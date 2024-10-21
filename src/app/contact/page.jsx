@@ -48,7 +48,7 @@ const ContactHome = () => {
     const handleOnContactSend = async (e) => {
         e.preventDefault();
         warning()
-        const myjson = await fetch('https://infrasity-backend.onrender.com/api/bookmeeting', {
+        const myjson = await fetch('https://infrasity-backend-j84r.onrender.com/api/bookmeeting', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
