@@ -1,0 +1,31 @@
+'use client'
+import React, {  useMemo } from 'react'
+import { Marquee } from "@devnomic/marquee";
+import "@devnomic/marquee/dist/index.css";
+import Image from 'next/image'
+
+const fileList = ['aviator.png', 'cedana.png', 'cerbos.png', 'codegiant-infra-1.png', 'daytona-removebg-preview-e1721477918328.png', 'DevZero.png', 'env0-infra-1.png', 'firefly.png', 'Group-14967.png', 'images-removebg-preview.png', 'images__2_-removebg-preview.png', 'kapstan.png', 'kubiya.svg', 'logo-landscape-removebg-preview.png', 'Mask-group.png', 'middleware-logo.svg', 'scalr.png', 'stackOne.svg', 'TravisCI-Full-Color.png']
+
+const HomeMarquee = () => {
+    const fileMemo = useMemo(() => fileList, [fileList])
+    return (
+            <div className='max-lg:mt-[30vh] max-sm:mt-[0vh] max bg-gradient-to-br from-[#DEE4EA] to-[#ebeef1] pt-10 pb-10 card glass'>
+                <h2 className='text-center pb-12 text-black quicksand-bold text-2xl'>Trusted by</h2>
+                <Marquee className="motion-reduce:overflow-auto" innerClassName="motion-reduce:animate-none">
+                    <div className="flex gap-20 max-sm:gap-10 items-center mx-12">
+                        {
+                            fileMemo.map((file, index) => {
+                                return (
+                                    <div key={index} className='flex-shrink-0 w-auto'>
+                                        <Image loading='lazy' width={117} height={30} className='w-40 max-sm:w-30' src={`/trustedby/${file}`} alt="Ratio is 3.9" />
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </Marquee>
+            </div>
+    )
+}
+
+export default HomeMarquee
