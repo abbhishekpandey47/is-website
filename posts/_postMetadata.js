@@ -10,24 +10,14 @@ let postMetaData = [
         metaDescription: "Master advanced UI design techniques and trends for user-friendly, immersive interfaces. Improve your design skills with expert tips."
     },
     {
-        title: "Becoming a Technical Content Writer for the Biggest Tech Companies",
-        slug: "becoming-a-technical-content-writer-for-the-biggest-tech-companies",
-        description: "Explore the world of technical content writing, where clarity and precision matter. Learn how top tech companies rely on skilled writers to simplify complex concepts and enhance user documentation, making an impact on their audience.",
-        ogImage: "/PostImages/becoming-a-technical-content-writer-for-the-biggest-tech-companies/0.webp",
-        publishedOn: "2024-10-07",
-        authorId: "author0001",
-        category: "Tutorials",
-        metaDescription: "Learn how to become a technical content writer for top tech companies by mastering clear, precise writing for complex concepts."
-    },
-    {
-        title: "Different Fields of Marketing – Exploring Different Paths and Strategies",
-        slug: "explore-the-different-fields-of-marketing",
-        description: "Dive into the various fields of marketing, from content and social media to product marketing. Uncover strategies that top SaaS companies use to grow and engage their audience, with insights into the latest trends such as AI-driven personalization.",
+        title: "Driving Rapid Growth Through Strategic Content: A Case Study with Terrateam",
+        slug: "Terrateam_case_study",
+        description: "This case study highlights how Infrasity helped Terrateam, a Netherlands-based startup, achieve rapid growth through strategic, high-impact technical content. By focusing on keyword research, SEO optimization, and developer-focused messaging, Infrasity increased Terrateam's traffic by 15% in just 14 days and boosted organic traffic by 13.8% over 90 days.",
         ogImage: "",
-        publishedOn: "2024-10-02",
+        publishedOn: "2024-09-12",
         authorId: "author0001",
-        category: "Informational",
-        metaDescription: "Explore different marketing strategies and fields, including content, social media, and product marketing, with AI personalization insights."
+        category: "Case Studies",
+        metaDescription: "Discover how Infrasity partnered with Terrateam to drive a 15% traffic boost in just 14 days through strategic, high-impact content focused on keyword research, SEO, and developer personas."
     },
     {
         title: "How to Use React Developer Tools for Debugging and Performance Optimization",
@@ -80,23 +70,83 @@ let postMetaData = [
         metaDescription: "Discover the benefits of writing technical content for SaaS companies. Learn best practices to improve user experience and trust."
     },
     {
-        title: "Driving Rapid Growth Through Strategic Content: A Case Study with Terrateam",
-        slug: "Terrateam_case_study",
-        description: "This case study highlights how Infrasity helped Terrateam, a Netherlands-based startup, achieve rapid growth through strategic, high-impact technical content. By focusing on keyword research, SEO optimization, and developer-focused messaging, Infrasity increased Terrateam's traffic by 15% in just 14 days and boosted organic traffic by 13.8% over 90 days.",
+        title: "Different Fields of Marketing – Exploring Different Paths and Strategies",
+        slug: "explore-the-different-fields-of-marketing",
+        description: "Dive into the various fields of marketing, from content and social media to product marketing. Uncover strategies that top SaaS companies use to grow and engage their audience, with insights into the latest trends such as AI-driven personalization.",
         ogImage: "",
-        publishedOn: "2024-09-12",
+        publishedOn: "2024-10-02",
         authorId: "author0001",
-        category: "Case Studies",
-        metaDescription: "Discover how Infrasity partnered with Terrateam to drive a 15% traffic boost in just 14 days through strategic, high-impact content focused on keyword research, SEO, and developer personas."
+        category: "Informational",
+        metaDescription: "Explore different marketing strategies and fields, including content, social media, and product marketing, with AI personalization insights."
+    },
+    {
+        title: "Becoming a Technical Content Writer for the Biggest Tech Companies",
+        slug: "becoming-a-technical-content-writer-for-the-biggest-tech-companies",
+        description: "Explore the world of technical content writing, where clarity and precision matter. Learn how top tech companies rely on skilled writers to simplify complex concepts and enhance user documentation, making an impact on their audience.",
+        ogImage: "/PostImages/becoming-a-technical-content-writer-for-the-biggest-tech-companies/0.webp",
+        publishedOn: "2024-10-07",
+        authorId: "author0001",
+        category: "Tutorials",
+        metaDescription: "Learn how to become a technical content writer for top tech companies by mastering clear, precise writing for complex concepts."
+    },
+    {
+        title: "10 Best Content Marketing Tools (For Beginners)",
+        slug: "10-best-content-marketing-tools-for-beginners",
+        description: "Discover the top 10 content marketing tools perfect for beginners to help you create, manage, and optimize your marketing strategy effectively.",
+        ogImage: "/PostImages/10-best-content-marketing-tools-for-beginners/0.png",
+        publishedOn: "2024-10-09",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Explore the best 10 content marketing tools for beginners. Learn how these tools can improve your content creation and marketing efforts."
+    },
+    {
+        title: "Product Marketing Jobs: Product Marketing Manager, Content Head and Head of Growth",
+        slug: "product-marketing-jobs-product-marketing-manager-content-head-and-head-of-growth",
+        description: "Understand the key roles in product marketing, including Product Marketing Manager, Content Head, and Head of Growth, and how they drive business success.",
+        ogImage: "/PostImages/product-marketing-jobs-product-marketing-manager-content-head-and-head-of-growth/0.png",
+        publishedOn: "2024-10-11",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Learn about the critical roles in product marketing—Product Marketing Manager, Content Head, and Head of Growth—and their impact on business growth."
+    },
+    {
+        title: "The 9 Steps to Write a Case Study: A Complete Guide",
+        slug: "the-9-steps-to-write-a-case-study-a-complete-guide",
+        description: "Follow this step-by-step guide to writing an effective case study that showcases your product or service’s success in solving real-world problems.",
+        ogImage: "/PostImages/the-9-steps-to-write-a-case-study-a-complete-guide/0.png",
+        publishedOn: "2024-10-14",
+        authorId: "author0001",
+        category: "Tutorials",
+        metaDescription: "Discover the 9 essential steps to writing a compelling case study. Learn how to highlight the impact of your product or service in a real-world scenario."
+    },
+    {
+        title: "Thought Leadership: How to Shape the Tech Landscape and Stand Out",
+        slug: "thought-leadership-how-to-shape-the-tech-landscape-and-stand-out",
+        description: "Learn how to position yourself as a thought leader in the tech industry and stand out by shaping the future of technology through strategic content.",
+        ogImage: "/PostImages/thought-leadership-how-to-shape-the-tech-landscape-and-stand-out/0.png",
+        publishedOn: "2024-10-16",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Explore strategies to become a thought leader in tech. Learn how to shape the tech landscape and stand out with impactful content."
+    },
+    {
+        title: "The Importance of Marketing a Product: Best Strategies for Product Marketing",
+        slug: "the-importance-of-marketing-a-product-best-strategies-for-product-marketing",
+        description: "Explore the best strategies for product marketing and understand why it’s essential to focus on effectively promoting your product to achieve success.",
+        ogImage: "/PostImages/the-importance-of-marketing-a-product-best-strategies-for-product-marketing/0.png",
+        publishedOn: "2024-10-18",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Learn the importance of product marketing and explore the best strategies to market your product effectively for business success."
     }
-]
+];
 
 const sorted = () => {
     return postMetaData.sort((a, b) => {
         let datea = Math.floor(new Date(a.publishedOn).getTime() / 1000);
         let dateb = Math.floor(new Date(b.publishedOn).getTime() / 1000);
         return datea - dateb;
-    })
+    });
 };
 
 postMetaData = sorted();
