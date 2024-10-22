@@ -1,9 +1,9 @@
 let postMetaData = [
     {
         title: "Mastering Advanced UI Design",
-        slug: "mastering_advanced_ui_designs",
+        slug: "mastering-advanced-ui-designs",
         description: "Discover advanced techniques in UI design, covering the latest trends, tools, and principles to create immersive, user-friendly interfaces. Elevate your design approach with insights that ensure a seamless and engaging user experience.",
-        ogImage: "/PostImages/mastering_advanced_ui_designs/0.webp",
+        ogImage: "/PostImages/mastering-advanced-ui-designs/0.webp",
         publishedOn: "2024-09-12",
         authorId: "author0001",
         category: "Informational",
@@ -11,7 +11,7 @@ let postMetaData = [
     },
     {
         title: "Driving Rapid Growth Through Strategic Content: A Case Study with Terrateam",
-        slug: "Terrateam_case_study",
+        slug: "Terrateam-case-study",
         description: "This case study highlights how Infrasity helped Terrateam, a Netherlands-based startup, achieve rapid growth through strategic, high-impact technical content. By focusing on keyword research, SEO optimization, and developer-focused messaging, Infrasity increased Terrateam's traffic by 15% in just 14 days and boosted organic traffic by 13.8% over 90 days.",
         ogImage: "",
         publishedOn: "2024-09-12",
