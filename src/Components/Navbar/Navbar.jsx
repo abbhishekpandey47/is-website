@@ -44,6 +44,7 @@ const GivenMenuBar = ({ head, menuLinks, setProgress, curPage, setCurPage }) => 
                                 onClick={(() => { checkVisitPage(menuLink.hrefLink) })}
                                 href={menuLink.hrefLink}
                                 className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                target={menuLink.hrefLink.includes("http") ? '_blank' : ""}
                             >
                                 {menuLink.menuName}
                             </Link>
@@ -74,7 +75,7 @@ const menuLinksArrServices = [
 
 const menuLinksArrProducts = [
     {
-        hrefLink: "/",
+        hrefLink: "https://content.infrasity.com/",
         menuName: "Outline Generator"
     },
 ]
@@ -116,7 +117,7 @@ const Navbar = () => {
                             <li>
                                 <span>Products</span>
                                 <ul className="p-2">
-                                    <li><Link href="/" onClick={(() => { checkVisitPage("/") })}>Outline Generator</Link></li>
+                                    <li><Link href="https://content.infrasity.com" target='_blank' onClick={(() => { checkVisitPage("/") })}>Outline Generator</Link></li>
                                 </ul>
                             </li>
                             <li><Link href="/blogs" onClick={(() => { checkVisitPage("/blogs") })}>Blog</Link></li>
