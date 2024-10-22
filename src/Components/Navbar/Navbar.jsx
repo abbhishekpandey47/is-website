@@ -4,6 +4,7 @@ import AppContext from '@/context/Infracontext';
 import { usePathname } from 'next/navigation'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import Link from 'next/link';
+import Image from 'next/image';
 // import { DownOutlined } from '@ant-design/icons';
 
 
@@ -137,15 +138,21 @@ const Navbar = () => {
                     >
                         <div className="flex flex-col my-auto items-center">
                             <div className="w-full flex justify-start">
-                                <img
-                                    src="logodata\infra_logo_only.png"
+                                <Image
+                                    width={200}
+                                    height={200}
+                                    loading='lazy'
+                                    src="/logodata/infra_logo_only.png"
                                     className="min-[408px]:hidden block w-[40%]"
                                     alt="Infrasity Logo"
                                 />
                             </div>
                             <div>
-                                <img
-                                    src="https://www.infrasity.com/wp-content/uploads/2023/12/infrasity_logo.png"
+                                <Image
+                                loading='lazy'
+                                    width={200}
+                                    height={200}
+                                    src="/logodata/infrasity_logo.png"
                                     className="max-[408px]:hidden"
                                     alt="Infrasity Logo"
                                 />
