@@ -8,7 +8,6 @@ export const Loader = () => {
     const context = useContext(AppContext)
 
     const { setProgress, progress } = context
-
     return (
         <div>
             <LoadingBar
