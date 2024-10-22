@@ -89,7 +89,7 @@ const ContactHome = () => {
                 {/* Left Section - Form */}
                 <div className="w-[65%] max-lg:w-full bg-white flex flex-col justify-center items-center max-sm:px-6 p-12">
                     <div className="w-full max-w-xl p-8 max-sm:px-0">
-                        <h2 className="text-3xl font-bold mb-4 text-center text-black quicksand-bold">Book a Demo</h2>
+                        <h1 className="text-3xl font-bold mb-4 text-center text-black quicksand-bold">Book a Demo</h1>
                         <p className="text-zinc-800 text-center mb-8 quicksand-medium">
                             Looking for developer-focused tech content to increase user signups for your product? Reach out at <a href="mailto:contact@infrasity.com" style={{ color: "darkblue" }} className='italic href-blue hover:underline'>contact@infrasity.com</a> for DevRel, Go-To-Market strategies, and tech content distribution for your product.
                         </p>
