@@ -4,7 +4,7 @@ User interface (UI) design is a critical component of product development that s
 
 Effective UI design is rooted in a few key principles that guide designers in making decisions that prioritize the user’s needs and expectations. Understanding and applying these principles can significantly improve the user experience design, interaction design, and overall product experience.
 
-!["Principles of Effective User Interface Design"](/PostImages/mastering_advanced_ui_designs/2.webp)
+!["Principles of Effective User Interface Design"](/PostImages/mastering-advanced-ui-designs/2.webp)
 
 ### Key User Interface (UI) Design Principles
 
@@ -14,7 +14,7 @@ Effective UI design is rooted in a few key principles that guide designers in ma
 
 - **Affordance**: Design elements should clearly suggest how they are used (e.g., clickable buttons, draggable sliders). This principle is key to intuitive, human-centered design, helping users understand interactions easily and creating meaningful digital experiences.
 
-!["Advanced Techniques in Visual Hierarchy"](/PostImages/mastering_advanced_ui_designs/3.webp)
+!["Advanced Techniques in Visual Hierarchy"](/PostImages/mastering-advanced-ui-designs/3.webp)
 
 ## Advanced Techniques in Visual Hierarchy
 
@@ -66,11 +66,11 @@ Designing for accessibility is about more than just compliance; it ensures that 
 
 ### Key Accessibility Techniques
 
-- **Implementing <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques" target="_blank">ARIA</a> Roles**: Use ARIA (Accessible Rich Internet Applications) roles to enhance the accessibility of dynamic content and user interface components.
+- **Implementing <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA-Techniques" target="-blank">ARIA</a> Roles**: Use ARIA (Accessible Rich Internet Applications) roles to enhance the accessibility of dynamic content and user interface components.
 
-- **Using <a href="https://www.semrush.com/blog/semantic-html5-guide/" target="_blank">Semantic HTML</a>**: Employ semantic HTML to improve the structure and accessibility of your web content.
+- **Using <a href="https://www.semrush.com/blog/semantic-html5-guide/" target="-blank">Semantic HTML</a>**: Employ semantic HTML to improve the structure and accessibility of your web content.
 
-- **Considering <a href="https://www.canva.com/colors/color-wheel/" target="_blank">Color</a> Contrast**: Ensure sufficient color contrast between text and background to make content more readable for users with visual impairments.
+- **Considering <a href="https://www.canva.com/colors/color-wheel/" target="-blank">Color</a> Contrast**: Ensure sufficient color contrast between text and background to make content more readable for users with visual impairments.
 
 ### Integration of Assistive Technologies
 
@@ -130,7 +130,7 @@ Wireframing and prototyping are critical steps in the design process. They allow
 
 Wireframes are low-fidelity sketches of the design, focusing on structure and functionality rather than aesthetics. Prototypes, on the other hand, are interactive models that simulate the user experience, allowing designers to test and refine the design.
 
-!["Wireframing and Prototyping"](/PostImages/mastering_advanced_ui_designs/4.webp)
+!["Wireframing and Prototyping"](/PostImages/mastering-advanced-ui-designs/4.webp)
 
 ### Choosing the Right Tools
 
