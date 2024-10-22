@@ -1,6 +1,7 @@
 import React from 'react'
 import {useRouter} from 'next/navigation'
 import Image from 'next/image'
+import Link from 'next/link'
 const ReadyToStart = () => {
     const router = useRouter()
     return (
@@ -14,7 +15,7 @@ const ReadyToStart = () => {
                     <p className="w-2/3 text-center pt-2 text-[wheat]">Infrasity is the only platform which provides you with developer focused content for your products or services</p>
                 </div>
                 <div className='flex gap-5 pt-5'>
-                    <button onClick={(()=>{router.push("/")})} className='btn bg-white text-gray-800 font-semibold py-2 px-4 rounded shadow hover:bg-gray-100 quicksand-semibold'>Outline Generator</button>
+                    <Link target='_blank' href="https://content.infrasity.com/"  className='btn bg-white text-gray-800 font-semibold py-2 px-4 rounded shadow hover:bg-gray-100 quicksand-semibold'>Outline Generator</Link>
                     <button onClick={(()=>{router.push("/contact")})} className='btn bg-black text-white font-semibold py-2 px-4 rounded shadow hover:bg-gray-900 quicksand-semibold'>Talk to Us</button>
                 </div>
             </div>

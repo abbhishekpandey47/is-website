@@ -250,7 +250,7 @@ const page = () => {
   const prevTabId = searchParams.get('prevTab') || tabs[0].id;
   const [paginArr, setPaginArr] = useState(paginArrData)
   const [activeTab, setActiveTab] = useState(prevTabId);
-  const [ytInfo, setYtInfo] = useState(ytMemo.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + totalItem));
+  const [ytInfo, setYtInfo] = useState(ytMemo.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + Number(totalItem)));
   const [searchData, setSearchData] = useState("");
 
   const context = useContext(AppContext)
@@ -277,7 +277,7 @@ const page = () => {
     if (myrtr[myrtr.length - 2] >= Math.ceil((oostData.length) / Number(totalItem))) {
       myrtr.pop()
     }
-    setYtInfo(oostData.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + totalItem))
+    setYtInfo(oostData.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + Number(totalItem)))
     // console.log("page changing ", myrtr)
     setPaginArr(myrtr)
   }
@@ -335,7 +335,7 @@ const page = () => {
     }
     const filteredAgainstTab = ytMemo.filter((element) => currTabArr.includes(element.category))
     const filteredAgainstSearch = filteredAgainstTab.filter((element) => element.topic.toLowerCase().includes(searchData.toLowerCase().trim()));
-    setYtInfo(filteredAgainstSearch.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + totalItem))
+    setYtInfo(filteredAgainstSearch.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + Number(totalItem)))
     paginationAlgo(filteredAgainstSearch);
   }, [activeTab, searchData])
 
