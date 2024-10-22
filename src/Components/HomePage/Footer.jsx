@@ -1,6 +1,7 @@
 import { GithubOutlined, InstagramOutlined, LinkedinOutlined, SlackOutlined, XOutlined, YoutubeFilled } from '@ant-design/icons';
 import Image from 'next/image';
 import React from 'react';
+import Link from 'next/link';
 
 const Footer = () => {
     return (
@@ -52,9 +53,10 @@ const Footer = () => {
                 <div className="border-t w-full border-[#999] mt-8 pt-4 text-sm flex items-center max-w-7xl mx-auto">
                     <div className="flex max-xs:text-xs max-xs:flex-col gap-1 w-1/2"><div>© 2024 Infrasity.</div> <div>All rights reserved.</div></div>
                     <div className="flex max-xs:text-xs max-sm:flex-col w-1/2 justify-end items-end max-sm:gap-1 gap-3">
-                        <a href="#" className="hover:underline">Privacy Policy</a>
-                        <a href="#" className="hover:underline">Terms of Service</a>
-                        <a href="#" className="hover:underline">Cookies Settings</a>
+                        {/* <a href="#" className="hover:underline">Privacy Policy</a> */}
+                        <Link href="/privacy-policy" className="hover:underline" >Privacy Policy</Link>
+                        <Link href="/terms-of-services" className="hover:underline" >Terms of Service</Link>
+                        
                     </div>
                 </div>
             </div>
