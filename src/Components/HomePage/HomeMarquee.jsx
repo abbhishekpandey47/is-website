@@ -4,7 +4,7 @@ import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
 import Image from 'next/image'
 
-const fileList = ['aviator.png', 'cedana.png', 'cerbos.png', 'codegiant-infra-1.png', 'daytona-removebg-preview-e1721477918328.png', 'DevZero.png', 'env0-infra-1.png', 'firefly.png', 'Group-14967.png', 'images-removebg-preview.png', 'images__2_-removebg-preview.png', 'kapstan.png', 'kubiya.svg', 'logo-landscape-removebg-preview.png', 'Mask-group.png', 'middleware-logo.svg', 'scalr.png', 'stackOne.svg', 'TravisCI-Full-Color.png']
+const fileList = ['aviator.png', 'cedana.png', 'cerbos.png', 'codegiant-infra-1.png', 'daytona-removebg-preview-e1721477918328.png', 'DevZero.png', 'env0-infra-1.png', 'firefly.png', 'Group-14967.png', 'images-removebg-preview.png', 'images__2_-removebg-preview.png', 'kapstan.png', 'kubiya.png', 'logo-landscape-removebg-preview.png', 'Mask-group.png', 'middleware-logo.svg', 'scalr.png', 'stackOne.svg', 'TravisCI-Full-Color.png']
 
 const HomeMarquee = () => {
     const fileMemo = useMemo(() => fileList, [fileList])
@@ -16,8 +16,8 @@ const HomeMarquee = () => {
                         {
                             fileMemo.map((file, index) => {
                                 return (
-                                    <div key={index} className='flex-shrink-0 w-auto'>
-                                        <Image loading='lazy' width={117} height={30} className='w-40 max-sm:w-30' src={`/trustedby/${file}`} alt="Ratio is 3.9" />
+                                    <div key={index} className='flex-shrink-0 w-auto mix-blend-color-burn'>
+                                        <Image loading='lazy' width={150} height={50} className='w-40 max-sm:w-30 ' src={`/trustedby/${file}`} alt="Ratio is 3.9" />
                                     </div>
                                 )
                             })
