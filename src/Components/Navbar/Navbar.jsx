@@ -65,10 +65,10 @@ const menuLinksArrServices = [
         hrefLink: "/service-blog-as-code",
         menuName: "Blogs-as-code"
     },
-    {
-        hrefLink: "/tutorials",
-        menuName: "Tutorials"
-    }
+    // {
+    //     hrefLink: "/tutorials",
+    //     menuName: "Tutorials"
+    // }
 ]
 
 const menuLinksArrProducts = [
@@ -124,7 +124,7 @@ const Navbar = () => {
                                 <ul className="p-2">
                                     <li><Link href="/service-video-production" onClick={(() => { checkVisitPage("/service-video-production") })}>Video Production</Link></li>
                                     <li><Link href="/service-blog-as-code" onClick={() => { setProgress(30) }}>Blogs-as-code</Link></li>
-                                    <li><Link href="/tutorials" onClick={(() => { checkVisitPage("/tutorials") })}>Tutorials</Link></li>
+                                    {/* <li><Link href="/tutorials" onClick={(() => { checkVisitPage("/tutorials") })}>Tutorials</Link></li> */}
                                 </ul>
                             </li>
                             <li><Link href="/faq" onClick={(() => { checkVisitPage("/faq") })}>FAQ</Link></li>
