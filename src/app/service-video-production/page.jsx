@@ -54,7 +54,7 @@ const YtCard = ({ handleOnOpen, item, setYtContentLink }) => {
           alt="Shoes" />) : (
           <img
             className="rounded-md"
-            src={`https://img.youtube.com/vi/XmUB8JXa4hI/hqdefault.jpg`}
+            src={item.imgLink}
             alt="Shoes" />
         )}
       </figure>
@@ -83,7 +83,8 @@ const PopupVideo = ({ handleOnClose, ytContentLink }) => {
                 <h2 className="quicksand-bold ">{ytContentLink.title}</h2>
               </div>
               <div className="gap-2 flex">
-                <a target="_blank" href={`https://www.youtube.com/watch?v=${ytContentLink.ytEmbedLink}`} className="btn bg-btnprimary hover:bg-btnprimaryhov text-white text-center border-none">Open in new tab</a>
+                {ytContentLink.category === "Podcasts"?(<a target="_blank" href={`https://www.youtube.com/watch?v=${ytContentLink.ytEmbedLink}`} className="btn bg-btnprimary hover:bg-btnprimaryhov text-white text-center border-none">Open in new tab</a>):
+                (<a target="_blank" href={ytContentLink.ytEmbedLink} className="btn bg-btnprimary hover:bg-btnprimaryhov text-white text-center border-none">Open video new tab</a>)}
                 <button onClick={handleOnClose} className="btn bg-btnprimary hover:bg-btnprimaryhov text-white text-center border-none">Close</button>
 
               </div>
@@ -104,7 +105,7 @@ const PopupVideo = ({ handleOnClose, ytContentLink }) => {
                   className='rounded-[20px] max-md:w-[630px] max-md:h-[359px] max-sm:w-[350px] max-sm:h-[181px] max-lg:w-[760px] max-lg:h-[439px] shadow-3xl relative p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200'
                   width="950"
                   height="550"
-                  src={`https://devzero.b-cdn.net/Devbox%20Xata%20Database%20.mp4`}
+                  src={ytContentLink.ytEmbedLink}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen

@@ -89,9 +89,7 @@ const CustomerSucc = () => {
                     <div className="w-[40%] max-sm:w-[100%] flex flex-col gap-20 max-sm:gap-5">
                         <h2 className="tracking-tight max-sm:tracking-normal max-sm:text-center leading-[70px] max-lg:text-[3em] max-sm:text-[2.5em] max-lg:leading-[30px] text-white text-[5em] quicksand-bold">Customer success</h2>
                         <p className='text-3xl quicksand-semibold max-sm:text-center max-sm:text:sm max-lg:text-xl'>Combining technical content with SEO to drive real growth for your startup!</p>
-                        <div className="card-actions justify-start max-sm:justify-center">
-                            <button className="btn btn-primary rounded-[20px] bg-[#282A3F] text-white font-bold border-none p-7 flex flex-col justify-center tracking-wider hover:bg-[#282A3F] quicksand-semibold" onClick={() => router.push("/customers")}>Browse Customers</button>
-                        </div>
+                        
                     </div>
                     <div className="w-[60%] max-sm:w-[100%] max-sm:text-center flex flex-col pl-5 max-sm:p-0 flex-1 gap-5">
                         {statistics}
