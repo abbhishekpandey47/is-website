@@ -106,7 +106,7 @@ const page = () => {
     const prevTabId = searchParams.get('prevTab') || tabs[0].id;
     const totalItem = searchParams.get('totalItem') || 6;
     const [cardArr, setCardArr] = useState(postMetaData)
-    const [cardInfo, setCardInfo] = useState(cardArr.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + totalItem));
+    const [cardInfo, setCardInfo] = useState(cardArr.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + Number(totalItem)));
     const [paginArr, setPaginArr] = useState(paginArrData)
     const [activeTab, setActiveTab] = useState(prevTabId);
     const [searchData, setSearchData] = useState("");
@@ -157,7 +157,7 @@ const page = () => {
             if (myrtr[myrtr.length - 2] >= Math.ceil((oostData.length) / Number(totalItem))) {
                 myrtr.pop()
             }
-            setCardInfo(oostData.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + totalItem))
+            setCardInfo(oostData.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + Number(totalItem)))
             setPaginArr(myrtr)
         },
         [pageNum, totalItem],
@@ -173,7 +173,7 @@ const page = () => {
         }
         const filteredAgainstTab = cardArr.filter((element) => currTabArr.includes(element.category))
         const filteredAgainstSearch = filteredAgainstTab.filter((element) => element.title.toLowerCase().includes(searchData.toLowerCase().trim()));
-        setCardInfo(filteredAgainstSearch.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + totalItem))
+        setCardInfo(filteredAgainstSearch.slice((pageNum - 1) * totalItem, (pageNum - 1) * totalItem + Number(totalItem)))
         paginationAlgo(filteredAgainstSearch)
 
     }, [activeTab, searchData])
