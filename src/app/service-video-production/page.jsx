@@ -28,7 +28,7 @@ gsap.registerPlugin(CustomEase);
 
 const YtCard = ({ handleOnOpen, item, setYtContentLink }) => {
   const handleOnYtCard = () => {
-    if (item.category === "Podcasts") {
+    if (item.type === "yt") {
       setYtContentLink({
         ytEmbedLink: item.ytEmbedLink,
         title: item.topic,
@@ -36,7 +36,7 @@ const YtCard = ({ handleOnOpen, item, setYtContentLink }) => {
 
       })
     }
-    else if (item.category === "Editorials") {
+    else if (item.type === "cdn") {
       setYtContentLink({
         ytEmbedLink: item.vidLink,
         title: item.topic,
@@ -48,7 +48,7 @@ const YtCard = ({ handleOnOpen, item, setYtContentLink }) => {
     <div onClick={handleOnYtCard} className="w-96 flex items-center rounded-md relative cursor-pointer hover:scale-105 transition-all bg-black ytCardDiv">
 
       <figure className='flex justify-center items-center'>
-        {item.category === "Podcasts" ? (<img
+        {item.type === "yt" ? (<img
           className="rounded-md"
           src={`https://img.youtube.com/vi/${item.ytEmbedLink}/hqdefault.jpg`}
           alt="Shoes" />) : (
