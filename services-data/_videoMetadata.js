@@ -51,14 +51,14 @@ const videoMetadata = [
         ytEmbedLink: "XmUB8JXa4hI",
         topic: "Build scalable infrastructure using your mobile phone",
         type:"yt",
-        category:"Podcasts",
+        category:"Editorials",
     },
     
     {
         ytEmbedLink: "Uf6cfVWt0-0",
         topic: "Deploy apps on Kubernetes cluster using ChatOps",
         type:"yt",
-        category:"Podcasts",
+        category:"Editorials",
     },
     {
         ytEmbedLink: "erczPxh8iGc",
