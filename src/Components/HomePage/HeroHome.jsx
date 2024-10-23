@@ -58,14 +58,14 @@ const HeroHome = () => {
             <div className="moving-dot"></div>
             <div className="moving-dot2"></div>
 
-            <div className='text-center flex flex-col justify-center pt-32 max-sm:pt-36  items-center'><div className='flex flex-col gap-[40px] max-w-[70vw] max-sm:max-w-[95vw] '>
+            <div className='text-center flex flex-col justify-center pt-32 max-sm:pt-36  items-center'><div className='flex flex-col gap-[40px] md:gap-[30px] max-w-[70vw] max-sm:max-w-[95vw] '>
                 <div className='quicksand-bold w-[70vw] max-lg:text-[4em] max-lg:pt-30 max-md:pt-0 text-[5em] text-white tracking-tight leading-[85px] max-md:text-[3.5em] max-md:tracking-tighter max-md:leading-[60px] max-sm:w-[100%] '>
                     <h1>
                         {headingText.title.map((word, index) => (
                             <span key={index} className="HeroWordSpan">{word} </span>
                         ))}
                         <div className='flex max-sm:flex-col justify-center'>
-                            <span className="HeroWordSpan specialtext">
+                            <span className="HeroWordSpan specialtext md:h-[93px]">
                                 <Typewriter
                                     words={['SaaS', 'DevOps', 'Obsevability', 'MLOps', 'LLMOps']}
                                     cursor
@@ -77,7 +77,7 @@ const HeroHome = () => {
                                 />
                             </span>
                             {headingText.subtitle.map((word, index) => (
-                                <span key={index} className="HeroWordSpan specialtext"> {word} </span>
+                                <span key={index} className="HeroWordSpan specialtext md:h-[93px]"> {word} </span>
                             ))}
                         </div>
                     </h1>
