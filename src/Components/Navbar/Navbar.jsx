@@ -120,7 +120,7 @@ const Navbar = () => {
                                     <li><Link href="https://content.infrasity.com" target='_blank' onClick={(() => { checkVisitPage("/") })}>Outline Generator</Link></li>
                                 </ul>
                             </li>
-                            <li><Link href="/blogs" onClick={(() => { checkVisitPage("/blogs") })}>Blog</Link></li>
+                            <li><Link href="/blog" onClick={(() => { checkVisitPage("/blog") })}>Blog</Link></li>
                             <li>
                                 <span>Services</span>
                                 <ul className="p-2">
@@ -167,7 +167,7 @@ const Navbar = () => {
                         <li>
                             <GivenMenuBar head={"Products"} menuLinks={menuLinksArrProducts} setProgress={setProgress} curPage={curPage} setCurPage={setCurPage} />
                         </li>
-                        <li><Link href="/blogs" onClick={(() => { checkVisitPage("/blogs") })}>Blog</Link></li>
+                        <li><Link href="/blog" onClick={(() => { checkVisitPage("/blog") })}>Blog</Link></li>
                         <li className='flex justify-center items-center'>
                             <GivenMenuBar head={"Services"} menuLinks={menuLinksArrServices} setProgress={setProgress} curPage={curPage} setCurPage={setCurPage} />
                         </li>
