@@ -7,9 +7,10 @@ import Footer from "@/Components/HomePage/Footer";
 import { Appwrap } from "@/context";
 import { Loader } from "@/Components/Loader";
 import { Analytics } from '@vercel/analytics/react'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata = {
-  title: "Infrasity",
+  title: "Infrasity: Technical Content Marketing for Cloud Companies",
   description: "Technical Content Marketing for Cloud Companies",
   keywords: "Infrasity, Technical Content Marketing, Cloud Companies, Developer Relations, Engineering Support, Marketing Strategies, User Engagement, Content Creation, SEO, Digital Marketing, Pipeline Acceleration, Software Development, DevOps, Automation, Continuous Integration, Content Strategy",
   name: "viewport",
@@ -33,6 +34,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <GoogleAnalytics gaId="G-TZC3YF8FSD"/>
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,6 +43,7 @@ export default function RootLayout({ children }) {
       <body
         className={`antialiased`}
       >
+
         <NextThemesProvider
           attribute="class"
           defaultTheme="dark"
