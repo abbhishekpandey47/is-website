@@ -10,14 +10,14 @@ import { Analytics } from '@vercel/analytics/react'
 import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata = {
-  title: "Infrasity: Technical Content Marketing for Cloud Companies",
-  description: "Technical Content Marketing for Cloud Companies",
-  keywords: "Infrasity, Technical Content Marketing, Cloud Companies, Developer Relations, Engineering Support, Marketing Strategies, User Engagement, Content Creation, SEO, Digital Marketing, Pipeline Acceleration, Software Development, DevOps, Automation, Continuous Integration, Content Strategy",
+  title: "Content Marketing Services for SaaS Companies | infrasity",
+  description: "Explore the best SaaS content marketing agencies, including Infrasity, know for driving growth through tailored content strategies for early stage startups.",
+  keywords: "Best SaaS Content Marketing Agencies, B2B SaaS content marketing agency, Technical Marketing Content for Software Startups, Content Marketing Strategy for Technology, A Complete Introduction to Technical Marketing, Content Marketing for Tech Companies, SaaS Blog Writing Services, Content Marketing for Tech Startups",
   name: "viewport",
   content: "width=device-width, initial-scale=1.0",
   openGraph: {
     title: "Infrasity",
-    description: "Technical Content Marketing for Cloud Companies",
+    description: "Explore the best SaaS content marketing agencies, including Infrasity, know for driving growth through tailored content strategies for early stage startups.",
     url: "",
     type: "website",
     images: [
@@ -38,6 +38,7 @@ export default function RootLayout({ children }) {
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="canonical" href="https://www.infrasity.com/" />
         <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet" />
       </Head>
       <body
