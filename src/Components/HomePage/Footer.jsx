@@ -23,7 +23,7 @@ const Footer = () => {
                             <ul className="space-y-4 flex flex-col ">
                                 <li><a href="/service-blog-as-code" className="hover:underline">Blogs-as-code at scale</a></li>
                                 {/* <li><a href="/tutorials" className="hover:underline">Tutorials</a></li> */}
-                                <li><a href="/services" className="hover:underline">Video Production</a></li>
+                                <li><a href="/service-video-production" className="hover:underline">Video Production</a></li>
                             </ul>
                         </div>
                     </div>
