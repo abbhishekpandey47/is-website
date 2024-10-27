@@ -5,7 +5,7 @@ import { ConfigProvider } from 'antd';
 
 export default function Home() {
   
-  return (
+  return (<>
     <div >
       <ConfigProvider theme={{
         components: {
@@ -22,5 +22,6 @@ export default function Home() {
         <HomePage/>
       </ConfigProvider>
     </div>
+    </>
   );
 }
