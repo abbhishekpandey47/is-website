@@ -19,9 +19,9 @@ const PrivacyPolicy = () => {
         Infrasity may use personal information for the following purposes:
       </p>
       <ul className="list-disc list-inside mb-3 sm:mb-4 pl-5 sm:pl-6">
-        <li><strong>To enhance customer service:</strong> Information helps us respond more effectively to customer service requests and support needs.</li>
-        <li><strong>To personalize user experience:</strong> We analyze aggregated information to understand how users interact with our platform, helping us improve service delivery.</li>
-        <li><strong>To send periodic communications:</strong> We may use email addresses to send updates about our services, respond to inquiries, or provide information based on user preferences.</li>
+        <li><strong>To enhance customer service:</strong> <span className='quicksand-light'>Information helps us respond more effectively to customer service requests and support needs.</span></li>
+        <li><strong>To personalize user experience:</strong> <span className='quicksand-light'>We analyze aggregated information to understand how users interact with our platform, helping us improve service delivery.</span></li>
+        <li><strong>To send periodic communications:</strong> <span className='quicksand-light'>We may use email addresses to send updates about our services, respond to inquiries, or provide information based on user preferences.</span></li>
       </ul>
 
       <h2 className="text-xl sm:text-2xl quicksand-semibold mb-3 sm:mb-4">Sharing Your Personal Information</h2>
@@ -30,7 +30,7 @@ const PrivacyPolicy = () => {
       </p>
 
       <h2 className="text-xl sm:text-2xl quicksand-semibold mb-3 sm:mb-4">Third-Party Websites</h2>
-      <p className="mb-3 sm:mb-4">
+      <p className="mb-3 sm:mb-4 quicksand-light">
         Our website may contain links to third-party sites. We are not responsible for the content or practices of these sites, which may have their own privacy policies. Browsing and interaction on these sites are subject to the site's terms and policies.
       </p>
 

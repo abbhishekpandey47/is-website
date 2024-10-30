@@ -35,7 +35,7 @@ const TermsAndServices = () => {
       </p>
 
       <h2 className="text-lg sm:text-xl quicksand-semibold mt-4">4. Limitations of Liability</h2>
-      <p className="mt-2 text-sm sm:text-base">
+      <p className="mt-2 text-sm sm:text-base quicksand-light">
         Infrasity is not liable for any damages arising from the use or inability to use materials on our site, even if advised of potential damages. Jurisdictional limitations on implied warranties or liabilities may apply.
       </p>
 
