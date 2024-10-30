@@ -1,6 +1,6 @@
 'use client'
 import ReadyToStart from '@/Components/HomePage/ReadyToStart'
-import React, { useEffect, useContext, useMemo } from 'react'
+import React, { useEffect, useContext, useMemo, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger, CustomEase, Power3 } from 'gsap/all'
 import { Carousel } from 'antd';
@@ -89,6 +89,17 @@ const page = () => {
     const { setProgress, progress } = context
     const serviceMemoArr = useMemo(() => serviceArr, [serviceArr])
     const dataMemoArr = useMemo(() => dataService, [dataService])
+
+    const [sortedPosts, setSortedPosts] = useState([]);
+
+    useEffect(() => {
+        const sorted = [...postMetaData].sort((a, b) => {
+            const dateA = new Date(a.publishedOn).getTime();
+            const dateB = new Date(b.publishedOn).getTime();
+            return dateB - dateA; // Sorts in descending order (newest first)
+        });
+        setSortedPosts(sorted);
+    }, []);
 
     useEffect(() => {
         gsap.utils.toArray('.serviceasblogcard').forEach((card) => {

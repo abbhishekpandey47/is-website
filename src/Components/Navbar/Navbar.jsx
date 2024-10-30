@@ -93,7 +93,7 @@ const Navbar = () => {
     return (
 
         <div className='w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute'>
-            <div className="navbar bg-slate-900 max-xs:w-full xs:rounded-lg p-3 w-[78vw] xl:w-[78vw] shadow-navshadow lg:absolute lg:left-[10vw] ">
+            <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[75vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
