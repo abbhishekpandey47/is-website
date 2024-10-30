@@ -11,19 +11,19 @@ const JoinCommunity = () => {
                 <div className="max-xs:text-base text-lg quicksand-semibold text-center text-[wheat]">
                     Engaging discussions, knowledge, and ideas to build your next product.
                 </div>
-                <div className="flex justify-center space-x-8 mt-5">
-                    <a href="#" className="flex items-center space-x-2 text-[wheat] hover:text-white hover:underline quicksand-semibold">
+                <div className="flex justify-center space-x-8 mt-5 z-10">
+                    <div className="flex items-center space-x-2 text-[wheat] hover:text-white hover:underline quicksand-semibold">
                         <img src="\communityIcons\youtube.svg" alt="Infrasity Youtube" className="w-6 h-6" />
                         <a href="https://www.youtube.com/@Infrasity" target='_blank' className="hover:underline flex items-center max-lg:justify-center space-x-10 gap-2" ><span>Youtube</span></a>
-                    </a>
-                    <a href="#" className="flex items-center space-x-2 text-[wheat] hover:text-white hover:underline quicksand-semibold">
+                    </div>
+                    <div className="flex items-center space-x-2 text-[wheat] hover:text-white hover:underline quicksand-semibold">
                         <img src="\communityIcons\devto.svg" alt="Infrasity Dev2" className="w-6 h-6" />
                         <a href="https://dev.to/infrasity-learning" target='_blank' className="hover:underline flex items-center max-lg:justify-center space-x-10 gap-2" ><span>Dev.to</span></a>
-                    </a>
-                    <a href="#" className="flex items-center space-x-2 text-[wheat] hover:text-white hover:underline quicksand-semibold">
+                    </div>
+                    <div className="flex items-center space-x-2 text-[wheat] hover:text-white hover:underline quicksand-semibold">
                         <img src="\communityIcons\medium.svg" alt="Infrasity Mediun" className="w-6 h-6" />
                         <a href="https://medium.com/@infrasity.com" target='_blank' className="hover:underline flex items-center max-lg:justify-center space-x-10 gap-2" ><span>Medium</span></a>
-                    </a>
+                    </div>
                 </div>
 
                 {/* max-lg */}
