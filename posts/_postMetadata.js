@@ -138,6 +138,16 @@ let postMetaData = [
         authorId: "author0001",
         category: "Informational",
         metaDescription: "Learn the importance of product marketing and explore the best strategies to market your product effectively for business success."
+    },
+    {
+        title: "Benefits of Using Keyword Explorer: Highlighting Its Importance for SaaS Success",
+        slug: "benefits-of-using-keyword-explorer",
+        description: "Explore the Benefits of Using Keyword Explorer: Highlighting Its Importance for SaaS Success",
+        ogImage: "/PostImages/benefits-of-using-keyword-explorer/0.png",
+        publishedOn: "2024-11-04",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Explore the Benefits of Using Keyword Explorer: Highlighting Its Importance for SaaS Success"
     }
 ];
 
