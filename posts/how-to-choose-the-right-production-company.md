@@ -1,7 +1,3 @@
-Target keyword: production company video
-
-# How to Choose the Right Production Company for Your Video Needs
-
 Globally, viewers now watch an average of more than 1 billion hours of
 YouTube content every day. And here's the kicker:
 [87%](https://www.superside.com/blog/trends-corporate-video-production)
