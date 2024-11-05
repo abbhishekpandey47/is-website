@@ -148,6 +148,16 @@ let postMetaData = [
         authorId: "author0001",
         category: "Informational",
         metaDescription: "Explore the Benefits of Using Keyword Explorer: Highlighting Its Importance for SaaS Success"
+    },
+    {
+        title: "How to Choose the Right Production Company for Your Video Needs",
+        slug: "how-to-choose-the-right-production-company",
+        description: "Learn how to find the perfect video production company for your brand. This guide covers everything from evaluating portfolios to budget tips, helping you choose a partner that brings your vision to life and creates impactful content.",
+        ogImage: "/PostImages/how-to-choose-the-right-production-company/0.png",
+        publishedOn: "2024-11-05",
+        authorId: "author0001",
+        category: "Tutorials",
+        metaDescription: "Discover how to choose the right video production company for your brand. Get tips on evaluating portfolios, managing budgets, and finding a partner that delivers impactful, engaging content."
     }
 ];
 
