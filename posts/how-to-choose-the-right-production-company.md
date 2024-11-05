@@ -393,7 +393,7 @@ throughout the process!
 
 If you\'re looking for a dedicated team to help you craft a powerful video
 content,
-[**[Infrasity]{.underline}**](https://www.infrasity.com/service-video-production)
+[**[Infrasity](https://www.infrasity.com/service-video-production)
 is here to support your SaaS startup with expert video production
 services as per your business requirements.
 
