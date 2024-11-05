@@ -16,7 +16,7 @@ covered.
 
 ## Understanding the Role of a Video Production Company
 
--   ### What Does a Video Production Company Really Do?
+### What Does a Video Production Company Really Do?
 
 A **video production company** specializes in creating video content for
 various purposes, including marketing, entertainment, education, and
@@ -28,7 +28,7 @@ Usually, video production companies work through three major stages:
 encompasses several key functions that contribute to the creation of
 high-quality video content.
 
--   ### Why SaaS Startups Need Video Content to Drive Growth
+### Why SaaS Startups Need Video Content to Drive Growth
 
 If we speak about SaaS startups in general, then the video content is
 essential for driving growth and engaging potential customers. The video
