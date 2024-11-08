@@ -1,5 +1,3 @@
-# User Guide vs API Documentation: Key Differences
-
 Documentation is a word that scares a lot of developers, and even users
 who aren't very close to the technical side of things, but guess what?
 We have made it look so complicated than it actually is.
