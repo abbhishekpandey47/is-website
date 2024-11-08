@@ -161,9 +161,9 @@ let postMetaData = [
     },
     {
         title: "User Guide vs API Documentation: Key Differences",
-        slug: "User-Guide-vs-API-Documentation",
+        slug: "user-guide-vs-api-documentation",
         description: "Explore the differences between User Guides and API Documentation, two essential types of documentation in software engineering. This blog dives into their distinct purposes, target audiences, content structures, and best practices. From installation instructions to API endpoint details, we cover everything you need to know to effectively create documentation that caters to both end-users and developers.",
-        ogImage: "/PostImages/User-Guide-vs-API-Documentation/0.jpg",
+        ogImage: "/PostImages/user-guide-vs-api-documentation/0.jpg",
         publishedOn: "2024-11-08",
         authorId: "author0001",
         category: "Informational",
