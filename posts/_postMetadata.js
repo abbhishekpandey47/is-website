@@ -158,6 +158,16 @@ let postMetaData = [
         authorId: "author0001",
         category: "Tutorials",
         metaDescription: "Discover how to choose the right video production company for your brand. Get tips on evaluating portfolios, managing budgets, and finding a partner that delivers impactful, engaging content."
+    },
+    {
+        title: "User Guide vs API Documentation: Key Differences",
+        slug: "User-Guide-vs-API-Documentation",
+        description: "Explore the differences between User Guides and API Documentation, two essential types of documentation in software engineering. This blog dives into their distinct purposes, target audiences, content structures, and best practices. From installation instructions to API endpoint details, we cover everything you need to know to effectively create documentation that caters to both end-users and developers.",
+        ogImage: "/PostImages/User-Guide-vs-API-Documentation/0.jpg",
+        publishedOn: "2024-11-08",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Discover the key differences between User Guides and API Documentation. Learn about their distinct purposes, audiences, structures, and examples, and get tips on creating effective documentation for both end-users and developers."
     }
 ];
 
