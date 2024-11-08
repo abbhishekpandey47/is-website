@@ -1,5 +1,3 @@
-# User Guide vs API Documentation: Key Differences
-
 Documentation is a word that scares a lot of developers, and even users
 who aren't very close to the technical side of things, but guess what?
 We have made it look so complicated than it actually is.
@@ -16,7 +14,7 @@ In this blog, we'll walk you through both of them, their key
 differences, and also some examples as well that will be highly
 effective to understand the fundamentals!
 
-### **Overview of Documentation Types**
+## **Overview of Documentation Types**
 
 So before diving into the differences and learning about the crucial
 aspects that differ both of these, let us clarify what both of these
@@ -71,7 +69,7 @@ social media platform's API, the documentation would outline:
 -   **Request Example**: Sample code showing how to make a request, in
      languages like Python or JavaScript.
 
-#### **Key Differences between both:**
+### **Key Differences between both:**
 
 -   **Audience**: User guides are intended for end-users, while API
      documentation is for developers.
@@ -83,7 +81,7 @@ social media platform's API, the documentation would outline:
      steps; API documentation details programming methods and data
      formats catered towards developers.
 
-### **What is a User Guide?**
+## **What is a User Guide?**
 
 User guides offer non-technical users instructions on how to use an
 application or hardware product. They simplify tasks for users
@@ -116,7 +114,7 @@ capabilities, which can make the software or the product easy to use.
 -   **Task-based approach**: Organize content based on tasks users
      frequently perform.
 
-### **What is API Documentation?**
+## **What is API Documentation?**
 
 API documentation provides detailed instructions on how developers can
 integrate with and interact with an API.
@@ -130,12 +128,12 @@ who need to integrate with or build upon a system.
 Let's discuss API documentation in-depth, with some hands-on and code
 examples as well.
 
-### **Key Characteristics with Hands-On Examples**
+## **Key Characteristics with Hands-On Examples**
 
 Let's assume we have an API endpoint that retrieves a list of users with
 additional filtering options, using both query parameters and headers.
 
-#### **Endpoint: GET /api/v1/users**
+### **Endpoint: GET /api/v1/users**
 
 -   **Base URL**: https://api.example.com
 
@@ -144,7 +142,7 @@ additional filtering options, using both query parameters and headers.
 -   **Purpose**: Retrieves a list of users with pagination and optional
      filters.
 
-#### **Request Breakdown**
+### **Request Breakdown**
 
 
 
@@ -159,7 +157,7 @@ additional filtering options, using both query parameters and headers.
 | Request Body  | Not applicable for GET requests.                                                                  |
 
 
-#### **Full Example Request (Using cURL, execute this on terminal!):**
+### **Full Example Request (Using cURL, execute this on terminal!):**
 
 curl -X GET \"https://api.example.com/api/v1/users?page=1&role=admin\"
 \\
@@ -168,7 +166,7 @@ curl -X GET \"https://api.example.com/api/v1/users?page=1&role=admin\"
 
 -H \"Content-Type: application/json\"
 
-#### **Sample Request with Query Parameters and Headers**
+### **Sample Request with Query Parameters and Headers**
 
 Here's how it would look in a structured request format:
 
@@ -180,7 +178,7 @@ Authorization: Bearer \<token\>
 
 Content-Type: application/json
 
-#### **Expected Response Example**
+### **Expected Response Example**
 
 The response might look like this, with the structure and data fields
 returned by the API:
@@ -206,7 +204,7 @@ returned by the API:
 }
 ```
 
-### **Summary of Each Component**
+## **Summary of Each Component**
 
 -   **Endpoint URL**: Includes both the base URL and the specific
      endpoint path (/api/v1/users).
@@ -231,7 +229,7 @@ returned by the API:
 -   **Examples**: Include example requests and responses in multiple
      programming languages.
 
-### **Key Differences Between User Guides and API Documentation:**
+## **Key Differences Between User Guides and API Documentation:**
 
 | Aspect              | User Guide                                        | API Documentation                                  |
 |---------------------|---------------------------------------------------|----------------------------------------------------|
@@ -252,7 +250,7 @@ When to use each type:
 In some projects, a blend of both types is necessary, especially if your
 product has both end-users and developer users.
 
-### **Best Practices for Creating Both User Guides and API Documentation**
+## **Best Practices for Creating Both User Guides and API Documentation**
 
 1.  **Clarity and Conciseness**: Focus on delivering clear, actionable
      information, avoid jargon at all costs that make it complicated,
@@ -274,9 +272,7 @@ product has both end-users and developer users.
      writers, and product managers. Their insights ensure your
      documentation is comprehensive and user-friendly.
 
-### 
-
-### **Conclusion**
+## **Conclusion**
 
 Understanding the differences between user guides and API documentation
 helps in creating the right type of documentation for your audience.
