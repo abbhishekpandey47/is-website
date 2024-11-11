@@ -143,8 +143,7 @@ using their brand assets:
                                     organizing projects simple and fun.
   -----------------------------------------------------------------------------
 
-![](vertopal_7aeaa68bd90242d088e9aee181b9a8d4/media/image2.png){width="6.5in"
-height="5.416666666666667in"}
+![](/PostImages/building-brand-assets-for-saas-success/1.png)
 
 These companies have found ways to connect with their audience by using
 brand assets that reflect who they are and what they stand for.
@@ -198,8 +197,7 @@ Ensure your brand's look and feel are the same everywhere. Whether it\'s
 your website, app, or ads, a consistent experience builds trust and
 helps your brand stand out.
 
-![](vertopal_7aeaa68bd90242d088e9aee181b9a8d4/media/image3.png){width="6.5in"
-height="5.416666666666667in"}
+![](/PostImages/building-brand-assets-for-saas-success/2.png)
 
 ## **Protecting Your Brand Assets**
 
