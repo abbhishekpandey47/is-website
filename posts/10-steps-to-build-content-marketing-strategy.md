@@ -53,7 +53,7 @@ and fostering loyalty.
      This is because valuable content attracts prospects looking for
      solutions that your product or service can provide.
 
-![](vertopal_82bed58105194c14a752096ca84b968c/media/image2.png)
+![](/PostImages/10-steps-to-build-content-marketing-strategy/18.png)
 
 3.  **Builds Trust**: For startups, trust is everything. Sharing quality
      content establishes your brand as an authority in your industry,
@@ -70,7 +70,8 @@ and fostering loyalty.
      significant organic traffic and leads without the hefty price tag
      of paid ads.
 
-![](vertopal_82bed58105194c14a752096ca84b968c/media/image3.png)
+![](/PostImages/10-steps-to-build-content-marketing-strategy/17.png)
+![](/PostImages/10-steps-to-build-content-marketing-strategy/16.png)
 
 Now, let's explore the steps in creating an effective content marketing
 strategy tailored to startups.
