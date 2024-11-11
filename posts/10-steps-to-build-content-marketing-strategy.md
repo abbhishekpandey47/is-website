@@ -1,3 +1,5 @@
+## **Introduction**
+
 Starting a startup is exciting but also challenging---especially when it
 comes to building a brand on a limited budget. That's where a
 well-thought-out content marketing strategy can make a huge difference.
