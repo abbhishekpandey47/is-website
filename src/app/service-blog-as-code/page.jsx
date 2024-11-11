@@ -1,6 +1,6 @@
 'use client'
 import ReadyToStart from '@/Components/HomePage/ReadyToStart'
-import React, { useEffect, useContext, useMemo } from 'react'
+import React, { useEffect, useContext, useMemo, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger, CustomEase, Power3 } from 'gsap/all'
 import { Carousel } from 'antd';
@@ -90,6 +90,17 @@ const page = () => {
     const serviceMemoArr = useMemo(() => serviceArr, [serviceArr])
     const dataMemoArr = useMemo(() => dataService, [dataService])
 
+    const [sortedPosts, setSortedPosts] = useState([]);
+
+    useEffect(() => {
+        const sorted = [...postMetaData].sort((a, b) => {
+            const dateA = new Date(a.publishedOn).getTime();
+            const dateB = new Date(b.publishedOn).getTime();
+            return dateB - dateA; // Sorts in descending order (newest first)
+        });
+        setSortedPosts(sorted);
+    }, []);
+
     useEffect(() => {
         gsap.utils.toArray('.serviceasblogcard').forEach((card) => {
             gsap.fromTo(card,
@@ -157,7 +168,7 @@ const page = () => {
             <div className='w-[80%] mx-auto'>
 
                 <Carousel autoplay className='hover:scale-105 transition-all pb-10'>
-                    <Link target='_blank' href={`/blogs/${postMetaData[postMetaData.length - 1].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4'>
+                    <Link target='_blank' href={`/blog/${postMetaData[postMetaData.length - 1].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4'>
                         <Badge.Ribbon text="Latest" className='p-4'>
                             <div className='flex  max-lg:flex-col cursor-pointer gap-8 rounded-lg text-white '>
 
@@ -206,7 +217,7 @@ const page = () => {
                             </div>
                         </Badge.Ribbon>
                     </Link>
-                    <Link target='_blank' href={`/blogs/${postMetaData[postMetaData.length - 2].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4 relative '>
+                    <Link target='_blank' href={`/blog/${postMetaData[postMetaData.length - 2].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4 relative '>
                         <div className='flex  max-lg:flex-col cursor-pointer gap-8 rounded-lg text-white '>
 
                             <div className='relative' ><Image
@@ -252,7 +263,7 @@ const page = () => {
                             </div>
                         </div>
                     </Link>
-                    <Link target='_blank' href={`/blogs/${postMetaData[postMetaData.length - 3].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4 relative '>
+                    <Link target='_blank' href={`/blog/${postMetaData[postMetaData.length - 3].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4 relative '>
                         <div className='flex  max-lg:flex-col cursor-pointer gap-8 rounded-lg text-white '>
                             <div className='relative' ><Image
                                 loading="lazy"

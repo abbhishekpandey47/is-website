@@ -6,13 +6,14 @@ import { gsap } from 'gsap'
 import { ScrollTrigger, CustomEase, Power3 } from 'gsap/all'
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(CustomEase);
+import { Typewriter } from 'react-simple-typewriter'
 
 const HeroHome = () => {
     const headingText = useMemo(() => {
         console.log("Memoizing heading text");
         return {
             title: "Accelerating growth for early-stage".split(" "),
-            subtitle: "SaaS startups".split(" ")
+            subtitle: "startups".split(" ")
         };
     }, []);
 
@@ -57,15 +58,30 @@ const HeroHome = () => {
             <div className="moving-dot"></div>
             <div className="moving-dot2"></div>
 
-            <div className='text-center flex flex-col justify-center pt-32 max-sm:pt-36  items-center'><div className='flex flex-col gap-[40px] max-w-[60vw] max-sm:max-w-[95vw] '>
-                <h1 className='quicksand-bold w-[62vw] max-lg:text-[4em] max-lg:pt-30 max-md:pt-0 text-[5em] text-white tracking-tight leading-[85px] max-md:text-[3.5em] max-md:tracking-tighter max-md:leading-[60px] max-sm:w-[100%] max-lg:w-[60vw]'>
-                    {headingText.title.map((word, index) => (
-                        <span key={index} className="HeroWordSpan">{word} </span>
-                    ))}
-                    {headingText.subtitle.map((word, index) => (
-                        <span key={index} className="HeroWordSpan specialtext"> {word} </span>
-                    ))}
-                </h1>
+            <div className='text-center flex flex-col justify-center pt-32 max-sm:pt-36  items-center'><div className='flex flex-col gap-[40px] md:gap-[30px] max-w-[70vw] max-sm:max-w-[95vw] '>
+                <div className='quicksand-bold w-[70vw] max-lg:text-[4em] max-lg:pt-30 max-md:pt-0 text-[5em] text-white tracking-tight leading-[85px] max-md:text-[3.5em] max-md:tracking-tighter max-md:leading-[60px] max-sm:w-[100%] '>
+                    <h1>
+                        {headingText.title.map((word, index) => (
+                            <span key={index} className="HeroWordSpan">{word} </span>
+                        ))}
+                        <div className='flex max-sm:flex-col justify-center'>
+                            <span className="HeroWordSpan specialtext md:h-[93px]">
+                                <Typewriter
+                                    words={['SaaS', 'DevOps', 'Obsevability', 'MLOps', 'LLMOps']}
+                                    cursor
+                                    loop={1000}
+                                    cursorStyle='|'
+                                    typeSpeed={100}
+                                    deleteSpeed={100}
+                                    delaySpeed={1000}
+                                />
+                            </span>
+                            {headingText.subtitle.map((word, index) => (
+                                <span key={index} className="HeroWordSpan specialtext md:h-[93px]"> {word} </span>
+                            ))}
+                        </div>
+                    </h1>
+                </div>
                 <div className='flex flex-col justify-center gap-10 items-center'>
                     <h2 className='quicksand-mediam text-[1.5em] w-[50vw] max-lg:w-[60vw] max-sm:w-[85vw] max-sm:text-[1.2em] text-center m-auto text-[wheat] heroPagePara'>
                         {description}

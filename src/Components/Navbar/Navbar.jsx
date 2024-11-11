@@ -93,26 +93,15 @@ const Navbar = () => {
     return (
 
         <div className='w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute'>
-            <div className="navbar bg-slate-900 max-xs:w-full xs:rounded-lg p-3 w-[78vw] xl:w-[78vw] shadow-navshadow lg:absolute lg:left-[10vw] ">
-                <div className="navbar-start">
-                    <div className="dropdown">
+            <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[75vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg  lg:absolute lg:left-[50vw] lg:origin-center lg: transform lg:-translate-x-1/2">
+                <div className="navbar-start max-lg:visible invisible">
+                {/*     <div className="dropdown ">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h8m-8 6h16" />
-                            </svg>
+                           
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-slate-900 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-md dropdown-content bg-slate-900 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><Link href="/" onClick={(() => { checkVisitPage("/") })}>Home</Link></li>
                             <li>
                                 <span>Products</span>
@@ -120,13 +109,13 @@ const Navbar = () => {
                                     <li><Link href="https://content.infrasity.com" target='_blank' onClick={(() => { checkVisitPage("/") })}>Outline Generator</Link></li>
                                 </ul>
                             </li>
-                            <li><Link href="/blogs" onClick={(() => { checkVisitPage("/blogs") })}>Blog</Link></li>
+                            <li><Link href="/blog" onClick={(() => { checkVisitPage("/blog") })}>Blog</Link></li>
                             <li>
                                 <span>Services</span>
                                 <ul className="p-2">
                                     <li><Link href="/service-video-production" onClick={(() => { checkVisitPage("/service-video-production") })}>Video Production</Link></li>
                                     <li><Link href="/service-blog-as-code" onClick={() => { setProgress(30) }}>Blogs-as-code</Link></li>
-                                    {/* <li><Link href="/tutorials" onClick={(() => { checkVisitPage("/tutorials") })}>Tutorials</Link></li> */}
+                                    
                                 </ul>
                             </li>
                             <li><Link href="/faq" onClick={(() => { checkVisitPage("/faq") })}>FAQ</Link></li>
@@ -160,6 +149,110 @@ const Navbar = () => {
                             </div>
                         </div>
                     </Link>
+                </div> */}
+                <Menu as="div" className="relative inline-block text-left p-0">
+                    <div>
+                        <MenuButton className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M4 6h16M4 12h8m-8 6h16" />
+                            </svg>
+
+
+                        </MenuButton>
+                    </div>
+
+                    <MenuItems
+                        transition
+                        className="absolute z-10 mt-6 w-56 origin-top-center rounded-lg bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5  transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                    >
+                        <div className="p-2 rounded-lg mx-auto">
+                            <MenuItem>
+                                <Link
+                                    onClick={(() => { checkVisitPage("/") })}
+                                    href="/"
+                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                    target={"/".includes("http") ? '_blank' : ""}
+                                >
+                                    {"Home"}
+                                </Link>
+                            </MenuItem>
+                            <MenuItem>
+                                <p
+                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                >
+                                    {"Products"}
+                                </p>
+                            </MenuItem>
+                            <MenuItem>
+                                <Link
+                                    href="https://content.infrasity.com/"
+                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                    target={"https://content.infrasity.com/".includes("http") ? '_blank' : ""}
+                                >
+                                    <div className='pl-6'>{"Outline Generator"}</div>
+                                </Link>
+                            </MenuItem> 
+                            <MenuItem>
+                                <Link
+                                    onClick={(() => { checkVisitPage("/blog") })}
+                                    href="/blog"
+                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                    target={"/blog".includes("http") ? '_blank' : ""}
+                                >
+                                    {"Blogs"}
+                                </Link>
+                            </MenuItem>
+                            <MenuItem>
+                                <p
+                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                >
+                                    {"Services"}
+                                </p>
+                            </MenuItem>
+                            <MenuItem>
+                                <Link
+                                    onClick={(() => { checkVisitPage("/service-video-production") })}
+                                    href="/service-video-production"
+                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                    target={"service-video-production".includes("http") ? '_blank' : ""}
+                                >
+                                    <div className='pl-6'>{"Video Production"}</div>
+                                </Link>
+                            </MenuItem>
+                            <MenuItem>
+                                <Link
+                                    onClick={(() => { checkVisitPage("/service-blog-as-code") })}
+                                    href="/service-blog-as-code"
+                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                    target={"/service-blog-as-code".includes("http") ? '_blank' : ""}
+                                >
+                                    <div className='pl-6'>{"Blog-as-code"}</div>
+                                </Link>
+                            </MenuItem>
+                            <MenuItem>
+                                <Link
+                                    onClick={(() => { checkVisitPage("/faq") })}
+                                    href="/faq"
+                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                    target={"/faq".includes("http") ? '_blank' : ""}
+                                >
+                                    {"FAQ"}
+                                </Link>
+                            </MenuItem>
+
+
+                        </div>
+                    </MenuItems>
+                </Menu>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 quicksand-semibold">
@@ -167,7 +260,7 @@ const Navbar = () => {
                         <li>
                             <GivenMenuBar head={"Products"} menuLinks={menuLinksArrProducts} setProgress={setProgress} curPage={curPage} setCurPage={setCurPage} />
                         </li>
-                        <li><Link href="/blogs" onClick={(() => { checkVisitPage("/blogs") })}>Blog</Link></li>
+                        <li><Link href="/blog" onClick={(() => { checkVisitPage("/blog") })}>Blog</Link></li>
                         <li className='flex justify-center items-center'>
                             <GivenMenuBar head={"Services"} menuLinks={menuLinksArrServices} setProgress={setProgress} curPage={curPage} setCurPage={setCurPage} />
                         </li>

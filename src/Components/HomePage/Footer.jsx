@@ -17,13 +17,16 @@ const Footer = () => {
                                 <Image loading='lazy' width={100} height={100} src="/awards/color-badge.svg" alt="AICPA SOC" className="h-20 max-sm:h-16" />
                                 <Image loading='lazy' width={100} height={100} src="/awards/clutch.svg" alt="GDPR" className="h-20 max-sm:h-16" />
                             </div>
+                            <a href="https://www.producthunt.com/posts/infrasity-outline-generator-2?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-infrasity&#0045;outline&#0045;generator&#0045;2" target="_blank" class="inline-block">
+                                <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=544443&theme=light" alt="Infrasity Outline Generator - Assisting Engineering Startups with tech Content | Product Hunt" class="w-[250px] h-[54px]" />
+                            </a>
                         </div>
                         <div className="flex max-sm:w-full flex-col w-[35%] max-lg:w-1/2 lg:pl-5">
                             <h1 className="font-semibold  mb-2">Services</h1>
                             <ul className="space-y-4 flex flex-col ">
                                 <li><a href="/service-blog-as-code" className="hover:underline">Blogs-as-code at scale</a></li>
                                 {/* <li><a href="/tutorials" className="hover:underline">Tutorials</a></li> */}
-                                <li><a href="/services" className="hover:underline">Video Production</a></li>
+                                <li><a href="/service-video-production" className="hover:underline">Video Production</a></li>
                             </ul>
                         </div>
                     </div>
@@ -33,7 +36,7 @@ const Footer = () => {
                                 <h1 className="font-bold  mb-2">Resources</h1>
                                 <ul className="space-y-4 ">
                                     <li><a href="/" className="hover:underline">Home</a></li>
-                                    <li><a href="/blogs" className="hover:underline">Blog</a></li>
+                                    <li><a href="/blog" className="hover:underline">Blog</a></li>
                                     <li><a href="/faq" className="hover:underline">FAQ</a></li>
                                     <li><a href="/contact" className="hover:underline">Contact Us</a></li>
                                 </ul>
@@ -56,7 +59,6 @@ const Footer = () => {
                         {/* <a href="#" className="hover:underline">Privacy Policy</a> */}
                         <Link href="/privacy-policy" className="hover:underline" >Privacy Policy</Link>
                         <Link href="/terms-of-services" className="hover:underline" >Terms of Service</Link>
-                        
                     </div>
                 </div>
             </div>

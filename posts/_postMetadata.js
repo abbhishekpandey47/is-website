@@ -138,6 +138,36 @@ let postMetaData = [
         authorId: "author0001",
         category: "Informational",
         metaDescription: "Learn the importance of product marketing and explore the best strategies to market your product effectively for business success."
+    },
+    {
+        title: "Benefits of Using Keyword Explorer: Highlighting Its Importance for SaaS Success",
+        slug: "benefits-of-using-keyword-explorer",
+        description: "Explore the Benefits of Using Keyword Explorer: Highlighting Its Importance for SaaS Success",
+        ogImage: "/PostImages/benefits-of-using-keyword-explorer/0.png",
+        publishedOn: "2024-11-04",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Explore the Benefits of Using Keyword Explorer: Highlighting Its Importance for SaaS Success"
+    },
+    {
+        title: "How to Choose the Right Production Company for Your Video Needs",
+        slug: "how-to-choose-the-right-production-company",
+        description: "Learn how to find the perfect video production company for your brand. This guide covers everything from evaluating portfolios to budget tips, helping you choose a partner that brings your vision to life and creates impactful content.",
+        ogImage: "/PostImages/how-to-choose-the-right-production-company/0.png",
+        publishedOn: "2024-11-05",
+        authorId: "author0001",
+        category: "Tutorials",
+        metaDescription: "Discover how to choose the right video production company for your brand. Get tips on evaluating portfolios, managing budgets, and finding a partner that delivers impactful, engaging content."
+    },
+    {
+        title: "User Guide vs API Documentation: Key Differences",
+        slug: "user-guide-vs-api-documentation",
+        description: "Explore the differences between User Guides and API Documentation, two essential types of documentation in software engineering. This blog dives into their distinct purposes, target audiences, content structures, and best practices. From installation instructions to API endpoint details, we cover everything you need to know to effectively create documentation that caters to both end-users and developers.",
+        ogImage: "/PostImages/user-guide-vs-api-documentation/0.jpg",
+        publishedOn: "2024-11-08",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Discover the key differences between User Guides and API Documentation. Learn about their distinct purposes, audiences, structures, and examples, and get tips on creating effective documentation for both end-users and developers."
     }
 ];
 
