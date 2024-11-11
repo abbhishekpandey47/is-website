@@ -43,8 +43,8 @@ const testiArr = [
         comment: "Infrasity helped us with tech content, focusing on infrastructure engineering - guides, code examples, and more. Their deep domain expertise with Terraform and the underlying tech stack is invaluable, and their project management approach facilitates a smooth and collaborative work process. I highly recommend them when it comes to writing hands-on technical developer-focused content. Their work is immediately impactful and working together is a pleasure..."
     },
     {
-        name: "Sri Krishna",
-        src: "./Testimon/sriMiddleware.jpg",
+        name: "Sri Krishna",    
+        src: "./Testimon/sriMiddleware.jpeg",
         pos: "Content Head, Middleware",
         comment: "Infrasity is incredibly responsive and understands client needs exceptionally well, always delivering promptly and as expected. Their attention to detail and outstanding customer support truly set them apart. Communication through email and messaging was seamless, and while the quality of work is top-notch, we look forward to even faster delivery in the future..."
     }

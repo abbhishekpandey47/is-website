@@ -42,7 +42,7 @@ const testiArr = [
     },
     {
         name: "Sri Krishna",
-        src: "./Testimon/sriMiddleware.jpg",
+        src: "/Testimon/sriMiddleware.jpeg",
         pos: "Content Head, Middleware",
         comment: "Infrasity is incredibly responsive and understands client needs exceptionally well, always delivering promptly and as expected. Their attention to detail and outstanding customer support truly set them apart. Communication through email and messaging was seamless, and while the quality of work is top-notch, we look forward to even faster delivery in the future..."
     }
