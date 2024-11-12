@@ -1,5 +1,11 @@
 const videoMetadata = [
     {
+        ytEmbedLink: "xPyKqcdt3TY",
+        topic: "How to Build a Global Leadership Development Empire: Miller Wymann’s Leandro D’Sylva",
+        type:"yt",
+        category:"Podcasts",
+    },
+    {
         vidLink: "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20ECS.mp4",
         topic: "How to Guide: AWS ECS",
         category:"Editorials",
