@@ -120,28 +120,14 @@ creating a unique auditory association with the brand.
 Here are a few examples of SaaS companies that have done a great job
 using their brand assets:
 
-  -----------------------------------------------------------------------------
-  **Company**      **Strongest      **Why It Works**
-                   Brand Asset**    
-  ---------------- ---------------- -------------------------------------------
-  **Mailchimp**    Mascot (Freddie  Mailchimp's fun mascot makes email
-                   the Monkey)      marketing feel less scary and more
-                                    friendly.
+| Company      | Strongest Brand Asset            | Why It Works                                                                |
+|--------------|----------------------------------|-----------------------------------------------------------------------------|
+| **Mailchimp** | Mascot (Freddie the Monkey)      | Mailchimp's fun mascot makes email marketing feel less scary and more friendly. |
+| **Zendesk**   | Logo & Tone                      | Zendesk's simple logo and friendly tone make customer support feel easy and personal. |
+| **HubSpot**   | Logo & Clear Messaging           | HubSpot's clean logo and simple language make their marketing tools easy to understand and trust. |
+| **Positional**| Color Palette & Design           | Positional uses modern colors and design to make it look professional and easy to use. |
+| **Trello**    | Visual Layout                    | Trello's colorful boards and lists make organizing projects simple and fun.  |
 
-  **Zendesk**      Logo & Tone      Zendesk's simple logo and friendly tone
-                                    make customer support feel easy and
-                                    personal.
-
-  **HubSpot**      Logo & Clear     HubSpot's clean logo and simple language
-                   Messaging        make their marketing tools easy to
-                                    understand and trust.
-
-  **Positional**   Color Palette &  Positional uses modern colors and design to
-                   Design           make it look professional and easy to use.
-
-  **Trello**       Visual Layout    Trello's colorful boards and lists make
-                                    organizing projects simple and fun.
-  -----------------------------------------------------------------------------
 
 ![](/PostImages/building-brand-assets-for-saas-success/1.png)
 
