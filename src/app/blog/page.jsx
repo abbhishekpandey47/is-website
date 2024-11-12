@@ -79,7 +79,7 @@ const CardDiv = React.memo(({ card }) => (
                 </div>
                 <div className="text-white flex flex-col gap-4">
                     <h2 className="card-title quicksand-bold">{card.title}</h2>
-                    <p className='quicksand-light mt-2'>{card.description.length > 90 ? `${card.description.slice(0, 90).trim()} . . .` : card.description}</p>
+                    <p className='quicksand-light mt-2'>{card.description.length > 90 ? `${card.description.slice(0, 80).trim()} . . .` : card.description}</p>
                     <div className='flex items-center gap-2 absolute bottom-3'>
                         <Image className='rounded-full' src={card.authorImage || "/svgPatterns/profile.svg"} alt="" width={40} height={40} />
                         <p className='quicksand-semibold'>{card.author}</p>
