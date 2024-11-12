@@ -69,7 +69,7 @@ into loyal customers.
 
 Trust doesn't happen overnight, but consistent brand assets can help you
 get there. Think of
-[**[Zendesk]{.underline}**](https://www.zendesk.com/in/)---their bright,
+[**[Zendesk]{.}**](https://www.zendesk.com/in/)---their bright,
 friendly logo and approachable tone make them feel like a brand you can
 count on.
 
@@ -160,7 +160,7 @@ for SaaS companies:
 #### **1. Identify Your Brand Purpose**
 
 Your brand needs a strong "why" behind it.
-[[Cloudflare's]{.underline}](https://www.cloudflare.com/en-in/) clear
+[[Cloudflare's]](https://www.cloudflare.com/en-in/) clear
 focus on a "better internet" shapes its branding choices.
 
 Define your mission first---it will guide every asset you create,
@@ -169,7 +169,7 @@ ensuring your brand stays authentic and relevant to your audience.
 #### **2. Develop a Unique Brand Voice**
 
 Know your audience and speak their language.
-[[Slack]{.underline}](https://slack.com/intl/en-in), for example, is
+[[Slack]](https://slack.com/intl/en-in), for example, is
 playful and conversational because it targets a casual, friendly user
 base.
 
@@ -178,7 +178,7 @@ Finding your voice makes your brand more relatable and memorable.
 #### **3. Design Consistent Logos and Visuals**
 
 Visual consistency across your website, app, and ads is vital.
-[[Dropbox's]{.underline}](https://www.dropbox.com/) simple and
+[[Dropbox's]](https://www.dropbox.com/) simple and
 recognizable logo across all platforms shows how consistency builds
 trust and familiarity.
 
@@ -187,7 +187,7 @@ trust and familiarity.
 Remember to test your assets! Gather feedback and tweak your visuals and
 messaging based on user responses.
 
-[[Mailchimp]{.underline}](https://mailchimp.com/) constantly evolves its
+[[Mailchimp]](https://mailchimp.com/) constantly evolves its
 branding, using feedback to keep its visuals and mascot, Freddie, fresh
 and engaging.
 
@@ -224,17 +224,17 @@ protected in the marketplace.
 
 To drive SaaS growth, brand assets like logos, colors, and tone should
 be used consistently across all platforms. For example,
-[**[Positional]{.underline}**](https://www.positional.com/) uses its
+[**[Positional]{.}**](https://www.positional.com/) uses its
 strong logo and clear messaging across its website and social media to
 maintain a professional, recognizable image.
 
 Building a community around your brand is another powerful tool.
-[**[HubSpot]{.underline}**](https://www.hubspot.com/products/crm) excels
+[**[HubSpot]{.}**](https://www.hubspot.com/products/crm) excels
 in creating spaces where users can connect, ask questions, and
 contribute content, increasing engagement and brand loyalty.
 
 Lastly, ensure a unified brand presentation across all customer
-touchpoints. [**[Zendesk\'s]{.underline}**](https://www.zendesk.com/in/)
+touchpoints. [**[Zendesk\'s]{.}**](https://www.zendesk.com/in/)
 consistent, friendly, and approachable design strengthens trust and
 credibility with users, especially in the SaaS sector, where reliability
 is crucial.
