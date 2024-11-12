@@ -69,7 +69,7 @@ into loyal customers.
 
 Trust doesn't happen overnight, but consistent brand assets can help you
 get there. Think of
-[**[Zendesk]{.}**](https://www.zendesk.com/in/)---their bright,
+[**[Zendesk]**](https://www.zendesk.com/in/)---their bright,
 friendly logo and approachable tone make them feel like a brand you can
 count on.
 
@@ -210,17 +210,17 @@ protected in the marketplace.
 
 To drive SaaS growth, brand assets like logos, colors, and tone should
 be used consistently across all platforms. For example,
-[**[Positional]{.}**](https://www.positional.com/) uses its
+[**[Positional]**](https://www.positional.com/) uses its
 strong logo and clear messaging across its website and social media to
 maintain a professional, recognizable image.
 
 Building a community around your brand is another powerful tool.
-[**[HubSpot]{.}**](https://www.hubspot.com/products/crm) excels
+[**[HubSpot]**](https://www.hubspot.com/products/crm) excels
 in creating spaces where users can connect, ask questions, and
 contribute content, increasing engagement and brand loyalty.
 
 Lastly, ensure a unified brand presentation across all customer
-touchpoints. [**[Zendesk\'s]{.}**](https://www.zendesk.com/in/)
+touchpoints. [**[Zendesk\'s]**](https://www.zendesk.com/in/)
 consistent, friendly, and approachable design strengthens trust and
 credibility with users, especially in the SaaS sector, where reliability
 is crucial.
