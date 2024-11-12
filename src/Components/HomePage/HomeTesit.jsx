@@ -12,7 +12,7 @@ const testiArr = [
     {
         name: "Cindy Blake",
         src: "/Testimon/cindyFirefly.jpg",
-        pos: "VP Marketting @Firefly",
+        pos: "VP Marketting, Firefly",
         comment: "Infrasity was quick to onboard and understand how to best show off the capabilities of Firefly's cloud asset management. Team has been super responsive and collaborative..."
 
     },
@@ -25,7 +25,7 @@ const testiArr = [
     {
         name: "Shaked Askayo",
         src: "/Testimon/Shaked.png",
-        pos: "CTO @Kubiya.ai",
+        pos: "CTO, Kubiya.ai",
         comment: "Infrasity's creative content has significantly enhanced the visibility and appeal of our product in a competitive market. Crafting content that engages our audience and eloquently highlights the advanced capabilities of Kubiya.ai."
     },
     {
@@ -37,8 +37,14 @@ const testiArr = [
     {
         name: "Igal Zeifman",
         src: "/Testimon/igalEnv0.jpg",
-        pos: "VP Marketing @Env0",
+        pos: "VP Marketing, Env0",
         comment: "Infrasity provided exceptional tech content on infrastructure engineering, with deep expertise in Terraform and the tech stack. Their collaborative approach and hands-on, developer-focused writing make their work impactful. Highly recommend them for technical content creation."
+    },
+    {
+        name: "Sri Krishna",
+        src: "/Testimon/sriMiddleware.jpeg",
+        pos: "Content Head, Middleware",
+        comment: "Infrasity is incredibly responsive and understands client needs exceptionally well, always delivering promptly and as expected. Their attention to detail and outstanding customer support truly set them apart. Communication through email and messaging was seamless, and while the quality of work is top-notch, we look forward to even faster delivery in the future..."
     }
 ]
 
