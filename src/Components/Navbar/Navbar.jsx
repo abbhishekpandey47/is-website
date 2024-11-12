@@ -95,7 +95,7 @@ const Navbar = () => {
         <div className='w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute'>
             <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[75vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg  lg:absolute lg:left-[50vw] lg:origin-center lg: transform lg:-translate-x-1/2">
                 <div className="navbar-start max-lg:visible invisible">
-                {/*     <div className="dropdown ">
+                    {/*     <div className="dropdown ">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                            
                         </div>
@@ -150,110 +150,139 @@ const Navbar = () => {
                         </div>
                     </Link>
                 </div> */}
-                <Menu as="div" className="relative inline-block text-left p-0">
-                    <div>
-                        <MenuButton className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h8m-8 6h16" />
-                            </svg>
+                    <Menu as="div" className="relative inline-block text-left p-0">
+                        <div>
+
+                            <MenuButton className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M4 6h16M4 12h8m-8 6h16" />
+                                </svg>
 
 
-                        </MenuButton>
-                    </div>
-
-                    <MenuItems
-                        transition
-                        className="absolute z-10 mt-6 w-56 origin-top-center rounded-lg bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5  transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-                    >
-                        <div className="p-2 rounded-lg mx-auto">
-                            <MenuItem>
-                                <Link
-                                    onClick={(() => { checkVisitPage("/") })}
-                                    href="/"
-                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                                    target={"/".includes("http") ? '_blank' : ""}
-                                >
-                                    {"Home"}
-                                </Link>
-                            </MenuItem>
-                            <MenuItem>
-                                <p
-                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                                >
-                                    {"Products"}
-                                </p>
-                            </MenuItem>
-                            <MenuItem>
-                                <Link
-                                    href="https://content.infrasity.com/"
-                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                                    target={"https://content.infrasity.com/".includes("http") ? '_blank' : ""}
-                                >
-                                    <div className='pl-6'>{"Outline Generator"}</div>
-                                </Link>
-                            </MenuItem> 
-                            <MenuItem>
-                                <Link
-                                    onClick={(() => { checkVisitPage("/blog") })}
-                                    href="/blog"
-                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                                    target={"/blog".includes("http") ? '_blank' : ""}
-                                >
-                                    {"Blogs"}
-                                </Link>
-                            </MenuItem>
-                            <MenuItem>
-                                <p
-                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                                >
-                                    {"Services"}
-                                </p>
-                            </MenuItem>
-                            <MenuItem>
-                                <Link
-                                    onClick={(() => { checkVisitPage("/service-video-production") })}
-                                    href="/service-video-production"
-                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                                    target={"service-video-production".includes("http") ? '_blank' : ""}
-                                >
-                                    <div className='pl-6'>{"Video Production"}</div>
-                                </Link>
-                            </MenuItem>
-                            <MenuItem>
-                                <Link
-                                    onClick={(() => { checkVisitPage("/service-blog-as-code") })}
-                                    href="/service-blog-as-code"
-                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                                    target={"/service-blog-as-code".includes("http") ? '_blank' : ""}
-                                >
-                                    <div className='pl-6'>{"Blog-as-code"}</div>
-                                </Link>
-                            </MenuItem>
-                            <MenuItem>
-                                <Link
-                                    onClick={(() => { checkVisitPage("/faq") })}
-                                    href="/faq"
-                                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                                    target={"/faq".includes("http") ? '_blank' : ""}
-                                >
-                                    {"FAQ"}
-                                </Link>
-                            </MenuItem>
-
-
+                            </MenuButton>
                         </div>
-                    </MenuItems>
-                </Menu>
+
+                        <MenuItems
+                            transition
+                            className="absolute z-10 mt-6 w-56 origin-top-center rounded-lg bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5  transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                        >
+                            <div className="p-2 rounded-lg mx-auto">
+                                <MenuItem>
+                                    <Link
+                                        onClick={(() => { checkVisitPage("/") })}
+                                        href="/"
+                                        className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                        target={"/".includes("http") ? '_blank' : ""}
+                                    >
+                                        {"Home"}
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem>
+                                    <p
+                                        className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                    >
+                                        {"Products"}
+                                    </p>
+                                </MenuItem>
+                                <MenuItem>
+                                    <Link
+                                        href="https://content.infrasity.com/"
+                                        className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                        target={"https://content.infrasity.com/".includes("http") ? '_blank' : ""}
+                                    >
+                                        <div className='pl-6'>{"Outline Generator"}</div>
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem>
+                                    <Link
+                                        onClick={(() => { checkVisitPage("/blog") })}
+                                        href="/blog"
+                                        className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                        target={"/blog".includes("http") ? '_blank' : ""}
+                                    >
+                                        {"Blogs"}
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem>
+                                    <p
+                                        className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                    >
+                                        {"Services"}
+                                    </p>
+                                </MenuItem>
+                                <MenuItem>
+                                    <Link
+                                        onClick={(() => { checkVisitPage("/service-video-production") })}
+                                        href="/service-video-production"
+                                        className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                        target={"service-video-production".includes("http") ? '_blank' : ""}
+                                    >
+                                        <div className='pl-6'>{"Video Production"}</div>
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem>
+                                    <Link
+                                        onClick={(() => { checkVisitPage("/service-blog-as-code") })}
+                                        href="/service-blog-as-code"
+                                        className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                        target={"/service-blog-as-code".includes("http") ? '_blank' : ""}
+                                    >
+                                        <div className='pl-6'>{"Blog-as-code"}</div>
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem>
+                                    <Link
+                                        onClick={(() => { checkVisitPage("/faq") })}
+                                        href="/faq"
+                                        className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                        target={"/faq".includes("http") ? '_blank' : ""}
+                                    >
+                                        {"FAQ"}
+                                    </Link>
+                                </MenuItem>
+
+
+                            </div>
+                        </MenuItems>
+                    </Menu>
                 </div>
+                <Link
+                    href="/"
+                    className="btn btn-ghost w-40  lg:absolute"
+                    aria-label="Infrasity Home"
+                >
+                    <div className="flex flex-col my-auto items-start">
+                        <div className="w-full flex justify-start">
+                            <Image
+                                width={200}
+                                height={200}
+                                loading='lazy'
+                                src="/logodata/infra_logo_only.png"
+                                className="min-[408px]:hidden block w-[60%] "
+                                alt="Infrasity Logo"
+                            />
+                        </div>
+                        <div>
+                            <Image
+                                loading='lazy'
+                                width={200}
+                                height={200}
+                                src="/logodata/infrasity_logo.png"
+                                className="max-[408px]:hidden"
+                                alt="Infrasity Logo"
+                            />
+                        </div>
+                    </div>
+                </Link>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 quicksand-semibold">
                         <li><Link href="/" onClick={(() => { checkVisitPage("/") })}>Home</Link></li>
