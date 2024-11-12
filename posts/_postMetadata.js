@@ -182,9 +182,7 @@ let postMetaData = [
     {
         title: "Building Brand Assets for SaaS Success: Why They Matter and How to Create Them",
         slug: "building-brand-assets-for-saas-success",
-        description: "This comprehensive guide dives into the importance of brand assets for SaaS companies, covering why they matter, the types of assets essential for success, and actionable steps to create them. Learn from top SaaS brands and discover best practices for building, protecting, and leveraging brand assets to foster growth, build loyalty, and maintain a lasting, memorable presence in a competitive market. Perfect for SaaS founders, marketers, and product managers.
-
-",
+        description: "This comprehensive guide dives into the importance of brand assets for SaaS companies, covering why they matter, the types of assets essential for success, and actionable steps to create them. Learn from top SaaS brands and discover best practices for building, protecting, and leveraging brand assets to foster growth, build loyalty, and maintain a lasting, memorable presence in a competitive market. Perfect for SaaS founders, marketers, and product managers.",
         ogImage: "/PostImages/building-brand-assets-for-saas-success/0.jpg",
         publishedOn: "2024-11-12",
         authorId: "author0001",
