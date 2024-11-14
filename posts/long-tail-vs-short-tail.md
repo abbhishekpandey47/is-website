@@ -27,8 +27,7 @@ technical content for maximum impact. Let's explore how you can refine
 your keyword approach to capture high-quality traffic and achieve
 measurable success!
 
-![](vertopal_8130a7c3f11f40caaa2f2b8805ff87ce/media/image7.png){width="6.5in"
-height="5.416666666666667in"}
+![](/PostImages/long-tail-vs-short-tail/1.png)
 
 Image inspired by
 [[Mangools]](https://mangools.com/blog/long-tail-keywords/)
@@ -49,8 +48,7 @@ like "electric cars" using a keyword research tool, say [Ahrefs
 Keywords Explorer](https://ahrefs.com/keywords-explorer),
 then, you'll get a list of keywords as follows.
 
-![](vertopal_8130a7c3f11f40caaa2f2b8805ff87ce/media/image1.png){width="4.180550087489064in"
-height="5.565621172353456in"}
+![](/PostImages/long-tail-vs-short-tail/2.png)
 
 Source:
 [https://ahrefs.com/blog/long-tail-vs-short-tail-keywords/](https://ahrefs.com/blog/long-tail-vs-short-tail-keywords/)
@@ -63,8 +61,7 @@ phrases (typically three or more words), such as "affordable cloud
 computing solutions for SaaS" or "best project management software for
 small businesses."
 
-![](vertopal_8130a7c3f11f40caaa2f2b8805ff87ce/media/image4.png){width="3.9843755468066493in"
-height="3.738280839895013in"}
+![](/PostImages/long-tail-vs-short-tail/3.png)
 
 Source:
 [https://ahrefs.com/blog/long-tail-vs-short-tail-keywords/](https://ahrefs.com/blog/long-tail-vs-short-tail-keywords/)
@@ -74,8 +71,7 @@ Volume, and other modifiers such as, 'for'. This will help you to arrive
 at the desired list of long-tail keywords with low competition. A great
 example is given below -
 
-![](vertopal_8130a7c3f11f40caaa2f2b8805ff87ce/media/image5.png){width="4.005208880139983in"
-height="3.3786504811898515in"}
+![](/PostImages/long-tail-vs-short-tail/4.png)
 
 Source:
 [https://ahrefs.com/blog/long-tail-vs-short-tail-keywords/](https://ahrefs.com/blog/long-tail-vs-short-tail-keywords/)
@@ -86,8 +82,7 @@ company targeting startups might also use "project management software
 for tech startups" to attract high-intent users specifically looking for
 startup-friendly solutions.
 
-![](vertopal_8130a7c3f11f40caaa2f2b8805ff87ce/media/image2.jpg){width="6.546875546806649in"
-height="4.305998468941382in"}
+![](/PostImages/long-tail-vs-short-tail/5.jpg)
 
 [Source](https://loganix.com/short-tail-keywords/)
 
@@ -118,8 +113,7 @@ Thus, keyword research is essential to identifying which terms best
 align with your audience's needs. Let's have a detailed look at the
 process to identify the right keywords for your technical content:
 
-![](vertopal_8130a7c3f11f40caaa2f2b8805ff87ce/media/image3.png){width="6.744792213473316in"
-height="3.351706036745407in"}
+![](/PostImages/long-tail-vs-short-tail/6.png)
 
 [Source](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.lcn.com/blog/short-tail-vs-long-tail-keywords/%23:~:text%3DWhen%2520doing%2520your%2520research%2520into,five%2520or%2520even%2520more%2520words.&ved=2ahUKEwje5_WE49WJAxUGS2wGHaFrMG8QFnoECBUQBQ&usg=AOvVaw1DesaNwib70YJ2LVQnJbCw)
 
@@ -182,8 +176,7 @@ software for small businesses" to attract ready-to-convert users. Thus,
 it\'s necessary to strike a balance between the short-tail and long-tail
 keywords.
 
-![](vertopal_8130a7c3f11f40caaa2f2b8805ff87ce/media/image8.png){width="6.432292213473316in"
-height="6.079300087489064in"}
+![](/PostImages/long-tail-vs-short-tail/7.png)
 
 [Source](https://loganix.com/short-tail-keywords/)
 
