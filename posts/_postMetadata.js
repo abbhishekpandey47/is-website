@@ -73,7 +73,7 @@ let postMetaData = [
         title: "Different Fields of Marketing – Exploring Different Paths and Strategies",
         slug: "explore-the-different-fields-of-marketing",
         description: "Dive into the various fields of marketing, from content and social media to product marketing. Uncover strategies that top SaaS companies use to grow and engage their audience, with insights into the latest trends such as AI-driven personalization.",
-        ogImage: "",
+        ogImage: "/PostImages/explore-the-different-fields-of-marketing/0.webp",
         publishedOn: "2024-10-02",
         authorId: "author0001",
         category: "Informational",
