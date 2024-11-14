@@ -53,7 +53,7 @@ let postMetaData = [
         title: "Jobs of Marketing: Career Paths, Roles and Skills",
         slug: "jobs-of-marketing-career-paths-roles-and-skills",
         description: "Discover the diverse career paths in marketing, from digital and product marketing to content and brand strategy. Explore the skills needed for each role and how you can start or pivot your career in this dynamic field.",
-        ogImage: "",
+        ogImage: "/PostImages/jobs-of-marketing-career-paths-roles-and-skills/0.webp",
         publishedOn: "2024-09-25",
         authorId: "author0001",
         category: "Informational",
