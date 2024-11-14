@@ -88,20 +88,12 @@ startup-friendly solutions.
 
 ### Summary Table 
 
-  -----------------------------------------------------------------------
-  **Aspect**              **Long-Tail Keywords**  **Short-Tail Keywords**
-  ----------------------- ----------------------- -----------------------
-  **Search Volume**       Lower but highly        Higher but less focused
-                          targeted                
-
-  **Competition**         Lower competition       Higher competition
-
-  **Conversion            Higher due to specific  Lower due to general
-  Potential**             user intent             intent
-
-  **User Intent**         High intent, focused    Broad intent, varied
-                          needs                   user goals
-  -----------------------------------------------------------------------
+  | **Aspect**             | **Long-Tail Keywords**       | **Short-Tail Keywords**      |
+|------------------------|------------------------------|------------------------------|
+| **Search Volume**      | Lower but highly targeted    | Higher but less focused      |
+| **Competition**        | Lower competition            | Higher competition           |
+| **Conversion Potential** | Higher due to specific user intent | Lower due to general intent |
+| **User Intent**        | High intent, focused needs   | Broad intent, varied user goals |
 
 ## How to do keyword research 
 
