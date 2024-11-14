@@ -13,7 +13,7 @@ let postMetaData = [
         title: "Driving Rapid Growth Through Strategic Content: A Case Study with Terrateam",
         slug: "Terrateam-case-study",
         description: "This case study highlights how Infrasity helped Terrateam, a Netherlands-based startup, achieve rapid growth through strategic, high-impact technical content. By focusing on keyword research, SEO optimization, and developer-focused messaging, Infrasity increased Terrateam's traffic by 15% in just 14 days and boosted organic traffic by 13.8% over 90 days.",
-        ogImage: "",
+        ogImage: "/PostImages/terrateam-case-study/0.webp",
         publishedOn: "2024-09-12",
         authorId: "author0001",
         category: "Case Studies",
