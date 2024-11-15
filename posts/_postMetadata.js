@@ -197,8 +197,7 @@ let postMetaData = [
         publishedOn: "2024-11-15",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Explore the difference between long-tail and short-tail keywords and how to effectively use long-tail keywords in your technical content for higher conversions.
-
+        metaDescription: "Explore the difference between long-tail and short-tail keywords and how to effectively use long-tail keywords in your technical content for higher conversions."
     }
 ];
 
