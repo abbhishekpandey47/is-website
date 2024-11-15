@@ -199,7 +199,7 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Explore the difference between long-tail and short-tail keywords and how to effectively use long-tail keywords in your technical content for higher conversions.
 
-    
+    }
 ];
 
 const sorted = () => {
