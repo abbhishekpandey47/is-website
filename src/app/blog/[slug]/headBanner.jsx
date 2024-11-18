@@ -50,7 +50,7 @@ export default React.memo(function HeadBanner({ postData }) {
               loading="lazy" // Added lazy loading
               priority={false}
               src={postData.authorImage || "https://via.placeholder.com/40"}
-              alt={`Author picture of ${postData.author || "the author"}`} // More descriptive alt text for accessibility
+              alt={`Author picture of ${postData.authorName || "the author"}`} // More descriptive alt text for accessibility
               className="rounded-full w-10 h-10 transition duration-300 ease-in-out transform hover:scale-105" // Added transition effect for smooth scaling on hover
             />
             <div>
@@ -59,7 +59,7 @@ export default React.memo(function HeadBanner({ postData }) {
               </p>{" "}
               {/* Added transition */}
               <p className="text-sm max-xs:text-xs quicksand-semibold transition duration-300 ease-in-out transform hover:scale-105">
-                {postData.author || "Author name"} {/* Added transition */}
+                {postData.authorName || "Author name"} {/* Added transition */}
               </p>
             </div>
           </a>
