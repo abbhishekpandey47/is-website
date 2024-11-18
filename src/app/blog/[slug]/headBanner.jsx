@@ -5,12 +5,12 @@ import React from "react";
 const monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 export default React.memo(function HeadBanner({ postData }) {
-  
+
   // Use JavaScript's Date object for better date parsing
   const publishedDate = postData.publishedOn
     ? new Date(postData.publishedOn)
     : new Date("2024-09-23");
-  
+
   return (
     <div
       id="headBanner"
@@ -37,7 +37,13 @@ export default React.memo(function HeadBanner({ postData }) {
 
         <div className="flex items-center space-x-6 text-white">
           {/* Author Info */}
-          <div className="flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105"> {/* Added smooth hover effect */}
+          <a
+            href={postData.authorLinkedin || "#"} 
+            target="_blank" // Open the link in a new tab
+            rel="noopener noreferrer" // Improves security
+            className="flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105"
+          >
+            {/* Added smooth hover effect */}
             <Image
               width={50}
               height={50}
@@ -48,27 +54,31 @@ export default React.memo(function HeadBanner({ postData }) {
               className="rounded-full w-10 h-10 transition duration-300 ease-in-out transform hover:scale-105" // Added transition effect for smooth scaling on hover
             />
             <div>
-              <p className="text-sm max-xs:text-xs quicksand-semibold transition duration-300 ease-in-out transform hover:scale-105">Written by</p> {/* Added transition */}
+              <p className="text-sm max-xs:text-xs quicksand-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                Written by
+              </p>{" "}
+              {/* Added transition */}
               <p className="text-sm max-xs:text-xs quicksand-semibold transition duration-300 ease-in-out transform hover:scale-105">
                 {postData.author || "Author name"} {/* Added transition */}
               </p>
             </div>
-          </div>
+          </a>
         </div>
+
       </div>
 
       {/* Right Section (Image Section) */}
-        <div className="w-2/5 flex justify-center h-auto max-lg:w-0">
-          <Image
-            width={900}
-            height={900}
-            loading="lazy" // Lazy loading for performance
-            priority={false}
-            src={postData.ogImage || "/blog_home/blog_home.png"}
-            alt={`Illustration for ${postData.title || "the blog"}`} // Improved alt text for accessibility
-            className="rounded-lg w-full h-auto max-lg:hidden"
-          />
-        </div>
+      <div className="w-2/5 flex justify-center h-auto max-lg:w-0">
+        <Image
+          width={900}
+          height={900}
+          loading="lazy" // Lazy loading for performance
+          priority={false}
+          src={postData.ogImage || "/blog_home/blog_home.png"}
+          alt={`Illustration for ${postData.title || "the blog"}`} // Improved alt text for accessibility
+          className="rounded-lg w-full h-auto max-lg:hidden"
+        />
+      </div>
     </div>
   );
 });

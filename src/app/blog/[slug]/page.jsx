@@ -70,6 +70,7 @@ const PostPage = (props) => {
   const authorObj = authorMetadata.find((element) => element.authorId === postData.authorId);
   postData.author = authorObj.name;
   postData.authorImage = authorObj.profilePic;
+  postData.authorLinkedin = authorObj.linkedIn;
 
   return (
     <>
