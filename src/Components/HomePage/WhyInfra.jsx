@@ -15,6 +15,13 @@ const infraArr = [
     "Explainer videos ensuring technical precision",
 ];
 
+const traditionalAgenArr = [
+    "Limited understanding of development workflows",
+    "More focus on general marketing and lack of technical resources",
+    "Tech content writing requires high level of  accuracy and detail, which doesn't align with general writing style",
+    "Lack in understanding of latest trends, tools and technologies in tech development",
+];
+
 const WhyInfra = () => {
     useEffect(() => {
         gsap.fromTo(".whyInfraUpperHead", {
@@ -38,7 +45,7 @@ const WhyInfra = () => {
         gsap.fromTo(".whyInfraCards", {
             opacity: 0,
             y: 55,
-            scale:1.3
+            scale: 1.3
         },
             {
                 opacity: 1,
@@ -46,7 +53,7 @@ const WhyInfra = () => {
                 duration: 0.5,
                 stagger: 0.1,
                 ease: "power3.out",
-                scale:1,
+                scale: 1,
                 scrollTrigger: {
                     trigger: ".whyInfraCards",
                     toggleActions: "restart none none none",
@@ -70,7 +77,7 @@ const WhyInfra = () => {
                 </div>
                 <div className="flex justify-center whyInfraUpperHead">
                     <p className="text-center text-[wheat] pt-5 w-2/3 quicksand-semibold max-lg:w-3/4 max-xs:w-full max-xs:px-5">
-                    Infrasity delivers technically accurate content crafted by engineers with real-world experience. We offer end-to-end services, including blogs, videos, and SEO, tailored to your industry. Our content brings depth and credibility, driving growth while freeing up your team.
+                        Infrasity delivers technically accurate content crafted by engineers with real-world experience. We offer end-to-end services, including blogs, videos, and SEO, tailored to your industry. Our content brings depth and credibility, driving growth while freeing up your team.
                     </p>
                 </div>
             </div>
@@ -81,9 +88,9 @@ const WhyInfra = () => {
                             <div className="flex justify-center items-center mb-3 h-[18%]">
                                 <h2 className="text-center text-white quicksand-bold text-4xl max-sm:text-xl mb-4">
                                     <Image
-                                    loading = "lazy"
-                                        width = {300}
-                                        height = {300}
+                                        loading="lazy"
+                                        width={300}
+                                        height={300}
                                         src="/logodata/infrasity_logo.png"
                                         alt="Infrasity Logo"
                                         className="w-auto h-[3.8rem] max-sm:h-[12]"
@@ -107,13 +114,13 @@ const WhyInfra = () => {
                     </div>
                 </div>
                 <div>
-                    <div className="bg-[#888]/20 backdrop-blur-sm ring-1 ring-black/5 isolate aspect-video rounded-xl image-full w-[450px] max-sm:w-[350px] shadow-xl whyInfraCards">
+                    <div className="bg-[#888]/20 backdrop-blur-sm ring-1 ring-black/5 isolate aspect-video rounded-xl image-full w-[450px] max-sm:w-[350px] shadow-xl whyInfraCards pb-2">
                         <div className="card-body">
                             <div className="h-[18%]">
                                 <h2 className="text-center text-white quicksand-bold text-4xl max-sm:text-xl p-4 mb-4">Traditional agencies</h2>
                             </div>
                             <div className="flex flex-col gap-6">
-                                {infraArr.map((item, index) => (
+                                {traditionalAgenArr.map((item, index) => (
                                     <div key={index} className="flex gap-5 items-center quicksand-medium">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28" fill="none">
