@@ -109,7 +109,7 @@ process to identify the right keywords for your technical content:
 
 [Source](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.lcn.com/blog/short-tail-vs-long-tail-keywords/%23:~:text%3DWhen%2520doing%2520your%2520research%2520into,five%2520or%2520even%2520more%2520words.&ved=2ahUKEwje5_WE49WJAxUGS2wGHaFrMG8QFnoECBUQBQ&usg=AOvVaw1DesaNwib70YJ2LVQnJbCw)
 
--   ### Conducting Effective Keyword Research
+### Conducting Effective Keyword Research
 
 There are various tools you can use to do effective keyword research.
 'Google Keyword Planner' identifies short-tail keywords and explores
@@ -122,7 +122,7 @@ It shows the keywords competitors are ranking for. Consequently, it
 offers ideas for both long-tail and short-tail keywords to fill the gaps
 in content.
 
--   #### TOFU, MOFU, and BOFU Keyword Strategy
+#### TOFU, MOFU, and BOFU Keyword Strategy
 
 To maximize effectiveness, you can tailor keywords to different stages
 of the buyer's journey:
@@ -141,7 +141,7 @@ of the buyer's journey:
  long-tail keyword "purchase CRM software for startups." This keyword
  attracts users actively ready to buy, maximizing conversion potential.
 
--   ### Analyzing Search Intent for Technical Content
+### Analyzing Search Intent for Technical Content
 
 Understanding search intent ensures that content aligns with user
 expectations. Technical content often fulfills **informational** search
@@ -152,7 +152,7 @@ management" speaks directly to users searching for actionable advice,
 making it likely to rank well if optimized with relevant long-tail
 keywords.
 
--   ### Balancing Long-Tail and Short-Tail Keywords
+### Balancing Long-Tail and Short-Tail Keywords
 
 Balancing both keyword types creates a robust SEO strategy:
 
