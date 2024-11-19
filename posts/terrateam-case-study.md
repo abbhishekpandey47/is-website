@@ -138,5 +138,4 @@ technical guides, and videos that resonate with developers. We help
 companies cut through the noise, delivering content that fuels growth
 and connects deeply with the target audience.
 
-![](vertopal_87640dacdf3f4366a28c32cf32718510/media/image1.png){width="6.267716535433071in"
-height="2.9444444444444446in"}
+![terrateam case study](/PostImages/terrateam-case-study/1.png)
