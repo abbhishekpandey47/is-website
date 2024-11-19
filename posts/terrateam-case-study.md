@@ -1,4 +1,4 @@
-# **Overview**
+## Overview
 
 This case study highlights how Infrasity helped Terrateam, a
 Netherland-based startup, achieve rapid growth through strategic,
@@ -7,7 +7,7 @@ research, SEO optimization, and developer-focused messaging. Terrateam
 witnessed website traffic growth by 405% in just 90 days and boosted
 organic traffic by 13.8%.
 
-# **Key Insights**
+## Key Insights
 
 We got an opportunity to partner with Terrateam, a Netherlands-based
 startup that automates Infrastructure as Code and integrates seamlessly
@@ -26,7 +26,7 @@ and user engagement. Their primary issue was the need to significantly
 increase website traffic and enhance the overall user experience through
 strategic content development that has the right match of keywords.
 
-# **The Strategy**
+## The Strategy
 
 To begin with the task, we started by building a custom content calendar
 for Terrateam that highlighted the broader areas that were to be
@@ -66,7 +66,7 @@ Blogs such as-
 Not only were they about keywords, but they were also about solving problems
 that Engineers face every day.
 
-# **How we created a Master-Content**
+## How we created a Master-Content
 
  By now we were absolutely clear on how the content piece would look like. With the use of the right keywords and clear and concise messaging while knowing about the Target Audience, we were ready to craft a Problem-solution-centric blog. 
 
@@ -98,7 +98,7 @@ This strategy enhanced their website structure and improved user
 experience, resulting in increased web traffic and better engagement
 metrics.
 
-# **The Outcome**
+## The Outcome
 
 Within just 14 days, we achieved a 15% increase in traffic to
 Terrateam's site. Over the last 90 Days, the website has seen a 13.8%
@@ -108,7 +108,7 @@ SEO efforts.
 From technical blogs to how-to guides and explainer videos, every piece
 of content was crafted to engage the right audience
 
-# **Future Plans**
+## Future Plans
 
 Based on the success that we have achieved so far, we would continue
 expanding the content strategy by delivering new content as well as
@@ -117,7 +117,7 @@ working for Terrateam has been an exceptional journey, and we would
 be more excited to carry on several tech content-related duties for many
 more years to come.
 
-# **Testimonial** 
+## Testimonial 
 
 Infrasity's dedication to understanding our audience\'s needs was
 evident in their research on what Engineers look for in content. By
@@ -129,7 +129,7 @@ our content strategy, and we highly recommend their expertise.
 
 > Josh; Co-Founder at Terrateam
 
-# **About Infrasity** 
+## About Infrasity 
 
 Infrasity specializes in helping engineering organizations drive growth
 through organic, technically credible content. Our in-house engineers
