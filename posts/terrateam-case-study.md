@@ -117,18 +117,6 @@ working for Terrateam has been an exceptional journey, and we would
 be more excited to carry on several tech content-related duties for many
 more years to come.
 
-## Testimonial 
-
-Infrasity's dedication to understanding our audience\'s needs was
-evident in their research on what Engineers look for in content. By
-focusing on teachings rather than selling, Infrasity's content has
-empowered our users with new skills and solutions to everyday problems.
-Their work has significantly boosted our web and blog traffic, and we
-couldn't be more pleased with the results. Infrasity has truly elevated
-our content strategy, and we highly recommend their expertise.
-
-> Josh; Co-Founder at Terrateam
-
 ## About Infrasity 
 
 Infrasity specializes in helping engineering organizations drive growth
