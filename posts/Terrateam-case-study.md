@@ -1,27 +1,142 @@
-At Infrasity, we partnered with Terrateam, a Netherlands-based startup specializing in automating Infrastructure as Code (IaC) while integrating with GitHub workflows. They enable teams to build, manage, and deploy infrastructure using tools like Terraform, OpenTofu, CDKTF, and Terragrunt.
+# **Overview**
 
-## The Challenge
+This case study highlights how Infrasity helped Terrateam, a
+Netherland-based startup, achieve rapid growth through strategic,
+high-impact technical content. We at Infrasity focused on keyword
+research, SEO optimization, and developer-focused messaging. Terrateam
+witnessed website traffic growth by 405% in just 90 days and boosted
+organic traffic by 13.8%.
 
-Until April, Terrateam saw steady traffic growth driven by our collaborative efforts. After a brief pause, they resumed engagement with us in September, aiming to elevate their organic traffic purely through high-impact technical content.
+# **Key Insights**
 
-## What Worked for Us
+We got an opportunity to partner with Terrateam, a Netherlands-based
+startup that automates Infrastructure as Code and integrates seamlessly
+with GitHub workflows. Using tools like Terraform, OpenTofu, CDKTF, and
+Terragrunt helps teams build, manage, and deploy infrastructure.
+Our collaboration led to steady traffic growth until April 2024. Then
+, after a brief pause, we resumed the services workflow for Terrateam in
+September 2024, resulting in an organic traffic surge. Our dedication to
+writing, researching, and optimizing SEO-driven tech blogs resulted in
+notable improvements in both website and blog traffic.
 
-Our success hinged on several key factors:
+**Initial Hurdles(Problem Statement)**
 
-- A seasoned engineer with a deep understanding of infrastructure conducted comprehensive keyword research.
-- Meticulous feedback and revisions ensured that the content aligned with the goals.
-- We created content with infrastructure and DevOps engineer personas in mind, focusing on clear, impactful messaging before optimizing for SEO.
+Terrateam faced a critical challenge in boosting its online visibility
+and user engagement. Their primary issue was the need to significantly
+increase website traffic and enhance the overall user experience through
+strategic content development that has the right match of keywords.
 
-## The Results
+# **The Strategy**
 
-Within just 14 days, we achieved a 15% increase in traffic to Terrateam’s site. Over the last 90 days, the site has seen a 13.8% boost in organic traffic, with a significant portion attributed to our SEO efforts.
+To begin with the task, we started by building a custom content calendar
+for Terrateam that highlighted the broader areas that were to be
+targeted by our Tech content writers. But before starting the Research
+and Content copy, both Terrateam and us at Infrasity discussed the
+audience persona. It was clear throughout the meetings that both DevOps
+and Infrastructure Engineers shall be the primary readers and
+contributors.
 
-From technical blogs to how-to guides and explainer videos, every piece of content was crafted to engage the right audience and deliver measurable results.
+Before guiding on directly to the messaging, we at Infrasity thought
+about the focus areas for Engineers. From the first go, it was clear to
+do a bit of research on what all Engineers are looking for in content.
+Keywords like "RBAC with Terraform" or "Terraform cloud alternatives"
+were mostly searched as they solve real problems engineers face.
 
-## About Infrasity
+After further brainstorming, we started the compilation process. Our
+focus was to write every blog piece while keeping DevOps engineers as
+the primary readers. Throughout the content creation process, we never
+lost focus on both quality and narration.
 
-Infrasity specializes in helping engineering organizations drive growth through organic, technically credible content. Our in-house engineers work hands-on with products to create high-impact blogs, whitepapers, technical guides, and videos that resonate with developers. We help companies cut through the noise, delivering content that fuels growth and connects deeply with the target audience.
+The blogs that were written by us talked about the biggest pain points
+such as **Managing terraform state or setting up RBAC**. Apart from
+regular easy-to-understand write-ups, the other things that we
+highlighted talked about how Terrateam's feature makes DevOps
+Engineer\'s life is easier, along with easy-to-follow tutorials.
 
-## Conclusion
+Blogs such as-
 
-Infrasity’s strategic content approach, rooted in deep keyword research and a focus on developer personas, helped fuel rapid growth for Terrateam. Our expertise in delivering technically credible, high-impact content ensures lasting success.
+-   RBAC with Terraform
+
+-   OPA with Terraform
+
+-   Terraform cloud alternative
+
+-   Migrating Terraform state between backends
+
+Not only were they about keywords, but they were also about solving problems
+that Engineers face every day.
+
+# **How we created a Master-Content**
+
+ By now we were absolutely clear on how the content piece would look like. With the use of the right keywords and clear and concise messaging while knowing about the Target Audience, we were ready to craft a Problem-solution-centric blog. 
+
+The steps that we followed:
+
+**Clear Message, Then SEO:** First, we focused on writing content that
+engineers would want to read. Then, we made sure it ranked well on SERP.
+The message always came first.
+
+**Got Feedback, Made It Better:** We didn't just write and publish.
+Every draft was reviewed by real engineers to make sure it was helpful,
+accurate, and made sense.
+
+**Focused on Teaching, Not Selling:** We didn't shove the product in
+their face. Instead, we focused on teaching them new skills and solving
+real problems they deal with every day.
+
+Apart from that, we prioritized keywords simply by focussing on ToFu and
+MoFu content. While listing these keywords, we focused on some critical
+areas like keyword competition and how they were being responded to in
+developer communities were studied to gain the best possible results.
+Once this was done, we chose specific topics based on the keywords and
+wrote blogs accordingly.
+
+This is how we made content that engineers trust and traffic that keeps
+growing.
+
+This strategy enhanced their website structure and improved user
+experience, resulting in increased web traffic and better engagement
+metrics.
+
+# **The Outcome**
+
+Within just 14 days, we achieved a 15% increase in traffic to
+Terrateam's site. Over the last 90 Days, the website has seen a 13.8%
+boost in organic traffic, with a significant portion attributed to our
+SEO efforts.
+
+From technical blogs to how-to guides and explainer videos, every piece
+of content was crafted to engage the right audience
+
+# **Future Plans**
+
+Based on the success that we have achieved so far, we would continue
+expanding the content strategy by delivering new content as well as
+optimizing existing content to maintain high search result rankings. For
+working for Terrateam has been an exceptional journey, and we would
+be more excited to carry on several tech content-related duties for many
+more years to come.
+
+# **Testimonial** 
+
+Infrasity's dedication to understanding our audience\'s needs was
+evident in their research on what Engineers look for in content. By
+focusing on teachings rather than selling, Infrasity's content has
+empowered our users with new skills and solutions to everyday problems.
+Their work has significantly boosted our web and blog traffic, and we
+couldn't be more pleased with the results. Infrasity has truly elevated
+our content strategy, and we highly recommend their expertise.
+
+> Josh; Co-Founder at Terrateam
+
+# **About Infrasity** 
+
+Infrasity specializes in helping engineering organizations drive growth
+through organic, technically credible content. Our in-house engineers
+work hands-on with products to create high-impact blogs, whitepapers,
+technical guides, and videos that resonate with developers. We help
+companies cut through the noise, delivering content that fuels growth
+and connects deeply with the target audience.
+
+![](vertopal_87640dacdf3f4366a28c32cf32718510/media/image1.png){width="6.267716535433071in"
+height="2.9444444444444446in"}
