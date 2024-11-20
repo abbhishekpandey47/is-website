@@ -354,8 +354,9 @@ Documentation: https://vuepress.vuejs.org/guide/introduction.html
 
 3.  **Create a VuePress Config File**: Inside the docs/ folder, add a
      .vuepress directory and a config.js file. This is where you
-     configure the site:\
-     module.exports = {
+     configure the site:
+    
+module.exports = {
 
 title: \'My VuePress Site\',
 
@@ -373,9 +374,12 @@ sidebar: \[
 
 };
 
+
+
 4.  **Add Vue Components**: One of VuePress\'s key strengths is its
      ability to embed Vue components directly into Markdown files.
-     Inside .vuepress/components/, create a Vue component,
+
+    Inside .vuepress/components/, create a Vue component,
      MyComponent.vue, and use it in your Markdown files:\
      \<template\>
 
