@@ -325,21 +325,7 @@ pages: \[
      and ready to deploy to a static site hosting platform with minimal
      configuration.
 
-#### 
-
-#### 
-
-#### 
-
-#### 
-
-#### 
-
-#### 
-
-#### 
-
-#### **VuePress**
+### **VuePress**
 
 !["vuepress"](/PostImages/frameworks-for-scalable-documentation-sites/4.png)
 
@@ -403,19 +389,6 @@ sidebar: \[
  VuePress will serve the site locally, allowing you to view the
  interactive Vue components embedded in your documentation.
 
-#### 
-
-#### 
-
-#### 
-
-#### 
-
-#### 
-
-#### 
-
-#### 
 
 ### **Antora**
 
