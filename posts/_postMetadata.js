@@ -193,7 +193,7 @@ let postMetaData = [
         title: "Frameworks for Scalable Documentation Sites",
         slug: "frameworks-for-scalable-documentation-sites",
         description: "Explore the best frameworks for creating scalable technical documentation, including MkDocs, Docusaurus, Fuma Docs, VuePress, and Antora. Learn how to choose the right framework for your project, with hands-on examples, installation guides, and best practices to enhance collaboration, user experience, and content management.",
-        ogImage: "/PostImages/framework-for-scalable-documentation-sites/0.png",
+        ogImage: "/PostImages/frameworks-for-scalable-documentation-sites/0.png",
         publishedOn: "2024-11-20",
         authorId: "author0001",
         category: "Tutorials",
