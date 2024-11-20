@@ -26,7 +26,7 @@ now, we will see how to choose the right framework for the same and a
 brief overview of hands-on examples covering the basics and installation
 as well; let's get into it!
 
-### **Choosing the Right Framework for Your Needs**
+## **Choosing the Right Framework for Your Needs**
 
 When selecting a documentation framework, a few factors play a crucial
 role.
@@ -95,7 +95,7 @@ Now, let's take a look at each of these frameworks and their use cases
 in brief, so you can proceed with choosing the best one according to
 your needs.
 
-### **Overview of Popular Frameworks for Documentation Sites**
+## **Overview of Popular Frameworks for Documentation Sites**
 
 Let's dive into the details of some popular frameworks for scalable
 documentation.
@@ -104,7 +104,7 @@ Each of these frameworks offers unique features, benefits, and
 limitations as well, along with hands-on examples to help you get
 started!
 
-#### **MkDocs**
+### **MkDocs**
 
 !["mkdocs"](/PostImages/frameworks-for-scalable-documentation-sites/1.png)
 
@@ -194,7 +194,7 @@ deployed to any static hosting provider.
 
 #### 
 
-#### **Docusaurus**
+### **Docusaurus**
 
 !["docusaurus"](/PostImages/frameworks-for-scalable-documentation-sites/2.png)
 
@@ -271,7 +271,7 @@ to navigate between versions easily.
 
 #### 
 
-#### **Fuma Docs**
+### **Fuma Docs**
 
 !["mkdocs"](/PostImages/frameworks-for-scalable-documentation-sites/3.png)
 
@@ -417,7 +417,7 @@ sidebar: \[
 
 #### 
 
-#### **Antora**
+### **Antora**
 
 !["antora"](/PostImages/frameworks-for-scalable-documentation-sites/5.png)
 
@@ -479,7 +479,7 @@ start_path: docs
      multi-version capabilities make it highly scalable and suitable
      for enterprise documentation.
 
-### **Comparing Frameworks for Different Use Cases**
+## **Comparing Frameworks for Different Use Cases**
 
 Each framework has its own strengths, making it suitable for different
 types of projects. Below is a quick comparison between each one of them:
@@ -493,9 +493,7 @@ types of projects. Below is a quick comparison between each one of them:
 | **Antora**    | Advanced          | Multi-repository, large-scale docs     | Very High            | Large teams, enterprise-level projects |
 
 
-### 
-
-### **Best Practices for Setting Up Scalable Documentation Sites**
+## **Best Practices for Setting Up Scalable Documentation Sites**
 
 Regardless of the framework, following best practices can greatly
 improve your documentation's scalability and usability.
@@ -517,7 +515,7 @@ that are crucial when improving documentation:
      content is accurate, easy to understand, and provides a smooth
      experience for end-users.
 
-### **Conclusion**
+## **Conclusion**
 
 Choosing the right documentation framework can have a major impact on
 the team's workflow, user experience, and overall success of the
@@ -532,7 +530,7 @@ Exploring these frameworks to find the best fit for your needs and
 setting up a scalable documentation site that serves your project now
 and in the future, is the demand moving forward with 2025.
 
-### **FAQ**
+## **FAQ**
 
 #### **1. What is the best framework for small to medium-sized documentation sites?**
 
