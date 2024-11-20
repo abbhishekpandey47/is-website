@@ -190,10 +190,10 @@ let postMetaData = [
         metaDescription: "Discover how to create and manage essential brand assets for SaaS success. Learn why brand assets like logos, color palettes, and brand voice matter, with examples from top SaaS brands, and get actionable steps to build a strong brand identity that stands out."
     },
     {
-        title: "Using Long-Tail vs. Short-Tail Keywords for Technical Content Success",
-        slug: "long-tail-vs-short-tail",
+        title: "Framework for Scalable Documentation Sites",
+        slug: "framework-for-scalable-documentation-sites",
         description: "In the competitive digital landscape, understanding the nuances between long-tail and short-tail keywords is key to boosting your content's performance. This blog dives into the differences between these keyword types, with a focus on the power of long-tail keywords in achieving higher conversion rates. Learn effective strategies for integrating long-tail keywords into your technical content to attract highly targeted audiences and increase engagement. From understanding user intent to optimizing for search engines, explore how the right keyword strategy can enhance your content’s visibility and impact.",
-        ogImage: "/PostImages/long-tail-vs-short-tail/0.jpg",
+        ogImage: "/PostImages/framework-for-scalable-documentation-sites/0.jpg",
         publishedOn: "2024-11-15",
         authorId: "author0001",
         category: "Informational",
