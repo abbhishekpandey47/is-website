@@ -106,8 +106,7 @@ started!
 
 #### **MkDocs**
 
-![](vertopal_c4e4110fff704a4f85d4184e666aefca/media/image3.png){width="6.267716535433071in"
-height="4.875in"}
+!["mkdocs"](/PostImages/frameworks-for-scalable-documentation-sites/1.png)
 
 MkDocs is a simple, fast static site generator built specifically for
 project documentation. It is known for its lightweight design, making it
@@ -180,7 +179,7 @@ nav:
      mkdocs serve
 
 The site will be available at
-[[http://localhost:127.0.0.1:8000/]{.underline}](http://127.0.0.1:8000/)
+[[http://localhost:127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 As you make changes, MkDocs will automatically reload the site in the
 browser as well.
@@ -197,8 +196,7 @@ deployed to any static hosting provider.
 
 #### **Docusaurus**
 
-![](vertopal_c4e4110fff704a4f85d4184e666aefca/media/image1.png){width="6.267716535433071in"
-height="3.9722222222222223in"}
+!["docusaurus"](/PostImages/frameworks-for-scalable-documentation-sites/2.png)
 
 Originally developed by Facebook, Docusaurus is a powerful documentation
 framework ideal for complex projects that need features like version
@@ -275,8 +273,7 @@ to navigate between versions easily.
 
 #### **Fuma Docs**
 
-![](vertopal_c4e4110fff704a4f85d4184e666aefca/media/image4.png){width="6.267716535433071in"
-height="3.2083333333333335in"}
+!["mkdocs"](/PostImages/frameworks-for-scalable-documentation-sites/3.png)
 
 Fuma Docs is designed with speed and minimalism in mind. It caters to
 developers who prefer a no-fluff approach and is great for
@@ -344,8 +341,7 @@ pages: \[
 
 #### **VuePress**
 
-![](vertopal_c4e4110fff704a4f85d4184e666aefca/media/image2.png){width="6.267716535433071in"
-height="3.2777777777777777in"}
+!["vuepress"](/PostImages/frameworks-for-scalable-documentation-sites/4.png)
 
 Built on Vue.js, VuePress is a Vue-powered static site generator. It's
 particularly well-suited for projects involving Vue.js or where seamless
@@ -423,8 +419,7 @@ sidebar: \[
 
 #### **Antora**
 
-![](vertopal_c4e4110fff704a4f85d4184e666aefca/media/image5.png){width="6.267716535433071in"
-height="3.2777777777777777in"}
+!["antora"](/PostImages/frameworks-for-scalable-documentation-sites/5.png)
 
 Designed for large-scale projects with multiple repositories, Antora
 provides advanced content versioning and multi-repository support,
