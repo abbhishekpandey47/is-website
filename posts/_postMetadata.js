@@ -192,12 +192,12 @@ let postMetaData = [
     {
         title: "Framework for Scalable Documentation Sites",
         slug: "framework-for-scalable-documentation-sites",
-        description: "In the competitive digital landscape, understanding the nuances between long-tail and short-tail keywords is key to boosting your content's performance. This blog dives into the differences between these keyword types, with a focus on the power of long-tail keywords in achieving higher conversion rates. Learn effective strategies for integrating long-tail keywords into your technical content to attract highly targeted audiences and increase engagement. From understanding user intent to optimizing for search engines, explore how the right keyword strategy can enhance your content’s visibility and impact.",
-        ogImage: "/PostImages/framework-for-scalable-documentation-sites/0.jpg",
-        publishedOn: "2024-11-15",
+        description: "Explore the best frameworks for creating scalable technical documentation, including MkDocs, Docusaurus, Fuma Docs, VuePress, and Antora. Learn how to choose the right framework for your project, with hands-on examples, installation guides, and best practices to enhance collaboration, user experience, and content management.",
+        ogImage: "/PostImages/framework-for-scalable-documentation-sites/0.png",
+        publishedOn: "2024-11-20",
         authorId: "author0001",
-        category: "Informational",
-        metaDescription: "Explore the difference between long-tail and short-tail keywords and how to effectively use long-tail keywords in your technical content for higher conversions."
+        category: "Tutorials",
+        metaDescription: "Discover top frameworks like MkDocs, Docusaurus, and Antora for scalable technical documentation. Find installation guides, examples, and best practices to improve content management and user experience for projects of all sizes."
     }
 ];
 
