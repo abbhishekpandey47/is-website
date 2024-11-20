@@ -190,7 +190,7 @@ let postMetaData = [
         metaDescription: "Discover how to create and manage essential brand assets for SaaS success. Learn why brand assets like logos, color palettes, and brand voice matter, with examples from top SaaS brands, and get actionable steps to build a strong brand identity that stands out."
     },
     {
-        title: "Framework for Scalable Documentation Sites",
+        title: "Frameworks for Scalable Documentation Sites",
         slug: "frameworks-for-scalable-documentation-sites",
         description: "Explore the best frameworks for creating scalable technical documentation, including MkDocs, Docusaurus, Fuma Docs, VuePress, and Antora. Learn how to choose the right framework for your project, with hands-on examples, installation guides, and best practices to enhance collaboration, user experience, and content management.",
         ogImage: "/PostImages/framework-for-scalable-documentation-sites/0.png",
