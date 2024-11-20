@@ -198,6 +198,16 @@ let postMetaData = [
         authorId: "author0001",
         category: "Tutorials",
         metaDescription: "Discover top frameworks like MkDocs, Docusaurus, and Antora for scalable technical documentation. Find installation guides, examples, and best practices to improve content management and user experience for projects of all sizes."
+    },
+    {
+        title: "How to Identify AI-Generated Content: Key Signs to Look For",
+        slug: "how-to-identify-ai",
+        description: "Learn how to identify AI-generated content with key signs such as repetitive language, awkward sentence structures, and lack of contextual understanding. This guide also explores Google's E-E-A-T principles for content evaluation, how AI tools assist writers, and practical ways to ensure content quality and authenticity.",
+        ogImage: "/PostImages/how-to-identify-ai/0.jpg",
+        publishedOn: "2024-11-21",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Discover key signs to identify AI-generated content, from unnatural language to shallow emotional depth. Learn how AI tools assist writers and explore Google's E-E-A-T principles for creating authentic, high-quality content."
     }
 ];
 
