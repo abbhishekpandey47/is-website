@@ -149,10 +149,9 @@ simple steps!
 2.  **Create a New Project**: Initialize a new MkDocs project with:\
      mkdocs new my-project
 
- cd my-project
+      cd my-project
 
-This creates a basic project structure with a docs/ folder for your
-documentation files and a configuration file called mkdocs.yml.
+     This creates a basic project structure with a docs/ folder for your documentation files and a configuration file called mkdocs.yml.
 
 3.  **Customize the Configuration**: Open the mkdocs.yml file and edit
      it to define the structure and appearance of your site. You can
@@ -161,15 +160,15 @@ documentation files and a configuration file called mkdocs.yml.
      \
      site_name: My Documentation Site
 
- theme:
-
- name: readthedocs
-
-nav:
-
-\- Home: index.md
-
-\- About: about.md
+      theme:
+     
+      name: readthedocs
+     
+      nav:
+     
+       - Home: index.md
+     
+       - About: about.md
 
 4.  **Add Content**: Inside the docs/ folder, create Markdown files like
      index.md and about.md to serve as the main pages of your
@@ -178,21 +177,18 @@ nav:
 5.  **Run the Site Locally**: Start a local server to preview the site:\
      mkdocs serve
 
-The site will be available at
-[[http://localhost:127.0.0.1:8000/](http://127.0.0.1:8000/)
+     The site will be available at
+     [[http://localhost:127.0.0.1:8000/](http://127.0.0.1:8000/)
 
-As you make changes, MkDocs will automatically reload the site in the
-browser as well.
+     As you make changes, MkDocs will automatically reload the site in the browser as well.
 
-Cool, right? Now, let's proceed with building the site!
+     Cool, right? Now, let's proceed with building the site!
 
 6.  **Build the Site**: To generate a static site, run:\
      mkdocs build
 
 This command outputs the site files to a site/ directory, ready to be
 deployed to any static hosting provider.
-
-#### 
 
 ### **Docusaurus**
 
@@ -216,8 +212,8 @@ Documentation: https://docusaurus.io/docs/docs-introduction
 
 **Hands-On Example**:
 
-**Installation**: Create a new Docusaurus site using the command:\
-\
+**Installation**: Create a new Docusaurus site using the command:
+
 npx create-docusaurus@latest my-website classic
 
 cd my-website
@@ -263,14 +259,6 @@ Docusaurus will serve the site at http://localhost:3000/. Each version
 will be available as a separate section in the sidebar, allowing users
 to navigate between versions easily.
 
-#### 
-
-#### 
-
-#### 
-
-#### 
-
 ### **Fuma Docs**
 
 !["mkdocs"](/PostImages/frameworks-for-scalable-documentation-sites/3.png)
@@ -302,19 +290,19 @@ Creating a Minimal Documentation Site with Fuma Docs
      structure of your site. For example:\
      module.exports = {
 
-siteTitle: \'Fuma Docs\',
-
-theme: \'simple\',
-
-pages: \[
-
-{ name: \'Home\', path: \'index.md\' },
-
-{ name: \'Getting Started\', path: \'getting-started.md\' },
-
-\],
-
-};
+     siteTitle: \'Fuma Docs\',
+     
+     theme: \'simple\',
+     
+     pages: \[
+     
+     { name: \'Home\', path: \'index.md\' },
+     
+     { name: \'Getting Started\', path: \'getting-started.md\' },
+     
+     \],
+     
+     };
 
 3.  **Add Documentation Pages**: Inside the project directory, create
      Markdown files like index.md and getting-started.md. These files
@@ -356,38 +344,38 @@ Documentation: https://vuepress.vuejs.org/guide/introduction.html
      .vuepress directory and a config.js file. This is where you
      configure the site:
     
-module.exports = {
-
-title: \'My VuePress Site\',
-
-themeConfig: {
-
-sidebar: \[
-
-\'/\',
-
-\'/guide/\',
-
-\],
-
-},
-
-};
-
+     module.exports = {
+     
+     title: \'My VuePress Site\',
+     
+     themeConfig: {
+     
+     sidebar: \[
+     
+     \'/\',
+     
+     \'/guide/\',
+     
+     \],
+     
+     },
+     
+     };
 
 
 4.  **Add Vue Components**: One of VuePress\'s key strengths is its
      ability to embed Vue components directly into Markdown files.
 
     Inside .vuepress/components/, create a Vue component,
-     MyComponent.vue, and use it in your Markdown files:\
-     \<template\>
+     MyComponent.vue, and use it in your Markdown files:
 
-\<div\>This is a custom component in VuePress!\</div\>
+    \<template\>
 
-\</template\>
+     \<div\>This is a custom component in VuePress!\</div\>
+     
+     \</template\>
 
-5.  **Run the Site**: To preview the site locally, run\
+6.  **Run the Site**: To preview the site locally, run\
      vuepress dev docs
 
  VuePress will serve the site locally, allowing you to view the
@@ -424,19 +412,19 @@ Documentation: https://docs.antora.org/antora/latest/
      sources, site configuration, and output. For example:\
      site:
 
-title: \'My Documentation Site\'
-
-start_page: my-component::index.adoc
-
-content:
-
-sources:
-
-\- url: https://github.com/my-org/my-repo.git
-
-branches: \[main\]
-
-start_path: docs
+     title: \'My Documentation Site\'
+     
+     start_page: my-component::index.adoc
+     
+     content:
+     
+     sources:
+     
+     \- url: https://github.com/my-org/my-repo.git
+     
+     branches: \[main\]
+     
+     start_path: docs
 
 3.  **Organize Content Across Repositories**: Antora is designed to work
      with content from multiple repositories. For each repository,
@@ -446,10 +434,10 @@ start_path: docs
 4.  **Build the Site**: Run Antora with your playbook file:\
      antora antora-playbook.yml
 
- *This will generate a static site based on your multi-repository
- content, which is organized by versions, components, and modules. The
- generated site is ideal for complex documentation needs, such as
- multiple product versions.*
+      *This will generate a static site based on your multi-repository
+      content, which is organized by versions, components, and modules. The
+      generated site is ideal for complex documentation needs, such as
+      multiple product versions.*
 
 5.  **Deploy**: After building, deploy the output folder to your
      preferred hosting platform. Antora's multi-repository and
