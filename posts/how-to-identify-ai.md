@@ -214,15 +214,4 @@ strategy.
 AI should assist with drafts and idea generation but not replace human
 creativity and expertise in the final piece.
 
-Source
 
-[https://surferseo.com/blog/detect-ai-content/](https://surferseo.com/blog/detect-ai-content/)
-
-[https://www.captechu.edu/blog/how-spot-ai-generated-content-it-fact-or-fiction](https://www.captechu.edu/blog/how-spot-ai-generated-content-it-fact-or-fiction)
-
-![](/PostImages/how-to-identify-ai/3.png)
-
-![](/PostImages/how-to-identify-ai/4.png)
-
-
-![](/PostImages/how-to-identify-ai/5.png)
