@@ -190,6 +190,16 @@ let postMetaData = [
         metaDescription: "Discover how to create and manage essential brand assets for SaaS success. Learn why brand assets like logos, color palettes, and brand voice matter, with examples from top SaaS brands, and get actionable steps to build a strong brand identity that stands out."
     },
     {
+        title: "Using Long-Tail vs. Short-Tail Keywords for Technical Content Success",
+        slug: "long-tail-vs-short-tail",
+        description: "Discover the differences between long-tail and short-tail keywords and how to use them effectively in technical content. Learn strategies to optimize content for targeted conversions and high-impact visibility.",
+        ogImage: "/PostImages/long-tail-vs-short-tail/0.jpg",
+        publishedOn: "2024-11-15",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Unlock the power of long-tail and short-tail keywords in technical content! Learn how to balance both types for SEO success, drive targeted traffic, and boost conversions in this comprehensive guide."
+    },
+    {
         title: "Frameworks for Scalable Documentation Sites",
         slug: "frameworks-for-scalable-documentation-sites",
         description: "Explore the best frameworks for creating scalable technical documentation, including MkDocs, Docusaurus, Fuma Docs, VuePress, and Antora. Learn how to choose the right framework for your project, with hands-on examples, installation guides, and best practices to enhance collaboration, user experience, and content management.",
