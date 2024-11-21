@@ -13,8 +13,7 @@ about LSI keywords. Are you ready to explore? Read the following blog!
 
 ## **Understanding LSI Keywords**
 
-![](vertopal_f9aaec7407774292b844a5897b534318/media/image1.png){width="16.666666666666668in"
-height="8.75in"}
+![lsi keywords](/PostImages/lsi-keywords/1.png)
 
 [Source](https://www.google.com/search?sca_esv=00c6b9a0241a0e2c&sxsrf=ADLYWILJ3xxWDuAroCdJ1yNHFpodnm0YRw:1730829582953&q=LSI+Keywords&udm=2&fbs=AEQNm0CvspUPonaF8UH5s_LBD3JPX4RSeMPt9v8oIaeGMh2T2PRrsfVPlQRxSTpQ4UUI6wfsFlEVaMALnJjEZtYpSTLmUV5oGF4fnHSG0LbvLjVKUV0IWX-9yHknaXpsINbxRPK_rD0aGBXyqo-cUa2T6ZySNg4d875n-vXkSutq7bWvEyjXRQuBfWktFSUkoyoeiqhKHNE-BZiSEnsk93CG_Dl8i5jDTw&sa=X&ved=2ahUKEwjPsdXT4sWJAxUKTGwGHcAdM5AQtKgLegQIFhAB&biw=1366&bih=641&dpr=1#vhid=6s-XcIfAlY5u8M&vssid=mosaic)
 
@@ -72,8 +71,7 @@ purchasing journey and help them address all kinds of search intents.
 
 ## **Finding LSI Keywords** 
 
-![](vertopal_f9aaec7407774292b844a5897b534318/media/image2.png){width="10.0in"
-height="7.5in"}
+![lsi keywords](/PostImages/lsi-keywords/2.png)
 
 [Source](https://www.google.com/search?sca_esv=00c6b9a0241a0e2c&sxsrf=ADLYWILJ3xxWDuAroCdJ1yNHFpodnm0YRw:1730829582953&q=LSI+Keywords&udm=2&fbs=AEQNm0CvspUPonaF8UH5s_LBD3JPX4RSeMPt9v8oIaeGMh2T2PRrsfVPlQRxSTpQ4UUI6wfsFlEVaMALnJjEZtYpSTLmUV5oGF4fnHSG0LbvLjVKUV0IWX-9yHknaXpsINbxRPK_rD0aGBXyqo-cUa2T6ZySNg4d875n-vXkSutq7bWvEyjXRQuBfWktFSUkoyoeiqhKHNE-BZiSEnsk93CG_Dl8i5jDTw&sa=X&ved=2ahUKEwjPsdXT4sWJAxUKTGwGHcAdM5AQtKgLegQIFhAB&biw=1366&bih=641&dpr=1#vhid=GcloBgmyAKx50M&vssid=mosaic)
 
