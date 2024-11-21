@@ -19,7 +19,7 @@ September 2024, resulting in an organic traffic surge. Our dedication to
 writing, researching, and optimizing SEO-driven tech blogs resulted in
 notable improvements in both website and blog traffic.
 
-**Initial Hurdles(Problem Statement)**
+## Initial Hurdles
 
 Terrateam faced a critical challenge in boosting its online visibility
 and user engagement. Their primary issue was the need to significantly
@@ -72,15 +72,15 @@ that Engineers face every day.
 
 The steps that we followed:
 
-**Clear Message, Then SEO:** First, we focused on writing content that
+- **Clear Message, Then SEO:** First, we focused on writing content that
 engineers would want to read. Then, we made sure it ranked well on SERP.
 The message always came first.
 
-**Got Feedback, Made It Better:** We didn't just write and publish.
+- **Got Feedback, Made It Better:** We didn't just write and publish.
 Every draft was reviewed by real engineers to make sure it was helpful,
 accurate, and made sense.
 
-**Focused on Teaching, Not Selling:** We didn't shove the product in
+- **Focused on Teaching, Not Selling:** We didn't shove the product in
 their face. Instead, we focused on teaching them new skills and solving
 real problems they deal with every day.
 
