@@ -208,7 +208,18 @@ let postMetaData = [
         authorId: "author0001",
         category: "Informational",
         metaDescription: "Discover key signs to identify AI-generated content, from unnatural language to shallow emotional depth. Learn how AI tools assist writers and explore Google's E-E-A-T principles for creating authentic, high-quality content."
+    },
+    {
+        title: "LSI Keywords: A Complete Guide to Semantic Search Optimization",
+        slug: "lsi-keywords",
+        description: "Learn everything about LSI keywords in our comprehensive guide. Understand how latent semantic indexing enhances SEO, improves content relevance, and drives organic traffic for SaaS startups. Explore manual and tool-based methods to find LSI keywords, implementation strategies, and common mistakes to avoid.",
+        ogImage: "/PostImages/lsi-keywords/0.jpg",
+        publishedOn: "2024-11-22",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Boost your SEO strategy with LSI keywords! Discover their role in modern semantic search, content optimization, and increasing organic traffic. Learn how to find, implement, and avoid pitfalls with our complete guide. Perfect for SaaS startups and content marketers!"
     }
+    
 ];
 
 const sorted = () => {
