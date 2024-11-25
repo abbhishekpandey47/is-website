@@ -372,3 +372,8 @@ body {
   outline: white;
   border: white;
 }
+
+.text-highlight {
+  color: #ffcc00; /* Highlight color */
+  font-weight: bold;
+}
