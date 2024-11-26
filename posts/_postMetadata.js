@@ -228,6 +228,16 @@ let postMetaData = [
         authorId: "author0001",
         category: "Informational",
         metaDescription: "Boost your SEO strategy with LSI keywords! Discover their role in modern semantic search, content optimization, and increasing organic traffic. Learn how to find, implement, and avoid pitfalls with our complete guide. Perfect for SaaS startups and content marketers!"
+    },
+    {
+        title: "Your Guide to Robots.txt: Simplifying SEO for Success",
+        slug: "guide-to-robots-txt",
+        description: "Learn how to build a Cloud Center of Excellence (CCoE) that drives efficiency, scalability, and innovation in your organization's cloud strategy. This guide covers the real-world DevOps challenges, solutions with Firefly, and practical steps for creating a high-performing CCoE tailored to your infrastructure needs.",
+        ogImage: "/PostImages/guide-to-robots-txt/0.jpg",
+        publishedOn: "2024-11-26",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Discover how to create a Cloud Center of Excellence (CCoE) with practical steps and solutions for managing cloud infrastructure. Learn how Firefly can enhance your CCoE for seamless DevOps workflows."
     }
     
 ];
