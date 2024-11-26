@@ -61,6 +61,8 @@ Let's break it down with some common **directives**:
 4.  **Sitemap:** This provides the location of your sitemap, helping
      crawlers understand your website structure.
 
+    !["robots.txt"](/PostImages/guide-to-robots-txt/1.png)
+
 Here's an example configuration:
 
 User-agent: \*
@@ -318,6 +320,8 @@ Screaming Frog, to verify that your rules are functioning correctly.
 
 **Step 3: Adjust your syntax based on the results** -- If any pages are
 blocked unintentionally, you can fix the rules and test again.
+
+!["robots.txt"](/PostImages/guide-to-robots-txt/2.png)
 
 ## Best Practices for Robots.txt Configuration
 
