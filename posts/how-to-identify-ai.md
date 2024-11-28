@@ -12,7 +12,7 @@ of content in the era of artificial intelligence.
 
 ## Unnatural or Repetitive Language
 
-![](/PostImages/how-to-identify-ai/1.png)
+![Unnatural or Repetitive Language](/PostImages/how-to-identify-ai/1.png)
 
 [Source](https://www.google.com/search?sca_esv=1c5d2991ca1b4824&sxsrf=ADLYWIJFgI20oBu_sbkXkedfeYQG05j6Dg:1731567981950&q=ai+and+human+content&udm=2&fbs=AEQNm0DvD4UMlvdpwktgGj2ZHhIXAIHy0lF5HBdT5py_0SmcDRj-ZcG8sN4MPTI25WFYis4wl2w2HABIwzHTNHgs0XyvwBQ326rTyYqJYbg_1X6pmiSPz_CRfEBqQCjykRrGJSrv9v0bwyitIWs1yYdbN-EGj2TW6HHOz0FdHytnAwTFdGSrJBWOpuoszbbCcyR9YmU8Qz2VR8uZmsP5VT7H3Itkd0BZuQ&sa=X&ved=2ahUKEwj_xN-zoduJAxWoamwGHWvyLQAQtKgLegQIGBAB&biw=1517&bih=712&dpr=0.9#vhid=x2WrFdmr_w9L1M&vssid=mosaic)
 
@@ -152,7 +152,7 @@ E-E-A-T standards and resonates with readers effectively.
 
 ## How AI Tools Can Assist Rather Than Replace Writers
 
-![](/PostImages/how-to-identify-ai/2.png)
+![How AI Tools Can Assist Rather Than Replace Writers](/PostImages/how-to-identify-ai/2.png)
 
 [Source](https://www.google.com/search?q=ai+and+human+content&sca_esv=1c5d2991ca1b4824&udm=2&biw=1517&bih=712&sxsrf=ADLYWII5bERyjXMs_VV5i8He2GdZMi2i4g%3A1731568033319&ei=oaE1Z4SWE8qTseMP-ciF8AU&oq=&gs_lp=EgNpbWciACoCCAEyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gIyBxAjGCcY6gJI4Q5QAFgAcAF4AJABAJgBAKABAKoBALgBAcgBAPgBAZgCAaACHqgCCpgDHpIHATGgBwA&sclient=img#vhid=th1GOh1BdYOZ5M&vssid=mosaic)
 
