@@ -37,8 +37,7 @@ customers, their choices, and what they want so that the blog can meet
 those needs. Blogs with targeted content enhance engagement and foster a
 loyal readership, essential for monetizing a blog effectively.
 
-![](vertopal_94cc0e2de77c454c98d783feff5e9819/media/image2.jpg){width="3.2239588801399823in"
-height="3.2708333333333335in"}
+![](/PostImages/strategic-marketing-plan/1.jpg)
 
 **Competitive Analysis:**
 
@@ -107,8 +106,7 @@ create credibility and the engaging video can grab the attention
 instantly. It is always advisable to make the content types you provide
 to your audience match their needs and wants at any given time.
 
-![](vertopal_94cc0e2de77c454c98d783feff5e9819/media/image1.png){width="6.267716535433071in"
-height="3.111111111111111in"}
+![](/PostImages/strategic-marketing-plan/2.png)
 
 **Editorial Calendar:**
 
@@ -121,8 +119,7 @@ forthcoming in the market niche. An editorial calendar also can help you
 remember deadlines, and coordinate with other team members involved in
 the content creation process.
 
-![](vertopal_94cc0e2de77c454c98d783feff5e9819/media/image3.png){width="6.267716535433071in"
-height="2.2222222222222223in"}
+![](/PostImages/strategic-marketing-plan/3.png)
 
 All of these strategies will assist you in increasing your overall
 efficiency toward your goal of reaching out to your target audience.
@@ -201,8 +198,7 @@ content, and 20% self-promoting posts. Respond to comments and reshare
 posts, and consider using targeted ads that can easily reach certain age
 brackets you know your audience belongs to.
 
-![](vertopal_94cc0e2de77c454c98d783feff5e9819/media/image4.png){width="6.267716535433071in"
-height="3.2222222222222223in"}
+![](/PostImages/strategic-marketing-plan/4.png)
 
 **Email Marketing:** Create an email list to keep in touch with your
 readers at any point in time. Design useful newsletters that consist of
