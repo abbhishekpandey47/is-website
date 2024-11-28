@@ -41,7 +41,7 @@ So, what does it do?
 Even though it's just a simple text file, it's a critical part of your
 website's SEO strategy.
 
-### How Does Robots.txt Work?
+## How Does Robots.txt Work?
 
 When a search engine crawler (like
 [Googlebot](https://en.wikipedia.org/wiki/Googlebot))
@@ -73,7 +73,7 @@ Allow: /private/public-info.html
 
 Sitemap: https://example.com/sitemap.xml
 
-### What happens if there's no robots.txt file?
+## What happens if there's no robots.txt file?
 
 If your website doesn't have a robots.txt file, crawlers assume they
 can access everything. This might sound okay, but it could lead to:
@@ -87,7 +87,7 @@ By setting up a well-structured robots.txt file, you can ensure search
 engines focus on the right areas, giving your SEO strategy the boost it
 deserves.
 
-### Why is Robots.txt Important for SEO?
+## Why is Robots.txt Important for SEO?
 
 A **robots.txt** file can make or break your site's SEO performance. By
 using it wisely, you can ensure that search engines focus on the right
@@ -128,7 +128,7 @@ allows you to block crawlers from accessing these areas, helping protect
 sensitive information and keeping it from being indexed on search
 engines.
 
-### When Should You Use Robots.txt?
+## When Should You Use Robots.txt?
 
 Now let's find out when we should use robots.txt:
 
@@ -154,7 +154,7 @@ Now let's find out when we should use robots.txt:
      engines from crawling these heavy files, helping to save both
      crawl budget and server resources.
 
-### Key Robots.txt Directives Explained
+## Key Robots.txt Directives Explained
 
 Let's understand the key robots.txt derivatives with examples:
 
@@ -233,7 +233,7 @@ must remember to update or remove these rules.
 If you don't, search engines might still be blocked from crawling your
 live website, affecting your SEO.
 
-### Advanced Tips for Robots.txt Optimization
+## Advanced Tips for Robots.txt Optimization
 
 To optimize your robots.txt file effectively, there are some advanced
 tips you can apply.
@@ -287,7 +287,7 @@ Disallow: /de/
 This prevents search engines from indexing the French and German
 versions of the site, helping avoid duplicate content penalties.
 
-### How to Test and Validate Robots.txt
+## How to Test and Validate Robots.txt
 
 When creating or updating your robots.txt file, testing and validating
 it is essential for ensuring it works as intended.
@@ -307,10 +307,9 @@ performance.
      powerful tool for testing robots.txt. It helps you analyze how
      your site's pages are being crawled and whether any pages you want
      to crawl are accidentally being blocked.
+ 
 
-### 
-
-### **Steps to Test Your Robots.txt File:**
+## **Steps to Test Your Robots.txt File:**
 
 **Step 1: Upload your robots.txt file to your server** -- Make sure it's
 available at https://yourdomain.com/robots.txt.
@@ -323,7 +322,7 @@ blocked unintentionally, you can fix the rules and test again.
 
 !["robots.txt"](/PostImages/guide-to-robots-txt/2.png)
 
-### Best Practices for Robots.txt Configuration
+## Best Practices for Robots.txt Configuration
 
 Following best practices for configuring your robots.txt file will
 ensure that your website is indexed correctly and optimized for search
@@ -362,14 +361,13 @@ This configuration is simple effective and ensures that search engines
 can crawl and index the right pages without wasting time on irrelevant
 ones.
 
-### Examples of Robots.txt in Action
+## Examples of Robots.txt in Action
 
 Let's take a closer look at how robots.txt can be effectively used in
 real-world scenarios to optimize SEO and improve site crawlability:
+ 
 
-#### 
-
-#### **1. Blocking Internal Search Pages**
+### **1. Blocking Internal Search Pages**
 
 Many websites, especially e-commerce or content-heavy sites, use
 internal search functionality.
@@ -387,10 +385,9 @@ Disallow: \*s=\*
 
 This rule ensures that search engines block any URL with ?s= (typically
 used for search parameters) from crawling.
+ 
 
-#### 
-
-#### **2. Blocking Faceted Navigation URLs**
+### **2. Blocking Faceted Navigation URLs**
 
 For e-commerce sites, faceted navigation often generates multiple URLs
 for the same products, causing duplicate content issues. For example,
@@ -409,10 +406,9 @@ Disallow: \*price=\*
 
 By doing this, you ensure search engines focus on the most important
 pages rather than crawling countless variations of the same content.
+ 
 
-#### 
-
-#### **3. Blocking PDF URLs**
+### **3. Blocking PDF URLs**
 
 Some sites may host PDFs, such as product manuals or guides, which may
 not add much value to search rankings.
@@ -428,7 +424,7 @@ search engines, thus optimizing the crawl budget.
 
 #### 
 
-#### **4. Blocking API or Form Submission Directories**
+### **4. Blocking API or Form Submission Directories**
 
 Many websites have directories for form submissions or API endpoints,
 which should not be crawled by search engines.
@@ -443,7 +439,7 @@ This ensures that any data submission forms or API endpoints are not
 indexed or crawled, keeping them secure and preventing unnecessary
 crawling.
 
-#### **5. Blocking User Account URLs**
+### **5. Blocking User Account URLs**
 
 On e-commerce websites, user account pages or order history pages often
 don't need to be indexed.
@@ -460,9 +456,8 @@ Allow: /myaccount/\$
 Here, the rule blocks all subpages under the /myaccount/ directory
 except the main login page, which you may want to be indexed for users.
 
-#### 
 
-#### **6. Blocking Non-Essential JavaScript Files**
+### **6. Blocking Non-Essential JavaScript Files**
 
 Not all JavaScript files are necessary for search engine crawlers to
 render content. Files used for tracking, ads, or analytics can be
@@ -474,10 +469,9 @@ Disallow: /assets/js/analytics.js
 
 Blocking such non-rendering JavaScript files ensures search engines
 focus on the content that matters most.
+ 
 
-#### 
-
-#### **7. Blocking AI Bots and Scrapers**
+### **7. Blocking AI Bots and Scrapers**
 
 With the rise of AI bots scraping content for training purposes, you may
 want to block certain bots from crawling your site.
@@ -493,10 +487,9 @@ Disallow: /
 This rule blocks specific bots from crawling any part of the site,
 helping reduce the strain on your server and prevent unauthorized use of
 your content.
+ 
 
-#### 
-
-#### **8. Specifying Sitemap URLs**
+### **8. Specifying Sitemap URLs**
 
 To make it easier for search engines to discover all the important pages
 on your website, you can specify the location of your sitemap(s) in the
@@ -507,7 +500,7 @@ Sitemap: https://www.example.com/sitemap.xml
 This helps ensure that search engines have easy access to all the URLs
 that are important for SEO.
 
-### Conclusion
+## Conclusion
 
 In conclusion, robots.txt is an essential tool for controlling how
 search engines interact with your website. Its role in SEO cannot be
@@ -527,7 +520,7 @@ you with expert tips and tools to optimize your website\'s performance.
 Explore our services today and ensure your website is fully optimized
 for search engines and ready to achieve top rankings.
 
-### Frequently Asked Questions
+## Frequently Asked Questions
 
 **1. What is a robots.txt file?**
 
