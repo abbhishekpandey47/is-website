@@ -41,7 +41,7 @@ So, what does it do?
 Even though it's just a simple text file, it's a critical part of your
 website's SEO strategy.
 
-## How Does Robots.txt Work?
+### How Does Robots.txt Work?
 
 When a search engine crawler (like
 [Googlebot](https://en.wikipedia.org/wiki/Googlebot))
@@ -73,7 +73,7 @@ Allow: /private/public-info.html
 
 Sitemap: https://example.com/sitemap.xml
 
-## What happens if there's no robots.txt file?
+### What happens if there's no robots.txt file?
 
 If your website doesn't have a robots.txt file, crawlers assume they
 can access everything. This might sound okay, but it could lead to:
@@ -87,7 +87,7 @@ By setting up a well-structured robots.txt file, you can ensure search
 engines focus on the right areas, giving your SEO strategy the boost it
 deserves.
 
-## Why is Robots.txt Important for SEO?
+### Why is Robots.txt Important for SEO?
 
 A **robots.txt** file can make or break your site's SEO performance. By
 using it wisely, you can ensure that search engines focus on the right
@@ -128,7 +128,7 @@ allows you to block crawlers from accessing these areas, helping protect
 sensitive information and keeping it from being indexed on search
 engines.
 
-## When Should You Use Robots.txt?
+### When Should You Use Robots.txt?
 
 Now let's find out when we should use robots.txt:
 
@@ -154,7 +154,7 @@ Now let's find out when we should use robots.txt:
      engines from crawling these heavy files, helping to save both
      crawl budget and server resources.
 
-## Key Robots.txt Directives Explained
+### Key Robots.txt Directives Explained
 
 Let's understand the key robots.txt derivatives with examples:
 
@@ -186,7 +186,7 @@ By using these directives wisely, you can give search engines clear
 instructions on which pages to crawl and which to ignore, ensuring your
 website is optimized for better SEO.
 
-## Common Robots.txt Mistakes and Solutions
+### Common Robots.txt Mistakes and Solutions
 
 When working with robots.txt, it's essential to avoid common mistakes
 that can negatively impact your website's SEO.
@@ -233,7 +233,7 @@ must remember to update or remove these rules.
 If you don't, search engines might still be blocked from crawling your
 live website, affecting your SEO.
 
-## Advanced Tips for Robots.txt Optimization
+### Advanced Tips for Robots.txt Optimization
 
 To optimize your robots.txt file effectively, there are some advanced
 tips you can apply.
@@ -287,7 +287,7 @@ Disallow: /de/
 This prevents search engines from indexing the French and German
 versions of the site, helping avoid duplicate content penalties.
 
-## How to Test and Validate Robots.txt
+### How to Test and Validate Robots.txt
 
 When creating or updating your robots.txt file, testing and validating
 it is essential for ensuring it works as intended.
@@ -323,7 +323,7 @@ blocked unintentionally, you can fix the rules and test again.
 
 !["robots.txt"](/PostImages/guide-to-robots-txt/2.png)
 
-## Best Practices for Robots.txt Configuration
+### Best Practices for Robots.txt Configuration
 
 Following best practices for configuring your robots.txt file will
 ensure that your website is indexed correctly and optimized for search
@@ -362,7 +362,7 @@ This configuration is simple effective and ensures that search engines
 can crawl and index the right pages without wasting time on irrelevant
 ones.
 
-## Examples of Robots.txt in Action
+### Examples of Robots.txt in Action
 
 Let's take a closer look at how robots.txt can be effectively used in
 real-world scenarios to optimize SEO and improve site crawlability:
@@ -507,7 +507,7 @@ Sitemap: https://www.example.com/sitemap.xml
 This helps ensure that search engines have easy access to all the URLs
 that are important for SEO.
 
-## Conclusion
+### Conclusion
 
 In conclusion, robots.txt is an essential tool for controlling how
 search engines interact with your website. Its role in SEO cannot be
@@ -527,7 +527,7 @@ you with expert tips and tools to optimize your website\'s performance.
 Explore our services today and ensure your website is fully optimized
 for search engines and ready to achieve top rankings.
 
-## Frequently Asked Questions
+### Frequently Asked Questions
 
 **1. What is a robots.txt file?**
 
