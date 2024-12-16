@@ -248,6 +248,16 @@ let postMetaData = [
         authorId: "author0001",
         category: "Informational",
         metaDescription: "Discover how a well-crafted marketing plan can take your blogging business to the next level. Learn about content strategies, SEO techniques, audience targeting, and monetization methods to grow your blog and increase revenue."
+    },
+    {
+        title: "What is Webflow",
+        slug: "what-is-webflow",
+        description: "Explore how to set up a blog using Webflow's intuitive CMS. Learn about its design flexibility, dynamic content features, and SEO-friendly tools, making it a great choice for bloggers and creatives.",
+        ogImage: "https://images.surferseo.art/785c638b-e8f1-43cb-946c-629934567d0e.png",
+        publishedOn: "2024-11-28",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Learn how to create and customize a blog with Webflow's no-code CMS platform. Discover its dynamic content management, design tools, SEO features, and why it's a great alternative to WordPress for bloggers and designers."
     }
     
 ];
