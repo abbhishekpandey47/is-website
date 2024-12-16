@@ -256,8 +256,18 @@ let postMetaData = [
         ogImage: "/PostImages/what-is-webflow/banner.png",
         publishedOn: "2024-12-16",
         authorId: "author0001",
-        category: "Informational",
+        category: "Tutorials",
         metaDescription: "Learn how to create and customize a blog with Webflow's no-code CMS platform. Discover its dynamic content management, design tools, SEO features, and why it's a great alternative to WordPress for bloggers and designers."
+    },
+    {
+        title: "Content Marketing Agency vs Freelance Content Writers: Which Is Right for You?",
+        slug: "content-marketing-agency-vs-freelance-content-writers.md",
+        description: "Explore the pros and cons of hiring a content marketing agency versus freelance content writers to help decide the best fit for your content needs.",
+        ogImage: "/PostImages/content-marketing-agency-vs-freelance-content-writers/banner.jpg",
+        publishedOn: "2024-12-17",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Compare content marketing agencies and freelance writers to determine which option aligns better with your goals, budget, and content strategy requirements."
     }
     
 ];
