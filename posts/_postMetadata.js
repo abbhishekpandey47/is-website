@@ -253,7 +253,7 @@ let postMetaData = [
         title: "What Webflow is and How it Transforms Web Design? (2025)",
         slug: "what-is-webflow",
         description: "Learn what Webflow is and how it enables users to design, build, and launch responsive websites without coding, making web design easier and faster.",
-        ogImage: "/PostImages/what-is-webflow/banner.jpg",
+        ogImage: "/PostImages/what-is-webflow/banner.png",
         publishedOn: "2024-12-16",
         authorId: "author0001",
         category: "Informational",
