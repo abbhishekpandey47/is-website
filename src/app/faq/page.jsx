@@ -29,7 +29,7 @@ const collapseContent = [
         head: "Can I see some examples of Infrasity's work?",
         content: (<div>Yes, definitely! We proudly showcase our work on various platforms. You can find our technical write-ups and articles on the Infrasity website, as well as on popular platforms like dev.to and Medium. For video content, visit our YouTube channel to view a range of tutorials and presentations. Additionally, our IAC repositories and product templates are available on our GitHub page, demonstrating our expertise in practical applications.<br></br>
             <span style={{ tabSize: 4 }}>
-                <Link href="/blogs" style={{ textDecoration: 'none' }}
+                <Link href="/blog" style={{ textDecoration: 'none' }}
                     onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
                     onMouseLeave={(e) => e.target.style.textDecoration = 'none'}>Blog</Link>
             </span><br />

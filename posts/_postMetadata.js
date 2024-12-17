@@ -250,7 +250,8 @@ let postMetaData = [
         metaDescription: "Discover how a well-crafted marketing plan can take your blogging business to the next level. Learn about content strategies, SEO techniques, audience targeting, and monetization methods to grow your blog and increase revenue."
     },
     {
-        title: "What Webflow is and How it Transforms Web Design? (2025)",
+        title: "What Webflow is and How it Transforms Web Design?",
+        metatitle: "What Webflow is and How it Transforms Web Design? (2025)",
         slug: "what-is-webflow",
         description: "Learn what Webflow is and how it enables users to design, build, and launch responsive websites without coding, making web design easier and faster.",
         ogImage: "/PostImages/what-is-webflow/banner.png",
@@ -258,16 +259,6 @@ let postMetaData = [
         authorId: "author0001",
         category: "Tutorials",
         metaDescription: "Learn how to create and customize a blog with Webflow's no-code CMS platform. Discover its dynamic content management, design tools, SEO features, and why it's a great alternative to WordPress for bloggers and designers."
-    },
-    {
-        title: "Content Marketing Agency vs Freelance Content Writers: Which Is Right for You?",
-        slug: "content-marketing-agency-vs-freelance-content-writers.md",
-        description: "Explore the pros and cons of hiring a content marketing agency versus freelance content writers to help decide the best fit for your content needs.",
-        ogImage: "/PostImages/content-marketing-agency-vs-freelance-content-writers/banner.jpg",
-        publishedOn: "2024-12-17",
-        authorId: "author0001",
-        category: "Informational",
-        metaDescription: "Compare content marketing agencies and freelance writers to determine which option aligns better with your goals, budget, and content strategy requirements."
     }
     
 ];
