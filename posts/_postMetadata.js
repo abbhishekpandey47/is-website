@@ -251,6 +251,7 @@ let postMetaData = [
     },
     {
         title: "What Webflow is and How it Transforms Web Design? (2025)",
+        metatitle: "test metatitle",
         slug: "what-is-webflow",
         description: "Learn what Webflow is and how it enables users to design, build, and launch responsive websites without coding, making web design easier and faster.",
         ogImage: "/PostImages/what-is-webflow/banner.png",
