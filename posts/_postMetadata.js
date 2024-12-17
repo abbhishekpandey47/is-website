@@ -250,8 +250,8 @@ let postMetaData = [
         metaDescription: "Discover how a well-crafted marketing plan can take your blogging business to the next level. Learn about content strategies, SEO techniques, audience targeting, and monetization methods to grow your blog and increase revenue."
     },
     {
-        title: "What Webflow is and How it Transforms Web Design? (2025)",
-        metatitle: "test metatitle",
+        title: "What Webflow is and How it Transforms Web Design?",
+        metatitle: "What Webflow is and How it Transforms Web Design? (2025)",
         slug: "what-is-webflow",
         description: "Learn what Webflow is and how it enables users to design, build, and launch responsive websites without coding, making web design easier and faster.",
         ogImage: "/PostImages/what-is-webflow/banner.png",
