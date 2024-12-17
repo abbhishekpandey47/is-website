@@ -44,7 +44,7 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: post.title,
+    title: post.metatitle || post.title,
     description: post.description,
     openGraph: {
       title: post.title,
