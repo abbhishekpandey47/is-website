@@ -63,7 +63,7 @@ const ContactHome = () => {
             error(res.msg)
         }
     }
-    
+
 
     const context = useContext(AppContext)
 
@@ -76,7 +76,7 @@ const ContactHome = () => {
     }, [])
 
     const [messageApi, contextHolder] = message.useMessage();
-    
+
 
 
     return (
@@ -148,13 +148,13 @@ const ContactHome = () => {
                         </form>
 
                         <p className="text-zinc-800 text-xs mt-4 text-center quicksand-ligth">
-                            By signing up you agree to our <a href="#" className="text-blue-600 underline">Terms of Service</a> and <a href="#" className="text-blue-600 underline">Privacy Policy</a>.
+                            By signing up you agree to our <a href="terms-of-services" className="text-blue-600 underline">Terms of Service</a> and <a href="privacy-policy" className="text-blue-600 underline">Privacy Policy</a>.
                         </p>
                     </div>
                 </div>
 
                 <div className="w-[35%] lg:fixed lg:right-0 lg:h-screen max-lg:w-full bg-gradient-to-br from-[#1c174a] to-[#1a1a6e] text-white p-8 flex flex-col justify-center items-center">
-                    
+
                     <TestiCarousel />
                 </div>
             </div>
