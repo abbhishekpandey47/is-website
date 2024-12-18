@@ -170,14 +170,14 @@ let postMetaData = [
         metaDescription: "Discover the key differences between User Guides and API Documentation. Learn about their distinct purposes, audiences, structures, and examples, and get tips on creating effective documentation for both end-users and developers."
     },
     {
-        title: "10 Steps to Build a Content Marketing Strategy",
+        title: "10 Strategic Steps to Build Content Marketing for Startups",
         slug: "10-steps-to-build-content-marketing-strategy",
-        description: "Learn the 10 essential steps to craft an effective content marketing strategy for your B2B SaaS. Achieve success in content marketing with these steps.",
+        description: "Learn 10 essential content marketing tips for startups to build an effective strategy for your B2B SaaS. Achieve success with actionable steps for your growth.",
         ogImage: "/PostImages/10-steps-to-build-content-marketing-strategy/0.jpg",
         publishedOn: "2024-11-11",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Learn the 10 essential steps to craft an effective content marketing strategy for your B2B SaaS. Achieve success in content marketing with these steps."
+        metaDescription: "Learn 10 essential content marketing tips for startups to build an effective strategy for your B2B SaaS. Achieve success with actionable steps for your growth."
     },
     {
         title: "Building Brand Assets for SaaS Success: Why They Matter and How to Create Them",
