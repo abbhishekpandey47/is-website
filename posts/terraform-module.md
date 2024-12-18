@@ -14,11 +14,7 @@ A Terraform module is like a ready-made blueprint for building your organization
 Modules are reusable, and you can share them across projects or teams. They also make updates easier. For example, if you need to change how a resource is configured, you only update the module, and the changes can be applied to every environment that uses it. This simplifies maintenance and ensures consistency across your infrastructure.
 
 
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image1.png "image_tooltip")
+![terraform-module](/PostImages/terraform-module/terraform-module.png)
 
 
 **Components of a Terraform Module**
@@ -26,15 +22,10 @@ Modules are reusable, and you can share them across projects or teams. They also
 A Terraform module consists of three configuration files that define its functionality and customization options: **main.tf** for the core resource definitions, **variable.tf** for setting input parameters, and **output.tf** for exposing the module’s results. These files work together to make the module clear, reusable, and simple to manage.
 
 ```
-
 s3-module/
-
 ├── main.tf
-
 ├── outputs.tf
-
 └── variables.tf
-
 ```
 
 A Terraform module is built on these configuration files that define its resources, inputs, and outputs:
@@ -63,100 +54,60 @@ Terraform modules help us by letting us define how resources should be set up in
 
 Creating a Terraform module is all about structuring your code to make it reusable and easy to manage. Instead of scattering configurations across multiple files, you can group them in a well defined folder that handles everything, like resource definitions, inputs, and outputs. To better understand how modules work, let’s walk through the process of creating one. We’ll start by building a simple module to set up an S3 bucket, step by step.
 
-```bash
-
+```
 s3-module/
-
 ├── main.tf
-
 ├── outputs.tf
-
 └── variables.tf
-
 ```
 
 This structure makes the module reusable and easy to manage. You can include it in any Terraform configuration, provide specific values using variables, and receive important information through outputs. This method helps keep your iac code structured, reduces duplication, and ensures it’s adaptable for different projects and environments.
 
-Now, we’ll create a **main.tf** configuration file** **
+Now, we’ll create a **main.tf** configuration file
 
-```bash
-
+```hcl
 resource "aws_s3_bucket" "this"{
-
   bucket = var.bucket_name
-
-    
-
-	versioning {
-
+ 	versioning {
  	enabled = var.enable_versioning
-
   }
-
 tags = var.tags
-
 }
-
 ```
 
 In this code, an AWS S3 bucket is created using Terraform. The bucket name is set using the variable `var.bucket_name`, allowing customization. The `versioning` block enables or disables versioning for the bucket based on the value of `var.enable_versioning`. The `tags` attribute assigns metadata to the bucket, such as environment or project details, using the values provided in `var.tags`. This configuration makes the bucket setup flexible and reusable.
 
-Now , we’ll create the **variable.tf **configuration file
+Now , we’ll create the **variable.tf** configuration file
 
-```bash
-
+```hcl
 variable "bucket_name" {
-
   description = "The name of teh S3 bucket"
-
 	type   = string
-
 }
-
 variable "enable_versioning" {
-
  description = "Enable versioning for the S3 bucket"
-
 	type  = bool
-
 	default = false
-
 }
-
 variable "tags" {
-
   description = "Tags to associate with the S3 bucket"
-
   type  = map(string)
-
   default = {}
-
 }
-
 ```
-
 This code defines three input variables to customize the S3 bucket setup. The `bucket_name` variable is a required string that specifies the bucket's unique name. The `enable_versioning` variable is a boolean that controls whether versioning is enabled for the bucket, with a default value of `false`. The `tags` variable is a map of key-value pairs used to assign metadata to the bucket, such as project or environment details, and defaults to an empty map if no tags are provided. These variables make the configuration flexible and reusable for different scenarios.
 
-Now we’ll create the **output.tf ** configuration file
+Now we’ll create the **output.tf** configuration file
 
-```
-
+```hcl
 output "bucket_name" {
-
   description = "The name of the S3 bucket"
-
 	value  = aws_s3_bucket.this.bucket
-
 }
-
 output "bucket_arn" {
-
   description = "The arn of the S3 Bucket"
-
 	Value  =  aws_s3_bucket.this.arn
-
 }
-
 ```
 
 This code defines two outputs to provide useful information about the S3 bucket after it is created. The `bucket_name` output returns the name of the S3 bucket, allowing it to be referenced in other parts of the Terraform configuration or externally. The `bucket_arn` output provides the Amazon Resource Name (ARN) of the bucket, which is a unique identifier used for access policies or linking the bucket with other AWS services. These outputs make it easier to integrate the S3 bucket with other resources or applications.
@@ -164,103 +115,58 @@ This code defines two outputs to provide useful information about the S3 bucket 
 So far, we’ve built a Terraform module, and now it’s time to use it to create resources. To do this, we’ll create a **main.tf** file, either in a separate directory or in the root directory. This file will reference the module we created and provide the necessary inputs to deploy the resources defined within the module.
 
 ```
-
 terraform-module/
-
  ├── s3-module/
-
-  |    	├── main.tf
-
-  |    	├── outputs.tf
-
-  |    	└── variables.tf
-
-  |────── main.tf
-
+ |    	├── main.tf
+ |    	├── outputs.tf
+ |    	└── variables.tf
+ |────── main.tf
 ```
 
 Create a **main.tf** configuration file
 
-```
-
+```hcl
 provider "aws" {
-
   region = "us-east-1"
-
 }
-
 module "s3_bucket" {
-
   source = "./s3-module"
-
 	bucket_name = "my-terraform-s3-module-2024"
-
 	enable_versioning = true
-
-    
-
-	tags = {
-
+  	tags = {
 	enviroment = "Dev"
-
   }
-
 }
-
 output "s3_bucket_name" {
-
   value = module.s3_bucket.bucket_name
-
 }
-
 output "s3_bucket_arn" {
-
-  value = module.s3_bucket.bucket_arn
-
+value = module.s3_bucket.bucket_arn
 }
-
-**```  **
+```
 
 This code sets up an AWS provider for the `us-east-1` region and uses a custom Terraform module, `s3_bucket`, to create an S3 bucket. The module takes inputs such as the bucket name (`my-terraform-s3-module-2024`), enables versioning, and assigns a tag with the environment set to "Dev." Two outputs are defined: `s3_bucket_name` returns the name of the created S3 bucket, and `s3_bucket_arn` provides its Amazon Resource Name (ARN), making it easy to reference the bucket elsewhere in the configuration.
 
-Now let’s try the terraform module by running the following terraform commands :
+Now let’s try the terraform module by running the following Terraform init commands :
 
 ``` bash
-
-Terraform init
-
 Initializing the backend...
-
 Initializing modules...
-
 - s3_bucket in s3-module
-
 Initializing provider plugins...
-
 - Finding latest version of hashicorp/aws...
-
 - Installing hashicorp/aws v5.80.0...
-
 - Installed hashicorp/aws v5.80.0 (unauthenticated)
-
 Terraform has created a lock file .terraform.lock.hcl to record the provider
-
 selections it made above. Include this file in your version control repository
-
 so that Terraform can guarantee to make the same selections by default when
-
 you run "terraform init" in the future.
-
 Terraform has been successfully initialized!
-
 ```
 
-By running the terraform init command, we initialized the terraform in the directory. now, moving further, we’ll run the following terraform command :
+By running the terraform init command, we initialized the terraform in the directory. now, moving further, we’ll run the following `terraform plan` command :
 
 ```bash
-
-terraform plan
-
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
 
   + create
