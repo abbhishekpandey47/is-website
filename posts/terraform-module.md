@@ -23,7 +23,7 @@ Modules are reusable, and you can share them across projects or teams. They also
 
 **Components of a Terraform Module**
 
-A Terraform module consists of three configuration files that define its functionality and customization options: **main.tf** for the core resource definitions, **variable.tf **for setting input parameters, and **output.tf **for exposing the module’s results. These files work together to make the module clear, reusable, and simple to manage.
+A Terraform module consists of three configuration files that define its functionality and customization options: **main.tf** for the core resource definitions, **variable.tf** for setting input parameters, and **output.tf** for exposing the module’s results. These files work together to make the module clear, reusable, and simple to manage.
 
 ```
 
@@ -161,7 +161,7 @@ output "bucket_arn" {
 
 This code defines two outputs to provide useful information about the S3 bucket after it is created. The `bucket_name` output returns the name of the S3 bucket, allowing it to be referenced in other parts of the Terraform configuration or externally. The `bucket_arn` output provides the Amazon Resource Name (ARN) of the bucket, which is a unique identifier used for access policies or linking the bucket with other AWS services. These outputs make it easier to integrate the S3 bucket with other resources or applications.
 
-So far, we’ve built a Terraform module, and now it’s time to use it to create resources. To do this, we’ll create a **main.tf ** file, either in a separate directory or in the root directory. This file will reference the module we created and provide the necessary inputs to deploy the resources defined within the module.
+So far, we’ve built a Terraform module, and now it’s time to use it to create resources. To do this, we’ll create a **main.tf** file, either in a separate directory or in the root directory. This file will reference the module we created and provide the necessary inputs to deploy the resources defined within the module.
 
 ```
 
@@ -179,9 +179,9 @@ terraform-module/
 
 ```
 
-Create a **main.tf ** configuration file
+Create a **main.tf** configuration file
 
-**```**
+```
 
 provider "aws" {
 
