@@ -3,7 +3,7 @@ import React, { useEffect, useContext } from 'react';
 import TestiCarousel from './TestiCarousel';
 import Link from 'next/link';
 import { useState } from 'react';
-import { message } from 'antd';
+import { message, Spin } from 'antd'; // Import Spin for loading indicator
 import AppContext from '@/context/Infracontext';
 
 const ContactHome = () => {
@@ -17,7 +17,8 @@ const ContactHome = () => {
         phone: '',
     });
 
-    // Custom message handlers
+    const [loading, setLoading] = useState(false); // Loading state
+
     const success = (mymsg) => {
         message.success(mymsg);
     };
@@ -28,21 +29,44 @@ const ContactHome = () => {
 
     const handleOnContactSend = async (e) => {
         e.preventDefault();
-        const myjson = await fetch(
-            'https://infrasity-backend-j84r.onrender.com/api/bookmeeting',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(contactMsg),
+        setLoading(true);
+
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+            const response = await fetch(
+                'https://infrasity-backend-j84r.onrender.com/api/bookmeeting',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(contactMsg),
+                    signal: controller.signal,
+                }
+            );
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch');
             }
-        );
-        const res = await myjson.json();
-        if (res.success) {
-            success(res.msg);
-        } else {
-            error(res.msg);
+
+            const res = await response.json();
+            if (res.success) {
+                success(res.msg);
+            } else {
+                error(res.msg);
+            }
+        } catch (err) {
+            if (err.name === 'AbortError') {
+                error('Request timed out. Please try again.');
+            } else {
+                error('Something went wrong. Please try again.');
+            }
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -57,32 +81,29 @@ const ContactHome = () => {
         <div className="absolute w-[100%] top-0 z-[21]">
             {/* Global style overrides for Ant Design alerts */}
             <style jsx global>{`
-            /* Default style for mobile (fallback) */
-            .ant-message {
-                z-index: 9999 !important; /* Ensures alert appears on top */
-                top: 80px !important; /* Default vertical position */
-                left: 50% !important; /* Center horizontally */
-                transform: translateX(-50%); /* Fully center the alert */
-                position: fixed !important;
-            }
-
-            .ant-message-notice-content {
-                font-size: 22px; /* Larger font size */
-                padding: 20px 30px; /* Adds spacing around the alert */
-                border-radius: 8px; /* Rounded edges */
-                text-align: center; /* Centers the text */
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Adds shadow */
-            }
-
-            /* Desktop-specific styling */
-            @media (min-width: 768px) {
                 .ant-message {
-                    left: 33% !important; /* Slightly left for desktop */
-                    transform: translateX(-25%); /* Fine-tuned adjustment */
+                    z-index: 9999 !important;
+                    top: 80px !important;
+                    left: 50% !important;
+                    transform: translateX(-50%);
+                    position: fixed !important;
                 }
-            }
-            `}</style>
 
+                .ant-message-notice-content {
+                    font-size: 22px;
+                    padding: 20px 30px;
+                    border-radius: 8px;
+                    text-align: center;
+                    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+                }
+
+                @media (min-width: 768px) {
+                    .ant-message {
+                        left: 33% !important;
+                        transform: translateX(-25%);
+                    }
+                }
+            `}</style>
 
             <Link href="/" className="cursor-pointer absolute pt-7 pl-10">
                 <img
@@ -97,7 +118,7 @@ const ContactHome = () => {
                 <div className="w-[65%] max-lg:w-full bg-white flex flex-col justify-center items-center max-sm:px-6 p-12">
                     <div className="w-full max-w-xl p-8 max-sm:px-0">
                         <h1 className="text-3xl font-bold mb-4 text-center text-black quicksand-bold">
-                            Book a Demo
+                            Book a Call
                         </h1>
                         <p className="text-zinc-800 text-center mb-8 quicksand-medium">
                             Looking for developer-focused tech content to
@@ -113,12 +134,12 @@ const ContactHome = () => {
                             content distribution for your product.
                         </p>
 
-                        <form className="space-y-4">
+                        <form onSubmit={handleOnContactSend} className="space-y-4">
                             <div className="flex space-x-4">
                                 <input
                                     type="text"
                                     placeholder="First Name"
-                                    className="w-1/2 p-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                    className="w-1/2 p-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none"
                                     onChange={(e) =>
                                         setContactMsg({
                                             ...contactMsg,
@@ -129,7 +150,7 @@ const ContactHome = () => {
                                 <input
                                     type="text"
                                     placeholder="Last Name"
-                                    className="w-1/2 p-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                    className="w-1/2 p-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none"
                                     onChange={(e) =>
                                         setContactMsg({
                                             ...contactMsg,
@@ -141,7 +162,7 @@ const ContactHome = () => {
                             <input
                                 type="text"
                                 placeholder="Company Name"
-                                className="w-full p-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                className="w-full p-3 border border-gray-300 rounded-md bg-white text-black"
                                 onChange={(e) =>
                                     setContactMsg({
                                         ...contactMsg,
@@ -152,7 +173,7 @@ const ContactHome = () => {
                             <input
                                 type="email"
                                 placeholder="Email Address"
-                                className="w-full p-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                className="w-full p-3 border border-gray-300 rounded-md bg-white text-black"
                                 onChange={(e) =>
                                     setContactMsg({
                                         ...contactMsg,
@@ -163,7 +184,7 @@ const ContactHome = () => {
                             <input
                                 type="text"
                                 placeholder="Country"
-                                className="w-full p-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                className="w-full p-3 border border-gray-300 rounded-md bg-white text-black"
                                 onChange={(e) =>
                                     setContactMsg({
                                         ...contactMsg,
@@ -175,7 +196,7 @@ const ContactHome = () => {
                                 <input
                                     type="text"
                                     placeholder="+91"
-                                    className="w-[15%] p-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                    className="w-[15%] p-3 border border-gray-300 rounded-md bg-white text-black"
                                     onChange={(e) =>
                                         setContactMsg({
                                             ...contactMsg,
@@ -186,7 +207,7 @@ const ContactHome = () => {
                                 <input
                                     type="text"
                                     placeholder="0000000000"
-                                    className="w-[85%] p-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                    className="w-[85%] p-3 border border-gray-300 rounded-md bg-white text-black"
                                     onChange={(e) =>
                                         setContactMsg({
                                             ...contactMsg,
@@ -195,27 +216,18 @@ const ContactHome = () => {
                                     }
                                 />
                             </div>
-                            <button
-                                onClick={handleOnContactSend}
-                                className="btn w-full bg-btnprimary border-none text-white p-3 font-semibold hover:bg-btnprimaryhov rounded-full transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                            >
-                                Continue
+                            <button type="submit" className="btn w-full bg-blue-600 border-none text-white p-3 font-semibold hover:bg-btnprimaryhov rounded-full transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600" disabled={loading}>
+                                {loading ? <Spin size="small" /> : 'Continue'}
                             </button>
                         </form>
 
-                        <p className="text-zinc-800 text-xs mt-4 text-center quicksand-ligth">
+                        <p className="text-zinc-800 text-xs mt-4 text-center">
                             By signing up you agree to our{' '}
-                            <a
-                                href="terms-of-services"
-                                className="text-blue-600 underline"
-                            >
+                            <a href="terms-of-services" className="text-blue-600 underline">
                                 Terms of Service
                             </a>{' '}
                             and{' '}
-                            <a
-                                href="privacy-policy"
-                                className="text-blue-600 underline"
-                            >
+                            <a href="privacy-policy" className="text-blue-600 underline">
                                 Privacy Policy
                             </a>
                             .
