@@ -273,7 +273,7 @@ let postMetaData = [
         metaDescription: "Learn how to create and customize a blog with Webflow's no-code CMS platform. Discover its dynamic content management, design tools, SEO features, and why it's a great alternative to WordPress for bloggers and designers."
     },
     {
-        title: "What is terraform module",
+        title: "What is terraform module?",
         metatitle: "Terraform Module (2025)",
         slug: "terraform-module",
         description: "This blog explores Terraform modules, offering insights into their reusability, structure, and how they simplify infrastructure management.",
