@@ -259,6 +259,17 @@ let postMetaData = [
         authorId: "author0001",
         category: "Tutorials",
         metaDescription: "Learn how to create and customize a blog with Webflow's no-code CMS platform. Discover its dynamic content management, design tools, SEO features, and why it's a great alternative to WordPress for bloggers and designers."
+    },
+    {
+        title: "Terraform Module",
+        metatitle: "Terraform Module (2025)",
+        slug: "terraform-module",
+        description: "This blog explores Terraform modules, offering insights into their reusability, structure, and how they simplify infrastructure management.",
+        ogImage: "/PostImages/terraform-modules/banner.png",
+        publishedOn: "2024-12-19",
+        authorId: "author0001",
+        category: "Tutorials",
+        metaDescription: "introduction to terraform module."
     }
     
 ];
