@@ -266,7 +266,7 @@ let postMetaData = [
         metatitle: "What Webflow is and How it Transforms Web Design? (2025)",
         slug: "what-is-webflow",
         description: "Learn what Webflow is and how it enables users to design, build, and launch responsive websites without coding, making web design easier and faster.",
-        ogImage: "/PostImages/what-is-webflow/banner.png",
+        ogImage: "https://images.surferseo.art/785c638b-e8f1-43cb-946c-629934567d0e.png",
         publishedOn: "2024-12-16",
         authorId: "author0001",
         category: "Tutorials",
@@ -282,6 +282,16 @@ let postMetaData = [
         authorId: "author0001",
         category: "Tutorials",
         metaDescription: "introduction to terraform module."
+    },
+    {
+        title: "Content Marketing Agency vs Freelance Content Writers: Which Is Right for You?",
+        slug: "content-marketing-agency-vs-freelance-content-writers",
+        description: "Explore the pros and cons of hiring a content marketing agency versus freelance content writers to help decide the best fit for your content needs.",
+        ogImage: "/PostImages/content-marketing-agency-vs-freelance-content-writers/banner.jpg",
+        publishedOn: "2024-12-17",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Compare content marketing agencies and freelance writers to determine which option aligns better with your goals, budget, and content strategy requirements."
     }
     
 ];

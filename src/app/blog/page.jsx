@@ -21,6 +21,7 @@ import NewsletterBlogs from './NewsletterBlogs';
 import postMetaData from '../../../posts/_postMetadata'
 import authorData from '../../../posts/_authorData';
 import Image from 'next/image';
+import { responsiveArray } from 'antd/es/_util/responsiveObserver';
 
 let tabs = [
     { id: "allCategories", label: "All Categories" },
@@ -66,10 +67,15 @@ const CardDiv = React.memo(({ card }) => (
                         loading="lazy"
                         width={600}
                         height={342}
-                        className='transition duration-150 cursor-pointer'
+                        className='object-cover relative overflow-hidden transition duration-150 cursor-pointer'
                         src={card.ogImage || "/blog_home/blog_home.png"}
                         alt="infrasity"
-                        style={{ borderRadius: "7px" }}
+                        style={{
+                            borderRadius: "7px",
+                            width: "600px",
+                            height: "200px",
+                            objectFit: "cover",
+                        }}
                     />
                 </figure>
                 <div className='py-0 pb-5'>

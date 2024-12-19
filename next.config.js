@@ -3,6 +3,6 @@ module.exports = {
       missingSuspenseWithCSRBailout: false,
     },
     images: {
-      domains: ['www.infrasity.com'],
+      domains: ['www.infrasity.com', 'images.surferseo.art'],
     },
   }
