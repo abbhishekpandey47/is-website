@@ -14,7 +14,7 @@ A Terraform module is like a ready-made blueprint for building your organization
 Modules are reusable, and you can share them across projects or teams. They also make updates easier. For example, if you need to change how a resource is configured, you only update the module, and the changes can be applied to every environment that uses it. This simplifies maintenance and ensures consistency across your infrastructure.
 
 
-![terraform-module](/PostImages/terraform-module/terraform-module.png)
+![terraform-module](/PostImages/terraform-modules/terraform-module.png)
 
 
 **Components of a Terraform Module**
@@ -312,12 +312,20 @@ Terraform Cloud's Private Module Registry allows you to share Terraform modules 
 You can test a module by creating a separate Terraform configuration that calls the module with different input values. Use the `terraform plan` and `terraform apply` to verify it works correctly and outputs the expected results.
 
 
-**4. How do I reference a Terraform module?**
+**4. What is the difference between Terraform modules and blueprints?**
 
 
-A Terraform module can be referenced locally or remotely. For a local reference, use `module "s3" { source = "./path/to/your/module" }`. For a remote reference, use `module "s3" { source = "git::https://github.com/jdxlabs/terraform-s3-module.git?ref=0.0.4" }` or `module "s3" { source = "git@github.com:jdxlabs/terraform-s3-module.git? ref=0.0. 4" }`.
+Terraform modules and blueprints are both used to organize infrastructure, but they’re not the same:
+
+**Terraform Modules** are like reusable pieces of code that handle specific tasks, like creating an S3 bucket or setting up a VPC. You can use them in different projects to save time.
+
+**Blueprints** are more like complete plans that combine several modules and configurations to build an entire setup, like a full application environment with networking, servers, and storage.
+
+Think of modules as building blocks and blueprints as the full structure made from those blocks.
 
 
 **5. What happens if I don’t use modules?**
+
+
 Without modules, you may end up writing repetitive code, which makes your configuration harder to manage and maintain. Modules help you avoid duplication and keep everything consistent.
 
