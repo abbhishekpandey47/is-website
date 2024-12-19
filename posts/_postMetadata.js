@@ -12,6 +12,7 @@ let postMetaData = [
     },
     {
         title: "Driving Rapid Growth Through Strategic Content: A Case Study with Terrateam",
+        metatitle: "How to write a case study for engineering company?",
         slug: "terrateam-case-study",
         description: "This case study highlights how Infrasity helped Terrateam, a Netherlands-based startup, achieve rapid growth through strategic, high-impact technical content. By focusing on keyword research, SEO optimization, and developer-focused messaging, Infrasity increased Terrateam's traffic by 15% in just 14 days and boosted organic traffic by 13.8% over 90 days.",
         ogImage: "/PostImages/terrateam-case-study/0.png",
@@ -22,6 +23,7 @@ let postMetaData = [
     },
     {
         title: "How to Use React Developer Tools for Debugging and Performance Optimization",
+        metatitle: "how to use react developer tools chrome"
         slug: "how-to-use-react-developer-tools-for-debugging-and-performance-optimization",
         description: "Maximize your React app's performance and catch bugs faster with React Developer Tools. This guide will help you optimize and debug your code efficiently, ensuring smoother, faster-running applications for end users.",
         ogImage: "/PostImages/how-to-use-react-developer-tools-for-debugging-and-performance-optimization/0.webp",
