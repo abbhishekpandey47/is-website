@@ -196,7 +196,8 @@ let postMetaData = [
         metaDescription: "Discover how to create and manage essential brand assets for SaaS success. Learn why brand assets like logos, color palettes, and brand voice matter, with examples from top SaaS brands, and get actionable steps to build a strong brand identity that stands out."
     },
     {
-        title: "Long-Tail vs. Short-Tail Keywords (2025)",
+        title: "Long-Tail vs. Short-Tail Keywords",
+        metatitle: "Long-Tail vs. Short-Tail Keywords (2025)​",
         slug: "long-tail-vs-short-tail",
         description: "Explore long-tail and short-tail keywords, their unique benefits, and how to choose the most effective ones to boost your SEO strategy and rankings.",
         ogImage: "/PostImages/long-tail-vs-short-tail/0.jpg",
@@ -207,6 +208,7 @@ let postMetaData = [
     },
     {
         title: "Frameworks for Scalable Documentation Sites",
+        metatitle: "Best Frameworks for Documentation​",
         slug: "frameworks-for-scalable-documentation-sites",
         description: "Explore the best frameworks for creating scalable technical documentation, including MkDocs, Docusaurus, Fuma Docs, VuePress, and Antora. Learn how to choose the right framework for your project, with hands-on examples, installation guides, and best practices to enhance collaboration, user experience, and content management.",
         ogImage: "/PostImages/frameworks-for-scalable-documentation-sites/0.png",
@@ -217,6 +219,7 @@ let postMetaData = [
     },
     {
         title: "How to Identify AI-Generated Content: Key Signs to Look For",
+        metatitle: "How does AI Detection work & How to Identify AI-Generated content​?​",
         slug: "how-to-identify-ai",
         description: "Learn how to identify AI-generated content with key signs such as repetitive language, awkward sentence structures, and lack of contextual understanding. This guide also explores Google's E-E-A-T principles for content evaluation, how AI tools assist writers, and practical ways to ensure content quality and authenticity.",
         ogImage: "/PostImages/how-to-identify-ai/0.jpg",
@@ -226,7 +229,8 @@ let postMetaData = [
         metaDescription: "Discover key signs to identify AI-generated content, from unnatural language to shallow emotional depth. Learn how AI tools assist writers and explore Google's E-E-A-T principles for creating authentic, high-quality content."
     },
     {
-        title: "What Are LSI Keywords and Why Use Them in 2025",
+        title: "What are LSI Keywords and Why Use Them in 2025",
+        metatitle: "What are lsi keywords ​& how to find lsi keywords?​",
         slug: "lsi-keywords",
         description: "Boost SEO rankings with LSI keywords. Discover how they enhance content relevance, improve search visibility, and align with search engine algorithms effectively.",
         ogImage: "/PostImages/lsi-keywords/0.jpg",
@@ -237,16 +241,18 @@ let postMetaData = [
     },
     {
         title: "Your Guide to Robots.txt: Simplifying SEO for Success",
+        metatitle: "What is Robots Txt​ and Why it is important for SEO?",
         slug: "guide-to-robots-txt",
-        description: "Learn how to build a Cloud Center of Excellence (CCoE) that drives efficiency, scalability, and innovation in your organization's cloud strategy. This guide covers the real-world DevOps challenges, solutions with Firefly, and practical steps for creating a high-performing CCoE tailored to your infrastructure needs.",
+        description: "Discover how to create a Cloud Center of Excellence (CCoE) with practical steps and solutions for managing cloud infrastructure. Learn how Firefly can enhance your CCoE.",
         ogImage: "/PostImages/guide-to-robots-txt/0.jpg",
         publishedOn: "2024-11-26",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Discover how to create a Cloud Center of Excellence (CCoE) with practical steps and solutions for managing cloud infrastructure. Learn how Firefly can enhance your CCoE for seamless DevOps workflows."
+        metaDescription: "Discover how to create a Cloud Center of Excellence (CCoE) with practical steps and solutions for managing cloud infrastructure. Learn how Firefly can enhance your CCoE."
     },
     {
         title: "How a Strategic Marketing Plan Can Boost Your Blogging Business",
+        metatitle: "How to Create a Strategic Marketing Plan For Blogging Business?",
         slug: "strategic-marketing-plan",
         description: "In today’s competitive blogging landscape, a well-structured marketing plan is essential for success. This article outlines how bloggers can develop a comprehensive strategy to enhance their business. It covers key aspects such as setting clear goals, understanding your audience, conducting competitive analysis, and creating high-quality content. Additionally, it delves into the importance of SEO, social media promotion, influencer collaborations, and various monetization strategies like affiliate marketing and sponsored content. By implementing these strategies, bloggers can grow their audience, increase traffic, and ultimately turn their blog into a profitable business.",
         ogImage: "/PostImages/strategic-marketing-plan/0.jpg",
