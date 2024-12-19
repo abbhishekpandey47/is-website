@@ -1,6 +1,7 @@
 let postMetaData = [
     {
         title: "Mastering Advanced UI Design",
+        metatitle: "what is user-interface (ui) design?",
         slug: "mastering-advanced-ui-designs",
         description: "Discover advanced techniques in UI design, covering the latest trends, tools, and principles to create immersive, user-friendly interfaces. Elevate your design approach with insights that ensure a seamless and engaging user experience.",
         ogImage: "/PostImages/mastering-advanced-ui-designs/0.webp",
