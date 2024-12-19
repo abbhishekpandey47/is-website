@@ -34,6 +34,7 @@ let postMetaData = [
     },
     {
         title: "Comprehensive Guide to Technical SEO for Improved Website Performance",
+        metatitle: "what is technical seo and how to do it for your website?",
         slug: "comprehensive-guide-to-technical-seo-for-improved-website-performance",
         description: "Optimize your website's performance with technical SEO best practices. Learn how to enhance site speed, indexability, and overall performance to improve your search engine rankings and user engagement.",
         ogImage: "/PostImages/comprehensive-guide-to-technical-seo-for-improved-website-performance/0.webp",
@@ -44,6 +45,7 @@ let postMetaData = [
     },
     {
         title: "Best Platform for Blogs: How to Choose the Right One",
+        metatitle: "best blogging platform to make money" 
         slug: "best-platform-for-blogs-how-to-choose-the-right-one",
         description: "Looking to start a blog? This guide breaks down the best blogging platforms available, helping you choose the right one based on your needs, whether you're focused on SEO, ease of use, or customization.",
         ogImage: "/PostImages/best-platform-for-blogs-how-to-choose-the-right-one/0.webp",
@@ -54,6 +56,7 @@ let postMetaData = [
     },
     {
         title: "Jobs of Marketing: Career Paths, Roles and Skills",
+        metatitle: "what is digital marketting for B2B SaaS companies",
         slug: "jobs-of-marketing-career-paths-roles-and-skills",
         description: "Discover the diverse career paths in marketing, from digital and product marketing to content and brand strategy. Explore the skills needed for each role and how you can start or pivot your career in this dynamic field.",
         ogImage: "/PostImages/jobs-of-marketing-career-paths-roles-and-skills/0.webp",
