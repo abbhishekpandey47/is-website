@@ -1,6 +1,7 @@
 let postMetaData = [
     {
         title: "Mastering Advanced UI Design",
+        metatitle: "what is user-interface (ui) design?",
         slug: "mastering-advanced-ui-designs",
         description: "Discover advanced techniques in UI design, covering the latest trends, tools, and principles to create immersive, user-friendly interfaces. Elevate your design approach with insights that ensure a seamless and engaging user experience.",
         ogImage: "/PostImages/mastering-advanced-ui-designs/0.webp",
@@ -11,6 +12,7 @@ let postMetaData = [
     },
     {
         title: "Driving Rapid Growth Through Strategic Content: A Case Study with Terrateam",
+        metatitle: "How to write a case study for engineering company?",
         slug: "terrateam-case-study",
         description: "This case study highlights how Infrasity helped Terrateam, a Netherlands-based startup, achieve rapid growth through strategic, high-impact technical content. By focusing on keyword research, SEO optimization, and developer-focused messaging, Infrasity increased Terrateam's traffic by 15% in just 14 days and boosted organic traffic by 13.8% over 90 days.",
         ogImage: "/PostImages/terrateam-case-study/0.png",
@@ -21,6 +23,7 @@ let postMetaData = [
     },
     {
         title: "How to Use React Developer Tools for Debugging and Performance Optimization",
+        metatitle: "how to use react developer tools chrome"
         slug: "how-to-use-react-developer-tools-for-debugging-and-performance-optimization",
         description: "Maximize your React app's performance and catch bugs faster with React Developer Tools. This guide will help you optimize and debug your code efficiently, ensuring smoother, faster-running applications for end users.",
         ogImage: "/PostImages/how-to-use-react-developer-tools-for-debugging-and-performance-optimization/0.webp",
@@ -31,6 +34,7 @@ let postMetaData = [
     },
     {
         title: "Comprehensive Guide to Technical SEO for Improved Website Performance",
+        metatitle: "what is technical seo and how to do it for your website?",
         slug: "comprehensive-guide-to-technical-seo-for-improved-website-performance",
         description: "Optimize your website's performance with technical SEO best practices. Learn how to enhance site speed, indexability, and overall performance to improve your search engine rankings and user engagement.",
         ogImage: "/PostImages/comprehensive-guide-to-technical-seo-for-improved-website-performance/0.webp",
@@ -41,6 +45,7 @@ let postMetaData = [
     },
     {
         title: "Best Platform for Blogs: How to Choose the Right One",
+        metatitle: "best blogging platform to make money" 
         slug: "best-platform-for-blogs-how-to-choose-the-right-one",
         description: "Looking to start a blog? This guide breaks down the best blogging platforms available, helping you choose the right one based on your needs, whether you're focused on SEO, ease of use, or customization.",
         ogImage: "/PostImages/best-platform-for-blogs-how-to-choose-the-right-one/0.webp",
@@ -51,6 +56,7 @@ let postMetaData = [
     },
     {
         title: "Jobs of Marketing: Career Paths, Roles and Skills",
+        metatitle: "what is digital marketting for B2B SaaS companies",
         slug: "jobs-of-marketing-career-paths-roles-and-skills",
         description: "Discover the diverse career paths in marketing, from digital and product marketing to content and brand strategy. Explore the skills needed for each role and how you can start or pivot your career in this dynamic field.",
         ogImage: "/PostImages/jobs-of-marketing-career-paths-roles-and-skills/0.webp",
@@ -190,7 +196,8 @@ let postMetaData = [
         metaDescription: "Discover how to create and manage essential brand assets for SaaS success. Learn why brand assets like logos, color palettes, and brand voice matter, with examples from top SaaS brands, and get actionable steps to build a strong brand identity that stands out."
     },
     {
-        title: "Long-Tail vs. Short-Tail Keywords (2025)",
+        title: "Long-Tail vs. Short-Tail Keywords",
+        metatitle: "Long-Tail vs. Short-Tail Keywords (2025)​",
         slug: "long-tail-vs-short-tail",
         description: "Explore long-tail and short-tail keywords, their unique benefits, and how to choose the most effective ones to boost your SEO strategy and rankings.",
         ogImage: "/PostImages/long-tail-vs-short-tail/0.jpg",
@@ -201,6 +208,7 @@ let postMetaData = [
     },
     {
         title: "Frameworks for Scalable Documentation Sites",
+        metatitle: "Best Frameworks for Documentation​",
         slug: "frameworks-for-scalable-documentation-sites",
         description: "Explore the best frameworks for creating scalable technical documentation, including MkDocs, Docusaurus, Fuma Docs, VuePress, and Antora. Learn how to choose the right framework for your project, with hands-on examples, installation guides, and best practices to enhance collaboration, user experience, and content management.",
         ogImage: "/PostImages/frameworks-for-scalable-documentation-sites/0.png",
@@ -211,6 +219,7 @@ let postMetaData = [
     },
     {
         title: "How to Identify AI-Generated Content: Key Signs to Look For",
+        metatitle: "How does AI Detection work & How to Identify AI-Generated content​?​",
         slug: "how-to-identify-ai",
         description: "Learn how to identify AI-generated content with key signs such as repetitive language, awkward sentence structures, and lack of contextual understanding. This guide also explores Google's E-E-A-T principles for content evaluation, how AI tools assist writers, and practical ways to ensure content quality and authenticity.",
         ogImage: "/PostImages/how-to-identify-ai/0.jpg",
@@ -220,7 +229,8 @@ let postMetaData = [
         metaDescription: "Discover key signs to identify AI-generated content, from unnatural language to shallow emotional depth. Learn how AI tools assist writers and explore Google's E-E-A-T principles for creating authentic, high-quality content."
     },
     {
-        title: "What Are LSI Keywords and Why Use Them in 2025",
+        title: "What are LSI Keywords and Why Use Them in 2025",
+        metatitle: "What are lsi keywords ​& how to find lsi keywords?​",
         slug: "lsi-keywords",
         description: "Boost SEO rankings with LSI keywords. Discover how they enhance content relevance, improve search visibility, and align with search engine algorithms effectively.",
         ogImage: "/PostImages/lsi-keywords/0.jpg",
@@ -231,16 +241,18 @@ let postMetaData = [
     },
     {
         title: "Your Guide to Robots.txt: Simplifying SEO for Success",
+        metatitle: "What is Robots Txt​ and Why it is important for SEO?",
         slug: "guide-to-robots-txt",
-        description: "Learn how to build a Cloud Center of Excellence (CCoE) that drives efficiency, scalability, and innovation in your organization's cloud strategy. This guide covers the real-world DevOps challenges, solutions with Firefly, and practical steps for creating a high-performing CCoE tailored to your infrastructure needs.",
+        description: "Discover how to create a Cloud Center of Excellence (CCoE) with practical steps and solutions for managing cloud infrastructure. Learn how Firefly can enhance your CCoE.",
         ogImage: "/PostImages/guide-to-robots-txt/0.jpg",
         publishedOn: "2024-11-26",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Discover how to create a Cloud Center of Excellence (CCoE) with practical steps and solutions for managing cloud infrastructure. Learn how Firefly can enhance your CCoE for seamless DevOps workflows."
+        metaDescription: "Discover how to create a Cloud Center of Excellence (CCoE) with practical steps and solutions for managing cloud infrastructure. Learn how Firefly can enhance your CCoE."
     },
     {
         title: "How a Strategic Marketing Plan Can Boost Your Blogging Business",
+        metatitle: "How to Create a Strategic Marketing Plan For Blogging Business?",
         slug: "strategic-marketing-plan",
         description: "In today’s competitive blogging landscape, a well-structured marketing plan is essential for success. This article outlines how bloggers can develop a comprehensive strategy to enhance their business. It covers key aspects such as setting clear goals, understanding your audience, conducting competitive analysis, and creating high-quality content. Additionally, it delves into the importance of SEO, social media promotion, influencer collaborations, and various monetization strategies like affiliate marketing and sponsored content. By implementing these strategies, bloggers can grow their audience, increase traffic, and ultimately turn their blog into a profitable business.",
         ogImage: "/PostImages/strategic-marketing-plan/0.jpg",

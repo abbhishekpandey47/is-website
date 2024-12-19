@@ -67,7 +67,6 @@ const TestiCard = ({ name, sorc, pos, comment, index }) => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
@@ -86,4 +85,4 @@ const TestiCarousel = () => {
     )
 }
 
-export default TestiCarousel
+export default TestiCarousel;
