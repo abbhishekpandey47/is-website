@@ -23,7 +23,7 @@ let postMetaData = [
     },
     {
         title: "How to Use React Developer Tools for Debugging and Performance Optimization",
-        metatitle: "how to use react developer tools chrome"
+        metatitle: "how to use react developer tools chrome",
         slug: "how-to-use-react-developer-tools-for-debugging-and-performance-optimization",
         description: "Maximize your React app's performance and catch bugs faster with React Developer Tools. This guide will help you optimize and debug your code efficiently, ensuring smoother, faster-running applications for end users.",
         ogImage: "/PostImages/how-to-use-react-developer-tools-for-debugging-and-performance-optimization/0.webp",
@@ -45,7 +45,7 @@ let postMetaData = [
     },
     {
         title: "Best Platform for Blogs: How to Choose the Right One",
-        metatitle: "best blogging platform to make money" 
+        metatitle: "best blogging platform to make money",
         slug: "best-platform-for-blogs-how-to-choose-the-right-one",
         description: "Looking to start a blog? This guide breaks down the best blogging platforms available, helping you choose the right one based on your needs, whether you're focused on SEO, ease of use, or customization.",
         ogImage: "/PostImages/best-platform-for-blogs-how-to-choose-the-right-one/0.webp",
