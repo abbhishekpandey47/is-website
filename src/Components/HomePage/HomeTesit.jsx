@@ -12,6 +12,7 @@ const testiArr = [
     {
         name: "Cindy Blake",
         src: "/Testimon/cindyFirefly.jpg",
+        alt: "Cindy Blake, VP Marketing, Firefly",
         pos: "VP Marketting, Firefly",
         comment: "Infrasity was quick to onboard and understand how to best show off the capabilities of Firefly's cloud asset management. Team has been super responsive and collaborative.",
         highlight: ["quick to onboard", "responsive", "collaborative"]
@@ -20,6 +21,7 @@ const testiArr = [
     {
         name: "Josh",
         src: "/Testimon/joshTerraTeam.jpg",
+        alt: "Josh, Co-Founder, Terrateam",
         pos: "Co-Founder, Terrateam",
         comment: "The Infrasity team has been fantastic to work with. Their attention to detail and level of accuracy is top notch. I'd fully recommend their services to anyone.",
         highlight: ["attention to detail", "level of accuracy", "top notch"]
@@ -27,6 +29,7 @@ const testiArr = [
     {
         name: "Shaked Askayo",
         src: "/Testimon/Shaked.png",
+        alt: "Shaked Askayo, CTO, Kubiya.ai",
         pos: "CTO, Kubiya.ai",
         comment: "Infrasity's creative content has significantly enhanced the visibility and appeal of our product in a competitive market. Crafting content that engages our audience and eloquently highlights the advanced capabilities of Kubiya.ai.",
         highlight: ["significantly enhanced the visibility and appeal of our product"]
@@ -34,6 +37,7 @@ const testiArr = [
     {
         name: "Frank Weissmann",
         src: "/Testimon/Frank.jpg",
+        alt: "Frank Weissmann, Customer Success Lead, firefly.ai",
         pos: "Customer Success Lead, firefly.ai",
         comment: "Infrasity's work has improved the client's SEO, earning a score of over 75%. They'vs also enabled the client to onboard end customers faster. Moreover, the team listens to the client's content needs, produces work that aligns with their conversation and delivers output in a quick turnaround time.",
         highlight: ["over 75%", "quick turnaround time"]
@@ -41,6 +45,7 @@ const testiArr = [
     {
         name: "Igal Zeifman",
         src: "/Testimon/igalEnv0.jpg",
+        alt: "Igal Zeifman, VP Marketing, Env0",
         pos: "VP Marketing, Env0",
         comment: "Infrasity provided exceptional tech content on infrastructure engineering, with deep expertise in Terraform and the tech stack. Their collaborative approach and hands-on, developer-focused writing make their work impactful. Highly recommend them for technical content creation.",
         highlight: ["exceptional tech content", "deep expertise", "collaborative approach", "impactful"]
@@ -48,13 +53,14 @@ const testiArr = [
     {
         name: "Sri Krishna",
         src: "/Testimon/sriMiddleware.jpeg",
+        alt: "Sri Krishna, Content Head, Middleware",
         pos: "Content Head, Middleware",
         comment: "Infrasity is incredibly responsive and understands client needs exceptionally well, always delivering promptly and as expected. Their attention to detail and outstanding customer support truly set them apart. Communication through email and messaging was seamless, and while the quality of work is top-notch, we look forward to even faster delivery in the future.",
         highlight: ["responsive", "attention to detail", "outstanding customer support", "quality of work is top-notch"]
     }
 ]
 
-const TestiCard = ({ name, sorc, pos, comment, index, carPtr, highlight }) => {
+const TestiCard = ({ name, alt, sorc, pos, comment, index, carPtr, highlight }) => {
     const renderHighlightedText = (text = "", highlights = []) => {
         if (!text) return ""; // Return an empty string if text is undefined or null
         const regex = new RegExp(`(${highlights.join("|")})`, "gi");
@@ -93,7 +99,7 @@ const TestiCard = ({ name, sorc, pos, comment, index, carPtr, highlight }) => {
                             height={100}
                             className="max-w-[60px] rounded-[100%]"
                             src={sorc}
-                            alt=""
+                            alt={alt}
                         />
                     </div>
                     <div className="flex flex-col justify-center gap-1">
@@ -156,8 +162,8 @@ const HomeTesit = () => {
 
         }
     }, [])
-    
-    
+
+
     const [renderArr, setRenderArr] = useState([1])
     const handleOnIndIncr = () => {
         newArr = []
@@ -196,10 +202,10 @@ const HomeTesit = () => {
                 <div className='flex justify-center text-white testiMonialsHead'><h1 className='text-center text-[1.7em] w-[70%] quicksand-bold max-lg:text-[1.2em] max-sm:text-[.9em] max-sm:w-[95%] pt-3'>We help <span className="specialtext">DevTools and engineering companies</span> drive growth through strategic technical content and developer relations services.</h1></div>
             </div>
             <div className='flex justify-center gap-6 py-16 quicksand-light flex-wrap w-7/6 m-auto text-white testiMonCardHome'>
-                
+
                 {
                     renderArr.map((testi, index) => {
-                        return <TestiCard index={index} name={testi.name} sorc={testi.src} pos={testi.pos} carPtr={carPtr} comment={testi.comment} highlight={testi.highlight || []} key={index} />
+                        return <TestiCard index={index} name={testi.name} alt={testi.alt} sorc={testi.src} pos={testi.pos} carPtr={carPtr} comment={testi.comment} highlight={testi.highlight || []} key={index} />
                     })
                 }
             </div>
