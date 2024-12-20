@@ -36,12 +36,14 @@ Example: *Research phrases like “best CI/CD tools” or “scaling Kubernetes 
 ### **Content Outlining** 
 With a data-driven foundation, agencies craft detailed outlines to ensure the content aligns with the identified keywords, search intent, and audience pain points. For technical products, this often involves weaving in developer-friendly examples, code snippets, or step-by-step walkthroughs to resonate with a technical audience. To create your first outline, you can always use [The Outline Generator](https://content.infrasity.com/), developed by [Infrasity.com](http://Infrasity.com), to ease your content creation workflow since the tool will do all the MSV and keyword research.
 
-![Outline](/PostImages/content-marketing-agency-vs-freelance-content-writers/outline.png)
+![Outline](/PostImages/content-marketing-agency-vs-freelance-content-writers/outline-1.png)
+![Outline](/PostImages/content-marketing-agency-vs-freelance-content-writers/outline-2.png)
 
 ### **Technical Content Writing** 
 The writing phase is where ideas come to life. In technical writing, this phase requires attention to detail. You ensure the information is credible, well-researched, and organized. Using examples, Infographics, and code snippets helps clarify complex topics and makes the content more digestible. One of the biggest problems at this stage arises when the writer lacks technical know-how, leading to excessive back and forths and delayed timelines. At Infrasity, our writers are engineers first who work hands-on with your product to build an understanding on par with your product team before they start writing. This ensures complete technical know-how for our writers when they start creating engaging content pieces. Every piece is optimized for SEO while maintaining readability for a developer audience.
 
-![Blog](/PostImages/content-marketing-agency-vs-freelance-content-writers/blog.png)
+![Blog](/PostImages/content-marketing-agency-vs-freelance-content-writers/blog-1.png)
+![Blog](/PostImages/content-marketing-agency-vs-freelance-content-writers/blog-2.png)
 
 ### **Quality Assurance** 
 Agencies conduct thorough checks for factual accuracy, grammar, and plagiarism. *Tools like KeywordsEverywhere, Grammarly, Quillbot, and ZeroGPT [help us at Infrasity](https://www.infrasity.com/blog/how-to-identify-ai) ensure that we always have the correct set of keywords and maintain the highest content standards regarding SEO and credibility*.  
@@ -120,7 +122,7 @@ The choice between an agency and a freelancer depends on several factors, especi
 * **Agencies:** Agencies have tried and tested **quality assurance processes**, including plagiarism checks, technical reviews, and SEO optimization. They often employ technical editors who understand developer-focused content, ensuring each piece is credible and resonates with your audience.  
 * **Freelancers:** While many freelancers deliver high-quality work, QA can vary significantly. You may need to invest extra time reviewing their output for **technical** **accuracy** or brand alignment, especially if they’re unfamiliar with devtools.
 
-![QA](/PostImages/content-marketing-agency-vs-freelance-content-writers/seo.png)
+![Review](/PostImages/content-marketing-agency-vs-freelance-content-writers/review.png)
 
   ### **5\. Content Distribution & Visibility**
 
