@@ -34,9 +34,9 @@ const AuthorBanner = React.memo(({ authorData }) => {
           </div>
         )}
         <div className="flex flex-col justify-center gap-y-2">
-          <h1 className="text-xl sm:text-3xl font-bold text-white quicksand-bold">
+          <h3 className="text-xl sm:text-3xl font-bold text-white quicksand-bold">
             {authorData.name || "Name of the author"}
-          </h1>
+          </h3>
           <p className="text-sm xs:text-lg text-[wheat]">
             {authorData.designation || "Technical Author"}
           </p>
