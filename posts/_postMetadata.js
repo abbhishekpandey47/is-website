@@ -303,7 +303,7 @@ let postMetaData = [
         description: "Explore the pros and cons of hiring a content marketing agency versus freelance content writers to help decide the best fit for your content needs.",
         ogImage: "/PostImages/content-marketing-agency-vs-freelance-content-writers/banner.jpg",
         publishedOn: "2024-12-17",
-        authorId: "author0001",
+        authorId: "author0002",
         category: "Informational",
         metaDescription: "Compare content marketing agencies and freelance writers to determine which option aligns better with your goals, budget, and content strategy requirements."
     }

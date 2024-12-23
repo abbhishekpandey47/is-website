@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(CustomEase);
 
 
-const testiArr = [
+export const testiArr = [
     {
         name: "Cindy Blake",
         src: "/Testimon/cindyFirefly.jpg",
