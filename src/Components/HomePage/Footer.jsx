@@ -22,7 +22,7 @@ const Footer = () => {
                             </a>
                         </div>
                         <div className="flex max-sm:w-full flex-col w-[35%] max-lg:w-1/2 lg:pl-5">
-                            <h1 className="font-semibold  mb-2">Services</h1>
+                            <h3 className="font-semibold  mb-2">Services</h3>
                             <ul className="space-y-4 flex flex-col ">
                                 <li><a href="/service-blog-as-code" className="hover:underline">Blogs-as-code at scale</a></li>
                                 {/* <li><a href="/tutorials" className="hover:underline">Tutorials</a></li> */}
@@ -33,7 +33,7 @@ const Footer = () => {
                     <div className='flex w-[25%] max-sm:w-full max-lg:text-center justify-end max-lg:w-full max-lg:justify-around'>
                         <div className='flex lg:gap-20 max-sm:gap-16 max-sm:flex-col max-lg:w-full'>
                             <div className="flex flex-col w-1/2 max-sm:w-full">
-                                <h1 className="font-bold  mb-2">Resources</h1>
+                                <h3 className="font-bold  mb-2">Resources</h3>
                                 <ul className="space-y-4 ">
                                     <li><a href="/" className="hover:underline">Home</a></li>
                                     <li><a href="/blog" className="hover:underline">Blog</a></li>
@@ -42,7 +42,7 @@ const Footer = () => {
                                 </ul>
                             </div>
                             <div className="flex flex-col w-1/2 max-lg:text-center max-sm:w-full">
-                                <h1 className="font-bold  mb-2">Follow us</h1>
+                                <h3 className="font-bold  mb-2">Follow us</h3>
                                 <ul className="space-y-4 ">
                                     <li><a href="https://www.youtube.com/@Infrasity" target='_blank' className="hover:underline flex items-center max-lg:justify-center space-x-10 gap-2" ><span><YoutubeFilled /> </span>Youtube</a></li>
                                     <li><a href="https://x.com/InfrasityHub" target='_blank' className="hover:underline flex items-center max-lg:justify-center space-x-10 gap-2" ><span><XOutlined /> </span> X</a></li>
