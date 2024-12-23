@@ -106,7 +106,7 @@ create credibility and the engaging video can grab the attention
 instantly. It is always advisable to make the content types you provide
 to your audience match their needs and wants at any given time.
 
-![](/PostImages/strategic-marketing-plan/2.png)
+![the importance of an editorial calander](/PostImages/strategic-marketing-plan/2.png)
 
 **Editorial Calendar:**
 
@@ -119,7 +119,7 @@ forthcoming in the market niche. An editorial calendar also can help you
 remember deadlines, and coordinate with other team members involved in
 the content creation process.
 
-![](/PostImages/strategic-marketing-plan/3.png)
+![blog historical calander](/PostImages/strategic-marketing-plan/3.png)
 
 All of these strategies will assist you in increasing your overall
 efficiency toward your goal of reaching out to your target audience.
@@ -198,7 +198,7 @@ content, and 20% self-promoting posts. Respond to comments and reshare
 posts, and consider using targeted ads that can easily reach certain age
 brackets you know your audience belongs to.
 
-![](/PostImages/strategic-marketing-plan/4.png)
+![balance content](/PostImages/strategic-marketing-plan/4.png)
 
 **Email Marketing:** Create an email list to keep in touch with your
 readers at any point in time. Design useful newsletters that consist of
