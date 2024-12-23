@@ -37,7 +37,7 @@ customers, their choices, and what they want so that the blog can meet
 those needs. Blogs with targeted content enhance engagement and foster a
 loyal readership, essential for monetizing a blog effectively.
 
-![](/PostImages/strategic-marketing-plan/1.jpg)
+![understand your audience](/PostImages/strategic-marketing-plan/1.jpg)
 
 **Competitive Analysis:**
 
