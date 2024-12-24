@@ -33,7 +33,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
             <div className='w-1/2 max-md:w-full flex flex-col justify-center'><Image loading='lazy' width={703} height={400} className='rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200' src={data.imgLink} alt="Ratio is 1.7589" /></div>
             <div className={`w-[40%] max-md:w-full max-lg:w-1/2 flex flex-col justify-center serviceasblogcard card-${ind}`}>
                 <div className='h-[80%] max-lg:h-full flex flex-col justify-center gap-5 max-lg:gap-2'>
-                    <div><h1 className='quicksand-bold text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-center' dangerouslySetInnerHTML={{ __html: data.hTag }}></h1></div>
+                    <div><h2 className='quicksand-bold text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-center' dangerouslySetInnerHTML={{ __html: data.hTag }}></h2></div>
                     <div><p className='quicksand-medium max-lg:text-[0.8em] max-md:text-[1.2em] max-md:text-center'>{data.pTag}</p></div>
                 </div>
             </div>
@@ -152,7 +152,7 @@ const page = () => {
             <div>
                 <div className="pt-20 space-y-9 relative blogDiv">
                     <div className="whyinfra"></div>
-                    <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center"><h1 className="w-3/4 leading-[80px] max-sm:w-[95%] max-sm:leading-[69px]"><span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">Distribute</span></h1></div>
+                    <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center"><h2 className="w-3/4 leading-[80px] max-sm:w-[95%] max-sm:leading-[69px]"><span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">Distribute</span></h2></div>
 
                     <div className="text-center text-white quicksand-semibold flex justify-center"><p className="w-1/2 max-sm:w-[90%]">We distribute your content across key platforms like Reddit, Dev.to, and other developer communities, ensuring it reaches the right technical audience and drives engagement where it matters most.</p></div>
 
@@ -187,7 +187,7 @@ const page = () => {
                                 </div>
                                 <div className='flex flex-col justify-around max-lg:gap-4'>
                                     <div className='flex flex-col gap-3'>
-                                        <div><h1 className='quicksand-bold'>{postMetaData[postMetaData.length - 1].title}</h1></div>
+                                        <div><h2 className='quicksand-bold'>{postMetaData[postMetaData.length - 1].title}</h2></div>
                                         <div><p className='quicksand-medium'>{postMetaData[postMetaData.length - 1].description}</p></div>
                                         <div className='text-[var(--blue)] bg-[#f5f4f7] rounded-full flex justify-center max-w-[100px] h-6 px-3 text-[12px] quicksand-semibold items-center'>
                                             <p className='text-black max-sm:text-xs quicksand-medium'>{postMetaData[postMetaData.length - 1].category}</p>
@@ -234,7 +234,7 @@ const page = () => {
                             </div>
                             <div className='flex flex-col justify-around max-lg:gap-4'>
                                 <div className='flex flex-col gap-3'>
-                                    <div><h1 className='quicksand-bold'>{postMetaData[postMetaData.length - 2].title}</h1></div>
+                                    <div><h2 className='quicksand-bold'>{postMetaData[postMetaData.length - 2].title}</h2></div>
                                     <div><p className='quicksand-medium'>{postMetaData[postMetaData.length - 2].description}</p></div>
                                     <div className='text-[var(--blue)] bg-[#f5f4f7] rounded-full flex justify-center max-w-[100px] h-6 px-3 text-[12px] quicksand-semibold items-center'>
                                         <p className='text-black max-sm:text-xs quicksand-medium'>{postMetaData[postMetaData.length - 2].category}</p>
@@ -279,7 +279,7 @@ const page = () => {
                             </div>
                             <div className='flex flex-col justify-around max-lg:gap-4'>
                                 <div className='flex flex-col gap-3'>
-                                    <div><h1 className='quicksand-bold'>{postMetaData[postMetaData.length - 3].title}</h1></div>
+                                    <div><h2 className='quicksand-bold'>{postMetaData[postMetaData.length - 3].title}</h2></div>
                                     <div><p className='quicksand-medium'>{postMetaData[postMetaData.length - 3].description}</p></div>
                                     <div className='text-[var(--blue)] bg-[#f5f4f7] rounded-full flex justify-center max-w-[100px] h-6 px-3 text-[12px] quicksand-semibold items-center'>
                                         <p className='text-black max-sm:text-xs quicksand-medium'>{postMetaData[postMetaData.length - 3].category}</p>
