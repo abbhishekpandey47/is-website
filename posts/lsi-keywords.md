@@ -11,7 +11,7 @@ search algorithms rank content by its context rather than the keyword
 repetition frequency. In this blog section, we are going to explore all
 about LSI keywords. Are you ready to explore? Read the following blog!
 
-## **Understanding LSI Keywords**
+## **What are LSI Keywords**
 
 ![lsi keywords](/PostImages/lsi-keywords/1.png)
 
@@ -69,7 +69,7 @@ engines to rank your content. This approach expands your SEO horizons
 and makes SaaS startups capture customers at each step of their
 purchasing journey and help them address all kinds of search intents.
 
-## **Finding LSI Keywords** 
+## **How to Find LSI Keywords** 
 
 ![lsi keywords](/PostImages/lsi-keywords/2.png)
 
