@@ -19,7 +19,7 @@ const LayoutJS3 = () => {
             <div className="flex w-[90%] items-center max-lg:flex-col">
                 {/* Left Section with Text */}
                 <div className="w-[50%] max-lg:w-full max-lg:pl-0 pl-36 lg:pr-5 text-left max-lg:text-center">
-                    <h1 className="text-3xl mb-4 quicksand-bold text-white"><span className="specialtext">Distribute.</span></h1>
+                    <h3 className="text-3xl mb-4 quicksand-bold text-white"><span className="specialtext">Distribute.</span></h3>
                     <p className="text-white max-lg:text-center quicksand-medium">
                     We distribute your content across key platforms like Reddit, Dev.to,
                     and other developer communities, ensuring it reaches the right technical audience and drives engagement where it matters most.
