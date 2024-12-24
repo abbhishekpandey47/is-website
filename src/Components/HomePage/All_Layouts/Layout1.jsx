@@ -21,7 +21,7 @@ const Layout1JS = () => {
             <div className="flex w-[90%] items-center max-lg:flex-col justify-between">
                 {/* Left Section with Text */}
                 <div className="w-[30%] max-lg:w-full max-lg:pl-0 lg:pr-5 text-left max-lg:text-center max-lg:pb-10">
-                    <h1 className="text-3xl mb-4 quicksand-bold text-white"><span className="specialtext">Outline.</span></h1>
+                    <h3 className="text-3xl mb-4 quicksand-bold text-white"><span className="specialtext">Outline.</span></h3>
                     <p className="text-white max-lg:text-center quicksand-medium">
                     We create a clear, structured outline that highlights your product’s features and includes
                     <br className="max-lg:hidden max-lg" />
