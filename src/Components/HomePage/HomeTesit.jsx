@@ -199,7 +199,7 @@ const HomeTesit = () => {
             <div className="relative addGrid2">
             <div className="whyinfra"></div>
                 <div className='flex justify-center text-white pt-20 testiMonialsHead overflow-y-hidden'><h2 className='text-center max-sm:text-[1.6em] text-[2em] w-[80%] max-sm:w-[95%] quicksand-semibold text-[wheat]'>Hear what our customers say about us</h2></div>
-                <div className='flex justify-center text-white testiMonialsHead'><h1 className='text-center text-[1.7em] w-[70%] quicksand-bold max-lg:text-[1.2em] max-sm:text-[.9em] max-sm:w-[95%] pt-3'>We help <span className="specialtext">DevTools and engineering companies</span> drive growth through strategic technical content and developer relations services.</h1></div>
+                <div className='flex justify-center text-white testiMonialsHead'><h3 className='text-center text-[1.7em] w-[70%] quicksand-bold max-lg:text-[1.2em] max-sm:text-[.9em] max-sm:w-[95%] pt-3'>We help <span className="specialtext">DevTools and engineering companies</span> drive growth through strategic technical content and developer relations services.</h3></div>
             </div>
             <div className='flex justify-center gap-6 py-16 quicksand-light flex-wrap w-7/6 m-auto text-white testiMonCardHome'>
 
