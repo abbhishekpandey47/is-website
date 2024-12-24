@@ -55,11 +55,11 @@ const HomeVidSection = () => {
           {/* <h1 className='quicksand-bold text-center text-[3em] max-sm:py-6 max-sm:text-[1em] text-white'>On-demand <span className="specialtext">technical videos</span> recorded by engineers</h1> */}
           <div className="whyinfra"></div>
           <div className='xs:px-5 sm:px-10 lg:px-20'>
-            <h1 className="text-white text-center max-xs:text-3xl max-sm:text-4xl text-[3em] quicksand-bold pt-10 whyInfraUpperHead">On-demand <span className="specialtext">technical videos</span> recorded by engineers</h1>
+            <h2 className="text-white text-center max-xs:text-3xl max-sm:text-4xl text-[3em] quicksand-bold pt-10 whyInfraUpperHead">On-demand <span className="specialtext">technical videos</span> recorded by engineers</h2>
           </div>
           <div className="flex justify-center whyInfraUpperHead">
             <p className="text-center text-[wheat] pt-5 w-2/3 quicksand-semibold max-lg:w-3/4">
-            Get on-demand technical videos and content created by engineers, tailored to showcase your  products key features.
+            Get on-demand technical videos and content created by engineers, tailored to showcase your products key features.
             </p>
           </div>
         </div>
