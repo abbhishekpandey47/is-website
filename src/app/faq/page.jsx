@@ -119,7 +119,7 @@ function page() {
                         <div className='pt-10'>
                             <div className="whyinfra"></div>
                             <div className=" relative text-white text-center max-xs:text-3xl max-lg:text-5xl text-[3em] quicksand-bold mx-16">
-                                <div className='lg:pt-10'>Frequently Asked <span className="specialtext">Questions</span></div>
+                                <h1 className="lg:pt-10"> Frequently Asked <span className="specialtext">Questions</span> </h1>
                             </div>
                         </div>
                         <div className="flex justify-center">
