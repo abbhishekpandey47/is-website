@@ -56,7 +56,7 @@ const HowWorks = ({ mainHeading, subHeading, serviceArr = [], isService = false 
             <div className="relative addGrid2">
                 <div className=' w-4/5 m-auto flex flex-col gap-7 max-sm:gap-2'>
                     <div className='w-full text-center pt-20 text-3xl quicksand-bold text-[wheat]'><h2>{subHeading}</h2></div>
-                    <div className='w-full max-lg:text-[2em] text-center text-[3em] flex justify-center quicksand-semibold'><h1 className='text-white max-md:w-3/4 max-sm:text-[0.7em] max-sm:w-[93%]' dangerouslySetInnerHTML={{ __html: mainHeading }}></h1></div>
+                    <div className='w-full max-lg:text-[2em] text-center text-[3em] flex justify-center quicksand-semibold'><h2 className='text-white max-md:w-3/4 max-sm:text-[0.7em] max-sm:w-[93%]' dangerouslySetInnerHTML={{ __html: mainHeading }}></h2></div>
                 </div>
             </div>
             <div>
