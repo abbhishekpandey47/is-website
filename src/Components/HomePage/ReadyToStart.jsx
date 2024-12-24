@@ -11,7 +11,7 @@ const ReadyToStart = () => {
                     <Image width={100} height={100} loading='lazy' src="/logodata/infra_logo_only.png" className='w-auto h-auto' alt="Infrasity_Logo" />
                 </div>
                 <div className='flex flex-col items-center'>
-                    <h1 className='text-2xl md:text-3xl lg:text-4xl text-white tracking-tight quicksand-bold'>Get started with Infrasity</h1>
+                    <h2 className='text-2xl md:text-3xl lg:text-4xl text-white tracking-tight quicksand-bold'>Get started with Infrasity</h2>
                     <p className="w-2/3 text-center pt-2 text-[wheat]">Infrasity is the only platform which provides you with developer focused content for your products or services</p>
                 </div>
                 <div className='flex gap-5 pt-5'>
