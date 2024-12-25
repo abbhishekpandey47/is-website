@@ -60,7 +60,7 @@ const monthArr = ["January", "February", "March", "April", "May", "June", "July"
 
 const CardDiv = React.memo(({ card }) => (
     <Link href={`/blog/${card.slug}`} className="">
-        <div className="hover:shadow-2xl hover:scale-105 max-sm:w-72 transition-all duration-200 cursor-pointer card w-96 h-[500px] shadow-2xl rounded-md border-[#999] border-2 relative">
+        <div className="hover:shadow-2xl hover:scale-105 max-sm:w-72 transition-all duration-200 cursor-pointer card w-96 h-[500px] max-sm:h-[550px] shadow-2xl rounded-md border-[#999] border-2 relative">
             <div className='p-3'>
                 <figure className='pb-5'>
                     <Image
