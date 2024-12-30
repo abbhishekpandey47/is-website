@@ -33,7 +33,7 @@ const ContactHome = () => {
 
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 8000);
+            const timeoutId = setTimeout(() => controller.abort(), 90000);
 
             const response = await fetch(
                 'https://infrasity-backend-j84r.onrender.com/api/bookmeeting',
