@@ -118,7 +118,7 @@ const ContactHome = () => {
                 <div className="w-[45%] max-lg:w-full bg-white flex flex-col justify-center items-center max-sm:px-6 p-12">
                     <div className="w-full max-w-xl p-8 max-sm:px-0">
                     <h1 className="text-3xl font-bold mb-4 text-center text-black quicksand-bold">
-                        Book a Demo with <span className="text-[#6c5be7]">25%</span> Off
+                        Book a <span className="text-[#6c5be7]">FREE</span> Demo
                     </h1>
                         <p className="text-zinc-800 text-center mb-8 quicksand-medium">
                             Looking for developer-focused tech content to
@@ -254,36 +254,38 @@ const ContactHome = () => {
 
                 <div className="flex flex-col h-full w-[55%] lg:fixed lg:right-0 bg-gradient-to-br from-[#1c174a] to-[#1a1a6e] text-white max-lg:w-full">
                     {/* USP Section */}
-                    <div className="flex flex-col justify-center items-start h-1/2 p-14 max-lg:h-[55%] space-y-6">
+                    <div className="flex flex-col justify-center items-center h-1/2 p-16 space-y-6">
                         <h2 className="text-3xl font-bold mb-4 text-center">Why Modern Engineering Companies Trust Infrasity</h2>
-                        <div className="flex items-start space-x-2">
-                            <svg className="w-6 h-6 text-green-500 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M20 6L9 17l-5-5" />
-                            </svg>
-                            <p className="text-left">Technical Expertise: Content written by developers & Infrastructure engineers</p>
-                        </div>
-                        <div className="flex items-start space-x-2 ">
-                            <svg className="w-6 h-6 text-green-500 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M20 6L9 17l-5-5" />
-                            </svg>
-                            <p className="text-left">Proven Results: 70% of content getting 1st page of SERP</p>
-                        </div>
-                        <div className="flex items-start space-x-2">
-                            <svg className="w-6 h-6 text-green-500 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M20 6L9 17l-5-5" />
-                            </svg>
-                            <p className="text-left">Content written by developers & Infrastructure engineers</p>
-                        </div>
-                        <div className="flex items-start space-x-2">
-                            <svg className="w-6 h-6 text-green-500 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M20 6L9 17l-5-5" />
-                            </svg>
-                            <p className="text-left">Developer Relations Approach: Avoid multiple vendors for keyword research, content development, and post-content analytics & distribution</p>
+                        <div className="flex flex-col justify-center items-start space-y-4 quicksand-light text-base md:text-lg 2xl:text-xl">
+                            <div className="flex items-start space-x-2">
+                                <svg className="w-6 h-6 text-green-500 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                                <p className="text-left">Technical Expertise: Content written by developers & Infrastructure engineers</p>
+                            </div>
+                            <div className="flex items-start space-x-2 ">
+                                <svg className="w-6 h-6 text-green-500 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                                <p className="text-left">Proven Results: 70% of content getting 1st page of SERP</p>
+                            </div>
+                            <div className="flex items-start space-x-2">
+                                <svg className="w-6 h-6 text-green-500 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                                <p className="text-left">Content written by developers & Infrastructure engineers</p>
+                            </div>
+                            <div className="flex items-start space-x-2">
+                                <svg className="w-6 h-6 text-green-500 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                                <p className="text-left">Developer Relations Approach: Unified process for content research & analytics</p>
+                            </div>
                         </div>
                     </div>
-                    <hr className="border-t border-white opacity-50 mx-8" />
+                    <hr className="border-t border-white opacity-50 mx-8 my-2" />
                     {/* Testimonials Section */}
-                    <div className="flex flex-col justify-center items-center h-1/2 p-8 max-lg:h-[45%]">
+                    <div className="flex flex-col justify-center items-center h-1/2 max-pb-16">
                         {/*<h2 className="text-4xl font-bold mb-2 text-center">What Our Clients Say</h2>*/}
                         <TestiCarousel />
                     </div>
@@ -294,3 +296,4 @@ const ContactHome = () => {
 };
 
 export default ContactHome;
+

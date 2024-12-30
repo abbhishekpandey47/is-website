@@ -297,7 +297,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link href="/contact" onClick={(() => { checkVisitPage("/contact") })} className="btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-semibold" >Talk to Us</Link>
+                    <Link href="/contact" onClick={(() => { checkVisitPage("/contact") })} className="btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-semibold" >Book a Free Demo</Link>
                 </div>
             </div>
 
