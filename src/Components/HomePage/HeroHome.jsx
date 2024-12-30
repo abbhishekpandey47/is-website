@@ -86,7 +86,7 @@ const HeroHome = () => {
                     <h2 className='quicksand-mediam text-[1.5em] w-[50vw] max-lg:w-[60vw] max-sm:w-[85vw] max-sm:text-[1.2em] text-center m-auto text-[wheat] heroPagePara'>
                         {description}
                     </h2>
-                    <Link href="/contact" className=" relative z-10 btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-bold ">Talk to Us</Link>
+                    <Link href="/contact" className=" relative z-10 btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-bold ">Book a Free Demo</Link>
                 </div>
             </div>
             </div>
