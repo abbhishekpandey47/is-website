@@ -216,8 +216,25 @@ const ContactHome = () => {
                                     }
                                 />
                             </div>
-                            <button type="submit" className="btn w-full bg-blue-600 border-none text-white p-3 font-semibold hover:bg-btnprimaryhov rounded-full transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600" disabled={loading}>
-                                {loading ? <Spin size="small" /> : 'Continue'}
+                            <button
+                            type="submit"
+                            style={{
+                                width: '100%',
+                                backgroundColor: loading ? 'gray' : '#1E40AF', // bg-blue-600
+                                border: 'none',
+                                color: 'white',
+                                padding: '0.75rem', // p-3
+                                fontWeight: '600', // font-semibold
+                                borderRadius: '9999px', // rounded-full
+                                transition: 'background-color 0.2s', // transition duration-200
+                                outline: 'none', // focus:outline-none
+                                boxShadow: loading ? 'none' : '0 0 0 2px #1E40AF' // focus:ring-2 focus:ring-blue-600
+                            }}
+                            disabled={loading}
+                            onMouseEnter={(e) => e.target.style.backgroundColor = '#2563EB'} // hover:bg-btnprimaryhov
+                            onMouseLeave={(e) => e.target.style.backgroundColor = loading ? 'gray' : '#1E40AF'} // bg-blue-600
+                            >
+                            {loading ? <Spin size="small" /> : 'Continue'}
                             </button>
                         </form>
 
@@ -270,7 +287,7 @@ const ContactHome = () => {
                         {/*<h2 className="text-4xl font-bold mb-2 text-center">What Our Clients Say</h2>*/}
                         <TestiCarousel />
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     );
