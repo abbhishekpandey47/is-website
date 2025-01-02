@@ -35,7 +35,7 @@ const serviceArr = [
   {
     id: "3",
     head: "Growth Engineering",
-    para: "We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch."
+    para: "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch."
   }
 
 ]

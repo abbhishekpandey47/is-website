@@ -8,10 +8,10 @@ gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(CustomEase);
 
 const infraArr = [
-    "Content by engineers with product experience",
+    "Best technical content writter trained with hands-on product experience",
     "Accurate, in-depth tech documentation",
-    "Full service from ideation to SEO",
-    "Specialized SEO for DevOps, Kubernetes, Cloud",
+    "Full service from key word research to SEO",
+    "Specialized developer focused content for AI/ML, Kubernetes, Cloud startups",
     "Explainer videos ensuring technical precision",
 ];
 

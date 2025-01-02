@@ -60,7 +60,7 @@ const TermsAndServices = () => {
       </p>
 
       <p className="mt-6 text-base sm:text-lg quicksand-semibold">
-        At Infrasity, we’re committed to supporting SaaS and DevTools companies in driving growth through expertly crafted content that resonates with developer audiences.
+      At Infrasity, we drive growth for DevTools and early stage SaaS startups with impactful technical content marketing, driving visibility and engagement across key developer platforms.
       </p>
     </div>
   );
