@@ -6,7 +6,7 @@ import Link from 'next/link';
 const collapseContent = [
     {
         head: "What services does Infrasity offer?",
-        content: "Infrasity offers a comprehensive range of content services designed for tech-focused companies. This includes technical articles, case studies, whitepapers, SEO-driven blogs, product documentation, and video content creation. We specialize in creating high-quality, organic content that resonates with the desired audience, helping startups stand out and drive growth.",
+        content: "Infrasity offers a comprehensive range of technical content writing services designed for engineering startups. This includes technical articles, case studies, whitepapers, SEO-driven blogs, product documentation, and video content creation. We specialize in creating high-quality, organic content that resonates with the desired audience, helping startups stand out and drive growth.",
         opened: false
     },
     {
@@ -33,7 +33,7 @@ const collapseContent = [
                     onMouseLeave={(e) => e.target.style.textDecoration = 'none'}>Blog</a>
             </span><br />
             <span style={{ tabSize: 4 }}>
-                <a href="https://dev.to/infrasity" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}
+                <a href="https://dev.to/infrasity-learning" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}
                     onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
                     onMouseLeave={(e) => e.target.style.textDecoration = 'none'}>Dev.to</a>
             </span>
