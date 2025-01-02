@@ -1,22 +1,32 @@
 'use client';
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TestiCarousel from './TestiCarousel';
 import Link from 'next/link';
-import { useState } from 'react';
 import { message, Spin } from 'antd'; // Import Spin for loading indicator
 import AppContext from '@/context/Infracontext';
-import { useEffect, useState } from 'react';
 
+const CalendlyEmbed = () => {
+  const [windowWidth, setWindowWidth] = useState(null);
 
-const [windowWidth, setWindowWidth] = useState(null);
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
 
-useEffect(() => {
-setWindowWidth(window.innerWidth);
-}, []);
+  if (windowWidth === null) {
+    return null;
+  }
 
-if (windowWidth === null) {
-return null;
-}
+  return (
+    <iframe
+      width="100%"
+      height={windowWidth >= 1500 ? '600px' : '530px'}
+      className="shadow-lg"
+      src="https://calendly.com/meet-shan/30min?hide_event_type_details=1"
+      allowFullScreen
+    ></iframe>
+  );
+};
+
 
 const ContactHome = () => {
     const [contactMsg, setContactMsg] = useState({
@@ -145,13 +155,7 @@ const ContactHome = () => {
                             for DevRel, Go-To-Market strategies, and tech
                             content distribution for your product.
                         </p>
-                        <iframe
-                          width="100%"
-                          height={windowWidth >= 1500 ? '600px' : '530px'}
-                          className="shadow-lg"
-                          src="https://calendly.com/meet-shan/30min?hide_event_type_details=1" 
-                          allowfullscreen>
-                        </iframe>
+                        <CalendlyEmbed />
                         <p className="text-zinc-800 text-xs mt-4 text-center">
                             By signing up you agree to our{' '}
                             <a href="terms-of-services" className="text-blue-600 underline">
