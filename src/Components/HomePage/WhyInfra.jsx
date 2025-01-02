@@ -73,7 +73,7 @@ const WhyInfra = () => {
             <div className="relative addGrid2">
                 <div className="whyinfra"></div>
                 <div>
-                    <h2 className="text-white text-center max-xs:text-3xl text-[3em] quicksand-bold pt-10 whyInfraUpperHead">Why <span className="specialtext">Infrasity</span>?</h2>
+                    <h2 className="text-white text-center max-xs:text-3xl text-[3em] quicksand-bold pt-10 whyInfraUpperHead">Why Infrasity <span className="specialtext">is a leading B2B tech content marketing agency</span>?</h2>
                 </div>
                 <div className="flex justify-center whyInfraUpperHead">
                     <p className="text-center text-[wheat] pt-5 w-2/3 quicksand-semibold max-lg:w-3/4 max-xs:w-full max-xs:px-5">
