@@ -5,6 +5,18 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { message, Spin } from 'antd'; // Import Spin for loading indicator
 import AppContext from '@/context/Infracontext';
+import { useEffect, useState } from 'react';
+
+
+const [windowWidth, setWindowWidth] = useState(null);
+
+useEffect(() => {
+setWindowWidth(window.innerWidth);
+}, []);
+
+if (windowWidth === null) {
+return null;
+}
 
 const ContactHome = () => {
     const [contactMsg, setContactMsg] = useState({
@@ -135,7 +147,7 @@ const ContactHome = () => {
                         </p>
                         <iframe
                           width="100%"
-                          height={window.innerWidth >= 1500 ? '600px' : '530px'}
+                          height={windowWidth >= 1500 ? '600px' : '530px'}
                           className="shadow-lg"
                           src="https://calendly.com/meet-shan/30min?hide_event_type_details=1" 
                           allowfullscreen>
