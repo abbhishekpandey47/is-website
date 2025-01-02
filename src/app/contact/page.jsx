@@ -105,7 +105,7 @@ const ContactHome = () => {
                 }
             `}</style>
 
-            <Link href="/" className="cursor-pointer absolute pt-7 pl-10">
+            <Link href="/" className="cursor-pointer absolute pt-7 pl-7">
                 <img
                     className="w-40"
                     src="/logodata/infrasity_logo.png"
@@ -115,12 +115,12 @@ const ContactHome = () => {
 
             <div className="flex min-h-screen flex-wrap max-lg:flex-col">
                 {/* Left Section - Form */}
-                <div className="w-[45%] max-lg:w-full bg-white flex flex-col justify-center items-center max-sm:px-6 p-12">
+                <div className="w-[45%] max-lg:w-full bg-white flex flex-col justify-center items-center max-sm:px-6 pt-14">
                     <div className="w-full max-w-xl p-8 max-sm:px-0">
                     <h1 className="text-3xl font-bold mb-4 text-center text-black quicksand-bold">
                         Book a <span className="text-[#6c5be7]">FREE</span> Demo
                     </h1>
-                        <p className="text-zinc-800 text-center mb-8 quicksand-medium">
+                        <p className="text-zinc-800 text-center mb-4 quicksand-medium">
                             Looking for developer-focused tech content to
                             increase user signups for your product? Reach out at{' '}
                             <a
@@ -133,111 +133,13 @@ const ContactHome = () => {
                             for DevRel, Go-To-Market strategies, and tech
                             content distribution for your product.
                         </p>
-
-                        <form onSubmit={handleOnContactSend} className="space-y-4">
-                            <div className="flex space-x-4">
-                                <input
-                                    type="text"
-                                    placeholder="First Name"
-                                    className="w-1/2 p-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none"
-                                    onChange={(e) =>
-                                        setContactMsg({
-                                            ...contactMsg,
-                                            fname: e.target.value,
-                                        })
-                                    }
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Last Name"
-                                    className="w-1/2 p-3 border border-gray-300 rounded-md bg-white text-black focus:outline-none"
-                                    onChange={(e) =>
-                                        setContactMsg({
-                                            ...contactMsg,
-                                            lname: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
-                            <input
-                                type="text"
-                                placeholder="Company Name"
-                                className="w-full p-3 border border-gray-300 rounded-md bg-white text-black"
-                                onChange={(e) =>
-                                    setContactMsg({
-                                        ...contactMsg,
-                                        company: e.target.value,
-                                    })
-                                }
-                            />
-                            <input
-                                type="email"
-                                placeholder="Email Address"
-                                className="w-full p-3 border border-gray-300 rounded-md bg-white text-black"
-                                onChange={(e) =>
-                                    setContactMsg({
-                                        ...contactMsg,
-                                        email: e.target.value,
-                                    })
-                                }
-                            />
-                            <input
-                                type="text"
-                                placeholder="Country"
-                                className="w-full p-3 border border-gray-300 rounded-md bg-white text-black"
-                                onChange={(e) =>
-                                    setContactMsg({
-                                        ...contactMsg,
-                                        country: e.target.value,
-                                    })
-                                }
-                            />
-                            <div className="flex space-x-4">
-                                <input
-                                    type="text"
-                                    placeholder="+91"
-                                    className="w-[15%] p-3 border border-gray-300 rounded-md bg-white text-black"
-                                    onChange={(e) =>
-                                        setContactMsg({
-                                            ...contactMsg,
-                                            ccode: e.target.value,
-                                        })
-                                    }
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="0000000000"
-                                    className="w-[85%] p-3 border border-gray-300 rounded-md bg-white text-black"
-                                    onChange={(e) =>
-                                        setContactMsg({
-                                            ...contactMsg,
-                                            phone: e.target.value,
-                                        })
-                                    }
-                                />
-                            </div>
-                            <button
-                            type="submit"
-                            style={{
-                                width: '100%',
-                                backgroundColor: loading ? 'gray' : '#1E40AF', // bg-blue-600
-                                border: 'none',
-                                color: 'white',
-                                padding: '0.75rem', // p-3
-                                fontWeight: '600', // font-semibold
-                                borderRadius: '9999px', // rounded-full
-                                transition: 'background-color 0.2s', // transition duration-200
-                                outline: 'none', // focus:outline-none
-                                boxShadow: loading ? 'none' : '0 0 0 2px #1E40AF' // focus:ring-2 focus:ring-blue-600
-                            }}
-                            disabled={loading}
-                            onMouseEnter={(e) => e.target.style.backgroundColor = '#2563EB'} // hover:bg-btnprimaryhov
-                            onMouseLeave={(e) => e.target.style.backgroundColor = loading ? 'gray' : '#1E40AF'} // bg-blue-600
-                            >
-                            {loading ? <Spin size="small" /> : 'Continue'}
-                            </button>
-                        </form>
-
+                        <iframe
+                          width="100%"
+                          height={window.innerWidth >= 1500 ? '600px' : '530px'}
+                          className="shadow-lg"
+                          src="https://calendly.com/meet-shan/30min?hide_event_type_details=1" 
+                          allowfullscreen>
+                        </iframe>
                         <p className="text-zinc-800 text-xs mt-4 text-center">
                             By signing up you agree to our{' '}
                             <a href="terms-of-services" className="text-blue-600 underline">
@@ -273,19 +175,13 @@ const ContactHome = () => {
                                 <svg className="w-6 h-6 text-green-500 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M20 6L9 17l-5-5" />
                                 </svg>
-                                <p className="text-left">Content written by developers & Infrastructure engineers</p>
-                            </div>
-                            <div className="flex items-start space-x-2">
-                                <svg className="w-6 h-6 text-green-500 flex-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M20 6L9 17l-5-5" />
-                                </svg>
                                 <p className="text-left">Developer Relations Approach: Unified process for content research & analytics</p>
                             </div>
                         </div>
                     </div>
                     <hr className="border-t border-white opacity-50 mx-8 my-2" />
                     {/* Testimonials Section */}
-                    <div className="flex flex-col justify-center items-center h-1/2 max-pb-16">
+                    <div className="flex flex-col justify-center items-center h-1/2 max-pb-16 p-6">
                         {/*<h2 className="text-4xl font-bold mb-2 text-center">What Our Clients Say</h2>*/}
                         <TestiCarousel />
                     </div>
