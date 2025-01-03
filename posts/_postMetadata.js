@@ -11,10 +11,10 @@ let postMetaData = [
         metaDescription: "Master advanced UI design techniques and trends for user-friendly, immersive interfaces. Improve your design skills with expert tips."
     },
     {
-        title: "Driving Rapid Growth Through Strategic Content: A Case Study with Terrateam",
+        title: "How Infrasity assisted Terrateam, with 300% more traffic with organic tech content",
         metatitle: "How to write a case study for engineering company?",
         slug: "terrateam-case-study",
-        description: "This case study highlights how Infrasity helped Terrateam, a Netherlands-based startup, achieve rapid growth through strategic, high-impact technical content. By focusing on keyword research, SEO optimization, and developer-focused messaging, Infrasity increased Terrateam's traffic by 15% in just 14 days and boosted organic traffic by 13.8% over 90 days.",
+        description: "This case study highlights how Infrasity assisted Terrateam, a Netherlands-based startup, achieve rapid growth through strategic, high-impact organic technical content. By focusing on keyword research, SEO optimization, and infrastructure-focused approached content, Infrasity assisted Terrateam's traffic by 15% in just 14 days and boosted organic traffic by 13.8% over 90 days, Read Below for detail",
         ogImage: "/PostImages/terrateam-case-study/0.png",
         publishedOn: "2024-11-19",
         authorId: "author0001",
