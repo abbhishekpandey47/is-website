@@ -5,8 +5,6 @@ Netherland-based startup, achieve rapid growth through strategic,
 high-impact technical content. We at Infrasity focused on keyword
 research, SEO optimization, and developer-focused messaging. Terrateam witnessed a massive growth in clicks over the past 3 months is 6,530 clicks, which is approximately 81% growth.
 
-When Terrateam, a Netherlands-based startup specializing in automating Infrastructure as Code, partnered with Infrasity, they were looking to strengthen their online presence and better connect with DevOps and Infrastructure Engineers. While they had a foundation in place, there was an opportunity to refine their content strategy to attract more meaningful traffic and showcase their solutions effectively.
-
 Over three months, this collaboration delivered impressive results, driving 6,530 additional clicks and achieving an 81% increase in website traffic. Additionally, many of the targeted keywords ranked on the first page of SERPs, positioning Terrateam as a strong contender against established competitors like Env0 and Spacelift, who have had years of market presence.
 
 
@@ -25,12 +23,16 @@ We got an opportunity to partner with Terrateam, a Netherlands-based startup tha
 
 This timeline reflects how Infrasity’s involvement directly contributed to a consistent rise in organic traffic, starting in March 2024 and stabilizing at its peak by January 2025. Our dedication to writing, researching, and optimizing SEO-driven tech blogs resulted in notable improvements in both website and blog traffic.
 
-## Initial Hurdles
+## Scope of work was clear from the day1
 
-Terrateam faced a critical challenge in boosting its online visibility
-and user engagement. Their primary issue was the need to significantly
-increase website traffic and enhance the overall user experience through
-strategic content development that has the right match of keywords.
+Terrateam, being a lean and completely bootstrapped team, faced a critical challenge in boosting its online visibility and user engagement. While their internal team was focused on core engineering activities and building new features for their customers/prospect, it became evident that content strategy and development required specialized expertise.
+
+The need was twofold:
+- **Increase Website Traffic**: Drive meaningful traffic by targeting the right keywords.
+- **Enhance User Engagement**: Create content that resonated with DevOps engineers and aligned with Terrateam's business proposition.
+
+To address this, Terrateam decided to delegate technical content creation to a specialized partner like [Infrasity](https://infrasity.com) whose core business is to eassist early stage and incubated growth staged startups with organic technical content, ensuring Terrateam's internal team could concentrate on building and scaling their product while leveraging Infrasity's expertise to establish a solid digital presence.
+
 
 ## The Strategy
 
