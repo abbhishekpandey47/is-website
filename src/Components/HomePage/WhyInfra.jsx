@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(CustomEase);
 
 const infraArr = [
-    "Best technical content writter trained with hands-on product experience",
+    "Best technical content writer trained with hands-on product experience",
     "Accurate, in-depth tech documentation",
     "Full service from key word research to SEO",
     "Specialized developer focused content for AI/ML, Kubernetes, Cloud startups",
@@ -77,7 +77,7 @@ const WhyInfra = () => {
                 </div>
                 <div className="flex justify-center whyInfraUpperHead">
                     <p className="text-center text-[wheat] pt-5 w-2/3 quicksand-semibold max-lg:w-3/4 max-xs:w-full max-xs:px-5">
-                        Infrasity delivers technically accurate content crafted by engineers with real-world experience. We offer end-to-end services, including blogs, videos, and SEO, tailored to your industry. Our content brings depth and credibility, driving growth while freeing up your team.
+                    Infrasity delivers the best content marketing for tech businesses, crafted by engineers with real-world experience. We offer end-to-end services, including blogs, videos, and SEO, tailored to your industry. Our content brings depth and credibility, driving growth while freeing up your team.
                     </p>
                 </div>
             </div>

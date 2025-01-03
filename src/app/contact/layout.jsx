@@ -12,8 +12,8 @@ export const metadata = {
     canonical: './',
   },
   openGraph: {
-    title: "Technical Writing Services for SaaS Startups | Infrasity",
-    description: "Boost your SaaS growth with Infrasity, a B2B tech content marketing agency offering expert technical content writing services tailored for success.",
+    title: "Contact Us - Get in Touch with Infrasity",
+    description: "Reach out to Infrasity for inquiries, support, and business opportunities. We're here to assist with all your needs. Contact us today for quick assistance.",
     url: "",
     type: "website",
     images: [
@@ -21,7 +21,7 @@ export const metadata = {
         url: "https://www.infrasity.com/_next/image?url=%2Flogodata%2Finfrasity_logo.png&w=256&q=75",
         width: 1200,
         height: 630,
-        alt: "Infrasity - Technical Content Marketing for Cloud Companies",
+        alt: "Technical Writing Services for SaaS Startups | Infrasity",
       },
     ],
   },
