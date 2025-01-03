@@ -380,9 +380,9 @@ const page = () => {
     <div className='max-w-[1566px] mx-auto overflow-hidden'>
       <div className="pt-40 space-y-9 relative blogDiv">
         <div className="whyinfra"></div>
-        <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center"><h1 className="w-3/4 leading-[80px] max-sm:w-[95%] max-sm:leading-[69px] ">Video <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">Production</span></h1></div>
+        <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center"><h1 className="w-3/4 leading-[80px] max-sm:w-[95%] max-sm:leading-[69px] ">B2B Video Production for <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">Early-Stage Startups</span></h1></div>
 
-        <div className="text-center text-white quicksand-semibold flex justify-center"><p className="w-1/2 max-sm:w-[90%]">Your extended Developer Relations team to initiate conversations, increase user sign ups, and accelerate pipeline faster than ever before</p></div>
+        <div className="text-center text-white quicksand-semibold flex justify-center"><p className="w-1/2 max-sm:w-[90%]">Your extended Developer Relations team to initiate conversations, increase user sign ups, and accelerate pipeline faster than ever before with developer focused video, scripted and created by developers</p></div>
         <div className="flex justify-center"><Link href="/contact" className="btn bg-btnprimary hover:bg-btnprimaryhov text-white text-center relative z-[12px]">Get Started</Link></div>
       </div>
       <div className="flex justify-center pt-10 service1VideoItem">
