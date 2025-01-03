@@ -1,10 +1,10 @@
 export const metadata = {
-    title: 'Video Production | Infrasity',
-    description: 'Discover how Infrasity\'s Video Production services enhance your Developer Relations efforts by creating engaging content, increasing user sign-ups, and accelerating your pipeline efficiently.',
-    keywords: 'Infrasity, Video Production, Developer Relations, Content Creation, Marketing Strategies, User Sign-ups, Pipeline Acceleration, Video Marketing, Brand Engagement, Corporate Videos, Explainer Videos, Video Editing, Animation',
+    title: 'Best Video Production Company for Tech Videos | Infrasity',
+    description: 'Looking for top-notch video production? We specialize in tech video production, delivering engaging and professional content for all your needs.',
+    keywords: 'b2b video production, best video production company, saas video production, b2b video marketing agency, tech video production​, tech product videos​, tech video production agency, video tech productions​',
     openGraph: {
-        title: 'Video Production | Infrasity',
-        description: 'Learn how Infrasity\'s Video Production services support your Developer Relations team by creating compelling content, boosting user engagement, and accelerating your business pipeline.',
+        title: 'Best Video Production Company for Tech Videos | Infrasity',
+        description: 'Looking for top-notch video production? We specialize in tech video production, delivering engaging and professional content for all your needs.',
         url: '', 
         type: 'website',
         images: [
