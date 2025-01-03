@@ -10,11 +10,18 @@ When Terrateam, a Netherlands-based startup specializing in automating Infrastru
 Over three months, this collaboration delivered impressive results, driving 6,530 additional clicks and achieving an 81% increase in website traffic. Additionally, many of the targeted keywords ranked on the first page of SERPs, positioning Terrateam as a strong contender against established competitors like Env0 and Spacelift, who have had years of market presence.
 
 
-## Key Insights
+## Highlight of the engagement 
 
 We got an opportunity to partner with Terrateam, a Netherlands-based startup that automates Infrastructure as Code and integrates seamlessly with GitHub workflows. Using tools like Terraform, OpenTofu, CDKTF, and Terragrunt helps teams build, manage, and deploy infrastructure. Our collaboration led to steady traffic growth until April 2024. After a brief pause, we resumed the services workflow for Terrateam in September 2024, resulting in an organic traffic surge.
 
+- Startups often rely on **multiple vendors** for keyword research and content creation, leading to fragmented strategies and inefficiencies.
+- Infrasity eliminated this complexity by handling **everything in-house**, ensuring a cohesive strategy aligned with Terrateam’s goals.
+
+
 ![Organic Traffic Growth Timeline](/PostImages/terrateam-case-study/3.png)
+
+- **May–September 2024**: Organic traffic shows steady growth as the keyword-driven content strategy takes effect.
+- **January 2025**: Organic traffic peaks at **1,436 visits per month**, reflecting the success of Infrasity’s approach.
 
 This timeline reflects how Infrasity’s involvement directly contributed to a consistent rise in organic traffic, starting in March 2024 and stabilizing at its peak by January 2025. Our dedication to writing, researching, and optimizing SEO-driven tech blogs resulted in notable improvements in both website and blog traffic.
 
@@ -27,24 +34,37 @@ strategic content development that has the right match of keywords.
 
 ## The Strategy
 
-To begin with the task, we started by building a custom content calendar
-for Terrateam that highlighted the broader areas that were to be
-targeted by our Tech content writers. But before starting the Research
-and Content copy, both Terrateam and us at Infrasity discussed the
-audience persona. It was clear throughout the meetings that both DevOps
-and Infrastructure Engineers shall be the primary readers and
-contributors.
+When Terrateam partnered with Infrasity, we began by building a **custom content calendar** tailored to their audience and business goals. This calendar outlined broader content areas, actionable topics, and optimization opportunities. Before content creation, we collaborated closely with Terrateam to define the **primary audience persona**:
+- **DevOps Engineers** and **Infrastructure Engineers**, who would serve as both readers and contributors.
 
-Before guiding on directly to the messaging, we at Infrasity thought
-about the focus areas for Engineers. From the first go, it was clear to
-do a bit of research on what all Engineers are looking for in content.
-Keywords like "RBAC with Terraform" or "Terraform cloud alternatives"
-were mostly searched as they solve real problems engineers face.
+### Understanding Audience Needs
+To create impactful content, we focused on understanding what engineers actively seek. Through **extensive keyword research**, we identified topics that aligned with their pain points using the following criteria:
+- **Monthly Search Volume (MSV)**: To ensure keywords had a significant search demand.
+- **Ranking Difficulty**: To target keywords with achievable search visibility.
+- **Technical Relevance**: To choose topics that directly solve real-world engineering challenges.
 
-After further brainstorming, we started the compilation process. Our
-focus was to write every blog piece while keeping DevOps engineers as
-the primary readers. Throughout the content creation process, we never
-lost focus on both quality and narration.
+Top-performing keywords included:
+- **"RBAC with Terraform"**
+- **"Terraform cloud alternatives"**
+
+These keywords were selected to address the immediate challenges faced by Terrateam's target audience while maximizing search intent and engagement.
+
+---
+
+### The Content Creation Process
+
+Our content strategy centered around creating **high-quality, actionable, and technically sound content** that resonated with the target audience.
+
+#### Key Highlights:
+1. **Pain Points Addressed**:
+   - **Managing Terraform State**: Simplified solutions for a common DevOps challenge.
+   - **Setting up RBAC**: Step-by-step tutorials addressing access control issues.
+
+2. **Tutorials and Guides**:
+   - Developed **easy-to-follow tutorials** to help engineers implement practical solutions efficiently.
+
+3. **Showcasing Terrateam’s Value**:
+   - Each blog highlighted how Terrateam’s tools simplify the workflows of DevOps engineers, with real-world use cases and product benefits.
 
 The blogs that were written by us talked about the biggest pain points
 such as **Managing terraform state or setting up RBAC**. Apart from
