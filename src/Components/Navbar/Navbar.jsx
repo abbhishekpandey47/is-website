@@ -261,7 +261,7 @@ const Navbar = () => {
                     aria-label="Infrasity Home"
                 >
                     <div className="flex flex-col my-auto items-start">
-                        <div className="w-full flex justify-start">
+                        {/*<div className="w-full flex justify-start">
                             <Image
                                 width={200}
                                 height={200}
@@ -270,14 +270,13 @@ const Navbar = () => {
                                 className="min-[408px]:hidden block w-[60%] "
                                 alt="Infrasity Logo"
                             />
-                        </div>
+                        </div>*/}                           
                         <div>
                             <Image
                                 loading='lazy'
                                 width={200}
                                 height={200}
                                 src="/logodata/infrasity_logo.png"
-                                className="max-[408px]:hidden"
                                 alt="Infrasity Logo"
                             />
                         </div>
@@ -297,7 +296,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link href="/contact" onClick={(() => { checkVisitPage("/contact") })} className="btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-semibold" >Book a Free Demo</Link>
+                    <Link href="/contact" onClick={(() => { checkVisitPage("/contact") })} className="hidden md:inline-flex btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-semibold" >Book a Free Demo</Link>
                 </div>
             </div>
 

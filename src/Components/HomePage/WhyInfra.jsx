@@ -99,11 +99,12 @@ const WhyInfra = () => {
                             </div>
                             <div className="flex flex-col gap-6">
                                 {infraArr.map((item, index) => (
-                                    <div key={index} className="flex gap-5 items-center">
+                                    <div key={index} className="grid grid-cols-[auto_1fr] gap-5 items-center">
                                         <div>
                                             <img
                                                 src="/svgPatterns/tick.svg"
                                                 alt="Bullet point icon"
+                                                className="w-[29px] h-[28px]"
                                             />
                                         </div>
                                         <p className="text-white max-sm:text-sm text-opacity-50 quicksand-semibold">{item}</p>
