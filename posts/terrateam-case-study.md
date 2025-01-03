@@ -11,7 +11,7 @@ organic traffic by 13.8%.
 
 We got an opportunity to partner with Terrateam, a Netherlands-based startup that automates Infrastructure as Code and integrates seamlessly with GitHub workflows. Using tools like Terraform, OpenTofu, CDKTF, and Terragrunt helps teams build, manage, and deploy infrastructure. Our collaboration led to steady traffic growth until April 2024. After a brief pause, we resumed the services workflow for Terrateam in September 2024, resulting in an organic traffic surge.
 
-![terrateam case study](/PostImages/terrateam-case-study/3.png)
+![Organic Traffic Growth Timeline](/PostImages/terrateam-case-study/3.png)
 
 This timeline reflects how Infrasity’s involvement directly contributed to a consistent rise in organic traffic, starting in March 2024 and stabilizing at its peak by January 2025. Our dedication to writing, researching, and optimizing SEO-driven tech blogs resulted in notable improvements in both website and blog traffic.
 
@@ -95,7 +95,7 @@ metrics.
 
 Within just 14 days, Terrateam's site experienced a 15% increase in traffic. Over the last 90 days, organic traffic surged by 405%, as highlighted in the performance metrics. The total clicks rose from 8.07k (January to March) to 14.6k (September to November), and impressions grew from 279k to 656k during the same period.
 
-![terrateam case study](/PostImages/terrateam-case-study/2.png)
+![Baseline vs. Post-Infrasity Performance Metrics](/PostImages/terrateam-case-study/2.png)
 
 This remarkable growth is a direct result of our targeted SEO efforts and developer-focused technical content. From technical blogs to how-to guides and explainer videos, every piece of content was crafted with a clear focus on engaging the right audience and solving real-world challenges.
 
