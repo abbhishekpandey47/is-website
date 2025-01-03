@@ -3,9 +3,7 @@
 This case study highlights how Infrasity helped Terrateam, a
 Netherland-based startup, achieve rapid growth through strategic,
 high-impact technical content. We at Infrasity focused on keyword
-research, SEO optimization, and developer-focused messaging. Terrateam
-witnessed website traffic growth by 405% in just 90 days and boosted
-organic traffic by 13.8%.
+research, SEO optimization, and developer-focused messaging. Terrateam witnessed a massive growth in clicks over the past 3 months is 6,530 clicks, which is approximately 81% growth.
 
 ## Key Insights
 
