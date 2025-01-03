@@ -45,6 +45,8 @@ To create impactful content, we focused on understanding what engineers actively
 - **Ranking Difficulty**: To target keywords with achievable search visibility.
 - **Technical Relevance**: To choose topics that directly solve real-world engineering challenges.
 
+![terrateam case study](/PostImages/terrateam-case-study/4.jpg)
+
 Top-performing keywords included:
 - **"RBAC with Terraform"**
 - **"Terraform cloud alternatives"**
