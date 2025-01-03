@@ -21,6 +21,7 @@
     "antd": "^5.21.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "crisp-sdk-web": "^1.0.25",
     "daisyui": "^4.12.10",
     "framer-motion": "^11.11.8",
     "gray-matter": "^4.0.3",

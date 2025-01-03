@@ -8,6 +8,7 @@ import { Appwrap } from "@/context";
 import { Loader } from "@/Components/Loader";
 import { Analytics } from '@vercel/analytics/react'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import dynamic from 'next/dynamic'
 
 export const metadata = {
   title: "Technical Writing Services for SaaS Startups | Infrasity",
@@ -36,6 +37,10 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const CrispWithNoSSR = dynamic(
+    () => import('../Components/chatbot')
+  )
+
   return (
     <html lang="en">
       <GoogleAnalytics gaId="G-G0BTN1FRWY"/>
@@ -44,6 +49,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet" />
       </Head>
+      <CrispWithNoSSR />
       <body
         className={`antialiased`}
       >
