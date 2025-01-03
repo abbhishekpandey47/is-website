@@ -432,7 +432,7 @@ const page = () => {
       <div className="relative bg-[url('https://cdn.prod.website-files.com/62fe4c0cf9e612b304ecd08b/662837ec30851f0543c18f14_Grid3.svg')]  top-10">
         <div className="flex justify-center w-full pt-32 flex-col gap-10">
           <div><h1 className='text-center text-white text-7xl quicksand-bold max-sm:text-[3.5rem]'>Editorials <span className='relative bg-gradient-to-br from-[#3c00e2] to-[#6530fb] bg-clip-text text-transparent after:content-[""] after:w-8 after:h-8 after:absolute after:top-2 after:right-[-20px] after:bg-[url("https://assets-global.website-files.com/63ea91a878b2a06196ffc825/6574480f9f60d7965d70b4b0_v2_highlight-image.svg")] after:bg-no-repeat after:bg-contain '>and Podcasts</span></h1></div>
-          <div className='flex justify-center'><p className='text-center text-white quicksand-light w-1/2 max-md:w-3/4 max-sm:w-4/5'>Our in-house engineers produce high-quality, technically detailed videos that delve into the nuanced use cases of your products. These are not just overviews but instructional guides that demonstrate how your products solve real-world infrastructure, security or data related problems.</p></div>
+          <div className='flex justify-center'><p className='text-center text-white quicksand-light w-1/2 max-md:w-3/4 max-sm:w-4/5'>Our in-house engineers specialize in SaaS video production, creating high-quality, technically detailed videos that delve into the nuanced use cases of your products. These are not just overviews but instructional guides that demonstrate how your products solve real-world infrastructure, security, or data-related problems.</p></div>
         </div>
       </div>
       <div className='w-full flex justify-center pt-20 max-md:pt-28 text-white'>
