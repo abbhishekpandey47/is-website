@@ -2,9 +2,9 @@ import Navbar from "@/Components/Navbar/Navbar";
 import Footer from "@/Components/HomePage/Footer";
 
 export const metadata = {
-  title: "Technical Writing Services for SaaS Startups | Infrasity",
-  description: "Boost your SaaS growth with Infrasity, a B2B tech content marketing agency offering expert technical content writing services tailored for success.",
-  keywords: "Technical Writing Services, technical content writer​, technical content marketing​,tech content marketing,content marketing for tech companies,developer relations, devrel service, technical content writing​,content marketing for tech businesses,b2b tech content marketing agency,technical content writing services​",
+  title: "Contact Us - Get in Touch with Infrasity",
+  description: "Reach out to Infrasity for inquiries, support, and business opportunities. We're here to assist with all your needs. Contact us today for quick assistance.",
+  keywords: "",
   name: "viewport",
   content: "width=device-width, initial-scale=1.0",
   metadataBase: `https://www.infrasity.com`,

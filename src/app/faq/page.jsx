@@ -6,7 +6,7 @@ import AppContext from '@/context/Infracontext'
 
 const collapseContent = [
     {
-        head: "does Infrasity offer?",
+        head: "What does Infrasity offer?",
         content: "Infrasity specializes in content marketing for tech businesses which includes technical articles, case studies, whitepapers, SEO-driven blogs, product documentation, and video content creation. We specialize in creating high-quality, organic content that resonates with the desired audience, helping startups stand out and drive growth.",
         opened: false
     },

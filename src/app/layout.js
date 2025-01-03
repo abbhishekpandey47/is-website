@@ -26,7 +26,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "",
+        url: "https://www.infrasity.com/_next/image?url=%2Flogodata%2Finfrasity_logo.png&w=256&q=75",
         width: 1200,
         height: 630,
         alt: "Infrasity - Technical Content Marketing for Cloud Companies",

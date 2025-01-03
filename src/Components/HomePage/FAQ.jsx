@@ -27,7 +27,7 @@ const collapseContent = [
     {
         head: "Can I see some examples of Infrasity's work?",
         content: (<div>Yes, definitely! We proudly showcase our work on various platforms. You can find our technical write-ups and articles on the Infrasity website, as well as on popular platforms like dev.to and Medium. For video content, visit our YouTube channel to view a range of tutorials and presentations. Additionally, our IAC repositories and product templates are available on our GitHub page, demonstrating our expertise in practical applications.<br></br>
-            <span style={{ tabSize: 4 }}>
+            {/* <span style={{ tabSize: 4 }}>
                 <a href="https://infrasity.com/blog" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}
                     onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
                     onMouseLeave={(e) => e.target.style.textDecoration = 'none'}>Blog</a>
@@ -36,7 +36,7 @@ const collapseContent = [
                 <a href="https://dev.to/infrasity-learning" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}
                     onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
                     onMouseLeave={(e) => e.target.style.textDecoration = 'none'}>Dev.to</a>
-            </span>
+            </span> */}
         </div>),
         opened: false
     },
