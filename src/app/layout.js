@@ -10,9 +10,9 @@ import { Analytics } from '@vercel/analytics/react'
 import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata = {
-  title: "Content Marketing Services for SaaS Companies | infrasity",
-  description: "Explore the best SaaS content marketing agencies, including Infrasity, know for driving growth through tailored content strategies for early stage startups.",
-  keywords: "Best SaaS Content Marketing Agencies, B2B SaaS content marketing agency, Technical Marketing Content for Software Startups, Content Marketing Strategy for Technology, A Complete Introduction to Technical Marketing, Content Marketing for Tech Companies, SaaS Blog Writing Services, Content Marketing for Tech Startups",
+  title: "Technical Writing Services for SaaS Startups | Infrasity",
+  description: "Boost your SaaS growth with Infrasity, a B2B tech content marketing agency offering expert technical content writing services tailored for success.",
+  keywords: "Technical Writing Services, technical content writer​, technical content marketing​,tech content marketing,content marketing for tech companies,developer relations, devrel service, technical content writing​,content marketing for tech businesses,b2b tech content marketing agency,technical content writing services​",
   name: "viewport",
   content: "width=device-width, initial-scale=1.0",
   metadataBase: `https://www.infrasity.com`,
