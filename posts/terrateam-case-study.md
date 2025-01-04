@@ -33,7 +33,7 @@ The need was twofold:
 - **Increase Website Traffic**: Drive meaningful traffic by targeting the right keywords.
 - **Enhance User Engagement**: Create content that resonated with DevOps engineers and aligned with Terrateam's business proposition.
 
-To address this, Terrateam decided to delegate technical content creation to a specialized partner like [Infrasity](https://infrasity.com) whose core business is to eassist early stage and incubated growth staged startups with organic technical content, ensuring Terrateam's internal team could concentrate on building and scaling their product while leveraging Infrasity's expertise to establish a solid digital presence.
+To address this, Terrateam decided to delegate technical content creation to a specialized partner like [Infrasity](https://infrasity.com) whose core business is to assist early stage and incubated growth staged startups with organic technical content, ensuring Terrateam's internal team could concentrate on building and scaling their product while leveraging Infrasity's expertise to establish a solid digital presence.
 
 
 ## The Strategy
