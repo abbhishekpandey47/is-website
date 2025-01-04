@@ -7,7 +7,7 @@ research, SEO optimization, and developer-focused messaging. Terrateam witnessed
 
 Over three months, this collaboration delivered impressive results, driving 6,530 additional clicks and achieving an 81% increase in website traffic. Additionally, many of the targeted keywords ranked on the first page of SERPs, positioning Terrateam as a strong contender against established competitors like Env0 and Spacelift, who have had years of market presence.
 
-![With & WithoutInfrasity](/PostImages/terrateam-case-study/6.png)
+![With & WithoutInfrasity](/PostImages/terrateam-case-study/7.png)
 
 
 ## Highlight of the engagement 
@@ -47,7 +47,7 @@ To create impactful content, we focused on understanding what engineers actively
 - **Ranking Difficulty**: To target keywords with achievable search visibility.
 - **Technical Relevance**: To choose topics that directly solve real-world engineering challenges.
 
-![terrateam case study](/PostImages/terrateam-case-study/4.jpg)
+![terrateam case study](/PostImages/terrateam-case-study/4.png)
 
 Top-performing keywords included:
 - **"RBAC with Terraform"**
