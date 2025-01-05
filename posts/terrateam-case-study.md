@@ -120,6 +120,17 @@ This strategy enhanced their website structure and improved user
 experience, resulting in increased web traffic and better engagement
 metrics.
 
+## SERP Outcome
+
+A key milestone in our collaboration with Terrateam was achieving **first-page rankings for 80% of the targeted keywords** on SERPs. By focusing on high-impact keywords such as **"Terraform Cache"**, **"Terraform State Management"**, and other essential Infrastructure as Code topics, we positioned Terrateam as a competitive force against established players.
+
+### Key Achievements:
+
+- Blogs like **"What is Global Caching in Terraform"** and **"How to Migrate Terraform State Between Backends"** consistently appeared on the first page of search results.
+- A keyword strategy tailored to Terrateam’s USP, such as caching and efficient state management in Terraform workflows, resonated with their core audience of **DevOps and Infrastructure Engineers**.
+- This success led to a measurable **81% growth in traffic**, generating **6,530 additional clicks** over three months.
+
+
 ## The Outcome
 
 Within just 14 days, Terrateam's site experienced a 15% increase in traffic. Over the last 90 days, organic traffic surged by 405%, as highlighted in the performance metrics. The total clicks rose from 8.07k (January to March) to 14.6k (September to November), and impressions grew from 279k to 656k during the same period.
