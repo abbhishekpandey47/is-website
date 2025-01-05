@@ -11,6 +11,17 @@ let postMetaData = [
         metaDescription: "Master advanced UI design techniques and trends for user-friendly, immersive interfaces. Improve your design skills with expert tips."
     },
     {
+        title: "How to Create a Powerful Product Document",
+        metatitle: "What is a Product Requirements Document (PRD)?",
+        slug: "how-to-create-a-powerful-product-document",
+        description: "Learn how to craft a product requirements document (PRD) that aligns teams and guides the product development process. This comprehensive guide covers key components, best practices, tools, and real-world examples for creating effective PRDs.",
+        ogImage: "/PostImages/how-to-create-a-powerful-product-document/image1.jpg",
+        publishedOn: "2025-01-05",
+        authorId: "author0001",
+        category: "Tutorials",
+        metaDescription: "Learn how to create a product requirements document (PRD) that defines product goals, features, and release criteria. This guide covers key components, tools, and practical tips to align teams and ensure a smooth development process."
+    },
+    {
         title: "How Infrasity assisted Terrateam, with 300% more traffic with organic tech content",
         metatitle: "How to write a case study for engineering company?",
         slug: "terrateam-case-study",
