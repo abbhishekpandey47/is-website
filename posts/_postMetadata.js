@@ -352,7 +352,18 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "SaaS growth with an optimized conversion funnel. Learn actionable strategies to drive leads, improve customer onboarding, and increase retention in this comprehensive guide."
     },
-    
+
+    {
+        title: "Master Terraform Docs: A Guide to Effective Documentation",
+        metatitle: "Master Terraform Docs: A Guide to Effective Documentation",
+        slug: "master-terraform-docs:-a-guide-to-effective-documentation",
+        description: "Learn how a SaaS conversion funnel works to attract, engage, and convert leads into loyal customers. Discover key strategies to optimize your funnel.",
+        ogImage: "/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/0.png",
+        publishedOn: "2025-1-06",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "SaaS growth with an optimized conversion funnel. Learn actionable strategies to drive leads, improve customer onboarding, and increase retention in this comprehensive guide."
+    },
 ];
 
 const sorted = () => {
