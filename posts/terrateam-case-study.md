@@ -72,6 +72,8 @@ Our content strategy centered around creating **high-quality, actionable, and te
 3. **Showcasing Terrateam’s Value**:
    - Each blog highlighted how Terrateam’s tools simplify the workflows of DevOps engineers, with real-world use cases and product benefits.
 
+![terrateam case study](/PostImages/terrateam-case-study/5.png)
+
 The blogs that were written by us talked about the biggest pain points
 such as **Managing terraform state or setting up RBAC**. Apart from
 regular easy-to-understand write-ups, the other things that we
