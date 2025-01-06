@@ -1,4 +1,6 @@
-# ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcI71fUCQTNWj-sSje8s53Bmi9E5ms_uwAK0VtqJ38eEY_BOF1_ORywIgan5X1Xcuc1KisJbz4bd00n5ldnfboxTuFVqu0QRQEP9M6SCjloWiN3DSLxSWcplFV5giBA5wyfRc78JQ?key=mcnKFZrlCjYZQuGZVAZqg3iz)Master Terraform Docs: A Guide to Effective Documentation
+![](/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/0.png)
+
+## Master Terraform Docs: A Guide to Effective Documentation
 
 Want to improve your Terraform module documentation? This guide explains how to use terraform-docs to create clear and updated documentation automatically. It covers how to install the tool, set it up, and use it within your CI/CD pipelines as well.
 
@@ -12,8 +14,8 @@ Want to improve your Terraform module documentation? This guide explains how to 
     
 
 ## What is Terraform-docs and How Does It Help?
+![](/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/1.png)
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe_iozzM_2m6CMLPcU-_Mgoyy3EZWpmhQ5Gg7QF1Zd_cH1c6lWZhTZI8f1zRed0DdllKEBXESpABcxKvk3f9F10eMTcVxG1X8N2cVMkRTWYTB-crzjrMDMxtIEcC4wtdIMUJlO9jg?key=mcnKFZrlCjYZQuGZVAZqg3iz)
 
 Terraform-docs is a tool that automatically generates documentation for your Terraform modules, saving you the time and effort of creating it on your own. It makes sure that your modules are clearly documented and easy to understand without any extra work from the Developer’s end.
 
@@ -24,8 +26,8 @@ By using terraform-docs, you can focus on building and deploying infrastructure 
 Now, keeping your documentation up-to-date is an important task for all DevOps or Infrastructure engineers. As projects scale, clear and accurate documentation helps everyone in the team to stay aligned, minimizing errors and misconfigurations. Terraform-docs simplifies this process by keeping your documentation synced with code changes, making it a valuable tool for anyone working with Terraform.
 
 ## How to Install Terraform-docs?
+![](/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/2.png)
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdQgTwrkxZ5_jN9wlNKNwy1fB0GyJ3Qikm7Y1RfhEEth6qd_5BqQvqW0Y8r7i6RlCUNavHpxgIWYvuCFjR2wTSfJPGOtX-yfWr1VeIg986v_qJz8vZMmiku_hpXyi1KQoPHxLZ6fg?key=mcnKFZrlCjYZQuGZVAZqg3iz)
 
 Installing terraform-docs is simple and works across different operating systems. Whether you use macOS, Windows, or Docker, there’s an option that fits your setup.
 
@@ -90,16 +92,15 @@ terraform-docs /module/path  
 This creates markdown files with all the details about your Terraform modules. This setup ensures your documentation is always clear, complete, and easy for your team to follow.
 
 ## What Formats Does Terraform-docs Support?
+![](/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/3.png)
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdrvooy8CvdbnuVJZDDbiNM9F2NlpWYVOvgaIb4brab-MGG0FCw6Jy9IdsGXtDyRLhDqF6qZXRP_PmLMb6uuOaj2M8PNnW0hMUHE6LNEjzrK5LCSxZLEcauj3oD05poPaohjAJi?key=mcnKFZrlCjYZQuGZVAZqg3iz)
 
 Terraform-docs supports multiple output formats, including Markdown and HTML. Markdown is the most commonly used format, as it clearly organizes inputs and outputs. You can customize Markdown tables by choosing which sections to show or hide, tailoring the documentation to your needs.
 
 You can also include headers and footers from specific files to align the documentation with your project’s style. If the output.file option isn’t enabled, you can redirect the output to a file manually, giving you full control over how and where the documentation is saved.
 
 ## Customizing Generated Documentation
-
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfw1SLD2LgVLRcvgYQSqCgrlHLU6Zjze_lL9SS8Kh635DJil-q2HZt0SuWd2Np_ZtKE-2IoEIRaNG1mRgLOS2dTanoFz6L8Pw7Tj81w1C2i-XEOj1Bk5x2lOBsZnSCuXsBxMeIS?key=mcnKFZrlCjYZQuGZVAZqg3iz)
+![](/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/4.png)
 
 With terraform-docs, you can easily customize your documentation by defining which sections to show or hide in the configuration file. This makes sure that the documentation focuses on the most relevant details.
 
