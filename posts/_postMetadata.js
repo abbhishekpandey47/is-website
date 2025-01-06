@@ -346,7 +346,7 @@ let postMetaData = [
         metatitle: "Mastering Topic Clusters: Boost Your SEO Strategy in 5 Steps",
         slug: "Mastering-Topic-Clusters-:-Boost-Your-SEO-Strategy-in-5-Steps",
         description: "Learn how a SaaS conversion funnel works to attract, engage, and convert leads into loyal customers. Discover key strategies to optimize your funnel.",
-        ogImage: "/PostImages/Mastering-Topic-Clusters:-Boost-Your-SEO-Strategy-in-5-Steps/0.jpg",
+        ogImage: "/PostImages/Mastering-Topic-Clusters:-Boost-Your-SEO-Strategy-in-5-Steps/0.png",
         publishedOn: "2025-1-06",
         authorId: "author0001",
         category: "Informational",
