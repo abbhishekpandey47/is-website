@@ -11,7 +11,7 @@ let postMetaData = [
         metaDescription: "Master advanced UI design techniques and trends for user-friendly, immersive interfaces. Improve your design skills with expert tips."
     },
     {
-        title: "How to Create a Powerful Product Document(PRD)",
+        title: "How to Create a Product Requirements Document(PRD)",
         metatitle: "What is a Product Requirements Document (PRD)?",
         slug: "how-to-create-a-powerful-product-document",
         description: "Learn how to craft a product requirements document (PRD) that aligns teams and guides the product development process. This comprehensive guide covers key components, best practices, tools, and real-world examples for creating effective PRDs.",
