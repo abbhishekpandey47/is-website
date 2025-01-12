@@ -364,6 +364,18 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "SaaS growth with an optimized conversion funnel. Learn actionable strategies to drive leads, improve customer onboarding, and increase retention in this comprehensive guide."
     },
+
+    {
+      title: "Transforming Middleware's Content Strategy for Greater Impact",
+      metatitle: "Case Study: Transforming Middleware’s Content Strategy for Greater Impact",
+      slug: "middleware-case-study",
+      description: "Learn how Infrasity collaborated with Middleware to transform their content strategy, boosting SEO scores, enhancing user engagement, and driving traffic through technically accurate and developer-focused content.",
+      ogImage: "/PostImages/middleware-case-study/0.png",
+      publishedOn: "2025-1-12",
+      authorId: "author0001",
+      category: "Case Studies",
+      metaDescription: "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions."
+  },
 ];
 
 const sorted = () => {
