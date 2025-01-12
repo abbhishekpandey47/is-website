@@ -26,8 +26,7 @@ import { responsiveArray } from 'antd/es/_util/responsiveObserver';
 let tabs = [
     { id: "allCategories", label: "All Categories" },
     { id: "Informational", label: "Informational" },
-    { id: "Tutorials", label: "Tutorials" },
-    { id: "Case Studies", label: "Case Studies" },
+    { id: "Tutorials", label: "Tutorials" }
 ];
 
 const TabDiv = React.memo(({ activeTab, setActiveTab }) => (
@@ -173,7 +172,7 @@ const page = () => {
     useEffect(() => {
         let currTabArr = [];
         if (activeTab === "allCategories") {
-            currTabArr = ["Informational", "Tutorials", "Case Studies"]
+            currTabArr = ["Informational", "Tutorials"]
         } else {
             currTabArr = [activeTab];
         }
