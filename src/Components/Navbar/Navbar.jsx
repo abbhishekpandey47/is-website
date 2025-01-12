@@ -213,6 +213,16 @@ const Navbar = () => {
                                     </Link>
                                 </MenuItem>
                                 <MenuItem>
+                                    <Link
+                                        onClick={(() => { checkVisitPage("/case-studies") })}
+                                        href="/case-studies"
+                                        className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                        target={"/blog".includes("http") ? '_blank' : ""}
+                                    >
+                                        {"Case Studies"}
+                                    </Link>
+                                </MenuItem>
+                                <MenuItem>
                                     <p
                                         className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
                                     >
@@ -289,6 +299,7 @@ const Navbar = () => {
                             <GivenMenuBar head={"Products"} menuLinks={menuLinksArrProducts} setProgress={setProgress} curPage={curPage} setCurPage={setCurPage} />
                         </li>
                         <li><Link href="/blog" onClick={(() => { checkVisitPage("/blog") })}>Blog</Link></li>
+                        <li><Link href="/blog" onClick={(() => { checkVisitPage("/case-studies") })}>Case Studies</Link></li>
                         <li className='flex justify-center items-center'>
                             <GivenMenuBar head={"Services"} menuLinks={menuLinksArrServices} setProgress={setProgress} curPage={curPage} setCurPage={setCurPage} />
                         </li>

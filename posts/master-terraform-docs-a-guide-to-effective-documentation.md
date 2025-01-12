@@ -1,4 +1,4 @@
-![](/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/0.png)
+![](/PostImages/master-terraform-docs-a-guide-to-effective-documentation/0.png)
 
 ## Master Terraform Docs: A Guide to Effective Documentation
 
@@ -14,7 +14,7 @@ Want to improve your Terraform module documentation? This guide explains how to 
     
 
 ## What is Terraform-docs and How Does It Help?
-![](/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/1.png)
+![](/PostImages/master-terraform-docs-a-guide-to-effective-documentation/1.png)
 
 
 Terraform-docs is a tool that automatically generates documentation for your Terraform modules, saving you the time and effort of creating it on your own. It makes sure that your modules are clearly documented and easy to understand without any extra work from the Developer’s end.
@@ -26,7 +26,7 @@ By using terraform-docs, you can focus on building and deploying infrastructure 
 Now, keeping your documentation up-to-date is an important task for all DevOps or Infrastructure engineers. As projects scale, clear and accurate documentation helps everyone in the team to stay aligned, minimizing errors and misconfigurations. Terraform-docs simplifies this process by keeping your documentation synced with code changes, making it a valuable tool for anyone working with Terraform.
 
 ## How to Install Terraform-docs?
-![](/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/2.png)
+![](/PostImages/master-terraform-docs-a-guide-to-effective-documentation/2.png)
 
 
 Installing terraform-docs is simple and works across different operating systems. Whether you use macOS, Windows, or Docker, there’s an option that fits your setup.
@@ -92,7 +92,7 @@ terraform-docs /module/path  
 This creates markdown files with all the details about your Terraform modules. This setup ensures your documentation is always clear, complete, and easy for your team to follow.
 
 ## What Formats Does Terraform-docs Support?
-![](/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/3.png)
+![](/PostImages/master-terraform-docs-a-guide-to-effective-documentation/3.png)
 
 
 Terraform-docs supports multiple output formats, including Markdown and HTML. Markdown is the most commonly used format, as it clearly organizes inputs and outputs. You can customize Markdown tables by choosing which sections to show or hide, tailoring the documentation to your needs.
@@ -100,7 +100,7 @@ Terraform-docs supports multiple output formats, including Markdown and HTML. Ma
 You can also include headers and footers from specific files to align the documentation with your project’s style. If the output.file option isn’t enabled, you can redirect the output to a file manually, giving you full control over how and where the documentation is saved.
 
 ## Customizing Generated Documentation
-![](/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/4.png)
+![](/PostImages/master-terraform-docs-a-guide-to-effective-documentation/4.png)
 
 With terraform-docs, you can easily customize your documentation by defining which sections to show or hide in the configuration file. This makes sure that the documentation focuses on the most relevant details.
 
