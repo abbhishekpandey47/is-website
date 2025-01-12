@@ -344,7 +344,7 @@ let postMetaData = [
     {
         title: "Mastering Topic Clusters: Boost Your SEO Strategy in 5 Steps",
         metatitle: "Mastering Topic Clusters: Boost Your SEO Strategy in 5 Steps",
-        slug: "mastering-topic-lusters-boost-your-seo-strategy-in-5-steps",
+        slug: "mastering-topic-clusters-boost-your-seo-strategy-in-5-steps",
         description: "Learn how a SaaS conversion funnel works to attract, engage, and convert leads into loyal customers. Discover key strategies to optimize your funnel.",
         ogImage: "/PostImages/Mastering-Topic-Clusters-Boost-Your-SEO-Strategy-in-5-Steps/0.png",
         publishedOn: "2025-1-06",
@@ -356,9 +356,9 @@ let postMetaData = [
     {
         title: "Master Terraform Docs: A Guide to Effective Documentation",
         metatitle: "Master Terraform Docs: A Guide to Effective Documentation",
-        slug: "master-terraform-docs:-a-guide-to-effective-documentation",
+        slug: "master-terraform-docs-a-guide-to-effective-documentation",
         description: "Learn how a SaaS conversion funnel works to attract, engage, and convert leads into loyal customers. Discover key strategies to optimize your funnel.",
-        ogImage: "/PostImages/master-terraform-docs:-a-guide-to-effective-documentation/0.png",
+        ogImage: "/PostImages/master-terraform-docs-a-guide-to-effective-documentation/0.png",
         publishedOn: "2025-1-06",
         authorId: "author0001",
         category: "Informational",
