@@ -1,4 +1,4 @@
-![Middleware Turning Points](/PostImages/middleware-case-study/5.png)
+![Middleware Turning Points](/PostImages/middleware-case-study/4.png)
 
 ## Overview
 
