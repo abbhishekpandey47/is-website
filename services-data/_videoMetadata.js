@@ -56,8 +56,19 @@ const videoMetadata = [
         topic: "Drift detection, asset management, and auto-code generation for your cloud infrastructure",
         type:"yt",
         category:"Editorials",
+    },
+    {
+        ytEmbedLink: "Yfv2iTyWGd0",
+        topic: "Lessons in Lean Startups: Malcolm Scaled Terrateam.io with a Small Team",
+        type:"yt",
+        category:"Podcasts",
+    },
+    {
+        ytEmbedLink: "R7pkdg6wcAY",
+        topic: "This Israeli Founder Rejected Y Combinator and Built a Startup Revolution",
+        type:"yt",
+        category:"Podcasts",
     }
-    
 ];
 
 
