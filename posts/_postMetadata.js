@@ -366,7 +366,7 @@ let postMetaData = [
     },
 
     {
-      title: "Transforming Middleware's Content Strategy for Greater Impact",
+      title: "Middleware and Infrasity: A Winning Partnership For Developer-Driven Content Success",
       metatitle: "Case Study: Transforming Middleware’s Content Strategy for Greater Impact",
       slug: "middleware-case-study",
       description: "Learn how Infrasity collaborated with Middleware to transform their content strategy, boosting SEO scores, enhancing user engagement, and driving traffic through technically accurate and developer-focused content.",
