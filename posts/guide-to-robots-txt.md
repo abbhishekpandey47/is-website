@@ -235,7 +235,7 @@ When creating or updating your robots.txt file, testing and validating it is ess
 Here's how you can test and validate your robots.txt for optimal SEO performance.
 
 - Use Google Search Console's Robots.txt Tester: Google Search Console provides a Robots.txt Tester that helps you test your robots.txt file. It checks if your directives are correctly blocking or allowing the intended pages and will highlight any potential issues.
-- Use Screaming Frog: [Screaming Frog}(https://www.screamingfrog.co.uk/) is another powerful tool for testing robots.txt. It helps you analyze how your site's pages are being crawled and whether any pages you want to crawl are accidentally being blocked.
+- Use Screaming Frog: [Screaming Frog](https://www.screamingfrog.co.uk/) is another powerful tool for testing robots.txt. It helps you analyze how your site's pages are being crawled and whether any pages you want to crawl are accidentally being blocked.
 
 ## Steps to Test Your Robots.txt File:
 
