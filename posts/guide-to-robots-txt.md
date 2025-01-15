@@ -215,7 +215,7 @@ User-agent: *
 Disallow: /
 ```
 
-This would tell all search engines to avoid crawling every page on your site, which can prevent your website from appearing in search results. To avoid this, it's important to regularly check your robots.txt file using tools like ![Google Search Console](https://search.google.com/search-console/about) to ensure nothing important is being blocked.
+This would tell all search engines to avoid crawling every page on your site, which can prevent your website from appearing in search results. To avoid this, it's important to regularly check your robots.txt file using tools like [Google Search Console](https://search.google.com/search-console/about) to ensure nothing important is being blocked.
 
 
 ### 2. Not Making Regular Updates to Your Robot.txt File
