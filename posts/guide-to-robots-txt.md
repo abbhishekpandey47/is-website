@@ -190,7 +190,7 @@ This rule blocks all PDF files across the website from being indexed by search e
 
 To make it easier for search engines to discover all the important pages on your website, you can specify the location of your sitemap(s) in the robots.txt file:
 
-Sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://www.infrasity.com/sitemap.xml
 
 This helps ensure that search engines have easy access to all the URLs that are important for SEO.
 
