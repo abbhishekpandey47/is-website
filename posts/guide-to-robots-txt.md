@@ -43,20 +43,25 @@ Even though it's just a simple text file, it's a critical part of your website's
 
 !["robot"](/PostImages/guide-to-robots-txt/1.png)
 
-1. **What is User Agent**
+### 1. What is User Agent
 
 The user-agent in a robots.txt file identifies which web crawler the directives apply to. The user-agent is the name of the spider that the directives are for. So, for instance, if you want your website to pop up when you do a google search but not when you do yahoo search, a robot.txt comes in handy. 
 
 The robot.txt instruction for a bot user agent to show up your website on a google search is :
 
 ```
+User-agent: Googlebot
 Allow: /
+```
+
 And, if you do not want it to show up on a bing search, the robot.txt instruction is:
+
+```
 User-agent: Bingbot 
 Disallow: /
 ```
 
-2. **What is a Disallow Command on Robot.txt?**
+### 2. What is a Disallow Command on Robot.txt?
 
 The Disallow command is the most used directive in robot.txt. It tells the web crawler not to crawl a particular part of the website, such as specific pages or folders. 
 
@@ -68,9 +73,10 @@ Disallow: /cart
 Disallow: /gp/cart/ 
 Disallow: /cart/view
 ```
+
 On the other hand, the allow command grants access to specific files, even if their folder is disallowed. The "Allow" directive overrides a "Disallow" rule for specific files or sub-directories. So, even if a broader path is blocked, you can use "Allow" to let certain pages through.
 
-3. **What is Crawl Delay in Robot.txt?**
+### 3. What is Crawl Delay in Robot.txt
 
 In the robot.txt file of the website, there are instructions regarding the frequency with which the crawler can access pages on your site. The administrator can issue instructions to the crawler to wait a specific amount of time, in milliseconds, before crawling each page. This directive is called crawl delay and it is used to not overburden the web server.
 
@@ -81,7 +87,7 @@ User-agent: *
 Crawl-delay: 10
 ```
 
-Buzzfeed uses a crawl delay of 10 ms. 
+**Buzzfeed uses a crawl delay of 10 ms. **
 
 !["robot"](/PostImages/guide-to-robots-txt/5.png)
 
@@ -89,7 +95,7 @@ This means that search engine crawlers should wait 10 seconds before requesting 
 
 However, some browsers like google do not obey the crawl delay command, but yahoo and bing do. 
 
-4. **What is Sitemap on Robot.txt**
+### 4. What is Sitemap on Robot.txt
 
 The sitemap is a list of all pages on a website that the bot has to crawl. It lists all the important pages on your website and therefore helps the crawler in indexing your website more quickly and efficiently. Its job is also to ensure that the crawler does not miss any pages and understand your website structure.  
 
@@ -110,7 +116,7 @@ A robots.txt file can make or break your site's SEO performance. By using it wis
 
 Here's how it can help:
 
-1. **Control Crawl Budget**
+### 1. Control Crawl Budget
 
 Every website has a limited amount of resources, and search engines like Google have a limited "crawl budget"---the amount of time and resources they'll spend crawling your site.
 
@@ -118,17 +124,17 @@ If your site has a lot of pages, but some are more important, robots.txt helps g
 
 For example, SaaS companies often have outdated product pages that no longer provide much value. By blocking these pages from being crawled, you free up the crawl budget for more important pages, like the ones showcasing your current features.
 
-2. **Prevent Duplicate Content**
+### 2. Prevent Duplicate Content
 
 If you have several versions of the same page on your site---perhaps one with a query parameter (like `"?ref=123"`) and another without, search engines might see these as separate pages, and crawl them separately. 
 
 Robots.txt can block these duplicate pages from being crawled, helping search engines focus only on the original page and improving your site's SEO.
 
-3. **Protect Sensitive Information**
+### 3. Protect Sensitive Information
 
 Your website might have areas not meant for public viewing, like test environments, internal dashboards, or private documents. Robots.txt allows you to block crawlers from accessing these areas, helping protect sensitive information and keeping it from being indexed on search engines.
 
-4. **Blocking Test or Staging Environments**
+### 4. Blocking Test or Staging Environments
 
 If you're working on a new website version or testing changes in a staging environment, you don't want search engines to crawl these "unfinished" pages. Robots.txt can help prevent these test pages from appearing in search results until your site is ready to go live.
 
@@ -138,7 +144,7 @@ By using the various robot.txt directives wisely, you can give search engines cl
 
 Let's take a closer look at how robots.txt can be effectively used in real-world scenarios to optimize SEO and improve site crawlability:
 
-1. **Blocking Internal Search Pages**
+### 1. Blocking Internal Search Pages
 
 Many websites, especially e-commerce or content-heavy sites, use internal search functionality.
 
@@ -153,7 +159,7 @@ Disallow: *s=*
 
 This rule ensures that search engines block any URL with `?s=(typically used for search parameters)` from crawling.
 
-2. **Blocking Faceted Navigation URLs**
+### 2. Blocking Faceted Navigation URLs
 
 For e-commerce sites, faceted navigation often generates multiple URLs for the same products, causing duplicate content issues. For example, filtering products by color, size, or price could result in hundreds of duplicate pages.
 
@@ -167,7 +173,7 @@ Disallow: *price=*
 ```
 By doing this, you ensure search engines focus on the most important pages rather than crawling countless variations of the same content.
 
-3. **Blocking PDF URLs**
+### 3. Blocking PDF URLs
 
 Some sites may host PDFs, such as product manuals or guides, which may not add much value to search rankings.
 
@@ -180,11 +186,11 @@ Disallow: /*.pdf$
 
 This rule blocks all PDF files across the website from being indexed by search engines, thus optimizing the crawl budget.
 
-4. **Specifying Sitemap URLs**
+### 4. Specifying Sitemap URLs
 
 To make it easier for search engines to discover all the important pages on your website, you can specify the location of your sitemap(s) in the robots.txt file:
 
-**Sitemap: https://www.example.com/sitemap.xml**
+Sitemap: https://www.example.com/sitemap.xml
 
 This helps ensure that search engines have easy access to all the URLs that are important for SEO.
 
@@ -198,7 +204,7 @@ When working with robots.txt, it's essential to avoid common mistakes that can n
 
 Here are some common robots.txt mistakes and solutions to help you optimize your website's crawling process.
 
-1. **Blocking the Entire Site by Mistake** 
+### 1. Blocking the Entire Site by Mistake
 
 One of the most common mistakes when configuring robots.txt is accidentally blocking the entire website from search engines.
 
@@ -209,10 +215,10 @@ User-agent: *
 Disallow: /
 ```
 
-This would tell all search engines to avoid crawling every page on your site, which can prevent your website from appearing in search results. To avoid this, it's important to regularly check your robots.txt file using tools like `[Google Search Console]` to ensure nothing important is being blocked.
+This would tell all search engines to avoid crawling every page on your site, which can prevent your website from appearing in search results. To avoid this, it's important to regularly check your robots.txt file using tools like ![Google Search Console](https://search.google.com/search-console/about) to ensure nothing important is being blocked.
 
 
-2. **Not Making Regular Updates to Your Robot.txt File**
+### 2. Not Making Regular Updates to Your Robot.txt File
 
 The content and structure of your website evolves regularly. Your robot.txt file should also be updated regularly to reflect the changes in your website. 
 
@@ -251,7 +257,7 @@ Explore our services today and ensure your website is fully optimized for search
 
 ## Frequently Asked Questions
 
-1. **What Does "Disallow" Mean in Robots.txt?**
+### 1. What Does "Disallow" Mean in Robots.txt
 
 The Disallow directive in a robots.txt file tells web crawlers which parts of the website they should not access or crawl. For example, if you want to prevent crawlers from indexing your private.html page, you would add:
 
@@ -260,18 +266,18 @@ User-agent: *
 Disallow: /private.html
 ```
 
-2. **Can a Bot Ignore the Robots.txt File?**
+### 2. Can a Bot Ignore the Robots.txt File?
 
 Yes, while most search engine bots follow the instructions in the robots.txt file, some bots, particularly malicious ones, may choose to ignore it. Thus, there are good bots and bad bots. The former, such as a web crawler, obeys the instructions issued by the robot.txt file.
 
-3. **Is Robot.txt Good for Seo?**
+### 3. Is Robot.txt Good for Seo
 
 Robot.txt helps crawlers navigate your website. So, in a lengthy website, a robot.txt file will specify what pages to crawl, thereby making navigation on your site easier for the bot. This will make it rank better on the SERF. 
 
-4. **What is Robot.txt Used for?**
+### 4. What is Robot.txt Used for
 
 Robot.txt is a simple text file that can be added to your website URL to help the web crawler bot navigate your website more efficiently. It instructs the bot not to crawl unnecessary pages. It therefore prevents overloading the crawler. 
 
-5. **How Do You Manually Overwrite the Robots.txt File in Wordpress​?**
+### 5. How Do You Manually Overwrite the Robots.txt File in Wordpress​?
 
 Typically, wordpress creates a robot.txt file for your website by default. But it also offers a feature to customize or update the robot.txt command manually. To do so, access the root directory of your website via file manager. Do your desired edits with robot.txt directives such as (allow, disallow, sitemap). Save the changes and upload the file back. 
