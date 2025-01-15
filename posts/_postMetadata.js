@@ -265,14 +265,14 @@ let postMetaData = [
     },
     {
         title: "Your Guide to Robots.txt: Simplifying SEO for Success",
-        metatitle: "What is Robots Txt​ and Why it is important for SEO?",
+        metatitle: "What is Robots Txt​ & Why it is important for SEO? (2025)",
         slug: "guide-to-robots-txt",
-        description: "Discover how to create a Cloud Center of Excellence (CCoE) with practical steps and solutions for managing cloud infrastructure. Learn how Firefly can enhance your CCoE.",
+        description: "Discover what Robots.txt is, its role in guiding search engine crawlers, and why it's vital for SEO to optimize indexing and improve website visibility.",
         ogImage: "/PostImages/guide-to-robots-txt/0.jpg",
         publishedOn: "2024-11-26",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Discover how to create a Cloud Center of Excellence (CCoE) with practical steps and solutions for managing cloud infrastructure. Learn how Firefly can enhance your CCoE."
+        metaDescription: "Discover what Robots.txt is, its role in guiding search engine crawlers, and why it's vital for SEO to optimize indexing and improve website visibility."
     },
     {
         title: "How a Strategic Marketing Plan Can Boost Your Blogging Business",
