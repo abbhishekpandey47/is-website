@@ -22,7 +22,7 @@ A robots.txt file on your website instructs a user agent (web crawling bot) whet
 
 ## How Does Robots.txt Work?
 
-When a search engine crawler (like ![Googlebot](https://en.wikipedia.org/wiki/Googlebot)) visits your site, it first checks your robots.txt file for instructions. These instructions help it decide where to go and what to skip.
+When a search engine crawler (like [Googlebot](https://en.wikipedia.org/wiki/Googlebot)) visits your site, it first checks your robots.txt file for instructions. These instructions help it decide where to go and what to skip.
 
 !["robots"](/PostImages/guide-to-robots-txt/3.png)
 
@@ -229,7 +229,7 @@ When creating or updating your robots.txt file, testing and validating it is ess
 Here's how you can test and validate your robots.txt for optimal SEO performance.
 
 - Use Google Search Console's Robots.txt Tester: Google Search Console provides a Robots.txt Tester that helps you test your robots.txt file. It checks if your directives are correctly blocking or allowing the intended pages and will highlight any potential issues.
-- Use Screaming Frog: ![Screaming Frog}(https://www.screamingfrog.co.uk/) is another powerful tool for testing robots.txt. It helps you analyze how your site's pages are being crawled and whether any pages you want to crawl are accidentally being blocked.
+- Use Screaming Frog: [Screaming Frog}(https://www.screamingfrog.co.uk/) is another powerful tool for testing robots.txt. It helps you analyze how your site's pages are being crawled and whether any pages you want to crawl are accidentally being blocked.
 
 ## Steps to Test Your Robots.txt File:
 
@@ -253,7 +253,7 @@ Explore our services today and ensure your website is fully optimized for search
 
 1. **What Does "Disallow" Mean in Robots.txt?**
 
-The Disallow directive in a robots.txt file tells web crawlers which parts of the website they should not access or crawl. For example, if you want to prevent crawlers from indexing your private.html page, you would add:\ 
+The Disallow directive in a robots.txt file tells web crawlers which parts of the website they should not access or crawl. For example, if you want to prevent crawlers from indexing your private.html page, you would add:
 
 ```
 User-agent: *
