@@ -165,7 +165,9 @@ const ContactHome = () => {
                             <a href="privacy-policy" className="text-blue-600 underline">
                                 Privacy Policy
                             </a>
-                            .
+                        </p>
+                        <p className="text-zinc-800 text-s mt-2 text-center">
+                            Address: E-18, 220/221, Rohini, New Delhi 110085
                         </p>
                     </div>
                 </div>
@@ -208,4 +210,3 @@ const ContactHome = () => {
 };
 
 export default ContactHome;
-
