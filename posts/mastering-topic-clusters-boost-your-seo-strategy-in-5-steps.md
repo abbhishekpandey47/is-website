@@ -23,7 +23,7 @@ A pillar page is a detailed, standalone page that serves as the central hub for 
 The structured layout of topic clusters also improves site organization, making it easier for users to find what they need. The central topic acts as an entry point to explore related content, which is the foundation of a strong topic cluster strategy.
 
 ## How Topic Clusters Improve Your Search Rankings?
-![](/PostImages/Mastering-Topic-Clusters:-Boost-Your-SEO-Strategy-in-5-Steps/1.png)
+![](/PostImages/Mastering-Topic-Clusters-Boost-Your-SEO-Strategy-in-5-Steps/1.png)
 
 Topic clusters play a crucial role in improving website visibility and search engine rankings by signaling relevance to search engines. Creating a strong content structure centered around topic clusters boosts your site’s overall authority and improves rankings.
 
@@ -32,7 +32,7 @@ Effective topic clustering leads to more quality content, helping rank for a wid
 Having multiple cluster pages that collectively cover a broad topic from all angles not only improves your search engine rankings but also makes your site a go-to resource for users seeking detailed information on that search engine results page's particular topic.
 
 ## What You Gain from Using Topic Clusters?
-![](/PostImages/Mastering-Topic-Clusters:-Boost-Your-SEO-Strategy-in-5-Steps/2.png)
+![](/PostImages/Mastering-Topic-Clusters-Boost-Your-SEO-Strategy-in-5-Steps/2.png)
 
 Implementing topic clusters can greatly benefit your SEO strategy. For example, an HR SaaS company saw a 17x increase in organic traffic after using this approach, showing the impact of well-organized and comprehensive content.
 
@@ -104,7 +104,7 @@ Track how your topic clusters are performing and make adjustments as needed.
 By following these steps, you can create topic clusters that improve your site’s organization, boost SEO performance, and provide value to your audience.
 
 ## Examples of Successful Topic Clusters
-![](/PostImages/Mastering-Topic-Clusters:-Boost-Your-SEO-Strategy-in-5-Steps/3.png)
+![](/PostImages/Mastering-Topic-Clusters-Boost-Your-SEO-Strategy-in-5-Steps/3.png)
 
 Looking at real-life examples of topic clusters shows how effective this strategy can be.
 
