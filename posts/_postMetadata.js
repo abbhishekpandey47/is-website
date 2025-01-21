@@ -388,14 +388,14 @@ let postMetaData = [
   },
   {
     title: "Content Marketing Strategy for SaaS Companies: a Masterclass in SaaS Marketing",
-    metatitle: "Learn how you can market your SaaS product using a content strategy. This blog breaks down the content marketing planning process and gives effective tips to drive organic traffic to your website and turn it into greater awareness for your product and services.",
+    metatitle: "Best Content Marketing Strategy for SaaS Companies (2025)",
     slug: "content-marketing-strategy",
-    description: "Learn how you can market your SaaS product using a content strategy. This blog breaks down the content marketing planning process and gives effective tips to drive organic traffic to your website and turn it into greater awareness for your product and services.",
+    description: "Drive your SaaS growth with our updated 2025 SaaS content marketing strategy guide. Learn proven marketing techniques to improve and deliver measurable results.",
     ogImage: "/PostImages/content-marketing-strategy/0.png",
     publishedOn: "2025-1-21",
     authorId: "author0001",
     category: "Informational",
-    metaDescription: "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions."
+    metaDescription: "Drive your SaaS growth with our updated 2025 SaaS content marketing strategy guide. Learn proven marketing techniques to improve and deliver measurable results."
 },
 
 ];
