@@ -174,11 +174,16 @@ A content calendar is a written schedule of what you will produce, when it will 
 
 ![Terrateam content calnedar](/PostImages/content-marketing-strategy/4.png)
 
+This is an example of a holistic content calendar that will be equally beneficial for the marketing as well as the writing team. In our [case study for Terrateam](https://www.infrasity.com/case-studies/terrateam-case-study), we designed a detailed content calendar that can be a great illustration to follow. 
+
 ### 5. Keyword Research - Tools (Ahrefs, Semrush, Keywords Everywhere)
 
 The main component of building a content strategy is keyword research. After you have decided on a relevant topic, say on Artificial Intelligence. This becomes your focus keyword. Now, put this on your preferred keyword research platform, and it will show the Monthly Search Volume (MSV) and the Keyword Difficulty (KD) of your focus keyword. Additionally, it will also show all the related keywords with their MSVs and KDs.
 
 ![Keyword research](/PostImages/content-marketing-strategy/5.png)
+
+You just have to infuse these obtained keywords in your blog and see the magic unfold. These keywords will attract the crawler and help your blog rank better on the search page. 
+Some of the best tools for keyword search are Semrush and Ashref. 
 
 ### 6. Internal Interlinking
 
@@ -202,7 +207,7 @@ Collecting email addresses offers a great way of maintaining engagement with the
 
 ### 8. Get Creative with Distribution
 
-Distribution is an area where being creative makes a considerable impact. For Instance, if you create video walkthroughs for your technical guides, it will be much easier to comprehend and enhance audience engagement. For example, see this visual guide for AWS. 
+Distribution is an area where being creative makes a considerable impact. For Instance, if you create video walkthroughs for your technical guides, it will be much easier to comprehend and enhance audience engagement. For example, see this [visual guide for AWS](https://www.devzero.io/docs/how-to-guides/existing-network/connecting-to-aws). 
 
 ![Canva's creative social media content](/PostImages/content-marketing-strategy/7.png)
 
@@ -224,7 +229,7 @@ This is an ongoing process. You have to constantly keep evaluating your competit
 
 If you remember our fictional SaaS company AUTOTIC, recall that potential consumers searching for managing customer inquiries on low staff are searching from an informational intent. So, you need to produce Content from an intentional point of view. 
 
-### Strategy Tools to Help Your Content Marketing
+## Strategy Tools to Help Your Content Marketing
 
 Here are a few strategy tools to help in content marketing:
 
@@ -232,16 +237,33 @@ Here are a few strategy tools to help in content marketing:
 - **Buzzsumo** – Helps in analyzing content engagement and finding relevant content ideas.
 - **Canva** – A free graphic designing tool with ready-made templates for visuals.
 
-### Content Strategy vs Content Marketing Strategy
+What is the Final Goal of Content Strategy for Marketing SaaS Companies
 
-- **Content Strategy**: The backbone of your company's knowledge base. It is the writer's job.
-- **Content Marketing Strategy**: Focuses on distributing what has been written to potential buyers. It involves researching topics that will resonate with the audience.
+## Content Strategy vs Content Marketing Strategy
+
+A content strategy is an outline of the kind of Content you want to create. It is the backbone of your company's knowledge base. It is your writer's job. 
+But a content 'marketing' strategy is a wholly different thing. It is not about writing but distributing what you have written to the prospective buyers. It also involves researching topics that are in high demand among your users and will resonate with them. It is your marketer's job. 
+These two components are related to one another and the best content marketing necessarily involves content strategy as its first step. 
+
+
+## What is the Final Goal of Content Strategy for Marketing SaaS Companies
+
+The entire point of creating informational blogs and making them rank in the search page has one main goal. It is converting the generated traffic into paying customers. The entire process of content marketing is directed towards generating revenue. It is one of the most efficient methods of revenue generation because if the Content is good, it will create a long-term reader base that can be slowly converted into customers. 
+
+You need to take good informational Content and convert it into growth numbers. So take words and lead to monetization. But for this, you cannot just depend on the quality of the words, a whole lot of optimization goes into making your Content reach the desired audience. 
+
+It establishes an online presence of your brands and creates a comprehensive information and advice base for your customers. 
+In this competitive SaaS business space, you need to make sure your quality content reaches your target audience. This is where a SaaS content marketing strategy becomes important. 
 
 ## Conclusion
 
-A content marketing strategy should focus on optimized content that enhances a company's online reach. The goal is to create valuable content that ranks on search pages and converts traffic into paying customers. 
+So, now instead of just churning out Content after Content, there should be a focus on creating Content according to a strategy. This strategized content creation will lead to better benefits and lesser costs. The benefits being the realization of your core business objectives. The core business objective being increased organic traffic that leads to conversions into buying customers. 
 
-By following a well-structured content marketing approach, SaaS companies can establish a strong online presence, engage users, and generate meaningful leads.
+You get the chain of events, right ? 
+
+We need a clear understanding of the main pain points for which your Content needs help. The primary struggle is with user engagement and building an online presence which could culminate in meaningful leads. In this landscape of low visibility and therefore meagre leads, a content marketing strategist creates optimized Content that enhances the company's online reach. 
+
+
 ## Frequently Asked Questions  
 
 ### 1. What is a SaaS Content Strategy?  
