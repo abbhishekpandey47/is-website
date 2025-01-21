@@ -112,6 +112,8 @@ So, the first step is to clarify what you are delivering to your audience. There
 
 Let us understand this with an example: Notion's premise is simple. It helps you to plan and create with AI assistance. Their business ethos is a more efficient organization. All their content is therefore related to how you can organize better and how they can help in this process. This coherence in narrative goes a long way in building your brand.
 
+![Notion blogs](/PostImages/content-marketing-strategy/2.png)
+
 In this example, we see Notion writing blogs on their product but also peripheral content in line with the brand's ethos.
 
 Don't forget products are great, and technicalities are very important, but what hooks a reader and a customer is the narrative. This is the groundwork, the base on which your content marketing strategy stands.
@@ -144,6 +146,8 @@ This is the stage where the potential customer knows they need help with a parti
 
 For example, a content marketer wants to organize their company's content production schedule and topics. Thus, they do a quick Google search to find a guide on creating a content calendar.
 
+![Notion's guide tops SERF](/PostImages/content-marketing-strategy/3.png)
+
 The example shows Notion's guide on the top of the search page.
 
 #### Interest
@@ -168,31 +172,57 @@ At this stage of the funnel, the paying customer begins going through your price
 
 A content calendar is a written schedule of what you will produce, when it will be published, and where it will be published. This is the basic content calendar plan, but you can add as much information as you want. A great tip is adding a column for keywords related to each topic to make it easier while you are writing. This strategy of planning ahead ensures that your content covers a variety of topics and is a comprehensive whole in itself.
 
+![Terrateam content calnedar](/PostImages/content-marketing-strategy/4.png)
+
 ### 5. Keyword Research - Tools (Ahrefs, Semrush, Keywords Everywhere)
 
 The main component of building a content strategy is keyword research. After you have decided on a relevant topic, say on Artificial Intelligence. This becomes your focus keyword. Now, put this on your preferred keyword research platform, and it will show the Monthly Search Volume (MSV) and the Keyword Difficulty (KD) of your focus keyword. Additionally, it will also show all the related keywords with their MSVs and KDs.
 
+![Keyword research](/PostImages/content-marketing-strategy/5.png)
+
 ### 6. Internal Interlinking
 
-While writing content, you may encounter a concept that is marginally mentioned but is the focus of another blog on your website. This is a great opportunity! You can link those articles within the one you are writing, organically diverting the reader to other related content.
+Okay, now you have decided on a relevant topic according to your content calendar and begin writing.
+
+In this process you encounter a concept that is marginally mentioned in this article but is the focus of another blog on your website. This is a great opportunity! For now you can link those articles within the one you are writing now and this will organically divert the reader to the other one as well. 
+
+Picture this as a circular maze. You go from one blog to another and to yet another to master a topic. And all this is happening within your website. This way even if one of your blogs ranks better on your website, others will also get readers through this maze formation. 
+ 
+Contents on your page should organically link to other Content. Your website should provide almost all relevant information for a topic, either within a single blog or through internal interlinking across blogs. This poses your website as a comprehensive information source. In fact, try that all of your Content is available at most 3 clicks from your homepage. 
+
 
 ### 7. Collect Email Addresses
 
-A great strategy is to include a request for email addresses within your blogs. This allows you to keep readers engaged and maintain visibility with potential customers.
+A great strategy is to include a request for email addresses within your blogs. You can give your readers an analysis of the cost of producing a blog or how much your services might cost to different industries. All these cost breakdowns can be communicated to your readers through mail. 
+
+Collecting email addresses offers a great way of maintaining engagement with the readers. This ongoing relationship keeps your brand visible to your potential consumers. 
+
+![Infrasity infusing email address request](/PostImages/content-marketing-strategy/6.png)
+
 
 ### 8. Get Creative with Distribution
 
-Distribution is an area where being creative makes a considerable impact. For instance, creating video walkthroughs for your technical guides can enhance audience engagement. 
+Distribution is an area where being creative makes a considerable impact. For Instance, if you create video walkthroughs for your technical guides, it will be much easier to comprehend and enhance audience engagement. For example, see this visual guide for AWS. 
 
-Another great example of a creative distribution channel is Canva, which uses visually attractive, informative, and fun social media content.
+![Canva's creative social media content](/PostImages/content-marketing-strategy/7.png)
+
+Another great example of a creative distribution channel is Canva, which is on social media like Instagram. It is visually attractive, informative, and fun. 
 
 ### 9. Updating Your Website
 
-Keep updating your website and its content to maintain a steady stream of traffic. Old and obsolete content does not help anyone as it stops bringing in traffic.
+Finally, keep updating your website and its Content to maintain a steady stream of traffic. Old and obsolete Content does not help anyone as it stops bringing in traffic. Marketing content is also about revisiting old ones as much as it is about producing new ones. 
 
-### 10. SWOT Analysis of Competitors
+### 10. In a Nutshell
+
+In a nutshell, When your user is searching for information, they will most likely do it on google. The aim, therefore, should be making your blog contained within your website to rank in a google search. This requires marketing and optimizing Content. 
+
+#### Swot Analysis of Competitors 
 
 This is an ongoing process. You have to constantly keep evaluating your competitors to stay ahead as thought leaders in your industry.
+
+#### Analyse Search Intent for Your Content
+
+If you remember our fictional SaaS company AUTOTIC, recall that potential consumers searching for managing customer inquiries on low staff are searching from an informational intent. So, you need to produce Content from an intentional point of view. 
 
 ### Strategy Tools to Help Your Content Marketing
 
