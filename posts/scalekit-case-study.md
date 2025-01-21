@@ -4,7 +4,7 @@ When Scalekit, a platform designed to simplify enterprise identity technologies 
 
 Curious to find out how? Keep reading!
 
-!(Case Study Spotlight)[/PostImages/scalekit-case-study/1.png]
+![Case Study Spotlight](/PostImages/scalekit-case-study/1.png)
 ---
 
 ## Overview
@@ -13,7 +13,7 @@ This case study highlights how Infrasity assisted Scalekit, a platform that simp
 
 Over the course of 5 months, this collaboration resulted in highly specialized tech content designed specifically for SaaS engineering teams, including Developers, IAM Specialists, and others like system administrators. The content addressed their technical needs and challenges, focusing on topics like SAML vs LDAP, JWT authentication, Google OAuth, identity management, and social login. This approach led to a 5x increase in website traffic. Furthermore, more than 170 targeted keywords ranked in the top search engine rankings, significantly boosting Scalekit’s visibility and positioning it ahead of its competitors.
 
-!(Opportunities, Risks & Rewards)[/PostImages/scalekit-case-study/2.png]
+![Opportunities, Risks & Rewards](/PostImages/scalekit-case-study/2.png)
 
 ---
 
@@ -41,7 +41,7 @@ As we progressed, we noticed steady growth in engagement and web traffic. The ta
 
 Our partnership with Scalekit produced deep technical content with measurable results and clear improvements across multiple key areas like Social Login, XPath Validation, LDAP, B2B Identity Providers and many more. 
 
-!(Click to Growth)[/PostImages/scalekit-case-study/3.png]
+![Click to Growth](/PostImages/scalekit-case-study/3.png)
 ---
 
 Here’s a look at how the content strategy impacted their business: 
@@ -80,7 +80,7 @@ We prioritized content based on business goals and product timelines, ensuring t
 
 Additionally, we closely analyzed competitor strategies to ensure Scalekit’s content was positioned effectively. By combining a well-defined content roadmap with a clear prioritization strategy, we ensured that Scalekit’s blogs not only provided value to their audience but also strengthened their search rankings and industry presence.
 
-!(Scalekit Content Calender)[/PostImages/scalekit-case-study/4.png]
+![Scalekit Content Calender](/PostImages/scalekit-case-study/4.png)
 
 ## Understanding Audience Needs 
 
@@ -108,7 +108,7 @@ Here’s a look at how we approached creating content that developers could conn
 
 **Review and Feedback:** Scalekit’s team was closely involved in reviewing drafts throughout the processes. Their feedback helped us refine the content so that it perfectly aligned with their goals and messaging. In addition to their inputs, we ran plagiarism checks to maintain originality and performed AI checks to ensure the content was humanized and engaging. We also compiled and tested code snippets to ensure accuracy.  This collaboration along with quality control measures, was crucial in ensuring the final content met Scalekit’s standards.
 
-!(Content Creation Workflow)[/PostImages/scalekit-case-study/5.png]
+![Content Creation Workflow](/PostImages/scalekit-case-study/5.png)
 
 ## Outcome that positioned Scalekit as a Leader 
 
