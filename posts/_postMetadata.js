@@ -391,7 +391,7 @@ let postMetaData = [
     metatitle: "Learn how you can market your SaaS product using a content strategy. This blog breaks down the content marketing planning process and gives effective tips to drive organic traffic to your website and turn it into greater awareness for your product and services.",
     slug: "content-marketing-strategy",
     description: "Learn how you can market your SaaS product using a content strategy. This blog breaks down the content marketing planning process and gives effective tips to drive organic traffic to your website and turn it into greater awareness for your product and services.",
-    ogImage: "/PostImages/middleware-case-study/0.png",
+    ogImage: "/PostImages/content-marketing-strategy/0.png",
     publishedOn: "2025-1-21",
     authorId: "author0001",
     category: "Informational",
