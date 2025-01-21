@@ -132,4 +132,4 @@ Through these efforts, Scalekit is set to strengthen its position with secure, c
 
 Book a [call with us now](https://calendly.com/meet-shan) to explore how  Infrasity can help you achieve your content and growth goals 
 
-!(Scalekit Testi)[/PostImages/scalekit-case-study/6.png]
+![Scalekit Testi](/PostImages/scalekit-case-study/6.png)
