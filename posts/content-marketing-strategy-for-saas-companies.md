@@ -1,7 +1,5 @@
 ## Introduction
 
-!(Benefits of Marketing)[/PostImages/content-marketing-strategy/1.png]
-
 Content is everywhere. It is the sought-after commodity that readers search for informational content. But you can't just keep creating content, hoping that one will do well and answer an essential query.
 
 A well-thought-out strategy is required to yield results for your content. Content success is a combination of well-written informative pieces infused with a strategy. You need to strategize on various parameters like SEO fixes and distribution channels for creating far-reaching and high-ranking content.
@@ -9,6 +7,8 @@ A well-thought-out strategy is required to yield results for your content. Conte
 Understand this process through the analogy of backstage and front stage. Despite being the face of your play and hence very important, your actor depends on the director to mold it. Same with content, which requires a behind-the-scenes strategy, such as consistent posting, infused keywords, and precise information for success.
 
 In this blog, we will list the importance of having a well-planned content marketing strategy for SaaS companies to support your content and make it reach the right audience. This blog also provides a comprehensive account of the best strategies a SaaS company can use, such as SEO optimization or creative distribution, to market its content and generate organic traffic that will finally turn into revenue through conversions.
+
+![Benefits of Marketing](/PostImages/content-marketing-strategy/1.png)
 
 ## Why Do You Need a Content Marketing Strategy?
 
