@@ -389,14 +389,14 @@ let postMetaData = [
   // },
   {
       title: " 5x Growth Journey: How Developer-Focused Technical Content Scaled a B2B enterprise SaaS Business",
-      metatitle: "Learn how you can market your SaaS product using a content strategy. This blog breaks down the content marketing planning process and gives effective tips to drive organic traffic to your website and turn it into greater awareness for your product and services. ",
+      metatitle: "Case Study: 5x Growth with Developer-Focused Content",
       slug: "scalekit-case-study",
       description: "Learn how you can market your SaaS product using a content strategy. This blog breaks down the content marketing planning process and gives effective tips to drive organic traffic to your website and turn it into greater awareness for your product and services.",
       ogImage: "/PostImages/scalekit-case-study/0.png",
       publishedOn: "2025-1-21",
       authorId: "author0001",
       category: "Case Studies",
-      metaDescription: "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions."
+      metaDescription: "Discover how we helped a B2B SaaS company achieve 5x growth with developer-focused content. This case study shares their journey and our winning strategies."
   },
 
 ]; 
