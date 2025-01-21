@@ -352,7 +352,6 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "SaaS growth with an optimized conversion funnel. Learn actionable strategies to drive leads, improve customer onboarding, and increase retention in this comprehensive guide."
     },
-
     {
         title: "Master Terraform Docs: A Guide to Effective Documentation",
         metatitle: "Master Terraform Docs: A Guide to Effective Documentation",
@@ -375,17 +374,6 @@ let postMetaData = [
       authorId: "author0001",
       category: "Case Studies",
       metaDescription: "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions."
-  }, 
-  {
-      title: "Content Marketing Strategy for SaaS Companies: a Masterclass in SaaS Marketing",
-      metatitle: "Learn how you can market your SaaS product using a content strategy. This blog breaks down the content marketing planning process and gives effective tips to drive organic traffic to your website and turn it into greater awareness for your product and services. ",
-      slug: "content-marketing-strategy-for-saas-companies",
-      description: "Learn how you can market your SaaS product using a content strategy. This blog breaks down the content marketing planning process and gives effective tips to drive organic traffic to your website and turn it into greater awareness for your product and services.",
-      ogImage: "/PostImages/middleware-case-study/0.png",
-      publishedOn: "2025-1-21",
-      authorId: "author0001",
-      category: "informational",
-      metaDescription: "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions."
   },
   {
       title: " 5x Growth Journey: How Developer-Focused Technical Content Scaled a B2B enterprise SaaS Business",
@@ -398,8 +386,19 @@ let postMetaData = [
       category: "Case Studies",
       metaDescription: "Discover how we helped a B2B SaaS company achieve 5x growth with developer-focused content. This case study shares their journey and our winning strategies."
   },
+  {
+    title: "Content Marketing Strategy for SaaS Companies: a Masterclass in SaaS Marketing",
+    metatitle: "Learn how you can market your SaaS product using a content strategy. This blog breaks down the content marketing planning process and gives effective tips to drive organic traffic to your website and turn it into greater awareness for your product and services.",
+    slug: "content-marketing-strategy",
+    description: "Learn how you can market your SaaS product using a content strategy. This blog breaks down the content marketing planning process and gives effective tips to drive organic traffic to your website and turn it into greater awareness for your product and services.",
+    ogImage: "/PostImages/middleware-case-study/0.png",
+    publishedOn: "2025-1-21",
+    authorId: "author0001",
+    category: "Informational",
+    metaDescription: "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions."
+},
 
-]; 
+];
 
 const sorted = () => {
     return postMetaData.sort((a, b) => {
