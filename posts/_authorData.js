@@ -14,6 +14,14 @@ const authorData = [
     designation: "Growth Engineer @ Infrasity",
     about: "Growth Engineer at Infrasity, specializes in driving growth for early-stage engineering startups through organic tech content and customer success services.",
     linkedIn: "https://www.linkedin.com/in/kislaya-gupta-52a53b212"
+  },
+  {
+    authorId: "author0003",
+    name: "Ananya",
+    profilePic: "/authorImages/ananya.jpeg",
+    designation: "Content Writer @ Infrasity",
+    about: "Content Writer at Infrasity, specializes in creating tech content for early-stage startups and developer relations",
+    linkedIn: "https://www.linkedin.com/in/ananya-sharma-611b01225/"
   }
 ];
 

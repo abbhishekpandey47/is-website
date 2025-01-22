@@ -393,7 +393,7 @@ let postMetaData = [
     description: "Drive your SaaS growth with our updated 2025 SaaS content marketing strategy guide. Learn proven marketing techniques to improve and deliver measurable results.",
     ogImage: "/PostImages/content-marketing-strategy/0.png",
     publishedOn: "2025-1-21",
-    authorId: "author0001",
+    authorId: "author0003",
     category: "Informational",
     metaDescription: "Drive your SaaS growth with our updated 2025 SaaS content marketing strategy guide. Learn proven marketing techniques to improve and deliver measurable results."
 },
