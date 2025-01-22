@@ -1,6 +1,6 @@
 ## Introduction
 
-Content is everywhere. It is the sought-after commodity that readers search for informational content. But you can't just keep creating content, hoping that one will do well and answer an essential query.
+Content is everywhere. Informational content is the sought-after commodity that readers search for. But you can't just keep creating content, hoping that one will do well and answer an essential query.
 
 A well-thought-out strategy is required to yield results for your content. Content success is a combination of well-written informative pieces infused with a strategy. You need to strategize on various parameters like SEO fixes and distribution channels for creating far-reaching and high-ranking content.
 
