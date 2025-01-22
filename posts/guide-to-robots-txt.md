@@ -140,7 +140,7 @@ If you're working on a new website version or testing changes in a staging envir
 
 By using the various robot.txt directives wisely, you can give search engines clear instructions on which pages to crawl and which to ignore, ensuring your website is optimized for better SEO.
 
-## Robots.txt Examples
+## Common Robots Txt File Examples
 
 Let's take a closer look at how robots.txt can be effectively used in real-world scenarios to optimize SEO and improve site crawlability:
 
