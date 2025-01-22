@@ -8,7 +8,7 @@ So, If you've ever wondered how search engines decide which pages of your websit
 
 Without robots.txt, search engines could end up wasting time crawling irrelevant pages, such as duplicate content or private areas of your website that aren't meant for public viewing. This can lead to a wasted crawl budget, poor indexing, or even the exposure of sensitive information.
 
-By learning how to use and optimize robots.txt, you can take control over how your website is crawled and indexed---ultimately improving your SEO results and protecting your content.
+By learning how to use and optimize robots.txt, you can take control over how your website is crawled and indexed---ultimately improving your SEO results and protecting your content. Robot txt in SEO is a gamechanger tool which can significantly add to your websites growth.
 
 ## What is Robots.txt?
 
@@ -78,7 +78,7 @@ On the other hand, the allow command grants access to specific files, even if th
 
 ### 3. What is Crawl Delay in Robot.txt
 
-In the robot.txt file of the website, there are instructions regarding the frequency with which the crawler can access pages on your site. The administrator can issue instructions to the crawler to wait a specific amount of time, in milliseconds, before crawling each page. This directive is called crawl delay and it is used to not overburden the web server.
+In the robot.txt file of the website, there are instructions regarding the frequency with which the crawler can access pages on your site. The administrator can issue instructions to the crawler to wait a specific amount of time, in milliseconds, before crawling each page. This directive is called crawl delay in robot txt and it is used to not overburden the web server.
 
 For instance, if you want the web crawler to crawl pages at an interval of 10 seconds, use the command:
 
@@ -95,9 +95,9 @@ This means that search engine crawlers should wait 10 seconds before requesting 
 
 However, some browsers like google do not obey the crawl delay command, but yahoo and bing do. 
 
-### 4. What is Sitemap on Robot.txt
+### 4. What is Sitemap in Robot.txt
 
-The sitemap is a list of all pages on a website that the bot has to crawl. It lists all the important pages on your website and therefore helps the crawler in indexing your website more quickly and efficiently. Its job is also to ensure that the crawler does not miss any pages and understand your website structure.  
+The sitemap in robot.txt is a list of all pages on a website that the bot has to crawl. It lists all the important pages on your website and therefore helps the crawler in indexing your website more quickly and efficiently. Its job is also to ensure that the crawler does not miss any pages and understand your website structure.  
 
 !["robot"](/PostImages/guide-to-robots-txt/4.png)
 
@@ -196,7 +196,7 @@ This helps ensure that search engines have easy access to all the URLs that are 
 
 ## Robot.txt vs Meta Robots Tags vs Directive No Index Tags
 
-robots.txt is primarily used for blocking entire sections or pages from being crawled. On the other hand, meta robots tags function within individual pages and allows for more precise control over which part of pages are crawled or indexed. A small variation in these robots is directive no index tags, which goes one step ahead and prevents content from appearing on the search page and hence is not crawled. 
+robots.txt is primarily used for blocking entire sections or pages from being crawled. On the other hand, meta robots tags function within individual pages and allows for more precise control over which part of pages are crawled or indexed. A small variation in these robots is directive no index robots.txt tags, which goes one step ahead and prevents content from appearing on the search page and hence is not crawled. 
 
 ## Common Robots.txt Mistakes and Solutions
 
