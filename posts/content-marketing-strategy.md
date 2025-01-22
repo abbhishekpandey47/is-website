@@ -70,7 +70,7 @@ If readers begin to see your brand as a credible and reliable source of informat
 
 ### Step 1: Target Audience
 
-Before you begin writing, make sure you define your **Ideal Customer Profile (ICP)**. A practical tip is to visualize a person, not a huge company. Marketing for SaaS companies is a tricky task and requires you to do detailed research.
+Before you begin writing, make sure you define your **Ideal Customer Profile (ICP)**. A practical tip is to visualize a person, not a huge company. Marketing for SaaS companies or even content markeitng for tech bussinesses is a tricky task and requires you to do detailed research.
 
 For example:
 
@@ -178,7 +178,7 @@ This is an example of a holistic content calendar that will be equally beneficia
 
 ### 5. Keyword Research - Tools (Ahrefs, Semrush, Keywords Everywhere)
 
-The main component of building a content strategy is keyword research. After you have decided on a relevant topic, say on Artificial Intelligence. This becomes your focus keyword. Now, put this on your preferred keyword research platform, and it will show the Monthly Search Volume (MSV) and the Keyword Difficulty (KD) of your focus keyword. Additionally, it will also show all the related keywords with their MSVs and KDs.
+The main component of building a blog content strategy for SaaS is keyword research. After you have decided on a relevant topic, say on Artificial Intelligence. This becomes your focus keyword. Now, put this on your preferred keyword research platform, and it will show the Monthly Search Volume (MSV) and the Keyword Difficulty (KD) of your focus keyword. Additionally, it will also show all the related keywords with their MSVs and KDs.
 
 ![Keyword research](/PostImages/content-marketing-strategy/5.png)
 
@@ -237,7 +237,6 @@ Here are a few strategy tools to help in content marketing:
 - **Buzzsumo** – Helps in analyzing content engagement and finding relevant content ideas.
 - **Canva** – A free graphic designing tool with ready-made templates for visuals.
 
-What is the Final Goal of Content Strategy for Marketing SaaS Companies
 
 ## Content Strategy vs Content Marketing Strategy
 
@@ -246,7 +245,7 @@ But a content 'marketing' strategy is a wholly different thing. It is not about 
 These two components are related to one another and the best content marketing necessarily involves content strategy as its first step. 
 
 
-## What is the Final Goal of Content Strategy for Marketing SaaS Companies
+## What is the Final Goal of  Content Strategy for Marketing SaaS companies
 
 The entire point of creating informational blogs and making them rank in the search page has one main goal. It is converting the generated traffic into paying customers. The entire process of content marketing is directed towards generating revenue. It is one of the most efficient methods of revenue generation because if the Content is good, it will create a long-term reader base that can be slowly converted into customers. 
 
@@ -267,10 +266,13 @@ We need a clear understanding of the main pain points for which your Content nee
 ## Frequently Asked Questions  
 
 ### 1. What is a SaaS Content Strategy?  
-SaaS content strategy is a planned approach wherein content is SEO-optimized and pushed to potential customers to yield organic traffic for the company that could finally lead to conversions in the form of paying customers. It focuses on researching your ideal consumer profile and then ideating on content that will address their specific pain points.  
+A B2B SaaS content strategy is a planned approach wherein content is SEO-optimized and pushed to potential customers to yield organic traffic for the company that could finally lead to conversions in the form of paying customers. It focuses on researching your ideal consumer profile and then ideating on content that will address their specific pain points.  
 
 ### 2. What is a SaaS Marketing Strategy?  
 SaaS marketing strategy is a specialized plan to help build awareness and interest and finally result in conversion for the software product of a SaaS company. It is a cost-effective way that uses optimized content to generate leads and acquire paying customers. It includes various components such as SEO optimization and planning ahead in the form of a content calendar.  
 
 ### 3. What are the 4 P's of Marketing in SaaS?  
 The 4 P's in SaaS marketing are **Product, Pricing, Placement,** and **Promotion.** The goal of these four Ps of marketing is the fifth P, namely **profit.** The 4 P’s play a significant role in generating leads to acquire and retain customers.  
+
+### 4. What is content strategy?
+A content strategy is an outline of the kind of Content you want to create. It is the backbone of your company's knowledge base. It is your writer's job. It includes creating a content calendar with sections for keywords ans their search volume and keyword density. 
