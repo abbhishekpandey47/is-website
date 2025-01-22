@@ -142,7 +142,7 @@ By using the various robot.txt directives wisely, you can give search engines cl
 
 ## Common Robots Txt File Examples
 
-Let's take a closer look at how robots.txt can be effectively used in real-world scenarios to optimize SEO and improve site crawlability:
+Let's take a closer look at common robots.txt examples​ which can be effectively used in real-world scenarios to optimize SEO and improve site crawlability:
 
 ### 1. Blocking Internal Search Pages
 
