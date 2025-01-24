@@ -397,6 +397,17 @@ let postMetaData = [
     category: "Informational",
     metaDescription: "Drive your SaaS growth with our updated 2025 SaaS content marketing strategy guide. Learn proven marketing techniques to improve and deliver measurable results."
 },
+    {
+    title: "B2B Content Syndication: A complete guide",
+    metatitle: "B2B Content Syndication guide",
+    slug: "b2b-content-syndication",
+    description: "Explore how content syndication can be used as an cost effective marketing tool for B2B Saas companies and boost SEO if done right. Learn how you can distribute your content to yield more traffic and high intent leads..",
+    ogImage: "/PostImages/b2b-content-syndication/0.png",
+    publishedOn: "2025-1-24",
+    authorId: "author0003",
+    category: "Informational",
+    metaDescription: "Explore content syndication as a cost effective marketing technique that entails republishing high quality content on third party platforms."
+},
 
 ];
 
