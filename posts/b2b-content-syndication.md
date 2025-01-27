@@ -23,7 +23,7 @@ Contrary to conventions, there is no rule that you can only syndicate blogs or w
 
 ## What are the Benefits of Content Syndication for B2B?
 
-The content marketing strategy for SaaS has three main components: understanding your audience, ideating content, and finally, distribution. Most marketers think that creativity ends at the second stage. But is it not marketing genius that takes an already-made product and alters it to fit every occasion? Similarly, in content syndication, you get creative with the distribution process. This syndication of content to different websites has several advantages:
+'[The content marketing strategy for SaaS](https://www.infrasity.com/blog/content-marketing-strategy)' has three main components: understanding your audience, ideating content, and finally, distribution. Most marketers think that creativity ends at the second stage. But is it not marketing genius that takes an already-made product and alters it to fit every occasion? Similarly, in content syndication, you get creative with the distribution process. This syndication of content to different websites has several advantages:
 
 ### 1. Enhancing Brand Visibility and Generating High-Quality Leads
 
