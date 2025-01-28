@@ -257,7 +257,7 @@ let postMetaData = [
         metatitle: "What are lsi keywords ​& how to find lsi keywords?​",
         slug: "lsi-keywords",
         description: "Boost SEO rankings with LSI keywords. Discover how they enhance content relevance, improve search visibility, and align with search engine algorithms effectively.",
-        ogImage: "/PostImages/lsi-keywords/0.jpg",
+        ogImage: "/PostImages/lsi-keywords/Lsi keyword.png",
         publishedOn: "2024-11-22",
         authorId: "author0001",
         category: "Informational",
