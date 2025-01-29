@@ -4,7 +4,7 @@ import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
 import Image from 'next/image'
 
-const fileList = ['aviator.png', 'firstock-logo.webp', 'cedana.png', 'cerbos.png', 'codegiant-infra-1.png', 'cycloid.png', 'daytona-removebg-preview-e1721477918328.png', 'DevZero.png', 'env0-infra-1.png', 'firefly.png', 'Group-14967.png', 'images-removebg-preview.png', 'images__2_-removebg-preview.png', 'kapstan.png', 'kubiya.png', 'logo-landscape-removebg-preview.png', 'Mask-group.png', 'middleware-logo.svg', 'scalr.png', 'stackOne.svg', 'TravisCI-Full-Color.png', 'terrateam.png','vapi.webp']
+const fileList = ['aviator.png', 'firstock-logo.webp', 'cedana.png', 'cerbos.png', 'codegiant-infra-1.png', 'cycloid.png', 'daytona-removebg-preview-e1721477918328.png', 'DevZero.png', 'env0-infra-1.png', 'firefly.png', 'Group-14967.png', 'images-removebg-preview.png', 'images__2_-removebg-preview.png', 'kapstan.png', 'kubiya.png', 'logo-landscape-removebg-preview.png', 'Mask-group.png', 'middleware-logo.svg', 'scalr.png', 'stackOne.svg', 'TravisCI-Full-Color.png', 'terrateam.png','vapi.png']
 
 const HomeMarquee = () => {
     const fileMemo = useMemo(() => fileList, [fileList])
