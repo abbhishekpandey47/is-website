@@ -10,6 +10,7 @@ Without robots.txt, search engines could end up wasting time crawling irrelevant
 
 By learning how to use and optimize robots.txt, you can take control over how your website is crawled and indexed---ultimately improving your SEO results and protecting your content. Robot txt in SEO is a gamechanger tool which can significantly add to your websites growth.
 
+
 ## What is Robots.txt?
 
 **Robots.txt** is a plain text file that lives on the root of your website and gives **web crawlers** instructions about which parts of your site they can access and which are off-limits.
