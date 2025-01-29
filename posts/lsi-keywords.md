@@ -29,7 +29,7 @@ If computers were only to yield results based on target keywords, it would have 
 
 However, a search engine focusing on semantic keywords will understand that the words Matcha and Japanese green tea often occur together in several articles, meaning that they are conceptually related. It will therefore yield more relevant search results and also return an article on 'Iced Matcha' if you search for 'Japanese green tea'.
 
-!["Content on Iced Matcha comes even when you search for any related term"](/PostImages/What-are-LSI-Keywords-a-complete-overview/1.png)
+![Content on Iced Matcha comes even when you search for any related term](/PostImages/lsi-keywords/1.png)
 
 
 ## Do Google's Search Engine Algorithms Use LSI Keywords?
@@ -58,7 +58,7 @@ Today, Google's algorithm has become much more advanced. It no longer uses just 
 
 Google now tries to understand the overall topic of a page.
 
-Computers are also trying to keep up with the way humans speak and enter search queries. Therefore, Google now uses contextual understanding through a range of related words to determine what a piece of content is about. So, the more holistically written your content is, the better Google thinks it is and therefore enhances SEO performance.
+Computers are also trying to keep up with the way humans speak and enter search queries. Therefore, Google now uses contextual understanding through a range of related words to determine what a piece of content is about. So, the more holistically written your content is, the better Google thinks it is and, therefore, enhances SEO performance.
 
 When using LSI keywords, it is crucial to ensure that most of them are connected naturally to the document. Do not overdo the use of LSI keywords, and choose to incorporate them in headings, subheadings, and body where applicable. It is best to avoid going overboard with keywords here, as it can lead to keyword stuffing, and your keywords should not exceed 1-2% of the content. Having effectively structured content areas, particularly bullet-point lists and short paragraphs, will yield better results.
 
@@ -68,7 +68,7 @@ One important thing to remember is that Google's algorithm is looking for semant
 
 For instance, the semantically related word for "Travel" will not be "Tour," as these are synonyms, just another word for it. This will not help the Google crawler in contextualizing. You need to use terms like:
 
-!["Semantically related terms with Travel"](/PostImages/What-are-LSI-Keywords-a-complete-overview/2.png)
+![Semantically related terms with Travel](/PostImages/lsi-keywords/2.png)
 
 
 ## Benefits of Using LSI Keywords
@@ -93,7 +93,7 @@ One of the simplest ways to find LSI keywords is using Google's autocomplete or 
 
 For example, let's take **'ICED AMERICANO'** as our primary keyword. All the words that appear in the drop-down menu are LSI Keywords. 
 
-!["Semantically related terms with Iced Americano"](/PostImages/What-are-LSI-Keywords-a-complete-overview/3.png)
+![Semantically related terms with Iced Americano](/PostImages/lsi-keywords/3.png)
 
 
 The next step is to use all these related words in your content to make it comprehensive and semantically rich.  
@@ -115,7 +115,7 @@ SEMrush will give you a list of terms related to our target keyword. According t
 
 ##### **STEP 3:** Browse the generated keyword list, which includes related terms, phrases, and questions people commonly search. These terms also carry with them their corresponding **Monthly Search Volumes (MSVs)** and **Keyword Density (KD)**.
 
-!["SEMrush to browse keywords"](/PostImages/What-are-LSI-Keywords-a-complete-overview/4.png)
+![SEMrush to browse keywords](/PostImages/lsi-keywords/4.png)
 
 
 ##### **STEP 4:** Then filter and sort keywords by volume, competition, or question format for deeper context.
@@ -129,7 +129,7 @@ Another great SEMrush feature is getting keywords used by your competitors. For 
 2. **Enter the URL of your competitor** (The content that tops the SERP).
 3. **Find out the LSI keywords used by them!**
 
-!["Semrush for competitor keyword search"](/PostImages/What-are-LSI-Keywords-a-complete-overview/5.png)
+![Semrush for competitor keyword search](/PostImages/lsi-keywords/5.png)
 
 These tools can help enrich your content by incorporating not just the primary term but also related keywords and common user questions, giving your content more depth and better search performance.
 
