@@ -29,7 +29,7 @@ If computers were only to yield results based on target keywords, it would have 
 
 However, a search engine focusing on semantic keywords will understand that the words Matcha and Japanese green tea often occur together in several articles, meaning that they are conceptually related. It will therefore yield more relevant search results and also return an article on 'Iced Matcha' if you search for 'Japanese green tea'.
 
-!["Content on Iced Matcha comes even when you search for any related term"](/PostImages/lsi-keywords/5 (1).png)
+!["Content on Iced Matcha"](/PostImages/lsi-keywords/11.png)
 
 ## Do Google's Search Engine Algorithms Use LSI Keywords?
 
