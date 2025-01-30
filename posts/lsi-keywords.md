@@ -67,7 +67,7 @@ One important thing to remember is that Google's algorithm is looking for semant
 
 For instance, the semantically related word for "Travel" will not be "Tour," as these are synonyms, just another word for it. This will not help the Google crawler in contextualizing. You need to use terms like:
 
-!["Semantically related terms with Travel"](/PostImages/lsi-keywords/3 (2).png)
+!["Semantically related terms with Travel"](/PostImages/lsi-keywords/14.png)
 
 
 ## Benefits of Using LSI Keywords
@@ -92,7 +92,7 @@ One of the simplest ways to find LSI keywords is using Google's autocomplete or 
 
 For example, let's take **'ICED AMERICANO'** as our primary keyword. All the words that appear in the drop-down menu are LSI Keywords. 
 
-!["Semantically related terms with Iced Americano"](/PostImages/lsi-keywords/2 (3).png)
+!["Semantically related terms with Iced Americano"](/PostImages/lsi-keywords/15.png)
 
 The next step is to use all these related words in your content to make it comprehensive and semantically rich.  
 
@@ -113,7 +113,7 @@ SEMrush will give you a list of terms related to our target keyword. According t
 
 ##### **STEP 3:** Browse the generated keyword list, which includes related terms, phrases, and questions people commonly search. These terms also carry with them their corresponding **Monthly Search Volumes (MSVs)** and **Keyword Density (KD)**.
 
-!["SEMrush to browse keywords"](/PostImages/lsi-keywords/1 (2).png)
+!["SEMrush to browse keywords"](/PostImages/lsi-keywords/13.png)
 
 
 ##### **STEP 4:** Then filter and sort keywords by volume, competition, or question format for deeper context.
@@ -127,7 +127,7 @@ Another great SEMrush feature is getting keywords used by your competitors. For 
 2. **Enter the URL of your competitor** (The content that tops the SERP).
 3. **Find out the LSI keywords used by them!**
 
-!["Semrush for competitor keyword search"](/PostImages/lsi-keywords/4 (1).png)
+!["Semrush for competitor keyword search"](PostImages/lsi-keywords/12.png)
 These tools can help enrich your content by incorporating not just the primary term but also related keywords and common user questions, giving your content more depth and better search performance.
 
 ## How to Use LSI Keywords
