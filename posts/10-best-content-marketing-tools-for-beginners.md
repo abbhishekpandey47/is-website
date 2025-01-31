@@ -24,7 +24,7 @@ In general, Infrasity helps customers create awareness of the products and servi
 
 Infrasity Outline Generator stands out as a powerful SaaS product designed to enhance content research and idea generation, particularly in the SaaS and B2B sectors.
 
-![Outline Generator](/PostImages/10-best-content-marketing-tools-for-beginners/1.png)
+![](/PostImages/10-best-content-marketing-tools-for-beginners/1.png)
 
 **Key Features:**
 
