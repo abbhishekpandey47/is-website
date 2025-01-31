@@ -80,7 +80,7 @@ For instance, you want a graphic representation of these five benefits of using 
 1. **Feed the prompt** into the AI tool. In this case, I have used the **IDEOGRAM AI tool**.
 2. **Choose the desired color palette** and other specifications.
 
- ![repurposed for linkedin by ai](/PostImages/Top-AI-Powered-Tools-For-Creating-Personalized-Visual-Content/5.png)
+ ![feed the prompt and choose the colour palette](/PostImages/Top-AI-Powered-Tools-For-Creating-Personalized-Visual-Content/5.png)
 
 3. **Generate your infographic**—you get your desired design in seconds!
 
