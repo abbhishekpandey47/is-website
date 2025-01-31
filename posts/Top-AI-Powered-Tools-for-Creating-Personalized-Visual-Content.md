@@ -87,6 +87,13 @@ Adobe offers advanced AI-powered content creation tools like **Adobe Firefly, Ph
 #### How It Helps:
 Adobe tools help marketers automate design tasks like resizing, removing objects, and enhancing images.
 
+#### Pricing
+
+Adobe's pricing plan starts from **$22.99 per month** for a single app such as Photoshop.  
+There is also an **'All Apps' plan** that starts at **$59.99 per month**.  
+
+The **All Apps plan** includes all Adobe creative applications, including **Firefly features** within Photoshop and Illustrator.
+
 
 ### 2. GIF Keyboard by Tenor
 
@@ -101,6 +108,10 @@ Adobe tools help marketers automate design tasks like resizing, removing objects
 
 #### How It Helps:
 Makes communication fun and engaging by offering endless possibilities for personalized GIFs, perfect for brands looking to connect casually with their audience.
+
+#### Pricing
+
+It's a **free application**!
 
 ### 3. Picsart AI GIF Generator
 
@@ -120,6 +131,13 @@ The best part? You don’t need any animation skills to bring your ideas to life
 #### How It Helps:
 It enables creators to use AI to create **informational visuals** and produce unique GIFs that resonate with their audience while aligning with brand identity. This boosts engagement and reinforces brand recognition!
 
+#### Pricing
+
+The **Picsart Plus** plan costs **$5 per month**, providing a wider range of premium templates, fonts, and stickers.  
+It also gives you access to a huge repository of stock photos and videos.  
+
+Picsart also offers a **Pro plan** that costs **$7 per month**.
+
 
 ### 4. Ezgif Text Addition Tool
 
@@ -133,6 +151,10 @@ It enables creators to use AI to create **informational visuals** and produce un
 #### How It Helps:
 This AI content creation tool allows creators to enhance their GIFs with meaningful captions or **call-to-action** elements, making visuals more engaging and informative.
 
+#### Pricing
+
+**Ezgif** is a completely **free application**!
+
 ### 5. Loading.io Text Animation Editor
 
 **Loading.io** is an online tool that specializes in creating text animations in formats like **GIF, SVG, or APNG**. It offers highly customizable design options to choose from!
@@ -145,6 +167,11 @@ This AI content creation tool allows creators to enhance their GIFs with meaning
 
 #### How It Helps:
 This AI content creation tool helps in creating **text-based animations** that grab attention in presentations, social media posts, or email campaigns.
+
+#### Pricing
+
+The **monthly plan** for Loading.io costs **$9.99 USD**, and the **yearly plan** costs **$39.99 USD**.  
+Both plans come with **unlimited access** and **up to 200 assets**.
 
 
 ### 6. Canva’s GIF Maker
@@ -163,6 +190,15 @@ This AI content creation tool helps in creating **text-based animations** that g
 #### How It Helps:
 Canva simplifies the animation creation process for content creators and marketers. It enables them to generate **professional-looking visuals** without requiring advanced design skills. Users can **add text, effects, and animations** to create engaging visuals.
 
+#### Pricing
+
+The **Canva Pro** plan costs **$12.99 per month**.  
+It is best suited for **individual users** and provides **1TB of cloud storage**.  
+
+The **Canva for Teams** plan is priced at **$14.99 per month** for **5 team members**.  
+Additional costs are incurred when adding more members.  
+This plan is designed to **foster good collaborative work**.
+
 
 ### 7. DALL·E for Visual Content Creation
 
@@ -179,6 +215,11 @@ Canva simplifies the animation creation process for content creators and markete
 #### How It Helps:
 Ideal for crafting **original visuals** that align with your brand identity, **DALL·E** helps your content stand out in a crowded market.
 
+#### Pricing
+
+**DALL-E** for visual content creation can be accessed through a **ChatGPT Plus subscription**,  
+which costs **$20 per month**.
+
 ### 8. Pictory AI
 
 **Pictory AI** automates the creation of professional-quality short videos from long-form text. It allows users to effortlessly create videos from any URL, including **homepages, product pages, or blog posts**. It turns web content into engaging videos that captivate the target audience, making it perfect for repurposing blogs, articles, or transcripts.
@@ -193,6 +234,15 @@ Ideal for crafting **original visuals** that align with your brand identity, **D
 
 #### How It Helps:
 Simplifies video creation for **creators, marketers, and social media managers**, allowing them to expand their reach through engaging video content.
+
+#### Pricing
+
+Pictory offers multiple pricing plans:
+
+- **Starters Plan**: Costs **$19 per month**.  
+- **Professional Plan**: Priced at **$39 per month**.  
+- **Teams Plan**: Costs **$99 per month**, providing access to **3+ users**.  
+- **Enterprise Plan**: Offers **custom pricing** based on requirements.
 
 
 ### 9. Piktochart AI
@@ -213,6 +263,14 @@ Simplifies video creation for **creators, marketers, and social media managers**
 #### How It Helps:
 This AI content creation tool helps **transform raw data into engaging visual stories**, allowing marketers to **communicate complex ideas effectively** and boost audience understanding.
 
+#### Pricing
+
+It offers three pricing plans:
+
+- **Pro Plan**: **$14 per month**  
+- **Business Plan**: **$24 per month**  
+- **Enterprise Plan**: **Custom pricing** based on requirements
+
 ### 10. Leonardo.Ai
 
 **Leonardo.Ai** is a cutting-edge tool designed to generate high-quality visual content using advanced artificial intelligence. Ideal for creators and marketers, it helps produce personalized designs, concept art, and creative assets with ease and efficiency.
@@ -226,6 +284,12 @@ This AI content creation tool helps **transform raw data into engaging visual st
 
 #### How It Helps:
 Leonardo.Ai empowers creators and marketers to bring their ideas to life with **exceptional speed and quality**. It transforms digital art into **print-ready masterpieces**, making it a **go-to tool for innovative visual content**.
+
+#### Pricing
+
+- **Basic Plan**: **$9 per month**  
+- **Standard Plan**: **$49 per month**  
+- **Pro Plan**: **$299 per month**  
 
 
 ### 11. Lucidchart
@@ -244,6 +308,12 @@ Leonardo.Ai empowers creators and marketers to bring their ideas to life with **
 #### How It Helps:
 Lucidchart facilitates the content creation process by providing the perfect toolkit for creating **visually engaging presentations, diagrams, flowcharts, and reports**. It **delivers polished content** by communicating complex ideas with clarity and finesse.
 
+#### Pricing
+
+Lucidchart offers **Free, Basic, Professional,** and **Team** plans.  
+The pricing begins at **$9 per month**.
+
+
 ### 12. OpenArt
 
 **OpenArt AI Image Creator** is an AI-driven platform designed to generate **unique art and visuals** for both **individual creators and businesses**. By combining cutting-edge AI models with user-friendly tools, **OpenArt** enables users to create stunning, custom visuals effortlessly.
@@ -258,6 +328,14 @@ Lucidchart facilitates the content creation process by providing the perfect too
 
 #### How It Helps:
 OpenArt is ideal for **marketers and creators** looking to produce **standout visuals**, explore **unique creative concepts**, and captivate their audience with **high-quality designs**.
+
+#### Pricing
+
+OpenArt offers three pricing plans:
+
+- **Essential Plan**: **$7 per month**  
+- **Advanced Plan**: **$14.5 per month**  
+- **Infinite Plan**: **$28 per month**  
 
 ## Tips to Improve Your Content Strategy Using AI Tools
 
