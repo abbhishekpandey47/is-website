@@ -67,7 +67,7 @@ For instance, you want a graphic representation of these five benefits of using 
 2. **Choose the desired color palette** and other specifications.
 3. **Generate your infographic**—you get your desired design in seconds!
 
-## Top 10 Tools to Create Graphics with AI
+## Top 12 Tools to Create Graphics with AI
 
 Here’s a detailed list of the best AI-powered content creation tools to help you create engaging and personalized visual content.
 
@@ -179,11 +179,11 @@ Canva simplifies the animation creation process for content creators and markete
 #### How It Helps:
 Ideal for crafting **original visuals** that align with your brand identity, **DALL·E** helps your content stand out in a crowded market.
 
-## 8. Pictory AI
+### 8. Pictory AI
 
 **Pictory AI** automates the creation of professional-quality short videos from long-form text. It allows users to effortlessly create videos from any URL, including **homepages, product pages, or blog posts**. It turns web content into engaging videos that captivate the target audience, making it perfect for repurposing blogs, articles, or transcripts.
 
-### Key Features:
+#### Key Features:
 - Converts text into **visually appealing videos**.
 - AI-powered **scene selection and storyboard creation**.
 - **Voiceover and music** integration.
@@ -191,7 +191,7 @@ Ideal for crafting **original visuals** that align with your brand identity, **D
 - Automatically extract highlights from **Zoom, Teams, Webinar, and Podcast recordings**.
 - **Add captions** to increase reach and watch time.
 
-### How It Helps:
+#### How It Helps:
 Simplifies video creation for **creators, marketers, and social media managers**, allowing them to expand their reach through engaging video content.
 
 
@@ -213,27 +213,26 @@ Simplifies video creation for **creators, marketers, and social media managers**
 #### How It Helps:
 This AI content creation tool helps **transform raw data into engaging visual stories**, allowing marketers to **communicate complex ideas effectively** and boost audience understanding.
 
-## 10. Leonardo.Ai
+### 10. Leonardo.Ai
 
 **Leonardo.Ai** is a cutting-edge tool designed to generate high-quality visual content using advanced artificial intelligence. Ideal for creators and marketers, it helps produce personalized designs, concept art, and creative assets with ease and efficiency.
 
-### Key Features:
+#### Key Features:
 - Create detailed **visuals, illustrations, and art** from text prompts.
 - Customizable **models** to align with specific artistic styles or brand guidelines.
 - Generate **high-resolution designs** in professional quality.
 - **Integrate with creative teams** to facilitate a collaborative workflow.
 - Access **pre-built design templates** for faster production.
 
-### How It Helps:
+#### How It Helps:
 Leonardo.Ai empowers creators and marketers to bring their ideas to life with **exceptional speed and quality**. It transforms digital art into **print-ready masterpieces**, making it a **go-to tool for innovative visual content**.
 
----
 
-## 11. Lucidchart
+### 11. Lucidchart
 
 **Lucidchart** is an intuitive **AI-powered platform** that helps marketers and businesses create impactful **visuals and presentations**. Its focus on **storytelling and collaboration** makes it perfect for **SaaS companies** looking to craft compelling pitches, infographics, and branded content.
 
-### Key Features:
+#### Key Features:
 - Build **presentations, infographics, and visuals** with pre-designed layouts.
 - AI-powered suggestions provide **design, layout, and content improvement recommendations**.
 - **Drag-and-drop interface** enables quick editing.
@@ -242,7 +241,7 @@ Leonardo.Ai empowers creators and marketers to bring their ideas to life with **
 - **Document systems and processes** in seconds.
 - Create and customize **AI-generated flowcharts and diagrams**.
 
-### How It Helps:
+#### How It Helps:
 Lucidchart facilitates the content creation process by providing the perfect toolkit for creating **visually engaging presentations, diagrams, flowcharts, and reports**. It **delivers polished content** by communicating complex ideas with clarity and finesse.
 
 ### 12. OpenArt
