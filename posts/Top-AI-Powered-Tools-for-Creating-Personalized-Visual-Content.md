@@ -263,17 +263,17 @@ OpenArt is ideal for **marketers and creators** looking to produce **standout vi
 
 Below are some tips to improve your content strategy while incorporating the best use of AI tools:
 
-### Personalization
+### 1. Personalization
 
 Use AI to **tailor content** for specific audience segments, ensuring relevance and improving engagement.  
 For example, customize **visuals, headlines, or messaging** based on user demographics or behavior.
 
-### Automate Repetitive Tasks
+### 2. Automate Repetitive Tasks
 
 Let AI handle time-consuming tasks like **generating visuals, resizing images, or creating variations of ads**.  
 This will enable your team to focus on **other important aspects of marketing strategy**.
 
-### Enhance Content Quality with Insights
+### 3. Enhance Content Quality with Insights
 
 Measure the impact of AI-powered visuals and use **analytics** to identify:
 - **Top-performing content**
@@ -282,12 +282,12 @@ Measure the impact of AI-powered visuals and use **analytics** to identify:
 
 Apply these insights to refine your strategy and drive **better results**.
 
-### Experiment with Different Tools for Different Formats
+### 4. Experiment with Different Tools for Different Formats
 
 AI tools can help diversify your content by creating **GIFs, videos, infographics, or memes**.  
 Test different tools for different formats to see what **resonates most** with your audience.
 
-### Optimize for SEO
+### 5. Optimize for SEO
 
 Use AI content creation tools to generate:
 - **SEO-friendly headlines**
@@ -311,13 +311,13 @@ Do explore more about **Infrasity’s content marketing services** and check out
 
 ## Frequently Asked Questions (FAQs)
 
-### How accurate are AI-powered tools in creating personalized visuals?
+### 1. How accurate are AI-powered tools in creating personalized visuals?
 
 AI-powered tools use **advanced algorithms** to match **branding guidelines, audience preferences, and platform requirements**.  
 However, while they excel at **automation and customization**, human oversight may still be needed to **refine details** or ensure **brand alignment**.
 
 
-### Are there free options for beginners?
+### 2. Are there free options for beginners?
 
 Yes, several AI tools offer **free versions or trials** for beginners.  
 Tools like **Canva, OpenArt**, and others provide **basic features at no cost**, allowing users to **experiment with creating visuals and AI-generated content**.  
@@ -325,7 +325,7 @@ Tools like **Canva, OpenArt**, and others provide **basic features at no cost**,
 While free options may have **limitations**, they are great for **small-scale projects** or learning the **basics of AI content creation** before upgrading to paid plans.
 
 
-### Can AI tools integrate with other platforms (e.g., Canva, Instagram, or Slack)?
+### 3. Can AI tools integrate with other platforms (e.g., Canva, Instagram, or Slack)?
 
 Many AI-powered tools offer **smooth integration** with popular platforms.  
 For example:
