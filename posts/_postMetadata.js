@@ -410,8 +410,8 @@ let postMetaData = [
 },
    {
     title: "Top AI Powered Tools for Creating Personalized Visual Content",
-    metatitle: "AI Powered Tools for Creating Personalized Visual Content",
-    slug: "ai-tools-for-creating-personalized-visual-content",
+    metatitle: "Best AI Tools for Creating Personalized Visual Content",
+    slug: "top-ai-powered-tools-for-creating-personalized-visual-content",
     description: "Explore how personalized visual content can be created using specialized AI Tools. Discover the steps to use AI to create personalized content in a matter of seconds and level up your SaaS Content and Marketing strategy.Explore the best AI Tools that can be used",
     ogImage: "/PostImages/Top-AI-Powered-Tools-for-Creating-Personalized-Visual-Content/0.png",
     publishedOn: "2025-1-31",
