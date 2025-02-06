@@ -16,6 +16,8 @@ Creating funnel content corresponding to each stage is a great mantra to drive s
 
 Breaking down the marketing process into three stages helps tackle each stage separately and create dedicated content for each stage.
 
+![](/PostImages/tofu-mofu-bofu-marketing/1.png)
+
 According to Kurve, **90% of B2B SaaS buyers research 2-7 websites before making a purchase decision**. They also engage with an average of 3-7 pieces of content before speaking to a sales representative, most of which happens through online channels.
 
 ## What is ToFU, MoFU, and BoFU in B2B SaaS Marketing?
@@ -60,6 +62,8 @@ Hence, seeing the divisions in the marketing funnel is very important!
 
 ## ToFU (Top of Funnel) Marketing
 
+![](/PostImages/tofu-mofu-bofu-marketing/2.png)
+
 ToFU is the awareness stage. All you need to do is ensure that your potential customers know you exist.
 
 But how can you create awareness for a very niche product when it is mostly probable that no one will specifically search for your product? Creating content about what people will search for related to your product or your target audience is the answer.
@@ -88,6 +92,8 @@ Some SEO strategies are:
 #### Paid Advertising
 An excellent ToFU strategy is creating an advertisement. Salesforce's recent advertisement with Indian cricketing legend Rahul Dravid is a great example of making your presence known to a new audience. When Salesforce entered the Indian market, it needed a campaign to create awareness and pique interest. They hired the perfect man, known as Mr Dependable!
 
+![](/PostImages/tofu-mofu-bofu-marketing/3.png)
+
 ### ToFU Content
 
 - **Informational/Educational Content:** This includes blogs, videos, podcasts.
@@ -98,6 +104,8 @@ Remember, add value in this stage. Don't put on your sales hat yet!
 
 
 ## MoFU (Middle of Funnel) Marketing
+
+![](/PostImages/tofu-mofu-bofu-marketing/4.png)
 
 This is the stage of nurturing the generated traffic. Here, the buyer is aware of your existence as well as their need to find a solution for their pain point. In the buyer's journey, this is the consideration stage.
 
@@ -115,6 +123,9 @@ Potential customers are edging towards a purchase; don't let them go. Nurture yo
 A side aim in the MoFU stage can be collecting contact information of a small percentage of those who visit you. For instance, you can provide your case studies over email or give information regarding pricing for writing technical content through email. Once accumulated, the emails can be used to relay tailored information like discounts and limited-time offers.
 
 #### Great Landing Page
+
+![](/PostImages/tofu-mofu-bofu-marketing/5.png)
+
 This is what pops up when you click on the Shopify advertisement with Mr Beast. This is called the landing page, which falls under MoFU content, and its job is to sustain the piqued interest. Outrightly, the Shopify landing page introduces itself while maintaining the link with Mr Beast. Great, right?
 
 ### MoFU Content
@@ -125,6 +136,9 @@ This is what pops up when you click on the Shopify advertisement with Mr Beast. 
 
 
 ## BoFU (Bottom of Funnel) Marketing
+
+![](/PostImages/tofu-mofu-bofu-marketing/6.png)
+
 
 At this juncture, a small proportion of the audience brought in by ToFU content and retained by MoFU content has trickled down to the BoFU stage.
 
@@ -166,6 +180,9 @@ Salesforce is like a superstar in creating content for each stage of the funnel.
 
 Salesforce has collaborated with Hollywood star Matthew McConaughey to advertise their AI-powered solutions. Let's go through its spectacular campaign that was launched in 2022, titled **‘Team Earth’** featuring Matthew McConaughey. Here we had a SaaS software being advertised by a Hollywood superstar!
 
+![](/PostImages/tofu-mofu-bofu-marketing/7.png)
+
+
 #### Stage 1: ToFU Stage
 An advertisement featuring Matthew McConaughey. It piques everyone’s interest and creates vast awareness. A lot of people who might potentially want CRM services will know about Salesforce.
 
@@ -175,11 +192,15 @@ The landing page welcomes us with an elaborate account of all its features, such
 #### Stage 3: BoFU Stage
 The excellent campaign culminates in offering free demos. This helps the customer on the brink of a purchase to try Salesforce’s services without incurring any costs.
 
+![](/PostImages/tofu-mofu-bofu-marketing/8.png)
 
 
 ### 2. Shopify
 
 Understanding who constitutes your target audience is the holy grail of marketing. Shopify, in its campaign with **Mr Beast**, demarcated a specific segment of its audience: content creators who want to sell their merchandise. They used Mr Beast not only as a famous face promoting them but also as a success story who had used Shopify’s services.
+
+![](/PostImages/tofu-mofu-bofu-marketing/9.png)
+
 
 #### Stage 1: ToFU Stage
 Shopify recognised content creators as potential customers. The entire campaign relentlessly catered to only this segment and used Mr Beast’s wide reach to connect with creators. The content creators who are slowly transitioning to commerce and business became aware of using a SaaS product to sell their merchandise. Here, the focus was the content creator’s pain point of not finding a simple solution for merchandise sales and marketing.
