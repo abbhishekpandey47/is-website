@@ -419,17 +419,17 @@ let postMetaData = [
     category: "Informational",
     metaDescription: "Discover how AI content generator tools can help in creating persoanlized visuals in a matter of seconds to drive your SaaS content marketing strategy"
 },
-    {
-    title: "ToFU, MoFU, BoFU B2B SaaS Marketing Strategy",
-    metatitle: "ToFU, MoFU and BoFU stages of the marketing funnel for B2B SaaS",
-    slug: "tofu-mofu-bofu-marketing",
-    description: "Explore how ToFU, MoFU and BoFU stages in the marketing funnel can be used to craft a comprehensive marketing plan to suit the buyer's journey at its various junctures.",
-    ogImage: "/PostImages/tofu-mofu-bofu-marketing/0.png",
-    publishedOn: "2025-2-06",
-    authorId: "author0003",
-    category: "Informational",
-    metaDescription: "Discover how a B2B SaaS marketing strategy tailored to fit the buyer's journey through awareness, interest and finally action stage can be harnessed by creating Tofu, Mofu, Bofu content."
-},
+//     {
+//     title: "ToFU, MoFU, BoFU B2B SaaS Marketing Strategy",
+//     metatitle: "ToFU, MoFU and BoFU stages of the marketing funnel for B2B SaaS",
+//     slug: "tofu-mofu-bofu-marketing",
+//     description: "Explore how ToFU, MoFU and BoFU stages in the marketing funnel can be used to craft a comprehensive marketing plan to suit the buyer's journey at its various junctures.",
+//     ogImage: "/PostImages/tofu-mofu-bofu-marketing/0.png",
+//     publishedOn: "2025-2-06",
+//     authorId: "author0003",
+//     category: "Informational",
+//     metaDescription: "Discover how a B2B SaaS marketing strategy tailored to fit the buyer's journey through awareness, interest and finally action stage can be harnessed by creating Tofu, Mofu, Bofu content."
+// },
 ];
 
 const sorted = () => {
