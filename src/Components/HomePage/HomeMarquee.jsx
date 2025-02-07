@@ -10,7 +10,7 @@ const HomeMarquee = () => {
     const fileMemo = useMemo(() => fileList, [fileList])
     return (
            <div className='max-lg:mt-[30vh] max-sm:mt-[0vh] max bg-gradient-to-br from-[#DEE4EA] to-[#ebeef1] pt-2.5 pb-2.5 card glass'>
-                <h2 className='text-center pb-1 text-black quicksand-bold text-2xl'>Trusted by DevTools Companies like</h2>
+                <h2 className='text-center pb-1 text-black quicksand-bold text-2xl'>We are the growth strategists for some of the fastest-growing B2B SaaS startups</h2>
                 <Marquee className="motion-reduce:overflow-auto" innerClassName="motion-reduce:animate-none">
                     <div className="flex gap-20 max-sm:gap-10 items-center mx-4">
                         {
