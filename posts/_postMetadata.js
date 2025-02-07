@@ -425,7 +425,7 @@ let postMetaData = [
     slug: "tofu-mofu-bofu-marketing",
     description: "Explore how Top of Funnel, Middle of Funnel and bottom of funnel stages in the marketing funnel can be used to craft a comprehensive marketing plan to suit the buyer's journey at its various junctures.",
     ogImage: "/PostImages/tofu-mofu-bofu-marketing/0.png",
-    publishedOn: "2025-1-26",
+    publishedOn: "2025-2-06",
     authorId: "author0003",
     category: "Informational",
     metaDescription: "Discover how a B2B SaaS marketing strategy tailored to fit the buyer's journey through awareness, interest and finally action stage can be harnessed by creating Tofu, Mofu, Bofu content."
