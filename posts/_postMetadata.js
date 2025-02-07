@@ -423,7 +423,7 @@ let postMetaData = [
     title: "ToFU, MoFU, BoFU B2B SaaS Marketing Strategy",
     metatitle: "ToFU, MoFU and BoFU stages of the marketing funnel for B2B SaaS",
     slug: "tofu-mofu-bofu-marketing",
-    description: "Explore how Top of Funnel, Middle of Funnel and bottom of funnel stages in the marketing funnel can be used to craft a comprehensive marketing plan to suit the buyer's journey at its various junctures.",
+    description: "Explore how ToFU, MoFU and BoFU stages in the marketing funnel can be used to craft a comprehensive marketing plan to suit the buyer's journey at its various junctures.",
     ogImage: "/PostImages/tofu-mofu-bofu-marketing/0.png",
     publishedOn: "2025-2-06",
     authorId: "author0003",
