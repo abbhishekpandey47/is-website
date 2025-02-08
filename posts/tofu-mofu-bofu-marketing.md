@@ -28,23 +28,17 @@ An enterprise with several decision-makers means you must pass through several f
 
 To sustain this arduously long process of a customer's buying cycle, we break down the marketing process of a SaaS product into well-demarcated stages. If B2B SaaS companies treat marketing as a monolith, it could adversely impact the overall goal of conversions.
 
-Think of it like a leaking funnel.
-
-### Top-of-Funnel (ToFU) Marketing
+**Think of it like a leaking funnel**.
 
 Top-of-funnel marketing tells potential customers that you exist! 
 
 For instance, let's take a hypothetical company named **ACME**, which is a SaaS company that offers a range of developer productivity tools. So, if I want to do ToFU marketing for ACME, the best strategy is to create informational blogs that merely address a pain point of ACME’s potential customers, such as DevOps or DevRels. At this stage, there is no mention of ACME or its product. ToFU is singularly customer-focused. It therefore brings in a vast swarm of audiences to your website.
 
-### Middle-of-Funnel (MoFU) Marketing
-
 Middle-of-the-funnel marketing nurtures some of this organic traffic. 
 
 So, the MoFU content for ACME can be more detailed blogs or whitepapers where, besides being solution-oriented, you offer your product as an answer to the customer’s problem.
 
-### Bottom-of-Funnel (BoFU) Marketing
-
-An even lesser portion of the audience moves to the final stage. Here, the customer is on the brink of a purchase. If ACME comes up with, for instance, a timely offer or discount, it could lead to conversions!
+An even lesser portion of the audience moves to the final stage, the bottom-of-funnel. Here, the customer is on the brink of a purchase. If ACME comes up with, for instance, a timely offer or discount, it could lead to conversions!
 
 
 
