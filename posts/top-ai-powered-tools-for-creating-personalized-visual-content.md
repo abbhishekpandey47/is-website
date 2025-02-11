@@ -45,7 +45,7 @@ This is the Instagram banner equipped with colors and imager, suited to the app.
 
 This is the repurposed infographic, made to suit Linked-in. 
 
-Both these infograhics are made with AI content creation tool in a matter of seconds!
+Both these infographics are made with AI content creation tool in a matter of seconds!
 
 ### 2. Scalability
 
