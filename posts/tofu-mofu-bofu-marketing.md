@@ -41,19 +41,6 @@ So, the MoFU content for ACME can be more detailed blogs or whitepapers where, b
 An even lesser portion of the audience moves to the final stage, the bottom-of-funnel. Here, the customer is on the brink of a purchase. If ACME comes up with, for instance, a timely offer or discount, it could lead to conversions!
 
 
-
-### Common Mistakes to Avoid in ToFU, MoFU, and BoFU Stages in SaaS Marketing
-
-Let's take a hypothetical scenario in which we have **Steve**, the marketing head of **XYZCLOUD**, a SaaS company that makes cloud security software.
-
-Now Steve wants conversions! So, he created a paid advertisement to tell people to buy his software for their company's security solutions. People come to XYZCLOUD's website following the advertisement but find nothing on the landing page that will retain them on the website. And so they lose interest and leave.
-
-Do you see Steve's mistake? 
-
-He created good ToFU content that drove potential customers to his website but failed to create content for the **'consideration' phase**, the **MoFU stage**.
-
-Hence, seeing the divisions in the marketing funnel is very important!
-
 ## ToFU (Top of Funnel) Marketing
 
 !["tofu goals and strategies"](/PostImages/tofu-mofu-bofu-marketing/2.png)
@@ -164,6 +151,17 @@ Each stage also has specific performance metrics peculiar to that stage:
 - **MoFU (Middle of Funnel):** Metrics can be webinar attendance and lead magnet downloads.
 - **BoFU (Bottom of Funnel):** Metrics can be demo sign-ups and deal closures.
 
+### Common Mistakes to Avoid in ToFU, MoFU, and BoFU Stages in SaaS Marketing
+
+Let's take a hypothetical scenario in which we have **Steve**, the marketing head of **XYZCLOUD**, a SaaS company that makes cloud security software.
+
+Now Steve wants conversions! So, he created a paid advertisement to tell people to buy his software for their company's security solutions. People come to XYZCLOUD's website following the advertisement but find nothing on the landing page that will retain them on the website. And so they lose interest and leave.
+
+Do you see Steve's mistake? 
+
+He created good ToFU content that drove potential customers to his website but failed to create content for the **'consideration' phase**, the **MoFU stage**.
+
+Hence, seeing the divisions in the marketing funnel is very important!
 
 
 ## ToFU, MoFU, and BoFU Examples
