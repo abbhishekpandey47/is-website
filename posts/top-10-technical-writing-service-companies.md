@@ -6,6 +6,8 @@ SaaS companies make complex products such as AI Agents and developer experience 
 
 This blog has curated a list of the top 10 technical writing services to help streamline technical content production and aid tech communication for your SaaS company. This blog breaks down the components to factor in before choosing a technical writing agency.
 
+!["pie chart"](/PostImages/top-10-technical-writing-service/11.png)
+
 ## 10 Technical Writing Companies to Try In 2025
 
 ### Infrasity 
