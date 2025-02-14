@@ -420,7 +420,7 @@ let postMetaData = [
     metaDescription: "Discover how AI content generator tools can help in creating persoanlized visuals in a matter of seconds to drive your SaaS content marketing strategy"
 },
      {
-     title: "ToFU, MoFU, BoFU: Proven B2B SaaS Marketing Strategy for Success.",
+     title: "ToFU, MoFU, BoFU: Proven B2B SaaS Marketing Strategy for Success",
      metatitle: "ToFU, MoFU and BoFU stages of the marketing funnel for B2B SaaS",
      slug: "tofu-mofu-bofu-marketing",
      description: "Explore how ToFU, MoFU and BoFU stages in the marketing funnel can be used to craft a comprehensive marketing plan to suit the buyer's journey at its various junctures.",
