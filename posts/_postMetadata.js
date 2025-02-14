@@ -428,7 +428,20 @@ let postMetaData = [
      publishedOn: "2025-2-06",
      authorId: "author0003",
      category: "Informational",
-     metaDescription: "Discover how a B2B SaaS marketing strategy tailored to fit the buyer's journey through awareness, interest and finally action stage can be harnessed by creating Tofu, Mofu, Bofu content." },
+     metaDescription: "Discover how a B2B SaaS marketing strategy tailored to fit the buyer's journey through awareness, interest and finally action stage can be harnessed by creating Tofu, Mofu, Bofu content." 
+},
+    
+    {
+    title: "Top 10 Technical Content Writing Service Companies in 2025",
+    metatitle: "Top 10 Technical Content Writing Service Companies to try in 2025",
+    slug: "top-10-technical-writing-service-companies",
+    description: "In this blog we have curated a list of top 10 technical writing service companies that provide comprehensive and simplified technical content",
+    ogImage: "/PostImages/Top-AI-Powered-Tools-for-Creating-Personalized-Visual-Content/0.png",
+    publishedOn: "2025-2-14",
+    authorId: "author0003",
+    category: "Informational",
+    metaDescription: "Check out our list of Technical writing companies to help streamline technical content production and aid tech communication for your SaaS company. "
+},
 ];
 
 const sorted = () => {
