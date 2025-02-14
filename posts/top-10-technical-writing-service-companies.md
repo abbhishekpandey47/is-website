@@ -8,7 +8,7 @@ This blog has curated a list of the top 10 technical writing services companies 
 
 !["pie chart"](/PostImages/top-10-technical-writing-service/11.png)
 
-## 10 Technical Writing Companies to Try In 2025
+## 10 Technical Writing Companies to Try in 2025
 
 ### 1. Infrasity 
 
