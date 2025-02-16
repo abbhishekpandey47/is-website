@@ -435,7 +435,7 @@ let postMetaData = [
     title: "Top 10 Technical Content Writing Service Companies in 2025",
     metatitle: "Top 10 Technical Content Writing Service Companies to try in 2025",
     slug: "top-10-technical-writing-service-companies",
-    description: "In this blog we have curated a list of top 10 technical writing service companies that provide comprehensive and simplified technical content",
+    description: "In this blog we have curated a list of top 10 technical writing service companies that provide comprehensive and simplified technical content.",
     ogImage: "/PostImages/top-10-technical-writing-service/banner.png",
     publishedOn: "2025-2-14",
     authorId: "author0003",
