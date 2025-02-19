@@ -26,7 +26,7 @@ The long-tail keywords have a lower search volume compared to short tailed keywo
 
 ## Difference Between Long Tail Keywords and Short Tail Keywords
 
-![Long Tail Keywords vs Short Tail Keywords](/PostImages/long-tail-vs-short-tail/11.png)
+![](/PostImages/long-tail-vs-short-tail/11.png)
 
 Short tail keywords include a few words ranging from one to three, whereas long tail keywords have a word count above three. The latter helps understand the search query, whether buying a specific product or seeking general information.
 
@@ -45,15 +45,15 @@ Here's how you can find relevant keywords using Ahrefs' Free Keyword Generator T
 1. Navigate to Ahrefs' Free Keyword Generator tool.
 2. Select your desired search engine and location where you would like to reach your target audience.
 
-**Caption:** Keyword Parameters
+![](/PostImages/long-tail-vs-short-tail/12.png)
 
 3. Input the set of words related to your topic or service. Then, click on ‘Find Keywords.’
 
-**Caption:** Input the primary set of words of your topic
+![](/PostImages/long-tail-vs-short-tail/13.png)
 
 4. You will find specific short and long-tail keywords you can integrate into the content to reach your target customers. You will find mainly short tail keywords in **Phrase Match**, and long tail keywords in **Question format**.
 
-**Caption:** Short Tail Keywords in Phrases and Long Tail Keywords in Questions
+![](/PostImages/long-tail-vs-short-tail/14.png)
 
 These steps allow you to research keywords using tools and upscale your content.
 
@@ -70,7 +70,7 @@ Even though short tailed keywords are expensive for running PPC campaigns, their
 ### 3. Integrate Short Tail Keywords in Meta Tags
 Since short tailed keywords have a high search volume, include them in meta titles, descriptions, and URLs. This keyword integration strategy will help increase visibility on search engine results pages (SERPs).
 
-**Caption:** Keyword in Meta Tags
+![](/PostImages/long-tail-vs-short-tail/15.png)
 
 ### 4. Create Informational Content
 You can create informational and educational blog articles around broad topics to build an online presence. For example, the content may revolve around content marketing. Such content with relevant keywords can introduce readers to your business. Additionally, it will lay the foundation for later stages in the customer journey.
