@@ -26,7 +26,7 @@ The long-tail keywords have a lower search volume compared to short tailed keywo
 
 ## Difference Between Long Tail Keywords and Short Tail Keywords
 
-![](/PostImages/long-tail-vs-short-tail/11.png)
+![](public/PostImages/long-tail-vs-short-tail/11.png)
 
 Short tail keywords include a few words ranging from one to three, whereas long tail keywords have a word count above three. The latter helps understand the search query, whether buying a specific product or seeking general information.
 
