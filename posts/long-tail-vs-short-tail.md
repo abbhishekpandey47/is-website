@@ -82,7 +82,7 @@ Integrating the SEO long tail keywords into your content helps reach your target
 ### 1. Content Clusters
 Develop content clusters around a central topic, linking related articles with different long tail keyword phrases to create a comprehensive resource.
 
-For example, an email marketing blog could create a central post about "what is content marketing." This central post could be linked to articles on "top 5 content marketing agencies" and "**[best content marketing tools]([https://www.infrasity.com/contact](https://www.infrasity.com/blog/10-best-content-marketing-tools-for-beginners))**."
+For example, an email marketing blog could create a central post about "what is content marketing." This central post could be linked to articles on "top 5 content marketing agencies" and "**[best content marketing tools](https://www.infrasity.com/blog/10-best-content-marketing-tools-for-beginners)**."
 
 ### 2. Detailed How-to Guides
 Create in-depth guides or tutorials that integrate long-tail keywords, offering actionable insights. An article titled "How to use Content Marketing Tools" can engage high-intent users aiming to gain some practical knowledge.
