@@ -37,7 +37,8 @@ Audits provide a bird's-eye view of the health of your website's technical SEO a
 The audit is like a report card of your website that tells its strengths and weaknesses. The job of fixing the weak points is of the technical SEO consultant.  
 Some of the tools that can help in site audit are Google Search Console, Screaming Frog, and SEMrush.
 
----
+!["screaming frog for seo audit"](/PostImages/what-is-a-technical-seo-specialist/1.png)
+
 
 ### Make Website Mobile-Friendly
 
@@ -50,13 +51,17 @@ According to Statista, as of 2024, mobile devices account for a staggering 62.54
 If a search engine crawler finds similar content on several pages of your website, it can confuse them as to which one is original, potentially splitting or lowering overall ranking.  
 The technical SEO expert tackles duplicate pages in case of content syndication or repetition by adding Canonical tags to the URL of the content to tell Google crawlers which version of content to see as original or by adding 301 redirects to point to the preferred original page.
 
----
+!["canonical tags"](/PostImages/what-is-a-technical-seo-specialist/2.png)
+
 
 ### Optimize Website Loading Speed
 
 According to research, 40% of readers bounce off if the page's loading time exceeds 3 seconds.  
 To prevent this staggering bounce rate, Tech SEO experts pay keen attention to maintaining a fast loading speed to retain readers.  
 Google's page speed insights tool helps you to check your website speed; it also marks your website's performance across several metrics like speed index, blocking time, etc., on a scale of 0 to 100. The higher your website scores, the better!
+
+!["performance score on google page insights"](/PostImages/what-is-a-technical-seo-specialist/3.png)
+
 
 ### Optimizing the Landing Pages - Reducing Bounce Rate
 
@@ -78,7 +83,7 @@ Site architecture refers to how pages are linked to your website. As previously 
 
 An SEO-friendly site architecture creation is the Tech SEO consultant's job, who must ensure that most pages are just 2-3 clicks away from the homepage.
 
-!["a simple site architecture"](/PostImages/b2b-content-syndication/1.png)
+!["a simple site architecture"](/PostImages/what-is-a-technical-seo-specialist/4.png)
 
 ### Managing Broken Pages and Links
 
