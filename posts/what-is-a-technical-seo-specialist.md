@@ -4,7 +4,7 @@ According to Forbes, organic search contributes 17% to overall website traffic. 
 
 A well-optimized site can significantly enhance the rate of organic traffic coming to your website and aid in their retention. 
 
-Technical SEO is a process that optimizes your website and helps search engine crawlers, often called spiders, to find, crawl, index, and finally rank your website in the Search Engine Reference page (SERF). 
+Technical SEO is a process that optimizes your website and helps search engine crawlers, often called Spiders, to find, crawl, index, and finally rank your website in the Search Engine Reference page (SERF). 
 
 One of the key players behind this optimization is a Technical SEO Specialist. This backend expert not only ensures that your website ranks well on search engines but is also user-friendly and easily navigable for the audience. 
 
@@ -21,7 +21,7 @@ On the backend, a Tech SEO Specialist improves the elements that contribute to t
 
 ---
 
-## What are the Tasks Performed by a Technical SEO Expert?
+## What Are the Tasks Performed by a Technical SEO Expert?
 
 SaaS marketing agencies like Infrasity that assist early-stage startups have technical SEO consultants who begin with a thorough audit of technical SEO to ascertain the weak points. On the foundation of an optimized technical SEO rests the entire content and marketing strategy.
 
@@ -114,7 +114,7 @@ This blog did a deep dive into the tasks performed by a Technical SEO specialist
 
 ### What Does a Technical SEO Specialist Do?
 
-A technical SEO specialist is essentially a backend expert who optimizes your website to make it discoverable and navigable for Google spider bots.
+A technical SEO specialist is essentially a backend expert who optimizes your website to make it discoverable and navigable for Google Spider bots.
 
 The job also entails fixing technical SEO issues and conducting extensive SEO analysis to rectify any loose ends like broken links, incomplete or missing meta tags, duplicate content, etc.
 
