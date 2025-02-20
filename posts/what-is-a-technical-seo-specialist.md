@@ -86,19 +86,19 @@ Broken links (like 404 errors) can frustrate your readers, making them bounce ou
 
 A technical SEO expert generally uses a combination of components to make websites mobile-friendly. Such as:
 
-### Compressing Images to Improve Loading Time
+### 1. Compressing Images to Improve Loading Time
 
 Chunky images can make your website slower to load and cause readers to leave your website. The visual assets, therefore, need to be compressed to be handled quickly by mobile devices.
 
-### Decluttered And Simplistic Web Page
+### 2. Decluttered And Simplistic Web Page
 
 Keep the interface simple and not riddled with too many options. Decluttered space is integral for a smaller screen size.
 
-### Compatible Fonts And Button Placements
+### 3. Compatible Fonts And Button Placements
 
 The mobile device screen is much smaller; therefore, maintaining the correct font size is essential to enhance user experience. If the reader has to constantly zoom in to read texts, then the chances of them leaving your website, despite good content, increase. Additionally, the button sizes and placements should also be optimized to be compatible with the screen size of a mobile device. CTAs should be strategically placed to attract attention and get clicks.
 
-### Minimize Pop-Ups
+### 4. Minimize Pop-Ups
 
 Too many pop-ups can hamper the user experience and make them bounce out of your website.
 
@@ -112,7 +112,7 @@ This blog did a deep dive into the tasks performed by a Technical SEO specialist
 
 ## Frequently Asked Questions (FAQs)
 
-### What Does a Technical SEO Specialist Do?
+### 1. What Does a Technical SEO Specialist Do?
 
 A technical SEO specialist is essentially a backend expert who optimizes your website to make it discoverable and navigable for Google Spider bots.
 
@@ -123,13 +123,13 @@ Some commonly used technical SEO tools are:
 - **Screaming Frog** (for SEO audits)
 - **Google Page Insights** (for page speed and website performance score)
 
-### Does Your Startup Need a Technical SEO Consultant?
+### 2. Does Your Startup Need a Technical SEO Consultant?
 
 To answer whether your startup needs dedicated personnel to handle technical SEO, you first need to assess your goals and priorities. A technical SEO expert’s job encompasses all the behind-the-scenes actions that make your content accessible to both the search engine crawlers as well as the end user.
 
 The Technical SEO consultant works to create a foundation for the content and marketing strategies and becomes essential as your company grows.
 
-### What Are the Reasons Why SEO Specialists Should Master Google Analytics?
+### 3. What Are the Reasons Why SEO Specialists Should Master Google Analytics?
 
 Google Analytics is a great tool that gives you a comprehensive view of organic traffic generated with respect to several metrics, such as specific periods and audience search patterns. This insight is invaluable for a technical SEO specialist who does regular audits to monitor the organic traffic coming to the website.
 
