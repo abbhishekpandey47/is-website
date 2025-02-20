@@ -4,3 +4,7 @@ Allow: /
 
 # Sitemaps
 Sitemap: https://infrasity.com/sitemap.xml
+
+# perplexity
+User-agent: PerplexityBot
+Allow: /
