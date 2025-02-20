@@ -78,6 +78,8 @@ Site architecture refers to how pages are linked to your website. As previously 
 
 An SEO-friendly site architecture creation is the Tech SEO consultant's job, who must ensure that most pages are just 2-3 clicks away from the homepage.
 
+!["a simple site architecture"](/PostImages/b2b-content-syndication/1.png)
+
 ### Managing Broken Pages and Links
 
 Broken links (like 404 errors) can frustrate your readers, making them bounce out of your website. A tech SEO expert regularly performs site audits to check if there are any broken links or pages. For instance, see the below audit report on broken links.
