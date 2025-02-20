@@ -223,7 +223,7 @@ let postMetaData = [
         title: "Long Tail vs. Short Tail Keywords: How Are They Different?",
         metatitle: "Long Tail vs. Short Tail Keywords (2025)​",
         slug: "long-tail-vs-short-tail",
-        description: "Explore long-tail and short-tail keywords, their unique benefits, and how to choose the most effective ones to boost your SEO strategy and rankings.",
+        description: "Explore long and short-tail keywords, learn how to find them, and integrate them into your content.",
         ogImage: "/PostImages/long-tail-vs-short-tail/16.png",
         publishedOn: "2024-11-15",
         authorId: "author0001",
