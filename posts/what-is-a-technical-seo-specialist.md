@@ -10,16 +10,12 @@ One of the key players behind this optimization is a Technical SEO Specialist. T
 
 In this blog, let's explore in detail the tasks performed by technical SEO specialists and how they enhance the marketing strategy. This blog also delves deep into how technical SEO specialists create the foundation for the entire content and marketing strategy's success.
 
----
-
 ## What is a Technical SEO Specialist?
 
 The Technical SEO Specialist ensures that **your content is readable not only by your target audience (humans!) but also by search engines**. All that makes your website discoverable and readable for search engine crawlers is the job of a Technical SEO Specialist. 
 
 A technical SEO expert's job on the user front is to smoothen the reader's experience on your website to increase organic traffic and minimize bounce rate.  
 On the backend, a Tech SEO Specialist improves the elements that contribute to the search engine to **crawl, index, and rank the content** of your website. 
-
----
 
 ## What Are the Tasks Performed by a Technical SEO Expert?
 
@@ -28,8 +24,6 @@ SaaS marketing agencies like **Infrasity** that **assist early-stage startups** 
 A staggering statistic analyzed by CXL concludes that **new sites encounter an average bounce rate of 56.52%**. That's a lot of people coming to your website but bouncing out. A technical SEO expert performs various tasks to retain the generated organic traffic.
 
 Some of the most critical tasks of a search engine optimization expert are:
-
----
 
 ### Technical SEO Site Audits
 
@@ -40,11 +34,9 @@ Some of the technical SEO tool that can help in site audit are **Google Search C
 !["screaming frog for seo audit"](/PostImages/what-is-a-technical-seo-specialist/1.png)
 
 
-### Make Website Mobile-Friendly
+### Mobile-Friendliness
 
 According to Statista, as of 2024, mobile devices account for a staggering 62.54% of all web traffic worldwide. With such a high volume of users accessing websites on their mobile, optimizing your website to become mobile-friendly is an urgent need.  
-
----
 
 ### Check for Duplicated Content
 
@@ -69,7 +61,7 @@ An informative and relevant landing page can be the **difference between a conve
 
 Suppose you start a great advertising campaign in order to bring in more traffic. The generated organic traffic comes to your website following the advertisement. However, if an informative and accessible landing page does not welcome them, this traffic will not be sustained.
 
-### Create Sitemaps
+### Sitemaps Optimization
 
 A sitemap is a document or file that lists all the pages contained in your website in order to help search engine crawlers discover and index your website in a more efficient manner.
 
