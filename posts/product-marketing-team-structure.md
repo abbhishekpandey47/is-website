@@ -27,8 +27,10 @@ The **Product Marketing Manager (PMM)** is a master storyteller who weaves a nar
 
 Especially when it comes to a **SaaS-based product**, the PMM’s role becomes crucial in communicating the unique points of a very niche product to its target audience.  
 
-For instance, consider **IKEA’s brilliant product marketing strategy**. The furniture company’s unique selling proposition is that it lets customers assemble their furniture themselves at home. This strategy creates an instant bond between the product and customers, generating a loyal consumer base.  
-This **story weaving** that positions the IKEA product as a partial result of the customer's labor is the job of a **Product Marketing Manager**.  
+For instance, consider **Slack’s** brilliant product marketing strategy. **Slack, a workplace messaging app**, launched an advertising campaign with the tagline **‘So Yeah, We Tried Slack’** that, in a fun and raunchy manner, communicated how frustrated office employees were much more organized when they started using **Slack to communicate**. The advertisement was in a mockumentary style and a funny tempo marketed Slack’s product. 
+
+**This story weaving that propositions Slack’s product as a chaos settler at the workplace is the job of a product marketing manager**. 
+
 
 Here’s what they do:  
 
