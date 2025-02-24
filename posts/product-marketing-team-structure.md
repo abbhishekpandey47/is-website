@@ -65,7 +65,7 @@ However, content heads can also be entirely non-technical, depending on the indu
 
 ## What the Content Head Does
 
-### Content Strategy in Accordance with the Brand Identity
+### Content Strategy in Accordance With the Brand Identity
 - Devise a comprehensive strategy for the company to develop content (articles, videos, pictures).
 - Ensure that all content distributed across platforms (social media, company blog, etc.) is aligned with the overall feel and appearance of the brand.
 
