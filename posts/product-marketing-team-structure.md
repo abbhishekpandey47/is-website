@@ -31,6 +31,7 @@ For instance, consider **Slack’s** brilliant product marketing strategy. **Sla
 
 **This story weaving that propositions Slack’s product as a chaos settler at the workplace is the job of a product marketing manager**. 
 
+!["role of product marketing manager"](/PostImages/lsi-keywords/1.png)
 
 Here’s what they do:  
 
@@ -63,7 +64,9 @@ For instance, suppose you are a **SaaS company whose product simplifies pushing 
 
 However, content heads can also be entirely non-technical, depending on the industry and product type.
 
-## What the Content Head Does
+!["role of content head"](/PostImages/lsi-keywords/2.png)
+
+Here's what they do: 
 
 ### Content Strategy in Accordance With the Brand Identity
 - Devise a comprehensive strategy for the company to develop content (articles, videos, pictures).
@@ -79,6 +82,8 @@ The **Content Head** is crucial because they assist the company in reaching out 
 ## Role of Growth Specialist in Product Marketing  
 
 Finally, there is the **Head of Growth** position; this person takes care of the company’s expansion and continuously looks for ways to **increase the customer base and revenue**. They are like the **discoverer**, seeking new opportunities to expand the company’s operations.  
+
+!["role of growth specialist"](/PostImages/lsi-keywords/3.png)
 
 What the Head of Growth does:  
 
@@ -142,7 +147,7 @@ SaaS companies produce **niche products** that need a well-crafted strategy to r
 
 ## Frequently Asked Questions (FAQs)  
 
-### What are the 5 P’s of Product Marketing?  
+### 1. What are the 5 P’s of Product Marketing?  
 
 **Product, Price, Promotion, Place, and People** are the **5 P’s of Product Marketing**. It essentially means that the **narrative around a product** is woven, keeping in mind:  
 
@@ -152,7 +157,7 @@ SaaS companies produce **niche products** that need a well-crafted strategy to r
 
 Keeping **Place, People, and Price** in mind, a **promotion strategy** is devised to market the product.  
 
-### What is the difference between a marketing team and a product team?  
+### 2. What is the difference between a marketing team and a product team?  
 
 The **Marketing team** is responsible for the **brand as a whole**, while the **Product Marketing team** exclusively focuses on **particular products** made by the company.  
 
@@ -160,7 +165,7 @@ For example, the **Marketing team** for **Notion**, a SaaS-based company that pr
 
 Whereas the **Product Marketing team** for Notion will concentrate on **selling particular products**, such as the **new AI-powered organization feature**.  
 
-### What is the salary range of a Product Marketing Manager?  
+### 3. What is the salary range of a Product Marketing Manager?  
 
 The **salary range** for a **Product Marketing Manager** in the **United States** is approximately **$90,000** at **entry level**. It rises to about **$160,000** in **senior positions**.  
 
