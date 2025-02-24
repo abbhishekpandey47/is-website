@@ -6,7 +6,7 @@ According to Statista, there are **9,100 leading SaaS companies** in the United 
 
 Therefore, it is essential to understand the importance of creating a product marketing team, which includes a **Product Marketing Manager**, a **Content Head**, and a **Head of Growth**. This article describes who they are and how having them can strengthen your business.  
 
-## What comprises a product marketing team structure?  
+## What Comprises a Product Marketing Team Structure?  
 
 A product marketing team consists of three main roles, namely:  
 
@@ -50,7 +50,6 @@ So, **Infrasity** assists early-stage SaaS companies with a USP that combines **
 Every company has a **clear brand message**.  
 
 - **Notion** wants to empower individuals and teams to design a workflow with a collaborative structure.  
-- **IKEA** wants to provide affordable, sustainable products.  
 
 Clear **brand messaging** goes a long way in building **customer loyalty**; every product must be marketed in line with the brand messaging.  
 
@@ -60,7 +59,7 @@ Finally, there is the **Head of Growth** position; this person takes care of the
 
 What the Head of Growth does:  
 
-### Growth Opportunities  
+### Search for Growth Opportunities
 
 They constantly seek fresh opportunities to bring in **new customers** or explore **new demographic segments** for selling products.  
 
