@@ -66,15 +66,15 @@ let postMetaData = [
         metaDescription: "Find the best platform for your blog. Compare platforms for SEO, ease of use, and customization to fit your blogging needs."
     },
     {
-        title: "Jobs of Marketing: Career Paths, Roles and Skills",
-        metatitle: "what is digital marketting for B2B SaaS companies",
-        slug: "jobs-of-marketing-career-paths-roles-and-skills",
-        description: "Discover the diverse career paths in marketing, from digital and product marketing to content and brand strategy. Explore the skills needed for each role and how you can start or pivot your career in this dynamic field.",
-        ogImage: "/PostImages/jobs-of-marketing-career-paths-roles-and-skills/0.webp",
+        title: "Product Marketing Team Structure: Hierarchy of Any Successful Product",
+        metatitle: "How to stucture your Marketing Team for best results in 2025 ",
+        slug: "product-marketing-team-structure",
+        description: "Discover the diverse career paths in marketing, from product marketing managers to content head and growth specialist who devise product strategies to market your product creatively.",
+        ogImage: "/PostImages/product-marketing-team-structure/0.png",
         publishedOn: "2024-09-25",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Explore marketing careers and roles, from digital to brand strategy. Learn skills needed for success in the evolving marketing field."
+        metaDescription: "Explore marketing careers and roles, from digital to brand strategy. . Explore the skills needed for each role and how you can start or pivot your career in this dynamic field."
     },
     {
         title: "Writing Technical Content – Benefits and Best Practices for SaaS Companies",
