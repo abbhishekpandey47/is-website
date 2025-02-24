@@ -31,7 +31,7 @@ For instance, consider **Slack’s** brilliant product marketing strategy. **Sla
 
 **This story weaving that propositions Slack’s product as a chaos settler at the workplace is the job of a product marketing manager**. 
 
-!["role of product marketing manager"](/PostImages/lsi-keywords/1.png)
+!["role of product marketing manager"](/PostImages/product-marketing-team-structure/1.png)
 
 Here’s what they do:  
 
@@ -64,7 +64,7 @@ For instance, suppose you are a **SaaS company whose product simplifies pushing 
 
 However, content heads can also be entirely non-technical, depending on the industry and product type.
 
-!["role of content head"](/PostImages/lsi-keywords/2.png)
+!["role of content head"](/PostImages/product-marketing-team-structure/2.png)
 
 Here's what they do: 
 
@@ -83,7 +83,7 @@ The **Content Head** is crucial because they assist the company in reaching out 
 
 Finally, there is the **Head of Growth** position; this person takes care of the company’s expansion and continuously looks for ways to **increase the customer base and revenue**. They are like the **discoverer**, seeking new opportunities to expand the company’s operations.  
 
-!["role of growth specialist"](/PostImages/lsi-keywords/3.png)
+!["role of growth specialist"](/PostImages/product-marketing-team-structure/3.png)
 
 What the Head of Growth does:  
 
