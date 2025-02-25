@@ -462,7 +462,7 @@ let postMetaData = [
         publishedOn: "2025-02-25",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Technical writing is a crucial aspect for B2B SaaS companies. Learn about the different types of technical writing and why they are relevant for your SaaS product."
+        metaDescription: "Technical writing is a crucial aspect for B2B SaaS companies. Learn about the types of technical writing and why they are relevant for your SaaS product."
     },
 ];
 
