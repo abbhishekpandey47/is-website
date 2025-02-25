@@ -453,6 +453,17 @@ let postMetaData = [
     category: "Informational",
     metaDescription: "Learn what a Technical SEO Specialist does, their key skills, and why your business needs one. Discover how they can improve your website's performance."
 },
+    {
+    title: "What is Technical Writing? Why Most Saas Companies Fail at Technical Content?",
+        metatitle: "What is Technical Writing For B2B SaaS Companies?",
+        slug: "what-is-technical-writing",
+        description: "Technical writing can scale your B2B SaaS business, leading to more conversions. Learn what it is, its different types, and why is it important for your SaaS product",
+        ogImage: "/PostImages/what-is-technical-writing/1.png",
+        publishedOn: "2025-02-25",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Technical writing is a crucial aspect for B2B SaaS companies. Learn about the different types of technical writing and why they are relevant for your SaaS product."
+    },
 ];
 
 const sorted = () => {
