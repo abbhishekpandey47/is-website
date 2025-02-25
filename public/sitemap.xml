@@ -324,4 +324,12 @@
   <priority>0.80</priority>
 </url>
 
+<url>     
+ <loc>https://www.infrasity.com/blog/what-is-technical-writing</loc>
+  <lastmod>2025-02-25T08:02:42+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+ 
+      
 </urlset>
