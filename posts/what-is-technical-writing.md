@@ -31,29 +31,43 @@ Product documentation is essential for B2B SaaS companies, enabling developers t
 
 #### 1.1 Recipe Library
 
+![recipe library in technical writing](/PostImages/what-is-technical-writing/3.png)
+
 A recipe library provides ready-to-use templates, use-case examples, and step-by-step guides to help developers implement features efficiently. For example, **DevZero's templates** offer structured, real-world scenarios, enabling teams to replicate workflows, streamline development, and reduce setup time.
 
 #### 1.2 How-to Guides
+
+![how-to guide in technical writing](/PostImages/what-is-technical-writing/4.png)
 
 How-to guides provide step-by-step instructions for performing key tasks such as installation, configuration, and integration. They help developers navigate complex setups with clear explanations, commands, and troubleshooting steps. For example, DevZero's guides offer structured workflows, ensuring seamless product adoption and efficient implementation.
 
 #### 1.3 Use Case Guide
 
+![use case guide](/PostImages/what-is-technical-writing/5.png)
+
 A use case guide helps developers leverage specific tools, SDKs, and APIs for real-world applications. It typically includes an overview, architecture diagram, technology stack, key features, installation steps, and functional examples. Here, Daytona's SDK Use Case Guide consists of structured code samples that showcase integration workflows and practical implementations.
 
 #### 1.4 Code Documentation
+
+![code documentation in technical writing](/PostImages/what-is-technical-writing/6.png)
 
 Code documentation provides clear function references, API endpoints, and usage examples to help developers integrate and adopt the product with ease. For example, **Scalekit's SSO Quickstart** demonstrates this by offering structured guidance with concise code snippets, ensuring faster onboarding and assisted adoption of Scalekit.
 
 #### 1.5 Workflow Diagrams
 
+![workflow diagram](/PostImages/what-is-technical-writing/7.png)
+
 Workflow diagrams visually map out processes, system interactions, and data flows, helping developers understand complex architectures. They provide a structured overview of dependencies, integrations, and execution paths. For example, this architecture diagram in Daytona's SDK examples illustrates how components interact, enabling developers to implement and troubleshoot efficiently.
 
 #### 1.6 Troubleshooting Guides
 
+![troubleshooting guide in technical writing](/PostImages/what-is-technical-writing/8.png)
+
 With troubleshooting guides, developers can diagnose and resolve issues by providing error explanations, step-by-step fixes, and command-based solutions. They cover common failures, misconfigurations, and debugging techniques. The troubleshooting section in DevZero's docs exemplifies this by offering clear remediation steps and terminal commands, ensuring efficient issue resolution.
 
 #### 1.7 Release Notes & Change Logs
+
+![release notes and change logs](/PostImages/what-is-technical-writing/9.png)
 
 Release Notes and Change Logs provide developers, product teams, and stakeholders with a structured record of feature updates, bug fixes, and version changes in B2B SaaS products. They include version numbers, release dates, API modifications, and UI snapshots. For instance, StackGen's documentation includes detailed changelogs, ensuring seamless adaptation to product updates.
 
@@ -64,6 +78,8 @@ White papers can be a great choice for driving growth to your SaaS business. The
 Since white papers provide comprehensive information about the product, they serve as an effective tool at different stages of the sales funnel. They catalyze the persuasion aspect for businesses to attract their customers.
 
 A thoroughly researched white paper can drive relevant traffic to your B2B SaaS business. How? You need to include particular elements— industry data, structured content with an engaging introduction, and infographics. Additionally, the customer persona, pain points, needs, and interests should be studied to plan the white paper. With proper keyword research and a niche-specific approach, white papers can be a lucrative option.
+
+![white paper in technical writing](/PostImages/what-is-technical-writing/10.png)
 
 The idea is to persuade clients to buy your product. There are specific jargon and technical concepts that need to be highlighted in this document. For example, **Google's Cloud Security and Compliance White Paper** showcases specific insights—internal audits, security infrastructure, and threat mitigation strategies.
 
@@ -79,6 +95,8 @@ A conversational tone throughout the blog article can be an effective strategy t
 
 The technical writers will use your SaaS product for **hands-on experience** and better understanding. Then, they will write about it in a simplified manner for the developers, software engineers, system admins, and other readers to understand your product's functionalities. The blog articles will also comprise proper screenshots and code snippets for the readers to utilize the product in an effective manner.  
 
+![technical blogs](/PostImages/what-is-technical-writing/11.png)
+
 For instance, **Infrasity** is a strategic content partner for **Firefly**, an Israel-based B2B SaaS startup that provides cloud management services. Our technical writers perform hands-on, understand the features of the product, and find relevant topics with higher search volume. Let's just say the topic revolves around Drift. It is ensured that the technical blog articles discuss what would be the scenario if there was no Firefly and how the product makes things simpler for the developers.  
 
 ## 4. Technical Newsletters
@@ -92,6 +110,8 @@ SaaS businesses can choose to have a particular frequency of publishing the news
 Prepare an **automated Welcome Email** for your subscribers. Give them an overview of your product. Ensure that you stay consistent with the frequency of publishing them. Make them engaging so the developers and stakeholders can navigate to your **blog, service page, or any other relevant landing page**.  
 
 Additionally, it is important to maintain **consistency with visual aspects**, including logos, typography, and illustrations. The newsletter subscription indicates the high chance that they will **Sign Up for a Free Trial** you have to offer.  
+
+![technical newsletter](/PostImages/what-is-technical-writing/12.png)
 
 A great example is Permit's newsletter, which takes a unique approach by connecting access control concepts with real-world scenarios like Factorio. This storytelling technique makes complex security concepts engaging, relatable, and easier to digest, keeping readers interested while subtly reinforcing product relevance.  
 
