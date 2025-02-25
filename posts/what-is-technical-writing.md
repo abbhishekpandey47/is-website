@@ -51,7 +51,7 @@ A use case guide helps developers leverage specific tools, SDKs, and APIs for re
 
 ![code documentation in technical writing](/PostImages/what-is-technical-writing/6.png)
 
-Code documentation provides clear function references, API endpoints, and usage examples to help developers integrate and adopt the product with ease. For example, **Scalekit's SSO Quickstart** demonstrates this by offering structured guidance with concise code snippets, ensuring faster onboarding and assisted adoption of Scalekit.
+Code documentation provides clear function references, API endpoints, and usage examples to help developers integrate and adopt the product with ease. For example, Scalekit's SSO Quickstart demonstrates this by offering structured guidance with concise code snippets, ensuring faster onboarding and assisted adoption of Scalekit.
 
 #### 1.5 Workflow Diagrams
 
