@@ -133,7 +133,7 @@ Technical writing is one of the vital aspects of a successful B2B SaaS product. 
 
 It drives engagement and conversions by bridging the gap between complex technical products and their applications. Technical writing can be an efficient strategy for maintaining the developer's interest in your product and maximizing its usability.  
 
-Book a **Free Demo** with Infrasity to make your B2B SaaS product successful with technical writing among the developer community.
+Book a **[Free Demo](https://www.infrasity.com/contact)** with Infrasity to make your B2B SaaS product successful with technical writing among the developer community.
 
 ## Frequently Asked Questions (FAQs)
 
