@@ -99,7 +99,7 @@ The technical writers will use your SaaS product for **hands-on experience** and
 
 For instance, **Infrasity** is a strategic content partner for **Firefly**, an Israel-based B2B SaaS startup that provides cloud management services. Our technical writers perform hands-on, understand the features of the product, and find relevant topics with higher search volume. Let's just say the topic revolves around Drift. It is ensured that the technical blog articles discuss what would be the scenario if there was no Firefly and how the product makes things simpler for the developers.  
 
-## 4. Technical Newsletters
+### 4. Technical Newsletters
 
 Subscribing to your newsletter is a choice that your potential customers, including developer communities and stakeholders, have made. Why not leverage the opportunity to market your product and increase conversions?  
 
