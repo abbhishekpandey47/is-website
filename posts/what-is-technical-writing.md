@@ -33,7 +33,7 @@ Product documentation is essential for B2B SaaS companies, enabling developers t
 
 ![recipe library in technical writing](/PostImages/what-is-technical-writing/3.png)
 
-A recipe library provides ready-to-use templates, use-case examples, and step-by-step guides to help developers implement features efficiently. For example, **DevZero's templates** offer structured, real-world scenarios, enabling teams to replicate workflows, streamline development, and reduce setup time.
+A recipe library provides ready-to-use templates, use-case examples, and step-by-step guides to help developers implement features efficiently. For example, DevZero's templates offer structured, real-world scenarios, enabling teams to replicate workflows, streamline development, and reduce setup time.
 
 #### 1.2 How-to Guides
 
@@ -91,7 +91,7 @@ Technical blogs consist of comprehensive articles on topics related to technical
 
 It is imperative to conduct research to identify the customer persona and analyze your competitor before moving on with technical blogs. A well-researched blog can help you drive maximum engagement to your website and convince your potential customers to consider your product.  
 
-A conversational tone throughout the blog article can be an effective strategy to engage your audience. Technical writing companies like Infrasity can help you reach your target audience through **customer-centric SEO-friendly technical blogs**.  
+A conversational tone throughout the blog article can be an effective strategy to engage your audience. **[Technical writing](https://www.infrasity.com/)** companies like Infrasity can help you reach your target audience through **customer-centric SEO-friendly technical blogs**.  
 
 The technical writers will use your SaaS product for **hands-on experience** and better understanding. Then, they will write about it in a simplified manner for the developers, software engineers, system admins, and other readers to understand your product's functionalities. The blog articles will also comprise proper screenshots and code snippets for the readers to utilize the product in an effective manner.  
 
