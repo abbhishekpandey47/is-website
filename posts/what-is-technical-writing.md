@@ -23,6 +23,8 @@ Let us understand the different types of technical writing and their significanc
 
 Technical writing is an umbrella term for several types of technical information organized in a structured way. If you are wondering how is technical writing used, these different categories of technical writing will help you understand it better.
 
+![types of technical writing](/PostImages/what-is-technical-writing/2.png)
+
 ### 1. Product Documentation
 
 Product documentation is essential for B2B SaaS companies, enabling developers to integrate the product with different sets of SDKs. It provides structured technical insights, offering step-by-step instructions, architecture overviews, and practical implementation steps. Here are several types of technical documentation:
