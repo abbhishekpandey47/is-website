@@ -12,10 +12,10 @@ It is imperative to have a set of parameters while selecting an outline generato
 
 Here are the important factors you should look for in outline generators:
 
-1. **Ease of use**: The foremost thing you should look for is the User Interface of the outline generator. It should be intuitive, allowing you to extract a constructive outline for your writing project. Identify if you can easily navigate and get the desired output.
-2. **Output efficiency**: Scrutinize the outline generator and identify if it provides you with efficient results. An efficient output will be where you don't need to change it and utilize it for writing the content.
-3. **Features**: Each outline generator has its unique features. These features could be the optimal word count and targeted keywords. So, select the tool with features that align with your requirements.
-4. **Pricing**: The free outline generators provide you with constructive outputs. However, with advanced features comes the pricing aspect. The premium version of these tools can be advantageous, but the decision is yours whether you want to make a purchase.
+- **Ease of use**: The foremost thing you should look for is the User Interface of the outline generator. It should be intuitive, allowing you to extract a constructive outline for your writing project. Identify if you can easily navigate and get the desired output.
+- **Output efficiency**: Scrutinize the outline generator and identify if it provides you with efficient results. An efficient output will be where you don't need to change it and utilize it for writing the content.
+- **Features**: Each outline generator has its unique features. These features could be the optimal word count and targeted keywords. So, select the tool with features that align with your requirements.
+- **Pricing**: The free outline generators provide you with constructive outputs. However, with advanced features comes the pricing aspect. The premium version of these tools can be advantageous, but the decision is yours whether you want to make a purchase.
 
 These are the set of parameters that can help you make an informed decision on selecting the best outline generator.
 
