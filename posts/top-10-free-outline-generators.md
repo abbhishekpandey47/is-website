@@ -88,7 +88,7 @@ The AI Summarizer has the following additional features:
 
 RyRob.com is an outline generator that requires you to input your blog topic, and it will provide you with an outline consisting of H1 and H2s. Additionally, it suggests the pointers you can add to your content. Once you are satisfied with the output, you can copy it into your file.
 
-#### Additional Features
+#### Additional Feature
 
 - RyRob.com provides you with a creative headline.
 
