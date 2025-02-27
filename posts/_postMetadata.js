@@ -463,7 +463,19 @@ let postMetaData = [
         authorId: "author0001",
         category: "Informational",
         metaDescription: "Technical writing is a crucial aspect for B2B SaaS companies. Learn about the types of technical writing and why they are relevant for your SaaS product."
-    },
+},
+    {
+    
+    title: "Top 10 Free AI Outline Generators in 2025",
+        metatitle: "Top 10 Free AI Outline Generators in 2025",
+        slug: "top-10-free-outline-generators",
+        description: "Here are the top 10 Free AI Outline Generators that you should utilize while preparing the structure of your write-up. The best part? They are free!",
+        ogImage: "/PostImages/top-10-free-outline-generators/A.png",
+        publishedOn: "2025-02-27",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "These Top 10 Free AI Outline Generators can save your time and structure the content more efficiently. The best part? They are available for free!"
+    }       
 ];
 
 const sorted = () => {
