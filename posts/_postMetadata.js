@@ -467,7 +467,7 @@ let postMetaData = [
     {
     
     title: "Top 10 Free AI Outline Generators in 2025",
-        metatitle: "Top 10 Free AI Outline Generators in 2025",
+        metatitle: "Top 10 Free AI Outline Generators of 2025 for Writing",
         slug: "top-10-free-outline-generators",
         description: "Here are the top 10 Free AI Outline Generators that you should utilize while preparing the structure of your write-up. The best part? They are free!",
         ogImage: "/PostImages/top-10-free-outline-generators/A.png",
