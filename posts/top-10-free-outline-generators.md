@@ -46,7 +46,7 @@ Infrasity's Free Outline Generator has the following additional features that pu
 
 ![copyai free outline generator](/PostImages/top-10-free-outline-generators/C.png)
 
-An AI-powered content writing tool, **[Copy AI](https://www.copy.ai/tools/outline-generator)**, has a free blog outline generator that requires you to input your topic and some additional details. It has a user-friendly interface that gives you a feel of writing in a **dot-grid notebook**. The free outline generator considers the topic as the headline and suggests subheadings with content suggestions.
+**[Copy AI](https://www.copy.ai/tools/outline-generator)**, an AI-powered content writing tool, has a free blog outline generator that requires you to input your topic and some additional details. It has a user-friendly interface that gives you a feel of writing in a **dot-grid notebook**. The free outline generator considers the topic as the headline and suggests subheadings with content suggestions.
 
 #### Additional Features
 
