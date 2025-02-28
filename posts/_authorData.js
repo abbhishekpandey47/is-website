@@ -22,6 +22,14 @@ const authorData = [
     designation: "Content Writer @ Infrasity",
     about: "Content Writer at Infrasity, specializes in creating tech content for early-stage startups and developer relations",
     linkedIn: "https://www.linkedin.com/in/ananya-sharma-611b01225/"
+  },
+  {
+    authorId: "author0004",
+    name: "Komal",
+    profilePic: "/authorImages/komal.jpg",
+    designation: "Content Writer @ Infrasity",
+    about: "Content Strategist at Infrasity, leading the content department and overseeing the development of high-quality tech content.",
+    linkedIn: "https://www.linkedin.com/in/komalguptaofficial/"
   }
 ];
 
