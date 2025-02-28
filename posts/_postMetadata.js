@@ -226,7 +226,7 @@ let postMetaData = [
         description: "Explore long and short-tail keywords, learn how to find them, and integrate them into your content.",
         ogImage: "/PostImages/long-tail-vs-short-tail/16.png",
         publishedOn: "2024-11-15",
-        authorId: "author0001",
+        authorId: "author0004",
         category: "Informational",
         metaDescription: "Explore long-tail and short-tail keywords, their unique benefits, and how to choose the most effective ones to boost your SEO strategy and rankings."
     },
@@ -460,7 +460,7 @@ let postMetaData = [
         description: "Technical writing can scale your B2B SaaS business, leading to more conversions. Learn what it is, its different types, and why is it important for your SaaS product.",
         ogImage: "/PostImages/what-is-technical-writing/1.png",
         publishedOn: "2025-02-25",
-        authorId: "author0001",
+        authorId: "author0004",
         category: "Informational",
         metaDescription: "Technical writing is a crucial aspect for B2B SaaS companies. Learn about the types of technical writing and why they are relevant for your SaaS product."
 },
@@ -472,7 +472,7 @@ let postMetaData = [
         description: "Here are the top 10 Free AI Outline Generators that you should utilize while preparing the structure of your write-up. The best part? They are free!",
         ogImage: "/PostImages/top-10-free-outline-generators/A.png",
         publishedOn: "2025-02-27",
-        authorId: "author0001",
+        authorId: "author0004",
         category: "Informational",
         metaDescription: "These Top 10 Free AI Outline Generators can save your time and structure the content more efficiently. The best part? They are available for free!"
     }       
