@@ -11,9 +11,9 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import dynamic from 'next/dynamic'
 
 export const metadata = {
-  title: "Technical Content Writing​ for SaaS Startups | Infrasity",
+  title: "Technical Content Writing​ Services | Infrasity",
   description: "Get professional technical writing services for businesses and organizations. From manuals to user guides, we’ve got you covered. Get started today!",
-  keywords: "Technical Writing Services, technical content writer​, technical content marketing​,tech content marketing,content marketing for tech companies,developer relations, devrel service, technical content writing​,content marketing for tech businesses,b2b tech content marketing agency,technical content writing services​",
+  keywords: "Technical Content Writing services, ​Technical Writing Services, technical content writer​, technical content marketing​,tech content marketing,content marketing for tech companies,developer relations, devrel service, technical content writing​,content marketing for tech businesses,b2b tech content marketing agency,technical content writing services​",
   name: "viewport",
   content: "width=device-width, initial-scale=1.0",
   metadataBase: `https://www.infrasity.com`,
