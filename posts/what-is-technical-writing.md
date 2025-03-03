@@ -31,13 +31,13 @@ Product documentation is essential for B2B SaaS companies, enabling developers t
 
 #### 1.1 Recipe Library
 
-![recipe library in technical writing](/PostImages/what-is-technical-writing/3.png)
+![recipe library in technical writing](/PostImages/what-is-technical-writing/3-2.png)
 
 A recipe library provides ready-to-use templates, use-case examples, and step-by-step guides to help developers implement features efficiently. For example, DevZero's templates offer structured, real-world scenarios, enabling teams to replicate workflows, streamline development, and reduce setup time.
 
 #### 1.2 How-to Guides
 
-![how-to guide in technical writing](/PostImages/what-is-technical-writing/4.png)
+![how-to guide in technical writing](/PostImages/what-is-technical-writing/4-2.png)
 
 How-to guides provide step-by-step instructions for performing key tasks such as installation, configuration, and integration. They help developers navigate complex setups with clear explanations, commands, and troubleshooting steps. For example, DevZero's guides offer structured workflows, ensuring seamless product adoption and efficient implementation.
 
