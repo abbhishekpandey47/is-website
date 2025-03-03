@@ -12,7 +12,7 @@ const HeroHome = () => {
     const headingText = useMemo(() => {
         console.log("Memoizing heading text");
         return {
-            title: "Technical writing services for early-stage".split(" "),
+            title: "Technical content writing​ services for early-stage".split(" "),
             subtitle: "startups".split(" ")
         };
     }, []);
