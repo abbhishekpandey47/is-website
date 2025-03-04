@@ -121,17 +121,6 @@ let postMetaData = [
         metaDescription: "Discover the top 10 content marketing tools perfect for beginners to help you create, manage, and optimize your tech content marketing strategy effectively."
     },
     {
-        title: "Product Marketing Jobs: Product Marketing Manager, Content Head and Head of Growth",
-        metatitle: "Product Marketing Jobs: Product Marketing Manager and Head of Growth",
-        slug: "product-marketing-jobs-product-marketing-manager-content-head-and-head-of-growth",
-        description: "Understand the key roles in product marketing, including Product Marketing Manager, Content Head, and Head of Growth, and how they drive business success.",
-        ogImage: "/PostImages/product-marketing-jobs-product-marketing-manager-content-head-and-head-of-growth/0.png",
-        publishedOn: "2024-10-11",
-        authorId: "author0001",
-        category: "Informational",
-        metaDescription: "Learn about the critical roles in product marketing—Product Marketing Manager, Content Head, and Head of Growth—and their impact on business growth."
-    },
-    {
         title: "The 9 Steps to Write a Case Study: A Complete Guide",
         metatitle: "A Complete Guide to Write a Case Study",
         slug: "the-9-steps-to-write-a-case-study-a-complete-guide",
