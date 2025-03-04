@@ -74,7 +74,7 @@ let postMetaData = [
         publishedOn: "2024-09-25",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Explore marketing careers and roles, from digital to brand strategy. . Explore the skills needed for each role and how you can start or pivot your career in this dynamic field."
+        metaDescription: "Explore marketing careers and roles, from digital to brand strategy. Explore the skills needed for each role and how you can start or pivot your career in this dynamic field."
     },
     {
         title: "Writing Technical Content – Benefits and Best Practices for SaaS Companies",
