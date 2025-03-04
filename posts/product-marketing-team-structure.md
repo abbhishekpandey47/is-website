@@ -40,9 +40,9 @@ Here’s what they do:
 A significant duty of the **Product Marketing Manager** is to decide and clearly define the potential customers to whom the company is selling the product.  
 Understanding the **behavior, attitude, and demographics** of consumers, they target this demarcated segment to promote the product and ensure it reaches the right consumer at the right time.  
 
-### Unique Selling Points (USPs)  
+### Unique Selling Propositions (USPs)  
 
-Carving out a **unique selling point (USP)** communicates to the consumer that the product adds exceptional value to their life.  
+Carving out a **unique selling propositions (USP)** communicates to the consumer that the product adds exceptional value to their life.  
 
 For example, you can be a **SaaS marketing agency**, of which there are many in the market. However, you need to set it apart to establish a position in the market.  
 
@@ -141,9 +141,7 @@ SaaS companies produce **niche products** that need a well-crafted strategy to r
 - **Keyword strategy**  
 - **Competitive analysis**  
 
-**Book a Free Demo with Infrasity** for **technical documentation services** and **video production** for your **B2B SaaS Startup**.  
-
-**Book a demo with Infrasity** for **end-to-end content marketing for SaaS companies**, equipped with **detailed technical documentation** around your product and **creative product marketing strategies**.  
+**Book a demo** for **end-to-end content marketing for SaaS companies**, equipped with **detailed technical documentation** around your product and **creative product marketing strategies**.  
 
 ## Frequently Asked Questions (FAQs)  
 
