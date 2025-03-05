@@ -475,7 +475,7 @@ let postMetaData = [
         publishedOn: "2025-03-05",
         authorId: "author0003",
         category: "Informational",
-        metaDescription: "Explore how factors other than relying solely on Search Volume of a keyword can help your content rank better in the Search Engine Reference Page".
+        metaDescription: "Explore how factors other than relying solely on Search Volume of a keyword can help your content rank better in the Search Engine Reference Page."
 }  
 ];
 
