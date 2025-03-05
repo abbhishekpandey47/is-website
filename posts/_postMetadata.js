@@ -464,7 +464,7 @@ let postMetaData = [
         authorId: "author0004",
         category: "Informational",
         metaDescription: "These Top 10 Free AI Outline Generators can save your time and structure the content more efficiently. The best part? They are available for free!"
-    }    
+ },    
      {
     
        title: "Why Search Volume isn't the best strategy for B2B SaaS",
