@@ -12,17 +12,23 @@ The monthly search volume indicates how many times a particular term is searched
 
 For instance, if a SaaS company wants to write content on a System for Cross-Domain Identity Management (SCIM) security, the first metric is usually to take out the MSVs of the keywords, like SCIM provisioning.  
 
+!["keyword magic tool"](/PostImages/why-search-volume-not-best/1.png)
+
 As we can see, our keyword's MSV is **1600**, with a **Keyword Difficulty of 37**, making it quite challenging to rank.
 
 ## Does the Search Volume of a Keyword Matter?  
 
 Well, yes. MSVs are great, but relying solely on the search volumes of keywords will cause two problems. Firstly, high search volume keywords have intense competition, and hence, content around such keywords will be very tough to rank. Secondly, as Brian Dean puts it, it will not stand out.  
 
+!["brian dean"](/PostImages/why-search-volume-not-best/111.png)
+
 MSV tells you what people are searching for. So, it is an obvious strategy to go for what most people demand. It is like a simple supply-demand equation. But have you considered how difficult it is to break through in a market with SaaS content that has high demand? Especially for an early-stage SaaS startup.  
 
 So, rather than targeting a high volume of searches by keyword research tools and going for high search volume ones that have proven competitiveness, we go for information gaps that no one else is addressing or think ahead of the curve and write on what we believe will become searched over time.  
 
 For instance, long-tail keywords have notoriously low search volume but trump on the intent side, with highly qualified and high-intent audiences searching for them. In this way, long-tail keywords garner higher conversion rates with their niche audience despite their lower search volumes.  
+
+!["long tail keywords"](/PostImages/why-search-volume-not-best/2.png)
 
 Despite low search volume, long-tail keywords can still range up to **50 or 100**, but what about keywords with **zero search volume**? Well, even they have their advantages. Let's understand it in more depth.
 
@@ -31,6 +37,8 @@ Despite low search volume, long-tail keywords can still range up to **50 or 100*
 Keywords with zero search volume indicate that the number of people searching for them is below a registrable threshold, such that the keyword search platforms, like **Semrush** or **Ahrefs**, mark it as zero. This means that this keyword has a niche audience, and if you write content on it, you can generate a lot of traffic without competition.  
 
 Zero search volume also means that this keyword is likely to blow up in the future, given industry trends. For instance, **Artificial Intelligence** has seen tremendous growth in the past year and is being increasingly adopted in various industries. **Notion**, a SaaS-based company offering an online workspace, has incorporated AI such that many of its blogs bear topics like _"Notion AI, Your Family Recipe Digitizer"_ or the fabulous blog named _"AI is the New Plastic."_  
+
+!["notion blog"](/PostImages/why-search-volume-not-best/3.png)
 
 AI was not the "plastic" a short while ago, but now it is, and those who predicted AI's incredible rise and wrote about it are now enjoying the **first-mover advantage**. So, if you have a team of experts with industry knowledge and insights, they can, at times, accurately predict when a keyword with zero search volume will blow up. Scraping through a pile of null search volume keywords for valuable ones is a task that yields manifold benefits.  
 
@@ -47,11 +55,15 @@ Say you are an early-stage SaaS-based startup, **ZEMP**, that provides an online
 
 Well, it will be a challenging task because we look at the search volume of our chosen keyword. It is incredibly high, at **4,400**, which means it has **high competition**, and ranking will be tough.  
 
+!["keyword magic tool"](/PostImages/why-search-volume-not-best/4.png)
+
 So, if you are a new startup, targeting high MSV keywords with equally high keyword difficulty (KD) will not yield desirable results. Instead, search for **long-tail keywords** or valuable **zero-search volume keywords** that might blow up.
 
 ### Where to Find Such Keywords?  
 
 #### Reddit Discussion Forums  
+
+!["reddit"](/PostImages/why-search-volume-not-best/5.png)
 
 A great place to find keywords not driven purely by numerical search volume analysis is where potential audiences and customers discuss. **Reddit** is a great place to see what words people use to present their queries and what topics they are curious about.  
 
@@ -66,15 +78,24 @@ The most definitive missing piece in many **SaaS-based content** is adequate res
 **Steps to Use Google Trends:**  
 
 1. **Go to the Google Trends website**  
-2. **Enter your keyword**  
-3. **Analyze the trends** Google Trends shows you the trends of a particular keyword over a specific time and geographical region.  
+2. **Enter your keyword**
+
+!["google trends"](/PostImages/why-search-volume-not-best/6.png)
+
+4. **Analyze the trends** Google Trends shows you the trends of a particular keyword over a specific time and geographical region.
+
+!["google trends"](/PostImages/why-search-volume-not-best/7.png)
 
 For example, we can add filters such as the **United States** and set the time to **past day**.  
+
+!["google trends"](/PostImages/why-search-volume-not-best/8.png)
 
 This allows us to see how much the keyword **"B2B SaaS"** is trending **region-wise** in sub-regions of our chosen geographic area, the **United States**.  
 
 
 ## Why is Moving Away from Solely Focusing on Search Volume a Good Idea? Think Ahead of the Curve  
+
+!["brian dean"](/PostImages/why-search-volume-not-best/112.png)
 
 Rather than having a purely mechanical outlook towards content creation, which focuses on **how often** a particular keyword is searched, focus on **solving customer pain points** and **actually adding value** to the customer.  
 
@@ -87,6 +108,8 @@ The main idea behind thinking **ahead of the curve** is writing content on a **t
 
 #### 1. 15% of Google Searches Every Day Are New Searches  
 
+!["google search overview"](/PostImages/why-search-volume-not-best/9.png)
+
 People are continually searching for **new things** to gain information about **novel domains**. If a whopping **15% of searches are new**, then writing content on topics with no MSV can also prove **beneficial**. In fact, **accurately forecasting** a probable topic that will be searched can **skyrocket** your content to rank at the top of the **Search Engine Results Page (SERP)**.  
 
 #### 2. Get the First-Mover Advantage  
@@ -98,6 +121,9 @@ This is called the **first-mover advantage**, which happens when you **depart fr
 #### 3. Demand Generation - Study Your Niche  
 
 If you **know your audience well**, you will naturally understand **what your readers want**. For instance, at the **Bottom of the Funnel** stage, audiences are interested in **comparison guides** on cost structure or **customer testimonials** like case studies.  
+
+!["notion"](/PostImages/why-search-volume-not-best/11.png)
+
 
 For example, see **Notion’s customer story blog**, which plays a vital role in **gaining trust** of potential customers and **edging them toward a purchase**.  
 
