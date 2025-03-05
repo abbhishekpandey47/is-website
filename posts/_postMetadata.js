@@ -471,7 +471,7 @@ let postMetaData = [
         metatitle: "Why Chasing Search Volume Needs Rethinking in 2025",
         slug: "why-search-volume-is-not-best",
         description: "In this blog, discover how you can rank well on the SERP by targeting low or zero search volume keywords and leverage the first movers advantage.",
-        ogImage: "/PostImages/why-search-volume-is-not-best/0.png",
+        ogImage: "/PostImages/why-search-volume-not-best/0.png",
         publishedOn: "2025-03-05",
         authorId: "author0003",
         category: "Informational",
