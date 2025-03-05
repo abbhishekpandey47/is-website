@@ -464,7 +464,20 @@ let postMetaData = [
         authorId: "author0004",
         category: "Informational",
         metaDescription: "These Top 10 Free AI Outline Generators can save your time and structure the content more efficiently. The best part? They are available for free!"
-    }       
+    }    
+     {
+    
+    title: "Why Search Volume isn't the best strategy for B2B SaaS",
+        metatitle: "Why Chasing Search Volume Needs Rethinking in 2025",
+        slug: "why-search-volume-is-not-best",
+        description: "In this blog, discover how you can rank well on the SERP by targeting low or zero search volume keywords and leverage the first movers advantage.",
+        ogImage: "/PostImages/why-search-volume-is-not-best/0.png",
+        publishedOn: "2025-03-05",
+        authorId: "author0003",
+        category: "Informational",
+        metaDescription: "Explore how factors other than relying solely on Search Volume of a keyword can help your content rank better in the Search Engine Reference Page".
+"
+    }  
 ];
 
 const sorted = () => {
