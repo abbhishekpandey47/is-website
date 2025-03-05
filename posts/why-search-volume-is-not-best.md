@@ -1,16 +1,16 @@
 ## Introduction
 
-How do you begin your content writing process for a SaaS product? You go through the well-trodden path of finding a keyword with a high monthly search volume (MSV). Then, you write a piece around the keywords, such as a blog or a technical article.  
+How do you begin your content writing process for a **SaaS product**? You go through the well-trodden path of finding a keyword with a **high monthly search volume (MSV)**. Then, you write a piece around the keywords, such as a blog or a technical article.  
 
-This keyword MSV-driven SEO strategy has made writing an extremely mechanical process. But remember, you are writing to provide a unique perspective and helpful information, not just to compete in a competitive milieu.  
+This **keyword MSV-driven SEO strategy** has made writing an extremely mechanical process. But remember, you are writing to provide a unique perspective and helpful information, not just to compete in a competitive milieu.  
 
-In this blog, let's understand why focusing solely on Search Volume is not the best B2B SaaS content writing strategy. Sometimes, it is best to rely on your expertise in the industry and craft content accordingly rather than fretting over whether that topic has a good Search Volume. This blog also explores the zero and low search volume keywords and whether these could be useful in making your SaaS company's content stand out.  
+In this blog, let's understand why focusing solely on Search Volume is not the best B2B SaaS content writing strategy. Sometimes, it is best to rely on your expertise in the industry and craft content accordingly rather than fretting over whether that topic has a good Search Volume. This blog also explores the **zero and low search volume keywords** and whether these could be useful in making your SaaS company's content stand out.  
 
 ## What are Monthly Search Volumes (MSV)?  
 
 The monthly search volume indicates how many times a particular term is searched for in a month. It is calculated by taking an average of the last 12 months. It is an indicator of the momentary popularity of a particular keyword. MSV has been the trusted marker on which to base the content strategy and is generally thought of as the first metric to consider when you start content creation.  
 
-For instance, if a SaaS company wants to write content on a System for Cross-Domain Identity Management (SCIM) security, the first metric is usually to take out the MSVs of the keywords, like SCIM provisioning.  
+For instance, if a SaaS company wants to write content on a System for **Cross-Domain Identity Management (SCIM) security**, the first metric is usually to take out the MSVs of the keywords, like **SCIM provisioning**.  
 
 !["keyword magic tool"](/PostImages/why-search-volume-not-best/1.png)
 
@@ -24,9 +24,9 @@ Well, yes. MSVs are great, but relying solely on the search volumes of keywords 
 
 MSV tells you what people are searching for. So, it is an obvious strategy to go for what most people demand. It is like a simple supply-demand equation. But have you considered how difficult it is to break through in a market with SaaS content that has high demand? Especially for an early-stage SaaS startup.  
 
-So, rather than targeting a high volume of searches by keyword research tools and going for high search volume ones that have proven competitiveness, we go for information gaps that no one else is addressing or think ahead of the curve and write on what we believe will become searched over time.  
+So, rather than targeting a high volume of searches by keyword research tools and going for high search volume ones that have proven competitiveness, we go for **information gaps** that no one else is addressing or think ahead of the curve and write on what we believe will become searched over time.  
 
-For instance, long-tail keywords have notoriously low search volume but trump on the intent side, with highly qualified and high-intent audiences searching for them. In this way, long-tail keywords garner higher conversion rates with their niche audience despite their lower search volumes.  
+For instance, **long-tail keywords** have notoriously **low search volume but trump on the intent side**, with **highly qualified and high-intent audiences** searching for them. In this way, long-tail keywords garner higher conversion rates with their niche audience despite their lower search volumes.  
 
 !["long tail keywords"](/PostImages/why-search-volume-not-best/2.png)
 
