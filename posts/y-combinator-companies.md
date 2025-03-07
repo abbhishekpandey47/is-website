@@ -83,6 +83,7 @@ Most successful Y Combinator companies follow these content strategies to mitiga
 Y Combinator startups are known for their innovations. However, **with innovation comes complexity, raising a need to educate the customers in the language their ICP understands.** There are chances that a highly complex technical product might be meant for a non-technical audience; therefore, it becomes essential to convey the features of the product in a manner that caters to a range of audiences without sounding like AI fluff.
 
 ![y combinator company, Zapier's community forum](/PostImages/y-combinator-companies/4.png)
+Zapier's Community Forum
 
 For instance, the YC-backed Zapier, a B2B workflow automation platform, produces educational content for developers to smooth onboarding and product understanding. It provides extensive documentation and community forums to assist developers in creating custom integrations and automation, ensuring they can tailor the platform to specific needs.
 
