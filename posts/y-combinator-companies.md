@@ -26,6 +26,8 @@ Y Combinator companies develop great products that can ease the lives of their t
 
 Many Y Combinator companies do not have a robust content marketing strategy to market their product. They are oblivious about what, when, and how to produce content.
 
+![y combinator company, Optifye.ai](/PostImages/y-combinator-companies/2.png)
+
 Source: **[TechCrunch](https://techcrunch.com/2025/02/25/y-combinator-deletes-posts-after-a-startups-demo-goes-viral/)**
 
 For example, a **YC-backed startup, Optifye.ai**, faced backlash for its launch video, where they defined the product as an "AI performance monitoring for factory workers." This sparked discussions where some individuals called it "inhumane" and "peak capitalism." Consequently, Y Combinator deleted its congratulatory tweet for the startup.
@@ -49,6 +51,8 @@ One of the challenges that Y Combinator companies face is the subjectivity of co
 **Google Analytics and HubSpot** are some tools that might be considered while conducting research. Companies can use Google Analytics to track traffic sources and user engagement. Additionally, they can utilize HubSpot to manage the content. It provides data regarding lead generation, customer journeys, and content-attributed conversions.
 
 ### 4. Talent Acquisition and Budget Constraints
+
+![y combinator company challenges](/PostImages/y-combinator-companies/3.png)
 
 As per the 2024 Gartner CMO Spend Survey, the respondents allocate **7.7% of their total revenue for marketing**. This 7.7% of the total revenue is utilized for several marketing techniques, such as advertising and search engine marketing. However, if the company plans to use **25% to 30% of this budget for content marketing**, it would be a great strategy, as per **[Forbes](https://www.forbes.com/councils/forbesagencycouncil/2021/01/20/how-much-should-your-company-budget-for-content-marketing/)**.
 
@@ -78,6 +82,8 @@ Most successful Y Combinator companies follow these content strategies to mitiga
 
 Y Combinator startups are known for their innovations. However, **with innovation comes complexity, raising a need to educate the customers in the language their ICP understands.** There are chances that a highly complex technical product might be meant for a non-technical audience; therefore, it becomes essential to convey the features of the product in a manner that caters to a range of audiences without sounding like AI fluff.
 
+![y combinator company, Zapier's community forum](/PostImages/y-combinator-companies/4.png)
+
 For instance, the YC-backed Zapier, a B2B workflow automation platform, produces educational content for developers to smooth onboarding and product understanding. It provides extensive documentation and community forums to assist developers in creating custom integrations and automation, ensuring they can tailor the platform to specific needs.
 
 ### 2. SEO-optimized Content
@@ -85,6 +91,8 @@ For instance, the YC-backed Zapier, a B2B workflow automation platform, produces
 The demand for SEO-optimized content has been rising every year. Why? The search engines determine the ranking of high-quality content based on SEO practices. To make their content SEO-friendly, YC-backed startups **infuse the right keywords into their content** and use other SEO techniques.
 
 Such SEO-optimized content is packed with information potential customers search for on search engines. Additionally, it addresses the challenges and interests of the target audience, making it more engaging.
+
+![y combinator company, coinbase](/PostImages/y-combinator-companies/5.png)
 
 For example, Coinbase, a crypto exchange platform, produces content around topic clusters for SEO, and those topics are infused with high-intent keywords in their educational and informational content. Let's say you search "what is crypto" on Google. You will find Coinbase's article on the first SERP.
 
@@ -145,6 +153,8 @@ Zepto, a Y Combinator company, is an online grocery delivery app that partners w
 **According to **[Forbes](https://www.forbes.com/sites/forbestechcouncil/2018/04/02/visual-content-the-future-of-storytelling/)**, 91% of consumers prefer watching visual content compared to text-based content.** Y Combinator companies utilize the visual storytelling technique as this is what their target audience wants.
 
 Producing content in the form of videos and including infographics in long-text-form content pieces helps attract audiences and deliver key messages in a creative manner. Additionally, creating content around the startup's story can also effectively connect with audiences on a deeper level.
+
+![y combinator company, twitch](/PostImages/y-combinator-companies/7.png)
 
 For instance, Twitch utilizes visual storytelling to explain how its product works. It integrates illustrations and videos in its content strategy so that the companies who want to partner with it can fully understand what the platform is all about.
 
