@@ -26,7 +26,7 @@ Y Combinator companies develop great products that can ease the lives of their t
 
 Many Y Combinator companies do not have a robust content marketing strategy to market their product. They are oblivious about what, when, and how to produce content.
 
-Source: TechCrunch
+Source: **[TechCrunch](https://techcrunch.com/2025/02/25/y-combinator-deletes-posts-after-a-startups-demo-goes-viral/)**
 
 For example, a **YC-backed startup, Optifye.ai**, faced backlash for its launch video, where they defined the product as an "AI performance monitoring for factory workers." This sparked discussions where some individuals called it "inhumane" and "peak capitalism." Consequently, Y Combinator deleted its congratulatory tweet for the startup.
 
@@ -36,7 +36,7 @@ A lack of keyword optimization, metadata structuring, and backlink strategies ca
 
 ### 2. Competing in Saturated Markets
 
-As per the sources, 305 million startups are created each year. This data shows the growing competition in various industries, whether health tech, SaaS, fintech, or machine learning. **B2B SaaS startups might face challenges in positioning their USPs effectively.** This means it comes out as a generic message that might not resonate with technical buyers.
+As per the sources, **[305 million startups](https://www.forbes.com/councils/forbestechcouncil/2023/12/18/from-struggle-to-success-tips-for-startups-ready-to-scale/)** are created each year. This data shows the growing competition in various industries, whether health tech, SaaS, fintech, or machine learning. **B2B SaaS startups might face challenges in positioning their USPs effectively.** This means it comes out as a generic message that might not resonate with technical buyers.
 
 Also, they might prioritize quantity over quality, publishing more SEO-driven content. However, it might lack the depth that is needed to engage CTOs and developers. For example, the content might not highlight technical deep dives, benchmark reports, or real-world use cases that showcase their expertise.
 
@@ -50,7 +50,7 @@ One of the challenges that Y Combinator companies face is the subjectivity of co
 
 ### 4. Talent Acquisition and Budget Constraints
 
-As per the 2024 Gartner CMO Spend Survey, the respondents allocate **7.7% of their total revenue for marketing**. This 7.7% of the total revenue is utilized for several marketing techniques, such as advertising and search engine marketing. However, if the company plans to use **25% to 30% of this budget for content marketing**, it would be a great strategy, as per Forbes.
+As per the 2024 Gartner CMO Spend Survey, the respondents allocate **7.7% of their total revenue for marketing**. This 7.7% of the total revenue is utilized for several marketing techniques, such as advertising and search engine marketing. However, if the company plans to use **25% to 30% of this budget for content marketing**, it would be a great strategy, as per **[Forbes](https://www.forbes.com/councils/forbesagencycouncil/2021/01/20/how-much-should-your-company-budget-for-content-marketing/)**.
 
 Being early-stage startups, these Y Combinator companies have budget constraints as most of their funds are allocated to product development. These startup founders have expertise in their domain (e.g., AI agents). This means they can oversee the content team in the best way possible.
 
@@ -112,7 +112,7 @@ For example, The Athletic, a D2C digital sports media company, uses platforms li
 
 ### 6. Consistent Messaging
 
-Consistent messaging across all distribution platforms can **increase revenue by approximately 23%**, as stated by the Lucidpress Report. Inconsistent messaging can confuse the target audience, resulting in insignificant revenue or loss of potential end users.
+Consistent messaging across all distribution platforms can **increase revenue by approximately 23%**, as stated by the **[Lucidpress Report](https://www.forbes.com/councils/forbesbusinesscouncil/2021/08/20/building-brand-recognition-through-your-content-and-bi-tools/)**. Inconsistent messaging can confuse the target audience, resulting in insignificant revenue or loss of potential end users.
 
 Y Combinator startups establish detailed brand guidelines that define voice, tone, messaging standards, and visual identity to mitigate this issue. These guidelines help align the content across blogs, LinkedIn posts, product documentation, and customer communications.
 
@@ -142,7 +142,7 @@ Zepto, a Y Combinator company, is an online grocery delivery app that partners w
 
 ### 10. Visual Storytelling
 
-**According to Forbes, 91% of consumers prefer watching visual content compared to text-based content.** Y Combinator companies utilize the visual storytelling technique as this is what their target audience wants.
+**According to **[Forbes](https://www.forbes.com/sites/forbestechcouncil/2018/04/02/visual-content-the-future-of-storytelling/)**, 91% of consumers prefer watching visual content compared to text-based content.** Y Combinator companies utilize the visual storytelling technique as this is what their target audience wants.
 
 Producing content in the form of videos and including infographics in long-text-form content pieces helps attract audiences and deliver key messages in a creative manner. Additionally, creating content around the startup's story can also effectively connect with audiences on a deeper level.
 
@@ -158,7 +158,7 @@ It is not about the "publish and pray" strategy anymore; it's about prioritizing
 
 With consistent messaging and active listening across all platforms, you can build an identity in front of your target audience, eventually making them loyal customers. The more visual content, the more the audience will consume it, leading to more conversions.
 
-If you are looking for technical content marketing services, book a Free Demo with Infrasity to scale your B2B SaaS startup.
+If you are looking for technical content marketing services, book a **[Free Demo](https://www.infrasity.com/contact)** with Infrasity to scale your B2B SaaS startup.
 
 ### Frequently Asked Questions
 
