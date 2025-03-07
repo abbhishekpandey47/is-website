@@ -60,7 +60,7 @@ A rule of thumb in the ToFU stage is to not even try selling anything. It is all
 ### ToFU Marketing Strategies
 
 #### Content Syndication
-B2B content syndication is a marketing technique wherein a company leverages a third-party website such as Reddit, Medium, or dev communities like dev.to to distribute its content. It entails publishing your content on other platforms and your own to increase visibility and create awareness among new customers.
+[B2B content syndication](https://www.infrasity.com/blog/b2b-content-syndication) is a marketing technique wherein a company leverages a third-party website such as Reddit, Medium, or dev communities like dev.to to distribute its content. It entails publishing your content on other platforms and your own to increase visibility and create awareness among new customers.
 
 #### Search Engine Optimization (SEO)
 SEO involves improving ranking on the search engine reference page to increase visibility and organic traffic.
