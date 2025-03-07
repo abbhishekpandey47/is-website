@@ -24,7 +24,7 @@ Y Combinator companies develop great products that can ease the lives of their t
 
 ### 1. Lack of Strategic Content Direction
 
-Many Y Combinator companies do not have a robust content marketing strategy to market their product. They are oblivious about what, when, and how to produce content.
+Many Y Combinator companies do not have a robust **[content marketing strategy](https://www.infrasity.com/blog/content-marketing-strategy)** to market their product. They are oblivious about what, when, and how to produce content.
 
 ![y combinator company, Optifye.ai](/PostImages/y-combinator-companies/2.png)
 
