@@ -467,9 +467,9 @@ let postMetaData = [
  },    
      {
     
-     title: "Why Search Volume isn't the best strategy for B2B SaaS",
+     title: "Why Search Volume isn't the best strategy for B2B SaaS Companies",
         metatitle: "Why Chasing Search Volume Needs Rethinking in 2025",
-        slug: "why-search-volume-is-not-best",
+        slug: "why-search-volume-fails-b2b-saas",
         description: "In this blog, discover how you can rank well on the SERP by targeting low or zero search volume keywords and leverage the first movers advantage.",
         ogImage: "/PostImages/why-search-volume-not-best/0.png",
         publishedOn: "2025-03-05",
