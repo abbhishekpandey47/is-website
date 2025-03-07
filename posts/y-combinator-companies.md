@@ -106,7 +106,7 @@ Y Combinator startups have predefined content guidelines and ensure that the con
 
 Once the content has been reviewed and published, the process of reaching out to the audience starts. It may happen that the target customers aren't present on a specific platform. It is imperative to conduct thorough research and analyze where your target audience is active to distribute the content effectively. It helps reach them without unnecessary expenditure and effort on less relevant platforms.
 
-YC-backed companies research the relevant platforms where their target audience is active and then utilize them. Based on the type of product and content format, startups can use some distribution mediums. These mediums are LinkedIn, Instagram, Facebook, YouTube, Reddit, Twitter, Medium, Hacker News, GitHub, and Dev.to.
+YC-backed companies research the relevant platforms where their target audience is active and then utilize them. Based on the type of product and content format, startups can use some distribution mediums. These mediums are **LinkedIn, Instagram, Facebook, YouTube, Reddit, Twitter, Medium, Hacker News, GitHub, and Dev.to**.
 
 For example, The Athletic, a D2C digital sports media company, uses platforms like Facebook, YouTube, and Twitter to share sports news. Additionally, it has a presence on Spotify for podcast sharing.
 
