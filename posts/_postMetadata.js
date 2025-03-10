@@ -432,7 +432,7 @@ let postMetaData = [
     metaDescription: "Check out our list of Technical writing companies to help streamline technical content production and aid tech communication for your SaaS company. "
 },
     {
-    title: "What is a Technical SEO Specialist",
+    title: "What is a Technical SEO Specialist?",
     metatitle: "What is a Technical SEO Specialist? [2025]",
     slug: "what-is-a-technical-seo-specialist",
     description: "This blog explores what is a Technical SEO Specialist and the tasks that tech SEO experts performs. This blog offers a deep dive into the basics of tech SEO.",
@@ -467,7 +467,7 @@ let postMetaData = [
  },    
      {
     
-     title: "Why Search Volume isn't the best strategy for B2B SaaS Companies",
+     title: "Why Search Volume isn't the best strategy for B2B SaaS Companies?",
         metatitle: "Why Chasing Search Volume Needs Rethinking in 2025",
         slug: "why-search-volume-fails-b2b-saas",
         description: "In this blog, discover how you can rank well on the SERP by targeting low or zero search volume keywords and leverage the first movers advantage.",
