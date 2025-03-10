@@ -72,7 +72,7 @@ let postMetaData = [
         description: "Discover the diverse career paths in marketing, from product marketing managers to content head and growth specialist who devise product strategies to market your product creatively.",
         ogImage: "/PostImages/product-marketing-team-structure/0.png",
         publishedOn: "2024-09-25",
-        authorId: "author0001",
+        authorId: "author0003",
         category: "Informational",
         metaDescription: "Explore marketing careers and roles, from digital to brand strategy. Explore the skills needed for each role and how you can start or pivot your career in this dynamic field."
     },
@@ -248,7 +248,7 @@ let postMetaData = [
         description: "Boost SEO rankings with LSI keywords. Discover how they enhance content relevance, improve search visibility, and align with search engine algorithms effectively.",
         ogImage: "/PostImages/lsi-keywords/banner.png",
         publishedOn: "2024-11-22",
-        authorId: "author0001",
+        authorId: "author0003",
         category: "Informational",
         metaDescription: "Boost SEO rankings with LSI keywords. Discover how they enhance content relevance, improve search visibility, and align with search engine algorithms effectively."
     },
@@ -259,7 +259,7 @@ let postMetaData = [
         description: "Discover what Robots.txt is, its role in guiding search engine crawlers, and why it's vital for SEO to optimize indexing and improve website visibility.",
         ogImage: "/PostImages/guide-to-robots-txt/0.jpg",
         publishedOn: "2024-11-26",
-        authorId: "author0001",
+        authorId: "author0003",
         category: "Informational",
         metaDescription: "Discover what Robots.txt is, its role in guiding search engine crawlers, and why it's vital for SEO to optimize indexing and improve website visibility."
     },
