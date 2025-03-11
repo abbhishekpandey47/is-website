@@ -487,6 +487,18 @@ let postMetaData = [
         authorId: "author0004",
         category: "Informational",
         metaDescription: "Y Combinator companies utilize content marketing to scale their businesses. Read about the content strategies that help them stay ahead of their competitors."
+},
+     
+    {
+        title: "How to Monitor Your Top Performing Content and Scale What Works??",
+        metatitle: "How Content Monitoing can help SaaS companies grow in 2025",
+        slug: "content-monitoring-for-saas-companies",
+        description: "In this blog we explore the importance of monitoring content and its role in maintaining content's competitiveness in the search results.",
+        ogImage: "/PostImages/content-monitoring-for-saas-companies/0.png",
+        publishedOn: "2025-03-11",
+        authorId: "author0003",
+        category: "Informational",
+        metaDescription: "Explore how content monitoring using tools like google search console and google analytics can help you increase your online presence and get results."
     },
 ];
 
