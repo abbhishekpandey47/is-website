@@ -65,7 +65,7 @@ They also reduce bounce rates, as customers stay to watch the short explainer vi
 
 These are the reasons why explainer videos can be a great option than just product documentation. They help simplify complex SaaS products, leading to increased customer acquisition and product adoption.
 
-However, creating an explainer video demands both product understanding as well as expertise in commercial video production. Partnering with an explainer video agency will give you professional videos in case you do not have a dedicated in-house team. Let us understand the production process of creating a persuasive explainer video that generates leads and conversions.
+However, creating an explainer video demands both product understanding as well as expertise in commercial **[video production](https://www.infrasity.com/blog/how-to-choose-the-right-production-company)**. Partnering with an explainer video agency will give you professional videos in case you do not have a dedicated in-house team. Let us understand the production process of creating a persuasive explainer video that generates leads and conversions.
 
 ## What Goes Behind Your B2B SaaS Explainer Video Production?
 
