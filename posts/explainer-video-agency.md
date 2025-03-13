@@ -1,4 +1,4 @@
-##Introduction
+## Introduction
 
 If you're a B2B SaaS startup, providing your customers with explainer videos isn't just an option - it's a necessity. You might wonder why you should invest in videos when product documentation already exists.
 
