@@ -65,6 +65,8 @@ However, creating an explainer video demands both product understanding as well 
 
 ## What Goes Behind Your B2B SaaS Explainer Video Production?
 
+![explainer video production](/PostImages/explainer-video-agency/e2.png)
+
 The video production process includes several stages that ensure the final explainer video comes out professional and effective. Explainer video agencies like Infrasity have a dedicated team that ensures the objectives of the video are met and pan out to be professional. Here's the process of video production:
 
 ### 1. Product Research and Hands-on  
@@ -80,6 +82,8 @@ The body of the script is a detailed explanation of the process, which is close 
 
 ### 3. Studio Setup  
 
+![explainer video studio setup](/PostImages/explainer-video-agency/e3.png)
+
 Since the developer is also visible during the screen recording process, a professional background is set up. It is ensured that the camera is set up at the appropriate angle and focuses on the developer, eliminating the blurriness. A good quality mic is used that does not record any background noise.  
 
 ### 4. Record Testing  
@@ -89,6 +93,8 @@ Record testing is done to ensure that the video being recorded is up to the stan
 ### 5. Recording  
 
 The developer records the explainer video and utilizes the prepared script while demonstrating the features of the SaaS product. It is ensured that each and every step is clearly visible and not too quick for a new user to understand. Each button clicked, and the value entered is shown and explained. Also, each step, including the account setup, is shown directly in the video, avoiding the use of any pre-existing resources.  
+
+![explainer video recording](/PostImages/explainer-video-agency/e4.png)
 
 For example, one of Infrasity's developers is explaining how to connect an AWS network with a developer workspace.  
 
