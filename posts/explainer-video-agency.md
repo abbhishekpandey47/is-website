@@ -9,6 +9,7 @@ But what exactly are SaaS explainer videos? Explainer videos visually demonstrat
 It takes expertise to simplify a complex B2B SaaS product based on the target audience's needs, such as streamlining CI/CD setup, their interest in automation efficiency, and their understanding of YAML configurations and API authentication, ensuring the explainer video is both engaging and practical. 
 
 Not just that, it also includes effective scripting, recording, and editing techniques. This is why partnering with a professional explainer video agency can make all the difference, saving you time to focus on product development.  
+
 This article discusses why SaaS explainer video production can be a better option than just product documentation or conventional blogs. It also explains what goes on behind the process of delivering high-quality videos that ensure clarity, engagement, and adoption of B2B SaaS products.
 
 ## Why Explainer Videos Can Be a Better Option Than Just Product Documentation?
@@ -28,6 +29,7 @@ For instance, Slack, a B2B SaaS company in the space of chats and communication,
 Suppose you're a DevOps engineer setting up a CI/CD pipeline integration with GitHub Actions for a new B2B SaaS automation platform. You need to learn how to configure the YAML workflow, set up authentication, and automate deployments. You have two options:
 
 **Option 1:** Read a 10-page technical guide detailing workflow syntax, secret management, and CLI commands.  
+
 **Option 2:** Watch a 2-minute explainer video demonstrating repository setup, YAML creation, and real-time deployment execution step by step.  
 
 Which one do you think you'd remember better?
@@ -42,6 +44,7 @@ Statistics indicate that **[85% of B2B marketers](https://vidico.com/news/b2b-vi
 ### 4. Accelerated Customer Acquisition  
 
 Product information can be delivered in various formats, but the ultimate goal of B2B SaaS companies is to convert prospects into customers. **[65% of the population falls under the visual learner category](https://www.inc.com/molly-reynolds/how-to-spot-visual-auditory-and-kinesthetic-learni.html)**, meaning that explainer videos help communicate product value better.  
+
 Explainer videos offer a clear and visual representation of your product's features, such as how it integrates with existing workflows, automates tasks, or improves efficiency. It builds credibility as the process is explained by a developer, assuring that the information is technically correct. Instead of relying on just product documentation, potential customers can see the product in action, reinforcing that what is promised is what actually exists.  
 
 For instance, **[Dropbox](https://motioncue.com/dropbox-raised-48-000-000-explainer-video-heres-can-startup/)** created an explainer video on its functionality, leading to a 10% increase in conversion rates and acquiring 10 million new customers, generating an additional $48 million in revenue.
@@ -50,7 +53,7 @@ For instance, **[Dropbox](https://motioncue.com/dropbox-raised-48-000-000-explai
 
 Product adoption depends on how fast developers can understand and utilize the product. The clear instructions in explainer videos allow customers to easily understand how to use the product until they operate it independently. Product documentation becomes less effective than videos since videos demonstrate real-time operations while illustrating everything with visual elements and verbal explanations to reduce user misunderstandings.  
 
-Statistics indicate that 77% of SaaS companies say video content decreases support tickets so their customer support team can handle essential queries before handling standard requests repeatedly. Additionally, self-paced learning empowers users to learn at their convenience, reducing onboarding time and accelerating product adoption.
+**[Statistics](https://blog.videate.io/skyrocketing-demand-for-video-and-why-you-should-care)** indicate that 77% of SaaS companies say video content decreases support tickets so their customer support team can handle essential queries before handling standard requests repeatedly. Additionally, self-paced learning empowers users to learn at their convenience, reducing onboarding time and accelerating product adoption.
 
 ### 6. Improves SEO  
 
@@ -72,6 +75,7 @@ The video production process includes several stages that ensure the final expla
 ### 1. Product Research and Hands-on  
 
 It is crucial to develop a deep understanding of core functionalities, integrations, and value proposition of the B2B SaaS product before creating its explainer video. Therefore, the developer goes through the existing how-to guide for the product.  
+
 Then, they prepare notes highlighting the requirements, such as access to the workspace and cloud provider with necessary permissions - admin level, owner, and read/write permissions. The notes also include the reasons why the product should be used and how it makes a difference from the traditional methods.  
 
 ### 2. Script Writing  
@@ -110,19 +114,20 @@ Any sensitive information, such as passwords, is masked, and relevant infographi
 Once the explainer video is edited, the internal team of developers and designers will review it. They review it using the following key parameters:  
 
 - If the explainer video is easy to grasp and covers all the crucial points  
-- If it is of high quality  
+- If it is of high quality, and  
 - If it is technically correct  
 
 ### 8. Customer's Review  
 
 Once the internal team approves the video, it is sent off to the SaaS company. The stakeholders review it and let the explainer video agency know if they want any changes or edits. The agency then incorporates the feedback and provides the company with the updated video.  
+
 So, the explainer video production includes product research, hands-on script writing, studio setup, recording, editing, and review from the internal team and the customer.  
 
 ## Conclusion  
 
 Explainer videos play a significant role in engaging target customers as they explain how a complex B2B SaaS product can be used in different ways. The developers can understand the product's features better with visuals than just product documentation. These videos improve the customer acquisition process and enhance product adoption as they build credibility.  
 
-Nevertheless, creating these SaaS explainer videos requires expertise in video production apart from technical knowledge. It includes in-depth product research, recording, and editing. Thus, partnering with video explainer companies can be a good decision as they ensure the video is professional and persuasive.  
+Nevertheless, creating these SaaS explainer videos requires expertise in video production apart from technical knowledge. It includes in-depth product research, recording, and editing. Thus, partnering with video explainer companies like **[Infrasity](https://www.infrasity.com/contact)** can be a good decision as they ensure the video is professional and persuasive.  
 
 ## FAQs  
 
