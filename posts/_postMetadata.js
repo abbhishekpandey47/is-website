@@ -500,6 +500,19 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Explore how content monitoring using tools like google search console and google analytics can help you increase your online presence and get results."
     },
+
+    {
+        title: "Here's Why You Should Partner With an Explainer Video Agency",
+        metatitle: "Here's Why You Should Partner With an Explainer Video Agency",
+        slug: "explainer-video-agency",
+        description: "Explainer videos can be effective in driving conversions for B2B SaaS companies. However, it involves a comprehensive process in producing a high-quality professional video. Explore why they are great for your company and what goes behind creating them",
+        ogImage: "/PostImages/explainer-video-agency/e1.png",
+        publishedOn: "2025-03-013",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Explainer videos are beneficial in driving leads and conversions. How? Learn about their benefits and explore how a video explainer agency produces it."
+},
+
 ];
 
 const sorted = () => {
