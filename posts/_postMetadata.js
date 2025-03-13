@@ -505,7 +505,7 @@ let postMetaData = [
         title: "Here's Why You Should Partner With an Explainer Video Agency",
         metatitle: "Here's Why You Should Partner With an Explainer Video Agency",
         slug: "explainer-video-agency",
-        description: "Explainer videos can be effective in driving conversions for B2B SaaS companies. However, it involves a comprehensive process in producing a high-quality professional video. Explore why they are great for your company and what goes behind creating them",
+        description: "Explainer videos play a significant role in driving conversions for B2B SaaS companies. However, it involves a comprehensive process in producing a high-quality professional video. Explore why they are great for your company and what goes behind creating them.",
         ogImage: "/PostImages/explainer-video-agency/e1.png",
         publishedOn: "2025-03-013",
         authorId: "author0004",
