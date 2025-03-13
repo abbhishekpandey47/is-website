@@ -2,7 +2,7 @@
 
 If you're a B2B SaaS startup, providing your customers with explainer videos isn't just an option - it's a necessity. You might wonder why you should invest in videos when product documentation already exists.
 
-Well, studies show that visuals can boost learning by up to 400%, meaning that SaaS explainer videos help developers and decision-makers grasp your product's value. The easier they understand it, the faster they convert.
+Well, studies show that **[visuals can boost learning by up to 400%](https://www.lmc.org/news-publications/magazine/july-aug-2023/message-matters-july-2023/#:~:text=The%20same%20study%20found%20that,as%20little%20as%2013%20milliseconds.)**, meaning that SaaS explainer videos help developers and decision-makers grasp your product's value. The easier they understand it, the faster they convert.
 
 But what exactly are SaaS explainer videos? Explainer videos visually demonstrate product functionality and integrations, offering a simplified, engaging alternative to text-based product documentation. Nevertheless, producing high-quality, engaging explainer videos demands more than just product knowledge.
 
@@ -19,7 +19,7 @@ Explainer videos are much more impactful than just product docs, and here are th
 
 Product documentation provides comprehensive instructions to developers, detailing a feature of the product. However, understanding theoretical instructions can be challenging without practical visualization. This is where explainer videos become invaluable, allowing developers to see the B2B SaaS product demonstration, thereby simplifying complex concepts.​
 
-Additionally, Wyzowl's Statistics show that 98% of people prefer watching explainer videos to learn more about a product. This highlights that a 2-minute video can be productive than text-based explanations in PDFs.
+Additionally, **[Wyzowl's Statistics](https://www.wyzowl.com/video-marketing-statistics/)** show that 98% of people prefer watching explainer videos to learn more about a product. This highlights that a 2-minute video can be productive than text-based explanations in PDFs.
 
 For instance, Slack, a B2B SaaS company in the space of chats and communication, utilizes explainer videos to demonstrate its platform's functionalities. These videos visually showcase features like channel organization and integrations, enabling developers to grasp practical applications more effectively than through text-based documentation alone.
 
@@ -32,23 +32,23 @@ Suppose you're a DevOps engineer setting up a CI/CD pipeline integration with Gi
 
 Which one do you think you'd remember better?
 
-People tend to retain technical concepts better when presented visually. It improves their memory recall compared to textual information. According to a study, 95% of the participants could retain video-based information, and only 10% could recall textual one. Therefore, there is a high chance that you will remember the process much better through explainer videos.
+People tend to retain technical concepts better when presented visually. It improves their memory recall compared to textual information. According to a **[study](https://www.forbes.com/sites/yec/2017/07/13/how-to-incorporate-video-into-your-social-media-strategy/)**, 95% of the participants could retain video-based information, and only 10% could recall textual one. Therefore, there is a high chance that you will remember the process much better through explainer videos.
 
 ### 3. Better Engagement  
 
 Explainer videos increase engagement because they are more conversational and visually dynamic than product documentation. While both formats are one-way communication, the explainer video's visual and auditory elements help capture their attention quickly.  
-Statistics indicate that 85% of B2B marketers find videos highly useful in capturing the attention of target audiences. For instance, visual product demonstrations, along with voiceovers and motion graphics, can keep them engaged and minimize the information overload in product documentation. This helps increase watch time and encourages interaction as the customers can understand complex products in a simplified manner.
+Statistics indicate that **[85% of B2B marketers](https://vidico.com/news/b2b-video-marketing-statistics/#toc-5-effectiveness-in-attracting-attention-85-of-b2b-marketers-find-video-an-effective-medium-and-marketing-tool-for-online-engagement)** find videos highly useful in capturing the attention of target audiences. For instance, visual product demonstrations, along with voiceovers and motion graphics, can keep them engaged and minimize the information overload in product documentation. This helps increase watch time and encourages interaction as the customers can understand complex products in a simplified manner.
 
 ### 4. Accelerated Customer Acquisition  
 
-Product information can be delivered in various formats, but the ultimate goal of B2B SaaS companies is to convert prospects into customers. 65% of the population falls under the visual learner category, meaning that explainer videos help communicate product value better.  
+Product information can be delivered in various formats, but the ultimate goal of B2B SaaS companies is to convert prospects into customers. **[65% of the population falls under the visual learner category](https://www.inc.com/molly-reynolds/how-to-spot-visual-auditory-and-kinesthetic-learni.html)**, meaning that explainer videos help communicate product value better.  
 Explainer videos offer a clear and visual representation of your product's features, such as how it integrates with existing workflows, automates tasks, or improves efficiency. It builds credibility as the process is explained by a developer, assuring that the information is technically correct. Instead of relying on just product documentation, potential customers can see the product in action, reinforcing that what is promised is what actually exists.  
 
-For instance, Dropbox created an explainer video on its functionality, leading to a 10% increase in conversion rates and acquiring 10 million new customers, generating an additional $48 million in revenue.
+For instance, **[Dropbox](https://motioncue.com/dropbox-raised-48-000-000-explainer-video-heres-can-startup/)** created an explainer video on its functionality, leading to a 10% increase in conversion rates and acquiring 10 million new customers, generating an additional $48 million in revenue.
 
 ### 5. Reduced Customer Support and Enhanced Product Adoption  
 
-Product adoption depends on how fast developers can understand and utilize the product. The clear instructions in explainer videos allow customers to easily understand how to use the product procedures until they operate it independently. Product documentation becomes less effective than videos do since videos demonstrate real-time operations while illustrating everything with visual elements and verbal explanations to reduce user misunderstandings.  
+Product adoption depends on how fast developers can understand and utilize the product. The clear instructions in explainer videos allow customers to easily understand how to use the product until they operate it independently. Product documentation becomes less effective than videos since videos demonstrate real-time operations while illustrating everything with visual elements and verbal explanations to reduce user misunderstandings.  
 
 Statistics indicate that 77% of SaaS companies say video content decreases support tickets so their customer support team can handle essential queries before handling standard requests repeatedly. Additionally, self-paced learning empowers users to learn at their convenience, reducing onboarding time and accelerating product adoption.
 
