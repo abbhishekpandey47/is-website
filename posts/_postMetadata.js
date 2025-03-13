@@ -510,7 +510,7 @@ let postMetaData = [
         publishedOn: "2025-03-013",
         authorId: "author0004",
         category: "Informational",
-        metaDescription: "Explainer videos are beneficial in driving leads and conversions. How? Learn about their benefits and explore how a video explainer agency produces it."
+        metaDescription: "If you're a SaaS company, partnering with an Explainer Video Agency can be the right decision. Read the article to know what goes behind the production process."
 },
 
 ];
