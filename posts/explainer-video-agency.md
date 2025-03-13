@@ -20,7 +20,7 @@ Explainer videos are much more impactful than just product docs, and here are th
 
 Product documentation provides comprehensive instructions to developers, detailing a feature of the product. However, understanding theoretical instructions can be challenging without practical visualization. This is where explainer videos become invaluable, allowing developers to see the B2B SaaS product demonstration, thereby simplifying complex concepts.​
 
-Additionally, **[Wyzowl's Statistics](https://www.wyzowl.com/video-marketing-statistics/)** show that 98% of people prefer watching explainer videos to learn more about a product. This highlights that a 2-minute video can be productive than text-based explanations in PDFs.
+Additionally, **[Wyzowl's Statistics](https://www.wyzowl.com/video-marketing-statistics/)** show that **98% of people prefer watching explainer videos** to learn more about a product. This highlights that **a 2-minute video can be productive than text-based explanations in PDFs**.
 
 For instance, Slack, a B2B SaaS company in the space of chats and communication, utilizes explainer videos to demonstrate its platform's functionalities. These videos visually showcase features like channel organization and integrations, enabling developers to grasp practical applications more effectively than through text-based documentation alone.
 
