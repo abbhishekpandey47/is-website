@@ -56,7 +56,7 @@ Statistics indicate that 77% of SaaS companies say video content decreases suppo
 
 You've invented a great B2B SaaS product, but without visibility, it won't reach your target customers. The addition of explainer videos to your content boosts SEO performance, which leads to better product discovery. The longer viewers stay on a page due to video content, the more search engines consider your content valuable.
 
-They also reduce bounce rates, as customers stay to watch the short explainer video rather than leaving immediately because they might plan on reading the product doc later. Search engines give greater importance to video content because they enhance the probability of user clicks (CTR). Your search rankings combined with website traffic will improve when you embed a well-optimized explainer video either on your website or YouTube platform.
+They also reduce bounce rates, as customers stay to watch the short explainer video rather than leaving immediately because they might plan on reading the product doc later. Search engines give greater importance to video content because they enhance the probability of user clicks. Your search rankings combined with website traffic will improve when you embed a well-optimized explainer video either on your website or YouTube platform.
 
 
 These are the reasons why explainer videos can be a great option than just product documentation. They help simplify complex SaaS products, leading to increased customer acquisition and product adoption.
