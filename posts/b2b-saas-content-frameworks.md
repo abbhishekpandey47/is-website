@@ -90,6 +90,8 @@ To develop a successful B2B content strategy framework, one must be thorough wit
 
 ### 1. Educational Content
 
+![educational content strategy framework](/PostImages/b2b-saas-content-frameworks/c2.png) 
+
 At the top of the funnel (TOFU) is educational content. Educate your audience about the solution they may need through the following formats:
 - **Blog posts**
 - **How-to guides**
@@ -150,6 +152,8 @@ Posting content is not enough; tracking its performance helps refine your strate
 ## Case Study of a Successful B2B SaaS Content Framework: HubSpot
 
 To create a scalable and effective content marketing framework, SaaS companies often rely on structured content frameworks. These frameworks help organize content in a way that improves SEO, enhances user experience, and drives conversions. Let’s go through HubSpot's content framework.
+
+![hubspot's content strategy framework](/PostImages/b2b-saas-content-frameworks/c4.png) 
 
 HubSpot has revolutionized the way B2B SaaS companies approach inbound marketing, making content the core of customer acquisition and retention. The **Topic Cluster Model** functions as HubSpot's structured content system, which combines SEO optimization with better user experience in order to establish authority through its framework.
 
