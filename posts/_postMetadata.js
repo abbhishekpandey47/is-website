@@ -507,11 +507,26 @@ let postMetaData = [
         slug: "explainer-video-agency",
         description: "Explainer videos play a significant role in driving conversions for B2B SaaS companies. However, it involves a comprehensive process in producing a high-quality professional video. Explore why they are great for your company and what goes behind creating them.",
         ogImage: "/PostImages/explainer-video-agency/e1.png",
-        publishedOn: "2025-03-013",
+        publishedOn: "2025-03-13",
         authorId: "author0004",
         category: "Informational",
         metaDescription: "If you're a SaaS company, partnering with an Explainer Video Agency can be the right decision. Read the article to know what goes behind the production process."
 },
+
+    
+    {
+        title: "Content Strategy Frameworks Adopted By B2B SaaS Companies",
+        metatitle: "Content Strategy Frameworks Adopted By B2B SaaS Companies",
+        slug: "b2b-saas-content-frameworks",
+        description: "Learn how top B2B SaaS brands use a content marketing framework to educate, engage, and convert customers; driving leads, revenue, and market authority.",
+        ogImage: "/PostImages/explainer-video-agency/e1.png",
+        publishedOn: "2025-03-15",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Discover how a content marketing framework enables B2B SaaS companies to transform engagement into conversions, driving growth and revenue."
+},
+
+
 
 ];
 
