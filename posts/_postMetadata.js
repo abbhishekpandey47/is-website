@@ -525,6 +525,17 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Discover how a content marketing framework enables B2B SaaS companies to transform engagement into conversions, driving growth and revenue."
 },
+     {
+        title: "The Ultimate Guide to B2B Content Repurposing",
+        metatitle: "Content Repurposing Strategy for B2B SaaS",
+        slug: "b2b-content-repurposing",
+        description: "This blog explores how content repurposing can be an effective strategy to scale your B2B SaaS company with creative and cost effective distribution techniques.",
+        ogImage: "/PostImages/public/PostImages/b2b-content-repurposing/0.png",
+        publishedOn: "2025-03-17",
+        authorId: "author0003",
+        category: "Informational",
+        metaDescription: "Discover how content repurposing can help your B2B SaaS company grow by creating an online presence on diverse platforms in the most cost-effective ways."
+},
 
 
 
