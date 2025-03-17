@@ -519,7 +519,7 @@ let postMetaData = [
         metatitle: "Content Strategy Frameworks Adopted By B2B SaaS Companies",
         slug: "b2b-saas-content-frameworks",
         description: "Learn how top B2B SaaS brands use a content marketing framework to educate, engage, and convert customers; driving leads, revenue, and market authority.",
-        ogImage: "/PostImages/explainer-video-agency/e1.png",
+        ogImage: "/PostImages/public/PostImages/b2b-saas-content-frameworks/c1.png",
         publishedOn: "2025-03-15",
         authorId: "author0001",
         category: "Informational",
