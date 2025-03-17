@@ -121,6 +121,8 @@ Creating great content is just one part of the equation—choosing the right dis
 
 To build brand awareness and reach the right audience, using the right channels to share your content is important.
 
+![distribution channels for content strategy framework](/PostImages/b2b-saas-content-frameworks/c3.png)
+
 ### 1. Owned Channels
 
 Your website, blog, and email newsletters are some of the common channels you own. In this space, you can control your content and brand message. With the help of owned channels, you can strengthen your relationships with your audience and share valuable insights.
@@ -157,7 +159,7 @@ To create a scalable and effective content marketing framework, SaaS companies o
 
 HubSpot has revolutionized the way B2B SaaS companies approach inbound marketing, making content the core of customer acquisition and retention. The **Topic Cluster Model** functions as HubSpot's structured content system, which combines SEO optimization with better user experience in order to establish authority through its framework.
 
-### How the Topic Cluster Model Works
+### How the Topic Cluster Model Works?
 
 #### Pillar Page:
 - A lengthy essential document stands as the main authority on large topics.
@@ -173,7 +175,7 @@ HubSpot has revolutionized the way B2B SaaS companies approach inbound marketing
 - All articles in the cluster group contain links to the pillar page, and the pillar page contains links to cluster articles.
 - Search engines detect the pillar page as a reliable source regarding the topic, which enhances its search ranking position.
 
-### Why the Topic Cluster Model is Effective for SaaS Companies?
+### Why is the Topic Cluster Model Effective for SaaS Companies?
 - Well-structured content, along with internal links, makes search engines provide higher rankings for competitive keywords.
 - The system allows users to freely move between connected content, which helps them spend more time exploring the platform.
 - The deep examination of topics enables SaaS companies to establish themselves as the leaders in their field.
