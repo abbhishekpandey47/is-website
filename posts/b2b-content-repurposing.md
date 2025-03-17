@@ -20,7 +20,9 @@ Content repurposing means **recycling existing content and reusing it in differe
 
 It is a cost-effective technique for **B2B SaaS marketing** that prioritizes producing quality content that can last long and over multiple platforms.  
 
-What it is *not* is merely reposting the same content on different platforms, as repurposing necessarily involves **format changes** and adaptations to suit various platforms.  
+What it is *not* is merely reposting the same content on different platforms, as repurposing necessarily involves **format changes** and adaptations to suit various platforms like twitter, YouTube, Linkedin and many more.  
+
+!["content repurposing"](/PostImages/b2b-content-repurposing/1.png)
 
 ## What Are the Benefits of Content Repurposing?
 
@@ -70,11 +72,15 @@ All SaaS companies think about is *producing content* to gain visibility in a co
 
 All efforts of constantly churning out new content on your website without getting creative with distribution will not get you ahead in a fast-evolving SaaS content space.  
 
+!["think distribution"](/PostImages/b2b-content-repurposing/2.png)
+
 For instance, **Datadog**, a SaaS company that makes modern monitoring and security-based software, produced a detailed technical blog post titled *"How to Monitor Kubernetes Applications with Datadog."*  
 
 Then, they repurposed this highly detailed content—sometimes into smaller snippets and at times into even more details—and distributed it to several platforms.  
 
 For example, look at this hour-long YouTube video on the same topic, *"Kubernetes Monitoring."*  
+
+!["content repurposing"](/PostImages/b2b-content-repurposing/3.png)
 
 A cardinal rule of new-age content creation is **effective distribution**. Many channels are available, each harboring its own loyal audience base that can become your audience if you get on these platforms.  
 
@@ -120,12 +126,16 @@ Here are two top **content repurposing tools** that can simplify the process.
 
 ### **Repurpose.io**  
 
+!["content repurposing"](/PostImages/b2b-content-repurposing/4.png)
+
 [Repurpose.io](https://repurpose.io) is an **automated content repurposing and scheduling platform** designed to let you create content once and then **automatically repurpose and publish it** in suitable formats on different social media platforms like YouTube, Instagram, Twitter, and Facebook.  
 
 #### **Best Feature:**  
 Repurpose.io not only **changes formats** but also **automates the publishing** of content across platforms, saving a significant amount of time.  
 
 ### **2short.ai**  
+
+!["content repurposing"](/PostImages/b2b-content-repurposing/5.png)
 
 The idea behind **2short.ai** is simple—long videos contain **condensed and valuable information**. By dividing these big chunks into smaller bits, you can attract a different type of audience that prefers **short-form content**.  
 
@@ -152,6 +162,10 @@ A **tertiary** aspect of content repurposing is **revamping older content**.
 Say you started as a **bootstrapped SaaS startup** trying to find footing in an overwhelmingly competitive SaaS marketplace. You built a website from scratch and added blogs, but now that you've grown, you feel that the **older blogs** on your website contain **half-baked information** and lack depth. Additionally, you now have **more market insight**, and those blogs can significantly benefit from your **newly acquired knowledge**.  
 
 Thus, **content revamping** becomes a part of content repurposing—older content is reviewed and **updated** with new information and **SEO optimizations**, such as infusing more **contemporary and relevant keywords**.  
+
+For instance, look at this example of the changes made when revamping content. 
+
+!["content revamping"](/PostImages/b2b-content-repurposing/6.png)
 
 
 ## Conclusion  
