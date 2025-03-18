@@ -358,5 +358,19 @@
   <changefreq>daily</changefreq>
   <priority>0.80</priority>
 </url>
+
+<url>     
+ <loc>https://www.infrasity.com/blog/explainer-video-agency</loc>
+  <lastmod>2025-03-13T08:02:42+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+
+<url>     
+ <loc>https://www.infrasity.com/blog/b2b-saas-content-frameworks</loc>
+  <lastmod>2025-03-15T08:02:42+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
       
 </urlset>
