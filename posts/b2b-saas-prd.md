@@ -16,7 +16,7 @@ Modern product teams often prefer streamlined PRDs over lengthy documents. These
 
 Creating a product requirements document is important as it gives a useful overview of the product to internal teams - developers, designers, or product managers.  
 
-Let us understand the process through the product requirements document example. For instance, your team is creating a B2B SaaS Analytics tool that will offer growing demand for simplified data flows, real-time insights, and automated reporting. Accordingly, businesses will make the right decisions using data more quickly.  
+Let us understand the process through the product requirements document example. For instance, your team is creating a **B2B SaaS Analytics tool** that will offer growing demand for simplified data flows, real-time insights, and automated reporting. Accordingly, businesses will make the right decisions using data more quickly.  
 
 Now, these are the major components your PRD will include:  
 
@@ -34,7 +34,7 @@ Data scientists, data analysts, and other data roles are employees who spend a c
 
 ### 2. Problem  
 
-Once you have set the stage with the situation, it is time to highlight the key issue experienced by your target audience. Discuss the customer's specific pain points and the aftermath of those issues. The consequences could be a negative effect on productivity and decision-making.  
+Once you have set the stage with the situation, **it is time to highlight the key issue experienced by your target audience**. Discuss the customer's specific pain points and the consequences of those issues. The consequences could be a negative effect on productivity and decision-making.  
 
 For instance, the problem statement in PRD will be:  
 
@@ -44,7 +44,7 @@ Data analysts spend too much time on manual data preparation instead of deliveri
 
 ### 3. Solution  
 
-For every problem, there lies a solution. Since the product will be a solution to the challenges faced by your target customers, you need to discuss its features, USPs, and benefits. Also, mention how the product addresses the technical challenges and needs of the companies.  
+**For every problem, there lies a solution**. Since the product will be a solution to the challenges faced by your target customers, you need to discuss its features, USPs, and benefits. Also, mention how the product addresses the technical challenges and needs of the companies.  
 
 For the discussed product, this is what the Solution section may look like:  
 
@@ -67,7 +67,7 @@ The product will be named "MetricZen" to emphasize its core functionality of dat
 
 ### 5. Milestones  
 
-Milestones define the key checkpoints of the process in the product requirement document and are an important part of it. They help track progress, set clear deadlines, and align engineering, design, and product management team efforts.  
+Milestones define the **key checkpoint**s of the process in the product requirement document and are an important part of it. They help track progress, set clear deadlines, and align engineering, design, and product management team efforts.  
 
 ![milestones in a prd](/PostImages/b2b-saas-prd/p3.png)
 
@@ -75,8 +75,7 @@ For example, the above table discussed the milestones of the product "MetricZen.
 
 ### 6. Scope  
 
-The scope of any product entails what will be included in the product. For example, it will discuss the product's features, integrations, and functionalities.  
-
+The scope of any product entails **what will be included in the product**. For example, it will discuss the product's features, integrations, and functionalities.  
 For instance, the scope section in the PRD will look somewhat like this:  
 
 The scope of MetricZen will focus on the following key metrics and features:  
@@ -91,7 +90,7 @@ The scope of MetricZen will focus on the following key metrics and features:
 
 The onboarding journey is important to make sure new customers can understand the product’s value and use it in their work. It simplifies the learning curve, provides instant value, and helps with long-term product usage.  
 
-The onboarding journey section of the product requirement document may be written as the following:  
+This section of the product requirement document may be written as the following:  
 
 For MetricZen, the onboarding experience is designed to instantly familiarize customers with its data integration capabilities and real-time dashboard features. The journey is divided into two main paths:  
 
