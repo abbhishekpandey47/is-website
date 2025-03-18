@@ -11,17 +11,6 @@ let postMetaData = [
         metaDescription: "Master advanced UI design techniques and trends for user-friendly, immersive interfaces. Improve your design skills with expert tips."
     },
     {
-        title: "How to Create a Product Requirements Document(PRD)",
-        metatitle: "What is a Product Requirements Document (PRD)?",
-        slug: "how-to-create-a-powerful-product-document",
-        description: "Learn how to craft a product requirements document (PRD) that aligns teams and guides the product development process. This comprehensive guide covers key components, best practices, tools, and real-world examples for creating effective PRDs.",
-        ogImage: "/PostImages/how-to-create-a-powerful-product-document/image1.jpg",
-        publishedOn: "2025-01-05",
-        authorId: "author0001",
-        category: "Tutorials",
-        metaDescription: "Learn how to create a product requirements document (PRD) that defines product goals, features, and release criteria. This guide covers key components, tools, and practical tips to align teams and ensure a smooth development process."
-    },
-    {
         title: "How Infrasity assisted Terrateam, with 300% more traffic with organic tech content",
         metatitle: "How to write a case study for engineering company?",
         slug: "terrateam-case-study",
@@ -537,6 +526,17 @@ let postMetaData = [
         metaDescription: "Discover how content repurposing can help your B2B SaaS company grow by creating an online presence on diverse platforms in the most cost-effective ways."
 },
 
+{
+        title: "The Ultimate PRD Guide For Your B2B SaaS Success in 2025",
+        metatitle: "The Ultimate PRD Guide For Your B2B SaaS Success in 2025",
+        slug: "b2b-saas-prd",
+        description: "Learn how to write a product requirements document for your B2B SaaS product and improve the team collaboration with an efficient development process.",
+        ogImage: "/PostImages/b2b-saas-prd/p1.png",
+        publishedOn: "2025-03-18",
+        authorId: "author0004",
+        category: "Tutorials",
+        metaDescription: "Learn how to write a product requirements document for your B2B SaaS product and improve the team collaboration with an efficient development process."
+    },
 
 
 ];
