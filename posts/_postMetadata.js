@@ -484,7 +484,7 @@ let postMetaData = [
         slug: "content-monitoring-for-saas-companies",
         description: "In this blog we explore the role of content monitoring  in maintaining the content's competitiveness in the search results, ultimately aiding your SaaS growth.",
         ogImage: "/PostImages/content-monitoring-for-saas-companies/0.png",
-        publishedOn: "2025-03-11",
+        publishedOn: "2025-03-17",
         authorId: "author0003",
         category: "Informational",
         metaDescription: "Explore how content monitoring using tools like google search console and google analytics can help you increase your online presence and get results."
@@ -520,7 +520,7 @@ let postMetaData = [
         slug: "b2b-content-repurposing",
         description: "This blog explores how content repurposing can be an effective strategy to scale your B2B SaaS company with creative and cost effective distribution techniques.",
         ogImage: "/PostImages/b2b-content-repurposing/0.png",
-        publishedOn: "2025-03-17",
+        publishedOn: "2025-03-11",
         authorId: "author0003",
         category: "Informational",
         metaDescription: "Discover how content repurposing can help your B2B SaaS company grow by creating an online presence on diverse platforms in the most cost-effective ways."
