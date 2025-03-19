@@ -1,0 +1,94 @@
+# Infrasity
+
+## Navigation/Header section
+- [Home](https://www.infrasity.com/)
+- [Book a Free Demo](https://www.infrasity.com/contact)
+
+## Main content sections
+
+### Technical Writing Services for SaaS Startups
+At Infrasity, we drive growth for DevTools and early-stage SaaS startups with impactful technical content marketing, driving visibility and engagement across key developer platforms.
+
+### How it works
+Your extended Developer Relations Team
+
+#### Developer Led Tech Content
+- Our in-house engineers craft highly technical content, including blogs, how-to guides, and whitepapers, by working hands-on with your product. This ensures "the utmost technological credibility" and delivers deep insights that resonate with engineers and developers.
+
+#### Video Production
+- Our in-house engineers work closely with your product hands-on, to craft videos that showcase its true potential. By understanding the tech through and through, we create videos that engage developers and decision-makers, ensuring "the highest level of credibility and authenticity."
+
+#### Growth Engineering
+- As a part of tech content marketing strategy, we develop ready-to-use recipe libraries for tech stacks like **Node.js**, **Bun.js**, **React**, and **CockroachDB**. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.
+
+### How we drive results
+Your Product needs a developer mindset to amplify presence
+
+DevTools and engineering companies often struggle to communicate complex product features to developers. Creating content marketing for tech companies and videos that resonate with technical audiences requires deep expertise, which can drain time and resources from your engineering team.
+
+#### Research
+- We identify the technical challenges and keywords that matter most to your audience, ensuring your content aligns with "real-world engineering problems."
+
+### Why Infrasity is a leading B2B tech content marketing agency?
+- Infrasity delivers the best content marketing for tech businesses, crafted by engineers with real-world experience. We offer end-to-end services, including blogs, videos, and SEO, tailored to your industry. Our content brings depth and credibility, driving growth while freeing up your team.
+
+---
+
+## Features and benefits
+- "Best technical content writer trained with hands-on product experience"
+- "Accurate, in-depth tech documentation"
+- "Full service from keyword research to SEO"
+- "Specialized developer-focused content for AI/ML, Kubernetes, Cloud startups"
+- "Explainer videos ensuring technical precision"
+
+### Traditional agencies
+- Limited understanding of development workflows
+- More focus on general marketing and lack of technical resources
+- Tech content writing requires high level of accuracy and detail, which doesn't align with "general writing style"
+- Lack of understanding of latest trends, tools, and technologies in tech development
+
+### On-demand technical videos recorded by engineers
+Get on-demand technical videos and content created by engineers, tailored to showcase your product's key features.
+
+## Customer success
+Combining technical content with SEO to drive real growth for your startup!
+
+- 93% are using content marketing as part of their strategy.
+- 47% of buyers view three to five pieces of content before engaging.
+- “Businesses publishing four blogs per week get 3.5 times more traffic than those publishing less frequently.” – Semrush
+
+### Hear what our customers say about us
+- "We help DevTools and engineering companies drive growth through strategic technical content and developer relations services."
+
+## Join our community
+Engaging discussions, knowledge, and ideas to build your next product.
+
+## Get started with Infrasity
+Infrasity is the only platform that provides you with developer-focused content for your products or services.
+
+## Frequently Asked Questions
+
+### What services does Infrasity offer?
+Infrasity offers a comprehensive range of technical content writing services designed for engineering startups. This includes:
+- Technical articles
+- Case studies
+- Whitepapers
+- SEO-driven blogs
+- Product documentation
+- Video content creation
+
+We specialize in creating high-quality, organic content that resonates with the desired audience, helping startups stand out and drive growth.
+
+### Who creates the content at Infrasity, and how do you ensure its technical accuracy?
+Our content is crafted by in-house engineers who actively work with the technologies they write about. This means the content comes from real-world experience, ensuring that everything we produce is technically sound and up to date. Our team ensures every piece of content is not only accurate but also insightful.
+
+### How does Infrasity help companies grow through content marketing?
+We focus on merging technical depth with strategic SEO, making sure that your content is not just informative but also ranks well and attracts the right audience. Through organic, well-researched content, we help you build authority in your industry, engage your target audience, and ultimately drive leads and conversions.
+
+### How do you ensure SEO optimization in the content?
+We conduct thorough keyword research, optimize meta tags, structure content for readability, and include relevant internal and external links. Our goal is to ensure that the content performs well in search engines while delivering value to your audience.
+
+### Can I see some examples of Infrasity's work?
+Yes! We proudly showcase our work on various platforms. You can find our technical write-ups and articles on the Infrasity website, as well as on popular platforms like [dev.to](https://dev.to) and [Medium](https://medium.com). For video content, visit our [YouTube channel](https://www.youtube.com) to view a range of tutorials and presentations. Additionally, our IAC repositories and product templates are available on our [GitHub page](https://github.com), demonstrating our expertise in practical applications.
+
+---
