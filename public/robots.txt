@@ -55,9 +55,8 @@ Allow: /
 User-agent: DuckAssistBot
 Allow: /
 
-# You.com's YouBot
-User-agent: YouBot
-Allow: /
+User-agent: *
+Allow: /llms.txt
 
 # Perplexity's PerplexityBot
 User-agent: PerplexityBot
