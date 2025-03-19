@@ -2,6 +2,10 @@
 User-agent: *
 Allow: /
 
+#llms.txt
+User-agent: *
+Allow: /llms.txt
+
 # Sitemaps
 Sitemap: https://infrasity.com/sitemap.xml
 
@@ -18,45 +22,6 @@ Allow: /
 # Google's AI crawler
 User-agent: Google-Extended
 Allow: /
-
-# Apple's Applebot
-User-agent: Applebot
-Allow: /
-
-# Microsoft's BingBot
-User-agent: BingBot
-Allow: /
-
-# Meta's FacebookBot
-User-agent: FacebookBot
-Allow: /
-
-# LinkedIn's LinkedInBot
-User-agent: LinkedInBot
-Allow: /
-
-# Amazon's Amazonbot
-User-agent: Amazonbot
-Allow: /
-
-# ByteDance's Bytespider
-User-agent: Bytespider
-Allow: /
-
-# Common Crawl's CCBot
-User-agent: CCBot
-Allow: /
-
-# Cohere's cohere-ai
-User-agent: cohere-ai
-Allow: /
-
-# DuckDuckGo's DuckAssistBot
-User-agent: DuckAssistBot
-Allow: /
-
-User-agent: *
-Allow: /llms.txt
 
 # Perplexity's PerplexityBot
 User-agent: PerplexityBot
