@@ -1,4 +1,5 @@
 'use client'
+
 import HomePage from "@/Components/HomePage/HomePage";
 import { ConfigProvider } from 'antd';
 
