@@ -1,14 +1,15 @@
-import "./globals.css";
-import { AntdRegistry } from '@ant-design/nextjs-registry';
-import Head from "next/head";
-import Navbar from "@/Components/Navbar/Navbar";
-import { ThemeProvider as NextThemesProvider } from "next-themes"
 import Footer from "@/Components/HomePage/Footer";
-import { Appwrap } from "@/context";
 import { Loader } from "@/Components/Loader";
-import { Analytics } from '@vercel/analytics/react'
-import { GoogleAnalytics } from '@next/third-parties/google'
-import dynamic from 'next/dynamic'
+import Navbar from "@/Components/Navbar/Navbar";
+import { Appwrap } from "@/context";
+import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { GoogleAnalytics } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/react';
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import dynamic from 'next/dynamic';
+import Head from "next/head";
+import Script from 'next/script';
+import "./globals.css";
 
 export const metadata = {
   title: "Technical Content Writing​ Services | Infrasity",
@@ -53,6 +54,15 @@ export default function RootLayout({ children }) {
       <body
         className={`antialiased`}
       >
+        <Script
+          id="koala-tracking"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(t){var k="ko",i=(window.globalKoalaKey=window.globalKoalaKey||k);if(window[i])return;var ko=(window[i]=[]);["identify","track","removeListeners","on","off","qualify","ready"].forEach(function(t){ko[t]=function(){var n=[].slice.call(arguments);return n.unshift(t),ko.push(n),ko}});var n=document.createElement("script");n.async=!0,n.setAttribute("src","https://cdn.getkoala.com/v1/pk_ccda6b50f34963a28c2f035673b27491be24/sdk.js"),(document.body || document.head).appendChild(n)}();
+            `,
+          }}
+        />
 
         <NextThemesProvider
           attribute="class"
