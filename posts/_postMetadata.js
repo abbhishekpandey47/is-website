@@ -542,7 +542,7 @@ let postMetaData = [
         metatitle: "The Expert-curated List for Best B2b Saas Podcasts",
         slug: "top-5-b2b-saas-podcasts",
         description: "This blog curates a list of top B2B SaaS podcasts and contains a guide to launching your own B2B SaaS podcast to scale and grow your enterprise and product.",
-        ogImage: "/PostImages/top-5-b2b-saas-podcast/0.png",
+        ogImage: "/PostImages/top-5-b2b-saas-podcasts/0.png",
         publishedOn: "2025-03-20",
         authorId: "author0003",
         category: "Informational",
