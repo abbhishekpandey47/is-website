@@ -537,6 +537,17 @@ let postMetaData = [
         category: "Tutorials",
         metaDescription: "Learn how to write a product requirements document for your B2B SaaS product and improve the team collaboration with an efficient development process."
     },
+    {
+        title: "Top B2B SaaS Podcasts to Listen in 2025",
+        metatitle: "The Expert-curated List for Best B2b Saas Podcasts",
+        slug: "top-5-b2b-saas-podcasts",
+        description: "This blog curates a list of top B2B SaaS podcasts and contains a guide to launching your own B2B SaaS podcast to scale and grow your enterprise and product.",
+        ogImage: "/PostImages/top-5-b2b-saas-podcasts/0.png",
+        publishedOn: "2025-03-20",
+        authorId: "author0003",
+        category: "Informational",
+        metaDescription: "Discover the top B2B SaaS podcasts to listen in 2025 equipped with actionable insights and experiential knowledge of leading SaaS founders from across the globe."
+    },
 
 
 ];
