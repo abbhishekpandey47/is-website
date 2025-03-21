@@ -548,6 +548,17 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Discover the top B2B SaaS podcasts to listen in 2025 equipped with actionable insights and experiential knowledge of leading SaaS founders from across the globe."
     },
+    {
+        title: "Best B2B SaaS Video Agencies",
+        metatitle: "Top B2B SaaS Video Agencies to try in 2025",
+        slug: "best-b2b-saas-video-agencies",
+        description: "This blog curates a list of top B2B SaaS video production agencies that you can partner with to venture into video production and scale your SaaS company.",
+        ogImage: "/PostImages/best-b2b-saas-video-agencies/0.png",
+        publishedOn: "2025-03-21",
+        authorId: "author0003",
+        category: "Informational",
+        metaDescription: "Discover the top B2B SaaS video production agencies to help create technical product explainer videos, animated how-to guides and much more to scale your SaaS."
+    },
 
 
 ];
