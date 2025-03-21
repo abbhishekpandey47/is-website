@@ -1,4 +1,4 @@
-## Why SaaS Startups Need Video Content to Drive Growth?
+P## Why SaaS Startups Need Video Content to Drive Growth?
 
 B2B SaaS companies are increasingly turning to video content to explain their product's features, showcase how their product works in real-time, or simply for marketing. Video content for SaaS has the potential to include not only a voice but also complementary visuals that effectively communicate the nuances of your product and establish your distinctive brand identity.
 
@@ -13,7 +13,7 @@ If you also want to create engaging videos for your SaaS product's marketing, ch
 
 ### 1.Infrasity
 
-!["infrasity"](/PostImages/best-b2b-saas-video-agencies/1.png)
+!["infrasity"](public/PostImages/best-b2b-saas-video-agencies/1.png)
 
 
 [Infrasity](https://www.infrasity.com/) is a holistic SaaS marketing agency that produces B2B SaaS videos. It helps early-stage and Y-Combinator startups make product explainer videos, converting your product's key features into videos that engage with your ICP — be it developers or investors.
