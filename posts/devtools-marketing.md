@@ -2,7 +2,7 @@
 
 Launched Your DevTool But Struggling to Get Users? Let’s fix that!
 
-You’ve put in the hours and built a DevTool that could make developers’ lives easier. But here’s the catch – getting them to notice it is a whole different challenge.
+You’ve put in the hours and built a DevTool that could make developers’ lives easier. But here’s the catch – **getting them to notice it is a whole different challenge.**
 
 You’re not alone. Many great tools get lost in the noise because marketing to developers isn’t like marketing to everyone else. They’re skeptical, they ignore ads, and they value authenticity over sales tactics. So, how do you get their attention? How do you make them see the real value of what you’ve built?
 
@@ -58,6 +58,8 @@ Therefore, by creating such educational and marketing developer content, you are
 Product Hunt and Dev Hunt are **online marketplaces where developers launch new tools and products**, featuring a voting system that helps the most popular and useful products gain visibility through community upvotes.
 
 Launching your DevTool on these platforms can be a great **Product-Led Growth (PLG) tactic** that helps early-stage startups drive adoption by putting the product directly in the hands of users. These platforms attract developers, product managers, and early adopters. They enable enterprises to gather real-time feedback, validate positioning, and attract first users through hands-on experience. The exposure often leads to SEO benefits via high-authority backlinks and helps teams refine onboarding flows, messaging, and visuals.
+
+![devtool marketing - product hunt](public/PostImages/devtools-marketing/d3.png) 
 
 For example, an early-stage startup, **Corbado**, successfully leveraged Product Hunt by launching their passkey DevTool, achieving the **#1 Developer Tool** of the Week and **#4 Product of the Day** in January 2024. This led to a 2x increase in website traffic and 4x more sign-ups compared to their daily average.
 
