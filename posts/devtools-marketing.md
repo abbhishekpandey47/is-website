@@ -77,6 +77,8 @@ Then, it offers a paid subscription to developers who want to utilize advanced f
 
 This will enhance your interactions with the community as well as peer-to-peer interactions, fostering a strong developer community. However, ensure that your organization is active in your community. You can designate a Developer Community Manager, for that matter. Make them participate in discussions and gather feedback while answering the developer’s queries. This will not only help in marketing developers' tools but also help you understand the improvements you should make to your product to increase product adoption.
 
+![devtool marketing - railway developer community](public/PostImages/devtools-marketing/d4.png) 
+
 For example, **Railway**, a developer tool, has built a strong developer community through Discord, GitHub, and X. On Discord, developers connect for troubleshooting, feature discussions, and onboarding help. As you can see in the above image, the README file is shared, which highlights the rules to be followed by the Railways’ community.
 
 Additionally, their GitHub hosts open-source projects like "awesome-railway," allowing contributions and issue tracking. Meanwhile, X (formerly Twitter) serves as a platform for updates, feature announcements, and community interaction. Collectively, these channels work together to foster an interactive ecosystem that enables developers to learn, interact, and engage with one another.
@@ -91,9 +93,13 @@ Hiring these passionate developers strengthens brand presence by:
 - **Engaging at conferences**: building trust through real-world insights.
 - **Driving organic adoption**: building trust and community-based growth by enabling authentic engagement, offering real solutions, and facilitating product adoption between peers.
 
+![devtool marketing - microsoft developer advocate](public/PostImages/devtools-marketing/d5.png) 
+
 For instance, **Microsoft’s Cloud Advocates** engage developers through education-based content, open-source contributions, and direct feedback loops, ensuring their cloud and AI tools remain relevant, developer-friendly, and widely adopted. By embedding advocacy into its marketing strategy, Microsoft enhances trust, improves product quality, and secures long-term user loyalty.
 
 Here’s an example of the content created by a Developer Advocate at Microsoft, **Aaron Powell**. He has written many articles on the .NET Blog providing guidance and tips on web development and .NET technologies.
+
+![devtool marketing - developer advocate](public/PostImages/devtools-marketing/d6.png)
 
 Moreover, **Ian Douglas** has worked as a Developer Advocate at Postman for nearly two years, where he’s been actively involved in educating developers on API best practices. During his time at Postman, he has spoken at several conferences on topics such as API-first development, testing workflows, and improving the developer experience with better tools.
 
