@@ -259,7 +259,16 @@ const Navbar = () => {
                                         {"FAQ"}
                                     </Link>
                                 </MenuItem>
-
+                                <MenuItem>
+                                    <Link
+                                        onClick={(() => { checkVisitPage("/about") })}
+                                        href="/about"
+                                        className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                                        target={"/about".includes("http") ? '_blank' : ""}
+                                    >
+                                        {"About"}
+                                    </Link>
+                                </MenuItem>
 
                             </div>
                         </MenuItems>
@@ -304,6 +313,7 @@ const Navbar = () => {
                             <GivenMenuBar head={"Services"} menuLinks={menuLinksArrServices} setProgress={setProgress} curPage={curPage} setCurPage={setCurPage} />
                         </li>
                         <li><Link href="/faq" onClick={(() => { checkVisitPage("/faq") })}>FAQ</Link></li>
+                        <li><Link href="/about" onClick={(() => { checkVisitPage("/about") })}>About</Link></li>
                     </ul>
                 </div>
                 <div className="navbar-end">
