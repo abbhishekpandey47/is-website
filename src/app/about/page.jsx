@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from "react";
+import { Linkedin } from "lucide-react";
 
 
 const about = () => {
@@ -56,7 +57,7 @@ const about = () => {
 
             <section className="h-[65vh] flex flex-col justify-center addGrid2">
                 <h1
-                    className='text-center text-red mt-16
+                    className='text-center text-red mt-20
                      text-7xl quicksand-bold max-sm:text-[3.3rem]'
                 >
                     About <span className='text-center text-7xl quicksand-bold max-sm:text-[3.3rem] specialtext '>Infrasity</span>
@@ -78,7 +79,7 @@ const about = () => {
 
 
             {/* Founder Section */}
-            <section className="w-full py-20 px-6 md:px-12 lg:px-16 overflow-hidden">
+            <section className="w-full px-4 md:px-12 lg:px-16 overflow-hidden">
                 <div
                     className={`w-full h-px bg-white/30 mb-16 opacity-0 ${isVisible ? "opacity-100 animate-fade-in" : ""
                         }`}
@@ -96,18 +97,18 @@ const about = () => {
                                 transitionDelay: "400ms"
                             }}
                         >
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl quicksand-bold text-white mb-8 tracking-tight">
                                 Meet our Founder
                             </h2>
 
                             <div className="space-y-8">
                                 <div>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{founder.name}</h3>
+                                    <h3 className="text-2xl md:text-3xl quicksand-bold text-white mb-2">{founder.name}</h3>
                                     <p className="text-gray-400 text-lg">{founder.role}</p>
                                 </div>
 
                                 <div className="space-y-6">
-                                    <p className="text-gray-300 text-m leading-relaxed">
+                                    <p className="quicksand-medium  text-m leading-relaxed">
                                         Before founding Infrasity, Shan spent years leading infrastructure
                                         teams for Fortune 500 companies & startups, focusing on cloud infrastructure,
                                         platform engineering later on his career, where he was one of key member in building platform engineering teams for Experian, UK. His work at ThoughtWorks and EY
@@ -115,13 +116,13 @@ const about = () => {
                                         high-performance engineering teams.
 
                                     </p>
-                                    <p className="text-gray-300 text-m leading-relaxed">
+                                    <p className="quicksand-medium text-m leading-relaxed">
                                         Beyond engineering, Shan is also a top-rated Udemy instructor, having
                                         trained thousands of engineers in cloud technologies, DevOps, and
                                         infrastructure best practices.
 
                                     </p>
-                                    <p className="text-gray-300 text-m leading-relaxed">
+                                    <p className="quicksand-medium text-m leading-relaxed">
                                         Recognizing a gap in how early-stage startups communicate their
                                         technical value to developers, Shan bootstrapped Infrasity—now one of
                                         the fastest-growing GTM & DevRel solutions companies based out of the capital of India. Infrasity helps incubated and Y Combinator-backed startups, AI agent companies, and
@@ -129,7 +130,7 @@ const about = () => {
                                         engagement, and technical positioning.
 
                                     </p>
-                                    <p className="text-gray-300 text-m leading-relaxed">
+                                    <p className="quicksand-medium text-m leading-relaxed">
                                         Today, Infrasity partners with high-growth startups to refine their
                                         go-to-market strategies, developer relations, and content-led growth
                                         efforts. From technical how-to guides and developer explainer videos
@@ -152,7 +153,7 @@ const about = () => {
                                 transitionDelay: "600ms"
                             }}
                         >
-                            <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border-4 border-[#4C2A85]/30">
+                            <div className="relative w-full mt-20  aspect-[4/3] rounded-xl overflow-hidden border-4 border-[#4C2A85]/30">
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
                                 <img
                                     src={founder.imageSrc}
@@ -160,12 +161,23 @@ const about = () => {
                                     className="w-full h-full object-cover object-center transition-transform duration-700 ease-out hover:scale-105"
                                 />
                             </div>
+                            <div className="flex justify-center items-center mt-6">
+                                <a
+                                    href=""
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    // className="flex items-center justify-center  hover:bg-blue-700 rounded-full w-10 h-10 mb-4 transition-colors duration-200"
+                                    aria-label="LinkedIn profile"
+                                >
+                            <img width="40" height="40" src="https://img.icons8.com/fluency/48/linkedin.png" alt="linkedin"/>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
             {/* Advisor Section */}
-            <section className="w-full py-20 px-6 md:px-12 lg:px-16  overflow-hidden">
+            <section className="w-full py-12 mt-5 px-6 md:px-12 lg:px-16  overflow-hidden">
                 <div
                     className={`w-full h-px bg-white/30 mb-16 opacity-0 ${isVisible ? "opacity-100 animate-fade-in" : ""
                         }`}
@@ -174,11 +186,11 @@ const about = () => {
 
                 <div className="max-w-7xl mx-auto text-center">
                     <h2
-                        className={`text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-16 tracking-tight opacity-0 ${isVisible ? "opacity-100 animate-fade-in" : ""
+                        className={`text-4xl md:text-5xl lg:text-6xl quicksand-bold text-white mb-16 tracking-tight opacity-0 ${isVisible ? "opacity-100 animate-fade-in" : ""
                             }`}
                         style={{ transitionDelay: "400ms" }}
                     >
-                        Investors and Advisors
+                        Advisors
                     </h2>
 
                     <div className="flex justify-center">
@@ -201,13 +213,27 @@ const about = () => {
 
                             </div>
 
+                            <div className="flex justify-center items-center mt-6">
+                                <a
+                                    href=""
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="LinkedIn profile"
+                                >
+                                   <img width="40" height="40" src="https://img.icons8.com/fluency/48/linkedin.png" alt="linkedin"/>
+                                </a>
+                            </div>
+
+
+
                             {/* Image text */}
                             <div className="mt-6 text-center">
-                                <h3 className="text-2xl font-bold text-white">{advisor.name}</h3>
-                                <p className="text-gray-400">
+                                <h3 className="text-2xl quicksand-bold text-white">{advisor.name}</h3>
+                                <p className="text-gray-400 quicksand-bold">Advisor</p>
+                                <p className="text-gray-400 quicksand">
                                     {advisor.role}, {advisor.company}
                                 </p>
-                                <p className="mt-4 max-w-lg mx-auto text-gray-300 text-sm">
+                                <p className="mt-4 max-w-lg mx-auto quicksand-medium text-m">
                                     Amit is a seasoned business executive, entrepreneur, and founder of Kubiya.ai, where he’s in a mission of  redefining DevOps through AI-powered automation. Before Kubiya Amit has held leadership roles at AWS, Glilot Capital, and Microsoft-acquired Cloudyn. He brings deep expertise in go-to-market strategy, product-market fit, and scaling early-stage B2B SaaS startups. As an advisor to Infrasity, Amit helps shape strategic growth initiatives for DevTool and infrastructure startups.
                                 </p>
                             </div>
@@ -216,24 +242,29 @@ const about = () => {
                 </div>
             </section>
             {/* why infrasity section */}
-            <section className="w-full  py-20 px-6 md:px-10">
+            <section className="w-full  py-10 px-6 md:px-10">
+                <div
+                    className={`w-full h-px bg-white/30 mb-16 opacity-0 ${isVisible ? "opacity-100 animate-fade-in" : ""
+                        }`}
+                    style={{ transitionDelay: "300ms" }}
+                ></div>
                 <div className="max-w-7xl mx-auto">
                     <h2
                         className={`text-5xl md:text-6xl quicksand-bold text-white-800 mb-20 text-center opacity-0 ${isVisible ? 'opacity-100 animate-fade-in-up' : ''
                             }`}
                         style={{ transitionDelay: '1900ms' }}
                     >
-                        What makes <span className="font-mono specialtext">Infrasity</span> different?
+                        What makes <span className="quicksand-bold specialtext">Infrasity</span> different?
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-10 md:gap-12">
                         {uspData.map((usp, index) => (
                             <div
                                 key={usp.id}
                                 className={`opacity-0 ${isVisible ? 'opacity-100 animate-fade-in-up' : ''}`}
                                 style={{ transitionDelay: `${2000 + (index * 150)}ms` }}
                             >
-                                <h3 className="text-2xl quicksand-bold text-purple-700 mb-6">{usp.title}</h3>
-                                <p className="text-gray-600 quicksand  mb-6 leading-relaxed">
+                                <h3 className="text-2xl quicksand-bold text-white-700 mb-4">{usp.title}</h3>
+                                <p className="text-gray-600 quicksand-bold leading-relaxed ">
                                     {usp.description}
                                 </p>
                                 {/* <a
@@ -257,7 +288,7 @@ const about = () => {
                                 }`}
                             style={{ transitionDelay: '2300ms' }}
                         >
-                            <h2 className="text-5xl  font-bold text-white mb-4 leading-tight">
+                            <h2 className="text-5xl  quicksand-bold text-white mb-4 leading-tight">
                                 Trusted by fastest <br /> growing B2B SaaS Startups.
                             </h2>
                         </div>
@@ -265,7 +296,7 @@ const about = () => {
                         {/* Right column with text and button */}
                         <div className="md:w-1/2 flex flex-col items-start gap-6">
                             <p
-                                className={`text-white/90 text-lg mb-6 opacity-0 ${isVisible ? 'opacity-100 animate-fade-in-up' : ''
+                                className={`text-white/90 text-lg mb-6 quicksand-medium opacity-0 ${isVisible ? 'opacity-100 animate-fade-in-up' : ''
                                     }`}
                                 style={{ transitionDelay: '2500ms' }}
                             >
@@ -277,9 +308,9 @@ const about = () => {
                                     }`}
                                 style={{ transitionDelay: '2700ms' }}
                             >
-                                <a href="https://calendly.com/meet-shan">
+                                <a href="https://calendly.com/meet-shan" target="_blank">
                                     <button
-                                        className="bg-gray-900 hover:bg-black text-white quicksand px-4 py-4 h-auto text-lg rounded-[10px] "
+                                        className="bg-gray-900 hover:bg-black text-white quicksand-medium px-4 py-4 h-auto text-lg rounded-[10px] "
                                     >
                                         Book a Demo
                                     </button>
