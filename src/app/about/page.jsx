@@ -53,9 +53,9 @@ const about = () => {
     return (
 
 
-        <div className="min-h-screen ">
+        <div className="min-h-screen overflow-x-hidden w-full">
 
-            <section className="h-[50vh] flex flex-col justify-center addGrid2">
+            <section className=" py-10 w-full mt-10 px-4 md:px-12 lg:px-16  overflow-hidden relative addGrid2">
                 <h1
                     className='text-center text-red mt-20
                      text-7xl quicksand-bold max-sm:text-[3.3rem]'
@@ -67,7 +67,7 @@ const about = () => {
 
 
                     <p
-                        className='text-center mt-6 text-white quicksand-light w-1/2 max-md:w-3/4 max-sm:w-4/5'
+                        className='text-center mt-6 text-white quicksand-light w-1/2 max-md:w-3/4 max-sm:w-4/5 tracking-tight leading-relaxed '
                     >
                         Infrasity is one of the fastest-growing accelerators supporting early-stage Y Combinator and incubated startups. We specialize in developer relations services and go-to-market strategies, with a strong focus on creating technical content and use case guides using SDKs. Our goal is to help DevTool companies accelerate developer onboarding and adoption.
 
@@ -92,37 +92,37 @@ const about = () => {
                         {/* Text Content */}
                         <div className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                             style={{ transitionDelay: "400ms" }}>
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl quicksand-bold text-white mb-8 tracking-tight">
                                 Meet our Founder
                             </h2>
 
                             <div className="space-y-8">
                                 <div>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{founder.name}</h3>
-                                    <p className="text-gray-400 text-lg">{founder.role}</p>
+                                    <h3 className="text-2xl md:text-3xl quicksand-bold text-white mb-2">{founder.name}</h3>
+                                    <p className="text-gray-400 quicksand-medium text-lg">{founder.role}</p>
                                 </div>
 
                                 <div className="space-y-6">
-                                    <p className="text-white/80 text-base leading-relaxed">
+                                    <p className="quicksand-medium text-base leading-relaxed">
                                         Before founding Infrasity, Shan spent years leading infrastructure
                                         teams for Fortune 500 companies & startups, focusing on cloud infrastructure,
                                         platform engineering later on his career, where he was one of key member in building platform engineering teams for Experian, UK. His work at ThoughtWorks and EY
                                         gave him deep technical expertise in building scalable systems and
                                         high-performance engineering teams.
                                     </p>
-                                    <p className="text-white/80 text-base leading-relaxed">
+                                    <p className="quicksand-medium text-base leading-relaxed">
                                         Beyond engineering, Shan is also a top-rated Udemy instructor, having
                                         trained thousands of engineers in cloud technologies, DevOps, and
                                         infrastructure best practices.
                                     </p>
-                                    <p className="text-white/80 text-base leading-relaxed">
+                                    <p className="quicksand-medium text-base leading-relaxed">
                                         Recognizing a gap in how early-stage startups communicate their
                                         technical value to developers, Shan bootstrapped Infrasity—now one of
                                         the fastest-growing GTM & DevRel solutions companies based out of the capital of India. Infrasity helps incubated and Y Combinator-backed startups, AI agent companies, and
                                         DevTools businesses scale their product adoption, developer
                                         engagement, and technical positioning.
                                     </p>
-                                    <p className="text-white/80 text-base leading-relaxed">
+                                    <p className="quicksand-medium text-base leading-relaxed">
                                         Today, Infrasity partners with high-growth startups to refine their
                                         go-to-market strategies, developer relations, and content-led growth
                                         efforts. From technical how-to guides and developer explainer videos
@@ -135,9 +135,8 @@ const about = () => {
                         </div>
 
                         {/* Image  */}
-                        <div className={`lg:mt-20 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                            style={{ transitionDelay: "600ms" }}>
-                            <div className="relative w-full mt-24  aspect-[4/3] rounded-xl overflow-hidden border-4 border-[#4C2A85]/30">
+                        <div>
+                            <div className="relative w-full mt-20 aspect-[4/3] rounded-xl overflow-hidden border-4 border-[#4C2A85]/30">
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
                                 <img
                                     src={founder.imageSrc}
@@ -152,7 +151,7 @@ const about = () => {
                                     rel="noopener noreferrer"
                                     aria-label="LinkedIn profile"
                                 >
-                                    <img width="40" height="40" src="https://img.icons8.com/fluency/48/linkedin.png" alt="linkedin" className="transition-transform hover:scale-110" />
+                                    <img width="40" height="40" src="https://img.icons8.com/fluency/48/linkedin.png" alt="linkedin" className="" />
                                 </a>
                             </div>
                         </div>
@@ -246,7 +245,7 @@ const about = () => {
                                 style={{ transitionDelay: `${2000 + (index * 150)}ms` }}
                             >
                                 <h3 className="text-2xl quicksand-bold text-purple-700 mb-4">{usp.title}</h3>
-                                <p className="text-white-600 quicksand-bold leading-relaxed ">
+                                <p className="text-white-600 quicksand-medium leading-relaxed ">
                                     {usp.description}
                                 </p>
                                 {/* <a
