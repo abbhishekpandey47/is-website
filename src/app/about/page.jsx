@@ -266,14 +266,14 @@ const about = () => {
                         {/* Left column with heading */}
                         <div className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                             style={{ transitionDelay: '1100ms' }}>
-                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                            <h2 className="text-4xl md:text-5xl quicksand-bold text-white mb-4 leading-tight">
                                 Trusted by fastest growing B2B SaaS Startups.
                             </h2>
                         </div>
 
                         {/* Right column with text and button */}
                         <div className="flex flex-col items-start gap-6">
-                            <p className={`text-white/90 text-lg mb-6 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                            <p className={`text-white/90 quicksand-medium text-lg mb-6 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                                 style={{ transitionDelay: '1200ms' }}>
                                 Trusted by YC startups. Built for developer-first companies.
                             </p>
@@ -281,7 +281,7 @@ const about = () => {
                             <div className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                                 style={{ transitionDelay: '1300ms' }}>
                                 <a href="https://calendly.com/meet-shan" target="_blank" rel="noopener noreferrer">
-                                    <button className="bg-gray-900 hover:bg-black text-white font-medium px-4 py-4 h-auto text-lg rounded-[10px] transition-all hover:shadow-lg hover:scale-105">
+                                    <button className="bg-gray-900 hover:bg-black text-white quicksand-medium px-4 py-4 h-auto text-lg rounded-[10px] transition-all hover:shadow-lg hover:scale-105">
                                         Book a Demo
                                     </button>
                                 </a>
