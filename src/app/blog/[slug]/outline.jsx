@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import { Linkedin, Twitter, Link as LinkIcon } from "lucide-react";
 
 const generateOutlineObj = (content) => {
   const lines = String(content).split("\n");
@@ -155,6 +156,25 @@ const Outline = ({ content }) => {
     }
   }, [activeOutlineId]); 
 
+    // Function to copy the current URL to clipboard
+    const copyLinkToClipboard = () => {
+      navigator.clipboard.writeText(window.location.href);
+      // You could add a toast notification here
+    };
+  
+    // Function to share on LinkedIn
+    const shareOnLinkedin = () => {
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank')
+    };
+  
+    // Function to share on Twitter
+    const shareOnTwitter = () => {
+      const url = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent("Check out this great article!");
+      window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+    };
+
   return (
     <nav
       id="outlineComponent"
@@ -192,6 +212,34 @@ const Outline = ({ content }) => {
           </div>
         ))}
       </div>
+       {/* Share with your community section */}
+       <div className=" py-5 px-6 mt-8 rounded-lg mb-4 readytostart text-center">
+        <h3 className="text-white text-lg font-semibold mb-4">Share with your community!</h3>
+        <div className="flex gap-5 justify-center">
+          <button  
+            className="bg-white rounded-full p-3 hover:bg-gray-100 transition-colors"
+            onClick={shareOnLinkedin} 
+            aria-label="Share on LinkedIn"
+          >
+            <Linkedin size={20} className="text-black" />
+          </button>
+          <button 
+            className="bg-white rounded-full p-3 hover:bg-gray-100 transition-colors"
+            onClick={shareOnTwitter} 
+            aria-label="Share on Twitter"
+          >
+            <Twitter size={20} className="text-black" />
+          </button>
+          <button 
+            className="bg-white rounded-full p-3 hover:bg-gray-100 transition-colors"
+            onClick={copyLinkToClipboard} 
+            aria-label="Copy link"
+          >
+            <LinkIcon size={20} className="text-black" />
+          </button>
+        </div>
+      </div>
+
     </nav>
   );
 };
