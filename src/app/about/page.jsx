@@ -36,7 +36,7 @@ const about = () => {
         },
         {
             id: 2,
-            title: "DevRel Meets GTM",
+            title: "DevRel Meets GTM xxx xxx xxx xxx xxx",
             description: "Infrasity bridges the gap between developer relations and go-to-market strategy. From SDK use cases and how-to guides to launch campaigns—we help you grow awareness, drive adoption, and build trust with technical users.",
             linkText: "How we predictably generate demand →",
             linkUrl: "#"
@@ -55,7 +55,7 @@ const about = () => {
 
         <div className="min-h-screen ">
 
-            <section className="h-[65vh] flex flex-col justify-center addGrid2">
+            <section className="h-[50vh] flex flex-col justify-center addGrid2">
                 <h1
                     className='text-center text-red mt-20
                      text-7xl quicksand-bold max-sm:text-[3.3rem]'
@@ -79,81 +79,65 @@ const about = () => {
 
 
             {/* Founder Section */}
-            <section className="w-full px-4 md:px-12 lg:px-16 overflow-hidden">
+            <section className="w-full px-4 md:px-12 lg:px-16  overflow-hidden relative">
                 <div
                     className={`w-full h-px bg-white/30 mb-16 opacity-0 ${isVisible ? "opacity-100 animate-fade-in" : ""
                         }`}
                     style={{ transitionDelay: "300ms" }}
                 ></div>
 
+
                 <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col lg:flex-row items-start items-center justify-between gap-10">
-                        {/* Text Content  */}
-                        <div
-                            className="w-full lg:w-1/2 text-left transform translate-y-8 opacity-0 transition duration-1000 ease-out"
-                            style={{
-                                transform: isVisible ? "translateY(0)" : "translateY(2rem)",
-                                opacity: isVisible ? 1 : 0,
-                                transitionDelay: "400ms"
-                            }}
-                        >
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl quicksand-bold text-white mb-8 tracking-tight">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start items-center ">
+                        {/* Text Content */}
+                        <div className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                            style={{ transitionDelay: "400ms" }}>
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
                                 Meet our Founder
                             </h2>
 
                             <div className="space-y-8">
                                 <div>
-                                    <h3 className="text-2xl md:text-3xl quicksand-bold text-white mb-2">{founder.name}</h3>
+                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{founder.name}</h3>
                                     <p className="text-gray-400 text-lg">{founder.role}</p>
                                 </div>
 
                                 <div className="space-y-6">
-                                    <p className="quicksand-medium  text-m leading-relaxed">
+                                    <p className="text-white/80 text-base leading-relaxed">
                                         Before founding Infrasity, Shan spent years leading infrastructure
                                         teams for Fortune 500 companies & startups, focusing on cloud infrastructure,
                                         platform engineering later on his career, where he was one of key member in building platform engineering teams for Experian, UK. His work at ThoughtWorks and EY
                                         gave him deep technical expertise in building scalable systems and
                                         high-performance engineering teams.
-
                                     </p>
-                                    <p className="quicksand-medium text-m leading-relaxed">
+                                    <p className="text-white/80 text-base leading-relaxed">
                                         Beyond engineering, Shan is also a top-rated Udemy instructor, having
                                         trained thousands of engineers in cloud technologies, DevOps, and
                                         infrastructure best practices.
-
                                     </p>
-                                    <p className="quicksand-medium text-m leading-relaxed">
+                                    <p className="text-white/80 text-base leading-relaxed">
                                         Recognizing a gap in how early-stage startups communicate their
                                         technical value to developers, Shan bootstrapped Infrasity—now one of
                                         the fastest-growing GTM & DevRel solutions companies based out of the capital of India. Infrasity helps incubated and Y Combinator-backed startups, AI agent companies, and
                                         DevTools businesses scale their product adoption, developer
                                         engagement, and technical positioning.
-
                                     </p>
-                                    <p className="quicksand-medium text-m leading-relaxed">
+                                    <p className="text-white/80 text-base leading-relaxed">
                                         Today, Infrasity partners with high-growth startups to refine their
                                         go-to-market strategies, developer relations, and content-led growth
                                         efforts. From technical how-to guides and developer explainer videos
                                         to product documentation and DevRel initiatives, Infrasity ensures
                                         that technical products reach the right audience, drive adoption, and
                                         build strong developer communities.
-
-
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Image */}
-                        <div
-                            className="w-full lg:w-[45%] transform translate-y-8 opacity-0 transition duration-1000 ease-out"
-                            style={{
-                                transform: isVisible ? "translateY(0)" : "translateY(2rem)",
-                                opacity: isVisible ? 1 : 0,
-                                transitionDelay: "600ms"
-                            }}
-                        >
-                            <div className="relative w-full mt-20  aspect-[4/3] rounded-xl overflow-hidden border-4 border-[#4C2A85]/30">
+                        {/* Image  */}
+                        <div className={`lg:mt-20 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                            style={{ transitionDelay: "600ms" }}>
+                            <div className="relative w-full mt-24  aspect-[4/3] rounded-xl overflow-hidden border-4 border-[#4C2A85]/30">
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
                                 <img
                                     src={founder.imageSrc}
@@ -163,13 +147,12 @@ const about = () => {
                             </div>
                             <div className="flex justify-center items-center mt-6">
                                 <a
-                                    href=""
+                                    href="https://www.linkedin.com/in/shantanu-das-devops/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    // className="flex items-center justify-center  hover:bg-blue-700 rounded-full w-10 h-10 mb-4 transition-colors duration-200"
                                     aria-label="LinkedIn profile"
                                 >
-                            <img width="40" height="40" src="https://img.icons8.com/fluency/48/linkedin.png" alt="linkedin"/>
+                                    <img width="40" height="40" src="https://img.icons8.com/fluency/48/linkedin.png" alt="linkedin" className="transition-transform hover:scale-110" />
                                 </a>
                             </div>
                         </div>
@@ -215,9 +198,8 @@ const about = () => {
 
                             <div className="flex justify-center items-center mt-6">
                                 <a
-                                    href=""
+                                    href="https://www.linkedin.com/in/amitgovrin/"
                                     target="_blank"
-                                    rel="noopener noreferrer"
                                     aria-label="LinkedIn profile"
                                 >
                                    <img width="40" height="40" src="https://img.icons8.com/fluency/48/linkedin.png" alt="linkedin"/>
@@ -263,8 +245,8 @@ const about = () => {
                                 className={`opacity-0 ${isVisible ? 'opacity-100 animate-fade-in-up' : ''}`}
                                 style={{ transitionDelay: `${2000 + (index * 150)}ms` }}
                             >
-                                <h3 className="text-2xl quicksand-bold text-white-700 mb-4">{usp.title}</h3>
-                                <p className="text-gray-600 quicksand-bold leading-relaxed ">
+                                <h3 className="text-2xl quicksand-bold text-purple-700 mb-4">{usp.title}</h3>
+                                <p className="text-white-600 quicksand-bold leading-relaxed ">
                                     {usp.description}
                                 </p>
                                 {/* <a
@@ -279,43 +261,31 @@ const about = () => {
                 </div>
             </section>
             {/* Book demo section */}
-            <section className="w-full py-10 px-4 md:px-10">
-                <div className="max-w-5xl mx-auto bg-gradient-to-r from-purple-700 to-purple-500 rounded-2xl p-10 md:p-14 shadow-xl">
-                    <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+            <section className="w-full py-20 px-4 md:px-10">
+                <div className="max-w-5xl mx-auto bg-gradient-to-r from-purple-700 to-purple-500 rounded-2xl p-10 md:p-14 shadow-xl backdrop-blur-lg">
+                    <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                         {/* Left column with heading */}
-                        <div
-                            className={`md:w-1/2 opacity-0 ${isVisible ? 'opacity-100 animate-fade-in-up' : ''
-                                }`}
-                            style={{ transitionDelay: '2300ms' }}
-                        >
-                            <h2 className="text-5xl  quicksand-bold text-white mb-4 leading-tight">
-                                Trusted by fastest <br /> growing B2B SaaS Startups.
+                        <div className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                            style={{ transitionDelay: '1100ms' }}>
+                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                                Trusted by fastest growing B2B SaaS Startups.
                             </h2>
                         </div>
 
                         {/* Right column with text and button */}
-                        <div className="md:w-1/2 flex flex-col items-start gap-6">
-                            <p
-                                className={`text-white/90 text-lg mb-6 quicksand-medium opacity-0 ${isVisible ? 'opacity-100 animate-fade-in-up' : ''
-                                    }`}
-                                style={{ transitionDelay: '2500ms' }}
-                            >
+                        <div className="flex flex-col items-start gap-6">
+                            <p className={`text-white/90 text-lg mb-6 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                                style={{ transitionDelay: '1200ms' }}>
                                 Trusted by YC startups. Built for developer-first companies.
                             </p>
 
-                            <div
-                                className={`opacity-0 ${isVisible ? 'opacity-100 animate-fade-in-up' : ''
-                                    }`}
-                                style={{ transitionDelay: '2700ms' }}
-                            >
-                                <a href="https://calendly.com/meet-shan" target="_blank">
-                                    <button
-                                        className="bg-gray-900 hover:bg-black text-white quicksand-medium px-4 py-4 h-auto text-lg rounded-[10px] "
-                                    >
+                            <div className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                                style={{ transitionDelay: '1300ms' }}>
+                                <a href="https://calendly.com/meet-shan" target="_blank" rel="noopener noreferrer">
+                                    <button className="bg-gray-900 hover:bg-black text-white font-medium px-4 py-4 h-auto text-lg rounded-[10px] transition-all hover:shadow-lg hover:scale-105">
                                         Book a Demo
                                     </button>
                                 </a>
-
                             </div>
                         </div>
                     </div>
