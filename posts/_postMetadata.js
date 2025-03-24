@@ -561,8 +561,8 @@ let postMetaData = [
     },
 
     {
-        title: "Devtools Marketing Strategy That Persuades Developers",
-        metatitle: "Devtools Marketing Strategy That Persuades Developers",
+        title: "DevTools Marketing Strategy That Persuades Developers",
+        metatitle: "DevTools Marketing Strategy That Persuades Developers",
         slug: "devtools-marketing",
         description: "Discover effective marketing strategies DevTool companies use to engage developers, enhance product adoption, and build lasting product credibility.",
         ogImage: "/PostImages/devtools-marketing/d1.png",
