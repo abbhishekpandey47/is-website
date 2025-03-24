@@ -1,6 +1,6 @@
 ## Introduction
 
-Launched Your DevTool But Struggling to Get Users? Let’s fix that!
+Launched your DevTool but struggling to get users? Let’s fix that!
 
 You’ve put in the hours and built a DevTool that could make developers’ lives easier. But here’s the catch – **getting them to notice it is a whole different challenge.**
 
@@ -42,7 +42,9 @@ Read this article further to know what you should do next after the audience res
 
 It is often said that "**Content is King**." Although the content itself is fundamental to developing brand awareness, engagement, and conversions, it also comes down to providing the right SEO-optimized content and context. Developers are not impressed by flashy marketing content. Therefore, align the context with their workflow and solve their real-life challenges.
 
-Developers constantly learn about new tools and methods to upskill themselves. Tap into that. Create **[technical content](https://www.infrasity.com/blog/what-is-technical-writing)** that teaches them something new, which is your new product or feature. It can be how-to guides, use case guides, workflow diagrams, white papers, and technical blogs. Add code snippets to make them understand your product better. But again, it should be contextual in a way that explains the "**why**" and "**what**" factors along with "how". Even Y Combinator-backed DevTool companies like Supabase, Replit, and Teleport focus on deep technical content.
+Developers constantly learn about new tools and methods to upskill themselves. Tap into that. Create **[technical content](https://www.infrasity.com/blog/what-is-technical-writing)** that teaches them something new, which is your new product or feature. It can be how-to guides, use case guides, workflow diagrams, white papers, and technical blogs. Add code snippets to make them understand your product better. But again, it should be contextual in a way that explains the "**why**" and "**what**" factors along with "**how**". Even Y Combinator-backed DevTool companies like Supabase, Replit, and Teleport focus on deep technical content.
+
+![devtool marketing - product hunt](/PostImages/devtools-marketing/d2.png)
 
 For example, **Supabase** is an open-source Firebase alternative. This DevTool company creates contextual technical content by educating developers through how-to guides, use case examples, workflow diagrams, and hands-on tutorials. Instead of just listing features, Supabase explains the why, what, and how with real-world applications like "Adding generative Q&A to your Next.js site."
 
@@ -64,6 +66,8 @@ Launching your DevTool on these platforms can be a great **Product-Led Growth (P
 For example, an early-stage startup, **Corbado**, successfully leveraged Product Hunt by launching their passkey DevTool, achieving the **#1 Developer Tool** of the Week and **#4 Product of the Day** in January 2024. This led to a 2x increase in website traffic and 4x more sign-ups compared to their daily average.
 
 ### 4. Utilize the Bait-and-Hook Strategy
+
+![devtool marketing - product hunt](/PostImages/devtools-marketing/d7.png)
 
 Once the developers have consumed your technical content, they are likely to be intrigued about testing your product. Or they may have heard about your product and want a hands-on experience.
 
