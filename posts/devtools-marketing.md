@@ -44,7 +44,7 @@ It is often said that "**Content is King**." Although the content itself is fund
 
 Developers constantly learn about new tools and methods to upskill themselves. Tap into that. Create **[technical content](https://www.infrasity.com/blog/what-is-technical-writing)** that teaches them something new, which is your new product or feature. It can be how-to guides, use case guides, workflow diagrams, white papers, and technical blogs. Add code snippets to make them understand your product better. But again, it should be contextual in a way that explains the "**why**" and "**what**" factors along with "**how**". Even Y Combinator-backed DevTool companies like Supabase, Replit, and Teleport focus on deep technical content.
 
-![devtool marketing - product hunt](/PostImages/devtools-marketing/d2.png)
+![devtool marketing - technical content](/PostImages/devtools-marketing/d2.png)
 
 For example, **Supabase** is an open-source Firebase alternative. This DevTool company creates contextual technical content by educating developers through how-to guides, use case examples, workflow diagrams, and hands-on tutorials. Instead of just listing features, Supabase explains the why, what, and how with real-world applications like "Adding generative Q&A to your Next.js site."
 
@@ -67,7 +67,7 @@ For example, an early-stage startup, **Corbado**, successfully leveraged Product
 
 ### 4. Utilize the Bait-and-Hook Strategy
 
-![devtool marketing - product hunt](/PostImages/devtools-marketing/d7.png)
+![devtool marketing - bait and hook strategy](/PostImages/devtools-marketing/d7.png)
 
 Once the developers have consumed your technical content, they are likely to be intrigued about testing your product. Or they may have heard about your product and want a hands-on experience.
 
