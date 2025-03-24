@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import postMetaData from "../../../../posts/_postMetadata";
 import Outline from "./outline";
 import HeadBanner from "./headBanner";
+import BookDemo from "./bookDemo";
 import AuthorBanner from "./authorBanner";
 import authorMetadata from "../../../../posts/_authorData";
 import NotFound from "./NotFound";
@@ -74,7 +75,7 @@ const PostPage = (props) => {
 
   return (
     <>
-      <div className="pt-32 pb-12">
+      <div className="pt-32">
         <HeadBanner postData={postData} />
         <div className="flex justify-center w-full pb-16 max-lg:flex-col">
           <div className="w-[17%] min-[1900px]:w-[0] 2xl:w-[13%] max-lg:w-full max-lg:pl-[8%] max-xl:w-[21%]">
@@ -135,6 +136,7 @@ const PostPage = (props) => {
           </div>
         </div>
         <AuthorBanner authorData={authorObj} />
+        <BookDemo/>
       </div>
     </>
   );
