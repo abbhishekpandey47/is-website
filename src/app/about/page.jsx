@@ -36,7 +36,7 @@ const about = () => {
         },
         {
             id: 2,
-            title: "DevRel Meets GTM xxx xxx xxx xxx xxx",
+            title: "DevRel Meets GTM for devtool companies",
             description: "Infrasity bridges the gap between developer relations and go-to-market strategy. From SDK use cases and how-to guides to launch campaigns—we help you grow awareness, drive adoption, and build trust with technical users.",
             linkText: "How we predictably generate demand →",
             linkUrl: "#"
