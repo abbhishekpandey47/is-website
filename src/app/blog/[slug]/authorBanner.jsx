@@ -6,7 +6,7 @@ const AuthorBanner = React.memo(({ authorData }) => {
   return (
     <div
       id="authorBanner"
-      className="w-[87%] flex flex-row items-center justify-between mx-auto py-6 md:px-6 rounded-lg shadow-lg readytostart"
+      className="w-[87%] mt-10 flex flex-row items-center justify-between mx-auto py-6 md:px-6 rounded-lg shadow-lg readytostart"
     >
       {authorData.profilePic && (
         <div className="hidden md:flex justify-center w-[25%] items-center">
