@@ -8,6 +8,7 @@ module.exports = {
 
 		// Or if using `src` directory:
 		"./src/**/*.{js,ts,jsx,tsx,mdx}",
+		
 	],
 
 	theme: {
@@ -97,7 +98,15 @@ module.exports = {
     			orbit: 'orbit calc(var(--duration)*1s) linear infinite',
     			'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
     			marquee: 'marquee var(--duration) infinite linear',
-    			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
+    			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+				'accordion-down': 'accordion-down 1s ease-out',
+				'accordion-up': 'accordion-up 1s ease-out',
+				'rotate-border': 'rotate-border 1s linear infinite',
+				'float': 'float 1s ease-in-out infinite',
+				'float-delay-1': 'float 1s ease-in-out infinite 1s',
+				'float-delay-2': 'float 1s ease-in-out infinite 2s',
+				'pulse-slow': 'pulse-slow 1s ease-in-out infinite',
+				'scale-slow': 'scale-slow 1s ease-in-out infinite'
     		},
     		keyframes: {
     			orbit: {
@@ -128,9 +137,46 @@ module.exports = {
     				to: {
     					transform: 'translateY(calc(-100% - var(--gap)))'
     				}
-    			}
+    			},
+				'accordion-down': {
+					from: {
+						height: '0'
+					},
+					to: {
+						height: 'var(--radix-accordion-content-height)'
+					}
+				},
+				'accordion-up': {
+					from: {
+						height: 'var(--radix-accordion-content-height)'
+					},
+					to: {
+						height: '0'
+					}
+				},
+				'rotate-border': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' }
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'pulse-slow': {
+					'0%, 100%': { opacity: '0.4' },
+					'50%': { opacity: '0.8' }
+				},
+				'scale-slow': {
+					'0%, 100%': { transform: 'scale(1)' },
+					'50%': { transform: 'scale(1.05)' }
+				}
     		}
     	}
     },
 	plugins: [require('daisyui'), require("tailwindcss-animate"), require('@tailwindcss/typography'), require('tailwind-scrollbar')],
+
 };
+
+
+
+  

@@ -377,3 +377,68 @@ body {
   color: #ffcc00; /* Highlight color */
   font-weight: bold;
 }
+
+/* book demo css */
+
+/* Star styles */
+.star-small {
+  width: 2px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+}
+
+.star-medium {
+  width: 3px;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+}
+
+.star-large {
+  width: 4px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+}
+
+/* Magic button styling with rotating border */
+.magic-button {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(to right, #1966ff, #d129ff, #8c1eff);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.magic-button::before {
+  content: '';
+  position: absolute;
+  z-index: -10;
+  inset: -2px;
+  border-radius: 8px;
+  /* background: linear-gradient(to right, #7c3aed, #4f46e5, #9333ea); */
+  background-color: rgba(255, 255, 255, 0.8);
+  animation: rotate-border 4s linear infinite;
+}
+
+.magic-button::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background-color: #0b0f19; 
+  border-radius: 6px;
+  z-index: -5;
+  transition: all 200ms ease-in-out;
+}
+
+
+/* Rotate border animation */
+@keyframes rotate-border {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
