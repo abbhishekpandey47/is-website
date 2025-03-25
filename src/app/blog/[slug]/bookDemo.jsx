@@ -4,7 +4,8 @@ import { Zap } from 'lucide-react';
 
 const BookDemo = () => {
   return (
-    <section className="relative h-auto min-h-[80vh] md:min-h-[60vh] lg:min-h-[50vh] overflow-hidden bg-space-dark py-16">
+    <div className='w-[87%]  magic-button transition-all duration-300 mt-10 bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] rounded-lg flex justify-center items-center'>
+         <section className=" w-full bg-[#0D0A1A] relative  rounded-lg shadow-lg min-h-[60vh] md:min-h-[60vh] lg:min-h-[50vh] overflow-hidden ">
       {/* 3D Grid overlay */}
       <div className="absolute inset-0" style={{ perspective: "1000px" }}>
         {/* Horizontal grid lines with perspective */}
@@ -41,7 +42,7 @@ const BookDemo = () => {
       
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl quicksand-bold text-white text-center mb-4">
+        <h1 className="text-4xl text-purple sm:text-4xl md:text-4xl quicksand-bold text-center mb-4">
         Trusted by fastest growing B2B SaaS Startups.
         </h1>
         <p className="text-lg md:text-xl quicksand-medium text-gray text-center max-w-2xl mb-8">
@@ -58,6 +59,8 @@ const BookDemo = () => {
        
       </div>
     </section>
+    </div>
+   
   );
 };
 
