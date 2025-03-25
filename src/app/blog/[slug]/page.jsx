@@ -75,7 +75,7 @@ const PostPage = (props) => {
 
   return (
     <>
-      <div className="pt-32">
+      <div className="pt-32 flex flex-col justify-center items-center">
         <HeadBanner postData={postData} />
         <div className="flex justify-center w-full pb-16 max-lg:flex-col">
           <div className="w-[17%] min-[1900px]:w-[0] 2xl:w-[13%] max-lg:w-full max-lg:pl-[8%] max-xl:w-[21%]">
