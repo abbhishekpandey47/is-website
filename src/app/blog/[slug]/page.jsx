@@ -132,11 +132,13 @@ const PostPage = (props) => {
   {postContent}
 </Markdown>
               </div>
+          
             </article>
+           
           </div>
+          
         </div>
         <BookDemo/>
-        <AuthorBanner authorData={authorObj} />
       </div>
     </>
   );
