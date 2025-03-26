@@ -16,6 +16,7 @@ import { Badge, Card, Space } from 'antd';
 
 import postMetaData from '../../../posts/_postMetadata'
 import authorData from '../../../posts/_authorData';
+import HomeMarquee from '@/Components/HomePage/HomeMarquee'
 
 
 const contentStyle = {
@@ -133,16 +134,74 @@ const page = () => {
 
     return (
         <div className=' max-w-[1560px] mx-auto overflow-hidden'>
-            <div className="pt-40 space-y-9 relative blogDiv">
-                <div className="whyinfra"></div>
-                <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center"><h1 className="w-3/4 leading-[80px] max-sm:w-[95%] max-sm:leading-[69px]">Blog-As<span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">-Code</span></h1></div>
-
-                <div className="text-center text-white quicksand-semibold flex justify-center"><p className="w-1/2 max-sm:w-[90%]">Your extended Developer Relations team to initiate conversations, increase user sign ups, and accelerate pipeline faster than ever before</p></div>
-                <div className="flex justify-center"><Link href="/contact" className="btn bg-btnprimary hover:bg-btnprimaryhov text-white text-center relative z-[12px]">Get Started</Link></div>
-
+             {/* Blog Engagement Section - NEW */}
+      <section className="w-full min-h-screen mt-20 py-20 px-6 md:px-10 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto flex sm:flex-col lg:flex-row items-center">
+          {/* Left side content */}
+          <div className="lg:w-1/2 lg:pr-10 z-10 mb-12 lg:mb-0">
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              Create blogs<br />that <span className="text-yellow-300">drive</span><br />
+              <span className="text-yellow-300">engagement</span><br />
+              and <span className="text-yellow-300">traffic</span>
+            </h2>          
+            <ul className="space-y-6 mb-10">
+              <li className="flex items-start text-white">
+                <span className="text-xl mr-3">•</span>
+                <p className="text-lg">
+                  Boost your brand visibility, authority, and recognition with
+                  expertly crafted blog content.
+                </p>
+              </li>
+              <li className="flex items-start text-white">
+                <span className="text-xl mr-3">•</span>
+                <p className="text-lg">
+                  Engage your audience like never before, fostering deeper
+                  connections and experiences.
+                </p>
+              </li>
+              <li className="flex items-start text-white">
+                <span className="text-xl mr-3">•</span>
+                <p className="text-lg">
+                  Convert visitors into loyal customers with persuasive and
+                  compelling blog posts.
+                </p>
+              </li>
+            </ul>
+            
+           
+                <button className="bg-[#3621ff] hover:bg-[#2a1ade] text-white px-8 py-4 h-auto text-m rounded-md">
+                  Book a Demo
+                </button>
+          </div>
+          
+          {/* Right side image */}
+          <div className="lg:w-1/2 relative z-10">
+            <div className="relative">
+              <img 
+                src="https://imgs.search.brave.com/MlWVdLLO1POkUN_NtHvi3qi8e6Emum3ExuOlcAhWJj0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vcGljanVt/Ym8uY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy9kaWdpdGFsLWFy/dC1kYXJrLW5hdHVy/YWwtc2NlbmVyeS13/aXRoLWEtbGFyZ2Ut/c3VuLWFuZC1hbm90/aGVyLXBsYW5ldC1m/cmVlLWltYWdlLmpw/ZWc_dz02MDAmcXVh/bGl0eT04MA" 
+                alt="Blog interface with writer tool" 
+                className="w-full h-auto"
+              />
             </div>
+          </div>
+          
+          {/* Background decorative elements
+          <div className="absolute top-1/4 right-10 w-32 h-32 opacity-20">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20,50 Q35,20 50,50 Q65,80 80,50" stroke="#FFD700" strokeWidth="3" fill="none" />
+            </svg>
+          </div>
+          <div className="absolute bottom-0 right-0 w-64 h-64 opacity-30">
+            <div className="grid grid-cols-8 grid-rows-8 gap-2">
+              {[...Array(64)].map((_, i) => (
+                <div key={i} className="w-2 h-2 bg-teal-400 rounded-full"></div>
+              ))}
+            </div>
+          </div> */}
+        </div>
+      </section>
             <div>
-                <HowWorks serviceArr={serviceMemoArr} isService={true} />
+               <HomeMarquee/>
             </div>
             <div className='flex flex-col gap-10 pt-20'>
                 {dataMemoArr.map((data, index) => {
