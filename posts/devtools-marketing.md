@@ -109,7 +109,7 @@ Here’s an example of the content created by a Developer Advocate at Microsoft,
 
 Moreover, **Ian Douglas** has worked as a Developer Advocate at Postman for nearly two years, where he’s been actively involved in educating developers on API best practices. During his time at Postman, he has spoken at several conferences on topics such as API-first development, testing workflows, and improving the developer experience with better tools.
 
-### Wrapping Up
+## Wrapping Up
 
 Marketing a DevTool isn’t about selling; it’s about helping developers solve real problems. Give them a free trial to explore, get your tool in front of them through Product Hunt and Dev Hunt, and build trust with developer advocacy. Keep them engaged with technical content and a strong developer community. Also, track what’s working. Measure adoption, engagement, and feedback to keep refining your developer marketing strategy.
 
