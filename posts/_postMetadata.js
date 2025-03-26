@@ -572,6 +572,18 @@ let postMetaData = [
         metaDescription: "Discover effective marketing strategies DevTool companies use to engage developers, enhance product adoption, and build lasting product credibility."
     },
 
+    {
+        title: "Kubecon 2025: A Conference For Cloud-native Communities",
+        metatitle: "Kubecon 2025: A Conference For Cloud-native Communities",
+        slug: "kubecon-2025",
+        description: "Kubecon 2025 is a great conference for the cloud-native community. You must attend it if you belong to this community. Why? Read further to know about it.",
+        ogImage: "/PostImages/kubecon-2025/k3.png",
+        publishedOn: "2025-03-26",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "Kubecon 2025 is a great conference for the cloud-native community. You must attend it if you belong to this community. Why? Read further to know about it."
+    },
+
 
 ];
 
