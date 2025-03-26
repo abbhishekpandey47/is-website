@@ -5,6 +5,7 @@ import postMetaData from "../../../../posts/_postMetadata";
 import Outline from "./outline";
 import HeadBanner from "./headBanner";
 import BookDemo from "./bookDemo";
+import Featured from "./featured";
 import AuthorBanner from "./authorBanner";
 import authorMetadata from "../../../../posts/_authorData";
 import NotFound from "./NotFound";
@@ -77,8 +78,8 @@ const PostPage = (props) => {
     <>
       <div className="pt-32 flex flex-col justify-center items-center">
         <HeadBanner postData={postData} />
-        <div className="flex justify-center w-full pb-16 max-lg:flex-col">
-          <div className="w-[17%] min-[1900px]:w-[0] 2xl:w-[13%] max-lg:w-full max-lg:pl-[8%] max-xl:w-[21%]">
+        <div className="flex justify-around w-full pb-16 px-10 max-lg:flex-col">
+          <div className=" max-lg:w-full max-lg:flex justify-center">
             {<Outline content={postContent} />}
           </div>
           <div className="h-auto hidden max-lg:flex max-lg:justify-center">
@@ -90,7 +91,7 @@ const PostPage = (props) => {
               />
             </div>
           </div>
-          <div className="w-[70%] min-[1900px]:w-[80%] max-lg:w-[80%] max-md:w-[96%] max-sm:ml-5 pt-2 lg:pt-15 flex justify-center flex-col items-start">
+          <div className="w-[60%] min-[1900px]:w-[80%] max-lg:w-[60%] max-md:w-[70%] max-sm:ml-5 pt-2 lg:pt-15 flex justify-center flex-col items-start">
             <article className="text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto">
               <div className="max-lg:w-[84vw] min-[1900px]:w-[60vw] max-[1537px]:w-[50vw]">
               <Markdown
@@ -135,6 +136,9 @@ const PostPage = (props) => {
           
             </article>
            
+          </div>
+          <div className=" max-lg:w-full max-lg:flex justify-center">
+          <Featured/>
           </div>
           
         </div>
