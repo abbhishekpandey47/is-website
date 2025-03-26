@@ -2,6 +2,7 @@
 
 **KubeCon + CloudNativeCon**, a developer-focused conference, is being organized by the Cloud Native Computing Foundation (CNCF). First started in 2015, Kubecon has brought together the global open-source and cloud-native community of developers, architects, technical leaders, DevOps, infrastructure engineers, students, founders, CIOs, and CTOs.
 
+![kubecon 2025](/PostImages/kubecon-2025/k1.jpg)
 _Source: cncf.io_
 
 It will be all about Kubernetes and broader DevOps trends and will take place in **Europe, China, Japan, India, and North America**, as per the Kubecon schedule for 2025.
@@ -69,6 +70,8 @@ Jit, Kubiya.AI, DevZero, and Polar Signals are some of the startups that focus o
 In short, observability isn’t being replaced; it’s becoming closely aligned with platform tooling, artificial intelligence, and security platforms. Startups building in this space will likely be judged not just on what they collect, but on how well they enable teams to act on it.
 
 ## Our Experience
+
+![infrasity - kubecon 2024](/PostImages/kubecon-2025/k2.jpg)
 
 The Infrasity team attended **KubeCon + CloudNativeCon India 2024**, where we experienced live product demos, meaningful technical conversations, and a strong sense of momentum across the ecosystem.
 
