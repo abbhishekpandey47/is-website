@@ -16,7 +16,8 @@ import { Badge, Card, Space } from 'antd';
 
 import postMetaData from '../../../posts/_postMetadata'
 import authorData from '../../../posts/_authorData';
-import HomeMarquee from '@/Components/HomePage/HomeMarquee'
+import NewMarquee from './marquee'
+import BlogTypes from './blogTypes'
 
 
 const contentStyle = {
@@ -34,6 +35,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
             <div className='w-1/2 max-md:w-full flex flex-col justify-center'><Image loading='lazy' width={703} height={400} className='rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200' src={data.imgLink} alt="Ratio is 1.7589" /></div>
             <div className={`w-[40%] max-md:w-full max-lg:w-1/2 flex flex-col justify-center serviceasblogcard card-${ind}`}>
                 <div className='h-[80%] max-lg:h-full flex flex-col justify-center gap-5 max-lg:gap-2'>
+                    <div><p className='text-white quicksand-bold text-4xl'>Step {ind +1}</p></div>
                     <div><h2 className='quicksand-bold text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-center' dangerouslySetInnerHTML={{ __html: data.hTag }}></h2></div>
                     <div><p className='quicksand-medium max-lg:text-[0.8em] max-md:text-[1.2em] max-md:text-center'>{data.pTag}</p></div>
                 </div>
@@ -135,33 +137,33 @@ const page = () => {
     return (
         <div className=' max-w-[1560px] mx-auto overflow-hidden'>
              {/* Blog Engagement Section - NEW */}
-      <section className="w-full min-h-screen mt-20 py-20 px-6 md:px-10 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto flex sm:flex-col lg:flex-row items-center">
+      <section className="w-full mx-auto mt-24 py-20 px-6 md:px-10 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto flex justify-center max-md:flex-col sm:flex-col lg:flex-row items-center">
           {/* Left side content */}
           <div className="lg:w-1/2 lg:pr-10 z-10 mb-12 lg:mb-0">
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Create blogs<br />that <span className="text-yellow-300">drive</span><br />
-              <span className="text-yellow-300">engagement</span><br />
-              and <span className="text-yellow-300">traffic</span>
+            <h2 className="text-5xl md:text-6xl quicksand-bold text-white mb-6 leading-tight">
+              Create blogs<br />that <span className="specialtext">drive</span><br />
+              <span className="specialtext">engagement</span><br />
+              and <span className="specialtext">traffic</span>
             </h2>          
             <ul className="space-y-6 mb-10">
               <li className="flex items-start text-white">
                 <span className="text-xl mr-3">•</span>
-                <p className="text-lg">
+                <p className="text-lg quicksand-medium">
                   Boost your brand visibility, authority, and recognition with
                   expertly crafted blog content.
                 </p>
               </li>
               <li className="flex items-start text-white">
                 <span className="text-xl mr-3">•</span>
-                <p className="text-lg">
+                <p className="text-lg quicksand-medium">
                   Engage your audience like never before, fostering deeper
                   connections and experiences.
                 </p>
               </li>
               <li className="flex items-start text-white">
                 <span className="text-xl mr-3">•</span>
-                <p className="text-lg">
+                <p className="text-lg quicksand-medium">
                   Convert visitors into loyal customers with persuasive and
                   compelling blog posts.
                 </p>
@@ -169,21 +171,21 @@ const page = () => {
             </ul>
             
            
-                <button className="bg-[#3621ff] hover:bg-[#2a1ade] text-white px-8 py-4 h-auto text-m rounded-md">
+                <button className="bg-[#3621ff] hover:bg-[#2a1ade] text-white quicksand-bold px-7 py-4 h-auto text-lg rounded-md">
                   Book a Demo
                 </button>
           </div>
           
           {/* Right side image */}
-          <div className="lg:w-1/2 relative z-10">
-            <div className="relative">
+         
+            <div className="">
               <img 
-                src="https://imgs.search.brave.com/MlWVdLLO1POkUN_NtHvi3qi8e6Emum3ExuOlcAhWJj0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vcGljanVt/Ym8uY29tL3dwLWNv/bnRlbnQvdXBsb2Fk/cy9kaWdpdGFsLWFy/dC1kYXJrLW5hdHVy/YWwtc2NlbmVyeS13/aXRoLWEtbGFyZ2Ut/c3VuLWFuZC1hbm90/aGVyLXBsYW5ldC1m/cmVlLWltYWdlLmpw/ZWc_dz02MDAmcXVh/bGl0eT04MA" 
+                src="/blog_as_service/blogHeading.webp" 
                 alt="Blog interface with writer tool" 
-                className="w-full h-auto"
+                className="w-[569px] h-auto"
               />
             </div>
-          </div>
+      
           
           {/* Background decorative elements
           <div className="absolute top-1/4 right-10 w-32 h-32 opacity-20">
@@ -201,11 +203,15 @@ const page = () => {
         </div>
       </section>
             <div>
-               <HomeMarquee/>
+             <NewMarquee/>
+            </div>
+            <div>
+             <BlogTypes/>
             </div>
             <div className='flex flex-col gap-10 pt-20'>
+            <div className='text-center'><h1 className='quicksand-bold text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-cente'>Intuitive content ordering process to meet your needs</h1></div>
                 {dataMemoArr.map((data, index) => {
-                    return <PageCard ind={index} data={data} />
+                    return  <PageCard ind={index} data={data} />
                 })}
             </div>
             <div>

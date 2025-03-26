@@ -44,15 +44,15 @@ const Featured = () => {
         }
     }, []);
 
-    // Random data from array
-    useEffect(() => {
-        const getRandomPosts = () => {
-            const shuffled = [...postMetaData].sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, Math.min(5, shuffled.length));
-        };
+   
+   // Getting latest blogs
+  const latestPosts = [...postMetaData]
+  .sort((a, b) => new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime())
+  .slice(0, 4);
 
-        setRandomPosts(getRandomPosts());
-    }, []);
+  latestPosts.map((item,index)=>(
+    console.log(item.publishedOn)
+  ))
 
     return (
         <nav
@@ -63,9 +63,10 @@ const Featured = () => {
         >
             {/* Featured Section */}
             <div className="flex flex-col max-h-[480px] p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-full">
-                <h3 className="text-lg quicksand-bold mb-4 text-[#3c61e2]">Featured</h3>
+                <h3 className="text-lg text-center quicksand-bold mb-4 text-[#3c61e2]">Latest Blogs</h3>
                 <div className="space-y-3">
-                    {randomPosts.map((item, index) => (
+                    {latestPosts.map((item, index) => (
+                      
                         <Link href={`/blog/${item.slug}`} className='flex items-center bg-[#2A3A5E] p-2 rounded-md cursor-pointer hover:bg-[#3A4A7E] transition-all duration-300'>
                          <div key={index} className="flex items-center ">
                             <img
