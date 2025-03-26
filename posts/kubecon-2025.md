@@ -1,13 +1,13 @@
-## What is Kubecon?
+## What is KubeCon?
 
-**KubeCon + CloudNativeCon**, a developer-focused conference, is being organized by the Cloud Native Computing Foundation (CNCF). First started in 2015, Kubecon has brought together the global open-source and cloud-native community of developers, architects, technical leaders, DevOps, infrastructure engineers, students, founders, CIOs, and CTOs.
+**KubeCon + CloudNativeCon**, a developer-focused conference, is being organized by the Cloud Native Computing Foundation (CNCF). First started in 2015, KubeCon has brought together the global open-source and cloud-native community of developers, architects, technical leaders, DevOps, infrastructure engineers, students, founders, CIOs, and CTOs.
 
 ![kubecon 2025](/PostImages/kubecon-2025/k1.png)
 _Source: cncf.io_
 
-It will be all about Kubernetes and broader DevOps trends and will take place in **Europe, China, Japan, India, and North America**, as per the Kubecon schedule for 2025.
+It will be all about Kubernetes and broader DevOps trends and will take place in **Europe, China, Japan, India, and North America**, as per the KubeCon schedule for 2025.
 
-## Why Should You Attend Kubecon?
+## Why Should You Attend KubeCon?
 
 KubeCon + CloudNativeCon isn’t just a Kubernetes event; it’s the meeting point for everyone who wants to build, run, scale, and evolve modern infrastructure. It’s designed for:
 
@@ -35,7 +35,7 @@ If you're steering your organisation’s technology strategy, KubeCon will offer
 
 ### 4. Investors
 
-Kubecon is where early-stage startups unveil what they’re building, where technical founders walk the floor with real ideas, and where the next breakout devtool companies are often spotted.
+KubeCon is where early-stage startups unveil what they’re building, where technical founders walk the floor with real ideas, and where the next breakout DevTool companies are often spotted.
 
 If you’re a VC or angel investor focused on developer tools, cloud-native platforms, or open-source commercialisation, KubeCon offers direct access to the builders behind the tools practitioners are actually adopting. It’s a place to have real conversations, see where attention is shifting, and build conviction early.
 
@@ -44,7 +44,7 @@ Whether you’re sourcing your next investment or tracking where the ecosystem i
 
 KubeCon is more than just an event; it’s a place where networks are built. Whether you are a developer, architect, technical leader, CIO, CTO, or investor, it brings together people who are transforming the cloud-native ecosystem. It’s where ideas are shared, partnerships begin, and lasting connections are made across roles, companies, and stages.
 
-## Kubecon 2025 Expected Trend
+## KubeCon 2025 Expected Trend
 
 At KubeCon + CloudNativeCon India 2024, the Infrasity team observed a clear focus on observability platforms, both in the tools showcased and the conversations happening across sessions and booths. As cloud-native environments grew in complexity, organisations turned to modern observability platforms to manage scale, improve reliability, and streamline troubleshooting.
 
