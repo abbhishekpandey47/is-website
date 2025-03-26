@@ -2,7 +2,7 @@
 
 **KubeCon + CloudNativeCon**, a developer-focused conference, is being organized by the Cloud Native Computing Foundation (CNCF). First started in 2015, Kubecon has brought together the global open-source and cloud-native community of developers, architects, technical leaders, DevOps, infrastructure engineers, students, founders, CIOs, and CTOs.
 
-![kubecon 2025](/PostImages/kubecon-2025/k1.jpg)
+![kubecon 2025](/PostImages/kubecon-2025/k1.png)
 _Source: cncf.io_
 
 It will be all about Kubernetes and broader DevOps trends and will take place in **Europe, China, Japan, India, and North America**, as per the Kubecon schedule for 2025.
