@@ -70,7 +70,7 @@ In short, observability isn’t being replaced; it’s becoming closely aligned 
 
 ## Our Experience
 
-The Infrasity team attended KubeCon + CloudNativeCon India 2024, where we experienced live product demos, meaningful technical conversations, and a strong sense of momentum across the ecosystem.
+The Infrasity team attended **KubeCon + CloudNativeCon India 2024**, where we experienced live product demos, meaningful technical conversations, and a strong sense of momentum across the ecosystem.
 
 We had real conversations around product positioning, future roadmap direction, and the technical friction points teams are still navigating. This helped us understand what kind of content the developer-first startups need in this new era.
 
