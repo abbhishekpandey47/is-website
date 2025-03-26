@@ -5,7 +5,7 @@ import { Zap } from 'lucide-react';
 const BookDemo = () => {
   return (
     <div className='w-[65%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg'>
-         <section className=" w-full bg-[#0D0A1A] relative  rounded-2xl shadow-lg min-h-[35vh] md:min-h-[40vh] lg:min-h-[35vh] overflow-hidden ">
+         <section className=" w-full bg-[#0D0A1A] relative  rounded-2xl shadow-lg min-h-[50vh] md:min-h-[50vh] lg:min-h-[35vh] overflow-hidden ">
      
 
       {/* Stars */}

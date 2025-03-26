@@ -53,7 +53,7 @@ const Outline = ({ content }) => {
   const [sticky, setSticky] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
 
-  const handleScroll = useCallback(() => {
+ const handleScroll = useCallback(() => {
     const headerOffset = 50;
     const currentScrollY = window.pageYOffset;
     let activeElement = null;

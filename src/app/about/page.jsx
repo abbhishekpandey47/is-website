@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import { Linkedin } from "lucide-react";
+import BookDemo from "../blog/[slug]/bookDemo";
+
 
 
 const about = () => {
@@ -260,36 +261,10 @@ const about = () => {
                 </div>
             </section>
             {/* Book demo section */}
-            <section className="w-full py-20 px-4 md:px-10">
-                <div className="max-w-5xl mx-auto bg-gradient-to-r from-purple-700 to-purple-500 rounded-2xl p-10 md:p-14 shadow-xl backdrop-blur-lg">
-                    <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                        {/* Left column with heading */}
-                        <div className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                            style={{ transitionDelay: '1100ms' }}>
-                            <h2 className="text-4xl md:text-5xl quicksand-bold text-white mb-4 leading-tight">
-                                Trusted by fastest growing B2B SaaS Startups.
-                            </h2>
-                        </div>
-
-                        {/* Right column with text and button */}
-                        <div className="flex flex-col items-start gap-6">
-                            <p className={`text-white/90 quicksand-medium text-lg mb-6 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                                style={{ transitionDelay: '1200ms' }}>
-                                Trusted by YC startups. Built for developer-first companies.
-                            </p>
-
-                            <div className={`transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                                style={{ transitionDelay: '1300ms' }}>
-                                <a href="https://calendly.com/meet-shan" target="_blank" rel="noopener noreferrer">
-                                    <button className="bg-gray-900 hover:bg-black text-white quicksand-medium px-4 py-4 h-auto text-lg rounded-[10px] transition-all hover:shadow-lg hover:scale-105">
-                                        Book a Demo
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div className="w-full flex justify-center items-center">
+            <BookDemo/>
+            </div>
+         
         </div>
 
     );
