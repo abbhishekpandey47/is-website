@@ -1,6 +1,7 @@
 import fs from "fs";
 import Markdown from "markdown-to-jsx";
 import matter from "gray-matter";
+import { notFound, redirect } from 'next/navigation'; // Add this import
 import postMetaData from "../../../../posts/_postMetadata";
 import Outline from "./outline";
 import HeadBanner from "./headBanner";
@@ -27,11 +28,13 @@ const getPostContent = (slug) => {
   return matterResult.content;
 };
 
-// Generate static paths for dynamic routes
+// Generate static paths for dynamic routes - ONLY for blog posts and tutorials
 export const generateStaticParams = async () => {
-  return postMetaData.map((post) => ({
-    slug: post.slug,
-  }));
+  return postMetaData
+    .filter(post => post.category !== "Case Studies")
+    .map((post) => ({
+      slug: post.slug,
+    }));
 };
 
 // Dynamically generate metadata for each post
@@ -42,6 +45,13 @@ export async function generateMetadata({ params }) {
     return {
       title: "Post Not Found",
       description: "The post you are looking for does not exist.",
+    };
+  }
+
+  if (post.category === "Case Studies") {
+    return {
+      title: "Invalid Route",
+      description: "This content is a case study and should be accessed through the case-studies route.",
     };
   }
 
@@ -63,12 +73,26 @@ export async function generateMetadata({ params }) {
 // Main PostPage component
 const PostPage = (props) => {
   const slug = props.params.slug;
+
+  // Check if the post exists
   if (!isValid(slug)) {
-    return <NotFound />;
+    return notFound();
+  }
+
+  // Get the post data and check its category
+  const postData = postMetaData.find((element) => element.slug === slug);
+
+  // If not found, show 404
+  if (!postData) {
+    return notFound();
+  }
+
+  // If this is a case study, redirect to the case study version
+  if (postData.category === "Case Studies") {
+    return redirect(`/case-studies/${slug}`);
   }
 
   const postContent = getPostContent(slug);
-  const postData = postMetaData.find((element) => element.slug === slug);
   const authorObj = authorMetadata.find((element) => element.authorId === postData.authorId);
   postData.authorName = authorObj.name;
   postData.authorImage = authorObj.profilePic;
@@ -133,14 +157,14 @@ const PostPage = (props) => {
   {postContent}
 </Markdown>
               </div>
-          
+
             </article>
-           
+
           </div>
           <div className=" max-lg:w-full max-lg:flex justify-center">
           <Featured/>
           </div>
-          
+
         </div>
         <BookDemo/>
       </div>
