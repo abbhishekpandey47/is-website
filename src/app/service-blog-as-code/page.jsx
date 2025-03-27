@@ -142,30 +142,27 @@ const page = () => {
           {/* Left side content */}
           <div className="lg:w-1/2 lg:pr-10 z-10 mb-12 lg:mb-0">
             <h2 className="text-5xl md:text-6xl quicksand-bold text-white mb-6 leading-tight">
-              Create blogs<br />that <span className="specialtext">drive</span><br />
-              <span className="specialtext">engagement</span><br />
-              and <span className="specialtext">traffic</span>
+            Docs That Don’t Just Explain<br />they <span className="specialtext">drive</span><br />
+              <span className="specialtext">Sell, Support,</span><br />
+              and <span className="specialtext">and Scale</span>
             </h2>          
             <ul className="space-y-6 mb-10">
               <li className="flex items-start text-white">
                 <span className="text-xl mr-3">•</span>
                 <p className="text-lg quicksand-medium">
-                  Boost your brand visibility, authority, and recognition with
-                  expertly crafted blog content.
+                Built for DevTools companies to help users get started, not stuck — with real examples, SDK integration to speed up dev onboarding.
                 </p>
               </li>
               <li className="flex items-start text-white">
                 <span className="text-xl mr-3">•</span>
                 <p className="text-lg quicksand-medium">
-                  Engage your audience like never before, fostering deeper
-                  connections and experiences.
+                Explains your product through real use cases — not fluffy feature lists
                 </p>
               </li>
               <li className="flex items-start text-white">
                 <span className="text-xl mr-3">•</span>
                 <p className="text-lg quicksand-medium">
-                  Convert visitors into loyal customers with persuasive and
-                  compelling blog posts.
+                Equips sales with demo-ready artifacts that double as self-serve onboarding for developers.
                 </p>
               </li>
             </ul>
