@@ -59,7 +59,7 @@ With over **700,000 active developers** who publish and participate on the platf
 
 Medium is quite popular among the tech writing audience and SaaS content. It has a simple and elegant design, and it also has an active audience that would make your ideas reach many people. Medium also has a ready-made audience, so when you post, your writings will go viral without much need for optimization.
 
-Since Medium attracts more than **[60 million active readers](https://feather.so/blog/substack-vs-medium)**, your post will quickly reach a large audience. Additionally, its interface is simple, just like writing on a notepad, and the posts are instantly distributed to a network of readers after hitting the ‘Publish’ button.
+Since Medium attracts more than **[60 million active readers monthly](https://feather.so/blog/substack-vs-medium)**, your post will quickly reach a large audience. Additionally, its interface is simple, just like writing on a notepad, and the posts are instantly distributed to a network of readers after hitting the ‘Publish’ button.
 
 However, Medium receives over 700,000 posts every month, and hence, you are likely to face stiff competition in terms of getting reach.
 
