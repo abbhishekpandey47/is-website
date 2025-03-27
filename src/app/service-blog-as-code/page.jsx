@@ -144,7 +144,7 @@ const page = () => {
             <h2 className="text-5xl md:text-6xl quicksand-bold text-white mb-6 leading-tight">
             Docs That Don’t Just Explain<br />they <span className="specialtext">drive</span><br />
               <span className="specialtext">Sell, Support,</span><br />
-              and <span className="specialtext">and Scale</span>
+              and <span className="specialtext"> Scale</span>
             </h2>          
             <ul className="space-y-6 mb-10">
               <li className="flex items-start text-white">
