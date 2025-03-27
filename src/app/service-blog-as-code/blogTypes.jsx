@@ -34,8 +34,8 @@ const blogTypes  = [
   },
   {
     id: 3,
-    title: "Expanded definition posts",
-    description: "In-depth explanations that provide comprehensive insights into a particular topic or concept.",
+    title: "Developer Guides",
+    description: "Step-by-step cloud guides that help developers implement, configure, and integrate platforms into their workflows, optimizing cloud infrastructure and accelerating development.",
     icon: <FileText className="h-7 w-7 text-purple-600" />
   },
   {
@@ -59,20 +59,20 @@ const blogTypes  = [
   // Additional blog types that will be shown when "View more" is clicked
   {
     id: 7,
-    title: "Opinion/thought leadership",
-    description: "Expert perspectives on industry trends, challenges, and future directions.",
+    title: "Thought Leadership",
+    description: "Content on cloud-native development, infrastructure automation, and the future of developer productivity, helping engineering teams optimize developer productivity.",
     icon: <Lightbulb className="h-7 w-7 text-purple-600" />
   },
   {
     id: 8,
     title: "Tutorials",
-    description: "Detailed, instructional content that teaches readers how to use a specific tool or technology.",
+    description: "Hands-on content that walks through setting up CI/CD pipelines, release strategies, AI agentic workflows, and tool integrations — built to help engineering teams move from setup to execution, faster.",
     icon: <BookOpen className="h-7 w-7 text-purple-600" />
   },
   {
     id: 9,
-    title: "Industry reports",
-    description: "Data-driven analyses of market trends, opportunities, and challenges.",
+    title: "Developer Use Case Guides",
+    description: "Developer onboarding guides turned from GitHub repos into blog-style tutorials—helping teams adopt new tools, integrate complex systems, and get to “Hello, World” faster..",
     icon: <LineChart className="h-7 w-7 text-purple-600" />
   }
 ];
