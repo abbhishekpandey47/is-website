@@ -23,37 +23,37 @@ const blogTypes  = [
   {
     id: 1,
     title: "How-to guides",
-    description: "Step-by-step instructions to help readers accomplish a specific task or achieve a goal.",
+    description: "Actionable, step-by-step guides for developers to complete specific tasks—from configuring cloud infrastructure to integrating tools into their tech stack.",
     icon: <BookText className="h-7 w-7 text-purple-600" />
   },
   {
     id: 2,
-    title: "Listicles",
-    description: "Informative articles presented as lists, often highlighting key points or ideas",
+    title: "CLI Docs",
+    description: "Clear, task-oriented documentation for CLI tools—covering installation, authentication, configuration, and infrastructure deployment from the terminal",
     icon: <ListChecks className="h-7 w-7 text-purple-600" />
   },
   {
     id: 3,
-    title: "Developer Guides",
-    description: "Step-by-step cloud guides that help developers implement, configure, and integrate platforms into their workflows, optimizing cloud infrastructure and accelerating development.",
+    title: "Product & Feature Docs",
+    description: "​In-depth documentation that guides users through the implementation, configuration, and optimization of specific product features, including cloud integrations, CLI usage, networking, and more.",
     icon: <FileText className="h-7 w-7 text-purple-600" />
   },
   {
     id: 4,
-    title: "Case studies",
-    description: "Detailed examinations of real-world situations or projects, often showcasing problem-solving and results.",
+    title: "API reference documentation",
+    description: "REST API and SDK documentation with language-specific examples in Python, Go, and TypeScript—built to help developers authenticate, trigger actions, and query data with ease.",
     icon: <Briefcase className="h-7 w-7 text-purple-600" />
   },
   {
     id: 5,
-    title: "Cheat sheets and checklists",
-    description: "Condensed reference guides or lists of essential information or tasks",
+    title: "Release Notes",
+    description: "Clear and structured product updates that highlight new features, improvements, and fixes—crafted to help users stay informed and enable smoother upgrades, demos, and usage",
     icon: <CheckSquare className="h-7 w-7 text-purple-600" />
   },
   {
     id: 6,
-    title: "Templates",
-    description: "Pre-designed formats or structures, such as marketing materials, can be customized for various purposes.",
+    title: "Demo Accelerators",
+    description: "Pre-built templates and GitHub repos designed to showcase real-world solutions during sales demos, speed up proof-of-concepts, and support developer onboarding.",
     icon: <LayoutGrid className="h-7 w-7 text-purple-600" />
   },
   // Additional blog types that will be shown when "View more" is clicked
@@ -65,7 +65,7 @@ const blogTypes  = [
   },
   {
     id: 8,
-    title: "Tutorials",
+    title: "Product Tutorials",
     description: "Hands-on content that walks through setting up CI/CD pipelines, release strategies, AI agentic workflows, and tool integrations — built to help engineering teams move from setup to execution, faster.",
     icon: <BookOpen className="h-7 w-7 text-purple-600" />
   },
@@ -87,7 +87,7 @@ const BlogTypes = () => {
     <section className="w-full py-20 px-6 md:px-10 bg-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-5xl md:text-6xl quicksand-bold text-purple-800 mb-16 text-center">
-          Blog Types
+          Content Types
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
