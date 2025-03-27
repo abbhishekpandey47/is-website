@@ -18,6 +18,8 @@ import postMetaData from '../../../posts/_postMetadata'
 import authorData from '../../../posts/_authorData';
 import NewMarquee from './marquee'
 import BlogTypes from './blogTypes'
+import WhyChooseInfrasity from './whychoose'
+import StorytellingSection from './storyTelling'
 
 
 const contentStyle = {
@@ -35,7 +37,11 @@ const PageCard = ({ ind = 1, data = { data } }) => {
             <div className='w-1/2 max-md:w-full flex flex-col justify-center'><Image loading='lazy' width={703} height={400} className='rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200' src={data.imgLink} alt="Ratio is 1.7589" /></div>
             <div className={`w-[40%] max-md:w-full max-lg:w-1/2 flex flex-col justify-center serviceasblogcard card-${ind}`}>
                 <div className='h-[80%] max-lg:h-full flex flex-col justify-center gap-5 max-lg:gap-2'>
-                    <div><p className='text-white quicksand-bold text-4xl'>Step {ind +1}</p></div>
+                 
+                    <div className='flex items-center gap-3'>
+                    <div className="w-8 h-8 bg-green-400 rounded-md mr-2"></div>
+                        <p className='text-white quicksand-bold text-4xl'>Step {ind +1}</p>
+                        </div>
                     <div><h2 className='quicksand-bold text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-center' dangerouslySetInnerHTML={{ __html: data.hTag }}></h2></div>
                     <div><p className='quicksand-medium max-lg:text-[0.8em] max-md:text-[1.2em] max-md:text-center'>{data.pTag}</p></div>
                 </div>
@@ -136,15 +142,15 @@ const page = () => {
 
     return (
         <div className=' max-w-[1560px] mx-auto overflow-hidden'>
-             {/* Blog Engagement Section - NEW */}
+             {/* Blog Engagement Section */}
       <section className="w-full mx-auto mt-24 py-20 px-6 md:px-10 relative overflow-hidden">
         <div className="max-w-7xl mx-auto flex justify-center max-md:flex-col sm:flex-col lg:flex-row items-center">
           {/* Left side content */}
           <div className="lg:w-1/2 lg:pr-10 z-10 mb-12 lg:mb-0">
             <h2 className="text-5xl md:text-6xl quicksand-bold text-white mb-6 leading-tight">
-            Docs That Don’t Just Explain<br />they <span className="specialtext">drive</span><br />
-              <span className="specialtext">Sell, Support,</span><br />
-              and <span className="specialtext"> Scale</span>
+            Docs That Don’t Just Explain<br />they <span className="text-yellow-300">drive</span><br />
+              <span className="text-yellow-300">Sell, Support,</span><br />
+              and <span className="text-yellow-300"> Scale</span>
             </h2>          
             <ul className="space-y-6 mb-10">
               <li className="flex items-start text-white">
@@ -167,36 +173,21 @@ const page = () => {
               </li>
             </ul>
             
-           
-                <button className="bg-[#3621ff] hover:bg-[#2a1ade] text-white quicksand-bold px-7 py-4 h-auto text-lg rounded-md">
+                
+                <button className="text-m quicksand-semibold rounded-[3px] before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40">
                   Book a Demo
                 </button>
           </div>
           
           {/* Right side image */}
          
-            <div className="">
+            <div className="mb-20">
               <img 
                 src="/blog_as_service/blogHeading.webp" 
                 alt="Blog interface with writer tool" 
                 className="w-[569px] h-auto"
               />
             </div>
-      
-          
-          {/* Background decorative elements
-          <div className="absolute top-1/4 right-10 w-32 h-32 opacity-20">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20,50 Q35,20 50,50 Q65,80 80,50" stroke="#FFD700" strokeWidth="3" fill="none" />
-            </svg>
-          </div>
-          <div className="absolute bottom-0 right-0 w-64 h-64 opacity-30">
-            <div className="grid grid-cols-8 grid-rows-8 gap-2">
-              {[...Array(64)].map((_, i) => (
-                <div key={i} className="w-2 h-2 bg-teal-400 rounded-full"></div>
-              ))}
-            </div>
-          </div> */}
         </div>
       </section>
             <div>
@@ -211,7 +202,16 @@ const page = () => {
                     return  <PageCard ind={index} data={data} />
                 })}
             </div>
+            {/* Why Choose Infrasity section */}
             <div>
+              <WhyChooseInfrasity/>
+            </div>
+            {/* story Telling section */}
+            <div>
+              <StorytellingSection/>
+            </div>
+
+            <div>      
                 <div className="pt-20 space-y-9 relative blogDiv">
                     <div className="whyinfra"></div>
                     <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center"><h2 className="w-3/4 leading-[80px] max-sm:w-[95%] max-sm:leading-[69px]"><span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">Distribute</span></h2></div>
@@ -226,7 +226,7 @@ const page = () => {
             </div>
             <ReadyToStart />
             <div className='quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter text-center flex justify-center mb-5'><h2>Latest <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">Blog</span></h2></div>
-            {/* <div className='flex justify-center flex-col items-center gap-5 mb-5'> */}
+
             <div className='w-[80%] mx-auto'>
 
                 <Carousel autoplay className='hover:scale-105 transition-all pb-10'>
@@ -372,7 +372,6 @@ const page = () => {
                     </Link>
                 </Carousel>
             </div>
-            {/* </div> */}
         </div>
     )
 }

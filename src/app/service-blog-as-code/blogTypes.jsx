@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 
 
 
-// Blog types data - first 6 items are initially visible
+// Blog types data 
 const blogTypes  = [
   {
     id: 1,
@@ -56,7 +56,6 @@ const blogTypes  = [
     description: "Pre-built templates and GitHub repos designed to showcase real-world solutions during sales demos, speed up proof-of-concepts, and support developer onboarding.",
     icon: <LayoutGrid className="h-7 w-7 text-purple-600" />
   },
-  // Additional blog types that will be shown when "View more" is clicked
   {
     id: 7,
     title: "Thought Leadership",
@@ -79,8 +78,8 @@ const blogTypes  = [
 
 const BlogTypes = () => {
   const [expanded, setExpanded] = useState(false);
-  
-  // Get the visible blog types based on expanded state
+
+  //handling visibility
   const visibleBlogTypes = expanded ? blogTypes : blogTypes.slice(0, 6);
   
   return (
@@ -94,13 +93,13 @@ const BlogTypes = () => {
           {visibleBlogTypes.map((blogType) => (
             <div 
               key={blogType.id} 
-              className="bg-white p-8 rounded-lg border border-gray-400 shadow-lg hover:shadow-xl transition-shadow"
+              className="bg-gradient-to-br from-white to-gray-50/80 p-8 rounded-lg border border-[#E5E4E2]-200 shadow-[1px_4px_13px_0px_#E5E4E2] hover:shadow-[1px_10px_13px_0px_#E5E4E2] transition-all"
             >
               <div className="flex items-start mb-4">
                 <div className="bg-purple-100 p-2 rounded-lg mr-4">
                   {blogType.icon}
-                </div>
-                <h3 className="text-xl quicksand-bold text-gray-900">{blogType.title}</h3>
+                </div>  
+                <h3 className="text-xs sm:text-sm md:text-base lg:text-lg mt-1 quicksand-bold text-gray-900 bg-[#CBC3E3] px-3 py-1 rounded-md">{blogType.title}</h3>
               </div>
               <p className="text-gray-600 quicksand-bold">
                 {blogType.description}
@@ -112,7 +111,7 @@ const BlogTypes = () => {
         <div className="flex justify-center mt-12">
           <Button 
             variant="outline" 
-            className="border-purple-500 py-6 px-4 bg-white text-md text-purple-600"
+            className="border-purple-500 py-6 px-4 bg-white quicksand-semibold text-md text-purple-600"
             onClick={() => setExpanded(!expanded)}
           >
             {expanded ? "View less" : "View more"} 

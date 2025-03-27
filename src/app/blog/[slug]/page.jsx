@@ -136,11 +136,12 @@ const PostPage = (props) => {
             </article>
            
           </div>
+          {/* featured part */}
           <div className=" max-lg:w-full max-lg:flex justify-center">
           <Featured/>
-          </div>
-          
+          </div>   
         </div>
+        {/* book demo section */}
         <BookDemo/>
       </div>
     </>
