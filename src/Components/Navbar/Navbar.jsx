@@ -317,7 +317,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link href="/contact" onClick={(() => { checkVisitPage("/contact") })} className="text-sm quicksand-semibold rounded-[3px] flex justify-center items-center before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#3b82f6]-500 text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40" >Book a Free Demo</Link>
+                    <Link href="/contact" onClick={(() => { checkVisitPage("/contact") })} className="text-sm quicksand-semibold rounded-[3px] flex justify-center items-center before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40" >Book a Free Demo</Link>
                 </div>
             </div>
 

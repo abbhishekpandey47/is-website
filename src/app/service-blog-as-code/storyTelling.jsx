@@ -12,8 +12,8 @@ const StorytellingSection = () => {
           We turn your features into content.
 <br />
 that clicks,convert <br />
-      and gets used</h2>
-          
+      and gets used</h2> 
+      
           <p className="text-white quicksand-medium text-xl max-w-lg mb-10">
           No onboarding lag. No extra hires. Just shipping, faster.
           </p>

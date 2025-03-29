@@ -84,29 +84,46 @@ const BlogTypes = () => {
   
   return (
     <section className="w-full py-20 px-6 md:px-10 bg-white">
+      <div className=''>
       <div className="max-w-7xl mx-auto">
         <h2 className="text-5xl md:text-6xl quicksand-bold text-purple-800 mb-16 text-center">
           Content Types
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {visibleBlogTypes.map((blogType) => (
-            <div 
-              key={blogType.id} 
-              className="bg-gradient-to-br from-white to-gray-50/80 p-8 rounded-lg border border-[#E5E4E2]-200 shadow-[1px_4px_13px_0px_#E5E4E2] hover:shadow-[1px_10px_13px_0px_#E5E4E2] transition-all"
-            >
-              <div className="flex items-start mb-4">
-                <div className="bg-purple-100 p-2 rounded-lg mr-4">
-                  {blogType.icon}
-                </div>  
-                <h3 className="text-xs sm:text-sm md:text-base lg:text-lg mt-1 quicksand-bold text-gray-900 bg-[#CBC3E3] px-3 py-1 rounded-md">{blogType.title}</h3>
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {visibleBlogTypes.map((blogType) => (
+          <div 
+            key={blogType.id} 
+            className=" bg-gray-100 rounded-xl p-3 flex items-center justify-center overflow-hidden "
+          >
+            {/* Outer container (light gray background) */}
+            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+              {/* Corner shadows */}
+    
+              {/* Inner container (white with shadow) */}
+              <div className="relative bg-white w-[99%] h-[98%] rounded-lg shadow-lg p-5 overflow-hidden z-10">
+              <div className="absolute top-0 left-0 w-60 h-60 bg-orange-100/50 blur-xl rounded-lg -translate-x-1/2 -translate-y-1/2 z-[-1]"></div>
+              <div className="absolute bottom-0 right-0 w-60 h-60 bg-orange-100/50 blur-xl rounded-lg translate-x-1/2 translate-y-1/2 z-[-1]"></div>
+                {/* Content inside the white box */}
+                <div className="flex items-start mb-4 z-1">
+                  <div className="bg-purple-100 p-2 rounded-lg mr-4">
+                    {blogType.icon}
+                  </div>
+                  <h3 className="text-xs sm:text-sm md:text-base lg:text-[16px] mt-1 quicksand-bold text-gray-900 bg-[#CBC3E3] px-3 py-1 rounded-md">
+                    {blogType.title}
+                  </h3>
+                </div>
+                
+                <div className="mt-2">
+                  <p className=" text-m text-gray-600 quicksand-bold">
+                    {blogType.description}
+                  </p>
+                </div>
               </div>
-              <p className="text-gray-600 quicksand-bold">
-                {blogType.description}
-              </p>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
         
         <div className="flex justify-center mt-12">
           <Button 
@@ -121,6 +138,7 @@ const BlogTypes = () => {
             }
           </Button>
         </div>
+      </div>
       </div>
     </section>
   );
