@@ -145,47 +145,47 @@ const page = () => {
     return (
         <div className=' max-w-[1560px] mx-auto overflow-hidden'>
              {/* Blog Engagement Section */}
-             <section className="w-full mx-auto mt-24 py-20 px-6 md:px-10 relative overflow-hidden">
-  <div className="max-w-7xl mx-auto flex justify-center max-md:flex-col sm:flex-col lg:flex-row items-start">
+             <section className="w-full mx-auto mt-24 py-20 md:px-10 relative overflow-hidden addGrid2">
+  <div className="max-w-7xl mx-auto ml-[100px] flex justify-center max-md:flex-col sm:flex-col lg:flex-row items-center gap-10" >
     {/* Left side content */}
-    <div className="lg:w-1/2 lg:flex lg:flex-col lg:items-start z-10 mb-12 lg:mb-0">
-      <h2 className="text-5xl lg:text-4xl md:text-6xl quicksand-bold text-white mb-6 leading-tight">
+    <div className="lg:w-[70vw] lg:flex lg:flex-col lg:items-start z-10 mb-12 lg:mb-0">
+      <h2 className="text-5xl lg:text-6xl md:text-6xl quicksand-bold mt-8 text-white mb-10 leading-tight">
         Docs That Don’t Just Explain, they 
-        <span className="text-[#5F64FF]">drive</span>
+        <span className="text-[#5F64FF]">drive </span>
         <span className="text-[#5F64FF]">Sell, Support,</span>
         and <span className="text-[#5F64FF]"> Scale</span>
       </h2>
       <ul className="space-y-6 mb-10">
         <li className="flex items-start text-white">
           <span className="text-xl mr-3">•</span>
-          <p className="text-lg quicksand-medium">
+          <p className="text-lg w-[40vw] quicksand-medium">
             Built for DevTools companies to help users get started, not stuck — with real examples, SDK integration to speed up dev onboarding.
           </p>
         </li>
         <li className="flex items-start text-white">
           <span className="text-xl mr-3">•</span>
-          <p className="text-lg quicksand-medium">
+          <p className="text-lg w-[40vw] quicksand-medium">
             Explains your product through real use cases — not fluffy feature lists
           </p>
         </li>
         <li className="flex items-start text-white">
           <span className="text-xl mr-3">•</span>
-          <p className="text-lg quicksand-medium">
+          <p className="text-lg w-[40vw] quicksand-medium">
             Equips sales with demo-ready artifacts that double as self-serve onboarding for developers.
           </p>
         </li>
       </ul>
-      <button className="text-sm quicksand-semibold rounded-[3px] flex justify-center items-center before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40">
+      <button className="text-m quicksand-semibold rounded-[3px] flex justify-center items-center before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40">
         Book a Demo
       </button>
     </div>
 
     {/* Right side image */}
-    <div className="lg:w-1/2 flex justify-start">
+    <div className="lg:w-1/2 flex justify-start ">
       <img 
         src="/blog_as_service/blogHeading.webp" 
         alt="Blog interface with writer tool" 
-        className="w-[569px] h-auto"
+        className="w-[500px] h-auto"
       />
     </div>
   </div>

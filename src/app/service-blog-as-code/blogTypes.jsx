@@ -83,27 +83,22 @@ const BlogTypes = () => {
   const visibleBlogTypes = expanded ? blogTypes : blogTypes.slice(0, 6);
   
   return (
-    <section className="w-full py-20 px-6 md:px-10 bg-white">
-      <div className=''>
+    <section className="w-full py-20 px-6 md:px-10 bg-gray-100 
+">
+      <div className='backdrop-filter  backdrop-blur-sm bg-opacity-10 border border-gray-100'>
       <div className="max-w-7xl mx-auto">
         <h2 className="text-5xl md:text-6xl quicksand-bold text-purple-800 mb-16 text-center">
           Content Types
         </h2>
         
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto ">
         {visibleBlogTypes.map((blogType) => (
           <div 
             key={blogType.id} 
-            className=" bg-gray-100 rounded-xl p-3 flex items-center justify-center overflow-hidden "
+            className=" rounded-xl shadow-xl  flex items-center justify-center overflow-hidden bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 "
           >
-            {/* Outer container (light gray background) */}
-            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-              {/* Corner shadows */}
-    
               {/* Inner container (white with shadow) */}
-              <div className="relative bg-white w-[99%] h-[98%] rounded-lg shadow-lg p-5 overflow-hidden z-10">
-              <div className="absolute top-0 left-0 w-60 h-60 bg-orange-100/50 blur-xl rounded-lg -translate-x-1/2 -translate-y-1/2 z-[-1]"></div>
-              <div className="absolute bottom-0 right-0 w-60 h-60 bg-orange-100/50 blur-xl rounded-lg translate-x-1/2 translate-y-1/2 z-[-1]"></div>
+              <div className="w-full p-5 overflow-hidden">
                 {/* Content inside the white box */}
                 <div className="flex items-start mb-4 z-1">
                   <div className="bg-purple-100 p-2 rounded-lg mr-4">
@@ -121,7 +116,6 @@ const BlogTypes = () => {
                 </div>
               </div>
             </div>
-          </div>
         ))}
       </div>
         

@@ -9,7 +9,7 @@ const fileList = ['aviator.png', 'firstock-logo.webp', 'cedana.png', 'cerbos.png
 const NewMarquee = () => {
     const fileMemo = useMemo(() => fileList, [fileList])
     return (
-           <div className='max-lg:mt-[30vh] max-sm:mt-[0vh] pt-10 pb-2.5'>
+           <div className='max-lg:mt-[30vh] max-sm:mt-[0vh] pt-5 pb-2.5'>
                
                 <h2 className='text-center pb-1 text-white quicksand-bold text-2xl'>We are the growth strategists for some of the fastest-growing B2B SaaS startups</h2>
                 <Marquee className="motion-reduce:overflow-auto" innerClassName="motion-reduce:animate-none">

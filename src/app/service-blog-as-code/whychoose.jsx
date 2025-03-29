@@ -2,7 +2,11 @@ import React from 'react';
 
 const WhyChooseInfrasity = () => {
   return (
-    <section className="w-full py-20 px-6 md:px-10 bg-[#080124]">
+    <section className="w-full pt-10 px-6 md:px-10 ">
+      <div
+                    className='w-full h-px bg-white/30 mb-16'
+                ></div>
+
       <div className="max-w-7xl mx-auto">
         <h2 className="text-5xl md:text-6xl quicksand-bold text-white mb-16 text-center">
         Why top engineering teams rely on Infrasity for content ?
