@@ -54,7 +54,7 @@ const dataService = [
     {
         imgLink: "/blog_as_service/1.png",
         hTag: "<p>Understanding Challenges & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Keyword Discovery</span></p>",
-        pTag: "After working with over 30 customers, we found that the real challenge is not just creating content, but identifying the right topics and keywords that resonate with your developer audience. To solve this, we align with your startup's goals and conduct targeted keyword research, focusing on terms with the right monthly search volumes (MSVs) to help your blog rank on the first page. Our engineer-authored blogs ensure technical accuracy and real-world insights, delivering value to both experts and those seeking deeper knowledge."
+        pTag: "After working with over 30 customers, we found that the real challenge is not just creating content, but identifying the right topics and keywords that resonate with your developer audience. To solve this, we align with your startup's goals and conduct targeted keyword research, focusing on terms with the right monthly search volumes (MSVs) to help your blog rank on the first page. Our developer-authored blogs ensure technical accuracy and real-world insights, delivering value to both experts and those seeking deeper knowledge."
     },
     {
         imgLink: "/blog_as_service/2.png",
@@ -197,7 +197,7 @@ const page = () => {
              <BlogTypes/>
             </div>
             <div className='flex flex-col gap-10 pt-20'>
-            <div className='text-center'><h1 className='quicksand-bold text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-cente'>Intuitive content ordering process to meet your needs</h1></div>
+            <div className='text-center'><h1 className='quicksand-bold text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-cente'>Launch-ready docs for DevTools & engineering teams</h1></div>
                 {dataMemoArr.map((data, index) => {
                     return  <PageCard ind={index} data={data} />
                 })}
