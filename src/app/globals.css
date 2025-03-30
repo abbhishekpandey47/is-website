@@ -345,6 +345,7 @@ body {
   
 }
 
+
 .whyinfra{
   background: radial-gradient(42.71% 52.71% at 48% 50%, #6a4fd1 0%, rgba(232, 65, 59, 0.00) 70%);
   opacity: 0.3;
@@ -441,4 +442,26 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+ /* Glass effect css */
+
+ .glassEffect {
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  box-shadow: 2px 2px 15px 0px #1a202c;
+  backdrop-filter: blur(10.8px);
+  -webkit-backdrop-filter: blur(10.8px);
+  border: 1px solid rgba(255, 255, 255, 1);
+
+ }
+
+ .blogtypesBg{
+  background: radial-gradient(42.71% 52.71% at 48% 50%, #3c3c3c 0%, rgba(232, 65, 59, 0.00) 70%);
+}
+
+.whyinfra3{
+  background: radial-gradient(42.71% 52.71% at 48% 50%, #3f1dc5 0%, rgba(232, 65, 59, 0.00) 70%);
+  inset: 0%;
+
 }

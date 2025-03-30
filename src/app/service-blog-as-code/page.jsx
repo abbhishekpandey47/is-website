@@ -148,8 +148,8 @@ const page = () => {
              <section className="w-full mx-auto lg:mt-24 sm:mt-16 md:mt-24 py-20 relative overflow-hidden addGrid2">
   <div className="max-w-full flex xxs:flex-col xs:flex-col sm:flex-col md:flex-col lg:flex-row justify-center items-center " >
     {/* Left side content */}
-    <div className=" md:ml-0 lg:ml-0 justify-center sm:w-full lg:w-[60vw] lg:flex lg:flex-col lg:items-start  lg:mb-0">
-      <h2 className="text-5xl text-center md:text-start lg:text-start lg:text-6xl md:text-6xl quicksand-bold mt-8 text-white mb-10 leading-tight">
+    <div className="lg:ml-[50px] justify-center sm:w-full lg:w-[60vw] lg:flex lg:flex-col lg:items-start">
+      <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-6xl quicksand-bold mt-8 text-white mb-10 leading-tight">
         Docs That Don’t Just Explain, they 
         <span className="text-[#5F64FF]"> drive  </span>
         <span className="text-[#5F64FF]"> Sell, Support, </span>
@@ -175,7 +175,7 @@ const page = () => {
           </p>
         </li>
       </ul>
-      <div className='flex justify-center md:justify-start lg:justify-start'>
+      <div className='flex justify-center md:justify-center lg:justify-start'>
       <button className="  text-m quicksand-semibold rounded-[5px] flex justify-center items-center before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40"
      onClick={() => window.open("https://calendly.com/meet-shan", "_blank")}
       >
