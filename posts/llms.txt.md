@@ -20,7 +20,7 @@ Suppose you have given a prompt to ChatGPT:
 
 "How do I set up authentication for my SaaS Product?"
 
-If the website has llms.txt, it will act like an index showing ChatGPT the path of the key docs, such as `/getting-started`, `/auth-guide`, and `/api-reference`. This will help the model quickly locate the right pages and give a more accurate, context-aware answer.
+If the website has llms.txt, it will act like an index showing ChatGPT the path of the key docs, such as `getting-started`, `auth-guide`, and `api-reference`. This will help the model quickly locate the right pages and give a more accurate, context-aware answer.
 
 Now, if you want ChatGPT to go deeper and understand not just where the docs are but what's inside them, you can provide LLMs-full.txt. It contains all your docs combined into one clean file, so when you paste that link into ChatGPT, it gets the full picture: endpoints, workflows, parameters, and edge cases. One link, full context.
 
