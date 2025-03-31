@@ -38,7 +38,7 @@ function generateSitemapXml(urls) {
 `;
 
   for (const { url, priority, changefreq } of urls) {
-    sitemap += `<url><loc>https://infrasity.com${url}</loc><lastmod>${today}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>\n`;
+    sitemap += `<url><loc>https://www.infrasity.com${url}</loc><lastmod>${today}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>\n`;
   }
 
   sitemap += `</urlset>`;
@@ -48,7 +48,7 @@ function generateSitemapXml(urls) {
 // Function to extract URLs from existing sitemap
 function extractUrlsFromSitemap(sitemapContent) {
   const urls = [];
-  const regex = /<url><loc>https:\/\/infrasity\.com(.*?)<\/loc>.*?<changefreq>(.*?)<\/changefreq><priority>(.*?)<\/priority><\/url>/g;
+  const regex = /<url><loc>https:\/\/www\.infrasity\.com(.*?)<\/loc>.*?<changefreq>(.*?)<\/changefreq><priority>(.*?)<\/priority><\/url>/g;
   let match;
 
   while ((match = regex.exec(sitemapContent)) !== null) {

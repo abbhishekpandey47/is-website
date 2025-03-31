@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://infrasity.com',
+  siteUrl: 'https://www.infrasity.com',
   generateRobotsTxt: false,
   outDir: 'public',
   sitemapSize: 70000,
