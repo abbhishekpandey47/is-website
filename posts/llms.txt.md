@@ -34,7 +34,7 @@ When these large language models process websites, they face a couple of challen
 
 If the website consists of an LLMs.txt file, it will enhance AI accuracy and readability. The file guides the large language models with the right path to relevant information, allowing them to extract accurate information without any misinterpretation.
 
-Now, here comes the question — search engines crawl websites through robots.txt, and AI also crawls webpages to extract information. Why can't AI utilize robots.txt for the same purpose?
+Now, here comes the question - search engines crawl websites through robots.txt, and AI also crawls webpages to extract information. Why can't AI utilize robots.txt for the same purpose?
 
 ## How Do LLMs Utilize LLMs.txt?
 
