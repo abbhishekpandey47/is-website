@@ -4,7 +4,7 @@ If you've ever used an AI tool like ChatGPT to generate code and ended up with a
 
 They rely heavily on web-based content, but most sites are built for humans, not machines. The result? AI often struggles to extract accurate, structured information from messy HTML. That's exactly why LLMs.txt was introduced.
 
-In this article, you'll learn what LLMs.txt is, why it was created, how it differs from robots.txt, and how LLMs actually use it. You'll also see how to generate and upload one to your site, where to place it, and what happens once it's live.
+In this article, you'll learn what LLMs.txt is, why it is important, and how LLMs actually use it. You'll also see how to generate and upload one to your site.
 
 ## What is LLMs.txt?
 
