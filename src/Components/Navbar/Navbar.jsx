@@ -64,8 +64,8 @@ const menuLinksArrServices = [
         menuName: "Video Production"
     },
     {
-        hrefLink: "/service-blog-as-code",
-        menuName: "Blogs-as-code"
+        hrefLink: "/technical-writing-services",
+        menuName: "Technical Writing Services"
     },
     // {
     //     hrefLink: "/tutorials",
@@ -241,10 +241,10 @@ const Navbar = () => {
                                 </MenuItem>
                                 <MenuItem>
                                     <Link
-                                        onClick={(() => { checkVisitPage("/service-blog-as-code") })}
-                                        href="/service-blog-as-code"
+                                        onClick={(() => { checkVisitPage("/technical-writing-services") })}
+                                        href="/technical-writing-services"
                                         className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                                        target={"/service-blog-as-code".includes("http") ? '_blank' : ""}
+                                        target={"/technical-writing-services".includes("http") ? '_blank' : ""}
                                     >
                                         <div className='pl-6'>{"Blog-as-code"}</div>
                                     </Link>
