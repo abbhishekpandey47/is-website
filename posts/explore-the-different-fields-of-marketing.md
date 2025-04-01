@@ -18,15 +18,15 @@ Product marketing is one of the most utilized types of marketing. It is a way of
 
 Let us understand the key elements of product marketing with Slack’s example:
 
-**Market Research**
+- **Market Research**
 
 Understanding the competitive landscape and customer needs is foundational. Slack identified a prevalent issue: teams were overwhelmed by excessive email communication, hindering productivity. Recognizing this gap, a platform called Slack was developed to streamline team collaboration and reduce reliance on email. Slack’s team constantly spoke to its early users and iterated accordingly, which helped ensure the product was resonating with its target audience.
 
-**Positioning and Messaging**
+- **Positioning and Messaging**
 
 Messaging and positioning a product successfully separates it from its competitors in a dense marketplace. Slack employed the concept of the "collaboration hub" in its positioning – a simple message that clearly defined Slack as an alternative to email, with the ability to decrease internal emails and improve the productivity of teams. The messaging focused on benefits, including increasing transparency, better organization, and easy integration into other tools. Having clear consistent messaging worked well in clarifying the value proposition of Slack to those potential users.
 
-**Product Launches**
+- **Product Launches**
 
 A strategic launch is critical for product adoption. Slack employed a "preview release" strategy, inviting select companies to test the platform before its official launch. This approach allowed Slack to gather valuable feedback, refine features, and build anticipation. The emphasis on user experience and responsiveness to feedback contributed to rapid adoption, with Slack achieving significant user growth and a substantial valuation within its first year.
 
