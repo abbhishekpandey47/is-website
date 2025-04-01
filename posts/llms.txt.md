@@ -48,7 +48,7 @@ This means that if the LLM reads `authentication.html`, it will read the entire 
 
 **Stage 3:** After extracting the required information, the AI model checks if it can add that much information to its context window. If the information exceeds the window limit, and the LLMs.txt file consists of some content highlighted as "Optional," the LLM discards it.
 
-This is how the LLMs.txt file makes it easy for the AI model to extract the correct information that the developer has asked it to provide. Instead of going through the HTML files and filtering out unnecessary information, LLMs can fetch the required data from LLMs.txt.
+This is how the LLMs.txt file makes it easy for the **[AI](https://www.infrasity.com/blog/top-ai-powered-tools-for-creating-personalized-visual-content)** model to extract the correct information that the developer has asked it to provide. Instead of going through the HTML files and filtering out unnecessary information, LLMs can fetch the required data from LLMs.txt.
 
 ## How to Generate LLMs.txt?
 
@@ -56,12 +56,12 @@ Generating the LLMs.txt file is pretty simple. You can utilize many generators t
 
 While the process is similar on each site, here's a step-by-step process for generating the LLMs.txt file:
 
-1. Visit [Firecrawl.dev](https://firecrawl.dev) and create an account.
+1. Visit [Firecrawl.dev](https://www.firecrawl.dev/app) and create an account.
 2. You will see an API key on the right. Copy it as it will be required during the generation process.
 
 ![llms.txt - api key](/PostImages/llms.txt/L2.png)
 
-3. Visit the LLMs.txt generator and enter the website's URL.
+3. Visit the [LLMs.txt generator](https://llmstxt.firecrawl.dev/) and enter the website's URL. 
 
 ![llms.txt - website](/PostImages/llms.txt/L6.png)
 
