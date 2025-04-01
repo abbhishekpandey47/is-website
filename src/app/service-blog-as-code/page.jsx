@@ -188,9 +188,9 @@ const page = () => {
     </div>
 
     {/* Right side image */}
-    <div className="">
+    <div className="mt-20 lg:mt-0 md:mt-0 ">
       <img 
-        src="/blog_as_service/blogHeading.webp" 
+        src="/blog_as_service/blogHeading.png" 
         alt="Blog interface with writer tool" 
         className="w-[500px] h-auto"
       />

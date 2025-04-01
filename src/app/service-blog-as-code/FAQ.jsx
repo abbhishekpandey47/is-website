@@ -9,7 +9,7 @@ const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
     <div className="border-[1px] lg:w-[30vw] w-full border-[#5F64FF] rounded-[10px]  ">
       <button 
         onClick={() => toggleAccordion(id)} 
-        className="p-6 text-left text-lg font-medium text-white w-full flex items-center justify-between"
+        className="p-6 text-left text-lg font-normal text-white w-full flex items-center justify-between"
       >
         {question}
         <ChevronDown 
@@ -88,7 +88,7 @@ const FAQSection = () => {
             </p>
             
             <a 
-              href="#contact"
+              href="https://calendly.com/meet-shan"
               className="inline-flex items-center text-[#5F64FF] text-lg  transition-colors"
             >
               Speak to Us
