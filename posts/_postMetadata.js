@@ -585,15 +585,15 @@ let postMetaData = [
     },
 
     {
-        title: "LLMs.txt: Changing the AI Model Landscape",
-        metatitle: "LLMs.txt File: Changing the AI Model Landscape",
+        title: "LLMs.txt: Changing the Large Language Model Landscape",
+        metatitle: "LLMs.txt: Changing the Large Language Model Landscape",
         slug: "llms.txt",
-        description: "LLMs.txt has brought advancement in the AI landscape. Explore how it has made a difference, why it is important, and how to generate and upload it to your repo.",
+        description: "LLMs.txt has brought advancement in the LLM landscape. Explore how it has made a difference, why it is important, and how to generate and upload it to your repo.",
         ogImage: "/PostImages/llms.txt/L1.png",
         publishedOn: "2025-04-01",
         authorId: "author0004",
         category: "Informational",
-        metaDescription: "LLMs.txt has brought advancement in the AI landscape. Explore how it has made a difference, why it is important, and how to generate and upload it to your repo."
+        metaDescription: "LLMs.txt has brought advancement in the LLM landscape. Explore how it has made a difference, why it is important, and how to generate and upload it to your repo."
     },
 
 
