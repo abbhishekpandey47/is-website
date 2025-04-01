@@ -1,16 +1,16 @@
 ## Introduction
 
-If you've ever used an AI tool like ChatGPT to generate code and ended up with a broken snippet, an outdated method, or a made-up function, you're not alone. Large Language Models (LLMs) are powerful, but they're only as good as the information they're trained on or fed.
+If you've ever used an AI tool like ChatGPT to generate code and ended up with a **broken snippet, an outdated method, or a made-up function**, you're not alone. Large Language Models (LLMs) are powerful, but they're only as good as the information they're trained on or fed.
 
 They rely heavily on web-based content, but most sites are built for humans, not machines. The result? AI often struggles to extract accurate, structured information from messy HTML. That's exactly why LLMs.txt was introduced.
 
-In this article, you'll learn what LLMs.txt is, why it is important, and how LLMs actually use it. You'll also see how to generate and upload one to your site.
+In this article, you'll learn what LLMs.txt is, why it is important, and how LLMs actually use it. You'll also see how to generate and upload one to your site. Let's dive in!
 
 ## What is LLMs.txt?
 
-LLMs.txt is a text file, especially created for LLMs to understand the information presented on the web pages. It functions as a curated index for large language models like ChatGPT, Claude, and Gemini, providing them with the website's critical contextual details and links to machine-optimized content.
+LLMs.txt is a text file, especially created for LLMs to understand the information presented on the web pages. It functions as a **curated index for large language models like ChatGPT, Claude, and Gemini**, providing them with the website's critical contextual details and links to machine-optimized content.
 
-It enhances the LLMs' interaction with the website, allowing them to analyze structured data without going through unnecessary data like JavaScript syntax and HTML fragments. Additionally, LLMs.txt is categorized into two file paths: LLMs.txt and LLMs-full.txt. Let us understand how they are different.
+It enhances the LLMs' interaction with the website, allowing them to analyze structured data without going through unnecessary data like JavaScript syntax and HTML fragments. Additionally, LLMs.txt is categorized into two file paths: **LLMs.txt and LLMs-full.txt**. Let us understand how they are different.
 
 ## LLMs.txt vs LLMs-full.txt
 
@@ -30,7 +30,7 @@ Together, these two files make ChatGPT smarter with minimal effort on your end.
 
 Traditional websites are primarily designed for humans to read. As a result, the AI models find it difficult to read them, as most websites contain CSS, JavaScript, HTML, and navigation elements. These elements are complex in nature for AI models to extract relevant information.
 
-When these large language models process websites, they face a couple of challenges, including context window limitations, inefficient crawling, and HTML complexity. The context window is basically the text limit of the AI model that it can consider at a time. Since the websites contain unnecessary elements, the LLMs have to crawl and filter out the web pages. However, this filtration might not exclude all the irrelevant information, resulting in an inaccuracy and exceeding the context window limit.
+When these large language models process websites, they face a couple of challenges, including **context window limitations, inefficient crawling, and HTML complexity**. The context window is basically the text limit of the AI model that it can consider at a time. Since the websites contain unnecessary elements, the LLMs have to crawl and filter out the web pages. However, this filtration might not exclude all the irrelevant information, resulting in an inaccuracy and exceeding the context window limit.
 
 If the website consists of an LLMs.txt file, it will enhance AI accuracy and readability. The file guides the large language models with the right path to relevant information, allowing them to extract accurate information without any misinterpretation.
 
@@ -38,7 +38,7 @@ Now, here comes the question - search engines crawl websites through robots.txt,
 
 ## How Do LLMs Utilize LLMs.txt?
 
-When the developer gives a prompt to an LLM, its orchestration frameworks parse the existing website's LLMs.txt to find the relevant sources. This process occurs in three stages:
+When the developer gives a prompt to an LLM, **its orchestration frameworks parse the existing website's LLMs.txt** to find the relevant sources. This process occurs in three stages:
 
 **Stage 1:** The model examines the LLMs.txt file to determine whether the website offers the required information and extracts the specific URLs where the information lies. This helps the LLM fetch data from the right path without crawling unnecessary HTML.
 
