@@ -61,15 +61,15 @@ While the process is similar on each site, here's a step-by-step process for gen
 
 ![llms.txt - api key](/PostImages/llms.txt/L2.png)
 
-4. Visit the LLMs.txt generator and enter the website's URL.
+3. Visit the LLMs.txt generator and enter the website's URL.
 
 ![llms.txt - website](/PostImages/llms.txt/L6.png)
 
-6. Now, enter the Firecrawl API key that you copied and click on "Generate." It will take a few minutes to create an LLMs.txt file for your website. Additionally, you can opt to generate an LLMs-full.txt file based on your preferences.
+4. Now, enter the Firecrawl API key that you copied and click on "Generate." It will take a few minutes to create an LLMs.txt file for your website. Additionally, you can opt to generate an LLMs-full.txt file based on your preferences.
 
 ![llms.txt - firecrawl api key](/PostImages/llms.txt/L3.png)
 
-8. Copy the generated LLMs.txt file to upload it to GitHub.
+5. Copy the generated LLMs.txt file to upload it to GitHub.
 
 ![llms.txt file](/PostImages/llms.txt/L4.png)
 
