@@ -107,6 +107,7 @@ It typically links to clean, structured Markdown (.md) files hosted at predictab
 
 ### 5. Can I Block All LLMs From Using My Content?   
 Yes, you can block all LLMs from using your website content by adding an llms.txt file to the root of your repository with:
+User-agent: * Disallow: /
 
 
 
