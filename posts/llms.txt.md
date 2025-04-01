@@ -56,20 +56,20 @@ Generating the LLMs.txt file is pretty simple. You can utilize many generators t
 
 While the process is similar on each site, here's a step-by-step process for generating the LLMs.txt file:
 
-1. Visit [Firecrawl.dev](https://www.firecrawl.dev/app) and create an account.
-2. You will see an API key on the right. Copy it as it will be required during the generation process.
+- Visit [Firecrawl.dev](https://www.firecrawl.dev/app) and create an account.
+- You will see an API key on the right. Copy it as it will be required during the generation process.
 
 ![llms.txt - api key](/PostImages/llms.txt/L2.png)
 
-3. Visit the [LLMs.txt generator](https://llmstxt.firecrawl.dev/) and enter the website's URL. 
+- Visit the [LLMs.txt generator](https://llmstxt.firecrawl.dev/) and enter the website's URL. 
 
 ![llms.txt - website](/PostImages/llms.txt/L6.png)
 
-4. Now, enter the Firecrawl API key that you copied and click on "Generate." It will take a few minutes to create an LLMs.txt file for your website. Additionally, you can opt to generate an LLMs-full.txt file based on your preferences.
+- Now, enter the Firecrawl API key that you copied and click on "Generate." It will take a few minutes to create an LLMs.txt file for your website. Additionally, you can opt to generate an LLMs-full.txt file based on your preferences.
 
 ![llms.txt - firecrawl api key](/PostImages/llms.txt/L3.png)
 
-5. Copy the generated LLMs.txt file to upload it to GitHub.
+- Copy the generated LLMs.txt file to upload it to GitHub.
 
 ![llms.txt file](/PostImages/llms.txt/L4.png)
 
@@ -77,13 +77,13 @@ While the process is similar on each site, here's a step-by-step process for gen
 
 Now that you have generated the LLMs.txt or LLMs-full.txt file, let's understand how you can upload it to GitHub:
 
-1. Navigate to your website's GitHub repository.
-2. Locate the root directory and create the `llms.txt` file in the root of the repository.
-3. Paste the LLMs.txt or LLMs-full.txt content in your new file.
+- Navigate to your website's GitHub repository.
+- Locate the root directory and create the `llms.txt` file in the root of the repository.
+- Paste the LLMs.txt or LLMs-full.txt content in your new file.
 
 ![llms.txt - github](/PostImages/llms.txt/L5.png)
 
-4. Commit changes to your repository and check if it's live after triggering it.
+- Commit changes to your repository and check if it's live after triggering it.
 
 ## Conclusion
 
