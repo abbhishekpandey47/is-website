@@ -29,33 +29,33 @@ const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
 const faqData = [
   {
     id: "1",
-    question: "Question 1",
-    answer: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. In necessitatibus, deleniti dolores dolorum recusandae hic quod rerum consectetur numquam cumque tenetur minus placeat doloribus "
+    question: "How does Infrasity help our product rank on Google",
+    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
   },
   {
     id: "2",
-    question: "Question 2",
-    answer: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. In necessitatibus, deleniti dolores dolorum recusandae hic quod rerum consectetur numquam cumque tenetur minus placeat doloribus "
+    question: "How does Infrasity help our product rank on Google",
+    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
   },
   {
     id: "3",
-    question: "Question 3",
-    answer: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. In necessitatibus, deleniti dolores dolorum recusandae hic quod rerum consectetur numquam cumque tenetur minus placeat doloribus "
+   question: "How does Infrasity help our product rank on Google",
+    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
   },
   {
     id: "4",
-    question: "Question 4",
-    answer: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. In necessitatibus, deleniti dolores dolorum recusandae hic quod rerum consectetur numquam cumque tenetur minus placeat doloribus"
+   question: "How does Infrasity help our product rank on Google",
+    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
   },
   {
     id: "5",
-    question: "Question 5",
-    answer: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. In necessitatibus, deleniti dolores dolorum recusandae hic quod rerum consectetur numquam cumque tenetur minus placeat doloribus"
+    question: "How does Infrasity help our product rank on Google",
+    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
   },
   {
     id: "6",
-    question: "Question 6",
-    answer: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. In necessitatibus, deleniti dolores dolorum recusandae hic quod rerum consectetur numquam cumque tenetur minus placeat doloribus"
+    question: "How does Infrasity help our product rank on Google",
+    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
   }
 ];
 
