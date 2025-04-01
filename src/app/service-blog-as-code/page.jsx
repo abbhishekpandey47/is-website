@@ -226,7 +226,7 @@ const page = () => {
             </div>
 
             <div>      
-                <div className="pt-20 px-8 space-y-9 relative blogDiv">
+                <div className="pt-6 px-8 space-y-9 relative blogDiv">
                 <div
         className='w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-16'
       ></div>
