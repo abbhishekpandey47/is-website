@@ -83,7 +83,7 @@ Now that you have generated the LLMs.txt or LLMs-full.txt file, let's understand
 
 ![llms.txt - github](/PostImages/llms.txt/L5.png)
 
-5. Commit changes to your repository and check if it's live after triggering it.
+4. Commit changes to your repository and check if it's live after triggering it.
 
 ## Conclusion
 
