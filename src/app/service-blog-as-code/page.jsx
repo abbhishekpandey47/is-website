@@ -204,7 +204,10 @@ const page = () => {
             <div>
              <BlogTypes/>
             </div>
-            <div className='flex flex-col gap-10 pt-20'>
+            <div className='flex flex-col gap-10 pt-6'>
+            <div
+        className='w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-16'
+      ></div>
             <div className='text-center'><h1 className='quicksand-bold text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-cente'>Launch-ready docs for DevTools & engineering teams</h1></div>
                 {dataMemoArr.map((data, index) => {
                     return  <PageCard ind={index} data={data} />
@@ -223,8 +226,13 @@ const page = () => {
             </div>
 
             <div>      
-                <div className="pt-20 space-y-9 relative blogDiv">
-                    <div className="whyinfra"></div>
+                <div className="pt-20 px-8 space-y-9 relative blogDiv">
+                <div
+        className='w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-16'
+      ></div>
+              
+                    <div className="whyinfra "></div>
+                  
                     <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center"><h2 className="w-3/4 leading-[80px] max-sm:w-[95%] max-sm:leading-[69px]"><span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">Distribute</span></h2></div>
 
                     <div className="text-center text-white quicksand-semibold flex justify-center"><p className="w-1/2 max-sm:w-[90%]">We distribute your content across key platforms like Reddit, Dev.to, and other developer communities, ensuring it reaches the right technical audience and drives engagement where it matters most.</p></div>
@@ -236,153 +244,7 @@ const page = () => {
                 </div>
             </div>
             <ReadyToStart />
-            <div className='quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter text-center flex justify-center mb-5'><h2>Latest <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">Blog</span></h2></div>
-
-            <div className='w-[80%] mx-auto'>
-
-                <Carousel autoplay className='hover:scale-105 transition-all pb-10'>
-                    <Link target='_blank' href={`/blog/${postMetaData[postMetaData.length - 1].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4'>
-                        <Badge.Ribbon text="Latest" className='p-4'>
-                            <div className='flex  max-lg:flex-col cursor-pointer gap-8 rounded-lg text-white '>
-
-
-                                <div className='relative' ><Image
-                                    loading="lazy"
-                                    width={600}
-                                    height={342}
-                                    className='transition duration-150 cursor-pointer'
-                                    src={postMetaData[postMetaData.length - 1].ogImage || "/blog_home/blog_home.png"}
-                                    alt="infrasity"
-                                    style={{ borderRadius: "7px" }}
-                                />
-                                    <BorderBeam size={250} duration={12} delay={9} />
-
-                                </div>
-                                <div className='flex flex-col justify-around max-lg:gap-4'>
-                                    <div className='flex flex-col gap-3'>
-                                        <div><h2 className='quicksand-bold'>{postMetaData[postMetaData.length - 1].title}</h2></div>
-                                        <div><p className='quicksand-medium'>{postMetaData[postMetaData.length - 1].description}</p></div>
-                                        <div className='text-[var(--blue)] bg-[#f5f4f7] rounded-full flex justify-center max-w-[100px] h-6 px-3 text-[12px] quicksand-semibold items-center'>
-                                            <p className='text-black max-sm:text-xs quicksand-medium'>{postMetaData[postMetaData.length - 1].category}</p>
-                                        </div>
-
-                                    </div>
-                                    <div className='flex items-center gap-5'>
-                                        <img className='rounded-full' src={(() => {
-                                            const author = authorData.find((element) => {
-                                                return element.authorId === postMetaData[postMetaData.length - 1].authorId;
-                                            });
-                                            return `${author ? author.profilePic : '/svgPatterns/profile.svg'}`;
-                                        })()}
-                                            alt="" width={40} height={40} />
-
-                                        {(() => {
-                                            const author = authorData.find((element) => {
-                                                return element.authorId === postMetaData[postMetaData.length - 1].authorId;
-                                            });
-                                            return <p className='quicksand-semibold'>{author ? author.name : 'Unknown Author'}</p>;
-                                        })()}
-                                        <p className='quicksand-light text-xs tracking-normal'>
-                                            {monthArr[Number(postMetaData[postMetaData.length - 1].publishedOn.split("-")[1]) - 1]} {postMetaData[postMetaData.length - 1].publishedOn.split("-")[2]}, {postMetaData[postMetaData.length - 1].publishedOn.split("-")[0]}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Badge.Ribbon>
-                    </Link>
-                    <Link target='_blank' href={`/blog/${postMetaData[postMetaData.length - 2].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4 relative '>
-                        <div className='flex  max-lg:flex-col cursor-pointer gap-8 rounded-lg text-white '>
-
-                            <div className='relative' ><Image
-                                loading="lazy"
-                                width={600}
-                                height={342}
-                                className='transition duration-150 cursor-pointer'
-                                src={postMetaData[postMetaData.length - 2].ogImage || "/blog_home/blog_home.png"}
-                                alt="infrasity"
-                                style={{ borderRadius: "7px" }}
-                            />
-                                <BorderBeam size={250} duration={12} delay={9} />
-
-                            </div>
-                            <div className='flex flex-col justify-around max-lg:gap-4'>
-                                <div className='flex flex-col gap-3'>
-                                    <div><h2 className='quicksand-bold'>{postMetaData[postMetaData.length - 2].title}</h2></div>
-                                    <div><p className='quicksand-medium'>{postMetaData[postMetaData.length - 2].description}</p></div>
-                                    <div className='text-[var(--blue)] bg-[#f5f4f7] rounded-full flex justify-center max-w-[100px] h-6 px-3 text-[12px] quicksand-semibold items-center'>
-                                        <p className='text-black max-sm:text-xs quicksand-medium'>{postMetaData[postMetaData.length - 2].category}</p>
-                                    </div>
-
-                                </div>
-                                <div className='flex items-center gap-5'>
-                                    <img className='rounded-full' src={(() => {
-                                        const author = authorData.find((element) => {
-                                            return element.authorId === postMetaData[postMetaData.length - 2].authorId;
-                                        });
-                                        return `${author ? author.profilePic : '/svgPatterns/profile.svg'}`;
-                                    })()}
-                                        alt="" width={40} height={40} />
-
-                                    {(() => {
-                                        const author = authorData.find((element) => {
-                                            return element.authorId === postMetaData[postMetaData.length - 2].authorId;
-                                        });
-                                        return <p className='quicksand-semibold'>{author ? author.name : 'Unknown Author'}</p>;
-                                    })()}
-                                    <p className='quicksand-light text-xs tracking-normal'>
-                                        {monthArr[Number(postMetaData[postMetaData.length - 2].publishedOn.split("-")[1]) - 1]} {postMetaData[postMetaData.length - 2].publishedOn.split("-")[2]}, {postMetaData[postMetaData.length - 2].publishedOn.split("-")[0]}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-                    <Link target='_blank' href={`/blog/${postMetaData[postMetaData.length - 3].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4 relative '>
-                        <div className='flex  max-lg:flex-col cursor-pointer gap-8 rounded-lg text-white '>
-                            <div className='relative' ><Image
-                                loading="lazy"
-                                width={600}
-                                height={342}
-                                className='transition duration-150 cursor-pointer'
-                                src={postMetaData[postMetaData.length - 3].ogImage || "/blog_home/blog_home.png"}
-                                alt="infrasity"
-                                style={{ borderRadius: "7px" }}
-                            />
-                                <BorderBeam size={250} duration={12} delay={9} />
-
-                            </div>
-                            <div className='flex flex-col justify-around max-lg:gap-4'>
-                                <div className='flex flex-col gap-3'>
-                                    <div><h2 className='quicksand-bold'>{postMetaData[postMetaData.length - 3].title}</h2></div>
-                                    <div><p className='quicksand-medium'>{postMetaData[postMetaData.length - 3].description}</p></div>
-                                    <div className='text-[var(--blue)] bg-[#f5f4f7] rounded-full flex justify-center max-w-[100px] h-6 px-3 text-[12px] quicksand-semibold items-center'>
-                                        <p className='text-black max-sm:text-xs quicksand-medium'>{postMetaData[postMetaData.length - 3].category}</p>
-                                    </div>
-
-                                </div>
-                                <div className='flex items-center gap-5'>
-                                    <img className='rounded-full' src={(() => {
-                                        const author = authorData.find((element) => {
-                                            return element.authorId === postMetaData[postMetaData.length - 3].authorId;
-                                        });
-                                        return `${author ? author.profilePic : '/svgPatterns/profile.svg'}`;
-                                    })()}
-                                        alt="" width={40} height={40} />
-
-                                    {(() => {
-                                        const author = authorData.find((element) => {
-                                            return element.authorId === postMetaData[postMetaData.length - 3].authorId;
-                                        });
-                                        return <p className='quicksand-semibold'>{author ? author.name : 'Unknown Author'}</p>;
-                                    })()}
-                                    <p className='quicksand-light text-xs tracking-normal'>
-                                        {monthArr[Number(postMetaData[postMetaData.length - 3].publishedOn.split("-")[1]) - 1]} {postMetaData[postMetaData.length - 3].publishedOn.split("-")[2]}, {postMetaData[postMetaData.length - 3].publishedOn.split("-")[0]}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-                </Carousel>
-            </div>
+          
         </div>
     )
 }

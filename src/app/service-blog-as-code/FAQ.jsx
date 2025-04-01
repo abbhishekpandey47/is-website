@@ -6,10 +6,10 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 // Custom Accordion component
 const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
   return (
-    <div className="border-[1px] border-gray-200 rounded-[10px]  ">
+    <div className="border-[1px] lg:w-[30vw] w-full border-[#5F64FF] rounded-[10px]  ">
       <button 
         onClick={() => toggleAccordion(id)} 
-        className="p-6 text-left text-lg font-medium text-[#0A1035] w-full flex items-center justify-between"
+        className="p-6 text-left text-lg font-medium text-white w-full flex items-center justify-between"
       >
         {question}
         <ChevronDown 
@@ -17,9 +17,9 @@ const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
         />
       </button>
       <div 
-        className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100 p-6' : 'max-h-0 opacity-0'}`}
+        className={`overflow-hidden bg-gray-100 rounded-[10px] transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100 p-6' : 'max-h-0 opacity-0'}`}
       >
-        <div className="text-gray-600">{answer}</div>
+        <div className="text-black">{answer}</div>
       </div>
     </div>
   );
@@ -67,7 +67,10 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="w-full py-10 px-6 md:px-10 bg-white">
+    <section className="w-full py-10 px-6 md:px-10 addGrid2">
+       <div
+        className='w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-16'
+      ></div>
       <div className="w-full mx-auto md:w-full">
         <div className="flex max-md:flex-col sm:flex-col lg:flex-row justify-center gap-10 lg:gap-40">
           {/* Left column with heading and text */}
@@ -76,17 +79,17 @@ const FAQSection = () => {
               <span className="text-purple-800 text-center">FAQ</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-400 text-[#02113E] mb-6 leading-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-400 text-[#5F64FF] mb-6 leading-tight">
               Frequently Asked Questions
             </h2>
             
-            <p className="text-lg text-gray-500 mb-8">
+            <p className="text-lg text-white mb-8">
               Have a question that needs a human to answer? No problem.
             </p>
             
             <a 
               href="#contact"
-              className="inline-flex items-center text-purple-600  transition-colors"
+              className="inline-flex items-center text-[#5F64FF] text-lg  transition-colors"
             >
               Speak to Us
               <ArrowRight className="ml-2 h-4 w-4" />
@@ -94,7 +97,7 @@ const FAQSection = () => {
           </div>
           
           {/* Right column with accordion FAQs */}
-          <div className="lg:w-7/12">
+          <div className="flex justify-center">
             <div className="w-[80%] flex flex-col gap-4">
               {faqData.map((faq) => (
                 <AccordionItem 
