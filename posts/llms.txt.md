@@ -63,7 +63,7 @@ While the process is similar on each site, here's a step-by-step process for gen
 
 4. Visit the LLMs.txt generator and enter the website's URL.
 
-
+![llms.txt - website](/PostImages/llms.txt/L6.png)
 
 6. Now, enter the Firecrawl API key that you copied and click on "Generate." It will take a few minutes to create an LLMs.txt file for your website. Additionally, you can opt to generate an LLMs-full.txt file based on your preferences.
 
