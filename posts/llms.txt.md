@@ -1,8 +1,8 @@
 ## Introduction
 
-If you've ever used an AI tool like ChatGPT to generate code and ended up with a **broken snippet, an outdated method, or a made-up function**, you're not alone. Large Language Models (LLMs) are powerful, but they're only as good as the information they're trained on or fed.
+If you've ever used an LLM like ChatGPT to generate code and ended up with a **broken snippet, an outdated method, or a made-up function**, you're not alone. Large Language Models (LLMs) are powerful, but they're only as good as the information they're trained on or fed.
 
-They rely heavily on web-based content, but most sites are built for humans, not machines. The result? AI often struggles to extract accurate, structured information from messy HTML. That's exactly why LLMs.txt was introduced.
+They rely heavily on web-based content, but most sites are built for humans, not machines. The result? LLMs often struggle to extract accurate, structured information from messy HTML. That's exactly why LLMs.txt was introduced.
 
 In this article, you'll learn what LLMs.txt is, why it is important, and how LLMs actually use it. You'll also see how to generate and upload one to your site. Let's dive in!
 
@@ -28,13 +28,13 @@ Together, these two files make ChatGPT smarter with minimal effort on your end.
 
 ## Why is LLMs.txt Important?
 
-Traditional websites are primarily designed for humans to read. As a result, the AI models find it difficult to read them, as most websites contain CSS, JavaScript, HTML, and navigation elements. These elements are complex in nature for AI models to extract relevant information.
+Traditional websites are primarily designed for humans to read. As a result, the large language models find it difficult to read them, as most websites contain CSS, JavaScript, HTML, and navigation elements. These elements are complex in nature for LLMs to extract relevant information.
 
-When these large language models process websites, they face a couple of challenges, including **context window limitations, inefficient crawling, and HTML complexity**. The context window is basically the text limit of the AI model that it can consider at a time. Since the websites contain unnecessary elements, the LLMs have to crawl and filter out the web pages. However, this filtration might not exclude all the irrelevant information, resulting in an inaccuracy and exceeding the context window limit.
+When these large language models process websites, they face a couple of challenges, including **context window limitations, inefficient crawling, and HTML complexity**. The context window is basically the text limit of the large language model that it can consider at a time. Since the websites contain unnecessary elements, the LLMs have to crawl and filter out the web pages. However, this filtration might not exclude all the irrelevant information, resulting in an inaccuracy and exceeding the context window limit.
 
-If the website consists of an LLMs.txt file, it will enhance AI accuracy and readability. The file guides the large language models with the right path to relevant information, allowing them to extract accurate information without any misinterpretation.
+If the website consists of an LLMs.txt file, it will enhance the accuracy and readability of the large language models. The file guides the large language models with the right path to relevant information, allowing them to extract accurate information without any misinterpretation.
 
-Now, here comes the question - search engines crawl websites through robots.txt, and AI also crawls webpages to extract information. Why can't AI utilize robots.txt for the same purpose?
+Now, here comes the question - search engines crawl websites through robots.txt, and LLMs also crawl web pages to extract information. Why can't they utilize robots.txt for the same purpose?
 
 ## How Do LLMs Utilize LLMs.txt?
 
@@ -44,9 +44,9 @@ When the developer gives a prompt to an LLM, **its orchestration frameworks pars
 
 **Stage 2:** Once the large language model has identified the URLs, it visits those web pages using the linked markdown files. For example, it will utilize `authentication.md` instead of `authentication.html`.
 
-This means that if the LLM reads `authentication.html`, it will read the entire webpage, including navigation bars, pop-ups, side menus, styling code, scripts, headers, and footers. On the other hand, the markdown file will filter out noise and help the AI model extract valuable information.
+This means that if the LLM reads `authentication.html`, it will read the entire webpage, including navigation bars, pop-ups, side menus, styling code, scripts, headers, and footers. On the other hand, the markdown file will filter out noise and help the LLMs extract valuable information.
 
-**Stage 3:** After extracting the required information, the AI model checks if it can add that much information to its context window. If the information exceeds the window limit, and the LLMs.txt file consists of some content highlighted as "Optional," the LLM discards it.
+**Stage 3:** After extracting the required information, the large language model checks if it can add that much information to its context window. If the information exceeds the window limit, and the LLMs.txt file consists of some content highlighted as "Optional," the LLM discards it.
 
 This is how the LLMs.txt file makes it easy for the **[AI](https://www.infrasity.com/blog/top-ai-powered-tools-for-creating-personalized-visual-content)** model to extract the correct information that the developer has asked it to provide. Instead of going through the HTML files and filtering out unnecessary information, LLMs can fetch the required data from LLMs.txt.
 
@@ -87,9 +87,9 @@ Now that you have generated the LLMs.txt or LLMs-full.txt file, let's understand
 
 ## Conclusion
 
-Large language models are utilized for various purposes, where they extract information from multiple relevant sources. However, those websites are mainly designed for human readers using HTML and other elements. The AI models find it difficult to process complex HTML and crawl websites. As a result, they deliver inaccurate responses.
+Large language models are utilized for various purposes, where they extract information from multiple relevant sources. However, those websites are mainly designed for human readers using HTML and other elements. The LLMs find it difficult to process complex HTML and crawl websites. As a result, they deliver inaccurate responses.
 
-Adding an LLMs.txt file to your website can simplify the process and help AI read the content better. This file has two variants – LLMs.txt and LLMs-full.txt – that help AI models navigate easily and extract relevant information from web pages. To generate this file, you can utilize LLMs.txt generators like Firecrawl and upload it into your GitHub repository.
+Adding an LLMs.txt file to your website can simplify the process and help large language models read the content better. This file has two variants – LLMs.txt and LLMs-full.txt – that help LLM models navigate easily and extract relevant information from web pages. To generate this file, you can utilize LLMs.txt generators like Firecrawl and upload it into your GitHub repository.
 
 ## FAQs
 
