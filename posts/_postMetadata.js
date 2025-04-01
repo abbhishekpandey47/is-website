@@ -44,15 +44,15 @@ let postMetaData = [
         metaDescription: "Boost website performance with technical SEO. Improve speed, indexability, and rankings for better user engagement and traffic."
     },
     {
-        title: "Best Platform for Blogs: How to Choose the Right One",
-        metatitle: "best blogging platform to make money",
+        title: "Best Blogging Platforms: How to Choose the Right One",
+        metatitle: "Best Blogging Platforms: How to Choose the Right One",
         slug: "best-platform-for-blogs-how-to-choose-the-right-one",
-        description: "Looking to start a blog? This guide breaks down the best blogging platforms available, helping you choose the right one based on your needs, whether you're focused on SEO, ease of use, or customization.",
+        description: "Explore the best blogging platforms to leverage your technical content and understand key factors before choosing the right one for your needs.",
         ogImage: "/PostImages/best-platform-for-blogs-how-to-choose-the-right-one/0.webp",
         publishedOn: "2024-09-18",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Find the best platform for your blog. Compare platforms for SEO, ease of use, and customization to fit your blogging needs."
+        metaDescription: "Explore the best blogging platforms to leverage your technical content and understand key factors before choosing the right one for your needs."
     },
     {
         title: "Product Marketing Team Structure: Hierarchy of Any Successful Product",
@@ -547,6 +547,53 @@ let postMetaData = [
         authorId: "author0003",
         category: "Informational",
         metaDescription: "Discover the top B2B SaaS podcasts to listen in 2025 equipped with actionable insights and experiential knowledge of leading SaaS founders from across the globe."
+    },
+    {
+        title: "Best B2B SaaS Video Agencies",
+        metatitle: "Top B2B SaaS Video Agencies to try in 2025",
+        slug: "best-b2b-saas-video-agencies",
+        description: "This blog curates a list of top B2B SaaS video production agencies that you can partner with to venture into video production and scale your SaaS company.",
+        ogImage: "/PostImages/best-b2b-saas-video-agencies/0.png",
+        publishedOn: "2025-03-21",
+        authorId: "author0003",
+        category: "Informational",
+        metaDescription: "Discover the top B2B SaaS video production agencies to help create technical product explainer videos, animated how-to guides and much more to scale your SaaS."
+    },
+
+    {
+        title: "DevTools Marketing Strategy That Persuades Developers",
+        metatitle: "DevTools Marketing Strategy That Persuades Developers",
+        slug: "devtools-marketing",
+        description: "Discover effective marketing strategies DevTool companies use to engage developers, enhance product adoption, and build lasting product credibility.",
+        ogImage: "/PostImages/devtools-marketing/d1.png",
+        publishedOn: "2025-03-22",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Discover effective marketing strategies DevTool companies use to engage developers, enhance product adoption, and build lasting product credibility."
+    },
+
+    {
+        title: "KubeCon 2025: A Conference For Cloud-native Communities",
+        metatitle: "KubeCon 2025: A Conference For Cloud-native Communities",
+        slug: "kubecon-2025",
+        description: "KubeCon 2025 is a great conference for the cloud-native community. You must attend it if you belong to this community. Why? Read further to know about it.",
+        ogImage: "/PostImages/kubecon-2025/k3.png",
+        publishedOn: "2025-03-26",
+        authorId: "author0001",
+        category: "Informational",
+        metaDescription: "KubeCon 2025 is a great conference for the cloud-native community. You must attend it if you belong to this community. Why? Read further to know about it."
+    },
+
+    {
+        title: "LLMs.txt: Changing the LLM Landscape",
+        metatitle: "LLMs.txt: Changing the Large Language Model Landscape",
+        slug: "llms.txt",
+        description: "LLMs.txt has brought advancement in the LLM landscape. Explore how it has made a difference, why it is important, and how to generate and upload it to your repo.",
+        ogImage: "/PostImages/llms.txt/L1.png",
+        publishedOn: "2025-04-01",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "LLMs.txt has brought advancement in the LLM landscape. Explore how it has made a difference, why it is important, and how to generate and upload it to your repo."
     },
 
 

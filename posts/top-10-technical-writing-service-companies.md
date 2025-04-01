@@ -144,7 +144,7 @@ Staying true to its transnational ethos, 3di also specializes in efficiently tra
 
 **Website:** [Visit 3di Information Solutions](https://3di-info.com/services/technical-writing/)  
 
-### 7. Verbilo  
+### 7. Verblio  
 
 !["verbilo"](/PostImages/top-10-technical-writing-service/7.png)
 
@@ -158,7 +158,7 @@ Denver, USA
 Ulistic, Growthsquad, Seer, Dovetail  
 
 #### Overview  
-Founded in 2011, Verbilo is a content creation company that produces content for agencies, marketers, and publishers. It specializes in SEO-powered technical writing.  
+Founded in 2011, Verblio is a content creation company that produces content for agencies, marketers, and publishers. It specializes in SEO-powered technical writing.  
 
 With 48% of its writers having more than **10 years of experience**, Verbilo writes content for industries such as healthcare, IT, software, and data security. It also creates content in "six different types of English"—catering to Canadian, British, American, Australian, South African, and New Zealand audiences.  
 
