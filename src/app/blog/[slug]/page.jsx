@@ -168,9 +168,8 @@ const PostPage = (props) => {
 
           </div>
         </div>
-        <BookDemo/>
-      </div>
-    </>
+        <BookDemo/>  
+     </>
   );
 }
 
