@@ -279,7 +279,7 @@ const Navbar = () => {
                     className="btn btn-ghost w-40  lg:absolute"
                     aria-label="Infrasity Home"
                 >
-                    <div className="flex flex-col my-auto items-start">
+                    <div className="flex flex-col my-auto items-center">
                         {/*<div className="w-full flex justify-start">
                             <Image
                                 width={200}
@@ -316,10 +316,12 @@ const Navbar = () => {
                         <li><Link href="/about" onClick={(() => { checkVisitPage("/about") })}>About Us</Link></li>
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <Link href="/contact" onClick={(() => { checkVisitPage("/contact") })} className="hidden md:inline-flex btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-semibold" >Book a Free Demo</Link>
+                <div className="navbar-end  ">
+                    <Link href="/contact" onClick={(() => { checkVisitPage("/contact") })} className="hidden md:inline-flex md:justify-center md:items-center text-sm quicksand-semibold rounded-[5px] before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40" >Book a Free Demo</Link>
                 </div>
             </div>
+
+            {/* hidden md:inline-flex btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-semibold */}
 
         </div>
     )

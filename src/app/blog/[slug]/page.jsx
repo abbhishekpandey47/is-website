@@ -7,7 +7,6 @@ import Outline from "./outline";
 import HeadBanner from "./headBanner";
 import BookDemo from "./bookDemo";
 import Featured from "./featured";
-import AuthorBanner from "./authorBanner";
 import authorMetadata from "../../../../posts/_authorData";
 import NotFound from "./NotFound";
 import Image from "next/image";
@@ -161,11 +160,15 @@ const PostPage = (props) => {
             </article>
 
           </div>
+          {/* featured part */}
           <div className=" max-lg:w-full max-lg:flex justify-center">
           <Featured/>
-          </div>
 
+          </div>   
+
+          </div>
         </div>
+        {/* book demo section */}
         <BookDemo/>
       </div>
     </>

@@ -16,6 +16,12 @@ import { Badge, Card, Space } from 'antd';
 
 import postMetaData from '../../../posts/_postMetadata'
 import authorData from '../../../posts/_authorData';
+import NewMarquee from './marquee'
+import BlogTypes from './blogTypes'
+import WhyChooseInfrasity from './whychoose'
+import StorytellingSection from './storyTelling'
+import FAQ from '@/Components/HomePage/FAQ'
+import FAQSection from './FAQ'
 
 
 const contentStyle = {
@@ -33,6 +39,11 @@ const PageCard = ({ ind = 1, data = { data } }) => {
             <div className='w-1/2 max-md:w-full flex flex-col justify-center'><Image loading='lazy' width={703} height={400} className='rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200' src={data.imgLink} alt="Ratio is 1.7589" /></div>
             <div className={`w-[40%] max-md:w-full max-lg:w-1/2 flex flex-col justify-center serviceasblogcard card-${ind}`}>
                 <div className='h-[80%] max-lg:h-full flex flex-col justify-center gap-5 max-lg:gap-2'>
+                 
+                    <div className='flex items-center gap-3'>
+                    <div className="w-8 h-8 bg-green-400 rounded-md mr-2"></div>
+                        <p className='text-white quicksand-bold text-4xl'>Step {ind +1}</p>
+                        </div>
                     <div><h2 className='quicksand-bold text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-center' dangerouslySetInnerHTML={{ __html: data.hTag }}></h2></div>
                     <div><p className='quicksand-medium max-lg:text-[0.8em] max-md:text-[1.2em] max-md:text-center'>{data.pTag}</p></div>
                 </div>
@@ -45,7 +56,7 @@ const dataService = [
     {
         imgLink: "/blog_as_service/1.png",
         hTag: "<p>Understanding Challenges & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Keyword Discovery</span></p>",
-        pTag: "After working with over 30 customers, we found that the real challenge is not just creating content, but identifying the right topics and keywords that resonate with your developer audience. To solve this, we align with your startup's goals and conduct targeted keyword research, focusing on terms with the right monthly search volumes (MSVs) to help your blog rank on the first page. Our engineer-authored blogs ensure technical accuracy and real-world insights, delivering value to both experts and those seeking deeper knowledge."
+        pTag: "After working with over 30 customers, we found that the real challenge is not just creating content, but identifying the right topics and keywords that resonate with your developer audience. To solve this, we align with your startup's goals and conduct targeted keyword research, focusing on terms with the right monthly search volumes (MSVs) to help your blog rank on the first page. Our developer-authored blogs ensure technical accuracy and real-world insights, delivering value to both experts and those seeking deeper knowledge."
     },
     {
         imgLink: "/blog_as_service/2.png",
@@ -132,26 +143,96 @@ const page = () => {
 
 
     return (
-        <div className=' max-w-[1560px] mx-auto overflow-hidden'>
-            <div className="pt-40 space-y-9 relative blogDiv">
-                <div className="whyinfra"></div>
-                <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center"><h1 className="w-3/4 leading-[80px] max-sm:w-[95%] max-sm:leading-[69px]">Blog-As<span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">-Code</span></h1></div>
+        <div className=' max-w-full mx-auto overflow-hidden'>
+             {/* Blog Engagement Section */}
+             <section className="w-full mx-auto lg:mt-24 sm:mt-16 md:mt-24 py-20 relative overflow-hidden addGrid2">
+  <div className="max-w-full flex xxs:flex-col xs:flex-col sm:flex-col md:flex-col lg:flex-row justify-center items-center " >
+    {/* Left side content */}
+    <div className="lg:ml-[50px] justify-center sm:w-full lg:w-[60vw] lg:flex lg:flex-col lg:items-start">
+      <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-6xl quicksand-bold mt-8 text-white mb-10 leading-tight">
+        Docs That Don’t Just Explain, they 
+        <span className="text-[#5F64FF]"> drive  </span>
+        <span className="text-[#5F64FF]"> Sell, Support, </span>
+        and <span className="text-[#5F64FF]"> Scale</span>
+      </h2>
+      <ul className="space-y-6 lg:w-[70%] mb-10">
+        <li className="flex items-start text-white ">
+          <span className="text-xl mr-3">•</span>
+          <p className="text-lg quicksand-medium">
+            Built for DevTools companies to help users get started, not stuck — with real examples, SDK integration to speed up dev onboarding.
+          </p>
+        </li>
+        <li className="flex items-start text-white">
+          <span className="text-xl mr-3">•</span>
+          <p className="text-lg quicksand-medium">
+            Explains your product through real use cases — not fluffy feature lists
+          </p>
+        </li>
+        <li className="flex items-start text-white">
+          <span className="text-xl mr-3">•</span>
+          <p className="text-lg  quicksand-medium">
+            Equips sales with demo-ready artifacts that double as self-serve onboarding for developers.
+          </p>
+        </li>
+      </ul>
+      <div className='flex justify-center md:justify-center lg:justify-start'>
+      <button className="  text-m quicksand-semibold rounded-[5px] flex justify-center items-center before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40"
+     onClick={() => window.open("https://calendly.com/meet-shan", "_blank")}
+      >
+        
+        Book a Demo
+      </button>
 
-                <div className="text-center text-white quicksand-semibold flex justify-center"><p className="w-1/2 max-sm:w-[90%]">Your extended Developer Relations team to initiate conversations, increase user sign ups, and accelerate pipeline faster than ever before</p></div>
-                <div className="flex justify-center"><Link href="/contact" className="btn bg-btnprimary hover:bg-btnprimaryhov text-white text-center relative z-[12px]">Get Started</Link></div>
+      </div>
+      
+    </div>
 
+    {/* Right side image */}
+    <div className="mt-20 lg:mt-0 md:mt-0 ">
+      <img 
+        src="/blog_as_service/blogHeading.png" 
+        alt="Blog interface with writer tool" 
+        className="w-[500px] h-auto"
+      />
+    </div>
+  </div>
+</section>
+
+            <div>
+             <NewMarquee/>
             </div>
             <div>
-                <HowWorks serviceArr={serviceMemoArr} isService={true} />
+             <BlogTypes/>
             </div>
-            <div className='flex flex-col gap-10 pt-20'>
+            <div className='flex flex-col gap-10 pt-6'>
+            <div
+        className='w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-16'
+      ></div>
+            <div className='text-center'><h1 className='quicksand-bold text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-cente'>Launch-ready docs for DevTools & engineering teams</h1></div>
                 {dataMemoArr.map((data, index) => {
-                    return <PageCard ind={index} data={data} />
+                    return  <PageCard ind={index} data={data} />
                 })}
             </div>
+            {/* Why Choose Infrasity section */}
             <div>
-                <div className="pt-20 space-y-9 relative blogDiv">
-                    <div className="whyinfra"></div>
+              <WhyChooseInfrasity/>
+            </div>
+            {/* story Telling section */}
+            <div>
+              <StorytellingSection/>
+            </div>
+            <div>
+             <FAQSection/>
+            </div>
+
+            <div>      
+                <div className="pt-6 px-8 space-y-9 relative blogDiv">
+                <div
+        className='w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-16'
+      ></div>
+              
+                    <div className="whyinfra "></div>
+                  
                     <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center"><h2 className="w-3/4 leading-[80px] max-sm:w-[95%] max-sm:leading-[69px]"><span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">Distribute</span></h2></div>
 
                     <div className="text-center text-white quicksand-semibold flex justify-center"><p className="w-1/2 max-sm:w-[90%]">We distribute your content across key platforms like Reddit, Dev.to, and other developer communities, ensuring it reaches the right technical audience and drives engagement where it matters most.</p></div>
@@ -163,154 +244,7 @@ const page = () => {
                 </div>
             </div>
             <ReadyToStart />
-            <div className='quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter text-center flex justify-center mb-5'><h2>Latest <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">Blog</span></h2></div>
-            {/* <div className='flex justify-center flex-col items-center gap-5 mb-5'> */}
-            <div className='w-[80%] mx-auto'>
-
-                <Carousel autoplay className='hover:scale-105 transition-all pb-10'>
-                    <Link target='_blank' href={`/blog/${postMetaData[postMetaData.length - 1].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4'>
-                        <Badge.Ribbon text="Latest" className='p-4'>
-                            <div className='flex  max-lg:flex-col cursor-pointer gap-8 rounded-lg text-white '>
-
-
-                                <div className='relative' ><Image
-                                    loading="lazy"
-                                    width={600}
-                                    height={342}
-                                    className='transition duration-150 cursor-pointer'
-                                    src={postMetaData[postMetaData.length - 1].ogImage || "/blog_home/blog_home.png"}
-                                    alt="infrasity"
-                                    style={{ borderRadius: "7px" }}
-                                />
-                                    <BorderBeam size={250} duration={12} delay={9} />
-
-                                </div>
-                                <div className='flex flex-col justify-around max-lg:gap-4'>
-                                    <div className='flex flex-col gap-3'>
-                                        <div><h2 className='quicksand-bold'>{postMetaData[postMetaData.length - 1].title}</h2></div>
-                                        <div><p className='quicksand-medium'>{postMetaData[postMetaData.length - 1].description}</p></div>
-                                        <div className='text-[var(--blue)] bg-[#f5f4f7] rounded-full flex justify-center max-w-[100px] h-6 px-3 text-[12px] quicksand-semibold items-center'>
-                                            <p className='text-black max-sm:text-xs quicksand-medium'>{postMetaData[postMetaData.length - 1].category}</p>
-                                        </div>
-
-                                    </div>
-                                    <div className='flex items-center gap-5'>
-                                        <img className='rounded-full' src={(() => {
-                                            const author = authorData.find((element) => {
-                                                return element.authorId === postMetaData[postMetaData.length - 1].authorId;
-                                            });
-                                            return `${author ? author.profilePic : '/svgPatterns/profile.svg'}`;
-                                        })()}
-                                            alt="" width={40} height={40} />
-
-                                        {(() => {
-                                            const author = authorData.find((element) => {
-                                                return element.authorId === postMetaData[postMetaData.length - 1].authorId;
-                                            });
-                                            return <p className='quicksand-semibold'>{author ? author.name : 'Unknown Author'}</p>;
-                                        })()}
-                                        <p className='quicksand-light text-xs tracking-normal'>
-                                            {monthArr[Number(postMetaData[postMetaData.length - 1].publishedOn.split("-")[1]) - 1]} {postMetaData[postMetaData.length - 1].publishedOn.split("-")[2]}, {postMetaData[postMetaData.length - 1].publishedOn.split("-")[0]}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Badge.Ribbon>
-                    </Link>
-                    <Link target='_blank' href={`/blog/${postMetaData[postMetaData.length - 2].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4 relative '>
-                        <div className='flex  max-lg:flex-col cursor-pointer gap-8 rounded-lg text-white '>
-
-                            <div className='relative' ><Image
-                                loading="lazy"
-                                width={600}
-                                height={342}
-                                className='transition duration-150 cursor-pointer'
-                                src={postMetaData[postMetaData.length - 2].ogImage || "/blog_home/blog_home.png"}
-                                alt="infrasity"
-                                style={{ borderRadius: "7px" }}
-                            />
-                                <BorderBeam size={250} duration={12} delay={9} />
-
-                            </div>
-                            <div className='flex flex-col justify-around max-lg:gap-4'>
-                                <div className='flex flex-col gap-3'>
-                                    <div><h2 className='quicksand-bold'>{postMetaData[postMetaData.length - 2].title}</h2></div>
-                                    <div><p className='quicksand-medium'>{postMetaData[postMetaData.length - 2].description}</p></div>
-                                    <div className='text-[var(--blue)] bg-[#f5f4f7] rounded-full flex justify-center max-w-[100px] h-6 px-3 text-[12px] quicksand-semibold items-center'>
-                                        <p className='text-black max-sm:text-xs quicksand-medium'>{postMetaData[postMetaData.length - 2].category}</p>
-                                    </div>
-
-                                </div>
-                                <div className='flex items-center gap-5'>
-                                    <img className='rounded-full' src={(() => {
-                                        const author = authorData.find((element) => {
-                                            return element.authorId === postMetaData[postMetaData.length - 2].authorId;
-                                        });
-                                        return `${author ? author.profilePic : '/svgPatterns/profile.svg'}`;
-                                    })()}
-                                        alt="" width={40} height={40} />
-
-                                    {(() => {
-                                        const author = authorData.find((element) => {
-                                            return element.authorId === postMetaData[postMetaData.length - 2].authorId;
-                                        });
-                                        return <p className='quicksand-semibold'>{author ? author.name : 'Unknown Author'}</p>;
-                                    })()}
-                                    <p className='quicksand-light text-xs tracking-normal'>
-                                        {monthArr[Number(postMetaData[postMetaData.length - 2].publishedOn.split("-")[1]) - 1]} {postMetaData[postMetaData.length - 2].publishedOn.split("-")[2]}, {postMetaData[postMetaData.length - 2].publishedOn.split("-")[0]}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-                    <Link target='_blank' href={`/blog/${postMetaData[postMetaData.length - 3].slug}`} className='flex max-lg:flex-col cursor-pointer gap-8 rounded-lg border-[#999] border-2 p-4 relative '>
-                        <div className='flex  max-lg:flex-col cursor-pointer gap-8 rounded-lg text-white '>
-                            <div className='relative' ><Image
-                                loading="lazy"
-                                width={600}
-                                height={342}
-                                className='transition duration-150 cursor-pointer'
-                                src={postMetaData[postMetaData.length - 3].ogImage || "/blog_home/blog_home.png"}
-                                alt="infrasity"
-                                style={{ borderRadius: "7px" }}
-                            />
-                                <BorderBeam size={250} duration={12} delay={9} />
-
-                            </div>
-                            <div className='flex flex-col justify-around max-lg:gap-4'>
-                                <div className='flex flex-col gap-3'>
-                                    <div><h2 className='quicksand-bold'>{postMetaData[postMetaData.length - 3].title}</h2></div>
-                                    <div><p className='quicksand-medium'>{postMetaData[postMetaData.length - 3].description}</p></div>
-                                    <div className='text-[var(--blue)] bg-[#f5f4f7] rounded-full flex justify-center max-w-[100px] h-6 px-3 text-[12px] quicksand-semibold items-center'>
-                                        <p className='text-black max-sm:text-xs quicksand-medium'>{postMetaData[postMetaData.length - 3].category}</p>
-                                    </div>
-
-                                </div>
-                                <div className='flex items-center gap-5'>
-                                    <img className='rounded-full' src={(() => {
-                                        const author = authorData.find((element) => {
-                                            return element.authorId === postMetaData[postMetaData.length - 3].authorId;
-                                        });
-                                        return `${author ? author.profilePic : '/svgPatterns/profile.svg'}`;
-                                    })()}
-                                        alt="" width={40} height={40} />
-
-                                    {(() => {
-                                        const author = authorData.find((element) => {
-                                            return element.authorId === postMetaData[postMetaData.length - 3].authorId;
-                                        });
-                                        return <p className='quicksand-semibold'>{author ? author.name : 'Unknown Author'}</p>;
-                                    })()}
-                                    <p className='quicksand-light text-xs tracking-normal'>
-                                        {monthArr[Number(postMetaData[postMetaData.length - 3].publishedOn.split("-")[1]) - 1]} {postMetaData[postMetaData.length - 3].publishedOn.split("-")[2]}, {postMetaData[postMetaData.length - 3].publishedOn.split("-")[0]}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-                </Carousel>
-            </div>
-            {/* </div> */}
+          
         </div>
     )
 }
