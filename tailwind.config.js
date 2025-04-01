@@ -14,6 +14,7 @@ module.exports = {
 	theme: {
     	extend: {
     		screens: {
+				xxs:'200px',
     			xs: '480px'
     		},
     		typography: {
@@ -99,8 +100,8 @@ module.exports = {
     			'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
     			marquee: 'marquee var(--duration) infinite linear',
     			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
-				'accordion-down': 'accordion-down 1s ease-out',
-				'accordion-up': 'accordion-up 1s ease-out',
+				'accordion-down': 'accordion-down 0.3s ease-out',
+				'accordion-up': 'accordion-up 0.3s ease-out',
 				'rotate-border': 'rotate-border 1s linear infinite',
 				'float': 'float 1s ease-in-out infinite',
 				'float-delay-1': 'float 1s ease-in-out infinite 1s',

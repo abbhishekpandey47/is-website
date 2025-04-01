@@ -18,7 +18,12 @@ But what if you could get information while walking your dog or driving home and
 
 ### 1.Startups for the Rest of Us  
 
+!["stratups for the rest of us"](/PostImages/top-5-b2b-saas-podcasts/1.png)
+
 Hosted by **Rob Walling**, an entrepreneur with an incredible profile boasting six companies and a community for bootstrapped SaaS startups called **MicroConf**, this podcast specifically highlights stories around bootstrapped startups. It explores the highs and lows of running a bootstrapped startup and maps out its growth journey.  
+
+!["stratups for the rest of us"](/PostImages/top-5-b2b-saas-podcasts/2.png)
+
 
 - With a whopping **766 episodes**, this SaaS podcast started in **2010**.  
 - Available on **Spotify, Apple Podcasts, YouTube, and [startupsfortherestofus.com](https://startupsfortherestofus.com)**.  
@@ -26,6 +31,8 @@ Hosted by **Rob Walling**, an entrepreneur with an incredible profile boasting s
 
 
 ### 2.SaaS Club  
+
+!["saas club"](/PostImages/top-5-b2b-saas-podcasts/3.png)
 
 At **434 episodes to date**, SaaS Club is hosted by **Omer Khan**, who previously worked at major conglomerates like **Walt Disney** and **Microsoft** before leaving his job to start his own company, following a dream he had harboured since childhood.  
 
@@ -37,7 +44,10 @@ The podcast contains in-depth conversations with SaaS founders on topics such as
 - Available on **Spotify, Apple Podcasts, YouTube, and [saasclub.io](https://saasclub.io)**.  
 - **Check out the latest episode:** *Conversation with Paul Holder, co-founder and CEO of OnRamp.*
 
-### 3.The SaaSiest Podcast  
+### 3.The SaaSiest Podcast 
+
+!["saasiest podcast"](/PostImages/top-5-b2b-saas-podcasts/4.png)
+
 
 The **SaaSiest Podcast** is terrific for several reasons:  
 
@@ -55,11 +65,17 @@ With **over 176 episodes**, covering topics from **navigating the SaaS attention
 
 ### 4. Lenny's Podcast  
 
+!["lenny's podcast"](/PostImages/top-5-b2b-saas-podcasts/5.png)
+
+
 **Lenny's Podcast** shifts its focus to **products**, diving deep into **building, launching, and growing** your SaaS product.  
 
 It is hosted by **Lenny Rachitsky**, who also publishes a **weekly newsletter** detailing **product growth strategies**.  
 
 Episodes like the **conversation with Ivan Zhao, co-founder of Notion**, on overcoming the pandemic years is a **quintessential episode** of this podcast—equipped with **humour, insights, and the joy of overcoming struggles** while building a **memorable enterprise**.  
+
+!["lenny's podcast"](/PostImages/top-5-b2b-saas-podcasts/6.png)
+
 
 - **Launched in:** 2020  
 - **Available on:** [Spotify](https://open.spotify.com), [Apple Podcasts](https://podcasts.apple.com), [YouTube](https://www.youtube.com), and [Lenny's Newsletter](https://www.lennysnewsletter.com)  
@@ -67,6 +83,9 @@ Episodes like the **conversation with Ivan Zhao, co-founder of Notion**, on over
 
 
 ### 5.The SaaS Revolution Show  
+
+!["saas revolution show"](/PostImages/top-5-b2b-saas-podcasts/7.png)
+
 
 Hosted by **Alex Theuma**, a pioneer in **SaaS podcasting**, who has been organising **SaaS conferences** globally since 2016, the **SaaS Revolution Show** provides deep insights into:  
 

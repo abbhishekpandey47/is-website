@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://infrasity.com',
+  siteUrl: 'https://www.infrasity.com',
   generateRobotsTxt: false,
   outDir: 'public',
   sitemapSize: 70000,
@@ -8,7 +8,13 @@ module.exports = {
   generateIndexSitemap: false, // This prevents `sitemap.xml` from referencing multiple files
   exclude: [],
   alternateRefs: [],
+  // This is important - make sure it's looking at the right directory for pages
+  sourceDir: '.next',
+  pagesDirectory: process.cwd() + '/src/app',
   transform: async (config, path) => {
+    // Remove any trailing slashes for consistency
+    path = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
+
     let priority = 0.7;
     let changefreq = 'weekly';
 
