@@ -77,15 +77,15 @@ let postMetaData = [
         metaDescription: "Discover the benefits of writing technical content for SaaS companies. Learn best practices to improve user experience and trust."
     },
     {
-        title: "Different Fields of Marketing – Exploring Different Paths and Strategies",
-        metatitle: "Exploring Different Paths and Strategies & Different Fields of Marketing",
+        title: "Different Types of Marketing for B2B SaaS Companies",
+        metatitle: "Different Types of Marketing for B2B SaaS Companies ",
         slug: "explore-the-different-fields-of-marketing",
-        description: "Dive into the various fields of marketing, from content and social media to product marketing. Uncover strategies that top SaaS companies use to grow and engage their audience, with insights into the latest trends such as AI-driven personalization.",
+        description: "Explore the different types of marketing that can help B2B SaaS companies reach their target customers to raise awareness, generate leads, and sell products.",
         ogImage: "/PostImages/explore-the-different-fields-of-marketing/0.webp",
         publishedOn: "2024-10-02",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Explore different marketing strategies and fields, including content, social media, and product marketing, with AI personalization insights."
+        metaDescription: "Explore the different types of marketing that can help B2B SaaS companies reach their target customers to raise awareness, generate leads, and sell products."
     },
     {
         title: "How to Become a Technical Content Writer",
