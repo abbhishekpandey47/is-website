@@ -29,33 +29,33 @@ const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
 const faqData = [
   {
     id: "1",
-    question: "How does Infrasity help our product rank on Google",
-    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
+    question: " How can early-stage startups outsource developer documentation and DevTool content without hiring a full DevRel team?",
+    answer: "Hiring takes months. With Infrasity, you get product-ready documentation from day one — without the overhead of salaries, onboarding, or dev time spent writing."
   },
   {
     id: "2",
-    question: "How does Infrasity help our product rank on Google",
-    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
+    question: "Can Infrasity help us launch product docs faster",
+    answer: "Absolutely. We’ve helped dozens of DevTool startups launch docs in under two weeks — from API references to full onboarding guides, ready for users and demos"
   },
   {
     id: "3",
-   question: "How does Infrasity help our product rank on Google",
-    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
+   question: "How is Infrasity different from a content agency or freelancer?",
+    answer: "We live and breathe infra, DevOps, and SaaS. You don’t need to explain what an SDK, CLI, or deployment pipeline is. We already get it."
   },
   {
     id: "4",
-   question: "How does Infrasity help our product rank on Google",
-    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
+   question: "Will this actually move the GTM needle",
+    answer: "Yes. Clear docs = faster onboarding = shorter time-to-value = more product adoption. It’s your silent GTM engine."
   },
   {
     id: "5",
-    question: "How does Infrasity help our product rank on Google",
-    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
+    question: "What type of content should we start with",
+    answer: "Launch with what converts: onboarding guides, API references, how-to tutorials, and real use-case walkthroughs."
   },
   {
     id: "6",
-    question: "How does Infrasity help our product rank on Google",
-    answer: "We combine hands-on technical expertise with SEO best practices like keyword research, content structuring, and internal linking. Every article is optimized to rank for high-intent, developer-focused keywords that drive real traffic and engagement"
+    question: "What technical content should a DevTool startup prioritize?",
+    answer: "Start with developer docs, onboarding guides, and real-world tutorials. These are the assets that reduce friction, explain your product clearly, and help users integrate fast."
   }
 ];
 
