@@ -585,8 +585,8 @@ let postMetaData = [
     },
 
     {
-        title: "LLMs.txt: Changing the LLM Landscape",
-        metatitle: "LLMs.txt: Changing the Large Language Model Landscape",
+        title: "LLMs.txt: A New Standard for Making Your Website LLM-friendly",
+        metatitle: "LLMs.txt: A New Standard for Making Your Website LLM-friendly",
         slug: "llms.txt",
         description: "LLMs.txt has brought advancement in the LLM landscape. Explore how it has made a difference, why it is important, and how to generate and upload it to your repo.",
         ogImage: "/PostImages/llms.txt/L1.png",
