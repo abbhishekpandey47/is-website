@@ -81,7 +81,7 @@ let postMetaData = [
         metatitle: "Different Types of Marketing for B2B SaaS Companies ",
         slug: "explore-the-different-fields-of-marketing",
         description: "Explore the different types of marketing that can help B2B SaaS companies reach their target customers to raise awareness, generate leads, and sell products.",
-        ogImage: "/PostImages/explore-the-different-fields-of-marketing/0.webp",
+        ogImage: "/PostImages/explore-the-different-fields-of-marketing/M1.png",
         publishedOn: "2024-10-02",
         authorId: "author0001",
         category: "Informational",
