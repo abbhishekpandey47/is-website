@@ -48,7 +48,7 @@ This means that if the LLM reads `authentication.html`, it will read the entire 
 
 **Stage 3:** After extracting the required information, the large language model checks if it can add that much information to its context window. If the information exceeds the window limit, and the LLMs.txt file consists of some content highlighted as "Optional," the LLM discards it.
 
-This is how the LLMs.txt file makes it easy for the **[AI](https://www.infrasity.com/blog/top-ai-powered-tools-for-creating-personalized-visual-content)** model to extract the correct information that the developer has asked it to provide. Instead of going through the HTML files and filtering out unnecessary information, LLMs can fetch the required data from LLMs.txt.
+This is how the LLMs.txt file makes it easy for the AI model to extract the correct information that the developer has asked it to provide. Instead of going through the HTML files and filtering out unnecessary information, LLMs can fetch the required data from LLMs.txt.
 
 ## How to Generate LLMs.txt?
 
