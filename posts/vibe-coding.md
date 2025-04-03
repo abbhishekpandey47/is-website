@@ -32,6 +32,10 @@ Vibe coding involves communicating your idea to AI-powered platforms by just typ
 
 **Step 5:** Once you have the desired website design, you can publish it directly with a subdomain created by the tool. If you have an existing domain, you can connect the website with it.
 
+![vibe coding](/PostImages/vibe-coding/v1.png)
+
+One of our team members who is a non-techie created an AI agent using Lovable. See, that’s how simple it is!  
+
 ## How Does Vibe Coding Compare to Traditional Coding Methods?
 
 As a developer, you must be aware of all the intricacies involved in traditional coding methods. To help you understand Vibe Coding better and identify if you can try it out, both these methods have been differentiated based on the following parameters:
