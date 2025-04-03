@@ -596,6 +596,18 @@ let postMetaData = [
         metaDescription: "LLMs.txt has brought advancement in the LLM landscape. Explore how it has made a difference, why it is important, and how to generate and upload it to your repo."
     },
 
+    {
+        title: "Vibe Coding Explained: A Boon or a Bane for Developers?",
+        metatitle: "Vibe Coding Explained: A Boon or a Bane for Developers?",
+        slug: "vibe-coding",
+        description: "Vibe Coding has been taking over the Internet since February. What’s so special about it? Read this blog to understand how it can be beneficial for developers.",
+        ogImage: "/PostImages/vibe-coding/v2.png",
+        publishedOn: "2025-04-03",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Vibe Coding has been taking over the Internet since February. What’s so special about it? Read this blog to understand how it can be beneficial for developers."
+    },
+
 
 ];
 
