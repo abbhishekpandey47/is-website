@@ -12,14 +12,14 @@ const HeroHome = () => {
     const headingText = useMemo(() => {
         console.log("Memoizing heading text");
         return {
-            title: "Technical content writing​ services for early-stage".split(" "),
+            title: "Tech Content Marketing Services for B2B SaaS".split(" "),
             subtitle: "startups".split(" ")
         };
     }, []);
 
     const description = useMemo(() => {
         console.log("Memoizing description text");
-        return "At Infrasity, we drive growth for DevTools and early stage SaaS startups with impactful technical content marketing, driving visibility and engagement across key developer platforms.";
+        return "At Infrasity, we drive growth for DevTools and early stage SaaS startups with impactful tech content marketing, driving visibility and engagement across key developer platforms.";
     }, []);
 
 
