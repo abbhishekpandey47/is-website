@@ -1,16 +1,16 @@
-# Introduction
+## Introduction
 
-In contemporary times, Vibe has become a crucial element of our daily lives. But what's interesting is - it is not limited to general slang, but also the technical domain.
+In contemporary times, _Vibe_ has become a crucial element of our daily lives. But what's interesting is - it is not limited to general slang, but also the technical domain.
 
-Even computer scientists and coders use the term "Vibe Coding." But what exactly does it mean? It’s a new slang in the tech domain which can be a boon for developers or bane for the ones who pay less attention to detail. Intrigued?
+Even computer scientists and coders use the term "**Vibe Coding**." But what exactly does it mean? It’s a new slang in the tech domain that can be a boon for developers or a bane for the ones who pay less attention to detail. Intrigued?
 
 Read this article further to understand what it is and how you can practice it in step-by-step process, utilizing its benefits. If you are a developer, you will gain clarity about how you can utilize it by combining it with traditional coding methods.
 
-# What is Vibe Coding?
+## What is Vibe Coding?
 
-The co-founder of OpenAI, Andrej Karpathy, introduced the term "Vibe Coding" on X. He defined it as a new kind of coding in which you utilize LLMs to create web pages and software applications. But what's interesting is - you focus on the vibes!
+The co-founder of OpenAI, **Andrej Karpathy**, introduced the term "Vibe Coding" on X. He defined it as a new kind of coding in which you utilize LLMs to create web pages and software applications. But what's interesting is - you focus on the vibes!
 
-This means if you have little to no prior technical knowledge, you can build basic websites or apps just by giving natural language prompts to an AI-powered coding platform.
+This means if you have little to no prior technical knowledge, you can build basic websites or apps just by giving **natural language prompts** to an AI-powered coding platform.
 
 Rather than writing the code, describe what you want, and the AI tool will generate the code for you. It's not just about code generation; it can even design the whole web page, website, or whatever you want to build. Additionally, you can describe the required changes if they don't fit the vibe.
 
@@ -18,7 +18,7 @@ Sounds interesting?
 
 Let us help you understand how you can utilize Vibe Coding AI platforms.
 
-# How Does Vibe Coding Work?
+## How Does Vibe Coding Work?
 
 Vibe coding involves communicating your idea to AI-powered platforms by just typing or speaking in a few sentences. Let us understand the basic process of creating something like a website through Vibe Coding.
 
@@ -32,9 +32,9 @@ Vibe coding involves communicating your idea to AI-powered platforms by just typ
 
 **Step 5:** Once you have the desired website design, you can publish it directly with a subdomain created by the tool. If you have an existing domain, you can connect the website with it.
 
-# How Does Vibe Coding Compare to Traditional Coding Methods?
+## How Does Vibe Coding Compare to Traditional Coding Methods?
 
-As a developer you must be aware of all the intricacies involved in traditional coding methods. To help you understand Vibe Coding better and identify if you can try it out, both these methods have been differentiated based on the following parameters:
+As a developer, you must be aware of all the intricacies involved in traditional coding methods. To help you understand Vibe Coding better and identify if you can try it out, both these methods have been differentiated based on the following parameters:
 
 | Parameters           | Vibe Coding                                                                 | Traditional Coding                                                                 |
 |----------------------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
@@ -45,4 +45,39 @@ As a developer you must be aware of all the intricacies involved in traditional 
 | Code Testing          | Vibe coders lack in-depth technical knowledge to test AI-generated code and fix bugs. | Developers can test, debug, and run code, creating robust and scalable applications. |
 | Solution Orientation  | Vibe coding applies the existing solution over the internet while creating applications. | Innovative applications can be created and designed by the developers.             |
 
+## What Are the Main Benefits of Using Vibe Coding?
+
+Now that you have understood how vibe coding is different from traditional coding methods, here are its main benefits that help you as a developer to save time and integrate into your workflow:
+
+- **Faster Development:** AI tools help generate code quickly, alleviating the time-consuming manual process of code generation.
+- **Beginner-Friendly:** Individuals can create basic apps or websites without deep coding knowledge.
+- **Creative Flexibility:** Offers flexibility to individuals for converting their ideas into reality.
+- **Productivity Boost:** When paired with technical oversight, vibe coding can streamline repetitive tasks and free up developers’ time.
+- **Tool Compatibility:** Works well with platforms like GitHub Copilot, Cursor, ChatGPT, Claude, Supermaven, and Gemini.
+
+## Should You Utilize Vibe Coding?
+
+AI-powered platforms have given rise to Vibe Coding. Individuals don't have to be software engineers to create basic websites. They can generate codes and design some basic applications and websites as per their preferences using AI tools. It is a beginner-friendly process, too.
+
+However, if you are a SaaS company, relying solely on vibe coding might not be a great idea. Why?
+
+- **Security risks:** AI-generated code can include hardcoded passwords or expose public resources by mistake.
+- **No visibility into code quality:** Without technical know-how, it's hard to verify if the code is secure or efficient.
+- **Tricky to fix or extend:** Poor structure and readability make debugging or adding features a slow, error-prone process.
+- **Hard to maintain:** Developers must first understand the AI's logic before making changes.
+- **Not future-proof:** AI-generated code may not follow best practices or work with future versions of frameworks and tools.
+
+Considering all these aspects, it is a sure thing that even though Vibe Coding is easy and helps speed up the process for developers, it can give rise to security and maintenance issues.
+
+That doesn't mean we should avoid AI-powered tools altogether. AI exists to simplify our workflows – how we use it makes all the difference.
+
+**_Clear prompts matter_**. If your instructions aren't specific, the AI might miss the intended vibe or logic. But when paired with solid technical understanding, vibe coding can actually boost developer productivity.
+
+For instance, **Infrasity's team of developers uses a mix of Traditional Coding and Vibe Coding** to enhance their productivity without compromising the code quality and security of their B2B SaaS startup clients. They utilize AI-powered platforms to generate code. However, they manually verify whether it's logical or not. If not, they either manually make changes to it or re-prompt the AI to fix the structure or required issues. Then, they run and test it to ensure the code is scalable, readable, future-proof, and secure.
+
+## Conclusion
+
+Vibe Coding has been taking over the Internet for a few months. It's not just about the coding anymore, but also vibing to it. Several Vibe Coding AI platforms exist in the market today – Fenado and Lovable. They help speed up developers' workflow, let alone individuals from the non-tech domain.
+
+Utilizing these platforms strategically for code generation can be really beneficial and turn out to be a boon for developers. However, if they don't utilize their expertise with vibe coding, it can be a bane for them.
 
