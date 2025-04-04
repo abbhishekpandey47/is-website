@@ -12,6 +12,8 @@ The co-founder of OpenAI, **Andrej Karpathy**, introduced the term "Vibe Coding"
 
 This means if you have little to no prior technical knowledge, you can build basic websites or apps just by giving **natural language prompts** to an AI-powered coding platform.
 
+![vibe coding - andrej karpathy](/PostImages/vibe-coding/v3.png)
+
 Rather than writing the code, describe what you want, and the AI tool will generate the code for you. It's not just about code generation; it can even design the whole web page, website, or whatever you want to build. Additionally, you can describe the required changes if they don't fit the vibe.
 
 Sounds interesting?
