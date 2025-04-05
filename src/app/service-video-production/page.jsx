@@ -453,6 +453,8 @@ const page = () => {
 
             <a
               href="https://calendly.com/meet-shan"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center w-fit mb-16 lg:mb-20 transition duration-300"
             >
               Get Started
