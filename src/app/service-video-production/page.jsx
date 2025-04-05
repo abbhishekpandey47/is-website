@@ -425,7 +425,13 @@ const page = () => {
 
   return (
     <div className="max-w-[1566px] mx-auto overflow-hidden">
-      <div className="pt-28 lg:pt-28 space-y-9 relative blogDiv">
+      <div
+        className="pt-28 lg:pt-28 space-y-9 relative blogDiv"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, #111113, #1b1b1f, #18151e, #0d0a1a)",
+        }}
+      >
         <div className="whyinfra"></div>
         <div className="text-center lg:text-left">
           <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-xs sm:text-[14px] font-medium mb-2 inline-block mx-auto lg:ml-40">
@@ -473,6 +479,8 @@ const page = () => {
           </Link>
         </div>
       </div>
+
+      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-24 mb-16"></div>
 
       <div className="flex justify-center pt-10 service1VideoItem">
         <div className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200">
