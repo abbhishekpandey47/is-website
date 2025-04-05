@@ -424,17 +424,18 @@ const page = () => {
   }, []);
 
   return (
-    <div className="max-w-[1566px] mx-auto overflow-hidden">
-      <div className="relative min-h-screen">
-        <div className="absolute inset-0">
-          <BackgroundGradient />
-        </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4 pt-20 md:pt-40 text-white min-h-screen flex flex-col">
-          {/* Tag line */}
-          <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium mb-8 max-w-fit">
+    <div>
+      <div className="absolute inset-0 z-0">
+        <BackgroundGradient />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-16 sm:pt-24 md:pt-32 lg:pt-40">
+        <div className="max-w-3xl mx-auto text-white">
+          <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium mb-6 md:mb-8 inline-block">
             #1 AI VIDEO PLATFORM FOR MARKETING
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
             B2B Video Production for
             <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] text-transparent bg-clip-text">
               {" "}
@@ -442,7 +443,7 @@ const page = () => {
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-8">
             Your extended Developer Relations team to initiate conversations,
             increase user sign ups, and accelerate pipeline faster than ever
             before with developer focused video, scripted and created by

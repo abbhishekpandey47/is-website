@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function BackgroundGradient() {
+  const [wavePosition, setWavePosition] = useState(0);
+
+  // Animate wave movement
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWavePosition((prev) => (prev + 1) % 100);
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative w-full h-screen overflow-hidden">
-      {/* Gradient background - changed from white/pink to dark blue shades */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0d0a1a] via-[#3b3072] to-[#0d0a1a]"></div>
+      {/* Animated gradient background */}
+      <div
+        className="absolute inset-0 bg-gradient-to-br from-[#0d0a1a] via-[#3b3072] to-[#0d0a1a] animate-pulse"
+        style={{ animationDuration: "8s" }}
+      ></div>
 
-      {/* Wave shape overlay - changed from white to a lighter blue */}
-      <div className="absolute bottom-0 left-0 w-full h-1/2">
+      {/* Second animated wave layer */}
+      <div className="absolute bottom-0 left-0 w-full h-1/3">
         <div className="absolute bottom-0 left-0 w-full h-full">
           <svg
             className="w-full h-full"
@@ -16,10 +30,20 @@ export default function BackgroundGradient() {
             fill="none"
           >
             <path
-              fill="#16122b"
-              fillOpacity="0.3"
-              d="M0,128L80,133.3C160,139,320,149,480,176C640,203,800,245,960,234.7C1120,224,1280,160,1360,128L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-            ></path>
+              fill="#0d0a1a"
+              fillOpacity="0.5"
+              d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,218.7C672,203,768,149,864,138.7C960,128,1056,160,1152,176C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            >
+              <animate
+                attributeName="d"
+                dur="15s"
+                repeatCount="indefinite"
+                values="
+                  M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,218.7C672,203,768,149,864,138.7C960,128,1056,160,1152,176C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                  M0,128L48,122.7C96,117,192,107,288,112C384,117,480,139,576,133.3C672,128,768,96,864,90.7C960,85,1056,107,1152,122.7C1248,139,1344,149,1392,154.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                  M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,218.7C672,203,768,149,864,138.7C960,128,1056,160,1152,176C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              />
+            </path>
           </svg>
         </div>
       </div>
