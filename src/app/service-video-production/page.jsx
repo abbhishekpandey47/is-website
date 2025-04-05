@@ -425,18 +425,18 @@ const page = () => {
 
   return (
     <div>
-      <section className="relative min-h-[70vh] overflow-hidden">
+      <section className="relative min-h-[85vh] overflow-hidden">
         <div className="absolute inset-0 z-0">
           <BackgroundGradient />
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-12 sm:pt-20 md:pt-28 lg:pt-40">
-          <div className="max-w-3xl mx-auto text-white">
-            <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium mb-6 md:mb-8 inline-block">
+        <div className="relative z-10 container mx-auto px-6 lg:px-12 pt-16 md:pt-20 lg:pt-28 xl:pt-36">
+          <div className="max-w-full md:max-w-3xl text-white text-left mx-auto md:mx-0 lg:ml-24 xl:ml-32">
+            <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium mb-6 inline-block">
               #1 AI VIDEO PLATFORM FOR MARKETING
             </span>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
               B2B Video Production for
               <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] text-transparent bg-clip-text">
                 {" "}
@@ -444,14 +444,14 @@ const page = () => {
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-8">
+            <p className="text-base md:text-lg lg:text-xl text-gray-300 mb-8 max-w-2xl">
               Your extended Developer Relations team to initiate conversations,
               increase user sign ups, and accelerate pipeline faster than ever
               before with developer focused video, scripted and created by
               developers
             </p>
 
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center w-fit mb-16 sm:mb-24">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center w-fit mb-16 lg:mb-20 transition duration-300">
               Get Started
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -469,7 +469,6 @@ const page = () => {
           </div>
         </div>
       </section>
-
       <div className="flex justify-center pt-10 service1VideoItem">
         <div className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200">
           <iframe
