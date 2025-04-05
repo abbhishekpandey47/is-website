@@ -425,7 +425,7 @@ const page = () => {
 
   return (
     <div className="max-w-[1566px] mx-auto overflow-hidden">
-      <div className="pt-28 lg:pt-40 space-y-9 relative blogDiv">
+      <div className="pt-28 lg:pt-28 space-y-9 relative blogDiv">
         <div className="whyinfra"></div>
         <div className="text-center lg:text-left">
           <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-xs sm:text-[14px] font-medium mb-2 inline-block mx-auto lg:ml-40">
@@ -453,28 +453,27 @@ const page = () => {
 
         <div className="flex justify-center lg:justify-start lg:ml-40">
           <Link
-            href="/contact"
+            href="https://calendly.com/meet-shan"
+            target="_blank"
             className="btn bg-btnprimary hover:bg-btnprimaryhov text-white text-center relative z-[12]"
           >
             Get Started
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 ml-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
           </Link>
         </div>
       </div>
 
-      <div className="flex justify-center pt-10 service1VideoItem">
-        <div className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200">
-          <iframe
-            className="rounded-lg max-md:w-[630px] max-md:h-[359px] max-sm:w-[350px] max-sm:h-[181px] max-lg:w-[760px] max-lg:h-[439px] shadow-3xl relative p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200"
-            width="950"
-            height="550"
-            src={`https://www.youtube.com/embed/ICUGIdqzmYg`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title="Embedded youtube"
-          />
-        </div>
-      </div>
       <div className="flex justify-center pt-10 service1VideoItem">
         <div className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200">
           <iframe
