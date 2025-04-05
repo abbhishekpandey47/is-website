@@ -451,7 +451,10 @@ const page = () => {
               developers
             </p>
 
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center w-fit mb-16 lg:mb-20 transition duration-300">
+            <a
+              href="https://calendly.com/meet-shan"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center w-fit mb-16 lg:mb-20 transition duration-300"
+            >
               Get Started
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -465,7 +468,7 @@ const page = () => {
                   clipRule="evenodd"
                 />
               </svg>
-            </button>
+            </a>
           </div>
         </div>
       </section>
