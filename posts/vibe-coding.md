@@ -24,6 +24,8 @@ Let us help you understand how you can utilize Vibe Coding AI platforms.
 
 Vibe coding involves communicating your idea to AI-powered platforms by just typing or speaking in a few sentences. Let us understand the basic process of creating something like a website through Vibe Coding.
 
+![vibe coding - andrej karpathy](/PostImages/vibe-coding/v4.png)
+
 **Step 1:** Select an AI-powered tool like Fenado or Lovable.
 
 **Step 2:** Create an account to begin the process.
