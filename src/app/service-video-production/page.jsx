@@ -430,13 +430,13 @@ const page = () => {
           <BackgroundGradient />
         </div>
 
-        <div className="relative z-10 container mx-auto px-6 lg:px-12 pt-16 md:pt-20 lg:pt-28 xl:pt-36">
-          <div className="max-w-full md:max-w-3xl text-white text-left mx-auto md:mx-0 lg:ml-24 xl:ml-32">
-            <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium mb-6 inline-block">
+        <div className="relative z-10 container mx-auto px-0 sm:px-6 lg:px-12 pt-32 md:pt-0 lg:pt-0 xl:pt-0 xl:left-32">
+          <div className="max-w-full md:max-w-3xl md:pt-48 text-white text-left">
+            <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-xs sm:text-[14px] font-medium mb-6 inline-block">
               #1 AI VIDEO PLATFORM FOR MARKETING
             </span>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
+            <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6">
               B2B Video Production for
               <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] text-transparent bg-clip-text">
                 {" "}
@@ -444,33 +444,35 @@ const page = () => {
               </span>
             </h1>
 
-            <p className="text-base md:text-lg lg:text-xl text-gray-300 mb-8 max-w-2xl">
+            <p className="text-xs sm:text-base md:text-lg lg:text-xl text-gray-300 mb-8 max-w-full sm:max-w-2xl">
               Your extended Developer Relations team to initiate conversations,
               increase user sign ups, and accelerate pipeline faster than ever
               before with developer focused video, scripted and created by
               developers
             </p>
 
-            <a
-              href="https://calendly.com/meet-shan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center w-fit mb-16 lg:mb-20 transition duration-300"
-            >
-              Get Started
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 ml-2"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+            <div className="flex justify-center md:justify-start">
+              <a
+                href="https://calendly.com/meet-shan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center w-fit mb-16 lg:mb-20 transition duration-300"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </a>
+                Get Started
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 ml-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </section>
