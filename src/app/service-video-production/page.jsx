@@ -438,7 +438,6 @@ const page = () => {
             #1 AI VIDEO PLATFORM FOR MARKETING
           </span>
         </div>
-
         <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center">
           <h1 className="w-3/4 max-sm:w-[95%] leading-[80px] max-sm:leading-[69px] text-left max-lg:text-center max-lg:mx-auto">
             B2B Video Production for{" "}
