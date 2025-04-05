@@ -431,7 +431,7 @@ const page = () => {
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-16 sm:pt-24 md:pt-32 lg:pt-40">
         <div className="max-w-3xl mx-auto text-white">
-          <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium mb-6 md:mb-8 inline-block">
+          <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium mb-6 md:mb-8 inline-block mt-28 sm:mt-0">
             #1 AI VIDEO PLATFORM FOR MARKETING
           </span>
 
