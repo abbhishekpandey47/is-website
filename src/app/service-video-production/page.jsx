@@ -425,48 +425,51 @@ const page = () => {
 
   return (
     <div>
-      <div className="absolute inset-0 z-0">
-        <BackgroundGradient />
-      </div>
-
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-16 sm:pt-24 md:pt-32 lg:pt-40">
-        <div className="max-w-3xl mx-auto text-white">
-          <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium mb-6 md:mb-8 inline-block mt-28 sm:mt-0">
-            #1 AI VIDEO PLATFORM FOR MARKETING
-          </span>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            B2B Video Production for
-            <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] text-transparent bg-clip-text">
-              {" "}
-              Early-Stage Startups{" "}
-            </span>
-          </h1>
-
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-8">
-            Your extended Developer Relations team to initiate conversations,
-            increase user sign ups, and accelerate pipeline faster than ever
-            before with developer focused video, scripted and created by
-            developers
-          </p>
-
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center w-fit">
-            Get Started
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-2"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
+      <section className="relative min-h-[70vh] overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <BackgroundGradient />
         </div>
-      </div>
+
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-12 sm:pt-20 md:pt-28 lg:pt-40">
+          <div className="max-w-3xl mx-auto text-white">
+            <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-sm font-medium mb-6 md:mb-8 inline-block">
+              #1 AI VIDEO PLATFORM FOR MARKETING
+            </span>
+
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              B2B Video Production for
+              <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] text-transparent bg-clip-text">
+                {" "}
+                Early-Stage Startups{" "}
+              </span>
+            </h1>
+
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-8">
+              Your extended Developer Relations team to initiate conversations,
+              increase user sign ups, and accelerate pipeline faster than ever
+              before with developer focused video, scripted and created by
+              developers
+            </p>
+
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center w-fit mb-16 sm:mb-24">
+              Get Started
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 ml-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
       <div className="flex justify-center pt-10 service1VideoItem">
         <div className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200">
           <iframe
