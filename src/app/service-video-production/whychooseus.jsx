@@ -65,7 +65,7 @@ export default function SaasGlassyBoxes() {
             backgroundColor: "#141318",
             backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 80%)`,
             boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
-            border: "1px solid rgba(60, 63, 84, 0.3)",
+            border: "2px solid rgba(60, 63, 84, 0.3)",
           }}
         >
           {/* Icon */}
