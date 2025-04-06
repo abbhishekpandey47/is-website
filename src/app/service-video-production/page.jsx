@@ -485,10 +485,14 @@ const page = () => {
       <div>
         <SaasGlassyBoxes />
       </div>
-      //Services
+      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-24 mb-16"></div>
+
+      {/* //Services */}
       <div>
         <Services />
       </div>
+      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-14 mb-16"></div>
+
       <div className="flex justify-center pt-10 service1VideoItem">
         <div className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200">
           <iframe
