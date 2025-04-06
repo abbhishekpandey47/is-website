@@ -23,6 +23,7 @@ import ReadyToStart from "@/Components/HomePage/ReadyToStart";
 import HowWorks from "@/Components/HomePage/HowWorks";
 import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";
 import { MarqueeDemo } from "./MarqueeData.jsx";
+import Services from "./services.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -478,16 +479,16 @@ const page = () => {
           </Link>
         </div>
       </div>
-
       {/* Line pink */}
       <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-24 mb-16"></div>
-
       {/* Why Choose Us */}
-
       <div>
         <SaasGlassyBoxes />
       </div>
-
+      //Services
+      <div>
+        <Services />
+      </div>
       <div className="flex justify-center pt-10 service1VideoItem">
         <div className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200">
           <iframe
