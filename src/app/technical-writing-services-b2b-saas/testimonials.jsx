@@ -9,124 +9,106 @@ export default function TestimonialSlider() {
   // Sample data
   const testimonials = [
     {
-      id: 1,
-      name: "Sarah Johnson",
-      position: "Small Business Owner",
-      image: "/api/placeholder/80/80",
-      quote:
-        "Since integrating this solution into our workflow, we've experienced a significant improvement in efficiency and collaboration.",
-    },
-    {
       id: 2,
-      name: "David Patel",
-      position: "Project Manager",
-      image: "/api/placeholder/80/80",
+      name: "Cindy Blake",
+      image: "/Testimon/cindyFirefly.jpg",
+      alt: "Cindy Blake, VP Marketing, Firefly",
+      position: "VP Marketting, Firefly",
       quote:
-        "I've tested numerous options in this category, but one stands out for its intuitive design and comprehensive functionality.",
+        "Infrasity was quick to onboard and understand how to best show off the capabilities of Firefly's cloud asset management. Team has been super responsive and collaborative.",
+      highlight: ["quick to onboard", "responsive", "collaborative"],
     },
     {
       id: 3,
-      name: "Emily Carter",
-      position: "Operations Manager",
-      image: "/api/placeholder/80/80",
+      name: "Josh",
+      image: "/Testimon/joshTerraTeam.jpg",
+      alt: "Josh, Co-Founder, Terrateam",
+      position: "Co-Founder, Terrateam",
       quote:
-        "The tool we've adopted has surpassed our expectations, providing invaluable insights and support as our business continues to grow.",
+        "The Infrasity team has been fantastic to work with. Their attention to detail and level of accuracy is top notch. I'd fully recommend their services to anyone.",
+      highlight: ["attention to detail", "level of accuracy", "top notch"],
     },
     {
       id: 4,
-      name: "Michael Chen",
-      position: "Marketing Director",
-      image: "/api/placeholder/80/80",
+      name: "Shaked Askayo",
+      image: "/Testimon/Shaked.png",
+      alt: "Shaked Askayo, CTO, Kubiya.ai",
+      position: "CTO, Kubiya.ai",
       quote:
-        "The analytics capabilities have transformed how we approach our campaigns. We're now able to make data-driven decisions faster than ever.",
+        "Infrasity's creative content has significantly enhanced the visibility and appeal of our product in a competitive market. Crafting content that engages our audience and eloquently highlights the advanced capabilities of Kubiya.ai.",
+      highlight: [
+        "significantly enhanced the visibility and appeal of our product",
+      ],
     },
     {
       id: 5,
-      name: "Priya Singh",
-      position: "CTO",
-      image: "/api/placeholder/80/80",
+      name: "Frank Weissmann",
+      image: "/Testimon/Frank.jpg",
+      alt: "Frank Weissmann, Customer Success Lead, firefly.ai",
+      position: "Customer Success Lead, firefly.ai",
       quote:
-        "Integration was seamless, and the technical support has been responsive to all our questions. A reliable solution for our tech stack.",
+        "Infrasity's work has improved the client's SEO, earning a score of over 75%. They'vs also enabled the client to onboard end customers faster. Moreover, the team listens to the client's content needs, produces work that aligns with their conversation and delivers output in a quick turnaround time.",
+      highlight: ["over 75%", "quick turnaround time"],
     },
     {
       id: 6,
-      name: "James Wilson",
-      position: "E-commerce Manager",
-      image: "/api/placeholder/80/80",
+      name: "Igal Zeifman",
+      image: "/Testimon/igalEnv0.jpg",
+      alt: "Igal Zeifman, VP Marketing, Env0",
+      position: "VP Marketing, Env0",
       quote:
-        "Our conversion rates have improved by 35% since implementing this platform. The ROI has been remarkable in just three months.",
+        "Infrasity provided exceptional tech content on infrastructure engineering, with deep expertise in Terraform and the tech stack. Their collaborative approach and hands-on, developer-focused writing make their work impactful. Highly recommend them for technical content creation.",
+      highlight: [
+        "exceptional tech content",
+        "deep expertise",
+        "collaborative approach",
+        "impactful",
+      ],
     },
     {
       id: 7,
-      name: "Sophia Rodriguez",
-      position: "Customer Success Lead",
-      image: "/api/placeholder/80/80",
+      name: "Sri Krishna",
+      image: "/Testimon/sriMiddleware.jpeg",
+      alt: "Sri Krishna, Content Head, Middleware",
+      position: "Content Head, Middleware",
       quote:
-        "Our customer satisfaction scores have reached an all-time high. The intuitive interface makes onboarding new clients a breeze.",
+        "Infrasity is incredibly responsive and understands client needs exceptionally well, always delivering promptly and as expected. Their attention to detail and outstanding customer support truly set them apart. Communication through email and messaging was seamless, and while the quality of work is top-notch, we look forward to even faster delivery in the future.",
+      highlight: [
+        "responsive",
+        "attention to detail",
+        "outstanding customer support",
+        "quality of work is top-notch",
+      ],
     },
     {
       id: 8,
-      name: "Thomas Wright",
-      position: "Sales Director",
-      image: "/api/placeholder/80/80",
+      name: "Debosmit Ray",
+      image: "/Testimon/devzeroDebo.png",
+      alt: "Debosmit Ray, Founder, DevZero",
+      position: "Founder, DevZero",
       quote:
-        "The automation features have freed up our sales team to focus on building relationships rather than administrative tasks.",
+        "Infrasity has helped us create technical content, product documentation, and recipe libraries for integrating DevZero with different tech stacks. Their product videos showcase our key features, making it easier to engage users. A great content partner in our journey!",
+      highlight: [
+        "technical content",
+        "tech stacks",
+        "easier to engage users",
+        "great content partner",
+      ],
     },
     {
       id: 9,
-      name: "Aisha Patel",
-      position: "Product Manager",
-      image: "/api/placeholder/80/80",
+      name: "Saif Ali Shaik",
+      image: "/Testimon/SaifScalekit.png",
+      alt: "Saif Ali Shaik, Devloper Advocate, Scalekit",
+      position: "Developer Advocate, Scalekit",
       quote:
-        "Feature requests are implemented quickly, and the product roadmap aligns perfectly with our evolving needs as a growing company.",
-    },
-    {
-      id: 10,
-      name: "Robert Kim",
-      position: "Data Analyst",
-      image: "/api/placeholder/80/80",
-      quote:
-        "The reporting capabilities provide deep insights that were previously impossible to obtain without extensive manual effort.",
-    },
-    {
-      id: 11,
-      name: "Olivia Martinez",
-      position: "HR Director",
-      image: "/api/placeholder/80/80",
-      quote:
-        "Managing our team's workflow has never been easier. The collaborative features have improved our internal communication significantly.",
-    },
-    {
-      id: 12,
-      name: "Daniel Johnson",
-      position: "Financial Analyst",
-      image: "/api/placeholder/80/80",
-      quote:
-        "The ROI tracking features have made budget planning much more precise. We can now allocate resources with greater confidence.",
-    },
-    {
-      id: 13,
-      name: "Emma Thompson",
-      position: "Content Strategist",
-      image: "/api/placeholder/80/80",
-      quote:
-        "The platform's content management tools have streamlined our publishing process and improved our editorial workflow considerably.",
-    },
-    {
-      id: 14,
-      name: "Lucas Garcia",
-      position: "IT Administrator",
-      image: "/api/placeholder/80/80",
-      quote:
-        "Security and compliance features are robust, giving us peace of mind when handling sensitive client data across our organization.",
-    },
-    {
-      id: 15,
-      name: "Zoe Williams",
-      position: "UX Designer",
-      image: "/api/placeholder/80/80",
-      quote:
-        "The user interface is exceptionally well-designed. As a designer myself, I appreciate the attention to detail and thoughtful user flows.",
+        "Infrasity has helped the client achieve increased organic traffic, higher engagement rates on content, and measurable improvements in search rankings. The team's work has contributed to the client's strengthened market position and visibility among key audiences in identification technology.",
+      highlight: [
+        "organic traffic",
+        "higher engagement rates",
+        "measurable improvements",
+        "strengthened market position",
+      ],
     },
   ];
 
@@ -157,16 +139,6 @@ export default function TestimonialSlider() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-          What people say
-        </h2>
-        <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-          Discover what our satisfied customers have to say about their
-          experiences with our products/services.
-        </p>
-      </div>
-
       {/* sestimonial slider */}
       <div
         className="relative overflow-hidden"

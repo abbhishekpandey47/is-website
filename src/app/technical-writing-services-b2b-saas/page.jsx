@@ -291,7 +291,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      {/* <TestimonialSlider /> */}
+      <TestimonialSlider />
 
       <ReadyToStart />
     </div>
