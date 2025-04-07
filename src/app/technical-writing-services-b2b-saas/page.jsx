@@ -77,7 +77,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
 
 const dataService = [
   {
-    imgLink: "/blog_as_service/1.png",
+    imgLink: "/blog_as_service/6.png",
     hTag: "<p>Understanding Challenges & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Keyword Discovery</span></p>",
     pTag: "After working with over 30 customers, we found that the real challenge is not just creating content, but identifying the right topics and keywords that resonate with your developer audience. To solve this, we align with your startup's goals and conduct targeted keyword research, focusing on terms with the right monthly search volumes (MSVs) to help your blog rank on the first page. Our developer-authored blogs ensure technical accuracy and real-world insights, delivering value to both experts and those seeking deeper knowledge.",
   },

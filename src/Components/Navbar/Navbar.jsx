@@ -84,10 +84,6 @@ const menuLinksArrServices = [
     hrefLink: "/technical-writing-services",
     menuName: "Technical Writing Services",
   },
-  {
-    hrefLink: "/technical-writing-services-b2b-saas",
-    menuName: "Technical Writing Services B2B SAAS",
-  },
   // {
   //     hrefLink: "/tutorials",
   //     menuName: "Tutorials"
