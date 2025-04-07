@@ -101,61 +101,66 @@ export default function Services() {
   };
 
   return (
-    <div className="max-w-[1566px] mx-auto overflow-hidden py-16">
-      <div className="text-center mb-12">
-        <h2 className="text-white text-lg md:text-xl opacity-80">
-          OUR SERVICES
-        </h2>
-        <p className="quicksand-bold text-3xl md:text-5xl lg:text-6xl text-white mb-2">
-          Create videos that drive qualified <br className="md:hidden" />
-          <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">
-            brand awareness and SQLs
-          </span>
-        </p>
-      </div>
-
+    <div>
       <div
-        className="py-12 relative"
+        className="max-w-[1566px] mx-auto overflow-hidden py-16"
         style={{
           background:
-            "radial-gradient(circle at center, rgba(31, 33, 48, 0.5) 0%, rgba(14, 14, 14, 0.3) 70%)",
-          backdropFilter: "blur(5px)",
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
         }}
       >
-        {/* Services row */}
-        <div className="flex flex-wrap justify-center px-4 sm:px-6 max-w-7xl mx-auto">
-          {services.map((service, index) => (
-            <ServiceBox
-              key={`service-${index}`}
-              title={service.title}
-              description={service.description}
-              features={service.features}
-            />
-          ))}
+        <div className="text-center mb-12">
+          <p className="quicksand-bold text-3xl md:text-5xl lg:text-6xl text-white mb-2">
+            Create videos that drive qualified <br className="md:hidden" />
+            <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">
+              brand awareness and SQLs
+            </span>
+          </p>
         </div>
 
-        {/* CTA Button */}
-        <div className="mt-12 text-center">
-          <a
-            href="https://calendly.com/meet-shan"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn bg-gradient-to-r from-[#1966ff] to-[#8c1eff] hover:from-[#0044ff] hover:to-[#7000ff] text-white px-8 py-3 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
-          >
-            Get Started
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                clipRule="evenodd"
+        <div
+          className="py-12 relative"
+          style={{
+            background:
+              "radial-gradient(circle at center, rgba(31, 33, 48, 0.5) 0%, rgba(14, 14, 14, 0.3) 70%)",
+            backdropFilter: "blur(5px)",
+          }}
+        >
+          {/* Services row */}
+          <div className="flex flex-wrap justify-center px-4 sm:px-6 max-w-7xl mx-auto">
+            {services.map((service, index) => (
+              <ServiceBox
+                key={`service-${index}`}
+                title={service.title}
+                description={service.description}
+                features={service.features}
               />
-            </svg>
-          </a>
+            ))}
+          </div>
+
+          {/* CTA Button */}
+          <div className="mt-12 text-center">
+            <a
+              href="https://calendly.com/meet-shan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn bg-gradient-to-r from-[#1966ff] to-[#8c1eff] hover:from-[#0044ff] hover:to-[#7000ff] text-white px-8 py-3 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
+            >
+              Get Started
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>

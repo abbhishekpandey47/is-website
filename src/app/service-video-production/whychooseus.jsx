@@ -90,7 +90,6 @@ export default function SaasGlassyBoxes() {
   return (
     <div className="max-w-[1566px] mx-auto overflow-hidden">
       <div className="text-center mb-8">
-        <h2 className="text-white text-lg md:text-xl">WHY INFRASITY?</h2>
         <p className="quicksand-bold text-3xl md:text-4xl text-white mb-2">
           We drive growth for your <br /> B2B SaaS {"  "}
           <span className="bg-gradient-to-r from-[#4a6bcd] via-[#6370c8] to-[#5566d1] bg-clip-text animate-gradient text-transparent">
