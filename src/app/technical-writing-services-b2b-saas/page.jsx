@@ -22,6 +22,7 @@ import WhyChooseInfrasity from "./whychoose";
 import StorytellingSection from "./storyTelling";
 import FAQ from "@/Components/HomePage/FAQ";
 import FAQSection from "./FAQ";
+import TestimonialSlider from "./testimonials";
 
 const contentStyle = {
   height: "160px",
@@ -290,6 +291,8 @@ const page = () => {
           </div>
         </div>
       </div>
+      {/* <TestimonialSlider /> */}
+
       <ReadyToStart />
     </div>
   );
