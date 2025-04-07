@@ -144,24 +144,12 @@ export default function TestimonialSlider() {
         className="relative overflow-hidden"
         style={{
           background:
-            "radial-gradient(circle at center, #1f2337 0%, #111226 80%)",
+            "radial-gradient(circle at center, ##0d0a1a 0%, ##0d0a1a 80%)",
           borderRadius: "16px",
           padding: "2rem",
-          boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
         }}
       >
         {/* background */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-10">
-          <div className="grid grid-cols-12 gap-4 h-full">
-            {[...Array(12)].map((_, i) => (
-              <div key={i} className="grid grid-rows-6 gap-4 h-full">
-                {[...Array(6)].map((_, j) => (
-                  <div key={j} className="border border-gray-500 rounded"></div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* carousel area  */}
         <div

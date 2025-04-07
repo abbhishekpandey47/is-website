@@ -23,6 +23,7 @@ import StorytellingSection from "./storyTelling";
 import FAQ from "@/Components/HomePage/FAQ";
 import FAQSection from "./FAQ";
 import TestimonialSlider from "./testimonials";
+import BookDemo from "../blog/[slug]/bookDemo";
 
 const contentStyle = {
   height: "160px",
@@ -44,7 +45,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
           loading="lazy"
           width={703}
           height={400}
-          className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200"
+          className="rounded-lg bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200"
           src={data.imgLink}
           alt="Ratio is 1.7589"
         />
@@ -176,6 +177,16 @@ const page = () => {
 
   return (
     <div className=" max-w-full mx-auto overflow-hidden">
+      <div className="absolute top-0 left-0 pl-12 pt-16">
+        <Image
+          loading="lazy"
+          width={200}
+          height={200}
+          src="/logodata/infrasity_logo.png"
+          alt="Infrasity Logo"
+        />
+      </div>
+
       {/* Blog Engagement Section */}
       <section className="w-full mx-auto lg:mt-24 sm:mt-16 md:mt-24 py-20 relative overflow-hidden addGrid2">
         <div className="max-w-full flex xxs:flex-col xs:flex-col sm:flex-col md:flex-col lg:flex-row justify-center items-center ">
@@ -233,17 +244,31 @@ const page = () => {
           </div>
         </div>
       </section>
+      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
 
-      <div>
+      <div
+        className="mb-24"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}
+      >
         <NewMarquee />
       </div>
       <div>
         <BlogTypes />
       </div>
-      <div className="flex flex-col gap-10 pt-6">
-        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-16"></div>
+
+      <div
+        className="flex flex-col gap-10"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-5"></div>
         <div className="text-center">
-          <h1 className="quicksand-bold text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-cente">
+          <h1 className="quicksand-bold text-white text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-cente">
             Launch-ready docs for DevTools & engineering teams
           </h1>
         </div>
@@ -256,16 +281,47 @@ const page = () => {
         <WhyChooseInfrasity />
       </div>
       {/* story Telling section */}
-      <div>
+      <div
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-12"></div>
+
         <StorytellingSection />
       </div>
-      <div>
+      <div
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-12"></div>
+
         <FAQSection />
       </div>
 
+      <div
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-12"></div>
+
+        <TestimonialSlider />
+      </div>
+
       <div>
-        <div className="pt-6 px-8 space-y-9 relative blogDiv">
-          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-16"></div>
+        <div
+          className="px-8 space-y-9 relative blogDiv"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+          }}
+        >
+          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-12"></div>
 
           <div className="whyinfra "></div>
 
@@ -291,9 +347,11 @@ const page = () => {
           </div>
         </div>
       </div>
-      <TestimonialSlider />
 
-      <ReadyToStart />
+      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-20 mb-12"></div>
+      <div className="w-full flex justify-center items-center">
+        <BookDemo />
+      </div>
     </div>
   );
 };
