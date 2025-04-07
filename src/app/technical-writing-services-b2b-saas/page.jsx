@@ -22,6 +22,7 @@ import WhyChooseInfrasity from "./whychoose";
 import StorytellingSection from "./storyTelling";
 import FAQ from "@/Components/HomePage/FAQ";
 import FAQSection from "./FAQ";
+import TestimonialSlider from "./testimonials";
 
 const contentStyle = {
   height: "160px",
@@ -76,7 +77,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
 
 const dataService = [
   {
-    imgLink: "/blog_as_service/1.png",
+    imgLink: "/blog_as_service/6.png",
     hTag: "<p>Understanding Challenges & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Keyword Discovery</span></p>",
     pTag: "After working with over 30 customers, we found that the real challenge is not just creating content, but identifying the right topics and keywords that resonate with your developer audience. To solve this, we align with your startup's goals and conduct targeted keyword research, focusing on terms with the right monthly search volumes (MSVs) to help your blog rank on the first page. Our developer-authored blogs ensure technical accuracy and real-world insights, delivering value to both experts and those seeking deeper knowledge.",
   },
@@ -181,8 +182,8 @@ const page = () => {
           {/* Left side content */}
           <div className="lg:ml-[50px] justify-center sm:w-full lg:w-[60vw] lg:flex lg:flex-col lg:items-start">
             <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-6xl quicksand-bold mt-8 text-white mb-10 leading-tight">
-              Docs That Don’t Just Explain they
-              <span className="text-[#5F64FF]"> drive, </span>
+              Docs That Don’t Just Explain, they
+              <span className="text-[#5F64FF]"> drive </span>
               <span className="text-[#5F64FF]"> Sell, Support, </span>
               and <span className="text-[#5F64FF]"> Scale</span>
             </h2>
@@ -290,6 +291,8 @@ const page = () => {
           </div>
         </div>
       </div>
+      <TestimonialSlider />
+
       <ReadyToStart />
     </div>
   );
