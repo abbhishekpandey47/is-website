@@ -285,22 +285,6 @@ const Navbar = () => {
                 <MenuItem>
                   <Link
                     onClick={() => {
-                      checkVisitPage("/technical-writing-services-b2b-saas");
-                    }}
-                    href="/technical-writing-services-b2b-saas"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={
-                      "/technical-writing-services-b2b-saas".includes("http")
-                        ? "_blank"
-                        : ""
-                    }
-                  >
-                    <div className="pl-6">{"Blog-as-code"}</div>
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    onClick={() => {
                       checkVisitPage("/faq");
                     }}
                     href="/faq"
