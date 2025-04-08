@@ -24,6 +24,7 @@ import FAQ from "@/Components/HomePage/FAQ";
 import FAQSection from "./FAQ";
 import TestimonialSlider from "./testimonials";
 import BookDemo from "../blog/[slug]/bookDemo";
+import CalendlyButton from "./cal";
 
 const contentStyle = {
   height: "160px",
@@ -271,16 +272,7 @@ const page = () => {
               </li>
             </ul>
             <div className="flex justify-center md:justify-center lg:justify-start">
-              <button
-                className="  text-m quicksand-semibold rounded-[5px] flex justify-center items-center before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40"
-                onClick={() =>
-                  window.open(
-                    "https://calendly.com/meet-shan/30min?back=1&month=2025-04"
-                  )
-                }
-              >
-                Book a Demo
-              </button>
+              <CalendlyButton name="Book a Demo" />
             </div>
           </div>
           {/* Right side image */}
