@@ -181,8 +181,8 @@ const page = () => {
           {/* Left side content */}
           <div className="lg:ml-[50px] justify-center sm:w-full lg:w-[60vw] lg:flex lg:flex-col lg:items-start">
             <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-6xl quicksand-bold mt-8 text-white mb-10 leading-tight">
-              Docs That Don’t Just Explain, they
-              <span className="text-[#5F64FF]"> drive </span>
+              Docs That Don’t Just Explain they
+              <span className="text-[#5F64FF]"> drive, </span>
               <span className="text-[#5F64FF]"> Sell, Support, </span>
               and <span className="text-[#5F64FF]"> Scale</span>
             </h2>
