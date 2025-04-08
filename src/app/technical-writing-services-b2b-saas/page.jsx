@@ -65,7 +65,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
             ></h2>
 
             <div>
-              <p className="quicksand-medium text-white max-lg:text-[0.8em] max-md:text-[1.2em] max-md:text-center">
+              <p className="quicksand-medium text-white max-lg:text-[0.8em] max-md:text-[1.2em] max-md:text-center mt-4">
                 {data.pTag}
               </p>
             </div>
@@ -176,7 +176,7 @@ const page = () => {
   }, []);
 
   return (
-    <div className=" max-w-full mx-auto overflow-hidden">
+    <div className="max-w-full mx-auto overflow-hidden px-6">
       <div className="absolute w-full flex justify-center pt-8 lg:pt-16 lg:justify-start lg:pl-12 lg:top-0 lg:left-0">
         <Link href="https://www.infrasity.com/" passHref>
           <Image
@@ -203,23 +203,68 @@ const page = () => {
             </h2>
             <ul className="space-y-6 lg:w-[70%] mb-10">
               <li className="flex items-start text-white ">
-                <span className="text-xl mr-3">•</span>
-                <p className="text-lg quicksand-medium">
+                <div className="flex-shrink-0 mt-2">
+                  <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-2.5 w-2.5 text-white"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <p className="text-lg pl-2 quicksand-medium">
                   Built for DevTools companies to help users get started, not
                   stuck — with real examples, SDK integration to speed up dev
                   onboarding.
                 </p>
               </li>
               <li className="flex items-start text-white">
-                <span className="text-xl mr-3">•</span>
-                <p className="text-lg quicksand-medium">
+                <div className="flex-shrink-0 mt-2">
+                  <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-2.5 w-2.5 text-white"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <p className="text-lg pl-2 quicksand-medium">
                   Explains your product through real use cases — not fluffy
                   feature lists
                 </p>
               </li>
               <li className="flex items-start text-white">
-                <span className="text-xl mr-3">•</span>
-                <p className="text-lg  quicksand-medium">
+                <div className="flex-shrink-0 mt-2">
+                  <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-2.5 w-2.5 text-white"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <p className="text-lg  quicksand-medium pl-2">
                   Equips sales with demo-ready artifacts that double as
                   self-serve onboarding for developers.
                 </p>
@@ -229,14 +274,15 @@ const page = () => {
               <button
                 className="  text-m quicksand-semibold rounded-[5px] flex justify-center items-center before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40"
                 onClick={() =>
-                  window.open("https://calendly.com/meet-shan", "_blank")
+                  window.open(
+                    "https://calendly.com/meet-shan/30min?back=1&month=2025-04"
+                  )
                 }
               >
                 Book a Demo
               </button>
             </div>
           </div>
-
           {/* Right side image */}
           <div className="mt-20 lg:mt-0 md:mt-0 ">
             <img
