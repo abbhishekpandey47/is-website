@@ -78,11 +78,11 @@ const GivenMenuBar = ({
 
 const menuLinksArrServices = [
   {
-    hrefLink: "/services/technical-writing-services",
+    hrefLink: "/services/service-video-production",
     menuName: "Video Production",
   },
   {
-    hrefLink: "/services/service-video-productionn",
+    hrefLink: "/services/technical-writing-services",
     menuName: "Technical Writing Services",
   },
   // {
@@ -130,7 +130,7 @@ const Navbar = () => {
                             <li>
                                 <span>Services</span>
                                 <ul className="p-2">
-                                    <li><Link href="/services/service-video-productionn" onClick={(() => { checkVisitPage("/services/service-video-productionn") })}>Video Production</Link></li>
+                                    <li><Link href="/services/service-video-production" onClick={(() => { checkVisitPage("/services/service-video-production") })}>Video Production</Link></li>
                                     <li><Link href="/service-blog-as-code" onClick={() => { setProgress(30) }}>Blogs-as-code</Link></li>
                                     
                                 </ul>
@@ -255,9 +255,9 @@ const Navbar = () => {
                 <MenuItem>
                   <Link
                     onClick={() => {
-                      checkVisitPage("/services/service-video-productionn");
+                      checkVisitPage("/services/service-video-production");
                     }}
-                    href="/services/service-video-productionn"
+                    href="/services/service-video-production"
                     className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
                     target={
                       "service-video-production".includes("http")
