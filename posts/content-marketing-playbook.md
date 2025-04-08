@@ -14,7 +14,7 @@ In this article, you will learn about a content playbook, its major components, 
 
 A playbook for content is a reference guide consisting of some specific components that ensure your marketing efforts are efficient. It helps in keeping the content marketing goals and objectives intact with a vision of what needs to be done to achieve them.
 
-A content marketing playbook is like one place for all the content stuff, right from strategy to analytics. Once you have prepared it, you'll observe some changes, including:
+To define playbook, it would be apt to say that it is like one place for all the content stuff, right from strategy to analytics. Once you have prepared it, you'll observe some changes, including:
 
 - Less time consumption  
 - Better budget utilization  
