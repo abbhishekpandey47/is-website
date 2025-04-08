@@ -23,6 +23,8 @@ export default function RootLayout({ children }) {
             })(window,document,'script','dataLayer','GTM-WGZGHXZS');
           `}
         </Script>
+        <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
       </head>
       <GoogleAnalytics gaId="G-G0BTN1FRWY"/>
       <body className="antialiased">

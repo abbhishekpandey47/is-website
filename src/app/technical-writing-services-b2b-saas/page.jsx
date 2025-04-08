@@ -24,6 +24,7 @@ import FAQ from "@/Components/HomePage/FAQ";
 import FAQSection from "./FAQ";
 import TestimonialSlider from "./testimonials";
 import BookDemo from "../blog/[slug]/bookDemo";
+import CalendlyButton from "./cal";
 
 const contentStyle = {
   height: "160px",
@@ -80,17 +81,17 @@ const dataService = [
   {
     imgLink: "/blog_as_service/6.png",
     hTag: "<p>Understanding Challenges & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Keyword Discovery</span></p>",
-    pTag: "After working with over 30 customers, we found that the real challenge is not just creating content, but identifying the right topics and keywords that resonate with your developer audience. To solve this, we align with your startup's goals and conduct targeted keyword research, focusing on terms with the right monthly search volumes (MSVs) to help your blog rank on the first page. Our developer-authored blogs ensure technical accuracy and real-world insights, delivering value to both experts and those seeking deeper knowledge.",
+    pTag: "Creating content is easy creating the right content is the real challenge. After working with 30+ B2B SaaS startups, we’ve learned that success starts with understanding your audience and choosing keywords that matter. We align with your business goals, research developer-focused keywords with strong monthly search volume, and craft content that ranks. Our blogs, written by developers, combine technical depth with real-world relevance perfect for both experts and curious minds.",
   },
   {
     imgLink: "/blog_as_service/7.png",
     hTag: "<p>Outline Generation & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Content Creation</span></p>",
-    pTag: "A solid outline is key to producing effective technical content, guiding logical flow and clarity. After identifying the right keywords, we craft a detailed outline with optimal headings, long-tail and short-tail keywords, and relevant Google-asked questions. We also plan the ideal number of images to boost engagement. With this outline, our engineers create content tailored for both on-page SEO and community engagement, whether for your website or platforms like Dev.to, Medium, or Reddit, delivering valuable insights that resonate with your audience.",
+    pTag: "A strong outline sets the foundation for high-performing content. Once we’ve locked in the right keywords, we create a clear structure with SEO-friendly headings, long-tail and short-tail terms, and popular Google-asked questions. We also plan visuals to keep readers engaged. This outline guides our engineers in writing content that’s optimized for both search engines and developer communities like Dev.to, Medium, and Reddit delivering real value where your audience lives.",
   },
   {
     imgLink: "/blog_as_service/8.png",
     hTag: "<p>Content Delivery & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Metrics Analysis</span></p>",
-    pTag: "Once the content is ready, we deliver it along with a comprehensive analysis of key metrics. This includes not only tracking the content's performance in terms of SEO and engagement but also evaluating specific aspects like website traffic and SERP rankings. Our content features focused on hands-on examples, such as integrating your product with a Java SDK or utilizing your observability product alongside open-source monitoring tools. Our goal is to continuously refine our strategy based on these real-time results, driving ongoing improvements in visibility and reach.",
+    pTag: "Once the content is live, we don’t stop there. We provide detailed performance insights — from SEO impact and engagement to traffic and SERP rankings. Our content is hands-on, featuring real use cases like Java SDK integrations or using your product with open-source tools. With these results, we refine the strategy in real-time to boost visibility, reach, and ongoing growth.",
   },
 ];
 
@@ -201,7 +202,7 @@ const page = () => {
               <span className="text-[#5F64FF]"> Sell, Support, </span>
               and <span className="text-[#5F64FF]"> Scale</span>
             </h2>
-            <ul className="space-y-6 lg:w-[70%] mb-10">
+            <ul className="space-y-6 lg:w-[85%] mb-10">
               <li className="flex items-start text-white ">
                 <div className="flex-shrink-0 mt-2">
                   <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
@@ -270,18 +271,7 @@ const page = () => {
                 </p>
               </li>
             </ul>
-            <div className="flex justify-center md:justify-center lg:justify-start">
-              <button
-                className="  text-m quicksand-semibold rounded-[5px] flex justify-center items-center before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40"
-                onClick={() =>
-                  window.open(
-                    "https://calendly.com/meet-shan/30min?back=1&month=2025-04"
-                  )
-                }
-              >
-                Book a Demo
-              </button>
-            </div>
+            <CalendlyButton name="Book a Demo" />
           </div>
           {/* Right side image */}
           <div className="mt-20 lg:mt-0 md:mt-0 ">
