@@ -27,10 +27,10 @@ Now that you understand how a content playbook can be a great tool for your B2B 
 
 A content marketing playbook is a quick reference guide. It has four major components:
 
-1. Strategy  
-2. Content Creation  
-3. Distribution  
-4. Measurement
+- Strategy  
+- Content Creation  
+- Distribution  
+- Measurement
 
 These elements help you create a robust marketing plan, right from planning and execution to measurement. Let's dive in!
 
@@ -59,10 +59,10 @@ After defining your goals and objectives, identify who your target audience will
 
 An ICP helps define your **ideal customers** — the type of companies likely to buy your SaaS product and remain loyal customers who might even refer your product. Your ICP should include:
 
-1. **Target Companies** (e.g., B2B SaaS companies)  
-2. **Firmographics** (company size, age, partnerships)  
-3. **Demographics** (location, job titles, roles, interests)  
-4. **Technographics** (pain points, tools being used, how your product can replace them)
+- **Target Companies** (e.g., B2B SaaS companies)  
+- **Firmographics** (company size, age, partnerships)  
+- **Demographics** (location, job titles, roles, interests)  
+- **Technographics** (pain points, tools being used, how your product can replace them)
 
 With ICP comes the buyer persona. It’s like you are zooming into the team members of the target company. You identify their goals, demographics, pain points, and preferences. There are three key buyer personas - _the end-user, the manager, and the decision maker_. They could be CTO, Product Manager, VP of marketing, developers, and CEO. 
 
