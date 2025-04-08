@@ -78,13 +78,14 @@ const GivenMenuBar = ({
 
 const menuLinksArrServices = [
   {
-    hrefLink: "/services/service-video-productionn",
+    hrefLink: "/services/technical-writing-services",
     menuName: "Video Production",
   },
   {
-    hrefLink: "/services/technical-writing-services",
+    hrefLink: "/services/service-video-productionn",
     menuName: "Technical Writing Services",
   },
+
   // {
   //     hrefLink: "/tutorials",
   //     menuName: "Tutorials"
