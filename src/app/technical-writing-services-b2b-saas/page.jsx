@@ -202,7 +202,7 @@ const page = () => {
               <span className="text-[#5F64FF]"> Sell, Support, </span>
               and <span className="text-[#5F64FF]"> Scale</span>
             </h2>
-            <ul className="space-y-6 lg:w-[70%] mb-10">
+            <ul className="space-y-6 lg:w-[85%] mb-10">
               <li className="flex items-start text-white ">
                 <div className="flex-shrink-0 mt-2">
                   <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
@@ -271,9 +271,7 @@ const page = () => {
                 </p>
               </li>
             </ul>
-            <div className="flex justify-center md:justify-center lg:justify-start">
-              <CalendlyButton name="Book a Demo" />
-            </div>
+            <CalendlyButton name="Book a Demo" />
           </div>
           {/* Right side image */}
           <div className="mt-20 lg:mt-0 md:mt-0 ">
