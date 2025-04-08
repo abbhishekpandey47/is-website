@@ -14,8 +14,8 @@ import { OrbitingCirclesDemo } from "@/Components/HomePage/OrbitTime";
 import { BorderBeam } from "@/Components/ui/border-beam";
 import { Badge, Card, Space } from "antd";
 
-import postMetaData from "../../../posts/_postMetadata";
-import authorData from "../../../posts/_authorData";
+import postMetaData from "../../../../posts/_postMetadata";
+import authorData from "../../../../posts/_authorData";
 import NewMarquee from "./marquee";
 import BlogTypes from "./blogTypes";
 import WhyChooseInfrasity from "./whychoose";

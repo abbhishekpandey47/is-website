@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  color: white;
+}
+
+
 @font-face {
   font-family: "Quicksand";
   src: url('./fonts/Quicksand-Bold.woff');
@@ -474,3 +479,4 @@ body {
     background-position: 100% 50%;
   }
 }
+

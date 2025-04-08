@@ -177,7 +177,7 @@ const page = () => {
 
   return (
     <div className=" max-w-full mx-auto overflow-hidden">
-      <div className="absolute top-0 left-0 pl-12 pt-16">
+      <div className="absolute w-full flex justify-center pt-8 lg:pt-16 lg:justify-start lg:pl-12 lg:top-0 lg:left-0">
         <Link href="https://www.infrasity.com/" passHref>
           <Image
             loading="lazy"
@@ -316,7 +316,7 @@ const page = () => {
         <TestimonialSlider />
       </div>
 
-      <div>
+      {/* <div>
         <div
           className="px-8 space-y-9 relative blogDiv"
           style={{
@@ -349,7 +349,7 @@ const page = () => {
             <OrbitingCirclesDemo />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-20 mb-12"></div>
       <div className="w-full flex justify-center items-center">

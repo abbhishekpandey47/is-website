@@ -78,11 +78,11 @@ const GivenMenuBar = ({
 
 const menuLinksArrServices = [
   {
-    hrefLink: "/service-video-production",
+    hrefLink: "/services/service-video-productionn",
     menuName: "Video Production",
   },
   {
-    hrefLink: "/technical-writing-services",
+    hrefLink: "/services/technical-writing-services",
     menuName: "Technical Writing Services",
   },
   // {
@@ -91,12 +91,12 @@ const menuLinksArrServices = [
   // }
 ];
 
-const menuLinksArrProducts = [
-  {
-    hrefLink: "https://content.infrasity.com/",
-    menuName: "Outline Generator",
-  },
-];
+// const menuLinksArrProducts = [
+//   {
+//     hrefLink: "https://content.infrasity.com/",
+//     menuName: "Outline Generator",
+//   },
+// ];
 
 const Navbar = () => {
   const checkVisitPage = (el) => {
@@ -130,7 +130,7 @@ const Navbar = () => {
                             <li>
                                 <span>Services</span>
                                 <ul className="p-2">
-                                    <li><Link href="/service-video-production" onClick={(() => { checkVisitPage("/service-video-production") })}>Video Production</Link></li>
+                                    <li><Link href="/services/service-video-productionn" onClick={(() => { checkVisitPage("/services/service-video-productionn") })}>Video Production</Link></li>
                                     <li><Link href="/service-blog-as-code" onClick={() => { setProgress(30) }}>Blogs-as-code</Link></li>
                                     
                                 </ul>
@@ -204,11 +204,12 @@ const Navbar = () => {
                     {"Home"}
                   </Link>
                 </MenuItem>
-                <MenuItem>
+                {/* MProducts */}
+                {/* <MenuItem>
                   <p className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg">
                     {"Products"}
                   </p>
-                </MenuItem>
+                </MenuItem> */}
                 <MenuItem>
                   <Link
                     href="https://content.infrasity.com/"
@@ -254,9 +255,9 @@ const Navbar = () => {
                 <MenuItem>
                   <Link
                     onClick={() => {
-                      checkVisitPage("/service-video-production");
+                      checkVisitPage("/services/service-video-productionn");
                     }}
-                    href="/service-video-production"
+                    href="/services/service-video-productionn"
                     className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
                     target={
                       "service-video-production".includes("http")
@@ -270,12 +271,12 @@ const Navbar = () => {
                 <MenuItem>
                   <Link
                     onClick={() => {
-                      checkVisitPage("/technical-writing-services");
+                      checkVisitPage("/services/technical-writing-services");
                     }}
-                    href="/technical-writing-services"
+                    href="/services/technical-writing-services"
                     className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
                     target={
-                      "/technical-writing-services".includes("http")
+                      "/services/technical-writing-services".includes("http")
                         ? "_blank"
                         : ""
                     }
@@ -350,7 +351,7 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li>
+            {/* <li>
               <GivenMenuBar
                 head={"Products"}
                 menuLinks={menuLinksArrProducts}
@@ -358,7 +359,7 @@ const Navbar = () => {
                 curPage={curPage}
                 setCurPage={setCurPage}
               />
-            </li>
+            </li> */}
             <li>
               <Link
                 href="/blog"
