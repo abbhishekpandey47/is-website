@@ -608,7 +608,19 @@ let postMetaData = [
         metaDescription: "Vibe Coding has been taking over the Internet since February. What’s so special about it? Read this blog to understand how it can be beneficial for developers."
     },
 
+{
+        title: "Content Marketing Playbook: Blueprint For B2B SaaS Content",
+        metatitle: "Content Marketing Playbook: Blueprint For B2B SaaS Content",
+        slug: "content-marketing-playbook",
+        description: "A content playbook is a one-stop reference guide for content marketing purposes. Learn how you can create it and make your marketing efforts effective.",
+        ogImage: "/PostImages/content-marketing-playbook/cp1.png",
+        publishedOn: "2025-04-08",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "A content playbook is a one-stop reference guide for content marketing purposes. Learn how you can create it and make your marketing efforts effective."
+    },
 
+    
 ];
 
 const sorted = () => {
