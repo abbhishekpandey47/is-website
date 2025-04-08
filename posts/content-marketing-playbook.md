@@ -36,13 +36,7 @@ These elements help you create a robust marketing plan, right from planning and 
 
 ### 1. Strategy
 
-Before starting anything, you need to plan a strategy on how you are going to take things forward. It involves:
-
-- Identifying your goals  
-- Defining ICPs (Ideal Customer Profiles)  
-- Understanding your competitors  
-- Mapping the funnel and content types  
-- Creating the overall content strategy
+Before starting anything, you need to plan a strategy on how you are going to take things forward. It involves identifying your goals, ICPs, competitors, mapping the funnel and content type, and finally creating the strategy.
 
 ### Define Goals and Objectives
 
