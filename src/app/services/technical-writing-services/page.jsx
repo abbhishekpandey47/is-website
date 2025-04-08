@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import _videometadata from "../../../services-data/_videoMetadata.js";
+import _videometadata from "../../../../services-data/_videoMetadata.js";
 import SaasGlassyBoxes from "./whychooseus.jsx";
 
 import AppContext from "@/context/Infracontext";
@@ -18,7 +18,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "../../Components/ui/pagination.jsx";
+} from "../../../Components/ui/pagination.jsx";
 import ReadyToStart from "@/Components/HomePage/ReadyToStart";
 import HowWorks from "@/Components/HomePage/HowWorks";
 import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";

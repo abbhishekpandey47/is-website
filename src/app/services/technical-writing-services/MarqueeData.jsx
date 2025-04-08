@@ -1,4 +1,4 @@
-import Marquee from "../../Components/ui/marquee";
+import Marquee from "../../../Components/ui/marquee";
 
 const serviceArrHowWorks = [
   {
