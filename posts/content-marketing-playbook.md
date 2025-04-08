@@ -53,7 +53,7 @@ Your goals and objectives depend on the stage you are in. Based on that, you wil
 - Product education  
 - Activation or retention  
 
-It's imperative to focus on **one primary goal** and then align it with future goals. For example, if you're an early-stage B2B SaaS startup, your first concern would be to increase **brand awareness**.  
+It's imperative to focus on **one primary goal** and then align it with future goals. For example, if you're an early-stage B2B SaaS startup, your first concern would be to increase brand awareness.  
 
 Once you gain traction, you can shift your focus to the other goals accordingly.
 
@@ -68,7 +68,7 @@ An ICP helps define your **ideal customers** — the type of companies likely to
 3. **Demographics** (location, job titles, roles, interests)  
 4. **Technographics** (pain points, tools being used, how your product can replace them)
 
-With ICP comes the buyer persona. It’s like you are zooming into the team members of the target company. You identify their goals, demographics, pain points, and preferences. There are three key buyer personas - the end-user, the manager, and the decision maker. They could be CTO, Product Manager, VP of marketing, developers, and CEO. 
+With ICP comes the buyer persona. It’s like you are zooming into the team members of the target company. You identify their goals, demographics, pain points, and preferences. There are three key buyer personas - _the end-user, the manager, and the decision maker_. They could be CTO, Product Manager, VP of marketing, developers, and CEO. 
 
 ### Analyze Your Competitors
 
@@ -106,7 +106,7 @@ For example, if you are targeting a CTO at the awareness stage, think about thei
 
 ### Guidelines
 
-You should include guidelines in your content playbook to ensure consistency across all touchpoints, whether it's a feature launch email or a blog post. These guidelines should cover your tone and voice, a list of approved words and branded phrases, image and design rules, formatting standards, trusted sources, and even prohibited topics. 
+You should include guidelines in your content playbook to ensure consistency across all touchpoints, whether it's a feature launch email or a blog post. These guidelines should cover your **tone and voice, a list of approved words and branded phrases, image and design rules, formatting standards, trusted sources, and even prohibited topics**. 
 
 This helps every writer, marketer, or freelancer stay aligned with the brand's identity. It saves time, reduces back-and-forth, and maintains a professional, cohesive presence without sounding like ten different people creating content for the same brand.
 
@@ -140,7 +140,7 @@ Additionally, make sure that you leave the website's link to get a backlink, whi
 
 Once you are done with everything, from content ideation to its distribution, it is imperative to gauge its effectiveness. Why? 
 
-Measuring content effectiveness helps you calculate the ROI, understand what type of content your ICPs are interacting with, and how you can improve your content deliverables. Therefore, utilize the analytics tool to gauge the performance - Google Analytics, HubSpot, and Sprout Social.
+Measuring content effectiveness helps you calculate the ROI, understand what type of content your ICPs are interacting with, and how you can improve your content deliverables. Therefore, utilize the analytics tool to gauge the performance - **Google Analytics, HubSpot, and Sprout Social**.
 
 Focus on the key performance indicators (KPIs) at each funnel stage:
 
