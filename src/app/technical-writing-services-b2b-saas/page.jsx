@@ -83,12 +83,12 @@ const dataService = [
     pTag: "After working with over 30 customers, we found that the real challenge is not just creating content, but identifying the right topics and keywords that resonate with your developer audience. To solve this, we align with your startup's goals and conduct targeted keyword research, focusing on terms with the right monthly search volumes (MSVs) to help your blog rank on the first page. Our developer-authored blogs ensure technical accuracy and real-world insights, delivering value to both experts and those seeking deeper knowledge.",
   },
   {
-    imgLink: "/blog_as_service/2.png",
+    imgLink: "/blog_as_service/7.png",
     hTag: "<p>Outline Generation & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Content Creation</span></p>",
     pTag: "A solid outline is key to producing effective technical content, guiding logical flow and clarity. After identifying the right keywords, we craft a detailed outline with optimal headings, long-tail and short-tail keywords, and relevant Google-asked questions. We also plan the ideal number of images to boost engagement. With this outline, our engineers create content tailored for both on-page SEO and community engagement, whether for your website or platforms like Dev.to, Medium, or Reddit, delivering valuable insights that resonate with your audience.",
   },
   {
-    imgLink: "/blog_as_service/3.jpg",
+    imgLink: "/blog_as_service/8.png",
     hTag: "<p>Content Delivery & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Metrics Analysis</span></p>",
     pTag: "Once the content is ready, we deliver it along with a comprehensive analysis of key metrics. This includes not only tracking the content's performance in terms of SEO and engagement but also evaluating specific aspects like website traffic and SERP rankings. Our content features focused on hands-on examples, such as integrating your product with a Java SDK or utilizing your observability product alongside open-source monitoring tools. Our goal is to continuously refine our strategy based on these real-time results, driving ongoing improvements in visibility and reach.",
   },
@@ -178,13 +178,16 @@ const page = () => {
   return (
     <div className=" max-w-full mx-auto overflow-hidden">
       <div className="absolute top-0 left-0 pl-12 pt-16">
-        <Image
-          loading="lazy"
-          width={200}
-          height={200}
-          src="/logodata/infrasity_logo.png"
-          alt="Infrasity Logo"
-        />
+        <Link href="https://www.infrasity.com/" passHref>
+          <Image
+            loading="lazy"
+            width={200}
+            height={200}
+            src="/logodata/infrasity_logo.png"
+            alt="Infrasity Logo"
+            style={{ cursor: "pointer" }}
+          />
+        </Link>
       </div>
 
       {/* Blog Engagement Section */}
