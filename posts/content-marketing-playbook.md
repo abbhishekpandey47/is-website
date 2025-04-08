@@ -70,9 +70,7 @@ Conducting a competitor analysis while planning a content strategy is important.
 
 To identify your competitors, search your **product category** (e.g., "workflow automation software") or check SaaS review sites like **G2** and **Capterra**. Then research their offerings to understand how your product stands out.
 
-Analyze their marketing strategies - what sort of keywords they are targeting and what kind of content they are creating to gain more traffic. There are many useful tools for SEO, such as SEMrush or Ahrefs to find out the keywords and backlinks. Additionally, understand their content's tone and CTAs to gain actionable insights.
-
-Use SEO tools like **SEMrush** or **Ahrefs** to dig into their keywords and backlinks. Also, evaluate the **tone** of their content and their **calls to action (CTAs)** to extract actionable insights.
+Analyze their marketing strategies - what sort of keywords they are targeting and what kind of content they are creating to gain more traffic. There are many useful tools for SEO, such as **Semrush or Ahrefs** to find out the keywords and backlinks. Additionally, understand their content's tone and CTAs to gain actionable insights.
 
 ## Map the Funnel & Content Types
 
