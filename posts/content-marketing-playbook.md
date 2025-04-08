@@ -36,6 +36,8 @@ These elements help you create a robust marketing plan, right from planning and 
 
 ### 1. Strategy
 
+![content marketing playbook - strategy](/PostImages/content-marketing-playbook/cp2.png)
+
 Before starting anything, you need to plan a strategy on how you are going to take things forward. It involves identifying your goals, ICPs, competitors, mapping the funnel and content type, and finally creating the strategy.
 
 ### Define Goals and Objectives
