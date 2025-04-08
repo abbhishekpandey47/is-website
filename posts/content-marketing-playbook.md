@@ -1,10 +1,10 @@
 ## Introduction
 
-You've probably heard the phrase, "If it's not written down, it doesn't exist." That couldn't be more true in the world of content marketing.
+You've probably heard the phrase, "_If it's not written down, it doesn't exist_." That couldn't be more true in the world of content marketing.
 
-Let's say you have created a solid strategy in mind — you know what kind of content to create, how you'll do it, and where it'll be distributed. Great. But if all of that lives in your head, how do you expect a team to execute it smoothly?
+Let's say you have created a solid strategy in mind - you know what kind of content to create, how you'll do it, and where it'll be distributed. Great. But if all of that lives in your head, how do you expect a team to execute it smoothly?
 
-The reality is **33% of B2B marketers plan their content strategy but never document it**, and that's where things fall apart. People go off-script, new team members struggle to catch up, and freelancers are left guessing.
+The reality is that **[33% of B2B marketers](https://contentmarketinginstitute.com/b2b-research/7-things-b2b-content-marketers-need-in-2023-new-research)** plan their content strategy but never document it, and that's where things fall apart. People go off-script, new team members struggle to catch up, and freelancers are left guessing.
 
 So what's the fix? A **content marketing playbook**. One file that serves as a source of truth for your content marketing efforts.
 
