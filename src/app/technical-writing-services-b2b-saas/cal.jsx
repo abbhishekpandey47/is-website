@@ -96,24 +96,23 @@ const CalendlyButton = ({ name }) => {
             {/* Close Button */}
             <button
               onClick={closePopup}
-              style={{
-                position: "fixed",
-                top: "10px",
-                left: "calc(50% - 290px)",
-                border: "none",
-                fontSize: "24px",
-                cursor: "pointer",
-                color: "black",
-                background: "white",
-                width: "30px",
-                height: "30px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "4px",
-                zIndex: 1001,
-                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-              }}
+              className="
+    fixed 
+    top-2 
+    left-2 
+    md:left-[calc(50%-290px)] 
+    w-8 
+    h-8 
+    flex 
+    items-center 
+    justify-center 
+    text-2xl 
+    text-black 
+    bg-white 
+    rounded 
+    shadow-md 
+    z-[1001]
+  "
             >
               ×
             </button>

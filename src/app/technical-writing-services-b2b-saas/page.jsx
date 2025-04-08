@@ -23,7 +23,7 @@ import StorytellingSection from "./storyTelling";
 import FAQ from "@/Components/HomePage/FAQ";
 import FAQSection from "./FAQ";
 import TestimonialSlider from "./testimonials";
-import BookDemo from "../blog/[slug]/bookDemo";
+import BookDemo from "./bookDemo";
 import CalendlyButton from "./cal";
 
 const contentStyle = {
@@ -271,7 +271,9 @@ const page = () => {
                 </p>
               </li>
             </ul>
-            <CalendlyButton name="Book a Demo" />
+            <div className="flex justify-center md:justify-start">
+              <CalendlyButton name="Book a Demo" />
+            </div>
           </div>
           {/* Right side image */}
           <div className="mt-20 lg:mt-0 md:mt-0 ">
