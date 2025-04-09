@@ -106,6 +106,8 @@ This helps every writer, marketer, or freelancer stay aligned with the brand's i
 
 **Content Workflow**
 
+![content marketing playbook - content workflow](/PostImages/content-marketing-playbook/cp3.png)
+
 You have planned a robust strategy, but if you don't create a structured workflow, the strategy may fall flat. You may ask, why? This is because the content workflow will guide the team in beginning the ideation process and smoothly executing it. It will turn chaos into clarity and meeting deadlines. Here's what your content workflow should include:
 
 - **Ideation**: Brainstorm content ideas that align with your goals, funnel stages, and ICPs.  
