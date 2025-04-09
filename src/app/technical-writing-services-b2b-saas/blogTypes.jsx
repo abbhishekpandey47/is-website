@@ -84,7 +84,7 @@ const BlogTypes = () => {
   const visibleBlogTypes = expanded ? blogTypes : blogTypes.slice(0, 6);
   
   return (
-    <section className="w-full py-20 px-6 md:px-10 whyinfra3 ">
+    <section className="w-full py-14 px-6 md:px-10 whyinfra3 ">
       <div className='backdrop-filter  backdrop-blur-sm bg-opacity-10'>
       <div className="max-w-7xl mx-auto">
         <h2 className="text-5xl md:text-6xl font-bold text-white mb-16 text-center">

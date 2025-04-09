@@ -55,20 +55,92 @@ const PageCard = ({ ind = 1, data = { data } }) => {
         className={`w-[40%] max-md:w-full max-lg:w-1/2 flex flex-col justify-center serviceasblogcard card-${ind}`}
       >
         <div className="h-[80%] max-lg:h-full flex flex-col justify-center gap-5 max-lg:gap-2">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-green-400 rounded-md mr-2"></div>
-            <p className="text-white quicksand-bold text-4xl">Step {ind + 1}</p>
-          </div>
+        <div className="flex items-center gap-3 mb-4">
+      <div className="relative">
+        <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg shadow-lg flex items-center justify-center transform rotate-3 overflow-hidden">
+          <div className="absolute inset-0 bg-black opacity-20 rounded-lg"></div>
+          <div className="absolute top-0 left-0 w-full h-1/2 bg-white opacity-20 rounded-t-lg"></div>
+          <span className="text-white font-bold text-2xl relative z-10">{ind + 1}</span>
+        </div>
+        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full shadow-md"></div>
+      </div>
+      <div className="flex flex-col">
+        <h3 className="text-white quicksand-bold text-2xl leading-tight">{`Step ${ind + 1}`}</h3>
+      </div>
+    </div>
           <div>
             <h2
-              className="quicksand-bold text-white text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-center"
+              className="quicksand-bold text-white text-[2em] max-lg:text-[2em] leading-[45px] max-md:text-center"
               dangerouslySetInnerHTML={{ __html: data.hTag }}
             ></h2>
 
             <div>
-              <p className="quicksand-medium text-white max-lg:text-[0.8em] max-md:text-[1.2em] max-md:text-center mt-4">
-                {data.pTag}
-              </p>
+                
+            <ul className="space-y-2 lg:w-[85%] mb-6">
+  <li className="flex items-start text-white">
+    <div className="flex-shrink-0 mt-1">
+      <div className="w-3 h-3 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-2 w-2 text-white"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </div>
+    </div>
+    <p className="text-base pl-3 quicksand-medium">
+      {data.p1}
+    </p>
+  </li>
+  <li className="flex items-start text-white">
+    <div className="flex-shrink-0 mt-1">
+      <div className="w-3 h-3 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-2 w-2 text-white"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </div>
+    </div>
+    <p className="text-base pl-3 quicksand-medium">
+      {data.p2}
+    </p>
+  </li>
+  <li className="flex items-start text-white">
+    <div className="flex-shrink-0 mt-1">
+      <div className="w-3 h-3 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-2 w-2 text-white"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </div>
+    </div>
+    <p className="text-base pl-3 quicksand-medium">
+      {data.p3}
+    </p>
+  </li>
+</ul>
             </div>
           </div>
         </div>
@@ -81,17 +153,24 @@ const dataService = [
   {
     imgLink: "/blog_as_service/6.png",
     hTag: "<p>Understanding Challenges & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Keyword Discovery</span></p>",
-    pTag: "Creating content is easy creating the right content is the real challenge. After working with 30+ B2B SaaS startups, we’ve learned that success starts with understanding your audience and choosing keywords that matter. We align with your business goals, research developer-focused keywords with strong monthly search volume, and craft content that ranks. Our blogs, written by developers, combine technical depth with real-world relevance perfect for both experts and curious minds.",
+    p1: "Content creation is easy — creating the right content is the real challenge.",
+    p2: "We research developer-focused keywords with strong monthly search volume that ",
+    p3: "Our developer-written blogs combine technical depth with real-world.",
   },
+  
   {
     imgLink: "/blog_as_service/7.png",
     hTag: "<p>Outline Generation & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Content Creation</span></p>",
-    pTag: "A strong outline sets the foundation for high-performing content. Once we’ve locked in the right keywords, we create a clear structure with SEO-friendly headings, long-tail and short-tail terms, and popular Google-asked questions. We also plan visuals to keep readers engaged. This outline guides our engineers in writing content that’s optimized for both search engines and developer communities like Dev.to, Medium, and Reddit delivering real value where your audience lives.",
+    p1: "Content creation is easy — creating the right content is the real challenge.",
+    p2: "We research developer-focused keywords with strong monthly search",
+    p3: "Our developer-written blogs combine technical depth with real-world",
   },
   {
     imgLink: "/blog_as_service/8.png",
     hTag: "<p>Content Delivery & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Metrics Analysis</span></p>",
-    pTag: "Once the content is live, we don’t stop there. We provide detailed performance insights — from SEO impact and engagement to traffic and SERP rankings. Our content is hands-on, featuring real use cases like Java SDK integrations or using your product with open-source tools. With these results, we refine the strategy in real-time to boost visibility, reach, and ongoing growth.",
+    p1: "Content creation is easy — creating the right content is the real challenge.",
+    p2: "We research developer-focused keywords with strong monthly search.",
+    p3: "Our developer-written blogs combine technical depth with real-world.",
   },
 ];
 
@@ -177,8 +256,9 @@ const page = () => {
   }, []);
 
   return (
-    <div className="max-w-full mx-auto overflow-hidden px-6">
-      <div className="absolute w-full flex justify-center pt-8 lg:pt-16 lg:justify-start lg:pl-12 lg:top-0 lg:left-0">
+    <div className="max-w-full mx-auto overflow-hidden px-4 lg:px-16">
+      <div>
+      <div className="absolute w-full flex justify-center sm:px-0 md:px-0 pt-16 lg:pt-16 lg:justify-start lg:pl-12 lg:top-0 lg:left-16">
         <Link href="https://www.infrasity.com/" passHref>
           <Image
             loading="lazy"
@@ -192,17 +272,17 @@ const page = () => {
       </div>
 
       {/* Blog Engagement Section */}
-      <section className="w-full mx-auto lg:mt-24 sm:mt-16 md:mt-24 py-20 relative overflow-hidden addGrid2">
+      <section className="w-full mx-auto lg:mt-24 sm:mt-16 md:mt-24 py-24 lg:py-12 relative overflow-hidden addGrid2">
         <div className="max-w-full flex xxs:flex-col xs:flex-col sm:flex-col md:flex-col lg:flex-row justify-center items-center ">
           {/* Left side content */}
           <div className="lg:ml-[50px] justify-center sm:w-full lg:w-[60vw] lg:flex lg:flex-col lg:items-start">
-            <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-6xl quicksand-bold mt-8 text-white mb-10 leading-tight">
+            <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-sm quicksand-bold mt-8 text-white mb-10 leading-tight">
               Docs That Don’t Just Explain, they
               <span className="text-[#5F64FF]"> drive </span>
               <span className="text-[#5F64FF]"> Sell, Support, </span>
               and <span className="text-[#5F64FF]"> Scale</span>
             </h2>
-            <ul className="space-y-6 lg:w-[85%] mb-10">
+            <ul className="space-y-6 lg:w-[85%] mb-10 mt-10">
               <li className="flex items-start text-white ">
                 <div className="flex-shrink-0 mt-2">
                   <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
@@ -220,7 +300,7 @@ const page = () => {
                     </svg>
                   </div>
                 </div>
-                <p className="text-lg pl-2 quicksand-medium">
+                <p className="text-lg pl-3 quicksand-medium">
                   Built for DevTools companies to help users get started, not
                   stuck — with real examples, SDK integration to speed up dev
                   onboarding.
@@ -243,7 +323,7 @@ const page = () => {
                     </svg>
                   </div>
                 </div>
-                <p className="text-lg pl-2 quicksand-medium">
+                <p className="text-lg pl-3 quicksand-medium">
                   Explains your product through real use cases — not fluffy
                   feature lists
                 </p>
@@ -265,7 +345,7 @@ const page = () => {
                     </svg>
                   </div>
                 </div>
-                <p className="text-lg  quicksand-medium pl-2">
+                <p className="text-lg  quicksand-medium pl-3">
                   Equips sales with demo-ready artifacts that double as
                   self-serve onboarding for developers.
                 </p>
@@ -393,6 +473,7 @@ const page = () => {
       <div className="w-full flex justify-center items-center">
         <BookDemo />
       </div>
+    </div>
     </div>
   );
 };
