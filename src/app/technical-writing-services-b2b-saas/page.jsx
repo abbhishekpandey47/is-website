@@ -177,8 +177,9 @@ const page = () => {
   }, []);
 
   return (
-    <div className="max-w-full mx-auto overflow-hidden px-6">
-      <div className="absolute w-full flex justify-center pt-8 lg:pt-16 lg:justify-start lg:pl-12 lg:top-0 lg:left-0">
+    <div className="max-w-full mx-auto overflow-hidden px-4 lg:px-16">
+      <div>
+      <div className="absolute w-full flex justify-center sm:px-0 md:px-0 pt-16 lg:pt-16 lg:justify-start lg:pl-12 lg:top-0 lg:left-16">
         <Link href="https://www.infrasity.com/" passHref>
           <Image
             loading="lazy"
@@ -192,11 +193,11 @@ const page = () => {
       </div>
 
       {/* Blog Engagement Section */}
-      <section className="w-full mx-auto lg:mt-24 sm:mt-16 md:mt-24 py-20 relative overflow-hidden addGrid2">
+      <section className="w-full mx-auto lg:mt-24 sm:mt-16 md:mt-24 py-24 lg:py-12 relative overflow-hidden addGrid2">
         <div className="max-w-full flex xxs:flex-col xs:flex-col sm:flex-col md:flex-col lg:flex-row justify-center items-center ">
           {/* Left side content */}
           <div className="lg:ml-[50px] justify-center sm:w-full lg:w-[60vw] lg:flex lg:flex-col lg:items-start">
-            <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-6xl quicksand-bold mt-8 text-white mb-10 leading-tight">
+            <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-sm quicksand-bold mt-8 text-white mb-10 leading-tight">
               Docs That Don’t Just Explain, they
               <span className="text-[#5F64FF]"> drive </span>
               <span className="text-[#5F64FF]"> Sell, Support, </span>
@@ -393,6 +394,7 @@ const page = () => {
       <div className="w-full flex justify-center items-center">
         <BookDemo />
       </div>
+    </div>
     </div>
   );
 };
