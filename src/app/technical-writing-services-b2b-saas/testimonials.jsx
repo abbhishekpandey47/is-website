@@ -193,6 +193,9 @@ export default function TestimonialSlider() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
+      <h2 className="text-5xl md:text-6xl quicksand-bold text-white mb-16 text-center">
+        Why top engineering teams rely on Infrasity for content ?
+      </h2>
       {/* testimonial slider */}
       <div
         className="relative overflow-hidden"
