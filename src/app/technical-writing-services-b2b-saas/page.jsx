@@ -76,71 +76,71 @@ const PageCard = ({ ind = 1, data = { data } }) => {
 
             <div>
                 
-            <ul className="space-y-6 lg:w-[85%] mb-10 mt-4">
-              <li className="flex items-start text-white">
-                <div className="flex-shrink-0 mt-2">
-                  <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-2.5 w-2.5 text-white"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <p className="text-lg pl-2 quicksand-medium">
-                {data.p1}
-                </p>
-              </li>
-              <li className="flex items-start text-white">
-                <div className="flex-shrink-0 mt-2">
-                  <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-2.5 w-2.5 text-white"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <p className="text-lg pl-2 quicksand-medium">
-                {data.p1}
-                </p>
-              </li>
-              <li className="flex items-start text-white ">
-                <div className="flex-shrink-0 mt-2">
-                  <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-2.5 w-2.5 text-white"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <p className="text-lg pl-2 quicksand-medium">
-                {data.p1}
-                </p>
-              </li>
-              </ul>
+            <ul className="space-y-2 lg:w-[85%] mb-6">
+  <li className="flex items-start text-white">
+    <div className="flex-shrink-0 mt-1">
+      <div className="w-3 h-3 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-2 w-2 text-white"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </div>
+    </div>
+    <p className="text-base pl-3 quicksand-medium">
+      {data.p1}
+    </p>
+  </li>
+  <li className="flex items-start text-white">
+    <div className="flex-shrink-0 mt-1">
+      <div className="w-3 h-3 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-2 w-2 text-white"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </div>
+    </div>
+    <p className="text-base pl-3 quicksand-medium">
+      {data.p2}
+    </p>
+  </li>
+  <li className="flex items-start text-white">
+    <div className="flex-shrink-0 mt-1">
+      <div className="w-3 h-3 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-2 w-2 text-white"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </div>
+    </div>
+    <p className="text-base pl-3 quicksand-medium">
+      {data.p3}
+    </p>
+  </li>
+</ul>
             </div>
           </div>
         </div>
@@ -154,23 +154,23 @@ const dataService = [
     imgLink: "/blog_as_service/6.png",
     hTag: "<p>Understanding Challenges & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Keyword Discovery</span></p>",
     p1: "Content creation is easy — creating the right content is the real challenge.",
-    p2: "We research developer-focused keywords with strong monthly search volume that align with your business goals.",
-    p3: "Our developer-written blogs combine technical depth with real-world relevance for experts and curious minds alike.",
+    p2: "We research developer-focused keywords with strong monthly search volume that ",
+    p3: "Our developer-written blogs combine technical depth with real-world.",
   },
   
   {
     imgLink: "/blog_as_service/7.png",
     hTag: "<p>Outline Generation & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Content Creation</span></p>",
     p1: "Content creation is easy — creating the right content is the real challenge.",
-    p2: "We research developer-focused keywords with strong monthly search volume that align with your business goals.",
-    p3: "Our developer-written blogs combine technical depth with real-world relevance for experts and curious minds alike.",
+    p2: "We research developer-focused keywords with strong monthly search",
+    p3: "Our developer-written blogs combine technical depth with real-world",
   },
   {
     imgLink: "/blog_as_service/8.png",
     hTag: "<p>Content Delivery & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Metrics Analysis</span></p>",
     p1: "Content creation is easy — creating the right content is the real challenge.",
-    p2: "We research developer-focused keywords with strong monthly search volume that align with your business goals.",
-    p3: "Our developer-written blogs combine technical depth with real-world relevance for experts and curious minds alike.",
+    p2: "We research developer-focused keywords with strong monthly search.",
+    p3: "Our developer-written blogs combine technical depth with real-world.",
   },
 ];
 
@@ -282,7 +282,7 @@ const page = () => {
               <span className="text-[#5F64FF]"> Sell, Support, </span>
               and <span className="text-[#5F64FF]"> Scale</span>
             </h2>
-            <ul className="space-y-6 lg:w-[85%] mb-10">
+            <ul className="space-y-6 lg:w-[85%] mb-10 mt-10">
               <li className="flex items-start text-white ">
                 <div className="flex-shrink-0 mt-2">
                   <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
