@@ -153,24 +153,24 @@ const dataService = [
   {
     imgLink: "/blog_as_service/6.png",
     hTag: "<p>Understanding Challenges & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Keyword Discovery</span></p>",
-    p1: "Content creation is easy — creating the right content is the real challenge.",
-    p2: "We research developer-focused keywords with strong monthly search volume that ",
-    p3: "Our developer-written blogs combine technical depth with real-world.",
+    p1: "Help identify the right topics and keywords that resonate with your developer audience.",
+    p2: "Align with your products goals and use targeted keyword research based on MSVs ",
+    p3: "Developer-authored blogs ensure technical accuracy and real-world insights.",
   },
-  
+
   {
     imgLink: "/blog_as_service/7.png",
     hTag: "<p>Outline Generation & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Content Creation</span></p>",
-    p1: "Content creation is easy — creating the right content is the real challenge.",
-    p2: "We research developer-focused keywords with strong monthly search",
-    p3: "Our developer-written blogs combine technical depth with real-world",
+    p1: "Craft detailed outlines with the right mix of headings, keywords, and Google-asked questions.",
+    p2: "Plan content structure and visuals to boost clarity, SEO, and engagement.",
+    p3: "Engineers write content tailored for your site and platforms like Dev.to or Reddi",
   },
   {
     imgLink: "/blog_as_service/8.png",
     hTag: "<p>Content Delivery & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Metrics Analysis</span></p>",
-    p1: "Content creation is easy — creating the right content is the real challenge.",
-    p2: "We research developer-focused keywords with strong monthly search.",
-    p3: "Our developer-written blogs combine technical depth with real-world.",
+    p1: "Deliver content with a detailed analysis of SEO, traffic, and SERP performance.",
+    p2: "Include hands-on examples like Java SDK integrations.",
+    p3: "Continuously refine strategy based on real-time data to boost visibility and reach.",
   },
 ];
 
@@ -256,7 +256,7 @@ const page = () => {
   }, []);
 
   return (
-    <div className="max-w-full mx-auto overflow-hidden px-4 lg:px-16">
+    <div className="max-w-full mx-auto overflow-x-hidden px-4 lg:px-16">
       <div>
       <div className="absolute w-full flex justify-center sm:px-0 md:px-0 pt-16 lg:pt-16 lg:justify-start lg:pl-12 lg:top-0 lg:left-16">
         <Link href="https://www.infrasity.com/" passHref>
