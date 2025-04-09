@@ -70,7 +70,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
     </div>
           <div>
             <h2
-              className="quicksand-bold text-white text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-center"
+              className="quicksand-bold text-white text-[2em] max-lg:text-[2em] leading-[45px] max-md:text-center"
               dangerouslySetInnerHTML={{ __html: data.hTag }}
             ></h2>
 
