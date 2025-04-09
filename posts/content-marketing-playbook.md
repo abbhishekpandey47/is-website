@@ -40,7 +40,7 @@ These elements help you create a robust marketing plan, right from planning and 
 
 Before starting anything, you need to plan a strategy on how you are going to take things forward. It involves identifying your goals, ICPs, competitors, mapping the funnel and content type, and finally creating the strategy.
 
-### Define Goals and Objectives
+**Define Goals and Objectives**
 
 Your goals and objectives depend on the stage you are in. Based on that, you will decide whether you want to focus on:
 
@@ -53,7 +53,7 @@ It's imperative to focus on **one primary goal** and then align it with future g
 
 Once you gain traction, you can shift your focus to the other goals accordingly.
 
-### Identify ICP & Buyer Personas
+**Identify ICP & Buyer Personas**
 
 After defining your goals and objectives, identify who your target audience will be. Create an **Ideal Customer Profile (ICP)** and **buyer personas** to guide effective content creation.
 
@@ -66,7 +66,7 @@ An ICP helps define your **ideal customers** — the type of companies likely to
 
 With ICP comes the buyer persona. It’s like you are zooming into the team members of the target company. You identify their goals, demographics, pain points, and preferences. There are three key buyer personas - _the end-user, the manager, and the decision maker_. They could be CTO, Product Manager, VP of marketing, developers, and CEO. 
 
-### Analyze Your Competitors
+**Analyze Your Competitors**
 
 Conducting a competitor analysis while planning a content strategy is important. The analysis will keep you stay relevant in the industry, build a strong USP, and identify potential opportunities and leverage them to stay ahead of your competitors.
 
@@ -74,7 +74,7 @@ To identify your competitors, search your **product category** (e.g., "workflow 
 
 Analyze their marketing strategies - what sort of keywords they are targeting and what kind of content they are creating to gain more traffic. There are many useful tools for SEO, such as **Semrush or Ahrefs** to find out the keywords and backlinks. Additionally, understand their content's tone and CTAs to gain actionable insights.
 
-## Map the Funnel & Content Types
+**Map the Funnel & Content Types**
 
 You need to create content based on the marketing stage you are at. Whether it's awareness, consideration, or conversion stage, you need to map the funnel accordingly - **[ToFu, MoFu, BoFu](https://www.infrasity.com/blog/tofu-mofu-bofu-marketing)**.
 
@@ -84,7 +84,7 @@ Here's the type of content you can create based on each marketing funnel:
 **MoFu**: Product demo videos, white papers, explainer videos, product comparison guides, nurture emails  
 **BoFu**: FAQ pages, case studies, product docs, coupons, and discount code emails
 
-## 2. Content Creation
+### 2. Content Creation
 
 Once you have planned a robust content marketing strategy, it's time to decide what type of content you will produce to achieve your goals and objectives. It will also include the content production process. This chapter of your content marketing playbook will help speed up the work by highlighting:
 
@@ -92,19 +92,19 @@ Once you have planned a robust content marketing strategy, it's time to decide w
 - Guidelines  
 - Content workflow  
 
-### Content Type
+**Content Type**
 
 As briefly mentioned, the content type should align with the marketing funnel. However, it is important to analyze the psychographic profile of your ICPs and curate content accordingly. 
 
 For example, if you are targeting a CTO at the awareness stage, think about their priorities. They could be staying ahead of technology trends, optimizing systems, and driving digital transformation. Instead of pitching a solution directly, offer thought leadership that resonates with their strategic concerns through blog posts.
 
-### Guidelines
+**Guidelines**
 
 You should include guidelines in your content playbook to ensure consistency across all touchpoints, whether it's a feature launch email or a blog post. These guidelines should cover your **tone and voice, a list of approved words and branded phrases, image and design rules, formatting standards, trusted sources, and even prohibited topics**. 
 
 This helps every writer, marketer, or freelancer stay aligned with the brand's identity. It saves time, reduces back-and-forth, and maintains a professional, cohesive presence without sounding like ten different people creating content for the same brand.
 
-### Content Workflow
+**Content Workflow**
 
 You have planned a robust strategy, but if you don't create a structured workflow, the strategy may fall flat. You may ask, why? This is because the content workflow will guide the team in beginning the ideation process and smoothly executing it. It will turn chaos into clarity and meeting deadlines. Here's what your content workflow should include:
 
@@ -118,7 +118,7 @@ You have planned a robust strategy, but if you don't create a structured workflo
 
 Content creation involves a major aspect, which is creating a structured workflow. Be it any type of content, like technical blog posts, product docs, or explainer videos, you will need to create guidelines for the team to work effectively. For instance, if you plan on collaborating with a content marketing agency like **[Infrasity](https://www.infrasity.com/contact)**, you would be able to communicate effectively by providing them with your content guidelines. It will save you time and effort to explain everything.
 
-## 3. Distribution
+### 3. Distribution
 
 As much as creating great content is crucial, distributing it on the right platform is equally important. Your content distribution plan should include where, how, and when you will distribute your content across different platforms that your ICPs utilize.
 
@@ -130,7 +130,7 @@ Identify your top distribution channels, such as:
 
 Additionally, make sure that you leave the website's link to get a backlink, which will increase its visibility. Do not forget about using scheduling tools like Hootsuite and Buffer to maintain efficiency and consistency across all channels.
 
-## 4. Measurement
+### 4. Measurement
 
 Once you are done with everything, from content ideation to its distribution, it is imperative to gauge its effectiveness. Why? 
 
