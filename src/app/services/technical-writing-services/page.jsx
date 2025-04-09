@@ -263,8 +263,14 @@ const page = () => {
       </div>
 
       <div>
-        <div className="pt-6 px-8 space-y-9 relative blogDiv">
-          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-16"></div>
+        <div
+          className="px-8 space-y-9 relative blogDiv"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+          }}
+        >
+          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-12"></div>
 
           <div className="whyinfra "></div>
 

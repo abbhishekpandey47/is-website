@@ -157,7 +157,7 @@ const dataService = [
     p2: "Align with your products goals and use targeted keyword research based on MSVs ",
     p3: "Developer-authored blogs ensure technical accuracy and real-world insights.",
   },
-  
+
   {
     imgLink: "/blog_as_service/7.png",
     hTag: "<p>Outline Generation & <span class='bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent'>Content Creation</span></p>",
@@ -256,7 +256,7 @@ const page = () => {
   }, []);
 
   return (
-    <div className="max-w-full mx-auto overflow-hidden px-4 lg:px-16">
+    <div className="max-w-full mx-auto overflow-x-hidden px-4 lg:px-16">
       <div>
       <div className="absolute w-full flex justify-center sm:px-0 md:px-0 pt-16 lg:pt-16 lg:justify-start lg:pl-12 lg:top-0 lg:left-16">
         <Link href="https://www.infrasity.com/" passHref>
