@@ -55,7 +55,10 @@ const PageCard = ({ ind = 1, data = { data } }) => {
         className={`w-[40%] max-md:w-full max-lg:w-1/2 flex flex-col justify-center serviceasblogcard card-${ind}`}
       >
         <div className="h-[80%] max-lg:h-full flex flex-col justify-center gap-5 max-lg:gap-2">
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-1">
+        <div className="flex flex-col">
+        <h3 className="text-white quicksand-bold text-2xl leading-tight">Step</h3>
+      </div>
       <div className="relative">
         <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg shadow-lg flex items-center justify-center transform rotate-3 overflow-hidden">
           <div className="absolute inset-0 bg-black opacity-20 rounded-lg"></div>
@@ -63,9 +66,6 @@ const PageCard = ({ ind = 1, data = { data } }) => {
           <span className="text-white font-bold text-2xl relative z-10">{ind + 1}</span>
         </div>
         <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full shadow-md"></div>
-      </div>
-      <div className="flex flex-col">
-        <h3 className="text-white quicksand-bold text-2xl leading-tight">{`Step ${ind + 1}`}</h3>
       </div>
     </div>
           <div>
@@ -76,7 +76,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
 
             <div>
                 
-            <ul className="space-y-2 lg:w-[85%] mb-6">
+            <ul className="space-y-2 lg:w-[95%] mt-4 mb-6">
   <li className="flex items-start text-white">
     <div className="flex-shrink-0 mt-1">
       <div className="w-3 h-3 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
@@ -94,7 +94,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
         </svg>
       </div>
     </div>
-    <p className="text-base pl-3 quicksand-medium">
+    <p className="text-sm pl-3 quicksand-medium">
       {data.p1}
     </p>
   </li>
@@ -115,7 +115,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
         </svg>
       </div>
     </div>
-    <p className="text-base pl-3 quicksand-medium">
+    <p className="text-sm pl-3 quicksand-medium">
       {data.p2}
     </p>
   </li>
@@ -136,7 +136,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
         </svg>
       </div>
     </div>
-    <p className="text-base pl-3 quicksand-medium">
+    <p className="text-sm pl-3 quicksand-medium">
       {data.p3}
     </p>
   </li>
@@ -256,9 +256,9 @@ const page = () => {
   }, []);
 
   return (
-    <div className="max-w-full mx-auto overflow-x-hidden px-4 lg:px-16">
+    <div className="relative max-w-full mx-auto overflow-hidden px-6">
       <div>
-      <div className="absolute w-full flex justify-center sm:px-0 md:px-0 pt-16 lg:pt-16 lg:justify-start lg:pl-12 lg:top-0 lg:left-16">
+  <div className="absolute top-0 left-0 w-full pt-12 flex justify-center lg:pt-16 lg:justify-start lg:pl-16">
         <Link href="https://www.infrasity.com/" passHref>
           <Image
             loading="lazy"
