@@ -29,7 +29,8 @@ import TrustedBySection from "./TrustedBySection.jsx";
 import YouTubeCarousel from "./videoSection.jsx";
 import BookDemo from "./bookDemo.jsx";
 import FAQSection from "./FAQ.jsx";
-import DarkGlassmorphicCard from "./caseStudy.jsx";
+import DarkGlass from "./caseStudy.jsx";
+import TestimonialSlider from "./testimonials.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -530,8 +531,15 @@ const page = () => {
         < YouTubeCarousel />
       </div>
 
-      <div>
-        < DarkGlassmorphicCard />
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
+        < DarkGlass />
       </div>
 
   
@@ -708,8 +716,6 @@ const page = () => {
         
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-
-
       < FAQSection />
       </div>
 
@@ -722,8 +728,20 @@ const page = () => {
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
 
 
-      <ReadyToStart />
+        < TestimonialSlider />
+      </div>
 
+      
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
+
+      <ReadyToStart />
       </div>
 
       <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-20 mb-12"></div>
