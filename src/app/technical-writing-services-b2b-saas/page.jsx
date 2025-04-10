@@ -78,7 +78,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
                 
             <ul className="space-y-2 lg:w-[95%] mt-4 mb-6">
   <li className="flex items-start text-white">
-    <div className="flex-shrink-0 mt-2">
+    <div className="flex-shrink-0 mt-1">
       <div className="w-3 h-3 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
         </svg>
       </div>
     </div>
-    <p className="text-base pl-3 quicksand-medium">
+    <p className="text-sm pl-3 quicksand-medium">
       {data.p1}
     </p>
   </li>
@@ -115,7 +115,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
         </svg>
       </div>
     </div>
-    <p className="text-base pl-3 quicksand-medium">
+    <p className="text-sm pl-3 quicksand-medium">
       {data.p2}
     </p>
   </li>
@@ -136,7 +136,7 @@ const PageCard = ({ ind = 1, data = { data } }) => {
         </svg>
       </div>
     </div>
-    <p className="text-base pl-3 quicksand-medium">
+    <p className="text-sm pl-3 quicksand-medium">
       {data.p3}
     </p>
   </li>
