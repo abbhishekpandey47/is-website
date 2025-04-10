@@ -479,10 +479,16 @@ const page = () => {
           </Link>
         </div>
       </div>
-      {/* Line pink */}
-      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-24 mb-16"></div>
       {/* Why Choose Us */}
-      <div>
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-5"></div>
+
+        
         <SaasGlassyBoxes />
       </div>
       <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-4"></div>
@@ -491,7 +497,14 @@ const page = () => {
       <div>
         <Services />
       </div>
-      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-5"></div>
 
       <div className="flex justify-center pt-10 service1VideoItem">
         <div className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200">
@@ -506,6 +519,7 @@ const page = () => {
             title="Embedded youtube"
           />
         </div>
+      </div>
       </div>
       <div className="flex justify-center w-full flex-col items-center">
         <div className="max-w-[1450px] mx-auto flex justify-center flex-col items-center gap-5 text-center">
