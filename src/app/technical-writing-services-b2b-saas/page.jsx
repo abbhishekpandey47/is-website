@@ -256,7 +256,7 @@ const page = () => {
   }, []);
 
   return (
-    <div className="relative max-w-full mx-auto overflow-hidden px-6">
+    <div className="relative max-w-full mx-auto overflow-hidden px-4">
       <div>
   <div className="absolute top-0 left-0 w-full pt-12 flex justify-center lg:pt-16 lg:justify-start lg:pl-16">
         <Link href="https://www.infrasity.com/" passHref>
@@ -276,7 +276,7 @@ const page = () => {
         <div className="max-w-full flex xxs:flex-col xs:flex-col sm:flex-col md:flex-col lg:flex-row justify-center items-center ">
           {/* Left side content */}
           <div className="lg:ml-[50px] justify-center sm:w-full lg:w-[60vw] lg:flex lg:flex-col lg:items-start">
-            <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-sm quicksand-bold mt-8 text-white mb-10 leading-tight">
+            <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-5xl quicksand-bold mt-8 text-white mb-10 leading-tight">
               Docs That Don’t Just Explain, they
               <span className="text-[#5F64FF]"> drive </span>
               <span className="text-[#5F64FF]"> Sell, Support, </span>
