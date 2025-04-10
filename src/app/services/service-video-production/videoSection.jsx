@@ -43,7 +43,6 @@ export default function YouTubeCarousel() {
 
       <div className="relative w-full">
         {/* Main carousel container with mint green background */}
-        <div className="bg-green-100 p-6 rounded-lg relative">
           <div className="relative aspect-video w-full">
             <iframe 
               className="w-full h-full"
@@ -58,7 +57,6 @@ export default function YouTubeCarousel() {
             <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded">
               With Attest's consumer research platform
             </div>
-          </div>
         </div>
 
         {/* Navigation arrows */}

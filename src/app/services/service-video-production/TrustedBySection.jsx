@@ -31,7 +31,7 @@ export default function TrustedBySection() {
     "qodo-logo.svg",
   ];
 
-  // Create rows with 4 logos each
+  // Create rows with 5 logos each
   const rows = [];
   for (let i = 0; i < fileList.length; i += 5) {
     rows.push(fileList.slice(i, i + 5));
