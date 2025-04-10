@@ -24,6 +24,9 @@ import HowWorks from "@/Components/HomePage/HowWorks";
 import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";
 import { MarqueeDemo } from "./MarqueeData.jsx";
 import Services from "./services.jsx";
+import ScrutGettingStarted from "./step.jsx";
+import TrustedBySection from "./TrustedBySection.jsx";
+import YouTubeCarousel from "./videoSection.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -425,7 +428,7 @@ const page = () => {
   }, []);
 
   return (
-    <div className="max-w-[1566px] mx-auto overflow-hidden">
+    <div className="max-w-[1566px] mx-auto overflow-x-hidden">
       <div
         className="pt-28 lg:pt-28 space-y-9 relative blogDiv"
         style={{
@@ -478,11 +481,21 @@ const page = () => {
             </svg>
           </Link>
         </div>
+
+        {/* <div>
+          <TrustedBySection />
+        </div> */}
       </div>
-      {/* Line pink */}
-      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-24 mb-16"></div>
       {/* Why Choose Us */}
-      <div>
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-5"></div>
+
+        
         <SaasGlassyBoxes />
       </div>
       <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-4"></div>
@@ -491,7 +504,29 @@ const page = () => {
       <div>
         <Services />
       </div>
-      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+
+      {/* <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-5"></div>
+
+        < ScrutGettingStarted />
+      </div>
+
+      <div>
+        < YouTubeCarousel />
+      </div> */}
+
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
 
       <div className="flex justify-center pt-10 service1VideoItem">
         <div className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200">
@@ -506,6 +541,7 @@ const page = () => {
             title="Embedded youtube"
           />
         </div>
+      </div>
       </div>
       <div className="flex justify-center w-full flex-col items-center">
         <div className="max-w-[1450px] mx-auto flex justify-center flex-col items-center gap-5 text-center">
@@ -525,6 +561,7 @@ const page = () => {
           <div className="pt-5" />
           <MarqueeDemo />
         </div>
+
         {/* <div className="max-w-[1450px] mx-auto flex justify-center flex-col items-center gap-5 text-center">
           <div className="divider-line divider-left max-lg:hidden" />
           <div className="divider-line divider-right max-lg:hidden" />
@@ -565,7 +602,7 @@ const page = () => {
             fill="currentColor"
             className="h-6 w-6 opacity-70"
           >
-            <path
+             <path
               fillRule="evenodd"
               d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
               clipRule="evenodd"
