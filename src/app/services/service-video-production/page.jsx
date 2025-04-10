@@ -24,6 +24,8 @@ import HowWorks from "@/Components/HomePage/HowWorks";
 import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";
 import { MarqueeDemo } from "./MarqueeData.jsx";
 import Services from "./services.jsx";
+import ScrutGettingStarted from "./step.jsx";
+import TrustedBySection from "./TrustedBySection.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -425,7 +427,7 @@ const page = () => {
   }, []);
 
   return (
-    <div className="max-w-[1566px] mx-auto overflow-hidden">
+    <div className="max-w-[1566px] mx-auto overflow-x-hidden">
       <div
         className="pt-28 lg:pt-28 space-y-9 relative blogDiv"
         style={{
@@ -478,6 +480,10 @@ const page = () => {
             </svg>
           </Link>
         </div>
+
+        <div>
+          <TrustedBySection />
+        </div>
       </div>
       {/* Why Choose Us */}
       <div className="flex flex-col gap-10 mt-24 mb-16"
@@ -505,6 +511,17 @@ const page = () => {
         
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-5"></div>
+
+        < ScrutGettingStarted />
+      </div>
+
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
 
       <div className="flex justify-center pt-10 service1VideoItem">
         <div className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200">
@@ -539,6 +556,7 @@ const page = () => {
           <div className="pt-5" />
           <MarqueeDemo />
         </div>
+
         {/* <div className="max-w-[1450px] mx-auto flex justify-center flex-col items-center gap-5 text-center">
           <div className="divider-line divider-left max-lg:hidden" />
           <div className="divider-line divider-right max-lg:hidden" />
