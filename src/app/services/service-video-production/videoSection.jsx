@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import BookDemo from './bookDemo';
+import CalendlyButton from './calendlyButton';
 
 export default function YouTubeCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -62,14 +64,14 @@ export default function YouTubeCarousel() {
         {/* Navigation arrows */}
         <button 
           onClick={prevSlide}
-          className="absolute top-1/2 left-2 mr-40 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg text-blue-500"
+          className="absolute top-1/2 md:left-2 sm:left-2 lg:-left-16 -translate-y-1/2 bg-black hover:bg-gray-800 rounded-full p-2 shadow-lg text-white"
         >
           <ChevronLeft size={24} />
         </button>
         
         <button 
           onClick={nextSlide}
-          className="absolute top-1/2 right-2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg text-blue-500"
+          className="absolute top-1/2 right-2 sm:right-2 md:right-2 lg:-right-16 -translate-y-1/2 bg-black hover:bg-gray-800 rounded-full p-2 shadow-lg text-white"
         >
           <ChevronRight size={24} />
         </button>
@@ -89,10 +91,9 @@ export default function YouTubeCarousel() {
         ))}
       </div>
 
-      {/* Call to action button */}
-      <button className="mt-6 bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-6 rounded">
-        Schedule a call
-      </button>
+      <div className='mt-5'>
+      < CalendlyButton />
+      </div>
     </div>
   );
 }

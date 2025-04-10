@@ -27,6 +27,8 @@ import Services from "./services.jsx";
 import ScrutGettingStarted from "./step.jsx";
 import TrustedBySection from "./TrustedBySection.jsx";
 import YouTubeCarousel from "./videoSection.jsx";
+import BookDemo from "./bookDemo.jsx";
+import FAQSection from "./FAQ.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -482,9 +484,9 @@ const page = () => {
           </Link>
         </div>
 
-        {/* <div>
+        <div>
           <TrustedBySection />
-        </div> */}
+        </div>
       </div>
       {/* Why Choose Us */}
       <div className="flex flex-col gap-10 mt-24 mb-16"
@@ -505,7 +507,7 @@ const page = () => {
         <Services />
       </div>
 
-      {/* <div className="flex flex-col gap-10 mt-24 mb-16"
+      <div className="flex flex-col gap-10 mt-8 mb-16"
         style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
         }}
@@ -516,9 +518,18 @@ const page = () => {
         < ScrutGettingStarted />
       </div>
 
-      <div>
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
         < YouTubeCarousel />
-      </div> */}
+      </div>
+
+  
 
       <div className="flex flex-col gap-10 mt-24 mb-16"
         style={{
@@ -684,7 +695,36 @@ const page = () => {
           </PaginationContent>
         </Pagination>
       </div>
+
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
+
+      < FAQSection />
+      </div>
+
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
+
       <ReadyToStart />
+
+      </div>
+
+      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-20 mb-12"></div>
+      <div className="w-full flex justify-center items-center">
+        <BookDemo />
+      </div>
     </div>
   );
 };
