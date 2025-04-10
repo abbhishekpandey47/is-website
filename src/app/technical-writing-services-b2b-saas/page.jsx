@@ -256,9 +256,9 @@ const page = () => {
   }, []);
 
   return (
-    <div className="max-w-full mx-auto overflow-x-hidden px-4 lg:px-16">
+    <div className="relative max-w-full mx-auto overflow-hidden px-6">
       <div>
-      <div className="absolute w-full flex justify-center sm:px-0 md:px-0 pt-16 lg:pt-16 lg:justify-start lg:pl-12 lg:top-0 lg:left-16">
+  <div className="absolute top-0 left-0 w-full pt-12 flex justify-center lg:pt-16 lg:justify-start lg:pl-16">
         <Link href="https://www.infrasity.com/" passHref>
           <Image
             loading="lazy"
