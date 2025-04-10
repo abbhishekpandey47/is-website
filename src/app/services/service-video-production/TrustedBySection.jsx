@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 export default function TrustedBySection() {
-    // Placeholder for logos - you can replace these with your actual logos later
 const fileList = [
   "aviator.png",
   "firstock-logo.webp",
@@ -16,7 +15,6 @@ const fileList = [
           {/* Heading */}
           <h2 className="text-[20px] text-[#858588] font-normal mb-4">Trusted by</h2>
           
-          {/* Logo placeholder container */}
           <div className="flex flex-wrap items-center pl-4">
             {fileList.map((company) => (
               <div 
@@ -26,7 +24,6 @@ const fileList = [
                   alignItems: "center"
                 }}
               >
-                {/* Empty space for logo - you can replace this */}
                 <div className="text-gray-400 text-sm">
                 <Image
                   loading="lazy"

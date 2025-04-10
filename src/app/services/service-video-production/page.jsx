@@ -26,6 +26,7 @@ import { MarqueeDemo } from "./MarqueeData.jsx";
 import Services from "./services.jsx";
 import ScrutGettingStarted from "./step.jsx";
 import TrustedBySection from "./TrustedBySection.jsx";
+import YouTubeCarousel from "./videoSection.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -481,9 +482,9 @@ const page = () => {
           </Link>
         </div>
 
-        <div>
+        {/* <div>
           <TrustedBySection />
-        </div>
+        </div> */}
       </div>
       {/* Why Choose Us */}
       <div className="flex flex-col gap-10 mt-24 mb-16"
@@ -504,7 +505,7 @@ const page = () => {
         <Services />
       </div>
 
-      <div className="flex flex-col gap-10 mt-24 mb-16"
+      {/* <div className="flex flex-col gap-10 mt-24 mb-16"
         style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
         }}
@@ -514,6 +515,10 @@ const page = () => {
 
         < ScrutGettingStarted />
       </div>
+
+      <div>
+        < YouTubeCarousel />
+      </div> */}
 
       <div className="flex flex-col gap-10 mt-24 mb-16"
         style={{

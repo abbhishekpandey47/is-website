@@ -25,7 +25,6 @@ export default function ScrutGettingStarted() {
     },
   ];
 
-  // Function to render icons
   const renderIcon = (iconName) => {
     switch (iconName) {
       case 'computer':
