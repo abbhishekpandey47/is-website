@@ -62,9 +62,9 @@ They map out the B2B SaaS customer’s journey and utilize automation platforms 
 
 With the rise in digital trends, the marketing aspect has also become more digital. The Fractional CMO oversees the content marketing, social media marketing, email marketing, and paid advertising efforts. They ensure that the product’s value proposition comes out cohesively across all digital platforms.
 
-They create a calendar for content and social media marketing, or rather, a content playbook for better communication and collaboration with teams. These things specify the relevant tasks and topics that need to be covered to meet the desired objectives and match the buyers’ interests.
+They create a calendar for content and social media marketing, or rather, a **[content playbook](https://www.infrasity.com/blog/content-marketing-playbook)** for better communication and collaboration with teams. These things specify the relevant tasks and topics that need to be covered to meet the desired objectives and match the buyers’ interests.
 
-Fractional CMOs also set priorities for the SEO aspect. It plays an important role in increasing the reach to potential customers, along with high-quality content. Talking about the high-quality content, especially technical one, considering your niche, you might try your hand at partnering with a technical content writing agency that will help you produce content that will convert.
+Fractional CMOs also set priorities for the SEO aspect. It plays an important role in increasing the reach to potential customers, along with high-quality content. Talking about the high-quality content, especially technical one, considering your niche, you might try your hand at partnering with a **[technical content writing agency](https://www.infrasity.com/contact)** that will help you produce content that will convert.
 
 Additionally, part time CMOs ensure that the SaaS company is reaching out to their potential and existing customers through another communication channel, email. They ensure that the email marketing campaign includes welcome emails, nurture sequences, onboarding emails, and newsletters.
 
