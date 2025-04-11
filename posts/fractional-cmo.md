@@ -48,6 +48,8 @@ A Fractional CMO works efficiently for a B2B SaaS startup, utilizing their skill
 
 Your SaaS company must establish its main marketing objectives, such as generating leads or making customers convert, before executing the strategic plan. The fractional CMO sets KPIs by establishing goals that the organization has defined.
 
+![fractional cmo - kpi](public/PostImages/fractional-cmo/f2.png) 
+
 The KPI measurements move from their group members while establishing tracking systems to monitor marketing outcome efficiency. These companies utilize digital marketing tools including _HubSpot, Salesforce, Google Analytics_ and also use Amplitude.
 
 These part time CMOs benefit from these tools that enable them to track their key performance indicators for reviews and adjustments after review of periodic outcome results.
