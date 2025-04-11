@@ -131,16 +131,16 @@ Now, what’s your plan – hiring a CMO full-time or part-time?
 
 ## FAQs
 
-1. What is the Difference Between a Fractional CMO and a Marketing Consultant?  
+### 1. What is the Difference Between a Fractional CMO and a Marketing Consultant?  
 Marketing consultants concentrate their knowledge on resolving particular market-related problems, while Fractional CMOs handle complete marketing strategy development and team guidance.
 
-2. What is the Difference Between Interim and Fractional CMO?  
+### 2. What is the Difference Between Interim and Fractional CMO?  
 While a Fractional CMO is hired for a short to mid-term period, the Interim CMO works for a fixed period and can become a full-time CMO too.
 
-3. How Many Hours Does a Fractional CMO Work? 
+### 3. How Many Hours Does a Fractional CMO Work? 
 A Fractional CMO can work for your B2B SaaS company for around 20 hours per week. It can extend based on the amount of work to be done.
 
-4. How Do I Know if I Need a Fractional CMO? What Are the Signs to Look for? 
+### 4. How Do I Know if I Need a Fractional CMO? What Are the Signs to Look for?
 When you see your marketing efforts go in vain due to a lack of team and can’t hire a full-time CMO with expertise in the B2B SaaS domain, that’s when you need to hire a Fractional CMO.
 
 
