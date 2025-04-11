@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
-export default function DarkGlassmorphicCard() {
+export default function DarkGlass() {
   return (
-    <div className="flex justify-center items-center min-h-screen p-4">
-      <div className="w-full max-w-6xl">
+    <div className="w-full flex flex-col items-center justify-center">
+  <div className="max-w-[1450px] w-full mx-auto flex flex-col items-center gap-5 text-center">
+
         <div
           className="rounded-2xl p-4 md:p-6 h-full flex flex-col items-center text-left relative overflow-hidden"
           style={{
@@ -14,9 +15,9 @@ export default function DarkGlassmorphicCard() {
             backdropFilter: "blur(4px)",
           }}
         >
-          <div className="flex flex-col md:flex-row w-full">
+          <div className="flex flex-col-reverse md:flex-row w-full">
             {/* Left Column - Text and Stats */}
-            <div className="w-full md:w-1/2 md:pr-4 mb-6 md:mb-0">
+            <div className="w-full md:w-1/2 md:pr-4 mt-6 md:mt-0">
               {/* Logo Section */}
               <div className="my-4 md:my-8 mx-3 md:mx-6">
                 <div className="flex items-center">
@@ -67,7 +68,7 @@ export default function DarkGlassmorphicCard() {
             </div>
 
             {/* Right Column - Video */}
-            <div className="w-full md:w-1/2 md:pl-4">
+            <div className="w-full md:w-1/2 md:pl-4 mt-6 md:mt-12 md:mb-0">
               <div className="p-2 md:p-4 bg-opacity-10 bg-white rounded-lg w-full">
                 <div className="w-full h-48 sm:h-56 md:h-64 rounded-md overflow-hidden">
                   {/* YouTube video iframe */}

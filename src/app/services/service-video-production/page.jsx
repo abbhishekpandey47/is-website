@@ -490,7 +490,7 @@ const page = () => {
           <TrustedBySection />
         </div>
       </div>
-      {/* Why Choose Us */}
+
       <div className="flex flex-col gap-10 mt-24 mb-16"
         style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
@@ -504,7 +504,6 @@ const page = () => {
       </div>
       <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-4"></div>
 
-      {/* //Services */}
       <div>
         <Services />
       </div>
@@ -567,7 +566,7 @@ const page = () => {
         </div>
       </div>
       </div>
-      <div className="flex justify-center w-full flex-col items-center">
+      {/* <div className="flex justify-center w-full flex-col items-center">
         <div className="max-w-[1450px] mx-auto flex justify-center flex-col items-center gap-5 text-center">
           <div className="divider-line divider-top max-lg:hidden" />
           <div className="divider-line divider-left max-lg:hidden" />
@@ -584,7 +583,7 @@ const page = () => {
           </div>
           <div className="pt-5" />
           <MarqueeDemo />
-        </div>
+        </div> */}
 
         {/* <div className="max-w-[1450px] mx-auto flex justify-center flex-col items-center gap-5 text-center">
           <div className="divider-line divider-left max-lg:hidden" />
@@ -594,8 +593,8 @@ const page = () => {
             subHeading=""
             serviceArr={serviceArrHowWorks2}
           />
-        </div> */}
-      </div>
+        </div> 
+      </div> */}
       <div className="relative bg-[url('https://cdn.prod.website-files.com/62fe4c0cf9e612b304ecd08b/662837ec30851f0543c18f14_Grid3.svg')]  top-10">
         <div className="flex justify-center w-full pt-32 flex-col gap-10">
           <div>
