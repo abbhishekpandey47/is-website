@@ -81,7 +81,7 @@ export default function SaasGlassyBoxes() {
           <h2 className="text-lg sm:text-xl font-bold text-white mb-2">
             {title}
           </h2>
-          <p className="text-gray-300 text-sm mb-4">{description}</p>
+          <p className="text-[#a5b5ba] text-sm mb-4">{description}</p>
         </div>
       </div>
     );
