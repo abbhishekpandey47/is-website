@@ -7,7 +7,6 @@ export default function TabbedYouTubeCarousel() {
   const [activeTab, setActiveTab] = useState("allCategories");
   const [currentSlide, setCurrentSlide] = useState(0);
   
-  // Define video collections for each tab
   const videoCollections = {
     allCategories: [
       "XmUB8JXa4hI",
@@ -30,10 +29,19 @@ export default function TabbedYouTubeCarousel() {
       "HC3ijBbNOow",
       "Yfv2iTyWGd0",
       "R7pkdg6wcAY",
+    ],
+    Features: [
+      "_TrEJAJPp0M",
+    ],
+    Explanations: [
+      "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20ECS.mp4",
+      "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20RDS%20.mp4",
+      "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20VPC.mp4",
     ]
   };
 
-  // Get the current videos based on active tab
+
+
   const currentVideos = videoCollections[activeTab];
 
   const nextSlide = () => {
@@ -50,37 +58,36 @@ export default function TabbedYouTubeCarousel() {
 
   const changeTab = (tabId) => {
     setActiveTab(tabId);
-    setCurrentSlide(0); // Reset to first slide when changing tabs
+    setCurrentSlide(0); 
   };
 
-  // For the second video, add start time parameter (55 seconds)
   const getEmbedUrl = (videoId) => {
-    if (videoId === "D7_ipDqhtwk") {
-      return `https://www.youtube.com/embed/${videoId}?rel=0&start=55`;
+    if (videoId.length >= 15) {
+      return videoId;
     }
     return `https://www.youtube.com/embed/${videoId}?rel=0`;
   };
 
-  // Tab definitions
   const tabs = [
-    { id: "allCategories", label: "All Categories" },
+    { id: "allCategories", label: "All" },
     { id: "Editorials", label: "Editorials" },
     { id: "Podcasts", label: "Podcasts" },
+    { id: "Explanations", label: "Explanations" },
+    { id: "Features", label: "Features" },
   ];
 
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold text-center my-6">Check out our YouTube Content</h1>
       
-      {/* Tab Navigation */}
-      <div className="w-full max-w-lg mb-6 rounded-full bg-gray-900 p-2 flex">
+      <div className="w-full max-w-md lg:max-w-3xl mb-6 rounded-full bg-gray-900 flex">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => changeTab(tab.id)}
-            className={`flex-1 py-2 px-4 rounded-full text-center transition-colors ${
+            className={`flex-1 py-4 px-2 lg:px-4 rounded-full text-center transition-colors ${
               activeTab === tab.id 
-                ? 'bg-yellow-50 text-gray-900 font-medium' 
+                ? 'bg-yellow-50 text-gray-900 font-normal' 
                 : 'text-white hover:bg-gray-800'
             }`}
           >
@@ -90,7 +97,6 @@ export default function TabbedYouTubeCarousel() {
       </div>
 
       <div className="relative w-full">
-        {/* Main carousel container */}
         <div className="relative aspect-video w-full">
           <iframe
             className="w-full h-full"
@@ -101,13 +107,11 @@ export default function TabbedYouTubeCarousel() {
             allowFullScreen
           ></iframe>
           
-          {/* Attest caption at bottom */}
           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded">
             With Attest's consumer research platform
           </div>
         </div>
 
-        {/* Navigation arrows */}
         <button
           onClick={prevSlide}
           className="absolute top-1/2 md:left-2 sm:left-2 lg:-left-16 -translate-y-1/2 bg-black hover:bg-gray-800 rounded-full p-2 shadow-lg text-white"
@@ -123,7 +127,6 @@ export default function TabbedYouTubeCarousel() {
         </button>
       </div>
 
-      {/* Dots navigation */}
       <div className="flex space-x-2 mt-4">
         {currentVideos.map((_, index) => (
           <button

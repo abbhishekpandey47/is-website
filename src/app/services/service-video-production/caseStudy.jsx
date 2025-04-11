@@ -16,9 +16,7 @@ export default function DarkGlass() {
           }}
         >
           <div className="flex flex-col-reverse md:flex-row w-full">
-            {/* Left Column - Text and Stats */}
             <div className="w-full md:w-1/2 md:pr-4 mt-6 md:mt-0">
-              {/* Logo Section */}
               <div className="my-4 md:my-8 mx-3 md:mx-6">
                 <div className="flex items-center">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,14 +26,11 @@ export default function DarkGlass() {
                 </div>
               </div>
 
-              {/* Headline */}
               <div className="mb-4 md:mb-8 mx-3 md:mx-6">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1">Decreased CPA on YouTube by 94%</h2>
               </div>
 
-              {/* Stats Section */}
               <div className="flex flex-wrap gap-4 md:gap-6 mb-4 mx-3 md:mx-6">
-                {/* CTR Stat */}
                 <div className="flex items-center">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-opacity-20 bg-green-400 mr-3">
                     <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +45,6 @@ export default function DarkGlass() {
                   </div>
                 </div>
 
-                {/* CPC Stat */}
                 <div className="flex items-center">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center bg-opacity-20 bg-red-400 mr-3">
                     <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,17 +61,14 @@ export default function DarkGlass() {
               </div>
             </div>
 
-            {/* Right Column - Video */}
-            <div className="w-full md:w-1/2 md:pl-4 mt-6 md:mt-12 md:mb-0">
-              <div className="p-2 md:p-4 bg-opacity-10 bg-white rounded-lg w-full">
+            <div className="w-full md:w-1/2 md:pl-4 md:mt-12 md:mb-0">
+              <div className="p-2 md:p-4 rounded-lg w-full lg:mb-12">
                 <div className="w-full h-48 sm:h-56 md:h-64 rounded-md overflow-hidden">
-                  {/* YouTube video iframe */}
                   <div className="relative w-full h-full">
                     <iframe 
                       className="absolute top-0 left-0 w-full h-full rounded-md"
                       src="https://www.youtube.com/embed/ICUGIdqzmYg" 
                       title="YouTube video"
-                      frameBorder="0" 
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                       allowFullScreen>
                     </iframe>
