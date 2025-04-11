@@ -620,6 +620,17 @@ let postMetaData = [
         metaDescription: "A content playbook is a one-stop reference guide for content marketing purposes. Learn how you can create it and make your marketing efforts effective."
     },
 
+    {
+        title: "Why B2B SaaS Startups Should Hire a Fractional CMO?",
+        metatitle: "Why B2B SaaS Startups Should Hire a Fractional CMO?",
+        slug: "fractional-cmo",
+        description: "Explore how a SaaS Fractional CMO can be a great addition to your marketing team for a short period, ideal for B2B SaaS startups with budget constraints.",
+        ogImage: "/PostImages/fractional-cmo/f1.png",
+        publishedOn: "2025-04-11",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Explore how a SaaS Fractional CMO can be a great addition to your marketing team for a short period, ideal for B2B SaaS startups with budget constraints."
+    },
     
 ];
 
