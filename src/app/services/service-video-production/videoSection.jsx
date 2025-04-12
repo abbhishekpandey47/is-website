@@ -32,6 +32,9 @@ export default function TabbedYouTubeCarousel() {
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20ECS.mp4",
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20RDS%20.mp4",
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20VPC.mp4",
+    ],
+    Animated: [
+      "yEuALidHHhY",
     ]
   };
 
@@ -68,6 +71,7 @@ export default function TabbedYouTubeCarousel() {
     { id: "Podcasts", label: "Podcasts" },
     { id: "Features", label: "Features" },
     { id: "ExplainerVideo", label: "Explainer Video" },
+    { id: "Animated", label: "Animated" },
   ];
 
   return (
