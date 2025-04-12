@@ -22,7 +22,7 @@ export default function DarkGlass() {
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6 12L10 16L18 8" stroke="#FF5733" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                  <span className="ml-2 text-gray-300 font-medium">hotjar</span>
+                  <span className="ml-2 text-gray-300 font-medium">DevZero</span>
                 </div>
               </div>
 
