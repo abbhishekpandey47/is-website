@@ -31,6 +31,7 @@ import BookDemo from "./bookDemo.jsx";
 import FAQSection from "./FAQ.jsx";
 import DarkGlass from "./caseStudy.jsx";
 import TestimonialSlider from "./testimonials.jsx";
+import CalendlyButton from "./calendlyButton.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -463,25 +464,7 @@ const page = () => {
         </div>
 
         <div className="flex justify-center lg:justify-start lg:ml-40">
-          <Link
-            href="https://calendly.com/meet-shan"
-            target="_blank"
-            className="btn bg-btnprimary hover:bg-btnprimaryhov text-white text-center relative z-[12]"
-          >
-            Get Started
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 ml-2"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </Link>
+          < CalendlyButton name="Get Started" />
         </div>
 
         <div>
