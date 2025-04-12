@@ -259,9 +259,7 @@ const page = () => {
   return (
     <div className="relative max-w-full mx-auto overflow-hidden px-4">
       <div>
-  
-
-      {/* Blog Engagement Section */}
+{/* Blog Engagement Section */}
       <section className="w-full mx-auto lg:mt-24 sm:mt-16 md:mt-24 py-24 lg:py-12 relative overflow-hidden addGrid2">
         <div className="max-w-full flex xxs:flex-col xs:flex-col sm:flex-col md:flex-col lg:flex-row justify-center items-center ">
           {/* Left side content */}
@@ -464,9 +462,9 @@ const page = () => {
         <BookDemo />
       </div>
 
-      {/* <div>
+      <div>
         < CRMAutomationPage />
-      </div> */}
+      </div>
     </div>
     </div>
   );

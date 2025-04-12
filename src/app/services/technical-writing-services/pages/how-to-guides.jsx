@@ -1,8 +1,8 @@
 export default function CRMAutomationPage() {
   return (
-    <div className="w-full bg-gray-900 p-4 flex items-center py-24 justify-center overflow-x-hidden">
+    <div className="w-full bg-gray-900 p-4 flex items-center py-24 px-16 justify-center overflow-x-hidden">
       <div 
-        className="w-full max-w-5xl rounded-2xl p-8 relative overflow-hidden box-border"
+        className="w-full max-w-full rounded-2xl p-8 relative overflow-hidden box-border"
         style={{
           backgroundColor: "#141318",
           backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 80%)`,
@@ -11,7 +11,7 @@ export default function CRMAutomationPage() {
         }}
       >
         <div className="flex flex-col lg:flex-row justify-between items-start">
-          {/* Left column  */}
+          {/* Left column  order */}
           <div className="flex flex-col-reverse md:flex-row w-full">
             <div className="w-full md:w-1/2 md:pr-4 mt-6 md:mt-0">
               <div className="md:my-8 mx-3 md:mx-6">
@@ -39,7 +39,7 @@ export default function CRMAutomationPage() {
               </div>
 
               <div className="flex flex-wrap gap-4 md:gap-6 mb-4 mx-3 md:mx-6">
-              <p className="text-gray-300 text-lg">
+              <p className="text-gray-300 text-2xl">
               Your CRM, Always Up-to-Date — Without<br />Lifting a Finger
             </p>
               </div>
@@ -48,15 +48,16 @@ export default function CRMAutomationPage() {
             <div className="w-full md:w-1/2 md:pl-4 md:mt-12 md:mb-0">
               <div className="md:p-4 rounded-lg w-full lg:mb-12">
                 <div className="w-full h-48 sm:h-56 md:h-64 rounded-md overflow-hidden">
-                  <div className="relative w-full h-full">
-                    <iframe 
-                      className="absolute top-0 left-0 w-full h-full rounded-md"
-                      src="https://www.youtube.com/embed/ICUGIdqzmYg" 
-                      title="YouTube video"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowFullScreen>
-                    </iframe>
-                  </div>
+                <div className="w-full max-w-md h-64 relative">
+  <iframe 
+    className="absolute top-0 left-0 w-full h-full rounded-md"
+    src="https://www.youtube.com/embed/ICUGIdqzmYg?autoplay=1&mute=1" 
+    title="YouTube video"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowFullScreen>
+  </iframe>
+</div>
+
                 </div>
               </div>
             </div>
