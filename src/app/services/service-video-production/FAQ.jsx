@@ -33,15 +33,15 @@ const faqData = [
   {
     id: "1",
     question:
-      " How can early-stage startups outsource developer documentation and DevTool content without hiring a full DevRel team?",
+      " What types of videos are most effective for B2B SaaS companies?",
     answer:
-      "Hiring takes months. With Infrasity, you get product-ready documentation from day one — without the overhead of salaries, onboarding, or dev time spent writing.",
+      "Effective video types include product demos, explainer videos, customer testimonials, and onboarding tutorials. These formats help in clearly communicating complex technical concepts and showcasing the value of your solutions.",
   },
   {
     id: "2",
-    question: "Can Infrasity help us launch product docs faster",
+    question: "Do you provide scriptwriting and storyboarding services?",
     answer:
-      "Absolutely. We’ve helped dozens of DevTool startups launch docs in under two weeks — from API references to full onboarding guides, ready for users and demos",
+      "Yes, comprehensive services include scriptwriting and storyboarding to ensure the video's message is clear and effectively communicated.",
   },
   {
     id: "3",
@@ -51,21 +51,21 @@ const faqData = [
   },
   {
     id: "4",
-    question: "Will this actually move the GTM needle",
+    question: "Where can SaaS companies use explainer videos?",
     answer:
-      "Yes. Clear docs = faster onboarding = shorter time-to-value = more product adoption. It’s your silent GTM engine.",
+      "Explainer videos can be used on landing pages, social media platforms, email campaigns, product demos, customer onboarding processes, and sales presentations.",
   },
   {
     id: "5",
-    question: "What type of content should we start with",
+    question: "How long should an explainer video be?",
     answer:
-      "Launch with what converts: onboarding guides, API references, how-to tutorials, and real use-case walkthroughs.",
+      "Ideally, the length should be short—around 60-90 seconds—to maintain viewer engagement while delivering the key message effectively.",
   },
   {
     id: "6",
-    question: "What technical content should a DevTool startup prioritize?",
+    question: "How can I incorporate testimonials and success stories into my explainer video?",
     answer:
-      "Start with developer docs, onboarding guides, and real-world tutorials. These are the assets that reduce friction, explain your product clearly, and help users integrate fast.",
+      "Feature authentic customer testimonials and detailed case studies, Use storytelling to highlight real-world applications of your SaaS.",
   },
 ];
 
