@@ -443,24 +443,24 @@ const page = () => {
         <div className="whyinfra"></div>
         <div className="text-center lg:text-left">
           <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-xs sm:text-[14px] font-medium mb-2 inline-block mx-auto lg:ml-40">
-            #1 AI VIDEO PLATFORM FOR MARKETING TEAMS
+            #1 AI VIDEO PLATFORM FOR MARKETING
           </span>
         </div>
         <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center">
           <h1 className="w-3/4 max-sm:w-[95%] leading-[80px] max-sm:leading-[69px] text-left max-lg:text-center max-lg:mx-auto">
-          B2B Video Production for DevTool {" "}
+            B2B Video Production for{" "}
             <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">
-            & Infra Startups
+              Early-Stage Startups
             </span>
           </h1>
         </div>
 
         <div className="text-white quicksand-semibold lg:ml-40">
           <p className="w-3/4 max-sm:w-[90%] text-left max-lg:text-center max-lg:mx-auto">
-          From AWS walkthroughs to RAG pipelines, we make videos that your team and your users actually want to watch.
-Used at KubeCon, inside docs, and across landing pages to drive signups, adoption, and pipeline.
-
-
+            Your extended Developer Relations team to initiate conversations,
+            increase user sign ups, and accelerate pipeline faster than ever
+            before with developer focused video, scripted and created by
+            developers
           </p>
         </div>
 
@@ -754,5 +754,4 @@ Used at KubeCon, inside docs, and across landing pages to drive signups, adoptio
     </div>
   );
 };
-
 export default page;
