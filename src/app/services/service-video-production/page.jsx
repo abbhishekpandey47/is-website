@@ -27,6 +27,10 @@ import Services from "./services.jsx";
 import ScrutGettingStarted from "./step.jsx";
 import TrustedBySection from "./TrustedBySection.jsx";
 import YouTubeCarousel from "./videoSection.jsx";
+import BookDemo from "./bookDemo.jsx";
+import FAQSection from "./FAQ.jsx";
+import DarkGlass from "./caseStudy.jsx";
+import TestimonialSlider from "./testimonials.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -439,24 +443,22 @@ const page = () => {
         <div className="whyinfra"></div>
         <div className="text-center lg:text-left">
           <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-xs sm:text-[14px] font-medium mb-2 inline-block mx-auto lg:ml-40">
-            #1 AI VIDEO PLATFORM FOR MARKETING
+          #1 AI VIDEO PLATFORM FOR MARKETING TEAMS
           </span>
         </div>
         <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center">
           <h1 className="w-3/4 max-sm:w-[95%] leading-[80px] max-sm:leading-[69px] text-left max-lg:text-center max-lg:mx-auto">
-            B2B Video Production for{" "}
+          B2B Video Production for DevTool{" "}
             <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">
-              Early-Stage Startups
+            & Infra Startups
             </span>
           </h1>
         </div>
 
         <div className="text-white quicksand-semibold lg:ml-40">
           <p className="w-3/4 max-sm:w-[90%] text-left max-lg:text-center max-lg:mx-auto">
-            Your extended Developer Relations team to initiate conversations,
-            increase user sign ups, and accelerate pipeline faster than ever
-            before with developer focused video, scripted and created by
-            developers
+          From AWS walkthroughs to RAG pipelines, we make videos that your team and your users actually want to watch.
+          Used at KubeCon, inside docs, and across landing pages to drive signups, adoption, and pipeline.
           </p>
         </div>
 
@@ -482,11 +484,11 @@ const page = () => {
           </Link>
         </div>
 
-        {/* <div>
+        <div>
           <TrustedBySection />
-        </div> */}
+        </div>
       </div>
-      {/* Why Choose Us */}
+
       <div className="flex flex-col gap-10 mt-24 mb-16"
         style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
@@ -500,12 +502,11 @@ const page = () => {
       </div>
       <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-4"></div>
 
-      {/* //Services */}
       <div>
         <Services />
       </div>
 
-      {/* <div className="flex flex-col gap-10 mt-24 mb-16"
+      <div className="flex flex-col gap-10 mt-8 mb-16"
         style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
         }}
@@ -516,11 +517,31 @@ const page = () => {
         < ScrutGettingStarted />
       </div>
 
-      <div>
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
         < YouTubeCarousel />
-      </div> */}
+      </div>
 
       <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
+        < DarkGlass />
+      </div>
+
+  
+
+      {/* <div className="flex flex-col gap-10 mt-24 mb-16"
         style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
         }}
@@ -542,8 +563,8 @@ const page = () => {
           />
         </div>
       </div>
-      </div>
-      <div className="flex justify-center w-full flex-col items-center">
+      </div> */}
+      {/* <div className="flex justify-center w-full flex-col items-center">
         <div className="max-w-[1450px] mx-auto flex justify-center flex-col items-center gap-5 text-center">
           <div className="divider-line divider-top max-lg:hidden" />
           <div className="divider-line divider-left max-lg:hidden" />
@@ -560,7 +581,7 @@ const page = () => {
           </div>
           <div className="pt-5" />
           <MarqueeDemo />
-        </div>
+        </div> */}
 
         {/* <div className="max-w-[1450px] mx-auto flex justify-center flex-col items-center gap-5 text-center">
           <div className="divider-line divider-left max-lg:hidden" />
@@ -570,9 +591,9 @@ const page = () => {
             subHeading=""
             serviceArr={serviceArrHowWorks2}
           />
-        </div> */}
-      </div>
-      <div className="relative bg-[url('https://cdn.prod.website-files.com/62fe4c0cf9e612b304ecd08b/662837ec30851f0543c18f14_Grid3.svg')]  top-10">
+        </div> 
+      </div> */}
+      {/* <div className="relative bg-[url('https://cdn.prod.website-files.com/62fe4c0cf9e612b304ecd08b/662837ec30851f0543c18f14_Grid3.svg')]  top-10">
         <div className="flex justify-center w-full pt-32 flex-col gap-10">
           <div>
             <h1 className="text-center text-white text-7xl quicksand-bold max-sm:text-[3.5rem]">
@@ -593,8 +614,8 @@ const page = () => {
             </p>
           </div>
         </div>
-      </div>
-      <div className="w-full flex justify-center pt-20 max-md:pt-28 text-white">
+      </div> */}
+      {/* <div className="w-full flex justify-center pt-20 max-md:pt-28 text-white">
         <label className="input h-[3.5rem] input-bordered flex items-center gap-2 w-1/3 bg-transparent max-sm:w-[80%] border-white border-2 blogLabelSearchClass">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -615,11 +636,12 @@ const page = () => {
             value={searchData}
             onChange={handleInputChange}
           />
-        </label>
+        </label> */}
 
         {/* <input type="text" placeholder="Search..." className="input input-bordered w-1/3 " /> */}
-      </div>
-      <div className="w-full flex justify-center pt-20 pb-10 text-white">
+      {/* </div> */}
+
+      {/* <div className="w-full flex justify-center pt-20 pb-10 text-white">
         <div className="p-2 py-1 border-[#fff] border-2 rounded-full max-sm:w-[90%]">
           <TabDiv activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
@@ -683,10 +705,51 @@ const page = () => {
             )}
           </PaginationContent>
         </Pagination>
+      </div> */}
+
+      <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+      < FAQSection />
       </div>
+
+
+      <div
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
+
+
+
+      < TestimonialSlider />
+      </div>
+
+      
+      {/* <div className="flex flex-col gap-10 mt-24 mb-16"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+        
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
+
       <ReadyToStart />
+      </div> */}
+
+      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-12 mb-12"></div>
+      <div className="w-full flex justify-center items-center">
+        <BookDemo />
+      </div>
     </div>
   );
 };
-
 export default page;

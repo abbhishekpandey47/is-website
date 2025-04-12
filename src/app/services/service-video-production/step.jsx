@@ -1,27 +1,26 @@
 import { useState, useEffect } from 'react';
 
 export default function ScrutGettingStarted() {
-  // Content for the 4 steps
   const steps = [
     {
       icon: "computer",
       title: "STEP 1",
-      heading: "Plug Scrut into your tech stack with easy integrations",
+      heading: "Send us your docs, SDK guides, or access to the product",
     },
     {
       icon: "document",
       title: "STEP 2",
-      heading: "Lean back as Scrut experts drive gap assessment and pen-testing",
+      heading: "We script and storyboard your onboarding journey",
     },
     {
       icon: "tools",
       title: "STEP 3",
-      heading: "Quickly address gaps and deploy controls with our content libraries",
+      heading: "We animate, narrate, and finalize your video using a professional studio setup with high-quality camera recording, motion graphics, and voiceover.",
     },
     {
       icon: "book",
       title: "STEP 4",
-      heading: "Enjoy continuous control monitoring and 24/7 audit readiness",
+      heading: "Embed in your docs, DevPortal, or product tours",
     },
   ];
 
@@ -89,12 +88,10 @@ export default function ScrutGettingStarted() {
             backdropFilter: "blur(4px)",
           }}
         >
-          {/* Icon */}
           <div className="bg-[#2d3142] rounded-full p-3 w-12 h-12 flex items-center justify-center mb-4">
             {renderIcon(icon)}
           </div>
 
-          {/* Title Button */}
           <div className="bg-[#6370c8] text-white font-bold py-2 px-6 rounded-full mb-4">
             {title}
           </div>
@@ -110,27 +107,37 @@ export default function ScrutGettingStarted() {
 
   return (
     <div 
-      className="pt-16 px-8"
+      className="pt-12 px-8"
       style={{
         background: "radial-gradient(circle at center, #1f2130 0%, #0e0e0e 70%)",
       }}
+
     >
+      
       <div className="max-w-7xl mx-auto mb-12 text-center">
         <h2 className="text-4xl font-bold text-white mb-2">
-          Getting started with Scrut is easy
+          Getting started with Infrasity is easy
         </h2>
       </div>
       
-      <div className="flex flex-wrap justify-center max-w-7xl mx-auto">
-        {steps.map((step, index) => (
-          <GlassyBox
-            key={index}
-            icon={step.icon}
-            title={step.title}
-            heading={step.heading}
-          />
-        ))}
-      </div>
+
+      <section className="lg:relative">
+  <div className="absolute top-0 left-0 mt-28 w-full h-px z-10 shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5" />
+</section>
+
+<section className="relative z-20">
+  <div className="flex flex-wrap justify-center max-w-7xl mx-auto">
+    {steps.map((step, index) => (
+      <GlassyBox
+        key={index}
+        icon={step.icon}
+        title={step.title}
+        heading={step.heading}
+      />
+    ))}
+  </div>
+</section>
+
     </div>
   );
 }
