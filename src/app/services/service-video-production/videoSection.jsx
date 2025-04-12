@@ -9,8 +9,7 @@ export default function TabbedYouTubeCarousel() {
   
   const videoCollections = {
     allCategories: [
-      "XmUB8JXa4hI",
-      "Uf6cfVWt0-0",
+      "_TrEJAJPp0M",
       "erczPxh8iGc",
       "xPyKqcdt3TY",
       "GTMEKQIM84I",
