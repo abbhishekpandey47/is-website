@@ -18,11 +18,7 @@ export default function TabbedYouTubeCarousel() {
       "Yfv2iTyWGd0",
       "R7pkdg6wcAY",
     ],
-    Editorials: [
-      "XmUB8JXa4hI",
-      "Uf6cfVWt0-0",
-      "erczPxh8iGc",
-    ],
+
     Podcasts: [
       "xPyKqcdt3TY",
       "GTMEKQIM84I",
@@ -33,7 +29,7 @@ export default function TabbedYouTubeCarousel() {
     Features: [
       "_TrEJAJPp0M",
     ],
-    Explanations: [
+    ExplainerVideo: [
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20ECS.mp4",
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20RDS%20.mp4",
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20VPC.mp4",
@@ -70,10 +66,9 @@ export default function TabbedYouTubeCarousel() {
 
   const tabs = [
     { id: "allCategories", label: "All" },
-    { id: "Editorials", label: "Editorials" },
     { id: "Podcasts", label: "Podcasts" },
-    { id: "Explanations", label: "Explanations" },
     { id: "Features", label: "Features" },
+    { id: "ExplainerVideo", label: "Explainer Video" },
   ];
 
   return (
