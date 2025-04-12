@@ -543,7 +543,7 @@ const page = () => {
 
   
 
-      <div className="flex flex-col gap-10 mt-24 mb-16"
+      {/* <div className="flex flex-col gap-10 mt-24 mb-16"
         style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
         }}
@@ -565,7 +565,7 @@ const page = () => {
           />
         </div>
       </div>
-      </div>
+      </div> */}
       {/* <div className="flex justify-center w-full flex-col items-center">
         <div className="max-w-[1450px] mx-auto flex justify-center flex-col items-center gap-5 text-center">
           <div className="divider-line divider-top max-lg:hidden" />
@@ -595,7 +595,7 @@ const page = () => {
           />
         </div> 
       </div> */}
-      <div className="relative bg-[url('https://cdn.prod.website-files.com/62fe4c0cf9e612b304ecd08b/662837ec30851f0543c18f14_Grid3.svg')]  top-10">
+      {/* <div className="relative bg-[url('https://cdn.prod.website-files.com/62fe4c0cf9e612b304ecd08b/662837ec30851f0543c18f14_Grid3.svg')]  top-10">
         <div className="flex justify-center w-full pt-32 flex-col gap-10">
           <div>
             <h1 className="text-center text-white text-7xl quicksand-bold max-sm:text-[3.5rem]">
@@ -616,8 +616,8 @@ const page = () => {
             </p>
           </div>
         </div>
-      </div>
-      <div className="w-full flex justify-center pt-20 max-md:pt-28 text-white">
+      </div> */}
+      {/* <div className="w-full flex justify-center pt-20 max-md:pt-28 text-white">
         <label className="input h-[3.5rem] input-bordered flex items-center gap-2 w-1/3 bg-transparent max-sm:w-[80%] border-white border-2 blogLabelSearchClass">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -638,11 +638,12 @@ const page = () => {
             value={searchData}
             onChange={handleInputChange}
           />
-        </label>
+        </label> */}
 
         {/* <input type="text" placeholder="Search..." className="input input-bordered w-1/3 " /> */}
-      </div>
-      <div className="w-full flex justify-center pt-20 pb-10 text-white">
+      {/* </div> */}
+
+      {/* <div className="w-full flex justify-center pt-20 pb-10 text-white">
         <div className="p-2 py-1 border-[#fff] border-2 rounded-full max-sm:w-[90%]">
           <TabDiv activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
@@ -706,7 +707,7 @@ const page = () => {
             )}
           </PaginationContent>
         </Pagination>
-      </div>
+      </div> */}
 
       <div className="flex flex-col gap-10 mt-24 mb-16"
         style={{
@@ -718,7 +719,8 @@ const page = () => {
       < FAQSection />
       </div>
 
-      <div className="flex flex-col gap-10 mt-24 mb-16"
+
+      <div
         style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
         }}
@@ -727,11 +729,13 @@ const page = () => {
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
 
 
-        < TestimonialSlider />
+
+
+      < TestimonialSlider />
       </div>
 
       
-      <div className="flex flex-col gap-10 mt-24 mb-16"
+      {/* <div className="flex flex-col gap-10 mt-24 mb-16"
         style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
         }}
@@ -741,9 +745,9 @@ const page = () => {
 
 
       <ReadyToStart />
-      </div>
+      </div> */}
 
-      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-20 mb-12"></div>
+      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-12 mb-12"></div>
       <div className="w-full flex justify-center items-center">
         <BookDemo />
       </div>
