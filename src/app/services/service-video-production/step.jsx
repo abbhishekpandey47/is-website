@@ -5,22 +5,22 @@ export default function ScrutGettingStarted() {
     {
       icon: "computer",
       title: "STEP 1",
-      heading: "Plug Scrut into your tech stack with easy integrations",
+      heading: "Send us your docs, SDK guides, or access to the product",
     },
     {
       icon: "document",
       title: "STEP 2",
-      heading: "Lean back as Scrut experts drive gap assessment and pen-testing",
+      heading: "We script and storyboard your onboarding journey",
     },
     {
       icon: "tools",
       title: "STEP 3",
-      heading: "Quickly address gaps and deploy controls with our content libraries",
+      heading: "We animate, narrate, and finalize your video using a professional studio setup with high-quality camera recording, motion graphics, and voiceover.",
     },
     {
       icon: "book",
       title: "STEP 4",
-      heading: "Enjoy continuous control monitoring and 24/7 audit readiness",
+      heading: "Embed in your docs, DevPortal, or product tours",
     },
   ];
 
@@ -116,7 +116,7 @@ export default function ScrutGettingStarted() {
       
       <div className="max-w-7xl mx-auto mb-12 text-center">
         <h2 className="text-4xl font-bold text-white mb-2">
-          Getting started with Scrut is easy
+          Getting started with Infrasity is easy
         </h2>
       </div>
       
