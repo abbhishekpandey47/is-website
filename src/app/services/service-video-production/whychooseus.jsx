@@ -3,21 +3,21 @@ export default function SaasGlassyBoxes() {
   const firstRow = [
     {
       icon: "icon1",
-      title: "Get a SaaS-specific expert team",
+      title: "Work with engineers who actually understand your product",
       description:
-        "Unlike traditional agencies that produce videos for all kinds of industries, we only work with SaaS companies. There's no one-size-fits-all approach here.",
+        "We’re not translators. Our team includes infra and DevOps folks who’ve worked with CI/CD tools, IAM, and cloud stacks — so the content is accurate from day one..",
     },
     {
       icon: "icon2",
-      title: "Launch new campaigns or refresh old ads",
+      title: "Launch features and explain use cases — without losing technical depth",
       description:
-        "Emotionally engage and convert your audience with eye-catching videos and GIFs, or refresh your campaigns with improved video ads.",
+        "Whether it’s Kubernetes provisioning or SSO setup, we turn technical workflows into clean, user-friendly stories — with the accuracy your engineers expect.",
     },
     {
       icon: "icon3",
-      title: "Video testing and experimentation",
+      title: "Run messaging experiments with technical confidence",
       description:
-        "Find out which video ad, messaging, product, or campaigns resonate the most with your audience by following a proven framework for A/B testing and experimentation.",
+        "A/B test different product positions, hooks, or CTAs — knowing that every version is grounded in correct, production-ready terminology..",
     },
   ];
 
@@ -25,15 +25,15 @@ export default function SaasGlassyBoxes() {
   const secondRow = [
     {
       icon: "icon4",
-      title: "Manage everything in one place",
+      title: "End-to-end production by developers, not video editors",
       description:
-        "Get everything taken care of — from script and storyboarding to talent sourcing and production. We also look after music sourcing and licensing for you.",
+        "From the first draft to final animation, every frame is created by someone who understands the infrastructure behind your product. Minimal back-and-forth corrections..",
     },
     {
       icon: "icon5",
-      title: "Reduce efforts for your in-house team",
+      title: "Save hours of engineering review time",
       description:
-        "Produce videos with our professional motion graphics designer, senior copywriter, and creative director to help your internal team save time and prioritize what matters most.",
+        "Your team’s already busy building. We keep them out of content loops by getting the tech right upfront — reducing internal review cycles to near-zero..",
     },
   ];
 
@@ -91,9 +91,9 @@ export default function SaasGlassyBoxes() {
     <div className="max-w-[1566px] mx-auto overflow-hidden">
       <div className="text-center mb-8">
         <p className="quicksand-bold text-3xl md:text-4xl text-white mb-2">
-          We drive growth for your <br /> B2B SaaS {"  "}
+        Your Go-To Video Partner for  <br /> {"  "}
           <span className="bg-gradient-to-r from-[#4a6bcd] via-[#6370c8] to-[#5566d1] bg-clip-text animate-gradient text-transparent">
-            with video ads
+          Infra, DevTools, and AI Products
           </span>
         </p>
       </div>

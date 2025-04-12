@@ -4,45 +4,44 @@ export default function Services() {
     {
       title: "Social video ads",
       description:
-        "Create and launch video ads on social media that makes your audience stop scrolling and click on your offer.",
+        "Animated explainer videos designed for social media — built to help B2B SaaS and DevTool companies simplify messaging, showcase features, and stop the scroll.",
       features: [
-        "Creative brief",
-        "Storyboarding design (Figma)",
-        "2D animation",
-        "Video workflow (Frame.io)",
-        "Music sourcing and licenses",
-        "Stock imagery/video sourcing and licenses",
+        "Creative brief with messaging tailored for LinkedIn, X, and niche platforms",
+        "Storyboard and visual design (Figma)",
+        "2D motion graphics and product-focused animation",
+        "Video workflow collaboration via Frame.io",
+        "Music sourcing and licensing",
+        "Stock footage and visual asset licensing"
       ],
     },
     {
       title: "YouTube video production",
       description:
-        "Create UGC videos, product explainers, and use-case videos for YouTube that engage your audience.",
+        "Convert your CLI guides, SDK docs, and cloud onboarding steps into short, embedded walkthroughs. These videos reduce friction, clarify setup, and speed up product adoption.",
       features: [
-        "Video ideation & creative brief",
-        "Storyboarding design (Figma)",
-        "2D animation",
-        "Access to the Creative Director overseeing production",
-        "Up to 2 revisions per round",
-        "Music sourcing and licenses",
-        "Stock imagery/video sourcing and licenses",
-        "Voiceover script, and production*",
-        "Voiceover talent*",
-        "UGC talent*",
+        "Turn written docs into embedded product walkthroughs (CLI, SDK, integrations)",
+        "Perfect for GCP, AWS, Azure onboarding or self-hosting instructions",
+        "Screencast recordings enhanced with overlays and animation",
+        "Storyboarding and design (Figma)",
+        "Voiceover scripting and talent*",
+        "Optional user-recorded walkthrough integration",
+        "Stock imagery, music, and licensing",
+        "Creative Director oversight for visual consistency",
+        "Up to 2 rounds of revision"
       ],
     },
     {
-      title: "End-to-end YouTube management",
+      title: "Conference & Launch Videos",
       description:
-        "Launch, test, and experiment with ad campaigns on YouTube. The result? More opportunities, customers, and revenue.",
+        "Create high-impact videos for KubeCon, product launches, and technical events — tailored for engineering audiences.",
       features: [
-        'Everything included in "YouTube video production"OR ads provided by your in-house team',
-        "Campaigns managed from start to finish",
-        "Video ads performance testing",
-        "Reporting dashboard",
-        "Dedicated Slack channel",
-        "Weekly reports on Slack",
-        "2x calls per month",
+        "Developer-recorded workflows converted into fast-paced, engaging animations",
+        "Storyboarding and visual design (Figma)",
+        "2D animation and motion graphics",
+        "Voiceover production with technical accuracy",
+        "Integration of user-generated content (UGC) if needed",
+        "Music and stock asset licensing",
+        "Up to 2 rounds of revisions"
       ],
     },
   ];
@@ -111,9 +110,9 @@ export default function Services() {
       >
         <div className="text-center mb-12">
           <p className="quicksand-bold text-3xl md:text-5xl lg:text-6xl text-white mb-2">
-            Create videos that drive qualified <br className="md:hidden" />
+          Pitch Your Product Without <br className="md:hidden" />
             <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">
-              brand awareness and SQLs
+            Losing the Plot (With Video)
             </span>
           </p>
         </div>
