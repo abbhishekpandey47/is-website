@@ -12,7 +12,7 @@ export default function SalesHero() {
           AI-Powered Automation
         </h1>
         <div>
-        <p className="text-sm text-gray-300">Seamlessly update your CRM, optimize sales opportunities, and automate follow-ups—all</p>
+        <p className="text-[16px] text-gray-300">Seamlessly update your CRM, optimize sales opportunities, and automate follow-ups—all</p>
 
         </div>
       </div>
