@@ -24,7 +24,7 @@
     "clsx": "^2.1.1",
     "crisp-sdk-web": "^1.0.25",
     "daisyui": "^4.12.10",
-    "framer-motion": "^11.11.8",
+    "framer-motion": "^11.18.2",
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.5",
     "lucide-react": "^0.483.0",
