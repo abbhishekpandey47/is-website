@@ -1,4 +1,4 @@
-export default function CRMAutomationPage() {
+const CRMAutomationPage = () => {
   return (
     <div className="w-full bg-gray-900 p-4 flex items-center py-24 px-16 justify-center overflow-x-hidden">
       <div 
@@ -95,3 +95,7 @@ export default function CRMAutomationPage() {
     </div>
   );
 }
+
+
+
+export default CRMAutomationPage;

@@ -25,7 +25,6 @@ import FAQSection from "./FAQ";
 import TestimonialSlider from "./testimonials";
 import BookDemo from "./bookDemo";
 import CalendlyButton from "./cal";
-import CRMAutomationPage from "./pages/how-to-guides";
 
 const contentStyle = {
   height: "160px",
@@ -462,9 +461,6 @@ const page = () => {
         <BookDemo />
       </div>
 
-      <div>
-        < CRMAutomationPage />
-      </div>
     </div>
     </div>
   );
