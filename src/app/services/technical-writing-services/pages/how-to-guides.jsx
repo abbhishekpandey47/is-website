@@ -1,6 +1,6 @@
 const CRMAutomationPage = () => {
   return (
-    <div className="w-full bg-gray-900 p-4 flex items-center py-24 px-16 justify-center overflow-x-hidden">
+    <div className="w-full bg-[#0d0a1a] p-4 flex items-center py-24 px-16 justify-center overflow-x-hidden">
       <div 
         className="w-full max-w-full rounded-2xl p-8 relative overflow-hidden box-border"
         style={{
