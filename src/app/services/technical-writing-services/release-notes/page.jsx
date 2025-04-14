@@ -1,6 +1,6 @@
 import BookDemo from "./bookDemo";
 import SalesHero from "./hero";
-import CRMAutomationPage from "./how-to-guides";
+import CRMAutomationPage from "./release-notes";
 
 export default function HowToGuidesPage() {
     return <div>
