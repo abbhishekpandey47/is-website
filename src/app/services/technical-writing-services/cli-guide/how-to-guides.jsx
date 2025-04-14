@@ -87,10 +87,10 @@ const CRMAutomationPage = () => {
           background:
             "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
         }}>
-        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-24"></div>
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-16"></div>
         <div
           key={section.id}
-          className="w-full max-w-full rounded-2xl p-8 relative overflow-hidden box-border mb-16"
+          className="w-full max-w-full rounded-2xl p-8 relative overflow-hidden box-border mb-12"
           style={{
             backgroundColor: "#141318",
             backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 80%)`,
@@ -163,7 +163,7 @@ const CRMAutomationPage = () => {
             ))}
           </div>
         </div>
-        <div className="flex justify-center mb-8"> 
+        <div className="flex justify-center mb-12"> 
         < CalendlyButton />
         </div>
         </div>
