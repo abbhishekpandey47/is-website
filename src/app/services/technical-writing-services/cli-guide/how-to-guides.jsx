@@ -1,3 +1,5 @@
+import CalendlyButton from "../cal";
+
 const CRMAutomationPage = () => {
   const crmSections = [
     {
@@ -160,6 +162,9 @@ const CRMAutomationPage = () => {
               </div>
             ))}
           </div>
+        </div>
+        <div className="flex justify-center mb-8"> 
+        < CalendlyButton />
         </div>
         </div>
       ))}
