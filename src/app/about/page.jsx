@@ -310,7 +310,7 @@ const about = () => {
           style={{ transitionDelay: "300ms" }}
         ></div>
 
-      {/* <div>
+      <div>
         < Timeline />
       </div>
       <div
@@ -318,7 +318,7 @@ const about = () => {
             isVisible ? "opacity-100 animate-fade-in" : ""
           }`}
           style={{ transitionDelay: "300ms" }}
-        ></div> */}
+        ></div>
 
       {/* Book demo section */}
       <div className="w-full flex justify-center items-center">
