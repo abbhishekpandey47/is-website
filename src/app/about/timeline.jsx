@@ -16,29 +16,29 @@ export default function Timeline() {
 
   const timelineData = [
     {
-      date: "Q1, 2023",
-      title: "Launched out of stealth"
+      date: "Q1, 2024",
+      title: "Launched with 2 infra startups with focus on technical blogs."
     },
     {
-      date: "Q2, 2023",
-      title: "Investment from Co-Founder of GitHub"
+      date: "Q2, 2024",
+      title: "Won YC-backed clients like DevZero & Kubiya.ai, expanded into DevRel and use case guides"
     },
     {
-      date: "Q3, 2023",
-      title: "100m API Calls, 20 Integrations available"
+      date: "Q3, 2024",
+      title: "Scaled to 10+ customers, added videos, SDK demos, and SEO playbooks."
     },
     {
       date: "Q4, 2023",
-      title: "$3.6m Seed Round, 50+ Integrations available"
+      title: "Partnered with top Terraform automation startups like Env0, Terrateam, and Firefly for docs, videos, and GTM."
     },
     {
       date: "TODAY",
-      title: "100+ Integrations, 6 Categories, Customers in 3 Continents"
+      title: "Serving 25+ AI, Infra & Security startups globally with content, DevRel, and GTM support."
     }
   ];
 
   return (
-    <div className="bg-[#0d0a1a] text-gray-200 p-6 rounded-lg px-14">
+    <div className="text-gray-200 p-6 rounded-lg px-14">
       <div className="flex items-center gap-2 mb-4">
         <div className="w-6 h-6 flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M200,164a36.07,36.07,0,0,0-33.94,24H72a28,28,0,0,1,0-56h96a44,44,0,0,0,0-88H72a12,12,0,0,0,0,24h96a20,20,0,0,1,0,40H72a52,52,0,0,0,0,104h94.06A36,36,0,1,0,200,164Zm0,48a12,12,0,1,1,12-12A12,12,0,0,1,200,212Z"></path></svg>
@@ -47,7 +47,7 @@ export default function Timeline() {
       </div>
 
       <h2 className="text-4xl font-bold mb-4">Our journey so far</h2>
-      <p className="text-lg text-gray-400 mb-8">One of the fastest growing integration platforms in the world.</p>
+      <p className="text-lg text-gray-400 mb-8">From developer blogs to GTM engines for DevTools startups.</p>
 
       {isMobile ? (
         // Mobile vertical timeline
