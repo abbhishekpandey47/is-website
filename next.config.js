@@ -13,6 +13,11 @@ module.exports = {
         destination: '/blog/b2b-saas-prd',
         permanent: true,
       },
+      {
+        source: '/case-studies/top-10-technical-writing-service-companies',
+        destination: '/blog/top-10-technical-writing-service-companies',
+        permanent: true,
+      },
     ];
   },
 };

@@ -4,51 +4,31 @@ const CRMAutomationPage = () => {
   const crmSections = [
     {
       id: 1,
-      productLabel: "Release Notes",
-      title: "Updates That Makes Sense to Everyone Release Communication That Builds Trust Understandable Release Notes, Every Time",
-      subtitle: "Clear, useful, human-readable updates - not walls of changelog text. We help engineering teams ship with confidence and clarity.",
+      productLabel: "CLI Docs",
+      title: "CLI Docs That Developers Actually Use",
+      subtitle: "From install to deploy — docs that walk users through every command, config, and edge case without slowing them down.",
       videoSrc: "/video-blog-technical-services/video1.mp4",
       features: [
         {
-          title: "PRs to Clarity, Not Confusion",
-          description: "We translate pull requests into clear, user-facing updates - no dev speak, just what changed and why it matters."
+          title: "Docs That Start at the Command Line",
+          description: "We document what actually runs — with clear commands, expected output, and edge cases. No fluff."
         },
         {
-          title: "Known Issues, Upfront",
-          description: "We flag current limitations or edge cases so clients don’t waste time or overwhelm your support team."
+          title: "Written Around Real Workflows",
+          description: "Watch deals move smoothly through every stage of your pipeline—automatically, based on real interactions."
         },
         {
-          title: "Feature Launches That Land",
-          description: "We explain new features in plain language, with usage context, so users actually adopt what you ship."
+          title: "Install to Infra Automation",
+          description: "Whether it’s brew install, tool login, or tool deploy --env prod, we cover everything your users need to get started and stay productive."
         },
         {
-          title: "Scales with Your Product and Team",
-          description: "From internal betas to public releases, we maintain a consistent tone, structure, and cadence, no matter how fast you ship."
+          title: "Built for DevTools and Infra Products",
+          description: "From SDK bootstrapping to Kubernetes deployments, we specialize in CLI docs that support real engineering teams."
         }
       ]
     },
     {
       id: 2,
-      productLabel: "Release Notes",
-      title: "Consistent, Categorized, and Clear Release Notes",
-      subtitle: "From semantic versioning to breaking changes, we bring consistency and hierarchy to every release.",
-      videoSrc: "/video-blog-technical-services/video1.mp4",
-      features: [
-        {
-          title: "Version-Aware Formatting",
-          description: "Major vs minor vs patch? We highlight the impact and risk so readers don’t have to guess."
-        },
-        {
-          title: "Change-Type Tagging",
-          description: "We categorize everything, including features, bug fixes, performance, infra, and security, so that teams can scan fast."
-        },
-        {
-          title: "Breaking Change Warnings",
-          description: "Critical changes get called out with visual cues and migration steps if needed."
-        },
-        {
-          title: "Real Impact in Real Stacks",
-          description: "Good release notes reduce rollout risk, boost adoption, and make engineering more transparent across orgs."
       productLabel: "CLI Docs",
       title: "Designed for Complex Toolchains",
       subtitle: "Kubernetes, Terraform, custom SDKs — we simplify even the most layered CLI experiences",
@@ -74,26 +54,6 @@ const CRMAutomationPage = () => {
     },
     {
       id: 3,
-      productLabel: "Release Notes",
-      title: "Release Notes That Speak to Everyone",
-      subtitle: "Whether you're shipping once a week or ten times a day, we help your team stay consistent and communicative.",
-      videoSrc: "/video-blog-technical-services/video1.mp4",
-      features: [
-        {
-          title: "User-Focused Summaries",
-          description: "We turn technical changes into plain-language updates that show users what changed, how it affects them, and what they can do next."
-        },
-        {
-          title: "No More Changelog Dumps",
-          description: "We turn raw commit messages and PR titles into clean, categorized release notes people can actually read."
-        },
-        {
-          title: "Cross-Team Friendly",
-          description: "Whether you’re building for engineers, product managers, or support, we shape notes to the right audience."
-        },
-        {
-          title: "Built Into Your Workflow",
-          description: "Notes delivered when and where you need them - GitHub releases, docs, Notion, or internal portals."
       productLabel: "CLI Docs",
       title: "Scalable Docs for Growing Teams",
       subtitle: "From onboarding new hires to supporting power users — your CLI docs should evolve with your team.",

@@ -41,7 +41,7 @@ const blogTypes  = [
   },
   {
     id: 4,
-    title: "API reference documentation",
+    title: "API/SDK documentation",
     description: "REST API and SDK documentation with language-specific examples in Python, Go, and TypeScript—built to help developers authenticate, trigger actions, and query data with ease.",
     icon: <Briefcase className="h-7 w-7 text-[#5F64FF]" />
   },
