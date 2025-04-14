@@ -66,6 +66,8 @@ With the rise in digital trends, the marketing aspect has also become more digit
 
 They create a calendar for content and social media marketing, or rather, a **[content playbook](https://www.infrasity.com/blog/content-marketing-playbook)** for better communication and collaboration with teams. These things specify the relevant tasks and topics that need to be covered to meet the desired objectives and match the buyers’ interests.
 
+![fractional cmo - digital marketing](/PostImages/fractional-cmo/f3.png) 
+
 Fractional CMOs also set priorities for the SEO aspect. It plays an important role in increasing the reach to potential customers, along with high-quality content. Talking about the high-quality content, especially technical one, considering your niche, you might try your hand at partnering with a **[technical content writing agency](https://www.infrasity.com/contact)** that will help you produce content that will convert.
 
 Additionally, part time CMOs ensure that the SaaS company is reaching out to their potential and existing customers through another communication channel, email. They ensure that the email marketing campaign includes welcome emails, nurture sequences, onboarding emails, and newsletters.
@@ -90,13 +92,7 @@ In short, a part time Fractional CMO helps you develop a crisis management plan 
 
 Even though the Fractional CMO and full-time CMO have similar roles and responsibilities, they vary in different aspects. Here’s a quick differentiation between the two:
 
-| Aspect       | Full-time CMO                                | Fractional CMO                                   |
-|--------------|----------------------------------------------|--------------------------------------------------|
-| Availability | Full-time employee (40+ hours/week)          | Part-time, flexible hours (10+ hours/week)       |
-| Commitment   | Long-term (ideal for enterprises)            | Short to mid-term (ideal for startups)           |
-| Experience   | Limited experience in 1–2 companies          | Diverse expertise across multiple SaaS companies |
-| Onboarding   | Typically takes 1–2 months                   | Quick, within a week                             |
-| Cost         | Fixed salary + benefits ($25,000–$42,000/mo) | Project or retainer-based ($5,000–$20,000/mo)    |
+![fractional cmo - kpi](/PostImages/fractional-cmo/f4.png) 
 
 The Fractional CMO can be a great fit for the B2B SaaS Startups compared to a full-time CMO, as they bring a **diverse set of experience** to the table. You get to hire a chief marketing officer who has worked with multiple SaaS companies and understands the intricacies of the industry. Unlike the time-consuming process of hiring a full-time CMO, it typically takes a few days to hire a Fractional CMO, getting the work in action as quickly as possible.
 
