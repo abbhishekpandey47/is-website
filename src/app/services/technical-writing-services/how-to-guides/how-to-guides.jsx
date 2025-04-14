@@ -2,26 +2,26 @@ const CRMAutomationPage = () => {
   const crmSections = [
     {
       id: 1,
-      productLabel: "Product",
-      title: "Effortless CRM Automation",
-      subtitle: "Your CRM, Always Up-to-Date — Without\nLifting a Finger",
+      productLabel: "CLI Docs",
+      title: "CLI Docs That Developers Actually Use",
+      subtitle: "From install to deploy — docs that walk users through every command, config, and edge case without slowing them down.",
       videoSrc: "/video-blog-technical-services/video1.mp4",
       features: [
         {
-          title: "Real-Time Updates",
-          description: "Every email, call, or message automatically updates your CRM fields—no manual input, no missed details."
+          title: "Docs That Start at the Command Line",
+          description: "We document what actually runs — with clear commands, expected output, and edge cases. No fluff."
         },
         {
-          title: "Deal Movement Made Easy",
+          title: "Written Around Real Workflows",
           description: "Watch deals move smoothly through every stage of your pipeline—automatically, based on real interactions."
         },
         {
-          title: "Task Creation & Assignment",
-          description: "Access personalized assistance whenever you need it from our expert support team, helping you make the most of your benefits."
+          title: "Install to Infra Automation",
+          description: "Whether it’s brew install, tool login, or tool deploy --env prod, we cover everything your users need to get started and stay productive."
         },
         {
-          title: "Why It Matters",
-          description: "Sales teams forget. Details slip. We don't. Our AI captures and updates everything in real-time, keeping your CRM richer, more accurate, and always ready for the next move."
+          title: "Built for DevTools and Infra Products",
+          description: "From SDK bootstrapping to Kubernetes deployments, we specialize in CLI docs that support real engineering teams."
         }
       ]
     },
