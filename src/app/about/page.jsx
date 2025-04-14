@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import BookDemo from "../blog/[slug]/bookDemo";
+import Timeline from "./timeline";
 
 const about = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -302,6 +303,23 @@ const about = () => {
           </div>
         </div>
       </section>
+      <div
+          className={`w-full h-px bg-white/30 mb-16 opacity-0 ${
+            isVisible ? "opacity-100 animate-fade-in" : ""
+          }`}
+          style={{ transitionDelay: "300ms" }}
+        ></div>
+
+      {/* <div>
+        < Timeline />
+      </div>
+      <div
+          className={`w-full h-px bg-white/30 mb-16 opacity-0 ${
+            isVisible ? "opacity-100 animate-fade-in" : ""
+          }`}
+          style={{ transitionDelay: "300ms" }}
+        ></div> */}
+
       {/* Book demo section */}
       <div className="w-full flex justify-center items-center">
         <BookDemo />

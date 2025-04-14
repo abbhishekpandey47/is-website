@@ -78,8 +78,14 @@ const CRMAutomationPage = () => {
   ];
 
   return (
-    <div className="w-full bg-[#0d0a1a] p-4 flex flex-col items-center py-24 px-8 lg:px-16 justify-center overflow-x-hidden">
+    <div className="w-full bg-[#0d0a1a] p-4 flex flex-col items-center py-14 px-8 lg:px-16 justify-center overflow-x-hidden">
       {crmSections.map((section) => (
+
+        <div          style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}>
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-24"></div>
         <div
           key={section.id}
           className="w-full max-w-full rounded-2xl p-8 relative overflow-hidden box-border mb-16"
@@ -154,6 +160,7 @@ const CRMAutomationPage = () => {
               </div>
             ))}
           </div>
+        </div>
         </div>
       ))}
     </div>
