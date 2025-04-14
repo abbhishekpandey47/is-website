@@ -27,51 +27,51 @@ const CRMAutomationPage = () => {
     },
     {
       id: 2,
-      productLabel: "Product",
-      title: "Revive & Optimize Sales Opportunities",
-      subtitle: "Never Let a Deal Go Cold Again",
+      productLabel: "CLI Docs",
+      title: "Designed for Complex Toolchains",
+      subtitle: "Kubernetes, Terraform, custom SDKs — we simplify even the most layered CLI experiences",
       videoSrc: "/video-blog-technical-services/video1.mp4",
       features: [
         {
-          title: "Daily Deal Monitoring",
-          description: "Our AI agents scan your CRM daily to spot deals going stale or slipping through the cracks."
+          title: "Infra-Focused Documentation",
+          description: "We explain cloud-native, infra-heavy, or multi-step workflows clearly, with visuals and flowcharts where needed."
         },
         {
-          title: "360° Communication Review",
-          description: "We analyze past emails, Zoom calls, phone calls, and Slack messages to pinpoint exactly what needs to be followed up on."
+          title: "Environment-Aware Commands",
+          description: "Dev, staging, prod — we document config, flags, and behavior differences across all your environments."
         },
         {
-          title: "Automated Follow-Ups",
-          description: "The AI crafts personalized follow-ups and sends them out automatically—no manual effort needed."
+          title: "Reusable Command Blocks",
+          description: "Guides are broken into modular steps, each runnable on its own or as part of a pipeline."
         },
         {
-          title: "Why It Matters",
-          description: "In fast-paced, high-volume sales, deals can easily get forgotten or go cold. Our AI keeps your pipeline warm by surfacing mid-funnel opportunities and taking action—saving your team time and making sure no deal is left behind."
+          title: "Real Impact in Real Stacks",
+          description: "Most docs break when real infra shows up. We write for the tools your engineers actually ship with."
         }
       ]
     },
     {
       id: 3,
-      productLabel: "Product",
-      title: "AI-Powered Follow-Up Emails",
-      subtitle: "Personalized. Instant. Effortless.",
+      productLabel: "CLI Docs",
+      title: "Scalable Docs for Growing Teams",
+      subtitle: "From onboarding new hires to supporting power users — your CLI docs should evolve with your team.",
       videoSrc: "/video-blog-technical-services/video1.mp4",
       features: [
         {
-          title: "Tailored Follow-Ups in Minutes",
-          description: "Get highly personalized follow-up emails drafted automatically within 5 minutes after every sales call—directly in your email drafts."
+          title: "Zero-to-Deploy Onboarding",
+          description: "New hires get productive fast with setup scripts and first-run instructions that just work."
         },
         {
-          title: "Context-Rich Messaging",
-          description: "Our AI pulls details from the sales call, past messages, and CRM data to craft messages that reflect exactly what was discussed."
+          title: "Command Reference with Flag-Level Clarity",
+          description: "We break down your CLI’s help output — every command, flag, and option — into a readable, structured format that developers can actually skim, search, and understand."
         },
         {
-          title: "Smart Email Replies",
-          description: "AI also handles responses to incoming emails, ensuring replies are always relevant and informed by the full conversation history."
+          title: "Fewer Support Pings",
+          description: "With clear, searchable docs, your devrel/support teams won’t have to answer the same questions twice."
         },
         {
-          title: "Why it Matters",
-          description: "No more generic follow-ups. No more delays. Your customers feel heard, your team saves time, and personalized, thoughtful communication happens instantly—without extra effort from your reps."
+          title: "Built to Grow With You",
+          description: "As your team grows, docs are your first line of communication. We make them count."
         }
       ]
     }
@@ -80,7 +80,7 @@ const CRMAutomationPage = () => {
   return (
     <div className="w-full bg-[#0d0a1a] p-4 flex flex-col items-center py-24 px-8 lg:px-16 justify-center overflow-x-hidden">
       {crmSections.map((section) => (
-        <div 
+        <div
           key={section.id}
           className="w-full max-w-full rounded-2xl p-8 relative overflow-hidden box-border mb-16"
           style={{
@@ -132,9 +132,9 @@ const CRMAutomationPage = () => {
                       <video
                         className="absolute top-0 left-0 w-full h-full rounded-md object-cover"
                         src={section.videoSrc}
-                        controls 
-                        autoPlay 
-                        muted 
+                        controls
+                        autoPlay
+                        muted
                         loop
                       />
                     </div>
@@ -145,7 +145,7 @@ const CRMAutomationPage = () => {
           </div>
 
           <div className="border-t border-gray-700 mb-8"></div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {section.features.map((feature, index) => (
               <div key={index}>
