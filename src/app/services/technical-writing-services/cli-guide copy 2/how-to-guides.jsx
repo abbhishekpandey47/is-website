@@ -121,6 +121,7 @@ const CRMAutomationPage = () => {
                     <span className="ml-2 text-gray-300 font-medium">{section.productLabel}</span>
                   </div>
                 </div>
+
                 <div className="md:mb-8 mx-3 md:mx-6">
                   <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-white mb-1">{section.title}</h2>
                 </div>
@@ -131,6 +132,7 @@ const CRMAutomationPage = () => {
                   </p>
                 </div>
               </div>
+
               <div className="w-full md:w-1/2 md:pl-4 md:mt-12 md:mb-0">
                 <div className="md:p-4 rounded-lg w-full lg:mb-12">
                   <div className="w-full h-48 sm:h-56 md:h-64 rounded-md overflow-hidden">
@@ -160,7 +162,7 @@ const CRMAutomationPage = () => {
               </div>
             ))}
           </div>
-          <div className="flex justify-center mb-10 mt-10"> 
+          <div className="flex justify-center mb-10 mt-8"> 
         < CalendlyButton />
         </div>
         </div>
