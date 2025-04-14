@@ -320,7 +320,6 @@ const about = () => {
           style={{ transitionDelay: "300ms" }}
         ></div>
 
-      {/* Book demo section */}
       <div className="w-full flex justify-center items-center">
         <BookDemo />
       </div>
