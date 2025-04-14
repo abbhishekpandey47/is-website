@@ -5,14 +5,14 @@ export default function SalesHero() {
     <div className="w-full py-4 bg-gradient-to-br from-[#0d0a1a] to-[#131020] text-center px-4">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-8 leading-tight">
-          Supercharge Your Sales 
+        Clear, task-based CLI docs 
           <br />
-          Process with
+          from install to infra deployment
           <br />
-          AI-Powered Automation
+          built to guide users without the guesswork.
         </h1>
         <div>
-        <p className="text-[16px] text-gray-300">Seamlessly update your CRM, optimize sales opportunities, and automate follow-ups—all</p>
+        <p className="text-[16px] text-gray-300">Command-line Documentation That Speaks Your Developer’s Language</p>
 
         </div>
       </div>
