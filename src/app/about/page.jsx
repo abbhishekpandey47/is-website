@@ -313,16 +313,14 @@ const about = () => {
         </div>
         </div>
       </section>
-  
+      <div
+          className={`w-full h-px bg-white/30 mb-16 opacity-0 ${
+            isVisible ? "opacity-100 animate-fade-in" : ""
+          }`}
+          style={{ transitionDelay: "300ms" }}
+        ></div>
 
-      <div 
-              style={{
-                background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
-              }}
-              
-            >
-              <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-      
+       <div>
         < Timeline />
       </div>
       
