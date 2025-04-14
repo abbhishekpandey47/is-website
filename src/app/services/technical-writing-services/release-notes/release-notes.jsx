@@ -4,26 +4,26 @@ const CRMAutomationPage = () => {
   const crmSections = [
     {
       id: 1,
-      productLabel: "CLI Docs",
-      title: "CLI Docs That Developers Actually Use",
-      subtitle: "From install to deploy — docs that walk users through every command, config, and edge case without slowing them down.",
+      productLabel: "Release Notes",
+      title: "Updates That Makes Sense to Everyone Release Communication That Builds Trust Understandable Release Notes, Every Time",
+      subtitle: "Clear, useful, human-readable updates - not walls of changelog text. We help engineering teams ship with confidence and clarity.",
       videoSrc: "/video-blog-technical-services/video1.mp4",
       features: [
         {
-          title: "Docs That Start at the Command Line",
-          description: "We document what actually runs — with clear commands, expected output, and edge cases. No fluff."
+          title: "PRs to Clarity, Not Confusion",
+          description: "We translate pull requests into clear, user-facing updates - no dev speak, just what changed and why it matters."
         },
         {
-          title: "Written Around Real Workflows",
-          description: "Watch deals move smoothly through every stage of your pipeline—automatically, based on real interactions."
+          title: "Known Issues, Upfront",
+          description: "We flag current limitations or edge cases so clients don’t waste time or overwhelm your support team."
         },
         {
-          title: "Install to Infra Automation",
-          description: "Whether it’s brew install, tool login, or tool deploy --env prod, we cover everything your users need to get started and stay productive."
+          title: "Feature Launches That Land",
+          description: "We explain new features in plain language, with usage context, so users actually adopt what you ship."
         },
         {
-          title: "Built for DevTools and Infra Products",
-          description: "From SDK bootstrapping to Kubernetes deployments, we specialize in CLI docs that support real engineering teams."
+          title: "Scales with Your Product and Team",
+          description: "From internal betas to public releases, we maintain a consistent tone, structure, and cadence, no matter how fast you ship."
         }
       ]
     },
@@ -80,7 +80,7 @@ const CRMAutomationPage = () => {
   ];
 
   return (
-    <div className="w-full p-4 flex flex-col items-center py-14 px-8 lg:px-16 justify-center overflow-x-hidden">
+    <div className="w-full bg-[#0d0a1a] p-4 flex flex-col items-center py-14 px-8 lg:px-16 justify-center overflow-x-hidden">
       {crmSections.map((section) => (
 
         <div          style={{
@@ -121,6 +121,7 @@ const CRMAutomationPage = () => {
                     <span className="ml-2 text-gray-300 font-medium">{section.productLabel}</span>
                   </div>
                 </div>
+
                 <div className="md:mb-8 mx-3 md:mx-6">
                   <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-white mb-1">{section.title}</h2>
                 </div>
@@ -131,6 +132,7 @@ const CRMAutomationPage = () => {
                   </p>
                 </div>
               </div>
+
               <div className="w-full md:w-1/2 md:pl-4 md:mt-12 md:mb-0">
                 <div className="md:p-4 rounded-lg w-full lg:mb-12">
                   <div className="w-full h-48 sm:h-56 md:h-64 rounded-md overflow-hidden">
