@@ -258,7 +258,6 @@ const about = () => {
           </div>
         </div>
       </section>
-      {/* why infrasity section */}
       <section className="w-full  py-10 px-6 md:px-10">
         <div
           className={`w-full h-px bg-white/30 mb-16 opacity-0 ${
