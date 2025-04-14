@@ -7,9 +7,9 @@ export default function SalesHero() {
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-8 leading-tight">
         Clear, task-based CLI docs 
           <br />
-          from install to infra deployment
+          built to guide
           <br />
-          built to guide users without the guesswork.
+          users without the guesswork.
         </h1>
         <div>
         <p className="text-[16px] text-gray-300">Command-line Documentation That Speaks Your Developer’s Language</p>
