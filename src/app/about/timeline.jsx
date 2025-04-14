@@ -52,12 +52,9 @@ export default function Timeline() {
       <p className="text-lg text-gray-400 mb-8 flex items-center justify-center">From developer blogs to GTM engines for DevTools startups.</p>
 
       {isMobile ? (
-        // Mobile vertical timeline
         <div className="relative pl-6">
-          {/* Vertical line */}
           <div className="absolute top-0 left-6 w-1 h-full bg-gray-700 transform -translate-x-1/2"></div>
           
-          {/* Timeline items */}
           {timelineData.map((item, index) => (
             <div key={index} className="mb-10 relative">
               <div className="absolute top-0 left-0 w-6 h-6 bg-gray-800 rounded-full border-2 border-[#1966ff] transform -translate-x-1/2 flex items-center justify-center">
@@ -72,21 +69,16 @@ export default function Timeline() {
           ))}
         </div>
       ) : (
-        // Desktop horizontal timeline
         <div className="relative">
-          {/* Timeline line */}
           <div className="absolute top-3 left-0 right-0 h-1 bg-gray-700 ml-4"></div>
 
-          {/* Timeline items */}
           <div className="flex justify-between relative mb-12">
             {timelineData.map((item, index) => (
               <div key={index} className="flex flex-col w-1/5">
-                {/* Timeline dot */}
                 <div className="w-6 h-6 bg-gray-800 rounded-full border-[2px] border-[#1966ff] mb-6 z-10 flex items-center justify-center self-start">
                   <div className="w-2.5 h-2.5 bg-[#1966ff] rounded-full"></div>
                 </div>
                 
-                {/* Content */}
                 <div className="text-left mr-4">
                   <p className="text-gray-400 mb-2">{item.date}</p>
                   <p className="font-semibold">{item.title}</p>
