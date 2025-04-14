@@ -16,24 +16,24 @@ export default function Timeline() {
 
   const timelineData = [
     {
-      date: "Q1, 2023",
-      title: "Launched out of stealth"
+      date: "Q1, 2024",
+      title: "Launched with 2 infra startups with focus on technical blogs."
     },
     {
-      date: "Q2, 2023",
-      title: "Investment from Co-Founder of GitHub"
+      date: "Q2, 2024",
+      title: "Won YC-backed clients like DevZero & Kubiya.ai, expanded into DevRel and use case guides"
     },
     {
-      date: "Q3, 2023",
-      title: "100m API Calls, 20 Integrations available"
+      date: "Q3, 2024",
+      title: "Scaled to 10+ customers, added videos, SDK demos, and SEO playbooks."
     },
     {
       date: "Q4, 2023",
-      title: "$3.6m Seed Round, 50+ Integrations available"
+      title: "Partnered with top Terraform automation startups like Env0, Terrateam, and Firefly for docs, videos, and GTM."
     },
     {
       date: "TODAY",
-      title: "100+ Integrations, 6 Categories, Customers in 3 Continents"
+      title: "Serving 25+ AI, Infra & Security startups globally with content, DevRel, and GTM support."
     }
   ];
 
@@ -47,7 +47,7 @@ export default function Timeline() {
       </div>
 
       <h2 className="text-4xl font-bold mb-4">Our journey so far</h2>
-      <p className="text-lg text-gray-400 mb-8">One of the fastest growing integration platforms in the world.</p>
+      <p className="text-lg text-gray-400 mb-8">From developer blogs to GTM engines for DevTools startups.</p>
 
       {isMobile ? (
         // Mobile vertical timeline
