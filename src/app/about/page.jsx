@@ -319,12 +319,9 @@ const about = () => {
           }`}
           style={{ transitionDelay: "300ms" }}
         ></div>
-
        <div>
         < Timeline />
       </div>
-      
-
       {/* Book demo section */}
       <div  style={{
           background:
