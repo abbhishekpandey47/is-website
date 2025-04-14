@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import BookDemo from "../blog/[slug]/bookDemo";
+import Timeline from "./timeline";
 
 const about = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -302,9 +303,27 @@ const about = () => {
           </div>
         </div>
       </section>
+      <div
+          className={`w-full h-px bg-white/30 mb-16 opacity-0 ${
+            isVisible ? "opacity-100 animate-fade-in" : ""
+          }`}
+          style={{ transitionDelay: "300ms" }}
+        ></div>
+
+      <div>
+        < Timeline />
+      </div>
+      
+
       {/* Book demo section */}
-      <div className="w-full flex justify-center items-center">
+      <div  style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}>
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-12"></div>
+      <div className="w-full flex justify-center items-center"> 
         <BookDemo />
+      </div>
       </div>
     </div>
   );

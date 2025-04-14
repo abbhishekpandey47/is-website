@@ -1,0 +1,101 @@
+import { useState, useEffect } from 'react';
+
+export default function Timeline() {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  const timelineData = [
+    {
+      date: "Q1, 2023",
+      title: "Launched out of stealth"
+    },
+    {
+      date: "Q2, 2023",
+      title: "Investment from Co-Founder of GitHub"
+    },
+    {
+      date: "Q3, 2023",
+      title: "100m API Calls, 20 Integrations available"
+    },
+    {
+      date: "Q4, 2023",
+      title: "$3.6m Seed Round, 50+ Integrations available"
+    },
+    {
+      date: "TODAY",
+      title: "100+ Integrations, 6 Categories, Customers in 3 Continents"
+    }
+  ];
+
+  return (
+    <div className="bg-[#0d0a1a] text-gray-200 p-6 rounded-lg px-14">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="w-6 h-6 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M200,164a36.07,36.07,0,0,0-33.94,24H72a28,28,0,0,1,0-56h96a44,44,0,0,0,0-88H72a12,12,0,0,0,0,24h96a20,20,0,0,1,0,40H72a52,52,0,0,0,0,104h94.06A36,36,0,1,0,200,164Zm0,48a12,12,0,1,1,12-12A12,12,0,0,1,200,212Z"></path></svg>
+        </div>
+        <span className="text-lg font-medium">Timeline</span>
+      </div>
+
+      <h2 className="text-4xl font-bold mb-4">Our journey so far</h2>
+      <p className="text-lg text-gray-400 mb-8">One of the fastest growing integration platforms in the world.</p>
+
+      {isMobile ? (
+        // Mobile vertical timeline
+        <div className="relative pl-6">
+          {/* Vertical line */}
+          <div className="absolute top-0 left-6 w-1 h-full bg-gray-700 transform -translate-x-1/2"></div>
+          
+          {/* Timeline items */}
+          {timelineData.map((item, index) => (
+            <div key={index} className="mb-10 relative">
+              {/* Timeline dot */}
+              <div className="absolute top-0 left-0 w-6 h-6 bg-gray-800 rounded-full border-2 border-emerald-500 transform -translate-x-1/2 flex items-center justify-center">
+                <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+              </div>
+              
+              {/* Content */}
+              <div className="ml-4">
+                <p className="text-gray-400 text-sm mb-1">{item.date}</p>
+                <p className="font-medium">{item.title}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        // Desktop horizontal timeline
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="absolute top-3 left-0 right-0 h-1 bg-gray-700 ml-4"></div>
+
+          {/* Timeline items */}
+          <div className="flex justify-between relative mb-12">
+            {timelineData.map((item, index) => (
+              <div key={index} className="flex flex-col w-1/5">
+                {/* Timeline dot */}
+                <div className="w-6 h-6 bg-gray-800 rounded-full border-[2px] border-emerald-500 mb-6 z-10 flex items-center justify-center self-start">
+                  <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full"></div>
+                </div>
+                
+                {/* Content */}
+                <div className="text-left mr-4">
+                  <p className="text-gray-400 mb-2">{item.date}</p>
+                  <p className="font-semibold">{item.title}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
