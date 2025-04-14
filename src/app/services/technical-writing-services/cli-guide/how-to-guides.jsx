@@ -162,10 +162,11 @@ const CRMAutomationPage = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div className="flex justify-center mb-12"> 
+          <div className="flex justify-center mb-10 mt-8"> 
         < CalendlyButton />
         </div>
+        </div>
+
         </div>
       ))}
     </div>

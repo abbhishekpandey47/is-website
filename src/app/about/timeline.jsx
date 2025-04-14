@@ -39,7 +39,7 @@ export default function Timeline() {
 
   return (
     <div className="bg-[#0d0a1a] text-gray-200 p-6 rounded-lg px-14">
-      <div className="bg-[#000000] border-white flex items-center gap-2 mb-4">
+      <div className="flex items-center gap-2 mb-4">
         <div className="w-6 h-6 flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M200,164a36.07,36.07,0,0,0-33.94,24H72a28,28,0,0,1,0-56h96a44,44,0,0,0,0-88H72a12,12,0,0,0,0,24h96a20,20,0,0,1,0,40H72a52,52,0,0,0,0,104h94.06A36,36,0,1,0,200,164Zm0,48a12,12,0,1,1,12-12A12,12,0,0,1,200,212Z"></path></svg>
         </div>
