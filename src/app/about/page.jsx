@@ -312,11 +312,7 @@ const about = () => {
       </section>
   
 
-      <div 
-              
-            >
-              <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-      
+<div>
         < Timeline />
       </div>
       
