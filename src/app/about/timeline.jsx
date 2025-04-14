@@ -85,7 +85,6 @@ export default function Timeline() {
                 <div className="w-6 h-6 bg-gray-800 rounded-full border-[2px] border-emerald-500 mb-6 z-10 flex items-center justify-center self-start">
                   <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full"></div>
                 </div>
-                
                 {/* Content */}
                 <div className="text-left mr-4">
                   <p className="text-gray-400 mb-2">{item.date}</p>
