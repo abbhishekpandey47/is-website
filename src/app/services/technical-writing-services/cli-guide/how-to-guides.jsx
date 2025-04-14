@@ -80,7 +80,7 @@ const CRMAutomationPage = () => {
   ];
 
   return (
-    <div className="w-full bg-[#0d0a1a] p-4 flex flex-col items-center py-14 px-8 lg:px-16 justify-center overflow-x-hidden">
+    <div className="w-full p-4 flex flex-col items-center py-14 px-8 lg:px-16 justify-center overflow-x-hidden">
       {crmSections.map((section) => (
 
         <div          style={{
