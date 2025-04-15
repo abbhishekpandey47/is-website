@@ -1,6 +1,6 @@
 "use client";
 
-const WebflowCard = ({ image, title, desc }) => {
+const CardComponent = ({ image, title, desc }) => {
   return (
     <div
       className="bg-white rounded-xl shadow-md p-6 flex flex-col justify-between min-h-[350px]"
@@ -15,4 +15,4 @@ const WebflowCard = ({ image, title, desc }) => {
   );
 };
 
-export default WebflowCard;
+export default CardComponent;

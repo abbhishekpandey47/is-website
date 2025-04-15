@@ -24,7 +24,7 @@ const projects = [
   },
 ];
 
-export default function AnimatedCardSlider() {
+export default function AnimatedCard() {
   const duplicatedProjects = [...projects, ...projects]; // duplicates for infinite scroll
 
   return (
