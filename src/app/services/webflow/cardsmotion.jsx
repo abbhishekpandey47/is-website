@@ -95,7 +95,7 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
   }, [isHovering, cardsPosition]);
 
   return (
-    <div className="mt-20 px-4 py-16 cursor-pointer">
+    <div className="mt-10 px-4 py-16 cursor-pointer">
       <div
         className="text-3xl font-bold mb-6 text-white text-center"
         dangerouslySetInnerHTML={{ __html: mainHeading }}
