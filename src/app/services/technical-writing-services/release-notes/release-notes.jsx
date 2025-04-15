@@ -54,31 +54,6 @@ const CRMAutomationPage = () => {
     },
     {
       id: 3,
-      productLabel: "CLI Docs",
-      title: "Designed for Complex Toolchains",
-      subtitle: "Kubernetes, Terraform, custom SDKs — we simplify even the most layered CLI experiences",
-      videoSrc: "/video-blog-technical-services/video1.mp4",
-      features: [
-        {
-          title: "Infra-Focused Documentation",
-          description: "We explain cloud-native, infra-heavy, or multi-step workflows clearly, with visuals and flowcharts where needed."
-        },
-        {
-          title: "Environment-Aware Commands",
-          description: "Dev, staging, prod — we document config, flags, and behavior differences across all your environments."
-        },
-        {
-          title: "Reusable Command Blocks",
-          description: "Guides are broken into modular steps, each runnable on its own or as part of a pipeline."
-        },
-        {
-          title: "Real Impact in Real Stacks",
-          description: "Most docs break when real infra shows up. We write for the tools your engineers actually ship with."
-        }
-      ]
-    },
-    {
-      id: 4,
       productLabel: "Release Notes",
       title: "Release Notes That Speak to Everyone",
       subtitle: "Whether you're shipping once a week or ten times a day, we help your team stay consistent and communicative.",
@@ -99,31 +74,6 @@ const CRMAutomationPage = () => {
         {
           title: "Built Into Your Workflow",
           description: "Notes delivered when and where you need them - GitHub releases, docs, Notion, or internal portals."
-        }
-      ]
-    },
-    {
-      id: 5,
-      productLabel: "CLI Docs",
-      title: "Scalable Docs for Growing Teams",
-      subtitle: "From onboarding new hires to supporting power users — your CLI docs should evolve with your team.",
-      videoSrc: "/video-blog-technical-services/video1.mp4",
-      features: [
-        {
-          title: "Zero-to-Deploy Onboarding",
-          description: "New hires get productive fast with setup scripts and first-run instructions that just work."
-        },
-        {
-          title: "Command Reference with Flag-Level Clarity",
-          description: "We break down your CLI's help output — every command, flag, and option — into a readable, structured format that developers can actually skim, search, and understand."
-        },
-        {
-          title: "Fewer Support Pings",
-          description: "With clear, searchable docs, your devrel/support teams won't have to answer the same questions twice."
-        },
-        {
-          title: "Built to Grow With You",
-          description: "As your team grows, docs are your first line of communication. We make them count."
         }
       ]
     }
