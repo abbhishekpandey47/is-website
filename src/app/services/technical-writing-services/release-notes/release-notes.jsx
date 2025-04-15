@@ -15,7 +15,7 @@ const CRMAutomationPage = () => {
         },
         {
           title: "Known Issues, Upfront",
-          description: "We flag current limitations or edge cases so clients don’t waste time or overwhelm your support team."
+          description: "We flag current limitations or edge cases so clients don't waste time or overwhelm your support team."
         },
         {
           title: "Feature Launches That Land",
@@ -36,7 +36,7 @@ const CRMAutomationPage = () => {
       features: [
         {
           title: "Version-Aware Formatting",
-          description: "Major vs minor vs patch? We highlight the impact and risk so readers don’t have to guess."
+          description: "Major vs minor vs patch? We highlight the impact and risk so readers don't have to guess."
         },
         {
           title: "Change-Type Tagging",
@@ -49,6 +49,11 @@ const CRMAutomationPage = () => {
         {
           title: "Real Impact in Real Stacks",
           description: "Good release notes reduce rollout risk, boost adoption, and make engineering more transparent across orgs."
+        }
+      ]
+    },
+    {
+      id: 3,
       productLabel: "CLI Docs",
       title: "Designed for Complex Toolchains",
       subtitle: "Kubernetes, Terraform, custom SDKs — we simplify even the most layered CLI experiences",
@@ -73,7 +78,7 @@ const CRMAutomationPage = () => {
       ]
     },
     {
-      id: 3,
+      id: 4,
       productLabel: "Release Notes",
       title: "Release Notes That Speak to Everyone",
       subtitle: "Whether you're shipping once a week or ten times a day, we help your team stay consistent and communicative.",
@@ -89,11 +94,16 @@ const CRMAutomationPage = () => {
         },
         {
           title: "Cross-Team Friendly",
-          description: "Whether you’re building for engineers, product managers, or support, we shape notes to the right audience."
+          description: "Whether you're building for engineers, product managers, or support, we shape notes to the right audience."
         },
         {
           title: "Built Into Your Workflow",
           description: "Notes delivered when and where you need them - GitHub releases, docs, Notion, or internal portals."
+        }
+      ]
+    },
+    {
+      id: 5,
       productLabel: "CLI Docs",
       title: "Scalable Docs for Growing Teams",
       subtitle: "From onboarding new hires to supporting power users — your CLI docs should evolve with your team.",
@@ -105,11 +115,11 @@ const CRMAutomationPage = () => {
         },
         {
           title: "Command Reference with Flag-Level Clarity",
-          description: "We break down your CLI’s help output — every command, flag, and option — into a readable, structured format that developers can actually skim, search, and understand."
+          description: "We break down your CLI's help output — every command, flag, and option — into a readable, structured format that developers can actually skim, search, and understand."
         },
         {
           title: "Fewer Support Pings",
-          description: "With clear, searchable docs, your devrel/support teams won’t have to answer the same questions twice."
+          description: "With clear, searchable docs, your devrel/support teams won't have to answer the same questions twice."
         },
         {
           title: "Built to Grow With You",
@@ -117,7 +127,7 @@ const CRMAutomationPage = () => {
         }
       ]
     }
-  ];
+  ]
 
   return (
     <div className="w-full bg-[#0d0a1a] p-4 flex flex-col items-center py-14 px-8 lg:px-16 justify-center overflow-x-hidden">
