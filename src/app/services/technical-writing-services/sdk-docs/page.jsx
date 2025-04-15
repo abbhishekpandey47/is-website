@@ -13,7 +13,6 @@ export default function HowToGuidesPage() {
         < CRMAutomationPage />
         </div>
 
-
         <div         style={{
           background:
             "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
