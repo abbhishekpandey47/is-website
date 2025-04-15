@@ -4,80 +4,80 @@ const CRMAutomationPage = () => {
   const crmSections = [
     {
       id: 1,
-      productLabel: "Release Notes",
-      title: "Updates That Makes Sense to Everyone Release Communication That Builds Trust Understandable Release Notes, Every Time",
-      subtitle: "Clear, useful, human-readable updates - not walls of changelog text. We help engineering teams ship with confidence and clarity.",
+      productLabel: "How to guides",
+      title: " Step-by-Step Guides That Don’t Skip Steps",
+      subtitle: "We write hands-on, visual walkthroughs that guide users through every feature, from setup to real-world results.",
       videoSrc: "/video-blog-technical-services/video1.mp4",
       features: [
         {
-          title: "PRs to Clarity, Not Confusion",
-          description: "We translate pull requests into clear, user-facing updates - no dev speak, just what changed and why it matters."
+          title: "Every Step, Clearly Explained",
+          description: "We guide users through each task with simple instructions, code snippets, and screenshots - no skipped context, no assumptions."
         },
         {
-          title: "Known Issues, Upfront",
-          description: "We flag current limitations or edge cases so clients don't waste time or overwhelm your support team."
+          title: "Visual, Annotated, Click-by-Click",
+          description: "Our guides include screenshots and visual cues to help users follow along confidently, even if they’re new to the tool."
         },
         {
-          title: "Feature Launches That Land",
-          description: "We explain new features in plain language, with usage context, so users actually adopt what you ship."
+          title: "Video Tutorials That Show, Not Just Tell",
+          description: "A short, focused video walkthrough backs each guide for those who prefer to watch and follow along."
         },
         {
-          title: "Scales with Your Product and Team",
-          description: "From internal betas to public releases, we maintain a consistent tone, structure, and cadence, no matter how fast you ship."
-        }
+          title: "Real Tools, Real Projects",
+          description: "We don’t just describe, we show your product working in actual environments, with relevant tools and real outcomes."
+        },
       ]
     },
     {
       id: 2,
-      productLabel: "Release Notes",
-      title: "Consistent, Categorized, and Clear Release Notes",
-      subtitle: "From semantic versioning to breaking changes, we bring consistency and hierarchy to every release.",
+      productLabel: "How to guides",
+      title: "Integrations That Drive Value",
+      subtitle: "We show users how your product fits into their existing workflow, and what they can unlock by connecting the dots.",
       videoSrc: "/video-blog-technical-services/video1.mp4",
       features: [
         {
-          title: "Version-Aware Formatting",
-          description: "Major vs minor vs patch? We highlight the impact and risk so readers don't have to guess."
+          title: "How to Integrate with Popular Tools",
+          description: "From Slack to GitHub to internal CRMs, we write how-to guides that walk users through key integrations step by step."
         },
         {
-          title: "Change-Type Tagging",
-          description: "We categorize everything, including features, bug fixes, performance, infra, and security, so that teams can scan fast."
+          title: "Connected Use Cases, Not Just Setup",
+          description: "We go beyond installation and show what users can do once integrated, triggering workflows, automating tasks, or sharing data."
         },
         {
-          title: "Breaking Change Warnings",
-          description: "Critical changes get called out with visual cues and migration steps if needed."
+          title: "Troubleshooting & Edge Cases Included",
+          description: "We help users avoid pitfalls with tips, warnings, and real-world fixes, reducing frustration and support tickets."
         },
         {
-          title: "Real Impact in Real Stacks",
-          description: "Good release notes reduce rollout risk, boost adoption, and make engineering more transparent across orgs."
-        }
+          title: "Post-Integration Value",
+          description: "We highlight changes after setup: metrics unlocked, workflows simplified, and time saved."
+        },
       ]
     },
     {
       id: 3,
-      productLabel: "Release Notes",
-      title: "Release Notes That Speak to Everyone",
-      subtitle: "Whether you're shipping once a week or ten times a day, we help your team stay consistent and communicative.",
+      productLabel: "How to Guides",
+      title: "Practical Guides for Real-World Use",
+      subtitle: "We turn users into confident operators of your product, with faster onboarding, fewer questions, and better adoption.",
       videoSrc: "/video-blog-technical-services/video1.mp4",
       features: [
         {
-          title: "User-Focused Summaries",
-          description: "We turn technical changes into plain-language updates that show users what changed, how it affects them, and what they can do next."
+          title: "Built for First-Time Users and Power Users",
+          description: "Whether someone is onboarding or exploring advanced features, our guides meet them where they are."
         },
         {
-          title: "No More Changelog Dumps",
-          description: "We turn raw commit messages and PR titles into clean, categorized release notes people can actually read."
+          title: "Context-First Writing",
+          description: "We don’t just tell users how, we explain why, so they understand what they’re doing and when to use it."
         },
         {
-          title: "Cross-Team Friendly",
-          description: "Whether you're building for engineers, product managers, or support, we shape notes to the right audience."
+          title: "Always-Available Learning",
+          description: "No need to ping support or ask around, our guides are searchable, shareable, and always up-to-date."
         },
         {
-          title: "Built Into Your Workflow",
-          description: "Notes delivered when and where you need them - GitHub releases, docs, Notion, or internal portals."
-        }
+          title: "Docs That Reduce Support Load",
+          description: "Support and success teams can link to our guides instead of re-answering the same questions, saving time."
+        },
       ]
-    }
-  ]
+    },
+  ];
 
   return (
     <div className="w-full bg-[#0d0a1a] p-4 flex flex-col items-center py-14 px-8 lg:px-16 justify-center overflow-x-hidden">

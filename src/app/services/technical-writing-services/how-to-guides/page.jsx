@@ -1,6 +1,6 @@
 import BookDemo from "./bookDemo";
 import SalesHero from "./hero";
-import CRMAutomationPage from "./how-to-guides";
+import CRMAutomationPage from "./how-to-guide";
 
 export default function HowToGuidesPage() {
     return <div>
@@ -12,8 +12,6 @@ export default function HowToGuidesPage() {
         <div>
         < CRMAutomationPage />
         </div>
-
-
         <div         style={{
           background:
             "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",

@@ -4,79 +4,79 @@ const CRMAutomationPage = () => {
   const crmSections = [
     {
       id: 1,
-      productLabel: "CLI Docs",
-      title: "CLI Docs That Developers Actually Use",
-      subtitle: "From install to deploy — docs that walk users through every command, config, and edge case without slowing them down.",
+      productLabel: "SDK Docs",
+      title: "SDK Docs Developers Actually Use",
+      subtitle: "We turn complex SDKs into clear, real-world walkthroughs with runnable code, multiple language examples, and zero guesswork.",
       videoSrc: "/video-blog-technical-services/video1.mp4",
       features: [
         {
-          title: "Docs That Start at the Command Line",
-          description: "We document what actually runs — with clear commands, expected output, and edge cases. No fluff."
+          title: "Real Projects, Not Just Snippets",
+          description: "We create working codebases around your SDK, so developers can learn by doing, not just reading."
         },
         {
-          title: "Written Around Real Workflows",
-          description: "Watch deals move smoothly through every stage of your pipeline—automatically, based on real interactions."
+          title: "Multi-Stack Coverage",
+          description: "From React to Node, Python to Java, we show you how to integrate your SDK across the tech stacks your users actually use."
         },
         {
-          title: "Install to Infra Automation",
-          description: "Whether it’s brew install, tool login, or tool deploy --env prod, we cover everything your users need to get started and stay productive."
+          title: "End-to-End Use Cases",
+          description: "Each guide walks through complete flows: setup, API calls, error handling, and production usage."
         },
         {
-          title: "Built for DevTools and Infra Products",
-          description: "From SDK bootstrapping to Kubernetes deployments, we specialize in CLI docs that support real engineering teams."
+          title: "Built for Developers, Clear for Everyone",
+          description: "We write docs with the technical depth developers need, without losing clarity for non-technical readers."
         }
       ]
     },
     {
       id: 2,
-      productLabel: "CLI Docs",
-      title: "Designed for Complex Toolchains",
-      subtitle: "Kubernetes, Terraform, custom SDKs — we simplify even the most layered CLI experiences",
+      productLabel: "SDK Docs",
+      title: "SDK Examples That Accelerate Developer Onboarding",
+      subtitle: "From first install to first success, we help new developers get started fast with real, runnable code in their language of choice. ",
       videoSrc: "/video-blog-technical-services/video1.mp4",
       features: [
         {
-          title: "Infra-Focused Documentation",
-          description: "We explain cloud-native, infra-heavy, or multi-step workflows clearly, with visuals and flowcharts where needed."
+          title: "From Zero to “It Works” Fast",
+          description: "We design guides that help developers go from setup to successful SDK usage in minutes, not hours."
         },
         {
-          title: "Environment-Aware Commands",
-          description: "Dev, staging, prod — we document config, flags, and behavior differences across all your environments."
+          title: " Progressive Examples That Teach by Doing",
+          description: "Each guide builds from simple to advanced use cases, giving developers immediate wins and deeper understanding."
         },
         {
-          title: "Reusable Command Blocks",
-          description: "Guides are broken into modular steps, each runnable on its own or as part of a pipeline."
+          title: " Copy-Paste Friendly, Project-Ready Code",
+          description: "No filler or abstract snippets - just clean, tested examples that work out of the box in real projects."
         },
         {
-          title: "Real Impact in Real Stacks",
-          description: "Most docs break when real infra shows up. We write for the tools your engineers actually ship with."
+          title: " Updated with Your SDK’s Growth",
+          description: "We keep onboarding guides fresh with every SDK change, so developers never get stuck on outdated docs."
         }
       ]
     },
     {
       id: 3,
-      productLabel: "CLI Docs",
-      title: "Scalable Docs for Growing Teams",
-      subtitle: "From onboarding new hires to supporting power users — your CLI docs should evolve with your team.",
+      productLabel: "SDK Docs",
+      title: "Content That Builds Adoption",
+      subtitle: "Great SDKs deserve great documentation. We help developers find success quickly and reduce support load along the way.",
       videoSrc: "/video-blog-technical-services/video1.mp4",
       features: [
         {
-          title: "Zero-to-Deploy Onboarding",
-          description: "New hires get productive fast with setup scripts and first-run instructions that just work."
+          title: "Feature-Driven Blog Posts",
+          description: "We turn major SDK updates into blog-style deep dives that show off what’s possible, fast."
         },
         {
-          title: "Command Reference with Flag-Level Clarity",
-          description: "We break down your CLI’s help output — every command, flag, and option — into a readable, structured format that developers can actually skim, search, and understand."
+          title: " Task-Oriented Guides",
+          description: "We write around real goals - “Auth integration,” “Kubernetes Automation,” “Handle auth errors”, not just API endpoints."
         },
         {
-          title: "Fewer Support Pings",
-          description: "With clear, searchable docs, your devrel/support teams won’t have to answer the same questions twice."
+          title: "Support-Ready Content",
+          description: "Our examples solve common problems before they reach your support team, with known issues and edge cases clearly documented."
         },
         {
-          title: "Built to Grow With You",
-          description: "As your team grows, docs are your first line of communication. We make them count."
+          title: "Consistent, Reliable Format",
+          description: "Every guide follows the same intuitive structure, so your users always know where to find what they need."
         }
       ]
-    }
+    },
   ];
 
   return (

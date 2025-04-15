@@ -39,15 +39,15 @@ export default function Timeline() {
 
   return (
     <div className="bg-[#0d0a1a] text-gray-200 p-6 rounded-lg px-14">
-      <div className="flex items-center gap-2 mb-4">
+      <div className="flex items-center justify-center gap-2 mb-4">
         <div className="w-6 h-6 flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M200,164a36.07,36.07,0,0,0-33.94,24H72a28,28,0,0,1,0-56h96a44,44,0,0,0,0-88H72a12,12,0,0,0,0,24h96a20,20,0,0,1,0,40H72a52,52,0,0,0,0,104h94.06A36,36,0,1,0,200,164Zm0,48a12,12,0,1,1,12-12A12,12,0,0,1,200,212Z"></path></svg>
         </div>
-        <span className="text-lg font-medium">Timeline</span>
+        <span className="text-lg font-medium flex items-center justify-center">Timeline</span>
       </div>
 
-      <h2 className="text-4xl font-bold mb-4">Our journey so far</h2>
-      <p className="text-lg text-gray-400 mb-8">From developer blogs to GTM engines for DevTools startups.</p>
+      <h2 className="text-4xl font-bold mb-4 flex items-center justify-center">Our journey so far</h2>
+      <p className="text-lg text-gray-400 mb-8 flex items-center justify-center">From developer blogs to GTM engines for DevTools startups.</p>
 
       {isMobile ? (
         // Mobile vertical timeline
@@ -59,8 +59,8 @@ export default function Timeline() {
           {timelineData.map((item, index) => (
             <div key={index} className="mb-10 relative">
               {/* Timeline dot */}
-              <div className="absolute top-0 left-0 w-6 h-6 bg-gray-800 rounded-full border-2 border-emerald-500 transform -translate-x-1/2 flex items-center justify-center">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+              <div className="absolute top-0 left-0 w-6 h-6 bg-gray-800 rounded-full border-2 border-[#1966ff] transform -translate-x-1/2 flex items-center justify-center">
+                <div className="w-2 h-2 bg-[#1966ff] rounded-full"></div>
               </div>
               
               {/* Content */}
@@ -82,8 +82,8 @@ export default function Timeline() {
             {timelineData.map((item, index) => (
               <div key={index} className="flex flex-col w-1/5">
                 {/* Timeline dot */}
-                <div className="w-6 h-6 bg-gray-800 rounded-full border-[2px] border-emerald-500 mb-6 z-10 flex items-center justify-center self-start">
-                  <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full"></div>
+                <div className="w-6 h-6 bg-gray-800 rounded-full border-[2px] border-[#1966ff] mb-6 z-10 flex items-center justify-center self-start">
+                  <div className="w-2.5 h-2.5 bg-[#1966ff] rounded-full"></div>
                 </div>
                 
                 {/* Content */}
