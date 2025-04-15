@@ -1,69 +1,150 @@
 // animatedcard/AnimatedCardSlider.tsx
 import { motion } from "framer-motion";
+import Image from "next/image";
+import img1 from "../../app/services/webflow/images/thecss1.png"
+import img2 from "../../app/services/webflow/images/thecss2.png"
+import img3 from "../../app/services/webflow/images/thecss3.png"
 
 const projects = [
   {
     title: "Joblinx ai",
     badges: ["Webflow", "Figma"],
-    image: "/images/joblinx.png",
+    image: img1,
   },
   {
     title: "Nirvana Consulting Company",
     badges: ["Figma", "Webflow"],
-    image: "/images/nirvana.png",
+    image: img2,
   },
   {
     title: "Consolto",
     badges: ["Webflow", "Figma"],
-    image: "/images/consolto.png",
+    image: img3,
   },
   {
     title: "My Hotel Line",
     badges: ["Figma", "Webflow"],
-    image: "/images/myhotel.png",
+    image: img2,
   },
+  {
+    title: "Aruti",
+    badges: ["Figma", "Webflow"],
+    image: img1,
+  },
+  {
+    title: "Novabeing",
+    badges: ["Figma", "Webflow"],
+    image: img3,
+  },
+
 ];
+
+// export default function AnimatedCard() {
+//   const duplicatedProjects = [...projects, ...projects]; // duplicates for infinite scroll
+
+//   return (
+//     <div className="overflow-hidden w-full py-10">
+//       <motion.div
+//         className="flex gap-6 w-max"
+//         animate={{
+//           x: ["0%", "-50%"], // only go halfway because we duplicated
+//         }}
+//         transition={{
+//           duration: 20,
+//           ease: "linear",
+//           repeat: Infinity,
+//         }}
+//       >
+//         {duplicatedProjects.map((project, i) => (
+//           <div
+//             key={i}
+//             className="bg-white bg-gradient-to-br from-[#231442] to-[#331a63] border rounded-xl shadow-md p-4 w-[500px] flex-shrink-0 
+//             h-[700px]"
+//           >
+//             <h2 className="font-semibold text-lg mb-2 text-start">{project.title}</h2>
+//             <div className="flex gap-2 mb-2">
+//               {project.badges.map((badge, idx) => (
+//                 <span
+//                   key={idx}
+//                   className="text-sm font-medium px-2 py-1 mb-3 rounded-full border bottom-1 bg-[#371577] "
+//                 >
+//                   {badge}
+//                 </span>
+//               ))}
+//             </div>
+//             <Image
+//               src={project.image}
+//               alt={project.title}
+//               className="rounded-xl w-full h-[700px] object-cover " // Updated classes
+//               width={0} // Adjusted width to match the container
+//               height={0} // Adjusted height to match the container
+//             />
+//           </div>
+//         ))}
+//       </motion.div>
+//     </div>
+//   );
+// }
 
 export default function AnimatedCard() {
   const duplicatedProjects = [...projects, ...projects]; // duplicates for infinite scroll
 
   return (
-    <div className="overflow-hidden w-full py-10">
-      <motion.div
-        className="flex gap-6 w-max"
-        animate={{
-          x: ["0%", "-50%"], // only go halfway because we duplicated
-        }}
-        transition={{
-          duration: 20,
-          ease: "linear",
-          repeat: Infinity,
-        }}
-      >
-        {duplicatedProjects.map((project, i) => (
-          <div
-            key={i}
-            className="bg-white rounded-xl shadow-md p-4 w-[300px] flex-shrink-0"
-          >
-            <h2 className="font-semibold text-lg mb-2">{project.title}</h2>
-            <div className="flex gap-2 mb-2">
-              {project.badges.map((badge, idx) => (
-                <span
-                  key={idx}
-                  className="text-sm bg-gray-200 px-2 py-1 rounded-full"
-                >
-                  {badge}
-                </span>
-              ))}
+    <div className="w-full py-16 ">
+      <div className="container mx-auto px-4 mb-8">
+        <h2 className="text-4xl font-bold text-center text-white mb-12">Our Recent Webflow Projects</h2>
+      </div>
+      
+      <div className="overflow-hidden w-full p-6">
+        <motion.div
+          className="flex gap-6 w-max px-4"
+          animate={{
+            x: ["0%", "-50%"], 
+          }}
+          transition={{
+            duration: 15,
+            ease: "linear",
+            repeat: Infinity,
+          }}
+        >
+          {duplicatedProjects.map((project, i) => (
+            <div
+              key={i}
+              className="bg-gradient-to-br from-[#231442] to-[#331a63] border border-white rounded-xl shadow-md p-5 w-[400px] flex-shrink-0 flex flex-col"
+            >
+              <h3 className="text-xl font-semibold mb-4 text-white text-start">{project.title}</h3>
+              
+              <div className="flex gap-2 mb-6">
+                {project.badges.map((badge, idx) => (
+                  <span
+                    key={idx}
+                    className="text-sm font-medium px-2 py-1 rounded-full border bg-[#371577] text-white"
+                  >
+                    {badge}
+                  </span>
+                ))}
+              </div>
+              
+              {/* Single Project Image */}
+              <div className="rounded-lg overflow-hidden w-full">
+                <Image
+                  src={project.image}
+                  alt={`${project.title} - screenshot`}
+                  className="w-full h-full object-cover rounded-md p-1 "
+                  width={550}
+                  height={340}
+                />
+              </div>
             </div>
-            <img
-              src={project.image}
-              alt={project.title}
-              className="rounded-md w-full h-48 object-cover"
-            />
-          </div>
-        ))}
-      </motion.div>
+          ))}
+        </motion.div>
+      </div>
+      <div className="flex justify-center">
+          <button className="bg-[#6169FC] px-4 py-3 rounded-md shadow-md text-white mt-8">
+            Book a Call
+          </button>
+        </div>
+
     </div>
   );
 }
