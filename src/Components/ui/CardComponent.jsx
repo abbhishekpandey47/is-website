@@ -16,4 +16,3 @@ const WebflowCard = ({ image, title, desc }) => {
 };
 
 export default WebflowCard;
-

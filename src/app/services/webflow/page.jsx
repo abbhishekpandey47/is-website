@@ -2,6 +2,7 @@
 import React, { useMemo } from "react";
 import HomeMarquee from "@/Components/HomePage/HomeMarquee";
 import CardMotion from "./cardsmotion";
+import CardComponent from "@/Components/ui/CardComponent";
 
 const fileList = [
   "aviator.png",
@@ -64,6 +65,39 @@ const serviceArr = [
   },
 ];
 
+const serviceCards = [
+  {
+    image: "💰",
+    title: "Simple Pricing",
+    desc: "We keep straightforward pricing based on what you opt for. No Contracts. Cancel anytime.",
+  },
+  {
+    image: "🚀",
+    title: "Quick Delivery",
+    desc: "We deliver full-fledged Webflow websites in 2 weeks. Turnaround for hourly work is 2 days.",
+  },
+  {
+    image: "📜",
+    title: "Certified Developers",
+    desc: "Our developers have passed all Webflow certification tests on Webflow university.",
+  },
+  {
+    image: "✨",
+    title: "Beautiful Interactions",
+    desc: "We create simple and beautiful animations that improve the user's overall experience.",
+  },
+  {
+    image: "📱",
+    title: "Responsive Design",
+    desc: "Our designs in Webflow have similar experiences across all devices.",
+  },
+  {
+    image: "⚡",
+    title: "Page Speed Optimization",
+    desc: "We build with clean structure so it won’t impact speed. Google’s core web vitals stay green.",
+  },
+];
+
 const page = () => {
   const fileMemo = useMemo(() => fileList, [fileList]);
 
@@ -88,7 +122,7 @@ const page = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-950 pointer-events-none" />
       </div>
 
-      <section className="py-12 md:py-20 lg:py-32 relative text-center">
+      <section className="py-12 md:py-20 lg:py-32 relative text-center ">
         {/* Clutch badge */}
         <div className="flex justify-center mt-20">
           <div className="bg-black text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-2">
@@ -157,11 +191,23 @@ const page = () => {
           />
         </div>
         <div className="flex justify-center">
-          <button className="bg-[#6169FC] px-6 py-3 rounded-md shadow-md text-white">
+          <button className="bg-[#6169FC] px-4 py-3 rounded-md shadow-md text-white">
             Book a Call
           </button>
         </div>
 
+        <p className="max-w-6xl mx-auto mb-5 text-4xl font-semibold mt-20">
+          Why you should choose us as your Webflow Partner.
+        </p>
+        <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
+          We have over 17+ years of experience in design and development.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto justify-center items-center">
+          {serviceCards.map((card, index) => (
+            <CardComponent key={index} {...card} />
+          ))}
+        </div>
       </section>
     </div>
   );
