@@ -24,15 +24,14 @@ export default function Hero() {
         </svg>
       </div>
       <div className="flex items-center justify-center font-medium text-sm" style={{ color: svgColor }}>
-        ROI Calculator
+      Content ROI Calculator for DevTool Startups, early-stage infra, AI companies 
       </div>
     </div>
       
       <div className="text-center">
         <h1 className="text-7xl font-semibold mt-8">
-          See how much time <br />
-          and money Fluent <br />
-          can save your team
+        Estimate the true cost of content and  <br />
+         see how much you save by outsourcing. <br />
         </h1>
       </div>
     </div>
