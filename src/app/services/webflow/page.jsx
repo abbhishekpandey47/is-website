@@ -7,19 +7,12 @@ import CardComponent from "@/app/services/webflow/CardComponent";
 import AnimatedCard from "@/app/services/webflow/AnimatedCard";
 import CustomerReview from "@/app/services/webflow/CustomerReview";
 import ThirdPartyIntegrations from "./ThirdPartyIntegrations";
-import css1 from "./images/thecss/css4.png";
-import css2 from "./images/thecss/css5.png";
+import img1 from "./images/css4.png";
+import img2 from "./images/css5.png";
 import WebflowMarquee from "@/app/services/webflow/Webflowmarquee";
 import FAQ from "@/app/services/service-video-production/FAQ";
 import BookDemo from "./bookDemo";
-import TestimonialSlider from "./Testimonials";
-import Webtable from "./Table";
-import img1 from './images/devs/dev1.png';
-import img2 from './images/devs/dev2.png';
-import img3 from './images/devs/dev3.png';
-import img4 from './images/devs/dev4.png';
-import img5 from './images/devs/dev5.png';
-import img6 from './images/devs/dev6.png';
+import TestimonialSlider from "./testimonials";
 
 const fileList = [
   "aviator.png",
@@ -204,6 +197,7 @@ const page = () => {
             </button>
           </div>
 
+<<<<<<< HEAD
           
           <div
             className="mb-24"
@@ -226,6 +220,12 @@ const page = () => {
           > 
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5">
           </div>
+=======
+          <div className="bg-black"><WebflowMarquee /></div>
+
+
+          <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+>>>>>>> f89db8e (16.04.25 - 0.4)
 
           <p className="max-w-5xl mx-auto mb-8 text-5xl font-semibold mt-10">
             5x your potential with our Range Of Webflow Development Services!
@@ -250,6 +250,7 @@ const page = () => {
             </button>
           </div>
 
+<<<<<<< HEAD
           </div>
 
           <div
@@ -259,6 +260,10 @@ const page = () => {
                 "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
             }}
           > 
+=======
+
+
+>>>>>>> f89db8e (16.04.25 - 0.4)
           <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
 
           <p className="max-w-6xl mx-auto mb-5 text-4xl font-semibold mt-20">
@@ -284,8 +289,14 @@ const page = () => {
               Book a Call
             </button>
           </div>
+<<<<<<< HEAD
             </div>
 
+=======
+
+          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10"></div>
+          <AnimatedCard />
+>>>>>>> f89db8e (16.04.25 - 0.4)
           <div
             className="mb-24"
             style={{
@@ -295,6 +306,7 @@ const page = () => {
           > 
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5">
           </div>
+<<<<<<< HEAD
           <AnimatedCard />
           </div>
 
@@ -311,6 +323,9 @@ const page = () => {
           <Webtable/>
           </div>
 
+=======
+          </div>
+
 
           <div
             style={{
@@ -321,6 +336,7 @@ const page = () => {
             <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
             <TestimonialSlider />
           </div>
+>>>>>>> f89db8e (16.04.25 - 0.4)
 
           <div
             style={{
@@ -329,6 +345,19 @@ const page = () => {
             }}
           >
             <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+<<<<<<< HEAD
+            <TestimonialSlider />
+          </div>
+
+          <div
+            style={{
+              background:
+                "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+            }}
+          >
+            <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+=======
+>>>>>>> f89db8e (16.04.25 - 0.4)
             <ThirdPartyIntegrations />
           </div>
 
@@ -343,7 +372,11 @@ const page = () => {
           </div>
 
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 "></div>
+<<<<<<< HEAD
             <div className="w-full flex justify-center items-center mt-5">
+=======
+            <div className="w-full flex justify-center items-center">
+>>>>>>> f89db8e (16.04.25 - 0.4)
               <BookDemo />
             </div>
 
