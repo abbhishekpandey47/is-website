@@ -4,7 +4,7 @@ export default function Hero() {
   const svgColor = "#afb0af";
   
   return (
-    <div className="flex flex-col items-center justify-center p-4 md:p-8 pt-28 md:pt-40 w-full max-w-4xl mx-auto">
+    <div className="flex flex-col items-center justify-center p-4 md:p-8 pt-20 md:pt-40 w-full max-w-4xl mx-auto">
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center">
           <svg
@@ -22,16 +22,18 @@ export default function Hero() {
             />
           </svg>
         </div>
-        <div className="flex items-center justify-center font-medium text-xs md:text-sm text-center pt-2 px-4" style={{ color: svgColor }}>
+        <div className="flex items-center justify-center font-medium text-xs md:text-sm text-center px-4" style={{ color: svgColor }}>
           Content ROI Calculator for DevTool Startups, early-stage infra, AI companies
         </div>
       </div>
       
       <div className="text-center px-4">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-semibold mt-4 md:mt-8">
-          Estimate the true cost of content and
-          see how much you save by outsourcing.
-          </h1>
+          Estimate the true cost of content and{" "}
+          <span className="hidden sm:inline"><br /></span>
+          see how much you save by outsourcing.{" "}
+          <span className="hidden sm:inline"><br /></span>
+        </h1>
       </div>
     </div>
   );
