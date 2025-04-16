@@ -51,7 +51,6 @@ const contentItems = [
   },
 ];
 
-
 export default function ThirdPartyIntegrations() {
   return (
     <section className="text-white py-16 px-6">
@@ -59,7 +58,7 @@ export default function ThirdPartyIntegrations() {
         We do third-party integration as well
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto  ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
         {contentItems.map(({ title, icon }) => (
           <div
             key={title}
@@ -77,12 +76,12 @@ export default function ThirdPartyIntegrations() {
                 <Image
                   src={icon.src}
                   alt={title || "Card Image"}
-                  width={100} // Adjust width as needed
-                  height={100} // Adjust height as needed
+                  width={100} 
+                  height={100}
                   className="object-contain"
                 />
               ) : (
-                <span className="text-lg">🖼️</span> // Fallback icon
+                <span className="text-lg">🖼️</span> 
               )}
               <h3 className="text-2xl font-semibold mt-5">{title}</h3>
             </div>

@@ -62,6 +62,7 @@ export default function AnimatedCard() {
                 boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
               }}
   
+  
             >
               <h3 className="text-xl font-semibold mb-4 text-white text-start">{project.title}</h3>
               

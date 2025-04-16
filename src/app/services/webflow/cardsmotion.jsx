@@ -83,8 +83,8 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
         <motion.div
           className="flex flex-nowrap gap-8"
           animate={{ x: cardsPosition }}
-          transition={{ type: "spring", stiffness: 150, damping: 20 }} // Slower and smoother transition
-          style={{ paddingLeft: containerPadding }} // Add space before the first card
+          transition={{ type: "spring", stiffness: 150, damping: 20 }} 
+          style={{ paddingLeft: containerPadding }} 
         >
           {serviceArr.map((service, index) => (
             <div
@@ -100,6 +100,7 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
                 background: `linear-gradient(35deg, rgba(71, 24, 99, 0.2) 10%, rgba(118, 67, 175, 0.5) 50%, rgba(193, 145, 231, 0.2) 100%)`,
                 boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
               }}
+    
             >
               {/* Left Section: Text */}
               <div className="flex-1 p-6 flex flex-col justify-center text-start">
