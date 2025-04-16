@@ -4,37 +4,30 @@ import Image from "next/image";
 import img1 from "./images/clients/pro1.png"
 import img2 from "./images/clients/pro2.png"
 import img3 from "./images/clients/pro3.png"
+import img4 from "./images/clients/pro4.png"
+
 
 const projects = [
   {
-    title: "Joblinx ai",
+    title: "Kubiya",
     badges: ["Webflow", "Figma"],
     image: img1,
   },
+  // fix
   {
-    title: "Nirvana Consulting Company",
+    title: "Acceldata",
     badges: ["Figma", "Webflow"],
-    image: img2,
+    image: img4,
   },
   {
-    title: "Consolto",
+    title: "devzero",
     badges: ["Webflow", "Figma"],
     image: img3,
   },
   {
-    title: "My Hotel Line",
+    title: "Knidal",
     badges: ["Figma", "Webflow"],
     image: img2,
-  },
-  {
-    title: "Aruti",
-    badges: ["Figma", "Webflow"],
-    image: img1,
-  },
-  {
-    title: "Novabeing",
-    badges: ["Figma", "Webflow"],
-    image: img3,
   },
 
 ];
