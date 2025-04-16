@@ -83,13 +83,13 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
         <motion.div
           className="flex flex-nowrap gap-8"
           animate={{ x: cardsPosition }}
-          transition={{ type: "spring", stiffness: 150, damping: 20 }} 
-          style={{ paddingLeft: containerPadding }} 
+          transition={{ type: "spring", stiffness: 150, damping: 20 }}
+          style={{ paddingLeft: containerPadding }}
         >
           {serviceArr.map((service, index) => (
             <div
               key={index}
-              className="bg-white text-black rounded-xl shadow-lg flex-shrink-0 w-[780px] flex items-stretch gap-6 border border-white"
+              className="bg-white text-black rounded-xl shadow-lg flex-shrink-0 w-[780px] flex items-stretch gap-6"
               // style={{
               //   backgroundColor: "#141318",
               //   backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 90%)`,
@@ -100,8 +100,13 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
                 background: `linear-gradient(35deg, rgba(71, 24, 99, 0.2) 10%, rgba(118, 67, 175, 0.5) 50%, rgba(193, 145, 231, 0.2) 100%)`,
                 boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
               }}
-    
             >
+              <div className="absolute inset-0 rounded-2xl opacity-0 ">
+                <div className="absolute inset-0 rounded-2xl border- border-transparent overflow-hidden">
+                  <div className="absolute inset-[-2px] bg-gradient-to-r from-purple-300/30 via-violet-500/80 to-fuchsia-300/30 animate-border-flow rounded-2xl"></div>
+                </div>
+              </div>
+
               {/* Left Section: Text */}
               <div className="flex-1 p-6 flex flex-col justify-center text-start">
                 <h3 className="text-2xl font-semibold mb-4 text-white">

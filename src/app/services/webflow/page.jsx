@@ -7,13 +7,18 @@ import CardComponent from "@/app/services/webflow/CardComponent";
 import AnimatedCard from "@/app/services/webflow/AnimatedCard";
 import CustomerReview from "@/app/services/webflow/CustomerReview";
 import ThirdPartyIntegrations from "./ThirdPartyIntegrations";
-import css1 from "./images/thecss/css4.png";
-import css2 from "./images/thecss/css5.png";
 import WebflowMarquee from "@/app/services/webflow/Webflowmarquee";
 import FAQ from "@/app/services/service-video-production/FAQ";
 import BookDemo from "./bookDemo";
-import TestimonialSlider from "./testimonials";
+import TestimonialSlider from "./Testimonials";
 import Webtable from "./table";
+import css5 from "./images/thecss/css1.png";
+import css4 from "./images/thecss/css6.png";
+import css3 from "./images/thecss/css3.png";
+import css1 from "./images/thecss/css4.png";
+import css2 from "./images/thecss/css5.png";
+import css6 from "./images/thecss/css2.png";
+
 import img1 from './images/devs/dev1.png';
 import img2 from './images/devs/dev2.png';
 import img3 from './images/devs/dev3.png';
@@ -91,25 +96,25 @@ const serviceCards = [
   {
     image: css2,
     title: "Quick Delivery",
-    desc: "We as a Webflow Agency deliver full-fledged Webflow website in just 2 weeks*. Our turnaround time for hourly work is just 2 days.",
+    desc: "We as a Webflow Agency deliver full-fledged Webflow website in just 2 weeks*.  Our turnaround time for hourly work is just 2 days.",
   },
   {
-    image: css1,
+    image: css3,
     title: "Certified Developers",
     desc: "We make sure that our developers have passed all Webflow certification tests on Webflow university.",
   },
   {
-    image: css2,
+    image: css5,
     title: "Beautiful Interactions",
     desc: "We create simple and beautiful animations that improve the user's overall experience.",
   },
   {
-    image: css1,
+    image: css6,
     title: "Responsive Design",
     desc: "We as a Webflow design agency ensure that all the designs we develop in Webflow has similar experiences across all the devices.",
   },
   {
-    image: css2,
+    image: css4,
     title: "Page Speed Optimization",
     desc: "We build a site with a clean structure so it won’t impact the page speed. As a Webflow development agency, we ensure that Google’s core web vitals are in green.",
   },
@@ -168,7 +173,9 @@ const page = () => {
           {/* Call to Action */}
           <div className="flex justify-center">
             <button className="bg-[#6169FC] px-6 py-3 rounded-md shadow-md text-white">
+            <a href="https://calendly.com/meet-shan" target="_blank">
               Book a Call
+              </a>
             </button>
           </div>
 
@@ -211,7 +218,9 @@ const page = () => {
             </div>
             <div className="flex justify-center">
               <button className="bg-[#6169FC] px-4 py-3 rounded-md shadow-md text-white">
+              <a href="https://calendly.com/meet-shan" target="_blank">
                 Book a Call
+                </a>
               </button>
             </div>
           </div>
@@ -243,7 +252,9 @@ const page = () => {
             </div>
             <div className="flex justify-center">
               <button className="bg-[#6169FC] px-4 py-3 rounded-md shadow-md text-white mt-10">
+              <a href="https://calendly.com/meet-shan" target="_blank">
                 Book a Call
+                </a>
               </button>
             </div>
           </div>
@@ -331,6 +342,6 @@ const page = () => {
       </div>
     </motion.div>
   );
-};
+};  
 
 export default page;

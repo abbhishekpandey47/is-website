@@ -19,3 +19,44 @@
       rgba(193, 145, 231, 0.2) 100%
     );
   }
+
+  @keyframes border-flow {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  .animate-border-flow {
+    animation: border-flow 3s ease infinite;
+  }
+  
+  @keyframes diagonal-shine-animation {
+    0% {
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+  }
+  
+  .diagonal-shine {
+    background: linear-gradient(
+      45deg,
+      transparent 45%,
+      rgba(255, 255, 255, 0.8) 50%,
+      transparent 55%
+    );
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    animation: diagonal-shine-animation 3s infinite linear;
+    pointer-events: none;
+  }
+  
+  .group:hover .diagonal-shine {
+    animation: diagonal-shine-animation 1.5s infinite linear;
+  }
