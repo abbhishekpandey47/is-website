@@ -7,13 +7,19 @@ import CardComponent from "@/app/services/webflow/CardComponent";
 import AnimatedCard from "@/app/services/webflow/AnimatedCard";
 import CustomerReview from "@/app/services/webflow/CustomerReview";
 import ThirdPartyIntegrations from "./ThirdPartyIntegrations";
-import img1 from "./images/css4.png";
-import img2 from "./images/css5.png";
+import css1 from "./images/css4.png";
+import css2 from "./images/css5.png";
 import WebflowMarquee from "@/app/services/webflow/Webflowmarquee";
 import FAQ from "@/app/services/service-video-production/FAQ";
 import BookDemo from "./bookDemo";
 import TestimonialSlider from "./testimonials";
 import Webtable from "./table";
+import img1 from './images/devs/dev1.png';
+import img2 from './images/devs/dev2.png';
+import img3 from './images/devs/dev3.png';
+import img4 from './images/devs/dev4.png';
+import img5 from './images/devs/dev5.png';
+import img6 from './images/devs/dev6.png';
 
 const fileList = [
   "aviator.png",
