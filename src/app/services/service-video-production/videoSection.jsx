@@ -85,7 +85,7 @@ export default function TabbedYouTubeCarousel() {
             onClick={() => changeTab(tab.id)}
             className={`flex-1 py-4 px-2 lg:px-4 rounded-full text-center transition-colors ${
               activeTab === tab.id 
-                ? 'bg-yellow-50 text-gray-900 font-normal' 
+                ? 'bg-yellow-50 text-white font-normal' 
                 : 'text-white hover:bg-gray-800'
             }`}
           >

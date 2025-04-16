@@ -12,8 +12,8 @@ import css2 from "./images/thecss/css5.png";
 import WebflowMarquee from "@/app/services/webflow/Webflowmarquee";
 import FAQ from "@/app/services/service-video-production/FAQ";
 import BookDemo from "./bookDemo";
-import TestimonialSlider from "./testimonials";
-import Webtable from "./table";
+import TestimonialSlider from "./Testimonials";
+import Webtable from "./Table";
 import img1 from './images/devs/dev1.png';
 import img2 from './images/devs/dev2.png';
 import img3 from './images/devs/dev3.png';
@@ -84,7 +84,7 @@ const serviceArr = [
 
 const serviceCards = [
   {
-    image: img1,
+    image: css1,
     title: "Simple Pricing",
     desc: "We keep straightforward pricing based on what you opt for at our Webflow expert agency. Choose a way to work with us. No Contracts. Cancel anytime.",
   },
@@ -114,14 +114,6 @@ const serviceCards = [
     desc: "We build a site with a clean structure so it won’t impact the page speed. As a Webflow development agency, we ensure that Google’s core web vitals are in green.",
   },
 ];
-
-const contentStyle = {
-  height: "160px",
-  color: "#fff",
-  lineHeight: "160px",
-  textAlign: "center",
-  background: "#364d79",
-};
 
 // const serviceCards = [
 //   {
@@ -351,7 +343,7 @@ const page = () => {
           </div>
 
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 "></div>
-            <div className="w-full flex justify-center items-center">
+            <div className="w-full flex justify-center items-center mt-5">
               <BookDemo />
             </div>
 

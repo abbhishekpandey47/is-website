@@ -1,9 +1,9 @@
 // animatedcard/AnimatedCardSlider.tsx
 import { motion } from "framer-motion";
 import Image from "next/image";
-import img1 from "../../app/services/webflow/images/thecss1.png"
-import img2 from "../../app/services/webflow/images/thecss2.png"
-import img3 from "../../app/services/webflow/images/thecss3.png"
+import img1 from "./images/thecss/thecss1.png"
+import img2 from "./images/thecss/thecss2.png"
+import img3 from "./images/thecss/thecss3.png"
 
 const projects = [
   {
@@ -39,53 +39,6 @@ const projects = [
 
 ];
 
-// export default function AnimatedCard() {
-//   const duplicatedProjects = [...projects, ...projects]; // duplicates for infinite scroll
-
-//   return (
-//     <div className="overflow-hidden w-full py-10">
-//       <motion.div
-//         className="flex gap-6 w-max"
-//         animate={{
-//           x: ["0%", "-50%"], // only go halfway because we duplicated
-//         }}
-//         transition={{
-//           duration: 20,
-//           ease: "linear",
-//           repeat: Infinity,
-//         }}
-//       >
-//         {duplicatedProjects.map((project, i) => (
-//           <div
-//             key={i}
-//             className="bg-white bg-gradient-to-br from-[#231442] to-[#331a63] border rounded-xl shadow-md p-4 w-[500px] flex-shrink-0 
-//             h-[700px]"
-//           >
-//             <h2 className="font-semibold text-lg mb-2 text-start">{project.title}</h2>
-//             <div className="flex gap-2 mb-2">
-//               {project.badges.map((badge, idx) => (
-//                 <span
-//                   key={idx}
-//                   className="text-sm font-medium px-2 py-1 mb-3 rounded-full border bottom-1 bg-[#371577] "
-//                 >
-//                   {badge}
-//                 </span>
-//               ))}
-//             </div>
-//             <Image
-//               src={project.image}
-//               alt={project.title}
-//               className="rounded-xl w-full h-[700px] object-cover " // Updated classes
-//               width={0} // Adjusted width to match the container
-//               height={0} // Adjusted height to match the container
-//             />
-//           </div>
-//         ))}
-//       </motion.div>
-//     </div>
-//   );
-// }
-
 export default function AnimatedCard() {
   const duplicatedProjects = [...projects, ...projects]; // duplicates for infinite scroll
 
@@ -111,6 +64,11 @@ export default function AnimatedCard() {
             <div
               key={i}
               className="bg-gradient-to-br from-[#231442] to-[#331a63] border border-white rounded-xl shadow-md p-5 w-[400px] flex-shrink-0 flex flex-col"
+              style={{
+                background: `linear-gradient(35deg, rgba(71, 24, 99, 0.2) 10%, rgba(118, 67, 175, 0.5) 50%, rgba(193, 145, 231, 0.2) 100%)`,
+                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
+              }}
+  
             >
               <h3 className="text-xl font-semibold mb-4 text-white text-start">{project.title}</h3>
               

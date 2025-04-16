@@ -9,7 +9,7 @@ import icon6 from "./images/icons/icon6.png";
 import icon7 from "./images/icons/icon7.png";
 import icon9 from "./images/icons/icon9.png";
 import icon10 from "./images/icons/icon10.png";
-
+import "./webflow.css"
 
 const contentItems = [
   {
@@ -53,33 +53,41 @@ const contentItems = [
 
 export default function ThirdPartyIntegrations() {
   return (
-    <section className=" text-white py-16 px-6">
-      <h2 className="text-center text-4xl font-bold mb-12">We do third-party integration as well</h2>
+    <section className="text-white py-16 px-6">
+      <h2 className="text-center text-4xl font-bold mb-12">
+        We do third-party integration as well
+      </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto ">
         {contentItems.map(({ title, icon }) => (
           <div
             key={title}
-            className="bg-gradient-to-br  from-[#231442] to-[#331a63] border border-white rounded-xl p-6 shadow-md "
+            className="rounded-2xl p-4 sm:p-6 h-full relative overflow-hidden group border border-white"
+            style={{
+              background: `linear-gradient(35deg, rgba(71, 24, 99, 0.2) 10%, rgba(118, 67, 175, 0.5) 50%, rgba(193, 145, 231, 0.2) 100%)`,
+              boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
+            }}
           >
-            <div className="flex mb-3 flex-col justify-center items-center">
-                      {icon ? (
-                        <Image
-                          src={icon.src}
-                          alt={title || "Card Image"}
-                          width={100} // Adjust width as needed
-                          height={100} // Adjust height as needed
-                          className="object-contain "
-                        />
-                      ) : (
-                        <span className="text-lg">🖼️</span> // Fallback icon
-                      )}
+            {/* Shiny Border */}
+            <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-gradient-to-r group-hover:animate-shiny-border pointer-events-none"></div>
+
+            <div className="flex mb-3 flex-col justify-center items-center relative z-10">
+              {icon ? (
+                <Image
+                  src={icon.src}
+                  alt={title || "Card Image"}
+                  width={100} // Adjust width as needed
+                  height={100} // Adjust height as needed
+                  className="object-contain"
+                />
+              ) : (
+                <span className="text-lg">🖼️</span> // Fallback icon
+              )}
               <h3 className="text-2xl font-semibold mt-5">{title}</h3>
             </div>
           </div>
         ))}
       </div>
-
     </section>
   );
 }

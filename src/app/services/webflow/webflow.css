@@ -1,0 +1,21 @@
+@keyframes shiny-border {
+    0% {
+      background-position: 200% 0%;
+    }
+    100% {
+      background-position: -200% 0%;
+    }
+  }
+  
+  .group-hover .animate-shiny-border {
+    animation: shiny-border 1.5s linear infinite;
+  }
+  
+  .group-hover .border-gradient-to-r {
+    background: linear-gradient(
+      135deg,
+      rgba(71, 24, 99, 0.2) 10%,
+      rgba(118, 67, 175, 0.5) 50%,
+      rgba(193, 145, 231, 0.2) 100%
+    );
+  }

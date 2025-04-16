@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
   const containerRef = useRef(null);
@@ -9,7 +10,7 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [isAtStart, setIsAtStart] = useState(true);
 
-  const cardWidth = 500; // Width of each card
+  const cardWidth = 700; // Adjusted width for the new layout
   const gap = 32; // Gap between cards
   const totalCardsWidth = serviceArr.length * (cardWidth + gap) - gap; // Total width of all cards
   const containerPadding = 100; // Space before the first card
@@ -88,22 +89,37 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
           {serviceArr.map((service, index) => (
             <div
               key={index}
-              className="bg-white text-black p-7 rounded-xl shadow-lg flex-shrink-0 w-[500px] bg-gradient-to-br from-[#231442] to-[#331a63] border border-white"
+              className="bg-white text-black rounded-xl shadow-lg flex-shrink-0 w-[780px] flex items-stretch gap-6 border border-white"
+              // style={{
+              //   backgroundColor: "#141318",
+              //   backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 90%)`,
+              //   boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
+              //   border: "2px solid rgba(60, 63, 84, 0.3)",
+              // }}
+              style={{
+                background: `linear-gradient(35deg, rgba(71, 24, 99, 0.2) 10%, rgba(118, 67, 175, 0.5) 50%, rgba(193, 145, 231, 0.2) 100%)`,
+                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
+              }}
+  
             >
-              {/* Image Section */}
-              <div className="h-[200px] w-full mb-4 overflow-hidden rounded-lg">
-                <img
+              {/* Left Section: Text */}
+              <div className="flex-1 p-6 flex flex-col justify-center text-start">
+                <h3 className="text-2xl font-semibold mb-4 text-white">
+                  {service.head}
+                </h3>
+                <p className="text-base text-white">{service.para}</p>
+              </div>
+
+              {/* Right Section: Image */}
+              <div className="flex-shrink-0 w-1/2 h-full">
+                <Image
                   src={service.image}
                   alt={service.head}
                   className="w-full h-full object-cover"
+                  width={450}
+                  height={550}
                 />
               </div>
-
-              {/* Title */}
-              <h3 className="text-2xl font-semibold mb-2">{service.head}</h3>
-
-              {/* Description */}
-              <p className="text-base text-white">{service.para}</p>
             </div>
           ))}
         </motion.div>
