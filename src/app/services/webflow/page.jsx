@@ -3,7 +3,6 @@ import React, { useMemo } from "react";
 import HomeMarquee from "@/Components/HomePage/HomeMarquee";
 import { motion } from "framer-motion"; 
 import CardMotion from "./cardsmotion";
-<<<<<<< HEAD
 import CardComponent from "@/app/services/webflow/CardComponent";
 import AnimatedCard from "@/app/services/webflow/AnimatedCard";
 import CustomerReview from "@/app/services/webflow/CustomerReview";
@@ -21,14 +20,6 @@ import img3 from './images/devs/dev3.png';
 import img4 from './images/devs/dev4.png';
 import img5 from './images/devs/dev5.png';
 import img6 from './images/devs/dev6.png';
-=======
-import CardComponent from "@/Components/ui/CardComponent";
-import AnimatedCard from "@/Components/ui/AnimatedCard";
-import CustomerReview from "@/Components/ui/CustomerReview";
-import ThirdPartyIntegrations from "./ThirdPartyIntegrations";
-import img1 from "./images/css4.png";
-import img2 from "./images/css5.png";
->>>>>>> 753b6fe (16.04.24 : 0.1)
 
 const fileList = [
   "aviator.png",
@@ -91,10 +82,9 @@ const serviceArr = [
   },
 ];
 
-<<<<<<< HEAD
 const serviceCards = [
   {
-    image: css1,
+    image: img1,
     title: "Simple Pricing",
     desc: "We keep straightforward pricing based on what you opt for at our Webflow expert agency. Choose a way to work with us. No Contracts. Cancel anytime.",
   },
@@ -132,7 +122,7 @@ const contentStyle = {
   textAlign: "center",
   background: "#364d79",
 };
-=======
+
 // const serviceCards = [
 //   {
 //     image: img1,
@@ -165,7 +155,6 @@ const contentStyle = {
 //     desc: "We build with clean structure so it won’t impact speed. Google’s core web vitals stay green.",
 //   },
 // ];
->>>>>>> 753b6fe (16.04.24 : 0.1)
 
 const page = () => {
   const fileMemo = useMemo(() => fileList, [fileList]);
@@ -236,7 +225,6 @@ const page = () => {
           <div className="bg-black"><WebflowMarquee /></div>
           </div>
 
-<<<<<<< HEAD
           <div
             className="mb-24"
             style={{
@@ -370,17 +358,6 @@ const page = () => {
         </section>
       </div>
     </motion.div>
-=======
-        <CustomerReview />
-        
-        <div className="w-full h-px mt-10 shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
-        
-        <ThirdPartyIntegrations/>
-
-        <div className="w-full h-px mt-10 shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
-      </section>
-    </div>
->>>>>>> 753b6fe (16.04.24 : 0.1)
   );
 };
 
