@@ -20,7 +20,8 @@ export default function ContentROICalculator() {
   const [hasCalculated, setHasCalculated] = useState(false);
 
   const handleCalculate = () => {
-
+    // Here you would normally do calculations based on input
+    // For now we'll just use the preset values
     setHasCalculated(true);
   };
 
@@ -151,7 +152,6 @@ export default function ContentROICalculator() {
             </div>
 
             <div className="w-px min-h-full bg-gray-600"></div>
-            <div className="w-full h-px md:w-px md:h-full bg-gray-600"></div>
 
             
             {/* Right */}
@@ -159,64 +159,63 @@ export default function ContentROICalculator() {
               <h2 className="text-2xl font-bold text-center mb-8">Your ROI Results</h2>
               
               {hasCalculated ? (
-                <div className="space-y-6">
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">Cost Comparison</h3>
-                    
-                    <div className="border-b border-gray-700 pb-3 mb-3 flex justify-between">
-                      <span>Hiring In-House</span>
-                      <span className="font-bold">${inHouseCost.toLocaleString()}</span>
-                    </div>
-                    
-                    <div className="border-b border-gray-700 pb-3 mb-3 flex justify-between">
-                      <span>Outsourced (Growth Plan)</span>
-                      <span className="font-bold">${outsourcedCost.toLocaleString()}</span>
-                    </div>
-                    
-                    <div className="flex justify-between text-blue-400">
-                      <span className="font-bold">Savings:</span>
-                      <span className="font-bold">${savings.toLocaleString()} ({savingsPercentage}%)</span>
-                    </div>
+                <div className="space-y-5">
+                {/* Cost Comparison */}
+                <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-lg p-5">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-100">Cost Comparison</h3>
+                  
+                  <div className="border-b border-gray-700/60 pb-2.5 mb-2.5 flex justify-between text-sm">
+                    <span className="text-gray-300">Hiring In-House</span>
+                    <span className="font-medium text-white">${inHouseCost.toLocaleString()}</span>
                   </div>
                   
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">Time to Value</h3>
-                    
-                    <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
-                      <span className="col-span-1">Time to First Output</span>
-                      <span className="col-span-1 text-center">4-6 weeks</span>
-                      <span className="col-span-1 text-center">1-2 weeks</span>
-                    </div>
-                    
-                    <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
-                      <span className="col-span-1">Output Per Month</span>
-                      <span className="col-span-1 text-center">{Math.floor(blogPosts/2)} assets</span>
-                      <span className="col-span-1 text-center">{blogPosts} assets</span>
-                    </div>
-                    
-                    <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
-                      <span className="col-span-1">Ramp-Up Time</span>
-                      <span className="col-span-1 text-center">High</span>
-                      <span className="col-span-1 text-center">None</span>
-                    </div>
-                    
-                    <p className="mt-4 text-blue-400">You get content 4x faster and save weeks of ramp-up.</p>
+                  <div className="border-b border-gray-700/60 pb-2.5 mb-2.5 flex justify-between text-sm">
+                    <span className="text-gray-300">Outsourced (Growth Plan)</span>
+                    <span className="font-medium text-white">${outsourcedCost.toLocaleString()}</span>
                   </div>
                   
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">Deliverables Estimate</h3>
-                    
-                    <div className="mb-2">
-                      <p>Month 1: {blogPosts} Blogs + 1 Video</p>
-                    </div>
-                    <div className="mb-2">
-                      <p>Month 2: {blogPosts} Blogs + 2 Docs</p>
-                    </div>
-                    <div>
-                      <p>Month 3: {blogPosts-1} Blogs + 1 Case Study</p>
-                    </div>
+                  <div className="flex justify-between text-sky-400 text-sm">
+                    <span className="font-medium">Savings:</span>
+                    <span className="font-medium">${savings.toLocaleString()} ({savingsPercentage}%)</span>
                   </div>
                 </div>
+                
+                {/* Time to Value */}
+                <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-lg p-5">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-100">Time to Value</h3>
+                  
+                  <div className="grid grid-cols-3 border-b border-gray-700/60 pb-2.5 mb-2.5 text-sm">
+                    <span className="col-span-1 text-gray-300">Time to First Output</span>
+                    <span className="col-span-1 text-center text-gray-400">4-6 weeks</span>
+                    <span className="col-span-1 text-center text-gray-400">1-2 weeks</span>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 border-b border-gray-700/60 pb-2.5 mb-2.5 text-sm">
+                    <span className="col-span-1 text-gray-300">Output Per Month</span>
+                    <span className="col-span-1 text-center text-gray-400">{Math.floor(blogPosts/2)} assets</span>
+                    <span className="col-span-1 text-center text-gray-400">{blogPosts} assets</span>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 border-b border-gray-700/60 pb-2.5 mb-2.5 text-sm">
+                    <span className="col-span-1 text-gray-300">Ramp-Up Time</span>
+                    <span className="col-span-1 text-center text-gray-400">High</span>
+                    <span className="col-span-1 text-center text-gray-400">None</span>
+                  </div>
+                  
+                  <p className="mt-3 text-sky-400 text-xs font-normal">You get content 4x faster and save weeks of ramp-up.</p>
+                </div>
+                
+                {/* Deliverables Estimate */}
+                <div className="bg-white/5 backdrop-blur-md border border-white/10 shadow-xl rounded-lg p-5">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-100">Deliverables Estimate</h3>
+                  
+                  <div className="text-sm space-y-2 text-gray-300">
+                    <p>Month 1: <span className="text-white">{blogPosts} Blogs + 1 Video</span></p>
+                    <p>Month 2: <span className="text-white">{blogPosts} Blogs + 2 Docs</span></p>
+                    <p>Month 3: <span className="text-white">{blogPosts-1} Blogs + 1 Case Study</span></p>
+                  </div>
+                </div>
+              </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="w-24 h-24 mb-4">
