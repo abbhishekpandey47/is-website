@@ -31,7 +31,7 @@ export default function Webtable() {
         </div>
 
         {/* Middle Column */}
-        <div className="flex flex-col gap-4 text-center bg-blue-950 p-6">
+        <div className="flex flex-col gap-4 text-center bg-[#080875] p-6">
           <div className="border-b border-solid border-gray-300 pb-2 ">
             <p className="font-bold text-white">Affordable</p>
           </div>

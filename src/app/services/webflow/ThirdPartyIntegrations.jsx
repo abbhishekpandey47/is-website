@@ -51,6 +51,7 @@ const contentItems = [
   },
 ];
 
+
 export default function ThirdPartyIntegrations() {
   return (
     <section className="text-white py-16 px-6">
@@ -58,7 +59,7 @@ export default function ThirdPartyIntegrations() {
         We do third-party integration as well
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto  ">
         {contentItems.map(({ title, icon }) => (
           <div
             key={title}
