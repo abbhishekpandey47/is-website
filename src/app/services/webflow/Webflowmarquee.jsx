@@ -1,5 +1,5 @@
 'use client'
-import React, {  useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
 import Image from 'next/image'

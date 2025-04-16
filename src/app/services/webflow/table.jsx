@@ -2,12 +2,12 @@ import React from "react";
 
 export default function Webtable() {
   return (
-    <div className="flex flex-col items-center max-w-5xl py-16 mx-auto p-6 mt-10">
+    <div className="flex flex-col items-center max-w-5xl mx-auto p-4 px-8 mt-10">
       <h1 className="text-3xl font-bold mb-8 text-center text-white">
-        Infrasity Agency vs Other Offerings
+        theCSS Agency vs Other Offerings
       </h1>
 
-      <div className="w-full grid grid-cols-4 gap-4 p-6">
+      <div className="w-full grid grid-cols-4 py-16 gap-8 ">
         {/* Left Column */}
         <div className="flex flex-col gap-4 p-6">
           <div className="border-b border-solid border-gray-300 pb-2">
@@ -31,8 +31,8 @@ export default function Webtable() {
         </div>
 
         {/* Middle Column */}
-        <div className="flex flex-col gap-4 text-center bg-[#412f80] rounded-md p-6">
-          <div className="border-b border-solid border-gray-300 pb-2">
+        <div className="flex flex-col gap-4 text-center bg-blue-950 p-6">
+          <div className="border-b border-solid border-gray-300 pb-2 ">
             <p className="font-bold text-white">Affordable</p>
           </div>
           <div className="border-b border-solid border-gray-300 pb-2">

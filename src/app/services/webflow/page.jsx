@@ -13,6 +13,7 @@ import WebflowMarquee from "@/app/services/webflow/Webflowmarquee";
 import FAQ from "@/app/services/service-video-production/FAQ";
 import BookDemo from "./bookDemo";
 import TestimonialSlider from "./testimonials";
+import Webtable from "./table";
 
 const fileList = [
   "aviator.png",
@@ -108,38 +109,6 @@ const serviceCards = [
   },
 ];
 
-// const serviceCards = [
-//   {
-//     image: img1,
-//     title: "Simple Pricing",
-//     desc: "We keep straightforward pricing based on what you opt for. No Contracts. Cancel anytime.",
-//   },
-//   {
-//     image: img2,
-//     title: "Quick Delivery",
-//     desc: "We deliver full-fledged Webflow websites in 2 weeks. Turnaround for hourly work is 2 days.",
-//   },
-//   {
-//     image: img1,
-//     title: "Certified Developers",
-//     desc: "Our developers have passed all Webflow certification tests on Webflow university.",
-//   },
-//   {
-//     image: img2,
-//     title: "Beautiful Interactions",
-//     desc: "We create simple and beautiful animations that improve the user's overall experience.",
-//   },
-//   {
-//     image: img1,
-//     title: "Responsive Design",
-//     desc: "Our designs in Webflow have similar experiences across all devices.",
-//   },
-//   {
-//     image: img2,
-//     title: "Page Speed Optimization",
-//     desc: "We build with clean structure so it won’t impact speed. Google’s core web vitals stay green.",
-//   },
-// ];
 
 const page = () => {
   const fileMemo = useMemo(() => fileList, [fileList]);
@@ -195,10 +164,7 @@ const page = () => {
             <button className="bg-[#6169FC] px-6 py-3 rounded-md shadow-md text-white">
               Book a Call
             </button>
-          </div>
-
-<<<<<<< HEAD
-          
+          </div>          
           <div
             className="mb-24"
             style={{
@@ -208,7 +174,7 @@ const page = () => {
           > 
           <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5">
           </div>
-          <div className="bg-black"><WebflowMarquee /></div>
+          <div className=""><WebflowMarquee /></div>
           </div>
 
           <div
@@ -220,12 +186,21 @@ const page = () => {
           > 
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5">
           </div>
-=======
           <div className="bg-black"><WebflowMarquee /></div>
+          </div>
 
 
           <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
->>>>>>> f89db8e (16.04.25 - 0.4)
+
+          <div
+            className="mb-24"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+            }}
+          > 
+          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5">
+          </div>
 
           <p className="max-w-5xl mx-auto mb-8 text-5xl font-semibold mt-10">
             5x your potential with our Range Of Webflow Development Services!
@@ -249,8 +224,6 @@ const page = () => {
               Book a Call
             </button>
           </div>
-
-<<<<<<< HEAD
           </div>
 
           <div
@@ -260,10 +233,15 @@ const page = () => {
                 "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
             }}
           > 
-=======
+          </div>
 
-
->>>>>>> f89db8e (16.04.25 - 0.4)
+          <div
+            className="mb-24"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+            }}
+          > 
           <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
 
           <p className="max-w-6xl mx-auto mb-5 text-4xl font-semibold mt-20">
@@ -289,14 +267,11 @@ const page = () => {
               Book a Call
             </button>
           </div>
-<<<<<<< HEAD
-            </div>
-
-=======
-
+          </div>
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10"></div>
           <AnimatedCard />
->>>>>>> f89db8e (16.04.25 - 0.4)
+            </div>
+
           <div
             className="mb-24"
             style={{
@@ -306,7 +281,6 @@ const page = () => {
           > 
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5">
           </div>
-<<<<<<< HEAD
           <AnimatedCard />
           </div>
 
@@ -323,7 +297,6 @@ const page = () => {
           <Webtable/>
           </div>
 
-=======
           </div>
 
 
@@ -336,7 +309,6 @@ const page = () => {
             <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
             <TestimonialSlider />
           </div>
->>>>>>> f89db8e (16.04.25 - 0.4)
 
           <div
             style={{
@@ -345,7 +317,6 @@ const page = () => {
             }}
           >
             <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-<<<<<<< HEAD
             <TestimonialSlider />
           </div>
 
@@ -356,8 +327,6 @@ const page = () => {
             }}
           >
             <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-=======
->>>>>>> f89db8e (16.04.25 - 0.4)
             <ThirdPartyIntegrations />
           </div>
 
@@ -372,11 +341,8 @@ const page = () => {
           </div>
 
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 "></div>
-<<<<<<< HEAD
             <div className="w-full flex justify-center items-center mt-5">
-=======
             <div className="w-full flex justify-center items-center">
->>>>>>> f89db8e (16.04.25 - 0.4)
               <BookDemo />
             </div>
 
