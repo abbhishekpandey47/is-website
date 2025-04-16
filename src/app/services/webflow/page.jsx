@@ -125,8 +125,8 @@ const page = () => {
       animate={{ opacity: 1, y: 0 }} // Animate to opacity 1 and y 0
       transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
     >
-      <div className="min-h-screen bg-[#0a0a1a]  text-white overflow-hidden relative">
-        <section className="py-12 md:py-20 lg:py-32 relative text-center ">
+      <div className="min-h-screen bg-[#0a0a1a] text-white overflow-hidden relative">
+        <section className="py-12 md:py-20 lg:py-32 relative text-center">
           {/* Clutch badge */}
           <div className="flex justify-center mt-20">
             <div className="bg-black text-white px-5 py-3 rounded-full text-sm font-semibold flex items-center gap-2">
@@ -170,187 +170,162 @@ const page = () => {
             <button className="bg-[#6169FC] px-6 py-3 rounded-md shadow-md text-white">
               Book a Call
             </button>
-          </div>          
+          </div>
+
+          {/* Webflow Marquee */}
           <div
             className="mb-24"
             style={{
               background:
                 "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
             }}
-          > 
-          <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5">
-          </div>
-          <div className=""><WebflowMarquee /></div>
-          </div>
-
-          <div
-            className="mb-24"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
-            }}
-          > 
-          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5">
-          </div>
-          <div className="bg-black"><WebflowMarquee /></div>
-          </div>
-
-
-          <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
-
-          <div
-            className="mb-24"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
-            }}
-          > 
-          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5">
-          </div>
-
-          <p className="max-w-5xl mx-auto mb-8 text-5xl font-semibold mt-10">
-            5x your potential with our Range Of Webflow Development Services!
-          </p>
-          <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
-            Unlock your brand’s full potential with our Webflow design company,
-            offering expert solutions tailored to your needs. As a leading
-            Webflow development agency, we specialize in creating
-            high-performing websites that are not only visually stunning but
-            also optimized for conversions. Partner with us to experience a
-            seamless blend of creativity and technical expertise.
-          </p>
-
-          <div>
-            <CardMotion
-              serviceArr={serviceArr}
-            />
-          </div>
-          <div className="flex justify-center">
-            <button className="bg-[#6169FC] px-4 py-3 rounded-md shadow-md text-white">
-              Book a Call
-            </button>
-          </div>
-          </div>
-
-          <div
-            className="mb-24"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
-            }}
-          > 
-          </div>
-
-          <div
-            className="mb-24"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
-            }}
-          > 
-          <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
-
-          <p className="max-w-6xl mx-auto mb-5 text-4xl font-semibold mt-20">
-            Why you should choose us as your Webflow Partner.
-          </p>
-          <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
-            We have over 17+ years of experience in design and development.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl justify-center mx-auto">
-            {serviceCards.map((card, index) => (
-              <CardComponent
-              key={index}
-              image={card.image}
-              title={card.title}
-              desc={card.desc}
-              />
-            ))}
-          </div>
-
-          <div className="flex justify-center">
-            <button className="bg-[#6169FC] px-4 py-3 rounded-md shadow-md text-white mt-10">
-              Book a Call
-            </button>
-          </div>
-          </div>
-          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10"></div>
-          <AnimatedCard />
+          >
+            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+            <div>
+              <WebflowMarquee />
             </div>
+          </div>
 
+          {/* Services Section */}
           <div
             className="mb-24"
             style={{
               background:
                 "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
             }}
-          > 
-          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5">
-          </div>
-          <AnimatedCard />
+          >
+            <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+            <p className="max-w-5xl mx-auto mb-8 text-5xl font-semibold mt-10">
+              5x your potential with our Range Of Webflow Development Services!
+            </p>
+            <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
+              Unlock your brand’s full potential with our Webflow design
+              company, offering expert solutions tailored to your needs. As a
+              leading Webflow development agency, we specialize in creating
+              high-performing websites that are not only visually stunning but
+              also optimized for conversions. Partner with us to experience a
+              seamless blend of creativity and technical expertise.
+            </p>
+            <div>
+              <CardMotion serviceArr={serviceArr} />
+            </div>
+            <div className="flex justify-center">
+              <button className="bg-[#6169FC] px-4 py-3 rounded-md shadow-md text-white">
+                Book a Call
+              </button>
+            </div>
           </div>
 
-          
+          {/* Why Choose Us Section */}
           <div
             className="mb-24"
             style={{
               background:
                 "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
             }}
-          > 
-          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5">
-          </div>
-          <Webtable/>
+          >
+            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+            <p className="max-w-6xl mx-auto mb-5 text-4xl font-semibold mt-20">
+              Why you should choose us as your Webflow Partner.
+            </p>
+            <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
+              We have over 17+ years of experience in design and development.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl justify-center mx-auto">
+              {serviceCards.map((card, index) => (
+                <CardComponent
+                  key={index}
+                  image={card.image}
+                  title={card.title}
+                  desc={card.desc}
+                />
+              ))}
+            </div>
+            <div className="flex justify-center">
+              <button className="bg-[#6169FC] px-4 py-3 rounded-md shadow-md text-white mt-10">
+                Book a Call
+              </button>
+            </div>
           </div>
 
-          </div>
-
-
+          {/**  recent project */}
           <div
+            className="mb-24"
             style={{
               background:
-                "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
             }}
           >
-            <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-            <TestimonialSlider />
+            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+            <div>
+              <AnimatedCard />
+            </div>
           </div>
 
+
+          {/**table */}
           <div
+            className="mb-24"
             style={{
               background:
-                "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
             }}
           >
-            <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-            <TestimonialSlider />
+            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+            <div>
+              <Webtable />
+            </div>
           </div>
 
+
+
+          {/* Additional Sections */}
           <div
+            className="mb-24"
             style={{
               background:
-                "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
             }}
           >
-            <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
             <ThirdPartyIntegrations />
           </div>
 
+          {/**faq */}
+          
           <div
             style={{
               background:
                 "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
             }}
-          >
-          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+          > 
+          <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
             <FAQ />
           </div>
 
-          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 "></div>
-            <div className="w-full flex justify-center items-center mt-5">
-            <div className="w-full flex justify-center items-center">
-              <BookDemo />
-            </div>
+
+          <div
+            style={{
+              background:
+                "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+            }}
+          > 
+          <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+            <TestimonialSlider />
+          </div>
+
+
+          <div
+            style={{
+              background:
+                "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+            }}
+          > 
+          <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+          <div className=" flex mt-8 justify-center items-center">
+            <BookDemo />
+          </div>
+          </div>
 
         </section>
       </div>
