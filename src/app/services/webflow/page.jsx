@@ -7,7 +7,6 @@ import CardComponent from "@/app/services/webflow/CardComponent";
 import AnimatedCard from "@/app/services/webflow/AnimatedCard";
 import CustomerReview from "@/app/services/webflow/CustomerReview";
 import ThirdPartyIntegrations from "./ThirdPartyIntegrations";
-<<<<<<< HEAD
 import css1 from "./images/thecss/css4.png";
 import css2 from "./images/thecss/css5.png";
 import WebflowMarquee from "@/app/services/webflow/Webflowmarquee";
@@ -21,11 +20,6 @@ import img3 from './images/devs/dev3.png';
 import img4 from './images/devs/dev4.png';
 import img5 from './images/devs/dev5.png';
 import img6 from './images/devs/dev6.png';
-=======
-import img1 from "./images/css4.png";
-import img2 from "./images/css5.png";
-import WebflowMarquee from "@/Components/ui/Webflowmarquee";
->>>>>>> 2d9dfab (16.04.24 : 0.3)
 
 const fileList = [
   "aviator.png",
