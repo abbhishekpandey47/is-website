@@ -1,36 +1,67 @@
 "use client"
 
-import { useState } from 'react';
-import ROIOutsourcing from './output';
+import { useState, useCallback } from 'react';
 
 export default function ContentROICalculator() {
-  const [budget, setBudget] = useState("15,000");
-  const [blogPosts, setBlogPosts] = useState(3);
-  const [trafficGrowth, setTrafficGrowth] = useState("100 %");
-  const [contentTeam, setContentTeam] = useState("No");
-  const [domainExpertise, setDomainExpertise] = useState(false);
-  const [timeline, setTimeline] = useState("6 months");
+  const [formValues, setFormValues] = useState({
+    budget: 15000,
+    blogPosts: 3,
+    trafficGrowth: 0,
+    contentTeam: "No",
+    domainExpertise: false,
+    timeline: 1
+  });
 
-  //when calulation is ready then I can upadte this values
-  const [inHouseCost, setInHouseCost] = useState(42000);
-  const [outsourcedCost, setOutsourcedCost] = useState(18000);
-  const [savings, setSavings] = useState(24000);
-  const [savingsPercentage, setSavingsPercentage] = useState(57);
-  
-  const [hasCalculated, setHasCalculated] = useState(false);
+  const [results, setResults] = useState({
+    inHouseCost: 0,
+    outsourcedCost: 0,
+    savings: 0,
+    savingsPercentage: 0,
+    hasCalculated: false
+  });
 
-  const handleCalculate = () => {
+  const handleInputChange = useCallback((field, value) => {
+    setFormValues(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  }, []);
 
-    setHasCalculated(true);
-  };
+  // Handle budget input with proper validation
+  const handleBudgetChange = useCallback((e) => {
+    const value = e.target.value.replace(/[^\d]/g, '');
+    handleInputChange('budget', value === '' ? '' : parseInt(value, 10) || 0);
+  }, [handleInputChange]);
+
+  const handleCalculate = useCallback(() => {
+    const { blogPosts, timeline } = formValues;
+    
+    const valOutsourcedCost = blogPosts * 495 * timeline;
+    
+    let valInHouseCost = 7000 * timeline;
+    valInHouseCost = (valInHouseCost + (7000 * 1.5)) * 1.2; 
+    
+    const valSavings = valInHouseCost - valOutsourcedCost;
+    const valSavingsPercentage = Math.round((valSavings / valInHouseCost) * 100);
+    
+    setResults({
+      inHouseCost: valInHouseCost,
+      outsourcedCost: valOutsourcedCost,
+      savings: valSavings,
+      savingsPercentage: valSavingsPercentage,
+      hasCalculated: true
+    });
+  }, [formValues]);
+
+  const { budget, blogPosts, trafficGrowth, contentTeam, domainExpertise, timeline } = formValues;
+  const { inHouseCost, outsourcedCost, savings, savingsPercentage, hasCalculated } = results;
 
   return (
     <div className="w-full max-w-6xl mx-auto p-6 font-sans mb-24">
       <div>
-        
         <div className="w-full rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white">
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* Left  */}
+            {/* Left */}
             <div className="w-full lg:w-1/2">
               <h2 className="text-2xl font-bold text-center mb-8">Enter your details</h2>
               
@@ -41,9 +72,10 @@ export default function ContentROICalculator() {
                     <span className="text-gray-300">$</span>
                   </div>
                   <input 
-                    type="text" 
+                    type="text"
+                    inputMode="numeric"
                     value={budget}
-                    onChange={(e) => setBudget(e.target.value)}
+                    onChange={handleBudgetChange}
                     className="w-full pl-8 pr-4 py-3 border border-gray-700 rounded-lg bg-gray-800/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
@@ -57,10 +89,10 @@ export default function ContentROICalculator() {
                     min="1"
                     max="20"
                     value={blogPosts}
-                    onChange={(e) => setBlogPosts(parseInt(e.target.value))}
+                    onChange={(e) => handleInputChange('blogPosts', parseInt(e.target.value))}
                     className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
                   />
-                  <div className="flex justify-between text-xs text-gray-400 mt-1">
+                  <div className="flex justify-between text-xl text-gray-400 mt-1">
                     <span className="text-blue-400 font-medium">{blogPosts}</span>
                   </div>
                 </div>
@@ -74,7 +106,7 @@ export default function ContentROICalculator() {
                       type="checkbox"
                       className="sr-only"
                       checked={domainExpertise}
-                      onChange={() => setDomainExpertise(!domainExpertise)}
+                      onChange={() => handleInputChange('domainExpertise', !domainExpertise)}
                       id="toggle"
                     />
                     <label
@@ -93,14 +125,28 @@ export default function ContentROICalculator() {
                 </div>
                 <div className="text-right text-gray-300 mt-1">{domainExpertise ? "Yes" : "No"}</div>
               </div>
+
               <div className="mb-5">
                 <label className="block text-gray-300 mb-2">Target traffic growth</label>
-                <input 
-                  type="text" 
-                  value={trafficGrowth}
-                  onChange={(e) => setTrafficGrowth(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-700 rounded-lg bg-gray-800/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
+                <div className="relative">
+                  <select
+                    value={trafficGrowth}
+                    onChange={(e) => handleInputChange('trafficGrowth', e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  >
+                    <option value="0">0%</option>
+                    <option value="25">25%</option>
+                    <option value="40">40%</option>
+                    <option value="60">60%</option>
+                    <option value="90">90%</option>
+                    <option value="100">100%</option>
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </div>
+                </div>
               </div>
               
               <div className="mb-5">
@@ -108,7 +154,7 @@ export default function ContentROICalculator() {
                 <div className="relative">
                   <select
                     value={contentTeam}
-                    onChange={(e) => setContentTeam(e.target.value)}
+                    onChange={(e) => handleInputChange('contentTeam', e.target.value)}
                     className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
                   >
                     <option value="No">No</option>
@@ -127,12 +173,13 @@ export default function ContentROICalculator() {
                 <div className="relative">
                   <select
                     value={timeline}
-                    onChange={(e) => setTimeline(e.target.value)}
+                    onChange={(e) => handleInputChange('timeline', parseInt(e.target.value))}
                     className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
                   >
-                    <option value="3 months">3 months</option>
-                    <option value="6 months">6 months</option>
-                    <option value="12 months">12 months</option>
+                    <option value="1">1 month</option>
+                    <option value="3">3 months</option>
+                    <option value="6">6 months</option>
+                    <option value="12">12 months</option>
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,7 +199,6 @@ export default function ContentROICalculator() {
 
             <div className="w-px min-h-full bg-gray-600"></div>
             <div className="w-full h-px md:w-px md:h-full bg-gray-600"></div>
-
             
             {/* Right */}
             <div className="w-full lg:w-1/2">
@@ -229,11 +275,13 @@ export default function ContentROICalculator() {
                 </div>
               )}
               
-              {hasCalculated ? <div className="mt-6 text-center">
-                <button className="py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200">
-                  Download Full Report
-                </button>
-              </div> : <div> </div>}
+              {hasCalculated && (
+                <div className="mt-6 text-center">
+                  <button className="py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200">
+                    Download Full Report
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
