@@ -116,7 +116,7 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
                   src={service.image}
                   alt={service.head}
                   className="w-full h-full object-cover"
-                  width={450}
+                  width={600}
                   height={550}
                 />
               </div>

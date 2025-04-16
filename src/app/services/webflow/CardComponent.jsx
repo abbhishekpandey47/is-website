@@ -10,25 +10,25 @@ const CardComponent = ({ image, title, desc }) => {
 
     >
       {/* Image Section */}
-      <div className="w-full h-[150px] overflow-hidden rounded-md ">
+      <div className="w-full h-[200px] overflow-hidden items-stretch rounded-md ">
         {image ? (
           <Image
             src={image.src}
             alt={title || "Card Image"}
-            width={450} // Adjust width as needed
-            height={0} // Adjust height as needed
+            width={450} 
+            height={0} 
             className="object-contain border-2 border-black"
           />
         ) : (
-          <span className="text-lg">🖼️</span> // Fallback icon
+          <span className="text-lg">🖼️</span> 
         )}
       </div>
 
       {/* Title Section */}
-      <h3 className="text-3xl mb-2 mt-4 text-white px-4">{title}</h3>
+      <h3 className="text-4xl mb-3 text-white px-4">{title}</h3>
 
       {/* Description Section */}
-      <p className="text-base text-white px-4">{desc}</p>
+      <p className="text-base text-white px-5">{desc}</p>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 // animatedcard/AnimatedCardSlider.tsx
 import { motion } from "framer-motion";
 import Image from "next/image";
-import img1 from "./images/thecss/thecss1.png"
-import img2 from "./images/thecss/thecss2.png"
-import img3 from "./images/thecss/thecss3.png"
+import img1 from "./images/clients/pro1.png"
+import img2 from "./images/clients/pro2.png"
+import img3 from "./images/clients/pro3.png"
 
 const projects = [
   {
@@ -48,7 +48,7 @@ export default function AnimatedCard() {
         <h2 className="text-4xl font-bold text-center text-white mb-12">Our Recent Webflow Projects</h2>
       </div>
       
-      <div className="overflow-hidden w-full p-6">
+      <div className="overflow-hidden w-full p-6 ">
         <motion.div
           className="flex gap-6 w-max px-4"
           animate={{
@@ -84,11 +84,11 @@ export default function AnimatedCard() {
               </div>
               
               {/* Single Project Image */}
-              <div className="rounded-lg overflow-hidden w-full">
+              <div className="rounded-lg overflow-hidden w-full items-stretch ">
                 <Image
                   src={project.image}
                   alt={`${project.title} - screenshot`}
-                  className="w-full h-full object-cover rounded-md p-1 "
+                  className="w-full h-full object-cover rounded-lg p-1"
                   width={550}
                   height={340}
                 />
