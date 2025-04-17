@@ -95,7 +95,7 @@ The thought leadership and opinion pieces will include articles on original pers
 
 You can also create authentication guides and comparison articles for developers, helping them to understand your product's relevancy among the tech giants in the market. 
 
-Once you have created and published content, it is essential to distribute it on various distribution channels.
+_Once you have created and published content, it is essential to distribute it on various distribution channels._
 
 **Distribution**
 
