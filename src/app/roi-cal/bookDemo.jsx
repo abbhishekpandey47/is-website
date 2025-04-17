@@ -1,10 +1,73 @@
-import React from "react";
 import { Zap } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
 
 const BookDemo = () => {
+  const calendlyLoaded = useRef(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const embedRef = useRef(null);
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.href = "https://assets.calendly.com/assets/external/widget.css";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    script.onload = () => {
+      calendlyLoaded.current = true;
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      if (link.parentNode) document.head.removeChild(link);
+      if (script.parentNode) document.body.removeChild(script);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (
+      isPopupOpen &&
+      calendlyLoaded.current &&
+      embedRef.current &&
+      window.Calendly
+    ) {
+      window.Calendly.initInlineWidget({
+        url: "https://calendly.com/meet-shan/30min?hide_event_type_details=1",
+        parentElement: embedRef.current,
+        branding: false,
+      });
+    }
+    
+    // Add click outside handler
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        closePopup();
+      }
+    };
+    
+    if (isPopupOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isPopupOpen]);
+
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
     <div className="w-[65%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg">
-      <section className=" w-full bg-[#0D0A1A] relative  rounded-2xl shadow-lg min-h-[50vh] md:min-h-[50vh] lg:min-h-[35vh] overflow-hidden ">
+      <section className="w-full bg-[#0D0A1A] relative rounded-2xl shadow-lg min-h-[50vh] md:min-h-[50vh] lg:min-h-[35vh] overflow-hidden">
         {/* Stars */}
         <Stars />
 
@@ -16,22 +79,46 @@ const BookDemo = () => {
           <p className="text-m text-white md:text-lg quicksand-medium text-gray text-center max-w-2xl mb-8">
             Trusted by YC startups. Built for developer-first companies.
           </p>
-          <a href="https://calendly.com/meet-shan" target="_blank">
-            <button className="magic-button group rounded-md px-6 py-3 text-white font-medium text-m transition-all duration-300 hover:scale-105 ">
-              <div className="flex items-center space-x-2">
-                <Zap className="h-5 w-5 transition-transform group-hover:rotate-12" />
-                <span className="quicksand-medium">Book Demo</span>
-              </div>
-            </button>
-          </a>
+          
+          <button 
+            className="magic-button group rounded-md px-6 py-3 text-white font-medium text-m transition-all duration-300 hover:scale-105"
+            onClick={openPopup}
+          >
+            <div className="flex items-center space-x-2">
+              <Zap className="h-5 w-5 transition-transform group-hover:rotate-12" />
+              <span className="quicksand-medium">Book Demo</span>
+            </div>
+          </button>
         </div>
       </section>
+
+      {/* Popup */}
+      {isPopupOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div 
+            ref={modalRef}
+            className="bg-white rounded-lg w-full max-w-4xl h-screen max-h-[50vh] relative"
+          >
+            {/* Close button */}
+            <button
+              onClick={closePopup}
+              className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center text-xl text-black bg-white rounded-full shadow-md z-10 hover:bg-gray-100"
+            >
+              ×
+            </button>
+            
+            <div 
+              ref={embedRef} 
+              className="w-full h-full"
+            ></div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 const Stars = () => {
-  // Generate random positions for the stars
   const smallStars = Array.from({ length: 100 }).map((_, i) => ({
     id: `small-${i}`,
     top: `${Math.random() * 100}%`,
