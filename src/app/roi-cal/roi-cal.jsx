@@ -5,6 +5,30 @@ import { useState, useCallback } from 'react';
 export default function ContentROICalculator() {
     const [isLoading, setIsLoading] = useState(false);
 
+    const [isPopup, setIsPopup] = useState(false);
+
+    const handlePopup = () => {
+      setIsPopup(true);
+    };
+
+    const closePopup = () => {
+      setIsPopup(false);
+    };
+
+
+    const [email, setEmail] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (email) {
+        setIsSubmitted(true);
+        // Here you would typically send the email to your backend
+        console.log('Email submitted:', email);
+      }
+    };
+  
+
   const [formValues, setFormValues] = useState({
     budget: 15000,
     blogPosts: 3,
@@ -299,7 +323,9 @@ export default function ContentROICalculator() {
               
               {/* {hasCalculated && (
                 <div className="mt-6 text-center">
-                  <button className="py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200">
+                  <button className="py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200"
+                  onClick={handlePopup}
+                  >
                     Download Full Report
                   </button>
                 </div>
@@ -308,6 +334,74 @@ export default function ContentROICalculator() {
           </div>
         </div>
       </div>
+
+      {isPopup && (
+  <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+    <div 
+      className="rounded-xl p-8 backdrop-blur-md relative overflow-hidden max-w-md w-full"
+      style={{
+        backgroundColor: 'rgba(30, 32, 45, 0.7)',
+        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.36)',
+        border: '1px solid rgba(60, 63, 84, 0.3)',
+      }}
+    >
+      {/* Close button - optional but recommended */}
+      <button
+  onClick={() => closePopup()}
+  className="absolute top-4 right-4 text-gray-400 hover:text-gray-100 cursor-pointer z-20"
+  type="button"
+>
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+  </svg>
+</button>
+      
+      {/* Decorative glass effect elements */}
+      <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-purple-500 opacity-10 blur-2xl"></div>
+      <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-blue-500 opacity-10 blur-2xl"></div>
+      
+      <div className="relative z-10">
+        {!isSubmitted ? (
+          <>
+            <h3 className="text-xl font-medium text-gray-100 mb-4">Download Full Report</h3>
+            <p className="text-gray-300 mb-6">Enter your email address to receive your report.</p>
+            
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
+              >
+                Subscribe
+              </button>
+            </form>
+          </>
+        ) : (
+          <div className="text-center py-8">
+            <div className="mb-4 flex justify-center">
+              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 className="text-xl font-medium text-gray-100 mb-2">Thank You!</h3>
+            <p className="text-gray-300">You've been successfully subscribed to our newsletter.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }
