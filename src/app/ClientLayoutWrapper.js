@@ -21,7 +21,7 @@ export function ClientLayoutWrapper({ children }) {
   
   return (
     <>
-      <CrispWithNoSSR />
+      {/* <CrispWithNoSSR /> */}
       <Script
         id="koala-tracking"
         strategy="afterInteractive"

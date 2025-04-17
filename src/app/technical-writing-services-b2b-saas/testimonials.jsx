@@ -277,7 +277,7 @@ export default function TestimonialSlider() {
         </div>
 
         {/* navigation */}
-        <div className="flex justify-center mt-6 sm:mt-8 relative z-10">
+        <div className="flex justify-center mt-6 sm:mt-8 relative">
           <button
             onClick={handlePrev}
             className="mx-2 p-1 sm:p-2 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white"
