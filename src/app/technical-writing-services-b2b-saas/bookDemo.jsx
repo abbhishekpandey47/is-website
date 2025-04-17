@@ -42,7 +42,6 @@ const BookDemo = () => {
       });
     }
     
-    // Add click outside handler
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         closePopup();
@@ -69,9 +68,9 @@ const BookDemo = () => {
   };
 
   return (
-    <div className="w-[100%] lg:w-[85%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg">
+    <div className="w-[100%] lg:w-[65%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg">
       <section className={`w-full bg-[#0D0A1A] relative rounded-2xl shadow-lg min-h-[50vh] md:min-h-[50vh] ${
-          isExpanded ? "min-h-[120vh]" : "lg:min-h-[35vh]"
+          isExpanded ? "h-[120vh]" : "lg:min-h-[35vh]"
         } overflow-hidden`}>
         {/* Stars */}
         <Stars />
