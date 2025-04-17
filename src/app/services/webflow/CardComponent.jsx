@@ -4,28 +4,27 @@ import { useState, useEffect } from "react";
 const CardComponent = ({ image, title, desc, variant = "default" }) => {
   return (
     <div
-      className="shadow-md bg-gradient-to-br from-[#231442] to-[#331a63] flex flex-col text-start min-h-[300px] bg-white 
-    border-transparent rounded-xl border"
+      className="shadow-md bg-gradient-to-br from-[#231442] to-[#331a63] flex flex-col text-start min-h-[300px] rounded-xl"
       style={{
         background: `linear-gradient(35deg, rgba(71, 24, 99, 0.2) 10%, rgba(118, 67, 175, 0.5) 50%, rgba(193, 145, 231, 0.2) 100%)`,
         boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
       }}
     >
-      <div className="absolute inset-0 rounded-2xl opacity-0 ">
-        <div className="absolute inset-0 rounded-2xl border-2 border-transparent overflow-hidden">
-          <div className="absolute inset-[-2px] bg-gradient-to-r from-purple-300/30 via-violet-500/80 to-fuchsia-300/30 animate-border-flow rounded-2xl"></div>
+      <div className=" ">
+        <div className="">
+          <div className="absolute bg-gradient-to-r from-purple-300/30 via-violet-500/80 to-fuchsia-300/30 animate-border-flow rounded-2xl"></div>
         </div>
       </div>
 
       {/* Image Section */}
-      <div className="w-full h-[200px] rounded-xl">
+      <div className="w-full h-[200px] ">
         {image ? (
           <Image
             src={image.src}
             alt={title || "Card Image"}
             width={450}
             height={0}
-            className="object-contain "
+            className="object-contain rounded-t-xl"
           />
         ) : (
           <span className="text-lg">🖼️</span>

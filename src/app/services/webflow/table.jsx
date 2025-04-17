@@ -1,15 +1,18 @@
 import React from "react";
+import CalendlyButton from "../service-video-production/calendlyButton";
+import Image from "next/image";
+import logo from "./images/logo/infrasity_logo.png";
 
 export default function Webtable() {
   return (
-    <div className="flex flex-col items-center max-w-7xl mx-auto p-4 px-8 mt-10 text-md">
+    <div className="flex flex-col items-center max-w-7xl mx-auto p-6 px-8 py-4 mt-10 text-md">
       <h1 className="text-3xl font-bold mb-8 text-center text-white">
-        theCSS Agency vs Other Offerings
+        infrasity Agency vs Other Offerings
       </h1>
 
-      <div className="w-full grid grid-cols-4 py-20 gap-12 text-start">
+      <div className="w-full grid grid-cols-4 gap-12 text-start">
         {/* Left Column */}
-        <div className="flex flex-col gap-6 p-6 font-semibold justify-end">
+        <div className="flex flex-col gap-8 p-8 font-semibold justify-end rounded-lg">
           <div className="border-b border-solid border-gray-300 w-64 pb-2">
             <p className="font-bold text-white">{""}</p>
           </div>
@@ -34,33 +37,43 @@ export default function Webtable() {
         </div>
 
         {/* Middle Column */}
-        <div className="flex flex-col gap-6 text-center bg-[#080875] p-6 rounded-md justify-end items-center">
-          <div className="border-b border-solid border-gray-300 w-64 pb-2">
-            <p className="font-bold text-white">Infasity</p>
-            <p className="font-medium text-white">(agency)</p>
+        <div className="flex flex-col gap-8 text-center p-10 justify-end w-[330px] bg-[#23233b] rounded-lg">
+          <div className="border-b border-solid border-gray-300 w-64 pb-2 ">
+            <span className="flex justify-center items-center">
+            <Image
+              src={logo}
+              width={150}
+              height={50}
+              loading="lazy"
+              className="justify-center text-center items-center flex"
+              alt="Infrasity Logo"
+            />
+            </span>
           </div>
           <div className="border-b border-solid border-gray-300 w-64 pb-2">
             <p className="text-white">Affordable</p>
           </div>
           <div className="border-b border-solid border-gray-300 w-64 pb-2">
-            <p className="text-white">Pixel Perfect, High-quality</p>
+            <p className="text-white">Pixel Perfect, High-quality </p>
           </div>
           <div className="border-b border-solid border-gray-300 w-64 pb-2">
             <p className="text-white">Unlimited</p>
           </div>
           <div className="border-b border-solid border-gray-300 w-64 pb-2">
-            <p className="text-white">3 Working days</p>
+            <p className="text-white">3 Working days
+            </p>
           </div>
           <div className="border-b border-solid border-gray-300 w-64 pb-2">
-            <p className="text-white">Through Slack</p>
+            <p className="text-white">Through slack</p>
           </div>
           <div className="w-64">
             <p className="text-white">Yes, dedicated</p>
           </div>
         </div>
 
+
         {/* Right Column */}
-        <div className="flex flex-col gap-6 text-center p-6 justify-end">
+        <div className="flex flex-col gap-8 text-center p-8 rounded-lg justify-end">
           <div className="border-b border-solid border-gray-300 w-64 pb-2">
             <p className="font-medium text-white">Freelancers</p>
           </div>
@@ -85,7 +98,7 @@ export default function Webtable() {
         </div>
 
         {/* Far Right Column */}
-        <div className="flex flex-col gap-6 text-center p-6 justify-end">
+        <div className="flex flex-col gap-8 text-center p-8 justify-end">
           <div className="border-b border-solid border-gray-300 w-64 pb-2">
             <p className="font-medium text-white">Other Agencies</p>
           </div>
@@ -111,9 +124,9 @@ export default function Webtable() {
       </div>
 
       <div className="flex justify-center">
-        <button className="bg-[#6169FC] px-6 py-3 mt-8 rounded-md shadow-md text-white">
-          <a href="https://calendly.com/meet-shan" target="_blank"> Book a Call </a>
-        </button>
+        <div className="flex justify-center md:justify-start mt-6">
+          <CalendlyButton name="Book a Demo" />
+        </div>
       </div>
     </div>
   );

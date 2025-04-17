@@ -12,6 +12,7 @@ import FAQ from "@/app/services/service-video-production/FAQ";
 import BookDemo from "./bookDemo";
 import TestimonialSlider from "./Testimonials";
 import Webtable from "./table";
+import CalendlyButton from "../service-video-production/calendlyButton";
 import css5 from "./images/thecss/css1.png";
 import css4 from "./images/thecss/css6.png";
 import css3 from "./images/thecss/css3.png";
@@ -172,11 +173,9 @@ const page = () => {
 
           {/* Call to Action */}
           <div className="flex justify-center">
-            <button className="bg-[#6169FC] px-6 py-3 rounded-md shadow-md text-white">
-            <a href="https://calendly.com/meet-shan" target="_blank">
-              Book a Call
-              </a>
-            </button>
+          <div className="flex justify-center md:justify-start">
+              <CalendlyButton name="Book a Demo" />
+            </div>
           </div>
 
           {/* Webflow Marquee */}
@@ -217,12 +216,11 @@ const page = () => {
               <CardMotion serviceArr={serviceArr} />
             </div>
             <div className="flex justify-center">
-              <button className="bg-[#6169FC] px-4 py-3 rounded-md shadow-md text-white">
-              <a href="https://calendly.com/meet-shan" target="_blank">
-                Book a Call
-                </a>
-              </button>
+            <div className="flex justify-center md:justify-start">
+              <CalendlyButton name="Book a Demo" />
             </div>
+          </div>
+
           </div>
 
           {/* Why Choose Us Section */}
@@ -251,12 +249,11 @@ const page = () => {
               ))}
             </div>
             <div className="flex justify-center">
-              <button className="bg-[#6169FC] px-4 py-3 rounded-md shadow-md text-white mt-10">
-              <a href="https://calendly.com/meet-shan" target="_blank">
-                Book a Call
-                </a>
-              </button>
+          <div className="flex justify-center md:justify-start mt-8">
+              <CalendlyButton name="Book a Demo" />
             </div>
+          </div>
+
           </div>
 
           {/**  recent project */}
@@ -267,7 +264,7 @@ const page = () => {
                 "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
             }}
           >
-            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+            <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
             <div>
               <AnimatedCard />
             </div>

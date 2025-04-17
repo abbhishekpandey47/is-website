@@ -10,7 +10,7 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [isAtStart, setIsAtStart] = useState(true);
 
-  const cardWidth = 700; // Adjusted width for the new layout
+  const cardWidth = 780; // Adjusted width for the new layout
   const gap = 32; // Gap between cards
   const totalCardsWidth = serviceArr.length * (cardWidth + gap) - gap; // Total width of all cards
   const containerPadding = 100; // Space before the first card
@@ -51,7 +51,7 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
   };
 
   useEffect(() => {
-    const container = containerRef.current;
+      const container = containerRef.current;
     if (container) {
       container.addEventListener("wheel", handleWheel, { passive: false });
     }
@@ -80,8 +80,8 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <motion.div
-          className="flex flex-nowrap gap-8"
+      <motion.div
+                className="flex flex-nowrap gap-8"
           animate={{ x: cardsPosition }}
           transition={{ type: "spring", stiffness: 150, damping: 20 }}
           style={{ paddingLeft: containerPadding }}
@@ -101,11 +101,6 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
                 boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
               }}
             >
-              <div className="absolute inset-0 rounded-2xl opacity-0 ">
-                <div className="absolute inset-0 rounded-2xl border- border-transparent overflow-hidden">
-                  <div className="absolute inset-[-2px] bg-gradient-to-r from-purple-300/30 via-violet-500/80 to-fuchsia-300/30 animate-border-flow rounded-2xl"></div>
-                </div>
-              </div>
 
               {/* Left Section: Text */}
               <div className="flex-1 p-6 flex flex-col justify-center text-start">
