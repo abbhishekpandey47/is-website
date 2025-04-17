@@ -228,7 +228,7 @@ export default function ContentROICalculator() {
               
               {hasCalculated ? (
                 <div className="space-y-6">
-                  <div className="bg-white/6 backdrop-blur-md border border-white/10 shadow-xl rounded-lg p-6">
+                  <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <h3 className="text-xl font-bold mb-4">Cost Comparison</h3>
                     
                     <div className="border-b border-gray-700 pb-3 mb-3 flex justify-between">
@@ -247,7 +247,7 @@ export default function ContentROICalculator() {
                     </div>
                   </div>
                   
-                  <div className="bg-white/6 backdrop-blur-md border border-white/10 shadow-xl rounded-lg p-6">
+                  <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <h3 className="text-xl font-bold mb-4">Time to Value</h3>
                     
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
@@ -271,7 +271,7 @@ export default function ContentROICalculator() {
                     <p className="mt-4 text-blue-400">You get content 4x faster and save weeks of ramp-up.</p>
                   </div>
                   
-                  <div className="bg-white/6 backdrop-blur-md border border-white/1 shadow-xl rounded-lg p-6">
+                  <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <h3 className="text-xl font-bold mb-4">Deliverables Estimate</h3>
                     
                     <div className="mb-2">
