@@ -4,7 +4,7 @@ export default function Hero() {
   const svgColor = "#afb0af";
   
   return (
-    <div className="flex flex-col items-center justify-center p-4 md:p-8 pt-20 md:pt-40 w-full max-w-4xl mx-auto">
+    <div className="flex flex-col items-center justify-center p-4 md:p-8 pt-32 md:pt-40 w-full max-w-4xl mx-auto">
       <div className="flex flex-col items-center justify-center">
         <div className="flex items-center justify-center">
           <svg

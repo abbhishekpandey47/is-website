@@ -94,13 +94,7 @@ const FAQSection = () => {
               Have a question that needs a human to answer? No problem.
             </p>
 
-            <a
-              href="https://calendly.com/meet-shan"
-              className="inline-flex items-center text-[#5F64FF] text-lg  transition-colors"
-            >
-              Speak to Us
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
+
           </div>
 
           {/* Right column with accordion FAQs */}
