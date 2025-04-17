@@ -10,11 +10,8 @@ const CardComponent = ({ image, title, desc, variant = "default" }) => {
         boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
       }}
     >
-      <div className=" ">
-        <div className="">
-          <div className="absolute bg-gradient-to-r from-purple-300/30 via-violet-500/80 to-fuchsia-300/30 animate-border-flow rounded-2xl"></div>
-        </div>
-      </div>
+      <div className="absolute -bottom-20 -right-40 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500/100 rounded-full blur-3xl"></div>
+      <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-2xl"></div>
 
       {/* Image Section */}
       <div className="w-full h-[200px] ">

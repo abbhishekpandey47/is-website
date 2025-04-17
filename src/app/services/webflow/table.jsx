@@ -73,9 +73,9 @@ export default function Webtable() {
 
 
         {/* Right Column */}
-        <div className="flex flex-col gap-8 text-center p-8 rounded-lg justify-end">
-          <div className="border-b border-solid border-gray-300 w-64 pb-2">
-            <p className="font-medium text-white">Freelancers</p>
+        <div className="flex flex-col gap-8 text-center p-8  rounded-lg justify-end">
+          <div className="border-b border-solid border-gray-300  w-64 pb-2">
+            <p className="font-bold text-white">Freelancers</p>
           </div>
           <div className="border-b border-solid border-gray-300 w-64 pb-2">
             <p className="text-white">Expensive</p>
@@ -100,7 +100,7 @@ export default function Webtable() {
         {/* Far Right Column */}
         <div className="flex flex-col gap-8 text-center p-8 justify-end">
           <div className="border-b border-solid border-gray-300 w-64 pb-2">
-            <p className="font-medium text-white">Other Agencies</p>
+            <p className="font-bold text-white">Other Agencies</p>
           </div>
           <div className="border-b border-solid border-gray-300 w-64 pb-2">
             <p className="text-white">Very expensive</p>

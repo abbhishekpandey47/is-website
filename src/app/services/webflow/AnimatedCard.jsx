@@ -58,13 +58,16 @@ export default function AnimatedCard() {
           {duplicatedProjects.map((project, i) => (
             <motion.div
               key={i}
-              className="bg-gradient-to-br from-[#231442] to-[#331a63] border border-white rounded-xl shadow-md p-3 w-[450px] flex-shrink-0 flex flex-col"
+              className="bg-gradient-to-br from-[#231442] to-[#331a63] rounded-xl shadow-md p-3 w-[450px] flex-shrink-0 flex flex-col"
               style={{
                 background: `linear-gradient(35deg, rgba(71, 24, 99, 0.2) 10%, rgba(118, 67, 175, 0.5) 50%, rgba(193, 145, 231, 0.2) 100%)`,
                 boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
               }}
-              whileHover={{ scale: 1.05 }} // Slight zoom effect on hover
+              // whileHover={{ scale: 1.05 }} // Slight zoom effect on hover
             >
+          <div className="absolute -bottom-20 -right-40 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500/100 rounded-full blur-3xl"></div>
+          <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-2xl"></div>
+
               <h3 className="text-xl font-semibold mb-4 text-white text-start">
                 {project.title}
               </h3>

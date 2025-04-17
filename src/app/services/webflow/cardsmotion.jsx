@@ -76,7 +76,7 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
       {/* Cards Container */}
       <div
         ref={containerRef}
-        className="overflow-hidden max-w-8xl mx-auto"
+        className="overflow-hidden max-w-8xl mx-auto "
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -101,9 +101,11 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
                 boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
               }}
             >
+          <div className="absolute -bottom-20 -right-40 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500/100 rounded-full blur-3xl"></div>
+          <div className="absolute -top-20 -left-20 w-0 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-2xl"></div>
 
               {/* Left Section: Text */}
-              <div className="flex-1 p-6 flex flex-col justify-center text-start">
+              <div className="flex-1 p-6 flex flex-col justify-center text-start rounded-xl">
                 <h3 className="text-2xl font-semibold mb-4 text-white">
                   {service.head}
                 </h3>
@@ -111,11 +113,11 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
               </div>
 
               {/* Right Section: Image */}
-              <div className="flex-shrink-0 w-1/2 h-full">
+              <div className="flex-shrink-0 w-1/2 h-full ">
                 <Image
                   src={service.image}
                   alt={service.head}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-r-xl"
                   width={600}
                   height={550}
                 />

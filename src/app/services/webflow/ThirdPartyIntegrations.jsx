@@ -63,15 +63,28 @@ export default function ThirdPartyIntegrations() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
         {contentItems.map(({ title, icon }) => (
+          // <div
+          //   key={title}
+            // className="rounded-2xl p-4 sm:p-6 h-full relative overflow-hidden border border-white/5 transition-all duration-500 card-container"
+          //   style={{
+          //     // background: `linear-gradient(135deg, rgba(97, 105, 252, 0.5) 30%, rgba(101, 110, 240, 0.8) 60%, rgba(86, 76, 226, 0.5) 100%)`,
+          //     boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.4)",
+          //     backdropFilter: "blur(4px)",
+          //   }}
+          // >
           <div
-            key={title}
-            className="rounded-2xl p-4 sm:p-6 h-full relative overflow-hidden border border-white/5 transition-all duration-500 card-container"
-            style={{
-              // background: `linear-gradient(135deg, rgba(97, 105, 252, 0.5) 30%, rgba(101, 110, 240, 0.8) 60%, rgba(86, 76, 226, 0.5) 100%)`,
-              boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.4)",
-              backdropFilter: "blur(4px)",
-            }}
-          >
+          className="rounded-2xl p-4 sm:p-6 h-full relative overflow-hidden border border-white/5 transition-all duration-500 card-container"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.05))",
+            boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
+            border: "2px solid rgba(255, 255, 255, 0.1)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          <div className="absolute -bottom-20 -right-40 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500/100 rounded-full blur-3xl"></div>
+          <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-2xl"></div>
+
             {/* Subtle Inner Glow */}
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/5 to-violet-600/5"></div>
 
