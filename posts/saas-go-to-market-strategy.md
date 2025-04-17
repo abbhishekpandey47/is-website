@@ -114,6 +114,8 @@ These landing pages should consist of crisp information and elements with CTA bu
 
 Additionally, since these pages are mainly designed for paid advertisement, you don't have to care about it being ranked down.
 
+![saas go to market strategy - infrasity landing page](/PostImages/saas-go-to-market-strategy/g1.png) 
+
 For example, this is Infrasity's landing page for paid advertisement.
 
 ### 3. Develop Use Case Examples
