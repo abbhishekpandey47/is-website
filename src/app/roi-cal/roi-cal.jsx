@@ -36,6 +36,7 @@ export default function ContentROICalculator() {
   }, [handleInputChange]);
 
   const handleCalculate = useCallback(() => {
+
     setIsLoading(true);
 
     const { blogPosts, timeline } = formValues;
@@ -67,9 +68,9 @@ export default function ContentROICalculator() {
   const { inHouseCost, outsourcedCost, savings, savingsPercentage, hasCalculated } = results;
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-6 font-sans mb-24 bg-gray-900">
+    <div className="w-full max-w-6xl mx-auto p-6 font-sans mb-24">
       <div>
-        <div className="w-full rounded-2xl p-6 bg-gray-800 border border-gray-700 shadow-xl text-white">
+        <div className="w-full rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left */}
             <div className="w-full lg:w-1/2">
@@ -86,7 +87,7 @@ export default function ContentROICalculator() {
                     inputMode="numeric"
                     value={budget}
                     onChange={handleBudgetChange}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-700 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="w-full pl-8 pr-4 py-3 border border-gray-700 rounded-lg bg-gray-800/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
               </div>
@@ -142,7 +143,7 @@ export default function ContentROICalculator() {
                   <select
                     value={trafficGrowth}
                     onChange={(e) => handleInputChange('trafficGrowth', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
                   >
                     <option value="0">0%</option>
                     <option value="25">25%</option>
@@ -165,7 +166,7 @@ export default function ContentROICalculator() {
                   <select
                     value={contentTeam}
                     onChange={(e) => handleInputChange('contentTeam', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
                   >
                     <option value="No">No</option>
                     <option value="Yes">Yes</option>
@@ -184,7 +185,7 @@ export default function ContentROICalculator() {
                   <select
                     value={timeline}
                     onChange={(e) => handleInputChange('timeline', parseInt(e.target.value))}
-                    className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
                   >
                     <option value="1">1 month</option>
                     <option value="3">3 months</option>
@@ -200,26 +201,26 @@ export default function ContentROICalculator() {
               </div>
               
               <button
-                onClick={handleCalculate}
-                disabled={isLoading}
-                className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200 mt-4 relative"
-              >
-                {isLoading ? (
-                  <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Calculating...
-                  </span>
-                ) : (
-                  "Calculate ROI"
-                )}
-              </button>
+        onClick={handleCalculate}
+        disabled={isLoading}
+        className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200 mt-4 relative"
+      >
+        {isLoading ? (
+          <span className="flex items-center justify-center">
+            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Calculating...
+          </span>
+        ) : (
+          "Calculate ROI"
+        )}
+      </button>
             </div>
 
-            <div className="w-px min-h-full bg-gray-600 hidden lg:block"></div>
-            <div className="w-full h-px bg-gray-600 block lg:hidden my-4"></div>
+            <div className="w-px min-h-full bg-gray-600"></div>
+            <div className="w-full h-px md:w-px md:h-full bg-gray-600"></div>
             
             {/* Right */}
             <div className="w-full lg:w-1/2">
@@ -227,7 +228,7 @@ export default function ContentROICalculator() {
               
               {hasCalculated ? (
                 <div className="space-y-6">
-                  <div className="bg-gray-800 border border-gray-700 shadow-xl rounded-lg p-6">
+                  <div className="bg-white/6 backdrop-blur-md border border-white/10 shadow-xl rounded-lg p-6">
                     <h3 className="text-xl font-bold mb-4">Cost Comparison</h3>
                     
                     <div className="border-b border-gray-700 pb-3 mb-3 flex justify-between">
@@ -246,7 +247,7 @@ export default function ContentROICalculator() {
                     </div>
                   </div>
                   
-                  <div className="bg-gray-800 border border-gray-700 shadow-xl rounded-lg p-6">
+                  <div className="bg-white/6 backdrop-blur-md border border-white/10 shadow-xl rounded-lg p-6">
                     <h3 className="text-xl font-bold mb-4">Time to Value</h3>
                     
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
@@ -270,7 +271,7 @@ export default function ContentROICalculator() {
                     <p className="mt-4 text-blue-400">You get content 4x faster and save weeks of ramp-up.</p>
                   </div>
                   
-                  <div className="bg-gray-800 border border-gray-700 shadow-xl rounded-lg p-6">
+                  <div className="bg-white/6 backdrop-blur-md border border-white/1 shadow-xl rounded-lg p-6">
                     <h3 className="text-xl font-bold mb-4">Deliverables Estimate</h3>
                     
                     <div className="mb-2">
@@ -285,16 +286,24 @@ export default function ContentROICalculator() {
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center h-full bg-gray-800 border border-gray-700 rounded-lg p-8">
+                <div className="flex flex-col items-center justify-center h-full">
                   <div className="w-24 h-24 mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-full h-full text-gray-600">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <p className="text-gray-300 text-center mb-4">Enter your details and calculate ROI to see potential savings</p>
-                  <p className="text-gray-400 text-sm text-center">Results will appear here after calculation</p>
+                  <p className="text-gray-400 text-center mb-4">Enter your details and calculate ROI to see potential savings</p>
+                  <p className="text-gray-500 text-sm text-center">Results will appear here after calculation</p>
                 </div>
               )}
+              
+              {/* {hasCalculated && (
+                <div className="mt-6 text-center">
+                  <button className="py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200">
+                    Download Full Report
+                  </button>
+                </div>
+              )} */}
             </div>
           </div>
         </div>
