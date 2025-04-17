@@ -2,6 +2,7 @@ import { Zap } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 
 const BookDemo = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
   const calendlyLoaded = useRef(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const embedRef = useRef(null);
@@ -41,7 +42,6 @@ const BookDemo = () => {
       });
     }
     
-    // Add click outside handler
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         closePopup();
@@ -58,16 +58,20 @@ const BookDemo = () => {
   }, [isPopupOpen]);
 
   const openPopup = () => {
+    setIsExpanded(true);
     setIsPopupOpen(true);
   };
 
   const closePopup = () => {
+    setIsExpanded(false)
     setIsPopupOpen(false);
   };
 
   return (
-    <div className="w-full lg:w-[80%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg">
-      <section className="w-full bg-[#0D0A1A] relative rounded-2xl shadow-lg min-h-[50vh] md:min-h-[50vh] lg:min-h-[35vh] overflow-hidden">
+    <div className="w-[100%] lg:w-[65%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg">
+      <section className={`w-full bg-[#0D0A1A] relative rounded-2xl shadow-lg min-h-[50vh] md:min-h-[50vh] ${
+          isExpanded ? "h-[120vh]" : "lg:min-h-[35vh]"
+        } overflow-hidden`}>
         {/* Stars */}
         <Stars />
 
@@ -94,10 +98,10 @@ const BookDemo = () => {
 
       {/* Popup */}
       {isPopupOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-40 bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
           <div 
             ref={modalRef}
-            className="bg-white rounded-lg w-full max-w-8xl h-[90vh] lg:h-[80vh] relative"
+            className="bg-white rounded-lg w-full max-w-8xl h-[90vh] lg:h-[150vh] lg:min-h-[95vh] relative"
           >
             {/* Close button */}
             <button
