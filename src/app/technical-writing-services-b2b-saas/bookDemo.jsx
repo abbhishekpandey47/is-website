@@ -66,7 +66,7 @@ const BookDemo = () => {
   };
 
   return (
-    <div className="w-[65%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg">
+    <div className="w-full lg:w-[80%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg">
       <section className="w-full bg-[#0D0A1A] relative rounded-2xl shadow-lg min-h-[50vh] md:min-h-[50vh] lg:min-h-[35vh] overflow-hidden">
         {/* Stars */}
         <Stars />
@@ -94,10 +94,10 @@ const BookDemo = () => {
 
       {/* Popup */}
       {isPopupOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center z-40 bg-black bg-opacity-50">
           <div 
             ref={modalRef}
-            className="bg-white rounded-lg w-full max-w-4xl h-screen max-h-[50vh] relative"
+            className="bg-white rounded-lg w-full max-w-8xl h-[90vh] lg:h-[80vh] relative"
           >
             {/* Close button */}
             <button
