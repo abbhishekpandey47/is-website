@@ -18,10 +18,9 @@ export function ClientLayoutWrapper({ children }) {
   
   const pathname = usePathname();
   const hideNavbar = pathname === '/technical-writing-services-b2b-saas';
-  
   return (
     <>
-      <CrispWithNoSSR />
+      {/* <CrispWithNoSSR /> */}
       <Script
         id="koala-tracking"
         strategy="afterInteractive"
