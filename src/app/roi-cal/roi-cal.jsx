@@ -71,10 +71,19 @@ export default function ContentROICalculator() {
 
     setIsLoading(true);
 
-    const { blogPosts, timeline, budget } = formValues;
+    const { blogPosts, timeline, budget, domainExpertise } = formValues;
 
     if(budget < 1) {
       handleOperation("Budget must be greater than 0.");
+      setIsLoading(false);
+      return;
+    }
+    
+    const currValueOutSource = domainExpertise ? 540 : 495;
+    const valOutsourcedCost = blogPosts * currValueOutSource * timeline;
+
+    if(valOutsourcedCost > budget) {
+      handleOperation(`This setup isn't realistic — your budget can't support ${blogPosts} blogs/month. Try reducing output or increasing budget.`);
       setIsLoading(false);
       return;
     }
@@ -83,10 +92,8 @@ export default function ContentROICalculator() {
       setError(null);
     }
     
-    const valOutsourcedCost = blogPosts * 495 * timeline;
-    
     let valInHouseCost = 7000 * timeline;
-    valInHouseCost = (valInHouseCost + (7000 * 1.5)) * 1.2; 
+    valInHouseCost = (valInHouseCost + (7000 * 2)) * 1.2; 
     
     const valSavings = valInHouseCost - valOutsourcedCost;
     const valSavingsPercentage = Math.round((valSavings / valInHouseCost) * 100);
