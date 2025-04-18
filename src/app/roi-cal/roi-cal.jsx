@@ -56,9 +56,15 @@ export default function ContentROICalculator() {
     }));
   }, []);
 
+  const handleOutput = () => {
+    setResults(prev => ({
+      ...prev,
+      hasCalculated: false
+    }));
+  }
+
   const handleOperation = (msg) => {
       setError(msg);
-      
   };
 
   // Handle budget input with proper validation
@@ -73,9 +79,16 @@ export default function ContentROICalculator() {
 
     const { blogPosts, timeline, budget, domainExpertise } = formValues;
 
+    const { hasCalculated } = results;
+
     if(budget < 1) {
       handleOperation("Budget must be greater than 0.");
       setIsLoading(false);
+
+      if(hasCalculated) {
+        handleOutput();
+      }
+
       return;
     }
     
@@ -85,12 +98,18 @@ export default function ContentROICalculator() {
     if(valOutsourcedCost > budget) {
       handleOperation(`This setup isn't realistic — your budget can't support ${blogPosts} blogs/month. Try reducing output or increasing budget.`);
       setIsLoading(false);
+
+      if(hasCalculated) {
+        handleOutput();
+      }
+
       return;
     }
 
     if(error) {
       setError(null);
     }
+
     
     let valInHouseCost = 7000 * timeline;
     valInHouseCost = (valInHouseCost + (7000 * 2)) * 1.2; 
@@ -358,7 +377,6 @@ export default function ContentROICalculator() {
               )}
               
               
-              {/* {error && <ErrorPopup message={error} />} */}
               
               {/* {hasCalculated && (
                 <div className="mt-6 text-center">
