@@ -6,7 +6,6 @@ import Image from "next/image";
 const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
   const containerRef = useRef(null);
   const [cardsPosition, setCardsPosition] = useState(0);
-  const [isHovering, setIsHovering] = useState(false);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [isAtStart, setIsAtStart] = useState(true);
 
@@ -16,42 +15,39 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
   const containerPadding = 100; // Space before the first card
 
   const handleWheel = (e) => {
+    e.preventDefault(); // Always prevent default to handle scrolling manually
+    
     const scrollAmount = e.deltaY;
-
-    // If hovering over the cards, lock vertical scrolling
-    if (isHovering) {
-      e.preventDefault();
-
-      // Calculate new position
-      let newPosition = cardsPosition - scrollAmount;
-
-      // Prevent scrolling beyond the last card
-      if (newPosition < -totalCardsWidth + cardWidth) {
-        newPosition = -totalCardsWidth + cardWidth;
-        setIsAtEnd(true); // Allow vertical scrolling after reaching the last card
-      } else {
-        setIsAtEnd(false);
-      }
-
-      // Prevent scrolling beyond the first card (with padding)
-      if (newPosition > containerPadding) {
-        newPosition = containerPadding;
-        setIsAtStart(true); // Allow vertical scrolling after reaching the first card
-      } else {
-        setIsAtStart(false);
-      }
-
-      setCardsPosition(newPosition);
+    const scrollMultiplier = 1.5; // Adjust for scroll sensitivity
+    
+    // Calculate new position with multiplier for smoother scrolling
+    let newPosition = cardsPosition - (scrollAmount * scrollMultiplier);
+    
+    // Calculate the minimum position (rightmost boundary)
+    const containerWidth = containerRef.current.clientWidth;
+    const minPosition = -(totalCardsWidth - containerWidth + containerPadding);
+    
+    // Prevent scrolling beyond the last card
+    if (newPosition < minPosition) {
+      newPosition = minPosition;
+      setIsAtEnd(true);
     } else {
-      // If not hovering over the cards, allow normal vertical scrolling
-      if (!isAtEnd && !isAtStart) {
-        e.preventDefault();
-      }
+      setIsAtEnd(false);
     }
+    
+    // Prevent scrolling beyond the first card (with padding)
+    if (newPosition > containerPadding) {
+      newPosition = containerPadding;
+      setIsAtStart(true);
+    } else {
+      setIsAtStart(false);
+    }
+    
+    setCardsPosition(newPosition);
   };
 
   useEffect(() => {
-      const container = containerRef.current;
+    const container = containerRef.current;
     if (container) {
       container.addEventListener("wheel", handleWheel, { passive: false });
     }
@@ -60,7 +56,7 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
         container.removeEventListener("wheel", handleWheel);
       }
     };
-  }, [cardsPosition, isHovering, isAtEnd, isAtStart]);
+  }, [cardsPosition]); // Only depend on cardsPosition
 
   return (
     <div className="mt-4 px-4 py-16 cursor-pointer">
@@ -76,12 +72,10 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
       {/* Cards Container */}
       <div
         ref={containerRef}
-        className="overflow-hidden max-w-8xl mx-auto "
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
+        className="overflow-hidden max-w-8xl mx-auto"
       >
-      <motion.div
-                className="flex flex-nowrap gap-8"
+        <motion.div
+          className="flex flex-nowrap gap-8"
           animate={{ x: cardsPosition }}
           transition={{ type: "spring", stiffness: 150, damping: 20 }}
           style={{ paddingLeft: containerPadding }}
@@ -90,19 +84,13 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
             <div
               key={index}
               className="bg-white text-black rounded-xl shadow-lg flex-shrink-0 w-[780px] flex items-stretch gap-6"
-              // style={{
-              //   backgroundColor: "#141318",
-              //   backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 90%)`,
-              //   boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
-              //   border: "2px solid rgba(60, 63, 84, 0.3)",
-              // }}
               style={{
                 background: `linear-gradient(35deg, rgba(71, 24, 99, 0.2) 10%, rgba(118, 67, 175, 0.5) 50%, rgba(193, 145, 231, 0.2) 100%)`,
                 boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
               }}
             >
-          <div className="absolute -bottom-20 -right-40 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500/100 rounded-full blur-3xl"></div>
-          <div className="absolute -top-20 -left-20 w-0 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-2xl"></div>
+              <div className="absolute -bottom-20 -right-40 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500/100 rounded-full blur-3xl"></div>
+              <div className="absolute -top-20 -left-20 w-0 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-2xl"></div>
 
               {/* Left Section: Text */}
               <div className="flex-1 p-6 flex flex-col justify-center text-start rounded-xl">
@@ -113,7 +101,7 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
               </div>
 
               {/* Right Section: Image */}
-              <div className="flex-shrink-0 w-1/2 h-full ">
+              <div className="flex-shrink-0 w-1/2 h-full">
                 <Image
                   src={service.image}
                   alt={service.head}
