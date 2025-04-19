@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo } from "react";
 import HomeMarquee from "@/Components/HomePage/HomeMarquee";
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 import CardMotion from "./cardsmotion";
 import CardComponent from "@/app/services/webflow-services/CardComponent";
 import AnimatedCard from "@/app/services/webflow-services/AnimatedCard";
@@ -20,12 +20,12 @@ import css1 from "./images/thecss/css4.png";
 import css2 from "./images/thecss/css5.png";
 import css6 from "./images/thecss/css2.png";
 
-import img1 from './images/devs/dev1.png';
-import img2 from './images/devs/dev2.png';
-import img3 from './images/devs/dev3.png';
-import img4 from './images/devs/dev4.png';
-import img5 from './images/devs/dev5.png';
-import img6 from './images/devs/dev6.png';
+import img1 from "./images/devs/dev1.png";
+import img2 from "./images/devs/dev2.png";
+import img3 from "./images/devs/dev3.png";
+import img4 from "./images/devs/dev4.png";
+import img5 from "./images/devs/dev5.png";
+import img6 from "./images/devs/dev6.png";
 
 const fileList = [
   "aviator.png",
@@ -121,7 +121,6 @@ const serviceCards = [
   },
 ];
 
-
 const page = () => {
   const fileMemo = useMemo(() => fileList, [fileList]);
 
@@ -173,7 +172,7 @@ const page = () => {
 
           {/* Call to Action */}
           <div className="flex justify-center">
-          <div className="flex justify-center md:justify-start">
+            <div className="flex justify-center md:justify-start">
               <CalendlyButton name="Book a Demo" />
             </div>
           </div>
@@ -216,11 +215,10 @@ const page = () => {
               <CardMotion serviceArr={serviceArr} />
             </div>
             <div className="flex justify-center">
-            <div className="flex justify-center md:justify-start">
-              <CalendlyButton name="Book a Demo" />
+              <div className="flex justify-center md:justify-start">
+                <CalendlyButton name="Book a Demo" />
+              </div>
             </div>
-          </div>
-
           </div>
 
           {/* Why Choose Us Section */}
@@ -238,22 +236,23 @@ const page = () => {
             <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
               We have over 17+ years of experience in design and development.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl justify-center mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
               {serviceCards.map((card, index) => (
-                <CardComponent
-                  key={index}
-                  image={card.image}
-                  title={card.title}
-                  desc={card.desc}
-                />
+                <div className="p-2 md:p-3">
+                  <CardComponent
+                    key={index}
+                    image={card.image}
+                    title={card.title}
+                    desc={card.desc}
+                  />
+                </div>
               ))}
-            </div>
+            </div>{" "}
             <div className="flex justify-center">
-          <div className="flex justify-center md:justify-start mt-8">
-              <CalendlyButton name="Book a Demo" />
+              <div className="flex justify-center md:justify-start mt-8">
+                <CalendlyButton name="Book a Demo" />
+              </div>
             </div>
-          </div>
-
           </div>
 
           {/**  recent project */}
@@ -270,7 +269,6 @@ const page = () => {
             </div>
           </div>
 
-
           {/**table */}
           <div
             className="mb-24"
@@ -285,8 +283,6 @@ const page = () => {
             </div>
           </div>
 
-
-
           {/* Additional Sections */}
           <div
             className="mb-24"
@@ -300,45 +296,42 @@ const page = () => {
           </div>
 
           {/**faq */}
-          
+
           <div
             style={{
               background:
                 "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
             }}
-          > 
-          <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+          >
+            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
             <FAQ />
           </div>
 
-
           <div
             style={{
               background:
                 "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
             }}
-          > 
-          <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+          >
+            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
             <TestimonialSlider />
           </div>
 
-
           <div
             style={{
               background:
                 "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
             }}
-          > 
-          <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
-          <div className=" flex mt-8 justify-center items-center">
-            <BookDemo />
+          >
+            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+            <div className=" flex mt-8 justify-center items-center">
+              <BookDemo />
+            </div>
           </div>
-          </div>
-
         </section>
       </div>
     </motion.div>
   );
-};  
+};
 
 export default page;
