@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import BookDemo from "../blog/[slug]/bookDemo";
 import Timeline from "./timeline";
+import LogoMoving from "./logomoving";
 
 const about = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -328,6 +329,11 @@ const about = () => {
         <BookDemo />
       </div>
       </div>
+
+{/* 
+      <div>
+        < LogoMoving />
+      </div> */}
     </div>
   );
 };
