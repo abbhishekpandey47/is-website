@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import ErrorPopup from './error';
+import TooltipIcon from './TooltipIcon';
 
 export default function ContentROICalculator() {
     const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +34,7 @@ export default function ContentROICalculator() {
   
 
   const [formValues, setFormValues] = useState({
-    budget: 15000,
+    budget: 0,
     blogPosts: 3,
     trafficGrowth: 0,
     contentTeam: "No",
@@ -71,6 +72,13 @@ export default function ContentROICalculator() {
   const handleBudgetChange = useCallback((e) => {
     const value = e.target.value.replace(/[^\d]/g, '');
     handleInputChange('budget', value === '' ? '' : parseInt(value, 10) || 0);
+  }, [handleInputChange]);
+
+  const handleTrafficGrowthChange = useCallback((e) => {
+    const value = e.target.value.replace(/[^\d]/g, '');
+    let numValue = value === '' ? 0 : parseInt(value, 10);
+    if (numValue > 100) numValue = 100;
+    handleInputChange('trafficGrowth', numValue);
   }, [handleInputChange]);
 
   const handleCalculate = useCallback(() => {
@@ -145,7 +153,14 @@ export default function ContentROICalculator() {
               <h2 className="text-2xl font-bold text-center mb-8">Enter your details</h2>
               
               <div className="mb-5">
-                <label className="block text-gray-300 mb-2">Monthly content budget</label>
+              <div className="relative inline-block">
+  <label className="block text-gray-300 mb-2">
+    Monthly content budget
+    <TooltipIcon description="Estimated amount you want to spend on content per month." />
+
+  </label>
+</div>
+
                 <div className="relative">
                   <div className="absolute left-0 top-0 bottom-0 flex items-center pl-3 pointer-events-none">
                     <span className="text-gray-300">$</span>
@@ -161,7 +176,15 @@ export default function ContentROICalculator() {
               </div>
               
               <div className="mb-5">
-                <label className="block text-gray-300 mb-2">Blog posts per month</label>
+              <div className="relative inline-block">
+  <label className="block text-gray-300 mb-2">
+  Blog posts per month
+
+  <TooltipIcon description="Number of blog articles you expect to publish each month." />
+
+
+  </label>
+</div>
                 <div className="mt-1">
                   <input
                     type="range"
@@ -179,7 +202,9 @@ export default function ContentROICalculator() {
               
               <div className="mb-5">
                 <div className="flex justify-between items-center">
-                  <label className="block text-gray-300">Domain expertise required?</label>
+                  <label className="block text-gray-300">Domain expertise required?
+                  <TooltipIcon description="Specify if the content needs specialized industry knowledge or experience." />
+                  </label>
                   <div className="relative inline-block w-12 h-6">
                     <input
                       type="checkbox"
@@ -206,30 +231,27 @@ export default function ContentROICalculator() {
               </div>
 
               <div className="mb-5">
-                <label className="block text-gray-300 mb-2">Target traffic growth</label>
-                <div className="relative">
-                  <select
-                    value={trafficGrowth}
-                    onChange={(e) => handleInputChange('trafficGrowth', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  >
-                    <option value="0">0%</option>
-                    <option value="25">25%</option>
-                    <option value="40">40%</option>
-                    <option value="60">60%</option>
-                    <option value="90">90%</option>
-                    <option value="100">100%</option>
-                  </select>
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                  </div>
-                </div>
-              </div>
+  <label className="block text-gray-300 mb-2">
+    Target traffic growth
+    <TooltipIcon description="Enter the percentage increase in traffic you aim to achieve." />
+  </label>
+  <div className="relative">
+    <input
+      type="text"
+      value={trafficGrowth}
+      onChange={(e) => handleTrafficGrowthChange(e)}
+      className="w-full px-4 py-3 border border-gray-700 rounded-lg bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
+      placeholder="Enter percentage"
+    />
+    <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">%</span>
+  </div>
+</div>
               
               <div className="mb-5">
-                <label className="block text-gray-300 mb-2">Do you have an existing content team?</label>
+                <label className="block text-gray-300 mb-2">Do you have an existing content team?
+                <TooltipIcon description="Tell us if you already have writers, editors, or strategists on your team." />
+
+                </label>
                 <div className="relative">
                   <select
                     value={contentTeam}
@@ -248,7 +270,9 @@ export default function ContentROICalculator() {
               </div>
               
               <div className="mb-5">
-                <label className="block text-gray-300 mb-2">Timeline</label>
+                <label className="block text-gray-300 mb-2">Timeline
+                <TooltipIcon description="Set your expected timeline for seeing results or getting deliverables." />
+                </label>
                 <div className="relative">
                   <select
                     value={timeline}
@@ -256,8 +280,16 @@ export default function ContentROICalculator() {
                     className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
                   >
                     <option value="1">1 month</option>
-                    <option value="3">3 months</option>
-                    <option value="6">6 months</option>
+                    <option value="1">2 month</option>
+                    <option value="1">3 month</option>
+                    <option value="1">4 month</option>
+                    <option value="1">5 month</option>
+                    <option value="1">6 month</option>
+                    <option value="3">7 months</option>
+                    <option value="6">8 months</option>
+                    <option value="1">9 month</option>
+                    <option value="1">10 month</option>
+                    <option value="1">11 month</option>
                     <option value="12">12 months</option>
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -288,9 +320,6 @@ export default function ContentROICalculator() {
 
       {error && (
         <div className="mt-2 text-red-500 text-sm flex items-center">
-          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
           {error}
         </div>
       )}
