@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useCallback } from 'react';
+import ErrorPopup from './error';
 
 export default function ContentROICalculator() {
     const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +19,8 @@ export default function ContentROICalculator() {
 
     const [email, setEmail] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [error, setError] = useState(null);
+
   
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -53,6 +56,17 @@ export default function ContentROICalculator() {
     }));
   }, []);
 
+  const handleOutput = () => {
+    setResults(prev => ({
+      ...prev,
+      hasCalculated: false
+    }));
+  }
+
+  const handleOperation = (msg) => {
+      setError(msg);
+  };
+
   // Handle budget input with proper validation
   const handleBudgetChange = useCallback((e) => {
     const value = e.target.value.replace(/[^\d]/g, '');
@@ -63,12 +77,42 @@ export default function ContentROICalculator() {
 
     setIsLoading(true);
 
-    const { blogPosts, timeline } = formValues;
+    const { blogPosts, timeline, budget, domainExpertise } = formValues;
+
+    const { hasCalculated } = results;
+
+    if(budget < 1) {
+      handleOperation("Budget must be greater than 0.");
+      setIsLoading(false);
+
+      if(hasCalculated) {
+        handleOutput();
+      }
+
+      return;
+    }
     
-    const valOutsourcedCost = blogPosts * 495 * timeline;
+    const currValueOutSource = domainExpertise ? 540 : 495;
+    const valOutsourcedCost = blogPosts * currValueOutSource * timeline;
+
+    if(valOutsourcedCost > budget) {
+      handleOperation(`This setup isn't realistic — your budget can't support ${blogPosts} blogs/month. Try reducing output or increasing budget.`);
+      setIsLoading(false);
+
+      if(hasCalculated) {
+        handleOutput();
+      }
+
+      return;
+    }
+
+    if(error) {
+      setError(null);
+    }
+
     
     let valInHouseCost = 7000 * timeline;
-    valInHouseCost = (valInHouseCost + (7000 * 1.5)) * 1.2; 
+    valInHouseCost = (valInHouseCost + (7000 * 2)) * 1.2; 
     
     const valSavings = valInHouseCost - valOutsourcedCost;
     const valSavingsPercentage = Math.round((valSavings / valInHouseCost) * 100);
@@ -241,6 +285,17 @@ export default function ContentROICalculator() {
           "Calculate ROI"
         )}
       </button>
+
+      {error && (
+        <div className="mt-2 text-red-500 text-sm flex items-center">
+          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          {error}
+        </div>
+      )}
+
+      
             </div>
 
             <div className="w-px min-h-full bg-gray-600"></div>
@@ -320,6 +375,8 @@ export default function ContentROICalculator() {
                   <p className="text-gray-500 text-sm text-center">Results will appear here after calculation</p>
                 </div>
               )}
+              
+              
               
               {/* {hasCalculated && (
                 <div className="mt-6 text-center">
