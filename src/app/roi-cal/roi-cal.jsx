@@ -34,9 +34,9 @@ export default function ContentROICalculator() {
   
 
   const [formValues, setFormValues] = useState({
-    budget: 0,
+    budget: '',
     blogPosts: 3,
-    trafficGrowth: 0,
+    trafficGrowth: '',
     contentTeam: "No",
     domainExpertise: false,
     timeline: 1
@@ -149,10 +149,11 @@ export default function ContentROICalculator() {
         <div className="w-full rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left */}
+            
             <div className="w-full lg:w-1/2">
-              <h2 className="text-2xl font-bold text-center mb-8">Enter your details</h2>
-              
-              <div className="mb-5">
+            
+              <h2 className="text-2xl font-bold text-center mb-8">Enter your details</h2>              
+              <div className="mb-5 group">
               <div className="relative inline-block">
   <label className="block text-gray-300 mb-2">
     Monthly content budget
@@ -166,6 +167,7 @@ export default function ContentROICalculator() {
                     <span className="text-gray-300">$</span>
                   </div>
                   <input 
+                  placeholder='Content Budget in USD'
                     type="text"
                     inputMode="numeric"
                     value={budget}
@@ -175,13 +177,13 @@ export default function ContentROICalculator() {
                 </div>
               </div>
               
-              <div className="mb-5">
+              <div className="mb-5 group">
               <div className="relative inline-block">
   <label className="block text-gray-300 mb-2">
   Blog posts per month
 
-  <TooltipIcon description="Number of blog articles you expect to publish each month." />
-
+  
+  <TooltipIcon description="Number of blog articles you expect to publish each month." /> 
 
   </label>
 </div>
@@ -200,9 +202,10 @@ export default function ContentROICalculator() {
                 </div>
               </div>
               
-              <div className="mb-5">
+              <div className="mb-5 group">
                 <div className="flex justify-between items-center">
                   <label className="block text-gray-300">Domain expertise required?
+
                   <TooltipIcon description="Specify if the content needs specialized industry knowledge or experience." />
                   </label>
                   <div className="relative inline-block w-12 h-6">
@@ -230,10 +233,11 @@ export default function ContentROICalculator() {
                 <div className="text-right text-gray-300 mt-1">{domainExpertise ? "Yes" : "No"}</div>
               </div>
 
-              <div className="mb-5">
-  <label className="block text-gray-300 mb-2">
+              <div className="mb-5 group">
+  <label className="relative inline-block text-gray-300 mb-2">
     Target traffic growth
-    <TooltipIcon description="Enter the percentage increase in traffic you aim to achieve." />
+
+     <TooltipIcon description="Enter the percentage increase in traffic you aim to achieve." />
   </label>
   <div className="relative">
     <input
@@ -247,9 +251,11 @@ export default function ContentROICalculator() {
   </div>
 </div>
               
-              <div className="mb-5">
+              <div className="mb-5 group">
                 <label className="block text-gray-300 mb-2">Do you have an existing content team?
-                <TooltipIcon description="Tell us if you already have writers, editors, or strategists on your team." />
+                  
+   
+                <TooltipIcon description="Tell us if you already have writers, editors, or strategists on your team." /> 
 
                 </label>
                 <div className="relative">
@@ -268,10 +274,14 @@ export default function ContentROICalculator() {
                   </div>
                 </div>
               </div>
+
               
-              <div className="mb-5">
-                <label className="block text-gray-300 mb-2">Timeline
-                <TooltipIcon description="Set your expected timeline for seeing results or getting deliverables." />
+              <div className="mb-5 group ">
+                <label className="text-gray-300 mb-2 relative inline-block">Timeline
+                  
+   
+       
+                <TooltipIcon description="Set your expected timeline for seeing results or getting deliverables." /> 
                 </label>
                 <div className="relative">
                   <select
