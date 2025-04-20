@@ -7,6 +7,8 @@ import TooltipIcon from './TooltipIcon';
 export default function ContentROICalculator() {
     const [isLoading, setIsLoading] = useState(false);
 
+    const [isEmailSending, setIsEmailSending] = useState(false);
+
     const [isPopup, setIsPopup] = useState(false);
 
     const handlePopup = () => {
@@ -24,13 +26,34 @@ export default function ContentROICalculator() {
     const [blogPerPost, setBlogPerPost] = useState(0);
     const [timelineInMonth, setTimelineInMonth] = useState(0);
 
+    
+
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
+
       e.preventDefault();
+      setIsEmailSending(true);
       if (email) {
-        setIsSubmitted(true);
-        // Here you would typically send the email to your backend
-        console.log('Email submitted:', email);
+        
+         try {
+        const response = await fetch('https://infrasity-backend-j84r.onrender.com/submit-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
+  
+        const data = await response.json();
+  
+        if (response.ok) {
+          setIsEmailSending(false)
+          setIsSubmitted(true);
+        } 
+      } catch (error) {
+        setIsEmailSending(false);
+        console.error('Error:', error);
+      }
       }
     };
   
@@ -199,7 +222,7 @@ export default function ContentROICalculator() {
                   <input
                     type="range"
                     min="1"
-                    max="20"
+                    max="1000"
                     value={blogPosts}
                     onChange={(e) => handleInputChange('blogPosts', parseInt(e.target.value))}
                     className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
@@ -445,7 +468,7 @@ export default function ContentROICalculator() {
               
               
               
-              {/* {hasCalculated && (
+              {hasCalculated && (
                 <div className="mt-6 text-center">
                   <button className="py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200"
                   onClick={handlePopup}
@@ -453,7 +476,7 @@ export default function ContentROICalculator() {
                     Download Full Report
                   </button>
                 </div>
-              )} */}
+              )}
             </div>
           </div>
         </div>
@@ -479,6 +502,8 @@ export default function ContentROICalculator() {
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
   </svg>
 </button>
+
+
       
       {/* Decorative glass effect elements */}
       <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-purple-500 opacity-10 blur-2xl"></div>
@@ -502,11 +527,22 @@ export default function ContentROICalculator() {
                 />
               </div>
               <button
-                type="submit"
-                className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
-              >
-                Subscribe
-              </button>
+        type="submit"
+        disabled={isEmailSending}
+        className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
+      >
+        {isEmailSending ? (
+          <span className="flex items-center justify-center">
+            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Submiting...
+          </span>
+        ) : (
+          "Submit"
+        )}
+      </button>
             </form>
           </>
         ) : (
@@ -519,7 +555,7 @@ export default function ContentROICalculator() {
               </div>
             </div>
             <h3 className="text-xl font-medium text-gray-100 mb-2">Thank You!</h3>
-            <p className="text-gray-300">You've been successfully subscribed to our newsletter.</p>
+            <p className="text-gray-300">Your email has been successfully submitted.</p>
           </div>
         )}
       </div>
