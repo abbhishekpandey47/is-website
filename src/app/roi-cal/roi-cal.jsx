@@ -387,7 +387,13 @@ export default function ContentROICalculator() {
                   </div>
                   
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">Time to Value</h3>
+                    
+
+                    <div className="grid grid-cols-3 pb-3 mb-3">
+                      <h3 className="text-xl font-bold">Time to Value</h3>
+                      <h3 className="text-xl font-bold text-center">In-House</h3>
+                      <h3 className="text-xl font-bold text-center">Infrasity</h3>
+                    </div>
                     
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Time to First Output</span>
