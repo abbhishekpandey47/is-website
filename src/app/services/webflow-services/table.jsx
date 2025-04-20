@@ -7,7 +7,7 @@ export default function Webtable() {
   return (
     <div className="flex flex-col items-center max-w-7xl mx-auto p-2 md:p-6 py-4 mt-10 text-sm md:text-md">
       <h1 className="text-xl md:text-3xl font-bold mb-4 md:mb-8 text-center text-white">
-        infrasity Agency vs Other Offerings
+        INFRASITY Agency vs Other Offerings
       </h1>
 
       {/* Mobile and Desktop table with horizontal scroll for small screens */}
