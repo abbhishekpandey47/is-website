@@ -136,10 +136,10 @@ const page = () => {
           <div className="flex justify-center mt-20">
             <div className="bg-black text-white px-5 py-3 rounded-full text-sm font-semibold flex items-center gap-2">
               <span className="bg-white text-black rounded-full px-3 py-0.5">
-                {" infrasity "}
+                {" INFRASITY "}
               </span>
               <span>5.0 Rating</span>
-              <span className="text-yellow-300">★★★★★</span>
+              <span className="text-purple-600">★★★★★</span>
             </div>
           </div>
 
@@ -213,11 +213,6 @@ const page = () => {
             </p>
             <div>
               <CardMotion serviceArr={serviceArr} />
-            </div>
-            <div className="flex justify-center">
-              <div className="flex justify-center md:justify-start">
-                <CalendlyButton name="Book a Demo" />
-              </div>
             </div>
           </div>
 
