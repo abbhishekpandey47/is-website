@@ -79,14 +79,14 @@ const Footer = () => {
                     Video Production
                   </a>
                 </li>
-                {/* <li>
+                <li>
                   <a
-                    href="/webflow"
+                    href="/services/webflow-services"
                     className="hover:underline"
                   >
-                    Webflow
+                    Webflow Services
                   </a>
-                </li> */}
+                </li>
               </ul>
             </div>
           </div>
