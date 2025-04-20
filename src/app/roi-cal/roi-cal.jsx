@@ -21,6 +21,8 @@ export default function ContentROICalculator() {
     const [email, setEmail] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [error, setError] = useState(null);
+    const [blogPerPost, setBlogPerPost] = useState(0);
+    const [timelineInMonth, setTimelineInMonth] = useState(0);
 
   
     const handleSubmit = (e) => {
@@ -34,9 +36,9 @@ export default function ContentROICalculator() {
   
 
   const [formValues, setFormValues] = useState({
-    budget: 0,
+    budget: '',
     blogPosts: 3,
-    trafficGrowth: 0,
+    trafficGrowth: '',
     contentTeam: "No",
     domainExpertise: false,
     timeline: 1
@@ -101,11 +103,15 @@ export default function ContentROICalculator() {
     }
     
     const currValueOutSource = domainExpertise ? 540 : 495;
+    setBlogPerPost(currValueOutSource);
     const valOutsourcedCost = blogPosts * currValueOutSource * timeline;
 
     if(valOutsourcedCost > budget) {
-      handleOperation(`This setup isn't realistic — your budget can't support ${blogPosts} blogs/month. Try reducing output or increasing budget.`);
+      const valYouneed = 
+      handleOperation(`This setup isn't feasible — your budget can't support ${blogPosts} blogs/month. Consider reducing output to ${Math.round(budget / currValueOutSource)} blogs/month, or increase your budget by $${valOutsourcedCost - budget}.`);
       setIsLoading(false);
+
+      //setRequiredBudget(budget - valOutsourcedCost)
 
       if(hasCalculated) {
         handleOutput();
@@ -121,6 +127,7 @@ export default function ContentROICalculator() {
     
     let valInHouseCost = 7000 * timeline;
     valInHouseCost = (valInHouseCost + (7000 * 2)) * 1.2; 
+    setTimelineInMonth(timeline);
     
     const valSavings = valInHouseCost - valOutsourcedCost;
     const valSavingsPercentage = Math.round((valSavings / valInHouseCost) * 100);
@@ -149,10 +156,11 @@ export default function ContentROICalculator() {
         <div className="w-full rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left */}
+            
             <div className="w-full lg:w-1/2">
-              <h2 className="text-2xl font-bold text-center mb-8">Enter your details</h2>
-              
-              <div className="mb-5">
+            
+              <h2 className="text-2xl font-bold text-center mb-8">Enter your details</h2>              
+              <div className="mb-5 group">
               <div className="relative inline-block">
   <label className="block text-gray-300 mb-2">
     Monthly content budget
@@ -166,6 +174,7 @@ export default function ContentROICalculator() {
                     <span className="text-gray-300">$</span>
                   </div>
                   <input 
+                  placeholder='Content Budget in USD'
                     type="text"
                     inputMode="numeric"
                     value={budget}
@@ -175,13 +184,13 @@ export default function ContentROICalculator() {
                 </div>
               </div>
               
-              <div className="mb-5">
+              <div className="mb-5 group">
               <div className="relative inline-block">
   <label className="block text-gray-300 mb-2">
   Blog posts per month
 
-  <TooltipIcon description="Number of blog articles you expect to publish each month." />
-
+  
+  <TooltipIcon description="Number of blog articles you expect to publish each month." /> 
 
   </label>
 </div>
@@ -200,9 +209,10 @@ export default function ContentROICalculator() {
                 </div>
               </div>
               
-              <div className="mb-5">
+              <div className="mb-5 group">
                 <div className="flex justify-between items-center">
                   <label className="block text-gray-300">Domain expertise required?
+
                   <TooltipIcon description="Specify if the content needs specialized industry knowledge or experience." />
                   </label>
                   <div className="relative inline-block w-12 h-6">
@@ -230,10 +240,11 @@ export default function ContentROICalculator() {
                 <div className="text-right text-gray-300 mt-1">{domainExpertise ? "Yes" : "No"}</div>
               </div>
 
-              <div className="mb-5">
-  <label className="block text-gray-300 mb-2">
+              <div className="mb-5 group">
+  <label className="relative inline-block text-gray-300 mb-2">
     Target traffic growth
-    <TooltipIcon description="Enter the percentage increase in traffic you aim to achieve." />
+
+     <TooltipIcon description="Enter the percentage increase in traffic you aim to achieve." />
   </label>
   <div className="relative">
     <input
@@ -247,9 +258,11 @@ export default function ContentROICalculator() {
   </div>
 </div>
               
-              <div className="mb-5">
+              <div className="mb-5 group">
                 <label className="block text-gray-300 mb-2">Do you have an existing content team?
-                <TooltipIcon description="Tell us if you already have writers, editors, or strategists on your team." />
+                  
+   
+                <TooltipIcon description="Tell us if you already have writers, editors, or strategists on your team." /> 
 
                 </label>
                 <div className="relative">
@@ -268,10 +281,14 @@ export default function ContentROICalculator() {
                   </div>
                 </div>
               </div>
+
               
-              <div className="mb-5">
-                <label className="block text-gray-300 mb-2">Timeline
-                <TooltipIcon description="Set your expected timeline for seeing results or getting deliverables." />
+              <div className="mb-5 group ">
+                <label className="text-gray-300 mb-2 relative inline-block">Timeline
+                  
+   
+       
+                <TooltipIcon description="Set your expected timeline for seeing results or getting deliverables." /> 
                 </label>
                 <div className="relative">
                   <select
@@ -280,16 +297,16 @@ export default function ContentROICalculator() {
                     className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
                   >
                     <option value="1">1 month</option>
-                    <option value="1">2 month</option>
-                    <option value="1">3 month</option>
-                    <option value="1">4 month</option>
-                    <option value="1">5 month</option>
-                    <option value="1">6 month</option>
-                    <option value="3">7 months</option>
-                    <option value="6">8 months</option>
-                    <option value="1">9 month</option>
-                    <option value="1">10 month</option>
-                    <option value="1">11 month</option>
+                    <option value="2">2 month</option>
+                    <option value="3">3 month</option>
+                    <option value="4">4 month</option>
+                    <option value="5">5 month</option>
+                    <option value="6">6 month</option>
+                    <option value="7">7 months</option>
+                    <option value="8">8 months</option>
+                    <option value="9">9 month</option>
+                    <option value="10">10 month</option>
+                    <option value="11">11 month</option>
                     <option value="12">12 months</option>
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -338,16 +355,30 @@ export default function ContentROICalculator() {
                 <div className="space-y-6">
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <h3 className="text-xl font-bold mb-4">Cost Comparison</h3>
-                    
-                    <div className="border-b border-gray-700 pb-3 mb-3 flex justify-between">
-                      <span>Hiring In-House</span>
-                      <span className="font-bold">${inHouseCost.toLocaleString()}</span>
-                    </div>
-                    
-                    <div className="border-b border-gray-700 pb-3 mb-3 flex justify-between">
-                      <span>Outsourced (Growth Plan)</span>
-                      <span className="font-bold">${outsourcedCost.toLocaleString()}</span>
-                    </div>
+           
+
+<div className="border-b border-gray-700 pb-3 mb-3">
+  <div className="flex justify-between items-center">
+    <span>Hiring In-House</span>
+    <span className="font-bold">${inHouseCost.toLocaleString()}</span>
+  </div>
+  <p className="text-gray-300 text-sm mt-1">
+    ({timelineInMonth} months × $7,000/month) + (2-month ramp-up × $7,000/month), then × 1.2 overhead
+  </p>
+</div>
+
+<div className="border-b border-gray-700 pb-3 mb-3">
+  <div className="flex justify-between items-center">
+    <span>Outsourced (Growth Plan)</span>
+    <span className="font-bold">${outsourcedCost.toLocaleString()}</span>
+  </div>
+  <p className="text-gray-300 text-sm mt-1">
+    {blogPosts} blog posts/month × ${blogPerPost} per post
+  </p>
+</div>
+
+
+                  
                     
                     <div className="flex justify-between text-blue-400">
                       <span className="font-bold">Savings:</span>
@@ -356,7 +387,13 @@ export default function ContentROICalculator() {
                   </div>
                   
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">Time to Value</h3>
+                    
+
+                    <div className="grid grid-cols-3 pb-3 mb-3">
+                      <h3 className="text-xl font-bold">Time to Value</h3>
+                      <h3 className="text-xl font-bold text-center">In-House</h3>
+                      <h3 className="text-xl font-bold text-center">Infrasity</h3>
+                    </div>
                     
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Time to First Output</span>
