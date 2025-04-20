@@ -41,7 +41,7 @@ export default function ContentROICalculator() {
     trafficGrowth: '',
     contentTeam: "No",
     domainExpertise: false,
-    timeline: 1
+    timeline: 1,
   });
 
   const [results, setResults] = useState({
@@ -107,8 +107,9 @@ export default function ContentROICalculator() {
     const valOutsourcedCost = blogPosts * currValueOutSource * timeline;
 
     if(valOutsourcedCost > budget) {
-      const valYouneed = 
-      handleOperation(`This setup isn't feasible — your budget can't support ${blogPosts} blogs/month. Consider reducing output to ${Math.round(budget / currValueOutSource)} blogs/month, or increase your budget by $${valOutsourcedCost - budget}.`);
+      const valYouneed = Math.round(budget / currValueOutSource);
+      handleOperation(`This setup isn't feasible — your budget can't support ${blogPosts} blogs/month. ${ valYouneed <= blogPosts ? `Consider reducing output to ${valYouneed} blogs/month, or increase your budget by $${valOutsourcedCost - budget}.` : `Increase your budget by $${valOutsourcedCost - budget}.`}`);
+
       setIsLoading(false);
 
       //setRequiredBudget(budget - valOutsourcedCost)
