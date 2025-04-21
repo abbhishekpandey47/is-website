@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
-
 // import { DownOutlined } from '@ant-design/icons';
 
 const GivenMenuBar = ({
@@ -37,10 +36,10 @@ const GivenMenuBar = ({
             <g>
               <g>
                 <path
-                  d="M484.132,124.986l-16.116-16.228c-5.072-5.068-11.82-7.86-19.032-7.86c-7.208,0-13.964,2.792-19.036,7.86l-183.84,183.848 
-      L62.056,108.554c-5.064-5.068-11.82-7.856-19.028-7.856s-13.968,2.788-19.036,7.856l-16.12,16.128 
-      c-10.496,10.488-10.496,27.572,0,38.06l219.136,219.924c5.064,5.064,11.812,8.632,19.084,8.632h0.084 
-      c7.212,0,13.96-3.572,19.024-8.632l218.932-219.328c5.072-5.064,7.856-12.016,7.864-19.224 
+                  d="M484.132,124.986l-16.116-16.228c-5.072-5.068-11.82-7.86-19.032-7.86c-7.208,0-13.964,2.792-19.036,7.86l-183.84,183.848
+      L62.056,108.554c-5.064-5.068-11.82-7.856-19.028-7.856s-13.968,2.788-19.036,7.856l-16.12,16.128
+      c-10.496,10.488-10.496,27.572,0,38.06l219.136,219.924c5.064,5.064,11.812,8.632,19.084,8.632h0.084
+      c7.212,0,13.96-3.572,19.024-8.632l218.932-219.328c5.072-5.064,7.856-12.016,7.864-19.224
       C491.996,136.902,489.204,130.046,484.132,124.986z"
                 />
               </g>
@@ -116,10 +115,10 @@ const Navbar = () => {
   return (
     <div className="w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute">
       <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[75vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg  lg:absolute lg:left-[50vw] lg:origin-center lg: transform lg:-translate-x-1/2">
-        <div className="navbar-start max-lg:visible invisible">
-          {/*     <div className="dropdown ">
+              <div className="navbar-start max-lg:visible invisible">
+                <div className="dropdown ">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                           
+
                         </div>
                         <ul
                             tabIndex={0}
@@ -137,7 +136,7 @@ const Navbar = () => {
                                 <ul className="p-2">
                                     <li><Link href="/services/service-video-production" onClick={(() => { checkVisitPage("/services/service-video-production") })}>Video Production</Link></li>
                                     <li><Link href="/service-blog-as-code" onClick={() => { setProgress(30) }}>Blogs-as-code</Link></li>
-                                    
+                                    <li><Link href="/services/webflow-services" onClick={(() => { checkVisitPage("/services/webflow-services") })}>Webflow Services</Link></li>
                                 </ul>
                             </li>
                             <li><Link href="/faq" onClick={(() => { checkVisitPage("/faq") })}>FAQ</Link></li>
@@ -171,7 +170,8 @@ const Navbar = () => {
                             </div>
                         </div>
                     </Link>
-                </div> */}
+                </div>
+              </div>
           <Menu as="div" className="relative inline-block text-left p-0">
             <div>
               <MenuButton className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20">
@@ -322,6 +322,7 @@ const Navbar = () => {
           className="btn btn-ghost w-40  lg:absolute"
           aria-label="Infrasity Home"
         >
+          </Link>
           <div className="flex flex-col my-auto items-center">
             {/*<div className="w-full flex justify-start">
                             <Image
