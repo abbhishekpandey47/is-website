@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useCallback } from 'react';
-import ErrorPopup from './error';
 import TooltipIcon from './TooltipIcon';
 
 export default function ContentROICalculator() {
@@ -15,6 +14,7 @@ export default function ContentROICalculator() {
       setIsPopup(true);
     };
 
+
     const closePopup = () => {
       setIsPopup(false);
     };
@@ -24,6 +24,7 @@ export default function ContentROICalculator() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [error, setError] = useState(null);
     const [blogPerPost, setBlogPerPost] = useState(0);
+    const [blogPerPostQunt, setblogPerPostQunt] = useState(0);
     const [timelineInMonth, setTimelineInMonth] = useState(0);
 
     
@@ -33,6 +34,9 @@ export default function ContentROICalculator() {
 
       e.preventDefault();
       setIsEmailSending(true);
+
+      const {budget, blogPosts, trafficGrowth, contentTeam, domainExpertise, timeline} =  formValues;
+
       if (email) {
         
          try {
@@ -41,7 +45,7 @@ export default function ContentROICalculator() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email, budget, blogPosts, trafficGrowth, contentTeam, domainExpertise, timeline }),
         });
   
         const data = await response.json();
@@ -61,7 +65,7 @@ export default function ContentROICalculator() {
   const [formValues, setFormValues] = useState({
     budget: '',
     blogPosts: 3,
-    trafficGrowth: '',
+    trafficGrowth: 50,
     contentTeam: "No",
     domainExpertise: false,
     timeline: 1,
@@ -125,6 +129,7 @@ export default function ContentROICalculator() {
       return;
     }
     
+    setblogPerPostQunt(blogPosts);
     const currValueOutSource = domainExpertise ? 540 : 495;
     setBlogPerPost(currValueOutSource);
     const valOutsourcedCost = blogPosts * currValueOutSource * timeline;
@@ -222,7 +227,7 @@ export default function ContentROICalculator() {
                   <input
                     type="range"
                     min="1"
-                    max="1000"
+                    max="50"
                     value={blogPosts}
                     onChange={(e) => handleInputChange('blogPosts', parseInt(e.target.value))}
                     className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
@@ -397,7 +402,7 @@ export default function ContentROICalculator() {
     <span className="font-bold">${outsourcedCost.toLocaleString()}</span>
   </div>
   <p className="text-gray-300 text-sm mt-1">
-    {blogPosts} blog posts/month × ${blogPerPost} per post
+    {blogPerPostQunt} blog posts/month × ${blogPerPost} per post
   </p>
 </div>
 
@@ -406,7 +411,7 @@ export default function ContentROICalculator() {
                     
                     <div className="flex justify-between text-blue-400">
                       <span className="font-bold">Savings:</span>
-                      <span className="font-bold">${savings.toLocaleString()} ({savingsPercentage}%)</span>
+                      <span className="font-bold blur-sm">${savings.toLocaleString()} ({savingsPercentage}%)</span>
                     </div>
                   </div>
                   
@@ -421,36 +426,36 @@ export default function ContentROICalculator() {
                     
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Time to First Output</span>
-                      <span className="col-span-1 text-center">4-6 weeks</span>
-                      <span className="col-span-1 text-center">1-2 weeks</span>
+                      <span className="col-span-1 text-center blur-sm">4-6 weeks</span>
+                      <span className="col-span-1 text-center blur-sm">1-2 weeks</span>
                     </div>
                     
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Output Per Month</span>
-                      <span className="col-span-1 text-center">{Math.floor(blogPosts/2)} assets</span>
-                      <span className="col-span-1 text-center">{blogPosts} assets</span>
+                      <span className="col-span-1 text-center blur-sm">{Math.floor(blogPerPostQunt/2) + 1} assets</span>
+                      <span className="col-span-1 text-center blur-sm">{blogPerPostQunt} assets</span>
                     </div>
                     
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Ramp-Up Time</span>
-                      <span className="col-span-1 text-center">High</span>
-                      <span className="col-span-1 text-center">None</span>
+                      <span className="col-span-1 text-center blur-sm">High</span>
+                      <span className="col-span-1 text-center blur-sm">None</span>
                     </div>
                     
-                    <p className="mt-4 text-blue-400">You get content 4x faster and save weeks of ramp-up.</p>
+                    <p className="mt-4 text-blue-400">You get content <span className="mt-4 text-blue-400 blur-sm">4 </span>x faster and save weeks of ramp-up.</p>
                   </div>
                   
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <h3 className="text-xl font-bold mb-4">Deliverables Estimate</h3>
                     
                     <div className="mb-2">
-                      <p>Month 1: {blogPosts} Blogs + 1 Video</p>
+                      <p>Month 1: {blogPerPostQunt} Blogs + 1 Video</p>
                     </div>
                     <div className="mb-2">
-                      <p>Month 2: {blogPosts} Blogs + 2 Docs</p>
+                      <p>Month 2: {blogPerPostQunt} Blogs + 2 Docs</p>
                     </div>
                     <div>
-                      <p>Month 3: {blogPosts-1} Blogs + 1 Case Study</p>
+                      <p>Month 3: {blogPerPostQunt} Blogs + 1 Case Study</p>
                     </div>
                   </div>
                 </div>
