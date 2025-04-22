@@ -6,8 +6,10 @@ const CardComponent = ({ image, title, desc, variant = "default" }) => {
     <div
       className="shadow-md bg-gradient-to-br from-[#231442] to-[#331a63] flex flex-col text-start rounded-xl relative p-2  h-full"
       style={{
-        background: `linear-gradient(35deg, rgba(71, 24, 99, 0.2) 10%, rgba(118, 67, 175, 0.5) 50%, rgba(193, 145, 231, 0.2) 100%)`,
+        backgroundColor: "#141318",
+        backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 80%)`,
         boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
+        border: "2px solid rgba(60, 63, 84, 0.3)",
       }}
     >
       {/* Background Glow Effects */}
