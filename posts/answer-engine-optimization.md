@@ -6,7 +6,7 @@ Is it something related to SEO only, or something different? Well, when I starte
 
 With the advent of AI overview, the concept of AEO also came into action. There's so much I want to share with you about it, especially the types of content you can create to leverage it. Also, some important tips for you to consider while creating that content for AEO.
 
-## But first, let me tell you - What is AEO?
+## But First, Let Me Tell You – What Is AEO?
 
 Answer Engine Optimization is a technique that optimizes your content to get visibility in **featured snippets, AI overview, and voice search results**. It involves creating the content in a way that you are answering their specific search query. It can be in question form or as a statement. 
 
@@ -16,7 +16,7 @@ Back to the concept - Answer engine optimization is a great way to enhance your 
 
 Therefore, follow just one simple technique - **curate your content in a way that answers the common search queries on the search engines**. There are more tips on AEO, but first, let us understand the key differences between SEO and AEO.
 
-## SEO vs AEO: Are they different?
+## SEO vs AEO: Are They Different?
 
 If you are assuming that the concept of AEO in SEO is a thing - that's not true! These two are different approaches to optimizing content and increasing your visibility over search engines.
 
