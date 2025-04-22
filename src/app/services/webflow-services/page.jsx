@@ -275,6 +275,12 @@ const page = () => {
             <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
             <div>
               <Webtable />
+              <div className="flex justify-center">
+                <div className="flex justify-center md:justify-start mt-4 font-semibold">
+                  <CalendlyButton name="Book a Demo" />
+                </div>
+              </div>
+
             </div>
           </div>
 

@@ -117,7 +117,7 @@ const Navbar = () => {
     <div className="w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute">
       <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[75vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg  lg:absolute lg:left-[50vw] lg:origin-center lg: transform lg:-translate-x-1/2">
         <div className="navbar-start max-lg:visible invisible">
-          {/*     <div className="dropdown ">
+        {/* <div className="dropdown ">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                            
                         </div>
@@ -137,7 +137,7 @@ const Navbar = () => {
                                 <ul className="p-2">
                                     <li><Link href="/services/service-video-production" onClick={(() => { checkVisitPage("/services/service-video-production") })}>Video Production</Link></li>
                                     <li><Link href="/service-blog-as-code" onClick={() => { setProgress(30) }}>Blogs-as-code</Link></li>
-                                    
+                                    <li><Link href="/services/webflow-services" onClick={(() => { checkVisitPage("/services/webflow-services") })}>Webflow Services</Link></li>
                                 </ul>
                             </li>
                             <li><Link href="/faq" onClick={(() => { checkVisitPage("/faq") })}>FAQ</Link></li>
