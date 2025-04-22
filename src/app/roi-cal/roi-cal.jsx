@@ -86,6 +86,7 @@ export default function ContentROICalculator() {
     }));
   }, []);
 
+
   const handleOutput = () => {
     setResults(prev => ({
       ...prev,
@@ -97,10 +98,24 @@ export default function ContentROICalculator() {
       setError(msg);
   };
 
+  const handlePostChange = (domainExpertis, valueOfBlogePost) => {
+    const { blogPosts } = formValues; 
+
+    const currValueOutSource = domainExpertis ? 540 : 495;
+    const budgetValue = valueOfBlogePost ? valueOfBlogePost * currValueOutSource : blogPosts * currValueOutSource;
+    handleInputChange('budget', budgetValue);
+  }
+
   // Handle budget input with proper validation
   const handleBudgetChange = useCallback((e) => {
+    const { domainExpertise } = formValues; 
     const value = e.target.value.replace(/[^\d]/g, '');
     handleInputChange('budget', value === '' ? '' : parseInt(value, 10) || 0);
+
+    const currValueOutSource = domainExpertise ? 540 : 495;
+    handleInputChange('blogPosts', Math.floor(value / currValueOutSource));
+    
+    handleInputChange('')
   }, [handleInputChange]);
 
   const handleTrafficGrowthChange = useCallback((e) => {
@@ -229,7 +244,9 @@ export default function ContentROICalculator() {
                     min="1"
                     max="50"
                     value={blogPosts}
-                    onChange={(e) => handleInputChange('blogPosts', parseInt(e.target.value))}
+                    onChange={(e) => {handleInputChange('blogPosts', parseInt(e.target.value));
+                      handlePostChange(domainExpertise, parseInt(e.target.value));
+                    }}
                     className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
                   />
                   <div className="flex justify-between text-xl text-gray-400 mt-1">
@@ -249,7 +266,10 @@ export default function ContentROICalculator() {
                       type="checkbox"
                       className="sr-only"
                       checked={domainExpertise}
-                      onChange={() => handleInputChange('domainExpertise', !domainExpertise)}
+                      onChange={() => {
+                        handleInputChange('domainExpertise', !domainExpertise);
+                        handlePostChange(!domainExpertise);
+                      }}                      
                       id="toggle"
                     />
                     <label
