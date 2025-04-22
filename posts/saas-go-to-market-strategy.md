@@ -179,4 +179,4 @@ HubSpot, Google Analytics, ChartMogul, Notion, Apollo, and MailChimp are some of
 
 ### 5. What Are the 5 pillars of GTM Plan?
 
-The GTM Plan consists of five essential pillars which include market segmentation, product pricing, distribution, product messaging, and positioning**.
+The GTM Plan consists of five essential pillars which include market segmentation, product pricing, distribution, product messaging, and positioning.
