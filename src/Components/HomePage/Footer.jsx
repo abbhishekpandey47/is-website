@@ -81,6 +81,23 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
+
+
+            <div className="flex max-sm:w-full flex-col w-[35%] max-lg:w-1/2 lg:pl-5">
+              <h3 className="font-semibold  mb-2">Tools</h3>
+              <ul className="space-y-4 flex flex-col ">
+                <li>
+                  <a
+                    href="/roi-cal"
+                    className="hover:underline"
+                  >
+                    ROI Calculator
+                  </a>
+                </li>
+                
+              </ul>
+            </div>
+
           </div>
           <div className="flex w-[25%] max-sm:w-full max-lg:text-center justify-end max-lg:w-full max-lg:justify-around">
             <div className="flex lg:gap-20 max-sm:gap-16 max-sm:flex-col max-lg:w-full">

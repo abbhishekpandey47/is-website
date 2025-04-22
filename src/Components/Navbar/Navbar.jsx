@@ -308,6 +308,18 @@ const Navbar = () => {
                     {"About Us"}
                   </Link>
                 </MenuItem>
+                <MenuItem>
+                  <Link
+                    onClick={() => {
+                      checkVisitPage("/roi-cal");
+                    }}
+                    href="/roi-cal"
+                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                    target={"/roi-cal".includes("http") ? "_blank" : ""}
+                  >
+                    {"Roi-Cal"}
+                  </Link>
+                </MenuItem>
               </div>
             </MenuItems>
           </Menu>
@@ -407,6 +419,16 @@ const Navbar = () => {
                 }}
               >
                 About Us
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/roi-cal"
+                onClick={() => {
+                  checkVisitPage("/roi-cal");
+                }}
+              >
+                Roi Calculator
               </Link>
             </li>
           </ul>
