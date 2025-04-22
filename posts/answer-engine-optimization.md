@@ -1,6 +1,6 @@
 ## Introduction
 
-You might have heard of search engine optimization (SEO) several times, or you could have already been utilizing it. But what the heck is Answer Search Engine Optimization (AEO) now?
+You might have heard of search engine optimization (SEO) several times, or you could have already been utilizing it. But what the heck is **Answer Search Engine Optimization (AEO)** now?
 
 Is it something related to SEO only, or something different? Well, when I started learning about it, I realized that it's such an interesting approach to gain visibility over search engines. 
 
@@ -8,45 +8,55 @@ With the advent of AI overview, the concept of AEO also came into action. There'
 
 ## But first, let me tell you - What is AEO?
 
-Answer Engine Optimization is a technique that optimizes your content to get visibility in featured snippets, AI overview, and voice search results. It involves creating the content in a way that you are answering their specific search query. It can be in question form or as a statement. 
+Answer Engine Optimization is a technique that optimizes your content to get visibility in **featured snippets, AI overview, and voice search results**. It involves creating the content in a way that you are answering their specific search query. It can be in question form or as a statement. 
 
-For example, "What is answer engine optimization?" would be a question search query, and "Difference between AEO and SEO" would be a statement search query. Just a quick info - the next section covers the difference between them.
+For example, "_What is answer engine optimization_?" would be a question search query, and "_Difference between AEO and SEO_" would be a statement search query. Just a quick info - the next section covers the difference between them.
 
 Back to the concept - Answer engine optimization is a great way to enhance your visibility on the search engines and reach your target customers. It's something that helps you stay on top, even above sponsored web pages and top-ranked sites.
 
-Therefore, follow just one simple technique - curate your content in a way that answers the common search queries on the search engines. There are more tips on AEO, but first, let us understand the key differences between SEO and AEO.
+Therefore, follow just one simple technique - **curate your content in a way that answers the common search queries on the search engines**. There are more tips on AEO, but first, let us understand the key differences between SEO and AEO.
 
 ## SEO vs AEO: Are they different?
 
 If you are assuming that the concept of AEO in SEO is a thing - that's not true! These two are different approaches to optimizing content and increasing your visibility over search engines.
 
+![seo vs aeo](/PostImages/answer-engine-optimization/a2.png) 
+
 ## What Types of Content Work Best for AEO?
 
-Your content marketing strategy must be including several types of content; however, add the following types of content to it if you haven't already.
+Your **[content marketing strategy](https://www.infrasity.com/blog/content-marketing-strategy)** must be including several types of content; however, add the following types of content to it if you haven't already.
 
 ### 1. Definition-based Content
 
 Definition-based content refers to content that provides clear, concise, and direct definitions of terms, concepts, or topics. It is optimized to show up in Definition Boxes or Featured Snippets at the top of search results when users ask "What is..." or similar informational queries.
 
-For example, when you search for "what is llms.txt," the featured snippet displays the definition of the search query.
+For example, when you search for "_what is llms.txt_," the featured snippet displays the definition of the search query.
 
-According to a study conducted by Ghergich & Co. and SEMrush, the featured snippet is roughly around 45 to 50 words. Therefore, ensure that you write the definitions in smaller sentences.
+![aeo - definition based content](/PostImages/answer-engine-optimization/ss1.png) 
+
+According to a study conducted by **[Ghergich & Co. and SEMrush](https://www.semrush.com/blog/featured-snippet/)**, the featured snippet is roughly around 45 to 50 words. Therefore, ensure that you write the definitions in smaller sentences.
 
 ### 2. Ordered List Content
 
 An ordered list content is a numbered list of items. It is a strategic way to improve visibility in featured snippets, especially for queries regarding tutorials like "how to create a landing page." Google often pulls from ordered lists when a clear sequence is needed and displays web pages in the AI Overview as well as featured snippets, as it helps users quickly grasp the process.
 
-You can also create transactional content, such as "best project management software for remote teams."
+You can also create transactional content that will be suggested in the AI overview, such as "_best project management software for remote teams_."
+
+![aeo - ordered list content](/PostImages/answer-engine-optimization/ss2.png) 
 
 ### 3. Use Case Guides
 
-Use case guides are a great way to demonstrate how your target users can solve a specific problem using your SaaS product. For example, a search query for "how to configure AWS CLI" provides articles in the AI Overview.
+Use case guides are a great way to demonstrate how your target users can solve a specific problem using your SaaS product. For example, a search query for "_how to configure AWS CLI_" provides articles in the AI Overview.
+
+![aeo - use case guides](/PostImages/answer-engine-optimization/ss3.png) 
 
 ### 4. Comparisons
 
 The target users search for SaaS product comparisons when they want to evaluate which product is more efficient and will provide them with better features, pricing, and productivity.
 
-You can utilize this aspect and compare your product with your competitive product, highlighting your value proposition against them. For example, here the search query is about comparing two infrastructure automation tools.
+You can utilize this aspect and compare your product with your competitive product, highlighting your value proposition against them. For example, here the search query is about _comparing two infrastructure automation tools_.
+
+![aeo - comparisons](/PostImages/answer-engine-optimization/ss4.png) 
 
 ### 5. FAQ Section
 
@@ -64,17 +74,17 @@ Let's just say your product is a project management software for remote teams.
 
 ### 1. Identify the User's Intent
 
-Answer engine optimization works well for primarily informational content. However, it can also work for transactional, commercial, and navigational user intent, where the target customer is seeking knowledge or planning to buy a product. 
+Answer engine optimization works well for **primarily content based on informational user intent**. However, it can also work for _transactional, commercial, and navigational user intent_, where the target customer is seeking knowledge or planning to buy a product. 
 
 It could be about use cases, new concepts in your niche, tutorials, or a comparison of your product with competitors. Plan the topics you can write about based on your niche. Additionally, analyze the People Also Ask tool on Google to find out the search queries.
 
 For example, they may be searching for:
 
-*How to use project management software?* (informational intent)
+How to use project management software? (informational intent)
 
 ### 2. Conduct Keyword Research
 
-Research about the target keywords, especially long-tail keywords, which are question-based. This is because the target users search specific queries in the search engine. Use keyword research tools like Google Keyword Planner, Semrush, and Ahrefs to identify them.
+Research about the target keywords, especially long-tail keywords, which are **question-based**. This is because the target users search specific queries in the search engine. Use keyword research tools like Google Keyword Planner, Semrush, and Ahrefs to identify them.
 
 For example, I researched the relevant keywords for the term "project management software" on Semrush, and these were some of the keywords that depicted the informational search intent.
 
@@ -86,7 +96,7 @@ Mention the answer in a concise manner right after the heading. You can also bol
 
 Discuss additional questions related to the primary search query, which is likely to be searched for later. Add some visuals like infographics, charts, and tables to simplify the complex process. Also, keep it conversational so that it is well-optimized for voice search queries.
 
-Creating AEO-based content can be tricky and requires expertise in creating well-optimized content - that's where a team of experts at Infrasity comes in to help B2B SaaS startups like you. The discussed types of content are produced by our team of developers, writers, and graphic designers - not just AEO but SEO-optimized, too.
+_Creating AEO-based content can be tricky and requires expertise in creating well-optimized content - that's where a team of experts at **[Infrasity](https://www.infrasity.com/contact)** comes in to help B2B SaaS startups like you. The discussed types of content are produced by our team of developers, writers, and graphic designers - not just AEO but SEO-optimized, too._
 
 ### 4. Integrate Schema Markup
 
