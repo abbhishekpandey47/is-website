@@ -6,19 +6,24 @@ import CalendlyButton from "../service-video-production/calendlyButton";
 
 const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
   const containerRef = useRef(null);
-  const [cardsPosition, setCardsPosition] = useState(0); // Start at 0
+  const [cardsPosition, setCardsPosition] = useState(0);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [isAtStart, setIsAtStart] = useState(true);
   const [touchStartX, setTouchStartX] = useState(null);
 
-  const cardWidth = 780;
+  const desktopCardWidth = 780;
   const gap = 32;
-  const totalCardsWidth = serviceArr.length * (cardWidth + gap) - gap;
-  const containerPadding = 0; // Remove padding
+  const totalCardsWidth = serviceArr.length * (desktopCardWidth + gap) - gap;
 
   const clampScroll = (pos) => {
     const containerWidth = containerRef.current?.clientWidth || 0;
-    const minPosition = -(totalCardsWidth - containerWidth);
+    const isMobile = containerWidth < 768; 
+    const cardWidth = isMobile ? containerWidth * 0.9 : desktopCardWidth; 
+    const adjustedTotalCardsWidth = serviceArr.length * (cardWidth + gap) - gap;
+
+    const minPosition = isMobile
+      ? -(adjustedTotalCardsWidth - containerWidth) 
+      : -(totalCardsWidth - containerWidth);
 
     if (pos < minPosition) {
       setIsAtEnd(true);
@@ -101,18 +106,16 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
                 border: "2px solid rgba(60, 63, 84, 0.3)",
               }}
             >
-              {/* Gradient blobs */}
               <div className="absolute -bottom-20 -right-40 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500 rounded-full blur-3xl" />
               <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-2xl" />
 
-              {/* Text Section */}
               <div className="flex-1 p-6 flex flex-col justify-start text-start">
                 <h3 className="text-lg md:text-2xl font-semibold mb-4 text-white">
                   {service.head}
                 </h3>
                 <p className="text-sm md:text-base text-white">{service.para}</p>
               </div>
-              <div className="w-full md:w-1/2 h-[250px] md:h-full flex-shrink-0">
+              <div className="w-full md:w-1/2 h-[400px] md:h-[250px] lg:h-full flex-shrink-0">
                 <Image
                   src={service.image}
                   alt={`Service: ${service.head}`}

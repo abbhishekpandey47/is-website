@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
+
 import Acc from "./images/jpg2png/acc.png";
 import dev from "./images/jpg2png/devzero.jpg";
 import kubiya from "./images/jpg2png/kubiya.png";
@@ -43,6 +44,7 @@ export default function AnimatedCard() {
           }}
           whileHover={{ x: "-1" }} // Pause animation on hover by setting it to 0%
         >
+
           {duplicatedProjects.map((project, i) => (
             <motion.div
               key={i}
