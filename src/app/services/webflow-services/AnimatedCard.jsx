@@ -43,7 +43,6 @@ export default function AnimatedCard() {
           }}
           whileHover={{ x: "-1" }} // Pause animation on hover by setting it to 0%
         >
-          
           {duplicatedProjects.map((project, i) => (
             <motion.div
               key={i}
