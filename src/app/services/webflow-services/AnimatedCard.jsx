@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Acc from "./images/jpg2png./acc.jpg";
-import dev from "./images/jpg2png./devzero.jpg";
-import kubiya from "./images/jpg2png./kubiya.jpg";
-import knidal from "./images/jpg2png./knidal.jpg";
+import Acc from "./images/jpg2png/acc.jpg";
+import dev from "./images/jpg2png/devzero.jpg";
+import kubiya from "./images/jpg2png/kubiya.jpg";
+import knidal from "./images/jpg2png/knidal.jpg";
 import CalendlyButton from "../service-video-production/calendlyButton";
 
 const projects = [
@@ -115,7 +115,7 @@ export default function AnimatedCard() {
           }}
           whileHover={{ x: "0%" }} // Pause animation on hover by setting it to 0%
         >
-          
+
           {duplicatedProjects.map((project, i) => (
             <motion.div
               key={i}
