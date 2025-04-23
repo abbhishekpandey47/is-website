@@ -10,6 +10,8 @@ With the advent of AI overview, the concept of AEO also came into action. There'
 
 Answer Engine Optimization is a technique that optimizes your content to get visibility in **featured snippets, AI overview, and voice search results**. It involves creating the content in a way that you are answering their specific search query. It can be in question form or as a statement. 
 
+![seo vs aeo](/PostImages/answer-engine-optimization/a3.png) 
+
 For example, "_What is answer engine optimization_?" would be a question search query, and "_Difference between AEO and SEO_" would be a statement search query. Just a quick info - the next section covers the difference between them.
 
 Back to the concept - Answer engine optimization is a great way to enhance your visibility on the search engines and reach your target customers. It's something that helps you stay on top, even above sponsored web pages and top-ranked sites.
