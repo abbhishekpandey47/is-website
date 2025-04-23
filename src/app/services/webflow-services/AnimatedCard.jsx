@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Acc from "./images/jpg2png/acc.jpg";
+import Acc from "./images/jpg2png/acc.png";
 import dev from "./images/jpg2png/devzero.jpg";
-import kubiya from "./images/jpg2png/kubiya.jpg";
+import kubiya from "./images/jpg2png/kubiya.png";
 import knidal from "./images/jpg2png/knidal.jpg";
 import CalendlyButton from "../service-video-production/calendlyButton";
 
@@ -41,7 +41,7 @@ export default function AnimatedCard() {
           style={{
             willChange: "transform", // Optimize GPU rendering
           }}
-          whileHover={{ x: "0%" }} // Pause animation on hover by setting it to 0%
+          whileHover={{ x: "-1" }} // Pause animation on hover by setting it to 0%
         >
           
           {duplicatedProjects.map((project, i) => (
@@ -92,7 +92,6 @@ export default function AnimatedCard() {
                   className="w-full lg:h-[600px] md:h-[450px] object-cover object-top rounded-lg"
                   width={500}
                   height={0}
-                  quality={100}
                 />
               </div>
             </motion.div>
