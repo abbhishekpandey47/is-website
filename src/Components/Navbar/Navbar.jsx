@@ -217,19 +217,6 @@ const Navbar = () => {
                 </MenuItem> */}
                 <MenuItem>
                   <Link
-                    href="https://content.infrasity.com/"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={
-                      "https://content.infrasity.com/".includes("http")
-                        ? "_blank"
-                        : ""
-                    }
-                  >
-                    <div className="pl-6">{"Outline Generator"}</div>
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
                     onClick={() => {
                       checkVisitPage("/blog");
                     }}
@@ -257,6 +244,23 @@ const Navbar = () => {
                     {"Services"}
                   </p>
                 </MenuItem>
+                
+                <MenuItem>
+                  <Link
+                    onClick={() => {
+                      checkVisitPage("/services/technical-writing-services");
+                    }}
+                    href="/services/technical-writing-services"
+                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                    target={
+                      "/services/technical-writing-services".includes("http")
+                        ? "_blank"
+                        : ""
+                    }
+                  >
+                    <div className="pl-6">{"Technical Writing Services"}</div>
+                  </Link>
+                </MenuItem>
                 <MenuItem>
                   <Link
                     onClick={() => {
@@ -276,17 +280,16 @@ const Navbar = () => {
                 <MenuItem>
                   <Link
                     onClick={() => {
-                      checkVisitPage("/services/technical-writing-services");
+                      checkVisitPage("/services/webflow-services");
                     }}
-                    href="/services/technical-writing-services"
+                    href="/services/webflow-services"
                     className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
                     target={
-                      "/services/technical-writing-services".includes("http")
+                      "webflow-services".includes("http")
                         ? "_blank"
                         : ""
-                    }
-                  >
-                    <div className="pl-6">{"Blog-as-code"}</div>
+                    }>
+                    <div className="pl-6">{"Webflow Services"}</div>
                   </Link>
                 </MenuItem>
                 <MenuItem>
@@ -322,7 +325,7 @@ const Navbar = () => {
                     className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
                     target={"/roi-cal".includes("http") ? "_blank" : ""}
                   >
-                    {"Roi-Cal"}
+                    {"Roi Calculator"}
                   </Link>
                 </MenuItem>
               </div>
@@ -335,16 +338,6 @@ const Navbar = () => {
           aria-label="Infrasity Home"
         >
           <div className="flex flex-col my-auto items-center">
-            {/*<div className="w-full flex justify-start">
-                            <Image
-                                width={200}
-                                height={200}
-                                loading='lazy'
-                                src="/logodata/infra_logo_only.png"
-                                className="min-[408px]:hidden block w-[60%] "
-                                alt="Infrasity Logo"
-                            />
-                        </div>*/}
             <div>
               <Image
                 loading="lazy"
@@ -368,15 +361,6 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            {/* <li>
-              <GivenMenuBar
-                head={"Products"}
-                menuLinks={menuLinksArrProducts}
-                setProgress={setProgress}
-                curPage={curPage}
-                setCurPage={setCurPage}
-              />
-            </li> */}
             <li>
               <Link
                 href="/blog"

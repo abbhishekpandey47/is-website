@@ -56,20 +56,7 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
     setTouchStartX(e.touches[0].clientX);
   };
 
-  // Automatically scroll the carousel in mobile view
-  useEffect(() => {
-    const isMobile = window.innerWidth <= 768;
-    if (isMobile) {
-      const interval = setInterval(() => {
-        setCardsPosition((prevPosition) => {
-          const newPos = clampScroll(prevPosition - cardWidth - gap);
-          return newPos;
-        });
-      }, 3000); // Scroll every 3 seconds
 
-      return () => clearInterval(interval);
-    }
-  }, [cardsPosition]);
 
   useEffect(() => {
     const container = containerRef.current;
