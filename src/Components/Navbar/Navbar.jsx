@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
+import MobileMenu from "./mobileservices"
 
-// import { DownOutlined } from '@ant-design/icons';
 
 const GivenMenuBar = ({
   head,
@@ -239,59 +239,7 @@ const Navbar = () => {
                     {"Case Studies"}
                   </Link>
                 </MenuItem>
-                <MenuItem>
-                  <p className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg">
-                    {"Services"}
-                  </p>
-                </MenuItem>
-                
-                <MenuItem>
-                  <Link
-                    onClick={() => {
-                      checkVisitPage("/services/technical-writing-services");
-                    }}
-                    href="/services/technical-writing-services"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={
-                      "/services/technical-writing-services".includes("http")
-                        ? "_blank"
-                        : ""
-                    }
-                  >
-                    <div className="pl-6">{"Technical Writing Services"}</div>
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    onClick={() => {
-                      checkVisitPage("/services/service-video-production");
-                    }}
-                    href="/services/service-video-production"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={
-                      "service-video-production".includes("http")
-                        ? "_blank"
-                        : ""
-                    }
-                  >
-                    <div className="pl-6">{"Video Production"}</div>
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    onClick={() => {
-                      checkVisitPage("/services/webflow-services");
-                    }}
-                    href="/services/webflow-services"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={
-                      "webflow-services".includes("http")
-                        ? "_blank"
-                        : ""
-                    }>
-                    <div className="pl-6">{"Webflow Services"}</div>
-                  </Link>
-                </MenuItem>
+                <MobileMenu />
                 <MenuItem>
                   <Link
                     onClick={() => {
