@@ -17,12 +17,12 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
 
   const clampScroll = (pos) => {
     const containerWidth = containerRef.current?.clientWidth || 0;
-    const isMobile = containerWidth < 768; 
-    const cardWidth = isMobile ? containerWidth * 0.9 : desktopCardWidth; 
+    const isMobile = containerWidth < 768;
+    const cardWidth = isMobile ? containerWidth * 0.9 : desktopCardWidth;
     const adjustedTotalCardsWidth = serviceArr.length * (cardWidth + gap) - gap;
 
     const minPosition = isMobile
-      ? -(adjustedTotalCardsWidth - containerWidth) 
+      ? -(adjustedTotalCardsWidth - containerWidth)
       : -(totalCardsWidth - containerWidth);
 
     if (pos < minPosition) {
@@ -113,7 +113,9 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
                 <h3 className="text-lg md:text-2xl font-semibold mb-4 text-white">
                   {service.head}
                 </h3>
-                <p className="text-sm md:text-base text-white">{service.para}</p>
+                <p className="text-sm md:text-base text-white">
+                  {service.para}
+                </p>
               </div>
               <div className="w-full md:w-1/2 h-[400px] md:h-[250px] lg:h-full flex-shrink-0">
                 <Image
