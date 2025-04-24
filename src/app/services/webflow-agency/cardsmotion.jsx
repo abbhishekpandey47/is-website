@@ -61,7 +61,6 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
     setTouchStartX(e.touches[0].clientX);
   };
 
-
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -131,9 +130,9 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
           ))}
         </motion.div>
       </div>
-      <div className="flex justify-center mt-6 md:mt-10">
+      {/* <div className="flex justify-center mt-6 md:mt-10">
         <CalendlyButton name="Book a Demo" />
-      </div>
+      </div> */}
     </div>
   );
 };
