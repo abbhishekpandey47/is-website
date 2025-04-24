@@ -230,10 +230,12 @@ const page = () => {
           >
             <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
             <p className="max-w-6xl mx-auto mb-5 text-4xl font-semibold mt-20">
-              Why you should choose us as your Webflow Partner.
+            Why Top B2B Startups Trust Us with Their Webflow Stack.
             </p>
             <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
-              We have over 17+ years of experience in design and development.
+            From incubated DevTool startups to funded AI platforms — we’ve shipped clean, conversion-ready Webflow sites that launch fast and scale with your story.
+
+
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
               {serviceCards.map((card, index) => (
