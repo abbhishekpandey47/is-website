@@ -90,27 +90,27 @@ const serviceArr = [
 
 const serviceCards = [
   {
-    image: css1,
+    image: css5,
     title: "Simple Pricing",
     desc: "We keep straightforward pricing based on what you opt for at our Webflow expert agency. Choose a way to work with us. No Contracts. Cancel anytime.",
   },
   {
-    image: css2,
+    image: css3,
     title: "Quick Delivery",
     desc: "We as a Webflow Agency deliver full-fledged Webflow website in just 2 weeks*.  Our turnaround time for hourly work is just 2 days.",
   },
   {
-    image: css3,
+    image: css2,
     title: "Certified Developers",
     desc: "We make sure that our developers have passed all Webflow certification tests on Webflow university.",
   },
   {
-    image: css5,
+    image: css6,
     title: "Beautiful Interactions",
     desc: "We create simple and beautiful animations that improve the user's overall experience.",
   },
   {
-    image: css6,
+    image: css1,
     title: "Responsive Design",
     desc: "We as a Webflow design agency ensure that all the designs we develop in Webflow has similar experiences across all the devices.",
   },
@@ -280,7 +280,6 @@ const page = () => {
                   <CalendlyButton name="Book a Demo" />
                 </div>
               </div>
-
             </div>
           </div>
 
