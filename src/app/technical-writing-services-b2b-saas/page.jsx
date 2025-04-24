@@ -7,6 +7,7 @@ import { Carousel } from "antd";
 import AppContext from "@/context/Infracontext";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
+import { motion } from "framer-motion";
 import Image from "next/image";
 import HowWorks from "@/Components/HomePage/HowWorks";
 import Link from "next/link";
@@ -256,9 +257,19 @@ const page = () => {
   }, []);
 
   return (
+    <motion.div
+    initial={{ opacity: 0, y: 50 }} // Start with opacity 0 and move up from 50px
+    animate={{ opacity: 1, y: 0 }} // Animate to opacity 1 and y 0
+    transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
+  >
     <div className="relative max-w-full mx-auto overflow-hidden px-4">
       <div>
-  <div className="absolute top-0 left-0 w-full pt-12 flex justify-center lg:pt-16 lg:justify-start lg:pl-16">
+
+
+    
+      <div className="bg-[#0a0a1a] text-white overflow-hidden relative">
+        <section className="py-12 md:py-20 lg:pt-32 relative text-center">
+        <div className="absolute top-0 left-0 w-full pt-10 flex justify-center lg:pt-16 lg:justify-start lg:pl-16">
         <Link href="https://www.infrasity.com/" passHref>
           <Image
             loading="lazy"
@@ -270,101 +281,49 @@ const page = () => {
           />
         </Link>
       </div>
-
       {/* Blog Engagement Section */}
-      <section className="w-full mx-auto lg:mt-24 sm:mt-16 md:mt-24 py-24 lg:py-12 relative overflow-hidden addGrid2">
-        <div className="max-w-full flex xxs:flex-col xs:flex-col sm:flex-col md:flex-col lg:flex-row justify-center items-center ">
-          {/* Left side content */}
-          <div className="lg:ml-[50px] justify-center sm:w-full lg:w-[60vw] lg:flex lg:flex-col lg:items-start">
-            <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-5xl quicksand-bold mt-8 text-white mb-10 leading-tight">
-              Docs That Don’t Just Explain, they
-              <span className="text-[#5F64FF]"> drive </span>
-              <span className="text-[#5F64FF]"> Sell, Support, </span>
-              and <span className="text-[#5F64FF]"> Scale</span>
-            </h2>
-            <ul className="space-y-6 lg:w-[85%] mb-10 mt-10">
-              <li className="flex items-start text-white ">
-                <div className="flex-shrink-0 mt-2">
-                  <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-2.5 w-2.5 text-white"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <p className="text-lg pl-3 quicksand-medium">
-                  Built for DevTools companies to help users get started, not
-                  stuck — with real examples, SDK integration to speed up dev
-                  onboarding.
-                </p>
-              </li>
-              <li className="flex items-start text-white">
-                <div className="flex-shrink-0 mt-2">
-                  <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-2.5 w-2.5 text-white"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <p className="text-lg pl-3 quicksand-medium">
-                  Explains your product through real use cases — not fluffy
-                  feature lists
-                </p>
-              </li>
-              <li className="flex items-start text-white">
-                <div className="flex-shrink-0 mt-2">
-                  <div className="w-4 h-4 bg-gradient-to-r from-[#1966ff] to-[#8c1eff] rounded-full flex items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-2.5 w-2.5 text-white"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <p className="text-lg  quicksand-medium pl-3">
-                  Equips sales with demo-ready artifacts that double as
-                  self-serve onboarding for developers.
-                </p>
-              </li>
-            </ul>
-            <div className="flex justify-center md:justify-start">
+      <div className="flex justify-center mt-10">
+            <div className="bg-black text-white px-5 py-3 rounded-full text-sm font-semibold flex items-center gap-2">
+              <span className="bg-white text-black rounded-full px-3 py-0.5">
+                {" INFRASITY "}
+              </span>
+              <span>5.0 Rating</span>
+              <span className="text-purple-600">★★★★★</span>
+            </div>
+          </div>
+
+          {/* Subheadline */}
+          <p className="font-medium text-lg m-3">
+          Turn Documentation Into Your Growth Engine
+          </p>
+
+          {/* Main Headline */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl max-w-4xl mx-auto font-bold mb-6">
+          Content Built for DevTools Startups 
+            <span className="bg-gradient-to-l from-purple-700 via-purple-400 to-blue-600 bg-clip-text text-transparent">
+              {" "}
+              Written to Convert, 
+            </span>{" "}
+            <span className="text-white"></span> {" "}
+            <span className="bg-gradient-to-l from-purple-700 via-purple-400 to-blue-600 bg-clip-text text-transparent">
+            Scale, and Support.
+            </span>
+          </h1>
+
+          {/* Paragraph */}
+          <p className="max-w-3xl mx-auto text-base sm:text-lg">
+          Built for DevTools companies, Infrasity helps users get started — not stuck — with real-world examples and SDK-integrated content that accelerates developer onboarding. We explain your product through practical use cases and equip sales teams with demo-ready artifacts that double as self-serve onboarding for technical users.
+          </p>
+          </section>
+          </div>
+
+         
+          {/* Call to Action */}
+          <div className="flex justify-center">
+            <div className="flex justify-center md:justify-start mb-10">
               <CalendlyButton name="Book a Demo" />
             </div>
           </div>
-          {/* Right side image */}
-          <div className="mt-20 lg:mt-0 md:mt-0 ">
-            <img
-              src="/blog_as_service/blogHeading.png"
-              alt="Blog interface with writer tool"
-              className="w-[500px] h-auto"
-            />
-          </div>
-        </div>
-      </section>
       <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
 
       <div
@@ -475,6 +434,7 @@ const page = () => {
       </div> */}
     </div>
     </div>
+    </motion.div>
   );
 };
 

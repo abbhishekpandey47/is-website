@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
+import MobileMenu from "./mobileservices"
 
-// import { DownOutlined } from '@ant-design/icons';
 
 const GivenMenuBar = ({
   head,
@@ -217,19 +217,6 @@ const Navbar = () => {
                 </MenuItem> */}
                 <MenuItem>
                   <Link
-                    href="https://content.infrasity.com/"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={
-                      "https://content.infrasity.com/".includes("http")
-                        ? "_blank"
-                        : ""
-                    }
-                  >
-                    <div className="pl-6">{"Outline Generator"}</div>
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
                     onClick={() => {
                       checkVisitPage("/blog");
                     }}
@@ -252,43 +239,7 @@ const Navbar = () => {
                     {"Case Studies"}
                   </Link>
                 </MenuItem>
-                <MenuItem>
-                  <p className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg">
-                    {"Services"}
-                  </p>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    onClick={() => {
-                      checkVisitPage("/services/service-video-production");
-                    }}
-                    href="/services/service-video-production"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={
-                      "service-video-production".includes("http")
-                        ? "_blank"
-                        : ""
-                    }
-                  >
-                    <div className="pl-6">{"Video Production"}</div>
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    onClick={() => {
-                      checkVisitPage("/services/technical-writing-services");
-                    }}
-                    href="/services/technical-writing-services"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={
-                      "/services/technical-writing-services".includes("http")
-                        ? "_blank"
-                        : ""
-                    }
-                  >
-                    <div className="pl-6">{"Blog-as-code"}</div>
-                  </Link>
-                </MenuItem>
+                <MobileMenu />
                 <MenuItem>
                   <Link
                     onClick={() => {
@@ -322,7 +273,7 @@ const Navbar = () => {
                     className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
                     target={"/roi-cal".includes("http") ? "_blank" : ""}
                   >
-                    {"Roi-Cal"}
+                    {"Roi Calculator"}
                   </Link>
                 </MenuItem>
               </div>
@@ -335,16 +286,6 @@ const Navbar = () => {
           aria-label="Infrasity Home"
         >
           <div className="flex flex-col my-auto items-center">
-            {/*<div className="w-full flex justify-start">
-                            <Image
-                                width={200}
-                                height={200}
-                                loading='lazy'
-                                src="/logodata/infra_logo_only.png"
-                                className="min-[408px]:hidden block w-[60%] "
-                                alt="Infrasity Logo"
-                            />
-                        </div>*/}
             <div>
               <Image
                 loading="lazy"
@@ -368,15 +309,6 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            {/* <li>
-              <GivenMenuBar
-                head={"Products"}
-                menuLinks={menuLinksArrProducts}
-                setProgress={setProgress}
-                curPage={curPage}
-                setCurPage={setCurPage}
-              />
-            </li> */}
             <li>
               <Link
                 href="/blog"
