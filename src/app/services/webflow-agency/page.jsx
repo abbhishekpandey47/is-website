@@ -3,11 +3,11 @@ import React, { useMemo } from "react";
 import HomeMarquee from "@/Components/HomePage/HomeMarquee";
 import { motion } from "framer-motion";
 import CardMotion from "./cardsmotion";
-import CardComponent from "@/app/services/webflow-services/CardComponent";
-import AnimatedCard from "@/app/services/webflow-services/AnimatedCard";
-import CustomerReview from "@/app/services/webflow-services/CustomerReview";
+import CardComponent from "@/app/services/webflow-agency/CardComponent";
+import AnimatedCard from "@/app/services/webflow-agency/AnimatedCard";
+import CustomerReview from "@/app/services/webflow-agency/CustomerReview";
 import ThirdPartyIntegrations from "./ThirdPartyIntegrations";
-import WebflowMarquee from "@/app/services/webflow-services/Webflowmarquee";
+import WebflowMarquee from "@/app/services/webflow-agency/Webflowmarquee";
 import FAQ from "@/app/services/service-video-production/FAQ";
 import BookDemo from "./bookDemo";
 import TestimonialSlider from "./Testimonials";
@@ -153,9 +153,9 @@ const page = () => {
             Your go-to
             <span className="bg-gradient-to-l from-purple-700 via-purple-400 to-blue-600 bg-clip-text text-transparent">
               {" "}
-              Webflow partner 
+              Webflow partner
             </span>{" "}
-            <span className="text-white"></span> {" "}
+            <span className="text-white"></span>{" "}
             <span className="bg-gradient-to-l from-purple-700 via-purple-400 to-blue-600 bg-clip-text text-transparent">
               trusted by Y Combinator backed startups
             </span>
@@ -163,8 +163,13 @@ const page = () => {
 
           {/* Paragraph */}
           <p className="max-w-3xl mx-auto mb-8 text-base sm:text-lg">
-          Trusted by startups backed by leading VCs — from Palo Alto to Tel Aviv — we build Webflow sites that help early-stage DevTool, AI, and infra teams look sharp from day one.
-          <br />From landing pages to full site builds, we handle the design and dev so your team can stay focused on scaling your B2B SaaS — not wrangling front-end code.
+            Trusted by startups backed by leading VCs — from Palo Alto to Tel
+            Aviv — we build Webflow sites that help early-stage DevTool, AI, and
+            infra teams look sharp from day one.
+            <br />
+            From landing pages to full site builds, we handle the design and dev
+            so your team can stay focused on scaling your B2B SaaS — not
+            wrangling front-end code.
           </p>
 
           {/* Call to Action */}
@@ -198,14 +203,17 @@ const page = () => {
           >
             <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
             <p className="max-w-5xl mx-auto mb-8 text-5xl font-semibold mt-10">
-            Great startups use their website to control the narrative early. 
-
+              Great startups use their website to control the narrative early.
             </p>
             <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
-            We’ve built Webflow sites for teams now doing $40M+ in ARR.<br />
-If you’re raising, hiring, or launching — we’ll help you ship a site that earns attention.<br />
-Backed by experience, shipped with speed, built to make people care.<br />
-
+              We’ve built Webflow sites for teams now doing $40M+ in ARR.
+              <br />
+              If you’re raising, hiring, or launching — we’ll help you ship a
+              site that earns attention.
+              <br />
+              Backed by experience, shipped with speed, built to make people
+              care.
+              <br />
             </p>
             <div>
               <CardMotion serviceArr={serviceArr} />

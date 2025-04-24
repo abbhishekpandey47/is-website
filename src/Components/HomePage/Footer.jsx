@@ -82,10 +82,10 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/services/webflow-services"
+                    href="/services/webflow-agency"
                     className="hover:underline"
                   >
-                    Webflow Services
+                    Webflow Agency
                   </a>
                 </li>
               </ul>
