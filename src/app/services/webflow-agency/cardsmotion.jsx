@@ -61,7 +61,6 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
     setTouchStartX(e.touches[0].clientX);
   };
 
-
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -86,7 +85,6 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
         dangerouslySetInnerHTML={{ __html: mainHeading }}
       />
       <p className="text-center text-white mb-10 text-lg">{subHeading}</p>
-
       <div
         ref={containerRef}
         className="overflow-hidden max-w-8xl mx-auto touch-pan-x"
