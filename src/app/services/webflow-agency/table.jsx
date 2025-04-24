@@ -18,11 +18,9 @@ export default function Webtable() {
       }
     };
 
-    // Run on mount and window resize
     handleScrollbar();
     window.addEventListener("resize", handleScrollbar);
 
-    // Cleanup listener on unmount
     return () => window.removeEventListener("resize", handleScrollbar);
   }, []);
 
@@ -33,8 +31,7 @@ export default function Webtable() {
       </h1>
 
       <div className="w-full overflow-x-auto table-container pb-10">
-        <div className="min-w-[800px] grid grid-cols-4 gap-4 md:gap-8 text-center mt-16 mb-16">
-          {/* Left Column */}
+        <div className="min-w-[1000px] md:min-w-[800px] grid grid-cols-4 gap-4 md:gap-8 text-center mt-16 mb-16">
           <div
             className="flex flex-col gap-4 md:gap-6 text-center p-2 md:p-2 rounded-lg justify-start pt-3"
             style={{
@@ -83,7 +80,7 @@ export default function Webtable() {
             </div>
           </div>
 
-          {/* Middle Column - YOUR COMPANY */}
+          {/* Middle Column */}
           <div
             className="flex flex-col gap-4 md:gap-6 text-center p-2 md:p-2 justify-start w-full rounded-2xl"
             style={{
@@ -98,7 +95,6 @@ export default function Webtable() {
               transform: "perspective(800px) rotateX(2deg)",
               transition: "transform 0.3s ease-out",
 
-              // Only change the height of the container itself
               height: "120%",
               marginTop: "-50px",
               marginBottom: "-12px",
@@ -198,7 +194,6 @@ export default function Webtable() {
             </div>
           </div>
 
-          {/* Other Agencies Column */}
           <div
             className="flex flex-col gap-4 md:gap-6 text-center rounded-lg p-2 md:p-2 justify-start"
             style={{
@@ -249,7 +244,6 @@ export default function Webtable() {
         </div>
       </div>
 
-      {/* CSS for hiding scrollbars on non-mobile devices */}
       <style jsx>{`
         .no-scrollbar::-webkit-scrollbar {
           display: none;
@@ -263,6 +257,12 @@ export default function Webtable() {
         @media (max-width: 767px) {
           .table-container {
             overflow-x: auto;
+          }
+
+          /* Additional padding for cells on mobile */
+          .flex-col p {
+            padding-left: 8px;
+            padding-right: 8px;
           }
         }
       `}</style>
