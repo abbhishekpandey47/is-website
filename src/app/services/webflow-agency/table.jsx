@@ -32,26 +32,25 @@ export default function Webtable() {
         Why High-Growth Startups Work With Us
       </h1>
 
-      {/* Mobile and Desktop table with horizontal scroll for small screens */}
       <div className="w-full overflow-x-auto table-container pb-10">
-        <div className="min-w-[800px] grid grid-cols-4 gap-4 md:gap-8 text-center">
+        <div className="min-w-[800px] grid grid-cols-4 gap-4 md:gap-8 text-center mt-16 mb-16">
           {/* Left Column */}
           <div
             className="flex flex-col gap-4 md:gap-6 text-center p-2 md:p-2 rounded-lg justify-start pt-3"
             style={{
               background:
-                "radial-gradient(ellipse at 25% 0%, #1e3a8a 0%, transparent 40%)",
+                "radial-gradient(ellipse at 25% 0%, #4b5563 0%, transparent 40%)",
               boxShadow:
-                "0 12px 36px 0 rgba(0, 0, 0, 0.45), inset 0 2px 8px rgba(255, 255, 255, 0.1)",
-              borderTop: "3px solid rgba(12, 24, 91, 0.8)",
-              borderLeft: "3px solid rgba(12, 24, 91, 0.8)",
-              borderRight: "1px solid rgba(60, 63, 84, 0.4)",
-              borderBottom: "3px solid rgba(60, 63, 84, 0.4)",
+                "0 12px 36px 0 rgba(0, 0, 0, 0.36), inset 0 2px 8px rgba(0, 0, 0, 0.36)",
+              borderTop: "3px solid rgba(75, 85, 99, 0.8)",
+              borderLeft: "3px solid rgba(75, 85, 99, 0.8)",
+              borderRight: "1px solid rgba(75, 85, 99, 0.4)",
+              borderBottom: "3px solid rgba(75, 85, 99, 0.4)",
               transform: "perspective(800px) rotateX(2deg)",
               transition: "transform 0.3s ease-out",
             }}
           >
-            <div className="border-b-2 border-solid border-[#91919b] w-full pb-8 flex items-center justify-center pt-3">
+            <div className="border-b-2 border-solid border-[#91919b] w-full pb-12 flex items-center justify-center">
               <p className="font-bold text-white pb-3 text-[16px]">{""}</p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
@@ -86,18 +85,25 @@ export default function Webtable() {
 
           {/* Middle Column - YOUR COMPANY */}
           <div
-            className="flex flex-col gap-4 md:gap-6 text-center p-2 md:p-2 justify-start w-full rounded-lg"
+            className="flex flex-col gap-4 md:gap-6 text-center p-2 md:p-2 justify-start w-full rounded-2xl"
             style={{
               background:
-                "radial-gradient(ellipse at 25% 0%, #1e3a8a 100%, transparent 40%)",
+                "radial-gradient(ellipse at 25% 0%, #4b5563 0%, transparent 40%)",
               boxShadow:
-                "0 12px 36px 0 rgba(0, 0, 0, 0.45), inset 0 2px 8px rgba(255, 255, 255, 0.1)",
-              borderTop: "3px solid rgba(12, 24, 91, 0.8)",
-              borderLeft: "3px solid rgba(12, 24, 91, 0.8)",
-              borderRight: "1px solid rgba(60, 63, 84, 0.4)",
-              borderBottom: "3px solid rgba(60, 63, 84, 0.4)",
+                "0 12px 36px 0 rgba(0, 0, 0, 0.36), inset 0 2px 8px rgba(0, 0, 0, 0.36)",
+              borderTop: "3px solid rgba(75, 85, 99, 0.8)",
+              borderLeft: "3px solid rgba(75, 85, 99, 0.8)",
+              borderRight: "1px solid rgba(75, 85, 99, 0.4)",
+              borderBottom: "3px solid rgba(75, 85, 99, 0.4)",
               transform: "perspective(800px) rotateX(2deg)",
               transition: "transform 0.3s ease-out",
+
+              // Only change the height of the container itself
+              height: "120%",
+              marginTop: "-50px",
+              marginBottom: "-12px",
+              position: "relative",
+              zIndex: "10",
             }}
           >
             <div className="border-b-2 border-solid border-[#91919b] w-full pb-1 flex items-center justify-center">
@@ -106,7 +112,7 @@ export default function Webtable() {
                 width={130}
                 height={40}
                 loading="lazy"
-                className="justify-center text-center items-center flex pb-3 pt-3"
+                className="justify-center text-center items-center flex pb-12 pt-7"
                 alt="Infrasity Logo"
               />
             </div>
@@ -159,7 +165,7 @@ export default function Webtable() {
               transition: "transform 0.3s ease-out",
             }}
           >
-            <div className="border-b-2 border-solid border-[#3e3e48] w-full pb-3 flex items-center justify-center pt-3">
+            <div className="border-b-2 border-solid border-[#91919b] w-full pb-3 flex items-center justify-center pt-3">
               <p className="font-bold text-white pb-3 text-[16px]">
                 Freelancers
               </p>
@@ -197,9 +203,9 @@ export default function Webtable() {
             className="flex flex-col gap-4 md:gap-6 text-center rounded-lg p-2 md:p-2 justify-start"
             style={{
               background:
-                "radial-gradient(ellipse at 25% 0%, #9333ea 0%, transparent 40%)",
+                "radial-gradient(ellipse at 25% 0%, #4b5563 0%, transparent 40%)",
               boxShadow:
-                "0 12px 36px 0 rgba(0, 0, 0, 0.45), inset 0 2px 8px rgba(255, 255, 255, 0.1)",
+                "0 12px 36px 0 rgba(0, 0, 0, 0.36), inset 0 2px 8px rgba(0, 0, 0, 0.36)",
               borderTop: "3px solid rgba(75, 85, 99, 0.8)",
               borderLeft: "3px solid rgba(75, 85, 99, 0.8)",
               borderRight: "1px solid rgba(75, 85, 99, 0.4)",

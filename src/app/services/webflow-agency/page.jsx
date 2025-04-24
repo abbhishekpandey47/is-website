@@ -250,11 +250,11 @@ const page = () => {
                 </div>
               ))}
             </div>{" "}
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <div className="flex justify-center md:justify-start mt-8">
                 <CalendlyButton name="Book a Demo" />
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/**  recent project */}

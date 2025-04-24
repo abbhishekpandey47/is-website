@@ -128,9 +128,9 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
           ))}
         </motion.div>
       </div>
-      <div className="flex justify-center mt-6 md:mt-10">
+      {/* <div className="flex justify-center mt-6 md:mt-10">
         <CalendlyButton name="Book a Demo" />
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -14,8 +14,6 @@ const projects = [
   { title: "Knidal", badges: ["Figma", "Webflow"], image: knidal },
 ];
 
-
-
 export default function AnimatedCard() {
   // Duplicate projects array for infinite scrolling
   const duplicatedProjects = [...projects, ...projects];
@@ -24,7 +22,7 @@ export default function AnimatedCard() {
     <div className="w-full py-8 md:py-16">
       <div className="container mx-auto px-4 mb-4">
         <h2 className="text-2xl md:text-4xl font-bold text-center text-white">
-        Trusted by fast-moving B2B AI and infra startups
+          Trusted by fast-moving B2B AI and infra startups
         </h2>
       </div>
 
@@ -44,7 +42,6 @@ export default function AnimatedCard() {
           }}
           whileHover={{ x: "-1" }} // Pause animation on hover by setting it to 0%
         >
-
           {duplicatedProjects.map((project, i) => (
             <motion.div
               key={i}
@@ -66,9 +63,7 @@ export default function AnimatedCard() {
               </h3>
 
               {/* Project Badges */}
-              <div className="flex gap-2 mb-3 md:mb-4"
-              
-              >
+              <div className="flex gap-2 mb-3 md:mb-4">
                 {project.badges.map((badge, idx) => (
                   <span
                     key={idx}
@@ -100,9 +95,9 @@ export default function AnimatedCard() {
         </motion.div>
       </div>
 
-      <div className="flex justify-center mt-6">
+      {/* <div className="flex justify-center mt-6">
         <CalendlyButton name="Book a Demo" />
-      </div>
+      </div> */}
     </div>
   );
 }

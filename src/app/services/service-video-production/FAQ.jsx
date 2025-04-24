@@ -63,7 +63,8 @@ const faqData = [
   },
   {
     id: "6",
-    question: "How can I incorporate testimonials and success stories into my explainer video?",
+    question:
+      "How can I incorporate testimonials and success stories into my explainer video?",
     answer:
       "Feature authentic customer testimonials and detailed case studies, Use storytelling to highlight real-world applications of your SaaS.",
   },
@@ -93,14 +94,14 @@ const FAQSection = () => {
             <p className="text-lg text-white mb-8">
               Have a question that needs a human to answer? No problem.
             </p>
-
+            {/* 
             <a
               href="https://calendly.com/meet-shan"
               className="inline-flex items-center text-[#5F64FF] text-lg  transition-colors"
             >
               Speak to Us
               <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
+            </a> */}
           </div>
 
           {/* Right column with accordion FAQs */}
