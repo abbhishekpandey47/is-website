@@ -1,67 +1,103 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CalendlyButton from "../service-video-production/calendlyButton";
 import Image from "next/image";
 import logo from "./images/logo/infrasity_logo.png";
 
 export default function Webtable() {
+  useEffect(() => {
+    const handleScrollbar = () => {
+      const isMobile = window.innerWidth < 768;
+      const scrollableElement = document.querySelector(".table-container");
+
+      if (scrollableElement) {
+        if (!isMobile) {
+          scrollableElement.classList.add("no-scrollbar");
+        } else {
+          scrollableElement.classList.remove("no-scrollbar");
+        }
+      }
+    };
+
+    // Run on mount and window resize
+    handleScrollbar();
+    window.addEventListener("resize", handleScrollbar);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("resize", handleScrollbar);
+  }, []);
+
   return (
     <div className="flex flex-col items-center max-w-7xl mx-auto p-2 md:p-6 py-4 mt-10 text-sm md:text-md">
       <h1 className="text-xl md:text-3xl font-bold mb-4 md:mb-8 text-center text-white pb-3 text-[16px]">
-        INFRASITY Agency vs Other Offerings
+        Why High-Growth Startups Work With Us
       </h1>
 
       {/* Mobile and Desktop table with horizontal scroll for small screens */}
-      <div className="w-full overflow-x-auto scrollbar-hide">
-        <div className="min-w-[800px] grid grid-cols-4 gap-4 md:gap-8 text-start">
+      <div className="w-full overflow-x-auto table-container pb-10">
+        <div className="min-w-[800px] grid grid-cols-4 gap-4 md:gap-8 text-center">
           {/* Left Column */}
           <div
             className="flex flex-col gap-4 md:gap-6 text-center p-2 md:p-2 rounded-lg justify-start pt-3"
             style={{
-              backgroundColor: "#141318",
-              backgroundImage: `radial-gradient(circle at top left, #065f46 0%, transparent 80%)`,
-              boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
-              borderTop: "2px solid rgba(4, 58, 42, 0.6)",
-              borderLeft: "2px solid rgba(4, 58, 42, 0.6)",
-              borderRight: "2px solid rgba(60, 63, 84, 0.3)",
-              borderBottom: "2px solid rgba(60, 63, 84, 0.3)",
+              background:
+                "radial-gradient(ellipse at 25% 0%, #1e3a8a 0%, transparent 40%)",
+              boxShadow:
+                "0 12px 36px 0 rgba(0, 0, 0, 0.45), inset 0 2px 8px rgba(255, 255, 255, 0.1)",
+              borderTop: "3px solid rgba(12, 24, 91, 0.8)",
+              borderLeft: "3px solid rgba(12, 24, 91, 0.8)",
+              borderRight: "1px solid rgba(60, 63, 84, 0.4)",
+              borderBottom: "3px solid rgba(60, 63, 84, 0.4)",
+              transform: "perspective(800px) rotateX(2deg)",
+              transition: "transform 0.3s ease-out",
             }}
           >
             <div className="border-b-2 border-solid border-[#91919b] w-full pb-8 flex items-center justify-center pt-3">
               <p className="font-bold text-white pb-3 text-[16px]">{""}</p>
             </div>
-            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center">
-              <p className="font-bold text-white pb-3 text-[16px]">Cost</p>
+            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
+              <p className="font-bold text-white pb-3 text-[16px]">Pricing</p>
             </div>
-            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center">
-              <p className="font-bold text-white pb-3 text-[16px]">Quality</p>
-            </div>
-            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center">
-              <p className="font-bold text-white pb-3 text-[16px]">Revisions</p>
-            </div>
-            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center">
+            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
               <p className="font-bold text-white pb-3 text-[16px]">
-                Project Starting Time
+                Start Time
               </p>
             </div>
-            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center">
+            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
               <p className="font-bold text-white pb-3 text-[16px]">
-                Chat Communication
+                Specialization
               </p>
             </div>
-            <div className="w-full flex items-center">
+            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
               <p className="font-bold text-white pb-3 text-[16px]">
-                Account Manager
+                Speed to Launch
+              </p>
+            </div>
+            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
+              <p className="font-bold text-white pb-3 text-[16px]">
+                Design Philosophy
+              </p>
+            </div>
+            <div className="w-full flex items-center justify-center">
+              <p className="font-bold text-white pb-3 text-[16px]">
+                Collaboration Style
               </p>
             </div>
           </div>
 
-          {/* Middle Column */}
+          {/* Middle Column - YOUR COMPANY */}
           <div
             className="flex flex-col gap-4 md:gap-6 text-center p-2 md:p-2 justify-start w-full rounded-lg"
             style={{
-              backgroundColor: "#141318",
-              backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 80%)`,
-              boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
+              background:
+                "radial-gradient(ellipse at 25% 0%, #1e3a8a 100%, transparent 40%)",
+              boxShadow:
+                "0 12px 36px 0 rgba(0, 0, 0, 0.45), inset 0 2px 8px rgba(255, 255, 255, 0.1)",
+              borderTop: "3px solid rgba(12, 24, 91, 0.8)",
+              borderLeft: "3px solid rgba(12, 24, 91, 0.8)",
+              borderRight: "1px solid rgba(60, 63, 84, 0.4)",
+              borderBottom: "3px solid rgba(60, 63, 84, 0.4)",
+              transform: "perspective(800px) rotateX(2deg)",
+              transition: "transform 0.3s ease-out",
             }}
           >
             <div className="border-b-2 border-solid border-[#91919b] w-full pb-1 flex items-center justify-center">
@@ -75,75 +111,101 @@ export default function Webtable() {
               />
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">Affordable</p>
-            </div>
-            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
               <p className="text-white pb-3 text-[16px]">
-                Pixel Perfect, High-quality
+                Scope-based. Per page. No retainers.
               </p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">Unlimited</p>
+              <p className="text-white pb-3 text-[16px]">
+                Start in 2 business days
+              </p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">3 Working days</p>
+              <p className="text-white pb-3 text-[16px]">
+                Only B2B SaaS, infra, and AI. We know what YC-style startups
+                need to ship fast
+              </p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">Through slack</p>
+              <p className="text-white pb-3 text-[16px]">
+                First draft in less than 7 days
+              </p>
+            </div>
+            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
+              <p className="text-white pb-3 text-[16px]">
+                Clean. On-brand. Built to impress investors and customers.
+              </p>
             </div>
             <div className="w-full flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">Yes, dedicated</p>
+              <p className="text-white pb-3 text-[16px]">
+                Slack-native. Works like an extension of your team.
+              </p>
             </div>
           </div>
 
+          {/* Freelancers Column */}
           <div
             className="flex flex-col gap-4 md:gap-6 text-center p-2 md:p-2 rounded-lg justify-start"
             style={{
-              backgroundColor: "#141318",
-              backgroundImage: `radial-gradient(circle at top left, #4b5563 0%, transparent 80%)`,
-              boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
-              borderTop: "2px solid rgba(38, 43, 51, 0.6)",
-              borderLeft: "2px solid rgba(38, 43, 51, 0.6)",
-              borderRight: "2px solid rgba(60, 63, 84, 0.3)",
-              borderBottom: "2px solid rgba(60, 63, 84, 0.3)",
+              background:
+                "radial-gradient(ellipse at 25% 0%, #4b5563 0%, transparent 40%)",
+              boxShadow:
+                "0 12px 36px 0 rgba(0, 0, 0, 0.36), inset 0 2px 8px rgba(0, 0, 0, 0.36)",
+              borderTop: "3px solid rgba(75, 85, 99, 0.8)",
+              borderLeft: "3px solid rgba(75, 85, 99, 0.8)",
+              borderRight: "1px solid rgba(75, 85, 99, 0.4)",
+              borderBottom: "3px solid rgba(75, 85, 99, 0.4)",
+              transform: "perspective(800px) rotateX(2deg)",
+              transition: "transform 0.3s ease-out",
             }}
           >
-            <div className="border-b-2 border-solid border-[#91919b] w-full pb-3 flex items-center justify-center pt-3">
+            <div className="border-b-2 border-solid border-[#3e3e48] w-full pb-3 flex items-center justify-center pt-3">
               <p className="font-bold text-white pb-3 text-[16px]">
                 Freelancers
               </p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">Expensive</p>
+              <p className="text-white pb-3 text-[16px]">
+                Unpredictable. Hourly. Scope creep.
+              </p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">Quality Varies</p>
+              <p className="text-white pb-3 text-[16px]">
+                Takes a week or more
+              </p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">Chargeable</p>
+              <p className="text-white pb-3 text-[16px]">
+                Generalists. Often not startup-ready
+              </p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">1-2 weeks</p>
+              <p className="text-white pb-3 text-[16px]">Variable</p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">Freelance platform</p>
+              <p className="text-white pb-3 text-[16px]">Varies widely</p>
             </div>
             <div className="w-full flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">No</p>
+              <p className="text-white pb-3 text-[16px]">
+                Email, DMs, WhatsApp chaos
+              </p>
             </div>
           </div>
 
-          {/* Far Right Column */}
+          {/* Other Agencies Column */}
           <div
             className="flex flex-col gap-4 md:gap-6 text-center rounded-lg p-2 md:p-2 justify-start"
             style={{
-              backgroundColor: "#141318",
-              backgroundImage: `radial-gradient(circle at top left, #1e3a8a 0%, transparent 80%)`,
-              boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
-              borderTop: "2px solid rgba(12, 24, 91, 0.6)",
-              borderLeft: "2px solid rgba(12, 24, 91, 0.6)",
-              borderRight: "2px solid rgba(60, 63, 84, 0.3)",
-              borderBottom: "2px solid rgba(60, 63, 84, 0.3)",
+              background:
+                "radial-gradient(ellipse at 25% 0%, #9333ea 0%, transparent 40%)",
+              boxShadow:
+                "0 12px 36px 0 rgba(0, 0, 0, 0.45), inset 0 2px 8px rgba(255, 255, 255, 0.1)",
+              borderTop: "3px solid rgba(75, 85, 99, 0.8)",
+              borderLeft: "3px solid rgba(75, 85, 99, 0.8)",
+              borderRight: "1px solid rgba(75, 85, 99, 0.4)",
+              borderBottom: "3px solid rgba(75, 85, 99, 0.4)",
+              transform: "perspective(800px) rotateX(2deg)",
+              transition: "transform 0.3s ease-out",
             }}
           >
             <div className="border-b-2 border-solid border-[#91919b] w-full pb-3 flex items-center justify-center pt-3">
@@ -152,50 +214,52 @@ export default function Webtable() {
               </p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">Very expensive</p>
-            </div>
-            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">High-quality</p>
-            </div>
-            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
               <p className="text-white pb-3 text-[16px]">
-                Limited or Chargeable
+                Expensive monthly retainers.
               </p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">Few weeks</p>
+              <p className="text-white pb-3 text-[16px]">Takes 2–3 weeks</p>
             </div>
             <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
-              <p className="text-white pb-3 text-[16px]">No, usually email</p>
+              <p className="text-white pb-3 text-[16px]">
+                Often built for enterprises
+              </p>
+            </div>
+            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
+              <p className="text-white pb-3 text-[16px]">
+                Slow due to approvals and layers
+              </p>
+            </div>
+            <div className="border-b border-solid border-gray-300 w-full pb-2 flex items-center justify-center">
+              <p className="text-white pb-3 text-[16px]">Often overdesigned</p>
             </div>
             <div className="w-full flex items-center justify-center">
               <p className="text-white pb-3 text-[16px]">
-                Yes (Additional Charge)
+                Email chains. PM bottlenecks.
               </p>
             </div>
           </div>
         </div>
       </div>
+
+      {/* CSS for hiding scrollbars on non-mobile devices */}
+      <style jsx>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+
+        .no-scrollbar {
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
+        }
+
+        @media (max-width: 767px) {
+          .table-container {
+            overflow-x: auto;
+          }
+        }
+      `}</style>
     </div>
   );
 }
-// Add this CSS to your global styles or component
-// to hide the scrollbar until user interacts with it
-const scrollbarStyles = `
-    .scrollbar-hide {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-    }
-    
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;  /* Chrome, Safari and Opera */
-    }
-    
-    .scrollbar-hide:hover::-webkit-scrollbar,
-    .scrollbar-hide:active::-webkit-scrollbar,
-    .scrollbar-hide:focus::-webkit-scrollbar {
-      display: auto;  /* Show on interaction */
-    }
-  `;
-
-// // You can inject this style into your app using next/head or include in your CSS file
