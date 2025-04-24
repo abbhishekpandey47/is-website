@@ -8,7 +8,7 @@ const MenuItem = ({ children }) => {
 
 const MobileMenu = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
-  
+
   const toggleServices = () => {
     setServicesOpen(!servicesOpen);
   };
@@ -20,7 +20,7 @@ const MobileMenu = () => {
   return (
     <div className="mobile-menu">
       <MenuItem>
-        <div 
+        <div
           className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-800 rounded-lg cursor-pointer"
           onClick={toggleServices}
         >
@@ -28,7 +28,7 @@ const MobileMenu = () => {
           {servicesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </div>
       </MenuItem>
-      
+
       {servicesOpen && (
         <div className="bg-slate-900 rounded-lg mt-1 mb-2">
           <MenuItem>
@@ -47,7 +47,7 @@ const MobileMenu = () => {
               <div>Technical Writing Services</div>
             </Link>
           </MenuItem>
-          
+
           <MenuItem>
             <Link
               onClick={() => {
@@ -56,29 +56,23 @@ const MobileMenu = () => {
               href="/services/service-video-production"
               className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
               target={
-                "service-video-production".includes("http")
-                  ? "_blank"
-                  : ""
+                "service-video-production".includes("http") ? "_blank" : ""
               }
             >
               <div>Video Production</div>
             </Link>
           </MenuItem>
-          
+
           <MenuItem>
             <Link
               onClick={() => {
-                checkVisitPage("/services/webflow-services");
+                checkVisitPage("/services/webflow-agency");
               }}
-              href="/services/webflow-services"
+              href="/services/webflow-agency"
               className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
-              target={
-                "webflow-services".includes("http")
-                  ? "_blank"
-                  : ""
-              }
+              target={"webflow-agency".includes("http") ? "_blank" : ""}
             >
-              <div>Webflow Services</div>
+              <div>Webflow Agency</div>
             </Link>
           </MenuItem>
         </div>
