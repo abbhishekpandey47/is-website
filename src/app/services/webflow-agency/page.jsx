@@ -153,7 +153,7 @@ const page = () => {
             Your go-to
             <span className="text-white bg-clip-text text-transparent">
               {" "}
-              Webflow partner
+              Webflow agency
             </span>{" "}
             <span className="text-white"></span>{" "}
             <span className="text-white bg-clip-text text-transparent">
