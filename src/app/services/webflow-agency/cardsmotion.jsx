@@ -10,7 +10,6 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [isAtStart, setIsAtStart] = useState(true);
   const [touchStartX, setTouchStartX] = useState(null);
-
   const desktopCardWidth = 780;
   const gap = 32;
   const totalCardsWidth = serviceArr.length * (desktopCardWidth + gap) - gap;
