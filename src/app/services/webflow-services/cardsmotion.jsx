@@ -61,6 +61,7 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
     setTouchStartX(e.touches[0].clientX);
   };
 
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
