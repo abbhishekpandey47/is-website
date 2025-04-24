@@ -3,11 +3,11 @@ import React, { useMemo } from "react";
 import HomeMarquee from "@/Components/HomePage/HomeMarquee";
 import { motion } from "framer-motion";
 import CardMotion from "./cardsmotion";
-import CardComponent from "@/app/services/webflow-services/CardComponent";
-import AnimatedCard from "@/app/services/webflow-services/AnimatedCard";
-import CustomerReview from "@/app/services/webflow-services/CustomerReview";
+import CardComponent from "@/app/services/webflow-agency/CardComponent";
+import AnimatedCard from "@/app/services/webflow-agency/AnimatedCard";
+import CustomerReview from "@/app/services/webflow-agency/CustomerReview";
 import ThirdPartyIntegrations from "./ThirdPartyIntegrations";
-import WebflowMarquee from "@/app/services/webflow-services/Webflowmarquee";
+import WebflowMarquee from "@/app/services/webflow-agency/Webflowmarquee";
 import FAQ from "@/app/services/service-video-production/FAQ";
 import BookDemo from "./bookDemo";
 import TestimonialSlider from "./Testimonials";
@@ -91,28 +91,28 @@ const serviceArr = [
 const serviceCards = [
   {
     image: css5,
-    title: "Simple Pricing",
-    desc: "We keep straightforward pricing based on what you opt for at our Webflow expert agency. Choose a way to work with us. No Contracts. Cancel anytime.",
+    title: "Flexible Pricing",
+    desc: "We work with early-stage teams who value speed and flexibility. Whether it’s a multi-page build or just a homepage, we scope based on what you actually need — even if it’s one page at a time.",
   },
   {
     image: css3,
-    title: "Quick Delivery",
-    desc: "We as a Webflow Agency deliver full-fledged Webflow website in just 2 weeks*.  Our turnaround time for hourly work is just 2 days.",
+    title: "Fast Turnaround",
+    desc: "Early-stage startups move fast — and we’re built for that. We've delivered investor-ready Webflow pages in under a week, from idea to launch.",
   },
   {
     image: css2,
-    title: "Certified Developers",
-    desc: "We make sure that our developers have passed all Webflow certification tests on Webflow university.",
+    title: "Product-Aware Team",
+    desc: "Our Webflow specialists work directly with founders and marketing leads — so every build aligns with the product narrative and gets shipped faster, with less back and forth.",
   },
   {
     image: css6,
-    title: "Beautiful Interactions",
-    desc: "We create simple and beautiful animations that improve the user's overall experience.",
+    title: "Modern Interactions",
+    desc: "YC startups build with urgency — and we match that urgency with clean, responsive UI. From scroll behavior to micro-animations, we design with precision, so every interaction feels fast, modern, and intentional.",
   },
   {
     image: css1,
-    title: "Responsive Design",
-    desc: "We as a Webflow design agency ensure that all the designs we develop in Webflow has similar experiences across all the devices.",
+    title: "Built for First Impressions",
+    desc: "Whether it’s launch day, a demo link, or your deck’s footer — we build sites that explain what you do clearly and make people take you seriously.",
   },
   {
     image: css4,
@@ -145,29 +145,31 @@ const page = () => {
 
           {/* Subheadline */}
           <p className="font-medium text-lg m-3">
-            A full-service webflow agency
+            A full-service webflow agency for B2B SaaS Companies
           </p>
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl max-w-4xl mx-auto font-bold mb-6">
-            Get
+            Your go-to
             <span className="bg-gradient-to-l from-purple-700 via-purple-400 to-blue-600 bg-clip-text text-transparent">
               {" "}
-              high-converting
+              Webflow partner
             </span>{" "}
-            <span className="text-white">Webflow</span> Websites{" "}
+            <span className="text-white"></span>{" "}
             <span className="bg-gradient-to-l from-purple-700 via-purple-400 to-blue-600 bg-clip-text text-transparent">
-              in just 2 weeks.
+              trusted by Y Combinator backed startups
             </span>
           </h1>
 
           {/* Paragraph */}
           <p className="max-w-3xl mx-auto mb-8 text-base sm:text-lg">
-            We as a Webflow expert agency help SaaS, IT, and B2B companies get
-            more clients with Webflow websites that are optimized for more
-            leads. Our Webflow development agency provides Webflow website
-            design, Webflow development and maintenance, SEO, and Webflow
-            migration services.
+            Trusted by startups backed by leading VCs — from Palo Alto to Tel
+            Aviv — we build Webflow sites that help early-stage DevTool, AI, and
+            infra teams look sharp from day one.
+            <br />
+            From landing pages to full site builds, we handle the design and dev
+            so your team can stay focused on scaling your B2B SaaS — not
+            wrangling front-end code.
           </p>
 
           {/* Call to Action */}
@@ -201,15 +203,17 @@ const page = () => {
           >
             <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
             <p className="max-w-5xl mx-auto mb-8 text-5xl font-semibold mt-10">
-              5x your potential with our Range Of Webflow Development Services!
+              Great startups use their website to control the narrative early.
             </p>
             <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
-              Unlock your brand’s full potential with our Webflow design
-              company, offering expert solutions tailored to your needs. As a
-              leading Webflow development agency, we specialize in creating
-              high-performing websites that are not only visually stunning but
-              also optimized for conversions. Partner with us to experience a
-              seamless blend of creativity and technical expertise.
+              We’ve built Webflow sites for teams now doing $40M+ in ARR.
+              <br />
+              If you’re raising, hiring, or launching — we’ll help you ship a
+              site that earns attention.
+              <br />
+              Backed by experience, shipped with speed, built to make people
+              care.
+              <br />
             </p>
             <div>
               <CardMotion serviceArr={serviceArr} />
