@@ -294,29 +294,25 @@ const page = () => {
 
           {/* Subheadline */}
           <p className="font-medium text-lg m-3">
-            A full-service webflow agency
+          Turn Documentation Into Your Growth Engine
           </p>
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl max-w-4xl mx-auto font-bold mb-6">
-            Get
+          Content Built for DevTools Startups 
             <span className="bg-gradient-to-l from-purple-700 via-purple-400 to-blue-600 bg-clip-text text-transparent">
               {" "}
-              high-converting
+              Written to Convert, 
             </span>{" "}
-            <span className="text-white">Webflow</span> Websites{" "}
+            <span className="text-white"></span> {" "}
             <span className="bg-gradient-to-l from-purple-700 via-purple-400 to-blue-600 bg-clip-text text-transparent">
-              in just 2 weeks.
+            Scale, and Support.
             </span>
           </h1>
 
           {/* Paragraph */}
           <p className="max-w-3xl mx-auto text-base sm:text-lg">
-            We as a Webflow expert agency help SaaS, IT, and B2B companies get
-            more clients with Webflow websites that are optimized for more
-            leads. Our Webflow development agency provides Webflow website
-            design, Webflow development and maintenance, SEO, and Webflow
-            migration services.
+          Built for DevTools companies, Infrasity helps users get started — not stuck — with real-world examples and SDK-integrated content that accelerates developer onboarding. We explain your product through practical use cases and equip sales teams with demo-ready artifacts that double as self-serve onboarding for technical users.
           </p>
           </section>
           </div>
