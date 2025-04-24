@@ -20,7 +20,7 @@ const WebflowMarquee = () => {
   return (
     <div className="max-lg:mt-[30vh] max-sm:mt-[0vh] pt-16 pb-1">
       <h2 className="text-center pb-8 quicksand-bold text-2xl">
-        We are the growth strategists for some of the fastest-growing B2B SaaS startups
+      Trusted by the fastest-growing B2B SaaS startups — from seed to $40M+ ARR.
       </h2>
       
       <div className="bg-white rounded-2xl shadow-md py-4 px-4 mx-auto max-w-7xl">
