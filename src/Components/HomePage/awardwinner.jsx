@@ -21,7 +21,9 @@ export default function AwardBanner() {
           </p>
           <Link
             href="https://hackernoon.com/startups/winner-award?type=city&slug=asia-new-delhi-dl-india&rank=1"
-            className=" relative z-10 flex items-center ml-2 font-medium hover:underline whitespace-nowrap "
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative z-10 flex items-center ml-2 font-medium hover:underline whitespace-nowrap"
           >
             Know More <ArrowRight className="h-4 w-4 ml-1" />
           </Link>
