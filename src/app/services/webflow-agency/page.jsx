@@ -26,6 +26,7 @@ import img3 from "./images/devs/dev3.png";
 import img4 from "./images/devs/dev4.png";
 import img5 from "./images/devs/dev5.png";
 import img6 from "./images/devs/dev6.png";
+import ServicesSection from "./ServicesSection";
 
 const fileList = [
   "aviator.png",
@@ -179,6 +180,8 @@ const page = () => {
               <CalendlyButton name="Book a Demo" />
             </div>
           </div>
+
+          {/* <ServicesSection /> */}
 
           {/* Webflow Marquee */}
           <div

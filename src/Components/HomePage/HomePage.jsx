@@ -14,6 +14,8 @@ import JoinCommunity from "./JoinCommunity";
 import WhyInfra from "./WhyInfra";
 import FAQ from "./FAQ";
 import AppContext from "@/context/Infracontext";
+import AwardBanner from "./awardwinner";
+import Navbar from "../Navbar/Navbar";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
@@ -50,6 +52,8 @@ const HomePage = () => {
 
   return (
     <div className="text-white overflow-x-hidden overflow-y-hidden">
+      <AwardBanner />
+      <Navbar />
       <HeroHome />
       <HomeMarquee />
       <HowWorks
