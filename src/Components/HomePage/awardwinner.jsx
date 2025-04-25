@@ -16,8 +16,8 @@ export default function AwardBanner() {
           <Award className="h-5 w-5 md:h-6 md:w-6 flex-shrink-0" />
           <p className="text-center">
             Infrasity has been recognized as the{" "}
-            <span className="font-bold">#1 Startup in New Delhi</span> by
-            HackerNoon's Startups of the Year Awards 2025.
+            <span className="font-bold">#1 Startup in New Delhi,India</span> by
+            HackerNoon's Startups of the Year Awards 2024.
           </p>
           <Link
             href="https://hackernoon.com/startups/winner-award?type=city&slug=asia-new-delhi-dl-india&rank=1"
