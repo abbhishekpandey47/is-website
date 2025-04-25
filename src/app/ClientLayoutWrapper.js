@@ -18,6 +18,9 @@ export function ClientLayoutWrapper({ children }) {
   
   const pathname = usePathname();
   const hideNavbar = pathname === '/technical-writing-services-b2b-saas';
+  const hideNavBar2 = pathname === '/';
+  
+  
   return (
     <>
       {/* <CrispWithNoSSR /> */}
@@ -40,7 +43,7 @@ export function ClientLayoutWrapper({ children }) {
         <Appwrap>
           <AntdRegistry>
             <Loader/>
-            {!hideNavbar && <Navbar />}
+            {!(hideNavbar || hideNavBar2) && <Navbar />}
             {children}
             <Analytics />
             <Footer />
