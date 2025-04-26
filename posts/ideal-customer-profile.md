@@ -2,9 +2,9 @@
 
 What's the point of investing so much time, energy, and budget into marketing if it ends up reaching a broad audience - some who need your product and many who never will?
 
-Your message reaches a mixed crowd: a few ideal users, and a whole lot of people who'll never convert. The result? Confused leads, wasted spending, and a growth graph stuck in neutral.
+Your message reaches a **mixed crowd**: a few ideal users, and a whole lot of people who'll never convert. The result? Confused leads, wasted spending, and a growth graph stuck in neutral.
 
-If you're a B2B SaaS startup, every dollar counts. So before you write another blog post, run another ad, or redesign your homepage for the fifth time - **Pause**. The issue may not be with your marketing methods.
+If you're a B2B SaaS startup, _**every dollar counts**_. So before you write another blog post, run another ad, or redesign your homepage for the fifth time - **Pause**. The issue may not be with your marketing methods.
 
 It might actually be that you are unclear on who you are selling to. And that's where a solid Ideal Customer Profile (ICP) comes into play - your guiding star for marketing, sales, and even product decisions. In this article, I'll explain what an ICP is, why it is important, what it should consist of, and how leading SaaS companies have utilized it to grow effectively.
 
@@ -16,7 +16,7 @@ An Ideal Customer Profile (ICP) is a detailed description of the type of company
 
 It's not just about who could use your product; it's about who gets the most value from it. These are the companies with the right size, stage, challenges, and workflows where your solution fits in naturally and delivers real value.
 
-Think of it like this: if your sales team had a list of dream customers who "just get it" on the first call, those are your ICPs. They're already facing the exact problems your product solves, they're actively searching for solutions, and they have the resources to buy and implement.
+Think of it like this: if your sales team had a list of dream customers who "**just get it**" on the first call, those are your ICPs. They're already facing the exact problems your product solves, they're actively searching for solutions, and they have the resources to buy and implement.
 
 A strong ICP helps you stop chasing anyone and everyone. Instead, it guides your marketing, sales, and product decisions toward the companies where you have the highest chance of winning and keeping business.
 
@@ -34,7 +34,7 @@ You understand the characteristics of your target audience, creating hyper-focus
 
 An ICP provides the opportunity to develop messages that resonate with the needs and interests of the target audience — it's as if your messages speak to your prospects directly.
 
-By incorporating these audience-focused messages into your content, ad copy, and sales pitches, you help your audience feel that you understand their pain points - and have developed your SaaS product to solve them.
+By incorporating these audience-focused messages into your _content, ad copy, and sales pitches_, you help your audience feel that you understand their pain points - and have developed your SaaS product to solve them.
 
 ### 3. Resource Utilization
 
@@ -93,7 +93,7 @@ Outline the pain points of your ideal customers so you can create a marketing st
 
 ### 4. Tech Ecosystem
 
-Understand the tech environment of your prospects — which tools and software they are using. This will help you identify how you can pitch your SaaS product and provide seamless integration into their workflow.
+Understand the tech environment of your prospects - which tools and software they are using. This will help you identify how you can pitch your SaaS product and provide seamless integration into their workflow.
 
 For example:
 
@@ -169,12 +169,13 @@ Asana released its project management and team collaboration platform to the mar
 
 - **Technology:** Zoom, Spotify, Figma, Quora
 - **Media:** Vox Media, Gannett, Discovery Digital Studios
-- **Retail / FMCG:** Christian Dior, Stride, Barfoot & Thompson
+- **Retail:** Christian Dior, Stride, Barfoot & Thompson
 - **Government:** Manchester City Council, City of Providence
 - **Education:** University of Melbourne, Blackboard, Telfer School of Management
 - **Fintech:** loanDepot, Morningstar, TDM Growth Partners
 
 **How ICP Clarity Helped Asana Scale:**  
+
 By deeply evaluating the evolving needs of its target customers, Asana was able to align its product roadmap and marketing messaging - from self-serve onboarding for SMBs to compliance-driven enterprise deployments. Publishing case studies from successful customers across industries and offering a free trial lowered the adoption barrier, fueling Asana's global growth.
 
 ### 2. Gong
