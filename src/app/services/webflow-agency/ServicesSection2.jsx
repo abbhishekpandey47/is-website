@@ -223,7 +223,7 @@ export default function ScrollingServicesSection() {
             <div
               key={key}
               ref={sectionRefs[key]}
-              className="min-h-screen border-t border-gray-700 first:border-t-0 mb-12"
+              className="border-t border-gray-700 first:border-t-0 mb-12"
               id={`service-${key}`}
               style={{
                 backgroundColor: "#141318",

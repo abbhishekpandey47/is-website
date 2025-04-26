@@ -179,8 +179,6 @@ const page = () => {
             </div>
           </div>
 
-          {/* <ScrollingServicesSection /> */}
-
           {/* Webflow Marquee */}
           <div
             className="mb-24"
@@ -206,8 +204,10 @@ const page = () => {
             <ServicesSection />
           </div>
 
+          <ScrollingServicesSection />
+
           {/* Services Section */}
-          <div
+          {/* <div
             className="mb-24"
             style={{
               background:
@@ -231,7 +231,7 @@ const page = () => {
             <div>
               <CardMotion serviceArr={serviceArr} />
             </div>
-          </div>
+          </div> */}
 
           {/* Why Choose Us Section */}
           <div
