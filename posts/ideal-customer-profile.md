@@ -6,7 +6,7 @@ Your message reaches a **mixed crowd**: a few ideal users, and a whole lot of pe
 
 If you're a B2B SaaS startup, _**every dollar counts**_. So before you write another blog post, run another ad, or redesign your homepage for the fifth time - **Pause**. The issue may not be with your marketing methods.
 
-It might actually be that you are unclear on who you are selling to. And that's where a solid Ideal Customer Profile (ICP) comes into play - your guiding star for marketing, sales, and even product decisions. In this article, I'll explain what an ICP is, why it is important, what it should consist of, and how leading SaaS companies have utilized it to grow effectively.
+It might actually be that you are unclear on who you are selling to. And that's where a solid **Ideal Customer Profile (ICP)** comes into play - your guiding star for marketing, sales, and even product decisions. In this article, I'll explain what an ICP is, why it is important, what it should consist of, and how leading SaaS companies have utilized it to grow effectively.
 
 Let's start with the basics.
 
