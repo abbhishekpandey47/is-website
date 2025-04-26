@@ -42,7 +42,7 @@ export default function ScrollingServicesSection() {
             sectionTop + serviceSectionRef.current.offsetHeight;
           const hideOffset = 300;
           if (
-            scrollPosition >= sectionTop + 200 &&
+            scrollPosition >= sectionTop + 300 &&
             scrollPosition <= sectionBottom - hideOffset
           ) {
             if (menuPosition === "off" || menuPosition === "exiting") {
