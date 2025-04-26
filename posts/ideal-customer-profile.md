@@ -20,7 +20,7 @@ Think of it like this: if your sales team had a list of dream customers who "**j
 
 A strong ICP helps you stop chasing anyone and everyone. Instead, it guides your marketing, sales, and product decisions toward the companies where you have the highest chance of winning and keeping business.
 
-## Why create an Ideal Customer Profile?
+## Why Create an Ideal Customer Profile?
 
 Creating an ideal customer profile is just as important as developing a great product. Here's why:
 
@@ -58,7 +58,7 @@ Your ideal customers have common characteristics and behavior patterns. Creating
 
 This insight guides you in recognizing which aspects of your strategy are working, and helps you develop standardized workflows for business growth and scalability.
 
-## What should your Ideal Customer Profile Look Like?
+## What Should Your Ideal Customer Profile Look Like?
 
 There's a lot to consider when defining your Ideal Customer Profile (ICP), but let's break it down with an example to understand better. Suppose you've developed a Data Analytics Platform that helps companies manage and utilize their data to make data-based decisions.
 
