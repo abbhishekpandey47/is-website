@@ -32,7 +32,7 @@ You understand the characteristics of your target audience, creating hyper-focus
 
 ### 2. Effective Messaging
 
-An ICP provides the opportunity to develop messages that resonate with the needs and interests of the target audience — **it's as if your messages speak to your prospects directly**.
+An ICP provides the opportunity to develop messages that resonate with the needs and interests of the target audience - **it's as if your messages speak to your prospects directly**.
 
 By incorporating these audience-focused messages into your _content, ad copy, and sales pitches_, you help your audience feel that you understand their pain points - and have developed your SaaS product to solve them.
 
