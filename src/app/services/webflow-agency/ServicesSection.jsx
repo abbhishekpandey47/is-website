@@ -40,9 +40,9 @@ export default function ScrollingServicesSection() {
           const sectionTop = serviceSectionRef.current.offsetTop;
           const sectionBottom =
             sectionTop + serviceSectionRef.current.offsetHeight;
-          const hideOffset = 300;
+          const hideOffset = 400;
           if (
-            scrollPosition >= sectionTop &&
+            scrollPosition >= sectionTop + 200 &&
             scrollPosition <= sectionBottom - hideOffset
           ) {
             if (menuPosition === "off" || menuPosition === "exiting") {
@@ -197,6 +197,10 @@ export default function ScrollingServicesSection() {
       className="bg-navy-900 text-white min-h-screen relative"
       ref={serviceSectionRef}
     >
+      <h1 className="text-4xl text-left sm:text-5xl lg:text-6xl max-w-4xl mx-auto font-bold mt-14 ml-8">
+        End-to-grow
+        <span className="text-[#9333ea]"> solution</span>
+      </h1>
       <div className="max-w-6xl mx-auto px-6">
         <div
           className={`fixed left-0 top-16 w-72 p-12 mb-36 ${
@@ -229,12 +233,13 @@ export default function ScrollingServicesSection() {
           </nav>
         </div>
 
-        <div className="ml-0 md:ml-64 py-12">
+        {/* Content area with proper spacing */}
+        <div className="ml-0 md:ml-64 py-12 -mb-36 ">
           {Object.entries(services).map(([key, service]) => (
             <div
               key={key}
               ref={sectionRefs[key]}
-              className="py-24 min-h-screen border-t border-gray-700 first:border-t-0"
+              className="py-24 min-h-screen border-t border-b border-gray-700 first:border-t-0"
               id={`service-${key}`}
             >
               <div className="flex items-center mb-6">
