@@ -14,6 +14,8 @@ Let's start with the basics.
 
 An Ideal Customer Profile (ICP) is a detailed description of the type of company that's most likely to buy your SaaS product and stick around because they actually need it.
 
+![ideal customer profile](/PostImages/ideal-customer-profile/i2.png)
+
 **It's not just about who could use your product; it's about who gets the most value from it**. These are the companies with the right size, stage, challenges, and workflows where your solution fits in naturally and delivers real value.
 
 Think of it like this: if your sales team had a list of dream customers who "**just get it**" on the first call, those are your ICPs. They're already facing the exact problems your product solves, they're actively searching for solutions, and they have the resources to buy and implement.
@@ -63,6 +65,8 @@ This insight guides you in recognizing which aspects of your strategy are workin
 There's a lot to consider when defining your Ideal Customer Profile (ICP), but let's break it down with an example to understand better. Suppose you've developed a Data Analytics Platform that helps companies manage and utilize their data to make data-based decisions.
 
 Now, let's understand the key elements your ICP should include:
+
+![ideal customer profile - key components](/PostImages/ideal-customer-profile/i3.png)
 
 ### 1. Company Details
 
