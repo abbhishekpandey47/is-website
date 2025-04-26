@@ -211,9 +211,9 @@ Gong's team focused marketing and sales messaging directly on sales leaders' pai
 
 Creating an ideal customer profile is a necessity for every B2B SaaS startup to market their product to the right audience. Once you crack the code and identify the right set of audiences who are seeking a solution to the challenges that your product can solve, it will help you position it better.
 
-It has some key elements that you should consider — company details, buyer persona, challenges, tech environment, budget, success goals, customer journey, and behavior. Once you have created a strong ideal customer profile, you can leverage it in your marketing strategy, especially content marketing.
+It has some key elements that you should consider — company details, buyer persona, challenges, tech environment, budget, success goals, customer journey, and behavior. Once you have created a strong ideal customer profile, you can leverage it in your marketing strategy, especially **[content marketing strategy](https://www.infrasity.com/blog/content-marketing-strategy)**.
 
-We understand that hiring a content marketing team can go out of your budget at the early stage of your startup. Therefore, our expert team of writers, designers, and developers ensures delivering high-quality content to B2B SaaS startups. We also help identify your ideal customer profile, so every content marketing effort and dollar counts.
+We understand that hiring a content marketing team can go out of your budget at the early stage of your startup. Therefore, **[Infrasity's](https://www.infrasity.com/contact)** expert team of writers, designers, and developers ensures delivering high-quality content to B2B SaaS startups. We also help identify your ideal customer profile, so every content marketing effort and dollar counts.
 
 ## FAQs
 
