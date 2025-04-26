@@ -78,9 +78,9 @@ It's important to determine which customer personas you need to target. Identify
 
 For a data analytics platform, here are the typical personas to consider:
 
-- **The User** – Usually a Data Analyst or Business Intelligence professional who will use the platform daily. They care about intuitive dashboards, quick insights, and smooth workflows.
-- **The Manager** – Likely to be a Head of Analytics or Department Lead who wants to boost team productivity and ensure efficient reporting. They evaluate tools based on team needs, performance, and results.
-- **The Decision-Maker** – Typically a CTO, CIO, or Director of Operations. Their focus is on business alignment, data security, budget justification, and ROI.
+- **The User** - Usually a Data Analyst or Business Intelligence professional who will use the platform daily. They care about intuitive dashboards, quick insights, and smooth workflows.
+- **The Manager** - Likely to be a Head of Analytics or Department Lead who wants to boost team productivity and ensure efficient reporting. They evaluate tools based on team needs, performance, and results.
+- **The Decision-Maker** - Typically a CTO, CIO, or Director of Operations. Their focus is on business alignment, data security, budget justification, and ROI.
 
 ### 3. Challenges
 
