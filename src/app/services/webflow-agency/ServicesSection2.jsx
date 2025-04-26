@@ -1,4 +1,11 @@
 import { useState, useEffect, useRef } from "react";
+import img1 from "./images/devs/dev1.png";
+import img2 from "./images/devs/dev2.png";
+import img3 from "./images/devs/dev3.png";
+import img4 from "./images/devs/dev4.png";
+import img5 from "./images/devs/dev5.png";
+import img6 from "./images/devs/dev6.png";
+import Image from "next/image";
 
 export default function ScrollingServicesSection() {
   const [activeSection, setActiveSection] = useState("web");
@@ -36,15 +43,18 @@ export default function ScrollingServicesSection() {
       scrollThrottleRef.current = requestAnimationFrame(() => {
         const scrollPosition = window.scrollY + window.innerHeight / 3;
 
+        // Check if we're in the services section
         if (serviceSectionRef.current) {
           const sectionTop = serviceSectionRef.current.offsetTop;
           const sectionBottom =
             sectionTop + serviceSectionRef.current.offsetHeight;
           const hideOffset = 300;
+          // Update menu position state based on scroll
           if (
             scrollPosition >= sectionTop &&
             scrollPosition <= sectionBottom - hideOffset
           ) {
+            // We're inside the services section
             if (menuPosition === "off" || menuPosition === "exiting") {
               setMenuPosition("entering");
               setTimeout(() => setMenuPosition("active"), 50);
@@ -58,8 +68,10 @@ export default function ScrollingServicesSection() {
         }
 
         if (menuPosition === "active" || menuPosition === "entering") {
+          // Find the actual visible section in the viewport
           let currentSection = null;
 
+          // Check each section from top to bottom
           Object.entries(sectionRefs).forEach(([key, ref]) => {
             if (ref.current) {
               const rect = ref.current.getBoundingClientRect();
@@ -108,51 +120,27 @@ export default function ScrollingServicesSection() {
   const services = {
     web: {
       title: "Web Design",
-      icon: "🔺",
       description:
         "Upgrade your online presence with our Webflow Development agency. We create perfect websites that load fast, look great on any device, and are fully optimized for search engines. Boost your digital presence with our custom Webflow development company solutions.",
-      features: [
-        "UX/UI design",
-        "Custom assets design",
-        "Conversion-driven approach",
-        "Lottie animations",
-      ],
+      image: img1,
     },
     webflow: {
       title: "Webflow Development",
-      icon: "W",
       description:
         "Build to grow. Fast, highly optimized and easy-to-scale Webflow websites built to eliminate bottlenecks and allow faster time-to-market.",
-      features: [
-        "Migrations from different platforms",
-        "Website automations and integrations",
-        "CMS and CRM implementation",
-        "Extensive quality assurance",
-      ],
+      image: img2,
     },
     growth: {
       title: "Growth",
-      icon: "📊",
       description:
         "Growing qualified pipeline. Helping GTM experts drive more traffic with the help of our SEO and Ads experts. The same people who got you to land on this page.",
-      features: [
-        "SEO research and strategy",
-        "Content production",
-        "Technical and on-page SEO",
-        "Performance advertising",
-      ],
+      image: img3,
     },
     strategy: {
       title: "Strategy & Consulting",
-      icon: "💼",
       description:
         "Expert guidance to shape your digital strategy and achieve business objectives.",
-      features: [
-        "Digital transformation roadmaps",
-        "Technology stack planning",
-        "Market research and insights",
-        "Business process optimization",
-      ],
+      image: img4,
     },
   };
 
@@ -229,160 +217,69 @@ export default function ScrollingServicesSection() {
           </nav>
         </div>
 
+        {/* Content area with proper spacing */}
         <div className="ml-0 md:ml-64 py-12">
           {Object.entries(services).map(([key, service]) => (
             <div
               key={key}
               ref={sectionRefs[key]}
-              className="py-24 min-h-screen border-t border-gray-700 first:border-t-0"
+              className="min-h-screen border-t border-gray-700 first:border-t-0 mb-12"
               id={`service-${key}`}
+              style={{
+                backgroundColor: "#141318",
+                backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 80%)`,
+                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
+                border: "2px solid rgba(60, 63, 84, 0.3)",
+              }}
             >
-              <div className="flex items-center mb-6">
-                {key === "web" && (
-                  <span className="text-pink-300 text-3xl mr-4">
-                    {service.icon}
-                  </span>
-                )}
-                {key === "webflow" && (
-                  <div className="bg-blue-500 rounded-full w-12 h-12 flex items-center justify-center mr-4">
-                    <span className="text-white font-bold text-2xl">
-                      {service.icon}
-                    </span>
-                  </div>
-                )}
-                {key === "growth" && (
-                  <div className="flex mr-4">
-                    <svg
-                      width="40"
-                      height="40"
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="4"
-                        y="24"
-                        width="6"
-                        height="12"
-                        rx="1"
-                        fill="#6B7280"
-                      />
-                      <rect
-                        x="16"
-                        y="18"
-                        width="6"
-                        height="18"
-                        rx="1"
-                        fill="#6B7280"
-                      />
-                      <rect
-                        x="28"
-                        y="10"
-                        width="6"
-                        height="26"
-                        rx="1"
-                        fill="#10B981"
-                      />
-                    </svg>
-                  </div>
-                )}
-                {key === "strategy" && (
-                  <div className="mr-4">
-                    <svg
-                      width="40"
-                      height="40"
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="4"
-                        y="4"
-                        width="10"
-                        height="10"
-                        rx="1"
-                        fill="#10B981"
-                      />
-                      <rect
-                        x="4"
-                        y="18"
-                        width="10"
-                        height="10"
-                        rx="1"
-                        fill="#10B981"
-                        fillOpacity="0.7"
-                      />
-                      <rect
-                        x="18"
-                        y="4"
-                        width="10"
-                        height="10"
-                        rx="1"
-                        fill="#10B981"
-                        fillOpacity="0.5"
-                      />
-                      <rect
-                        x="18"
-                        y="18"
-                        width="10"
-                        height="10"
-                        rx="1"
-                        fill="#10B981"
-                        fillOpacity="0.3"
-                      />
-                    </svg>
-                  </div>
-                )}
-                <h3 className="text-4xl font-bold text-left">
-                  {service.title}
-                </h3>
-              </div>
+              <div className="relative rounded-xl shadow-lg overflow-hidden p-6">
+                <div className="absolute -bottom-20 -right-40 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500 rounded-full blur-3xl" />
+                <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-2xl" />
 
-              <p className="text-lg mb-8 max-w-3xl text-left">
-                {service.description}
-              </p>
+                <div className="flex items-center mb-6">
+                  <h3 className="text-4xl font-bold text-left text-white">
+                    {service.title}
+                  </h3>
+                </div>
 
-              <div className="grid md:grid-cols-2 gap-6 max-w-3xl">
-                {service.features.map((feature, index) => (
-                  <div key={index} className="flex items-start">
-                    <div className="bg-blue-500 rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-white"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
+                <div className="flex flex-col-reverse md:flex-row items-stretch gap-6">
+                  <div className="flex-1 flex flex-col justify-start text-start">
+                    <p className="text-lg mb-8 max-w-3xl text-left text-white">
+                      {service.description}
+                    </p>
+
+                    <div className="mt-12">
+                      <a
+                        href={`#service-${key}`}
+                        className="flex items-center text-lg border-b border-gray-500 pb-1 w-max text-white"
                       >
-                        <path
-                          fillRule="evenodd"
-                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                        Explore service
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 ml-2"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </a>
                     </div>
-                    <span className="text-lg">{feature}</span>
                   </div>
-                ))}
-              </div>
 
-              <div className="mt-12">
-                <a
-                  href={`#service-${key}`}
-                  className="flex items-center text-lg border-b border-gray-500 pb-1 w-max"
-                >
-                  Explore service
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-2"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
+                  <div className="w-full md:w-1/2 h-[400px] md:h-[250px] lg:h-full flex-shrink-0">
+                    <Image
+                      src={service.image}
+                      alt={`Service: ${service.title}`}
+                      className="w-full h-full object-cover md:rounded-r-xl"
+                      width={600}
+                      height={550}
                     />
-                  </svg>
-                </a>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

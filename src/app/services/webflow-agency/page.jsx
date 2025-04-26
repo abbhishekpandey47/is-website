@@ -27,6 +27,7 @@ import img4 from "./images/devs/dev4.png";
 import img5 from "./images/devs/dev5.png";
 import img6 from "./images/devs/dev6.png";
 import ServicesSection from "./ServicesSection";
+import ScrollingServicesSection from "./ServicesSection2";
 
 const fileList = [
   "aviator.png",
@@ -127,13 +128,12 @@ const page = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }} // Start with opacity 0 and move up from 50px
-      animate={{ opacity: 1, y: 0 }} // Animate to opacity 1 and y 0
-      transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: "easeOut" }}
     >
       <div className="min-h-screen bg-[#0a0a1a] text-white overflow-hidden relative">
         <section className="py-12 md:py-20 lg:py-32 relative text-center">
-          {/* Clutch badge */}
           <div className="flex justify-center mt-20">
             <div className="bg-black text-white px-5 py-3 rounded-full text-sm font-semibold flex items-center gap-2">
               <span className="bg-white text-black rounded-full px-3 py-0.5">
@@ -144,12 +144,10 @@ const page = () => {
             </div>
           </div>
 
-          {/* Subheadline */}
           <p className="font-medium text-lg m-3">
             A full-service webflow agency for B2B SaaS Companies
           </p>
 
-          {/* Main Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl max-w-4xl mx-auto font-bold mb-6">
             Your go-to
             <span className="text-white bg-clip-text text-transparent">
@@ -181,7 +179,8 @@ const page = () => {
             </div>
           </div>
 
-          {/* <ServicesSection /> */}
+          <ServicesSection />
+          <ScrollingServicesSection />
 
           {/* Webflow Marquee */}
           <div
