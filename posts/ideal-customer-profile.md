@@ -207,6 +207,7 @@ Founded in 2015, Gong is a revenue intelligence platform that helps sales teams 
 - **Language:** English-speaking sales teams
 
 **How ICP Clarity Helped Gong Scale:**  
+
 By defining a sharp and specific ICP early, Gong avoided the common startup trap of trying to serve everyone. Instead, they built their Minimum Viable Product (MVP) alongside 12 handpicked design partners (early adopters). These were sales teams that matched their ICP and helped refine the product based on real-world usage and feedback.
 
 Gong's team focused marketing and sales messaging directly on sales leaders' pain points, emphasizing better visibility into calls, faster coaching cycles, and stronger forecasting accuracy. They didn't initially lead with "AI"; instead, they framed the product as a sales efficiency tool, aligning exactly with what their ICP cared about.
