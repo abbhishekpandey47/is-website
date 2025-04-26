@@ -26,6 +26,8 @@ A strong ICP helps you stop chasing anyone and everyone. Instead, it guides your
 
 Creating an ideal customer profile is just as important as developing a great product. Here's why:
 
+![benefits of creating ideal customer profile](/PostImages/ideal-customer-profile/i4.png)
+
 ### 1. Targeted Marketing
 
 A well-prepared ideal customer profile gives you the opportunity to efficaciously utilize your marketing efforts. It helps you target the right set of audiences, leading to a higher possibility of conversion.
