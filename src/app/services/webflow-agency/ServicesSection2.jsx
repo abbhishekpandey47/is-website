@@ -51,7 +51,7 @@ export default function ScrollingServicesSection() {
           const hideOffset = 300;
           // Update menu position state based on scroll
           if (
-            scrollPosition >= sectionTop &&
+            scrollPosition >= sectionTop + 200 &&
             scrollPosition <= sectionBottom - hideOffset
           ) {
             // We're inside the services section
@@ -119,27 +119,59 @@ export default function ScrollingServicesSection() {
 
   const services = {
     web: {
-      title: "Web Design",
+      head: "Webflow Design",
+      title: "Web Design for Fast-Moving Startups",
+      icon: "🔺",
       description:
-        "Upgrade your online presence with our Webflow Development agency. We create perfect websites that load fast, look great on any device, and are fully optimized for search engines. Boost your digital presence with our custom Webflow development company solutions.",
+        "Your product changes weekly — your site should too. We help YC-backed and modern SaaS companies launch Webflow sites that scale with their roadmap, from feature drops to pricing experiments to new verticals. Test messaging, ship new pages, and move fast — without waiting on dev cycles.",
+      features: [
+        "UX/UI tailored to GTM needs",
+        "Conversion-first layout logic",
+        "Dev-free content workflows",
+        "Smooth Lottie and scroll-based interactions",
+      ],
       image: img1,
     },
     webflow: {
+      head: "Webflow Development",
       title: "Webflow Development",
+      icon: "W",
       description:
-        "Build to grow. Fast, highly optimized and easy-to-scale Webflow websites built to eliminate bottlenecks and allow faster time-to-market.",
+        "Startups don't move slow — you're shipping new features every week, pivoting messaging, launching products, maybe even prepping a KubeCon demo. Your site can't be a blocker. That's why early teams — especially YC-backed and B2B SaaS startups — move to Webflow. We help you set up a system where landing pages, announcements, and copy updates take hours, not weeks.",
+      features: [
+        "Spin up new landing pages in hours, not weeks",
+        "Launch product updates, demos, and announcements fast",
+        "Test new messaging and run experiments without dev bottlenecks",
+        "Keep your site evolving alongside your product roadmap",
+      ],
       image: img2,
     },
     growth: {
-      title: "Growth",
+      head: "Webflow Migration",
+      title: "Migration to Webflow",
+      icon: "📊",
       description:
-        "Growing qualified pipeline. Helping GTM experts drive more traffic with the help of our SEO and Ads experts. The same people who got you to land on this page.",
+        "Migrating platforms shouldn't mean starting over.We help you move from WordPress, Wix, or Framer — without losing traffic, SEO, or structure..",
+      features: [
+        "Migrate seamlessly from WordPress without SEO or content loss",
+        "Switch from Wix or Squarespace with zero downtime",
+        "Move from Framer or custom-built CMS to Webflow effortlessly",
+        "Structured migrations that protect your rankings, URLs, and performance",
+      ],
       image: img3,
     },
     strategy: {
-      title: "Strategy & Consulting",
+      head: "Maintenance & Support",
+      title: "Webflow Maintenance & Support",
+      icon: "💼",
       description:
-        "Expert guidance to shape your digital strategy and achieve business objectives.",
+        "Early-stage startups rarely stick to one design.Your branding evolves, product positioning shifts, and your website needs frequent updates—fast. We help you maintain a pixel-perfect Webflow site, translating Figma prototypes rapidly into production-ready pages without bottlenecks..",
+      features: [
+        "Rapid updates from Figma prototypes to live Webflow",
+        "Seamless branding changes & design refreshes",
+        "Seamless, same-day design updates from Day 1",
+        "Ongoing, expert Webflow support—no dev delays",
+      ],
       image: img4,
     },
   };
@@ -185,6 +217,10 @@ export default function ScrollingServicesSection() {
       className="bg-navy-900 text-white min-h-screen relative"
       ref={serviceSectionRef}
     >
+      <h1 className="text-4xl text-left sm:text-5xl lg:text-6xl max-w-4xl mx-auto font-bold mt-14 ml-8">
+        End-to-grow
+        <span className="text-[#9333ea]"> solution</span>
+      </h1>
       <div className="max-w-6xl mx-auto px-6">
         <div
           className={`fixed left-0 top-16 w-72 p-12 mb-36 ${
@@ -202,7 +238,7 @@ export default function ScrollingServicesSection() {
               <div
                 key={key}
                 onClick={() => scrollToSection(key)}
-                className={`cursor-pointer text-xl transition-colors duration-300 flex items-center ${
+                className={`cursor-pointer text-sm transition-colors duration-300 flex items-center ${
                   activeSection === key ? "text-white" : "text-gray-400"
                 }`}
               >
@@ -210,7 +246,7 @@ export default function ScrollingServicesSection() {
                   <span className="text-cyan-400 mr-2 text-lg">●</span>
                 )}
                 <span className={activeSection === key ? "font-medium" : ""}>
-                  {service.title.split(" ")[0]}
+                  {service.head}
                 </span>
               </div>
             ))}
@@ -218,12 +254,47 @@ export default function ScrollingServicesSection() {
         </div>
 
         {/* Content area with proper spacing */}
-        <div className="ml-0 md:ml-64 py-12">
+        <div className="ml-0 md:ml-64 pt-20">
           {Object.entries(services).map(([key, service]) => (
             <div
               key={key}
               ref={sectionRefs[key]}
-              className="border-t border-gray-700 first:border-t-0 mb-12"
+              className="relative bg-white text-black rounded-xl shadow-lg flex-shrink-0 w-[90vw] md:w-[780px] flex flex-col-reverse md:flex-row items-stretch gap-6 overflow-hidden mb-16 "
+              style={{
+                backgroundColor: "#141318",
+                backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 80%)`,
+                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
+                border: "2px solid rgba(60, 63, 84, 0.3)",
+              }}
+            >
+              <div className="absolute -bottom-20 -right-40 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500 rounded-full blur-3xl" />
+              <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-2xl" />
+
+              <div className="flex-1 p-6 flex flex-col justify-start text-start">
+                <h3 className="text-lg md:text-2xl font-semibold mb-4 text-white">
+                  {service.title}
+                </h3>
+                <p className="text-sm md:text-base text-white">
+                  {service.description}
+                </p>
+              </div>
+              <div className="w-full md:w-1/2 h-[400px] md:h-[250px] lg:h-full flex-shrink-0">
+                <Image
+                  src={service.image}
+                  alt={`Service: ${service.head}`}
+                  className="w-full h-full object-cover md:rounded-r-xl"
+                  width={600}
+                  height={550}
+                />
+              </div>
+            </div>
+          ))}
+
+          {/* {Object.entries(services).map(([key, service]) => (
+            <div
+              key={key}
+              // ref={sectionRefs[key]}
+              className="mb-12"
               id={`service-${key}`}
               style={{
                 backgroundColor: "#141318",
@@ -244,30 +315,9 @@ export default function ScrollingServicesSection() {
 
                 <div className="flex flex-col-reverse md:flex-row items-stretch gap-6">
                   <div className="flex-1 flex flex-col justify-start text-start">
-                    <p className="text-lg mb-8 max-w-3xl text-left text-white">
+                    <p className="text-lg max-w-3xl text-left text-white">
                       {service.description}
                     </p>
-
-                    <div className="mt-12">
-                      <a
-                        href={`#service-${key}`}
-                        className="flex items-center text-lg border-b border-gray-500 pb-1 w-max text-white"
-                      >
-                        Explore service
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 ml-2"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </a>
-                    </div>
                   </div>
 
                   <div className="w-full md:w-1/2 h-[400px] md:h-[250px] lg:h-full flex-shrink-0">
@@ -282,7 +332,7 @@ export default function ScrollingServicesSection() {
                 </div>
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

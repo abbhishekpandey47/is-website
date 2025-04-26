@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 export default function TrustedBySection() {
   const scrollContainerRef = useRef(null);
   const fileList = [
+    "mocha.png",
     "aviator.png",
     "firstock-logo.webp",
     "cedana.png",
@@ -42,36 +43,36 @@ export default function TrustedBySection() {
     if (!scrollContainer) return;
 
     let scrollPosition = 0;
-    const totalWidth = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-    
+    const totalWidth =
+      scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
     const scroll = () => {
-      // Increment scroll 
+      // Increment scroll
       scrollPosition += 0.5;
-      
+
       // Reset scroll position when we end
       if (scrollPosition >= totalWidth) {
         scrollPosition = 0;
       }
-      
+
       scrollContainer.scrollLeft = scrollPosition;
-      
+
       requestAnimationFrame(scroll);
     };
 
     const animationId = requestAnimationFrame(scroll);
-    
+
     return () => cancelAnimationFrame(animationId);
   }, []);
 
   return (
-<div className="w-[55%] py-2 px-6 lg:pl-40">
-<div className="max-w-7xl mx-auto">
-        <h2 className="text-[20px] text-[#858588] font-normal mb-4">Trusted by</h2>
+    <div className="w-[55%] py-2 px-6 lg:pl-40">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-[20px] text-[#858588] font-normal mb-4">
+          Trusted by
+        </h2>
 
-        <div 
-          ref={scrollContainerRef}
-          className="overflow-x-hidden"
-        >
+        <div ref={scrollContainerRef} className="overflow-x-hidden">
           <div className="inline-flex min-w-full">
             {rows.map((row, rowIndex) => (
               <div key={rowIndex} className="flex min-w-full">
