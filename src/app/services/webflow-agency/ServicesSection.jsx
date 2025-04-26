@@ -107,51 +107,51 @@ export default function ScrollingServicesSection() {
 
   const services = {
     web: {
-      title: "Web Design",
+      title: "Web Design for Fast-Moving Startups",
       icon: "🔺",
       description:
-        "Upgrade your online presence with our Webflow Development agency. We create perfect websites that load fast, look great on any device, and are fully optimized for search engines. Boost your digital presence with our custom Webflow development company solutions.",
+        "Your product changes weekly — your site should too. We help YC-backed and modern SaaS companies launch Webflow sites that scale with their roadmap, from feature drops to pricing experiments to new verticals. Test messaging, ship new pages, and move fast — without waiting on dev cycles.",
       features: [
-        "UX/UI design",
-        "Custom assets design",
-        "Conversion-driven approach",
-        "Lottie animations",
+        "UX/UI tailored to GTM needs",
+        "Conversion-first layout logic",
+        "Dev-free content workflows",
+        "Smooth Lottie and scroll-based interactions",
       ],
     },
     webflow: {
       title: "Webflow Development",
       icon: "W",
       description:
-        "Build to grow. Fast, highly optimized and easy-to-scale Webflow websites built to eliminate bottlenecks and allow faster time-to-market.",
+        "Startups don’t move slow — you’re shipping new features every week, pivoting messaging, launching products, maybe even prepping a KubeCon demo. Your site can’t be a blocker. That’s why early teams — especially YC-backed and B2B SaaS startups — move to Webflow. We help you set up a system where landing pages, announcements, and copy updates take hours, not weeks.",
       features: [
-        "Migrations from different platforms",
-        "Website automations and integrations",
-        "CMS and CRM implementation",
-        "Extensive quality assurance",
+        "Spin up new landing pages in hours, not weeks",
+        "Launch product updates, demos, and announcements fast",
+        "Test new messaging and run experiments without dev bottlenecks",
+        "Keep your site evolving alongside your product roadmap",
       ],
     },
     growth: {
-      title: "Growth",
+      title: "Migration to Webflow",
       icon: "📊",
       description:
-        "Growing qualified pipeline. Helping GTM experts drive more traffic with the help of our SEO and Ads experts. The same people who got you to land on this page.",
+        "Migrating platforms shouldn’t mean starting over.We help you move from WordPress, Wix, or Framer — without losing traffic, SEO, or structure..",
       features: [
-        "SEO research and strategy",
-        "Content production",
-        "Technical and on-page SEO",
-        "Performance advertising",
+        "Migrate seamlessly from WordPress without SEO or content loss",
+        "Switch from Wix or Squarespace with zero downtime",
+        "Move from Framer or custom-built CMS to Webflow effortlessly",
+        "Structured migrations that protect your rankings, URLs, and performance",
       ],
     },
     strategy: {
-      title: "Strategy & Consulting",
+      title: "Webflow Maintenance & Support",
       icon: "💼",
       description:
-        "Expert guidance to shape your digital strategy and achieve business objectives.",
+        "Early-stage startups rarely stick to one design.Your branding evolves, product positioning shifts, and your website needs frequent updates—fast. We help you maintain a pixel-perfect Webflow site, translating Figma prototypes rapidly into production-ready pages without bottlenecks..",
       features: [
-        "Digital transformation roadmaps",
-        "Technology stack planning",
-        "Market research and insights",
-        "Business process optimization",
+        "Rapid updates from Figma prototypes to live Webflow",
+        "Seamless branding changes & design refreshes",
+        "Seamless, same-day design updates from Day 1",
+        "Ongoing, expert Webflow support—no dev delays",
       ],
     },
   };
@@ -198,8 +198,8 @@ export default function ScrollingServicesSection() {
       ref={serviceSectionRef}
     >
       <h1 className="text-4xl text-left sm:text-5xl lg:text-6xl max-w-4xl mx-auto font-bold mt-14 ml-8">
-        End-to-grow
-        <span className="text-[#9333ea]"> solution</span>
+      Webflow Website That Evolve As Fast As Your 
+        <span className="text-[#9333ea]"> Product</span>
       </h1>
       <div className="max-w-6xl mx-auto px-6">
         <div
@@ -211,7 +211,7 @@ export default function ScrollingServicesSection() {
             ...getSidebarStyles(),
           }}
         >
-          <h2 className="text-xl font-semibold mb-12">OUR SERVICES</h2>
+          <h2 className="text-xl font-semibold mb-12">Webflow for Startups</h2>
 
           <nav className="space-y-8">
             {Object.entries(services).map(([key, service]) => (
