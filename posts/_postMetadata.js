@@ -655,6 +655,19 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Answer engine optimization can help you reach the top of the search engine results page. Wanna know how? Read the article to understand how to do AEO."
     },
+
+    {
+        title: "Stop Selling Your Product To Everyone: Create Your Ideal Customer Profile",
+        metatitle: "Stop Selling To Everyone: Create Your Ideal Customer Profile",
+        slug: "ideal-customer-profile",
+        description: "Explore how to create an ideal customer profile, and how some successful B2B SaaS companies leveraged their sales and marketing efforts by creating an ICP.",
+        ogImage: "/PostImages/ideal-customer-profile/i1.png",
+        publishedOn: "2025-04-26",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Explore how to create an ideal customer profile, and how some successful B2B SaaS companies leveraged their sales and marketing efforts by creating an ICP."
+    },
+
     
 ];
 
