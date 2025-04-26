@@ -1,12 +1,12 @@
 ## Introduction
 
-What's the point of investing so much time, energy, and budget into marketing if it ends up reaching a broad audience — some who need your product and many who never will?
+What's the point of investing so much time, energy, and budget into marketing if it ends up reaching a broad audience - some who need your product and many who never will?
 
 Your message reaches a mixed crowd: a few ideal users, and a whole lot of people who'll never convert. The result? Confused leads, wasted spending, and a growth graph stuck in neutral.
 
-If you're a B2B SaaS startup, every dollar counts. So before you write another blog post, run another ad, or redesign your homepage for the fifth time — **pause**. The issue may not be with your marketing methods.
+If you're a B2B SaaS startup, every dollar counts. So before you write another blog post, run another ad, or redesign your homepage for the fifth time - **Pause**. The issue may not be with your marketing methods.
 
-It might actually be that you are unclear on who you are selling to. And that's where a solid Ideal Customer Profile (ICP) comes into play — your guiding star for marketing, sales, and even product decisions. In this article, I'll explain what an ICP is, why it is important, what it should consist of, and how leading SaaS companies have utilized it to grow effectively.
+It might actually be that you are unclear on who you are selling to. And that's where a solid Ideal Customer Profile (ICP) comes into play - your guiding star for marketing, sales, and even product decisions. In this article, I'll explain what an ICP is, why it is important, what it should consist of, and how leading SaaS companies have utilized it to grow effectively.
 
 Let's start with the basics.
 
@@ -34,7 +34,7 @@ You understand the characteristics of your target audience, creating hyper-focus
 
 An ICP provides the opportunity to develop messages that resonate with the needs and interests of the target audience — it's as if your messages speak to your prospects directly.
 
-By incorporating these audience-focused messages into your content, ad copy, and sales pitches, you help your audience feel that you understand their pain points — and have developed your SaaS product to solve them.
+By incorporating these audience-focused messages into your content, ad copy, and sales pitches, you help your audience feel that you understand their pain points - and have developed your SaaS product to solve them.
 
 ### 3. Resource Utilization
 
@@ -175,7 +175,7 @@ Asana released its project management and team collaboration platform to the mar
 - **Fintech:** loanDepot, Morningstar, TDM Growth Partners
 
 **How ICP Clarity Helped Asana Scale:**  
-By deeply evaluating the evolving needs of its target customers, Asana was able to align its product roadmap and marketing messaging — from self-serve onboarding for SMBs to compliance-driven enterprise deployments. Publishing case studies from successful customers across industries and offering a free trial lowered the adoption barrier, fueling Asana's global growth.
+By deeply evaluating the evolving needs of its target customers, Asana was able to align its product roadmap and marketing messaging - from self-serve onboarding for SMBs to compliance-driven enterprise deployments. Publishing case studies from successful customers across industries and offering a free trial lowered the adoption barrier, fueling Asana's global growth.
 
 ### 2. Gong
 
