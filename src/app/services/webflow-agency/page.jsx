@@ -28,6 +28,7 @@ import img5 from "./images/devs/dev5.png";
 import img6 from "./images/devs/dev6.png";
 import ServicesSection from "./ServicesSection";
 import ScrollingServicesSection from "./ServicesSection2";
+import ClutchBadge from "./clutch";
 
 const fileList = [
   "aviator.png",
@@ -176,6 +177,7 @@ const page = () => {
           <div className="flex justify-center">
             <div className="flex justify-center md:justify-start">
               <CalendlyButton name="Book a Demo" />
+              <ClutchBadge />
             </div>
           </div>
 

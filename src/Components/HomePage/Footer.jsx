@@ -60,6 +60,34 @@ const Footer = () => {
           </div>
 
           <div className="w-full lg:w-2/3 flex flex-wrap max-lg:justify-center lg:pl-32">
+            {/* Tools section - made full width on small screens */}
+            <div className="w-full sm:w-1/2 lg:w-1/4 mb-8 lg:mb-0 text-center sm:text-left">
+              <h3 className="font-bold mb-4">Tools</h3>
+              <ul className="space-y-3">
+                <li>
+                  <a href="/roi-cal" className="hover:underline">
+                    ROI Calculator
+                  </a>
+                </li>
+              </ul>
+              <h3 className="font-bold mb-4 mt-8">Awards</h3>
+              <ul className="space-y-3">
+                <li>
+                  <div className="flex items-center justify-center flex-grow gap-0 sm:gap-2 text-xs sm:text-sm md:text-base">
+                    <Link
+                      href="https://hackernoon.com/startups/winner-award?type=city&slug=asia-new-delhi-dl-india&rank=1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      <span className="z-10">
+                        #1 Startup in New Delhi,India
+                      </span>
+                    </Link>
+                  </div>
+                </li>
+              </ul>
+            </div>
             {/* Services section - made full width on small screens */}
             <div className="w-full sm:w-1/2 lg:w-1/4 mb-8 lg:mb-0 text-center sm:text-left">
               <h3 className="font-bold mb-4">Services</h3>
@@ -86,18 +114,6 @@ const Footer = () => {
                     className="hover:underline"
                   >
                     Webflow Agency
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Tools section - made full width on small screens */}
-            <div className="w-full sm:w-1/2 lg:w-1/4 mb-8 lg:mb-0 text-center sm:text-left">
-              <h3 className="font-bold mb-4">Tools</h3>
-              <ul className="space-y-3">
-                <li>
-                  <a href="/roi-cal" className="hover:underline">
-                    ROI Calculator
                   </a>
                 </li>
               </ul>
