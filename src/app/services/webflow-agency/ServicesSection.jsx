@@ -1,4 +1,11 @@
 import { useState, useEffect, useRef } from "react";
+import img1 from "./images/devs/dev1.png";
+import img2 from "./images/devs/dev2.png";
+import img3 from "./images/devs/dev3.png";
+import img4 from "./images/devs/dev4.png";
+import img5 from "./images/devs/dev5.png";
+import img6 from "./images/devs/dev6.png";
+import Image from "next/image";
 
 export default function ScrollingServicesSection() {
   const [activeSection, setActiveSection] = useState("web");
@@ -122,21 +129,25 @@ export default function ScrollingServicesSection() {
       title: "Web Design",
       description:
         "Upgrade your online presence with our Webflow Development agency. We create perfect websites that load fast, look great on any device, and are fully optimized for search engines. Boost your digital presence with our custom Webflow development company solutions.",
+      image: img1,
     },
     webflow: {
       title: "Webflow Development",
       description:
         "Build to grow. Fast, highly optimized and easy-to-scale Webflow websites built to eliminate bottlenecks and allow faster time-to-market.",
+      image: img2,
     },
     growth: {
       title: "Growth",
       description:
         "Growing qualified pipeline. Helping GTM experts drive more traffic with the help of our SEO and Ads experts. The same people who got you to land on this page.",
+      image: img3,
     },
     strategy: {
       title: "Strategy & Consulting",
       description:
         "Expert guidance to shape your digital strategy and achieve business objectives.",
+      image: img4,
     },
   };
 
@@ -221,38 +232,63 @@ export default function ScrollingServicesSection() {
             <div
               key={key}
               ref={sectionRefs[key]}
-              className="py-24 min-h-screen border-t border-gray-700 first:border-t-0"
+              className="min-h-screen border-t border-gray-700 first:border-t-0 mb-12"
               id={`service-${key}`}
+              style={{
+                backgroundColor: "#141318",
+                backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 80%)`,
+                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
+                border: "2px solid rgba(60, 63, 84, 0.3)",
+              }}
             >
-              <div className="flex items-center mb-6">
-                <h3 className="text-4xl font-bold text-left">
-                  {service.title}
-                </h3>
-              </div>
+              <div className="relative rounded-xl shadow-lg overflow-hidden p-6">
+                <div className="absolute -bottom-20 -right-40 w-40 h-40 bg-gradient-to-r from-blue-500/10 to-purple-500 rounded-full blur-3xl" />
+                <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-2xl" />
 
-              <p className="text-lg mb-8 max-w-3xl text-left">
-                {service.description}
-              </p>
+                <div className="flex items-center mb-6">
+                  <h3 className="text-4xl font-bold text-left text-white">
+                    {service.title}
+                  </h3>
+                </div>
 
-              <div className="mt-12">
-                <a
-                  href={`#service-${key}`}
-                  className="flex items-center text-lg border-b border-gray-500 pb-1 w-max"
-                >
-                  Explore service
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-2"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
+                <div className="flex flex-col-reverse md:flex-row items-stretch gap-6">
+                  <div className="flex-1 flex flex-col justify-start text-start">
+                    <p className="text-lg mb-8 max-w-3xl text-left text-white">
+                      {service.description}
+                    </p>
+
+                    <div className="mt-12">
+                      <a
+                        href={`#service-${key}`}
+                        className="flex items-center text-lg border-b border-gray-500 pb-1 w-max text-white"
+                      >
+                        Explore service
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 ml-2"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="w-full md:w-1/2 h-[400px] md:h-[250px] lg:h-full flex-shrink-0">
+                    <Image
+                      src={service.image}
+                      alt={`Service: ${service.title}`}
+                      className="w-full h-full object-cover md:rounded-r-xl"
+                      width={600}
+                      height={550}
                     />
-                  </svg>
-                </a>
+                  </div>
+                </div>
               </div>
             </div>
           ))}
