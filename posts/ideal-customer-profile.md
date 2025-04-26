@@ -70,7 +70,7 @@ Identify the type of companies that would get the most value from your solution.
 
 - **Size:** Mid-market to enterprise companies with 100–1000+ employees  
 - **Industry:** Sectors like retail, finance, healthcare, or any industry heavily dependent on data  
-- **Location:** Regions where these prospects would be based — Texas, New York, Europe, etc.
+- **Location:** Regions where these prospects would be based - Texas, New York, Europe, etc.
 
 ### 2. Buyer Persona
 
