@@ -114,7 +114,7 @@ const HeroHome = () => {
               >
                 Book a Free Demo
               </Link>
-              <div className="mt-4 pl-40">
+              <div className="flex justify-center mt-4">
                 <ClutchBadge />
               </div>
             </div>

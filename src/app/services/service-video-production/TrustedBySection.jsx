@@ -75,7 +75,7 @@ export default function TrustedBySection() {
 
         <div className="flex flex-row">
           {/* Left side: Scrolling logos (50% width) */}
-          <div className="w-[50%]">
+          <div className="w-[37%]">
             <div ref={scrollContainerRef} className="overflow-x-hidden">
               <div className="inline-flex min-w-full">
                 {rows.map((row, rowIndex) => (
@@ -104,9 +104,9 @@ export default function TrustedBySection() {
           </div>
 
           {/* Right side: ClutchBadge (50% width) */}
-          <div className="w-[50%] flex items-center justify-end">
+          <div className="w-[63%] lg:w-[53%] flex items-center justify-end">
             <div className="flex items-center space-x-4">
-              <div className="border-l-2 border-gray-400 h-[25px]"></div>
+              <div className="border-l-2 border-gray-400 h-[25px] ml-4"></div>
               <ClutchBadge />
             </div>
           </div>

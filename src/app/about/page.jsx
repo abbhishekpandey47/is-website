@@ -329,10 +329,9 @@ const about = () => {
         </div>
       </div>
 
-      {/* 
       <div>
-        < LogoMoving />
-      </div> */}
+        <LogoMoving />
+      </div>
     </div>
   );
 };
