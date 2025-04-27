@@ -14,7 +14,6 @@ export default function ClutchBadge() {
       };
       document.body.appendChild(script);
     };
-
     loadWidget();
 
     const handleRouteChange = () => {
