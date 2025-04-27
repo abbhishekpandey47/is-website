@@ -7,6 +7,7 @@ import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 import { Typewriter } from "react-simple-typewriter";
+import ClutchBadge from "./clutch";
 
 const HeroHome = () => {
   const headingText = useMemo(() => {
@@ -101,16 +102,22 @@ const HeroHome = () => {
               </div>
             </h1>
           </div>
-          <div className="flex flex-col justify-center gap-10 items-center">
+          <div className="flex flex-col items-center gap-10">
             <h2 className="quicksand-mediam text-[1.5em] w-[50vw] max-lg:w-[60vw] max-sm:w-[85vw] max-sm:text-[1.2em] text-center m-auto text-[wheat] heroPagePara">
               {description}
             </h2>
-            <Link
-              href="/contact"
-              className=" relative z-10 btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-bold "
-            >
-              Book a Free Demo
-            </Link>
+
+            <div className="items-center gap-4">
+              <Link
+                href="/contact"
+                className="relative z-10 btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-bold"
+              >
+                Book a Free Demo
+              </Link>
+              <div className="flex justify-center mt-4">
+                <ClutchBadge />
+              </div>
+            </div>
           </div>
         </div>
       </div>

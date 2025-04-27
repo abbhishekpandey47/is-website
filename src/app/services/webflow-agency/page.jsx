@@ -28,6 +28,7 @@ import img5 from "./images/devs/dev5.png";
 import img6 from "./images/devs/dev6.png";
 import ServicesSection from "./ServicesSection";
 import ScrollingServicesSection from "./ServicesSection2";
+import ClutchBadge from "./clutch";
 
 const fileList = [
   "aviator.png",
@@ -89,6 +90,8 @@ const serviceArr = [
     image: img6,
   },
 ];
+
+const htmlString = `<script type="text/javascript" src="https://widget.clutch.co/static/js/widget.js"></script> <div class="clutch-widget" data-url="https://widget.clutch.co" data-widget-type="14" data-height="50" data-nofollow="true" data-expandifr="true" data-scale="100" data-clutchcompany-id="2350194"></div>`;
 
 const serviceCards = [
   {
@@ -174,8 +177,10 @@ const page = () => {
 
           {/* Call to Action */}
           <div className="flex justify-center">
-            <div className="flex justify-center md:justify-start">
+            <div className="flex items-center space-x-9 ml-10 lg:ml-32">
               <CalendlyButton name="Book a Demo" />
+              <div className="border-l-2 border-gray-400 h-6"></div>
+              <ClutchBadge />
             </div>
           </div>
 
