@@ -177,12 +177,10 @@ const page = () => {
 
           {/* Call to Action */}
           <div className="flex justify-center">
-            <div className="flex justify-center md:justify-start">
+            <div className="flex items-center space-x-9 ml-10 lg:ml-32">
               <CalendlyButton name="Book a Demo" />
-              <div className="flex items-center space-x-4 ml-4">
-                <div className="border-l-2 border-gray-400 h-[25px]"></div>
-                <div dangerouslySetInnerHTML={{ __html: htmlString }} />
-              </div>
+              <div className="border-l-2 border-gray-400 h-6"></div>
+              <ClutchBadge />
             </div>
           </div>
 
