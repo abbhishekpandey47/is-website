@@ -1,36 +1,5 @@
-import React from "react";
-
 export default function ClutchBadge() {
-  return (
-    <div className="flex items-center max-w-xs ml-4">
-      <div className="border-l-2 border-gray-400 h-[25px]"></div>
+  const htmlString = `<script type="text/javascript" src="https://widget.clutch.co/static/js/widget.js"></script> <div class="clutch-widget" data-url="https://widget.clutch.co" data-widget-type="14" data-height="50" data-nofollow="true" data-expandifr="true" data-scale="100" data-clutchcompany-id="2350194"></div>`;
 
-      <div className="flex flex-col justify-center ml-4">
-        <div className="flex items-center justify-between w-full mb-1">
-          <span className="text-gray-500 text-xs font-medium tracking-wide">
-            REVIEWED ON
-          </span>
-          <div className="flex ml-2">
-            {[...Array(5)].map((_, i) => (
-              <svg
-                key={i}
-                className="h-[18px] w-[18px]"
-                fill="#e62415"
-                viewBox="0 0 20 20"
-              >
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between w-full">
-          <span className="text-gray-300 text-2xl font-bold">Clutch</span>
-          <span className="text-[#e62415] font-normal text-[16px]">
-            16 REVIEWS
-          </span>
-        </div>
-      </div>
-    </div>
-  );
+  return <div dangerouslySetInnerHTML={{ __html: htmlString }} />;
 }

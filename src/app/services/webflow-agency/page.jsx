@@ -91,6 +91,8 @@ const serviceArr = [
   },
 ];
 
+const htmlString = `<script type="text/javascript" src="https://widget.clutch.co/static/js/widget.js"></script> <div class="clutch-widget" data-url="https://widget.clutch.co" data-widget-type="14" data-height="50" data-nofollow="true" data-expandifr="true" data-scale="100" data-clutchcompany-id="2350194"></div>`;
+
 const serviceCards = [
   {
     image: css5,
@@ -177,7 +179,10 @@ const page = () => {
           <div className="flex justify-center">
             <div className="flex justify-center md:justify-start">
               <CalendlyButton name="Book a Demo" />
-              <ClutchBadge />
+              <div className="flex items-center space-x-4 ml-4">
+                <div className="border-l-2 border-gray-400 h-[25px]"></div>
+                <div dangerouslySetInnerHTML={{ __html: htmlString }} />
+              </div>
             </div>
           </div>
 
