@@ -328,10 +328,10 @@ const about = () => {
           <BookDemo />
         </div>
       </div>
-
+      {/* 
       <div>
         <LogoMoving />
-      </div>
+      </div> */}
     </div>
   );
 };
