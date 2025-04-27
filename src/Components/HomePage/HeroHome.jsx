@@ -107,15 +107,16 @@ const HeroHome = () => {
               {description}
             </h2>
 
-            <div className="flex items-center gap-4">
+            <div className="items-center gap-4">
               <Link
                 href="/contact"
                 className="relative z-10 btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-bold"
               >
                 Book a Free Demo
               </Link>
-              <div className="border-l-2 border-gray-400 h-[25px]"></div>
-              <ClutchBadge />
+              <div className="mt-4 pl-40">
+                <ClutchBadge />
+              </div>
             </div>
           </div>
         </div>

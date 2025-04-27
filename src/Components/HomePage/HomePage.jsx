@@ -52,8 +52,6 @@ const HomePage = () => {
 
   return (
     <div className="text-white overflow-x-hidden overflow-y-hidden">
-      <AwardBanner />
-      <Navbar />
       <HeroHome />
       <HomeMarquee />
       <HowWorks

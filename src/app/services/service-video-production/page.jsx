@@ -468,10 +468,6 @@ const page = () => {
 
         <div className="flex justify-center lg:justify-start lg:ml-40">
           <CalendlyButton name="Get Started" />
-          <div className="flex items-center space-x-4 ml-4">
-            <div className="border-l-2 border-gray-400 h-[25px]"></div>
-            <ClutchBadge />
-          </div>
         </div>
 
         <div>
