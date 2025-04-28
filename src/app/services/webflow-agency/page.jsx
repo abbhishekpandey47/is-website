@@ -177,10 +177,12 @@ const page = () => {
 
           {/* Call to Action */}
           <div className="flex justify-center">
-            <div className="flex items-center space-x-9 ml-10 lg:ml-32">
+            <div className="flex items-center space-x-4 lg:space-x-9 lg:ml-32">
               <CalendlyButton name="Book a Demo" />
-              <div className="border-l-2 border-gray-400 h-6"></div>
-              <ClutchBadge />
+              <div className="h-6 border-l-2 border-gray-400"></div>
+              <div className="flex items-end mt-7">
+                <ClutchBadge />
+              </div>
             </div>
           </div>
 
