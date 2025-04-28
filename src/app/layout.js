@@ -23,6 +23,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
         <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+       <link rel="preload" href="https://widget.clutch.co/static/js/widget.js" as="script"></link>
 
       </head>
       <GoogleAnalytics gaId="G-G0BTN1FRWY"/>
