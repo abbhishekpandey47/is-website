@@ -3,7 +3,11 @@ import React from "react";
 
 export default function ClutchBadge() {
   return (
-    <Link href="https://clutch.co/profile/infrasity#reviews" target="_blank">
+    <Link
+      href="https://clutch.co/profile/infrasity#reviews"
+      target="_blank"
+      className="z-10"
+    >
       <div className="flex flex-col items-start max-w-xs">
         <div className="flex items-center justify-between w-full mb-1">
           <span className="text-gray-400 text-[14px] font-medium tracking-wide">
