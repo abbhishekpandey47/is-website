@@ -103,10 +103,9 @@ export default function TrustedBySection() {
             </div>
           </div>
 
-          {/* Right side: ClutchBadge (50% width) */}
           <div className="w-[63%] lg:w-[53%] flex items-center justify-end">
             <div className="flex items-center space-x-4">
-              <div className="border-l-2 border-gray-400 h-[25px] ml-4"></div>
+              <div className="flex mb-6 h-6 border-l-2 border-gray-400"></div>
               <ClutchBadge />
             </div>
           </div>
