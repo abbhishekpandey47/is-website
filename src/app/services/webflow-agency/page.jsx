@@ -137,7 +137,7 @@ const page = () => {
     >
       <div className="min-h-screen bg-[#0a0a1a] text-white overflow-hidden relative">
         <section className="py-12 md:py-20 lg:py-32 relative text-center">
-          <div className="flex justify-center mt-20">
+          {/* <div className="flex justify-center mt-20">
             <div className="bg-black text-white px-5 py-3 rounded-full text-sm font-semibold flex items-center gap-2">
               <span className="bg-white text-black rounded-full px-3 py-0.5">
                 {" INFRASITY "}
@@ -145,7 +145,7 @@ const page = () => {
               <span>5.0 Rating</span>
               <span className="text-purple-600">★★★★★</span>
             </div>
-          </div>
+          </div> */}
 
           <p className="font-medium text-lg m-3">
             A full-service webflow agency for B2B SaaS Companies
