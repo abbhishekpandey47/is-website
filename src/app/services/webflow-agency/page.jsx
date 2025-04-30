@@ -29,6 +29,7 @@ import img6 from "./images/devs/dev6.png";
 import ServicesSection from "./ServicesSection";
 import ScrollingServicesSection from "./ServicesSection2";
 import ClutchBadge from "./clutch";
+import ServiceCardCarousel from "./webflowstack";
 
 const fileList = [
   "aviator.png",
@@ -272,6 +273,30 @@ const page = () => {
                 </div>
               ))}
             </div>{" "}
+            {/* <div className="flex justify-center">
+              <div className="flex justify-center md:justify-start mt-8">
+                <CalendlyButton name="Book a Demo" />
+              </div>
+            </div> */}
+          </div>
+
+          <div
+            className="mb-24"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+            }}
+          >
+            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+            <p className="max-w-6xl mx-auto mb-5 text-4xl font-semibold mt-20">
+              Why Top B2B Startups Trust Us with Their Webflow Stack.
+            </p>
+            <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
+              From incubated DevTool startups to funded AI platforms — we’ve
+              shipped clean, conversion-ready Webflow sites that launch fast and
+              scale with your story.
+            </p>
+            <ServiceCardCarousel />
             {/* <div className="flex justify-center">
               <div className="flex justify-center md:justify-start mt-8">
                 <CalendlyButton name="Book a Demo" />

@@ -83,6 +83,14 @@ const Footer = () => {
                       <span className="z-10">
                         #1 Startup in New Delhi,India
                       </span>
+                      <Image
+                        height={640}
+                        width={131}
+                        loading="lazy"
+                        src="/awards/HackerNoon_Logo.png"
+                        alt="Infra Logo"
+                        className="w-[80%] mt-2"
+                      />
                     </Link>
                   </div>
                 </li>
