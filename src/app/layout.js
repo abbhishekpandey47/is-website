@@ -1,8 +1,8 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
+import Script from 'next/script';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
 import "./globals.css";
 import { metadata } from './metadata';
-import Script from 'next/script';
 
 export { metadata };
 
@@ -23,15 +23,23 @@ export default function RootLayout({ children }) {
           `}
         </Script>
         <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-
+        <Script id="clarity-script" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "rc3czxet7l");
+          `}
+        </Script>
       </head>
       <GoogleAnalytics gaId="G-G0BTN1FRWY"/>
       <body className="antialiased">
         <noscript>
-          <iframe 
+          <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WGZGHXZS"
-            height="0" 
-            width="0" 
+            height="0"
+            width="0"
             style={{display: 'none', visibility: 'hidden'}}
           ></iframe>
         </noscript>
