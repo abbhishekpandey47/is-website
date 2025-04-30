@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import HomeMarquee from "@/Components/HomePage/HomeMarquee";
 import { motion } from "framer-motion";
 import CardMotion from "./cardsmotion";
@@ -29,6 +29,7 @@ import img6 from "./images/devs/dev6.png";
 import ServicesSection from "./ServicesSection";
 import ScrollingServicesSection from "./ServicesSection2";
 import ClutchBadge from "./clutch";
+import ServiceCardCarousel from "./webflowstack";
 
 const fileList = [
   "aviator.png",
@@ -129,6 +130,22 @@ const serviceCards = [
 const page = () => {
   const fileMemo = useMemo(() => fileList, [fileList]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+
+      handleResize();
+
+      window.addEventListener("resize", handleResize);
+
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -176,17 +193,35 @@ const page = () => {
           </p>
 
           {/* Call to Action */}
-          <div className="flex justify-center">
-            <div className="flex items-center space-x-4 lg:space-x-9 lg:ml-32">
-              <CalendlyButton name="Book a Demo" />
-              <div className="h-6 border-l-2 border-gray-400"></div>
-              <div className="flex items-end mt-7">
-                <ClutchBadge />
+          {isMobile && (
+            <div className="flex flex-col md:flex-row items-center md:items-start">
+              <div className="mb-4 md:mb-0">
+                <CalendlyButton name="Book a Demo" />
+              </div>
+
+              <div className="flex items-center md:ml-4 space-x-4">
+                <div className="hidden md:block h-6 border-l-2 border-gray-400"></div>
+                <div className="pt-2 md:pt-7">
+                  <ClutchBadge />
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* Webflow Marquee */}
+          {!isMobile && (
+            <div className="flex justify-center md:justify-center items-center">
+              <div className="flex-col">
+                <CalendlyButton name="Book a Demo" />
+              </div>
+              <div className="flex items-center ml-4 space-x-4">
+                <div className="h-6 border-l-2 border-gray-400"></div>
+                <div className="pt-7">
+                  <ClutchBadge />
+                </div>
+              </div>
+            </div>
+          )}
+
           <div
             className="mb-24"
             style={{
@@ -278,6 +313,26 @@ const page = () => {
               </div>
             </div> */}
           </div>
+
+          {/* <div
+            className="mb-24"
+            style={{
+              background:
+                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+            }}
+          >
+            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+            <p className="max-w-6xl mx-auto mb-5 text-4xl font-semibold mt-20">
+              Why Top B2B Startups Trust Us with Their Webflow Stack.
+            </p>
+            <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
+              From incubated DevTool startups to funded AI platforms — we’ve
+              shipped clean, conversion-ready Webflow sites that launch fast and
+              scale with your story.
+            </p>
+            <ServiceCardCarousel />
+          
+          </div> */}
 
           {/**  recent project */}
           <div
