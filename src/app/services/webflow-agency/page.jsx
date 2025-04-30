@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import HomeMarquee from "@/Components/HomePage/HomeMarquee";
 import { motion } from "framer-motion";
 import CardMotion from "./cardsmotion";
@@ -130,6 +130,22 @@ const serviceCards = [
 const page = () => {
   const fileMemo = useMemo(() => fileList, [fileList]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+
+      handleResize();
+
+      window.addEventListener("resize", handleResize);
+
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -177,15 +193,34 @@ const page = () => {
           </p>
 
           {/* Call to Action */}
-          <div className="flex justify-center">
-            <div className="flex items-center space-x-4 lg:space-x-9 lg:ml-32">
-              <CalendlyButton name="Book a Demo" />
-              <div className="h-6 border-l-2 border-gray-400"></div>
-              <div className="flex items-end mt-7">
-                <ClutchBadge />
+          {isMobile && (
+            <div className="flex flex-col md:flex-row items-center md:items-start">
+              <div className="mb-4 md:mb-0">
+                <CalendlyButton name="Book a Demo" />
+              </div>
+
+              <div className="flex items-center md:ml-4 space-x-4">
+                <div className="hidden md:block h-6 border-l-2 border-gray-400"></div>
+                <div className="pt-2 md:pt-7">
+                  <ClutchBadge />
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
+          {!isMobile && (
+            <div className="flex justify-center md:justify-center items-center">
+              <div className="flex-col">
+                <CalendlyButton name="Book a Demo" />
+              </div>
+              <div className="flex items-center ml-4 space-x-4">
+                <div className="h-6 border-l-2 border-gray-400"></div>
+                <div className="pt-7">
+                  <ClutchBadge />
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Webflow Marquee */}
           <div
