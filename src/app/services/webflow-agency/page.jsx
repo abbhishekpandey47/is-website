@@ -314,7 +314,7 @@ const page = () => {
             </div> */}
           </div>
 
-          <div
+          {/* <div
             className="mb-24"
             style={{
               background:
@@ -331,12 +331,8 @@ const page = () => {
               scale with your story.
             </p>
             <ServiceCardCarousel />
-            {/* <div className="flex justify-center">
-              <div className="flex justify-center md:justify-start mt-8">
-                <CalendlyButton name="Book a Demo" />
-              </div>
-            </div> */}
-          </div>
+          
+          </div> */}
 
           {/**  recent project */}
           <div
