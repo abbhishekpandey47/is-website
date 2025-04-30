@@ -222,7 +222,6 @@ const page = () => {
             </div>
           )}
 
-          {/* Webflow Marquee */}
           <div
             className="mb-24"
             style={{
