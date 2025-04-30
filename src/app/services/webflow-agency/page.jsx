@@ -153,7 +153,7 @@ const page = () => {
       transition={{ duration: 1, ease: "easeOut" }}
     >
       <div className="min-h-screen bg-[#0a0a1a] text-white overflow-hidden relative">
-        <section className="py-12 md:py-20 lg:py-32 relative text-center">
+        <section className="py-28 md:py-20 lg:py-32 relative text-center mt-">
           {/* <div className="flex justify-center mt-20">
             <div className="bg-black text-white px-5 py-3 rounded-full text-sm font-semibold flex items-center gap-2">
               <span className="bg-white text-black rounded-full px-3 py-0.5">
@@ -333,7 +333,6 @@ const page = () => {
             <ServiceCardCarousel />
           
           </div> */}
-
           {/**  recent project */}
           <div
             className="mb-24"
