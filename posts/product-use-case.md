@@ -2,7 +2,7 @@
 
 I don't know if you've ever used Asana, but when I first started exploring it, I found their product use cases pretty interesting.
 
-Not because it told me what Asana was, but because it showed me what I could do with it. For example, I can integrate it with Slack to automatically send a message to my editor the moment a task is marked "Ready to Edit."
+Not because it told me what Asana was, but because it showed me what I could do with it. For example, I can integrate it with Slack to automatically send a message to my editor the moment a task is marked "_Ready to Edit_."
 
 And just like that, I was sold.
 
@@ -26,7 +26,7 @@ A well-written use case not only explains functionality but also shows your prod
 
 ## Use Case Examples
 
-The developers in the Infrasity team have created several use case examples for some of the fastest-growing B2B SaaS startups, like Daytona, DevZero, and Scalekit. I have shared a few samples below to help you understand better:
+The developers in the **[Infrasity](https://www.infrasity.com/contact)** team have created several use case examples for some of the fastest-growing B2B SaaS startups, like Daytona, DevZero, and Scalekit. I have shared a few samples below to help you understand better:
 
 ### 1. DevZero's Use Cases
 
