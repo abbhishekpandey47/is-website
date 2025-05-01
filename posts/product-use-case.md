@@ -94,7 +94,7 @@ With a robust use case idea, the developer integrates the product into a program
 
 ### 4. Creating a README File
 
-After the integration is complete, the developer writes a comprehensive use case in the form of a README file using tools like GitHub Copilot. It explains how the product features work and how to set it up with step-by-step instructions.
+After the integration is complete, the developer writes a comprehensive use case in the form of a README file using platforms like GitHub Copilot. It explains how the product features work and how to set it up with step-by-step instructions.
 
 ### 5. Designing an Architecture Diagram
 
@@ -116,7 +116,7 @@ It's not just about showcasing features; it's about giving your target users a c
 
 When done right, use cases build trust, establish credibility, simplify onboarding, reduce churn, and clearly demonstrate how your product delivers real, practical value in everyday workflows.
 
-If you want your SaaS product to stand out, don't just tell people what it does. Show them what they can do with it.
+If you want your SaaS product to stand out, don't just your **[ideal customer profile](https://www.infrasity.com/blog/ideal-customer-profile)** what it does. Show them what they can do with it.
 
 ## FAQs
 
