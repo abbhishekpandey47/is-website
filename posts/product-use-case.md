@@ -30,15 +30,21 @@ The developers in the Infrasity team have created several use case examples for 
 
 ### 1. DevZero's Use Cases
 
-This is a product use case template library that Infrasity created for DevZero. For example, the developer team made a Todo and Voting App for DevZero users, so that they can just pick up the template and use it directly instead of creating their own without any manual configuration.
+![devzero product use case](/PostImages/product-use-case/p1.png)
+
+This is a product use case template library that Infrasity created for **[DevZero](https://github.com/daytonaio-experiments/sdk-examples/tree/main/claude-code-interpreter)**. For example, the developer team made a Todo and Voting App for DevZero users, so that they can just pick up the template and use it directly instead of creating their own without any manual configuration.
 
 ### 2. ScaleKit's Use Cases
 
-For ScaleKit, the developer made a sample web app with Scalekit SDK to showcase its Single Sign-On capabilities with Social Login. It shows that a single integration can be used for multiple IdPs.
+![scalekit product use case](/PostImages/product-use-case/p2.png)
+
+For ScaleKit, the developer made a sample web app with **[Scalekit](https://github.com/scalekit-developers/blogops-app-examples/tree/main/sso-node-react-onelogin)** SDK to showcase its Single Sign-On capabilities with Social Login. It shows that a single integration can be used for multiple IdPs.
 
 ### 3. Daytona's Use Cases
 
-Here is one of the use cases created for Daytona, where the developer connected Daytona workspace with Claude, using MCP. This is so that a user doesn't have to manually verify the generated code from Claude, and it can be done automatically using the Daytona workspace.
+![daytona product use case](/PostImages/product-use-case/p3.png)
+
+Here is one of the use cases created for **[Daytona](https://github.com/daytonaio-experiments/sdk-examples/tree/main/claude-code-interpreter)**, where the developer connected Daytona workspace with Claude, using MCP. This is so that a user doesn't have to manually verify the generated code from Claude, and it can be done automatically using the Daytona workspace.
 
 ## Why Do You Need Use Cases for Your Product?
 
@@ -73,7 +79,9 @@ The developer starts by learning and researching the SaaS product's features and
 Once the developer has fully understood the product and its features, they brainstorm ideas on how it can be used to solve different problem aspects. They ensure that those product use cases are practical and innovative, so the potential or existing customer can actually integrate them into their workflow.  
 Then, the developer creates a content plan to document the ideas and follow them.
 
-> For example, in one of the above use case ideas, the developer connected Daytona workspace with SmolAgents using Daytona SDK so that it takes a code snippet from the user, parses it, and gives an overview of what it does. Then, it generates test cases for it, which run on a Daytona workspace and return output on the basis of passed and failed test cases.
+![product use case](/PostImages/product-use-case/p2.png)
+
+For example, in one of the above use case ideas, the developer connected **[Daytona workspace with SmolAgents](https://github.com/daytonaio-experiments/sdk-examples/tree/main/smolagents-code-tester)** using Daytona SDK so that it takes a code snippet from the user, parses it, and gives an overview of what it does. Then, it generates test cases for it, which run on a Daytona workspace and return output on the basis of passed and failed test cases.
 
 ### 3. Integrating the Product
 
