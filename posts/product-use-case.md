@@ -82,10 +82,9 @@ The developer starts by learning and researching the SaaS product's features and
 
 ### 2. Brainstorming Ideas on Use Cases
 
-Once the developer has fully understood the product and its features, they brainstorm ideas on how it can be used to solve different problem aspects. They ensure that those product use cases are practical and innovative, so the potential or existing customer can actually integrate them into their workflow.  
-Then, the developer creates a content plan to document the ideas and follow them.
+Once the developer has fully understood the product and its features, they brainstorm ideas on how it can be used to solve different problem aspects. They ensure that those product use cases are practical and innovative, so the potential or existing customer can actually integrate them into their workflow. Then, the developer creates a content plan to document the ideas and follow them.
 
-![product use case](/PostImages/product-use-case/p2.png)
+![product use case](/PostImages/product-use-case/p4.png)
 
 For example, in one of the above use case ideas, the developer connected **[Daytona workspace with SmolAgents](https://github.com/daytonaio-experiments/sdk-examples/tree/main/smolagents-code-tester)** using Daytona SDK so that it takes a code snippet from the user, parses it, and gives an overview of what it does. Then, it generates test cases for it, which run on a Daytona workspace and return output on the basis of passed and failed test cases.
 
