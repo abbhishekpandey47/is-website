@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
-import MobileMenu from "./mobileservices";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const GivenMenuBar = ({
   head,
@@ -120,11 +120,20 @@ const menuLinksArrServices = [
 // ];
 
 const Navbar = () => {
+  const MenuItem2 = ({ children }) => {
+    return children;
+  };
+
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const checkVisitPage = (el) => {
-    el == curPage ? setProgress(0) : setProgress(30);
-    setCurPage(el);
+  const context = useContext(AppContext);
+  const pathname = usePathname();
+  const { setProgress, progress } = context;
+  const [curPage, setCurPage] = useState(pathname);
+
+  const toggleServices = () => {
+    setServicesOpen(!servicesOpen);
   };
 
   const toggleMobileMenu = () => {
@@ -135,10 +144,18 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const context = useContext(AppContext);
-  const pathname = usePathname();
-  const { setProgress, progress } = context;
-  const [curPage, setCurPage] = useState(pathname);
+  const checkVisitPage = (el) => {
+    el == curPage ? setProgress(0) : setProgress(30);
+    setCurPage(el);
+  };
+
+  const handleServiceClick = (path) => {
+    checkVisitPage(path);
+
+    setTimeout(() => {
+      window.location.href = path;
+    }, 10);
+  };
 
   return (
     <div className="w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute">
@@ -218,7 +235,88 @@ const Navbar = () => {
                       {"Case Studies"}
                     </Link>
                   </MenuItem>
-                  <MobileMenu closeParentMenu={closeMobileMenu} />{" "}
+                  <div className="mobile-menu">
+                    <MenuItem2>
+                      <div
+                        className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-800 rounded-lg cursor-pointer"
+                        onClick={toggleServices}
+                      >
+                        <p>Services</p>
+                        {servicesOpen ? (
+                          <ChevronUp size={16} />
+                        ) : (
+                          <ChevronDown size={16} />
+                        )}
+                      </div>
+                    </MenuItem2>
+
+                    {servicesOpen && (
+                      <div className="bg-slate-900 rounded-lg mt-1 mb-2">
+                        <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick(
+                                "/services/technical-writing-services"
+                              );
+                            }}
+                            href="/services/technical-writing-services"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/services/technical-writing-services".includes(
+                                "http"
+                              )
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>Technical Writing Services</div>
+                          </Link>
+                        </MenuItem2>
+
+                        <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick(
+                                "/services/service-video-production"
+                              );
+                            }}
+                            href="/services/service-video-production"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/services/service-video-production".includes(
+                                "http"
+                              )
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>Video Production</div>
+                          </Link>
+                        </MenuItem2>
+
+                        <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault(); // Prevent default navigation
+                              handleServiceClick("/services/webflow-agency");
+                            }}
+                            href="/services/webflow-agency"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/services/webflow-agency".includes("http")
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>Webflow Agency</div>
+                          </Link>
+                        </MenuItem2>
+                      </div>
+                    )}
+                  </div>
+
                   <MenuItem>
                     <Link
                       onClick={() => {
@@ -265,7 +363,7 @@ const Navbar = () => {
         </div>
         <Link
           href="/"
-          className="btn btn-ghost w-40  lg:absolute"
+          className="btn btn-ghost w-40 lg:absolute"
           aria-label="Infrasity Home"
         >
           <div className="flex flex-col my-auto items-center">
