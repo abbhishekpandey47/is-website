@@ -68,7 +68,8 @@ const MobileMenu = ({ closeParentMenu }) => {
           <MenuItem>
             <Link
               onClick={() => {
-                handleServiceClick("/services/webflow-agency");
+                checkVisitPage("/services/webflow-agency");
+
               }}
               href="/services/webflow-agency"
               className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"

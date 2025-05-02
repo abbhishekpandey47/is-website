@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import TooltipIcon from "./TooltipIcon";
+import { saveUserData } from "./user";
 
 export default function ContentROICalculator() {
   const [isMobile, setIsMobile] = useState(false);
@@ -41,6 +42,53 @@ export default function ContentROICalculator() {
   const [blogPerPostQunt, setblogPerPostQunt] = useState(0);
   const [timelineInMonth, setTimelineInMonth] = useState(0);
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsEmailSending(true);
+
+  //   const {
+  //     budget,
+  //     blogPosts,
+  //     trafficGrowth,
+  //     contentTeam,
+  //     domainExpertise,
+  //     timeline,
+  //   } = formValues;
+
+  //   if (email) {
+  //     try {
+  //       const response = await fetch(
+  //         "https://infrasity-backend-j84r.onrender.com/submit-email",
+  //         {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //           body: JSON.stringify({
+  //             email,
+  //             budget,
+  //             blogPosts,
+  //             trafficGrowth,
+  //             contentTeam,
+  //             domainExpertise,
+  //             timeline,
+  //           }),
+  //         }
+  //       );
+
+  //       const data = await response.json();
+
+  //       if (response.ok) {
+  //         setIsEmailSending(false);
+  //         setIsSubmitted(true);
+  //       }
+  //     } catch (error) {
+  //       setIsEmailSending(false);
+  //       console.error("Error:", error);
+  //     }
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsEmailSending(true);
@@ -54,37 +102,39 @@ export default function ContentROICalculator() {
       timeline,
     } = formValues;
 
-    if (email) {
-      try {
-        const response = await fetch(
-          "https://infrasity-backend-j84r.onrender.com/submit-email",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email,
-              budget,
-              blogPosts,
-              trafficGrowth,
-              contentTeam,
-              domainExpertise,
-              timeline,
-            }),
-          }
-        );
+    if (!email) {
+      setIsEmailSending(false);
+      return;
+    }
 
-        const data = await response.json();
+    try {
+      const userData = {
+        email,
+        budget,
+        blogPosts,
+        trafficGrowth: trafficGrowth || "",
+        contentTeam: contentTeam || "No",
+        domainExpertise: domainExpertise || "False",
+        timeline: timeline || "",
+        submittedAt: new Date().toISOString(),
+      };
 
-        if (response.ok) {
-          setIsEmailSending(false);
-          setIsSubmitted(true);
-        }
-      } catch (error) {
+      console.log("Submitting form data:", userData);
+
+      const result = await saveUserData(userData);
+
+      if (result && result.status === "success") {
         setIsEmailSending(false);
-        console.error("Error:", error);
+        setIsSubmitted(true);
+
+        console.log("Form data saved successfully:", userData);
+      } else {
+        throw new Error("Received unsuccessful response from saveUserData");
       }
+    } catch (error) {
+      setIsEmailSending(false);
+      setErrorMessage("Failed to submit form. Please try again.");
+      console.error("Error saving form data:", error);
     }
   };
 
