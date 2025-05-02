@@ -6,15 +6,17 @@ const MenuItem = ({ children }) => {
   return children;
 };
 
-const MobileMenu = () => {
+const MobileMenu = ({ closeParentMenu }) => {
   const [servicesOpen, setServicesOpen] = useState(false);
 
   const toggleServices = () => {
     setServicesOpen(!servicesOpen);
   };
 
-  const checkVisitPage = (path) => {
+  const handleServiceClick = (path) => {
     console.log("Visited:", path);
+    setServicesOpen(false);
+    if (closeParentMenu) closeParentMenu();
   };
 
   return (
@@ -34,7 +36,7 @@ const MobileMenu = () => {
           <MenuItem>
             <Link
               onClick={() => {
-                checkVisitPage("/services/technical-writing-services");
+                handleServiceClick("/services/technical-writing-services");
               }}
               href="/services/technical-writing-services"
               className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
@@ -51,7 +53,7 @@ const MobileMenu = () => {
           <MenuItem>
             <Link
               onClick={() => {
-                checkVisitPage("/services/service-video-production");
+                handleServiceClick("/services/service-video-production");
               }}
               href="/services/service-video-production"
               className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
@@ -66,7 +68,7 @@ const MobileMenu = () => {
           <MenuItem>
             <Link
               onClick={() => {
-                checkVisitPage("/services/webflow-agency");
+                handleServiceClick("/services/webflow-agency");
               }}
               href="/services/webflow-agency"
               className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
