@@ -14,14 +14,28 @@ const GivenMenuBar = ({
   curPage,
   setCurPage,
 }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const checkVisitPage = (el) => {
     el == curPage ? setProgress(0) : setProgress(30);
     setCurPage(el);
   };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <Menu as="div" className="relative inline-block text-left p-0">
       <div>
-        <MenuButton className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20">
+        <MenuButton
+          onClick={toggleMenu}
+          className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20"
+        >
           {head}{" "}
           <svg
             fill="#CFCAC7"
@@ -48,29 +62,32 @@ const GivenMenuBar = ({
         </MenuButton>
       </div>
 
-      <MenuItems
-        transition
-        className="absolute z-10 mt-6 w-56 origin-top-center rounded-md bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-      >
-        <div className="p-2 rounded-lg mx-auto">
-          {menuLinks.map((menuLink, index) => {
-            return (
-              <MenuItem key={index}>
-                <Link
-                  onClick={() => {
-                    checkVisitPage(menuLink.hrefLink);
-                  }}
-                  href={menuLink.hrefLink}
-                  className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                  target={menuLink.hrefLink.includes("http") ? "_blank" : ""}
-                >
-                  {menuLink.menuName}
-                </Link>
-              </MenuItem>
-            );
-          })}
-        </div>
-      </MenuItems>
+      {isMenuOpen && (
+        <MenuItems
+          transition
+          className="absolute z-10 mt-6 w-56 origin-top-center rounded-md bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+        >
+          <div className="p-2 rounded-lg mx-auto">
+            {menuLinks.map((menuLink, index) => {
+              return (
+                <MenuItem key={index}>
+                  <Link
+                    onClick={() => {
+                      closeMenu(); // Close menu when link is clicked
+                      checkVisitPage(menuLink.hrefLink);
+                    }}
+                    href={menuLink.hrefLink}
+                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                    target={menuLink.hrefLink.includes("http") ? "_blank" : ""}
+                  >
+                    {menuLink.menuName}
+                  </Link>
+                </MenuItem>
+              );
+            })}
+          </div>
+        </MenuItems>
+      )}
     </Menu>
   );
 };
@@ -103,10 +120,21 @@ const menuLinksArrServices = [
 // ];
 
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const checkVisitPage = (el) => {
     el == curPage ? setProgress(0) : setProgress(30);
     setCurPage(el);
   };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   const context = useContext(AppContext);
   const pathname = usePathname();
   const { setProgress, progress } = context;
@@ -116,64 +144,12 @@ const Navbar = () => {
     <div className="w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute">
       <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[75vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg  lg:absolute lg:left-[50vw] lg:origin-center lg: transform lg:-translate-x-1/2">
         <div className="navbar-start max-lg:visible invisible">
-          {/* <div className="dropdown ">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                           
-                        </div>
-                        <ul
-                            tabIndex={0}
-                            className="menu menu-md dropdown-content bg-slate-900 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li><Link href="/" onClick={(() => { checkVisitPage("/") })}>Home</Link></li>
-                            <li>
-                                <span>Products</span>
-                                <ul className="p-2">
-                                    <li><Link href="https://content.infrasity.com" target='_blank' onClick={(() => { checkVisitPage("/") })}>Outline Generator</Link></li>
-                                </ul>
-                            </li>
-                            <li><Link href="/blog" onClick={(() => { checkVisitPage("/blog") })}>Blog</Link></li>
-                            <li>
-                                <span>Services</span>
-                                <ul className="p-2">
-                                    <li><Link href="/services/service-video-production" onClick={(() => { checkVisitPage("/services/service-video-production") })}>Video Production</Link></li>
-                                    <li><Link href="/service-blog-as-code" onClick={() => { setProgress(30) }}>Blogs-as-code</Link></li>
-                                    <li><Link href="/services/webflow-services" onClick={(() => { checkVisitPage("/services/webflow-services") })}>Webflow Services</Link></li>
-                                </ul>
-                            </li>
-                            <li><Link href="/faq" onClick={(() => { checkVisitPage("/faq") })}>FAQ</Link></li>
-                        </ul>
-                    </div>
-                    <Link
-                        href="/"
-                        className="btn btn-ghost w-40"
-                        aria-label="Infrasity Home"
-                    >
-                        <div className="flex flex-col my-auto items-center">
-                            <div className="w-full flex justify-start">
-                                <Image
-                                    width={200}
-                                    height={200}
-                                    loading='lazy'
-                                    src="/logodata/infra_logo_only.png"
-                                    className="min-[408px]:hidden block w-[40%]"
-                                    alt="Infrasity Logo"
-                                />
-                            </div>
-                            <div>
-                                <Image
-                                loading='lazy'
-                                    width={200}
-                                    height={200}
-                                    src="/logodata/infrasity_logo.png"
-                                    className="max-[408px]:hidden"
-                                    alt="Infrasity Logo"
-                                />
-                            </div>
-                        </div>
-                    </Link>
-                </div> */}
           <Menu as="div" className="relative inline-block text-left p-0">
             <div>
-              <MenuButton className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20">
+              <MenuButton
+                onClick={toggleMobileMenu}
+                className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -191,92 +167,100 @@ const Navbar = () => {
               </MenuButton>
             </div>
 
-            <MenuItems
-              transition
-              className="absolute z-10 mt-6 w-56 origin-top-center rounded-lg bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5  transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-            >
-              <div className="p-2 rounded-lg mx-auto">
-                <MenuItem>
-                  <Link
-                    onClick={() => {
-                      checkVisitPage("/");
-                    }}
-                    href="/"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={"/".includes("http") ? "_blank" : ""}
-                  >
-                    {"Home"}
-                  </Link>
-                </MenuItem>
-                {/* MProducts */}
-                {/* <MenuItem>
-                  <p className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg">
-                    {"Products"}
-                  </p>
-                </MenuItem> */}
-                <MenuItem>
-                  <Link
-                    onClick={() => {
-                      checkVisitPage("/blog");
-                    }}
-                    href="/blog"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={"/blog".includes("http") ? "_blank" : ""}
-                  >
-                    {"Blogs"}
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    onClick={() => {
-                      checkVisitPage("/case-studies");
-                    }}
-                    href="/case-studies"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={"/case-studies".includes("http") ? "_blank" : ""}
-                  >
-                    {"Case Studies"}
-                  </Link>
-                </MenuItem>
-                <MobileMenu />
-                <MenuItem>
-                  <Link
-                    onClick={() => {
-                      checkVisitPage("/faq");
-                    }}
-                    href="/faq"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={"/faq".includes("http") ? "_blank" : ""}
-                  >
-                    {"FAQ"}
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    onClick={() => {
-                      checkVisitPage("/about");
-                    }}
-                    href="/about"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={"/about".includes("http") ? "_blank" : ""}
-                  >
-                    {"About Us"}
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    onClick={() => {
-                      checkVisitPage("/roi-cal");
-                    }}
-                    href="/roi-cal"
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={"/roi-cal".includes("http") ? "_blank" : ""}
-                  >
-                    {"Roi Calculator"}
-                  </Link>
-                </MenuItem>
-              </div>
-            </MenuItems>
+            {isMobileMenuOpen && (
+              <MenuItems
+                transition
+                className="absolute z-10 mt-6 w-56 origin-top-center rounded-lg bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+              >
+                <div className="p-2 rounded-lg mx-auto">
+                  <MenuItem>
+                    <Link
+                      onClick={() => {
+                        closeMobileMenu();
+                        checkVisitPage("/");
+                      }}
+                      href="/"
+                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                      target={"/".includes("http") ? "_blank" : ""}
+                    >
+                      {"Home"}
+                    </Link>
+                  </MenuItem>
+                  {/* MProducts */}
+                  {/* <MenuItem>
+                    <p className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg">
+                      {"Products"}
+                    </p>
+                  </MenuItem> */}
+                  <MenuItem>
+                    <Link
+                      onClick={() => {
+                        closeMobileMenu();
+                        checkVisitPage("/blog");
+                      }}
+                      href="/blog"
+                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                      target={"/blog".includes("http") ? "_blank" : ""}
+                    >
+                      {"Blogs"}
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      onClick={() => {
+                        closeMobileMenu();
+                        checkVisitPage("/case-studies");
+                      }}
+                      href="/case-studies"
+                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                      target={"/case-studies".includes("http") ? "_blank" : ""}
+                    >
+                      {"Case Studies"}
+                    </Link>
+                  </MenuItem>
+                  <MobileMenu closeParentMenu={closeMobileMenu} />{" "}
+                  <MenuItem>
+                    <Link
+                      onClick={() => {
+                        closeMobileMenu();
+                        checkVisitPage("/faq");
+                      }}
+                      href="/faq"
+                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                      target={"/faq".includes("http") ? "_blank" : ""}
+                    >
+                      {"FAQ"}
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      onClick={() => {
+                        closeMobileMenu();
+                        checkVisitPage("/about");
+                      }}
+                      href="/about"
+                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                      target={"/about".includes("http") ? "_blank" : ""}
+                    >
+                      {"About Us"}
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      onClick={() => {
+                        closeMobileMenu();
+                        checkVisitPage("/roi-cal");
+                      }}
+                      href="/roi-cal"
+                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                      target={"/roi-cal".includes("http") ? "_blank" : ""}
+                    >
+                      {"Roi Calculator"}
+                    </Link>
+                  </MenuItem>
+                </div>
+              </MenuItems>
+            )}
           </Menu>
         </div>
         <Link
@@ -381,8 +365,6 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-
-      {/* hidden md:inline-flex btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-semibold */}
     </div>
   );
 };
