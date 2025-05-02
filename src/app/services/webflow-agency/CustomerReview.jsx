@@ -3,42 +3,47 @@ import { useEffect, useRef } from "react";
 
 const projects = [
   {
-    review: "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
+    review:
+      "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
     customerName: "Rajnikant",
     rank: "co-founder, The Cluless Company",
     location: "India",
   },
   {
-    review: "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
-    customerName: "Rajnikant",
-    rank: "CEO, The Cluless Company",
-    location: "India",
-  },  
-  {
-    review: "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
-    customerName: "Rajnikant",
-    rank: "co-founder, jet learn",
-    location: "India",
-  },  
-  {
-    review: "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
-    customerName: "Rajnikant",
-    rank: "CEO, jet learn",
-    location: "India",
-  }, 
-  {
-    review: "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
-    customerName: "Rajnikant",
-    rank: "co-founder, jet learn",
-    location: "India",
-  },  
-  {
-    review: "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
+    review:
+      "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
     customerName: "Rajnikant",
     rank: "CEO, The Cluless Company",
     location: "India",
   },
-
+  {
+    review:
+      "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
+    customerName: "Rajnikant",
+    rank: "co-founder, jet learn",
+    location: "India",
+  },
+  {
+    review:
+      "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
+    customerName: "Rajnikant",
+    rank: "CEO, jet learn",
+    location: "India",
+  },
+  {
+    review:
+      "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
+    customerName: "Rajnikant",
+    rank: "co-founder, jet learn",
+    location: "India",
+  },
+  {
+    review:
+      "As a part of tech content marketing strategy We develop ready-to-use recipe libraries for tech stacks like Node.js, Bun.js, React, and CockroachDB. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.",
+    customerName: "Rajnikant",
+    rank: "CEO, The Cluless Company",
+    location: "India",
+  },
 ];
 
 export default function CustomerReview() {
@@ -63,7 +68,7 @@ export default function CustomerReview() {
         ref={containerRef}
         className="flex gap-6 w-max"
         animate={controls}
-        onMouseEnter={() => controls.stop()}  //
+        onMouseEnter={() => controls.stop()} //
         onMouseLeave={() =>
           controls.start({
             x: ["0%", "-50%"],
@@ -82,15 +87,16 @@ export default function CustomerReview() {
           >
             <h2 className="font-base text-left mb-2">{project.review}</h2>
             <div className="flex mb-2">
-            <span className="text-sm font-semibold px-2 py-1">{project.customerName}</span>
+              <span className="text-sm font-semibold px-2 py-1">
+                {project.customerName}
+              </span>
             </div>
             <div className="flex gap-2">
-            <span className="text-sm font-base px-2 ">{project.rank}</span>
+              <span className="text-sm font-base px-2 ">{project.rank}</span>
             </div>
             <div className="flex mb-2">
-            <span className="text-sm font-base px-2">{project.location}</span>
+              <span className="text-sm font-base px-2">{project.location}</span>
             </div>
-
           </div>
         ))}
       </motion.div>

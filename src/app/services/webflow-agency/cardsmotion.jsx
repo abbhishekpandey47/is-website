@@ -10,7 +10,6 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [isAtStart, setIsAtStart] = useState(true);
   const [touchStartX, setTouchStartX] = useState(null);
-
   const desktopCardWidth = 780;
   const gap = 32;
   const totalCardsWidth = serviceArr.length * (desktopCardWidth + gap) - gap;
@@ -85,7 +84,6 @@ const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
         dangerouslySetInnerHTML={{ __html: mainHeading }}
       />
       <p className="text-center text-white mb-10 text-lg">{subHeading}</p>
-
       <div
         ref={containerRef}
         className="overflow-hidden max-w-8xl mx-auto touch-pan-x"

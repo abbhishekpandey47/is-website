@@ -655,6 +655,30 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Answer engine optimization can help you reach the top of the search engine results page. Wanna know how? Read the article to understand how to do AEO."
     },
+
+    {
+        title: "Stop Selling Your Product To Everyone: Create Your Ideal Customer Profile",
+        metatitle: "Stop Selling To Everyone: Create Your Ideal Customer Profile",
+        slug: "ideal-customer-profile",
+        description: "Explore how to create an ideal customer profile, and how some successful B2B SaaS companies leveraged their sales and marketing efforts by creating an ICP.",
+        ogImage: "/PostImages/ideal-customer-profile/i1.png",
+        publishedOn: "2025-04-26",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Explore how to create an ideal customer profile, and how some successful B2B SaaS companies leveraged their sales and marketing efforts by creating an ICP."
+    },
+
+    {
+        title: "Don’t Miss Out on Creating a Product Use Case: Here’s Why",
+        metatitle: "Don’t Miss Out on Creating a Product Use Case: Here’s Why",
+        slug: "product-use-case",
+        description: "Product use case examples help B2B SaaS startups drive conversions. Discover what they are, why they are significant, and how to create them effectively.",
+        ogImage: "/PostImages/product-use-case/p5.png",
+        publishedOn: "2025-05-01",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Want to boost conversions for your B2B SaaS product? Learn what product use case examples are, why they’re important, and how to create them effectively."
+    },
     
 ];
 
