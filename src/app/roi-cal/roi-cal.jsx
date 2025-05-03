@@ -231,7 +231,7 @@ export default function ContentROICalculator() {
     setBlogPerPost(currValueOutSource);
     const valOutsourcedCost = blogPosts * currValueOutSource * timeline;
 
-    if (valOutsourcedCost > budget) {
+    if (blogPosts * currValueOutSource > budget) {
       const valYouneed = Math.round(budget / currValueOutSource);
       handleOperation(
         `This setup isn't feasible — your budget can't support ${blogPosts} blogs/month. ${
@@ -312,7 +312,30 @@ export default function ContentROICalculator() {
                 <div className="relative inline-block">
                   <label className="block text-gray-300 mb-2">
                     Monthly content budget
-                    <TooltipIcon description="Estimated amount you want to spend on content per month." />
+                    {/* <TooltipIcon description="Estimated amount you want to spend on content per month." /> */}
+                    <div className="group relative inline-block">
+                      <svg
+                        className="w-4 h-4 ml-2 inline-block cursor-pointer"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+
+                      <div className="w-[400px] absolute hidden group-hover:block bg-gray-800 text-white text-sm rounded px-3 py-2 z-10 bottom-6 left-1/2 -translate-x-1/2">
+                        <p>
+                          Estimated amount you want to spend on content per
+                          month.
+                        </p>
+                      </div>
+                    </div>
                   </label>
                 </div>
 
@@ -335,7 +358,30 @@ export default function ContentROICalculator() {
                 <div className="relative inline-block">
                   <label className="block text-gray-300 mb-2">
                     Blog posts per month
-                    <TooltipIcon description="Number of blog articles you expect to publish each month." />
+                    {/* <TooltipIcon description="Number of blog articles you expect to publish each month." /> */}
+                    <div className="group relative inline-block">
+                      <svg
+                        className="w-4 h-4 ml-2 inline-block cursor-pointer"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+
+                      <div className="w-[390px] absolute hidden group-hover:block bg-gray-800 text-white text-sm rounded px-3 py-2 z-10 bottom-6 left-1/2 -translate-x-1/2">
+                        <p>
+                          Number of blog articles you expect to publish each
+                          month.
+                        </p>
+                      </div>
+                    </div>
                   </label>
                 </div>
                 <div className="mt-1">
@@ -365,7 +411,30 @@ export default function ContentROICalculator() {
                 <div className="flex justify-between items-center">
                   <label className="block text-gray-300">
                     Domain expertise required?
-                    <TooltipIcon description="Specify if the content needs specialized industry knowledge or experience." />
+                    {/* <TooltipIcon description="Specify if the content needs specialized industry knowledge or experience." /> */}
+                    <div className="group relative inline-block">
+                      <svg
+                        className="w-4 h-4 ml-2 inline-block cursor-pointer"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+
+                      <div className="w-[330px] absolute hidden group-hover:block bg-gray-800 text-white text-sm rounded px-3 py-2 z-10 bottom-6 left-1/2 -translate-x-1/2">
+                        <p>
+                          Specify if the content needs specialized industry
+                          knowledge or experience.
+                        </p>
+                      </div>
+                    </div>
                   </label>
                   <div className="relative inline-block w-12 h-6">
                     <input
@@ -402,7 +471,30 @@ export default function ContentROICalculator() {
               <div className="mb-5 group">
                 <label className="relative inline-block text-gray-300 mb-2">
                   Target traffic growth
-                  <TooltipIcon description="Enter the percentage increase in traffic you aim to achieve." />
+                  {/* <TooltipIcon description="Enter the percentage increase in traffic you aim to achieve." /> */}
+                  <div className="group relative inline-block">
+                    <svg
+                      className="w-4 h-4 ml-2 inline-block cursor-pointer"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+
+                    <div className="w-[390px] absolute hidden group-hover:block bg-gray-800 text-white text-sm rounded px-3 py-2 z-10 bottom-6 left-1/2 -translate-x-1/2">
+                      <p>
+                        Enter the percentage increase in traffic you aim to
+                        achieve.
+                      </p>
+                    </div>
+                  </div>
                 </label>
                 <div className="relative">
                   <input
@@ -455,7 +547,30 @@ export default function ContentROICalculator() {
               <div className="mb-5 group ">
                 <label className="text-gray-300 mb-2 relative inline-block">
                   Timeline
-                  <TooltipIcon description="Set your expected timeline for seeing results or getting deliverables." />
+                  {/* <TooltipIcon description="Set your expected timeline for seeing results or getting deliverables." /> */}
+                  <div className="group relative inline-block">
+                    <svg
+                      className="w-4 h-4 ml-2 inline-block cursor-pointer"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+
+                    <div className="w-[450px] absolute hidden group-hover:block bg-gray-800 text-white text-sm rounded px-3 py-2 z-10 bottom-6 left-32 -translate-x-1/2">
+                      <p>
+                        Set your expected timeline for seeing results or getting
+                        deliverables.
+                      </p>
+                    </div>
+                  </div>
                 </label>
                 <div className="relative">
                   <select
@@ -637,7 +752,7 @@ export default function ContentROICalculator() {
                     <h3 className="text-xl font-bold mb-4">
                       Deliverables Estimate
                     </h3>
-
+                    {/* 
                     <div className="mb-2">
                       <p>Month 1: {blogPerPostQunt} Blogs + 1 Video</p>
                     </div>
@@ -646,6 +761,15 @@ export default function ContentROICalculator() {
                     </div>
                     <div>
                       <p>Month 3: {blogPerPostQunt} Blogs + 1 Case Study</p>
+                    </div> */}
+                    <div className="mb-2">
+                      <p>Month 1: {blogPerPostQunt} Blogs</p>
+                    </div>
+                    <div className="mb-2">
+                      <p>Month 2: {blogPerPostQunt} Blogs</p>
+                    </div>
+                    <div>
+                      <p>Month 3: {blogPerPostQunt} Blogs</p>
                     </div>
                   </div>
                 </div>
