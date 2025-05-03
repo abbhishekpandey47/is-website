@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import TooltipIcon from "./TooltipIcon";
 import { saveUserData } from "./user";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function ContentROICalculator() {
   const [isMobile, setIsMobile] = useState(false);
@@ -297,6 +298,50 @@ export default function ContentROICalculator() {
     hasCalculated,
   } = results;
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const options = [
+    { value: 1, label: "1 month" },
+    { value: 2, label: "2 months" },
+    { value: 3, label: "3 months" },
+    { value: 4, label: "4 months" },
+    { value: 5, label: "5 months" },
+    { value: 6, label: "6 months" },
+    { value: 7, label: "7 months" },
+    { value: 8, label: "8 months" },
+    { value: 9, label: "9 months" },
+    { value: 10, label: "10 months" },
+    { value: 11, label: "11 months" },
+    { value: 12, label: "12 months" },
+  ];
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const handleSelect = (value) => {
+    handleInputChange("timeline", parseInt(value));
+    setIsOpen(false);
+  };
+
+  const selectedOption = options.find((option) => option.value === timeline);
+
+  const [isOpenContent, setIsOpenContent] = useState(false);
+
+  const optionsContent = [
+    { value: "Yes", label: "Yes" },
+    { value: "No", label: "No" },
+  ];
+
+  const toggleDropdownContent = () => setIsOpenContent(!isOpenContent);
+
+  const handleSelectContent = (value) => {
+    handleInputChange("contentTeam", value);
+    setIsOpenContent(false);
+  };
+
+  const selectedOptionContent = optionsContent.find(
+    (option) => option.value === contentTeam
+  );
+
   return (
     <div className="w-full max-w-6xl mx-auto p-6 font-sans mb-24">
       <div>
@@ -516,31 +561,76 @@ export default function ContentROICalculator() {
                   <TooltipIcon description="Tell us if you already have writers, editors, or strategists on your team." />
                 </label>
                 <div className="relative">
-                  <select
-                    value={contentTeam}
-                    onChange={(e) =>
-                      handleInputChange("contentTeam", e.target.value)
-                    }
-                    className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  <button
+                    onClick={toggleDropdownContent}
+                    className="w-full px-4 py-3 bg-black rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
                   >
-                    <option value="No">No</option>
-                    <option value="Yes">Yes</option>
-                  </select>
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <svg
-                      className="w-5 h-5 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      ></path>
-                    </svg>
-                  </div>
+                    <span className="text-xl text-white">
+                      {selectedOptionContent?.label}
+                    </span>
+                    <div className="flex items-center">
+                      <svg
+                        className="w-5 h-5 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
+                    </div>
+                  </button>
+
+                  {isOpenContent && (
+                    <div className="absolute mt-1 w-full bg-black border border-gray-700 rounded-lg shadow-lg z-10 overflow-hidden">
+                      <ul className="py-2 px-4 max-h-60 rounded-lg overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-black">
+                        {optionsContent.map((option) => (
+                          <li
+                            key={option.value}
+                            onClick={() => handleSelectContent(option.value)}
+                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-xl ${
+                              contentTeam === option.value
+                                ? "bg-gray-800"
+                                : "hover:bg-gray-900"
+                            }`}
+                          >
+                            <div className="flex justify-between items-center">
+                              <span
+                                className={
+                                  contentTeam === option.value
+                                    ? "text-white font-medium"
+                                    : "text-gray-300"
+                                }
+                              >
+                                {option.label}
+                              </span>
+                              {contentTeam === option.value && (
+                                <div className="w-4 h-4 ml-2 rounded-full bg-black flex items-center justify-center">
+                                  <svg
+                                    className="w-3 h-3 text-gray-400"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth="2.5"
+                                      d="M5 12l5 5L20 7"
+                                    />
+                                  </svg>
+                                </div>
+                              )}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -572,42 +662,77 @@ export default function ContentROICalculator() {
                     </div>
                   </div>
                 </label>
-                <div className="relative">
-                  <select
-                    value={timeline}
-                    onChange={(e) =>
-                      handleInputChange("timeline", parseInt(e.target.value))
-                    }
-                    className="w-full px-4 py-3 border border-gray-700 rounded-lg appearance-none bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
+                <div className="relative h-20">
+                  <button
+                    onClick={toggleDropdown}
+                    className="w-full px-4 py-3 bg-black rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
                   >
-                    <option value="1">1 month</option>
-                    <option value="2">2 month</option>
-                    <option value="3">3 month</option>
-                    <option value="4">4 month</option>
-                    <option value="5">5 month</option>
-                    <option value="6">6 month</option>
-                    <option value="7">7 months</option>
-                    <option value="8">8 months</option>
-                    <option value="9">9 month</option>
-                    <option value="10">10 month</option>
-                    <option value="11">11 month</option>
-                    <option value="12">12 months</option>
-                  </select>
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <svg
-                      className="w-5 h-5 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      ></path>
-                    </svg>
-                  </div>
+                    <span className="text-xl text-white">
+                      {selectedOption?.label}
+                    </span>
+                    <div className="flex items-center">
+                      <svg
+                        className="w-5 h-5 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
+                    </div>
+                  </button>
+
+                  {isOpen && (
+                    <div className="absolute mt-1 w-full bg-black border border-gray-700 rounded-lg shadow-lg z-10 overflow-hidden">
+                      <ul className="py-2 px-4 max-h-60 rounded-lg overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-black">
+                        {options.map((option) => (
+                          <li
+                            key={option.value}
+                            onClick={() => handleSelect(option.value)}
+                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-xl ${
+                              timeline === option.value
+                                ? "bg-gray-800"
+                                : "hover:bg-gray-900"
+                            }`}
+                          >
+                            <div className="flex justify-between items-center">
+                              <span
+                                className={
+                                  timeline === option.value
+                                    ? "text-white font-medium"
+                                    : "text-gray-300"
+                                }
+                              >
+                                {option.label}
+                              </span>
+                              {timeline === option.value && (
+                                <div className="w-4 h-4 ml-2 rounded-full bg-black flex items-center justify-center">
+                                  <svg
+                                    className="w-3 h-3 text-gray-400"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth="2.5"
+                                      d="M5 12l5 5L20 7"
+                                    />
+                                  </svg>
+                                </div>
+                              )}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
 
