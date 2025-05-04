@@ -563,9 +563,9 @@ export default function ContentROICalculator() {
                 <div className="relative">
                   <button
                     onClick={toggleDropdownContent}
-                    className="w-full px-4 py-3 bg-black rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
+                    className="w-full px-4 py-3 bg-gray-800/50 rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
                   >
-                    <span className="text-xl text-white">
+                    <span className="text-md text-white">
                       {selectedOptionContent?.label}
                     </span>
                     <div className="flex items-center">
@@ -592,7 +592,7 @@ export default function ContentROICalculator() {
                           <li
                             key={option.value}
                             onClick={() => handleSelectContent(option.value)}
-                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-xl ${
+                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-md ${
                               contentTeam === option.value
                                 ? "bg-gray-800"
                                 : "hover:bg-gray-900"
@@ -665,9 +665,9 @@ export default function ContentROICalculator() {
                 <div className="relative h-20">
                   <button
                     onClick={toggleDropdown}
-                    className="w-full px-4 py-3 bg-black rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
+                    className="w-full px-4 py-3 bg-gray-800/50 rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
                   >
-                    <span className="text-xl text-white">
+                    <span className="text-md text-white">
                       {selectedOption?.label}
                     </span>
                     <div className="flex items-center">
@@ -694,7 +694,7 @@ export default function ContentROICalculator() {
                           <li
                             key={option.value}
                             onClick={() => handleSelect(option.value)}
-                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-xl ${
+                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-md ${
                               timeline === option.value
                                 ? "bg-gray-800"
                                 : "hover:bg-gray-900"
