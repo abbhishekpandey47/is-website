@@ -342,6 +342,28 @@ export default function ContentROICalculator() {
     (option) => option.value === contentTeam
   );
 
+  const dropdownRef = useRef(null);
+  const dropdownRefContent = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+      if (
+        dropdownRefContent.current &&
+        !dropdownRefContent.current.contains(event.target)
+      ) {
+        setIsOpenContent(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="w-full max-w-6xl mx-auto p-6 font-sans mb-24">
       <div>
@@ -560,7 +582,7 @@ export default function ContentROICalculator() {
                   Do you have an existing content team?
                   <TooltipIcon description="Tell us if you already have writers, editors, or strategists on your team." />
                 </label>
-                <div className="relative">
+                <div ref={dropdownRefContent} className="relative">
                   <button
                     onClick={toggleDropdownContent}
                     className="w-full px-4 py-3 bg-gray-800/50 rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
@@ -662,7 +684,7 @@ export default function ContentROICalculator() {
                     </div>
                   </div>
                 </label>
-                <div className="relative h-20">
+                <div ref={dropdownRef} className="relative h-20 ">
                   <button
                     onClick={toggleDropdown}
                     className="w-full px-4 py-3 bg-gray-800/50 rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
