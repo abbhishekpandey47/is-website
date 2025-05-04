@@ -89,7 +89,7 @@ const Footer = () => {
                         loading="lazy"
                         src="/awards/HackerNoon_Logo.png"
                         alt="Infra Logo"
-                        className="w-[80%] mt-2"
+                        className="w-[100%] lg-[80%] mt-2"
                       />
                     </Link>
                   </div>
