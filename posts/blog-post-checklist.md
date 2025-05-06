@@ -6,13 +6,11 @@ There's a lot going on - pre-writing prep, in-the-moment details, and post-writi
 
 **_That's exactly where a blog post checklist comes in._**
 
-It keeps you organized, ensures consistency, and helps you focus on what matters most: clear, accurate, developer-friendly content that aligns with your product goals. I'm sharing a comprehensive checklist that our developers and technical writers follow while writing technical blogs for our B2B SaaS startup clients.
-
-Here's the tried-and-tested technical blog checklist you can consider when writing a technical blog.
+It keeps you organized, ensures consistency, and helps you focus on what matters most: clear, accurate, developer-friendly content that aligns with your product goals. This blog article is all about that - the tried-and-tested technical blog checklist you can consider when writing a technical blog.
 
 ## Technical Blog Content Checklist
 
-I am discussing the blog post checklist that the technical writers and developers of **[Infrasity](https://www.infrasity.com/contact)** use for technical blog content. This is to ensure that the blogs are **developer-focused and technically sound** before we deliver the content to our **B2B SaaS startup clients**.
+I am sharing the blog post checklist that the technical writers and developers of **[Infrasity](https://www.infrasity.com/contact)** use while writing technical blog content for our B2B SaaS Startup clients. This is to ensure that the blogs are **developer-focused and technically sound** before we deliver the content to our **B2B SaaS startup clients**.
 
 ![technical blog post checklist](/PostImages/blog-post-checklist/c2.png) 
 
