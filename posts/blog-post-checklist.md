@@ -61,8 +61,8 @@ When your technical content involves CLI-based tools, including the actual outpu
 
 For example, here's a screenshot of the output from running terraform init. It confirms that:
 - The backend (in this case, an S3 bucket) was successfully configured.
-- The hashicorp/aws provider was located and installed.
-- A .terraform.lock.hcl file was created to ensure consistent provider versions.
+- The `hashicorp/aws` provider was located and installed.
+- A **.terraform.lock.hcl** file was created to ensure consistent provider versions.
 
 It ends with a clear success message and next steps (terraform plan), giving readers confidence that their setup is complete and working.
 
