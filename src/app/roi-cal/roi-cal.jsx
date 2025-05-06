@@ -5,7 +5,7 @@ import TooltipIcon from "./TooltipIcon";
 import { saveUserData } from "./user";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-export default function ContentROICalculator() {
+const ContentROICalculator = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -1087,4 +1087,6 @@ export default function ContentROICalculator() {
       )}
     </div>
   );
-}
+};
+
+export default ContentROICalculator;
