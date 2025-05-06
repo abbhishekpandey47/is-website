@@ -97,7 +97,7 @@ To ensure your technical blog reaches the right audience and ranks well in searc
 - **Write a Compelling Meta Description:** Summarize your blog in 150-160 characters, including the secondary keyword, to improve click-through rates from search results.
 - **Add Alt Text for Images:** Use descriptive alt text for every image, screenshot, or diagram to improve accessibility and help search engines index your content.
 - **Structure with Clear Headings:** Organize your blog with clear H2 and H3 headings to improve readability and help search engines index key sections.
-- Ensure Mobile Optimization: Make sure your blog is mobile-friendly, as Google prioritizes mobile-optimized content in search results.
+- **Ensure Mobile Optimization:** Make sure your blog is mobile-friendly, as Google prioritizes mobile-optimized content in search results.
 
 Once you are done writing the technical blog, make sure that you run an SEO score check to gauge whether your article is SEO-friendly or not.
 
