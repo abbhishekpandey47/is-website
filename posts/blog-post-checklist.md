@@ -14,6 +14,8 @@ Here's the tried-and-tested technical blog checklist you can consider when writi
 
 I am discussing the blog post checklist that the technical writers and developers of **[Infrasity](https://www.infrasity.com/contact)** use for technical blog content. This is to ensure that the blogs are **developer-focused and technically sound** before we deliver the content to our **B2B SaaS startup clients**.
 
+![technical blog post checklist](/PostImages/blog-post-checklist/c2.png) 
+
 ### 1. Create a Structured Outline
 
 A well-structured technical blog isn't just easier to read, it's easier to use. Developers are often scanning for specific answers or steps, and a clear outline with proper H2s and H3s helps them navigate your post without getting lost. Structured sections also improve SEO by clearly signaling what each part of your post is about.
@@ -39,11 +41,15 @@ Code snippets are non-negotiable when writing for developers. Whether you're exp
 
 Make sure the code is clean, accurate, and copy-paste-ready. Avoid unnecessary placeholders or hidden dependencies; developers should be able to grab it and run without extra tweaking.
 
+![technical blog post checklist - code snippets](/PostImages/blog-post-checklist/c3.png) 
+
 This is the kind of snippet that's immediately useful. It shows what to define and how with zero fluff. Developers understand the main logic of the code, what is required, how it creates a JWT after authentication, and how long it stays valid.
 
 ### 4. Include Dashboard Screenshots
 
 When walking readers through how your product or tool works, dashboard screenshots provide visual proof of the actual experience. Instead of describing steps in isolation, screenshots let readers see what the UI looks like at each point in the workflow, increasing clarity and helping them follow along with confidence. This technical writing checklist point is especially helpful for low-code/no-code platforms, internal tools, or anything visual where the interface is a core part of the user experience.
+
+![technical blog post checklist - dashboard screenshot](/PostImages/blog-post-checklist/c4.png)
 
 Here, the dashboard screenshot is added to demonstrate how Mocha (AI-powered no-code website builder) interprets a natural-language prompt and translates it into a structured, business-specific website layout, showing both the input format and the generated UI in a single view.
 
@@ -52,6 +58,8 @@ The user prompt - "_I want a clean, modern site to sell handmade jewelry…_" - 
 ### 5. Add CLI Outputs
 
 When your technical content involves CLI-based tools, including the actual output from commands is necessary. These CLI outputs serve as real-world validation points for your readers. They confirm that the environment is correctly set up, dependencies are being pulled as expected, and that each step in the workflow is functioning properly. Especially with tools like Terraform, where providers, plugins, and backend configurations are sensitive to missteps, showing CLI output helps readers spot misconfigurations early and avoid invisible breakages later in the pipeline.
+
+![technical blog post checklist - cli output](/PostImages/blog-post-checklist/c5.png)
 
 For example, here's a screenshot of the output from running terraform init. It confirms that:
 - The backend (in this case, an S3 bucket) was successfully configured.
@@ -64,6 +72,8 @@ It ends with a clear success message and next steps (terraform plan), giving rea
 
 In technical blogs, especially for B2B SaaS products, readers often need to understand how different tools, commands, or systems interact. Explaining this with just text can be confusing and time-consuming. That's where diagrams come in - they break down complex processes like version control, architecture diagrams, application flow, or API integrations into clear, visual steps. This reduces confusion, helps readers stay focused, and makes your content easier to follow, even for developers who are quickly scanning through the technical blog.
 
+![technical blog post checklist - visual diagrams](/PostImages/blog-post-checklist/c6.png)
+
 For instance, this diagram shows how common Git commands (add, commit, push, reset, etc.) move files through different stages - from the local working directory to the remote repository. Instead of explaining each step in a long paragraph, the arrows visually map how data flows across stages, like the working directory, staging area, and commit history. A simple image like this can quickly clarify concepts that would otherwise take 300+ words to explain.
 
 ### 7. Embed Videos
@@ -72,17 +82,23 @@ When writing technical blogs, especially those involving code execution, UI beha
 
 Videos also improve engagement in your website content. They make your blog post more interactive, reduce drop-off, and provide readers with visual walkthroughs over written steps. Search engines also tend to favor multimedia-rich content, which can improve discoverability.
 
+![technical blog post checklist - embed videos](/PostImages/blog-post-checklist/c7.png)
+
 For example, here, the embedded YouTube video shows how to configure PingIdentity for SAML authentication by creating a custom SAML application, configuring necessary values, and testing the authentication. Rather than just describing how it works, the video gives a clear and visual representation of what users should expect, making the product concept easier to follow and implement.
 
 ### 8. Write a Strong Call to Action
 
 A strong CTA turns readers into users. Whether you want them to try your tool, explore further guides, or clone a GitHub repo, a clear and relevant CTA guides them on what to do next. In technical blogs, especially tutorials or how-to articles, a well-placed CTA helps reinforce the value of your product or resource while keeping the reader engaged beyond the blog.
 
+![technical blog post checklist - call to action](/PostImages/blog-post-checklist/c8.png)
+
 Here's an example of a good CTA, where the blog doesn't just end with a summary, it nudges the reader toward a useful next step. After explaining how to undo Git commits in the article, it introduces Aviator's Stacked PRs CLI as a tool that simplifies those very workflows. The CTA helps users reach the product directly without searching for it through hyperlinks.
 
 ### 9. Categorize Tools Logically if It's a Listicle
 
 In a technical blog in a listicle, grouping tools under logical, descriptive categories helps readers quickly scan and compare similar options. Instead of dumping ten tools in a flat list, organizing them - say, by feature focus, integration type, or depth of code support - adds clarity and structure. It turns your blog from a loose collection into a useful decision-making guide.
+
+![technical blog post checklist - categorization of SaaS tools](/PostImages/blog-post-checklist/c9.png)
 
 This example shows that the products are categorized based on the problems they are solving, like IDE-Specific and Code Quality, Deep Code Understanding & Navigation, and Rapid Prototyping & AI Agent Building. This structure makes it easier for readers to scan, compare similar products, and find what's most relevant for them.
 
