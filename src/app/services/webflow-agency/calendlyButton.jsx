@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const ContactForm = ({ name }) => {
@@ -177,12 +178,11 @@ const ContactForm = ({ name }) => {
   return (
     <>
       {/* Button to trigger */}
-      <button
-        className="text-m font-semibold rounded-md flex justify-center items-center relative h-12 w-40 overflow-hidden border-0 bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] text-white shadow-lg transition-all hover:shadow-xl"
-        onClick={openPopup}
-      >
-        {name || "Book a Demo"}
-      </button>
+      <Link href="/book-a-demo" passHref>
+        <button className="text-m font-semibold rounded-md flex justify-center items-center relative h-12 w-40 overflow-hidden border-0 bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] text-white shadow-lg transition-all hover:shadow-xl">
+          {name || "Book a Demo"}
+        </button>
+      </Link>
 
       {/* Modal Overlay */}
       {isPopupOpen && (

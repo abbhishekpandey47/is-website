@@ -12,7 +12,7 @@ import FAQ from "@/app/services/service-video-production/FAQ";
 import BookDemo from "./bookDemo";
 import TestimonialSlider from "./Testimonials";
 import Webtable from "./table";
-import CalendlyButton from "../service-video-production/calendlyButton";
+import CalendlyButton from "./calendlyButton";
 import css5 from "./images/thecss/css1.png";
 import css4 from "./images/thecss/css6.png";
 import css3 from "./images/thecss/css3.png";
