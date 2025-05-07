@@ -8,6 +8,7 @@ export default function ContactPage() {
     email: "",
     phoneNumber: "",
     message: "",
+    countryCode: "+91",
   });
   const [isHovered, setIsHovered] = useState(false);
 
@@ -90,7 +91,7 @@ export default function ContactPage() {
         },
         {
           name: "phone",
-          value: formData.phoneNumber,
+          value: formData.countryCode + " " + formData.phoneNumber,
         },
         {
           name: "message",
@@ -154,7 +155,7 @@ export default function ContactPage() {
       </div>
 
       <div className="bg-[#080b1e] text-white flex justify-center items-center p-4">
-        <div className="bg-[#0c102e] rounded-xl p-8 w-full max-w-3xl mx-auto shadow-xl border border-[#3d4058]">
+        <div className="bg-black rounded-xl p-8 w-full max-w-3xl mx-auto shadow-xl border border-[#3d4058]">
           {isSuccess ? (
             <div className="bg-green-800 bg-opacity-20 border border-green-500 text-white p-6 rounded-lg text-center mb-4">
               <div className="mb-4 flex justify-center">
@@ -208,6 +209,17 @@ export default function ContactPage() {
                         : "border border-[#3d4058]"
                     }`}
                     placeholder="First Name"
+                    style={{
+                      backgroundColor: "#1a1921",
+                      backgroundImage:
+                        "linear-gradient(to bottom, rgba(18, 17, 23, 1), rgba(30, 28, 36, 0.9))",
+                      boxShadow:
+                        "0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      padding: "16px 20px",
+                      color: "rgba(255, 255, 255, 0.8)",
+                      backdropFilter: "blur(5px)",
+                    }}
                   />
                   {errors.firstName && (
                     <p className="text-red-500 text-sm mt-1">
@@ -232,6 +244,17 @@ export default function ContactPage() {
                         : "border border-[#3d4058]"
                     }`}
                     placeholder="Last Name"
+                    style={{
+                      backgroundColor: "#1a1921",
+                      backgroundImage:
+                        "linear-gradient(to bottom, rgba(18, 17, 23, 1), rgba(30, 28, 36, 0.9))",
+                      boxShadow:
+                        "0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      padding: "16px 20px",
+                      color: "rgba(255, 255, 255, 0.8)",
+                      backdropFilter: "blur(5px)",
+                    }}
                   />
                   {errors.lastName && (
                     <p className="text-red-500 text-sm mt-1">
@@ -258,6 +281,17 @@ export default function ContactPage() {
                         : "border border-[#3d4058]"
                     }`}
                     placeholder="Email"
+                    style={{
+                      backgroundColor: "#1a1921",
+                      backgroundImage:
+                        "linear-gradient(to bottom, rgba(18, 17, 23, 1), rgba(30, 28, 36, 0.9))",
+                      boxShadow:
+                        "0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      padding: "16px 20px",
+                      color: "rgba(255, 255, 255, 0.8)",
+                      backdropFilter: "blur(5px)",
+                    }}
                   />
                   {errors.email && (
                     <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -269,20 +303,142 @@ export default function ContactPage() {
                   <label className="block text-gray-300 mb-1">
                     Phone Number
                   </label>
-                  <input
-                    type="tel"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    pattern="[0-9]*"
-                    inputMode="numeric"
-                    className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-[0.5px] focus:ring-[#4f4bc6] ${
-                      errors.phoneNumber
-                        ? "border border-red-500"
-                        : "border border-[#3d4058]"
-                    }`}
-                    placeholder="Phone Number"
-                  />
+                  <div className="flex w-full">
+                    <select
+                      name="countryCode"
+                      value={formData.countryCode}
+                      onChange={handleChange}
+                      className="w-[88px] bg-[#0c102e] rounded-l pl-1 py-2 text-white focus:outline-none focus:ring-[0.5px] focus:ring-[#4f4bc6] border border-[#3d4058] border-r-0"
+                      style={{
+                        backgroundColor: "#1a1921",
+                        backgroundImage:
+                          "linear-gradient(to bottom, rgba(18, 17, 23, 1), rgba(30, 28, 36, 0.9))",
+                        boxShadow:
+                          "0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05)",
+                        border: "1px solid rgba(255, 255, 255, 0.08)",
+                        color: "rgba(255, 255, 255, 0.8)",
+                        backdropFilter: "blur(5px)",
+                      }}
+                    >
+                      <option value="+1">🇺🇸 +1</option>{" "}
+                      <option value="+7">🇷🇺 +7</option>{" "}
+                      <option value="+20">🇪🇬 +20</option>{" "}
+                      <option value="+27">🇿🇦 +27</option>{" "}
+                      <option value="+30">🇬🇷 +30</option>{" "}
+                      <option value="+31">🇳🇱 +31</option>{" "}
+                      <option value="+32">🇧🇪 +32</option>{" "}
+                      <option value="+33">🇫🇷 +33</option>{" "}
+                      <option value="+34">🇪🇸 +34</option>{" "}
+                      <option value="+36">🇭🇺 +36</option>{" "}
+                      <option value="+39">🇮🇹 +39</option>{" "}
+                      <option value="+40">🇷🇴 +40</option>{" "}
+                      <option value="+41">🇨🇭 +41</option>{" "}
+                      <option value="+43">🇦🇹 +43</option>{" "}
+                      <option value="+44">🇬🇧 +44</option>{" "}
+                      <option value="+45">🇩🇰 +45</option>{" "}
+                      <option value="+46">🇸🇪 +46</option>{" "}
+                      <option value="+47">🇳🇴 +47</option>{" "}
+                      <option value="+48">🇵🇱 +48</option>{" "}
+                      <option value="+49">🇩🇪 +49</option>{" "}
+                      <option value="+51">🇵🇪 +51</option>{" "}
+                      <option value="+52">🇲🇽 +52</option>{" "}
+                      <option value="+54">🇦🇷 +54</option>{" "}
+                      <option value="+55">🇧🇷 +55</option>{" "}
+                      <option value="+56">🇨🇱 +56</option>{" "}
+                      <option value="+57">🇨🇴 +57</option>{" "}
+                      <option value="+58">🇻🇪 +58</option>{" "}
+                      <option value="+60">🇲🇾 +60</option>{" "}
+                      <option value="+61">🇦🇺 +61</option>{" "}
+                      <option value="+62">🇮🇩 +62</option>{" "}
+                      <option value="+63">🇵🇭 +63</option>{" "}
+                      <option value="+64">🇳🇿 +64</option>{" "}
+                      <option value="+65">🇸🇬 +65</option>{" "}
+                      <option value="+66">🇹🇭 +66</option>{" "}
+                      <option value="+81">JP +81</option>{" "}
+                      <option value="+82">🇰🇷 +82</option>{" "}
+                      <option value="+84">🇻🇳 +84</option>{" "}
+                      <option value="+86">🇨🇳 +86</option>{" "}
+                      <option value="+90">🇹🇷 +90</option>{" "}
+                      <option value="+91">🇮🇳 +91</option>{" "}
+                      <option value="+92">🇵🇰 +92</option>{" "}
+                      <option value="+93">🇦🇫 +93</option>{" "}
+                      <option value="+94">🇱🇰 +94</option>{" "}
+                      <option value="+95">🇲🇲 +95</option>{" "}
+                      <option value="+98">🇮🇷 +98</option>{" "}
+                      <option value="+212">🇲🇦 +212</option>{" "}
+                      <option value="+213">🇩🇿 +213</option>{" "}
+                      <option value="+216">🇹🇳 +216</option>{" "}
+                      <option value="+218">🇱🇾 +218</option>{" "}
+                      <option value="+220">🇬🇲 +220</option>{" "}
+                      <option value="+221">🇸🇳 +221</option>{" "}
+                      <option value="+234">🇳🇬 +234</option>{" "}
+                      <option value="+254">🇰🇪 +254</option>{" "}
+                      <option value="+351">🇵🇹 +351</option>{" "}
+                      <option value="+352">🇱🇺 +352</option>{" "}
+                      <option value="+353">🇮🇪 +353</option>{" "}
+                      <option value="+354">🇮🇸 +354</option>{" "}
+                      <option value="+355">🇦🇱 +355</option>{" "}
+                      <option value="+358">🇫🇮 +358</option>{" "}
+                      <option value="+359">🇧🇬 +359</option>{" "}
+                      <option value="+370">🇱🇹 +370</option>{" "}
+                      <option value="+371">🇱🇻 +371</option>{" "}
+                      <option value="+372">🇪🇪 +372</option>{" "}
+                      <option value="+380">🇺🇦 +380</option>{" "}
+                      <option value="+385">🇭🇷 +385</option>{" "}
+                      <option value="+420">🇨🇿 +420</option>{" "}
+                      <option value="+421">🇸🇰 +421</option>{" "}
+                      <option value="+503">🇸🇻 +503</option>{" "}
+                      <option value="+504">🇭🇳 +504</option>{" "}
+                      <option value="+505">🇳🇮 +505</option>{" "}
+                      <option value="+506">🇨🇷 +506</option>{" "}
+                      <option value="+507">🇵🇦 +507</option>{" "}
+                      <option value="+591">🇧🇴 +591</option>{" "}
+                      <option value="+593">🇪🇨 +593</option>{" "}
+                      <option value="+595">🇵🇾 +595</option>{" "}
+                      <option value="+598">🇺🇾 +598</option>{" "}
+                      <option value="+673">🇧🇳 +673</option>{" "}
+                      <option value="+852">🇭🇰 +852</option>{" "}
+                      <option value="+855">🇰🇭 +855</option>{" "}
+                      <option value="+880">🇧🇩 +880</option>{" "}
+                      <option value="+886">🇹🇼 +886</option>{" "}
+                      <option value="+960">🇲🇻 +960</option>{" "}
+                      <option value="+961">🇱🇧 +961</option>{" "}
+                      <option value="+962">🇯🇴 +962</option>{" "}
+                      <option value="+963">🇸🇾 +963</option>{" "}
+                      <option value="+966">🇸🇦 +966</option>{" "}
+                      <option value="+971">🇦🇪 +971</option>{" "}
+                      <option value="+972">🇮🇱 +972</option>{" "}
+                      <option value="+977">🇳🇵 +977</option>{" "}
+                      <option value="+994">🇦🇿 +994</option>{" "}
+                      <option value="+995">🇬🇪 +995</option>
+                    </select>
+
+                    <input
+                      type="tel"
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
+                      onChange={handleChange}
+                      pattern="[0-9]*"
+                      inputMode="numeric"
+                      className={`flex-1 bg-[#0c102e] rounded-r px-1 py-2 text-white focus:outline-none focus:ring-[0.5px] focus:ring-[#4f4bc6] ${
+                        errors.phoneNumber
+                          ? "border border-red-500"
+                          : "border border-[#3d4058]"
+                      }`}
+                      placeholder="Phone Number"
+                      style={{
+                        backgroundColor: "#1a1921",
+                        backgroundImage:
+                          "linear-gradient(to bottom, rgba(18, 17, 23, 1), rgba(30, 28, 36, 0.9))",
+                        boxShadow:
+                          "0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05)",
+                        border: "1px solid rgba(255, 255, 255, 0.08)",
+                        padding: "16px 20px",
+                        color: "rgba(255, 255, 255, 0.8)",
+                        backdropFilter: "blur(5px)",
+                      }}
+                    />
+                  </div>
                   {errors.phoneNumber && (
                     <p className="text-red-500 text-sm mt-1">
                       {errors.phoneNumber}
@@ -303,8 +459,19 @@ export default function ContactPage() {
                       : "border border-[#3d4058]"
                   }`}
                   placeholder="Write your message here."
+                  // style={{
+                  //   resize: "vertical",
+                  // }}
                   style={{
-                    resize: "vertical",
+                    backgroundColor: "#1a1921",
+                    backgroundImage:
+                      "linear-gradient(to bottom, rgba(18, 17, 23, 1), rgba(30, 28, 36, 0.9))",
+                    boxShadow:
+                      "0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05)",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    padding: "16px 20px",
+                    color: "rgba(255, 255, 255, 0.8)",
+                    backdropFilter: "blur(5px)",
                   }}
                 />
                 {errors.message && (
