@@ -1,9 +1,10 @@
 import React from "react";
 import { Zap } from "lucide-react";
+import Link from "next/link";
 
 const BookDemo = () => {
   return (
-    <div className="w-[65%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg">
+    <div className="w-[65%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] mt-16 -mb-10 rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg">
       <section className=" w-full bg-[#0D0A1A] relative  rounded-2xl shadow-lg min-h-[50vh] md:min-h-[50vh] lg:min-h-[35vh] overflow-hidden ">
         {/* Stars */}
         <Stars />
@@ -16,14 +17,14 @@ const BookDemo = () => {
           <p className="text-m text-white md:text-lg quicksand-medium text-gray text-center max-w-2xl mb-8">
             Trusted by YC startups. Built for developer-first companies.
           </p>
-          <a href="https://calendly.com/meet-shan" target="_blank">
+          <Link href="/book-a-demo" passHref>
             <button className="magic-button group rounded-md px-6 py-3 text-white font-medium text-m transition-all duration-300 hover:scale-105 ">
               <div className="flex items-center space-x-2">
                 <Zap className="h-5 w-5 transition-transform group-hover:rotate-12" />
                 <span className="quicksand-medium">Book Demo</span>
               </div>
             </button>
-          </a>
+          </Link>
         </div>
       </section>
     </div>

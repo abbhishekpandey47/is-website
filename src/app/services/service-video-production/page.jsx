@@ -31,7 +31,7 @@ import BookDemo from "./bookDemo.jsx";
 import FAQSection from "./FAQ.jsx";
 import DarkGlass from "./caseStudy.jsx";
 import TestimonialSlider from "./testimonials.jsx";
-import CalendlyButton from "./calendlyButton.jsx";
+import ContactForm from "./calendlyButton.jsx";
 import ClutchBadge from "./clutch.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
@@ -467,7 +467,7 @@ const page = () => {
         </div>
 
         <div className="flex justify-center lg:justify-start lg:ml-40">
-          <CalendlyButton name="Get Started" />
+          <ContactForm name="Get Started" />
         </div>
 
         <div>
