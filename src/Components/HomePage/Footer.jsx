@@ -15,7 +15,7 @@ const Footer = () => {
     <footer className="bg-zing-800 backdrop-blur-lg py-4 px-14 mt-8 text-white flex justify-center flex-col w-full opacity-1 footerClassHome">
       <div className="flex flex-col gap-6">
         <div className="max-w-7xl mx-auto flex flex-wrap items-start w-full border-t border-[#999] pt-12 max-lg:flex-col max-lg:gap-10">
-          <div className="w-full lg:w-1/3 flex flex-col items-start space-y-4 max-lg:items-center max-lg:text-center mb-8 lg:mb-0 pr-8">
+          <div className="w-full lg:w-1/3 flex flex-col items-start space-y-4 max-lg:items-center max-lg:text-center mb-8 lg:mb-0">
             <Image
               height={640}
               width={131}

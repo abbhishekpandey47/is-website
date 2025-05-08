@@ -1,8 +1,24 @@
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ClutchBadge from "./clutch";
 
 export default function TrustedBySection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+
+      handleResize();
+
+      window.addEventListener("resize", handleResize);
+
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
   const scrollContainerRef = useRef(null);
   const fileList = [
     "mocha.png",
@@ -75,7 +91,7 @@ export default function TrustedBySection() {
 
         <div className="flex flex-row">
           {/* Left side: Scrolling logos (50% width) */}
-          <div className="w-[37%]">
+          <div className="w-full lg:w-[37%]">
             <div ref={scrollContainerRef} className="overflow-x-hidden">
               <div className="inline-flex min-w-full">
                 {rows.map((row, rowIndex) => (
@@ -102,15 +118,23 @@ export default function TrustedBySection() {
               </div>
             </div>
           </div>
-
-          <div className="w-[63%] lg:w-[53%] flex items-center justify-end">
-            <div className="flex items-center space-x-4">
-              <div className="flex mb-6 h-6 border-l-2 border-gray-400"></div>
-              <ClutchBadge />
+          {!isMobile && (
+            <div className="w-[63%] lg:w-[53%] flex items-center justify-end">
+              <div className="flex items-center space-x-4">
+                <div className="flex mb-6 h-6 border-l-2 border-gray-400"></div>
+                <ClutchBadge />
+              </div>
             </div>
-          </div>
+          )}{" "}
         </div>
       </div>
+      {isMobile && (
+        <div className="w-full flex items-center justify-center mt-4">
+          <div className="flex items-center space-x-4">
+            <ClutchBadge />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
