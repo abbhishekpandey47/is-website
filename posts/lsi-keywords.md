@@ -1,6 +1,6 @@
 ## Introduction
 
-LSI (Latent semantic indexing) keywords are terms thematically or conceptually related to your focus keyword.
+LSI (Latent Semantic Indexing) keywords are terms thematically or conceptually related to your focus keyword.
 
 Latent Semantic Indexing as a technique was first introduced in a research paper in 1988 that introduced the usage of semantically related words as "a new approach for dealing with the vocabulary problem in human-computer interaction." LSI later became one of the main parts of SEO that helps search algorithms rank content by its context rather than the keyword repetition frequency.
 
@@ -10,7 +10,7 @@ This blog will explore what LSI keywords are all about and how they can help imp
 
 ## What Does LSI Mean?
 
-LSI (Latent semantic indexing) is a mathematical method that analyzes relationships between words to understand context.
+Latent Semantic Indexing (LSI) is a mathematical method that analyzes relationships between words to understand context.
 
 Rather than just looking for main keywords and relying only on exact matches, Google search now focuses on themes, capturing a broader range of meanings and associated terms. These thematically related words are LSI keywords.
 
@@ -20,7 +20,7 @@ At the end of the day, computers are interpreting the vocabulary of humans. And 
 
 LSI Keywords means thematically related terms to your focus keyword that help Google's search algorithm to better understand the depth and quality of your content and ascertain through semantically related phrases what a piece is topically about.
 
-For example, Suppose you want to search for 'Iced Matcha'. But you forget the name and instead, just google 'Japanese green tea.'
+For example, suppose you want to search for 'Iced Matcha'. But you forget the name and instead, just google 'Japanese green tea.'
 
 If computers were only to yield results based on target keywords, it would have been challenging to get to Matcha from Japanese green tea, as it might exclusively return articles that contain the word 'Japanese green tea.'
 
@@ -80,12 +80,12 @@ For instance, the semantically related word for "Travel" will not be "Tour," as 
 
 ## How to Find LSI Keywords
 
-Finding LSI keywords can be done either manually where you can find out what words are related to your target keyword or use SEO tools especially designed to find related keywords.  
+Finding LSI keywords can be done either manually, where you can find out what words are related to your target keyword or use SEO tools especially designed to find related keywords.  
 
 ### 1. Manual Research Methods
 
 #### Google Autocomplete
-One of the simplest ways to find LSI keywords is using Google's autocomplete or suggestion search. Your crucial main keyword is the one you type in the first instance, and Google will give suggestions.  
+One of the simplest ways to find LSI keywords is by using Google's autocomplete or suggestion search. Your crucial main keyword is the one you type in the first instance, and Google will give suggestions.  
 
 For example, let's take **'ICED AMERICANO'** as our primary keyword. All the words that appear in the drop-down menu are LSI Keywords. 
 
