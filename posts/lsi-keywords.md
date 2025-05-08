@@ -98,11 +98,11 @@ For enhanced results, check the **'People Also Ask'** box and other connected se
 The most significant advantage of working with search snippets is an understanding of other terms that go hand in hand with it.  
 
 ### 2. Tools and Resources
-A much more straightforward and advanced way of taking out keywords is using a set of dedicated SEO Tools such as **LSI Graphs, SEMrush, or Ahrefs** that can be utilized to find phrases and concepts related to the primary term. **Google Keyword Planner** also shows keyword suggestions associated with search volume.  
+A much more straightforward and advanced way of taking out keywords is using a set of dedicated SEO Tools such as **LSI Graphs, Semrush, or Ahrefs** that can be utilized to find phrases and concepts related to the primary term. **Google Keyword Planner** also shows keyword suggestions associated with search volume.  
 
-#### Using SEMrush:
+**Using Semrush**:
 
-**STEP 1:** Log in to your SEMrush account or sign up if you don't have one.
+**STEP 1:** Log in to your Semrush account or sign up if you don't have one.
 **STEP 2:** Navigate to the **'Keyword Magic Tool'** under the **'Keyword Research'** section and then enter your primary keyword. In our example, it's **ICED AMERICANO**, and start the search for keyword ideas.
 SEMrush will give you a list of terms related to our target keyword. According to our example, we got:
 - `iced americano coffee`
