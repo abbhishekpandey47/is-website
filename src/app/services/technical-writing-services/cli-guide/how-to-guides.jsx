@@ -149,7 +149,6 @@ const CRMAutomationPage = () => {
                       {section.title}
                     </h2>
                   </div>
-
                   <div className="flex flex-wrap gap-4 md:gap-6 mb-4 mx-3 md:mx-6">
                     <p className="text-gray-300 text-xl sm:text-lg md:text-base lg:text-2xl font-semibold">
                       {section.subtitle}
