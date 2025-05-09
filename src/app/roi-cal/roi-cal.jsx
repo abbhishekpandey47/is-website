@@ -364,6 +364,19 @@ const ContentROICalculator = () => {
     };
   }, []);
 
+  const [isVisible, setIsVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleClick = () => {
+    setIsVisible(true);
+
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 3000);
+  };
+
+  const showTooltip = isVisible || isHovered;
+
   return (
     <div className="w-full max-w-6xl mx-auto p-6 font-sans mb-24">
       <div>
@@ -379,8 +392,11 @@ const ContentROICalculator = () => {
                 <div className="relative inline-block">
                   <label className="block text-gray-300 mb-2">
                     Monthly content budget
-                    {/* <TooltipIcon description="Estimated amount you want to spend on content per month." /> */}
-                    <div className="group relative inline-block">
+                    <TooltipIcon
+                      description="Estimated amount you want to spend on content per month."
+                      width="400px"
+                    />
+                    {/* <div className="group relative inline-block">
                       <svg
                         className="w-4 h-4 ml-2 inline-block cursor-pointer"
                         fill="none"
@@ -402,7 +418,7 @@ const ContentROICalculator = () => {
                           month.
                         </p>
                       </div>
-                    </div>
+                    </div> */}
                   </label>
                 </div>
 
@@ -425,8 +441,11 @@ const ContentROICalculator = () => {
                 <div className="relative inline-block">
                   <label className="block text-gray-300 mb-2">
                     Blog posts per month
-                    {/* <TooltipIcon description="Number of blog articles you expect to publish each month." /> */}
-                    <div className="group relative inline-block">
+                    <TooltipIcon
+                      description="Number of blog articles you expect to publish each month."
+                      width="390px"
+                    />
+                    {/* <div className="group relative inline-block">
                       <svg
                         className="w-4 h-4 ml-2 inline-block cursor-pointer"
                         fill="none"
@@ -448,7 +467,7 @@ const ContentROICalculator = () => {
                           month.
                         </p>
                       </div>
-                    </div>
+                    </div> */}
                   </label>
                 </div>
                 <div className="mt-1">
@@ -478,8 +497,11 @@ const ContentROICalculator = () => {
                 <div className="flex justify-between items-center">
                   <label className="block text-gray-300">
                     Domain expertise required?
-                    {/* <TooltipIcon description="Specify if the content needs specialized industry knowledge or experience." /> */}
-                    <div className="group relative inline-block">
+                    <TooltipIcon
+                      description="Specify if the content needs specialized industry knowledge or experience."
+                      width="330px"
+                    />
+                    {/* <div className="group relative inline-block">
                       <svg
                         className="w-4 h-4 ml-2 inline-block cursor-pointer"
                         fill="none"
@@ -501,7 +523,7 @@ const ContentROICalculator = () => {
                           knowledge or experience.
                         </p>
                       </div>
-                    </div>
+                    </div> */}
                   </label>
                   <div className="relative inline-block w-12 h-6">
                     <input
@@ -538,8 +560,11 @@ const ContentROICalculator = () => {
               <div className="mb-5 group">
                 <label className="relative inline-block text-gray-300 mb-2">
                   Target traffic growth
-                  {/* <TooltipIcon description="Enter the percentage increase in traffic you aim to achieve." /> */}
-                  <div className="group relative inline-block">
+                  <TooltipIcon
+                    description="Enter the percentage increase in traffic you aim to achieve."
+                    width="390px"
+                  />
+                  {/* <div className="group relative inline-block">
                     <svg
                       className="w-4 h-4 ml-2 inline-block cursor-pointer"
                       fill="none"
@@ -561,7 +586,7 @@ const ContentROICalculator = () => {
                         achieve.
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </label>
                 <div className="relative">
                   <input
@@ -580,7 +605,10 @@ const ContentROICalculator = () => {
               <div className="mb-5 group">
                 <label className="block text-gray-300 mb-2">
                   Do you have an existing content team?
-                  <TooltipIcon description="Tell us if you already have writers, editors, or strategists on your team." />
+                  <TooltipIcon
+                    description="Tell us if you already have writers, editors, or strategists on your team."
+                    width="280px"
+                  />
                 </label>
                 <div ref={dropdownRefContent} className="relative">
                   <button
@@ -667,6 +695,9 @@ const ContentROICalculator = () => {
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
+                      onClick={handleClick}
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
                     >
                       <path
                         strokeLinecap="round"
@@ -676,12 +707,14 @@ const ContentROICalculator = () => {
                       />
                     </svg>
 
-                    <div className="w-[450px] absolute hidden group-hover:block bg-gray-800 text-white text-sm rounded px-3 py-2 z-10 bottom-6 left-32 -translate-x-1/2">
-                      <p>
-                        Set your expected timeline for seeing results or getting
-                        deliverables.
-                      </p>
-                    </div>
+                    {showTooltip && (
+                      <div className="max-w-md min-w-[300px] whitespace-normal absolute bg-gray-800 text-white text-sm rounded px-3 py-2 z-10 ml-36 bottom-6 left-1/2 -translate-x-1/2">
+                        <p>
+                          Set your expected timeline for seeing results or
+                          getting deliverables.
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </label>
                 <div ref={dropdownRef} className="relative h-20 ">
