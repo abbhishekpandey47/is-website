@@ -698,7 +698,7 @@ let postMetaData = [
         slug: "content-marketing-metrics",
         description: "Wondering why your content isn’t increasing the product adoption rate? Start tracking these 6 key content metrics to drive conversions through content marketing.",
         ogImage: "/PostImages/content-marketing-metrics/cmm1.png",
-        publishedOn: "2025-05-06",
+        publishedOn: "2025-05-09",
         authorId: "author0004",
         category: "Informational",
         metaDescription: "Wondering why your content isn’t increasing the product adoption rate? Start tracking these 6 key content metrics to drive conversions through content marketing."
