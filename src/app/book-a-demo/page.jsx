@@ -484,11 +484,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-[50%] py-4 px-6 rounded-xl flex items-center justify-center font-medium text-lg transition-all ${
-                    isSubmitting
-                      ? "bg-gray-600 cursor-not-allowed"
-                      : "bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white"
-                  }`}
+                  className="w-[50%] py-4 px-6 rounded-xl flex items-center justify-center font-medium text-lg transition-all bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white"
                   // style={{
                   //   backgroundColor: "#1a1921",
                   //   backgroundImage:
