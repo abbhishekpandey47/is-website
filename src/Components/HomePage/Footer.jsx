@@ -98,7 +98,7 @@ const Footer = () => {
               <h3 className="font-bold mb-2 mt-5">Mentioned</h3>
               <ul className="space-y-3">
                 <li>
-                  <div className="flex items-center justify-center flex-grow gap-0 sm:gap-2 text-xs sm:text-sm md:text-base">
+                  <div className="items-center justify-center flex-grow ">
                     <Link
                       href="https://content.techgig.com/leadership/revolutionizing-engineering-content-infrasitys-approach-to-developer-focused-resources/articleshow/120793276.cms"
                       target="_blank"
@@ -118,7 +118,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="/services/technical-writing-services"
-                    className="hover:underline"
+                    className="hover:underline lg:mr-2"
                   >
                     Technical Writing Services
                   </a>
