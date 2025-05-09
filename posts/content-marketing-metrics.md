@@ -12,15 +12,15 @@ But before we dive into the metrics, let us understand the core reasons why trac
 
 The primary purpose of a marketing metric is to **gauge the effectiveness of your content marketing efforts**. However, there are some other reasons why it is important for B2B SaaS startups to track content marketing metrics:
 
-1. You Will Know Which Content Is Actually Driving Product Adoption
+### 1. You Will Know Which Content Is Actually Driving Product Adoption
    
 You might publish a product doc or technical blog explaining how to use your SaaS product, which is great for attracting the right audience. But without tracking clicks on your "_Start Free Trial_" or "_View Docs_" CTA, you won't know if that specific article is actually encouraging your target users towards product adoption.
 
-2. You Get To Know Exactly What Your Audience Finds Valuable
+### 2. You Get To Know Exactly What Your Audience Finds Valuable
    
 For B2B SaaS startups, metrics like scroll depth and engagement time reveal which content truly holds attention. If users spend minutes on your integration guide but bounce from your thought leadership piece in seconds, you know exactly what to double down on and what to cut.
 
-3. You Know Exactly Which Content Needs To Be Optimized
+### 3. You Know Exactly Which Content Needs To Be Optimized
    
 Content marketing metrics highlight underperforming pages, whether it's low engagement or weak CTA clicks. These SaaS performance metrics help you focus on improving what's not working instead of rewriting everything blindly.
 
@@ -46,13 +46,13 @@ Average engagement time is the average time period the visitors/target users act
 
 Also, a high engagement time on a blog post or service page often correlates with content that has useful information, strong messaging, or an engaging structure. Low engagement time, on the other hand, could point to issues like poor intros, confusing layout, or irrelevant content for the target audience. 
 
-Google Analytics helps you identify the average engagement time for each web page. Below is a snapshot of how the tool has already calculated the average engagement time.
+Google Analytics helps you identify the average engagement time for each web page. Below is a snapshot of how the tool has already calculated the average engagement time of our blog and service pages.
 
 ![content marketing metrics - average engagement time](/PostImages/content-marketing-metrics/cmm2.png) 
 
 Monitoring engagement time helps you identify what's working, what needs rewriting, and where to focus your SEO and UX efforts. Because in SaaS, it's not just about traffic - it's about attention that converts.
 
-### Scroll Depth
+### 3. Scroll Depth
 
 Scroll depth is a content marketing metric that measures how far users scroll down a page, typically tracked in percentages like **25%, 50%, 75%, and 100%**. It helps you understand whether visitors are actually consuming the full content or dropping off midway. For B2B SaaS startups investing in content marketing, this is a key signal of content engagement and layout effectiveness.
 
@@ -60,7 +60,7 @@ You can track scroll depth using **Google Tag Manager** (GTM) and **Google Analy
 
 This metric also helps with strategic CTA placement. If most users are only reaching the 50% mark, placing your SaaS product CTA below that point means many will never see it. By analyzing scroll depth, you can reposition CTAs at points of high visibility, ensuring more users engage with your offering and improving the likelihood of conversions.
 
-### Traffic Sources And Medium
+### 4. Traffic Sources And Medium
 
 Traffic sources and mediums tell you how visitors reach your website. A source is where the traffic comes from - like Google, LinkedIn, ChatGPT, or YouTube. A medium describes how they got there, such as organic, referral, or direct. For example, Google (organic) means someone found you through a search, while LinkedIn (referral) means they followed a link to your site from a post or profile on LinkedIn.
 
@@ -70,7 +70,7 @@ I have attached a screenshot of the graph on Google Analytics, depicting the tra
 
 This metric is essential because it shows you exactly which traffic sources and mediums are driving qualified traffic and which ones are underperforming. It shows you exactly which sources are driving high-quality traffic and which ones aren't. For example, if you're getting significant website traffic from Google or LinkedIn, it's a clear signal to invest more in SEO or double down on your social content strategy.
 
-### Keyword Ranking
+### 5. Keyword Ranking
 
 Keyword ranking refers to the position your web page holds in Google's search results for a specific query. This content marketing metric can be analyzed using tools like SEMrush and Google Search Console.
 
@@ -84,7 +84,7 @@ You can see here that this article is ranking in the first position on the searc
 
 Keyword rankings determine how visible your content is and how likely it is to get clicks. Tracking them is essential for B2B SaaS startups because it shows whether your content is actually reaching the target audience it's intended for. Ranking high for the right keywords means your content is discoverable by users actively searching for solutions that your product solves.
 
-### Average Position
+### 6. Average Position
 
 Average position refers to the typical spot your web page appears in Google's Search Engine Result Pages for a specific set of keywords. It's a content marketing metric that can be determined using Google Search Console that reflects the overall search visibility of your page. **The lower the number, the better**. For example, a position of 1 means you're the top organic result, while a position of 7 means you're near the bottom of page one.
 
@@ -92,16 +92,16 @@ Going back to the previous example with Kubiya's article on "_Top 9 AI Tools for
 
 Let me tell you briefly how to measure SaaS content marketing metric (average position) using Google Search Console:
 
-- Go to the Performance section  
-- Click on Search Results  
-- Add a Page filter for the article's URL  
+- Go to the Performance section.  
+- Click on Search Results.  
+- Add a Page filter for the article's URL.  
 - You'll then see the Average Position metric calculated across all queries where the page appears in search engine results.
 
 Tracking the average position of your web page is important because it tells you how your content is performing in competitive search spaces. A strong average position means your content is not only discoverable by your target users but also trusted by Google's algorithm.
 
 ## Conclusion
 
-Measuring the content performance KPIs is important, especially for B2B SaaS startups where every content should drive conversions. Instead of relying on surface-level stats, focus on key content marketing metrics like CTA Click-Through Rate, Average Engagement Time, Scroll Depth, Traffic Sources and Medium, Keyword Ranking, and Average Position. These metrics show you what's working, what's not, and where to improve so your content drives real results, not just traffic.
+Measuring the content performance KPIs is important, especially for B2B SaaS startups where every content should drive conversions. Instead of relying on surface-level stats, focus on key content marketing metrics like _CTA Click-Through Rate, Average Engagement Time, Scroll Depth, Traffic Sources and Medium, Keyword Ranking, and Average Position_. These metrics show you what's working, what's not, and where to improve so your content drives real results, not just traffic.
 
 Not sure how to measure these content metrics? We'll analyze your content, identify what's working, and pinpoint exactly where to optimize for better results. Contact us for a **[Free Audit](https://www.infrasity.com/contact)**!
 
