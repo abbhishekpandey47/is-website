@@ -107,22 +107,22 @@ Not sure how to measure these content metrics? We'll analyze your content, ident
 
 ## FAQs
 
-### What's The Difference Between Average Position And Keyword Ranking?
+### 1. What's The Difference Between Average Position And Keyword Ranking?
 
 Keyword ranking means which keyword your webpage is ranking for on Google, like "AI tools for DevOps." Average position is the average rank your web page holds across specific keywords or queries, such as 1st or 3rd position in the search engine result page. One shows performance per keyword; the other gives a broader visibility snapshot.
 
-### How Often Should I Monitor My Content Marketing Metrics?
+### 2. How Often Should I Monitor My Content Marketing Metrics?
 
 Based on your goals, you can monitor your content marketing metrics monthly, quarterly, or annually.
 
-### What Is The Number One Content Marketing Metric?
+### 3. What Is The Number One Content Marketing Metric?
 
 All the content metrics are essential, but as a B2B SaaS startup, your core metric could be the CTA Click-Through Rate. It shows whether your content is not just being read but actually motivating users to take the next step toward conversion, like demo requests, signups, or product adoption.
 
-### What's A Good Scroll Depth?
+### 4. What's A Good Scroll Depth?
 
 A good scroll depth usually falls between 60% and 80%. This suggests that most visitors are actively engaging with your content and scrolling through a significant portion of the page, enough to reach key messaging or CTAs placed mid-way or lower on the page.
 
-### How Can I Use Traffic Source Data To Improve My Content Strategy?
+### 5. How Can I Use Traffic Source Data To Improve My Content Strategy?
 
 It's crucial to understand where your audience is coming from and whether they align with your target users. Traffic source data helps you identify if you're reaching your buyer personas. Based on that, you can create more relevant content and refine existing pages to reach better and connect with your ideal customers.
