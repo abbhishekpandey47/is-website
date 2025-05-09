@@ -103,6 +103,7 @@ const CRMAutomationPage = () => {
       {crmSections.map((section) => (
         <div
           key={section.id}
+          className="w-full mb-16"
           style={{
             background:
               "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
@@ -110,7 +111,7 @@ const CRMAutomationPage = () => {
         >
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-16"></div>
           <div
-            className="w-full max-w-full rounded-2xl p-8 relative overflow-hidden box-border mb-12"
+            className="w-full max-w-full rounded-2xl p-4 md:p-8 relative overflow-hidden box-border mb-12"
             style={{
               backgroundColor: "#141318",
               backgroundImage: `radial-gradient(circle at top right, #272b40 0%, transparent 80%)`,
@@ -148,22 +149,23 @@ const CRMAutomationPage = () => {
                       {section.title}
                     </h2>
                   </div>
-
                   <div className="flex flex-wrap gap-4 md:gap-6 mb-4 mx-3 md:mx-6">
                     <p className="text-gray-300 text-xl sm:text-lg md:text-base lg:text-2xl font-semibold">
                       {section.subtitle}
                     </p>
                   </div>
                 </div>
-                <div className="w-full md:w-1/2 md:pl-4 md:mt-12 md:mb-0">
-                  <div className="md:p-4 rounded-lg w-full lg:mb-12">
-                    <div className="w-full h-64 sm:h-80 md:h-85 rounded-md overflow-hidden relative">
+                <div className="w-full md:w-1/2 md:pl-4 mb-4 md:mb-0">
+                  <div className="p-2 md:p-4 rounded-lg w-full">
+                    <div className="w-full aspect-video relative rounded-md overflow-hidden">
                       <Image
                         src={section.videoSrc}
                         alt={section.title}
                         fill
-                        className="object-cover"
+                        className="object-contain"
                         sizes="(max-width: 768px) 100vw, 50vw"
+                        priority
+                        quality={90}
                       />
                     </div>
                   </div>
@@ -171,7 +173,7 @@ const CRMAutomationPage = () => {
               </div>
             </div>
 
-            <div className="border-t border-gray-700 mb-8"></div>
+            <div className="border-t border-gray-700 my-8"></div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {section.features.map((feature, index) => (

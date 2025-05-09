@@ -70,7 +70,7 @@ const Footer = () => {
                   </a>
                 </li>
               </ul>
-              <h3 className="font-bold mb-4 mt-8">Awards</h3>
+              <h3 className="font-bold mb-2 mt-5">Awards</h3>
               <ul className="space-y-3">
                 <li>
                   <div className="flex items-center justify-center flex-grow gap-0 sm:gap-2 text-xs sm:text-sm md:text-base">
@@ -91,6 +91,21 @@ const Footer = () => {
                         alt="Infra Logo"
                         className="w-[100%] lg:w-[80%] mt-2"
                       />
+                    </Link>
+                  </div>
+                </li>
+              </ul>
+              <h3 className="font-bold mb-2 mt-5">Mentioned</h3>
+              <ul className="space-y-3">
+                <li>
+                  <div className="flex items-center justify-center flex-grow gap-0 sm:gap-2 text-xs sm:text-sm md:text-base">
+                    <Link
+                      href="https://content.techgig.com/leadership/revolutionizing-engineering-content-infrasitys-approach-to-developer-focused-resources/articleshow/120793276.cms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      <span className="z-10">Recognized by TechGig</span>
                     </Link>
                   </div>
                 </li>

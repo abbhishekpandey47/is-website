@@ -489,22 +489,22 @@ export default function ContactPage() {
                       ? "bg-gray-600 cursor-not-allowed"
                       : "bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white"
                   }`}
-                  style={{
-                    backgroundColor: "#1a1921",
-                    backgroundImage:
-                      "linear-gradient(to bottom, rgba(18, 17, 23, 1), rgba(30, 28, 36, 0.9))",
-                    boxShadow:
-                      "0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    borderRadius: "18px",
-                    padding: "16px 20px",
-                    color: "rgba(255, 255, 255, 0.8)",
-                    transform: isHovered ? "translateY(-2px)" : "translateY(0)",
-                    transition: "all 0.2s ease-out",
-                    backdropFilter: "blur(5px)",
-                  }}
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)}
+                  // style={{
+                  //   backgroundColor: "#1a1921",
+                  //   backgroundImage:
+                  //     "linear-gradient(to bottom, rgba(18, 17, 23, 1), rgba(30, 28, 36, 0.9))",
+                  //   boxShadow:
+                  //     "0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05)",
+                  //   border: "1px solid rgba(255, 255, 255, 0.08)",
+                  //   borderRadius: "18px",
+                  //   padding: "16px 20px",
+                  //   color: "rgba(255, 255, 255, 0.8)",
+                  //   transform: isHovered ? "translateY(-2px)" : "translateY(0)",
+                  //   transition: "all 0.2s ease-out",
+                  //   backdropFilter: "blur(5px)",
+                  // }}
+                  // onMouseEnter={() => setIsHovered(true)}
+                  //onMouseLeave={() => setIsHovered(false)}
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center">
