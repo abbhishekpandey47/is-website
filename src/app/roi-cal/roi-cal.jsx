@@ -951,6 +951,18 @@ const ContentROICalculator = () => {
                     <div>
                       <p>Month 3: {blogPerPostQunt} Blogs</p>
                     </div>
+                    <div>
+                      <p className="text-[12px] text-gray-400 mt-4">
+                        Note: If you want {trafficGrowth}% traffic growth, you
+                        need to publish{" "}
+                        {trafficGrowth <= 30
+                          ? blogPerPostQunt
+                          : trafficGrowth <= 60
+                          ? blogPerPostQunt + 2
+                          : blogPerPostQunt + 4}{" "}
+                        blogs per month.
+                      </p>
+                    </div>
                   </div>
                 </div>
               ) : (
