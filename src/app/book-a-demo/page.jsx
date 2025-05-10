@@ -542,23 +542,9 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-[#4d51e0] w-[50%] py-4 px-6 rounded-xl flex items-center justify-center font-medium text-lg transition-all bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white"
-                  // style={{
-                  //   backgroundColor: "#1a1921",
-                  //   backgroundImage:
-                  //     "linear-gradient(to bottom, rgba(18, 17, 23, 1), rgba(30, 28, 36, 0.9))",
-                  //   boxShadow:
-                  //     "0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05)",
-                  //   border: "1px solid rgba(255, 255, 255, 0.08)",
-                  //   borderRadius: "18px",
-                  //   padding: "16px 20px",
-                  //   color: "rgba(255, 255, 255, 0.8)",
-                  //   transform: isHovered ? "translateY(-2px)" : "translateY(0)",
-                  //   transition: "all 0.2s ease-out",
-                  //   backdropFilter: "blur(5px)",
-                  // }}
-                  // onMouseEnter={() => setIsHovered(true)}
-                  //onMouseLeave={() => setIsHovered(false)}
+                  className={`w-[50%] py-4 px-6 rounded-xl flex items-center justify-center font-medium text-lg text-white transition-all duration-200 bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] hover:shadow-lg transform hover:-translate-y-1 ${
+                    isSubmitting ? "cursor-not-allowed opacity-80" : ""
+                  }`}
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center">
