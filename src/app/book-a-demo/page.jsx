@@ -9,6 +9,7 @@ export default function ContactPage() {
     phoneNumber: "",
     message: "",
     countryCode: "+91",
+    companyWebsite: "",
   });
   const [isHovered, setIsHovered] = useState(false);
 
@@ -97,6 +98,10 @@ export default function ContactPage() {
           name: "message",
           value: formData.message,
         },
+        {
+          name: "domain",
+          value: "https://" + formData.companyWebsite,
+        },
       ],
       context: {
         pageUri: window.location.href,
@@ -121,6 +126,7 @@ export default function ContactPage() {
           email: "",
           phoneNumber: "",
           message: "",
+          companyWebsite: "",
         });
         setIsSuccess(true);
         // Reset success message after 5 seconds
@@ -446,6 +452,58 @@ export default function ContactPage() {
                   )}
                 </div>
               </div>
+              <div className="mb-4">
+                <label className="block text-gray-300 mb-1">
+                  Company Website
+                </label>
+                <div className="flex w-full">
+                  <select
+                    // name="countryCode"
+                    // value={formData.countryCode}
+                    // onChange={handleChange}
+                    className="w-[88px] bg-[#0c102e] rounded-l pl-1 py-2 text-white focus:outline-none focus:ring-[0.5px] focus:ring-[#4f4bc6] border border-[#3d4058] border-r-0"
+                    style={{
+                      backgroundColor: "#1a1921",
+                      backgroundImage:
+                        "linear-gradient(to bottom, rgba(18, 17, 23, 1), rgba(30, 28, 36, 0.9))",
+                      boxShadow:
+                        "0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      color: "rgba(255, 255, 255, 0.8)",
+                      backdropFilter: "blur(5px)",
+                    }}
+                  >
+                    <option value="https://">https://</option>{" "}
+                  </select>
+
+                  <div className="flex w-full">
+                    <input
+                      type="text"
+                      name="companyWebsite"
+                      value={formData.companyWebsite}
+                      onChange={handleChange}
+                      inputMode="text"
+                      className={`flex-1 bg-[#0c102e] rounded-r px-1 py-2 text-white focus:outline-none focus:ring-[0.5px] focus:ring-[#4f4bc6] ${
+                        errors.phoneNumber
+                          ? "border border-red-500"
+                          : "border border-[#3d4058]"
+                      }`}
+                      placeholder="Your company website"
+                      style={{
+                        backgroundColor: "#1a1921",
+                        backgroundImage:
+                          "linear-gradient(to bottom, rgba(18, 17, 23, 1), rgba(30, 28, 36, 0.9))",
+                        boxShadow:
+                          "0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.05)",
+                        border: "1px solid rgba(255, 255, 255, 0.08)",
+                        padding: "16px 20px",
+                        color: "rgba(255, 255, 255, 0.8)",
+                        backdropFilter: "blur(5px)",
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
 
               <div className="mb-4">
                 <label className="block text-gray-300 mb-1">Message</label>
@@ -484,7 +542,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-[50%] py-4 px-6 rounded-xl flex items-center justify-center font-medium text-lg transition-all bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white"
+                  className="bg-[#4d51e0] w-[50%] py-4 px-6 rounded-xl flex items-center justify-center font-medium text-lg transition-all bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white"
                   // style={{
                   //   backgroundColor: "#1a1921",
                   //   backgroundImage:
