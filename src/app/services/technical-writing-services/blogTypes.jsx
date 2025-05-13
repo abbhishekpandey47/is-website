@@ -49,7 +49,7 @@ const blogTypes = [
     description:
       "REST API and SDK documentation with language-specific examples in Python, Go, and TypeScript—built to help developers authenticate, trigger actions, and query data with ease.",
     icon: <Briefcase className="h-7 w-7 text-[#5F64FF]" />,
-    href: "/services/technical-writing-services",
+    href: "/services/technical-writing-services/sdk-docs",
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ const blogTypes = [
     description:
       "Clear and structured product updates that highlight new features, improvements, and fixes—crafted to help users stay informed and enable smoother upgrades, demos, and usage",
     icon: <CheckSquare className="h-7 w-7 text-[#5F64FF]" />,
-    href: "/services/technical-writing-services",
+    href: "/services/technical-writing-services/release-notes",
   },
   {
     id: 6,
