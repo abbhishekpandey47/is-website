@@ -26,11 +26,6 @@ const AuthorBanner = React.memo(({ authorData }) => {
         {authorData.profilePic && (
           <div className="hidden max-md:flex justify-center items-center m-2">
             {/* Added descriptive alt text for accessibility */}
-            <img
-              src={authorData.profilePic}
-              alt={`Profile picture of ${authorData.name || "the author"}`} // Improved alt attribute
-              className="rounded-full w-20 h-20 xs:w-28 xs:h-28 sm:w-32 sm:h-32"
-            />
           </div>
         )}
         <div className="flex flex-col justify-center gap-y-2">

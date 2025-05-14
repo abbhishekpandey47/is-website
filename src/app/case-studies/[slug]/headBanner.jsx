@@ -2,10 +2,22 @@ import Image from "next/image";
 import React from "react";
 
 // React.memo to prevent unnecessary re-renders if props don't change
-const monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const monthArr = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 export default React.memo(function HeadBanner({ postData }) {
-
   // Use JavaScript's Date object for better date parsing
   const publishedDate = postData.publishedOn
     ? new Date(postData.publishedOn)
@@ -32,13 +44,15 @@ export default React.memo(function HeadBanner({ postData }) {
 
         {/* Use the Date object for better readability */}
         <p className="text-white text-sm mb-6">
-          {`${monthArr[publishedDate.getMonth()]} ${publishedDate.getDate()}, ${publishedDate.getFullYear()}`}
+          {`${
+            monthArr[publishedDate.getMonth()]
+          } ${publishedDate.getDate()}, ${publishedDate.getFullYear()}`}
         </p>
 
         <div className="flex items-center space-x-6 text-white">
           {/* Author Info */}
           <a
-            href={postData.authorLinkedin || "#"} 
+            href={postData.authorLinkedin || "#"}
             target="_blank" // Open the link in a new tab
             rel="noopener noreferrer" // Improves security
             className="flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105"
@@ -64,7 +78,6 @@ export default React.memo(function HeadBanner({ postData }) {
             </div>
           </a>
         </div>
-
       </div>
 
       {/* Right Section (Image Section) */}

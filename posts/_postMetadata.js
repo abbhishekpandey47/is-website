@@ -342,17 +342,48 @@ let postMetaData = [
         metaDescription: "SaaS growth with an optimized conversion funnel. Learn actionable strategies to drive leads, improve customer onboarding, and increase retention in this comprehensive guide."
     },
 
+   {
+  title: "Middleware and Infrasity: A Winning Partnership For Developer-Driven Content Success",
+  metatitle: "Case Study: Transforming Middleware’s Content Strategy for Greater Impact",
+  slug: "middleware-case-study",
+  description:
+    "Learn how Infrasity collaborated with Middleware to transform their content strategy, boosting SEO scores, enhancing user engagement, and driving traffic through technically accurate and developer-focused content.",
+  ogImage: "/PostImages/middleware-case-study/0.png",
+  publishedOn: "2025-01-12",
+  authorId: "author0001",
+  category: "Case Studies",
+  metaDescription:
+    "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions.",
+  stats: [
     {
-      title: "Middleware and Infrasity: A Winning Partnership For Developer-Driven Content Success",
-      metatitle: "Case Study: Transforming Middleware’s Content Strategy for Greater Impact",
-      slug: "middleware-case-study",
-      description: "Learn how Infrasity collaborated with Middleware to transform their content strategy, boosting SEO scores, enhancing user engagement, and driving traffic through technically accurate and developer-focused content.",
-      ogImage: "/PostImages/middleware-case-study/0.png",
-      publishedOn: "2025-1-12",
-      authorId: "author0001",
-      category: "Case Studies",
-      metaDescription: "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions."
-  },
+//         Organic Traffic - 8x Growth (64 to 594 - +828.13%) 
+// Organic Keywords - 7x Growth (106 to 865 - +715.09%)
+// Organic Keywords in Top 10 - 3x Growth (12 to 39 - +290%)
+      title: "Organic Traffic",
+      value: "8x Growth",
+      subtext: "(64 to 594 - +828.13%) ",
+      valueClass: "text-4xl md:text-5xl font-bold",
+    },
+    {
+      title: "Organic Keywords",
+      value: "7x Growth",
+      subtext: "(106 to 865 - +715.09%)",
+      valueClass: "text-4xl md:text-5xl font-bold",
+    },
+    {
+      title: "Organic Keywords in Top 10",
+      value: "3x Growth",
+      subtext: "(12 to 39 - +290%)",
+      valueClass: "text-4xl md:text-5xl font-bold",
+    },
+    // {
+    //   title: "Keywords in Positions 1–10",
+    //   value: "+98%",
+    //   subtext: "in 12 months",
+    //   valueClass: "text-4xl md:text-5xl font-bold",
+    // },
+  ],
+},
   {
       title: " 5x Growth Journey: How Developer-Focused Technical Content Scaled a B2B enterprise SaaS Business",
       metatitle: "Case Study: 5x Growth with Developer-Focused Content",
