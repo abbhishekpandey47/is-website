@@ -104,13 +104,10 @@ const PostPage = (props) => {
       <div className="pt-32 pb-12">
         <HeadBanner postData={postData} />
 
-        <Analytics postData={postData} />
-
         <div className="flex justify-center w-full pb-16 max-lg:flex-col">
           <div className="w-[17%] min-[1900px]:w-[0] 2xl:w-[13%] max-lg:w-full max-lg:pl-[8%] max-xl:w-[21%]">
             {<Outline content={postContent} />}
           </div>
-
           <div className="h-auto hidden max-lg:flex max-lg:justify-center">
             <div className="w-[84vw]">
               <img
@@ -123,8 +120,9 @@ const PostPage = (props) => {
               />
             </div>
           </div>
-
           <div className="w-[70%] min-[1900px]:w-[80%] max-lg:w-[80%] max-md:w-[96%] max-sm:ml-5 pt-2 lg:pt-15 flex justify-center flex-col items-start">
+            <Analytics postData={postData} />
+
             <article className="text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto">
               <div className="max-lg:w-[84vw] min-[1900px]:w-[60vw] max-[1537px]:w-[50vw]">
                 <Markdown
@@ -174,7 +172,7 @@ const PostPage = (props) => {
                 </Markdown>
               </div>
             </article>
-          </div>
+          </div>{" "}
         </div>
         <AuthorBanner authorData={authorObj} />
       </div>

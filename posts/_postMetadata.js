@@ -354,35 +354,7 @@ let postMetaData = [
   category: "Case Studies",
   metaDescription:
     "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions.",
-  stats: [
-    {
-//         Organic Traffic - 8x Growth (64 to 594 - +828.13%) 
-// Organic Keywords - 7x Growth (106 to 865 - +715.09%)
-// Organic Keywords in Top 10 - 3x Growth (12 to 39 - +290%)
-      title: "Organic Traffic",
-      value: "8x Growth",
-      subtext: "(64 to 594 - +828.13%) ",
-      valueClass: "text-4xl md:text-5xl font-bold",
-    },
-    {
-      title: "Organic Keywords",
-      value: "7x Growth",
-      subtext: "(106 to 865 - +715.09%)",
-      valueClass: "text-4xl md:text-5xl font-bold",
-    },
-    {
-      title: "Organic Keywords in Top 10",
-      value: "3x Growth",
-      subtext: "(12 to 39 - +290%)",
-      valueClass: "text-4xl md:text-5xl font-bold",
-    },
-    // {
-    //   title: "Keywords in Positions 1–10",
-    //   value: "+98%",
-    //   subtext: "in 12 months",
-    //   valueClass: "text-4xl md:text-5xl font-bold",
-    // },
-  ],
+ 
 },
   {
       title: " 5x Growth Journey: How Developer-Focused Technical Content Scaled a B2B enterprise SaaS Business",
@@ -393,7 +365,36 @@ let postMetaData = [
       publishedOn: "2025-1-21",
       authorId: "author0001",
       category: "Case Studies",
-      metaDescription: "Discover how we helped a B2B SaaS company achieve 5x growth with developer-focused content. This case study shares their journey and our winning strategies."
+      metaDescription: "Discover how we helped a B2B SaaS company achieve 5x growth with developer-focused content. This case study shares their journey and our winning strategies.",
+       stats: [
+    {
+//         Organic Traffic - 8x Growth (64 to 594 - +828.13%) 
+// Organic Keywords - 7x Growth (106 to 865 - +715.09%)
+// Organic Keywords in Top 10 - 3x Growth (12 to 39 - +290%)
+      title: "Organic Traffic",
+      value: "+828.13%",
+      subtext: "(64 to 594 - 8x Growth)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Organic Keywords",
+      value: "+715.09%",
+      subtext: "(106 to 865 - 7x Growth)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Organic Keywords in Top 10",
+      value: "+290%",
+      subtext: "(12 to 39 - 3x Growth)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    // {
+    //   title: "Keywords in Positions 1–10",
+    //   value: "+98%",
+    //   subtext: "in 12 months",
+    //   valueClass: "text-4xl md:text-5xl font-bold",
+    // },
+  ],
   },
   {
     title: "Content Marketing Strategy for SaaS Companies: a Masterclass in SaaS Marketing",
