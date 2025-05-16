@@ -24,6 +24,8 @@ To illustrate these best practices, I've included a release notes sample from on
 
 The title is more than just a headline; it's a navigational cue for your users. In the context of release notes, something like "May 2025" isn't just clean and concise; it helps users immediately understand which month's update they're reading.
 
+![product release notes title](/PostImages/product-release-notes/pr2.png) 
+
 ### 2. Summary 
 
 The summary is the hook of your release note. It highlights new features, enhancements, and bug fixes, helping busy users decide if they need to dive deeper.
@@ -34,6 +36,8 @@ For example, in the May 2025 release note from StackGen, you can see that the su
 
 Think of the version number as a checkpoint on your product's roadmap - it gives users clarity on which iteration they're working with. Whether they're curious about what's changed since their last login or simply want to know if an issue they faced is now resolved, the version number helps them track progress, verify updates, and stay confident about their experience.
 
+![product release notes version number](/PostImages/product-release-notes/pr3.png) 
+
 For example, "StackGen CLI Version v0.55.0 is now available!" tells users this is the latest CLI version and that what follows applies specifically to this update. No guesswork is needed.
 
 ### 4. Detailed Changelog (What's New, Enhanced, and Fixed)
@@ -43,6 +47,8 @@ The detailed changelog is where your users get the full picture - what's been ad
 Users often rely on product release notes to discover new features they can benefit from, see enhancements that streamline their workflow, and check if the bugs have been fixed. This clarity empowers users to make the most of each release.
 
 For example, in the StackGen update, the changelog highlights enhancements to Custom Module Versioning and Governance Enforcement, showing users how they can now manage infrastructure configurations more flexibly and maintain compliance with greater ease, directly relevant for teams handling complex environments.
+
+![product release notes detailed changelog](/PostImages/product-release-notes/pr4.png) 
 
 In some cases, especially when addressing critical issues, you may issue patch notes outside the regular release cycle. These are short, focused changelogs that communicate urgent bug fixes. Including them in the changelog or linking to them keeps users informed and reassured that problems are being actively addressed, even between major releases.
 
@@ -58,6 +64,8 @@ For product users, visuals aren't optional; they're essential. When you introduc
 
 Instead of relying solely on written descriptions, a visual grounds the change in reality. It shows the exact context - buttons, labels, and layout, so users can spot the feature as soon as they log in. This is especially useful in technical platforms where clarity and speed matter.
 
+![product release notes visuals](/PostImages/product-release-notes/pr5.png) 
+
 For instance, here is a screenshot of the new Resources tab that shows users exactly what to expect: a searchable, tabular view of infrastructure components with clear indicators for warnings and metadata. 
 
 ### 7. Command snippet 
@@ -66,17 +74,23 @@ For product users, especially developers, command snippets are a quick path to a
 
 This is especially essential in CLI-driven tools or automation-heavy workflows, where precision matters and time is limited. A well-written snippet doesn't just save effort; it builds confidence. It shows the correct usage, expected flags, and typical input, helping users avoid trial-and-error and integrate the feature smoothly into their pipeline.
 
-As you can see here, the CLI snippet makes it clear how to import a Terraform .tfstate file, either to create a new appStack or version an existing one. It communicates the what and the how in a single glance, accelerating adoption for infrastructure teams building compliant, automated pipelines.
+![product release notes command snippet](/PostImages/product-release-notes/pr6.png) 
+
+As you can see here, the CLI snippet makes it clear how to import a Terraform `.tfstate` file, either to create a new appStack or version an existing one. It communicates the what and the how in a single glance, accelerating adoption for infrastructure teams building compliant, automated pipelines.
 
 ### 8. Supported Resources
 
 Not every release note needs a "Supported Resources" section, but when it's relevant, it's critical. For products that interact with cloud platforms, APIs, or infrastructure components, users need to know what's now supported to decide whether an update matters to them.
+
+![product release notes supported resources](/PostImages/product-release-notes/pr7.png) 
 
 In the example above, StackGen highlights newly supported standalone Google Cloud Platform (GCP) and Azure resources. Rather than crowding the note with details, it links to a full list, keeping things clean while still offering depth for those who need it.
 
 ### 9. Known Issues
 
 If you list out known issues in product release notes, it will showcase transparency and respect for your customer's time. It will help them avoid dead ends, debug faster, and plan around limitations, especially when no fix is immediately available. This section is not about showcasing flaws; it's about building trust.
+
+![product release notes title](/PostImages/product-release-notes/pr8.png) 
 
 In the StackGen example, users are alerted that governance configurations may show unrelated teams due to a dropdown filtering bug. Since there's no workaround, this heads-up saves users from silent failures and confusion during setup.
 
