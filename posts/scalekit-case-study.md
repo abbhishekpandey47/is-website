@@ -90,6 +90,8 @@ Infrasity’s approach was built around understanding Scalekit’s audience and 
 
 Infrasity’s goal was to create content that clearly explained features like organization-specific auth, self-serve admin portal, automatic user activation and deactivation, single integration with multiple logins, etc., making them relevant and accessible for developers. We took a hands-on approach to the product, reaching out directly to the Scalekit team and then planning & developing each piece of informative and engaging content.
 
+![scalekit case study - infrasity's content creation workflow](/PostImages/scalekit-case-study/s4.png)
+
 Here’s a look at how we approached creating content that developers could connect with:
 
 ### 1. Research and Planning
