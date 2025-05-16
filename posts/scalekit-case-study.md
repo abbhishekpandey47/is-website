@@ -138,6 +138,6 @@ Through these efforts, Scalekit is set to strengthen its position with secure, c
 
 **Looking for similar success for your SaaS startup?**
 
-Book a **[Free Demo](https://calendly.com/meet-shan)** with us to discuss how Infrasity can help you achieve your content and growth goals.
+Book a **[Free Demo](https://www.infrasity.com/book-a-demo)** with us to discuss how Infrasity can help you achieve your content and growth goals.
 
 ![scalekit case study review/6.png)
