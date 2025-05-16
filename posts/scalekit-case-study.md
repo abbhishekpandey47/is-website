@@ -53,15 +53,15 @@ When we first partnered with Scalekit, our primary goal was to address several c
 
 We focused on simplifying Scalekit’s features through our tech content and highlighted its easy integration through pre-built connectors and customizable workflows. We also emphasized its real-time synchronization capabilities that streamline the authentication process. Furthermore, we positioned Scalekit effectively in the competitive market by showcasing how it addressed key industry needs, such as improving security, enhancing user access, and ensuring compliance with data privacy standards like SOC2 and ISO 27001.
 
-**Building a Content Strategy That Drives Results for B2B SaaS:** We worked closely with Scalekit to create a content calendar, ensuring a steady flow of blogs covering technical topics to reach a wider audience.
+**Building a content strategy that drives results for B2B SaaS startups:** We worked closely with Scalekit to create a content calendar, ensuring a steady flow of blogs covering technical topics to reach a wider audience.
 
 **Optimizing for SEO:** We tailored each piece of content to rank well in search engines, helping Scalekit attract more traffic and visibility online.
 
-**Simplifying Complex Features:** We focused on explaining Scalekit's core features, like SCIM and SAML support, in a way that was easy to understand for both technical and non-technical readers.
+**Simplifying complex features:** We focused on explaining Scalekit's core features, like SCIM and SAML support, in a way that was easy to understand for both technical and non-technical readers.
 
 Hence, the association between Scalekit and Infrasity began to strengthen as we partnered to enhance Scalekit’s online presence. This allowed Scalekit's internal team to focus on what they do best, that is to strengthen their platform while leaving the content creation to experts who could help them establish a strong online presence and connect with their developer audience.
 
-## Building a Content Strategy That Drives Results for B2B SaaS
+## Building a Content Strategy That Drives Results for B2B SaaS Startups
 
 To ensure Scalekit's content strategy was effective, we created a structured plan that combined technical depth with broad industry appeal. From detailed guides for experienced developers to insights for newcomers, the content was designed to engage a diverse audience. By highlighting Scalekit’s unique features and analyzing competitors, we created a strategy that resonated with readers and maximized visibility through SEO.
 
@@ -136,7 +136,7 @@ Looking ahead, Scalekit is committed to significantly expanding its content prod
 
 Through these efforts, Scalekit is set to strengthen its position with secure, customizable authentication solutions that enable quick enterprise-level deployments, bypassing lengthy development cycles. Infrasity will continue to partner with Scalekit to help them grow their content strategy, ensuring that they stay ahead in a competitive market and reach a wider developer audience.
 
-**Looking for similar success for your SaaS startup?**
+**Looking for similar success for your B2B SaaS startup?**
 
 Book a **[Free Demo](https://www.infrasity.com/book-a-demo)** with us to discuss how Infrasity can help you achieve your content and growth goals.
 
