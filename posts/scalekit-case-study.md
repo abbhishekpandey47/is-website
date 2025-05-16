@@ -4,11 +4,15 @@ When Scalekit, a platform built to simplify enterprise identity technologies lik
 
 Curious to find out how? Keep reading!
 
+![scalekit case study](/PostImages/scalekit-case-study/s1.png)
+
 ## Overview
 
 This case study highlights how Infrasity assisted Scalekit, a platform that simplifies enterprise identity technologies like SCIM and SAML, and strengthened its content strategy to reach wider B2B SaaS Customers. Scalekit recognized the need to produce more engaging, high-quality, deep technical content to increase its visibility and differentiate itself in a competitive identity management space facing tough competition from giants like WorkOS, Frontegg, Descope, and Okta. Scalekit partnered with Infrasity to create highly targeted content that addressed the specific needs of Developers, SREs, security engineers, and IAM Specialists, enabling Scalekit to establish itself as a trusted solution provider in the authentication and identity management space.
 
 Over the course of 9 months, this collaboration resulted in highly specialized tech content designed specifically for SaaS engineering teams, including Developers, IAM Specialists, and others like system administrators. The content addressed their technical needs and challenges, focusing on topics like SAML vs LDAP, JWT authentication, Google OAuth, identity management, and social login. This approach led to an 8x increase in website traffic. Furthermore, more than 470 targeted keywords ranked in the top search engine rankings, significantly boosting Scalekit’s visibility and positioning it ahead of its competitors.
+
+![scalekit case study - infrasity's impact](/PostImages/scalekit-case-study/s2.png)
 
 ## Engagement Milestones That Made a Difference
 
@@ -33,6 +37,8 @@ The tech content was developed with a clear goal, which is to improve Scalekit�
 As we progressed, we noticed steady growth in engagement and web traffic. The targeted content strategy paid off, positioning Scalekit as a trusted authority in enterprise identity solutions and helping it attract the right B2B audience. By delivering in-depth, value-driven tech content that addressed the specific needs of engineering teams and decision-makers, Scalekit strengthened its presence in a competitive SaaS market, differentiating itself as a go-to solution for identity management.
 
 Our partnership with Scalekit produced deep technical content with measurable results and clear improvements across multiple key areas like Social Login, XPath Validation, LDAP, B2B Identity Providers, and many more.
+
+![scalekit case study - scalekit's growth in 9 months](/PostImages/scalekit-case-study/s3.png)
 
 Here’s a look at how the content strategy impacted their business:
 
@@ -60,6 +66,8 @@ Hence, the association between Scalekit and Infrasity began to strengthen as we 
 To ensure Scalekit's content strategy was effective, we created a structured plan that combined technical depth with broad industry appeal. From detailed guides for experienced developers to insights for newcomers, the content was designed to engage a diverse audience. By highlighting Scalekit’s unique features and analyzing competitors, we created a strategy that resonated with readers and maximized visibility through SEO.
 
 A key part of this process was Scalekit’s Content Calendar, which provided both Scalekit and Infrasity with a clear roadmap of what would be published in the following month. This visibility was crucial in aligning efforts, ensuring we covered the right topics, and maintaining a steady publishing cadence.
+
+![scalekit case study - content calendar](/PostImages/scalekit-case-study/4.png)
 
 We prioritized content based on business goals and product timelines, ensuring that higher-priority content, such as blogs related to new product launches or key feature updates, was published first. For example, implementation-focused blogs like '[Implement Secure User Authentication Using Google Sign-In](https://www.scalekit.com/blog/implement-secure-authentication-using-google-sign-in)' are aligned with key product updates, helping developers integrate Scalekit’s solutions seamlessly. Meanwhile, foundational explainers like '[Understanding SAML vs. LDAP: Which Is Right for You?](https://www.scalekit.com/blog/saml-vs-ldap)' helped improve search visibility and educate potential users at earlier stages of the funnel.
 
@@ -130,4 +138,6 @@ Through these efforts, Scalekit is set to strengthen its position with secure, c
 
 **Looking for similar success for your SaaS startup?**
 
-Book a **[Free Demo](https://calendly.com/meet-shan)** to discuss how Infrasity can help you achieve your content and growth goals.
+Book a **[Free Demo](https://calendly.com/meet-shan)** with us to discuss how Infrasity can help you achieve your content and growth goals.
+
+![scalekit case study review/6.png)
