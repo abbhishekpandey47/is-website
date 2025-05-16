@@ -47,17 +47,11 @@ When we first partnered with Scalekit, our primary goal was to address several c
 
 We focused on simplifying Scalekit’s features through our tech content and highlighted its easy integration through pre-built connectors and customizable workflows. We also emphasized its real-time synchronization capabilities that streamline the authentication process. Furthermore, we positioned Scalekit effectively in the competitive market by showcasing how it addressed key industry needs, such as improving security, enhancing user access, and ensuring compliance with data privacy standards like SOC2 and ISO 27001.
 
-### Building a Content Strategy That Drives Results for B2B SaaS
+**Building a Content Strategy That Drives Results for B2B SaaS:** We worked closely with Scalekit to create a content calendar, ensuring a steady flow of blogs covering technical topics to reach a wider audience.
 
-We worked closely with Scalekit to create a content calendar, ensuring a steady flow of blogs covering technical topics to reach a wider audience.
+**Optimizing for SEO:** We tailored each piece of content to rank well in search engines, helping Scalekit attract more traffic and visibility online.
 
-### Optimizing for SEO
-
-We tailored each piece of content to rank well in search engines, helping Scalekit attract more traffic and visibility online.
-
-### Simplifying Complex Features
-
-We focused on explaining Scalekit's core features, like SCIM and SAML support, in a way that was easy to understand for both technical and non-technical readers.
+**Simplifying Complex Features:** We focused on explaining Scalekit's core features, like SCIM and SAML support, in a way that was easy to understand for both technical and non-technical readers.
 
 Hence, the association between Scalekit and Infrasity began to strengthen as we partnered to enhance Scalekit’s online presence. This allowed Scalekit's internal team to focus on what they do best, that is to strengthen their platform while leaving the content creation to experts who could help them establish a strong online presence and connect with their developer audience.
 
@@ -80,8 +74,6 @@ Additionally, we closely analyzed competitor strategies to ensure Scalekit’s c
 
 Infrasity’s approach was built around understanding Scalekit’s audience and delivering content that truly resonated with them. We focused on four key areas:
 
-Infrasity’s approach was built around understanding Scalekit’s audience and delivering content that truly resonated with them. We focused on three key areas:
-
 - **Insights from Competitors:** Scalekit shared what their competitors were covering, and we used that knowledge to create content that featured similar topics along with highlighting what set Scalekit apart in the market.
 - **SEO-Focused Writing:** Every blog was carefully crafted with search engine optimization in mind, targeting specific keywords to increase Scalekit’s online visibility and attract more organic traffic.
 - **Simplifying Complex Features:** We took complex topics like SCIM and SAML support and broke them down into easy-to-understand examples, making it simple for developers to see how they could apply Scalekit’s features in their organizations or products without major code changes.
@@ -89,6 +81,8 @@ Infrasity’s approach was built around understanding Scalekit’s audience and 
 ## How We Created Developer-Focused Content
 
 Infrasity’s goal was to create content that clearly explained features like organization-specific auth, self-serve admin portal, automatic user activation and deactivation, single integration with multiple logins, etc., making them relevant and accessible for developers. We took a hands-on approach to the product, reaching out directly to the Scalekit team and then planning & developing each piece of informative and engaging content.
+
+Here’s a look at how we approached creating content that developers could connect with:
 
 ### 1. Research and Planning
 
@@ -110,13 +104,11 @@ Our writing process emphasized clear storytelling. We started each post by intro
 
 Scalekit’s team was closely involved in reviewing drafts throughout the process. Their feedback helped us refine the content so that it perfectly aligned with their goals and messaging. In addition to their inputs, we ran plagiarism checks to maintain originality and performed AI checks to ensure the content was humanized and engaging. We also compiled and tested code snippets to ensure accuracy. This collaboration, along with quality control measures, was crucial in ensuring the final content met Scalekit’s standards.
 
-
-
 ## Outcome that positioned Scalekit as a Leader 
 
-Working with Infrasity brought clear, positive results for Scalekit. They now have a steady stream of blog posts that cover technical details keeping their audience engaged and informed. This regular flow of content helped improve their search engine ranking, with every blog hitting the SEO target and driving more organic traffic on its website.
+Working with Infrasity brought clear, positive results for Scalekit. They now have a steady stream of blog posts that cover technical details keeping their audience engaged and informed. This regular flow of content helped improve their search engine ranking, with every blog hitting the SEO target and driving more organic traffic to their website.
 
-We also took complex features like SCIM and SAML and broke them down into simple, easy-to-understand explanations, which helped attract a wider range of readers including developers and those new to the tech. By writing about topics their competitors were covering, Scalekit was able to highlight what makes them unique and stand out in the B2B enterprise space. All of these efforts helped Scalekit build a stronger online presence and position itself as a leader in their space.
+We also took complex features like SCIM and SAML and broke them down into simple, easy-to-understand explanations, which helped attract a wider range of readers, including developers and those new to the tech. By writing about topics their competitors were covering, Scalekit was able to highlight what makes them unique and stand out in the B2B enterprise space. All of these efforts helped Scalekit build a stronger online presence and position itself as a leader in their space.
 
 ## Outcome That Positioned Scalekit as a Leader
 
@@ -138,6 +130,4 @@ Through these efforts, Scalekit is set to strengthen its position with secure, c
 
 **Looking for similar success for your SaaS startup?**
 
-Book a [call with us now](https://calendly.com/meet-shan) to explore how  Infrasity can help you achieve your content and growth goals 
-
-![Scalekit Testi](/PostImages/scalekit-case-study/6.png)
+Book a **[Free Demo](https://calendly.com/meet-shan)** to discuss how Infrasity can help you achieve your content and growth goals.
