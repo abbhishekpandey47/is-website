@@ -357,10 +357,10 @@ let postMetaData = [
  
 },
   {
-      title: " 5x Growth Journey: How Developer-Focused Technical Content Scaled a B2B enterprise SaaS Business",
-      metatitle: "Case Study: 5x Growth with Developer-Focused Content",
+      title: "8x Growth Journey: How Developer-Focused Technical Content Scaled a B2B Enterprise SaaS Business",
+      metatitle: "Case Study: 8x Growth with Developer-Focused Content",
       slug: "scalekit-case-study",
-      description: "Discover how developer focused technical content prompted a 5x growth for Scalekit, a B2B SaaS enterprise. In this case study learn how targeted content creation can leverage substantial traffic growth and quality leads for your b2b SaaS enterprise.",
+      description: "Discover how developer-focused technical content prompted a 5x growth for Scalekit, a B2B SaaS enterprise. In this case study learn how targeted content creation can leverage substantial traffic growth and quality leads for your b2b SaaS enterprise.",
       ogImage: "/PostImages/scalekit-case-study/0.png",
       publishedOn: "2025-1-21",
       authorId: "author0001",
