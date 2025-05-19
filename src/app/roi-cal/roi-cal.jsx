@@ -7,6 +7,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 
 const ContentROICalculator = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [contentTeamExist, setContentTeamExist] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -212,7 +213,8 @@ const ContentROICalculator = () => {
   const handleCalculate = useCallback(() => {
     setIsLoading(true);
 
-    const { blogPosts, timeline, budget, domainExpertise } = formValues;
+    const { blogPosts, timeline, budget, domainExpertise, contentTeam } =
+      formValues;
 
     const { hasCalculated } = results;
 
@@ -259,9 +261,23 @@ const ContentROICalculator = () => {
       setError(null);
     }
 
-    let valInHouseCost = 7000 * timeline;
+    const blogPostsPerPersonPerMonth = 5;
+
+    let peopleNeededPerMonth = Math.ceil(
+      blogPosts / blogPostsPerPersonPerMonth
+    );
+
+    let valInHouseCost = 7000 * (timeline * peopleNeededPerMonth);
+
     valInHouseCost = (valInHouseCost + 7000 * 2) * 1.2;
     setTimelineInMonth(timeline);
+
+    if (contentTeam === "Yes") {
+      setContentTeamExist(true);
+      valInHouseCost = 0;
+    } else {
+      setContentTeamExist(false);
+    }
 
     const valSavings = valInHouseCost - valOutsourcedCost;
     const valSavingsPercentage = Math.round(
@@ -853,10 +869,12 @@ const ContentROICalculator = () => {
                           ${inHouseCost.toLocaleString()}
                         </span>
                       </div>
-                      <p className="text-gray-300 text-sm mt-1">
-                        ({timelineInMonth} months × $7,000/month) + (2-month
-                        ramp-up × $7,000/month), then × 1.2 overhead
-                      </p>
+                      {!contentTeamExist && (
+                        <p className="text-gray-300 text-sm mt-1">
+                          ({timelineInMonth} months × $7,000/month) + (2-month
+                          ramp-up × $7,000/month), then × 1.2 overhead
+                        </p>
+                      )}
                     </div>
 
                     <div className="border-b border-gray-700 pb-3 mb-3">
