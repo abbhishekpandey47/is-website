@@ -7,7 +7,9 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 
 const ContentROICalculator = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [contentTeamExist, setContentTeamExist] = useState(false);
+  //const [contentTeamExist, setContentTeamExist] = useState(false);
+  const [trafficGrowthBlogPost, setTrafficGrowthBlogPost] = useState(10);
+  const [domainExpertisResult, setDomainExpertisResult] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -43,6 +45,7 @@ const ContentROICalculator = () => {
   const [blogPerPost, setBlogPerPost] = useState(0);
   const [blogPerPostQunt, setblogPerPostQunt] = useState(0);
   const [timelineInMonth, setTimelineInMonth] = useState(0);
+  const [budgetError, setBudgetError] = useState(false);
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -182,6 +185,8 @@ const ContentROICalculator = () => {
     const budgetValue = valueOfBlogePost
       ? valueOfBlogePost * currValueOutSource
       : blogPosts * currValueOutSource;
+
+    setBudgetError(false);
     handleInputChange("budget", budgetValue);
   };
 
@@ -189,6 +194,13 @@ const ContentROICalculator = () => {
   const handleBudgetChange = useCallback(
     (e) => {
       const { domainExpertise } = formValues;
+
+      if (parseInt(e.target.value) < 495) {
+        setBudgetError(true);
+      } else {
+        setBudgetError(false);
+      }
+
       const value = e.target.value.replace(/[^\d]/g, "");
       handleInputChange("budget", value === "" ? "" : parseInt(value, 10) || 0);
 
@@ -213,7 +225,7 @@ const ContentROICalculator = () => {
   const handleCalculate = useCallback(() => {
     setIsLoading(true);
 
-    const { blogPosts, timeline, budget, domainExpertise, contentTeam } =
+    const { blogPosts, timeline, budget, domainExpertise, trafficGrowth } =
       formValues;
 
     const { hasCalculated } = results;
@@ -226,6 +238,12 @@ const ContentROICalculator = () => {
         handleOutput();
       }
 
+      return;
+    }
+
+    if (blogPosts <= 0) {
+      handleOperation("To proceed, select one or more posts.");
+      setIsLoading(false);
       return;
     }
 
@@ -261,22 +279,30 @@ const ContentROICalculator = () => {
       setError(null);
     }
 
-    const blogPostsPerPersonPerMonth = 5;
+    // let peopleNeededPerMonth = Math.ceil(
+    //   blogPosts / blogPostsPerPersonPerMonth
+    // );
+    // setContentTeamSize(peopleNeededPerMonth);
 
-    let peopleNeededPerMonth = Math.ceil(
-      blogPosts / blogPostsPerPersonPerMonth
-    );
+    if (domainExpertise) {
+      setDomainExpertisResult(true);
+    } else {
+      setDomainExpertisResult(false);
+    }
 
-    let valInHouseCost = 7000 * (timeline * peopleNeededPerMonth);
+    let valInHouseCost = timeline * 7000;
 
     valInHouseCost = (valInHouseCost + 7000 * 2) * 1.2;
     setTimelineInMonth(timeline);
 
-    if (contentTeam === "Yes") {
-      setContentTeamExist(true);
-      valInHouseCost = 0;
+    if (trafficGrowth > 0 && trafficGrowth <= 25) {
+      setTrafficGrowthBlogPost(10);
+    } else if (trafficGrowth > 25 && trafficGrowth <= 50) {
+      setTrafficGrowthBlogPost(20);
+    } else if (trafficGrowth > 50 && trafficGrowth <= 75) {
+      setTrafficGrowthBlogPost(30);
     } else {
-      setContentTeamExist(false);
+      setTrafficGrowthBlogPost(40);
     }
 
     const valSavings = valInHouseCost - valOutsourcedCost;
@@ -451,6 +477,11 @@ const ContentROICalculator = () => {
                     className="w-full pl-8 pr-4 py-3 border border-gray-700 rounded-lg bg-gray-800/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
                 </div>
+                {budgetError && (
+                  <div className="mt-2 text-red-500 text-sm flex items-center">
+                    Budget must be at least $495.
+                  </div>
+                )}
               </div>
 
               <div className="mb-5 group">
@@ -869,12 +900,11 @@ const ContentROICalculator = () => {
                           ${inHouseCost.toLocaleString()}
                         </span>
                       </div>
-                      {!contentTeamExist && (
-                        <p className="text-gray-300 text-sm mt-1">
-                          ({timelineInMonth} months × $7,000/month) + (2-month
-                          ramp-up × $7,000/month), then × 1.2 overhead
-                        </p>
-                      )}
+
+                      <p className="text-gray-300 text-sm mt-1">
+                        ({timelineInMonth} months × $7,000/month) + (2-month
+                        ramp-up × $7,000/month), then × 1.2 overhead
+                      </p>
                     </div>
 
                     <div className="border-b border-gray-700 pb-3 mb-3">
@@ -885,8 +915,10 @@ const ContentROICalculator = () => {
                         </span>
                       </div>
                       <p className="text-gray-300 text-sm mt-1">
-                        {blogPerPostQunt} blog posts/month × ${blogPerPost} per
-                        post
+                        {blogPerPostQunt} blog posts/month ×{" "}
+                        {domainExpertisResult
+                          ? "($495 per post + $45 per post for domain expertise)"
+                          : "$495 per post"}
                       </p>
                     </div>
 
@@ -960,17 +992,26 @@ const ContentROICalculator = () => {
                     <div>
                       <p>Month 3: {blogPerPostQunt} Blogs + 1 Case Study</p>
                     </div> */}
-                    <div className="mb-2">
-                      <p>Month 1: {blogPerPostQunt} Blogs</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                      {[0, 1, 2].map((colIndex) => (
+                        <div key={colIndex}>
+                          {Array.from({ length: 4 }).map((_, rowIndex) => {
+                            const month = colIndex * 4 + rowIndex + 1;
+                            if (month > timelineInMonth) return null;
+                            return (
+                              <div key={month} className="mb-2">
+                                <p className="text-gray-100 text-sm">
+                                  Month {month}: {blogPerPostQunt} Blogs
+                                </p>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ))}
                     </div>
-                    <div className="mb-2">
-                      <p>Month 2: {blogPerPostQunt} Blogs</p>
-                    </div>
+
                     <div>
-                      <p>Month 3: {blogPerPostQunt} Blogs</p>
-                    </div>
-                    <div>
-                      <p className="text-[12px] text-gray-400 mt-4">
+                      <p className="text-[12px] text-gray-300 mt-4">
                         {/* Note: If you want {trafficGrowth}% traffic growth, you
                         need to publish{" "}
                         {trafficGrowth <= 30
@@ -979,8 +1020,9 @@ const ContentROICalculator = () => {
                           ? blogPerPostQunt + 2
                           : blogPerPostQunt + 4}{" "}
                         blogs per month. */}
-                        Note: To hit 50% traffic growth, aim for 22 high-quality
-                        blog posts each month.
+                        Note: To hit {trafficGrowth}% traffic growth, aim for{" "}
+                        {trafficGrowthBlogPost} high-quality blog
+                        posts each month.
                       </p>
                     </div>
                   </div>
