@@ -143,8 +143,6 @@ const CalendarBooking = ({ onBookingComplete }) => {
     e.preventDefault();
     if (!validateUserInfo()) return;
 
-    // Here you would submit the booking data to your API
-    // For now, we'll just simulate success
     const bookingData = {
       date: selectedDate,
       time: selectedTime,
