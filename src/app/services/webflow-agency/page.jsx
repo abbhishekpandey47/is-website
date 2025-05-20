@@ -12,7 +12,7 @@ import FAQ from "@/app/services/service-video-production/FAQ";
 import BookDemo from "./bookDemo";
 import TestimonialSlider from "./Testimonials";
 import Webtable from "./table";
-import CalendlyButton from "./calendlyButton";
+import ContactForm from "./calendlyButton";
 import css5 from "./images/thecss/css1.png";
 import css4 from "./images/thecss/css6.png";
 import css3 from "./images/thecss/css3.png";
@@ -196,7 +196,7 @@ const page = () => {
           {isMobile && (
             <div className="flex flex-col md:flex-row items-center md:items-start">
               <div className="mb-4 md:mb-0">
-                <CalendlyButton name="Book a Demo" />
+                <ContactForm name="Book a Demo" />
               </div>
 
               <div className="flex items-center md:ml-4 space-x-4">
@@ -211,7 +211,7 @@ const page = () => {
           {!isMobile && (
             <div className="flex justify-center md:justify-center items-center">
               <div className="flex-col">
-                <CalendlyButton name="Book a Demo" />
+                <ContactForm name="Book a Demo" />
               </div>
               <div className="flex items-center ml-4 space-x-4">
                 <div className="h-6 border-l-2 border-gray-400"></div>
@@ -360,7 +360,7 @@ const page = () => {
               <Webtable />
               <div className="flex justify-center">
                 <div className="flex justify-center md:justify-start mt-4 font-semibold">
-                  <CalendlyButton name="Book a Demo" />
+                  <ContactForm name="Book a Demo" />
                 </div>
               </div>
             </div>
