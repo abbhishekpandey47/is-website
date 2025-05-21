@@ -753,7 +753,7 @@ let postMetaData = [
         metatitle: "Poor Documentation, Stalled Sales: 4 Red Flags To Watch",
         slug: "poor-documentation",
         description: "No matter how innovative your SaaS product is, poor documentation can impact the sales and revenue. Explore the four red flags of poor documentation here.",
-        ogImage: "/PostImages/poor-documentation/pd1.png",
+        ogImage: "/PostImages/poor-documentation/pd1.jpg",
         publishedOn: "2025-05-21",
         authorId: "author0004",
         category: "Informational",
