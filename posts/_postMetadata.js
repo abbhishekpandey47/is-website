@@ -748,6 +748,18 @@ let postMetaData = [
         metaDescription: "If you are a SaaS startup, start preparing release notes. Learn what they are, what all you need to write them, and how Google publishes its release notes."
     },
 
+    {
+        title: "Poor Documentation, Stalled Sales: 4 Red Flags To Watch Out",
+        metatitle: "Poor Documentation, Stalled Sales: 4 Red Flags To Watch",
+        slug: "poor-documentation",
+        description: "No matter how innovative your SaaS product is, poor documentation can impact the sales and revenue. Explore the four red flags of poor documentation here.",
+        ogImage: "/PostImages/poor-documentation/pd1.png",
+        publishedOn: "2025-05-21",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "No matter how innovative your SaaS product is, poor documentation can impact the sales and revenue. Explore the four red flags of poor documentation here."
+    },
+
 
 ];
 
