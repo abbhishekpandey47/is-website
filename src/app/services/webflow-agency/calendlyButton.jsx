@@ -1,14 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import ContactPage from "@/app/book-a-demo/page";
+import Image from "next/image";
 
 const CalendarBooking = ({ onBookingComplete }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
-  const [step, setStep] = useState(1); // 1: Calendar, 2: Time selection
+  const [step, setStep] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTimezone, setSelectedTimezone] = useState("UTC-06:00");
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
@@ -17,6 +18,155 @@ const CalendarBooking = ({ onBookingComplete }) => {
     phoneNumber: "",
   });
   const [errors, setErrors] = useState({});
+  const [selectedTimezone, setSelectedTimezone] = useState("UTC-07:00");
+  const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
+
+  const baseTimeSlotsPDT = [
+    "9:00 PM",
+    "9:30 PM",
+    "10:00 PM",
+    "10:30 PM",
+    "11:00 PM",
+    "2:00 AM",
+    "2:30 AM",
+    "3:00 AM",
+    "3:30 AM",
+    "4:00 AM",
+    "4:30 AM",
+    "5:00 AM",
+    "5:30 AM",
+    "6:00 AM",
+    "8:00 AM",
+    "8:30 AM",
+    "9:00 AM",
+    "9:30 AM",
+    "10:00 AM",
+    "10:30 AM",
+    "11:00 AM",
+    "11:30 AM",
+    "12:00 PM",
+  ];
+
+  const timezones = [
+    { value: "UTC-12:00", label: "(UTC-12:00) Baker Island" },
+    { value: "UTC-11:00", label: "(UTC-11:00) Samoa Standard Time" },
+    { value: "UTC-10:00", label: "(UTC-10:00) Hawaii Standard Time" },
+    { value: "UTC-09:30", label: "(UTC-09:30) Marquesas Islands" },
+    { value: "UTC-08:00", label: "(UTC-08:00) Alaska Daylight Time" },
+    { value: "UTC-07:00", label: "(UTC-07:00) Pacific Daylight Time (US)" },
+    { value: "UTC-06:00", label: "(UTC-06:00) Mountain Daylight Time (US)" },
+    { value: "UTC-05:00", label: "(UTC-05:00) Central Daylight Time (US)" },
+    { value: "UTC-04:00", label: "(UTC-04:00) Eastern Daylight Time (US)" },
+    { value: "UTC-03:00", label: "(UTC-03:00) Atlantic Daylight Time" },
+    { value: "UTC-02:30", label: "(UTC-02:30) Newfoundland Daylight Time" },
+    { value: "UTC-03:00", label: "(UTC-03:00) Brasilia" },
+    { value: "UTC-02:00", label: "(UTC-02:00) South Georgia" },
+    { value: "UTC-01:00", label: "(UTC-01:00) Cape Verde" },
+    { value: "UTC+00:00", label: "(UTC+00:00) Greenwich Mean Time" },
+    { value: "UTC+01:00", label: "(UTC+01:00) London Daylight Time" },
+    { value: "UTC+02:00", label: "(UTC+02:00) Paris Daylight Time" },
+    { value: "UTC+02:00", label: "(UTC+02:00) Cairo" },
+    { value: "UTC+03:00", label: "(UTC+03:00) Moscow" },
+    { value: "UTC+03:30", label: "(UTC+03:30) Tehran" },
+    { value: "UTC+04:00", label: "(UTC+04:00) Dubai" },
+    { value: "UTC+04:30", label: "(UTC+04:30) Kabul" },
+    { value: "UTC+05:00", label: "(UTC+05:00) Karachi" },
+    { value: "UTC+05:30", label: "(UTC+05:30) New Delhi (IST)" },
+    { value: "UTC+05:45", label: "(UTC+05:45) Kathmandu" },
+    { value: "UTC+06:00", label: "(UTC+06:00) Dhaka" },
+    { value: "UTC+06:30", label: "(UTC+06:30) Yangon" },
+    { value: "UTC+07:00", label: "(UTC+07:00) Bangkok" },
+    { value: "UTC+08:00", label: "(UTC+08:00) Singapore" },
+    { value: "UTC+08:45", label: "(UTC+08:45) Eucla" },
+    { value: "UTC+09:00", label: "(UTC+09:00) Tokyo" },
+    { value: "UTC+10:30", label: "(UTC+10:30) Adelaide Daylight Time" },
+    { value: "UTC+11:00", label: "(UTC+11:00) Sydney Daylight Time" },
+    { value: "UTC+11:00", label: "(UTC+11:00) Lord Howe Island" },
+    { value: "UTC+11:00", label: "(UTC+11:00) Solomon Islands" },
+    { value: "UTC+11:30", label: "(UTC+11:30) Norfolk Island" },
+    { value: "UTC+13:00", label: "(UTC+13:00) Auckland Daylight Time" },
+    { value: "UTC+13:45", label: "(UTC+13:45) Chatham Islands Daylight Time" },
+    { value: "UTC+13:00", label: "(UTC+13:00) Tonga" },
+    { value: "UTC+14:00", label: "(UTC+14:00) Kiritimati" },
+  ];
+
+  const timeToMinutes = (timeStr) => {
+    const [time, period] = timeStr.split(" ");
+    let [hours, minutes] = time.split(":").map(Number);
+
+    if (period === "PM" && hours !== 12) hours += 12;
+    if (period === "AM" && hours === 12) hours = 0;
+
+    return hours * 60 + minutes;
+  };
+
+  const minutesToTime = (minutes) => {
+    minutes = ((minutes % 1440) + 1440) % 1440;
+
+    let hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+
+    const period = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours || 12;
+
+    return `${hours}:${mins.toString().padStart(2, "0")} ${period}`;
+  };
+
+  const getTimezoneOffsetMinutes = (timezone) => {
+    const offsetMatch = timezone.match(/UTC([+-])(\d+):(\d+)/);
+    if (!offsetMatch) return 0;
+
+    const sign = offsetMatch[1] === "+" ? 1 : -1;
+    const hours = parseInt(offsetMatch[2]);
+    const minutes = parseInt(offsetMatch[3]);
+
+    return sign * (hours * 60 + minutes);
+  };
+
+  const convertTimeSlots = (targetTimezone) => {
+    const pdtOffsetMinutes = getTimezoneOffsetMinutes("UTC-07:00");
+    const targetOffsetMinutes = getTimezoneOffsetMinutes(targetTimezone);
+
+    const offsetDifference = targetOffsetMinutes - pdtOffsetMinutes;
+
+    return baseTimeSlotsPDT
+      .map((timeSlot) => {
+        const pdtMinutes = timeToMinutes(timeSlot);
+
+        const targetMinutes = (pdtMinutes + offsetDifference + 1440) % 1440;
+
+        return {
+          originalPDT: timeSlot,
+          convertedTime: minutesToTime(targetMinutes),
+          pdtOffset: pdtOffsetMinutes,
+          targetOffset: targetOffsetMinutes,
+          diffMinutes: offsetDifference,
+        };
+      })
+      .sort(
+        (a, b) =>
+          timeToMinutes(a.convertedTime) - timeToMinutes(b.convertedTime)
+      );
+  };
+
+  useEffect(() => {
+    const convertedSlots = convertTimeSlots(selectedTimezone);
+    setAvailableTimeSlots(convertedSlots);
+    setSelectedTime(null);
+  }, [selectedTimezone]);
+
+  const handleTimezoneChange = (e) => {
+    setSelectedTimezone(e.target.value);
+  };
+
+  const handleTimeSelection = (timeObject) => {
+    setSelectedTime(timeObject.convertedTime);
+    // console.log(
+    //   `Selected: ${timeObject.convertedTime} in ${selectedTimezone} (${timeObject.originalPDT} PDT)`
+    // );
+    setStep(3);
+  };
 
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const months = [
@@ -32,22 +182,6 @@ const CalendarBooking = ({ onBookingComplete }) => {
     "October",
     "November",
     "December",
-  ];
-
-  const timeSlots = [
-    "12:00 AM",
-    "12:30 AM",
-    "1:00 AM",
-    "1:30 AM",
-    "2:00 AM",
-    "6:30 PM",
-    "7:30 PM",
-    "9:00 PM",
-    "9:30 PM",
-    "10:00 PM",
-    "10:30 PM",
-    "11:00 PM",
-    "11:30 PM",
   ];
 
   const openModal = () => {
@@ -80,12 +214,12 @@ const CalendarBooking = ({ onBookingComplete }) => {
     setSelectedDate(date);
   };
 
-  const handleTimeSelection = (time) => {
-    setSelectedTime(time);
-  };
-  const handleTimezoneChange = (e) => {
-    setSelectedTimezone(e.target.value);
-  };
+  // const handleTimeSelection = (time) => {
+  //   setSelectedTime(time);
+  // };
+  // const handleTimezoneChange = (e) => {
+  //   setSelectedTimezone(e.target.value);
+  // };
   const goToTimeSelection = () => {
     if (selectedDate) {
       setStep(2);
@@ -109,7 +243,6 @@ const CalendarBooking = ({ onBookingComplete }) => {
       [name]: value,
     });
 
-    // Clear error for this field when user types
     if (errors[name]) {
       setErrors({
         ...errors,
@@ -321,47 +454,6 @@ const CalendarBooking = ({ onBookingComplete }) => {
     return days;
   };
 
-  const timezones = [
-    { value: "UTC-12:00", label: "(UTC-12:00) Baker Island" },
-    { value: "UTC-11:00", label: "(UTC-11:00) Samoa" },
-    { value: "UTC-10:00", label: "(UTC-10:00) Hawaii" },
-    { value: "UTC-09:30", label: "(UTC-09:30) Marquesas Islands" },
-    { value: "UTC-09:00", label: "(UTC-09:00) Alaska" },
-    { value: "UTC-08:00", label: "(UTC-08:00) Pacific Time (US)" },
-    { value: "UTC-07:00", label: "(UTC-07:00) Mountain Time (US)" },
-    { value: "UTC-06:00", label: "(UTC-06:00) Central Time (US)" },
-    { value: "UTC-05:00", label: "(UTC-05:00) Eastern Time (US)" },
-    { value: "UTC-04:00", label: "(UTC-04:00) Atlantic Time" },
-    { value: "UTC-03:30", label: "(UTC-03:30) Newfoundland" },
-    { value: "UTC-03:00", label: "(UTC-03:00) Brasilia" },
-    { value: "UTC-02:00", label: "(UTC-02:00) South Georgia" },
-    { value: "UTC-01:00", label: "(UTC-01:00) Cape Verde" },
-    { value: "UTC+00:00", label: "(UTC+00:00) London" },
-    { value: "UTC+01:00", label: "(UTC+01:00) Paris" },
-    { value: "UTC+02:00", label: "(UTC+02:00) Cairo" },
-    { value: "UTC+03:00", label: "(UTC+03:00) Moscow" },
-    { value: "UTC+03:30", label: "(UTC+03:30) Tehran" },
-    { value: "UTC+04:00", label: "(UTC+04:00) Dubai" },
-    { value: "UTC+04:30", label: "(UTC+04:30) Kabul" },
-    { value: "UTC+05:00", label: "(UTC+05:00) Karachi" },
-    { value: "UTC+05:30", label: "(UTC+05:30) New Delhi" },
-    { value: "UTC+05:45", label: "(UTC+05:45) Kathmandu" },
-    { value: "UTC+06:00", label: "(UTC+06:00) Dhaka" },
-    { value: "UTC+06:30", label: "(UTC+06:30) Yangon" },
-    { value: "UTC+07:00", label: "(UTC+07:00) Bangkok" },
-    { value: "UTC+08:00", label: "(UTC+08:00) Singapore" },
-    { value: "UTC+08:45", label: "(UTC+08:45) Eucla" },
-    { value: "UTC+09:00", label: "(UTC+09:00) Tokyo" },
-    { value: "UTC+09:30", label: "(UTC+09:30) Adelaide" },
-    { value: "UTC+10:00", label: "(UTC+10:00) Sydney" },
-    { value: "UTC+10:30", label: "(UTC+10:30) Lord Howe Island" },
-    { value: "UTC+11:00", label: "(UTC+11:00) Solomon Islands" },
-    { value: "UTC+11:30", label: "(UTC+11:30) Norfolk Island" },
-    { value: "UTC+12:00", label: "(UTC+12:00) Auckland" },
-    { value: "UTC+12:45", label: "(UTC+12:45) Chatham Islands" },
-    { value: "UTC+13:00", label: "(UTC+13:00) Tonga" },
-    { value: "UTC+14:00", label: "(UTC+14:00) Kiritimati" },
-  ];
   return (
     <>
       <button
@@ -398,9 +490,22 @@ const CalendarBooking = ({ onBookingComplete }) => {
               </svg>
             </button>
 
-            <div className="text-2xl font-bold text-center mb-4 mt-2">
-              {step === 1 && "Select a Date"}
-              {step === 2 && "Select a Time"}
+            <div className="text-xl font-bold text-center mb-4 mt-2">
+              {step === 1 && (
+                <div>
+                  <div className="rounded-full">
+                    <Image
+                      className="mx-auto mb-4 rounded-full"
+                      src="/logodata/infrasity_logo.png"
+                      alt="Meeting"
+                      width={150}
+                      height={100}
+                    />
+                  </div>
+                  Book a Time to Connect with Us
+                </div>
+              )}
+              {step === 2 && "Book a Time to Connect with Us"}
               {/* {step === 3 && "Complete Your Booking"} */}
               {step === 4 && "Booking Confirmed"}
             </div>
@@ -501,8 +606,8 @@ const CalendarBooking = ({ onBookingComplete }) => {
                         outline: "none",
                         boxShadow: "none",
                         transition: "all 0.2s",
-                        scrollbarWidth: "thin" /* Firefox */,
-                        scrollbarColor: "#3d4058 #1a1f4a" /* Firefox */,
+                        scrollbarWidth: "thin",
+                        scrollbarColor: "#3d4058 #1a1f4a",
                       }}
                       className="w-full text-sm bg-[#0c102e] border border-gray-700 rounded px-3 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] p-2 custom-scrollbar"
                     >
@@ -516,18 +621,18 @@ const CalendarBooking = ({ onBookingComplete }) => {
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto mb-4">
-                  {timeSlots.map((time) => (
+                  {availableTimeSlots.map((slot, index) => (
                     <div
-                      key={time}
-                      className={`p-2 text-center rounded-md cursor-pointer border border-gray-700
-                        ${
-                          selectedTime === time
-                            ? "bg-blue-600 text-white"
-                            : "hover:bg-gray-700"
-                        }`}
-                      onClick={() => handleTimeSelection(time)}
+                      key={index}
+                      onClick={() => handleTimeSelection(slot)}
+                      className={`p-2 text-center rounded-md cursor-pointer border border-gray-700 
+                ${
+                  selectedTime === slot
+                    ? "bg-blue-600 text-white"
+                    : "hover:bg-gray-700"
+                }`}
                     >
-                      {time}
+                      <div className="font-medium">{slot.convertedTime}</div>
                     </div>
                   ))}
                 </div>
