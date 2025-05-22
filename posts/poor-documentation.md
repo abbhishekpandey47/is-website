@@ -36,9 +36,7 @@ _Step 1: Connect your account.
 Step 2: Install the SDK.  
 Step 3: Start building._
 
-You can see there's no detail on how to authenticate, what settings to use, or how to know if it's working. The steps are too shallow - and now the user is stuck.
-
-This kind of gap creates unnecessary friction. Developers are forced to guess their way through the process, which leads to delays, support tickets, and frustration.
+You can see there's no detail on how to authenticate, what settings to use, or how to know if it's working. The steps are too shallow - and now the user is stuck. This kind of gap creates unnecessary friction. Developers are forced to guess their way through the process, which leads to delays, support tickets, and frustration.
 
 But the real cost shows up in your sales funnel. If a user can't get the product working during a free trial or proof of concept, they won't convert. Sales teams lose momentum. Opportunities stall - not because the product lacks value, but because the documentation didn't show users how to utilize it.
 
