@@ -2,9 +2,9 @@
 
 You've poured time, energy, and resources into building an innovative B2B SaaS product - one that solves real problems, streamlines complex workflows, and delivers measurable value to your product users. But here's the hard truth: if your documentation doesn't clearly guide them on how to use it, your product won't convert, retain, or scale as expected.
 
-A great SaaS product with poor documentation is like handing someone a GPS without instructions. It's pretty useful, but without knowing how to pin a destination, download offline maps, or avoid ferries, even the smartest features go unused, and the user is stuck before the journey begins.
+_A great SaaS product with poor documentation is like handing someone a GPS without instructions._ It's pretty useful, but without knowing how to pin a destination, download offline maps, or avoid ferries, even the smartest features go unused, and the user is stuck before the journey begins.
 
-Most B2B SaaS teams invest heavily in user experience, pricing models, and go-to-market execution. However, once a potential user signs up or a prospect begins evaluating your product, documentation becomes the first real touchpoint with the product experience itself. If it's unclear, incomplete, or too technical, users struggle, and those struggles show up later as churn, support load, or lost deals.
+Most B2B SaaS teams invest heavily in user experience, pricing models, and go-to-market execution. However, once a potential user signs up or a prospect begins evaluating your product, _documentation becomes the first real touchpoint with the product experience itself_. If it's unclear, incomplete, or too technical, users struggle, and those struggles show up later as churn, support load, or lost deals.
 
 In fact, **[research](https://documee.ai/hidden-costs-of-poor-documentation/)** shows that companies lose 20-30% of their revenue annually due to inefficiencies caused by poor documentation. For a B2B SaaS startup making $2M in ARR, that's $400K to $600K in preventable losses - not because the product doesn't deliver value, but because users never reach the "aha" moment.
 
@@ -13,6 +13,8 @@ Now that you have a clear picture of how poor documentation can impact your sale
 ## Red Flags: What Poor Documentation Looks Like
 
 Even the best SaaS products can lose their target customers if their documentation creates friction instead of confidence. If your documentation shows any of the following signs, it may be affecting product adoption, increasing churn, or overwhelming your support team.
+
+![poor documentation](/PostImages/poor-documentation/pd2.jpg) 
 
 ### 1. Updated Product, Outdated Docs
 
@@ -30,11 +32,11 @@ Your product may be improving, but if your docs don't keep pace, your growth won
 
 Imagine a user following your setup guide and has the following steps:
 
-Step 1: Connect your account.  
+_Step 1: Connect your account.  
 Step 2: Install the SDK.  
-Step 3: Start building.
+Step 3: Start building._
 
-There's no detail on how to authenticate, what settings to use, or how to know if it's working. The steps are too shallow - and now the user is stuck.
+You can see there's no detail on how to authenticate, what settings to use, or how to know if it's working. The steps are too shallow - and now the user is stuck.
 
 This kind of gap creates unnecessary friction. Developers are forced to guess their way through the process, which leads to delays, support tickets, and frustration.
 
