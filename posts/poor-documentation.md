@@ -6,7 +6,7 @@ _A great SaaS product with poor documentation is like handing someone a GPS with
 
 Most B2B SaaS teams invest heavily in user experience, pricing models, and go-to-market execution. However, once a potential user signs up or a prospect begins evaluating your product, _documentation becomes the first real touchpoint with the product experience itself_. If it's unclear, incomplete, or too technical, users struggle, and those struggles show up later as churn, support load, or lost deals.
 
-In fact, **[research](https://documee.ai/hidden-costs-of-poor-documentation/)** shows that companies lose 20-30% of their revenue annually due to inefficiencies caused by poor documentation. For a B2B SaaS startup making $2M in ARR, that's $400K to $600K in preventable losses - not because the product doesn't deliver value, but because users never reach the "aha" moment.
+In fact, **[research](https://documee.ai/hidden-costs-of-poor-documentation/)** shows that companies lose **20-30%** of their revenue annually due to inefficiencies caused by poor documentation. For a B2B SaaS startup making **$2M in ARR, that's $400K to $600K** in preventable losses - not because the product doesn't deliver value, but because users never reach the "aha" moment.
 
 Now that you have a clear picture of how poor documentation can impact your sales, support load, and long-term revenue growth, let's identify where the gaps are.
 
@@ -22,7 +22,7 @@ Let's say you've made some improvements to your product, such as new features, r
 
 What starts as a minor disconnect becomes a serious friction point during onboarding and evaluation. Confused users submit more tickets. Developers hit blockers. Prospects drop off. And even loyal customers begin to question the reliability of your product.
 
-The impact goes far beyond support queues. According to **[Stripe's Developer Coefficient report](https://stripe.com/files/reports/the-developer-coefficient.pdf)**, developers spend more than 17 hours a week on maintenance tasks like debugging and refactoring, often caused by poor documentation. That inefficiency contributes to $85 billion in lost productivity annually.
+The impact goes far beyond support queues. According to **[Stripe's Developer Coefficient report](https://stripe.com/files/reports/the-developer-coefficient.pdf)**, **developers spend more than 17 hours a week** on maintenance tasks like debugging and refactoring, often caused by poor documentation. That inefficiency contributes to **$85 billion in lost productivity annually**.
 
 For B2B SaaS companies, this isn't just a cost center; it's a revenue leak. When documentation doesn't reflect the product's actual state, trial users fail to activate, proof-of-concepts fail, and sales cycles stretch longer than they should.
 
@@ -87,9 +87,9 @@ This stat alone proves how critical documentation is to developer experience. Bu
 
 If you already have a stack of product documentation, identify the ones of poor quality, for example, if they have unclear step-by-step instructions, poor structure, or do not mention proper prerequisites before the users start utilizing your SaaS product. Additionally, it might be a case that they are outdated, meaning that your product has evolved but not the documentation.
 
-We at Infrasity understand the importance of high-quality product docs. Our team of developers and technical writers partners closely with your engineering teams to ensure your documentation evolves with every release.
+_We at Infrasity understand the importance of high-quality product docs. Our team of developers and technical writers partners closely with your engineering teams to ensure your documentation evolves with every release._
 
-We focus on structure, clarity, and usability, so your documentation actually helps users explore, adopt, and scale with your product. Because in the B2B SaaS space, it's not just the best product that wins; it's the one users can understand and deploy with confidence.
+_We focus on structure, clarity, and usability, so your documentation actually helps users explore, adopt, and scale with your product. Because in the B2B SaaS space, it's not just the best product that wins; it's the one users can understand and deploy with confidence._
 
 Book a **[Free Demo](https://www.infrasity.com/contact)** with us to discuss how we can help you with new product docs, refine the existing ones, and support you with other **[technical writing services](https://www.infrasity.com/services/technical-writing-services)** tailored to your needs.
 
