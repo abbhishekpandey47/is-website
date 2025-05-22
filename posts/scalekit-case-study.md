@@ -142,4 +142,4 @@ Through these efforts, Scalekit is set to strengthen its position with secure, c
 
 Book a **[Free Demo](https://www.infrasity.com/book-a-demo)** with us to discuss how Infrasity can help you achieve your content and growth goals.
 
-![scalekit case study review/6.png)
+![scalekit case study review](/PostImages/scalekit-case-study/6.png) 
