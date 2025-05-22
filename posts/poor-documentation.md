@@ -38,6 +38,8 @@ Step 3: Start building._
 
 You can see there's no detail on how to authenticate, what settings to use, or how to know if it's working. The steps are too shallow - and now the user is stuck. This kind of gap creates unnecessary friction. Developers are forced to guess their way through the process, which leads to delays, support tickets, and frustration.
 
+![poor documentation - unclear or incomplete steps](/PostImages/poor-documentation/pd4.jpg) 
+
 But the real cost shows up in your sales funnel. If a user can't get the product working during a free trial or proof of concept, they won't convert. Sales teams lose momentum. Opportunities stall - not because the product lacks value, but because the documentation didn't show users how to utilize it.
 
 Incomplete steps don't just slow down adoption - they quietly block revenue.
@@ -61,6 +63,8 @@ When your documentation doesn't follow the way users naturally explore your prod
 ### 4. Missing Prerequisites
 
 You can have a great onboarding flow - but if users don't know what's required before they begin, they'll fail before they even start.
+
+![poor documentation - missing perspectives](/PostImages/poor-documentation/pd3.jpg) 
 
 Missing prerequisites are one of the most common - and most frustrating - gaps in SaaS documentation. Users begin setup without realizing they need admin-level access, a specific SDK version, environment variables, or external dependencies. By the time they hit an error, they're already frustrated.
 
