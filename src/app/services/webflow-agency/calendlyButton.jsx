@@ -353,6 +353,24 @@ const CalendarBooking = ({ onBookingComplete }) => {
       if (response.ok) {
         setStep(4);
 
+        try {
+          await fetch("/api/send-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: userInfo.email,
+              firstName: userInfo.firstName,
+              lastName: userInfo.lastName,
+              date: selectedDate,
+              time: selectedTime,
+              timezone: selectedTimezone,
+              companyWebsite: userInfo.companyWebsite,
+            }),
+          });
+        } catch (emailErr) {
+          console.error("Failed to send confirmation email:", emailErr);
+        }
+
         // setTimeout(() => {
         //   closeModal();
         // }, 5000);
