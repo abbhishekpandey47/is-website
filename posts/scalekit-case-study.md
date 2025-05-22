@@ -43,9 +43,9 @@ Our partnership with Scalekit produced deep technical content with measurable re
 Here’s a look at how the content strategy impacted their business:
 
 - **Traffic Growth:** Over the course of 9 months, Scalekit saw an 8x increase in organic traffic, driven by the consistent release of targeted blog posts.
-- **SEO Success:** 470+ targeted keywords ranked in the top 50 positions and 27+ keywords in the top 10 positions on search engine results pages, significantly boosting Scalekit’s visibility.
+- **SEO Success:** 470+ targeted keywords ranked in the top 50 positions and 35+ keywords in the top 10 positions on search engine results pages, significantly boosting Scalekit’s visibility.
 - **Content Output:** During the collaboration, 22 blog posts were published, covering topics that ranged from feature highlights to industry insights, keeping Scalekit’s audience engaged.
-- **Audience Growth:** The number of new visitors to Scalekit’s blog increased from 64 visitors in August to 594 visitors in March, demonstrating the effectiveness of the content strategy.
+- **Audience Growth:** The number of new visitors to Scalekit’s blog increased from 64 visitors to 594 visitors in 9 months, demonstrating the effectiveness of the content strategy.
 
 ## Action Plan for Achieving Scalekit’s Goals
 
