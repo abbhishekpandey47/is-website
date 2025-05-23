@@ -47,7 +47,7 @@ const formatTimezoneForGoogle = (timezone) => {
 
   
   if (timezone.includes('/')) {
-    return timezone; // IANA timezone name
+    return timezone; 
   }
   
   if (timezone.startsWith('UTC')) {
@@ -180,7 +180,7 @@ export default async function handler(req, res) {
       hour12: true,
     });
 
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport()({
       service: "gmail",
       auth: {
         user: process.env.EMAIL_USER,

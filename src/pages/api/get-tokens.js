@@ -4,8 +4,9 @@ const open = require('open');
 const readline = require('readline');
 
 const oAuth2Client = new google.auth.OAuth2(
-
-  'http://localhost:3000/auth/google/callback'
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_CLIENT_SECRET,
+  process.env.GOOGLE_REDIRECT_URI
 );
 
 const SCOPES = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.events'];
