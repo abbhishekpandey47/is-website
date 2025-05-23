@@ -180,7 +180,7 @@ export default async function handler(req, res) {
       hour12: true,
     });
 
-    const transporter = nodemailer.createTransport()({
+    const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.EMAIL_USER,
