@@ -653,7 +653,7 @@ const ContentROICalculator = () => {
                 <label className="block text-gray-300 mb-2">
                   Do you have an existing content team?
                   <TooltipIcon
-                    description="Tell us if you already have writers, editors, or strategists on your team."
+                    description="Tell us if you already have writers, editors, or strategists in your team."
                     width="280px"
                   />
                 </label>
@@ -903,7 +903,7 @@ const ContentROICalculator = () => {
 
                       <p className="text-gray-300 text-sm mt-1">
                         ({timelineInMonth} months × $7,000/month) + (2-month
-                        ramp-up × $7,000/month), then × 1.2 overhead
+                        ramp-up × $7,000/month) × 1.2 overhead
                       </p>
                     </div>
 
@@ -915,7 +915,8 @@ const ContentROICalculator = () => {
                         </span>
                       </div>
                       <p className="text-gray-300 text-sm mt-1">
-                        {blogPerPostQunt} blog posts/month ×{" "}
+                        {timelineInMonth} months × {blogPerPostQunt} blog
+                        posts/month ×{" "}
                         {domainExpertisResult
                           ? "($495 per post + $45 per post for domain expertise)"
                           : "$495 per post"}
@@ -979,9 +980,9 @@ const ContentROICalculator = () => {
                   </div>
 
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">
+                    {/* <h3 className="text-xl font-bold mb-4">
                       Deliverables Estimate
-                    </h3>
+                    </h3> */}
                     {/* 
                     <div className="mb-2">
                       <p>Month 1: {blogPerPostQunt} Blogs + 1 Video</p>
@@ -992,7 +993,7 @@ const ContentROICalculator = () => {
                     <div>
                       <p>Month 3: {blogPerPostQunt} Blogs + 1 Case Study</p>
                     </div> */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                       {[0, 1, 2].map((colIndex) => (
                         <div key={colIndex}>
                           {Array.from({ length: 4 }).map((_, rowIndex) => {
@@ -1008,10 +1009,10 @@ const ContentROICalculator = () => {
                           })}
                         </div>
                       ))}
-                    </div>
+                    </div> */}
 
                     <div>
-                      <p className="text-[12px] text-gray-300 mt-4">
+                      <p className="text-[12px] text-gray-300">
                         {/* Note: If you want {trafficGrowth}% traffic growth, you
                         need to publish{" "}
                         {trafficGrowth <= 30

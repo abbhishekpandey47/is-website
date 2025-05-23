@@ -353,7 +353,7 @@ const Navbar = () => {
                       className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
                       target={"/roi-cal".includes("http") ? "_blank" : ""}
                     >
-                      {"Roi Calculator"}
+                      {"ROI Calculator"}
                     </Link>
                   </MenuItem>
                 </div>
@@ -446,7 +446,7 @@ const Navbar = () => {
                   checkVisitPage("/roi-cal");
                 }}
               >
-                Roi Calculator
+                ROI Calculator
               </Link>
             </li>
           </ul>
