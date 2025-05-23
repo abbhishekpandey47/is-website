@@ -32,40 +32,40 @@ const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
 const faqData = [
   {
     id: "1",
-    question:
-      " How can early-stage startups outsource developer documentation and DevTool content without hiring a full DevRel team?",
+    question: " Is this ROI calculator only for SaaS companies?",
     answer:
-      "Hiring takes months. With Infrasity, you get product-ready documentation from day one — without the overhead of salaries, onboarding, or dev time spent writing.",
+      "Not at all. This calculator is built for any company investing in content marketing, whether you're in SaaS, AI, edtech, or fintech. ",
   },
   {
     id: "2",
-    question: "Can Infrasity help us launch product docs faster",
+    question: "Why do you ask about domain expertise in the calculator?",
     answer:
-      "Absolutely. We’ve helped dozens of DevTool startups launch docs in under two weeks — from API references to full onboarding guides, ready for users and demos",
+      "Domain expertise is required because technical content isn’t one-size-fits-all. If your product involves infrastructure, APIs, machine learning, or developer workflows, it requires writers with real subject-matter knowledge. Without that expertise, content takes longer to produce, demands more revisions, and often misses the mark. Including this input helps the calculator give a more realistic view of the time, cost, and ROI impact based on your content’s complexity.",
   },
   {
     id: "3",
-    question: "How is Infrasity different from a content agency or freelancer?",
+    question: "What’s the ideal number of blogs per month to increase ROI?",
     answer:
-      "We live and breathe infra, DevOps, and SaaS. You don’t need to explain what an SDK, CLI, or deployment pipeline is. We already get it.",
+      "For early-stage B2B SaaS and AI startups, publishing at least 4 high-quality blogs per month is recommended. This keeps your site active, builds SEO momentum, and gives sales and product teams fresh assets to share. More important than quantity is consistency and relevance, blogs that answer real user questions, showcase use cases, or support onboarding tend to drive the strongest ROI.",
   },
   {
     id: "4",
-    question: "Will this actually move the GTM needle",
+    question: "How should I decide on my target traffic growth?",
     answer:
-      "Yes. Clear docs = faster onboarding = shorter time-to-value = more product adoption. It’s your silent GTM engine.",
+      "It depends on your stage and goals. For early-stage SaaS startups, a realistic growth target is 20-50% over 3-6 months, especially if you’re starting from a low content baseline. If you already have traffic momentum, even 10-15% monthly growth can be impactful. The key is to align traffic goals with what content can influence, like top-of-funnel visibility, branded search, and long-tail discovery. Set a target that’s ambitious but grounded in your current content volume and domain authority.",
   },
   {
     id: "5",
-    question: "What type of content should we start with",
+    question: "What’s the ideal timeline for calculating content ROI?",
     answer:
-      "Launch with what converts: onboarding guides, API references, how-to tutorials, and real use-case walkthroughs.",
+      "For most B2B SaaS and AI startups, a 3 - 6 month window is ideal. It gives your content enough time to rank, drive traffic, and support onboarding or sales workflows. Shorter timelines (1 - 2 months) work best for launch support or quick GTM validation, while longer ones (6 - 12 months) help model compounding SEO or PLG effects. Choose a timeframe that matches your current growth goals and runway.",
   },
   {
     id: "6",
-    question: "What technical content should a DevTool startup prioritize?",
+    question:
+      "What makes Infrasity different from traditional content agencies?",
     answer:
-      "Start with developer docs, onboarding guides, and real-world tutorials. These are the assets that reduce friction, explain your product clearly, and help users integrate fast.",
+      "Infrasity specializes in technical content for SaaS, AI, DevOps, observability, and developer-first products. Unlike generalist agencies, we combine domain expertise with GTM alignment, so every piece we ship is not just well-written, but also technically accurate and adoption-focused. We collaborate like a product team, think in sprints, and tailor content to your roadmap, not a static brief.",
   },
 ];
 
