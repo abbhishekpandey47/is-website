@@ -4,8 +4,7 @@ const open = require('open');
 const readline = require('readline');
 
 const oAuth2Client = new google.auth.OAuth2(
-  '784971397184-ruga2mv8if09skfdloc0e44f08srt38r.apps.googleusercontent.com',
-  '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',
+
   'http://localhost:3000/auth/google/callback'
 );
 
