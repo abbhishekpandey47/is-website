@@ -492,7 +492,7 @@ const CalendarBooking = ({ onBookingComplete }) => {
   return (
     <>
       <button
-        className="text-m font-semibold rounded-md flex justify-center items-center relative h-12 w-40 overflow-hidden border-0 bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] text-white shadow-lg transition-all hover:shadow-xl"
+        className="hidden md:inline-flex md:justify-center md:items-center text-sm quicksand-semibold rounded-[5px] before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40"
         onClick={openModal}
       >
         Book a Meeting
@@ -500,12 +500,25 @@ const CalendarBooking = ({ onBookingComplete }) => {
 
       {isModalOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-10"
+          style={{
+            zIndex: 9999,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
           onClick={(e) => {
             if (e.target === e.currentTarget) closeModal();
           }}
         >
-          <div className="bg-[#0c102e] text-white rounded-xl p-6 w-[90%] max-w-md relative">
+          <div
+            className="bg-[#0c102e] text-white rounded-xl p-6 w-[90%] max-w-md relative"
+            style={{
+              maxHeight: "100vh",
+              overflowY: "auto",
+              margin: "auto",
+            }}
+          >
             <button
               onClick={closeModal}
               className="absolute right-4 top-4 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
@@ -771,7 +784,7 @@ const CalendarBooking = ({ onBookingComplete }) => {
                         name="companyWebsite"
                         value={userInfo.companyWebsite}
                         onChange={handleInputChange}
-                        className={` bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
+                        className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
                         placeholder="https://"
                       />
                     </div>
