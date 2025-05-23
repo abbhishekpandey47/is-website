@@ -352,6 +352,31 @@ const CalendarBooking = ({ onBookingComplete }) => {
 
       if (response.ok) {
         setStep(4);
+        try {
+          const emailResponse = await fetch("/api/send-email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: userInfo.email,
+              firstName: userInfo.firstName,
+              lastName: userInfo.lastName,
+              date: selectedDate,
+              time: selectedTime,
+              timezone: selectedTimezone,
+              companyWebsite: userInfo.companyWebsite,
+            }),
+            // Add timeout to prevent hanging requests
+            signal: AbortSignal.timeout(30000), // 30 second timeout
+          });
+
+          if (!emailResponse.ok) {
+            const errorText = await emailResponse.text();
+            console.error("Email API error:", errorText);
+          }
+        } catch (emailErr) {
+          console.error("Failed to send confirmation email:", emailErr);
+          // Don't block the user flow, but maybe show a warning
+        }
 
         // setTimeout(() => {
         //   closeModal();
@@ -371,6 +396,7 @@ const CalendarBooking = ({ onBookingComplete }) => {
       setIsSubmitting(false);
     }
   };
+
   const getDaysInMonth = (year, month) => {
     return new Date(year, month + 1, 0).getDate();
   };
