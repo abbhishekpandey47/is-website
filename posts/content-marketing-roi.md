@@ -56,7 +56,7 @@ This is the revenue generated directly or indirectly from your content efforts. 
 
 The time period over which you measure ROI is crucial since content often takes time to generate results. Whether you track monthly, quarterly, or annually, consistency helps you assess growth and make informed decisions.
 
-## How to Calculate Content Marketing ROI Percentage
+## Now, Let Me Tell You How To Calculate ROI Percentage
 
 Content marketing ROI helps you understand whether your content efforts are generating more value than they cost. It's not just about publishing volume or engagement - it's about connecting your efforts to actual revenue outcomes.
 
