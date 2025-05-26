@@ -21,7 +21,7 @@ import { Button } from "@/Components/ui/button";
 const blogTypes = [
   {
     id: 1,
-    title: "How-to guides",
+    title: "New Box: How-to guides",
     description:
       "Actionable, step-by-step guides for developers to complete specific tasks—from configuring cloud infrastructure to integrating tools into their tech stack.",
     icon: <BookText className="h-7 w-7 text-[#5F64FF]" />,
@@ -29,6 +29,14 @@ const blogTypes = [
   },
   {
     id: 2,
+    title: "How-to guides",
+    description:
+      "Actionable, step-by-step guides for developers to complete specific tasks—from configuring cloud infrastructure to integrating tools into their tech stack.",
+    icon: <BookText className="h-7 w-7 text-[#5F64FF]" />,
+    href: "/services/technical-writing-services/how-to-guides",
+  },
+  {
+    id: 3,
     title: "CLI Docs",
     description:
       "Clear, task-oriented documentation for CLI tools—covering installation, authentication, configuration, and infrastructure deployment from the terminal",
@@ -36,7 +44,7 @@ const blogTypes = [
     href: "/services/technical-writing-services/cli-guide",
   },
   {
-    id: 3,
+    id: 4,
     title: "Product & Feature Docs",
     description:
       "​In-depth documentation that guides users through the implementation, configuration, and optimization of specific product features, including cloud integrations, CLI usage, networking, and more.",
@@ -44,7 +52,7 @@ const blogTypes = [
     href: "/services/technical-writing-services",
   },
   {
-    id: 4,
+    id: 5,
     title: "API/SDK documentation",
     description:
       "REST API and SDK documentation with language-specific examples in Python, Go, and TypeScript—built to help developers authenticate, trigger actions, and query data with ease.",
@@ -52,7 +60,7 @@ const blogTypes = [
     href: "/services/technical-writing-services/sdk-docs",
   },
   {
-    id: 5,
+    id: 6,
     title: "Release Notes",
     description:
       "Clear and structured product updates that highlight new features, improvements, and fixes—crafted to help users stay informed and enable smoother upgrades, demos, and usage",
@@ -60,7 +68,7 @@ const blogTypes = [
     href: "/services/technical-writing-services/release-notes",
   },
   {
-    id: 6,
+    id: 7,
     title: "Demo Accelerators",
     description:
       "Pre-built templates and GitHub repos designed to showcase real-world solutions during sales demos, speed up proof-of-concepts, and support developer onboarding.",
@@ -68,7 +76,7 @@ const blogTypes = [
     href: "/services/technical-writing-services",
   },
   {
-    id: 7,
+    id: 8,
     title: "Thought Leadership",
     description:
       "Content on cloud-native development, infrastructure automation, and the future of developer productivity, helping engineering teams optimize developer productivity.",
@@ -76,7 +84,7 @@ const blogTypes = [
     href: "/services/technical-writing-services",
   },
   {
-    id: 8,
+    id: 9,
     title: "Product Tutorials",
     description:
       "Hands-on content that walks through setting up CI/CD pipelines, release strategies, AI agentic workflows, and tool integrations — built to help engineering teams move from setup to execution, faster.",
@@ -84,7 +92,7 @@ const blogTypes = [
     href: "/services/technical-writing-services",
   },
   {
-    id: 9,
+    id: 10,
     title: "Developer Use Case Guides",
     description:
       "Developer onboarding guides turned from GitHub repos into blog-style tutorials—helping teams adopt new tools, integrate complex systems, and get to “Hello, World” faster..",
@@ -107,14 +115,14 @@ const BlogTypes = () => {
             Content Types
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {visibleBlogTypes.map((blogType) => (
               <Link
                 href={blogType.href}
                 key={blogType.id}
                 className="block transition-transform duration-300 hover:scale-105"
               >
-                <div className="relative glassEffect cursor-pointer">
+                <div className="h-[250px] relative glassEffect cursor-pointer">
                   <div className="p-6">
                     {/* Content inside the box */}
                     <div className="flex items-center mb-4">
