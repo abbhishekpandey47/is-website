@@ -95,6 +95,8 @@ A content marketing ROI calculator can help you estimate the potential returns f
 
 ### Key Things You Will Need to Input:
 
+You will need to input the following details in the marketing ROI Calculator:
+
 - **Monthly Content Budget**: How much are you willing to spend on blog content? (Here, the minimum cost for a blog post in the U.S. market is around **$495**.)
 
 - **Blog Posts per Month**: The number of blog posts you plan to publish each month. An ideal frequency would be at least **four blog posts a month**.
@@ -123,7 +125,7 @@ This ROI software provides valuable insights into these cost dynamics, allowing 
 
 ### Here's a Step-by-Step Walkthrough of the ROI Calculator
 
-To make it even easier, here's a brief walkthrough video of the Infrasity Content Marketing ROI Calculator. This demo will guide you through how to input your data and get an estimate of how much you need to spend.
+To make it even easier, here's a brief walkthrough video of the Content Marketing ROI Calculator. This demo will guide you through how to input your data and get an estimate of how much you need to spend.
 
 
 ## Conclusion
