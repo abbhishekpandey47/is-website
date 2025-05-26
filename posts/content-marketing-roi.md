@@ -127,15 +127,17 @@ This ROI software provides valuable insights into these cost dynamics, allowing 
 
 To make it even easier, here's a brief walkthrough video of the Content Marketing ROI Calculator. This demo will guide you through how to input your data and get an estimate of how much you need to spend.
 
-<iframe
-  width="100%"
-  height="399"
-  src="https://drive.google.com/file/d/1RUDiTizr44gw8A9rJxTi0m_v6YYMx8_6/preview"
-  frameborder="0"
-  allow="autoplay; encrypted-media"
-  allowfullscreen
-  title="Content Marketing ROI Calculator Walkthrough Video"
-/>
+<div style="display: flex; justify-content: center;">
+  <iframe
+    width="640"
+    height="399"
+    src="https://drive.google.com/file/d/1RUDiTizr44gw8A9rJxTi0m_v6YYMx8_6/preview"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen
+    title="Content Marketing ROI Calculator Walkthrough Video"
+  ></iframe>
+</div>
 
 ## Conclusion
 
