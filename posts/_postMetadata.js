@@ -232,14 +232,14 @@ let postMetaData = [
     },
     {
         title: "What are LSI Keywords and Why Use Them in 2025",
-        metatitle: "What are lsi keywords ​& how to find lsi keywords?​",
+        metatitle: "Stop Guessing What Users Want - Use LSI Keywords Instead",
         slug: "lsi-keywords",
         description: "Boost SEO rankings with LSI keywords. Discover how they enhance content relevance, improve search visibility, and align with search engine algorithms effectively.",
         ogImage: "/PostImages/lsi-keywords/banner.png",
         publishedOn: "2024-11-22",
         authorId: "author0003",
         category: "Informational",
-        metaDescription: "Boost SEO rankings with LSI keywords. Discover how they enhance content relevance, improve search visibility, and align with search engine algorithms effectively."
+        metaDescription: "Did you know that LSI keywords are the keywords that you should consider after short tail and long tail keywords? Read the article to learn about them."
     },
     {
         title: "Your Guide to Robots.txt: Simplifying SEO for Success",
@@ -357,10 +357,10 @@ let postMetaData = [
  
 },
   {
-      title: " 5x Growth Journey: How Developer-Focused Technical Content Scaled a B2B enterprise SaaS Business",
-      metatitle: "Case Study: 5x Growth with Developer-Focused Content",
+      title: "8x Growth Journey: How Developer-Focused Technical Content Scaled a B2B Enterprise SaaS Business",
+      metatitle: "Case Study: 8x Growth with Developer-Focused Content",
       slug: "scalekit-case-study",
-      description: "Discover how developer focused technical content prompted a 5x growth for Scalekit, a B2B SaaS enterprise. In this case study learn how targeted content creation can leverage substantial traffic growth and quality leads for your b2b SaaS enterprise.",
+      description: "Discover how developer-focused technical content prompted a 5x growth for Scalekit, a B2B SaaS enterprise. In this case study learn how targeted content creation can leverage substantial traffic growth and quality leads for your b2b SaaS enterprise.",
       ogImage: "/PostImages/scalekit-case-study/0.png",
       publishedOn: "2025-1-21",
       authorId: "author0001",
@@ -711,7 +711,68 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Want to boost conversions for your B2B SaaS product? Learn what product use case examples are, why they’re important, and how to create them effectively."
     },
-    
+
+    {
+        title: "The Tried-and-Tested Tech Blog Post Checklist That Turns Readers into Users",
+        metatitle: "The Tried-and-Tested Blog Post Checklist for Tech Content",
+        slug: "blog-post-checklist",
+        description: "A technical blog checklist acts as a key guide to ensure high-quality, well-structured content. Use this checklist to craft clear, accurate, and engaging technical blogs that resonate with your target audience and meet professional standards.",
+        ogImage: "/PostImages/blog-post-checklist/c1.png",
+        publishedOn: "2025-05-06",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "This is the only technical blog checklist you should consider when writing for developers - follow it to create clear and engaging content every time!"
+    },
+
+    {
+        title: "No One Talks About These 6 SaaS Content Marketing Metrics",
+        metatitle: "6 SaaS Content Marketing Metrics No One’s Talking About",
+        slug: "content-marketing-metrics",
+        description: "Wondering why your content isn’t increasing the product adoption rate? Start tracking these 6 key content metrics to enhance your content marketing efforts.",
+        ogImage: "/PostImages/content-marketing-metrics/cmm1.png",
+        publishedOn: "2025-05-09",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Wondering why your content isn’t increasing the product adoption rate? Start tracking these 6 key content metrics to enhance your content marketing efforts."
+    },
+
+    {
+        title: "Product Release Notes 101: The Secret to Writing Updates Users Actually Read",
+        metatitle: "Product Release Notes 101: Updates That Make Sense To Users",
+        slug: "product-release-notes",
+        description: "If you are a SaaS startup, start preparing release notes. Learn what they are, what all you need to write them, and how Google publishes its release notes.",
+        ogImage: "/PostImages/product-release-notes/pr1.png",
+        publishedOn: "2025-05-16",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "If you are a SaaS startup, start preparing release notes. Learn what they are, what all you need to write them, and how Google publishes its release notes."
+    },
+
+    {
+        title: "Poor Documentation, Stalled Sales: 4 Red Flags To Watch Out",
+        metatitle: "Poor Documentation, Stalled Sales: 4 Red Flags To Watch",
+        slug: "poor-documentation",
+        description: "No matter how innovative your SaaS product is, poor documentation can impact the sales and revenue. Explore the four red flags of poor documentation here.",
+        ogImage: "/PostImages/poor-documentation/pd1.jpg",
+        publishedOn: "2025-05-21",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "No matter how innovative your SaaS product is, poor documentation can impact the sales and revenue. Explore the four red flags of poor documentation here."
+    },
+
+    {
+        title: "Content Marketing ROI: The Growth Lever Most SaaS Teams Undervalue",
+        metatitle: "Content Marketing ROI: A Metric Every SaaS CMO Should Track",
+        slug: "content-marketing-roi",
+        description: "Not measuring content marketing ROI? You’re risking budget waste and missed growth. Learn how to track content ROI and drive real SaaS product adoption.",
+        ogImage: "/PostImages/content-marketing-roi/cmr1.png",
+        publishedOn: "2025-05-26",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Not measuring content marketing ROI? You’re risking budget waste and missed growth. Learn how to track content ROI and drive real SaaS product adoption."
+    },
+
+
 ];
 
 const sorted = () => {
