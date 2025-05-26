@@ -16,7 +16,7 @@ const fileList = [
 const MarqueePage = () => {
   const fileMemo = useMemo(() => fileList, [fileList]);
   return (
-    <div className="inset-0 flex justify-center items-center bg-[#171a3d]">
+    <div className="inset-0 flex justify-center items-center bg-[#171a3d] pb-20">
       <div
         className="w-[90%] max bg-gradient-to-br from-[#DEE4EA] to-[#ebeef1] pt-10 pb-2.5 card glass"
         style={{
@@ -30,7 +30,7 @@ const MarqueePage = () => {
           startups
         </h2>
 
-        <div className="flex gap-20 max-sm:gap-10 items-center mx-4">
+        <div className="flex gap-20 max-sm:gap-10 justify-center items-center pb-8 mx-4">
           {fileMemo.map((file, index) => {
             return (
               <div key={index} className="flex-shrink-0 w-auto">
