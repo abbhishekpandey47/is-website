@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "CLI Documentation Services for Dev Tools & SaaS",
+  title: "CLI Guide Documentation by Technical Writing Experts",
   description:
-    "Infrasity provides clear, task-based CLI documentation, guiding users through every command, configuration, and deployment step without guesswork.",
+    "Accurate and user-friendly CLI guides crafted by technical writing experts. Help developers interact with your tools efficiently using clear command-line docs.",
 };
 
 export default function PageLayout({ children }) {

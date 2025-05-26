@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 import { Typewriter } from "react-simple-typewriter";
 import ClutchBadge from "./clutch";
+import CalendarBooking from "../../app/calendarButton";
 
 const HeroHome = () => {
   const headingText = useMemo(() => {
@@ -108,12 +109,13 @@ const HeroHome = () => {
             </h2>
 
             <div className="items-center gap-4">
-              <Link
+              {/* <Link
                 href="/contact"
                 className="relative z-10 btn bg-btnprimary text-white hover:bg-btnprimaryhov quicksand-bold"
               >
                 Book a Free Demo
-              </Link>
+              </Link> */}
+              <CalendarBooking buttonText="Book a Free Demo" />
               <div className="flex justify-center mt-4">
                 <ClutchBadge />
               </div>

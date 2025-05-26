@@ -154,16 +154,6 @@ const page = () => {
     >
       <div className="min-h-screen bg-[#0a0a1a] text-white overflow-hidden relative">
         <section className="py-28 md:py-20 lg:py-32 relative text-center mt-">
-          {/* <div className="flex justify-center mt-20">
-            <div className="bg-black text-white px-5 py-3 rounded-full text-sm font-semibold flex items-center gap-2">
-              <span className="bg-white text-black rounded-full px-3 py-0.5">
-                {" INFRASITY "}
-              </span>
-              <span>5.0 Rating</span>
-              <span className="text-purple-600">★★★★★</span>
-            </div>
-          </div> */}
-
           <p className="font-medium text-lg m-3">
             A full-service webflow agency for B2B SaaS Companies
           </p>
@@ -245,38 +235,6 @@ const page = () => {
             <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
             <ServicesSection />
           </div>
-          {/* 
-          <div className="mb-24 pt-24">
-            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
-            <ScrollingServicesSection />
-          </div> */}
-
-          {/* Services Section */}
-          {/* <div
-            className="mb-24"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
-            }}
-          >
-            <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
-            <p className="max-w-5xl mx-auto mb-8 text-5xl font-semibold mt-10">
-              Great startups use their website to control the narrative early.
-            </p>
-            <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
-              We’ve built Webflow sites for teams now doing $40M+ in ARR.
-              <br />
-              If you’re raising, hiring, or launching — we’ll help you ship a
-              site that earns attention.
-              <br />
-              Backed by experience, shipped with speed, built to make people
-              care.
-              <br />
-            </p>
-            <div>
-              <CardMotion serviceArr={serviceArr} />
-            </div>
-          </div> */}
 
           {/* Why Choose Us Section */}
           <div
@@ -307,32 +265,7 @@ const page = () => {
                 </div>
               ))}
             </div>{" "}
-            {/* <div className="flex justify-center">
-              <div className="flex justify-center md:justify-start mt-8">
-                <CalendlyButton name="Book a Demo" />
-              </div>
-            </div> */}
           </div>
-
-          {/* <div
-            className="mb-24"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
-            }}
-          >
-            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
-            <p className="max-w-6xl mx-auto mb-5 text-4xl font-semibold mt-20">
-              Why Top B2B Startups Trust Us with Their Webflow Stack.
-            </p>
-            <p className="max-w-3xl mx-auto mb-8 text-base font-normal sm:text-lg">
-              From incubated DevTool startups to funded AI platforms — we’ve
-              shipped clean, conversion-ready Webflow sites that launch fast and
-              scale with your story.
-            </p>
-            <ServiceCardCarousel />
-          
-          </div> */}
           {/**  recent project */}
           <div
             className="mb-24"

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import BookDemo from "./bookDemo";
-import CalendlyButton from "./calendlyButton";
+import CalendarBooking from "../../calendarButton";
 
 export default function TabbedYouTubeCarousel() {
   const [activeTab, setActiveTab] = useState("allCategories");
@@ -144,7 +144,7 @@ export default function TabbedYouTubeCarousel() {
       </div>
 
       <div className="mt-5">
-        <CalendlyButton />
+        <CalendarBooking buttonText="Book a Demo" />
       </div>
     </div>
   );

@@ -21,32 +21,32 @@ export default function TrustedBySection() {
 
   const scrollContainerRef = useRef(null);
   const fileList = [
-    "mocha.png",
     "aviator.png",
-    "firstock-logo.webp",
+    "mocha.png",
     "cedana.png",
+    "mvp-grow.png",
     "cerbos.png",
-    "codegiant-infra-1.png",
+    "qodo-logo.png",
+    "Codegiant.png",
+    "Scalekit-logo.png",
     "cycloid.png",
-    "daytona-removebg-preview-e1721477918328.png",
-    "DevZero.png",
-    "env0-infra-1.png",
-    "firefly.png",
-    "Group-14967.png",
-    "images-removebg-preview.png",
-    "images__2_-removebg-preview.png",
-    "kapstan.png",
-    "kubiya.png",
-    "logo-landscape-removebg-preview.png",
-    "lovable-logo.png",
-    "Mask-group.png",
-    "middleware-logo.svg",
     "scalr.png",
-    "stackOne.svg",
-    "TravisCI-Full-Color.png",
+    "daytona.png",
+    "stackOne.png",
+    "DevZero.png",
     "terrateam.png",
-    "vapi.png",
-    "qodo-logo.svg",
+    "env0-infra-1.png",
+    "tracetest.png",
+    "firefly.png",
+    "TravisCI-Full-Color.png",
+    "firstock-logo.png",
+    "vapi-logo.png",
+    "kapstan.png",
+    "Zenml.png",
+    "Kubiya.png",
+    "lovable-logo.png",
+    "Meteor-ops.png",
+    "middleware-logo.png",
   ];
 
   // Create rows with 5 logos each
@@ -107,7 +107,7 @@ export default function TrustedBySection() {
                             width={100}
                             height={40}
                             className="max-h-10 w-auto text-gray-400 filter brightness-0 invert"
-                            src={`/trustedby/${company}`}
+                            src={`/trustedby-bw/bw/${company}`}
                             alt={`Trusted partner ${company}`}
                           />
                         </div>

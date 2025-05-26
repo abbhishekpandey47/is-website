@@ -1,5 +1,5 @@
 import React from "react";
-import CalendlyButton from "./cal";
+import CalendarBooking from "../../calendarButton";
 
 const StorytellingSection = () => {
   return (
@@ -22,7 +22,7 @@ const StorytellingSection = () => {
             No onboarding lag. No extra hires. Just shipping, faster.
           </p>
           <div className="flex justify-center md:justify-center lg:justify-start">
-            <CalendlyButton name="Get Started" />
+            <CalendarBooking buttonText="Get Started" />
           </div>
         </div>
 
