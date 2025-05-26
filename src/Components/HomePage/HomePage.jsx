@@ -5,7 +5,7 @@ import HomeMarquee from "./HomeMarquee";
 import HowWorks from "./HowWorks";
 import CustomerSucc from "./CustomerSucc";
 import HomeTesit from "./HomeTesit";
-import ReadyToStart from "./ReadyToStart";
+import ReadyToStart from "../../app/book-a-demo/cta";
 import HomeTimeLine from "./HomeTimeLine";
 import { ScrollTrigger, CustomEase } from "gsap/all";
 import { gsap } from "gsap";
@@ -65,7 +65,7 @@ const HomePage = () => {
       <CustomerSucc />
       <HomeTesit />
       <JoinCommunity />
-      <ReadyToStart />
+      <ReadyToStart check={true} />
       <FAQ />
     </div>
   );

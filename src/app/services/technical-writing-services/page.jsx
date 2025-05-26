@@ -23,9 +23,10 @@ import StorytellingSection from "./storyTelling";
 import FAQ from "@/Components/HomePage/FAQ";
 import FAQSection from "./FAQ";
 import TestimonialSlider from "./testimonials";
-import BookDemo from "./bookDemo";
+import BookDemo from "../../book-a-demo/cta";
 import CalendlyButton from "./cal";
 import ClutchBadge from "./clutch";
+import CalendarBooking from "../../calendarButton";
 
 const contentStyle = {
   height: "160px",
@@ -356,7 +357,7 @@ const page = () => {
               {isMobile && (
                 <div className="flex flex-col md:flex-row items-center md:items-start">
                   <div className="mb-4 md:mb-0">
-                    <CalendlyButton name="Book a Demo" />
+                    <CalendarBooking buttonText="Book a Demo" />
                   </div>
 
                   <div className="flex items-center md:ml-4 space-x-4">
@@ -371,7 +372,7 @@ const page = () => {
               {!isMobile && (
                 <div className="flex justify-center md:justify-start items-center">
                   <div className="flex-col">
-                    <CalendlyButton name="Book a Demo" />
+                    <CalendarBooking buttonText="Book a Demo" />
                   </div>
                   <div className="flex items-center ml-4 space-x-4">
                     <div className="h-6 border-l-2 border-gray-400"></div>
@@ -496,12 +497,20 @@ const page = () => {
           </div>
         </div>
       </div> */}
+      </div>
 
-        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-20 mb-12"></div>
-        <div className="w-full flex justify-center items-center">
+      <div
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+        <div className=" flex mt-8 justify-center items-center">
           <BookDemo />
         </div>
       </div>
+      <div className="mb-20"></div>
     </div>
   );
 };

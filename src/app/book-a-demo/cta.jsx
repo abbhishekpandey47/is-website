@@ -4,8 +4,9 @@ import ContactPage from "@/app/book-a-demo/page";
 import Image from "next/image";
 import { Zap } from "lucide-react";
 import { message } from "antd";
+import Link from "next/link";
 
-const CalendarBooking = ({ onBookingComplete }) => {
+const CalendarBooking = ({ onBookingComplete, check }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -572,32 +573,75 @@ const CalendarBooking = ({ onBookingComplete }) => {
 
   return (
     <>
-      <div className="w-[65%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] mt-16 -mb-10 rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg">
-        <section className=" w-full bg-[#0D0A1A] relative  rounded-2xl shadow-lg min-h-[50vh] md:min-h-[50vh] lg:min-h-[35vh] overflow-hidden ">
-          {/* Stars */}
-          <Stars />
+      {!check && (
+        <div className="w-[65%] bg-[linear-gradient(to_right,#1966ff,#d129ff,#8c1eff)] p-[2px] mt-16 -mb-10 rounded-2xl flex justify-center items-center shadow-2xl backdrop-blur-lg">
+          <section className=" w-full bg-[#0D0A1A] relative  rounded-2xl shadow-lg min-h-[50vh] md:min-h-[50vh] lg:min-h-[35vh] overflow-hidden ">
+            {/* Stars */}
+            <Stars />
 
-          {/* Content */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10">
-            <h1 className="text-3xlc text-white text-purple sm:text-3xl md:text-3xl quicksand-bold text-center mb-4">
-              Trusted by fastest growing B2B SaaS Startups.
-            </h1>
-            <p className="text-m text-white md:text-lg quicksand-medium text-gray text-center max-w-2xl mb-8">
-              Trusted by YC startups. Built for developer-first companies.
-            </p>
+            {/* Content */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10">
+              <h1 className="text-3xlc text-white text-purple sm:text-3xl md:text-3xl quicksand-bold text-center mb-4">
+                Trusted by fastest growing B2B SaaS Startups.
+              </h1>
+              <p className="text-m text-white md:text-lg quicksand-medium text-gray text-center max-w-2xl mb-8">
+                Trusted by YC startups. Built for developer-first companies.
+              </p>
 
-            <button
-              className="magic-button group rounded-md px-6 py-3 text-white font-medium text-m transition-all duration-300 hover:scale-105 "
-              onClick={openModal}
-            >
-              <div className="flex items-center space-x-2">
-                <Zap className="h-5 w-5 transition-transform group-hover:rotate-12" />
-                <span className="quicksand-medium">Book Demo</span>
-              </div>
-            </button>
+              <button
+                className="magic-button group rounded-md px-6 py-3 text-white font-medium text-m transition-all duration-300 hover:scale-105 "
+                onClick={openModal}
+              >
+                <div className="flex items-center space-x-2">
+                  <Zap className="h-5 w-5 transition-transform group-hover:rotate-12" />
+                  <span className="quicksand-medium">Book Demo</span>
+                </div>
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {check && (
+        <div className="py-12 rounded-lg max-xs:mx-4 max-sm:max-8 mx-12 my-12 gap-12 readytostart">
+          <div className="flex flex-col justify-center items-center gap-2">
+            <div>
+              <Image
+                width={100}
+                height={100}
+                loading="lazy"
+                src="/logodata/infra_logo_only.png"
+                className="w-auto h-auto"
+                alt="Infrasity_Logo"
+              />
+            </div>
+            <div className="flex flex-col items-center">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl text-white tracking-tight quicksand-bold">
+                Get started with Infrasity
+              </h2>
+              <p className="w-2/3 text-center pt-2 text-[wheat]">
+                Infrasity is the only platform which provides you with developer
+                focused content for your products or services
+              </p>
+            </div>
+            <div className="flex gap-5 pt-5">
+              <Link
+                target="_blank"
+                href="https://content.infrasity.com/"
+                className="btn bg-white text-gray-800 font-semibold py-2 px-4 rounded shadow hover:bg-gray-100 quicksand-semibold"
+              >
+                Outline Generator
+              </Link>
+              <button
+                onClick={openModal}
+                className="btn bg-black text-white font-semibold py-2 px-4 rounded shadow hover:bg-gray-900 quicksand-semibold"
+              >
+                Talk to Us
+              </button>
+            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      )}
 
       {isModalOpen && (
         <div

@@ -27,11 +27,12 @@ import Services from "./services.jsx";
 import ScrutGettingStarted from "./step.jsx";
 import TrustedBySection from "./TrustedBySection.jsx";
 import YouTubeCarousel from "./videoSection.jsx";
-import BookDemo from "./bookDemo.jsx";
+import BookDemo from "../../book-a-demo/cta.jsx";
 import FAQSection from "./FAQ.jsx";
 import DarkGlass from "./caseStudy.jsx";
 import TestimonialSlider from "./testimonials.jsx";
 import ContactForm from "./calendlyButton.jsx";
+import CalendarBooking from "../../calendarButton.jsx";
 import ClutchBadge from "./clutch.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
@@ -467,7 +468,7 @@ const page = () => {
         </div>
 
         <div className="flex justify-center lg:justify-start lg:ml-40">
-          <ContactForm name="Get Started" />
+          <CalendarBooking buttonText="Get Started" />
         </div>
 
         <div>
@@ -716,22 +717,18 @@ const page = () => {
         <TestimonialSlider />
       </div>
 
-      {/* <div className="flex flex-col gap-10 mt-24 mb-16"
+      <div
         style={{
-          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
         }}
-        
       >
-        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-
-
-      <ReadyToStart />
-      </div> */}
-
-      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-12 mb-12"></div>
-      <div className="w-full flex justify-center items-center">
-        <BookDemo />
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+        <div className=" flex mt-8 justify-center items-center">
+          <BookDemo />
+        </div>
       </div>
+      <div className="mb-20"></div>
     </div>
   );
 };

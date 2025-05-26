@@ -4,7 +4,7 @@ import ContactPage from "@/app/book-a-demo/page";
 import Image from "next/image";
 import { message } from "antd";
 
-const CalendarBooking = ({ onBookingComplete }) => {
+const CalendarBooking = ({ onBookingComplete, buttonText }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -495,7 +495,7 @@ const CalendarBooking = ({ onBookingComplete }) => {
         className="hidden md:inline-flex md:justify-center md:items-center text-sm quicksand-semibold rounded-[5px] before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40"
         onClick={openModal}
       >
-        Book a Meeting
+        {buttonText || "Book a Meeting"}
       </button>
 
       {isModalOpen && (
@@ -512,11 +512,12 @@ const CalendarBooking = ({ onBookingComplete }) => {
           }}
         >
           <div
-            className="bg-[#0c102e] text-white rounded-xl p-6 w-[90%] max-w-md relative"
+            className="bg-[#0c102e] text-white rounded-xl p-6 relative"
             style={{
-              maxHeight: "100vh",
+              width: "90vw",
+              maxWidth: "28rem", // equivalent to max-w-md
+              maxHeight: "90vh",
               overflowY: "auto",
-              margin: "auto",
             }}
           >
             <button
