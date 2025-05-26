@@ -760,6 +760,18 @@ let postMetaData = [
         metaDescription: "No matter how innovative your SaaS product is, poor documentation can impact the sales and revenue. Explore the four red flags of poor documentation here."
     },
 
+    {
+        title: "Content Marketing ROI: The Growth Lever Most SaaS Teams Undervalue",
+        metatitle: "Content Marketing ROI: A Metric Every SaaS CMO Should Track",
+        slug: "content-marketing-roi",
+        description: "Not measuring content marketing ROI? You’re risking budget waste and missed growth. Learn how to track content ROI and drive real SaaS product adoption.",
+        ogImage: "/PostImages/content-marketing-roi/cmr1.png",
+        publishedOn: "2025-05-26",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Not measuring content marketing ROI? You’re risking budget waste and missed growth. Learn how to track content ROI and drive real SaaS product adoption."
+    },
+
 
 ];
 
