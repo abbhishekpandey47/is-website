@@ -20,7 +20,7 @@ Not measuring your content marketing ROI is like shooting arrows without a targe
 
 ![content marketing roi - product adoption](/PostImages/content-marketing-roi/cmr2.jpg) 
 
-You want more users to discover the product, understand how it works, and reach activation faster. Whether it's technical blog posts, product documentation, or white papers, your content should be guiding users through the ToFu, MoFu, BoFu stages of the marketing funnel and helping them integrate your product into their workflow.
+You want more users to discover the product, understand how it works, and reach activation faster. Whether it's technical blog posts, product documentation, or white papers, your content should be guiding users through the **[ToFu, MoFu, BoFu](https://www.infrasity.com/blog/tofu-mofu-bofu-marketing)** stages of the marketing funnel and helping them integrate your product into their workflow.
 
 But if you're not measuring ROI, you cannot tell what's actually driving value. You can't identify what's working, what's being ignored, or where to reinvest. You're not optimizing for adoption - you're just publishing and hoping.
 
@@ -60,7 +60,7 @@ The time period over which you measure ROI is crucial since content often takes 
 
 Content marketing ROI helps you understand whether your content efforts are generating more value than they cost. It's not just about publishing volume or engagement - it's about connecting your efforts to actual revenue outcomes.
 
-Yet, 56% of marketers say they struggle to attribute ROI to their content efforts. That means more than half are investing in content without knowing whether it's driving growth or just draining resources.
+Yet, **[56% of marketers](https://contentmarketinginstitute.com/b2b-research/b2b-content-marketing-trends-research)** say they struggle to attribute ROI to their content efforts. That means more than half are investing in content without knowing whether it's driving growth or just draining resources.
 
 Here's how to solve that. Start with the standard formula:
 
@@ -87,7 +87,7 @@ This means your content marketing returned an approximate ROI of **33%**, meanin
 
 However, I understand that this kind of budget and team-building effort can be overwhelming for early-stage startups. Founders and executives are juggling countless priorities, and building an in-house content team, with hiring, onboarding, tools, and management, can quickly drain your time and resources.
 
-**A Quick Tip:** _Partnering with a specialized agency that offers technical writing services can be a smarter and more cost-effective solution. You get access to experienced technical writers, developers, and strategists who understand the SaaS landscape without the burden of full-time hires or expensive tool subscriptions. This lets you focus on product and growth while ensuring your content drives measurable ROI._
+**A Quick Tip:** _Partnering with a specialized agency that offers **[technical writing services](https://www.infrasity.com/services/technical-writing-services)** can be a smarter and more cost-effective solution. You get access to experienced technical writers, developers, and strategists who understand the SaaS landscape without the burden of full-time hires or expensive tool subscriptions. This lets you focus on product and growth while ensuring your content drives measurable ROI._
 
 ## Content Marketing ROI Calculator: Plan Before You Spend
 
@@ -132,7 +132,7 @@ Content marketing ROI is a crucial metric for any startup leveraging content to 
 
 To accurately calculate content marketing ROI, you need to track core metrics: the total investment in content (including salaries, freelancer or agency fees), the revenue generated from those efforts, and the timeframe over which you measure results.
 
-For early-stage startups with limited capital, partnering with specialized agencies like Infrasity can be a smart, cost-effective way to produce high-quality content. Our services are designed to drive meaningful growth and accelerate product adoption, helping your startup achieve measurable results without the overhead of building an in-house content marketing team.
+For early-stage startups with limited capital, partnering with specialized agencies like **[Infrasity](https://www.infrasity.com/)** can be a smart, cost-effective way to produce high-quality content. Our services are designed to drive meaningful growth and accelerate product adoption, helping your startup achieve measurable results without the overhead of building an in-house content marketing team.
 
 ### FAQs
 
