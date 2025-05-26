@@ -129,7 +129,7 @@ To make it even easier, here's a brief walkthrough video of the Content Marketin
 
 <iframe
   width="100%"
-  height="400"
+  height="399"
   src="https://drive.google.com/file/d/1RUDiTizr44gw8A9rJxTi0m_v6YYMx8_6/preview"
   frameborder="0"
   allow="autoplay; encrypted-media"
