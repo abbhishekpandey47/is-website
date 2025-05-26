@@ -18,6 +18,8 @@ Not measuring your content marketing ROI is like shooting arrows without a targe
 
 **The real goal? Product adoption.**
 
+![content marketing roi - product adoption](/PostImages/content-marketing-roi/cmr2.jpg) 
+
 You want more users to discover the product, understand how it works, and reach activation faster. Whether it's technical blog posts, product documentation, or white papers, your content should be guiding users through the ToFu, MoFu, BoFu stages of the marketing funnel and helping them integrate your product into their workflow.
 
 But if you're not measuring ROI, you cannot tell what's actually driving value. You can't identify what's working, what's being ignored, or where to reinvest. You're not optimizing for adoption - you're just publishing and hoping.
@@ -31,6 +33,8 @@ Content marketing might seem like a low-cost marketing strategy on the surface, 
 One of the most underrated content marketing aspects, especially in B2B SaaS, is how its value builds over time. A single technical blog post, how-to, or use case guide that ranks well today can keep driving **signups, activations, and credibility for months, even years**.  
 
 For example, a well-written use case guide like "_5 Ways to Automate CI/CD Rollbacks with Your DevOps Stack_" might initially generate a few leads in the first month, but over the next six months, it could consistently attract qualified traffic, earn backlinks from developer communities, and get referenced in GitHub discussions. That one piece of content keeps delivering value long after the initial effort.
+
+![content marketing roi - content compounding effect](/PostImages/content-marketing-roi/cmr3.jpg) 
 
 But if you're not measuring ROI, you'll miss this compounding effect entirely. You might treat content like a one-time cost when it's actually a long-term growth lever. Without the data, there's no way to know which pieces continue to perform, which are losing momentum, and where to reinvest.
 
@@ -60,6 +64,8 @@ Yet, 56% of marketers say they struggle to attribute ROI to their content effort
 
 Here's how to solve that. Start with the standard formula:
 
+![content marketing roi formula](/PostImages/content-marketing-roi/cmr4.png) 
+
 Let's say you've hired a small full-time team consisting of a technical writer, a graphic designer, an SEO specialist, and a content marketer. Over the course of a quarter, this team creates and publishes:
 
 - 9 technical blog posts, and
@@ -67,12 +73,15 @@ Let's say you've hired a small full-time team consisting of a technical writer, 
 
 Now, let's break down how much you invested to make this happen. I have mentioned the average salaries of the content marketing team members in the United States.
 
+![content marketing roi - content team salaries](/PostImages/content-marketing-roi/cmr5.png) 
+
 **Total Salary Cost per quarter**: $73,227.75
 
 You would also need some essential tools for content marketing, such as Semrush for keyword research and SEO audit, Adobe Creative Cloud for design work, and supporting platforms like Grammarly, Notion, and CMS plugins for workflow and optimization. Together, these tools would sum up to approximately **$1,199.82 per quarter**.
 
 This means your total content marketing investment for the quarter would be approximately **$74,400**. And if you've earned a revenue of **$99,000** from the content produced this quarter, the Content Marketing ROI will be:
 
+![content marketing roi calculation](/PostImages/content-marketing-roi/cmr6.png) 
 
 This means your content marketing returned an approximate ROI of **33%**, meaning for every **$1** invested, your team generated **$1.33** in return.
 
@@ -102,9 +111,13 @@ At the same time, you have a clear goal: to achieve **30% organic traffic growth
 
 This is exactly why using a **Content Marketing ROI Calculator** can help. It allows you to align your budget with your goals, estimate what's achievable, and make an informed decision on whether an agency or an in-house team is the best fit for your startup's needs.
 
+![content marketing roi calculator](/PostImages/content-marketing-roi/cmr7.png) 
+
 So, you enter your details into the ROI calculator, a $2,000 monthly budget, four blog posts per month, 30% target traffic growth, and a three-month timeline.
 
 With just a few clicks, you see the numbers side by side. Hiring an in-house team would cost you a staggering $42,000 for the quarter while outsourcing to an agency like Infrasity would come in at just $5,940. The difference? It's over $36,000, which is hard to ignore.
+
+![content marketing roi calculator](/PostImages/content-marketing-roi/cmr8.png) 
 
 This ROI software provides valuable insights into these cost dynamics, allowing you to better understand where your investment will go. Similarly, you can use this tool before allocating your content marketing budget to get a clearer picture of potential costs and make smarter investment decisions.
 
@@ -112,7 +125,6 @@ This ROI software provides valuable insights into these cost dynamics, allowing 
 
 To make it even easier, here's a brief walkthrough video of the Infrasity Content Marketing ROI Calculator. This demo will guide you through how to input your data and get an estimate of how much you need to spend.
 
-**Video**
 
 ## Conclusion
 
