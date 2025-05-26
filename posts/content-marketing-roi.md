@@ -86,13 +86,13 @@ A content marketing ROI calculator can help you estimate the potential returns f
 
 ### Key Things You Will Need to Input:
 
-1. **Monthly Content Budget**: How much are you willing to spend on blog content? (Here, the minimum cost for a blog post in the U.S. market is around **$495**.)
+- **Monthly Content Budget**: How much are you willing to spend on blog content? (Here, the minimum cost for a blog post in the U.S. market is around **$495**.)
 
-2. **Blog Posts per Month**: The number of blog posts you plan to publish each month. An ideal frequency would be at least **four blog posts a month**.
+- **Blog Posts per Month**: The number of blog posts you plan to publish each month. An ideal frequency would be at least **four blog posts a month**.
 
-3. **Target Traffic Growth**: The percentage increase in organic traffic you aim to achieve. For a period of approximately three months, it should be **10-30% for startups**.
+- **Target Traffic Growth**: The percentage increase in organic traffic you aim to achieve. For a period of approximately three months, it should be **10-30% for startups**.
 
-4. **Timeline**: The period over which you want to measure your content marketing ROI. Ideally, the timeline should be at least **three months**, as content usually takes time to show results. As discussed, it gives long-term growth; hence, give it some time.
+- **Timeline**: The period over which you want to measure your content marketing ROI. Ideally, the timeline should be at least **three months**, as content usually takes time to show results. As discussed, it gives long-term growth; hence, give it some time.
 
 ### Let's Try Out the Content Marketing ROI Calculator!
 
