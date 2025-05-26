@@ -25,8 +25,13 @@ export default function TabbedYouTubeCarousel() {
       "Yfv2iTyWGd0",
       "R7pkdg6wcAY",
     ],
-    Features: ["_TrEJAJPp0M"],
+    Features: [
+      "_TrEJAJPp0M",
+      "https://drive.google.com/file/d/13Sbd2SeaZw1GA0yLJ1zDWizPR_dcgXfx/preview",
+      "https://drive.google.com/file/d/1GGH7tBvC175GcicPsuVznQ-GNfo4toqr/preview",
+    ],
     ExplainerVideo: [
+      "22d5Xu3I1Oo",
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20ECS.mp4",
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20RDS%20.mp4",
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20VPC.mp4",
@@ -103,7 +108,7 @@ export default function TabbedYouTubeCarousel() {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-          ></iframe>
+          />
 
           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded">
             With Attest's consumer research platform

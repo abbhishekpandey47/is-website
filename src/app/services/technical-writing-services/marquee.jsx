@@ -55,7 +55,11 @@ const NewMarquee = () => {
                   loading="lazy"
                   width={150}
                   height={50}
-                  className="w-40 max-sm:w-30 filter brightness-0 invert "
+                  className="w-40 max-sm:w-30"
+                  style={{
+                    filter: "brightness(0) invert(1)",
+                    mixBlendMode: "screen",
+                  }}
                   src={`/trustedby/${file}`}
                   alt="Ratio is 3.9"
                 />
