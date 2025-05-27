@@ -49,7 +49,7 @@ This gives developers a high-level overview of the CLI’s capabilities before t
 
 Developers don’t just want to know what a command does; they need to see how to use it in their workflow. For example: “_Spin up a workspace running Ubuntu 22.04 with Node.js 18 pre-installed by running workspace_ `create --os ubuntu-22.04 --node 18.`”
 
-![cli docs - real world example](/PostImages/cli-docs-checklist/cd2.png) 
+![cli docs - real world example](/PostImages/cli-docs-checklist/Cd2.png) 
 
 Show examples that reflect real scenarios your users face. It’s not enough to list commands; make them relatable, practical, and ready to copy-paste.
 
