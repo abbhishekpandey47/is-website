@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
-import { Linkedin, Twitter, Link as LinkIcon } from "lucide-react";
+import { Linkedin, X, Link as LinkIcon } from "lucide-react";
 
 const generateOutlineObj = (content) => {
   const lines = String(content).split("\n");
@@ -188,7 +188,7 @@ const Outline = ({ content }) => {
       aria-label="Outline Navigation"
       className={`w-[18rem] max-xl:w-[13rem] min-[2173px]:w-[22rem] min-[2173px]:text-lg min-[2500px]:w-[30rem] min-[2500px]:text-xl max-lg:w-[20rem] flex flex-col quicksand-light text-sm my-8 ${
         sticky && "sticky"
-      } left-0 top-[82px] pt-10`}
+      } left-0 top-[82px]`}
     >
       <div className="flex justify-start text-lg py-4 pb-2 mb-0 quicksand-semibold">
         <p className="text-left text-[#3c61e2]"># Overview</p>
@@ -226,21 +226,21 @@ const Outline = ({ content }) => {
         </h3>
         <div className="flex gap-5 justify-center">
           <button
-            className="bg-white rounded-full p-3 hover:bg-gray-100 transition-colors"
+            className="bg-black rounded-full p-3 hover:bg-gray-700 transition-colors"
             onClick={shareOnLinkedin}
             aria-label="Share on LinkedIn"
           >
             <Linkedin size={20} className="text-black" />
           </button>
           <button
-            className="bg-white rounded-full p-3 hover:bg-gray-100 transition-colors"
+            className="bg-black rounded-full p-3 hover:bg-gray-700 transition-colors"
             onClick={shareOnTwitter}
             aria-label="Share on Twitter"
           >
-            <Twitter size={20} className="text-black" />
+            <X size={20} className="text-black" />
           </button>
           <button
-            className="bg-white rounded-full p-3 hover:bg-gray-100 transition-colors"
+            className="bg-black rounded-full p-3 hover:bg-gray-700 transition-colors"
             onClick={copyLinkToClipboard}
             aria-label="Copy link"
           >

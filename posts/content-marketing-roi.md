@@ -129,8 +129,9 @@ To make it even easier, here's a brief walkthrough video of the Content Marketin
 
 <div style="display: flex; justify-content: center;">
   <iframe
+    class="responsive-iframe"
     width="640"
-    height="399"
+    height="300"
     src="https://drive.google.com/file/d/1RUDiTizr44gw8A9rJxTi0m_v6YYMx8_6/preview"
     frameborder="0"
     allow="autoplay; encrypted-media"
@@ -138,6 +139,14 @@ To make it even easier, here's a brief walkthrough video of the Content Marketin
     title="Content Marketing ROI Calculator Walkthrough Video"
   ></iframe>
 </div>
+
+<style>
+  @media (max-width: 768px) {
+    .responsive-iframe {
+      height: 200px;
+    }
+  }
+</style>
 
 ## Conclusion
 

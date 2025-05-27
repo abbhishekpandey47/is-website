@@ -25,11 +25,7 @@ export default function TabbedYouTubeCarousel() {
       "Yfv2iTyWGd0",
       "R7pkdg6wcAY",
     ],
-    Features: [
-      "_TrEJAJPp0M",
-      "https://drive.google.com/file/d/13Sbd2SeaZw1GA0yLJ1zDWizPR_dcgXfx/preview",
-      "https://drive.google.com/file/d/1GGH7tBvC175GcicPsuVznQ-GNfo4toqr/preview",
-    ],
+    Features: ["_TrEJAJPp0M", "ELSjojPjPAo", "b8B5odoAHPI"],
     ExplainerVideo: [
       "22d5Xu3I1Oo",
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20ECS.mp4",

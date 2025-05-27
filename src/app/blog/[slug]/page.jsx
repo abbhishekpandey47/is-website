@@ -5,7 +5,7 @@ import { notFound, redirect } from "next/navigation"; // Add this import
 import postMetaData from "../../../../posts/_postMetadata";
 import Outline from "./outline";
 import HeadBanner from "./headBanner";
-import BookDemo from "./bookDemo";
+import BookDemo from "../../book-a-demo/cta";
 import Featured from "./featured";
 import authorMetadata from "../../../../posts/_authorData";
 import NotFound from "./NotFound";
@@ -120,7 +120,7 @@ const PostPage = (props) => {
               />
             </div>
           </div>
-          <div className="w-[60%] min-[1900px]:w-[80%] max-lg:w-[60%] max-md:w-[70%] max-sm:ml-5 pt-2 lg:pt-15 flex justify-center flex-col items-start">
+          <div className="w-[40%] min-[1900px]:w-[80%] max-lg:w-[60%] max-md:w-[70%] pt-2 lg:pt-15 flex justify-center flex-col items-start">
             <article className="text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto">
               <div className="max-lg:w-[84vw] min-[1900px]:w-[60vw] max-[1537px]:w-[50vw]">
                 <Markdown
@@ -176,9 +176,18 @@ const PostPage = (props) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center">
-        <BookDemo />
+      <div
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+        <div className=" flex justify-center items-center">
+          <BookDemo />
+        </div>
       </div>
+      <div className="mb-24"></div>
     </>
   );
 };
