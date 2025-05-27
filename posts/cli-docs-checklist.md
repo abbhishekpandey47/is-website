@@ -91,6 +91,7 @@ When it’s time to write the CLI docs, focus on clarity, brevity, and developer
 
 Every command should begin with a clear, properly formatted syntax block. Developers expect to see the command structure first. For example:
 `workspace create [options] <config-file>`
+
 This helps them understand how to use the command at a glance.
 
 ### 2. Add Practical, Copy-Paste Examples
