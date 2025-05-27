@@ -115,32 +115,38 @@ const BlogTypes = () => {
             Content Types
           </h2>
 
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {visibleBlogTypes.map((blogType) => (
-              <Link
-                href={blogType.href}
-                key={blogType.id}
-                className="block transition-transform duration-300 hover:scale-105"
-              >
-                <div className="h-[250px] relative glassEffect cursor-pointer">
-                  <div className="p-6">
-                    {/* Content inside the box */}
-                    <div className="flex items-center mb-4">
-                      <div className="p-2 rounded bg-white/5 mr-4">
-                        {blogType.icon}
-                      </div>
-                      <h3 className="text-xl font-medium text-white">
-                        {blogType.title}
-                      </h3>
-                    </div>
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+            {visibleBlogTypes.map((blogType, index) => {
+              const shouldCenter = index === 9;
 
-                    <p className="text-gray-100 mb-6 text-m">
-                      {blogType.description}
-                    </p>
+              return (
+                <Link
+                  href={blogType.href}
+                  key={blogType.id}
+                  className={`block transition-transform duration-300 hover:scale-105 ${
+                    shouldCenter ? "lg:col-start-2" : ""
+                  }`}
+                >
+                  <div className="h-[250px] relative glassEffect cursor-pointer">
+                    <div className="p-6">
+                      {/* Content inside the box */}
+                      <div className="flex items-center mb-4">
+                        <div className="p-2 rounded bg-white/5 mr-4">
+                          {blogType.icon}
+                        </div>
+                        <h3 className="text-xl font-medium text-white">
+                          {blogType.title}
+                        </h3>
+                      </div>
+
+                      <p className="text-gray-100 mb-6 text-m">
+                        {blogType.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="flex justify-center mt-12">
