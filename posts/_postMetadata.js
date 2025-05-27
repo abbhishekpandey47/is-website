@@ -777,7 +777,7 @@ let postMetaData = [
         metatitle: "CLI Docs Checklist: The Secret to Developer-First Docs",
         slug: "cli-docs-checklist",
         description: "Write developer-focused CLI docs with this checklist that helps you guide users, explain commands clearly, and keep your documentation up to date.",
-        ogImage: "/PostImages/cli-docs-checklist/cd1.png",
+        ogImage: "/PostImages/cli-docs-checklist/Cd1.png",
         publishedOn: "2025-05-27",
         authorId: "author0004",
         category: "Informational",
