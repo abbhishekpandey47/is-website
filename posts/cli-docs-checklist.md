@@ -39,15 +39,17 @@ For example: “_Provision and manage fully-configured development workspaces fr
 For the developers to quickly comprehend what the command-line interface can do, list out every command with a clear and one-line explanation.
 
 For example:
-`workspace create` - Create a new workspace
-`workspace list` -  List active workspaces
-`workspace delete` -  Remove a workspace
+- `workspace create` - Create a new workspace
+- `workspace list` -  List active workspaces
+- `workspace delete` -  Remove a workspace
 
 This gives developers a high-level overview of the CLI’s capabilities before they dive into the details.
 
 ### 4. Outline Real-World Use Cases
 
 Developers don’t just want to know what a command does; they need to see how to use it in their workflow. For example: “_Spin up a workspace running Ubuntu 22.04 with Node.js 18 pre-installed by running workspace_ `create --os ubuntu-22.04 --node 18.`”
+
+![cli docs - real world example](/PostImages/cli-docs-checklist/cd2.png) 
 
 Show examples that reflect real scenarios your users face. It’s not enough to list commands; make them relatable, practical, and ready to copy-paste.
 
@@ -75,6 +77,8 @@ Do they need to authenticate with an API key or login token? Are there environme
 
 For example: Before using the CLI, authenticate by running cli auth login `--token <your-api-key>` and ensure Docker is installed on your machine.
 
+![cli docs - outline setup](/PostImages/cli-docs-checklist/cd3.png) 
+
 Clear setup instructions remove blockers and help developers get started fast.
 
 Once you’ve set the foundation, which is understanding your users, mapping commands, and outlining real-world scenarios, you have everything you need to start writing. Now it’s time to turn all that prep into clear, actionable CLI docs that developers can trust. Let’s get into the writing phase.
@@ -101,8 +105,8 @@ This is a real, copy-paste-ready command that developers can use as-is to get st
 
 Ensure that every flag and argument is clearly explained. Don’t just list them, show what each one does, when to use it, and what happens if you skip it. 
 For example:
-`--os` specifies the operating system for the workspace.
-`--node` sets the Node.js version to use.
+- `--os` specifies the operating system for the workspace.
+- `--node` sets the Node.js version to use.
 
 This level of detail ensures developers don’t have to guess, and that’s what makes documentation truly developer-friendly.
 
@@ -113,6 +117,8 @@ Make sure default values and output formats are clear. If a command defaults to 
 This helps developers know exactly what to expect, reducing errors and frustration.
 For example: By default, the workspace uses Ubuntu 22.04 and returns a JSON object like:
 `{ "workspace_id": "abc123", "status": "active" }`
+
+![cli docs - default values and output formats](/PostImages/cli-docs-checklist/cd4.png) 
 
 Clear expectations lead to fewer support tickets and a better developer experience.
 
