@@ -772,6 +772,18 @@ let postMetaData = [
         metaDescription: "Not measuring content marketing ROI? You’re risking budget waste and missed growth. Learn how to track content ROI and drive real SaaS product adoption."
     },
 
+    {
+        title: "The Secret Checklist for Developer-First CLI Docs for SaaS Startups",
+        metatitle: "CLI Docs Checklist: The Secret to Developer-First Docs",
+        slug: "cli-docs-checklist",
+        description: "Write developer-focused CLI docs with this checklist that helps you guide users, explain commands clearly, and keep your documentation up to date.",
+        ogImage: "/PostImages/cli-docs-checklist/cd1.png",
+        publishedOn: "2025-05-27",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Write developer-focused CLI docs with this checklist that helps you guide users, explain commands clearly, and keep your documentation up to date."
+    },
+
 
 ];
 
