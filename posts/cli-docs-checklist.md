@@ -6,7 +6,7 @@ But let me ask you - do you (_or your developers or technical writers_) have spe
 
 Writing CLI docs isn’t just about listing flags and options. It’s about making developers feel confident and in control, so they can integrate your product, build faster, and stick around.
 
-That’s why I’m sharing the **secret checklist** our team of developers and technical writers at Infrasity (_a developer marketing agency_) uses to write CLI docs for B2B SaaS startups. You can even use this checklist to verify if you’re doing it right.
+That’s why I’m sharing the **secret checklist** our team of developers and technical writers at Infrasity (**[_a developer marketing agency_](https://www.infrasity.com/)**) uses to write CLI docs for B2B SaaS startups. You can even use this checklist to verify if you’re doing it right.
 
 _Oh, and I’ll be sharing a few secret pointers that we don’t usually disclose, so let’s keep it between us, okay?_ 
 
@@ -39,9 +39,9 @@ For example: “_Provision and manage fully-configured development workspaces fr
 For the developers to quickly comprehend what the command-line interface can do, list out every command with a clear and one-line explanation.
 
 For example:
-- `workspace create` - Create a new workspace
-- `workspace list` -  List active workspaces
-- `workspace delete` -  Remove a workspace
+- `workspace create` : Create a new workspace
+- `workspace list` :  List active workspaces
+- `workspace delete` :  Remove a workspace
 
 This gives developers a high-level overview of the CLI’s capabilities before they dive into the details.
 
