@@ -21,9 +21,9 @@ import { Button } from "@/Components/ui/button";
 const blogTypes = [
   {
     id: 1,
-    title: "New Box: How-to guides",
+    title: "Technical Blogs",
     description:
-      "Actionable, step-by-step guides for developers to complete specific tasks—from configuring cloud infrastructure to integrating tools into their tech stack.",
+      "Engaging, SEO-based technical blogs crafted for developers; focused on simplifying SaaS products, explaining how things work, and offering clear value.",
     icon: <BookText className="h-7 w-7 text-[#5F64FF]" />,
     href: "/services/technical-writing-services/how-to-guides",
   },
