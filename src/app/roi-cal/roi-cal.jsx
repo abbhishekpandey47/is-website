@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import TooltipIcon from "./TooltipIcon";
 import { saveUserData } from "./user";
+import CalendarBooking from "../book-a-demo/calendarButton";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 const ContentROICalculator = () => {
@@ -1058,12 +1059,7 @@ const ContentROICalculator = () => {
 
               {hasCalculated && (
                 <div className="mt-6 text-center">
-                  <button
-                    className="py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200"
-                    onClick={handlePopup}
-                  >
-                    Download Full Report
-                  </button>
+                  <CalendarBooking buttonText="Get the full breakdown" />
                 </div>
               )}
             </div>
