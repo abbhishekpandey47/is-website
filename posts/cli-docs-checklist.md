@@ -12,6 +12,8 @@ _Oh, and I’ll be sharing a few secret pointers that we don’t usually disclos
 
 Let’s dive in!
 
+![3 phases of writing cli docs](/PostImages/cli-docs-checklist/cd8.png)
+
 ## Pre-Writing: Plan Like a Developer for Effective CLI Docs
 
 Before beginning to write CLI documentation, it’s essential to think as a developer. The goal is to make it easy for them to learn, adopt, and use the CLI effectively, without guessing or getting stuck.
@@ -19,6 +21,8 @@ Before beginning to write CLI documentation, it’s essential to think as a deve
 Let’s take an example. Imagine there’s a SaaS product that helps developers create workspaces with all dependencies pre-installed, think of it like spinning up fully configured development environments in seconds. The product has a full web UI where users can select the OS, write a config, and launch a workspace from the dashboard.
 
 But here’s the thing: all of that functionality is also available via the command-line interface. With just a few commands, a developer can skip the dashboard entirely, automate their workflow, and spin up workspaces right from their terminal. That’s pretty essential, but only if the CLI docs make it clear how to do it.
+
+![cli docs - pre-writing phase](/PostImages/cli-docs-checklist/cd5.png)
 
 ### 1. Know the User
 
@@ -87,6 +91,8 @@ Once you’ve set the foundation, which is understanding your users, mapping com
 
 When it’s time to write the CLI docs, focus on clarity, brevity, and developer-first details, here’s what that means in practice:
 
+![cli docs - writing phase](/PostImages/cli-docs-checklist/cd6.png)
+
 ### 1. Start with Command Syntax
 
 Every command should begin with a clear, properly formatted syntax block. Developers expect to see the command structure first. For example:
@@ -142,6 +148,8 @@ That’s how you write CLI docs that developers can actually rely on: clear, con
 ## Post-Writing: QA Your CLI Docs Like a Developer
 
 Once the CLI documentation draft is ready, the work isn't done - now it's time to test your docs like a developer would. Here's what you should do:
+
+![cli docs - post writing phase](/PostImages/cli-docs-checklist/cd7.png)
 
 ### 1. Run Every Example Command
 
