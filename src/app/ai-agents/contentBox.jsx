@@ -69,7 +69,7 @@ const HoverCards = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-blue-900/40 via-[#0a0f1c] to-slate-900 pt-20">
+    <div className="bg-gradient-to-br from-blue-900/40 via-[#0a0f1c] to-slate-900 py-20">
       <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
         <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
           <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">

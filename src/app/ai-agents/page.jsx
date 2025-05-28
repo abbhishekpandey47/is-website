@@ -3,6 +3,7 @@ import HeroHome from "./hero";
 import MarqueePage from "./marquee";
 import WhyAI from "./whyai";
 import HoverCards from "./contentBox";
+import TestimonialCarousel from "./testimonialCarousel";
 
 export default function Page() {
   return (
@@ -10,8 +11,8 @@ export default function Page() {
       <HeroHome />
       <MarqueePage />
       <WhyAI />
-
       <HoverCards />
+      <TestimonialCarousel />
     </div>
   );
 }
