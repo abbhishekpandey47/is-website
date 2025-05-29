@@ -48,7 +48,7 @@ Clear product docs, use case guides, and technical blogs show exactly how your p
 - **It offers active engagement with developer communities.**  
 By participating in forums, GitHub, open-source projects, and other developer spaces, you can build more credibility compared to traditional marketing efforts.
 
-It offers transparent communication through roadmaps and changelogs.  
+- **It offers transparent communication through roadmaps and changelogs.**
 Sharing your SaaS product’s ongoing development openly shows that you listen to your users' feedback and work on improving the product, which is one of the key factors for earning developers’ long-term trust.
 
 So, these are some of the key dev marketing strategies that shift the focus from generic promotion to marketing developer products smartly, driving engagement and conversions.
