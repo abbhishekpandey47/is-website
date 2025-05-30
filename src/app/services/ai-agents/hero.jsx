@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { ArrowRight } from "lucide-react";
-import CalendarBooking from "../calendarButton";
+import CalendarBooking from "../../calendarButton";
 
 export default function AIStartupLanding() {
   return (

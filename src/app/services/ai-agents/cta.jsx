@@ -1,5 +1,5 @@
 import React from "react";
-import CalendarBooking from "../calendarButton";
+import CalendarBooking from "../../calendarButton";
 
 export default function Cta() {
   return (
