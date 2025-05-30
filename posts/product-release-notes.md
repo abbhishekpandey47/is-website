@@ -128,13 +128,13 @@ Now, let's take a look at one of the release notes examples, which shows how pro
 
 What makes their approach effective is the consistent use of categorical tagging. Every update is labeled to help users quickly understand what kind of change they're looking at:
 
-- **Feature** - New capabilities added
-- **Fix** - Resolved bugs
-- **Known Issue** - Active problems users should be aware of
-- **Announcement** - Previews or upcoming features
-- **Change** - UI or behavioral modifications
-- **Deprecated** - Features or workflows being phased out
-- **Breaking Change** - Updates requiring user action to maintain functionality
+- **Feature**: New capabilities added
+- **Fix**: Resolved bugs
+- **Known Issue**: Active problems users should be aware of
+- **Announcement**: Previews or upcoming features
+- **Change**: UI or behavioral modifications
+- **Deprecated**: Features or workflows being phased out
+- **Breaking Change**: Updates requiring user action to maintain functionality
 
 In the **May 15, 2025**, release, Google Cloud included a well-rounded mix of updates that illustrate how to write user-focused release notes at scale. Highlights included:
 
