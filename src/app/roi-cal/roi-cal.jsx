@@ -48,53 +48,6 @@ const ContentROICalculator = () => {
   const [timelineInMonth, setTimelineInMonth] = useState(0);
   const [budgetError, setBudgetError] = useState(false);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setIsEmailSending(true);
-
-  //   const {
-  //     budget,
-  //     blogPosts,
-  //     trafficGrowth,
-  //     contentTeam,
-  //     domainExpertise,
-  //     timeline,
-  //   } = formValues;
-
-  //   if (email) {
-  //     try {
-  //       const response = await fetch(
-  //         "https://infrasity-backend-j84r.onrender.com/submit-email",
-  //         {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify({
-  //             email,
-  //             budget,
-  //             blogPosts,
-  //             trafficGrowth,
-  //             contentTeam,
-  //             domainExpertise,
-  //             timeline,
-  //           }),
-  //         }
-  //       );
-
-  //       const data = await response.json();
-
-  //       if (response.ok) {
-  //         setIsEmailSending(false);
-  //         setIsSubmitted(true);
-  //       }
-  //     } catch (error) {
-  //       setIsEmailSending(false);
-  //       console.error("Error:", error);
-  //     }
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsEmailSending(true);
@@ -280,11 +233,6 @@ const ContentROICalculator = () => {
       setError(null);
     }
 
-    // let peopleNeededPerMonth = Math.ceil(
-    //   blogPosts / blogPostsPerPersonPerMonth
-    // );
-    // setContentTeamSize(peopleNeededPerMonth);
-
     if (domainExpertise) {
       setDomainExpertisResult(true);
     } else {
@@ -439,29 +387,6 @@ const ContentROICalculator = () => {
                       description="Estimated amount you want to spend on content per month."
                       width="400px"
                     />
-                    {/* <div className="group relative inline-block">
-                      <svg
-                        className="w-4 h-4 ml-2 inline-block cursor-pointer"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-
-                      <div className="w-[400px] absolute hidden group-hover:block bg-gray-800 text-white text-sm rounded px-3 py-2 z-10 bottom-6 left-1/2 -translate-x-1/2">
-                        <p>
-                          Estimated amount you want to spend on content per
-                          month.
-                        </p>
-                      </div>
-                    </div> */}
                   </label>
                 </div>
 
@@ -493,29 +418,6 @@ const ContentROICalculator = () => {
                       description="Number of blog articles you expect to publish each month."
                       width="390px"
                     />
-                    {/* <div className="group relative inline-block">
-                      <svg
-                        className="w-4 h-4 ml-2 inline-block cursor-pointer"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-
-                      <div className="w-[390px] absolute hidden group-hover:block bg-gray-800 text-white text-sm rounded px-3 py-2 z-10 bottom-6 left-1/2 -translate-x-1/2">
-                        <p>
-                          Number of blog articles you expect to publish each
-                          month.
-                        </p>
-                      </div>
-                    </div> */}
                   </label>
                 </div>
                 <div className="mt-1">
@@ -549,29 +451,6 @@ const ContentROICalculator = () => {
                       description="Specify if the content needs specialized industry knowledge or experience."
                       width="330px"
                     />
-                    {/* <div className="group relative inline-block">
-                      <svg
-                        className="w-4 h-4 ml-2 inline-block cursor-pointer"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-
-                      <div className="w-[330px] absolute hidden group-hover:block bg-gray-800 text-white text-sm rounded px-3 py-2 z-10 bottom-6 left-1/2 -translate-x-1/2">
-                        <p>
-                          Specify if the content needs specialized industry
-                          knowledge or experience.
-                        </p>
-                      </div>
-                    </div> */}
                   </label>
                   <div className="relative inline-block w-12 h-6">
                     <input
@@ -612,29 +491,6 @@ const ContentROICalculator = () => {
                     description="Enter the percentage increase in traffic you aim to achieve."
                     width="390px"
                   />
-                  {/* <div className="group relative inline-block">
-                    <svg
-                      className="w-4 h-4 ml-2 inline-block cursor-pointer"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-
-                    <div className="w-[390px] absolute hidden group-hover:block bg-gray-800 text-white text-sm rounded px-3 py-2 z-10 bottom-6 left-1/2 -translate-x-1/2">
-                      <p>
-                        Enter the percentage increase in traffic you aim to
-                        achieve.
-                      </p>
-                    </div>
-                  </div> */}
                 </label>
                 <div className="relative">
                   <input
@@ -891,47 +747,107 @@ const ContentROICalculator = () => {
 
               {hasCalculated ? (
                 <div className="space-y-6">
-                  <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">Cost Comparison</h3>
-
-                    <div className="border-b border-gray-700 pb-3 mb-3">
-                      <div className="flex justify-between items-center">
-                        <span>Hiring In-House</span>
-                        <span className="font-bold">
-                          ${inHouseCost.toLocaleString()}
-                        </span>
+                  <div className="bg-gradient-to-br from-gray-900/95 via-gray-800/90 to-gray-700/95 backdrop-blur-sm border border-white/10 shadow-2xl rounded-2xl p-6">
+                    {/* Header */}
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="w-8 h-8 bg-gradient-to-br from-green-500/90 to-green-600/80 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/10">
+                        <svg
+                          className="w-6 h-6 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
                       </div>
-
-                      <p className="text-gray-300 text-sm mt-1">
-                        ({timelineInMonth} months × $7,000/month) + (2-month
-                        ramp-up × $7,000/month) × 1.2 overhead
-                      </p>
+                      <h3 className="text-xl font-bold text-white">
+                        ROI Analysis
+                      </h3>
                     </div>
 
-                    <div className="border-b border-gray-700 pb-3 mb-3">
+                    {/* Current vs Optimized State */}
+                    <div className="space-y-2 mb-8">
                       <div className="flex justify-between items-center">
-                        <span>Outsourced (Growth Plan)</span>
-                        <span className="font-bold">
-                          ${outsourcedCost.toLocaleString()}
+                        <span className="text-gray-300 text-md">
+                          Current State
+                        </span>
+                        <span className="font-bold text-white text-md">
+                          ${inHouseCost.toLocaleString()}/mo
                         </span>
                       </div>
-                      <p className="text-gray-300 text-sm mt-1">
-                        {timelineInMonth} months × {blogPerPostQunt} blog
-                        posts/month ×{" "}
-                        {domainExpertisResult
-                          ? "($495 per post + $45 per post for domain expertise)"
-                          : "$495 per post"}
-                      </p>
+                      <div className="w-full bg-gray-700/30 backdrop-blur-sm rounded-full h-3 border border-white/5">
+                        <div
+                          className="bg-gradient-to-r from-orange-500/90 to-red-500/80 h-3 rounded-full backdrop-blur-sm"
+                          style={{ width: "100%" }}
+                        ></div>
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-300 text-md mt-4">
+                          With Incident Management
+                        </span>
+                        <span className="font-bold text-white text-md">
+                          $
+                          {Math.round(
+                            outsourcedCost / timelineInMonth
+                          ).toLocaleString()}
+                          /mo
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-700/30 backdrop-blur-sm rounded-full h-3 border border-white/5">
+                        <div
+                          className="bg-gradient-to-r from-green-500/90 to-blue-500/80 h-3 rounded-full backdrop-blur-sm"
+                          style={{ width: `${100 - savingsPercentage}%` }}
+                        ></div>
+                      </div>
                     </div>
 
-                    <div className="flex justify-between text-blue-400">
-                      <span className="font-bold">Savings:</span>
-                      <span className="font-bold blur-sm">
-                        ${savings.toLocaleString()} ({savingsPercentage}%)
-                      </span>
+                    {/* Metrics Grid */}
+                    <div className="grid grid-cols-2 gap-6">
+                      {/* Cost Reduction */}
+                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                        <div className="text-2xl font-bold text-green-400">
+                          {savingsPercentage}%
+                        </div>
+                        <div className="text-gray-300 text-md">
+                          Cost Reduction
+                        </div>
+                      </div>
+
+                      {/* Annual Savings */}
+                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                        <div className="text-2xl font-bold text-blue-400">
+                          ${(savings * 12).toLocaleString()}
+                        </div>
+                        <div className="text-gray-300 text-md text-md">
+                          Annual Savings
+                        </div>
+                      </div>
+
+                      {/* Payback Period */}
+                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                        <div className="text-2xl font-bold text-yellow-400">
+                          0.0 mo
+                        </div>
+                        <div className="text-gray-300 text-md">
+                          Payback Period
+                        </div>
+                      </div>
+
+                      {/* 3-Year ROI */}
+                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                        <div className="text-2xl font-bold text-cyan-400">
+                          {Math.round(((savings * 36) / outsourcedCost) * 100)}%
+                        </div>
+                        <div className="text-gray-300 text-md">3-Year ROI</div>
+                      </div>
                     </div>
                   </div>
-
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <div className="grid grid-cols-3 pb-3 mb-3">
                       <h3 className="text-xl font-bold">Time to Value</h3>
@@ -981,51 +897,24 @@ const ContentROICalculator = () => {
                   </div>
 
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
-                    {/* <h3 className="text-xl font-bold mb-4">
-                      Deliverables Estimate
-                    </h3> */}
-                    {/* 
-                    <div className="mb-2">
-                      <p>Month 1: {blogPerPostQunt} Blogs + 1 Video</p>
-                    </div>
-                    <div className="mb-2">
-                      <p>Month 2: {blogPerPostQunt} Blogs + 2 Docs</p>
-                    </div>
                     <div>
-                      <p>Month 3: {blogPerPostQunt} Blogs + 1 Case Study</p>
-                    </div> */}
-                    {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                      {[0, 1, 2].map((colIndex) => (
-                        <div key={colIndex}>
-                          {Array.from({ length: 4 }).map((_, rowIndex) => {
-                            const month = colIndex * 4 + rowIndex + 1;
-                            if (month > timelineInMonth) return null;
-                            return (
-                              <div key={month} className="mb-2">
-                                <p className="text-gray-100 text-sm">
-                                  Month {month}: {blogPerPostQunt} Blogs
-                                </p>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      ))}
-                    </div> */}
-
-                    <div>
-                      <p className="text-[12px] text-gray-300">
-                        {/* Note: If you want {trafficGrowth}% traffic growth, you
-                        need to publish{" "}
-                        {trafficGrowth <= 30
-                          ? blogPerPostQunt
-                          : trafficGrowth <= 60
-                          ? blogPerPostQunt + 2
-                          : blogPerPostQunt + 4}{" "}
-                        blogs per month. */}
+                      {/* <p className="text-[12px] text-gray-300">
                         Note: To hit {trafficGrowth}% traffic growth, aim for{" "}
                         {trafficGrowthBlogPost} high-quality blog
                         posts each month.
+                      </p> */}
+
+                      <p className="text-center">
+                        Start saving{" "}
+                        <span className="font-bold">
+                          ${(inHouseCost - outsourcedCost).toLocaleString()}
+                        </span>{" "}
+                        every month
                       </p>
+
+                      <div className="mt-3 text-center">
+                        <CalendarBooking buttonText="Get Started Today" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1054,12 +943,6 @@ const ContentROICalculator = () => {
                   <p className="text-gray-500 text-sm text-center">
                     Results will appear here after calculation
                   </p>
-                </div>
-              )}
-
-              {hasCalculated && (
-                <div className="mt-6 text-center">
-                  <CalendarBooking buttonText="Get the full breakdown" />
                 </div>
               )}
             </div>
