@@ -39,6 +39,8 @@ While these tactics might have some relevance in raising general awareness, if y
 
 ### Here’s How Dev Marketing Fixes the Issue:
 
+![dev marketing](/PostImages/dev-marketing/dm3.png) 
+
 - **It offers self-serve trials and sandbox environments.**  
 Developers can experiment with your AI agent risk-free and on their own schedule without sales pressure. This lowers barriers and respects their need for independent exploration.
 
