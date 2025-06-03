@@ -10,10 +10,8 @@ export default function YCStartupLanding() {
       className="flex items-center pb-20 pt-40 overflow-hidden relative"
       style={{ background: "#2c3077" }}
     >
-      {/* Animated Background */}
       <div className="animated-bg"></div>
 
-      {/* Main Container */}
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -41,7 +39,6 @@ export default function YCStartupLanding() {
 
           {/* Right Side - Screenshot Image */}
           <div className="relative flex justify-end lg:justify-end lg:ml-36 ">
-            {/* Large Background Image - Partially Visible in Right Section Only */}
             <div className="absolute right-16 top-16 w-full h-full opacity-20 rounded-2xl overflow-hidden">
               <Image
                 src={`/ai-page/yc-web.png`}
@@ -52,10 +49,8 @@ export default function YCStartupLanding() {
               />
             </div>
 
-            {/* Background Shadow/Blur Effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-blue-900/20 rounded-2xl blur-xl transform rotate-3 scale-105"></div>
 
-            {/* Screenshot Container with Browser Chrome */}
             <div className="relative bg-gray-100 overflow-hidden shadow-2xl max-w-md w-full z-10"
               style={{
                 border: "1px solid #5c5c63",

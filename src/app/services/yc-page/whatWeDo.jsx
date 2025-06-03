@@ -33,7 +33,6 @@ const WhatWeDo = () => {
       </div>
       <div className=" flex items-center justify-center p-10">
         <div className="flex flex-col lg:flex-row gap-10 max-w-6xl w-full">
-          {/* First Card - 40% width */}
           <div
             className="w-full lg:w-[50%] relative group"
             onMouseEnter={() => setHoveredCard("kubiya")}
@@ -48,7 +47,6 @@ const WhatWeDo = () => {
                 transition: "all 0.3s ease",
               }}
             >
-              {/* Glow Effect */}
               <div
                 className={`absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-purple-500/30 via-blue-500/20 to-transparent rounded-full blur-xl transition-all duration-500 ${hoveredCard === "kubiya"
                   ? "scale-[3] opacity-60"
@@ -56,7 +54,6 @@ const WhatWeDo = () => {
                   }`}
               ></div>
 
-              {/* Image Placeholder */}
               <div className="p-8">
                 <div className="w-16 h-16 p-4 rounded-lg bg-[#1c1f4b] -mb-8">
                   <EditIcon />
@@ -100,7 +97,7 @@ const WhatWeDo = () => {
                     className="bg-white/95 p-4 h-full relative overflow-hidden"
                     style={{
                       border: "1.5px solid #223170",
-                      borderTopLeftRadius: "1rem",       // example rounding size
+                      borderTopLeftRadius: "1rem",
                       borderBottomLeftRadius: "0",
                       borderTopRightRadius: "0",
                       borderBottomRightRadius: "0",
@@ -122,7 +119,7 @@ const WhatWeDo = () => {
             </div>
           </div>
 
-          {/* Second Card - 80% width */}
+          {/* Second Card*/}
           <div
             className="w-full lg:w-[65%] relative group"
             onMouseEnter={() => setHoveredCard("kubiya")}
@@ -137,7 +134,6 @@ const WhatWeDo = () => {
                 transition: "all 0.3s ease",
               }}
             >
-              {/* Glow Effect */}
               <div
                 className={`absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-purple-500/30 via-blue-500/20 to-transparent rounded-full blur-xl transition-all duration-500 ${hoveredCard === "kubiya"
                   ? "scale-[3] opacity-60"
@@ -169,14 +165,12 @@ const WhatWeDo = () => {
                   <p className="text-sm text-gray-400 tracking-wider font-light flex items-center">
                     How-to guides
                     <span className="ml-4 text-gray-400">|</span>{" "}
-                    {/* equal horizontal margin and matching color */}
                   </p>
 
                   <RightIcon />
                   <p className="text-sm text-gray-400 tracking-wider font-light flex items-center">
                     Integration playbooks
                     <span className="ml-4 text-gray-400">|</span>{" "}
-                    {/* equal horizontal margin and matching color */}
                   </p>
 
                   <RightIcon />
@@ -229,7 +223,6 @@ const WhatWeDo = () => {
               transition: "all 0.3s ease",
             }}
           >
-            {/* Glow Effect */}
             <div
               className={`absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-purple-500/30 via-blue-500/20 to-transparent rounded-full blur-xl transition-all duration-500 ${hoveredCard === "kubiya"
                 ? "scale-[3] opacity-60"
@@ -237,8 +230,6 @@ const WhatWeDo = () => {
                 }`}
             ></div>
 
-            {/* Image Placeholder */}
-            {/* Two Column Layout */}
             <div className="flex">
               {/* Left Side - Content */}
               <div className="flex-1 p-8">
@@ -304,7 +295,7 @@ const WhatWeDo = () => {
 
       <div className="flex items-center justify-center p-10 bg-gray-900 min-h-screen">
         <div className="flex flex-col lg:flex-row gap-10 max-w-6xl w-full">
-          {/* First Card - Use Case Libraries */}
+          {/* First Card */}
           <div
             className="w-full lg:w-[70%] relative group"
             onMouseEnter={() => setHoveredCard("usecase")}
@@ -392,7 +383,7 @@ const WhatWeDo = () => {
             </div>
           </div>
 
-          {/* Second Card - Launch Campaigns */}
+          {/* Second Card  */}
           <div
             className="w-full lg:w-[30%] relative group"
             onMouseEnter={() => setHoveredCard("launch")}

@@ -107,7 +107,7 @@ const HoverCards = () => {
                                     </h3>
                                 </div>
 
-                                {/* Description Row - Smooth fade in with delay */}
+                                {/* Description Row  */}
                                 <div className="flex-1 overflow-hidden">
                                     <div
                                         className={`transition-all duration-500 ease-out ${activeCard === index
@@ -127,7 +127,6 @@ const HoverCards = () => {
                                                 <p className="text-sm text-[#ffa600] tracking-wider flex items-center">
                                                     {card.time}{" "}
                                                     <span className="ml-4 text-gray-400">|</span>{" "}
-                                                    {/* equal horizontal margin and matching color */}
                                                 </p>
 
                                                 <p className="text-sm text-[#ffffffe8] tracking-wider font-light flex items-center">
@@ -142,10 +141,8 @@ const HoverCards = () => {
                                 </div>
                             </div>
 
-                            {/* Gradient overlay for better text readability */}
                             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent rounded-2xl pointer-events-none" />
 
-                            {/* Subtle glow effect on hover with smooth transition */}
                             <div
                                 className={`absolute inset-0 rounded-2xl transition-all duration-600 ease-out ${activeCard === index
                                     ? "bg-gradient-to-r from-pink-500/5 to-blue-500/5 opacity-100"
