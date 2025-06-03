@@ -72,7 +72,6 @@ const YCWork = () => {
       </div>
       <div className="flex items-center justify-center p-10">
         <div className="w-full">
-          {/* Original 2-card grid layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl w-full mx-auto mb-8">
             {currentCards.map((card) => (
               <div
@@ -90,16 +89,14 @@ const YCWork = () => {
                     transition: "all 0.3s ease",
                   }}
                 >
-                  {/* Glow Effect */}
                   <div
-                    className={`absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-purple-500/30 via-blue-500/20 to-transparent rounded-full blur-xl transition-all duration-500 ${
-                      hoveredCard === card.id
+                    className={`absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-purple-500/30 via-blue-500/20 to-transparent rounded-full blur-xl transition-all duration-500 ${hoveredCard === card.id
                         ? "scale-[3] opacity-60"
                         : "scale-100 opacity-30"
-                    }`}
+                      }`}
                   ></div>
 
-                  {/* Image Placeholder */}
+                  {/* Image  */}
                   <div className="h-80 relative overflow-hidden">
                     <div className="absolute top-4 left-4 right-4 bottom-4">
                       <div
@@ -163,11 +160,8 @@ const YCWork = () => {
             ))}
           </div>
 
-          {/* Bottom Navigation Bar */}
           <div className="flex items-center justify-center space-x-6 max-w-md mx-auto">
-            {/* Previous Button */}
 
-            {/* Progress Bar */}
             <div className="flex-1 h-2 bg-slate-800/60 rounded-full overflow-hidden backdrop-blur-sm border border-slate-700/30">
               <div
                 className="h-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-500 ease-out"
@@ -178,7 +172,6 @@ const YCWork = () => {
               />
             </div>
 
-            {/* Dot Indicators */}
 
             <button
               onClick={prevSet}
@@ -187,7 +180,6 @@ const YCWork = () => {
               <ChevronLeft className="w-5 h-5 group-hover:text-purple-400 transition-colors" />
             </button>
 
-            {/* Next Button */}
             <button
               onClick={nextSet}
               className="w-10 h-10 bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-full flex items-center justify-center text-white hover:bg-slate-700/80 hover:border-purple-500/30 transition-all duration-300 group"
