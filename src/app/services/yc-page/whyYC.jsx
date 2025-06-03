@@ -28,7 +28,9 @@ const HoverCards = () => {
             ),
             title: "Technical Credibility",
             description:
-                "How-to guides, tutorials, and sample projects. Pragmatic guides with code snippets and diagrams to shorten the learning curve for new users.",
+                "All content written by engineers who use the tech you build.",
+            time: "100%",
+            tagLine: "Engineering-authored content",
         },
         {
             icon: (
@@ -42,8 +44,9 @@ const HoverCards = () => {
                 </svg>
             ),
             title: "Team Extension",
-            description:
-                "Interactive video content and guided tours to help users understand and utilize platform features effectively.",
+            description: "Full DevRel/content team instantly, no recruiting delays. ",
+            time: "DAY 1",
+            tagLine: "Ready from start",
         },
         {
             icon: (
@@ -58,7 +61,9 @@ const HoverCards = () => {
             ),
             title: "Proven Growth Impact",
             description:
-                "Go-to-market strategies and positioning frameworks for agentic workflows and automated solutions.",
+                "Engineering-led content drives qualified leads and organic growth.",
+            time: "3.5x",
+            tagLine: "More traffic with regular content",
         },
     ];
 
@@ -67,7 +72,7 @@ const HoverCards = () => {
             <div className="max-w-6xl mx-auto text-center relative z-10 py-10 pt-4">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
                     <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-                        Our <span className="text-orange-500">YC</span> Startups Trust Infrasity{" "}
+                        Why <span className="text-orange-500">YC</span> Startups Trust Infrasity{" "}
                     </h1>
                 </div>
 

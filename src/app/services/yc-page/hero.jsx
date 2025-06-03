@@ -57,13 +57,13 @@ export default function YCStartupLanding() {
 
             {/* Screenshot Container with Browser Chrome */}
             <div className="relative bg-gray-100 overflow-hidden shadow-2xl max-w-md w-full z-10"
-             style={{
-    border: "1px solid #5c5c63",
-    borderTopLeftRadius: "1rem",       // example rounding size
-    borderBottomLeftRadius: "1rem",
-    borderTopRightRadius: "0",
-    borderBottomRightRadius: "0",
-  }}
+              style={{
+                border: "1px solid #5c5c63",
+                borderTopLeftRadius: "1rem",
+                borderBottomLeftRadius: "1rem",
+                borderTopRightRadius: "0",
+                borderBottomRightRadius: "0",
+              }}
             >
               {/* Screenshot Image */}
               <div className="bg-white aspect-[4/3] flex items-center justify-center">
