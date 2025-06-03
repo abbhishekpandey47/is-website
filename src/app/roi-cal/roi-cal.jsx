@@ -209,12 +209,10 @@ const ContentROICalculator = () => {
     if (blogPosts * currValueOutSource > budget) {
       const valYouneed = Math.round(budget / currValueOutSource);
       handleOperation(
-        `This setup isn't feasible — your budget can't support ${blogPosts} blogs/month. ${
-          valYouneed <= blogPosts
-            ? `Consider reducing output to ${valYouneed} blogs/month, or increase your budget by $${
-                valOutsourcedCost - budget
-              }.`
-            : `Increase your budget by $${valOutsourcedCost - budget}.`
+        `This setup isn't feasible — your budget can't support ${blogPosts} blogs/month. ${valYouneed <= blogPosts
+          ? `Consider reducing output to ${valYouneed} blogs/month, or increase your budget by $${valOutsourcedCost - budget
+          }.`
+          : `Increase your budget by $${valOutsourcedCost - budget}.`
         }`
       );
 
@@ -465,16 +463,14 @@ const ContentROICalculator = () => {
                     />
                     <label
                       htmlFor="toggle"
-                      className={`absolute cursor-pointer rounded-full w-12 h-6 ${
-                        domainExpertise ? "bg-blue-500" : "bg-gray-700"
-                      }`}
+                      className={`absolute cursor-pointer rounded-full w-12 h-6 ${domainExpertise ? "bg-blue-500" : "bg-gray-700"
+                        }`}
                     >
                       <span
-                        className={`absolute rounded-full w-4 h-4 top-1 transition-transform duration-300 ease-in-out ${
-                          domainExpertise
+                        className={`absolute rounded-full w-4 h-4 top-1 transition-transform duration-300 ease-in-out ${domainExpertise
                             ? "bg-white transform translate-x-7"
                             : "bg-white translate-x-1"
-                        }`}
+                          }`}
                       />
                     </label>
                   </div>
@@ -546,11 +542,10 @@ const ContentROICalculator = () => {
                           <li
                             key={option.value}
                             onClick={() => handleSelectContent(option.value)}
-                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-md ${
-                              contentTeam === option.value
+                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-md ${contentTeam === option.value
                                 ? "bg-gray-800"
                                 : "hover:bg-gray-900"
-                            }`}
+                              }`}
                           >
                             <div className="flex justify-between items-center">
                               <span
@@ -653,11 +648,10 @@ const ContentROICalculator = () => {
                           <li
                             key={option.value}
                             onClick={() => handleSelect(option.value)}
-                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-md ${
-                              timeline === option.value
+                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-md ${timeline === option.value
                                 ? "bg-gray-800"
                                 : "hover:bg-gray-900"
-                            }`}
+                              }`}
                           >
                             <div className="flex justify-between items-center">
                               <span
