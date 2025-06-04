@@ -14,11 +14,15 @@ Before we dive deeper, let's clarify what exactly changelog vs release notes is.
 
 A changelog is a detailed, chronological record of every change made to a features, codebase, or related components of a SaaS product. It typically includes bug fixes, technical improvements, new features, and updates, often with version numbers and dates. These technical documents are primarily written for developers, technical users, and anyone who needs to track the product's evolution.
 
-For example, Daytona, a cloud-native infrastructure automation platform, maintains a detailed changelog like the one for their Bitbucket Server Prebuilds and Hetzner Provider update released on Nov 08, 2024. 
+For example, Daytona, a cloud-native infrastructure automation platform, maintains a detailed changelog like the one for their **[Bitbucket Server Prebuilds and Hetzner Provider](https://www.daytona.io/changelog/bitbucket-server-prebuilds-and-hetzner-provider)** update released on Nov 08, 2024. 
+
+![changelog vs release notes - daytona](/PostImages/changelog-vs-release-notes/rc2.png)
 
 This changelog clearly lists new features, improvements, and bug fixes with version numbers and dates, helping developers monitor product changes accurately and stay informed for upgrades. Startup changelogs like these tend to be shorter and focused on key updates for rapid development cycles.
 
-In contrast, enterprises like Facebook maintain highly detailed changelogs, such as their Facebook Android SDK changelog. 
+In contrast, enterprises like Facebook maintain highly detailed changelogs, such as their **[Facebook Android SDK changelog](https://github.com/facebook/facebook-android-sdk/blob/main/CHANGELOG.md)**. 
+
+![changelog vs release notes - facebook sdk](/PostImages/changelog-vs-release-notes/rc3.png)
 
 This changelog provides a comprehensive, version-by-version record of every update, including new features, bug fixes, improvements, and breaking changes. Maintained directly in the code repository as a Markdown file, it serves as a precise technical reference that helps developers track changes, troubleshoot issues, and manage upgrades effectively across complex projects.
 
@@ -26,7 +30,9 @@ This changelog provides a comprehensive, version-by-version record of every upda
 
 Release notes are user-friendly summaries of product updates written for a broader audience. They highlight key changes, improvements, and fixes in plain language, explaining how these updates benefit end users, customers, or business stakeholders. Release notes often accompany major or minor product releases and focus on the "why" and "what" rather than the technical "how."
 
-For instance, Zoom's release notes for the Desktop Client version 5.15.0 highlights new features, enhancements, resolved issues, and security updates. They are written in a way that's easy to follow, making it clear for users and admins what has been changed and the advantages of that upgrade. This format helps people quickly understand the key updates without feeling overwhelmed by the technical jargon.
+For instance, Zoom's release notes for the **[Desktop Client version 5.15.0](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0061222)** highlights new features, enhancements, resolved issues, and security updates. They are written in a way that's easy to follow, making it clear for users and admins what has been changed and the advantages of that upgrade. This format helps people quickly understand the key updates without feeling overwhelmed by the technical jargon.
+
+![changelog vs release notes - zoom](/PostImages/changelog-vs-release-notes/rc4.png)
 
 Now that we've understood what changelog vs release notes mean, let's take a closer look at how they differ and why those differences matter when communicating updates.
 
@@ -38,6 +44,8 @@ Changelogs are primarily created for developers, whether they're part of your in
 
 Let's say you have built a B2B SaaS product that offers AI-powered virtual agents designed to automate and enhance customer support for enterprise businesses. The developers might consult the changelog to see exactly which bug was fixed in the natural language processing module or what updates were made to the AI model's training pipeline.
 
+![changelog vs release notes](/PostImages/changelog-vs-release-notes/rc5.png)
+
 Release notes, on the other hand, address a wider group that includes product managers, customer success teams, and business leaders. These readers are less concerned with technical details and more interested in how updates improve their workflow, like reducing customer wait times, boosting AI accuracy, and enhancing overall support efficiency.
 
 Understanding the differences in the audience between release notes vs changelog helps you tailor your messaging so each group gets exactly what they need.
@@ -48,11 +56,15 @@ The level of detail in your updates can make a big difference in how effectively
 
 Changelogs are highly detailed. They list every single fix, improvement, or tweak, often including technical jargon, version numbers, and links to relevant code commits or issue trackers. They are frequently maintained as Markdown files in repositories (e.g., `CHANGELOG.md`). This depth is essential for developers who need to track changes precisely or debug problems.
 
-For example, the Apple App Store Server Library for Node.js maintains a detailed changelog in its GitHub repository. This changelog documents every version with specific fixes, feature additions, and updates, providing developers with the granular information needed to understand each change and manage integrations effectively.
+For example, the Apple App Store Server Library for Node.js maintains a detailed changelog in its **[GitHub repository](https://github.com/apple/app-store-server-library-node/blob/main/CHANGELOG.md)**. This changelog documents every version with specific fixes, feature additions, and updates, providing developers with the granular information needed to understand each change and manage integrations effectively.
+
+![changelog vs release notes - apple](/PostImages/changelog-vs-release-notes/rc6.png)
 
 Release notes are more focused and concise. They highlight only the most significant updates, emphasizing the practical benefits and how those changes improve the user experience. Instead of overwhelming users with technical data, release notes translate that complexity into clear, user-friendly explanations.
 
-For example, if you see Apple's release notes for Xcode 16.1, you will observe that it provides a clear summary of key new features, enhancements, and bug fixes. These notes highlight how they improve developers' workflows, such as improved build performance and new debugging tools, helping users quickly understand what's new and why it matters without diving into excessive technical detail.
+For example, if you see Apple's release notes for **[Xcode 16.1](https://developer.apple.com/documentation/xcode-release-notes/xcode-16_1-release-notes)**, you will observe that it provides a clear summary of key new features, enhancements, and bug fixes. These notes highlight how they improve developers' workflows, such as improved build performance and new debugging tools, helping users quickly understand what's new and why it matters without diving into excessive technical detail.
+
+![changelog vs release notes - apple release notes](/PostImages/changelog-vs-release-notes/rc7.png)
 
 Finding the right level of detail is important when navigating the changelog vs release notes divide, ensuring each audience receives the clarity they need.
 
@@ -61,6 +73,8 @@ Finding the right level of detail is important when navigating the changelog vs 
 How updates are organized greatly impacts how easily your audience can understand and act on the information. A clear, thoughtful structure helps guide readers to the details that matter most to them and sets the appropriate tone for the content.
 
 Changelogs typically follow a straightforward and chronological list format. Each changelog corresponds to a specific version or release, often presented as a plain-text or markdown list of technical changes. This format focuses on completeness and accuracy, showing every bug fix or improvement in order without much consideration of readability or visual appeal. It's designed for readers who need to quickly scan through detailed change histories or look up specific technical fixes.
+
+![changelog vs release notes - structure](/PostImages/changelog-vs-release-notes/rc8.png)
 
 Release notes are designed as clear, user-focused summaries highlighting the most relevant information for a wider audience. They're often organized by themes, key features, or user benefits, using headings, bullet points, and sometimes screenshots. This approach makes release notes more engaging and makes it easier to identify the required information, helping users understand not just what changed but why those new features, enhancements, or bug fixes are crucial. 
 
@@ -74,7 +88,7 @@ Release notes, on the other hand, are usually crafted by product managers, techn
 
 However, we understand the unique dynamics and challenges early-stage SaaS startups face: limited resources, tight timelines, and the need to communicate clearly across diverse audiences.
 
-If you're seeking technical writing services to help craft release notes and changelogs that are both accurate and engaging, partnering with Infrasity can provide the expertise and support you need. We've worked with over 50 startups to create product updates that resonate with both technical and non-technical users, helping you build trust and drive adoption.
+_If you're seeking **[technical writing services](https://www.infrasity.com/)** to help craft release notes and changelogs that are both accurate and engaging, partnering with Infrasity can provide the expertise and support you need. We've worked with over 50 startups to create product updates that resonate with both technical and non-technical users, helping you build trust and drive adoption._
 
 ### 5. How Often Are They Updated?
 
@@ -84,7 +98,9 @@ Changelogs are published frequently for every code change, bug fix, or minor imp
 
 Contrastingly, Release notes are relatively published less frequently and tend to coincide with significant milestones, like major feature launches, version upgrades, or monthly releases. By listing out the major impactful changes, release notes are relevant for a broader audience that prefers periodic summaries over constant technical detail.
 
-For example, in May, Amazon Business released 3 release notes highlighting key features like setting "Pay by Invoice" as the default payment method and enabling "Guided Buying" for Business Prime users. In contrast, April saw a higher volume with 10 release notes, reflecting a period of more frequent updates or smaller feature rollouts.
+For example, in May, **[Amazon Business](https://business.amazon.com/en/discover-more/release-notes)** released 3 release notes highlighting key features like setting "Pay by Invoice" as the default payment method and enabling "Guided Buying" for Business Prime users. In contrast, April saw a higher volume with 10 release notes, reflecting a period of more frequent updates or smaller feature rollouts.
+
+![changelog vs release notes - amazon](/PostImages/changelog-vs-release-notes/rc9.png)
 
 This pattern shows how release notes are typically grouped around meaningful changes or feature sets rather than every minor fix. The monthly count of release notes allows the end users to gauge the product's development rhythm without overwhelming them with technical details.
 
@@ -99,6 +115,8 @@ Changelogs are typically simple, text-based documents or markdown files. They fo
 Release notes, on the other hand, often incorporate visual elements like screenshots. These enhancements make the updates more engaging and easier to navigate for a wider audience, helping users quickly grasp new features or improvements and see their real-world impact.
 
 Let's take an example of a cloud infrastructure automation platform for developers and DevOps teams, StackGen. They included a screenshot in their May release notes to showcase their new Resource Discovery for .tfstate Imports feature. The screenshot clearly illustrates how users can select resources discovered from imported Terraform state files and add them to their app stack using an intuitive interface with checkboxes and arrow controls. This visual helps users quickly understand the feature's functionality and how it simplifies importing and managing existing infrastructure.
+
+![changelog vs release notes - stackgen](/PostImages/changelog-vs-release-notes/rc10.png)
 
 Using visuals strategically in release notes can boost user understanding, increase adoption rates, and create a more polished, professional impression of your product updates.
 
