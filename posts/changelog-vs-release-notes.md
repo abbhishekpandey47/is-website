@@ -10,7 +10,7 @@ Mixing them up can confuse users, dilute the impact of your updates, and make yo
 
 Before we dive deeper, let's clarify what exactly changelog vs release notes is.
 
-### What is a Changelog?
+### What Is a Changelog?
 
 A changelog is a detailed, chronological record of every change made to a features, codebase, or related components of a SaaS product. It typically includes bug fixes, technical improvements, new features, and updates, often with version numbers and dates. These technical documents are primarily written for developers, technical users, and anyone who needs to track the product's evolution.
 
