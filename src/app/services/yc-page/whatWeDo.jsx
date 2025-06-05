@@ -16,7 +16,7 @@ const WhatWeDo = () => {
         transition: "all 0.3s ease",
       }}
     >
-      <div className="max-w-6xl mx-auto text-center relative z-10 py-10 pt-4">
+      <div className="max-w-6xl mx-auto text-center relative z-10 py-14 ">
         <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
           <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
             What we do{" "}
@@ -151,31 +151,30 @@ const WhatWeDo = () => {
               <div className="p-8">
                 <div className="flex items-start justify-between mb-3">
                   <h2 className="text-2xl font-bold text-white quicksand-bold tracking-tighter">
-                    Technical Content and Blogs
+                    Webflow Development
                   </h2>
                 </div>
 
                 <p className="text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
-                  SEO-driven developer articles, whitepapers and product docs
-                  written by engineers for engineers
+                 Landing pages and websites tailored to B2B SaaS/DevTools, delivered fast - often under a week.
                 </p>
 
                 <div className="flex items-center space-x-3 mb-2">
                   <RightIcon />
                   <p className="text-sm text-gray-400 tracking-wider font-light flex items-center">
-                    How-to guides
+                   Responsive design 
                     <span className="ml-4 text-gray-400">|</span>{" "}
                   </p>
 
                   <RightIcon />
                   <p className="text-sm text-gray-400 tracking-wider font-light flex items-center">
-                    Integration playbooks
+                    Conversion Focused 
                     <span className="ml-4 text-gray-400">|</span>{" "}
                   </p>
 
                   <RightIcon />
                   <p className="text-sm text-gray-400 tracking-wider font-light">
-                    Integration playbooks
+                    SEO Driven
                   </p>
                 </div>
               </div>
@@ -269,19 +268,19 @@ const WhatWeDo = () => {
 
               {/* Right Side - Image */}
               <div className="flex-1">
-                <div className="h-full min-h-[200px] top-16 left-4 bottom-0 right-0 relative overflow-hidden rounded-xl">
+                <div className="h-full min-h-[200px] top-10 left-4 bottom-0 right-0 relative overflow-hidden rounded-xl">
                   <div
-                    className="bg-white/95 p-4 h-full relative overflow-hidden rounded-xl"
+                    className=" p-4 h-full relative overflow-hidden rounded-xl"
                     style={{
                       border: "1.5px solid #223170",
                     }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center text-slate-600 text-lg font-medium rounded-xl">
+                    <div className="absolute inset-0 bg-gradient-to-br flex items-center justify-center text-slate-600 text-lg font-medium rounded-xl">
                       <Image
-                        src={`/ai-page/first.png`}
+                        src={`/ai-page/third.png`}
                         alt="Kubiya Dashboard"
-                        layout="fill"
-                        objectFit="cover"
+                        height={500}
+                        width={600}
                         className="absolute inset-0 object-cover rounded-xl"
                       />
                     </div>
@@ -293,7 +292,7 @@ const WhatWeDo = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-center p-10 bg-gray-900 min-h-screen">
+      <div className="flex items-center justify-center p-10 bg-gray-900 min-h-screen pb-20">
         <div className="flex flex-col lg:flex-row gap-10 max-w-6xl w-full">
           {/* First Card */}
           <div
