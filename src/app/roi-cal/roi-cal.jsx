@@ -823,7 +823,6 @@ const ContentROICalculator = () => {
                         </div>
                       </div>
 
-                      {/* 3-Year ROI */}
                       <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
                         <div className="text-2xl font-bold text-cyan-400 mb-1">
                           {Math.round(((savings * 36) / outsourcedCost) * 100)}%
