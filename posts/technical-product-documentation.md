@@ -8,19 +8,19 @@ Effective technical product documentation doesn't just guide your users through 
 
 Technical product documentation enables developers, other end users, and internal teams to understand, use, and troubleshoot your product issues. It is crucial to be aware of what technical product documentation includes. Therefore, here's what they include: 
 
-### Use Case Guides
-The product use case guide is a type of technical product documentation that offers real-world scenarios and practical applications of your product to showcase how it can make your users' workflow easy. These guides provide a detailed set of instructions on how to use your product to achieve specific, measurable outcomes. They are key to demonstrating how your solution addresses customer pain points and integrates them into existing systems.
+### 1. Use Case Guides
+The **[product use case guide](https://www.infrasity.com/blog/product-use-case)** is a type of technical product documentation that offers real-world scenarios and practical applications of your product to showcase how it can make your users' workflow easy. These guides provide a detailed set of instructions on how to use your product to achieve specific, measurable outcomes. They are key to demonstrating how your solution addresses customer pain points and integrates them into existing systems.
 
-### Troubleshooting Guides
+### 2. Troubleshooting Guides
 User troubleshooting guides provide solutions to the issues that developers or other end users face. Typically, they provide diagnostic steps, error codes, and potential causes of the problem. Most of these guides tell you how to identify what is wrong, the related error codes, and the likely causes so users can solve problems by themselves. Technical aspects could be included to make it easier to solve and fix any issues.
 
-### How-to Guides
+### 3. How-to Guides
 These are typically comprehensive, step-by-step instructions for end users to use specific features of the SaaS product. These guides comprise clear explanations of tasks and workflows that are critical for effectively using your product. They help users complete tasks without requiring external assistance.
 
-### CLI Docs
+### 4. CLI Docs
 The SaaS products that have a Command-Line Interface (CLI) should provide the users with CLI documentation. They offer a comprehensive reference for commands, syntax, options, and configurations required to interact with the product programmatically. CLI documentation plays an important role in enabling automation, batch processing, and integration within CI/CD pipelines, ensuring that your product can scale efficiently in DevOps environments.
 
-### Release Notes and Changelogs
+### 5. Release Notes and Changelogs
 They are also crucial types of technical product documentation that allow users to stay updated about the SaaS product, so they know that their issues are being fixed and the team is working regularly on enhancing the product's features. 
 
 The release notes highlight new features, enhancements, fixes, and any potential compatibility issues or known issues of the product, mainly for the end users, like product managers, developers, customer support teams, etc. 
@@ -35,13 +35,13 @@ Technical product documentation serves as a multi-purpose asset for SaaS startup
 
 ### 1. Leveraging Product Documentation as a Marketing Tool
 
-Let's suppose your SaaS product is ready to launch, or it has just. Now, it's time to market it to your target audience - developers or other end users. When marketing a product built for developers, you need to think about dev marketing differently. Traditional tactics like ads or social media might help you get attention, but product documentation should be your top priority.
+Let's suppose your SaaS product is ready to launch, or it has just. Now, it's time to market it to your target audience - developers or other end users. When marketing a product built for developers, you need to think about **[dev marketing](https://www.infrasity.com/blog/dev-marketing)** differently. Traditional tactics like ads or social media might help you get attention, but product documentation should be your top priority.
 
 Why? Because when developers hear about your product or come across it online, they'll first look for your technical product documentation. Why? Because developers want to quickly understand how your product works, how it integrates into their workflows, and how they can resolve any issues that arise.
 
 Documentation becomes their first point of reference, offering insights into your product's technical capabilities, integration options, and troubleshooting steps. The more detailed, accessible, and clear your documentation is, the more likely developers will trust your product, see its value, and integrate it into their workflows confidently.
 
-For example, take a look at a technical product documentation example of Shopify. When developers hear about Shopify, they might search specific keywords, like "Shopify API," "Shopify Developer API," "Shopify APIs," or "Shopify API documentation." With these keywords, they will quickly find the link to the Shopify API documentation, which not only serves as a technical reference but also demonstrates the platform's full potential.
+For example, take a look at a technical product documentation example of Shopify. When developers hear about Shopify, they might search specific keywords, like "Shopify API," "Shopify Developer API," "Shopify APIs," or "Shopify API documentation." With these keywords, they will quickly find the link to the **[Shopify API documentation](https://shopify.dev/docs/api)**, which not only serves as a technical reference but also demonstrates the platform's full potential.
 
 The documentation is clear and detailed and includes API references, authentication guides, tutorials, use case examples, SDKs, rate-limiting information, and webhook setup. Most probably, developers will first go through the use case guides to see the real-world examples and to visualize how the platform can help meet their goals. This approach doesn't just provide the 'how-to' but helps developers see the possibilities and value of the product from a technical perspective, making it an essential part of their decision to adopt it.
 
@@ -49,7 +49,7 @@ The documentation is clear and detailed and includes API references, authenticat
 
 When developers explore a new platform, they usually begin using it with a free trial, and the ease of onboarding plays a crucial role in their decision to adopt it. For example, when developers hear about Shopify, they typically look for ways to quickly get started. Clear, accessible documentation helps them understand this process with ease, offering step-by-step guides, code snippets, and setup instructions that simplify the integration process.
 
-For example, here's a tweet by ShopifyDevs highlighting 5 updates that directly improve the developer experience. These updates include clearer Discount GraphQL Admin API docs, intuitive navigation, and linked tutorials, which simplify how developers understand and integrate Shopify's features.
+For example, here's a tweet by **[ShopifyDevs](https://x.com/ShopifyDevs/status/1895247932590325828)** highlighting 5 updates that directly improve the developer experience. These updates include clearer Discount GraphQL Admin API docs, intuitive navigation, and linked tutorials, which simplify how developers understand and integrate Shopify's features.
 
 In response, Afflr App (a third-party app for affiliate marketing on Shopify) tweeted about how these updates make developers' jobs easier by providing "cleaner docs, smoother deployments, and better data tracking." This emphasizes how improvements to documentation and deployment processes enable developers to get up to speed faster and integrate features more seamlessly.
 
@@ -71,7 +71,7 @@ Technical product documentation is a pretty versatile asset for B2B SaaS startup
 
 However, it is crucial to maintain a high quality of technical product documentation. Amidst the agile environment, you can partner with a technical writing agency, like Infrasity. We prioritize creating clear and easy-to-understand documentation that not only reaches your target users but also accelerates product adoption. Our team of technical writers and developers works together to ensure that the documentation is not only user-friendly but also prepared with the point of view of developers in mind.
 
-Book a Free Demo to discuss how we can help you create high-quality technical product documentation to boost your product's adoption.
+Book a **[Free Demo](https://www.infrasity.com/contact)** to discuss how we can help you create high-quality technical product documentation to boost your product's adoption.
 
 ## FAQs
 
