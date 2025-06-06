@@ -8,6 +8,8 @@ Effective technical product documentation doesn't just guide your users through 
 
 Technical product documentation enables developers, other end users, and internal teams to understand, use, and troubleshoot your product issues. It is crucial to be aware of what technical product documentation includes. Therefore, here's what they include: 
 
+![types of technical product documentation](/PostImages/technical-product-documentation/tp5.png) 
+
 ### 1. Use Case Guides
 The **[product use case guide](https://www.infrasity.com/blog/product-use-case)** is a type of technical product documentation that offers real-world scenarios and practical applications of your product to showcase how it can make your users' workflow easy. These guides provide a detailed set of instructions on how to use your product to achieve specific, measurable outcomes. They are key to demonstrating how your solution addresses customer pain points and integrates them into existing systems.
 
