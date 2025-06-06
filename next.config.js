@@ -23,6 +23,11 @@ module.exports = {
                 destination: '/blog/saas-video-production',
                 permanent: true,
             },
+            {
+                source: '/services/yc-page',
+                destination: '/services/gtm-content-services-for-yc-startups ',
+                permanent: true,
+            },
         ];
     },
 };
