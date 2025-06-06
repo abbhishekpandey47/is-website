@@ -68,7 +68,7 @@ const HoverCards = () => {
     ];
 
     return (
-        <div className="bg-gradient-to-br from-blue-900/40 via-[#0a0f1c] to-slate-900 py-20">
+        <div className="bg-gradient-to-br from-blue-900/40 via-[#0a0f1c] to-slate-900 py-10">
             <div className="max-w-6xl mx-auto text-center relative z-10 py-10 pt-4">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
                     <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
@@ -77,14 +77,14 @@ const HoverCards = () => {
                 </div>
 
                 {/* Description */}
-                <div className="max-w-[70%] mx-auto mb-8">
+                <div className="max-w-[70%] mx-auto">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
                         Built for the speed and precision that Y Combinator companies demand
                     </p>
                 </div>
             </div>
             <div className="flex items-center justify-center p-8">
-                <div className="flex gap-4 max-w-7xl w-full justify-center items-start">
+                <div className="h-64 flex gap-4 max-w-7xl w-full justify-center items-start">
                     {cards.map((card, index) => (
                         <div
                             key={index}
@@ -94,6 +94,11 @@ const HoverCards = () => {
                                 }`}
                             onMouseEnter={() => setActiveCard(index)}
                             onMouseLeave={() => setActiveCard(0)}
+                            style={{
+                                background: "linear-gradient(to top right, #020207 40%, #2c3077 90%)",
+                                border: "2px solid #2f2f37",
+                                transition: "all 0.3s ease",
+                            }}
                         >
                             <div className="px-8 pt-8 flex flex-col h-full">
 
@@ -114,8 +119,9 @@ const HoverCards = () => {
                                             ? "opacity-100 translate-y-0 delay-200"
                                             : "opacity-0 translate-y-2 delay-0"
                                             }`}
+
                                     >
-                                        <p className="h-10 text-[17px] md:text-[15px] text-gray-300 leading-relaxed tracking-wide font-light">
+                                        <p className="h-10 text-[17px] md:text-[15px] text-[#afafaf] leading-relaxed tracking-wide font-[330]">
                                             {card.description}
                                         </p>
 
@@ -124,12 +130,12 @@ const HoverCards = () => {
 
                                             <div className="flex items-center space-x-3 pt-14">
                                                 <RightIcon />
-                                                <p className="text-sm text-[#ffa600] tracking-wider flex items-center">
+                                                <p className="text-sm text-[#ffa600] tracking-wider font-[330] flex items-center">
                                                     {card.time}{" "}
                                                     <span className="ml-4 text-gray-400">|</span>{" "}
                                                 </p>
 
-                                                <p className="text-sm text-[#ffffffe8] tracking-wider font-light flex items-center">
+                                                <p className="text-sm text-[#afafaf] tracking-wider font-[330] flex items-center">
                                                     {card.tagLine}{" "}
                                                 </p>
 
