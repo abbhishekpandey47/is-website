@@ -1,6 +1,6 @@
 ## Introduction
 
-As a B2B SaaS startup founder, you are trying to work within limited budgets, managing a small and overworked team, and figuring out how to stand out in a competitive market. In the rush to launch and gain traction, creating technical product documentation can easily slip down your list of priorities. However, having clear, well-organized documentation from the beginning can help you achieve multiple objectives with minimal effort.
+As a B2B SaaS startup founder, you are trying to work within limited budgets, managing a small and overworked team, and figuring out how to stand out in a competitive market. In the rush to launch and gain traction, creating **technical product documentation** can easily slip down your list of priorities. However, having clear, well-organized documentation from the beginning can help you achieve multiple objectives with minimal effort.
 
 Effective technical product documentation doesn't just guide your users through the product; it can lay the foundation for smoother onboarding, reduce customer support time, and even enhance your marketing efforts. In this article, we'll dive into how technical documentation can be a versatile asset, helping you streamline your processes and set your startup up for success from the get-go.
 
@@ -43,7 +43,7 @@ Documentation becomes their first point of reference, offering insights into you
 
 ![technical product documentation - shopify api](/PostImages/technical-product-documentation/tp2.png) 
 
-For example, take a look at a technical product documentation example of Shopify. When developers hear about Shopify, they might search specific keywords, like "Shopify API," "Shopify Developer API," "Shopify APIs," or "Shopify API documentation." With these keywords, they will quickly find the link to the **[Shopify API documentation](https://shopify.dev/docs/api)**, which not only serves as a technical reference but also demonstrates the platform's full potential.
+For example, take a look at a technical product documentation example of Shopify. When developers hear about Shopify, they might search specific keywords, like _"Shopify API," "Shopify Developer API," "Shopify APIs," or "Shopify API documentation_." With these keywords, they will quickly find the link to the **[Shopify API documentation](https://shopify.dev/docs/api)**, which not only serves as a technical reference but also demonstrates the platform's full potential.
 
 ![technical product documentation - shopify api keyword](/PostImages/technical-product-documentation/tp3.png) 
 
