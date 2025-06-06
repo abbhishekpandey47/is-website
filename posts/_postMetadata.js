@@ -523,15 +523,15 @@ let postMetaData = [
     },
 
     {
-        title: "Here's Why You Should Partner With an Explainer Video Agency",
-        metatitle: "Here's Why You Should Partner With an Explainer Video Agency",
-        slug: "explainer-video-agency",
-        description: "Explainer videos play a significant role in driving conversions for B2B SaaS companies. However, it involves a comprehensive process in producing a high-quality professional video. Explore why they are great for your company and what goes behind creating them.",
-        ogImage: "/PostImages/explainer-video-agency/e1.png",
+        title: "The Complete SaaS Video Production Process For Startups",
+        metatitle: "The Complete B2B SaaS Video Production Process For Startups",
+        slug: "saas-video-production",
+        description: "Product docs are a valuable asset for startups but SaaS explainer videos can significantly boost conversion. Here’s what goes into the video production process.",
+        ogImage: "/PostImages/saas-video-production/e1.png",
         publishedOn: "2025-03-13",
         authorId: "author0004",
         category: "Informational",
-        metaDescription: "If you're a SaaS company, partnering with an Explainer Video Agency can be the right decision. Read the article to know what goes behind the production process."
+        metaDescription: "Product docs are a valuable asset for startups but SaaS explainer videos can significantly boost conversion. Here’s what goes into the video production process."
 },
 
     
