@@ -8,16 +8,27 @@ export default function YCStartupLanding() {
   return (
     <div
       className="flex items-center pb-20 pt-40 overflow-hidden relative"
-      style={{ background: "#2c3077" }}
     >
-      <div className="animated-bg"></div>
+      <div className="animated-bg">
+        <div className="floating-orb orb-1"></div>
+        <div className="floating-orb orb-2"></div>
+        <div className="floating-orb orb-3"></div>
+        <div className="floating-orb orb-4"></div>
+        <div className="wave-layer"></div>
+        <div className="pulse-layer"></div>
+        <div className="gradient-overlay"></div>
+        <div className="transition-orb"></div>
+        <div className="transition-orb"></div>
+      </div>
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className="w-[100%] text-left ml-20">
+          <div className="w-[120%] text-left p-8 lg:m-0 lg:ml-20">
+                    <div className="half-ring"></div>
+
             <h1
-              className="text-5xl lg:text-6xl font-bold quicksand-bold tracking-tighter text-white mb-8"
+              className="text-5xl lg:text-6xl font-bold quicksand-bold tracking-wide text-white  mb-8"
               style={{ lineHeight: "1.3" }}
             >
               Your <span className="text-white">GTM & Technical</span>
@@ -27,7 +38,7 @@ export default function YCStartupLanding() {
               for <span className="text-orange-500">YC Startups</span>
             </h1>
 
-            <p className="text-xl md:text-xl text-[#e7d2ac] leading-relaxed font-light mb-8">
+            <p className="w-[82%] text-xl md:text-xl text-[#ffe8a8] leading-relaxed font-[320] mb-8">
               We blend engineering expertise with marketing speed, building
               conversion-focused sites and developer-focused content so you can
               launch faster.
@@ -76,6 +87,18 @@ export default function YCStartupLanding() {
       </div>
 
       <style jsx>{`
+
+       .half-ring {
+          position: absolute;
+          left: -300px;
+          top: -250px;
+          width: 780px;
+          height: 800px;
+          border: 2px solid #2d3159;
+          border-radius: 50%;
+          opacity: 0.8;
+          z-index: -1;
+        }
         .animated-bg {
           position: absolute;
           top: 0;
@@ -86,71 +109,217 @@ export default function YCStartupLanding() {
           overflow: hidden;
         }
 
-        .animated-bg::before {
-          content: "";
+        .floating-orb {
           position: absolute;
+          border-radius: 50%;
+          filter: blur(60px);
+          opacity: 0.8;
+          animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .orb-1 {
+          width: 700px;
+          height: 700px;
+          background: radial-gradient(circle, #080915 0%, #080915 40%, transparent 70%);
+          top: -350px;
+          left: -350px;
+          animation: float1 28s infinite ease-in-out;
+        }
+
+        .orb-2 {
+          width: 700px;
+          height: 700px;
+          background: radial-gradient(circle, #080915 0%, #080915 35%, transparent 65%);
+          top: 30%;
+          right: -350px;
+          animation: float2 35s infinite ease-in-out reverse;
+        }
+
+        .orb-3 {
+          width: 550px;
+          height: 550px;
+          background: radial-gradient(circle, #080915 0%, #080915 30%, transparent 60%);
+          bottom: -275px;
+          left: 25%;
+          animation: float3 42s infinite ease-in-out;
+        }
+
+        .orb-4 {
           width: 800px;
           height: 800px;
-          background: radial-gradient(
-            circle,
-            rgba(147, 51, 234, 0.1) 0%,
-            transparent 70%
-          );
-          border-radius: 50%;
-          animation: moveCircle1 20s infinite linear;
-          top: -200px;
-          left: -200px;
+          background: radial-gradient(circle, #080915 0%, #080915 45%, transparent 75%);
+          top: 10%;
+          left: 50%;
+          animation: float4 50s infinite ease-in-out reverse;
         }
 
-        .animated-bg::after {
-          content: "";
+        .wave-layer {
           position: absolute;
-          width: 600px;
-          height: 600px;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(
+            ellipse at 30% 40%,
+            rgba(8, 9, 21, 0.3) 0%,
+            transparent 60%
+          );
+          animation: waveShift 30s infinite ease-in-out;
+        }
+
+        .pulse-layer {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 120%;
+          height: 120%;
+          border-radius: 50%;
           background: radial-gradient(
             circle,
-            rgba(59, 130, 246, 0.1) 0%,
+            rgba(8, 9, 21, 0.2) 0%,
             transparent 70%
           );
+          animation: pulse 20s infinite ease-in-out;
+        }
+
+        .gradient-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(
+            ellipse at 70% 60%,
+            rgba(8, 9, 21, 0.25) 0%,
+            transparent 70%
+          );
+          animation: gradientRotate 45s infinite ease-in-out reverse;
+        }
+
+        .transition-orb {
+          position: absolute;
+          width: 450px;
+          height: 450px;
           border-radius: 50%;
-          animation: moveCircle2 25s infinite linear reverse;
-          bottom: -200px;
-          right: -200px;
+          background: radial-gradient(circle, rgba(8, 9, 21, 0.6) 0%, transparent 70%);
+          filter: blur(50px);
+          opacity: 0;
+          animation: fadeInOut 22s infinite ease-in-out;
         }
 
-        @keyframes moveCircle1 {
-          0% {
-            transform: translate(0, 0) rotate(0deg);
+        .transition-orb:nth-child(8) {
+          top: 15%;
+          left: 15%;
+          animation-delay: -11s;
+        }
+
+        .transition-orb:nth-child(9) {
+          bottom: 15%;
+          right: 15%;
+          animation-delay: -5.5s;
+        }
+
+        @keyframes float1 {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
           }
           25% {
-            transform: translate(200px, 100px) rotate(90deg);
+            transform: translate(400px, 250px) scale(1.1);
           }
           50% {
-            transform: translate(100px, 200px) rotate(180deg);
+            transform: translate(700px, 150px) scale(0.9);
           }
           75% {
-            transform: translate(-100px, 100px) rotate(270deg);
-          }
-          100% {
-            transform: translate(0, 0) rotate(360deg);
+            transform: translate(300px, 500px) scale(1.05);
           }
         }
 
-        @keyframes moveCircle2 {
-          0% {
-            transform: translate(0, 0) rotate(0deg);
+        @keyframes float2 {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+          }
+          20% {
+            transform: translate(-350px, -200px) scale(1.2);
+          }
+          40% {
+            transform: translate(-500px, 150px) scale(0.8);
+          }
+          60% {
+            transform: translate(-250px, 350px) scale(1.1);
+          }
+          80% {
+            transform: translate(-150px, -250px) scale(0.95);
+          }
+        }
+
+        @keyframes float3 {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+          }
+          30% {
+            transform: translate(300px, -400px) scale(1.15);
+          }
+          60% {
+            transform: translate(-200px, -300px) scale(0.85);
+          }
+          90% {
+            transform: translate(150px, -150px) scale(1.05);
+          }
+        }
+
+        @keyframes float4 {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
           }
           25% {
-            transform: translate(-150px, -100px) rotate(90deg);
+            transform: translate(-400px, 200px) scale(0.9);
           }
           50% {
-            transform: translate(-50px, -150px) rotate(180deg);
+            transform: translate(-200px, -300px) scale(1.2);
           }
           75% {
-            transform: translate(100px, -100px) rotate(270deg);
+            transform: translate(300px, 150px) scale(0.95);
+          }
+        }
+
+        @keyframes waveShift {
+          0% {
+            transform: translateX(-50%);
           }
           100% {
-            transform: translate(0, 0) rotate(360deg);
+            transform: translateX(0%);
+          }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.2;
+          }
+          50% {
+            transform: translate(-50%, -50%) scale(1.3);
+            opacity: 0.05;
+          }
+        }
+
+        @keyframes gradientRotate {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes fadeInOut {
+          0%, 100% {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          50% {
+            opacity: 0.3;
+            transform: scale(1.4);
           }
         }
       `}</style>

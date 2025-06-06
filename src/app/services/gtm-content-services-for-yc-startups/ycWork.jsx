@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const YCWork = () => {
   const [currentSet, setCurrentSet] = useState(0);
@@ -15,6 +16,7 @@ const YCWork = () => {
         id: "kubiya",
         title: "Kubiya.ai",
         category: "ENTERPRISE AI AGENT PLATFORM",
+        link: "https://kubiya.ai",
         description:
           "Translated complex agent features into a clear, responsive landing page delivered in days. Our content guides help engineering users onboard quickly to their unified observability dashboard.",
         achievement: "Delivered in 3 days",
@@ -25,6 +27,7 @@ const YCWork = () => {
         id: "middleware",
         title: "Middleware",
         category: "UNIFIED OBSERVABILITY PLATFORM",
+        link: "https://middleware.io",
         description:
           "Made technical UIs approachable with content guides and use-case write-ups that explain dashboards, alerts and logs in plain language for faster engineering onboarding.",
         achievement: "50% faster onboarding",
@@ -83,12 +86,29 @@ const YCWork = () => {
                 <div
                   className="relative bg-slate-900/60 backdrop-blur-sm border border-slate-700/50 rounded-3xl overflow-hidden transition-all duration-500 hover:border-purple-500/30"
                   style={{
-                    background:
-                      "linear-gradient(to top right, #020207 40%, #2c3077 90%)",
+                    background: hoveredCard === card.id
+                      ? "#2c3077" 
+                      : "linear-gradient(to top right, #020207 40%, #2c3077 90%)",
                     border: "2px solid #2f2f37",
-                    transition: "all 0.3s ease",
+                    position: "relative",
+                    overflow: "hidden",
+                    transition: "background 0.6s ease"
                   }}
                 >
+                  {/* Glowy gradient overlay animation */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(600px circle at ${hoveredCard === card.id ? '100% 0%' : '120% -20%'}, 
+                        rgba(139, 92, 246, ${hoveredCard === card.id ? '0.3' : '0'}) 0%, 
+                        rgba(59, 130, 246, ${hoveredCard === card.id ? '0.2' : '0'}) 30%, 
+                        rgba(147, 51, 234, ${hoveredCard === card.id ? '0.1' : '0'}) 50%, 
+                        transparent 70%)`,
+                      transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+                      transform: hoveredCard === card.id ? 'scale(1)' : 'scale(0.8)',
+                      opacity: hoveredCard === card.id ? 1 : 0
+                    }}
+                  />
                   <div
                     className={`absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-purple-500/30 via-blue-500/20 to-transparent rounded-full blur-xl transition-all duration-500 ${hoveredCard === card.id
                         ? "scale-[3] opacity-60"
@@ -96,7 +116,6 @@ const YCWork = () => {
                       }`}
                   ></div>
 
-                  {/* Image  */}
                   <div className="h-80 relative overflow-hidden">
                     <div className="absolute top-4 left-4 right-4 bottom-4">
                       <div
@@ -123,7 +142,11 @@ const YCWork = () => {
                       <h2 className="text-2xl font-bold text-white tracking-tighter font-sans">
                         {card.title}
                       </h2>
-                      <ArrowUpRight className="text-slate-400 w-8 h-8 transition-all rounded-sm duration-300 group-hover:text-purple-400 border-[1.5px] border-[#5c5c63]" />
+
+                      <Link href={card.link} target="_blank" rel="noopener noreferrer">
+                      <ArrowUpRight className="text-slate-400 w-7 h-7 transition-all rounded-sm duration-300 group-hover:text-purple-400 border-[1.5px] border-[#5c5c63]" />
+                     </Link>
+                     
                     </div>
 
                     <div className="mb-3">
