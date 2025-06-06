@@ -122,7 +122,7 @@ You've invented a great B2B SaaS product, but without visibility, it won't reach
 
 They also reduce bounce rates, as customers stay to watch the short SaaS explainer video rather than leaving immediately because they might plan on reading the product doc later. Search engines give greater importance to video content because they enhance the probability of user clicks. Your search rankings combined with website traffic will improve when you embed a well-optimized explainer video either on your website or YouTube platform.
 
-These are the reasons why you should prioritize SaaS video production than just product documentation. They help simplify complex SaaS products, leading to increased customer acquisition and product adoption.
+These are the reasons why you should prioritize SaaS video production over just working on product documentation. They help simplify complex SaaS products, leading to increased customer acquisition and product adoption.
 
 ## Conclusion  
 
