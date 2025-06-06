@@ -21,9 +21,7 @@ These are typically comprehensive, step-by-step instructions for end users to us
 The SaaS products that have a Command-Line Interface (CLI) should provide the users with CLI documentation. They offer a comprehensive reference for commands, syntax, options, and configurations required to interact with the product programmatically. CLI documentation plays an important role in enabling automation, batch processing, and integration within CI/CD pipelines, ensuring that your product can scale efficiently in DevOps environments.
 
 ### 5. Release Notes and Changelogs
-They are also crucial types of technical product documentation that allow users to stay updated about the SaaS product, so they know that their issues are being fixed and the team is working regularly on enhancing the product's features. 
-
-The release notes highlight new features, enhancements, fixes, and any potential compatibility issues or known issues of the product, mainly for the end users, like product managers, developers, customer support teams, etc. 
+They are also crucial types of technical product documentation that allow users to stay updated about the SaaS product, so they know that their issues are being fixed and the team is working regularly on enhancing the product's features. The release notes highlight new features, enhancements, fixes, and any potential compatibility issues or known issues of the product, mainly for the end users, like product managers, developers, customer support teams, etc. 
 
 Changelogs, on the other hand, are more focused toward developers, offering a detailed log of all changes that have been made. They even include the specific version number and the dates of release, enabling users and developers to track modifications and understand the progression of the product.
 
