@@ -47,7 +47,7 @@ For example, take a look at a technical product documentation example of Shopify
 
 The documentation is clear and detailed and includes API references, authentication guides, tutorials, use case examples, SDKs, rate-limiting information, and webhook setup. Most probably, developers will first go through the use case guides to see the real-world examples and to visualize how the platform can help meet their goals. This approach doesn't just provide the 'how-to' but helps developers see the possibilities and value of the product from a technical perspective, making it an essential part of their decision to adopt it.
 
-### Facilitating Smooth Developer Onboarding
+### 2. Facilitating Smooth Developer Onboarding
 
 When developers explore a new platform, they usually begin using it with a free trial, and the ease of onboarding plays a crucial role in their decision to adopt it. For example, when developers hear about Shopify, they typically look for ways to quickly get started. Clear, accessible documentation helps them understand this process with ease, offering step-by-step guides, code snippets, and setup instructions that simplify the integration process.
 
@@ -57,7 +57,7 @@ For example, here's a tweet by **[ShopifyDevs](https://x.com/ShopifyDevs/status/
 
 In response, Afflr App (a third-party app for affiliate marketing on Shopify) tweeted about how these updates make developers' jobs easier by providing "cleaner docs, smoother deployments, and better data tracking." This emphasizes how improvements to documentation and deployment processes enable developers to get up to speed faster and integrate features more seamlessly.
 
-### 2. Improving Operational Efficiency and Customer Retention
+### 3. Improving Operational Efficiency and Customer Retention
 
 Technical product documentation doesn't just help developers and other end users; it also plays a key role in improving your internal operations and retaining customers. When the users have easy access to clear, precise documentation, it minimizes the time spent troubleshooting and reduces reliance on support teams, directly boosting operational efficiency.
 
