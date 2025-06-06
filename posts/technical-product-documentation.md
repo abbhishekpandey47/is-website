@@ -41,13 +41,19 @@ Why? Because when developers hear about your product or come across it online, t
 
 Documentation becomes their first point of reference, offering insights into your product's technical capabilities, integration options, and troubleshooting steps. The more detailed, accessible, and clear your documentation is, the more likely developers will trust your product, see its value, and integrate it into their workflows confidently.
 
+![technical product documentation - shopify api](/PostImages/technical-product-documentation/tp2.png) 
+
 For example, take a look at a technical product documentation example of Shopify. When developers hear about Shopify, they might search specific keywords, like "Shopify API," "Shopify Developer API," "Shopify APIs," or "Shopify API documentation." With these keywords, they will quickly find the link to the **[Shopify API documentation](https://shopify.dev/docs/api)**, which not only serves as a technical reference but also demonstrates the platform's full potential.
+
+![technical product documentation - shopify api keyword](/PostImages/technical-product-documentation/tp3.png) 
 
 The documentation is clear and detailed and includes API references, authentication guides, tutorials, use case examples, SDKs, rate-limiting information, and webhook setup. Most probably, developers will first go through the use case guides to see the real-world examples and to visualize how the platform can help meet their goals. This approach doesn't just provide the 'how-to' but helps developers see the possibilities and value of the product from a technical perspective, making it an essential part of their decision to adopt it.
 
 ### Facilitating Smooth Developer Onboarding
 
 When developers explore a new platform, they usually begin using it with a free trial, and the ease of onboarding plays a crucial role in their decision to adopt it. For example, when developers hear about Shopify, they typically look for ways to quickly get started. Clear, accessible documentation helps them understand this process with ease, offering step-by-step guides, code snippets, and setup instructions that simplify the integration process.
+
+![technical product documentation - shopify tweet](/PostImages/technical-product-documentation/tp4.png) 
 
 For example, here's a tweet by **[ShopifyDevs](https://x.com/ShopifyDevs/status/1895247932590325828)** highlighting 5 updates that directly improve the developer experience. These updates include clearer Discount GraphQL Admin API docs, intuitive navigation, and linked tutorials, which simplify how developers understand and integrate Shopify's features.
 
