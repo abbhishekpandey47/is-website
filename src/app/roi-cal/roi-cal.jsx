@@ -878,8 +878,7 @@ const ContentROICalculator = () => {
                       faster and save weeks of ramp-up.
                     </p>
                   </div>
-
-                  <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
+                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <div>
                       {/* <p className="text-[12px] text-gray-300">
                         Note: To hit {trafficGrowth}% traffic growth, aim for{" "}
@@ -895,12 +894,15 @@ const ContentROICalculator = () => {
                         every month
                       </p>
 
-                      <div className="mt-3 text-center">
-                        <CalendarBooking buttonText="Get Started Today" />
-                      </div>
+                      
                     </div>
                   </div>
+                  <div className="mt-3 text-center">
+                        <CalendarBooking buttonText="Get Started Today" />
+                      </div>
                 </div>
+                
+                
               ) : (
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="w-24 h-24 mb-4">

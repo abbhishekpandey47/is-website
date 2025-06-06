@@ -433,9 +433,8 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
   };
 
   const formatDate = (date) => {
-    return `${weekdays[date.getDay()]}, ${
-      months[date.getMonth()]
-    } ${date.getDate()}, ${date.getFullYear()}`;
+    return `${weekdays[date.getDay()]}, ${months[date.getMonth()]
+      } ${date.getDate()}, ${date.getFullYear()}`;
   };
 
   const renderCalendar = () => {
@@ -468,15 +467,13 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
           key={`day-${day}`}
           className={`h-10 w-10 flex items-center justify-center rounded-full cursor-pointer mx-1
             ${isSelected ? "bg-blue-600 text-white" : ""} 
-            ${
-              isTodayDate && !isSelected
-                ? "border border-blue-600 text-white"
-                : ""
+            ${isTodayDate && !isSelected
+              ? "border border-blue-600 text-white"
+              : ""
             }
-            ${
-              isPast && !isTodayDate
-                ? "text-gray-500 cursor-not-allowed"
-                : "hover:bg-gray-700"
+            ${isPast && !isTodayDate
+              ? "text-gray-500 cursor-not-allowed"
+              : "hover:bg-gray-700"
             }`}
           onClick={() => !isPast && handleDateChange(date)}
         >
@@ -491,7 +488,7 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
   return (
     <>
       <button
-        className="md:inline-flex md:justify-center md:items-center text-sm quicksand-semibold rounded-[5px] before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40"
+        className="md:inline-flex md:justify-center md:items-center text-sm quicksand-semibold rounded-[5px] before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40 z-50"
         onClick={openModal}
       >
         {buttonText || "Book a Meeting"}
@@ -674,11 +671,10 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
                       key={index}
                       onClick={() => handleTimeSelection(slot)}
                       className={`p-2 text-center rounded-md cursor-pointer border border-gray-700 
-                ${
-                  selectedTime === slot
-                    ? "bg-blue-600 text-white"
-                    : "hover:bg-gray-700"
-                }`}
+                ${selectedTime === slot
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                        }`}
                     >
                       <div className="font-medium">{slot.convertedTime}</div>
                     </div>
