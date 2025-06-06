@@ -468,8 +468,8 @@ const ContentROICalculator = () => {
                     >
                       <span
                         className={`absolute rounded-full w-4 h-4 top-1 transition-transform duration-300 ease-in-out ${domainExpertise
-                            ? "bg-white transform translate-x-7"
-                            : "bg-white translate-x-1"
+                          ? "bg-white transform translate-x-7"
+                          : "bg-white translate-x-1"
                           }`}
                       />
                     </label>
@@ -543,8 +543,8 @@ const ContentROICalculator = () => {
                             key={option.value}
                             onClick={() => handleSelectContent(option.value)}
                             className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-md ${contentTeam === option.value
-                                ? "bg-gray-800"
-                                : "hover:bg-gray-900"
+                              ? "bg-gray-800"
+                              : "hover:bg-gray-900"
                               }`}
                           >
                             <div className="flex justify-between items-center">
@@ -649,8 +649,8 @@ const ContentROICalculator = () => {
                             key={option.value}
                             onClick={() => handleSelect(option.value)}
                             className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-md ${timeline === option.value
-                                ? "bg-gray-800"
-                                : "hover:bg-gray-900"
+                              ? "bg-gray-800"
+                              : "hover:bg-gray-900"
                               }`}
                           >
                             <div className="flex justify-between items-center">
@@ -801,11 +801,11 @@ const ContentROICalculator = () => {
                       </div>
                     </div>
 
-                    {/* Metrics Grid */}
-                    <div className="grid grid-cols-2 gap-6">
+                    {/* Metrics Grid - Now 3 columns for better balance */}
+                    <div className="grid grid-cols-3 gap-4">
                       {/* Cost Reduction */}
-                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
-                        <div className="text-2xl font-bold text-green-400">
+                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-green-500/30 transition-all duration-300">
+                        <div className="text-2xl font-bold text-green-400 mb-1">
                           {savingsPercentage}%
                         </div>
                         <div className="text-gray-300 text-md">
@@ -814,28 +814,17 @@ const ContentROICalculator = () => {
                       </div>
 
                       {/* Annual Savings */}
-                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
-                        <div className="text-2xl font-bold text-blue-400">
+                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-blue-500/30 transition-all duration-300">
+                        <div className="text-2xl font-bold text-blue-400 mb-1">
                           ${(savings * 12).toLocaleString()}
                         </div>
-                        <div className="text-gray-300 text-md text-md">
+                        <div className="text-gray-300 text-md">
                           Annual Savings
                         </div>
                       </div>
 
-                      {/* Payback Period */}
-                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
-                        <div className="text-2xl font-bold text-yellow-400">
-                          0.0 mo
-                        </div>
-                        <div className="text-gray-300 text-md">
-                          Payback Period
-                        </div>
-                      </div>
-
-                      {/* 3-Year ROI */}
-                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
-                        <div className="text-2xl font-bold text-cyan-400">
+                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
+                        <div className="text-2xl font-bold text-cyan-400 mb-1">
                           {Math.round(((savings * 36) / outsourcedCost) * 100)}%
                         </div>
                         <div className="text-gray-300 text-md">3-Year ROI</div>
@@ -889,8 +878,7 @@ const ContentROICalculator = () => {
                       faster and save weeks of ramp-up.
                     </p>
                   </div>
-
-                  <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
+                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <div>
                       {/* <p className="text-[12px] text-gray-300">
                         Note: To hit {trafficGrowth}% traffic growth, aim for{" "}
@@ -906,12 +894,15 @@ const ContentROICalculator = () => {
                         every month
                       </p>
 
-                      <div className="mt-3 text-center">
-                        <CalendarBooking buttonText="Get Started Today" />
-                      </div>
+                      
                     </div>
                   </div>
+                  <div className="mt-3 text-center">
+                        <CalendarBooking buttonText="Get Started Today" />
+                      </div>
                 </div>
+                
+                
               ) : (
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="w-24 h-24 mb-4">
@@ -943,129 +934,6 @@ const ContentROICalculator = () => {
           </div>
         </div>
       </div>
-      {isPopup && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div
-            className="rounded-xl p-8 backdrop-blur-md relative overflow-hidden max-w-md w-full"
-            style={{
-              backgroundColor: "rgba(30, 32, 45, 0.7)",
-              boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
-              border: "1px solid rgba(60, 63, 84, 0.3)",
-            }}
-          >
-            {/* Close button - optional but recommended */}
-            <button
-              onClick={() => closePopup()}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-100 cursor-pointer z-20"
-              type="button"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-
-            {/* Decorative glass effect elements */}
-            <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-purple-500 opacity-10 blur-2xl"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-blue-500 opacity-10 blur-2xl"></div>
-
-            <div className="relative z-10">
-              {!isSubmitted ? (
-                <>
-                  <h3 className="text-xl font-medium text-gray-100 mb-4">
-                    Download Full Report
-                  </h3>
-                  <p className="text-gray-300 mb-6">
-                    Enter your email address to receive your report.
-                  </p>
-
-                  <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter your email"
-                        className="w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={isEmailSending}
-                      className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
-                    >
-                      {isEmailSending ? (
-                        <span className="flex items-center justify-center">
-                          <svg
-                            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                            ></circle>
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                            ></path>
-                          </svg>
-                          Submiting...
-                        </span>
-                      ) : (
-                        "Submit"
-                      )}
-                    </button>
-                  </form>
-                </>
-              ) : (
-                <div className="text-center py-8">
-                  <div className="mb-4 flex justify-center">
-                    <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
-                      <svg
-                        className="w-8 h-8 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M5 13l4 4L19 7"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-medium text-gray-100 mb-2">
-                    Thank You!
-                  </h3>
-                  <p className="text-gray-300">
-                    Your email has been successfully submitted.
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

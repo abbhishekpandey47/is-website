@@ -505,17 +505,17 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
             zIndex: 9999,
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
+            alignItems: "end",
           }}
           onClick={(e) => {
             if (e.target === e.currentTarget) closeModal();
           }}
         >
           <div
-            className="bg-[#0c102e] text-white rounded-xl p-6 relative"
+            className="bg-[#0c102e] text-white rounded-xl p-6 relative mt-40"
             style={{
               width: "90vw",
-              maxWidth: "28rem", // equivalent to max-w-md
+              maxWidth: "28rem", 
               maxHeight: "90vh",
               overflowY: "auto",
             }}
