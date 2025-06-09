@@ -1,14 +1,14 @@
 "use client";
 import Image from "next/image";
-import icon1 from "./images/icons/icon1.png";
-import icon2 from "./images/icons/icon2.png";
-import icon3 from "./images/icons/icon3.png";
-import icon4 from "./images/icons/make.png";
-import icon5 from "./images/icons/icon5.png";
-import icon6 from "./images/icons/icon6.png";
-import icon7 from "./images/icons/icon7.png";
-import icon9 from "./images/icons/icon9.png";
-import icon10 from "./images/icons/icon10.png";
+import icon1 from "/public/webflow-age/icons/icon1.png";
+import icon2 from "/public/webflow-age/icons/icon2.png";
+import icon3 from "/public/webflow-age/icons/icon3.png";
+import icon4 from "/public/webflow-age/icons/make.png";
+import icon5 from "/public/webflow-age/icons/icon5.png";
+import icon6 from "/public/webflow-age/icons/icon6.png";
+import icon7 from "/public/webflow-age/icons/icon7.png";
+import icon9 from "/public/webflow-age/icons/icon9.png";
+import icon10 from "/public/webflow-age/icons/icon10.png";
 
 const contentItems = [
   { title: "Zapier", icon: icon1 },

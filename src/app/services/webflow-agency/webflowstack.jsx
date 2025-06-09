@@ -2,12 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
-import css5 from "./images/thecss/css1.png";
-import css4 from "./images/thecss/css6.png";
-import css3 from "./images/thecss/css3.png";
-import css1 from "./images/thecss/css4.png";
-import css2 from "./images/thecss/css5.png";
-import css6 from "./images/thecss/css2.png";
+import css5 from "/public/webflow-age/thecss/css1.png";
+import css4 from "/public/webflow-age/thecss/css6.png";
+import css3 from "/public/webflow-age/thecss/css3.png";
+import css1 from "/public/webflow-age/thecss/css4.png";
+import css2 from "/public/webflow-age/thecss/css5.png";
+import css6 from "/public/webflow-age/thecss/css2.png";
 
 export default function ServiceCardCarousel() {
   const serviceCards = [

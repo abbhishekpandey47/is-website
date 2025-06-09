@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import img1 from "./images/devs/dev1.png";
-import img2 from "./images/devs/dev2.png";
-import img3 from "./images/devs/dev3.png";
-import img4 from "./images/devs/dev4.png";
-import img5 from "./images/devs/dev5.png";
-import img6 from "./images/devs/dev6.png";
+import img1 from "/public/webflow-age/devs/dev1.png";
+import img2 from "/public/webflow-age/devs/dev2.png";
+import img3 from "/public/webflow-age/devs/dev3.png";
+import img4 from "/public/webflow-age/devs/dev4.png";
+import img5 from "/public/webflow-age/devs/dev5.png";
+import img6 from "/public/webflow-age/devs/dev6.png";
 import Image from "next/image";
 
 export default function ScrollingServicesSection() {
