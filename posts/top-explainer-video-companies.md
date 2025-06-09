@@ -30,7 +30,7 @@ Despite the video being technical, it still needs to keep the distinctive voice 
 **Step 3: Creating a Feedback Loop**  
 No one knows your SaaS product better than the people who have built it. Infrasity maintains a constant feedback loop so that the explainer video can include all the elements you deem necessary.
 
-Within two days, you get a video packed with your product's value propositions, ready to be published on your website or sent to your developers and investors.
+Within two days, the **[SaaS video production](https://www.infrasity.com/blog/saas-video-production)** process gets over, and you get a video packed with your product's value propositions, ready to be published on your website. 
 
 **Who is it for?**  
 Infrasity is an explainer video production company that provides services to early-stage SaaS startups from several domains, such as observability, DevOps, MLOps, ad LLMOps.
