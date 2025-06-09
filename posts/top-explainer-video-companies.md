@@ -109,7 +109,7 @@ For early-stage SaaS startups, partnering with an explainer video agency can be 
 
 SaaS video production refers to the complete process of creating video content for marketing a SaaS company or its products. This includes product explainer videos, use cases in video format, how-to guides, and video advertisements. Since it’s a video medium, you can get as creative as you want - from storytelling to animation - under the umbrella of SaaS video production.
 
-### 2. ### 2. How Will Video Content Help My SaaS Startup?
+### 2. How Will Video Content Help My SaaS Startup?
 
 Videos are incredibly engaging and effective at the top of the funnel for customer acquisition. They spark interest and increase time-on-site, while also driving organic traffic. Video content helps communicate the nuances of your SaaS product more clearly and makes it easier to reach a broader audience.
 
