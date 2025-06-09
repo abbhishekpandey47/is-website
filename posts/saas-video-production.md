@@ -74,6 +74,8 @@ Now, **[technical product documentation](https://www.infrasity.com/blog/technica
 
 ## Why SaaS Explainer Videos Can Be a Better Option Than Just Product Documentation?
 
+![saas video production process - adding explainer videos](/PostImages/explainer-video-agency/e5.png)
+
 Explainer videos are much more impactful than just product docs, and here are the reasons behind it:
 
 ### 1. Simplification of Complex Concepts
