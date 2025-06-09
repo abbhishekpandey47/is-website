@@ -72,7 +72,7 @@ So, the SaaS video production includes product research, hands-on script writing
 
 Now, **[technical product documentation](https://www.infrasity.com/blog/technical-product-documentation)**  holds its importance; however, if you want to drive maximum product adoption, you should start investing into SaaS video production.
 
-## Why Explainer Videos Can Be a Better Option Than Just Product Documentation?
+## Why SaaS Explainer Videos Can Be a Better Option Than Just Product Documentation?
 
 Explainer videos are much more impactful than just product docs, and here are the reasons behind it:
 
