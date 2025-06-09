@@ -301,7 +301,7 @@ let postMetaData = [
         metatitle: "Using Case Studies and Whitepapers as SEO Assets in Technical Content",
         slug: "using-case-studies-and-whitepapers-as-seo-assets-in-technical-content",
         description: "Discover how SaaS companies can use case studies and whitepapers to drive SEO success. Learn best practices to optimize content for visibility, and authority.",
-        ogImage: "/PostImages/using-case-studies-and-whitepapers-as-seo-assets-in-technical-content/banner.jpg",
+        ogImage: "/PostImages/using-case-studies-and-whitepapers-as-seo-assets-in-technical-content/banner.png",
         publishedOn: "2024-12-25",
         authorId: "author0001",
         category: "Informational",
