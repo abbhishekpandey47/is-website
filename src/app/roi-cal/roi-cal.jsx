@@ -237,9 +237,9 @@ const ContentROICalculator = () => {
       setDomainExpertisResult(false);
     }
 
-    let valInHouseCost = timeline * 7000;
+    let valInHouseCost = timeline * 1800;
 
-    valInHouseCost = (valInHouseCost + 7000 * 2) * 1.2;
+    valInHouseCost = (valInHouseCost + 1800 * 2) * 1.2;
     setTimelineInMonth(timeline);
 
     if (trafficGrowth > 0 && trafficGrowth <= 25) {
