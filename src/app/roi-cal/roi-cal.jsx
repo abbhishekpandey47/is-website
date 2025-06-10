@@ -796,7 +796,7 @@ const ContentROICalculator = () => {
                       <div className="w-full bg-gray-700/30 backdrop-blur-sm rounded-full h-3 border border-white/5">
                         <div
                           className="bg-gradient-to-r from-green-500/90 to-blue-500/80 h-3 rounded-full backdrop-blur-sm"
-                          style={{ width: `${100 - savingsPercentage}%` }}
+                          style={{ width: `${Math.min(100, Math.max(0, 100 - savingsPercentage))}%` }}
                         ></div>
                       </div>
                     </div>
@@ -878,7 +878,7 @@ const ContentROICalculator = () => {
                       faster and save weeks of ramp-up.
                     </p>
                   </div>
-                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
+                  <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <div>
                       {/* <p className="text-[12px] text-gray-300">
                         Note: To hit {trafficGrowth}% traffic growth, aim for{" "}
@@ -894,15 +894,15 @@ const ContentROICalculator = () => {
                         every month
                       </p>
 
-                      
+
                     </div>
                   </div>
                   <div className="mt-3 text-center">
-                        <CalendarBooking buttonText="Get Started Today" />
-                      </div>
+                    <CalendarBooking buttonText="Get Started Today" />
+                  </div>
                 </div>
-                
-                
+
+
               ) : (
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="w-24 h-24 mb-4">
