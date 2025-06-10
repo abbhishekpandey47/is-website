@@ -22,7 +22,7 @@ Let us dive into the smart strategies you should utilize for marketing developer
 
 To successfully market a DevTool, you need more than just a great product – you need a strategy that speaks directly to developers. **Infrasity has partnered with 50+ DevTool companies**, and here are some of the strategies that might be relevant to your DevTools marketing:
 
-### 1. Understand What Developers are Looking for
+### 1. Understand What Developers Are Looking For
 
 DevTools cater to developers; therefore, it is crucial to understand what they are looking for. It’s not just about developers in general; **there are different sub-domains in the field: web, software, DevOps, mobile, back-end, full-stack, and front-end**. Identify the type of developers that come under your target audience and build your **[developer marketing](https://www.infrasity.com/blog/developer-marketing)** strategy accordingly.
 
