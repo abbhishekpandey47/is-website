@@ -39,9 +39,8 @@ const contentStyle = {
 const PageCard = ({ ind = 1, data = { data } }) => {
   return (
     <div
-      className={`p-10 max-lg:p-4 gap-10 ${
-        ind % 2 == 0 ? "flex" : "flex flex-row-reverse"
-      } max-md:flex-col`}
+      className={`p-10 max-lg:p-4 gap-10 ${ind % 2 == 0 ? "flex" : "flex flex-row-reverse"
+        } max-md:flex-col`}
     >
       <div className="w-1/2 max-md:w-full flex flex-col justify-center">
         <Image
@@ -245,13 +244,13 @@ const page = () => {
       );
     });
 
-    return () => {};
+    return () => { };
   }, []);
 
   useEffect(() => {
     setProgress(100);
 
-    return () => {};
+    return () => { };
   }, []);
 
   const [isMobile, setIsMobile] = useState(false);
@@ -278,11 +277,11 @@ const page = () => {
           <div className="max-w-full flex xxs:flex-col xs:flex-col sm:flex-col md:flex-col lg:flex-row justify-center items-center ">
             {/* Left side content */}
             <div className="lg:ml-[50px] justify-center sm:w-full lg:w-[60vw] lg:flex lg:flex-col lg:items-start">
-              <h2 className="text-5xl text-center md:text-center lg:text-start lg:text-6xl md:text-5xl quicksand-bold mt-8 text-white mb-10 leading-tight">
-                Docs That Don’t Just Explain, they
-                <span className="text-[#5F64FF]"> drive </span>
-                <span className="text-[#5F64FF]"> Sell, Support, </span>
-                and <span className="text-[#5F64FF]"> Scale</span>
+              <h2 className="text-4xl text-center md:text-center lg:text-start lg:text-[55px] md:text-5xl quicksand-bold mt-8 text-white mb-10 leading-tight">
+                Developer-Centric <br /> Technical Writing Services for
+                <span className="text-[#5F64FF]"> SaaS Startups
+                </span>
+
               </h2>
               <ul className="space-y-6 lg:w-[85%] mb-10 mt-10">
                 <li className="flex items-start text-white ">
@@ -303,9 +302,8 @@ const page = () => {
                     </div>
                   </div>
                   <p className="text-lg pl-3 quicksand-medium">
-                    Built for DevTools companies to help users get started, not
-                    stuck — with real examples, SDK integration to speed up dev
-                    onboarding.
+                    Content by engineers, for engineers - precise, relevant, and easy to follow.
+
                   </p>
                 </li>
                 <li className="flex items-start text-white">
@@ -326,8 +324,8 @@ const page = () => {
                     </div>
                   </div>
                   <p className="text-lg pl-3 quicksand-medium">
-                    Explains your product through real use cases — not fluffy
-                    feature lists
+                    Practical docs with real-world examples that smooth the onboarding curve.
+
                   </p>
                 </li>
                 <li className="flex items-start text-white">
@@ -348,8 +346,7 @@ const page = () => {
                     </div>
                   </div>
                   <p className="text-lg  quicksand-medium pl-3">
-                    Equips sales with demo-ready artifacts that double as
-                    self-serve onboarding for developers.
+                     Self-serve docs that reduce support load and fast-track product adoption.
                   </p>
                 </li>
               </ul>

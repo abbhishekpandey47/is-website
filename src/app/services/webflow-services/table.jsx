@@ -1,7 +1,7 @@
 import React from "react";
 import CalendlyButton from "../service-video-production/calendlyButton";
 import Image from "next/image";
-import logo from "./images/logo/infrasity_logo.png";
+import logo from "/public/webflow-age/logo/infrasity_logo.png";
 
 export default function Webtable() {
   return (

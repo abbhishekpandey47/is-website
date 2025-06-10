@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-import Acc from "./images/jpg2png/acc.png";
-import dev from "./images/jpg2png/devzero.jpg";
-import kubiya from "./images/jpg2png/kubiya.png";
-import knidal from "./images/jpg2png/knidal.jpg";
+import Acc from "/public/webflow-age/jpg2png/acc.png";
+import dev from "/public/webflow-age/jpg2png/devzero.jpg";
+import kubiya from "/public/webflow-age/jpg2png/kubiya.png";
+import knidal from "/public/webflow-age/jpg2png/knidal.jpg";
 import CalendlyButton from "../service-video-production/calendlyButton";
 
 const projects = [

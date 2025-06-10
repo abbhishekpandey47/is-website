@@ -624,17 +624,16 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
                 focused content for your products or services
               </p>
             </div>
-            <div className="flex gap-5 pt-5">
+            <div className="flex gap-5 pt-5 cursor-pointer">
               <Link
-                target="_blank"
-                href="https://content.infrasity.com/"
-                className="btn bg-white text-gray-800 font-semibold py-2 px-4 rounded shadow hover:bg-gray-100 quicksand-semibold"
+                href="/roi-cal"
+                className="btn bg-white text-gray-800 font-semibold py-2 px-4 rounded shadow hover:bg-gray-100 quicksand-semibold cursor-pointer"
               >
-                Outline Generator
+                ROI Calculator
               </Link>
               <button
                 onClick={openModal}
-                className="btn bg-black text-white font-semibold py-2 px-4 rounded shadow hover:bg-gray-900 quicksand-semibold"
+                className="btn bg-black text-white font-semibold py-2 px-4 rounded shadow hover:bg-gray-900 quicksand-semibold cursor-pointer"
               >
                 Talk to Us
               </button>
