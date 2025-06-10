@@ -14,7 +14,7 @@ This article discusses what goes on behind the SaaS video production process of 
 
 ## What Goes Behind Your B2B SaaS Video Production?
 
-![saas video production process](/PostImages/explainer-video-agency/e2.png)
+![saas video production process](/PostImages/explainer-video-agency/e5.png)
 
 Creating a SaaS explainer video demands both product understanding as well as expertise in commercial video production. This production process includes several stages that ensure the final video comes out professional and effective. Here's the process of SaaS video production:
 
