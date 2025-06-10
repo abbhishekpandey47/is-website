@@ -785,9 +785,9 @@ let postMetaData = [
     },
 
     {
-        title: "Why Dev Marketing Should Be Your GTM Strategy for SaaS Products?",
-        metatitle: "Why Dev Marketing Should Be Your SaaS GTM Strategy?",
-        slug: "dev-marketing",
+        title: "Why Developer Marketing Should Be Your GTM Strategy for SaaS Products?",
+        metatitle: "Why Developer Marketing Should Be Your SaaS GTM Strategy?",
+        slug: "developer-marketing",
         description: "Built a SaaS product for developers? Discover how Dev Marketing can help you drive real engagement and growth compared to traditional marketing strategies.",
         ogImage: "/PostImages/dev-marketing/dm1.png",
         publishedOn: "2025-05-29",
