@@ -24,7 +24,7 @@ To successfully market a DevTool, you need more than just a great product – yo
 
 ### 1. Understand What Developers are Looking for
 
-DevTools cater to developers; therefore, it is crucial to understand what they are looking for. It’s not just about developers in general; **there are different sub-domains in the field: web, software, DevOps, mobile, back-end, full-stack, and front-end**. Identify the type of developers that come under your target audience and build your developer marketing strategy accordingly.
+DevTools cater to developers; therefore, it is crucial to understand what they are looking for. It’s not just about developers in general; **there are different sub-domains in the field: web, software, DevOps, mobile, back-end, full-stack, and front-end**. Identify the type of developers that come under your target audience and build your **[developer marketing](https://www.infrasity.com/blog/developer-marketing)** strategy accordingly.
 
 For instance, **Aviator** is a GitHub automation tool designed for high-velocity engineering teams, streamlining pull request workflows, automating merges, and accelerating CI pipelines. Their developer audiences are DevOps Engineers, Infrastructure Engineers, Software Developers, and Site Reliability Engineers (SREs).
 
