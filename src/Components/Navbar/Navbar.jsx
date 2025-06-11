@@ -36,6 +36,7 @@ const GivenMenuBar = ({
         <MenuButton
           onClick={toggleMenu}
           className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20"
+          Menu
         >
           {head}{" "}
           <svg
@@ -167,6 +168,7 @@ const Navbar = () => {
               <MenuButton
                 onClick={toggleMobileMenu}
                 className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20"
+                Menu
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -189,6 +191,7 @@ const Navbar = () => {
               <MenuItems
                 transition
                 className="absolute z-10 mt-6 w-56 origin-top-center rounded-lg bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                
               >
                 <div className="p-2 rounded-lg mx-auto">
                   <MenuItem>
@@ -364,10 +367,10 @@ const Navbar = () => {
         </div>
         <Link
           href="/"
-          className="btn btn-ghost w-40 lg:absolute"
+          className="btn btn-ghost w-40 lg:absolute mr-28"
           aria-label="Infrasity Home"
         >
-          <div className="flex flex-col my-auto items-center">
+          <div className="flex flex-col my-auto justify-center items-center">
             <div>
               <Image
                 loading="lazy"
@@ -451,20 +454,9 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+              {!isMobileMenuOpen && <CalendarBooking />}
         </div>
-        <div className="navbar-end  ">
-          {/* <Link
-            href="/book-a-demo"
-            onClick={() => {
-              checkVisitPage("/book-a-demo");
-            }}
-            className="hidden md:inline-flex md:justify-center md:items-center text-sm quicksand-semibold rounded-[5px] before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40"
-          >
-            Book a Free Demo
-          </Link> */}
-
-          <CalendarBooking />
-        </div>
+       
       </div>
     </div>
   );
