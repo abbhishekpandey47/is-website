@@ -36,7 +36,7 @@ const GivenMenuBar = ({
         <MenuButton
           onClick={toggleMenu}
           className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20"
-          Menu
+          aria-label="Menu"
         >
           {head}{" "}
           <svg
@@ -168,7 +168,7 @@ const Navbar = () => {
               <MenuButton
                 onClick={toggleMobileMenu}
                 className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20"
-                Menu
+                aria-label="Menu"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

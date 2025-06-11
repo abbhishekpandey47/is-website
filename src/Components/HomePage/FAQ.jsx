@@ -73,14 +73,16 @@ function FAQ() {
                     {memoCollapseArr.map((item, index) => {
                         return (
                             <div key={index} className="collapse cursor-pointer collapse-arrow bg-[#888]/20 backdrop-blur-sm ring-1 ring-black/5 relative z-[5]">
+                                <label htmlFor={`FAQ${index}`} className="sr-only">{item.head}</label>
                                 <input type="checkbox" id={`FAQ${index}`} />
                                 <div className="collapse-title text-xl quicksand-semibold">{item.head}</div>
                                 <div className="collapse-content">
                                     <div className="quicksand-light">{item.content}</div>
                                 </div>
                             </div>
-                        )
+                        );
                     })}
+
                     <div className="whyinfra z-[0] "></div>
                 </div>
                 <div className='flex flex-col justify-center gap-5 items-center pt-12'>
