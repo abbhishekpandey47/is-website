@@ -6,7 +6,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import CalendarBooking from "../../app/calendarButton";
+import CalendarBooking from "../../app/book-a-demo/calendarButton"
 
 const GivenMenuBar = ({
   head,

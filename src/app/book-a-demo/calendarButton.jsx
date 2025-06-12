@@ -221,12 +221,6 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
     setSelectedDate(date);
   };
 
-  // const handleTimeSelection = (time) => {
-  //   setSelectedTime(time);
-  // };
-  // const handleTimezoneChange = (e) => {
-  //   setSelectedTimezone(e.target.value);
-  // };
   const goToTimeSelection = () => {
     if (selectedDate) {
       setStep(2);
@@ -433,9 +427,8 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
   };
 
   const formatDate = (date) => {
-    return `${weekdays[date.getDay()]}, ${
-      months[date.getMonth()]
-    } ${date.getDate()}, ${date.getFullYear()}`;
+    return `${weekdays[date.getDay()]}, ${months[date.getMonth()]
+      } ${date.getDate()}, ${date.getFullYear()}`;
   };
 
   const renderCalendar = () => {
@@ -469,15 +462,13 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
           key={`day-${day}`}
           className={`h-10 w-10 flex items-center justify-center rounded-full cursor-pointer mx-1
             ${isSelected ? "bg-blue-600 text-white" : ""} 
-            ${
-              isTodayDate && !isSelected
-                ? "border border-blue-600 text-white"
-                : ""
+            ${isTodayDate && !isSelected
+              ? "border border-blue-600 text-white"
+              : ""
             }
-            ${
-              isPast && !isTodayDate
-                ? "text-gray-500 cursor-not-allowed"
-                : "hover:bg-gray-700"
+            ${isPast && !isTodayDate
+              ? "text-gray-500 cursor-not-allowed"
+              : "hover:bg-gray-700"
             }`}
           onClick={() => !isPast && handleDateChange(date)}
         >
@@ -492,33 +483,31 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
   return (
     <>
       <button
-        className="hidden md:inline-flex md:justify-center md:items-center text-sm quicksand-semibold rounded-[5px] before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40"
+        className="hidden md:inline-flex md:justify-center md:items-center text-sm quicksand-semibold rounded-[5px] before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-40"
         onClick={openModal}
       >
         {buttonText || "Book a Meeting"}
       </button>
-
       {isModalOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-10"
+          className="fixed inset-0 flex justify-center items-center"
           style={{
             zIndex: 9999,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "end",
+            height: "100vh",
           }}
           onClick={(e) => {
             if (e.target === e.currentTarget) closeModal();
           }}
         >
           <div
-            className="bg-[#0c102e] text-white rounded-xl p-6 relative mt-40"
+            className="bg-[#0c102e] text-white rounded-xl p-6 relative"
             style={{
               width: "90vw",
-              maxWidth: "28rem", 
+              maxWidth: "28rem",
               maxHeight: "90vh",
               overflowY: "auto",
             }}
+            onClick={(e) => e.stopPropagation()}  // Prevent the click from propagating to the overlay
           >
             <button
               onClick={closeModal}
@@ -538,7 +527,6 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
                 />
               </svg>
             </button>
-
             <div className="text-xl font-bold text-center mb-4 mt-2">
               {step === 1 && (
                 <div>
@@ -555,7 +543,6 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
                 </div>
               )}
               {step === 2 && "Book a Time to Connect with Us"}
-              {/* {step === 3 && "Complete Your Booking"} */}
               {step === 4 && "Booking Confirmed"}
             </div>
 
@@ -675,11 +662,10 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
                       key={index}
                       onClick={() => handleTimeSelection(slot)}
                       className={`p-2 text-center rounded-md cursor-pointer border border-gray-700 
-                ${
-                  selectedTime === slot
-                    ? "bg-blue-600 text-white"
-                    : "hover:bg-gray-700"
-                }`}
+                ${selectedTime === slot
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                        }`}
                     >
                       <div className="font-medium">{slot.convertedTime}</div>
                     </div>
