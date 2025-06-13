@@ -16,8 +16,6 @@ In the SaaS world, things change fast. Your product evolves, your audience start
 
 Here's why content refreshing is crucial for SaaS companies:
 
-**Infographic**
-
 - **Outdated product references**  
   Product features, UI, or workflows may have changed. Updating ensures users get accurate, actionable guidance. For instance, our ROI Calculator has been enhanced lately, in terms of UI, and this results in the need to update the blog article where we have discussed how to use it.  
     
@@ -57,8 +55,6 @@ The process of B2B content refresh starts with knowing what to look for. Whether
 
 This content refresh checklist will help you focus on the key areas that need attention and guide you through the content revamp process in an effective way.
 
-**Infographic**
-
 ### 1. Evaluate the SEO Score of the Content
 
 The foremost thing you need to check is the SEO score of your content. If you're not getting the traffic you expected, this is likely the root of the problem. Because if your content isn't reaching your target audience, they won't even have the chance to read, engage, or convert, no matter how valuable it is.
@@ -79,7 +75,7 @@ Here's what to focus on:
 
 Let’s take an example of a technical blog article of an AI-powered meeting assistant platform. Let’s say the original article lacked key SEO elements, especially relevant keywords. 
 
-![][image2]
+![content refresh - keyword integration](/PostImages/content-refresh/cr2.png) 
 
 Through a content refresh, they identified and strategically infused the primary keyword **"disaster recovery plan"** into the title, description, and throughout the body of the article. This not only enhanced search visibility in the search engine but also aligned the content more closely with what their target audience (eg, developers and cloud engineers) searches for.
 
@@ -89,13 +85,13 @@ By scrutinizing the crucial SEO elements, including meta tags, keywords, interna
 
 There might be new keywords your competitors are already ranking for, leaving your content behind in search results. These could be high-intent keywords, trending industry terms, or newly popular questions that weren't relevant when the content was first published. As part of your B2B content refresh, look for opportunities to expand your content with sections that naturally incorporate these terms.
 
-For example, while updating a technical blog for Firefly, a new keyword opportunity was identified: **"Multi Cloud Disaster Recovery."** To capture search traffic around this term, a new section was added titled *"Best Practices for Multi Cloud Disaster Recovery Automation."* 
+For example, while updating this technical blog, a new keyword opportunity might have been identified: **"Multi Cloud Disaster Recovery."** To capture search traffic around this term, a new section was added titled *"Best Practices for Multi Cloud Disaster Recovery Automation."* 
 
-![][image3]
+![content refresh - new keyword](/PostImages/content-refresh/cr3.png) 
 
 This section outlines the best strategies for implementing a reliable multi-cloud disaster recovery plan, like using a unified IaC framework, automating backups, codifying unmanaged resources, setting alerts, running DR tests, and centralizing cloud monitoring.
 
-### **3\. Align the Title With the Content**
+### 3. Align the Title With the Content
 
 Your title is one of the first things search engines and your target audience read. It sets expectations and determines whether someone clicks or scrolls past. While working to refresh outdated content, make sure the title still aligns with what the content actually delivers because that's what it represents.
 
@@ -110,7 +106,7 @@ Real-world examples make technical content more relatable and credible. They hel
 
 During a content refresh, review every example to ensure it still reflects how your product or solution works today and that it supports the core message of the blog.
 
-![][image4]
+![content refresh - real-world example](/PostImages/content-refresh/cr4.png) 
 
 For instance, in this excerpt from a refreshed technical blog, the scenario starts with a DevOps engineer facing a real outage in AWS. It introduces the challenge of managing a multi-cloud disaster recovery plan across AWS, Azure, and GCP, and backs it up with a relevant industry stat from Gartner. This kind of real-world framing makes the content not only more engaging but also immediately useful and trustworthy for readers facing similar challenges.
 
