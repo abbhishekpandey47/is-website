@@ -22,6 +22,7 @@ export default function AwardBanner() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center font-medium hover:underline whitespace-nowrap text-xs sm:text-sm"
+            aria-label="Read more about Infrasity's award as #1 Startup in New Delhi"
           >
             <span className="hidden z-10 xs:inline">Know More</span>
             <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-0 sm:ml-1" />
