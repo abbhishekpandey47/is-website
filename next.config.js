@@ -33,6 +33,11 @@ module.exports = {
                 destination: '/blog/top-explainer-video-companies',
                 permanent: true,
             },
+            {
+                source: '/blog/dev-marketing',
+                destination: '/blog/developer-marketing',
+                permanent: true,
+            },
         ];
     },
 };
