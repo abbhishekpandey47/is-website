@@ -346,7 +346,7 @@ const page = () => {
                     </div>
                   </div>
                   <p className="text-lg  quicksand-medium pl-3">
-                     Self-serve docs that reduce support load and fast-track product adoption.
+                    Self-serve docs that reduce support load and fast-track product adoption.
                   </p>
                 </li>
               </ul>
@@ -415,9 +415,9 @@ const page = () => {
         >
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-5"></div>
           <div className="text-center">
-            <h1 className="quicksand-bold text-white text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-cente">
+            <h2 classNaDeveloper-Centricme="quicksand-bold text-white text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-cente">
               Launch-ready docs for DevTools & engineering teams
-            </h1>
+            </h2>
           </div>
           {dataMemoArr.map((data, index) => {
             return <PageCard ind={index} data={data} />;

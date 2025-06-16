@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Technical Writing Services by Industry Experts | Infrasity",
+  title: "Technical Content Writing Services for SaaS & Dev Tools",
   description:
-    "Professional technical writing services for documentation, blogs, guides, manuals, and more. Clear, structured content tailored to your product and audience.",
+    "Technical Content Writing Services for SaaS & Dev Tools Meta Description: Get expert technical content writing services for SaaS, APIs, and DevTools. We create clear, engaging docs, blogs, and guides that drive growth and adoption.",
   keywords:
     "Infrasity, Blog As Code, Developer Relations, Engineering Support, Marketing Strategies, User Sign-ups, Pipeline Acceleration, DevOps, Infrastructure as Code, Automation, Continuous Integration, Continuous Deployment",
   openGraph: {
