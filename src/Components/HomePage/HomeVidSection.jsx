@@ -12,42 +12,42 @@ const HomeVidSection = () => {
   const videoId = 'ICUGIdqzmYg'; 
   
   useEffect(() => {
-    gsap.fromTo(".howWorksHead", {
-      opacity: 0,
-      y: 55,
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      stagger: 0.1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".howWorksHead",
-        toggleActions: "restart none none none"
-      }
-    });
+  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      gsap.fromTo(".howWorksHead", {
+        opacity: 0,
+        y: 55,
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".howWorksHead",
+          toggleActions: "restart none none none"
+        }
+      });
 
-    gsap.fromTo(".howWorksVidSection", {
-      opacity: 0,
-      y: 55,
-      scale: 1.3
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "power3.out",
-      scale: 1,
-      scrollTrigger: {
-        trigger: ".howWorksVidSection",
-        scrub: 1,
-        toggleActions: "restart none none none"
-      }
+      gsap.fromTo(".howWorksVidSection", {
+        opacity: 0,
+        y: 55,
+        scale: 1.3
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scale: 1,
+        scrollTrigger: {
+          trigger: ".howWorksVidSection",
+          scrub: 1,
+          toggleActions: "restart none none none"
+        }
+      });
     });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
+  }
+}, []);
 
   const handlePlayClick = () => {
     setIsVideoLoaded(true);
@@ -108,6 +108,7 @@ const HomeVidSection = () => {
               height="550"
               src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              loading="lazy"
               allowFullScreen
               title="Embedded youtube"
             />
