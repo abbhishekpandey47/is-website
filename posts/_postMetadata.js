@@ -820,6 +820,18 @@ let postMetaData = [
         metaDescription: "It's time to leverage one of the most versatile assets - technical product documentation, for B2B SaaS startups. Why? Read the article to find out!"
     },
 
+    {
+        title: " Content Refresh: How To Refresh Content For SaaS Startups",
+        metatitle: "SaaS Content Refresh: How To Refresh Content Perfectly",
+        slug: "content-refresh",
+        description: "Not getting reach on your technical content? That’s a clear sign it needs content refreshing. Use this checklist to revamp your content the right way.",
+        ogImage: "/PostImages/content-refresh/cr1.png",
+        publishedOn: "2025-06-13",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Not getting reach on your technical content? That’s a clear sign it needs content refreshing. Use this checklist to revamp your content the right way."
+    },
+
 ];
 
 const sorted = () => {
