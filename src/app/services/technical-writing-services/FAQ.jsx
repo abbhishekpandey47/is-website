@@ -12,15 +12,13 @@ const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
       >
         {question}
         <ChevronDown
-          className={`h-5 w-5 shrink-0 text-gray-400 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`h-5 w-5 shrink-0 text-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+            }`}
         />
       </button>
       <div
-        className={`overflow-hidden bg-gray-100 rounded-[10px] transition-all duration-300 ${
-          isOpen ? "max-h-96 opacity-100 p-6" : "max-h-0 opacity-0"
-        }`}
+        className={`overflow-hidden bg-gray-100 rounded-[10px] transition-all duration-300 ${isOpen ? "max-h-96 opacity-100 p-6" : "max-h-0 opacity-0"
+          }`}
       >
         <div className="text-black">{answer}</div>
       </div>
@@ -96,6 +94,7 @@ const FAQSection = () => {
 
             <a
               href="https://calendly.com/meet-shan"
+              rel="noopener noreferrer"
               className="inline-flex items-center text-[#5F64FF] text-lg  transition-colors"
             >
               Speak to Us

@@ -50,6 +50,7 @@ const Footer = () => {
               href="https://www.producthunt.com/posts/infrasity-outline-generator-2?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-infrasity&#0045;outline&#0045;generator&#0045;2"
               target="_blank"
               className="inline-block"
+              rel="noopener noreferrer"
             >
               <img
                 src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=544443&theme=light"
@@ -181,6 +182,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="https://www.youtube.com/@Infrasity"
+                    rel="noopener noreferrer"
                     target="_blank"
                     className="hover:underline flex items-center justify-center sm:justify-start gap-2"
                   >
@@ -193,6 +195,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="https://x.com/InfrasityHub"
+                    rel="noopener noreferrer"
                     target="_blank"
                     className="hover:underline flex items-center justify-center sm:justify-start gap-2"
                   >
@@ -205,6 +208,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="https://www.linkedin.com/company/infrasity/"
+                    rel="noopener noreferrer"
                     target="_blank"
                     className="hover:underline flex items-center justify-center sm:justify-start gap-2"
                   >
@@ -217,6 +221,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="https://www.instagram.com/infrasity/"
+                    rel="noopener noreferrer"
                     target="_blank"
                     className="hover:underline flex items-center justify-center sm:justify-start gap-2"
                   >

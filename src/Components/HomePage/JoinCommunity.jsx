@@ -14,15 +14,15 @@ const JoinCommunity = () => {
                 <div className="flex justify-center space-x-8 mt-5 z-10">
                     <div className="flex items-center space-x-2 text-[wheat] hover:text-white hover:underline quicksand-semibold">
                         <img src="\communityIcons\youtube.svg" loading="lazy" alt="Infrasity Youtube" className="w-6 h-6" />
-                        <a href="https://www.youtube.com/@Infrasity" target='_blank' className="hover:underline flex items-center max-lg:justify-center space-x-10 gap-2" ><span>Youtube</span></a>
+                        <a href="https://www.youtube.com/@Infrasity" target='_blank' rel="noopener noreferrer" className="hover:underline flex items-center max-lg:justify-center space-x-10 gap-2" ><span>Youtube</span></a>
                     </div>
                     <div className="flex items-center space-x-2 text-[wheat] hover:text-white hover:underline quicksand-semibold">
                         <img src="\communityIcons\devto.svg" alt="Infrasity Dev2" className="w-6 h-6" />
-                        <a href="https://dev.to/infrasity-learning" loading="lazy" target='_blank' className="hover:underline flex items-center max-lg:justify-center space-x-10 gap-2" ><span>Dev.to</span></a>
+                        <a href="https://dev.to/infrasity-learning" rel="noopener noreferrer" loading="lazy" target='_blank' className="hover:underline flex items-center max-lg:justify-center space-x-10 gap-2" ><span>Dev.to</span></a>
                     </div>
                     <div className="flex items-center space-x-2 text-[wheat] hover:text-white hover:underline quicksand-semibold">
                         <img src="\communityIcons\medium.svg" alt="Infrasity Mediun" className="w-6 h-6" />
-                        <a href="https://medium.com/@infrasity.com" loading="lazy" target='_blank' className="hover:underline flex items-center max-lg:justify-center space-x-10 gap-2" ><span>Medium</span></a>
+                        <a href="https://medium.com/@infrasity.com" rel="noopener noreferrer" loading="lazy" target='_blank' className="hover:underline flex items-center max-lg:justify-center space-x-10 gap-2" ><span>Medium</span></a>
                     </div>
                 </div>
 
@@ -55,16 +55,16 @@ const JoinCommunity = () => {
                 </div>
 
                 <div className="absolute top-[80px] left-[-90px] max-lg:hidden">
-                    <img src="/svgPatterns/join-line-1.svg" alt="line 1" loading="lazy"  className="w-full h-full object-cover" />
+                    <img src="/svgPatterns/join-line-1.svg" alt="line 1" loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute bottom-[50px] left-[-120px] max-lg:hidden scale-x-75">
-                    <img src="/svgPatterns/join-line-2.svg" alt="line 2" loading="lazy"  className="w-full h-full object-cover" />
+                    <img src="/svgPatterns/join-line-2.svg" alt="line 2" loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute top-[60px] right-[-10px] max-lg:hidden">
-                    <img src="/svgPatterns/join-line-3.svg" alt="line 3" loading="lazy"  className="w-full h-full object-cover" />
+                    <img src="/svgPatterns/join-line-3.svg" alt="line 3" loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute bottom-[45px] right-[-120px] max-md:right-[30%] max-md:bottom-[13%] max-lg:hidden">
-                    <img src="/svgPatterns/join-line-4.svg" alt="line 4" loading="lazy"  className="w-full h-full object-cover" />
+                    <img src="/svgPatterns/join-line-4.svg" alt="line 4" loading="lazy" className="w-full h-full object-cover" />
                 </div>
             </div>
         </div>

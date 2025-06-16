@@ -109,6 +109,7 @@ const PopupVideo = ({ handleOnClose, ytContentLink }) => {
                   <a
                     target="_blank"
                     href={`https://www.youtube.com/watch?v=${ytContentLink.ytEmbedLink}`}
+                    rel="noopener noreferrer"
                     className="btn bg-btnprimary hover:bg-btnprimaryhov text-white text-center border-none"
                   >
                     Open in new tab
@@ -117,6 +118,7 @@ const PopupVideo = ({ handleOnClose, ytContentLink }) => {
                   <a
                     target="_blank"
                     href={ytContentLink.ytEmbedLink}
+                    rel="noopener noreferrer"
                     className="btn bg-btnprimary hover:bg-btnprimaryhov text-white text-center border-none"
                   >
                     Open video new tab
@@ -180,9 +182,8 @@ const TabDiv = ({ activeTab, setActiveTab }) => {
           onClick={() => {
             setActiveTab(tab.id);
           }}
-          className={`max-sm:w-full ${
-            activeTab === tab.id ? "" : "hover:text-white/60"
-          } relative rounded-full px-6 py-2.5 max-sm:py-1 max-sm:px-1 max-sm:text-xs text-sm quicksand-light text-white outline-sky-400 transition focus-visible:outline-1`}
+          className={`max-sm:w-full ${activeTab === tab.id ? "" : "hover:text-white/60"
+            } relative rounded-full px-6 py-2.5 max-sm:py-1 max-sm:px-1 max-sm:text-xs text-sm quicksand-light text-white outline-sky-400 transition focus-visible:outline-1`}
           style={{
             WebkitTapHighlightColor: "transparent",
           }}
@@ -302,7 +303,7 @@ const page = () => {
   useEffect(() => {
     setProgress(100);
 
-    return () => {};
+    return () => { };
   }, []);
 
   const paginationAlgo = (oostData) => {
@@ -368,7 +369,7 @@ const page = () => {
       }
     );
 
-    return () => {};
+    return () => { };
   }, []);
 
   useEffect(() => {
