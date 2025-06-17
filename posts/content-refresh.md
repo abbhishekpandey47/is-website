@@ -63,6 +63,8 @@ Use tools like SurferSEO, [Semrush's Content Checker](https://www.semrush.com/fe
 
 Here's what to focus on:
 
+![content refresh - SEO factors](/PostImages/content-refresh/cr5.png) 
+
 - **Keywords**: Your content should include the primary keyword and a mix of secondary keywords that cover LSI (Latent Semantic Indexing), long-tail, and [short-tail keywords](https://www.infrasity.com/blog/long-tail-vs-short-tail). This helps the content rank for a broader range of search queries while staying aligned with user intent.  
     
 - **Meta Tags**: Make sure title tags and meta descriptions are clear, relevant, and optimized for both users and search engines. While doing meta content refresh, aim for a meta title between 50–60 characters and a meta description between 150–160 characters. Add the primary keyword in the title and infuse secondary keywords naturally in the description to improve click-through rates.  
