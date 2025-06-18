@@ -118,7 +118,7 @@ When developers first hear about your product, one of the first things they’ll
 
 Documentation is often the first real touchpoint a developer has with your product, and it plays a crucial role in whether they decide to adopt the product or move on. That’s why, as an early-stage startup, your focus should be on building a strong foundation with content - API docs, onboarding guides, SDK walkthroughs, changelogs, and technical blogs. These are not just helpful, they’re important for enabling self-serve product adoption and reducing support tickets.
 
-When you consider the budget constraints, the decision becomes even more strategic. While Developer Advocates bring broad value across content and community, a **Technical Writer** offers expertise in technical writing, typically at a **lower cost**.
+When you consider the budget constraints, the decision becomes even more strategic. While **Developer Advocates** bring broad value across content and community, a **Technical Writer** offers expertise in technical writing, typically at a **lower cost**.
 
 And for startups operating with much tighter budgets, you don’t have to compromise on quality. Partnering with a **[technical writing agency](https://www.infrasity.com/services/technical-writing-services)** like **Infrasity** gives you access to a team of developers and writers who craft engineered content that’s technically accurate, clearly structured, and designed to scale.
 
