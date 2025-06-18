@@ -832,6 +832,18 @@ let postMetaData = [
         metaDescription: "Not getting reach on your technical content? That’s a clear sign it needs content refreshing. Use this checklist to revamp your content the right way."
     },
 
+    {
+        title: "Should You Hire a Technical Writer or a Developer Advocate for Your SaaS Startup?",
+        metatitle: "Who Should You Hire: Technical Writer or Developer Advocate?",
+        slug: "technical-writer-vs-developer-advocate",
+        description: "Tech writer vs. dev advocate - who gives your B2B SaaS startup the edge? Uncover the impact of each role and make your first hire count. Read the full guide.",
+        ogImage: "/PostImages/technical-writer-vs-developer-advocate/td1.webp",
+        publishedOn: "2025-06-17",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Tech writer vs. dev advocate - who gives your B2B SaaS startup the edge? Uncover the impact of each role and make your first hire count. Read the full guide."
+    },
+
 ];
 
 const sorted = () => {
