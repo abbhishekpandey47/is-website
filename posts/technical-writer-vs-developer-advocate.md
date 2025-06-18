@@ -1,4 +1,9 @@
-## Introduction
+## TL;DR
+
+- Developer Advocates wear many hats - engage with the community, create technical content, represent the company at conferences, and deliver developer feedback to internal teams.
+- Technical Writers focus on writing technical content - how-to guides, release notes, changelogs, CLI docs, SDK guides, and technical blogs.
+- Who to hire? It depends on your startup’s stage and budget - if you're early-stage, focus on building a strong content foundation with a Technical Writer.
+- If that foundation is already in place and budget allows, hiring a Developer Advocate can be a great next step to strengthen your presence within the developer community.
 
 As an early-stage SaaS founder, you've got a product, a few early users, and a growing list of developer questions. You know you need content - blogs, onboarding guides, release notes, and changelogs. But who should create it?
 
