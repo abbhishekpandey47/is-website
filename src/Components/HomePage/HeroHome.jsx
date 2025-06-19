@@ -30,7 +30,7 @@ const HeroHome = () => {
       requestIdleCallback(() => {
         gsap.fromTo(
           ".HeroWordSpan",
-          { opacity: 0, y: 200 },
+          { opacity: 0 },
           {
             opacity: 1,
             y: 0,

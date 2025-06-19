@@ -1,11 +1,7 @@
 "use client";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import React, { useEffect, useMemo, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";
 import Image from "next/image";
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(CustomEase);
 
 export const testiArr = [
   {
@@ -180,46 +176,51 @@ const HomeTesit = () => {
   const [carPtr, setCarPtr] = useState(1);
   const testiMemo = useMemo(() => testiArr, [testiArr]);
   useEffect(() => {
-    gsap.fromTo(
-      ".testiMonialsHead",
-      {
-        opacity: 0,
-        y: 55,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".testiMonialsHead",
-          toggleActions: "restart none none none",
+    (async () => {
+      const { gsap } = await import('gsap');
+      const { ScrollTrigger, CustomEase } = await import('gsap/all');
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(CustomEase);
+      gsap.fromTo(
+        ".testiMonialsHead",
+        {
+          opacity: 0,
+          y: 55,
         },
-      }
-    );
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".testiMonialsHead",
+            toggleActions: "restart none none none",
+          },
+        }
+      );
 
-    gsap.fromTo(
-      ".testiMonCardHome",
-      {
-        opacity: 0,
-        y: 55,
-        scale: 1.3,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "power3.out",
-        scale: 1,
-        scrollTrigger: {
-          trigger: ".testiMonCardHome",
-          toggleActions: "restart none none none",
+      gsap.fromTo(
+        ".testiMonCardHome",
+        {
+          opacity: 0,
+          y: 55,
+          scale: 1.3,
         },
-      }
-    );
-
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power3.out",
+          scale: 1,
+          scrollTrigger: {
+            trigger: ".testiMonCardHome",
+            toggleActions: "restart none none none",
+          },
+        }
+      );
+    })();
     return () => {};
   }, []);
 

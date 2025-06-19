@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TypeAnimation } from 'react-type-animation';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/all';
 import { Play } from 'lucide-react';
 import YouTubeLogo from '../../../public/svgPatterns/youTube';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const HomeVidSection = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
@@ -14,37 +10,42 @@ const HomeVidSection = () => {
   useEffect(() => {
     if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
       requestIdleCallback(() => {
-        gsap.fromTo(".howWorksHead", {
-          opacity: 0,
-          y: 55,
-        }, {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".howWorksHead",
-            toggleActions: "restart none none none"
-          }
-        });
+        (async () => {
+          const { gsap } = await import('gsap');
+          const { ScrollTrigger } = await import('gsap/all');
+          gsap.registerPlugin(ScrollTrigger);
+          gsap.fromTo(".howWorksHead", {
+            opacity: 0,
+            y: 55,
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".howWorksHead",
+              toggleActions: "restart none none none"
+            }
+          });
 
-        gsap.fromTo(".howWorksVidSection", {
-          opacity: 0,
-          y: 55,
-          scale: 1.3
-        }, {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scale: 1,
-          scrollTrigger: {
-            trigger: ".howWorksVidSection",
-            scrub: 1,
-            toggleActions: "restart none none none"
-          }
-        });
+          gsap.fromTo(".howWorksVidSection", {
+            opacity: 0,
+            y: 55,
+            scale: 1.3
+          }, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            scale: 1,
+            scrollTrigger: {
+              trigger: ".howWorksVidSection",
+              scrub: 1,
+              toggleActions: "restart none none none"
+            }
+          });
+        })();
       });
     }
   }, []);
@@ -80,9 +81,10 @@ const HomeVidSection = () => {
             >
               <div className='relative rounded-[18px] overflow-hidden'>
                 <img
-                  src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+                  src="/homepage/maxresdefault.avif"
                   alt="Video thumbnail"
-                  className='w-[950px] h-[525px] max-md:w-[630px] max-md:h-[359px] max-sm:w-[350px] max-sm:h-[181px] max-lg:w-[760px] max-lg:h-[439px]'
+                  height={500}
+                  className='w-[950px] h-[515px] max-md:w-[630px] max-md:h-[329px] max-sm:w-[350px] max-sm:h-[181px] max-lg:w-[760px] max-lg:h-[439px]'
                 />
 
                 <div className='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300'></div>

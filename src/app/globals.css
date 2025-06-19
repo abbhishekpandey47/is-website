@@ -58,12 +58,6 @@ body {
   background-color: #0D0A1A;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
 .scrollertesti {
   /* scrollbar-color: #333 #111; */
   scrollbar-width: thin;
