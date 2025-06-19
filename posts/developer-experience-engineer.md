@@ -55,7 +55,7 @@ Despite evidence from user interviews, session replays, and repeated support tic
 * Show a JSON response after a test API call  
 * Reorder steps: Auth before SDK setup  
 * Add curl examples beside the SDK code  
-* Show "✅ Auth Complete" after CLI setup
+* Show "Auth Complete" after CLI setup
 
 **Reason: DevEx insights aren't translated into specific, prioritized content or product updates.**
 
