@@ -68,7 +68,7 @@ This creates a disconnect: the docs team doesn't know what to revise, and produc
 
 **Solution:** To improve onboarding and activation, DevEx issues should be clearly tagged in the backlog, regularly reviewed in cross-functional triage meetings, and translated into specific, actionable tasks. Each issue must have a defined owner and timeline to ensure consistent follow-through and impact.  
 
-**Note: This example illustrates how the 5 Whys technique can be applied in a specific context. The questions and conclusions will vary depending on the nature of the issue being investigated. These are not intended as universal questions but rather as a detailed walkthrough to help you understand the approach.**
+_**Note: This example illustrates how the 5 Whys technique can be applied in a specific context. The questions and conclusions will vary depending on the nature of the issue being investigated. These are not intended as universal questions but rather as a detailed walkthrough to help you understand the approach.**_
   
 Now that we've explored a full example, let's look at how you can craft effective 5 Whys as a Developer Experience Engineer.
 
