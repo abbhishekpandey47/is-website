@@ -81,13 +81,13 @@ const about = () => {
       {/* Founder Section */}
       <section className="w-full px-4 md:px-12 lg:px-16  overflow-hidden relative">
         <div
-                  style={{
-          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
-        }}
-        
-      >
-        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-</div>
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+          }}
+        >
+          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+        </div>
 
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start items-center ">
@@ -186,13 +186,12 @@ const about = () => {
       {/* Advisor Section */}
       <section className="w-full py-12 mt-5 px-6 md:px-12 lg:px-16  overflow-hidden">
         <div
-                 style={{
-                  background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
-                }}
-                
-              >
-                <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-        
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+          }}
+        >
+          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
         </div>
 
         <div className="max-w-7xl mx-auto text-center">
@@ -267,13 +266,13 @@ const about = () => {
       {/* why infrasity section */}
       <section className="w-full  py-10 px-6 md:px-10">
         <div
-                  style={{
-                    background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
-                  }}
-                  
-                >
-                  <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-          </div>
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+          }}
+        >
+          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+        </div>
         <div className="max-w-7xl mx-auto">
           <h2
             className={`text-5xl md:text-6xl quicksand-bold text-white-800 mb-20 text-center opacity-0 ${
@@ -311,28 +310,27 @@ const about = () => {
           </div>
         </div>
       </section>
-  
 
-<div >
+      <div>
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-6 mt-8"></div>
-        < Timeline />
+        <Timeline />
       </div>
-      
 
       {/* Book demo section */}
-      <div  style={{
+      <div
+        style={{
           background:
             "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
-        }}>
+        }}
+      >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-12"></div>
-      <div className="w-full flex justify-center items-center"> 
-        <BookDemo />
+        <div className="w-full flex justify-center items-center">
+          <BookDemo />
+        </div>
       </div>
-      </div>
-
-{/* 
+      {/* 
       <div>
-        < LogoMoving />
+        <LogoMoving />
       </div> */}
     </div>
   );

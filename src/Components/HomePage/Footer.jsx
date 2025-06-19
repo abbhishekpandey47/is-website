@@ -11,11 +11,11 @@ import React from "react";
 import Link from "next/link";
 
 const Footer = () => {
-  return (    
+  return (
     <footer className="bg-zing-800 backdrop-blur-lg py-4 px-14 mt-8 text-white flex justify-center flex-col w-full opacity-1 footerClassHome">
       <div className="flex flex-col gap-6">
         <div className="max-w-7xl mx-auto flex flex-wrap items-start w-full border-t border-[#999] pt-12 max-lg:flex-col max-lg:gap-10">
-          <div className="w-full lg:w-1/3 flex flex-col items-start space-y-4 max-lg:items-center max-lg:text-center mb-8 lg:mb-0 pr-8">
+          <div className="w-full lg:w-1/3 flex flex-col items-start space-y-4 max-lg:items-center max-lg:text-center mb-8 lg:mb-0">
             <Image
               height={640}
               width={131}
@@ -60,39 +60,8 @@ const Footer = () => {
           </div>
 
           <div className="w-full lg:w-2/3 flex flex-wrap max-lg:justify-center lg:pl-32">
-
-
-            <div className="w-1/2 lg:w-1/4 mb-8 lg:mb-0 max-lg:text-center">
-              <h3 className="font-bold mb-4">Services</h3>
-              <ul className="space-y-3">
-                <li>
-                  <a
-                    href="/services/technical-writing-services"
-                    className="hover:underline"
-                  >
-                    Technical Writing Services
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/service-video-production"
-                    className="hover:underline"
-                  >
-                    Video Production
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/services/webflow-services"
-                    className="hover:underline"
-                  >
-                    Webflow Services
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="w-1/2 lg:w-1/4 mb-8 lg:mb-0 max-lg:text-center">
+            {/* Tools section - made full width on small screens */}
+            <div className="w-full sm:w-1/2 lg:w-1/4 mb-8 lg:mb-0 text-center sm:text-left">
               <h3 className="font-bold mb-4">Tools</h3>
               <ul className="space-y-3">
                 <li>
@@ -101,9 +70,80 @@ const Footer = () => {
                   </a>
                 </li>
               </ul>
+              <h3 className="font-bold mb-2 mt-5">Awards</h3>
+              <ul className="space-y-3">
+                <li>
+                  <div className="flex items-center justify-center flex-grow gap-0 sm:gap-2 text-xs sm:text-sm md:text-base">
+                    <Link
+                      href="https://hackernoon.com/startups/winner-award?type=city&slug=asia-new-delhi-dl-india&rank=1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      <span className="z-10">
+                        #1 Startup in New Delhi,India
+                      </span>
+                      <Image
+                        height={640}
+                        width={131}
+                        loading="lazy"
+                        src="/awards/HackerNoon_Logo.png"
+                        alt="Infra Logo"
+                        className="w-[100%] lg:w-[80%] mt-2"
+                      />
+                    </Link>
+                  </div>
+                </li>
+              </ul>
+              <h3 className="font-bold mb-2 mt-5">Mentioned</h3>
+              <ul className="space-y-3">
+                <li>
+                  <div className="items-center justify-center flex-grow ">
+                    <Link
+                      href="https://content.techgig.com/leadership/revolutionizing-engineering-content-infrasitys-approach-to-developer-focused-resources/articleshow/120793276.cms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      <span className="z-10">Recognized by TechGig</span>
+                    </Link>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            {/* Services section - made full width on small screens */}
+            <div className="w-full sm:w-1/2 lg:w-1/4 mb-8 lg:mb-0 text-center sm:text-left">
+              <h3 className="font-bold mb-4">Services</h3>
+              <ul className="space-y-3">
+                <li>
+                  <a
+                    href="/services/technical-writing-services"
+                    className="hover:underline lg:mr-2"
+                  >
+                    Technical Writing Services
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/services/service-video-production"
+                    className="hover:underline"
+                  >
+                    Video Production
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/services/webflow-agency"
+                    className="hover:underline"
+                  >
+                    Webflow Agency
+                  </a>
+                </li>
+              </ul>
             </div>
 
-            <div className="w-1/2 lg:w-1/4 mb-8 lg:mb-0 max-lg:text-center">
+            {/* Resources section - made full width on small screens */}
+            <div className="w-full sm:w-1/2 lg:w-1/4 mb-8 lg:mb-0 text-center sm:text-left">
               <h3 className="font-bold mb-4">Resources</h3>
               <ul className="space-y-3">
                 <li>
@@ -134,16 +174,19 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="w-1/2 lg:w-1/4 max-lg:text-center">
+            {/* Follow us section - made full width on small screens */}
+            <div className="w-full sm:w-1/2 lg:w-1/4 text-center sm:text-left">
               <h3 className="font-bold mb-4">Follow us</h3>
               <ul className="space-y-3">
                 <li>
                   <a
                     href="https://www.youtube.com/@Infrasity"
                     target="_blank"
-                    className="hover:underline flex items-center max-lg:justify-center gap-2"
+                    className="hover:underline flex items-center justify-center sm:justify-start gap-2"
                   >
-                    <span><YoutubeFilled /></span>
+                    <span>
+                      <YoutubeFilled />
+                    </span>
                     Youtube
                   </a>
                 </li>
@@ -151,9 +194,11 @@ const Footer = () => {
                   <a
                     href="https://x.com/InfrasityHub"
                     target="_blank"
-                    className="hover:underline flex items-center max-lg:justify-center gap-2"
+                    className="hover:underline flex items-center justify-center sm:justify-start gap-2"
                   >
-                    <span><XOutlined /></span>
+                    <span>
+                      <XOutlined />
+                    </span>
                     X
                   </a>
                 </li>
@@ -161,9 +206,11 @@ const Footer = () => {
                   <a
                     href="https://www.linkedin.com/company/infrasity/"
                     target="_blank"
-                    className="hover:underline flex items-center max-lg:justify-center gap-2"
+                    className="hover:underline flex items-center justify-center sm:justify-start gap-2"
                   >
-                    <span><LinkedinOutlined /></span>
+                    <span>
+                      <LinkedinOutlined />
+                    </span>
                     LinkedIn
                   </a>
                 </li>
@@ -171,9 +218,11 @@ const Footer = () => {
                   <a
                     href="https://www.instagram.com/infrasity/"
                     target="_blank"
-                    className="hover:underline flex items-center max-lg:justify-center gap-2"
+                    className="hover:underline flex items-center justify-center sm:justify-start gap-2"
                   >
-                    <span><InstagramOutlined /></span>
+                    <span>
+                      <InstagramOutlined />
+                    </span>
                     Instagram
                   </a>
                 </li>
@@ -182,18 +231,24 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Copyright section with the changes you requested */}
         <div className="border-t w-full border-[#999] mt-4 pt-4 text-sm flex items-center max-w-7xl mx-auto">
+          {" "}
           <div className="flex max-xs:text-xs max-xs:flex-col gap-1 w-1/2">
-            <div>© 2025 Infrasity.</div> <div>All rights reserved.</div>
-          </div>
+            {" "}
+            <div>© 2025 Infrasity. All rights reserved.</div>{" "}
+          </div>{" "}
           <div className="flex max-xs:text-xs max-sm:flex-col w-1/2 justify-end items-end max-sm:gap-1 gap-3">
+            {" "}
             <Link href="/privacy-policy" className="hover:underline">
-              Privacy Policy
-            </Link>
+              {" "}
+              Privacy Policy{" "}
+            </Link>{" "}
             <Link href="/terms-of-services" className="hover:underline">
-              Terms of Service
-            </Link>
-          </div>
+              {" "}
+              Terms of Service{" "}
+            </Link>{" "}
+          </div>{" "}
         </div>
       </div>
     </footer>

@@ -84,7 +84,7 @@ export default function TestimonialSlider() {
     {
       id: 8,
       name: "Debosmit Ray",
-      image: "/Testimon/devzeroDebo.png",
+      image: "/Testimon/devzeroDebo1.png",
       alt: "Debosmit Ray, Founder, DevZero",
       position: "Founder, DevZero",
       quote:

@@ -5,7 +5,7 @@ import HomeMarquee from "./HomeMarquee";
 import HowWorks from "./HowWorks";
 import CustomerSucc from "./CustomerSucc";
 import HomeTesit from "./HomeTesit";
-import ReadyToStart from "./ReadyToStart";
+import ReadyToStart from "../../app/book-a-demo/cta";
 import HomeTimeLine from "./HomeTimeLine";
 import { ScrollTrigger, CustomEase } from "gsap/all";
 import { gsap } from "gsap";
@@ -14,6 +14,8 @@ import JoinCommunity from "./JoinCommunity";
 import WhyInfra from "./WhyInfra";
 import FAQ from "./FAQ";
 import AppContext from "@/context/Infracontext";
+import AwardBanner from "./awardwinner";
+import Navbar from "../Navbar/Navbar";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
@@ -63,7 +65,7 @@ const HomePage = () => {
       <CustomerSucc />
       <HomeTesit />
       <JoinCommunity />
-      <ReadyToStart />
+      <ReadyToStart check={true} />
       <FAQ />
     </div>
   );

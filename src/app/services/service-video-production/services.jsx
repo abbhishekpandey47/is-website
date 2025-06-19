@@ -1,3 +1,5 @@
+import CalendarBooking from "../../calendarButton";
+
 export default function Services() {
   // Services data
   const services = [
@@ -11,7 +13,7 @@ export default function Services() {
         "2D motion graphics and product-focused animation",
         "Video workflow collaboration via Frame.io",
         "Music sourcing and licensing",
-        "Stock footage and visual asset licensing"
+        "Stock footage and visual asset licensing",
       ],
     },
     {
@@ -27,7 +29,7 @@ export default function Services() {
         "Optional user-recorded walkthrough integration",
         "Stock imagery, music, and licensing",
         "Creative Director oversight for visual consistency",
-        "Up to 2 rounds of revision"
+        "Up to 2 rounds of revision",
       ],
     },
     {
@@ -41,7 +43,7 @@ export default function Services() {
         "Voiceover production with technical accuracy",
         "Integration of user-generated content (UGC) if needed",
         "Music and stock asset licensing",
-        "Up to 2 rounds of revisions"
+        "Up to 2 rounds of revisions",
       ],
     },
   ];
@@ -110,9 +112,9 @@ export default function Services() {
       >
         <div className="text-center mb-12">
           <p className="quicksand-bold text-3xl md:text-5xl lg:text-6xl text-white mb-2">
-          Pitch Your Product Without <br className="md:hidden" />
+            Pitch Your Product Without <br className="md:hidden" />
             <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">
-            Losing the Plot (With Video)
+              Losing the Plot (With Video)
             </span>
           </p>
         </div>
@@ -138,29 +140,10 @@ export default function Services() {
           </div>
 
           {/* CTA Button */}
-          <div className="mt-12 text-center">
-            <a
-              href="https://calendly.com/meet-shan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn bg-gradient-to-r from-[#1966ff] to-[#8c1eff] hover:from-[#0044ff] hover:to-[#7000ff] text-white px-8 py-3 rounded-lg text-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
-            >
-              Get Started
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </a>
-          </div>
         </div>
+      </div>
+      <div className="text-center">
+        <CalendarBooking buttonText="Get Started" />
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import { usePathname } from 'next/navigation';
+import AwardBanner from "@/Components/HomePage/awardwinner";
 
 export function ClientLayoutWrapper({ children }) {
   const CrispWithNoSSR = dynamic(
@@ -18,6 +19,9 @@ export function ClientLayoutWrapper({ children }) {
   
   const pathname = usePathname();
   const hideNavbar = pathname === '/technical-writing-services-b2b-saas';
+  const hideNavBar2 = pathname === '/services/webflow-agency';
+  
+  
   return (
     <>
       {/* <CrispWithNoSSR /> */}
@@ -40,6 +44,9 @@ export function ClientLayoutWrapper({ children }) {
         <Appwrap>
           <AntdRegistry>
             <Loader/>
+
+            {!hideNavBar2 && <AwardBanner />}
+
             {!hideNavbar && <Navbar />}
             {children}
             <Analytics />

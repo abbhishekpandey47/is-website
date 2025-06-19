@@ -232,14 +232,14 @@ let postMetaData = [
     },
     {
         title: "What are LSI Keywords and Why Use Them in 2025",
-        metatitle: "What are lsi keywords ​& how to find lsi keywords?​",
+        metatitle: "Stop Guessing What Users Want - Use LSI Keywords Instead",
         slug: "lsi-keywords",
         description: "Boost SEO rankings with LSI keywords. Discover how they enhance content relevance, improve search visibility, and align with search engine algorithms effectively.",
         ogImage: "/PostImages/lsi-keywords/banner.png",
         publishedOn: "2024-11-22",
         authorId: "author0003",
         category: "Informational",
-        metaDescription: "Boost SEO rankings with LSI keywords. Discover how they enhance content relevance, improve search visibility, and align with search engine algorithms effectively."
+        metaDescription: "Did you know that LSI keywords are the keywords that you should consider after short tail and long tail keywords? Read the article to learn about them."
     },
     {
         title: "Your Guide to Robots.txt: Simplifying SEO for Success",
@@ -301,7 +301,7 @@ let postMetaData = [
         metatitle: "Using Case Studies and Whitepapers as SEO Assets in Technical Content",
         slug: "using-case-studies-and-whitepapers-as-seo-assets-in-technical-content",
         description: "Discover how SaaS companies can use case studies and whitepapers to drive SEO success. Learn best practices to optimize content for visibility, and authority.",
-        ogImage: "/PostImages/using-case-studies-and-whitepapers-as-seo-assets-in-technical-content/banner.jpg",
+        ogImage: "/PostImages/using-case-studies-and-whitepapers-as-seo-assets-in-technical-content/banner.png",
         publishedOn: "2024-12-25",
         authorId: "author0001",
         category: "Informational",
@@ -342,27 +342,59 @@ let postMetaData = [
         metaDescription: "SaaS growth with an optimized conversion funnel. Learn actionable strategies to drive leads, improve customer onboarding, and increase retention in this comprehensive guide."
     },
 
-    {
-      title: "Middleware and Infrasity: A Winning Partnership For Developer-Driven Content Success",
-      metatitle: "Case Study: Transforming Middleware’s Content Strategy for Greater Impact",
-      slug: "middleware-case-study",
-      description: "Learn how Infrasity collaborated with Middleware to transform their content strategy, boosting SEO scores, enhancing user engagement, and driving traffic through technically accurate and developer-focused content.",
-      ogImage: "/PostImages/middleware-case-study/0.png",
-      publishedOn: "2025-1-12",
-      authorId: "author0001",
-      category: "Case Studies",
-      metaDescription: "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions."
-  },
+   {
+  title: "Middleware and Infrasity: A Winning Partnership For Developer-Driven Content Success",
+  metatitle: "Case Study: Transforming Middleware’s Content Strategy for Greater Impact",
+  slug: "middleware-case-study",
+  description:
+    "Learn how Infrasity collaborated with Middleware to transform their content strategy, boosting SEO scores, enhancing user engagement, and driving traffic through technically accurate and developer-focused content.",
+  ogImage: "/PostImages/middleware-case-study/0.png",
+  publishedOn: "2025-01-12",
+  authorId: "author0001",
+  category: "Case Studies",
+  metaDescription:
+    "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions.",
+ 
+},
   {
-      title: " 5x Growth Journey: How Developer-Focused Technical Content Scaled a B2B enterprise SaaS Business",
-      metatitle: "Case Study: 5x Growth with Developer-Focused Content",
+      title: "8x Growth Journey: How Developer-Focused Technical Content Scaled a B2B Enterprise SaaS Business",
+      metatitle: "Case Study: 8x Growth with Developer-Focused Content",
       slug: "scalekit-case-study",
-      description: "Discover how developer focused technical content prompted a 5x growth for Scalekit, a B2B SaaS enterprise. In this case study learn how targeted content creation can leverage substantial traffic growth and quality leads for your b2b SaaS enterprise.",
+      description: "Discover how developer-focused technical content prompted a 5x growth for Scalekit, a B2B SaaS enterprise. In this case study learn how targeted content creation can leverage substantial traffic growth and quality leads for your b2b SaaS enterprise.",
       ogImage: "/PostImages/scalekit-case-study/0.png",
       publishedOn: "2025-1-21",
       authorId: "author0001",
       category: "Case Studies",
-      metaDescription: "Discover how we helped a B2B SaaS company achieve 5x growth with developer-focused content. This case study shares their journey and our winning strategies."
+      metaDescription: "Discover how we helped a B2B SaaS company achieve 5x growth with developer-focused content. This case study shares their journey and our winning strategies.",
+       stats: [
+    {
+//         Organic Traffic - 8x Growth (64 to 594 - +828.13%) 
+// Organic Keywords - 7x Growth (106 to 865 - +715.09%)
+// Organic Keywords in Top 10 - 3x Growth (12 to 39 - +290%)
+      title: "Organic Traffic",
+      value: "+828.13%",
+      subtext: "(64 to 594 - 8x Growth)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Organic Keywords",
+      value: "+715.09%",
+      subtext: "(106 to 865 - 7x Growth)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Organic Keywords in Top 10",
+      value: "+290%",
+      subtext: "(12 to 39 - 3x Growth)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    // {
+    //   title: "Keywords in Positions 1–10",
+    //   value: "+98%",
+    //   subtext: "in 12 months",
+    //   valueClass: "text-4xl md:text-5xl font-bold",
+    // },
+  ],
   },
   {
     title: "Content Marketing Strategy for SaaS Companies: a Masterclass in SaaS Marketing",
@@ -491,15 +523,15 @@ let postMetaData = [
     },
 
     {
-        title: "Here's Why You Should Partner With an Explainer Video Agency",
-        metatitle: "Here's Why You Should Partner With an Explainer Video Agency",
-        slug: "explainer-video-agency",
-        description: "Explainer videos play a significant role in driving conversions for B2B SaaS companies. However, it involves a comprehensive process in producing a high-quality professional video. Explore why they are great for your company and what goes behind creating them.",
+        title: "The Complete SaaS Video Production Process For Startups",
+        metatitle: "The Complete B2B SaaS Video Production Process For Startups",
+        slug: "saas-video-production",
+        description: "Product docs are a valuable asset for startups but SaaS explainer videos can significantly boost conversion. Here’s what goes into the video production process.",
         ogImage: "/PostImages/explainer-video-agency/e1.png",
         publishedOn: "2025-03-13",
         authorId: "author0004",
         category: "Informational",
-        metaDescription: "If you're a SaaS company, partnering with an Explainer Video Agency can be the right decision. Read the article to know what goes behind the production process."
+        metaDescription: "Product docs are a valuable asset for startups but SaaS explainer videos can significantly boost conversion. Here’s what goes into the video production process."
 },
 
     
@@ -549,15 +581,15 @@ let postMetaData = [
         metaDescription: "Discover the top B2B SaaS podcasts to listen in 2025 equipped with actionable insights and experiential knowledge of leading SaaS founders from across the globe."
     },
     {
-        title: "Best B2B SaaS Video Agencies",
-        metatitle: "Top B2B SaaS Video Agencies to try in 2025",
-        slug: "best-b2b-saas-video-agencies",
-        description: "This blog curates a list of top B2B SaaS video production agencies that you can partner with to venture into video production and scale your SaaS company.",
+        title: "Top Explainer Video Companies For B2B SaaS Startups",
+        metatitle: "Top Explainer Video Companies For B2B SaaS Startups in 2025",
+        slug: "top-explainer-video-companies",
+        description: "If you're planning to partner with an explainer video production company, don't forget to go through this list before you make a decision for your SaaS Startup.",
         ogImage: "/PostImages/best-b2b-saas-video-agencies/0.png",
         publishedOn: "2025-03-21",
         authorId: "author0003",
         category: "Informational",
-        metaDescription: "Discover the top B2B SaaS video production agencies to help create technical product explainer videos, animated how-to guides and much more to scale your SaaS."
+        metaDescription: "If you're planning to partner with an explainer video production company, don't forget to go through this list before you make a decision for your SaaS Startup."
     },
 
     {
@@ -643,7 +675,175 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Planning to launch your SaaS product? Read this Go-To-Market strategy guide for practical tips to enhance your marketing efforts with higher conversion rates."
     },
+
+    {
+        title: "Answer Engine Optimization: The Catalyst Your B2B SaaS Content Needs in 2025",
+        metatitle: "Answer Engine Optimization: A Catalyst For B2B SaaS Content",
+        slug: "answer-engine-optimization",
+        description: "Answer engine optimization can help you reach the top of the search engine results page. Wanna know how? Read the article to understand what it is, where your content will show up, and even what type of content you can create to gain visibility. Also, don't forget to check out the practical tips towards the end.",
+        ogImage: "/PostImages/answer-engine-optimization/a1.png",
+        publishedOn: "2025-04-22",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Answer engine optimization can help you reach the top of the search engine results page. Wanna know how? Read the article to understand how to do AEO."
+    },
+
+    {
+        title: "Stop Selling Your Product To Everyone: Create Your Ideal Customer Profile",
+        metatitle: "Stop Selling To Everyone: Create Your Ideal Customer Profile",
+        slug: "ideal-customer-profile",
+        description: "Explore how to create an ideal customer profile, and how some successful B2B SaaS companies leveraged their sales and marketing efforts by creating an ICP.",
+        ogImage: "/PostImages/ideal-customer-profile/i1.png",
+        publishedOn: "2025-04-26",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Explore how to create an ideal customer profile, and how some successful B2B SaaS companies leveraged their sales and marketing efforts by creating an ICP."
+    },
+
+    {
+        title: "Don’t Miss Out on Creating a Product Use Case: Here’s Why",
+        metatitle: "Don’t Miss Out on Creating a Product Use Case: Here’s Why",
+        slug: "product-use-case",
+        description: "Product use case examples help B2B SaaS startups drive conversions. Discover what they are, why they are significant, and how to create them effectively.",
+        ogImage: "/PostImages/product-use-case/p5.png",
+        publishedOn: "2025-05-01",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Want to boost conversions for your B2B SaaS product? Learn what product use case examples are, why they’re important, and how to create them effectively."
+    },
+
+    {
+        title: "The Tried-and-Tested Tech Blog Post Checklist That Turns Readers into Users",
+        metatitle: "The Tried-and-Tested Blog Post Checklist for Tech Content",
+        slug: "blog-post-checklist",
+        description: "A technical blog checklist acts as a key guide to ensure high-quality, well-structured content. Use this checklist to craft clear, accurate, and engaging technical blogs that resonate with your target audience and meet professional standards.",
+        ogImage: "/PostImages/blog-post-checklist/c1.png",
+        publishedOn: "2025-05-06",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "This is the only technical blog checklist you should consider when writing for developers - follow it to create clear and engaging content every time!"
+    },
+
+    {
+        title: "No One Talks About These 6 SaaS Content Marketing Metrics",
+        metatitle: "6 SaaS Content Marketing Metrics No One’s Talking About",
+        slug: "content-marketing-metrics",
+        description: "Wondering why your content isn’t increasing the product adoption rate? Start tracking these 6 key content metrics to enhance your content marketing efforts.",
+        ogImage: "/PostImages/content-marketing-metrics/cmm1.png",
+        publishedOn: "2025-05-09",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Wondering why your content isn’t increasing the product adoption rate? Start tracking these 6 key content metrics to enhance your content marketing efforts."
+    },
+
+    {
+        title: "Product Release Notes 101: The Secret to Writing Updates Users Actually Read",
+        metatitle: "Product Release Notes 101: Updates That Make Sense To Users",
+        slug: "product-release-notes",
+        description: "If you are a SaaS startup, start preparing release notes. Learn what they are, what all you need to write them, and how Google publishes its release notes.",
+        ogImage: "/PostImages/product-release-notes/pr1.png",
+        publishedOn: "2025-05-16",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "If you are a SaaS startup, start preparing release notes. Learn what they are, what all you need to write them, and how Google publishes its release notes."
+    },
+
+    {
+        title: "Poor Documentation, Stalled Sales: 4 Red Flags To Watch Out",
+        metatitle: "Poor Documentation, Stalled Sales: 4 Red Flags To Watch",
+        slug: "poor-documentation",
+        description: "No matter how innovative your SaaS product is, poor documentation can impact the sales and revenue. Explore the four red flags of poor documentation here.",
+        ogImage: "/PostImages/poor-documentation/pd1.jpg",
+        publishedOn: "2025-05-21",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "No matter how innovative your SaaS product is, poor documentation can impact the sales and revenue. Explore the four red flags of poor documentation here."
+    },
+
+    {
+        title: "Content Marketing ROI: The Growth Lever Most SaaS Teams Undervalue",
+        metatitle: "Content Marketing ROI: A Metric Every SaaS CMO Should Track",
+        slug: "content-marketing-roi",
+        description: "Not measuring content marketing ROI? You’re risking budget waste and missed growth. Learn how to track content ROI and drive real SaaS product adoption.",
+        ogImage: "/PostImages/content-marketing-roi/cmr1.png",
+        publishedOn: "2025-05-26",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Not measuring content marketing ROI? You’re risking budget waste and missed growth. Learn how to track content ROI and drive real SaaS product adoption."
+    },
+
+    {
+        title: "The Secret Checklist for Developer-First CLI Docs for SaaS Startups",
+        metatitle: "CLI Docs Checklist: The Secret to Developer-First Docs",
+        slug: "cli-docs-checklist",
+        description: "Write developer-focused CLI docs with this checklist that helps you guide users, explain commands clearly, and keep your documentation up to date.",
+        ogImage: "/PostImages/cli-docs-checklist/Cd1.png",
+        publishedOn: "2025-05-27",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Write developer-focused CLI docs with this checklist that helps you guide users, explain commands clearly, and keep your documentation up to date."
+    },
+
+    {
+        title: "Why Developer Marketing Should Be Your GTM Strategy for SaaS Products?",
+        metatitle: "Why Developer Marketing Should Be Your SaaS GTM Strategy?",
+        slug: "developer-marketing",
+        description: "Built a SaaS product for developers? Discover how Dev Marketing can help you drive real engagement and growth compared to traditional marketing strategies.",
+        ogImage: "/PostImages/dev-marketing/dm1.png",
+        publishedOn: "2025-05-29",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Built a SaaS product for developers? Discover how Dev Marketing can help you drive real engagement and growth compared to traditional marketing strategies."
+    },
     
+    {
+        title: "SaaS Alert: Stop Mixing Up Changelog vs Release Notes",
+        metatitle: "SaaS Alert: Avoid Mixing Up Changelog vs Release Notes",
+        slug: "changelog-vs-release-notes",
+        description: "Changelog vs Release Notes: Though often used interchangeably, understand their differences before you confuse your product users and lose them.",
+        ogImage: "/PostImages/changelog-vs-release-notes/rc1.png",
+        publishedOn: "2025-06-04",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Changelog vs Release Notes: Though often used interchangeably, understand their differences before you confuse your product users and lose them."
+    },
+
+     {
+        title: "Why Technical Product Documentation is a Versatile Asset for SaaS Startups?",
+        metatitle: "Why Technical Product Documentation is a Versatile Asset",
+        slug: "technical-product-documentation",
+        description: "It's time to leverage one of the most versatile assets - technical product documentation, for B2B SaaS startups. Why? Read the article to find out!",
+        ogImage: "/PostImages/technical-product-documentation/tp1.png",
+        publishedOn: "2025-06-05",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "It's time to leverage one of the most versatile assets - technical product documentation, for B2B SaaS startups. Why? Read the article to find out!"
+    },
+
+    {
+        title: " Content Refresh: How To Refresh Content For SaaS Startups",
+        metatitle: "SaaS Content Refresh: How To Refresh Content Perfectly",
+        slug: "content-refresh",
+        description: "Not getting reach on your technical content? That’s a clear sign it needs content refreshing. Use this checklist to revamp your content the right way.",
+        ogImage: "/PostImages/content-refresh/cr1.png",
+        publishedOn: "2025-06-13",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Not getting reach on your technical content? That’s a clear sign it needs content refreshing. Use this checklist to revamp your content the right way."
+    },
+
+    {
+        title: "Should You Hire a Technical Writer or a Developer Advocate for Your SaaS Startup?",
+        metatitle: "Who Should You Hire: Technical Writer or Developer Advocate?",
+        slug: "technical-writer-vs-developer-advocate",
+        description: "Tech writer vs. dev advocate - who gives your B2B SaaS startup the edge? Uncover the impact of each role and make your first hire count. Read the full guide.",
+        ogImage: "/PostImages/technical-writer-vs-developer-advocate/td1.webp",
+        publishedOn: "2025-06-17",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Tech writer vs. dev advocate - who gives your B2B SaaS startup the edge? Uncover the impact of each role and make your first hire count. Read the full guide."
+    },
+
 ];
 
 const sorted = () => {

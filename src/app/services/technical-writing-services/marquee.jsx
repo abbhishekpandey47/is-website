@@ -6,30 +6,31 @@ import Image from "next/image";
 
 const fileList = [
   "aviator.png",
-  "firstock-logo.webp",
+  "mocha.png",
   "cedana.png",
+  "mvp-grow.png",
   "cerbos.png",
-  "codegiant-infra-1.png",
+  "qodo-logo.png",
+  "Codegiant.png",
+  "Scalekit-logo.png",
   "cycloid.png",
-  "daytona-removebg-preview-e1721477918328.png",
-  "DevZero.png",
-  "env0-infra-1.png",
-  "firefly.png",
-  "Group-14967.png",
-  "images-removebg-preview.png",
-  "images__2_-removebg-preview.png",
-  "kapstan.png",
-  "kubiya.png",
-  "logo-landscape-removebg-preview.png",
-  "lovable-logo.png",
-  "Mask-group.png",
-  "middleware-logo.svg",
   "scalr.png",
-  "stackOne.svg",
-  "TravisCI-Full-Color.png",
+  "daytona.png",
+  "stackOne.png",
+  "DevZero.png",
   "terrateam.png",
-  "vapi.png",
-  "qodo-logo.svg",
+  "env0-infra-1.png",
+  "tracetest.png",
+  "firefly.png",
+  "TravisCI-Full-Color.png",
+  "firstock-logo.png",
+  "vapi-logo.png",
+  "kapstan.png",
+  "Zenml.png",
+  "Kubiya.png",
+  "lovable-logo.png",
+  "Meteor-ops.png",
+  "middleware-logo.png",
 ];
 
 const NewMarquee = () => {
@@ -55,8 +56,8 @@ const NewMarquee = () => {
                   loading="lazy"
                   width={150}
                   height={50}
-                  className="w-40 max-sm:w-30 filter brightness-0 invert "
-                  src={`/trustedby/${file}`}
+                  className="w-40 max-sm:w-30 mt-8"
+                  src={`/trustedby-bw/bw/${file}`}
                   alt="Ratio is 3.9"
                 />
               </div>
