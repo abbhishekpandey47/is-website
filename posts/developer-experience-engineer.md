@@ -22,6 +22,8 @@ This guide covers how to apply the 5 Whys technique with an example and how to f
 
 ## A Practical Example of the 5 Whys Method
 
+![developer experience engineer - example](/PostImages/developer-experience-engineer/de2.png) 
+
 Let's say you're working on a developer-focused payments API platform. Your internal metrics show a **drop in onboarding completion from 60% to 35% over the past 2 sprints**. Session replays from tools show developers **completing the quickstart**, generating an API key, and then... doing nothing. They scroll, switch tabs, and exit.  
 
 Support tickets raise vague concerns:  
@@ -31,6 +33,8 @@ Support tickets raise vague concerns:
 These signals confirm there's friction, but they're fragmented. To find the root cause, you apply the **5 Whys** method. 
 
 **Problem: Only 35% of developers are completing onboarding (down from 60%)**  
+
+![developer experience engineer - 5 whys examples](/PostImages/developer-experience-engineer/de3.png) 
 
 ### 1. Why Are Developers Dropping Off During Onboarding?
 
@@ -74,7 +78,9 @@ Now that we've explored a full example, let's look at how you can craft effectiv
 
 ## How to Frame the 5 Whys as a Developer Experience Engineer
 
-Framing effective 5 Whys is pretty straightforward, but to make it meaningful in a Developer Experience context, there are a few things worth keeping in mind.  
+Framing effective 5 Whys is pretty straightforward, but to make it meaningful in a Developer Experience context, there are a few things worth keeping in mind. 
+
+![developer experience engineer - how to frame 5 whys](/PostImages/developer-experience-engineer/de4.png) 
 
 ### 1. Identify a developer-facing problem that impacts the company's growth
 Focus on issues that create real friction for developers and tie directly to business outcomes, like a drop in onboarding completion, delays in the first API call, or repeated support requests during integration.  
