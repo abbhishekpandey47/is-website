@@ -32,8 +32,6 @@ These signals confirm there's friction, but they're fragmented. To find the root
 
 **Problem: Only 35% of developers are completing onboarding (down from 60%)**  
 
-**Infographic**
-
 ### 1. Why Are Developers Dropping Off During Onboarding?
 
 Data from session replays, onboarding funnel analytics (using Mixpanel), and support tickets show developers stop after the API key is generated. The SDK is initialized, but no API call is made, and the CLI runs silently. There are no errors, no visible results, no logs or test output.  
