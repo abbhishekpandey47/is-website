@@ -83,7 +83,6 @@ const HomeVidSection = () => {
                 <img
                   src="/homepage/maxresdefault.avif"
                   alt="Video thumbnail"
-                  height={500}
                   className='w-[950px] h-[515px] max-md:w-[630px] max-md:h-[329px] max-sm:w-[350px] max-sm:h-[181px] max-lg:w-[760px] max-lg:h-[439px]'
                 />
 

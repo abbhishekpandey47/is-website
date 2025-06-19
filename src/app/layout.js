@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
                     onLoad="this.onload=null;this.rel='stylesheet'"
                 />
                 <noscript>
-                    <link rel="stylesheet" href="/src/app/globals.css" />
+                    <link rel="stylesheet" href="/globals.css" />
                 </noscript>
 
                 {/* If you are self-hosting Quicksand, preload the font files as well */}
