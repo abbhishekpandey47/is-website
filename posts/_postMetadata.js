@@ -843,6 +843,18 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Tech writer vs. dev advocate - who gives your B2B SaaS startup the edge? Uncover the impact of each role and make your first hire count. Read the full guide."
     },
+    
+    {
+        title: "5 Whys Every Developer Experience Engineer Should Consider",
+        metatitle: "5 Whys Every Developer Experience Engineer Should Consider",
+        slug: "developer-experience-engineer",
+        description: "Master the 5 Whys root cause analysis to solve developer experience challenges and reduce friction in your SaaS onboarding and integration flows.",
+        ogImage: "/PostImages/developer-experience-engineer/de1.webp",
+        publishedOn: "2025-06-19",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Master the 5 Whys root cause analysis to solve developer experience challenges and reduce friction in your SaaS onboarding and integration flows."
+    },
 
 ];
 
