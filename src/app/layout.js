@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
 import './globals.css';
 import { metadata } from './metadata';
+import AlternateLinks from './AlternateLinks';
 
 export { metadata };
 
@@ -48,6 +49,7 @@ export default function RootLayout({ children }) {
                     src='https://assets.calendly.com/assets/external/widget.js'
                     strategy='lazyOnload'
                 />
+                <AlternateLinks />
             </head>
             <GoogleAnalytics gaId='G-G0BTN1FRWY' />
             <body className='antialiased'>
