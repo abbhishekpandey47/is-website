@@ -3,7 +3,7 @@
 * The 5 Whys method is a powerful tool for Developer Experience engineers to identify the root cause of developer-facing problems.   
 * Each "why" builds on the previous answer, creating a logical chain that uncovers the root cause.   
 * This five whys technique is widely applicable in SaaS environments, especially for diagnosing friction in onboarding, integration, and activation.   
-* It works best when used collaboratively across teams, including Product, Support, and Technical Writing.
+* It works best when used collaboratively across teams, including the Product team, Support team, and Technical Writing team.
 
 Are you in a situation where onboarding drop-offs are rising, activation is lagging, and support tickets and calls keep coming, but there's no clear explanation for why?  
 
