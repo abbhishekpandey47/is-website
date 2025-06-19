@@ -6,25 +6,25 @@ import { message, Spin } from 'antd'; // Import Spin for loading indicator
 import AppContext from '@/context/Infracontext';
 
 const CalendlyEmbed = () => {
-  const [windowWidth, setWindowWidth] = useState(null);
+    const [windowWidth, setWindowWidth] = useState(null);
 
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
+    useEffect(() => {
+        setWindowWidth(window.innerWidth);
+    }, []);
 
-  if (windowWidth === null) {
-    return null;
-  }
+    if (windowWidth === null) {
+        return null;
+    }
 
-  return (
-    <iframe
-      width="100%"
-      height={windowWidth >= 1500 ? '600px' : '530px'}
-      className="shadow-lg"
-      src="https://calendly.com/meet-shan/30min?hide_event_type_details=1"
-      allowFullScreen
-    ></iframe>
-  );
+    return (
+        <iframe
+            width="100%"
+            height={windowWidth >= 1500 ? '600px' : '530px'}
+            className="shadow-lg"
+            src="https://calendly.com/meet-shan/30min?hide_event_type_details=1"
+            allowFullScreen
+        ></iframe>
+    );
 };
 
 
@@ -139,14 +139,15 @@ const ContactHome = () => {
                 {/* Left Section - Form */}
                 <div className="w-[45%] max-lg:w-full bg-white flex flex-col justify-center items-center max-sm:px-6 pt-14">
                     <div className="w-full max-w-xl p-8 max-sm:px-0">
-                    <h1 className="text-3xl font-bold mb-4 text-center text-black quicksand-bold">
-                        Book a <span className="text-[#6c5be7]">FREE</span> Demo
-                    </h1>
+                        <h1 className="text-3xl font-bold mb-4 text-center text-black quicksand-bold">
+                            Book a <span className="text-[#6c5be7]">FREE</span> Demo
+                        </h1>
                         <p className="text-zinc-800 text-center mb-4 quicksand-medium">
                             Looking for developer-focused tech content to
                             increase user signups for your product? Reach out at{' '}
                             <a
                                 href="mailto:contact@infrasity.com"
+                                rel="noopener noreferrer"
                                 style={{ color: 'darkblue' }}
                                 className="italic href-blue hover:underline"
                             >

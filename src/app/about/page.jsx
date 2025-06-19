@@ -93,11 +93,10 @@ const about = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start items-center ">
             {/* Text Content */}
             <div
-              className={`transition-all duration-1000 ease-out ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
+              className={`transition-all duration-1000 ease-out ${isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
+                }`}
               style={{ transitionDelay: "400ms" }}
             >
               <h2 className="text-4xl md:text-5xl lg:text-6xl quicksand-bold text-white mb-8 tracking-tight">
@@ -196,9 +195,8 @@ const about = () => {
 
         <div className="max-w-7xl mx-auto text-center">
           <h2
-            className={`text-4xl md:text-5xl lg:text-6xl quicksand-bold text-white mb-16 tracking-tight opacity-0 ${
-              isVisible ? "opacity-100 animate-fade-in" : ""
-            }`}
+            className={`text-4xl md:text-5xl lg:text-6xl quicksand-bold text-white mb-16 tracking-tight opacity-0 ${isVisible ? "opacity-100 animate-fade-in" : ""
+              }`}
             style={{ transitionDelay: "400ms" }}
           >
             Advisors
@@ -228,6 +226,7 @@ const about = () => {
                   href="https://www.linkedin.com/in/amitgovrin/"
                   target="_blank"
                   aria-label="LinkedIn profile"
+                  rel="nofollow noreferrer"
                 >
                   <img
                     width="40"
@@ -275,9 +274,8 @@ const about = () => {
         </div>
         <div className="max-w-7xl mx-auto">
           <h2
-            className={`text-5xl md:text-6xl quicksand-bold text-white-800 mb-20 text-center opacity-0 ${
-              isVisible ? "opacity-100 animate-fade-in-up" : ""
-            }`}
+            className={`text-5xl md:text-6xl quicksand-bold text-white-800 mb-20 text-center opacity-0 ${isVisible ? "opacity-100 animate-fade-in-up" : ""
+              }`}
             style={{ transitionDelay: "1900ms" }}
           >
             What makes{" "}
@@ -288,9 +286,8 @@ const about = () => {
             {uspData.map((usp, index) => (
               <div
                 key={usp.id}
-                className={`opacity-0 ${
-                  isVisible ? "opacity-100 animate-fade-in-up" : ""
-                }`}
+                className={`opacity-0 ${isVisible ? "opacity-100 animate-fade-in-up" : ""
+                  }`}
                 style={{ transitionDelay: `${2000 + index * 150}ms` }}
               >
                 <h3 className="text-2xl quicksand-bold text-purple-700 mb-4">

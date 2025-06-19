@@ -124,7 +124,7 @@ function page() {
                         </div>
                         <div className="flex justify-center">
                             <p className="text-center text-[wheat] pt-5 w-2/3 quicksand-semibold max-lg:w-3/4">
-                                Send any questions to <a href="mailto:contact@infrasity.com" style={{ color: "white" }} className='italic href-blue hover:underline relative z-[1]'>contact@infrasity.com</a> or jump on a quick call with us.
+                                Send any questions to <a href="mailto:contact@infrasity.com" style={{ color: "white" }} rel="noopener noreferrer" className='italic href-blue hover:underline relative z-[1]'>contact@infrasity.com</a> or jump on a quick call with us.
                             </p>
                         </div>
                     </div>

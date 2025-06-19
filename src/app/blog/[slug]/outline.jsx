@@ -168,7 +168,8 @@ const Outline = ({ content }) => {
     const url = encodeURIComponent(window.location.href);
     window.open(
       `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-      "_blank"
+      "_blank",
+      "noopener,noreferrer"
     );
   };
 
@@ -178,7 +179,8 @@ const Outline = ({ content }) => {
     const text = encodeURIComponent("Check out this great article!");
     window.open(
       `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
-      "_blank"
+      "_blank",
+      "noopener,noreferrer"
     );
   };
 
@@ -186,9 +188,8 @@ const Outline = ({ content }) => {
     <nav
       id="outlineComponent"
       aria-label="Outline Navigation"
-      className={`w-[18rem] max-xl:w-[13rem] min-[2173px]:w-[22rem] min-[2173px]:text-lg min-[2500px]:w-[30rem] min-[2500px]:text-xl max-lg:w-[20rem] flex flex-col quicksand-light text-sm my-8 ${
-        sticky && "sticky"
-      } left-0 top-[82px]`}
+      className={`w-[18rem] max-xl:w-[13rem] min-[2173px]:w-[22rem] min-[2173px]:text-lg min-[2500px]:w-[30rem] min-[2500px]:text-xl max-lg:w-[20rem] flex flex-col quicksand-light text-sm my-8 ${sticky && "sticky"
+        } left-0 top-[82px]`}
     >
       <div className="flex justify-start text-lg py-4 pb-2 mb-0 quicksand-semibold">
         <p className="text-left text-[#3c61e2]"># Overview</p>
@@ -204,15 +205,13 @@ const Outline = ({ content }) => {
             key={elementIdx}
             role="link"
             aria-label={`Navigate to section ${element.text}`}
-            className={`py-1 transition-all duration-500 ${
-              activeId === element.id ? " " : ""
-            }`}
+            className={`py-1 transition-all duration-500 ${activeId === element.id ? " " : ""
+              }`}
             onClick={() => handleScrollToElement(element.id)}
           >
             <div
-              className={`hover:underline hover:cursor-pointer ${
-                activeId === element.id ? "white quicksand-semibold" : "#999"
-              }`}
+              className={`hover:underline hover:cursor-pointer ${activeId === element.id ? "white quicksand-semibold" : "#999"
+                }`}
             >
               {element?.text}
             </div>
