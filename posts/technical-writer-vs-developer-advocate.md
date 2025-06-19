@@ -25,6 +25,8 @@ The roles of the developer advocate and technical writer are pretty interesting 
 
 Developer Advocates bring a broad and impactful skill set. They write technical content, gather developer feedback, engage with developer communities, and often represent the company at conferences or on social media platforms. They're part educator, part engineer, and part evangelist, making them well-suited for startups looking to expand visibility and connect with a developer audience.
 
+![technical writer vs developer advocate - skill sets](/PostImages/technical-writer-vs-developer-advocate/td2.png) 
+
 Technical Writers, in contrast, specialize in content depth and clarity. Their expertise lies in creating clear, structured, and accurate documentation, including **API references, SDK guides, changelogs, release notes, CLI docs, and how-to guides**. They simplify complex concepts into content that's easy for developers to follow and is designed to support real-world implementation. Both roles can produce developer-focused content, but the difference lies in focus. 
 
 **Developer Advocates wear many hats** (community engagement, technical content creation, event participation), which means their time is divided across multiple priorities. **Technical Writers, however, are laser-focused** on one thing: making your product understandable and usable through content.
@@ -70,6 +72,8 @@ But all these skills collectively suit best when your technical content foundati
 ## Answer These 6 Questions Before You Hire One
 
 While you are confused between whether to hire a Technical Writer or a Developer Advocate, answering these questions will help you make a decision with reasoning.
+
+![technical writer vs developer advocate - hiring](/PostImages/technical-writer-vs-developer-advocate/td3.png) 
 
 ### 1. Are Developers Discovering You but Not Sticking Around?
 
