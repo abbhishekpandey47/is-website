@@ -6,7 +6,6 @@ export default function Home() {
     const headersList = headers();
     const userAgent = headersList.get('user-agent') || '';
 
-    const ip = headersList.get('x-forwarded-for') || '127.0.0.1';
     const url = '/';
 
     const knownBots = ['gptbot', 'bingbot', 'googlebot'];
@@ -20,7 +19,6 @@ export default function Home() {
                 dt: new Date().toISOString(),
                 message: `Bot detected: ${matchedBot}`,
                 userAgent,
-                ip,
                 url,
             }),
         }).catch((error) => {
