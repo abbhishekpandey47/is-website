@@ -56,7 +56,7 @@ export default function WhyAI() {
       <div className="max-w-6xl mx-auto text-center relative z-10">
         <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
           <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-            Why Al Agent Startups Need a New Content Playbook
+            Why AI Agent Startups Need a New Content Playbook
           </h1>
         </div>
 
@@ -113,11 +113,10 @@ export default function WhyAI() {
                   {/* Expandable Content - Fixed Height Container */}
                   <div className="relative">
                     <div
-                      className={`absolute top-0 left-0 w-full transition-all duration-500 ease-in-out ${
-                        activeSection === section.id
+                      className={`absolute top-0 left-0 w-full transition-all duration-500 ease-in-out ${activeSection === section.id
                           ? "opacity-100 translate-y-0 pointer-events-auto"
                           : "opacity-0 -translate-y-4 pointer-events-none"
-                      }`}
+                        }`}
                     >
                       <div className="pt-4">
                         <p className="text-gray-300 leading-relaxed text-base">
@@ -127,9 +126,8 @@ export default function WhyAI() {
                     </div>
                     {/* Spacer to maintain consistent height */}
                     <div
-                      className={`transition-all duration-500 ease-in-out ${
-                        activeSection === section.id ? "h-24" : "h-0"
-                      }`}
+                      className={`transition-all duration-500 ease-in-out ${activeSection === section.id ? "h-24" : "h-0"
+                        }`}
                     />
                   </div>
                 </div>
@@ -165,11 +163,10 @@ export default function WhyAI() {
                 {/* Expandable Content - Fixed Height Container */}
                 <div className="relative">
                   <div
-                    className={`absolute top-0 left-0 w-full transition-all duration-500 ease-in-out ${
-                      activeSection === section.id
+                    className={`absolute top-0 left-0 w-full transition-all duration-500 ease-in-out ${activeSection === section.id
                         ? "opacity-100 translate-y-0 pointer-events-auto"
                         : "opacity-0 -translate-y-4 pointer-events-none"
-                    }`}
+                      }`}
                   >
                     <div className="pt-6">
                       <p className="text-gray-300 leading-relaxed text-lg">
@@ -179,9 +176,8 @@ export default function WhyAI() {
                   </div>
                   {/* Spacer to maintain consistent height */}
                   <div
-                    className={`transition-all duration-500 ease-in-out ${
-                      activeSection === section.id ? "h-32" : "h-0"
-                    }`}
+                    className={`transition-all duration-500 ease-in-out ${activeSection === section.id ? "h-32" : "h-0"
+                      }`}
                   />
                 </div>
               </div>

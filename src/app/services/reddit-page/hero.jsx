@@ -71,7 +71,6 @@ export default function AIStartupLanding() {
                     </p>
                 </div>
 
-                {/* Mobile: Button and Image in two rows */}
                 <div className="mb-16 max-sm:mb-8">
                     <div className="hidden max-sm:flex flex-col items-center gap-6">
                         <CalendarBooking />
