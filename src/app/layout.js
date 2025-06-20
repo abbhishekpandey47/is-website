@@ -11,22 +11,47 @@ export default function RootLayout({ children }) {
     return (
         <html lang='en'>
             <head>
-                <link rel='alternate' href='https://www.infrasity.com/' hreflang='x-default' />
-                <link rel='alternate' href='https://www.infrasity.com/' hreflang='en-us' />
                 <link rel='preconnect' href='https://fonts.googleapis.com' />
                 <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
+
+                {/* Preload Google Fonts CSS and load asynchronously */}
+                <link
+                    rel="preload"
+                    as="style"
+                    href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap"
+                    onLoad="this.onload=null;this.rel='stylesheet'"
+                />
+                <noscript>
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" />
+                </noscript>
+
+                {/* Preload main CSS if possible (adjust path if needed) */}
+                <link
+                    rel="preload"
+                    as="style"
+                    href="/src/app/globals.css"
+                    onLoad="this.onload=null;this.rel='stylesheet'"
+                />
+                <noscript>
+                    <link rel="stylesheet" href="/globals.css" />
+                </noscript>
+
+                {/* If you are self-hosting Quicksand, preload the font files as well */}
                 <link
                     rel='preload'
-                    href='/media/Quicksand-Bold.e05d0c2c.woff'
+                    href='/src/app/fonts/Quicksand-Bold.woff2'
                     as='font'
-                    type='font/woff'
-                    crossorigin
+                    type='font/woff2'
+                    crossOrigin='anonymous'
+                />
+                <link
+                    rel='preload'
+                    href='/src/app/fonts/Quicksand-Regular.woff2'
+                    as='font'
+                    type='font/woff2'
+                    crossOrigin='anonymous'
                 />
 
-                <link
-                    href='https://fonts.googleapis.com/css2?family=Quicksand&display=swap'
-                    rel='stylesheet'
-                />
                 <Script id='google-tag-manager' strategy='lazyOnload'>{`
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

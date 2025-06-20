@@ -1,13 +1,18 @@
 'use client'
-import React from 'react';
-import { ScrollTrigger, CustomEase } from 'gsap/all'
-import { gsap } from 'gsap'
+import React, { useEffect } from 'react';
 import StepperShow from './StepperShow';
-gsap.registerPlugin(ScrollTrigger)
-gsap.registerPlugin(CustomEase);
-CustomEase.create("custom", "M0,0 C0.01,1.01 0,1 1,1.05");
 
 const HomeTimeLine = () => {
+  useEffect(() => {
+    (async () => {
+      const { gsap } = await import('gsap');
+      const { ScrollTrigger, CustomEase } = await import('gsap/all');
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(CustomEase);
+      CustomEase.create("custom", "M0,0 C0.01,1.01 0,1 1,1.05");
+      // Add any GSAP animation code here if needed
+    })();
+  }, []);
 
   return (
     <div className='relative lg:mt-20'>

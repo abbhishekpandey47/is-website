@@ -1,11 +1,6 @@
 'use client'
-import React from 'react';
-import { gsap } from 'gsap'
-import { ScrollTrigger, CustomEase } from 'gsap/all'
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
-gsap.registerPlugin(ScrollTrigger)
-gsap.registerPlugin(CustomEase);
 
 const infraArr = [
     "Best technical content writer trained with hands-on product experience",
@@ -24,49 +19,49 @@ const traditionalAgenArr = [
 
 const WhyInfra = () => {
     useEffect(() => {
-        gsap.fromTo(".whyInfraUpperHead", {
-            opacity: 0,
-            y: 55,
-
-        },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                stagger: 0.1,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ".whyInfraUpperHead",
-                    toggleActions: "restart none none none"
+        (async () => {
+            const { gsap } = await import('gsap');
+            const { ScrollTrigger, CustomEase } = await import('gsap/all');
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.registerPlugin(CustomEase);
+            gsap.fromTo(".whyInfraUpperHead", {
+                opacity: 0,
+                y: 55,
+            },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: ".whyInfraUpperHead",
+                        toggleActions: "restart none none none"
+                    }
                 }
-            }
-        )
+            )
 
-        gsap.fromTo(".whyInfraCards", {
-            opacity: 0,
-            y: 55,
-            scale: 1.3
-        },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                stagger: 0.1,
-                ease: "power3.out",
-                scale: 1,
-                scrollTrigger: {
-                    trigger: ".whyInfraCards",
-                    toggleActions: "restart none none none",
+            gsap.fromTo(".whyInfraCards", {
+                opacity: 0,
+                y: 55,
+                scale: 1.3
+            },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    scale: 1,
+                    scrollTrigger: {
+                        trigger: ".whyInfraCards",
+                        toggleActions: "restart none none none",
+                    }
                 }
-            }
-        )
-
-
-
-        return () => {
-
-        }
-    }, [])
+            )
+        })();
+        return () => {};
+    }, []);
 
     return (
         <div>
