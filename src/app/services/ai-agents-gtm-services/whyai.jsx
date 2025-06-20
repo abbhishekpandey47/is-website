@@ -41,7 +41,7 @@ export default function AIChallengesSection() {
       <div className="max-w-6xl mx-auto text-center relative z-10">
         <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
           <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-            Why Al Agent Startups Need a New Content Playbook
+            Why AI Agent Startups Need a New Content Playbook
           </h1>
         </div>
 

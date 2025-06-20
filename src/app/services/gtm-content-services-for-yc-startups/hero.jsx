@@ -25,7 +25,7 @@ export default function YCStartupLanding() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="w-[120%] text-left p-8 lg:m-0 lg:ml-20">
-                    <div className="half-ring"></div>
+            <div className="half-ring"></div>
 
             <h1
               className="text-5xl lg:text-6xl font-bold quicksand-bold tracking-wide text-white  mb-8"
