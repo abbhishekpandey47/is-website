@@ -23,6 +23,8 @@ export default function Home() {
                 ip,
                 url,
             }),
+        }).catch((error) => {
+            console.error('Failed to log bot detection:', error);
         });
     }
     return (
