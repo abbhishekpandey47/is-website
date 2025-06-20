@@ -1,0 +1,78 @@
+"use client";
+import React, { useMemo } from "react";
+import { Marquee } from "@devnomic/marquee";
+import "@devnomic/marquee/dist/index.css";
+import Image from "next/image";
+
+const fileList = [
+    "aviator.png",
+    "mocha.png",
+    "cedana.png",
+    "mvp-grow.png",
+    "cerbos.png",
+    "qodo-logo.png",
+    "Codegiant.png",
+    "Scalekit-logo.png",
+    "cycloid.png",
+    "scalr.png",
+    "daytona.png",
+    "stackOne.png",
+    "DevZero.png",
+    "terrateam.png",
+    "env0-infra-1.png",
+    "tracetest.png",
+    "firefly.png",
+    "TravisCI-Full-Color.png",
+    "firstock-logo.png",
+    "vapi-logo.png",
+    "kapstan.png",
+    "Zenml.png",
+    "Kubiya.png",
+    "lovable-logo.png",
+    "Meteor-ops.png",
+    "middleware-logo.png",
+];
+
+const NewMarquee = () => {
+    const fileMemo = useMemo(() => fileList, [fileList]);
+    return (
+        <div className="bg-[#171a3d] justify-center items-center flex flex-col pb-10">
+            <div
+                className="w-[90%] pt-10 pb-1"
+                style={{
+                    backgroundColor: "#171a3d",
+                    backgroundImage: `radial-gradient(circle at top right, #090d1a 0%, transparent 30%)`,
+                    border: "1.5px solid rgba(45, 51, 71, 1)",
+                    borderRadius: "16px",
+                }}
+            >
+                <h2 className="text-center pb-1 text-white quicksand-bold text-2xl">
+                    Trusted by Builders at Innovative Al Startups
+                </h2>
+                <Marquee
+                    className="motion-reduce:overflow-auto"
+                    innerClassName="motion-reduce:animate-none"
+                >
+                    <div className="flex gap-20 max-sm:gap-10 items-center mx-4">
+                        {fileMemo.map((file, index) => {
+                            return (
+                                <div key={index} className="mix-blend-color-burn">
+                                    <Image
+                                        loading="lazy"
+                                        width={100}
+                                        height={40}
+                                        className="w-35 max-sm:w-30 my-8"
+                                        src={`/trustedby-bw/bw/${file}`}
+                                        alt="Ratio is 3.9"
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
+                </Marquee>
+            </div>
+        </div>
+    );
+};
+
+export default NewMarquee;
