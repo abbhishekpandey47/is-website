@@ -16,24 +16,27 @@ export default function RootLayout({ children }) {
 
                 {/* Preload Google Fonts CSS and load asynchronously */}
                 <link
-                    rel="preload"
-                    as="style"
-                    href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap"
+                    rel='preload'
+                    as='style'
+                    href='https://fonts.googleapis.com/css2?family=Quicksand&display=swap'
                     onLoad="this.onload=null;this.rel='stylesheet'"
                 />
                 <noscript>
-                    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" />
+                    <link
+                        rel='stylesheet'
+                        href='https://fonts.googleapis.com/css2?family=Quicksand&display=swap'
+                    />
                 </noscript>
 
                 {/* Preload main CSS if possible (adjust path if needed) */}
                 <link
-                    rel="preload"
-                    as="style"
-                    href="/src/app/globals.css"
+                    rel='preload'
+                    as='style'
+                    href='/src/app/globals.css'
                     onLoad="this.onload=null;this.rel='stylesheet'"
                 />
                 <noscript>
-                    <link rel="stylesheet" href="/globals.css" />
+                    <link rel='stylesheet' href='/globals.css' />
                 </noscript>
 
                 {/* If you are self-hosting Quicksand, preload the font files as well */}

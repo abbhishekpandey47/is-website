@@ -83,7 +83,7 @@ const HomeVidSection = () => {
                 <img
                   src="/homepage/maxresdefault.avif"
                   alt="Video thumbnail"
-                  className='w-[950px] h-[515px] max-md:w-[630px] max-md:h-[329px] max-sm:w-[350px] max-sm:h-[181px] max-lg:w-[760px] max-lg:h-[439px]'
+                  className='w-[950px] h-[515px] max-md:w-[630px] max-md:h-[329px] max-sm:w-[350px] max-sm:h-[181px] max-lg:w-[760px] max-lg:h-[439px] object-cover'
                 />
 
                 <div className='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300'></div>
