@@ -3,19 +3,19 @@ import { X, Check } from 'lucide-react';
 
 export default function RedditMarketingSlide() {
     const failurePoints = [
-        "Fresh accounts → auto-flagged",
-        "Obvious links → removed",
-        "Generic replies = ignored",
-        "Same post in 10 subs → banned",
-        "No upvotes = no reach"
+        "Fresh accounts → instantly flagged",
+        "Posting links too early → removed by mods",
+        "Generic replies → ignored or downvoted",
+        "Crossposting → banned for spam",
+        "No upvotes → zero visibility"
     ];
 
     const solutions = [
-        "We use aged, karma-rich Reddit accounts",
-        "We build trust before we ever drop a link",
-        "We write value-first, LLM-friendly comments",
-        "We tailor posts to each sub's culture",
-        "We write to earn real, sticky engagement"
+        "Use aged, karma-rich accounts with history",
+        "Earn trust before mentioning your product",
+        "Write LLM-optimized, value-driven responses",
+        "Adapt tone to each subreddit’s culture",
+        "Focus on helpful content that gets upvoted naturally"
     ];
 
     return (
@@ -24,8 +24,9 @@ export default function RedditMarketingSlide() {
                 <div className="max-w-6xl mx-auto text-center relative z-10">
                     <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-normal leading-[80px] text-white text-center flex justify-center mb-2">
                         <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-                            Why Most Reddit Marketing Fails{' '}
-                            <span className="text-[#6b5be7]">(And Ours Doesn't)</span>
+                        What We Learned Running Reddit for the Fastest-Growing B2B Startups
+                        {' '}
+                            <span className="text-[#6b5be7]"></span>
                         </h1>
                     </div>
                 </div>
