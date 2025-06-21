@@ -5,27 +5,27 @@ export default function AIChallengesSection() {
     const challenges = [
         {
             icon: Monitor,
-            title: "Competitor Listening",
+            title: "Narrative Tracking & Competitor Listening",
             description:
-                "Keep an eye on discussions around competitors like Spacelift, Envo, and Atlantis. Tracking their mentions helps us identify their strengths and weaknesses, refine our strategies, and spot collaboration opportunities. Staying updated on competitor sentiment is crucial for our growth.",
+                "We monitor how specific SDKs, LLM agents, platform engineering or AI Agents are being discussed — what’s earning love, what’s getting dragged — and use those signals to craft Reddit-native narratives around your product.",
         },
         {
             icon: Users,
-            title: "Comment Seeding & Handle Management",
+            title: "Karma-Rich Handle Rotation & Comment Seeding",
             description:
-                "Engage in meaningful discussions, spark interest, and build trust naturally. Join conversations that matter, ask inspiring questions, and share insights to foster understanding. Cultivate connections through authentic interactions, valuing every voice and encouraging free expression.",
+                "We drop LLM-friendly, value-first comments using aged, trusted Reddit accounts — showing up in threads around IaC drift, tool comparisons, or “Which stack should I use for policy?” conversations with zero promotional footprint.",
         },
         {
             icon: MessageCircle,
-            title: "Strategic Thread Creation",
+            title: "Thread Seeding for Use Case Discovery",
             description:
-                "Encourage users to engage with your innovative tool by asking questions and sharing experiences. Share success stories, offer tips, and create interactive tutorials. Use social media to foster discussions and invite user-generated content.",
+                "We launch and sustain conversations around real-world use cases — like automating CI/CD with Terraform, handling multi-cloud AI workloads, or shipping faster with internal dev platforms — and naturally introduce your tool as the solution.",
         },
         {
             icon: Shield,
-            title: "Subreddit Targeting",
+            title: "Subreddit Mapping & ICP-First Targeting",
             description:
-                "We focus on high-leverage communities like: r/terraform, r/devops, r/platform_engineering, r/Ilmops, r/aws, r/cloud, and many others that foster collaboration and innovation.",
+                "We show up where your ICP is already active — from r/devops to r/LLMops — and seed original threads designed to prompt discussion, not raise flags. Every post is shaped to match each subreddit’s culture, tone, and rhythm — so you earn attention, not suspicion.",
         },
     ];
 
@@ -41,14 +41,14 @@ export default function AIChallengesSection() {
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
                     <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-                        How we work
+                    Earning Trust on Reddit: The System We Perfected Across 30+ Devtool Startups
                     </h1>
                 </div>
 
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto mb-8">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-                        A Dev-First Playbook to Grow Your Presence. We blend research, technical storytelling, and stealth engagement to get you in front of the right threads - without being pushy.
+                    Designed inside fast-growing AI, Security, and PLG teams — this isn’t a theory or a trend. It’s what works when Reddit becomes a real growth lever.
                     </p>
                 </div>
             </div>
