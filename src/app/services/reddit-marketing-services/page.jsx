@@ -9,6 +9,7 @@ import WhyAI from "./whyai";
 import Cta from "./cta";
 import RedditMarketingSlide from "./why";
 import InfraMethodologyTimeline from "./methodology";
+import RedditServiceCards from "./whatYouGet";
 
 export default function Page() {
     return (
@@ -18,6 +19,7 @@ export default function Page() {
             {/* <MarqueePage /> */}
             <WhyAI />
             <InfraMethodologyTimeline />
+            <RedditServiceCards />
             <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] mb-10"></div>
 
             <Cta />
