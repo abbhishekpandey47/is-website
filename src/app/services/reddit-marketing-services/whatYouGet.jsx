@@ -57,7 +57,21 @@ const RedditServiceCards = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-[#000000] p-8">
+        <div className="bg-[#000000] p-8">
+            <div className="max-w-6xl mx-auto text-center relative z-10">
+                <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
+                    <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
+                        What You Get
+                    </h1>
+                </div>
+
+                {/* Description */}
+                <div className="max-w-[70%] mx-auto mb-8">
+                    <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
+                        Everything You Need to Become the Go-To Tool on Reddit.
+                    </p>
+                </div>
+            </div>
             <div className="max-w-[1400px] mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                     {services.map((service, index) => (

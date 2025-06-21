@@ -77,7 +77,7 @@ const InfraMethodologyTimeline = () => {
                                 </div>
                             </div>
                             <p className="text-sm text-gray-300 tracking-wider leading-loose font-light mr-4">
-                                Deep dive into your product and identify key subreddits.
+                                We break down your product and ICP, then map relevant Reddit subreddits and content themes where real traction is possible.
                             </p>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ const InfraMethodologyTimeline = () => {
                                 </div>
                             </div>
                             <p className="text-sm text-gray-300 tracking-wider leading-loose font-light mr-4">
-                                Build authentic presence with valuable contributions.
+                                Activate karma-rich accounts and begin comment-driven engagement — showing up with insight-first contributions in live threads.
                             </p>
                         </div>
                     </div>
@@ -126,7 +126,7 @@ const InfraMethodologyTimeline = () => {
                                 </div>
                             </div>
                             <p className="text-sm text-gray-300 tracking-wider leading-loose font-light mr-4">
-                                Monitor performance and amplify with targeted ads (10% only).
+                                We start original discussions designed to spark feedback and curiosity — and maintain active presence to guide the conversation.
                             </p>
                         </div>
                     </div>
@@ -152,7 +152,7 @@ const InfraMethodologyTimeline = () => {
                             </div>
                         </div>
                         <p className="text-sm text-gray-300 tracking-wider leading-loose font-light mr-4">
-                            Strategic content creation and real-time engagement.
+                            Monitor responses and engagement signals — then optionally use targeted Reddit ads (≤10%) to amplify momentum without killing authenticity.
                         </p>
                     </div>
                 </div>
@@ -191,7 +191,7 @@ const InfraMethodologyTimeline = () => {
                             </div>
                         </div>
                         <p className="text-sm text-gray-300 tracking-wider leading-loose font-light">
-                            Deep dive into your product and identify key subreddits.
+                            We break down your product and ICP, then map relevant Reddit subreddits and content themes where real traction is possible.
                         </p>
                     </div>
 
@@ -218,7 +218,7 @@ const InfraMethodologyTimeline = () => {
                             </div>
                         </div>
                         <p className="text-sm text-gray-300 tracking-wider leading-loose font-light">
-                            Build authentic presence with valuable contributions.
+                            Activate karma-rich accounts and begin comment-driven engagement — showing up with insight-first contributions in live threads.
                         </p>
                     </div>
 
@@ -245,7 +245,7 @@ const InfraMethodologyTimeline = () => {
                             </div>
                         </div>
                         <p className="text-sm text-gray-300 tracking-wider leading-loose font-light">
-                            Monitor performance and amplify with targeted ads (10% only).
+                            We start original discussions designed to spark feedback and curiosity — and maintain active presence to guide the conversation.
                         </p>
                     </div>
 
@@ -272,7 +272,7 @@ const InfraMethodologyTimeline = () => {
                             </div>
                         </div>
                         <p className="text-sm text-gray-300 tracking-wider leading-loose font-light">
-                            Strategic content creation and real-time engagement.
+                            Monitor responses and engagement signals — then optionally use targeted Reddit ads (≤10%) to amplify momentum without killing authenticity.
                         </p>
                     </div>
                 </div>
