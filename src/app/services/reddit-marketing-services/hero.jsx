@@ -59,15 +59,15 @@ export default function AIStartupLanding() {
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[4.5em] max-md:text-[3.2em] max-sm:text-[2.4em] leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-white text-center flex justify-center mb-16 max-sm:mb-8">
                     <h1 className="leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-center max-lg:text-center max-lg:mx-auto tracking-normal">
-                    Reddit Growth <span className="text-[#ff4500]">Engine</span> for<br />
-                         <span className="text-[#6b5be7]"> AI Agents <span className="text-white">&</span> SaaS Startups </span>
+                        <span className="text-[#ff4500]">Reddit </span>Growth Engine for<br />
+                        <span className="text-[#6b5be7]"> AI Agents <span className="text-white">&</span> SaaS Startups </span>
                     </h1>
                 </div>
 
                 {/* Description */}
                 <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto mb-14 max-sm:mb-8">
                     <p className="text-[24px] md:text-[24px] max-sm:text-[18px] text-[#f5deb3] leading-snug font-light tracking-normal">
-                    Most startups get flagged or ignored on Reddit. We help you show up where your ICP hangs out like r/devops, r/nocode, and r/platform_engineering  with LLM-friendly comments, karma-rich accounts, and stealth thread strategies.
+                        Most startups get flagged or ignored on Reddit. We help you show up where your ICP hangs out like r/devops, r/nocode, and r/platform_engineering  with LLM-friendly comments, karma-rich accounts, and stealth thread strategies.
                     </p>
                 </div>
 
@@ -95,7 +95,7 @@ export default function AIStartupLanding() {
             </div>
 
             {/* Desktop: Image positioned on the right */}
-            <div className="absolute right-0 bottom-0 z-10 mb-72 max-sm:hidden">
+            <div className="absolute right-0 bottom-0 z-10 mb-[244px] max-sm:hidden">
                 <Image
                     width={600}
                     height={200}
@@ -107,7 +107,7 @@ export default function AIStartupLanding() {
                 />
             </div>
 
-            <div className="w-full justify-center items-center flex flex-col pb-10 z-20 pt-32 max-sm:pt-16">
+            <div className="w-full justify-center items-center flex flex-col pb-10 z-20 pt-20 max-sm:pt-16">
                 <div
                     className="w-[100%] pt-10 pb-1 max-sm:pt-6"
                     style={{
