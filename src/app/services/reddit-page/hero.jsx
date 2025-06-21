@@ -59,15 +59,15 @@ export default function AIStartupLanding() {
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[4.5em] max-md:text-[3.2em] max-sm:text-[2.4em] leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-white text-center flex justify-center mb-16 max-sm:mb-8">
                     <h1 className="leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-center max-lg:text-center max-lg:mx-auto tracking-normal">
-                        Organic <span className="text-[#ff4500]">Reddit</span> Growth<br />
-                        for <span className="text-[#6b5be7]"> DevTools <span className="text-white">&</span> SaaS Startups </span>
+                    Reddit Growth <span className="text-[#ff4500]">Engine</span> for<br />
+                         <span className="text-[#6b5be7]"> AI Agents <span className="text-white">&</span> SaaS Startups </span>
                     </h1>
                 </div>
 
                 {/* Description */}
                 <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto mb-14 max-sm:mb-8">
                     <p className="text-[24px] md:text-[24px] max-sm:text-[18px] text-[#f5deb3] leading-snug font-light tracking-normal">
-                        We strategically engage in 50+ developer-focused subreddits, posting relevant comments and content that organically increases your visibility. Reach 100K+ developers monthly where they actually spend their time - on Reddit.
+                    Most startups get flagged or ignored on Reddit. We help you show up where your ICP hangs out like r/devops, r/nocode, and r/platform_engineering  with LLM-friendly comments, karma-rich accounts, and stealth thread strategies.
                     </p>
                 </div>
 
