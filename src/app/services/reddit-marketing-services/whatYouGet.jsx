@@ -57,7 +57,7 @@ const RedditServiceCards = () => {
     ];
 
     return (
-        <div className="bg-[#000000] p-8">
+        <div className="bg-[#000000] p-8 -mt-8">
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
                     <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
