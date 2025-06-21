@@ -23,7 +23,7 @@ export default function RedditMarketingSlide() {
             <div className="max-w-6xl w-full">
                 <div className="max-w-6xl mx-auto text-center relative z-10">
                     <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-normal leading-[80px] text-white text-center flex justify-center mb-2">
-                        <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
+                        <h1 className=" leading-[50px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
                             What We Learned Running Reddit for the Fastest-Growing B2B Startups
                             {' '}
                             <span className="text-[#6b5be7]"></span>

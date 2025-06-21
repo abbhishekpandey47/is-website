@@ -38,7 +38,7 @@ export default function AIChallengesSection() {
         >
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
-                    <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
+                    <h1 className=" leading-[50px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
                         Earning Trust on Reddit: The System We Perfected Across 30+ Devtool Startups
                     </h1>
                 </div>

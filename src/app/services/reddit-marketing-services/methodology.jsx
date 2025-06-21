@@ -2,7 +2,7 @@ import React from 'react';
 
 const InfraMethodologyTimeline = () => {
     return (
-        <div className="min-h-screen bg-black text-white p-8">
+        <div className="bg-black text-white p-8">
             {/* Header */}
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-normal leading-[80px] text-white text-center flex justify-center">
