@@ -1,7 +1,7 @@
 "use client";
 import HeroHome from "./hero";
 import MarqueePage from "./marquee";
-import WhyAI from "./whyai";
+import WhyAI from "./howWeWork";
 // import HoverCards from "./contentBox";
 // import TestimonialCarousel from "./testimonialCarousel";
 // import MarketingHeadsCarousel from "./marketingHeadsCarousel";
