@@ -5,27 +5,27 @@ export default function AIChallengesSection() {
     const challenges = [
         {
             icon: Monitor,
-            title: "New Interface Paradigms",
+            title: "Competitor Listening",
             description:
-                "Your AI agent may replace or augment traditional UIs with conversational or autonomous workflows. Explaining this novel interface is hard - users might not immediately grasp how to use it or why it's better.",
+                "Keep an eye on discussions around competitors like Spacelift, Envo, and Atlantis. Tracking their mentions helps us identify their strengths and weaknesses, refine our strategies, and spot collaboration opportunities. Staying updated on competitor sentiment is crucial for our growth.",
         },
         {
             icon: Users,
-            title: "Hard-to-Explain Infrastructure",
+            title: "Comment Seeding & Handle Management",
             description:
-                "Behind the scenes, agentic platforms rely on complex AI models, tool orchestration, and real-time decision-making. Communicating how it all works (and why it's reliable and secure) can overwhelm a non-expert audience.",
+                "Engage in meaningful discussions, spark interest, and build trust naturally. Join conversations that matter, ask inspiring questions, and share insights to foster understanding. Cultivate connections through authentic interactions, valuing every voice and encouraging free expression.",
         },
         {
             icon: MessageCircle,
-            title: "Real Time Feedback Loops",
+            title: "Strategic Thread Creation",
             description:
-                "Many AI agents learn and adapt on the fly. It's a powerful feature, but conveying its value requires storytelling and education. Users need to understand what the agent is doing and trust it to make the right decisions in real time.",
+                "Encourage users to engage with your innovative tool by asking questions and sharing experiences. Share success stories, offer tips, and create interactive tutorials. Use social media to foster discussions and invite user-generated content.",
         },
         {
             icon: Shield,
-            title: "Trust and Adoption Hurdles",
+            title: "Subreddit Targeting",
             description:
-                "Handing over tasks to an autonomous agent can feel risky. Prospective customers and developers might worry about control, safety, or ROI. Without clear content to address these concerns, even groundbreaking tech can face adoption headwinds.",
+                "We focus on high-leverage communities like: r/terraform, r/devops, r/platform_engineering, r/Ilmops, r/aws, r/cloud, and many others that foster collaboration and innovation.",
         },
     ];
 
@@ -41,24 +41,18 @@ export default function AIChallengesSection() {
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
                     <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-                        Why AI Agent Startups Need a New Content Playbook
+                        How we work
                     </h1>
                 </div>
 
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto mb-8">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-                        Al agent platforms face unique Go-to-Market challenges. Your product
-                        introduces a new way of working. To win over developers and
-                        stakeholders, you must answer their key questions:
-                        <br />{" "}
-                        <span className="font-normal text-[19px]">
-                            "What can I build? How do I integrate? Where do I start?"
-                        </span>
+                        A Dev-First Playbook to Grow Your Presence. We blend research, technical storytelling, and stealth engagement to get you in front of the right threads - without being pushy.
                     </p>
                 </div>
             </div>
-            <div className="max-w-[85%] mx-auto">
+            <div className="max-w-[90%] mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {challenges.map((challenge, index) => (
                         <div key={index} className="group relative ">
