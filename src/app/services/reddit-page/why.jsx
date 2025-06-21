@@ -28,8 +28,6 @@ export default function RedditMarketingSlide() {
                             <span className="text-[#6b5be7]">(And Ours Doesn't)</span>
                         </h1>
                     </div>
-
-
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
                     <div className="bg-[#270102] border-[1px] border-[#ff0000] rounded-lg p-6">
