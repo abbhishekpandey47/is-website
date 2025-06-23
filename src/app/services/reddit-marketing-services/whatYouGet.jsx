@@ -60,15 +60,15 @@ const RedditServiceCards = () => {
         <div className="bg-[#000000] p-8 -mt-8">
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
-                    <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-                    The Quiet Reddit System Refined Across 30+ Breakout Startups
-                    </h1>
+                    <h2 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
+                        The Quiet Reddit System Refined Across 30+ Breakout Startups
+                    </h2>
                 </div>
 
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto mb-8">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-                    Sets it apart from generic Reddit service promises. Great for credibility.
+                        Sets it apart from generic Reddit service promises. Great for credibility.
 
 
                     </p>

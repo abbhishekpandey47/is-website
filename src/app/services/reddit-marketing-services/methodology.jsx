@@ -6,11 +6,11 @@ const InfraMethodologyTimeline = () => {
             {/* Header */}
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-normal leading-[80px] text-white text-center flex justify-center">
-                    <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
+                    <h2 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
                         Our{' '}
                         <span className="text-[#6b5be7]">Infra - first</span>{" "}
                         Methodology
-                    </h1>
+                    </h2>
                 </div>
             </div>
 

@@ -1,11 +1,92 @@
 "use client";
-import React, { useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import CalendarBooking from "../../calendarButton";
 import Image from "next/image";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
-import TrustedBySection from "./marquee";
+
+
+const fileList = [
+    { name: "hyperwise.svg", hasBackground: false },
+    { name: "eclipse.svg", hasBackground: true },
+    { name: "together.svg", hasBackground: false },
+    { name: "susaventures.png", hasBackground: true },
+    { name: "firestreak.png", hasBackground: true },
+    { name: "yc.avif", hasBackground: false },
+    { name: "khosala.avif", hasBackground: false }
+];
+
+const TrustedBySection = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isAnimating, setIsAnimating] = useState(true);
+
+    const nextLogo = useCallback(() => {
+        setCurrentIndex((prevIndex) => {
+            if (prevIndex >= fileList.length - 1) {
+                // Reset to beginning without animation
+                setIsAnimating(false);
+                setTimeout(() => {
+                    setCurrentIndex(0);
+                    setIsAnimating(true);
+                }, 50);
+                return prevIndex;
+            }
+            return prevIndex + 1;
+        });
+    }, []);
+
+    useEffect(() => {
+        // Start animation immediately on load
+        const immediateTimeout = setTimeout(nextLogo, 700);
+
+        // Then continue with regular intervals
+        const interval = setInterval(nextLogo, 2500);
+
+        return () => {
+            clearTimeout(immediateTimeout);
+            clearInterval(interval);
+        };
+    }, [nextLogo]);
+
+    return (
+        <div className="text-left text-white">
+            <div className="flex items-left justify-left gap-2 text-lg md:text-[22px]">
+                <span>Trusted at startups backed by</span>
+
+                {/* Vertical Logo Rotator */}
+                <div className="relative h-8 overflow-hidden inline-block mx-1">
+                    <div
+                        className={`flex flex-col ${isAnimating ? 'transition-transform duration-500 ease-in-out' : ''}`}
+                        style={{
+                            transform: `translateY(${-currentIndex * 32}px)`,
+                            willChange: 'transform'
+                        }}
+                    >
+                        {fileList.map((file, index) => (
+                            <div
+                                key={`logo-${index}`}
+                                className="h-8  flex items-center justify-center flex-shrink-0"
+                            >
+                                <Image
+                                    loading="lazy"
+                                    width={170}
+                                    height={32}
+                                    className={`max-w-[190px] h-[32px] object-contain ${file.hasBackground ? "bg-white rounded-xl" : ""}`}
+                                    src={`/reddit/${file.name}`}
+                                    alt={`Company logo ${(index % fileList.length) + 1}`}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <span>and more.</span>
+            </div>
+        </div>
+    );
+};
+
 
 const logoFiles = [
     "aviator.png",
@@ -59,7 +140,7 @@ export default function AIStartupLanding() {
             {/* Content */}
             <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[4.5em] max-md:text-[3.2em] max-sm:text-[2.4em] leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-white text-center mb-16 max-sm:mb-8">                    <h1 className="leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-center max-lg:text-center max-lg:mx-auto tracking-normal">
-                    <span className="text-[#ff4500]">Reddit </span>Growth Engine for<br />
+                    <span className="text-[#ff4500]">Reddit </span>Marketing Agency for<br />
                     <span className="text-[#6b5be7]"> AI Agents <span className="text-white">&</span> SaaS Startups </span>
                 </h1>
                 </div>

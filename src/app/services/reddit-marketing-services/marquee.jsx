@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 
 const fileList = [
@@ -15,64 +15,75 @@ const fileList = [
 
 const TrustedBySection = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [shouldAnimate, setShouldAnimate] = useState(true);
+    const [isAnimating, setIsAnimating] = useState(true);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => {
-                const nextIndex = prevIndex + 1;
-
-                if (nextIndex > fileList.length) {
-                    setShouldAnimate(false);
-                    setTimeout(() => {
-                        setCurrentIndex(1);
-                        setShouldAnimate(true);
-                    }, 50);
-                    return 0;
-                }
-
-                return nextIndex;
-            });
-        }, 2000);
-
-        return () => clearInterval(interval);
+    const nextLogo = useCallback(() => {
+        setCurrentIndex((prevIndex) => {
+            if (prevIndex >= fileList.length - 1) {
+                // Reset to beginning without animation
+                setIsAnimating(false);
+                setTimeout(() => {
+                    setCurrentIndex(0);
+                    setIsAnimating(true);
+                }, 50);
+                return prevIndex;
+            }
+            return prevIndex + 1;
+        });
     }, []);
 
-    // Create array with duplicated first item at the end for seamless loop
-    const displayList = [...fileList, fileList[0]];
+    useEffect(() => {
+        // Start animation immediately on load
+        const immediateTimeout = setTimeout(nextLogo, 700);
+
+        // Then continue with regular intervals
+        const interval = setInterval(nextLogo, 2500);
+
+        return () => {
+            clearTimeout(immediateTimeout);
+            clearInterval(interval);
+        };
+    }, [nextLogo]);
 
     return (
         <div className="text-left text-white">
-            <div className="flex items-left justify-left gap-2 text-lg md:text-[22px]">
-                <span>Trusted at startups backed by</span>
+            <div className="flex flex-col sm:flex-row sm:items-left sm:justify-left gap-2 text-base sm:text-lg md:text-[22px]">
+                <span className="sm:inline">Trusted at startups backed by</span>
 
                 {/* Vertical Logo Rotator */}
-                <div className="relative h-8 overflow-hidden inline-block mx-1">
+                <div className="relative h-6 sm:h-8 overflow-hidden inline-block mx-0 sm:mx-1">
                     <div
-                        className={`flex flex-col ${shouldAnimate ? 'transition-transform duration-700 ease-in-out' : ''}`}
+                        className={`flex flex-col ${isAnimating ? 'transition-transform duration-500 ease-in-out' : ''}`}
                         style={{
-                            transform: `translateY(${-currentIndex * 32}px)`
+                            transform: `translateY(${-currentIndex * 32}px)`,
+                            willChange: 'transform'
                         }}
                     >
-                        {displayList.map((file, index) => (
+                        {fileList.map((file, index) => (
                             <div
-                                key={`logo-${index}`}
-                                className="h-8  flex items-center justify-center flex-shrink-0"
+                                key={`logo-${file.name}-${index}`}
+                                className="h-6 sm:h-8 flex items-center justify-center flex-shrink-0"
                             >
                                 <Image
-                                    loading="lazy"
+                                    src={`/reddit/${file.name}`}
+                                    alt={`${file.name.split('.')[0]} logo`}
                                     width={170}
                                     height={32}
-                                    className={`max-w-[190px] h-[32px] object-contain ${file.hasBackground ? "bg-white rounded-xl" : ""}`}
-                                    src={`/reddit/${file.name}`}
-                                    alt={`Company logo ${(index % fileList.length) + 1}`}
+                                    className={`
+                                        max-w-[120px] sm:max-w-[190px] 
+                                        h-[24px] sm:h-[32px] 
+                                        object-contain
+                                        ${file.hasBackground ? "bg-white rounded-xl" : ""}
+                                    `}
+                                    priority={index === 0}
+                                    loading={index === 0 ? "eager" : "lazy"}
                                 />
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <span>and more.</span>
+                <span className="sm:inline">and more.</span>
             </div>
         </div>
     );
