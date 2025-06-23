@@ -1,12 +1,11 @@
 "use client";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 const fileList = [
     { name: "hyperwise.svg", hasBackground: false },
     { name: "eclipse.svg", hasBackground: true },
     { name: "together.svg", hasBackground: false },
-    { name: "vineventures.svg", hasBackground: true },
     { name: "susaventures.png", hasBackground: true },
     { name: "firestreak.png", hasBackground: true },
     { name: "yc.avif", hasBackground: false },
@@ -14,77 +13,97 @@ const fileList = [
 ];
 
 const TrustedBySection = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isAnimating, setIsAnimating] = useState(true);
+    const [visibleIndex, setVisibleIndex] = useState(1);
+    const [isMobile, setIsMobile] = useState(false);
 
-    const nextLogo = useCallback(() => {
-        setCurrentIndex((prevIndex) => {
-            if (prevIndex >= fileList.length - 1) {
-                // Reset to beginning without animation
-                setIsAnimating(false);
-                setTimeout(() => {
-                    setCurrentIndex(0);
-                    setIsAnimating(true);
-                }, 50);
-                return prevIndex;
-            }
-            return prevIndex + 1;
-        });
+    useEffect(() => {
+        const checkIfMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkIfMobile();
+        window.addEventListener("resize", checkIfMobile);
+
+        return () => window.removeEventListener("resize", checkIfMobile);
     }, []);
 
     useEffect(() => {
-        // Start animation immediately on load
-        const immediateTimeout = setTimeout(nextLogo, 700);
+        const initialTimeout = setTimeout(() => {
+            setVisibleIndex(2); // Move to third logo quickly
+        }, 500);
 
-        // Then continue with regular intervals
-        const interval = setInterval(nextLogo, 2500);
+        const normalInterval = setTimeout(() => {
+            const interval = setInterval(() => {
+                setVisibleIndex((prev) => (prev + 1) % fileList.length);
+            }, 2000);
+            return () => clearInterval(interval);
+        }, 2500);
 
         return () => {
-            clearTimeout(immediateTimeout);
-            clearInterval(interval);
+            clearTimeout(initialTimeout);
+            clearTimeout(normalInterval);
         };
-    }, [nextLogo]);
+    }, []);
 
     return (
         <div className="text-left text-white">
-            <div className="flex flex-col sm:flex-row sm:items-left sm:justify-left gap-2 text-base sm:text-lg md:text-[22px]">
-                <span className="sm:inline">Trusted at startups backed by</span>
+            <div className="hidden md:flex items-left justify-left gap-2 text-lg md:text-[22px]">
+                <span>Trusted at startups backed by</span>
 
-                {/* Vertical Logo Rotator */}
-                <div className="relative h-6 sm:h-8 overflow-hidden inline-block mx-0 sm:mx-1">
-                    <div
-                        className={`flex flex-col ${isAnimating ? 'transition-transform duration-500 ease-in-out' : ''}`}
-                        style={{
-                            transform: `translateY(${-currentIndex * 32}px)`,
-                            willChange: 'transform'
-                        }}
-                    >
-                        {fileList.map((file, index) => (
-                            <div
-                                key={`logo-${file.name}-${index}`}
-                                className="h-6 sm:h-8 flex items-center justify-center flex-shrink-0"
-                            >
-                                <Image
-                                    src={`/reddit/${file.name}`}
-                                    alt={`${file.name.split('.')[0]} logo`}
-                                    width={170}
-                                    height={32}
-                                    className={`
-                                        max-w-[120px] sm:max-w-[190px] 
-                                        h-[24px] sm:h-[32px] 
-                                        object-contain
-                                        ${file.hasBackground ? "bg-white rounded-xl" : ""}
-                                    `}
-                                    priority={index === 0}
-                                    loading={index === 0 ? "eager" : "lazy"}
-                                />
-                            </div>
-                        ))}
-                    </div>
+                <div className="relative h-8 inline-block mx-1 w-[190px] -mx-2">
+                    {fileList.map((file, index) => (
+                        <div
+                            key={`logo-${index}`}
+                            className={`absolute inset-0 h-8 flex items-center justify-center transition-all duration-500 ${index === visibleIndex
+                                ? 'opacity-100 translate-y-0'
+                                : index === (visibleIndex - 1 + fileList.length) % fileList.length
+                                    ? 'opacity-0 -translate-y-8'
+                                    : 'opacity-0 translate-y-8'
+                                }`}
+                        >
+                            <Image
+                                loading="lazy"
+                                width={170}
+                                height={32}
+                                className={`max-w-[190px] h-[32px] object-contain ${file.hasBackground ? "bg-white rounded-xl" : ""}`}
+                                src={`/reddit/${file.name}`}
+                                alt={`Company logo ${index + 1}`}
+                            />
+                        </div>
+                    ))}
                 </div>
 
-                <span className="sm:inline">and more.</span>
+                <span>and more.</span>
             </div>
+
+            {isMobile && <div className="md:hidden flex flex-col items-center justify-center gap-3 text-lg">
+                <span className="text-center">Trusted at startups backed by</span>
+
+                <div className="relative h-8 inline-block w-[190px]">
+                    {fileList.map((file, index) => (
+                        <div
+                            key={`logo-${index}`}
+                            className={`absolute inset-0 h-8 flex items-center justify-center transition-all duration-400 ${index === visibleIndex
+                                ? 'opacity-100 translate-y-0'
+                                : index === (visibleIndex - 1 + fileList.length) % fileList.length
+                                    ? 'opacity-0 -translate-y-8'
+                                    : 'opacity-0 translate-y-8'
+                                }`}
+                        >
+                            <Image
+                                loading="lazy"
+                                width={170}
+                                height={32}
+                                className={`max-w-[190px] h-[32px] object-contain ${file.hasBackground ? "bg-white rounded-xl" : ""}`}
+                                src={`/reddit/${file.name}`}
+                                alt={`Company logo ${index + 1}`}
+                            />
+                        </div>
+                    ))}
+                </div>
+
+                <span className="text-center">and more.</span>
+            </div>}
         </div>
     );
 };
