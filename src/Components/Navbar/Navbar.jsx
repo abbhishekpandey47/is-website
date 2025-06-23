@@ -107,8 +107,12 @@ const menuLinksArrServices = [
     hrefLink: "/services/webflow-agency",
     menuName: "Webflow Agency",
   },
+  {
+    hrefLink: "/services/reddit-marketing-services",
+    menuName: "Reddit Marketing Services",
+  },
 
-  // {
+  // { reddit-marketing-services
   //     hrefLink: "/tutorials",
   //     menuName: "Tutorials"
   // }
@@ -191,7 +195,7 @@ const Navbar = () => {
               <MenuItems
                 transition
                 className="absolute z-10 mt-6 w-56 origin-top-center rounded-lg bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-                
+
               >
                 <div className="p-2 rounded-lg mx-auto">
                   <MenuItem>
@@ -303,7 +307,7 @@ const Navbar = () => {
                         <MenuItem2>
                           <Link
                             onClick={(e) => {
-                              e.preventDefault(); // Prevent default navigation
+                              e.preventDefault(); // Prevent default navigation reddit-marketing-services
                               handleServiceClick("/services/webflow-agency");
                             }}
                             href="/services/webflow-agency"
@@ -315,6 +319,23 @@ const Navbar = () => {
                             }
                           >
                             <div>Webflow Agency</div>
+                          </Link>
+                        </MenuItem2>
+                        <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick("/services/reddit-marketing-services");
+                            }}
+                            href="/services/reddit-marketing-services"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/services/reddit-marketing-services".includes("http")
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>Reddit Marketing Services</div>
                           </Link>
                         </MenuItem2>
                       </div>
@@ -454,9 +475,9 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-              {!isMobileMenuOpen && <CalendarBooking />}
+          {!isMobileMenuOpen && <CalendarBooking />}
         </div>
-       
+
       </div>
     </div>
   );

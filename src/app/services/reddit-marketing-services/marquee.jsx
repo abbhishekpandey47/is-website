@@ -3,11 +3,14 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 const fileList = [
-    "ventures.avif",
-    "SEQUOIA.avif",
-    "andreessen.avif",
-    "khosala.avif",
-    "yc.avif"
+    { name: "hyperwise.svg", hasBackground: false },
+    { name: "eclipse.svg", hasBackground: true },
+    { name: "together.svg", hasBackground: false },
+    { name: "vineventures.svg", hasBackground: true },
+    { name: "susaventures.png", hasBackground: true },
+    { name: "firestreak.png", hasBackground: true },
+    { name: "yc.avif", hasBackground: false },
+    { name: "khosala.avif", hasBackground: false }
 ];
 
 const TrustedBySection = () => {
@@ -19,7 +22,6 @@ const TrustedBySection = () => {
             setCurrentIndex((prevIndex) => {
                 const nextIndex = prevIndex + 1;
 
-                // When we reach beyond the last item, reset to 0 without animation
                 if (nextIndex > fileList.length) {
                     setShouldAnimate(false);
                     setTimeout(() => {
@@ -55,14 +57,14 @@ const TrustedBySection = () => {
                         {displayList.map((file, index) => (
                             <div
                                 key={`logo-${index}`}
-                                className="h-8 flex items-center justify-center flex-shrink-0 -mx-2"
+                                className="h-8  flex items-center justify-center flex-shrink-0"
                             >
                                 <Image
                                     loading="lazy"
                                     width={170}
                                     height={32}
-                                    className="max-w-[190px] max-h-[32px] object-contain"
-                                    src={`/reddit/${file}`}
+                                    className={`max-w-[190px] h-[32px] object-contain ${file.hasBackground ? "bg-white rounded-xl" : ""}`}
+                                    src={`/reddit/${file.name}`}
                                     alt={`Company logo ${(index % fileList.length) + 1}`}
                                 />
                             </div>
