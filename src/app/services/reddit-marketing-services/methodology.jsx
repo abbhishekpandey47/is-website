@@ -14,6 +14,10 @@ const InfraMethodologyTimeline = () => {
                 </div>
             </div>
 
+            <div class="flex justify-center my-10 mb-16">
+                <div class="w-[148px] h-1 bg-[#6B5BE7] rounded-full"></div>
+            </div>
+
             {/* Desktop Version */}
             <div className="max-w-7xl mx-auto relative hidden md:block">
                 <style jsx>{`

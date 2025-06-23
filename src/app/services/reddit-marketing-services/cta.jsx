@@ -10,6 +10,9 @@ export default function Cta() {
                         Ready to win{" "}<span className="text-[#ff4500]">Reddit</span>?
                     </h2>
                 </div>
+                <div class="flex justify-center my-10 mb-16">
+                    <div class="w-[148px] h-1 bg-[#6B5BE7] rounded-full"></div>
+                </div>
 
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto">
