@@ -26,12 +26,12 @@ const RedditServiceCards = () => {
     const services = [
         {
             title: "Subreddit & Keyword Mapping",
-            description: "We identify all active communities where your audience is — from r/terraform to r/aiagents.",
+            description: "We surface high-signal topics that invite your ICP to engage — blending into existing conversation patterns while steering the narrative toward your strengths.",
             icon: <DocumentIcon />
         },
         {
             title: "Organic Engagement",
-            description: "Comment seeding in key threads, with technical POVs + subtle Firefly mention.",
+            description: "We use karma-rich Reddit accounts to participate in live discussions with technical clarity and cultural fluency, showing up where it counts, and never triggering flags.",
             icon: <DocumentIcon />
         },
         {
@@ -41,17 +41,17 @@ const RedditServiceCards = () => {
         },
         {
             title: "Competitor & Sentiment Monitoring",
-            description: "We track mentions of Spacelift/Env0/ControlMonkey and capture sentiment shifts.",
+            description: "We monitor how Reddit talks about tools in categories like infrastructure automation, data observability, and AI agent platforms — identifying sentiment shifts and conversation gaps where your product can enter naturally and earn attention.",
             icon: <DocumentIcon />
         },
         {
-            title: "Paid Amplification (opt-in)",
-            description: "Boost your best comments or posts via Reddit's Promoted Posts.",
+            title: "Selective Paid Amplification",
+            description: "If something works organically, we’ll selectively amplify it using Reddit’s native ad format. Less than 10% of our impact, used for signal, not reach.",
             icon: <DocumentIcon />
         },
         {
             title: "KPI Dashboard",
-            description: "Weekly report — late views, upvotes, clicks, UTM traffic & conversions.",
+            description: "You get weekly visibility into what’s working — upvotes, traffic, clicks, conversions — and how each Reddit thread contributes to the bigger picture.",
             icon: <DocumentIcon />
         }
     ];
@@ -61,14 +61,16 @@ const RedditServiceCards = () => {
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
                     <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-                        What You Get
+                    The Quiet Reddit System Refined Across 30+ Breakout Startups
                     </h1>
                 </div>
 
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto mb-8">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-                        Everything You Need to Become the Go-To Tool on Reddit.
+                    Sets it apart from generic Reddit service promises. Great for credibility.
+
+
                     </p>
                 </div>
             </div>
