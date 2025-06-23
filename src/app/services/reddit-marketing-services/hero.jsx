@@ -88,9 +88,12 @@ export default function AIStartupLanding() {
                     </div>
 
                     <div className="flex flex-row gap-4 justify-center items-center">
-                        <CalendarBooking />
+                        <div className="hidden md:block">
+                            <CalendarBooking />
+                        </div>
                         <TrustedBySection />
                     </div>
+
 
                 </div>
             </div>

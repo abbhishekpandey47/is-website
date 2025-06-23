@@ -18,18 +18,22 @@ const TrustedBySection = () => {
     const [shouldAnimate, setShouldAnimate] = useState(true);
 
     useEffect(() => {
-        // Start the animation immediately by setting the interval
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => {
                 const nextIndex = prevIndex + 1;
 
-                if (nextIndex >= fileList.length) {
-                    return 0;  // Reset to first logo once we reach the end
+                if (nextIndex > fileList.length) {
+                    setShouldAnimate(false);
+                    setTimeout(() => {
+                        setCurrentIndex(1);
+                        setShouldAnimate(true);
+                    }, 50);
+                    return 0;
                 }
 
                 return nextIndex;
             });
-        }, 2000); // 2 seconds interval for each image change
+        }, 2000);
 
         return () => clearInterval(interval);
     }, []);
@@ -53,7 +57,7 @@ const TrustedBySection = () => {
                         {displayList.map((file, index) => (
                             <div
                                 key={`logo-${index}`}
-                                className="h-8 flex items-center justify-center flex-shrink-0"
+                                className="h-8  flex items-center justify-center flex-shrink-0"
                             >
                                 <Image
                                     loading="lazy"

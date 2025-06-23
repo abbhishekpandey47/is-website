@@ -324,10 +324,10 @@ const Navbar = () => {
                         <MenuItem2>
                           <Link
                             onClick={(e) => {
-                              e.preventDefault(); // Prevent default navigation reddit-marketing-services
-                              handleServiceClick("/services/webflow-agency");
+                              e.preventDefault();
+                              handleServiceClick("/services/reddit-marketing-services");
                             }}
-                            href="/services/webflow-agency"
+                            href="/services/reddit-marketing-services"
                             className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
                             target={
                               "/services/reddit-marketing-services".includes("http")
