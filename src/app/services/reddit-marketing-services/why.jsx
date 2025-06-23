@@ -29,14 +29,17 @@ export default function RedditMarketingSlide() {
                             <span className="text-[#6b5be7]"></span>
                         </h2>
                     </div>
+                    <div class="flex justify-center my-10 mb-16">
+                        <div class="w-[148px] h-1 bg-[#6B5BE7] rounded-full"></div>
+                    </div>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-                    <div className="bg-[#270102] border-[1px] border-[#ff0000] rounded-lg p-6">
-                        <h2 className="quicksand-semibold text-3xl font-semibold text-[#ff0000] mb-6">What Fails</h2>
+                    <div className="bg-[#270102] border-[1px] border-[#F87171] rounded-lg p-6">
+                        <h2 className="quicksand-semibold text-3xl font-semibold text-[#F87171] mb-6">What Fails</h2>
                         <div className="space-y-6">
                             {failurePoints.map((point, index) => (
                                 <div key={index} className="flex items-center gap-3">
-                                    <X style={{ stroke: '#ff0000' }} size={20} />
+                                    <X style={{ stroke: '#F87171' }} size={20} />
                                     <p className="text-[17px] md:text-[17px] text-[#ffffff] leading-none tracking-wide font-light">{point}</p>
                                 </div>
                             ))}

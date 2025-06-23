@@ -43,6 +43,10 @@ export default function AIChallengesSection() {
                     </h2>
                 </div>
 
+                <div class="flex justify-center my-10 mb-16">
+                    <div class="w-[148px] h-1 bg-[#6B5BE7] rounded-full"></div>
+                </div>
+
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto mb-8">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">

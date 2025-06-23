@@ -49,22 +49,57 @@ const logoFiles = [
 
 export default function AIStartupLanding() {
     const memoizedLogos = useMemo(() => logoFiles, []);
+    const BackgroundSVG = () => (
+        <svg
+            width="140"
+            height="10"
+            viewBox="0 0 1440 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="absolute inset-0 w-full h-full object-cover"
+        >
+            <g clipPath="url(#clip0_647_203)">
+                <g filter="url(#filter0_f_647_203)">
+                    <circle cx="1436" cy="31" r="402" fill="#5F64FF" fillOpacity="0.6" />
+                </g>
+                <g filter="url(#filter1_f_647_203)">
+                    <circle cx="-162" cy="449" r="402" fill="#5F64FF" fillOpacity="0.6" />
+                </g>
+                <g filter="url(#filter2_f_647_203)">
+                    <circle cx="842" cy="885" r="328" fill="#5F64FF" fillOpacity="0.5" />
+                </g>
+            </g>
+            <defs>
+                <filter id="filter0_f_647_203" x="660" y="-745" width="1552" height="1552" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="187" result="effect1_foregroundBlur_647_203" />
+                </filter>
+                <filter id="filter1_f_647_203" x="-938" y="-327" width="1552" height="1552" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="187" result="effect1_foregroundBlur_647_203" />
+                </filter>
+                <filter id="filter2_f_647_203" x="140" y="183" width="1404" height="1404" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                    <feGaussianBlur stdDeviation="187" result="effect1_foregroundBlur_647_203" />
+                </filter>
+                <clipPath id="clip0_647_203">
+                    <rect width="1455" height="1507" fill="white" transform="translate(-15 -449)" />
+                </clipPath>
+            </defs>
+        </svg>
+    );
 
     return (
         <div
             className="relative flex flex-col items-left justify-left px-6 pt-40 max-sm:pb-0"
-            style={{ background: "#171a3d" }}
+        //   style={{ background: "#171a3d" }}
+
         >
-            <div className="animated-bg">
-                <div className="floating-orb orb-1"></div>
-                <div className="floating-orb orb-2"></div>
-                <div className="floating-orb orb-3"></div>
-                <div className="floating-orb orb-4"></div>
-                <div className="wave-layer"></div>
-                <div className="pulse-layer"></div>
-                <div className="gradient-overlay"></div>
-                <div className="transition-orb"></div>
-                <div className="transition-orb"></div>
+            <div className="inset-0 z-0">
+                <BackgroundSVG />
             </div>
 
             {/* Content */}
@@ -110,7 +145,7 @@ export default function AIStartupLanding() {
             </div>
 
             {/* Desktop: Image positioned on the right */}
-            <div className="absolute right-0 bottom-0 mb-[244px] max-sm:hidden">
+            <div className=" absolute right-0 bottom-0 mb-[200px] max-sm:hidden">
                 <Image
                     width={600}
                     height={200}
@@ -122,7 +157,7 @@ export default function AIStartupLanding() {
                 />
             </div>
 
-            <div className="w-full justify-center items-center flex flex-col pb-10 pt-20 max-sm:pt-16">
+            <div className="w-full justify-center items-center flex flex-col pt-20 max-sm:pt-16">
                 <div
                     className="w-[100%] pt-10 pb-1 max-sm:pt-6"
                     style={{
