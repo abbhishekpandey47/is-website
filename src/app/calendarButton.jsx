@@ -498,7 +498,6 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
         <div
           className="fixed inset-0 bg-black bg-opacity-10 z-50"
           style={{
-            zIndex: 9999,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
