@@ -72,7 +72,7 @@ export default function AIStartupLanding() {
                     </p>
                 </div>
 
-                <div className="mb-28">
+                <div className="mb-28 justify-center items-center">
                     <div className="hidden max-sm:flex flex-col items-center gap-6">
                         <CalendarBooking />
                         <div className="w-full flex justify-center">
@@ -88,7 +88,7 @@ export default function AIStartupLanding() {
                         </div>
                     </div>
 
-                    <div className="max-w-[85%] max-sm:max-w-[95%] flex flex-row gap-4 justify-left items-center">
+                    <div className="flex flex-row gap-4 justify-center items-center">
                         <CalendarBooking />
                         <TrustedBySection />
                     </div>
