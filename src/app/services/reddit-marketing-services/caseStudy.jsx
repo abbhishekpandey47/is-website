@@ -5,9 +5,9 @@ export default function FireflyClone() {
         <div className="min-h-screen bg-black overflow-hidden relative">
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
-                    <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
+                    <h2 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
                         Case Study
-                    </h1>
+                    </h2>
                 </div>
 
                 {/* Description */}
@@ -81,7 +81,7 @@ export default function FireflyClone() {
 
                                 {/* Title and Arrow */}
                                 <div className="flex items-center justify-center mb-12">
-                                    <h1 className="quicksand-bold text-3xl font-semibold text-white mr-6 tracking-wide">Firefly</h1>
+                                    <h2 className="quicksand-bold text-3xl font-semibold text-white mr-6 tracking-wide">Firefly</h2>
                                     <div className="w-10 h-10 border-2 border-gray-400 rounded-xl flex items-center justify-center bg-gray-800/30">
                                         <svg className="w-7 h-7 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />

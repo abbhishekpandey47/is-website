@@ -38,9 +38,9 @@ export default function AIChallengesSection() {
         >
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
-                    <h1 className=" leading-[50px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
+                    <h2 className=" leading-[50px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
                         Earning Trust on Reddit: The System We Perfected Across 30+ Devtool Startups
-                    </h1>
+                    </h2>
                 </div>
 
                 {/* Description */}
@@ -71,7 +71,7 @@ export default function AIChallengesSection() {
                 {challenge.description}
               </p> */}
                             <div className="quicksand-bold text-xl max-sm:text-[1em] tracking-wide leading-[30px] text-white text-left flex justify-start mb-2">
-                                <h1>{challenge.title}</h1>
+                                <h2>{challenge.title}</h2>
                             </div>
 
                             {/* Description */}
