@@ -9,6 +9,7 @@ export default function TabbedYouTubeCarousel() {
 
   const videoCollections = {
     allCategories: [
+      "BivxMW5DftE",
       "_TrEJAJPp0M",
       "erczPxh8iGc",
       "xPyKqcdt3TY",
@@ -84,11 +85,10 @@ export default function TabbedYouTubeCarousel() {
           <button
             key={tab.id}
             onClick={() => changeTab(tab.id)}
-            className={`flex-1 py-4 px-2 lg:px-4 rounded-full text-center transition-colors ${
-              activeTab === tab.id
+            className={`flex-1 py-4 px-2 lg:px-4 rounded-full text-center transition-colors ${activeTab === tab.id
                 ? "bg-yellow-50 text-black font-normal"
                 : "text-white hover:bg-gray-800"
-            }`}
+              }`}
           >
             {tab.label}
           </button>
@@ -131,9 +131,8 @@ export default function TabbedYouTubeCarousel() {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`h-3 w-3 rounded-full ${
-              currentSlide === index ? "bg-blue-500" : "bg-blue-300"
-            }`}
+            className={`h-3 w-3 rounded-full ${currentSlide === index ? "bg-blue-500" : "bg-blue-300"
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
