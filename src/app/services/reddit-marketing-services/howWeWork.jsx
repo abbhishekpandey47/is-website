@@ -30,11 +30,11 @@ export default function AIChallengesSection() {
     return (
         <div
             className=" py-5 pb-10"
-            style={{
-                background: `radial-gradient(circle at top right, #3a3e9c, transparent 30%), 
-               radial-gradient(circle at bottom left, #3a3e9c, transparent 30%), 
-               #090f1b`,
-            }}
+        // style={{
+        //     background: `radial-gradient(circle at top right, #3a3e9c, transparent 30%), 
+        //    radial-gradient(circle at bottom left, #3a3e9c, transparent 30%), 
+        //    #090f1b`,
+        // }}
         >
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">

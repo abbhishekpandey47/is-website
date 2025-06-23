@@ -28,7 +28,7 @@ module.exports = {
                 destination: '/services/gtm-content-services-for-yc-startups',
                 permanent: true,
             },
-             {
+            {
                 source: '/blog/best-b2b-saas-video-agencies',
                 destination: '/blog/top-explainer-video-companies',
                 permanent: true,

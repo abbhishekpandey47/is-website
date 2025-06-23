@@ -5,6 +5,7 @@ import CalendarBooking from "../../calendarButton";
 import Image from "next/image";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
+import TrustedBySection from "./marquee";
 
 const logoFiles = [
     "aviator.png",
@@ -40,7 +41,7 @@ export default function AIStartupLanding() {
 
     return (
         <div
-            className="relative flex flex-col items-center justify-center px-6 pt-40 max-sm:pb-0"
+            className="relative flex flex-col items-left justify-left px-6 pt-40 max-sm:pb-0"
             style={{ background: "#171a3d" }}
         >
             <div className="animated-bg">
@@ -56,22 +57,22 @@ export default function AIStartupLanding() {
             </div>
 
             {/* Content */}
-            <div className="max-w-6xl mx-auto text-center relative z-10">
-                <div className="quicksand-bold text-[4.5em] max-md:text-[3.2em] max-sm:text-[2.4em] leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-white text-center flex justify-center mb-16 max-sm:mb-8">
-                    <h1 className="leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-center max-lg:text-center max-lg:mx-auto tracking-normal">
+            <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto text-left relative z-10">
+                <div className="quicksand-bold text-[4.5em] max-md:text-[3.2em] max-sm:text-[2.4em] leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-white text-left flex justify-left mb-16 max-sm:mb-8">
+                    <h1 className="leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-left max-lg:text-left max-lg:mx-auto tracking-normal">
                         <span className="text-[#ff4500]">Reddit </span>Growth Engine for<br />
                         <span className="text-[#6b5be7]"> AI Agents <span className="text-white">&</span> SaaS Startups </span>
                     </h1>
                 </div>
 
                 {/* Description */}
-                <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto mb-14 max-sm:mb-8">
+                <div className="max-w-[100%] max-sm:max-w-[95%] mx-auto mb-14 max-sm:mb-8">
                     <p className="text-[24px] md:text-[24px] max-sm:text-[18px] text-[#f5deb3] leading-snug font-light tracking-normal">
                         Most startups get flagged or ignored on Reddit. We help you show up where your ICP hangs out like r/devops, r/nocode, and r/platform_engineering  with LLM-friendly comments, karma-rich accounts, and stealth thread strategies.
                     </p>
                 </div>
 
-                <div className="mb-16 max-sm:mb-8">
+                <div className="mb-28">
                     <div className="hidden max-sm:flex flex-col items-center gap-6">
                         <CalendarBooking />
                         <div className="w-full flex justify-center">
@@ -87,10 +88,11 @@ export default function AIStartupLanding() {
                         </div>
                     </div>
 
-                    {/* Desktop: Only button (image positioned absolutely) */}
-                    <div className="max-sm:hidden">
+                    <div className="max-w-[85%] max-sm:max-w-[95%] flex flex-row gap-4 justify-left items-center">
                         <CalendarBooking />
+                        <TrustedBySection />
                     </div>
+
                 </div>
             </div>
 

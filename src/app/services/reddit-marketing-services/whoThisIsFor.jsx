@@ -4,7 +4,7 @@ import React from 'react';
 const StartupHeroSection = () => {
     return (
         <div className="bg-black">
-            <div className="container mx-auto px-6 py-12">
+            <div className="container mx-auto px-12 py-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     {/* Left Column - Content */}
                     <div className="space-y-8">
@@ -60,15 +60,19 @@ const StartupHeroSection = () => {
                     {/* Right Column - Image */}
                     <div className="flex justify-center lg:justify-end">
                         <div className="rounded-lg flex items-center justify-center">
-                            {/* Placeholder for your image */}
-                            <Image
+                            {/* Image with precise dimensions using inline styles */}
+                            <img
                                 src="/reddit/whothisisfor.png"
-                                width={600}
-                                height={1200}
                                 alt="Who this is for Image"
+                                style={{
+                                    width: '487px',
+                                    height: '622px',
+                                    objectFit: 'cover'
+                                }}
                             />
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
