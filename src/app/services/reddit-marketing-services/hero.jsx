@@ -96,7 +96,7 @@ export default function AIStartupLanding() {
             </div>
 
             {/* Desktop: Image positioned on the right */}
-            <div className="absolute right-0 bottom-0 z-10 mb-[244px] max-sm:hidden">
+            <div className="absolute right-0 bottom-0 mb-[244px] max-sm:hidden">
                 <Image
                     width={600}
                     height={200}
@@ -108,7 +108,7 @@ export default function AIStartupLanding() {
                 />
             </div>
 
-            <div className="w-full justify-center items-center flex flex-col pb-10 z-20 pt-20 max-sm:pt-16">
+            <div className="w-full justify-center items-center flex flex-col pb-10 pt-20 max-sm:pt-16">
                 <div
                     className="w-[100%] pt-10 pb-1 max-sm:pt-6"
                     style={{
@@ -116,6 +116,7 @@ export default function AIStartupLanding() {
                         backgroundImage: `radial-gradient(circle at top right, #090d1a 0%, transparent 30%)`,
                         border: "1.5px solid rgba(45, 51, 71, 1)",
                         borderRadius: "16px",
+                        zIndex: 0,
                     }}
                 >
                     <h2 className="text-center pb-1 text-white quicksand-bold text-2xl max-sm:text-xl max-sm:px-4">
