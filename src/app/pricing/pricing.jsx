@@ -186,22 +186,21 @@ const PricingPage = () => {
                     {/* Left Column - 1 testimonial (vertically centered) */}
                     <div className="flex items-center min-h-full">
                         <div className="w-full">
-                            {testimonials[0] && (
-                                <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 transition-colors duration-300">
-                                    <div className="text-left mb-6">
-                                        <img
-                                            src={testimonials[0].imageUrl}
-                                            alt={testimonials[0].name}
-                                            className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-purple-500/30"
-                                        />
-                                        <h4 className="font-semibold text-white">{testimonials[0].name}</h4>
-                                        <p className="text-sm text-gray-400">{testimonials[0].title}, {testimonials[0].company}</p>
-                                    </div>
-                                    <p className="text-gray-300 text-sm leading-relaxed text-left">
-                                        "{testimonials[0].quote}"
-                                    </p>
+
+                            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 transition-colors duration-300">
+                                <div className="text-left mb-6">
+                                    <img
+                                        src={testimonials[0].imageUrl}
+                                        alt={testimonials[0].name}
+                                        className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-purple-500/30"
+                                    />
+                                    <h4 className="font-semibold text-white">{testimonials[0].name}</h4>
+                                    <p className="text-sm text-gray-400">{testimonials[0].title}, {testimonials[0].company}</p>
                                 </div>
-                            )}
+                                <p className="text-gray-300 text-sm leading-relaxed text-left">
+                                    "{testimonials[0].quote}"
+                                </p>
+                            </div>
                         </div>
                     </div>
 
