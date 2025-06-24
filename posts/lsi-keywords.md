@@ -104,7 +104,7 @@ A much more straightforward and advanced way of taking out keywords is using a s
 
 **STEP 1:** Log in to your Semrush account or sign up if you don't have one.
 **STEP 2:** Navigate to the **'Keyword Magic Tool'** under the **'Keyword Research'** section and then enter your primary keyword. In our example, it's **ICED AMERICANO**, and start the search for keyword ideas.
-**[SEMrush](https://www.semrush.com/)** will give you a list of terms related to our target keyword. According to our example, we got:
+**[SEMrush](https://www.semrush.com/features/keyword-research-toolkit/)** will give you a list of terms related to our target keyword. According to our example, we got:
 - `iced americano coffee`
 - `iced americano recipe`
 
