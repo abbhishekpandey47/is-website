@@ -44,7 +44,7 @@ Even though it's just a simple text file, it's a critical part of your website's
 
 !["robot"](/PostImages/guide-to-robots-txt/1.png)
 
-### 1. What is User Agent
+### 1. What is User Agent?
 
 The user-agent in a robots.txt file identifies which web crawler the directives apply to. The user-agent is the name of the spider that the directives are for. So, for instance, if you want your website to pop up when you do a google search but not when you do yahoo search, a robot.txt comes in handy. 
 
@@ -77,7 +77,7 @@ Disallow: /cart/view
 
 On the other hand, the allow command grants access to specific files, even if their folder is disallowed. The "Allow" directive overrides a "Disallow" rule for specific files or sub-directories. So, even if a broader path is blocked, you can use "Allow" to let certain pages through.
 
-### 3. What is Crawl Delay in Robot.txt
+### 3. What is Crawl Delay in Robot.txt?
 
 In the robot.txt file of the website, there are instructions regarding the frequency with which the crawler can access pages on your site. The administrator can issue instructions to the crawler to wait a specific amount of time, in milliseconds, before crawling each page. This directive is called crawl delay in robot txt and it is used to not overburden the web server.
 
@@ -96,7 +96,7 @@ This means that search engine crawlers should wait 10 seconds before requesting 
 
 However, some browsers like google do not obey the crawl delay command, but yahoo and bing do. 
 
-### 4. What is Sitemap in Robot.txt
+### 4. What is Sitemap in Robot.txt?
 
 The sitemap in robot.txt is a list of all pages on a website that the bot has to crawl. It lists all the important pages on your website and therefore helps the crawler in indexing your website more quickly and efficiently. Its job is also to ensure that the crawler does not miss any pages and understand your website structure.  
 
@@ -111,7 +111,7 @@ If your website doesn't have a robots.txt file, crawlers assume they can access 
 
 By setting up a well-structured robots.txt file, you can ensure search engines focus on the right areas, giving your SEO strategy the boost it deserves.
 
-## Why is Robots.txt Important for Seo?
+## Why is Robots.txt Important for SEO?
 
 A robots.txt file can make or break your site's SEO performance. By using it wisely, you can ensure that search engines focus on the right content and ignore what doesn't need to be indexed.
 
