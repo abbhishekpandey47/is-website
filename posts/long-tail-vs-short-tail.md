@@ -30,7 +30,7 @@ The long-tail keywords have a lower search volume compared to short tailed keywo
 
 Short tail keywords include a few words ranging from one to three, whereas long tail keywords have a word count above three. The latter helps understand the search query, whether buying a specific product or seeking general information.
 
-Since most individuals search queries in one or two words, the search volume becomes higher than long-tail keywords. The higher the search volume of the keyword, the higher will be the competition between them. Therefore, short tailed keywords have relatively higher competition in ranking in the search engine.
+Since most individuals search queries in one or two words, the search volume becomes higher than long-tail keywords. The higher the **[keyword msv](https://www.infrasity.com/blog/why-search-volume-fails-b2b-saas)**, the higher will be the competition between them. Therefore, short tailed keywords have relatively higher competition in ranking in the search engine.
 
 Since the long tail keywords specify the user's search intent, the short tail ones might not have the upper hand in driving conversions. Therefore, it is not definite that a higher search volume keyword will effectively increase the conversion rate for businesses.
 
@@ -38,20 +38,20 @@ Since the long tail keywords specify the user's search intent, the short tail on
 
 Now that you know about long tail and short tail keywords, it is time to understand how to conduct keyword research. There are various tools in the market that help users to research relevant keywords.
 
-Google has its keyword research tool, **Google Keyword Planner**. It identifies short tail keywords and explores broader search trends. **Ahrefs** and **SEMrush** are some great long tail keywords research tools.
+Google has its keyword research tool, **Google Keyword Planner**. It identifies short tail keywords and explores broader search trends. **[Ahrefs](https://ahrefs.com/)** and **SEMrush** are some great long tail keywords research tools.
 
 Here's how you can find relevant keywords using Ahrefs' Free Keyword Generator Tool:
 
-1. Navigate to Ahrefs' Free Keyword Generator tool.
-2. Select your desired search engine and location where you would like to reach your target audience.
+- Navigate to Ahrefs' Free Keyword Generator tool.
+- Select your desired search engine and location where you would like to reach your target audience.
 
 ![ahrefs free keyword generator](/PostImages/long-tail-vs-short-tail/12.png)
 
-3. Input the set of words related to your topic or service. Then, click on ‘Find Keywords.’
+- Input the set of words related to your topic or service. Then, click on ‘Find Keywords.’
 
 ![keyword research in ahrefs](/PostImages/long-tail-vs-short-tail/13.png)
 
-4. You will find specific short and long-tail keywords you can integrate into the content to reach your target customers. You will find mainly short tail keywords in **Phrase Match**, and long tail keywords in **Question format**.
+- You will find specific short and long-tail keywords you can integrate into the content to reach your target customers. You will find mainly short tail keywords in **Phrase Match**, and long tail keywords in **Question format**.
 
 ![short tail keyword and long tail keyword research in ahrefs](/PostImages/long-tail-vs-short-tail/14.png)
 
@@ -85,7 +85,7 @@ Develop content clusters around a central topic, linking related articles with d
 For example, an email marketing blog could create a central post about "what is content marketing." This central post could be linked to articles on "top 5 content marketing agencies" and "**[best content marketing tools](https://www.infrasity.com/blog/10-best-content-marketing-tools-for-beginners)**."
 
 ### 2. Detailed How-to Guides
-Create in-depth guides or tutorials that integrate long-tail keywords, offering actionable insights. An article titled "How to use Content Marketing Tools" can engage high-intent users aiming to gain some practical knowledge.
+Create in-depth **[product use case](https://www.infrasity.com/blog/product-use-case)** guides or tutorials that integrate long-tail keywords, offering actionable insights. An article titled "How to use Content Marketing Tools" can engage high-intent users aiming to gain some practical knowledge.
 
 ### 3. User-generated Content
 You can add a CTA for the readers to comment down their queries or share their experiences in the comments section. The comments can lead to an organic integration of long-tail keywords on the web page.
