@@ -109,7 +109,7 @@ If your website doesn't have a robots.txt file, crawlers assume they can access 
 - Crawlers waste time on pages that don't add value, like duplicate content or utility pages (e.g., cart or checkout pages).
 - Sensitive information is accidentally being indexed.
 
-By setting up a well-structured robots.txt file, you can ensure search engines focus on the right areas, giving your SEO strategy the boost it deserves.
+By setting up a well-structured robots.txt file, you can ensure search engines focus on the right areas, giving your **[technical SEO](https://www.infrasity.com/blog/what-is-a-technical-seo-specialist)** strategy the boost it deserves.
 
 ## Why is Robots.txt Important for SEO?
 
@@ -119,7 +119,7 @@ Here's how it can help:
 
 ### 1. Control Crawl Budget
 
-Every website has a limited amount of resources, and search engines like Google have a limited "crawl budget"---the amount of time and resources they'll spend crawling your site.
+Every website has a limited amount of resources, and search engines like Google have a limited "crawl budget" - the amount of time and resources they'll spend crawling your site.
 
 If your site has a lot of pages, but some are more important, robots.txt helps guide the crawler to focus on the important ones and block other low priority pages from being crawled.
 
@@ -127,7 +127,7 @@ For example, SaaS companies often have outdated product pages that no longer pro
 
 ### 2. Prevent Duplicate Content
 
-If you have several versions of the same page on your site---perhaps one with a query parameter (like `"?ref=123"`) and another without, search engines might see these as separate pages, and crawl them separately. 
+If you have several versions of the same page on your site - perhaps one with a query parameter (like `"?ref=123"`) and another without, search engines might see these as separate pages, and crawl them separately. 
 
 Robots.txt can block these duplicate pages from being crawled, helping search engines focus only on the original page and improving your site's SEO.
 
@@ -189,7 +189,7 @@ This rule blocks all PDF files across the website from being indexed by search e
 
 ### 4. Specifying Sitemap URLs
 
-To make it easier for search engines to discover all the important pages on your website, you can specify the location of your sitemap(s) in the robots.txt file:
+To make it easier for search engines to discover all the important pages on your website, like **[technical product documentation](https://www.infrasity.com/blog/technical-product-documentation)**, you can specify the location of your sitemap(s) in the robots.txt file:
 
 Sitemap: https://www.infrasity.com/sitemap.xml
 
