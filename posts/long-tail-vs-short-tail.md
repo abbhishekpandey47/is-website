@@ -38,7 +38,7 @@ Since the long tail keywords specify the user's search intent, the short tail on
 
 Now that you know about long tail and short tail keywords, it is time to understand how to conduct keyword research. There are various tools in the market that help users to research relevant keywords.
 
-Google has its keyword research tool, **Google Keyword Planner**. It identifies short tail keywords and explores broader search trends. **[Ahrefs](https://ahrefs.com/)** and **SEMrush** are some great long tail keywords research tools.
+Google has its keyword research tool, **Google Keyword Planner**. It identifies short tail keywords and explores broader search trends. **[Ahrefs]([https://ahrefs.com/](https://ahrefs.com/keyword-generator)** and **SEMrush** are some great long tail keywords research tools.
 
 Here's how you can find relevant keywords using Ahrefs' Free Keyword Generator Tool:
 
