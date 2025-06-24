@@ -19,7 +19,7 @@ On the backend, a Tech SEO Specialist improves the elements that contribute to t
 
 ## What Are the Tasks Performed by a Technical SEO Expert?
 
-SaaS marketing agencies like **Infrasity** that **assist early-stage startups** have **technical SEO consultants** who begin with a **thorough audit of technical SEO** to ascertain the weak points. On the foundation of an optimized technical SEO rests the entire content and marketing strategy.
+SaaS marketing agencies like **Infrasity** that **assist early-stage startups** have **technical SEO consultants** who begin with a **thorough audit of technical SEO** to ascertain the weak points. On the foundation of an optimized technical SEO rests the entire content and **[go-to-market strategy](https://www.infrasity.com/blog/saas-go-to-market-strategy)**.
 
 A staggering statistic analyzed by CXL concludes that **new sites encounter an average bounce rate of 56.52%**. That's a lot of people coming to your website but bouncing out. A technical SEO expert performs various tasks to retain the generated organic traffic.
 
