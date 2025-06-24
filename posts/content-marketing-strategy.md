@@ -28,7 +28,7 @@ For instance, if Notion advertises its product, I might visit their site once. H
 
 ### Cost-Effective
 
-Creating content serves several purposes, making the cost incurred much less. It gives information to the users, which builds trust. It also brings potential users to your website by providing them with something they want, leading to conversions. In this way, it yields a high ROI and serves many purposes. On the contrary, advertising only aims to bring the user to your website, which is much more competitive. This makes advertising a much more expensive route.
+Creating content serves several purposes, making the cost incurred much less. It gives information to the users, which builds trust. It also brings potential users to your website by providing them with something they want, leading to conversions. In this way, it yields a high **[content marketing ROI](https://www.infrasity.com/blog/content-marketing-roi)** and serves many purposes. On the contrary, advertising only aims to bring the user to your website, which is much more competitive. This makes advertising a much more expensive route.
 
 ### Attracting the Right Audience
 
@@ -70,7 +70,7 @@ If readers begin to see your brand as a credible and reliable source of informat
 
 ### Step 1: Target Audience
 
-Before you begin writing, make sure you define your **Ideal Customer Profile (ICP)**. A practical tip is to visualize a person, not a huge company. Marketing for SaaS companies or even content markeitng for tech bussinesses is a tricky task and requires you to do detailed research.
+Before you begin writing, make sure you define your **[Ideal Customer Profile (ICP)](https://www.infrasity.com/blog/ideal-customer-profile)**. A practical tip is to visualize a person, not a huge company. Marketing for SaaS companies or even content markeitng for tech bussinesses is a tricky task and requires you to do detailed research.
 
 For example:
 
@@ -98,7 +98,7 @@ The task now is to **publish the optimized content** according to the content ca
 
 For example:
 
-- If the founder of a growing startup that needs **AUTOTIC** frequently searches for solutions on **Reddit**, then distribute your content there! Many people organically go to Reddit when facing an issue.
+- If the founder of a growing startup that needs **AUTOTIC** frequently searches for solutions on **[Reddit](https://www.reddit.com/)**, then distribute your content there! Many people organically go to Reddit when facing an issue.
 
 ## Components for Building a Content Marketing Strategy for Your SaaS Company
 
