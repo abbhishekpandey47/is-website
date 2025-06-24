@@ -120,9 +120,9 @@ SEMrush will give you a list of terms related to our target keyword. According t
 Finding Competitor Keywords with SEMrush
 Another great SEMrush feature is getting keywords used by your competitors. For this, follow these steps:
 
-1. **Go to Organic Search**
-2. **Enter the URL of your competitor** (The content that tops the SERP).
-3. **Find out the LSI keywords used by them!**
+- **Go to Organic Search**
+- **Enter the URL of your competitor** (The content that tops the SERP).
+- **Find out the LSI keywords used by them!**
 
 !["Semrush competitor keyword search"](/PostImages/lsi-keywords/12.png)
 These tools can help enrich your content by incorporating not just the primary term but also related keywords and common user questions, giving your content more depth and better search performance.
