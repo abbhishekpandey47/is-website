@@ -19,13 +19,13 @@ export default function RedditMarketingSlide() {
     ];
 
     return (
-        <div className="bg-black text-white p-8 flex flex-col items-center justify-center">
+        <div className="bg-black text-white p-[6rem] flex flex-col items-center justify-center -mt-16">
             <div className="max-w-6xl w-full">
                 <div className="max-w-6xl mx-auto text-center relative z-10">
-                    <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-normal leading-[80px] text-white text-center flex justify-center mb-2">
-                        <h2 className=" leading-[50px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
+                    <div className="quicksand-bold text-[30px] max-sm:text-[1em] tracking-normal leading-[40px] text-white text-center flex justify-center mb-2">
+                        <h2 className=" md:leading-[50px] max-sm:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
                             What We Learned Running Reddit for the Fastest-Growing
-                            {' '}<br />
+                            {' '}
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">B2B Startups</span>
                         </h2>
                     </div>

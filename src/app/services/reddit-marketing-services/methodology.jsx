@@ -2,10 +2,10 @@ import React from 'react';
 
 const InfraMethodologyTimeline = () => {
     return (
-        <div className="bg-black text-white p-8">
+        <div className="bg-black text-white p-8 md:p-[4rem] md:px-[4rem]">
             {/* Header */}
             <div className="max-w-6xl mx-auto text-center relative z-10">
-                <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-normal leading-[80px] text-white text-center flex justify-center">
+                <div className="quicksand-bold text-[30px] max-sm:text-[1em] tracking-normal leading-[80px] text-white text-center flex justify-center">
                     <h2 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
                         The Execution Framework Behind 100+ Reddit Touchpoints
                     </h2>
