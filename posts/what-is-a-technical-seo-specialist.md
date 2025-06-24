@@ -41,7 +41,7 @@ According to Statista, as of 2024, mobile devices account for a staggering 62.54
 ### Check for Duplicated Content
 
 If a search engine crawler finds similar content on several pages of your website, it can confuse them as to which one is original, potentially **splitting or lowering overall ranking**.  
-The technical SEO expert tackles duplicate pages in case of content syndication or repetition by adding **Canonical tags** to the URL of the content to tell Google crawlers which version of content to see as original or by adding **301 redirects** to point to the preferred original page.
+The technical SEO expert tackles duplicate pages in case of **[content syndication](https://www.infrasity.com/blog/b2b-content-syndication)** or repetition by adding **Canonical tags** to the URL of the content to tell Google crawlers which version of content to see as original or by adding **301 redirects** to point to the preferred original page.
 
 !["canonical tags"](/PostImages/what-is-a-technical-seo-specialist/2.png)
 
