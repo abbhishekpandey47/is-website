@@ -85,7 +85,7 @@ const PricingPage = () => {
                     <div className="bg-gray-900/50 backdrop-blur-sm border border-[#7dffa2] transition-colors rounded-2xl p-8">
                         <div className="mb-8">
                             <h3 className="quicksand-semibold text-2xl text-[#e8bfff] font-bold mb-2">Startup</h3>
-                            <p className="text-[40px] text-white mb-4">For Small teams</p>
+                            <p className="text-lg text-white mb-4">For Small teams</p>
                             <p className="text-sm text-gray-400">Who have to manage their cloud spend continuously</p>
                         </div>
                         <div className="bg-white bg-opacity-15 flex-none h-px overflow-hidden relative w-full mb-8"></div>
@@ -142,7 +142,7 @@ const PricingPage = () => {
 
                         <div className="mb-8">
                             <h3 className="quicksand-semibold text-[#99e2ff] text-3xl font-bold mb-2">Enterprise</h3>
-                            <p className="text-[40px] text-white mb-4">For Large Organizations</p>
+                            <p className="text-lg text-white mb-4">For Large Organizations</p>
                             <p className="text-sm text-gray-400">With multiple teams managing and monitoring cloud costs</p>
                         </div>
                         <div className="bg-white bg-opacity-15 flex-none h-px overflow-hidden relative w-full mb-8"></div>
@@ -186,22 +186,21 @@ const PricingPage = () => {
                     {/* Left Column - 1 testimonial (vertically centered) */}
                     <div className="flex items-center min-h-full">
                         <div className="w-full">
-                            {testimonials[0] && (
-                                <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 transition-colors duration-300">
-                                    <div className="text-left mb-6">
-                                        <img
-                                            src={testimonials[0].imageUrl}
-                                            alt={testimonials[0].name}
-                                            className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-purple-500/30"
-                                        />
-                                        <h4 className="font-semibold text-white">{testimonials[0].name}</h4>
-                                        <p className="text-sm text-gray-400">{testimonials[0].title}, {testimonials[0].company}</p>
-                                    </div>
-                                    <p className="text-gray-300 text-sm leading-relaxed text-left">
-                                        "{testimonials[0].quote}"
-                                    </p>
+
+                            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 transition-colors duration-300">
+                                <div className="text-left mb-6">
+                                    <img
+                                        src={testimonials[0].imageUrl}
+                                        alt={testimonials[0].name}
+                                        className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-purple-500/30"
+                                    />
+                                    <h4 className="font-semibold text-white">{testimonials[0].name}</h4>
+                                    <p className="text-sm text-gray-400">{testimonials[0].title}, {testimonials[0].company}</p>
                                 </div>
-                            )}
+                                <p className="text-gray-300 text-sm leading-relaxed text-left">
+                                    "{testimonials[0].quote}"
+                                </p>
+                            </div>
                         </div>
                     </div>
 
