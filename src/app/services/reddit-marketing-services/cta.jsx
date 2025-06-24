@@ -6,7 +6,7 @@ export default function Cta() {
         <div>
             <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
-                    <h2 className=" leading-[80px] text-center max-lg:text-center max-lg:mx-auto">
+                    <h2 className=" md:leading-[80px] max-lg:text-center max-lg:mx-auto">
                         Ready to win{" "}<span className="text-[#ff4500]">Reddit</span>?
                     </h2>
                 </div>
