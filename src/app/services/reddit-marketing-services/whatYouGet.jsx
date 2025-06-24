@@ -57,11 +57,11 @@ const RedditServiceCards = () => {
     ];
 
     return (
-        <div className="bg-[#000000] p-8 -mt-8">
+        <div className="bg-[#000000] p-8 md:p-[6rem] md:px-[5rem] -mt-8">
             <div className="max-w-6xl mx-auto text-center relative z-10">
-                <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
+                <div className="quicksand-bold text-[30px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" leading-[50px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-                        The Quiet Reddit System Refined Across 30+ <br /> <span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>Breakout Startups</span>
+                        The Quiet Reddit System Refined Across 30+ {" "}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>Breakout Startups</span>
                     </h2>
                 </div>
                 <div class="flex justify-center my-6 mb-8">

@@ -10,7 +10,7 @@ import StartupHeroSection from "./whoThisIsFor";
 
 export default function Page() {
     return (
-        <div className="text-white overflow-x-hidden overflow-y-hidden">
+        <div className="text-white">
             <HeroHome />
             <StartupHeroSection />
             <RedditMarketingSlide />
