@@ -106,7 +106,7 @@ export default function AIStartupLanding() {
             <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[4.5em] max-md:text-[3.2em] max-sm:text-[2.4em] leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-white text-center mb-16 max-sm:mb-8">                    <h1 className="leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-center max-lg:text-center max-lg:mx-auto tracking-normal">
                     <span className="text-[#ff4500]">Reddit </span>Marketing Agency for<br />
-                    <span className="text-[#6b5be7]"> AI Agents <span className="text-white">&</span> SaaS Startups </span>
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600"> AI Agents <span className="text-white">&</span> SaaS Startups </span>
                 </h1>
                 </div>
 

@@ -8,14 +8,14 @@ const InfraMethodologyTimeline = () => {
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-normal leading-[80px] text-white text-center flex justify-center">
                     <h2 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
                         Our{' '}
-                        <span className="text-[#6b5be7]">Infra - first</span>{" "}
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">Infra - first</span>{" "}
                         Methodology
                     </h2>
                 </div>
             </div>
 
-            <div class="flex justify-center my-10 mb-16">
-                <div class="w-[148px] h-1 bg-[#6B5BE7] rounded-full"></div>
+            <div class="flex justify-center my-4 mb-2">
+                <div class="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
             </div>
 
             {/* Desktop Version */}
