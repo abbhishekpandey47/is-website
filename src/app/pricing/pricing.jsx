@@ -5,37 +5,48 @@ const PricingPage = () => {
     const testimonials = [
         {
             id: 1,
-            name: "Prathamesh Juvatkar",
-            title: "Co-founder & CTO",
-            company: "Nanonets",
-            quote: "Amnic has been a strategic partner for us in our cloud efficiency journey. The team has deep technical chops and has worked closely to develop innovative solutions to tackle the tough problems. We have been able to identify root causes and make our intra-region data transfers as well as S3 bucket data management more efficient with Amnic's platform.",
-            imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=120&h=120"
+            name: "Cindy Blake",
+            imageUrl: "/Testimon/cindyFirefly.jpg",
+            alt: "Cindy Blake, VP Marketing, Firefly",
+            title: "VP Marketting, Firefly",
+            quote:
+                "Infrasity was quick to onboard and understand how to best show off the capabilities of Firefly's cloud asset management. Team has been super responsive and collaborative.",
+            highlight: ["quick to onboard", "responsive", "collaborative"],
         },
         {
             id: 2,
-            name: "Mayank Bhola",
-            title: "Co-founder & CTO",
-            company: "Lambdatest",
-            quote: "Amnic's astute recommendation engine helped us reduce our cloud bill through optimization of network and cloudwatch costs. A key differentiator for Amnic remains its strong team which has channelized its significant experience in building a product uniquely suited to address pain points of fast growing companies.",
-            imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=120&h=120"
+            name: "Josh",
+            imageUrl: "/Testimon/joshTerraTeam.jpg",
+            alt: "Josh, Co-Founder, Terrateam",
+            title: "Co-Founder, Terrateam",
+            quote:
+                "The Infrasity team has been fantastic to work with. Their attention to detail and level of accuracy is top notch. I'd fully recommend their services to anyone.",
+            highlight: ["attention to detail", "level of accuracy", "top notch"],
         },
         {
             id: 3,
-            name: "Amit Sharma",
-            title: "Co-founder & Head of Engineering",
-            company: "Metamap",
-            quote: "Amnic facilitated our transition from a self-managed Kubernetes environment to EKS, concurrently streamlining costs through implementation of elastic scaling mechanisms and strategic utilization of spot instances.",
-            imageUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=120&h=120"
+            name: "Shaked Askayo",
+            imageUrl: "/Testimon/Shaked.png",
+            alt: "Shaked Askayo, CTO, Kubiya.ai",
+            title: "CTO, Kubiya.ai",
+            quote:
+                "Infrasity's creative content has significantly enhanced the visibility and appeal of our product in a competitive market. Crafting content that engages our audience and eloquently highlights the advanced capabilities of Kubiya.ai.",
+            highlight: [
+                "significantly enhanced the visibility and appeal of our product",
+            ],
         },
         {
             id: 4,
-            name: "Sekhar Prakash",
-            title: "Co-founder, Cloud Engineering and Ops",
-            company: "JIFFY.ai",
-            quote: "The Amnic platform played a pivotal role in bringing visibility and reducing our Kubernetes cluster costs by 50% by providing precise recommendations for right-sizing instances and pods. The team at Amnic is exceptionally responsive and showcases robust problem-solving abilities when it comes to the technical challenges in Cloud.",
-            imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=120&h=120"
+            name: "Frank Weissmann",
+            imageUrl: "/Testimon/Frank.jpg",
+            alt: "Frank Weissmann, Customer Success Lead, firefly.ai",
+            title: "Customer Success Lead, firefly.ai",
+            quote:
+                "Infrasity's work has improved the client's SEO, earning a score of over 75%. They'vs also enabled the client to onboard end customers faster. Moreover, the team listens to the client's content needs, produces work that aligns with their conversation and delivers output in a quick turnaround time.",
+            highlight: ["over 75%", "quick turnaround time"],
         }
     ];
+
     const startupFeatures = [
         "Amnic AI",
         "Cost Analyzer",
