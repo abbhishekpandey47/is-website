@@ -32,7 +32,7 @@ However, a search engine focusing on semantic keywords will understand that the 
 
 Sort of, but not as you might think!
 
-Google does not directly support LSI as a factor for ranking on the search engine result page. In fact, Google has given direct statements against using latent semantic indexing as a ranking criterion. John Muller, Google's search advocate, blatantly dismissed the usage of LSI keywords in search engine performance.
+Google gives priority to long tail or **[short tail keywords](https://www.infrasity.com/blog/long-tail-vs-short-tail)**, but does not directly support LSI as a factor for ranking on the search engine result page. In fact, Google has given direct statements against using latent semantic indexing as a ranking criterion. John Muller, Google's search advocate, blatantly dismissed the usage of LSI keywords in search engine performance.
 
 LSI technology is old, and Google's approach is much more nuanced than just picking up content and ranking it in accordance with the usage of terms related to the target keyword.
 
