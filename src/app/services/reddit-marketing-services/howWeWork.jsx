@@ -29,7 +29,7 @@ export default function AIChallengesSection() {
     ];
     return (
         <div
-            className="pb-10 p-8 md:p-[3rem]"
+            className="pb-10 p-8 md:p-[2rem]"
         // style={{
         //     background: `radial-gradient(circle at top right, #3a3e9c, transparent 30%), 
         //    radial-gradient(circle at bottom left, #3a3e9c, transparent 30%), 
@@ -37,8 +37,8 @@ export default function AIChallengesSection() {
         // }}
         >
             <div className="max-w-6xl mx-auto text-center relative z-10">
-                <div className="quicksand-bold text-[30px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
-                    <h2 className=" leading-[50px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
+                <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
+                    <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
                         Earning Trust on Reddit: The System We Perfected Across 30+{" "}<span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">Devtool Startups </span>
                     </h2>
                 </div>

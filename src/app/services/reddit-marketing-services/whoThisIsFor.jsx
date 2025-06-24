@@ -4,12 +4,12 @@ import React from 'react';
 const StartupHeroSection = () => {
     return (
         <div className="bg-black">
-            <div className="container mx-auto md:p-[5rem] md:px-[5rem]">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-left">
+            <div className="mx-auto p-[2rem] md:p-[3rem] md:px-[5rem]">
+                <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-12 items-left">
                     {/* Left Column - Content */}
                     <div className="space-y-8">
                         <div className="max-w-6xl mx-auto text-left relative z-10">
-                            <div className="quicksand-bold text-[30px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-left flex justify-left mb-2">
+                            <div className="quicksand-bold text-[30px] tracking-tighter md:leading-[80px] text-white text-left flex justify-left mb-2">
                                 <h2 className="leading-[80px] max-sm:leading-[69px] text-left max-lg:mx-auto">
                                     Who this is for :
                                 </h2>

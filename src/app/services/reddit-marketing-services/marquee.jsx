@@ -50,7 +50,7 @@ const TrustedBySection = () => {
             <div className="hidden md:flex items-left justify-left gap-2 text-lg md:text-[22px]">
                 <span>Trusted at startups backed by</span>
 
-                <div className="relative h-8 inline-block mx-1 w-[190px] -mx-2">
+                <div className="relative h-8 inline-block w-[190px] -mx-2">
                     {fileList.map((file, index) => (
                         <div
                             key={`logo-${index}`}
