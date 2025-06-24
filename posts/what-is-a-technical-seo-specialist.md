@@ -29,7 +29,7 @@ Some of the most critical tasks of a search engine optimization expert are:
 
 Audits provide a **bird's-eye view** of the health of your website's technical SEO and structure. It allows you to see a host of errors that could hurt your website's performance, such as broken links, duplicated content, missing meta tags, and much more.  
 The audit is like a report card of your website that tells its strengths and weaknesses. The job of fixing the weak points is of the technical SEO consultant.  
-Some of the technical SEO tool that can help in site audit are **Google Search Console, Screaming Frog, and SEMrush**.
+Some of the technical SEO tool that can help in site audit are **[Google Search Console](https://search.google.com/search-console/about), Screaming Frog, and SEMrush**.
 
 !["screaming frog for seo audit"](/PostImages/what-is-a-technical-seo-specialist/1.png)
 
