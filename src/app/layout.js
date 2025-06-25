@@ -119,3 +119,18 @@ export function CatchAllLayout({ children, params }) {
         </html>
     );
 }
+
+export function generateMetadata() {
+    const fullHref = 'https://www.infrasity.com/';
+    return {
+        alternates: {
+            canonical: fullHref,
+            languages: {
+                'x-default': fullHref,
+                'en-us': fullHref,
+            },
+        },
+        title: "Infrasity | Home",
+        description: "Infrasity: Elevate your tech brand with expert content, GTM strategy, and developer marketing. Discover our services for SaaS, startups, and enterprises.",
+    };
+}

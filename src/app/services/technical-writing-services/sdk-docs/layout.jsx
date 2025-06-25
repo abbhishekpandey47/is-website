@@ -1,8 +1,19 @@
-export const metadata = {
-  title: "SDK Documentation Services by Technical Writing Experts",
-  description:
-    "Boost your product with clear, developer-focused SDK documentation. Our technical writing services ensure accuracy, usability, and seamless integration support.",
-};
+export function generateMetadata() {
+  const fullHref = 'https://www.infrasity.com/services/sdk-docs';
+  return {
+    alternates: {
+      canonical: fullHref,
+      languages: {
+        'x-default': fullHref,
+        'en-us': fullHref,
+      },
+    },
+    title: "SDK Documentation Services by Technical Writing Experts",
+    description:
+      "Boost your product with clear, developer-focused SDK documentation. Our technical writing services ensure accuracy, usability, and seamless integration support.",
+
+  };
+}
 
 export default function PageLayout({ children }) {
   return <>{children}</>;
