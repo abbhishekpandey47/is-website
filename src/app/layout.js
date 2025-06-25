@@ -106,20 +106,6 @@ export default function RootLayout({ children }) {
     );
 }
 
-export function CatchAllLayout({ children, params }) {
-    const slugArray = params.slug || [];
-    const path = '/' + slugArray.join('/');
-    const baseHref = 'https://www.infrasity.com';
-    const fullHref = `${baseHref}${path}`;
-
-    return (
-        <html lang='en'>
-            <head></head>
-            <body>{children}</body>
-        </html>
-    );
-}
-
 export function generateMetadata() {
     const fullHref = 'https://www.infrasity.com/';
     return {
@@ -130,7 +116,8 @@ export function generateMetadata() {
                 'en-us': fullHref,
             },
         },
-        title: "Infrasity | Home",
-        description: "Infrasity: Elevate your tech brand with expert content, GTM strategy, and developer marketing. Discover our services for SaaS, startups, and enterprises.",
+        title: 'Infrasity | Home',
+        description:
+            'Infrasity: Elevate your tech brand with expert content, GTM strategy, and developer marketing. Discover our services for SaaS, startups, and enterprises.',
     };
 }
