@@ -55,9 +55,18 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const fullHref = `https://www.infrasity.com/blog/${params.slug}`;
+
   return {
     title: post.metatitle || post.title,
     description: post.description,
+    alternates: {
+      canonical: fullHref,
+      languages: {
+        'x-default': fullHref,
+        'en-us': fullHref,
+      },
+    },
     openGraph: {
       title: post.title,
       description: post.metaDescription,

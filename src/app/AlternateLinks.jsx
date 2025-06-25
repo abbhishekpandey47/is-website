@@ -25,7 +25,7 @@ export default function AlternateLinks() {
             linkTag.setAttribute('hreflang', hreflang);
             document.head.appendChild(linkTag);
         });
-    }, [pathname]); 
+    }, [pathname]);
 
     return null;
 }
