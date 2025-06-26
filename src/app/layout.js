@@ -2,24 +2,12 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
 import './globals.css';
-import { headers } from 'next/headers';
-import React from 'react';
+import { metadata } from './metadata';
+import AlternateLinks from './AlternateLinks';
+
+export { metadata };
 
 export default function RootLayout({ children }) {
-    const headersList = headers();
-    // Try to get the current URL from x-url or referer
-    const fullUrl = headersList.get('x-url') || headersList.get('referer') || '';
-    let pathname = '/';
-    if (fullUrl) {
-        try {
-            pathname = new URL(fullUrl).pathname;
-        } catch {
-            pathname = '/';
-        }
-    }
-    const baseHref = 'https://www.infrasity.com';
-    const fullHref = `${baseHref}${pathname}`;
-
     return (
         <html lang='en'>
             <head>
@@ -89,6 +77,7 @@ export default function RootLayout({ children }) {
                     src='https://assets.calendly.com/assets/external/widget.js'
                     strategy='lazyOnload'
                 />
+                <AlternateLinks />
             </head>
             <GoogleAnalytics gaId='G-G0BTN1FRWY' />
             <body className='antialiased'>
@@ -104,20 +93,4 @@ export default function RootLayout({ children }) {
             </body>
         </html>
     );
-}
-
-export function generateMetadata() {
-    const fullHref = 'https://www.infrasity.com/';
-    return {
-        alternates: {
-            canonical: fullHref,
-            languages: {
-                'x-default': fullHref,
-                'en-us': fullHref,
-            },
-        },
-        title: 'Infrasity | Home',
-        description:
-            'Infrasity: Elevate your tech brand with expert content, GTM strategy, and developer marketing. Discover our services for SaaS, startups, and enterprises.',
-    };
 }
