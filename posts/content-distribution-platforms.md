@@ -88,7 +88,7 @@ A content distribution platform provides a space to promote your website content
 
 ### 2. Which Platform Is Commonly Used for Content Marketing Distribution?
 
-For targeting the developer audience, [Dev.to](http://dev.to) is a widely used content distribution platform for B2B SaaS companies.
+For targeting the developer audience, Dev.to is a widely used content distribution platform for B2B SaaS companies.
 
 ### 3. How Can You Refine Your Content Distribution Strategy?
 
