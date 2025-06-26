@@ -1,10 +1,20 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import ContactPage from "@/app/book-a-demo/page";
 import Image from "next/image";
 import { message } from "antd";
 
-const CalendarBooking = ({ onBookingComplete, buttonText }) => {
+const CalendarBooking = ({
+  buttonText = "Book a Meeting",
+  bgGradient = "", // Default background color if no gradient is passed
+  width = "w-40", // Default width
+  height = "h-12", // Default height
+  textSize = "text-sm", // Text size
+  textWeight = "quicksand-semibold", // Text weight
+  borderColor = "#3b82f6", // Default border color
+  onClick,
+}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -190,15 +200,14 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
 
   const openModal = () => {
     setIsModalOpen(true);
-    document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = "15px"; // Prevent layout shift
+    // Prevent body scrolling when modal is open
+    document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    document.body.style.overflow = "";
-    document.body.style.paddingRight = "";
-    resetBooking();
+    // Restore body scrolling when modal is closed
+    document.body.style.overflow = 'unset';
   };
 
   const resetBooking = () => {
@@ -487,32 +496,40 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
 
   return (
     <>
-      <button
-        className="md:inline-flex md:justify-center md:items-center text-sm quicksand-semibold rounded-[5px] before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700  hover:before:-translate-x-40 z-50"
-        onClick={openModal}
-      >
-        {buttonText || "Book a Meeting"}
-      </button>
+       <button
+      className={`
+        md:inline-flex md:justify-center md:items-center 
+        ${textSize} ${textWeight} ${bgGradient ? bgGradient : "bg-[#5F64FF]"} 
+        rounded-[5px] 
+        relative overflow-hidden 
+        ${borderColor ? `border border-[${borderColor}]` : ""} 
+        text-white shadow-2xl transition-all 
+        z-1
+         ${width} ${height}
+        before:ease before:absolute before:right-0 before:top-0 
+        before:h-12 before:w-6 before:translate-x-12 
+        before:rotate-6 before:bg-white before:opacity-10 before:duration-700 
+        hover:before:-translate-x-40
+      `}
+      onClick={openModal}
+    >
+      {buttonText}
+    </button>
 
-      {isModalOpen && (
+      {isModalOpen && typeof window !== "undefined" && ReactDOM.createPortal(
         <div
-          className="fixed inset-0 bg-black bg-opacity-10 z-50"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto"
           onClick={(e) => {
             if (e.target === e.currentTarget) closeModal();
           }}
         >
           <div
-            className="bg-[#0c102e] text-white rounded-xl p-6 relative"
+            className="bg-[#0c102e] text-white rounded-xl p-6 relative overflow-y-auto"
             style={{
               width: "90vw",
               maxWidth: "28rem", // equivalent to max-w-md
               maxHeight: "90vh",
-              overflowY: "auto",
+              // overflowY: "auto",
             }}
           >
             <button
@@ -546,10 +563,10 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
                       height={100}
                     />
                   </div>
-                  Book a Time to Connect with Us
+                  Book a Time to Connect with Us
                 </div>
               )}
-              {step === 2 && "Book a Time to Connect with Us"}
+              {step === 2 && "Book a Time to Connect with Us"}
               {/* {step === 3 && "Complete Your Booking"} */}
               {step === 4 && "Booking Confirmed"}
             </div>
@@ -1001,7 +1018,8 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
