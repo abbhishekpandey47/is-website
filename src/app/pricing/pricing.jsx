@@ -96,8 +96,8 @@ const PricingPage = () => {
                     <div className="bg-gray-900/50 backdrop-blur-sm border border-[#7dffa2] transition-colors rounded-2xl p-8">
                         <div className="mb-8">
                             <h3 className="quicksand-semibold text-2xl text-[#e8bfff] font-bold mb-2">Startup</h3>
-                            <p className="text-[40px] text-white mb-4">For Small teams</p>
-                            <p className="text-sm text-gray-400">Who have to manage their cloud spend continuously</p>
+                            <p className="text-[40px] text-white mb-0">For Small teams</p>
+                        <p className="text-md text-[#bababe]">Who have to manage their cloud spend continuously</p>
                         </div>
                         <div className="bg-white bg-opacity-15 flex-none h-px overflow-hidden relative w-full mb-8"></div>
 
@@ -155,8 +155,8 @@ const PricingPage = () => {
 
                         <div className="mb-8">
                             <h3 className="quicksand-semibold text-[#99e2ff] text-3xl font-bold mb-2">Enterprise</h3>
-                            <p className="text-[40px] text-white mb-4">For Large Organizations</p>
-                            <p className="text-sm text-gray-400">With multiple teams managing and monitoring cloud costs</p>
+                            <p className="text-[40px] text-white mb-1">For Large Organizations</p>
+                            <p className="text-md text-[#bababe]">With multiple teams managing and monitoring cloud costs</p>
                         </div>
                         <div className="bg-white bg-opacity-15 flex-none h-px overflow-hidden relative w-full mb-8"></div>
 
@@ -182,8 +182,9 @@ const PricingPage = () => {
                         {/* <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 transition-opacity duration-300 py-3 rounded-lg font-medium border-0 text-white">
                             Talk to sales
                         </button> */}
+                        <div className="pb-12 pt-16">
                         <CalendarBooking buttonText="Talk to sales" width="w-full" bgGradient="bg-gradient-to-r from-purple-600 to-pink-600" borderColor="" />
-                        <p className="text-xs text-gray-500 mt-4 text-center">Our teams will be in touch with you in a maximum of 48 business hours.</p>
+                        </div>
                     </div>
                 </div>
             </section>
