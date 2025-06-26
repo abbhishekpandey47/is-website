@@ -48,25 +48,26 @@ const PricingPage = () => {
     ];
 
     const startupFeatures = [
-        "Amnic AI",
-        "Cost Analyzer",
-        "Anomaly Detection",
-        "Recommendations",
-        "Kubernetes Visibility",
-        "Save charts & views",
-        "Amortized views",
-        "Unit Economics",
-        "Cost by Tags",
-        "Cost Summary",
-        "Alerts",
-        "and more..."
+        "4 long-form technical blogs/month (with diagrams or code where needed)",
+        "1 SDK guide or integration walkthrough (React/Node.js/Python/etc.)",
+        "SEO-backed topic ideation based on monthly search volume (MSV)",
+        "Developer persona mapping + content format mix (e.g., how-to, comparison, teardown)",
+        "Internal collaboration via Notion or Slack",
+        "Weekly async updates + Google Doc delivery",
+        "Up to 2 revisions/post",
+        "Optional CMS publishing (Markdown or Webflow)",
+        "7–10 day turnaround/post",
+        "1 onboarding call + content roadmap setup",
+        "Support for founder-led POV content (upon request)",
     ];
 
     const enterpriseFeatures = [
-        "Unlimited data retention",
-        "Access to our cost experts",
-        "Design partner status",
-        "Reports"
+        "6–8 technical blogs/month",
+        "2 video walkthroughs/month",
+        "Use case libraries, onboarding docs, SDK examples",
+        "Landing page + feature copy",
+        "Dedicated content owner",
+        "Monthly performance tracking + content calendar"
     ];
 
     return (
@@ -80,8 +81,8 @@ const PricingPage = () => {
                             Find a plan that works
                         </h1>
                         <div className="text-[#b4b4b8] text-lg mb-10">
-                            <p className="text-[#b4b4b8] text-[16px]">One month trial. No credit card needed.</p>
-                            <p className="text-[#b4b4b8] text-[16px]">Get started on your cloud cost observability<br className="hidden md:block" />journey in 5-minutes</p>
+                            <p className="text-[#b4b4b8] text-[16px]">Find a plan that fits your growth stage No upfront commitment. No fluff.</p>
+                            <p className="text-[#b4b4b8] text-[16px]">Start your journey toward developer-first content<br className="hidden md:block" />and GTM clarity — in under 5 minutes.</p>
                         </div>
                         <CalendarBooking width="w-40" />
                     </div>
@@ -90,14 +91,14 @@ const PricingPage = () => {
 
             {/* Pricing Cards */}
             <section className="container mx-auto py-20">
-                <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
 
                     {/* Startup Plan */}
                     <div className="bg-gray-900/50 backdrop-blur-sm border border-[#7dffa2] transition-colors rounded-2xl p-8">
                         <div className="mb-8">
-                            <h3 className="quicksand-semibold text-2xl text-[#e8bfff] font-bold mb-2">Startup</h3>
-                            <p className="text-[40px] text-white mb-0">For Small teams</p>
-                            <p className="text-md text-[#bababe]">Who have to manage their cloud spend continuously</p>
+                            <h3 className="quicksand-semibold text-2xl text-[#e8bfff] font-bold mb-2">Starter Plan</h3>
+                            <p className="text-[40px] text-white mb-1">For early-stage infra, AI, and DevTool startups</p>
+                            <p className="text-md text-[#bababe]">Designed for teams who need developer-focused content to drive sign-ups, not vanity traffic.</p>
                         </div>
                         <div className="bg-white bg-opacity-15 flex-none h-px overflow-hidden relative w-full mb-8"></div>
 
@@ -106,8 +107,8 @@ const PricingPage = () => {
                             <div className="flex space-x-8">
                                 {/* First Column */}
                                 <div className="w-1/2">
-                                    {startupFeatures.slice(0, Math.ceil(startupFeatures.length / 2)).map((feature, index) => (
-                                        <div key={index} className="flex items-center space-x-3 mb-4">
+                                    {startupFeatures.slice(0, 4).map((feature, index) => (
+                                        <div key={index} className="flex items-start space-x-3 mb-4">
                                             <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <svg width="140" height="140" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <rect x="8" y="8" width="104" height="104" rx="32" ry="32" fill="#3a4a5c" stroke="#5a6a7c" stroke-width="1" />
@@ -115,15 +116,15 @@ const PricingPage = () => {
                                                     <path d="M35 60l15 15L85 40" stroke="#7dff9d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
                                                 </svg>
                                             </div>
-                                            <span className="text-gray-300">{feature}</span>
+                                            <span className="text-[14px] text-gray-300">{feature}</span>
                                         </div>
                                     ))}
                                 </div>
 
                                 {/* Second Column */}
                                 <div className="w-1/2">
-                                    {startupFeatures.slice(Math.ceil(startupFeatures.length / 2)).map((feature, index) => (
-                                        <div key={index} className="flex items-center space-x-3 mb-4">
+                                    {startupFeatures.slice(5).map((feature, index) => (
+                                        <div key={index} className="flex items-start space-x-3 mb-4">
                                             <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <rect x="8" y="8" width="104" height="104" rx="32" ry="32" fill="#3a4a5c" stroke="#5a6a7c" stroke-width="1" />
@@ -131,7 +132,7 @@ const PricingPage = () => {
                                                     <path d="M35 60l15 15L85 40" stroke="#7dff9d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
                                                 </svg>
                                             </div>
-                                            <span className="text-gray-300">{feature}</span>
+                                            <span className="text-[14px] text-gray-300">{feature}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -154,14 +155,14 @@ const PricingPage = () => {
                         </div>
 
                         <div className="mb-8">
-                            <h3 className="quicksand-semibold text-[#99e2ff] text-3xl font-bold mb-2">Enterprise</h3>
-                            <p className="text-[40px] text-white mb-1">For Large Organizations</p>
-                            <p className="text-md text-[#bababe]">With multiple teams managing and monitoring cloud costs</p>
+                            <h3 className="quicksand-semibold text-[#99e2ff] text-3xl font-bold mb-2">Scale Plan</h3>
+                            <p className="text-[40px] text-white mb-1">For growing teams who need DevRel-style content at volume</p>
+                            <p className="text-md text-[#bababe]">When you’re ready to scale content across docs, demos, and GTM efforts.</p>
                         </div>
                         <div className="bg-white bg-opacity-15 flex-none h-px overflow-hidden relative w-full mb-8"></div>
 
                         <div className="mb-6">
-                            <h4 className="text-lg font-semibold text-purple-400 mb-4">Everything in Startup</h4>
+                            <h4 className="text-lg font-semibold text-purple-400 mb-4">What you get:</h4>
                         </div>
 
                         <div className="space-y-4 mb-8">
@@ -192,8 +193,8 @@ const PricingPage = () => {
             {/* Testimonials Section - Custom 3-Column Layout with Vertical Centering */}
             <section className="container mx-auto px-6 py-20">
                 <div className="text-center mb-16">
-                    <p className="text-gray-400 mb-4">Trusted source of truth for DevOps industry leaders</p>
-                    <h2 className="text-4xl md:text-5xl font-bold">Hear what they have to say</h2>
+                    <p className="text-gray-400 mb-4">Why teams backed by YC, Boldstart, and Eclipse trust Infrasity</p>
+                    <h2 className="text-2xl md:text-3xl font-bold">Here’s how we help them ship content fast — and with depth.</h2>
                 </div>
 
                 {/* Desktop Layout: Left-Middle-Right with vertical centering */}
@@ -214,7 +215,6 @@ const PricingPage = () => {
                     {/* Left Column - 1 testimonial (vertically centered) */}
                     <div className="flex items-center z-50">
                         <div className="w-[95%]">
-
                             <div className="bg-[#2a2d5a]/30 border border-purple-500/30  backdrop-blur-sm rounded-2xl p-6 transition-colors duration-300">
                                 <div className="flex items-center mb-4">
                                     <img
@@ -230,13 +230,15 @@ const PricingPage = () => {
                                     </div>
                                 </div>
 
-                               <p 
-  className="text-[#DAD1F1] leading-relaxed text-left" 
-  dangerouslySetInnerHTML={{ __html: testimonials[0].highlight.reduce((acc, phrase) => {
-    const regex = new RegExp(`(${phrase})`, 'gi'); // Case-insensitive matching for each phrase
-    return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
-  }, testimonials[0].quote) }}
-/>
+                                <p
+                                    className="text-[#DAD1F1] leading-relaxed text-left"
+                                    dangerouslySetInnerHTML={{
+                                        __html: testimonials[0].highlight.reduce((acc, phrase) => {
+                                            const regex = new RegExp(`(${phrase})`, 'gi'); // Case-insensitive matching for each phrase
+                                            return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
+                                        }, testimonials[0].quote)
+                                    }}
+                                />
 
                             </div>
                         </div>
@@ -260,13 +262,15 @@ const PricingPage = () => {
                                     </div>
                                 </div>
 
-                               <p 
-  className="text-[#DAD1F1] leading-relaxed text-left" 
-  dangerouslySetInnerHTML={{ __html: testimonials[1].highlight.reduce((acc, phrase) => {
-    const regex = new RegExp(`(${phrase})`, 'gi'); // Case-insensitive matching for each phrase
-    return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
-  }, testimonials[1].quote) }}
-/>
+                                <p
+                                    className="text-[#DAD1F1] leading-relaxed text-left"
+                                    dangerouslySetInnerHTML={{
+                                        __html: testimonials[1].highlight.reduce((acc, phrase) => {
+                                            const regex = new RegExp(`(${phrase})`, 'gi'); // Case-insensitive matching for each phrase
+                                            return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
+                                        }, testimonials[1].quote)
+                                    }}
+                                />
 
                             </div>
                         )}
@@ -287,13 +291,15 @@ const PricingPage = () => {
                                     </div>
                                 </div>
 
-                                <p 
-  className="text-[#DAD1F1] leading-relaxed text-left" 
-  dangerouslySetInnerHTML={{ __html: testimonials[2].highlight.reduce((acc, phrase) => {
-    const regex = new RegExp(`(${phrase})`, 'gi'); 
-    return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
-  }, testimonials[2].quote) }}
-/>
+                                <p
+                                    className="text-[#DAD1F1] leading-relaxed text-left"
+                                    dangerouslySetInnerHTML={{
+                                        __html: testimonials[2].highlight.reduce((acc, phrase) => {
+                                            const regex = new RegExp(`(${phrase})`, 'gi');
+                                            return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
+                                        }, testimonials[2].quote)
+                                    }}
+                                />
 
                             </div>
                         )}
@@ -318,13 +324,15 @@ const PricingPage = () => {
                                         </div>
                                     </div>
 
-                                   <p 
-  className="text-[#DAD1F1] leading-relaxed text-left" 
-  dangerouslySetInnerHTML={{ __html: testimonials[3].highlight.reduce((acc, phrase) => {
-    const regex = new RegExp(`(${phrase})`, 'gi'); 
-    return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
-  }, testimonials[3].quote) }}
-/>
+                                    <p
+                                        className="text-[#DAD1F1] leading-relaxed text-left"
+                                        dangerouslySetInnerHTML={{
+                                            __html: testimonials[3].highlight.reduce((acc, phrase) => {
+                                                const regex = new RegExp(`(${phrase})`, 'gi');
+                                                return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
+                                            }, testimonials[3].quote)
+                                        }}
+                                    />
 
                                 </div>
                             )}
