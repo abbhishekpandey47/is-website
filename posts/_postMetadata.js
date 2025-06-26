@@ -621,7 +621,7 @@ let postMetaData = [
         metatitle: "LLMs.txt: A New Standard for Making Your Website LLM-friendly",
         slug: "llms.txt",
         description: "LLMs.txt has brought advancement in the LLM landscape. Explore how it has made a difference, why it is important, and how to generate and upload it to your repo.",
-        ogImage: "/PostImages/llms.txt/L1.png",
+        ogImage: "/PostImages/llms.txt/L1.webp",
         publishedOn: "2025-04-01",
         authorId: "author0004",
         category: "Informational",
