@@ -59,19 +59,19 @@ While the process is similar on each site, here's a step-by-step process for gen
 - Visit [Firecrawl.dev](https://www.firecrawl.dev/app) and create an account.
 - You will see an API key on the right. Copy it as it will be required during the generation process.
 
-![llms.txt - api key](/PostImages/llms.txt/L2.webp)
+![firedcrawl.dev api key for generating llms.txt](/PostImages/llms.txt/L2.webp)
 
 - Visit the [LLMs.txt generator](https://llmstxt.firecrawl.dev/) and enter the website's URL. 
 
-![llms.txt - website](/PostImages/llms.txt/L6.webp)
+![enter your website url in firecrawl.dev to generate llms.txt](/PostImages/llms.txt/L6.webp)
 
 - Now, enter the Firecrawl API key that you copied and click on "Generate." It will take a few minutes to create an LLMs.txt file for your website. Additionally, you can opt to generate an LLMs-full.txt file based on your preferences.
 
-![llms.txt - firecrawl api key](/PostImages/llms.txt/L3.webp)
+![paste firecrawl.dev api key to create llms.txt file](/PostImages/llms.txt/L3.webp)
 
 - Copy the generated LLMs.txt file to upload it to GitHub.
 
-![llms.txt file](/PostImages/llms.txt/L4.webp)
+![llms.txt file is generated and ready to be copy pasted](/PostImages/llms.txt/L4.webp)
 
 ## How to Upload the LLMs.txt file?
 
@@ -81,7 +81,7 @@ Now that you have generated the LLMs.txt or LLMs-full.txt file, let's understand
 - Locate the root directory and create the `llms.txt` file in the root of the repository.
 - Paste the LLMs.txt or LLMs-full.txt content in your new file.
 
-![llms.txt - github](/PostImages/llms.txt/L5.webp)
+![paste the LLMs.txt in your new file.](/PostImages/llms.txt/L5.webp)
 
 - Commit changes to your repository and check if it's live after triggering it.
 
