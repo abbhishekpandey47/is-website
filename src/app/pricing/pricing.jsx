@@ -66,7 +66,7 @@ const PricingPage = () => {
         "2 video walkthroughs/month",
         "Use case libraries, onboarding docs, SDK examples",
         "Landing page + feature copy",
-        "Dedicated content owner",
+        "Dedicated content strategist ",
         "Monthly performance tracking + content calendar"
     ];
 
@@ -78,10 +78,9 @@ const PricingPage = () => {
                     <div className="max-w-4xl mx-auto">
                         <p className="text-[#d6daff] font-medium tracking-wider uppercase text-sm mb-6">PRICING</p>
                         <h1 className="quicksand-bold text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                            Find a plan that works
+                            Find a plan that fits your growth stage No upfront commitment. No fluff.
                         </h1>
                         <div className="text-[#b4b4b8] text-lg mb-10">
-                            <p className="text-[#b4b4b8] text-[16px]">Find a plan that fits your growth stage No upfront commitment. No fluff.</p>
                             <p className="text-[#b4b4b8] text-[16px]">Start your journey toward developer-first content<br className="hidden md:block" />and GTM clarity — in under 5 minutes.</p>
                         </div>
                         <CalendarBooking width="w-40" />
@@ -97,7 +96,7 @@ const PricingPage = () => {
                     <div className="bg-gray-900/50 backdrop-blur-sm border border-[#7dffa2] transition-colors rounded-2xl p-8">
                         <div className="mb-8">
                             <h3 className="quicksand-semibold text-2xl text-[#e8bfff] font-bold mb-2">Starter Plan</h3>
-                            <p className="text-[40px] text-white mb-1">For early-stage infra, AI, and DevTool startups</p>
+                            <p className="text-[40px] leading-[50px] text-white mb-6">For early-stage infra, AI, and DevTool startups</p>
                             <p className="text-md text-[#bababe]">Designed for teams who need developer-focused content to drive sign-ups, not vanity traffic.</p>
                         </div>
                         <div className="bg-white bg-opacity-15 flex-none h-px overflow-hidden relative w-full mb-8"></div>
@@ -145,7 +144,7 @@ const PricingPage = () => {
                         </button> */}
                         <CalendarBooking buttonText="Sign up" width="w-full" bgGradient="bg-gradient-to-r from-gray-800 to-gray-800" borderColor="" />
 
-                        <p className="text-xs text-gray-500 mt-4 text-center">Get a 30-day POC to test Amnic for your business</p>
+                        <p className="text-xs text-gray-500 mt-4 text-center">Get a 30-day POC to test Infrasity  for your business</p>
                     </div>
 
                     {/* Enterprise Plan */}
@@ -156,7 +155,7 @@ const PricingPage = () => {
 
                         <div className="mb-8">
                             <h3 className="quicksand-semibold text-[#99e2ff] text-3xl font-bold mb-2">Scale Plan</h3>
-                            <p className="text-[40px] text-white mb-1">For growing teams who need DevRel-style content at volume</p>
+                            <p className="text-[40px] leading-[50px] text-white mb-6">For growing teams who need DevRel-style content at volume</p>
                             <p className="text-md text-[#bababe]">When you’re ready to scale content across docs, demos, and GTM efforts.</p>
                         </div>
                         <div className="bg-white bg-opacity-15 flex-none h-px overflow-hidden relative w-full mb-8"></div>
