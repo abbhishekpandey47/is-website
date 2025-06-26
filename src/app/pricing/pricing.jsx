@@ -83,7 +83,7 @@ const PricingPage = () => {
                             <p className="text-[#b4b4b8] text-[16px]">One month trial. No credit card needed.</p>
                             <p className="text-[#b4b4b8] text-[16px]">Get started on your cloud cost observability<br className="hidden md:block" />journey in 5-minutes</p>
                         </div>
-                        <CalendarBooking />
+                        <CalendarBooking width="w-40" />
                     </div>
                 </div>
             </section>
@@ -96,7 +96,7 @@ const PricingPage = () => {
                     <div className="bg-gray-900/50 backdrop-blur-sm border border-[#7dffa2] transition-colors rounded-2xl p-8">
                         <div className="mb-8">
                             <h3 className="quicksand-semibold text-2xl text-[#e8bfff] font-bold mb-2">Startup</h3>
-                            <p className="text-lg text-white mb-4">For Small teams</p>
+                            <p className="text-[40px] text-white mb-4">For Small teams</p>
                             <p className="text-sm text-gray-400">Who have to manage their cloud spend continuously</p>
                         </div>
                         <div className="bg-white bg-opacity-15 flex-none h-px overflow-hidden relative w-full mb-8"></div>
@@ -139,21 +139,23 @@ const PricingPage = () => {
                         </div>
 
 
-                        <button className="w-full bg-gray-800 hover:bg-gray-700 transition-colors duration-200 py-3 rounded-lg font-medium border-0 text-white">
+                        {/* <button className="w-full bg-gray-800 hover:bg-gray-700 transition-colors duration-200 py-3 rounded-lg font-medium border-0 text-white">
                             Sign up
-                        </button>
+                        </button> */}
+                        <CalendarBooking buttonText="Sign up" width="w-full" bgGradient="bg-gradient-to-r from-gray-800 to-gray-800" borderColor="" />
+
                         <p className="text-xs text-gray-500 mt-4 text-center">Get a 30-day POC to test Amnic for your business</p>
                     </div>
 
                     {/* Enterprise Plan */}
-                    <div className="bg-gray-900/50 backdrop-blur-sm border border-purple-500/50 rounded-2xl p-8 hover:border-purple-500 transition-colors duration-300 relative">
+                    <div className="bg-gray-900/50 backdrop-blur-sm border border-purple-500/50 rounded-2xl p-8 transition-colors duration-300 relative">
                         <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                             <span className="bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-1 rounded-full text-sm font-medium">Popular</span>
                         </div>
 
                         <div className="mb-8">
                             <h3 className="quicksand-semibold text-[#99e2ff] text-3xl font-bold mb-2">Enterprise</h3>
-                            <p className="text-lg text-white mb-4">For Large Organizations</p>
+                            <p className="text-[40px] text-white mb-4">For Large Organizations</p>
                             <p className="text-sm text-gray-400">With multiple teams managing and monitoring cloud costs</p>
                         </div>
                         <div className="bg-white bg-opacity-15 flex-none h-px overflow-hidden relative w-full mb-8"></div>
@@ -172,14 +174,15 @@ const PricingPage = () => {
                                             <path d="M35 60l15 15L85 40" stroke="#7dff9d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
                                         </svg>
                                     </div>
-                                    <span className="text-gray-300">{feature}</span>
+                                    <span className="text-[16px] text-gray-300">{feature}</span>
                                 </div>
                             ))}
                         </div>
 
-                        <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 transition-opacity duration-300 py-3 rounded-lg font-medium border-0 text-white">
+                        {/* <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 transition-opacity duration-300 py-3 rounded-lg font-medium border-0 text-white">
                             Talk to sales
-                        </button>
+                        </button> */}
+                        <CalendarBooking buttonText="Talk to sales" width="w-full" bgGradient="bg-gradient-to-r from-purple-600 to-pink-600" borderColor="" />
                         <p className="text-xs text-gray-500 mt-4 text-center">Our teams will be in touch with you in a maximum of 48 business hours.</p>
                     </div>
                 </div>
@@ -198,7 +201,7 @@ const PricingPage = () => {
                     <div className="flex items-center min-h-full">
                         <div className="w-full">
 
-                            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 transition-colors duration-300">
+                            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 transition-colors duration-300">
                                 <div className="text-left mb-6">
                                     <img
                                         src={testimonials[0].imageUrl}
