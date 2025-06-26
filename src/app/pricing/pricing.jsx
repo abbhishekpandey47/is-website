@@ -97,7 +97,7 @@ const PricingPage = () => {
                         <div className="mb-8">
                             <h3 className="quicksand-semibold text-2xl text-[#e8bfff] font-bold mb-2">Startup</h3>
                             <p className="text-[40px] text-white mb-0">For Small teams</p>
-                        <p className="text-md text-[#bababe]">Who have to manage their cloud spend continuously</p>
+                            <p className="text-md text-[#bababe]">Who have to manage their cloud spend continuously</p>
                         </div>
                         <div className="bg-white bg-opacity-15 flex-none h-px overflow-hidden relative w-full mb-8"></div>
 
@@ -174,7 +174,7 @@ const PricingPage = () => {
                                             <path d="M35 60l15 15L85 40" stroke="#7dff9d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
                                         </svg>
                                     </div>
-                                    <span className="text-[16px] text-gray-300">{feature}</span>
+                                    <span className="text-[16px] text-[#DAD1F1]">{feature}</span>
                                 </div>
                             ))}
                         </div>
@@ -183,7 +183,7 @@ const PricingPage = () => {
                             Talk to sales
                         </button> */}
                         <div className="pb-12 pt-16">
-                        <CalendarBooking buttonText="Talk to sales" width="w-full" bgGradient="bg-gradient-to-r from-purple-600 to-pink-600" borderColor="" />
+                            <CalendarBooking buttonText="Talk to sales" width="w-full" bgGradient="bg-gradient-to-r from-purple-600 to-pink-600" borderColor="" />
                         </div>
                     </div>
                 </div>
@@ -197,99 +197,135 @@ const PricingPage = () => {
                 </div>
 
                 {/* Desktop Layout: Left-Middle-Right with vertical centering */}
-<div className="hidden lg:grid lg:grid-cols-3 gap-6 max-w-7xl mx-auto relative">
-                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10">
-    {/* Outer glow layer */}
-    <div className="w-[1000px] h-[1000px] rounded-full blur-[50px] opacity-40" 
-         style={{background: 'radial-gradient(circle, #7C3AED 0%, #6D28D9 25%, #5B21B6 50%, rgba(91, 33, 182, 0.3) 75%, transparent 100%)'}}></div>
-    
-    {/* Soft middle layer - much lighter */}
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full blur-[60px] opacity-25" 
-         style={{background: 'radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, rgba(124, 58, 237, 0.4) 40%, rgba(124, 58, 237, 0.2) 70%, transparent 100%)'}}></div>
-    
-    {/* Very soft inner glow */}
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full blur-[40px] opacity-30" 
-         style={{background: 'radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, rgba(147, 51, 234, 0.3) 30%, rgba(147, 51, 234, 0.1) 60%, transparent 100%)'}}></div>
-    
-    {/* Gentle center highlight */}
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] rounded-full blur-[20px] opacity-20" 
-         style={{background: 'radial-gradient(circle, rgba(192, 132, 252, 0.4) 0%, rgba(168, 85, 247, 0.2) 50%, transparent 100%)'}}></div>
-</div>
-                    {/* Left Column - 1 testimonial (vertically centered) */}
-                    <div className="flex items-center min-h-full">
-                        <div className="w-full">
+                <div className="hidden lg:grid lg:grid-cols-3 gap-0 max-w-7xl mx-auto relative">
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10">
+                        <div className="w-[1000px] h-[1000px] rounded-full blur-[50px] opacity-40"
+                            style={{ background: 'radial-gradient(circle, #3e2189 0%, #3e2189 25%, #3e2189 50%, rgba(91, 33, 182, 0.3) 75%, transparent 100%)' }}></div>
 
-                            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 transition-colors duration-300">
-                                <div className="text-left mb-6">
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full blur-[60px] opacity-25"
+                            style={{ background: 'radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, rgba(124, 58, 237, 0.4) 30%, rgba(124, 58, 237, 0.2) 60%, transparent 100%)' }}></div>
+
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full blur-[40px] opacity-30"
+                            style={{ background: 'radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, rgba(147, 51, 234, 0.3) 30%, rgba(147, 51, 234, 0.1) 60%, transparent 100%)' }}></div>
+
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] rounded-full blur-[20px] opacity-20"
+                            style={{ background: 'radial-gradient(circle, rgba(192, 132, 252, 0.4) 0%, rgba(168, 85, 247, 0.2) 50%, transparent 100%)' }}></div>
+                    </div>
+                    {/* Left Column - 1 testimonial (vertically centered) */}
+                    <div className="flex items-center z-50">
+                        <div className="w-[95%]">
+
+                            <div className="bg-[#2a2d5a]/30 border border-purple-500/30  backdrop-blur-sm rounded-2xl p-6 transition-colors duration-300">
+                                <div className="flex items-center mb-4">
                                     <img
                                         src={testimonials[0].imageUrl}
                                         alt={testimonials[0].name}
-                                        className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-purple-500/30 z-40"
+                                        className="w-16 h-16 rounded-full object-cover border-2 border-purple-500/30 mr-4"
                                     />
-                                    <h4 className="font-semibold text-white">{testimonials[0].name}</h4>
-                                    <p className="text-sm text-gray-400">{testimonials[0].title}, {testimonials[0].company}</p>
+                                    <div className="text-left">
+                                        <h4 className="font-semibold text-white">{testimonials[0].name}</h4>
+                                        <p className="text-sm text-gray-400">
+                                            {testimonials[0].title}, {testimonials[0].company}
+                                        </p>
+                                    </div>
                                 </div>
-                                <p className="text-gray-300 text-sm leading-relaxed text-left">
-                                    "{testimonials[0].quote}"
-                                </p>
+
+                               <p 
+  className="text-[#DAD1F1] leading-relaxed text-left" 
+  dangerouslySetInnerHTML={{ __html: testimonials[0].highlight.reduce((acc, phrase) => {
+    const regex = new RegExp(`(${phrase})`, 'gi'); // Case-insensitive matching for each phrase
+    return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
+  }, testimonials[0].quote) }}
+/>
+
                             </div>
                         </div>
                     </div>
 
                     {/* Middle Column - 2 testimonials */}
-                    <div className="space-y-6">
+                    <div className="space-y-4 z-50">
                         {testimonials[1] && (
-                            <div className="bg-gray-900/50 backdrop-blur-sm border rounded-2xl p-8 border-purple-500/50 transition-colors duration-300">
-                                <div className="text-center mb-6 z-50">
+                            <div className="w-[95%] bg-[#2a2d5a]/30 border rounded-2xl p-8 border-purple-500/30 transition-colors duration-300">
+                                <div className="flex items-center justify-left mb-4 z-50">
                                     <img
                                         src={testimonials[1].imageUrl}
                                         alt={testimonials[1].name}
-                                        className="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-purple-500/30 z-40"
+                                        className="w-16 h-16 rounded-full object-cover border-2 border-purple-500/30 mr-4"
                                     />
-                                    <h4 className="font-semibold text-white">{testimonials[1].name}</h4>
-                                    <p className="text-sm text-gray-400">{testimonials[1].title}, {testimonials[1].company}</p>
+                                    <div className="text-left">
+                                        <h4 className="font-semibold text-white">{testimonials[1].name}</h4>
+                                        <p className="text-sm text-gray-400">
+                                            {testimonials[1].title}, {testimonials[1].company}
+                                        </p>
+                                    </div>
                                 </div>
-                                <p className="text-gray-300 leading-relaxed text-center">
-                                    "{testimonials[1].quote}"
-                                </p>
+
+                               <p 
+  className="text-[#DAD1F1] leading-relaxed text-left" 
+  dangerouslySetInnerHTML={{ __html: testimonials[1].highlight.reduce((acc, phrase) => {
+    const regex = new RegExp(`(${phrase})`, 'gi'); // Case-insensitive matching for each phrase
+    return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
+  }, testimonials[1].quote) }}
+/>
+
                             </div>
                         )}
 
                         {testimonials[2] && (
-                            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 hover:border-purple-500/50 transition-colors duration-300">
-                                <div className="text-center mb-6 z-50">
+                            <div className="w-[95%] bg-[#2a2d5a]/30 border border-purple-500/30  backdrop-blur-sm rounded-2xl p-8 transition-colors duration-300">
+                                <div className="flex items-center justify-left mb-4 z-50">
                                     <img
                                         src={testimonials[2].imageUrl}
                                         alt={testimonials[2].name}
-                                        className="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-purple-500/30"
+                                        className="w-16 h-16 rounded-full object-cover border-2 border-purple-500/30 mr-4"
                                     />
-                                    <h4 className="font-semibold text-white">{testimonials[2].name}</h4>
-                                    <p className="text-sm text-gray-400">{testimonials[2].title}, {testimonials[2].company}</p>
+                                    <div className="text-left">
+                                        <h4 className="font-semibold text-white">{testimonials[2].name}</h4>
+                                        <p className="text-sm text-gray-400">
+                                            {testimonials[2].title}, {testimonials[2].company}
+                                        </p>
+                                    </div>
                                 </div>
-                                <p className="text-gray-300 leading-relaxed text-center">
-                                    "{testimonials[2].quote}"
-                                </p>
+
+                                <p 
+  className="text-[#DAD1F1] leading-relaxed text-left" 
+  dangerouslySetInnerHTML={{ __html: testimonials[2].highlight.reduce((acc, phrase) => {
+    const regex = new RegExp(`(${phrase})`, 'gi'); 
+    return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
+  }, testimonials[2].quote) }}
+/>
+
                             </div>
                         )}
                     </div>
 
                     {/* Right Column - 1 testimonial (vertically centered) */}
-                    <div className="flex items-center">
-                        <div className="w-full">
+                    <div className="flex items-center z-50">
+                        <div className="w-[95%]">
                             {testimonials[3] && (
-                                <div className="bg-gray-900/50 backdrop-blur-sm border rounded-2xl p-6 border-purple-500/50 transition-colors duration-300">
-                                    <div className="text-left mb-6">
+                                <div className="bg-[#2a2d5a]/30 border border-purple-500/30 backdrop-blur-sm rounded-2xl p-6 transition-colors duration-300">
+                                    <div className="flex items-center mb-4">
                                         <img
                                             src={testimonials[3].imageUrl}
                                             alt={testimonials[3].name}
-                                            className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-purple-500/30 z-40"
+                                            className="w-16 h-16 rounded-full object-cover border-2 border-purple-500/30 mr-4"
                                         />
-                                        <h4 className="font-semibold text-white">{testimonials[3].name}</h4>
-                                        <p className="text-sm text-gray-400">{testimonials[3].title}, {testimonials[3].company}</p>
+                                        <div className="text-left">
+                                            <h4 className="font-semibold text-white">{testimonials[3].name}</h4>
+                                            <p className="text-sm text-gray-400">
+                                                {testimonials[3].title}, {testimonials[3].company}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <p className="text-gray-300 text-sm leading-relaxed text-left">
-                                        "{testimonials[3].quote}"
-                                    </p>
+
+                                   <p 
+  className="text-[#DAD1F1] leading-relaxed text-left" 
+  dangerouslySetInnerHTML={{ __html: testimonials[3].highlight.reduce((acc, phrase) => {
+    const regex = new RegExp(`(${phrase})`, 'gi'); 
+    return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
+  }, testimonials[3].quote) }}
+/>
+
                                 </div>
                             )}
                         </div>
@@ -300,16 +336,21 @@ const PricingPage = () => {
                 <div className="lg:hidden space-y-6">
                     {testimonials.map((testimonial) => (
                         <div key={testimonial.id} className="bg-gray-900/50 backdrop-blur-sm border rounded-2xl p-6 hover:border-purple-500/50 transition-colors duration-300">
-                            <div className="text-center mb-6">
+                            <div className="flex items-left justify-left mb-6">
                                 <img
                                     src={testimonial.imageUrl}
                                     alt={testimonial.name}
-                                    className="w-16 h-16 rounded-full mx-auto mb-4 object-cover border-2 border-purple-500/30"
+                                    className="w-16 h-16 rounded-full object-cover border-2 border-purple-500/30 mr-4"
                                 />
-                                <h4 className="font-semibold text-white">{testimonial.name}</h4>
-                                <p className="text-sm text-gray-400">{testimonial.title}, {testimonial.company}</p>
+                                <div className="text-left">
+                                    <h4 className="font-semibold text-white">{testimonial.name}</h4>
+                                    <p className="text-sm text-gray-400">
+                                        {testimonial.title}, {testimonial.company}
+                                    </p>
+                                </div>
                             </div>
-                            <p className="text-gray-300 text-sm leading-relaxed text-center">
+
+                            <p className="text-gray-300 text-sm leading-relaxed text-left">
                                 "{testimonial.quote}"
                             </p>
                         </div>
