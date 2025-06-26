@@ -197,17 +197,34 @@ const PricingPage = () => {
                 </div>
 
                 {/* Desktop Layout: Left-Middle-Right with vertical centering */}
-                <div className="hidden lg:grid lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+<div className="hidden lg:grid lg:grid-cols-3 gap-6 max-w-7xl mx-auto relative">
+                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10">
+    {/* Outer glow layer */}
+    <div className="w-[1000px] h-[1000px] rounded-full blur-[50px] opacity-40" 
+         style={{background: 'radial-gradient(circle, #7C3AED 0%, #6D28D9 25%, #5B21B6 50%, rgba(91, 33, 182, 0.3) 75%, transparent 100%)'}}></div>
+    
+    {/* Soft middle layer - much lighter */}
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full blur-[60px] opacity-25" 
+         style={{background: 'radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, rgba(124, 58, 237, 0.4) 40%, rgba(124, 58, 237, 0.2) 70%, transparent 100%)'}}></div>
+    
+    {/* Very soft inner glow */}
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full blur-[40px] opacity-30" 
+         style={{background: 'radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, rgba(147, 51, 234, 0.3) 30%, rgba(147, 51, 234, 0.1) 60%, transparent 100%)'}}></div>
+    
+    {/* Gentle center highlight */}
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] rounded-full blur-[20px] opacity-20" 
+         style={{background: 'radial-gradient(circle, rgba(192, 132, 252, 0.4) 0%, rgba(168, 85, 247, 0.2) 50%, transparent 100%)'}}></div>
+</div>
                     {/* Left Column - 1 testimonial (vertically centered) */}
                     <div className="flex items-center min-h-full">
                         <div className="w-full">
 
-                            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 transition-colors duration-300">
+                            <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 transition-colors duration-300">
                                 <div className="text-left mb-6">
                                     <img
                                         src={testimonials[0].imageUrl}
                                         alt={testimonials[0].name}
-                                        className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-purple-500/30"
+                                        className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-purple-500/30 z-40"
                                     />
                                     <h4 className="font-semibold text-white">{testimonials[0].name}</h4>
                                     <p className="text-sm text-gray-400">{testimonials[0].title}, {testimonials[0].company}</p>
@@ -222,12 +239,12 @@ const PricingPage = () => {
                     {/* Middle Column - 2 testimonials */}
                     <div className="space-y-6">
                         {testimonials[1] && (
-                            <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 hover:border-purple-500/50 transition-colors duration-300">
-                                <div className="text-center mb-6">
+                            <div className="bg-gray-900/50 backdrop-blur-sm border rounded-2xl p-8 border-purple-500/50 transition-colors duration-300">
+                                <div className="text-center mb-6 z-50">
                                     <img
                                         src={testimonials[1].imageUrl}
                                         alt={testimonials[1].name}
-                                        className="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-purple-500/30"
+                                        className="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-purple-500/30 z-40"
                                     />
                                     <h4 className="font-semibold text-white">{testimonials[1].name}</h4>
                                     <p className="text-sm text-gray-400">{testimonials[1].title}, {testimonials[1].company}</p>
@@ -240,7 +257,7 @@ const PricingPage = () => {
 
                         {testimonials[2] && (
                             <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 hover:border-purple-500/50 transition-colors duration-300">
-                                <div className="text-center mb-6">
+                                <div className="text-center mb-6 z-50">
                                     <img
                                         src={testimonials[2].imageUrl}
                                         alt={testimonials[2].name}
@@ -257,15 +274,15 @@ const PricingPage = () => {
                     </div>
 
                     {/* Right Column - 1 testimonial (vertically centered) */}
-                    <div className="flex items-center min-h-full">
+                    <div className="flex items-center">
                         <div className="w-full">
                             {testimonials[3] && (
-                                <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 transition-colors duration-300">
+                                <div className="bg-gray-900/50 backdrop-blur-sm border rounded-2xl p-6 border-purple-500/50 transition-colors duration-300">
                                     <div className="text-left mb-6">
                                         <img
                                             src={testimonials[3].imageUrl}
                                             alt={testimonials[3].name}
-                                            className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-purple-500/30"
+                                            className="w-16 h-16 rounded-full mb-4 object-cover border-2 border-purple-500/30 z-40"
                                         />
                                         <h4 className="font-semibold text-white">{testimonials[3].name}</h4>
                                         <p className="text-sm text-gray-400">{testimonials[3].title}, {testimonials[3].company}</p>
@@ -282,7 +299,7 @@ const PricingPage = () => {
                 {/* Mobile Layout - Single Column */}
                 <div className="lg:hidden space-y-6">
                     {testimonials.map((testimonial) => (
-                        <div key={testimonial.id} className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 transition-colors duration-300">
+                        <div key={testimonial.id} className="bg-gray-900/50 backdrop-blur-sm border rounded-2xl p-6 hover:border-purple-500/50 transition-colors duration-300">
                             <div className="text-center mb-6">
                                 <img
                                     src={testimonial.imageUrl}
