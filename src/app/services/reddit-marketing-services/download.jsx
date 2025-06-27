@@ -41,7 +41,7 @@ export default function DownloadPDF() {
                 setIsEmailSending(false);
                 setIsSubmitted(true);
 
-                window.open("https://drive.google.com/uc?export=download&id=1QTRmSUnIszi4Xi_fn82LpAbQGyabdwkl", "_blank");
+                window.location.href = "https://drive.google.com/uc?export=download&id=1bX9OsrZd2DltBL-p1aLhhUPIqwVW8au7";
             } else {
                 throw new Error("Received unsuccessful response from saveUserData");
             }
