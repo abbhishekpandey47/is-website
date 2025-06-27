@@ -112,7 +112,7 @@ export default function DownloadPDF() {
                                     onClick={handlePopup}
                                     className="flex items-center border border-white justify-between px-6 py-3 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 ease-in-out transform hover:scale-105"
                                 >
-                                    <span className="mr-3">Download PlaybookFlow</span>
+                                    <span className="mr-3">Download Playbook</span>
                                     <svg
                                         width="20"
                                         height="20"
@@ -193,10 +193,10 @@ export default function DownloadPDF() {
                             {!isSubmitted ? (
                                 <>
                                     <h3 className="text-xl font-medium text-gray-100 mb-4">
-                                        Download Full Report
+                                        Download Playbook
                                     </h3>
                                     <p className="text-gray-300 mb-6">
-                                        Enter your email address to receive your report.
+                                        Enter your email address to Download Playbook.
                                     </p>
 
                                     <form onSubmit={handleSubmit}>
