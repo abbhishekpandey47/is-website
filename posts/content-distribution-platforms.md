@@ -1,7 +1,7 @@
 ## TL;DR
 
 * Best content distribution platforms include Dev.to, Daily.dev, Hacker News, Substack, and Medium.  
-* Daily.dev and [Dev.to](http://dev.to) are developer-focused content distribution platforms for B2B SaaS companies.  
+* Daily.dev and Dev.to are developer-focused content distribution platforms for B2B SaaS companies.  
 * However, Hacker News, Substack, and Medium offer a broader, semi-tech audience. 
 
 If you are leveraging content marketing to promote your SaaS product, you need to focus not only on creating high-quality content but also on distributing it efficaciously across different platforms. Don't just rely on getting traffic by ranking on the search engine result pages (SERP). While ranking is important, it's not the only way to drive traffic and build visibility. The key to reaching your target audience and boosting product adoption lies in distributing your content across multiple channels where your potential customers are already engaged.  
