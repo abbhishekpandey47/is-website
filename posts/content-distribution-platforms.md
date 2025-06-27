@@ -12,7 +12,7 @@ By sharing your technical blogs on content distribution platforms like Dev.to, H
 
 Content distribution is the process of sharing your content across various platforms to reach a broader audience or target specific user groups. Let's say you have developed a B2B SaaS product, which is an observability platform, and you have written an article on "Best Practices for Monitoring Microservices in Distributed Systems."   
 
-In order to utilize the same article across different content distribution platforms, like [Dev.to](http://dev.to), Hacker News, Daily.dev, and Substack, you can repurpose it and target your buyer personas. These personas could be Platform Engineers, DevOps engineers, and Site Reliability Engineers (SREs) who are looking for solutions to optimize system performance. However, choosing the right content distribution platforms is also important. Therefore, we have discussed them below.
+In order to utilize the same article across different content distribution platforms, like Dev.to, Hacker News, Daily.dev, and Substack, you can repurpose it and target your buyer personas. These personas could be Platform Engineers, DevOps engineers, and Site Reliability Engineers (SREs) who are looking for solutions to optimize system performance. However, choosing the right content distribution platforms is also important. Therefore, we have discussed them below.
 
 ## Here Are The 5 Content Distribution Platforms
 
