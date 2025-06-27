@@ -16,7 +16,7 @@ I'm sharing these Reddit marketing strategy tips that we follow while helping ou
 
 ### 1. Identify Your Competitors
 
-Before you start building your presence on Reddit, the key step is to list down at least three competitors who have a similar SaaS product and target the same kind of audience as you do. Start by searching keywords that specify your product on search engines or gathering information through review sites like G2, Capterra, or Trustpilot. You can also leverage tools like Ocean.io to discover lookalike companies in your domain.
+Before you start building your presence on Reddit, the key step is to list down at least three competitors who have a similar SaaS product and target the same kind of audience as you do. Start by searching keywords that specify your product on search engines or gathering information through review sites like **G2, Capterra, or Trustpilot**. You can also leverage tools **like Ocean.io** to discover lookalike companies in your domain.
 
 **Find Their Reddit Presence (Official vs. Unofficial)**
 
@@ -43,6 +43,7 @@ If that's the case, search if they are discussed within broader industry subredd
 ![post on subreddit about ipd soultions, a reddit marketing strategy](/PostImages/reddit-marketing-strategy/r4.webp) 
 
 For instance, you can observe here that a developer shared a list of Terraform self-service platforms and Internal Developer Platform (IDP) solutions on the **r/devops subreddit**, seeking feedback on tools that can help provide a self-service catalog for deployment automation, specifically for Terraform-based services. The tools listed include Humanitec, which is a competitor in the domain, meaning that developers are discussing your competitor.
+
 Additionally, some SaaS companies' teams choose to engage via an official Reddit user account instead of a subreddit; for example, the CEO of getport.io, Zohar, posted on the r/kubernetes subreddit, sharing a technical blog about how developer portals can abstract away Kubernetes complexity. In the Reddit thread, he engaged with the developer community as well.
 
 ![getport ceo post on subreddit as reddit marketing strategy](/PostImages/reddit-marketing-strategy/r5.webp) 
@@ -52,9 +53,7 @@ Therefore, document how and where each competitor shows up on Reddit - do they h
 
 ### 2. Audit Your Presence on Reddit
 
-Begin by assessing whether your product has any presence on Reddit, either directly or indirectly. Start by reviewing whether any of your team members have participated in relevant subreddit discussions.
-
-Then, find out if your target users are discussing your SaaS product on the platform, either directly by name or in comparison to your other products in the market. If such discussions exist, analyze the feedback to gain valuable insights. 
+Begin by assessing whether your product has any presence on Reddit, either directly or indirectly. Start by reviewing whether any of your team members have participated in relevant subreddit discussions. Then, find out if your target users are discussing your SaaS product on the platform, either directly by name or in comparison to your other products in the market. If such discussions exist, analyze the feedback to gain valuable insights. 
 
 Also, be mindful of potential identity issues, such as if your product's name is similar to a common object or term. In such cases, the subreddit threads related to that object might show up first in Reddit search results before your SaaS product. Identifying these issues helps you improvise your Reddit marketing strategy and ensures your product's visibility in relevant conversations.
 
@@ -65,11 +64,17 @@ Identifying your Ideal Customer Profiles (ICPs) and buyer personas is a crucial 
 For example, if you are promoting a DevOps platform, you would target professionals who are directly involved in managing and automating infrastructure, streamlining workflows, and enabling self-service for development teams. These audiences would likely include:
 
 **Site Reliability Engineers (SREs)**: Looking for tools that improve system reliability and reduce downtime through automation.
+
 **Platform Teams**: Interested in self-service tools that empower developers to manage infrastructure without heavy intervention.
+
 **Tech Leads Evaluating Tooling**: Decision-makers assessing solutions to improve workflows and streamline development pipelines.
+
 **ML/LLM Infrastructure Engineers**: Managing complex infrastructures for machine learning models and large-scale systems.
+
 **DevOps Engineers**: Driving automation in continuous integration and continuous delivery (CI/CD) processes.
+
 **Cloud Architects**: Designing and optimizing cloud infrastructure for scalability, performance, and cost-efficiency.
+
 **Infrastructure Engineers**: Involved in maintaining and optimizing cloud infrastructure.
 
 ### 4. Develop a Content Strategy
@@ -94,12 +99,12 @@ Once a consistent presence is established and organic traffic and awareness grow
 ### 5. Gauge your Reddit Marketing Metrics
 When measuring the effectiveness of your Reddit marketing strategy, it's important to focus on key metrics that reflect both the engagement and conversion of your efforts. These metrics will help you track progress, optimize your approach, and refine your content strategy based on real-time data. Here are the key metrics that your Reddit marketing strategy should include:
 
-**Traffic from Reddit**: Monitor the number of visits to your website or landing pages driven by Reddit. For example, 150 website visits per month. Track this through Google Analytics or similar tools to understand how much traffic you are generating from Reddit posts and threads.
-**Upvotes and Engagement on Threads**: Track the number of upvotes your posts receive (e.g., ~ 5 upvotes each post), especially those that are part of community discussions. High upvotes indicate that your content resonates with the community, helping to increase visibility and credibility.
+- **Traffic from Reddit**: Monitor the number of visits to your website or landing pages driven by Reddit. For example, 150 website visits per month. Track this through Google Analytics or similar tools to understand how much traffic you are generating from Reddit posts and threads.
+- **Upvotes and Engagement on Threads**: Track the number of upvotes your posts receive (e.g., ~ 5 upvotes each post), especially those that are part of community discussions. High upvotes indicate that your content resonates with the community, helping to increase visibility and credibility.
 
-**Mentions in Tool Recommendation Threads**: Measure the number of times (e.g., 6 times) your platform is organically mentioned in relevant discussions, particularly when users are recommending tools or discussing alternatives. This reflects your brand's growing presence in the community.
-**Product Trials**: Track the number of product trials or sign-ups that come directly from Reddit engagement. This is a direct indicator of how effective your Reddit content is in driving conversions.
-**Search Visibility on Reddit**: Monitor the appearance of your platform in LLM-related searches (Large Language Models), particularly in conversations around Infrastructure as Code (IaC), cloud automation, and governance. Use Reddit's search functionality and analytics tools to measure your presence in these specific topics.
+- **Mentions in Tool Recommendation Threads**: Measure the number of times (e.g., 6 times) your platform is organically mentioned in relevant discussions, particularly when users are recommending tools or discussing alternatives. This reflects your brand's growing presence in the community.
+- **Product Trials**: Track the number of product trials or sign-ups that come directly from Reddit engagement. This is a direct indicator of how effective your Reddit content is in driving conversions.
+- **Search Visibility on Reddit**: Monitor the appearance of your platform in LLM-related searches (Large Language Models), particularly in conversations around Infrastructure as Code (IaC), cloud automation, and governance. Use Reddit's search functionality and analytics tools to measure your presence in these specific topics.
 
 ### 6. Plan an Execution Timeline
 
