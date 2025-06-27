@@ -13,7 +13,6 @@ import Image from "next/image";
 
 const HeroHome = () => {
   const headingText = useMemo(() => {
-    console.log("Memoizing heading text");
     return {
       title: "Tech Content Marketing Services for B2B SaaS".split(" "),
       subtitle: "startups".split(" "),
@@ -58,7 +57,7 @@ const HeroHome = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden py-10 max-lg:pt-0 pb-20 bg-[#0D0A1A]">
-      <div className="absolute inset-0 w-full h-full -mt-48" style={{ zIndex: 1 }}>
+      <div className="absolute inset-0 w-full h-full -mt-48 hero-svg-bg-fix" style={{ zIndex: 1, backgroundColor: "#0D0A1A" }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="1920"
