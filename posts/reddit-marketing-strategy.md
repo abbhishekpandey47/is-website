@@ -59,7 +59,7 @@ Also, be mindful of potential identity issues, such as if your product's name is
 
 ### 3. Identify Your ICPs and Buyer Persona
 
-Identifying your Ideal Customer Profiles (ICPs) and buyer personas is a crucial step in creating a robust Reddit marketing strategy. It helps you determine exactly who you want to engage with and which subreddits to focus on for maximum impact. Understanding your target audience helps you to plan your content discussions that speak directly to their needs and challenges.
+Identifying your **[Ideal Customer Profiles](https://www.infrasity.com/blog/ideal-customer-profile)** (ICPs) and buyer personas is a crucial step in creating a robust Reddit marketing strategy. It helps you determine exactly who you want to engage with and which subreddits to focus on for maximum impact. Understanding your target audience helps you to plan your content discussions that speak directly to their needs and challenges.
 
 For example, if you are promoting a DevOps platform, you would target professionals who are directly involved in managing and automating infrastructure, streamlining workflows, and enabling self-service for development teams. These audiences would likely include:
 
@@ -77,7 +77,7 @@ To promote your DevOps platform on Reddit, your **[content marketing strategy](h
 
 ![leverage opportunity from such reddit posts to engage with people as a part of your reddit marketing strategy](/PostImages/reddit-marketing-strategy/r7.webp) 
 
-For example, in a post on the r/platform_engineering subreddit, a user asked the community for feedback on the necessary components for building an Internal Developer Platform (IDP), mentioning tools like Waypoint and Humanitec. This is a perfect opportunity for you to engage in such questions by offering valuable insights and subtly introducing your platform as a solution without being overly promotional. Let's say you can reply to this thread by appreciating the essential parts they have mentioned, following up with one limitation of Waypoint and Humanitec; and offering your product by mentioning its value proposition.
+For example, in a post on the **r/platform_engineering subreddit**, a user asked the community for feedback on the necessary components for building an Internal Developer Platform (IDP), mentioning tools like Waypoint and Humanitec. This is a perfect opportunity for you to engage in such questions by offering valuable insights and subtly introducing your platform as a solution without being overly promotional. Let's say you can reply to this thread by appreciating the essential parts they have mentioned, following up with one limitation of Waypoint and Humanitec; and offering your product by mentioning its value proposition.
 
 ![participate in product reviews to subtly discuss your product as apart of your reddit marekting strategy](/PostImages/reddit-marketing-strategy/r8.webp) 
 
