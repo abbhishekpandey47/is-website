@@ -6,7 +6,7 @@ export const saveUserData = async (data) => {
   const APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL;
   if (!APPS_SCRIPT_URL) {
     console.error(
-      "NEXT_PUBLIC_APPS_SCRIPT_URL environment variable is not defined"
+      "APPS_SCRIPT_URL environment variable is not defined"
     );
     return Promise.reject(
       new Error("Google Apps Script URL is not configured")
