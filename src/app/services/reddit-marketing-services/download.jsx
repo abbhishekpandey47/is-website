@@ -266,7 +266,19 @@ export default function DownloadPDF() {
                                         <button
                                             type="submit"
                                             disabled={isEmailSending}
-                                            className="w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                                            className="w-full py-3 px-4 text-white font-medium rounded-lg transition-all disabled:opacity-50"
+                                            style={{
+                                                background: 'linear-gradient(to right, #2563eb, #9333ea)',
+                                                backgroundImage: 'linear-gradient(to right, #2563eb, #9333ea)',
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                if (!isEmailSending) {
+                                                    e.target.style.opacity = '0.9';
+                                                }
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.target.style.opacity = '1';
+                                            }}
                                         >
                                             {isEmailSending ? (
                                                 <span className="flex items-center justify-center">
