@@ -59,15 +59,13 @@ const StartupHeroSection = () => {
 
                     {/* Right Column - Image */}
                     <div className="flex justify-center lg:justify-end">
-                        <div className="flex justify-center lg:justify-end">
-    <div className="rounded-lg flex items-center justify-center">
-        <img
-            src="/reddit/whothisisfor.png"
-            alt="Who this is for Image"
-            className="w-[287px] h-[422px] lg:w-[487px] lg:h-[622px] object-cover"
-        />
-    </div>
-</div>
+                        <div className="rounded-lg flex items-center justify-center">
+                            <img
+                                src="/reddit/whothisisfor.png"
+                                alt="Who this is for Image"
+                                className="w-[287px] h-[422px] lg:w-[487px] lg:h-[622px] object-cover"
+                            />
+                        </div>
 
                     </div>
 
