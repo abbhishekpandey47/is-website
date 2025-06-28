@@ -10,7 +10,7 @@ export default function DownloadPDF() {
     const [email, setEmail] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    
+
     const popupRef = useRef(null);
     const handlePopup = () => {
         setIsPopup(true);
@@ -74,7 +74,7 @@ export default function DownloadPDF() {
             document.removeEventListener("mousedown", handleClickOutside);
             document.body.style.overflow = 'unset';
         };
-    }, [isPopup]); 
+    }, [isPopup]);
 
     return (
         <div className="flex items-center justify-center my-16">
@@ -201,7 +201,7 @@ export default function DownloadPDF() {
                     </div>
                 </div>
             </div>
-            
+
             {isPopup && (
                 <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 p-4">
                     <div
@@ -266,7 +266,7 @@ export default function DownloadPDF() {
                                         <button
                                             type="submit"
                                             disabled={isEmailSending}
-                                            className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+                                            className="w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
                                         >
                                             {isEmailSending ? (
                                                 <span className="flex items-center justify-center">
