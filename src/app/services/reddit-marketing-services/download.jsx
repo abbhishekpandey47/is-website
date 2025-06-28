@@ -269,7 +269,6 @@ export default function DownloadPDF() {
                                             className="w-full py-3 px-4 text-white font-medium rounded-lg transition-all disabled:opacity-50"
                                             style={{
                                                 background: 'linear-gradient(to right, #2563eb, #9333ea)',
-                                                backgroundImage: 'linear-gradient(to right, #2563eb, #9333ea)',
                                             }}
                                             onMouseEnter={(e) => {
                                                 if (!isEmailSending) {
