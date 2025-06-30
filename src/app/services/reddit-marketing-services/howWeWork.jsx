@@ -28,14 +28,7 @@ export default function AIChallengesSection() {
         },
     ];
     return (
-        <div
-            className="pb-10 p-8 md:p-[2rem]"
-        // style={{
-        //     background: `radial-gradient(circle at top right, #3a3e9c, transparent 30%), 
-        //    radial-gradient(circle at bottom left, #3a3e9c, transparent 30%), 
-        //    #090f1b`,
-        // }}
-        >
+        <div className="pb-10 p-8 md:p-[2rem]" >
             <div className="max-w-7xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
