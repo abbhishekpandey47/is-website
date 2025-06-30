@@ -8,6 +8,8 @@ const fileList = [
   "mocha.png",
   "aviator.png",
   "firstock-logo.webp",
+  "dhiwise.svg",
+  "amnic.png",
   "cedana.png",
   "cerbos.png",
   "codegiant-infra-1.png",
@@ -50,15 +52,15 @@ const HomeMarquee = () => {
             return (
               <div
                 key={index}
-                className="flex-shrink-0 w-auto mix-blend-color-burn"
+                className="flex-shrink-0 mix-blend-color-burn"
               >
                 <Image
                   loading="lazy"
-                  width={150}
-                  height={50}
-                  className="w-40 max-sm:w-30 "
+                  width={160}
+                  height={80}
+                  className="w-[160px] h-[80px] max-sm:w-[120px] max-sm:h-[60px] object-contain"
                   src={`/trustedby/${file}`}
-                  alt="Ratio is 3.9"
+                  alt="Trusted by logo"
                 />
               </div>
             );
