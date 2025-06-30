@@ -16,8 +16,8 @@ export default function Cta() {
                         >GTM motion</span> {" "}to feel like a compound engine?
                     </h2>
                 </div>
-                <div class="flex justify-center my-1 mb-7">
-                    <div class="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
+                <div className="flex justify-center my-1 mb-7">
+                    <div className="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
                 </div>
 
                 {/* Description */}

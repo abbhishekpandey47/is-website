@@ -109,7 +109,7 @@ export default function AIStartupLanding() {
                 {/* Description */}
                 <div className="max-w-full max-sm:max-w-[95%] mx-auto mb-14 max-sm:mb-8">
                     <p className="text-[24px] md:text-[24px] max-sm:text-[18px] text-[#f5deb3] leading-snug font-light tracking-normal">
-                        From Seed to Series B, Infrasity partners with VC-backed startups to produce high-leverage, <rb />engineering-first content that educates users, drives traffic,<br />
+                        From Seed to Series B, Infrasity partners with VC-backed startups to produce high-leverage, <br />engineering-first content that educates users, drives traffic,<br />
                         and accelerates time-to-market.
                     </p>
                 </div>
