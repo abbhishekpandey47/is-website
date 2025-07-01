@@ -24,6 +24,8 @@ export default function TrustedBySection() {
     "aviator.png",
     "mocha.png",
     "cedana.png",
+    "dhiwise.png",
+    "amnic.png",
     "mvp-grow.png",
     "cerbos.png",
     "qodo-logo.png",
@@ -99,14 +101,14 @@ export default function TrustedBySection() {
                     {row.map((company, index) => (
                       <div
                         key={`${rowIndex}-${index}`}
-                        className="w-1/3 h-20 flex items-center justify-center px-4"
+                        className="w-1/3 h-24 flex items-center justify-center px-4"
                       >
                         <div className="flex items-center justify-center">
                           <Image
                             loading="lazy"
                             width={100}
-                            height={40}
-                            className="max-h-10 w-auto text-gray-400 filter brightness-0 invert"
+                            height={90}
+                            className={`w-auto text-gray-400 max-h-24 ${company === 'amnic.png' ? 'h-10' : ''}`}
                             src={`/trustedby-bw/bw/${company}`}
                             alt={`Trusted partner ${company}`}
                           />

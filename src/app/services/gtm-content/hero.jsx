@@ -11,6 +11,8 @@ const logoFiles = [
     "aviator.png",
     "mocha.png",
     "cedana.png",
+    "dhiwise.png",
+    "amnic.png",
     "mvp-grow.png",
     "cerbos.png",
     "qodo-logo.png",
@@ -155,7 +157,11 @@ export default function AIStartupLanding() {
                                             loading="lazy"
                                             width={100}
                                             height={40}
-                                            className="w-35 max-sm:w-30 my-8 max-sm:my-6"
+                                            className={
+                                                logoFile.includes('amnic') || logoFile.includes('special-height')
+                                                    ? "w-35 h-10 max-sm:w-30 max-sm:h-8 my-8 max-sm:my-6 object-contain"
+                                                    : "w-35 max-sm:w-30 my-8 max-sm:my-6"
+                                            }
                                             src={`/trustedby-bw/bw/${logoFile}`}
                                             alt="Company Logo"
                                         />
