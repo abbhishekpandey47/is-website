@@ -158,7 +158,7 @@ export default function AIStartupLanding() {
                                             width={100}
                                             height={40}
                                             className={
-                                                logoFile === 'amnic.png'
+                                                logoFile.includes('amnic') || logoFile.includes('special-height')
                                                     ? "w-35 h-10 max-sm:w-30 max-sm:h-8 my-8 max-sm:my-6 object-contain"
                                                     : "w-35 max-sm:w-30 my-8 max-sm:my-6"
                                             }
