@@ -35,6 +35,44 @@ const fileList = [
   "middleware-logo.png",
 ];
 
+const getLogoPadding = (filename) => {
+  const paddingMap = {
+    'aviator.png': 'p-3',
+    'mocha.png': 'p-8',
+    'cedana.png': 'p-5',
+    'dhiwise.png': 'p-2',
+    'amnic.png': 'p-5 filter brightness-0 invert',
+    'mvp-grow.png': 'p-4',
+    'cerbos.png': 'p-4',
+    'qodo-logo.png': 'p-8',
+    'Codegiant.png': 'p-4',
+    'Scalekit-logo.png': 'p-4',
+    'cycloid.png': 'p-7',
+    'scalr.png': 'p-4',
+    'daytona.png': 'p-5',
+    'stackOne.png': 'p-4',
+    'DevZero.png': 'p-4',
+    'terrateam.png': 'p-4',
+    'env0-infra-1.png': 'p-6',
+    'tracetest.png': 'p-4',
+    'firefly.png': 'p-5',
+    'TravisCI-Full-Color.png': 'p-5',
+    'firstock-logo.png': 'p-5',
+    'vapi-logo.png': 'p-10',
+    'kapstan.png': 'p-4',
+    'Zenml.png': 'p-4',
+    'Kubiya.png': 'p-5',
+    'lovable-logo.png': 'p-4',
+    'Meteor-ops.png': 'p-4',
+    'middleware-logo.png': 'p-3',
+  };
+
+  // Return specific padding or default p-4
+  return paddingMap[filename] || 'p-4';
+};
+
+
+
 
 const NewMarquee = () => {
   const fileMemo = useMemo(() => fileList, [fileList]);
@@ -48,18 +86,15 @@ const NewMarquee = () => {
         className="motion-reduce:overflow-auto"
         innerClassName="motion-reduce:animate-none"
       >
-        <div className="flex gap-20 max-sm:gap-10 items-center mx-4">
+        <div className="flex gap-28 max-sm:gap-10 items-center mx-4">
           {fileMemo.map((file, index) => {
             return (
-              <div
-                key={index}
-                className="flex-shrink-0 w-auto mix-blend-color-burn"
-              >
+              <div key={index} className="mix-blend-color-burn">
                 <Image
                   loading="lazy"
                   width={160}
                   height={80}
-                  className={`w-auto text-gray-400 max-h-40 ${file === 'amnic.png' ? 'h-10' : ''}`}
+                  className={`${getLogoPadding(file)} object-contain opacity-90`}
                   src={`/trustedby-bw/bw/${file}`}
                   alt="Trusted by logo"
                 />

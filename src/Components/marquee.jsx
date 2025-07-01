@@ -67,16 +67,16 @@ const getLogoPadding = (filename) => {
     'terrateam.png': 'p-4',
     'vapi.png': 'p-5',
   };
-
+  
   // Return specific padding or default p-4
   return paddingMap[filename] || 'p-4';
 };
 
-const MarqueeDef = ({ text }) => {
+const MarqueeDef = ({text}) => {
   const fileMemo = useMemo(() => fileList, [fileList]);
-
+  
   return (
-    <div className="max-lg:mt-[30vh] max-sm:mt-[0vh] bg-white rounded-3xl pt-16 pb-1">
+    <div className="max-lg:mt-[30vh] max-sm:mt-[0vh] max bg-gradient-to-br from-[#DEE4EA] to-[#ebeef1] pt-10 pb-2.5 card glass">
       <h2 className="text-center pb-1 text-black quicksand-bold text-2xl">
         {text || "We are the growth strategists for some of the fastest-growing B2B SaaS startups"}
       </h2>
@@ -109,7 +109,7 @@ const MarqueeDef = ({ text }) => {
           })}
         </div>
       </Marquee>
-
+      
       {/* Duplicate marquee for seamless loop - fixes overlapping issue */}
       <style jsx>{`
         .marquee-container {

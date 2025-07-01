@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import HomeMarquee from "@/Components/HomePage/HomeMarquee";
 import { motion } from "framer-motion";
 import CardMotion from "./cardsmotion";
 import CardComponent from "@/app/services/webflow-agency/CardComponent";
@@ -189,9 +188,9 @@ const page = () => {
                 "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
             }}
           >
-            <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+            <div className="w-full my-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
             <div>
-              <WebflowMarquee />
+              <WebflowMarquee text="Trusted by the fastest-growing B2B SaaS startups — from seed to $40M+ ARR." />
             </div>
           </div>
 

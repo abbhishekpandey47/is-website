@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useContext } from "react";
 import HeroHome from "./HeroHome";
-import HomeMarquee from "./HomeMarquee";
 import HowWorks from "./HowWorks";
 import CustomerSucc from "./CustomerSucc";
 import HomeTesit from "./HomeTesit";
@@ -16,6 +15,7 @@ import FAQ from "./FAQ";
 import AppContext from "@/context/Infracontext";
 import AwardBanner from "./awardwinner";
 import Navbar from "../Navbar/Navbar";
+import Marquee from "../marquee"
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
@@ -53,7 +53,7 @@ const HomePage = () => {
   return (
     <div className="text-white overflow-x-hidden overflow-y-hidden">
       <HeroHome />
-      <HomeMarquee />
+      <Marquee />
       <HowWorks
         mainHeading="<p>Your extended <span class='specialtext'>Developer Relations</span> Team</p>"
         subHeading="How it works"

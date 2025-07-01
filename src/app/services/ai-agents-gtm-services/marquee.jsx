@@ -35,6 +35,42 @@ const fileList = [
   "middleware-logo.png",
 ];
 
+const getLogoPadding = (filename) => {
+  const paddingMap = {
+    'dhiwise.png': 'p-2',
+    'middleware-logo.svg': 'p-3',
+    'qodo-logo.svg': 'p-8',
+    'stackOne.svg': 'p-4',
+    'mocha.png': 'p-8',
+    'aviator.png': 'p-3',
+    'firstock-logo.webp': 'p-5',
+    'amnic.png': 'p-5 filter brightness-0 invert',
+    'cedana.png': 'p-5',
+    'cerbos.png': 'p-4',
+    'codegiant-infra-1.png': 'p-3',
+    'cycloid.png': 'p-7',
+    'daytona-removebg-preview-e1721477918328.png': 'p-5',
+    'DevZero.png': 'p-4',
+    'env0-infra-1.png': 'p-6',
+    'firefly.png': 'p-5',
+    'Group-14967.png': 'p-4',
+    'images-removebg-preview.png': 'p-6',
+    'images__2_-removebg-preview.png': 'p-6',
+    'kapstan.png': 'p-4',
+    'kubiya.png': 'p-5',
+    'logo-landscape-removebg-preview.png': 'p-2',
+    'lovable-logo.png': 'p-4',
+    'Mask-group.png': 'p-5',
+    'scalr.png': 'p-4',
+    'TravisCI-Full-Color.png': 'p-5',
+    'terrateam.png': 'p-4',
+    'vapi.png': 'p-5',
+  };
+
+  // Return specific padding or default p-4
+  return paddingMap[filename] || 'p-4';
+};
+
 const NewMarquee = () => {
   const fileMemo = useMemo(() => fileList, [fileList]);
   return (
@@ -63,7 +99,7 @@ const NewMarquee = () => {
                     loading="lazy"
                     width={160}
                     height={80}
-                    className={`w-auto text-gray-400 max-h-40 ${file === 'amnic.png' ? 'h-10' : ''}`}
+                    className={`${getLogoPadding(file)} object-contain opacity-90`}
                     src={`/trustedby-bw/bw/${file}`}
                     alt="Trusted by logo"
                   />
