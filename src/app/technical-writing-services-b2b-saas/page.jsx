@@ -25,7 +25,7 @@ import FAQ from "@/Components/HomePage/FAQ";
 import FAQSection from "./FAQ";
 import TestimonialSlider from "./testimonials";
 import BookDemo from "./bookDemo";
-import CalendlyButton from "./cal";
+import CalendarBooking from "../calendarButton";
 import ClutchBadge from "./clutch";
 
 const contentStyle = {
@@ -39,9 +39,8 @@ const contentStyle = {
 const PageCard = ({ ind = 1, data = { data } }) => {
   return (
     <div
-      className={`p-10 max-lg:p-4 gap-10 ${
-        ind % 2 == 0 ? "flex" : "flex flex-row-reverse"
-      } max-md:flex-col`}
+      className={`p-10 max-lg:p-4 gap-10 ${ind % 2 == 0 ? "flex" : "flex flex-row-reverse"
+        } max-md:flex-col`}
     >
       <div className="w-1/2 max-md:w-full flex flex-col justify-center">
         <Image
@@ -245,13 +244,13 @@ const page = () => {
       );
     });
 
-    return () => {};
+    return () => { };
   }, []);
 
   useEffect(() => {
     setProgress(100);
 
-    return () => {};
+    return () => { };
   }, []);
 
   return (
@@ -320,9 +319,11 @@ const page = () => {
           {/* Call to Action */}
           <div className="flex justify-center">
             <div className="flex items-center space-x-9 ml-10 lg:ml-32">
-              <CalendlyButton name="Book a Demo" />
+              <CalendarBooking name="Book a Demo" />
               <div className="border-l-2 border-gray-400 h-6"></div>
-              <ClutchBadge />
+              <span className="mt-6">
+                <ClutchBadge />
+              </span>
             </div>
           </div>
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>

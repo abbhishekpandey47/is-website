@@ -29,35 +29,6 @@ import img6 from "/public/webflow-age/devs/dev6.png";
 import ServicesSection from "./ServicesSection";
 import ScrollingServicesSection from "./ServicesSection2";
 import ClutchBadge from "./clutch";
-import ServiceCardCarousel from "./webflowstack";
-
-const fileList = [
-  "aviator.png",
-  "firstock-logo.webp",
-  "cedana.png",
-  "cerbos.png",
-  "codegiant-infra-1.png",
-  "cycloid.png",
-  "daytona-removebg-preview-e1721477918328.png",
-  "DevZero.png",
-  "env0-infra-1.png",
-  "firefly.png",
-  "Group-14967.png",
-  "images-removebg-preview.png",
-  "images__2_-removebg-preview.png",
-  "kapstan.png",
-  "kubiya.png",
-  "logo-landscape-removebg-preview.png",
-  "lovable-logo.png",
-  "Mask-group.png",
-  "middleware-logo.svg",
-  "scalr.png",
-  "stackOne.svg",
-  "TravisCI-Full-Color.png",
-  "terrateam.png",
-  "vapi.png",
-  "qodo-logo.svg",
-];
 
 const serviceArr = [
   {
@@ -128,7 +99,6 @@ const serviceCards = [
 ];
 
 const page = () => {
-  const fileMemo = useMemo(() => fileList, [fileList]);
 
   const [isMobile, setIsMobile] = useState(false);
 

@@ -9,6 +9,8 @@ const fileList = [
   "aviator.png",
   "firstock-logo.webp",
   "cedana.png",
+  "dhiwise.svg",
+  "amnic.png",
   "cerbos.png",
   "codegiant-infra-1.png",
   "cycloid.png",
@@ -48,17 +50,17 @@ const WebflowMarquee = () => {
           className="motion-reduce:overflow-auto"
           innerClassName="motion-reduce:animate-none"
         >
-          <div className="flex gap-20 max-sm:gap-10 items-center mx-4">
+          <div className="flex gap-20 max-sm:gap-10 items-center mx-4 my-8">
             {fileMemo.map((file, index) => {
               return (
                 <div key={index} className="flex-shrink-0 w-auto">
                   <Image
                     loading="lazy"
-                    width={150}
-                    height={50}
-                    className="w-40 max-sm:w-30"
+                    width={160}
+                    height={80}
+                    className="w-[160px] h-[80px] max-sm:w-[120px] max-sm:h-[60px] object-contain"
                     src={`/trustedby/${file}`}
-                    alt={`Partner logo ${index + 1}`}
+                    alt="Trusted by logo"
                   />
                 </div>
               );
