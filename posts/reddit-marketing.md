@@ -99,7 +99,7 @@ Some users report that when they try to log out of a shadowbanned account, they 
 
 ### 5. The Ban Appeal Test
 
-If you are still not sure, do a quick ban appeal test. Reddit has an official ban appeal form that you can find by going to https://www.reddit.com/appeal. Typically, if your account is actually banned, you'll be able to use the appeal process to ask for a review. For example, here you can see that the user wrote an appeal to Reddit for account suspension.
+If you are still not sure, do a quick ban appeal test. Reddit has an official ban appeal form that you can find by going to their **[website](https://www.reddit.com/appeal)**. Typically, if your account is actually banned, you'll be able to use the appeal process to ask for a review. For example, here you can see that the user wrote an appeal to Reddit for account suspension.
 
 ![apply for band appeal test in reddit marketing](/PostImages/reddit-marketing/rm8.png) 
 
