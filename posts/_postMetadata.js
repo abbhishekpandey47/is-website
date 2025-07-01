@@ -880,6 +880,17 @@ let postMetaData = [
         metaDescription: "Follow this 6-step Reddit Marketing Strategy and connect with your target audience to organically promote your B2B SaaS product and gather feedback from devs."
     },
 
+    {
+        title: "Dos and Don’ts of Reddit Marketing for B2B SaaS Startups",
+        metatitle: "Dos and Don’ts of Reddit Marketing for B2B SaaS Startups",
+        slug: "reddit-marketing",
+        description: "Using Reddit for marketing can be a great strategy but it is crucial to understand what to do and what not to do. Therefore, read the article to get insights.",
+        ogImage: "/PostImages/reddit-marketing/rm1.png",
+        publishedOn: "2025-07-01",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Using Reddit for marketing can be a great strategy but it is crucial to understand what to do and what not to do. Therefore, read the article to get insights."
+    },
 
 ];
 
