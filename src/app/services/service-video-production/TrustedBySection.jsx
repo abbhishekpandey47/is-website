@@ -24,6 +24,8 @@ export default function TrustedBySection() {
     "aviator.png",
     "mocha.png",
     "cedana.png",
+    "dhiwise.png",
+    "amnic.png",
     "mvp-grow.png",
     "cerbos.png",
     "qodo-logo.png",
@@ -105,8 +107,8 @@ export default function TrustedBySection() {
                           <Image
                             loading="lazy"
                             width={100}
-                            height={40}
-                            className="max-h-10 w-auto text-gray-400 filter brightness-0 invert"
+                            height={90}
+                            className={`w-auto text-gray-400 max-h-10 ${company === 'dhiwise.png' ? 'h-20' : ''}`}
                             src={`/trustedby-bw/bw/${company}`}
                             alt={`Trusted partner ${company}`}
                           />
