@@ -78,10 +78,10 @@ const PricingPage = () => {
                     <div className="max-w-4xl mx-auto">
                         <p className="text-[#d6daff] font-medium tracking-wider uppercase text-sm mb-6">PRICING</p>
                         <h1 className="quicksand-bold text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                            Find a plan that fits your growth stage No upfront commitment. No fluff.
+                            Find a plan that fits your growth stage
                         </h1>
                         <div className="text-[#b4b4b8] text-lg mb-10">
-                            <p className="text-[#b4b4b8] text-[16px]">Start your journey toward developer-first content<br className="hidden md:block" />and GTM clarity — in under 5 minutes.</p>
+                            <p className="text-[#b4b4b8] text-[16px]">No upfront commitment. No fluff. Start your journey toward developer-first content<br className="hidden md:block" />and GTM clarity — in under 5 minutes.</p>
                         </div>
                         <CalendarBooking width="w-40" />
                     </div>
