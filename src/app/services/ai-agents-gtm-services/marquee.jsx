@@ -8,6 +8,8 @@ const fileList = [
   "aviator.png",
   "mocha.png",
   "cedana.png",
+  "dhiwise.png",
+  "amnic.png",
   "mvp-grow.png",
   "cerbos.png",
   "qodo-logo.png",
@@ -53,17 +55,17 @@ const NewMarquee = () => {
           className="motion-reduce:overflow-auto"
           innerClassName="motion-reduce:animate-none"
         >
-          <div className="flex gap-20 max-sm:gap-10 items-center mx-4">
+          <div className="flex gap-28 max-sm:gap-10 items-center mx-4">
             {fileMemo.map((file, index) => {
               return (
                 <div key={index} className="mix-blend-color-burn">
                   <Image
                     loading="lazy"
-                    width={100}
-                    height={40}
-                    className="w-35 max-sm:w-30 my-8"
+                    width={160}
+                    height={80}
+                    className={`w-auto text-gray-400 max-h-40 ${file === 'amnic.png' ? 'h-10' : ''}`}
                     src={`/trustedby-bw/bw/${file}`}
-                    alt="Ratio is 3.9"
+                    alt="Trusted by logo"
                   />
                 </div>
               );

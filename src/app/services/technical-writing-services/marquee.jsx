@@ -8,6 +8,8 @@ const fileList = [
   "aviator.png",
   "mocha.png",
   "cedana.png",
+  "dhiwise.png",
+  "amnic.png",
   "mvp-grow.png",
   "cerbos.png",
   "qodo-logo.png",
@@ -54,11 +56,11 @@ const NewMarquee = () => {
               >
                 <Image
                   loading="lazy"
-                  width={150}
-                  height={50}
-                  className="w-40 max-sm:w-30 mt-8"
+                  width={160}
+                  height={80}
+                  className={`w-auto text-gray-400 max-h-40 ${file === 'amnic.png' ? 'h-10' : ''}`}
                   src={`/trustedby-bw/bw/${file}`}
-                  alt="Ratio is 3.9"
+                  alt="Trusted by logo"
                 />
               </div>
             );
