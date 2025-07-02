@@ -15,7 +15,7 @@ export default function RealResult() {
                     </h2>
                 </div>
 
-                <div class="flex justify-center my-6 mb-8">
+                <div className="flex justify-center my-6 mb-8">
                     <div class="w-[148px] h-1 rounded-full"
                         style={{
                             backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"
@@ -118,7 +118,8 @@ export default function RealResult() {
                                 </div>
 
                                 <div>
-                                    <blockquote className="font-[quicksand] text-base leading-relaxed mt-6" style={{ color: '#6B5BE7' }}>                                    "Their developer documentation and onboarding guides transformed our user experience. Developers actually understand our product now."
+                                    <blockquote className="font-[quicksand] text-base leading-relaxed mt-6" style={{ color: '#6B5BE7' }}>
+                                        "Their developer documentation and onboarding guides transformed our user experience. Developers actually understand our product now."
                                     </blockquote>
                                 </div>
                             </div>
