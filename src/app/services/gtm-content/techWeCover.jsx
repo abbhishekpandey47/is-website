@@ -37,7 +37,7 @@ export default function TechWeCover() {
     );
 
     return (
-        <div className="px-4 sm:px-6 lg:px-8 mb-28">
+        <div className="px-4 sm:px-6 lg:px-8 mb-14">
             {/* Header Section */}
             <div className="max-w-7xl mx-auto text-center z-10 mb-8 sm:mb-12 lg:mb-16">
                 <div className="quicksand-bold text-2xl sm:text-3xl lg:text-[30px] text-white mb-4 sm:mb-6">

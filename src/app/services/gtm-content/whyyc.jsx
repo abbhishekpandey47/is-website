@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useState, useEffect, useRef } from 'react';
 
 const ScrollAccordion = () => {
@@ -61,7 +62,7 @@ const ScrollAccordion = () => {
     }, []);
 
     return (
-        <div className="p-8 pb-10 md:p-[2rem]" >
+        <div className="p-8 pb-96 lg:pb-0" >
             <div className="max-w-7xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
@@ -86,27 +87,26 @@ const ScrollAccordion = () => {
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto mb-8">
                     <p className="text-[18px] md:text-[17px] text-white leading-relaxed tracking-wide font-light">
-                        Most technical startups struggle with content that actually converts developers <br /> and drives meaningful growth.                    </p>
+                        Most technical startups struggle with content that actually converts developers <br className="hidden lg:block" />and drives meaningful growth.</p>
                 </div>
             </div>
 
             <div
                 ref={containerRef}
-                className="h-[400px] px-4 md:px-8 lg:px-12"
+                className="h-[400px] px-4 md:px-8"
             >
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 items-start">
+                <div className="max-w-7xl mx-auto md:-mt-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
                         {/* Left Column - Empty/Black */}
-                        <div className="space-y-8 lg:sticky lg:top-20">
-                            {sections.map((section, index) => (
-                                <div
-                                    key={index}
-                                    ref={el => itemRefs.current[index] = el}
-                                    className="h-16"
-                                >
-                                </div>
-                            ))}
+                        <div className="md:h-[450px] flex items-center justify-center">
+                            <Image
+                                width={800}
+                                height={600}
+                                className='rounded-xl'
+                                src="/gtm-content/whyyc.png"
+                                alt="Infrasity Logo"
+                            />
                         </div>
 
                         <div className="relative">
@@ -138,7 +138,7 @@ const ScrollAccordion = () => {
                                                     : 'max-h-0 opacity-0 transform -translate-y-4'
                                                     }`}
                                             >
-                                                <p className="text-[20px] md:text-[17px] text-white leading-relaxed tracking-wide font-light pb-8">
+                                                <p className="text-[20px] md:text-[17px] text-white leading-relaxed font-[quicksand] tracking-wide font-thin pb-8">
                                                     {section.description}
                                                 </p>
                                             </div>
