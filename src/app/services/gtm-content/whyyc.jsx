@@ -14,11 +14,11 @@ const ScrollAccordion = () => {
         },
         {
             title: "Technical Founders? We Get You.",
-            description: "We understand the technical complexity of your product and can translate complex features into compelling marketing messages that resonate with your target audience."
+            description: "We're not \"fluff\" marketers. Our team comes from infrastructure, Al, and DevOps backgrounds. We've shipped CLI docs, SDK guides, Al onboarding flows, and Terraform blogs for production-grade startups."
         },
         {
             title: "Built for Speed and SEO.",
-            description: "Our streamlined process ensures rapid content delivery while maintaining SEO best practices. We focus on creating content that ranks well and converts visitors into customers."
+            description: "Whether you're announcing a feature, onboarding a new user cohort, or optimizing for high-intent keywords, our system combines developer-grade accuracy with SEO precision."
         }
     ];
 
@@ -93,10 +93,10 @@ const ScrollAccordion = () => {
 
             <div
                 ref={containerRef}
-                className="h-[400px] px-4 md:px-8"
+                className="h-[400px] px-4 md:px-6"
             >
                 <div className="max-w-7xl mx-auto md:-mt-12">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
                         {/* Left Column - Empty/Black */}
                         <div className="md:h-[450px] flex items-center justify-center">
@@ -120,7 +120,7 @@ const ScrollAccordion = () => {
                                             {/* Title - Always visible */}
                                             <div className={`flex ${activeIndex === index ? 'text-start' : 'text-start'} space-x-4 mb-4`}>
                                                 <div
-                                                    className={`absolute mt-1 left-0 w-[5px] rounded-full transition-all duration-500 ${activeIndex === index ? 'bg-[#6B5BE7] h-32' : 'bg-gray-600 h-6'
+                                                    className={`absolute mt-1 left-0 w-[5px] rounded-full transition-all duration-500 ${activeIndex === index ? 'bg-[#6B5BE7] h-[116px]' : 'bg-gray-600 h-6'
                                                         }`}
                                                 />
                                                 <h3
@@ -138,7 +138,7 @@ const ScrollAccordion = () => {
                                                     : 'max-h-0 opacity-0 transform -translate-y-4'
                                                     }`}
                                             >
-                                                <p className="text-[20px] md:text-[17px] text-white leading-relaxed font-[quicksand] tracking-wide font-thin pb-8">
+                                                <p className="text-[18px] md:text-[16px] text-white leading-relaxed font-[quicksand] tracking-wide font-thin pb-8">
                                                     {section.description}
                                                 </p>
                                             </div>

@@ -17,7 +17,7 @@ export default function TechWeCover() {
                 h-[60px] sm:h-[70px] lg:h-[80px] 
                 rounded-[10px] sm:rounded-[12px] lg:rounded-[15px] 
                 flex items-center justify-start px-4 sm:px-5 lg:px-[30px]
-                text-xs sm:text-sm lg:text-base
+                text-md sm:text-sm lg:text-[17px]
                 ${position === 'top-left' ? 'top-2 sm:top-4 lg:top-8 left-2 sm:left-4 lg:left-0' : ''}
                 ${position === 'top-right' ? 'top-2 sm:top-4 lg:top-8 right-2 sm:right-4 lg:right-0' : ''}
                 ${position === 'middle-left' ? 'top-1/2 -translate-y-1/2 left-2 sm:left-4 lg:left-0' : ''}
@@ -73,7 +73,7 @@ export default function TechWeCover() {
             </div>
 
             {/* Main Container */}
-            <div className="relative w-full h-[400px] sm:h-[500px] lg:h-screen max-h-[500px] overflow-hidden">
+            <div className="relative w-full h-[400px] sm:h-[500px] lg:h-screen max-h-[475px] overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none z-10">
                     <div className="absolute left-0 top-0 w-20 sm:w-40 lg:w-80 h-full bg-gradient-to-r from-black to-transparent" />
                     <div className="absolute right-0 top-0 w-20 sm:w-40 lg:w-80 h-full bg-gradient-to-l from-black to-transparent" />
@@ -165,10 +165,10 @@ export default function TechWeCover() {
 
                 {/* Logo */}
                 <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
-                    <div className="w-[180px] h-[180px] flex items-center justify-center bg-white rounded-full">
+                    <div className="w-[200px] h-[200px] flex items-center justify-center bg-white rounded-full">
                         <Image
-                            width={160}
-                            height={160}
+                            width={180}
+                            height={180}
                             src="/logodata/infrasity_logo.png"
                             alt="Infrasity Logo"
                         />

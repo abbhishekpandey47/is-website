@@ -100,13 +100,13 @@ export default function WhatWeCreate() {
             <div className="max-w-7xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
-                        Why{" "}
+                        What We Create{" "}
                         <span
                             className="bg-clip-text text-transparent"
                             style={{
                                 backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"
                             }}
-                        >YC-Backed</span>{" "}Startups Work with Infrasity
+                        >Create</span>{" "}(Based on Your GTM Stage)
                     </h2>
                 </div>
 
