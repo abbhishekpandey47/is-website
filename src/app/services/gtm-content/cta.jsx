@@ -5,7 +5,7 @@ export default function Cta() {
     return (
         <div>
             <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
-                <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
+                <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] tracking-tighter text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[80px] max-lg:text-center max-lg:mx-auto">
                         Want your {" "}
                         <span
