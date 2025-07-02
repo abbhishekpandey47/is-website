@@ -74,6 +74,19 @@ export default function TechWeCover() {
 
             {/* Main Container */}
             <div className="relative w-full h-[400px] sm:h-[500px] lg:h-screen max-h-[475px] overflow-hidden">
+                <div className="absolute inset-0">
+                    {/* Line 1 */}
+                    <div className="absolute top-1/3 mt-5 left-0 w-[300px] h-[0.5px]">
+                        <div className="h-full bg-gradient-to-r from-transparent via-white to-white animate-[slideRight_3s_ease-out_infinite]"
+                            style={{ width: '30%' }}></div>
+                    </div>
+
+                    {/* Line 2 */}
+                    <div className="absolute top-1/3 mt-24 ml-14 left-0 w-[300px] h-[0.5px]">
+                        <div className="h-full bg-gradient-to-r from-transparent via-white to-white animate-[slideRight_3s_ease-out_infinite]"
+                            style={{ width: '25%' }}></div>
+                    </div>
+                </div>
                 <div className="absolute inset-0 pointer-events-none z-10">
                     <div className="absolute left-0 top-0 w-20 sm:w-40 lg:w-80 h-full bg-gradient-to-r from-black to-transparent" />
                     <div className="absolute right-0 top-0 w-20 sm:w-40 lg:w-80 h-full bg-gradient-to-l from-black to-transparent" />
@@ -175,6 +188,18 @@ export default function TechWeCover() {
                     </div>
                 </div>
             </div>
+            <style jsx>{`
+        @keyframes slideRight {
+          0% {
+            transform: translateX(-200%);
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(calc(100vw + 100%));
+            opacity: 1;
+          }
+        }
+      `}</style>
         </div>
     );
 }
