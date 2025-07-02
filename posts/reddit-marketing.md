@@ -197,7 +197,7 @@ This kind of flair provides transparency: readers immediately know your affiliat
 
 ## Conclusion
 
-Leveraging Reddit marketing for promoting your product to your target audience is a lucrative practice when done right. In this article, we've covered the most essential Do's and Don'ts of Reddit marketing that every B2B SaaS team should know.
+Leveraging Reddit marketing for promoting your product to your target audience is a lucrative practice when done right. In this article, we've covered the most essential Dos and Don'ts of Reddit marketing that every B2B SaaS team should know.
 
 For example, avoid sounding overly promotional, always follow subreddit-specific rules, and be cautious of getting shadowbanned. Make sure your account looks real and personalized (not bot-like), and take the time to build up Karma so your contributions carry weight and credibility. Most importantly, diversify your activity. Don't just show up to pitch - engage in meaningful conversations, share insights, and create a buffer of helpful, non-promotional posts that position you as part of the community rather than a marketer.
 
