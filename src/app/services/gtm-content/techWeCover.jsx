@@ -195,7 +195,7 @@ export default function TechWeCover() {
             opacity: 1;
           }
           100% {
-            transform: translateX(calc(100vw + 100%));
+            transform: translateX(100vw);
             opacity: 1;
           }
         }
