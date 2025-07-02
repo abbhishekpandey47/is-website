@@ -16,7 +16,7 @@ export default function TechWeCover() {
                 absolute w-[180px] sm:w-[200px] lg:w-[235px] 
                 h-[60px] sm:h-[70px] lg:h-[80px] 
                 rounded-[10px] sm:rounded-[12px] lg:rounded-[15px] 
-                flex items-center justify-left px-4 sm:px-5 lg:px-[30px]
+                flex items-center justify-start px-4 sm:px-5 lg:px-[30px]
                 text-xs sm:text-sm lg:text-base
                 ${position === 'top-left' ? 'top-2 sm:top-4 lg:top-8 left-2 sm:left-4 lg:left-0' : ''}
                 ${position === 'top-right' ? 'top-2 sm:top-4 lg:top-8 right-2 sm:right-4 lg:right-0' : ''}
@@ -80,26 +80,25 @@ export default function TechWeCover() {
                 </div>
 
                 <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[300px] lg:w-[944px] h-[150px] sm:w-[300px] lg:h-[515px] opacity-80">
-                        <svg
-                            width="100%"
-                            height="100%"
-                            viewBox="0 0 944 515"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-full h-full"
-                        >
-                            <g filter="url(#filter0_f_913_2290)">
-                                <path d="M472 320.199C625.117 320.199 749.243 292.243 749.243 257.756C749.243 223.27 625.117 195.313 472 195.313C318.883 195.313 194.757 223.27 194.757 257.756C194.757 292.243 318.883 320.199 472 320.199Z" fill="#232DE3" />
-                            </g>
-                            <defs>
-                                <filter id="filter0_f_913_2290" x="-0.00267029" y="0.553482" width="944.005" height="514.406" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                                    <feGaussianBlur stdDeviation="97.38" result="effect1_foregroundBlur_913_2290" />
-                                </filter>
-                            </defs>
-                        </svg>
+                    <div className="w-[300px] lg:w-[944px] h-[150px] lg:h-[515px] opacity-80">                        <svg
+                        width="100%"
+                        height="100%"
+                        viewBox="0 0 944 515"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-full h-full"
+                    >
+                        <g filter="url(#filter0_f_913_2290)">
+                            <path d="M472 320.199C625.117 320.199 749.243 292.243 749.243 257.756C749.243 223.27 625.117 195.313 472 195.313C318.883 195.313 194.757 223.27 194.757 257.756C194.757 292.243 318.883 320.199 472 320.199Z" fill="#232DE3" />
+                        </g>
+                        <defs>
+                            <filter id="filter0_f_913_2290" x="-0.00267029" y="0.553482" width="944.005" height="514.406" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                                <feGaussianBlur stdDeviation="97.38" result="effect1_foregroundBlur_913_2290" />
+                            </filter>
+                        </defs>
+                    </svg>
                     </div>
                 </div>
 
