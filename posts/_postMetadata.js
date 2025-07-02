@@ -885,7 +885,7 @@ let postMetaData = [
         metatitle: "Dos and Don’ts of Reddit Marketing for B2B SaaS Startups",
         slug: "reddit-marketing",
         description: "Using Reddit for marketing can be a great strategy but it is crucial to understand what to do and what not to do. Therefore, read the article to get insights.",
-        ogImage: "/PostImages/reddit-marketing/rm1.png",
+        ogImage: "/PostImages/reddit-marketing/rm1.webp",
         publishedOn: "2025-07-01",
         authorId: "author0004",
         category: "Informational",
