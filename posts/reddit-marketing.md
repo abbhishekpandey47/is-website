@@ -33,13 +33,13 @@ Reddit thrives on authentic conversations. Communities value genuine discussions
 
 **Every subreddit has its own set of rules** (often listed in the sidebar or "About" section), and you must read and respect them before posting. Reddit has two layers of moderation: automated moderation (bots and filters that the platform or subreddit mods set up) and human moderation (the subreddit's volunteer moderators). 
 
-![ensure you follow rules of subreddit when doing reddit marketing](/PostImages/reddit-marketing/rm2.png) 
+![ensure you follow rules of subreddit when doing reddit marketing](/PostImages/reddit-marketing/rm2.webp) 
 
 For example, you can see the **r/devops** subreddit's moderators' profiles and rules, such as not sharing personal information and not spamming promotional content, even though they don't mind it, but it shouldn't be the sole purpose to join this subreddit.
 
 If you violate the community guidelines, your posts or comments will be removed, even if you have an established account, and you may receive a warning or ban. For example, a user once had their comment removed in the **r/OutOfTheLoop** subreddit simply because it didn't follow that community's specific posting guidelines, starting the comment with "Answer:". 
 
-![automoderator notification of deleting comment when performing reddit marketing](/PostImages/reddit-marketing/rm3.png) 
+![automoderator notification of deleting comment when performing reddit marketing](/PostImages/reddit-marketing/rm3.webp) 
 
 The AutoModerator deleted it to enforce the rules. This shows how seriously Reddit communities take their rules. Therefore, always read the rules of the subreddit before you engage, and when in doubt, ask a moderator for guidance.
 
@@ -47,7 +47,7 @@ The AutoModerator deleted it to enforce the rules. This shows how seriously Redd
 
 Reddit users are quick to spot anything that feels like a sales pitch, and they don't react kindly to it. The community values authenticity and gets easily turned off by posts or comments that seem promotional, leading to receiving downvotes (negative karma), getting comments deleted, or even getting banned. For example, a user promoted Gemini out of nowhere on a comparison post about Claude Code and Cursor. 
 
-![avoid posting promotional comments out of context in reddit marketing](/PostImages/reddit-marketing/rm4.png) 
+![avoid posting promotional comments out of context in reddit marketing](/PostImages/reddit-marketing/rm4.webp) 
 
 Not only was this comment blatantly promotional, but it also had no structure. To understand how he should have commented with promotional intent, read the __ point under Dos of Reddit Marketing.
 
@@ -61,7 +61,7 @@ Only include a link when it truly adds value or is necessary to support a point,
 
 For instance, on a post on r/SaaS, the commenter shares actionable tips while naturally introducing their role as a Growth Marketer at Infrasity, highlighting that they are sharing marketing tips from experience. By offering relevant advice and including a contextual link, they position their company with credibility and authority, without coming off as pushy or salesy.
 
-![add links strategically with context in reddit marketing](/PostImages/reddit-marketing/rm5.png) 
+![add links strategically with context in reddit marketing](/PostImages/reddit-marketing/rm5.webp) 
 
 By being transparent and sparing with links, you signal that you're there to participate in the community, not just drive traffic to your site. Remember, a conversational mention of your product (without a link) can often be more effective than a promotional link drop. If the subreddit explicitly forbids promotional links, do not include them at all.
 
@@ -85,7 +85,7 @@ On Reddit's interface (especially on the website), you normally see your avatar 
 
 Click on your username or profile. If you get a message saying "We had a server error," it indicates that you have been shadowbanned. For instance, this shadowbanned account has no Avatar, and the error message also pops up.
 
-![in failed reddit marketing, you cannot see your avatar and get error message when you get shadowbanned](/PostImages/reddit-marketing/rm6.png) 
+![in failed reddit marketing, you cannot see your avatar and get error message when you get shadowbanned](/PostImages/reddit-marketing/rm6.webp) 
 
 ### 3. Your Posts/Comments Are Invisible to Others
 
@@ -95,17 +95,17 @@ An easy test is to log out or use a private/incognito browser window, then try t
 
 Some users report that when they try to log out of a shadowbanned account, they see a notice like "Your account has been suspended," even though they can log back in. This is a pretty strong indicator of a shadow ban.
 
-![suspended account when reddit marketing not done right](/PostImages/reddit-marketing/rm7.png) 
+![suspended account when reddit marketing not done right](/PostImages/reddit-marketing/rm7.webp) 
 
 ### 5. The Ban Appeal Test
 
 If you are still not sure, do a quick ban appeal test. Reddit has an official ban appeal form that you can find by going to their **[website](https://www.reddit.com/appeal)**. Typically, if your account is actually banned, you'll be able to use the appeal process to ask for a review. For example, here you can see that the user wrote an appeal to Reddit for account suspension.
 
-![apply for band appeal test in reddit marketing](/PostImages/reddit-marketing/rm8.png) 
+![apply for band appeal test in reddit marketing](/PostImages/reddit-marketing/rm8.webp) 
 
 If your account was not banned, you won't get the option to appeal because there's nothing to appeal; indicating that you are not shadowbanned. 
 
-![you are not shadowbanned when you cannot send appeal while doing reddit marketing](/PostImages/reddit-marketing/rm9.png) 
+![you are not shadowbanned when you cannot send appeal while doing reddit marketing](/PostImages/reddit-marketing/rm9.webp) 
 
 So, you can check if your Reddit account has been shadowbanned in these five ways, including whether your Avatar, posts, and comments are still visible, if an error message appears, or if you can send an appeal.
 
@@ -117,7 +117,7 @@ Now that we've covered what not to do, let's focus on the positive steps you sho
 
 Redditors prefer to interact with people, not faceless brand logos. If possible, avoid using a throwaway account that looks brand new or an account that is blatantly just your company name with no personality. Choose a username that's professional but not purely promotional (for example, using your name or a variation of it, perhaps with your company name subtly included). Set a Reddit Avatar and add a banner image to make your profile look active. Fill out your bio with one or two lines about who you are or what you gonna do in there. 
 
-![personalize your account for reddit marketing](/PostImages/reddit-marketing/rm10.png) 
+![personalize your account for reddit marketing](/PostImages/reddit-marketing/rm10.webp) 
 
 For instance, this Reddit user has set up an Avatar, banner image, and mentioned what they are going to do on the platform. This profile customization builds authenticity. A completed, personable profile is more likely to be trusted by other users and not immediately dismissed as a spammer or bot. It shows that behind the account, there's a real person who genuinely participates on Reddit.
 
@@ -130,7 +130,7 @@ Also, be responsive: if people comment on your post or reply to your comments, w
 
 For example, a user posted on a subreddit r/AI_Agents, where they shared that they built an AI-powered research agent using n8n, OpenAI, Reddit, and Hacker News to help uncover why products in a given niche fail.
 
-![reply to comments timely when doing reddit marketing](/PostImages/reddit-marketing/rm11.png) 
+![reply to comments timely when doing reddit marketing](/PostImages/reddit-marketing/rm11.webp) 
 
 They received a comment, to which they replied instantly, building more engagement. In short, karma is "social proof" that you're a legitimate and contributing member of Reddit. Therefore, aim for at least a few hundred karma points and a couple of weeks of normal activity before you start your Reddit marketing thoroughly.
 
@@ -177,11 +177,11 @@ Ensure that the vast majority of your interactions are NOT about your product. S
 
 The more you contribute meaningfully, the more you'll stand out in a positive way. Reddit actually recognizes users who engage a lot and gives them Achievements. For example, you might get these achievements for your contribution on Reddit. Here, Nice Post was received because of getting 10 Upvotes on the Post.
 
-![you receive achievements during reddit marketing process](/PostImages/reddit-marketing/rm11.png) 
+![you receive achievements during reddit marketing process](/PostImages/reddit-marketing/rm12.webp) 
 
 These achievements, especially achievements like Top 1% Commenter, give you more credibility and help in highlighting your comment among all the comments. For example, in this snapshot of the comment section, your attention must be drawn toward the commenter with the "Top 1% Commenter" achievement.
 
-![top 1 percent commenter achievement in reddit marketing](/PostImages/reddit-marketing/rm12.png) 
+![top 1 percent commenter achievement in reddit marketing](/PostImages/reddit-marketing/rm13.webp) 
 
 How do you get there? Consistency and quality. Try to consistently be one of the people who answer questions in your domain, welcome newcomers, or provide insightful analysis on topics in your industry. Over time, people will recognize your username. 
 
@@ -191,7 +191,7 @@ This kind of reputation means that when you eventually introduce your solution f
 
 Many subreddits offer a user flair, a little tag next to your username, which can be used to identify yourself. What you need to do is go to a subreddit - let's say the DevOps subreddit. Click on User Flair, and you'll see options like Devops, System Engineer, and Editable Placeholder Flair.
 
-![utilize flair in reddit marketing](/PostImages/reddit-marketing/rm12.png) 
+![utilize flair in reddit marketing](/PostImages/reddit-marketing/rm14.webp) 
 
 This kind of flair provides transparency: readers immediately know your affiliation. It can actually help you, because you're being upfront (Redditors appreciate honesty), and it can draw positive attention to your comments (people might notice the flair and see you as an authority, if used appropriately).
 
