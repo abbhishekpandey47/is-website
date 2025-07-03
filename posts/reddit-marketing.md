@@ -147,23 +147,23 @@ Looking for non-ChatGPT AI tools that are useful in enterprise workflows. Any su
 
 Instead of diving straight into a pitch, a well-structured comment would include:
 
-1. A Quirky Opener to Build Trust  
-   "Enterprise AI right now reminds me of the early IoT wave - everyone was hyped, but only a few got real value without drowning in complexity."
+1. A Quirky Opener to Build Trust
+ <p  style="margin: 0; font-size: 18px;">"Enterprise AI right now reminds me of the early IoT wave - everyone was hyped, but only a few got real value without drowning in complexity."</p>
 
 This kind of opener hooks readers with a relatable, insightful comparison and signals that you know the space well.
 
-2. A Soft Mention of the Tool You're Promoting  
-   "I see huge potential in DevOps and engineering support when they use [your tool]. It's like an AI-powered internal assistant in Slack/Teams that can create tickets, check deployments, pull logs, etc."
+2. A Soft Mention of the Tool You're Promoting
+ <p  style="margin: 0; font-size: 18px;">"I see huge potential in DevOps and engineering support when they use [your tool]. It's like an AI-powered internal assistant in Slack/Teams that can create tickets, check deployments, pull logs, etc."</p>
 
 You're not forcing a pitch - just showing how your tool fits the need, in a helpful, context-aware way.
 
-3. Address Minor Points or Concerns (like Budget)  
-   "You've mentioned budget - honestly, it's not a huge lift. You can start small, see how it fits into your workflow, and scale from there."
+3. Address Minor Points or Concerns (like Budget)
+ <p  style="margin: 0; font-size: 18px;">"You've mentioned budget - honestly, it's not a huge lift. You can start small, see how it fits into your workflow, and scale from there."</p>
 
 This tones down sales pressure and frames your product as low-risk and testable.
 
-4. Open the Door for More Engagement  
-   "Would love to hear if anyone else has had success outside the usual ChatGPT clones."
+4. Open the Door for More Engagement
+ <p  style="margin: 0; font-size: 18px;">"Would love to hear if anyone else has had success outside the usual ChatGPT clones."</p>
 
 This keeps the conversation going, inviting others to join in - which increases visibility and makes your post feel collaborative, not transactional.
 
