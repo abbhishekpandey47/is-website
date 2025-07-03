@@ -165,7 +165,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute">
-      <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[85vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg: transform lg:-translate-x-1/2">
+      <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[85vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg:transform lg:-translate-x-1/2">
         <div className="navbar-start max-lg:visible invisible">
           <Menu as="div" className="relative inline-block text-left p-0 ml-4">
             <div>
