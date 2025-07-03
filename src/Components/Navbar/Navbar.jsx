@@ -165,9 +165,9 @@ const Navbar = () => {
 
   return (
     <div className="w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute">
-      <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[75vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg  lg:absolute lg:left-[50vw] lg:origin-center lg: transform lg:-translate-x-1/2">
+      <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[85vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg:transform lg:-translate-x-1/2">
         <div className="navbar-start max-lg:visible invisible">
-          <Menu as="div" className="relative inline-block text-left p-0">
+          <Menu as="div" className="relative inline-block text-left p-0 ml-4">
             <div>
               <MenuButton
                 onClick={toggleMobileMenu}
@@ -211,12 +211,6 @@ const Navbar = () => {
                       {"Home"}
                     </Link>
                   </MenuItem>
-                  {/* MProducts */}
-                  {/* <MenuItem>
-                    <p className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg">
-                      {"Products"}
-                    </p>
-                  </MenuItem> */}
                   <MenuItem>
                     <Link
                       onClick={() => {
@@ -381,6 +375,19 @@ const Navbar = () => {
                       {"ROI Calculator"}
                     </Link>
                   </MenuItem>
+                  <MenuItem>
+                    <Link
+                      onClick={() => {
+                        closeMobileMenu();
+                        checkVisitPage("/pricing");
+                      }}
+                      href="/pricing"
+                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                      target={"/pricing".includes("http") ? "_blank" : ""}
+                    >
+                      {"Pricing"}
+                    </Link>
+                  </MenuItem>
                 </div>
               </MenuItems>
             )}
@@ -388,10 +395,10 @@ const Navbar = () => {
         </div>
         <Link
           href="/"
-          className="btn btn-ghost w-40 lg:absolute mr-28"
+          className="btn btn-ghost w-full md:w-40"
           aria-label="Infrasity Home"
         >
-          <div className="flex flex-col my-auto justify-center items-center">
+          <div className="flex flex-col justify-center items-center">
             <div>
               <Image
                 loading="lazy"
@@ -404,7 +411,7 @@ const Navbar = () => {
           </div>
         </Link>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 quicksand-semibold">
+          <ul className="menu menu-horizontal px-1 quicksand-semibold flex justify-center items-center">
             <li>
               <Link
                 href="/"
@@ -474,8 +481,20 @@ const Navbar = () => {
                 ROI Calculator
               </Link>
             </li>
+            <li>
+              <Link
+                href="/pricing"
+                onClick={() => {
+                  checkVisitPage("/pricing");
+                }}
+              >
+                Pricing
+              </Link>
+            </li>
+            <li className="mr-10">
+              {!isMobileMenuOpen && <CalendarBooking />}
+            </li>
           </ul>
-          {!isMobileMenuOpen && <CalendarBooking />}
         </div>
 
       </div>

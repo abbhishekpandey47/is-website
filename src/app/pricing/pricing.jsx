@@ -73,11 +73,11 @@ const PricingPage = () => {
     return (
         <div className="bg-black">
             {/* Hero Section */}
-            <section className="relative overflow-hidden bg-black">
+            <section className="relative overflow-hidden">
                 <div className="container mx-auto px-6 py-20 pt-36 text-center">
                     <div className="max-w-4xl mx-auto">
                         <p className="text-[#d6daff] font-medium tracking-wider uppercase text-sm mb-6">PRICING</p>
-                        <h1 className="quicksand-bold text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                        <h1 className="quicksand-bold text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text">
                             Find a plan that fits your growth stage
                         </h1>
                         <div className="text-[#b4b4b8] text-lg mb-10">
