@@ -165,13 +165,13 @@ const Navbar = () => {
 
   return (
     <div className="w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute">
-      <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[85vw] xl:w-[85vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg: transform lg:-translate-x-1/2">
-        <div className="max-lg:visible invisible">
-          <Menu as="div" className="flex justify-center items-center">
+      <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[85vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg: transform lg:-translate-x-1/2">
+        <div className="navbar-start max-lg:visible invisible">
+          <Menu as="div" className="relative inline-block text-left p-0 ml-4">
             <div>
               <MenuButton
                 onClick={toggleMobileMenu}
-                className="inline-flex items-center ml-4 gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20"
+                className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20"
                 aria-label="Menu"
               >
                 <svg
@@ -398,7 +398,7 @@ const Navbar = () => {
           className="btn btn-ghost w-full md:w-40"
           aria-label="Infrasity Home"
         >
-          <div className="flex justify-start items-start">
+          <div className="flex flex-col justify-center items-center">
             <div>
               <Image
                 loading="lazy"
@@ -491,7 +491,7 @@ const Navbar = () => {
                 Pricing
               </Link>
             </li>
-            <li className="items-start justify-start mr-8">
+            <li className="mr-10">
               {!isMobileMenuOpen && <CalendarBooking />}
             </li>
           </ul>
