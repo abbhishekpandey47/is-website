@@ -19,13 +19,11 @@ For example, you can see that this user has a total of 3.7k Karma, having contri
 
 As discussed previously, Reddit Karma depends on how many upvotes you get; however, the ratio of upvotes to Karma is not known yet. However, there are two types of Karma that you should be aware of so you can build your Reddit marketing strategy accordingly. 
 
-**Post Karma**
-Post karma is the reputation you earn from the upvotes received on your post on a subreddit. The more upvotes your posts get, the higher your Post Karma. The better your post resonates with users, the more Karma you'll get.
+**Post Karma**: Post karma is the reputation you earn from the upvotes received on your post on a subreddit. The more upvotes your posts get, the higher your Post Karma. The better your post resonates with users, the more Karma you'll get.
 
 ![how do you get karma on reddit - post karma and comment karma](/PostImages/how-do-you-get-karma-on-reddit/rk3.webp) 
 
-**Comment Karma**
-Comment karma is the reputation score that you achieve when Reddit users upvote your comments. It shows how well your responses add meaning to the conversation. Comments that provide valuable insights or add meaningful discussions are more likely to be upvoted. Just like post karma, your comment karma reflects how much the Reddit community values your input.
+**Comment Karma**: Comment karma is the reputation score that you achieve when Reddit users upvote your comments. It shows how well your responses add meaning to the conversation. Comments that provide valuable insights or add meaningful discussions are more likely to be upvoted. Just like post karma, your comment karma reflects how much the Reddit community values your input.
 
 >_Note: Downvotes hit just harder than upvotes to your Karma. It's a 1:1 trade. If your post/comment starts tanking, don't cling to it. Cut your losses, delete, and live to post another day._
 
