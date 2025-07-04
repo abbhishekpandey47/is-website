@@ -25,7 +25,9 @@ As discussed previously, Reddit Karma depends on how many upvotes you get; howev
 
 **Comment Karma**: Comment karma is the reputation score that you achieve when Reddit users upvote your comments. It shows how well your responses add meaning to the conversation. Comments that provide valuable insights or add meaningful discussions are more likely to be upvoted. Just like post karma, your comment karma reflects how much the Reddit community values your input.
 
->_Note: Downvotes hit just harder than upvotes to your Karma. It's a 1:1 trade. If your post/comment starts tanking, don't cling to it. Cut your losses, delete, and live to post another day._
+<div style="border-left: 5px solid #374151; padding-left: 1em; margin: 1em 0; color: #ffffff; background: transparent; font-style: italic; font-size: 20px; font-weight: 300;">
+Note: Downvotes hit just harder than upvotes to your Karma. It's a 1:1 trade. If your post/comment starts tanking, don't cling to it. Cut your losses, delete, and live to post another day.
+</div>
 
 ## How To Get Comment Karma on Reddit?
 
@@ -65,7 +67,9 @@ Keep an eye on rising posts; these are the posts that are getting a lot of atten
 
 ![how do you get karma on reddit - leverage rising posts to get more comment karma](/PostImages/how-do-you-get-karma-on-reddit/rk6.webp) 
 
-> _Engage in relevant subreddit discussions before mentioning your platform. Contribute valuable insights or join conversations in a casual and non-promotional way to create a buffer, ensuring that your platform mentions come across as more genuine and less self-serving._
+<div style="border-left: 5px solid #374151; padding-left: 1em; margin: 1em 0; color: #ffffff; background: transparent; font-style: italic; font-size: 20px; font-weight: 300;">
+Engage in relevant subreddit discussions before mentioning your platform. Contribute valuable insights or join conversations in a casual and non-promotional way to create a buffer, ensuring that your platform mentions come across as more genuine and less self-serving.
+</div>
 
 ## How To Get Post Karma on Reddit?
 
