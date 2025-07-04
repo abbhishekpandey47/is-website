@@ -37,7 +37,7 @@ To build comment karma on Reddit, it's important to get involved in active discu
 
 Reddit is fast-paced, so the sooner you comment on a trending post, the more likely your comment will be noticed and upvoted. When you engage early in the conversation, your comment has a better chance of being seen by a wider audience. Redditors tend to engage with the first replies, so if you're quick to contribute something valuable, your comment will stand out and increase your chances of earning Karma.
 
-Let's say you have an AI-powered no-code platform for building websites and apps, and you're interested in Reddit marketing. You could participate in discussions on subreddits like **r/nocode** to engage with the community.
+Let's say you have an AI-powered no-code platform for building websites and apps, and you're interested in **[Reddit marketing](https://www.infrasity.com/blog/reddit-marketing)**. You could participate in discussions on subreddits like **r/nocode** to engage with the community.
 
 For example, a post in the **r/nocode** subreddit discussing a List of Coding, No-Code, and Low-Code Platforms in 2025 asked Redditors to share their favorite tools from the list, inviting suggestions for any platforms they felt were missing. They also included a bonus question, wondering if it would be helpful to create a directory that includes pricing and additional details about these tools.
 
