@@ -11,6 +11,24 @@ import DevZero from "./svg/devzero";
 const WorkWith = () => {
     const [hoveredCard, setHoveredCard] = useState(null);
 
+    const cardData = [
+        {
+            id: "firefly-1",
+            title: "Firefly",
+            description: "Conversational AI platform (closed $12M seed + $6M extension) that lets teams delegate tasks to chatbots. We craft Kubiya's technical documentation and case studies."
+        },
+        {
+            id: "firefly-2",
+            title: "Terrateam",
+            description: "Netherlands-based startup that automates infrastructure via Terraform, OpenTofu, CDKTF and Terragrunt. Infrasity's keyword-rich content has helped Terrateam rapidly climb search rankings."
+        },
+        {
+            id: "3",
+            title: "Terrateam",
+            description: "Open-source IaC orchestration and code-generation engine that streamlines code management, orchestration, and observability. Infrasity develops Terramate’s developer guides and CLI docs to expand its community and adoption."
+        }
+    ];
+
     return (
         <div
             style={{
@@ -376,54 +394,52 @@ const WorkWith = () => {
                 </div>
             </div>
 
-            <div className="flex items-center justify-center p-10 max-sm:p-4">
+            <div className="flex items-center justify-center p-0 max-sm:p-4">
                 <div className="w-full">
-                    <div className="flex gap-10 max-sm:flex-col max-sm:gap-6 max-w-6xl w-full mx-auto">
-
-                        {/* Firefly Card - 40% width on desktop, full width on mobile */}
-                        <div
-                            className="relative group w-[45%] max-sm:w-full"
-                            onMouseEnter={() => setHoveredCard("firefly")}
-                            onMouseLeave={() => setHoveredCard(null)}
-                        >
+                    <div className="flex flex-row gap-10 max-sm:flex-col max-sm:gap-6 max-w-6xl w-full mx-auto">
+                        {cardData.map((card) => (
                             <div
-                                className="w-full relative bg-slate-900/60 backdrop-blur-sm border border-slate-700/50 rounded-3xl overflow-hidden transition-all duration-500 hover:border-purple-500/30"
-                                style={{
-                                    background: "linear-gradient(to top right, #020207 50%,#464cc0 100%)",
-                                    border: "1px solid #D8D8D833",
-                                    position: "relative",
-                                    overflow: "hidden",
-                                    transition: "background 0.6s ease, border-bottom-width 0.5s ease",
-                                    height: "370px",
-                                    borderBottomWidth: "1.5px",
-                                    borderBottomColor: "#D8D8D833"
-                                }}
+                                key={card.id}
+                                className={`relative group ${card.id == 3 ? "w-[33%]" : "w-[30%]"} max-sm:w-full`}
+                                onMouseEnter={() => setHoveredCard(card.id)}
+                                onMouseLeave={() => setHoveredCard(null)}
                             >
-                                {/* Glowy gradient overlay animation */}
                                 <div
-                                    className="absolute inset-0 pointer-events-none"
-                                />
-                                <div
-                                    className={`absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-purple-500/30 via-blue-500/20 to-transparent rounded-full blur-xl transition-all duration-500 ${hoveredCard === "firefly"
-                                        ? "scale-[3] opacity-60"
-                                        : "scale-100 opacity-30"
-                                        }`}
-                                ></div>
-                                <div className="p-8 max-sm:p-4 max-sm:mt-0">{/* Removed negative margin on mobile */}
-                                    <div className="w-16 h-16 max-sm:w-12 max-sm:h-12 p-4 max-sm:p-2 rounded-lg bg-[#1e2252] mb-6 max-sm:mb-4">
-                                        <FireFly />
+                                    className="w-full relative bg-slate-900/60 backdrop-blur-sm border border-slate-700/50 rounded-3xl overflow-hidden transition-all duration-500 hover:border-purple-500/30"
+                                    style={{
+                                        background: "linear-gradient(to top right, #020207 50%, #5F64FF80 100%)",
+                                        border: "1px solid #D8D8D833",
+                                        position: "relative",
+                                        overflow: "hidden",
+                                        transition: "background 0.6s ease, border-bottom-width 0.5s ease",
+                                        height: "305px",
+                                        borderBottomWidth: "1.5px",
+                                        borderBottomColor: "#D8D8D833"
+                                    }}
+                                >
+                                    <div className="absolute inset-0 pointer-events-none" />
+                                    <div
+                                        className={`absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-purple-500/30 via-blue-500/20 to-transparent rounded-full blur-xl transition-all duration-500 ${hoveredCard === card.id
+                                            ? "scale-[3] opacity-60"
+                                            : "scale-100 opacity-30"
+                                            }`}
+                                    />
+                                    <div className="p-8 max-sm:p-4 max-sm:mt-0">
+                                        <div className="w-16 h-16 max-sm:w-12 max-sm:h-12 p-4 max-sm:p-2 rounded-lg bg-[#1e2252] mb-6 max-sm:mb-4">
+                                            <FireFly />
+                                        </div>
+                                        <div className="flex items-start justify-between mb-3">
+                                            <h2 className="text-xl max-sm:text-lg font-bold text-white tracking-tighter font-sans">
+                                                {card.title}
+                                            </h2>
+                                        </div>
+                                        <p className="text-sm max-sm:text-[14px] text-[#afafaf] tracking-wider leading-relaxed font-light mb-0">
+                                            {card.description}
+                                        </p>
                                     </div>
-                                    <div className="flex items-start justify-between mb-3">
-                                        <h2 className="quicksand-bold text-xl max-sm:text-lg font-bold text-white tracking-tighter font-sans">
-                                            Firefly
-                                        </h2>
-                                    </div>
-                                    <p className="text-[15px] max-sm:text-[14px] text-[#afafaf] tracking-wider leading-relaxed font-light mb-0">
-                                        A rapidly growing lac platform (raised $23M in Series A) whose customers include Cisco, ZoomInfo and Fortune 500. Firefly relies on Infrasity for strategic developer content that highlights its multi-cloud control plane.
-                                    </p>
                                 </div>
                             </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
