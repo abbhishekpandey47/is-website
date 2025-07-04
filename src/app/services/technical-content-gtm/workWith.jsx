@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import FireFly from "./svg/firefly";
 import FireFly2 from "./svg/envSVG";
+import DevZero from "./svg/devzero";
 
 
 
@@ -226,9 +227,9 @@ const WorkWith = () => {
                 <div className="w-full">
                     <div className="flex gap-10 max-w-6xl w-full mx-auto mb-8">
 
-                        {/* Kubiya Card - 40% width */}
+                        {/* spacelift Card */}
                         <div
-                            className="relative group w-[45%]"
+                            className="relative group w-[50%]"
                         >
                             <div
                                 className="w-full h-[370px] relative bg-slate-900/60 backdrop-blur-sm border border-slate-700/50 rounded-3xl overflow-hidden transition-all duration-500 hover:border-purple-500/30"
@@ -263,10 +264,32 @@ const WorkWith = () => {
                                         }`}
                                 ></div>
 
+
+
+                                <div className="p-6">
+                                    <div className="w-16 h-16 pt-3 rounded-lg bg-[#1e2252] mb-6">
+                                        <Image
+                                            height={400}
+                                            width={400}
+                                            src="/ai-page/spacelift-logo.png"
+                                            alt="spacelift logo"
+                                            className="w-28 h-8"
+                                        />
+                                    </div>
+                                    <div className="flex items-start justify-between mb-3">
+                                        <h2 className="quicksand-bold text-xl font-bold text-white tracking-tighter font-sans">
+                                            Spacelift
+                                        </h2>
+
+                                    </div>
+                                    <p className="text-[15px] text-[#afafaf] tracking-wider leading-relaxed font-light mb-0">
+                                        Infrastructure-as-Code platform (Series B $15M, backed by Insight Partners) for Terraform and Pulumi. Our collaboration has included detailed release notes and tutorials.
+                                    </p>
+                                </div>
                                 <div className="h-52 relative overflow-hidden">
                                     <div className="absolute left-[202px] bottom-[10px] w-full h-full opacity-20 rounded-bl-2xl overflow-hidden">
                                         <Image
-                                            src={`/ai-page/firefly.png`}
+                                            src={`/ai-page/spacelift.png`}
                                             alt="Background"
                                             width={300}
                                             height={300}
@@ -282,7 +305,7 @@ const WorkWith = () => {
                                         >
                                             <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center text-slate-600 text-lg font-medium">
                                                 <Image
-                                                    src="/ai-page/firefly.png"
+                                                    src="/ai-page/spacelift.png"
                                                     alt="Kubiya Dashboard"
                                                     height={300}
                                                     width={300}
@@ -292,26 +315,13 @@ const WorkWith = () => {
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="p-8 -mt-32">
-                                    <div className="w-16 h-16 p-4 rounded-lg bg-[#1e2252] mb-6">
-                                        <FireFly />
-                                    </div>
-                                    <div className="flex items-start justify-between mb-3">
-                                        <h2 className="quicksand-bold text-xl font-bold text-white tracking-tighter font-sans">
-                                            Spacelift
-                                        </h2>
-
-                                    </div>
-                                    <p className="text-[15px] text-[#afafaf] tracking-wider leading-relaxed font-light mb-0">
-                                        Infrastructure-as-Code platform (Series B $15M, backed by Insight Partners) for Terraform and Pulumi. Our collaboration has included detailed release notes and tutorials.                                    </p>
-                                </div>
                             </div>
+
                         </div>
 
-                        {/* env0 Card - 60% width */}
+                        {/* devzero Card */}
                         <div
-                            className="relative group w-[55%]"
+                            className="relative group w-[40%]"
                         >
                             <div
                                 className="w-full relative h-[370px] bg-slate-900/60 backdrop-blur-sm border border-slate-700/50 rounded-3xl overflow-hidden transition-all duration-500 hover:border-purple-500/30"
@@ -352,9 +362,9 @@ const WorkWith = () => {
 
                                     {/* Left side - Content with icon */}
                                     <div className="flex-1 p-8 flex flex-col justify-center">
-                                        <div className="w-16 h-16 p-4 rounded-lg bg-[#1e2252] mb-6">
+                                        <div className="w-16 h-16 py-4 rounded-lg bg-[#1e2252] mb-6">
 
-                                            <FireFly2 />
+                                            <DevZero />
                                         </div>
                                         <div className="flex items-start justify-between mb-3">
                                             <h2 className="quicksand-bold text-xl font-bold text-white tracking-tighter font-sans">
@@ -362,7 +372,8 @@ const WorkWith = () => {
                                             </h2>
                                         </div>
                                         <p className="text-[15px] text-[#afafaf] tracking-wider leading-relaxed font-light mb-0 mr-8">
-                                            Cloud IDE startup (raised $26M seed+Series A) founded by ex-Uber engineers. Infrasity supports DevZero with crisp one-pagers and use-case guides.                                        </p>
+                                            Cloud IDE startup (raised $26M seed+Series A) founded by ex-Uber engineers. Infrasity supports DevZero with crisp one-pagers and use-case guides.
+                                        </p>
                                     </div>
 
                                     {/* Right side - Image */}
@@ -370,7 +381,7 @@ const WorkWith = () => {
                                         <div className="absolute top-32 left-80 right-0 bottom-0">
                                             <div className="absolute right-3 top-4 w-full h-full opacity-20 rounded-tl-2xl overflow-hidden">
                                                 <Image
-                                                    src={`/ai-page/firefly.png`}
+                                                    src={`/ai-page/devzero.png`}
                                                     alt="Background"
                                                     width={300}
                                                     height={300}
@@ -385,8 +396,8 @@ const WorkWith = () => {
                                             >
                                                 <div className="absolute inset-0 bg-gradient-to-br flex items-center justify-center text-slate-600 text-lg font-medium">
                                                     <Image
-                                                        src="/ai-page/env0.png"
-                                                        alt="Kubiya Dashboard"
+                                                        src="/ai-page/devzero.png"
+                                                        alt="devzero Dashboard"
                                                         height={800}
                                                         width={600}
                                                         className="absolute inset-0 object-cover"
