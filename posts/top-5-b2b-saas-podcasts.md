@@ -16,7 +16,7 @@ Well, reading has become quite a hassle, requiring you to take formal informatio
 
 But what if you could get information while walking your dog or driving home and not even feel the burden of consuming technical pieces? The answer is podcasts, and this list of our favourite podcasts will get you started on your listening journey.  
 
-### 1.Startups for the Rest of Us  
+### 1. Startups for the Rest of Us  
 
 !["stratups for the rest of us"](/PostImages/top-5-b2b-saas-podcasts/1.png)
 
@@ -48,7 +48,6 @@ The podcast contains in-depth conversations with SaaS founders on topics such as
 
 !["saasiest podcast"](/PostImages/top-5-b2b-saas-podcasts/4.png)
 
-
 The **SaaSiest Podcast** is terrific for several reasons:  
 
 1. **SaaSiest** as a community has an **exclusive membership group** for **female B2B SaaS founders**.  
@@ -63,29 +62,21 @@ With **over 176 episodes**, covering topics from **navigating the SaaS attention
 - **Check out the latest episode:** *Conversation with Frederic Laziou, CEO of Puzzel.*  
 
 
-### 4. Lenny's Podcast  
+### 4. SaaS That App: Building B2B Web Applications
 
-!["lenny's podcast"](/PostImages/top-5-b2b-saas-podcasts/5.png)
+!["saas that app: building b2b web applications"](/PostImages/top-5-b2b-saas-podcasts/bp.png)
 
+SaaS That App dives deep into the stories behind today’s most successful SaaS companies. Each episode features candid conversations with **founders, product leaders, and growth experts**, unpacking how they built, scaled, and optimized their SaaS businesses.
 
-**Lenny's Podcast** shifts its focus to **products**, diving deep into **building, launching, and growing** your SaaS product.  
+What makes it stand out is its broad yet practical range of topics - **from early-stage strategies and finding product-market fit to enterprise-level scaling**, pricing models, customer retention, and emerging SaaS tech trends. The podcast is packed with actionable insights, making it a go-to resource for entrepreneurs, operators, and anyone obsessed with building in SaaS.
 
-It is hosted by **Lenny Rachitsky**, who also publishes a **weekly newsletter** detailing **product growth strategies**.  
+- **Launched in**: April 18, 2025
+- **Available on**: [Apple Podcasts](https://podcasts.apple.com/us/podcast/saas-that-app-building-b2b-web-applications/id1810002146), and [saasthatapp.com](https://saasthatapp.com/)
+- **Check out the latest episode**: _Conversation with Brett Farmiloe, Founder and CEO of Featured_
 
-Episodes like the **conversation with Ivan Zhao, co-founder of Notion**, on overcoming the pandemic years is a **quintessential episode** of this podcast—equipped with **humour, insights, and the joy of overcoming struggles** while building a **memorable enterprise**.  
-
-!["lenny's podcast"](/PostImages/top-5-b2b-saas-podcasts/6.png)
-
-
-- **Launched in:** 2020  
-- **Available on:** [Spotify](https://open.spotify.com), [Apple Podcasts](https://podcasts.apple.com), [YouTube](https://www.youtube.com), and [Lenny's Newsletter](https://www.lennysnewsletter.com)  
-- **Check out the latest episode:** *Conversation with Eric Simpson, founder and CEO of Stackblitz.*  
-
-
-### 5.The SaaS Revolution Show  
+### 5. The SaaS Revolution Show  
 
 !["saas revolution show"](/PostImages/top-5-b2b-saas-podcasts/7.png)
-
 
 Hosted by **Alex Theuma**, a pioneer in **SaaS podcasting**, who has been organising **SaaS conferences** globally since 2016, the **SaaS Revolution Show** provides deep insights into:  
 
