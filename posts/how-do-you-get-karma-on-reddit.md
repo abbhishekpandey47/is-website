@@ -11,6 +11,8 @@ Reddit marketing is a fantastic way to engage with your target users, but only i
 
 Karma on Reddit is a reputation score that reflects how much your presence and contributions are appreciated on the platform. When the community members upvote your posts or comments, your Karma goes up, and when they downvote, it takes away the upvotes. A higher karma score means you are likely contributing positively and engaging with the community in a meaningful way. 
 
+![how do you get karma on reddit - user has 3.7k total karma](/PostImages/how-do-you-get-karma-on-reddit/rk2.webp) 
+
 For example, you can see that this user has a total of 3.7k Karma, having contributed to the Reddit community 84 times. 
 
 ### How Does Reddit Karma Work?
@@ -19,6 +21,8 @@ As discussed previously, Reddit Karma depends on how many upvotes you get; howev
 
 **Post Karma**
 Post karma is the reputation you earn from the upvotes received on your post on a subreddit. The more upvotes your posts get, the higher your Post Karma. The better your post resonates with users, the more Karma you'll get.
+
+![how do you get karma on reddit - post karma and comment karma](/PostImages/how-do-you-get-karma-on-reddit/rk3.webp) 
 
 **Comment Karma**
 Comment karma is the reputation score that you achieve when Reddit users upvote your comments. It shows how well your responses add meaning to the conversation. Comments that provide valuable insights or add meaningful discussions are more likely to be upvoted. Just like post karma, your comment karma reflects how much the Reddit community values your input.
@@ -39,6 +43,8 @@ Let's say you have an AI-powered no-code platform for building websites and apps
 
 For example, a post in the **r/nocode** subreddit discussing a List of Coding, No-Code, and Low-Code Platforms in 2025 asked Redditors to share their favorite tools from the list, inviting suggestions for any platforms they felt were missing. They also included a bonus question, wondering if it would be helpful to create a directory that includes pricing and additional details about these tools.
 
+![how do you get karma on reddit - engage in active conversations quickly](/PostImages/how-do-you-get-karma-on-reddit/rk4.webp) 
+
 One Redditor leveraged the opportunity in the comments to mention their own platforms - DaDaBIK, and AppifyText.ai. They also suggested creating a curated directory that includes essential details like use cases, key features, founding years, update history, customization levels, and app export options. With this comment, they got 3 upvotes, gaining more Karma.
 
 By responding with this helpful information, the commenter not only shares their tools but also contributes valuable suggestions to the thread, building their reputation within the community. Similarly, you could engage in discussions like these to share insights about your no-code platform, provide helpful advice, and increase your Comment Karma points. 
@@ -53,9 +59,13 @@ Many Reddit users look for answers or insights. Providing value by offering usef
 
 For example, on a post in the **r/AskProgramming** subreddit asking if no-code platforms and clone apps are a threat to software development jobs, one user responded with a brief yet thoughtful reply, stating that these technologies aren't a threat, referencing past examples like 4GL languages and low-code platforms. The comment earned 26 upvotes and several replies, demonstrating how a helpful, direct response can lead to engagement and Karma.
 
+![how do you get karma on reddit - be helpful and informative](/PostImages/how-do-you-get-karma-on-reddit/rk5.webp) 
+
 ### 4. Leverage Rising Posts for Upvotes
 
 Keep an eye on rising posts; these are the posts that are getting a lot of attention and are likely to end up in the "Hot" section soon. Commenting on these posts early gives your comment more visibility, which increases the chances of it getting traction and, depending on your content, the upvotes. By engaging with rising posts, you can ride the wave of increasing engagement and gain Comment Karma faster. To find out the rising posts on a subreddit, click on the "Sort By" section and select "Rising." 
+
+![how do you get karma on reddit - leverage rising posts to get more comment karma](/PostImages/how-do-you-get-karma-on-reddit/rk6.webp) 
 
 > _Engage in relevant subreddit discussions before mentioning your platform. Contribute valuable insights or join conversations in a casual and non-promotional way to create a buffer, ensuring that your platform mentions come across as more genuine and less self-serving._
 
@@ -73,6 +83,8 @@ Ensure that you're posting at a time when the maximum number of members are onli
 
 For example, if you're based in Europe but targeting developers in the U.S., schedule your posts to go live during the daytime in the U.S. Avoid posting during your own off-hours just for convenience. Instead, align your posting time with when your target audience is most active. Use tools like Later for Reddit, Delay for Reddit, or Subreddit Stats to identify optimal windows for each subreddit. Good timing can be the difference between a post that gains traction and one that goes completely unnoticed.
 
+![how do you get karma on reddit -post on subreddit when the users are active](/PostImages/how-do-you-get-karma-on-reddit/rk7.webp) 
+
 For instance, here you can see that 408 people are online, indicating that it is a good time to post for more visibility and engagement.
 
 ### 3. Post Engaging Content with Catchy Titles
@@ -81,6 +93,8 @@ Share something that's genuinely useful, interesting, or thought-provoking. This
 
 For example, you can see in this post on **r/aws** that the user has posed a question for the community, asking - "How painful was your migration from x86 to Graviton?" Instead of sharing their own detailed experience, they lay out common concerns they've heard, like compatibility issues, performance regressions, and tooling headaches, and then invite others to weigh in. 
 
+![how do you get karma on reddit - post engaging content wih catchy titles](/PostImages/how-do-you-get-karma-on-reddit/rk8.webp) 
+
 This approach works well because it sparks the urge to share personal experiences, especially among those who've gone through similar migrations. It turns a technical topic into an open conversation, encouraging the community to contribute their insights, and that's exactly the kind of post that tends to earn strong engagement and Karma.
 
 ### 4. Share your existing content
@@ -88,6 +102,8 @@ This approach works well because it sparks the urge to share personal experience
 If you've already written an article or blog post, you can absolutely share it on Reddit, as long as it's relevant and the subreddit allows link posts. The key is to present it in a way that invites discussion or feedback, rather than simply dropping a link. A thoughtful summary or context can go a long way.
 
 For example, in a post titled "How Developer Portals Abstract Away Kubernetes Complexity", the CEO of Getport.io shared a link to a technical blog, clearly stating their role and intent: to explore how developer portals can simplify Kubernetes for developers and how this ties into platform engineering and IDPs. 
+
+![how do you get karma on reddit - share your existing content like blogs](/PostImages/how-do-you-get-karma-on-reddit/rk9.webp) 
 
 They didn't just share the link; they explained what the article covers and asked for feedback from the community. This transparent, discussion-first approach makes the post feel helpful and genuine, encouraging engagement while still promoting their content.
 
