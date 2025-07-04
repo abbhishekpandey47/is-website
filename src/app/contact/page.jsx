@@ -495,479 +495,499 @@ const CalendarBooking = ({
     };
 
     return (
-        <div className="h-[700px]">
+        <div className="h-full lg:h-[1000px]">
             <div className="w-full mt-36 items-center justify-center">
                 <div className="w-full text-white rounded-xl p-8 flex flex-col items-center">
                     <h1 className="text-5xl text-center font-bold mb-4">Schedule a Free Demo</h1>
                     <span className="text-center text-gray-400 mb-8">
                         Book a free demo and see how Infrasity helps you move faster, smarter.
                     </span>
-                    <div className="text-xl font-bold text-center mb-4 mt-10">
-                        {step === 1 && (
-                            <div>
-                                <div className="rounded-full">
-                                    <Image
-                                        className="mx-auto mb-4 rounded-full"
-                                        src="/logodata/infrasity_logo.png"
-                                        alt="Meeting"
-                                        width={150}
-                                        height={100}
-                                    />
-                                </div>
-                                Book a Time to Connect with Us
-                            </div>
-                        )}
-                        {step === 2 && "Book a Time to Connect with Us"}
-                        {/* {step === 3 && "Complete Your Booking"} */}
-                        {step === 4 && "Booking Confirmed"}
-                    </div>
+                </div>
+                <div
+                    className="mb-24"
+                    style={{
+                        background:
+                            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+                    }}
+                >
+                    <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-14"></div>
 
-                    {step === 1 && (
-                        <div className="calendar-container">
-                            <div className="flex justify-between items-center mb-4">
-                                <button
-                                    onClick={prevMonth}
-                                    className="p-2 rounded-full hover:bg-gray-700"
-                                >
-                                    <svg
-                                        className="h-5 w-5"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M15 19l-7-7 7-7"
-                                        />
-                                    </svg>
-                                </button>
-                                <h2 className="text-xl font-medium">
-                                    {months[currentDate.getMonth()]} {currentDate.getFullYear()}
-                                </h2>
-                                <button
-                                    onClick={nextMonth}
-                                    className="p-2 rounded-full hover:bg-gray-700"
-                                >
-                                    <svg
-                                        className="h-5 w-5"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M9 5l7 7-7 7"
-                                        />
-                                    </svg>
-                                </button>
-                            </div>
-
-                            <div className="grid grid-cols-7 gap-1 mb-2">
-                                {weekdays.map((day) => (
-                                    <div
-                                        key={day}
-                                        className="text-center text-gray-400 text-sm"
-                                    >
-                                        {day}
+                    <div className="flex items-center justify-center p-4">
+                        <div className="w-full lg:w-[50%] items-center justify-center rounded-3xl border border-gray-400 p-10"
+                            style={{
+                                background: "linear-gradient(to right, #0e1329 0%, #0e1329 10%, #353586 100%)",
+                                border: "2px solid #393a52",
+                                transition: "all 0.3s ease",
+                            }}
+                        >
+                            <div className="text-xl font-bold text-center mb-4 mt-10 ">
+                                {step === 1 && (
+                                    <div>
+                                        <div className="rounded-full">
+                                            <Image
+                                                className="mx-auto mb-4 rounded-full"
+                                                src="/logodata/infrasity_logo.png"
+                                                alt="Meeting"
+                                                width={150}
+                                                height={100}
+                                            />
+                                        </div>
+                                        Book a Time to Connect with Us
                                     </div>
-                                ))}
-                            </div>
-
-                            <div className="grid grid-cols-7 gap-1">{renderCalendar()}</div>
-
-                            <div className="mt-6 flex justify-end">
-                                {selectedDate && (
-                                    <button
-                                        onClick={goToTimeSelection}
-                                        className="bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md"
-                                    >
-                                        Next
-                                    </button>
                                 )}
-                            </div>
-                        </div>
-                    )}
-
-                    {step === 2 && (
-                        <div className="time-selection">
-                            <div>
-                                <p className="text-lg font-medium mb-1">
-                                    {selectedDate && formatDate(selectedDate)}
-                                </p>
-                                <p className="text-gray-400 text-sm mb-2">
-                                    Select a time slot for your meeting
-                                </p>
-                            </div>
-                            <div className="mb-4 bg-[#0e1433] rounded-lg">
-                                <div>
-                                    <select
-                                        value={selectedTimezone}
-                                        onChange={handleTimezoneChange}
-                                        style={{
-                                            width: "100%",
-                                            fontSize: "0.875rem",
-                                            backgroundColor: "#0c102e",
-                                            border: "1px solid #374151",
-                                            borderRadius: "0.25rem",
-                                            padding: "0.5rem 0.75rem",
-                                            color: "#ffffff",
-                                            outline: "none",
-                                            boxShadow: "none",
-                                            transition: "all 0.2s",
-                                            scrollbarWidth: "thin",
-                                            scrollbarColor: "#3d4058 #1a1f4a",
-                                        }}
-                                        className="w-full text-sm bg-[#0c102e] border border-gray-700 rounded px-3 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] p-2 custom-scrollbar"
-                                    >
-                                        {timezones.map((tz) => (
-                                            <option key={tz.value} value={tz.value}>
-                                                {tz.label}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
+                                {step === 2 && "Book a Time to Connect with Us"}
+                                {/* {step === 3 && "Complete Your Booking"} */}
+                                {step === 4 && "Booking Confirmed"}
                             </div>
 
-                            <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto mb-4">
-                                {availableTimeSlots.map((slot, index) => (
-                                    <div
-                                        key={index}
-                                        onClick={() => handleTimeSelection(slot)}
-                                        className={`p-2 text-center rounded-md cursor-pointer border border-gray-700 
-                ${selectedTime === slot
-                                                ? "bg-blue-600 text-white"
-                                                : "hover:bg-gray-700"
-                                            }`}
-                                    >
-                                        <div className="font-medium">{slot.convertedTime}</div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="mt-6 flex justify-between">
-                                <button
-                                    onClick={goToCalendar}
-                                    className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md"
-                                >
-                                    Back
-                                </button>
-
-                                {selectedTime && (
-                                    <button
-                                        onClick={goToUserInfo}
-                                        className="bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md"
-                                    >
-                                        Next
-                                    </button>
-                                )}
-                            </div>
-                        </div>
-                    )}
-
-                    {step === 3 && (
-                        <div className="user-info">
-                            <div className="mb-4">
-                                <p className="text-lg font-medium mb-1">Booking Details</p>
-                                <p className="text-gray-400 text-sm">
-                                    {selectedDate && formatDate(selectedDate)} at {selectedTime}
-                                </p>
-                            </div>
-
-                            <form className="space-y-4">
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-gray-300 mb-1 text-left">
-                                            First Name <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="firstName"
-                                            value={userInfo.firstName}
-                                            onChange={handleInputChange}
-                                            className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
-                                            placeholder="First Name"
-                                        />
-                                        {errors.firstName && (
-                                            <p className="text-red-500 text-sm mt-1 text-left">
-                                                {errors.firstName}
-                                            </p>
-                                        )}
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-gray-300 mb-1 text-left">
-                                            Last Name <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="lastName"
-                                            value={userInfo.lastName}
-                                            onChange={handleInputChange}
-                                            className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
-                                            placeholder="Last Name"
-                                        />
-                                        {errors.lastName && (
-                                            <p className="text-red-500 text-sm mt-1 text-left">
-                                                {errors.lastName}
-                                            </p>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-gray-300 mb-1 text-left">
-                                            Email <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            value={userInfo.email}
-                                            onChange={handleInputChange}
-                                            className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
-                                            placeholder="Email"
-                                        />
-                                        {errors.email && (
-                                            <p className="text-red-500 text-sm mt-1 text-left">
-                                                {errors.email}
-                                            </p>
-                                        )}
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-gray-300 mb-1 text-left">
-                                            Company Website
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="companyWebsite"
-                                            value={userInfo.companyWebsite}
-                                            onChange={handleInputChange}
-                                            className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
-                                            placeholder="https://"
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <label className="block text-gray-300 mb-1 text-left">
-                                        Phone Number
-                                    </label>
-                                    <div className="flex w-full">
-                                        <select
-                                            name="countryCode"
-                                            value={userInfo.countryCode}
-                                            onChange={handleInputChange}
-                                            className="w-[88px] bg-[#0c102e] rounded-l pl-1 py-2 text-white focus:outline-none focus:ring-[0.5px] focus:ring-[#4f4bc6] border border-[#3d4058] border-r-0"
+                            {step === 1 && (
+                                <div className="calendar-container">
+                                    <div className="flex justify-between items-center mb-4">
+                                        <button
+                                            onClick={prevMonth}
+                                            className="p-2 rounded-full hover:bg-gray-700"
                                         >
-                                            <option value="+1">🇺🇸 +1</option>{" "}
-                                            <option value="+7">🇷🇺 +7</option>{" "}
-                                            <option value="+20">🇪🇬 +20</option>{" "}
-                                            <option value="+27">🇿🇦 +27</option>{" "}
-                                            <option value="+30">🇬🇷 +30</option>{" "}
-                                            <option value="+31">🇳🇱 +31</option>{" "}
-                                            <option value="+32">🇧🇪 +32</option>{" "}
-                                            <option value="+33">🇫🇷 +33</option>{" "}
-                                            <option value="+34">🇪🇸 +34</option>{" "}
-                                            <option value="+36">🇭🇺 +36</option>{" "}
-                                            <option value="+39">🇮🇹 +39</option>{" "}
-                                            <option value="+40">🇷🇴 +40</option>{" "}
-                                            <option value="+41">🇨🇭 +41</option>{" "}
-                                            <option value="+43">🇦🇹 +43</option>{" "}
-                                            <option value="+44">🇬🇧 +44</option>{" "}
-                                            <option value="+45">🇩🇰 +45</option>{" "}
-                                            <option value="+46">🇸🇪 +46</option>{" "}
-                                            <option value="+47">🇳🇴 +47</option>{" "}
-                                            <option value="+48">🇵🇱 +48</option>{" "}
-                                            <option value="+49">🇩🇪 +49</option>{" "}
-                                            <option value="+51">🇵🇪 +51</option>{" "}
-                                            <option value="+52">🇲🇽 +52</option>{" "}
-                                            <option value="+54">🇦🇷 +54</option>{" "}
-                                            <option value="+55">🇧🇷 +55</option>{" "}
-                                            <option value="+56">🇨🇱 +56</option>{" "}
-                                            <option value="+57">🇨🇴 +57</option>{" "}
-                                            <option value="+58">🇻🇪 +58</option>{" "}
-                                            <option value="+60">🇲🇾 +60</option>{" "}
-                                            <option value="+61">🇦🇺 +61</option>{" "}
-                                            <option value="+62">🇮🇩 +62</option>{" "}
-                                            <option value="+63">🇵🇭 +63</option>{" "}
-                                            <option value="+64">🇳🇿 +64</option>{" "}
-                                            <option value="+65">🇸🇬 +65</option>{" "}
-                                            <option value="+66">🇹🇭 +66</option>{" "}
-                                            <option value="+81">JP +81</option>{" "}
-                                            <option value="+82">🇰🇷 +82</option>{" "}
-                                            <option value="+84">🇻🇳 +84</option>{" "}
-                                            <option value="+86">🇨🇳 +86</option>{" "}
-                                            <option value="+90">🇹🇷 +90</option>{" "}
-                                            <option value="+91">🇮🇳 +91</option>{" "}
-                                            <option value="+92">🇵🇰 +92</option>{" "}
-                                            <option value="+93">🇦🇫 +93</option>{" "}
-                                            <option value="+94">🇱🇰 +94</option>{" "}
-                                            <option value="+95">🇲🇲 +95</option>{" "}
-                                            <option value="+98">🇮🇷 +98</option>{" "}
-                                            <option value="+212">🇲🇦 +212</option>{" "}
-                                            <option value="+213">🇩🇿 +213</option>{" "}
-                                            <option value="+216">🇹🇳 +216</option>{" "}
-                                            <option value="+218">🇱🇾 +218</option>{" "}
-                                            <option value="+220">🇬🇲 +220</option>{" "}
-                                            <option value="+221">🇸🇳 +221</option>{" "}
-                                            <option value="+234">🇳🇬 +234</option>{" "}
-                                            <option value="+254">🇰🇪 +254</option>{" "}
-                                            <option value="+351">🇵🇹 +351</option>{" "}
-                                            <option value="+352">🇱🇺 +352</option>{" "}
-                                            <option value="+353">🇮🇪 +353</option>{" "}
-                                            <option value="+354">🇮🇸 +354</option>{" "}
-                                            <option value="+355">🇦🇱 +355</option>{" "}
-                                            <option value="+358">🇫🇮 +358</option>{" "}
-                                            <option value="+359">🇧🇬 +359</option>{" "}
-                                            <option value="+370">🇱🇹 +370</option>{" "}
-                                            <option value="+371">🇱🇻 +371</option>{" "}
-                                            <option value="+372">🇪🇪 +372</option>{" "}
-                                            <option value="+380">🇺🇦 +380</option>{" "}
-                                            <option value="+385">🇭🇷 +385</option>{" "}
-                                            <option value="+420">🇨🇿 +420</option>{" "}
-                                            <option value="+421">🇸🇰 +421</option>{" "}
-                                            <option value="+503">🇸🇻 +503</option>{" "}
-                                            <option value="+504">🇭🇳 +504</option>{" "}
-                                            <option value="+505">🇳🇮 +505</option>{" "}
-                                            <option value="+506">🇨🇷 +506</option>{" "}
-                                            <option value="+507">🇵🇦 +507</option>{" "}
-                                            <option value="+591">🇧🇴 +591</option>{" "}
-                                            <option value="+593">🇪🇨 +593</option>{" "}
-                                            <option value="+595">🇵🇾 +595</option>{" "}
-                                            <option value="+598">🇺🇾 +598</option>{" "}
-                                            <option value="+673">🇧🇳 +673</option>{" "}
-                                            <option value="+852">🇭🇰 +852</option>{" "}
-                                            <option value="+855">🇰🇭 +855</option>{" "}
-                                            <option value="+880">🇧🇩 +880</option>{" "}
-                                            <option value="+886">🇹🇼 +886</option>{" "}
-                                            <option value="+960">🇲🇻 +960</option>{" "}
-                                            <option value="+961">🇱🇧 +961</option>{" "}
-                                            <option value="+962">🇯🇴 +962</option>{" "}
-                                            <option value="+963">🇸🇾 +963</option>{" "}
-                                            <option value="+966">🇸🇦 +966</option>{" "}
-                                            <option value="+971">🇦🇪 +971</option>{" "}
-                                            <option value="+972">🇮🇱 +972</option>{" "}
-                                            <option value="+977">🇳🇵 +977</option>{" "}
-                                            <option value="+994">🇦🇿 +994</option>{" "}
-                                            <option value="+995">🇬🇪 +995</option>
-                                        </select>
-
-                                        <input
-                                            type="tel"
-                                            name="phoneNumber"
-                                            value={userInfo.phoneNumber}
-                                            onChange={handleInputChange}
-                                            className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
-                                            placeholder="Phone Number"
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <label className="block text-gray-300 mb-1 text-left">
-                                        Message
-                                    </label>
-                                    <textarea
-                                        type="text"
-                                        name="message"
-                                        value={userInfo.message}
-                                        onChange={handleInputChange}
-                                        className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
-                                        placeholder="Write your message here."
-                                    />
-                                </div>
-                            </form>
-
-                            <div className="mt-6 flex justify-between">
-                                <button
-                                    onClick={() => setStep(2)}
-                                    className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md"
-                                >
-                                    Back
-                                </button>
-
-                                {!isSubmitting ? (
-                                    <button
-                                        onClick={handleBookingSubmit}
-                                        className="bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md"
-                                    >
-                                        Confirm Booking
-                                    </button>
-                                ) : (
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                        }}
-                                    >
-                                        <svg
-                                            style={{
-                                                animation: "spin 1s linear infinite",
-                                                marginLeft: "-0.25rem",
-                                                marginRight: "0.75rem",
-                                                height: "1.25rem",
-                                                width: "1.25rem",
-                                                color: "white",
-                                            }}
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <circle
-                                                style={{ opacity: 0.25 }}
-                                                cx="12"
-                                                cy="12"
-                                                r="10"
+                                            <svg
+                                                className="h-5 w-5"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
                                                 stroke="currentColor"
-                                                strokeWidth="4"
-                                            ></circle>
-                                            <path
-                                                style={{ opacity: 0.75 }}
-                                                fill="currentColor"
-                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                            ></path>
-                                        </svg>
-                                        Submitting...
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M15 19l-7-7 7-7"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <h2 className="text-xl font-medium">
+                                            {months[currentDate.getMonth()]} {currentDate.getFullYear()}
+                                        </h2>
+                                        <button
+                                            onClick={nextMonth}
+                                            className="p-2 rounded-full hover:bg-gray-700"
+                                        >
+                                            <svg
+                                                className="h-5 w-5"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M9 5l7 7-7 7"
+                                                />
+                                            </svg>
+                                        </button>
                                     </div>
-                                )}
-                            </div>
-                        </div>
-                    )}
 
-                    {step === 4 && (
-                        <div className="success-message text-center py-8">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-16 w-16 mx-auto mb-4 text-green-500"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M5 13l4 4L19 7"
-                                />
-                            </svg>
-                            <h3 className="text-xl font-bold mb-2 text-green-400">
-                                Booking Confirmed!
-                            </h3>
-                            <p className="text-gray-300">
-                                Your meeting has been scheduled for:
-                            </p>
-                            <p className="font-medium">
-                                {selectedDate && formatDate(selectedDate)} at {selectedTime}
-                            </p>
-                            <p className="mt-2 text-gray-400">
-                                A confirmation email has been sent to your inbox.
-                            </p>
+                                    <div className="grid grid-cols-7 gap-1 mb-2">
+                                        {weekdays.map((day) => (
+                                            <div
+                                                key={day}
+                                                className="text-center text-gray-400 text-sm"
+                                            >
+                                                {day}
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="grid grid-cols-7 gap-1">{renderCalendar()}</div>
+
+                                    <div className="mt-6 flex justify-end">
+                                        {selectedDate && (
+                                            <button
+                                                onClick={goToTimeSelection}
+                                                className="bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md"
+                                            >
+                                                Next
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
+                            {step === 2 && (
+                                <div className="time-selection">
+                                    <div>
+                                        <p className="text-lg font-medium mb-1">
+                                            {selectedDate && formatDate(selectedDate)}
+                                        </p>
+                                        <p className="text-gray-400 text-sm mb-2">
+                                            Select a time slot for your meeting
+                                        </p>
+                                    </div>
+                                    <div className="mb-4 bg-[#0e1433] rounded-lg">
+                                        <div>
+                                            <select
+                                                value={selectedTimezone}
+                                                onChange={handleTimezoneChange}
+                                                style={{
+                                                    width: "100%",
+                                                    fontSize: "0.875rem",
+                                                    backgroundColor: "#0c102e",
+                                                    border: "1px solid #374151",
+                                                    borderRadius: "0.25rem",
+                                                    padding: "0.5rem 0.75rem",
+                                                    color: "#ffffff",
+                                                    outline: "none",
+                                                    boxShadow: "none",
+                                                    transition: "all 0.2s",
+                                                    scrollbarWidth: "thin",
+                                                    scrollbarColor: "#3d4058 #1a1f4a",
+                                                }}
+                                                className="w-full text-sm bg-[#0c102e] border border-gray-700 rounded px-3 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] p-2 custom-scrollbar"
+                                            >
+                                                {timezones.map((tz) => (
+                                                    <option key={tz.value} value={tz.value}>
+                                                        {tz.label}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto mb-4">
+                                        {availableTimeSlots.map((slot, index) => (
+                                            <div
+                                                key={index}
+                                                onClick={() => handleTimeSelection(slot)}
+                                                className={`p-2 text-center rounded-md cursor-pointer border border-gray-700 
+                ${selectedTime === slot
+                                                        ? "bg-blue-600 text-white"
+                                                        : "hover:bg-gray-700"
+                                                    }`}
+                                            >
+                                                <div className="font-medium">{slot.convertedTime}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="mt-6 flex justify-between">
+                                        <button
+                                            onClick={goToCalendar}
+                                            className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md"
+                                        >
+                                            Back
+                                        </button>
+
+                                        {selectedTime && (
+                                            <button
+                                                onClick={goToUserInfo}
+                                                className="bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md"
+                                            >
+                                                Next
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
+                            {step === 3 && (
+                                <div className="user-info">
+                                    <div className="mb-4">
+                                        <p className="text-lg font-medium mb-1">Booking Details</p>
+                                        <p className="text-gray-400 text-sm">
+                                            {selectedDate && formatDate(selectedDate)} at {selectedTime}
+                                        </p>
+                                    </div>
+
+                                    <form className="space-y-4">
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-gray-300 mb-1 text-left">
+                                                    First Name <span className="text-red-500">*</span>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="firstName"
+                                                    value={userInfo.firstName}
+                                                    onChange={handleInputChange}
+                                                    className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
+                                                    placeholder="First Name"
+                                                />
+                                                {errors.firstName && (
+                                                    <p className="text-red-500 text-sm mt-1 text-left">
+                                                        {errors.firstName}
+                                                    </p>
+                                                )}
+                                            </div>
+
+                                            <div>
+                                                <label className="block text-gray-300 mb-1 text-left">
+                                                    Last Name <span className="text-red-500">*</span>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="lastName"
+                                                    value={userInfo.lastName}
+                                                    onChange={handleInputChange}
+                                                    className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
+                                                    placeholder="Last Name"
+                                                />
+                                                {errors.lastName && (
+                                                    <p className="text-red-500 text-sm mt-1 text-left">
+                                                        {errors.lastName}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-gray-300 mb-1 text-left">
+                                                    Email <span className="text-red-500">*</span>
+                                                </label>
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    value={userInfo.email}
+                                                    onChange={handleInputChange}
+                                                    className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
+                                                    placeholder="Email"
+                                                />
+                                                {errors.email && (
+                                                    <p className="text-red-500 text-sm mt-1 text-left">
+                                                        {errors.email}
+                                                    </p>
+                                                )}
+                                            </div>
+
+                                            <div>
+                                                <label className="block text-gray-300 mb-1 text-left">
+                                                    Company Website
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="companyWebsite"
+                                                    value={userInfo.companyWebsite}
+                                                    onChange={handleInputChange}
+                                                    className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
+                                                    placeholder="https://"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label className="block text-gray-300 mb-1 text-left">
+                                                Phone Number
+                                            </label>
+                                            <div className="flex w-full">
+                                                <select
+                                                    name="countryCode"
+                                                    value={userInfo.countryCode}
+                                                    onChange={handleInputChange}
+                                                    className="w-[88px] bg-[#0c102e] rounded-l pl-1 py-2 text-white focus:outline-none focus:ring-[0.5px] focus:ring-[#4f4bc6] border border-[#3d4058] border-r-0"
+                                                >
+                                                    <option value="+1">🇺🇸 +1</option>{" "}
+                                                    <option value="+7">🇷🇺 +7</option>{" "}
+                                                    <option value="+20">🇪🇬 +20</option>{" "}
+                                                    <option value="+27">🇿🇦 +27</option>{" "}
+                                                    <option value="+30">🇬🇷 +30</option>{" "}
+                                                    <option value="+31">🇳🇱 +31</option>{" "}
+                                                    <option value="+32">🇧🇪 +32</option>{" "}
+                                                    <option value="+33">🇫🇷 +33</option>{" "}
+                                                    <option value="+34">🇪🇸 +34</option>{" "}
+                                                    <option value="+36">🇭🇺 +36</option>{" "}
+                                                    <option value="+39">🇮🇹 +39</option>{" "}
+                                                    <option value="+40">🇷🇴 +40</option>{" "}
+                                                    <option value="+41">🇨🇭 +41</option>{" "}
+                                                    <option value="+43">🇦🇹 +43</option>{" "}
+                                                    <option value="+44">🇬🇧 +44</option>{" "}
+                                                    <option value="+45">🇩🇰 +45</option>{" "}
+                                                    <option value="+46">🇸🇪 +46</option>{" "}
+                                                    <option value="+47">🇳🇴 +47</option>{" "}
+                                                    <option value="+48">🇵🇱 +48</option>{" "}
+                                                    <option value="+49">🇩🇪 +49</option>{" "}
+                                                    <option value="+51">🇵🇪 +51</option>{" "}
+                                                    <option value="+52">🇲🇽 +52</option>{" "}
+                                                    <option value="+54">🇦🇷 +54</option>{" "}
+                                                    <option value="+55">🇧🇷 +55</option>{" "}
+                                                    <option value="+56">🇨🇱 +56</option>{" "}
+                                                    <option value="+57">🇨🇴 +57</option>{" "}
+                                                    <option value="+58">🇻🇪 +58</option>{" "}
+                                                    <option value="+60">🇲🇾 +60</option>{" "}
+                                                    <option value="+61">🇦🇺 +61</option>{" "}
+                                                    <option value="+62">🇮🇩 +62</option>{" "}
+                                                    <option value="+63">🇵🇭 +63</option>{" "}
+                                                    <option value="+64">🇳🇿 +64</option>{" "}
+                                                    <option value="+65">🇸🇬 +65</option>{" "}
+                                                    <option value="+66">🇹🇭 +66</option>{" "}
+                                                    <option value="+81">JP +81</option>{" "}
+                                                    <option value="+82">🇰🇷 +82</option>{" "}
+                                                    <option value="+84">🇻🇳 +84</option>{" "}
+                                                    <option value="+86">🇨🇳 +86</option>{" "}
+                                                    <option value="+90">🇹🇷 +90</option>{" "}
+                                                    <option value="+91">🇮🇳 +91</option>{" "}
+                                                    <option value="+92">🇵🇰 +92</option>{" "}
+                                                    <option value="+93">🇦🇫 +93</option>{" "}
+                                                    <option value="+94">🇱🇰 +94</option>{" "}
+                                                    <option value="+95">🇲🇲 +95</option>{" "}
+                                                    <option value="+98">🇮🇷 +98</option>{" "}
+                                                    <option value="+212">🇲🇦 +212</option>{" "}
+                                                    <option value="+213">🇩🇿 +213</option>{" "}
+                                                    <option value="+216">🇹🇳 +216</option>{" "}
+                                                    <option value="+218">🇱🇾 +218</option>{" "}
+                                                    <option value="+220">🇬🇲 +220</option>{" "}
+                                                    <option value="+221">🇸🇳 +221</option>{" "}
+                                                    <option value="+234">🇳🇬 +234</option>{" "}
+                                                    <option value="+254">🇰🇪 +254</option>{" "}
+                                                    <option value="+351">🇵🇹 +351</option>{" "}
+                                                    <option value="+352">🇱🇺 +352</option>{" "}
+                                                    <option value="+353">🇮🇪 +353</option>{" "}
+                                                    <option value="+354">🇮🇸 +354</option>{" "}
+                                                    <option value="+355">🇦🇱 +355</option>{" "}
+                                                    <option value="+358">🇫🇮 +358</option>{" "}
+                                                    <option value="+359">🇧🇬 +359</option>{" "}
+                                                    <option value="+370">🇱🇹 +370</option>{" "}
+                                                    <option value="+371">🇱🇻 +371</option>{" "}
+                                                    <option value="+372">🇪🇪 +372</option>{" "}
+                                                    <option value="+380">🇺🇦 +380</option>{" "}
+                                                    <option value="+385">🇭🇷 +385</option>{" "}
+                                                    <option value="+420">🇨🇿 +420</option>{" "}
+                                                    <option value="+421">🇸🇰 +421</option>{" "}
+                                                    <option value="+503">🇸🇻 +503</option>{" "}
+                                                    <option value="+504">🇭🇳 +504</option>{" "}
+                                                    <option value="+505">🇳🇮 +505</option>{" "}
+                                                    <option value="+506">🇨🇷 +506</option>{" "}
+                                                    <option value="+507">🇵🇦 +507</option>{" "}
+                                                    <option value="+591">🇧🇴 +591</option>{" "}
+                                                    <option value="+593">🇪🇨 +593</option>{" "}
+                                                    <option value="+595">🇵🇾 +595</option>{" "}
+                                                    <option value="+598">🇺🇾 +598</option>{" "}
+                                                    <option value="+673">🇧🇳 +673</option>{" "}
+                                                    <option value="+852">🇭🇰 +852</option>{" "}
+                                                    <option value="+855">🇰🇭 +855</option>{" "}
+                                                    <option value="+880">🇧🇩 +880</option>{" "}
+                                                    <option value="+886">🇹🇼 +886</option>{" "}
+                                                    <option value="+960">🇲🇻 +960</option>{" "}
+                                                    <option value="+961">🇱🇧 +961</option>{" "}
+                                                    <option value="+962">🇯🇴 +962</option>{" "}
+                                                    <option value="+963">🇸🇾 +963</option>{" "}
+                                                    <option value="+966">🇸🇦 +966</option>{" "}
+                                                    <option value="+971">🇦🇪 +971</option>{" "}
+                                                    <option value="+972">🇮🇱 +972</option>{" "}
+                                                    <option value="+977">🇳🇵 +977</option>{" "}
+                                                    <option value="+994">🇦🇿 +994</option>{" "}
+                                                    <option value="+995">🇬🇪 +995</option>
+                                                </select>
+
+                                                <input
+                                                    type="tel"
+                                                    name="phoneNumber"
+                                                    value={userInfo.phoneNumber}
+                                                    onChange={handleInputChange}
+                                                    className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
+                                                    placeholder="Phone Number"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label className="block text-gray-300 mb-1 text-left">
+                                                Message
+                                            </label>
+                                            <textarea
+                                                type="text"
+                                                name="message"
+                                                value={userInfo.message}
+                                                onChange={handleInputChange}
+                                                className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
+                                                placeholder="Write your message here."
+                                            />
+                                        </div>
+                                    </form>
+
+                                    <div className="mt-6 flex justify-between">
+                                        <button
+                                            onClick={() => setStep(2)}
+                                            className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md"
+                                        >
+                                            Back
+                                        </button>
+
+                                        {!isSubmitting ? (
+                                            <button
+                                                onClick={handleBookingSubmit}
+                                                className="bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md"
+                                            >
+                                                Confirm Booking
+                                            </button>
+                                        ) : (
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                }}
+                                            >
+                                                <svg
+                                                    style={{
+                                                        animation: "spin 1s linear infinite",
+                                                        marginLeft: "-0.25rem",
+                                                        marginRight: "0.75rem",
+                                                        height: "1.25rem",
+                                                        width: "1.25rem",
+                                                        color: "white",
+                                                    }}
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <circle
+                                                        style={{ opacity: 0.25 }}
+                                                        cx="12"
+                                                        cy="12"
+                                                        r="10"
+                                                        stroke="currentColor"
+                                                        strokeWidth="4"
+                                                    ></circle>
+                                                    <path
+                                                        style={{ opacity: 0.75 }}
+                                                        fill="currentColor"
+                                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                                    ></path>
+                                                </svg>
+                                                Submitting...
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
+                            {step === 4 && (
+                                <div className="success-message text-center py-8">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-16 w-16 mx-auto mb-4 text-green-500"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M5 13l4 4L19 7"
+                                        />
+                                    </svg>
+                                    <h3 className="text-xl font-bold mb-2 text-green-400">
+                                        Booking Confirmed!
+                                    </h3>
+                                    <p className="text-gray-300">
+                                        Your meeting has been scheduled for:
+                                    </p>
+                                    <p className="font-medium">
+                                        {selectedDate && formatDate(selectedDate)} at {selectedTime}
+                                    </p>
+                                    <p className="mt-2 text-gray-400">
+                                        A confirmation email has been sent to your inbox.
+                                    </p>
+                                </div>
+                            )}
                         </div>
-                    )}
+                    </div>
                 </div>
             </div>
         </div>
