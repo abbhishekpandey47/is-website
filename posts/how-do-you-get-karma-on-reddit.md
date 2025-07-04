@@ -119,6 +119,8 @@ To effectively use Reddit for marketing, you need a solid base of karma points t
 
 For post karma, choose subreddits where your audience is active and post during their peak hours. Share engaging content like technical insights or discussion-worthy questions, and pair it with eye-catching titles. Share your existing content in a way that feels native to Reddit, and structure your posts with simple language, relevant keywords, and question-based headings to make them SEO- and LLM-friendly. With the right approach, Reddit karma will increase, and so will credibility for your brand.
 
+These tactics and specific insights to increase Karma points on Reddit are experience-based, and if you are seeking a Reddit marketing partner, book a Free Demo with Infrasity. We specialize in Reddit marketing, wherein we don't promote your B2B SaaS company but advocate for it, which goes with the Reddit community's vibe.
+
 ## FAQs
 
 ### 1. Is 1 Upvote 1 Karma?  
