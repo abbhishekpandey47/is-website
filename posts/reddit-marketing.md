@@ -24,10 +24,12 @@ Chances are, your account will get flagged and potentially shadowbanned (where y
 
 Reddit thrives on authentic conversations. Communities value genuine discussions, shared experiences, and organic feedback, not the obvious marketing tactics.
 
-> _**Karma** is a point-based reputation system that reflects how much the community values your contributions. You earn karma in two main ways:  
-> **Post Karma** - When people upvote your submitted posts.  
-> **Comment Karma** - When people upvote your replies and comments on other posts.  
-> **Total Karma** - When both Post Karma and Comment Karma are coupled together._
+<div style="border-left: 5px solid #374151; padding-left: 1em; margin: 1em 0; color: #ffffff; background: transparent; font-style: italic; font-size: 20px; font-weight: 300;">
+Karma is a point-based reputation system that reflects how much the community values your contributions. You earn karma in two main ways:<br>
+<strong style="color: #ffffff; font-weight: 500; font-style: italic;">Post Karma</strong> - When people upvote your submitted posts.<br>
+<strong style="color: #ffffff; font-weight: 500;">Comment Karma</strong> - When people upvote your replies and comments on other posts.<br>
+<strong style="color: #ffffff; font-weight: 500;">Total Karma</strong> - When both Post Karma and Comment Karma are coupled together.
+</div>
 
 ### 2. Don't Ignore Subreddit Rules or the Moderators
 
