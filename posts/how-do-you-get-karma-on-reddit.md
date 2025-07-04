@@ -67,7 +67,7 @@ Keep an eye on rising posts; these are the posts that are getting a lot of atten
 
 > _Engage in relevant subreddit discussions before mentioning your platform. Contribute valuable insights or join conversations in a casual and non-promotional way to create a buffer, ensuring that your platform mentions come across as more genuine and less self-serving._
 
-## How To Get Post Karma on Reddit
+## How To Get Post Karma on Reddit?
 
 Earning post karma on Reddit means creating original posts that resonate with the community and get upvoted. Here's how to do it effectively:
 
