@@ -70,7 +70,7 @@ SaaS That App dives deep into the stories behind today’s most successful SaaS 
 
 What makes it stand out is its broad yet practical range of topics - **from early-stage strategies and finding product-market fit to enterprise-level scaling**, pricing models, customer retention, and emerging SaaS tech trends. The podcast is packed with actionable insights, making it a go-to resource for entrepreneurs, operators, and anyone obsessed with building in SaaS.
 
-- **Launched in**: April 18, 2025
+- **Launched in**: 2025
 - **Available on**: [Apple Podcasts](https://podcasts.apple.com/us/podcast/saas-that-app-building-b2b-web-applications/id1810002146), and [saasthatapp.com](https://saasthatapp.com/)
 - **Check out the latest episode**: _Conversation with Brett Farmiloe, Founder and CEO of Featured_
 
