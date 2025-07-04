@@ -891,6 +891,19 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Using Reddit for marketing can be a great strategy but it is crucial to understand what to do and what not to do. Therefore, read the article to get insights."
     },
+    
+    {
+        title: "How Do You Get Karma on Reddit​: A Comprehensive Guide",
+        metatitle: "How Do You Get Karma on Reddit​: A Comprehensive Guide",
+        slug: "how-do-you-get-karma-on-reddit",
+        description: "You can get Reddit Karma points in two ways - with Comment Karma and Post Karma. Read the article to understand what are they and how to achieve them.",
+        ogImage: "/PostImages/reddit-marketing-strategy/r1.webp",
+        publishedOn: "2025-07-04",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "You can get Reddit Karma points in two ways - with Comment Karma and Post Karma. Read the article to understand what are they and how to achieve them."
+    },
+
 
 ];
 
