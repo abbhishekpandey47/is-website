@@ -60,9 +60,9 @@ const Footer = () => {
             </a>
           </div>
 
-          <div className="w-full lg:w-2/3 flex flex-wrap max-lg:justify-center lg:pl-32">
-            {/* Tools section - made full width on small screens */}
-            <div className="w-full sm:w-1/2 lg:w-1/4 mb-8 lg:mb-0 text-center sm:text-left">
+          <div className="w-full lg:w-2/3 flex flex-wrap max-lg:justify-center">
+
+            <div className="w-full sm:w-1/2 lg:w-1/5 mb-8 lg:mb-0 text-center sm:text-left">
               <h3 className="font-bold mb-4">Tools</h3>
               <ul className="space-y-3">
                 <li>
@@ -112,8 +112,34 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            {/* Services section - made full width on small screens */}
-            <div className="w-full sm:w-1/2 lg:w-1/4 mb-8 lg:mb-0 text-center sm:text-left">
+            {/* Use Cases section */}
+            <div className="w-full sm:w-1/2 lg:w-1/5 mb-8 lg:mb-0 text-center sm:text-left">
+              <h3 className="font-bold mb-4">Use Cases</h3>
+              <ul className="space-y-3">
+                <li>
+                  <a href="/services/ai-agents-gtm-services" className="hover:underline">
+                    AI Agents GTM Services
+                  </a>
+                </li>
+                <li>
+                  <a href="/services/gtm-content" className="hover:underline">
+                    GTM Content
+                  </a>
+                </li>
+                <li>
+                  <a href="/services/gtm-content-services-for-yc-startups" className="hover:underline">
+                    GTM Content Services For YC Startups
+                  </a>
+                </li>
+                <li>
+                  <a href="/services/technical-content-gtm" className="hover:underline">
+                    Technical Content GTM
+                  </a>
+                </li>
+              </ul>
+            </div>
+            {/* Services section */}
+            <div className="w-full sm:w-1/2 lg:w-1/5 mb-8 lg:mb-0 text-center sm:text-left">
               <h3 className="font-bold mb-4">Services</h3>
               <ul className="space-y-3">
                 <li>
@@ -152,8 +178,8 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Resources section - made full width on small screens */}
-            <div className="w-full sm:w-1/2 lg:w-1/4 mb-8 lg:mb-0 text-center sm:text-left">
+            {/* Resources section */}
+            <div className="w-full sm:w-1/2 lg:w-1/5 mb-8 lg:mb-0 text-center sm:text-left">
               <h3 className="font-bold mb-4">Resources</h3>
               <ul className="space-y-3">
                 <li>
@@ -184,8 +210,8 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Follow us section - made full width on small screens */}
-            <div className="w-full sm:w-1/2 lg:w-1/4 text-center sm:text-left">
+            {/* Follow us section */}
+            <div className="w-full sm:w-1/2 lg:w-1/5 text-center sm:text-left">
               <h3 className="font-bold mb-4">Follow us</h3>
               <ul className="space-y-3">
                 <li>
