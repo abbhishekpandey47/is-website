@@ -106,7 +106,7 @@ const Footer = () => {
                       rel="noopener noreferrer"
                       className="hover:underline"
                     >
-                      <span className="z-10">Recognized by TechGig</span>
+                      <span className="z-10 lg:mr-5">Recognized by TechGig</span>
                     </Link>
                   </div>
                 </li>
@@ -117,7 +117,7 @@ const Footer = () => {
               <h3 className="font-bold mb-4">Use Cases</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="/services/ai-agents-gtm-services" className="hover:underline">
+                  <a href="/services/ai-agents-gtm-services" className="hover:underline lg:mr-5">
                     AI Agents GTM Services
                   </a>
                 </li>
@@ -126,12 +126,12 @@ const Footer = () => {
                     GTM Content
                   </a>
                 </li>
-                <li>
+                <li className="lg:mr-5">
                   <a href="/services/gtm-content-services-for-yc-startups" className="hover:underline">
                     GTM Content Services For YC Startups
                   </a>
                 </li>
-                <li>
+                <li className="lg:mr-5">
                   <a href="/services/technical-content-gtm" className="hover:underline">
                     Technical Content GTM
                   </a>
