@@ -112,7 +112,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            {/* Tools section - made full width on small screens */}
+            {/* Use Cases section */}
             <div className="w-full sm:w-1/2 lg:w-1/5 mb-8 lg:mb-0 text-center sm:text-left">
               <h3 className="font-bold mb-4">Use Cases</h3>
               <ul className="space-y-3">
@@ -138,7 +138,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            {/* Services section - made full width on small screens */}
+            {/* Services section */}
             <div className="w-full sm:w-1/2 lg:w-1/5 mb-8 lg:mb-0 text-center sm:text-left">
               <h3 className="font-bold mb-4">Services</h3>
               <ul className="space-y-3">
@@ -178,7 +178,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Resources section - made full width on small screens */}
+            {/* Resources section */}
             <div className="w-full sm:w-1/2 lg:w-1/5 mb-8 lg:mb-0 text-center sm:text-left">
               <h3 className="font-bold mb-4">Resources</h3>
               <ul className="space-y-3">
@@ -210,7 +210,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Follow us section - made full width on small screens */}
+            {/* Follow us section */}
             <div className="w-full sm:w-1/2 lg:w-1/5 text-center sm:text-left">
               <h3 className="font-bold mb-4">Follow us</h3>
               <ul className="space-y-3">
