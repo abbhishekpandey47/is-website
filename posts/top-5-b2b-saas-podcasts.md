@@ -46,7 +46,7 @@ The podcast contains in-depth conversations with SaaS founders on topics such as
 
 ### 3.The SaaSiest Podcast 
 
-!["saasiest podcast"](/PostImages/top-5-b2b-saas-podcasts/8.png)
+!["saasiest podcast"](/PostImages/top-5-b2b-saas-podcasts/4.png)
 
 The **SaaSiest Podcast** is terrific for several reasons:  
 
@@ -64,7 +64,7 @@ With **over 176 episodes**, covering topics from **navigating the SaaS attention
 
 ### 4. SaaS That App: Building B2B Web Applications
 
-!["saas that app: building b2b web applications"](/PostImages/top-5-b2b-saas-podcasts/bp.png)
+!["saas that app: building b2b web applications"](/PostImages/top-5-b2b-saas-podcasts/8.png)
 
 SaaS That App dives deep into the stories behind today’s most successful SaaS companies. Each episode features candid conversations with **founders, product leaders, and growth experts**, unpacking how they built, scaled, and optimized their SaaS businesses.
 
