@@ -8,14 +8,12 @@ const HoverCards = () => {
 
     const cards = [
         {
-
             title: "Startup-Speed Delivery",
             description:
                 "We match YC's pace with rapid turnaround times",
             time: "2 WEEKS",
             tagLine: "Product Docs Delivery"
         },
-
         {
             icon: (
                 <svg
@@ -83,31 +81,32 @@ const HoverCards = () => {
                     </p>
                 </div>
             </div>
-            <div className="flex items-center justify-center p-8">
-                <div className="h-64 flex gap-4 max-w-7xl w-full justify-center items-start">
+            <div className="flex items-center justify-center p-8 max-sm:p-4">
+                <div className="flex md:flex-row flex-col md:h-64 gap-4 max-w-7xl w-full justify-center items-start md:items-start max-w-sm md:max-w-7xl mx-auto">
                     {cards.map((card, index) => (
                         <div
                             key={index}
-                            className={`relative bg-gradient-to-br from-[#0a0f1b] to-blue-900/40 backdrop-blur-sm rounded-2xl border-2 cursor-pointer flex-shrink-0 h-28 transition-all duration-700 ease-out transform hover:scale-[1.02] border-[#323640] ${activeCard === index
-                                ? "w-[400px] h-56 border-[#454671] shadow-2xl shadow-pink"
-                                : "w-56 border-slate-700/60 hover:border-slate-600/80"
+                            className={`relative bg-gradient-to-br from-[#0a0f1b] to-blue-900/40 backdrop-blur-sm rounded-2xl border-2 cursor-pointer md:flex-shrink-0 w-full md:w-56 transition-all duration-700 ease-out transform hover:scale-[1.02] md:active:scale-100 active:scale-[0.98] border-[#323640] ${activeCard === index
+                                ? "md:w-[400px] h-56 border-[#454671] shadow-2xl shadow-pink"
+                                : "h-20 lg:h-28 md:border-slate-700/60 border-slate-700/60 hover:border-slate-600/80"
                                 }`}
                             onMouseEnter={() => setActiveCard(index)}
                             onMouseLeave={() => setActiveCard(0)}
+                            onClick={() => setActiveCard(activeCard === index ? 0 : index)}
                             style={{
                                 background: "linear-gradient(to top right, #020207 40%, #2c3077 90%)",
                                 border: "2px solid #2f2f37",
                                 transition: "all 0.3s ease",
                             }}
                         >
-                            <div className="px-8 pt-8 flex flex-col h-full">
+                            <div className="px-8 md:px-8 max-sm:px-6 pt-8 md:pt-8 max-sm:pt-6 flex flex-col h-full">
 
                                 {/* Title Row */}
                                 <div
-                                    className={`flex-shrink-0 mb-4 ${activeCard === index ? "mr-0" : "mr-1"
+                                    className={`flex-shrink-0 mb-4 ${activeCard === index ? "mr-0" : "md:mr-1"
                                         }`}
                                 >
-                                    <h3 className="text-white text-[21px] font-semibold leading-tight tracking-wide">
+                                    <h3 className="text-white text-[21px] md:text-[21px] max-sm:text-[19px] font-semibold leading-tight tracking-wide">
                                         {card.title}
                                     </h3>
                                 </div>
@@ -121,14 +120,14 @@ const HoverCards = () => {
                                             }`}
 
                                     >
-                                        <p className="h-10 text-[17px] md:text-[15px] text-[#afafaf] leading-relaxed tracking-wide font-[330]">
+                                        <p className="md:h-10 text-[17px] md:text-[15px] max-sm:text-[15px] text-[#afafaf] leading-relaxed tracking-wide font-[330] max-sm:mb-4">
                                             {card.description}
                                         </p>
 
 
                                         <div>
 
-                                            <div className="flex items-center space-x-3 pt-14">
+                                            <div className="flex items-center space-x-3 pt-14 max-sm:pt-8">
                                                 <RightIcon />
                                                 <p className="text-sm text-[#ffa600] tracking-wider font-[330] flex items-center">
                                                     {card.time}{" "}
