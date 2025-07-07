@@ -17,8 +17,8 @@ const YCWork = () => {
       category: "ENTERPRISE AI AGENT PLATFORM",
       link: "https://www.aviator.co/",
       description:
-        "Translated complex agent features into a clear, responsive landing page delivered in days. Our content guides help engineering users onboard quickly to their unified observability dashboard.",
-      achievement: "Delivered in 3 days",
+        "Supporting Aviator with technical blogs and SEO-driven content to articulate their AI agent-based approach to DevOps automation. Our work helps translate complex workflows into content that builds trust with engineering leaders.",
+      achievement: "Pivot-aligned technical content delivered in days",
       image: "/ai-page/aviator.png",
       alt: "Kubiya Dashboard",
     },
@@ -28,8 +28,8 @@ const YCWork = () => {
       category: "UNIFIED OBSERVABILITY PLATFORM",
       link: "https://middleware.io",
       description:
-        "Made technical UIs approachable with content guides and use-case write-ups that explain dashboards, alerts and logs in plain language for faster engineering onboarding.",
-      achievement: "50% faster onboarding",
+        "We help Middleware publish technical blogs on topics like OpenTelemetry, log pipelines, cloud-native observability, and monitoring at scale. Each piece is SEO-optimized to drive organic growth while staying deeply technical for platform engineers.",
+      achievement: "Technical blogs across observability and DevOps",
       image: "/ai-page/middleware.png",
       alt: "Middleware Dashboard",
     },
@@ -39,7 +39,7 @@ const YCWork = () => {
       category: "MONITORING & ANALYTICS",
       link: "https://getmocha.com/",
       description:
-        "Designed a sleek, developer-focused monitoring interface with real-time feedback loops, making observability effortless across engineering teams.",
+        "We produce technical blogs and SEO content for GetMocha covering frontend observability, performance bottlenecks, and developer experience. Our work helps position Mocha as a go-to solution for engineering teams focused on web performance and user impact.",
       achievement: "99.9% uptime",
       image: "/ai-page/getmocha.png",
       alt: "DataDog Dashboard",
@@ -50,8 +50,8 @@ const YCWork = () => {
       category: "AI AGENT TESTING",
       link: "https://www.qodo.ai",
       description:
-        "Built intelligent tools to test AI agents directly within your IDE and Git workflows—enabling automated reviews, debugging, and iterative improvements.",
-      achievement: "Integrated with major Git platforms",
+        "Supporting Qodo’s early GTM with Reddit engagement, explainer videos, and comparison-style blogs that differentiate them from tools like Copilot, Cursor, and Replit. All content is geared toward driving top-of-funnel visibility and developer onboarding.",
+      achievement: "Comparison guides, Reddit traction & explainer video",
       image: "/ai-page/qodo.png",
       alt: "AI Agent Testing Dashboard",
     },
