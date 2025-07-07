@@ -70,7 +70,7 @@ const HoverCards = () => {
             <div className="max-w-6xl mx-auto text-center relative z-10 py-10 pt-4">
                 <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
-                        Why <span className="text-orange-500">YC</span> Startups Trust Infrasity{" "}
+                    Content Partner <span>Behind</span>  Several <span className="text-orange-500">YC</span> Growth Stories{" "}
                     </h2>
                 </div>
                 <div class="flex justify-center my-6 mb-8">
@@ -84,7 +84,7 @@ const HoverCards = () => {
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-                        Built for the speed and precision that Y Combinator companies demand
+                    Startups backed by Y Combinator rely on us to craft product explainers, SDK docs, and use-case libraries
                     </p>
                 </div>
             </div>
