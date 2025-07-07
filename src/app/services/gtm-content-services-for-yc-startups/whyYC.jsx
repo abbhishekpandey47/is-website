@@ -82,7 +82,7 @@ const HoverCards = () => {
                 </div>
             </div>
             <div className="flex items-center justify-center p-8 max-sm:p-4">
-                <div className="flex md:flex-row flex-col md:h-64 gap-4 max-w-7xl w-full justify-center items-start md:items-start max-w-sm md:max-w-7xl mx-auto">
+                <div className="flex md:flex-row flex-col md:h-64 gap-4 w-full justify-center items-start md:items-start max-w-sm md:max-w-7xl mx-auto">
                     {cards.map((card, index) => (
                         <div
                             key={index}
