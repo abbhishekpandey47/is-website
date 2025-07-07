@@ -155,7 +155,7 @@ export default function AIStartupLanding() {
                     </p>
                 </div>
 
-                <div className="lg:mb-28 justify-center items-center">
+                <div className="lg:mb-32 justify-center items-center">
                     <div className="hidden max-sm:flex flex-col items-center gap-6">
                         <CalendarBooking />
                         <div className="w-full flex justify-center">
@@ -183,7 +183,7 @@ export default function AIStartupLanding() {
             </div>
 
             {/* Desktop: Image positioned on the right */}
-            <div className=" absolute right-0 bottom-0 mb-[200px] max-sm:hidden">
+            <div className=" absolute right-0 bottom-0 mb-[270px] max-sm:hidden">
                 <Image
                     width={600}
                     height={200}
