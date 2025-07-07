@@ -9,17 +9,16 @@ const YCWork = () => {
   const [currentSet, setCurrentSet] = useState(0);
   const [hoveredCard, setHoveredCard] = useState(null);
 
-  // All your cards - expand this array with more cards
   const allCards = [
     {
-      id: "kubiya",
-      title: "Kubiya.ai",
+      id: "aviator",
+      title: "Aviator",
       category: "ENTERPRISE AI AGENT PLATFORM",
-      link: "https://kubiya.ai",
+      link: "https://www.aviator.co/",
       description:
         "Translated complex agent features into a clear, responsive landing page delivered in days. Our content guides help engineering users onboard quickly to their unified observability dashboard.",
       achievement: "Delivered in 3 days",
-      image: "/ai-page/kubiya.png",
+      image: "/ai-page/aviator.png",
       alt: "Kubiya Dashboard",
     },
     {
@@ -34,27 +33,28 @@ const YCWork = () => {
       alt: "Middleware Dashboard",
     },
     {
-      id: "datadog",
-      title: "DataDog Clone",
+      id: "getmocha",
+      title: "Getmocha",
       category: "MONITORING & ANALYTICS",
-      link: "https://example.com",
+      link: "https://getmocha.com/",
       description:
-        "Built comprehensive monitoring dashboards with real-time metrics visualization and alert systems for enterprise-grade applications.",
+        "Designed a sleek, developer-focused monitoring interface with real-time feedback loops, making observability effortless across engineering teams.",
       achievement: "99.9% uptime",
-      image: "/ai-page/kubiya.png",
+      image: "/ai-page/getmocha.png",
       alt: "DataDog Dashboard",
     },
     {
-      id: "stripe",
-      title: "Payment Gateway",
-      category: "FINTECH INFRASTRUCTURE",
-      link: "https://example.com",
+      id: "qodo",
+      title: "Qodo",
+      category: "AI AGENT TESTING",
+      link: "https://www.qodo.ai",
       description:
-        "Developed secure payment processing system with multi-currency support and fraud detection capabilities for global e-commerce platforms.",
-      achievement: "PCI DSS compliant",
-      image: "/ai-page/middleware.png",
-      alt: "Payment Dashboard",
+        "Built intelligent tools to test AI agents directly within your IDE and Git workflows—enabling automated reviews, debugging, and iterative improvements.",
+      achievement: "Integrated with major Git platforms",
+      image: "/ai-page/qodo.png",
+      alt: "AI Agent Testing Dashboard",
     },
+
 
   ];
 
@@ -144,7 +144,7 @@ const YCWork = () => {
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 <div
-                  className="relative bg-slate-900/60 backdrop-blur-sm border border-slate-700/50 rounded-3xl overflow-hidden transition-all duration-500 hover:border-purple-500/30"
+                  className="h-[600px] relative bg-slate-900/60 backdrop-blur-sm border border-slate-700/50 rounded-3xl overflow-hidden transition-all duration-500 hover:border-purple-500/30"
                   style={{
                     background: hoveredCard === card.id
                       ? "#2c3077"
@@ -214,7 +214,7 @@ const YCWork = () => {
                       </span>
                     </div>
 
-                    <p className="text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
+                    <p className="h-20 text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
                       {card.description}
                     </p>
 
