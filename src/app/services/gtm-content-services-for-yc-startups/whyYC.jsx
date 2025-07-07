@@ -15,15 +15,7 @@ const HoverCards = () => {
             tagLine: "Product Docs, SDK Guides, Use Cases"
         },
         {
-            icon: (
-                <svg
-                    className="w-6 h-6 text-blue-400"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66L9.64 16.2a2 2 0 0 1-2.83-2.83l8.49-8.49" />
-                </svg>
-            ),
+
             title: "Technical Credibility",
             description:
                 "Content that doesn’t need babysitting — written by folks who speak infrastructure, SDKs, and APIs like your team does",
@@ -31,32 +23,14 @@ const HoverCards = () => {
             tagLine: "Engineering authored content",
         },
         {
-            icon: (
-                <svg
-                    className="w-6 h-6 text-blue-400"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <polygon points="23 7 16 12 23 17 23 7" />
-                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
-                </svg>
-            ),
+
             title: "Your DevRel Team, Without the Hiring Lag",
             description: "Full DevRel/content team instantly, no recruiting delays. ",
             time: "DAY 1 | Operational from kickoff",
             tagLine: "Ready from start",
         },
         {
-            icon: (
-                <svg
-                    className="w-6 h-6 text-blue-400"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <circle cx="12" cy="12" r="3" />
-                    <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m15.5-6.5l-4.24 4.24M7.76 16.24l-4.24 4.24m12.73 0l-4.24-4.24M7.76 7.76L3.52 3.52" />
-                </svg>
-            ),
+
             title: "5x faster and ~75% cheaper",
             description:
                 "Our content helps startups 3–5x traffic and increase signups — without founders writing a word.",
@@ -94,7 +68,7 @@ const HoverCards = () => {
                         <div
                             key={index}
                             className={`relative bg-gradient-to-br from-[#0a0f1b] to-blue-900/40 backdrop-blur-sm rounded-2xl border-2 cursor-pointer md:flex-shrink-0 w-full md:w-56 transition-all duration-700 ease-out transform hover:scale-[1.02] md:active:scale-100 active:scale-[0.98] border-[#323640] ${activeCard === index
-                                ? "md:w-[35%] h-64 border-[#454671] shadow-2xl shadow-pink"
+                                ? "md:w-[35%] h-60 border-[#454671] shadow-2xl shadow-pink"
                                 : "h-24 lg:h-36 md:border-slate-700/60 border-slate-700/60 hover:border-slate-600/80"
                                 }`}
                             onMouseEnter={() => setActiveCard(index)}
@@ -133,20 +107,15 @@ const HoverCards = () => {
 
 
                                         <div>
-
                                             <div className="flex items-center space-x-2 pt-14 max-sm:pt-8">
-                                                <RightIcon />
-                                                <p className="text-sm text-[#ffa600] tracking-wider font-[330] flex items-center">
-                                                    {card.time}{" "}
-                                                    <span className="ml-2 text-gray-400">|</span>{" "}
+                                                <div className="flex-shrink-0">
+                                                    <RightIcon />
+                                                </div>
+                                                <p className="text-sm text-[#ffa600] tracking-wider font-[330] leading-tight">
+                                                    {card.time}
                                                 </p>
-
-                                                <p className="text-sm text-[#afafaf] tracking-wider font-[330] flex items-center">
-                                                    {card.tagLine}{" "}
-                                                </p>
-
-
                                             </div>
+
                                         </div>
 
                                     </div>
