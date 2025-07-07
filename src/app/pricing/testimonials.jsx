@@ -7,7 +7,7 @@ export default function Testimonials() {
             name: "Cindy Blake",
             imageUrl: "/Testimon/cindyFirefly.jpg",
             alt: "Cindy Blake, VP Marketing, Firefly",
-            title: "VP Marketting, Firefly",
+            title: "VP Marketing, Firefly",
             quote:
                 "Infrasity was quick to onboard and understand how to best show off the capabilities of Firefly's cloud asset management. Team has been super responsive and collaborative.",
             highlight: ["quick to onboard", "responsive", "collaborative"],
@@ -80,7 +80,7 @@ export default function Testimonials() {
                                 <div className="text-left">
                                     <h4 className="font-semibold text-white">{testimonials[0].name}</h4>
                                     <p className="text-sm text-gray-400">
-                                        {testimonials[0].title}, {testimonials[0].company}
+                                        {testimonials[0].title}
                                     </p>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@ export default function Testimonials() {
                                 className="text-[#DAD1F1] leading-relaxed text-left"
                                 dangerouslySetInnerHTML={{
                                     __html: testimonials[0].highlight.reduce((acc, phrase) => {
-                                        const regex = new RegExp(`(${phrase})`, 'gi'); // Case-insensitive matching for each phrase
+                                        const regex = new RegExp(`(${phrase})`, 'gi');
                                         return acc.replace(regex, (match) => `<span class="text-white font-semibold">${match}</span>`);
                                     }, testimonials[0].quote)
                                 }}
