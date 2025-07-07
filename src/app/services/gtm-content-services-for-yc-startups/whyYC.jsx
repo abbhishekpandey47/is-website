@@ -26,9 +26,9 @@ const HoverCards = () => {
             ),
             title: "Technical Credibility",
             description:
-                "All content written by engineers who use the tech you build.",
-            time: "100%",
-            tagLine: "Engineering-authored content",
+                "Content that doesn’t need babysitting — written by folks who speak infrastructure, SDKs, and APIs like your team does",
+            time: "100% | Authored by practitioners, not generalists",
+            tagLine: "Engineering authored content",
         },
         {
             icon: (
@@ -41,9 +41,9 @@ const HoverCards = () => {
                     <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
                 </svg>
             ),
-            title: "Team Extension",
+            title: "Your DevRel Team, Without the Hiring Lag",
             description: "Full DevRel/content team instantly, no recruiting delays. ",
-            time: "DAY 1",
+            time: "DAY 1 | Operational from kickoff",
             tagLine: "Ready from start",
         },
         {
@@ -57,10 +57,10 @@ const HoverCards = () => {
                     <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m15.5-6.5l-4.24 4.24M7.76 16.24l-4.24 4.24m12.73 0l-4.24-4.24M7.76 7.76L3.52 3.52" />
                 </svg>
             ),
-            title: "Proven Growth Impact",
+            title: "5x faster and ~75% cheaper",
             description:
-                "Engineering-led content drives qualified leads and organic growth.",
-            time: "3.5x",
+                "Our content helps startups 3–5x traffic and increase signups — without founders writing a word.",
+            time: "40% | Avg. lift in qualified inbound",
             tagLine: "More traffic with regular content",
         },
     ];
