@@ -19,15 +19,14 @@ const WhatWeDo = () => {
       <div className="max-w-6xl mx-auto text-center relative z-10 py-14 ">
         <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
           <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-            What we do{" "}
+          Go to market faster with use cases, landing pages, and product docs.{" "}
           </h1>
         </div>
 
         {/* Description */}
         <div className="max-w-[70%] mx-auto mb-8">
           <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-            Comprehensive technical content and development services designed
-            for YC startups.
+          No head of marketing? No problem. We act as your GTM engine across content, docs, and site strategy.
           </p>
         </div>
       </div>
