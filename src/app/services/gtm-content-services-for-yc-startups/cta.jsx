@@ -8,10 +8,17 @@ export default function Cta() {
     return (
         <div>
             <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
-                <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
-                    <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto tracking-wide">
+                <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
+                    <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
                         Ready to Scale Your Launch?
-                    </h1>
+                    </h2>
+                </div>
+                <div class="flex justify-center my-6 mb-8">
+                    <div class="w-[148px] h-1 rounded-full"
+                        style={{
+                            backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"
+                        }}
+                    ></div>
                 </div>
 
                 {/* Description */}
