@@ -19,6 +19,7 @@ const WhatWeDo = () => {
       <div className="max-w-6xl mx-auto text-center relative z-10 py-14 ">
         <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
           <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
+    
           Go to market faster with use cases, landing pages, and product docs.{" "}
           </h1>
         </div>
@@ -26,7 +27,7 @@ const WhatWeDo = () => {
         {/* Description */}
         <div className="max-w-[70%] mx-auto mb-8">
           <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-          No head of marketing? No problem. We act as your GTM engine across content, docs, and site strategy.
+          No head of marketing? No problem. We plug in as your GTM engine across content, docs, and site strategy.
           </p>
         </div>
       </div>
@@ -67,8 +68,7 @@ const WhatWeDo = () => {
                 </div>
 
                 <p className="text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
-                  SEO-driven developer articles, whitepapers and product docs
-                  written by engineers for engineers
+                Product-led whitepapers and explainer docs written by developers, designed to rank and convert. 
                 </p>
 
                 <div className="flex items-center space-x-3 mb-2">
@@ -87,6 +87,18 @@ const WhatWeDo = () => {
                   <RightIcon />
                   <p className="text-sm text-gray-400 tracking-wider font-light">
                     Integration playbooks
+                  </p>
+                </div>
+                <div className="flex items-center space-x-3 mb-2">
+                  <RightIcon />
+                  <p className="text-sm text-gray-400 tracking-wider font-light">
+                    Technical Whitepapers
+                  </p>
+                </div>
+                <div className="flex items-center space-x-3 mb-2">
+                  <RightIcon />
+                  <p className="text-sm text-gray-400 tracking-wider font-light">
+                    Use Case Breakdowns
                   </p>
                 </div>
               </div>
@@ -155,7 +167,7 @@ const WhatWeDo = () => {
                 </div>
 
                 <p className="text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
-                 Landing pages and websites tailored to B2B SaaS/DevTools, delivered fast - often under a week.
+                We build launch pages, product microsites, and pricing pages—fast. Always SEO-optimized and ready to convert.
                 </p>
 
                 <div className="flex items-center space-x-3 mb-2">
@@ -167,13 +179,17 @@ const WhatWeDo = () => {
 
                   <RightIcon />
                   <p className="text-sm text-gray-400 tracking-wider font-light flex items-center">
-                    Conversion Focused 
+                  Built for founder-led GTM
                     <span className="ml-4 text-gray-400">|</span>{" "}
                   </p>
 
                   <RightIcon />
                   <p className="text-sm text-gray-400 tracking-wider font-light">
-                    SEO Driven
+                  Design + Dev handled end-to-end
+                  </p>
+                  <RightIcon />
+                  <p className="text-sm text-gray-400 tracking-wider font-light">
+                  Delivered in 3–4 days
                   </p>
                 </div>
               </div>
