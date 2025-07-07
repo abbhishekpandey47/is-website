@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowUpRight, CheckCircle } from "lucide-react";
 import Image from "next/image";
 import RightIcon from "./svg/correct";
 import EditIcon from "./svg/editIcon";
@@ -17,10 +16,10 @@ const WhatWeDo = () => {
       }}
     >
       <div className="max-w-6xl mx-auto text-center relative z-10 py-14 ">
-        <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
-          <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
+        <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
+          <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
             What we do{" "}
-          </h1>
+          </h2>
         </div>
 
         {/* Description */}
@@ -31,7 +30,7 @@ const WhatWeDo = () => {
           </p>
         </div>
       </div>
-      <div className=" flex items-center justify-center p-10">
+      <div className=" flex items-center justify-center p-5 lg:p-10">
         <div className="flex flex-col lg:flex-row gap-10 max-w-6xl w-full">
           <div
             className="w-full lg:w-[50%] relative group"
@@ -94,7 +93,7 @@ const WhatWeDo = () => {
               <div className="h-80 relative overflow-hidden -mt-28">
                 <div className="absolute top-32 left-32 right-0 bottom-0">
                   <div
-                    className="bg-white/95 p-4 h-full relative overflow-hidden"
+                    className="p-4 h-full relative overflow-hidden"
                     style={{
                       border: "1.5px solid #223170",
                       borderTopLeftRadius: "1rem",
@@ -156,19 +155,19 @@ const WhatWeDo = () => {
                 </div>
 
                 <p className="text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
-                 Landing pages and websites tailored to B2B SaaS/DevTools, delivered fast - often under a week.
+                  Landing pages and websites tailored to B2B SaaS/DevTools, delivered fast - often under a week.
                 </p>
 
                 <div className="flex items-center space-x-3 mb-2">
                   <RightIcon />
                   <p className="text-sm text-gray-400 tracking-wider font-light flex items-center">
-                   Responsive design 
+                    Responsive design
                     <span className="ml-4 text-gray-400">|</span>{" "}
                   </p>
 
                   <RightIcon />
                   <p className="text-sm text-gray-400 tracking-wider font-light flex items-center">
-                    Conversion Focused 
+                    Conversion Focused
                     <span className="ml-4 text-gray-400">|</span>{" "}
                   </p>
 
@@ -179,9 +178,9 @@ const WhatWeDo = () => {
                 </div>
               </div>
               <div className="h-[270px] relative overflow-hidden">
-                <div className="absolute top-4 left-32 right-0 bottom-0">
+                <div className="absolute top-4 left-36 right-0 bottom-0">
                   <div
-                    className="bg-white/95 p-4 h-full relative overflow-hidden"
+                    className="p-4 h-full relative overflow-hidden"
                     style={{
                       border: "1.5px solid #223170",
                       borderTopLeftRadius: "1rem",
@@ -267,7 +266,7 @@ const WhatWeDo = () => {
               </div>
 
               {/* Right Side - Image */}
-              <div className="flex-1">
+              <div className="hidden lg:block flex-2 lg:flex-1">
                 <div className="h-full min-h-[200px] top-10 left-4 bottom-0 right-0 relative overflow-hidden rounded-xl">
                   <div
                     className=" p-4 h-full relative overflow-hidden rounded-xl"
@@ -292,7 +291,7 @@ const WhatWeDo = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-center p-10 bg-gray-900 min-h-screen pb-20">
+      <div className="flex items-center justify-center p-5 lg:p-10 bg-gray-900 min-h-screen pb-20">
         <div className="flex flex-col lg:flex-row gap-10 max-w-6xl w-full">
           {/* First Card */}
           <div
@@ -360,8 +359,8 @@ const WhatWeDo = () => {
               </div>
 
               {/* Image Section */}
-              <div className="pl-8 pt-8">
-                <div className="h-72 right-0 bottom-0 left-60 top-0 relative overflow-hidden rounded-tl-2xl">
+              <div className="pl-8 pt-20 lg:pt-8">
+                <div className="h-72 right-0 bottom-0 lg:left-60 top-0 relative overflow-hidden rounded-tl-2xl">
                   <div
                     className="h-full relative overflow-hidden rounded-tl-2xl"
                     style={{
@@ -451,20 +450,21 @@ const WhatWeDo = () => {
               <div className="pt-8 pl-8">
                 <div className="relative h-48 bottom-0 right-0 w-full">
                   <div
-                    className="bg-white/95 p-4 h-full relative overflow-hidden rounded-tl-2xl"
+                    className="p-4 h-full relative overflow-hidden rounded-tl-2xl"
                     style={{
                       border: "1.5px solid #223170",
                     }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center text-slate-600 text-lg font-medium rounded-tl-2xl">
-                      <div className="w-full h-full bg-gradient-to-br from-green-100 to-blue-100 flex items-center justify-center rounded-tl-2xl">
+                    <div className="absolute inset-0 flex items-center justify-center text-slate-600 text-lg font-medium rounded-tl-2xl">
+                      <div className="w-full h-full flex items-center justify-center rounded-tl-2xl">
                         <Image
                           src={`/ai-page/launch.png`}
                           alt="Kubiya Dashboard"
                           layout="fill"
                           objectFit="cover"
                           className="absolute inset-0 object-cover"
-                        />                      </div>
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

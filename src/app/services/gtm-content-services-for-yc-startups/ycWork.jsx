@@ -59,20 +59,20 @@ const YCWork = () => {
       }}
     >
       <div className="max-w-6xl mx-auto text-center relative z-10 py-10 pt-4">
-        <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
-          <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-          Trusted by <span className="text-orange-500"> YC backed </span> Founders {" "}
-          </h1>
+        <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
+          <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
+            Trusted by <span className="text-orange-500"> YC backed </span> Founders {" "}
+          </h2>
         </div>
 
         {/* Description */}
         <div className="max-w-[70%] mx-auto mb-8">
           <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-          From your first landing page to your product docs — we help you go to market faster with content that speaks to devs, wins trust, and drives adoption.
+            From your first landing page to your product docs — we help you go to market faster with content that speaks to devs, wins trust, and drives adoption.
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-center p-10">
+      <div className="flex items-center justify-center p-5 lg:p-10">
         <div className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl w-full mx-auto mb-8">
             {currentCards.map((card) => (
@@ -86,7 +86,7 @@ const YCWork = () => {
                   className="relative bg-slate-900/60 backdrop-blur-sm border border-slate-700/50 rounded-3xl overflow-hidden transition-all duration-500 hover:border-purple-500/30"
                   style={{
                     background: hoveredCard === card.id
-                      ? "#2c3077" 
+                      ? "#2c3077"
                       : "linear-gradient(to top right, #020207 40%, #2c3077 90%)",
                     border: "2px solid #2f2f37",
                     position: "relative",
@@ -110,8 +110,8 @@ const YCWork = () => {
                   />
                   <div
                     className={`absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-purple-500/30 via-blue-500/20 to-transparent rounded-full blur-xl transition-all duration-500 ${hoveredCard === card.id
-                        ? "scale-[3] opacity-60"
-                        : "scale-100 opacity-30"
+                      ? "scale-[3] opacity-60"
+                      : "scale-100 opacity-30"
                       }`}
                   ></div>
 
@@ -143,9 +143,9 @@ const YCWork = () => {
                       </h2>
 
                       <Link href={card.link} target="_blank" rel="noopener noreferrer">
-                      <ArrowUpRight className="text-slate-400 w-7 h-7 transition-all rounded-sm duration-300 group-hover:text-purple-400 border-[1.5px] border-[#5c5c63]" />
-                     </Link>
-                     
+                        <ArrowUpRight className="text-slate-400 w-7 h-7 transition-all rounded-sm duration-300 group-hover:text-purple-400 border-[1.5px] border-[#5c5c63]" />
+                      </Link>
+
                     </div>
 
                     <div className="mb-3">

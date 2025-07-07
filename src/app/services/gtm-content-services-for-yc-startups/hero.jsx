@@ -64,8 +64,6 @@ export default function YCStartupLanding() {
               style={{ lineHeight: "1.3" }}
             >
               Content led <span className="text-white">GTM & developer <br className="hidden lg:block" /> marketting service</span>
-              {/* <br /> */}
-              {/* <span className="text-white">for </span> */}
               <br />
               for <span className="text-orange-500">YC Startups</span>
             </h1>
