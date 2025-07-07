@@ -75,7 +75,7 @@ export default function YCStartupLanding() {
             <CalendarBooking />
           </div>
 
-          <div className="relative flex justify-end lg:justify-end lg:ml-36 ">
+          <div className="relative flex justify-end lg:justify-end lg:ml-36 mb-10 lg:mb-24 ">
             <div className="absolute right-16 top-16 w-full h-full opacity-20 rounded-2xl overflow-hidden">
               <Image
                 src={`/ai-page/yc-web.png`}
