@@ -46,7 +46,7 @@ export default function Testimonials({ heading, subHeading }) {
         }
     ];
     return (
-        <section className="container mx-auto px-6 py-10">
+        <section className="container mx-auto lg:px-6 py-10">
             <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
                 <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
