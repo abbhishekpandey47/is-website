@@ -13,6 +13,13 @@ export default function Cta() {
                         Ready to Scale Your Launch?
                     </h2>
                 </div>
+                <div class="flex justify-center my-6 mb-8">
+                    <div class="w-[148px] h-1 rounded-full"
+                        style={{
+                            backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"
+                        }}
+                    ></div>
+                </div>
 
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto">

@@ -9,33 +9,89 @@ const YCWork = () => {
   const [currentSet, setCurrentSet] = useState(0);
   const [hoveredCard, setHoveredCard] = useState(null);
 
-  const cardSets = [
-    // Set 1 - Original cards
-    [
-      {
-        id: "kubiya",
-        title: "Kubiya.ai",
-        category: "ENTERPRISE AI AGENT PLATFORM",
-        link: "https://kubiya.ai",
-        description:
-          "Translated complex agent features into a clear, responsive landing page delivered in days. Our content guides help engineering users onboard quickly to their unified observability dashboard.",
-        achievement: "Delivered in 3 days",
-        image: "/ai-page/kubiya.png",
-        alt: "Kubiya Dashboard",
-      },
-      {
-        id: "middleware",
-        title: "Middleware",
-        category: "UNIFIED OBSERVABILITY PLATFORM",
-        link: "https://middleware.io",
-        description:
-          "Made technical UIs approachable with content guides and use-case write-ups that explain dashboards, alerts and logs in plain language for faster engineering onboarding.",
-        achievement: "50% faster onboarding",
-        image: "/ai-page/middleware.png",
-        alt: "Middleware Dashboard",
-      },
-    ],
+  // All your cards - expand this array with more cards
+  const allCards = [
+    {
+      id: "kubiya",
+      title: "Kubiya.ai",
+      category: "ENTERPRISE AI AGENT PLATFORM",
+      link: "https://kubiya.ai",
+      description:
+        "Translated complex agent features into a clear, responsive landing page delivered in days. Our content guides help engineering users onboard quickly to their unified observability dashboard.",
+      achievement: "Delivered in 3 days",
+      image: "/ai-page/kubiya.png",
+      alt: "Kubiya Dashboard",
+    },
+    {
+      id: "middleware",
+      title: "Middleware",
+      category: "UNIFIED OBSERVABILITY PLATFORM",
+      link: "https://middleware.io",
+      description:
+        "Made technical UIs approachable with content guides and use-case write-ups that explain dashboards, alerts and logs in plain language for faster engineering onboarding.",
+      achievement: "50% faster onboarding",
+      image: "/ai-page/middleware.png",
+      alt: "Middleware Dashboard",
+    },
+    {
+      id: "datadog",
+      title: "DataDog Clone",
+      category: "MONITORING & ANALYTICS",
+      link: "https://example.com",
+      description:
+        "Built comprehensive monitoring dashboards with real-time metrics visualization and alert systems for enterprise-grade applications.",
+      achievement: "99.9% uptime",
+      image: "/ai-page/kubiya.png",
+      alt: "DataDog Dashboard",
+    },
+    {
+      id: "stripe",
+      title: "Payment Gateway",
+      category: "FINTECH INFRASTRUCTURE",
+      link: "https://example.com",
+      description:
+        "Developed secure payment processing system with multi-currency support and fraud detection capabilities for global e-commerce platforms.",
+      achievement: "PCI DSS compliant",
+      image: "/ai-page/middleware.png",
+      alt: "Payment Dashboard",
+    },
+
   ];
+
+  const createCardSets = () => {
+    const sets = [];
+    const cardsPerSet = window.innerWidth < 1024 ? 1 : 2;
+
+    for (let i = 0; i < allCards.length; i += cardsPerSet) {
+      sets.push(allCards.slice(i, i + cardsPerSet));
+    }
+
+    return sets;
+  };
+
+  const [cardSets, setCardSets] = useState(() => {
+    const sets = [];
+    for (let i = 0; i < allCards.length; i += 2) {
+      sets.push(allCards.slice(i, i + 2));
+    }
+    return sets;
+  });
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      const newSets = createCardSets();
+      setCardSets(newSets);
+      setCurrentSet(0);
+    };
+
+    if (typeof window !== 'undefined') {
+      const newSets = createCardSets();
+      setCardSets(newSets);
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   const nextSet = () => {
     setCurrentSet((prev) => (prev + 1) % cardSets.length);
@@ -45,11 +101,7 @@ const YCWork = () => {
     setCurrentSet((prev) => (prev - 1 + cardSets.length) % cardSets.length);
   };
 
-  const goToSet = (index) => {
-    setCurrentSet(index);
-  };
-
-  const currentCards = cardSets[currentSet];
+  const currentCards = cardSets[currentSet] || [];
 
   return (
     <div
@@ -65,6 +117,14 @@ const YCWork = () => {
           </h2>
         </div>
 
+        <div className="flex justify-center my-6 mb-8">
+          <div className="w-[148px] h-1 rounded-full"
+            style={{
+              backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"
+            }}
+          ></div>
+        </div>
+
         {/* Description */}
         <div className="max-w-[70%] mx-auto mb-8">
           <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
@@ -72,12 +132,13 @@ const YCWork = () => {
           </p>
         </div>
       </div>
+
       <div className="flex items-center justify-center p-5 lg:p-10">
         <div className="w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl w-full mx-auto mb-8">
-            {currentCards.map((card) => (
+            {currentCards.map((card, index) => (
               <div
-                key={card.id}
+                key={`${card.id}-${currentSet}-${index}`}
                 className="relative group"
                 onMouseEnter={() => setHoveredCard(card.id)}
                 onMouseLeave={() => setHoveredCard(null)}
@@ -94,7 +155,6 @@ const YCWork = () => {
                     transition: "background 0.6s ease"
                   }}
                 >
-                  {/* Glowy gradient overlay animation */}
                   <div
                     className="absolute inset-0 pointer-events-none"
                     style={{
@@ -108,6 +168,7 @@ const YCWork = () => {
                       opacity: hoveredCard === card.id ? 1 : 0
                     }}
                   />
+
                   <div
                     className={`absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-purple-500/30 via-blue-500/20 to-transparent rounded-full blur-xl transition-all duration-500 ${hoveredCard === card.id
                       ? "scale-[3] opacity-60"
@@ -126,7 +187,7 @@ const YCWork = () => {
                         <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center text-slate-600 text-lg font-medium">
                           <Image
                             src={card.image}
-                            alt="Kubiya Dashboard"
+                            alt={card.alt}
                             layout="fill"
                             objectFit="cover"
                             className="absolute inset-0 object-cover"
@@ -145,7 +206,6 @@ const YCWork = () => {
                       <Link href={card.link} target="_blank" rel="noopener noreferrer">
                         <ArrowUpRight className="text-slate-400 w-7 h-7 transition-all rounded-sm duration-300 group-hover:text-purple-400 border-[1.5px] border-[#5c5c63]" />
                       </Link>
-
                     </div>
 
                     <div className="mb-3">
@@ -183,7 +243,6 @@ const YCWork = () => {
           </div>
 
           <div className="flex items-center justify-center space-x-6 max-w-md mx-auto">
-
             <div className="flex-1 h-2 bg-slate-800/60 rounded-full overflow-hidden backdrop-blur-sm border border-slate-700/30">
               <div
                 className="h-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-500 ease-out"
@@ -194,20 +253,35 @@ const YCWork = () => {
               />
             </div>
 
-
             <button
               onClick={prevSet}
-              className="w-10 h-10 bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-full flex items-center justify-center text-white hover:bg-slate-700/80 hover:border-purple-500/30 transition-all duration-300 group"
+              disabled={cardSets.length <= 1}
+              className="w-10 h-10 bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-full flex items-center justify-center text-white hover:bg-slate-700/80 hover:border-purple-500/30 transition-all duration-300 group disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ChevronLeft className="w-5 h-5 group-hover:text-purple-400 transition-colors" />
             </button>
 
             <button
               onClick={nextSet}
-              className="w-10 h-10 bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-full flex items-center justify-center text-white hover:bg-slate-700/80 hover:border-purple-500/30 transition-all duration-300 group"
+              disabled={cardSets.length <= 1}
+              className="w-10 h-10 bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-full flex items-center justify-center text-white hover:bg-slate-700/80 hover:border-purple-500/30 transition-all duration-300 group disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <ChevronRight className="w-5 h-5 group-hover:text-purple-400 transition-colors" />
             </button>
+          </div>
+
+          {/* Dots */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {cardSets.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSet(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSet
+                  ? 'bg-purple-500 w-6'
+                  : 'bg-slate-600 hover:bg-slate-500'
+                  }`}
+              />
+            ))}
           </div>
         </div>
       </div>

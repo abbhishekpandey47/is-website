@@ -18,15 +18,22 @@ const WhatWeDo = () => {
       <div className="max-w-6xl mx-auto text-center relative z-10 py-14 ">
         <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
           <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
-            What we do{" "}
+            Go to market faster with use cases, landing pages, and product docs.{" "}
+
           </h2>
+        </div>
+        <div class="flex justify-center my-6 mb-8">
+          <div class="w-[148px] h-1 rounded-full"
+            style={{
+              backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"
+            }}
+          ></div>
         </div>
 
         {/* Description */}
         <div className="max-w-[70%] mx-auto mb-8">
           <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-            Comprehensive technical content and development services designed
-            for YC startups.
+            No head of marketing? No problem. We plug in as your GTM engine across content, docs, and site strategy.
           </p>
         </div>
       </div>
@@ -54,21 +61,25 @@ const WhatWeDo = () => {
               ></div>
 
               <div className="p-8">
-                <div className="w-16 h-16 p-4 rounded-lg bg-[#1c1f4b] -mb-8">
-                  <EditIcon />
-                </div>
-              </div>
+                <div className="flex items-start pb-6 gap-6">
+                  <div className="w-16 h-16 p-4 rounded-lg bg-[#1c1f4b] flex-shrink-0">
+                    <EditIcon />
+                  </div>
 
-              <div className="p-8">
-                <div className="flex items-start justify-between mb-3">
-                  <h2 className="text-2xl font-bold text-white quicksand-bold tracking-tighter">
-                    Technical Content and Blogs
-                  </h2>
-                </div>
+                  <div>
+                    <div className="flex items-start justify-between mb-2">
+                      <h2 className="text-2xl font-bold text-white quicksand-bold tracking-tighter">
+                        Technical Content and Blogs
+                      </h2>
+                    </div>
 
-                <p className="text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
-                  SEO-driven developer articles, whitepapers and product docs
-                  written by engineers for engineers
+                    <p className="hidden lg:block text-sm text-gray-400 tracking-wider leading-relaxed font-light">
+                      Product-led whitepapers and explainer docs written by developers, designed to rank and convert.
+                    </p>
+                  </div>
+                </div>
+                <p className="lg:hidden text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-6">
+                  Product-led whitepapers and explainer docs written by developers, designed to rank and convert.
                 </p>
 
                 <div className="flex items-center space-x-3 mb-2">
@@ -89,8 +100,20 @@ const WhatWeDo = () => {
                     Integration playbooks
                   </p>
                 </div>
+                <div className="flex items-center space-x-3 mb-2">
+                  <RightIcon />
+                  <p className="text-sm text-gray-400 tracking-wider font-light">
+                    Technical Whitepapers
+                  </p>
+                </div>
+                <div className="flex items-center space-x-3 mb-2">
+                  <RightIcon />
+                  <p className="text-sm text-gray-400 tracking-wider font-light">
+                    Use Case Breakdowns
+                  </p>
+                </div>
               </div>
-              <div className="h-80 relative overflow-hidden -mt-28">
+              <div className="h-80 relative overflow-hidden -mt-32">
                 <div className="absolute top-32 left-32 right-0 bottom-0">
                   <div
                     className="p-4 h-full relative overflow-hidden"
@@ -142,41 +165,53 @@ const WhatWeDo = () => {
 
               {/* Image Placeholder */}
               <div className="p-8">
-                <div className="w-16 h-16 p-4 rounded-lg bg-[#1c1f4b] -mb-8">
-                  <EditIcon />
-                </div>
-              </div>
+                <div className="flex items-start pb-6 gap-6">
+                  <div className="w-16 h-16 p-4 rounded-lg bg-[#1c1f4b] flex-shrink-0">
+                    <EditIcon />
+                  </div>
 
-              <div className="p-8">
-                <div className="flex items-start justify-between mb-3">
-                  <h2 className="text-2xl font-bold text-white quicksand-bold tracking-tighter">
-                    Webflow Development
-                  </h2>
-                </div>
+                  <div>
+                    <div className="flex items-start justify-between mb-3">
+                      <h2 className="text-2xl font-bold text-white quicksand-bold tracking-tighter">
+                        Webflow Development
+                      </h2>
+                    </div>
 
-                <p className="text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
-                  Landing pages and websites tailored to B2B SaaS/DevTools, delivered fast - often under a week.
+                    <p className="hidden lg:block text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
+                      We build launch pages, product microsites, and pricing pages—fast. Always SEO-optimized and ready to convert.
+                    </p>
+                  </div>
+                </div>
+                <p className="lg:hidden text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
+                  We build launch pages, product microsites, and pricing pages—fast. Always SEO-optimized and ready to convert.
                 </p>
 
-                <div className="flex items-center space-x-3 mb-2">
-                  <RightIcon />
-                  <p className="text-sm text-gray-400 tracking-wider font-light flex items-center">
-                    Responsive design
-                    <span className="ml-4 text-gray-400">|</span>{" "}
-                  </p>
+                <div className="space-y-4 mb-0">
+                  {/* First row */}
+                  <div className="flex items-start space-x-3">
+                    <RightIcon />
+                    <p className="w-[50%] lg:w-full text-sm text-gray-400 tracking-wider font-light flex items-center">
+                      Responsive design
+                    </p>
 
-                  <RightIcon />
-                  <p className="text-sm text-gray-400 tracking-wider font-light flex items-center">
-                    Conversion Focused
-                    <span className="ml-4 text-gray-400">|</span>{" "}
-                  </p>
+                    <RightIcon />
+                    <p className="w-[50%] lg:w-full text-sm text-gray-400 tracking-wider font-light">
+                      Built for founder-led GTM
+                    </p>
+                  </div>
 
-                  <RightIcon />
-                  <p className="text-sm text-gray-400 tracking-wider font-light">
-                    SEO Driven
-                  </p>
-                </div>
-              </div>
+                  <div className="flex items-start space-x-3">
+                    <RightIcon />
+                    <p className="w-[50%] lg:w-full text-sm text-gray-400 tracking-wider font-light flex items-center">
+                      Design + Dev handled end-to-end
+                    </p>
+
+                    <RightIcon />
+                    <p className="w-[50%] lg:w-full text-sm text-gray-400 tracking-wider font-light">
+                      Delivered in 3–4 days
+                    </p>
+                  </div>
+                </div>              </div>
               <div className="h-[270px] relative overflow-hidden">
                 <div className="absolute top-4 left-36 right-0 bottom-0">
                   <div
