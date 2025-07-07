@@ -31,17 +31,15 @@ export default function YCStartupLanding() {
               className="text-5xl lg:text-6xl font-bold quicksand-bold tracking-wide text-white  mb-8"
               style={{ lineHeight: "1.3" }}
             >
-              Your <span className="text-white">GTM & Technical</span>
-              <br />
-              <span className="text-white">Content Partner</span>
+              Content led <span className="text-white">GTM & developer marketting service</span>
+              {/* <br /> */}
+              {/* <span className="text-white">for </span> */}
               <br />
               for <span className="text-orange-500">YC Startups</span>
             </h1>
 
             <p className="w-[82%] text-xl md:text-xl text-[#ffe8a8] leading-relaxed font-[320] mb-8">
-              We blend engineering expertise with marketing speed, building
-              conversion-focused sites and developer-focused content so you can
-              launch faster.
+            From your first landing page to your product docs — we help you go to market faster with content that speaks to devs, wins trust, and drives adoption.
             </p>
 
             {/* CTA Button */}
