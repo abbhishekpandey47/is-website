@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import RightIcon from "./svg/correct";
 
 const YCWork = () => {
   const [currentSet, setCurrentSet] = useState(0);
@@ -110,7 +111,7 @@ const YCWork = () => {
         transition: "all 0.3s ease",
       }}
     >
-      <div className="max-w-6xl mx-auto text-center relative z-10 py-10 pt-4">
+      <div className="max-w-6xl mx-auto text-center relative z-10 pt-4">
         <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
           <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
             Trusted by <span className="text-orange-500"> YC backed </span> Founders {" "}
@@ -219,19 +220,7 @@ const YCWork = () => {
                     </p>
 
                     <div className="flex items-center space-x-3">
-                      <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </div>
+                      <RightIcon />
                       <span className="text-gray-400 font-light">
                         {card.achievement}
                       </span>
