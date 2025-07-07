@@ -1,5 +1,5 @@
 
-export default function Testimonials() {
+export default function Testimonials({ heading, subHeading }) {
 
     const testimonials = [
         {
@@ -47,13 +47,29 @@ export default function Testimonials() {
     ];
     return (
         <section className="container mx-auto px-6 py-10">
-            <div className="text-center mb-16">
-                <p className="font-[quicksand] text-gray-400 mb-4">Here’s how we help them ship content fast — and with depth.</p>
-                <h2 className="font-[quicksand] text-2xl md:text-3xl font-bold">Why teams backed by YC, Boldstart, and Eclipse trust Infrasity</h2>
+            <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
+                <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
+                    <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
+                        Why teams backed by YC, Boldstart, and Eclipse trust Infrasity
+                    </h2>
+                </div>
+                <div class="flex justify-center my-6 mb-8">
+                    <div class="w-[148px] h-1 rounded-full"
+                        style={{
+                            backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"
+                        }}
+                    ></div>
+                </div>
+
+                {/* Description */}
+                <div className="max-w-[70%] mx-auto">
+                    <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light tracking-wide">
+                        Here’s how we help them ship content fast — and with depth.                                </p>
+                </div>
             </div>
 
             {/* Desktop Layout: Left-Middle-Right with vertical centering */}
-            <div className="hidden lg:grid lg:grid-cols-3 gap-0 max-w-7xl mx-auto relative">
+            <div className="hidden lg:grid lg:grid-cols-3 gap-0 max-w-5xl mx-auto relative">
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10">
                     <div className="w-[1000px] h-[1000px] rounded-full blur-[50px] opacity-40"
                         style={{ background: 'radial-gradient(circle, #3e2189 0%, #3e2189 25%, #3e2189 50%, rgba(91, 33, 182, 0.3) 75%, transparent 100%)' }}></div>

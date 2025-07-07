@@ -113,7 +113,7 @@ const WhatWeDo = () => {
                   </p>
                 </div>
               </div>
-              <div className="h-80 relative overflow-hidden -mt-32">
+              <div className="h-80 relative overflow-hidden -mt-36">
                 <div className="absolute top-32 left-32 right-0 bottom-0">
                   <div
                     className="p-4 h-full relative overflow-hidden"
@@ -211,8 +211,9 @@ const WhatWeDo = () => {
                       Delivered in 3–4 days
                     </p>
                   </div>
-                </div>              </div>
-              <div className="h-[270px] relative overflow-hidden">
+                </div>
+              </div>
+              <div className="h-[265px] relative overflow-hidden">
                 <div className="absolute top-4 left-36 right-0 bottom-0">
                   <div
                     className="p-4 h-full relative overflow-hidden"
@@ -266,19 +267,28 @@ const WhatWeDo = () => {
             <div className="flex">
               {/* Left Side - Content */}
               <div className="flex-1 p-8">
-                <div className="w-16 h-16 p-4 rounded-lg bg-[#1c1f4b] mb-6">
-                  <EditIcon />
+                <div className="flex items-start pb-6 gap-6">
+                  <div className="w-16 h-16 p-4 rounded-lg bg-[#1c1f4b] flex-shrink-0">
+                    <EditIcon />
+                  </div>
+
+                  <div>
+                    <div className="flex items-start justify-between lg: mb-2">
+                      <h2 className="text-2xl font-bold text-white quicksand-bold tracking-tighter">
+                        Explainer & Demo Videos
+                      </h2>
+                    </div>
+
+                    <p className="hidden lg:block text-sm text-gray-400 tracking-wider leading-relaxed font-light">
+                      Product demos, walkthroughs, and use-case explainers crafted by our engineers.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="flex items-start justify-between mb-3">
-                  <h2 className="text-2xl font-bold text-white quicksand-bold tracking-tighter">
-                    Explainer & Demo Videos
-                  </h2>
-                </div>
-
-                <p className="text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
-                  Product demos, walkthroughs, and use-case explainers crafted by our engineers.
+                <p className="lg:hidden text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
+                  Product use-case and quickstart libraries showing customers how to solve real problems.
                 </p>
+
 
                 <div className="flex items-center space-x-3 mb-2">
                   <RightIcon />
@@ -350,20 +360,25 @@ const WhatWeDo = () => {
 
               {/* Icon */}
               <div className="p-8">
-                <div className="w-16 h-16 p-4 rounded-lg bg-[#1c1f4b] flex items-center justify-center text-white">
-                  <EditIcon />
-                </div>
-              </div>
+                <div className="flex items-start pb-6 gap-6">
+                  <div className="w-16 h-16 p-4 rounded-lg bg-[#1c1f4b] flex-shrink-0">
+                    <EditIcon />
+                  </div>
 
-              {/* Content */}
-              <div className="px-8 -mb-20">
-                <div className="flex items-start justify-between mb-3">
-                  <h2 className="text-2xl font-bold text-white tracking-tighter">
-                    Use Case Libraries
-                  </h2>
+                  <div>
+                    <div className="flex items-start justify-between mb-3">
+                      <h2 className="text-2xl font-bold text-white quicksand-bold tracking-tighter">
+                        Use Case <br className="lg:hidden" /> Libraries
+                      </h2>
+                    </div>
+
+                    <p className="hidden lg:block text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
+                      Product use-case and quickstart libraries showing customers how to solve real problems.
+                    </p>
+                  </div>
                 </div>
 
-                <p className="text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
+                <p className="lg:hidden text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
                   Product use-case and quickstart libraries showing customers how to solve real problems.
                 </p>
 
@@ -394,8 +409,8 @@ const WhatWeDo = () => {
               </div>
 
               {/* Image Section */}
-              <div className="pl-8 pt-20 lg:pt-8">
-                <div className="h-72 right-0 bottom-0 lg:left-60 top-0 relative overflow-hidden rounded-tl-2xl">
+              <div className="pl-8 lg:-mt-12">
+                <div className="h-48 lg:h-72 right-0 bottom-0 lg:left-60 top-0 relative overflow-hidden rounded-tl-2xl">
                   <div
                     className="h-full relative overflow-hidden rounded-tl-2xl"
                     style={{
@@ -438,22 +453,25 @@ const WhatWeDo = () => {
 
               {/* Icon */}
               <div className="p-8">
-                <div className="w-16 h-16 p-4 rounded-lg bg-[#1c1f4b] flex items-center justify-center text-white">
-                  <EditIcon />
-                </div>
-              </div>
 
-              {/* Content */}
-              <div className="px-8 -mb-7">
-                <div className="flex items-start justify-between mb-3">
-                  <h2 className="text-2xl font-bold text-white tracking-tighter">
-                    Launch Campaigns
-                  </h2>
-                </div>
+                <div className="flex items-start pb-6 gap-6">
+                  <div className="w-16 h-16 p-4 rounded-lg bg-[#1c1f4b] flex-shrink-0">
+                    <EditIcon />
+                  </div>
 
-                <p className="text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-8">
+                  <div>
+                    <div className="flex items-start justify-between mb-2">
+                      <h2 className="text-2xl font-bold text-white quicksand-bold tracking-tighter">
+                        Launch Campaigns
+                      </h2>
+                    </div>
+                  </div>
+
+                </div>
+                <p className="text-sm text-gray-400 tracking-wider leading-relaxed font-light mb-6">
                   Coordinated go-to-market campaigns with launch collateral and community distribution.
                 </p>
+
 
                 <div className="flex items-center space-x-3 mb-2">
                   <div className="text-purple-400">
@@ -482,7 +500,7 @@ const WhatWeDo = () => {
               </div>
 
               {/* Image Section */}
-              <div className="pt-8 pl-8">
+              <div className="pt-8 pl-8 lg:-mt-12">
                 <div className="relative h-48 bottom-0 right-0 w-full">
                   <div
                     className="p-4 h-full relative overflow-hidden rounded-tl-2xl"
