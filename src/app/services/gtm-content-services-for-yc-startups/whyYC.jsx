@@ -8,11 +8,11 @@ const HoverCards = () => {
 
     const cards = [
         {
-            title: "Startup-Speed Delivery",
+            title: "Delivery That Matches YC Pacing",
             description:
-                "We match YC's pace with rapid turnaround times",
+                "YC startups don’t wait — neither do we,we move at the same speed as you — fast, focused, and always shipping",
             time: "2 WEEKS",
-            tagLine: "Product Docs Delivery"
+            tagLine: "Product Docs, SDK Guides, Use Cases"
         },
         {
             icon: (
