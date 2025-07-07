@@ -61,15 +61,14 @@ const YCWork = () => {
       <div className="max-w-6xl mx-auto text-center relative z-10 py-10 pt-4">
         <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
           <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
-            Our <span className="text-orange-500">YC</span> Work{" "}
+          Trusted by <span className="text-orange-500"> YC backed </span> Founders {" "}
           </h1>
         </div>
 
         {/* Description */}
         <div className="max-w-[70%] mx-auto mb-8">
           <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-            Trusted by Y Combinator-backed startups to deliver technical content
-            and conversion-focused websites.
+          From your first landing page to your product docs — we help you go to market faster with content that speaks to devs, wins trust, and drives adoption.
           </p>
         </div>
       </div>
