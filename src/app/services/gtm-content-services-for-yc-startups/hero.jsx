@@ -39,7 +39,7 @@ export default function YCStartupLanding() {
             </h1>
 
             <p className="w-[82%] text-xl md:text-xl text-[#ffe8a8] leading-relaxed font-[320] mb-8">
-            From your first landing page to your product docs — we help you go to market faster with content that speaks to devs, wins trust, and drives adoption.
+            We work with startups from YC batches like Cedana (W24), Middleware (W22), GetMocha (S22), and Aviator (W21) — delivering developer-first content, launch-ready docs, and GTM assets that fuel early growth.
             </p>
 
             {/* CTA Button */}
