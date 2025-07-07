@@ -9,6 +9,7 @@ export default function TabbedYouTubeCarousel() {
 
   const videoCollections = {
     allCategories: [
+      "pQoP_Rndpqw",
       "BivxMW5DftE",
       "_TrEJAJPp0M",
       "erczPxh8iGc",
@@ -86,8 +87,8 @@ export default function TabbedYouTubeCarousel() {
             key={tab.id}
             onClick={() => changeTab(tab.id)}
             className={`flex-1 py-4 px-2 lg:px-4 rounded-full text-center transition-colors ${activeTab === tab.id
-                ? "bg-yellow-50 text-black font-normal"
-                : "text-white hover:bg-gray-800"
+              ? "bg-yellow-50 text-black font-normal"
+              : "text-white hover:bg-gray-800"
               }`}
           >
             {tab.label}
