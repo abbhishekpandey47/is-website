@@ -95,7 +95,7 @@ const HoverCards = () => {
                             key={index}
                             className={`relative bg-gradient-to-br from-[#0a0f1b] to-blue-900/40 backdrop-blur-sm rounded-2xl border-2 cursor-pointer md:flex-shrink-0 w-full md:w-56 transition-all duration-700 ease-out transform hover:scale-[1.02] md:active:scale-100 active:scale-[0.98] border-[#323640] ${activeCard === index
                                 ? "md:w-[400px] h-64 border-[#454671] shadow-2xl shadow-pink"
-                                : "h-20 lg:h-36 md:border-slate-700/60 border-slate-700/60 hover:border-slate-600/80"
+                                : "h-24 lg:h-36 md:border-slate-700/60 border-slate-700/60 hover:border-slate-600/80"
                                 }`}
                             onMouseEnter={() => setActiveCard(index)}
                             onMouseLeave={() => setActiveCard(0)}
