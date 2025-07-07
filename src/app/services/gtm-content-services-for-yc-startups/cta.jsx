@@ -32,26 +32,6 @@ export default function Cta() {
                 <div className="flex justify-center">
                     <CalendarBooking />
                 </div>
-                <div className="bg-black flex items-center justify-center p-8">
-                    <div className="max-w-4xl mx-auto">
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-10">
-                            <div className="flex items-center gap-2">
-                                <HighVolt />
-                                <span className="text-white text-lg font-light">Launch-ready in days</span>
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                                <Tool />
-                                <span className="text-white text-lg font-light">Engineer-authored content</span>
-                            </div>
-
-                            <div className="flex items-center gap-2">
-                                <Rocket />
-                                <span className="text-white text-lg font-light">YC-proven results</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     );

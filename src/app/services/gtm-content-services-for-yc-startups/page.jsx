@@ -15,7 +15,10 @@ export default function Page() {
       <WhatWeDo />
       <WhyYC />
 
-      <Testimonials />
+      <Testimonials
+        heading="Why teams backed by YC, Boldstart, and Eclipse trust Infrasity"
+        subHeading="Here’s how we help them ship content fast — and with depth."
+      />
 
       <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] mb-10"></div>
 

@@ -1,5 +1,5 @@
 
-export default function Testimonials() {
+export default function Testimonials({ heading, subHeading }) {
 
     const testimonials = [
         {
@@ -48,8 +48,8 @@ export default function Testimonials() {
     return (
         <section className="container mx-auto px-6 py-10">
             <div className="text-center mb-16">
-                <p className="font-[quicksand] text-gray-400 mb-4">Why teams backed by YC, Boldstart, and Eclipse trust Infrasity</p>
-                <h2 className="font-[quicksand] text-2xl md:text-3xl font-bold">Here’s how we help them ship content fast — and with depth.</h2>
+                <p className="font-[quicksand] text-gray-400 mb-4">{subHeading || "Why teams backed by YC, Boldstart, and Eclipse trust Infrasity"}</p>
+                <h2 className="font-[quicksand] text-2xl md:text-3xl font-bold">{heading || "Here’s how we help them ship content fast — and with depth."}</h2>
             </div>
 
             {/* Desktop Layout: Left-Middle-Right with vertical centering */}

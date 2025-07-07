@@ -8,11 +8,11 @@ const HoverCards = () => {
 
     const cards = [
         {
-            title: "Startup-Speed Delivery",
+            title: "Delivery That Matches YC Pacing",
             description:
-                "We match YC's pace with rapid turnaround times",
+                "YC startups don’t wait — neither do we,we move at the same speed as you — fast, focused, and always shipping",
             time: "2 WEEKS",
-            tagLine: "Product Docs Delivery"
+            tagLine: "Product Docs, SDK Guides, Use Cases"
         },
         {
             icon: (
@@ -26,9 +26,9 @@ const HoverCards = () => {
             ),
             title: "Technical Credibility",
             description:
-                "All content written by engineers who use the tech you build.",
-            time: "100%",
-            tagLine: "Engineering-authored content",
+                "Content that doesn’t need babysitting — written by folks who speak infrastructure, SDKs, and APIs like your team does",
+            time: "100% | Authored by practitioners, not generalists",
+            tagLine: "Engineering authored content",
         },
         {
             icon: (
@@ -41,9 +41,9 @@ const HoverCards = () => {
                     <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
                 </svg>
             ),
-            title: "Team Extension",
+            title: "Your DevRel Team, Without the Hiring Lag",
             description: "Full DevRel/content team instantly, no recruiting delays. ",
-            time: "DAY 1",
+            time: "DAY 1 | Operational from kickoff",
             tagLine: "Ready from start",
         },
         {
@@ -57,10 +57,10 @@ const HoverCards = () => {
                     <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m15.5-6.5l-4.24 4.24M7.76 16.24l-4.24 4.24m12.73 0l-4.24-4.24M7.76 7.76L3.52 3.52" />
                 </svg>
             ),
-            title: "Proven Growth Impact",
+            title: "5x faster and ~75% cheaper",
             description:
-                "Engineering-led content drives qualified leads and organic growth.",
-            time: "3.5x",
+                "Our content helps startups 3–5x traffic and increase signups — without founders writing a word.",
+            time: "40% | Avg. lift in qualified inbound",
             tagLine: "More traffic with regular content",
         },
     ];
@@ -70,7 +70,7 @@ const HoverCards = () => {
             <div className="max-w-6xl mx-auto text-center relative z-10 py-10 pt-4">
                 <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
-                        Why <span className="text-orange-500">YC</span> Startups Trust Infrasity{" "}
+                    Content Partner <span>Behind</span>  Several <span className="text-orange-500">YC</span> Growth Stories{" "}
                     </h2>
                 </div>
                 <div class="flex justify-center my-6 mb-8">
@@ -84,7 +84,7 @@ const HoverCards = () => {
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-                        Built for the speed and precision that Y Combinator companies demand
+                    Startups backed by Y Combinator rely on us to craft product explainers, SDK docs, and use-case libraries
                     </p>
                 </div>
             </div>

@@ -243,7 +243,7 @@ const WhatWeDo = () => {
       </div>
       <div className="flex items-center justify-center">
         <div
-          className="w-[90%]"
+          className="w-[90%] lg:w-[1150px]"
           onMouseEnter={() => setHoveredCard("kubiya")}
           onMouseLeave={() => setHoveredCard(null)}
         >
@@ -326,7 +326,7 @@ const WhatWeDo = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-center p-5 lg:p-10 bg-gray-900 min-h-screen pb-20">
+      <div className="flex items-center justify-center p-5 lg:p-10 bg-gray-900 pb-20">
         <div className="flex flex-col lg:flex-row gap-10 max-w-6xl w-full">
           {/* First Card */}
           <div
