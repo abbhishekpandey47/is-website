@@ -67,7 +67,7 @@ const HoverCards = () => {
 
     return (
         <div className="bg-gradient-to-br from-blue-900/40 via-[#0a0f1c] to-slate-900 pt-10">
-            <div className="max-w-6xl mx-auto text-center relative z-10 py-10 pt-4">
+            <div className="w-full mx-auto text-center relative z-10 py-10 pt-4">
                 <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
                         Content Partner <span>Behind</span>  Several <span className="text-orange-500">YC</span> Growth Stories{" "}
@@ -88,13 +88,13 @@ const HoverCards = () => {
                     </p>
                 </div>
             </div>
-            <div className="flex items-center justify-center p-8 max-sm:p-4">
+            <div className="flex items-center justify-center p-4 max-sm:p-4">
                 <div className="flex md:flex-row flex-col md:h-64 gap-4 w-full justify-center items-start md:items-start max-w-sm md:max-w-7xl mx-auto">
                     {cards.map((card, index) => (
                         <div
                             key={index}
                             className={`relative bg-gradient-to-br from-[#0a0f1b] to-blue-900/40 backdrop-blur-sm rounded-2xl border-2 cursor-pointer md:flex-shrink-0 w-full md:w-56 transition-all duration-700 ease-out transform hover:scale-[1.02] md:active:scale-100 active:scale-[0.98] border-[#323640] ${activeCard === index
-                                ? "md:w-[400px] h-64 border-[#454671] shadow-2xl shadow-pink"
+                                ? "md:w-[35%] h-64 border-[#454671] shadow-2xl shadow-pink"
                                 : "h-24 lg:h-36 md:border-slate-700/60 border-slate-700/60 hover:border-slate-600/80"
                                 }`}
                             onMouseEnter={() => setActiveCard(index)}
@@ -134,11 +134,11 @@ const HoverCards = () => {
 
                                         <div>
 
-                                            <div className="flex items-center space-x-3 pt-14 max-sm:pt-8">
+                                            <div className="flex items-center space-x-2 pt-14 max-sm:pt-8">
                                                 <RightIcon />
                                                 <p className="text-sm text-[#ffa600] tracking-wider font-[330] flex items-center">
                                                     {card.time}{" "}
-                                                    <span className="ml-4 text-gray-400">|</span>{" "}
+                                                    <span className="ml-2 text-gray-400">|</span>{" "}
                                                 </p>
 
                                                 <p className="text-sm text-[#afafaf] tracking-wider font-[330] flex items-center">
