@@ -10,7 +10,7 @@ export default function Cta() {
             <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
                 <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
-                        Ready to Scale Your Launch?
+                    See how fast we can go? book a quick sync
                     </h2>
                 </div>
                 <div class="flex justify-center my-6 mb-8">
@@ -24,7 +24,7 @@ export default function Cta() {
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light tracking-wide">
-                        Get bulletproof tech content and sites that accelerate your startup's growth. See how our expert team can transform your go-to-market strategy.
+                    From blog posts and docs to demo videos and launch campaigns—everything’s built, shipped, and live in 10–14 days.
                     </p>
                 </div>
             </div>
