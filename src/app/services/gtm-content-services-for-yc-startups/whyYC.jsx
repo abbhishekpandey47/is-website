@@ -70,7 +70,7 @@ const HoverCards = () => {
             <div className="max-w-6xl mx-auto text-center relative z-10 py-10 pt-4">
                 <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
-                    Content Partner <span>Behind</span>  Several <span className="text-orange-500">YC</span> Growth Stories{" "}
+                        Content Partner <span>Behind</span>  Several <span className="text-orange-500">YC</span> Growth Stories{" "}
                     </h2>
                 </div>
                 <div class="flex justify-center my-6 mb-8">
@@ -84,7 +84,7 @@ const HoverCards = () => {
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-                    Startups backed by Y Combinator rely on us to craft product explainers, SDK docs, and use-case libraries
+                        Startups backed by Y Combinator rely on us to craft product explainers, SDK docs, and use-case libraries
                     </p>
                 </div>
             </div>
@@ -94,8 +94,8 @@ const HoverCards = () => {
                         <div
                             key={index}
                             className={`relative bg-gradient-to-br from-[#0a0f1b] to-blue-900/40 backdrop-blur-sm rounded-2xl border-2 cursor-pointer md:flex-shrink-0 w-full md:w-56 transition-all duration-700 ease-out transform hover:scale-[1.02] md:active:scale-100 active:scale-[0.98] border-[#323640] ${activeCard === index
-                                ? "md:w-[400px] h-56 border-[#454671] shadow-2xl shadow-pink"
-                                : "h-20 lg:h-28 md:border-slate-700/60 border-slate-700/60 hover:border-slate-600/80"
+                                ? "md:w-[400px] h-64 border-[#454671] shadow-2xl shadow-pink"
+                                : "h-20 lg:h-36 md:border-slate-700/60 border-slate-700/60 hover:border-slate-600/80"
                                 }`}
                             onMouseEnter={() => setActiveCard(index)}
                             onMouseLeave={() => setActiveCard(0)}
