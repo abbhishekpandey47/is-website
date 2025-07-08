@@ -33,39 +33,39 @@ const faqData = [
     {
         id: "1",
         question:
-            " How can early-stage startups outsource developer documentation and DevTool content without hiring a full DevRel team?",
+            " What does a Reddit marketing agency do?",
         answer:
-            "Hiring takes months. With Infrasity, you get product-ready documentation from day one — without the overhead of salaries, onboarding, or dev time spent writing.",
+            "A Reddit marketing agency helps B2B startups engage with developer communities through authentic, non-promotional content. At Infrasity, we ghostwrite Reddit comments, seed technical threads, and manage warmed accounts to drive traffic, visibility, and trust — all while staying subreddit-compliant.",
     },
     {
         id: "2",
-        question: "Can Infrasity help us launch product docs faster",
+        question: "Why hire a Reddit marketing agency instead of doing it in-house?",
         answer:
-            "Absolutely. We’ve helped dozens of DevTool startups launch docs in under two weeks — from API references to full onboarding guides, ready for users and demos",
+            "Reddit has strict rules, sensitive communities, and a steep learning curve. A Reddit marketing agency like Infrasity brings pre-warmed accounts, deep subreddit knowledge, and proven ghostwriting strategies that help B2B startups show up without getting banned or ignored. We do the groundwork daily — so your team doesn’t have to.",
     },
     {
         id: "3",
-        question: "How is Infrasity different from a content agency or freelancer?",
+        question: "Is Reddit a good place for marketing?",
         answer:
-            "We live and breathe infra, DevOps, and SaaS. You don’t need to explain what an SDK, CLI, or deployment pipeline is. We already get it.",
+            "Yes — Reddit is one of the best channels for B2B startups in DevTools, AI infrastructure, and platform engineering. Technical buyers often search for tools by asking real users in subreddits like r/devops, r/kubernetes, and r/mlops. These threads often rank on Google. With the right comment strategy and warmed accounts, Reddit can drive qualified traffic, influence decision-making, and build early-stage trust — without relying on ads or outbound.",
     },
     {
         id: "4",
-        question: "Will this actually move the GTM needle",
+        question: "How much does Reddit marketing cost?",
         answer:
-            "Yes. Clear docs = faster onboarding = shorter time-to-value = more product adoption. It’s your silent GTM engine.",
+            "Reddit marketing costs depend on the volume of engagement, subreddits targeted, and whether account warming or competitor analysis is included. At Infrasity, we offer flexible, usage-based plans tailored for early-stage B2B startups. 📩 Reach out to us or visit our contact page to get a custom quote.",
     },
     {
         id: "5",
-        question: "What type of content should we start with",
+        question: "How can I promote my brand on Reddit without getting banned?",
         answer:
-            "Launch with what converts: onboarding guides, API references, how-to tutorials, and real use-case walkthroughs.",
+            "To promote your B2B product on Reddit without getting banned, you need to follow subreddit rules, use aged/warmed accounts, and avoid sounding promotional. Instead of pitching directly, focus on adding value — join relevant threads, answer technical questions, and mention your product only when it naturally fits the conversation.",
     },
     {
         id: "6",
-        question: "What technical content should a DevTool startup prioritize?",
+        question: "Is advertising on Reddit effective for B2B or B2C brands?",
         answer:
-            "Start with developer docs, onboarding guides, and real-world tutorials. These are the assets that reduce friction, explain your product clearly, and help users integrate fast.",
+            " Reddit ads can work for both B2B and B2C, but they’re often better for B2C where visual, high-volume campaigns matter. For B2B startups — especially in DevTools, infrastructure, and AI — organic participation in relevant subreddits often drives better trust, visibility, and long-term traffic. Most decision-making happens in comment threads, not banner ads.",
     },
 ];
 
