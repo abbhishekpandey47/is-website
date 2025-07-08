@@ -32,7 +32,7 @@ const PricingPage = () => {
         <div className="bg-black">
             {/* Hero Section */}
             <section className="relative overflow-hidden">
-                <div className="container mx-auto px-6 py-20 pt-36 text-center">
+                <div className="mx-auto px-6 py-20 pt-36 text-center">
                     <div className="max-w-4xl mx-auto">
                         <p className="text-[#d6daff] font-medium tracking-wider uppercase text-sm mb-6">PRICING</p>
                         <h1 className="quicksand-bold text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text">
@@ -47,11 +47,11 @@ const PricingPage = () => {
             </section>
 
             {/* Pricing Cards */}
-            <section className="container mx-auto py-20">
-                <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <section className="mx-auto py-10">
+                <div className="grid md:grid-cols-2 gap-12 md:gap-8 max-w-3xl lg:max-w-5xl mx-auto p-2">
 
                     {/* Startup Plan */}
-                    <div className="bg-gray-900/50 backdrop-blur-sm border border-[#7dffa2] transition-colors rounded-2xl p-8">
+                    <div className="bg-gray-900/50 backdrop-blur-sm border border-[#7dffa2] transition-colors rounded-2xl p-6 md:p-8">
                         <div className="mb-8">
                             <h3 className="quicksand-semibold text-2xl text-[#e8bfff] font-bold mb-2">Starter Plan</h3>
                             <p className="text-[40px] leading-[50px] text-white mb-6">For early-stage infra, AI, and DevTool startups</p>
@@ -61,9 +61,9 @@ const PricingPage = () => {
 
 
                         <div className="space-y-4 mb-8">
-                            <div className="flex space-x-8">
+                            <div className="md:flex md:space-x-8">
                                 {/* First Column */}
-                                <div className="w-1/2">
+                                <div className="md:w-1/2">
                                     {startupFeatures.slice(0, 4).map((feature, index) => (
                                         <div key={index} className="flex items-start space-x-3 mb-4">
                                             <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
@@ -79,7 +79,7 @@ const PricingPage = () => {
                                 </div>
 
                                 {/* Second Column */}
-                                <div className="w-1/2">
+                                <div className="md:w-1/2">
                                     {startupFeatures.slice(5).map((feature, index) => (
                                         <div key={index} className="flex items-start space-x-3 mb-4">
                                             <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
@@ -106,7 +106,7 @@ const PricingPage = () => {
                     </div>
 
                     {/* Enterprise Plan */}
-                    <div className="bg-gray-900/50 backdrop-blur-sm border border-purple-500/50 rounded-2xl p-8 transition-colors duration-300 relative">
+                    <div className="bg-gray-900/50 backdrop-blur-sm border border-purple-500/50 rounded-2xl p-6 md:p-8 transition-colors duration-300 relative">
                         <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                             <span className="bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-1 rounded-full text-sm font-medium">Popular</span>
                         </div>

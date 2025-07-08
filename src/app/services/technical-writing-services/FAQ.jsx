@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import Link from "next/link";
+import CalendarBooking from "@/app/calendarButton";
 
 // Custom Accordion component
 const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
@@ -92,14 +94,12 @@ const FAQSection = () => {
               Have a question that needs a human to answer? No problem.
             </p>
 
-            <a
-              href="https://calendly.com/meet-shan"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-[#5F64FF] text-lg  transition-colors"
+            <div
+              className="inline-flex i"
             >
-              Speak to Us
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
+              <CalendarBooking Design="faq" buttonText="Speak to Us" />
+              <ArrowRight className="ml-2 mt-2 h-4 w-4" />
+            </div>
           </div>
 
           {/* Right column with accordion FAQs */}

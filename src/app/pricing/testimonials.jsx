@@ -46,7 +46,7 @@ export default function Testimonials() {
         }
     ];
     return (
-        <section className="container mx-auto px-6 py-10">
+        <section className="mx-auto px-6 py-10">
             <div className="text-center mb-16">
                 <p className="font-[quicksand] text-gray-400 mb-4">Here’s how we help them ship content fast — and with depth.</p>
                 <h2 className="font-[quicksand] text-2xl md:text-3xl font-bold">Why teams backed by YC, Boldstart, and Eclipse trust Infrasity</h2>

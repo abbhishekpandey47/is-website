@@ -14,6 +14,7 @@ const CalendarBooking = ({
   textWeight = "quicksand-semibold", // Text weight
   borderColor = "#3b82f6", // Default border color
   onClick,
+  Design,
 }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
@@ -496,8 +497,11 @@ const CalendarBooking = ({
 
   return (
     <>
-       <button
-      className={`
+      <button
+        className={
+          Design === "faq"
+            ? "inline-flex items-center text-[#5F64FF] text-lg transition-colors"
+            : `
         md:inline-flex md:justify-center md:items-center 
         ${textSize} ${textWeight} ${bgGradient ? bgGradient : "bg-[#5F64FF]"} 
         rounded-[5px] 
@@ -505,16 +509,17 @@ const CalendarBooking = ({
         ${borderColor ? `border border-[${borderColor}]` : ""} 
         text-white shadow-2xl transition-all 
         z-1
-         ${width} ${height}
+        ${width} ${height}
         before:ease before:absolute before:right-0 before:top-0 
         before:h-12 before:w-6 before:translate-x-12 
         before:rotate-6 before:bg-white before:opacity-10 before:duration-700 
         hover:before:-translate-x-40
-      `}
-      onClick={openModal}
-    >
-      {buttonText}
-    </button>
+      `
+        }
+        onClick={openModal}
+      >
+        {buttonText}
+      </button>
 
       {isModalOpen && typeof window !== "undefined" && ReactDOM.createPortal(
         <div
