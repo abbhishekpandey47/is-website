@@ -1,12 +1,12 @@
 "use clinet";
 
 import Cta from "./cta";
+import FAQSection from "./FAQ.jsx";
 import YCStartupLanding from "./hero";
 import Testimonials from "./testimonials";
 import WhatWeDo from "./whatWeDo";
 import WhyYC from "./whyYC";
 import YCWork from "./ycWork";
-import FAQSection from "../technical-writing-services/FAQ";
 
 export default function Page() {
   return (

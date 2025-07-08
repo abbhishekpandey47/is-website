@@ -9,7 +9,7 @@ import RedditServiceCards from "./whatYouGet";
 import StartupHeroSection from "./whoThisIsFor";
 import DownloadPDF from "./download";
 import Testimonials from "../gtm-content-services-for-yc-startups/testimonials";
-import FAQSection from "../technical-writing-services/FAQ";
+import FAQSection from "./FAQ";
 
 
 export default function Page() {
