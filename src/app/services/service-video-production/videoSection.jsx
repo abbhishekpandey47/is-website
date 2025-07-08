@@ -29,6 +29,7 @@ export default function TabbedYouTubeCarousel() {
     ],
     Features: ["_TrEJAJPp0M", "ELSjojPjPAo", "b8B5odoAHPI"],
     ExplainerVideo: [
+      "pQoP_Rndpqw",
       "22d5Xu3I1Oo",
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20ECS.mp4",
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20RDS%20.mp4",
