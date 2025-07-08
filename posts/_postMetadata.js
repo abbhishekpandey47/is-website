@@ -904,6 +904,18 @@ let postMetaData = [
         metaDescription: "You can get Reddit Karma points in two ways - with Comment Karma and Post Karma. Read the article to understand what are they and how to achieve them."
     },
 
+    {
+        title: "Top 5 Reddit Marketing Agencies for B2B SaaS Companies",
+        metatitle: "Top 5 Reddit Marketing Agencies for B2B SaaS Companies",
+        slug: "reddit-marketing-agencies",
+        description: "If you are confused about finding the right Reddit marketing agency to partner with, you can pick any of these best marketing agencies for SaaS companies.",
+        ogImage: "/PostImages/reddit-marketing-agencies/ag1.webp",
+        publishedOn: "2025-07-08",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "If you are confused about finding the right Reddit marketing agency to partner with, you can pick any of these best marketing agencies for SaaS companies."
+    },
+
 
 ];
 
