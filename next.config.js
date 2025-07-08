@@ -38,11 +38,11 @@ module.exports = {
                 destination: '/blog/developer-marketing',
                 permanent: true,
             },
-            // {
-            //     source: '/outline-generator/:path*',
-            //     destination: 'https://www.youtube.com/:path*',
-            //     permanent: true,
-            // },
+            {
+                source: '/outline-gen',
+                destination: 'https://infra-content-generator.vercel.app',
+                permanent: false,
+            },
         ];
     },
 };
