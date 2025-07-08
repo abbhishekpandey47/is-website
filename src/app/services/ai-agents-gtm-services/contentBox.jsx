@@ -88,15 +88,14 @@ const HoverCards = () => {
       </div>
 
       <div className="flex items-center justify-center p-8">
-        <div className="flex gap-4 max-w-7xl w-full justify-center items-start">
+        <div className="md:flex gap-4 max-w-7xl w-full justify-center items-start">
           {cards.map((card, index) => (
             <div
               key={index}
-              className={`relative bg-gradient-to-br from-[#0a0f1b] to-blue-900/40 backdrop-blur-sm rounded-2xl border-2 cursor-pointer flex-shrink-0 h-64 transition-all duration-700 ease-out transform hover:scale-[1.02] border-[#323640] ${
-                activeCard === index
-                  ? "w-[450px] border-pink-500/80 shadow-2xl shadow-pink"
-                  : "w-56 border-slate-700/60 hover:border-slate-600/80"
-              }`}
+              className={`my-4 md:my-0 relative bg-gradient-to-br from-[#0a0f1b] to-blue-900/40 backdrop-blur-sm rounded-2xl border-2 cursor-pointer flex-shrink-0 h-40 md:h-64 transition-all duration-700 ease-out transform hover:scale-[1.02] border-[#323640] ${activeCard === index
+                ? "w-full md:w-[450px] h-64 border-pink-500/80 shadow-2xl shadow-pink"
+                : "w-full md:w-56 border-slate-700/60 hover:border-slate-600/80"
+                }`}
               onMouseEnter={() => setActiveCard(index)}
               onMouseLeave={() => setActiveCard(0)}
             >
@@ -110,9 +109,8 @@ const HoverCards = () => {
 
                 {/* Title Row */}
                 <div
-                  className={`flex-shrink-0 mb-4 ${
-                    activeCard === index ? "mr-0" : "mr-12"
-                  }`}
+                  className={`flex-shrink-0 mb-4 ${activeCard === index ? "mr-0" : "mr-12"
+                    }`}
                 >
                   <h3 className="text-white text-[20px] font-semibold leading-tight">
                     {card.title}
@@ -122,11 +120,10 @@ const HoverCards = () => {
                 {/* Description Row - Smooth fade in with delay */}
                 <div className="flex-1 overflow-hidden">
                   <div
-                    className={`transition-all duration-500 ease-out ${
-                      activeCard === index
-                        ? "opacity-100 translate-y-0 delay-200"
-                        : "opacity-0 translate-y-2 delay-0"
-                    }`}
+                    className={`transition-all duration-500 ease-out ${activeCard === index
+                      ? "opacity-100 translate-y-0 delay-200"
+                      : "opacity-0 translate-y-2 delay-0"
+                      }`}
                   >
                     <p className="text-slate-300 text-sm leading-relaxed">
                       {card.description}
@@ -140,11 +137,10 @@ const HoverCards = () => {
 
               {/* Subtle glow effect on hover with smooth transition */}
               <div
-                className={`absolute inset-0 rounded-2xl transition-all duration-600 ease-out ${
-                  activeCard === index
-                    ? "bg-gradient-to-r from-pink-500/5 to-blue-500/5 opacity-100"
-                    : "bg-gradient-to-r from-pink-500/5 to-blue-500/5 opacity-0"
-                }`}
+                className={`absolute inset-0 rounded-2xl transition-all duration-600 ease-out ${activeCard === index
+                  ? "bg-gradient-to-r from-pink-500/5 to-blue-500/5 opacity-100"
+                  : "bg-gradient-to-r from-pink-500/5 to-blue-500/5 opacity-0"
+                  }`}
               />
             </div>
           ))}
