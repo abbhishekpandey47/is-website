@@ -499,28 +499,25 @@ const CalendarBooking = ({
   return (
     <>
       <Link
-        className={
-          Design === "faq"
-            ? "inline-flex items-center text-[#5F64FF] text-lg transition-colors"
-            : `
-        md:inline-flex md:justify-center md:items-center 
-        ${textSize} ${textWeight} ${bgGradient ? bgGradient : "bg-[#5F64FF]"} 
-        rounded-[5px] 
-        relative overflow-hidden 
-        ${borderColor ? `border border-[${borderColor}]` : ""} 
-        text-white shadow-2xl transition-all 
-        z-1
-        ${width} ${height}
-        before:ease before:absolute before:right-0 before:top-0 
-        before:h-12 before:w-6 before:translate-x-12 
-        before:rotate-6 before:bg-white before:opacity-10 before:duration-700 
-        hover:before:-translate-x-40
-      `
-        }
+        className={`inline-flex justify-center items-center 
+    ${textSize} ${textWeight} 
+    ${bgGradient || "bg-[#5F64FF]"} 
+    rounded-[5px] relative overflow-hidden 
+    ${borderColor ? `border border-[${borderColor}]` : ""} 
+    text-white shadow-2xl transition-all 
+    z-10 ${width} ${height}
+    
+    before:ease before:absolute before:right-0 before:top-0 
+    before:h-12 before:w-6 before:translate-x-12 
+    before:rotate-6 before:bg-white before:opacity-10 before:duration-700 
+    hover:before:-translate-x-40
+    ${Design === "faq" ? "text-[#5F64FF] text-lg" : ""}
+  `}
         href="/contact"
       >
         {buttonText}
       </Link>
+
 
       {isModalOpen && typeof window !== "undefined" && ReactDOM.createPortal(
         <div
