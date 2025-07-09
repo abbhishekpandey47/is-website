@@ -126,9 +126,11 @@ export default function AIStartupLanding() {
         //   style={{ background: "#171a3d" }}
 
         >
-            <div className="inset-0 z-0">
+            <div className="absolute inset-0 z-0">
                 <BackgroundSVG />
             </div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] opacity-5" style={{ backgroundSize: '32px 32px' }}></div>
+
 
             {/* Content */}
             <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto text-center relative z-10">

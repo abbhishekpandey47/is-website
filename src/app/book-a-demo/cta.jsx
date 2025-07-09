@@ -435,9 +435,8 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
   };
 
   const formatDate = (date) => {
-    return `${weekdays[date.getDay()]}, ${
-      months[date.getMonth()]
-    } ${date.getDate()}, ${date.getFullYear()}`;
+    return `${weekdays[date.getDay()]}, ${months[date.getMonth()]
+      } ${date.getDate()}, ${date.getFullYear()}`;
   };
 
   const renderCalendar = () => {
@@ -471,15 +470,13 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
           key={`day-${day}`}
           className={`h-10 w-10 flex items-center justify-center rounded-full cursor-pointer mx-1
             ${isSelected ? "bg-blue-600 text-white" : ""} 
-            ${
-              isTodayDate && !isSelected
-                ? "border border-blue-600 text-white"
-                : ""
+            ${isTodayDate && !isSelected
+              ? "border border-blue-600 text-white"
+              : ""
             }
-            ${
-              isPast && !isTodayDate
-                ? "text-gray-500 cursor-not-allowed"
-                : "hover:bg-gray-700"
+            ${isPast && !isTodayDate
+              ? "text-gray-500 cursor-not-allowed"
+              : "hover:bg-gray-700"
             }`}
           onClick={() => !isPast && handleDateChange(date)}
         >
@@ -502,8 +499,8 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
         i % 3 === 0
           ? "animate-float"
           : i % 3 === 1
-          ? "animate-float-delay-1"
-          : "animate-float-delay-2",
+            ? "animate-float-delay-1"
+            : "animate-float-delay-2",
     }));
 
     const mediumStars = Array.from({ length: 30 }).map((_, i) => ({
@@ -515,8 +512,8 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
         i % 3 === 0
           ? "animate-float"
           : i % 3 === 1
-          ? "animate-float-delay-1"
-          : "animate-float-delay-2",
+            ? "animate-float-delay-1"
+            : "animate-float-delay-2",
     }));
 
     const largeStars = Array.from({ length: 15 }).map((_, i) => ({
@@ -528,8 +525,8 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
         i % 3 === 0
           ? "animate-pulse-slow"
           : i % 3 === 1
-          ? "animate-float-delay-1"
-          : "animate-scale-slow",
+            ? "animate-float-delay-1"
+            : "animate-scale-slow",
     }));
 
     return (
@@ -588,15 +585,15 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
                 Trusted by YC startups. Built for developer-first companies.
               </p>
 
-              <button
+              <Link
                 className="magic-button group rounded-md px-6 py-3 text-white font-medium text-m transition-all duration-300 hover:scale-105 "
-                onClick={openModal}
+                href="/contact"
               >
                 <div className="flex items-center space-x-2">
                   <Zap className="h-5 w-5 transition-transform group-hover:rotate-12" />
                   <span className="quicksand-medium">Book Demo</span>
                 </div>
-              </button>
+              </Link>
             </div>
           </section>
         </div>
@@ -818,11 +815,10 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
                       key={index}
                       onClick={() => handleTimeSelection(slot)}
                       className={`p-2 text-center rounded-md cursor-pointer border border-gray-700 
-                ${
-                  selectedTime === slot
-                    ? "bg-blue-600 text-white"
-                    : "hover:bg-gray-700"
-                }`}
+                ${selectedTime === slot
+                          ? "bg-blue-600 text-white"
+                          : "hover:bg-gray-700"
+                        }`}
                     >
                       <div className="font-medium">{slot.convertedTime}</div>
                     </div>

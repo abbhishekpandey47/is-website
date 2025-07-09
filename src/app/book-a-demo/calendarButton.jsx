@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import ContactPage from "@/app/book-a-demo/page";
 import Image from "next/image";
 import { message } from "antd";
+import Link from "next/link";
 
 const CalendarBooking = ({ onBookingComplete, buttonText }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -482,12 +483,12 @@ const CalendarBooking = ({ onBookingComplete, buttonText }) => {
 
   return (
     <>
-      <button
+      <Link
         className="hidden md:inline-flex md:justify-center md:items-center text-sm quicksand-semibold rounded-[5px] before:ease relative h-12 w-40 overflow-hidden border border-[#3b82f6] bg-[#5F64FF] text-white shadow-2xl transition-all before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-40"
-        onClick={openModal}
+        href="/contact"
       >
         {buttonText || "Book a Meeting"}
-      </button>
+      </Link>
       {isModalOpen && (
         <div
           className="fixed inset-0 flex justify-center items-center"

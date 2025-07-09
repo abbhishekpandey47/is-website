@@ -54,7 +54,7 @@ const HeroHome = () => {
       }
     );
 
-    return () => {};
+    return () => { };
   }, []);
 
   const [color, setColor] = useState("#ffffff");
