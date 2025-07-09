@@ -155,35 +155,34 @@ export default function AIStartupLanding() {
                     </p>
                 </div>
 
-                <div className="lg:mb-32 justify-center items-center">
-                    <div className="hidden max-sm:flex flex-col items-center gap-6">
-                        <CalendarBooking />
-                        <div className="w-full flex justify-center">
+                <div className="justify-center items-center">
+                    <div className="flex flex-row gap-4 justify-center items-center mb-8">
+                        <TrustedBySection />
+                    </div>
+                    <div className="flex flex-col items-center gap-6">
+                        <div className="w-full flex justify-center mb-4">
                             <Image
-                                width={600}
-                                height={200}
-                                className="w-[320px] h-auto border-[1.5px] border-[#373737] rounded-2xl"
+                                width={800}
+                                height={400}
+                                className="w-[520px] h-auto border-[1.5px] border-[#373737] rounded-2xl"
                                 loading="lazy"
                                 priority={false}
                                 src="/reddit/hero.png"
                                 alt="Hero Image"
                             />
                         </div>
+                        <CalendarBooking />
+
                     </div>
 
-                    <div className="flex flex-row gap-4 justify-center items-center">
-                        <div className="hidden md:block">
-                            <CalendarBooking />
-                        </div>
-                        <TrustedBySection />
-                    </div>
+
 
 
                 </div>
             </div>
 
             {/* Desktop: Image positioned on the right */}
-            <div className=" absolute right-0 bottom-0 mb-[270px] max-sm:hidden">
+            {/* <div className=" absolute right-0 bottom-0 mb-[270px] max-sm:hidden">
                 <Image
                     width={600}
                     height={200}
@@ -193,7 +192,7 @@ export default function AIStartupLanding() {
                     src="/reddit/hero.png"
                     alt="Hero Image"
                 />
-            </div>
+            </div> */}
 
             <div className="w-full justify-center items-center flex flex-col pt-20 max-sm:pt-16">
                 <div
