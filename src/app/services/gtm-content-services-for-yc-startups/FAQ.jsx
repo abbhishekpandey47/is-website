@@ -97,8 +97,13 @@ const FAQSection = () => {
                         <div
                             className="inline-flex i"
                         >
-                            <CalendarBooking Design="faq" buttonText="Speak to Us" />
-                            <ArrowRight className="ml-2 mt-2 h-4 w-4" />
+                            <a
+                                href="/contact"
+                                className="inline-flex items-center text-[#5F64FF] text-lg  transition-colors"
+                            >
+                                Speak to Us
+                                <ArrowRight className="ml-2 h-4 w-4" />
+                            </a>
                         </div>
                     </div>
 
