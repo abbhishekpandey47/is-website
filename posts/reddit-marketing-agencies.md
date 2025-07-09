@@ -4,7 +4,7 @@
 - They understand how to leverage Reddit for marketing B2B SaaS products, be it through organic community engagement or paid ads.  
 - Infrasity stands out by focusing on value-first conversations and only pitching your product when it truly fits - more advocacy, less promotion.
 
-With over **[1,600](https://clutch.co/agencies/social-media-marketing/reddit)** Reddit marketing agencies, finding the right partner can be challenging, especially when many focus on not just B2B but also B2C and DTC companies. However, if you're a B2B SaaS startup, your needs are more specific. You're not just looking for product awareness but also credibility, earning trust from technical audiences, and engaging in communities where your target users are already active.
+With over **[1600](https://clutch.co/agencies/social-media-marketing/reddit)** Reddit marketing agencies, finding the right partner can be challenging, especially when many focus on not just B2B but also B2C and DTC companies. However, if you're a B2B SaaS startup, your needs are more specific. You're not just looking for product awareness but also credibility, earning trust from technical audiences, and engaging in communities where your target users are already active.
 
 To help you make the right choice, I have curated a list of 5 leading marketing agencies for SaaS companies that understand how to leverage Reddit effectively for B2B growth. Each agency brings a different strength, from content-led community engagement to high-performing ad strategies.
 
