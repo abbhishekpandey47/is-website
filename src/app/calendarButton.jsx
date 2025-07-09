@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import ContactPage from "@/app/book-a-demo/page";
 import Image from "next/image";
 import { message } from "antd";
+import Link from "next/link";
 
 const CalendarBooking = ({
   buttonText = "Book a Meeting",
@@ -497,7 +498,7 @@ const CalendarBooking = ({
 
   return (
     <>
-      <button
+      <Link
         className={
           Design === "faq"
             ? "inline-flex items-center text-[#5F64FF] text-lg transition-colors"
@@ -516,10 +517,10 @@ const CalendarBooking = ({
         hover:before:-translate-x-40
       `
         }
-        onClick={openModal}
+        href="/contact"
       >
         {buttonText}
-      </button>
+      </Link>
 
       {isModalOpen && typeof window !== "undefined" && ReactDOM.createPortal(
         <div
