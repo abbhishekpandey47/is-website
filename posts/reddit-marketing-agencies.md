@@ -30,7 +30,7 @@ Here are the best Reddit marketing agencies you can collaborate with, each havin
 
 **[Infrasity](https://www.infrasity.com/)** is a Reddit marketing agency that caters specifically to the B2B SaaS industry, making it one of the few niche-focused players in this space. What sets this India-based agency apart is its organic-first approach. Instead of just relying solely on paid Reddit ads, they first engage naturally within relevant subreddits using aged, karma-rich accounts. They strategize in blending into conversations, offering value-driven insights, and earning community trust before ever mentioning a product. This not only helps shape your SaaS product's positive image but also generates relevant traffic to your website from Reddit.
 
-It also leverages Reddit as a market feedback platform, actively analyzing threads and discussions to extract real user insights. These learnings are then used to improve your messaging, positioning, and overall go-to-market strategy.
+It also leverages Reddit as a market feedback platform, actively analyzing threads and discussions to extract real user insights. These learnings are then used to improve your messaging, positioning, and overall **[go-to-market strategy](https://www.infrasity.com/blog/saas-go-to-market-strategy)**.
 
 ### 2. Foundation Marketing
 
@@ -62,7 +62,7 @@ While Reddit is one of several platforms they work with, their team is skilled a
 
 ## How Infrasity Works Differently From Other Reddit Marketing Agencies?
 
-Infrasity doesn't just focus on Reddit Ads and surface-level engagement; it takes a more thoughtful, community-driven approach, specifically built for B2B SaaS companies.
+Infrasity doesn't just focus on Reddit Ads and surface-level engagement while doing **[Reddit marketing](https://www.infrasity.com/blog/reddit-marketing)**; it takes a more thoughtful, community-driven approach, specifically built for B2B SaaS companies.
 
 ### 1. Use Aged, Karma-Rich Accounts With a History
 
