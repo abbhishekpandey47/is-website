@@ -79,6 +79,18 @@ export default function DownloadPDF() {
     return (
         <div className="flex items-center justify-center my-16">
             <div className="w-[90%]">
+                {/* Section Heading */}
+                <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
+                    <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
+                        <h2 className="md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
+                            Reddit Done Right: <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">A Playbook for Founders & Teams</span>
+                        </h2>
+                    </div>
+                    <div className="flex justify-center my-6 mb-8">
+                        <div className="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
+                    </div>
+                </div>
+
                 <div
                     className="relative rounded-3xl overflow-hidden transition-all duration-500 hover:border-purple-500/30"
                     style={{
@@ -94,8 +106,8 @@ export default function DownloadPDF() {
                     {/* Desktop Layout */}
                     <div className="hidden md:flex">
                         <div className="w-[60%] flex-1 p-14 px-14 mb-2">
-                            <div className="flex items-start justify-between mb-3">
-                                <h2 className="text-[26px] font-bold text-white quicksand-bold tracking-wide">
+                            <div className="mb-6">
+                                <h2 className="text-2xl font-bold text-white quicksand-bold tracking-wide">
                                     <span className="text-[#FB651E]">Reddit </span>Marketing Built for Engineers, <br /> Not Marketers.
                                 </h2>
                             </div>
@@ -150,21 +162,7 @@ export default function DownloadPDF() {
                     {/* Mobile Layout */}
                     <div className="md:hidden">
                         <div className="w-full p-8">
-                            <div className="h-56 relative overflow-hidden rounded-xl">
-                                <div className="h-full relative overflow-hidden rounded-xl">
-                                    <div className="absolute inset-0 bg-gradient-to-br flex items-center justify-center text-slate-600 text-lg font-medium rounded-xl">
-                                        <img
-                                            src={`/reddit/download.png`}
-                                            alt="Kubiya Dashboard"
-                                            className="absolute inset-0 w-full h-full object-cover rounded-xl"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="w-full p-6 pt-2">
-                            <div className="mb-4">
+                            <div className="mb-6">
                                 <h2 className="text-xl sm:text-2xl font-bold text-white quicksand-bold tracking-wide">
                                     <span className="text-[#FB651E]">Reddit </span>Marketing Built for Engineers, Not Marketers.
                                 </h2>
