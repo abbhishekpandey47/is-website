@@ -105,7 +105,7 @@ For example, if someone shares a great post about workflow automation in r/NoCod
 
 _“This insight aligns closely with how teams use FlowRaft, curious what others think?”_
 
-This does three things:
+This does two things:
 
 - Keeps your subreddit fresh with high-quality and relevant content  
 - Starts conversations without needing to create every post from scratch  
