@@ -79,13 +79,13 @@ Consider sticking this welcome thread to the top of your subreddit so every newc
 
 Before you invite others in or promote your subreddit, publish some quality posts in it. In fact, Reddit recommends at least 3 posts so that visitors find something interesting when they visit your subreddit. As the moderator or founder, start posting content that will spark discussions and share resources related to your product. Here are a couple of content ideas to get started:
 
-#### 3. Ask Me Anything (AMA) Posts
+**Ask Me Anything (AMA) Posts**
 
 AMAs are a popular Reddit tradition where an individual (often a founder, executive, or expert) answers community questions in real-time. For example, the CEO or lead developer of FlowRaft could do an AMA about no-code automation or the story behind the product.  
 
 This gives your community direct access to ask questions and learn more. AMAs help you engage with your users and build credibility. In fact, they give you an opportunity to answer questions about your product with context and showcase thought leadership in your industry. Be sure to announce the AMA in advance to get a good turnout, and genuinely engage with the questions asked.
 
-#### 4. Informative Posts Related to Your Product
+**Informative Posts Related to Your Product**
 
 Share educational content that provides value to your target users. Post things that establish your expertise and help users solve problems. For FlowRaft’s subreddit, this could include how-to guides (e.g., “_Step-by-Step Guide to Automating an Onboarding Workflow with FlowRaft_”), case studies or success stories from clients, industry insights on process automation, or tips and tricks for productivity.  
 
