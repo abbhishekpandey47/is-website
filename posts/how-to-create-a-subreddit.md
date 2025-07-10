@@ -4,7 +4,7 @@
 - A Reddit account is a prerequisite for creating a subreddit that will be based on your industry or product.  
 - Once the subreddit is created, ensure you post content that will spark discussions and engage with your audience in a timely manner.  
 
-If you’re a B2B SaaS startup, chances are you’ve already realized how favorable Reddit can be – **real users, honest feedback, and niche communities** for just about every industry. But trying to talk about your product in someone else’s subreddit might feel like walking on eggshells. Most communities have strict rules, and even well-intentioned posts can get flagged or removed.  
+If you’re a B2B SaaS startup, chances are you’ve already realized how favorable Reddit can be - **real users, honest feedback, and niche communities** for just about every industry. But trying to talk about your product in someone else’s subreddit might feel like walking on eggshells. Most communities have strict rules, and even well-intentioned posts can get flagged or removed.  
 
 That’s why creating your own **subreddit** can make all the difference. It gives you a space to speak openly, share updates, host discussions, and connect directly with your users, without having to tiptoe around someone else’s rules. More importantly, **it gives your users a place to talk to you**- to ask questions, report bugs, share ideas, or vent frustrations - knowing someone from the team is actually listening. And when people feel heard, they’re much more likely to stick around and become part of what you’re building.  
 
