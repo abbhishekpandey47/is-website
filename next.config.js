@@ -43,6 +43,12 @@ module.exports = {
                 destination: 'https://infra-content-generator.vercel.app',
                 permanent: false,
             },
+            {
+                source: '/services/reddit-marketing-services',
+                destination: '/services/reddit-marketing-agency',
+                permanent: true,
+                statusCode: 301,
+            },
         ];
     },
 };
