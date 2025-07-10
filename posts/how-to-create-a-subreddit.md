@@ -20,27 +20,27 @@ Reddit users join subreddits related to their industry or interests. Additionall
 
 Let’s say you have developed a **B2B SaaS platform named FlowRaft** that helps product and operations teams design, automate, and optimize cross-functional workflows, without needing to write code. Now, you are planning to build your presence on Reddit by creating an official subreddit for your community. Here are the step-by-step instructions on how to create subreddit.
 
-### Create a Reddit Account
+### 1. Create a Reddit Account
 
 The foremost step is to create a Reddit account to begin with the official subreddit for your company. You will need to come up with a unique username or the platform will create it by default.
 
-### Navigate to the Menu and Click on ‘Create a community’
+### 2. Navigate to the Menu and Click on ‘Create a community’
 
 Once you have created your Reddit account, head to the menu bar on the left and click on ‘Create a community,’ under the ‘Communities’ section.
 
-### Fill In the Required Details About Your Community
+### 3. Fill In the Required Details About Your Community
 
 Fill in the Community Name and Description that defines your product. Make sure that you mention that it is an official subreddit. This will help the Reddit users to understand that whatever they communicate on the subreddit will be gathered as feedback and that the new features or bug fixes will be informed.
 
-### Make It Visually Appealing
+### 4. Make It Visually Appealing
 
 The next step involves adding the icon and banner, wherein you will be adding your company’s logo in the icon and a banner image that matches your theme.
 
-### Select the Topics Related to Your Subreddit
+### 5. Select the Topics Related to Your Subreddit
 
 Select the topics that are related to your platform, such as Software and Apps, that align with the niche of your product. So, whenever a Reddit user searches this topic, your subreddit will also be listed.
 
-### Choose the Privacy Settings & Click on ‘Create Community’
+### 6. Choose the Privacy Settings & Click on ‘Create Community’
 
 Then, choose your desired privacy option out of Public, Restricted, and Private.  
 
@@ -50,7 +50,8 @@ Then, choose your desired privacy option out of Public, Restricted, and Private.
 
 However, since you are creating this subreddit to build a community, it should be **Public**.
 
-> Once you have created the Subreddit, you can choose moderators who will have the ability to flag unwanted posts or comments and maintain the decorum. You can also set rules for your subreddit, so the users don’t do anything that violates the guidelines.
+<div style="border-left: 5px solid #374151; padding-left: 1em; margin: 1em 0; color: #ffffff; background: transparent; font-style: italic; font-size: 20px; font-weight: 300;">
+Once you have created the Subreddit, you can choose moderators who will have the ability to flag unwanted posts or comments and maintain the decorum. You can also set rules for your subreddit, so the users don’t do anything that violates the guidelines.<br>
 
 ## How To Grow a Subreddit?
 
