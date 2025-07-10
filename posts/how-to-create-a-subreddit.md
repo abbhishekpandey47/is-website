@@ -26,21 +26,31 @@ The foremost step is to create a Reddit account to begin with the official subre
 
 ### 2. Navigate to the Menu and Click on ‘Create a community’
 
+![how to create a reddit account - create a reddit account first and click on create a community](/PostImages/how-to-create-a-subreddit/sub2.webp) 
+
 Once you have created your Reddit account, head to the menu bar on the left and click on ‘Create a community,’ under the ‘Communities’ section.
 
 ### 3. Fill In the Required Details About Your Community
+
+![how to create a reddit account - enter the community name and description](/PostImages/how-to-create-a-subreddit/sub3.webp) 
 
 Fill in the Community Name and Description that defines your product. Make sure that you mention that it is an official subreddit. This will help the Reddit users to understand that whatever they communicate on the subreddit will be gathered as feedback and that the new features or bug fixes will be informed.
 
 ### 4. Make It Visually Appealing
 
+![how to create a reddit account - upload the icon and banner image](/PostImages/how-to-create-a-subreddit/sub4.webp) 
+
 The next step involves adding the icon and banner, wherein you will be adding your company’s logo in the icon and a banner image that matches your theme.
 
 ### 5. Select the Topics Related to Your Subreddit
 
+![how to create a reddit account - add topics](/PostImages/how-to-create-a-subreddit/sub5.webp)
+
 Select the topics that are related to your platform, such as Software and Apps, that align with the niche of your product. So, whenever a Reddit user searches this topic, your subreddit will also be listed.
 
 ### 6. Choose the Privacy Settings & Click on ‘Create Community’
+
+![how to create a reddit account - add privacy](/PostImages/how-to-create-a-subreddit/sub6.webp) 
 
 Then, choose your desired privacy option out of Public, Restricted, and Private.  
 
@@ -55,9 +65,9 @@ Once you have created the Subreddit, you can choose moderators who will have the
 
 ## How To Grow a Subreddit?
 
-Growing a subreddit for Reddit marketing requires consistent effort and a focus on providing value to your members. Here are the tips to grow your subreddit and gain more members:
+Growing a subreddit for **[Reddit marketing](https://www.infrasity.com/blog/reddit-marketing)** requires consistent effort and a focus on providing value to your members. Here are the tips to grow your subreddit and gain more members:
 
-### Write a Welcome Post
+### 1. Write a Welcome Post
 
 Start by creating a warm, informative welcome post to introduce new visitors to your community. Explain what your subreddit is about, who it’s for, and any guidelines or expectations. For instance,  
 
@@ -65,29 +75,29 @@ Start by creating a warm, informative welcome post to introduce new visitors to 
 
 Consider sticking this welcome thread to the top of your subreddit so every newcomer sees it. You might even make it a recurring monthly thread, inviting new members to introduce themselves or ask questions.
 
-### Seed Your Subreddit With Content
+### 2. Seed Your Subreddit With Content
 
 Before you invite others in or promote your subreddit, publish some quality posts in it. In fact, Reddit recommends at least 3 posts so that visitors find something interesting when they visit your subreddit. As the moderator or founder, start posting content that will spark discussions and share resources related to your product. Here are a couple of content ideas to get started:
 
-#### Ask Me Anything (AMA) Posts
+#### 3. Ask Me Anything (AMA) Posts
 
 AMAs are a popular Reddit tradition where an individual (often a founder, executive, or expert) answers community questions in real-time. For example, the CEO or lead developer of FlowRaft could do an AMA about no-code automation or the story behind the product.  
 
 This gives your community direct access to ask questions and learn more. AMAs help you engage with your users and build credibility. In fact, they give you an opportunity to answer questions about your product with context and showcase thought leadership in your industry. Be sure to announce the AMA in advance to get a good turnout, and genuinely engage with the questions asked.
 
-#### Informative Posts Related to Your Product
+#### 4. Informative Posts Related to Your Product
 
 Share educational content that provides value to your target users. Post things that establish your expertise and help users solve problems. For FlowRaft’s subreddit, this could include how-to guides (e.g., “_Step-by-Step Guide to Automating an Onboarding Workflow with FlowRaft_”), case studies or success stories from clients, industry insights on process automation, or tips and tricks for productivity.  
 
 The key is to focus on useful, relevant insights rather than just promoting your product, so that readers are more likely to engage and trust your content. By posting such high-quality content early on, you set the tone for the community and give people a reason to join and stay active on your subreddit.
 
-### Engage With Your Community Consistently
+### 5. Engage With Your Community Consistently
 
 Active engagement is crucial for subreddit growth. Reply to comments, answer questions, and appreciate people for sharing their thoughts. For example, if a FlowRaft user posts a question about a feature or a suggestion for improvement, respond promptly and helpfully.  
 
 This not only provides support to that user but also shows how much you care for your customers. This consistent active engagement can turn one-time visitors into regular contributors.
 
-### Cross-Post From Relevant Subreddits
+### 6. Cross-Post From Relevant Subreddits
 
 Cross-posting is one of the best ways to gain visibility by sharing helpful content from other subreddits (from your domain) into yours. This is something you can do when you run out of content. This keeps your community active and full of useful discussions, even if you haven’t built up original content yet.  
 
