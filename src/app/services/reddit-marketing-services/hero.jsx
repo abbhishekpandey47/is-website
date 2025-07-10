@@ -142,48 +142,34 @@ export default function AIStartupLanding() {
 
             {/* Content */}
             <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto text-center relative z-10">
-                <div className="quicksand-bold text-[4.5em] max-md:text-[3.2em] max-sm:text-[2.4em] leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-white text-center mb-16 max-sm:mb-8">                    <h1 className="leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-center max-lg:text-center max-lg:mx-auto tracking-normal">
+                <div className="quicksand-bold text-[4.5em] max-md:text-[3.2em] max-sm:text-[2.4em] leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-white text-center mb-12 max-sm:mb-6">                    <h1 className="leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-center max-lg:text-center max-lg:mx-auto tracking-normal">
                     <span className="text-[#ff4500]">Reddit </span>Marketing Agency for<br />
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600"> AI Agents <span className="text-white">&</span> SaaS Startups </span>
                 </h1>
                 </div>
 
                 {/* Description */}
-                <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto mb-14 max-sm:mb-8">
+                <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto mb-10 max-sm:mb-6">
                     <p className="text-[24px] md:text-[24px] max-sm:text-[18px] text-[#f5deb3] leading-snug font-light tracking-normal">
                         Most startups get flagged or ignored on Reddit. We help you show up where your ICP hangs out like r/devops, r/nocode, and r/platform_engineering  with LLM-friendly comments, karma-rich accounts, and stealth thread strategies.
                     </p>
                 </div>
 
-                <div className="lg:mb-32 justify-center items-center">
-                    <div className="hidden max-sm:flex flex-col items-center gap-6">
-                        <CalendarBooking />
-                        <div className="w-full flex justify-center">
-                            <Image
-                                width={600}
-                                height={200}
-                                className="w-[320px] h-auto border-[1.5px] border-[#373737] rounded-2xl"
-                                loading="lazy"
-                                priority={false}
-                                src="/reddit/hero.png"
-                                alt="Hero Image"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="flex flex-row gap-4 justify-center items-center">
-                        <div className="hidden md:block">
-                            <CalendarBooking />
-                        </div>
+                <div className="justify-center items-center">
+                    <div className="flex flex-row gap-4 justify-center items-center mb-6">
                         <TrustedBySection />
                     </div>
-
-
+                    <div className="flex flex-col items-center">
+                        {/* Center - Book a Demo button */}
+                        <div className="flex flex-col items-center">
+                            <CalendarBooking />
+                        </div>
+                    </div>
                 </div>
             </div>
 
             {/* Desktop: Image positioned on the right */}
-            <div className=" absolute right-0 bottom-0 mb-[270px] max-sm:hidden">
+            {/* <div className=" absolute right-0 bottom-0 mb-[270px] max-sm:hidden">
                 <Image
                     width={600}
                     height={200}
@@ -193,11 +179,11 @@ export default function AIStartupLanding() {
                     src="/reddit/hero.png"
                     alt="Hero Image"
                 />
-            </div>
+            </div> */}
 
-            <div className="w-full justify-center items-center flex flex-col pt-20 max-sm:pt-16">
+            <div className="w-full justify-center items-center flex flex-col pt-16 max-sm:pt-12">
                 <div
-                    className="w-[100%] pt-10 pb-1 max-sm:pt-6"
+                    className="w-[100%] pt-8 pb-1 max-sm:pt-4"
                     style={{
                         backgroundColor: "#171a3d",
                         backgroundImage: `radial-gradient(circle at top right, #090d1a 0%, transparent 30%)`,
