@@ -178,7 +178,7 @@ Once you’re aware of the good subreddits to join, focus on maintaining a consi
 You can promote your SaaS product on subreddits, such as **r/SaaS**, **r/devops**, **r/AI_Agents**, **r/programming**, **r/webdev**, **r/nocode**, **r/vibecoding**, and **r/indiehackers**, depending on your audience.
 
 ### 2. How To Promote Your SaaS on Reddit? 
-Share insights, case studies, or user-focused value, not sales pitches. Use subreddits like **r/SaaS** or **r/indiehackers**, and always follow the rules around self-promotion.
+Share insights, case studies, or user-focused value, not sales pitches. Engage in subreddits like **r/SaaS** or **r/indiehackers**, and always follow the rules around self-promotion.
 
 ### 3. What Subreddits Are Easiest To Gain Karma?  
 You can gain karma easily on subreddits like **r/SaaS**, **r/webdev**, and **r/programming** by publishing posts and comments.
