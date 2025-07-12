@@ -40,7 +40,7 @@ const YCWork = () => {
       link: "https://getmocha.com/",
       description:
         "We produce technical blogs and SEO content for GetMocha covering frontend observability, performance bottlenecks, and developer experience. Our work helps position Mocha as a go-to solution for engineering teams focused on web performance and user impact.",
-      achievement: "99.9% uptime",
+      achievement: "Consistent, technical content shipped on schedule",
       image: "/ai-page/getmocha.png",
       alt: "DataDog Dashboard",
     },
