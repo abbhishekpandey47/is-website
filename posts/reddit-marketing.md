@@ -126,7 +126,7 @@ For instance, this Reddit user has set up an Avatar, banner image, and mentioned
 ### 2. Create a Buffer, Don't Make Every Post About Your Product
 
 In Reddit, Karma (both Post Karma and Comment Karma) is essentially your reputation score. High karma indicates that your contributions have been appreciated by the community over time. Especially for a new account, it's important to build up some karma organically before you start talking about your own product. 
-You can do this by engaging in discussions on popular subreddits relevant to your industry (or even general-interest subs to start). Offer helpful comments, answer questions, and contribute to conversations without any self-promotion. This activity will earn you Upvotes and Karma points.
+You can do this by engaging in discussions on the **[best subreddits](https://www.infrasity.com/blog/best-subreddits)** relevant to your industry (or even general-interest subs to start with). Offer helpful comments, answer questions, and contribute to conversations without any self-promotion. This activity will earn you Upvotes and Karma points.
 
 Also, be responsive: if people comment on your post or reply to your comments, write back promptly and thoughtfully. Quick, ongoing interaction can lead to more upvotes (as people appreciate an active conversation) and will increase your comment karma. Not only does a higher karma count unlock certain posting privileges on some subreddits, it also signals trustworthiness - both to the community and to Reddit's algorithms.
 
