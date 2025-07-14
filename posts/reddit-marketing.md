@@ -185,7 +185,7 @@ These achievements, especially achievements like Top 1% Commenter, give you more
 
 ![top 1 percent commenter achievement in reddit marketing](/PostImages/reddit-marketing/rm13.webp)
 
-How do you get there? Consistency and quality. Try to consistently be one of the people who answer questions in your domain, welcome newcomers, or provide insightful analysis on topics in your industry. Over time, people will recognize your username.
+How do you get there? Consistency and quality. Therefore, in your **[Reddit marketing strategy](https://www.infrasity.com/blog/reddit-marketing-strategy)**, try to consistently be one of the people who answer questions in your domain, welcome newcomers, or provide insightful analysis on topics in your industry. Over time, people will recognize your username.
 
 This kind of reputation means that when you eventually introduce your solution for SaaS users, users are more likely to listen because you've proven yourself knowledgeable and not just self-interested.
 
