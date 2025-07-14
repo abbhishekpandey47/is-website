@@ -44,7 +44,7 @@ If that's the case, search if they are discussed within broader industry subredd
 
 For instance, you can observe here that a developer shared a list of Terraform self-service platforms and Internal Developer Platform (IDP) solutions on the **r/devops subreddit**, seeking feedback on tools that can help provide a self-service catalog for deployment automation, specifically for Terraform-based services. The tools listed include Humanitec, which is a competitor in the domain, meaning that developers are discussing your competitor.
 
-Additionally, some SaaS companies' teams choose to engage via an official Reddit user account instead of a subreddit; for example, the CEO of getport.io, Zohar, posted on the r/kubernetes subreddit, sharing a technical blog about how developer portals can abstract away Kubernetes complexity. In the Reddit thread, he engaged with the developer community as well.
+Additionally, some SaaS companies' teams choose to engage via an official Reddit user account instead of a **[subreddit](https://www.infrasity.com/blog/how-to-create-a-subreddit)**; for example, the CEO of getport.io, Zohar, posted on the r/kubernetes subreddit, sharing a technical blog about how developer portals can abstract away Kubernetes complexity. In the Reddit thread, he engaged with the developer community as well.
 
 ![getport ceo post on subreddit as reddit marketing strategy](/PostImages/reddit-marketing-strategy/r5.webp) 
 ![getport ceo responding to developers on reddit thread as a part of his reddit marketing strategy](/PostImages/reddit-marketing-strategy/r6.webp) 
