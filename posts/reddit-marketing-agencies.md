@@ -74,7 +74,7 @@ Not only do we ensure that the responses or posts on Reddit are valuable, but al
 
 ### 3. Adapt Tone to Each Subreddit’s Culture
 
-Every subreddit has its own vibe - some are super technical, others are sarcastic, and a few are just brutally honest. If you show up sounding out of place, people will ignore you or call you out. That's why we always take time to understand the tone and language of each community before jumping in. It helps us talk like a real member, not like a marketer, and that's what actually gets people to listen and engage.
+Every **[subreddit](https://www.infrasity.com/blog/how-to-create-a-subreddit)** has its own vibe - some are super technical, others are sarcastic, and a few are just brutally honest. If you show up sounding out of place, people will ignore you or call you out. That's why we always take time to understand the tone and language of each community before jumping in. It helps us talk like a real member, not like a marketer, and that's what actually gets people to listen and engage.
 
 ### 4. Focus on Helpful Content That Gets Upvoted Naturally
 
