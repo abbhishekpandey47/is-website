@@ -7,7 +7,7 @@ export default function Cta() {
             <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[80px] max-lg:text-center max-lg:mx-auto">
-                        Ready to win{" "}<span className="text-[#ff4500]">Reddit</span>?
+                        Ready to win <span className="text-[#ff4500]">Reddit</span>? Get a <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 bg-clip-text text-transparent font-bold">free audit</span> today.
                     </h2>
                 </div>
                 <div class="flex justify-center my-3 mb-7">
