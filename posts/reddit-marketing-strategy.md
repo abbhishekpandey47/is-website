@@ -120,7 +120,7 @@ So, while planning a Reddit marketing strategy, ensure that you run a competitor
 
 ![infrasity reddit marketing strategy flow for b2b saas companies](/PostImages/reddit-marketing-strategy/r10.webp) 
 
-At Infrasity, we follow a Reddit marketing strategy flow as shown above and here's how we drive results:
+At Infrasity, we follow a **[Reddit marketing](https://www.infrasity.com/blog/reddit-marketing)** strategy flow as shown above and here's how we drive results:
 
 - **Trust First, Promotion Second Approach**: We perform a product hands-on for our customers' B2B SaaS product first, so our subreddit posts or replies to threads don't come off as promotional but more as an advocate. We prioritize building credibility by providing valuable insights, answering questions, and engaging consistently in relevant discussions. With this approach, promotions follow naturally once we've earned attention and trust.
 - **Utilize Aged, Active Accounts**: We use only aged and active Reddit accounts with proven posting histories to avoid spam filters and enhance recognition where it matters most.
