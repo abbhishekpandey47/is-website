@@ -33,7 +33,7 @@ Karma is a point-based reputation system that reflects how much the community va
 
 ### 2. Don't Ignore Subreddit Rules or the Moderators
 
-**Every subreddit has its own set of rules** (often listed in the sidebar or "About" section), and you must read and respect them before posting. Reddit has two layers of moderation: automated moderation (bots and filters that the platform or subreddit mods set up) and human moderation (the subreddit's volunteer moderators).
+**Every [subreddit](https://www.infrasity.com/blog/how-to-create-a-subreddit) has its own set of rules** (often listed in the sidebar or "About" section), and you must read and respect them before posting. Reddit has two layers of moderation: automated moderation (bots and filters that the platform or subreddit mods set up) and human moderation (the subreddit's volunteer moderators).
 
 ![ensure you follow rules of subreddit when doing reddit marketing](/PostImages/reddit-marketing/rm2.webp)
 
@@ -203,7 +203,7 @@ Leveraging Reddit marketing for promoting your product to your target audience i
 
 For example, avoid sounding overly promotional, always follow subreddit-specific rules, and be cautious of getting shadowbanned. Make sure your account looks real and personalized (not bot-like), and take the time to build up Karma so your contributions carry weight and credibility. Most importantly, diversify your activity. Don't just show up to pitch - engage in meaningful conversations, share insights, and create a buffer of helpful, non-promotional posts that position you as part of the community rather than a marketer.
 
-These lessons come from real-world experience and if you ever feel stuck or want a strategic partner to help you with [Reddit marketing services](https://www.infrasity.com/services/reddit-marketing-agency)**, **book a Free Demo with [Reddit marketing agencies](https://www.infrasity.com/blog/reddit-marketing-agencies)** like Infrasity**. We specialize in helping B2B SaaS companies grow through authentic Reddit engagement.
+These lessons come from real-world experience and if you ever feel stuck or want a strategic partner to help you with [Reddit marketing services](https://www.infrasity.com/services/reddit-marketing-agency)**, **book a Free Demo with [Reddit marketing agencies](https://www.infrasity.com/blog/reddit-marketing-agencies) like Infrasity**. We specialize in helping B2B SaaS companies grow through authentic Reddit engagement.
 
 ## FAQs
 
