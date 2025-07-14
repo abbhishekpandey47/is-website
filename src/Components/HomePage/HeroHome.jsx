@@ -115,7 +115,7 @@ const HeroHome = () => {
               >
                 Book a Free Demo
               </Link> */}
-              <CalendarBooking buttonText="Book a Free Demo" />
+              <CalendarBooking buttonText="Book a Free Consultation" width="w-52" />
               <div className="flex justify-center mt-4">
                 <ClutchBadge />
               </div>

@@ -6,7 +6,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import CalendarBooking from "../../app/book-a-demo/calendarButton"
+import CalendarBooking from "../../app/calendarButton"
 
 const GivenMenuBar = ({
   head,
@@ -165,7 +165,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute">
-      <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:w-[85vw] lg:w-[80vw] xl:w-[85vw] max-w-[1200px] p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg:transform lg:-translate-x-1/2">
+      <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:max-w-6xl p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg:transform lg:-translate-x-1/2">
         <div className="navbar-start max-lg:visible invisible">
           <Menu as="div" className="absolute inline-block text-left">
             <div>
@@ -491,8 +491,8 @@ const Navbar = () => {
                 Pricing
               </Link>
             </li>
-            <li className="mr-10">
-              {!isMobileMenuOpen && <CalendarBooking />}
+            <li className="lg:mr-10">
+              {!isMobileMenuOpen && <CalendarBooking buttonText="Book a Free Consultation" width="w-52" />}
             </li>
           </ul>
         </div>
