@@ -51,7 +51,7 @@ Reddit users are quick to spot anything that feels like a sales pitch, and they 
 
 ![avoid posting promotional comments out of context in reddit marketing](/PostImages/reddit-marketing/rm4.webp)
 
-Not only was this comment blatantly promotional, but it also had no structure. To understand how he should have commented with promotional intent, read the \_\_ point under Dos of Reddit Marketing.
+Not only was this comment blatantly promotional, but it also had no structure. To understand how he should have commented with promotional intent, read the 3rd point under Dos of Reddit Marketing.
 
 Additionally, instead of selling, focus on advocating for your product seamlessly. Share insights, offer solutions, and mention your product only when it's truly relevant and always with transparency. Aim to be helpful first. When your contributions are thoughtful and community-focused, any mention of your product will feel natural rather than forced. That's the key to earning trust and eventually, interest.
 
