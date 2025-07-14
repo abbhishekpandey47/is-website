@@ -56,7 +56,7 @@ const InfraMethodologyTimeline = () => {
                 <div className="absolute vertical-dashed" style={{ left: '62.5%', top: '50px', bottom: '50px' }}></div>
                 <div className="absolute vertical-dashed" style={{ left: '87.5%', top: '50px', bottom: '50px' }}></div>
 
-                <div className="relative" style={{ height: '800px', paddingTop: '70px', paddingBottom: '70px' }}>
+                <div className="relative" style={{ height: '1050px', paddingTop: '70px', paddingBottom: '70px' }}>
 
                     <div className="absolute" style={{ left: '2.5%', top: '70px', width: '33%' }}>
                         <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-blue-800 rounded-2xl p-6 shadow-2xl border border-purple-700/50 mt-8"
@@ -84,7 +84,7 @@ const InfraMethodologyTimeline = () => {
                         </div>
                     </div>
 
-                    <div className="absolute" style={{ left: '22.5%', top: '140px', width: '33%' }}>
+                    <div className="absolute" style={{ left: '22.5%', top: '240px', width: '33%' }}>
                         <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-blue-800 rounded-2xl p-6 shadow-2xl border border-purple-700/50 mt-44"
                             style={{
                                 background: "linear-gradient(to right, #0e1329 0%, #0e1329 50%, #353586 100%)",
@@ -108,7 +108,7 @@ const InfraMethodologyTimeline = () => {
                         </div>
                     </div>
 
-                    <div className="absolute" style={{ left: '70.5%', top: '270px', width: '33%' }}>
+                    <div className="absolute" style={{ left: '70.5%', top: '370px', width: '33%' }}>
                         <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-blue-800 rounded-2xl p-6 shadow-2xl border border-purple-700/50"
                             style={{
                                 background: "linear-gradient(to right, #0e1329 0%, #0e1329 50%, #353586 100%)",
@@ -133,7 +133,7 @@ const InfraMethodologyTimeline = () => {
                         </div>
                     </div>
 
-                    <div className="absolute" style={{ left: '48.5%', top: '530px', width: '33%' }}>
+                    <div className="absolute" style={{ left: '48.5%', top: '730px', width: '33%' }}>
                         <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-blue-800 rounded-2xl p-6 shadow-2xl border border-purple-700/50 bottom-0"
                             style={{
                                 background: "linear-gradient(to right, #0e1329 0%, #0e1329 50%, #353586 100%)",
