@@ -145,19 +145,19 @@ This includes platforms like Dev.to and Daily.dev, both of which cater to highly
 
 It is crucial to measure the impact of your B2B content syndication practices, and here are the metrics you should track:
 
-**1. Inbound traffic From External Sources**
+### 1. Inbound traffic From External Sources
 
 Referral traffic tells you how many visitors reached your website from a specific syndication platform. In Google Analytics, you can view this by checking the Source/Medium report (e.g., medium.com/referral). There’s another way of tracking the metrics, which is through a UTM link, created by using UTM link builders like **[GA Dev Tools](https://ga-dev-tools.google/campaign-url-builder/)**, and adding it to the article on syndication sites.
 
-**2. Impressions**
+### 2. Impressions
 
 Impressions refer to how many times your article was shown to users on the B2B content syndication platform. This metric helps you gauge how much visibility your content is getting. If your goal is product awareness, impressions are a leading indicator of success. Most platforms provide this metric through a native stats dashboard.
 
-**3. Clicks**
+### 3. Clicks
 
 Clicks measure the number of times users engaged with your content on the syndication sites. It shows how effective your headlines are in motivating users to take action, increasing the possibility of gaining referral traffic.
 
-**4. Cost Per Lead (CPL) (for paid syndication)**
+### 4. Cost Per Lead (CPL) (for paid syndication)
 
 If you're using paid syndication, CPL is a crucial metric that reflects the efficiency of your investment. It's calculated by dividing your total campaign spend by the number of leads acquired. A lower CPL indicates cost-effective performance, but you should always consider it alongside lead quality to avoid chasing cheap but unqualified leads.
 
@@ -169,13 +169,13 @@ If you are looking for a partner to utilize content syndication practices for yo
 
 ## Frequently Asked Questions
 
-### What is Content Syndication in B2B?  
+### 1. What is Content Syndication in B2B?  
 B2B content syndication is a **marketing strategy** that republishes original content on multiple websites. It involves distributing content to other platforms with a **backlink** directing readers to the original source. This helps B2B enterprises increase **brand visibility and awareness** while generating **high-intent leads.**
 
-### What is Content Syndication?  
+### 2. What is Content Syndication?  
 Content syndication is a **marketing technique** in which content is published across multiple websites. The host website benefits by receiving **high-quality, relevant content**, while the original creator gains **higher traffic and visibility.** Various forms of content can be syndicated, including **blogs, videos, eBooks, and white papers.**
 
-### What Does B2B Content Mean?  
+### 3. What Does B2B Content Mean?  
 B2B content refers to **blogs, whitepapers, eBooks, newsletters,** or any other format designed to capture the attention of individuals within your company’s **ideal customer profile,** such as IT professionals, subject matter experts, or web developers. This content—whether in the form of a blog or video—is used to drive traffic to your website, generating leads and potential conversions.
 
 
