@@ -1,7 +1,6 @@
 export const metadata = {
     title: 'Blog | Infrasity',
     description: 'Explore Infrasity\'s latest blogs on Developer Relations, engineering insights, marketing strategies, and more to accelerate your pipeline and boost user engagement.',
-    keywords: 'Infrasity, Blogs, Developer Relations, Engineering, Marketing, User Sign-ups, Pipeline Acceleration, Tech Insights, Software Development, Growth Strategies',
     openGraph: {
         title: 'Blog | Infrasity',
         description: 'Explore Infrasity\'s latest blogs on Developer Relations, engineering insights, marketing strategies, and more to accelerate your pipeline and boost user engagement.',
