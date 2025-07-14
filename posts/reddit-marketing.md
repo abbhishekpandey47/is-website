@@ -134,7 +134,7 @@ For example, a user posted on a subreddit r/AI_Agents, where they shared that th
 
 ![reply to comments timely when doing reddit marketing](/PostImages/reddit-marketing/rm11.webp)
 
-They received a comment, to which they replied instantly, building more engagement. In short, karma is "social proof" that you're a legitimate and contributing member of Reddit. Therefore, aim for at least a few hundred karma points and a couple of weeks of normal activity before you start your Reddit marketing thoroughly.
+They received a comment, to which they replied instantly, building more engagement. In short, karma is "social proof" that you're a legitimate and contributing member of Reddit. Therefore, aim for at least a few hundred **[karma points](https://www.infrasity.com/blog/how-do-you-get-karma-on-reddit)** and a couple of weeks of normal activity before you start your Reddit marketing thoroughly.
 
 ### 3. Provide Value Before Pitching
 
