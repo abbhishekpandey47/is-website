@@ -10,7 +10,7 @@ When you are a B2B SaaS enterprise, and your product caters to a specific niche 
 
 Content syndication is an excellent way of scaling your content’s reach. But it's not just an increase in numbers—it also improves the quality of leads. It is a focused and targeted marketing strategy that yields high benefits with minimal investments. This blog explores how to integrate content syndication for the best results and the pitfalls and mistakes to avoid.
 
-## What is B2B Content Syndication?
+## What is Content Syndication?
 
 B2B companies make products that cater to a very specific niche. For instance, Slack’s cloud-based team communication software is helpful in business communication and management, but the knowledge that such a product exists has to be communicated first. Often, your prospective customers have no idea that you even exist. Increasing your visibility is the only path to generating leads and getting the attention of your ideal customer profile.
 
