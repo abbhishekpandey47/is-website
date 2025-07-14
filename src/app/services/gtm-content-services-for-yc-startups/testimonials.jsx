@@ -49,7 +49,7 @@ export default function Testimonials({ heading, subHeading }) {
         <section className="mx-auto px-6 py-10">
             <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
                 <div className="quicksand-bold text-[32px] max-sm:text-[20px] tracking-tight leading-[1.1] text-white text-center flex justify-center mb-2">
-                    <h2 className="whitespace-nowrap text-center max-lg:mx-auto tracking-wide">
+                    <h2 className="text-center max-lg:mx-auto tracking-wide">
                         Why teams backed by <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">YC, Boldstart, and Eclipse</span> trust Infrasity
                     </h2>
                 </div>
