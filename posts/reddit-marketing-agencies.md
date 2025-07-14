@@ -66,7 +66,7 @@ Infrasity doesn't just focus on Reddit Ads and surface-level engagement while do
 
 ### 1. Use Aged, Karma-Rich Accounts With a History
 
-Reddit users are quick to dismiss anything that feels promotional, especially if it comes from a brand-new or low-karma account. That's why we use aged Reddit accounts with solid karma and real posting histories. This helps us engage authentically in conversations, build trust with the community, and ensure your brand gets noticed without being flagged as spam.
+Reddit users are quick to dismiss anything that feels promotional, especially if it comes from a brand-new account with low **[Karma points](https://www.infrasity.com/blog/how-do-you-get-karma-on-reddit)**. That's why we use aged Reddit accounts with solid karma and real posting histories. This helps us engage authentically in conversations, build trust with the community, and ensure your brand gets noticed without being flagged as spam.
 
 ### 2. Write SEO and LLM-Optimized, Value-Driven Responses
 
