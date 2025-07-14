@@ -138,7 +138,7 @@ It’s a supportive space for sharing builds, launching products, and exploring 
 
 **[r/vibecoding](https://www.reddit.com/r/vibecoding/)** is a fun, laid-back community for developers who care about the craft, aesthetics, and vibe of coding. It’s where cool side projects, clean UIs, and creative experiments take center stage - whether they’re made solo, powered by AI, or purely for the love of code.
 
-This isn’t a subreddit for tutorials or serious architecture debates; it’s more about inspiration, personal expression, and showcasing the joy of building.
+This isn’t a **[subreddit](https://www.infrasity.com/blog/how-to-create-a-subreddit)** for tutorials or serious architecture debates; it’s more about inspiration, personal expression, and showcasing the joy of building.
 
 **Things to keep in mind:**
 
