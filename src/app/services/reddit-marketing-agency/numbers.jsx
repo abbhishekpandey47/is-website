@@ -25,8 +25,7 @@ const StatsSection = () => {
                     <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
-                        The Quiet Reddit System Refined Across 30+ {" "}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>Breakout Startups</span>
-                    </h2>
+Real Threads. Real Signups                    </h2>
                 </div>
                 <div class="flex justify-center my-6 mb-8">
                     <div class="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
@@ -35,8 +34,7 @@ const StatsSection = () => {
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto mb-8">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-                        Sets it apart from generic Reddit service promises. Great for credibility.
-
+No use this one Reddit Metrics That Move the Needle — Traffic, Upvotes, Trials
 
                     </p>
                 </div>
