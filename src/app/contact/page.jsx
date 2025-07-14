@@ -438,8 +438,13 @@ const CalendarBooking = ({
     const isPastDate = (date) => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        return date < today;
+
+        const dayOfWeek = date.getDay(); // 0 = Sunday, 6 = Saturday
+        const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+
+        return date < today || isWeekend;
     };
+
 
     const formatDate = (date) => {
         return `${weekdays[date.getDay()]}, ${months[date.getMonth()]
