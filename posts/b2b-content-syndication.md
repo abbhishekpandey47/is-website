@@ -4,7 +4,7 @@ B2B content syndication is a marketing technique wherein a company leverages a t
 
 Making your content discoverable by ranking high on the search engine results page is a long and highly competitive game that requires high investment. Content syndication is a strategic marketing tactic that, if done right, can substantially increase awareness for your organization and get you high-quality leads with minimal investment. Syndication also helps build trust—if a credible website republishes your content, you can gain the benefits of their credibility and reach. The task is just to republish with proper attribution on a platform that is not your commercial rival but has high traffic and credibility.
 
-![find audience on b2b contwnt syndication platforms](/PostImages/b2b-content-syndication/1.png)
+![find audience on b2b content syndication platforms](/PostImages/b2b-content-syndication/1.png)
 
 When you are a B2B SaaS enterprise, and your product caters to a specific niche requirement of your target audience, there is a high chance that they may not even know that you exist. To get the attention of your ideal customer profile, you need to be on the websites they frequent, be it Reddit, LinkedIn, or Hacker News. This marketing strategy is called content syndication.
 
@@ -74,7 +74,7 @@ However, with content syndication, you can significantly shorten the buying cycl
 
 So, you are going to your client’s site rather than them coming to you!
 
-![b2b contwnt syndication shortens the buying cycle](/PostImages/b2b-content-syndication/2.png)
+![b2b content syndication shortens the buying cycle](/PostImages/b2b-content-syndication/2.png)
 
 ### 3. Creates Demand
 
@@ -104,7 +104,7 @@ Canonical tags help prevent SEO issues while syndicating content. These tags are
 
 Here’s what the self-referential Canonical Tag looks like:
 
-<link rel="canonical" href="https://www.original-site.com/original-article-url"/>
+"<link rel="canonical" href="https://www.original-site.com/original-article-url"/>"
 
 You need to place it in the <head> section of the HTML of the page of your website.
 
