@@ -77,8 +77,8 @@ export default function DownloadPDF() {
     }, [isPopup]);
 
     return (
-        <div className="flex items-center justify-center my-16">
-            <div className="w-[90%]">
+    <div className="bg-[#000000] p-8 md:p-[4rem] md:px-[5rem] -mt-8">
+            <div className="max-w-6xl mx-auto">
                 {/* Section Heading */}
                 <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
                     <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
