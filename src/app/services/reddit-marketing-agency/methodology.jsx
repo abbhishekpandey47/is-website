@@ -7,7 +7,7 @@ const InfraMethodologyTimeline = () => {
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center">
                     <h2 className=" md:leading-[80px] text-center max-lg:text-center max-lg:mx-auto">
-                        The Execution Framework Behind 100+{" "}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>Reddit Touchpoints</span>
+                        Our Proven Reddit Marketing Process for Authentic Brand Growth
                     </h2>
                 </div>
             </div>
@@ -75,11 +75,11 @@ const InfraMethodologyTimeline = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal mr-12">Technical audit + Reddit scan</h3>
+                                    <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal mr-12">Reddit Market Research & Competitor Analysis</h3>
                                 </div>
                             </div>
                             <p className="text-sm text-gray-300 tracking-wider leading-loose font-light mr-4">
-                                We break down your product and ICP, then map relevant Reddit subreddits and content themes where real traction is possible.
+                                We start by researching your product, industry trends, and competitors to build a data-driven Reddit marketing strategy. Our team identifies high-potential subreddits, relevant discussion topics, and communities where your brand can gain authentic visibility.
                             </p>
                         </div>
                     </div>
@@ -99,11 +99,11 @@ const InfraMethodologyTimeline = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal mr-4">Karma-rich handle creation + comment seeding</h3>
+                                    <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal mr-4">Content Planning & Engagement Strategy</h3>
                                 </div>
                             </div>
                             <p className="text-sm text-gray-300 tracking-wider leading-loose font-light mr-4">
-                                Activate karma-rich accounts and begin comment-driven engagement — showing up with insight-first contributions in live threads.
+                                Next, we shortlist the best Reddit threads and conversation topics for brand promotion. We create engagement samples and comment drafts that reflect your unique value proposition and brand voice, ensuring all content feels organic and community-first.
                             </p>
                         </div>
                     </div>
@@ -124,55 +124,56 @@ const InfraMethodologyTimeline = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal mr-4">Sentiment tracking + Reddit ad boost</h3>
+                                    <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal mr-4">Live Reddit Engagement & Thread Activation</h3>
                                 </div>
                             </div>
                             <p className="text-sm text-gray-300 tracking-wider leading-loose font-light mr-4">
-                                We start original discussions designed to spark feedback and curiosity — and maintain active presence to guide the conversation.
+                                With your approval, we use karma-rich accounts to post comments, create threads, and join discussions. This real-time Reddit engagement strategy helps boost credibility, drive organic conversation, and connect your brand with your ideal audience.
                             </p>
                         </div>
                     </div>
-                </div>
 
-                <div className="absolute" style={{ left: '48.5%', top: '530px', width: '33%' }}>
-                    <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-blue-800 rounded-2xl p-6 shadow-2xl border border-purple-700/50 bottom-0"
-                        style={{
-                            background: "linear-gradient(to right, #0e1329 0%, #0e1329 50%, #353586 100%)",
-                            border: "2px solid #393a52",
-                            transition: "all 0.3s ease",
-                        }}
-                    >
-                        <div className="flex items-start mb-4">
-                            <div className="w-10 h-10 bg-[#232a5f] rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 0 002-2V6a2 0 00-2-2H4zm0 2h12v8H4V6z" />
-                                    <path d="M6 8h8v2H6V8zm0 4h5v2H6v-2z" />
-                                </svg>
+                    <div className="absolute" style={{ left: '48.5%', top: '530px', width: '33%' }}>
+                        <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-blue-800 rounded-2xl p-6 shadow-2xl border border-purple-700/50 bottom-0"
+                            style={{
+                                background: "linear-gradient(to right, #0e1329 0%, #0e1329 50%, #353586 100%)",
+                                border: "2px solid #393a52",
+                                transition: "all 0.3s ease",
+                            }}
+                        >
+                            <div className="flex items-start mb-4">
+                                <div className="w-10 h-10 bg-[#232a5f] rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 0 00-2-2H4zm0 2h12v8H4V6z" />
+                                        <path d="M6 8h8v2H6V8zm0 4h5v2H6v-2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal mr-4">Tracking, Reddit Ads & Campaign Optimization</h3>
+                                </div>
                             </div>
-                            <div>
-                                <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal mr-4">Thread creation + live responses</h3>
-                            </div>
+                            <p className="text-sm text-gray-300 tracking-wider leading-loose font-light mr-4">
+                                We monitor engagement metrics and audience sentiment closely. Based on performance, we refine our Reddit marketing approach and, if suitable, run targeted Reddit ad campaigns to amplify reach all while keeping engagement authentic and compliant.
+                            </p>
                         </div>
-                        <p className="text-sm text-gray-300 tracking-wider leading-loose font-light mr-4">
-                            Monitor responses and engagement signals — then optionally use targeted Reddit ads (≤10%) to amplify momentum without killing authenticity.
-                        </p>
                     </div>
+
                 </div>
 
                 <div className="flex justify-between text-center -mt-4 mb-12">
-                    <div className="quicksand-semibold text-3xl font-light text-white" style={{ width: '25%' }}>Week 1</div>
-                    <div className="quicksand-semibold text-3xl font-light text-white" style={{ width: '25%' }}>Week 2</div>
-                    <div className="quicksand-semibold text-3xl font-light text-white" style={{ width: '25%' }}>Week 3</div>
-                    <div className="quicksand-semibold text-3xl font-light text-white" style={{ width: '25%' }}>Week 4</div>
+                    <div className="quicksand-semibold text-3xl font-light text-white" style={{ width: '25%' }}>Step 1</div>
+                    <div className="quicksand-semibold text-3xl font-light text-white" style={{ width: '25%' }}>Step 2</div>
+                    <div className="quicksand-semibold text-3xl font-light text-white" style={{ width: '25%' }}>Step 3</div>
+                    <div className="quicksand-semibold text-3xl font-light text-white" style={{ width: '25%' }}>Step 4</div>
                 </div>
             </div>
 
             {/* Mobile Version */}
             <div className="md:hidden max-w-md mx-auto mt-8">
                 <div className="space-y-6">
-                    {/* Week 1 Card */}
+                    {/* Step 1 Card */}
                     <div className="text-center mb-4">
-                        <div className="quicksand-semibold text-2xl font-light text-white">Week 1</div>
+                        <div className="quicksand-semibold text-2xl font-light text-white">Step 1</div>
                     </div>
                     <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-blue-800 rounded-2xl p-6 shadow-2xl border border-purple-700/50"
                         style={{
@@ -189,17 +190,17 @@ const InfraMethodologyTimeline = () => {
                                 </svg>
                             </div>
                             <div>
-                                <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal">Technical audit + Reddit scan</h3>
+                                <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal">Reddit Market Research & Competitor Analysis</h3>
                             </div>
                         </div>
                         <p className="text-sm text-gray-300 tracking-wider leading-loose font-light">
-                            We break down your product and ICP, then map relevant Reddit subreddits and content themes where real traction is possible.
+                            We start by researching your product, industry trends, and competitors to build a data-driven Reddit marketing strategy. Our team identifies high-potential subreddits, relevant discussion topics, and communities where your brand can gain authentic visibility.
                         </p>
                     </div>
 
-                    {/* Week 2 Card */}
+                    {/* Step 2 Card */}
                     <div className="text-center mb-4">
-                        <div className="quicksand-semibold text-2xl font-light text-white">Week 2</div>
+                        <div className="quicksand-semibold text-2xl font-light text-white">Step 2</div>
                     </div>
                     <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-blue-800 rounded-2xl p-6 shadow-2xl border border-purple-700/50"
                         style={{
@@ -216,17 +217,17 @@ const InfraMethodologyTimeline = () => {
                                 </svg>
                             </div>
                             <div>
-                                <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal">Karma-rich handle creation + comment seeding</h3>
+                                <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal">Content Planning & Engagement Strategy</h3>
                             </div>
                         </div>
                         <p className="text-sm text-gray-300 tracking-wider leading-loose font-light">
-                            Activate karma-rich accounts and begin comment-driven engagement — showing up with insight-first contributions in live threads.
+                            Next, we shortlist the best Reddit threads and conversation topics for brand promotion. We create engagement samples and comment drafts that reflect your unique value proposition and brand voice, ensuring all content feels organic and community-first.
                         </p>
                     </div>
 
-                    {/* Week 3 Card */}
+                    {/* Step 3 Card */}
                     <div className="text-center mb-4">
-                        <div className="quicksand-semibold text-2xl font-light text-white">Week 3</div>
+                        <div className="quicksand-semibold text-2xl font-light text-white">Step 3</div>
                     </div>
                     <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-blue-800 rounded-2xl p-6 shadow-2xl border border-purple-700/50"
                         style={{
@@ -243,17 +244,17 @@ const InfraMethodologyTimeline = () => {
                                 </svg>
                             </div>
                             <div>
-                                <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal">Sentiment tracking + Reddit ad boost</h3>
+                                <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal">Live Reddit Engagement & Thread Activation</h3>
                             </div>
                         </div>
                         <p className="text-sm text-gray-300 tracking-wider leading-loose font-light">
-                            We start original discussions designed to spark feedback and curiosity — and maintain active presence to guide the conversation.
+                            With your approval, we use karma-rich accounts to post comments, create threads, and join discussions. This real-time Reddit engagement strategy helps boost credibility, drive organic conversation, and connect your brand with your ideal audience.
                         </p>
                     </div>
 
-                    {/* Week 4 Card */}
+                    {/* Step 4 Card */}
                     <div className="text-center mb-4">
-                        <div className="quicksand-semibold text-2xl font-light text-white">Week 4</div>
+                        <div className="quicksand-semibold text-2xl font-light text-white">Step 4</div>
                     </div>
                     <div className="bg-gradient-to-br from-purple-900 via-blue-900 to-blue-800 rounded-2xl p-6 shadow-2xl border border-purple-700/50 mb-8"
                         style={{
@@ -270,11 +271,11 @@ const InfraMethodologyTimeline = () => {
                                 </svg>
                             </div>
                             <div>
-                                <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal">Thread creation + live responses</h3>
+                                <h3 className="quicksand-semibold text-white font-semibold text-lg leading-tight tracking-normal">Tracking, Reddit Ads & Campaign Optimization</h3>
                             </div>
                         </div>
                         <p className="text-sm text-gray-300 tracking-wider leading-loose font-light">
-                            Monitor responses and engagement signals — then optionally use targeted Reddit ads (≤10%) to amplify momentum without killing authenticity.
+                            We monitor engagement metrics and audience sentiment closely. Based on performance, we refine our Reddit marketing approach and, if suitable, run targeted Reddit ad campaigns to amplify reach all while keeping engagement authentic and compliant.
                         </p>
                     </div>
                 </div>
