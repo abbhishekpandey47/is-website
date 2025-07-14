@@ -25,7 +25,8 @@ const StatsSection = () => {
                     <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
-Real Threads. Real Signups                    </h2>
+Reddit Metrics That Move the Needle — Traffic, Upvotes, Trials
+                    </h2>
                 </div>
                 <div class="flex justify-center my-6 mb-8">
                     <div class="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
@@ -34,8 +35,6 @@ Real Threads. Real Signups                    </h2>
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto mb-8">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-No use this one Reddit Metrics That Move the Needle — Traffic, Upvotes, Trials
-
                     </p>
                 </div>
             </div>
