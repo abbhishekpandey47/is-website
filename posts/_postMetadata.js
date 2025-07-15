@@ -411,7 +411,7 @@ let postMetaData = [
     title: "What is B2B Content Syndication: A Complete Guide",
     metatitle: "A Complete Guide To B2B Content Syndication And Platforms",
     slug: "b2b-content-syndication",
-    description: "Explore how content syndication can be used as an cost effective marketing tool for B2B Saas companies and boost SEO if done right. Learn how you can distribute your content to yield more traffic and high intent leads..",
+    description: "Explore how content syndication can be used as an cost effective marketing tool for B2B Saas companies and boost SEO if done right. Learn how you can distribute your content to yield more traffic and high intent leads.",
     ogImage: "/PostImages/b2b-content-syndication/0.png",
     publishedOn: "2025-1-24",
     authorId: "author0003",
