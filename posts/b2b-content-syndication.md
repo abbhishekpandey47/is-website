@@ -104,7 +104,7 @@ Canonical tags help prevent SEO issues while syndicating content. These tags are
 
 Here’s what the self-referential Canonical Tag looks like:
 
-"<link rel="canonical" href="https://www.original-site.com/original-article-url"/>"
+`<link rel="canonical" href="https://www.original-site.com/original-article-url"/>`
 
 You need to place it in the <head> section of the HTML of the page of your website.
 
