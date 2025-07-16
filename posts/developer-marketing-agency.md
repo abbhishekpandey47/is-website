@@ -70,7 +70,7 @@ This developer agency focuses on creating SEO-optimized technical content that s
 
 ### 3. Draftdev
 
-![draftdev is a developer marketing agency](/PostImages/developer-marketing-agency/da3.webp) 
+![draftdev is a developer marketing agency](/PostImages/developer-marketing-agency/da4.webp) 
 
 **[Draft.dev](https://draft.dev/)** is another developer marketing agency that specializes in creating high-quality content for technical audiences. They produce technical blogs, roundups, and how-to guides, all designed to engage and educate developers. By focusing on developer-centric content, Draft.dev helps DevTools companies build credibility and connect meaningfully with a technical audience.
 
@@ -78,7 +78,7 @@ They support developer marketing efforts by crafting content that plays a crucia
 
 ### 4. Hoopy
 
-![hoopy is a developer marketing agency](/PostImages/developer-marketing-agency/da4.webp) 
+![hoopy is a developer marketing agency](/PostImages/developer-marketing-agency/da5.webp) 
 
 **[Hoopy](https://hoopy.io/)** is a developer marketing agency that helps DevTools startups build awareness, drive adoption, and build long-term relationships with developers. With a team of developers-turned-marketers, Hoopy creates effective strategies that resonate with technical audiences. They offer services like training, strategy development, research, audits, and content production, all aimed at engaging developers.
 
@@ -86,7 +86,7 @@ Hoopy works with DevRel and marketing teams globally to create authentic connect
 
 ### 5. Catchy Agency
 
-![catchy agency is a developer marketing agency](/PostImages/developer-marketing-agency/da5.webp) 
+![catchy agency is a developer marketing agency](/PostImages/developer-marketing-agency/da6.webp) 
 
 **[Catchy Agency](https://www.catchyagency.com/)** is one of the dev agencies that helps technology companies, from startups to established leaders, effectively reach and engage with the developer community. Specializing in developer relations and community-building, this developer agency creates impactful go-to-market strategies, demand generation campaigns, and optimized developer experiences. They help in driving developer engagement, ensuring long-term relationships and sustained growth. By focusing on content creation, developer advocacy, and data-driven insights, Catchy Agency empowers companies to create developer ecosystems that thrive.
 
