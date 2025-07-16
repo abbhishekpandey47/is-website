@@ -941,7 +941,7 @@ let postMetaData = [
     },
    
     {
-        title: "Top 5 Developer Marketing Agencies For DevTools Startups",
+        title: "Top 5 Developer Marketing Agencies For DevTools Startup",
         metatitle: "Top 5 Developer Marketing Agencies For B2B SaaS Startups",
         slug: "developer-marketing-agency",
         description: "Here are the top 5 dev agencies that specializes in leveraging technical content as marketing collateral. Pick the best one that aligns with your expectations.",
