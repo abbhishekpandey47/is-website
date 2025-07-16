@@ -939,6 +939,18 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Join these top Reddit communities to promote your B2B SaaS product. However, be mindful of some specific thing that have been discussed in the article."
     },
+   
+    {
+        title: "Top 5 Developer Marketing Agencies For B2B SaaS Startups",
+        metatitle: "Top 5 Developer Marketing Agencies For B2B SaaS Startups",
+        slug: "developer-marketing-agency",
+        description: "Here are the top 5 dev agencies that specializes in leveraging technical content as marketing collateral. Pick the best one that aligns with your expectations.",
+        ogImage: "/PostImages/developer-marketing-agency/da1.webp",
+        publishedOn: "2025-07-16",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Here are the top 5 dev agencies that specializes in leveraging technical content as marketing collateral. Pick the best one that aligns with your expectations."
+    },
 
 
 ];
