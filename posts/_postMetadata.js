@@ -952,7 +952,17 @@ let postMetaData = [
         metaDescription: "Here are the top 5 dev agencies that specializes in leveraging technical content as marketing collateral. Pick the best one that aligns with your expectations."
     },
 
-
+    {
+        title: "7 Reasons Why You Should Partner With a Webflow Agency",
+        metatitle: "7 Reasons Why You Should Partner With a Webflow Agency",
+        slug: "webflow-agency",
+        description: "A Webflow design agency can be your go-to partner in building and maintaining website. Read the article to know why they are worth collaborating with.",
+        ogImage: "/PostImages/webflow-agency/w1.webp",
+        publishedOn: "2025-07-17",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "A Webflow design agency can be your go-to partner in building and maintaining website. Read the article to know why they are worth collaborating with."
+    },
 ];
 
 const sorted = () => {
