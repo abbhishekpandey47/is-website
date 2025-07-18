@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/outline-gen(/.*)?",
-      "destination": "https://infra-content-generator-test-4ytangthq-kolhesatishs-projects.vercel.app/outline-gen$1"
-    }
-  ]
-}
