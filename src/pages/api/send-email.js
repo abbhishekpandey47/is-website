@@ -234,7 +234,7 @@ export default async function handler(req, res) {
             
             <div style="margin-bottom: 15px;">
               <span style="font-weight: bold; color: #34495e; display: inline-block; width: 120px;">Duration:</span>
-              <span style="color: #2c3e50;">30 minitues</span>
+              <span style="color: #2c3e50;">30 minutes</span>
             </div>
             
             ${companyWebsite ? `
