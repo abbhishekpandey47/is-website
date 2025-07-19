@@ -379,7 +379,6 @@ const CalendarBooking = ({
             });
 
             if (response.ok) {
-                console.log("UserData" + selectedDate);
                 setStep(4);
                 try {
                     const emailResponse = await fetch("/api/send-email", {
