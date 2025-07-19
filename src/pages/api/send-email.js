@@ -97,7 +97,7 @@ export default async function handler(req, res) {
     const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
 
     const startDateTime = parseDateTime(date, time);
-    const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000); 
+    const endDateTime = new Date(startDateTime.getTime() + 30 * 60 * 1000); 
 
     const calendarTimezone = formatTimezoneForGoogle(timezone);
 
@@ -234,7 +234,7 @@ export default async function handler(req, res) {
             
             <div style="margin-bottom: 15px;">
               <span style="font-weight: bold; color: #34495e; display: inline-block; width: 120px;">Duration:</span>
-              <span style="color: #2c3e50;">1 hour</span>
+              <span style="color: #2c3e50;">30 minutes</span>
             </div>
             
             ${companyWebsite ? `

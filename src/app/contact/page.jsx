@@ -149,11 +149,40 @@ const CalendarBooking = ({
             );
     };
 
+    // Helper: Get current time in minutes for a given timezone
+    const getCurrentTimeInTimezoneMinutes = (timezone) => {
+        const now = new Date();
+        // Get UTC time in minutes
+        const utcMinutes = now.getUTCHours() * 60 + now.getUTCMinutes();
+        // Get offset for selected timezone
+        const offsetMinutes = getTimezoneOffsetMinutes(timezone);
+        // Calculate local time in selected timezone
+        let localMinutes = utcMinutes + offsetMinutes;
+        // Wrap around 24h
+        localMinutes = ((localMinutes % 1440) + 1440) % 1440;
+        return localMinutes;
+    };
+
     useEffect(() => {
         const convertedSlots = convertTimeSlots(selectedTimezone);
-        setAvailableTimeSlots(convertedSlots);
+        // Filter out past slots if selectedDate is today
+        let filteredSlots = convertedSlots;
+        if (selectedDate) {
+            const today = new Date();
+            if (
+                selectedDate.getDate() === today.getDate() &&
+                selectedDate.getMonth() === today.getMonth() &&
+                selectedDate.getFullYear() === today.getFullYear()
+            ) {
+                const nowMinutes = getCurrentTimeInTimezoneMinutes(selectedTimezone);
+                filteredSlots = convertedSlots.filter(
+                    (slot) => timeToMinutes(slot.convertedTime) > nowMinutes
+                );
+            }
+        }
+        setAvailableTimeSlots(filteredSlots);
         setSelectedTime(null);
-    }, [selectedTimezone]);
+    }, [selectedTimezone, selectedDate]);
 
     const handleTimezoneChange = (e) => {
         setSelectedTimezone(e.target.value);
@@ -273,12 +302,17 @@ const CalendarBooking = ({
         return Object.keys(newErrors).length === 0;
     };
 
+    const pad = (n) => n.toString().padStart(2, '0');
+    const dateString = selectedDate
+        ? `${selectedDate.getFullYear()}-${pad(selectedDate.getMonth() + 1)}-${pad(selectedDate.getDate())}`
+        : null;
+
     const handleBookingSubmit = async (e) => {
         e.preventDefault();
         if (!validateUserInfo()) return;
 
         const bookingData = {
-            date: selectedDate,
+            date: dateString, // Send as YYYY-MM-DD string
             time: selectedTime,
             ...userInfo,
         };
@@ -314,7 +348,7 @@ const CalendarBooking = ({
                 },
                 {
                     name: "start_date",
-                    value: selectedDate,
+                    value: dateString, // Use YYYY-MM-DD string
                 },
                 {
                     name: "meeting_time",
@@ -354,7 +388,7 @@ const CalendarBooking = ({
                             email: userInfo.email,
                             firstName: userInfo.firstName,
                             lastName: userInfo.lastName,
-                            date: selectedDate,
+                            date: dateString, // Use YYYY-MM-DD string
                             time: selectedTime,
                             timezone: selectedTimezone,
                             companyWebsite: userInfo.companyWebsite,
