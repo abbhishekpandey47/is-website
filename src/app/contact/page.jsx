@@ -459,10 +459,10 @@ const CalendarBooking = ({
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        //const dayOfWeek = date.getDay(); // 0 = Sunday, 6 = Saturday
-       // const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+        const dayOfWeek = date.getDay(); // 0 = Sunday, 6 = Saturday
+        const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
-        return date < today //|| isWeekend;
+        return date < today || isWeekend;
     };
 
 
