@@ -296,7 +296,10 @@ const CalendarBooking = ({
             newErrors.email = "Email is required";
         } else if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
             newErrors.email = "Email address is invalid";
+        } else if (/@(gmail|yahoo|hotmail|outlook|aol|icloud)\.(com|in|net)$/i.test(userInfo.email)) {
+            newErrors.email = "Please enter a valid company email address";
         }
+
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -500,12 +503,8 @@ const CalendarBooking = ({
                     key={`day-${day}`}
                     className={`h-10 w-10 flex items-center justify-center rounded-full cursor-pointer mx-1
             ${isSelected ? "bg-blue-600 text-white" : ""} 
-            ${isTodayDate && !isSelected
-                            ? "border border-blue-600 text-white"
-                            : ""
-                        }
             ${isPast && !isTodayDate
-                            ? "text-gray-500 cursor-not-allowed"
+                            ? "text-gray-500 cursor-default"
                             : "hover:bg-gray-700"
                         }`}
                     onClick={() => !isPast && handleDateChange(date)}
