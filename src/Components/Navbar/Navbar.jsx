@@ -111,19 +111,19 @@ const menuLinksArrServices = [
     hrefLink: "/services/reddit-marketing-services",
     menuName: "Reddit Marketing Services",
   },
-
-  // { reddit-marketing-services
-  //     hrefLink: "/tutorials",
-  //     menuName: "Tutorials"
-  // }
 ];
 
-// const menuLinksArrProducts = [
-//   {
-//     hrefLink: "https://content.infrasity.com/",
-//     menuName: "Outline Generator",
-//   },
-// ];
+
+const resourcesTab = [
+  {
+    hrefLink: "/roi-cal",
+    menuName: "ROI Calculator",
+  },
+  {
+    hrefLink: "/outline-gen",
+    menuName: "Outline Generator",
+  }
+];
 
 const Navbar = () => {
   const MenuItem2 = ({ children }) => {
@@ -131,6 +131,7 @@ const Navbar = () => {
   };
 
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const context = useContext(AppContext);
@@ -140,6 +141,10 @@ const Navbar = () => {
 
   const toggleServices = () => {
     setServicesOpen(!servicesOpen);
+  };
+
+  const toggleResources = () => {
+    setResourcesOpen(!resourcesOpen);
   };
 
   const toggleMobileMenu = () => {
@@ -336,6 +341,70 @@ const Navbar = () => {
                     )}
                   </div>
 
+                  <div className="mobile-menu">
+                    <MenuItem2>
+                      <div
+                        className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-800 rounded-lg cursor-pointer"
+                        onClick={toggleResources}
+                      >
+                        <p>Resources</p>
+                        {resourcesOpen ? (
+                          <ChevronUp size={16} />
+                        ) : (
+                          <ChevronDown size={16} />
+                        )}
+                      </div>
+                    </MenuItem2>
+
+                    {resourcesOpen && (
+                      <div className="bg-slate-900 rounded-lg mt-1 mb-2">
+                        <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick(
+                                "/roi-cal"
+                              );
+                            }}
+                            href="/roi-cal"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/roi-cal".includes(
+                                "http"
+                              )
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>ROI Calculator</div>
+                          </Link>
+                        </MenuItem2>
+
+                        <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick(
+                                "/outline-gen"
+                              );
+                            }}
+                            href="/outline-gen"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/outline-gen".includes(
+                                "http"
+                              )
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>Outline Generator</div>
+                          </Link>
+                        </MenuItem2>
+                      </div>
+                    )}
+                  </div>
+
                   <MenuItem>
                     <Link
                       onClick={() => {
@@ -471,15 +540,14 @@ const Navbar = () => {
                 About Us
               </Link>
             </li>
-            <li>
-              <Link
-                href="/roi-cal"
-                onClick={() => {
-                  checkVisitPage("/roi-cal");
-                }}
-              >
-                ROI Calculator
-              </Link>
+            <li className="flex justify-center items-center">
+              <GivenMenuBar
+                head={"Resources"}
+                menuLinks={resourcesTab}
+                setProgress={setProgress}
+                curPage={curPage}
+                setCurPage={setCurPage}
+              />
             </li>
             <li>
               <Link
