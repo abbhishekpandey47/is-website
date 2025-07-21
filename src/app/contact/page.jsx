@@ -296,7 +296,7 @@ const CalendarBooking = ({
             newErrors.email = "Email is required";
         } else if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
             newErrors.email = "Email address is invalid";
-        } else if (/@(gmail|yahoo|hotmail|outlook|aol|icloud)\.(com|in|net)$/i.test(userInfo.email)) {
+        } else if (/@(gmail|yahoo|hotmail|outlook|aol|icloud|protonmail|yandex|live|msn)\.(com|in|net|org|co\.uk|de|fr)$/i.test(userInfo.email)) {
             newErrors.email = "Please enter a valid company email address";
         }
 

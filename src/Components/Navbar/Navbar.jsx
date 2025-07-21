@@ -143,7 +143,7 @@ const Navbar = () => {
     setServicesOpen(!servicesOpen);
   };
 
-    const toggleResources = () => {
+  const toggleResources = () => {
     setResourcesOpen(!resourcesOpen);
   };
 
@@ -401,7 +401,7 @@ const Navbar = () => {
                             <div>Outline Generator</div>
                           </Link>
                         </MenuItem2>
-                       </div>
+                      </div>
                     )}
                   </div>
 
@@ -540,7 +540,7 @@ const Navbar = () => {
                 About Us
               </Link>
             </li>
-           <li className="flex justify-center items-center">
+            <li className="flex justify-center items-center">
               <GivenMenuBar
                 head={"Resources"}
                 menuLinks={resourcesTab}
