@@ -963,6 +963,18 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "A Webflow design agency can be your go-to partner in building and maintaining website. Read the article to know why they are worth collaborating with."
     },
+
+     {
+        title: "AEO vs SEO: Which One Is Better For Your B2B SaaS Startup?",
+        metatitle: "AEO vs SEO: Which Is Better For Your B2B SaaS Startup?",
+        slug: "aeo-vs-seo",
+        description: "Learn the key differences between SEO vs AEO, how each impacts your content visibility, and when to use either one or both in your content strategy.",
+        ogImage: "/PostImages/aeo-vs-seo/as1.webp",
+        publishedOn: "2025-07-22",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Learn the key differences between SEO vs AEO, how each impacts your content visibility, and when to use either one or both in your content strategy."
+    },
 ];
 
 const sorted = () => {
