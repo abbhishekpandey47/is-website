@@ -64,7 +64,7 @@ The About section (the short description under your repo name) is a key element 
 
 **Best practices:**
 * **Start with the main keyword**: If your project handles monitoring, use that term early in the sentence.
-* **Keep it short and specific**: Aim for describing your project in 5–15 words. Explain what the project does, not how great it is.
+* **Keep it short and specific**: Aim for describing your project in 5 - 15 words. Explain what the project does, not how great it is.
 * **Mention the platform or use case**: Clarify if it’s built for a specific stack or tech (e.g., “for Kubernetes”, “built with JavaScript”).
 
 Let’s take the second example of `louislam/uptime-kuma`, its description is: 
