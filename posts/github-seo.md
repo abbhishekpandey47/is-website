@@ -106,9 +106,9 @@ Promote your project across different **[content distribution platforms](https:/
 
 These platforms are ideal for announcing releases, writing tutorials, or explaining the “why” behind your project—all of which drive qualified traffic back to your SEO GitHub pages.
 
-#### Step 2: Convert Visitors into Users
+#### Step 2: Convert Visitors Into Users
 
-Once people reach your repository, your job is to help them quickly understand and appreciate what you’ve built. This is where a great `README.md` comes in—it acts as the landing page for your project.
+Once people reach your repository, your job is to help them quickly understand and appreciate what you’ve built. This is where a great `README.md` comes in; it acts as the landing page for your project.
 
 Make sure your README answers the following:
 
