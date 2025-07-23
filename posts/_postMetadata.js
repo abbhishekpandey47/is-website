@@ -975,6 +975,19 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Learn the key differences between SEO vs AEO, how each impacts your content visibility, and when to use either one or both in your content strategy."
     },
+
+    {
+        title: "The Ultimate Guide to GitHub SEO for 2025",
+        metatitle: "The Ultimate Guide to GitHub SEO for 2025",
+        slug: "github-seo",
+        description: "Explore how you can do GitHub SEO in several ways and get your product documentation visible to your target audience - developers.",
+        ogImage: "/PostImages/github-seo/gh1.webp",
+        publishedOn: "2025-07-23",
+        authorId: "author0004",
+        category: "Informational",
+        metaDescription: "Explore how you can do GitHub SEO in several ways and get your product documentation visible to your target audience - developers."
+    },
+
 ];
 
 const sorted = () => {
