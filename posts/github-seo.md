@@ -58,6 +58,8 @@ For example:
 
 It is a bit long, but extremely clear. It includes both the main function (`authentication`) and target language (`js`). Anyone searching for "authentication library JS" is likely to land here. It also includes the organization name (`AzureAD`), which reinforces trust.
 
+![add keyword in your repository name for github seo](/PostImages/github-seo/gh2.webp) 
+
 ### 2. About
 
 The About section (the short description under your repo name) is a key element for ranking in GitHub search. It's one of the first things both users and the algorithm see, so it should be clear, specific, and keyword-focused.
@@ -71,13 +73,17 @@ Let’s take the second example of `louislam/uptime-kuma`, its description is:
 "_A fancy self-hosted monitoring tool_"
 This one is a casual description but effective as it clearly includes “**monitoring**” and even hints at deployment style (“**self-hosted**”), which developers may search for.
 
+![add keyword in your about for github seo](/PostImages/github-seo/gh3.webp) 
+
 ### 3. Topics
 
 Topics help categorize your repository and are directly used in GitHub's search filters. This makes it essential to include primary keywords in your Topics if you want your project to show up in related searches.
 
 For example, if your project is built for or with Kubernetes, but you don't mention the topic as kubernetes or kube, it can be difficult to appear when users filter by that keyword.
 
-In the example below, top-ranked repositories make it very clear they’re Kubernetes projects:
+![add keyword in topics for github seo](/PostImages/github-seo/gh4.webp) 
+
+In the image above, the top-ranked repositories make it very clear that they’re Kubernetes projects not just through their names or descriptions, but through their topics.
 
 `kubernetes/kubernetes ` 
 Topics: `go`, `kubernetes`, `containers`, `cncf`
@@ -146,7 +152,7 @@ Let your users become advocates. And when they do, make sure your project is pol
 
 Utilizing GitHub SEO technique is about making your project more discoverable, understandable, and valuable to the right audience. By using clear, keyword-rich repo names, writing a concise and specific About section, and adding exact-match topics, you help GitHub’s search engine and real users find your project more easily.
 
-Pair that with a solid README.md, consistent structure, and a little promotion, and you create a strong foundation for long-term visibility. Ultimately, GitHub SEO is not just about getting more stars—it’s about connecting your work with developers who need it.
+Pair that with a solid README.md, consistent structure, and a little promotion, and you create a strong foundation for long-term visibility. Ultimately, GitHub SEO is not just about getting more stars; it’s about connecting your work with developers who need it. As an agency, we have provided **[technical writing services](https://www.infrasity.com/services/technical-writing-services)** to our B2B SaaS startup customers; from use case guides to code documentation, and have ensured that they are SEO optimized for GitHub so the developers can discover them easily. If you are seeking a partner to write technical blogs, product documentation and even distribute them on various platforms, book a **[Free Demo](https://www.infrasity.com/contact)** with Infrasity.
 
 ### FAQs
 
