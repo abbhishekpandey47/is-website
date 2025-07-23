@@ -1,3 +1,5 @@
+## TL;DR
+
 * GitHub SEO includes optimizing your repository name, about (description), and topics for increasing discoverability and engagement.
 * Grow stars, watchers, and forks by driving traffic through developer channels, writing a strong README, and adding clear CTAs.
 * Utilize distribution platforms, such as Dev.to, Dailydev, Medium, and Reddit.
