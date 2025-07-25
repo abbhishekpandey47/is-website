@@ -53,7 +53,7 @@ export const DownloadPage = () => {
       ],
       context: {
         pageUri: window.location.href,
-        pageName: "WhitePaper Context Engineering Form",
+        pageName: "Playbook for Reddit Marketting",
       },
     };
 
@@ -94,17 +94,17 @@ export const DownloadPage = () => {
             <div className="max-w-md space-y-6">
               <div className="space-y-10">
                 <h1 className="text-4xl font-bold text-white leading-normal tracking-tight">
-                  Context Engineering and the pursuit of{" "}
+                The Reddit B2B Playbook for AI & Infra Startups{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">
-                    Determinism in LLMs
+                   Grow Without Paid Ads
                   </span>
                 </h1>
               </div>
               <div className="space-y-10 text-gray-300 text-[19px] leading-relaxed tracking-wide">
                 <p>
-                  Engineering Predictable AI Systems Modern language models are
-                  powerful but unpredictable. Learn how context engineering
-                  brings reliability, repeatability, and trust to enterprise AI.
+                Built from 500+ Reddit comments across 25+ subreddits.
+Learn how we turn Reddit threads into mini demo calls, feedback loops, and signups.
+If you're still ignoring Reddit, you're leaving trust (and traffic) on the table.
                 </p>
               </div>
             </div>
@@ -163,7 +163,7 @@ export const DownloadPage = () => {
                     disabled={isSubmitting}
                     className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-lg shadow-purple-900/20 font-semibold py-3 px-10 rounded-xl transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? "Submitting..." : "Download Whitepaper"}
+                    {isSubmitting ? "Submitting..." : "Download Playbook"}
                   </button>
                 </div>
               </div>
@@ -174,7 +174,7 @@ export const DownloadPage = () => {
                 <div className="text-green-400 text-6xl mb-4">✓</div>
                 <h2 className="text-3xl font-bold text-white mb-4">Success!</h2>
                 <p className="text-gray-300 text-lg mb-6">
-                  Thank you for your submission. Your whitepaper download will
+                  Thank you for your submission. Your playbook download will
                   begin shortly.
                 </p>
               </div>
