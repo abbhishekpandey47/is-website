@@ -14,11 +14,11 @@ export default function Hero() {
   const [hoveredNode, setHoveredNode] = useState(null);
 
   const topics = [
-    "Why LLMs behave unpredictably — and why it matters",
-    "What is context engineering?",
-    "How to design deterministic, auditable AI pipelines",
-    "Strategies for retrieval, prompt modularity & memory",
-    "Best practices for building reliable, testable AI systems"
+    "2 powerful reasons why Reddit actually works for B2B GTM in 2025",
+    "Avoiding the 'ban hammer': real mistakes we’ve made so you don’t",
+    "The Karma system explained (and how to farm it without wasting time)",
+    "Link drop strategies that actually stick",
+    "Comment tone, timing, and real examples of posts that worked"
   ];
 
   const standardEasing = [0.25, 0.1, 0.25, 1];
@@ -60,7 +60,7 @@ export default function Hero() {
           <h1 className="text-4xl font-bold text-white leading-tight">
             What is the{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">
-              Whitepaper{" "}
+              playbook{" "}
             </span>
             about?
           </h1>
@@ -83,13 +83,13 @@ export default function Hero() {
           <div className="flex-1 lg:w-1/2 space-y-6">
             <div className="space-y-10">
               <h1 className="text-4xl font-medium text-white leading-tight">
-                Making AI Predictable with Context Engineering
+              What You’d Learn If We Handed You Our Entire Reddit Strategy 
               </h1>
             </div>
 
             <div className="space-y-10 text-gray-300 text-lg leading-relaxed">
               <p>
-                Discover how to transform powerful but unpredictable language models into reliable, production-ready systems through architectural determinism and structured context design.
+              We’ve built this playbook from hundreds of real Reddit marketing campaigns across AI, DevTools, and B2B startups. It’s not theory. It’s the same playbook we’ve used to drive signups, conversations, and traction without a single paid ad.
               </p>
             </div>
 
