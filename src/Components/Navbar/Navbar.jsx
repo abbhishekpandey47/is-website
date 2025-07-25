@@ -16,6 +16,7 @@ const GivenMenuBar = ({
   setCurPage,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openSubmenus, setOpenSubmenus] = useState({});
 
   const checkVisitPage = (el) => {
     el == curPage ? setProgress(0) : setProgress(30);
@@ -24,10 +25,34 @@ const GivenMenuBar = ({
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    if (!isMenuOpen) {
+      // Reset submenus when opening main menu
+      setOpenSubmenus({});
+    }
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+    setOpenSubmenus({});
+  };
+
+  const toggleSubmenu = (index, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setOpenSubmenus(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
+  const handleServiceClick = (path) => {
+    if (path) {
+      checkVisitPage(path);
+      closeMenu();
+      setTimeout(() => {
+        window.location.href = path;
+      }, 10);
+    }
   };
 
   return (
@@ -53,10 +78,10 @@ const GivenMenuBar = ({
               <g>
                 <path
                   d="M484.132,124.986l-16.116-16.228c-5.072-5.068-11.82-7.86-19.032-7.86c-7.208,0-13.964,2.792-19.036,7.86l-183.84,183.848 
-      L62.056,108.554c-5.064-5.068-11.82-7.856-19.028-7.856s-13.968,2.788-19.036,7.856l-16.12,16.128 
-      c-10.496,10.488-10.496,27.572,0,38.06l219.136,219.924c5.064,5.064,11.812,8.632,19.084,8.632h0.084 
-      c7.212,0,13.96-3.572,19.024-8.632l218.932-219.328c5.072-5.064,7.856-12.016,7.864-19.224 
-      C491.996,136.902,489.204,130.046,484.132,124.986z"
+        L62.056,108.554c-5.064-5.068-11.82-7.856-19.028-7.856s-13.968,2.788-19.036,7.856l-16.12,16.128 
+        c-10.496,10.488-10.496,27.572,0,38.06l219.136,219.924c5.064,5.064,11.812,8.632,19.084,8.632h0.084 
+        c7.212,0,13.96-3.572,19.024-8.632l218.932-219.328c5.072-5.064,7.856-12.016,7.864-19.224 
+        C491.996,136.902,489.204,130.046,484.132,124.986z"
                 />
               </g>
             </g>
@@ -67,25 +92,84 @@ const GivenMenuBar = ({
       {isMenuOpen && (
         <MenuItems
           transition
-          className="absolute z-10 mt-6 w-56 origin-top-center rounded-md bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+          className="absolute z-10 mt-6 w-64 origin-top-center rounded-md bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
         >
           <div className="p-2 rounded-lg mx-auto">
             {menuLinks.map((menuLink, index) => {
-              return (
-                <MenuItem key={index}>
-                  <Link
-                    onClick={() => {
-                      closeMenu(); // Close menu when link is clicked
-                      checkVisitPage(menuLink.hrefLink);
-                    }}
-                    href={menuLink.hrefLink}
-                    className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                    target={menuLink.hrefLink.includes("http") ? "_blank" : ""}
-                  >
-                    {menuLink.menuName}
-                  </Link>
-                </MenuItem>
-              );
+              // Check if this menu item has a submenu
+              if (menuLink.submenu && menuLink.submenu.length > 0) {
+                return (
+                  <div key={index} className="relative">
+                    {/* Check if the parent item has its own hrefLink */}
+                    {menuLink.hrefLink ? (
+                      <MenuItem>
+                        <Link
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleServiceClick(menuLink.hrefLink);
+                          }}
+                          href={menuLink.hrefLink}
+                          className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                          target={menuLink.hrefLink.includes("http") ? "_blank" : ""}
+                        >
+                          {menuLink.menuName}
+                        </Link>
+                      </MenuItem>
+                    ) : (
+                      <MenuItem>
+                        <div
+                          onClick={(e) => toggleSubmenu(index, e)}
+                          className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-800 rounded-lg cursor-pointer w-full"
+                        >
+                          <span>{menuLink.menuName}</span>
+                          {openSubmenus[index] ? (
+                            <ChevronUp size={16} />
+                          ) : (
+                            <ChevronDown size={16} />
+                          )}
+                        </div>
+                      </MenuItem>
+                    )}
+
+                    {openSubmenus[index] && (
+                      <div className="ml-4 bg-slate-900 rounded-lg mt-1 mb-2">
+                        {menuLink.submenu.map((subItem, subIndex) => (
+                          <MenuItem key={subIndex}>
+                            <Link
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleServiceClick(subItem.hrefLink);
+                              }}
+                              href={subItem.hrefLink}
+                              className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                              target={subItem.hrefLink.includes("http") ? "_blank" : ""}
+                            >
+                              {subItem.menuName}
+                            </Link>
+                          </MenuItem>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              } else {
+                // Regular menu item without submenu
+                return (
+                  <MenuItem key={index}>
+                    <Link
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleServiceClick(menuLink.hrefLink);
+                      }}
+                      href={menuLink.hrefLink}
+                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                      target={menuLink.hrefLink.includes("http") ? "_blank" : ""}
+                    >
+                      {menuLink.menuName}
+                    </Link>
+                  </MenuItem>
+                );
+              }
             })}
           </div>
         </MenuItems>
@@ -114,7 +198,7 @@ const menuLinksArrServices = [
 ];
 
 
-const resourcesTab = [
+const toolsTab = [
   {
     hrefLink: "/roi-cal",
     menuName: "ROI Calculator",
@@ -125,14 +209,40 @@ const resourcesTab = [
   }
 ];
 
+const resourcesTab = [
+  {
+    hrefLink: "/blog",
+    menuName: "Blogs",
+  },
+  {
+    hrefLink: "/case-studies",
+    menuName: "Case Studies",
+  },
+  {
+    menuName: "Playbook",
+    submenu: [
+      {
+        hrefLink: "/playbook/reddit-b2b-marketing",
+        menuName: "Reddit B2B Playbook",
+      },
+    ],
+  },
+];
+
 const Navbar = () => {
   const MenuItem2 = ({ children }) => {
     return children;
   };
 
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const [playbookOpen, setPlaybookOpen] = useState(false);
+
+  const togglePlaybook = () => setPlaybookOpen(!playbookOpen);
 
   const context = useContext(AppContext);
   const pathname = usePathname();
@@ -145,6 +255,10 @@ const Navbar = () => {
 
   const toggleResources = () => {
     setResourcesOpen(!resourcesOpen);
+  };
+
+  const toggleTools = () => {
+    setToolsOpen(!toolsOpen);
   };
 
   const toggleMobileMenu = () => {
@@ -170,7 +284,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute">
-      <div className="navbar bg-slate-900 w-full sm:w-[90vw] md:max-w-6xl p-3 sm:p-5 mx-auto shadow-navshadow rounded-lg lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg:transform lg:-translate-x-1/2">
+      <div className="navbar bg-slate-900 w-full sm:w-[80vw] md:max-w-6xl p-3 sm:p-5 mx-auto shadow-navshadow rounded-xl lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg:transform lg:-translate-x-1/2">
         <div className="navbar-start max-lg:visible invisible">
           <Menu as="div" className="absolute inline-block text-left">
             <div>
@@ -214,32 +328,6 @@ const Navbar = () => {
                       target={"/".includes("http") ? "_blank" : ""}
                     >
                       {"Home"}
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <Link
-                      onClick={() => {
-                        closeMobileMenu();
-                        checkVisitPage("/blog");
-                      }}
-                      href="/blog"
-                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                      target={"/blog".includes("http") ? "_blank" : ""}
-                    >
-                      {"Blogs"}
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <Link
-                      onClick={() => {
-                        closeMobileMenu();
-                        checkVisitPage("/case-studies");
-                      }}
-                      href="/case-studies"
-                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                      target={"/case-studies".includes("http") ? "_blank" : ""}
-                    >
-                      {"Case Studies"}
                     </Link>
                   </MenuItem>
                   <div className="mobile-menu">
@@ -302,7 +390,6 @@ const Navbar = () => {
                             <div>Video Production</div>
                           </Link>
                         </MenuItem2>
-
                         <MenuItem2>
                           <Link
                             onClick={(e) => {
@@ -341,14 +428,97 @@ const Navbar = () => {
                     )}
                   </div>
 
+                  <MenuItem>
+                    <Link
+                      onClick={() => {
+                        closeMobileMenu();
+                        checkVisitPage("/pricing");
+                      }}
+                      href="/pricing"
+                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                      target={"/pricing".includes("http") ? "_blank" : ""}
+                    >
+                      {"Pricing"}
+                    </Link>
+                  </MenuItem>
+
                   <div className="mobile-menu">
+                    {/* Resources Dropdown */}
                     <MenuItem2>
                       <div
                         className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-800 rounded-lg cursor-pointer"
                         onClick={toggleResources}
                       >
                         <p>Resources</p>
-                        {resourcesOpen ? (
+                        {resourcesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                      </div>
+                    </MenuItem2>
+
+                    {resourcesOpen && (
+                      <div className="bg-slate-900 rounded-lg mt-1 mb-2">
+                        <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick("/blog");
+                            }}
+                            href="/blog"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                          >
+                            <div>Blogs</div>
+                          </Link>
+                        </MenuItem2>
+                        <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick("/case-studies");
+                            }}
+                            href="/case-studies"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                          >
+                            <div>Case Studies</div>
+                          </Link>
+                        </MenuItem2>
+
+                        {/* Playbook with Submenu */}
+                        <MenuItem2>
+                          <div
+                            onClick={togglePlaybook}
+                            className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4 cursor-pointer"
+                          >
+                            <p>Playbook</p>
+                            {playbookOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                          </div>
+                        </MenuItem2>
+
+                        {playbookOpen && (
+                          <div className="ml-6 bg-slate-900 rounded-lg mt-1 mb-2">
+                            <MenuItem2>
+                              <Link
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleServiceClick("/playbook/reddit-b2b-marketing");
+                                }}
+                                href="/playbook/reddit-b2b-marketing"
+                                className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                              >
+                                Reddit B2B Playbook
+                              </Link>
+                            </MenuItem2>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  <div className="mobile-menu">
+                    <MenuItem2>
+                      <div
+                        className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-800 rounded-lg cursor-pointer"
+                        onClick={toggleTools}
+                      >
+                        <p>Tools</p>
+                        {toolsOpen ? (
                           <ChevronUp size={16} />
                         ) : (
                           <ChevronDown size={16} />
@@ -356,7 +526,7 @@ const Navbar = () => {
                       </div>
                     </MenuItem2>
 
-                    {resourcesOpen && (
+                    {toolsOpen && (
                       <div className="bg-slate-900 rounded-lg mt-1 mb-2">
                         <MenuItem2>
                           <Link
@@ -444,19 +614,6 @@ const Navbar = () => {
                       {"ROI Calculator"}
                     </Link>
                   </MenuItem>
-                  <MenuItem>
-                    <Link
-                      onClick={() => {
-                        closeMobileMenu();
-                        checkVisitPage("/pricing");
-                      }}
-                      href="/pricing"
-                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                      target={"/pricing".includes("http") ? "_blank" : ""}
-                    >
-                      {"Pricing"}
-                    </Link>
-                  </MenuItem>
                 </div>
               </MenuItems>
             )}
@@ -491,59 +648,11 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li>
-              <Link
-                href="/blog"
-                onClick={() => {
-                  checkVisitPage("/blog");
-                }}
-              >
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/case-studies"
-                onClick={() => {
-                  checkVisitPage("/case-studies");
-                }}
-              >
-                Case Studies
-              </Link>
-            </li>
+
             <li className="flex justify-center items-center">
               <GivenMenuBar
                 head={"Services"}
                 menuLinks={menuLinksArrServices}
-                setProgress={setProgress}
-                curPage={curPage}
-                setCurPage={setCurPage}
-              />
-            </li>
-            <li>
-              <Link
-                href="/faq"
-                onClick={() => {
-                  checkVisitPage("/faq");
-                }}
-              >
-                FAQ
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/about"
-                onClick={() => {
-                  checkVisitPage("/about");
-                }}
-              >
-                About Us
-              </Link>
-            </li>
-            <li className="flex justify-center items-center">
-              <GivenMenuBar
-                head={"Resources"}
-                menuLinks={resourcesTab}
                 setProgress={setProgress}
                 curPage={curPage}
                 setCurPage={setCurPage}
@@ -559,6 +668,51 @@ const Navbar = () => {
                 Pricing
               </Link>
             </li>
+
+
+            <li className="flex justify-center items-center">
+              <GivenMenuBar
+                head={"Tools"}
+                menuLinks={toolsTab}
+                setProgress={setProgress}
+                curPage={curPage}
+                setCurPage={setCurPage}
+              />
+            </li>
+
+            <li className="flex justify-center items-center">
+              <GivenMenuBar
+                head={"Resources"}
+                menuLinks={resourcesTab}
+                setProgress={setProgress}
+                curPage={curPage}
+                setCurPage={setCurPage}
+              />
+            </li>
+
+
+            <li>
+              <Link
+                href="/faq"
+                onClick={() => {
+                  checkVisitPage("/faq");
+                }}
+              >
+                FAQ
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                href="/about"
+                onClick={() => {
+                  checkVisitPage("/about");
+                }}
+              >
+                About Us
+              </Link>
+            </li>
+
             <li className="lg:mr-10">
               {!isMobileMenuOpen && <CalendarBooking buttonText="Book a Free Consultation" width="w-52" />}
             </li>
