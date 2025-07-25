@@ -1,13 +1,8 @@
-/**
- * @param {Object} data User data to save
- * @returns {Promise<Object>} Response from the API
- */
 export const saveUserData = async (data) => {
-  const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL;
+  const APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL;
+
   if (!APPS_SCRIPT_URL) {
-    console.error(
-      "APPS_SCRIPT_URL environment variable is not defined"
-    );
+    console.error("APPS_SCRIPT_URL environment variable is not defined");
     return Promise.reject(
       new Error("Google Apps Script URL is not configured")
     );
@@ -45,7 +40,6 @@ export const saveUserData = async (data) => {
       form.appendChild(dataField);
 
       document.body.appendChild(form);
-
       form.submit();
 
       setTimeout(() => {
