@@ -14,12 +14,11 @@ export default function Hero() {
   const [hoveredNode, setHoveredNode] = useState(null);
 
   const topics = [
-    "How to find and engage your Ideal Customer Profile (ICP) on Reddit",
-    "What not to do to avoid shadow bans & mod takedowns",
-    "Comment formats, soft launches & value-first link strategies",
-    "Karma hacks, subreddit mapping, & execution-ready workflows",
-    "Inside Infrasity’s exact process for Reddit-native brand growth",
-    "Tactical templates to track Karma, link drop cadence & comment ROI"
+    "2 powerful reasons why Reddit actually works for B2B GTM in 2025",
+    "Avoiding the 'ban hammer': real mistakes we’ve made so you don’t",
+    "The Karma system explained (and how to farm it without wasting time)",
+    "Link drop strategies that actually stick",
+    "Comment tone, timing, and real examples of posts that worked"
   ];
 
   const standardEasing = [0.25, 0.1, 0.25, 1];
@@ -60,7 +59,7 @@ export default function Hero() {
         <div className="flex justify-center items-center mb-8">
           <h1 className="text-4xl font-bold text-white leading-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">
-              B2B Growth{" "}
+              playbook{" "}
             </span>
             Tactics that Actually Work
           </h1>
@@ -82,15 +81,17 @@ export default function Hero() {
 
           <div className="flex-1 lg:w-1/2 space-y-6">
             <div className="space-y-10">
-              <h2 className="text-4xl font-medium text-white leading-tight">
-                 B2B Growth Tactics that Actually Work
-              </h2>
+
+              <h1 className="text-4xl font-medium text-white leading-tight">
+              What You’d Learn If We Handed You Our Entire Reddit Strategy 
+              </h1>
             </div>
 
             <div className="space-y-10 text-gray-300 text-lg leading-relaxed">
               <p>
-                Learn how to tap into Reddit’s 130K+ niche communities to engage authentically, bypass bans, and turn conversations into conversions. Whether you're launching a dev tool, SaaS, or no-code platform this is your Reddit cheat sheet for 2025.
-                              </p>
+
+              We’ve built this playbook from hundreds of real Reddit marketing campaigns across AI, DevTools, and B2B startups. It’s not theory. It’s the same playbook we’ve used to drive signups, conversations, and traction without a single paid ad.
+              </p>
             </div>
 
             <div className="border border-b-[0.5px] border-gray-700"></div>
