@@ -58,9 +58,7 @@ export default function Hero() {
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-center items-center mb-8">
           <h1 className="text-4xl font-bold text-white leading-tight">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">
-              playbook{" "}
-            </span>
+            
             Tactics that Actually Work
           </h1>
         </div>
