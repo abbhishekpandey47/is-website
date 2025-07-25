@@ -8,7 +8,7 @@ export default function Cta() {
         <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
           <h1 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">
 
-          Ready to Turn Reddit Into Your Growth Channel?
+          Ready to Turn <span className="text-[#ff4500]">Reddit</span> Into Your Growth Channel?
           </h1>
         </div>
 

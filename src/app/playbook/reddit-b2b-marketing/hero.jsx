@@ -83,7 +83,7 @@ export default function Hero() {
             <div className="space-y-10">
 
               <h1 className="text-4xl font-medium text-white leading-tight">
-              What You’d Learn If We Handed You Our Entire Reddit Strategy 
+              What You’d Learn If We Handed You Our Entire <span className="text-[#ff4500]">Reddit</span> Strategy 
               </h1>
             </div>
 
