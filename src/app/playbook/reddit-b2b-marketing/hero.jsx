@@ -58,11 +58,10 @@ export default function Hero() {
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-center items-center mb-8">
           <h1 className="text-4xl font-bold text-white leading-tight">
-            What is the{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">
               playbook{" "}
             </span>
-            about?
+            Tactics that Actually Work
           </h1>
         </div>
 
@@ -82,13 +81,15 @@ export default function Hero() {
 
           <div className="flex-1 lg:w-1/2 space-y-6">
             <div className="space-y-10">
+
               <h1 className="text-4xl font-medium text-white leading-tight">
-              What You’d Learn If We Handed You Our Entire Reddit Strategy 
+              What You’d Learn If We Handed You Our Entire <span className="text-[#ff4500]">Reddit</span> Strategy 
               </h1>
             </div>
 
             <div className="space-y-10 text-gray-300 text-lg leading-relaxed">
               <p>
+
               We’ve built this playbook from hundreds of real Reddit marketing campaigns across AI, DevTools, and B2B startups. It’s not theory. It’s the same playbook we’ve used to drive signups, conversations, and traction without a single paid ad.
               </p>
             </div>
@@ -103,7 +104,7 @@ export default function Hero() {
               <div className="space-y-3">
                 {topics.map((topic, index) => (
                   <div key={index} className="flex items-start space-x-2 group">
-                    <div className="flex-shrink-0 mt-1">
+                    <div className="flex-shrink-0 mt-[6px] flex items-end justify-end">
                       <div className="w-4 h-4 bg-green-700 rounded-full flex items-center justify-center">
                         <Check className="w-3 h-3 text-white" />
                       </div>

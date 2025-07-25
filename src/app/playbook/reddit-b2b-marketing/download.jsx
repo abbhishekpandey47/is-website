@@ -94,6 +94,7 @@ export const DownloadPage = () => {
             <div className="max-w-md space-y-6">
               <div className="space-y-10">
                 <h1 className="text-4xl font-bold text-white leading-normal tracking-tight">
+
                 The Reddit B2B Playbook for AI & Infra Startups{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">
                    Grow Without Paid Ads
@@ -102,6 +103,7 @@ export const DownloadPage = () => {
               </div>
               <div className="space-y-10 text-gray-300 text-[19px] leading-relaxed tracking-wide">
                 <p>
+
                 Built from 500+ Reddit comments across 25+ subreddits.
 Learn how we turn Reddit threads into mini demo calls, feedback loops, and signups.
 If you're still ignoring Reddit, you're leaving trust (and traffic) on the table.
