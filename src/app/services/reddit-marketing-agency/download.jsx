@@ -62,7 +62,7 @@ export default function DownloadPDF() {
 
         setTimeout(() => {
           const link = document.createElement("a");
-          link.href = "https://drive.google.com/uc?export=download&id=1p_LhIko1hqaKSuiSBNPcjl-yQvJP4MJ7";
+          link.href = "https://drive.google.com/uc?export=download&id=1bX9OsrZd2DltBL-p1aLhhUPIqwVW8au7";
           link.download = "";
           document.body.appendChild(link);
           link.click();
