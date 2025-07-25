@@ -1,6 +1,6 @@
 import DownloadSetion from "./download";
 import Hero from "./hero";
-import Cta from "./Cta";
+import Cta from "./CTA";
 
 export default function Page() {
 
