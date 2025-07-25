@@ -59,7 +59,7 @@ export default function Hero() {
         <div className="flex justify-center items-center mb-8">
           <h1 className="text-4xl font-bold text-white leading-tight">
             
-            Tactics that Actually Work
+            What is the Whitepaper About?
           </h1>
         </div>
 
