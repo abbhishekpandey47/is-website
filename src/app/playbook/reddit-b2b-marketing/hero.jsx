@@ -104,7 +104,7 @@ export default function Hero() {
               <div className="space-y-3">
                 {topics.map((topic, index) => (
                   <div key={index} className="flex items-start space-x-2 group">
-                    <div className="flex-shrink-0 mt-1">
+                    <div className="flex-shrink-0 mt-[6px] flex items-end justify-end">
                       <div className="w-4 h-4 bg-green-700 rounded-full flex items-center justify-center">
                         <Check className="w-3 h-3 text-white" />
                       </div>
