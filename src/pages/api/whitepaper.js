@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
   // send to Google Apps Script
   try {
-    const response = await fetch(process.env.NEXT_PUBLIC_APPS_SCRIPT_URL, {
+    const response = await fetch(process.env.APPS_SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData)

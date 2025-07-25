@@ -3,7 +3,7 @@
  * @returns {Promise<Object>} Response from the API
  */
 export const saveUserData = async (data) => {
-  const APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL;
+  const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL;
   if (!APPS_SCRIPT_URL) {
     console.error(
       "APPS_SCRIPT_URL environment variable is not defined"

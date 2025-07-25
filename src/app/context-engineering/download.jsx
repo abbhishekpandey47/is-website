@@ -58,19 +58,23 @@ export const DownloadPage = () => {
     };
 
     try {
-      const response = fetch("/api/whitepaper", {
+      const response = await fetch("/api/whitepaper", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      const [hubspotRes] = await Promise.all([response]);
+      const [hubspotRes] = Promise.all([response]);
 
       if (hubspotRes.ok) {
         setIsSubmitted(true);
         setTimeout(() => {
-          window.location.href =
-            "https://drive.google.com/uc?export=download&id=1p_LhIko1hqaKSuiSBNPcjl-yQvJP4MJ7";
+          const link = document.createElement('a');
+          link.href = "https://drive.google.com/uc?export=download&id=1p_LhIko1hqaKSuiSBNPcjl-yQvJP4MJ7";
+          link.download = '';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         }, 100);
       } else {
         setErrorMessage("Failed to submit form. Please try again.");
