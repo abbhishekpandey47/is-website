@@ -94,17 +94,15 @@ export const DownloadPage = () => {
             <div className="max-w-md space-y-6">
               <div className="space-y-10">
                 <h1 className="text-4xl font-bold text-white leading-normal tracking-tight">
-                  Context Engineering and the pursuit of{" "}
+                  Reddit GTM Playbook for{" "}
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">
-                    Determinism in LLMs
+                    B2B Growth in 2025
                   </span>
                 </h1>
               </div>
               <div className="space-y-10 text-gray-300 text-[19px] leading-relaxed tracking-wide">
                 <p>
-                  Engineering Predictable AI Systems Modern language models are
-                  powerful but unpredictable. Learn how context engineering
-                  brings reliability, repeatability, and trust to enterprise AI.
+                  Reddit isn’t just memes and cat videos it’s a goldmine for high-intent B2B engagement. Learn how to harness Reddit’s niche communities, build trust, avoid bans, and drive real growth with Infrasity’s proven GTM strategies tailored for 2025.
                 </p>
               </div>
             </div>
