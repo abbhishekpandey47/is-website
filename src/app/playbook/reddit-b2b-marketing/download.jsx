@@ -47,8 +47,8 @@ export const DownloadPage = () => {
 
     const payload = {
       fields: [
-        { name: "full_name", value: formData.fullName },
-        { name: "company", value: formData.companyName },
+        { name: "fullname", value: formData.fullName },
+        { name: "companyname", value: formData.companyName },
         { name: "email", value: formData.workEmail },
       ],
       context: {
