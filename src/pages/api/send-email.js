@@ -191,6 +191,8 @@ export default async function handler(req, res) {
       maxMessages: 10,
     });
 
+    console.log(process.env.EMAIL_PASS);
+
     try {
       await transporter.verify();
     } catch (verifyError) {
