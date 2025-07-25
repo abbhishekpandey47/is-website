@@ -5,77 +5,95 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { saveUserData } from "../../roi-cal/user"
 
 export default function DownloadPDF() {
-    const [isEmailSending, setIsEmailSending] = useState(false);
-    const [isPopup, setIsPopup] = useState(false);
-    const [email, setEmail] = useState("");
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
+  const [isEmailSending, setIsEmailSending] = useState(false);
+  const [isPopup, setIsPopup] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-    const popupRef = useRef(null);
-    const handlePopup = () => {
-        setIsPopup(true);
-        document.body.style.overflow = 'hidden';
+  const popupRef = useRef(null);
+
+  const handlePopup = () => {
+    setIsPopup(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closePopup = () => {
+    setIsPopup(false);
+    document.body.style.overflow = "unset";
+    setEmail("");
+    setIsSubmitted(false);
+    setErrorMessage("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsEmailSending(true);
+    setErrorMessage("");
+
+    if (!email) {
+      setIsEmailSending(false);
+      setErrorMessage("Email is required.");
+      return;
+    }
+
+    const payload = {
+      fields: [
+        { name: "fullname", value: "" },
+        { name: "companyname", value: "" },
+        { name: "email", value: email },
+      ],
+      context: {
+        pageUri: window.location.href,
+        pageName: "Playbook for Reddit Marketting",
+      },
     };
 
-    const closePopup = () => {
-        setIsPopup(false);
-        document.body.style.overflow = 'unset';
-        setEmail("");
-        setIsSubmitted(false); // Reset submitted state when closing
-        setErrorMessage(""); // Clear any error messages
+    try {
+      const response = await fetch("/api/whitepaper", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setIsEmailSending(false);
+
+        setTimeout(() => {
+          const link = document.createElement("a");
+          link.href = "https://drive.google.com/uc?export=download&id=1p_LhIko1hqaKSuiSBNPcjl-yQvJP4MJ7";
+          link.download = "";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }, 100);
+      } else {
+        setErrorMessage("Failed to submit form. Please try again.");
+        setIsEmailSending(false);
+      }
+    } catch (error) {
+      setErrorMessage("An error occurred. Please try again.");
+      setIsEmailSending(false);
+    }
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        closePopup();
+      }
+    }
+
+    if (isPopup) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "unset";
     };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsEmailSending(true);
-        setErrorMessage("");
-
-        if (!email) {
-            setIsEmailSending(false);
-            return;
-        }
-
-        try {
-            const userData = {
-                email
-            };
-
-            const result = await saveUserData(userData);
-
-            if (result && result.status === "success") {
-                setIsEmailSending(false);
-                setIsSubmitted(true);
-
-                setTimeout(() => {
-                    window.location.href = "https://drive.google.com/uc?export=download&id=1bX9OsrZd2DltBL-p1aLhhUPIqwVW8au7";
-                }, 1500);
-            } else {
-                throw new Error("Received unsuccessful response from saveUserData");
-            }
-        } catch (error) {
-            setIsEmailSending(false);
-            setErrorMessage("Failed to submit form. Please try again.");
-            console.error("Error saving form data:", error);
-        }
-    };
-
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (popupRef.current && !popupRef.current.contains(event.target)) {
-                closePopup();
-            }
-        }
-
-        if (isPopup) {
-            document.addEventListener("mousedown", handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-            document.body.style.overflow = 'unset';
-        };
-    }, [isPopup]);
-
+  }, [isPopup]);
     return (
     <div className="bg-[#000000] p-8 md:p-[4rem] md:px-[5rem] -mt-8">
             <div className="max-w-6xl mx-auto">
