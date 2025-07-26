@@ -67,10 +67,10 @@ export default function Hero() {
           <div className="flex-1 lg:w-1/2 flex justify-center items-center">
             <div className="relative justify-center items-center">
               <Image
-                                                      src={`/reddit/download.png`}
+                                                      src={`/reddit/reddittt.png`}
 
                // src="/contextengineering.png"
-                width={1000}
+                width={800}
                 height={600}
                 alt="Context Engineering Image"
               />
