@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
@@ -53,7 +55,7 @@ export default function FAQ() {
     return (
       <div
         key={faq.id}
-        className={`bg-gray-600/40 border border-gray-700/20 overflow-hidden transition-all duration-200 ${
+        className={`bg-white/10 border border-gray-700/20 overflow-hidden transition-all duration-200 ${
           isFirst ? "rounded-t-xl" : ""
         } ${isLast ? "rounded-b-xl" : ""}`}
       >

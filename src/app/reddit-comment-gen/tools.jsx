@@ -1,3 +1,5 @@
+"use client"
+
 import { MessageCircle } from "lucide-react";
 
 export default function ToolsSection() {
@@ -20,7 +22,7 @@ export default function ToolsSection() {
 
   return (
     <div className="bg-black text-white p-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-12 text-gray-100">
           Discover more Tools
         </h1>
@@ -29,7 +31,7 @@ export default function ToolsSection() {
           {tools.map((tool) => (
             <div
               key={tool.id}
-              className="bg-gray-800 border border-gray-700 rounded-xl p-6 hover:border-gray-600 hover:bg-gray-750 transition-all duration-300 cursor-pointer group"
+              className="bg-white/10 border border-gray-700 rounded-xl p-6 hover:border-gray-600 hover:bg-gray-750 transition-all duration-300 cursor-pointer group"
             >
               <div className={`w-12 h-12 ${tool.iconBg} rounded-lg flex items-center justify-center mb-4`}>
                 <MessageCircle className={`w-6 h-6 ${tool.iconColor}`} />
