@@ -14,7 +14,7 @@ export default function AwardBanner() {
   {/* Close Button */}
   <button
     onClick={() => setIsVisible(false)}
-    className="absolute right-2 top-2 text-white hover:text-gray-200 hover:bg-purple-800/90 rounded-full focus:outline-none z-10"
+    className="absolute right-2 top-2 text-white hover:text-gray-200 hover:bg-purple-800/90 rounded-full focus:outline-none z-10 cursor-pointer"
     aria-label="Close banner"
   >
     <X className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -33,8 +33,8 @@ export default function AwardBanner() {
   className="inline-flex items-center font-medium hover:underline text-xs sm:text-sm ml-1 z-20"
   aria-label="Read more about Infrasity's award"
 >
-  <span className="whitespace-nowrap z-20">Know More</span>
-  <ArrowRight className="ml-1 h-3 w-3 sm:h-4 sm:w-4 z-20" />
+  <span className="whitespace-nowrap z-20 cursor-pointer">Know More</span>
+  <ArrowRight className="ml-1 h-3 w-3 sm:h-4 sm:w-4 z-20 cursor-pointer" />
 </Link>
 
     </p>
@@ -54,7 +54,7 @@ export default function AwardBanner() {
                 </div>
                 <div className="z-20">
                   <Link className="z-10" href="/playbook/reddit-b2b-marketing">
-                    <p className="text-sm font-medium text-white text-center">
+                    <p className="text-sm font-medium text-white text-center cursor-pointer">
                       Download Free Playbook: Reddit B2B Playbook
                     </p>
                   </Link>
@@ -62,7 +62,7 @@ export default function AwardBanner() {
               </div>
               <button
                 onClick={() => setIsVisible(false)}
-                className="text-white/60 hover:text-white transition-colors duration-200 hover:bg-white/10 rounded-full p-1 z-10"
+                className="text-white/60 hover:text-white transition-colors duration-200 hover:bg-white/10 rounded-full p-1 z-10 cursor-pointer"
               >
                 <X className="z-10" size={16} />
               </button>
