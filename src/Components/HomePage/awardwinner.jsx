@@ -8,42 +8,9 @@ export default function AwardBanner() {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-gradient-to-r from-blue-800 to-purple-800 text-white pb-2 pt-1 px-3 sm:px-4">
+    <div className="bg-gradient-to-r from-blue-800 to-purple-800 text-white pb-2 py-2 px-3 sm:px-4">
       <div>
-    <div className="relative w-full px-4 py-1">
-  {/* Close Button */}
-  <button
-    onClick={() => setIsVisible(false)}
-    className="absolute right-2 top-2 text-white hover:text-gray-200 hover:bg-purple-800/90 rounded-full focus:outline-none z-10 cursor-pointer"
-    aria-label="Close banner"
-  >
-    <X className="h-4 w-4 sm:h-5 sm:w-5" />
-  </button>
-
-  {/* Banner Content */}
-  <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2 text-center text-xs sm:text-sm md:text-base px-6 sm:px-0 z-20">
-    <Award className="h-4 w-4 md:w-6 flex-shrink-0" />
-    <p className="text-white">
-      Infrasity has been recognized as the{" "}
-      <span className="font-bold">#1 Startup in New Delhi, India</span> by HackerNoon's Startups of the Year Awards 2024.{" "}
-      <Link
-  href="https://hackernoon.com/startups/winner-award?type=city&slug=asia-new-delhi-dl-india&rank=1"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-flex items-center font-medium hover:underline text-xs sm:text-sm ml-1 z-20"
-  aria-label="Read more about Infrasity's award"
->
-  <span className="whitespace-nowrap z-20 cursor-pointer">Know More</span>
-  <ArrowRight className="ml-1 h-3 w-3 sm:h-4 sm:w-4 z-20 cursor-pointer" />
-</Link>
-
-    </p>
-  </div>
-</div>
-
-
-
-        {/* <div className="divider-line divider-top"></div> */}
+   {/* <div className="divider-line divider-top"></div> */}
 
         <div className=" flex items-center justify-center md:px-4">
           <div className="lg:mx-auto flex items-center justify-center">
