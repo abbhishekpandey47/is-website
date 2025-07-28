@@ -5,7 +5,7 @@ import Cta from "./CTA";
 export default function Page() {
 
   return (
-    <div className="mt-36">
+    <div className="pt-36">
       <DownloadSetion />
       <div
         className="mb-10"
