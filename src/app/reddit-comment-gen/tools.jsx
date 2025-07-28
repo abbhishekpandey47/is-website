@@ -1,22 +1,25 @@
 "use client"
 
 import { MessageCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function ToolsSection() {
   const tools = [
     {
       id: 1,
-      title: "TikTok Comment Generator",
-      description: "Create custom TikTok comment reply stickers for your UGC content and video ads.",
+      title: "Infrasity ROI Calculator",
+      description: "Calculate how much you can save by outsourcing technical content for your DevTool, Infra, or AI Startup, in just 10 seconds.",
       iconColor: "text-blue-500",
-      iconBg: "bg-blue-500/10"
+      iconBg: "bg-blue-500/10",
+      link: "/roi-cal"
     },
     {
       id: 2,
-      title: "Instagram Comment Generator",
-      description: "Create custom Instagram comment reply stickers for your UGC content and video ads.",
+      title: "Outline Generator by Infrasity",
+      description: "Generate clear and tailored content outlines instantly for blogs, landing pages, and UGC scripts — built to simplify and speed up your creative flow.",
       iconColor: "text-pink-500",
-      iconBg: "bg-pink-500/10"
+      iconBg: "bg-pink-500/10",
+      link: "/outline-gen",
     }
   ];
 
@@ -29,6 +32,7 @@ export default function ToolsSection() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {tools.map((tool) => (
+            <Link href={tool.link}>
             <div
               key={tool.id}
               className="bg-white/10 border border-gray-700 rounded-xl p-6 hover:border-gray-600 hover:bg-gray-750 transition-all duration-300 cursor-pointer group"
@@ -45,6 +49,7 @@ export default function ToolsSection() {
                 {tool.description}
               </p>
             </div>
+            </Link>
           ))}
         </div>
       </div>
