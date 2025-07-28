@@ -123,10 +123,10 @@ const HeroHome = () => {
           </div>
         </div>
       </div>
-      <div className="divider-line divider-top"></div>
-      <div className="max-2xl:hidden divider-line divider-left"></div>
+      {/* <div className="divider-line divider-top"></div>
+      <div className="max-2xl:hidden divider-line divider-left"></div> */}
       {/* <div className="divider-line divider-bottom"></div> */}
-      <div className="max-2xl:hidden divider-line divider-right"></div>
+      {/* <div className="max-2xl:hidden divider-line divider-right"></div> */}
       <Particles
         className="absolute inset-0"
         quantity={250}
