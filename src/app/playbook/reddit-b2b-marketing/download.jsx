@@ -88,7 +88,7 @@ export const DownloadPage = () => {
 
   return (
     <div className="text-white">
-      <div className="max-w-7xl mx-auto px-8 lg:px-14 pt-16 pb-10">
+      <div className="max-w-7xl mx-auto px-8 lg:px-14 mt-16 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
           <div>
             <div className="max-w-md space-y-6">
