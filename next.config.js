@@ -3,7 +3,7 @@ module.exports = {
         missingSuspenseWithCSRBailout: false,
     },
     images: {
-        domains: ['www.infrasity.com', 'images.surferseo.art'],
+        domains: ['www.infrasity.com', 'images.surferseo.art', "superagi.com"],
     },
     // Add redirect configuration
     async redirects() {
@@ -41,6 +41,12 @@ module.exports = {
             {
                 source: '/services/reddit-marketing-services',
                 destination: '/services/reddit-marketing-agency',
+                permanent: true,
+                statusCode: 301,
+            },
+            {
+                source: '/services/service-video-production',
+                destination: '/services/tech-video-production',
                 permanent: true,
                 statusCode: 301,
             },
