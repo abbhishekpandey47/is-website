@@ -78,9 +78,9 @@ export default function TabbedYouTubeCarousel() {
 
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-center my-6">
+      <h2 className="text-3xl font-bold text-center my-6">
         Check out our YouTube Content
-      </h1>
+      </h2>
 
       <div className="w-full max-w-md lg:max-w-3xl mb-6 rounded-full bg-gray-900 flex">
         {tabs.map((tab) => (
