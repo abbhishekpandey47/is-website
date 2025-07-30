@@ -206,6 +206,9 @@ const toolsTab = [
   {
     hrefLink: "/outline-gen",
     menuName: "Outline Generator",
+  },{
+    hrefLink: "/tools/reddit-comment-generator",
+    menuName: "Reddit Comment Generator",
   }
 ];
 
@@ -571,6 +574,28 @@ const Navbar = () => {
                             <div>Outline Generator</div>
                           </Link>
                         </MenuItem2>
+                        <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick(
+                                "/tools/reddit-comment-generator"
+                              );
+                            }}
+                            href="/tools/reddit-comment-generator"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/tools/reddit-comment-generator".includes(
+                                "http"
+                              )
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>Reddit Comment Generator</div>
+                          </Link>
+                        </MenuItem2>
+
                       </div>
                     )}
                   </div>
