@@ -1,10 +1,10 @@
 export const metadata = {
-    title: 'Best Video Production Company for Tech Videos | Infrasity',
-    description: 'Looking for top-notch video production? We specialize in tech video production, delivering engaging and professional content for all your needs.',
+    title: 'Tech Video Production Company for B2B SaaS & AI',
+    description: 'Infrasity creates high-quality technology videos for SaaS, DevOps, and AI brands. Boost engagement with expert-led tech video production services.',
     keywords: 'b2b video production, best video production company, saas video production, b2b video marketing agency, tech video production​, tech product videos​, tech video production agency, video tech productions​',
     openGraph: {
-        title: 'Best Video Production Company for Tech Videos | Infrasity',
-        description: 'Looking for top-notch video production? We specialize in tech video production, delivering engaging and professional content for all your needs.',
+        title: 'Tech Video Production Company for B2B SaaS & AI',
+        description: 'Infrasity creates high-quality technology videos for SaaS, DevOps, and AI brands. Boost engagement with expert-led tech video production services.',
         url: '', 
         type: 'website',
         images: [

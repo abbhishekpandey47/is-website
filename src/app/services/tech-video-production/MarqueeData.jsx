@@ -83,10 +83,10 @@ export function MarqueeDemo() {
       <div className="relative flex h-[500px]  flex-col items-center justify-center overflow-hidden rounded-lg bg-transparent w-[100vw]">
         <div className=" w-4/5 m-auto flex flex-col gap-4 max-sm:gap-2">
           <div className="w-full max-lg:text-[2em] text-center text-[3em] flex justify-center quicksand-semibold">
-            <h1 className="text-white max-md:w-3/4 max-sm:text-[0.7em] max-sm:w-[93%]">
+            <h2 className="text-white max-md:w-3/4 max-sm:text-[0.7em] max-sm:w-[93%]">
               Technical Videos Showcasing{" "}
               <span class="specialtext">Hands-On Use Cases</span>
-            </h1>
+            </h2>
           </div>
         </div>
 
