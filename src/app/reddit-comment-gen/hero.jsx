@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 const API_URL = "/api/generate-comment";
 const API_DETAILS_URL = "/api/fetch-post-details";
-const API_SECRET = process.env.NEXT_PUBLIC_API_SECRET;
 
 const RedditPostTemplate = () => {
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -370,14 +369,12 @@ export default RedditPostTemplate;
 
 // Example usage for API call:
 // async function generateComment(redditUrl) {
-//   const res = await fetch("https://your-backend-url.onrender.com/generate_comment", {
+//   const res = await fetch("/api/generate-comment", {
 //     method: "POST",
 //     headers: {
 //       "Content-Type": "application/json",
-//       "X-Api-Secret": process.env.NEXT_PUBLIC_API_SECRET,
 //     },
-//     body: JSON.stringify({ reddit_url: redditUrl }),
-//     credentials: "include"
+//     body: JSON.stringify({ reddit_url: redditUrl })
 //   });
 //   if (res.status === 403) throw new Error("Forbidden");
 //   if (!res.ok) throw new Error(res.statusText);
