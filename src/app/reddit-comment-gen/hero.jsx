@@ -324,7 +324,9 @@ const RedditPostTemplate = () => {
                           Copy
                         </button>
                       )}
-                      {copySuccess && <span className="ml-2 text-green-400 text-xs">{copySuccess}</span>}
+                      {copySuccess && generatedComment && (
+                        <span className="ml-2 text-green-400 text-xs">{copySuccess}</span>
+                      )}
                     </div>
                     <h3 className="text-white text-[calc(16px*var(--scale))] leading-[calc(20px*var(--scale))] font-bold break-words whitespace-pre-wrap mt-1 mb-2">
                       {generatedComment ? (
