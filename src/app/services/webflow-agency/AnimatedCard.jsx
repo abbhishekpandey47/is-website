@@ -5,7 +5,7 @@ import Acc from "/public/webflow-age/jpg2png/acc.png";
 import dev from "/public/webflow-age/jpg2png/devzero.jpg";
 import kubiya from "/public/webflow-age/jpg2png/kubiya.png";
 import knidal from "/public/webflow-age/jpg2png/knidal.jpg";
-import CalendlyButton from "../service-video-production/calendlyButton";
+import CalendlyButton from "../tech-video-production/calendlyButton";
 
 const projects = [
   { title: "Kubiya", badges: ["Webflow", "Figma"], image: kubiya },
