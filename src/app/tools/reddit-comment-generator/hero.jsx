@@ -295,7 +295,7 @@ const RedditPostTemplate = () => {
                   <button
                     className="bg-[#3c4199] hover:bg-[#3c4199ee] text-white px-3 py-1 rounded-xl text-sm flex items-center"
                     onClick={handleFetchDetails}
-                    disabled={fetchLoading}
+                    disabled={fetchLoading || !formData.subreddit.trim()}
                   >
                     {fetchLoading ? (
                       <>
@@ -361,7 +361,7 @@ const RedditPostTemplate = () => {
                   <button
                     className="bg-[#3c4199] hover:bg-[#3c4199ee] text-white px-3 py-1 rounded-full text-sm flex items-center"
                     onClick={handleGenerateComment}
-                    disabled={generateLoading}
+                    disabled={generateLoading || !formData.subreddit.trim()}
                   >
                     {generateLoading ? (
                       <>
