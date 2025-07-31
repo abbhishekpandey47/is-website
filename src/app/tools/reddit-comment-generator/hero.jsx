@@ -50,7 +50,9 @@ const RedditPostTemplate = () => {
   const [urlError, setUrlError] = useState("");
   const [fetchLoading, setFetchLoading] = useState(false);
   const [generateLoading, setGenerateLoading] = useState(false);
+  const [sentiment, setSentiment] = useState("agree");
   const CONTEXT_CHAR_LIMIT = 250;
+  const EMBED_URL_CHAR_LIMIT = 200;
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -135,6 +137,11 @@ const RedditPostTemplate = () => {
       return;
     }
     // Validate embed URL if present
+    if (embedUrl && embedUrl.length > EMBED_URL_CHAR_LIMIT) {
+      setUrlError("Link is too long.");
+      setGenerateLoading(false);
+      return;
+    }
     if (embedUrl && !/^https?:\/\/.+\..+/.test(embedUrl)) {
       setUrlError("Please enter a valid link (must start with http/https)");
       setGenerateLoading(false);
@@ -152,7 +159,8 @@ const RedditPostTemplate = () => {
           reddit_url: formData.subreddit,
           word_count: wordCount,
           extra_context: extraContext || undefined,
-          embed_url: embedUrl || undefined
+          embed_url: embedUrl || undefined,
+          sentiment: sentiment
         }),
         signal: controller.signal
       });
@@ -206,6 +214,92 @@ const RedditPostTemplate = () => {
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
+        input[type="range"] {
+          height: 32px;
+          background: transparent;
+          accent-color: #3c4199;
+          /* Remove default background for better alignment */
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+          height: 6px;
+          background: #3c4199;
+          border-radius: 3px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+          width: 18px;
+          height: 18px;
+          background: #fff;
+          border: 2px solid #3c4199;
+          border-radius: 50%;
+          cursor: pointer;
+          box-shadow: 0 0 2px #3c4199;
+          transition: background 0.2s;
+          margin-top: -6px; /* Center thumb on track */
+        }
+        input[type="range"]:focus::-webkit-slider-thumb {
+          outline: 2px solid #3c4199;
+        }
+        input[type="range"]::-moz-range-thumb {
+          width: 18px;
+          height: 18px;
+          background: #fff;
+          border: 2px solid #3c4199;
+          border-radius: 50%;
+          cursor: pointer;
+          box-shadow: 0 0 2px #3c4199;
+          transition: background 0.2s;
+        }
+        input[type="range"]::-moz-range-track {
+          height: 6px;
+          background: #3c4199;
+          border-radius: 3px;
+        }
+        input[type="range"]::-ms-thumb {
+          width: 18px;
+          height: 18px;
+          background: #fff;
+          border: 2px solid #3c4199;
+          border-radius: 50%;
+          cursor: pointer;
+          box-shadow: 0 0 2px #3c4199;
+          transition: background 0.2s;
+        }
+        input[type="range"]::-ms-fill-lower {
+          background: #3c4199;
+          border-radius: 3px;
+        }
+        input[type="range"]::-ms-fill-upper {
+          background: #3c4199;
+          border-radius: 3px;
+        }
+        input[type="range"] {
+          /* Remove outline and background for all browsers */
+          outline: none;
+          background: transparent;
+        }
+        select, option, optgroup {
+          background: #181a20;
+          color: #fff;
+        }
+        select:focus {
+          border-color: #3c4199;
+          background: #181a20;
+          color: #fff;
+        }
+        select option:hover, select optgroup:hover {
+          background: #3c4199;
+          color: #fff;
+        }
+        .loader {
+          border-style: solid;
+          border-radius: 50%;
+          box-shadow: 0 2px 8px 0 #3c419980;
+          animation: loader-spin 1.2s cubic-bezier(0.4, 0.2, 0.2, 1) infinite;
+        }
+        @keyframes loader-spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
       `}</style>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
@@ -235,6 +329,40 @@ const RedditPostTemplate = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
             {/* Left Side - Form */}
             <div className='p-6 md:pr-0 md:pb-0 pt-6 pl-6'>
+              {/* Subreddit Link Input - moved to top */}
+              <div className="mb-6">
+                <label className="block text-white font-medium mb-2">Paste a Subreddit thread link</label>
+                <div className='flex gap-2 items-center'>
+                  <input
+                    type="text"
+                    value={formData.subreddit}
+                    onChange={e => {
+                      const val = e.target.value;
+                      if (val.length <= EMBED_URL_CHAR_LIMIT) {
+                        handleInputChange('subreddit', val);
+                      } else {
+                        handleInputChange('subreddit', val.slice(0, EMBED_URL_CHAR_LIMIT));
+                      }
+                    }}
+                    maxLength={EMBED_URL_CHAR_LIMIT}
+                    className="w-full bg-black/30 border border-white/20 rounded-lg p-1 px-2 text-white focus:border-[#3c4199ee] focus:outline-none"
+                    placeholder="https://www.reddit.com/r/dataengineering/comments/xxxxxx/title"
+                  />
+                  <button
+                    className="bg-[#3c4199] hover:bg-[#3c4199ee] text-white px-3 py-1 rounded-xl text-sm flex items-center"
+                    onClick={handleFetchDetails}
+                    disabled={fetchLoading || !formData.subreddit.trim()}
+                  >
+                    {fetchLoading ? (
+                      <span className="flex items-center gap-2">
+                        <span className="loader inline-block w-5 h-5 rounded-full border-4 border-white border-t-[#3c4199] animate-spin"></span>
+                        <span>Loading...</span>
+                      </span>
+                    ) : "Fetch Details"}
+                  </button>
+                </div>
+                {error && <div className="text-red-400 mt-2">{error}</div>}
+              </div>
 
               {/* Word Count Slider */}
               <div className="mb-6">
@@ -242,7 +370,7 @@ const RedditPostTemplate = () => {
                 <div className="flex items-center gap-3">
                   <input
                     type="range"
-                    min={100}
+                    min={50}
                     max={1000}
                     step={50}
                     value={wordCount}
@@ -251,7 +379,20 @@ const RedditPostTemplate = () => {
                   />
                   <span className="text-white font-semibold w-12 text-center">{wordCount}</span>
                 </div>
-                <p className="text-gray-400 text-xs mt-1">Choose between 100 and 1000 words</p>
+                <p className="text-gray-400 text-xs mt-1">Choose between 50 and 1000 words</p>
+              </div>
+
+              {/* Tonality Dropdown */}
+              <div className="mb-6">
+                <label className="block text-white font-medium mb-2">Tonality for the AI</label>
+                <select
+                  className="w-full bg-black/30 border border-white/20 rounded-lg p-2 text-white focus:border-[#3c4199ee] focus:outline-none"
+                  value={sentiment}
+                  onChange={e => setSentiment(e.target.value)}
+                >
+                  <option value="agree">Agree</option>
+                  <option value="disagree">Disagree</option>
+                </select>
               </div>
 
               {/* Additional Context */}
@@ -274,42 +415,23 @@ const RedditPostTemplate = () => {
                 <input
                   type="text"
                   value={embedUrl}
-                  onChange={e => setEmbedUrl(e.target.value)}
+                  onChange={e => {
+                    const val = e.target.value;
+                    if (val.length <= EMBED_URL_CHAR_LIMIT) {
+                      setEmbedUrl(val);
+                    } else {
+                      setEmbedUrl(val.slice(0, EMBED_URL_CHAR_LIMIT));
+                    }
+                  }}
+                  maxLength={EMBED_URL_CHAR_LIMIT}
                   className="w-full bg-black/30 border border-white/20 rounded-lg p-1 px-2 text-white focus:border-[#3c4199ee] focus:outline-none"
                   placeholder="Paste a link to embed in the comment"
                 />
                 {urlError && <div className="text-red-400 mt-1 text-xs">{urlError}</div>}
               </div>
 
-              {/* Subreddit */}
-              <div className="mb-6">
-                <label className="block text-white font-medium mb-2">Paste a Subreddit thread link</label>
-                <div className='flex gap-2 items-center'>
-                  <input
-                    type="text"
-                    value={formData.subreddit}
-                    onChange={(e) => handleInputChange('subreddit', e.target.value)}
-                    className="w-full bg-black/30 border border-white/20 rounded-lg p-1 px-2 text-white focus:border-[#3c4199ee] focus:outline-none"
-                    placeholder="https://www.reddit.com/r/dataengineering/comments/xxxxxx/title"
-                  />
-                  <button
-                    className="bg-[#3c4199] hover:bg-[#3c4199ee] text-white px-3 py-1 rounded-xl text-sm flex items-center"
-                    onClick={handleFetchDetails}
-                    disabled={fetchLoading || !formData.subreddit.trim()}
-                  >
-                    {fetchLoading ? (
-                      <>
-                        <span className="mr-2">Loading...</span>
-                        <span className="animate-spin rounded-full h-5 w-5 border-t-4 border-b-4 border-white"></span>
-                      </>
-                    ) : "Fetch Details"}
-                  </button>
-                </div>
-                {error && <div className="text-red-400 mt-2">{error}</div>}
-              </div>
-
               {/* Text */}
-              <div className="bg-black/40 p-4 border border-white/20 rounded-t-xl mb-0">
+              <div className="bg-black/40 p-4 border border-white/10 rounded-t-xl mb-0">
                 <div>
                   <h2 className='font-semibold'>Post Details</h2>
                   <p className='font-light tracking-wider'>{postDetails.post_title || "No post title found."}</p>
@@ -355,82 +477,76 @@ const RedditPostTemplate = () => {
              </div>
 
             {/* Right Side - Preview */}
-            <div className='bg-white/10 m-4 pt-2 rounded-xl border border-white/10'>
+            <div className='bg-white/10 m-4 pt-2 rounded-xl border border-white/10 flex items-center justify-center min-h-[500px] relative'>
+              {/* Top right Generate Comment button, only visible when detailsFetched is true */}
               {detailsFetched && (
-                <div className="flex items-end justify-end mx-4 mt-2">
-                  <button
-                    className="bg-[#3c4199] hover:bg-[#3c4199ee] text-white px-3 py-1 rounded-full text-sm flex items-center"
-                    onClick={handleGenerateComment}
-                    disabled={generateLoading || !formData.subreddit.trim()}
-                  >
-                    {generateLoading ? (
-                      <>
-                        <span className="mr-2">Loading...</span>
-                        <span className="animate-spin rounded-full h-5 w-5 border-t-4 border-b-4 border-white"></span>
-                      </>
-                    ) : "Generate Comment"}
-                  </button>
-                  {copySuccess && <span className="ml-2 text-green-400 text-xs">{copySuccess}</span>}
-                </div>
+                <button
+                  className="bg-[#3c4199] hover:bg-[#3c4199ee] text-white px-3 py-1 rounded-full text-sm flex items-center absolute top-6 right-6 z-10"
+                  onClick={handleGenerateComment}
+                  disabled={generateLoading || !formData.subreddit.trim()}
+                >
+                  {generateLoading ? (
+                    <span className="flex items-center gap-2">
+                      <span className="loader inline-block w-5 h-5 rounded-full border-4 border-white border-t-[#3c4199] animate-spin"></span>
+                      <span>Loading...</span>
+                    </span>
+                  ) : "Generate Comment"}
+                </button>
               )}
-              <div className="md:flex items-start justify-center">
-                <div className="flex items-start justify-center">
-                  <div className={generatedComment ? "" : "flex items-center justify-center min-h-[350px]"}>
-                    <div className="bg-black/40 border border-white/10 rounded-lg p-4 w-full max-w-[400px] mx-auto mt-4">
-                      {/* Reddit Post Preview */}
-                      <div className="flex justify-between items-center gap-3">
-                        <div className="flex items-center gap-3">
-                          <img
-                            src="https://postfully.app/_astro/reddit-default-avatar.BEQTJRzt.png"
-                            alt="Avatar"
-                            className="w-9 h-9 rounded-full"
-                          />
-                          <div className="flex-1 mb-1">
-                            <div className="flex items-start mb-1">
-                              <span className="text-white text-[14px] font-semibold">{postDetails.subreddit || "infrasity.com"}</span>
-                            </div>
-                            <div className="flex gap-0">
-                              <img
-                                src="https://postfully.app/_astro/reddit-awards.BPz5fCNF.png"
-                                alt="Awards"
-                                className="w-36 h-3"
-                              />
-                            </div>
+              <div className="w-full flex flex-col items-center justify-center">
+                <div className={generatedComment ? "" : "flex items-center justify-center min-h-[350px] w-full"}>
+                  <div className="bg-black/40 border border-white/10 rounded-lg p-4 w-full max-w-[400px] mx-auto">
+                    {/* Reddit Post Preview */}
+                    <div className="flex justify-between items-center gap-3">
+                      <div className="flex items-center gap-3">
+                        <img
+                          src="https://postfully.app/_astro/reddit-default-avatar.BEQTJRzt.png"
+                          alt="Avatar"
+                          className="w-9 h-9 rounded-full"
+                        />
+                        <div className="flex-1 mb-1">
+                          <div className="flex items-start mb-1">
+                            <span className="text-white text-[14px] font-semibold">{postDetails.subreddit || "infrasity.com"}</span>
+                          </div>
+                          <div className="flex gap-0">
+                            <img
+                              src="https://postfully.app/_astro/reddit-awards.BPz5fCNF.png"
+                              alt="Awards"
+                              className="w-36 h-3"
+                            />
                           </div>
                         </div>
-                        {generatedComment && (
-                          <button
-                            className="bg-[#3c4199] hover:bg-[#3c4199ee] text-white px-2 py-1 rounded text-xs"
-                            onClick={handleCopyComment}
-                          >
-                            Copy
-                          </button>
-                        )}
-                        {copySuccess && generatedComment && (
-                          <span className="ml-2 text-green-400 text-xs">{copySuccess}</span>
-                        )}
                       </div>
-                      <h3 className="text-white text-[calc(16px*var(--scale))] leading-[calc(20px*var(--scale))] font-bold break-words whitespace-pre-wrap mt-1 mb-2">
-                        {generatedComment ? (
-                          <div
-                            className="whitespace-pre-line text-sm overflow-y-auto w-full break-words pr-2 scrollbar-hide min-h-[40px] bg-black/30 rounded-lg p-3 transition-all"
-                            style={{ wordBreak: 'break-word', width: '100%', maxHeight: '70vh' }}
-                          >
-                            {generatedComment}
-                          </div>
-                        ) : "Create your custom Reddit story"}
-                      </h3>
-                      <div className="flex items-center gap-4 text-gray-400 text-sm mb-2">
-                        <div className="flex items-center gap-1">
-                          <span>
-                            {/* Upvotes icon */}
-                            <svg className='h-4 w-4' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22.8C11.9136 22.8 11.826 22.8 11.7384 22.7928C10.4844 22.6956 9.3153 22.1218 8.47124 21.1894C7.62719 20.2569 7.17227 19.0367 7.19997 17.7792V13.2H3.43437C3.01826 13.2 2.61154 13.0764 2.26576 12.8449C1.91999 12.6134 1.65073 12.2845 1.49213 11.8998C1.33352 11.5151 1.2927 11.0919 1.37485 10.684C1.457 10.2761 1.65842 9.90176 1.95357 9.60844L11.292 0.336043C11.48 0.148743 11.7346 0.0435791 12 0.0435791C12.2654 0.0435791 12.5199 0.148743 12.708 0.336043L22.0464 9.60844C22.3414 9.90168 22.5428 10.2759 22.625 10.6837C22.7072 11.0915 22.6665 11.5146 22.508 11.8992C22.3496 12.2838 22.0805 12.6128 21.7349 12.8444C21.3893 13.076 20.9828 13.1997 20.5668 13.2H16.8V17.8584C16.8203 18.9814 16.459 20.0779 15.7752 20.9688C15.3262 21.5407 14.7529 22.0027 14.0988 22.32C13.4447 22.6373 12.727 22.8014 12 22.8ZM12 2.16844L3.22197 10.8852C3.17966 10.9273 3.1508 10.981 3.13904 11.0394C3.12728 11.0979 3.13314 11.1586 3.15589 11.2137C3.17864 11.2689 3.21725 11.316 3.26683 11.3492C3.31641 11.3823 3.37472 11.4001 3.43437 11.4H8.99997V17.7792C8.97957 18.5749 9.26054 19.3488 9.78659 19.9461C10.3126 20.5434 11.0449 20.9198 11.8368 21C12.2446 21.0265 12.6534 20.9674 13.0369 20.8265C13.4205 20.6855 13.7704 20.4659 14.064 20.1816C14.3614 19.9018 14.5981 19.5636 14.7591 19.1883C14.9201 18.813 15.0021 18.4085 15 18V11.4H20.5668C20.6266 11.4004 20.6851 11.3829 20.7349 11.3497C20.7847 11.3165 20.8234 11.2692 20.8461 11.2139C20.8688 11.1586 20.8744 11.0977 20.8623 11.0392C20.8502 10.9806 20.8208 10.927 20.778 10.8852L12 2.16844Z" fill="#ffff"></path></svg>
-                          </span> <span>{postDetails.upvotes}</span>
+                      {generatedComment && (
+                        <button
+                          className="bg-[#3c4199] hover:bg-[#3c4199ee] text-white px-2 py-1 rounded text-xs min-w-[60px] transition-all duration-200"
+                          onClick={handleCopyComment}
+                          disabled={!!copySuccess}
+                        >
+                          {copySuccess ? "Copied!" : "Copy"}
+                        </button>
+                      )}
+                    </div>
+                    <h3 className="text-white text-[calc(16px*var(--scale))] leading-[calc(20px*var(--scale))] font-bold break-words whitespace-pre-wrap mt-1 mb-2">
+                      {generatedComment ? (
+                        <div
+                          className="whitespace-pre-line text-sm overflow-y-auto w-full break-words pr-2 scrollbar-hide min-h-[40px] bg-black/30 rounded-lg p-3 transition-all"
+                          style={{ wordBreak: 'break-word', width: '100%', maxHeight: '70vh' }}
+                        >
+                          {generatedComment}
                         </div>
-                        <div className="flex items-center gap-1">
-                          <svg className='h-4 w-4' viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 19H1.871a.886.886 0 0 1-.798-.52.886.886 0 0 1 .158-.941L3.1 15.771A9 9 0 1 1 10 19Zm-6.549-1.5H10a7.5 7.5 0 1 0-5.323-2.219l.54.545L3.451 17.5Z" fill="#ffff"></path></svg>
-                          <span>{postDetails.total_comments}</span>
-                        </div>
+                      ) : "Create your custom Reddit story"}
+                    </h3>
+                    <div className="flex items-center gap-4 text-gray-400 text-sm mb-2">
+                      <div className="flex items-center gap-1">
+                        <span>
+                          {/* Upvotes icon */}
+                          <svg className='h-4 w-4' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22.8C11.9136 22.8 11.826 22.8 11.7384 22.7928C10.4844 22.6956 9.3153 22.1218 8.47124 21.1894C7.62719 20.2569 7.17227 19.0367 7.19997 17.7792V13.2H3.43437C3.01826 13.2 2.61154 13.0764 2.26576 12.8449C1.91999 12.6134 1.65073 12.2845 1.49213 11.8998C1.33352 11.5151 1.2927 11.0919 1.37485 10.684C1.457 10.2761 1.65842 9.90176 1.95357 9.60844L11.292 0.336043C11.48 0.148743 11.7346 0.0435791 12 0.0435791C12.2654 0.0435791 12.5199 0.148743 12.708 0.336043L22.0464 9.60844C22.3414 9.90168 22.5428 10.2759 22.625 10.6837C22.7072 11.0915 22.6665 11.5146 22.508 11.8992C22.3496 12.2838 22.0805 12.6128 21.7349 12.8444C21.3893 13.076 20.9828 13.1997 20.5668 13.2H16.8V17.8584C16.8203 18.9814 16.459 20.0779 15.7752 20.9688C15.3262 21.5407 14.7529 22.0027 14.0988 22.32C13.4447 22.6373 12.727 22.8014 12 22.8ZM12 2.16844L3.22197 10.8852C3.17966 10.9273 3.1508 10.981 3.13904 11.0394C3.12728 11.0979 3.13314 11.1586 3.15589 11.2137C3.17864 11.2689 3.21725 11.316 3.26683 11.3492C3.31641 11.3823 3.37472 11.4001 3.43437 11.4H8.99997V17.7792C8.97957 18.5749 9.26054 19.3488 9.78659 19.9461C10.3126 20.5434 11.0449 20.9198 11.8368 21C12.2446 21.0265 12.6534 20.9674 13.0369 20.8265C13.4205 20.6855 13.7704 20.4659 14.064 20.1816C14.3614 19.9018 14.5981 19.5636 14.7591 19.1883C14.9201 18.813 15.0021 18.4085 15 18V11.4H20.5668C20.6266 11.4004 20.6851 11.3829 20.7349 11.3497C20.7847 11.3165 20.8234 11.2692 20.8461 11.2139C20.8688 11.1586 20.8744 11.0977 20.8623 11.0392C20.8502 10.9806 20.8208 10.927 20.778 10.8852L12 2.16844Z" fill="#ffff"></path></svg>
+                        </span> <span>{postDetails.upvotes}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <svg className='h-4 w-4' viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 19H1.871a.886.886 0 0 1-.798-.52.886.886 0 0 1 .158-.941L3.1 15.771A9 9 0 1 1 10 19Zm-6.549-1.5H10a7.5 7.5 0 1 0-5.323-2.219l.54.545L3.451 17.5Z" fill="#ffff"></path></svg>
+                        <span>{postDetails.total_comments}</span>
                       </div>
                     </div>
                   </div>
