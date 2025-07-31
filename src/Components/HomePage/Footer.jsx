@@ -70,6 +70,16 @@ const Footer = () => {
                     ROI Calculator
                   </a>
                 </li>
+                <li>
+                  <a href="/tools/reddit-comment-generator" className="hover:underline">
+                    Reddit Comment Generator
+                  </a>
+                </li>
+                <li>
+                  <a href="/outline-gen" className="hover:underline">
+                    Outline Generator
+                  </a>
+                </li>
               </ul>
               <h3 className="font-bold mb-2 mt-5">Awards</h3>
               <ul className="space-y-3">
