@@ -210,8 +210,8 @@ const RedditPostTemplate = () => {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">Reddit Post Template</h1>
-          <p className="text-gray-400">Create custom Reddit posts for your Reddit story videos. Free to use, no email required.</p>
+          <h1 className="text-4xl font-bold text-white mb-2">Free Reddit Comment Generator</h1>
+          <p className="text-gray-400">No more getting downvoted or reported. Generate human-like, natural Reddit comments and posts that blend in with real conversations keeping you off the downvote and report radar.</p>
         </div>
 
         {/* Beta Notice */}

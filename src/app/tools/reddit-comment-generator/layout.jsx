@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Reddit B2B Marketing Playbook for LLM SEO & SaaS Growth",
-  description: "Discover how to turn Reddit into a B2B growth engine. Fuel LLM-friendly SEO, developer awareness, and pipeline with this tactical playbook from Infrasity.",
+  title: "Free Reddit Comment Generator [No Login Required]",
+  description: "Create human-like Reddit comments and posts for free. No login required. Avoid downvotes with our authentic Reddit Comment Generator for organic engagement.",
   robots: {
     index: false,
     follow: false,

@@ -10,23 +10,28 @@ export default function FAQ() {
   const faqs = [
     {
       id: 1,
-      question: "How to create Reddit story frames?",
-      answer: "To create Reddit story frames, you can use various tools and templates that mimic Reddit's post format. These frames typically include the Reddit header, upvote/downvote buttons, username, timestamp, and content area. You can customize the text, colors, and styling to match your needs."
+      question: "What is a Reddit Comment Generator?",
+      answer: "A Reddit Comment Generator is a free online tool that helps you quickly create human-like Reddit comments and post templates. It’s designed for marketers, brands, and community members who want to engage on Reddit authentically without spending hours writing from scratch."
     },
     {
       id: 2,
-      question: "Do I need a Reddit account to use the Reddit Post Template?",
-      answer: "No, you don't need a Reddit account to use Reddit post templates. These are design tools that create the visual appearance of Reddit posts for creative projects, presentations, or educational purposes. They're completely separate from the actual Reddit platform."
+      question: "Will the generated Reddit comments get me downvoted or reported?",
+      answer: "Our tool focuses on creating authentic, human-like comments that blend naturally into Reddit conversations. While no tool can guarantee zero downvotes, using relevant, non-spammy comments will help you avoid the downvote and report radar."
     },
     {
       id: 3,
-      question: "Is it legal to use custom Reddit posts?",
-      answer: "Yes, creating custom Reddit post designs for educational, creative, or presentation purposes is generally legal. However, you should avoid using them to deceive people or spread misinformation. Always be transparent about the content being fictional or for demonstration purposes when sharing."
+      question: "Can I use this tool for brand promotion on Reddit?",
+      answer: "Yes, but we strongly recommend promoting your brand strategically. Reddit users value genuine contributions, so use the generated comments to add value and avoid hard-selling to prevent bans or negative feedback."
     },
     {
       id: 4,
-      question: "Is this template free to use?",
-      answer: "Most Reddit post templates are free to use for personal and educational purposes. However, licensing terms may vary depending on the specific template or tool you're using. Always check the terms of service or licensing agreement before using any template commercially."
+      question: "Are the comments unique every time?",
+      answer: "Yes. Each time you generate a comment, the tool creates unique variations using different tones and structures, so your comments don’t look repetitive."
+    },
+    {
+      id: 5,
+      question: "Can I customize the comments?",
+      answer: "Yes, you can edit and tweak the generated comments to match your brand voice or the context of the conversation before posting on Reddit."
     }
   ];
 
