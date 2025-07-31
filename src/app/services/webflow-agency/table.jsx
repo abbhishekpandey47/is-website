@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import CalendlyButton from "../service-video-production/calendlyButton";
+import CalendlyButton from "../tech-video-production/calendlyButton";
 import Image from "next/image";
 import logo from "/public/webflow-age/logo/infrasity_logo.png";
 

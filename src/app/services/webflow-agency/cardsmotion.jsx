@@ -2,7 +2,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import CalendlyButton from "../service-video-production/calendlyButton";
+import CalendlyButton from "../tech-video-production/calendlyButton";
 
 const CardMotion = ({ mainHeading, subHeading, serviceArr }) => {
   const containerRef = useRef(null);

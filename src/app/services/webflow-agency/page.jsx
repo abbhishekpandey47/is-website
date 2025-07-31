@@ -7,7 +7,7 @@ import AnimatedCard from "@/app/services/webflow-agency/AnimatedCard";
 import CustomerReview from "@/app/services/webflow-agency/CustomerReview";
 import ThirdPartyIntegrations from "./ThirdPartyIntegrations";
 import WebflowMarquee from "@/app/services/webflow-agency/Webflowmarquee";
-import FAQ from "@/app/services/service-video-production/FAQ";
+import FAQ from "@/app/services/tech-video-production/FAQ";
 import BookDemo from "../../book-a-demo/cta";
 import TestimonialSlider from "./Testimonials";
 import Webtable from "./table";
