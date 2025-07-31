@@ -43,6 +43,12 @@ const RedditPostTemplate = () => {
   const [threadSummary, setThreadSummary] = useState("");
   const [topComment, setTopComment] = useState(null);
   const [detailsFetched, setDetailsFetched] = useState(false);
+  const [wordCount, setWordCount] = useState(200);
+  const [extraContext, setExtraContext] = useState("");
+  const [embedUrl, setEmbedUrl] = useState("");
+  const [contextError, setContextError] = useState("");
+  const [urlError, setUrlError] = useState("");
+  const CONTEXT_CHAR_LIMIT = 250;
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -118,6 +124,20 @@ const RedditPostTemplate = () => {
     setError("");
     setGeneratedComment("");
     setCopySuccess("");
+    setContextError("");
+    setUrlError("");
+    // Validate extra context
+    if (extraContext.length > CONTEXT_CHAR_LIMIT) {
+      setContextError(`Max ${CONTEXT_CHAR_LIMIT} characters allowed.`);
+      setLoading(false);
+      return;
+    }
+    // Validate embed URL if present
+    if (embedUrl && !/^https?:\/\/.+\..+/.test(embedUrl)) {
+      setUrlError("Please enter a valid link (must start with http/https)");
+      setLoading(false);
+      return;
+    }
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 60000);
     try {
@@ -126,7 +146,12 @@ const RedditPostTemplate = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ reddit_url: formData.subreddit }),
+        body: JSON.stringify({
+          reddit_url: formData.subreddit,
+          word_count: wordCount,
+          extra_context: extraContext || undefined,
+          embed_url: embedUrl || undefined
+        }),
         signal: controller.signal
       });
       clearTimeout(timeoutId);
@@ -208,6 +233,51 @@ const RedditPostTemplate = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
             {/* Left Side - Form */}
             <div className='p-6 md:pr-0 md:pb-0 pt-6 pl-6'>
+
+              {/* Word Count Slider */}
+              <div className="mb-6">
+                <label className="block text-white font-medium mb-2">Comment Word Count</label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="range"
+                    min={100}
+                    max={1000}
+                    step={50}
+                    value={wordCount}
+                    onChange={e => setWordCount(Number(e.target.value))}
+                    className="w-full h-2 bg-black/30 rounded-lg appearance-none cursor-pointer"
+                  />
+                  <span className="text-white font-semibold w-12 text-center">{wordCount}</span>
+                </div>
+                <p className="text-gray-400 text-xs mt-1">Choose between 100 and 1000 words</p>
+              </div>
+
+              {/* Additional Context */}
+              <div className="mb-6">
+                <label className="block text-white font-medium mb-2">Additional Context <span className="text-gray-400 text-xs">(max {CONTEXT_CHAR_LIMIT} chars)</span></label>
+                <textarea
+                  value={extraContext}
+                  onChange={e => setExtraContext(e.target.value)}
+                  maxLength={CONTEXT_CHAR_LIMIT}
+                  className="w-full bg-black/30 border border-white/20 rounded-lg p-2 text-white focus:border-[#3c4199ee] focus:outline-none resize-none"
+                  rows={2}
+                  placeholder="Add any extra context for the comment (optional)"
+                />
+                {contextError && <div className="text-red-400 mt-1 text-xs">{contextError}</div>}
+              </div>
+
+              {/* Link Embed */}
+              <div className="mb-6">
+                <label className="block text-white font-medium mb-2">Embed a Link <span className="text-gray-400 text-xs">(optional)</span></label>
+                <input
+                  type="text"
+                  value={embedUrl}
+                  onChange={e => setEmbedUrl(e.target.value)}
+                  className="w-full bg-black/30 border border-white/20 rounded-lg p-1 px-2 text-white focus:border-[#3c4199ee] focus:outline-none"
+                  placeholder="Paste a link to embed in the comment"
+                />
+                {urlError && <div className="text-red-400 mt-1 text-xs">{urlError}</div>}
+              </div>
 
               {/* Subreddit */}
               <div className="mb-6">
