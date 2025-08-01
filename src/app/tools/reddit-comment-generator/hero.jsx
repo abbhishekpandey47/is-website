@@ -443,7 +443,7 @@ const RedditPostTemplate = () => {
                   }}
                   maxLength={EMBED_URL_CHAR_LIMIT}
                   className="w-full bg-black/30 border border-white/20 rounded-lg p-1 px-2 text-white focus:border-[#3c4199ee] focus:outline-none"
-                  placeholder="Paste a URL you want to include in the comment (e.g., blog, product, or resource)."
+                  placeholder="Paste a URL you want to include in the comment"
                 />
                 {urlError && <div className="text-red-400 mt-1 text-xs">{urlError}</div>}
               </div>
