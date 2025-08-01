@@ -429,7 +429,7 @@ const RedditPostTemplate = () => {
 
               {/* Link Embed */}
               <div className="mb-6">
-                <label className="block text-white font-medium mb-2">Embed a Link <span className="text-gray-400 text-xs">(optional)</span></label>
+                <label className="block text-white font-medium mb-2">Promote a Link <span className="text-gray-400 text-xs">(optional)</span></label>
                 <input
                   type="text"
                   value={embedUrl}
@@ -443,7 +443,7 @@ const RedditPostTemplate = () => {
                   }}
                   maxLength={EMBED_URL_CHAR_LIMIT}
                   className="w-full bg-black/30 border border-white/20 rounded-lg p-1 px-2 text-white focus:border-[#3c4199ee] focus:outline-none"
-                  placeholder="Paste a link to embed in the comment"
+                  placeholder="Paste a URL you want to include in the comment (e.g., blog, product, or resource)."
                 />
                 {urlError && <div className="text-red-400 mt-1 text-xs">{urlError}</div>}
               </div>
