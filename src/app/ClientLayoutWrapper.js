@@ -18,6 +18,9 @@ export function ClientLayoutWrapper({ children }) {
     const pathname = usePathname();
     const hideNavbar = pathname === '/technical-writing-services-b2b-saas';
     const hideNavBar2 = pathname === '/services/webflow-agency';
+    const hideNavBarAndFooter = pathname === '/tools/reddit-tools';
+    const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2;
+    const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar;
 
     return (
         <>
@@ -42,12 +45,13 @@ export function ClientLayoutWrapper({ children }) {
                     <AntdRegistry>
                         <Loader />
 
-                        {!hideNavBar2 && <AwardBanner />}
+                        {shouldShowAwardBanner && <AwardBanner />}
 
-                        {!hideNavbar && <Navbar />}
+                        {shouldShowNavbar && <Navbar />}
+
                         {children}
                         <Analytics />
-                        <Footer />
+                        {!hideNavBarAndFooter && <Footer />}
                     </AntdRegistry>
                 </Appwrap>
             </NextThemesProvider>
