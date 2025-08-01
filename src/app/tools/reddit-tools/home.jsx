@@ -48,6 +48,10 @@ export default function Home2({ handleNavClick }) {
     return (
         <div className="flex-1 p-4 sm:p-6 lg:p-8 bg-gray-50">
             <div className="max-w-6xl mx-auto">
+                <div className="absolute h-8 w-8 md:h-10 md:w-10 right-10 mb-6 sm:mb-8 bg-green-800 rounded-full flex items-center justify-center text-white font-semibold">
+  <span>P</span>
+</div>
+
                 {/* Header */}
                 <div className="text-center mb-6 sm:mb-8">
                     <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
