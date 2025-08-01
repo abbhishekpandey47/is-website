@@ -1,8 +1,8 @@
 "use client";
 
-import BookDemo from "../book-a-demo/cta";
+import BookDemo from "../../book-a-demo/cta";
 import CalendlyButton from "./cal";
-import CalendarBooking from "../calendarButton";
+import CalendarBooking from "../../calendarButton";
 import FAQSection from "./FAQ";
 import Hero from "./hero";
 import ContentROICalculator from "./roi-cal";

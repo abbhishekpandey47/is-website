@@ -85,7 +85,7 @@ const handleNavClick = (tabId) => {
 
             case "credits":
                 return (
-                    <h1>Hello</h1>
+                    <Credits />
                 )
 
             default:

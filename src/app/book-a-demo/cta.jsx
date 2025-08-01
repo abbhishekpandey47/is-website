@@ -623,7 +623,7 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
             </div>
             <div className="flex gap-5 pt-5 cursor-pointer">
               <Link
-                href="/roi-cal"
+                href="/tools/roi-cal"
                 className="btn bg-white text-gray-800 font-semibold py-2 px-4 rounded shadow hover:bg-gray-100 quicksand-semibold cursor-pointer"
               >
                 ROI Calculator
