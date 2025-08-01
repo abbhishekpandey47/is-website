@@ -5,6 +5,7 @@ import {
     LineChart,
     MessageCircle
 } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home2({ handleNavClick }) {
     const tools = [
@@ -19,21 +20,21 @@ export default function Home2({ handleNavClick }) {
             id: 'competitor',
             title: 'Competitor Analysis',
             description: 'Analyze where, how, and with what content competitors get traction',
-    icon: <Search className="w-6 h-6 stroke-gray-600" />,
+            icon: <Search className="w-6 h-6 stroke-gray-600" />,
             tags: ['Brand Visibility', 'Subreddits']
         },
         {
-            id: 'current-retions',
+            id: 'current',
             title: 'Check Current Retions',
             description: 'See where your brand is getting mentioned in Reddit threads',
-    icon: <LineChart className="w-6 h-6 stroke-gray-600" />,
+            icon: <LineChart className="w-6 h-6 stroke-gray-600" />,
             tags: ['Brand Monitoring', 'Buzz Tracking']
         },
         {
-            id: 'post-commentor',
+            link: "/tools/reddit-comment-generator",
             title: 'Post Commentor',
             description: 'Generate customizable comments for any thread paste',
-    icon: <MessageCircle className="w-6 h-6 stroke-gray-600" />,
+            icon: <MessageCircle className="w-6 h-6 stroke-gray-600" />,
             tags: ['AI', 'Reddit Contents', 'Growth Analytics']
         }
     ];
@@ -47,6 +48,10 @@ export default function Home2({ handleNavClick }) {
     return (
         <div className="flex-1 p-4 sm:p-6 lg:p-8 bg-gray-50">
             <div className="max-w-6xl mx-auto">
+                <div className="absolute h-8 w-8 md:h-10 md:w-10 right-10 mb-6 sm:mb-8 bg-green-800 rounded-full flex items-center justify-center text-white font-semibold">
+  <span>P</span>
+</div>
+
                 {/* Header */}
                 <div className="text-center mb-6 sm:mb-8">
                     <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
@@ -59,27 +64,44 @@ export default function Home2({ handleNavClick }) {
 
                 {/* Tools Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-8 sm:mb-12">
-                    {tools.map((tool) => (
-                        <div
-                            key={tool.id}
-                            className="bg-white/20 rounded-xl p-4 md:px-6  shadow-sm border border-gray-500/20 hover:border-gray-500 transition-shadow cursor-pointer"
-                            onClick={() => handleNavClick(tool.id)}
-                        >
-                            <div className="mb-2 md:mb-2">{tool.icon}</div>
-                            <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{tool.title}</h3>
-                            <p className="text-[13px] font-[480] text-[#666666] mb-3 sm:mb-4">{tool.description}</p>
-                            <div className="flex flex-wrap gap-1 md:gap-1">
-                                {tool.tags.map((tag, index) => (
-                                    <span
-                                        key={index}
-                                        className="px-2 py-1 md:py-[2px] text-gray-700 text-xs rounded-full border border-gray-500/20"
-                                    >
-                                        {tag}
-                                    </span>
-                                ))}
+                    {tools.map((tool) => {
+                        const cardContent = (
+                            <>
+                                <div className="mb-2 md:mb-2">{tool.icon}</div>
+                                <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{tool.title}</h3>
+                                <p className="text-[13px] font-[480] text-[#666666] mb-3 sm:mb-4">{tool.description}</p>
+                                <div className="flex flex-wrap gap-1 md:gap-1">
+                                    {tool.tags.map((tag, index) => (
+                                        <span
+                                            key={index}
+                                            className="px-2 py-1 md:py-[2px] text-gray-700 text-xs rounded-full border border-gray-500/20"
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </>
+                        );
+
+                        return tool.link ? (
+                            <Link
+                                key={tool.title}
+                                href={tool.link}
+                                className="bg-white/20 rounded-xl p-4 md:px-6 shadow-sm border border-gray-500/20 hover:border-gray-500 transition-shadow cursor-pointer block"
+                            >
+                                {cardContent}
+                            </Link>
+                        ) : (
+                            <div
+                                key={tool.id}
+                                className="bg-white/20 rounded-xl p-4 md:px-6 shadow-sm border border-gray-500/20 hover:border-gray-500 transition-shadow cursor-pointer"
+                                onClick={() => handleNavClick(tool.id)}
+                            >
+                                {cardContent}
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
+
                 </div>
 
                 {/* Recent Activity */}

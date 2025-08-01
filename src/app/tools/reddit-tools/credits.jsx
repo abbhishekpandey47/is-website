@@ -1,40 +1,56 @@
+import { Button } from "@headlessui/react";
 
-import {
-    Target,
-    Search,
-    LineChart,
-    MessageCircle
-} from 'lucide-react';
 
 export default function Credits({ handleNavClick }) {
     const tools = [
         {
             id: 'new-post',
             title: 'New Post Generator',
-            description: 'AI generates Reddit post titles based on any company website',
-            icon: <Target className="w-6 h-6 stroke-gray-600" />,
-            tags: ['AI', 'Reddit Posts', 'Copywriting']
+            description: 'Offer ends: 0 days: 9 hrs: 26 mins 1 secs',
+            boldTitle: "Trial",
+            price: "$100",
+            discount: "$25",
+            buttonText: "Buy 75 Credits"
         },
         {
             id: 'competitor',
             title: 'Competitor Analysis',
-            description: 'Analyze where, how, and with what content competitors get traction',
-    icon: <Search className="w-6 h-6 stroke-gray-600" />,
-            tags: ['Brand Visibility', 'Subreddits']
+            description: 'Offer ends: 0 days: 9 hrs: 26 mins 1 socs',
+            boldTitle: "Startup",
+            price: "$200",
+            discount: "$50",
+            buttonText: "Buy 150 Credits"
+
         },
         {
             id: 'current-retions',
             title: 'Check Current Retions',
-            description: 'See where your brand is getting mentioned in Reddit threads',
-    icon: <LineChart className="w-6 h-6 stroke-gray-600" />,
-            tags: ['Brand Monitoring', 'Buzz Tracking']
+            description: 'Offer ends: 0 days 19 hrs: 26 mins 1 secs',
+            boldTitle: "Serious Business",
+            price: "$400",
+            discount: "$100",
+            buttonText: "Buy 300 Credits"
+
         },
         {
             id: 'post-commentor',
             title: 'Post Commentor',
-            description: 'Generate customizable comments for any thread paste',
-    icon: <MessageCircle className="w-6 h-6 stroke-gray-600" />,
-            tags: ['AI', 'Reddit Contents', 'Growth Analytics']
+            description: 'Offer ends: 0 days: 9 hrs: 26 mins 1 secs',
+            boldTitle: "Growth Co",
+            price: "$800",
+            discount: "$200",
+            buttonText: "Buy 600 Credits"
+
+        },
+        {
+            id: 'post-commentor',
+            title: 'Post Commentor',
+            description: 'Offer ends: 0 days: 9 hrs: 26 mins 1 secs',
+            boldTitle: "Business Titan",
+            price: "$4000",
+            discount: "$1000",
+            buttonText: "Buy 2000 Credits"
+
         }
     ];
 
@@ -48,93 +64,40 @@ export default function Credits({ handleNavClick }) {
         <div className="flex-1 p-4 sm:p-6 lg:p-8 bg-gray-50">
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
-                <div className="text-center mb-6 sm:mb-8">
-                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
-                        Hi, XYZ 👋
+                <div className="text-lrft mb-6">
+                    <h1 className="text-xl font-bold text-gray-900">
+                        Buy Credits
                     </h1>
-                    <p className="text-lg sm:text-xl text-gray-600">
-                        Let's make Reddit your growth engine!
+                    <p className="text-md text-gray-600">
+                        Out of credits? Let's get you back on track!
                     </p>
                 </div>
 
                 {/* Tools Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6 mb-8 sm:mb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-6 mb-8 sm:mb-12">
                     {tools.map((tool) => (
                         <div
                             key={tool.id}
                             className="bg-white/20 rounded-xl p-4 md:px-6  shadow-sm border border-gray-500/20 hover:border-gray-500 transition-shadow cursor-pointer"
                             onClick={() => handleNavClick(tool.id)}
                         >
-                            <div className="mb-2 md:mb-2">{tool.icon}</div>
-                            <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{tool.title}</h3>
-                            <p className="text-[13px] font-[480] text-[#666666] mb-3 sm:mb-4">{tool.description}</p>
-                            <div className="flex flex-wrap gap-1 md:gap-1">
-                                {tool.tags.map((tag, index) => (
-                                    <span
-                                        key={index}
-                                        className="px-2 py-1 md:py-[2px] text-gray-700 text-xs rounded-full border border-gray-500/20"
-                                    >
-                                        {tag}
-                                    </span>
-                                ))}
+                            <div className="mb-2 text-2xl font-bold text-gray-900">{tool.boldTitle}</div>
+                            <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                                <span className="text-xs line-through text-gray-500">{tool.discount}</span>
+                                <span className="text-2xl font-bold text-green-600">{tool.price}</span>
+
                             </div>
+                            <div className="flex mb-2">
+                               <Button className="w-full text-black bg-gray-800/5 border border-gray-600/20 p-1 rounded-xl">{tool.buttonText}</Button>
+                            </div>
+                            <span className="bg-gray-600/5 px-2 py-1 md:py-[2px] text-gray-700 text-xs rounded-full border border-gray-500/20" >
+                                {tool.description}
+                            </span>
+                            
                         </div>
                     ))}
                 </div>
 
-                {/* Recent Activity */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-                    <div className="p-4 sm:p-6 border-b border-gray-100">
-                        <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Recent Activity</h2>
-                    </div>
-
-                    {/* Mobile Card View */}
-                    <div className="block sm:hidden">
-                        {recentActivity.map((activity, index) => (
-                            <div key={index} className="p-4 border-b border-gray-100 last:border-b-0">
-                                <div className="space-y-2">
-                                    <div className="font-medium text-gray-900 text-sm">{activity.url}</div>
-                                    <div className="text-gray-600 text-sm">{activity.tool}</div>
-                                    <div className="text-gray-500 text-xs">{activity.time}</div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Desktop Table View */}
-                    <div className="hidden sm:block overflow-x-auto">
-                        <table className="w-full">
-                            <thead className="bg-gray-50">
-                                <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        URL/Domain
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Tool Used
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Last Edited
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {recentActivity.map((activity, index) => (
-                                    <tr key={index} className="hover:bg-gray-50">
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {activity.url}
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                            {activity.tool}
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {activity.time}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
         </div>
     )
