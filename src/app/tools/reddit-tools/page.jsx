@@ -9,13 +9,18 @@ import NewPost from './newPost';
 import Competitor from './competitor';
 import Current from './current';
 import Mentions from './mentions';
+import { useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+
 import {
     Home,
     Sparkles,
     BarChart2,
     Search,
-    MessageCircle
+    MessageCircle,
+    NotebookIcon
 } from 'lucide-react';
+import Credits from './credits';
 
 
 const Dashboard = () => {
@@ -25,16 +30,30 @@ const Dashboard = () => {
 
     const navigationItems = [
         { id: 'home', label: 'Home', icon: <Home className="w-5 h-5 stroke-gray-600" /> },
-        { id: 'new-post', label: 'New Post Generator', icon: <Sparkles className="w-5 h-5 stroke-gray-600" /> },
+        { id: 'new-post', label: 'New Post Generator', icon: <NotebookIcon className="w-5 h-5 stroke-gray-600" /> },
         { id: 'competitor', label: 'Competitor Analysis', icon: <BarChart2 className="w-5 h-5 stroke-gray-600" /> },
         { id: 'current', label: 'Check Current', icon: <Search className="w-5 h-5 stroke-gray-600" /> },
-        { id: 'mentions', label: 'Mentions', icon: <MessageCircle className="w-5 h-5 stroke-gray-600" /> }
+        { id: 'mentions', label: 'Mentions', icon: <MessageCircle className="w-5 h-5 stroke-gray-600" /> },
+        { id: 'credits', label: 'Credits', icon: <Sparkles className="w-5 h-5 stroke-gray-600" /> },
+
     ];
 
-    const handleNavClick = (tabId) => {
-        setActiveTab(tabId);
-        setSidebarOpen(false); // Close sidebar on mobile after selection
-    };
+    const searchParams = useSearchParams();
+
+useEffect(() => {
+  const tabFromURL = searchParams.get('tab');
+  if (tabFromURL) {
+    setActiveTab(tabFromURL);
+  }
+}, [searchParams]);
+
+
+const handleNavClick = (tabId) => {
+  setActiveTab(tabId);
+  setSidebarOpen(false);
+  router.push(`?tab=${tabId}`, { scroll: false }); // Optional: scroll false keeps scroll position
+};
+
 
 
     const renderContent = () => {
@@ -64,6 +83,11 @@ const Dashboard = () => {
                     <Mentions />
                 );
 
+            case "credits":
+                return (
+                    <h1>Hello</h1>
+                )
+
             default:
                 return null;
         }
@@ -71,25 +95,7 @@ const Dashboard = () => {
 
     return (
         <div className="relative min-h-screen bg-[#f6f8fc] flex">
-            {/* Mobile Menu Button */}
-            {/* <button
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="lg:hidden fixed top-40 right-10 z-50 p-2 bg-white rounded-md shadow-md"
-            >
-                <div className="w-6 h-6 flex flex-col justify-center">
-                    <span className={`bg-gray-800 block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${sidebarOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'}`}></span>
-                    <span className={`bg-gray-800 block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${sidebarOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-                    <span className={`bg-gray-800 block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${sidebarOpen ? '-rotate-45 -translate-y-1' : 'translate-y-0.5'}`}></span>
-                </div>
-            </button> */}
-            {/* Mobile Overlay */}
-            {/* {sidebarOpen && (
-                <div
-                    className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
-                    onClick={() => setSidebarOpen(false)}
-                ></div>
-            )} */}
-
+          
             {/* Sidebar */}
 <div
   className={`
@@ -103,7 +109,7 @@ const Dashboard = () => {
 >
 
 
-                <div className="p-2 md:p-4">
+                <div className="p-4 md:p-4">
                     <div className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8 mt-8 lg:mt-0">
                         <Image
                             loading="lazy"
@@ -117,7 +123,7 @@ const Dashboard = () => {
                             <button
                                 key={item.id}
                                 onClick={() => handleNavClick(item.id)}
-                                className={`w-full text-left px-1 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors flex items-center space-x-2 sm:space-x-3 text-sm sm:text-base ${activeTab === item.id
+                                className={`w-full text-left px-3 py-2 sm:py-3 rounded-lg transition-colors flex items-center space-x-2 sm:space-x-3 text-sm sm:text-base ${activeTab === item.id
                                     ? 'bg-blue-50 text-blue-700'
                                     : 'text-gray-600 hover:bg-gray-50'
                                     }`}
