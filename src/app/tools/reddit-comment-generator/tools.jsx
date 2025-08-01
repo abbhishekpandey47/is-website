@@ -12,7 +12,7 @@ export default function ToolsSection() {
       description: "Calculate how much you can save by outsourcing technical content for your DevTool, Infra, or AI Startup, in just 10 seconds.",
       iconColor: "text-blue-500",
       iconBg: "bg-blue-500/10",
-      link: "/roi-cal"
+      link: "/tools/roi-cal"
     },
     {
       id: 2,

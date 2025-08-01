@@ -200,7 +200,7 @@ const menuLinksArrServices = [
 
 const toolsTab = [
   {
-    hrefLink: "/roi-cal",
+    hrefLink: "/tools/roi-cal",
     menuName: "ROI Calculator",
   },
   {
@@ -536,13 +536,13 @@ const Navbar = () => {
                             onClick={(e) => {
                               e.preventDefault();
                               handleServiceClick(
-                                "/roi-cal"
+                                "/tools/roi-cal"
                               );
                             }}
-                            href="/roi-cal"
+                            href="/tools/roi-cal"
                             className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
                             target={
-                              "/roi-cal".includes(
+                              "/tools/roi-cal".includes(
                                 "http"
                               )
                                 ? "_blank"
@@ -632,9 +632,9 @@ const Navbar = () => {
                         closeMobileMenu();
                         checkVisitPage("/roi-cal");
                       }}
-                      href="/roi-cal"
+                      href="/tools/roi-cal"
                       className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                      target={"/roi-cal".includes("http") ? "_blank" : ""}
+                      target={"/tools/roi-cal".includes("http") ? "_blank" : ""}
                     >
                       {"ROI Calculator"}
                     </Link>
