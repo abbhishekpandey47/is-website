@@ -330,7 +330,7 @@ const RedditPostTemplate = () => {
           100% { transform: rotate(360deg); }
         }
       `}</style>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">Free Reddit Comment Generator</h1>
@@ -540,7 +540,7 @@ const RedditPostTemplate = () => {
             <div className='bg-white/10 m-4 pt-2 rounded-xl border border-white/10 flex items-center justify-center min-h-[500px] relative'>
               <div className="w-full flex flex-col items-center justify-center">
                 <div className={generatedComment ? "" : "flex items-center justify-center min-h-[350px] w-full"}>
-                  <div className="bg-black/40 border border-white/10 rounded-lg p-4 w-full max-w-[400px] mx-auto">
+                  <div className="bg-black/40 border border-white/10 rounded-lg p-4 w-full max-w-[500px] mx-auto">
                     {/* Reddit Post Preview */}
                     <div className="flex justify-between items-center gap-3">
                       <div className="flex items-center gap-3">
@@ -550,15 +550,9 @@ const RedditPostTemplate = () => {
                           className="w-9 h-9 rounded-full"
                         />
                         <div className="flex-1 mb-1">
-                          <div className="flex items-start mb-1">
+                          <div className="flex flex-col items-start mb-1">
                             <span className="text-white text-[14px] font-semibold">{"u/InfrasityAgent"}</span>
-                          </div>
-                          <div className="flex gap-0">
-                            <img
-                              src="https://postfully.app/_astro/reddit-awards.BPz5fCNF.png"
-                              alt="Awards"
-                              className="w-36 h-3"
-                            />
+                            <span className="text-gray-400 text-xs block mt-[-2px]">Just Now</span>
                           </div>
                         </div>
                       </div>
@@ -582,6 +576,12 @@ const RedditPostTemplate = () => {
                         </div>
                       ) : "Create your custom Reddit story"}
                     </h3>
+                    {generatedComment && (
+                      <div className="flex justify-between items-center mt-2 text-xs text-gray-400 px-1">
+                        <span>Tone: {tone.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</span>
+                        <span>Word Count: {generatedComment.split(/\s+/).filter(Boolean).length}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
