@@ -50,9 +50,13 @@ const RedditPostTemplate = () => {
   const [urlError, setUrlError] = useState("");
   const [fetchLoading, setFetchLoading] = useState(false);
   const [generateLoading, setGenerateLoading] = useState(false);
-  const [sentiment, setSentiment] = useState("agree");
+  const [tone, setTone] = useState("default");
   const CONTEXT_CHAR_LIMIT = 250;
   const EMBED_URL_CHAR_LIMIT = 200;
+
+  const isValidRedditUrl = url => {
+    return /^https?:\/\/(www\.)?reddit\.com\/r\/.+\/comments\/.+/.test(url.trim());
+  };
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -65,7 +69,7 @@ const RedditPostTemplate = () => {
   const handleFetchDetails = async () => {
     setFetchLoading(true);
     setError("");
-    setGeneratedComment("");
+    setGeneratedComment(""); // Reset comment so button label resets
     setDetailsFetched(false);
     setPostDetails({
       post_title: '',
@@ -80,6 +84,11 @@ const RedditPostTemplate = () => {
     setThreadSummary("");
     setTopComment(null);
     setCopySuccess("");
+    if (!isValidRedditUrl(formData.subreddit)) {
+      setError("Invalid Reddit URL. Please enter a valid Reddit thread link.");
+      setFetchLoading(false);
+      return;
+    }
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 60000);
     try {
@@ -93,8 +102,20 @@ const RedditPostTemplate = () => {
       });
       clearTimeout(timeoutId);
       if (!res.ok) {
+        let errMsg = "";
         const errData = await res.json().catch(() => null);
-        setError(errData?.detail || "Error: " + res.statusText);
+        if (res.status === 404) {
+          errMsg = "Post not found. Please check the link.";
+        } else if (res.status === 400) {
+          if (errData?.detail?.includes("extract post ID") || errData?.detail?.toLowerCase().includes("invalid reddit url")) {
+            errMsg = "Invalid Reddit URL. Please enter a valid Reddit thread link.";
+          } else {
+            errMsg = errData?.detail || "Bad request.";
+          }
+        } else {
+          errMsg = errData?.detail || "Unexpected error. Please try again.";
+        }
+        setError(errMsg);
         setFetchLoading(false);
         return;
       }
@@ -115,7 +136,7 @@ const RedditPostTemplate = () => {
       if (err.name === "AbortError") {
         setError("Request timed out. Please try again later.");
       } else {
-        setError("Network error. Please try again.");
+        setError("Network error. Please check your connection and try again.");
       }
     } finally {
       clearTimeout(timeoutId);
@@ -160,14 +181,22 @@ const RedditPostTemplate = () => {
           word_count: wordCount,
           extra_context: extraContext || undefined,
           embed_url: embedUrl || undefined,
-          sentiment: sentiment
+          tone: tone
         }),
         signal: controller.signal
       });
       clearTimeout(timeoutId);
       if (!res.ok) {
+        let errMsg = "";
         const errData = await res.json().catch(() => null);
-        setError(errData?.detail || "Error: " + res.statusText);
+        if (res.status === 404) {
+          errMsg = "Post not found. Please check the link.";
+        } else if (res.status === 400) {
+          errMsg = errData?.detail?.includes("extract post ID") ? "Invalid Reddit URL. Please check the link." : (errData?.detail || "Bad request.");
+        } else {
+          errMsg = errData?.detail || "Unexpected error. Please try again.";
+        }
+        setError(errMsg);
         setGenerateLoading(false);
         return;
       }
@@ -189,7 +218,7 @@ const RedditPostTemplate = () => {
       if (err.name === "AbortError") {
         setError("Request timed out. Please try again later.");
       } else {
-        setError("Network error. Please try again.");
+        setError("Network error. Please check your connection and try again.");
       }
     } finally {
       clearTimeout(timeoutId);
@@ -308,23 +337,6 @@ const RedditPostTemplate = () => {
           <p className="text-gray-400">No more getting downvoted or reported. Generate human-like, natural Reddit comments and posts that blend in with real conversations keeping you off the downvote and report radar.</p>
         </div>
 
-        {/* Beta Notice */}
-        <div className="bg-white/10 border border-white/20 hover:border-[#3c4199ee] rounded-lg p-4 mb-6 backdrop-blur-sm">
-          <div className="md:flex items-center justify-between">
-            <div className='w-full md:w-[80%]'>
-              <h3 className="text-white font-medium flex items-center gap-2">
-                Reddit Story Template V2 (Beta) is here 🎉
-              </h3>
-              <p className="text-gray-400 text-sm mt-1">
-                We've listened to your feedback and built the most advanced Reddit Story Template with text styles, drop shadow, font weight and many more customization options.
-              </p>
-            </div>
-            <button className="bg-[#3c4199] hover:bg-[#3c4199ee] text-white px-4 py-2  mt-4 md:mt-0 rounded-lg text-sm font-medium transition-colors">
-              Try it now
-            </button>
-          </div>
-        </div>
-
         <div className="bg-black border border-white/20 hover:border-[#3c4199ee] rounded-2xl backdrop-blur-sm">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
             {/* Left Side - Form */}
@@ -384,14 +396,20 @@ const RedditPostTemplate = () => {
 
               {/* Tonality Dropdown */}
               <div className="mb-6">
-                <label className="block text-white font-medium mb-2">Tonality for the AI</label>
+                <label className="block text-white font-medium mb-2">Comment Tone</label>
                 <select
                   className="w-full bg-black/30 border border-white/20 rounded-lg p-2 text-white focus:border-[#3c4199ee] focus:outline-none"
-                  value={sentiment}
-                  onChange={e => setSentiment(e.target.value)}
+                  value={tone}
+                  onChange={e => setTone(e.target.value)}
                 >
-                  <option value="agree">Agree</option>
-                  <option value="disagree">Disagree</option>
+                  <option value="default">Default</option>
+                  <option value="witty">Witty</option>
+                  <option value="formal">Formal</option>
+                  <option value="technical">Technical</option>
+                  <option value="casual">Casual</option>
+                  <option value="supportive">Supportive</option>
+                  <option value="respectfully_disagree">Respectfully Disagree</option>
+                  <option value="soft_promotional">Soft Promotional</option>
                 </select>
               </div>
 
@@ -490,7 +508,7 @@ const RedditPostTemplate = () => {
                       <span className="loader inline-block w-5 h-5 rounded-full border-4 border-white border-t-[#3c4199] animate-spin"></span>
                       <span>Loading...</span>
                     </span>
-                  ) : "Generate Comment"}
+                  ) : (generatedComment ? "Regenerate Comment" : "Generate Comment")}
                 </button>
               )}
               <div className="w-full flex flex-col items-center justify-center">
