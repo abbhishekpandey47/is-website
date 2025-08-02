@@ -11,6 +11,7 @@ import DownloadPDF from "./download";
 import Testimonials from "../gtm-content-services-for-yc-startups/testimonials";
 import FAQSection from "./FAQ";
 import StatsSection from "./numbers";
+import RedditComment from "./redditComment";
 
 
 export default function Page() {
@@ -24,6 +25,7 @@ export default function Page() {
             <RedditServiceCards />
             <StatsSection />
             <DownloadPDF />
+            <RedditComment />
             <Testimonials />
             <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] mb-10"></div>
             <Cta />
