@@ -58,7 +58,7 @@ export default function Home2({ handleNavClick }) {
                         Hi, XYZ 👋
                     </h1>
                     <p className="text-lg sm:text-xl text-gray-600">
-                        Let's make Reddit your growth engine!
+                        Let's make <span className="text-[#ff4500]">Reddit</span> your growth engine!
                     </p>
                 </div>
 

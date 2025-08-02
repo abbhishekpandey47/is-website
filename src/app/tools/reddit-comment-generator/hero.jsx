@@ -333,7 +333,7 @@ const RedditPostTemplate = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">Free Reddit Comment Generator</h1>
+          <h1 className="text-4xl font-bold text-white mb-2">Free <span className="text-[#ff4500]">Reddit</span> Comment Generator</h1>
           <p className="text-gray-400">No more getting downvoted or reported. Generate human-like, natural Reddit comments and posts that blend in with real conversations keeping you off the downvote and report radar.</p>
         </div>
 
@@ -483,9 +483,9 @@ const RedditPostTemplate = () => {
                   {urlError && <div className="text-red-400 mt-1 text-xs">{urlError}</div>}
                 </div>
                 {/* Generate and Reset Buttons */}
-                <div className="flex flex-col gap-2 mb-1">
+                <div className="">
                   <button
-                    className="bg-[#3c4199] hover:bg-[#3c4199ee] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    className="bg-[#3c4199] hover:bg-[#3c4199ee] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer"
                     onClick={handleGenerateComment}
                     disabled={generateLoading || !formData.subreddit.trim()}
                     style={{ minWidth: 140 }}
@@ -497,7 +497,11 @@ const RedditPostTemplate = () => {
                       </span>
                     ) : (generatedComment ? "Regenerate Comment" : "Generate Comment")}
                   </button>
-                  <button
+                </div>
+              </div>
+
+<div className='flex justify-center items-center mb-3'>
+   <button
                     className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                     onClick={() => {
                       setFormData({ subreddit: '', text: '', upvotes: '', comments: '', type: 'Story', badge: 'No badge' });
@@ -524,9 +528,7 @@ const RedditPostTemplate = () => {
                   >
                     Reset
                   </button>
-                </div>
-              </div>
-
+</div>
               {/* Text */}
 
 

@@ -8,7 +8,7 @@ export default function RedditComment() {
         {/* Left Side Content */}
         <div className="flex-1 max-w-2xl mb-14 md:mb-0 text-center md:text-left">
           <h1 className="font-[quicksand] text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
-          Try Our New Reddit Comment Generator
+          Try Our New <br /><span className="text-[#ff4500]">Reddit</span> Comment Generator
             <br />
            
           </h1>
@@ -23,14 +23,14 @@ export default function RedditComment() {
             Drive authentic engagement with smart, subreddit-aware replies
           </p>
           
-          <Link href="/tools/reddit-comment-generator" className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+          <Link href="/tools/reddit-comment-generator" className="bg-[#3c4199] hover:opacity-80 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
             Reddit Comment Generator
           </Link>
         </div>
         
         {/* Right Side - Placeholder for your image */}
         <div className="flex-1 flex justify-center md:justify-end">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center shadow-2xl shadow-gray-100/20">
             <Image
                 src={`/reddit/reddit-comment.png`}
             height={500}
