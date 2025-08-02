@@ -377,7 +377,7 @@ const RedditPostTemplate = () => {
               </div>
 
               {/* Post Details and Top Comment moved up */}
-              <div className="bg-black/40 p-4 border border-white/10 rounded-t-xl mb-0">
+              <div className="bg-black/40 p-4 border border-white/20 rounded-xl mb-2">
                 <div>
                   <h2 className='font-semibold'>Post Details</h2>
                   <p className='font-light tracking-wider'>{postDetails.post_title || "No post title found."}</p>
@@ -394,7 +394,7 @@ const RedditPostTemplate = () => {
                   </div>
                 </div>
               </div>
-              <div className="mb-6 bg-black/40 p-4 border-l border-r border-b border-white/20 rounded-b-xl">
+              <div className="mb-6 bg-black/40 p-4 border border-white/20 rounded-xl">
                 <div className="flex items-center gap-1">
                   <svg className='h-4 w-4' viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 19H1.871a.886.886 0 0 1-.798-.52.886.886 0 0 1 .158-.941L3.1 15.771A9 9 0 1 1 10 19Zm-6.549-1.5H10a7.5 7.5 0 1 0-5.323-2.219l.54.545L3.451 17.5Z" fill="#ffff"></path></svg>
                   <span className='font-semibold'>Top Comment</span>
