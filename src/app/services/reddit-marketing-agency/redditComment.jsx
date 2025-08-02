@@ -8,19 +8,19 @@ export default function RedditComment() {
         {/* Left Side Content */}
         <div className="flex-1 max-w-2xl mb-14 md:mb-0 text-center md:text-left">
           <h1 className="font-[quicksand] text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
-            Real-world AI starts
+          Try Our New Reddit Comment Generator
             <br />
-            with time series.
+           
           </h1>
           
           <p className="font-[quicksand] text-xl text-gray-300 mb-4 font-medium">
-            Time series starts with InfluxDB.
+            Build Reddit authority with smart, context-aware replies.
           </p>
           
           <p className="font-[quicksand] text-lg text-gray-400 mb-12 leading-relaxed">
-            Join the millions of developers building real-time systems
+          Get more eyes on your brand by showing up in top Reddit conversations — the smart way.
             <br />
-            with InfluxDB, the leading time series database.
+            Drive authentic engagement with smart, subreddit-aware replies
           </p>
           
           <Link href="/tools/reddit-comment-generator" className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
