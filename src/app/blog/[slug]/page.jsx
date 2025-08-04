@@ -10,6 +10,7 @@ import Featured from "./featured";
 import authorMetadata from "../../../../posts/_authorData";
 import NotFound from "./NotFound";
 import Image from "next/image";
+import CTA from "./cta";
 
 // Utility function to check if the post file exists
 const isValid = (slug) => {
@@ -184,8 +185,11 @@ const PostPage = (props) => {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
         <div className=" flex justify-center items-center">
-          <BookDemo />
+       {postData.slug !== "aeo-vs-seo" ? 
+          <BookDemo /> : <CTA />
+        }
         </div>
+        
       </div>
       <div className="mb-24"></div>
     </>
