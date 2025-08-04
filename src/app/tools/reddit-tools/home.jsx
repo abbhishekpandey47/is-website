@@ -31,7 +31,7 @@ export default function Home2({ handleNavClick }) {
             tags: ['Brand Monitoring', 'Buzz Tracking']
         },
         {
-            link: "/tools/reddit-comment-generator",
+            link: "/tools/reddit-tools?tab=reddit-commnet",
             title: 'Post Commentor',
             description: 'Generate customizable comments for any thread paste',
             icon: <MessageCircle className="w-6 h-6 stroke-gray-600" />,
