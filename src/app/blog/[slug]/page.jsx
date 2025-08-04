@@ -13,6 +13,7 @@ import NotFound from "./NotFound";
 import Image from "next/image";
 import CTA from "./cta";
 
+// Utility function to check if the post file exists
 const isValid = (slug) => {
   try {
     const folder = "posts/";
@@ -43,6 +44,7 @@ const getPostContent = (slug) => {
   }
 };
 
+// Generate static paths for dynamic routes - ONLY for blog posts and tutorials
 export const generateStaticParams = async () => {
   try {
     if (!postMetaData || !Array.isArray(postMetaData)) {
@@ -52,6 +54,7 @@ export const generateStaticParams = async () => {
 
     const validPosts = postMetaData
       .filter((post) => {
+        // Check if post has required fields and is not a case study
         return post && 
                post.slug && 
                post.category !== "Case Studies" &&
@@ -69,6 +72,7 @@ export const generateStaticParams = async () => {
   }
 };
 
+// Dynamically generate metadata for each post
 export async function generateMetadata({ params }) {
   try {
     if (!params || !params.slug) {
@@ -140,18 +144,22 @@ const PostPage = (props) => {
       return notFound();
     }
 
+    // Check if postMetaData is available
     if (!postMetaData || !Array.isArray(postMetaData)) {
       console.error("postMetaData is not available or not an array");
       return notFound();
     }
 
+    // Get the post data and check its category
     const postData = postMetaData.find((element) => element.slug === slug);
 
+    // If not found, show 404
     if (!postData) {
       console.error(`Post data not found for slug: ${slug}`);
       return notFound();
     }
 
+    // If this is a case study, redirect to the case study version
     if (postData.category === "Case Studies") {
       return redirect(`/case-studies/${slug}`);
     }
@@ -163,6 +171,7 @@ const PostPage = (props) => {
       return notFound();
     }
 
+    // Safely get author data
     let authorObj = null;
     if (authorMetadata && Array.isArray(authorMetadata) && postData.authorId) {
       authorObj = authorMetadata.find(
@@ -170,6 +179,7 @@ const PostPage = (props) => {
       );
     }
 
+    // Safely assign author properties
     if (authorObj) {
       postData.authorName = authorObj.name || "";
       postData.authorImage = authorObj.profilePic || "";
@@ -225,23 +235,24 @@ const PostPage = (props) => {
 
                               const normalizedHeading = String(headingText).trim().toLowerCase();
 
+                              // Find the index of this heading in the headingLines array
                               const headingIndex = headingLines.findIndex(line =>
                                 line.replace('## ', '').trim().toLowerCase() === normalizedHeading
                               );
                               
-                              // Check if this is the thirs heading (index 2)
-                              const isSecondHeading = headingIndex === 2;
+                              // Check if this is the second heading (index 1)
+                              const isSecondHeading = headingIndex === 3;
 
                               return (
                                 <>
-                                  <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">
-                                    {children}
-                                  </h2>
                                   {isSecondHeading && (
-                                    <div className="my-8">
+                                    <div className="my-8 mb-10">
                                       <CTA />
                                     </div>
                                   )}
+                                  <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">
+                                    {children}
+                                  </h2>
                                 </>
                               );
                             } catch (error) {
@@ -254,6 +265,7 @@ const PostPage = (props) => {
                         img: {
                           component: ({ src, alt, ...props }) => {
                             try {
+                              // Safety checks
                               if (!src || typeof src !== 'string') {
                                 return <div className="text-gray-500">Image not available</div>;
                               }
