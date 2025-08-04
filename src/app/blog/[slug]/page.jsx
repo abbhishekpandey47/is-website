@@ -1,7 +1,8 @@
 import fs from "fs";
+import path from "path";
 import Markdown from "markdown-to-jsx";
 import matter from "gray-matter";
-import { notFound, redirect } from "next/navigation"; // Add this import
+import { notFound, redirect } from "next/navigation";
 import postMetaData from "../../../../posts/_postMetadata";
 import Outline from "./outline";
 import HeadBanner from "./headBanner";
@@ -12,224 +13,321 @@ import NotFound from "./NotFound";
 import Image from "next/image";
 import CTA from "./cta";
 
-// Utility function to check if the post file exists
 const isValid = (slug) => {
-  const folder = "posts/";
-  const file = `${folder}${slug}.md`;
-  return fs.existsSync(file);
+  try {
+    const folder = "posts/";
+    const file = path.join(process.cwd(), folder, `${slug}.md`);
+    return fs.existsSync(file);
+  } catch (error) {
+    console.error(`Error checking file existence for slug: ${slug}`, error);
+    return false;
+  }
 };
 
 // Function to retrieve the post content
 const getPostContent = (slug) => {
-  const folder = "posts/";
-  const file = `${folder}${slug}.md`;
-  const content = fs.readFileSync(file, "utf8");
-  const matterResult = matter(content);
-  return matterResult.content;
+  try {
+    const folder = "posts/";
+    const file = path.join(process.cwd(), folder, `${slug}.md`);
+    
+    if (!fs.existsSync(file)) {
+      throw new Error(`Post file not found: ${file}`);
+    }
+    
+    const content = fs.readFileSync(file, "utf8");
+    const matterResult = matter(content);
+    return matterResult.content;
+  } catch (error) {
+    console.error(`Error reading post content for slug: ${slug}`, error);
+    return "";
+  }
 };
 
-// Generate static paths for dynamic routes - ONLY for blog posts and tutorials
 export const generateStaticParams = async () => {
-  return postMetaData
-    .filter((post) => post.category !== "Case Studies")
-    .map((post) => ({
-      slug: post.slug,
-    }));
+  try {
+    if (!postMetaData || !Array.isArray(postMetaData)) {
+      console.error("postMetaData is not available or not an array");
+      return [];
+    }
+
+    const validPosts = postMetaData
+      .filter((post) => {
+        return post && 
+               post.slug && 
+               post.category !== "Case Studies" &&
+               isValid(post.slug);
+      })
+      .map((post) => ({
+        slug: post.slug,
+      }));
+
+    console.log(`Generated ${validPosts.length} static params for blog posts`);
+    return validPosts;
+  } catch (error) {
+    console.error("Error in generateStaticParams:", error);
+    return [];
+  }
 };
 
-// Dynamically generate metadata for each post
 export async function generateMetadata({ params }) {
-  const post = postMetaData.find((element) => element.slug === params.slug);
+  try {
+    if (!params || !params.slug) {
+      return {
+        title: "Post Not Found",
+        description: "Invalid post parameters.",
+      };
+    }
 
-  if (!post) {
+    if (!postMetaData || !Array.isArray(postMetaData)) {
+      return {
+        title: "Post Not Found",
+        description: "Post metadata not available.",
+      };
+    }
+
+    const post = postMetaData.find((element) => element.slug === params.slug);
+
+    if (!post) {
+      return {
+        title: "Post Not Found",
+        description: "The post you are looking for does not exist.",
+      };
+    }
+
+    if (post.category === "Case Studies") {
+      return {
+        title: "Invalid Route",
+        description:
+          "This content is a case study and should be accessed through the case-studies route.",
+      };
+    }
+
     return {
-      title: "Post Not Found",
-      description: "The post you are looking for does not exist.",
+      title: post.metatitle || post.title || "Blog Post",
+      description: post.description || "Blog post description",
+      openGraph: {
+        title: post.title || "Blog Post",
+        description: post.metaDescription || post.description || "Blog post description",
+        images: [
+          {
+            url: post.ogImage || "/blog_home/blog_home.png",
+          },
+        ],
+      },
+    };
+  } catch (error) {
+    console.error("Error in generateMetadata:", error);
+    return {
+      title: "Error",
+      description: "An error occurred while generating metadata.",
     };
   }
-
-  if (post.category === "Case Studies") {
-    return {
-      title: "Invalid Route",
-      description:
-        "This content is a case study and should be accessed through the case-studies route.",
-    };
-  }
-
-
-
-  return {
-    title: post.metatitle || post.title,
-    description: post.description,
-    openGraph: {
-      title: post.title,
-      description: post.metaDescription,
-      images: [
-        {
-          url: post.ogImage || "/blog_home/blog_home.png",
-        },
-      ],
-    },
-  };
 }
-
 
 // Main PostPage component
 const PostPage = (props) => {
-  const slug = props.params.slug;
+  try {
+    const slug = props?.params?.slug;
 
-  // Check if the post exists
-  if (!isValid(slug)) {
-    return notFound();
-  }
+    if (!slug) {
+      console.error("No slug provided in params");
+      return notFound();
+    }
 
-  // Get the post data and check its category
-  const postData = postMetaData.find((element) => element.slug === slug);
+    // Check if the post exists
+    if (!isValid(slug)) {
+      console.error(`Post file not found for slug: ${slug}`);
+      return notFound();
+    }
 
-  // If not found, show 404
-  if (!postData) {
-    return notFound();
-  }
+    if (!postMetaData || !Array.isArray(postMetaData)) {
+      console.error("postMetaData is not available or not an array");
+      return notFound();
+    }
 
-  // If this is a case study, redirect to the case study version
-  if (postData.category === "Case Studies") {
-    return redirect(`/case-studies/${slug}`);
-  }
+    const postData = postMetaData.find((element) => element.slug === slug);
 
-  const postContent = getPostContent(slug);
-  const authorObj = authorMetadata.find(
-    (element) => element.authorId === postData.authorId
-  );
-  postData.authorName = authorObj.name;
-  postData.authorImage = authorObj.profilePic;
-  postData.authorLinkedin = authorObj.linkedIn;
+    if (!postData) {
+      console.error(`Post data not found for slug: ${slug}`);
+      return notFound();
+    }
 
-  // Get outline
-  const headingLines = postContent
-    .split('\n')
-    .filter((line) => line.startsWith('## '));
+    if (postData.category === "Case Studies") {
+      return redirect(`/case-studies/${slug}`);
+    }
 
-  const secondHeadingText = headingLines[1]?.replace('## ', '').trim();
+    const postContent = getPostContent(slug);
+    
+    if (!postContent) {
+      console.error(`Post content could not be loaded for slug: ${slug}`);
+      return notFound();
+    }
 
-  return (
-    <>
-      <div className="pt-32 flex flex-col justify-center items-center">
-        <HeadBanner postData={postData} />
-        <div className="flex justify-around w-full pb-16 px-10 max-lg:flex-col">
-          <div className=" max-lg:w-full max-lg:flex justify-center">
-            {<Outline content={postContent} />}
-          </div>
-          <div className="h-auto hidden max-lg:flex max-lg:justify-center">
-            <div className="w-[84vw]">
-              <img
-                src={
-                  postData.ogImage ||
-                  "https://www.infrasity.com/wp-content/uploads/2024/09/Untitled-design-1-1.png"
-                }
-                alt="Content Illustration"
-                className="w-full h-auto text-center"
-              />
+    let authorObj = null;
+    if (authorMetadata && Array.isArray(authorMetadata) && postData.authorId) {
+      authorObj = authorMetadata.find(
+        (element) => element.authorId === postData.authorId
+      );
+    }
+
+    if (authorObj) {
+      postData.authorName = authorObj.name || "";
+      postData.authorImage = authorObj.profilePic || "";
+      postData.authorLinkedin = authorObj.linkedIn || "";
+    } else {
+      postData.authorName = "";
+      postData.authorImage = "";
+      postData.authorLinkedin = "";
+    }
+
+    // Get outline - Extract headings safely
+    let headingLines = [];
+    if (postContent && typeof postContent === 'string') {
+      headingLines = postContent
+        .split('\n')
+        .filter((line) => line.startsWith('## '))
+        .map(line => line.trim());
+    }
+
+    return (
+      <>
+        <div className="pt-32 flex flex-col justify-center items-center">
+          <HeadBanner postData={postData} />
+          <div className="flex justify-around w-full pb-16 px-10 max-lg:flex-col">
+            <div className=" max-lg:w-full max-lg:flex justify-center">
+              <Outline content={postContent} />
+            </div>
+            <div className="h-auto hidden max-lg:flex max-lg:justify-center">
+              <div className="w-[84vw]">
+                <img
+                  src={
+                    postData.ogImage ||
+                    "https://www.infrasity.com/wp-content/uploads/2024/09/Untitled-design-1-1.png"
+                  }
+                  alt="Content Illustration"
+                  className="w-full h-auto text-center"
+                />
+              </div>
+            </div>
+            <div className="w-[40%] min-[1900px]:w-[80%] max-lg:w-[60%] max-md:w-[70%] pt-2 lg:pt-15 flex justify-center flex-col items-start lg:ml-10">
+              <article className="text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto">
+                <div className="max-lg:w-[84vw] min-[1900px]:w-[45vw] max-[1537px]:w-[50vw]">
+                  <Markdown
+                    options={{
+                      overrides: {
+                        h2: {
+                          component: ({ children, ...props }) => {
+                            try {
+                              const headingText =
+                                typeof children === "string"
+                                  ? children
+                                  : (Array.isArray(children) ? children[0] : "") || "";
+
+                              const normalizedHeading = String(headingText).trim().toLowerCase();
+
+                              const headingIndex = headingLines.findIndex(line =>
+                                line.replace('## ', '').trim().toLowerCase() === normalizedHeading
+                              );
+                              
+                              // Check if this is the thirs heading (index 2)
+                              const isSecondHeading = headingIndex === 2;
+
+                              return (
+                                <>
+                                  <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">
+                                    {children}
+                                  </h2>
+                                  {isSecondHeading && (
+                                    <div className="my-8">
+                                      <CTA />
+                                    </div>
+                                  )}
+                                </>
+                              );
+                            } catch (error) {
+                              console.error("Error in h2 component:", error);
+                              return <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">{children}</h2>;
+                            }
+                          },
+                        },
+
+                        img: {
+                          component: ({ src, alt, ...props }) => {
+                            try {
+                              if (!src || typeof src !== 'string') {
+                                return <div className="text-gray-500">Image not available</div>;
+                              }
+
+                              const isBase64 = src.startsWith("data:image/");
+                              const isValidUrl = (url) => {
+                                try {
+                                  new URL(url);
+                                  return true;
+                                } catch {
+                                  return false;
+                                }
+                              };
+
+                              if (isBase64 || !isValidUrl(src)) {
+                                return (
+                                  <img
+                                    src={src}
+                                    alt={alt || "Image"}
+                                    loading="lazy"
+                                    style={{ width: "100%", height: "auto" }}
+                                    {...props}
+                                  />
+                                );
+                              }
+
+                              return (
+                                <Image
+                                  loading="lazy"
+                                  src={src}
+                                  alt={alt || "Image"}
+                                  width={900}
+                                  height={900}
+                                  unoptimized={true}
+                                  {...props}
+                                />
+                              );
+                            } catch (error) {
+                              console.error("Error in img component:", error);
+                              return <div className="text-gray-500">Failed to load image</div>;
+                            }
+                          },
+                        },
+                      },
+                    }}
+                  >
+                    {postContent}
+                  </Markdown>
+                </div>
+              </article>
+            </div>
+            <div className=" max-lg:w-full max-lg:flex justify-center">
+              <Featured />
             </div>
           </div>
-          <div className="w-[40%] min-[1900px]:w-[80%] max-lg:w-[60%] max-md:w-[70%] pt-2 lg:pt-15 flex justify-center flex-col items-start lg:ml-10">
-            <article className="text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto">
-              <div className="max-lg:w-[84vw] min-[1900px]:w-[45vw] max-[1537px]:w-[50vw]">
-                <Markdown
-                  options={{
-                    overrides: {
-                      h2: {
-                        component: ({ children, ...props }) => {
-                          const headingText =
-                            typeof children === "string"
-                              ? children
-                              : children?.[0] || "";
-
-                          const normalizedHeading = headingText.trim().toLowerCase();
-
-                          const headingIndex = headingLines.findIndex(line =>
-                            line.replace('## ', '').trim().toLowerCase() === normalizedHeading
-                          );
-                          const isSecondHeading = headingIndex === 1;
-
-                          return (
-                            <>
-                              <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">{children}</h2>
-
-                              {isSecondHeading && (
-                                <div className="my-8">
-                                  <CTA />
-                                </div>
-                              )}
-
-                            </>
-                          );
-                        },
-                      },
-
-                      img: {
-                        component: ({ src, alt }) => {
-                          const isBase64 = src.startsWith("data:image/");
-                          const isValidUrl = (url) => {
-                            try {
-                              new URL(url);
-                              return true;
-                            } catch {
-                              return false;
-                            }
-                          };
-
-                          if (isBase64 || !isValidUrl(src)) {
-                            return (
-                              <img
-                                src={src}
-                                alt={alt}
-                                loading="lazy"
-                                style={{ width: "100%", height: "auto" }}
-                              />
-                            );
-                          }
-
-                          return (
-                            <Image
-                              loading="lazy"
-                              src={src}
-                              alt={alt}
-                              width={900}
-                              height={900}
-                              unoptimized={true}
-                            />
-                          );
-                        },
-                      },
-                    },
-                  }}
-                >
-                  {postContent}
-                </Markdown>
-
-              </div>
-            </article>
-          </div>
-          <div className=" max-lg:w-full max-lg:flex justify-center">
-            <Featured />
+        </div>
+        <div
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+          }}
+        >
+          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+          <div className=" flex justify-center items-center">
+            <BookDemo />
           </div>
         </div>
-      </div>
-      <div
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
-        }}
-      >
-        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
-        <div className=" flex justify-center items-center">
-          <BookDemo />
-        </div>
-
-      </div>
-      <div className="mb-20"></div>
-    </>
-  );
+        <div className="mb-20"></div>
+      </>
+    );
+  } catch (error) {
+    console.error("Error in PostPage component:", error);
+    return notFound();
+  }
 };
 
 export default PostPage;
