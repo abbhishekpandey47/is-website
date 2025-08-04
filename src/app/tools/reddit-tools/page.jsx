@@ -39,7 +39,7 @@ const Dashboard = () => {
         { id: 'current', label: 'Check Current', icon: <Search className="w-5 h-5 stroke-gray-600" /> },
         { id: 'mentions', label: 'Mentions', icon: <MessageCirclePlus className="w-5 h-5 stroke-gray-600" /> },
         { id: 'credits', label: 'Credits', icon: <Sparkles className="w-5 h-5 stroke-gray-600" /> },
-        { id: 'reddit-commnet', label: 'Reddit Comment', icon: <MessageCircle className="w-5 h-5 stroke-gray-600" /> },
+        { id: 'reddit-comment', label: 'Reddit Comment', icon: <MessageCircle className="w-5 h-5 stroke-gray-600" /> },
 
     ];
 
@@ -93,7 +93,7 @@ const handleNavClick = (tabId) => {
                     <Credits />
                 );
 
-            case "reddit-commnet":
+            case "reddit-comment":
                 return (
                     <Page />
                 )
