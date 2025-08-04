@@ -45,19 +45,19 @@ const Dashboard = () => {
 
     const searchParams = useSearchParams();
 
-useEffect(() => {
-  const tabFromURL = searchParams.get('tab');
-  if (tabFromURL) {
-    setActiveTab(tabFromURL);
-  }
-}, [searchParams]);
+    useEffect(() => {
+        const tabFromURL = searchParams.get('tab');
+        if (tabFromURL) {
+            setActiveTab(tabFromURL);
+        }
+    }, [searchParams]);
 
 
-const handleNavClick = (tabId) => {
-  setActiveTab(tabId);
-  setSidebarOpen(false);
-  router.push(`?tab=${tabId}`, { scroll: false }); // Optional: scroll false keeps scroll position
-};
+    const handleNavClick = (tabId) => {
+        setActiveTab(tabId);
+        setSidebarOpen(false);
+        router.push(`?tab=${tabId}`, { scroll: false }); // Optional: scroll false keeps scroll position
+    };
 
 
 
@@ -105,10 +105,10 @@ const handleNavClick = (tabId) => {
 
     return (
         <div className="relative min-h-screen bg-[#f6f8fc] flex">
-          
+
             {/* Sidebar */}
-<div
-  className={`
+            <div
+                className={`
     group
     absolute left-0 top-1 bottom-0 z-50
     bg-white shadow-sm border-r border-gray-200
@@ -116,18 +116,21 @@ const handleNavClick = (tabId) => {
     ${sidebarOpen ? 'w-64' : 'w-20 hover:w-64'}
     overflow-y-auto
   `}
->
+            >
 
 
                 <div className="p-4 md:p-4">
                     <div className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8 mt-8 lg:mt-0">
+                          <Link href="/">
                         <Image
                             loading="lazy"
                             width={200}
                             height={200}
                             src="/logodata/infrasity_logo.png"
                             alt="Infrasity Logo"
-                        /></div>
+                        />
+                        </Link>
+                        </div>
                     <nav className="space-y-1 sm:space-y-2">
                         {navigationItems.map((item) => (
                             <button
