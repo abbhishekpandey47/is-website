@@ -109,7 +109,7 @@ const PostPage = (props) => {
     .split('\n')
     .filter((line) => line.startsWith('## '));
 
-  const secondHeadingText = headingLines[1]?.replace('## ', '').trim(); 
+  const secondHeadingText = headingLines[1]?.replace('## ', '').trim();
 
   return (
     <>
@@ -146,14 +146,16 @@ const PostPage = (props) => {
 
                           const normalizedHeading = headingText.trim().toLowerCase();
 
-                          const isAfterSecondHeading =
-                            normalizedHeading === secondHeadingText?.toLowerCase();
+                          const headingIndex = headingLines.findIndex(line =>
+                            line.replace('## ', '').trim().toLowerCase() === normalizedHeading
+                          );
+                          const isSecondHeading = headingIndex === 1;
 
                           return (
                             <>
                               <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">{children}</h2>
 
-                              {isAfterSecondHeading && (
+                              {isSecondHeading && (
                                 <div className="my-8">
                                   <CTA />
                                 </div>
