@@ -56,6 +56,8 @@ export async function generateMetadata({ params }) {
     };
   }
 
+
+
   return {
     title: post.metatitle || post.title,
     description: post.description,
@@ -70,6 +72,7 @@ export async function generateMetadata({ params }) {
     },
   };
 }
+
 
 // Main PostPage component
 const PostPage = (props) => {
@@ -101,6 +104,13 @@ const PostPage = (props) => {
   postData.authorImage = authorObj.profilePic;
   postData.authorLinkedin = authorObj.linkedIn;
 
+  // Get outline
+  const headingLines = postContent
+    .split('\n')
+    .filter((line) => line.startsWith('## '));
+
+  const secondHeadingText = headingLines[1]?.replace('## ', '').trim();
+
   return (
     <>
       <div className="pt-32 flex flex-col justify-center items-center">
@@ -127,9 +137,37 @@ const PostPage = (props) => {
                 <Markdown
                   options={{
                     overrides: {
+                      h2: {
+                        component: ({ children, ...props }) => {
+                          const headingText =
+                            typeof children === "string"
+                              ? children
+                              : children?.[0] || "";
+
+                          const normalizedHeading = headingText.trim().toLowerCase();
+
+                          const headingIndex = headingLines.findIndex(line =>
+                            line.replace('## ', '').trim().toLowerCase() === normalizedHeading
+                          );
+                          const isSecondHeading = headingIndex === 1;
+
+                          return (
+                            <>
+                              <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">{children}</h2>
+
+                              {isSecondHeading && (
+                                <div className="my-8">
+                                  <CTA />
+                                </div>
+                              )}
+
+                            </>
+                          );
+                        },
+                      },
+
                       img: {
                         component: ({ src, alt }) => {
-                          // Check if the src is a base64 string or a valid URL
                           const isBase64 = src.startsWith("data:image/");
                           const isValidUrl = (url) => {
                             try {
@@ -140,7 +178,6 @@ const PostPage = (props) => {
                             }
                           };
 
-                          // Use next/image for valid URLs, otherwise use a regular img tag
                           if (isBase64 || !isValidUrl(src)) {
                             return (
                               <img
@@ -169,6 +206,7 @@ const PostPage = (props) => {
                 >
                   {postContent}
                 </Markdown>
+
               </div>
             </article>
           </div>
@@ -185,13 +223,11 @@ const PostPage = (props) => {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
         <div className=" flex justify-center items-center">
-       {postData.slug !== "aeo-vs-seo" ? 
-          <BookDemo /> : <CTA />
-        }
+          <BookDemo />
         </div>
-        
+
       </div>
-      <div className="mb-24"></div>
+      <div className="mb-20"></div>
     </>
   );
 };
