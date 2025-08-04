@@ -9,6 +9,7 @@ export default function TabbedYouTubeCarousel() {
 
   const videoCollections = {
     allCategories: [
+      "0AsyeSd1_kQ",
       "pQoP_Rndpqw",
       "BivxMW5DftE",
       "_TrEJAJPp0M",
@@ -29,6 +30,7 @@ export default function TabbedYouTubeCarousel() {
     ],
     Features: ["_TrEJAJPp0M", "ELSjojPjPAo", "b8B5odoAHPI"],
     ExplainerVideo: [
+      "0AsyeSd1_kQ",
       "pQoP_Rndpqw",
       "22d5Xu3I1Oo",
       "https://devzero.b-cdn.net/how%20to%20guide%20AWS%20ECS.mp4",
