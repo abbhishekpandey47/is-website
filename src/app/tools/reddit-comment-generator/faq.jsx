@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-export default function FAQ() {
+export default function FAQ({darkMode}) {
   const [openItems, setOpenItems] = useState(new Set());
   const [loading, setLoading] = useState(false); // Add loading state
 
@@ -46,59 +46,77 @@ export default function FAQ() {
   };
 
   return (
-    <div className="bg-black text-white p-6 relative">
+    <div className={`p-6 relative ${darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
       <div className="max-w-4xl mx-auto relative">
-        <h1 className="text-4xl font-bold text-center mb-12 text-gray-100">
+        <h2 className={`text-4xl font-bold text-center mb-12 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>
           Frequently Asked Questions
-        </h1>
-        <div className="p-[6px] border border-white/20 rounded-xl relative">
+        </h2>
+        <div className={`p-[6px] border rounded-xl relative ${darkMode ? 'border-white/20' : 'border-black/20'}`}>
           {/* Loader overlay */}
           {loading && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 z-20 rounded-xl">
-              <div className="animate-spin rounded-full h-16 w-16 border-t-8 border-b-8 border-[#3c4199] shadow-2xl drop-shadow-lg"></div>
-              <span className="mt-6 text-lg font-semibold text-[#3c4199] drop-shadow-lg">Loading...</span>
+            <div className={`absolute inset-0 flex flex-col items-center justify-center z-20 rounded-xl ${darkMode ? 'bg-black/70' : 'bg-white/70'
+              }`}>
+              <div
+                className={`animate-spin rounded-full h-16 w-16 shadow-2xl drop-shadow-lg ${darkMode
+                    ? 'border-t-8 border-b-8 border-[#3c4199]'
+                    : 'border-t-8 border-b-8 border-[#9ca3af]'
+                  }`}
+              />
+              <span
+                className={`mt-6 text-lg font-semibold drop-shadow-lg ${darkMode ? 'text-[#3c4199]' : 'text-gray-700'
+                  }`}
+              >
+                Loading...
+              </span>
             </div>
           )}
           <div className="rounded-xl">
-  {faqs.map((faq, index) => {
-    const isFirst = index === 0;
-    const isLast = index === faqs.length - 1;
+            {faqs.map((faq, index) => {
+              const isFirst = index === 0;
+              const isLast = index === faqs.length - 1;
 
-    return (
-      <div
-        key={faq.id}
-        className={`bg-white/10 border border-gray-700/20 overflow-hidden transition-all duration-200 ${
-          isFirst ? "rounded-t-xl" : ""
-        } ${isLast ? "rounded-b-xl" : ""}`}
-      >
-        <button
-          onClick={() => toggleItem(faq.id)}
-          className="w-full px-6 py-3 text-left flex items-center justify-between"
-        >
-          <span className="text-lg font-medium text-gray-100 pr-4">
-            {faq.question}
-          </span>
-          <ChevronDown
-            className={`w-5 h-5 text-gray-400 transform transition-transform duration-200 flex-shrink-0 ${
-              openItems.has(faq.id) ? "rotate-180" : ""
-            }`}
-          />
-        </button>
+              return (
+                <div
+                  key={faq.id}
+                  className={`overflow-hidden transition-all duration-200 
+  ${isFirst ? "rounded-t-xl" : ""} 
+  ${isLast ? "rounded-b-xl" : ""} 
+  ${darkMode ? "bg-white/5 border border-white/20" : "bg-black/5 border border-black/10"}`}
 
-        <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out ${
-            openItems.has(faq.id) ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          <div className="bg-gray-700/40 px-6 pb-5 pt-1">
-            <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+                >
+                  <button
+                    onClick={() => toggleItem(faq.id)}
+                    className="w-full px-6 py-3 text-left flex items-center justify-between"
+                  >
+                    <span
+                      className={`text-lg font-medium pr-4 ${darkMode ? "text-gray-100" : "text-gray-800"
+                        }`}
+                    >
+                      {faq.question}
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transform transition-transform duration-200 flex-shrink-0 ${darkMode ? "text-gray-400" : "text-gray-600"
+                        } ${openItems.has(faq.id) ? "rotate-180" : ""}`}
+                    />
+
+                  </button>
+
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${openItems.has(faq.id) ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                      }`}
+                  >
+                    <div className={`px-6 pb-5 pt-1 ${darkMode ? "bg-gray-700/40" : "bg-gray-100"}`}>
+                      <p className={`leading-relaxed ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                        {faq.answer}
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
-    );
-  })}
-</div>
-</div>
 
       </div>
     </div>

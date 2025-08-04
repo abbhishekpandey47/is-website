@@ -18,8 +18,9 @@ export function ClientLayoutWrapper({ children }) {
     const pathname = usePathname();
     const hideNavbar = pathname === '/technical-writing-services-b2b-saas';
     const hideNavBar2 = pathname === '/services/webflow-agency';
-    const hideNavBarAndFooter = pathname === '/tools/reddit-tools';
-    const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2;
+    const hideNavBar3 = pathname === '/tools/reddit-comment-generator';
+    const hideNavBarAndFooter = pathname === '/tools/reddit-tools' || hideNavBar3;
+    const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2 && !hideNavBar3;
     const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar;
 
     return (
