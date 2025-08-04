@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function RedditComment() {
   return (
-    <div className="max-w-7xl mx-auto text-center relative z-10">
+    <div className="max-w-7xl mx-auto text-center relative z-10 pt-4">
       <div className="md:flex items-center md:justify-between px-8 pb-10 lg:px-16">
         {/* Left Side Content */}
         <div className="flex-1 max-w-2xl mb-14 md:mb-0 text-center md:text-left">
@@ -24,10 +24,12 @@ export default function RedditComment() {
             <br />
             Drive authentic engagement with smart, subreddit-aware replies
           </p>
+          <div className="flex justify-center items-center">
 
           <Link href="/tools/reddit-comment-generator" className="bg-[#3c4199] hover:opacity-80 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
             Reddit Comment Generator
           </Link>
+          </div>
         </div>
 
         {/* Right Side - Placeholder for your image */}

@@ -24,8 +24,8 @@ export default function Page() {
             <InfraMethodologyTimeline />
             <RedditServiceCards />
             <StatsSection />
-            <DownloadPDF />
             <RedditComment />
+            <DownloadPDF />
             <Testimonials />
             <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] mb-10"></div>
             <Cta />
