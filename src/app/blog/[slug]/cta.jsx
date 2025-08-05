@@ -17,16 +17,16 @@ export default function CTA2({text}) {
                 {/* Content */}
                 <div className="relative md:gap-4 px-6 md:px-12 flex flex-col md:flex-row items-center md:justify-between -mt-6">
                     <div className="text-center md:text-left mb-4 md:mb-0">
-                        <h2 className="font-[quicksand] text-3xl md:text-4xl font-bold text-white leading-tight">
+                        <h2 className="font-[quicksand] text-3xl md:text-3xl font-bold text-white leading-tight">
                             {text || "Every devtool startup needs content. Most do it wrong."}
                         </h2>
                     </div>
 
-                    <div className="flex justify-center items-center mb-6 md:mb-0 md:mt-8">
+                    <div className="flex justify-center items-center mb-6 md:mb-0 md:mt-5">
                         <Link
                             href="/contact"
-                            className="w-full md:w-[130px] group no-underline inline-flex items-center gap-2 bg-black backdrop-blur-sm border border-white/20 text-white px-3 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
-                            <span className="text-[14px] text-center">Schedule a 15-min call</span>
+                            className="w-full md:w-[150px] group no-underline inline-flex items-center gap-2 bg-black backdrop-blur-sm border border-white/20 text-white px-3 py-3 rounded-lg transition-all duration-300 transform hover:scale-125 hover:shadow-2xl">
+                            <span className="text-[18px] text-center">Book a Call</span>
                             <ArrowRight className="h-5 w-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-1" />
                         </Link>
                     </div>
