@@ -34,6 +34,7 @@ import TestimonialSlider from "./testimonials.jsx";
 import ContactForm from "./calendlyButton.jsx";
 import CalendarBooking from "../../calendarButton.jsx";
 import ClutchBadge from "./clutch.jsx";
+import Video from "./video.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -470,6 +471,10 @@ const page = () => {
 
         <div className="flex justify-center lg:justify-start lg:ml-40">
           <CalendarBooking buttonText="Get Started" />
+        </div>
+
+        <div>
+          <Video />
         </div>
 
         <div>
