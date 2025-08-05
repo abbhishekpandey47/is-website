@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-export default function CTA2() {
+export default function CTA2({text}) {
     return (
         <div className="w-full">
             <div className="relative overflow-hidden rounded-2xl">
@@ -18,7 +18,7 @@ export default function CTA2() {
                 <div className="relative md:gap-4 px-6 md:px-12 flex flex-col md:flex-row items-center md:justify-between -mt-6">
                     <div className="text-center md:text-left mb-4 md:mb-0">
                         <h2 className="font-[quicksand] text-3xl md:text-4xl font-bold text-white leading-tight">
-                            Every devtool startup needs content. Most do it wrong.
+                            {text || "Every devtool startup needs content. Most do it wrong."}
                         </h2>
                     </div>
 

@@ -252,7 +252,7 @@ const PostPage = (props) => {
                                 <>
                                   {showFirstCTA && (
                                     <div className="my-8 mb-10">
-                                      <CTA />
+                                      <CTA text="Let Infrasity handle your technical content, explainer videos, and developer GTM." />
                                     </div>
                                   )}
                                   {showSecondCTA && (
