@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function CTA2({text}) {
     return (
         <div className="w-full">
-            <div className="relative overflow-hidden rounded-2xl">
+            <div className="relative overflow-hidden rounded-2xl py-2">
                 {/* Gradient background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-purple-900"></div>
 
@@ -26,7 +26,7 @@ export default function CTA2({text}) {
                         <Link
                             href="/contact"
                             className="w-full md:w-[150px] group no-underline inline-flex items-center gap-2 bg-black backdrop-blur-sm border border-white/20 text-white px-3 py-3 rounded-lg transition-all duration-300 transform hover:scale-125 hover:shadow-2xl">
-                            <span className="text-[18px] text-center">Book a Call</span>
+                            <span className="text-[16px] text-center">Book a Call</span>
                             <ArrowRight className="h-5 w-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-1" />
                         </Link>
                     </div>
