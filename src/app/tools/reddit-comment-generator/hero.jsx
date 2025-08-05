@@ -416,7 +416,7 @@ const RedditPostTemplate = () => {
                 <div className="flex items-center gap-3">
                   <input
                     type="range"
-                    min={50}
+                    min={100}
                     max={1000}
                     step={50}
                     value={wordCount}
@@ -425,7 +425,7 @@ const RedditPostTemplate = () => {
                   />
                   <span className="text-white font-semibold w-12 text-center">{wordCount}</span>
                 </div>
-                <p className="text-gray-400 text-xs mt-1">Choose between 50 and 1000 words</p>
+                <p className="text-gray-400 text-xs mt-1">Choose between 100 and 1000 words</p>
               </div>
 
               {/* Tonality Dropdown */}
