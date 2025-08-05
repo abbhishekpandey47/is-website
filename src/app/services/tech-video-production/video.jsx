@@ -54,7 +54,7 @@ const Video = () => {
        <div className="mb-10">
   <div className="md:flex md:gap-20">
     <div className="flex-shrink-0">
-      <div className="mb-6 md:mb-0 w-14 h-14 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
+      <div className="mb-6 w-14 h-14 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
         1
       </div>
     </div>
@@ -101,7 +101,7 @@ const Video = () => {
           <div className="md:flex md:gap-20">
             {/* Left Column - Number */}
             <div className="flex-shrink-0">
-              <div className="w-14 h-14 mb-6 md:mb-0 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
+              <div className="w-14 h-14 mb-6 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
                 2
               </div>
             </div>
@@ -148,7 +148,7 @@ const Video = () => {
           <div className="md:flex md:gap-20">
             {/* Left Column - Number */}
             <div className="flex-shrink-0">
-              <div className="w-14 h-14 mb-6 md:mb-0 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
+              <div className="w-14 h-14 mb-6 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
                 3
               </div>
             </div>
@@ -170,7 +170,7 @@ const Video = () => {
           <div className="md:flex md:gap-20">
             {/* Left Column - Number */}
             <div className="flex-shrink-0">
-              <div className="w-14 h-14 mb-6 md:mb-0 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
+              <div className="w-14 h-14 mb-6 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
                 4
               </div>
             </div>
@@ -187,7 +187,7 @@ const Video = () => {
           <div className="md:flex md:gap-20">
             {/* Left Column - Number */}
             <div className="flex-shrink-0">
-              <div className="w-14 h-14 mb-6 md:mb-0 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
+              <div className="w-14 h-14 mb-6 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
                 5
               </div>
             </div>
