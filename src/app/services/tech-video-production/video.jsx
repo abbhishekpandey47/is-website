@@ -17,10 +17,10 @@ const Video = () => {
   ];
 
   const spokespersons = [
-    { id: 1, name: "Professional Male", image:"/video-page/i6.JPG", },
-    { id: 2, name: "Friendly Female", image:"/video-page/i6.JPG"},
-    { id: 3, name: "Casual Male", image:"/video-page/i6.JPG"},
-    { id: 4, name: "Corporate Female", image:"/video-page/i6.JPG" }
+    { id: 1, name: "Professional Male", image:"/video-page/t1.JPG", },
+    { id: 2, name: "Friendly Female", image:"/video-page/t2.JPG"},
+    { id: 3, name: "Casual Male", image:"/video-page/t3.JPG"},
+    { id: 4, name: "Corporate Female", image:"/video-page/t4.png" }
   ];
   
   const StarIcon = () => (
@@ -129,12 +129,14 @@ const Video = () => {
                     className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105`}
                   >
                     <div className="aspect-video">
-                      <iframe
-                        src={`https://www.youtube.com/embed/${videoId}?autoplay=0&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=${videoId}`}
-                        className="w-full h-full object-cover"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
+                       <Image
+                  src={spokesperson.image}
+                  className="w-full h-full object-cover"
+                  height={200}
+                  width={200}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
                     </div>
                   </div>
                 ))}
