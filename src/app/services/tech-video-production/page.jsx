@@ -35,6 +35,7 @@ import ContactForm from "./calendlyButton.jsx";
 import CalendarBooking from "../../calendarButton.jsx";
 import ClutchBadge from "./clutch.jsx";
 import Video from "./video.jsx";
+import RecentWork from "./recent-work.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -490,6 +491,18 @@ const page = () => {
 
           <Video />
         </div>
+
+        {/* <div
+        className="flex flex-col gap-10 mt-24 mb-10"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
+          <RecentWork />
+        </div> */}
 
       <div
         className="flex flex-col gap-10 mb-16"
