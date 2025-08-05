@@ -26,7 +26,7 @@ export default function CTA2({text}) {
                         <Link
                             href="/contact"
                             className="w-full md:w-[130px] group no-underline inline-flex items-center gap-2 bg-black backdrop-blur-sm border border-white/20 text-white px-3 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
-                            <span className="text-[14px] text-center">Schedule a 15-min call</span>
+                            <span className="text-[14px] text-center">Book a Free Call</span>
                             <ArrowRight className="h-5 w-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:translate-x-1" />
                         </Link>
                     </div>

@@ -16,7 +16,7 @@ const BookDemo = () => {
           <p className="text-m text-white md:text-lg quicksand-medium text-gray text-center max-w-2xl mb-8">
             Trusted by YC startups. Built for developer-first companies.
           </p>
-          <a href="https://calendly.com/meet-shan" target="_blank" rel="nofollow noreferrer">
+          <a href="/contact" target="_blank" rel="nofollow noreferrer">
             <button className="magic-button group rounded-md px-6 py-3 text-white font-medium text-m transition-all duration-300 hover:scale-105 ">
               <div className="flex items-center space-x-2">
                 <Zap className="h-5 w-5 transition-transform group-hover:rotate-12" />

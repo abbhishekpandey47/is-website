@@ -11,7 +11,9 @@ import Featured from "./featured";
 import authorMetadata from "../../../../posts/_authorData";
 import NotFound from "./NotFound";
 import Image from "next/image";
-import CTA from "./cta";
+import CTA2 from "./cta2";
+import CTA from "./cta"
+
 
 // Utility function to check if the post file exists
 const isValid = (slug) => {
@@ -30,11 +32,11 @@ const getPostContent = (slug) => {
   try {
     const folder = "posts/";
     const file = path.join(process.cwd(), folder, `${slug}.md`);
-    
+
     if (!fs.existsSync(file)) {
       throw new Error(`Post file not found: ${file}`);
     }
-    
+
     const content = fs.readFileSync(file, "utf8");
     const matterResult = matter(content);
     return matterResult.content;
@@ -55,10 +57,10 @@ export const generateStaticParams = async () => {
     const validPosts = postMetaData
       .filter((post) => {
         // Check if post has required fields and is not a case study
-        return post && 
-               post.slug && 
-               post.category !== "Case Studies" &&
-               isValid(post.slug);
+        return post &&
+          post.slug &&
+          post.category !== "Case Studies" &&
+          isValid(post.slug);
       })
       .map((post) => ({
         slug: post.slug,
@@ -165,7 +167,7 @@ const PostPage = (props) => {
     }
 
     const postContent = getPostContent(slug);
-    
+
     if (!postContent) {
       console.error(`Post content could not be loaded for slug: ${slug}`);
       return notFound();
@@ -235,19 +237,27 @@ const PostPage = (props) => {
 
                               const normalizedHeading = String(headingText).trim().toLowerCase();
 
-                              // Find the index of this heading in the headingLines array
-                              const headingIndex = headingLines.findIndex(line =>
-                                line.replace('## ', '').trim().toLowerCase() === normalizedHeading
+                              const headingIndex = headingLines.findIndex(
+                                line => line.replace('## ', '').trim().toLowerCase() === normalizedHeading
                               );
-                              
-                              // Check if this is the second heading (index 1)
-                              const isSecondHeading = headingIndex === 3;
+
+                              const totalHeadings = headingLines.length;
+
+                              const showFirstCTA = headingIndex === 2;
+
+                              const showSecondCTA =
+                                totalHeadings > 4 && headingIndex === totalHeadings - 3;
 
                               return (
                                 <>
-                                  {isSecondHeading && (
+                                  {showFirstCTA && (
                                     <div className="my-8 mb-10">
-                                      <CTA />
+                                      <CTA text="Let Infrasity handle your technical content, explainer videos, and developer GTM." />
+                                    </div>
+                                  )}
+                                  {showSecondCTA && (
+                                    <div className="my-8 mb-10">
+                                      <CTA2 />
                                     </div>
                                   )}
                                   <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">
