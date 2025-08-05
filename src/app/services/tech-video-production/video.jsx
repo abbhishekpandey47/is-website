@@ -35,7 +35,7 @@ const Video = () => {
         {/* Header Section */}
         <div className="flex items-center justify-center text-center max-w-5xl mx-auto relative z-10 mb-20">
           <div>
-            <div className="absolute -top-10 -right-10 md:-top-16 md:-right-36 lg:-top-10 lg:-right-0">
+            <div className="absolute -top-10 -right-10 md:-top-16 md:-right-36 lg:-top-10 lg:right-40">
               <StarIcon />
             </div>
 
