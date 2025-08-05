@@ -55,6 +55,9 @@ export default function RootLayout({ children }) {
                     crossOrigin='anonymous'
                 />
 
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
+
+
               <Script id="reb2b-snippet" strategy="afterInteractive">
         {`
           !function () {
