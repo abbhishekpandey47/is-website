@@ -17,9 +17,9 @@ const Video = () => {
   ];
 
   const spokespersons = [
-    { id: 1, name: "Professional Male", image:"/video-page/t1.JPG", },
-    { id: 2, name: "Friendly Female", image:"/video-page/t2.JPG"},
-    { id: 3, name: "Casual Male", image:"/video-page/t3.JPG"},
+    { id: 1, name: "Professional Male", image:"/video-page/t1.jpg", },
+    { id: 2, name: "Friendly Female", image:"/video-page/t2.jpg"},
+    { id: 3, name: "Casual Male", image:"/video-page/t3.jpg"},
     { id: 4, name: "Corporate Female", image:"/video-page/t4.png" }
   ];
   
@@ -52,9 +52,9 @@ const Video = () => {
 
         {/* Step 1 - Customize the set */}
        <div className="mb-10">
-  <div className="flex gap-20">
+  <div className="md:flex md:gap-20">
     <div className="flex-shrink-0">
-      <div className="w-14 h-14 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
+      <div className="mb-6 md:mb-0 w-14 h-14 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
         1
       </div>
     </div>
@@ -98,10 +98,10 @@ const Video = () => {
 
         {/* Step 2 - Choose your spokesperson */}
         <div className="mb-10">
-          <div className="flex gap-20 mb-8">
+          <div className="md:flex md:gap-20">
             {/* Left Column - Number */}
             <div className="flex-shrink-0">
-              <div className="w-14 h-14 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
+              <div className="w-14 h-14 mb-6 md:mb-0 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
                 2
               </div>
             </div>
@@ -145,10 +145,10 @@ const Video = () => {
 
         {/* Step 2 - Choose your spokesperson */}
         <div className="mb-10">
-          <div className="flex gap-20 mb-8">
+          <div className="md:flex md:gap-20">
             {/* Left Column - Number */}
             <div className="flex-shrink-0">
-              <div className="w-14 h-14 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
+              <div className="w-14 h-14 mb-6 md:mb-0 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
                 3
               </div>
             </div>
@@ -167,10 +167,10 @@ const Video = () => {
 
 
          <div className="mb-10">
-          <div className="flex gap-20 mb-8">
+          <div className="md:flex md:gap-20">
             {/* Left Column - Number */}
             <div className="flex-shrink-0">
-              <div className="w-14 h-14 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
+              <div className="w-14 h-14 mb-6 md:mb-0 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
                 4
               </div>
             </div>
@@ -184,10 +184,10 @@ const Video = () => {
 
 
          <div className="mb-10">
-          <div className="flex gap-20 mb-8">
+          <div className="md:flex md:gap-20">
             {/* Left Column - Number */}
             <div className="flex-shrink-0">
-              <div className="w-14 h-14 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
+              <div className="w-14 h-14 mb-6 md:mb-0 bg-[#1f1c25] rounded-lg flex items-center justify-center text-xl font-bold">
                 5
               </div>
             </div>
