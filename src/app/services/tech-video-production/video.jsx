@@ -30,15 +30,11 @@ const Video = () => {
   );
   
   return (
-    <div className="bg-black flex justify-center items-center text-white p-8 pt-20">
+    <div className="flex justify-center items-center text-white p-8 ">
       <div className="max-w-7xl w-full">
         {/* Header Section */}
         <div className="flex items-center justify-center text-center max-w-5xl mx-auto relative z-10 mb-20">
           <div>
-            <div className="absolute -top-10 -right-10 md:-top-16 md:-right-36 lg:-top-10 lg:right-40">
-              <StarIcon />
-            </div>
-
             <h1 className="font-termina text-2xl md:text-[35px] font-medium leading-tight mb-6">
               The video marketing team{' '}
               <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent text-glow-yellow">you</span>
