@@ -155,11 +155,11 @@ const projects = [
   ))}
 </div>
         {/* Load More Button */}
-        <div className="text-center px-4 md:px-0">
+        {/* <div className="text-center px-4 md:px-0">
           <button className="bg-[#3c4199] border border-white/40 py-3 px-4 rounded-xl hover:opacity-90 transition-all duration-300 text-sm md:text-base">
             Load More
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Popup Modal */}
