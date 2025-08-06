@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const API_BASE = "https://reddit-comment-gen.onrender.com";
-const DEFAULT_ICON = "https://postfully.app/_astro/reddit-default-avatar.BEQTJRzt.png";
+const DEFAULT_ICON = "/reddit/reddit-default-avatar.png";
 
 export default function NewPost() {
   const [subredditUrl, setSubredditUrl] = useState("");
@@ -95,7 +95,7 @@ export default function NewPost() {
               <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
                 <div className="w-11 h-11 bg-gray-800/20 rounded-xl flex items-center justify-center">
                   <img
-                    src={subredditIcon}
+                    src={subredditIcon || "/reddit/reddit-default-avatar.png"}
                     alt="Avatar"
                     className="w-9 h-9 rounded-full"
                   />

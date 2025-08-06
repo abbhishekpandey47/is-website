@@ -658,7 +658,7 @@ const RedditPostTemplate = ({ darkMode }) => {
                     <div className="flex justify-between items-center gap-3">
                       <div className="flex items-center gap-3">
                         <img
-                          src="https://postfully.app/_astro/reddit-default-avatar.BEQTJRzt.png"
+                          src="/reddit/reddit-default-avatar.png"
                           alt="Avatar"
                           className="w-9 h-9 rounded-full"
                         />
