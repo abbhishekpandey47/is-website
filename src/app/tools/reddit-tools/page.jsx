@@ -21,10 +21,12 @@ import {
     NotebookIcon,
     PersonStanding,
     MessageCircleIcon,
-    MessageCirclePlus
+    MessageCirclePlus,
+    SearchIcon
 } from 'lucide-react';
 import Credits from './credits';
 import Page from './reddit-comment-generator/page';
+import PostSearch from './postSearch';
 
 
 const Dashboard = () => {
@@ -40,6 +42,8 @@ const Dashboard = () => {
         { id: 'mentions', label: 'Mentions', icon: <MessageCirclePlus className="w-5 h-5 stroke-gray-600" /> },
         { id: 'credits', label: 'Credits', icon: <Sparkles className="w-5 h-5 stroke-gray-600" /> },
         { id: 'reddit-comment', label: 'Reddit Comment', icon: <MessageCircle className="w-5 h-5 stroke-gray-600" /> },
+        { id: 'post-search', label: 'Post Search', icon: <SearchIcon className="w-5 h-5 stroke-gray-600" /> },
+
 
     ];
 
@@ -96,6 +100,11 @@ const Dashboard = () => {
             case "reddit-comment":
                 return (
                     <Page />
+                );
+
+            case "post-search" :
+                return (
+                    <PostSearch />
                 )
 
             default:
