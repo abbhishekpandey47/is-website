@@ -36,6 +36,7 @@ import CalendarBooking from "../../calendarButton.jsx";
 import ClutchBadge from "./clutch.jsx";
 import Video from "./video.jsx";
 import RecentWork from "./recent-work.jsx";
+import PeopleFocused from "./peopleFocused.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -449,7 +450,7 @@ const page = () => {
         <div className="whyinfra"></div>
         <div className="text-center lg:text-left">
           <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-xs sm:text-[14px] font-medium mb-2 inline-block mx-auto lg:ml-40">
-            #1 AI VIDEO PLATFORM FOR MARKETING TEAMS
+            #1  VIDEO PLATFORM FOR B2B GROWTH & MARKETING TEAMS
           </span>
         </div>
         <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center">
@@ -481,7 +482,7 @@ const page = () => {
       </div>
 
         <div
-        className="flex flex-col gap-10 mt-24 mb-10"
+        className="flex flex-col gap-10 mt-24"
         style={{
           background:
             "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
@@ -492,8 +493,21 @@ const page = () => {
           <Video />
         </div>
 
-        {/* <div
-        className="flex flex-col gap-10 mt-24 mb-10"
+         <div
+        className="flex flex-col gap-10"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
+          <PeopleFocused />
+        </div>
+
+
+        <div
+        className="flex flex-col gap-10 mb-10"
         style={{
           background:
             "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
@@ -502,7 +516,7 @@ const page = () => {
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
 
           <RecentWork />
-        </div> */}
+        </div>
 
       <div
         className="flex flex-col gap-10 mb-16"
