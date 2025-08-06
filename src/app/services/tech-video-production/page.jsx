@@ -449,7 +449,7 @@ const page = () => {
         <div className="whyinfra"></div>
         <div className="text-center lg:text-left">
           <span className="bg-white/10 text-blue-500 px-4 py-2 rounded-lg text-xs sm:text-[14px] font-medium mb-2 inline-block mx-auto lg:ml-40">
-            #1 AI VIDEO PLATFORM FOR MARKETING TEAMS
+            #1  VIDEO PLATFORM FOR B2B GROWTH & MARKETING TEAMS
           </span>
         </div>
         <div className="quicksand-bold text-[5em] max-sm:text-[4em] tracking-tighter leading-[80px] text-white text-center flex justify-center">
