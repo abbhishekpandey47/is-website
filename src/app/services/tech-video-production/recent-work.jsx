@@ -169,7 +169,7 @@ const projects = [
             {/* Close Button - Fixed Position */}
             <button
               onClick={closePopup}
-              className="absolute top-0 right-0 z-10 text-[#ffffff80] hover:text-white transition-colors bg-gray-800/50 rounded-full p-2"
+              className="absolute top-4 right-4 md:top-0 md:right-0 z-10 text-[#ffffff80] hover:text-white transition-colors bg-gray-800/50 rounded-full p-2"
             >
               <X size={20} />
             </button>
