@@ -8,19 +8,20 @@ const Video = () => {
   const videoId = "0AsyeSd1_kQ";
 
   const sets = [
-    { id: 1, name: "Gradient Studio" , image:"/video-page/i1.JPG",},
+   
     { id: 2, name: "Purple Ambiance", image:"/video-page/i2.JPG",},
     { id: 3, name: "Green Workspace", image:"/video-page/i3.JPG",},
+    { id: 1, name: "Gradient Studio" , image:"/video-page/i1.JPG",},
     { id: 4, name: "Green Workspace", image:"/video-page/i6.JPG",},
     { id: 5, name: "Warm Office", image:"/video-page/i4.JPG",},
     { id: 6, name: "Green Workspace", image:"/video-page/i5.JPG",}
   ];
 
   const spokespersons = [
-    { id: 1, name: "Professional Male", image:"/video-page/t1.jpg", },
-    { id: 2, name: "Friendly Female", image:"/video-page/t2.jpg"},
-    { id: 3, name: "Casual Male", image:"/video-page/t3.jpg"},
-    { id: 4, name: "Corporate Female", image:"/video-page/t4.png" }
+    { id: 4, name: "Casual Male", image:"/video-page/t3.JPG"},
+    { id: 1, name: "Professional Male", image:"/video-page/t1.JPG", },
+    { id: 3, name: "Corporate Female", image:"/video-page/t4.png" },
+    { id: 2, name: "Friendly Female", image:"/video-page/t2.JPG"}
   ];
   
   const StarIcon = () => (
@@ -36,16 +37,16 @@ const Video = () => {
         <div className="flex items-center justify-center text-center max-w-5xl mx-auto relative z-10 mb-20">
           <div>
             <h1 className="font-termina text-2xl md:text-[35px] font-medium leading-tight mb-6">
-              The video marketing team{' '}
-              <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent text-glow-yellow">you</span>
+              Those product explainer videos you {' '}
+              <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent text-glow-yellow"></span>
               <br />
-              <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent text-glow-yellow">didn't have to hire.</span>
+              <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent text-glow-yellow">always wanted to publish.</span>
             </h1>
 
             <p className="max-w-2xl text-center text-lg md:text-[17px] font-medium text-[#ffffff80] leading-relaxed tracking-wide">
-              We have the actors, sets, cinematographers, editors and designers that will
-              bring your videos to life.{' '}
-              <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">Need it yesterday? We're here.</span>
+              We have the developer advocate, sets, cinematographers, editors and designers that will
+              product explainer videos.{' '}
+              <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent"><br /> Get your first video recorded, edited, published in less than 7 days.</span>
             </p>
           </div>
         </div>
@@ -60,13 +61,13 @@ const Video = () => {
     </div>
     
     <div className="flex-1">
-      <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Customize the set.</h2>
+      <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4"> Sets & backgrounds of your choice.</h2>
       <div className="mb-6">
         <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
-          Choose one of our predefined sets or get something completely custom.
+          Choose from a wide range of one of the 50+ customized sets or get something completely custom.
         </p>
         <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
-          You name it, we'll design it.
+          Theme completely alligned with your brand tone.
         </p>
       </div>
 
@@ -108,13 +109,13 @@ const Video = () => {
             
             {/* Right Column - Content */}
             <div className="flex-1">
-              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Choose your spokesperson.</h2>
+              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Developer advocates with years of experience in video creation.</h2>
               <div className="mb-6">
                 <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
-                  7+ actors you can choose from.
+                  10+ developer advocates you can collaborate with.
                 </p>
                 <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
-                  We are constantly adding new options for you.
+                  Not in the list? reach out to us and we might connect with the right persona.
                 </p>
               </div>
 
@@ -153,10 +154,10 @@ const Video = () => {
               </div>
             </div>
             <div className="flex-1">
-              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Choose your spokesperson.</h2>
+              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Get the script created.</h2>
               <div className="mb-6">
                 <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
-                 We take care of the script, screen recordings, stock footage, graphics, sound, and animations.
+                 Our team of developers, copy writers, SEO & editors takes care of the script, screen recordings, stock footage, graphics, sound, and animations.
                 </p>
               </div>
             </div>
@@ -176,6 +177,11 @@ const Video = () => {
             </div>
             <div className="flex-1">
               <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Post-Production and Revisions</h2>
+              <div className="mb-6">
+                <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
+                 Once the initial draft is ready, will share you within 4 business days and would be open for as many edits as per your choice.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -192,8 +198,13 @@ const Video = () => {
               </div>
             </div>
             <div className="flex-1">
-              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Your first draft is ready in      {" "}        <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">under 10 days!</span>
+              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Your first draft is ready in      {" "}        <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">under less than 7 days!</span>
 </h2>
+<div className="mb-6">
+                <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
+                 Growth teams at some of the fastest growing AI & B2B SaaS companies like Kubiya.ai, Qodo(earlier Codium), Devzero, Firefly.ai, Aviator trust us with their product explainer videos.
+                </p>
+              </div>
             </div>
           </div>
         </div>
