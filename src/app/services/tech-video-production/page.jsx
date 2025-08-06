@@ -481,7 +481,7 @@ const page = () => {
       </div>
 
         <div
-        className="flex flex-col gap-10 mt-24 mb-10"
+        className="flex flex-col gap-10 mt-24"
         style={{
           background:
             "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
@@ -493,7 +493,7 @@ const page = () => {
         </div>
 
         <div
-        className="flex flex-col gap-10 mt-24 mb-10"
+        className="flex flex-col gap-10 mb-10"
         style={{
           background:
             "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
