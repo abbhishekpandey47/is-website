@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
+import CalendarBooking from "../../calendarButton.jsx";
+
 
 const Video = () => {
   const [selectedSet, setSelectedSet] = useState(null);
@@ -36,7 +38,7 @@ const Video = () => {
         {/* Header Section */}
         <div className="flex items-center justify-center text-center max-w-5xl mx-auto relative z-10 mb-20">
           <div>
-            <h1 className="font-termina text-2xl md:text-[35px] font-medium leading-tight mb-6">
+            <h1 className="font-[quicksand] font-bold text-2xl md:text-[35px] leading-tight mb-6">
               Those product explainer videos you {' '}
               <br />
               <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent text-glow-yellow">always wanted to publish.</span>
@@ -60,7 +62,7 @@ create your product explainer videos.{' '}
     </div>
     
     <div className="flex-1">
-      <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4"> Sets & backgrounds of your choice.</h2>
+      <h2 className="font-[quicksand] font-bold text-2xl md:text-[35px] mb-4"> Sets & backgrounds of your choice.</h2>
       <div className="mb-6">
         <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
           Choose from 50+ customized sets or get something completely custom.
@@ -108,7 +110,7 @@ create your product explainer videos.{' '}
             
             {/* Right Column - Content */}
             <div className="flex-1">
-              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Developer advocates with years of experience in video creation.</h2>
+              <h2 className="font-[quicksand] font-bold text-2xl md:text-[35px] mb-4">Developer advocates with years of experience in video creation.</h2>
               <div className="mb-6">
                 <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
                   10+ developer advocates you can collaborate with.
@@ -153,7 +155,7 @@ create your product explainer videos.{' '}
               </div>
             </div>
             <div className="flex-1">
-              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Get the script created.</h2>
+              <h2 className="font-[quicksand] text-2xl md:text-[35px] font-bold mb-4">Get the script created.</h2>
               <div className="mb-6">
                 <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
                  Our team of developers, copy writers, SEO & editors takes care of the script, screen recordings, stock footage, graphics, sound, and animations.
@@ -175,7 +177,7 @@ create your product explainer videos.{' '}
               </div>
             </div>
             <div className="flex-1">
-              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Post-Production and Revisions</h2>
+              <h2 className="font-[quicksand] text-2xl md:text-[35px] font-bold mb-4">Post-Production and Revisions</h2>
               <div className="mb-6">
                 <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
                  Once the initial draft is ready, will share you within 4 business days and would be open for as many edits as per your choice.
@@ -197,7 +199,7 @@ create your product explainer videos.{' '}
               </div>
             </div>
             <div className="flex-1">
-              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Your first draft is ready in{" "}<span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">less than 7 days!</span>
+              <h2 className="font-[quicksand] text-2xl md:text-[35px] font-bold mb-4">Your first draft is ready in{" "}<span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">less than 7 days!</span>
 </h2>
 <div className="mb-6">
                 <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
@@ -209,7 +211,9 @@ create your product explainer videos.{' '}
         </div>
 
         
-
+ <div className="flex justify-center">
+          <CalendarBooking buttonText="Get Started" />
+        </div>
       </div>
     </div>
   );
