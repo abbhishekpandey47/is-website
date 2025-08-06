@@ -100,7 +100,7 @@ const projects = [
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-           <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Recent Work</h2>
+           <h2 className="font-[quicksand] font-bold text-2xl md:text-[35px] mb-4">Recent Work</h2>
       <div className="flex items-center justify-center mb-6">
         <p className="max-w-3xl text-center text-[#ffffff80] font-semibold tracking-wide text-lg">
                      Success leaves clues, and we've left a bunch. We've joined hands with companies big and small, turning their YouTube channels into their biggest distribution channels.
@@ -140,8 +140,8 @@ const projects = [
 
           {/* Content */}
           <div className="absolute bottom-0 left-0 shadow-text-black shadow-text-xl z-10 flex-1 flex flex-col justify-end">
-            <div className="font-termina text-xs md:text-sm bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent md:mb-2">{project.subtitle}</div>
-            <h3 className="font-termina text-lg md:text-3xl font-medium mb-0">{project.title}</h3>
+            <div className="font-[quicksand] font-semibold text-xs md:text-sm bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent md:mb-2">{project.subtitle}</div>
+            <h3 className="font-[quicksand] text-lg md:text-3xl font-bold mb-0">{project.title}</h3>
           </div>
         </div>
       </div>
@@ -184,7 +184,7 @@ const projects = [
                       {selectedProject.category}
                     </span>
                   </div>
-                  <h2 className="font-termina text-[32px] md:text-4xl font-medium mb-4">{selectedProject.title}</h2>
+                  <h2 className="font-[quicksand] text-[32px] md:text-4xl font-bold mb-4">{selectedProject.title}</h2>
                   <p className="text-[#ffffff80] text-base md:text-lg mb-6 md:mb-8">
                     {selectedProject.description}
                   </p>

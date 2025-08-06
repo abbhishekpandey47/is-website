@@ -21,7 +21,7 @@ export default function PeopleFocused() {
                     <div className='absolute top-0 right-0 -z-10 rounded-3xl'>
                     <BoxSvg />
                     </div>
-                        <h2 className="font-termina text-[30px] md:text-[35px] font-medium text-white mb-6 leading-tight z-50">
+                        <h2 className="font-[quicksand] text-[30px] md:text-[35px] font-bold text-white mb-6 leading-tight z-50">
                             We create <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">people-focused</span>
                             <br />
                             B2B YouTube Videos

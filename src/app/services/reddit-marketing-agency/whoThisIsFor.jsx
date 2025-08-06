@@ -17,7 +17,7 @@ const StartupHeroSection = () => {
 
                             {/* Description */}
                             <div className="mx-auto mb-8">
-                                <p className="font-quicksand text-[18px] md:text-[18px] text-white tracking-wide leading-relaxed font-[320]">
+                                <p className="font-[quicksand] text-[18px] md:text-[18px] text-white tracking-wide leading-relaxed font-[320]">
                                     We work with early and growth-stage startups building tools for technical users.
                                     If you're building for developers and want to win credibility on Reddit — we're
                                     your team.
@@ -49,7 +49,7 @@ const StartupHeroSection = () => {
                                             />
                                         </svg>
                                     </div>
-                                    <p className="font-quicksand text-[18px] md:text-[18px] text-white tracking-wide leading-relaxed font-[320]">
+                                    <p className="font-[quicksand] font-bold text-[18px] md:text-[18px] text-white tracking-wide leading-relaxed">
                                         {item}
                                     </p>
                                 </div>
