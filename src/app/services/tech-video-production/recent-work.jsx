@@ -13,7 +13,7 @@ const projects = [
     subtitle: "B2B Video Production Agency",
     category: "Presentation Videos",
     videoId: "pQoP_Rndpqw",
-    image: "/video-page/t1.JPG",
+    image: "/video-page/t1.jpg",
     description: "We shoot and edit educational video content for leading tech companies.",
     services: [
       "Script writing",
@@ -32,7 +32,7 @@ const projects = [
     subtitle: "Product Video Production",
     category: "Tutorials",
     videoId: "pQoP_Rndpqw",
-    image: "/video-page/t2.JPG",
+    image: "/video-page/t2.jpg",
     description: "We create high-quality tutorial videos tailored for technology products and platforms.",
     services: [
       "Script writing",
@@ -51,7 +51,7 @@ const projects = [
     subtitle: "Educational Video Series",
     category: "Educational Videos",
     videoId: "BivxMW5DftE",
-    image: "/video-page/t3.JPG",
+    image: "/video-page/t3.jpg",
     description: "We produce engaging educational videos that highlight the latest trends in AI and marketing.",
     services: [
       "Script writing",
