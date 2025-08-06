@@ -198,7 +198,7 @@ const Video = () => {
               </div>
             </div>
             <div className="flex-1">
-              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Your first draft is ready in      {" "}        <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">under less than 7 days!</span>
+              <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4">Your first draft is ready in{" "}<span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">less than 7 days!</span>
 </h2>
 <div className="mb-6">
                 <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
