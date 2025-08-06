@@ -38,14 +38,13 @@ const Video = () => {
           <div>
             <h1 className="font-termina text-2xl md:text-[35px] font-medium leading-tight mb-6">
               Those product explainer videos you {' '}
-              <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent text-glow-yellow"></span>
               <br />
               <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent text-glow-yellow">always wanted to publish.</span>
             </h1>
 
             <p className="max-w-2xl text-center text-lg md:text-[17px] font-medium text-[#ffffff80] leading-relaxed tracking-wide">
-              We have the developer advocate, sets, cinematographers, editors and designers that will
-              product explainer videos.{' '}
+               We have the developer advocates, sets, cinematographers, editors and designers that will
+create your product explainer videos.{' '}
               <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent"><br /> Get your first video recorded, edited, published in less than 7 days.</span>
             </p>
           </div>
@@ -64,7 +63,7 @@ const Video = () => {
       <h2 className="font-termina text-2xl md:text-[35px] font-medium mb-4"> Sets & backgrounds of your choice.</h2>
       <div className="mb-6">
         <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
-          Choose from a wide range of one of the 50+ customized sets or get something completely custom.
+          Choose from 50+ customized sets or get something completely custom.
         </p>
         <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
           Theme completely alligned with your brand tone.
