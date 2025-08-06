@@ -6,84 +6,85 @@ import Link from 'next/link';
 const PortfolioShowcase = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const projects = [
-    {
-      id: 1,
-      title: "Infrasity",
-      subtitle: "B2B VIDEO PRODUCTION AGENCY",
-      category: "Presentation Videos",
-      videoId: "pQoP_Rndpqw",
-      image: "/video-page/t1.JPG",
-      description: "We shoot and edit educational video content for leading tech companies",
-      services: [
-        "Script writing",
-        "Graphics and animations", 
-        "Storyboard",
-        "Sound design",
-        "Project management",
-        "Studio production (Spokesperson)"
-      ],
-      estimatedCost: "Starting at $1800",
-      deliveryTime: "5 days"
-    },
-    {
-      id: 2,
-      title: "Infrasity & Qodo",
-      subtitle: "Product Videos",
-      category: "Tutorials",
-      videoId: "pQoP_Rndpqw",
-      image: "/video-page/t2.JPG",
-      description: "We shoot and edit educational video content for leading tech companies",
-      services: [
-        "Script writing",
-        "Graphics and animations",
-        "Storyboard", 
-        "Sound design",
-        "Project management",
-        "Studio production (Spokesperson)"
-      ],
-      estimatedCost: "Starting at $1800",
-      deliveryTime: "5 days"
-    },
-    {
-      id: 3,
-      title: "AI MARKETING GAME-CHANGERS",
-      subtitle: "Educational Videos",
-      category: "Educational Videos",
-      videoId: "BivxMW5DftE", 
-      image: "/video-page/t3.JPG",
-      description: "We shoot and edit educational video content for leading tech companies",
-      services: [
-        "Script writing",
-        "Graphics and animations",
-        "Storyboard",
-        "Sound design", 
-        "Project management",
-        "Studio production (Spokesperson)"
-      ],
-      estimatedCost: "Starting at $1800",
-      deliveryTime: "5 days"
-    },
-    {
-      id: 4,
-      title: "Infrasity & Kubiya",
-      subtitle: "Educational Videos", 
-      category: "Educational Videos",
-      videoId: "_TrEJAJPp0M",
-      image: "/video-page/t4.png",
-      description: "We shoot and edit educational video content for leading tech companies",
-      services: [
-        "Script writing",
-        "Graphics and animations",
-        "Storyboard",
-        "Sound design",
-        "Project management", 
-        "Studio production (Spokesperson)"
-      ],
-      estimatedCost: "Starting at $1800",
-      deliveryTime: "5 days"
-    }
-  ];
+const projects = [
+  {
+    id: 1,
+    title: "Infrasity",
+    subtitle: "B2B Video Production Agency",
+    category: "Presentation Videos",
+    videoId: "pQoP_Rndpqw",
+    image: "/video-page/t1.JPG",
+    description: "We shoot and edit educational video content for leading tech companies.",
+    services: [
+      "Script writing",
+      "Graphics and animations",
+      "Storyboard",
+      "Sound design",
+      "Project management",
+      "Studio production (Spokesperson)"
+    ],
+    estimatedCost: "Starting at $1800",
+    deliveryTime: "5 days"
+  },
+  {
+    id: 2,
+    title: "Infrasity & Qodo",
+    subtitle: "Product Video Production",
+    category: "Tutorials",
+    videoId: "pQoP_Rndpqw",
+    image: "/video-page/t2.JPG",
+    description: "We create high-quality tutorial videos tailored for technology products and platforms.",
+    services: [
+      "Script writing",
+      "Graphics and animations",
+      "Storyboard",
+      "Sound design",
+      "Project management",
+      "Studio production (Spokesperson)"
+    ],
+    estimatedCost: "Starting at $1800",
+    deliveryTime: "5 days"
+  },
+  {
+    id: 3,
+    title: "AI Marketing Game-Changers",
+    subtitle: "Educational Video Series",
+    category: "Educational Videos",
+    videoId: "BivxMW5DftE",
+    image: "/video-page/t3.JPG",
+    description: "We produce engaging educational videos that highlight the latest trends in AI and marketing.",
+    services: [
+      "Script writing",
+      "Graphics and animations",
+      "Storyboard",
+      "Sound design",
+      "Project management",
+      "Studio production (Spokesperson)"
+    ],
+    estimatedCost: "Starting at $1800",
+    deliveryTime: "5 days"
+  },
+  {
+    id: 4,
+    title: "Infrasity & Kubiya",
+    subtitle: "Educational Content Production",
+    category: "Educational Videos",
+    videoId: "_TrEJAJPp0M",
+    image: "/video-page/t4.png",
+    description: "We develop compelling educational content for top tech platforms and developer-focused companies.",
+    services: [
+      "Script writing",
+      "Graphics and animations",
+      "Storyboard",
+      "Sound design",
+      "Project management",
+      "Studio production (Spokesperson)"
+    ],
+    estimatedCost: "Starting at $1800",
+    deliveryTime: "5 days"
+  }
+];
+
 
   const openPopup = (project) => {
     setSelectedProject(project);
@@ -242,7 +243,7 @@ const PortfolioShowcase = () => {
                     <span className="text-[#ffffff80] text-sm md:text-base">Delivery Time</span>
                     <span className="font-bold text-sm md:text-base">{selectedProject.deliveryTime}</span>
                   </div>
-                  <div className='flex justify-start items-center'>
+                  <div className='flex justify-center items-center'>
                    <Link 
                    href="/contact"
                    className="bg-[#3c4199] border border-white/20 hover:opacity-90 px-4 md:px-6 py-2 md:py-3 rounded-full transition-all duration-300 flex items-center space-x-2 text-sm md:text-base">
