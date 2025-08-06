@@ -36,6 +36,36 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Termina Demi';
+  src: url('./fonts/TerminaTest-Demi.otf') format('opentype');
+  font-weight: semibold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Termina Demi';
+  src: url('./fonts/TerminaTest-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Termina Demi";
+  src: url('./fonts/TerminaTest-Bold.otf');
+  font-weight: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Termina Demi";
+  src: url('./fonts/TerminaTest-Heavy.otf');
+  font-weight: 600;
+  font-display: swap;
+}
+
+
+
 /* @font-face {
   font-family: "Quicksand";
   src: url('./fonts/Quicksand-Medium.woff2');
@@ -478,3 +508,6 @@ body {
 }
 
 
+.text-glow-yellow {
+  text-shadow: 0 0 15px #1966ff3a, 0 0 20px #1966ff44;
+}
