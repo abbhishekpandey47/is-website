@@ -10,7 +10,6 @@ const Video = () => {
   const videoId = "0AsyeSd1_kQ";
 
   const sets = [
-   
     { id: 2, name: "Purple Ambiance", image:"/video-page/i2.JPG",},
     { id: 3, name: "Green Workspace", image:"/video-page/i3.JPG",},
     { id: 1, name: "Gradient Studio" , image:"/video-page/i1.JPG",},
@@ -77,7 +76,7 @@ create your product explainer videos.{' '}
           {sets.map((set) => (
             <div
               key={set.id}
-              className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 min-w-[200px] flex-shrink-0"
+              className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 min-w-[150px] flex-shrink-0"
             >
               <div className="aspect-video">
                 <Image

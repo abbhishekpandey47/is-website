@@ -10,6 +10,8 @@ const fileList = [
   "cedana.png",
   "dhiwise.png",
   "amnic.png",
+  "oso.png",
+  "ox-sec.svg",
   "mvp-grow.png",
   "cerbos.png",
   "qodo-logo.png",
@@ -39,6 +41,8 @@ const getLogoPadding = (filename) => {
   const paddingMap = {
     'dhiwise.png': 'p-2',
     'middleware-logo.svg': 'p-3',
+    'oso.png': 'p-12',
+    'ox-sec.svg': 'p-8',
     'qodo-logo.svg': 'p-8',
     'stackOne.svg': 'p-4',
     'mocha.png': 'p-8',
