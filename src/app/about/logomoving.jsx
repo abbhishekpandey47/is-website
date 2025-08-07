@@ -7,6 +7,8 @@ export default function LogoMoving() {
     "firstock-logo.webp",
     "cedana.png",
     "cerbos.png",
+    "oso.png",
+  "ox-sec.svg",
     "codegiant-infra-1.png",
     "cycloid.png",
     "daytona-removebg-preview-e1721477918328.png",

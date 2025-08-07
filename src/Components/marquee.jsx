@@ -10,6 +10,8 @@ const fileList = [
   "firstock-logo.webp",
   "dhiwise.svg",
   "amnic.png",
+  "oso.png",
+  "ox-sec.svg",
   "cedana.png",
   "cerbos.png",
   "codegiant-infra-1.png",
@@ -43,6 +45,8 @@ const getLogoPadding = (filename) => {
     'qodo-logo.svg': 'p-8',
     'stackOne.svg': 'p-4',
     'mocha.png': 'p-8',
+    'oso.png': 'p-12',
+    'ox-sec.svg': 'p-8',
     'aviator.png': 'p-3',
     'firstock-logo.webp': 'p-5',
     'amnic.png': 'p-6',
@@ -67,14 +71,14 @@ const getLogoPadding = (filename) => {
     'terrateam.png': 'p-4',
     'vapi.png': 'p-5',
   };
-  
+
   // Return specific padding or default p-4
   return paddingMap[filename] || 'p-4';
 };
 
-const MarqueeDef = ({text}) => {
+const MarqueeDef = ({ text }) => {
   const fileMemo = useMemo(() => fileList, [fileList]);
-  
+
   return (
     <div className="max-lg:mt-[30vh] max-sm:mt-[0vh] max bg-gradient-to-br from-[#DEE4EA] to-[#ebeef1] pt-10 pb-2.5 card glass">
       <h2 className="text-center pb-1 text-black quicksand-bold text-2xl">
@@ -94,7 +98,7 @@ const MarqueeDef = ({text}) => {
             return (
               <div
                 key={index}
-                className="flex-shrink-0 mix-blend-color-burn min-w-[160px] flex justify-center items-center"
+                className={`flex-shrink-0 mix-blend-color-burn w-[160px] flex justify-center items-center`}
               >
                 <Image
                   loading="lazy"
@@ -109,7 +113,7 @@ const MarqueeDef = ({text}) => {
           })}
         </div>
       </Marquee>
-      
+
       {/* Duplicate marquee for seamless loop - fixes overlapping issue */}
       <style jsx>{`
         .marquee-container {
