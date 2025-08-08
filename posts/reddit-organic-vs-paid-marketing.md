@@ -56,28 +56,21 @@ I have mentioned all possible metrics you would want to know before setting up a
 
 ### **Organic vs Paid Search Table Comparison**
 
-| Crieteria  | Organic  | Paid  |
-| :---- | :---- | :---- |
-| **Cost**  | Free | Cost Per Click (CPC) \- $0.50 \- $4.00 Cost Per Thousand Impressions (CPM) \- $3.50 \- $15.00 Minimum Daily Spend- $5/day Minimum Campaign Budget- $50 total |
-| **Trust Level** | High if done right | Moderate to low (Depends on the ad quality) |
-| **Visibility**  | Earned through relevance & engagement | Guaranteed via targeting  |
-| **Result Time**  | Slow but long-term | Fast but temporary |
-| **Reddit Community Acceptance**  | High (If authentic) | Low (If too sales-oriented or irrelevant) |
-| **Resources Needed** | Strategist, Writer, Web Developer, Graphic Artist, Manager | Campaign Manager, Copywriter |
-| **Conversion Rate** | 2.4% | 1.3% |
-| **ROI**  | 748% | 36%  |
-| **User Intent Alignment** | High-users engage voluntarily with interest-driven posts | Medium ads may appear to users who aren't actively seeking the solution |
-| **Algorithm Dependency** | Dependent on upvotes, comments, and subreddit rules | Less reliant. Visibility is guaranteed through payment |
-| **Audience Feedback** | Direct, candid, and often brutally honest | Mixed, lower engagement, harder to receive genuine feedback |
-| **Brand Recall** | Stronger due to authentic, conversation-based exposure | Weaker and ad blindness and scrolling habits reduce retention |
-| **Algorithm Dependency** | Dependent on upvotes, comments, and subreddit rules | Less reliant. Visibility is guaranteed through payment |
-| **Community Building Potential** | High-builds long-term credibility and fosters a loyal following | Low campaigns are short-lived without sustained interaction |
-| **Subreddit Moderation Risk** | High-posts can be removed or flagged if not following subreddit rules | Lower-ads bypass subreddit rules but still face community scrutiny |
-| **Learning Curve** | Steep \-requires Reddit literacy, subtlety, and cultural fluency | Easier to start, plug-and-play targeting and budget setup |
-| **Data & Analytics Access** | Limited. Unless using UTM tags and external tools | Detailed. Includes impressions, clicks, conversions, and targeting insights  |
-| **Brand Voice Flexibility** | Flexible. Allows experimentation with tone, memes, storytelling | Restricted. Ad format has word/character/image limitations |
-| **Reputation Risk** | Higher. One wrong move can trigger backlash | Medium. Users may downvote or report irrelevant/annoying ads |
-| **Ideal For** | Thought leadership, storytelling, niche engagement | Driving quick traffic to landing pages, A/B testing offers |
+| Criteria               | Organic                                      | Paid                                                    |
+|------------------------|----------------------------------------------|---------------------------------------------------------|
+| **Cost**               | Free                                         | CPC: $0.50–$4.00 <br> CPM: $3.50–$15.00                |
+| **Trust Level**        | High (if done right)                         | Moderate to low (depends on ad quality)                 |
+| **Visibility**         | Earned (relevance & engagement)              | Guaranteed (via targeting)                              |
+| **Result Time**        | Slow, long-term                              | Fast but temporary                                      |
+| **Community Acceptance**| High if authentic                           | Low if sales-oriented or irrelevant                     |
+| **Resources Needed**   | Strategist, Writer, Web Dev, Graphic Artist, Manager | Campaign Manager, Copywriter                  |
+| **Conversion Rate**    | ~2.4%                                        | ~1.3%                                                   |
+| **ROI**                | ~748%                                        | ~36%                                                    |
+| **Audience Feedback**  | Direct, candid, often brutally honest        | Mixed, generally lower engagement                       |
+| **Brand Recall**       | Strong (authentic, conversation-based)       | Weaker (potential ad blindness)                         |
+| **Community Building** | High (credibility & loyal following)         | Low (short-lived)                                       |
+| **Reputation Risk**    | Higher (risk of backlash)                    | Medium (can be downvoted or reported)                   |
+| **Ideal For**          | Thought leadership, storytelling, niche engagement | Quick traffic, A/B testing, offers                |
 
  
 
