@@ -56,23 +56,24 @@ I have mentioned all possible metrics you would want to know before setting up a
 
 ### **Organic vs Paid Search Table Comparison**
 
-| Criteria               | Organic                                      | Paid                                                    |
-|------------------------|----------------------------------------------|---------------------------------------------------------|
-| **Cost**               | Free                                         | CPC: $0.50–$4.00 <br> CPM: $3.50–$15.00                |
-| **Trust Level**        | High (if done right)                         | Moderate to low (depends on ad quality)                 |
-| **Visibility**         | Earned (relevance & engagement)              | Guaranteed (via targeting)                              |
-| **Result Time**        | Slow, long-term                              | Fast but temporary                                      |
-| **Community Acceptance**| High if authentic                           | Low if sales-oriented or irrelevant                     |
-| **Resources Needed**   | Strategist, Writer, Web Dev, Graphic Artist, Manager | Campaign Manager, Copywriter                  |
-| **Conversion Rate**    | ~2.4%                                        | ~1.3%                                                   |
-| **ROI**                | ~748%                                        | ~36%                                                    |
-| **Audience Feedback**  | Direct, candid, often brutally honest        | Mixed, generally lower engagement                       |
-| **Brand Recall**       | Strong (authentic, conversation-based)       | Weaker (potential ad blindness)                         |
-| **Community Building** | High (credibility & loyal following)         | Low (short-lived)                                       |
-| **Reputation Risk**    | Higher (risk of backlash)                    | Medium (can be downvoted or reported)                   |
-| **Ideal For**          | Thought leadership, storytelling, niche engagement | Quick traffic, A/B testing, offers                |
+| Criteria                   | Organic                                          | Paid                                                    |
+|----------------------------|--------------------------------------------------|---------------------------------------------------------|
+| **Cost**                   | Free                                             | CPC: $0.50–$4.00 <br> CPM: $3.50–$15.00                |
+| **Minimum Daily Spend**    | $0                                               | $5/day                                                  |
+| **Minimum Campaign Budget**| $0                                               | $50 total                                               |
+| **Trust Level**            | High (if done right)                             | Moderate to Low (depends on ad quality)                 |
+| **Visibility**             | Earned (relevance & engagement)                  | Guaranteed (via targeting)                              |
+| **Result Time**            | Slow, long-term                                  | Fast but temporary                                      |
+| **Community Acceptance**   | High if authentic                                | Low if too sales-oriented or irrelevant                 |
+| **Resources Needed**       | Strategist, Writer, Web Dev, Design              | Campaign Manager, Copywriter                            |
+| **Conversion Rate**        | ~2.4%                                            | ~1.3%                                                   |
+| **ROI**                    | ~748%                                            | ~36%                                                    |
+| **Audience Feedback**      | Direct, candid, brutally honest                  | Mixed, lower engagement                                 |
+| **Brand Recall**           | Strong (authentic exposure)                      | Weaker (ad blindness possible)                          |
+| **Community Building**     | High (credibility, loyalty)                      | Low (short-lived campaigns)                             |
+| **Reputation Risk**        | Higher (can trigger backlash)                    | Medium (downvotes/reporting possible)                   |
+| **Ideal For**              | Thought leadership, storytelling, niche engagement| Quick traffic, A/B testing                        |
 
- 
 
 **Tip**: Trying the combination of paid vs organic Reddit advertising will open up new doors for your brand. 
 
