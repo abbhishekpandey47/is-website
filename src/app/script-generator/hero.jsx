@@ -369,9 +369,9 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                         <div className="text-xs">
                             <button
                                 onClick={() => {
-  onClose();
-  regenerateText();
-}}
+                                    onClose();
+                                    regenerateText();
+                                }}
 
                                 className="flex items-center bg-[#6c5ce8] hover:bg-[#6c5ce8]/80 text-white px-4 py-2 rounded-xl transition-colors duration-200 text-sm font-medium"
 
@@ -706,25 +706,25 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                             rows={3}
                         />
-                       {regenerate ? (
-    <button
-        onClick={() => {
-            handleSubmit();
-            setRgenerate(false);
-        }}
-        className="absolute bottom-4 right-4 w-32 flex items-center justify-center h-10 bg-[#6c5ce8] hover:bg-[#6c5ce8]/80 text-white rounded-xl transition-colors duration-200 text-sm font-medium"
-    >
-        <Sparkles className="w-5 h-5 mr-2" />
-        Regenerate
-    </button>
-) : (
-    <button
-        onClick={handleSubmit}
-        className="absolute bottom-4 right-4 w-10 h-10 bg-[#6c5ce8] hover:opacity-80 rounded-xl flex items-center justify-center transition-colors duration-200 shadow-lg"
-    >
-        <Sparkles className="w-5 h-5 stroke-white/90" />
-    </button>
-)}
+                        {regenerate ? (
+                            <button
+                                onClick={() => {
+                                    handleSubmit();
+                                    setRgenerate(false);
+                                }}
+                                className="absolute bottom-4 right-4 w-32 flex items-center justify-center h-10 bg-[#6c5ce8] hover:bg-[#6c5ce8]/80 text-white rounded-xl transition-colors duration-200 text-sm font-medium"
+                            >
+                                <Sparkles className="w-5 h-5 mr-2" />
+                                Regenerate
+                            </button>
+                        ) : (
+                            <button
+                                onClick={handleSubmit}
+                                className="absolute bottom-4 right-4 w-10 h-10 bg-[#6c5ce8] hover:opacity-80 rounded-xl flex items-center justify-center transition-colors duration-200 shadow-lg"
+                            >
+                                <Sparkles className="w-5 h-5 stroke-white/90" />
+                            </button>
+                        )}
 
                     </div>
                 </div>
