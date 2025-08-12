@@ -30,6 +30,14 @@ const authorData = [
     designation: "Content Writer @ Infrasity",
     about: "Content Strategist at Infrasity, leading the content department and overseeing the development of high-quality tech content.",
     linkedIn: "https://www.linkedin.com/in/komalguptaofficial/"
+  },
+  {
+    authorId: "author0005",
+    name: "Paramita",
+    profilePic: "/authorImages/paramita.png",
+    designation: "Content Writer @ Infrasity",
+    about: "Content Strategist at Infrasity, leading the content department and overseeing the development of high-quality tech content.",
+    linkedIn: "https://www.linkedin.com/in/paramita-kalita/"
   }
 ];
 
