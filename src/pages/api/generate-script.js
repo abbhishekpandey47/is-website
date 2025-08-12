@@ -1,12 +1,29 @@
-// pages/api/generate-script.js
 import OpenAI from "openai";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-  organization: process.env.OPENAI_ORG_ID, // ✅ Added org ID
+  organization: process.env.OPENAI_ORG_ID, 
 });
 
 export default async function handler(req, res) {
+const allowedOrigins = [
+    "https://infrasity.com",
+    "http://localhost:3000"
+  ];
+  
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -31,7 +48,7 @@ export default async function handler(req, res) {
     `;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: systemMessage },
         { role: "user", content: prompt },
@@ -41,11 +58,11 @@ export default async function handler(req, res) {
     });
 
     const script = completion.choices[0]?.message?.content?.trim() || "";
-    console.log("content :" + script);
+    console.log("Generated script:", script);
 
     res.status(200).json({ script });
   } catch (error) {
-    console.error(error);
+    console.error("Error generating script:", error);
     res.status(500).json({ error: "Failed to generate script" });
   }
 }
