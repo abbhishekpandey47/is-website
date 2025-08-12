@@ -8,7 +8,7 @@ export default function VideoScriptContent() {
           {/* Header */}
           <div className="text-left mb-12">
             <h1 className="font-[quicksand] text-xl md:text-2xl font-bold text-white">
-              Generate engaging video scripts in seconds
+              Generate engaging <span class="specialtext">video scripts in seconds</span>
             </h1>
           </div>
 

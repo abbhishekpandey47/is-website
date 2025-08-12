@@ -7,8 +7,8 @@ export default function AIScriptStep() {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="font-[quicksand] text-5xl md:text-6xl font-black text-white mb-4 tracking-tight">
-            HOW TO USE THE AI SCRIPT<br />
-            <span className="text-white-500">GENERATOR:</span>
+            HOW TO USE THE <span class="specialtext">AI SCRIPT<br />
+            GENERATOR:</span>
           </h1>
         </div>
 

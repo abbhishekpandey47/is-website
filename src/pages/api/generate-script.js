@@ -1,16 +1,8 @@
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  organization: process.env.OPENAI_ORG_ID, 
-});
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { videoTypePrompts } from "./prompt";
 
 export default async function handler(req, res) {
-const allowedOrigins = [
-    "https://infrasity.com",
-    "http://localhost:3000"
-  ];
-  
+  const allowedOrigins = ["https://infrasity.com", "http://localhost:3000"];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
@@ -19,46 +11,34 @@ const allowedOrigins = [
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+  if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   try {
-    const { prompt, toolsInvolved, selectedAudience, targetAudience } = req.body;
+    const { prompt, toolsInvolved, targetAudience, videoType } = req.body;
 
-    if (!prompt || !toolsInvolved || selectedAudience.length === 0 || targetAudience.length === 0) {
+console.log("Prompt:", prompt);
+console.log("Tools Involved:", toolsInvolved);
+console.log("Target Audience:", targetAudience);
+console.log("Video Type:", videoType);
+    if (!prompt || !toolsInvolved || !Array.isArray(targetAudience) || targetAudience.length === 0 || !videoType) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const systemMessage = `
-      You are an expert video scriptwriter for technical and AI content.
-      Create an engaging, structured script based on the given inputs.
-      Structure:
-      - Hook (attention grabber)
-      - Introduction
-      - Main content sections (use examples with ${toolsInvolved})
-      - Call to action
-      - Closing
-      Style: Keep it relevant for ${selectedAudience.join(", ")} but tailored to ${targetAudience.join(", ")}.
-    `;
+    const systemMessageGenerator = videoTypePrompts[videoType];
+    const systemMessage = systemMessageGenerator
+      ? systemMessageGenerator({ toolsInvolved, targetAudience })
+      : `You are an expert video scriptwriter for technical and AI content. Audience: ${targetAudience.join(", ")}.`;
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        { role: "system", content: systemMessage },
-        { role: "user", content: prompt },
-      ],
-      temperature: 0.75,
-      max_tokens: 800,
-    });
+    const fullPrompt = `${systemMessage}\n\nUser Prompt:\n${prompt}`;
 
-    const script = completion.choices[0]?.message?.content?.trim() || "";
-    console.log("Generated script:", script);
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+    const result = await model.generateContent(fullPrompt);
+    const script = result.response.text().trim();
+
+    console.log("Script" + script);
 
     res.status(200).json({ script });
   } catch (error) {
