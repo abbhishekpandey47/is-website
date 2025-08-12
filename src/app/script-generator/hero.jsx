@@ -446,7 +446,7 @@ const CustomDropdown = ({ label, options, value, onChange, minWidth, getOptionIc
             setGeneratedComment(""); 
             setLoading(true);
 
-            const res = await fetch("/api/generate-script", {
+            const res = await fetch("https://infrasity-frontend.vercel.app/api/generate-script", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
