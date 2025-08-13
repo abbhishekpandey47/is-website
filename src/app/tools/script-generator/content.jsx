@@ -8,7 +8,7 @@ export default function VideoScriptContent() {
           {/* Header */}
           <div className="text-left mb-12">
             <h1 className="font-[quicksand] text-xl md:text-2xl font-bold text-white">
-              Generate engaging <span class="specialtext">video scripts in seconds</span>
+            Generate High-Impact Video <span class="specialtext">Scripts for Engineering Startups in Seconds</span>
             </h1>
           </div>
 
@@ -16,12 +16,13 @@ export default function VideoScriptContent() {
           <div className="grid md:grid-cols-2 gap-8">
             {/* Left Column */}
             <p className="text-lg leading-relaxed text-gray-300">
-              Staring at a blank page while deadlines loom? VEED's AI script generator eliminates writer's block by creating scripts for any format — TikTok videos, Instagram Reels, YouTube content, and marketing campaigns. Describe your video idea, and get a complete script with hooks, key points, and calls-to-action. Then, refine the script with your expertise and brand voice.
+            Stop wasting hours figuring out what to say in your product videos. Infrasity’s AI Script Generator is purpose-built for AI, DevTool, and infrastructure-focused startups—covering everything from cost optimization workflows to side-by-side tool comparisons (e.g., code review platforms, IaC automation tools), and deep dives into real developer workflows like Kubernetes tuning, CI/CD speed-ups, or testing automation.
+
             </p>
 
             {/* Right Column */}
             <p className="text-lg leading-relaxed text-gray-300">
-              Skip the complicated workflow of multiple platforms. Once your script is ready, you can turn it into a professional video with lifelike voiceovers, AI avatars, background music, captions, and stock footage. No need to juggle tools and software. Create professional-quality content in one seamless platform. Get started now for free.
+            Just tell us your product, use case, and audience, and get a script that’s already optimized for hooks, technical clarity, and developer engagement. Whether you’re launching a new feature, breaking down a complex workflow, or showing how your tool outperforms the competition, our generator delivers ready-to-use scripts grounded in real GTM research, trending technical conversations, and platform-specific performance data—so you’re not just creating content, you’re creating traction
             </p>
           </div>
         </div>
