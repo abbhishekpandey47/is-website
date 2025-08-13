@@ -65,6 +65,11 @@ const Footer = () => {
             <div className="w-full sm:w-1/2 lg:w-1/5 mb-8 lg:mb-0 text-center sm:text-left">
               <h3 className="font-bold mb-4">Tools</h3>
               <ul className="space-y-3">
+                 <li>
+                  <a href="/tools/script-generator" className="hover:underline">
+                    Script Generator
+                  </a>
+                </li>
                 <li>
                   <a href="/tools/roi-cal" className="hover:underline">
                     ROI Calculator
