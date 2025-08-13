@@ -6,134 +6,130 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
     const [copied, setCopied] = useState(false);
 
     // Enhanced parsing for tool comparison content
-    const parseScript = (script) => {
-        const sections = [];
-        const lines = script.split('\n').filter(line => line.trim());
+   // Replace your existing parseScript with this
+const parseScript = (script) => {
+  const sections = [];
+  const lines = script.split('\n');
+  let metadata = null;
+  let remainingScript = script;
 
-        let currentSection = { type: 'content', content: [] };
-        let mainTitle = null;
+  // 1) Try fenced JSON block first: ```json ... ```
+  const fencedJsonMatch = script.match(/^\s*```json\s*([\s\S]*?)```/i);
+  if (fencedJsonMatch) {
+    try {
+      metadata = JSON.parse(fencedJsonMatch[1]);
+      remainingScript = script.replace(fencedJsonMatch[0], '').trim();
+    } catch (err) {
+      // invalid JSON — ignore, leave as plain text
+      metadata = null;
+    }
+  } else {
+    // 2) Try raw JSON object at very start: { ... }
+    const rawJsonMatch = script.match(/^\s*({[\s\S]*?})/);
+    if (rawJsonMatch) {
+      try {
+        metadata = JSON.parse(rawJsonMatch[1]);
+        remainingScript = script.replace(rawJsonMatch[1], '').trim();
+      } catch (err) {
+        metadata = null;
+      }
+    }
+  }
 
-        lines.forEach(line => {
-            line = line.trim();
+  // Now proceed to parse the remaining script (without the JSON block)
+  const contentLines = remainingScript.split('\n').filter(line => line.trim());
+  let currentSection = { type: 'content', content: [] };
+  let mainTitle = null;
 
-            // Handle main headers (# Title)
-            if (line.startsWith('# ')) {
-                mainTitle = line.replace('# ', '');
-                if (currentSection.content.length > 0) {
-                    sections.push(currentSection);
-                }
-                currentSection = {
-                    type: 'main-title',
-                    title: mainTitle,
-                    content: []
-                };
-            }
-            // Handle section headers (## Section)
-            else if (line.startsWith('## ')) {
-                if (currentSection.content.length > 0) {
-                    sections.push(currentSection);
-                }
-                const title = line.replace('## ', '');
-                currentSection = {
-                    type: getSectionType(title),
-                    title: title,
-                    content: []
-                };
-            }
-            // Handle subsections (### or **Bold Headers** with colons)
-            else if (line.startsWith('### ') || (line.startsWith('**') && line.endsWith(':**'))) {
-                const title = line.replace(/###\s|^\*\*|\*\*:$/g, '');
-                currentSection.content.push({
-                    type: 'subsection',
-                    title: title,
-                    items: []
-                });
-            }
-            // Handle bullet points and list items
-            else if (line.startsWith('* ') || line.startsWith('- ') || line.startsWith('✅') || line.startsWith('❌')) {
-                let icon, text, isStrong = false;
+  contentLines.forEach(rawLine => {
+    let line = rawLine.trim();
 
-                if (line.startsWith('✅')) {
-                    icon = '✅';
-                    text = line.replace(/^✅\s*/, '').replace(/^(Strengths|Pros):\s*/i, '');
-                } else if (line.startsWith('❌')) {
-                    icon = '❌';
-                    text = line.replace(/^❌\s*/, '').replace(/^(Limitations|Cons):\s*/i, '');
-                } else if (line.startsWith('* ')) {
-                    text = line.replace(/^\*\s*/, '');
-                    // Check if it's a bold tool name (starts with **ToolName:**)
-                    if (text.match(/^\*\*[^*]+\*\*:/)) {
-                        isStrong = true;
-                        icon = 'bold';
-                        text = text.replace(/^\*\*([^*]+)\*\*:\s*/, '**$1:** ');
-                    } else {
-                        icon = '•';
-                    }
-                } else {
-                    icon = '•';
-                    text = line.replace(/^-\s*/, '');
-                }
+    // Headers
+    if (line.startsWith('# ')) {
+      mainTitle = line.replace('# ', '');
+      if (currentSection.content.length > 0) sections.push(currentSection);
+      currentSection = { type: 'main-title', title: mainTitle, content: [] };
+      return;
+    }
 
-                const listItem = {
-                    type: 'list-item',
-                    icon: icon,
-                    text: text,
-                    isStrong: isStrong
-                };
+    if (line.startsWith('## ')) {
+      if (currentSection.content.length > 0) sections.push(currentSection);
+      const title = line.replace('## ', '');
+      currentSection = { type: getSectionType(title), title, content: [] };
+      return;
+    }
 
-                // Check if we're in a subsection
-                if (currentSection.content.length > 0 && currentSection.content[currentSection.content.length - 1].type === 'subsection') {
-                    currentSection.content[currentSection.content.length - 1].items.push(listItem);
-                } else {
-                    currentSection.content.push(listItem);
-                }
-            }
-            // Handle nested bullet points (indented with spaces/tabs)
-            else if (line.match(/^\s{4,}\*\s/) || line.match(/^\s{4,}-\s/)) {
-                const text = line.replace(/^\s+[\*-]\s*/, '');
-                const listItem = {
-                    type: 'list-item',
-                    icon: '◦',
-                    text: text,
-                    isNested: true
-                };
+    if (line.startsWith('### ') || (line.startsWith('**') && line.endsWith(':**'))) {
+      const title = line.replace(/###\s|^\*\*|\*\*:$/g, '');
+      currentSection.content.push({ type: 'subsection', title, items: [] });
+      return;
+    }
 
-                if (currentSection.content.length > 0) {
-                    const lastItem = currentSection.content[currentSection.content.length - 1];
-                    if (lastItem.type === 'subsection') {
-                        lastItem.items.push(listItem);
-                    } else {
-                        currentSection.content.push(listItem);
-                    }
-                }
-            }
-            // Handle numbered lists and regular paragraphs
-            else if (line && !line.startsWith('[') && line !== '---') {
-                // Handle numbered lists
-                if (/^\d+\.\s/.test(line)) {
-                    const number = line.match(/^(\d+)\.\s/)[1];
-                    const text = line.replace(/^\d+\.\s/, '');
-                    currentSection.content.push({
-                        type: 'numbered-item',
-                        number: number,
-                        text: text
-                    });
-                } else {
-                    currentSection.content.push({
-                        type: 'paragraph',
-                        text: line.replace(/\*\*/g, '')
-                    });
-                }
-            }
-        });
-
-        // Add the last section
-        if (currentSection.content.length > 0) {
-            sections.push(currentSection);
+    // Lists and icons
+    if (line.startsWith('* ') || line.startsWith('- ') || line.startsWith('✅') || line.startsWith('❌')) {
+      let icon, text, isStrong = false;
+      if (line.startsWith('✅')) {
+        icon = '✅';
+        text = line.replace(/^✅\s*/, '');
+      } else if (line.startsWith('❌')) {
+        icon = '❌';
+        text = line.replace(/^❌\s*/, '');
+      } else if (line.startsWith('* ')) {
+        text = line.replace(/^\*\s*/, '');
+        if (text.match(/^\*\*[^*]+\*\*:/)) {
+          isStrong = true;
+          icon = 'bold';
+          text = text.replace(/^\*\*([^*]+)\*\*:\s*/, '**$1:** ');
+        } else {
+          icon = '•';
         }
+      } else {
+        icon = '•';
+        text = line.replace(/^\-\s*/, '');
+      }
 
-        return { sections, mainTitle };
-    };
+      const listItem = { type: 'list-item', icon, text, isStrong };
+
+      const last = currentSection.content[currentSection.content.length - 1];
+      if (last && last.type === 'subsection') {
+        last.items.push(listItem);
+      } else {
+        currentSection.content.push(listItem);
+      }
+      return;
+    }
+
+    // Nested bullet detection (indented)
+    if (/^\s{4,}[\*\-]\s/.test(rawLine)) {
+      const text = rawLine.replace(/^\s+[\*\-]\s*/, '');
+      const nestedItem = { type: 'list-item', icon: '◦', text, isNested: true };
+      const last = currentSection.content[currentSection.content.length - 1];
+      if (last && last.type === 'subsection') {
+        last.items.push(nestedItem);
+      } else {
+        currentSection.content.push(nestedItem);
+      }
+      return;
+    }
+
+    // Numbered items
+    if (/^\d+\.\s/.test(line)) {
+      const number = line.match(/^(\d+)\.\s/)[1];
+      const text = line.replace(/^\d+\.\s/, '');
+      currentSection.content.push({ type: 'numbered-item', number, text });
+      return;
+    }
+
+    // Fallback paragraph
+    if (line && line !== '---') {
+      currentSection.content.push({ type: 'paragraph', text: line.replace(/\*\*/g, '') });
+    }
+  });
+
+  if (currentSection.content.length > 0) sections.push(currentSection);
+
+  return { sections, mainTitle, metadata };
+};
 
     const getSectionType = (title) => {
         const lowerTitle = title.toLowerCase();
@@ -150,16 +146,16 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
 
     const getSectionIcon = (type) => {
         switch (type) {
-            case 'main-title': return '🔧';
-            case 'intro': return '💡';
-            case 'overview': return '📋';
-            case 'features': return '⚡';
-            case 'pricing': return '💰';
-            case 'usage': return '🛠️';
-            case 'pros-cons': return '⚖️';
-            case 'recommendation': return '🎯';
-            case 'action': return '🚀';
-            default: return '📄';
+            case 'main-title': return '';
+            case 'intro': return '';
+            case 'overview': return '';
+            case 'features': return '';
+            case 'pricing': return '';
+            case 'usage': return '';
+            case 'pros-cons': return '';
+            case 'recommendation': return '';
+            case 'action': return '';
+            default: return '';
         }
     };
 
@@ -198,7 +194,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
         document.body.removeChild(element);
     };
 
-    const { sections: parsedSections, mainTitle } = parseScript(generatedScript);
+    const { sections: parsedSections, mainTitle, metadata } = parseScript(generatedScript);
     const estimatedReadTime = Math.ceil(generatedScript.length / 1000); // Rough estimate: 1000 chars per minute
     const displayTitle = comparisonTitle || mainTitle || 'Tool Comparison Analysis';
 
@@ -252,6 +248,29 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                 {/* Content */}
                 <div className="p-6 overflow-y-auto max-h-[calc(85vh-140px)]">
                     <div className="space-y-6">
+                        {/* Metadata preview (only if metadata exists) */}
+{metadata && (
+  <div className="ml-4 text-sm text-gray-300">
+    {metadata.title || metadata.Title ? (
+      <div className="mb-1">
+        <strong className="text-white">{metadata.title || metadata.Title}</strong>
+      </div>
+    ) : null}
+
+    <div className="flex items-center space-x-3 text-xs text-gray-400">
+      {metadata.videoLength && (
+        <div className="flex items-center">
+          <Clock className="h-3 w-3 mr-1" />
+          <span>{metadata.videoLength}</span>
+        </div>
+      )}
+
+     
+    </div>
+  </div>
+)}
+
+                        
                         {parsedSections.map((section, index) => (
                             <div
                                 key={index}
@@ -538,15 +557,15 @@ export default function AIVideoScriptGenerator() {
 
     const getToneIcon = (tone) => {
         const icons = {
-            'Tool Comparison': '🔍',
-            'Feature Demo': '✨ ',
-            'Coding Walkthrough': '🧑‍💻',
-            'Bug Fixing Session': '🐛',
-            'Prompt Testing': '🧪',
-            'Productivity Tips': '⚡',
-            'Behind the Scenes': '🎬',
-            'Real-world Scenario Demo': '🌍',
-            'Code Optimization Breakdown': '🧠',
+            'Tool Comparison': '',
+            'Feature Demo': '',
+            'Coding Walkthrough': '',
+            'Bug Fixing Session': '',
+            'Prompt Testing': '',
+            'Productivity Tips': '',
+            'Behind the Scenes': '',
+            'Real-world Scenario Demo': '',
+            'Code Optimization Breakdown': '',
         };
         return icons[tone] || '';
     };
@@ -594,7 +613,8 @@ export default function AIVideoScriptGenerator() {
                     prompt,
                     videoType,
                     toolsInvolved,
-                    targetAudience
+                    targetAudience,
+                    videoLength
                 }),
             });
 
