@@ -51,7 +51,7 @@ const RedditPostTemplate = ({ darkMode }) => {
   const [fetchLoading, setFetchLoading] = useState(false);
   const [generateLoading, setGenerateLoading] = useState(false);
   const [tone, setTone] = useState("default");
-  const CONTEXT_CHAR_LIMIT = 250;
+  const CONTEXT_CHAR_LIMIT = 500;
   const EMBED_URL_CHAR_LIMIT = 200;
 
   const isValidRedditUrl = url => {
