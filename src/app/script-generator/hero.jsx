@@ -341,7 +341,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                                                         </span>
                                                     </div>
                                                     <p className="text-gray-300 leading-relaxed">
-                                                        {item.text}
+                                                        {item.text.replace(/\*/g, '')}
                                                     </p>
                                                 </div>
                                             )}
