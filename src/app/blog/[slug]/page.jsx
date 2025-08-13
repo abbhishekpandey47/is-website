@@ -15,6 +15,7 @@ import CTA2 from "./cta2";
 import CTA from "./cta"
 
 
+
 // Utility function to check if the post file exists
 const isValid = (slug) => {
   try {
@@ -201,13 +202,14 @@ const PostPage = (props) => {
         .map(line => line.trim());
     }
 
+
     return (
       <>
         <div className="pt-32 flex flex-col justify-center items-center">
           <HeadBanner postData={postData} />
           <div className="flex justify-around w-full pb-16 px-10 max-lg:flex-col">
             <div className=" max-lg:w-full max-lg:flex justify-center">
-              <Outline content={postContent} />
+        <Outline content={postContent} />
             </div>
             <div className="h-auto hidden max-lg:flex max-lg:justify-center">
               <div className="w-[84vw]">

@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Linkedin, X, Link as LinkIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
+
 
 const generateOutlineObj = (content) => {
   const lines = String(content).split("\n");
@@ -45,6 +47,7 @@ const generateOutlineObj = (content) => {
 };
 
 const Outline = ({ content }) => {
+  const pathname = usePathname();
   const outlineRef = useRef(null);
   const outline = useMemo(() => generateOutlineObj(content), [content]);
   const [activeId, setActiveId] = useState("");
@@ -219,6 +222,8 @@ const Outline = ({ content }) => {
         ))}
       </div>
       {/* Share with your community section */}
+                     {pathname !== "/blog/developer-advocates-bridge-engineer-product-teams" && (
+
       <div className=" py-5 px-6 mt-8 rounded-lg mb-4 readytostart text-center">
         <h3 className="text-white text-lg font-semibold mb-4">
           Share with your community!
@@ -247,6 +252,7 @@ const Outline = ({ content }) => {
           </button>
         </div>
       </div>
+                     )}
     </nav>
   );
 };
