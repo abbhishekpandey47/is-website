@@ -655,17 +655,17 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-8">
                     <h1 className="font-[quicksand] text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
-                        <span class="specialtext">AI VIDEO SCRIPT GENERATOR</span>
+                        <span class="specialtext">Video Scripts Built for Developer Audiences</span>
                     </h1>
                     <p className="text-lg sm:text-xl text-gray-400 font-medium max-w-2xl mx-auto">
-                        Generate free scripts for social media videos, explainers, marketing campaigns, and more
+                    From AI agents to testing platforms, devboxes to code review tools—generate scripts that speak your audience’s language
                     </p>
                 </div>
 
                 <div className="max-w-2xl mx-auto mb-8">
                     <div className="my-4 justify-center md:justify-start items-center gap-4 sm:gap-6">
                         <CustomDropdown
-                            label="Video Type"
+                            label="Select video type (how-to, comparison, explainer, use case, etc.)"
                             options={videoTypeDrop}
                             value={videoType}
                             onChange={setVideoType}
@@ -675,7 +675,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                         />
 
                         <CustomDropdown
-                            label="Tools Involved"
+                            label="Select tools, frameworks, or platforms"
                             options={toolsIn}
                             value={toolsInvolved}
                             onChange={setToolsInvolved}
@@ -685,7 +685,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                         />
 
                         <CustomDropdown
-                            label="Target Audience"
+                            label="Select target audience (developers, testers, platform engineers, etc.)"
                             options={audienceType}
                             value={targetAudience}
                             onChange={setTargetAudience}
@@ -701,7 +701,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                         <textarea
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
-                            placeholder="e.g. The best beach for beginner surfers in Europe."
+                            placeholder="e.g. AI Video Scripts for Technical Startups."
                             className="w-full h-32 sm:h-24 px-6 py-6 pr-16 bg-transparent text-white placeholder-gray-500 resize-none outline-none text-base sm:text-lg rounded-2xl scrollbar-hide"
                             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                             rows={3}
