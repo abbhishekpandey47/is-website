@@ -1,6 +1,4 @@
-# **![Blog banner on How Developer Advocates Bridge the Gap Between Engineers and Product Teams][image1]**
 
-# **How Developer Advocates Bridge the Gap Between Engineers and Product Teams** 
 
 ## **TL;DR**
 
@@ -14,8 +12,8 @@
 Developer Advocacy is the practice of building strong and two-way relationships between a company and its community. A Developer Advocate serves both as a bridge and a translator, connecting the team that designs and builds products with the product users.
 
 A Developer Advocate’s or a DA’s job is to represent the needs of developers and focus on improving their experience to ensure easier adoption of technology in startups or any organisation, such as Vercel, Tailscale, or Google.
+![Snapshot from X of Lee Robinson, VP of Product at Vercel, on DevRel.](https://x.com/leerob/status/1766507997939769499?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1766507997939769499%7Ctwgr%5E9eb00f5e6fa99bb1e896c708c1ca706e7a51f8bb%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fadityathakur.in%2Fhow-to-become-a-developer-advocate%2F)
 
-[![Snapshot from X of Lee Robinson, VP of Product at Vercel, on DevRel.][image2]](https://x.com/leerob/status/1766507997939769499?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1766507997939769499%7Ctwgr%5E9eb00f5e6fa99bb1e896c708c1ca706e7a51f8bb%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fadityathakur.in%2Fhow-to-become-a-developer-advocate%2F)
 
 Lee Robinson, VP of Product at Vercel, on DevRel.
 
