@@ -6,7 +6,7 @@ TITLE: Use this exact format: "# ${title || `Tool Comparison: ${toolsInvolved.jo
 
 STRUCTURE: Follow this exact section order and formatting:
 
-## Why Tool Selection Matters
+## Introduction
 Write 2-3 sentences explaining why choosing the right tool from these options is crucial for ${targetAudience.join(", ")}. Focus on impact on productivity, learning curve, and outcomes.
 
 ## Overview

@@ -386,9 +386,12 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
             </div>
         </div>
     );
-}; export default function AIVideoScriptGenerator() {
+};
+
+export default function AIVideoScriptGenerator() {
     const [prompt, setPrompt] = useState('');
     const [videoType, setVideoType] = useState('Select video type...');
+    const [videoLength, setVideoLength] = useState('Select video Length...');
     const [toolsInvolved, setToolsInvolved] = useState([]);
     const [targetAudience, setTargetAudience] = useState([]);
     const [generatedComment, setGeneratedComment] = useState("");
@@ -531,6 +534,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
     const videoTypeDrop = ['Tool Comparison', 'Feature Demo', 'Coding Walkthrough', 'Bug Fixing Session', 'Prompt Testing', 'Productivity Tips', 'Behind the Scenes', 'Real-world Scenario Demo', 'Code Optimization Breakdown'];
     const toolsIn = ['GitHub Copilot', 'CodeRabbit', 'Gemini', 'Cody', 'Amazon CodeWhisperer', 'Tabnine', 'Qodo', 'Replit Ghostwriter', 'Codeium'];
     const audienceType = ['Beginner Developers', 'Intermediate Developers', 'Senior Engineers', 'AI/ML Enthusiasts', 'Frontend Developers', 'Backend Developers', 'DevOps Professionals', 'Content Creators', 'CTOs / Tech Decision Makers'];
+    const videoLengthDrop = ['0 to 2 Minutes', '2 to 8 Minutes', '8 to 12 Minutes', '12 to 20 Minutes'];
 
     const getToneIcon = (tone) => {
         const icons = {
@@ -683,7 +687,6 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                             getOptionIcon={getAudienceIcon}
                             multiSelect={true}
                         />
-
                         <CustomDropdown
                             label="Target Audience"
                             options={audienceType}
@@ -693,6 +696,18 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                             getOptionIcon={getPlatformIcon}
                             multiSelect={true}
                         />
+                        <CustomDropdown
+                            label="Video Length"
+                            options={videoLengthDrop}
+                            value={videoLength}
+                            onChange={setVideoLength}
+                            minWidth="min-w-[110px]"
+                            getOptionIcon={getPlatformIcon}
+                            multiSelect={false}
+                        />
+
+
+
                     </div>
                 </div>
 
