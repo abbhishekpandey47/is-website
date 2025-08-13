@@ -209,6 +209,10 @@ const toolsTab = [
   },{
     hrefLink: "/tools/reddit-comment-generator",
     menuName: "Reddit Comment Generator",
+  },
+  {
+    hrefLink: "/tools/script-generator",
+    menuName: "Script Generator",
   }
 ];
 
@@ -593,6 +597,28 @@ const Navbar = () => {
                             }
                           >
                             <div>Reddit Comment Generator</div>
+                          </Link>
+                        </MenuItem2>
+
+                        <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick(
+                                "/tools/script-generator"
+                              );
+                            }}
+                            href="/tools/script-generator"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/tools/script-generator".includes(
+                                "http"
+                              )
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>Script Generator</div>
                           </Link>
                         </MenuItem2>
 
