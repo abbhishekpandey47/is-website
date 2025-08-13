@@ -1,134 +1,111 @@
 export const videoTypePrompts = {
-"Tool Comparison": ({ toolsInvolved, targetAudience, videoLength, title = null }) => `
-Create a professional, time-coded video script comparing ${toolsInvolved.join(", ")}.
+"Tool Comparison": ({ toolsInvolved, targetAudience, videoLength, prompt }) => `
+Create a professional, time-coded video script comparing ${toolsInvolved.join(", ")} for ${targetAudience.join(", ")}.
 
-TITLE: Use this exact format:
-"# ${title || `Tool Comparison: ${toolsInvolved.join(" vs ")}`}"
+**IMPORTANT: Output clean, readable text only. Strictly avoid:**
+- Code block markers (\`\`\`) unless absolutely necessary for actual code
+- Text labels like "text", "bash", "javascript" 
+- Excessive formatting characters (****), decorative elements
+- Icons or emojis in content sections
+- Use simple, clean formatting that renders well when copied**
 
-VIDEO LENGTH (how to use): 
-- videoLength will be provided as a range like "0 to 2 Minutes", "2 to 8 Minutes", etc.
-- Parse the two numeric bounds, compute the midpoint in seconds (e.g., "2 to 8 Minutes" → midpoint 5 minutes → 300s). Use the midpoint as the total runtime.
-- Allocate time proportionally:
-  - Intro: 10% of total
-  - Setup: 10%
-  - Prompt Explanation: 5%
-  - Tool-by-Tool Breakdown: 60% (divide equally among ${toolsInvolved.length} tools)
-  - Outro: 10%
-  - Call to Action: 5%
-- Convert all times to mm:ss and include them next to section headings (e.g., [00:00–00:36]).
+### TITLE REQUIREMENT (MANDATORY)
+- Start the script with this exact format: "# Tool Comparison: ${toolsInvolved.join(" vs ")}"
+- Title must be the very first line of the output
+- Use single # only, no additional formatting
 
-IMPORTANT: When you output the **Outro Script**, output it as plain paragraph text (no triple-backticks, no "text" fences, no code-block wrappers). The Call to Action should follow as bullet points. Do not include any code fences around the ending sections.
+### VIDEO LENGTH CALCULATION
+- Input: videoLength provided as range (e.g., "5 to 15 Minutes")
+- Parse numeric bounds and calculate midpoint in seconds
+- Example: "5 to 15 Minutes" → 10 minutes = 600 seconds
+- Time allocation:
+  * Introduction: 10% of total runtime
+  * Setup: 10% 
+  * Prompt Explanation: 5%
+  * Tool Breakdown: 60% (divided equally among tools)
+  * Outro: 10%
+  * Call to Action: 5%
+- Format timecodes as [mm:ss–mm:ss]
+- Ensure sections are contiguous with no gaps
 
-STRUCTURE: Follow this exact section order and formatting:
+### REQUIRED STRUCTURE (All sections mandatory, exact order)
 
-## Introduction
-- Time: use the allocated Intro range.
-- Write 2-3 sentences explaining why choosing the right tool matters for ${targetAudience.join(", ")} (impact on productivity, learning curve, outcomes).
-- End with a one-line tease about what to expect in the comparison.
+## Introduction [mm:ss–mm:ss]
+Write 2-3 clear sentences explaining why choosing the right tool matters for ${targetAudience.join(", ")}. Focus on practical impact and productivity. End with one sentence teasing what the comparison will reveal.
 
-## Setup
-- Time: use the allocated Setup range.
-- Describe the test environment (language, framework, repo type). If a concrete repo or setup commands are known, list exact commands in a code block; otherwise include a concise "Recommended setup" code block.
-- Example code block format:
+## Setup [mm:ss–mm:ss]
+Describe the test environment clearly. Provide setup commands in simple code block:
+
 \`\`\`bash
-# Example setup (replace with real commands if available)
-git clone <repo>
-cd <repo>
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+git clone [repo_url]
+cd [project_name]  
+npm install
 \`\`\`
 
-## The Prompt (Exact)
-- Time: use the allocated Prompt Explanation range.
-- Show the exact prompt given to every tool (one quoted line).
-- Explain in 1–2 bullets why this prompt is a real-world test (requires reading models, grouping data, generating UI, etc.).
+## The Prompt (Exact) [mm:ss–mm:ss]
+Prompt: "${prompt}"
+Explain in 1-2 bullets why this tests real-world capabilities.
 
-## Tool-by-Tool Breakdown
-- Time: split the entire breakdown portion equally across ${toolsInvolved.length} tools; list each tool in the same order as \`toolsInvolved\`.
-- For each tool, use this exact sub-format and include the tool’s Start–End timestamp:
+## Tool-by-Tool Breakdown [mm:ss–mm:ss]
+**Time: 60% divided equally among ${toolsInvolved.length} tools**
 
-**[ToolName] – [MM:SS–MM:SS]**
-* **Repo Understanding:** Did it locate the right files and models? (1–2 bullets)
-* **Implementation Details:** Step-by-step what code/features it generated (2–4 bullets)
-* **UI & Design Quality:** Describe frontend changes, graphs, styling (1–2 bullets)
-* **Speed:** Fast / Medium / Slow
-* **Correctness:** High / Medium / Low
-* **Repo Awareness:** Excellent / Needs Guidance / Minimal
-* ✅ Strengths: 3 short bullets
-* ❌ Limitations: 2 short bullets
+For each tool in order: ${toolsInvolved.join(", ")}, use this format:
 
-(Repeat for each tool.)
+**[Tool Name] – [mm:ss–mm:ss]**
+* Repo Understanding: Brief assessment of file/structure recognition
+* Implementation Details: 2-4 bullets describing generated code/features  
+* UI & Design Quality: Description of visual output quality
+* Speed: Fast/Medium/Slow
+* Correctness: High/Medium/Low
+* Repo Awareness: Excellent/Needs Guidance/Minimal
 
-## Outro Script
-- Immediately after the "Outro" bullets, include a short **plain-text script** (1–4 sentences) that can be read aloud as the video's outro.  
-- **Do not** wrap this script in triple backticks or any code/text fences. Output it exactly as plain paragraph(s).
-- Example style (the generator should create a similar, original paragraph):  
-So that was four AI code generation tools. Same prompt. Same Django project. Totally different results. Some understood Python’s ORM like a pro. Some struggled to even find the right files. One rewired the logic and still got it right. What does that tell you? It’s not just about generating code — it’s about understanding your framework, your data, your intent, and your repo’s structure.
+**Strengths:**
+✅ Key strength 1
+✅ Key strength 2  
+✅ Key strength 3
 
-## Call to Action
-- Time: use the allocated CTA range.
-- Following the plain-text Outro Script, provide these 3 bullet items:
-* ✅ Drop a like if you found this useful
-* 💬 Tell us which prompt or tool to test next in the comments
-* 📎 Link to the full blog breakdown (or repo) in the description
+**Limitations:**
+❌ Main limitation 1
+❌ Main limitation 2
 
-FORMATTING REQUIREMENTS:
-- Use bullet points (*) and the exact section headings above.
-- Use ✅ and ❌ only in the per-tool strengths/limitations.
-- Keep tool names consistent throughout.
-- Use mm:ss timecodes derived from the midpoint of videoLength.
-- Professional, analytical tone — no filler or promotional language.
-- Ensure the Outro Script is plain text (no code fences) and appears before the Call to Action bullets.
-`,
+## Outro Script [mm:ss–mm:ss]
+**Output as plain text paragraph (no code formatting):**
+Write 2-4 sentences summarizing key findings, highlighting which tools excelled or struggled, and tying back to ${targetAudience.join(", ")} needs.
 
-  "Coding Walkthrough": ({ toolsInvolved, targetAudience, title = null }) => `
-Create a detailed, beginner-friendly coding walkthrough with the following specifications:
+## Call to Action [mm:ss–mm:ss]
+✅ Drop a like if you found this useful
+💬 Tell us which prompt or tool to test next in the comments  
+📎 Link to the full blog breakdown in the description
 
-TITLE: Use this exact format: "# ${title || `Coding Walkthrough: ${toolsInvolved.join(", ")}`}"
+### FORMATTING RULES (STRICT)
+- Clean, readable text - avoid excessive symbols
+- Use single bullets (*) for lists, not multiple asterisks
+- Headers use ## only (double hash)
+- Timecodes in [mm:ss–mm:ss] format
+- Tool names consistent throughout
+- No decorative formatting or extra symbols
+- Keep Outro Script as plain paragraph text
+- Ensure all sections present in exact order
 
-STRUCTURE: Follow this exact section order and formatting:
+### CONTENT QUALITY REQUIREMENTS
+- Professional, analytical tone
+- No promotional language or filler
+- Specific, actionable insights
+- Consistent evaluation criteria across tools
+- Accurate timecode calculations
+- Clear, concise explanations
 
-## Why This Coding Concept Matters
-Write 2-3 sentences explaining why understanding this coding concept is valuable for ${targetAudience.join(", ")}. Focus on practical impact, real-world relevance, and skill growth.
+### COPY-FRIENDLY OUTPUT RULES
+**Critical: When users copy sections, ensure clean text output:**
+- NO code block markers (\`\`\`) in regular content
+- NO language labels (bash, text, javascript) 
+- NO bullet symbols (•, *, -, ✅, ❌) in copied text
+- NO icons or emojis in section content
+- NO time codes in copied content  
+- NO excessive formatting symbols
+- OUTPUT should be plain, readable text that can be directly used
 
-## Setup & Environment
-Provide a clear checklist of prerequisites and setup steps:
-* Required tools/libraries: ${toolsInvolved.join(", ")}
-* Installation instructions (exact commands)
-* Project structure or folder setup
-
-## Step-by-Step Implementation
-Walk through the code in sequential steps:
-1. **Step Name:** Short explanation of the step’s purpose
-2. Show the relevant code snippet (syntax-highlighted if possible)
-3. Explain what’s happening in simple terms
-Repeat until the full feature/concept is implemented.
-
-## Best Practices
-Provide 4-6 concise, actionable recommendations:
-* Naming conventions
-* Error handling
-* Performance considerations
-* Security implications
-* Maintainability tips
-
-## Recap
-Summarize the key points in 3-4 bullet points for quick reference.
-
-## Call to Action
-End with 2-3 suggestions for applying the learned concept:
-* Extend the example with new functionality
-* Apply it to a small real-world project
-* Practice by rewriting the code in a different way
-
-FORMATTING REQUIREMENTS:
-- Use numbered steps for the coding process
-- Use bullet points (*) for lists
-- Keep all code snippets consistent with the same language style
-- Avoid unnecessary filler words; stay concise
-- Ensure all instructions are accurate and easy to follow
-- Maintain a clear, approachable, and educational tone
+**Only use code blocks for actual code examples, never for regular text content**
 `,
 
 "Bug Fixing Session": ({ toolsInvolved, targetAudience, title = null }) => `

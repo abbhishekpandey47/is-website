@@ -4,132 +4,144 @@ import { useEffect, useState } from 'react';
 
 const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regenerateText, videoType }) => {
     const [copied, setCopied] = useState(false);
+    const [copiedSections, setCopiedSections] = useState({});
 
     // Enhanced parsing for tool comparison content
-   // Replace your existing parseScript with this
-const parseScript = (script) => {
-  const sections = [];
-  const lines = script.split('\n');
-  let metadata = null;
-  let remainingScript = script;
+    const parseScript = (script) => {
+        const sections = [];
+        const lines = script.split('\n');
+        let metadata = null;
+        let remainingScript = script;
 
-  // 1) Try fenced JSON block first: ```json ... ```
-  const fencedJsonMatch = script.match(/^\s*```json\s*([\s\S]*?)```/i);
-  if (fencedJsonMatch) {
-    try {
-      metadata = JSON.parse(fencedJsonMatch[1]);
-      remainingScript = script.replace(fencedJsonMatch[0], '').trim();
-    } catch (err) {
-      // invalid JSON — ignore, leave as plain text
-      metadata = null;
-    }
-  } else {
-    // 2) Try raw JSON object at very start: { ... }
-    const rawJsonMatch = script.match(/^\s*({[\s\S]*?})/);
-    if (rawJsonMatch) {
-      try {
-        metadata = JSON.parse(rawJsonMatch[1]);
-        remainingScript = script.replace(rawJsonMatch[1], '').trim();
-      } catch (err) {
-        metadata = null;
-      }
-    }
-  }
-
-  // Now proceed to parse the remaining script (without the JSON block)
-  const contentLines = remainingScript.split('\n').filter(line => line.trim());
-  let currentSection = { type: 'content', content: [] };
-  let mainTitle = null;
-
-  contentLines.forEach(rawLine => {
-    let line = rawLine.trim();
-
-    // Headers
-    if (line.startsWith('# ')) {
-      mainTitle = line.replace('# ', '');
-      if (currentSection.content.length > 0) sections.push(currentSection);
-      currentSection = { type: 'main-title', title: mainTitle, content: [] };
-      return;
-    }
-
-    if (line.startsWith('## ')) {
-      if (currentSection.content.length > 0) sections.push(currentSection);
-      const title = line.replace('## ', '');
-      currentSection = { type: getSectionType(title), title, content: [] };
-      return;
-    }
-
-    if (line.startsWith('### ') || (line.startsWith('**') && line.endsWith(':**'))) {
-      const title = line.replace(/###\s|^\*\*|\*\*:$/g, '');
-      currentSection.content.push({ type: 'subsection', title, items: [] });
-      return;
-    }
-
-    // Lists and icons
-    if (line.startsWith('* ') || line.startsWith('- ') || line.startsWith('✅') || line.startsWith('❌')) {
-      let icon, text, isStrong = false;
-      if (line.startsWith('✅')) {
-        icon = '✅';
-        text = line.replace(/^✅\s*/, '');
-      } else if (line.startsWith('❌')) {
-        icon = '❌';
-        text = line.replace(/^❌\s*/, '');
-      } else if (line.startsWith('* ')) {
-        text = line.replace(/^\*\s*/, '');
-        if (text.match(/^\*\*[^*]+\*\*:/)) {
-          isStrong = true;
-          icon = 'bold';
-          text = text.replace(/^\*\*([^*]+)\*\*:\s*/, '**$1:** ');
+        // 1) Try fenced JSON block first: ```json ... ```
+        const fencedJsonMatch = script.match(/^\s*```json\s*([\s\S]*?)```/i);
+        if (fencedJsonMatch) {
+            try {
+                metadata = JSON.parse(fencedJsonMatch[1]);
+                remainingScript = script.replace(fencedJsonMatch[0], '').trim();
+            } catch (err) {
+                metadata = null;
+            }
         } else {
-          icon = '•';
+            // 2) Try raw JSON object at very start: { ... }
+            const rawJsonMatch = script.match(/^\s*({[\s\S]*?})/);
+            if (rawJsonMatch) {
+                try {
+                    metadata = JSON.parse(rawJsonMatch[1]);
+                    remainingScript = script.replace(rawJsonMatch[1], '').trim();
+                } catch (err) {
+                    metadata = null;
+                }
+            }
         }
-      } else {
-        icon = '•';
-        text = line.replace(/^\-\s*/, '');
-      }
 
-      const listItem = { type: 'list-item', icon, text, isStrong };
+        // Now proceed to parse the remaining script (without the JSON block)
+        const contentLines = remainingScript.split('\n').filter(line => line.trim());
+        let currentSection = { type: 'content', content: [], rawContent: '' };
+        let mainTitle = null;
+        let sectionRawContent = '';
 
-      const last = currentSection.content[currentSection.content.length - 1];
-      if (last && last.type === 'subsection') {
-        last.items.push(listItem);
-      } else {
-        currentSection.content.push(listItem);
-      }
-      return;
-    }
+        contentLines.forEach(rawLine => {
+            let line = rawLine.trim();
+            sectionRawContent += rawLine + '\n';
 
-    // Nested bullet detection (indented)
-    if (/^\s{4,}[\*\-]\s/.test(rawLine)) {
-      const text = rawLine.replace(/^\s+[\*\-]\s*/, '');
-      const nestedItem = { type: 'list-item', icon: '◦', text, isNested: true };
-      const last = currentSection.content[currentSection.content.length - 1];
-      if (last && last.type === 'subsection') {
-        last.items.push(nestedItem);
-      } else {
-        currentSection.content.push(nestedItem);
-      }
-      return;
-    }
+            // Headers
+            if (line.startsWith('# ')) {
+                mainTitle = line.replace('# ', '');
+                if (currentSection.content.length > 0) {
+                    currentSection.rawContent = sectionRawContent.slice(0, -rawLine.length - 1);
+                    sections.push(currentSection);
+                    sectionRawContent = rawLine + '\n';
+                }
+                currentSection = { type: 'main-title', title: mainTitle, content: [], rawContent: '' };
+                return;
+            }
 
-    // Numbered items
-    if (/^\d+\.\s/.test(line)) {
-      const number = line.match(/^(\d+)\.\s/)[1];
-      const text = line.replace(/^\d+\.\s/, '');
-      currentSection.content.push({ type: 'numbered-item', number, text });
-      return;
-    }
+            if (line.startsWith('## ')) {
+                if (currentSection.content.length > 0) {
+                    currentSection.rawContent = sectionRawContent.slice(0, -rawLine.length - 1);
+                    sections.push(currentSection);
+                    sectionRawContent = rawLine + '\n';
+                }
+                const title = line.replace('## ', '');
+                currentSection = { type: getSectionType(title), title, content: [], rawContent: '' };
+                return;
+            }
 
-    // Fallback paragraph
-    if (line && line !== '---') {
-      currentSection.content.push({ type: 'paragraph', text: line.replace(/\*\*/g, '') });
-    }
-  });
+            if (line.startsWith('### ') || (line.startsWith('**') && line.endsWith(':**'))) {
+                const title = line.replace(/###\s|^\*\*|\*\*:$/g, '');
+                currentSection.content.push({ type: 'subsection', title, items: [] });
+                return;
+            }
 
-  if (currentSection.content.length > 0) sections.push(currentSection);
+            // Lists and icons
+            if (line.startsWith('* ') || line.startsWith('- ') || line.startsWith('✅') || line.startsWith('❌')) {
+                let icon, text, isStrong = false;
+                if (line.startsWith('✅')) {
+                    icon = '✅';
+                    text = line.replace(/^✅\s*/, '');
+                } else if (line.startsWith('❌')) {
+                    icon = '❌';
+                    text = line.replace(/^❌\s*/, '');
+                } else if (line.startsWith('* ')) {
+                    text = line.replace(/^\*\s*/, '');
+                    if (text.match(/^\*\*[^*]+\*\*:/)) {
+                        isStrong = true;
+                        icon = 'bold';
+                        text = text.replace(/^\*\*([^*]+)\*\*:\s*/, '**$1:** ');
+                    } else {
+                        icon = '•';
+                    }
+                } else {
+                    icon = '•';
+                    text = line.replace(/^\-\s*/, '');
+                }
 
-  return { sections, mainTitle, metadata };
-};
+                const listItem = { type: 'list-item', icon, text, isStrong };
+
+                const last = currentSection.content[currentSection.content.length - 1];
+                if (last && last.type === 'subsection') {
+                    last.items.push(listItem);
+                } else {
+                    currentSection.content.push(listItem);
+                }
+                return;
+            }
+
+            // Nested bullet detection (indented)
+            if (/^\s{4,}[\*\-]\s/.test(rawLine)) {
+                const text = rawLine.replace(/^\s+[\*\-]\s*/, '');
+                const nestedItem = { type: 'list-item', icon: '◦', text, isNested: true };
+                const last = currentSection.content[currentSection.content.length - 1];
+                if (last && last.type === 'subsection') {
+                    last.items.push(nestedItem);
+                } else {
+                    currentSection.content.push(nestedItem);
+                }
+                return;
+            }
+
+            // Numbered items
+            if (/^\d+\.\s/.test(line)) {
+                const number = line.match(/^(\d+)\.\s/)[1];
+                const text = line.replace(/^\d+\.\s/, '');
+                currentSection.content.push({ type: 'numbered-item', number, text });
+                return;
+            }
+
+            // Fallback paragraph
+            if (line && line !== '---') {
+                currentSection.content.push({ type: 'paragraph', text: line.replace(/\*\*/g, '') });
+            }
+        });
+
+        if (currentSection.content.length > 0) {
+            currentSection.rawContent = sectionRawContent;
+            sections.push(currentSection);
+        }
+
+        return { sections, mainTitle, metadata };
+    };
 
     const getSectionType = (title) => {
         const lowerTitle = title.toLowerCase();
@@ -145,18 +157,8 @@ const parseScript = (script) => {
     };
 
     const getSectionIcon = (type) => {
-        switch (type) {
-            case 'main-title': return '';
-            case 'intro': return '';
-            case 'overview': return '';
-            case 'features': return '';
-            case 'pricing': return '';
-            case 'usage': return '';
-            case 'pros-cons': return '';
-            case 'recommendation': return '';
-            case 'action': return '';
-            default: return '';
-        }
+        // Remove all icons - return empty string for all types
+        return '';
     };
 
     const getSectionColor = (type) => {
@@ -184,6 +186,55 @@ const parseScript = (script) => {
         }
     };
 
+    const copySectionToClipboard = async (sectionIndex, sectionContent) => {
+        try {
+            // Clean the content by removing all formatting and unwanted elements
+            let cleanContent = sectionContent || '';
+            
+            // Remove code blocks and their language identifiers
+            cleanContent = cleanContent.replace(/```[\w]*\n?/g, '');
+            cleanContent = cleanContent.replace(/```/g, '');
+            
+            // Remove all markdown formatting
+            cleanContent = cleanContent
+                .replace(/\*\*/g, '') // Remove bold markdown
+                .replace(/^\*\s+/gm, '') // Remove bullet points
+                .replace(/^-\s+/gm, '') // Remove dash bullets
+                .replace(/^•\s+/gm, '') // Remove bullet symbols
+                .replace(/^✅\s*/gm, '') // Remove checkmarks
+                .replace(/^❌\s*/gm, '') // Remove X marks
+                .replace(/^#+\s+/gm, '') // Remove headers
+                .replace(/^\d+\.\s+/gm, '') // Remove numbered lists
+                .replace(/\[[\d:–-]+\]/g, '') // Remove time codes
+                .replace(/^\s*\*\*([^*]+)\*\*:\s*/gm, '$1: ') // Convert **Label:** to Label:
+                .replace(/^\s*\*\*([^*]+)\*\*\s*–\s*/gm, '$1 - ') // Convert **Tool** – to Tool -
+                .replace(/\*\*Strengths:\*\*/g, 'Strengths:') // Clean section headers
+                .replace(/\*\*Limitations:\*\*/g, 'Limitations:') // Clean section headers
+                .replace(/\*\*/g, '') // Remove any remaining bold formatting
+                .replace(/^>\s+/gm, '') // Remove blockquotes
+                .replace(/^\s*[\*\-•]\s*/gm, '') // Remove any remaining bullets
+                .replace(/\n\s*\n\s*\n/g, '\n\n') // Remove excessive line breaks
+                .replace(/^\s+/gm, '') // Remove leading spaces
+                .trim();
+
+            // Remove common prefixes that might appear
+            cleanContent = cleanContent
+                .replace(/^text\s*/i, '') // Remove 'text' prefix
+                .replace(/^bash\s*/i, '') // Remove 'bash' prefix
+                .replace(/^javascript\s*/i, '') // Remove 'javascript' prefix
+                .replace(/^html\s*/i, '') // Remove 'html' prefix
+                .replace(/^css\s*/i, '') // Remove 'css' prefix;
+
+            await navigator.clipboard.writeText(cleanContent);
+            setCopiedSections(prev => ({ ...prev, [sectionIndex]: true }));
+            setTimeout(() => {
+                setCopiedSections(prev => ({ ...prev, [sectionIndex]: false }));
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to copy section text: ', err);
+        }
+    };
+
     const downloadScript = () => {
         const element = document.createElement('a');
         const file = new Blob([generatedScript], { type: 'text/plain' });
@@ -195,7 +246,7 @@ const parseScript = (script) => {
     };
 
     const { sections: parsedSections, mainTitle, metadata } = parseScript(generatedScript);
-    const estimatedReadTime = Math.ceil(generatedScript.length / 1000); // Rough estimate: 1000 chars per minute
+    const estimatedReadTime = Math.ceil(generatedScript.length / 1000);
     const displayTitle = comparisonTitle || mainTitle || 'Tool Comparison Analysis';
 
     return (
@@ -227,7 +278,7 @@ const parseScript = (script) => {
                             className="flex items-center bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-xl transition-colors duration-200 text-sm font-medium"
                         >
                             <Copy className="h-4 w-4 mr-2" />
-                            {copied ? 'Copied!' : 'Copy'}
+                            {copied ? 'Copied!' : 'Copy All'}
                         </button>
                         <button
                             onClick={downloadScript}
@@ -248,42 +299,65 @@ const parseScript = (script) => {
                 {/* Content */}
                 <div className="p-6 overflow-y-auto max-h-[calc(85vh-140px)]">
                     <div className="space-y-6">
+                        {/* Title Section (Always show) */}
+                        {mainTitle && (
+                            <div className="bg-gradient-to-r from-purple-600/30 to-indigo-600/30 border-purple-500/40 rounded-xl border-2 p-6 transition-all duration-200 hover:shadow-lg">
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="flex items-center">
+                                        <h1 className="font-[quicksand] font-bold text-white text-3xl">
+                                            {mainTitle}
+                                        </h1>
+                                    </div>
+                                    <button
+                                        onClick={() => copySectionToClipboard('title', mainTitle)}
+                                        className="flex items-center bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 px-3 py-1.5 rounded-lg transition-colors duration-200 text-xs font-medium border border-purple-500/30"
+                                    >
+                                        <Copy className="h-3 w-3 mr-1" />
+                                        {copiedSections['title'] ? 'Copied!' : 'Copy'}
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
                         {/* Metadata preview (only if metadata exists) */}
-{metadata && (
-  <div className="ml-4 text-sm text-gray-300">
-    {metadata.title || metadata.Title ? (
-      <div className="mb-1">
-        <strong className="text-white">{metadata.title || metadata.Title}</strong>
-      </div>
-    ) : null}
+                        {metadata && (
+                            <div className="ml-4 text-sm text-gray-300">
+                                {metadata.title || metadata.Title ? (
+                                    <div className="mb-1">
+                                        <strong className="text-white">{metadata.title || metadata.Title}</strong>
+                                    </div>
+                                ) : null}
 
-    <div className="flex items-center space-x-3 text-xs text-gray-400">
-      {metadata.videoLength && (
-        <div className="flex items-center">
-          <Clock className="h-3 w-3 mr-1" />
-          <span>{metadata.videoLength}</span>
-        </div>
-      )}
-
-     
-    </div>
-  </div>
-)}
-
+                                <div className="flex items-center space-x-3 text-xs text-gray-400">
+                                    {metadata.videoLength && (
+                                        <div className="flex items-center">
+                                            <Clock className="h-3 w-3 mr-1" />
+                                            <span>{metadata.videoLength}</span>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
                         
-                        {parsedSections.map((section, index) => (
+                        {parsedSections.filter(section => section.type !== 'main-title').map((section, index) => (
                             <div
                                 key={index}
-                                className={`bg-gradient-to-r ${getSectionColor(section.type)} rounded-xl border p-6 transition-all duration-200 hover:shadow-lg ${section.type === 'main-title' ? 'border-2' : ''
-                                    }`}
+                                className={`bg-gradient-to-r ${getSectionColor(section.type)} rounded-xl border p-6 transition-all duration-200 hover:shadow-lg`}
                             >
                                 {section.title && (
-                                    <div className="flex items-center mb-4">
-                                        <span className="text-2xl mr-3">{getSectionIcon(section.type)}</span>
-                                        <h3 className={`font-[quicksand] font-bold text-white ${section.type === 'main-title' ? 'text-2xl' : 'text-xl'
-                                            }`}>
-                                            {section.title}
-                                        </h3>
+                                    <div className="flex items-center justify-between mb-4">
+                                        <div className="flex items-center">
+                                            <h3 className="font-[quicksand] font-bold text-white text-xl">
+                                                {section.title}
+                                            </h3>
+                                        </div>
+                                        <button
+                                            onClick={() => copySectionToClipboard(index, section.rawContent || section.title)}
+                                            className="flex items-center bg-gray-800/50 hover:bg-gray-700/50 text-gray-300 px-3 py-1.5 rounded-lg transition-colors duration-200 text-xs font-medium border border-gray-600/30"
+                                        >
+                                            <Copy className="h-3 w-3 mr-1" />
+                                            {copiedSections[index] ? 'Copied!' : 'Copy'}
+                                        </button>
                                     </div>
                                 )}
 
@@ -391,13 +465,10 @@ const parseScript = (script) => {
                                     onClose();
                                     regenerateText();
                                 }}
-
                                 className="flex items-center bg-[#6c5ce8] hover:bg-[#6c5ce8]/80 text-white px-4 py-2 rounded-xl transition-colors duration-200 text-sm font-medium"
-
                             >
                                 <Sparkles className="w-4 h-4 mr-2" />
                                 Regenerate
-
                             </button>
                         </div>
                     </div>
