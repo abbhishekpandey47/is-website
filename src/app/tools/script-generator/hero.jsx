@@ -2,7 +2,7 @@
 import { Sparkles, X, Copy, Download, Play, Clock, Users, Video, FileText } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regenerateText }) => {
+const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regenerateText, videoType }) => {
     const [copied, setCopied] = useState(false);
 
     // Enhanced parsing for tool comparison content
@@ -383,7 +383,7 @@ const parseScript = (script) => {
                     <div className="flex items-center justify-between text-sm text-gray-400">
                         <div className="flex items-center">
                             <Sparkles className="h-4 w-4 mr-2 text-[#6c5ce8]" />
-                            <span>Generated Tool Comparison • AI-Powered Analysis</span>
+                            <span>{`Generated ${videoType} • AI-Powered Analysis`}</span>
                         </div>
                         <div className="text-xs">
                             <button
@@ -772,6 +772,7 @@ export default function AIVideoScriptGenerator() {
                         generatedScript={generatedComment}
                         onClose={() => setShowScript(false)}
                         regenerateText={() => setRgenerate(true)}
+                        videoType={videoType}
 
                     />
                 )}
