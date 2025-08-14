@@ -102,8 +102,8 @@ export default function AIScriptStep() {
                   </div>
                 </div>
 
-                <div className="mb-2">
-                  <span className="text-xs text-gray-300 font-medium tracking-wider">
+                <div className="mb-2 text-center">
+                  <span className="text-[18px] text-gray-300 quicksand-bold tracking-wider">
                     {step.label}
                   </span>
                 </div>
@@ -139,7 +139,7 @@ export default function AIScriptStep() {
 
                 <div className="flex-1">
                   <div className="mb-1">
-                    <span className="text-xs text-gray-300 font-medium tracking-wider">
+                    <span className="text-[18px] text-gray-300 quicksand-bold tracking-wider">
                       {step.label}
                     </span>
                   </div>
