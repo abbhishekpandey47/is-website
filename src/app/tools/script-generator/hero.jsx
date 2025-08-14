@@ -190,11 +190,11 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
         try {
             // Clean the content by removing all formatting and unwanted elements
             let cleanContent = sectionContent || '';
-            
+
             // Remove code blocks and their language identifiers
             cleanContent = cleanContent.replace(/```[\w]*\n?/g, '');
             cleanContent = cleanContent.replace(/```/g, '');
-            
+
             // Remove all markdown formatting
             cleanContent = cleanContent
                 .replace(/\*\*/g, '') // Remove bold markdown
@@ -249,19 +249,33 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
     const estimatedReadTime = Math.ceil(generatedScript.length / 1000);
     const displayTitle = comparisonTitle || mainTitle || 'Tool Comparison Analysis';
 
+    function linkify(text) {
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.replace(urlRegex, (url) => {
+            try {
+                let domain = new URL(url).hostname.replace(/^www\./, ""); // remove www.
+                return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color:#3b82f6">${domain}</a>`;
+            } catch (e) {
+                return url;
+            }
+        });
+    }
+
+
+
     return (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
                 {/* Header */}
                 <div className="lg:flex items-center justify-center lg:justify-between p-6 border-b border-gray-700 bg-gradient-to-r from-purple-900/50 to-indigo-900/50">
-                    <div className="lg:flex my-4 md:py-0 items-center justify-center space-x-3">
+                    <div className="lg:flex my-4 md:my-0 items-center justify-center space-x-3">
                         <div className="flex items-center justify-center bg-[#6c5ce8]/20 rounded-full px-4 py-2 border border-[#6c5ce8]/40">
                             <Sparkles className="h-5 w-5 mr-2" />
                             <span className="font-[quicksand] text-sm text-white font-bold">
                                 {displayTitle}
                             </span>
                         </div>
-                        <div className="flex my-4 md:py-0 items-center justify-center space-x-4 text-sm text-gray-400">
+                        <div className="flex my-4 md:my-0 items-center justify-center space-x-4 text-sm text-gray-400">
                             <div className="flex items-center">
                                 <Clock className="h-4 w-4 mr-1" />
                                 <span>~{estimatedReadTime} min read</span>
@@ -289,7 +303,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                         </button>
                         <button
                             onClick={onClose}
-className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-200 absolute lg:static top-8 right-4"
+                            className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-200 absolute lg:static top-8 right-4"
                         >
                             <X className="w-5 h-5 text-gray-400" />
                         </button>
@@ -338,7 +352,7 @@ className="w-10 h-10 rounded-xl flex items-center justify-center transition-colo
                                 </div>
                             </div>
                         )}
-                        
+
                         {parsedSections.filter(section => section.type !== 'main-title').map((section, index) => (
                             <div
                                 key={index}
@@ -440,9 +454,11 @@ className="w-10 h-10 rounded-xl flex items-center justify-center transition-colo
                                             )}
 
                                             {item.type === 'paragraph' && (
-                                                <p className="text-gray-300 leading-relaxed mb-3">
-                                                    {item.text}
-                                                </p>
+                                                <p className="text-gray-300 leading-relaxed mb-3"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: linkify(item.text)
+                                                    }} />
+
                                             )}
                                         </div>
                                     ))}
@@ -482,6 +498,7 @@ export default function AIVideoScriptGenerator() {
     const [prompt, setPrompt] = useState('');
     const [videoType, setVideoType] = useState('Select video type...');
     const [videoLength, setVideoLength] = useState('Select video Length...');
+    const [linkForRef, setLinkForRef] = useState("");
     const [toolsInvolved, setToolsInvolved] = useState([]);
     const [targetAudience, setTargetAudience] = useState([]);
     const [generatedComment, setGeneratedComment] = useState("");
@@ -685,7 +702,8 @@ export default function AIVideoScriptGenerator() {
                     videoType,
                     toolsInvolved,
                     targetAudience,
-                    videoLength
+                    videoLength,
+                    linkForRef
                 }),
             });
 
@@ -753,7 +771,7 @@ export default function AIVideoScriptGenerator() {
                         <span class="specialtext">Video Scripts Built for Developer Audiences</span>
                     </h1>
                     <p className="text-lg sm:text-xl text-gray-400 font-medium max-w-2xl mx-auto">
-                    From AI agents to testing platforms, devboxes to code review tools—generate scripts that speak your audience’s language
+                        From AI agents to testing platforms, devboxes to code review tools—generate scripts that speak your audience’s language
                     </p>
                 </div>
 
@@ -787,18 +805,42 @@ export default function AIVideoScriptGenerator() {
                             getOptionIcon={getPlatformIcon}
                             multiSelect={true}
                         />
-                        <CustomDropdown
-                            label="Video Length"
-                            options={videoLengthDrop}
-                            value={videoLength}
-                            onChange={setVideoLength}
-                            minWidth="min-w-[110px]"
-                            getOptionIcon={getPlatformIcon}
-                            multiSelect={false}
-                        />
+                        <div className='md:flex items-center justify-center gap-8'>
+                            <CustomDropdown
+                                label="Video Length"
+                                options={videoLengthDrop}
+                                value={videoLength}
+                                onChange={setVideoLength}
+                                minWidth="min-w-[250px]"
+                                getOptionIcon={getPlatformIcon}
+                                multiSelect={false}
+                            />
+                           <div className="flex flex-col min-w-[300px]">
+  <label className="font-[quicksand] font-semibold">Insert Links</label>
+  <input
+    type="text"
+    onChange={(e) => {
+      let value = e.target.value.trim();
 
+      // Allow only valid domain formats (with or without protocol)
+      const domainRegex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
 
+      if (domainRegex.test(value)) {
+        // Add protocol if missing
+        if (!/^https?:\/\//i.test(value)) {
+          value = `https://${value}`;
+        }
+        setLinkForRef(value);
+      } else {
+        setLinkForRef("");
+      }
+    }}
+    placeholder="Enter Your Links"
+    className="appearance-none bg-gray-900 hover:bg-gray-700 border border-gray-700 rounded-xl w-full px-4 py-3 mt-1 pr-10 text-white text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#6c5ce8] focus:border-transparent relative"
+  />
+</div>
 
+                        </div>
                     </div>
                 </div>
 

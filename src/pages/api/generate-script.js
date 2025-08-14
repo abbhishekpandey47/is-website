@@ -15,19 +15,21 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   try {
-    const { prompt, toolsInvolved, targetAudience, videoType, videoLength } = req.body;
+    const { prompt, toolsInvolved, targetAudience, videoType, videoLength, linkForRef } = req.body;
 
 console.log("Prompt:", prompt);
 console.log("Tools Involved:", toolsInvolved);
 console.log("Target Audience:", targetAudience);
 console.log("Video Type:", videoType);
+console.log("Link:", linkForRef);
+
     if (!prompt || !toolsInvolved || !Array.isArray(targetAudience) || targetAudience.length === 0 || !videoType) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
     const systemMessageGenerator = videoTypePrompts[videoType];
     const systemMessage = systemMessageGenerator
-      ? systemMessageGenerator({ toolsInvolved, targetAudience })
+      ? systemMessageGenerator({ toolsInvolved, targetAudience, videoLength, linkForRef })
       : `You are an expert video scriptwriter for technical and AI content. Audience: ${targetAudience.join(", ")}.`;
 
     const fullPrompt = `${systemMessage}\n\nUser Prompt:\n${prompt}`;
