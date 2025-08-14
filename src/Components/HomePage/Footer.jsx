@@ -66,7 +66,7 @@ const Footer = () => {
               <h3 className="font-bold mb-4">Tools</h3>
               <ul className="space-y-3">
                  <li>
-                  <a href="/tools/script-generator" className="hover:underline">
+                  <a href="/tools/ai-script-generator" className="hover:underline">
                     Script Generator
                   </a>
                 </li>

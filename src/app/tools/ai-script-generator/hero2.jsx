@@ -1,20 +1,18 @@
 "use client"
 import React, { useState } from "react";
 import ScriptData from "./script.js";
-import { Sparkles, X, Copy, Download, Play, Clock, Users, Video, FileText } from 'lucide-react';
+import { Sparkles, X, Copy, Download, Clock, FileText } from 'lucide-react';
 
 const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, videoType }) => {
     const [copied, setCopied] = useState(false);
     const [copiedSections, setCopiedSections] = useState({});
 
-    // Enhanced parsing for tool comparison content
     const parseScript = (script) => {
         const sections = [];
         const lines = script.split('\n');
         let metadata = null;
         let remainingScript = script;
 
-        // 1) Try fenced JSON block first: ```json ... ```
         const fencedJsonMatch = script.match(/^\s*```json\s*([\s\S]*?)```/i);
         if (fencedJsonMatch) {
             try {
@@ -501,7 +499,7 @@ export default function Hero2() {
   const [selectedScript, setSelectedScript] = useState(null);
 
   return (
-    <div className="p-6">
+    <div className="max-w-6xl mx-auto">
       {selectedScript ? (
         <ScriptDisplay
           generatedScript={selectedScript.content}

@@ -50,6 +50,12 @@ module.exports = {
                 permanent: true,
                 statusCode: 301,
             },
+            {
+                source: '/tools/script-generator',
+                destination: '/tools/ai-script-generator',
+                permanent: true,
+                statusCode: 301,
+            },
         ];
     },
 };
