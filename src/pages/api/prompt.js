@@ -1,5 +1,5 @@
 export const videoTypePrompts = {
-"Tool Comparison": ({ toolsInvolved, targetAudience, videoLength, prompt }) => `
+"Tool Comparison": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef }) => `
 Create a professional, time-coded video script comparing ${toolsInvolved.join(", ")} for ${targetAudience.join(", ")}.
 
 **IMPORTANT: Output clean, readable text only. Strictly avoid:**
@@ -15,7 +15,7 @@ Create a professional, time-coded video script comparing ${toolsInvolved.join(",
 - Use single # only, no additional formatting
 
 ### VIDEO LENGTH CALCULATION
-- Input: videoLength provided as range (e.g., "5 to 15 Minutes")
+- Input: ${videoLength} provided as range (e.g., "5 to 15 Minutes")
 - Parse numeric bounds and calculate midpoint in seconds
 - Example: "5 to 15 Minutes" → 10 minutes = 600 seconds
 - Time allocation:
@@ -75,7 +75,7 @@ Write 2-4 sentences summarizing key findings, highlighting which tools excelled 
 ## Call to Action [mm:ss–mm:ss]
 ✅ Drop a like if you found this useful
 💬 Tell us which prompt or tool to test next in the comments  
-📎 Link to the full blog breakdown in the description
+${linkForRef && `📎 For more context or additional information, click here: ${linkForRef}`}
 
 ### FORMATTING RULES (STRICT)
 - Clean, readable text - avoid excessive symbols
