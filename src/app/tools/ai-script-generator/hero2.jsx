@@ -591,12 +591,12 @@ export default function Hero2() {
             </div>
 
             {/* Call to Action */}
-            <div className="text-center pt-8">
+            {/* <div className="text-center pt-8">
               <div className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 cursor-pointer hover:from-blue-500 hover:to-purple-500 hover:scale-105">
                 <PlayCircle size={20} />
                 <span className="font-semibold">Explore All Scripts</span>
               </div>
-            </div>
+            </div> */}
 
             {/* Background Decoration */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
