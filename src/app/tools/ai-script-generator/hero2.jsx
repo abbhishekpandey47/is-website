@@ -1,7 +1,8 @@
 "use client"
 import React, { useState } from "react";
 import ScriptData from "./script.js";
-import { Sparkles, X, Copy, Download, Clock, FileText } from 'lucide-react';
+import { Sparkles, X, Copy, Download, Clock, FileText, PlayCircle, User, ChevronRight, } from 'lucide-react';
+
 
 const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, videoType }) => {
     const [copied, setCopied] = useState(false);
@@ -498,31 +499,113 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, video
 export default function Hero2() {
   const [selectedScript, setSelectedScript] = useState(null);
 
+  const getCategoryColor = (category) => {
+    const colors = {
+      'Technology': 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+      'Business': 'bg-green-500/20 text-green-300 border-green-500/30',
+      'Strategy': 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+      'Analytics': 'bg-orange-500/20 text-orange-300 border-orange-500/30',
+      'Design': 'bg-pink-500/20 text-pink-300 border-pink-500/30',
+      'Management': 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30'
+    };
+    return colors[category] || 'bg-gray-500/20 text-gray-300 border-gray-500/30';
+  };
+
   return (
-    <div className="max-w-6xl mx-auto">
-      {selectedScript ? (
-        <ScriptDisplay
-          generatedScript={selectedScript.content}
-          onClose={() => setSelectedScript(null)}
-          comparisonTitle={`Script #${selectedScript.id}`}
-          videoType="Tool Comparison"
-        />
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {ScriptData.map((script) => (
-            <div
-              key={script.id}
-              onClick={() => setSelectedScript(script)}
-              className="bg-gray-800 text-white rounded-xl p-4 cursor-pointer hover:bg-gray-700 transition-colors duration-200"
-            >
-              <h2 className="font-bold text-lg mb-2">Script #{script.id}</h2>
-              <p className="text-sm text-gray-400 line-clamp-3">
-                {script.content}
+    <div className="">
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        {selectedScript ? (
+          <ScriptDisplay
+            generatedScript={selectedScript.content}
+            onClose={() => setSelectedScript(null)}
+            comparisonTitle={`Script #${selectedScript.id}: ${selectedScript.title}`}
+            videoType="Tool Comparison"
+          />
+        ) : (
+          <div className="space-y-8">
+            {/* Header Section */}
+            <div className="text-center space-y-4">
+              <h1 className="text-4xl md:text-5xl quicksand-bold bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent">
+                Professional Scripts Library
+              </h1>
+              <p className="font-[quicksand] text-xl text-gray-300 max-w-2xl mx-auto">
+                Discover expertly crafted scripts designed to elevate your content and engage your audience
               </p>
             </div>
-          ))}
-        </div>
-      )}
+
+            {/* Scripts Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {ScriptData.map((script) => (
+                <div
+                  key={script.id}
+                  onClick={() => setSelectedScript(script)}
+                  className="group bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 cursor-pointer border border-gray-700/50 hover:border-gray-600/50 overflow-hidden transform hover:-translate-y-2 hover:bg-gray-800/70"
+                >
+                  {/* Card Header */}
+                  <div className="p-6 pb-4">
+                    <div className="flex items-start justify-between mb-3">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getCategoryColor(script.category)}`}>
+                        {script.category}
+                      </span>
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <ChevronRight size={20} className="text-gray-400 group-hover:text-white" />
+                      </div>
+                    </div>
+                    
+                    <h2 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+                      {script.title}
+                    </h2>
+                    
+                    <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-4 group-hover:text-gray-300 transition-colors">
+                      {script.intro}
+                    </p>
+                  </div>
+
+                  {/* Card Footer */}
+                  <div className="px-6 py-4 bg-gray-900/30 border-t border-gray-700/30">
+                    <div className="flex items-center justify-between text-sm text-gray-400">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1">
+                          <Clock size={14} />
+                          <span>{script.duration}</span>
+                        </div>
+                        {/* <div className="flex items-center gap-1">
+                          <User size={14} />
+                          <span>{script.author}</span>
+                        </div> */}
+                      </div>
+                      <div className="flex items-center gap-1 text-blue-400 group-hover:text-blue-300 transition-colors">
+                        <PlayCircle size={16} />
+                        <span className="font-medium">View Script</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-600/10 via-transparent to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  
+                  {/* Glow Effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none blur-xl" />
+                </div>
+              ))}
+            </div>
+
+            {/* Call to Action */}
+            <div className="text-center pt-8">
+              <div className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 cursor-pointer hover:from-blue-500 hover:to-purple-500 hover:scale-105">
+                <PlayCircle size={20} />
+                <span className="font-semibold">Explore All Scripts</span>
+              </div>
+            </div>
+
+            {/* Background Decoration */}
+            <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+              <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

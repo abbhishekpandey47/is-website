@@ -9,7 +9,7 @@ export default function Page() {
     return (
         <>
         <AIVideoScriptGenerator />
-        {/* <Hero2 /> */}
+        <Hero2 />
         <ClutchBadge />
         <BlackMarquee />
         <VideoScriptContent />
