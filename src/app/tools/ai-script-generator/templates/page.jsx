@@ -1,19 +1,19 @@
 "use client"
-import { Sparkles, X, Copy, Download, Play, Clock, Users, Video, FileText } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import React, { useState } from "react";
+import ScriptData from "./script.js";
+import { Sparkles, X, Copy, Download, Clock, FileText, PlayCircle, User, ChevronRight, } from 'lucide-react';
 
-const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regenerateText, videoType }) => {
+
+const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, videoType }) => {
     const [copied, setCopied] = useState(false);
     const [copiedSections, setCopiedSections] = useState({});
 
-    // Enhanced parsing for tool comparison content
     const parseScript = (script) => {
         const sections = [];
         const lines = script.split('\n');
         let metadata = null;
         let remainingScript = script;
 
-        // 1) Try fenced JSON block first: ```json ... ```
         const fencedJsonMatch = script.match(/^\s*```json\s*([\s\S]*?)```/i);
         if (fencedJsonMatch) {
             try {
@@ -473,19 +473,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                     <div className="flex items-center justify-between text-sm text-gray-400">
                         <div className="flex items-center">
                             <Sparkles className="h-4 w-4 mr-2 text-[#6c5ce8]" />
-                            <span>{`Generated ${videoType} • AI-Powered Analysis`}</span>
-                        </div>
-                        <div className="text-xs">
-                            <button
-                                onClick={() => {
-                                    onClose();
-                                    regenerateText();
-                                }}
-                                className="flex items-center bg-[#6c5ce8] hover:bg-[#6c5ce8]/80 text-white px-4 py-2 rounded-xl transition-colors duration-200 text-sm font-medium"
-                            >
-                                <Sparkles className="w-4 h-4 mr-2" />
-                                Regenerate
-                            </button>
+                            <span>AI-Powered Analysis</span>
                         </div>
                     </div>
                 </div>
@@ -494,581 +482,107 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
     );
 };
 
-export default function AIVideoScriptGenerator() {
-    const [prompt, setPrompt] = useState('');
-    const [videoType, setVideoType] = useState('Select video type...');
-    const [toolsIn, setToolsIn] = useState([]);
-    const [videoLength, setVideoLength] = useState('Select video Length...');
-    const [linkForRef, setLinkForRef] = useState("");
-    const [toolsInvolved, setToolsInvolved] = useState([]);
-    const [targetAudience, setTargetAudience] = useState([]);
-    const [generatedComment, setGeneratedComment] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [showScript, setShowScript] = useState(false);
-    const [regenerate, setRgenerate] = useState(false)
-
-    const CustomDropdown = ({ label, options, value, onChange, minWidth, getOptionIcon, getSelectedIcon, multiSelect = false, allowCustom = false }) => {
-        const [isOpen, setIsOpen] = useState(false);
-        const [showCustomInput, setShowCustomInput] = useState(false);
-        const [customValue, setCustomValue] = useState('');
-
-        const displayOptions = allowCustom ? [...options, 'Other'] : options;
-
-        const handleSelect = (option) => {
-            if (option === 'Other' && allowCustom) {
-                setShowCustomInput(true);
-                setIsOpen(false);
-                return;
-            }
-
-            if (multiSelect) {
-                const currentValues = Array.isArray(value) ? value : [];
-                if (currentValues.includes(option)) {
-                    const newValues = currentValues.filter(v => v !== option);
-                    onChange(newValues);
-                } else {
-                    onChange([...currentValues, option]);
-                }
-            } else {
-                onChange(option);
-                setIsOpen(false);
-            }
-        };
-
-        const handleCustomAdd = () => {
-            if (customValue.trim() && multiSelect) {
-                const currentValues = Array.isArray(value) ? value : [];
-                if (!currentValues.includes(customValue.trim())) {
-                    onChange([...currentValues, customValue.trim()]);
-                }
-                setCustomValue('');
-                setShowCustomInput(false);
-            }
-        };
-
-        const handleCustomKeyPress = (e) => {
-            if (e.key === 'Enter') {
-                handleCustomAdd();
-            } else if (e.key === 'Escape') {
-                setCustomValue('');
-                setShowCustomInput(false);
-            }
-        };
-
-        const removeOption = (optionToRemove, e) => {
-            e.stopPropagation();
-            if (multiSelect && Array.isArray(value)) {
-                const newValues = value.filter(v => v !== optionToRemove);
-                onChange(newValues);
-            }
-        };
-
-        const getDisplayValue = () => {
-            if (multiSelect) {
-                if (!Array.isArray(value) || value.length === 0) {
-                    return label.includes('Target Audience') ? 'Select target audience...' :
-                        label.includes('Tools') ? 'Select tools...' : 'Select options...';
-                }
-                return `${value.length} selected`;
-            }
-            return value;
-        };
-
-        const isOptionSelected = (option) => {
-            if (multiSelect) {
-                return Array.isArray(value) && value.includes(option);
-            }
-            return value === option;
-        };
 
 
+export default function Page() {
+  const [selectedScript, setSelectedScript] = useState(null);
 
-        return (
-            <div className="my-4 relative">
-                <label className="font-[quicksand] font-semibold">
-                    {label}
-                </label>
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className={`appearance-none bg-gray-900 hover:bg-gray-700 border border-gray-700 rounded-xl w-full px-4 py-3 mt-1 pr-10 text-white text-sm font-medium cursor-pointer transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#6c5ce8] focus:border-transparent ${minWidth} relative`}
+  const getCategoryColor = (category) => {
+    const colors = {
+      'Technology': 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+      'Business': 'bg-green-500/20 text-green-300 border-green-500/30',
+      'Strategy': 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+      'Analytics': 'bg-orange-500/20 text-orange-300 border-orange-500/30',
+      'Design': 'bg-pink-500/20 text-pink-300 border-pink-500/30',
+      'Management': 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30'
+    };
+    return colors[category] || 'bg-gray-500/20 text-gray-300 border-gray-500/30';
+  };
+
+  return (
+    <div className="pt-36">
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        {selectedScript ? (
+          <ScriptDisplay
+            generatedScript={selectedScript.content}
+            onClose={() => setSelectedScript(null)}
+            comparisonTitle={`Script #${selectedScript.id}: ${selectedScript.title}`}
+            videoType="Tool Comparison"
+          />
+        ) : (
+          <div className="space-y-8">
+            <div className="text-center space-y-4">
+              <h1 className="text-4xl md:text-5xl quicksand-bold">
+                Professional Scripts Library
+              </h1>
+              <p className="font-[quicksand] text-xl text-gray-300 max-w-2xl mx-auto">
+                Discover expertly crafted scripts designed to elevate your content and engage your audience
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {ScriptData.map((script) => (
+                <div
+                  key={script.id}
+                  onClick={() => setSelectedScript(script)}
+                  className="group bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 cursor-pointer border border-gray-700/50 hover:border-gray-600/50 overflow-hidden transform hover:-translate-y-2 hover:bg-gray-800/70"
                 >
-                    <span className="flex items-center justify-between">
-                        <span className="flex items-center">
-                            {!multiSelect && (
-                                <span className="">{getSelectedIcon ? getSelectedIcon(value) : getOptionIcon(value)}</span>
-                            )}
-                            {getDisplayValue()}
-                        </span>
-                    </span>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                        <svg
-                            className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
+                  <div className="p-6 pb-4">
+                    <div className="flex items-start justify-between mb-3">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getCategoryColor(script.category)}`}>
+                        {script.category}
+                      </span>
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <ChevronRight size={20} className="text-gray-400 group-hover:text-white" />
+                      </div>
                     </div>
-                </button>
-
-                {multiSelect && Array.isArray(value) && value.length > 0 && (
-                    <div className="mt-2 flex flex-wrap gap-2">
-                        {value.map((selectedOption) => (
-                            <div
-                                key={selectedOption}
-                                className="flex items-center bg-[#6c5ce8]/40 text-white px-3 py-1 rounded-full text-sm"
-                            >
-                                <span className="mr-1">{getOptionIcon(selectedOption)}</span>
-                                <span>{selectedOption}</span>
-                                <button
-                                    onClick={(e) => removeOption(selectedOption, e)}
-                                    className="ml-2 hover:bg-white/20 rounded-full p-0.5 transition-colors"
-                                >
-                                    <X className="w-3 h-3" />
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                {showCustomInput && (
-                    <>
-                        <div
-                            className="fixed inset-0 z-30 bg-black/50"
-                            onClick={() => {
-                                setShowCustomInput(false);
-                                setCustomValue('');
-                            }}
-                        />
-                        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 bg-gray-800 border border-gray-700 rounded-lg shadow-xl p-6 w-96">
-                            <h3 className="text-white font-semibold mb-4">Add Custom Option</h3>
-                            <input
-                                type="text"
-                                value={customValue}
-                                onChange={(e) => setCustomValue(e.target.value)}
-                                onKeyDown={handleCustomKeyPress}
-                                placeholder="Enter custom option..."
-                                className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#6c5ce8] focus:border-transparent"
-                                autoFocus
-                            />
-                            <div className="flex justify-end gap-2 mt-4">
-                                <button
-                                    onClick={() => {
-                                        setShowCustomInput(false);
-                                        setCustomValue('');
-                                    }}
-                                    className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    onClick={handleCustomAdd}
-                                    disabled={!customValue.trim()}
-                                    className="px-4 py-2 bg-[#6c5ce8] text-white rounded-lg hover:bg-[#5a4fd8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                                >
-                                    Add
-                                </button>
-                            </div>
-                        </div>
-                    </>
-                )}
-
-                {isOpen && (
-                    <>
-                        <div
-                            className="fixed inset-0 z-10"
-                            onClick={() => setIsOpen(false)}
-                        />
-                        <div className="absolute top-full left-0 mt-2 w-full min-w-[400px] bg-gray-800 border border-gray-700 rounded-lg shadow-xl z-20 py-2">
-                            {displayOptions.map((option, index) => (
-                                <button
-                                    key={option}
-                                    onClick={() => handleSelect(option)}
-                                    className={`w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-700 transition-colors duration-150 flex items-center justify-between ${isOptionSelected(option) ? 'bg-gray-700 text-blue-400' : ''
-                                        } ${index === 0 ? 'rounded-t-lg' : ''} ${index === displayOptions.length - 1 ? 'rounded-b-lg' : ''}`}
-                                >
-                                    <div className="flex items-center">
-                                        <span className="mr-2">{getOptionIcon(option)}</span>
-                                        <span>{option}</span>
-                                    </div>
-                                    {multiSelect && isOptionSelected(option) && (
-                                        <div className="w-4 h-4 bg-blue-500 rounded-sm flex items-center justify-center">
-                                            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                    )}
-                                </button>
-                            ))}
-                        </div>
-                    </>
-                )}
-            </div>
-        );
-    };
-
-    const videoTypeDrop = ['Tool Comparison', 'Feature Demo', 'Coding Walkthrough', 'Bug Fixing Session', 'Prompt Testing', 'Productivity Tips', 'Behind the Scenes', 'Real-world Scenario Demo', 'Code Optimization Breakdown'];
-    const audienceType = ['Beginner Developers', 'Intermediate Developers', 'Senior Engineers', 'AI/ML Enthusiasts', 'Frontend Developers', 'Backend Developers', 'DevOps Professionals', 'Content Creators', 'CTOs / Tech Decision Makers'];
-    const videoLengthDrop = ['0 to 2 Minutes', '2 to 8 Minutes', '8 to 12 Minutes', '12 to 20 Minutes'];
-    const toolsMap = {
-        'Tool Comparison': [
-            'GitHub Copilot',
-            'Codeium',
-            'Gemini',
-            'OpenAI GPT',
-            'Claude',
-            'Tabnine',
-            'Replit Ghostwriter'
-        ],
-
-        'Feature Demo': [
-            'Next.js',
-            'Vercel',
-            'Supabase',
-            'Firebase',
-            'Descript',
-            'Canva',
-            'GitHub Copilot'
-        ],
-
-        'Coding Walkthrough': [
-            'VS Code',
-            'GitHub Copilot',
-            'Next.js',
-            'Node.js',
-            'TypeScript',
-            'Docker',
-            'Postman'
-        ],
-
-        'Bug Fixing Session': [
-            'Chrome DevTools',
-            'VS Code',
-            'Sentry',
-            'Postman',
-            'Jest',
-            'GitHub Copilot',
-            'Codeium'
-        ],
-
-        'Prompt Testing': [
-            'Gemini',
-            'OpenAI GPT',
-            'Claude',
-            'LlamaIndex',
-            'LangChain',
-            'Pinecone',
-            'Anthropic Claude'
-        ],
-
-        'Productivity Tips': [
-            'Notion',
-            'Trello',
-            'Slack',
-            'Jira',
-            'Zapier',
-            'Google Calendar',
-            'GitHub Copilot'
-        ],
-
-        'Behind the Scenes': [
-            'Figma',
-            'Notion',
-            'OBS Studio',
-            'Descript',
-            'Canva',
-            'GitHub',
-            'Vercel'
-        ],
-
-        'Real-world Scenario Demo': [
-            'Next.js',
-            'AWS Lambda',
-            'Docker',
-            'Postman',
-            'Firebase',
-            'GitHub Copilot',
-            'Codeium'
-        ],
-
-        'Code Optimization Breakdown': [
-            'Chrome DevTools',
-            'cProfile (Python)',
-            'py-spy',
-            'Node.js Profiler',
-            'Flamegraph (perf tools)',
-            'Redis',
-            'AWS X-Ray'
-        ]
-    };
-
-    useEffect(() => {
-        if (videoType && videoType !== 'Select video type...') {
-            setToolsIn(toolsMap[videoType] || []);
-        } else {
-            setToolsIn([]);
-        }
-    }, [videoType]);
-
-    const getToneIcon = (tone) => {
-        const icons = {
-            'Tool Comparison': '',
-            'Feature Demo': '',
-            'Coding Walkthrough': '',
-            'Bug Fixing Session': '',
-            'Prompt Testing': '',
-            'Productivity Tips': '',
-            'Behind the Scenes': '',
-            'Real-world Scenario Demo': '',
-            'Code Optimization Breakdown': '',
-        };
-        return icons[tone] || '';
-    };
-
-    const getAudienceIcon = (audience) => {
-        const icons = {
-            'GitHub Copilot': '',
-            'CodeRabbit': '',
-            'Gemini': '',
-            'Cody': '',
-            'Amazon CodeWhisperer': '',
-            'Tabnine': '',
-            'Qodo': '',
-            'Replit Ghostwriter': '',
-            'Codeium': ''
-        };
-        return icons[audience] || '';
-    };
-
-    const getPlatformIcon = (platform) => {
-        const icons = {
-            'Beginner Developers': '',
-            'Intermediate Developers': '',
-            'Senior Engineers': '',
-            'AI/ML Enthusiasts': '',
-            'Frontend Developers': '',
-            'Backend Developers': '',
-            'DevOps Professionals': '',
-            'Content Creators': '',
-            'CTOs / Tech Decision Makers': ''
-        };
-        return icons[platform] || '';
-    };
-
-    const handleSubmit = async () => {
-        try {
-            setError("");
-            setGeneratedComment("");
-            setLoading(true);
-
-            const res = await fetch("/api/generate-script", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    prompt,
-                    videoType,
-                    toolsInvolved,
-                    targetAudience,
-                    videoLength,
-                    linkForRef
-                }),
-            });
-
-            if (!res.ok) throw new Error("Failed to generate script");
-
-            const data = await res.json();
-            setGeneratedComment(data.script);
-            setShowScript(true);
-        } catch (err) {
-            setError(err.message || "Something went wrong");
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const [loadingText, setLoadingText] = useState("Generating your script...");
-
-    useEffect(() => {
-        if (loading) {
-            const messages = [
-                "Analyzing video type...",
-                "Analyzing tools...",
-                "Analyzing audience...",
-                "Finalizing your script..."
-            ];
-            let index = 0;
-
-            const interval = setInterval(() => {
-                setLoadingText(messages[index]);
-                index++;
-                if (index >= messages.length) {
-                    index = messages.length - 1;
-                }
-            }, 2000);
-
-            return () => clearInterval(interval);
-        }
-    }, [loading]);
-
-
-
-    return (
-        <div className="bg-black text-white pt-36 -mb-16">
-            {loading && (
-                <div className="fixed inset-0  backdrop-blur-sm z-50 flex items-center justify-center">
-                    <div className="bg-gray-900 border border-gray-700 rounded-2xl p-8 text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#6c5ce8] mx-auto mb-4"></div>
-                        <p className="text-white font-[quicksand] font-semibold">{loadingText}</p>
-                    </div>
-                </div>
-            )}
-
-            <div className="flex items-center justify-center pt-8 pb-4">
-                <div className="flex items-center bg-gray-800 rounded-full px-4 py-2 border border-[#6c5ce8]/40">
-                    <div className="w-4 h-4 rounded mr-2 flex items-center justify-center">
-                        <Sparkles className="h-4 w-4 stroke-slate-100" />
-                    </div>
-                    <span className="font-[quicksand] text-sm text-gray-300 font-bold">Script Generator</span>
-                </div>
-            </div>
-
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-8">
-                    <h1 className="font-[quicksand] text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
-                        <span class="specialtext">Video Scripts Built for Developer Audiences</span>
-                    </h1>
-                    <p className="text-lg sm:text-xl text-gray-400 font-medium max-w-2xl mx-auto">
-                        From AI agents to testing platforms, devboxes to code review tools—generate scripts that speak your audience’s language
+                    
+                    <h2 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+                      {script.title}
+                    </h2>
+                    
+                    <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-4 group-hover:text-gray-300 transition-colors">
+                      {script.intro}
                     </p>
-                </div>
+                  </div>
 
-                <div className="max-w-2xl mx-auto mb-8">
-                    <div className="my-4 justify-center md:justify-start items-center gap-4 sm:gap-6">
-                        <CustomDropdown
-                            label="Select video type (how-to, comparison, explainer, use case, etc.)"
-                            options={videoTypeDrop}
-                            value={videoType}
-                            onChange={setVideoType}
-                            minWidth="min-w-[120px]"
-                            getOptionIcon={getToneIcon}
-                            multiSelect={false}
-                        />
-
-                        <CustomDropdown
-                            label="Select tools, frameworks, or platforms"
-                            options={toolsIn}
-                            value={toolsInvolved}
-                            onChange={setToolsInvolved}
-                            minWidth="min-w-[140px]"
-                            getOptionIcon={getAudienceIcon}
-                            multiSelect={true}
-                            allowCustom={true}  // This enables the "Other" option
-                        />
-                        <CustomDropdown
-                            label="Select target audience (developers, testers, platform engineers, etc.)"
-                            options={audienceType}
-                            value={targetAudience}
-                            onChange={setTargetAudience}
-                            minWidth="min-w-[110px]"
-                            getOptionIcon={getPlatformIcon}
-                            multiSelect={true}
-                        />
-                        <div className='md:flex items-center justify-center gap-8'>
-                            <CustomDropdown
-                                label="Video Length"
-                                options={videoLengthDrop}
-                                value={videoLength}
-                                onChange={setVideoLength}
-                                minWidth="min-w-[250px]"
-                                getOptionIcon={getPlatformIcon}
-                                multiSelect={false}
-                            />
-                            <div className="flex flex-col min-w-[300px]">
-                                <label className="font-[quicksand] font-semibold">Insert Links</label>
-                                <input
-                                    type="text"
-                                    onChange={(e) => {
-                                        let value = e.target.value.trim();
-
-                                        // Allow only valid domain formats (with or without protocol)
-                                        const domainRegex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
-
-                                        if (domainRegex.test(value)) {
-                                            // Add protocol if missing
-                                            if (!/^https?:\/\//i.test(value)) {
-                                                value = `https://${value}`;
-                                            }
-                                            setLinkForRef(value);
-                                        } else {
-                                            setLinkForRef("");
-                                        }
-                                    }}
-                                    placeholder="Enter Your Links"
-                                    className="appearance-none bg-gray-900 hover:bg-gray-700 border border-gray-700 rounded-xl w-full px-4 py-3 mt-1 pr-10 text-white text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#6c5ce8] focus:border-transparent relative"
-                                />
-                            </div>
-
+                  {/* Card Footer */}
+                  <div className="px-6 py-4 bg-gray-900/30 border-t border-gray-700/30">
+                    <div className="flex items-center justify-between text-sm text-gray-400">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1">
+                          <Clock size={14} />
+                          <span>{script.duration}</span>
                         </div>
+                        {/* <div className="flex items-center gap-1">
+                          <User size={14} />
+                          <span>{script.author}</span>
+                        </div> */}
+                      </div>
+                      <div className="flex items-center gap-1 text-blue-400 group-hover:text-blue-300 transition-colors">
+                        <PlayCircle size={16} />
+                        <span className="font-medium">View Script</span>
+                      </div>
                     </div>
+                  </div>
+
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-600/10 via-transparent to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  
+                  {/* Glow Effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none blur-xl" />
                 </div>
-
-                <div className="max-w-2xl mx-auto mb-8">
-                    <div className="relative bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl">
-                        <textarea
-                            value={prompt}
-                            onChange={(e) => setPrompt(e.target.value)}
-                            placeholder="e.g. AI Video Scripts for Technical Startups."
-                            className="w-full h-32 sm:h-24 px-6 py-6 pr-16 bg-transparent text-white placeholder-gray-500 resize-none outline-none text-base sm:text-lg rounded-2xl scrollbar-hide"
-                            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                            rows={3}
-                        />
-                        {regenerate ? (
-                            <button
-                                onClick={() => {
-                                    handleSubmit();
-                                    setRgenerate(false);
-                                }}
-                                className="absolute bottom-4 right-4 w-32 flex items-center justify-center h-10 bg-[#6c5ce8] hover:bg-[#6c5ce8]/80 text-white rounded-xl transition-colors duration-200 text-sm font-medium"
-                            >
-                                <Sparkles className="w-5 h-5 mr-2" />
-                                Regenerate
-                            </button>
-                        ) : (
-                            <button
-                                onClick={handleSubmit}
-                                className="absolute bottom-4 right-4 w-10 h-10 bg-[#6c5ce8] hover:opacity-80 rounded-xl flex items-center justify-center transition-colors duration-200 shadow-lg"
-                            >
-                                <Sparkles className="w-5 h-5 stroke-white/90" />
-                            </button>
-                        )}
-
-                    </div>
-                </div>
-
-                <div className="pb-16"></div>
-
-                {/* Show script modal only when generatedComment has content */}
-                {showScript && generatedComment && (
-                    <ScriptDisplay
-                        generatedScript={generatedComment}
-                        onClose={() => setShowScript(false)}
-                        regenerateText={() => setRgenerate(true)}
-                        videoType={videoType}
-
-                    />
-                )}
-
-                {/* Show error message if there's an error */}
-                {error && (
-                    <div className="max-w-2xl mx-auto mb-8">
-                        <div className="bg-red-500/20 border border-red-500/30 rounded-xl p-4 text-red-400 text-center">
-                            {error}
-                        </div>
-                    </div>
-                )}
+              ))}
             </div>
-        </div>
-    );
+
+            {/* Background Decoration */}
+            <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+              <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
