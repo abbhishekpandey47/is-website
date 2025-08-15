@@ -60,11 +60,11 @@ In 2025, Generative Engine Optimization services focus on factors AI models actu
 
 Here it is, check out the checklit for generative engine optimization.
 
-1. ### **Titles & Metadata**
+1. **Titles & Metadata**
 
 Create AI-ready titles that match search intent, use primary keywords naturally and don’t stuff, and stay under 60 characters. Pair them with engaging meta descriptions under 160 characters, optimized for click-through and discoverability. Keep URL slugs short, clean, and keyword-rich for better indexing and AI parsing.
 
-### ![SEO summary preview showing title, description, and URL for a Infrasity's tech video production's webpage, highlighting metadata detail,  and url link.][image2] 
+![SEO summary preview showing title, description, and URL for a Infrasity's tech video production's webpage, highlighting metadata detail,  and url link.](/PostImages/generative-engine-optimization-best-practices/i2.png) 
 
 * **Meta Title:** Matches intent and is keyword-optimized. Clear, concise and ≤ 60 characters, includes primary keyword.
 
@@ -72,11 +72,11 @@ Create AI-ready titles that match search intent, use primary keywords naturally 
 
 * **URL Slug:** Short, clean, and contains the primary keyword. 
 
-2. ### **Content Structure & Readability**
+2. **Content Structure & Readability**
 
 Organize content for both readers and AI models with a clear TL;DR, keyword-rich subheadings, and a strong first 150 words addressing the query. Use bullets, numbered lists, and Q\&A formats for featured snippets, and include real-world examples. Maintain an authoritative yet conversational tone to build trust and engagement.
 
-![Screenshot of TL;DR section explaining AEO and SEO differences, including definitions, benefits, and how AI tools like ChatGPT and Google AI Overviews impact search visibility.][image3]
+![Screenshot of TL;DR section explaining AEO and SEO differences, including definitions, benefits, and how AI tools like ChatGPT and Google AI Overviews impact search visibility.](/PostImages/generative-engine-optimization-best-practices/i3.png) 
 
 * **TL;DR:** 2–5 sentences summarizing all main points and AI pulls this easily.
 
@@ -91,7 +91,7 @@ Organize content for both readers and AI models with a clear TL;DR, keyword-rich
 * **Authoritative Tone:** Factual yet conversational for trust and engagement.
 
 
-3. ### **AI-Friendly Content Practices**
+3. **AI-Friendly Content Practices**
 
 Write for natural discovery with well-placed keywords, entity optimization, and conversational phrasing that mirrors user prompts. Provide context-rich, standalone answers and short, quotable statements for AI citations. Strengthen credibility through relevant internal links, authoritative external sources, and trustworthy data-backed references.
 
@@ -105,7 +105,7 @@ Write for natural discovery with well-placed keywords, entity optimization, and 
 
 * **Quote-Worthy Sentences:** Write short, definitive statements that can be cited
 
-4. ### **Linking & Credibility**
+4. **Linking & Credibility**
 
 Strengthen authority with 3–4 relevant internal links to related content and external references only from reputable, high-authority sources. Back claims with credible data and statistics, ensuring every fact is verifiable. This builds trust with both human readers and AI systems, increasing your chances of being cited.
 
