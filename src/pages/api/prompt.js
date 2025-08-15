@@ -108,15 +108,31 @@ ${linkForRef && `📎 For more context or additional information, click here: ${
 **Only use code blocks for actual code examples, never for regular text content**
 `,
 
-"Bug Fixing Session": ({ toolsInvolved, targetAudience, title = null }) => `
-Create a detailed bug fixing session guide with the following specifications:
+"Bug Fixing Session": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef }) => `
+Create a professional, structured bug fixing session guide for ${toolsInvolved.join(", ")} aimed at ${targetAudience.join(", ")}.
 
-TITLE: Use this exact format: "# ${title || `Bug Fixing Session: ${toolsInvolved.join(", ")}`}"
+**IMPORTANT: Output clean, readable text only. Strictly avoid:**
+- Code block markers (\`\`\`) unless absolutely necessary for actual code
+- Text labels like "text", "bash", "javascript"
+- Excessive formatting characters (****), decorative elements
+- Icons or emojis in section content
+- Unnecessary symbols — keep copy clean and plain
 
-STRUCTURE: Follow this exact section order and formatting:
+### TITLE REQUIREMENT (MANDATORY)
+- Start with: "# Bug Fixing Session: ${toolsInvolved.join(" vs ")}"
+- This must be the very first line of the output
+- Use single # only, no extra formatting
+
+### VIDEO LENGTH REFERENCE
+- Input: ${videoLength} provided as range (e.g., "5 to 15 Minutes")
+- Parse numeric bounds and calculate midpoint in seconds
+- This midpoint can help pace the walkthrough steps and ensure balanced timing across sections
+- Optional: show section durations in [mm:ss–mm:ss] if needed
+
+### REQUIRED STRUCTURE (All sections mandatory, exact order)
 
 ## The Problem & Its Impact
-Write 2-3 sentences describing the bug in simple terms. Explain why this issue matters for ${targetAudience.join(", ")} and what negative effects it causes in the system or user experience.
+Write 2–3 concise sentences explaining the bug in simple terms. Describe why it matters for ${targetAudience.join(", ")} and its negative impact on the system or user experience.
 
 ## Debugging Steps
 Provide a clear, numbered troubleshooting process:
@@ -126,15 +142,15 @@ Provide a clear, numbered troubleshooting process:
 4. Narrowing down potential causes
 
 ## Root Cause Explanation
-Explain exactly what caused the bug. Include:
-* The underlying technical reason
-* How the issue was introduced
-* Why it wasn't caught earlier
+Clearly explain:
+* The underlying technical reason for the bug
+* How and when the issue was introduced
+* Why it was not detected earlier
 
 ## Fix Implementation
-Show the exact changes made to resolve the bug:
-* Before and after code snippets
-* Explanation of why this fix works
+Show exactly what was changed to resolve the issue:
+* Before and after code snippets (use only actual code blocks for code)
+* Explanation of why the fix works
 * Any relevant configuration changes
 
 ## Validation & Testing
@@ -144,66 +160,58 @@ List how to confirm the bug is resolved:
 * Additional edge cases to check
 
 ## Summary & Call to Action
-Summarize the key lessons learned and provide 2-3 next steps:
+Summarize key lessons learned in 2–3 sentences and provide next steps:
 * Improve code review process
 * Add automated test coverage
-* Monitor for similar issues in the future
+* Monitor for similar issues in the future  
+${linkForRef && `For more context or additional details, click here: ${linkForRef}`}
 
-FORMATTING REQUIREMENTS:
-- Use numbered steps for debugging process
-- Use bullet points (*) for lists
-- Use before/after code blocks where applicable
-- Keep explanations concise and factual
-- Maintain a problem-solving, engaging, and technical tone
+### FORMATTING RULES (STRICT)
+- Numbered steps for debugging
+- Bullets (*) for lists
+- Before/after code blocks only when showing code
+- Plain, professional tone
+- No decorative or promotional language
+- Ensure all sections are present and in exact order
 
----
+### CONTENT QUALITY REQUIREMENTS
+- Focus on problem-solving clarity
+- Keep explanations factual and concise
+- Apply consistent evaluation and troubleshooting style across all tools or technologies mentioned
 
-### Example Output for Bug Fixing Session (Node.js + Express, Backend Developers)
-
-# Bug Fixing Session: Node.js, Express
-
-## The Problem & Its Impact
-Users reported that API responses from the "/users" endpoint were returning empty arrays even when the database contained user records. This impacted reporting features and caused delays in data analytics processing.
-
-## Debugging Steps
-1. Checked API logs — confirmed requests were reaching the route handler.
-2. Verified database connection — logs showed connection successful.
-3. Ran the query manually in MongoDB Compass — data returned as expected.
-4. Isolated the route handler code and found the query filter was incorrect.
-
-## Fix Implementation
-
-// Before:
-// const users = await User.find({ isActive: "true" });
-
-// After:
-// const users = await User.find({ isActive: true });
-
-
-The fix changes the string "true" to a boolean true, ensuring the query matches the intended documents.
-
-## Validation & Testing
-* Called "/users" endpoint — received correct active user data.
-* Wrote unit tests to verify "isActive" filtering works correctly.
-* Added edge case test for "isActive: false".
-
-## Summary & Call to Action
-* Lesson learned: Always validate data types in queries.
-* Next steps:
-  1. Add automated tests for API endpoints.
-  2. Include type-checking in the data access layer.
-  3. Implement logging for mismatched query filters.
+### COPY-FRIENDLY OUTPUT RULES
+**Critical: When users copy, ensure clean text output:**
+- NO extra formatting symbols or icons in regular text
+- NO unnecessary bullet variations or decorative marks
+- Only use code blocks for actual code examples
+- Maintain plain, readable text ready for direct use
 `,
 
-"Prompt Testing": ({ toolsInvolved, targetAudience, title = null }) => `
-Create a detailed prompt testing report with the following specifications:
+"Prompt Testing": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef }) => `
+Create a professional, structured prompt testing report for ${toolsInvolved.join(", ")} aimed at ${targetAudience.join(", ")}.
 
-TITLE: Use this exact format: "# ${title || `Prompt Testing: ${toolsInvolved.join(", ")}`}"
+**IMPORTANT: Output clean, readable text only. Strictly avoid:**
+- Code block markers (\`\`\`) unless absolutely necessary for actual code
+- Text labels like "text", "bash", "javascript"
+- Excessive formatting characters (****), decorative elements
+- Icons or emojis in section content
+- Unnecessary symbols — keep copy clean and plain
 
-STRUCTURE: Follow this exact section order and formatting:
+### TITLE REQUIREMENT (MANDATORY)
+- Start with: "# Prompt Testing: ${toolsInvolved.join(" vs ")}"
+- This must be the very first line of the output
+- Use single # only, no extra formatting
+
+### VIDEO LENGTH REFERENCE
+- Input: ${videoLength} provided as range (e.g., "5 to 15 Minutes")
+- Parse numeric bounds and calculate midpoint in seconds
+- This midpoint can guide pacing for each section
+- Optional: Show section durations in [mm:ss–mm:ss] if relevant
+
+### REQUIRED STRUCTURE (All sections mandatory, exact order)
 
 ## Why Prompt Quality Matters
-Write 2-3 sentences explaining why effective prompt design is important for ${targetAudience.join(", ")}. Focus on how it impacts output accuracy, creativity, and task completion.
+Write 2–3 sentences explaining why effective prompt design is important for ${targetAudience.join(", ")}. Focus on its impact on output accuracy, creativity, and task completion.
 
 ## Test Setup & Methodology
 Provide:
@@ -214,142 +222,122 @@ Provide:
 
 ## Different Prompts with Outputs
 For each tested prompt:
-* **Prompt:** Show the exact text used
-* **Output:** Show the model’s response (summarized if long)
-* **Analysis:** Short commentary on strengths and weaknesses
+* Prompt: Show the exact text used
+* Output: Show the model’s response (summarized if long)
+* Analysis: Short commentary on strengths and weaknesses
 
 ## Insights & Learnings
-Summarize key observations from testing:
+Summarize key observations:
 * Patterns in what worked well
 * Common pitfalls or issues
 * Unexpected behaviors
 
 ## Summary & Call to Action
-Wrap up with 2-3 actionable recommendations:
+Wrap up with 2–3 actionable recommendations:
 * How to improve prompt design
 * What to test next
-* How to scale testing for better results
+* How to scale testing for better results  
+${linkForRef && `For more context or additional details, click here: ${linkForRef}`}
 
-FORMATTING REQUIREMENTS:
-- Use bullet points (*) for lists
-- Keep all prompts and outputs clearly separated
+### FORMATTING RULES (STRICT)
+- Use single bullets (*) for lists
+- Keep prompts and outputs clearly separated
 - Avoid filler words; stay concise
-- Maintain an experimental, data-driven, and curious tone
+- Maintain an experimental, data-driven, and analytical tone
 - Include real, factual observations when possible
+- Ensure all sections are present and in exact order
 
----
+### CONTENT QUALITY REQUIREMENTS
+- Specific, actionable insights
+- Consistent evaluation criteria across prompts
+- Clear, concise explanations
+- Avoid promotional or decorative language
 
-### Example Output for Prompt Testing (OpenAI GPT-4, AI Researchers)
-
-# Prompt Testing: OpenAI GPT-4
-
-## Why Prompt Quality Matters
-For AI researchers, well-crafted prompts are the difference between insightful responses and irrelevant outputs. Good prompt engineering ensures consistency, reduces hallucinations, and improves efficiency.
-
-## Test Setup & Methodology
-* **Tools/platforms used:** OpenAI GPT-4, Playground
-* **Test environment:** Temperature = 0.7, Max tokens = 300
-* **Evaluation criteria:** Accuracy, creativity, relevance
-* **Dataset:** 5 factual knowledge queries and 3 creative writing tasks
-
-## Different Prompts with Outputs
-
-**Prompt 1:**  
-*"Explain quantum entanglement in simple terms for a 12-year-old."*  
-**Output:** "Quantum entanglement is like having two magic dice..."  
-**Analysis:** Clear analogy, accessible language. Missed some key quantum details.
-
-**Prompt 2:**  
-*"Summarize quantum entanglement for physics PhD students in 100 words."*  
-**Output:** Provided a mathematically correct description with Bell’s theorem reference.  
-**Analysis:** Technically accurate but slightly exceeded the word count.
-
-**Prompt 3:**  
-*"List 3 real-world applications of quantum entanglement with short explanations."*  
-**Output:** Quantum cryptography, quantum teleportation, quantum networks — each with concise descriptions.  
-**Analysis:** Met requirements exactly, practical examples.
-
-## Insights & Learnings
-* Specificity in prompts greatly improves relevance.
-* Audience targeting changes style and technical depth.
-* Word count limits are respected ~80% of the time.
-
-## Summary & Call to Action
-* Always define the audience and context in the prompt.
-* Test both general and highly specific variations.
-* Next: Experiment with chain-of-thought style prompts for complex reasoning tasks.
+### COPY-FRIENDLY OUTPUT RULES
+**Critical: When users copy, ensure clean text output:**
+- NO extra formatting symbols or icons in regular text
+- NO unnecessary bullet variations
+- Only use code blocks for actual code examples
+- Maintain plain, readable text ready for direct use
 `,
 
-  "Productivity Tips": ({ toolsInvolved, targetAudience, title = null }) => `
-Create a structured productivity tips guide with the following specifications:
+  "Productivity Tips": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef }) => `
+Create a professional, structured productivity tips guide for ${toolsInvolved.join(", ")} tailored to ${targetAudience.join(", ")}.
 
-TITLE: Use this exact format: "# ${title || `Productivity Tips with ${toolsInvolved.join(", ")}`}"
+**IMPORTANT: Output clean, readable text only. Strictly avoid:**
+- Code block markers (\`\`\`) unless for actual code
+- Decorative symbols or icons (❌ avoid emojis, ★, →, etc.)
+- Unnecessary bold/italic except for headings and key terms
+- Extra formatting clutter that reduces copy-paste usability
 
-STRUCTURE: Follow this exact section order and formatting:
+### TITLE REQUIREMENT
+- Start with: "# Productivity Tips with ${toolsInvolved.join(" & ")}"
+- This must be the very first line of the output
+- Use only a single # for the title
+
+### VIDEO LENGTH REFERENCE
+- Input: ${videoLength} (e.g., "5 to 15 Minutes")
+- Parse numeric bounds and calculate midpoint in seconds
+- This midpoint may guide pacing if tips are adapted into a video
+
+### REQUIRED STRUCTURE (Exact Order)
 
 ## Why Productivity Boosts Matter
-Write 2-3 sentences explaining why productivity improvements are important for ${targetAudience.join(", ")}. Focus on how they help achieve goals faster, reduce stress, and improve overall efficiency.
+Write 2–3 sentences explaining why productivity improvements are important for ${targetAudience.join(", ")}. Focus on how they help achieve goals faster, reduce stress, and improve efficiency.
 
 ## 3 Actionable Tips
-Provide exactly 3 tips, each with:
+Provide exactly 3 tips, each containing:
 * **Tip Name:** Short and clear
-* **Description:** 2-3 sentences on how to implement it
+* **Description:** 2–3 sentences on how to implement it
 * **Benefit:** 1 sentence explaining the impact
 
 ## Quick Recap
-Summarize the tips in one bullet list for quick reference.
+Summarize the tips in a single bullet list for fast reference.
 
 ## Call to Action
-Write a motivational closing line that encourages ${targetAudience.join(", ")} to apply these tips today.
+Write a motivational closing line encouraging ${targetAudience.join(", ")} to apply these tips immediately.  
+${linkForRef && `For further reading or additional resources, see: ${linkForRef}`}
 
-FORMATTING REQUIREMENTS:
-- Use bullet points (*) for lists
-- Keep tips concise and practical
-- Avoid filler words or vague advice
-- Maintain a motivational, concise, and inspiring tone
+### FORMATTING RULES
+- Use single bullets (*) for lists
+- Keep all tips practical and easy to understand
+- Avoid filler words and vague advice
+- Maintain a motivational and concise tone
 
----
-
-### Example Output for Productivity Tips (Notion, Trello, Remote Developers)
-
-# Productivity Tips with Notion, Trello
-
-## Why Productivity Boosts Matter
-For remote developers, staying productive means delivering high-quality work without burning out. The right systems can streamline tasks, improve focus, and create a better work-life balance.
-
-## 3 Actionable Tips
-* **Daily Standup Notes in Notion:** Write a quick morning log with top 3 priorities, blockers, and key updates.  
-  **Benefit:** Keeps you focused and aligned with the team.
-
-* **Kanban Flow in Trello:** Organize tasks into "To Do," "In Progress," and "Done" columns.  
-  **Benefit:** Visual clarity reduces decision fatigue and speeds up execution.
-
-* **Time-Box Deep Work:** Block out 90-minute focus sessions without meetings or distractions.  
-  **Benefit:** Increases concentration and task completion speed.
-
-## Quick Recap
-* Daily Standup Notes in Notion  
-* Kanban Flow in Trello  
-* Time-Box Deep Work  
-
-## Call to Action
-Start implementing these three tips today and see how much more you can achieve without increasing your working hours.
+### CONTENT QUALITY REQUIREMENTS
+- Provide real-world, actionable tips
+- Ensure each benefit directly links to improved productivity
+- Keep explanations direct, free of unnecessary elaboration
+- Maintain plain-text formatting for easy copy-paste
 `,
 
-"Behind the Scenes": ({ toolsInvolved, targetAudience, title = null }) => `
-Create a behind-the-scenes storytelling piece with the following specifications:
+"Behind the Scenes": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef }) => `
+Create an engaging behind-the-scenes storytelling piece for ${toolsInvolved.join(", ")} aimed at ${targetAudience.join(", ")}.
 
-TITLE: Use this exact format: "# ${title || `Behind the Scenes: ${toolsInvolved.join(", ")}`}"
+**IMPORTANT: Output clean, readable text only. Strictly avoid:**
+- Code block markers (\`\`\`) unless for actual code
+- Decorative symbols or emojis
+- Overuse of bold or italics — only use where essential
+- Extra visual clutter that reduces copy-paste usability
 
-STRUCTURE: Follow this exact section order and formatting:
+### TITLE REQUIREMENT
+- Start with: "# Behind the Scenes: ${toolsInvolved.join(" & ")}"
+- This must be the very first line of the output
+- Use only a single # for the title
+
+### VIDEO LENGTH REFERENCE
+- Input: ${videoLength}
+- Parse numeric bounds and calculate midpoint in seconds for pacing if adapted to video
+
+### REQUIRED STRUCTURE (Exact Order)
 
 ## Tease the Big Reveal
-Write 2-3 sentences to spark curiosity about the story. Hint at the most exciting or unexpected part without fully revealing it.
+Write 2–3 sentences that spark curiosity about the story. Hint at the most surprising or exciting part without fully revealing it.
 
 ## Overview of the Project
-Explain in 3-4 sentences:
+Explain in 3–4 sentences:
 * The purpose of the project
-* Who it’s for (${targetAudience.join(", ")})
+* The audience (${targetAudience.join(", ")})
 * The main tools used: ${toolsInvolved.join(", ")}
 
 ## Step-by-Step Process
@@ -357,127 +345,80 @@ Describe the journey from start to finish in clear steps. Use bullet points for 
 
 ## Challenges & Wins
 List:
-* **Challenges:** 2-3 obstacles faced during the process
-* **Wins:** 2-3 successes or breakthroughs achieved
+* **Challenges:** 2–3 key obstacles encountered
+* **Wins:** 2–3 successes or breakthroughs
 
 ## Closing & Call to Action
-Wrap up with:
-* A reflection on what was learned
-* An invitation for the audience to share thoughts, ask questions, or try something similar
+End with:
+* A short reflection on lessons learned
+* An invitation for the audience to comment, ask questions, or try something similar  
+${linkForRef && `For more insights, check out: ${linkForRef}`}
 
-FORMATTING REQUIREMENTS:
-- Use bullet points (*) for lists
-- Keep the tone transparent, casual, and relatable
+### FORMATTING RULES
+- Use single bullets (*) for lists
+- Maintain a transparent, casual, and relatable tone
 - Avoid overly technical language unless essential
-- Make it feel like a real “inside look”
+- Make it feel like a genuine “inside look”
+
+### CONTENT QUALITY REQUIREMENTS
+- Ensure milestones are sequential and clear
+- Keep the narrative engaging without unnecessary filler
+- Share at least one personal or unexpected insight
+`,
+
+"Real-world Scenario Demo": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef }) => `
+Create a practical real-world scenario demonstration for ${toolsInvolved.join(", ")} aimed at ${targetAudience.join(", ")}.
+
+**TITLE REQUIREMENT:**
+- Use exactly: "# Real-world Scenario Demo: ${toolsInvolved.join(" & ")}" as the first line
+- Only one # at the start
+
+**VIDEO LENGTH REFERENCE:**
+- Input: ${videoLength}
+- Use to determine pacing if adapted for video
 
 ---
 
-### Example Output for Behind the Scenes (Figma, Webflow, UX Designers)
-
-# Behind the Scenes: Figma, Webflow
-
-## Tease the Big Reveal
-We almost scrapped the entire homepage — until a single design tweak completely changed the client’s reaction. Here’s what really happened.
-
-## Overview of the Project
-This was a rapid 2-week redesign for a SaaS dashboard aimed at UX designers. The goal was to create a cleaner, faster, and more intuitive experience. We relied heavily on Figma for design iteration and Webflow for fast deployment.
-
-## Step-by-Step Process
-* Mapped out the core user flows from analytics data
-* Created low-fidelity wireframes in Figma for quick approval
-* Built interactive prototypes for usability testing
-* Implemented final designs in Webflow with custom animations
-
-## Challenges & Wins
-**Challenges:**
-* Tight 2-week deadline
-* Unexpected client feedback late in the process
-* Performance issues with initial animations
-
-**Wins:**
-* User test scores improved by 35%
-* The client’s NPS jumped from 6 to 9 after launch
-* Achieved a fully responsive build without extra dev resources
-
-## Closing & Call to Action
-This project reminded us that small design decisions can have huge impacts. Have you ever had a project turn around because of one tiny change? I’d love to hear your stories.
-`,
-
-"Real-world Scenario Demo": ({ toolsInvolved, targetAudience, title = null }) => `
-Create a real-world scenario demonstration with the following specifications:
-
-TITLE: Use this exact format: "# ${title || `Real-world Scenario Demo: ${toolsInvolved.join(", ")}`}"
-
-STRUCTURE: Follow this exact section order and formatting:
-
 ## Why This Scenario Matters
-Write 2-3 sentences explaining the importance of this scenario for ${targetAudience.join(", ")}. Emphasize how mastering it can improve efficiency, problem-solving, or project success.
+Write 2–3 sentences explaining why this scenario is important for ${targetAudience.join(", ")}. Highlight how mastering it can improve efficiency, problem-solving, or overall success.
 
 ## Setup & Context
 Describe:
-* The real-world setting or use case
-* The main tools used: ${toolsInvolved.join(", ")}
-* Any prerequisites or assumptions
+* **Scenario:** The real-world setting or use case
+* **Tools:** ${toolsInvolved.join(", ")}
+* **Prerequisites:** Any requirements or assumptions
 
 ## Step-by-Step Execution
-Present a clear sequence of steps, each with:
+For each step, include:
 * **Action:** What to do
 * **Purpose:** Why it’s necessary
-* **Tip:** (Optional) A quick optimization or common pitfall to avoid
+* **Tip:** (Optional) Quick optimization or common pitfall to avoid
 
 ## Results & Impact
 Summarize:
-* The outcome achieved
-* Measurable results or improvements
-* Feedback from stakeholders or end-users
+* The final outcome
+* Any measurable results or improvements
+* Feedback from stakeholders or end users
 
 ## Summary & Call to Action
 Provide:
-* A 2-3 sentence recap of key takeaways
-* A motivational prompt encouraging ${targetAudience.join(", ")} to try the scenario themselves
-
-FORMATTING REQUIREMENTS:
-- Use bullet points (*) for lists
-- Use **bold** for labels like "Action:", "Purpose:", "Tip:"
-- Keep tone practical, relatable, and informative
-- Avoid unnecessary jargon unless essential for clarity
+* A 2–3 sentence recap of the key takeaways
+* A motivational closing encouraging ${targetAudience.join(", ")} to try the scenario themselves  
+${linkForRef && `For more details, visit: ${linkForRef}`}
 
 ---
 
-### Example Output for Real-world Scenario Demo (Postman, REST APIs, Backend Developers)
+**FORMATTING RULES:**
+- Use * for bullet points
+- Bold labels like **Action:**, **Purpose:**, **Tip:**
+- Keep the tone practical, relatable, and clear
+- Avoid unnecessary jargon unless essential
+- Make it feel applicable to real-world work
 
-# Real-world Scenario Demo: Postman, REST APIs
-
-## Why This Scenario Matters
-For backend developers, the ability to quickly test and debug REST APIs can make the difference between a smooth release and a week of fire-fighting. This skill ensures faster delivery, fewer bugs, and more confidence in deployments.
-
-## Setup & Context
-* **Scenario:** Testing a new "user registration" endpoint before pushing it to production
-* **Tools:** Postman for API testing, REST APIs for backend communication
-* **Prerequisites:** An active development server and access to API documentation
-
-## Step-by-Step Execution
-* **Action:** Open Postman and create a new request for the "POST /register" endpoint.  
-  **Purpose:** To verify the API works as expected before deployment.  
-  **Tip:** Use environment variables for base URLs to easily switch between dev, staging, and prod.
-
-* **Action:** Add request body with "username", "email", and "password" fields.  
-  **Purpose:** Simulate actual user input to test the endpoint.
-
-* **Action:** Send the request and inspect the JSON response.  
-  **Purpose:** Ensure correct status code ("201 Created") and valid response data.
-
-* **Action:** Test invalid inputs (e.g., missing password).  
-  **Purpose:** Confirm that error handling and validation are working.
-
-## Results & Impact
-* API returned correct success and error responses
-* Validation errors were caught early, saving an estimated 3 hours of debugging later
-* Team gained confidence to proceed with deployment
-
-## Summary & Call to Action
-Mastering quick, thorough API testing prevents production issues and keeps development moving smoothly. Try setting up your own test suite in Postman today to speed up your debugging workflow.
+**QUALITY REQUIREMENTS:**
+- Steps should be sequential and easy to follow
+- Include at least one optimization or pitfall warning
+- Share one tangible, measurable benefit from completing the scenario
 `,
 
 "Code Optimization Breakdown": ({ toolsInvolved, targetAudience, title = null }) => `
@@ -488,34 +429,36 @@ TITLE: Use this exact format: "# ${title || `Code Optimization Breakdown: ${tool
 STRUCTURE: Follow this exact section order and formatting:
 
 ## Why Optimization Matters
-Write 2-3 sentences explaining why code optimization is important for ${targetAudience.join(", ")}. Highlight benefits such as faster execution, reduced resource usage, and better scalability.
+Write 2–3 sentences explaining why optimization is important for ${targetAudience.join(", ")}. Highlight measurable benefits such as faster execution, reduced memory usage, and improved scalability.
 
 ## Initial Performance Metrics
 Provide:
-* Baseline execution time
-* Memory usage
-* Any profiling tool results from ${toolsInvolved.join(", ")}
+* **Execution Time:** Baseline measurement
+* **Memory Usage:** Baseline peak usage
+* **Profiling Results:** Key bottlenecks identified using ${toolsInvolved.join(", ")}
 
 ## Step-by-Step Improvements
-For each improvement, include:
-* **Action:** The change made
-* **Reasoning:** Why this change improves performance
-* **Code Snippet:** Before & after comparison (if applicable)
+For each optimization:
+* **Action:** The specific change made
+* **Reasoning:** Why this improves performance
+* **Code Snippet:** Show before & after code (if applicable)
 
 ## Before & After Results
 Present:
-* A side-by-side table or bullet points comparing key metrics before and after optimization
-* Brief analysis of the improvements
+* A side-by-side table OR bullet points comparing key metrics before and after
+* Brief analysis explaining the significance of improvements
 
 ## Summary & Call to Action
-Write:
-* A 2-3 sentence recap of the key optimization strategies used
-* A CTA encouraging ${targetAudience.join(", ")} to apply similar techniques to their own code
+Include:
+* A 2–3 sentence recap of the key strategies used
+* A motivational closing encouraging ${targetAudience.join(", ")} to apply similar optimizations in their own work
 
-FORMATTING REQUIREMENTS:
-- Use bullet points (*) for lists
-- Use **bold** for labels like "Action:", "Reasoning:", "Code Snippet:"
-- Include realistic metric examples for credibility
+---
+
+FORMATTING RULES:
+- Use * for bullet points
+- Bold labels like **Action:**, **Reasoning:**, **Code Snippet:**
+- Include realistic example metrics for credibility
 - Keep tone analytical, technical, and insightful
 
 ---
@@ -525,21 +468,228 @@ FORMATTING REQUIREMENTS:
 # Code Optimization Breakdown: Python Profiling Tools
 
 ## Why Optimization Matters
-For data engineers, unoptimized code in ETL pipelines can lead to long runtimes, higher infrastructure costs, and missed SLAs. Improving performance not only speeds up workflows but also reduces operational expenses.
+For data engineers, inefficient ETL code can result in long runtimes, higher infrastructure costs, and missed SLAs. Optimization reduces processing time, minimizes hardware needs, and increases throughput.
 
 ## Initial Performance Metrics
-* Execution Time: 14.2 seconds for processing 1M rows
-* Memory Usage: 512MB peak
-* Profiling Results (cProfile): 70% of time spent in "apply" function
+* **Execution Time:** 14.2 seconds for 1M rows
+* **Memory Usage:** 512 MB peak
+* **Profiling Results (cProfile):** 70% of total runtime spent in \`apply\` function
 
 ## Step-by-Step Improvements
-* **Action:** Replaced Pandas "apply" with vectorized operations.  
-  **Reasoning:** Vectorized operations in Pandas are significantly faster than row-by-row execution.  
+* **Action:** Replaced Pandas \`apply\` with vectorized operations.  
+  **Reasoning:** Vectorization leverages C-level optimizations in Pandas, eliminating Python-level loops.  
   **Code Snippet:**
-  "python"
+  \`\`\`python
   # Before
-  
-  
-  # After`
-,
+  df["col3"] = df.apply(lambda row: row.col1 + row.col2, axis=1)
+
+  # After
+  df["col3"] = df["col1"] + df["col2"]
+  \`\`\`
+
+* **Action:** Switched from CSV to Parquet format for intermediate storage.  
+  **Reasoning:** Parquet offers faster read/write speeds and better compression.  
+
+## Before & After Results
+| Metric            | Before      | After       |
+|-------------------|------------|-------------|
+| Execution Time    | 14.2s      | 3.8s        |
+| Memory Usage      | 512 MB     | 290 MB      |
+| I/O Time          | 5.1s       | 1.2s        |
+
+**Analysis:** Achieved 73% faster execution and 43% less memory usage.
+
+## Summary & Call to Action
+By identifying hotspots through profiling and applying targeted optimizations, we drastically reduced runtime and memory load. Try profiling your code today with ${toolsInvolved.join(", ")} — small changes can deliver massive gains.
+`,
+
+"Feature Demo": ({ toolsInvolved, targetAudience, title = null }) => `
+Create a structured feature demonstration with the following specifications:
+
+TITLE: Use this exact format: "# ${title || `Feature Demo: ${toolsInvolved.join(", ")}`}"
+
+STRUCTURE: Follow this exact section order and formatting:
+
+## Why This Feature Matters
+Write 2–3 sentences explaining the value of the feature for ${targetAudience.join(", ")}. Focus on how it solves a problem, saves time, or enhances results.
+
+## Feature Overview
+Describe:
+* **Purpose:** What the feature does
+* **Tools:** ${toolsInvolved.join(", ")}
+* **Primary Use Cases:** 2–3 quick examples
+
+## Step-by-Step Walkthrough
+For each step:
+* **Action:** What the user should do
+* **Purpose:** Why it’s important
+* **Tip:** (Optional) Suggest a best practice or common pitfall to avoid
+
+## Benefits & Impact
+List 3–4 key benefits of using this feature, supported by measurable or practical outcomes.
+
+## Summary & Call to Action
+Provide:
+* A 2–3 sentence recap of why the feature is worth using
+* A motivational prompt encouraging ${targetAudience.join(", ")} to try it today
+
+FORMATTING REQUIREMENTS:
+- Use * for bullet points
+- Bold labels like **Action:**, **Purpose:**, **Tip:**
+- Keep tone practical, user-friendly, and slightly enthusiastic
+- Avoid unnecessary jargon unless it’s essential for clarity
+
+---
+
+### Example Output for Feature Demo (Canva Magic Resize, Social Media Managers)
+
+# Feature Demo: Canva Magic Resize
+
+## Why This Feature Matters
+For social media managers, manually resizing designs for each platform wastes hours each week. Canva’s Magic Resize automates this, ensuring perfect formatting across all channels with a single click.
+
+## Feature Overview
+* **Purpose:** Instantly resize a design for multiple platforms without starting from scratch  
+* **Tools:** Canva Magic Resize  
+* **Primary Use Cases:** Repurposing a Facebook post for Instagram Stories, adapting YouTube thumbnails for Pinterest, and converting flyers into posters
+
+## Step-by-Step Walkthrough
+* **Action:** Open your design in Canva and click the "Resize" button.  
+  **Purpose:** Access the list of pre-set dimensions for various platforms.  
+  **Tip:** Use "Custom Size" if you need non-standard dimensions.
+
+* **Action:** Select multiple formats (e.g., Instagram Story, LinkedIn Post) and click "Copy & Resize."  
+  **Purpose:** Generate new versions in separate tabs for quick edits.
+
+* **Action:** Review each resized design and make layout adjustments as needed.  
+  **Purpose:** Ensure text, images, and branding remain visually balanced.
+
+## Benefits & Impact
+* Saves up to 80% of design resizing time  
+* Maintains brand consistency across platforms  
+* Eliminates repetitive manual work  
+* Enables faster content scheduling and publishing
+
+## Summary & Call to Action
+Magic Resize turns a tedious multi-hour process into a 2-minute task, freeing you to focus on strategy and creativity. Try using it for your next campaign and experience the time savings firsthand.
+`,
+"Coding Walkthrough": ({ toolsInvolved, targetAudience, title = null }) => `
+Create a detailed coding walkthrough with the following specifications:
+
+TITLE: Use this exact format: "# ${title || `Coding Walkthrough: ${toolsInvolved.join(", ")}`}"
+
+STRUCTURE: Follow this exact section order and formatting:
+
+## Why This Walkthrough Matters
+Write 2–3 sentences explaining why this coding walkthrough is important for ${targetAudience.join(", ")}. Emphasize the skills or concepts they’ll learn and how it applies to real-world problems.
+
+## Project Overview
+Describe:
+* **Goal:** What you’re building or solving
+* **Tools/Technologies:** ${toolsInvolved.join(", ")}
+* **Difficulty Level:** Beginner, Intermediate, or Advanced
+* **Prerequisites:** Any knowledge or setup required
+
+## Step-by-Step Implementation
+For each step:
+* **Action:** What to do
+* **Explanation:** Why this step is necessary
+* **Code Snippet:** Include relevant code for the step
+* **Tip:** (Optional) Suggest best practices or warn about common mistakes
+
+## Testing & Validation
+Explain:
+* How to test the code
+* Expected outputs or behaviors
+* Troubleshooting tips for common errors
+
+## Final Code & Output
+Provide:
+* The complete, functional code
+* Example of expected output or results
+
+## Summary & Call to Action
+Write:
+* A 2–3 sentence recap of the core learning points
+* A motivational closing line encouraging ${targetAudience.join(", ")} to try building or extending the project themselves
+
+FORMATTING REQUIREMENTS:
+- Use * for bullet points
+- Bold labels like **Action:**, **Explanation:**, **Code Snippet:**
+- Include syntax-highlighted code blocks for clarity
+- Keep tone educational, clear, and encouraging
+
+---
+
+### Example Output for Coding Walkthrough (JavaScript, Frontend Developers)
+
+# Coding Walkthrough: JavaScript, DOM Manipulation
+
+## Why This Walkthrough Matters
+For frontend developers, mastering DOM manipulation without heavy frameworks is crucial for lightweight, high-performance web apps. This walkthrough will help you confidently update, style, and manage page content using pure JavaScript.
+
+## Project Overview
+* **Goal:** Build a dynamic to-do list with add and delete functionality  
+* **Tools/Technologies:** JavaScript, HTML, CSS  
+* **Difficulty Level:** Beginner  
+* **Prerequisites:** Basic understanding of HTML elements and JavaScript event listeners
+
+## Step-by-Step Implementation
+* **Action:** Create the basic HTML structure with an input field, button, and empty list.  
+  **Explanation:** Provides the framework for capturing and displaying tasks.  
+  **Code Snippet:**
+  \`\`\`html
+  <input id="taskInput" type="text" placeholder="New task" />
+  <button id="addBtn">Add</button>
+  <ul id="taskList"></ul>
+  \`\`\`
+
+* **Action:** Add an event listener to the "Add" button to create a new list item.  
+  **Explanation:** Links user interaction to dynamic content updates.  
+  **Code Snippet:**
+  \`\`\`javascript
+  document.getElementById('addBtn').addEventListener('click', () => {
+    const taskText = document.getElementById('taskInput').value;
+    if (taskText) {
+      const li = document.createElement('li');
+      li.textContent = taskText;
+      document.getElementById('taskList').appendChild(li);
+      document.getElementById('taskInput').value = '';
+    }
+  });
+  \`\`\`
+
+## Testing & Validation
+* Type a task in the input field and click "Add" — it should appear in the list  
+* Check that the input clears automatically after adding a task  
+* Test with empty input — nothing should be added
+
+## Final Code & Output
+\`\`\`html
+<!-- Full HTML + JS in one file -->
+<!DOCTYPE html>
+<html>
+<body>
+  <input id="taskInput" type="text" placeholder="New task" />
+  <button id="addBtn">Add</button>
+  <ul id="taskList"></ul>
+  <script>
+    document.getElementById('addBtn').addEventListener('click', () => {
+      const taskText = document.getElementById('taskInput').value;
+      if (taskText) {
+        const li = document.createElement('li');
+        li.textContent = taskText;
+        document.getElementById('taskList').appendChild(li);
+        document.getElementById('taskInput').value = '';
+      }
+    });
+  </script>
+</body>
+</html>
+\`\`\`
+
+## Summary & Call to Action
+By breaking this project into small, clear steps, you’ve learned how to use JavaScript to manipulate the DOM directly. Now, challenge yourself to extend this to-do list with features like delete buttons or task completion checkmarks.
+`,
+
 };
