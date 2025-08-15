@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import ScriptData from "./script.js";
 import { Sparkles, X, Copy, Download, Clock, FileText, PlayCircle, User, ChevronRight, } from 'lucide-react';
+import Link from "next/link.js";
 
 
 const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, videoType }) => {
@@ -523,9 +524,8 @@ export default function Hero2() {
           />
         ) : (
           <div className="space-y-8">
-            {/* Header Section */}
             <div className="text-center space-y-4">
-              <h1 className="text-4xl md:text-5xl quicksand-bold bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-5xl quicksand-bold">
                 Professional Scripts Library
               </h1>
               <p className="font-[quicksand] text-xl text-gray-300 max-w-2xl mx-auto">
@@ -533,7 +533,6 @@ export default function Hero2() {
               </p>
             </div>
 
-            {/* Scripts Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {ScriptData.map((script) => (
                 <div
@@ -541,7 +540,6 @@ export default function Hero2() {
                   onClick={() => setSelectedScript(script)}
                   className="group bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 cursor-pointer border border-gray-700/50 hover:border-gray-600/50 overflow-hidden transform hover:-translate-y-2 hover:bg-gray-800/70"
                 >
-                  {/* Card Header */}
                   <div className="p-6 pb-4">
                     <div className="flex items-start justify-between mb-3">
                       <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getCategoryColor(script.category)}`}>
@@ -591,12 +589,14 @@ export default function Hero2() {
             </div>
 
             {/* Call to Action */}
-            {/* <div className="text-center pt-8">
-              <div className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 cursor-pointer hover:from-blue-500 hover:to-purple-500 hover:scale-105">
+            <div className="text-center pt-4">
+              <Link 
+              href="/tools/ai-script-generator/templates"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 cursor-pointer hover:from-blue-500 hover:to-purple-500 hover:scale-105">
                 <PlayCircle size={20} />
                 <span className="font-semibold">Explore All Scripts</span>
-              </div>
-            </div> */}
+              </Link>
+            </div>
 
             {/* Background Decoration */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
