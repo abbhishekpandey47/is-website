@@ -66,7 +66,7 @@ export default function ScriptGen() {
                 height={500}
                 width={700}
                 alt="Technical Video Script Generator Interface"
-  className="w-full h-auto md:w-[800px] md:h-auto" // Larger size for laptops
+  className="w-full h-auto md:w-[800px] md:h-auto" 
                 priority
               />
               
