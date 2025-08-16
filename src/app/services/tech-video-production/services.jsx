@@ -6,7 +6,7 @@ export default function Services() {
     {
       title: "Social video ads",
       description:
-        "Animated explainer videos designed for social media — built to help B2B SaaS and DevTool companies simplify messaging, showcase features, and stop the scroll.",
+        "Animated explainer videos designed for B2B video production, built to help SaaS, DevTool, and enterprise brands simplify messaging, showcase features, and stop the scroll. As a tech video production agency, we create tech product videos that resonate with engineering audiences and drive engagement.",
       features: [
         "Creative brief with messaging tailored for LinkedIn, X, and niche platforms",
         "Storyboard and visual design (Figma)",

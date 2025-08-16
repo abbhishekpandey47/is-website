@@ -15,24 +15,24 @@ export default function ScriptGen() {
           <h1 className="font-[quicksand] text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             <div className="mb-2">Try Our New</div>
             <div class="specialtext">
-              Technical Video Script Generator
+            Script Generator for Your Tech Product Videos
             </div>
           </h1>
 
           <p className="font-[quicksand] text-xl sm:text-2xl text-gray-200 mb-6 font-medium leading-relaxed">
-            Create clear, engaging, and structured scripts for your technical content.
+          Turn complex technical concepts into clear, compelling narratives for tech product videos, onboarding content, and B2B video marketing campaigns. 
           </p>
 
           <div className="space-y-4 mb-10">
             <div className="flex items-start gap-3 text-left">
               <p className="font-[quicksand] text-gray-300 text-lg leading-relaxed">
-                Boost your reach with scripts tailored for developers, engineers, and tech enthusiasts
+              Waste no time on scripts and create high-impact scripts for tech video production. It is faster, smarter, and more engaging than ever.
               </p>
             </div>
             
             <div className="flex items-start gap-3 text-left">
               <p className="font-[quicksand] text-gray-300 text-lg leading-relaxed">
-                Save hours of prep time with AI-generated scripts that are accurate and ready to record
+              Perfect tool for SaaS video production where accuracy and clarity matter most.
               </p>
             </div>
           </div>

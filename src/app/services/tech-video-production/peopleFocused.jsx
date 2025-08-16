@@ -22,13 +22,13 @@ export default function PeopleFocused() {
                     <BoxSvg />
                     </div>
                         <h2 className="font-[quicksand] text-[30px] md:text-[35px] font-bold text-white mb-6 leading-tight z-50">
-                            We create <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">people-focused</span>
+                        We offer people-focused ​ <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">developer focused</span>
                             <br />
-                            B2B YouTube Videos
+                            B2B tech video production
                         </h2>
                         <p className="text-gray-300 text-lg leading-relaxed">
-                            Faceless videos don't stick in the minds of your audience. <br /> From
-                            product videos to educational series, we got you covered.
+                         Faceless videos don't stick in your audience’s mind, so we will offer you the best tech video production​ experience!. <br /> Action and emotion that will ignite your brand recognition.
+
                         </p>
                     </div>
 
@@ -46,7 +46,7 @@ export default function PeopleFocused() {
                         </div>
                         <h3 className="text-xl font-[quicksand] font-bold text-white mb-2">Webinar Repurposing</h3>
                         <p className="text-gray-400 leading-relaxed">
-                            We help busy marketing teams turn their hour-long webinars into dynamic short-form videos. 100% done for you.
+                        We transform boring, hour-long webinars into engaging, short-form videos. 100% done for you.
                         </p>
                     </div>
 
@@ -59,7 +59,7 @@ export default function PeopleFocused() {
                         </div>
                         <h3 className="text-xl font-[quicksand] font-bold text-white mb-2">B2B educational videos</h3>
                         <p className="text-gray-400 leading-relaxed">
-                            We have the actors, studio, editors and designers to bring your educational video series to life.
+                        We have the developer relations, studio, editors and designers to bring your educational video series to life with our B2B video production.
                         </p>
                     </div>
 
@@ -70,9 +70,9 @@ export default function PeopleFocused() {
                                 <TrendingUp className="w-6 h-6 text-white" />
                             </div>
                         </div>
-                        <h3 className="text-xl font-[quicksand] font-bold text-white mb-2">Product videos</h3>
+                        <h3 className="text-xl font-[quicksand] font-bold text-white mb-2">Tech Product Videos</h3>
                         <p className="text-gray-400 leading-relaxed">
-                            Replace the skippable loom videos with product videos your users will love to watch.
+                        Replace the skippable loom videos with tech product videos your users will love to watch.
                         </p>
                     </div>
 
@@ -85,7 +85,7 @@ export default function PeopleFocused() {
                         </div>
                         <h3 className="text-xl font-[quicksand] font-bold text-white mb-2">YouTube growth</h3>
                         <p className="text-gray-400 leading-relaxed">
-                            The "In-House" YouTube Video creators you didn't have to hire. We research, shoot, edit and distribute so you can reach more people on YouTube.
+                        The "In-House" YouTube Video creators you didn't have to hire. As a tech video production agency, we research, shoot, edit and distribute so you can reach more people on YouTube.
                         </p>
                     </div>
                 </div>

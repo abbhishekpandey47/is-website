@@ -154,10 +154,11 @@ create your product explainer videos.{' '}
               </div>
             </div>
             <div className="flex-1">
-              <h2 className="font-[quicksand] text-2xl md:text-[35px] font-bold mb-4">Get the script created.</h2>
+              <h2 className="font-[quicksand] text-2xl md:text-[35px] font-bold mb-4">Get the Script Created for Your Tech Video Production.</h2>
               <div className="mb-6">
                 <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
-                 Our team of developers, copy writers, SEO & editors takes care of the script, screen recordings, stock footage, graphics, sound, and animations.
+                Our team of developers, copywriters, SEO & editors takes care of the script, screen recordings, stock footage, graphics, sound, and animations. Timebound? Try our Script Generator to get your desired script in minutes!
+.
                 </p>
               </div>
             </div>
@@ -202,7 +203,7 @@ create your product explainer videos.{' '}
 </h2>
 <div className="mb-6">
                 <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
-                 Growth teams at some of the fastest growing AI & B2B SaaS companies like Kubiya.ai, Qodo(earlier Codium), Devzero, Firefly.ai, Aviator trust us with their product explainer videos.
+                Growth teams at some of the fastest-growing AI & B2B SaaS companies like Kubiya.ai, Qodo (earlier Codium), Devzero, Firefly.ai, Aviator trust us with their tech product videos. 
                 </p>
               </div>
             </div>

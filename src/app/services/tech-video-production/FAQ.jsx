@@ -33,33 +33,33 @@ const faqData = [
   {
     id: "1",
     question:
-      " What types of videos are most effective for B2B SaaS companies?",
+      " What is a B2B video production?",
     answer:
-      "Effective video types include product demos, explainer videos, customer testimonials, and onboarding tutorials. These formats help in clearly communicating complex technical concepts and showcasing the value of your solutions.",
+      "Think of B2B video production as storytelling for businesses, but with a sharper suit and a tech-savvy brain. Instead of chasing viral dance trends, we focus on tech video production that speaks directly to your target audience. Whether it’s SaaS video production, explainer videos, or tech product videos, our job is to translate your complex solution into a clear, engaging visual journey that makes decision-makers say, “Yep, I need that.",
   },
   {
     id: "2",
-    question: "Do you provide scriptwriting and storyboarding services?",
+    question: "How to make a SaaS product video?",
     answer:
-      "Yes, comprehensive services include scriptwriting and storyboarding to ensure the video's message is clear and effectively communicated.",
+      "Making a SaaS product video is like onboarding your users… but without the awkward silences and boring PDFs. First, we map out your product’s “aha” moments. Then we craft a script that explains your features, benefits, and workflows in human language, not just dev-speak. Using our tech video production agency magic, we blend motion graphics, voiceover, and storytelling so your audience not only understands your product but wants to try it right away.",
   },
   {
     id: "3",
-    question: "How is Infrasity different from a content agency or freelancer?",
+    question: "Do I need a script before I approach a video production company?",
     answer:
-      "We live and breathe infra, DevOps, and SaaS. You don’t need to explain what an SDK, CLI, or deployment pipeline is. We already get it.",
+      "Not necessarily, but having a script can save you from going back and forth. Our script generator tool is built exactly for this, to turn your brain dump, technical docs into a full-blown, camera-ready script. That’s the beauty of working with a B2B video production team that speaks “tech”.",
   },
   {
     id: "4",
-    question: "Where can SaaS companies use explainer videos?",
+    question: "Can I be involved in the creative process?",
     answer:
-      "Explainer videos can be used on landing pages, social media platforms, email campaigns, product demos, customer onboarding processes, and sales presentations.",
+      "Absolutely. In fact, we insist on it. You know your product better than anyone, and we know how to make video tech productions that hit the right notes. From storyboard to final cut, we keep you in the loop with collaborative tools (think Frame.io, Figma boards, and live feedback sessions).",
   },
   {
     id: "5",
-    question: "How long should an explainer video be?",
+    question: "What makes B2B video content effective?",
     answer:
-      "Ideally, the length should be short—around 60-90 seconds—to maintain viewer engagement while delivering the key message effectively.",
+      "Effective B2B video content is like a great API it’s clean, fast, and does exactly what it’s supposed to do. The magic happens when you combine crystal-clear messaging, high-quality visuals, and a delivery style that resonates with your target audience. Our best video production company approach blends technical accuracy with storytelling flair, so your tech product videos don’t just inform, they convert.",
   },
   {
     id: "6",
