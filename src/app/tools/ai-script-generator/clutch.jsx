@@ -3,7 +3,7 @@ import React from "react";
 
 export default function ClutchBadge() {
   return (
-    <div className="flex items-center justify-center">
+    <div className="bg-black flex items-center justify-center">
     <Link
       href="https://clutch.co/profile/infrasity#reviews"
       target="_blank"

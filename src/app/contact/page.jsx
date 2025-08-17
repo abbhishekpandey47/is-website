@@ -32,7 +32,7 @@ const CalendarBooking = ({
         countryCode: "+91",
     });
     const [errors, setErrors] = useState({});
-    const [selectedTimezone, setSelectedTimezone] = useState("UTC+05:30");
+    const [selectedTimezone, setSelectedTimezone] = useState("UTC-08:00");
     const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
 
     const istTimeSlots = [
@@ -51,7 +51,7 @@ const CalendarBooking = ({
         { value: "UTC-11:00", label: "(UTC-11:00) Samoa Standard Time" },
         { value: "UTC-10:00", label: "(UTC-10:00) Hawaii Standard Time" },
         { value: "UTC-09:30", label: "(UTC-09:30) Marquesas Islands" },
-        { value: "UTC-08:00", label: "(UTC-08:00) Alaska Daylight Time" },
+{ value: "UTC-08:00", label: "(UTC-08:00) Pacific Standard Time (US)" },
         { value: "UTC-07:00", label: "(UTC-07:00) Pacific Daylight Time (US)" },
         { value: "UTC-06:00", label: "(UTC-06:00) Mountain Daylight Time (US)" },
         { value: "UTC-05:00", label: "(UTC-05:00) Central Daylight Time (US)" },
@@ -124,7 +124,7 @@ const CalendarBooking = ({
     };
 
     const convertTimeSlots = (targetTimezone) => {
-        const pdtOffsetMinutes = getTimezoneOffsetMinutes("UTC+05:30");
+        const pdtOffsetMinutes = getTimezoneOffsetMinutes("UTC-08:00");
         const targetOffsetMinutes = getTimezoneOffsetMinutes(targetTimezone);
 
         const offsetDifference = targetOffsetMinutes - pdtOffsetMinutes;
