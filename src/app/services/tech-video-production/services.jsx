@@ -4,7 +4,7 @@ export default function Services() {
   // Services data
   const services = [
     {
-      title: "Social video ads",
+      title: "SOCIAL VIDEO ADS",
       description:
         "Animated explainer videos designed for B2B video production, built to help SaaS, DevTool, and enterprise brands simplify messaging, showcase features, and stop the scroll. As a tech video production agency, we create tech product videos that resonate with engineering audiences and drive engagement.",
       features: [
@@ -17,7 +17,7 @@ export default function Services() {
       ],
     },
     {
-      title: "YouTube video production",
+      title: "YOUTUBE VIDEO PRODUCTION",
       description:
         "Convert your CLI guides, SDK docs, and cloud onboarding steps into short, embedded walkthroughs. These videos reduce friction, clarify setup, and speed up product adoption.",
       features: [
@@ -33,7 +33,7 @@ export default function Services() {
       ],
     },
     {
-      title: "Conference & Launch Videos",
+      title: "CONFERENCE & LAUNCH VIDEOS",
       description:
         "Create high-impact videos for KubeCon, product launches, and technical events — tailored for engineering audiences.",
       features: [
@@ -63,7 +63,7 @@ export default function Services() {
           }}
         >
           <div className="p-6 md:p-8">
-            <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
+            <h2 className="font-[quicksand] text-xl md:text-2xl font-bold text-white mb-3">
               {title}
             </h2>
             <p className="text-gray-300 text-sm mb-6">{description}</p>

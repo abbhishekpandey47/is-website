@@ -22,12 +22,12 @@ export default function PeopleFocused() {
                     <BoxSvg />
                     </div>
                         <h2 className="font-[quicksand] text-[30px] md:text-[35px] font-bold text-white mb-6 leading-tight z-50">
-                        We offer people-focused ​ <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">developer focused</span>
+                        We offer ​<span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">developer focused</span>
                             <br />
                             B2B tech video production
                         </h2>
                         <p className="text-gray-300 text-lg leading-relaxed">
-                         Faceless videos don't stick in your audience’s mind, so we will offer you the best tech video production​ experience!. <br /> Action and emotion that will ignite your brand recognition.
+                         Faceless videos don't stick in your audience’s mind, so we will offer you the best tech video production​ experience! <br /> Action and emotion that will ignite your brand recognition.
 
                         </p>
                     </div>

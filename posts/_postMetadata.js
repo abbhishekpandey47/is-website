@@ -144,14 +144,14 @@ let postMetaData = [
     },
     {
         title: "What are the Benefits of Using Keyword Explorer Tools",
-        metatitle: "How to choose the best video production company",
+        metatitle: "How to choose the best video production company | Infrasity",
         slug: "benefits-of-using-keyword-explorer",
         description: "Explore the Benefits of Using Keyword Explorer: Highlighting Its Importance for SaaS Success",
         ogImage: "/PostImages/benefits-of-using-keyword-explorer/0.png",
         publishedOn: "2024-11-04",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Explore the Benefits of Using Keyword Explorer: Highlighting Its Importance for SaaS Success"
+        metaDescription: "Find out how to choose the best video production company to ensure the best outcome and to stand out visual content. Click the link to read more."
     },
     {
         title: "How to Choose the Right Production Company for Your Video Needs",
@@ -166,9 +166,9 @@ let postMetaData = [
     },
     {
         title: "User Guide vs API Documentation: Key Differences",
-        metatitle: "User Guide vs API Documentation: Key Difference",
+        metatitle: "User Guide vs API Documentation: Key Difference | Infrasity",
         slug: "user-guide-vs-api-documentation",
-        description: "Explore the differences between User Guides and API Documentation, two essential types of documentation in software engineering. This blog dives into their distinct purposes, target audiences, content structures, and best practices. From installation instructions to API endpoint details, we cover everything you need to know to effectively create documentation that caters to both end-users and developers.",
+        description: "Understand the key differences between a user guide vs API documentation to improve usability, clarity, and developer adoption. Read now!",
         ogImage: "/PostImages/user-guide-vs-api-documentation/0.jpg",
         publishedOn: "2024-11-08",
         authorId: "author0001",
@@ -199,9 +199,9 @@ let postMetaData = [
     },
     {
         title: "Long Tail vs. Short Tail Keywords: How Are They Different?",
-        metatitle: "Long Tail vs. Short Tail Keywords (2025)​",
+        metatitle: "Long Tail vs. Short Tail Keywords (2025)​ | Infrasity",
         slug: "long-tail-vs-short-tail",
-        description: "Explore long and short-tail keywords, learn how to find them, and integrate them into your content.",
+        description: "Learn the difference between long tail keywords and short tail keywords and how to use both for better SEO, traffic, and content strategy. Click the link to read now!",
         ogImage: "/PostImages/long-tail-vs-short-tail/16.png",
         publishedOn: "2024-11-15",
         authorId: "author0004",
@@ -210,9 +210,9 @@ let postMetaData = [
     },
     {
         title: "Frameworks for Scalable Documentation Sites",
-        metatitle: "Best Frameworks for Documentation​",
+        metatitle: "Best Frameworks for Documentation​ | Infrasity ",
         slug: "frameworks-for-scalable-documentation-sites",
-        description: "Explore the best frameworks for creating scalable technical documentation, including MkDocs, Docusaurus, Fuma Docs, VuePress, and Antora. Learn how to choose the right framework for your project, with hands-on examples, installation guides, and best practices to enhance collaboration, user experience, and content management.",
+        description: "Discover the best frameworks for documentation to boost clarity, efficiency, and collaboration for your projects and teams. Read now.",
         ogImage: "/PostImages/frameworks-for-scalable-documentation-sites/0.png",
         publishedOn: "2024-11-20",
         authorId: "author0001",
@@ -221,9 +221,9 @@ let postMetaData = [
     },
     {
         title: "How to Identify AI-Generated Content: Key Signs to Look For",
-        metatitle: "How does AI Detection work & How to Identify AI-Generated content​?​",
+        metatitle: "Best Frameworks for Documentation​ | Infrasity",
         slug: "how-to-identify-ai",
-        description: "Learn how to identify AI-generated content with key signs such as repetitive language, awkward sentence structures, and lack of contextual understanding. This guide also explores Google's E-E-A-T principles for content evaluation, how AI tools assist writers, and practical ways to ensure content quality and authenticity.",
+        description: "Learn how to tell if something is AI generated text with tips and tools, including the best AI selector options for text, images, and more. Read more.",
         ogImage: "/PostImages/how-to-identify-ai/0.jpg",
         publishedOn: "2024-11-21",
         authorId: "author0001",
@@ -256,7 +256,7 @@ let postMetaData = [
         title: "How a Strategic Marketing Plan Can Boost Your Blogging Business",
         metatitle: "How to Create a Strategic Marketing Plan For Blogging Business?",
         slug: "strategic-marketing-plan",
-        description: "In today’s competitive blogging landscape, a well-structured marketing plan is essential for success. This article outlines how bloggers can develop a comprehensive strategy to enhance their business. It covers key aspects such as setting clear goals, understanding your audience, conducting competitive analysis, and creating high-quality content. Additionally, it delves into the importance of SEO, social media promotion, influencer collaborations, and various monetization strategies like affiliate marketing and sponsored content. By implementing these strategies, bloggers can grow their audience, increase traffic, and ultimately turn their blog into a profitable business.",
+        description: "Learn how to create a strategic marketing plan for blogging business to boost traffic, grow your audience, and increase revenue. Read more.",
         ogImage: "/PostImages/strategic-marketing-plan/0.jpg",
         publishedOn: "2024-11-28",
         authorId: "author0001",
@@ -300,12 +300,12 @@ let postMetaData = [
         title: "Using Case Studies and Whitepapers as SEO Assets in Technical Content",
         metatitle: "Using Case Studies and Whitepapers as SEO Assets in Technical Content",
         slug: "using-case-studies-and-whitepapers-as-seo-assets-in-technical-content",
-        description: "Discover how SaaS companies can use case studies and whitepapers to drive SEO success. Learn best practices to optimize content for visibility, and authority.",
+        description: "Discover how to using case studies and whitepapers as SEO assets in technical content helps your B2B SaaS brand. Read more to know.",
         ogImage: "/PostImages/using-case-studies-and-whitepapers-as-seo-assets-in-technical-content/banner.png",
         publishedOn: "2024-12-25",
         authorId: "author0001",
         category: "Informational",
-        metaDescription: "Discover how SaaS companies can use case studies and whitepapers to drive SEO success. Learn best practices to optimize content for visibility, and authority."
+        metaDescription: "Discover how to using case studies and whitepapers as SEO assets in technical content helps your B2B SaaS brand. Read more to know."
     },
     {
         title: "Enhance SaaS business growth through Conversion Funnel",
