@@ -5,7 +5,6 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-// SVG Imports (you'll update actual files later)
 import TechnicalBlogsIcon from "./svg/technicalBlogs";
 import WhitepaperIcon from "./svg/whitepaper";
 import OnePagerIcon from "./svg/onePager";
