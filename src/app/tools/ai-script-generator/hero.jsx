@@ -264,12 +264,12 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
 
 
     return (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
+        <div className="fixed inset-0 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="border border-gray-700 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
                 {/* Header */}
-                <div className="lg:flex items-center justify-center lg:justify-between p-6 border-b border-gray-700 bg-gradient-to-r from-purple-900/50 to-indigo-900/50">
+                <div className="lg:flex items-center justify-center lg:justify-between p-6 border-b border-gray-700">
                     <div className="lg:flex my-4 md:my-0 items-center justify-center space-x-3">
-                        <div className="flex items-center justify-center bg-[#6c5ce8]/20 rounded-full px-4 py-2 border border-[#6c5ce8]/40">
+                        <div className="flex items-center justify-center rounded-full px-4 py-2 border border-[#6c5ce8]/40">
                             <Sparkles className="h-5 w-5 mr-2" />
                             <span className="font-[quicksand] text-sm text-white font-bold">
                                 {displayTitle}

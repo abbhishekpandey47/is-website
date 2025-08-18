@@ -514,7 +514,7 @@ export default function Hero2() {
 
   return (
     <div className="">
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="bg-black max-w-6xl mx-auto px-4 py-12">
         {selectedScript ? (
           <ScriptDisplay
             generatedScript={selectedScript.content}
