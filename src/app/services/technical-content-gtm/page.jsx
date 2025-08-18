@@ -1,4 +1,5 @@
 import YCStartupLanding from "./hero";
+import WhatWeCreate from "./whatWeCreate";
 import WorkWith from "./workWith";
 
 export default function () {
@@ -6,6 +7,7 @@ export default function () {
         <div>
             <YCStartupLanding />
             <WorkWith />
+            <WhatWeCreate />
         </div>
     )
 }
