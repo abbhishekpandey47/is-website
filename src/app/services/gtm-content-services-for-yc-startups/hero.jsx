@@ -69,8 +69,7 @@ export default function YCStartupLanding() {
             </h1>
 
             <p className="w-full lg:w-[82%] text-xl md:text-xl text-[#ffe8a8] leading-relaxed font-[320] mb-8">
-              We work with startups from YC batches like Cedana (W24), Middleware (W22), GetMocha (S22), and Aviator (W21) — delivering developer-first content, launch-ready docs, and GTM assets that fuel early growth.
-            </p>
+We work with startups from Y Combinator batch such as Cadana (W24), Middleware (W220, GerMocha (S22), and Aviator (W21). We have delivered developer-first content, launch-ready docs, and GTM assets that fuel early growth.            </p>
 
             <CalendarBooking />
           </div>

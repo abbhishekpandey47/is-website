@@ -33,39 +33,33 @@ const faqData = [
     {
         id: "1",
         question:
-            " How can early-stage startups outsource developer documentation and DevTool content without hiring a full DevRel team?",
+            "How to get into Y Combinator?",
         answer:
-            "Hiring takes months. With Infrasity, you get product-ready documentation from day one — without the overhead of salaries, onboarding, or dev time spent writing.",
+            "The Y Combinator team seeks founders who move quickly, learn even quicker and have a vision that is scalable on a global level. To apply for Y Combinator, focus on fine-tuning your application, articulating your problem/solution, and demonstrating why your team is best positioned to solve it. Bonus points if you’ve hacked together an MVP or got a few users already.",
     },
     {
         id: "2",
-        question: "Can Infrasity help us launch product docs faster",
+        question: "How does Y Combinator work?",
         answer:
-            "Absolutely. We’ve helped dozens of DevTool startups launch docs in under two weeks — from API references to full onboarding guides, ready for users and demos",
+            "How YC works is: money + mentorship + momentum. At its core, Y Combinator is a startup accelerator that invests in early-stage companies, usually twice a year in what’s called a ‘Y Combinator batch’. The selected startups get seed funding, mentorship, and access to a network of founders and investors. For three intense months, founders build, iterate, and prep for the Demo Day, where they pitch top investors.",
     },
     {
         id: "3",
-        question: "How is Infrasity different from a content agency or freelancer?",
+        question: "How to apply for Y Combinator?",
         answer:
-            "We live and breathe infra, DevOps, and SaaS. You don’t need to explain what an SDK, CLI, or deployment pipeline is. We already get it.",
+            "To apply for Y Combinator, you need to fill out their online application form. It is as straightforward as it sounds. YC asks about your team, your idea, traction, and why you’re the right people to build this. If you stand out, you’ll be invited to an interview. Pro tip: keep it simple, clear, and bold. Y Combinator funding goes to teams who can explain big ideas in plain English.",
     },
     {
         id: "4",
-        question: "Will this actually move the GTM needle",
+        question: "How to start a startup Y Combinator?",
         answer:
-            "Yes. Clear docs = faster onboarding = shorter time-to-value = more product adoption. It’s your silent GTM engine.",
+            "If you’re wondering how to start a startup Y Combinator style, you need to embrace speed and focus. Start with a real problem, hack a scrappy solution, and test it with real users. Once you’ve validated that people care, apply for Y Combinator and try it out. YC has helped thousands of founders go from zero to launch, proving that momentum beats polish in the early days.",
     },
     {
         id: "5",
-        question: "What type of content should we start with",
+        question: "Where are Y Combinator companies based?",
         answer:
-            "Launch with what converts: onboarding guides, API references, how-to tutorials, and real use-case walkthroughs.",
-    },
-    {
-        id: "6",
-        question: "What technical content should a DevTool startup prioritize?",
-        answer:
-            "Start with developer docs, onboarding guides, and real-world tutorials. These are the assets that reduce friction, explain your product clearly, and help users integrate fast.",
+            "While Y Combinator companies are truly global, most start in the U.S. because YC itself is based in Silicon Valley. That said, some of the best companies from Y Combinator now come from Asia, Europe, and Africa. Post-COVID, YC has gone remote-friendly, so founders anywhere in the world can join a Y Combinator batch without relocating.",
     },
 ];
 

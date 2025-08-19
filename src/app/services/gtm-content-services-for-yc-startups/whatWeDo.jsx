@@ -18,7 +18,7 @@ const WhatWeDo = () => {
       <div className="max-w-6xl mx-auto text-center relative z-10 py-14 ">
         <div className="quicksand-bold text-[37px] max-sm:text-[25px] tracking-tighter leading-[40px] text-white text-center flex justify-center mb-2">
           <h2 className=" md:leading-[50px] text-center max-lg:mx-auto tracking-wide">
-            Go to market faster with use cases, landing pages, and product docs.{" "}
+           Go to Market Faster With Use Cases, Landing Pages, and Product Docs Trusted By Every{" "}<span className="text-orange-500"> Y Combinator</span>{" "}Startup
 
           </h2>
         </div>
