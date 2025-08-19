@@ -1020,6 +1020,17 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Explore generative engine optimization best practices & a detailed platforms comparison to boost AI-driven search visibility in 2025."
     },
+     {
+        title: "8 Key Performance Indicators for Video Marketing",
+        metatitle: "Key Performance Indicators for Video Marketing",
+        slug: "key-performance-indicators-video-marketing",
+        description: "The breakdown of the most important Key Performance Indicators for video marketing that every B2B SaaS marketer should track. From impressions and CTR to ROI and customer acquisition cost, we have highlighted how each metric drives performance. You’ll also get an effective video SEO checklist to ensure your content ranks, engages, and converts. Perfect for B2B SaaS founders and CMOs looking to scale their video marketing impact in 2025.",
+        ogImage: "/PostImages/key-performance-indicators-video-marketing/banner.jpg",
+        publishedOn: "2025-08-19",
+        authorId: "author0005",
+        category: "Informational",
+        metaDescription: "Discover key performance indicators for video marketing and follow powerful video SEO checklists to boost reach and engagement. Read now to learn more!"
+    },
 
 ];
 
