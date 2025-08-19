@@ -20,7 +20,6 @@ export default function CaseStudy() {
     
     {/* Left Content (60%) */}
     <div className="md:w-[60%] flex flex-col">
-      {/* Logo + Name */}
       <div className="flex items-start gap-4">
         <div className="bg-white rounded-lg p-2 w-16 h-16 flex items-center justify-center">
            <svg width="68" height="66" viewBox="0 0 68 66" fill="none" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
@@ -41,7 +40,6 @@ export default function CaseStudy() {
         </div>
       </div>
 
-      {/* Description */}
       <p className="text-[#AFAFAF] text-[15px] leading-relaxed font-light mt-6">
         Infrasity&apos;s tailored content strategy delivered measurable results.
         Within 3 months, Terrateam saw an 81% jump in organic traffic (an extra
@@ -50,7 +48,6 @@ export default function CaseStudy() {
         players like Env0 and Spacelift.
       </p>
 
-      {/* Quote */}
       <div className="bg-[#6c5ce8]/10 border border-[#AFAFAF80] rounded-xl mt-6 p-4">
         <p className="text-[#6c5ce8] font-medium text-base leading-relaxed">
           "This case exemplifies how our deep technical content and SEO focus
@@ -59,12 +56,10 @@ export default function CaseStudy() {
       </div>
     </div>
 
-    {/* Divider */}
     <div className="hidden md:flex w-px bg-[#AFAFAF80]"></div>
 
     {/* Right Content (40%) */}
     <div className="md:w-[40%] flex flex-col">
-      {/* Stats Row */}
       <div className="flex items-center  text-left mb-6 border-b border-[#AFAFAF80] pb-6">
         <div>
           <p className="text-[#6c5ce8] text-xl font-bold">81%</p>
@@ -82,7 +77,6 @@ export default function CaseStudy() {
         </div>
       </div>
 
-      {/* Screenshot */}
       <div className="rounded-lg overflow-hidden border border-[#AFAFAF80] shadow-lg mt-8">
         <Image
           src="/gtm-content/case-study.png"
