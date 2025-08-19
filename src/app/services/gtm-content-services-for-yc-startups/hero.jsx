@@ -63,7 +63,7 @@ export default function YCStartupLanding() {
               className="text-5xl lg:text-6xl font-bold quicksand-bold tracking-wide text-white  mb-8"
               style={{ lineHeight: "1.3" }}
             >
-              Content led <span className="text-white">GTM & developer <br className="hidden lg:block" /> marketing service</span>
+              Content-led <br />  <span className="text-white">GTM & Developer <br className="hidden lg:block" /> Marketing Service</span>
               <br />
               for <span className="text-orange-500">Y Combinator</span>{" "}Startup
             </h1>
