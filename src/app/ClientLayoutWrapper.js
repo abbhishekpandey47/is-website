@@ -1,5 +1,5 @@
 'use client';
-
+import { useEffect } from 'react';
 import Footer from '@/Components/HomePage/Footer';
 import { Loader } from '@/Components/Loader';
 import Navbar from '@/Components/Navbar/Navbar';
@@ -11,8 +11,14 @@ import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import { usePathname } from 'next/navigation';
 import AwardBanner from '@/Components/HomePage/awardwinner';
+import { initMixpanel } from "../lib/mixpanel"
 
 export function ClientLayoutWrapper({ children }) {
+
+        useEffect(() => {
+        initMixpanel();
+      }, []);
+
     const CrispWithNoSSR = dynamic(() => import('../Components/chatbot'));
 
     const pathname = usePathname();
