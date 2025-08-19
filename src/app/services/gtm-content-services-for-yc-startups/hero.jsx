@@ -65,7 +65,7 @@ export default function YCStartupLanding() {
             >
               Content led <span className="text-white">GTM & developer <br className="hidden lg:block" /> marketing service</span>
               <br />
-              for <span className="text-orange-500">YC Startups</span>
+              for <span className="text-orange-500">Y Combinator</span>{" "}Startup
             </h1>
 
             <p className="w-full lg:w-[82%] text-xl md:text-xl text-[#ffe8a8] leading-relaxed font-[320] mb-8">
