@@ -636,7 +636,7 @@ export default function AIVideoScriptGenerator() {
                 {showCustomInput && (
                     <>
                         <div
-                            className="fixed inset-0 z-30 bg-black/50"
+                            className="fixed inset-0 z-30 /50"
                             onClick={() => {
                                 setShowCustomInput(false);
                                 setCustomValue('');
@@ -915,7 +915,7 @@ export default function AIVideoScriptGenerator() {
 
 
     return (
-        <div className="bg-black text-white pt-36 -mb-16">
+        <div className=" text-white pt-36 -mb-16">
             {loading && (
                 <div className="fixed inset-0  backdrop-blur-sm z-50 flex items-center justify-center">
                     <div className="bg-gray-900 border border-gray-700 rounded-2xl p-8 text-center">
