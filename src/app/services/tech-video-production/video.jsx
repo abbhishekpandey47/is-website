@@ -52,7 +52,6 @@ const Video = () => {
           </div>
         </div>
 
-        {/* Step 1 - Customize the set */}
         <div className="mb-10">
           <div className="md:flex md:gap-20">
             <div className="flex-shrink-0">
@@ -72,26 +71,43 @@ const Video = () => {
                 </p>
               </div>
 
-              <div className="overflow-x-auto">
-                <div className="flex flex-nowrap gap-6">
-                  {sets.map((set) => (
+              <div className="overflow-hidden w-full">
+                <div className="flex gap-6 animate-scroll">
+                  {sets.concat(sets).map((set, i) => (
                     <div
-                      key={set.id}
-                      className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 min-w-[120px] flex-shrink-0"
+                      key={set.id + "-" + i}
+                      className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 min-w-[200px] flex-shrink-0"
                     >
                       <div className="aspect-video">
                         <Image
                           src={set.image}
+                          alt="carousel image"
                           className="w-full h-full object-cover"
                           height={200}
                           width={200}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
+                          priority
                         />
                       </div>
                     </div>
                   ))}
                 </div>
+
+                <style jsx>{`
+        .animate-scroll {
+          display: flex;
+          width: max-content;
+          animation: scroll 40s linear infinite;
+        }
+
+        @keyframes scroll {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
               </div>
             </div>
           </div>
