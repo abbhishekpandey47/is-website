@@ -64,9 +64,9 @@ const WhatWeCreate = () => {
         <div>
             <div className="max-w-6xl mx-auto text-center relative z-10 py-10 pt-14 max-sm:px-4">
                 <div className="quicksand-bold text-[37px] max-sm:text-[28px] tracking-tighter leading-[80px] max-sm:leading-[35px] text-white text-center flex justify-center mb-2">
-                    <h1 className="leading-[80px] max-sm:leading-[35px] text-center max-lg:text-center max-lg:mx-auto">
+                    <h2 className="leading-[80px] max-sm:leading-[35px] text-center max-lg:text-center max-lg:mx-auto">
                         What We Create
-                    </h1>
+                    </h2>
                 </div>
 
                 <div className="max-w-[70%] max-sm:max-w-[90%] mx-auto mb-8">
