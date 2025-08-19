@@ -264,7 +264,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, video
 
 
     return (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 /80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
                 {/* Header */}
                 <div className="lg:flex items-center justify-center lg:justify-between p-6 border-b border-gray-700 bg-gradient-to-r from-purple-900/50 to-indigo-900/50">
