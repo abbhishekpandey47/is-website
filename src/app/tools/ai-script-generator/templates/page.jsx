@@ -481,11 +481,11 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, video
         </div>
     );
 };
-
 export default function Page() {
   const [selectedScript, setSelectedScript] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [showFilters, setShowFilters] = useState(false);
 
   const categories = useMemo(() => {
     return [...new Set(ScriptData.map(script => script.category))];
@@ -531,9 +531,93 @@ export default function Page() {
     return colors[category] || 'bg-gray-500/20 text-gray-300 border-gray-500/30';
   };
 
+  const FilterSidebar = ({ className = "" }) => (
+    <div className={`space-y-6 ${className}`}>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-semibold text-white">Filter Templates</h2>
+        {selectedCategories.length > 0 && (
+          <button
+            onClick={() => setSelectedCategories([])}
+            className="flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors"
+          >
+            <X className="h-4 w-4" />
+            Clear
+          </button>
+        )}
+      </div>
+
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-medium text-white">Use Case</h3>
+          <span className="text-sm text-gray-400">{categories.length}</span>
+        </div>
+        
+        <div className="space-y-2">
+          {categories.map((category) => {
+            const isSelected = selectedCategories.includes(category);
+            const scriptsInCategory = ScriptData.filter(script => script.category === category).length;
+            
+            return (
+              <label
+                key={category}
+                className="flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all duration-200 hover:bg-gray-700/30 border-gray-600/30"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => handleCategoryToggle(category)}
+                      className="sr-only"
+                    />
+                    <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
+                      isSelected 
+                        ? "bg-[#6b5be7] border-[#6b5be7]"
+                        : 'border-gray-500 bg-transparent'
+                    }`}>
+                      {isSelected && (
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  <span className="text-sm font-medium text-gray-200">{category}</span>
+                </div>
+                <span className="text-xs text-gray-400">{scriptsInCategory}</span>
+              </label>
+            );
+          })}
+        </div>
+      </div>
+
+      {selectedCategories.length > 0 && (
+        <div>
+          <h4 className="text-sm font-medium text-gray-300 mb-2">Active Filters</h4>
+          <div className="flex flex-wrap gap-2">
+            {selectedCategories.map(category => (
+              <span
+                key={category}
+                className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs border ${getCategoryColor(category)}`}
+              >
+                {category}
+                <button
+                  onClick={() => handleCategoryToggle(category)}
+                  className="hover:bg-white/10 rounded-full p-0.5 transition-colors"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
   return (
-    <div className="pt-36">
-      <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="pt-20 sm:pt-36 min-h-screen bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 py-6 sm:py-12">
         {selectedScript ? (
           <ScriptDisplay
             generatedScript={selectedScript.content}
@@ -542,17 +626,19 @@ export default function Page() {
             videoType="Tool Comparison"
           />
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
+            {/* Header */}
             <div className="text-center space-y-4">
-              <h1 className="font-[quicksand] text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <h1 className="font-[quicksand] text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent px-4">
                 Ready-Made Video Script Library
               </h1>
-              <p className="font-[quicksand] text-xl text-gray-300 max-w-2xl mx-auto">
-Scripts tailored for startups building in infra, AI, or SaaS. Pick a template, plug in your context, and get a record-ready script in minutes.
+              <p className="font-[quicksand] text-base sm:text-xl text-gray-300 max-w-2xl mx-auto px-4">
+                Scripts tailored for startups building in infra, AI, or SaaS. Pick a template, plug in your context, and get a record-ready script in minutes.
               </p>
             </div>
 
-            <div className="mb-8">
+            {/* Search Bar */}
+            <div className="mb-6 sm:mb-8">
               <div className="relative max-w-2xl mx-auto">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Search className="h-5 w-5 text-gray-400 stroke-gray-400" />
@@ -562,7 +648,7 @@ Scripts tailored for startups building in infra, AI, or SaaS. Pick a template, p
                   placeholder="Search scripts by title or description..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-3 mb-28 border border-gray-600/50 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 outline-none focus:ring-0 focus:border-blue-500/50 transition-all"
+                  className="block w-full pl-10 pr-12 py-3 border border-gray-600/50 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 outline-none focus:ring-0 focus:border-blue-500/50 transition-all"
                 />
                 {searchQuery && (
                   <button
@@ -575,123 +661,86 @@ Scripts tailored for startups building in infra, AI, or SaaS. Pick a template, p
               </div>
             </div>
 
-            <div className="flex gap-8">
-              {/* Left Sidebar - Categories */}
-              <div className="w-80 flex-shrink-0">
-                <div className="sticky top-40 space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold text-white">Filter Templates</h2>
-                    {selectedCategories.length > 0 && (
+            {/* Mobile Filter Toggle & Results Info */}
+            <div className="flex items-center justify-between gap-4 px-1">
+              {/* Mobile Filter Toggle */}
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className="lg:hidden flex items-center gap-2 px-4 py-2 bg-gray-800/50 text-gray-300 rounded-lg border border-gray-600/50 hover:bg-gray-700/50 transition-colors"
+              >
+                <Filter className="h-4 w-4" />
+                <span className="text-sm">Filters</span>
+                {selectedCategories.length > 0 && (
+                  <span className="bg-[#6b5be7] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {selectedCategories.length}
+                  </span>
+                )}
+              </button>
+
+              {/* Results Info */}
+              <p className="text-gray-400 text-xs sm:text-sm flex-1 text-right">
+                {filteredScripts.length === ScriptData.length 
+                  ? `${filteredScripts.length} scripts`
+                  : `${filteredScripts.length} of ${ScriptData.length}`
+                }
+                {selectedCategories.length > 0 && (
+                  <span className="hidden sm:inline">
+                    {' in '}
+                    {selectedCategories.length === 1 
+                      ? selectedCategories[0]
+                      : `${selectedCategories.length} categories`
+                    }
+                  </span>
+                )}
+              </p>
+            </div>
+
+            {showFilters && (
+              <div className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
+                <div className="absolute inset-x-0 top-0 bg-gray-900 border-b border-gray-700/50 max-h-[80vh] overflow-y-auto">
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-xl font-semibold text-white">Filter Scripts</h2>
                       <button
-                        onClick={() => setSelectedCategories([])}
-                        className="flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors"
+                        onClick={() => setShowFilters(false)}
+                        className="p-2 hover:bg-gray-700/50 rounded-lg transition-colors"
                       >
-                        <X className="h-4 w-4" />
-                        Clear
+                        <X className="h-5 w-5 text-gray-400" />
                       </button>
-                    )}
-                  </div>
-
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-lg font-medium text-white">Use Case</h3>
-                      <span className="text-sm text-gray-400">{categories.length}</span>
                     </div>
-                    
-                    <div className="space-y-2">
-                      {categories.map((category) => {
-                        const isSelected = selectedCategories.includes(category);
-                        const scriptsInCategory = ScriptData.filter(script => script.category === category).length;
-                        
-                        return (
-                          <label
-                            key={category}
-                            className="flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all duration-200 hover:bg-gray-700/30 border-gray-600/30"
-                          >
-                            <div className="flex items-center gap-3">
-                              <div className="relative">
-                                <input
-                                  type="checkbox"
-                                  checked={isSelected}
-                                  onChange={() => handleCategoryToggle(category)}
-                                  className="sr-only"
-                                />
-                                <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
-                                  isSelected 
-                                    ? "bg-blue-500 border-blue-500"
-                                    : 'border-gray-500 bg-transparent'
-                                }`}>
-                                  {isSelected && (
-                                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                    </svg>
-                                  )}
-                                </div>
-                              </div>
-                              <span className="text-sm font-medium text-gray-200">{category}</span>
-                            </div>
-                            <span className="text-xs text-gray-400">{scriptsInCategory}</span>
-                          </label>
-                        );
-                      })}
+                    <FilterSidebar />
+                    <div className="mt-6 pt-4 border-t border-gray-700/30">
+                      <button
+                        onClick={() => setShowFilters(false)}
+                        className="w-full bg-[#6b5be7] hover:bg-[#6b5be7]/80 text-white py-3 rounded-lg transition-colors font-medium"
+                      >
+                        Apply Filters
+                      </button>
                     </div>
                   </div>
+                </div>
+              </div>
+            )}
 
-                  {selectedCategories.length > 0 && (
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-300 mb-2">Active Filters</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedCategories.map(category => (
-                          <span
-                            key={category}
-                            className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs border ${getCategoryColor(category)}`}
-                          >
-                            {category}
-                            <button
-                              onClick={() => handleCategoryToggle(category)}
-                              className="hover:bg-white/10 rounded-full p-0.5 transition-colors"
-                            >
-                              <X className="h-3 w-3" />
-                            </button>
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+            <div className="flex gap-8">
+              <div className="hidden lg:block w-80 flex-shrink-0">
+                <div className="sticky top-40">
+                  <FilterSidebar />
                 </div>
               </div>
 
               <div className="flex-1 space-y-6">
-                <div className="flex items-center justify-between">
-                  <p className="text-gray-400 text-sm">
-                    {filteredScripts.length === ScriptData.length 
-                      ? `Showing all ${filteredScripts.length} scripts`
-                      : `Showing ${filteredScripts.length} of ${ScriptData.length} scripts`
-                    }
-                    {selectedCategories.length > 0 && (
-                      <span>
-                        {' in '}
-                        {selectedCategories.length === 1 
-                          ? selectedCategories[0]
-                          : `${selectedCategories.length} categories`
-                        }
-                      </span>
-                    )}
-                    {searchQuery && ` matching "${searchQuery}"`}
-                  </p>
-                </div>
-
                 {filteredScripts.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
                     {filteredScripts.map((script) => (
                       <div
                         key={script.id}
                         onClick={() => setSelectedScript(script)}
-                        className="group bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 cursor-pointer border border-gray-700/50 hover:border-gray-600/50 overflow-hidden transform hover:-translate-y-2 hover:bg-gray-800/70 relative"
+                        className="group bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 cursor-pointer border border-gray-700/50 hover:border-gray-600/50 overflow-hidden transform hover:-translate-y-1 sm:hover:-translate-y-2 hover:bg-gray-800/70 relative"
                       >
-                        <div className="p-6 pb-4">
+                        <div className="p-4 sm:p-6 pb-3 sm:pb-4">
                           <div className="flex items-start justify-between mb-3">
-                            <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getCategoryColor(script.category)}`}>
+                            <span className={`px-2 sm:px-3 py-1 rounded-full text-xs font-semibold border ${getCategoryColor(script.category)}`}>
                               {script.category}
                             </span>
                             <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -699,42 +748,39 @@ Scripts tailored for startups building in infra, AI, or SaaS. Pick a template, p
                             </div>
                           </div>
                           
-                          <h2 className="text-xl font-bold text-white mb-3 group-hover:text-[#6b5be7] transition-colors">
+                          <h2 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-[#6b5be7] transition-colors line-clamp-2">
                             {script.title}
                           </h2>
                           
-                          <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-4 group-hover:text-gray-300 transition-colors">
+                          <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-3 sm:mb-4 group-hover:text-gray-300 transition-colors">
                             {script.intro}
                           </p>
                         </div>
 
-                        <div className="px-6 py-4 bg-gray-900/30 border-t border-gray-700/30">
+                        <div className="px-4 sm:px-6 py-3 sm:py-4 bg-gray-900/30 border-t border-gray-700/30">
                           <div className="flex items-center justify-between text-sm text-gray-400">
-                            <div className="flex items-center gap-4">
-                              <div className="flex items-center gap-1">
-                                <Clock size={14} />
-                                <span>{script.duration}</span>
-                              </div>
+                            <div className="flex items-center gap-1">
+                              <Clock size={14} />
+                              <span className="text-xs sm:text-sm">{script.duration}</span>
                             </div>
                             <div className="flex items-center gap-1 text-blue-400 group-hover:text-blue-300 transition-colors">
                               <PlayCircle size={16} />
-                              <span className="font-medium">View Script</span>
+                              <span className="font-medium text-xs sm:text-sm">View Script</span>
                             </div>
                           </div>
                         </div>
 
                         <div className="absolute inset-0 bg-gradient-to-t from-blue-600/10 via-transparent to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                        
                         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none blur-xl" />
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-16">
-                    <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl p-8 max-w-md mx-auto border border-gray-700/30">
-                      <Search className="h-16 w-16 text-gray-500 mx-auto mb-4" />
-                      <h3 className="text-xl font-semibold text-white mb-2">No scripts found</h3>
-                      <p className="text-gray-400 mb-4">
+                  <div className="text-center py-12 sm:py-16">
+                    <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl p-6 sm:p-8 max-w-md mx-auto border border-gray-700/30">
+                      <Search className="h-12 sm:h-16 w-12 sm:w-16 text-gray-500 mx-auto mb-4" />
+                      <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">No scripts found</h3>
+                      <p className="text-gray-400 mb-4 text-sm sm:text-base">
                         {searchQuery && selectedCategories.length > 0
                           ? `No scripts match "${searchQuery}" in the selected categories`
                           : searchQuery 
@@ -746,7 +792,7 @@ Scripts tailored for startups building in infra, AI, or SaaS. Pick a template, p
                       </p>
                       <button
                         onClick={clearAllFilters}
-                        className="px-4 py-2 bg-blue-600/20 text-blue-300 rounded-lg border border-blue-500/30 hover:bg-blue-600/30 transition-colors"
+                        className="px-4 py-2 bg-blue-600/20 text-blue-300 rounded-lg border border-blue-500/30 hover:bg-blue-600/30 transition-colors text-sm sm:text-base"
                       >
                         Clear filters
                       </button>
@@ -759,8 +805,8 @@ Scripts tailored for startups building in infra, AI, or SaaS. Pick a template, p
         )}
 
         <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-blue-500/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/5 rounded-full blur-3xl" />
         </div>
       </div>
     </div>
