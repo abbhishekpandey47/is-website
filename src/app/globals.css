@@ -531,3 +531,38 @@ body {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+.ai-border {
+  position: relative;
+  border-radius: 1rem; 
+  padding: 2px;
+  background-color: #1f29370c; 
+  background-image: conic-gradient(
+    from var(--angle),
+    transparent 0deg,
+    #6c5ce7 calc(var(--glow-angle) * 0.1),
+    #ff7675 calc(var(--glow-angle) * 0.5),
+    #a29bfe calc(var(--glow-angle) * 0.7),
+    #6c5ce7 calc(var(--glow-angle) * 0.9),
+    transparent var(--glow-angle),
+    transparent 360deg
+  );
+  animation: rotateBorder 6s linear infinite;
+}@property
+ --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}@keyframes
+ rotateBorder {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}.ai-border > textarea {
+  border-radius: 1rem;
+  background: #1f2937; 
+  display: block;
+}
+

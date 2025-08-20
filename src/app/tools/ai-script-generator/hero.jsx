@@ -265,7 +265,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
 
     return (
         <div className="fixed inset-0 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="border border-gray-700 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
+            <div className="border bg-black border-gray-700 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
                 {/* Header */}
                 <div className="lg:flex items-center justify-center lg:justify-between p-6 border-b border-gray-700">
                     <div className="lg:flex my-4 md:my-0 items-center justify-center space-x-3">
@@ -1013,10 +1013,13 @@ export default function AIVideoScriptGenerator() {
                         </div>
                     </div>
                 </div>
-
-                <div className="max-w-2xl mx-auto mb-8">
-                    <div className="relative bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl">
-                        <textarea
+<div className="relative max-w-2xl mx-auto mb-8">
+  <div 
+    className="relative rounded-2xl shadow-2xl overflow-hidden ai-border"
+    style={{
+      '--glow-angle': '90deg',
+    }}
+  >                        <textarea
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
                             placeholder="e.g. AI Video Scripts for Technical Startups."
