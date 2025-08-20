@@ -513,10 +513,12 @@ export default function Page() {
           <div className="space-y-8">
             <div className="text-center space-y-4">
               <h1 className="text-4xl md:text-5xl quicksand-bold">
-                Professional Scripts Library
+              Ready-Made Video Script Library
               </h1>
               <p className="font-[quicksand] text-xl text-gray-300 max-w-2xl mx-auto">
-                Discover expertly crafted scripts designed to elevate your content and engage your audience
+              Scripts tailored for startups building in infra, AI, or SaaS.
+              Pick a template, plug in your context, and get a record-ready script in minutes.
+
               </p>
             </div>
 
