@@ -1,7 +1,7 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import ScriptData from "./script.js";
-import { Sparkles, X, Copy, Download, Clock, FileText, PlayCircle, User, ChevronRight, } from 'lucide-react';
+import { Sparkles, X, Copy, Download, Clock, FileText, PlayCircle, Search, Filter, User, ChevronRight, } from 'lucide-react';
 
 
 const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, videoType }) => {
@@ -482,10 +482,42 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, video
     );
 };
 
-
-
 export default function Page() {
   const [selectedScript, setSelectedScript] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const categories = useMemo(() => {
+    return [...new Set(ScriptData.map(script => script.category))];
+  }, []);
+
+  const handleCategoryToggle = (category) => {
+    setSelectedCategories(prev => {
+      if (prev.includes(category)) {
+        return prev.filter(c => c !== category);
+      } else {
+        return [...prev, category];
+      }
+    });
+  };
+
+  const clearAllFilters = () => {
+    setSearchQuery('');
+    setSelectedCategories([]);
+  };
+
+  const filteredScripts = useMemo(() => {
+    return ScriptData.filter(script => {
+      const matchesSearch = searchQuery === '' || 
+        script.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        script.intro.toLowerCase().includes(searchQuery.toLowerCase());
+      
+      const matchesCategory = selectedCategories.length === 0 || 
+        selectedCategories.includes(script.category);
+      
+      return matchesSearch && matchesCategory;
+    });
+  }, [searchQuery, selectedCategories]);
 
   const getCategoryColor = (category) => {
     const colors = {
@@ -501,7 +533,7 @@ export default function Page() {
 
   return (
     <div className="pt-36">
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-12">
         {selectedScript ? (
           <ScriptDisplay
             generatedScript={selectedScript.content}
@@ -512,7 +544,7 @@ export default function Page() {
         ) : (
           <div className="space-y-8">
             <div className="text-center space-y-4">
-              <h1 className="text-4xl md:text-5xl quicksand-bold">
+              <h1 className="font-[quicksand] text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 Professional Scripts Library
               </h1>
               <p className="font-[quicksand] text-xl text-gray-300 max-w-2xl mx-auto">
@@ -520,68 +552,216 @@ export default function Page() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {ScriptData.map((script) => (
-                <div
-                  key={script.id}
-                  onClick={() => setSelectedScript(script)}
-                  className="group bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 cursor-pointer border border-gray-700/50 hover:border-gray-600/50 overflow-hidden transform hover:-translate-y-2 hover:bg-gray-800/70"
-                >
-                  <div className="p-6 pb-4">
-                    <div className="flex items-start justify-between mb-3">
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getCategoryColor(script.category)}`}>
-                        {script.category}
-                      </span>
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                        <ChevronRight size={20} className="text-gray-400 group-hover:text-white" />
-                      </div>
-                    </div>
-                    
-                    <h2 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
-                      {script.title}
-                    </h2>
-                    
-                    <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-4 group-hover:text-gray-300 transition-colors">
-                      {script.intro}
-                    </p>
-                  </div>
-
-                  {/* Card Footer */}
-                  <div className="px-6 py-4 bg-gray-900/30 border-t border-gray-700/30">
-                    <div className="flex items-center justify-between text-sm text-gray-400">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1">
-                          <Clock size={14} />
-                          <span>{script.duration}</span>
-                        </div>
-                        {/* <div className="flex items-center gap-1">
-                          <User size={14} />
-                          <span>{script.author}</span>
-                        </div> */}
-                      </div>
-                      <div className="flex items-center gap-1 text-blue-400 group-hover:text-blue-300 transition-colors">
-                        <PlayCircle size={16} />
-                        <span className="font-medium">View Script</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-600/10 via-transparent to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                  
-                  {/* Glow Effect */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none blur-xl" />
+            <div className="mb-8">
+              <div className="relative max-w-2xl mx-auto">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-gray-400 stroke-gray-400" />
                 </div>
-              ))}
+                <input
+                  type="text"
+                  placeholder="Search scripts by title or description..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="block w-full pl-10 pr-3 py-3 mb-28 border border-gray-600/50 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 outline-none focus:ring-0 focus:border-blue-500/50 transition-all"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                )}
+              </div>
             </div>
 
-            {/* Background Decoration */}
-            <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-              <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+            <div className="flex gap-8">
+              {/* Left Sidebar - Categories */}
+              <div className="w-80 flex-shrink-0">
+                <div className="sticky top-40 space-y-6">
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-xl font-semibold text-white">Filter Templates</h2>
+                    {selectedCategories.length > 0 && (
+                      <button
+                        onClick={() => setSelectedCategories([])}
+                        className="flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors"
+                      >
+                        <X className="h-4 w-4" />
+                        Clear
+                      </button>
+                    )}
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-medium text-white">Use Case</h3>
+                      <span className="text-sm text-gray-400">{categories.length}</span>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      {categories.map((category) => {
+                        const isSelected = selectedCategories.includes(category);
+                        const scriptsInCategory = ScriptData.filter(script => script.category === category).length;
+                        
+                        return (
+                          <label
+                            key={category}
+                            className="flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all duration-200 hover:bg-gray-700/30 border-gray-600/30"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="relative">
+                                <input
+                                  type="checkbox"
+                                  checked={isSelected}
+                                  onChange={() => handleCategoryToggle(category)}
+                                  className="sr-only"
+                                />
+                                <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
+                                  isSelected 
+                                    ? "bg-blue-500 border-blue-500"
+                                    : 'border-gray-500 bg-transparent'
+                                }`}>
+                                  {isSelected && (
+                                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                    </svg>
+                                  )}
+                                </div>
+                              </div>
+                              <span className="text-sm font-medium text-gray-200">{category}</span>
+                            </div>
+                            <span className="text-xs text-gray-400">{scriptsInCategory}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {selectedCategories.length > 0 && (
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-300 mb-2">Active Filters</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedCategories.map(category => (
+                          <span
+                            key={category}
+                            className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs border ${getCategoryColor(category)}`}
+                          >
+                            {category}
+                            <button
+                              onClick={() => handleCategoryToggle(category)}
+                              className="hover:bg-white/10 rounded-full p-0.5 transition-colors"
+                            >
+                              <X className="h-3 w-3" />
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex-1 space-y-6">
+                <div className="flex items-center justify-between">
+                  <p className="text-gray-400 text-sm">
+                    {filteredScripts.length === ScriptData.length 
+                      ? `Showing all ${filteredScripts.length} scripts`
+                      : `Showing ${filteredScripts.length} of ${ScriptData.length} scripts`
+                    }
+                    {selectedCategories.length > 0 && (
+                      <span>
+                        {' in '}
+                        {selectedCategories.length === 1 
+                          ? selectedCategories[0]
+                          : `${selectedCategories.length} categories`
+                        }
+                      </span>
+                    )}
+                    {searchQuery && ` matching "${searchQuery}"`}
+                  </p>
+                </div>
+
+                {filteredScripts.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredScripts.map((script) => (
+                      <div
+                        key={script.id}
+                        onClick={() => setSelectedScript(script)}
+                        className="group bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 cursor-pointer border border-gray-700/50 hover:border-gray-600/50 overflow-hidden transform hover:-translate-y-2 hover:bg-gray-800/70 relative"
+                      >
+                        <div className="p-6 pb-4">
+                          <div className="flex items-start justify-between mb-3">
+                            <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getCategoryColor(script.category)}`}>
+                              {script.category}
+                            </span>
+                            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                              <ChevronRight size={20} className="text-gray-400 group-hover:text-white" />
+                            </div>
+                          </div>
+                          
+                          <h2 className="text-xl font-bold text-white mb-3 group-hover:text-[#6b5be7] transition-colors">
+                            {script.title}
+                          </h2>
+                          
+                          <p className="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-4 group-hover:text-gray-300 transition-colors">
+                            {script.intro}
+                          </p>
+                        </div>
+
+                        <div className="px-6 py-4 bg-gray-900/30 border-t border-gray-700/30">
+                          <div className="flex items-center justify-between text-sm text-gray-400">
+                            <div className="flex items-center gap-4">
+                              <div className="flex items-center gap-1">
+                                <Clock size={14} />
+                                <span>{script.duration}</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-1 text-blue-400 group-hover:text-blue-300 transition-colors">
+                              <PlayCircle size={16} />
+                              <span className="font-medium">View Script</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="absolute inset-0 bg-gradient-to-t from-blue-600/10 via-transparent to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                        
+                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none blur-xl" />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-16">
+                    <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl p-8 max-w-md mx-auto border border-gray-700/30">
+                      <Search className="h-16 w-16 text-gray-500 mx-auto mb-4" />
+                      <h3 className="text-xl font-semibold text-white mb-2">No scripts found</h3>
+                      <p className="text-gray-400 mb-4">
+                        {searchQuery && selectedCategories.length > 0
+                          ? `No scripts match "${searchQuery}" in the selected categories`
+                          : searchQuery 
+                            ? `No scripts match "${searchQuery}"`
+                            : selectedCategories.length > 0
+                              ? `No scripts found in the selected categories`
+                              : "No scripts available"
+                        }
+                      </p>
+                      <button
+                        onClick={clearAllFilters}
+                        className="px-4 py-2 bg-blue-600/20 text-blue-300 rounded-lg border border-blue-500/30 hover:bg-blue-600/30 transition-colors"
+                      >
+                        Clear filters
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}
+
+        <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+        </div>
       </div>
     </div>
   );
