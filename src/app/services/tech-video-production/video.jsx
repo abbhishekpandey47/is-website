@@ -1,13 +1,15 @@
-import Image from 'next/image';
-import React, { useState } from 'react';
-import CalendarBooking from "../../calendarButton.jsx";
+"use client";
 
+import CalendarBooking from "../../calendarButton.jsx";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { X } from "lucide-react"
 
 const Video = () => {
-  const [selectedSet, setSelectedSet] = useState(null);
-  const [selectedSpokesperson, setSelectedSpokesperson] = useState(null);
-
-  const videoId = "0AsyeSd1_kQ";
+  const [isHovered, setIsHovered] = useState(false); 
+  const [index, setIndex] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const sets = [
     { id: 7, name: "Warm Workspace", image: "/video-page/i7.JPG", },
@@ -19,6 +21,25 @@ const Video = () => {
     { id: 6, name: "Green Workspace", image: "/video-page/i5.JPG", },
   ];
 
+  useEffect(() => {
+    if (!isHovered) {
+      const interval = setInterval(() => {
+        setIndex((prevIndex) => (prevIndex + 1) % sets.length);
+      }, 3000);
+
+      return () => clearInterval(interval);
+    }
+  }, [sets.length, isHovered]); 
+
+
+  useEffect(() => {
+    if (selectedImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [selectedImage]);
+
   const spokespersons = [
     { id: 4, name: "Casual Male", image: "/video-page/t3.jpg" },
     { id: 1, name: "Professional Male", image: "/video-page/t1.jpg", },
@@ -26,16 +47,10 @@ const Video = () => {
     { id: 2, name: "Friendly Female", image: "/video-page/t2.jpg" }
   ];
 
-  const StarIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="46" height="44" viewBox="0 0 46 44" fill="none" className="w-12 h-12">
-      <path d="M46 25.2551L29.6471 20.1775L43.2262 9.97392L27.3385 16.2941L30.988 0L23 14.7602L15.012 0L18.6615 16.2941L2.77381 9.97392L16.3529 20.1775L0 25.2551L17.1548 24.5938L7.98755 38.6927L20.6914 27.4767L23 44L25.3086 27.4767L38.0125 38.6927L28.8452 24.5938L46 25.2551Z" fill="#FFBA08" />
-    </svg>
-  );
-
   return (
     <div className="flex justify-center items-center text-white p-8 ">
       <div className="max-w-7xl w-full">
-        {/* Header Section */}
+        {/* Header  */}
         <div className="flex items-center justify-center text-center max-w-5xl mx-auto relative z-10 mb-20">
           <div>
             <h1 className="font-[quicksand] font-bold text-2xl md:text-[35px] leading-tight mb-6">
@@ -71,47 +86,98 @@ const Video = () => {
                 </p>
               </div>
 
-              <div className="overflow-hidden w-full">
-                <div className="flex gap-6 animate-scroll">
-                  {sets.concat(sets).map((set, i) => (
-                    <div
-                      key={set.id + "-" + i}
-                      className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 min-w-[200px] flex-shrink-0"
-                    >
-                      <div className="aspect-video">
-                        <Image
-                          src={set.image}
-                          alt="carousel image"
-                          className="w-full h-full object-cover"
-                          height={200}
-                          width={200}
-                          priority
-                        />
-                      </div>
-                    </div>
-                  ))}
+              <div
+      className="relative w-full"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="overflow-hidden w-full">
+        <motion.div
+          className="flex gap-4"
+          animate={{
+            x: `-${index * (200 + 16)}px`,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 500,
+            damping: 25,
+            mass: 0.7,
+          }}
+          style={{
+            width: `${sets.length * (200 + 16)}px`,
+          }}
+        >
+          {sets.map((set, i) => {
+            const isActive = i === index;
+            return (
+              <motion.div
+                key={set.id}
+                className="relative rounded-2xl overflow-hidden cursor-pointer min-w-[100px] flex-shrink-0"
+                animate={{
+                  scale: isActive ? 1.1 : 0.9,
+                  opacity: isActive ? 1 : 0.7,
+                  filter: isActive ? "brightness(1)" : "brightness(0.8)",
+                }}
+                transition={{
+                  duration: 0.4,
+                  ease: [0.4, 0, 0.2, 1],
+                }}
+                onClick={() => setSelectedImage(set)} 
+                whileHover={{
+                  scale: isActive ? 1.15 : 0.95,
+                  transition: { duration: 0.15 },
+                }}
+              >
+                <div className="aspect-video relative">
+                  <Image
+                    src={set.image}
+                    alt={set.name}
+                    className="w-full h-full object-cover"
+                    height={112}
+                    width={200}
+                    priority={i <= 2}
+                  />
+                  {!isActive && (
+                    <div className="absolute inset-0 bg-black/20 transition-opacity duration-200" />
+                  )}
                 </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
 
-                <style jsx>{`
-        .animate-scroll {
-          display: flex;
-          width: max-content;
-          animation: scroll 40s linear infinite;
-        }
-
-        @keyframes scroll {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(-50%);
-          }
-        }
-      `}</style>
-              </div>
+      {/* 🔹 Fullscreen  */}
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.3 }}
+            className="relative max-w-4xl w-full rounded-2xl overflow-hidden"
+          >
+            <Image
+              src={selectedImage.image}
+              alt={selectedImage.name}
+              className="w-full h-auto object-contain"
+              width={1200}
+              height={800}
+            />
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 bg-black hover:bg-gray-800/90 rounded-full p-2"
+            >
+              <X className="h-4 w-4 font-extrabold" />
+            </button>
+          </motion.div>
+        </div>
+      )}
+    </div>
             </div>
           </div>
         </div>
+        
         <div className='bg-[#27252a] w-full h-[1px] my-10'></div>
 
         {/* Step 2 - Choose your spokesperson */}
@@ -145,11 +211,10 @@ const Video = () => {
                     <div className="aspect-video">
                       <Image
                         src={spokesperson.image}
+                        alt={spokesperson.name}
                         className="w-full h-full object-cover"
                         height={200}
                         width={200}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
                       />
                     </div>
                   </div>
@@ -161,7 +226,7 @@ const Video = () => {
 
         <div className='bg-[#27252a] w-full h-[1px] my-10'></div>
 
-        {/* Step 2 - Choose your spokesperson */}
+        {/* Step 3 - Script Creation */}
         <div className="mb-10">
           <div className="md:flex md:gap-20">
             {/* Left Column - Number */}
@@ -175,7 +240,6 @@ const Video = () => {
               <div className="mb-6">
                 <p className="text-[#ffffff80] font-semibold tracking-wide text-lg">
                   Our team of developers, copywriters, SEO & editors takes care of the script, screen recordings, stock footage, graphics, sound, and animations. Timebound? Try our Script Generator to get your desired script in minutes!
-                  .
                 </p>
               </div>
             </div>
@@ -184,7 +248,7 @@ const Video = () => {
 
         <div className='bg-[#27252a] w-full h-[1px] my-10'></div>
 
-
+        {/* Step 4 - Post-Production */}
         <div className="mb-10">
           <div className="md:flex md:gap-20">
             {/* Left Column - Number */}
@@ -206,7 +270,7 @@ const Video = () => {
 
         <div className='bg-[#27252a] w-full h-[1px] my-10'></div>
 
-
+        {/* Step 5 - Final Delivery */}
         <div className="mb-10">
           <div className="md:flex md:gap-20">
             {/* Left Column - Number */}
@@ -226,7 +290,6 @@ const Video = () => {
             </div>
           </div>
         </div>
-
 
         <div className="flex justify-center">
           <CalendarBooking buttonText="Get Started" />
