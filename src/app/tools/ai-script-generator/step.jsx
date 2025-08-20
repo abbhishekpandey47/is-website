@@ -81,9 +81,9 @@ export default function AIScriptStep() {
         {/* Header */}
         <div className="text-center mb-12 px-4">
           <h1 className="mx-auto max-w-3xl font-[quicksand] text-lg md:text-2xl font-extrabold text-white leading-snug tracking-tight">
-            Script Generator for Technical GTM Videos
+            How to Use Video Script Generator for Technical GTM Videos
             <span className="block mt-2 text-indigo-300 font-semibold">
-              Purpose-built for AI Agents, DevTools, Infra, Testing, and Developer Platforms
+              Purpose- built for AI Agents, DevTools, Infra, Testing and Developer Platforms.
             </span>
           </h1>
         </div>
