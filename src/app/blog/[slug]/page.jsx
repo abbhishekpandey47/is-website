@@ -249,11 +249,9 @@ const PostPage = (props) => {
 
                               let ctaToShow = null;
 
-                              // Show first CTA only if it's the third heading
                               if (headingIndex === 2) {
                                 ctaToShow = "first";
                               }
-                              // Show second CTA only if it's the third-to-last heading AND first CTA is not already shown
                               else if (totalHeadings > 4 && headingIndex === totalHeadings - 3) {
                                 ctaToShow = "second";
                               }
