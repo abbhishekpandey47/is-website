@@ -1,9 +1,9 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
+import AlternateLinks from './AlternateLinks';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
 import './globals.css';
 import { metadata } from './metadata';
-import AlternateLinks from './AlternateLinks';
 
 export { metadata };
 
@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
                 <link
                     rel='preload'
                     as='style'
-                    href='/src/app/globals.css'
+                    href='/globals.css'
                     onLoad="this.onload=null;this.rel='stylesheet'"
                 />
                 <noscript>
@@ -42,14 +42,14 @@ export default function RootLayout({ children }) {
                 {/* If you are self-hosting Quicksand, preload the font files as well */}
                 <link
                     rel='preload'
-                    href='/src/app/fonts/Quicksand-Bold.woff2'
+                    href='/fonts/Quicksand-Bold.woff2'
                     as='font'
                     type='font/woff2'
                     crossOrigin='anonymous'
                 />
                 <link
                     rel='preload'
-                    href='/src/app/fonts/Quicksand-Regular.woff2'
+                    href='/fonts/Quicksand-Regular.woff2'
                     as='font'
                     type='font/woff2'
                     crossOrigin='anonymous'

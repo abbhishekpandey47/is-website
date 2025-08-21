@@ -9,21 +9,21 @@
 
 @font-face {
   font-family: "Quicksand";
-  src: url('./fonts/Quicksand-Bold.woff');
+  src: url('/fonts/Quicksand-Bold.woff');
   font-weight: bold;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Quicksand";
-  src: url('./fonts/Quicksand-SemiBold.woff2');
+  src: url('/fonts/Quicksand-SemiBold.woff2');
   font-weight: 600;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Quicksand";
-  src: url('./fonts/Quicksand-Light.woff2') format("woff2");
+  src: url('/fonts/Quicksand-Light.woff2') format("woff2");
   font-weight: 100;
   font-display: swap;
 
@@ -31,35 +31,36 @@
 
 @font-face {
   font-family: "Quicksand";
-  src: url('./fonts/Quicksand-Medium.woff2') format("woff2");
+  src: url('/fonts/Quicksand-Medium.woff2') format("woff2");
   font-weight: medium;
   font-display: swap;
 }
 
+
 @font-face {
   font-family: 'Termina Demi';
-  src: url('./fonts/TerminaTest-Demi.otf') format('opentype');
+  src: url('/fonts/TerminaTest-Demi.otf') format('opentype');
   font-weight: semibold;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Termina Demi';
-  src: url('./fonts/TerminaTest-Thin.otf') format('opentype');
+  src: url('/fonts/TerminaTest-Thin.otf') format('opentype');
   font-weight: 100;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Termina Demi";
-  src: url('./fonts/TerminaTest-Bold.otf');
+  src: url('/fonts/TerminaTest-Bold.otf');
   font-weight: bold;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Termina Demi";
-  src: url('./fonts/TerminaTest-Heavy.otf');
+  src: url('/fonts/TerminaTest-Heavy.otf');
   font-weight: 600;
   font-display: swap;
 }
@@ -68,7 +69,7 @@
 
 /* @font-face {
   font-family: "Quicksand";
-  src: url('./fonts/Quicksand-Medium.woff2');
+  src: url('/fonts/Quicksand-Medium.woff2');
   font-weight: medium;
 } */
 
@@ -374,7 +375,7 @@ body {
 
 .addGrid2{
   background-image: url("../../public/svgPatterns/whyinfra.svg");
-  
+
 }
 
 
@@ -459,7 +460,7 @@ body {
   content: '';
   position: absolute;
   inset: 1px;
-  background-color: #0b0f19; 
+  background-color: #0b0f19;
   border-radius: 6px;
   z-index: -5;
   transition: all 200ms ease-in-out;
@@ -533,9 +534,9 @@ body {
 }
 .ai-border {
   position: relative;
-  border-radius: 1rem; 
+  border-radius: 1rem;
   padding: 2px;
-  background-color: #1f29370c; 
+  background-color: #1f29370c;
   background-image: conic-gradient(
     from var(--angle),
     transparent 0deg,
@@ -562,7 +563,6 @@ body {
   }
 }.ai-border > textarea {
   border-radius: 1rem;
-  background: #1f2937; 
+  background: #1f2937;
   display: block;
 }
-
