@@ -1,5 +1,7 @@
 import { ArrowUp, Clock, MessageCircle, Search } from 'lucide-react';
 import { useState } from 'react';
+import { loadKeywordResults, saveKeywordResults } from './utils/cache';
+import { formatHoursToRedditAge } from './utils/timeAgo';
 
 export default function PostSearch() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,10 +15,17 @@ export default function PostSearch() {
     setError("");
     setPosts([]);
     try {
+      const keywordsArr = searchQuery.split(",").map(k => k.trim()).filter(Boolean);
+      const cached = loadKeywordResults(keywordsArr);
+      if (cached) {
+        setPosts(cached);
+        setLoading(false);
+        return;
+      }
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ keywords: searchQuery.split(",").map(k => k.trim()).filter(Boolean) })
+        body: JSON.stringify({ keywords: keywordsArr })
       });
       if (!res.ok) {
         const errData = await res.json().catch(() => null);
@@ -31,7 +40,7 @@ export default function PostSearch() {
             Object.values(group).flatMap(postsArr => postsArr.map((post, idx) => ({
               id: post.post_url + idx,
               subreddit: `r/${post.subreddit}`,
-              timeAgo: post.post_age_hours ? `${post.post_age_hours} hours ago` : '',
+              timeAgo: formatHoursToRedditAge(post.post_age_hours),
               title: post.post_title,
               description: post.post_summary || post.post_content || '',
               tags: [post.subreddit, ...(post.post_title ? post.post_title.split(' ').slice(0,2) : [])],
@@ -42,6 +51,7 @@ export default function PostSearch() {
           )
         ) : [];
       setPosts(fetchedPosts);
+      saveKeywordResults(keywordsArr, fetchedPosts);
     } catch (err) {
       setError("Network error. Please try again.");
     } finally {

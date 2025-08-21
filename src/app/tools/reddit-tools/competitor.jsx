@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { loadKeywordResults, saveKeywordResults } from './utils/cache';
+import { formatHoursToRedditAge } from './utils/timeAgo'; // path is correct relative to this file
 
 const API_BASE = "https://reddit-comment-gen.onrender.com";
 
@@ -14,14 +16,22 @@ export default function Competitor() {
         setError("");
         setResults([]);
         try {
+            const kwArr = keywords.split(",").map(k => k.trim()).filter(Boolean);
+            const cached = loadKeywordResults(kwArr);
+            if (cached) {
+                setResults(cached);
+                setLoading(false);
+                return;
+            }
             const res = await fetch(`${API_BASE}/find_reddit_post`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ keywords: keywords.split(",").map(k => k.trim()).filter(Boolean) })
+                body: JSON.stringify({ keywords: kwArr })
             });
             if (!res.ok) throw new Error("Failed to fetch posts");
             const data = await res.json();
             setResults(data.results || []);
+            saveKeywordResults(kwArr, data.results || []);
         } catch (err) {
             setError(err.message || "Error fetching posts");
         } finally {
@@ -78,7 +88,7 @@ export default function Competitor() {
                                             {posts.map((post, i) => (
                                                 <li key={i} className="p-3 bg-gray-100 rounded">
                                                     <a href={post.post_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold">{post.post_title}</a>
-                                                    <div className="text-sm text-gray-600">Subreddit: {post.subreddit} | Upvotes: {post.upvotes} | Comments: {post.total_comments} | Age: {post.post_age_hours}h</div>
+                                                    <div className="text-sm text-gray-600">Subreddit: {post.subreddit} | Upvotes: {post.upvotes} | Comments: {post.total_comments} | Age: {formatHoursToRedditAge(post.post_age_hours)}</div>
                                                 </li>
                                             ))}
                                         </ul>
