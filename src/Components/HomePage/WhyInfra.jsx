@@ -1,6 +1,6 @@
 'use client'
-import React, { useEffect } from 'react';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 const infraArr = [
     "Best technical content writer trained with hands-on product experience",
@@ -121,7 +121,7 @@ const WhyInfra = () => {
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28" fill="none">
                                                 <rect x="0.5" width="28" height="28" rx="5" fill="red" fillOpacity="0.7" />
-                                                <path d="M9.5 19L14.5 14M14.5 14L19.5 9M14.5 14L9.5 9M14.5 14L19.5 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M9.5 19L14.5 14M14.5 14L19.5 9M14.5 14L9.5 9M14.5 14L19.5 19" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </div>
                                         <p className="text-white max-sm:text-sm text-opacity-50 quicksand-semibold">{item}</p>
