@@ -209,7 +209,7 @@ const PostPage = (props) => {
           <HeadBanner postData={postData} />
           <div className="flex justify-around w-full pb-16 px-10 max-lg:flex-col">
             <div className=" max-lg:w-full max-lg:flex justify-center">
-              <Outline content={postContent} />
+        <Outline content={postContent} />
             </div>
             <div className="h-auto hidden max-lg:flex max-lg:justify-center">
               <div className="w-[84vw]">
@@ -235,9 +235,7 @@ const PostPage = (props) => {
                               const headingText =
                                 typeof children === "string"
                                   ? children
-                                  : Array.isArray(children)
-                                    ? children[0]
-                                    : "";
+                                  : (Array.isArray(children) ? children[0] : "") || "";
 
                               const normalizedHeading = String(headingText).trim().toLowerCase();
 
@@ -247,23 +245,19 @@ const PostPage = (props) => {
 
                               const totalHeadings = headingLines.length;
 
-                              let ctaToShow = null;
+                              const showFirstCTA = headingIndex === 2;
 
-                              if (headingIndex === 2) {
-                                ctaToShow = "first";
-                              }
-                              else if (totalHeadings > 4 && headingIndex === totalHeadings - 3) {
-                                ctaToShow = "second";
-                              }
+                              const showSecondCTA =
+                                totalHeadings > 4 && headingIndex === totalHeadings - 3;
 
                               return (
                                 <>
-                                  {ctaToShow === "first" && (
+                                  {showFirstCTA && (
                                     <div className="my-8 mb-10">
                                       <CTA text="Tired of wasting engineering time on content?" />
                                     </div>
                                   )}
-                                  {ctaToShow === "second" && (
+                                  {showSecondCTA && (
                                     <div className="my-8 mb-10">
                                       <CTA2 />
                                     </div>
@@ -277,7 +271,6 @@ const PostPage = (props) => {
                               console.error("Error in h2 component:", error);
                               return <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">{children}</h2>;
                             }
-
                           },
                         },
 

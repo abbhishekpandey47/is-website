@@ -666,7 +666,7 @@ export default function Page() {
               {/* Mobile Filter Toggle */}
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="lg:hidden flex items-center gap-2 px-4 py-2 bg-gray-800/50 text-gray-300 rounded-lg border border-gray-600/50 hover:bg-gray-700/50 transition-colors"
+                className="md:hidden flex items-center gap-2 px-4 py-2 bg-gray-800/50 text-gray-300 rounded-lg border border-gray-600/50 hover:bg-gray-700/50 transition-colors"
               >
                 <Filter className="h-4 w-4" />
                 <span className="text-sm">Filters</span>
