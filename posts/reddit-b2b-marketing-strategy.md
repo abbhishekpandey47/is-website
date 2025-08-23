@@ -2,7 +2,7 @@
 
 * **Reddit Matters for B2B SaaS**: With 124M+ decision-makers, Reddit is now the \#1 platform executives use to validate software, making it a crucial channel for SaaS demand generation.
 
-* **Pick the Right Subreddits**: Start broad r/Entrepreneur, r/Startups, go SaaS-specific r/SaaS, r/SaaS\_Marketing, and explore niche product-focused spaces like r/Lovable or r/Boltnewbuilders.
+* **Pick the Right Subreddits**: Start broad Entrepreneur, Startups, go SaaS-specific SaaS, SaaS\_Marketing, and explore niche product-focused spaces like Lovable or Boltnewbuilders.
 
 * **Leverage Tools & Automation**: Use tools like [Infrasity’s Reddit Comment Generator](https://www.infrasity.com/tools/reddit-comment-generator) to craft human-like comments that blend into discussions.
 
@@ -58,7 +58,7 @@ As the founder of a B2B SaaS company. In [r/Entrepreneur](https://www.reddit.com
 
 Reddit has endless niches. Whatever you want to search, you will get it on Reddit. The communities for B2B SaaS are pure gold for B2B SaaS marketing Reddit strategies, since every thread is already aligned with your ICP’s pain points.
 
-Example: In your chosen subreddit, a founder asks, *“*How do you reduce churn during onboarding?”. Since your product tackles exactly that, you share insights from customer experiences, highlight best practices, and subtly reference how your solution automates onboarding steps. But just make sure you are not being too promotional. The audience here is already in your ICP zone, so your contribution will land harder.
+Example: In your chosen subreddit, a founder asks, How do you reduce churn during onboarding? Since your product tackles exactly that, you share insights from customer experiences, highlight best practices, and subtly reference how your solution automates onboarding steps. But just make sure you are not being too promotional. The audience here is already in your ICP zone, so your contribution will land harder.
 
 **Step 3: Explore the Niche & Industry Subreddits**
 
