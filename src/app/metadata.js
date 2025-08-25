@@ -1,7 +1,7 @@
 export const metadata = {
-    title: 'Tech Content Marketing Services for SaaS & B2B | Infrasity',
+    title: 'Tech Content Marketing for B2B SaaS | Infrasity',
     description:
-        'Drive leads and authority with Infrasity’s tech content marketing services. We create SEO-driven blogs, whitepapers, and strategy for B2B SaaS growth.',
+        'Infrasity helps B2B SaaS startups grow with GTM content, Reddit marketing, AI agent strategies, and technical writing. Build trust, scale visibility, and accelerate growth with us today!',
     keywords: '',
     name: 'viewport',
     content: 'width=device-width, initial-scale=1.0',

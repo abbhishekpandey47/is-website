@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "SDK Documentation Services by Technical Writing Experts",
+  title: "SDK Documentation Services for Developers | Infrasity",
   description:
-    "Boost your product with clear, developer-focused SDK documentation. Our technical writing services ensure accuracy, usability, and seamless integration support.",
+    "Get strong SDK docs for speed adoption. Infrasity delivers developer-first documentation for seamless integration. Build credibility & get SDK docs today",
 };
 
 export default function PageLayout({ children }) {

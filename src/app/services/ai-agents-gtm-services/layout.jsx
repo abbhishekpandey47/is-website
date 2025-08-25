@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "GTM Content Services for AI Agents | Infrasity",
-  description: "Get expert GTM support for your AI agent. We craft messaging, content, and campaigns that convert helping you stand out, generate leads, and grow revenue.",
+  title: "GTM Services for AI Agents & SaaS Tools | Infrasity",
+  description: "AI agents need precise GTM positioning. Infrasity helps B2b SaaS brands with launch strategies and demand programs. Scale your AI tool today!",
 };
 
 export default function PageLayout({ children }) {
