@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Webflow Design & Development Agency | Infrasity",
+  title: "Webflow Design & Development for SaaS | Infrasity",
   description:
-    "Partner with Infrasity, a leading Webflow agency offering custom, responsive web design & development to elevate your brand and boost online performance.",
+    "B2B SaaS startups need fast, scalable websites. Infrasity builds Webflow sites that showcase products and fuel growth. Launch your Webflow project today",
 };
 
 export default function PageLayout({ children }) {

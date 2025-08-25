@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "How-To Guide Writing Services by Technical Writing Experts",
+  title: "How-To Guide Writing for SaaS Products | Infrasity",
   description:
-    "Clear and concise how-to guides crafted by technical writing experts. Improve product usability and provide users with reliable, task-oriented documentation.",
+    "Offer users structured, step-by-step how-to guides and docs created by Infrasity to reduce friction and boost SaaS growth. Click the link to know more.",
 };
 
 export default function PageLayout({ children }) {

@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "CLI Guide Documentation by Technical Writing Experts",
+  title: "CLI Guide Documentation Services | Infrasity",
   description:
-    "Accurate and user-friendly CLI guides crafted by technical writing experts. Help developers interact with your tools efficiently using clear command-line docs.",
+    "Infrasity simplifies CLI tools with developer-friendly guides. We create clear docs to improve onboarding and adoption. Contact us now and get expert CLI docs today.",
 };
 
 export default function PageLayout({ children }) {
