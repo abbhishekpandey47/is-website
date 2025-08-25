@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import CurrentHeader from "./components/competitor/CurrentHeader";
+import Pagination from "./components/competitor/Pagination";
 import { CommentsList, PostsList } from "./components/competitor/PostsList";
 import ResultsTabs from "./components/competitor/ResultsTabs";
 import SearchPanel from "./components/competitor/SearchPanel";
@@ -24,24 +25,25 @@ export default function Current() {
   const [commentsAfter, setCommentsAfter] = useState(null);
   const [backgroundLoading, setBackgroundLoading] = useState(false);
   const [done, setDone] = useState(false);
-  // virtualization counts
-  const [visiblePosts, setVisiblePosts] = useState(25);
-  const [visibleComments, setVisibleComments] = useState(25);
+  // pagination pages (1-based) & page size
+  const PAGE_SIZE = 15; // updated page size
+  const [postsPage, setPostsPage] = useState(1);
+  const [commentsPage, setCommentsPage] = useState(1);
   const [fromCache, setFromCache] = useState(false);
   const [stopped, setStopped] = useState(false);
   const [pollDelay, setPollDelay] = useState(2000);
   const consecutiveNoNewRef = useRef(0);
   const postsSetRef = useRef(new Set());
   const commentsSetRef = useRef(new Set());
-  const sentinelRef = useRef(null);
+  // removed infinite scroll sentinel
 
   const resetState = () => {
     setPosts([]);
     setComments([]);
     setPostsAfter(null);
     setCommentsAfter(null);
-    setVisiblePosts(25);
-    setVisibleComments(25);
+  setPostsPage(1);
+  setCommentsPage(1);
     setDone(false);
   };
 
@@ -54,7 +56,7 @@ export default function Current() {
       setComments(entry.comments || []);
       setPostsAfter(entry.postsAfter || null);
       setCommentsAfter(entry.commentsAfter || null);
-      setDone(!!entry.done);
+  setDone(!!entry.done);
       setShowResults(true);
       setFromCache(true);
       // seed sets
@@ -67,7 +69,9 @@ export default function Current() {
   const handleSearch = async (value, { forceRefresh = false } = {}) => {
     if (!forceRefresh && value === brand && showResults && done) return; // avoid redundant fetch
     setBrand(value);
-    setActiveTab("posts");
+  setActiveTab("posts");
+  setPostsPage(1);
+  setCommentsPage(1);
     setError("");
     setLoading(true);
     setShowResults(false);
@@ -100,7 +104,7 @@ export default function Current() {
       setPosts(newPosts);
       setComments(newComments);
       setPostsAfter(data.posts_after || null);
-      setCommentsAfter(data.comments_after || null);
+  setCommentsAfter(data.comments_after || null);
       if (!data.posts_after && !data.comments_after) setDone(true);
   setShowResults(true);
   saveCurrentMentions(value, { posts: data.posts, comments: data.comments, postsAfter: data.posts_after, commentsAfter: data.comments_after, done: !data.posts_after && !data.comments_after });
@@ -184,27 +188,35 @@ export default function Current() {
   }, [postsAfter, commentsAfter, done, brand, loading, pollDelay, stopped]);
 
 
-  // Infinite scroll: reveal more of already-fetched items
+  // Adjust current page when data shrinks (unlikely) or grows so page index stays valid
   useEffect(() => {
-    if (!sentinelRef.current) return;
-    const el = sentinelRef.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (activeTab === "posts") {
-              setVisiblePosts((v) => Math.min(v + 25, posts.length));
-            } else {
-              setVisibleComments((v) => Math.min(v + 25, comments.length));
-            }
-          }
-        });
-      },
-      { rootMargin: "200px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [activeTab, posts.length, comments.length]);
+    const totalPostPages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
+    if (postsPage > totalPostPages) setPostsPage(totalPostPages);
+  }, [posts.length, postsPage]);
+  useEffect(() => {
+    const totalCommentPages = Math.max(1, Math.ceil(comments.length / PAGE_SIZE));
+    if (commentsPage > totalCommentPages) setCommentsPage(totalCommentPages);
+  }, [comments.length, commentsPage]);
+
+  // When switching tab, ensure we don't show empty page beyond data length
+  useEffect(() => {
+    if (activeTab === 'posts') {
+      const tp = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
+      if (postsPage > tp) setPostsPage(tp);
+    } else {
+      const tp = Math.max(1, Math.ceil(comments.length / PAGE_SIZE));
+      if (commentsPage > tp) setCommentsPage(tp);
+    }
+  }, [activeTab, posts.length, comments.length, postsPage, commentsPage]);
+
+  const pagedPosts = useMemo(() => {
+    const start = (postsPage - 1) * PAGE_SIZE;
+    return posts.slice(start, start + PAGE_SIZE);
+  }, [posts, postsPage]);
+  const pagedComments = useMemo(() => {
+    const start = (commentsPage - 1) * PAGE_SIZE;
+    return comments.slice(start, start + PAGE_SIZE);
+  }, [comments, commentsPage]);
 
   const stats = useMemo(() => {
     if (!showResults) return { totalPosts: 0, totalComments: 0, uniqueSubs: 0, totalUpvotes: 0 };
@@ -252,20 +264,28 @@ export default function Current() {
         counts={{ posts: posts.length, comments: comments.length }}
         visible={showResults}
       />
-      <PostsList posts={posts.slice(0, visiblePosts)} visible={showResults && activeTab === "posts"} />
-      <CommentsList comments={comments.slice(0, visibleComments)} visible={showResults && activeTab === "comments"} />
-      {showResults && (
-        <div ref={sentinelRef} className="h-8" />
+      <PostsList posts={pagedPosts} visible={showResults && activeTab === "posts"} />
+      {showResults && activeTab === 'posts' && (
+        <Pagination
+          page={postsPage}
+          totalItems={posts.length}
+            pageSize={PAGE_SIZE}
+            loading={backgroundLoading}
+            onPageChange={(p) => setPostsPage(p)}
+        />
+      )}
+      <CommentsList comments={pagedComments} visible={showResults && activeTab === "comments"} />
+      {showResults && activeTab === 'comments' && (
+        <Pagination
+          page={commentsPage}
+          totalItems={comments.length}
+          pageSize={PAGE_SIZE}
+          loading={backgroundLoading}
+          onPageChange={(p) => setCommentsPage(p)}
+        />
       )}
       {showResults && !done && !(postsAfter || commentsAfter) && posts.length + comments.length > 0 && (
-        <div className="px-6 mt-6 text-center">
-          <button
-            onClick={fetchNextBatch}
-            className="inline-flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-          >
-            Load more
-          </button>
-        </div>
+        <div className="px-6 mt-6 text-center text-xs text-gray-500">All currently fetched results shown. (Pagination updates as new results arrive.)</div>
       )}
       {!showResults && !loading && (
         <div className="px-6 mt-14 text-center text-sm text-gray-500">
