@@ -2,18 +2,16 @@
 import { Sparkles, X, Copy, Download, Play, Clock, Users, Video, FileText } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regenerateText, videoType }) => {
+const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, videoType }) => {
     const [copied, setCopied] = useState(false);
     const [copiedSections, setCopiedSections] = useState({});
 
-    // Enhanced parsing for tool comparison content
     const parseScript = (script) => {
         const sections = [];
         const lines = script.split('\n');
         let metadata = null;
         let remainingScript = script;
 
-        // 1) Try fenced JSON block first: ```json ... ```
         const fencedJsonMatch = script.match(/^\s*```json\s*([\s\S]*?)```/i);
         if (fencedJsonMatch) {
             try {
@@ -264,12 +262,12 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
 
 
     return (
-        <div className="fixed inset-0 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="border bg-black border-gray-700 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
+        <div className="fixed inset-0 /80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
                 {/* Header */}
-                <div className="lg:flex items-center justify-center lg:justify-between p-6 border-b border-gray-700">
+                <div className="lg:flex items-center justify-center lg:justify-between p-6 border-b border-gray-700 bg-gradient-to-r from-purple-900/50 to-indigo-900/50">
                     <div className="lg:flex my-4 md:my-0 items-center justify-center space-x-3">
-                        <div className="flex items-center justify-center rounded-full px-4 py-2 border border-[#6c5ce8]/40">
+                        <div className="flex items-center justify-center bg-[#6c5ce8]/20 rounded-full px-4 py-2 border border-[#6c5ce8]/40">
                             <Sparkles className="h-5 w-5 mr-2" />
                             <span className="font-[quicksand] text-sm text-white font-bold">
                                 {displayTitle}
@@ -473,19 +471,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                     <div className="flex items-center justify-between text-sm text-gray-400">
                         <div className="flex items-center">
                             <Sparkles className="h-4 w-4 mr-2 text-[#6c5ce8]" />
-                            <span>{`Generated ${videoType} • AI-Powered Analysis`}</span>
-                        </div>
-                        <div className="text-xs">
-                            <button
-                                onClick={() => {
-                                    onClose();
-                                    regenerateText();
-                                }}
-                                className="flex items-center bg-[#6c5ce8] hover:bg-[#6c5ce8]/80 text-white px-4 py-2 rounded-xl transition-colors duration-200 text-sm font-medium"
-                            >
-                                <Sparkles className="w-4 h-4 mr-2" />
-                                Regenerate
-                            </button>
+                            <span>AI-Powered Analysis</span>
                         </div>
                     </div>
                 </div>
@@ -493,7 +479,6 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
         </div>
     );
 };
-
 export default function AIVideoScriptGenerator() {
     const [prompt, setPrompt] = useState('');
     const [videoType, setVideoType] = useState('Select video type...');

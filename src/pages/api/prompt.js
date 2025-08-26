@@ -43,7 +43,7 @@ npm install
 \`\`\`
 
 ## The Prompt (Exact) [mm:ss–mm:ss]
-Prompt: "${prompt}"
+Prompt:
 Explain in 1-2 bullets why this tests real-world capabilities.
 
 ## Tool-by-Tool Breakdown [mm:ss–mm:ss]
