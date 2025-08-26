@@ -2,7 +2,7 @@
 import { Sparkles, X, Copy, Download, Play, Clock, Users, Video, FileText } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, videoType }) => {
+const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regenerateText, videoType }) => {
     const [copied, setCopied] = useState(false);
     const [copiedSections, setCopiedSections] = useState({});
 
@@ -467,11 +467,23 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, video
                 </div>
 
                 {/* Footer */}
-                <div className="border-t border-gray-700 p-4 bg-gray-800/50">
+               <div className="border-t border-gray-700 p-4 bg-gray-800/50">
                     <div className="flex items-center justify-between text-sm text-gray-400">
                         <div className="flex items-center">
                             <Sparkles className="h-4 w-4 mr-2 text-[#6c5ce8]" />
-                            <span>AI-Powered Analysis</span>
+                            <span>{`Generated ${videoType} • AI-Powered Analysis`}</span>
+                        </div>
+                        <div className="text-xs">
+                            <button
+                                onClick={() => {
+                                    onClose();
+                                    regenerateText();
+                                }}
+                                className="flex items-center bg-[#6c5ce8] hover:bg-[#6c5ce8]/80 text-white px-4 py-2 rounded-xl transition-colors duration-200 text-sm font-medium"
+                            >
+                                <Sparkles className="w-4 h-4 mr-2" />
+                                Regenerate
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -479,6 +491,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, video
         </div>
     );
 };
+
 export default function AIVideoScriptGenerator() {
     const [prompt, setPrompt] = useState('');
     const [videoType, setVideoType] = useState('Select video type...');
@@ -1060,3 +1073,6 @@ export default function AIVideoScriptGenerator() {
         </div>
     );
 }
+
+
+ 
