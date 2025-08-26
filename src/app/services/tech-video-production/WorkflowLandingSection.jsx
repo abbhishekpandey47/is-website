@@ -33,7 +33,7 @@ export default function WorkflowLandingSection() {
                             <div className="flex justify-center lg:justify-start">
                                 <Link
                                     href="/tools/ai-script-generator"
-                                    className="group bg-[#5f64ff] text-black font-semibold px-8 py-4 rounded-full flex items-center space-x-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25">
+                                    className="group bg-[#5f64ff] text-black font-semibold px-6 py-3 rounded-full flex items-center space-x-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25">
                                     <span>Learn more</span>
                                     <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
                                 </Link>
