@@ -38,6 +38,7 @@ import Video from "./video.jsx";
 import RecentWork from "./recent-work.jsx";
 import PeopleFocused from "./peopleFocused.jsx";
 import ScriptGen from "./scriptGen.jsx";
+import WorkflowLandingSection from "./WorkflowLandingSection.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 
@@ -493,6 +494,19 @@ const page = () => {
 
           <Video />
         </div>
+        
+        
+        <div
+        className="flex flex-col gap-10 mt-24"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
+
+          <WorkflowLandingSection />
+        </div>
 
          <div
         className="flex flex-col gap-10"
@@ -571,172 +585,6 @@ const page = () => {
 
         <DarkGlass />
       </div>
-
-      {/* <div className="flex flex-col gap-10 mt-24 mb-16"
-        style={{
-          background: "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
-        }}
-        
-      >
-        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 pt-0.5 mb-5"></div>
-
-      <div className="flex justify-center pt-10 service1VideoItem">
-        <div className="rounded-lg p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200">
-          <iframe
-            className="rounded-lg max-md:w-[630px] max-md:h-[359px] max-sm:w-[350px] max-sm:h-[181px] max-lg:w-[760px] max-lg:h-[439px] shadow-3xl relative p-[2px] bg-gradient-to-r from-purple-600 via-blue-500 to-slate-200"
-            width="950"
-            height="550"
-            src={`https://www.youtube.com/embed/ICUGIdqzmYg`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title="Embedded youtube"
-          />
-        </div>
-      </div>
-      </div> */}
-      {/* <div className="flex justify-center w-full flex-col items-center">
-        <div className="max-w-[1450px] mx-auto flex justify-center flex-col items-center gap-5 text-center">
-          <div className="divider-line divider-top max-lg:hidden" />
-          <div className="divider-line divider-left max-lg:hidden" />
-          <div className="divider-line divider-right max-lg:hidden" />
-          <HowWorks
-            mainHeading="Technical Videos Showcasing <span class='specialtext'>Hands-On Use Cases</span>"
-            subHeading="Steps for Video Production"
-            serviceArr={serviceArrHowWorks}
-          />
-          <div className=" w-6/5 m-auto flex flex-col gap-4 max-sm:gap-2">
-            <div className="w-full text-center pt-20 text-3xl quicksand-bold text-[wheat]">
-              <h2>Steps for Video Production</h2>
-            </div>
-          </div>
-          <div className="pt-5" />
-          <MarqueeDemo />
-        </div> */}
-
-      {/* <div className="max-w-[1450px] mx-auto flex justify-center flex-col items-center gap-5 text-center">
-          <div className="divider-line divider-left max-lg:hidden" />
-          <div className="divider-line divider-right max-lg:hidden" />
-          <HowWorks
-            mainHeading="AI-Generated Videos Enhanced with <span class='specialtext'>Human Touch</span>"
-            subHeading=""
-            serviceArr={serviceArrHowWorks2}
-          />
-        </div> 
-      </div> */}
-      {/* <div className="relative bg-[url('https://cdn.prod.website-files.com/62fe4c0cf9e612b304ecd08b/662837ec30851f0543c18f14_Grid3.svg')]  top-10">
-        <div className="flex justify-center w-full pt-32 flex-col gap-10">
-          <div>
-            <h1 className="text-center text-white text-7xl quicksand-bold max-sm:text-[3.5rem]">
-              Editorials{" "}
-              <span className='relative bg-gradient-to-br from-[#3c00e2] to-[#6530fb] bg-clip-text text-transparent after:content-[""] after:w-8 after:h-8 after:absolute after:top-2 after:right-[-20px] after:bg-[url("https://assets-global.website-files.com/63ea91a878b2a06196ffc825/6574480f9f60d7965d70b4b0_v2_highlight-image.svg")] after:bg-no-repeat after:bg-contain '>
-                and Podcasts
-              </span>
-            </h1>
-          </div>
-          <div className="flex justify-center">
-            <p className="text-center text-white quicksand-light w-1/2 max-md:w-3/4 max-sm:w-4/5">
-              Our in-house engineers specialize in SaaS video production,
-              creating high-quality, technically detailed videos that delve into
-              the nuanced use cases of your products. These are not just
-              overviews but instructional guides that demonstrate how your
-              products solve real-world infrastructure, security, or
-              data-related problems.
-            </p>
-          </div>
-        </div>
-      </div> */}
-      {/* <div className="w-full flex justify-center pt-20 max-md:pt-28 text-white">
-        <label className="input h-[3.5rem] input-bordered flex items-center gap-2 w-1/3 bg-transparent max-sm:w-[80%] border-white border-2 blogLabelSearchClass">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="h-6 w-6 opacity-70"
-          >
-             <path
-              fillRule="evenodd"
-              d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-              clipRule="evenodd"
-            />
-          </svg>
-          <input
-            type="text"
-            className="grow"
-            placeholder="search..."
-            value={searchData}
-            onChange={handleInputChange}
-          />
-        </label> */}
-
-      {/* <input type="text" placeholder="Search..." className="input input-bordered w-1/3 " /> */}
-      {/* </div> */}
-
-      {/* <div className="w-full flex justify-center pt-20 pb-10 text-white">
-        <div className="p-2 py-1 border-[#fff] border-2 rounded-full max-sm:w-[90%]">
-          <TabDiv activeTab={activeTab} setActiveTab={setActiveTab} />
-        </div>
-      </div>
-      <div className="max-w-[1450px] mx-auto justify-center flex pt-12">
-        <div
-          className="w-[90%] flex flex-wrap gap-5 justify-center"
-          id="youtubeSectionIdService"
-        >
-          {ytInfo.map((item) => {
-            return (
-              <YtCard
-                ytContentLink={ytContentLink}
-                setYtContentLink={setYtContentLink}
-                handleOnOpen={handleOnOpen}
-                item={item}
-              />
-            );
-          })}
-        </div>
-      </div>
-      <PopupVideo ytContentLink={ytContentLink} handleOnClose={handleOnClose} />
-      <div className="py-12">
-        <Pagination>
-          <PaginationContent>
-            {Number(pageNum) - 1 > 0 && (
-              <PaginationItem>
-                <PaginationPrevious
-                  href={`?page=${
-                    Number(pageNum) - 1
-                  }&totalItem=${totalItem}&prevTab=${activeTab}`}
-                />
-              </PaginationItem>
-            )}
-            {paginArr.map((item, index) => {
-              return (
-                <PaginationItem key={item}>
-                  <PaginationLink
-                    isActive={pageNum == item ? true : false}
-                    href={`?page=${item}&totalItem=${totalItem}&prevTab=${activeTab}`}
-                  >
-                    {item}
-                  </PaginationLink>
-                </PaginationItem>
-              );
-            })}
-
-            {Number(pageNum) + 1 <= paginArr[paginArr.length - 1] && (
-              <>
-                <PaginationItem>
-                  <PaginationEllipsis />
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationNext
-                    href={`?page=${
-                      Number(pageNum) + 1
-                    }&totalItem=${totalItem}&prevTab=${activeTab}`}
-                  />
-                </PaginationItem>
-              </>
-            )}
-          </PaginationContent>
-        </Pagination>
-      </div> */}
 
       <div
         className="flex flex-col gap-10 mt-24 mb-16"

@@ -265,15 +265,16 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
         <div className="fixed inset-0 /80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
                 {/* Header */}
-                <div className="lg:flex items-center justify-center lg:justify-between p-6 border-b border-gray-700 bg-gradient-to-r from-purple-900/50 to-indigo-900/50">
-                    <div className="lg:flex my-4 md:my-0 items-center justify-center space-x-3">
-                        <div className="flex items-center justify-center bg-[#6c5ce8]/20 rounded-full px-4 py-2 border border-[#6c5ce8]/40">
-                            <Sparkles className="h-5 w-5 mr-2" />
-                            <span className="font-[quicksand] text-sm text-white font-bold">
+                <div className="lg:flex items-center justify-between p-6 border-b border-gray-700 bg-gradient-to-r from-purple-900/50 to-indigo-900/50">
+                    <div className="flex-1 lg:flex my-4 md:my-0 items-center justify-center lg:justify-start space-y-3 lg:space-y-0 lg:space-x-3 min-w-0">
+                        <div className="flex items-center justify-center bg-[#6c5ce8]/20 rounded-2xl px-4 py-3 border border-[#6c5ce8]/40 min-w-0 max-w-full lg:max-w-md">
+                            <Sparkles className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
+                            <span className="font-[quicksand] text-sm text-white font-bold break-words leading-tight">
                                 {displayTitle}
                             </span>
                         </div>
-                        <div className="flex my-4 md:my-0 items-center justify-center space-x-4 text-sm text-gray-400">
+
+                        <div className="flex items-center justify-center space-x-4 text-sm text-gray-400 flex-shrink-0">
                             <div className="flex items-center">
                                 <Clock className="h-4 w-4 mr-1" />
                                 <span>~{estimatedReadTime} min read</span>
@@ -284,7 +285,8 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center justify-center space-x-2">
+
+                    <div className="flex items-center justify-center lg:justify-end space-x-2 mt-4 lg:mt-0 flex-shrink-0 relative">
                         <button
                             onClick={copyToClipboard}
                             className="flex items-center bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-xl transition-colors duration-200 text-sm font-medium"
@@ -301,7 +303,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                         </button>
                         <button
                             onClick={onClose}
-                            className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-200 absolute lg:static top-8 right-4"
+                            className="w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-200 lg:static absolute top-[-2rem] right-0 lg:top-auto lg:right-auto hover:bg-gray-800"
                         >
                             <X className="w-5 h-5 text-gray-400" />
                         </button>
@@ -467,7 +469,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                 </div>
 
                 {/* Footer */}
-               <div className="border-t border-gray-700 p-4 bg-gray-800/50">
+                <div className="border-t border-gray-700 p-4 bg-gray-800/50">
                     <div className="flex items-center justify-between text-sm text-gray-400">
                         <div className="flex items-center">
                             <Sparkles className="h-4 w-4 mr-2 text-[#6c5ce8]" />
@@ -1027,13 +1029,13 @@ export default function AIVideoScriptGenerator() {
                         </div>
                     </div>
                 </div>
-<div className="relative max-w-2xl mx-auto mb-8">
-  <div 
-    className="relative rounded-2xl shadow-2xl overflow-hidden ai-border"
-    style={{
-      '--glow-angle': '90deg',
-    }}
-  >                        <textarea
+                <div className="relative max-w-2xl mx-auto mb-8">
+                    <div
+                        className="relative rounded-2xl shadow-2xl overflow-hidden ai-border"
+                        style={{
+                            '--glow-angle': '90deg',
+                        }}
+                    >                        <textarea
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
                             placeholder="e.g. AI Video Scripts for Technical Startups."
@@ -1091,4 +1093,4 @@ export default function AIVideoScriptGenerator() {
 }
 
 
- 
+

@@ -92,12 +92,12 @@ Prompt: "[Exact prompt used in testing]"
     id: 2,
     videoType: "Product Demo",
      intro: "In this video, we are going to see how thousands of [type of companies] are using [product name] to [main benefit] — and how you and your team can [main action] with [product name].",
-    title: "Software Demo Video Script",
+    title: "Software Demo Video Script Software Demo Video Script Software Demo Video Script Software Demo Video ScriptSoftware Demo Video Script",
     duration: "5 min",
     author: "[Author or Presenter Name]",
     category: "SaaS",
 
-    content: `# [Main Video Title]
+    content: `# Software Demo Video Script
 
 ## Hook [00:00–00:10]
 In this video, we are going to see how thousands of [type of companies] are using [product name] to [main benefit] — and how you and your team can [main action] with [product name].
