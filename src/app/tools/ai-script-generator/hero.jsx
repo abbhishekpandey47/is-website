@@ -716,11 +716,16 @@ export default function AIVideoScriptGenerator() {
         'Tool Comparison': [
             'GitHub Copilot',
             'Codeium',
-            'Gemini',
+            'Gemini (Google)',
             'OpenAI GPT',
-            'Claude',
+            'Claude(Anthropic)',
             'Tabnine',
-            'Replit Ghostwriter'
+            'Replit Ghostwriter',
+            'v0.dev',
+            'Cursor',
+            'Cursor AI',
+            'Qodo',
+            'Cline'
         ],
 
         'Feature Demo': [
@@ -729,8 +734,11 @@ export default function AIVideoScriptGenerator() {
             'Supabase',
             'Firebase',
             'Descript',
-            'Canva',
-            'GitHub Copilot'
+            'GitHub Copilot',
+            'Neon',
+            'PlanetScale',
+            'Neon'
+
         ],
 
         'Coding Walkthrough': [
@@ -740,7 +748,8 @@ export default function AIVideoScriptGenerator() {
             'Node.js',
             'TypeScript',
             'Docker',
-            'Postman'
+            'Postman',
+            'Python'
         ],
 
         'Bug Fixing Session': [
@@ -750,7 +759,10 @@ export default function AIVideoScriptGenerator() {
             'Postman',
             'Jest',
             'GitHub Copilot',
-            'Codeium'
+            'Codeium',
+            'Jest',
+            'Pytest'
+
         ],
 
         'Prompt Testing': [
@@ -770,7 +782,10 @@ export default function AIVideoScriptGenerator() {
             'Jira',
             'Zapier',
             'Google Calendar',
-            'GitHub Copilot'
+            'GitHub Copilot',
+            'Linear',
+            'Asana'
+
         ],
 
         'Behind the Scenes': [
@@ -780,7 +795,8 @@ export default function AIVideoScriptGenerator() {
             'Descript',
             'Canva',
             'GitHub',
-            'Vercel'
+            'Vercel',
+            'Whimsical'
         ],
 
         'Real-world Scenario Demo': [
@@ -986,7 +1002,7 @@ export default function AIVideoScriptGenerator() {
                                 multiSelect={false}
                             />
                             <div className="flex flex-col min-w-[300px]">
-                                <label className="font-[quicksand] font-semibold">Insert Links</label>
+                                <label className="font-[quicksand] font-semibold">Tool / Reference Link</label>
                                 <input
                                     type="text"
                                     onChange={(e) => {
