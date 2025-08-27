@@ -27,14 +27,6 @@ export default function RootLayout({ children }) {
                         href='https://fonts.googleapis.com/css2?family=Quicksand&display=swap'
                     />
                 </noscript>
-
-                {/* Preload main CSS if possible (adjust path if needed) */}
-                <link
-                    rel='preload'
-                    as='style'
-                    href='/globals.css'
-                    onLoad="this.onload=null;this.rel='stylesheet'"
-                />
                 <noscript>
                     <link rel='stylesheet' href='/globals.css' />
                 </noscript>
