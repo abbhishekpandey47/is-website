@@ -8,12 +8,12 @@ import { Textarea } from "../../../../Components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../Components/ui/select";
 import { SidebarTrigger } from "../../../../Components/ui/sidebar";
 import { UserProfile } from "../../../../Components/UserProfile";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { Save, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const AddPostPage = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { toast } = useToast();
   
   const [formData, setFormData] = useState({
@@ -57,7 +57,7 @@ const AddPostPage = () => {
     });
 
     // Navigate back to posts page
-    navigate("/crm/posts");
+    router.push("/crm/posts");
   };
 
   return (
