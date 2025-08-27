@@ -22,8 +22,8 @@ export function ClientLayoutWrapper({ children }) {
     const CrispWithNoSSR = dynamic(() => import('../Components/chatbot'));
 
     const pathname = usePathname();
-    const hideNavbar = pathname === '/technical-writing-services-b2b-saas';
-    const hideNavBar2 = pathname === '/services/webflow-agency';
+    const hideNavbar = pathname === '/technical-writing-services-b2b-saas' || pathname.startsWith('/crm');
+    const hideNavBar2 = pathname === '/services/webflow-agency' || pathname.startsWith('/crm');
     const hideNavBar3 = pathname === '/tools/reddit-comment-generator';
     const hideNavBarAndFooter = pathname === '/tools/reddit-tools';
     const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2;

@@ -1,0 +1,105 @@
+'use client'
+
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import {
+  BarChart3,
+  MessageSquare,
+  TrendingUp,
+  Settings,
+  Users,
+  Calendar,
+  Tag,
+  FileText
+} from "lucide-react"
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from "./ui/sidebar"
+import { cn } from "@/lib/utils"
+
+const mainItems = [
+  { title: "Dashboard", url: "/crm", icon: BarChart3 },
+  { title: "Reddit Posts", url: "/crm/posts", icon: MessageSquare },
+  { title: "Analytics", url: "/crm/analytics", icon: TrendingUp },
+  { title: "Communities", url: "/crm/communities", icon: Users },
+]
+
+const managementItems = [
+  { title: "Categories", url: "/crm/categories", icon: Tag },
+  { title: "Schedule", url: "/crm/schedule", icon: Calendar },
+  { title: "Templates", url: "/crm/templates", icon: FileText },
+  { title: "Settings", url: "/crm/settings", icon: Settings },
+]
+
+export function AppSidebar() {
+  const { open } = useSidebar()
+  const pathname = usePathname()
+
+  const isActive = (href) => {
+    if (href === "/crm") return pathname === "/crm"
+    return pathname === href || pathname.startsWith(href + "/crm/")
+  }
+
+  const renderItem = (item) => {
+    const active = isActive(item.url)
+    return (
+      <SidebarMenuItem key={item.title}>
+        {/* asChild lets SidebarMenuButton pass its styles/props to Link */}
+        <SidebarMenuButton asChild>
+          <Link
+            href={item.url}
+            aria-current={active ? "page" : undefined}
+            className={cn(
+              "flex items-center w-full px-3 py-2 rounded-md transition-colors",
+              active
+                ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+                : "hover:bg-sidebar-accent/50 text-sidebar-foreground"
+            )}
+          >
+            <item.icon className="mr-3 h-4 w-4" />
+            {open && <span>{item.title}</span>}
+          </Link>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    )
+  }
+
+  return (
+    <Sidebar className="border-sidebar-border">
+      <SidebarContent className="bg-sidebar text-sidebar-foreground">
+        {/* Main Navigation */}
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-sidebar-foreground/70 text-xs font-medium uppercase tracking-wider mb-2">
+            Main
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {mainItems.map(renderItem)}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Management */}
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-sidebar-foreground/70 text-xs font-medium uppercase tracking-wider mb-2">
+            Management
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {managementItems.map(renderItem)}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+  )
+}
