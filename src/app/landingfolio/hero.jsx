@@ -6,7 +6,7 @@ export default function Hero() {
     <svg class="absolute inset-0 -z-10 h-full w-full stroke-white/5 [mask-image:radial-gradient(75%_50%_at_top_center,white,transparent)]" aria-hidden="true"><defs><pattern id="hero" width="80" height="80" x="50%" y="-1" patternUnits="userSpaceOnUse"><path d="M.5 200V.5H200" fill="none"></path></pattern></defs><rect width="100%" height="100%" stroke-width="0" fill="url(#hero)"></rect></svg>
     </>
   return (
-    <section className="relative flex items-center justify-center min-h-screen bg-gradient-to-b from-[#0a0f1c] to-black text-center px-6">
+    <section className="relative mt-28 flex items-center justify-center bg-gradient-to-b from-[#0a0f1c] to-black text-center px-6">
       {/* Grid Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:30px_30px]">
         <bgSvg />
