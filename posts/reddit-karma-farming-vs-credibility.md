@@ -115,6 +115,7 @@ One thing about Reddit is that users love talking to people. I would suggest tha
 
 * **Add Value First**  
   To achieve success on Reddit, B2B SaaS brands need to contribute knowledge instead of campaigns. Contribute value to the community, share insights, guides, and resources instead of pushing your product. For Karma farming, your company can join subreddits such as [r/developers](https://www.reddit.com/r/developers/), and [r/SaaS](https://www.reddit.com/r/SaaS/). You may also engage in genuine posts or discussions.   
+
   Scroll through the posts and comment on whichever suits your brand the best. You may want to comment on posts first and understand how engaging on Reddit works and how other B2B SaaS brands engage.   
   ![Screenshot of r/developers page on Reddit](/PostImages/reddit-karma-farming-vs-credibility/i3.png)
 
@@ -150,19 +151,19 @@ If you’re a growth leader, community marketer, or social media manager, think 
 
 ## **Frequently Asked Questions** 
 
-1. How to increase karma points on Reddit?
+Q1: How to increase karma points on Reddit?
 
 The best way to increase karma points Reddit is by consistently adding value to discussions. Instead of spamming links or self-promoting, focus on answering questions, sharing thoughtful insights, and contributing to trending conversations. Think of karma as reputation points or a user reputation score, as it reflects how much the community trusts and appreciates your contributions. For B2B SaaS brands, this means joining relevant subreddits, solving problems, and sharing authentic experiences. 
 
-2. Is Karma farming allowed on Reddit?
+Q2: Is Karma farming allowed on Reddit?
 
 **Yes**, karma farming is allowed as long as it’s done naturally and within subreddit rules. Posting memes, helpful tips, or contributing to popular threads is part of Reddit’s culture. The issue arises when users try to manipulate the system with spammy content. Redditors care about source reliability and user reputation, so karma farming without real value won’t build long-term trust. For growth-focused marketers, the goal should be to blend karma farming with credibility and using karma to gain visibility while proving reliability through consistent, authentic contributions.
 
-3. Can a brand post promotional content at all?
+Q3: Can a brand post promotional content at all?
 
 Direct promotional content rarely performs well on Reddit unless it’s shared in the right context. Most subreddits strictly forbid self-promotion, and violating that can damage your user reputation and even get you banned. Instead of plugging your product, focus on delivering value first, share case studies, experiences, or answer questions related to your expertise.
 
-4. How long does it take to see results on Reddit?
+Q4: How long does it take to see results on Reddit?
 
  Result can be expect in weeks or even months, but credibility compounds slowly will build sustainable ROI over time.
 

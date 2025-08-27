@@ -1040,7 +1040,7 @@ let postMetaData = [
         publishedOn: "2025-08-22",
         authorId: "author0005",
         category: "Informational",
-        metaDescription: "Discover how to use Reddit B2B marketing to grow your SaaS. Learn subreddit strategy, and toolsfor B2B SaaS marketing Reddit. Read now!"
+        metaDescription: "Discover how to use Reddit B2B marketing to grow your SaaS. Learn subreddit strategy and tools for B2B SaaS marketing Reddit. Read now!"
     },
     {
         title: "Karma Farming vs Credibility: What Really Drives Reddit B2B Marketing Growth",
