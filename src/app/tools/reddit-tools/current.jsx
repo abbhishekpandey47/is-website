@@ -15,6 +15,30 @@ export default function Current() {
   const [brand, setBrand] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("posts");
+  // Time range filtering (frontend only)
+  const [timeRange, setTimeRange] = useState('all'); // default to All
+  const [customFrom, setCustomFrom] = useState('');
+  const [customTo, setCustomTo] = useState('');
+
+  // time range filtering helper placed before usage
+  function filterByTime(arr) {
+    if (!timeRange || timeRange === 'all') return arr;
+    const now = Date.now();
+    if (timeRange !== 'custom') {
+      const limits = { '24h': 24, '7d': 24*7, '30d': 24*30, '90d': 24*90, '1y': 24*365 };
+      const maxH = limits[timeRange];
+      if (!maxH) return arr;
+      return arr.filter(i => (i.post_age_hours || 0) <= maxH);
+    }
+    if (!customFrom && !customTo) return arr;
+    const startTs = customFrom ? new Date(customFrom + 'T00:00:00Z').getTime() : 0;
+    const endTs = customTo ? new Date(customTo + 'T23:59:59Z').getTime() : now;
+    return arr.filter(i => {
+      const ageH = i.post_age_hours || 0;
+      const createdTs = now - ageH * 3600 * 1000;
+      return createdTs >= startTs && createdTs <= endTs;
+    });
+  }
   const [showResults, setShowResults] = useState(false);
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
@@ -210,13 +234,17 @@ export default function Current() {
   }, [activeTab, posts.length, comments.length, postsPage, commentsPage]);
 
   const pagedPosts = useMemo(() => {
+    // filter by time range first
+    const filtered = filterByTime(posts);
     const start = (postsPage - 1) * PAGE_SIZE;
-    return posts.slice(start, start + PAGE_SIZE);
-  }, [posts, postsPage]);
+    return filtered.slice(start, start + PAGE_SIZE);
+  }, [posts, postsPage, timeRange, customFrom, customTo]);
   const pagedComments = useMemo(() => {
+    const filtered = filterByTime(comments);
     const start = (commentsPage - 1) * PAGE_SIZE;
-    return comments.slice(start, start + PAGE_SIZE);
-  }, [comments, commentsPage]);
+    return filtered.slice(start, start + PAGE_SIZE);
+  }, [comments, commentsPage, timeRange, customFrom, customTo]);
+
 
   const stats = useMemo(() => {
     if (!showResults) return { totalPosts: 0, totalComments: 0, uniqueSubs: 0, totalUpvotes: 0 };
@@ -234,7 +262,17 @@ export default function Current() {
   return (
     <div className="flex-1 min-h-screen bg-gray-50 pb-16">
   <CurrentHeader />
-  <SearchPanel onSearch={handleSearch} loading={loading} buttonLabel="Search Mentions" />
+  <SearchPanel
+    onSearch={handleSearch}
+    loading={loading}
+    buttonLabel="Search Mentions"
+    timeRange={timeRange}
+    setTimeRange={setTimeRange}
+    customFrom={customFrom}
+    setCustomFrom={setCustomFrom}
+    customTo={customTo}
+    setCustomTo={setCustomTo}
+  />
       {error && (
         <div className="px-6 mt-4 text-sm text-red-600 bg-red-50 border border-red-100 rounded-md p-3">{error}</div>
       )}
@@ -261,24 +299,24 @@ export default function Current() {
       <ResultsTabs
         active={activeTab}
         setActive={setActiveTab}
-        counts={{ posts: posts.length, comments: comments.length }}
+        counts={{ posts: filterByTime(posts).length, comments: filterByTime(comments).length }}
         visible={showResults}
       />
-      <PostsList posts={pagedPosts} visible={showResults && activeTab === "posts"} />
+    <PostsList posts={pagedPosts} visible={showResults && activeTab === "posts"} />
       {showResults && activeTab === 'posts' && (
         <Pagination
           page={postsPage}
-          totalItems={posts.length}
+      totalItems={filterByTime(posts).length}
             pageSize={PAGE_SIZE}
             loading={backgroundLoading}
             onPageChange={(p) => setPostsPage(p)}
         />
       )}
-      <CommentsList comments={pagedComments} visible={showResults && activeTab === "comments"} />
+    <CommentsList comments={pagedComments} visible={showResults && activeTab === "comments"} />
       {showResults && activeTab === 'comments' && (
         <Pagination
           page={commentsPage}
-          totalItems={comments.length}
+      totalItems={filterByTime(comments).length}
           pageSize={PAGE_SIZE}
           loading={backgroundLoading}
           onPageChange={(p) => setCommentsPage(p)}
