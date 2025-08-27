@@ -2,6 +2,7 @@ import HomePage from '@/Components/HomePage/HomePage';
 import { ConfigProvider } from 'antd';
 import { headers } from 'next/headers';
 
+
 export default function Home() {
     const headersList = headers();
     const userAgent = headersList.get('user-agent') || '';
