@@ -13,14 +13,14 @@ export default function ToolsSection() {
       iconBg: "bg-blue-500/10",
       link: "/tools/roi-cal"
     },
-    {
-      id: 2,
-      title: "Outline Generator by Infrasity",
-      description: "Generate clear and tailored content outlines instantly for blogs, landing pages, and UGC scripts — built to simplify and speed up your creative flow.",
-      iconColor: "text-pink-500",
-      iconBg: "bg-pink-500/10",
-      link: "/outline-gen",
-    }
+    // {
+    //   id: 2,
+    //   title: "Outline Generator by Infrasity",
+    //   description: "Generate clear and tailored content outlines instantly for blogs, landing pages, and UGC scripts — built to simplify and speed up your creative flow.",
+    //   iconColor: "text-pink-500",
+    //   iconBg: "bg-pink-500/10",
+    //   link: "/outline-gen",
+    // }
   ];
 
   return (
