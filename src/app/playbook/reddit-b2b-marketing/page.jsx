@@ -1,6 +1,7 @@
 import DownloadSetion from "./download";
 import Hero from "./hero";
 import Cta from "./CTA";
+import Testimonials from "./testimonials";
 
 export default function Page() {
 
@@ -17,6 +18,17 @@ export default function Page() {
         <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
 
         <Hero />
+      </div>
+        <div
+        className="mb-10"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+
+        <Testimonials />
       </div>
       <div
         className="mb-10"
