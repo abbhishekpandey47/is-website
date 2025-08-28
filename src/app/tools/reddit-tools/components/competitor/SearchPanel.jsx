@@ -18,10 +18,10 @@ export default function SearchPanel({ onSearch, loading, buttonLabel = "Analyze"
 
   return (
     <div className="px-6">
-      <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+      <div className="bg-background border border-border-muted rounded-xl p-5 shadow-sm">
         <div className="flex flex-col gap-4 md:flex-row md:items-end">
           <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-white mb-1">
               Brand / Company / Domain
             </label>
             <input
@@ -30,12 +30,12 @@ export default function SearchPanel({ onSearch, loading, buttonLabel = "Analyze"
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={onKeyDown}
               placeholder="e.g. qodo, linear, competitor.com"
-              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 placeholder:text-gray-400 caret-gray-900"
+              className="w-full rounded-lg border border-border-muted bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-700 text-white placeholder:text-indigo-200 caret-white"
             />
           </div>
           <div className="grid grid-cols-2 gap-3 md:w-[430px]">
             <div className="col-span-2 md:col-span-1">
-              <label className="block text-xs font-medium text-gray-700 mb-1">Time Range</label>
+              <label className="block text-xs font-medium text-white mb-1">Time Range</label>
               <select
                 value={timeRange}
                 onChange={e=> setTimeRange(e.target.value)}

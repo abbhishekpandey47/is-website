@@ -36,7 +36,6 @@ const Dashboard = () => {
         { id: 'subredditsense', label: 'Subreddit Dashboard', icon: <BarChart2 className="w-5 h-5 stroke-gray-600" /> },
         { id: 'new-post', label: 'New Post Generator', icon: <NotebookIcon className="w-5 h-5 stroke-gray-600" /> },
         { id: 'competitor', label: 'Competitor Analysis', icon: <BarChart2 className="w-5 h-5 stroke-gray-600" /> },
-        { id: 'current', label: 'Check Current', icon: <Search className="w-5 h-5 stroke-gray-600" /> },
         { id: 'mentions', label: 'Mentions', icon: <MessageCirclePlus className="w-5 h-5 stroke-gray-600" /> },
         { id: 'credits', label: 'Credits', icon: <Sparkles className="w-5 h-5 stroke-gray-600" /> },
         { id: 'reddit-comment', label: 'Reddit Comment', icon: <MessageCircle className="w-5 h-5 stroke-gray-600" /> },
@@ -84,20 +83,20 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="relative min-h-screen bg-[#f6f8fc] flex">
+        <div className="relative min-h-screen bg-background flex">
             {/* Sidebar */}
             <div
                 className={`
     group
     absolute left-0 top-1 bottom-0 z-50
-    bg-white shadow-sm border-r border-gray-200
+    bg-sidebar shadow-sm border-r border-sidebar-border
     transition-all duration-300 ease-in-out
     ${sidebarOpen ? 'w-64' : 'w-20 hover:w-64'}
     overflow-y-auto
   `}
             >
                 <div className="p-4 md:p-4">
-                    <div className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8 mt-8 lg:mt-0">
+                    <div className="text-lg sm:text-xl font-bold text-sidebar-foreground mb-6 sm:mb-8 mt-8 lg:mt-0">
                           <Link href="/">
                         <Image
                             loading="lazy"
@@ -114,14 +113,14 @@ const Dashboard = () => {
                                 key={item.id}
                                 onClick={() => handleNavClick(item.id)}
                                 className={`w-full text-left px-3 py-2 sm:py-3 rounded-lg transition-colors flex items-center space-x-2 sm:space-x-3 text-sm sm:text-base ${activeTab === item.id
-                                    ? 'bg-blue-50 text-blue-700'
-                                    : 'text-gray-600 hover:bg-gray-50'
+                                    ? 'bg-indigo-100 text-indigo-700 font-semibold'
+                                    : 'text-gray-200 hover:bg-sidebar-accent/50 hover:text-white'
                                     }`}
                             >
-                                <span className="text-base sm:text-lg">{item.icon}</span>
+                                <span className={activeTab === item.id ? "text-base sm:text-lg text-indigo-700" : "text-base sm:text-lg text-gray-200"}>{item.icon}</span>
                                 <span
                                     className={`
-    text-[#54616e] text-[16px] font-semibold
+    ${activeTab === item.id ? "text-indigo-700" : "text-gray-200"} text-[16px] font-semibold
     whitespace-nowrap
     overflow-hidden
     transition-opacity duration-200

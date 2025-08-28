@@ -60,44 +60,42 @@ export default function PostSearch() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-black">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 py-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Reddit Post Search</h1>
-            <p className="text-gray-600">Search and discover high-quality Reddit content</p>
-          </div>
-          {/* Search Bar */}
-          <div className="relative">
-            <div className="md:flex">
-              <div className="relative flex-1">
-                <input
-                  type="text"
-                  placeholder="Enter keywords to search for posts..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-white w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black outline-none text-gray-900 placeholder-gray-500"
-                />
-                <Search className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 stroke-gray-700" />
-              </div>
-              <div className='flex items-center justify-center mt-4 md:mt-0'>
-                <button
-                  className="ml-4 px-6 py-3 bg-[#3c4199] hover:bg-[#3c4199]/90 text-white font-medium rounded-lg transition-colors min-w-[120px] flex items-center justify-center"
-                  onClick={handleSearch}
-                  disabled={loading || !searchQuery.trim()}
-                >
-                  {loading ? (
-                    <span className="flex items-center gap-2">
-                      <span className="loader inline-block w-5 h-5 rounded-full border-4 animate-spin border-white border-t-[#3c4199]" />
-                      <span>Searching...</span>
-                    </span>
-                  ) : "Search Posts"}
-                </button>
-              </div>
+    <div className="min-h-screen bg-background text-white">
+      {/* Header & Search Bar */}
+      <div className="max-w-4xl mx-auto px-4 pt-8">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-2"><span className="gradient-text">Reddit Post Search</span></h1>
+          <p className="text-foreground-muted">Search and discover high-quality Reddit content</p>
+        </div>
+        {/* Search Bar */}
+        <div className="relative">
+          <div className="md:flex">
+            <div className="relative flex-1">
+              <input
+                type="text"
+                placeholder="Enter keywords to search for posts..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="bg-background w-full px-4 py-3 pr-12 border border-border-muted rounded-lg focus:ring-2 focus:ring-indigo-700 outline-none text-white placeholder-indigo-200"
+              />
+              <Search className="absolute right-4 top-1/2 transform -translate-y-1/2 text-indigo-200 w-5 h-5 stroke-indigo-400" />
             </div>
-            {error && <div className="text-red-400 mt-2">{error}</div>}
+            <div className='flex items-center justify-center mt-4 md:mt-0'>
+              <button
+                className="ml-4 px-6 py-3 bg-indigo-700 hover:bg-indigo-800 text-white font-medium rounded-lg transition-colors min-w-[120px] flex items-center justify-center"
+                onClick={handleSearch}
+                disabled={loading || !searchQuery.trim()}
+              >
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <span className="loader inline-block w-5 h-5 rounded-full border-4 animate-spin border-white border-t-indigo-700" />
+                    <span>Searching...</span>
+                  </span>
+                ) : "Search Posts"}
+              </button>
+            </div>
           </div>
+          {error && <div className="text-red-400 mt-2">{error}</div>}
         </div>
       </div>
 
@@ -106,44 +104,44 @@ export default function PostSearch() {
         <div className="space-y-6">
           {posts.length > 0 ? (
             posts.map((post) => (
-              <div key={post.id} className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow">
+              <div key={post.id} className="glass-card rounded-lg border border-border-muted p-6 hover:shadow-md transition-shadow text-white">
                 {/* Post Header */}
-                <div className="flex items-center text-sm text-gray-500 mb-3">
-                  <span className="font-medium text-gray-700">{post.subreddit}</span>
-                  <span className="mx-2 text-black">•</span>
-                  <Clock className="w-4 h-4 mr-1 stroke-gray-600" />
-                  <span className='text-black'>{post.timeAgo}</span>
+                <div className="flex items-center text-sm text-foreground-muted mb-3">
+                  <span className="font-medium text-white">{post.subreddit}</span>
+                  <span className="mx-2 text-white">•</span>
+                  <Clock className="w-4 h-4 mr-1 stroke-white" />
+                  <span className='text-white'>{post.timeAgo}</span>
                 </div>
                 {/* Post Title */}
                 <a href={post.post_url} target="_blank" rel="noopener noreferrer">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-2 hover:text-blue-600 cursor-pointer">
+                  <h2 className="text-xl font-semibold text-white mb-2 hover:text-indigo-400 cursor-pointer">
                     {post.title}
                   </h2>
                 </a>
                 {/* Post Details (summary/content) - always show section */}
                 <div className="mb-4">
-                  <div className="font-semibold text-gray-800 mb-1">Post Details:</div>
-                  <div className="text-gray-700 text-base leading-relaxed whitespace-pre-line">
+                  <div className="font-semibold text-white mb-1">Post Details:</div>
+                  <div className="text-white text-base leading-relaxed whitespace-pre-line">
                     {post.description?.trim()
                       ? post.description
                       : (post.post_summary?.trim() || post.post_content?.trim() || "No details available for this post.")}
                   </div>
                 </div>
                 {/* Post Stats */}
-                <div className="flex items-center gap-6 text-gray-500">
+                <div className="flex items-center gap-6 text-foreground-muted">
                   <div className="flex items-center gap-2">
-                    <ArrowUp className="h-4 w-4 stroke-gray-600" />
-                    <span className="text-sm font-medium text-black">{post.upvotes} upvotes</span>
+                    <ArrowUp className="h-4 w-4 stroke-white" />
+                    <span className="text-sm font-medium text-white">{post.upvotes} upvotes</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <MessageCircle className="w-4 h-4 stroke-gray-600" />
-                    <span className="text-sm font-medium text-black">{post.comments} comments</span>
+                    <MessageCircle className="w-4 h-4 stroke-white" />
+                    <span className="text-sm font-medium text-white">{post.comments} comments</span>
                   </div>
                 </div>
               </div>
             ))
           ) : (
-            <div className="text-gray-400">No results yet.</div>
+            <div className="text-center text-white py-8">No posts found.</div>
           )}
         </div>
       </div>
