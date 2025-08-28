@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../../Components/ui/card";
 import { Input } from "../../../../Components/ui/input";
@@ -11,11 +11,16 @@ import { UserProfile } from "../../../../Components/UserProfile";
 import { useRouter } from "next/navigation";
 import { Save, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabaseClient";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebaseClient";
 
 const AddPostPage = () => {
+  const [firebaseUser, setFirebaseUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { toast } = useToast();
-  
+
   const [formData, setFormData] = useState({
     category: "",
     title: "",
@@ -25,40 +30,82 @@ const AddPostPage = () => {
     kimsVersion: "",
     datePosted: "",
     postedLink: "",
-    currentStatus: "pending"
+    currentStatus: "pending",
   });
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setFirebaseUser(user);
+      setLoading(false);
+      if (!user) {
+        router.push("/auth/signin");
+      }
+    });
+
+    return () => unsubscribe();
+  }, [router]);
+
   const handleInputChange = (field, value) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Basic validation
+
+    if (!firebaseUser) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in before adding a post.",
+        variant: "destructive",
+      });
+      router.push("/auth/signup");
+      return;
+    }
+
     if (!formData.category || !formData.title || !formData.url) {
       toast({
         title: "Missing Information",
         description: "Please fill in category, title, and URL fields.",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
 
-    // Here you would typically save to a database
-    console.log("Saving post:", formData);
-    
+    // Save to Supabase
+    const { data, error } = await supabase.from("posts").insert([
+      {
+        category: formData.category,
+        title: formData.title,
+        url: formData.url,
+        status: formData.status,
+        engagement_text: formData.engagementText,
+        kims_version: formData.kimsVersion,
+        date_posted: formData.datePosted ? new Date(formData.datePosted) : null,
+        posted_link: formData.postedLink,
+        current_status: formData.currentStatus,
+        user_id: firebaseUser.uid, // link post to Firebase user
+      },
+    ]);
+
+    if (error) {
+      console.error("Error saving post:", error);
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+      return;
+    }
+
     toast({
       title: "Post Added Successfully!",
-      description: "Your Reddit post has been added to the tracker.",
+      description: "Your post has been added to the tracker.",
     });
 
-    // Navigate back to posts page
     router.push("/crm/posts");
   };
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="min-h-screen bg-background">
