@@ -136,7 +136,7 @@ const SignupForm = () => {
         <div className="w-full max-w-sm">
           <div className="mb-8 text-center">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Image src="/icons/infrasity-small-logo.svg" alt="logo" width={28} height={28} />
+              <Image src="/CommLogo/infrasity-small-logo.svg" alt="logo" width={28} height={28} />
             </div>
             <h1 className="text-xl font-semibold text-white mb-1">
               Create your Infrasity account

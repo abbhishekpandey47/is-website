@@ -82,7 +82,7 @@ const SigninForm = () => {
         <div className="flex flex-col items-center justify-center w-full gap-5">
           {/* Logo */}
           <Image
-            src="/icons/infrasity-small-logo.svg"
+            src="/CommLogo/infrasity-small-logo.svg"
             alt="logo"
             width={28}
             height={28}
@@ -101,7 +101,7 @@ const SigninForm = () => {
             onClick={handleGoogleSignin}
             className="flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-gray-800 text-gray-200 font-medium border border-gray-700 hover:bg-gray-700 transition"
           >
-            <Image src="/icons/google-icon.svg" alt="google" width={16} height={16} priority />
+            <Image src="/CommLogo/google-icon.svg" alt="google" width={16} height={16} priority />
             Continue with Google
           </button>
 

@@ -25,7 +25,7 @@ export function ClientLayoutWrapper({ children }) {
     const hideNavbar = pathname === '/technical-writing-services-b2b-saas' || pathname.startsWith('/crm') || pathname.startsWith('/auth');
     const hideNavBar2 = pathname === '/services/webflow-agency' || pathname.startsWith('/crm') || pathname.startsWith('/auth') ;
     const hideNavBar3 = pathname === '/tools/reddit-comment-generator';
-    const hideNavBarAndFooter = pathname === '/tools/reddit-tools' || pathname.startsWith('/auth');
+    const hideNavBarAndFooter = pathname === '/tools/reddit-tools' || pathname.startsWith('/auth') || pathname.startsWith('/crm');
     const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2;
     const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar;
 

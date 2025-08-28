@@ -203,10 +203,11 @@ const toolsTab = [
     hrefLink: "/tools/roi-cal",
     menuName: "ROI Calculator",
   },
+  // {
+  //   hrefLink: "/outline-gen",
+  //   menuName: "Outline Generator",
+  // },
   {
-    hrefLink: "/outline-gen",
-    menuName: "Outline Generator",
-  },{
     hrefLink: "/tools/reddit-comment-generator",
     menuName: "Reddit Comment Generator",
   },
@@ -557,7 +558,7 @@ const Navbar = () => {
                           </Link>
                         </MenuItem2>
 
-                        <MenuItem2>
+                        {/* <MenuItem2>
                           <Link
                             onClick={(e) => {
                               e.preventDefault();
@@ -577,7 +578,7 @@ const Navbar = () => {
                           >
                             <div>Outline Generator</div>
                           </Link>
-                        </MenuItem2>
+                        </MenuItem2> */}
                         <MenuItem2>
                           <Link
                             onClick={(e) => {
