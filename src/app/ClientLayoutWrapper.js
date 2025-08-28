@@ -22,10 +22,10 @@ export function ClientLayoutWrapper({ children }) {
     const CrispWithNoSSR = dynamic(() => import('../Components/chatbot'));
 
     const pathname = usePathname();
-    const hideNavbar = pathname === '/technical-writing-services-b2b-saas' || pathname.startsWith('/crm');
-    const hideNavBar2 = pathname === '/services/webflow-agency' || pathname.startsWith('/crm');
+    const hideNavbar = pathname === '/technical-writing-services-b2b-saas' || pathname.startsWith('/crm') || pathname.startsWith('/auth');
+    const hideNavBar2 = pathname === '/services/webflow-agency' || pathname.startsWith('/crm') || pathname.startsWith('/auth') ;
     const hideNavBar3 = pathname === '/tools/reddit-comment-generator';
-    const hideNavBarAndFooter = pathname === '/tools/reddit-tools';
+    const hideNavBarAndFooter = pathname === '/tools/reddit-tools' || pathname.startsWith('/auth');
     const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2;
     const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar;
 

@@ -1,7 +1,7 @@
 'use client'
 
 
-import { useState } from "react";
+import { useState, useRef, useEffect   } from "react";
 import { Button } from "../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../Components/ui/card";
 import { SidebarTrigger } from "../../Components/ui/sidebar";
@@ -11,6 +11,10 @@ import { SearchFilters } from "../../Components/SearchFilters";
 import { UserProfile } from "../../Components/UserProfile";
 import { useRouter } from "next/navigation";
 import { Plus, BarChart3 } from "lucide-react";
+import { signOutUser } from "@/lib/firebaseClient";
+
+import LoaderWater from "@/Components/LoaderWater";
+
 
 // Mock data for Reddit posts
 const mockPosts = [
@@ -59,6 +63,33 @@ const Index = () => {
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [viewMode, setViewMode] = useState('list');
 
+  const [refreshToken, setRefreshToken] = useState();
+  const exampleSectionRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const refreshToken = localStorage.getItem('refresh_token');
+    if (refreshToken) {
+      setLoading(false);
+      setRefreshToken(refreshToken);
+      console.log(refreshToken);
+    } else {
+      setLoading(false);
+      signOutUser().then(() => {
+        // localStorage.removeItem('token');
+        // localStorage.removeItem('refresh_token');
+        router.push("/auth/signup");
+      });
+    }
+  }, [router]);
+
+  const handleScrollToExampleSection = () => {
+    if (exampleSectionRef.current) {
+      exampleSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const statusCounts = {
     approved: 3,
     pending: 0,
@@ -79,7 +110,10 @@ const Index = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+    {loading ? <LoaderWater loadingMessage={"Loading please wait..."} /> : (
+        !loading && refreshToken ?
+    <div className="bg-background">
       {/* Header with Sidebar Trigger */}
       <header className="border-b border-border bg-card">
         <div className="flex items-center justify-between px-6 py-4">
@@ -147,7 +181,9 @@ const Index = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </div>  : <LoaderWater loadingMessage={"Loading please wait..."} />
+      )}
+    </>
   );
 };
 
