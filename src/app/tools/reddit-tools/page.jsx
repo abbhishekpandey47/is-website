@@ -19,7 +19,6 @@ import {
     MessageCircle,
     MessageCirclePlus,
     NotebookIcon,
-    Search,
     SearchIcon,
     Sparkles
 } from 'lucide-react';
