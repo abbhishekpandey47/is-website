@@ -1,33 +1,30 @@
-'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+'use client';
+import PostSearch from './postSearch';
+import Page from './reddit-comment-generator/page';
+
 import Image from 'next/image';
-import Home2 from './home';
-import NewPost from './newPost';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import Competitor from './competitor';
 import Current from './current';
+import Home2 from './home';
 import Mentions from './mentions';
-import { useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import NewPost from './newPost';
 
 import {
-    Home,
-    Sparkles,
     BarChart2,
-    Search,
+    Home,
     MessageCircle,
-    NotebookIcon,
-    PersonStanding,
-    MessageCircleIcon,
     MessageCirclePlus,
-    SearchIcon
+    NotebookIcon,
+    Search,
+    SearchIcon,
+    Sparkles
 } from 'lucide-react';
 import Credits from './credits';
-import Page from './reddit-comment-generator/page';
-import PostSearch from './postSearch';
-
+import SubredditSenseDashboard from './subredditsense';
 
 const Dashboard = () => {
     const router = useRouter();
@@ -36,6 +33,7 @@ const Dashboard = () => {
 
     const navigationItems = [
         { id: 'home', label: 'Home', icon: <Home className="w-5 h-5 stroke-gray-600" /> },
+        { id: 'subredditsense', label: 'Subreddit Dashboard', icon: <BarChart2 className="w-5 h-5 stroke-gray-600" /> },
         { id: 'new-post', label: 'New Post Generator', icon: <NotebookIcon className="w-5 h-5 stroke-gray-600" /> },
         { id: 'competitor', label: 'Competitor Analysis', icon: <BarChart2 className="w-5 h-5 stroke-gray-600" /> },
         { id: 'current', label: 'Check Current', icon: <Search className="w-5 h-5 stroke-gray-600" /> },
@@ -43,8 +41,6 @@ const Dashboard = () => {
         { id: 'credits', label: 'Credits', icon: <Sparkles className="w-5 h-5 stroke-gray-600" /> },
         { id: 'reddit-comment', label: 'Reddit Comment', icon: <MessageCircle className="w-5 h-5 stroke-gray-600" /> },
         { id: 'post-search', label: 'Post Search', icon: <SearchIcon className="w-5 h-5 stroke-gray-600" /> },
-
-
     ];
 
     const searchParams = useSearchParams();
@@ -56,57 +52,32 @@ const Dashboard = () => {
         }
     }, [searchParams]);
 
-
     const handleNavClick = (tabId) => {
         setActiveTab(tabId);
         setSidebarOpen(false);
-        router.push(`?tab=${tabId}`, { scroll: false }); // Optional: scroll false keeps scroll position
+        router.push(`?tab=${tabId}`, { scroll: false });
     };
-
-
 
     const renderContent = () => {
         switch (activeTab) {
             case 'home':
-                return (
-                    <Home2 handleNavClick={handleNavClick} />
-                );
-
+                return <Home2 handleNavClick={handleNavClick} />;
+            case 'subredditsense':
+                return <SubredditSenseDashboard />;
             case 'new-post':
-                return (
-                    <NewPost />
-                );
-
+                return <NewPost />;
             case 'competitor':
-                return (
-                    <Competitor />
-                );
-
+                return <Competitor />;
             case 'current':
-                return (
-                    <Current />
-                );
-
+                return <Current />;
             case 'mentions':
-                return (
-                    <Mentions />
-                );
-
-            case "credits":
-                return (
-                    <Credits />
-                );
-
-            case "reddit-comment":
-                return (
-                    <Page />
-                );
-
-            case "post-search" :
-                return (
-                    <PostSearch />
-                )
-
+                return <Mentions />;
+            case 'credits':
+                return <Credits />;
+            case 'reddit-comment':
+                return <Page />;
+            case 'post-search':
+                return <PostSearch />;
             default:
                 return null;
         }
@@ -114,7 +85,6 @@ const Dashboard = () => {
 
     return (
         <div className="relative min-h-screen bg-[#f6f8fc] flex">
-
             {/* Sidebar */}
             <div
                 className={`
@@ -126,8 +96,6 @@ const Dashboard = () => {
     overflow-y-auto
   `}
             >
-
-
                 <div className="p-4 md:p-4">
                     <div className="text-lg sm:text-xl font-bold text-gray-900 mb-6 sm:mb-8 mt-8 lg:mt-0">
                           <Link href="/">
@@ -162,13 +130,11 @@ const Dashboard = () => {
                                 >
                                     {item.label}
                                 </span>
-
                             </button>
                         ))}
                     </nav>
                 </div>
             </div>
-
             {/* Main Content */}
             <div className="flex-1 mr-6 md:mr-0 ml-20">
                 {renderContent()}

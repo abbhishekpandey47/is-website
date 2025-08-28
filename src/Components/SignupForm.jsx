@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Eye, EyeOff, Check, Sparkles } from 'lucide-react';
+import { Check, Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { signinWithGoogle } from "@/service/firebase-auth-service";
-import { signUpWithEmail } from "@/service/firebase-auth-service";
 import { useRouter } from "next/navigation";
+import { useState } from 'react';
 import { toast } from "react-toastify";
+import { signinWithGoogle, signUpWithEmail } from "../service/firebase-auth-service";
 
 
 const SignupForm = () => {
@@ -370,7 +369,7 @@ const SignupForm = () => {
           <div className="text-left">
             <p className="text-xs text-gray-500">
               Want to learn more?{" "}
-              <Link 
+              <Link
               href="/contact"
               className="text-blue-400 hover:text-blue-300 underline">
                 Schedule a demo

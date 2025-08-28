@@ -1,17 +1,17 @@
 'use client'
 
 
-import { useState, useRef, useEffect   } from "react";
+import { BarChart3, Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { RedditPostsTable } from "../../Components/RedditPostsTable";
+import { SearchFilters } from "../../Components/SearchFilters";
+import { StatusCard } from "../../Components/StatusCard";
 import { Button } from "../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../Components/ui/card";
 import { SidebarTrigger } from "../../Components/ui/sidebar";
-import { StatusCard } from "../../Components/StatusCard";
-import { RedditPostsTable } from "../../Components/RedditPostsTable";
-import { SearchFilters } from "../../Components/SearchFilters";
 import { UserProfile } from "../../Components/UserProfile";
-import { useRouter } from "next/navigation";
-import { Plus, BarChart3 } from "lucide-react";
-import { signOutUser } from "@/lib/firebaseClient";
+import { signOutUser } from "../../lib/firebaseClient";
 
 import LoaderWater from "@/Components/LoaderWater";
 
@@ -98,14 +98,14 @@ const Index = () => {
   };
 
   const filteredPosts = mockPosts.filter(post => {
-    const matchesSearch = searchQuery === "" || 
+    const matchesSearch = searchQuery === "" ||
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.subreddit.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.keywords.some(keyword => keyword.toLowerCase().includes(searchQuery.toLowerCase()));
-    
+
     const matchesCategory = selectedCategory === "all" || post.category === selectedCategory;
     const matchesStatus = selectedStatus === "all" || post.status === selectedStatus;
-    
+
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
@@ -130,7 +130,7 @@ const Index = () => {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button 
+            <Button
               onClick={() => router.push("crm/posts/add")}
               className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >

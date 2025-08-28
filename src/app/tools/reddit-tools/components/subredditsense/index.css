@@ -1,0 +1,234 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .quicksand-light {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+  }
+  .quicksand-regular {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+  }
+  .quicksand-semibold {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+  }
+  .quicksand-bold {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+  }
+}
+
+/* Reddit Dashboard Design System - All colors, gradients, fonts, etc defined here */
+
+@layer base {
+  :root {
+    /* Base Colors (HSL) */
+    --background: 220 25% 6%;
+    --surface: 220 20% 10%;
+    --surface-elevated: 220 15% 14%;
+    --surface-glass: 220 15% 14% / 0.8;
+    --foreground: 220 15% 95%;
+    --foreground-muted: 220 10% 70%;
+    --foreground-subtle: 220 8% 50%;
+
+    /* Reddit Brand Colors */
+    --reddit-orange: 16 100% 55%;
+    --reddit-orange-muted: 16 80% 45%;
+    --reddit-blue: 212 100% 50%;
+
+    /* Status Colors */
+    --success: 142 76% 36%;
+    --success-muted: 142 76% 46%;
+    --warning: 38 92% 50%;
+    --warning-muted: 38 92% 60%;
+    --error: 0 84% 60%;
+    --error-muted: 0 84% 70%;
+
+    /* Chart Colors */
+    --chart-primary: 212 100% 50%;
+    --chart-secondary: 16 100% 55%;
+    --chart-tertiary: 142 76% 36%;
+    --chart-quaternary: 271 81% 56%;
+    --chart-quinary: 38 92% 50%;
+
+    /* Interactive States */
+    --interactive-hover: 220 15% 18%;
+    --interactive-active: 220 15% 22%;
+    --border: 220 15% 20%;
+    --border-muted: 220 10% 15%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(212 100% 50%) 0%, hsl(271 81% 56%) 100%);
+    --gradient-surface: linear-gradient(135deg, hsl(220 20% 10%) 0%, hsl(220 15% 14%) 100%);
+    --gradient-reddit: linear-gradient(135deg, hsl(16 100% 55%) 0%, hsl(16 80% 45%) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(220 25% 6% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(220 25% 6% / 0.1), 0 2px 4px -1px hsl(220 25% 6% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(220 25% 6% / 0.1), 0 4px 6px -2px hsl(220 25% 6% / 0.05);
+    --shadow-glow: 0 0 20px hsl(212 100% 50% / 0.3);
+
+    /* Typography */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+
+    /* Spacing */
+    --spacing-card: 1.5rem;
+    --spacing-section: 2rem;
+    --border-radius: 0.75rem;
+    --border-radius-lg: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--surface));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--foreground-subtle));
+  }
+}
+
+@layer components {
+  /* Glass Card Component */
+  .glass-card {
+    background: hsl(var(--surface-glass));
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Metric Card */
+  .metric-card {
+    @apply glass-card p-6 transition-all duration-300 hover:shadow-glow;
+  }
+
+  /* Interactive Elements */
+  .interactive {
+    @apply transition-all duration-200 hover:bg-interactive-hover active:bg-interactive-active;
+  }
+
+  /* Chart Container */
+  .chart-container {
+    @apply glass-card p-4;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Button Variants */
+  .btn-primary {
+    background: var(--gradient-primary);
+    @apply text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:shadow-glow;
+  }
+
+  .btn-reddit {
+    background: var(--gradient-reddit);
+    @apply text-white px-4 py-2 rounded-lg font-medium transition-all duration-200;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent border border-border text-foreground-muted px-4 py-2 rounded-lg font-medium interactive;
+  }
+
+  /* Status Indicators */
+  .status-success {
+    @apply text-success bg-success/10 border-success/20;
+  }
+
+  .status-warning {
+    @apply text-warning bg-warning/10 border-warning/20;
+  }
+
+  .status-error {
+    @apply text-error bg-error/10 border-error/20;
+  }
+}
+
+@layer utilities {
+  /* Custom Color Classes */
+  .bg-surface { background-color: hsl(var(--surface)); }
+  .bg-surface-elevated { background-color: hsl(var(--surface-elevated)); }
+  .bg-interactive-hover { background-color: hsl(var(--interactive-hover)); }
+  .bg-interactive-active { background-color: hsl(var(--interactive-active)); }
+
+  .text-foreground { color: hsl(var(--foreground)); }
+  .text-foreground-muted { color: hsl(var(--foreground-muted)); }
+  .text-foreground-subtle { color: hsl(var(--foreground-subtle)); }
+  .text-reddit-orange { color: hsl(var(--reddit-orange)); }
+  .text-success { color: hsl(var(--success)); }
+  .text-warning { color: hsl(var(--warning)); }
+  .text-error { color: hsl(var(--error)); }
+
+  .border-border { border-color: hsl(var(--border)); }
+  .border-border-muted { border-color: hsl(var(--border-muted)); }
+
+  /* Animation Classes */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s infinite;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 5px hsl(var(--reddit-orange) / 0.3); }
+  50% { box-shadow: 0 0 20px hsl(var(--reddit-orange) / 0.6); }
+}
