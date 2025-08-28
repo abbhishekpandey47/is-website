@@ -18,7 +18,7 @@ export default function SearchPanel({ onSearch, loading, buttonLabel = "Analyze"
 
   return (
     <div className="px-6">
-      <div className="bg-background border border-border-muted rounded-xl p-5 shadow-sm">
+  <div className="bg-gray-800 border border-gray-700 rounded-xl p-5 shadow-sm">
         <div className="flex flex-col gap-4 md:flex-row md:items-end">
           <div className="flex-1">
             <label className="block text-sm font-medium text-white mb-1">
@@ -39,23 +39,23 @@ export default function SearchPanel({ onSearch, loading, buttonLabel = "Analyze"
               <select
                 value={timeRange}
                 onChange={e=> setTimeRange(e.target.value)}
-                className="w-full rounded-lg border border-gray-400 bg-white px-3 py-2 text-sm text-black placeholder-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                style={{color:'#111'}}
+                className="w-full rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white placeholder-grey-100 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-700 appearance-none" style={{color:'white'}}
+                style={{color:'#ffffff'}}
               >
-                <option value="24h" className="text-black" style={{color:'#000'}}>Last 24 hours</option>
-                <option value="7d" className="text-black" style={{color:'#000'}}>Last 7 days</option>
-                <option value="30d" className="text-black" style={{color:'#000'}}>Last 30 days</option>
-                <option value="90d" className="text-black" style={{color:'#000'}}>Last 90 days</option>
-                <option value="1y" className="text-black" style={{color:'#000'}}>Last 1 year</option>
-                <option value="all" className="text-black" style={{color:'#000'}}>All time</option>
-                <option value="custom" className="text-black" style={{color:'#000'}}>Custom range</option>
+                <option value="24h" className="text-white bg-gray-900" style={{color:'#fff',background:'#1a1a1a'}}>Last 24 hours</option>
+                <option value="7d" className="text-white bg-gray-900" style={{color:'#fff',background:'#1a1a1a'}}>Last 7 days</option>
+                <option value="30d" className="text-white bg-gray-900" style={{color:'#fff',background:'#1a1a1a'}}>Last 30 days</option>
+                <option value="90d" className="text-white bg-gray-900" style={{color:'#fff',background:'#1a1a1a'}}>Last 90 days</option>
+                <option value="1y" className="text-white bg-gray-900" style={{color:'#fff',background:'#1a1a1a'}}>Last 1 year</option>
+                <option value="all" className="text-white bg-gray-900" style={{color:'#fff',background:'#1a1a1a'}}>All time</option>
+                <option value="custom" className="text-white bg-gray-900" style={{color:'#fff',background:'#1a1a1a'}}>Custom range</option>
               </select>
             </div>
             {timeRange === 'custom' && (
               <div className="col-span-2 flex gap-3">
                 <div className="flex-1">
                   <label className="block text-[10px] font-medium text-gray-600 mb-1">From</label>
-                  <input type="date" value={customFrom} onChange={e=> setCustomFrom(e.target.value)} className="w-full rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-xs text-gray-900" />
+                  <input type="date" value={customFrom} onChange={e=> setCustomFrom(e.target.value)} className="w-full rounded-lg border border-gray-700 bg-gray-900 px-2 py-1.5 text-xs text-gray-100" />
                 </div>
                 <div className="flex-1">
                   <label className="block text-[10px] font-medium text-gray-600 mb-1">To</label>
