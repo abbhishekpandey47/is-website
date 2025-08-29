@@ -1,19 +1,19 @@
 'use client';
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/lib/supabaseClient";
-import { onAuthStateChanged } from "firebase/auth";
-import { ArrowLeft, Save } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../../Components/ui/card";
 import { Input } from "../../../../Components/ui/input";
 import { Label } from "../../../../Components/ui/label";
+import { Textarea } from "../../../../Components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../Components/ui/select";
 import { SidebarTrigger } from "../../../../Components/ui/sidebar";
-import { Textarea } from "../../../../Components/ui/textarea";
 import { UserProfile } from "../../../../Components/UserProfile";
-import { auth } from "../../../../lib/firebaseClient";
+import { useRouter } from "next/navigation";
+import { Save, ArrowLeft } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabaseClient";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebaseClient";
 
 const AddPostPage = () => {
   const [firebaseUser, setFirebaseUser] = useState(null);
