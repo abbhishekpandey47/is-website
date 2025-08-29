@@ -1,210 +1,178 @@
 import { ArrowUp, Clock, ExternalLink, MessageSquare } from "lucide-react";
 import session from "../../../utils/session";
 
-const threadData = [
-	{
-		id: 1,
-		title: "Best practices for Docker deployment in production?",
-		subreddit: "r/docker",
-		author: "devops_guru",
-		karma: 15420,
-		upvotes: 245,
-		comments: 89,
-		age: "3h",
-		matchReason: "Docker + production keywords",
-		sentiment: "neutral",
-		priority: "high",
-	},
-	{
-		id: 2,
-		title: "Looking for alternatives to current monitoring solution",
-		subreddit: "r/devops",
-		author: "sysadmin_pro",
-		karma: 8960,
-		upvotes: 182,
-		comments: 64,
-		age: "5h",
-		matchReason: "Monitoring + alternatives",
-		sentiment: "negative",
-		priority: "high",
-	},
-	{
-		id: 3,
-		title: "Great experience with new deployment tools",
-		subreddit: "r/programming",
-		author: "code_enthusiast",
-		karma: 12350,
-		upvotes: 156,
-		comments: 45,
-		age: "7h",
-		matchReason: "Positive brand mention",
-		sentiment: "positive",
-		priority: "medium",
-	},
-	{
-		id: 4,
-		title: "Comparison between different CI/CD platforms",
-		subreddit: "r/webdev",
-		author: "fullstack_dev",
-		karma: 6890,
-		upvotes: 134,
-		comments: 78,
-		age: "12h",
-		matchReason: "CI/CD comparison",
-		sentiment: "neutral",
-		priority: "medium",
-	},
-	{
-		id: 5,
-		title: "Issues with current infrastructure setup",
-		subreddit: "r/sysadmin",
-		author: "ops_manager",
-		karma: 19850,
-		upvotes: 98,
-		comments: 52,
-		age: "18h",
-		matchReason: "Infrastructure issues",
-		sentiment: "negative",
-		priority: "high",
-	},
-];
+
+function getAgeString(postAgeHours) {
+	if (!postAgeHours && postAgeHours !== 0) return '';
+	if (postAgeHours < 24) return `${Math.round(postAgeHours)}h`;
+	if (postAgeHours < 24 * 7) return `${Math.round(postAgeHours / 24)}d`;
+	return `${Math.round(postAgeHours / (24 * 7))}w`;
+}
+
+function getSentiment(upvotes, downvotes) {
+	if (typeof downvotes === 'number') {
+		if (upvotes > downvotes) return 'positive';
+		if (upvotes < downvotes) return 'negative';
+		return 'neutral';
+	}
+	// fallback: positive if upvotes > 0
+	if (upvotes > 0) return 'positive';
+	return 'neutral';
+}
 
 const TopThreadsTable = (props) => {
-	session.set("topThreads", props.threads);
+    let threads = [];
+    // Prefer props.data, fallback to props.threads if provided
+    if (props.data && props.data.posts) {
+        threads = props.data.posts
+            .map((p, idx) => ({
+                id: idx,
+                title: p.post_title,
+                subreddit: p.subreddit,
+                author: p.author || '',
+                karma: p.karma || '',
+                upvotes: p.upvotes || 0,
+                comments: p.total_comments || 0,
+                age: getAgeString(p.post_age_hours),
+                matchReason: '',
+                sentiment: getSentiment(p.upvotes || 0, p.downvotes),
+                priority: (p.upvotes || 0) > 10 ? 'high' : 'medium',
+                post_url: p.post_url || '',
+            }))
+            .sort((a, b) => (b.upvotes + b.comments) - (a.upvotes + a.comments))
+            .slice(0, 10);
+    } else if (props.threads && Array.isArray(props.threads)) {
+        threads = props.threads;
+    }
+    session.set("topThreads", threads);
 
-	const getSentimentColor = (sentiment) => {
-		switch (sentiment) {
-			case "positive":
-				return "status-success";
-			case "negative":
-				return "status-error";
-			default:
-				return "text-foreground-muted";
-		}
-	};
+    const getSentimentColor = (sentiment) => {
+        switch (sentiment) {
+            case "positive": return "status-success";
+            case "negative": return "status-error";
+            default: return "text-foreground-muted";
+        }
+    };
+    const getPriorityColor = (priority) => {
+        switch (priority) {
+            case "high": return "text-error";
+            case "medium": return "text-warning";
+            default: return "text-foreground-muted";
+        }
+    };
 
-	const getPriorityColor = (priority) => {
-		switch (priority) {
-			case "high":
-				return "text-error";
-			case "medium":
-				return "text-warning";
-			default:
-				return "text-foreground-muted";
-		}
-	};
-
-	return (
-		<div className="chart-container animate-slide-up">
-			<div className="flex items-center justify-between mb-6">
-				<div>
-					<h2 className="text-xl font-semibold text-foreground mb-1">
-						Top Threads Leaderboard
-					</h2>
-					<p className="text-foreground-muted text-sm">
-						High-priority threads requiring attention
-					</p>
-				</div>
-				<button className="btn-reddit">View All Threads</button>
-			</div>
-
-			<div className="overflow-x-auto">
-				<table className="w-full">
-					<thead>
-						<tr className="border-b border-border">
-							<th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">
-								Thread
-							</th>
-							<th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">
-								Community
-							</th>
-							<th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">
-								Author
-							</th>
-							<th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">
-								Engagement
-							</th>
-							<th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">
-								Sentiment
-							</th>
-							<th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">
-								Actions
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						{threadData.map((thread) => (
-							<tr
-								key={thread.id}
-								className="border-b border-border-muted hover:bg-interactive-hover transition-colors"
-							>
-								<td className="py-4 px-2">
-									<div className="max-w-sm">
-										<h3 className="font-medium text-foreground mb-1 truncate">
-											{thread.title}
-										</h3>
-										<p className="text-xs text-foreground-muted">
-											{thread.matchReason}
-										</p>
-									</div>
-								</td>
-								<td className="py-4 px-2">
-									<span className="text-reddit-orange font-medium text-sm">
-										{thread.subreddit}
-									</span>
-								</td>
-								<td className="py-4 px-2">
-									<div>
-										<div className="text-sm font-medium text-foreground">
-											{thread.author}
-										</div>
-										<div className="text-xs text-foreground-muted">
-											{thread.karma.toLocaleString()} karma
-										</div>
-									</div>
-								</td>
-								<td className="py-4 px-2">
-									<div className="flex items-center space-x-3 text-sm">
-										<div className="flex items-center">
-											<ArrowUp className="w-3 h-3 mr-1 text-chart-primary" />
-											<span>{thread.upvotes}</span>
-										</div>
-										<div className="flex items-center">
-											<MessageSquare className="w-3 h-3 mr-1 text-chart-secondary" />
-											<span>{thread.comments}</span>
-										</div>
-										<div className="flex items-center text-foreground-muted">
-											<Clock className="w-3 h-3 mr-1" />
-											<span>{thread.age}</span>
-										</div>
-									</div>
-								</td>
-								<td className="py-4 px-2">
-									<span
-										className={`px-2 py-1 rounded text-xs font-medium border ${getSentimentColor(
-											thread.sentiment
-										)}`}
-									>
-										{thread.sentiment}
-									</span>
-								</td>
-								<td className="py-4 px-2">
-									<div className="flex items-center space-x-2">
-										<button className="btn-primary text-xs px-3 py-1">
-											Respond
-										</button>
-										<button className="btn-ghost text-xs px-3 py-1">
-											<ExternalLink className="w-3 h-3" />
-										</button>
-									</div>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
-		</div>
-	);
+    if (!threads.length) {
+        return (
+            <div className="chart-container animate-slide-up">
+                <div className="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 className="text-xl font-semibold text-foreground mb-1">
+                            Top Threads Leaderboard
+                        </h2>
+                        <p className="text-foreground-muted text-sm">
+                            High-priority threads requiring attention
+                        </p>
+                    </div>
+                </div>
+                <div className="overflow-x-auto">
+                    <table className="w-full">
+                        <thead>
+                            <tr className="border-b border-border">
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Thread</th>
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Community</th>
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Author</th>
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Engagement</th>
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Sentiment</th>
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colSpan={6} className="py-8 text-center text-foreground-muted">No threads available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
+    }
+    return (
+        <div className="chart-container animate-slide-up">
+            <div className="flex items-center justify-between mb-6">
+                <div>
+                    <h2 className="text-xl font-semibold text-foreground mb-1">
+                        Top Threads Leaderboard
+                    </h2>
+                    <p className="text-foreground-muted text-sm">
+                        High-priority threads requiring attention
+                    </p>
+                </div>
+                <button className="btn-reddit">View All Threads</button>
+            </div>
+            <div className="overflow-x-auto">
+                <table className="w-full">
+                    <thead>
+                        <tr className="border-b border-border">
+                            <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Thread</th>
+                            <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Community</th>
+                            <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Author</th>
+                            <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Engagement</th>
+                            <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Sentiment</th>
+                            <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {threads.map((thread) => (
+                            <tr key={thread.id} className="border-b border-border-muted hover:bg-interactive-hover transition-colors">
+                                <td className="py-4 px-2">
+                                    <div className="max-w-sm">
+                                        <h3 className="font-medium text-foreground mb-1 truncate">{thread.title}</h3>
+                                        <p className="text-xs text-foreground-muted">{thread.matchReason}</p>
+                                    </div>
+                                </td>
+                                <td className="py-4 px-2">
+                                    <span className="text-reddit-orange font-medium text-sm">{thread.subreddit}</span>
+                                </td>
+                                <td className="py-4 px-2">
+                                    <div>
+                                        <div className="text-sm font-medium text-foreground">{thread.author}</div>
+                                        <div className="text-xs text-foreground-muted">{thread.karma ? thread.karma.toLocaleString() + ' karma' : ''}</div>
+                                    </div>
+                                </td>
+                                <td className="py-4 px-2">
+                                    <div className="flex items-center space-x-3 text-sm">
+                                        <div className="flex items-center">
+                                            <ArrowUp className="w-3 h-3 mr-1 text-chart-primary" />
+                                            <span>{thread.upvotes}</span>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <MessageSquare className="w-3 h-3 mr-1 text-chart-secondary" />
+                                            <span>{thread.comments}</span>
+                                        </div>
+                                        <div className="flex items-center text-foreground-muted">
+                                            <Clock className="w-3 h-3 mr-1" />
+                                            <span>{thread.age}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td className="py-4 px-2">
+                                    <span className={`px-2 py-1 rounded text-xs font-medium border ${getSentimentColor(thread.sentiment)}`}>{thread.sentiment}</span>
+                                </td>
+                                <td className="py-4 px-2">
+                                    <div className="flex items-center space-x-2">
+                                        <button className="btn-primary text-xs px-3 py-1">Respond</button>
+                                        <a href={thread.post_url} target="_blank" rel="noopener noreferrer" className="btn-ghost text-xs px-3 py-1">
+                                            <ExternalLink className="w-3 h-3" />
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
 };
 
 export default TopThreadsTable;

@@ -1,25 +1,25 @@
 import * as React from "react"
 import useEmblaCarousel, {
-  type UseEmblaCarouselType,
+  // Removed type-only import
 } from "embla-carousel-react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { cn } from "../../../../../lib/subredditsense/utils"
 import { Button } from "@/components/ui/button"
 
-type CarouselApi = UseEmblaCarouselType[1]
-type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
-type CarouselOptions = UseCarouselParameters[0]
-type CarouselPlugin = UseCarouselParameters[1]
+// Removed type-only declaration
+// Removed type-only declaration
+// Removed type-only declaration
+// Removed type-only declaration
 
-type CarouselProps = {
+// Removed type-only declaration
   opts?: CarouselOptions
   plugins?: CarouselPlugin
   orientation?: "horizontal" | "vertical"
   setApi?: (api: CarouselApi) => void
 }
 
-type CarouselContextProps = {
+// Removed type-only declaration
   carouselRef: ReturnType<typeof useEmblaCarousel>[0]
   api: ReturnType<typeof useEmblaCarousel>[1]
   scrollPrev: () => void
@@ -251,7 +251,7 @@ const CarouselNext = React.forwardRef<
 CarouselNext.displayName = "CarouselNext"
 
 export {
-  type CarouselApi,
+  // Removed type-only usage
   Carousel,
   CarouselContent,
   CarouselItem,

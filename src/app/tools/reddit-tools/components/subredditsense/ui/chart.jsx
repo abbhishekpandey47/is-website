@@ -6,7 +6,7 @@ import { cn } from "../../../../../lib/subredditsense/utils"
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const
 
-export type ChartConfig = {
+// Removed type-only export
   [k in string]: {
     label?: React.ReactNode
     icon?: React.ComponentType
@@ -16,7 +16,7 @@ export type ChartConfig = {
   )
 }
 
-type ChartContextProps = {
+// Removed type-only declaration
   config: ChartConfig
 }
 
