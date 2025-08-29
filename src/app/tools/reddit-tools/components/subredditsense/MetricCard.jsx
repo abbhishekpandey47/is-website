@@ -30,7 +30,7 @@ const MetricCard = ({ title, value, change, changeType = 'neutral', icon: Icon, 
           {title}
         </h3>
         <p className="text-2xl font-bold text-foreground mb-0.5">
-          {value.toLocaleString()}
+          {value !== '' && value !== undefined ? value.toLocaleString ? value.toLocaleString() : value : <span className="text-foreground-muted">—</span>}
         </p>
         {subtitle && (
           <p className="text-foreground-subtle text-xs">

@@ -1,26 +1,54 @@
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import session from "../../../utils/session";
 
-const data = [
-  { date: 'Jan 1', mentions: 45, comments: 23, posts: 22 },
-  { date: 'Jan 2', mentions: 52, comments: 31, posts: 21 },
-  { date: 'Jan 3', mentions: 38, comments: 18, posts: 20 },
-  { date: 'Jan 4', mentions: 67, comments: 42, posts: 25 },
-  { date: 'Jan 5', mentions: 89, comments: 56, posts: 33 },
-  { date: 'Jan 6', mentions: 76, comments: 48, posts: 28 },
-  { date: 'Jan 7', mentions: 94, comments: 61, posts: 33 },
-  { date: 'Jan 8', mentions: 82, comments: 52, posts: 30 },
-  { date: 'Jan 9', mentions: 103, comments: 68, posts: 35 },
-  { date: 'Jan 10', mentions: 118, comments: 79, posts: 39 },
-  { date: 'Jan 11', mentions: 95, comments: 61, posts: 34 },
-  { date: 'Jan 12', mentions: 87, comments: 55, posts: 32 },
-  { date: 'Jan 13', mentions: 112, comments: 73, posts: 39 },
-  { date: 'Jan 14', mentions: 134, comments: 89, posts: 45 },
-];
+
+// Helper to aggregate posts/comments by day
+function aggregateMentions(posts = [], comments = []) {
+  // Group by date (YYYY-MM-DD)
+  const map = {};
+  posts.forEach(p => {
+    const d = new Date(Date.now() - (p.post_age_hours || 0) * 3600 * 1000);
+    const date = d.toISOString().slice(0, 10);
+    if (!map[date]) map[date] = { date, mentions: 0, comments: 0, posts: 0 };
+    map[date].posts += 1;
+    map[date].mentions += 1;
+  });
+  comments.forEach(c => {
+    const d = new Date(Date.now() - (c.post_age_hours || 0) * 3600 * 1000);
+    const date = d.toISOString().slice(0, 10);
+    if (!map[date]) map[date] = { date, mentions: 0, comments: 0, posts: 0 };
+    map[date].comments += 1;
+    map[date].mentions += 1;
+  });
+  // Sort by date
+  return Object.values(map).sort((a, b) => a.date.localeCompare(b.date));
+}
 
 const MentionsChart = (props) => {
-  // Example: cache mentions data in session
-  session.set('mentionsData', props.data);
+  // Use real data if provided, else fallback to mock
+  let chartData = [];
+  if (props.data && props.data.posts && props.data.comments) {
+    chartData = aggregateMentions(props.data.posts, props.data.comments);
+  } else {
+    chartData = [
+      { date: '2025-08-01', mentions: 45, comments: 23, posts: 22 },
+      { date: '2025-08-02', mentions: 52, comments: 31, posts: 21 },
+      { date: '2025-08-03', mentions: 38, comments: 18, posts: 20 },
+      { date: '2025-08-04', mentions: 67, comments: 42, posts: 25 },
+      { date: '2025-08-05', mentions: 89, comments: 56, posts: 33 },
+      { date: '2025-08-06', mentions: 76, comments: 48, posts: 28 },
+      { date: '2025-08-07', mentions: 94, comments: 61, posts: 33 },
+      { date: '2025-08-08', mentions: 82, comments: 52, posts: 30 },
+      { date: '2025-08-09', mentions: 103, comments: 68, posts: 35 },
+      { date: '2025-08-10', mentions: 118, comments: 79, posts: 39 },
+      { date: '2025-08-11', mentions: 95, comments: 61, posts: 34 },
+      { date: '2025-08-12', mentions: 87, comments: 55, posts: 32 },
+      { date: '2025-08-13', mentions: 112, comments: 73, posts: 39 },
+      { date: '2025-08-14', mentions: 134, comments: 89, posts: 45 },
+    ];
+  }
+
+  session.set('mentionsData', chartData);
 
   return (
     <div className="chart-container animate-slide-up">
@@ -51,7 +79,7 @@ const MentionsChart = (props) => {
 
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data}>
+          <AreaChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis
               dataKey="date"

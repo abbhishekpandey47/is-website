@@ -30,10 +30,10 @@ const Dashboard = () => {
 
     const navigationItems = [
         { id: 'home', label: 'Home', icon: <Home className="w-5 h-5 stroke-gray-600" /> },
-        { id: 'subredditsense', label: 'Subreddit Dashboard', icon: <BarChart2 className="w-5 h-5 stroke-gray-600" /> },
         { id: 'new-post', label: 'New Post Generator', icon: <NotebookIcon className="w-5 h-5 stroke-gray-600" /> },
         { id: 'competitor', label: 'Competitor Analysis', icon: <BarChart2 className="w-5 h-5 stroke-gray-600" /> },
         { id: 'current', label: 'Check Current', icon: <SearchIcon className="w-5 h-5 stroke-gray-600" /> },
+        { id: 'subredditsense', label: 'Subreddit Dashboard', icon: <BarChart2 className="w-5 h-5 stroke-gray-600" /> },
         { id: 'credits', label: 'Credits', icon: <Sparkles className="w-5 h-5 stroke-gray-600" /> },
         { id: 'reddit-comment', label: 'Reddit Comment', icon: <MessageCircle className="w-5 h-5 stroke-gray-600" /> },
         { id: 'post-search', label: 'Post Search', icon: <SearchIcon className="w-5 h-5 stroke-gray-600" /> },
