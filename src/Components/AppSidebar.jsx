@@ -27,17 +27,17 @@ import {
 import { cn } from "@/lib/utils"
 
 const mainItems = [
-  { title: "Dashboard", url: "/crm", icon: BarChart3 },
-  { title: "Reddit Posts", url: "/crm/posts", icon: MessageSquare },
-  { title: "Analytics", url: "/crm/analytics", icon: TrendingUp },
-  { title: "Communities", url: "/crm/communities", icon: Users },
+  { title: "Dashboard", url: "/threadflow", icon: BarChart3 },
+  { title: "Reddit Posts", url: "/threadflow/posts", icon: MessageSquare },
+  { title: "Analytics", url: "/threadflow/analytics", icon: TrendingUp },
+  { title: "Communities", url: "/threadflow/communities", icon: Users },
 ]
 
 const managementItems = [
-  { title: "Categories", url: "/crm/categories", icon: Tag },
-  { title: "Schedule", url: "/crm/schedule", icon: Calendar },
-  { title: "Templates", url: "/crm/templates", icon: FileText },
-  { title: "Settings", url: "/crm/settings", icon: Settings },
+  { title: "Categories", url: "/threadflow/categories", icon: Tag },
+  { title: "Schedule", url: "/threadflow/schedule", icon: Calendar },
+  { title: "Templates", url: "/threadflow/templates", icon: FileText },
+  { title: "Settings", url: "/threadflow/settings", icon: Settings },
 ]
 
 export function AppSidebar() {
@@ -45,8 +45,8 @@ export function AppSidebar() {
   const pathname = usePathname()
 
   const isActive = (href) => {
-    if (href === "/crm") return pathname === "/crm"
-    return pathname === href || pathname.startsWith(href + "/crm/")
+    if (href === "/threadflow") return pathname === "/threadflow"
+    return pathname === href || pathname.startsWith(href + "/threadflow/")
   }
 
   const renderItem = (item) => {

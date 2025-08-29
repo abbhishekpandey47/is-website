@@ -128,7 +128,7 @@ useEffect(() => {
           </div>
           <div className="flex items-center gap-3">
             <Button 
-              onClick={() => router.push("crm/posts/add")}
+              onClick={() => router.push("/threadflow/posts/add")}
               className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <Plus className="h-4 w-4 mr-2" />
