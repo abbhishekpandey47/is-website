@@ -1,3 +1,7 @@
+"use client";
+
+import { ErrorBoundary } from "@sentry/react";
+
 export const metadata = {
   title: "Tech Content Marketing ROI Calculator | Infrasity",
   description:
@@ -5,5 +9,9 @@ export const metadata = {
 };
 
 export default function PageLayout({ children }) {
-  return <>{children}</>;
+  return (
+    <ErrorBoundary fallback={<div>Something went wrong.</div>} showDialog>
+      {children}
+    </ErrorBoundary>
+  );
 }

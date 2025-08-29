@@ -1,11 +1,11 @@
-import AIVideoScriptGenerator from "./hero"
-import BlackMarquee from "./marquee"
 import ClutchBadge from "./clutch"
 import VideoScriptContent from "./content"
-import AIScriptStep from "./step"
-import Hero2 from "./hero2"
-import WhyUse from "./whyUse"
 import FAQSection from "./FAQ"
+import AIVideoScriptGenerator from "./hero"
+import Hero2 from "./hero2"
+import BlackMarquee from "./marquee"
+import AIScriptStep from "./step"
+import WhyUse from "./whyUse"
 
 export default function Page() {
     return (
@@ -21,3 +21,7 @@ export default function Page() {
         </ div>
     )
 }
+
+// Example usage:
+// const scriptData = session.get('script');
+// session.set('script', { value: 'example' });

@@ -1,11 +1,19 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
+import * as Sentry from '@sentry/nextjs';
 import Script from 'next/script';
 import AlternateLinks from './AlternateLinks';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
 import './globals.css';
 import { metadata } from './metadata';
 
-export { metadata };
+export function generateMetadata() {
+  return {
+    ...metadata,
+    other: {
+      ...Sentry.getTraceData()
+    }
+  };
+}
 
 export default function RootLayout({ children }) {
     return (

@@ -1,5 +1,9 @@
+import session from "../../../utils/session";
 
 const MetricCard = ({ title, value, change, changeType = 'neutral', icon: Icon, subtitle }) => {
+  // Example: cache metric data in session
+  session.set('metricData', { title, value, change, changeType, icon: Icon, subtitle });
+
   const getChangeColor = () => {
     switch (changeType) {
       case 'positive': return 'text-success';
@@ -20,13 +24,13 @@ const MetricCard = ({ title, value, change, changeType = 'neutral', icon: Icon, 
           </span>
         )}
       </div>
-      
+
       <div>
         <h3 className="text-foreground-muted text-sm font-medium mb-1">
           {title}
         </h3>
         <p className="text-2xl font-bold text-foreground mb-0.5">
-          {value.toLocaleString()}
+          {value !== '' && value !== undefined ? value.toLocaleString ? value.toLocaleString() : value : <span className="text-foreground-muted">—</span>}
         </p>
         {subtitle && (
           <p className="text-foreground-subtle text-xs">

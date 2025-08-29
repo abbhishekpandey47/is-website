@@ -3,15 +3,21 @@ import * as React from "react"
 
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
 import { cn } from "../../../../../lib/subredditsense/utils"
+import session from "../../utils/session"
 
-const Pagination = ({ className, ...props }) => (
-  <nav
-    role="navigation"
-    aria-label="pagination"
-    className={cn("mx-auto flex w-full justify-center", className)}
-    {...props}
-  />
-)
+const Pagination = ({ className, ...props }) => {
+  // Example: cache pagination state in session
+  session.set("pagination", props.page)
+
+  return (
+    <nav
+      role="navigation"
+      aria-label="pagination"
+      className={cn("mx-auto flex w-full justify-center", className)}
+      {...props}
+    />
+  )
+}
 Pagination.displayName = "Pagination"
 
 const PaginationContent = React.forwardRef(({ className, ...props }, ref) => (
@@ -101,11 +107,11 @@ const PaginationEllipsis = ({
 PaginationEllipsis.displayName = "PaginationEllipsis"
 
 export {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious
 }

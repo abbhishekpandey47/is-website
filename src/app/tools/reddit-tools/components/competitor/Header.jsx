@@ -1,6 +1,10 @@
 "use client";
 
-export default function CompetitorHeader() {
+import session from "../../../utils/session";
+
+export default function CompetitorHeader(props) {
+  session.set('headerState', props.state);
+
   return (
     <header className="flex flex-col gap-1 p-6 pb-4">
       <h1 className="text-2xl font-semibold text-gray-900">

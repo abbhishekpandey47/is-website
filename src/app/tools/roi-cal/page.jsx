@@ -1,13 +1,16 @@
 "use client";
 
 import BookDemo from "../../book-a-demo/cta";
-import CalendlyButton from "./cal";
 import CalendarBooking from "../../calendarButton";
 import FAQSection from "./FAQ";
 import Hero from "./hero";
 import ContentROICalculator from "./roi-cal";
 
 export default function Page() {
+  // Example usage:
+  // const roiData = session.get('roi');
+  // session.set('roi', { value: 123 });
+
   return (
     <div>
       <div>
@@ -35,7 +38,7 @@ export default function Page() {
         }}
       >
         <div
-          className="w-full h-px shadow-pink-400/50 bg-gradient-to-r 
+          className="w-full h-px shadow-pink-400/50 bg-gradient-to-r
         from-pink-500/5 via-pink-300 to-pink-500/5 mb-12 mt-12"
         ></div>
         <FAQSection />

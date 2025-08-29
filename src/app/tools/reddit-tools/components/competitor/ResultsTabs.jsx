@@ -1,17 +1,23 @@
 "use client";
 
+import session from "../../../utils/session";
+
 export default function ResultsTabs({ active, setActive, counts, visible }) {
   if (!visible) return null;
   const tabs = [
     { id: "posts", label: "Posts", count: counts.posts },
     { id: "comments", label: "Comments", count: counts.comments },
   ];
+
+  // Example: cache tab state in session
+  session.set("activeTab", active);
+
   return (
     <div className="px-6 mt-8 border-b border-gray-200 flex gap-6">
       {tabs.map((t) => (
         <button
           key={t.id}
-            onClick={() => setActive(t.id)}
+          onClick={() => setActive(t.id)}
           className={`relative pb-3 text-sm font-medium transition-colors ${
             active === t.id
               ? "text-blue-600"

@@ -1,11 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import FAQ from "./faq"
-import RedditPostTemplate from "./hero"
-import ToolsSection from "./tools"
-import { FiSun, FiMoon, FiX } from "react-icons/fi";
-
+import { FiMoon, FiSun } from "react-icons/fi";
+import FAQ from "./faq";
+import RedditPostTemplate from "./hero";
+import ToolsSection from "./tools";
 
 export default function Page() {
     const [darkMode, setDarkMode] = useState(false);
@@ -27,6 +26,9 @@ export default function Page() {
         document.documentElement.classList.toggle('dark', newDarkMode);
         localStorage.setItem('darkMode', newDarkMode.toString());
     };
+    // Example usage:
+    // const commentData = session.get('comment');
+    // session.set('comment', { text: 'Hello' });
     return (
         <div
             className={`pt-16 ${darkMode ? 'bg-black text-white' : 'bg-white text-black'
@@ -49,7 +51,7 @@ export default function Page() {
                 </button>
             </div>
 
-           
+
 
 
             <RedditPostTemplate darkMode={darkMode} />

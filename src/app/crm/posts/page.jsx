@@ -2,7 +2,6 @@
 import { supabase } from "@/lib/supabaseClient";
 import { onAuthStateChanged } from "firebase/auth";
 import { ExternalLink, Plus, Search } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Badge } from "../../../Components/ui/badge";

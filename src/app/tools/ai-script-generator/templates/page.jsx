@@ -2,6 +2,8 @@
 import React, { useState, useMemo } from "react";
 import ScriptData from "./script.js";
 import { Sparkles, X, Copy, Download, Clock, FileText, PlayCircle, Search, Filter, User, ChevronRight, } from 'lucide-react';
+import * as Sentry from "../../../utils/sentry";
+import session from "../../../utils/session";
 
 
 const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, videoType }) => {

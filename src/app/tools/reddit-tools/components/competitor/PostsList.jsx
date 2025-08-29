@@ -1,4 +1,5 @@
 "use client";
+import session from "../../../utils/session";
 import { formatHoursShort, formatHoursToRedditAge } from "../../utils/timeAgo";
 
 export function PostsList({ posts, visible }) {
@@ -6,6 +7,7 @@ export function PostsList({ posts, visible }) {
   if (!posts.length) return (
     <div className="px-6 py-12 text-center text-sm text-gray-500">No posts yet.</div>
   );
+  session.set('posts', posts);
   return (
     <div className="px-6 mt-6 space-y-4">
       {posts.map((p, i) => (

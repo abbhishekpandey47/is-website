@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import session from "../../../utils/session";
 
 export default function SearchPanel({ onSearch, loading, buttonLabel = "Analyze", timeRange, setTimeRange, customFrom, setCustomFrom, customTo, setCustomTo }) {
   const [value, setValue] = useState("");
@@ -15,6 +16,9 @@ export default function SearchPanel({ onSearch, loading, buttonLabel = "Analyze"
       trigger();
     }
   };
+
+  // Example: set shared session data
+  session.set('searchQuery', value);
 
   return (
     <div className="px-6">

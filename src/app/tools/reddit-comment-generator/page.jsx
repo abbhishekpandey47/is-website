@@ -1,8 +1,8 @@
 "use client"
 
-import FAQ from "./faq"
-import RedditPostTemplate from "./hero"
-import ToolsSection from "./tools"
+import FAQ from "./faq";
+import RedditPostTemplate from "./hero";
+import ToolsSection from "./tools";
 
 export default function Page() {
     return (
@@ -13,3 +13,7 @@ export default function Page() {
         </div>
     )
 }
+
+// Example usage:
+// const commentData = session.get('comment');
+// session.set('comment', { text: 'Hello' });

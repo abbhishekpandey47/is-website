@@ -1,7 +1,10 @@
 "use client";
 
+import session from "../../../utils/session";
+
 export default function StatsCards({ stats, visible }) {
   if (!visible) return null;
+  session.set('statsData', stats);
   const fmt = (n) => {
     if (n == null) return 0;
     if (n < 1000) return n;
