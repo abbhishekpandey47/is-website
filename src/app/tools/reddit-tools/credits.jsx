@@ -61,16 +61,12 @@ export default function Credits({ handleNavClick }) {
     ];
 
     return (
-        <div className="flex-1 p-4 sm:p-6 lg:p-8 bg-gray-50">
+        <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
-                <div className="text-lrft mb-6">
-                    <h1 className="text-xl font-bold text-gray-900">
-                        Buy Credits
-                    </h1>
-                    <p className="text-md text-gray-600">
-                        Out of credits? Let's get you back on track!
-                    </p>
+                <div className="mb-6">
+                    <h1 className="text-2xl font-bold mb-2"><span className="gradient-text">Buy Credits</span></h1>
+                    <p className="text-md text-foreground-muted">Out of credits? Let's get you back on track!</p>
                 </div>
 
                 {/* Tools Grid */}
@@ -78,26 +74,23 @@ export default function Credits({ handleNavClick }) {
                     {tools.map((tool) => (
                         <div
                             key={tool.id}
-                            className="bg-white/20 rounded-xl p-4 md:px-6  shadow-sm border border-gray-500/20 hover:border-gray-500 transition-shadow cursor-pointer"
+                            className="glass-card rounded-xl p-4 md:px-6 shadow-md border border-border-muted hover:border-indigo-400 transition-shadow cursor-pointer text-white"
                             onClick={() => handleNavClick(tool.id)}
                         >
-                            <div className="mb-2 text-2xl font-bold text-gray-900">{tool.boldTitle}</div>
+                            <div className="mb-2 text-2xl font-bold text-white">{tool.boldTitle}</div>
                             <div className="flex items-center gap-2 mb-3 sm:mb-4">
-                                <span className="text-xs line-through text-gray-500">{tool.discount}</span>
-                                <span className="text-2xl font-bold text-green-600">{tool.price}</span>
-
+                                <span className="text-xs line-through text-gray-300">{tool.discount}</span>
+                                <span className="text-2xl font-bold text-green-400">{tool.price}</span>
                             </div>
                             <div className="flex mb-2">
-                               <Button className="w-full text-black bg-gray-800/5 border border-gray-600/20 p-1 rounded-xl">{tool.buttonText}</Button>
+                               <Button className="w-full text-white bg-indigo-700/80 border border-indigo-400/40 p-1 rounded-xl">{tool.buttonText}</Button>
                             </div>
-                            <span className="bg-gray-600/5 px-2 py-1 md:py-[2px] text-gray-700 text-xs rounded-full border border-gray-500/20" >
+                            <span className="bg-indigo-900/40 px-2 py-1 md:py-[2px] text-indigo-200 text-xs rounded-full border border-indigo-400/20" >
                                 {tool.description}
                             </span>
-                            
                         </div>
                     ))}
                 </div>
-
             </div>
         </div>
     )

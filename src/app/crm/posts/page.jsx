@@ -1,19 +1,19 @@
 "use client";
-import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import { onAuthStateChanged } from "firebase/auth";
+import { ExternalLink, Plus, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { Badge } from "../../../Components/ui/badge";
 import { Button } from "../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../Components/ui/card";
 import { Input } from "../../../Components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../Components/ui/select";
-import { Badge } from "../../../Components/ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../Components/ui/table";
 import { SidebarTrigger } from "../../../Components/ui/sidebar";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../Components/ui/table";
 import { UserProfile } from "../../../Components/UserProfile";
-import { useRouter } from "next/navigation";
-import { Plus, Search, ExternalLink } from "lucide-react";
-import { supabase } from "@/lib/supabaseClient";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebaseClient";
-import { toast } from "react-toastify";
+import { auth } from "../../../lib/firebaseClient";
 
 const PostsPage = () => {
   const router = useRouter();
@@ -46,7 +46,7 @@ const PostsPage = () => {
       const { data, error } = await supabase
         .from("posts")
         .select("*")
-        .eq("user_id", firebaseUser.uid) 
+        .eq("user_id", firebaseUser.uid)
         .order("date_posted", { ascending: false });
 
       if (error) {

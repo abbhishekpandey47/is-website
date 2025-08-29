@@ -1,5 +1,5 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { firestore } from "@/lib/firebaseClient";
+import { firestore } from "../lib/firebaseClient";
 
 const saveUser = async (userr) => {
   try {

@@ -1,7 +1,6 @@
-import React from "react"
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
 
-import { cn } from "@/lib/utils"
+import { cn } from "../../lib/utils"
 
 const HoverCard = HoverCardPrimitive.Root
 const HoverCardTrigger = HoverCardPrimitive.Trigger
@@ -20,4 +19,4 @@ const HoverCardContent = ({ className, align = "center", sideOffset = 4, ...prop
   )
 }
 
-export { HoverCard, HoverCardTrigger, HoverCardContent }
+export { HoverCard, HoverCardContent, HoverCardTrigger }

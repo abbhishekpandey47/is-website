@@ -1,15 +1,14 @@
+import { sendError } from "@/http/api";
 import {
-  GoogleAuthProvider,
-  signInWithPopup,
   browserPopupRedirectResolver,
-  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  AuthError,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup
 } from "firebase/auth";
-import { auth } from "@/lib/firebaseClient";
-import { saveUser, saveUser2 } from "@/service/firebase-db-service";
-import { FireBaseErrors } from "@/errors/firebase-errors";
-import { setIdTokenCookie, sendError, setRefreshTokenInCookie } from "@/http/api";
+import { FireBaseErrors } from "../errors/firebase-errors";
+import { auth } from "../lib/firebaseClient";
+import { saveUser, saveUser2 } from "./firebase-db-service";
 
 const signinWithGoogle = async () => {
   try {
@@ -144,4 +143,4 @@ const signUpWithEmail = async (email, password, firstName, lastName) => {
   }
 }
 
-export { signinWithGoogle, signinWithEmail, signUpWithEmail}
+export { signinWithEmail, signinWithGoogle, signUpWithEmail };

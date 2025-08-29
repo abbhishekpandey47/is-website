@@ -40,55 +40,44 @@ export default function Competitor() {
     };
 
     return (
-        <div className="flex-1 p-4 sm:p-6 lg:p-8 bg-gray-50">
-            <div className="max-w-4xl mx-auto">
-                <div className="bg-white rounded-xl p-4 sm:p-6 lg:p-8 shadow-sm border border-gray-100">
-                    <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Competitor Analysis</h1>
-                    <div className="space-y-4 sm:space-y-6">
+        <div className="min-h-screen bg-background p-4 md:p-8">
+            <div className="max-w-5xl mx-auto">
+                <div className="glass-card px-8 py-6 rounded-xl shadow-md mb-8 animate-fade-in">
+                    <h1 className="text-3xl font-bold mb-1"><span className="gradient-text">Competitor Analysis</span></h1>
+                    <p className="text-lg text-foreground-muted mb-2">Analyze where, how, and with what content competitors get traction on Reddit.</p>
+                </div>
+                <div className="glass-card rounded-xl shadow-md border border-border-muted mb-8 animate-fade-in p-6">
+                    <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Competitor Website or Brand Name
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="competitor.com or Brand Name"
-                                className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
-                            />
+                            <label className="block text-sm font-medium text-foreground-muted mb-2">Competitor Website or Brand Name</label>
+                            <input type="text" value={keywords} onChange={e => setKeywords(e.target.value)} placeholder="competitor.com or Brand Name" className="w-full px-4 py-3 border border-border-muted rounded-lg focus:ring-2 focus:ring-reddit-orange focus:border-transparent text-sm" required />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Analysis Type
-                            </label>
-                            <select className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base">
+                            <label className="block text-sm font-medium text-foreground-muted mb-2">Analysis Type</label>
+                            <select className="w-full px-4 py-3 border border-border-muted rounded-lg focus:ring-2 focus:ring-reddit-orange focus:border-transparent text-sm">
                                 <option>Brand Visibility</option>
                                 <option>Subreddit Activity</option>
                                 <option>Engagement Metrics</option>
                             </select>
                         </div>
-                        <button className="w-full bg-blue-600 text-white py-2 sm:py-3 px-4 sm:px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors text-sm sm:text-base">
-                            Analyze Competitor
-                        </button>
-                    </div>
+                        <div className="md:col-span-2 flex justify-end">
+                            <button type="submit" className="btn-primary px-6 py-3 rounded-lg font-medium">{loading ? "Searching..." : "Analyze Competitor"}</button>
+                        </div>
+                    </form>
+                    {error && <div className="text-error mt-2">{error}</div>}
                 </div>
-            </div>
-            <div className="p-4">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <input type="text" value={keywords} onChange={e => setKeywords(e.target.value)} placeholder="Enter keywords (comma separated)" className="border p-2 w-full" required />
-                    <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded" disabled={loading}>{loading ? "Searching..." : "Find Posts"}</button>
-                </form>
-                {error && <div className="text-red-500 mt-2">{error}</div>}
                 {results.length > 0 && (
-                    <div className="mt-4">
+                    <div className="glass-card rounded-xl shadow-md border border-border-muted mb-8 animate-fade-in p-6">
                         {results.map((group, idx) => (
-                            <div key={idx} className="mb-6">
+                            <div key={idx} className="mb-8">
                                 {Object.entries(group).map(([keyword, posts]) => (
-                                    <div key={keyword}>
-                                        <h3 className="font-bold text-lg mb-2">Keyword: {keyword}</h3>
+                                    <div key={keyword} className="mb-6">
+                                        <h3 className="font-bold text-lg mb-2 gradient-text">Keyword: {keyword}</h3>
                                         <ul className="space-y-2">
                                             {posts.map((post, i) => (
-                                                <li key={i} className="p-3 bg-gray-100 rounded">
-                                                    <a href={post.post_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold">{post.post_title}</a>
-                                                    <div className="text-sm text-gray-600">Subreddit: {post.subreddit} | Upvotes: {post.upvotes} | Comments: {post.total_comments} | Age: {formatHoursToRedditAge(post.post_age_hours)}</div>
+                                                <li key={i} className="p-4 bg-surface rounded-lg animate-fade-in">
+                                                    <a href={post.post_url} target="_blank" rel="noopener noreferrer" className="text-reddit-orange font-semibold hover:underline">{post.post_title}</a>
+                                                    <div className="text-sm text-foreground-muted mt-1">Subreddit: {post.subreddit} | Upvotes: {post.upvotes} | Comments: {post.total_comments} | Age: {formatHoursToRedditAge(post.post_age_hours)}</div>
                                                 </li>
                                             ))}
                                         </ul>

@@ -1,17 +1,17 @@
 'use client';
-import { useEffect } from 'react';
-import Footer from '@/Components/HomePage/Footer';
-import { Loader } from '@/Components/Loader';
-import Navbar from '@/Components/Navbar/Navbar';
-import { Appwrap } from '@/context';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import dynamic from 'next/dynamic';
-import Script from 'next/script';
 import { usePathname } from 'next/navigation';
-import AwardBanner from '@/Components/HomePage/awardwinner';
-import { initMixpanel } from "../lib/mixpanel"
+import Script from 'next/script';
+import { useEffect } from 'react';
+import AwardBanner from '../Components/HomePage/awardwinner';
+import Footer from '../Components/HomePage/Footer';
+import { Loader } from '../Components/Loader';
+import Navbar from '../Components/Navbar/Navbar';
+import { Appwrap } from '../context';
+import { initMixpanel } from "../lib/mixpanel";
 
 export function ClientLayoutWrapper({ children }) {
 

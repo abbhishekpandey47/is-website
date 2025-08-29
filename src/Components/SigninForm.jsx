@@ -1,14 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { signinWithGoogle, signinWithEmail } from "@/service/firebase-auth-service";
-import { FireBaseErrors } from "@/errors/firebase-errors";
-import Image from "next/image";
-import { toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FireBaseErrors } from "../errors/firebase-errors";
+import { signinWithEmail, signinWithGoogle } from "../service/firebase-auth-service";
 
 const SuccessMessage = () => {
   return (

@@ -13,9 +13,9 @@ export default function StatsCards({ stats, visible }) {
     return (v % 1 === 0 ? v : v.toFixed(v >= 100 ? 0 : v >= 10 ? 1 : 2)) + 'M';
   };
   const card = (label, value, accent) => (
-    <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col">
-      <span className="text-xs font-medium uppercase tracking-wide text-gray-500 mb-1">{label}</span>
-      <span className={`text-2xl font-semibold ${accent}`}>{value}</span>
+  <div className="bg-gray-800 border border-gray-700 rounded-xl p-5 shadow-sm flex flex-col">
+  <span className="text-xs font-medium uppercase tracking-wide text-gray-300 mb-1">{label}</span>
+  <span className={`text-2xl font-semibold text-gray-100 ${accent}`}>{value}</span>
     </div>
   );
   return (

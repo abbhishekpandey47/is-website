@@ -1,7 +1,7 @@
 'use client'
-import AppContext from '@/context/Infracontext'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import LoadingBar from 'react-top-loading-bar'
+import AppContext from '../context/Infracontext'
 
 export const Loader = () => {
 
