@@ -204,7 +204,7 @@ const AddPostPage = () => {
                   />
                 </div>
 
-                <div>
+                {/* <div>
                   <Label htmlFor="kimsVersion">Kim's Version</Label>
                   <Textarea
                     id="kimsVersion"
@@ -213,7 +213,7 @@ const AddPostPage = () => {
                     placeholder="Revised version of the engagement text"
                     rows={4}
                   />
-                </div>
+                </div> */}
 
                 {/* Tracking Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
