@@ -1,8 +1,12 @@
 "use client";
 
+import session from "../../../utils/session";
+
 // Generic pagination control
 // Props: page (1-based), totalItems, pageSize, onPageChange, loading (optional)
 export default function Pagination({ page, totalItems, pageSize = 15, onPageChange, loading }) {
+  session.set('pagination', page);
+
   const totalPages = Math.max(1, Math.ceil(totalItems / pageSize));
   if (totalPages <= 1) return null;
 

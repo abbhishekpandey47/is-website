@@ -1,5 +1,5 @@
-
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import session from "../../../utils/session";
 
 const data = [
   { date: 'Jan 1', mentions: 45, comments: 23, posts: 22 },
@@ -18,7 +18,10 @@ const data = [
   { date: 'Jan 14', mentions: 134, comments: 89, posts: 45 },
 ];
 
-const MentionsChart = () => {
+const MentionsChart = (props) => {
+  // Example: cache mentions data in session
+  session.set('mentionsData', props.data);
+
   return (
     <div className="chart-container animate-slide-up">
       <div className="flex items-center justify-between mb-6">
@@ -45,21 +48,21 @@ const MentionsChart = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data}>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-            <XAxis 
-              dataKey="date" 
+            <XAxis
+              dataKey="date"
               stroke="hsl(var(--foreground-muted))"
               fontSize={12}
             />
-            <YAxis 
+            <YAxis
               stroke="hsl(var(--foreground-muted))"
               fontSize={12}
             />
-            <Tooltip 
+            <Tooltip
               contentStyle={{
                 backgroundColor: 'hsl(var(--surface-elevated))',
                 border: '1px solid hsl(var(--border))',
@@ -67,27 +70,27 @@ const MentionsChart = () => {
                 color: 'hsl(var(--foreground))'
               }}
             />
-            <Area 
-              type="monotone" 
-              dataKey="mentions" 
+            <Area
+              type="monotone"
+              dataKey="mentions"
               stackId="1"
-              stroke="hsl(var(--chart-primary))" 
+              stroke="hsl(var(--chart-primary))"
               fill="hsl(var(--chart-primary) / 0.2)"
               strokeWidth={2}
             />
-            <Area 
-              type="monotone" 
-              dataKey="posts" 
+            <Area
+              type="monotone"
+              dataKey="posts"
               stackId="2"
-              stroke="hsl(var(--chart-secondary))" 
+              stroke="hsl(var(--chart-secondary))"
               fill="hsl(var(--chart-secondary) / 0.3)"
               strokeWidth={2}
             />
-            <Area 
-              type="monotone" 
-              dataKey="comments" 
+            <Area
+              type="monotone"
+              dataKey="comments"
               stackId="2"
-              stroke="hsl(var(--chart-tertiary))" 
+              stroke="hsl(var(--chart-tertiary))"
               fill="hsl(var(--chart-tertiary) / 0.3)"
               strokeWidth={2}
             />

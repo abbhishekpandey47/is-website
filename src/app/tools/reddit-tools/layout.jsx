@@ -7,18 +7,18 @@ export const metadata = {
   },
 };
 
-
-
-
 const tabs = [
   { name: "Home", href: "/tools/reddit-tools" },
   { name: "Subreddit Dashboard", href: "/tools/reddit-tools/subredditsense" },
   // ...add other tabs as needed
 ];
 
+import ClientLayout from "./ClientLayout";
+
 export default function PlatformLayout({ children }) {
-  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
   return (
-    <main className="w-full">{children}</main>
+    <main className="w-full">
+      <ClientLayout>{children}</ClientLayout>
+    </main>
   );
 }

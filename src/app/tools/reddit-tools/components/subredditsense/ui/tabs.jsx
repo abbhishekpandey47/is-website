@@ -1,5 +1,6 @@
 import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
+import session from "../../utils/session";
 
 import { cn } from "../../../../../lib/subredditsense/utils"
 
@@ -45,3 +46,9 @@ const TabsContent = React.forwardRef<
 TabsContent.displayName = TabsPrimitive.Content.displayName
 
 export { Tabs, TabsList, TabsTrigger, TabsContent }
+
+export default function Tabs(props) {
+  // Example: cache tabs state in session
+  session.set('tabsState', props.state);
+  // ...existing code...
+}

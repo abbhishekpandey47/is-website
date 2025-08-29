@@ -1,5 +1,9 @@
+import session from "../../../utils/session";
 
 const MetricCard = ({ title, value, change, changeType = 'neutral', icon: Icon, subtitle }) => {
+  // Example: cache metric data in session
+  session.set('metricData', { title, value, change, changeType, icon: Icon, subtitle });
+
   const getChangeColor = () => {
     switch (changeType) {
       case 'positive': return 'text-success';
@@ -20,7 +24,7 @@ const MetricCard = ({ title, value, change, changeType = 'neutral', icon: Icon, 
           </span>
         )}
       </div>
-      
+
       <div>
         <h3 className="text-foreground-muted text-sm font-medium mb-1">
           {title}

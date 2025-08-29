@@ -1,3 +1,4 @@
+import session from "../../../utils/session";
 
 const subreddits = [
   'r/programming', 'r/webdev', 'r/javascript', 'r/reactjs', 'r/node',
@@ -18,7 +19,9 @@ const generateHeatmapData = () => {
   }));
 };
 
-const SubredditHeatmap = () => {
+const SubredditHeatmap = (props) => {
+  session.set('heatmapData', props.data);
+
   const heatmapData = generateHeatmapData();
 
   const getIntensityColor = (value) => {
@@ -41,7 +44,7 @@ const SubredditHeatmap = () => {
           <span>Low</span>
           <div className="flex space-x-1">
             {[0.2, 0.4, 0.6, 0.8, 1.0].map(opacity => (
-              <div 
+              <div
                 key={opacity}
                 className="w-3 h-3 rounded-sm border border-border-muted"
                 style={{ backgroundColor: `hsl(var(--reddit-orange) / ${opacity * 0.8 + 0.1})` }}
@@ -62,7 +65,7 @@ const SubredditHeatmap = () => {
               </div>
             ))}
           </div>
-          
+
           {heatmapData.map(({ subreddit, data }) => (
             <div key={subreddit} className="flex items-center mb-1">
               <div className="w-32 text-sm text-foreground-muted font-medium truncate pr-3">

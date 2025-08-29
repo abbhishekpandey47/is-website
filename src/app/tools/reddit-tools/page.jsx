@@ -1,4 +1,3 @@
-
 'use client';
 import PostSearch from './postSearch';
 import Page from './reddit-comment-generator/page';
@@ -79,6 +78,10 @@ const Dashboard = () => {
                 return null;
         }
     };
+
+    // Example usage:
+    // const tabData = session.get('tab');
+    // session.set('tab', { active: true });
 
     return (
         <div className="relative min-h-screen bg-background flex">

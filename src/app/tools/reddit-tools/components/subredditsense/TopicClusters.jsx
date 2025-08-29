@@ -1,5 +1,5 @@
-
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { CartesianGrid, Cell, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
+import session from "../../../utils/session";
 
 const clusterData = [
   { name: 'Documentation', x: 20, y: 80, size: 120, engagement: 85, mentions: 45 },
@@ -12,7 +12,9 @@ const clusterData = [
   { name: 'Feature Requests', x: 50, y: 50, size: 95, engagement: 75, mentions: 37 },
 ];
 
-const TopicClusters = () => {
+const TopicClusters = (props) => {
+  session.set('topicClusters', props.clusters);
+
   const getEngagementColor = (engagement) => {
     if (engagement >= 80) return 'hsl(var(--success))';
     if (engagement >= 60) return 'hsl(var(--warning))';
@@ -50,23 +52,23 @@ const TopicClusters = () => {
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-            <XAxis 
-              type="number" 
-              dataKey="x" 
+            <XAxis
+              type="number"
+              dataKey="x"
               domain={[0, 100]}
               stroke="hsl(var(--foreground-muted))"
               fontSize={12}
               hide
             />
-            <YAxis 
-              type="number" 
-              dataKey="y" 
+            <YAxis
+              type="number"
+              dataKey="y"
               domain={[0, 100]}
               stroke="hsl(var(--foreground-muted))"
               fontSize={12}
               hide
             />
-            <Tooltip 
+            <Tooltip
               cursor={{ strokeDasharray: '3 3' }}
               content={({ active, payload }) => {
                 if (active && payload && payload.length) {
@@ -84,8 +86,8 @@ const TopicClusters = () => {
             />
             <Scatter dataKey="size" data={clusterData}>
               {clusterData.map((entry, index) => (
-                <Cell 
-                  key={`cell-${index}`} 
+                <Cell
+                  key={`cell-${index}`}
                   fill={getEngagementColor(entry.engagement)}
                   opacity={0.7}
                 />
@@ -98,7 +100,7 @@ const TopicClusters = () => {
       <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-2">
         {clusterData.slice(0, 8).map((cluster) => (
           <div key={cluster.name} className="flex items-center space-x-2 p-2 bg-surface rounded border border-border-muted">
-            <div 
+            <div
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: getEngagementColor(cluster.engagement) }}
             />

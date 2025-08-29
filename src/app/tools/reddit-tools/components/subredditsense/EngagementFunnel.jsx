@@ -1,5 +1,5 @@
-
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import session from "../../../utils/session";
 
 const funnelData = [
   {
@@ -34,7 +34,10 @@ const funnelData = [
   }
 ];
 
-const EngagementFunnel = () => {
+const EngagementFunnel = (props) => {
+  // Example: set engagement data in session
+  session.set('engagementData', props.data);
+
   return (
     <div className="chart-container animate-slide-up">
       <div className="flex items-center justify-between mb-6">
@@ -56,19 +59,19 @@ const EngagementFunnel = () => {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={funnelData} layout="horizontal">
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-            <XAxis 
+            <XAxis
               type="number"
               stroke="hsl(var(--foreground-muted))"
               fontSize={12}
             />
-            <YAxis 
+            <YAxis
               type="category"
               dataKey="stage"
               stroke="hsl(var(--foreground-muted))"
               fontSize={11}
               width={80}
             />
-            <Tooltip 
+            <Tooltip
               contentStyle={{
                 backgroundColor: 'hsl(var(--surface-elevated))',
                 border: '1px solid hsl(var(--border))',
@@ -80,8 +83,8 @@ const EngagementFunnel = () => {
                 'Count'
               ]}
             />
-            <Bar 
-              dataKey="count" 
+            <Bar
+              dataKey="count"
               fill="hsl(var(--chart-primary))"
               radius={[0, 4, 4, 0]}
             />
@@ -93,9 +96,9 @@ const EngagementFunnel = () => {
         {funnelData.map((stage, index) => (
           <div key={stage.stage} className="text-center">
             <div className="h-2 bg-surface rounded-full overflow-hidden mb-2">
-              <div 
+              <div
                 className="h-full transition-all duration-1000 delay-300"
-                style={{ 
+                style={{
                   width: `${stage.percentage}%`,
                   backgroundColor: stage.color
                 }}

@@ -1,7 +1,10 @@
-
 import { Calendar, Download, Filter, Settings } from "lucide-react";
+import session from "../../../utils/session";
 
 const DashboardHeader = () => {
+  // Example: get dashboard state from session
+  const dashboardState = session.get("dashboardState");
+
   return (
     <div className="glass-card px-8 py-6 rounded-xl shadow-md mb-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
