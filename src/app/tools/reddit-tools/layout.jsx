@@ -8,6 +8,17 @@ export const metadata = {
 };
 
 
+
+
+const tabs = [
+  { name: "Home", href: "/tools/reddit-tools" },
+  { name: "Subreddit Dashboard", href: "/tools/reddit-tools/subredditsense" },
+  // ...add other tabs as needed
+];
+
 export default function PlatformLayout({ children }) {
-  return <>{children}</>;
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
+  return (
+    <main className="w-full">{children}</main>
+  );
 }

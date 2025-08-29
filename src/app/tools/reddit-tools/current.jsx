@@ -1,4 +1,6 @@
 "use client";
+
+"use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import CurrentHeader from "./components/competitor/CurrentHeader";
 import Pagination from "./components/competitor/Pagination";
@@ -12,15 +14,13 @@ import { fetchWithRetry } from "./utils/fetchWithRetry";
 const API_BASE = "https://reddit-comment-gen.onrender.com"; // adjust if env variable available
 
 export default function Current() {
+  // ...existing code...
   const [brand, setBrand] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("posts");
-  // Time range filtering (frontend only)
-  const [timeRange, setTimeRange] = useState('all'); // default to All
+  const [timeRange, setTimeRange] = useState('all');
   const [customFrom, setCustomFrom] = useState('');
   const [customTo, setCustomTo] = useState('');
-
-  // time range filtering helper placed before usage
   function filterByTime(arr) {
     if (!timeRange || timeRange === 'all') return arr;
     const now = Date.now();
@@ -44,13 +44,11 @@ export default function Current() {
   const [comments, setComments] = useState([]);
   const [error, setError] = useState("");
   const abortRef = useRef(null);
-  // pagination + progressive loading state
-  const [postsAfter, setPostsAfter] = useState(null); // pagination cursor (if backend supports)
+  const [postsAfter, setPostsAfter] = useState(null);
   const [commentsAfter, setCommentsAfter] = useState(null);
   const [backgroundLoading, setBackgroundLoading] = useState(false);
   const [done, setDone] = useState(false);
-  // pagination pages (1-based) & page size
-  const PAGE_SIZE = 15; // updated page size
+  const PAGE_SIZE = 15;
   const [postsPage, setPostsPage] = useState(1);
   const [commentsPage, setCommentsPage] = useState(1);
   const [fromCache, setFromCache] = useState(false);
@@ -59,19 +57,17 @@ export default function Current() {
   const consecutiveNoNewRef = useRef(0);
   const postsSetRef = useRef(new Set());
   const commentsSetRef = useRef(new Set());
-  // removed infinite scroll sentinel
 
   const resetState = () => {
     setPosts([]);
     setComments([]);
     setPostsAfter(null);
     setCommentsAfter(null);
-  setPostsPage(1);
-  setCommentsPage(1);
+    setPostsPage(1);
+    setCommentsPage(1);
     setDone(false);
   };
 
-  // restore last brand (if within TTL) on mount
   useEffect(() => {
     const entry = loadLastBrandEntry();
     if (entry) {
@@ -80,22 +76,20 @@ export default function Current() {
       setComments(entry.comments || []);
       setPostsAfter(entry.postsAfter || null);
       setCommentsAfter(entry.commentsAfter || null);
-  setDone(!!entry.done);
+      setDone(!!entry.done);
       setShowResults(true);
       setFromCache(true);
-      // seed sets
       (entry.posts||[]).forEach(p=> postsSetRef.current.add(p.post_url));
       (entry.comments||[]).forEach(c=> commentsSetRef.current.add(c.comment_url));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSearch = async (value, { forceRefresh = false } = {}) => {
-    if (!forceRefresh && value === brand && showResults && done) return; // avoid redundant fetch
+    if (!forceRefresh && value === brand && showResults && done) return;
     setBrand(value);
-  setActiveTab("posts");
-  setPostsPage(1);
-  setCommentsPage(1);
+    setActiveTab("posts");
+    setPostsPage(1);
+    setCommentsPage(1);
     setError("");
     setLoading(true);
     setShowResults(false);
@@ -106,7 +100,6 @@ export default function Current() {
     setPollDelay(2000);
     setStopped(false);
     setFromCache(false);
-    // abort previous
     if (abortRef.current) {
       abortRef.current.abort();
     }
@@ -128,19 +121,18 @@ export default function Current() {
       setPosts(newPosts);
       setComments(newComments);
       setPostsAfter(data.posts_after || null);
-  setCommentsAfter(data.comments_after || null);
+      setCommentsAfter(data.comments_after || null);
       if (!data.posts_after && !data.comments_after) setDone(true);
-  setShowResults(true);
-  saveCurrentMentions(value, { posts: data.posts, comments: data.comments, postsAfter: data.posts_after, commentsAfter: data.comments_after, done: !data.posts_after && !data.comments_after });
+      setShowResults(true);
+      saveCurrentMentions(value, { posts: data.posts, comments: data.comments, postsAfter: data.posts_after, commentsAfter: data.comments_after, done: !data.posts_after && !data.comments_after });
     } catch (e) {
-      if (e.name === "AbortError") return; // silent
+      if (e.name === "AbortError") return;
       setError(e.message || "Failed fetching mentions");
     } finally {
       setLoading(false);
     }
   };
 
-  // Fetch subsequent batches in background (poll-style) if pagination cursors exist
   const fetchNextBatch = async () => {
     if (backgroundLoading || done || stopped) return;
     if (!postsAfter && !commentsAfter) return;
@@ -158,32 +150,31 @@ export default function Current() {
         }),
         retries: 2
       });
-  let newPosts = posts;
-  let newComments = comments;
-  let added = 0;
-  if (Array.isArray(data.posts) && data.posts.length) {
-    const fresh = data.posts.filter(p=> !postsSetRef.current.has(p.post_url));
-    if (fresh.length) {
-      fresh.forEach(p=> postsSetRef.current.add(p.post_url));
-      newPosts = [...posts, ...fresh];
-      added += fresh.length;
-    }
-  }
-  if (Array.isArray(data.comments) && data.comments.length) {
-    const fresh = data.comments.filter(c=> !commentsSetRef.current.has(c.comment_url));
-    if (fresh.length) {
-      fresh.forEach(c=> commentsSetRef.current.add(c.comment_url));
-      newComments = [...comments, ...fresh];
-      added += fresh.length;
-    }
-  }
-  if (newPosts !== posts) setPosts(newPosts);
-  if (newComments !== comments) setComments(newComments);
-  setPostsAfter(data.posts_after || null);
-  setCommentsAfter(data.comments_after || null);
-  if (!data.posts_after && !data.comments_after) setDone(true);
-  saveCurrentMentions(brand, { posts: newPosts, comments: newComments, postsAfter: data.posts_after, commentsAfter: data.comments_after, done: !data.posts_after && !data.comments_after });
-      // adjust polling/backoff
+      let newPosts = posts;
+      let newComments = comments;
+      let added = 0;
+      if (Array.isArray(data.posts) && data.posts.length) {
+        const fresh = data.posts.filter(p=> !postsSetRef.current.has(p.post_url));
+        if (fresh.length) {
+          fresh.forEach(p=> postsSetRef.current.add(p.post_url));
+          newPosts = [...posts, ...fresh];
+          added += fresh.length;
+        }
+      }
+      if (Array.isArray(data.comments) && data.comments.length) {
+        const fresh = data.comments.filter(c=> !commentsSetRef.current.has(c.comment_url));
+        if (fresh.length) {
+          fresh.forEach(c=> commentsSetRef.current.add(c.comment_url));
+          newComments = [...comments, ...fresh];
+          added += fresh.length;
+        }
+      }
+      if (newPosts !== posts) setPosts(newPosts);
+      if (newComments !== comments) setComments(newComments);
+      setPostsAfter(data.posts_after || null);
+      setCommentsAfter(data.comments_after || null);
+      if (!data.posts_after && !data.comments_after) setDone(true);
+      saveCurrentMentions(brand, { posts: newPosts, comments: newComments, postsAfter: data.posts_after, commentsAfter: data.comments_after, done: !data.posts_after && !data.comments_after });
       if (added === 0) {
         consecutiveNoNewRef.current += 1;
         setPollDelay(d => Math.min(d * 1.5, 15000));
@@ -203,7 +194,6 @@ export default function Current() {
     }
   };
 
-  // Poll every 2s while cursors remain
   useEffect(() => {
     if (!brand || done || loading || stopped) return;
     if (!postsAfter && !commentsAfter) return;
@@ -211,8 +201,6 @@ export default function Current() {
     return () => clearTimeout(id);
   }, [postsAfter, commentsAfter, done, brand, loading, pollDelay, stopped]);
 
-
-  // Adjust current page when data shrinks (unlikely) or grows so page index stays valid
   useEffect(() => {
     const totalPostPages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
     if (postsPage > totalPostPages) setPostsPage(totalPostPages);
@@ -222,7 +210,6 @@ export default function Current() {
     if (commentsPage > totalCommentPages) setCommentsPage(totalCommentPages);
   }, [comments.length, commentsPage]);
 
-  // When switching tab, ensure we don't show empty page beyond data length
   useEffect(() => {
     if (activeTab === 'posts') {
       const tp = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
@@ -234,7 +221,6 @@ export default function Current() {
   }, [activeTab, posts.length, comments.length, postsPage, commentsPage]);
 
   const pagedPosts = useMemo(() => {
-    // filter by time range first
     const filtered = filterByTime(posts);
     const start = (postsPage - 1) * PAGE_SIZE;
     return filtered.slice(start, start + PAGE_SIZE);
@@ -244,7 +230,6 @@ export default function Current() {
     const start = (commentsPage - 1) * PAGE_SIZE;
     return filtered.slice(start, start + PAGE_SIZE);
   }, [comments, commentsPage, timeRange, customFrom, customTo]);
-
 
   const stats = useMemo(() => {
     if (!showResults) return { totalPosts: 0, totalComments: 0, uniqueSubs: 0, totalUpvotes: 0 };
@@ -260,39 +245,39 @@ export default function Current() {
   }, [showResults, posts, comments]);
 
   return (
-    <div className="flex-1 min-h-screen bg-gray-50 pb-16">
-  <CurrentHeader />
-  <SearchPanel
-    onSearch={handleSearch}
-    loading={loading}
-    buttonLabel="Search Mentions"
-    timeRange={timeRange}
-    setTimeRange={setTimeRange}
-    customFrom={customFrom}
-    setCustomFrom={setCustomFrom}
-    customTo={customTo}
-    setCustomTo={setCustomTo}
-  />
+    <div className="flex-1 min-h-screen pb-16 bg-gray-900 text-gray-100 font-sans">
+      <CurrentHeader />
+      <SearchPanel
+        onSearch={handleSearch}
+        loading={loading}
+        buttonLabel="Search Mentions"
+        timeRange={timeRange}
+        setTimeRange={setTimeRange}
+        customFrom={customFrom}
+        setCustomFrom={setCustomFrom}
+        customTo={customTo}
+        setCustomTo={setCustomTo}
+      />
       {error && (
-        <div className="px-6 mt-4 text-sm text-red-600 bg-red-50 border border-red-100 rounded-md p-3">{error}</div>
+        <div className="px-6 mt-4 text-sm text-red-400 bg-red-900/40 border border-red-800 rounded-md p-3 font-medium">{error}</div>
       )}
       <StatsCards stats={stats} visible={showResults} />
       {showResults && (
-        <div className="px-6 mt-2 text-[11px] text-gray-900 flex flex-wrap gap-4 items-center" aria-live="polite">
-          <span className="text-black font-medium">Loaded {posts.length} posts / {comments.length} comments</span>
-          {fromCache && <span className="px-2 py-0.5 rounded bg-gray-200 text-gray-700">cached</span>}
+        <div className="px-6 mt-2 text-xs text-gray-200 flex flex-wrap gap-4 items-center font-medium" aria-live="polite">
+          <span className="text-gray-100 font-semibold">Loaded {posts.length} posts / {comments.length} comments</span>
+          {fromCache && <span className="px-2 py-0.5 rounded bg-gray-800 text-gray-300">cached</span>}
           {!done && !stopped && (postsAfter || commentsAfter) && (
-            <span className="inline-flex items-center gap-1 text-blue-600">Fetching more<span className="h-3 w-3 inline-block animate-spin rounded-full border-2 border-blue-300 border-t-transparent" /></span>
+            <span className="inline-flex items-center gap-1 text-blue-400">Fetching more<span className="h-3 w-3 inline-block animate-spin rounded-full border-2 border-blue-500 border-t-transparent" /></span>
           )}
-          {stopped && !done && <span className="text-orange-600">paused</span>}
-          {done && <span className="text-emerald-600">All results loaded</span>}
-          {backgroundLoading && <span className="text-gray-400">(background)</span>}
-          <button onClick={() => handleSearch(brand, { forceRefresh: true })} className="ml-2 inline-flex items-center px-2 py-1 bg-gray-800 text-white rounded hover:bg-black">Refresh</button>
+          {stopped && !done && <span className="text-orange-400">paused</span>}
+          {done && <span className="text-emerald-400">All results loaded</span>}
+          {backgroundLoading && <span className="text-gray-500">(background)</span>}
+          <button onClick={() => handleSearch(brand, { forceRefresh: true })} className="ml-2 inline-flex items-center px-2 py-1 bg-gray-700 text-white rounded hover:bg-gray-800 font-semibold">Refresh</button>
           {!stopped && !done && (postsAfter || commentsAfter) && (
-            <button onClick={() => setStopped(true)} className="inline-flex items-center px-2 py-1 bg-gray-200 rounded hover:bg-gray-300">Stop</button>
+            <button onClick={() => setStopped(true)} className="inline-flex items-center px-2 py-1 bg-gray-800 text-gray-200 rounded hover:bg-gray-700 font-semibold">Stop</button>
           )}
           {stopped && !done && (
-            <button onClick={() => { setStopped(false); setPollDelay(2000); }} className="inline-flex items-center px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">Resume</button>
+            <button onClick={() => { setStopped(false); setPollDelay(2000); }} className="inline-flex items-center px-2 py-1 bg-blue-700 text-white rounded hover:bg-blue-800 font-semibold">Resume</button>
           )}
         </div>
       )}
@@ -302,36 +287,36 @@ export default function Current() {
         counts={{ posts: filterByTime(posts).length, comments: filterByTime(comments).length }}
         visible={showResults}
       />
-    <PostsList posts={pagedPosts} visible={showResults && activeTab === "posts"} />
+      <PostsList posts={pagedPosts} visible={showResults && activeTab === "posts"} />
       {showResults && activeTab === 'posts' && (
         <Pagination
           page={postsPage}
-      totalItems={filterByTime(posts).length}
-            pageSize={PAGE_SIZE}
-            loading={backgroundLoading}
-            onPageChange={(p) => setPostsPage(p)}
+          totalItems={filterByTime(posts).length}
+          pageSize={PAGE_SIZE}
+          loading={backgroundLoading}
+          onPageChange={(p) => setPostsPage(p)}
         />
       )}
-    <CommentsList comments={pagedComments} visible={showResults && activeTab === "comments"} />
+      <CommentsList comments={pagedComments} visible={showResults && activeTab === "comments"} />
       {showResults && activeTab === 'comments' && (
         <Pagination
           page={commentsPage}
-      totalItems={filterByTime(comments).length}
+          totalItems={filterByTime(comments).length}
           pageSize={PAGE_SIZE}
           loading={backgroundLoading}
           onPageChange={(p) => setCommentsPage(p)}
         />
       )}
       {showResults && !done && !(postsAfter || commentsAfter) && posts.length + comments.length > 0 && (
-        <div className="px-6 mt-6 text-center text-xs text-gray-500">All currently fetched results shown. (Pagination updates as new results arrive.)</div>
+        <div className="px-6 mt-6 text-center text-xs text-gray-400 font-normal">All currently fetched results shown. (Pagination updates as new results arrive.)</div>
       )}
       {!showResults && !loading && (
-        <div className="px-6 mt-14 text-center text-sm text-gray-500">
+        <div className="px-6 mt-14 text-center text-sm text-gray-500 font-normal">
           Enter a brand above to view current Reddit mentions.
         </div>
       )}
       {loading && (
-        <div className="px-6 mt-14 text-center text-sm text-gray-500 animate-pulse">
+        <div className="px-6 mt-14 text-center text-sm text-gray-400 animate-pulse font-normal">
           Fetching mentions for {brand || "brand"}...
         </div>
       )}

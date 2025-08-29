@@ -13,29 +13,6 @@ export default function NewPost() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    setResult(null);
-    setCopied(false);
-    try {
-      const res = await fetch(`${API_BASE}/generate_post`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subreddit_url: subredditUrl, word_count: wordCount, context, tone })
-      });
-      if (!res.ok) throw new Error("Failed to generate post");
-      const data = await res.json();
-      setResult(data);
-    } catch (err) {
-      setError(err.message || "Error generating post");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleCopy = () => {
     if (result?.generated_post) {
       navigator.clipboard.writeText(result.generated_post);
@@ -43,6 +20,28 @@ export default function NewPost() {
       setTimeout(() => setCopied(false), 1500);
     }
   };
+
+  return (
+    <div className="min-h-screen bg-background p-4 md:p-8">
+      <div className="max-w-5xl mx-auto">
+        <div className="glass-card px-8 py-6 rounded-xl shadow-md mb-8 animate-fade-in">
+          <h1 className="text-3xl font-bold mb-1"><span className="gradient-text">New Post Generator</span></h1>
+          <p className="text-lg text-foreground-muted mb-2">AI generates Reddit post titles based on any company website.</p>
+        </div>
+        <div className="glass-card rounded-xl shadow-md border border-border-muted mb-8 animate-fade-in p-6">
+          <form className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-foreground-muted mb-2">Company Website</label>
+              <input type="text" placeholder="company.com" className="w-full px-4 py-3 border border-border-muted rounded-lg focus:ring-2 focus:ring-reddit-orange focus:border-transparent text-sm" required />
+            </div>
+            <div className="flex justify-end">
+              <button type="submit" className="btn-primary px-6 py-3 rounded-lg font-medium">Generate Post</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 
   const handleSubredditUrlChange = async (e) => {
     const url = e.target.value;

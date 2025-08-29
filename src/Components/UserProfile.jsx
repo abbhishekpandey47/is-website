@@ -1,21 +1,20 @@
 "use client";
-import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { Bell, HelpCircle, LogOut, Settings, User } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { auth, signOutUser } from "../lib/firebaseClient";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { User, Settings, LogOut, Bell, HelpCircle } from "lucide-react";
-import { signOutUser, auth, firestore } from "@/lib/firebaseClient";
-import { useRouter } from "next/navigation";
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { toast } from "react-toastify";
 
 export function UserProfile() {
   const [userData, setUserData] = useState({
