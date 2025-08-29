@@ -1,14 +1,10 @@
-"use client";
-import { ErrorBoundary } from '@sentry/react';
+import PageLayoutClient from "./PageLayoutClient";
 
 export const metadata = {
+  title: "Platform | Infrasity",
+  description: "Platform page layout with error boundary",
 };
 
-
 export default function PlatformLayout({ children }) {
-  return (
-    <ErrorBoundary fallback={<div>Something went wrong.</div>} showDialog>
-      {children}
-    </ErrorBoundary>
-  );
+  return <PageLayoutClient>{children}</PageLayoutClient>;
 }
