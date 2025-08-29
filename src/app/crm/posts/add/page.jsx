@@ -117,7 +117,7 @@ const AddPostPage = () => {
             <div className="flex items-center gap-3">
               <Button 
                 variant="ghost" 
-                onClick={() => navigate("/crm/posts")}
+                onClick={() => router.back()}                
                 className="p-2"
               >
                 <ArrowLeft className="h-4 w-4" />
@@ -264,8 +264,7 @@ const AddPostPage = () => {
                   <Button 
                     type="button" 
                     variant="outline" 
-                    onClick={() => navigate("/crm/posts")}
-                  >
+onClick={() => router.back()}                  >
                     Cancel
                   </Button>
                   <Button type="submit" className="bg-primary hover:bg-primary/90 text-primary-foreground">
