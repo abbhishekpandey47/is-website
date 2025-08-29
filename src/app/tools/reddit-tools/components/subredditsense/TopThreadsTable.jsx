@@ -74,7 +74,25 @@ const TopThreadsTable = (props) => {
                         </p>
                     </div>
                 </div>
-                <div className="text-center text-foreground-muted py-16">No threads available.</div>
+                <div className="overflow-x-auto">
+                    <table className="w-full">
+                        <thead>
+                            <tr className="border-b border-border">
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Thread</th>
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Community</th>
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Author</th>
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Engagement</th>
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Sentiment</th>
+                                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colSpan={6} className="py-8 text-center text-foreground-muted">No threads available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }

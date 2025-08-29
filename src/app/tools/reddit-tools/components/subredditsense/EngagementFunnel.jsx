@@ -39,7 +39,32 @@ const EngagementFunnel = (props) => {
   session.set('engagementData', funnelData);
 
   if (!funnelData.length) {
-    return <div className="chart-container animate-slide-up"><div className="text-center text-foreground-muted py-16">No engagement data available.</div></div>;
+    return (
+      <div className="chart-container animate-slide-up">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-xl font-semibold text-foreground mb-1">Engagement Funnel</h2>
+            <p className="text-foreground-muted text-sm">Conversion from mentions to positive outcomes</p>
+          </div>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Stage</th>
+                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Count</th>
+                <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">Percentage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colSpan={3} className="py-8 text-center text-foreground-muted">No engagement data available.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
   }
 
   return (
