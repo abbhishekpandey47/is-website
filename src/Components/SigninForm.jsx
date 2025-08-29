@@ -33,7 +33,7 @@ const SigninForm = () => {
       const res = await signinWithGoogle();
       setShowSuccess(true);
       setTimeout(() => {
-        router.push(res === true ? "/crm" : "/crm");
+        router.push(res === true ? "/threadflow" : "/threadflow");
       }, 2000);
     } catch (error) {
       if (error instanceof FireBaseErrors.INVALID_PASSWORD) {
@@ -54,7 +54,7 @@ const SigninForm = () => {
       const res = await signinWithEmail(email, password);
       setShowSuccess(true);
       setTimeout(() => {
-        router.push(res === true ? "/crm" : "/crm");
+        router.push(res === true ? "/threadflow" : "/threadflow");
       }, 2000);
     } catch (error) {
       if (error instanceof FireBaseErrors.INVALID_PASSWORD) {
