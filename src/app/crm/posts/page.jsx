@@ -154,10 +154,10 @@ const PostsPage = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="Approved">Approved</SelectItem>
-                  <SelectItem value="Live">Live</SelectItem>
-                  <SelectItem value="Pending">Pending</SelectItem>
-                  <SelectItem value="Rejected">Rejected</SelectItem>
+                  <SelectItem value="approved">Approved</SelectItem>
+                  <SelectItem value="live">Live</SelectItem>
+                  <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="rejected">Rejected</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -170,6 +170,7 @@ const PostsPage = () => {
               My Posts ({filteredPosts.length})
             </CardTitle>
           </CardHeader>
+          <div className="bg-[#344256] w-full h-[0.5px] mb-1"></div>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <Table>
