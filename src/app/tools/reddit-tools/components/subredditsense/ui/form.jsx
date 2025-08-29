@@ -15,9 +15,8 @@ import { Label } from "@/components/ui/label"
 
 const Form = FormProvider
 
-type FormFieldContextValue<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+// Removed type-only declaration
+  // Removed TypeScript generics for JS compatibility
 > = {
   name: TName
 }
@@ -27,8 +26,7 @@ const FormFieldContext = React.createContext<FormFieldContextValue>(
 )
 
 const FormField = <
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  // Removed TypeScript generics for JS compatibility
 >({
   ...props
 }: ControllerProps<TFieldValues, TName>) => {
@@ -62,7 +60,7 @@ const useFormField = () => {
   }
 }
 
-type FormItemContextValue = {
+// Removed type-only declaration
   id: string
 }
 
@@ -85,8 +83,7 @@ const FormItem = React.forwardRef<
 FormItem.displayName = "FormItem"
 
 const FormLabel = React.forwardRef<
-  React.ElementRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
+  // Removed invalid type usage for JS
 >(({ className, ...props }, ref) => {
   const { error, formItemId } = useFormField()
 
@@ -102,8 +99,7 @@ const FormLabel = React.forwardRef<
 FormLabel.displayName = "FormLabel"
 
 const FormControl = React.forwardRef<
-  React.ElementRef<typeof Slot>,
-  React.ComponentPropsWithoutRef<typeof Slot>
+  // Removed invalid type usage for JS
 >(({ ...props }, ref) => {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
 

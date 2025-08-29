@@ -4,39 +4,27 @@ import session from "../../../utils/session";
 
 function calculateFunnel(posts = [], comments = []) {
   const allMentions = posts.length + comments.length;
+  if (!allMentions) return [];
   const upvotes5 = posts.filter(p => (p.upvotes || 0) >= 5).length;
   const comments3 = posts.filter(p => (p.total_comments || 0) >= 3).length;
-  // Brand replied and positive outcome: leave empty for now
   return [
     {
       stage: 'All Verified\nMentions',
       count: allMentions,
-      percentage: allMentions ? 100 : 0,
+      percentage: 100,
       color: 'hsl(var(--chart-primary))'
     },
     {
       stage: 'Upvotes ≥5',
       count: upvotes5,
-      percentage: allMentions ? Math.round((upvotes5 / allMentions) * 100) : 0,
+      percentage: Math.round((upvotes5 / allMentions) * 100),
       color: 'hsl(var(--chart-secondary))'
     },
     {
       stage: 'Comments ≥3',
       count: comments3,
-      percentage: allMentions ? Math.round((comments3 / allMentions) * 100) : 0,
+      percentage: Math.round((comments3 / allMentions) * 100),
       color: 'hsl(var(--chart-tertiary))'
-    },
-    {
-      stage: 'Brand\nReplied',
-      count: '',
-      percentage: '',
-      color: 'hsl(var(--chart-quaternary))'
-    },
-    {
-      stage: 'Positive\nOutcome',
-      count: '',
-      percentage: '',
-      color: 'hsl(var(--success))'
     }
   ];
 }
@@ -46,42 +34,13 @@ const EngagementFunnel = (props) => {
   let funnelData = [];
   if (props.data && props.data.posts && props.data.comments) {
     funnelData = calculateFunnel(props.data.posts, props.data.comments);
-  } else {
-    funnelData = [
-      {
-        stage: 'All Verified\nMentions',
-        count: 1250,
-        percentage: 100,
-        color: 'hsl(var(--chart-primary))'
-      },
-      {
-        stage: 'Upvotes ≥5',
-        count: 875,
-        percentage: 70,
-        color: 'hsl(var(--chart-secondary))'
-      },
-      {
-        stage: 'Comments ≥3',
-        count: 520,
-        percentage: 42,
-        color: 'hsl(var(--chart-tertiary))'
-      },
-      {
-        stage: 'Brand\nReplied',
-        count: 185,
-        percentage: 15,
-        color: 'hsl(var(--chart-quaternary))'
-      },
-      {
-        stage: 'Positive\nOutcome',
-        count: 95,
-        percentage: 8,
-        color: 'hsl(var(--success))'
-      }
-    ];
   }
 
   session.set('engagementData', funnelData);
+
+  if (!funnelData.length) {
+    return <div className="chart-container animate-slide-up"><div className="text-center text-foreground-muted py-16">No engagement data available.</div></div>;
+  }
 
   return (
     <div className="chart-container animate-slide-up">
@@ -93,10 +52,6 @@ const EngagementFunnel = (props) => {
           <p className="text-foreground-muted text-sm">
             Conversion from mentions to positive outcomes
           </p>
-        </div>
-        <div className="text-right">
-          <div className="text-2xl font-bold text-success">{funnelData[4]?.percentage || '8%'}%</div>
-          <div className="text-sm text-foreground-muted">Conversion Rate</div>
         </div>
       </div>
 
