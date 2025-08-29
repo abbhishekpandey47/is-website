@@ -10,7 +10,6 @@ import { SidebarTrigger } from "../../Components/ui/sidebar";
 import { UserProfile } from "../../Components/UserProfile";
 import { useRouter } from "next/navigation";
 import { Plus, Search, ExternalLink, BarChart3 } from "lucide-react";
-import { supabase } from "@/lib/supabaseClient";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
 import { toast } from "react-toastify";
@@ -39,28 +38,29 @@ const PostsPage = () => {
     return () => unsubscribe();
   }, [router]);
 
-  useEffect(() => {
-    if (!firebaseUser) return;
+useEffect(() => {
+  if (!firebaseUser) return;
 
-    console.log("Fetching posts for user:", firebaseUser.uid);
+  console.log("Fetching posts for user:", firebaseUser.uid);
 
-    const fetchPosts = async () => {
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*")
-        .eq("user_id", firebaseUser.uid) 
-        .order("date_posted", { ascending: false });
+  const fetchPosts = async () => {
+    try {
+      const res = await fetch(`/api/posts?userId=${firebaseUser.uid}`);
+      const result = await res.json();
 
-      if (error) {
-        console.error("Error fetching posts:", error);
-        toast.error("Failed to load posts");
-      } else {
-        setPosts(data || []);
+      if (!res.ok) {
+        throw new Error(result.error || "Failed to fetch posts");
       }
-    };
 
-    fetchPosts();
-  }, [firebaseUser]);
+      setPosts(result.data || []);
+    } catch (err) {
+      console.error("Error fetching posts:", err);
+      toast.error("Failed to load posts");
+    }
+  };
+
+  fetchPosts();
+}, [firebaseUser]);
 
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
@@ -203,13 +203,16 @@ const PostsPage = () => {
                     <TableHead>Category</TableHead>
                     <TableHead>Title</TableHead>
                     <TableHead>URL</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Engagement Text</TableHead>
-                    <TableHead>Kim's Version</TableHead>
-                    <TableHead>Date Posted</TableHead>
-                    <TableHead>Posted Link</TableHead>
-                    <TableHead>Current Status</TableHead>
-                    <TableHead>Actions</TableHead>
+                    <TableHead>Approved</TableHead>
+                    <TableHead>Text of engagement</TableHead>
+                    {/* <TableHead>Kim's Version</TableHead> */}
+                    <TableHead>Date published</TableHead>
+                     <TableHead>Status</TableHead>
+                    <TableHead>Published Link</TableHead>
+                   
+                    <TableHead>Number of our engagements</TableHead>
+                    <TableHead>Link to Kubiya</TableHead>
+                    <TableHead>ID used</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -242,14 +245,16 @@ const PostsPage = () => {
                           {post.engagement_text}
                         </div>
                       </TableCell>
-                      <TableCell className="max-w-sm">
+                      {/* <TableCell className="max-w-sm">
                         <div className="text-sm text-muted-foreground line-clamp-3">
                           {post.kims_version}
                         </div>
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell className="text-sm">
                         {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
                       </TableCell>
+                                            <TableCell className="text-sm">{post.current_status}</TableCell>
+
                       <TableCell>
                         <a
                           href={post.posted_link}
@@ -260,8 +265,12 @@ const PostsPage = () => {
                           {post.posted_link ? "View Link" : "-"}
                         </a>
                       </TableCell>
-                      <TableCell className="text-sm">{post.current_status}</TableCell>
                       <TableCell>
+                      </TableCell>
+                       <TableCell>
+                      </TableCell>
+                       <TableCell>
+                        {post.id}
                       </TableCell>
                     </TableRow>
                   ))}

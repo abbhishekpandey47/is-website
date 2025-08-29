@@ -50,51 +50,38 @@ const AddPostPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!firebaseUser) {
-      toast({
-        title: "Authentication Required",
-        description: "Please log in before adding a post.",
-        variant: "destructive",
-      });
-      router.push("/auth/signup");
-      return;
-    }
+  if (!firebaseUser) {
+    toast({
+      title: "Authentication Required",
+      description: "Please log in before adding a post.",
+      variant: "destructive",
+    });
+    router.push("/auth/signup");
+    return;
+  }
 
-    if (!formData.category || !formData.title || !formData.url) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in category, title, and URL fields.",
-        variant: "destructive",
-      });
-      return;
-    }
+  if (!formData.category || !formData.title || !formData.url) {
+    toast({
+      title: "Missing Information",
+      description: "Please fill in category, title, and URL fields.",
+      variant: "destructive",
+    });
+    return;
+  }
 
-    // Save to Supabase
-    const { data, error } = await supabase.from("posts").insert([
-      {
-        category: formData.category,
-        title: formData.title,
-        url: formData.url,
-        status: formData.status,
-        engagement_text: formData.engagementText,
-        kims_version: formData.kimsVersion,
-        date_posted: formData.datePosted ? new Date(formData.datePosted) : null,
-        posted_link: formData.postedLink,
-        current_status: formData.currentStatus,
-        user_id: firebaseUser.uid, // link post to Firebase user
-      },
-    ]);
+  try {
+    const res = await fetch("/api/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...formData, user_id: firebaseUser.uid }),
+    });
 
-    if (error) {
-      console.error("Error saving post:", error);
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
-      return;
+    const result = await res.json();
+
+    if (!res.ok) {
+      throw new Error(result.error || "Failed to save post");
     }
 
     toast({
@@ -103,7 +90,15 @@ const AddPostPage = () => {
     });
 
     router.push("/crm/posts");
-  };
+  } catch (err) {
+    console.error("Error saving post:", err);
+    toast({
+      title: "Error",
+      description: err.message,
+      variant: "destructive",
+    });
+  }
+};
 
   if (loading) return <p>Loading...</p>;
 

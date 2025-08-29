@@ -10,7 +10,6 @@ import { SidebarTrigger } from "../../../Components/ui/sidebar";
 import { UserProfile } from "../../../Components/UserProfile";
 import { useRouter } from "next/navigation";
 import { Plus, Search, ExternalLink } from "lucide-react";
-import { supabase } from "@/lib/supabaseClient";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
 import { toast } from "react-toastify";
@@ -37,28 +36,29 @@ const PostsPage = () => {
     return () => unsubscribe();
   }, [router]);
 
-  useEffect(() => {
-    if (!firebaseUser) return;
+useEffect(() => {
+  if (!firebaseUser) return;
 
-    console.log("Fetching posts for user:", firebaseUser.uid);
+  console.log("Fetching posts for user:", firebaseUser.uid);
 
-    const fetchPosts = async () => {
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*")
-        .eq("user_id", firebaseUser.uid) 
-        .order("date_posted", { ascending: false });
+  const fetchPosts = async () => {
+    try {
+      const res = await fetch(`/api/posts?userId=${firebaseUser.uid}`);
+      const result = await res.json();
 
-      if (error) {
-        console.error("Error fetching posts:", error);
-        toast.error("Failed to load posts");
-      } else {
-        setPosts(data || []);
+      if (!res.ok) {
+        throw new Error(result.error || "Failed to fetch posts");
       }
-    };
 
-    fetchPosts();
-  }, [firebaseUser]);
+      setPosts(result.data || []);
+    } catch (err) {
+      console.error("Error fetching posts:", err);
+      toast.error("Failed to load posts");
+    }
+  };
+
+  fetchPosts();
+}, [firebaseUser]);
 
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
