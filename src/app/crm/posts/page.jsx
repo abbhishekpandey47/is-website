@@ -1,10 +1,5 @@
 "use client";
-import { supabase } from "@/lib/supabaseClient";
-import { onAuthStateChanged } from "firebase/auth";
-import { ExternalLink, Plus, Search } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { Badge } from "../../../Components/ui/badge";
 import { Button } from "../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../Components/ui/card";
@@ -13,7 +8,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { SidebarTrigger } from "../../../Components/ui/sidebar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../Components/ui/table";
 import { UserProfile } from "../../../Components/UserProfile";
-import { auth } from "../../../lib/firebaseClient";
+import { useRouter } from "next/navigation";
+import { Plus, Search, ExternalLink } from "lucide-react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebaseClient";
+import { toast } from "react-toastify";
 
 const PostsPage = () => {
   const router = useRouter();
@@ -37,28 +36,29 @@ const PostsPage = () => {
     return () => unsubscribe();
   }, [router]);
 
-  useEffect(() => {
-    if (!firebaseUser) return;
+useEffect(() => {
+  if (!firebaseUser) return;
 
-    console.log("Fetching posts for user:", firebaseUser.uid);
+  console.log("Fetching posts for user:", firebaseUser.uid);
 
-    const fetchPosts = async () => {
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*")
-        .eq("user_id", firebaseUser.uid)
-        .order("date_posted", { ascending: false });
+  const fetchPosts = async () => {
+    try {
+      const res = await fetch(`/api/posts?userId=${firebaseUser.uid}`);
+      const result = await res.json();
 
-      if (error) {
-        console.error("Error fetching posts:", error);
-        toast.error("Failed to load posts");
-      } else {
-        setPosts(data || []);
+      if (!res.ok) {
+        throw new Error(result.error || "Failed to fetch posts");
       }
-    };
 
-    fetchPosts();
-  }, [firebaseUser]);
+      setPosts(result.data || []);
+    } catch (err) {
+      console.error("Error fetching posts:", err);
+      toast.error("Failed to load posts");
+    }
+  };
+
+  fetchPosts();
+}, [firebaseUser]);
 
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
@@ -111,7 +111,7 @@ const PostsPage = () => {
           </div>
           <div className="flex items-center gap-3">
             <Button
-              onClick={() => router.push("crm/posts/add")}
+              onClick={() => router.push("/crm/posts/add")}
               className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <Plus className="h-4 w-4 mr-2" />
@@ -154,98 +154,108 @@ const PostsPage = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="Approved">Approved</SelectItem>
-                  <SelectItem value="Live">Live</SelectItem>
-                  <SelectItem value="Pending">Pending</SelectItem>
-                  <SelectItem value="Rejected">Rejected</SelectItem>
+                  <SelectItem value="approved">Approved</SelectItem>
+                  <SelectItem value="live">Live</SelectItem>
+                  <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="rejected">Rejected</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg font-semibold">
-              My Posts ({filteredPosts.length})
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-0">
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Category</TableHead>
-                    <TableHead>Title</TableHead>
-                    <TableHead>URL</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Engagement Text</TableHead>
-                    <TableHead>Kim's Version</TableHead>
-                    <TableHead>Date Posted</TableHead>
-                    <TableHead>Posted Link</TableHead>
-                    <TableHead>Current Status</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredPosts.map((post) => (
-                    <TableRow key={post.id}>
-                      <TableCell>
-                        <Badge variant="outline" className="whitespace-nowrap">
-                          {post.category}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="font-medium max-w-xs">
-                        <div className="truncate" title={post.title}>
-                          {post.title}
-                        </div>
-                      </TableCell>
-                      <TableCell className="max-w-xs">
-                        <a
-                          href={post.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:underline flex items-center gap-1 truncate"
-                        >
-                          <ExternalLink className="h-3 w-3" />
-                          Reddit Link
-                        </a>
-                      </TableCell>
-                      <TableCell>{getStatusBadge(post.status)}</TableCell>
-                      <TableCell className="max-w-sm">
-                        <div className="text-sm text-muted-foreground line-clamp-3">
-                          {post.engagement_text}
-                        </div>
-                      </TableCell>
-                      <TableCell className="max-w-sm">
-                        <div className="text-sm text-muted-foreground line-clamp-3">
-                          {post.kims_version}
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-sm">
-                        {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
-                      </TableCell>
-                      <TableCell>
-                        <a
-                          href={post.posted_link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:underline"
-                        >
-                          {post.posted_link ? "View Link" : "-"}
-                        </a>
-                      </TableCell>
-                      <TableCell className="text-sm">{post.current_status}</TableCell>
-                      <TableCell>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+         <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg font-semibold">
+                      My Posts ({filteredPosts.length})
+                    </CardTitle>
+                  </CardHeader>
+                  <div className="bg-[#344256] w-full h-[0.5px] mb-1"></div>
+                  <CardContent className="p-0">
+                    <div className="overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Category</TableHead>
+                            <TableHead>Title</TableHead>
+                            <TableHead>URL</TableHead>
+                            <TableHead>Approved</TableHead>
+                            <TableHead>Text of engagement</TableHead>
+                            {/* <TableHead>Kim's Version</TableHead> */}
+                            <TableHead>Date published</TableHead>
+                             <TableHead>Status</TableHead>
+                            <TableHead>Published Link</TableHead>
+                           
+                            <TableHead>Number of our engagements</TableHead>
+                            <TableHead>Link to Kubiya</TableHead>
+                            <TableHead>ID used</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {filteredPosts.map((post) => (
+                            <TableRow key={post.id}>
+                              <TableCell>
+                                <Badge variant="outline" className="whitespace-nowrap">
+                                  {post.category}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="font-medium max-w-xs">
+                                <div className="truncate" title={post.title}>
+                                  {post.title}
+                                </div>
+                              </TableCell>
+                              <TableCell className="max-w-xs">
+                                <a
+                                  href={post.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-primary hover:underline flex items-center gap-1 truncate"
+                                >
+                                  <ExternalLink className="h-3 w-3" />
+                                  Reddit Link
+                                </a>
+                              </TableCell>
+                              <TableCell>{getStatusBadge(post.status)}</TableCell>
+                              <TableCell className="max-w-sm">
+                                <div className="text-sm text-muted-foreground line-clamp-3">
+                                  {post.engagement_text}
+                                </div>
+                              </TableCell>
+                              {/* <TableCell className="max-w-sm">
+                                <div className="text-sm text-muted-foreground line-clamp-3">
+                                  {post.kims_version}
+                                </div>
+                              </TableCell> */}
+                              <TableCell className="text-sm">
+                                {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
+                              </TableCell>
+                                                    <TableCell className="text-sm">{post.current_status}</TableCell>
+        
+                              <TableCell>
+                                <a
+                                  href={post.posted_link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-primary hover:underline"
+                                >
+                                  {post.posted_link ? "View Link" : "-"}
+                                </a>
+                              </TableCell>
+                              <TableCell>
+                              </TableCell>
+                               <TableCell>
+                              </TableCell>
+                               <TableCell>
+                                {post.id}
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </CardContent>
+                </Card>
+                      </div>
     </div>
   );
 };

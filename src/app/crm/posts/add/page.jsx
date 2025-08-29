@@ -1,19 +1,19 @@
 'use client';
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/lib/supabaseClient";
-import { onAuthStateChanged } from "firebase/auth";
-import { ArrowLeft, Save } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../../Components/ui/card";
 import { Input } from "../../../../Components/ui/input";
 import { Label } from "../../../../Components/ui/label";
+import { Textarea } from "../../../../Components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../Components/ui/select";
 import { SidebarTrigger } from "../../../../Components/ui/sidebar";
-import { Textarea } from "../../../../Components/ui/textarea";
 import { UserProfile } from "../../../../Components/UserProfile";
-import { auth } from "../../../../lib/firebaseClient";
+import { useRouter } from "next/navigation";
+import { Save, ArrowLeft } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabaseClient";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebaseClient";
 
 const AddPostPage = () => {
   const [firebaseUser, setFirebaseUser] = useState(null);
@@ -50,51 +50,38 @@ const AddPostPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!firebaseUser) {
-      toast({
-        title: "Authentication Required",
-        description: "Please log in before adding a post.",
-        variant: "destructive",
-      });
-      router.push("/auth/signup");
-      return;
-    }
+  if (!firebaseUser) {
+    toast({
+      title: "Authentication Required",
+      description: "Please log in before adding a post.",
+      variant: "destructive",
+    });
+    router.push("/auth/signup");
+    return;
+  }
 
-    if (!formData.category || !formData.title || !formData.url) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in category, title, and URL fields.",
-        variant: "destructive",
-      });
-      return;
-    }
+  if (!formData.category || !formData.title || !formData.url) {
+    toast({
+      title: "Missing Information",
+      description: "Please fill in category, title, and URL fields.",
+      variant: "destructive",
+    });
+    return;
+  }
 
-    // Save to Supabase
-    const { data, error } = await supabase.from("posts").insert([
-      {
-        category: formData.category,
-        title: formData.title,
-        url: formData.url,
-        status: formData.status,
-        engagement_text: formData.engagementText,
-        kims_version: formData.kimsVersion,
-        date_posted: formData.datePosted ? new Date(formData.datePosted) : null,
-        posted_link: formData.postedLink,
-        current_status: formData.currentStatus,
-        user_id: firebaseUser.uid, // link post to Firebase user
-      },
-    ]);
+  try {
+    const res = await fetch("/api/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...formData, user_id: firebaseUser.uid }),
+    });
 
-    if (error) {
-      console.error("Error saving post:", error);
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
-      return;
+    const result = await res.json();
+
+    if (!res.ok) {
+      throw new Error(result.error || "Failed to save post");
     }
 
     toast({
@@ -103,7 +90,15 @@ const AddPostPage = () => {
     });
 
     router.push("/crm/posts");
-  };
+  } catch (err) {
+    console.error("Error saving post:", err);
+    toast({
+      title: "Error",
+      description: err.message,
+      variant: "destructive",
+    });
+  }
+};
 
   if (loading) return <p>Loading...</p>;
 
@@ -115,9 +110,9 @@ const AddPostPage = () => {
           <div className="flex items-center gap-4">
             <SidebarTrigger className="h-8 w-8" />
             <div className="flex items-center gap-3">
-              <Button
-                variant="ghost"
-                onClick={() => navigate("/crm/posts")}
+              <Button 
+                variant="ghost" 
+                onClick={() => router.back()}                
                 className="p-2"
               >
                 <ArrowLeft className="h-4 w-4" />
@@ -209,7 +204,7 @@ const AddPostPage = () => {
                   />
                 </div>
 
-                <div>
+                {/* <div>
                   <Label htmlFor="kimsVersion">Kim's Version</Label>
                   <Textarea
                     id="kimsVersion"
@@ -218,7 +213,7 @@ const AddPostPage = () => {
                     placeholder="Revised version of the engagement text"
                     rows={4}
                   />
-                </div>
+                </div> */}
 
                 {/* Tracking Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -261,11 +256,10 @@ const AddPostPage = () => {
 
                 {/* Action Buttons */}
                 <div className="flex items-center justify-end gap-3 pt-6">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => navigate("/crm/posts")}
-                  >
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+onClick={() => router.back()}                  >
                     Cancel
                   </Button>
                   <Button type="submit" className="bg-primary hover:bg-primary/90 text-primary-foreground">
