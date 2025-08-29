@@ -89,7 +89,7 @@ const AddPostPage = () => {
       description: "Your post has been added to the tracker.",
     });
 
-    router.push("/crm/posts");
+    router.push("/threadflow/posts");
   } catch (err) {
     console.error("Error saving post:", err);
     toast({

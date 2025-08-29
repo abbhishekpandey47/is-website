@@ -24,12 +24,12 @@ const SignupForm = () => {
       if (res === true) {
         setShowSuccess(true);
         setTimeout(() => {
-          router.push("/crm");
+          router.push("/threadflow");
         }, 2000); // Adjust the delay as needed
       } else {
         setShowSuccess(true);
         setTimeout(() => {
-          router.push("/crm");
+          router.push("/threadflow");
         }, 2000);
       }
     } catch (error) {
@@ -76,12 +76,12 @@ const SignupForm = () => {
       if (res === true) {
         setShowSuccess(true);
         setTimeout(() => {
-          router.push("/crm");
+          router.push("/threadflow");
         }, 2000); // Adjust the delay as needed
       } else {
         setShowSuccess(true);
         setTimeout(() => {
-          router.push("/crm");
+          router.push("/threadflow");
         }, 2000);
       }
     } catch (error) {
