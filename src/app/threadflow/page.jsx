@@ -169,6 +169,9 @@ useEffect(() => {
                   <SelectItem value="Drift Detection">Drift Detection</SelectItem>
                   <SelectItem value="IaC">IaC</SelectItem>
                   <SelectItem value="DevOps">DevOps</SelectItem>
+                  <SelectItem value="AWS">AWS</SelectItem>
+                  <SelectItem value="Enterprise AI">Enterprise AI</SelectItem>
+                  <SelectItem value="AI Workflow">AI Workflow</SelectItem>
                 </SelectContent>
               </Select>
 
