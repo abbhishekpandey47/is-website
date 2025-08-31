@@ -46,7 +46,7 @@ export function AppSidebar() {
 
   const isActive = (href) => {
     if (href === "/threadflow") return pathname === "/threadflow"
-    return pathname === href || pathname.startsWith(href + "/threadflow/")
+    return pathname === href || pathname.startsWith(href + "/")
   }
 
   const renderItem = (item) => {

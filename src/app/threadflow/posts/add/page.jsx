@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { SidebarTrigger } from "../../../../Components/ui/sidebar";
 import { UserProfile } from "../../../../Components/UserProfile";
 import { useRouter } from "next/navigation";
-import { Save, ArrowLeft } from "lucide-react";
+import { Save, ArrowLeft, Plus, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabaseClient";
 import { onAuthStateChanged } from "firebase/auth";
@@ -20,6 +20,18 @@ const AddPostPage = () => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { toast } = useToast();
+  const [showAddCategory, setShowAddCategory] = useState(false);
+  const [newCategory, setNewCategory] = useState({ name: "", description: "" });
+
+  // Predefined categories
+  const [categories, setCategories] = useState([
+    "Drift Detection",
+    "IaC", 
+    "DevOps",
+    "AWS",
+    "Enterprise AI",
+    "AI Workflow"
+  ]);
 
   const [formData, setFormData] = useState({
     category: "",
@@ -47,6 +59,36 @@ const AddPostPage = () => {
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleAddCategory = () => {
+    if (!newCategory.name.trim()) {
+      toast({
+        title: "Category name required",
+        description: "Please enter a category name.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (categories.includes(newCategory.name.trim())) {
+      toast({
+        title: "Category already exists",
+        description: "A category with this name already exists.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setCategories(prev => [...prev, newCategory.name.trim()]);
+    setFormData(prev => ({ ...prev, category: newCategory.name.trim() }));
+    setNewCategory({ name: "", description: "" });
+    setShowAddCategory(false);
+    
+    toast({
+      title: "Category added",
+      description: `Category "${newCategory.name.trim()}" has been added successfully.`,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -131,28 +173,120 @@ const AddPostPage = () => {
       <div className="p-6">
         <div className="max-w-4xl mx-auto">
           <form onSubmit={handleSubmit}>
-            <Card>
-              <CardHeader>
-                <CardTitle>Post Details</CardTitle>
+            <Card className="border-border/50 shadow-sm">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-lg font-semibold flex items-center gap-2">
+                  <div className="w-1 h-6 bg-primary rounded-full"></div>
+                  Post Details
+                </CardTitle>
+                <p className="text-sm text-muted-foreground">Fill in the information below to create a new Reddit post entry</p>
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Basic Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="category">Category *</Label>
-                    <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select category" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Drift Detection">Drift Detection</SelectItem>
-                        <SelectItem value="IaC">IaC</SelectItem>
-                        <SelectItem value="DevOps">DevOps</SelectItem>
-                        <SelectItem value="AWS">AWS</SelectItem>
-                        <SelectItem value="Enterprise AI">Enterprise AI</SelectItem>
-                        <SelectItem value="AI Workflow">AI Workflow</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <div className="space-y-2">
+                      <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
+                        <SelectTrigger className="h-10">
+                          <SelectValue placeholder="Choose a category" />
+                        </SelectTrigger>
+                        <SelectContent className="max-h-60">
+                          <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground border-b border-border/50 mb-1">
+                            Available Categories
+                          </div>
+                          {categories.map((category) => (
+                            <SelectItem key={category} value={category} className="py-2">
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-primary/60 rounded-full"></div>
+                                {category}
+                              </div>
+                            </SelectItem>
+                          ))}
+                          <div className="border-t border-border/50 mt-1 pt-1">
+                            <SelectItem value="add-new" className="text-primary font-medium py-2">
+                              <div className="flex items-center gap-2">
+                                <Plus className="h-4 w-4" />
+                                Create New Category
+                              </div>
+                            </SelectItem>
+                          </div>
+                        </SelectContent>
+                      </Select>
+                      
+                      {formData.category === "add-new" && (
+                        <div className="border border-border/50 rounded-lg p-4 bg-card/50 backdrop-blur-sm shadow-sm">
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-2">
+                              <div className="w-2 h-2 bg-primary rounded-full"></div>
+                              <Label className="text-sm font-semibold text-foreground">Create New Category</Label>
+                            </div>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              className="h-6 w-6 p-0 hover:bg-muted"
+                              onClick={() => {
+                                setShowAddCategory(false);
+                                setFormData(prev => ({ ...prev, category: "" }));
+                              }}
+                            >
+                              <X className="h-3 w-3" />
+                            </Button>
+                          </div>
+                          <div className="space-y-4">
+                            <div>
+                              <Label htmlFor="newCategoryName" className="text-xs font-medium text-muted-foreground mb-2 block">
+                                Category Name *
+                              </Label>
+                              <Input
+                                id="newCategoryName"
+                                value={newCategory.name}
+                                onChange={(e) => setNewCategory(prev => ({ ...prev, name: e.target.value }))}
+                                placeholder="e.g., Cloud Security, Monitoring, etc."
+                                className="h-9 text-sm"
+                                autoFocus
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="newCategoryDescription" className="text-xs font-medium text-muted-foreground mb-2 block">
+                                Description (Optional)
+                              </Label>
+                              <Input
+                                id="newCategoryDescription"
+                                value={newCategory.description}
+                                onChange={(e) => setNewCategory(prev => ({ ...prev, description: e.target.value }))}
+                                placeholder="Brief description of this category"
+                                className="h-9 text-sm"
+                              />
+                            </div>
+                            <div className="flex gap-2 pt-2">
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                onClick={() => {
+                                  setShowAddCategory(false);
+                                  setFormData(prev => ({ ...prev, category: "" }));
+                                }}
+                                className="flex-1 h-8 text-xs"
+                              >
+                                Cancel
+                              </Button>
+                              <Button
+                                type="button"
+                                onClick={handleAddCategory}
+                                size="sm"
+                                className="flex-1 h-8 text-xs bg-primary hover:bg-primary/90"
+                              >
+                                <Plus className="h-3 w-3 mr-1" />
+                                Create Category
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   <div>
@@ -172,36 +306,40 @@ const AddPostPage = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="title">Title *</Label>
+                  <Label htmlFor="title" className="text-sm font-medium mb-2 block">Title *</Label>
                   <Input
                     id="title"
                     value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
-                    placeholder="Enter the post title"
+                    placeholder="Enter the Reddit post title"
+                    className="h-10"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="url">URL *</Label>
+                  <Label htmlFor="url" className="text-sm font-medium mb-2 block">Reddit URL *</Label>
                   <Input
                     id="url"
                     type="url"
                     value={formData.url}
                     onChange={(e) => handleInputChange("url", e.target.value)}
-                    placeholder="https://www.reddit.com/r/..."
+                    placeholder="https://www.reddit.com/r/community/comments/..."
+                    className="h-10"
                   />
                 </div>
 
                 {/* Content */}
                 <div>
-                  <Label htmlFor="engagementText">Engagement Text</Label>
+                  <Label htmlFor="engagementText" className="text-sm font-medium mb-2 block">Engagement Text</Label>
                   <Textarea
                     id="engagementText"
                     value={formData.engagementText}
                     onChange={(e) => handleInputChange("engagementText", e.target.value)}
-                    placeholder="Original engagement text for the post"
+                    placeholder="Enter your engagement text or comment for this Reddit post..."
                     rows={4}
+                    className="resize-none"
                   />
+                  <p className="text-xs text-muted-foreground mt-1">This will be your response or engagement with the Reddit post</p>
                 </div>
 
                 {/* <div>
@@ -255,16 +393,21 @@ const AddPostPage = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex items-center justify-end gap-3 pt-6">
+                <div className="flex items-center justify-end gap-3 pt-8 border-t border-border/50">
                   <Button 
                     type="button" 
                     variant="outline" 
-onClick={() => router.back()}                  >
+                    onClick={() => router.back()}
+                    className="h-10 px-6"
+                  >
                     Cancel
                   </Button>
-                  <Button type="submit" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                  <Button 
+                    type="submit" 
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground h-10 px-6"
+                  >
                     <Save className="h-4 w-4 mr-2" />
-                    Save Post
+                    Create Post
                   </Button>
                 </div>
               </CardContent>

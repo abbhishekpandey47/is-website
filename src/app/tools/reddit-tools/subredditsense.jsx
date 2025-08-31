@@ -1,5 +1,5 @@
 // SubredditSense Dashboard Page
-import { Eye, MessageSquare, Target, TrendingUp, Users, Zap } from "lucide-react";
+import { Eye, MessageSquare, TrendingUp, Users } from "lucide-react";
 import DashboardHeader from "./components/subredditsense/DashboardHeader";
 import EngagementFunnel from "./components/subredditsense/EngagementFunnel";
 import './components/subredditsense/index.css';
@@ -116,7 +116,7 @@ const SubredditSenseDashboard = () => {
         </div>
         {/* Full Width Table */}
         <div className="mb-12">
-          <TopThreadsTable />
+          <TopThreadsTable data={{ posts, comments }} />
         </div>
       </div>
     </div>
