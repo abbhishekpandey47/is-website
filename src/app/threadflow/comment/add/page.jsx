@@ -160,7 +160,7 @@ const AddPostPage = () => {
                 <ArrowLeft className="h-4 w-4" />
               </Button>
               <div>
-                <h1 className="text-xl font-bold text-foreground">Add New Reddit Post</h1>
+                <h1 className="text-xl font-bold text-foreground">Add New Reddit Comment</h1>
                 <p className="text-sm text-muted-foreground">Create a new entry for tracking</p>
               </div>
             </div>
@@ -177,9 +177,9 @@ const AddPostPage = () => {
               <CardHeader className="pb-4">
                 <CardTitle className="text-lg font-semibold flex items-center gap-2">
                   <div className="w-1 h-6 bg-primary rounded-full"></div>
-                  Post Details
+                  Comment Details
                 </CardTitle>
-                <p className="text-sm text-muted-foreground">Fill in the information below to create a new Reddit post entry</p>
+                <p className="text-sm text-muted-foreground">Fill in the information below to create a new Reddit Comment entry</p>
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Basic Information */}
@@ -311,7 +311,7 @@ const AddPostPage = () => {
                     id="title"
                     value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
-                    placeholder="Enter the Reddit post title"
+                    placeholder="Enter the Reddit Comment title"
                     className="h-10"
                   />
                 </div>
@@ -335,11 +335,11 @@ const AddPostPage = () => {
                     id="engagementText"
                     value={formData.engagementText}
                     onChange={(e) => handleInputChange("engagementText", e.target.value)}
-                    placeholder="Enter your engagement text or comment for this Reddit post..."
+                    placeholder="Enter your engagement text or comment for this Reddit Comment..."
                     rows={4}
                     className="resize-none"
                   />
-                  <p className="text-xs text-muted-foreground mt-1">This will be your response or engagement with the Reddit post</p>
+                  <p className="text-xs text-muted-foreground mt-1">This will be your response or engagement with the Reddit Comment</p>
                 </div>
 
                 {/* <div>
@@ -356,7 +356,7 @@ const AddPostPage = () => {
                 {/* Tracking Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="datePosted">Date Posted</Label>
+                    <Label htmlFor="datepostted">Date Posted</Label>
                     <Input
                       id="datePosted"
                       type="date"
@@ -407,7 +407,7 @@ const AddPostPage = () => {
                     className="bg-primary hover:bg-primary/90 text-primary-foreground h-10 px-6"
                   >
                     <Save className="h-4 w-4 mr-2" />
-                    Create Post
+                    Create Comment
                   </Button>
                 </div>
               </CardContent>
