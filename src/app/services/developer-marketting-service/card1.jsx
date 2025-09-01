@@ -1,11 +1,12 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const words = [
-  { text: "Interviews.", video: "https://cluely.com/videos/home/interviews-section/interviews.mp4", poster: "/videos/home/interviews-section/interviews-poster.jpg" },
-  { text: "Sales calls.", video: "https://cluely.com/videos/home/interviews-section/sales-calls.mp4", poster: "/videos/home/interviews-section/sales-calls-poster.jpg" },
-  { text: "Homework.", video: "https://cluely.com/videos/home/interviews-section/homework.mp4", poster: "/videos/home/interviews-section/homework-poster.jpg" },
-  { text: "Meetings.", video: "https://cluely.com/videos/home/interviews-section/meetings.mp4", poster: "/videos/home/interviews-section/meetings-poster.jpg" },
+  { text: "Interviews.", video: "/landingfolio/Interviews.mp4", poster: "/videos/home/interviews-section/interviews-poster.jpg" },
+  { text: "Sales calls.", video: "/landingfolio/sales.mp4", poster: "/videos/home/interviews-section/sales-calls-poster.jpg" },
+  { text: "Homework.", video: "/landingfolio/home.mp4", poster: "/videos/home/interviews-section/homework-poster.jpg" },
+  { text: "Meetings.", video: "/landingfolio/meeting.mp4", poster: "/videos/home/interviews-section/meetings-poster.jpg" },
   { text: "Really everything.", video: "https://cluely.com/videos/home/interviews-section/really-everything.mp4", poster: "/videos/home/interviews-section/really-everything-poster.jpg" },
 ];
 
@@ -48,14 +49,18 @@ export default function VideoTextHero() {
           It's time to cheat
         </span>
         
-        <h2 className="relative block font-[quicksand] text-[48px] leading-tight font-semibold text-white md:text-[64px] lg:text-[84px] xl:text-[96px]">
+        <h2 className="relative block font-[quicksand] text-[48px] leading-tight font-semibold md:text-[64px] lg:text-[84px] xl:text-[96px]">
           {words.map((word, index) => (
             <span
               key={index}
               className="relative inline-block pr-3 transition-all duration-700 ease-in-out transform-gpu will-change-transform"
             >
               <span 
-                className={`relative z-10 ${active === index ? 'text-white/5' : 'text-gray-400'}`}
+className={`relative z-10 ${
+  active === index
+    ? 'opacity-0'
+    : 'bg-gradient-to-br from-gray-200 to-zinc-400 bg-clip-text text-transparent'
+}`}
               >
                 {word.text}
               </span>
@@ -87,26 +92,23 @@ export default function VideoTextHero() {
         </h2>
 
         {/* CTA  */}
-        <div className="w-full mt-10 flex flex-col gap-5 sm:flex-row">
-          <a
-            href="https://downloads.cluely.com/downloads/cluely-setup.exe"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative flex h-11 w-40 items-center justify-center rounded-md 
-                       bg-gradient-to-r from-violet-500 to-purple-600 px-6 font-semibold text-white 
-                       shadow-lg shadow-violet-800/40 ring-1 ring-violet-400/40 sm:w-[199px] 
-                       transition hover:scale-105 hover:shadow-xl"
-          >
-           <svg className="mr-2" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
-<path d="M12.1818 4H4V12.1818H12.1818V4Z" fill="#F9FAFB"/>
-<path d="M13.8182 12.1816L22 12.1816L22 3.99982L13.8182 3.99982L13.8182 12.1816Z" fill="#F9FAFB"/>
-<path d="M12.1818 13.8184H4V22.0002H12.1818V13.8184Z" fill="#F9FAFB"/>
-<path d="M13.8182 22L22 22L22 13.8182L13.8182 13.8182L13.8182 22Z" fill="#F9FAFB"/>
-</svg>
-            Get for Windows
-          </a>
-        </div>
+        <div className="mt-6 flex flex-col items-start justify-center gap-y-8">
+  <div className="mt-10 gap-4 justify-center items-center">
+    <Link
+      href="/contact"
+      className="group relative inline-flex rounded-full p-px text-sm/6 text-zinc-400 duration-300 hover:text-zinc-100 hover:shadow-glow"
+    >
+      <span className="absolute inset-0 overflow-hidden rounded-full">
+        <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(108,91,233,0.6)_0%,rgba(108,91,233,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+      </span>
+      <div className="relative z-10 rounded-full bg-zinc-950 px-6 py-2 ring-1 ring-white/10">
+        Book a demo
       </div>
+      <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-[#6c5be9]/0 via-[#6c5be9]/90 to-[#6c5be9]/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+    </Link>
+  </div>
+</div>
+     </div>
     </section>
   );
 }
