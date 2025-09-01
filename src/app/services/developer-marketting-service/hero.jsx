@@ -2,6 +2,7 @@
 import Particles from "@/Components/ui/particles";
 import { ArrowDown } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -31,7 +32,7 @@ export default function Hero() {
       <div className="py-24 sm:py-32 lg:pb-10">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="relative mx-auto max-w-3xl text-center">
-            <h1 className="font-[quicksand] bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-5xl/[1.07] font-bold tracking-tight text-transparent md:text-7xl/[1.07]">
+            <h1 className="font-[quicksand] bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-5xl/[1.07] font-bold tracking-tight text-transparent md:text-5xl/[1.07]">
               The developer marketing engine behind top SaaS startups
             </h1>
             <p className="font-[quicksand]  mt-6 text-lg font-medium text-zinc-400 md:text-xl">
@@ -40,22 +41,22 @@ export default function Hero() {
 
             {/* Buttons */}
             <div className="mt-10 flex flex-col items-center justify-center gap-y-8">
-              <div className="mt-10 gap-4 justify-center items-center">
-          <button
-  type="button"
-  className="group relative rounded-full p-px text-sm/6 text-zinc-400 duration-300 hover:text-zinc-100 hover:shadow-glow"
->
-  <span className="absolute inset-0 overflow-hidden rounded-full">
-    <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(108,91,233,0.6)_0%,rgba(108,91,233,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
-  </span>
-  <div className="relative z-10 rounded-full bg-zinc-950 px-6 py-2 ring-1 ring-white/10">
-    Join the waitlist
-  </div>
-  <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-[#6c5be9]/0 via-[#6c5be9]/90 to-[#6c5be9]/0 transition-opacity duration-500 group-hover:opacity-40"></span>
-</button>
-
-        </div>
-              {/* Learn More */}
+                   <div className="mt-6 flex flex-col items-center justify-center gap-y-8">
+               <div className="mt-10 gap-4 justify-center items-center">
+                 <Link
+                   href="/contact"
+                   className="group relative inline-flex rounded-full p-px text-sm/6 text-zinc-400 duration-300 hover:text-zinc-100 hover:shadow-glow"
+                 >
+                   <span className="absolute inset-0 overflow-hidden rounded-full">
+                     <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(108,91,233,0.6)_0%,rgba(108,91,233,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+                   </span>
+                   <div className="relative z-10 rounded-full bg-zinc-950 px-6 py-2 ring-1 ring-white/10">
+                     Book a demo
+                   </div>
+                   <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-[#6c5be9]/0 via-[#6c5be9]/90 to-[#6c5be9]/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+                 </Link>
+               </div>
+             </div>             {/* Learn More */}
               <div className="">
                 <a href="/#intro" className="flex flex-col items-center gap-1">
                   <p className="text-sm/6 text-zinc-400 duration-300 group-hover:text-white">

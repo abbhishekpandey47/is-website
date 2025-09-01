@@ -40,7 +40,7 @@ const FeatureCards = () => {
           {cards.map((card) => (
             <div
               key={card.id}
-              className="px-10 g-gray-800 rounded-lg border border-gray-700 p-6 hover:shadow-lg hover:shadow-gray-900/20 transition-shadow duration-200"
+              className="px-5 g-gray-800 rounded-lg border border-gray-700 p-6 shadow-sm shadow-white/30 transition-shadow duration-200"
             >
               <div className="mb-6">
                 <img
