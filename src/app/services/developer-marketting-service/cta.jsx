@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function CTA() {
   return (
-    <div className="mx-6 md:mx-16 bg-gradient-to-b from-[#fe7587]/70 to-[#d220ff]/70 relative flex flex-col items-center rounded-xl p-16 text-center overflow-hidden bg-cover bg-no-repeat"
+    <div className="mx-6 md:mx-16 bg-gradient-to-r from-blue-800 to-purple-800 relative flex flex-col items-center rounded-xl p-16 text-center overflow-hidden bg-cover bg-no-repeat"
     >
       {/* Title */}
       <h2 className="text-2xl md:text-3xl font-bold text-white max-w-xl">
