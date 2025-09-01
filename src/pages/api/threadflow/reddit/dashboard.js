@@ -11,9 +11,10 @@ export default async function handler(req, res) {
   try {
     const { data: mentions, error: mErr } = await supabase
       .from('reddit_mentions')
-      .select('type, subreddit, upvotes, downvotes, total_comments, created_utc, engagement_score, title, body, url')
+      .select('type, subreddit, upvotes, downvotes, total_comments, created_utc, fetched_at, engagement_score, title, body, url')
       .eq('company_id', companyId)
-      .gte('created_utc', since);
+      // Include rows where created_utc is null (older ingested records) OR within range
+      .or(`created_utc.is.null,created_utc.gte.${since}`);
     if (mErr) throw mErr;
     const totalMentions = mentions.length;
     const subsSet = new Set(mentions.map(m => m.subreddit).filter(Boolean));
@@ -26,7 +27,8 @@ export default async function handler(req, res) {
     // Time series by date (UTC date key)
     const map = {};
     mentions.forEach(m => {
-      const d = (m.created_utc ? m.created_utc.substring(0,10) : 'unknown');
+      const effectiveDate = (m.created_utc || m.fetched_at || '').substring(0,10) || 'unknown';
+      const d = effectiveDate;
       if (!map[d]) map[d] = { date: d, mentions: 0, posts: 0, comments: 0 };
       map[d].mentions += 1;
       if (m.type === 'post') map[d].posts += 1; else map[d].comments += 1;
@@ -34,16 +36,18 @@ export default async function handler(req, res) {
     const timeSeries = Object.values(map).sort((a,b)=> a.date.localeCompare(b.date));
     // Heatmap weeks (last 8 weeks bucket by age): compute age hours now
     const now = Date.now();
-    function weekBucket(createdUtc){
-      const ts = new Date(createdUtc).getTime();
+    function weekBucket(createdUtc, fetchedAt){
+      const tsStr = createdUtc || fetchedAt;
+      if(!tsStr) return 'W1';
+      const ts = new Date(tsStr).getTime();
       const ageH = (now - ts)/(3600*1000);
       const weekNum = Math.max(1, Math.min(8, 8 - Math.floor(ageH/168)));
       return 'W'+weekNum;
     }
     const heatMapMap = {}; // subreddit -> week -> {count, engagement}
     mentions.forEach(m => {
-      if (!m.subreddit || !m.created_utc) return;
-      const w = weekBucket(m.created_utc);
+      if (!m.subreddit) return;
+      const w = weekBucket(m.created_utc, m.fetched_at);
       heatMapMap[m.subreddit] = heatMapMap[m.subreddit] || {};
       const slot = heatMapMap[m.subreddit][w] || { count:0, engagement:0, acc:0 };
       slot.count += 1;
@@ -111,7 +115,7 @@ export default async function handler(req, res) {
         subreddit: p.subreddit,
         upvotes: p.upvotes||0,
         total_comments: p.total_comments||0,
-        post_age_hours: p.created_utc ? (nowMs - new Date(p.created_utc).getTime())/3600000 : 0,
+        post_age_hours: (p.created_utc || p.fetched_at) ? (nowMs - new Date(p.created_utc || p.fetched_at).getTime())/3600000 : 0,
         post_content: p.body || '',
         downvotes: p.downvotes||0
       }));
@@ -124,7 +128,7 @@ export default async function handler(req, res) {
         replies: 0,
         author: '',
         post_url: c.url, // not perfect but keeps shape
-        post_age_hours: c.created_utc ? (nowMs - new Date(c.created_utc).getTime())/3600000 : 0,
+        post_age_hours: (c.created_utc || c.fetched_at) ? (nowMs - new Date(c.created_utc || c.fetched_at).getTime())/3600000 : 0,
         downvotes: c.downvotes||0
       }));
       legacyPayload = { posts, comments };
