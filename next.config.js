@@ -3,6 +3,7 @@ module.exports = {
         missingSuspenseWithCSRBailout: false,
     },
     images: {
+         domains: ["cdn.prod.website-files.com"],
     },
     // Add redirect configuration
     async redirects() {
