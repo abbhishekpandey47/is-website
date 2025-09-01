@@ -19,7 +19,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../../components/ui/dropdown-menu"
+} from "../../Components/ui/dropdown-menu"
 
 const PostsPage = () => {
   const router = useRouter();
