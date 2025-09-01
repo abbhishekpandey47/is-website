@@ -32,12 +32,10 @@ export default function Hero() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="relative mx-auto max-w-3xl text-center">
             <h1 className="font-[quicksand] bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-5xl/[1.07] font-bold tracking-tight text-transparent md:text-7xl/[1.07]">
-              Unleash the power of intuitive finance
+              The developer marketing engine behind top SaaS startups
             </h1>
             <p className="font-[quicksand]  mt-6 text-lg font-medium text-zinc-400 md:text-xl">
-              Say goodbye to outdated financial tools. Every small business
-              owner, regardless of background, can now manage their business
-              like a pro. Simple. Intuitive. And never boring.
+              We work with leading infra and AI companies to transform product features into developer adoption through GitHub repos, community-first content, and technical storytelling.
             </p>
 
             {/* Buttons */}
