@@ -3,9 +3,10 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
-  const { companyId, range = '30d' } = req.query;
+  const { companyId, range = '30d', legacy } = req.query;
   if (!companyId) return res.status(400).json({ error: 'companyId required' });
-  const days = parseInt(range) || 30;
+  // Allow larger default window (many historical posts may be older than 30d). If client did not explicitly pass range use 365d.
+  const days = range === '30d' && !req.query.range ? 365 : (parseInt(range) || 30);
   const since = new Date(Date.now() - days * 24 * 3600 * 1000).toISOString();
   try {
     const { data: mentions, error: mErr } = await supabase
@@ -88,17 +89,46 @@ export default async function handler(req, res) {
       const words = m.title.toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(w=> w.length>3 && !stop.has(w));
       for (let i=0;i<words.length-1;i++) {
         const phrase = words[i]+" "+words[i+1];
-        phraseCounts[phrase] = phraseCounts[phrase] || { cluster_key: phrase, representative_phrase: phrase, mentions_count:0 };
+        phraseCounts[phrase] = phraseCounts[phrase] || { cluster_key: phrase, representative_phrase: phrase, mentions_count:0, total_engagement:0 };
         phraseCounts[phrase].mentions_count += 1;
+        phraseCounts[phrase].total_engagement += (m.upvotes||0) + (m.total_comments||0);
       }
     });
     const topicClusters = Object.values(phraseCounts)
-      .filter(p=>p.mentions_count>=2)
+      .filter(p=>p.mentions_count>=1) // lowered threshold so clusters appear for smaller datasets
       .sort((a,b)=> b.mentions_count - a.mentions_count)
       .slice(0, 12)
-      .map(p=> ({ ...p, avg_engagement: 0 }));
+      .map(p=> ({ ...p, avg_engagement: p.mentions_count ? Math.round(p.total_engagement / p.mentions_count) : 0 }));
     const { data: company, error: cErr } = await supabase.from('companies').select('last_ingested_at').eq('id', companyId).single();
     if (cErr && cErr.code !== 'PGRST116') throw cErr;
+    // Legacy mode: return raw posts/comments arrays shaped like original UI expects (with post_age_hours)
+    let legacyPayload = undefined;
+    if (legacy) {
+      const nowMs = Date.now();
+      const posts = mentions.filter(m=>m.type==='post').map(p=>({
+        post_title: p.title,
+        post_url: p.url,
+        subreddit: p.subreddit,
+        upvotes: p.upvotes||0,
+        total_comments: p.total_comments||0,
+        post_age_hours: p.created_utc ? (nowMs - new Date(p.created_utc).getTime())/3600000 : 0,
+        post_content: p.body || '',
+        downvotes: p.downvotes||0
+      }));
+      const comments = mentions.filter(m=>m.type==='comment').map(c=>({
+        comment_body: c.body || '',
+        comment_url: c.url,
+        post_title: c.title || '',
+        subreddit: c.subreddit,
+        upvotes: c.upvotes||0,
+        replies: 0,
+        author: '',
+        post_url: c.url, // not perfect but keeps shape
+        post_age_hours: c.created_utc ? (nowMs - new Date(c.created_utc).getTime())/3600000 : 0,
+        downvotes: c.downvotes||0
+      }));
+      legacyPayload = { posts, comments };
+    }
     return res.status(200).json({
       success: true,
       metrics: { totalMentions, activeSubreddits, avgEngagement, positiveSentimentPct: positiveSentiment },
@@ -107,7 +137,8 @@ export default async function handler(req, res) {
       funnel,
       topThreads,
       topicClusters,
-      lastIngestedAt: company?.last_ingested_at || null
+      lastIngestedAt: company?.last_ingested_at || null,
+      ...(legacyPayload || {})
     });
   } catch (e) {
     console.error('dashboard error', e);

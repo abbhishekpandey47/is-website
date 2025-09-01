@@ -6,11 +6,13 @@ import { useEffect, useState } from 'react';
 import { Button } from "../../../Components/ui/button";
 import { SidebarTrigger } from "../../../Components/ui/sidebar";
 import { UserProfile } from "../../../Components/UserProfile";
-import EngagementFunnelAPI from './components/EngagementFunnelAPI';
-import SubredditHeatmapAPI from './components/SubredditHeatmapAPI';
-import TimeSeriesChart from './components/TimeSeriesChart';
-import TopicClusters from './components/TopicClusters';
-import TopThreadsTable from './components/TopThreadsTable';
+// Use original SubredditSense components for consistent UI
+import TopicClusters from '@/app/threadflow/subredditsense/components/TopicClusters';
+import MentionsChart from '@/app/tools/reddit-tools/components/subredditsense/MentionsChart';
+import MetricCard from '@/app/tools/reddit-tools/components/subredditsense/MetricCard';
+import SubredditHeatmap from '@/app/tools/reddit-tools/components/subredditsense/SubredditHeatmap';
+import TopThreadsTable from '@/app/tools/reddit-tools/components/subredditsense/TopThreadsTable';
+import { Eye, MessageSquare, TrendingUp, Users } from 'lucide-react';
 
 async function apiLinkCompany(firebaseUserId, companyName) {
   const res = await fetch('/api/threadflow/reddit/link-company', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firebaseUserId, companyName }) });
@@ -28,7 +30,7 @@ async function apiJob(jobId){
   return res.json();
 }
 async function apiDashboard(companyId) {
-  const res = await fetch(`/api/threadflow/reddit/dashboard?companyId=${encodeURIComponent(companyId)}`);
+  const res = await fetch(`/api/threadflow/reddit/dashboard?companyId=${encodeURIComponent(companyId)}&legacy=1`);
   if (!res.ok) throw new Error('Dashboard fetch failed');
   return res.json();
 }
@@ -178,20 +180,36 @@ export default function ThreadflowSubredditSensePage() {
         {error && <div className="text-sm text-red-500">{error}</div>}
         {!dashboard && !error && <div className="text-sm text-muted-foreground">Loading dashboard...</div>}
         {dashboard && (
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Metric title="Total Mentions" value={dashboard.metrics.totalMentions} />
-              <Metric title="Active Subreddits" value={dashboard.metrics.activeSubreddits} />
-              <Metric title="Avg Engagement" value={dashboard.metrics.avgEngagement} />
-              <Metric title="Positive Sentiment %" value={dashboard.metrics.positiveSentimentPct + '%'} />
+          <div className="max-w-7xl mx-auto space-y-10">
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <MetricCard title="Total Mentions" value={dashboard.metrics.totalMentions} icon={MessageSquare} subtitle={`Range ${(dashboard.timeSeries||[]).length} days`} />
+              <MetricCard title="Active Subreddits" value={dashboard.metrics.activeSubreddits} icon={Users} subtitle="Communities" />
+              <MetricCard title="Avg Engagement" value={dashboard.metrics.avgEngagement} icon={TrendingUp} subtitle="Upvotes + Comments" />
+              <MetricCard title="Positive Sentiment" value={dashboard.metrics.positiveSentimentPct + '%'} icon={Eye} subtitle="Upvotes vs Downvotes" />
             </div>
-            <div className="grid lg:grid-cols-2 gap-6">
-              <TimeSeriesChart data={dashboard.timeSeries} />
-              <EngagementFunnelAPI data={dashboard.funnel} />
+            {/* Charts */}
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+              <MentionsChart data={{ posts: dashboard.posts || [], comments: dashboard.comments || [] }} />
+              <SubredditHeatmap data={{ posts: dashboard.posts || [], comments: dashboard.comments || [] }} />
             </div>
-            <SubredditHeatmapAPI data={dashboard.heatmap} />
-            <TopThreadsTable data={dashboard.topThreads} />
+            {/* Topic Clusters */}
             <TopicClusters data={dashboard.topicClusters || []} />
+            {/* Top Threads Leaderboard (use API-provided ranking) */}
+            <TopThreadsTable threads={(dashboard.topThreads || []).map((t,i)=>(
+              { id: i,
+                title: t.title,
+                subreddit: t.subreddit,
+                author: t.author || '',
+                karma: null,
+                upvotes: t.upvotes,
+                comments: t.comments,
+                age: '',
+                matchReason: '',
+                sentiment: (t.upvotes > (t.downvotes||0)) ? 'positive' : (t.upvotes < (t.downvotes||0) ? 'negative' : 'neutral'),
+                priority: (t.upvotes + t.comments) > 10 ? 'high' : 'medium',
+                post_url: t.url
+              }))} />
           </div>
         )}
       </div>
@@ -199,14 +217,7 @@ export default function ThreadflowSubredditSensePage() {
   );
 }
 
-function Metric({ title, value }) {
-  return (
-    <div className="p-4 rounded-md border border-border bg-card">
-      <p className="text-xs text-muted-foreground mb-1">{title}</p>
-      <p className="text-lg font-semibold">{value ?? '—'}</p>
-    </div>
-  );
-}
+// Retained legacy MetricCard styling; inline simple component removed in favor of imported MetricCard.
 
 async function pollJobUntilDone(jobId, onStatus, timeoutMs=60000, intervalMs=1500){
   const started = Date.now();
