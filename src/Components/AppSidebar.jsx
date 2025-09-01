@@ -1,36 +1,37 @@
 'use client'
 
+import {
+    BarChart3,
+    Calendar,
+    FileText,
+    MessageSquare,
+    Settings,
+    Tag,
+    TrendingUp,
+    Users
+} from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import {
-  BarChart3,
-  MessageSquare,
-  TrendingUp,
-  Settings,
-  Users,
-  Calendar,
-  Tag,
-  FileText
-} from "lucide-react"
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from "./ui/sidebar"
 import { cn } from "@/lib/utils"
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarGroup,
+    SidebarGroupContent,
+    SidebarGroupLabel,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    useSidebar,
+} from "./ui/sidebar"
 
 const mainItems = [
   { title: "Dashboard", url: "/threadflow", icon: BarChart3 },
   { title: "Reddit Posts", url: "/threadflow/posts", icon: MessageSquare },
   { title: "Analytics", url: "/threadflow/analytics", icon: TrendingUp },
   { title: "Communities", url: "/threadflow/communities", icon: Users },
+  { title: "SubredditSense", url: "/threadflow/subredditsense", icon: TrendingUp },
 ]
 
 const managementItems = [
