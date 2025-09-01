@@ -5,29 +5,29 @@ const FeatureCards = () => {
   const cards = [
     {
       id: 1,
-      title: "Production-ready MCP servers",
-      description: "Unlock the capabilities of your AI by providing the tools your users need with self-hosted or remote MCP servers.",
+      title: "Ship product knowledge, not just features",
+      description: "Developer adoption depends on crisp docs, release notes, and GitHub examples. We build these so your product is discoverable and usable from day one.",
       imageAlt: "MCP servers illustration",
       image: "c1.png"
     },
     {
       id: 2,
-      title: "Managed auth for 2,800 apps",
-      description: "Pipedream manages the authorization flow, secure token storage and refresh, and OAuth client management.",
+      title: "Show up where developers are",
+      description: "From Reddit to GitHub Discussions, we seed conversations that spark trust. No spam, just consistent engagement where your users already live.",
       imageAlt: "Auth management illustration",
       image: "c2.png"
     },
     {
       id: 3,
-      title: "10,000+ tools",
-      description: "Add prebuilt triggers and actions to your app or expose them as tools for your AI agent.",
+      title: "One story, many surfaces",
+      description: "A single product video can become a YouTube demo, doc embed, and short-form clip. We repurpose content across channels so nothing goes stale.",
       imageAlt: "Tools illustration",
       image: "c3.png"
     },
     {
       id: 4,
-      title: "Send custom requests",
-      description: "Send any request to any API while avoiding the headaches of managed auth with the Connect Proxy.",
+      title: "From code to community",
+      description: "We connect the dots: blog posts, docs, GitHub repos, and social proof. Everything funnels back to your core goal — faster developer adoption.",
       imageAlt: "Custom requests illustration",
       image: "c4.png"
     }

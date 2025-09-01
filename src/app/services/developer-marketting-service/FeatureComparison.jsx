@@ -13,7 +13,7 @@ const beforeItems = [
   className="w-5 h-5"
 >
   <path d="M 11.7 6.3 L 6.3 11.7 M 6.3 6.3 L 11.7 11.7 M 18 9 C 18 13.971 13.971 18 9 18 C 4.029 18 0 13.971 0 9 C 0 4.029 4.029 0 9 0 C 13.971 0 18 4.029 18 9 Z" />
-</svg>, text: "CI fails after merge" },
+</svg>, text: "Docs are outdated or missing key integrations" },
   { icon: <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 18 18"
@@ -25,7 +25,7 @@ const beforeItems = [
     className="w-5 h-5"
   >
     <path d="M 6.818 6.75 C 7.182 5.715 8.239 5.094 9.32 5.279 C 10.402 5.465 11.192 6.403 11.19 7.5 C 11.19 9 8.94 9.75 8.94 9.75 M 9 12.75 L 9.008 12.75 M 16.5 9 C 16.5 13.142 13.142 16.5 9 16.5 C 4.858 16.5 1.5 13.142 1.5 9 C 1.5 4.858 4.858 1.5 9 1.5 C 13.142 1.5 16.5 4.858 16.5 9 Z" />
-  </svg>, text: "PRs merged with outdated base" },
+  </svg>, text: "Blog posts are irregular, no SEO traction" },
   { icon: <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 18 18"
@@ -38,7 +38,7 @@ const beforeItems = [
 >
   <path d="M 9 4.5 L 9 9 L 12 10.5 M 16.5 9 C 16.5 13.142 13.142 16.5 9 16.5 C 4.858 16.5 1.5 13.142 1.5 9 C 1.5 4.858 4.858 1.5 9 1.5 C 13.142 1.5 16.5 4.858 16.5 9 Z" />
 </svg>
-, text: "CI time wasted on reruns" },
+, text: "No presence on Reddit / GitHub where devs actually are" },
   { icon: <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 18 18"
@@ -50,7 +50,7 @@ const beforeItems = [
     className="w-5 h-5"
   >
     <path d="M 6.818 6.75 C 7.182 5.715 8.239 5.094 9.32 5.279 C 10.402 5.465 11.192 6.403 11.19 7.5 C 11.19 9 8.94 9.75 8.94 9.75 M 9 12.75 L 9.008 12.75 M 16.5 9 C 16.5 13.142 13.142 16.5 9 16.5 C 4.858 16.5 1.5 13.142 1.5 9 C 1.5 4.858 4.858 1.5 9 1.5 C 13.142 1.5 16.5 4.858 16.5 9 Z" />
-  </svg>, text: "CI jobs randomly flake" },
+  </svg>, text: "Engineers pulled into writing content instead of shipping" },
   { icon: <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 18 18"
@@ -62,7 +62,7 @@ const beforeItems = [
   className="w-5 h-5"
 >
   <path d="M 10.5 8.25 L 6 8.25 M 7.5 11.25 L 6 11.25 M 12 5.25 L 6 5.25 M 15 7.875 L 15 5.1 C 15 3.84 15 3.21 14.755 2.728 C 14.539 2.305 14.195 1.961 13.771 1.745 C 13.29 1.5 12.66 1.5 11.4 1.5 L 6.6 1.5 C 5.34 1.5 4.71 1.5 4.229 1.745 C 3.805 1.961 3.461 2.305 3.245 2.728 C 3 3.21 3 3.84 3 5.1 L 3 12.9 C 3 14.16 3 14.79 3.245 15.271 C 3.461 15.695 3.805 16.039 4.229 16.255 C 4.71 16.5 5.34 16.5 6.6 16.5 L 8.625 16.5 M 16.5 16.5 L 15.375 15.375 M 16.125 13.5 C 16.125 14.95 14.95 16.125 13.5 16.125 C 12.05 16.125 10.875 14.95 10.875 13.5 C 10.875 12.05 12.05 10.875 13.5 10.875 C 14.95 10.875 16.125 12.05 16.125 13.5 Z" />
-</svg>, text: "CI fails with no clear root cause" },
+</svg>, text: "Engineers pulled into writing content instead of shipping" },
 ];
 
 const afterItems = [
@@ -77,7 +77,7 @@ const afterItems = [
   className="w-5 h-5"
 >
   <path d="M 9 11.25 L 6.75 9 M 9 11.25 C 10.048 10.852 11.053 10.349 12 9.75 M 9 11.25 L 9 15 C 9 15 11.272 14.588 12 13.5 C 12.81 12.285 12 9.75 12 9.75 M 6.75 9 C 7.149 7.965 7.652 6.972 8.25 6.038 C 10.027 3.196 13.149 1.479 16.5 1.5 C 16.5 3.54 15.915 7.125 12 9.75 M 6.75 9 L 3 9 C 3 9 3.412 6.727 4.5 6 C 5.715 5.19 8.25 6 8.25 6 M 3.375 12.375 C 2.25 13.32 1.875 16.125 1.875 16.125 C 1.875 16.125 4.68 15.75 5.625 14.625 C 6.158 13.995 6.15 13.028 5.558 12.443 C 4.954 11.866 4.013 11.837 3.375 12.375 Z" />
-</svg>, text: "CI always passes after merge" },
+</svg>, text: "Docs, release notes, and examples shipped on time" },
   { icon:  <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 18 18"
@@ -87,8 +87,8 @@ const afterItems = [
   strokeLinecap="round"
   strokeLinejoin="round"
   className="w-5 h-5"
-><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Drift from main automatically detected" },
-  { icon: <Sparkles className="w-5 h-5 stroke-green-400" />, text: "Retries are automatic, tracked, and reduced" },
+><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Blog and SEO content consistent and compounding" },
+  { icon: <Sparkles className="w-5 h-5 stroke-green-400" />, text: "Founder narrative translated into developer facing stories" },
   { icon: <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 18 18"
@@ -98,7 +98,7 @@ const afterItems = [
   strokeLinecap="round"
   strokeLinejoin="round"
   className="w-5 h-5"
-><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Flaky jobs detected, flagged, and monitored" },
+><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Credible presence on Reddit, GitHub, and dev communities" },
   { icon: <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 18 18"
@@ -108,7 +108,7 @@ const afterItems = [
   strokeLinecap="round"
   strokeLinejoin="round"
   className="w-5 h-5"
-><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Job-level visibility helps pinpoint what broke" },
+><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Engineers stay focused on building features" },
 ];
 
 export default function FeatureComparison() {
