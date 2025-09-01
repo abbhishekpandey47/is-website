@@ -14,6 +14,12 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
 import { toast } from "react-toastify";
 import { StatusCard } from "../../Components/StatusCard";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../../components/ui/dropdown-menu"
 
 const PostsPage = () => {
   const router = useRouter();
@@ -126,16 +132,26 @@ useEffect(() => {
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Button 
-              onClick={() => router.push("/threadflow/posts/add")}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground"
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              Add Reddit Post
-            </Button>
-            <UserProfile />
-          </div>
+       <div className="flex items-center gap-3">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Plus className="h-4 w-4 mr-2" />
+            Add
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem onClick={() => router.push("/threadflow/posts/add")}>
+            Add Post
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push("/threadflow/comment/add")}>
+            Add Comment
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <UserProfile />
+    </div>
         </div>
       </header>
 
