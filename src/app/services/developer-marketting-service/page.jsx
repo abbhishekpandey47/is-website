@@ -2,6 +2,7 @@ import Image from "next/image";
 import Hero from "./hero";
 import Card1 from "./card1";
 import DashboardCards from "./DashboardCards";
+import FeatureComparison from "./FeatureComparison";
 
 export default function Page() {
     return (
@@ -9,6 +10,7 @@ export default function Page() {
             <Hero />
             <Card1 />
             <DashboardCards />
+            <FeatureComparison />
         </div>
     )
 }
