@@ -3,11 +3,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const words = [
-  { text: "Interviews.", video: "/landingfolio/Interviews.mp4", poster: "/videos/home/interviews-section/interviews-poster.jpg" },
-  { text: "Sales calls.", video: "/landingfolio/sales.mp4", poster: "/videos/home/interviews-section/sales-calls-poster.jpg" },
-  { text: "Homework.", video: "/landingfolio/home.mp4", poster: "/videos/home/interviews-section/homework-poster.jpg" },
-  { text: "Meetings.", video: "/landingfolio/meeting.mp4", poster: "/videos/home/interviews-section/meetings-poster.jpg" },
-  { text: "Really everything.", video: "https://cluely.com/videos/home/interviews-section/really-everything.mp4", poster: "/videos/home/interviews-section/really-everything-poster.jpg" },
+  { text: "We take developer.", video: "/landingfolio/Interviews.mp4", poster: "/videos/home/interviews-section/interviews-poster.jpg" },
+  { text: "marketing off your.", video: "/landingfolio/sales.mp4", poster: "/videos/home/interviews-section/sales-calls-poster.jpg" },
+  { text: "plate.", video: "/landingfolio/home.mp4", poster: "/videos/home/interviews-section/homework-poster.jpg" },
+  { text: "so adoption.", video: "/landingfolio/meeting.mp4", poster: "/videos/home/interviews-section/meetings-poster.jpg" },
+  { text: "doesn’t slip.", video: "https://cluely.com/videos/home/interviews-section/really-everything.mp4", poster: "/videos/home/interviews-section/really-everything-poster.jpg" },
 ];
 
 export default function VideoTextHero() {
@@ -46,7 +46,7 @@ export default function VideoTextHero() {
 
       <div className="max-w-5xl">
         <span className="block text-lg font-medium leading-[1.75] -tracking-[0.04em] text-zinc-400 md:text-xl lg:text-2xl xl:text-[28px]">
-          It's time to cheat
+         Docs. Blogs. GitHub. Reddit. Videos.
         </span>
         
         <h2 className="relative block font-[quicksand] text-[48px] leading-tight font-semibold md:text-[64px] lg:text-[84px] xl:text-[96px]">
