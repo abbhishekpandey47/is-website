@@ -1,35 +1,48 @@
 "use client";
+import Particles from "@/Components/ui/particles";
 import { ArrowDown } from "lucide-react";
+import Image from "next/image";
 
 export default function Hero() {
-    const bgSvg = <>
-    <svg class="absolute inset-0 -z-10 h-full w-full stroke-white/5 [mask-image:radial-gradient(75%_50%_at_top_center,white,transparent)]" aria-hidden="true"><defs><pattern id="hero" width="80" height="80" x="50%" y="-1" patternUnits="userSpaceOnUse"><path d="M.5 200V.5H200" fill="none"></path></pattern></defs><rect width="100%" height="100%" stroke-width="0" fill="url(#hero)"></rect></svg>
-    </>
   return (
-    <section className="relative mt-28 flex items-center justify-center bg-gradient-to-b from-[#0a0f1c] to-black text-center px-6">
-      {/* Grid Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:30px_30px]">
-        <bgSvg />
-      </div>
+    <section className="relative isolate transform-gpu pt-28">
+      <div className="absolute inset-0 -z-10 top-0 bg-[radial-gradient(70%_80%_at_50%_-20%,rgba(108,91,233,0.5),rgba(255,255,255,0))]" />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <h1
-  className="bg-gradient-to-br font-[quicksand] from-white to-zinc-500 bg-clip-text text-transparent text-5xl/[1.07] md:text-7xl/[1.07] font-bold tracking-tight"
->
-  Unleash the power of intuitive finance
-</h1>
+      <svg
+        className="absolute inset-0 -z-10 h-full w-full stroke-white/10 
+                   [mask-image:radial-gradient(75%_50%_at_top_center,white,transparent)]"
+        aria-hidden="true"
+      >
+        <defs>
+          <pattern
+            id="hero"
+            width="80"
+            height="80"
+            x="50%"
+            y="-1"
+            patternUnits="userSpaceOnUse"
+          >
+            <path d="M.5 200V.5H200" fill="none" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero)" />
+      </svg>
 
+      <div className="py-24 sm:py-32 lg:pb-10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="relative mx-auto max-w-3xl text-center">
+            <h1 className="font-[quicksand] bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-5xl/[1.07] font-bold tracking-tight text-transparent md:text-7xl/[1.07]">
+              Unleash the power of intuitive finance
+            </h1>
+            <p className="font-[quicksand]  mt-6 text-lg font-medium text-zinc-400 md:text-xl">
+              Say goodbye to outdated financial tools. Every small business
+              owner, regardless of background, can now manage their business
+              like a pro. Simple. Intuitive. And never boring.
+            </p>
 
-        <p className="mt-6 text-lg font-[quicksand] md:text-xl text-gray-400">
-          Say goodbye to outdated financial tools. Every small business owner,
-          regardless of background, can now manage their business like a pro.
-          <br />
-          <span className="block font-[quicksand] mt-2">Simple. Intuitive. And never boring.</span>
-        </p>
-
-        {/* Buttons */}
-        <div className="mt-10 gap-4 justify-center items-center">
+            {/* Buttons */}
+            <div className="mt-10 flex flex-col items-center justify-center gap-y-8">
+              <div className="mt-10 gap-4 justify-center items-center">
           <button
   type="button"
   className="group relative rounded-full p-px text-sm/6 text-zinc-400 duration-300 hover:text-zinc-100 hover:shadow-glow"
@@ -44,12 +57,57 @@ export default function Hero() {
 </button>
 
         </div>
-        <div className="mt-10 gap-4 flex justify-center items-center">
-          <button className="flex items-center gap-2 text-gray-400 hover:text-white transition">
-            Learn more <ArrowDown className="w-4 h-4" />
-          </button>
-        </div>
+              {/* Learn More */}
+              <div className="">
+                <a href="/#intro" className="flex flex-col items-center gap-1">
+                  <p className="text-sm/6 text-zinc-400 duration-300 group-hover:text-white">
+                    Learn more
+                  </p>
+                  <ArrowDown
+                    className="w-4 h-4 text-zinc-400 duration-300 
+                               group-hover:translate-y-1.5 group-hover:text-white"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+
+
+              {/* Top Glow Line */}
+              {/* <div className="absolute -top-px right-20 h-2 w-20 
+                              [mask-image:linear-gradient(to_right,rgba(217,217,217,0)_0%,#d9d9d9_25%,#d9d9d9_75%,rgba(217,217,217,0)_100%)] 
+                              md:w-32 lg:w-64">
+                <div className="h-px w-full animate-starlight-right bg-gradient-to-r from-purple-500/0 via-[rgba(108,91,233,1)] to-purple-500/0"></div>
+              </div> */}
+{/* 
+              <div className="rounded-md bg-zinc-950 ring-1 ring-white/10 lg:rounded-2xl">
+                <Image
+                  src="/landingfolio/dashboard.webp"
+                  alt="App screenshot"
+                  width={4200}
+                  height={2490}
+                  priority
+                  className="rounded-md lg:rounded-2xl"
+                />
+              </div> */}
+
+              {/* Bottom Glow Line */}
+              {/* <div className="absolute -bottom-2 left-20 h-2 w-20 
+                              [mask-image:linear-gradient(to_right,rgba(217,217,217,0)_0%,#d9d9d9_25%,#d9d9d9_75%,rgba(217,217,217,0)_100%)] 
+                              md:w-32 lg:w-64">
+                <div className="h-px w-full animate-starlight-left bg-gradient-to-r from-purple-500/0 via-[rgba(108,91,233,1)] to-purple-500/0"></div>
+              </div> */}
+            </div>
       </div>
+
+    
+        <Particles
+              className="absolute inset-0"
+              quantity={100}
+              ease={80}
+              color={"#ffffff"}
+              refresh
+            />
     </section>
   );
 }
