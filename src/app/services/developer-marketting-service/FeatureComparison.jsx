@@ -126,7 +126,7 @@ export default function FeatureComparison() {
         {/* Columns */}
         <div className="relative">
           {/* Middle divider line */}
-          <div className="hidden md:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+          <div className="hidden md:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Before Infrasity */}
