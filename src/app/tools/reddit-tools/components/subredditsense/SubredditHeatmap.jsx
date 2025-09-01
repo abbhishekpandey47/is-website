@@ -48,9 +48,22 @@ const SubredditHeatmap = ({ data }) => {
 			}));
 		}
 
+	// Dynamic scaling with Reddit orange palette (light -> intense)
+	const allValues = (heatmapData||[]).flatMap(r=> r.data.map(d=> d.value));
+	const observedMax = allValues.length ? Math.max(...allValues) : 0;
+	const threshold = observedMax > 1000 ? 1000 : (observedMax > 100 ? 100 : (observedMax || 100));
+	const palette = [
+		'#FFF1E9', // very light
+		'#FFD1B8', // light
+		'#FF8B60', // upvote color
+		'#FF5700', // reddit orange
+		'#FF4500'  // orangered (highest intensity)
+	];
 	const getIntensityColor = (value) => {
-		const intensity = Math.min(value / 50, 1);
-		return `hsl(var(--reddit-orange) / ${0.1 + intensity * 0.8})`;
+		if (value <= 0) return palette[0];
+		const ratio = Math.min(value / threshold, 1);
+		const idx = Math.min(palette.length - 1, Math.floor(ratio * (palette.length - 1 + 0.00001)));
+		return palette[idx];
 	};
 
 		return (
@@ -67,15 +80,12 @@ const SubredditHeatmap = ({ data }) => {
 				<div className="flex items-center space-x-2 text-xs text-foreground-muted">
 					<span>Low</span>
 					<div className="flex space-x-1">
-						{[0.2, 0.4, 0.6, 0.8, 1.0].map(opacity => (
-							<div
-								key={opacity}
-								className="w-3 h-3 rounded-sm border border-border-muted"
-								style={{ backgroundColor: `hsl(var(--reddit-orange) / ${opacity * 0.8 + 0.1})` }}
-							/>
+						{palette.map(c => (
+							<div key={c} className="w-3 h-3 rounded-sm border border-border-muted" style={{backgroundColor:c}} />
 						))}
 					</div>
 					<span>High</span>
+					<span className="ml-2 text-[10px] opacity-70">Full at ≥ {threshold}</span>
 				</div>
 			</div>
 

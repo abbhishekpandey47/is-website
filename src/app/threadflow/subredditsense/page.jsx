@@ -30,7 +30,7 @@ async function apiJob(jobId){
   return res.json();
 }
 async function apiDashboard(companyId) {
-  const res = await fetch(`/api/threadflow/reddit/dashboard?companyId=${encodeURIComponent(companyId)}&legacy=1`);
+  const res = await fetch(`/api/threadflow/reddit/dashboard?companyId=${encodeURIComponent(companyId)}&legacy=1&range=all`);
   if (!res.ok) throw new Error('Dashboard fetch failed');
   return res.json();
 }
@@ -183,7 +183,7 @@ export default function ThreadflowSubredditSensePage() {
           <div className="max-w-7xl mx-auto space-y-10">
             {/* Metrics Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              <MetricCard title="Total Mentions" value={dashboard.metrics.totalMentions} icon={MessageSquare} subtitle={`Range ${(dashboard.timeSeries||[]).length} days`} />
+              <MetricCard title="Total Mentions" value={dashboard.metrics.totalMentions} icon={MessageSquare} subtitle={dashboard.meta ? `All Time (${dashboard.meta.spanDays} days)` : 'All Time'} />
               <MetricCard title="Active Subreddits" value={dashboard.metrics.activeSubreddits} icon={Users} subtitle="Communities" />
               <MetricCard title="Avg Engagement" value={dashboard.metrics.avgEngagement} icon={TrendingUp} subtitle="Upvotes + Comments" />
               <MetricCard title="Positive Sentiment" value={dashboard.metrics.positiveSentimentPct + '%'} icon={Eye} subtitle="Upvotes vs Downvotes" />

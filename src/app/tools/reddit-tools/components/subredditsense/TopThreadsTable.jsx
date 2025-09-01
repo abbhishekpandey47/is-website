@@ -98,7 +98,7 @@ const TopThreadsTable = (props) => {
     }
     return (
         <div className="chart-container animate-slide-up">
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center mb-6">
                 <div>
                     <h2 className="text-xl font-semibold text-foreground mb-1">
                         Top Threads Leaderboard
@@ -107,7 +107,6 @@ const TopThreadsTable = (props) => {
                         High-priority threads requiring attention
                     </p>
                 </div>
-                <button className="btn-reddit">View All Threads</button>
             </div>
             <div className="overflow-x-auto">
                 <table className="w-full">
@@ -160,7 +159,7 @@ const TopThreadsTable = (props) => {
                                 </td>
                                 <td className="py-4 px-2">
                                     <div className="flex items-center space-x-2">
-                                        <button className="btn-primary text-xs px-3 py-1">Respond</button>
+                                        <button className="btn-primary text-xs px-3 py-1 text-reddit-orange border border-reddit-orange/40 bg-transparent hover:bg-reddit-orange/10">Respond</button>
                                         <a href={thread.post_url} target="_blank" rel="noopener noreferrer" className="btn-ghost text-xs px-3 py-1">
                                             <ExternalLink className="w-3 h-3" />
                                         </a>

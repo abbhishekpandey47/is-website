@@ -62,18 +62,12 @@ const MentionsChart = (props) => {
           </p>
         </div>
         <div className="flex items-center space-x-4 text-sm">
-          <div className="flex items-center">
-            <div className="w-3 h-3 bg-chart-primary rounded-full mr-2"></div>
-            <span className="text-foreground-muted">Total Mentions</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-3 h-3 bg-chart-secondary rounded-full mr-2"></div>
-            <span className="text-foreground-muted">Posts</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-3 h-3 bg-chart-tertiary rounded-full mr-2"></div>
-            <span className="text-foreground-muted">Comments</span>
-          </div>
+          {['Total Mentions','Posts','Comments'].map(label => (
+            <div className="flex items-center" key={label}>
+              <div className="w-3 h-3 rounded-full mr-2" style={{backgroundColor:'#FF5700'}}></div>
+              <span className="text-foreground-muted">{label}</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -83,11 +77,13 @@ const MentionsChart = (props) => {
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis
               dataKey="date"
-              stroke="hsl(var(--foreground-muted))"
+              stroke="#FFFFFF"
+              tick={{ fill: '#FFFFFF', fontSize: 12 }}
               fontSize={12}
             />
             <YAxis
-              stroke="hsl(var(--foreground-muted))"
+              stroke="#FFFFFF"
+              tick={{ fill: '#FFFFFF', fontSize: 12 }}
               fontSize={12}
             />
             <Tooltip
@@ -98,30 +94,9 @@ const MentionsChart = (props) => {
                 color: 'hsl(var(--foreground))'
               }}
             />
-            <Area
-              type="monotone"
-              dataKey="mentions"
-              stackId="1"
-              stroke="hsl(var(--chart-primary))"
-              fill="hsl(var(--chart-primary) / 0.2)"
-              strokeWidth={2}
-            />
-            <Area
-              type="monotone"
-              dataKey="posts"
-              stackId="2"
-              stroke="hsl(var(--chart-secondary))"
-              fill="hsl(var(--chart-secondary) / 0.3)"
-              strokeWidth={2}
-            />
-            <Area
-              type="monotone"
-              dataKey="comments"
-              stackId="2"
-              stroke="hsl(var(--chart-tertiary))"
-              fill="hsl(var(--chart-tertiary) / 0.3)"
-              strokeWidth={2}
-            />
+            <Area type="monotone" dataKey="mentions" stroke="#FF5700" fill="rgba(255,87,0,0.28)" strokeWidth={2} />
+            <Area type="monotone" dataKey="posts" stroke="#FF5700" fill="rgba(255,87,0,0.18)" strokeWidth={1.5} />
+            <Area type="monotone" dataKey="comments" stroke="#FF5700" fill="rgba(255,87,0,0.12)" strokeWidth={1.5} />
           </AreaChart>
         </ResponsiveContainer>
       </div>

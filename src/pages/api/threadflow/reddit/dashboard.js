@@ -5,16 +5,22 @@ export default async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
   const { companyId, range = '30d', legacy } = req.query;
   if (!companyId) return res.status(400).json({ error: 'companyId required' });
-  // Allow larger default window (many historical posts may be older than 30d). If client did not explicitly pass range use 365d.
-  const days = range === '30d' && !req.query.range ? 365 : (parseInt(range) || 30);
-  const since = new Date(Date.now() - days * 24 * 3600 * 1000).toISOString();
+  // range=all returns full history without date filtering
+  let since = null;
+  let days = null;
+  if (range !== 'all') {
+    days = (range === '30d' && !req.query.range) ? 365 : (parseInt(range) || 30);
+    since = new Date(Date.now() - days * 24 * 3600 * 1000).toISOString();
+  }
   try {
-    const { data: mentions, error: mErr } = await supabase
+    let query = supabase
       .from('reddit_mentions')
       .select('type, subreddit, upvotes, downvotes, total_comments, created_utc, fetched_at, engagement_score, title, body, url')
-      .eq('company_id', companyId)
-      // Include rows where created_utc is null (older ingested records) OR within range
-      .or(`created_utc.is.null,created_utc.gte.${since}`);
+      .eq('company_id', companyId);
+    if (range !== 'all') {
+      query = query.or(`created_utc.is.null,created_utc.gte.${since}`);
+    }
+    const { data: mentions, error: mErr } = await query;
     if (mErr) throw mErr;
     const totalMentions = mentions.length;
     const subsSet = new Set(mentions.map(m => m.subreddit).filter(Boolean));
@@ -34,6 +40,16 @@ export default async function handler(req, res) {
       if (m.type === 'post') map[d].posts += 1; else map[d].comments += 1;
     });
     const timeSeries = Object.values(map).sort((a,b)=> a.date.localeCompare(b.date));
+    // Compute full historical span (min -> max effective date) irrespective of gaps
+    const effectiveDates = mentions
+      .map(m => (m.created_utc || m.fetched_at || '').substring(0,10))
+      .filter(d => d && d !== 'unknown');
+    let firstDate = null, lastDate = null, spanDays = 0;
+    if (effectiveDates.length) {
+      firstDate = effectiveDates.reduce((a,b)=> a < b ? a : b);
+      lastDate = effectiveDates.reduce((a,b)=> a > b ? a : b);
+      spanDays = Math.max(1, Math.round((new Date(lastDate).getTime() - new Date(firstDate).getTime())/86400000) + 1);
+    }
     // Heatmap weeks (last 8 weeks bucket by age): compute age hours now
     const now = Date.now();
     function weekBucket(createdUtc, fetchedAt){
@@ -142,6 +158,7 @@ export default async function handler(req, res) {
       topThreads,
       topicClusters,
       lastIngestedAt: company?.last_ingested_at || null,
+  meta: { firstDate, lastDate, spanDays, distinctDays: timeSeries.length },
       ...(legacyPayload || {})
     });
   } catch (e) {
