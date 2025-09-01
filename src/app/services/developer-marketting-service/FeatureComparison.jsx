@@ -113,13 +113,13 @@ const afterItems = [
 
 export default function FeatureComparison() {
   return (
-    <section className="relative py-20 bg-zinc-950 text-zinc-100 font-[quicksand]">
+    <section className="relative py-20 text-zinc-100 font-[quicksand]">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Title */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl">
             <span className="text-white">Before</span> vs{" "}
-            <span className="text-white">After Infrasity</span>
+            <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">After Infrasity</span>
           </h2>
         </div>
 
@@ -131,7 +131,7 @@ export default function FeatureComparison() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Before Infrasity */}
             <div>
-              <h3 className="text-xl font-semibold specialtext mb-6 text-center">
+              <h3 className="text-xl font-semibold text-white mb-6 text-center">
                 Before Infrasity
               </h3>
               <ul className="space-y-5">
@@ -157,7 +157,7 @@ export default function FeatureComparison() {
 
             {/* After Infrasity */}
             <div>
-              <h3 className="text-xl font-semibold specialtext mb-6 text-center">
+              <h3 className="text-xl font-semibold text-white mb-6 text-center">
                 After Infrasity
               </h3>
               <ul className="space-y-5">
