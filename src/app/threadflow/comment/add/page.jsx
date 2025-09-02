@@ -113,7 +113,7 @@ const AddPostPage = () => {
   }
 
   try {
-    const res = await fetch("/api/posts", {
+    const res = await fetch("/api/comment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...formData, user_id: firebaseUser.uid }),
