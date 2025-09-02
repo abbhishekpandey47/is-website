@@ -27,9 +27,17 @@ export default async function handler(req, res) {
     const activeSubreddits = subsSet.size;
     const engagements = mentions.map(m => (m.upvotes || 0) + (m.total_comments || 0));
     const avgEngagement = engagements.length ? (engagements.reduce((a,b)=>a+b,0) / engagements.length).toFixed(2) : '0.00';
-    const up = mentions.reduce((a,b)=> a + (b.upvotes||0), 0);
-    const down = mentions.reduce((a,b)=> a + (b.downvotes||0), 0);
-    const positiveSentiment = (up + down) ? Math.round((up/(up+down))*100) : 0;
+    // Reddit API provides a net score (ups - downs). We approximate up/down counts:
+    // If score >=0: estimated_up = score + 1 (include OP), estimated_down = 1 (baseline) => net still approximates.
+    // If score <0: estimated_up = 1 (OP), estimated_down = (-score) + 1.
+    // This keeps ratios directional without needing real downvote counts.
+    let estUpTotal = 0, estDownTotal = 0;
+    mentions.forEach(m => {
+      const score = typeof m.upvotes === 'number' ? m.upvotes : 0; // 'upvotes' field holds net score
+      if (score >= 0) { estUpTotal += (score + 1); estDownTotal += 1; }
+      else { estUpTotal += 1; estDownTotal += ((-score) + 1); }
+    });
+    const positiveSentiment = (estUpTotal + estDownTotal) ? Math.round((estUpTotal / (estUpTotal + estDownTotal)) * 100) : 0;
     // Time series by date (UTC date key)
     const map = {};
     mentions.forEach(m => {
@@ -151,7 +159,7 @@ export default async function handler(req, res) {
     }
     return res.status(200).json({
       success: true,
-      metrics: { totalMentions, activeSubreddits, avgEngagement, positiveSentimentPct: positiveSentiment },
+  metrics: { totalMentions, activeSubreddits, avgEngagement, positiveSentimentPct: positiveSentiment, estUpVotes: estUpTotal, estDownVotes: estDownTotal },
       timeSeries,
       heatmap,
       funnel,

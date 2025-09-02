@@ -1,7 +1,7 @@
 "use client";
 import { auth } from '@/lib/firebaseClient';
 import { onAuthStateChanged } from 'firebase/auth';
-import { BarChart3, Link2, RefreshCw } from 'lucide-react';
+import { BarChart3, RefreshCw, Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from "../../../Components/ui/button";
 import { SidebarTrigger } from "../../../Components/ui/sidebar";
@@ -82,8 +82,19 @@ export default function ThreadflowSubredditSensePage() {
     const unsub = onAuthStateChanged(auth, (user) => {
       setFirebaseUser(user);
       if (user) {
-        const defName = deriveDefaultCompany(user.email || '');
-        setCompanyName(defName);
+        // Check localStorage for previously selected brand for this user
+        try {
+          const stored = typeof window !== 'undefined' ? localStorage.getItem(`lastSelectedBrand_${user.uid}`) : null;
+          if (stored && stored.trim()) {
+            setCompanyName(stored.trim());
+          } else {
+            const defName = deriveDefaultCompany(user.email || '');
+            setCompanyName(defName);
+          }
+        } catch {
+          const defName = deriveDefaultCompany(user.email || '');
+          setCompanyName(defName);
+        }
       }
       setLoading(false);
     });
@@ -117,7 +128,10 @@ export default function ThreadflowSubredditSensePage() {
     if (!customCompany.trim()) return;
     setSaving(true);
     try {
-      setCompanyName(customCompany.trim());
+      const newName = customCompany.trim();
+      setCompanyName(newName);
+      // Persist user preference locally (session-level persistence)
+      try { if (firebaseUser) localStorage.setItem(`lastSelectedBrand_${firebaseUser.uid}`, newName); } catch {}
     } finally {
       setCustomCompany('');
       setSaving(false);
@@ -159,17 +173,17 @@ export default function ThreadflowSubredditSensePage() {
             </div>
           </div>
           <div className="flex-1 max-w-sm">
-            <label className="text-xs text-muted-foreground">Change / Link Brand</label>
+            <label className="text-xs text-muted-foreground">Brand to Track</label>
             <input
               value={customCompany}
               onChange={e => setCustomCompany(e.target.value)}
-              placeholder="Enter new company name"
+              placeholder="Enter brand name (e.g. Acme)"
               className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-sm"
             />
           </div>
           <div className="flex gap-2">
             <Button disabled={saving || !customCompany.trim()} onClick={handleRelink}>
-              <Link2 className="w-4 h-4 mr-1" /> {saving ? 'Linking...' : 'Link'}
+              <Search className="w-4 h-4 mr-1" /> {saving ? 'Searching...' : 'Search Mentions'}
             </Button>
             <Button variant="outline" disabled={fetching || refreshing || ingesting} onClick={() => { if(companyId && firebaseUser) triggerFullRefresh(companyId); }}>
               <RefreshCw className={`w-4 h-4 mr-1 ${(refreshing||ingesting)?'animate-spin':''}`} /> {refreshing||ingesting? 'Refreshing...' : 'Refresh'}
@@ -186,7 +200,7 @@ export default function ThreadflowSubredditSensePage() {
               <MetricCard title="Total Mentions" value={dashboard.metrics.totalMentions} icon={MessageSquare} subtitle={dashboard.meta ? `All Time (${dashboard.meta.spanDays} days)` : 'All Time'} />
               <MetricCard title="Active Subreddits" value={dashboard.metrics.activeSubreddits} icon={Users} subtitle="Communities" />
               <MetricCard title="Avg Engagement" value={dashboard.metrics.avgEngagement} icon={TrendingUp} subtitle="Upvotes + Comments" />
-              <MetricCard title="Positive Sentiment" value={dashboard.metrics.positiveSentimentPct + '%'} icon={Eye} subtitle="Upvotes vs Downvotes" />
+              <MetricCard title="Positive Sentiment" value={dashboard.metrics.positiveSentimentPct + '%'} icon={Eye} subtitle={dashboard.metrics.estUpVotes !== undefined ? `${dashboard.metrics.estUpVotes}↑ / ${dashboard.metrics.estDownVotes}↓ (est)` : 'Score Ratio'} />
             </div>
             {/* Charts + Topic Clusters inline layout */}
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 items-start">
