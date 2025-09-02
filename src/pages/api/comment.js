@@ -80,6 +80,7 @@ export default async function handler(req, res) {
   if (req.method === "PUT") {
     try {
       const { id, ...updates } = req.body;
+      console.log("data", req.body)
 
       if (!id) {
         return res.status(400).json({ error: "Missing post ID" });
