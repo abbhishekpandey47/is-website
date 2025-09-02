@@ -580,7 +580,15 @@ body {
   outline-offset: 0;
 }
 
-.text-foreground-lighter {
-    --tw-text-opacity: 1;
-    color: hsl(var(--foreground-lighter) / var(--tw-text-opacity));
+
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 25s linear infinite;
+  }
+  .animate-spin-slower {
+    animation: spin 40s linear infinite;
+  }
+  .animate-spin-slowest {
+    animation: spin 60s linear infinite;
+  }
 }
