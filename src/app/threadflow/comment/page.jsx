@@ -148,7 +148,7 @@ const PostsPage = () => {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
 
-    if (!editFormData.category || !editFormData.title || !editFormData.url) {
+    if (!editFormData.category || !editFormData.title) {
       toast.error("Please fill in category, title, and URL fields.");
       return;
     }
@@ -325,17 +325,17 @@ if (loading) {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Category</TableHead>
+                    <TableHead>Targeted Subreddit</TableHead>
                     <TableHead>Title</TableHead>
-                    <TableHead>URL</TableHead>
-                    <TableHead>Status</TableHead>
+                    <TableHead>Comment Approval Status</TableHead>
                     <TableHead>Text of engagement</TableHead>
                     <TableHead>Date published</TableHead>
-                    <TableHead>Current Status</TableHead>
+                    <TableHead>Client Feedback</TableHead>
                     <TableHead>Published Link</TableHead>
-                    <TableHead>Number of our engagements</TableHead>
-                    <TableHead>Link to Kubiya</TableHead>
+                    {/* <TableHead>Number of our engagements</TableHead> */}
+                    {/* <TableHead>Link to Kubiya</TableHead> */}
                     <TableHead>ID used</TableHead>
-                    <TableHead>Actions</TableHead>
+                    {/* <TableHead>Actions</TableHead> */}
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -346,21 +346,15 @@ if (loading) {
                           {post.category}
                         </Badge>
                       </TableCell>
+<TableCell className="max-w-sm">
+                        <div className="text-sm text-muted-foreground line-clamp-3">
+                          {post.targeted_subreddit}
+                        </div>
+                      </TableCell>
                       <TableCell className="font-medium max-w-xs">
                         <div className="truncate" title={post.title}>
                           {post.title}
                         </div>
-                      </TableCell>
-                      <TableCell className="max-w-xs">
-                        <a
-                          href={post.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:underline flex items-center gap-1 truncate"
-                        >
-                          <ExternalLink className="h-3 w-3" />
-                          Reddit Link
-                        </a>
                       </TableCell>
                       <TableCell>{getStatusBadge(post.status)}</TableCell>
                       <TableCell className="max-w-sm">
@@ -371,7 +365,7 @@ if (loading) {
                       <TableCell className="text-sm">
                         {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
                       </TableCell>
-                      <TableCell className="text-sm">{post.current_status}</TableCell>
+                      <TableCell className="text-sm">{post.client_feedback}</TableCell>
                       <TableCell>
                         <a
                           href={post.posted_link}
@@ -382,10 +376,10 @@ if (loading) {
                           {post.posted_link ? "View Link" : "-"}
                         </a>
                       </TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
+                      {/* <TableCell></TableCell>
+                      <TableCell></TableCell> */}
                       <TableCell>{post.id}</TableCell>
-                      <TableCell>
+                      {/* <TableCell>
                         <div className="flex items-center gap-2">
                           <Button
                             variant="ghost"
@@ -405,7 +399,7 @@ if (loading) {
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   ))}
                 </TableBody>
