@@ -580,3 +580,7 @@ body {
   outline-offset: 0;
 }
 
+.text-foreground-lighter {
+    --tw-text-opacity: 1;
+    color: hsl(var(--foreground-lighter) / var(--tw-text-opacity));
+}
