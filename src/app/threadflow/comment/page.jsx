@@ -62,7 +62,7 @@ const PostsPage = () => {
 
     const fetchPosts = async () => {
       try {
-        const res = await fetch(`/api/posts?userId=${firebaseUser.uid}`);
+        const res = await fetch(`/api/comment?userId=${firebaseUser.uid}`);
         const result = await res.json();
 
         if (!res.ok) {
@@ -154,7 +154,7 @@ const PostsPage = () => {
     }
 
     try {
-      const res = await fetch("/api/posts", {
+      const res = await fetch("/api/comment", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -206,7 +206,7 @@ const PostsPage = () => {
     setIsDeleting(postId);
 
     try {
-      const res = await fetch(`/api/posts?id=${postId}`, {
+      const res = await fetch(`/api/comment?id=${postId}`, {
         method: "DELETE",
       });
 
