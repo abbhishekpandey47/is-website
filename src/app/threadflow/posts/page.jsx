@@ -228,9 +228,15 @@ const PostsPage = () => {
     }
   };
 
-  if (loading) {
-    return <div className="p-6">Loading your posts...</div>;
-  }
+if (loading) {
+  return (
+    <div className="p-6 space-y-4">
+      <div className="animate-pulse h-6 w-48 bg-gray-300 rounded" />
+      <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
+      <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
+    </div>
+  );
+}
 
   if (!firebaseUser) {
     return <div className="p-6">Please log in to view your posts.</div>;

@@ -1,5 +1,7 @@
+"use client"
+
 import Image from 'next/image';
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const FeatureCards = () => {
   const cards = [
@@ -16,7 +18,8 @@ const FeatureCards = () => {
       title: "Show up where developers are",
       description: "From Reddit to GitHub Discussions, we seed conversations that spark trust. No spam, just consistent engagement where your users already live.",
       imageAlt: "Auth management illustration",
-      image: "c2.png"
+      image: "c2.png",
+      design: <OrbitLogos />
     },
     {
       id: 3,
@@ -43,7 +46,7 @@ const FeatureCards = () => {
       {cards.map((card) => (
         <div
           key={card.id}
-          className="g-gray-800 rounded-lg border border-gray-700 py-6 shadow-sm shadow-white/30 transition-shadow duration-200"
+          className="g-gray-800 rounded-lg border border-gray-700 pb-6 shadow-sm shadow-white/30 transition-shadow duration-200"
         >
           <div className="mb-6">
             {card.design ? (
@@ -199,3 +202,117 @@ const MCPToolsInterface = () => {
     </div>
   );
 };
+
+const circle1 = [
+  "https://framerusercontent.com/images/GzVxBdDoT8WYQfEz3RZpgt4tyIs.svg",
+  "https://framerusercontent.com/images/fOGS30H04nLKlVAy0oNDZKH6o.png",
+  "https://framerusercontent.com/images/hdY8ot05YZnMTURoaxRjdqsrs.jpeg",
+  "https://framerusercontent.com/images/OI4zR2hwXpGOXXxCzkmfTB3Pls.png",
+];
+
+const circle2 = [
+  "https://framerusercontent.com/images/POqrokMFJqkFZTHtUNf4gUp2Jc.png",
+  "https://framerusercontent.com/images/Lg0zdHRcf1P5w2pD2FssTVwJmo.svg",
+  "https://framerusercontent.com/images/RnVehSAT2ygAnRaFsXNbybdyP0.png",
+  "https://framerusercontent.com/images/MDDNoOiq3s6vk6Xe8tUd2z1o6o.jpeg",
+  "https://framerusercontent.com/images/urTU3aKWMI2JwYiTyskKeNolSY.svg",
+];
+
+const circle3 = [
+  "https://framerusercontent.com/images/276WO0YitRvZ7zBTjFFeSUdqM1w.svg",
+  "https://framerusercontent.com/images/n633YieGsyurEJVRQYTV9NJkPk.png",
+  "https://framerusercontent.com/images/3NHXgLzpd82ROkKyt6peYL6OFhs.svg",
+  "https://framerusercontent.com/images/SwOk89pCA23qMeJlAcxU7IyRw.svg",
+  "https://framerusercontent.com/images/QBNJ7cvbiKkcxhWEs4RrY6BYT0E.png",
+  "https://framerusercontent.com/images/87hLs84LpgsjaIqNbzWD38JL9b4.png",
+  "https://framerusercontent.com/images/eFYSSb2rsQ20Xy4Zw3hXmHafiMs.png",
+];
+
+function OrbitLogos() {
+  return (
+    <div className="relative flex items-center justify-center h-[200px] w-[450px] text-white overflow-hidden">
+      {/* Center logo */}
+      <div className="absolute w-28 h-28 rounded-full flex items-center justify-center border border-gray-700 shadow-lg z-10">
+        <span className="text-sm font-semibold">Logo</span>
+      </div>
+
+      {/* Small circle */}
+      <div className="absolute w-[250px] h-[250px] rounded-full border border-gray-700 animate-spin-slow">
+        {circle1.map((src, i) => {
+          const angle = (i / circle1.length) * 360;
+          return (
+            <div
+              key={i}
+              className="absolute w-8 h-8 -ml-4 -mt-4"
+              style={{
+                top: "50%",
+                left: "50%",
+                transform: `rotate(${angle}deg) translate(125px) rotate(-${angle}deg)`,
+              }}
+            >
+              <Image
+                src={src}
+                alt={`logo1-${i}`}
+                width={32}
+                height={32}
+                className="rounded-full object-cover"
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Medium circle */}
+      <div className="absolute w-[400px] h-[400px] rounded-full border border-gray-700 animate-spin-slower">
+        {circle2.map((src, i) => {
+          const angle = (i / circle2.length) * 360;
+          return (
+            <div
+              key={i}
+              className="absolute w-8 h-8 -ml-4 -mt-4"
+              style={{
+                top: "50%",
+                left: "50%",
+                transform: `rotate(${angle}deg) translate(200px) rotate(-${angle}deg)`,
+              }}
+            >
+              <Image
+                src={src}
+                alt={`logo2-${i}`}
+                width={32}
+                height={32}
+                className="rounded-full object-cover"
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Large circle */}
+      <div className="absolute w-[550px] h-[550px] rounded-full border border-gray-700 animate-spin-slowest">
+        {circle3.map((src, i) => {
+          const angle = (i / circle3.length) * 360;
+          return (
+            <div
+              key={i}
+              className="absolute w-8 h-8 -ml-4 -mt-4"
+              style={{
+                top: "50%",
+                left: "50%",
+                transform: `rotate(${angle}deg) translate(275px) rotate(-${angle}deg)`,
+              }}
+            >
+              <Image
+                src={src}
+                alt={`logo3-${i}`}
+                width={32}
+                height={32}
+                className="rounded-full object-cover"
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
