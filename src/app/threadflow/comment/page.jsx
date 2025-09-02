@@ -28,15 +28,15 @@ const PostsPage = () => {
   // Edit modal 
   const [editingPost, setEditingPost] = useState(null);
   const [editFormData, setEditFormData] = useState({
-    category: "",
+   category: "",
     title: "",
-    url: "",
-    status: "pending",
     engagementText: "",
-    kimsVersion: "",
     datePosted: "",
     postedLink: "",
-    currentStatus: "pending",
+    status: "pending",
+    clientFeedback: "",
+    targetedSubreddit: "",
+    postURL: "",
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(null);
@@ -114,13 +114,13 @@ const PostsPage = () => {
     setEditFormData({
       category: post.category || "",
       title: post.title || "",
-      url: post.url || "",
-      status: post.status || "pending",
       engagementText: post.engagement_text || "",
-      kimsVersion: post.kims_version || "",
       datePosted: post.date_posted ? new Date(post.date_posted).toISOString().split('T')[0] : "",
       postedLink: post.posted_link || "",
-      currentStatus: post.current_status || "pending",
+      status: post.status || "pending",
+      clientFeedback: post.client_feedback || "",
+      targetedSubreddit: post.targeted_subreddit || "",
+      postURL: post.post_url || "",
     });
     setIsEditModalOpen(true);
   };
@@ -158,17 +158,18 @@ const PostsPage = () => {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id: editingPost.id,
-          category: editFormData.category,
-          title: editFormData.title,
-          url: editFormData.url,
-          status: editFormData.status,
-          engagement_text: editFormData.engagementText,
-          kims_version: editFormData.kimsVersion,
-          date_posted: editFormData.datePosted ? new Date(editFormData.datePosted) : null,
-          posted_link: editFormData.postedLink,
-          current_status: editFormData.currentStatus,
-        }),
+  id: editingPost.id, // required for update
+  category: editFormData.category,
+  title: editFormData.title,
+  status: editFormData.status || "pending",
+  engagement_text: editFormData.engagementText || null,
+  date_posted: editFormData.datePosted ? new Date(editFormData.datePosted) : null,
+  posted_link: editFormData.postedLink || null,
+  user_id: editFormData.user_id, // keep user reference
+  targeted_subreddit: editFormData.targetedSubreddit || null,
+  client_feedback: editFormData.clientFeedback || null,
+  post_url: editFormData.postURL || null,
+}),
       });
 
       const result = await res.json();
@@ -365,7 +366,7 @@ if (loading) {
                       <TableCell className="text-sm">
                         {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
                       </TableCell>
-                      <TableCell className="text-sm">{post.client_feedback}</TableCell>
+                      <TableCell className="text-sm"> <div className="text-sm text-muted-foreground line-clamp-3">{post.client_feedback}</div></TableCell>
                       <TableCell>
                         <a
                           href={post.posted_link}
@@ -379,7 +380,7 @@ if (loading) {
                       {/* <TableCell></TableCell>
                       <TableCell></TableCell> */}
                       <TableCell>{post.id}</TableCell>
-                      {/* <TableCell>
+                      <TableCell>
                         <div className="flex items-center gap-2">
                           <Button
                             variant="ghost"
@@ -399,7 +400,7 @@ if (loading) {
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
-                      </TableCell> */}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -449,24 +450,28 @@ if (loading) {
                       </Select>
                     </div>
 
-                    <div>
-                      <Label htmlFor="edit-status">Status</Label>
-                      <Select
-                        value={editFormData.status}
-                        onValueChange={(value) => handleEditInputChange("status", value)}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="pending">Pending</SelectItem>
-                          <SelectItem value="approved">Approved</SelectItem>
-                          <SelectItem value="rejected">Rejected</SelectItem>
-                          <SelectItem value="live">Live</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                     <div>
+                    <Label htmlFor="targetedSubreddit">Targeted Subreddit</Label>
+                     <Input
+                    id="targetedSubreddit"
+                    value={editFormData.targetedSubreddit}
+                    onChange={(e) => handleEditInputChange("targetedSubreddit", e.target.value)}
+                    placeholder="Enter the Targeted Subreddit"
+                    className="h-10"
+                  />
                   </div>
+                  </div>
+
+                   <div>
+                  <Label htmlFor="postURL" className="text-sm font-medium mb-2 block">Post URL</Label>
+                  <Input
+                    id="postURL"
+                    value={editFormData.postURL}
+                    onChange={(e) => handleEditInputChange("postURL", e.target.value)}
+                    placeholder="Enter the Reddit Post URL"
+                    className="h-10"
+                  />
+                </div>
 
                   <div>
                     <Label htmlFor="edit-title">Title *</Label>
@@ -478,16 +483,7 @@ if (loading) {
                     />
                   </div>
 
-                  <div>
-                    <Label htmlFor="edit-url">URL *</Label>
-                    <Input
-                      id="edit-url"
-                      type="url"
-                      value={editFormData.url}
-                      onChange={(e) => handleEditInputChange("url", e.target.value)}
-                      placeholder="https://www.reddit.com/r/..."
-                    />
-                  </div>
+                 
 
                   {/* Content */}
                   <div>
@@ -500,6 +496,18 @@ if (loading) {
                       rows={4}
                     />
                   </div>
+
+                   <div>
+                  <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Client Feedback</Label>
+                  <Textarea
+                    id="clientFeedback"
+                    value={editFormData.clientFeedback}
+                    onChange={(e) => handleEditInputChange("clientFeedback", e.target.value)}
+                    placeholder="Enter your feedback for this Reddit Comment..."
+                    rows={4}
+                    className="resize-none"
+                  />
+                </div>
 
                   {/* Tracking Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -514,7 +522,7 @@ if (loading) {
                     </div>
 
                     <div>
-                      <Label htmlFor="edit-currentStatus">Current Status</Label>
+                      <Label htmlFor="edit-currentStatus">Comment Approval Status</Label>
                       <Select
                         value={editFormData.currentStatus}
                         onValueChange={(value) => handleEditInputChange("currentStatus", value)}
@@ -523,17 +531,17 @@ if (loading) {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="pending">Pending</SelectItem>
-                          <SelectItem value="live">Live</SelectItem>
-                          <SelectItem value="approved">Approved</SelectItem>
-                          <SelectItem value="rejected">Rejected</SelectItem>
-                        </SelectContent>
+                        <SelectItem value="pending">Live</SelectItem>
+                        <SelectItem value="live">Deleted</SelectItem>
+                        <SelectItem value="approved">Reuploaded </SelectItem>
+                        <SelectItem value="rejected">Pending</SelectItem>
+                      </SelectContent>
                       </Select>
                     </div>
                   </div>
 
                   <div>
-                    <Label htmlFor="edit-postedLink">Posted Link</Label>
+                    <Label htmlFor="edit-postedLink">Comment URL</Label>
                     <Input
                       id="edit-postedLink"
                       type="url"
@@ -570,7 +578,7 @@ if (loading) {
                   <Trash2 className="h-6 w-6 text-destructive" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground">Delete Post</h3>
+                  <h3 className="text-lg font-semibold text-foreground">Delete Comment</h3>
                   <p className="text-sm text-muted-foreground mt-1">
                     This action cannot be undone
                   </p>
@@ -579,7 +587,7 @@ if (loading) {
               
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground mb-2">
-                  Are you sure you want to delete this post?
+                  Are you sure you want to delete this Comment?
                 </p>
                 <div className="p-3 bg-muted rounded-md">
                   <p className="text-sm font-medium text-foreground truncate">
