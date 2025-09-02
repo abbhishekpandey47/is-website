@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative isolate transform-gpu pt-28">
+    <section className="relative isolate transform-gpu pt-28 -mb-20">
       <div className="absolute inset-0 -z-10 top-0 bg-[radial-gradient(70%_80%_at_50%_-20%,rgba(108,91,233,0.5),rgba(255,255,255,0))]" />
 
       <svg
