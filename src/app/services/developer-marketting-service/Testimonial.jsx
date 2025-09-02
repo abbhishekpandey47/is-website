@@ -174,20 +174,18 @@ let newArr = [];
 
 const Testimonials = () => {
   const [carPtr, setCarPtr] = useState(0);
-  const testiMemo = useMemo(() => testiArr, [testiArr]);
-  
+  const testiMemo = useMemo(() => testiArr, []);
+
   useEffect(() => {
     (async () => {
-      const { gsap } = await import('gsap');
-      const { ScrollTrigger, CustomEase } = await import('gsap/all');
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger, CustomEase } = await import("gsap/all");
       gsap.registerPlugin(ScrollTrigger);
       gsap.registerPlugin(CustomEase);
+
       gsap.fromTo(
         ".testiMonialsHead",
-        {
-          opacity: 0,
-          y: 55,
-        },
+        { opacity: 0, y: 55 },
         {
           opacity: 1,
           y: 0,
@@ -203,11 +201,7 @@ const Testimonials = () => {
 
       gsap.fromTo(
         ".testiMonCardHome",
-        {
-          opacity: 0,
-          y: 55,
-          scale: 1.3,
-        },
+        { opacity: 0, y: 55, scale: 1.3 },
         {
           opacity: 1,
           y: 0,
@@ -222,16 +216,24 @@ const Testimonials = () => {
         }
       );
     })();
-    return () => {};
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCarPtr((prev) => (prev + 1) % testiMemo.length);
+    }, 3000);
+
+    return () => clearInterval(interval); 
+  }, [testiMemo.length]);
 
   const handleOnIndIncr = () => {
     setCarPtr((carPtr - 1 + testiMemo.length) % testiMemo.length);
   };
-  
+
   const handleOnIndDecr = () => {
     setCarPtr((carPtr + 1) % testiMemo.length);
   };
+
 
   return (
     <div>

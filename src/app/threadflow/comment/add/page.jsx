@@ -36,14 +36,12 @@ const AddPostPage = () => {
   const [formData, setFormData] = useState({
     category: "",
     title: "",
-    url: "",
-    status: "",
     engagementText: "",
-    kimsVersion: "",
     datePosted: "",
     postedLink: "",
-    currentStatus: "pending",
+    status: "pending",
     clientFeedback: "",
+    targetedSubreddit: "",
   });
 
   useEffect(() => {
@@ -291,11 +289,11 @@ const AddPostPage = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="status">Targeted Subreddit</Label>
+                    <Label htmlFor="targetedSubreddit">Targeted Subreddit</Label>
                      <Input
-                    id="status"
-                    value={formData.status}
-                    onChange={(e) => handleInputChange("status", e.target.value)}
+                    id="targetedSubreddit"
+                    value={formData.targetedSubreddit}
+                    onChange={(e) => handleInputChange("targetedSubreddit", e.target.value)}
                     placeholder="Enter the Targeted Subreddit"
                     className="h-10"
                   />
@@ -363,8 +361,8 @@ const AddPostPage = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="currentStatus">Comment Approval Status</Label>
-                    <Select value={formData.currentStatus} onValueChange={(value) => handleInputChange("currentStatus", value)}>
+                    <Label htmlFor="status">Comment Approval Status</Label>
+                    <Select value={formData.status} onValueChange={(value) => handleInputChange("status", value)}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
