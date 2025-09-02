@@ -228,14 +228,13 @@ if (loading) {
                     <TableHead>Category</TableHead>
                     <TableHead>Title</TableHead>
                     <TableHead>URL</TableHead>
-                    <TableHead>Approved</TableHead>
+                    <TableHead>Published Post Status</TableHead>
                     <TableHead>Text of engagement</TableHead>
                     {/* <TableHead>Kim's Version</TableHead> */}
                     <TableHead>Date published</TableHead>
-                     <TableHead>Status</TableHead>
+                     <TableHead>Post Approval Status</TableHead>
                     <TableHead>Published Link</TableHead>
-                   
-                    <TableHead>Number of our engagements</TableHead>
+                    <TableHead>Targeted Subreddit</TableHead>
                     <TableHead>Link to Kubiya</TableHead>
                     <TableHead>ID used</TableHead>
                   </TableRow>
@@ -291,6 +290,7 @@ if (loading) {
                         </a>
                       </TableCell>
                       <TableCell>
+                        {post.target_subreddit || "-"}
                       </TableCell>
                        <TableCell>
                       </TableCell>
