@@ -82,7 +82,6 @@ useEffect(() => {
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
-    // Dynamically calculate status counts from posts
   const statusCounts = posts.reduce(
     (acc, post) => {
       acc[post.status] = (acc[post.status] || 0) + 1;
@@ -107,9 +106,16 @@ useEffect(() => {
     );
   };
 
-  if (loading) {
-    return <div className="p-6">Loading your posts...</div>;
-  }
+if (loading) {
+  return (
+    <div className="p-6 space-y-4">
+      <div className="animate-pulse h-6 w-48 bg-gray-300 rounded" />
+      <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
+      <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
+    </div>
+  );
+}
+
 
   if (!firebaseUser) {
     return <div className="p-6">Please log in to view your posts.</div>;
