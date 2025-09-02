@@ -235,8 +235,7 @@ if (loading) {
                      <TableHead>Post Approval Status</TableHead>
                     <TableHead>Published Link</TableHead>
                     <TableHead>Targeted Subreddit</TableHead>
-                    <TableHead>Link to Kubiya</TableHead>
-                    <TableHead>ID used</TableHead>
+                    <TableHead>Reddit Username</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -292,10 +291,9 @@ if (loading) {
                       <TableCell>
                         {post.target_subreddit || "-"}
                       </TableCell>
+                  
                        <TableCell>
-                      </TableCell>
-                       <TableCell>
-                        {post.id}
+                        {post.reddit_username || "-"}
                       </TableCell>
                     </TableRow>
                   ))}

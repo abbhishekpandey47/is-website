@@ -27,6 +27,7 @@ export default async function handler(req, res) {
           posted_link: body.postedLink || null,
           current_status: body.currentStatus || "pending",
           user_id: body.user_id,
+          reddit_username: body.redditUsername || null,
         },
       ]);
 

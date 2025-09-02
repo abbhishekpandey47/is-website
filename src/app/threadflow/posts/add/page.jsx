@@ -42,6 +42,7 @@ const AddPostPage = () => {
     postedLink: "",
     status: "live",
     currentStatus: "approved",
+    redditUsername: "",
   });
 
   useEffect(() => {
@@ -298,6 +299,17 @@ const AddPostPage = () => {
                     />
                   </div>
                 </div>
+
+                  <div>
+                                  <Label htmlFor="redditUsername" className="text-sm font-medium mb-2 block">Reddit Username</Label>
+                                  <Input
+                                    id="redditUsername"
+                                    value={formData.redditUsername}
+                                    onChange={(e) => handleInputChange("redditUsername", e.target.value)}
+                                    placeholder="Enter the Reddit Username"
+                                    className="h-10"
+                                  />
+                                </div>
 
                 <div>
                   <Label htmlFor="title" className="text-sm font-medium mb-2 block">Title *</Label>
