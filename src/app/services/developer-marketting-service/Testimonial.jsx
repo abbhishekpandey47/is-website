@@ -111,7 +111,7 @@ const TestiCard = ({
   highlight,
 }) => {
   const renderHighlightedText = (text = "", highlights = []) => {
-    if (!text) return ""; 
+    if (!text) return "";
     const regex = new RegExp(`(${highlights.join("|")})`, "gi");
     return text.split(regex).map((part, i) =>
       highlights.includes(part) ? (
@@ -223,7 +223,7 @@ const Testimonials = () => {
       setCarPtr((prev) => (prev + 1) % testiMemo.length);
     }, 3000);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, [testiMemo.length]);
 
   const handleOnIndIncr = () => {
@@ -255,7 +255,7 @@ const Testimonials = () => {
           </h3>
         </div>
       </div>
-      
+
       <div className="flex justify-center items-center gap-8 py-16 quicksand-light w-full m-auto text-white">
         <div className="flex-shrink-0">
           <button
@@ -265,7 +265,7 @@ const Testimonials = () => {
             <ArrowLeftOutlined className="text-white" />
           </button>
         </div>
-        
+
         <div className="testiMonCardHome">
           <TestiCard
             index={0}
@@ -279,7 +279,7 @@ const Testimonials = () => {
             key={carPtr}
           />
         </div>
-        
+
         <div className="flex-shrink-0">
           <button
             onClick={handleOnIndDecr}
