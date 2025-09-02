@@ -64,7 +64,7 @@ export default async function handler(req, res) {
       const { data, error } = await supabase
         .from("posts")
         .select("*")
-        .eq("user_id", userId)
+        // .eq("user_id", userId)
         .order("date_posted", { ascending: false });
 
       if (error) return res.status(500).json({ error: error.message });
