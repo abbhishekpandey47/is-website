@@ -1,20 +1,21 @@
 "use client";
+import { getCache, setCache } from '@/lib/cacheClient';
+import { auth } from "@/lib/firebaseClient";
+import { onAuthStateChanged } from "firebase/auth";
+import { Edit, ExternalLink, Plus, Save, Search, Trash2, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Badge } from "../../../Components/ui/badge";
 import { Button } from "../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../Components/ui/card";
 import { Input } from "../../../Components/ui/input";
 import { Label } from "../../../Components/ui/label";
-import { Textarea } from "../../../Components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../Components/ui/select";
 import { SidebarTrigger } from "../../../Components/ui/sidebar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../Components/ui/table";
+import { Textarea } from "../../../Components/ui/textarea";
 import { UserProfile } from "../../../Components/UserProfile";
-import { useRouter } from "next/navigation";
-import { Plus, Search, ExternalLink, Edit, Trash2, Save, X } from "lucide-react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebaseClient";
-import { toast } from "react-toastify";
 
 const PostsPage = () => {
   const router = useRouter();
@@ -24,8 +25,8 @@ const PostsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
-  
-  // Edit modal 
+
+  // Edit modal
   const [editingPost, setEditingPost] = useState(null);
   const [editFormData, setEditFormData] = useState({
     category: "",
@@ -57,25 +58,24 @@ const PostsPage = () => {
 
   useEffect(() => {
     if (!firebaseUser) return;
-
-    console.log("Fetching posts for user:", firebaseUser.uid);
-
+    const cacheKey = `posts_${firebaseUser.uid}`;
+    const cached = getCache(cacheKey, 'local');
+    if (cached?.data) {
+      setPosts(cached.data);
+    }
     const fetchPosts = async () => {
       try {
         const res = await fetch(`/api/posts?userId=${firebaseUser.uid}`);
         const result = await res.json();
-
-        if (!res.ok) {
-          throw new Error(result.error || "Failed to fetch posts");
-        }
-
+        if (!res.ok) throw new Error(result.error || 'Failed to fetch posts');
         setPosts(result.data || []);
+        setCache(cacheKey, { data: result.data || [] }, 2 * 60 * 1000, 'local'); // 2m TTL
       } catch (err) {
-        console.error("Error fetching posts:", err);
-        toast.error("Failed to load posts");
+        console.error('Error fetching posts:', err);
+        toast.error('Failed to load posts');
       }
     };
-
+    // Always revalidate in background (won't block UI if cache served)
     fetchPosts();
   }, [firebaseUser]);
 
@@ -108,7 +108,7 @@ const PostsPage = () => {
     );
   };
 
-  // Edit 
+  // Edit
   const openEditModal = (post) => {
     setEditingPost(post);
     setEditFormData({
@@ -178,11 +178,11 @@ const PostsPage = () => {
       }
 
       // Update the posts state
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post.id === editingPost.id ? { ...post, ...result.data[0] } : post
-        )
-      );
+      setPosts((prevPosts) => {
+        const updated = prevPosts.map((post) => post.id === editingPost.id ? { ...post, ...result.data[0] } : post);
+        if (firebaseUser) setCache(`posts_${firebaseUser.uid}`, { data: updated }, 2*60*1000, 'local');
+        return updated;
+      });
 
       toast.success("Post updated successfully!");
       closeEditModal();
@@ -217,7 +217,11 @@ const PostsPage = () => {
       }
 
       // Remove the post from the state
-      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+      setPosts((prevPosts) => {
+        const updated = prevPosts.filter((post) => post.id !== postId);
+        if (firebaseUser) setCache(`posts_${firebaseUser.uid}`, { data: updated }, 2*60*1000, 'local');
+        return updated;
+      });
       toast.success("Post deleted successfully!");
       closeDeleteConfirmation();
     } catch (err) {
@@ -582,7 +586,7 @@ if (loading) {
                   </p>
                 </div>
               </div>
-              
+
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground mb-2">
                   Are you sure you want to delete this post?
@@ -595,14 +599,14 @@ if (loading) {
               </div>
 
               <div className="flex items-center justify-end gap-3">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={closeDeleteConfirmation}
                   disabled={isDeleting}
                 >
                   Cancel
                 </Button>
-                <Button 
+                <Button
                   variant="destructive"
                   onClick={handleDelete}
                   disabled={isDeleting}

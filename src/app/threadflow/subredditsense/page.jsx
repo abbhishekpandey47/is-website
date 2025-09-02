@@ -12,6 +12,7 @@ import MentionsChart from '@/app/tools/reddit-tools/components/subredditsense/Me
 import MetricCard from '@/app/tools/reddit-tools/components/subredditsense/MetricCard';
 import SubredditHeatmap from '@/app/tools/reddit-tools/components/subredditsense/SubredditHeatmap';
 import TopThreadsTable from '@/app/tools/reddit-tools/components/subredditsense/TopThreadsTable';
+import { getCache, setCache } from '@/lib/cacheClient';
 import { Eye, MessageSquare, TrendingUp, Users } from 'lucide-react';
 
 async function apiLinkCompany(firebaseUserId, companyName) {
@@ -46,19 +47,49 @@ function deriveDefaultCompany(email) {
 }
 
 export default function ThreadflowSubredditSensePage() {
-  const [firebaseUser, setFirebaseUser] = useState(null);
-  const [companyName, setCompanyName] = useState('');
+  // Synchronous pre-hydration (client only) to eliminate initial flicker
+  const initialUser = typeof window !== 'undefined' ? auth.currentUser : null;
+  let initialCompanyName = '';
+  let initialDashboard = null;
+  let initialLastUpdated = null;
+  if (typeof window !== 'undefined' && initialUser) {
+    try {
+      const stored = localStorage.getItem(`lastSelectedBrand_${initialUser.uid}`);
+      if (stored && stored.trim()) {
+        initialCompanyName = stored.trim();
+      } else if (initialUser.email) {
+        initialCompanyName = deriveDefaultCompany(initialUser.email);
+      }
+      if (initialCompanyName) {
+        const cached = getCache(`dash_${initialUser.uid}_${initialCompanyName}`, 'local');
+        if (cached?.data) {
+          initialDashboard = cached.data;
+          initialLastUpdated = cached.lastUpdated || null;
+        }
+      }
+    } catch {}
+  }
+  const [firebaseUser, setFirebaseUser] = useState(initialUser);
+  const [companyName, setCompanyName] = useState(initialCompanyName);
   const [companyId, setCompanyId] = useState(null);
   const [customCompany, setCustomCompany] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!initialUser);
   const [saving, setSaving] = useState(false);
-  const [dashboard, setDashboard] = useState(null);
+  const [dashboard, setDashboard] = useState(initialDashboard);
   const [fetching, setFetching] = useState(false);
   const [ingesting, setIngesting] = useState(false);
   const [error, setError] = useState(null);
-  const [lastUpdated, setLastUpdated] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(initialLastUpdated);
   const [refreshing, setRefreshing] = useState(false);
   const [jobId, setJobId] = useState(null); // reserved if we later display status
+  const [updatedFields, setUpdatedFields] = useState(new Set());
+  const [hadInitialData, setHadInitialData] = useState(!!dashboard);
+  const friendlyError = error ? (() => {
+    if (/fetch failed|failed/i.test(error) && !dashboard) return 'Service temporarily unreachable. Please retry shortly.';
+    if (/not.?found|404/i.test(error)) return 'No data found for this brand yet.';
+    if (/link company failed/i.test(error)) return 'Could not link this brand. Try a simpler brand name.';
+    return error;
+  })() : null;
 
   const triggerFullRefresh = async (cid) => {
     if(!firebaseUser || !cid) return;
@@ -73,8 +104,9 @@ export default function ThreadflowSubredditSensePage() {
         });
       }
       const dash = await apiDashboard(cid);
-      setDashboard(dash);
+  applyDashboardUpdate(dash);
       setLastUpdated(dash.lastIngestedAt || new Date().toISOString());
+      if (firebaseUser) setCache(`dash_${firebaseUser.uid}_${companyName}`, { data: dash, lastUpdated: dash.lastIngestedAt }, 5*60*1000, 'local');
     } catch(e){ setError(e.message);} finally { setRefreshing(false); setIngesting(false);}
   };
 
@@ -82,47 +114,87 @@ export default function ThreadflowSubredditSensePage() {
     const unsub = onAuthStateChanged(auth, (user) => {
       setFirebaseUser(user);
       if (user) {
-        // Check localStorage for previously selected brand for this user
-        try {
-          const stored = typeof window !== 'undefined' ? localStorage.getItem(`lastSelectedBrand_${user.uid}`) : null;
-          if (stored && stored.trim()) {
-            setCompanyName(stored.trim());
-          } else {
+        // Only adjust company if we don't already have one
+        if (!companyName) {
+          try {
+            const stored = typeof window !== 'undefined' ? localStorage.getItem(`lastSelectedBrand_${user.uid}`) : null;
+            if (stored && stored.trim()) {
+              setCompanyName(stored.trim());
+            } else {
+              const defName = deriveDefaultCompany(user.email || '');
+              setCompanyName(defName);
+            }
+          } catch {
             const defName = deriveDefaultCompany(user.email || '');
             setCompanyName(defName);
           }
-        } catch {
-          const defName = deriveDefaultCompany(user.email || '');
-          setCompanyName(defName);
         }
       }
       setLoading(false);
     });
     return () => unsub();
-  }, []);
+  }, [companyName]);
 
   useEffect(() => {
     if (!firebaseUser || !companyName) return;
     let cancelled = false;
+    const cacheKey = `dash_${firebaseUser.uid}_${companyName}`;
+    const hasPrefilled = !!dashboard; // from initial cache hydration
     (async () => {
       try {
         setError(null);
-        setFetching(true);
+        if (!hasPrefilled) setFetching(true);
+        // Only re-read cache if not prefilled
+        if (!hasPrefilled) {
+          const cached = getCache(cacheKey, 'local');
+          if (cached?.data) {
+            setDashboard(cached.data);
+            setLastUpdated(cached.lastUpdated || null);
+          }
+        }
         const link = await apiLinkCompany(firebaseUser.uid, companyName);
         if (cancelled) return;
-  setCompanyId(link.company.id);
-  setLastUpdated(link.company.last_ingested_at || null);
-  if (link.stale) await triggerFullRefresh(link.company.id);
-  const dash = await apiDashboard(link.company.id);
+        setCompanyId(link.company.id);
+        setLastUpdated(link.company.last_ingested_at || null);
+        if (link.stale) await triggerFullRefresh(link.company.id);
+        const dash = await apiDashboard(link.company.id);
         if (!cancelled) {
-          setDashboard(dash);
+          applyDashboardUpdate(dash);
           setLastUpdated(dash.lastIngestedAt || link.company.last_ingested_at || null);
+          setCache(cacheKey, { data: dash, lastUpdated: dash.lastIngestedAt }, 5*60*1000, 'local');
         }
       } catch (e) { if (!cancelled) setError(e.message); }
       finally { if (!cancelled) setFetching(false); }
     })();
     return () => { cancelled = true; };
   }, [firebaseUser, companyName]);
+
+  function applyDashboardUpdate(nextDash){
+    setHadInitialData(true);
+    setDashboard(prev => {
+      if (!prev) return nextDash;
+      try {
+        const changed = new Set();
+        const prevMetrics = prev.metrics || {};
+        const nextMetrics = nextDash.metrics || {};
+        Object.keys(nextMetrics).forEach(k => {
+          if (prevMetrics[k] !== nextMetrics[k]) changed.add(k);
+        });
+        if (changed.size) {
+          setUpdatedFields(changed);
+          // Clear highlights after short delay
+          setTimeout(() => {
+            setUpdatedFields(current => {
+              const clone = new Set(current);
+              changed.forEach(c => clone.delete(c));
+              return clone;
+            });
+          }, 1500);
+        }
+      } catch {}
+      return nextDash;
+    });
+  }
 
   async function handleRelink() {
     if (!customCompany.trim()) return;
@@ -138,7 +210,7 @@ export default function ThreadflowSubredditSensePage() {
     }
   }
 
-  if (loading) return <div className="p-6">Loading...</div>;
+  if (loading && !dashboard) return <div className="p-6">Loading...</div>;
   if (!firebaseUser) return <div className="p-6">Please sign in.</div>;
 
   return (
@@ -177,7 +249,7 @@ export default function ThreadflowSubredditSensePage() {
             <input
               value={customCompany}
               onChange={e => setCustomCompany(e.target.value)}
-              placeholder="Enter brand name (e.g. Acme)"
+              placeholder="Enter brand name (e.g. Infrasity)"
               className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-sm"
             />
           </div>
@@ -190,17 +262,69 @@ export default function ThreadflowSubredditSensePage() {
             </Button>
           </div>
         </div>
-        {lastUpdated && <p className="text-[11px] text-muted-foreground">Last updated: {new Date(lastUpdated).toLocaleString()}</p>}
-        {error && <div className="text-sm text-red-500">{error}</div>}
-        {!dashboard && !error && <div className="text-sm text-muted-foreground">Loading dashboard...</div>}
-        {dashboard && (
+        <div className="flex items-center gap-3 flex-wrap text-[11px] text-muted-foreground">
+          {lastUpdated && <span>Last updated: {new Date(lastUpdated).toLocaleString()}</span>}
+          {dashboard && (refreshing || (fetching && !refreshing)) && (
+            <span className="flex items-center gap-1 text-xs text-primary">
+              <span className="inline-block w-3 h-3 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              {refreshing ? 'Refreshing data…' : 'Updating…'}
+            </span>
+          )}
+        </div>
+  {friendlyError && <div className="text-sm text-red-500">{friendlyError}</div>}
+  {!dashboard && !friendlyError && (
+          <div className="space-y-8" aria-label="dashboard-skeleton">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {Array.from({length:4}).map((_,i)=>(<div key={i} className="h-24 rounded-md bg-muted/40 animate-pulse" />))}
+            </div>
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+              <div className="space-y-8">
+                <div className="h-64 rounded-md bg-muted/40 animate-pulse" />
+                <div className="h-64 rounded-md bg-muted/40 animate-pulse" />
+              </div>
+              <div className="h-[540px] rounded-md bg-muted/40 animate-pulse" />
+            </div>
+            <div className="h-72 rounded-md bg-muted/40 animate-pulse" />
+          </div>
+        )}
+        {dashboard && dashboard.metrics && dashboard.metrics.totalMentions === 0 && !refreshing && !fetching && (
+          <div className="max-w-3xl mx-auto text-center py-20 flex flex-col items-center gap-6">
+            <div className="w-20 h-20 rounded-full bg-muted/30 flex items-center justify-center">
+              <MessageSquare className="w-10 h-10 text-muted-foreground" />
+            </div>
+            <h2 className="text-2xl font-semibold">No Reddit presence detected yet</h2>
+            <p className="text-sm text-muted-foreground max-w-md">We couldn't find recent mentions or threads for <span className="font-medium">{companyName}</span>. You can refresh, adjust the brand name, or check back later.</p>
+            <div className="flex gap-3">
+              <Button variant="outline" disabled={refreshing || ingesting} onClick={() => companyId && triggerFullRefresh(companyId)}>
+                <RefreshCw className={`w-4 h-4 mr-1 ${refreshing? 'animate-spin':''}`} /> {refreshing ? 'Refreshing...' : 'Force Refresh'}
+              </Button>
+              <Button disabled={saving || !customCompany.trim()} onClick={handleRelink}>
+                <Search className="w-4 h-4 mr-1" /> Track Different Brand
+              </Button>
+            </div>
+            <ul className="text-xs text-muted-foreground space-y-1 mt-4 text-left list-disc list-inside max-w-sm">
+              <li>Use the common brand name (avoid legal suffixes).</li>
+              <li>Give new mentions a few minutes to ingest.</li>
+              <li>Try a manual refresh after updating the name.</li>
+            </ul>
+          </div>
+        )}
+        {dashboard && dashboard.metrics && dashboard.metrics.totalMentions > 0 && (
           <div className="max-w-7xl mx-auto space-y-10">
             {/* Metrics Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              <MetricCard title="Total Mentions" value={dashboard.metrics.totalMentions} icon={MessageSquare} subtitle={dashboard.meta ? `All Time (${dashboard.meta.spanDays} days)` : 'All Time'} />
-              <MetricCard title="Active Subreddits" value={dashboard.metrics.activeSubreddits} icon={Users} subtitle="Communities" />
-              <MetricCard title="Avg Engagement" value={dashboard.metrics.avgEngagement} icon={TrendingUp} subtitle="Upvotes + Comments" />
-              <MetricCard title="Positive Sentiment" value={dashboard.metrics.positiveSentimentPct + '%'} icon={Eye} subtitle={dashboard.metrics.estUpVotes !== undefined ? `${dashboard.metrics.estUpVotes}↑ / ${dashboard.metrics.estDownVotes}↓ (est)` : 'Score Ratio'} />
+              <div className={`transition-colors ${updatedFields.has('totalMentions') ? 'flash-update' : ''}`}>
+                <MetricCard title="Total Mentions" value={dashboard.metrics.totalMentions} icon={MessageSquare} subtitle={dashboard.meta ? `All Time (${dashboard.meta.spanDays} days)` : 'All Time'} />
+              </div>
+              <div className={updatedFields.has('activeSubreddits') ? 'flash-update' : ''}>
+                <MetricCard title="Active Subreddits" value={dashboard.metrics.activeSubreddits} icon={Users} subtitle="Communities" />
+              </div>
+              <div className={updatedFields.has('avgEngagement') ? 'flash-update' : ''}>
+                <MetricCard title="Avg Engagement" value={dashboard.metrics.avgEngagement} icon={TrendingUp} subtitle="Upvotes + Comments" />
+              </div>
+              <div className={updatedFields.has('positiveSentimentPct') ? 'flash-update' : ''}>
+                <MetricCard title="Positive Sentiment" value={dashboard.metrics.positiveSentimentPct + '%'} icon={Eye} subtitle={dashboard.metrics.estUpVotes !== undefined ? `${dashboard.metrics.estUpVotes}↑ / ${dashboard.metrics.estDownVotes}↓ (est)` : 'Score Ratio'} />
+              </div>
             </div>
             {/* Charts + Topic Clusters inline layout */}
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 items-start">
