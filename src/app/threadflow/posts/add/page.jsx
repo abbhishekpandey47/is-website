@@ -26,7 +26,7 @@ const AddPostPage = () => {
   // Predefined categories
   const [categories, setCategories] = useState([
     "Drift Detection",
-    "IaC", 
+    "IaC",
     "DevOps",
     "AWS",
     "Enterprise AI",
@@ -36,13 +36,12 @@ const AddPostPage = () => {
   const [formData, setFormData] = useState({
     category: "",
     title: "",
-    url: "",
-    status: "pending",
+    targetedSubreddit: "",
     engagementText: "",
-    kimsVersion: "",
     datePosted: "",
     postedLink: "",
-    currentStatus: "pending",
+    status: "live",
+    currentStatus: "approved",
   });
 
   useEffect(() => {
@@ -84,7 +83,7 @@ const AddPostPage = () => {
     setFormData(prev => ({ ...prev, category: newCategory.name.trim() }));
     setNewCategory({ name: "", description: "" });
     setShowAddCategory(false);
-    
+
     toast({
       title: "Category added",
       description: `Category "${newCategory.name.trim()}" has been added successfully.`,
@@ -92,55 +91,55 @@ const AddPostPage = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!firebaseUser) {
-    toast({
-      title: "Authentication Required",
-      description: "Please log in before adding a post.",
-      variant: "destructive",
-    });
-    router.push("/auth/signup");
-    return;
-  }
-
-  if (!formData.category || !formData.title || !formData.url) {
-    toast({
-      title: "Missing Information",
-      description: "Please fill in category, title, and URL fields.",
-      variant: "destructive",
-    });
-    return;
-  }
-
-  try {
-    const res = await fetch("/api/posts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...formData, user_id: firebaseUser.uid }),
-    });
-
-    const result = await res.json();
-
-    if (!res.ok) {
-      throw new Error(result.error || "Failed to save post");
+    if (!firebaseUser) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in before adding a post.",
+        variant: "destructive",
+      });
+      router.push("/auth/signup");
+      return;
     }
 
-    toast({
-      title: "Post Added Successfully!",
-      description: "Your post has been added to the tracker.",
-    });
+    if (!formData.category || !formData.title) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in category, title, and URL fields.",
+        variant: "destructive",
+      });
+      return;
+    }
 
-    router.push("/threadflow/posts");
-  } catch (err) {
-    console.error("Error saving post:", err);
-    toast({
-      title: "Error",
-      description: err.message,
-      variant: "destructive",
-    });
-  }
-};
+    try {
+      const res = await fetch("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, user_id: firebaseUser.uid }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || "Failed to save post");
+      }
+
+      toast({
+        title: "Post Added Successfully!",
+        description: "Your post has been added to the tracker.",
+      });
+
+      router.push("/threadflow/posts");
+    } catch (err) {
+      console.error("Error saving post:", err);
+      toast({
+        title: "Error",
+        description: err.message,
+        variant: "destructive",
+      });
+    }
+  };
 
   if (loading) return <p>Loading...</p>;
 
@@ -152,9 +151,9 @@ const AddPostPage = () => {
           <div className="flex items-center gap-4">
             <SidebarTrigger className="h-8 w-8" />
             <div className="flex items-center gap-3">
-              <Button 
-                variant="ghost" 
-                onClick={() => router.back()}                
+              <Button
+                variant="ghost"
+                onClick={() => router.back()}
                 className="p-2"
               >
                 <ArrowLeft className="h-4 w-4" />
@@ -213,7 +212,7 @@ const AddPostPage = () => {
                           </div>
                         </SelectContent>
                       </Select>
-                      
+
                       {formData.category === "add-new" && (
                         <div className="border border-border/50 rounded-lg p-4 bg-card/50 backdrop-blur-sm shadow-sm">
                           <div className="flex items-center justify-between mb-4">
@@ -288,20 +287,15 @@ const AddPostPage = () => {
                       )}
                     </div>
                   </div>
-
                   <div>
-                    <Label htmlFor="status">Status</Label>
-                    <Select value={formData.status} onValueChange={(value) => handleInputChange("status", value)}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="approved">Approved</SelectItem>
-                        <SelectItem value="rejected">Rejected</SelectItem>
-                        <SelectItem value="live">Live</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Label htmlFor="targetedSubreddit" className="text-sm font-medium mb-2 block">Targeted Subreddit</Label>
+                    <Input
+                      id="targetedSubreddit"
+                      value={formData.targetedSubreddit}
+                      onChange={(e) => handleInputChange("targetedSubreddit", e.target.value)}
+                      placeholder="Enter the Targeted Subreddit"
+                      className="h-10"
+                    />
                   </div>
                 </div>
 
@@ -316,26 +310,14 @@ const AddPostPage = () => {
                   />
                 </div>
 
-                <div>
-                  <Label htmlFor="url" className="text-sm font-medium mb-2 block">Reddit URL *</Label>
-                  <Input
-                    id="url"
-                    type="url"
-                    value={formData.url}
-                    onChange={(e) => handleInputChange("url", e.target.value)}
-                    placeholder="https://www.reddit.com/r/community/comments/..."
-                    className="h-10"
-                  />
-                </div>
-
                 {/* Content */}
                 <div>
-                  <Label htmlFor="engagementText" className="text-sm font-medium mb-2 block">Engagement Text</Label>
+                  <Label htmlFor="engagementText" className="text-sm font-medium mb-2 block">Body Text</Label>
                   <Textarea
                     id="engagementText"
                     value={formData.engagementText}
                     onChange={(e) => handleInputChange("engagementText", e.target.value)}
-                    placeholder="Enter your engagement text or comment for this Reddit post..."
+                    placeholder="Enter your Body Text or comment for this Reddit post..."
                     rows={4}
                     className="resize-none"
                   />
@@ -366,48 +348,65 @@ const AddPostPage = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="currentStatus">Current Status</Label>
+                    <Label htmlFor="currentStatus">Post Approval Status</Label>
                     <Select value={formData.currentStatus} onValueChange={(value) => handleInputChange("currentStatus", value)}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="live">Live</SelectItem>
                         <SelectItem value="approved">Approved</SelectItem>
-                        <SelectItem value="rejected">Rejected</SelectItem>
+                        <SelectItem value="notApproved">Not Approved</SelectItem>
+                        <SelectItem value="pending">Pending</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
 
-                <div>
-                  <Label htmlFor="postedLink">Posted Link</Label>
-                  <Input
-                    id="postedLink"
-                    type="url"
-                    value={formData.postedLink}
-                    onChange={(e) => handleInputChange("postedLink", e.target.value)}
-                    placeholder="Direct link to the posted content"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="postedLink">Posted Link</Label>
+                    <Input
+                      id="postedLink"
+                      type="url"
+                      value={formData.postedLink}
+                      onChange={(e) => handleInputChange("postedLink", e.target.value)}
+                      placeholder="Direct link to the posted content"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="status">Published Post Status</Label>
+                    <Select value={formData.status} onValueChange={(value) => handleInputChange("status", value)}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="live">Live</SelectItem>
+                        <SelectItem value="deleted">Deleted</SelectItem>
+                        <SelectItem value="reuploaded">Reuploaded </SelectItem>
+                        <SelectItem value="pending">Pending </SelectItem>
+                      </SelectContent>
+                    </Select>
+
+                  </div>
+
                 </div>
 
                 {/* Action Buttons */}
                 <div className="flex items-center justify-end gap-3 pt-8 border-t border-border/50">
-                  <Button 
-                    type="button" 
-                    variant="outline" 
+                  <Button
+                    type="button"
+                    variant="outline"
                     onClick={() => router.back()}
                     className="h-10 px-6"
                   >
                     Cancel
                   </Button>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="bg-primary hover:bg-primary/90 text-primary-foreground h-10 px-6"
                   >
                     <Save className="h-4 w-4 mr-2" />
-                    Create Post
+                    Save
                   </Button>
                 </div>
               </CardContent>
