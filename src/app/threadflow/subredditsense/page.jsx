@@ -15,6 +15,13 @@ import TopThreadsTable from '@/app/tools/reddit-tools/components/subredditsense/
 import { getCache, setCache } from '@/lib/cacheClient';
 import { Eye, MessageSquare, TrendingUp, Users } from 'lucide-react';
 
+// Lightweight per-session in-memory cache (persists while tab remains open)
+// Avoids re-fetching when user navigates away & back within TTL.
+// Structure: Map<cacheKey, { data, companyId, lastUpdated, fetchedAt, expires }>
+const memDashCache = typeof window !== 'undefined'
+  ? (window.__TF_DASH_CACHE__ ||= new Map())
+  : new Map();
+
 async function apiLinkCompany(firebaseUserId, companyName) {
   const res = await fetch('/api/threadflow/reddit/link-company', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firebaseUserId, companyName }) });
   if (!res.ok) throw new Error('Link company failed');
@@ -61,10 +68,17 @@ export default function ThreadflowSubredditSensePage() {
         initialCompanyName = deriveDefaultCompany(initialUser.email);
       }
       if (initialCompanyName) {
-        const cached = getCache(`dash_${initialUser.uid}_${initialCompanyName}`, 'local');
-        if (cached?.data) {
-          initialDashboard = cached.data;
-          initialLastUpdated = cached.lastUpdated || null;
+        const memKey = `dash_${initialUser.uid}_${initialCompanyName}`;
+        const memEntry = memDashCache.get(memKey);
+        if (memEntry && memEntry.expires > Date.now()) {
+          initialDashboard = memEntry.data;
+          initialLastUpdated = memEntry.lastUpdated || null;
+        } else {
+          const cached = getCache(memKey, 'local');
+            if (cached?.data) {
+              initialDashboard = cached.data;
+              initialLastUpdated = cached.lastUpdated || null;
+            }
         }
       }
     } catch {}
@@ -85,6 +99,8 @@ export default function ThreadflowSubredditSensePage() {
   const [updatedFields, setUpdatedFields] = useState(new Set());
   const [hadInitialData, setHadInitialData] = useState(!!dashboard);
   const friendlyError = error ? (() => {
+    // If we already have a zero-mentions dashboard, suppress transient network errors
+    if (dashboard && dashboard.metrics && dashboard.metrics.totalMentions === 0) return null;
     if (/fetch failed|failed/i.test(error) && !dashboard) return 'Service temporarily unreachable. Please retry shortly.';
     if (/not.?found|404/i.test(error)) return 'No data found for this brand yet.';
     if (/link company failed/i.test(error)) return 'Could not link this brand. Try a simpler brand name.';
@@ -106,8 +122,15 @@ export default function ThreadflowSubredditSensePage() {
       const dash = await apiDashboard(cid);
   applyDashboardUpdate(dash);
       setLastUpdated(dash.lastIngestedAt || new Date().toISOString());
-      if (firebaseUser) setCache(`dash_${firebaseUser.uid}_${companyName}`, { data: dash, lastUpdated: dash.lastIngestedAt }, 5*60*1000, 'local');
-    } catch(e){ setError(e.message);} finally { setRefreshing(false); setIngesting(false);}
+      if (firebaseUser) {
+        const key = `dash_${firebaseUser.uid}_${companyName}`;
+        setCache(key, { data: dash, lastUpdated: dash.lastIngestedAt }, 5*60*1000, 'local');
+        memDashCache.set(key, { data: dash, companyId: cid, lastUpdated: dash.lastIngestedAt, fetchedAt: Date.now(), expires: Date.now() + 5*60*1000 });
+      }
+    } catch(e){
+      // Suppress transient refresh errors if we don't yet have any dashboard data; we'll still attempt to load existing cached data
+      if (dashboard) setError(e.message);
+    } finally { setRefreshing(false); setIngesting(false);}
   };
 
   useEffect(() => {
@@ -140,6 +163,31 @@ export default function ThreadflowSubredditSensePage() {
     let cancelled = false;
     const cacheKey = `dash_${firebaseUser.uid}_${companyName}`;
     const hasPrefilled = !!dashboard; // from initial cache hydration
+    // Fast path: memory cache (avoid any network call if still fresh)
+    if (!hasPrefilled) {
+      const memEntry = memDashCache.get(cacheKey);
+      if (memEntry && memEntry.expires > Date.now()) {
+        setCompanyId(memEntry.companyId || null);
+        setDashboard(memEntry.data);
+        setLastUpdated(memEntry.lastUpdated || null);
+        // If older than half TTL, refresh silently
+        if (Date.now() - memEntry.fetchedAt > 2.5 * 60 * 1000) {
+          (async () => {
+            try {
+              const link = await apiLinkCompany(firebaseUser.uid, companyName);
+              if (cancelled) return;
+              const dashFresh = await apiDashboard(link.company.id);
+              if (cancelled) return;
+              applyDashboardUpdate(dashFresh);
+              setLastUpdated(dashFresh.lastIngestedAt || link.company.last_ingested_at || null);
+              setCache(cacheKey, { data: dashFresh, lastUpdated: dashFresh.lastIngestedAt }, 5*60*1000, 'local');
+              memDashCache.set(cacheKey, { data: dashFresh, companyId: link.company.id, lastUpdated: dashFresh.lastIngestedAt, fetchedAt: Date.now(), expires: Date.now() + 5*60*1000 });
+            } catch {/* ignore background errors */}
+          })();
+        }
+        return () => { cancelled = true; };
+      }
+    }
     (async () => {
       try {
         setError(null);
@@ -162,6 +210,7 @@ export default function ThreadflowSubredditSensePage() {
           applyDashboardUpdate(dash);
           setLastUpdated(dash.lastIngestedAt || link.company.last_ingested_at || null);
           setCache(cacheKey, { data: dash, lastUpdated: dash.lastIngestedAt }, 5*60*1000, 'local');
+          memDashCache.set(cacheKey, { data: dash, companyId: link.company.id, lastUpdated: dash.lastIngestedAt, fetchedAt: Date.now(), expires: Date.now() + 5*60*1000 });
         }
       } catch (e) { if (!cancelled) setError(e.message); }
       finally { if (!cancelled) setFetching(false); }

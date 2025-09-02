@@ -62,18 +62,38 @@ const MentionsChart = (props) => {
           </p>
         </div>
         <div className="flex items-center space-x-4 text-sm">
-          {['Total Mentions','Posts','Comments'].map(label => (
-            <div className="flex items-center" key={label}>
-              <div className="w-3 h-3 rounded-full mr-2" style={{backgroundColor:'#FF5700'}}></div>
-              <span className="text-foreground-muted">{label}</span>
-            </div>
-          ))}
+          <div className="flex items-center" key="Total Mentions">
+            <div className="w-3 h-3 rounded-full mr-2" style={{backgroundColor:'#FF5700'}}></div>
+            <span className="text-foreground-muted">Total Mentions</span>
+          </div>
+          <div className="flex items-center" key="Posts">
+            <div className="w-3 h-3 rounded-full mr-2" style={{backgroundColor:'#3B82F6'}}></div>
+            <span className="text-foreground-muted">Posts</span>
+          </div>
+            <div className="flex items-center" key="Comments">
+            <div className="w-3 h-3 rounded-full mr-2" style={{backgroundColor:'#10B981'}}></div>
+            <span className="text-foreground-muted">Comments</span>
+          </div>
         </div>
       </div>
 
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData}>
+            <defs>
+              <linearGradient id="gradMentions" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#FF5700" stopOpacity={0.6}/>
+                <stop offset="95%" stopColor="#FF5700" stopOpacity={0.05}/>
+              </linearGradient>
+              <linearGradient id="gradPosts" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.55}/>
+                <stop offset="95%" stopColor="#3B82F6" stopOpacity={0.05}/>
+              </linearGradient>
+              <linearGradient id="gradComments" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#10B981" stopOpacity={0.55}/>
+                <stop offset="95%" stopColor="#10B981" stopOpacity={0.05}/>
+              </linearGradient>
+            </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis
               dataKey="date"
@@ -94,9 +114,9 @@ const MentionsChart = (props) => {
                 color: 'hsl(var(--foreground))'
               }}
             />
-            <Area type="monotone" dataKey="mentions" stroke="#FF5700" fill="rgba(255,87,0,0.28)" strokeWidth={2} />
-            <Area type="monotone" dataKey="posts" stroke="#FF5700" fill="rgba(255,87,0,0.18)" strokeWidth={1.5} />
-            <Area type="monotone" dataKey="comments" stroke="#FF5700" fill="rgba(255,87,0,0.12)" strokeWidth={1.5} />
+            <Area type="monotone" dataKey="mentions" stroke="#FF5700" fill="url(#gradMentions)" strokeWidth={2} />
+            <Area type="monotone" dataKey="posts" stroke="#3B82F6" fill="url(#gradPosts)" strokeWidth={1.8} />
+            <Area type="monotone" dataKey="comments" stroke="#10B981" fill="url(#gradComments)" strokeWidth={1.8} />
           </AreaChart>
         </ResponsiveContainer>
       </div>
