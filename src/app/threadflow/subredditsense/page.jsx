@@ -188,13 +188,14 @@ export default function ThreadflowSubredditSensePage() {
               <MetricCard title="Avg Engagement" value={dashboard.metrics.avgEngagement} icon={TrendingUp} subtitle="Upvotes + Comments" />
               <MetricCard title="Positive Sentiment" value={dashboard.metrics.positiveSentimentPct + '%'} icon={Eye} subtitle="Upvotes vs Downvotes" />
             </div>
-            {/* Charts */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-              <MentionsChart data={{ posts: dashboard.posts || [], comments: dashboard.comments || [] }} />
+            {/* Charts + Topic Clusters inline layout */}
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 items-start">
+              <div className="flex flex-col gap-8">
+                <MentionsChart data={{ posts: dashboard.posts || [], comments: dashboard.comments || [] }} />
+                <TopicClusters data={dashboard.topicClusters || []} />
+              </div>
               <SubredditHeatmap data={{ posts: dashboard.posts || [], comments: dashboard.comments || [] }} />
             </div>
-            {/* Topic Clusters */}
-            <TopicClusters data={dashboard.topicClusters || []} />
             {/* Top Threads Leaderboard (use API-provided ranking) */}
             <TopThreadsTable threads={(dashboard.topThreads || []).map((t,i)=>(
               { id: i,

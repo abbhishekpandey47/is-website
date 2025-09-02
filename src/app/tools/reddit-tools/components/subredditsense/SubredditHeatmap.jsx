@@ -106,16 +106,21 @@ const SubredditHeatmap = ({ data }) => {
 								{subreddit}
 							</div>
 							<div className="flex flex-1 space-x-1">
-								{data.map(({ week, value, engagement }) => (
-									<div
-										key={week}
-										className="flex-1 h-8 rounded border border-border-muted cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-glow flex items-center justify-center text-xs font-medium"
-										style={{ backgroundColor: getIntensityColor(value) }}
-										title={`${subreddit} - ${week}: ${value} mentions, ${engagement}% engagement`}
-									>
-										{value > 30 ? value : ''}
-									</div>
-								))}
+								{data.map(({ week, value, engagement }) => {
+									const bg = getIntensityColor(value);
+									// Decide text color for contrast
+									const darkText = ['#FFF1E9','#FFD1B8'].includes(bg);
+									return (
+										<div
+											key={week}
+											className="flex-1 h-8 rounded border border-border-muted cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-glow flex items-center justify-center text-[11px] font-semibold"
+											style={{ backgroundColor: bg, color: darkText ? '#222' : '#FFF' }}
+											title={`${subreddit} - ${week}: ${value} mentions, ${engagement}% engagement`}
+										>
+											{value > 0 ? value : ''}
+										</div>
+									);
+								})}
 							</div>
 						</div>
 					))}

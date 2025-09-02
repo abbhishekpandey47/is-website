@@ -158,10 +158,9 @@ const TopThreadsTable = (props) => {
                                     <span className={`px-2 py-1 rounded text-xs font-medium border ${getSentimentColor(thread.sentiment)}`}>{thread.sentiment}</span>
                                 </td>
                                 <td className="py-4 px-2">
-                                    <div className="flex items-center space-x-2">
-                                        <button className="btn-primary text-xs px-3 py-1 text-reddit-orange border border-reddit-orange/40 bg-transparent hover:bg-reddit-orange/10">Respond</button>
-                                        <a href={thread.post_url} target="_blank" rel="noopener noreferrer" className="btn-ghost text-xs px-3 py-1">
-                                            <ExternalLink className="w-3 h-3" />
+                                    <div className="flex items-center">
+                                        <a href={thread.post_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-7 h-7 rounded border border-border-muted hover:bg-reddit-orange/10 transition-colors" title="Open thread">
+                                            <ExternalLink className="w-3.5 h-3.5 text-reddit-orange" />
                                         </a>
                                     </div>
                                 </td>
