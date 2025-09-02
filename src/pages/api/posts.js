@@ -10,15 +10,16 @@ export default async function handler(req, res) {
     try {
       const body = req.body;
 
-      if (!body.title || !body.category || !body.url || !body.user_id) {
+      if (!body.title || !body.category || !body.user_id) {
         return res.status(400).json({ error: "Missing required fields" });
       }
 
       const { data, error } = await supabase.from("posts").insert([
         {
           category: body.category,
+          targeted_subreddit: body.targetedSubreddit || null,
           title: body.title,
-          url: body.url,
+          url: body.url || "No URL",
           status: body.status || "pending",
           engagement_text: body.engagementText || null,
           kims_version: body.kimsVersion || null,

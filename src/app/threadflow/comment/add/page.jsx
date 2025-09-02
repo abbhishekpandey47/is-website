@@ -37,12 +37,13 @@ const AddPostPage = () => {
     category: "",
     title: "",
     url: "",
-    status: "pending",
+    status: "",
     engagementText: "",
     kimsVersion: "",
     datePosted: "",
     postedLink: "",
     currentStatus: "pending",
+    clientFeedback: "",
   });
 
   useEffect(() => {
@@ -104,10 +105,10 @@ const AddPostPage = () => {
     return;
   }
 
-  if (!formData.category || !formData.title || !formData.url) {
+  if (!formData.category || !formData.title) {
     toast({
       title: "Missing Information",
-      description: "Please fill in category, title, and URL fields.",
+      description: "Please fill in category and title fields.",
       variant: "destructive",
     });
     return;
@@ -290,18 +291,14 @@ const AddPostPage = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="status">Status</Label>
-                    <Select value={formData.status} onValueChange={(value) => handleInputChange("status", value)}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="approved">Approved</SelectItem>
-                        <SelectItem value="rejected">Rejected</SelectItem>
-                        <SelectItem value="live">Live</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Label htmlFor="status">Targeted Subreddit</Label>
+                     <Input
+                    id="status"
+                    value={formData.status}
+                    onChange={(e) => handleInputChange("status", e.target.value)}
+                    placeholder="Enter the Targeted Subreddit"
+                    className="h-10"
+                  />
                   </div>
                 </div>
 
@@ -312,18 +309,6 @@ const AddPostPage = () => {
                     value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
                     placeholder="Enter the Reddit Comment title"
-                    className="h-10"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="url" className="text-sm font-medium mb-2 block">Reddit URL *</Label>
-                  <Input
-                    id="url"
-                    type="url"
-                    value={formData.url}
-                    onChange={(e) => handleInputChange("url", e.target.value)}
-                    placeholder="https://www.reddit.com/r/community/comments/..."
                     className="h-10"
                   />
                 </div>
@@ -340,6 +325,18 @@ const AddPostPage = () => {
                     className="resize-none"
                   />
                   <p className="text-xs text-muted-foreground mt-1">This will be your response or engagement with the Reddit Comment</p>
+                </div>
+
+                 <div>
+                  <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Client Feedback</Label>
+                  <Textarea
+                    id="clientFeedback"
+                    value={formData.clientFeedback}
+                    onChange={(e) => handleInputChange("clientFeedback", e.target.value)}
+                    placeholder="Enter your feedback for this Reddit Comment..."
+                    rows={4}
+                    className="resize-none"
+                  />
                 </div>
 
                 {/* <div>
@@ -366,16 +363,16 @@ const AddPostPage = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="currentStatus">Current Status</Label>
+                    <Label htmlFor="currentStatus">Comment Approval Status</Label>
                     <Select value={formData.currentStatus} onValueChange={(value) => handleInputChange("currentStatus", value)}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="live">Live</SelectItem>
-                        <SelectItem value="approved">Approved</SelectItem>
-                        <SelectItem value="rejected">Rejected</SelectItem>
+                        <SelectItem value="pending">Live</SelectItem>
+                        <SelectItem value="live">Deleted</SelectItem>
+                        <SelectItem value="approved">Reuploaded </SelectItem>
+                        <SelectItem value="rejected">Pending</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -407,7 +404,7 @@ const AddPostPage = () => {
                     className="bg-primary hover:bg-primary/90 text-primary-foreground h-10 px-6"
                   >
                     <Save className="h-4 w-4 mr-2" />
-                    Create Comment
+                    Save
                   </Button>
                 </div>
               </CardContent>
