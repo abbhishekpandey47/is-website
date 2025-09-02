@@ -111,7 +111,7 @@ const TestiCard = ({
   highlight,
 }) => {
   const renderHighlightedText = (text = "", highlights = []) => {
-    if (!text) return ""; // Return an empty string if text is undefined or null
+    if (!text) return ""; 
     const regex = new RegExp(`(${highlights.join("|")})`, "gi");
     return text.split(regex).map((part, i) =>
       highlights.includes(part) ? (
@@ -125,7 +125,7 @@ const TestiCard = ({
   };
 
   return (
-    <div className="max-md:w-[350px] h-[55vh] max-lg:h-[40vh] transition card bg-zinc-950 w-[30%] shadow-xl border-[#edeaea] border-2 flex flex-col overflow-x-hidden">
+    <div className="max-md:w-[950px] transition card w-[900px] shadow-xl flex flex-col overflow-x-hidden">
       <div className="h-[15%] flex justify-center">
         <div className="pt-8 items-center card-title text-[4em] max-lg:text-[2em]">
           <svg
@@ -143,13 +143,13 @@ const TestiCard = ({
           </svg>
         </div>
       </div>
-      <div className="card-body max-lg:px-3 max-lg:pb-3 pt-10 overflow-y-auto scrollertesti h-[55%]">
+      <div className="card-body max-lg:px-3 max-lg:pb-3 pt-10 overflow-y-auto scrollertesti ">
         <p className="text-md max-lg:text-[0.7rem] cursor-pointer text-center">
           {renderHighlightedText(comment, highlight)}
         </p>
       </div>
-      <div className="card-body pt-0 h-[30%]">
-        <div className="flex justify-start gap-5 mt-5 items-center">
+      <div className="card-body mt-8">
+        <div className="flex justify-center gap-5 items-center">
           <div>
             <Image
               loading="lazy"
@@ -173,8 +173,9 @@ const TestiCard = ({
 let newArr = [];
 
 const Testimonials = () => {
-  const [carPtr, setCarPtr] = useState(1);
+  const [carPtr, setCarPtr] = useState(0);
   const testiMemo = useMemo(() => testiArr, [testiArr]);
+  
   useEffect(() => {
     (async () => {
       const { gsap } = await import('gsap');
@@ -224,42 +225,13 @@ const Testimonials = () => {
     return () => {};
   }, []);
 
-  const [renderArr, setRenderArr] = useState([1]);
   const handleOnIndIncr = () => {
-    newArr = [];
-    if (window.innerWidth >= 1024)
-      newArr.push(
-        testiMemo[(carPtr - 2 + testiMemo.length) % testiMemo.length]
-      );
-    newArr.push(testiMemo[(carPtr - 1 + testiMemo.length) % testiMemo.length]);
-    if (window.innerWidth >= 1024)
-      newArr.push(testiMemo[(carPtr + testiMemo.length) % testiMemo.length]);
-    setRenderArr(newArr);
     setCarPtr((carPtr - 1 + testiMemo.length) % testiMemo.length);
   };
+  
   const handleOnIndDecr = () => {
-    newArr = [];
-    if (window.innerWidth >= 1024)
-      newArr.push(testiMemo[(carPtr + testiMemo.length) % testiMemo.length]);
-    newArr.push(testiMemo[(carPtr + 1) % testiMemo.length]);
-    if (window.innerWidth >= 1024)
-      newArr.push(
-        testiMemo[(carPtr + 2 + testiMemo.length) % testiMemo.length]
-      );
-    setRenderArr(newArr);
-    setCarPtr((carPtr + 1 + testiMemo.length) % testiMemo.length);
+    setCarPtr((carPtr + 1) % testiMemo.length);
   };
-  useEffect(() => {
-    newArr = [testiMemo[carPtr]];
-    if (window.innerWidth >= 1024)
-      newArr = [
-        testiMemo[carPtr - 1],
-        testiMemo[carPtr],
-        testiMemo[carPtr + 1],
-      ];
-    setRenderArr(newArr);
-    return () => {};
-  }, []);
 
   return (
     <div>
@@ -281,25 +253,9 @@ const Testimonials = () => {
           </h3>
         </div>
       </div>
-      <div className="flex justify-center gap-6 py-16 quicksand-light flex-wrap w-7/6 m-auto text-white testiMonCardHome">
-        {renderArr.map((testi, index) => {
-          return (
-            <TestiCard
-              index={index}
-              name={testi.name}
-              alt={testi.alt}
-              sorc={testi.src}
-              pos={testi.pos}
-              carPtr={carPtr}
-              comment={testi.comment}
-              highlight={testi.highlight || []}
-              key={index}
-            />
-          );
-        })}
-      </div>
-      <div className="flex justify-center gap-10">
-        <div>
+      
+      <div className="flex justify-center items-center gap-8 py-16 quicksand-light w-full m-auto text-white">
+        <div className="flex-shrink-0">
           <button
             onClick={handleOnIndIncr}
             className="transition scale-125 btn hover:bg-transparent rounded-[100%] bg-transparent text-white border-[#999] hover:border-[white]"
@@ -307,7 +263,22 @@ const Testimonials = () => {
             <ArrowLeftOutlined className="text-white" />
           </button>
         </div>
-        <div>
+        
+        <div className="testiMonCardHome">
+          <TestiCard
+            index={0}
+            name={testiMemo[carPtr]?.name}
+            alt={testiMemo[carPtr]?.alt}
+            sorc={testiMemo[carPtr]?.src}
+            pos={testiMemo[carPtr]?.pos}
+            carPtr={carPtr}
+            comment={testiMemo[carPtr]?.comment}
+            highlight={testiMemo[carPtr]?.highlight || []}
+            key={carPtr}
+          />
+        </div>
+        
+        <div className="flex-shrink-0">
           <button
             onClick={handleOnIndDecr}
             className="transition scale-125 btn hover:bg-transparent rounded-[100%] bg-transparent text-white border-[#999] hover:border-[white]"
@@ -319,5 +290,4 @@ const Testimonials = () => {
     </div>
   );
 };
-
 export default Testimonials;
