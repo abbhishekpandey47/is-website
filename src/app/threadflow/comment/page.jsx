@@ -37,6 +37,7 @@ const PostsPage = () => {
     clientFeedback: "",
     targetedSubreddit: "",
     postURL: "",
+    redditUsername: "",
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(null);
@@ -121,6 +122,7 @@ const PostsPage = () => {
       clientFeedback: post.client_feedback || "",
       targetedSubreddit: post.targeted_subreddit || "",
       postURL: post.post_url || "",
+      redditUsername: post.reddit_username || "",
     });
     setIsEditModalOpen(true);
   };
@@ -138,6 +140,7 @@ const PostsPage = () => {
       datePosted: "",
       postedLink: "",
       currentStatus: "pending",
+      redditUsername: "",
     });
   };
 
@@ -165,10 +168,11 @@ const PostsPage = () => {
   engagement_text: editFormData.engagementText || null,
   date_posted: editFormData.datePosted ? new Date(editFormData.datePosted) : null,
   posted_link: editFormData.postedLink || null,
-  user_id: editFormData.user_id, // keep user reference
+  user_id: editFormData.user_id, 
   targeted_subreddit: editFormData.targetedSubreddit || null,
   client_feedback: editFormData.clientFeedback || null,
   post_url: editFormData.postURL || null,
+  reddit_username: editFormData.redditUsername || null,
 }),
       });
 
@@ -335,7 +339,7 @@ if (loading) {
                     <TableHead>Published Link</TableHead>
                     {/* <TableHead>Number of our engagements</TableHead> */}
                     {/* <TableHead>Link to Kubiya</TableHead> */}
-                    <TableHead>ID used</TableHead>
+                    <TableHead>Reddit Username</TableHead>
                     {/* <TableHead>Actions</TableHead> */}
                   </TableRow>
                 </TableHeader>
@@ -379,7 +383,7 @@ if (loading) {
                       </TableCell>
                       {/* <TableCell></TableCell>
                       <TableCell></TableCell> */}
-                      <TableCell>{post.id}</TableCell>
+                      <TableCell>{post.reddit_username}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">
                           <Button
@@ -473,6 +477,16 @@ if (loading) {
                   />
                 </div>
 
+                  <div>
+                                  <Label htmlFor="redditUsername" className="text-sm font-medium mb-2 block">Reddit Username</Label>
+                                  <Input
+                                    id="redditUsername"
+                                    value={editFormData.redditUsername}
+                                    onChange={(e) => handleEditInputChange("redditUsername", e.target.value)}
+                                    placeholder="Enter the Reddit Username"
+                                    className="h-10"
+                                  />
+                                </div>
                   <div>
                     <Label htmlFor="edit-title">Title *</Label>
                     <Input
