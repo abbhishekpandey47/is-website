@@ -42,6 +42,7 @@ const AddPostPage = () => {
     status: "pending",
     clientFeedback: "",
     targetedSubreddit: "",
+    postURL: "",
   });
 
   useEffect(() => {
@@ -300,6 +301,17 @@ const AddPostPage = () => {
                   </div>
                 </div>
 
+                  <div>
+                  <Label htmlFor="postURL" className="text-sm font-medium mb-2 block">Post URL</Label>
+                  <Input
+                    id="postURL"
+                    value={formData.postURL}
+                    onChange={(e) => handleInputChange("postURL", e.target.value)}
+                    placeholder="Enter the Reddit Post URL"
+                    className="h-10"
+                  />
+                </div>
+
                 <div>
                   <Label htmlFor="title" className="text-sm font-medium mb-2 block">Title *</Label>
                   <Input
@@ -377,7 +389,7 @@ const AddPostPage = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="postedLink">Posted Link</Label>
+                  <Label htmlFor="postedLink">Comment URL</Label>
                   <Input
                     id="postedLink"
                     type="url"

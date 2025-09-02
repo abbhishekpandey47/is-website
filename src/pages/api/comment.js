@@ -26,6 +26,7 @@ export default async function handler(req, res) {
           posted_link: body.postedLink || null,
           user_id: body.user_id,
           client_feedback: body.clientFeedback || null,
+          post_url: body.postURL || null,
         },
       ]);
 
@@ -42,13 +43,13 @@ export default async function handler(req, res) {
     try {
       const { userId, id } = req.query;
 
-      // ✅ Get single post by ID
+      //  Get single post by ID
       if (id) {
         const { data, error } = await supabase
           .from("comment")
           .select("*")
           .eq("id", id)
-          .single(); // ensures only one row is returned
+          .single(); 
 
         if (error) return res.status(500).json({ error: error.message });
 
@@ -63,7 +64,7 @@ export default async function handler(req, res) {
       const { data, error } = await supabase
         .from("comment")
         .select("*")
-        .eq("user_id", userId)
+        // .eq("user_id", userId)
         .order("date_posted", { ascending: false });
 
       if (error) return res.status(500).json({ error: error.message });
