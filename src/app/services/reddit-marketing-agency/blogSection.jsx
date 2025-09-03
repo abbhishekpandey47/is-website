@@ -9,20 +9,20 @@ import Image from "next/image";
 
 const posts = [
   {
-    date: "Aug 11, 2025",
+    date: "August 8, 2025",
     title: "Organic Vs Paid Marketing on Reddit: What Works Best in 2025?",
     href: "/blog/reddit-organic-vs-paid-marketing",
     image: "/PostImages/organic-vs-paid-marketing-reddit/organic-vs-paid-marketing-reddit.png",
   },
   {
-    date: "2025-08-22",
+    date: "August 22, 2025",
     title:
       "Subreddit Strategy for Reddit B2B Marketing: How to Pick the Right Communities",
     href: "/blog/reddit-b2b-marketing-strategy",
     image: "/PostImages/reddit-b2b-marketing-strategy/banner.jpg",
   },
   {
-    date: "Jun 9, 2025",
+    date: "August 27, 2025",
     title: "Karma Farming vs Credibility: What Really Drives Reddit B2B Marketing Growth",
     href: "/blog/reddit-karma-farming-vs-credibility",
     image: "/PostImages/reddit-karma-farming-vs-credibility/banner.png",
@@ -76,7 +76,7 @@ export default function BlogSection() {
       {posts.map((post, i) => (
         <div
           key={i}
-          className="flex flex-col items-center py-10 pb-10 gap-20 justify-between w-full bg-[#0E1416]"
+          className="flex flex-col items-center py-10 pb-10 gap-20 justify-between w-full"
         >
       
         <Link

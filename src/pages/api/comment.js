@@ -27,6 +27,7 @@ export default async function handler(req, res) {
           user_id: body.user_id,
           client_feedback: body.clientFeedback || null,
           post_url: body.postURL || null,
+          posted_comment_status: body.postedCommentStatus || "underModeration",
         },
       ]);
 
