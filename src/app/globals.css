@@ -89,6 +89,18 @@ body {
   background-color: #0D0A1A;
 }
 
+/* Flash highlight for updated metrics */
+.flash-update {
+  position: relative;
+  animation: flashPulse 0.9s ease-in-out 0s 1;
+}
+@keyframes flashPulse {
+  0% { box-shadow: 0 0 0 0 rgba(99,102,241,0.0); background-color: rgba(99,102,241,0.10); }
+  40% { box-shadow: 0 0 0 2px rgba(99,102,241,0.35); background-color: rgba(99,102,241,0.18); }
+  80% { box-shadow: 0 0 0 1px rgba(99,102,241,0.15); background-color: rgba(99,102,241,0.08); }
+  100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); background-color: transparent; }
+}
+
 .scrollertesti {
   /* scrollbar-color: #333 #111; */
   scrollbar-width: thin;

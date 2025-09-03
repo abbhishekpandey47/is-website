@@ -62,16 +62,16 @@ const MentionsChart = (props) => {
           </p>
         </div>
         <div className="flex items-center space-x-4 text-sm">
-          <div className="flex items-center">
-            <div className="w-3 h-3 bg-chart-primary rounded-full mr-2"></div>
+          <div className="flex items-center" key="Total Mentions">
+            <div className="w-3 h-3 rounded-full mr-2" style={{backgroundColor:'#FF5700'}}></div>
             <span className="text-foreground-muted">Total Mentions</span>
           </div>
-          <div className="flex items-center">
-            <div className="w-3 h-3 bg-chart-secondary rounded-full mr-2"></div>
+          <div className="flex items-center" key="Posts">
+            <div className="w-3 h-3 rounded-full mr-2" style={{backgroundColor:'#3B82F6'}}></div>
             <span className="text-foreground-muted">Posts</span>
           </div>
-          <div className="flex items-center">
-            <div className="w-3 h-3 bg-chart-tertiary rounded-full mr-2"></div>
+            <div className="flex items-center" key="Comments">
+            <div className="w-3 h-3 rounded-full mr-2" style={{backgroundColor:'#10B981'}}></div>
             <span className="text-foreground-muted">Comments</span>
           </div>
         </div>
@@ -80,14 +80,30 @@ const MentionsChart = (props) => {
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData}>
+            <defs>
+              <linearGradient id="gradMentions" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#FF5700" stopOpacity={0.6}/>
+                <stop offset="95%" stopColor="#FF5700" stopOpacity={0.05}/>
+              </linearGradient>
+              <linearGradient id="gradPosts" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.55}/>
+                <stop offset="95%" stopColor="#3B82F6" stopOpacity={0.05}/>
+              </linearGradient>
+              <linearGradient id="gradComments" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#10B981" stopOpacity={0.55}/>
+                <stop offset="95%" stopColor="#10B981" stopOpacity={0.05}/>
+              </linearGradient>
+            </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis
               dataKey="date"
-              stroke="hsl(var(--foreground-muted))"
+              stroke="#FFFFFF"
+              tick={{ fill: '#FFFFFF', fontSize: 12 }}
               fontSize={12}
             />
             <YAxis
-              stroke="hsl(var(--foreground-muted))"
+              stroke="#FFFFFF"
+              tick={{ fill: '#FFFFFF', fontSize: 12 }}
               fontSize={12}
             />
             <Tooltip
@@ -98,30 +114,9 @@ const MentionsChart = (props) => {
                 color: 'hsl(var(--foreground))'
               }}
             />
-            <Area
-              type="monotone"
-              dataKey="mentions"
-              stackId="1"
-              stroke="hsl(var(--chart-primary))"
-              fill="hsl(var(--chart-primary) / 0.2)"
-              strokeWidth={2}
-            />
-            <Area
-              type="monotone"
-              dataKey="posts"
-              stackId="2"
-              stroke="hsl(var(--chart-secondary))"
-              fill="hsl(var(--chart-secondary) / 0.3)"
-              strokeWidth={2}
-            />
-            <Area
-              type="monotone"
-              dataKey="comments"
-              stackId="2"
-              stroke="hsl(var(--chart-tertiary))"
-              fill="hsl(var(--chart-tertiary) / 0.3)"
-              strokeWidth={2}
-            />
+            <Area type="monotone" dataKey="mentions" stroke="#FF5700" fill="url(#gradMentions)" strokeWidth={2} />
+            <Area type="monotone" dataKey="posts" stroke="#3B82F6" fill="url(#gradPosts)" strokeWidth={1.8} />
+            <Area type="monotone" dataKey="comments" stroke="#10B981" fill="url(#gradComments)" strokeWidth={1.8} />
           </AreaChart>
         </ResponsiveContainer>
       </div>

@@ -9,15 +9,12 @@ function getAgeString(postAgeHours) {
 	return `${Math.round(postAgeHours / (24 * 7))}w`;
 }
 
-function getSentiment(upvotes, downvotes) {
-	if (typeof downvotes === 'number') {
-		if (upvotes > downvotes) return 'positive';
-		if (upvotes < downvotes) return 'negative';
-		return 'neutral';
-	}
-	// fallback: positive if upvotes > 0
-	if (upvotes > 0) return 'positive';
-	return 'neutral';
+function getSentiment(upvotes) {
+    // Approximation: any positive score = positive, zero = neutral, negative (not expected) = negative
+    if (typeof upvotes !== 'number') return 'neutral';
+    if (upvotes > 0) return 'positive';
+    if (upvotes < 0) return 'negative';
+    return 'neutral';
 }
 
 const TopThreadsTable = (props) => {
@@ -35,7 +32,7 @@ const TopThreadsTable = (props) => {
                 comments: p.total_comments || 0,
                 age: getAgeString(p.post_age_hours),
                 matchReason: '',
-                sentiment: getSentiment(p.upvotes || 0, p.downvotes),
+                sentiment: getSentiment(p.upvotes || 0),
                 priority: (p.upvotes || 0) > 10 ? 'high' : 'medium',
                 post_url: p.post_url || '',
             }))
@@ -98,7 +95,7 @@ const TopThreadsTable = (props) => {
     }
     return (
         <div className="chart-container animate-slide-up">
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center mb-6">
                 <div>
                     <h2 className="text-xl font-semibold text-foreground mb-1">
                         Top Threads Leaderboard
@@ -107,7 +104,6 @@ const TopThreadsTable = (props) => {
                         High-priority threads requiring attention
                     </p>
                 </div>
-                <button className="btn-reddit">View All Threads</button>
             </div>
             <div className="overflow-x-auto">
                 <table className="w-full">
@@ -159,10 +155,9 @@ const TopThreadsTable = (props) => {
                                     <span className={`px-2 py-1 rounded text-xs font-medium border ${getSentimentColor(thread.sentiment)}`}>{thread.sentiment}</span>
                                 </td>
                                 <td className="py-4 px-2">
-                                    <div className="flex items-center space-x-2">
-                                        <button className="btn-primary text-xs px-3 py-1">Respond</button>
-                                        <a href={thread.post_url} target="_blank" rel="noopener noreferrer" className="btn-ghost text-xs px-3 py-1">
-                                            <ExternalLink className="w-3 h-3" />
+                                    <div className="flex items-center">
+                                        <a href={thread.post_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-7 h-7 rounded border border-border-muted hover:bg-reddit-orange/10 transition-colors" title="Open thread">
+                                            <ExternalLink className="w-3.5 h-3.5 text-reddit-orange" />
                                         </a>
                                     </div>
                                 </td>
