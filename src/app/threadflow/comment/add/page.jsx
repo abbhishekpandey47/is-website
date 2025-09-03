@@ -378,7 +378,7 @@ useEffect(() => {
                 </div>
 
                  <div>
-                  <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Client Feedback</Label>
+                  <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Customer Comments</Label>
                   <Textarea
                     id="clientFeedback"
                     value={formData.clientFeedback}
