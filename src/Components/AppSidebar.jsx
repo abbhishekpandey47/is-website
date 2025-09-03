@@ -29,9 +29,12 @@ import { cn } from "@/lib/utils"
 const mainItems = [
   { title: "Dashboard", url: "/threadflow", icon: BarChart3 },
   { title: "Reddit Posts", url: "/threadflow/posts", icon: MessageSquare },
+  { title: "Reddit Comments", url: "/threadflow/comment", icon: MessageSquare },
   { title: "Analytics", url: "/threadflow/analytics", icon: TrendingUp },
   { title: "Communities", url: "/threadflow/communities", icon: Users },
 ]
+
+
 
 const managementItems = [
   { title: "Categories", url: "/threadflow/categories", icon: Tag },

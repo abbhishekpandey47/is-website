@@ -80,6 +80,11 @@ const PostsPage = () => {
     fetchPosts();
   }, [firebaseUser]);
 
+  const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
+const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
+
+
+
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
       searchQuery === "" ||
@@ -284,34 +289,32 @@ if (loading) {
                   className="pl-10"
                 />
               </div>
+ <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+  <SelectTrigger className="w-48">
+    <SelectValue placeholder="All Categories" />
+  </SelectTrigger>
+  <SelectContent>
+    {categories.map((cat) => (
+      <SelectItem key={cat} value={cat}>
+        {cat === "all" ? "All Categories" : cat}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>
 
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder="All Categories" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  <SelectItem value="Drift Detection">Drift Detection</SelectItem>
-                  <SelectItem value="IaC">IaC</SelectItem>
-                  <SelectItem value="DevOps">DevOps</SelectItem>
-                  <SelectItem value="AWS">AWS</SelectItem>
-                  <SelectItem value="Enterprise AI">Enterprise AI</SelectItem>
-                  <SelectItem value="AI Workflow">AI Workflow</SelectItem>
-                </SelectContent>
-              </Select>
 
-              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                <SelectTrigger className="w-32">
-                  <SelectValue placeholder="All Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="approved">Approved</SelectItem>
-                  <SelectItem value="live">Live</SelectItem>
-                  <SelectItem value="pending">Pending</SelectItem>
-                  <SelectItem value="rejected">Rejected</SelectItem>
-                </SelectContent>
-              </Select>
+            <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+  <SelectTrigger className="w-32">
+    <SelectValue placeholder="All Status" />
+  </SelectTrigger>
+  <SelectContent>
+    {statuses.map((status) => (
+      <SelectItem key={status} value={status}>
+        {status === "all" ? "All Status" : status.charAt(0).toUpperCase() + status.slice(1)}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>
             </div>
           </CardContent>
         </Card>
