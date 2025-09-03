@@ -14,10 +14,12 @@ import { useRouter } from "next/navigation";
 import { Plus, Search, ExternalLink, Edit, Trash2, Save, X } from "lucide-react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
-import { toast } from "react-toastify";
+import { useToast } from "@/hooks/use-toast";
 
 const PostsPage = () => {
   const router = useRouter();
+    const { toast } = useToast();
+
   const [firebaseUser, setFirebaseUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
@@ -248,31 +250,55 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
   };
 
   const handleDelete = async () => {
-    const postId = deleteConfirmation.post.id;
-    setIsDeleting(postId);
+  const postId = deleteConfirmation.post.id;
+  setIsDeleting(postId);
 
-    try {
-      const res = await fetch(`/api/posts?id=${postId}`, {
-        method: "DELETE",
-      });
+  try {
+    const res = await fetch(`/api/posts?id=${postId}`, {
+      method: "DELETE",
+    });
 
-      const result = await res.json();
+    const result = await res.json();
 
-      if (!res.ok) {
-        throw new Error(result.error || "Failed to delete post");
+    if (!res.ok) {
+      // Customize error message for user
+      let message = result.error || "Failed to delete post";
+
+      if (
+        message.toLowerCase().includes("foreign key") ||
+        message.toLowerCase().includes("permission") ||
+        message.toLowerCase().includes("not authorized")
+      ) {
+        message = "You may not be the right person to delete this post.";
       }
 
-      // Remove the post from the state
-      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
-      toast.success("Post deleted successfully!");
-      closeDeleteConfirmation();
-    } catch (err) {
-      console.error("Error deleting post:", err);
-      toast.error(err.message);
-    } finally {
-      setIsDeleting(null);
+      toast({
+        title: "Error",
+        description: message,
+        variant: "destructive",
+      });
+
+      return;
     }
-  };
+
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+    toast({
+      title: "Post deleted successfully!",
+      description: "The post was removed from the tracker.",
+    });
+    closeDeleteConfirmation();
+  } catch (err) {
+    console.error("Error deleting post:", err);
+    toast({
+      title: "Error",
+      description: err.message,
+      variant: "destructive",
+    });
+  } finally {
+    setIsDeleting(null);
+  }
+};
+
 
 if (loading) {
   return (
