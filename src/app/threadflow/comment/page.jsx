@@ -641,7 +641,7 @@ const getStatusBadge = (status) => {
                     </div>
 
                     <div>
-                      <Label htmlFor="edit-status">Client Approval Statu</Label>
+                      <Label htmlFor="edit-status">Client Approval Status</Label>
                       <Select
                         value={editFormData.status}
                         onValueChange={(value) => handleEditInputChange("status", value)}
