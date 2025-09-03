@@ -372,7 +372,7 @@ export default function ThreadflowSubredditSensePage() {
                 <MetricCard title="Avg Engagement" value={dashboard.metrics.avgEngagement} icon={TrendingUp} subtitle="Upvotes + Comments" />
               </div>
               <div className={updatedFields.has('positiveSentimentPct') ? 'flash-update' : ''}>
-                <MetricCard title="Positive Sentiment" value={dashboard.metrics.positiveSentimentPct + '%'} icon={Eye} subtitle={dashboard.metrics.estUpVotes !== undefined ? `${dashboard.metrics.estUpVotes}↑ / ${dashboard.metrics.estDownVotes}↓ (est)` : 'Score Ratio'} />
+                <MetricCard title="Positive Sentiment" value={dashboard.metrics.positiveSentimentPct + '%'} icon={Eye} subtitle={dashboard.metrics.estUpVotes !== undefined ? `${dashboard.metrics.estUpVotes}↑ (est)` : 'Score Ratio'} />
               </div>
             </div>
             {/* Charts + Topic Clusters inline layout */}
@@ -394,7 +394,7 @@ export default function ThreadflowSubredditSensePage() {
                 comments: t.comments,
                 age: '',
                 matchReason: '',
-                sentiment: (t.upvotes > (t.downvotes||0)) ? 'positive' : (t.upvotes < (t.downvotes||0) ? 'negative' : 'neutral'),
+                sentiment: t.upvotes > 0 ? 'positive' : (t.upvotes < 0 ? 'negative' : 'neutral'),
                 priority: (t.upvotes + t.comments) > 10 ? 'high' : 'medium',
                 post_url: t.url
               }))} />

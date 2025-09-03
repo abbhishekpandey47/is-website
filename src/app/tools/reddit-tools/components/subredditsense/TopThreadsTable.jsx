@@ -9,15 +9,12 @@ function getAgeString(postAgeHours) {
 	return `${Math.round(postAgeHours / (24 * 7))}w`;
 }
 
-function getSentiment(upvotes, downvotes) {
-	if (typeof downvotes === 'number') {
-		if (upvotes > downvotes) return 'positive';
-		if (upvotes < downvotes) return 'negative';
-		return 'neutral';
-	}
-	// fallback: positive if upvotes > 0
-	if (upvotes > 0) return 'positive';
-	return 'neutral';
+function getSentiment(upvotes) {
+    // Approximation: any positive score = positive, zero = neutral, negative (not expected) = negative
+    if (typeof upvotes !== 'number') return 'neutral';
+    if (upvotes > 0) return 'positive';
+    if (upvotes < 0) return 'negative';
+    return 'neutral';
 }
 
 const TopThreadsTable = (props) => {
@@ -35,7 +32,7 @@ const TopThreadsTable = (props) => {
                 comments: p.total_comments || 0,
                 age: getAgeString(p.post_age_hours),
                 matchReason: '',
-                sentiment: getSentiment(p.upvotes || 0, p.downvotes),
+                sentiment: getSentiment(p.upvotes || 0),
                 priority: (p.upvotes || 0) > 10 ? 'high' : 'medium',
                 post_url: p.post_url || '',
             }))

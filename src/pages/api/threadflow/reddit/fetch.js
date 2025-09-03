@@ -10,6 +10,7 @@ export default async function handler(req, res) {
   if (!firebaseUserId || !companyId || !companyName) return res.status(400).json({ error: 'Missing fields' });
   try {
     const batchLimit = Math.min(parseInt(maxBatches) || 1, 8); // prevent runaway
+  console.log('[reddit_fetch_v2] invocation', { companyId, companyName, fullRefresh, batchLimit });
     const { data: job, error: jobErr } = await supabase
       .from('reddit_ingestion_jobs')
       .insert({ company_id: companyId, status: 'running' })
@@ -37,18 +38,24 @@ export default async function handler(req, res) {
         nextCommentsAfter = comp.last_comments_after || null;
       }
     }
+    const TIMEOUT_MS = parseInt(process.env.REDDIT_FETCH_TIMEOUT_MS || '120000', 10);
+    console.log('[reddit_fetch_v2] env', { supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL?.slice(0,30)+'...', serviceKeyPresent: !!process.env.SUPABASE_SERVICE_ROLE_KEY, timeoutMs: TIMEOUT_MS });
+    let emptyBatches = 0;
     while (batches < batchLimit) {
       batches++;
       const payload = {
         company_name: companyName,
-        limit_posts: fullRefresh ? 150 : 80,
-        limit_comments: fullRefresh ? 150 : 80,
+        // Let backend decide default limits (100). Only pass after cursors.
         posts_after: fullRefresh ? undefined : nextPostsAfter || undefined,
         comments_after: fullRefresh ? undefined : nextCommentsAfter || undefined
       };
-      const data = await fetchWithRetry(`${API_BASE}/search_company_mentions`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), retries: 2 });
+      const started = Date.now();
+      console.log('[reddit_fetch_v2] batch', batches, 'payload', payload);
+      const data = await fetchWithRetry(`${API_BASE}/search_company_mentions`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), retries: 0, timeoutMs: TIMEOUT_MS });
+      console.log('[reddit_fetch_v2] upstream duration(ms):', Date.now() - started, 'keys:', Object.keys(data||{}));
       const posts = Array.isArray(data.posts) ? data.posts : [];
       const comments = Array.isArray(data.comments) ? data.comments : [];
+      console.log('[reddit_fetch_v2] counts', { posts: posts.length, comments: comments.length, posts_after: data.posts_after, comments_after: data.comments_after });
       // Update rolling cursors for persistence (keep the most recent returned token)
       if (data.posts_after) {
         postsAfter = data.posts_after; // final value to persist
@@ -65,23 +72,21 @@ export default async function handler(req, res) {
         commentsAfter = nextCommentsAfter;
       }
       const preCount = allTransformed.length;
-      posts.forEach(p => {
+    posts.forEach(p => {
         const url = p.post_url;
         if (!url || seenUrls.has(url)) return;
         seenUrls.add(url);
         allTransformed.push({
           company_id: companyId,
           type: 'post',
-          subreddit: p.subreddit,
-          author: p.author || null,
-          title: p.post_title,
-          body: (p.post_content || ''),
+          subreddit: p.subreddit || '',
+          author: p.author || '',
+          title: p.post_title || '',
+            body: p.post_content || '',
           url,
-          upvotes: p.upvotes || 0,
-          downvotes: p.downvotes || 0,
-          total_comments: p.total_comments || 0,
-          created_utc: p.post_age_hours ? new Date(Date.now() - p.post_age_hours * 3600 * 1000).toISOString() : null,
-          sentiment: sentiment(p.upvotes || 0, p.downvotes),
+          upvotes: typeof p.upvotes === 'number' ? p.upvotes : 0,
+          total_comments: typeof p.total_comments === 'number' ? p.total_comments : 0,
+      created_utc: p.post_age_hours ? new Date(Date.now() - p.post_age_hours * 3600 * 1000).toISOString() : new Date().toISOString(),
           engagement_score: (p.upvotes || 0) + (p.total_comments || 0)
         });
       });
@@ -92,39 +97,56 @@ export default async function handler(req, res) {
         allTransformed.push({
           company_id: companyId,
           type: 'comment',
-          subreddit: c.subreddit,
-          author: c.author,
-          title: null,
+          subreddit: c.subreddit || '',
+          author: c.author || '',
+          title: '',
           body: c.comment_body || '',
           url,
-          upvotes: c.upvotes || 0,
-          downvotes: c.downvotes || 0,
+          upvotes: typeof c.upvotes === 'number' ? c.upvotes : 0,
           total_comments: null,
-          created_utc: c.post_age_hours ? new Date(Date.now() - c.post_age_hours * 3600 * 1000).toISOString() : null,
-          sentiment: sentiment(c.upvotes || 0, c.downvotes),
-          engagement_score: (c.upvotes || 0)
+          created_utc: c.post_age_hours ? new Date(Date.now() - c.post_age_hours * 3600 * 1000).toISOString() : new Date().toISOString(),
+          engagement_score: c.upvotes || 0
         });
       });
       const addedThisBatch = allTransformed.length - preCount;
-      // Stop early if nothing new OR API did not provide new cursors (pagination exhausted)
-      if (addedThisBatch === 0 || (!fullRefresh && !data.posts_after && !data.comments_after)) break;
+      if (addedThisBatch === 0) {
+        emptyBatches++;
+        console.warn('[reddit_fetch_v2] empty batch', batches, 'cursors', { nextPostsAfter, nextCommentsAfter });
+      }
+      // Break conditions: consecutive empty (2) OR no new cursors (pagination exhausted)
+      const paginationExhausted = !fullRefresh && !data.posts_after && !data.comments_after;
+      if ((emptyBatches >= 2) || paginationExhausted) {
+        console.log('[reddit_fetch_v2] stopping ingestion', { emptyBatches, paginationExhausted });
+        break;
+      }
       // small delay between batches to be polite
       if (batches < batchLimit) await new Promise(r => setTimeout(r, 800));
     }
     // bulk upsert
     for (let chunk = 0; chunk < allTransformed.length; chunk += 500) {
       const slice = allTransformed.slice(chunk, chunk + 500);
-      // Use composite conflict target to allow identical URLs across different companies
-      const { error: insErr } = await supabase.from('reddit_mentions').upsert(slice, { onConflict: 'company_id,url' });
-      if (insErr) throw insErr;
+      console.log('[reddit_fetch_v2] upsert chunk', { chunkStart: chunk, size: slice.length });
+      if (slice.length > 0) console.log('[reddit_fetch_v2] sample row', JSON.stringify(slice[0]));
+      const { error: insErr, data: insData, status: insStatus } = await supabase.from('reddit_mentions').upsert(slice, { onConflict: 'company_id,url' });
+      if (insErr) {
+        console.error('[reddit_fetch_v2] upsert error', insErr);
+        throw insErr;
+      }
+      console.log('[reddit_fetch_v2] upsert status', insStatus, 'returned rows', insData?.length);
     }
     const totalAddedPosts = allTransformed.filter(r=>r.type==='post').length;
     const totalAddedComments = allTransformed.filter(r=>r.type==='comment').length;
+    if (allTransformed.length === 0) {
+      console.warn('[reddit_fetch_v2] no transformed rows – upstream returned zero content. Investigate backend search for companyName or limits.');
+    }
     await supabase.from('reddit_ingestion_jobs').update({ status: 'success', finished_at: new Date().toISOString(), total_added_posts: totalAddedPosts, total_added_comments: totalAddedComments, posts_after: postsAfter, comments_after: commentsAfter }).eq('id', job.id);
   await supabase.from('companies').update({ last_ingested_at: new Date().toISOString(), last_posts_after: postsAfter, last_comments_after: commentsAfter }).eq('id', companyId);
-    return res.status(200).json({ success: true, jobId: job.id, batchesUsed: batches, added: { posts: totalAddedPosts, comments: totalAddedComments }, cursors: { postsAfter, commentsAfter } });
+    // Optionally fetch a quick count of mentions for visibility
+    const { data: countRows, error: countErr } = await supabase.rpc?.('edge_count_company_mentions', { p_company_id: companyId }) || { data: null, error: null }; // optional if function exists
+    if (countErr) console.warn('[reddit_fetch_v2] count rpc error (non-fatal)', countErr.message);
+    return res.status(200).json({ success: true, jobId: job.id, batchesUsed: batches, added: { posts: totalAddedPosts, comments: totalAddedComments }, cursors: { postsAfter, commentsAfter }, totalMentionsEstimate: countRows || null });
   } catch (e) {
-    console.error('fetch error', e);
+    console.error('[reddit_fetch_v2] fetch error', e);
     return res.status(500).json({ error: e.message });
   }
 }

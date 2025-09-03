@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   try {
     let query = supabase
       .from('reddit_mentions')
-      .select('type, subreddit, upvotes, downvotes, total_comments, created_utc, fetched_at, engagement_score, title, body, url')
+  .select('type, subreddit, upvotes, total_comments, created_utc, fetched_at, engagement_score, title, body, url')
       .eq('company_id', companyId);
     if (range !== 'all') {
       query = query.or(`created_utc.is.null,created_utc.gte.${since}`);
@@ -141,7 +141,7 @@ export default async function handler(req, res) {
         total_comments: p.total_comments||0,
         post_age_hours: (p.created_utc || p.fetched_at) ? (nowMs - new Date(p.created_utc || p.fetched_at).getTime())/3600000 : 0,
         post_content: p.body || '',
-        downvotes: p.downvotes||0
+  // downvotes removed
       }));
       const comments = mentions.filter(m=>m.type==='comment').map(c=>({
         comment_body: c.body || '',
@@ -153,13 +153,13 @@ export default async function handler(req, res) {
         author: '',
         post_url: c.url, // not perfect but keeps shape
         post_age_hours: (c.created_utc || c.fetched_at) ? (nowMs - new Date(c.created_utc || c.fetched_at).getTime())/3600000 : 0,
-        downvotes: c.downvotes||0
+  // downvotes removed
       }));
       legacyPayload = { posts, comments };
     }
     return res.status(200).json({
       success: true,
-  metrics: { totalMentions, activeSubreddits, avgEngagement, positiveSentimentPct: positiveSentiment, estUpVotes: estUpTotal, estDownVotes: estDownTotal },
+  metrics: { totalMentions, activeSubreddits, avgEngagement, positiveSentimentPct: positiveSentiment, estUpVotes: estUpTotal },
       timeSeries,
       heatmap,
       funnel,
