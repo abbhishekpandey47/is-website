@@ -269,7 +269,7 @@ const serviceArrHowWorks2 = [
 
 const paginArrData = [];
 
-const page = () => {
+const TechVideoProductionPage = () => {
   const searchParams = useSearchParams();
   const [ytList, setYtList] = useState(_videometadata);
   const ytMemo = useMemo(() => ytList, [ytList]);
@@ -622,7 +622,7 @@ const page = () => {
 export default function PageWithSuspense(props) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <page {...props} />
+      <TechVideoProductionPage {...props} />
     </Suspense>
   );
 }

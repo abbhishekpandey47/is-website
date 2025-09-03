@@ -8,7 +8,7 @@ export default function VideoScriptContent() {
           {/* Header */}
           <div className="text-left mb-12">
             <h1 className="font-[quicksand] text-xl md:text-2xl font-bold text-white">
-            Generate High-Impact Video <span class="specialtext">Scripts for Engineering Startups in Seconds</span>
+            Generate High-Impact Video <span className="specialtext">Scripts for Engineering Startups in Seconds</span>
             </h1>
           </div>
 

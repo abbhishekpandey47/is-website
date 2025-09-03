@@ -48,10 +48,11 @@ export default function ServiceCardCarousel() {
   const [isMobile, setIsMobile] = useState(false);
   const cardsRef = useRef(null);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    "use client";
+    useEffect(() => {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
 
     checkMobile();
 

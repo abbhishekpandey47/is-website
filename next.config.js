@@ -9,6 +9,10 @@ module.exports = {
                 protocol: 'https',
                 hostname: 'framerusercontent.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'images.surferseo.art',
+            },
         ],
     },
     // Add redirect configuration

@@ -68,9 +68,9 @@ const PricingPage = () => {
                                         <div key={index} className="flex items-start space-x-3 mb-4">
                                             <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <svg width="140" height="140" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect x="8" y="8" width="104" height="104" rx="32" ry="32" fill="#3a4a5c" stroke="#5a6a7c" stroke-width="1" />
+                                                    <rect x="8" y="8" width="104" height="104" rx="32" ry="32" fill="#3a4a5c" stroke="#5a6a7c" strokeWidth="1" />
 
-                                                    <path d="M35 60l15 15L85 40" stroke="#7dff9d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                                                    <path d="M35 60l15 15L85 40" stroke="#7dff9d" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                                                 </svg>
                                             </div>
                                             <span className="text-[14px] text-gray-300">{feature}</span>
@@ -84,9 +84,9 @@ const PricingPage = () => {
                                         <div key={index} className="flex items-start space-x-3 mb-4">
                                             <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
                                                 <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect x="8" y="8" width="104" height="104" rx="32" ry="32" fill="#3a4a5c" stroke="#5a6a7c" stroke-width="1" />
+                                                    <rect x="8" y="8" width="104" height="104" rx="32" ry="32" fill="#3a4a5c" stroke="#5a6a7c" strokeWidth="1" />
 
-                                                    <path d="M35 60l15 15L85 40" stroke="#7dff9d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                                                    <path d="M35 60l15 15L85 40" stroke="#7dff9d" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                                                 </svg>
                                             </div>
                                             <span className="text-[14px] text-gray-300">{feature}</span>
@@ -127,9 +127,9 @@ const PricingPage = () => {
                                 <div key={index} className="flex items-center space-x-3">
                                     <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
                                         <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect x="8" y="8" width="104" height="104" rx="32" ry="32" fill="#3a4a5c" stroke="#5a6a7c" stroke-width="1" />
+                                            <rect x="8" y="8" width="104" height="104" rx="32" ry="32" fill="#3a4a5c" stroke="#5a6a7c" strokeWidth="1" />
 
-                                            <path d="M35 60l15 15L85 40" stroke="#7dff9d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                                            <path d="M35 60l15 15L85 40" stroke="#7dff9d" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                                         </svg>
                                     </div>
                                     <span className="text-[16px] text-[#DAD1F1]">{feature}</span>

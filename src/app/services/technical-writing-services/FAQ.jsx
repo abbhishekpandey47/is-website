@@ -1,8 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import { ArrowRight, ChevronDown } from "lucide-react";
-import Link from "next/link";
 import CalendarBooking from "@/app/calendarButton";
+import { ArrowRight, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 // Custom Accordion component
 const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
@@ -112,6 +111,7 @@ const FAQSection = () => {
                   answer={faq.answer}
                   isOpen={openItem === faq.id}
                   toggleAccordion={toggleAccordion}
+                  key={faq.id}
                 />
               ))}
             </div>

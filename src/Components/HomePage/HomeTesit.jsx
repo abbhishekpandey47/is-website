@@ -1,4 +1,5 @@
 "use client";
+"use client";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
@@ -284,21 +285,18 @@ const HomeTesit = () => {
         </div>
       </div>
       <div className="flex justify-center gap-6 py-16 quicksand-light flex-wrap w-7/6 m-auto text-white testiMonCardHome">
-        {renderArr.map((testi, index) => {
-          return (
-            <TestiCard
-              index={index}
-              name={testi.name}
-              alt={testi.alt}
-              sorc={testi.src}
-              pos={testi.pos}
-              carPtr={carPtr}
-              comment={testi.comment}
-              highlight={testi.highlight || []}
-              key={index}
-            />
-          );
-        })}
+        {renderArr.map((testi, index) => (
+          <TestiCard
+            index={index}
+            name={testi.name}
+            sorc={testi.src}
+            pos={testi.pos}
+            carPtr={carPtr}
+            comment={testi.comment}
+            highlight={testi.highlight || []}
+            key={index}
+          />
+        ))}
       </div>
       <div className="flex justify-center gap-10">
         <div>

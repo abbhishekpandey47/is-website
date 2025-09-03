@@ -221,16 +221,15 @@ const page = () => {
               scale with your story.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-              {serviceCards.map((card, index) => (
-                <div className="p-2 md:p-3">
-                  <CardComponent
-                    key={index}
-                    image={card.image}
-                    title={card.title}
-                    desc={card.desc}
-                  />
-                </div>
-              ))}
+                {serviceCards.map((card, index) => (
+                  <div className="p-2 md:p-3" key={card.id || index}>
+                    <CardComponent
+                      image={card.image}
+                      title={card.title}
+                      desc={card.desc}
+                    />
+                  </div>
+                ))}
             </div>{" "}
           </div>
           {/**  recent project */}

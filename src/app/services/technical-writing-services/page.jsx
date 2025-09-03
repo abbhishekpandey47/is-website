@@ -1,32 +1,22 @@
 "use client";
-import ReadyToStart from "@/Components/HomePage/ReadyToStart";
-import React, { useEffect, useContext, useMemo, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";
-import { Carousel } from "antd";
 import AppContext from "@/context/Infracontext";
+import { gsap } from "gsap";
+import { CustomEase, Power3, ScrollTrigger } from "gsap/all";
+import Image from "next/image";
+import { useContext, useEffect, useMemo, useState } from "react";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
-import Image from "next/image";
-import HowWorks from "@/Components/HomePage/HowWorks";
-import Link from "next/link";
-import { OrbitingCirclesDemo } from "@/Components/HomePage/OrbitTime";
-import { BorderBeam } from "@/Components/ui/border-beam";
-import { Badge, Card, Space } from "antd";
 
 import postMetaData from "../../../../posts/_postMetadata";
-import authorData from "../../../../posts/_authorData";
-import NewMarquee from "./marquee";
-import BlogTypes from "./blogTypes";
-import WhyChooseInfrasity from "./whychoose";
-import StorytellingSection from "./storyTelling";
-import FAQ from "@/Components/HomePage/FAQ";
-import FAQSection from "./FAQ";
-import TestimonialSlider from "./testimonials";
 import BookDemo from "../../book-a-demo/cta";
-import CalendlyButton from "./cal";
-import ClutchBadge from "./clutch";
 import CalendarBooking from "../../calendarButton";
+import BlogTypes from "./blogTypes";
+import ClutchBadge from "./clutch";
+import FAQSection from "./FAQ";
+import NewMarquee from "./marquee";
+import StorytellingSection from "./storyTelling";
+import TestimonialSlider from "./testimonials";
+import WhyChooseInfrasity from "./whychoose";
 
 const contentStyle = {
   height: "160px",
@@ -415,12 +405,12 @@ const page = () => {
         >
           <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-5"></div>
           <div className="text-center">
-            <h2 classNaDeveloper-Centricme="quicksand-bold text-white text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-cente">
+            <h2 className="quicksand-bold text-white text-[3em] max-lg:text-[2em] leading-[45px] max-md:text-cente">
               Launch-ready docs for DevTools & engineering teams
             </h2>
           </div>
           {dataMemoArr.map((data, index) => {
-            return <PageCard ind={index} data={data} />;
+            return <PageCard ind={index} data={data} key={data.id || index} />;
           })}
         </div>
         {/* Why Choose Infrasity section */}

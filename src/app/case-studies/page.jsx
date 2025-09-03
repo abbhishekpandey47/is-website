@@ -1,33 +1,32 @@
 "use client";
-import React, {
-  useEffect,
-  useState,
-  useContext,
-  useMemo,
-  useCallback,
-} from "react";
-import { Suspense } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
+import React, {
+    Suspense,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
+} from "react";
 
 import AppContext from "@/context/Infracontext";
 
 import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
 } from "../../Components/ui/pagination";
 
 import { useSearchParams } from "next/navigation";
 import NewsletterBlogs from "./NewsletterBlogs";
 
-import postMetaData from "../../../posts/_postMetadata";
-import authorData from "../../../posts/_authorData";
 import Image from "next/image";
+import authorData from "../../../posts/_authorData";
+import postMetaData from "../../../posts/_postMetadata";
 
 const monthArr = [
   "January",
@@ -99,7 +98,7 @@ const CardDiv = React.memo(({ card }) => (
 
 const paginArrData = [];
 
-const page = () => {
+const CaseStudiesPage = () => {
   const context = useContext(AppContext);
 
   const { setProgress, progress } = context;
@@ -223,8 +222,8 @@ const page = () => {
             card.author = author?.name;
             card.authorImage = author?.profilePic;
             return (
-              <Suspense fallback={"Loading..."}>
-                <CardDiv card={card} key={index} />
+              <Suspense fallback={"Loading..."} key={card.id || index}>
+                <CardDiv card={card} key={card.id || index} />
               </Suspense>
             );
           })}
@@ -277,7 +276,7 @@ const page = () => {
 export default function CaseStudiesPageWithSuspense(props) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <page {...props} />
+      <CaseStudiesPage {...props} />
     </Suspense>
   );
 }
