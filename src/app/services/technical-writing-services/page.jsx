@@ -27,6 +27,7 @@ import BookDemo from "../../book-a-demo/cta";
 import CalendlyButton from "./cal";
 import ClutchBadge from "./clutch";
 import CalendarBooking from "../../calendarButton";
+import BlogSection from "./blogSection";
 
 const contentStyle = {
   height: "160px",
@@ -495,6 +496,17 @@ const page = () => {
         </div>
       </div> */}
       </div>
+
+       <div
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+          }}
+        >
+          <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-12"></div>
+
+          <BlogSection />
+        </div>
 
       <div
         style={{
