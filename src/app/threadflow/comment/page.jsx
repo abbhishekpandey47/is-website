@@ -40,6 +40,7 @@ const PostsPage = () => {
     targetedSubreddit: "",
     postURL: "",
     redditUsername: "",
+    postedCommentStatus: "",
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(null);
@@ -83,7 +84,11 @@ const PostsPage = () => {
         setPosts(result.data || []);
       } catch (err) {
         console.error("Error fetching posts:", err);
-        toast.error("Failed to load posts");
+         toast({
+        title: "Error",
+        description: "Failed to load posts",
+        variant: "destructive",
+      });
       }
     };
 
@@ -135,21 +140,29 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
-  const getStatusBadge = (status) => {
-    const statusColors = {
-      live: "bg-green-500 text-white",
-      deleted: "bg-red-500 text-white",
-      reuploaded: "bg-blue-500 text-white",
-      pending: "bg-yellow-500 text-black",
-    };
-
-
-    return (
-      <Badge className={`${statusColors[status?.toLowerCase()] || "bg-gray-600"} capitalize`}>
-        {status}
-      </Badge>
-    );
+const getStatusBadge = (status) => {
+  const statusColors = {
+    live: "bg-green-500 text-white",
+    removed: "bg-red-500 text-white",
+    undermoderation: "bg-yellow-500 text-black",
   };
+
+  const colorClass = status
+    ? statusColors[status.toLowerCase()] || "bg-gray-600 text-white"
+    : "bg-gray-600 text-white";
+
+  // format text: insert spaces before capital letters
+  const formattedText = status
+    ? status.replace(/([a-z])([A-Z])/g, "$1 $2")
+    : "";
+
+  return (
+    <Badge className={`${colorClass} capitalize`}>
+      {formattedText}
+    </Badge>
+  );
+};
+
 
   // Edit 
   const openEditModal = (post) => {
@@ -165,6 +178,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
       targetedSubreddit: post.targeted_subreddit || "",
       postURL: post.post_url || "",
       redditUsername: post.reddit_username || "",
+      postedCommentStatus: post.posted_comment_status || "underModeration",
     });
     setIsEditModalOpen(true);
   };
@@ -183,6 +197,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
       postedLink: "",
       currentStatus: "pending",
       redditUsername: "",
+      postedCommentStatus: "underModeration",
     });
   };
 
@@ -215,6 +230,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
           client_feedback: editFormData.clientFeedback || null,
           post_url: editFormData.postURL || null,
           reddit_username: editFormData.redditUsername || null,
+          posted_comment_status: editFormData.postedCommentStatus || "underModeration",
         }),
       });
 
@@ -231,7 +247,10 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
         )
       );
 
-      toast.success("Post updated successfully!");
+      toast({
+        title: "Post updated successfully!",
+        description: "The post was updated successfully.",
+      });
       closeEditModal();
     } catch (err) {
       console.error("Error updating post:", err);
@@ -406,6 +425,9 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
                     {/* <TableHead>Number of our engagements</TableHead> */}
                     {/* <TableHead>Link to Kubiya</TableHead> */}
                     <TableHead>Reddit Username</TableHead>
+                    <TableHead>Posted Comment Status</TableHead>
+                                        <TableHead>Actions</TableHead>
+
                     {/* <TableHead>Actions</TableHead> */}
                   </TableRow>
                 </TableHeader>
@@ -450,6 +472,8 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
                       {/* <TableCell></TableCell>
                       <TableCell></TableCell> */}
                       <TableCell>{post.reddit_username}</TableCell>
+                                             <TableCell>{getStatusBadge(post.posted_comment_status)}</TableCell>
+
                       <TableCell>
                         <div className="flex items-center gap-2">
                           <Button
@@ -617,7 +641,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
                     </div>
 
                     <div>
-                      <Label htmlFor="edit-status">Comment Approval Status</Label>
+                      <Label htmlFor="edit-status">Client Approval Statu</Label>
                       <Select
                         value={editFormData.status}
                         onValueChange={(value) => handleEditInputChange("status", value)}
@@ -626,24 +650,40 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="live">Live</SelectItem>
-                          <SelectItem value="deleted">Deleted</SelectItem>
-                          <SelectItem value="reuploaded">Reuploaded </SelectItem>
+                          <SelectItem value="approved">Approved</SelectItem>
+                          <SelectItem value="notApproved">Not Approved</SelectItem>
                           <SelectItem value="pending">Pending</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
-
-                  <div>
-                    <Label htmlFor="edit-postedLink">Comment URL</Label>
-                    <Input
-                      id="edit-postedLink"
-                      type="url"
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="edit-postedLink">Comment URL</Label>
+                      <Input
+                        id="edit-postedLink"
+                        type="url"
                       value={editFormData.postedLink}
                       onChange={(e) => handleEditInputChange("postedLink", e.target.value)}
                       placeholder="Direct link to the posted content"
                     />
+                  </div>
+                    <div>
+                      <Label htmlFor="edit-postedCommentStatus">Posted Comment Status</Label>
+                      <Select
+                        value={editFormData.postedCommentStatus}
+                        onValueChange={(value) => handleEditInputChange("postedCommentStatus", value)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="live">Live</SelectItem>
+                          <SelectItem value="removed">Removed </SelectItem>
+                          <SelectItem value="underModeration">Under Moderation</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
 
                   {/* Action Buttons */}

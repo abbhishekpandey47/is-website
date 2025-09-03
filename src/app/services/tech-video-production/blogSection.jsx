@@ -1,37 +1,52 @@
+// Sure, sharing the same. 
+
+// 1. https://www.infrasity.com/blog/top-10-technical-writing-service-companies
+// 2. https://www.infrasity.com/blog/importance-of-writing-organic-content-benefits-and-best-practices-for-saas-companies
+// 3. https://www.infrasity.com/blog/comprehensive-guide-to-technical-seo-for-improved-website-performance
+
+
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
 
-// 1. https://www.infrasity.com/blog/reddit-organic-vs-paid-marketing
-// 2. https://www.infrasity.com/blog/reddit-b2b-marketing-strategy
-// 3. https://www.infrasity.com/blog/reddit-karma-farming-vs-credibility
+
 
 const posts = [
+
+    // Video page 
+// 1. https://www.infrasity.com/blog/key-performance-indicators-video-marketing
+// 2. https://www.infrasity.com/blog/key-performance-indicators-video-marketing
+// https://www.infrasity.com/blog/top-explainer-video-companies
+// 3. https://www.infrasity.com/blog/top-explainer-video-companies
+// Technical Writing page - 
+// 1. https://www.infrasity.com/blog/top-explainer-video-companies
+// 2. https://www.infrasity.com/blog/key-performance-indicators-video-marketing
+// 3. https://www.infrasity.com/blog/top-explainer-video-companies
+// Updated @𝐊𝐨𝐥𝐡𝐞 𝐒𝐚𝐭𝐢𝐬𝐡
   {
-    date: "August 8, 2025",
-    title: "Organic Vs Paid Marketing on Reddit: What Works Best in 2025?",
-    href: "/blog/reddit-organic-vs-paid-marketing",
-    image: "/PostImages/organic-vs-paid-marketing-reddit/organic-vs-paid-marketing-reddit.png",
+    date: "August 19, 2025",
+    title: "8 Key Performance Indicators for Video Marketing",
+    href: "/blog/key-performance-indicators-video-marketing",
+    image: "/PostImages/key-performance-indicators-video-marketing/banner.jpg",
   },
   {
-    date: "August 22, 2025",
-    title:
-      "Subreddit Strategy for Reddit B2B Marketing: How to Pick the Right Communities",
-    href: "/blog/reddit-b2b-marketing-strategy",
-    image: "/PostImages/reddit-b2b-marketing-strategy/banner.jpg",
+    date: "August 19, 2025",
+    title: "8 Key Performance Indicators for Video Marketing",
+    href: "/blog/key-performance-indicators-video-marketing",
+    image: "/PostImages/key-performance-indicators-video-marketing/banner.jpg",
   },
   {
-    date: "August 27, 2025",
-    title: "Karma Farming vs Credibility: What Really Drives Reddit B2B Marketing Growth",
-    href: "/blog/reddit-karma-farming-vs-credibility",
-    image: "/PostImages/reddit-karma-farming-vs-credibility/banner.png",
+    date: "March 21, 2025",
+    title: "Top Explainer Video Companies For B2B SaaS Startups",
+    href: "/blog/top-explainer-video-companies",
+    image: "/PostImages/best-b2b-saas-video-agencies/0.png",
   },
 ];
 
 export default function BlogSection() {
   return (
-<section className="max-w-6xl mx-auto px-6">
+<section className="max-w-6xl mx-auto px-6 mb-14">
   <div className="w-full">
     {/* Header */}
     <div className="flex flex-row justify-between items-center gap-4 flex-wrap w-full">
