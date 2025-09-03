@@ -1,32 +1,33 @@
 "use client";
-import { getCache, setCache } from '@/lib/cacheClient';
-import { auth } from "@/lib/firebaseClient";
-import { onAuthStateChanged } from "firebase/auth";
-import { Edit, ExternalLink, Plus, Save, Search, Trash2, X } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { Badge } from "../../../Components/ui/badge";
 import { Button } from "../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../Components/ui/card";
 import { Input } from "../../../Components/ui/input";
 import { Label } from "../../../Components/ui/label";
+import { Textarea } from "../../../Components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../Components/ui/select";
 import { SidebarTrigger } from "../../../Components/ui/sidebar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../Components/ui/table";
-import { Textarea } from "../../../Components/ui/textarea";
 import { UserProfile } from "../../../Components/UserProfile";
+import { useRouter } from "next/navigation";
+import { Plus, Search, ExternalLink, Edit, Trash2, Save, X } from "lucide-react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebaseClient";
+import { useToast } from "@/hooks/use-toast";
 
 const PostsPage = () => {
   const router = useRouter();
+    const { toast } = useToast();
+
   const [firebaseUser, setFirebaseUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
-
-  // Edit modal
+  
+  // Edit modal 
   const [editingPost, setEditingPost] = useState(null);
   const [editFormData, setEditFormData] = useState({
     category: "",
@@ -68,24 +69,25 @@ const PostsPage = () => {
 
   useEffect(() => {
     if (!firebaseUser) return;
-    const cacheKey = `posts_${firebaseUser.uid}`;
-    const cached = getCache(cacheKey, 'local');
-    if (cached?.data) {
-      setPosts(cached.data);
-    }
+
+    console.log("Fetching posts for user:", firebaseUser.uid);
+
     const fetchPosts = async () => {
       try {
         const res = await fetch(`/api/posts?userId=${firebaseUser.uid}`);
         const result = await res.json();
-        if (!res.ok) throw new Error(result.error || 'Failed to fetch posts');
+
+        if (!res.ok) {
+          throw new Error(result.error || "Failed to fetch posts");
+        }
+
         setPosts(result.data || []);
-        setCache(cacheKey, { data: result.data || [] }, 2 * 60 * 1000, 'local'); // 2m TTL
       } catch (err) {
-        console.error('Error fetching posts:', err);
-        toast.error('Failed to load posts');
+        console.error("Error fetching posts:", err);
+        toast.error("Failed to load posts");
       }
     };
-    // Always revalidate in background (won't block UI if cache served)
+
     fetchPosts();
   }, [firebaseUser]);
 
@@ -151,7 +153,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
     );
   };
 
-  // Edit
+  // Edit 
   const openEditModal = (post) => {
     setEditingPost(post);
     setEditFormData({
@@ -224,11 +226,11 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
       }
 
       // Update the posts state
-      setPosts((prevPosts) => {
-        const updated = prevPosts.map((post) => post.id === editingPost.id ? { ...post, ...result.data[0] } : post);
-        if (firebaseUser) setCache(`posts_${firebaseUser.uid}`, { data: updated }, 2*60*1000, 'local');
-        return updated;
-      });
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === editingPost.id ? { ...post, ...result.data[0] } : post
+        )
+      );
 
       toast.success("Post updated successfully!");
       closeEditModal();
@@ -248,35 +250,55 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
   };
 
   const handleDelete = async () => {
-    const postId = deleteConfirmation.post.id;
-    setIsDeleting(postId);
+  const postId = deleteConfirmation.post.id;
+  setIsDeleting(postId);
 
-    try {
-      const res = await fetch(`/api/posts?id=${postId}`, {
-        method: "DELETE",
-      });
+  try {
+    const res = await fetch(`/api/posts?id=${postId}`, {
+      method: "DELETE",
+    });
 
-      const result = await res.json();
+    const result = await res.json();
 
-      if (!res.ok) {
-        throw new Error(result.error || "Failed to delete post");
+    if (!res.ok) {
+      // Customize error message for user
+      let message = result.error || "Failed to delete post";
+
+      if (
+        message.toLowerCase().includes("foreign key") ||
+        message.toLowerCase().includes("permission") ||
+        message.toLowerCase().includes("not authorized")
+      ) {
+        message = "You may not be the right person to delete this post.";
       }
 
-      // Remove the post from the state
-      setPosts((prevPosts) => {
-        const updated = prevPosts.filter((post) => post.id !== postId);
-        if (firebaseUser) setCache(`posts_${firebaseUser.uid}`, { data: updated }, 2*60*1000, 'local');
-        return updated;
+      toast({
+        title: "Error",
+        description: message,
+        variant: "destructive",
       });
-      toast.success("Post deleted successfully!");
-      closeDeleteConfirmation();
-    } catch (err) {
-      console.error("Error deleting post:", err);
-      toast.error(err.message);
-    } finally {
-      setIsDeleting(null);
+
+      return;
     }
-  };
+
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+    toast({
+      title: "Post deleted successfully!",
+      description: "The post was removed from the tracker.",
+    });
+    closeDeleteConfirmation();
+  } catch (err) {
+    console.error("Error deleting post:", err);
+    toast({
+      title: "Error",
+      description: err.message,
+      variant: "destructive",
+    });
+  } finally {
+    setIsDeleting(null);
+  }
+};
+
 
 if (loading) {
   return (
@@ -654,7 +676,7 @@ if (loading) {
                   </p>
                 </div>
               </div>
-
+              
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground mb-2">
                   Are you sure you want to delete this post?
@@ -667,14 +689,14 @@ if (loading) {
               </div>
 
               <div className="flex items-center justify-end gap-3">
-                <Button
-                  variant="outline"
+                <Button 
+                  variant="outline" 
                   onClick={closeDeleteConfirmation}
                   disabled={isDeleting}
                 >
                   Cancel
                 </Button>
-                <Button
+                <Button 
                   variant="destructive"
                   onClick={handleDelete}
                   disabled={isDeleting}
