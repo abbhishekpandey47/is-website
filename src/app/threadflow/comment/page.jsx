@@ -42,6 +42,14 @@ const PostsPage = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState({ isOpen: false, post: null });
+    const [editCategories, setEditCategories] = useState([
+    "Drift Detection",
+    "IaC",
+    "DevOps",
+    "AWS",
+    "Enterprise AI",
+    "AI Workflow"
+  ]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -79,6 +87,33 @@ const PostsPage = () => {
 
     fetchPosts();
   }, [firebaseUser]);
+    useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setFirebaseUser(user);
+      setLoading(false);
+  
+      if (!user) {
+        router.push("/auth/signin");
+      } else {
+        try {
+          const res = await fetch(`/api/comment?categories=true&userId=${user.uid}`);
+          const result = await res.json();
+  
+          if (res.ok && result.categories) {
+            setEditCategories((prev) => {
+              const merged = [...prev, ...result.categories];
+              return [...new Set(merged.map((c) => c.trim()))]; 
+            });
+          }
+        } catch (err) {
+          console.error("Failed to fetch categories:", err);
+        }
+      }
+    });
+  
+    return () => unsubscribe();
+  }, [router]);
+  
 
 const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
 const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
@@ -448,14 +483,29 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
                         <SelectTrigger>
                           <SelectValue placeholder="Select category" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Drift Detection">Drift Detection</SelectItem>
-                          <SelectItem value="IaC">IaC</SelectItem>
-                          <SelectItem value="DevOps">DevOps</SelectItem>
-                          <SelectItem value="AWS">AWS</SelectItem>
-                          <SelectItem value="Enterprise AI">Enterprise AI</SelectItem>
-                          <SelectItem value="AI Workflow">AI Workflow</SelectItem>
-                        </SelectContent>
+                                    <SelectContent className="max-h-60">
+  {editCategories.length > 0 && (
+    <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground border-b border-border/50 mb-1">
+      Recommended Categories
+    </div>
+  )}
+  {editCategories.map((category) => (
+    <SelectItem key={category} value={category} className="py-2">
+      <div className="flex items-center gap-2">
+        <div className="w-2 h-2 bg-primary/60 rounded-full"></div>
+        {category}
+      </div>
+    </SelectItem>
+  ))}
+  {/* <div className="border-t border-border/50 mt-1 pt-1">
+    <SelectItem value="add-new" className="text-primary font-medium py-2">
+      <div className="flex items-center gap-2">
+        <Plus className="h-4 w-4" />
+        Create New Category
+      </div>
+    </SelectItem>
+  </div> */}
+</SelectContent>
                       </Select>
                     </div>
 
