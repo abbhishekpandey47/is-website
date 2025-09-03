@@ -3,7 +3,16 @@ module.exports = {
         missingSuspenseWithCSRBailout: false,
     },
     images: {
-         domains: ["cdn.prod.website-files.com", "framerusercontent.com"],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'cdn.prod.website-files.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'framerusercontent.com',
+            },
+        ],
     },
     // Add redirect configuration
     async redirects() {
