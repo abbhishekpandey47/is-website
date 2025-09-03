@@ -401,7 +401,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
                     <TableHead>Comment Approval Status</TableHead>
                     <TableHead>Text of engagement</TableHead>
                     <TableHead>Date published</TableHead>
-                    <TableHead>Client Feedback</TableHead>
+                    <TableHead>Customer Comments</TableHead>
                     <TableHead>Published Link</TableHead>
                     {/* <TableHead>Number of our engagements</TableHead> */}
                     {/* <TableHead>Link to Kubiya</TableHead> */}
@@ -593,7 +593,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
                   </div>
 
                   <div>
-                    <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Client Feedback</Label>
+                    <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Customer Comments</Label>
                     <Textarea
                       id="clientFeedback"
                       value={editFormData.clientFeedback}
