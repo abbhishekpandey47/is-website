@@ -142,6 +142,34 @@ const AddPostPage = () => {
     }
   };
 
+  useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    setFirebaseUser(user);
+    setLoading(false);
+
+    if (!user) {
+      router.push("/auth/signin");
+    } else {
+      try {
+        const res = await fetch(`/api/posts?categories=true&userId=${user.uid}`);
+        const result = await res.json();
+
+        if (res.ok && result.categories) {
+          setCategories((prev) => {
+            const merged = [...prev, ...result.categories];
+            return [...new Set(merged.map((c) => c.trim()))]; 
+          });
+        }
+      } catch (err) {
+        console.error("Failed to fetch categories:", err);
+      }
+    }
+  });
+
+  return () => unsubscribe();
+}, [router]);
+
+
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -191,27 +219,30 @@ const AddPostPage = () => {
                         <SelectTrigger className="h-10">
                           <SelectValue placeholder="Choose a category" />
                         </SelectTrigger>
-                        <SelectContent className="max-h-60">
-                          <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground border-b border-border/50 mb-1">
-                            Available Categories
-                          </div>
-                          {categories.map((category) => (
-                            <SelectItem key={category} value={category} className="py-2">
-                              <div className="flex items-center gap-2">
-                                <div className="w-2 h-2 bg-primary/60 rounded-full"></div>
-                                {category}
-                              </div>
-                            </SelectItem>
-                          ))}
-                          <div className="border-t border-border/50 mt-1 pt-1">
-                            <SelectItem value="add-new" className="text-primary font-medium py-2">
-                              <div className="flex items-center gap-2">
-                                <Plus className="h-4 w-4" />
-                                Create New Category
-                              </div>
-                            </SelectItem>
-                          </div>
-                        </SelectContent>
+                       <SelectContent className="max-h-60">
+  {categories.length > 0 && (
+    <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground border-b border-border/50 mb-1">
+      Recommended Categories
+    </div>
+  )}
+  {categories.map((category) => (
+    <SelectItem key={category} value={category} className="py-2">
+      <div className="flex items-center gap-2">
+        <div className="w-2 h-2 bg-primary/60 rounded-full"></div>
+        {category}
+      </div>
+    </SelectItem>
+  ))}
+  <div className="border-t border-border/50 mt-1 pt-1">
+    <SelectItem value="add-new" className="text-primary font-medium py-2">
+      <div className="flex items-center gap-2">
+        <Plus className="h-4 w-4" />
+        Create New Category
+      </div>
+    </SelectItem>
+  </div>
+</SelectContent>
+
                       </Select>
 
                       {formData.category === "add-new" && (

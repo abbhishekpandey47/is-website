@@ -143,6 +143,34 @@ const AddPostPage = () => {
   }
 };
 
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    setFirebaseUser(user);
+    setLoading(false);
+
+    if (!user) {
+      router.push("/auth/signin");
+    } else {
+      try {
+        const res = await fetch(`/api/comment?categories=true&userId=${user.uid}`);
+        const result = await res.json();
+
+        if (res.ok && result.categories) {
+          setCategories((prev) => {
+            const merged = [...prev, ...result.categories];
+            return [...new Set(merged.map((c) => c.trim()))]; 
+          });
+        }
+      } catch (err) {
+        console.error("Failed to fetch categories:", err);
+      }
+    }
+  });
+
+  return () => unsubscribe();
+}, [router]);
+
+
   if (loading) return <p>Loading...</p>;
 
   return (

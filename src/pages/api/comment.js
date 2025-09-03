@@ -41,7 +41,7 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
-      const { userId, id } = req.query;
+      const { userId, id, categories } = req.query;
 
       //  Get single post by ID
       if (id) {
@@ -56,10 +56,26 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true, data });
       }
 
-      // ✅ Otherwise get all comment by userId
+      // Otherwise get all comment by userId
       if (!userId) {
         return res.status(400).json({ error: "Missing userId" });
       }
+
+      if (categories === "true") {
+        const { data, error } = await supabase
+          .from("comment")
+          .select("category")
+          .eq("user_id", userId);
+
+        if (error) return res.status(500).json({ error: error.message });
+
+        // Extract only unique categories
+        const uniqueCategories = [...new Set(data.map((p) => p.category))];
+
+        return res.status(200).json({ success: true, categories: uniqueCategories });
+      }
+
+
 
       const { data, error } = await supabase
         .from("comment")
@@ -76,7 +92,7 @@ export default async function handler(req, res) {
     }
   }
 
-  // ✅ Edit Post (PUT)
+  // Edit Post (PUT)
   if (req.method === "PUT") {
     try {
       const { id, ...updates } = req.body;
@@ -101,7 +117,7 @@ export default async function handler(req, res) {
     }
   }
 
-  // ✅ Delete Post (DELETE)
+  // Delete Post (DELETE)
   if (req.method === "DELETE") {
     try {
       const { id } = req.query;
