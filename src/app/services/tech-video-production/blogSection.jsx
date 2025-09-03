@@ -23,12 +23,13 @@ const posts = [
 // 1. https://www.infrasity.com/blog/top-explainer-video-companies
 // 2. https://www.infrasity.com/blog/key-performance-indicators-video-marketing
 // 3. https://www.infrasity.com/blog/top-explainer-video-companies
+// https://www.infrasity.com/blog/how-to-choose-the-right-production-company
 // Updated @𝐊𝐨𝐥𝐡𝐞 𝐒𝐚𝐭𝐢𝐬𝐡
   {
-    date: "August 19, 2025",
-    title: "8 Key Performance Indicators for Video Marketing",
-    href: "/blog/key-performance-indicators-video-marketing",
-    image: "/PostImages/key-performance-indicators-video-marketing/banner.jpg",
+    date: "November 5, 2024",
+    title: "How to Choose the Right Production Company for Your Video Needs",
+    href: "/blog/how-to-choose-the-right-production-company",
+    image: "/PostImages/how-to-choose-the-right-production-company/0.png",
   },
   {
     date: "August 19, 2025",

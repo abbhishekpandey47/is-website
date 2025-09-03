@@ -1064,6 +1064,17 @@ let postMetaData = [
         category: "Informational",
         metaDescription: "Discover the top growth levers driving success for early-stage SaaS and B2B startups. Learn how these growth lever help B2B SaaS companies scale."
     },
+    {
+    title: "How to Use an LLM Visibility Tool for Performance Tracking: A Guide for Growth Marketers",
+    metatitle: "How to Use an LLM Visibility Tool | Infrasity",
+    slug: "llm-visibility-tool-guide",
+    description: "Large Language Models (LLMs) like ChatGPT, Gemini, and Claude are becoming the first stop for buyers researching B2B SaaS startups! But most companies don’t know how often, or how accurately, their brand shows up in these AI-generated answers. In this guide, we’ll break down how to use the LLM visibility tool to monitor your brand mentions, track competitor visibility, and identify opportunities to improve your positioning.",
+    ogImage: "/PostImages/llm-visibility-tool-guide/banner.png",
+    publishedOn: "2025-09-03",
+    authorId: "author0005",
+    category: "Informational",
+    metaDescription: "Click the link to unlock growth with an LLM visibility tool. Track brand mentions, rankings & performance in ChatGPT, Gemini, Claude & more."
+},
 
 ];
 
