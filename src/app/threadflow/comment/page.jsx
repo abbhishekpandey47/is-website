@@ -24,11 +24,11 @@ const PostsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
-  
+
   // Edit modal 
   const [editingPost, setEditingPost] = useState(null);
   const [editFormData, setEditFormData] = useState({
-   category: "",
+    category: "",
     title: "",
     engagementText: "",
     datePosted: "",
@@ -80,6 +80,10 @@ const PostsPage = () => {
     fetchPosts();
   }, [firebaseUser]);
 
+const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
+const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
+
+
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
       searchQuery === "" ||
@@ -96,14 +100,15 @@ const PostsPage = () => {
 
   const getStatusBadge = (status) => {
     const statusColors = {
-      approved: "bg-approved text-approved-foreground",
-      live: "bg-live text-live-foreground",
-      pending: "bg-pending text-pending-foreground",
-      rejected: "bg-rejected text-rejected-foreground",
+      live: "bg-green-500 text-white",
+      deleted: "bg-red-500 text-white",
+      reuploaded: "bg-blue-500 text-white",
+      pending: "bg-yellow-500 text-black",
     };
 
+
     return (
-      <Badge className={`${statusColors[status?.toLowerCase()] || "bg-gray-200"} capitalize`}>
+      <Badge className={`${statusColors[status?.toLowerCase()] || "bg-gray-600"} capitalize`}>
         {status}
       </Badge>
     );
@@ -161,19 +166,19 @@ const PostsPage = () => {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-  id: editingPost.id, // required for update
-  category: editFormData.category,
-  title: editFormData.title,
-  status: editFormData.status || "pending",
-  engagement_text: editFormData.engagementText || null,
-  date_posted: editFormData.datePosted ? new Date(editFormData.datePosted) : null,
-  posted_link: editFormData.postedLink || null,
-  user_id: editFormData.user_id, 
-  targeted_subreddit: editFormData.targetedSubreddit || null,
-  client_feedback: editFormData.clientFeedback || null,
-  post_url: editFormData.postURL || null,
-  reddit_username: editFormData.redditUsername || null,
-}),
+          id: editingPost.id, // required for update
+          category: editFormData.category,
+          title: editFormData.title,
+          status: editFormData.status || "pending",
+          engagement_text: editFormData.engagementText || null,
+          date_posted: editFormData.datePosted ? new Date(editFormData.datePosted) : null,
+          posted_link: editFormData.postedLink || null,
+          user_id: editFormData.user_id,
+          targeted_subreddit: editFormData.targetedSubreddit || null,
+          client_feedback: editFormData.clientFeedback || null,
+          post_url: editFormData.postURL || null,
+          reddit_username: editFormData.redditUsername || null,
+        }),
       });
 
       const result = await res.json();
@@ -233,15 +238,15 @@ const PostsPage = () => {
     }
   };
 
-if (loading) {
-  return (
-    <div className="p-6 space-y-4">
-      <div className="animate-pulse h-6 w-48 bg-gray-300 rounded" />
-      <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
-      <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
-    </div>
-  );
-}
+  if (loading) {
+    return (
+      <div className="p-6 space-y-4">
+        <div className="animate-pulse h-6 w-48 bg-gray-300 rounded" />
+        <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
+        <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
+      </div>
+    );
+  }
 
   if (!firebaseUser) {
     return <div className="p-6">Please log in to view your Comment.</div>;
@@ -286,33 +291,33 @@ if (loading) {
                 />
               </div>
 
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder="All Categories" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  <SelectItem value="Drift Detection">Drift Detection</SelectItem>
-                  <SelectItem value="IaC">IaC</SelectItem>
-                  <SelectItem value="DevOps">DevOps</SelectItem>
-                  <SelectItem value="AWS">AWS</SelectItem>
-                  <SelectItem value="Enterprise AI">Enterprise AI</SelectItem>
-                  <SelectItem value="AI Workflow">AI Workflow</SelectItem>
-                </SelectContent>
-              </Select>
+             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+  <SelectTrigger className="w-48">
+    <SelectValue placeholder="All Categories" />
+  </SelectTrigger>
+  <SelectContent>
+    {categories.map((cat) => (
+      <SelectItem key={cat} value={cat}>
+        {cat === "all" ? "All Categories" : cat}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>
 
-              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                <SelectTrigger className="w-32">
-                  <SelectValue placeholder="All Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="approved">Approved</SelectItem>
-                  <SelectItem value="live">Live</SelectItem>
-                  <SelectItem value="pending">Pending</SelectItem>
-                  <SelectItem value="rejected">Rejected</SelectItem>
-                </SelectContent>
-              </Select>
+
+            <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+  <SelectTrigger className="w-32">
+    <SelectValue placeholder="All Status" />
+  </SelectTrigger>
+  <SelectContent>
+    {statuses.map((status) => (
+      <SelectItem key={status} value={status}>
+        {status === "all" ? "All Status" : status.charAt(0).toUpperCase() + status.slice(1)}
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>
+
             </div>
           </CardContent>
         </Card>
@@ -351,7 +356,7 @@ if (loading) {
                           {post.category}
                         </Badge>
                       </TableCell>
-<TableCell className="max-w-sm">
+                      <TableCell className="max-w-sm">
                         <div className="text-sm text-muted-foreground line-clamp-3">
                           {post.targeted_subreddit}
                         </div>
@@ -454,39 +459,39 @@ if (loading) {
                       </Select>
                     </div>
 
-                     <div>
-                    <Label htmlFor="targetedSubreddit">Targeted Subreddit</Label>
-                     <Input
-                    id="targetedSubreddit"
-                    value={editFormData.targetedSubreddit}
-                    onChange={(e) => handleEditInputChange("targetedSubreddit", e.target.value)}
-                    placeholder="Enter the Targeted Subreddit"
-                    className="h-10"
-                  />
+                    <div>
+                      <Label htmlFor="targetedSubreddit">Targeted Subreddit</Label>
+                      <Input
+                        id="targetedSubreddit"
+                        value={editFormData.targetedSubreddit}
+                        onChange={(e) => handleEditInputChange("targetedSubreddit", e.target.value)}
+                        placeholder="Enter the Targeted Subreddit"
+                        className="h-10"
+                      />
+                    </div>
                   </div>
-                  </div>
-
-                   <div>
-                  <Label htmlFor="postURL" className="text-sm font-medium mb-2 block">Post URL</Label>
-                  <Input
-                    id="postURL"
-                    value={editFormData.postURL}
-                    onChange={(e) => handleEditInputChange("postURL", e.target.value)}
-                    placeholder="Enter the Reddit Post URL"
-                    className="h-10"
-                  />
-                </div>
 
                   <div>
-                                  <Label htmlFor="redditUsername" className="text-sm font-medium mb-2 block">Reddit Username</Label>
-                                  <Input
-                                    id="redditUsername"
-                                    value={editFormData.redditUsername}
-                                    onChange={(e) => handleEditInputChange("redditUsername", e.target.value)}
-                                    placeholder="Enter the Reddit Username"
-                                    className="h-10"
-                                  />
-                                </div>
+                    <Label htmlFor="postURL" className="text-sm font-medium mb-2 block">Post URL</Label>
+                    <Input
+                      id="postURL"
+                      value={editFormData.postURL}
+                      onChange={(e) => handleEditInputChange("postURL", e.target.value)}
+                      placeholder="Enter the Reddit Post URL"
+                      className="h-10"
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="redditUsername" className="text-sm font-medium mb-2 block">Reddit Username</Label>
+                    <Input
+                      id="redditUsername"
+                      value={editFormData.redditUsername}
+                      onChange={(e) => handleEditInputChange("redditUsername", e.target.value)}
+                      placeholder="Enter the Reddit Username"
+                      className="h-10"
+                    />
+                  </div>
                   <div>
                     <Label htmlFor="edit-title">Title *</Label>
                     <Input
@@ -497,7 +502,7 @@ if (loading) {
                     />
                   </div>
 
-                 
+
 
                   {/* Content */}
                   <div>
@@ -511,17 +516,17 @@ if (loading) {
                     />
                   </div>
 
-                   <div>
-                  <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Client Feedback</Label>
-                  <Textarea
-                    id="clientFeedback"
-                    value={editFormData.clientFeedback}
-                    onChange={(e) => handleEditInputChange("clientFeedback", e.target.value)}
-                    placeholder="Enter your feedback for this Reddit Comment..."
-                    rows={4}
-                    className="resize-none"
-                  />
-                </div>
+                  <div>
+                    <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Client Feedback</Label>
+                    <Textarea
+                      id="clientFeedback"
+                      value={editFormData.clientFeedback}
+                      onChange={(e) => handleEditInputChange("clientFeedback", e.target.value)}
+                      placeholder="Enter your feedback for this Reddit Comment..."
+                      rows={4}
+                      className="resize-none"
+                    />
+                  </div>
 
                   {/* Tracking Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -536,20 +541,20 @@ if (loading) {
                     </div>
 
                     <div>
-                      <Label htmlFor="edit-currentStatus">Comment Approval Status</Label>
+                      <Label htmlFor="edit-status">Comment Approval Status</Label>
                       <Select
-                        value={editFormData.currentStatus}
-                        onValueChange={(value) => handleEditInputChange("currentStatus", value)}
+                        value={editFormData.status}
+                        onValueChange={(value) => handleEditInputChange("status", value)}
                       >
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                        <SelectItem value="pending">Live</SelectItem>
-                        <SelectItem value="live">Deleted</SelectItem>
-                        <SelectItem value="approved">Reuploaded </SelectItem>
-                        <SelectItem value="rejected">Pending</SelectItem>
-                      </SelectContent>
+                          <SelectItem value="live">Live</SelectItem>
+                          <SelectItem value="deleted">Deleted</SelectItem>
+                          <SelectItem value="reuploaded">Reuploaded </SelectItem>
+                          <SelectItem value="pending">Pending</SelectItem>
+                        </SelectContent>
                       </Select>
                     </div>
                   </div>
@@ -598,7 +603,7 @@ if (loading) {
                   </p>
                 </div>
               </div>
-              
+
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground mb-2">
                   Are you sure you want to delete this Comment?
@@ -611,14 +616,14 @@ if (loading) {
               </div>
 
               <div className="flex items-center justify-end gap-3">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={closeDeleteConfirmation}
                   disabled={isDeleting}
                 >
                   Cancel
                 </Button>
-                <Button 
+                <Button
                   variant="destructive"
                   onClick={handleDelete}
                   disabled={isDeleting}

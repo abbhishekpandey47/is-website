@@ -252,18 +252,19 @@ const MCPToolsInterface = () => {
 
 
 const circle1 = [
-  "https://framerusercontent.com/images/GzVxBdDoT8WYQfEz3RZpgt4tyIs.svg",
-  "https://framerusercontent.com/images/fOGS30H04nLKlVAy0oNDZKH6o.png",
-  "https://framerusercontent.com/images/hdY8ot05YZnMTURoaxRjdqsrs.jpeg",
-  "https://framerusercontent.com/images/OI4zR2hwXpGOXXxCzkmfTB3Pls.png",
+  "/landingfolio/reddita.svg",
+  "/landingfolio/github.png",
+  "/landingfolio/dev.webp",
+  "/landingfolio/stack.png",
+  "/landingfolio/chatpng.png",
 ];
 
 const circle2 = [
-  "https://framerusercontent.com/images/POqrokMFJqkFZTHtUNf4gUp2Jc.png",
-  "https://framerusercontent.com/images/Lg0zdHRcf1P5w2pD2FssTVwJmo.svg",
-  "https://framerusercontent.com/images/RnVehSAT2ygAnRaFsXNbybdyP0.png",
-  "https://framerusercontent.com/images/MDDNoOiq3s6vk6Xe8tUd2z1o6o.jpeg",
-  "https://framerusercontent.com/images/urTU3aKWMI2JwYiTyskKeNolSY.svg",
+  "/landingfolio/y.svg",
+  "/landingfolio/Discord.png",
+  "/landingfolio/share.png",
+  "/landingfolio/people.png",
+  "/landingfolio/upvote.jpeg",
 ];
 
 const circle3 = [
