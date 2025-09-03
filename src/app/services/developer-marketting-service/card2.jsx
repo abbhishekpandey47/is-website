@@ -26,7 +26,32 @@ const FeatureCards = () => {
       title: "One story, many surfaces",
       description: "A single product video can become a YouTube demo, doc embed, and short-form clip. We repurpose content across channels so nothing goes stale.",
       imageAlt: "Tools illustration",
-      image: "c3.png"
+      image: "c3.png",
+      design: <div className="relative bg-black pt-8 flex flex-wrap gap-4 justify-center items-center overflow-hidden">
+  {/* Gradient overlay */}
+  <div
+    className="absolute inset-0 pointer-events-none"
+    style={{
+      background:
+        "radial-gradient(circle at center, rgba(25,102,255,0.3), rgba(209,41,255,0.2), rgba(0,0,0,0.9))",
+    }}
+  ></div>
+     <Pill label="Send to Slack" isPattern={false} iconUrl="https://framerusercontent.com/images/HgSJ7Rgtu1wlY4m5ugoPh27M8.svg" />
+      <Pill label="Tool label" isPattern={true} />
+      <Pill label="Create page" iconUrl="https://framerusercontent.com/images/deP5Emns5JYXary7hz0Icm245NY.svg" />
+      <Pill label="Summarize text" iconUrl="https://framerusercontent.com/images/SwOk89pCA23qMeJlAcxU7IyRw.svg" />
+      <Pill label="Create a pin" iconUrl="https://framerusercontent.com/images/eFYSSb2rsQ20Xy4Zw3hXmHafiMs.png" />
+      <Pill label="Create row" iconUrl="https://framerusercontent.com/images/3NHXgLzpd82ROkKyt6peYL6OFhs.svg" />
+      <Pill label="Add to new row" iconUrl="https://framerusercontent.com/images/6hAErI1Rk4yOzvuhtIqtiYkGQ.png" />
+      <Pill label="Get RSS" iconUrl="https://framerusercontent.com/images/y34nsuMXQ1cGa6JUzRxXJ7jn0c.png" />
+      <Pill label="Create order" iconUrl="https://framerusercontent.com/images/276WO0YitRvZ7zBTjFFeSUdqM1w.svg" />
+      <Pill label="Get Stripe sales" iconUrl="https://framerusercontent.com/images/n633YieGsyurEJVRQYTV9NJkPk.png" />
+      <Pill label="Create event" iconUrl="https://framerusercontent.com/images/POqrokMFJqkFZTHtUNf4gUp2Jc.png" />
+      <Pill label="Send photo" iconUrl="https://framerusercontent.com/images/AivTqnTKX4huKzVYrpTTt3GELU.svg" />
+      <Pill label="Create issue" iconUrl="https://framerusercontent.com/images/wNeivcUdPcU22wpDo7aZDHm5jsw.svg" />
+      <Pill label="Monitor inbox" iconUrl="https://framerusercontent.com/images/ldXgClNPKa5Kf9yDz94cahCcyA.png" />
+      <Pill label="Tool label" isPattern={true} />
+    </div>,
     },
     {
       id: 4,
@@ -86,7 +111,6 @@ const FeatureCards = () => {
 export default FeatureCards;
 
 
-
 const MCPToolsInterface = () => {
   const toolSets = [
     {
@@ -97,14 +121,23 @@ const MCPToolsInterface = () => {
     },
     {
       logo: "https://framerusercontent.com/images/wNeivcUdPcU22wpDo7aZDHm5jsw.svg",
-      tools: ["API References", "Guides", "Changelog",],
+      tools: ["API References", "Guides", "Changelog"],
       extraCount: 12,
       name: "Outputs"
     }
   ];
 
+  // keep toggle state for each toolSet
+  const [toggles, setToggles] = useState(toolSets.map(() => true));
+
+  const toggleSwitch = (index) => {
+    setToggles((prev) =>
+      prev.map((t, i) => (i === index ? !t : t))
+    );
+  };
+
   const DashedLine = ({ className, vertical = false }) => (
-    <div className={`${className} ${vertical ? 'w-px h-full' : 'h-px w-full'}`}>
+    <div className={`${className} ${vertical ? "w-px h-full" : "h-px w-full"}`}>
       <svg
         className="w-full h-full"
         viewBox={vertical ? "0 0 1 100" : "0 0 100 1"}
@@ -123,23 +156,21 @@ const MCPToolsInterface = () => {
   );
 
   const ConnectionCross = ({ className }) => (
-    <div className={`absolute ${className} w-3 h-3 flex items-center justify-center`}>
-      {/* Horizontal line */}
+    <div
+      className={`absolute ${className} w-3 h-3 flex items-center justify-center`}
+    >
       <div className="absolute w-3 h-px bg-white/15"></div>
-      {/* Vertical line */}
       <div className="absolute w-px h-3 bg-white/15"></div>
     </div>
   );
 
   return (
-    <div className="relative w-full max-w-lg mx-auto p-4 text-white">
-      {/* Main container with grid structure */}
+    <div className="relative w-full max-w-lg mx-auto p-4 text-white -mb-10">
       <div className="relative">
-
         {/* Horizontal dashed lines */}
         <DashedLine className="absolute top-8 left-0 right-0" />
-        <DashedLine className="absolute top-24 left-0 right-0" />
-        <DashedLine className="absolute bottom-8 left-0 right-0" />
+        <DashedLine className="absolute top-[120px] left-0 right-0" />
+        <DashedLine className="absolute bottom-4 left-0 right-0" />
 
         {/* Vertical dashed lines */}
         <DashedLine className="absolute left-8 top-0 bottom-0" vertical />
@@ -155,53 +186,70 @@ const MCPToolsInterface = () => {
 
         {/* Tool sections */}
         <div className="space-y-8 py-8">
-          {toolSets.map((toolSet, index) => (
-            <div key={index} className="px-12">
-
-              {/* Header with logo, "Tools:" text and toggle */}
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center space-x-3">
-                  <div className="w-6 h-6 rounded-sm overflow-hidden bg-gray-800 border border-gray-700 flex items-center justify-center">
-                    <img
-                      src={toolSet.logo}
-                      alt="Service logo"
-                      className="w-4 h-4 object-contain filter brightness-0 invert"
-                    />
+          {toolSets.map((toolSet, index) => {
+            const isActive = toggles[index];
+            return (
+              <div key={index} className="px-10">
+                {/* Header with logo + toggle */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-6 h-6 rounded-sm overflow-hidden bg-gray-800 border border-gray-700 flex items-center justify-center">
+                      <img
+                        src={toolSet.logo}
+                        alt="Service logo"
+                        className="w-4 h-4 object-contain filter brightness-0 invert"
+                      />
+                    </div>
+                    <span className="text-sm text-gray-400 font-medium">
+                      {toolSet.name}
+                    </span>
                   </div>
-                  <span className="text-sm text-gray-400 font-medium">{toolSet.name}</span>
-                </div>
 
-                {/* Toggle switch - enabled state */}
-                <div className="relative">
-                  <div className="w-11 h-6 bg-emerald-500 rounded-full shadow-sm flex items-center justify-end px-0.5 transition-colors duration-200">
-                    <div className="w-5 h-5 bg-white rounded-full shadow-md transition-transform duration-200"></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tools row */}
-              <div className="flex items-center space-x-2 flex-wrap">
-                {toolSet.tools.map((tool, toolIndex) => (
+                  {/* Toggle switch */}
                   <div
-                    key={toolIndex}
-                    className="bg-gray-800 border border-gray-700 rounded px-3 py-1.5 text-white text-sm font-mono whitespace-nowrap"
+                    className={`relative cursor-pointer`}
+                    onClick={() => toggleSwitch(index)}
                   >
-                    {tool}
+                    <div
+                      className={`w-11 h-6 rounded-full shadow-sm flex items-center px-0.5 transition-colors duration-200
+                        ${isActive ? "bg-emerald-500 justify-end" : "bg-gray-600 justify-start"}`}
+                    >
+                      <div
+                        className={`w-5 h-5 bg-white rounded-full shadow-md transition-transform duration-200`}
+                      ></div>
+                    </div>
                   </div>
-                ))}
+                </div>
 
-                {/* Extra tools count */}
-                <div className="text-gray-400 text-sm font-medium ml-1">
-                  +{toolSet.extraCount}
+                {/* Tools row */}
+                <div
+                  className={`flex items-center space-x-2 flex-wrap transition-opacity duration-300 ${
+                    isActive ? "opacity-100" : "opacity-40 grayscale"
+                  }`}
+                >
+                  {toolSet.tools.map((tool, toolIndex) => (
+                    <div
+                      key={toolIndex}
+                      className="bg-gray-800 border border-gray-700 rounded px-3 py-1.5 text-white text-sm font-mono whitespace-nowrap"
+                    >
+                      {tool}
+                    </div>
+                  ))}
+
+                  <div className="text-gray-400 text-sm font-medium ml-1">
+                    +{toolSet.extraCount}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
   );
 };
+
+
 
 const circle1 = [
   "https://framerusercontent.com/images/GzVxBdDoT8WYQfEz3RZpgt4tyIs.svg",
@@ -316,3 +364,41 @@ function OrbitLogos() {
     </div>
   );
 }
+
+
+const Pill = ({ label, iconUrl, isPattern = false, isSelected = false }) => {
+  return (
+    <div className="relative inline-block m-1">
+      <div
+        className={`rounded-md px-2 py-1 flex items-center gap-1.5 transition-all duration-200
+          bg-gradient-to-b from-gray-800 to-gray-900
+          shadow-[0_0_0_1px_rgba(171,171,171,0.25),0_1px_2px_0_rgba(0,0,0,0.15),0_2px_5px_-1px_rgba(0,0,0,0.08),0_4px_8px_0_rgba(0,0,0,0.1)]
+          dark:shadow-[0_0_0_1px_rgba(75,85,99,0.5),0_1px_2px_0_rgba(0,0,0,0.25),0_2px_5px_-1px_rgba(0,0,0,0.2),0_4px_8px_0_rgba(0,0,0,0.3)]`}
+      >
+        <div className="w-4 h-4 relative flex-shrink-0">
+          {isPattern ? (
+            <div
+              className="absolute inset-0 bg-repeat bg-left-top bg-[length:64px_auto] opacity-100"
+              style={{
+                backgroundImage: `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="126" height="126"><path id="a" d="M126 0v21.584L21.584 126H0v-17.585L108.415 0H126Zm0 108.414V126h-17.586L126 108.414Zm0-84v39.171L63.585 126H24.414L126 24.414Zm0 42v39.17L105.584 126h-39.17L126 66.414ZM105.586 0 0 105.586V66.415L66.415 0h39.171Zm-42 0L0 63.586V24.415L24.415 0h39.171Zm-42 0L0 21.586V0h21.586Z" fill="rgb(136,136,136,0.2)" fill-rule="evenodd"/></svg>')`,
+              }}
+            />
+          ) : iconUrl ? (
+            <img
+              src={iconUrl}
+              alt=""
+              className="w-full h-full object-contain"
+            />
+          ) : null}
+        </div>
+        <p className="text-xs font-medium text-gray-200 whitespace-nowrap">
+          {label}
+        </p>
+      </div>
+      <div
+        className={`absolute -inset-0.5 rounded-full shadow-[0_1px_7px_4px_rgb(57,209,140)] transition-opacity duration-200
+          ${isSelected ? 'opacity-100' : 'opacity-0'}`}
+      />
+    </div>
+  );
+};
