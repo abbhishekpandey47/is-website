@@ -31,7 +31,7 @@ const posts = [
 
 export default function BlogSection() {
   return (
-  <section className="max-w-6xl mx-auto px-6 flex flex-col items-center">
+<section className="max-w-6xl mx-auto px-6">
   <div className="w-full">
     {/* Header */}
     <div className="flex flex-row justify-between items-center gap-4 flex-wrap w-full">
@@ -45,16 +45,16 @@ export default function BlogSection() {
         <h2
           role="heading"
           aria-level="2"
-          className="font-light text-[32px] xxs:text-[40px] xs:text-[52px] leading-[120%] tracking-[-1%] text-white"
+          className="font-[quicksand] text-[32px] xxs:text-[40px] xs:text-[52px] leading-[120%] tracking-[-1%] text-white"
         >
-          Latest news
+          Latest Blog
         </h2>
       </div>
 
       {/* Desktop CTA */}
       <div className="hidden md:block">
         <Link href="/blog">
-          <button className="rounded-xl inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors border border-white bg-transparent text-white hover:text-gray-900 text-[15px] px-4 py-2">
+          <button className="rounded-xl inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors border border-white bg-transparent text-white hover:text-gray-300 text-[15px] px-4 py-2">
             View all
           </button>
         </Link>
@@ -62,38 +62,48 @@ export default function BlogSection() {
     </div>
 
     {/* Blog Grid */}
-    <div className="mt-8">
-  <div className="grid border-[rgba(255,255,255,0.14)] mb-6 border-b border-t md:mx-0 w-[calc(100%+3rem)] md:w-full md:auto-cols-fr gap-10 md:grid-flow-col">
-    {posts.map((post, index) => (
-      <div
-        key={index}
-        className={`flex flex-col items-center border-[rgba(255,255,255,0.14)] pt-10 pb-10 gap-20 justify-between w-full bg-[#0E1416] 
-          ${index < 2 ? "border-r" : ""}`}
-      >
-            <Link
-              href={post.href}
-              className="flex flex-col gap-6 h-full justify-between"
-            >
-              <div className="flex flex-col gap-6 text-center md:text-left">
-                <span className="text-gray-500">{post.date}</span>
-                <h3 className="overflow-hidden text-ellipsis text-pretty text-white">
-                  {post.title}
-                </h3>
-              </div>
-              <div className="w-full aspect-[7/4] rounded-2xl overflow-hidden">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  width={600}
-                  height={400}
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-            </Link>
+  <div className="relative mt-8 border-y border-[rgba(255,255,255,0.14)]">
+ <span
+      aria-hidden
+      className="hidden md:block pointer-events-none absolute inset-y-0 left-[32%] w-px bg-[rgba(255,255,255,0.14)]"
+    />
+    <span
+      aria-hidden
+      className="hidden md:block pointer-events-none absolute inset-y-0 left-[68%] w-px bg-[rgba(255,255,255,0.14)]"
+    />
+
+    <div className="grid md:grid-cols-3 gap-20">
+      {posts.map((post, i) => (
+        <div
+          key={i}
+          className="flex flex-col items-center py-10 pb-10 gap-20 justify-between w-full bg-[#0E1416]"
+        >
+      
+        <Link
+          href={post.href}
+          className="flex flex-col gap-6 h-full justify-between"
+        >
+          <div className="flex flex-col gap-6 text-center md:text-left">
+            <span className="text-gray-500">{post.date}</span>
+            <h3 className="overflow-hidden text-ellipsis text-pretty text-white">
+              {post.title}
+            </h3>
           </div>
-        ))}
+          <div className="w-full aspect-[7/4] rounded-2xl overflow-hidden">
+            <Image
+              src={post.image}
+              alt={post.title}
+              width={600}
+              height={400}
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
+        </Link>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
+
 
     {/* Mobile CTA */}
     <div className="block md:hidden mt-6 justify-center">
