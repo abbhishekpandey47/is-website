@@ -1,43 +1,28 @@
 "use client";
-import React, { useState, useEffect, useContext, useMemo } from "react";
 import { ArrowRightOutlined, PlayCircleOutlined } from "@ant-design/icons";
+import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
-import Link from "next/link";
+import { Suspense, useContext, useEffect, useMemo, useState } from "react";
 import _videometadata from "../../../../services-data/_videoMetadata.js";
 import SaasGlassyBoxes from "./whychooseus.jsx";
 
 import AppContext from "@/context/Infracontext";
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "../../../Components/ui/pagination.jsx";
-import ReadyToStart from "@/Components/HomePage/ReadyToStart";
-import HowWorks from "@/Components/HomePage/HowWorks";
-import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";
-import { MarqueeDemo } from "./MarqueeData.jsx";
+import { CustomEase, ScrollTrigger } from "gsap/all";
+import BookDemo from "../../book-a-demo/cta.jsx";
+import CalendarBooking from "../../calendarButton.jsx";
+import DarkGlass from "./caseStudy.jsx";
+import FAQSection from "./FAQ.jsx";
+import PeopleFocused from "./peopleFocused.jsx";
+import RecentWork from "./recent-work.jsx";
+import ScriptGen from "./scriptGen.jsx";
 import Services from "./services.jsx";
 import ScrutGettingStarted from "./step.jsx";
-import TrustedBySection from "./TrustedBySection.jsx";
-import YouTubeCarousel from "./videoSection.jsx";
-import BookDemo from "../../book-a-demo/cta.jsx";
-import FAQSection from "./FAQ.jsx";
-import DarkGlass from "./caseStudy.jsx";
 import TestimonialSlider from "./testimonials.jsx";
-import ContactForm from "./calendlyButton.jsx";
-import CalendarBooking from "../../calendarButton.jsx";
-import ClutchBadge from "./clutch.jsx";
+import TrustedBySection from "./TrustedBySection.jsx";
 import Video from "./video.jsx";
-import RecentWork from "./recent-work.jsx";
-import PeopleFocused from "./peopleFocused.jsx";
-import ScriptGen from "./scriptGen.jsx";
+import YouTubeCarousel from "./videoSection.jsx";
 import WorkflowLandingSection from "./WorkflowLandingSection.jsx";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
@@ -494,8 +479,8 @@ const page = () => {
 
           <Video />
         </div>
-        
-        
+
+
         <div
         className="flex flex-col gap-10 mt-24"
         style={{
@@ -634,4 +619,10 @@ const page = () => {
     </div>
   );
 };
-export default page;
+export default function PageWithSuspense(props) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <page {...props} />
+    </Suspense>
+  );
+}

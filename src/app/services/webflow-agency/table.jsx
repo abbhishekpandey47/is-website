@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import CalendlyButton from "../tech-video-production/calendlyButton";
 import Image from "next/image";
-import logo from "/public/webflow-age/logo/infrasity_logo.png";
+import { useEffect } from "react";
+// Use root-relative path for public asset
+const logo = "/webflow-age/logo/infrasity_logo.png";
 
 export default function Webtable() {
   useEffect(() => {

@@ -1,34 +1,33 @@
 "use client";
-import React, {
-  useEffect,
-  useState,
-  useContext,
-  Suspense,
-  useMemo,
-  useCallback,
-} from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import React, {
+    Suspense,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
+} from "react";
 
 import AppContext from "@/context/Infracontext";
 
 import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
 } from "../../Components/ui/pagination";
 
 import { useSearchParams } from "next/navigation";
 import NewsletterBlogs from "./NewsletterBlogs";
 
-import postMetaData from "../../../posts/_postMetadata";
-import authorData from "../../../posts/_authorData";
 import Image from "next/image";
-import { responsiveArray } from "antd/es/_util/responsiveObserver";
+import authorData from "../../../posts/_authorData";
+import postMetaData from "../../../posts/_postMetadata";
 
 let tabs = [
   { id: "allCategories", label: "All Categories" },
@@ -365,4 +364,10 @@ const page = () => {
   );
 };
 
-export default page;
+export default function BlogPageWithSuspense(props) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <page {...props} />
+    </Suspense>
+  );
+}

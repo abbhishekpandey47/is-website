@@ -3,10 +3,10 @@ import React, {
   useEffect,
   useState,
   useContext,
-  Suspense,
   useMemo,
   useCallback,
 } from "react";
+import { Suspense } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -274,4 +274,10 @@ const page = () => {
   );
 };
 
-export default page;
+export default function CaseStudiesPageWithSuspense(props) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <page {...props} />
+    </Suspense>
+  );
+}

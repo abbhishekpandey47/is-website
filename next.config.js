@@ -1,7 +1,4 @@
 module.exports = {
-    experimental: {
-        missingSuspenseWithCSRBailout: false,
-    },
     images: {
         remotePatterns: [
             {

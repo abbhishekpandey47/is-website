@@ -1,13 +1,14 @@
-import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
-import css5 from "/public/webflow-age/thecss/css1.png";
-import css4 from "/public/webflow-age/thecss/css6.png";
-import css3 from "/public/webflow-age/thecss/css3.png";
-import css1 from "/public/webflow-age/thecss/css4.png";
-import css2 from "/public/webflow-age/thecss/css5.png";
-import css6 from "/public/webflow-age/thecss/css2.png";
+// Use root-relative paths for public assets
+const css5 = "/webflow-age/thecss/css1.png";
+const css4 = "/webflow-age/thecss/css6.png";
+const css3 = "/webflow-age/thecss/css3.png";
+const css1 = "/webflow-age/thecss/css4.png";
+const css2 = "/webflow-age/thecss/css5.png";
+const css6 = "/webflow-age/thecss/css2.png";
 
 export default function ServiceCardCarousel() {
   const serviceCards = [
