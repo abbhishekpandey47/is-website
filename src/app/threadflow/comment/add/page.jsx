@@ -44,6 +44,7 @@ const AddPostPage = () => {
     targetedSubreddit: "",
     postURL: "",
     redditUsername: "",
+    postedCommentStatus: "underModeration",
   });
 
   useEffect(() => {
@@ -378,7 +379,7 @@ useEffect(() => {
                 </div>
 
                  <div>
-                  <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Client Feedback</Label>
+                  <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Customer Comments</Label>
                   <Textarea
                     id="clientFeedback"
                     value={formData.clientFeedback}
@@ -413,20 +414,20 @@ useEffect(() => {
                   </div>
 
                   <div>
-                    <Label htmlFor="status">Comment Approval Status</Label>
+                    <Label htmlFor="status">Client Approval Status</Label>
                     <Select value={formData.status} onValueChange={(value) => handleInputChange("status", value)}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="live">Live</SelectItem>
-                        <SelectItem value="deleted">Deleted</SelectItem>
-                        <SelectItem value="reuploaded">Reuploaded </SelectItem>
-                        <SelectItem value="pending">Pending</SelectItem>
+                         <SelectItem value="approved">Approved</SelectItem>
+                          <SelectItem value="notApproved">Not Approved</SelectItem>
+                          <SelectItem value="pending">Pending</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                 <div>
                   <Label htmlFor="postedLink">Comment URL</Label>
@@ -438,6 +439,23 @@ useEffect(() => {
                     placeholder="Direct link to the posted content"
                   />
                 </div>
+                <div>
+                      <Label htmlFor="postedCommentStatus">Posted Comment Status</Label>
+                      <Select
+                        value={formData.postedCommentStatus}
+                        onValueChange={(value) => handleInputChange("postedCommentStatus", value)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="live">Live</SelectItem>
+                          <SelectItem value="removed">Removed </SelectItem>
+                          <SelectItem value="underModeration">Under Moderation</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    </div>
 
                 {/* Action Buttons */}
                 <div className="flex items-center justify-end gap-3 pt-8 border-t border-border/50">
