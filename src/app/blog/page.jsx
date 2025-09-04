@@ -32,38 +32,55 @@ import postMetaData from "../../../posts/_postMetadata";
 let tabs = [
   { id: "allCategories", label: "All Categories" },
   { id: "Informational", label: "Informational" },
-  { id: "Tutorials", label: "Tutorials" },
-  // { id: "B2B SaaS- Content Marketing", label: "B2B SaaS- Content Marketing" },
-  // { id: "B2B SaaS Growth & GTM", label: "B2B SaaS Growth & GTM" },
-  // { id: "Reddit Marketing B2B SaaS", label: "Reddit Marketing B2B SaaS" },
-  // { id: "Tech Video Marketing", label: "Tech Video Marketing" },
+  { id: "B2B SaaS- Content Marketing", label: "B2B SaaS- Content Marketing" },
+  { id: "B2B SaaS Growth & GTM", label: "B2B SaaS Growth & GTM" },
+  { id: "Reddit Marketing B2B SaaS", label: "Reddit Marketing B2B SaaS" },
+  { id: "Tech Video Marketing", label: "Tech Video Marketing" },
 ];
 
 const TabDiv = React.memo(({ activeTab, setActiveTab }) => (
-  <div className="flex space-x-1">
+  <div className="flex flex-wrap gap-4 max-w-7xl mx-auto justify-center">
     {tabs.map((tab) => (
       <button
         key={tab.id}
         onClick={() => setActiveTab(tab.id)}
-        className={`max-sm:w-full ${
-          activeTab === tab.id ? "" : "hover:text-white/60"
-        }
-                    relative rounded-full px-6 py-2.5 max-sm:py-1 max-sm:px-1 max-sm:text-xs text-sm quicksand-light text-white outline-sky-400 transition focus-visible:outline-1`}
+        className={`relative group px-3 py-3 text-sm font-medium rounded-lg transition-all duration-300 ease-out
+          ${activeTab === tab.id 
+            ? 'text-white shadow-lg scale-105' 
+            : 'text-gray-300 hover:text-white hover:scale-102'
+          }
+          focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50
+          backdrop-blur-sm border border-white/20 hover:border-white/40
+          min-w-max whitespace-nowrap
+        `}
         style={{ WebkitTapHighlightColor: "transparent" }}
       >
         {activeTab === tab.id && (
-          <motion.span
-            layoutId="bubble"
-            className="absolute inset-0 z-10 bg-white mix-blend-difference"
-            style={{ borderRadius: 9999 }}
-            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+          <motion.div
+            layoutId="activeTab"
+            className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-xl"
+            transition={{ 
+              type: "spring", 
+              bounce: 0.15, 
+              duration: 0.5 
+            }}
           />
         )}
-        {tab.label}
+        <span className="relative z-10 flex items-center gap-2">
+          {tab.label}
+          {activeTab === tab.id && (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="w-2 h-2 bg-white rounded-full"
+            />
+          )}
+        </span>
       </button>
     ))}
   </div>
 ));
+
 
 const monthArr = [
   "January",
@@ -295,8 +312,8 @@ const BlogPage = () => {
           />
         </label>
       </div>
-      <div className="w-full flex justify-center pt-20 pb-10 text-white">
-        <div className="p-2 py-1 border-[#fff] border-2 rounded-full max-sm:w-[90%]">
+       <div className="w-full flex justify-center pt-20 pb-10">
+        <div className="p-2 bg-black/20 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl max-w-7xl w-full mx-4">
           <TabDiv activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
       </div>

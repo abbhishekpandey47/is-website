@@ -117,7 +117,7 @@ let postMetaData = [
         ogImage: "/PostImages/the-9-steps-to-write-a-case-study-a-complete-guide/0.png",
         publishedOn: "2024-10-14",
         authorId: "author0001",
-        category: "Tutorials",
+        category: "Informational",
         metaDescription: "Discover the 9 essential steps to writing a compelling case study. Learn how to highlight the impact of your product or service in a real-world scenario."
     },
     {
@@ -271,7 +271,7 @@ let postMetaData = [
         ogImage: "https://images.surferseo.art/785c638b-e8f1-43cb-946c-629934567d0e.png",
         publishedOn: "2024-12-16",
         authorId: "author0001",
-        category: "Tutorials",
+        category: "Informational",
         metaDescription: "Learn how to create and customize a blog with Webflow's no-code CMS platform. Discover its dynamic content management, design tools, SEO features, and why it's a great alternative to WordPress for bloggers and designers."
     },
     {

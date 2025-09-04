@@ -1,5 +1,6 @@
 module.exports = {
     images: {
+         domains: ["cdn.prod.website-files.com", "framerusercontent.com", "images.surferseo.art"],
         remotePatterns: [
             {
                 protocol: 'https',
