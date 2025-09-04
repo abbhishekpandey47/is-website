@@ -138,7 +138,46 @@ const PostsPage = () => {
     );
   };
 
+  const getStatusCounts2 = () => {
+  let itemsToCount = allItems;
+  if (selectedType !== "all") {
+    itemsToCount = allItems.filter(item => item.type === selectedType);
+  }
+
+  return itemsToCount.reduce(
+    (acc, item) => {
+      if (item.type === "post") {
+        // ✅ posts use post.status
+        if (item.status?.toLowerCase() === "live") {
+          acc.live = (acc.live || 0) + 1;
+        } else if (item.status?.toLowerCase() === "removed") {
+          acc.rejected = (acc.rejected || 0) + 1;
+        } else {
+          acc[item.status] = (acc[item.status] || 0) + 1;
+        }
+      } else if (item.type === "comment") {
+        // ✅ comments use posted_comment_status
+        const commentStatus = item.posted_comment_status?.toLowerCase();
+        if (commentStatus === "live") {
+          acc.live = (acc.live || 0) + 1;
+        } else if (commentStatus === "removed") {
+          acc.rejected = (acc.rejected || 0) + 1;
+        } else if (commentStatus === "undermoderation") {
+          acc.pending = (acc.pending || 0) + 1;
+        } else {
+          acc[item.status] = (acc[item.status] || 0) + 1;
+        }
+      }
+      return acc;
+    },
+    { approved: 0, pending: 0, rejected: 0, live: 0 }
+  );
+};
+
+
   const statusCounts = getStatusCounts();
+    const statusCounts2 = getStatusCounts2();
+
 
   const getStatusBadge = (status) => {
   const statusColors = {
@@ -226,7 +265,8 @@ const PostsPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <StatusCard status="approved" count={statusCounts.approved} label="Approved" />
           <StatusCard status="pending" count={statusCounts.pending} label="Pending" />
-          <StatusCard status="live" count={statusCounts.live} label="Live" />
+          <StatusCard status="live" count={statusCounts2.live} label="Live" />
+          <StatusCard status="rejected" count={statusCounts2.rejected} label="Removed" />
         </div>
 
         {/* Filters */}
@@ -268,7 +308,7 @@ const PostsPage = () => {
               </Select>
 
               {/* Status Filter */}
-              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+              {/* <Select value={selectedStatus} onValueChange={setSelectedStatus}>
                 <SelectTrigger className="w-32">
                   <SelectValue placeholder="All Status" />
                 </SelectTrigger>
@@ -279,7 +319,7 @@ const PostsPage = () => {
                     </SelectItem>
                   ))}
                 </SelectContent>
-              </Select>
+              </Select> */}
             </div>
           </CardContent>
         </Card>
