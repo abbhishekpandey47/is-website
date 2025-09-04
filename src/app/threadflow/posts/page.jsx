@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { Badge } from "../../../Components/ui/badge";
 import { Button } from "../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../Components/ui/card";
@@ -15,6 +16,10 @@ import { Plus, Search, ExternalLink, Edit, Trash2, Save, X } from "lucide-react"
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
 import { useToast } from "@/hooks/use-toast";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
+import { cn } from "@/lib/utils";
+
 
 const PostsPage = () => {
   const router = useRouter();
@@ -195,8 +200,12 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
   const handleEditSubmit = async (e) => {
     e.preventDefault();
 
-    if (!editFormData.category || !editFormData.title || !editFormData.url) {
-      toast.error("Please fill in category, title, and URL fields.");
+    if (!editFormData.category || !editFormData.title) {
+         toast({
+      title: "Error",
+      description: "Please fill in category, title, and URL fields",
+      variant: "destructive",
+    });
       return;
     }
 
@@ -232,11 +241,19 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
         )
       );
 
-      toast.success("Post updated successfully!");
+      toast({
+        title: "Success",
+        description: "Post updated successfully",
+        variant: "default",
+      });
       closeEditModal();
     } catch (err) {
       console.error("Error updating post:", err);
-      toast.error(err.message);
+         toast({
+      title: "Error",
+      description: err.message,
+      variant: "destructive",
+    });
     }
   };
 
@@ -432,11 +449,13 @@ if (loading) {
                         </a>
                       </TableCell>
                       <TableCell>{getStatusBadge(post.status)}</TableCell>
-                      <TableCell className="max-w-sm">
-                        <div className="text-sm text-muted-foreground line-clamp-3">
-                          {post.engagement_text}
-                        </div>
-                      </TableCell>
+                     <TableCell className="max-w-sm">
+  <div
+    className="text-sm text-muted-foreground line-clamp-3"
+    dangerouslySetInnerHTML={{ __html: post.engagement_text }}
+  />
+</TableCell>
+
                       <TableCell className="text-sm">
                         {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
                       </TableCell>
@@ -579,7 +598,7 @@ if (loading) {
                   </div>
 
                   <div>
-                    <Label htmlFor="edit-url">URL *</Label>
+                    <Label htmlFor="edit-url">URL</Label>
                     <Input
                       id="edit-url"
                       type="url"
@@ -590,16 +609,55 @@ if (loading) {
                   </div>
 
                   {/* Content */}
-                  <div>
-                    <Label htmlFor="edit-engagementText">Engagement Text</Label>
-                    <Textarea
-                      id="edit-engagementText"
-                      value={editFormData.engagementText}
-                      onChange={(e) => handleEditInputChange("engagementText", e.target.value)}
-                      placeholder="Original engagement text for the post"
-                      rows={4}
-                    />
-                  </div>
+                    <div>
+                                   <Label
+                                     htmlFor="engagementText"
+                                     className="text-sm font-medium mb-2 block"
+                                   >
+                                     Body Text
+                                   </Label>
+                                   <div
+                                     className={cn(
+                                       "flex w-full rounded-md border border-input bg-transparent shadow-sm transition-colors",
+                                       "focus-within:outline-none focus-within:ring-1 focus-within:ring-ring"
+                                     )}
+                                   >
+                                     <ReactQuill
+                                       id="engagementText"
+                                       value={editFormData.engagementText}
+                                       onChange={(content) => handleEditInputChange("engagementText", content)}
+                                       placeholder="Enter your Body Text or comment for this Reddit post..."
+                                       modules={{
+                                         toolbar: [
+                                           ["bold", "italic", "underline"],
+                                           [{ list: "ordered" }, { list: "bullet" }],
+                                           ["link"],
+                                         ],
+                                       }}
+                                       className={cn(
+                                         "w-full",
+                 
+                                         "[&_.ql-toolbar]:!border-none [&_.ql-container]:!border-none",
+                 
+                                         "[&_.ql-toolbar]:bg-transparent [&_.ql-container]:bg-transparent",
+                                         "[&_.ql-editor]:min-h-[120px] [&_.ql-editor]:pt-2 [&_.ql-editor]:px-3",
+                                         "[&_.ql-editor]:text-sm [&_.ql-editor]:text-foreground",
+                                         "[&_.ql-editor.ql-blank::before]:text-muted-foreground",
+                 
+                                         "[&_.ql-toolbar_button]:text-muted-foreground [&_.ql-toolbar_button:hover]:text-foreground",
+                 
+                                         "[&_.ql-tooltip]:!bg-neutral-900 [&_.ql-tooltip]:!text-white [&_.ql-tooltip]:!border [&_.ql-tooltip]:!border-neutral-700",
+                 
+                                         "[&_.ql-tooltip_input]:!bg-neutral-800 [&_.ql-tooltip_input]:!text-white [&_.ql-tooltip_input]:!placeholder-gray-400 [&_.ql-tooltip_input]:!border [&_.ql-tooltip_input]:!border-neutral-700",
+                 
+                                         "[&_.ql-tooltip] button:!text-white [&_.ql-tooltip] button:hover:!text-blue-400"
+                                       )}
+                                     />
+                                   </div>
+                                   <p className="text-xs text-muted-foreground mt-1">
+                                     This will be your response or engagement with the Reddit post
+                                   </p>
+                                 </div>
 
                   {/* Tracking Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

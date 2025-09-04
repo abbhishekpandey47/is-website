@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Button } from "../../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../../Components/ui/card";
 import { Input } from "../../../../Components/ui/input";
@@ -14,7 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabaseClient";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
-import ReactQuill from "react-quill";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import { cn } from "@/lib/utils";
 
