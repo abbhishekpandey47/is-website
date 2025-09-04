@@ -3,8 +3,9 @@ import { ConfigProvider } from 'antd';
 import { headers } from 'next/headers';
 
 
-export default function Home() {
-    const headersList = headers();
+
+export default async function Home() {
+    const headersList = await headers();
     const userAgent = headersList.get('user-agent') || '';
 
     const url = '/';

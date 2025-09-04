@@ -1,4 +1,3 @@
-import React from 'react';
 
 const ServiceCard = ({ icon, title, description }) => {
     return (
@@ -64,8 +63,8 @@ const RedditServiceCards = () => {
                         The Quiet Reddit System Refined Across 30+ {" "}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>Breakout Startups</span>
                     </h2>
                 </div>
-                <div class="flex justify-center my-6 mb-8">
-                    <div class="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
+                <div className="flex justify-center my-6 mb-8">
+                    <div className="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
                 </div>
 
                 {/* Description */}

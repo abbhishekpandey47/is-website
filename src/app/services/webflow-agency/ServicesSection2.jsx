@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from "react";
-import img1 from "/public/webflow-age/devs/dev1.png";
-import img2 from "/public/webflow-age/devs/dev2.png";
-import img3 from "/public/webflow-age/devs/dev3.png";
-import img4 from "/public/webflow-age/devs/dev4.png";
-import img5 from "/public/webflow-age/devs/dev5.png";
-import img6 from "/public/webflow-age/devs/dev6.png";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+// Use root-relative paths for public assets
+const img1 = "/webflow-age/devs/dev1.png";
+const img2 = "/webflow-age/devs/dev2.png";
+const img3 = "/webflow-age/devs/dev3.png";
+const img4 = "/webflow-age/devs/dev4.png";
+const img5 = "/webflow-age/devs/dev5.png";
+const img6 = "/webflow-age/devs/dev6.png";
 
 export default function ScrollingServicesSection() {
   const [activeSection, setActiveSection] = useState("web");

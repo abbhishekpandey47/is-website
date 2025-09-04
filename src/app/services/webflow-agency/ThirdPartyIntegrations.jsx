@@ -1,14 +1,15 @@
 "use client";
 import Image from "next/image";
-import icon1 from "/public/webflow-age/icons/icon1.png";
-import icon2 from "/public/webflow-age/icons/icon2.png";
-import icon3 from "/public/webflow-age/icons/icon3.png";
-import icon4 from "/public/webflow-age/icons/make.png";
-import icon5 from "/public/webflow-age/icons/icon5.png";
-import icon6 from "/public/webflow-age/icons/icon6.png";
-import icon7 from "/public/webflow-age/icons/icon7.png";
-import icon9 from "/public/webflow-age/icons/icon9.png";
-import icon10 from "/public/webflow-age/icons/icon10.png";
+// Use root-relative paths for public assets
+const icon1 = "/webflow-age/icons/icon1.png";
+const icon2 = "/webflow-age/icons/icon2.png";
+const icon3 = "/webflow-age/icons/icon3.png";
+const icon4 = "/webflow-age/icons/make.png";
+const icon5 = "/webflow-age/icons/icon5.png";
+const icon6 = "/webflow-age/icons/icon6.png";
+const icon7 = "/webflow-age/icons/icon7.png";
+const icon9 = "/webflow-age/icons/icon9.png";
+const icon10 = "/webflow-age/icons/icon10.png";
 
 const contentItems = [
   { title: "Zapier", icon: icon1 },

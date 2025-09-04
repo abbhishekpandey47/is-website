@@ -1,5 +1,4 @@
-import React from "react";
-import { Monitor, Users, MessageCircle, Shield } from "lucide-react";
+import { MessageCircle, Monitor, Shield, Users } from "lucide-react";
 
 export default function AIChallengesSection() {
     const challenges = [
@@ -36,8 +35,8 @@ export default function AIChallengesSection() {
                     </h2>
                 </div>
 
-                <div class="flex justify-center my-6 mb-8">
-                    <div class="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
+                <div className="flex justify-center my-6 mb-8">
+                    <div className="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
                 </div>
 
                 {/* Description */}
