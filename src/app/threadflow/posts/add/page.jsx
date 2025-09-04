@@ -14,6 +14,10 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabaseClient";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { cn } from "@/lib/utils";
+
 
 const AddPostPage = () => {
   const [firebaseUser, setFirebaseUser] = useState(null);
@@ -143,31 +147,31 @@ const AddPostPage = () => {
   };
 
   useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, async (user) => {
-    setFirebaseUser(user);
-    setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setFirebaseUser(user);
+      setLoading(false);
 
-    if (!user) {
-      router.push("/auth/signin");
-    } else {
-      try {
-        const res = await fetch(`/api/posts?categories=true&userId=${user.uid}`);
-        const result = await res.json();
+      if (!user) {
+        router.push("/auth/signin");
+      } else {
+        try {
+          const res = await fetch(`/api/posts?categories=true&userId=${user.uid}`);
+          const result = await res.json();
 
-        if (res.ok && result.categories) {
-          setCategories((prev) => {
-            const merged = [...prev, ...result.categories];
-            return [...new Set(merged.map((c) => c.trim()))]; 
-          });
+          if (res.ok && result.categories) {
+            setCategories((prev) => {
+              const merged = [...prev, ...result.categories];
+              return [...new Set(merged.map((c) => c.trim()))];
+            });
+          }
+        } catch (err) {
+          console.error("Failed to fetch categories:", err);
         }
-      } catch (err) {
-        console.error("Failed to fetch categories:", err);
       }
-    }
-  });
+    });
 
-  return () => unsubscribe();
-}, [router]);
+    return () => unsubscribe();
+  }, [router]);
 
 
   if (loading) return <p>Loading...</p>;
@@ -219,29 +223,29 @@ const AddPostPage = () => {
                         <SelectTrigger className="h-10">
                           <SelectValue placeholder="Choose a category" />
                         </SelectTrigger>
-                       <SelectContent className="max-h-60">
-  {categories.length > 0 && (
-    <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground border-b border-border/50 mb-1">
-      Recommended Categories
-    </div>
-  )}
-  {categories.map((category) => (
-    <SelectItem key={category} value={category} className="py-2">
-      <div className="flex items-center gap-2">
-        <div className="w-2 h-2 bg-primary/60 rounded-full"></div>
-        {category}
-      </div>
-    </SelectItem>
-  ))}
-  <div className="border-t border-border/50 mt-1 pt-1">
-    <SelectItem value="add-new" className="text-primary font-medium py-2">
-      <div className="flex items-center gap-2">
-        <Plus className="h-4 w-4" />
-        Create New Category
-      </div>
-    </SelectItem>
-  </div>
-</SelectContent>
+                        <SelectContent className="max-h-60">
+                          {categories.length > 0 && (
+                            <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground border-b border-border/50 mb-1">
+                              Recommended Categories
+                            </div>
+                          )}
+                          {categories.map((category) => (
+                            <SelectItem key={category} value={category} className="py-2">
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-primary/60 rounded-full"></div>
+                                {category}
+                              </div>
+                            </SelectItem>
+                          ))}
+                          <div className="border-t border-border/50 mt-1 pt-1">
+                            <SelectItem value="add-new" className="text-primary font-medium py-2">
+                              <div className="flex items-center gap-2">
+                                <Plus className="h-4 w-4" />
+                                Create New Category
+                              </div>
+                            </SelectItem>
+                          </div>
+                        </SelectContent>
 
                       </Select>
 
@@ -331,16 +335,16 @@ const AddPostPage = () => {
                   </div>
                 </div>
 
-                  <div>
-                                  <Label htmlFor="redditUsername" className="text-sm font-medium mb-2 block">Reddit Username</Label>
-                                  <Input
-                                    id="redditUsername"
-                                    value={formData.redditUsername}
-                                    onChange={(e) => handleInputChange("redditUsername", e.target.value)}
-                                    placeholder="Enter the Reddit Username"
-                                    className="h-10"
-                                  />
-                                </div>
+                <div>
+                  <Label htmlFor="redditUsername" className="text-sm font-medium mb-2 block">Reddit Username</Label>
+                  <Input
+                    id="redditUsername"
+                    value={formData.redditUsername}
+                    onChange={(e) => handleInputChange("redditUsername", e.target.value)}
+                    placeholder="Enter the Reddit Username"
+                    className="h-10"
+                  />
+                </div>
 
                 <div>
                   <Label htmlFor="title" className="text-sm font-medium mb-2 block">Title *</Label>
@@ -355,17 +359,55 @@ const AddPostPage = () => {
 
                 {/* Content */}
                 <div>
-                  <Label htmlFor="engagementText" className="text-sm font-medium mb-2 block">Body Text</Label>
-                  <Textarea
-                    id="engagementText"
-                    value={formData.engagementText}
-                    onChange={(e) => handleInputChange("engagementText", e.target.value)}
-                    placeholder="Enter your Body Text or comment for this Reddit post..."
-                    rows={4}
-                    className="resize-none"
-                  />
-                  <p className="text-xs text-muted-foreground mt-1">This will be your response or engagement with the Reddit post</p>
+                  <Label
+                    htmlFor="engagementText"
+                    className="text-sm font-medium mb-2 block"
+                  >
+                    Body Text
+                  </Label>
+                  <div
+                    className={cn(
+                      "flex w-full rounded-md border border-input bg-transparent shadow-sm transition-colors",
+                      "focus-within:outline-none focus-within:ring-1 focus-within:ring-ring"
+                    )}
+                  >
+                    <ReactQuill
+                      id="engagementText"
+                      value={formData.engagementText}
+                      onChange={(content) => handleInputChange("engagementText", content)}
+                      placeholder="Enter your Body Text or comment for this Reddit post..."
+                      modules={{
+                        toolbar: [
+                          ["bold", "italic", "underline"],
+                          [{ list: "ordered" }, { list: "bullet" }],
+                          ["link"],
+                        ],
+                      }}
+                      className={cn(
+                        "w-full",
+
+                        "[&_.ql-toolbar]:!border-none [&_.ql-container]:!border-none",
+
+                        "[&_.ql-toolbar]:bg-transparent [&_.ql-container]:bg-transparent",
+                        "[&_.ql-editor]:min-h-[120px] [&_.ql-editor]:pt-2 [&_.ql-editor]:px-3",
+                        "[&_.ql-editor]:text-sm [&_.ql-editor]:text-foreground",
+                        "[&_.ql-editor.ql-blank::before]:text-muted-foreground",
+
+                        "[&_.ql-toolbar_button]:text-muted-foreground [&_.ql-toolbar_button:hover]:text-foreground",
+
+                        "[&_.ql-tooltip]:!bg-neutral-900 [&_.ql-tooltip]:!text-white [&_.ql-tooltip]:!border [&_.ql-tooltip]:!border-neutral-700",
+
+                        "[&_.ql-tooltip_input]:!bg-neutral-800 [&_.ql-tooltip_input]:!text-white [&_.ql-tooltip_input]:!placeholder-gray-400 [&_.ql-tooltip_input]:!border [&_.ql-tooltip_input]:!border-neutral-700",
+
+                        "[&_.ql-tooltip] button:!text-white [&_.ql-tooltip] button:hover:!text-blue-400"
+                      )}
+                    />
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    This will be your response or engagement with the Reddit post
+                  </p>
                 </div>
+
 
                 {/* <div>
                   <Label htmlFor="kimsVersion">Kim's Version</Label>

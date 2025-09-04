@@ -556,7 +556,6 @@ const PostsPage = () => {
 
 export default PostsPage;
 
-
 const EngagementTextCell = ({ text }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -564,35 +563,34 @@ const EngagementTextCell = ({ text }) => {
     return <span className="text-muted-foreground">-</span>;
   }
 
-  const handleMouseEnter = () => {
-    setShowTooltip(true);
-  };
-
-  const handleMouseLeave = () => {
-    setShowTooltip(false);
-  };
+  const handleMouseEnter = () => setShowTooltip(true);
+  const handleMouseLeave = () => setShowTooltip(false);
 
   return (
     <div className="relative max-w-sm">
+      {/* Truncated preview */}
       <div
-        className="text-sm text-muted-foreground line-clamp-3 cursor-help hover:text-foreground transition-colors duration-200"
+        className="text-sm text-muted-foreground line-clamp-3 cursor-help hover:text-foreground transition-colors duration-200
+                   [&_a]:text-blue-500 [&_a:hover]:underline"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         title="Hover to see full text"
-      >
-        {text}
-      </div>
-      
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
+
+      {/* Tooltip with full content */}
       {showTooltip && (
-        <div 
+        <div
           className="absolute z-50 left-0 top-full -mt-6 w-80 bg-popover border border-border rounded-lg shadow-lg p-3 animate-in fade-in-0 zoom-in-95"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
           <div className="max-h-60 overflow-y-auto">
-            <div className="text-sm text-popover-foreground whitespace-pre-wrap break-words">
-              {text}
-            </div>
+            <div
+              className="text-sm text-popover-foreground whitespace-pre-wrap break-words
+                         [&_a]:text-blue-500 [&_a:hover]:underline"
+              dangerouslySetInnerHTML={{ __html: text }}
+            />
           </div>
           {/* Arrow pointer */}
           <div className="absolute -top-1 left-4 w-2 h-2 bg-popover border-l border-t border-border rotate-45"></div>
