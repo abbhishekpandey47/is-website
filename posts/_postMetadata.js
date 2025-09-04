@@ -95,7 +95,7 @@ let postMetaData = [
         ogImage: "/PostImages/becoming-a-technical-content-writer-for-the-biggest-tech-companies/0.webp",
         publishedOn: "2024-10-07",
         authorId: "author0001",
-        category: "Tutorials",
+        category: "Informational",
         metaDescription: "Looking for a career in technical writing? Tips to work with top tech SaaS-based companies and write impactful technical content without any fail."
     },
     {
@@ -106,7 +106,7 @@ let postMetaData = [
         ogImage: "/PostImages/10-best-content-marketing-tools-for-beginners/0.png",
         publishedOn: "2024-10-09",
         authorId: "author0001",
-        category: "Informational",
+        category: "B2B SaaS- Content Marketing",
         metaDescription: "Discover the top 10 content marketing tools perfect for beginners to help you create, manage, and optimize your tech content marketing strategy effectively."
     },
     {
@@ -161,7 +161,7 @@ let postMetaData = [
         ogImage: "/PostImages/how-to-choose-the-right-production-company/0.png",
         publishedOn: "2024-11-05",
         authorId: "author0001",
-        category: "Tutorials",
+        category: "Tech Video Marketing",
         metaDescription: "Discover how to choose the right video production company for your brand. Get tips on evaluating portfolios, managing budgets, and finding a partner that delivers impactful, engaging content."
     },
     {
@@ -183,7 +183,7 @@ let postMetaData = [
         ogImage: "/PostImages/10-steps-to-build-content-marketing-strategy/0.jpg",
         publishedOn: "2024-11-11",
         authorId: "author0001",
-        category: "Informational",
+        category: "B2B SaaS- Content Marketing",
         metaDescription: "Learn 10 essential content marketing tips for startups to build an effective strategy for your B2B SaaS. Achieve success with actionable steps for your growth."
     },
     {
@@ -194,7 +194,7 @@ let postMetaData = [
         ogImage: "/PostImages/building-brand-assets-for-saas-success/0.jpg",
         publishedOn: "2024-11-12",
         authorId: "author0001",
-        category: "Informational",
+        category: "B2B SaaS Growth & GTM",
         metaDescription: "Discover how to create and manage essential brand assets for SaaS success. Learn why brand assets like logos, color palettes, and brand voice matter, with examples from top SaaS brands, and get actionable steps to build a strong brand identity that stands out."
     },
     {
@@ -216,7 +216,7 @@ let postMetaData = [
         ogImage: "/PostImages/frameworks-for-scalable-documentation-sites/0.png",
         publishedOn: "2024-11-20",
         authorId: "author0001",
-        category: "Tutorials",
+        category: "Informational",
         metaDescription: "Discover top frameworks like MkDocs, Docusaurus, and Antora for scalable technical documentation. Find installation guides, examples, and best practices to improve content management and user experience for projects of all sizes."
     },
     {
@@ -282,7 +282,7 @@ let postMetaData = [
         ogImage: "/PostImages/terraform-modules/banner.png",
         publishedOn: "2024-12-19",
         authorId: "author0001",
-        category: "Tutorials",
+        category: "Informational",
         metaDescription: "introduction to terraform module."
     },
     {
@@ -293,7 +293,7 @@ let postMetaData = [
         ogImage: "/PostImages/content-marketing-agency-vs-freelance-content-writers/banner.jpg",
         publishedOn: "2024-12-17",
         authorId: "author0002",
-        category: "Informational",
+        category: "B2B SaaS- Content Marketing",
         metaDescription: "Compare content marketing agencies and freelance writers to determine which option aligns better with your goals, budget, and content strategy requirements."
     },
     {
@@ -315,7 +315,7 @@ let postMetaData = [
         ogImage: "/PostImages/enhance-saas-business-growth-through-conversion-funnel/banner.jpg",
         publishedOn: "2024-12-30",
         authorId: "author0001",
-        category: "Informational",
+        category: "B2B SaaS Growth & GTM",
         metaDescription: "SaaS growth with an optimized conversion funnel. Learn actionable strategies to drive leads, improve customer onboarding, and increase retention in this comprehensive guide."
     },
 
@@ -404,7 +404,7 @@ let postMetaData = [
     ogImage: "/PostImages/content-marketing-strategy/0.png",
     publishedOn: "2025-1-21",
     authorId: "author0003",
-    category: "Informational",
+    category: "B2B SaaS- Content Marketing",
     metaDescription: "Drive your SaaS growth with our updated 2025 SaaS content marketing strategy guide. Learn proven marketing techniques to improve and deliver measurable results."
 },
     {
@@ -415,7 +415,7 @@ let postMetaData = [
     ogImage: "/PostImages/b2b-content-syndication/0.png",
     publishedOn: "2025-1-24",
     authorId: "author0003",
-    category: "Informational",
+    category: "B2B SaaS- Content Marketing",
     metaDescription: "Explore content syndication as a cost effective marketing technique that entails republishing high quality content on third party platforms."
 },
    {
@@ -437,9 +437,12 @@ let postMetaData = [
      ogImage: "/PostImages/tofu-mofu-bofu-marketing/0.png",
      publishedOn: "2025-2-06",
      authorId: "author0003",
-     category: "Informational",
+     category: "B2B SaaS Growth & GTM",
      metaDescription: "Discover how a B2B SaaS marketing strategy tailored to fit the buyer's journey through awareness, interest and finally action stage can be harnessed by creating Tofu, Mofu, Bofu content." 
 },
+
+// /importance-of-writing-organic-content-benefits-and-best-practices-for-saas-companies
+// /importance-of-writing-organic-content-benefits-and-best-practices-for-saas-companies
     
     {
     title: "Top 10 Technical Content Writing Service Companies in 2025",
@@ -506,7 +509,7 @@ let postMetaData = [
         ogImage: "/PostImages/y-combinator-companies/1.png",
         publishedOn: "2025-03-07",
         authorId: "author0004",
-        category: "Informational",
+        category: "B2B SaaS- Content Marketing",
         metaDescription: "Y Combinator companies utilize content marketing to scale their businesses. Read about the content strategies that help them stay ahead of their competitors."
 },
      
@@ -518,7 +521,7 @@ let postMetaData = [
         ogImage: "/PostImages/content-monitoring-for-saas-companies/0.png",
         publishedOn: "2025-03-17",
         authorId: "author0003",
-        category: "Informational",
+        category: "B2B SaaS- Content Marketing",
         metaDescription: "Explore how content monitoring using tools like google search console and google analytics can help you increase your online presence and get results."
     },
 
@@ -530,7 +533,7 @@ let postMetaData = [
         ogImage: "/PostImages/explainer-video-agency/e1.png",
         publishedOn: "2025-03-13",
         authorId: "author0004",
-        category: "Informational",
+        category: "Tech Video Marketing",
         metaDescription: "Product docs are a valuable asset for startups but SaaS explainer videos can significantly boost conversion. Here’s what goes into the video production process."
 },
 
@@ -543,7 +546,7 @@ let postMetaData = [
         ogImage: "/PostImages/b2b-saas-content-frameworks/c1.png",
         publishedOn: "2025-03-15",
         authorId: "author0001",
-        category: "Informational",
+        category: "B2B SaaS Growth & GTM",
         metaDescription: "Discover how a content marketing framework enables B2B SaaS companies to transform engagement into conversions, driving growth and revenue."
 },
      {
@@ -554,7 +557,7 @@ let postMetaData = [
         ogImage: "/PostImages/b2b-content-repurposing/0.png",
         publishedOn: "2025-03-11",
         authorId: "author0003",
-        category: "Informational",
+        category: "B2B SaaS- Content Marketing",
         metaDescription: "Discover how content repurposing can help your B2B SaaS company grow by creating an online presence on diverse platforms in the most cost-effective ways."
 },
 
@@ -566,7 +569,7 @@ let postMetaData = [
         ogImage: "/PostImages/b2b-saas-prd/p1.png",
         publishedOn: "2025-03-18",
         authorId: "author0004",
-        category: "Tutorials",
+        category: "B2B SaaS Growth & GTM",
         metaDescription: "Learn how to write a product requirements document for your B2B SaaS product and improve the team collaboration with an efficient development process."
     },
     {
@@ -588,7 +591,7 @@ let postMetaData = [
         ogImage: "/PostImages/best-b2b-saas-video-agencies/0.png",
         publishedOn: "2025-03-21",
         authorId: "author0003",
-        category: "Informational",
+        category: "Tech Video Marketing",
         metaDescription: "If you're planning to partner with an explainer video production company, don't forget to go through this list before you make a decision for your SaaS Startup."
     },
 
@@ -648,7 +651,7 @@ let postMetaData = [
         ogImage: "/PostImages/content-marketing-playbook/cp1.png",
         publishedOn: "2025-04-08",
         authorId: "author0004",
-        category: "Informational",
+        category: "B2B SaaS- Content Marketing",
         metaDescription: "A content playbook is a one-stop reference guide for content marketing purposes. Learn how you can create it and make your marketing efforts effective."
     },
 
@@ -672,7 +675,7 @@ let postMetaData = [
         ogImage: "/PostImages/saas-go-to-market-strategy/g2.png",
         publishedOn: "2025-04-17",
         authorId: "author0004",
-        category: "Informational",
+        category: "B2B SaaS Growth & GTM",
         metaDescription: "Planning to launch your SaaS product? Read this Go-To-Market strategy guide for practical tips to enhance your marketing efforts with higher conversion rates."
     },
 
@@ -732,7 +735,7 @@ let postMetaData = [
         ogImage: "/PostImages/content-marketing-metrics/cmm1.png",
         publishedOn: "2025-05-09",
         authorId: "author0004",
-        category: "Informational",
+        category: "B2B SaaS- Content Marketing",
         metaDescription: "Wondering why your content isn’t increasing the product adoption rate? Start tracking these 6 key content metrics to enhance your content marketing efforts."
     },
 
@@ -768,7 +771,7 @@ let postMetaData = [
         ogImage: "/PostImages/content-marketing-roi/cmr1.png",
         publishedOn: "2025-05-26",
         authorId: "author0004",
-        category: "Informational",
+        category: "B2B SaaS- Content Marketing",
         metaDescription: "Not measuring content marketing ROI? You’re risking budget waste and missed growth. Learn how to track content ROI and drive real SaaS product adoption."
     },
 
@@ -828,7 +831,7 @@ let postMetaData = [
         ogImage: "/PostImages/content-refresh/cr1.png",
         publishedOn: "2025-06-13",
         authorId: "author0004",
-        category: "Informational",
+        category: "B2B SaaS- Content Marketing",
         metaDescription: "Not getting reach on your technical content? That’s a clear sign it needs content refreshing. Use this checklist to revamp your content the right way."
     },
 
@@ -864,7 +867,7 @@ let postMetaData = [
         ogImage: "/PostImages/content-distribution-platforms/dp1.webp",
         publishedOn: "2025-06-26",
         authorId: "author0004",
-        category: "Informational",
+        category: "B2B SaaS- Content Marketing",
         metaDescription: "Don't miss out on using these 5 content distribution platforms to promote your content and connect with your target audiences and direct them to your website."
     },
 
@@ -876,7 +879,7 @@ let postMetaData = [
         ogImage: "/PostImages/reddit-marketing-strategy/r1.webp",
         publishedOn: "2025-06-27",
         authorId: "author0004",
-        category: "Informational",
+        category: "Reddit Marketing B2B SaaS",
         metaDescription: "Follow this 6-step Reddit Marketing Strategy and connect with your target audience to organically promote your B2B SaaS product and gather feedback from devs."
     },
 
@@ -888,7 +891,7 @@ let postMetaData = [
         ogImage: "/PostImages/reddit-marketing/rm1.webp",
         publishedOn: "2025-07-01",
         authorId: "author0004",
-        category: "Informational",
+        category: "Reddit Marketing B2B SaaS",
         metaDescription: "Using Reddit for marketing can be a great strategy but it is crucial to understand what to do and what not to do. Therefore, read the article to get insights."
     },
     
@@ -900,7 +903,7 @@ let postMetaData = [
         ogImage: "/PostImages/reddit-marketing-strategy/r1.webp",
         publishedOn: "2025-07-04",
         authorId: "author0004",
-        category: "Informational",
+        category: "Reddit Marketing B2B SaaS",
         metaDescription: "You can get Reddit Karma points in two ways - with Comment Karma and Post Karma. Read the article to understand what are they and how to achieve them."
     },
 
@@ -912,7 +915,7 @@ let postMetaData = [
         ogImage: "/PostImages/reddit-marketing-agencies/ag1.webp",
         publishedOn: "2025-07-08",
         authorId: "author0004",
-        category: "Informational",
+        category: "Reddit Marketing B2B SaaS",
         metaDescription: "If you are confused about finding the right Reddit marketing agency to partner with, you can pick any of these best marketing agencies for SaaS companies."
     },
 
@@ -924,7 +927,7 @@ let postMetaData = [
         ogImage: "/PostImages/how-to-create-a-subreddit/sub1.webp",
         publishedOn: "2025-07-10",
         authorId: "author0004",
-        category: "Informational",
+        category: "Reddit Marketing B2B SaaS",
         metaDescription: "If you are building your presence on Reddit, learn how to create a subreddit easily, connect with target users and grow your community with effective tips."
     },
 
@@ -936,7 +939,7 @@ let postMetaData = [
         ogImage: "/PostImages/best-subreddits/ts1.webp",
         publishedOn: "2025-07-11",
         authorId: "author0004",
-        category: "Informational",
+        category: "Reddit Marketing B2B SaaS",
         metaDescription: "Join these top Reddit communities to promote your B2B SaaS product. However, be mindful of some specific thing that have been discussed in the article."
     },
    
@@ -995,7 +998,7 @@ let postMetaData = [
         ogImage: "/PostImages/organic-vs-paid-marketing-reddit/organic-vs-paid-marketing-reddit.png",
         publishedOn: "2025-08-08", 
         authorId: "author0005",
-        category: "Informational",
+        category: "Reddit Marketing B2B SaaS",
         metaDescription: "Learn the differences between organic vs paid traffic on Reddit, and what works best for your B2B SaaS brand. Discover the best way to grow on Reddit."
     },
      {
@@ -1028,7 +1031,7 @@ let postMetaData = [
         ogImage: "/PostImages/key-performance-indicators-video-marketing/banner.jpg",
         publishedOn: "2025-08-19",
         authorId: "author0005",
-        category: "Informational",
+        category: "Tech Video Marketing",
         metaDescription: "Discover key performance indicators for video marketing and follow powerful video SEO checklists to boost reach and engagement. Read now to learn more!"
     },
      {
@@ -1039,7 +1042,7 @@ let postMetaData = [
         ogImage: "/PostImages/reddit-b2b-marketing-strategy/banner.jpg",
         publishedOn: "2025-08-22",
         authorId: "author0005",
-        category: "Informational",
+        category: "Reddit Marketing B2B SaaS",
         metaDescription: "Discover how to use Reddit B2B marketing to grow your SaaS. Learn subreddit strategy and tools for B2B SaaS marketing Reddit. Read now!"
     },
     {
@@ -1050,7 +1053,7 @@ let postMetaData = [
         ogImage: "/PostImages/reddit-karma-farming-vs-credibility/banner.png",
         publishedOn: "2025-08-27",
         authorId: "author0005",
-        category: "Informational",
+        category: "Reddit Marketing B2B SaaS",
         metaDescription: "Discover how karma farming and credibility fuel B2B SaaS growth on Reddit. Shortcuts vs trust, and what truly drives results. Click the link below to read now."
     },
     {
@@ -1061,7 +1064,7 @@ let postMetaData = [
         ogImage: "/PostImages/b2b-saas-growth-levers/banner.png",
         publishedOn: "2025-08-31",
         authorId: "author0005",
-        category: "Informational",
+        category: "B2B SaaS Growth & GTM",
         metaDescription: "Discover the top growth levers driving success for early-stage SaaS and B2B startups. Learn how these growth lever help B2B SaaS companies scale."
     },
     {

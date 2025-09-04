@@ -33,6 +33,10 @@ let tabs = [
   { id: "allCategories", label: "All Categories" },
   { id: "Informational", label: "Informational" },
   { id: "Tutorials", label: "Tutorials" },
+  // { id: "B2B SaaS- Content Marketing", label: "B2B SaaS- Content Marketing" },
+  // { id: "B2B SaaS Growth & GTM", label: "B2B SaaS Growth & GTM" },
+  // { id: "Reddit Marketing B2B SaaS", label: "Reddit Marketing B2B SaaS" },
+  // { id: "Tech Video Marketing", label: "Tech Video Marketing" },
 ];
 
 const TabDiv = React.memo(({ activeTab, setActiveTab }) => (
