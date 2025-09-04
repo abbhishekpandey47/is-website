@@ -143,7 +143,7 @@ const PostsPage = () => {
   const getStatusBadge = (status) => {
   const statusColors = {
     // Published Post Status
-    approval: "bg-blue-500 text-white",
+    commentUnderApproval: "bg-blue-500 text-white",
     live: "bg-green-500 text-white",
     removed: "bg-red-500 text-white",
     undermoderation: "bg-yellow-500 text-black",
