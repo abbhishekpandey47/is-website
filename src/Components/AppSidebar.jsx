@@ -38,10 +38,10 @@ const mainItems = [
 
 
 const managementItems = [
-  { title: "Categories", url: "/threadflow/categories", icon: Tag },
-  { title: "Schedule", url: "/threadflow/schedule", icon: Calendar },
-  { title: "Templates", url: "/threadflow/templates", icon: FileText },
-  { title: "Settings", url: "/threadflow/settings", icon: Settings },
+  { title: "Categories", url: "/threadflow/management/categories", icon: Tag },
+  { title: "Schedule", url: "/threadflow/management/schedule", icon: Calendar },
+  { title: "Templates", url: "/threadflow/management/templates", icon: FileText },
+  { title: "Settings", url: "/threadflow/management/settings", icon: Settings },
 ]
 
 export function AppSidebar() {

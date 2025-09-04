@@ -142,16 +142,23 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
 
 const getStatusBadge = (status) => {
   const statusColors = {
+    // Published Post Status
+    approval: "bg-blue-500 text-white",
     live: "bg-green-500 text-white",
     removed: "bg-red-500 text-white",
     undermoderation: "bg-yellow-500 text-black",
+
+    // Post Approval Status
+    approved: "bg-emerald-600 text-white",
+    notapproved: "bg-red-600 text-white",
+    pending: "bg-gray-500 text-white",
   };
 
   const colorClass = status
     ? statusColors[status.toLowerCase()] || "bg-gray-600 text-white"
     : "bg-gray-600 text-white";
 
-  // format text: insert spaces before capital letters
+  // Format text → insert spaces before capital letters
   const formattedText = status
     ? status.replace(/([a-z])([A-Z])/g, "$1 $2")
     : "";
@@ -460,7 +467,8 @@ const getStatusBadge = (status) => {
                           {post.post_url ? "Post Link" : "-"}
                         </a>
                       </TableCell>
-                      <TableCell>{getStatusBadge(post.status)}</TableCell>
+                                <TableCell>{getStatusBadge(post.status, 'comment')}</TableCell>
+
                       <TableCell className="max-w-sm">
                         <div className="text-sm text-muted-foreground line-clamp-3">
                           {post.engagement_text}

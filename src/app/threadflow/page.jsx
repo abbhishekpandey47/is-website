@@ -140,42 +140,35 @@ const PostsPage = () => {
 
   const statusCounts = getStatusCounts();
 
-  const getStatusBadge = (status, type) => {
-    if (type === 'post') {
-      const statusColors = {
-        approved: "bg-approved text-approved-foreground",
-        live: "bg-live text-live-foreground",
-        pending: "bg-pending text-pending-foreground",
-        rejected: "bg-rejected text-rejected-foreground",
-      };
+  const getStatusBadge = (status) => {
+  const statusColors = {
+    // Published Post Status
+    approval: "bg-blue-500 text-white",
+    live: "bg-green-500 text-white",
+    removed: "bg-red-500 text-white",
+    undermoderation: "bg-yellow-500 text-black",
 
-      return (
-        <Badge className={`${statusColors[status?.toLowerCase()] || "bg-gray-200"} capitalize`}>
-          {status}
-        </Badge>
-      );
-    } else {
-      const statusColors = {
-        live: "bg-green-500 text-white",
-        removed: "bg-red-500 text-white",
-        undermoderation: "bg-yellow-500 text-black",
-      };
-
-      const colorClass = status
-        ? statusColors[status.toLowerCase()] || "bg-gray-600 text-white"
-        : "bg-gray-600 text-white";
-
-      const formattedText = status
-        ? status.replace(/([a-z])([A-Z])/g, "$1 $2")
-        : "";
-
-      return (
-        <Badge className={`${colorClass} capitalize`}>
-          {formattedText}
-        </Badge>
-      );
-    }
+    // Post Approval Status
+    approved: "bg-emerald-600 text-white",
+    notapproved: "bg-red-600 text-white",
+    pending: "bg-gray-500 text-white",
   };
+
+  const colorClass = status
+    ? statusColors[status.toLowerCase()] || "bg-gray-600 text-white"
+    : "bg-gray-600 text-white";
+
+  // Format text → insert spaces before capital letters
+  const formattedText = status
+    ? status.replace(/([a-z])([A-Z])/g, "$1 $2")
+    : "";
+
+  return (
+    <Badge className={`${colorClass} capitalize`}>
+      {formattedText}
+    </Badge>
+  );
+};
 
   if (loading) {
     return (
@@ -455,7 +448,8 @@ const PostsPage = () => {
                           </TableCell>
                           
                           {/* Comment Approval Status */}
-                          <TableCell>{getStatusBadge(item.status, item.type)}</TableCell>
+                          {/* getStatusBadge(item.posted_comment_status, 'comment')} */}
+                          <TableCell>{getStatusBadge(item.status, 'comment')}</TableCell>
                           
                           {/* Text of engagement */}
                           <TableCell className="max-w-sm">
