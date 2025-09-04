@@ -45,7 +45,7 @@ Emerging companies that are b2b SaaS often face the same challenge \- a great pr
    
 For instance, A recent project with **Daytona.ai**, a B2B SaaS startup that provides cloud-based developer workspaces, illustrates this approach. To amplify Daytona.ai’s reach and make its product’s value tangible, we built a series of public use case examples hosted on GitHub.
 
-![Snapshot of daytonaio's GitHub SDK examples](/PostImages/b2b-saas-growth-levers/i1.png)
+![Snapshot of daytonaio's GitHub SDK examples](/PostImages/b2b-saas-growth-levers/i1.webp)
 
 Snapshot of Daytona SDK Examples
 
@@ -90,7 +90,7 @@ Early-stage B2B SaaS growth depends less on adding features and more on activati
 ## **11 Growth Levers for Success in Early-Stage B2B SaaS Startups**
 
 Let’s understand the growth levers and what action steps you can take to turn the tables.   
-![snapshot of 11 growth levers for success in early -stage b2b SaaS startups, including deep market and audience understanding, GitHub as a marketing channel, covering all buyer personas, building technical SEO foundations, monitoring industry trends, creating distribution channels, streamlining pricing and product-led growth, building social media presence, developing a clear roadmap, leveraging offline and online events, and acting on customer feedback](/PostImages/b2b-saas-growth-levers/i2.png)
+![snapshot of 11 growth levers for success in early -stage b2b SaaS startups, including deep market and audience understanding, GitHub as a marketing channel, covering all buyer personas, building technical SEO foundations, monitoring industry trends, creating distribution channels, streamlining pricing and product-led growth, building social media presence, developing a clear roadmap, leveraging offline and online events, and acting on customer feedback](/PostImages/b2b-saas-growth-levers/i2.webp)
 
 1. **Deep Market and Audience Understanding**
 

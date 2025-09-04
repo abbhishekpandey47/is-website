@@ -64,7 +64,7 @@ Here it is, check out the checklit for generative engine optimization.
 
 Create AI-ready titles that match search intent, use primary keywords naturally and don’t stuff, and stay under 60 characters. Pair them with engaging meta descriptions under 160 characters, optimized for click-through and discoverability. Keep URL slugs short, clean, and keyword-rich for better indexing and AI parsing.
 
-![SEO summary preview showing title, description, and URL for a Infrasity's tech video production's webpage, highlighting metadata detail,  and url link.](/PostImages/generative-engine-optimization-best-practices/i2.png) 
+![SEO summary preview showing title, description, and URL for a Infrasity's tech video production's webpage, highlighting metadata detail,  and url link.](/PostImages/generative-engine-optimization-best-practices/i2.webp) 
 
 * **Meta Title:** Matches intent and is keyword-optimized. Clear, concise and ≤ 60 characters, includes primary keyword.
 
@@ -76,7 +76,7 @@ Create AI-ready titles that match search intent, use primary keywords naturally 
 
 Organize content for both readers and AI models with a clear TL;DR, keyword-rich subheadings, and a strong first 150 words addressing the query. Use bullets, numbered lists, and Q\&A formats for featured snippets, and include real-world examples. Maintain an authoritative yet conversational tone to build trust and engagement.
 
-![Screenshot of TL;DR section explaining AEO and SEO differences, including definitions, benefits, and how AI tools like ChatGPT and Google AI Overviews impact search visibility.](/PostImages/generative-engine-optimization-best-practices/i3.png) 
+![Screenshot of TL;DR section explaining AEO and SEO differences, including definitions, benefits, and how AI tools like ChatGPT and Google AI Overviews impact search visibility.](/PostImages/generative-engine-optimization-best-practices/i3.webp) 
 
 * **TL;DR:** 2–5 sentences summarizing all main points and AI pulls this easily.
 
@@ -119,7 +119,7 @@ Strengthen authority with 3–4 relevant internal links to related content and e
 
 Support AI understanding with schema markup like FAQPage, HowTo, and Article formats. Use fast-loading WebP images with descriptive alt text, concise infographics, and data tables to enhance clarity. These elements not only improve human readability but also increase AI parsing accuracy.
 
-![Table comparing organic vs paid search on Reddit, showing differences in cost, minimum daily spend, and minimum campaign budget.][image4]
+![Table comparing organic vs paid search on Reddit, showing differences in cost, minimum daily spend, and minimum campaign budget.](/PostImages/generative-engine-optimization-best-practices/i4.webp) 
 
 * **Schema Markup:** Use FAQPage, HowTo, and Article schema to help AI parse content.  
 * **Images:** WebP format for fast loading

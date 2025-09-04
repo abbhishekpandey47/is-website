@@ -79,7 +79,9 @@ When these mindsets aren’t aligned, the result can be misunderstandings, slowe
 
 ## **How Developer Advocates Bridge the Gap**
 
-![Image on How delevoper advocates bridge the gap between engineer and product team and its four ways.](/PostImages/organic-vs-paid-marketing-reddit/image6.png)
+![Image on How delevoper advocates bridge the gap between engineer and product team and its four ways.](/PostImages/developer-advocates-bridge-engineer-product-teams/banner.webp)
+
+
 
 When the product and engineering teams speak the same language, both literally and figuratively, things start to align. Products launch faster, quality improves, and teams actually enjoy working together. Let us learn a step-by-step guide to developing an effective marketing strategy and bridging the gap between Engineer and the Product teams.
 
@@ -120,7 +122,7 @@ The DA fights for:
 
 ## **Benefits of Having Developer Advocates in the Product Cycle**
 
-![The image shows four benefits of having developer advocates in the product cycle.](/PostImages/organic-vs-paid-marketing-reddit/image3.png)
+![The image shows four benefits of having developer advocates in the product cycle.](/PostImages/developer-advocates-bridge-engineer-product-teams/i3.webp)
 
 By now, you must have understood how a DA works for B2B SaaS, AI brands, or any other companies. If you are considering having a Developer Advocate in your organization, you must want to know other benefits that will make you change your mind.
 

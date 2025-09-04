@@ -143,7 +143,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
 const getStatusBadge = (status) => {
   const statusColors = {
     // Published Post Status
-    approval: "bg-blue-500 text-white",
+    commentUnderApproval: "bg-blue-500 text-white",
     live: "bg-green-500 text-white",
     removed: "bg-red-500 text-white",
     undermoderation: "bg-yellow-500 text-black",
@@ -697,7 +697,7 @@ const getStatusBadge = (status) => {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="approval">Approval</SelectItem>
+                          <SelectItem value="commentUnderApproval">Comment Under Approval</SelectItem>
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
                           <SelectItem value="underModeration">Under Moderation</SelectItem>

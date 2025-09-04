@@ -1003,7 +1003,7 @@ let postMetaData = [
         metatitle: "Developer Advocate Bridge Engineer & Product Team",
         slug: "developer-advocates-bridge-engineer-product-teams",
         description: "Learn how developer advocates connect engineers and product teams for better collaboration and product success in the developer community",
-        ogImage: "/PostImages/organic-vs-paid-marketing-reddit/homepage.png",
+        ogImage: "/PostImages/developer-advocates-bridge-engineer-product-teams/banner.webp",
         publishedOn: "2025-08-13",
         authorId: "author0005",
         category: "Informational",
