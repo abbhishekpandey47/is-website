@@ -72,7 +72,7 @@ Example: As you might already know, Reddit thrives on niche, product-focused spa
 
 Simple if you know how it works right?
 
-![screenshot of r/Lovable page on Reddit](/PostImages/reddit-b2b-marketing-strategy/i2.jpg) 
+![screenshot of r/Lovable page on Reddit](/PostImages/reddit-b2b-marketing-strategy/i2.webp) 
 
 **Step 4: Use Tools to Monitor**
 

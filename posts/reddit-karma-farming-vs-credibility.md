@@ -22,7 +22,7 @@ Reddit Karma points are nothing but the trust signal that shapes how content spr
 
 Karma points are divided into post karma for submissions and comment karma received when the user replies. These numbers reflect how the community values your participation. Users with high karma are viewed as active, respected, and credible, signals that matter when posting in gated or high-value subreddits. With high Karma, users can access key communities that most with low Karma can’t. 
 
-![Screenshot of Post karma point and comment karma points of a user after karma farming on Reddit](/PostImages/reddit-karma-farming-vs-credibility/i5.png) 
+![Screenshot of Post karma point and comment karma points of a user after karma farming on Reddit](/PostImages/reddit-karma-farming-vs-credibility/i5.webp) 
 
 For marketers, karma is more of a growth lever, as higher karma increases algorithmic visibility, builds community trust, and unlocks access to vital conversations.
 
@@ -61,7 +61,7 @@ Here’s how B2B SaaS companies can go beyond chasing upvotes to build true infl
 * **Be First, Be Helpful**  
   Jumping into active threads early with thoughtful responses builds visibility and genuine goodwill. Upvotes will come naturally when you solve problems before others do.
 
-![Screenshot of Reddit displaying a thoughtful responses in a thread](/PostImages/reddit-karma-farming-vs-credibility/i1.png)
+![Screenshot of Reddit displaying a thoughtful responses in a thread](/PostImages/reddit-karma-farming-vs-credibility/i1.webp)
 
 Example: Most engineers often reply in subreddits like [r/SaaS](https://www.reddit.com/r/SaaS/) with immediate solutions to deployment or Next.js questions. These answers earn consistent upvotes, not because they’re gaming karma, but because they’re genuinely helpful.
 
@@ -117,11 +117,11 @@ One thing about Reddit is that users love talking to people. I would suggest tha
   To achieve success on Reddit, B2B SaaS brands need to contribute knowledge instead of campaigns. Contribute value to the community, share insights, guides, and resources instead of pushing your product. For Karma farming, your company can join subreddits such as [r/developers](https://www.reddit.com/r/developers/), and [r/SaaS](https://www.reddit.com/r/SaaS/). You may also engage in genuine posts or discussions.   
 
   Scroll through the posts and comment on whichever suits your brand the best. You may want to comment on posts first and understand how engaging on Reddit works and how other B2B SaaS brands engage.   
-  ![Screenshot of r/developers page on Reddit](/PostImages/reddit-karma-farming-vs-credibility/i3.png)
+  ![Screenshot of r/developers page on Reddit](/PostImages/reddit-karma-farming-vs-credibility/i3.webp)
 
 * **Respect the Rules**  
   Each subreddit has its own guidelines and follow them to avoid removals or bans. The rules will vary from community to community, so be mindful of the rules, as if not followed, you post or even your account might get banned.   
-  ![Screenshot of community rules of r/SaaS displaying the rules of this subreddits to be followed.](/PostImages/reddit-karma-farming-vs-credibility/i2.png)  
+  ![Screenshot of community rules of r/SaaS displaying the rules of this subreddits to be followed.](/PostImages/reddit-karma-farming-vs-credibility/i2.webp)  
 * **Engage in Conversations**  
   Explore the chosen community and take your time responding to existing threads, and try to participate naturally in discussions.
 
