@@ -3,7 +3,7 @@ module.exports = {
         missingSuspenseWithCSRBailout: false,
     },
     images: {
-         domains: ["cdn.prod.website-files.com", "framerusercontent.com"],
+         domains: ["cdn.prod.website-files.com", "framerusercontent.com", "images.surferseo.art"],
     },
     // Add redirect configuration
     async redirects() {

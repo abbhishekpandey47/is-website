@@ -226,7 +226,6 @@ const PostsPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <StatusCard status="approved" count={statusCounts.approved} label="Approved" />
           <StatusCard status="pending" count={statusCounts.pending} label="Pending" />
-          <StatusCard status="rejected" count={statusCounts.rejected} label="Rejected" />
           <StatusCard status="live" count={statusCounts.live} label="Live" />
         </div>
 
