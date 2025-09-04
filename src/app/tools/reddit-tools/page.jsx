@@ -5,7 +5,7 @@ import Page from './reddit-comment-generator/page';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import Competitor from './competitor';
 import Current from './current';
 import Home2 from './home';
@@ -143,4 +143,10 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default function RedditToolsPageWithSuspense(props) {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <Dashboard {...props} />
+        </Suspense>
+    );
+}

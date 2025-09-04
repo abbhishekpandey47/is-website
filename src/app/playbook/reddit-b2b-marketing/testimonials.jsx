@@ -1,4 +1,3 @@
-
 export default function Testimonials({ heading, subHeading }) {
 
     const testimonials = [
@@ -54,8 +53,8 @@ export default function Testimonials({ heading, subHeading }) {
  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">Y Combinator Companies - Boldstart, and Eclipse </span> trust Infrasity
                     </h2>
                 </div>
-                <div class="flex justify-center my-6 mb-8">
-                    <div class="w-[148px] h-1 rounded-full"
+                <div className="flex justify-center my-6 mb-8">
+                    <div className="w-[148px] h-1 rounded-full"
                         style={{
                             backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"
                         }}

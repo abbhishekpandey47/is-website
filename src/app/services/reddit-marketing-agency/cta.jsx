@@ -1,4 +1,3 @@
-import React from "react";
 import CalendarBooking from "../../calendarButton";
 
 export default function Cta() {
@@ -10,8 +9,8 @@ export default function Cta() {
                         Ready to win <span className="text-[#ff4500]">Reddit</span>? Get a <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 bg-clip-text text-transparent font-bold">free audit</span> today.
                     </h2>
                 </div>
-                <div class="flex justify-center my-3 mb-7">
-                    <div class="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
+                <div className="flex justify-center my-3 mb-7">
+                    <div className="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
                 </div>
 
                 {/* Description */}

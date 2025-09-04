@@ -1,5 +1,4 @@
-import React from 'react';
-import { X, Check } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 
 export default function RedditMarketingSlide() {
     const failurePoints = [
@@ -29,8 +28,8 @@ export default function RedditMarketingSlide() {
                             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">B2B Startups</span>
                         </h2>
                     </div>
-                    <div class="flex justify-center my-6 mb-10">
-                        <div class="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
+                    <div className="flex justify-center my-6 mb-10">
+                        <div className="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
                     </div>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">

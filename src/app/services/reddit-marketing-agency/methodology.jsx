@@ -1,4 +1,3 @@
-import React from 'react';
 
 const InfraMethodologyTimeline = () => {
     return (
@@ -12,8 +11,8 @@ const InfraMethodologyTimeline = () => {
                 </div>
             </div>
 
-            <div class="flex justify-center my-4 mb-2">
-                <div class="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
+            <div className="flex justify-center my-4 mb-2">
+                <div className="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
             </div>
 
             {/* Desktop Version */}

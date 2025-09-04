@@ -1,5 +1,5 @@
 "use client"
-import { Sparkles, X, Copy, Download, Play, Clock, Users, Video, FileText } from 'lucide-react';
+import { Clock, Copy, Download, FileText, Sparkles, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regenerateText, videoType }) => {
@@ -66,7 +66,7 @@ const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regen
                 return;
             }
 
-            if (line.startsWith('### ') || (line.startsWith('**') && line.endsWith(':**'))) {
+            if (line.startsWith('### ') || (line.startsWith('**' ) && line.endsWith(':**'))) {
                 const title = line.replace(/###\s|^\*\*|\*\*:$/g, '');
                 currentSection.content.push({ type: 'subsection', title, items: [] });
                 return;
@@ -953,7 +953,7 @@ export default function AIVideoScriptGenerator() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-8">
                     <h1 className="font-[quicksand] text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
-                        <span class="specialtext">Video Scripts Built for Developer Audiences</span>
+                        <span className="specialtext">Video Scripts Built for Developer Audiences</span>
                     </h1>
                     <p className="text-lg sm:text-xl text-gray-400 font-medium max-w-2xl mx-auto">
                         From AI agents to testing platforms, devboxes to code review tools—generate scripts that speak your audience’s language
@@ -1091,6 +1091,3 @@ export default function AIVideoScriptGenerator() {
         </div>
     );
 }
-
-
-

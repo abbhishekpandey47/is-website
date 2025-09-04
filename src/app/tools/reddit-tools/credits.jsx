@@ -71,9 +71,9 @@ export default function Credits({ handleNavClick }) {
 
                 {/* Tools Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-6 mb-8 sm:mb-12">
-                    {tools.map((tool) => (
+                    {tools.map((tool, idx) => (
                         <div
-                            key={tool.id}
+                            key={tool.id + '-' + idx}
                             className="glass-card rounded-xl p-4 md:px-6 shadow-md border border-border-muted hover:border-indigo-400 transition-shadow cursor-pointer text-white"
                             onClick={() => handleNavClick(tool.id)}
                         >

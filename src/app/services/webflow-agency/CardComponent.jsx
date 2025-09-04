@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useState, useEffect } from "react";
 
 const CardComponent = ({ image, title, desc, variant = "default" }) => {
   return (
@@ -18,17 +17,19 @@ const CardComponent = ({ image, title, desc, variant = "default" }) => {
 
       {/* Image Section */}
       <div className="w-full h-[120px] md:h-[150px] rounded-t-xl overflow-hidden">
-        {image ? (
-          <Image
-            src={image.src}
-            alt={title || "Card Image"}
-            width={450}
-            height={300}
-            className="object-cover w-full h-full"
-          />
-        ) : (
-          <span className="text-lg">🖼️</span>
-        )}
+          {image && image.src ? (
+            image.src !== "" ? (
+              <Image
+                src={image.src}
+                alt={title || "Card Image"}
+                width={450}
+                height={300}
+                className="object-cover w-full h-full"
+              />
+            ) : null
+          ) : (
+            <span className="text-lg">🖼️</span>
+          )}
       </div>
 
       {/* Title Section */}

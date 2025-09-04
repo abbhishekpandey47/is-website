@@ -1,7 +1,8 @@
 "use client";
+"use client";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
-import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
 
 export const testiArr = [
   {
@@ -151,14 +152,16 @@ const TestiCard = ({
       <div className="card-body pt-0 h-[30%]">
         <div className="flex justify-start gap-5 mt-5 items-center">
           <div>
-            <Image
-              loading="lazy"
-              width={100}
-              height={100}
-              className="max-w-[60px] rounded-[100%]"
-              src={sorc}
-              alt={alt}
-            />
+            {sorc ? (
+              <Image
+                loading="lazy"
+                width={100}
+                height={100}
+                className="max-w-[60px] rounded-[100%]"
+                src={sorc}
+                alt={alt || name || "User profile image"}
+              />
+            ) : null}
           </div>
           <div className="flex flex-col justify-center gap-1">
             <h2 className="max-lg:text-[0.7rem]">{name}</h2>
@@ -282,21 +285,18 @@ const HomeTesit = () => {
         </div>
       </div>
       <div className="flex justify-center gap-6 py-16 quicksand-light flex-wrap w-7/6 m-auto text-white testiMonCardHome">
-        {renderArr.map((testi, index) => {
-          return (
-            <TestiCard
-              index={index}
-              name={testi.name}
-              alt={testi.alt}
-              sorc={testi.src}
-              pos={testi.pos}
-              carPtr={carPtr}
-              comment={testi.comment}
-              highlight={testi.highlight || []}
-              key={index}
-            />
-          );
-        })}
+        {renderArr.map((testi, index) => (
+          <TestiCard
+            index={index}
+            name={testi.name}
+            sorc={testi.src}
+            pos={testi.pos}
+            carPtr={carPtr}
+            comment={testi.comment}
+            highlight={testi.highlight || []}
+            key={index}
+          />
+        ))}
       </div>
       <div className="flex justify-center gap-10">
         <div>

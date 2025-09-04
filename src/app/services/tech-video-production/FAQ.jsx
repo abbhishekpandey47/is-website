@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 // Custom Accordion component
 const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
@@ -94,7 +94,7 @@ const FAQSection = () => {
             <p className="text-lg text-white mb-8">
               Have a question that needs a human to answer? No problem.
             </p>
-            {/* 
+            {/*
             <a
               href="https://calendly.com/meet-shan"
               className="inline-flex items-center text-[#5F64FF] text-lg  transition-colors"
@@ -114,6 +114,7 @@ const FAQSection = () => {
                   answer={faq.answer}
                   isOpen={openItem === faq.id}
                   toggleAccordion={toggleAccordion}
+                  key={faq.id}
                 />
               ))}
             </div>
