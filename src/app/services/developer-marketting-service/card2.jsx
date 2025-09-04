@@ -268,13 +268,11 @@ const circle2 = [
 ];
 
 const circle3 = [
-  "https://framerusercontent.com/images/276WO0YitRvZ7zBTjFFeSUdqM1w.svg",
-  "https://framerusercontent.com/images/n633YieGsyurEJVRQYTV9NJkPk.png",
-  "https://framerusercontent.com/images/3NHXgLzpd82ROkKyt6peYL6OFhs.svg",
-  "https://framerusercontent.com/images/SwOk89pCA23qMeJlAcxU7IyRw.svg",
-  "https://framerusercontent.com/images/QBNJ7cvbiKkcxhWEs4RrY6BYT0E.png",
-  "https://framerusercontent.com/images/87hLs84LpgsjaIqNbzWD38JL9b4.png",
-  "https://framerusercontent.com/images/eFYSSb2rsQ20Xy4Zw3hXmHafiMs.png",
+    "/landingfolio/y.svg",
+  "/landingfolio/Discord.png",
+  "/landingfolio/share.png",
+  "/landingfolio/people.png",
+  "/landingfolio/upvote.jpeg",
 ];
 
 function OrbitLogos() {
@@ -282,7 +280,13 @@ function OrbitLogos() {
     <div className="relative flex items-center justify-center h-[200px] w-[450px] text-white overflow-hidden">
       {/* Center logo */}
       <div className="absolute w-28 h-28 rounded-full flex items-center justify-center border border-gray-700 shadow-lg z-10">
-        <span className="text-sm font-semibold">Logo</span>
+         <Image
+                alt="Center Logo"
+                src="/CommLogo/infrasity-small-logo.svg"
+                width={32}
+                height={32}
+                className="rounded-full object-cover"
+         />
       </div>
 
       {/* Small circle */}

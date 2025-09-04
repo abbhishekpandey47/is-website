@@ -1,5 +1,16 @@
 "use client";
-import ComingSoon from '@/Components/ComingSoon';
-export default function CommunitiesPage(){
-  return <ComingSoon title="Communities Hub" description="A unified view of subreddit communities, activity trends, and opportunity scoring is on its way." backHref="/threadflow" />;
+
+export default function Page() {
+  return (
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="text-center space-y-4">
+        <h1 className="text-3xl font-bold text-foreground">
+            Communities Page Coming Soon
+        </h1>
+        <p className="text-muted-foreground">
+          We’re working hard to bring this feature to you. Stay tuned!
+        </p>
+      </div>
+    </div>
+  );
 }

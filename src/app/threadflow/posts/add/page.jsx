@@ -466,11 +466,11 @@ const AddPostPage = () => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="live">Live</SelectItem>
-                        <SelectItem value="deleted">Deleted</SelectItem>
-                        <SelectItem value="reuploaded">Reuploaded </SelectItem>
-                        <SelectItem value="pending">Pending </SelectItem>
-                      </SelectContent>
+                                              <SelectItem value="postUnderApproval">Post Under Approval</SelectItem>
+                                              <SelectItem value="live">Live</SelectItem>
+                                              <SelectItem value="removed">Removed </SelectItem>
+                                              <SelectItem value="underModeration">Under Moderation</SelectItem>
+                                            </SelectContent>
                     </Select>
 
                   </div>
