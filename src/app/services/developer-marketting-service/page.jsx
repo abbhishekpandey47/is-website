@@ -11,6 +11,7 @@ import WhyInfrasity from "./WhyInfrasity";
 import Testimonials from "./Testimonial";
 import NewMarquee from "./marquee";
 import IndustrySection from "./IndustrySection";
+import IntegrationsSection from "./IntegrationsSection";
 
 export default function Page() {
   return (
@@ -37,7 +38,26 @@ export default function Page() {
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
         <WhyInfrasity />
       </div>
+      <div
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
+        
       <IndustrySection />
+      </div>
+      <div
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-16"></div>
+        
+      <IntegrationsSection />
+      </div>
       <div
         style={{
           background:
