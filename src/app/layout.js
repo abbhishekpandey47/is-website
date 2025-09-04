@@ -16,19 +16,18 @@ export function generateMetadata() {
 }
 
 export default function RootLayout({ children }) {
-    return (
-        <html lang='en'>
+  return (
+  <html lang='en'>
             <head>
                 <link rel='preconnect' href='https://fonts.googleapis.com' />
                 <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
 
                 {/* Preload Google Fonts CSS and load asynchronously */}
-                <link
-                    rel='preload'
-                    as='style'
-                    href='https://fonts.googleapis.com/css2?family=Quicksand&display=swap'
-                    onLoad="this.onload=null;this.rel='stylesheet'"
-                />
+        <link
+          rel='preload'
+          as='style'
+          href='https://fonts.googleapis.com/css2?family=Quicksand&display=swap'
+        />
                 <noscript>
                     <link
                         rel='stylesheet'

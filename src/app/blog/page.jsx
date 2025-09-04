@@ -1,34 +1,33 @@
 "use client";
-import React, {
-  useEffect,
-  useState,
-  useContext,
-  Suspense,
-  useMemo,
-  useCallback,
-} from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import React, {
+    Suspense,
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
+} from "react";
 
 import AppContext from "@/context/Infracontext";
 
 import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
 } from "../../Components/ui/pagination";
 
 import { useSearchParams } from "next/navigation";
 import NewsletterBlogs from "./NewsletterBlogs";
 
-import postMetaData from "../../../posts/_postMetadata";
-import authorData from "../../../posts/_authorData";
 import Image from "next/image";
-import { responsiveArray } from "antd/es/_util/responsiveObserver";
+import authorData from "../../../posts/_authorData";
+import postMetaData from "../../../posts/_postMetadata";
 
 let tabs = [
   { id: "allCategories", label: "All Categories" },
@@ -132,7 +131,7 @@ const CardDiv = React.memo(({ card }) => (
 
 const paginArrData = [];
 
-const page = () => {
+const BlogPage = () => {
   const context = useContext(AppContext);
 
   const { setProgress, progress } = context;
@@ -213,20 +212,27 @@ const page = () => {
     } else {
       currTabArr = [activeTab];
     }
-    const filteredAgainstTab = cardArr.filter((element) =>
+    // Always filter and sort from postMetaData
+    const filteredAgainstTab = postMetaData.filter((element) =>
       currTabArr.includes(element.category)
     );
     const filteredAgainstSearch = filteredAgainstTab.filter((element) =>
       element.title.toLowerCase().includes(searchData.toLowerCase().trim())
     );
+    // Sort by publishedOn descending
+    const sortedFiltered = filteredAgainstSearch.sort((a, b) => {
+      let datea = Math.floor(new Date(a.publishedOn).getTime() / 1000);
+      let dateb = Math.floor(new Date(b.publishedOn).getTime() / 1000);
+      return dateb - datea;
+    });
     setCardInfo(
-      filteredAgainstSearch.slice(
+      sortedFiltered.slice(
         (pageNum - 1) * totalItem,
         (pageNum - 1) * totalItem + Number(totalItem)
       )
     );
-    paginationAlgo(filteredAgainstSearch);
-  }, [activeTab, searchData]);
+    paginationAlgo(sortedFiltered);
+  }, [activeTab, searchData, pageNum, totalItem]);
 
   const scrollToSection = useCallback(() => {
     const cardDivBlogSection = document.getElementById("cardDivBlogSection");
@@ -303,15 +309,15 @@ const page = () => {
           className="p-12 flex gap-10 flex-wrap justify-center max-w-[1450px]"
           id="cardDivBlogSection"
         >
-          {cardInfo.map((card, index) => {
+          {cardInfo.map((card) => {
             const author = authorData.find((element) => {
               return element.authorId === card.authorId;
             });
             card.author = author?.name;
             card.authorImage = author?.profilePic;
             return (
-              <Suspense fallback={"Loading..."}>
-                <CardDiv card={card} key={index} />
+              <Suspense fallback={"Loading..."} key={card.slug}>
+                <CardDiv card={card} />
               </Suspense>
             );
           })}
@@ -365,4 +371,10 @@ const page = () => {
   );
 };
 
-export default page;
+export default function BlogPageWithSuspense(props) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <BlogPage {...props} />
+    </Suspense>
+  );
+}

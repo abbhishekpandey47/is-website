@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-import Acc from "/public/webflow-age/jpg2png/acc.png";
-import dev from "/public/webflow-age/jpg2png/devzero.jpg";
-import kubiya from "/public/webflow-age/jpg2png/kubiya.png";
-import knidal from "/public/webflow-age/jpg2png/knidal.jpg";
-import CalendlyButton from "../tech-video-production/calendlyButton";
+// Use root-relative paths for public assets
+const Acc = "/webflow-age/jpg2png/acc.png";
+const dev = "/webflow-age/jpg2png/devzero.jpg";
+const kubiya = "/webflow-age/jpg2png/kubiya.png";
+const knidal = "/webflow-age/jpg2png/knidal.jpg";
 
 const projects = [
   { title: "Kubiya", badges: ["Webflow", "Figma"], image: kubiya },
