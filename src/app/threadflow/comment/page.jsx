@@ -417,6 +417,7 @@ const getStatusBadge = (status) => {
                     <TableHead>Category</TableHead>
                     <TableHead>Targeted Subreddit</TableHead>
                     <TableHead>Title</TableHead>
+                    <TableHead>Reddit Post URL</TableHead>
                     <TableHead>Comment Approval Status</TableHead>
                     <TableHead>Text of engagement</TableHead>
                     <TableHead>Date published</TableHead>
@@ -448,6 +449,16 @@ const getStatusBadge = (status) => {
                         <div className="truncate" title={post.title}>
                           {post.title}
                         </div>
+                      </TableCell>
+                       <TableCell>
+                        <a
+                          href={post.post_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline"
+                        >
+                          {post.post_url ? "Post Link" : "-"}
+                        </a>
                       </TableCell>
                       <TableCell>{getStatusBadge(post.status)}</TableCell>
                       <TableCell className="max-w-sm">
@@ -678,6 +689,7 @@ const getStatusBadge = (status) => {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
+                          <SelectItem value="approval">Approval</SelectItem>
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
                           <SelectItem value="underModeration">Under Moderation</SelectItem>
