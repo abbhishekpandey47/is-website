@@ -104,8 +104,8 @@ const IndustrySection = () => {
  </div>
  <div className="z-[1] relative">
  <div className="mx-[12px] md:mx-auto text-center relative z-[1] max-w-[692px] pt-[110px]">
- <h2 className="font-poppins text-[32px] lg:text-[38px] text-white font-medium mb-[16px]">Secure your industry lead</h2>
- <p className="font-inter text-[18px] text-gray-400">Find out how a powerful API platform like Treblle can help you achieve a competitive advantage in your industry.</p>
+ <h2 className="font-poppins text-[32px] lg:text-[38px] text-white font-medium mb-[16px]">The SaaS categories we help win</h2>
+ <p className="font-inter text-[18px] text-gray-400">See how Infrasity accelerates adoption across different types of developer-first companies.</p>
  </div>
  </div>
  <svg
@@ -148,8 +148,8 @@ const IndustrySection = () => {
  icon={<svg width="24" height="25" viewBox="0 0 24 25" xmlns="http://www.w3.org/2000/svg" className="text-gray-400">
  <path d="M2.445 2.318a.9.9 0 0 1 .9.9v18.208l18.21.002a.9.9 0 0 1 .888.754l.012.146a.9.9 0 0 1-.9.9H2.445a.9.9 0 0 1-.9-.9V3.218a.9.9 0 0 1 .9-.9zm19.746 5.749a.9.9 0 0 1 0 1.273l-6.415 6.414a.9.9 0 0 1-1.272 0l-4.496-4.495-3.212 3.212a.9.9 0 0 1-1.148.105l-.125-.105a.9.9 0 0 1 0-1.272l3.849-3.85a.9.9 0 0 1 1.273 0l4.495 4.496 5.778-5.778a.9.9 0 0 1 1.273 0z" fill="currentColor" fillRule="nonzero"></path>
  </svg>}
- title="Financial Services"
- description="Helping you accelerate innovations and bring new experiences to banking, payment operations and FinTech."
+ title="MLOps Platforms"
+ description="Helping you win developer trust in a crowded space with hands-on guides, model ops playbooks, and repo-driven adoption."
  href="/industries/financial-services"
  />
  <IndustryCard 
@@ -159,8 +159,8 @@ const IndustrySection = () => {
  <path d="M22 12.773a10.06 10. 06 0 0 0-20 0h20zM12 12.773v8a2 2 0 1 0 4 0M12 2.773v1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
  </g>
  </svg>}
- title="Insurance"
- description="Protect lives, properties and businesses, by bringing excellence through tech innovations and governance."
+ title="Infrastructure SaaS"
+ description="Positioning infra tools where they belong — inside GitHub, docs, and communities — to build credibility with platform teams."
  href="/industries/insurance"
  />
  <IndustryCard 
@@ -170,16 +170,16 @@ const IndustrySection = () => {
  <path d="M2.22 10.773H8.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"></path>
  </g>
  </svg>}
- title="Healthcare"
- description="Enhance patient care and operational efficiency in hospitals and clinics with secure health-tech solutions."
+ title="Observability & DevOps"
+ description="Driving adoption with tutorials, benchmarks, and integrations that prove value in real production setups."
  href="/industries/healthcare"
  />
  <IndustryCard 
  icon={<svg width="24" height="25" viewBox="0 0 24 25" xmlns="http://www.w3.org/2000/svg" className="text-gray-400">
  <path d="M12 2.29a10.485 10.485 0 0 1 9.635 6.344c.546 1.27.848 2.669.848 4.139 0 5.79-4.693 10.483-10.483 10.483-5.79 0-10.483-4.693-10.483-10.483C1.517 6.983 6.21 2.29 12 2.29zM6.311 6.212l-.008.007a8.678 8.678 0 0 0-2.787 4.695h1.776a2.817 2.817 0 0 1 2.816 2.817v.958c0 .562.456 1.017 1.017 1.017a2.817 2.817 0 0 1 2.817 2.817l-.001 2.933H12c.68 0 1.34-.078 1.975-.226v-3.666a2.817 2.817 0 0 1 2.817-2.816h3.666a8.71 8.71 0 0 0 .225-1.975c0-1.03-.179-2.017-.508-2.934H17.75c-.557 0-1.017.46-1.017 1.017a2.817 2.817 0 0 1-5.633 0c0-.561-.455-1.016-1.017-1.016a3.775 3.775 0 0 1-3.772-3.628zm-2.994 6.56a8.686 8.686 0 0 0 6.824 8.485v-2.734c0-.562-.454-1.017-1.016-1.017a2.817 2.817 0 0 1-2.817-2.817v-.958c0-.561-.455-1.017-1.016-1.017H3.317v.059zm13.475 3.776c-.562 0-1.017.455-1.017 1.016v3.03a8.719 8.719 0 0 0 4.046-4.045l-3.03-.001zM12 4.09c-1.4 0-2.72.33-3.891.918v1.057c0 1.09.884 1.975 1.974 1.975a2.817 2.817 0 0 1 2.817 2.816 1.017 1.017 0 1 0 2.033 0A2.822 2.822 0 0 1 17.75 8.04l1.53-.001A8.676 8.676 0 0 0 12 4.089z" fill="currentColor" fillRule="nonzero"></path>
  </svg>}
- title="Travel"
- description="Reimagine travel experiences from booking to destination with cutting-edge, customer-focused solutions."
+ title="AI Infra & Agentic Tools"
+ description="Building technical narratives that explain complex agent workflows in a way developers can run and trust."
  href="/industries/travel"
  />
  <div className={`${showAll ? '' : ''}`}>
@@ -192,8 +192,8 @@ const IndustrySection = () => {
  <circle cx="15" cy="10" r="2"></circle>
  </g>
  </svg>}
- title="Automotive"
- description="Drive the future of mobility by combining AI innovation, robust API security, and API governance solutions."
+ title="API-first SaaS"
+ description="From SDKs to migration guides, we craft the artifacts that get your API adopted across ecosystems."
  href="/industries/automotive"
  />
  </div>
@@ -224,8 +224,8 @@ const IndustrySection = () => {
  </g>
  </g>
  </svg>}
- title="IoT"
- description="Innovate at the speed of connectivity with the power of API Intelligence and advanced API forensics."
+ title="YC & Early-Stage Startups"
+ description="We act as your extended devrel team — shipping community presence, GTM content, and adoption signals from day one."
  href="/industries/iot"
  />
  </div>

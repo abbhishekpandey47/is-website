@@ -1,5 +1,5 @@
 "use client";
-import Particles from "@/Components/ui/particles";
+import Particles from "../../../components/ui/particles";
 import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

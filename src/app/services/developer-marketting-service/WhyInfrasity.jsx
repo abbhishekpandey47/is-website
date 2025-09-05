@@ -11,8 +11,8 @@ export default function WhyInfrasity() {
       {/* Header */}
       <div className="max-w-xl flex flex-col gap-2">
         <h2 className="text-3xl md:text-4xl font-semibold text-zinc-400">
-          Why companies moved{" "}
-          <span className="specialtext">to Supabase from Neon</span>
+        Why companies choose{" "}
+          <span className="specialtext">Infrasity for developer marketting</span>
         </h2>
         <p className="text-zinc-400">
           Build secure, scalable applications using a developer platform built
@@ -29,12 +29,10 @@ export default function WhyInfrasity() {
             <span className="block w-7 h-px bg-zinc-400" />
           </div>
           <h4 className="text-lg lg:text-xl mt-1 text-zinc-100">
-            Build fast and with confidence
+          Build adoption, not just content
           </h4>
           <p className="text-zinc-400">
-            Supabase helps you go from prototype to production with built-in
-            auth, real-time data, and observability. No setup or backend
-            boilerplate required.
+          We go beyond blogs and docs. Infrasity builds developer trust with stories, repos, and examples that engineers actually use.
           </p>
         </li>
 
@@ -45,11 +43,10 @@ export default function WhyInfrasity() {
             <span className="block w-7 h-px bg-zinc-400" />
           </div>
           <h4 className="text-lg lg:text-xl mt-1 text-zinc-100">
-            Everything your application stack needs
+          Everything your GTM stack needs
           </h4>
           <p className="text-zinc-400">
-            Auth, storage, edge functions, vectors, and realtime are available
-            out of the box. Use one or all.
+          From SEO blogs to GitHub repos, release notes to Reddit credibility — we cover every surface where developers discover and adopt new tools.
           </p>
         </li>
 
@@ -60,12 +57,10 @@ export default function WhyInfrasity() {
             <span className="block w-7 h-px bg-zinc-400" />
           </div>
           <h4 className="text-lg lg:text-xl mt-1 text-zinc-100">
-            Scalable, dependable, Postgres-native
+          Credibility, community-first
           </h4>
           <p className="text-zinc-400">
-            Supabase runs on standard Postgres with full SQL, ACID guarantees,
-            PITR, and high availability. Designed for reliable, stateful agent
-            workloads.
+          Our work shows up in the channels that matter: subreddits, GitHub discussions, Dev.to hubs. That’s where early adoption signals are born.
           </p>
         </li>
 
@@ -76,9 +71,9 @@ export default function WhyInfrasity() {
             <span className="block w-7 h-px bg-zinc-400" />
           </div>
           <h4 className="text-lg lg:text-xl mt-1 text-zinc-100">
-            Migrate from Neon with ease
+          Save founders from distraction
           </h4>
-          <p className="text-zinc-400">Supabase is Postgres. Moving from Neon is a breeze.</p>
+          <p className="text-zinc-400">Your team ships features. We handle developer marketing — so you don’t burn cycles writing blogs, chasing keywords, or seeding Reddit threads.</p>
         </li>
       </ul>
     </section>

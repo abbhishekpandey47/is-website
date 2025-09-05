@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import ContactPage from "@/app/book-a-demo/page";
+import ContactPage from "../book-a-demo/page";
 import Image from "next/image";
 import { message } from "antd";
 

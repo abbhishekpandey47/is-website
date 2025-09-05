@@ -12,7 +12,7 @@ import HomeVidSection from "./HomeVidSection";
 import JoinCommunity from "./JoinCommunity";
 import WhyInfra from "./WhyInfra";
 import FAQ from "./FAQ";
-import AppContext from "@/context/Infracontext";
+import AppContext from "../../context/Infracontext";
 import AwardBanner from "./awardwinner";
 import Navbar from "../Navbar/Navbar";
 import Marquee from "../marquee"
