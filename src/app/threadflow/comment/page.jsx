@@ -503,7 +503,7 @@ const getStatusBadge = (status) => {
                       {/* <TableCell></TableCell>
                       <TableCell></TableCell> */}
                       <TableCell>{post.reddit_username}</TableCell>
-                                             <TableCell>{getStatusBadge(post.posted_comment_status)}</TableCell>
+                                             <TableCell><div className="text-center">{getStatusBadge(post.posted_comment_status)}</div></TableCell>
 
                       <TableCell>
                         <div className="flex items-center gap-2">

@@ -5,6 +5,7 @@ import Link from "next/link";
 
 export default function CTA() {
   return (
+    <section className="max-w-6xl mx-auto my-20">
     <div className="mx-6 md:mx-16 bg-gradient-to-r from-blue-800 to-purple-800 relative flex flex-col items-center rounded-xl p-16 text-center overflow-hidden bg-cover bg-no-repeat"
     >
       {/* Title */}
@@ -42,5 +43,6 @@ export default function CTA() {
         />
       </div>
     </div>
+    </section>
   );
 }
