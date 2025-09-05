@@ -126,30 +126,38 @@ export default function FeatureComparison() {
         {/* Columns */}
         <div className="relative">
           {/* Middle divider line */}
-          <div className="hidden md:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+          <div className="hidden md:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Before Infrasity */}
             <div>
-              <h3 className="text-xl font-semibold text-white mb-6 text-center">
+              <h3 className="text-xl font-semibold text-zinc-400 mb-6 text-center">
                 Before Infrasity
               </h3>
-              <ul className="space-y-5">
+              <ul className="space-y-4">
                 {beforeItems.map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-3 w-full rounded-xl
-                      bg-[radial-gradient(87%_241%_at_125%_203%,rgba(70,70,80,0.9),rgba(20,20,25,0.75))]
-                      backdrop-blur-lg shadow-[inset_0_1px_2px_rgba(255,255,255,0.12),0_8px_20px_rgba(0,0,0,0.55)]
-                      p-3 transition-transform"
+                    className="flex items-center gap-3 w-full rounded-2xl px-4 py-3 bg-zinc-800/80 backdrop-blur-sm shadow-md hover:shadow-lg transition-shadow duration-300"
+                     style={{
+    position: "relative",
+    borderRadius: 18,
+    border: "1px solid rgba(255,255,255,0.08)", // brighter rim
+    overflow: "hidden",
+    background: "rgba(255,255,255,0.04)", // faint light fill
+    boxShadow:
+      "0 2px 8px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.05)", // softer shadows
+    padding: "12px 16px",
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    width: "100%",
+  }}
                   >
-                 <div class="flex items-center justify-center w-8 h-8 rounded-md 
-  bg-gradient-to-br from-zinc-700/70 to-zinc-900/90 
-  shadow-inner ring-1 ring-white/10 border border-white/5">
-  {item.icon}
-</div>
-
-                    <span className="text-sm font-medium">{item.text}</span>
+                    <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-zinc-700/50 ring-1 ring-zinc-600/50">
+                      {item.icon}
+                    </div>
+                    <span className="text-md font-medium text-zinc-200">{item.text}</span>
                   </li>
                 ))}
               </ul>
@@ -157,25 +165,33 @@ export default function FeatureComparison() {
 
             {/* After Infrasity */}
             <div>
-              <h3 className="text-xl font-semibold text-white mb-6 text-center">
+              <h3 className="text-xl font-semibold text-zinc-400 mb-6 text-center">
                 After Infrasity
               </h3>
-              <ul className="space-y-5">
+              <ul className="space-y-4">
                 {afterItems.map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-3 w-full rounded-xl
-                      bg-[radial-gradient(87%_241%_at_125%_203%,rgba(70,70,80,0.9),rgba(20,20,25,0.75))]
-                      backdrop-blur-lg shadow-[inset_0_1px_2px_rgba(255,255,255,0.12),0_8px_20px_rgba(0,0,0,0.55)]
-                      p-3 transition-transform"
+                    className="flex items-center gap-3 w-full rounded-2xl px-4 py-3 bg-zinc-800/80 backdrop-blur-sm shadow-md hover:shadow-lg transition-shadow duration-300"
+                     style={{
+    position: "relative",
+    borderRadius: 18,
+    border: "1px solid rgba(255,255,255,0.08)", // brighter rim
+    overflow: "hidden",
+    background: "rgba(255,255,255,0.04)", // faint light fill
+    boxShadow:
+      "0 2px 8px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.05)", // softer shadows
+    padding: "12px 16px",
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    width: "100%",
+  }}
                   >
-                    <div className="flex items-center justify-center w-8 h-8 rounded-md 
-  bg-gradient-to-br from-zinc-700/70 via-zinc-800/80 to-emerald-900/80
-  shadow-inner ring-1 ring-white/10 border border-white/5">
-  {item.icon}
-</div>
-
-                    <span className="text-sm font-medium">{item.text}</span>
+                    <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-emerald-900/50 ring-1 ring-emerald-700/50">
+                      {item.icon}
+                    </div>
+                    <span className="text-md font-medium text-zinc-200">{item.text}</span>
                   </li>
                 ))}
               </ul>

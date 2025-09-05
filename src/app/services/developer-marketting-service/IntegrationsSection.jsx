@@ -6,32 +6,32 @@ const IntegrationsSection = () => {
     {
       name: 'Java',
       image: '/integrations/java-spring.png',
-      href: 'https://docs.treblle.com/integrations/java/spring/'
+      href: '/services/developer-marketting-service'
     },
     {
       name: '.NET',
       image: '/integrations/dotnet.webp',
-      href: 'https://docs.treblle.com/integrations/net/net/'
+      href: '/services/developer-marketting-service'
     },
     {
       name: 'NodeJS',
       image: '/integrations/node.webp',
-      href: 'https://docs.treblle.com/integrations/javascript/node/'
+      href: '/services/developer-marketting-service'
     },
     {
       name: 'Laravel',
       image: '/integrations/laravel.webp',
-      href: 'https://docs.treblle.com/integrations/php/laravel/'
+      href: '/services/developer-marketting-service'
     },
     {
       name: 'Ruby on Rails',
       image: '/integrations/ruby-on-rails.png',
-      href: 'https://docs.treblle.com/integrations/ruby/rails/'
+      href: '/services/developer-marketting-service'
     },
     {
       name: 'Django',
       image: '/integrations/django.webp',
-      href: 'https://docs.treblle.com/integrations/python/django/'
+      href: '/services/developer-marketting-service'
     }
   ];
 
@@ -39,27 +39,27 @@ const IntegrationsSection = () => {
     {
       name: 'Kong Gateway',
       image: '/integrations/kong.webp',
-      href: 'https://docs.treblle.com/integrations/kong/'
+      href: '/services/developer-marketting-service'
     },
     {
       name: 'Traefik API Gateway',
       image: '/integrations/traefik.webp',
-      href: 'https://docs.treblle.com/integrations/traefik/'
+      href: '/services/developer-marketting-service'
     },
     {
       name: 'WSO2 API Gateway',
       image: '/integrations/traefik.webp',
-      href: 'https://docs.treblle.com/integrations/wso2/'
+      href: '/services/developer-marketting-service'
     },
     {
       name: 'Cloudflare',
       image: '/integrations/traefik.webp',
-      href: 'https://docs.treblle.com/integrations/cloudflare/'
+      href: '/services/developer-marketting-service'
     },
     {
       name: 'Strapi',
       image: '/integrations/traefik.webp',
-      href: 'https://docs.treblle.com/integrations/strapi/'
+      href: '/services/developer-marketting-service'
     }
   ];
 
@@ -166,7 +166,7 @@ const IntegrationsSection = () => {
         </p>
         <a 
           className="px-6 py-3 border border-gray-500 text-white rounded-lg hover:bg-gray-800 transition-colors font-[quicksand]"
-          href="/book-a-demo"
+          href="/contact"
         >
           Talk to sales
         </a>
