@@ -10,10 +10,9 @@ import { SidebarTrigger } from "../../../../Components/ui/sidebar";
 import { UserProfile } from "../../../../Components/UserProfile";
 import { useRouter } from "next/navigation";
 import { Save, ArrowLeft, Plus, X } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/lib/supabaseClient";
+import { useToast } from "../../../../hooks/use-toast";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebaseClient";
+import { auth } from "../../../../lib/firebaseClient";
 
 const AddPostPage = () => {
   const [firebaseUser, setFirebaseUser] = useState(null);

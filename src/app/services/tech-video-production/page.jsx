@@ -7,7 +7,7 @@ import { Suspense, useContext, useEffect, useMemo, useState } from "react";
 import _videometadata from "../../../../services-data/_videoMetadata.js";
 import SaasGlassyBoxes from "./whychooseus.jsx";
 
-import AppContext from "@/context/Infracontext";
+import AppContext from "../../../context/Infracontext.jsx";
 
 import { CustomEase, ScrollTrigger } from "gsap/all";
 import BookDemo from "../../book-a-demo/cta.jsx";

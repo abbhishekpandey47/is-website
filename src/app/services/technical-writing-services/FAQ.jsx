@@ -1,5 +1,5 @@
 "use client";
-import CalendarBooking from "@/app/calendarButton";
+import CalendarBooking from "../../calendarButton";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useState } from "react";
 

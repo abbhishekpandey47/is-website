@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
   // Only apply rate limiting to /api/support POST requests
   if (request.nextUrl.pathname === '/api/support' && request.method === 'POST') {
     try {
-      const ip = request.ip || request.headers.get('x-forwarded-for') || '127.0.0.1';
+      const ip = (request as any).ip ??  request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "127.0.0.1";
       const key = `rate-limit:${ip}`;
 
       // Get current request count

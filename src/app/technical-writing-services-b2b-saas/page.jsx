@@ -1,30 +1,20 @@
 "use client";
-import ReadyToStart from "@/Components/HomePage/ReadyToStart";
 import React, { useEffect, useContext, useMemo, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";
-import { Carousel } from "antd";
-import AppContext from "@/context/Infracontext";
+import AppContext from "../../context/Infracontext";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
 import { motion } from "framer-motion";
 import Image from "next/image";
-import HowWorks from "@/Components/HomePage/HowWorks";
 import Link from "next/link";
-import { OrbitingCirclesDemo } from "@/Components/HomePage/OrbitTime";
-import { BorderBeam } from "@/Components/ui/border-beam";
-import { Badge, Card, Space } from "antd";
-
 import postMetaData from "../../../posts/_postMetadata";
-import authorData from "../../../posts/_authorData";
 import NewMarquee from "./marquee";
 import BlogTypes from "./blogTypes";
 import WhyChooseInfrasity from "./whychoose";
 import StorytellingSection from "./storyTelling";
-import FAQ from "@/Components/HomePage/FAQ";
 import FAQSection from "./FAQ";
 import TestimonialSlider from "./testimonials";
-import BookDemo from "./bookDemo";
 import CalendarBooking from "../calendarButton";
 import ClutchBadge from "./clutch";
 
