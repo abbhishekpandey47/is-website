@@ -1,7 +1,7 @@
 'use client'
 import React, { useMemo, useState, useContext, useEffect } from 'react'
 import Link from 'next/link';
-import AppContext from '@/context/Infracontext'
+import AppContext from '../../context/Infracontext'
 
 
 const collapseContent = [

@@ -1,8 +1,8 @@
 "use client";
-import FAQ from "@/app/services/tech-video-production/FAQ";
-import AnimatedCard from "@/app/services/webflow-agency/AnimatedCard";
-import CardComponent from "@/app/services/webflow-agency/CardComponent";
-import WebflowMarquee from "@/app/services/webflow-agency/Webflowmarquee";
+import FAQ from "../tech-video-production/FAQ";
+import AnimatedCard from "../webflow-agency/AnimatedCard";
+import CardComponent from "../webflow-agency/CardComponent";
+import WebflowMarquee from "../webflow-agency/Webflowmarquee";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import BookDemo from "../../book-a-demo/cta";

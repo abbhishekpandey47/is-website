@@ -10,7 +10,7 @@ import React, {
     useState,
 } from "react";
 
-import AppContext from "@/context/Infracontext";
+import AppContext from "../../context/Infracontext";
 
 import {
     Pagination,

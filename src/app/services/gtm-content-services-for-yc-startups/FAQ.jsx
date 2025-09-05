@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
-import CalendarBooking from "@/app/calendarButton";
 
 // Custom Accordion component
 const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {

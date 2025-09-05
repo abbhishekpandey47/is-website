@@ -1,5 +1,5 @@
 "use client";
-import AppContext from "@/context/Infracontext";
+import AppContext from "../../../context/Infracontext";
 import { gsap } from "gsap";
 import { CustomEase, Power3, ScrollTrigger } from "gsap/all";
 import Image from "next/image";

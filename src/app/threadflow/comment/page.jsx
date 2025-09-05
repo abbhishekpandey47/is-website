@@ -13,8 +13,8 @@ import { UserProfile } from "../../../Components/UserProfile";
 import { useRouter } from "next/navigation";
 import { Plus, Search, ExternalLink, Edit, Trash2, Save, X } from "lucide-react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebaseClient";
-import { useToast } from "@/hooks/use-toast";
+import { auth } from "../../../lib/firebaseClient";
+import { useToast } from "../../../hooks/use-toast";
 
 
 const PostsPage = () => {
