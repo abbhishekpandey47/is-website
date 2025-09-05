@@ -23,29 +23,29 @@ const FeatureCards = () => {
     },
     {
       id: 3,
-      title: "One story, many surfaces",
-      description: "A single product video can become a YouTube demo, doc embed, and short-form clip. We repurpose content across channels so nothing goes stale.",
+      title: "Content Developers Actually Read",
+      description: "From hands-on tutorials to comparison blogs and SDK examples, Infrasity creates the content that answers developer questions and builds long-term trust.",
       imageAlt: "Tools illustration",
       image: "c3.png",
-      design: <div className="relative w-full flex flex-wrap justify-center bg-black overflow-hidden min-h-[280px] -mb-5 mt-5">
+      design: <div className="relative w-full flex flex-wrap justify-center bg-black overflow-hidden min-h-[200px] -mb-5 mt-5">
       {/* Pills (visible) */}
       <div className="relative z-10 flex flex-wrap justify-center gap-0 px-6">
-     <Pill label="Send to Slack" isPattern={false} iconUrl="https://framerusercontent.com/images/HgSJ7Rgtu1wlY4m5ugoPh27M8.svg" />
-      <Pill label="Tool label" isPattern={true} />
-      <Pill label="Create page" iconUrl="https://framerusercontent.com/images/deP5Emns5JYXary7hz0Icm245NY.svg" />
-      <Pill label="Summarize text" iconUrl="https://framerusercontent.com/images/SwOk89pCA23qMeJlAcxU7IyRw.svg" />
-      <Pill label="Create a pin" iconUrl="https://framerusercontent.com/images/eFYSSb2rsQ20Xy4Zw3hXmHafiMs.png" />
-      <Pill label="Create row" iconUrl="https://framerusercontent.com/images/3NHXgLzpd82ROkKyt6peYL6OFhs.svg" />
-      <Pill label="Add to new row" iconUrl="https://framerusercontent.com/images/6hAErI1Rk4yOzvuhtIqtiYkGQ.png" />
-      <Pill label="Get RSS" iconUrl="https://framerusercontent.com/images/y34nsuMXQ1cGa6JUzRxXJ7jn0c.png" />
-      <Pill label="Create order" iconUrl="https://framerusercontent.com/images/276WO0YitRvZ7zBTjFFeSUdqM1w.svg" />
-      <Pill label="Get Stripe sales" iconUrl="https://framerusercontent.com/images/n633YieGsyurEJVRQYTV9NJkPk.png" />
-      <Pill label="Create event" iconUrl="https://framerusercontent.com/images/POqrokMFJqkFZTHtUNf4gUp2Jc.png" />
-      <Pill label="Send photo" iconUrl="https://framerusercontent.com/images/AivTqnTKX4huKzVYrpTTt3GELU.svg" />
-      <Pill label="Create issue" iconUrl="https://framerusercontent.com/images/wNeivcUdPcU22wpDo7aZDHm5jsw.svg" />
-      <Pill label="Monitor inbox" iconUrl="https://framerusercontent.com/images/ldXgClNPKa5Kf9yDz94cahCcyA.png" />
-      <Pill label="Tool label" isPattern={true} />
-         </div>
+     <Pill label="“How-to Guide" isPattern={false} iconUrl="https://framerusercontent.com/images/HgSJ7Rgtu1wlY4m5ugoPh27M8.svg" />
+      <Pill label="Comparison" isPattern={true} />
+      <Pill label="Release Note" iconUrl="https://framerusercontent.com/images/deP5Emns5JYXary7hz0Icm245NY.svg" />
+      <Pill label="Tutorial" iconUrl="https://framerusercontent.com/images/SwOk89pCA23qMeJlAcxU7IyRw.svg" />
+      <Pill label="Explainer" iconUrl="https://framerusercontent.com/images/eFYSSb2rsQ20Xy4Zw3hXmHafiMs.png" />
+      <Pill label="Integration Example" iconUrl="https://framerusercontent.com/images/3NHXgLzpd82ROkKyt6peYL6OFhs.svg" />
+      <Pill label="SDK Docs" iconUrl="https://framerusercontent.com/images/6hAErI1Rk4yOzvuhtIqtiYkGQ.png" />
+      <Pill label="How-to Guide" iconUrl="https://framerusercontent.com/images/y34nsuMXQ1cGa6JUzRxXJ7jn0c.png" />
+      <Pill label="Comparison" iconUrl="https://framerusercontent.com/images/276WO0YitRvZ7zBTjFFeSUdqM1w.svg" />
+      <Pill label="Release Note" iconUrl="https://framerusercontent.com/images/deP5Emns5JYXary7hz0Icm245NY.svg" />
+      <Pill label="Tutorial" iconUrl="https://framerusercontent.com/images/SwOk89pCA23qMeJlAcxU7IyRw.svg" />
+      <Pill label="Explainer" iconUrl="https://framerusercontent.com/images/eFYSSb2rsQ20Xy4Zw3hXmHafiMs.png" />
+      <Pill label="Integration Example" iconUrl="https://framerusercontent.com/images/3NHXgLzpd82ROkKyt6peYL6OFhs.svg" />
+      <Pill label="SDK Docs" iconUrl="https://framerusercontent.com/images/6hAErI1Rk4yOzvuhtIqtiYkGQ.png" />
+  
+           </div>
 
       {/* Enhanced Black Fade-out overlay */}
       <div
@@ -62,8 +62,8 @@ const FeatureCards = () => {
     },
     {
       id: 4,
-      title: "From code to community",
-      description: "We connect the dots: blog posts, docs, GitHub repos, and social proof. Everything funnels back to your core goal — faster developer adoption.",
+      title: "From One Video to Many Surfaces",
+      description: "We turn a single demo into YouTube explainers, doc embeds, shorts, and landing page assets — giving your product visibility everywhere developers learn.",
       imageAlt: "Custom requests illustration",
       image: "c4.png",
       design: <DarkPipedreamDiagram />
