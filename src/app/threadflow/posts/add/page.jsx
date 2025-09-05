@@ -15,9 +15,17 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabaseClient";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import "react-quill/dist/quill.snow.css";
 import { cn } from "@/lib/utils";
+
+
+const ReactQuill = dynamic(
+  async () => {
+    const { default: RQ } = await import("react-quill-new");
+    await import("react-quill-new/dist/quill.snow.css");
+    return RQ;
+  },
+  { ssr: false }
+);
 
 
 const AddPostPage = () => {
@@ -470,6 +478,8 @@ const AddPostPage = () => {
                                               <SelectItem value="live">Live</SelectItem>
                                               <SelectItem value="removed">Removed </SelectItem>
                                               <SelectItem value="underModeration">Under Moderation</SelectItem>
+                                              <SelectItem value="notPosted">Not Posted</SelectItem>
+
                                             </SelectContent>
                     </Select>
 

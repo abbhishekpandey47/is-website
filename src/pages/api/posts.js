@@ -19,7 +19,7 @@ export default async function handler(req, res) {
           category: body.category,
           targeted_subreddit: body.targetedSubreddit || null,
           title: body.title,
-          url: body.url || "No URL",
+          url: body.url || "",
           status: body.status || "pending",
           engagement_text: body.engagementText || null,
           kims_version: body.kimsVersion || null,

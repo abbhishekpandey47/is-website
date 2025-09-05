@@ -453,6 +453,7 @@ useEffect(() => {
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
                           <SelectItem value="underModeration">Under Moderation</SelectItem>
+                          <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
