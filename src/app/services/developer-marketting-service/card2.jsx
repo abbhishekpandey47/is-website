@@ -278,7 +278,7 @@ const circle3 = [
 
 function OrbitLogos() {
   return (
-    <div className="relative flex items-center justify-center h-[200px] w-[450px] text-white overflow-hidden mb-8 pt-40">
+    <div className="relative flex items-center justify-center h-[200px] w-[450px] text-white overflow-hidden mb-12 pt-40">
       {/* Center logo */}
       <div className="absolute w-28 h-28 rounded-full flex items-center justify-center  shadow-lg z-10">
          <Image
