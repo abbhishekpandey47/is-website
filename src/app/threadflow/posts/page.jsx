@@ -16,14 +16,22 @@ import { Plus, Search, ExternalLink, Edit, Trash2, Save, X } from "lucide-react"
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
 import { useToast } from "@/hooks/use-toast";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import "react-quill/dist/quill.snow.css";
 import { cn } from "@/lib/utils";
+
+const ReactQuill = dynamic(
+  async () => {
+    const { default: RQ } = await import("react-quill-new");
+    await import("react-quill-new/dist/quill.snow.css");
+    return RQ;
+  },
+  { ssr: false }
+);
+
 
 
 const PostsPage = () => {
   const router = useRouter();
-    const { toast } = useToast();
+  const { toast } = useToast();
 
   const [firebaseUser, setFirebaseUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,7 +39,7 @@ const PostsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
-  
+
   // Edit modal 
   const [editingPost, setEditingPost] = useState(null);
   const [editFormData, setEditFormData] = useState({
@@ -45,6 +53,7 @@ const PostsPage = () => {
     postedLink: "",
     currentStatus: "pending",
     redditUsername: "",
+    targetedSubreddit: "",
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(null);
@@ -97,35 +106,35 @@ const PostsPage = () => {
   }, [firebaseUser]);
 
   useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, async (user) => {
-    setFirebaseUser(user);
-    setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setFirebaseUser(user);
+      setLoading(false);
 
-    if (!user) {
-      router.push("/auth/signin");
-    } else {
-      try {
-        const res = await fetch(`/api/posts?categories=true&userId=${user.uid}`);
-        const result = await res.json();
+      if (!user) {
+        router.push("/auth/signin");
+      } else {
+        try {
+          const res = await fetch(`/api/posts?categories=true&userId=${user.uid}`);
+          const result = await res.json();
 
-        if (res.ok && result.categories) {
-          setEditCategories((prev) => {
-            const merged = [...prev, ...result.categories];
-            return [...new Set(merged.map((c) => c.trim()))]; 
-          });
+          if (res.ok && result.categories) {
+            setEditCategories((prev) => {
+              const merged = [...prev, ...result.categories];
+              return [...new Set(merged.map((c) => c.trim()))];
+            });
+          }
+        } catch (err) {
+          console.error("Failed to fetch categories:", err);
         }
-      } catch (err) {
-        console.error("Failed to fetch categories:", err);
       }
-    }
-  });
+    });
 
-  return () => unsubscribe();
-}, [router]);
+    return () => unsubscribe();
+  }, [router]);
 
 
   const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
-const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
+  const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
 
 
 
@@ -172,6 +181,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
       postedLink: post.posted_link || "",
       currentStatus: post.current_status || "pending",
       redditUsername: post.reddit_username || "",
+      targetedSubreddit: post.targeted_subreddit || "",
     });
     setIsEditModalOpen(true);
   };
@@ -190,6 +200,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
       postedLink: "",
       currentStatus: "pending",
       redditUsername: "",
+      targetedSubreddit: "",
     });
   };
 
@@ -201,11 +212,11 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
     e.preventDefault();
 
     if (!editFormData.category || !editFormData.title) {
-         toast({
-      title: "Error",
-      description: "Please fill in category, title, and URL fields",
-      variant: "destructive",
-    });
+      toast({
+        title: "Error",
+        description: "Please fill in category, title, and URL fields",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -225,6 +236,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
           posted_link: editFormData.postedLink,
           current_status: editFormData.currentStatus,
           reddit_username: editFormData.redditUsername,
+          targeted_subreddit: editFormData.targetedSubreddit,
         }),
       });
 
@@ -249,11 +261,11 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
       closeEditModal();
     } catch (err) {
       console.error("Error updating post:", err);
-         toast({
-      title: "Error",
-      description: err.message,
-      variant: "destructive",
-    });
+      toast({
+        title: "Error",
+        description: err.message,
+        variant: "destructive",
+      });
     }
   };
 
@@ -267,65 +279,65 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
   };
 
   const handleDelete = async () => {
-  const postId = deleteConfirmation.post.id;
-  setIsDeleting(postId);
+    const postId = deleteConfirmation.post.id;
+    setIsDeleting(postId);
 
-  try {
-    const res = await fetch(`/api/posts?id=${postId}`, {
-      method: "DELETE",
-    });
-
-    const result = await res.json();
-
-    if (!res.ok) {
-      // Customize error message for user
-      let message = result.error || "Failed to delete post";
-
-      if (
-        message.toLowerCase().includes("foreign key") ||
-        message.toLowerCase().includes("permission") ||
-        message.toLowerCase().includes("not authorized")
-      ) {
-        message = "You may not be the right person to delete this post.";
-      }
-
-      toast({
-        title: "Error",
-        description: message,
-        variant: "destructive",
+    try {
+      const res = await fetch(`/api/posts?id=${postId}`, {
+        method: "DELETE",
       });
 
-      return;
+      const result = await res.json();
+
+      if (!res.ok) {
+        // Customize error message for user
+        let message = result.error || "Failed to delete post";
+
+        if (
+          message.toLowerCase().includes("foreign key") ||
+          message.toLowerCase().includes("permission") ||
+          message.toLowerCase().includes("not authorized")
+        ) {
+          message = "You may not be the right person to delete this post.";
+        }
+
+        toast({
+          title: "Error",
+          description: message,
+          variant: "destructive",
+        });
+
+        return;
+      }
+
+      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+      toast({
+        title: "Post deleted successfully!",
+        description: "The post was removed from the tracker.",
+      });
+      closeDeleteConfirmation();
+    } catch (err) {
+      console.error("Error deleting post:", err);
+      toast({
+        title: "Error",
+        description: err.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsDeleting(null);
     }
+  };
 
-    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
-    toast({
-      title: "Post deleted successfully!",
-      description: "The post was removed from the tracker.",
-    });
-    closeDeleteConfirmation();
-  } catch (err) {
-    console.error("Error deleting post:", err);
-    toast({
-      title: "Error",
-      description: err.message,
-      variant: "destructive",
-    });
-  } finally {
-    setIsDeleting(null);
+
+  if (loading) {
+    return (
+      <div className="p-6 space-y-4">
+        <div className="animate-pulse h-6 w-48 bg-gray-300 rounded" />
+        <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
+        <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
+      </div>
+    );
   }
-};
-
-
-if (loading) {
-  return (
-    <div className="p-6 space-y-4">
-      <div className="animate-pulse h-6 w-48 bg-gray-300 rounded" />
-      <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
-      <div className="animate-pulse h-10 w-full bg-gray-200 rounded" />
-    </div>
-  );
-}
 
   if (!firebaseUser) {
     return <div className="p-6">Please log in to view your posts.</div>;
@@ -369,32 +381,32 @@ if (loading) {
                   className="pl-10"
                 />
               </div>
- <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-  <SelectTrigger className="w-48">
-    <SelectValue placeholder="All Categories" />
-  </SelectTrigger>
-  <SelectContent>
-    {categories.map((cat) => (
-      <SelectItem key={cat} value={cat}>
-        {cat === "all" ? "All Categories" : cat}
-      </SelectItem>
-    ))}
-  </SelectContent>
-</Select>
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="w-48">
+                  <SelectValue placeholder="All Categories" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((cat) => (
+                    <SelectItem key={cat} value={cat}>
+                      {cat === "all" ? "All Categories" : cat}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
 
-            <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-  <SelectTrigger className="w-32">
-    <SelectValue placeholder="All Status" />
-  </SelectTrigger>
-  <SelectContent>
-    {statuses.map((status) => (
-      <SelectItem key={status} value={status}>
-        {status === "all" ? "All Status" : status.charAt(0).toUpperCase() + status.slice(1)}
-      </SelectItem>
-    ))}
-  </SelectContent>
-</Select>
+              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+                <SelectTrigger className="w-32">
+                  <SelectValue placeholder="All Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  {statuses.map((status) => (
+                    <SelectItem key={status} value={status}>
+                      {status === "all" ? "All Status" : status.charAt(0).toUpperCase() + status.slice(1)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </CardContent>
         </Card>
@@ -449,12 +461,12 @@ if (loading) {
                         </a>
                       </TableCell>
                       <TableCell>{getStatusBadge(post.status)}</TableCell>
-                     <TableCell className="max-w-sm">
-  <div
-    className="text-sm text-muted-foreground line-clamp-3"
-    dangerouslySetInnerHTML={{ __html: post.engagement_text }}
-  />
-</TableCell>
+                      <TableCell className="max-w-sm">
+                        <div
+                          className="text-sm text-muted-foreground line-clamp-3"
+                          dangerouslySetInnerHTML={{ __html: post.engagement_text }}
+                        />
+                      </TableCell>
 
                       <TableCell className="text-sm">
                         {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
@@ -531,21 +543,21 @@ if (loading) {
                         <SelectTrigger>
                           <SelectValue placeholder="Select category" />
                         </SelectTrigger>
-                      <SelectContent className="max-h-60">
-  {editCategories.length > 0 && (
-    <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground border-b border-border/50 mb-1">
-      Recommended Categories
-    </div>
-  )}
-  {editCategories.map((category) => (
-    <SelectItem key={category} value={category} className="py-2">
-      <div className="flex items-center gap-2">
-        <div className="w-2 h-2 bg-primary/60 rounded-full"></div>
-        {category}
-      </div>
-    </SelectItem>
-  ))}
-  {/* <div className="border-t border-border/50 mt-1 pt-1">
+                        <SelectContent className="max-h-60">
+                          {editCategories.length > 0 && (
+                            <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground border-b border-border/50 mb-1">
+                              Recommended Categories
+                            </div>
+                          )}
+                          {editCategories.map((category) => (
+                            <SelectItem key={category} value={category} className="py-2">
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-primary/60 rounded-full"></div>
+                                {category}
+                              </div>
+                            </SelectItem>
+                          ))}
+                          {/* <div className="border-t border-border/50 mt-1 pt-1">
     <SelectItem value="add-new" className="text-primary font-medium py-2">
       <div className="flex items-center gap-2">
         <Plus className="h-4 w-4" />
@@ -553,39 +565,32 @@ if (loading) {
       </div>
     </SelectItem>
   </div> */}
-</SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="edit-status">Status</Label>
-                      <Select
-                        value={editFormData.status}
-                        onValueChange={(value) => handleEditInputChange("status", value)}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="pending">Pending</SelectItem>
-                          <SelectItem value="approved">Approved</SelectItem>
-                          <SelectItem value="rejected">Rejected</SelectItem>
-                          <SelectItem value="live">Live</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
-                  </div>
 
                     <div>
-                                    <Label htmlFor="redditUsername" className="text-sm font-medium mb-2 block">Reddit Username</Label>
-                                    <Input
-                                      id="redditUsername"
-                                      value={editFormData.redditUsername}
-                                      onChange={(e) => handleEditInputChange("redditUsername", e.target.value)}
-                                      placeholder="Enter the Reddit Username"
-                                      className="h-10"
-                                    />
-                                  </div>
+                      <Label htmlFor="targetedSubreddit" className="text-sm font-medium mb-2 block">Targeted Subreddit</Label>
+                      <Input
+                        id="targetedSubreddit"
+                        value={editFormData.targetedSubreddit}
+                        onChange={(e) => handleEditInputChange("targetedSubreddit", e.target.value)}
+                        placeholder="Enter the Targeted Subreddit"
+                        className="h-10"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="redditUsername" className="text-sm font-medium mb-2 block">Reddit Username</Label>
+                    <Input
+                      id="redditUsername"
+                      value={editFormData.redditUsername}
+                      onChange={(e) => handleEditInputChange("redditUsername", e.target.value)}
+                      placeholder="Enter the Reddit Username"
+                      className="h-10"
+                    />
+                  </div>
 
                   <div>
                     <Label htmlFor="edit-title">Title *</Label>
@@ -597,7 +602,7 @@ if (loading) {
                     />
                   </div>
 
-                  <div>
+                  {/* <div>
                     <Label htmlFor="edit-url">URL</Label>
                     <Input
                       id="edit-url"
@@ -606,58 +611,58 @@ if (loading) {
                       onChange={(e) => handleEditInputChange("url", e.target.value)}
                       placeholder="https://www.reddit.com/r/..."
                     />
-                  </div>
+                  </div> */}
 
                   {/* Content */}
-                    <div>
-                                   <Label
-                                     htmlFor="engagementText"
-                                     className="text-sm font-medium mb-2 block"
-                                   >
-                                     Body Text
-                                   </Label>
-                                   <div
-                                     className={cn(
-                                       "flex w-full rounded-md border border-input bg-transparent shadow-sm transition-colors",
-                                       "focus-within:outline-none focus-within:ring-1 focus-within:ring-ring"
-                                     )}
-                                   >
-                                     <ReactQuill
-                                       id="engagementText"
-                                       value={editFormData.engagementText}
-                                       onChange={(content) => handleEditInputChange("engagementText", content)}
-                                       placeholder="Enter your Body Text or comment for this Reddit post..."
-                                       modules={{
-                                         toolbar: [
-                                           ["bold", "italic", "underline"],
-                                           [{ list: "ordered" }, { list: "bullet" }],
-                                           ["link"],
-                                         ],
-                                       }}
-                                       className={cn(
-                                         "w-full",
-                 
-                                         "[&_.ql-toolbar]:!border-none [&_.ql-container]:!border-none",
-                 
-                                         "[&_.ql-toolbar]:bg-transparent [&_.ql-container]:bg-transparent",
-                                         "[&_.ql-editor]:min-h-[120px] [&_.ql-editor]:pt-2 [&_.ql-editor]:px-3",
-                                         "[&_.ql-editor]:text-sm [&_.ql-editor]:text-foreground",
-                                         "[&_.ql-editor.ql-blank::before]:text-muted-foreground",
-                 
-                                         "[&_.ql-toolbar_button]:text-muted-foreground [&_.ql-toolbar_button:hover]:text-foreground",
-                 
-                                         "[&_.ql-tooltip]:!bg-neutral-900 [&_.ql-tooltip]:!text-white [&_.ql-tooltip]:!border [&_.ql-tooltip]:!border-neutral-700",
-                 
-                                         "[&_.ql-tooltip_input]:!bg-neutral-800 [&_.ql-tooltip_input]:!text-white [&_.ql-tooltip_input]:!placeholder-gray-400 [&_.ql-tooltip_input]:!border [&_.ql-tooltip_input]:!border-neutral-700",
-                 
-                                         "[&_.ql-tooltip] button:!text-white [&_.ql-tooltip] button:hover:!text-blue-400"
-                                       )}
-                                     />
-                                   </div>
-                                   <p className="text-xs text-muted-foreground mt-1">
-                                     This will be your response or engagement with the Reddit post
-                                   </p>
-                                 </div>
+                  <div>
+                    <Label
+                      htmlFor="engagementText"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      Body Text
+                    </Label>
+                    <div
+                      className={cn(
+                        "flex w-full rounded-md border border-input bg-transparent shadow-sm transition-colors",
+                        "focus-within:outline-none focus-within:ring-1 focus-within:ring-ring"
+                      )}
+                    >
+                      <ReactQuill
+                        id="engagementText"
+                        value={editFormData.engagementText}
+                        onChange={(content) => handleEditInputChange("engagementText", content)}
+                        placeholder="Enter your Body Text or comment for this Reddit post..."
+                        modules={{
+                          toolbar: [
+                            ["bold", "italic", "underline"],
+                            [{ list: "ordered" }, { list: "bullet" }],
+                            ["link"],
+                          ],
+                        }}
+                        className={cn(
+                          "w-full",
+
+                          "[&_.ql-toolbar]:!border-none [&_.ql-container]:!border-none",
+
+                          "[&_.ql-toolbar]:bg-transparent [&_.ql-container]:bg-transparent",
+                          "[&_.ql-editor]:min-h-[120px] [&_.ql-editor]:pt-2 [&_.ql-editor]:px-3",
+                          "[&_.ql-editor]:text-sm [&_.ql-editor]:text-foreground",
+                          "[&_.ql-editor.ql-blank::before]:text-muted-foreground",
+
+                          "[&_.ql-toolbar_button]:text-muted-foreground [&_.ql-toolbar_button:hover]:text-foreground",
+
+                          "[&_.ql-tooltip]:!bg-neutral-900 [&_.ql-tooltip]:!text-white [&_.ql-tooltip]:!border [&_.ql-tooltip]:!border-neutral-700",
+
+                          "[&_.ql-tooltip_input]:!bg-neutral-800 [&_.ql-tooltip_input]:!text-white [&_.ql-tooltip_input]:!placeholder-gray-400 [&_.ql-tooltip_input]:!border [&_.ql-tooltip_input]:!border-neutral-700",
+
+                          "[&_.ql-tooltip] button:!text-white [&_.ql-tooltip] button:hover:!text-blue-400"
+                        )}
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      This will be your response or engagement with the Reddit post
+                    </p>
+                  </div>
 
                   {/* Tracking Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -672,33 +677,48 @@ if (loading) {
                     </div>
 
                     <div>
-                      <Label htmlFor="edit-currentStatus">Current Status</Label>
-                      <Select
-                        value={editFormData.currentStatus}
-                        onValueChange={(value) => handleEditInputChange("currentStatus", value)}
-                      >
+                      <Label htmlFor="currentStatus">Post Approval Status</Label>
+                      <Select value={editFormData.currentStatus} onValueChange={(value) => handleEditInputChange("currentStatus", value)}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="pending">Pending</SelectItem>
-                          <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="approved">Approved</SelectItem>
-                          <SelectItem value="rejected">Rejected</SelectItem>
+                          <SelectItem value="notApproved">Not Approved</SelectItem>
+                          <SelectItem value="pending">Pending</SelectItem>
+                          
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                  <div>
-                    <Label htmlFor="edit-postedLink">Posted Link</Label>
-                    <Input
-                      id="edit-postedLink"
-                      type="url"
-                      value={editFormData.postedLink}
-                      onChange={(e) => handleEditInputChange("postedLink", e.target.value)}
-                      placeholder="Direct link to the posted content"
-                    />
+                    <div>
+                      <Label htmlFor="edit-postedLink">Posted Link</Label>
+                      <Input
+                        id="edit-postedLink"
+                        type="url"
+                        value={editFormData.postedLink}
+                        onChange={(e) => handleEditInputChange("postedLink", e.target.value)}
+                        placeholder="Direct link to the posted content"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="status">Published Post Status</Label>
+                      <Select value={editFormData.status} onValueChange={(value) => handleEditInputChange("status", value)}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="postUnderApproval">Post Under Approval</SelectItem>
+                          <SelectItem value="live">Live</SelectItem>
+                          <SelectItem value="removed">Removed </SelectItem>
+                          <SelectItem value="underModeration">Under Moderation</SelectItem>
+                          <SelectItem value="notPosted">Not Posted</SelectItem>
+                        </SelectContent>
+                      </Select>
+
+                    </div>
                   </div>
 
                   {/* Action Buttons */}
@@ -734,7 +754,7 @@ if (loading) {
                   </p>
                 </div>
               </div>
-              
+
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground mb-2">
                   Are you sure you want to delete this post?
@@ -747,14 +767,14 @@ if (loading) {
               </div>
 
               <div className="flex items-center justify-end gap-3">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={closeDeleteConfirmation}
                   disabled={isDeleting}
                 >
                   Cancel
                 </Button>
-                <Button 
+                <Button
                   variant="destructive"
                   onClick={handleDelete}
                   disabled={isDeleting}

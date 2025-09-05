@@ -171,24 +171,30 @@ const getStatusBadge = (status) => {
 };
 
 
-  // Edit 
   const openEditModal = (post) => {
-    setEditingPost(post);
-    setEditFormData({
-      category: post.category || "",
-      title: post.title || "",
-      engagementText: post.engagement_text || "",
-      datePosted: post.date_posted ? new Date(post.date_posted).toISOString().split('T')[0] : "",
-      postedLink: post.posted_link || "",
-      status: post.status || "pending",
-      clientFeedback: post.client_feedback || "",
-      targetedSubreddit: post.targeted_subreddit || "",
-      postURL: post.post_url || "",
-      redditUsername: post.reddit_username || "",
-      postedCommentStatus: post.posted_comment_status || "underModeration",
-    });
-    setIsEditModalOpen(true);
-  };
+  setEditCategories((prev) => {
+    if (post.category && !prev.includes(post.category)) {
+      return [...prev, post.category];
+    }
+    return prev;
+  });
+
+  setEditingPost(post);
+  setEditFormData({
+    category: post.category || "",
+    title: post.title || "",
+    engagementText: post.engagement_text || "",
+    datePosted: post.date_posted ? new Date(post.date_posted).toISOString().split('T')[0] : "",
+    postedLink: post.posted_link || "",
+    status: post.status || "pending",
+    clientFeedback: post.client_feedback || "",
+    targetedSubreddit: post.targeted_subreddit || "",
+    postURL: post.post_url || "",
+    redditUsername: post.reddit_username || "",
+    postedCommentStatus: post.posted_comment_status || "underModeration",
+  });
+  setIsEditModalOpen(true);
+};
 
   const closeEditModal = () => {
     setIsEditModalOpen(false);
@@ -353,11 +359,11 @@ const getStatusBadge = (status) => {
           </div>
           <div className="flex items-center gap-3">
             <Button
-              onClick={() => router.push("/threadflow/Comment/add")}
+              onClick={() => router.push("/threadflow/comment/add")}
               className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <Plus className="h-4 w-4 mr-2" />
-              Add New Post
+              Add New Comment
             </Button>
             <UserProfile />
           </div>
@@ -378,18 +384,24 @@ const getStatusBadge = (status) => {
                 />
               </div>
 
-             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-  <SelectTrigger className="w-48">
-    <SelectValue placeholder="All Categories" />
+           <Select
+  value={editFormData.category}
+  onValueChange={(value) => handleEditInputChange("category", value)}
+>
+  <SelectTrigger>
+    <SelectValue placeholder="Select category">
+      {editFormData.category || "Select category"}
+    </SelectValue>
   </SelectTrigger>
-  <SelectContent>
-    {categories.map((cat) => (
-      <SelectItem key={cat} value={cat}>
-        {cat === "all" ? "All Categories" : cat}
+  <SelectContent className="max-h-60">
+    {editCategories.map((category) => (
+      <SelectItem key={category} value={category}>
+        {category}
       </SelectItem>
     ))}
   </SelectContent>
 </Select>
+
 
 
             <Select value={selectedStatus} onValueChange={setSelectedStatus}>
@@ -701,6 +713,7 @@ const getStatusBadge = (status) => {
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
                           <SelectItem value="underModeration">Under Moderation</SelectItem>
+                          <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>

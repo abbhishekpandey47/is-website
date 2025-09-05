@@ -565,9 +565,10 @@ const PostsPage = () => {
                           </TableCell>
 
                           {/* Targeted Subreddit */}
-                          <TableCell>
-                            {item.type === 'post' ? (item.target_subreddit || "-") : (item.targeted_subreddit || "-")}
-                          </TableCell>
+<TableCell>
+  {item.targeted_subreddit || "-"}
+</TableCell>
+
 
                           {/* Reddit Username */}
                           <TableCell>
