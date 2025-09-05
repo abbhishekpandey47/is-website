@@ -278,9 +278,9 @@ const circle3 = [
 
 function OrbitLogos() {
   return (
-    <div className="relative flex items-center justify-center h-[200px] w-[450px] text-white overflow-hidden">
+    <div className="relative flex items-center justify-center h-[200px] w-[450px] text-white overflow-hidden mb-8 pt-40">
       {/* Center logo */}
-      <div className="absolute w-28 h-28 rounded-full flex items-center justify-center border border-gray-700 shadow-lg z-10">
+      <div className="absolute w-28 h-28 rounded-full flex items-center justify-center  shadow-lg z-10">
          <Image
                 alt="Center Logo"
                 src="/CommLogo/infrasity-small-logo.svg"
@@ -290,8 +290,7 @@ function OrbitLogos() {
          />
       </div>
 
-      {/* Small circle */}
-      <div className="absolute w-[250px] h-[250px] rounded-full border border-gray-700 animate-spin-slow">
+      <div className="absolute w-[250px] h-[250px] rounded-full border border-gray-700 animate-spin-slowest">
         {circle1.map((src, i) => {
           const angle = (i / circle1.length) * 360;
           return (
@@ -315,34 +314,32 @@ function OrbitLogos() {
           );
         })}
       </div>
-
-      {/* Medium circle */}
-      <div className="absolute w-[400px] h-[400px] rounded-full border border-gray-700 animate-spin-slower">
-        {circle2.map((src, i) => {
-          const angle = (i / circle2.length) * 360;
-          return (
-            <div
-              key={i}
-              className="absolute w-8 h-8 -ml-4 -mt-4"
-              style={{
-                top: "50%",
-                left: "50%",
-                transform: `rotate(${angle}deg) translate(200px) rotate(-${angle}deg)`,
-              }}
-            >
-              <Image
-                src={src}
-                alt={`logo2-${i}`}
-                width={32}
-                height={32}
-                className="rounded-full object-cover"
-              />
-            </div>
-          );
-        })}
+<div className="absolute w-[400px] h-[400px] rounded-full border border-gray-700 animate-spin-reverse">
+  {circle2.map((src, i) => {
+    const angle = (i / circle2.length) * 360;
+    return (
+      <div
+        key={i}
+        className="absolute w-8 h-8 -ml-4 -mt-4"
+        style={{
+          top: "50%",
+          left: "50%",
+          transform: `rotate(${angle}deg) translate(200px) rotate(-${angle}deg)`,
+        }}
+      >
+        <Image
+          src={src}
+          alt={`logo2-${i}`}
+          width={32}
+          height={32}
+          className="rounded-full object-cover"
+        />
       </div>
+    );
+  })}
+</div>
 
-      {/* Large circle */}
+
       <div className="absolute w-[550px] h-[550px] rounded-full border border-gray-700 animate-spin-slowest">
         {circle3.map((src, i) => {
           const angle = (i / circle3.length) * 360;
@@ -450,7 +447,7 @@ const DarkPipedreamDiagram = () => {
 
         <svg className="w-32 h-20" viewBox="0 0 115 80" xmlns="http://www.w3.org/2000/svg">
           <g transform="translate(0 39.95)">
-            <path d="M 0 0 L 115 0" fill="transparent" stroke="rgb(255, 255, 255)" stroke-dasharray="9.2 9.2" stroke-linecap="butt" stroke-width="1" />
+            <path d="M 0 0 L 115 0" fill="transparent" stroke="rgb(255, 255, 255)" strokeDasharray="9.2 9.2" stroke-linecap="butt" stroke-width="1" />
           </g>
         </svg>
 
