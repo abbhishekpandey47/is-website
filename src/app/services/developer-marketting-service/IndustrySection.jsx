@@ -41,22 +41,6 @@ const IndustryCard = ({ icon, title, description, href }) => {
           {icon}
           <h3 className="font-poppins text-white text-[22px] mt-[8px]">{title}</h3>
           <p className="font-inter text-gray-400 mb-[16px]">{description}</p>
-          <span className="block text-gray-500 max-h-[24px] md:max-h-0 opacity-100 md:opacity-0 h-full flex items-center transition-[max-height_0.2s_ease,opacity_0.2s_ease] group-hover:opacity-100 group-hover:max-h-[24px]">
-            Learn more
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 15 15"
-              xmlns="http://www.w3.org/2000/svg"
-              className="inline ml-[4px]"
-            >
-              <path
-                d="M1.595 7.673c0 .352.285.636.637.636l9.434.015-2.734 2.728a.634.634 0 0 0 .45 1.085.636.636 0 0 0 .45-.186l3.822-3.814a.634.634 0 0 0 0-.898L9.833 3.425a.637.637 0 0 0-.9.899l2.733 2.728-9.434-.014a.636.636 0 0 0-.637.635z"
-                fill="currentColor"
-                fillRule="nonzero"
-              ></path>
-            </svg>
-          </span>
         </div>
 
         <div
@@ -259,14 +243,6 @@ const IndustrySection = () => {
  href="/industries/telecommunications"
  />
  </div>
- </div>
- <div className='flex justify-center items-center mt-8'>
- <button
- onClick={() => setShowAll(!showAll)}
- className="transition-opacity duration-300 opacity-100 button button--variant_outline"
- >
- {showAll ? 'Show less' : 'Show all'}
- </button>
  </div>
  </div>
  </div>
