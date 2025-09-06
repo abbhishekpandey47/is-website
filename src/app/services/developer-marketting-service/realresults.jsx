@@ -16,39 +16,47 @@ const caseStudies = [
     href: '/services/tech-video-production',
     logo: 'https://framerusercontent.com/images/fL7fpMcAbk9CemZ1CkadfWS84L8.png',
     logoAlt: 'Back Market Logo',
-    title: 'Engaging product explainers and demos that simplify complex SaaS features.',
+    title: 'Video Production',
+    description: 'Engaging product explainers and demos that simplify complex SaaS features.',
     personName: 'One of Back Market\'s',
     personRole: 'DevOps Engineers',
     icon: <Video className="w-6 h-6 text-blue-400" />,
+    ctaText: "View our work",
   },
   {
     id: 'contra',
     href: '/services/technical-writing-services',
     logo: 'https://framerusercontent.com/images/HDo6WR9KUHx595FKclTY6WMWM.png',
     logoAlt: 'Contra Logo',
-    title: 'Clear, developer-focused docs and guides that speed up adoption.',
+    title: 'Technical Writing Services',
+    description: 'Clear, developer-focused docs and guides that speed up adoption.',
     personName: 'Doug Schlenker',
     personRole: 'VP of Engineering',
      icon: <FileText className="w-6 h-6 text-emerald-400" />,
+    ctaText: "See our writing",
   },
   {
     id: 'luminar',
     href: '/services/webflow-agency',
     logo: 'https://framerusercontent.com/images/AmIZfk7Uwc2ATo35ixS9KzfgpM.png',
     logoAlt: 'Luminar Logo',
-    title: 'Custom Webflow sites designed for SaaS conversion and scalability.',
+    title: 'Webflow Agency',
+    description: 'Custom Webflow sites designed for SaaS conversion and scalability.',
     personName: 'Florian Berchtold',
     personRole: 'Software Engineer',
     icon: <Layout className="w-6 h-6 text-purple-400" />,
+    ctaText: "View our sites",
   },
   {
     id: 'prophesee',
     href: '/services/reddit-marketing-agency',
     logo: '/landingfolio/reddita.svg',
     logoAlt: 'Prophesee Logo',
-    title: 'Authentic engagement in dev communities to build credibility and trust.',
+    title: 'Reddit Marketing Services',
+    description: 'Authentic engagement in dev communities to build credibility and trust.',
     personName: 'Julien Thierry',
     personRole: 'Software Engineer',
+    ctaText: "See our strategy",
   },
 ];
 
@@ -77,13 +85,18 @@ function CaseStudyCard({ study }) {
 
 
         {/* Title */}
-        <p className="text-xl h-36 font-medium text-white mb-4 group-hover:text-purple-800 transition-colors duration-300">
+        <h3 className="text-xl font-medium text-white mb-2 group-hover:text-purple-800 transition-colors duration-300">
           {study.title}
+        </h3>
+        
+        {/* Description */}
+        <p className="text-gray-400 text-sm mb-4 h-20">
+          {study.description}
         </p>
                 <div className="opacity-0 group-hover:opacity-100 h-px bg-white/20 mb-4 group-hover:bg-blue-400/30 transition-colors duration-300"></div>
 
         <span className="opacity-0 group-hover:opacity-100 mb-6 text-gray-400 text-sm font-medium flex items-center">
-          Read story
+          {study.ctaText}
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 24 24" 
@@ -134,12 +147,12 @@ export default function RealResult() {
       <div className="max-w-7xl mx-auto">
         {/* Title */}
         <h2 className="text-4xl md:text-6xl font-medium leading-tight tracking-tight text-left bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-          Real teams, real results
+          The assets every early-stage SaaS actually needs
         </h2>
 
         {/* Subtitle */}
         <p className="mt-4 text-lg md:text-xl font-medium leading-relaxed tracking-tight text-gray-400 text-left">
-          Engineering teams we helped merge faster, safer, and cheaper
+          How top infra, AI, and SaaS startups scaled credibility without hiring full DevRel teams.
         </p>
       </div>
 
