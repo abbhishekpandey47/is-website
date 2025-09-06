@@ -159,6 +159,14 @@ const Footer = () => {
               <ul className="space-y-3">
                 <li>
                   <a
+                    href="/services/developer-marketting-service"
+                    className="hover:underline lg:mr-2"
+                  >
+                    Developer Marketing Services
+                  </a>
+                </li>
+                <li>
+                  <a
                     href="/services/technical-writing-services"
                     className="hover:underline lg:mr-2"
                   >

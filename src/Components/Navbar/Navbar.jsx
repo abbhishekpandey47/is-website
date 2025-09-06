@@ -180,6 +180,10 @@ const GivenMenuBar = ({
 
 const menuLinksArrServices = [
   {
+    hrefLink: "/services/developer-marketting-service",
+    menuName: "Developer Marketing Services",
+  },
+  {
     hrefLink: "/services/service-video-production",
     menuName: "Video Production",
   },
@@ -355,6 +359,28 @@ const Navbar = () => {
 
                     {servicesOpen && (
                       <div className="bg-slate-900 rounded-lg mt-1 mb-2">
+                        <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick(
+                                "/services/developer-marketting-service"
+                              );
+                            }}
+                            href="/services/developer-marketting-service"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/services/developer-marketting-service".includes(
+                                "http"
+                              )
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>Developer Marketing Services</div>
+                          </Link>
+                        </MenuItem2>
+
                         <MenuItem2>
                           <Link
                             onClick={(e) => {
