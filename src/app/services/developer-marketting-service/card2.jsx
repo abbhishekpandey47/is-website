@@ -467,17 +467,17 @@ const DarkPipedreamDiagram = () => {
 
  <div className="w-2 h-2 bg-white rounded-full"></div>
 
- <div className="relative bg-green-500 rounded-md p-4">
- <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-green-500 bg-gray-900 rounded-xl p-2">
- Pipedream Connect
+ <div className="relative bg-purple-800 rounded-md p-4">
+ <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-purple-800 bg-gray-900 rounded-xl p-2">
+Infrasity
  </div>
  </div>
 
  <svg className="w-32 h-32" viewBox="0 0 102.5 183" xmlns="http://www.w3.org/2000/svg">
  <g>
- <path d="M 0 93.759 L 0.504 93.645 L 39.972 93.712 C 55.146 93.738 67.461 81.444 67.461 66.27 L 67.461 34.302 C 67.461 15.358 82.818 0 101.763 0 L 101.763 0" fill="transparent" stroke="rgb(57, 209, 140)" />
- <path d="M 0 93.759 L 0.504 93.645 L 40.066 93.712 C 55.203 93.738 67.461 106.017 67.461 121.154 L 67.461 144.069 C 67.461 163.013 82.818 178.371 101.763 178.371 L 101.763 178.371" fill="transparent" stroke="rgb(57, 209, 140)" />
- <path d="M 5.717 93.645 L 101.763 93.759" fill="transparent" stroke="rgb(57, 209, 140)" />
+ <path d="M 0 93.759 L 0.504 93.645 L 39.972 93.712 C 55.146 93.738 67.461 81.444 67.461 66.27 L 67.461 34.302 C 67.461 15.358 82.818 0 101.763 0 L 101.763 0" fill="transparent" stroke="rgb(198 39 255)" />
+ <path d="M 0 93.759 L 0.504 93.645 L 40.066 93.712 C 55.203 93.738 67.461 106.017 67.461 121.154 L 67.461 144.069 C 67.461 163.013 82.818 178.371 101.763 178.371 L 101.763 178.371" fill="transparent" stroke="rgb(198 39 255)" />
+ <path d="M 5.717 93.645 L 101.763 93.759" fill="transparent" stroke="rgb(198 39 255)" />
  </g>
  </svg>
 
