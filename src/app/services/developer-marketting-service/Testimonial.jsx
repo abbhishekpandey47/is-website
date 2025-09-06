@@ -152,7 +152,6 @@ const TestiCard = ({
         <div className="flex justify-center gap-5 items-center">
           <div>
             <Image
-              loading="lazy"
               width={100}
               height={100}
               className="max-w-[60px] rounded-[100%]"
