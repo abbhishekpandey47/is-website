@@ -115,10 +115,10 @@ const IntegrationsSection = () => {
   return (
     <div className=" mx-3">
       <h2 className="font-medium text-[32px] lg:text-[38px] text-white text-center font-[quicksand] mb-4">
-        Integrate with any Framework or Gateway
+      Trusted by SaaS teams across DevTools, Infra, and AI
       </h2>
       <p className="font-['Inter'] text-[18px] text-gray-400 max-w-[928px] mx-auto text-center mb-10">
-        Our open-source SDKs let you seamlessly add Treblle to your APIs. We support 20+ platforms and API gateways, including Javascript, PHP, Azure, Mulesoft, Laravel, .Net, Cloudflare, Python, etc.
+      From MLOps to Cloud Infra, from YC-backed startups to growth-stage SaaS — we’ve built adoption engines that scale.
       </p>
 
       <div className="relative max-w-[1200px] mx-auto">

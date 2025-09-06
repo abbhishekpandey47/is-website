@@ -10,7 +10,7 @@ export default function CTA() {
     >
       {/* Title */}
       <h2 className="text-2xl md:text-3xl font-bold text-white max-w-xl">
-        Ready to turn intelligence into intuition?
+        YC-backed SaaS companies trust Infrasity to drive adoption.<br />Ready to join them?
       </h2>
 
       {/* CTA Button */}
