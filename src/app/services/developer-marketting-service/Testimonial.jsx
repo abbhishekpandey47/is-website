@@ -177,45 +177,36 @@ const Testimonials = () => {
   const testiMemo = useMemo(() => testiArr, []);
 
   useEffect(() => {
+    let ctx;
     (async () => {
       const { gsap } = await import("gsap");
-      const { ScrollTrigger, CustomEase } = await import("gsap/all");
+      const { ScrollTrigger } = await import("gsap/all");
       gsap.registerPlugin(ScrollTrigger);
-      gsap.registerPlugin(CustomEase);
+      
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          ".testiMonialsHead",
+          { opacity: 0, y: 55 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".testiMonialsHead",
+              toggleActions: "restart none none none",
+            },
+          }
+        );
 
-      gsap.fromTo(
-        ".testiMonialsHead",
-        { opacity: 0, y: 55 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".testiMonialsHead",
-            toggleActions: "restart none none none",
-          },
-        }
-      );
-
-      gsap.fromTo(
-        ".testiMonCardHome",
-        { opacity: 0, y: 55, scale: 1.3 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: "power3.out",
-          scale: 1,
-          scrollTrigger: {
-            trigger: ".testiMonCardHome",
-            toggleActions: "restart none none none",
-          },
-        }
-      );
+        gsap.set(".testiMonCardHome", { opacity: 1, y: 0, scale: 1 });
+      });
     })();
+    
+    return () => {
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   useEffect(() => {
@@ -266,7 +257,7 @@ const Testimonials = () => {
           </button>
         </div>
 
-        <div className="testiMonCardHome">
+        <div className="testiMonCardHome transition-opacity duration-300">
           <TestiCard
             index={0}
             name={testiMemo[carPtr]?.name}
@@ -276,7 +267,6 @@ const Testimonials = () => {
             carPtr={carPtr}
             comment={testiMemo[carPtr]?.comment}
             highlight={testiMemo[carPtr]?.highlight || []}
-            key={carPtr}
           />
         </div>
 
