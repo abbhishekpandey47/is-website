@@ -76,22 +76,23 @@ const FeatureCards = () => {
     <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-px bg-gradient-to-b from-pink-500/5 via-pink-300 to-pink-500/5 shadow-pink-400/50"></div>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 gap-x-20">
-      {cards.map((card) => (
+      {cards.map((card, index) => (
         <div
           key={card.id}
           className="g-gray-800 rounded-lg border border-gray-700 pb-6 shadow-sm shadow-white/30 transition-shadow duration-200"
         >
-          <div className="mb-6">
-            {card.design ? (
-              <div>{card.design}</div>
-            ) : (
-              <img
-                src={`/landingfolio/${card.image}`}
-                alt={card.imageAlt}
-                className="w-full h-full rounded"
-              />
-            )}
-          </div>
+        <div className={`mb-6 ${index < 2 ? "h-56" : ""}`}>
+  {card.design ? (
+    <div>{card.design}</div>
+  ) : (
+    <img
+      src={`/landingfolio/${card.image}`}
+      alt={card.imageAlt}
+      className="w-full h-full rounded"
+    />
+  )}
+</div>
+
 
           {/* Title */}
           <div className="px-5">
@@ -468,20 +469,50 @@ const DarkPipedreamDiagram = () => {
  <div className="w-2 h-2 bg-white rounded-full"></div>
 
  <div className="relative bg-purple-800 rounded-md p-4">
- <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border border-purple-800 bg-gray-900 rounded-xl p-2">
+ <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-[2px] border-[#c627ff] bg-gray-900 rounded-xl p-2 -mr-1">
 Infrasity
  </div>
  </div>
 
- <svg className="w-32 h-32" viewBox="0 0 102.5 183" xmlns="http://www.w3.org/2000/svg">
- <g>
- <path d="M 0 93.759 L 0.504 93.645 L 39.972 93.712 C 55.146 93.738 67.461 81.444 67.461 66.27 L 67.461 34.302 C 67.461 15.358 82.818 0 101.763 0 L 101.763 0" fill="transparent" stroke="rgb(198 39 255)" />
- <path d="M 0 93.759 L 0.504 93.645 L 40.066 93.712 C 55.203 93.738 67.461 106.017 67.461 121.154 L 67.461 144.069 C 67.461 163.013 82.818 178.371 101.763 178.371 L 101.763 178.371" fill="transparent" stroke="rgb(198 39 255)" />
- <path d="M 5.717 93.645 L 101.763 93.759" fill="transparent" stroke="rgb(198 39 255)" />
- </g>
- </svg>
+<svg className="w-[120px] h-32" viewBox="0 0 130 183" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <path
+      d="M 0 93.759 L 0.504 93.645 L 39.972 93.712 
+         C 55.146 93.738 67.461 81.444 67.461 66.27 
+         L 67.461 34.302 
+         C 67.461 15.358 82.818 0 109.763 0"
+      fill="transparent"
+      stroke="rgb(198 39 255)"
+      strokeWidth="2"
+    />
+    <path
+      d="M 0 93.759 L 0.504 93.645 L 40.066 93.712 
+         C 55.203 93.738 67.461 106.017 67.461 121.154 
+         L 67.461 144.069 
+         C 67.461 163.013 82.818 178.371 109.763 178.371"
+      fill="transparent"
+      stroke="rgb(198 39 255)"
+      strokeWidth="2"
+    />
+    <path
+      d="M 5.717 93.645 L 109.763 93.759"
+      fill="transparent"
+      stroke="rgb(198 39 255)"
+      strokeWidth="2"
+    />
+  </g>
+</svg>
 
- <div className="flex flex-col space-y-4">
+
+ {/*  <svg className="w-full h-full" viewBox="0 0 102.5 80" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <path d="M 0 40 L 0.504 39.951 L 39.972 39.98 C 55.146 39.991 67.461 34.746 67.461 28.272 L 67.461 14.634 C 67.461 6.552 82.818 0 101.763 0 L 101.763 0" fill="transparent" stroke="rgb(198 39 255)" />
+              <path d="M 0 40 L 0.504 39.951 L 40.066 39.98 C 55.203 39.991 67.461 45.23 67.461 51.687 L 67.461 61.464 C 67.461 69.546 82.818 76.098 101.763 76.098 L 101.763 76.098" fill="transparent" stroke="rgb(198 39 255)" />
+              <path d="M 5.717 39.951 L 101.763 40" fill="transparent" stroke="rgb(198 39 255)" />
+            </g>
+          </svg> */}
+
+ <div className="flex flex-col space-y-4 -ml-7">
  <div className="bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg shadow-lg p-2">
  <svg className="w-5 h-5" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg">
  <path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" fill="#fff"/>
