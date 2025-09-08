@@ -1,5 +1,3 @@
-# **Strategy for Distribution Channels for B2B Content Marketting**
-
 ## **TL;DR**
 
 * Distribution channels for B2B content marketing are very different when targeting developers compared to traditional B2B buyers.
