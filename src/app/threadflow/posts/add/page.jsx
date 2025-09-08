@@ -1,21 +1,19 @@
 'use client';
-import { useState, useEffect } from "react";
+import { auth } from "@/lib/firebaseClient";
+import { cn } from "@/lib/utils";
+import { onAuthStateChanged } from "firebase/auth";
+import { ArrowLeft, Plus, Save, X } from "lucide-react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Button } from "../../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../../Components/ui/card";
 import { Input } from "../../../../Components/ui/input";
 import { Label } from "../../../../Components/ui/label";
-import { Textarea } from "../../../../Components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../Components/ui/select";
 import { SidebarTrigger } from "../../../../Components/ui/sidebar";
 import { UserProfile } from "../../../../Components/UserProfile";
-import { useRouter } from "next/navigation";
-import { Save, ArrowLeft, Plus, X } from "lucide-react";
 import { useToast } from "../../../../hooks/use-toast";
-import { supabase } from "@/lib/supabaseClient";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebaseClient";
-import { cn } from "@/lib/utils";
 
 
 const ReactQuill = dynamic(
@@ -127,10 +125,11 @@ const AddPostPage = () => {
     }
 
     try {
+      const token = await firebaseUser.getIdToken();
       const res = await fetch("/api/posts", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, user_id: firebaseUser.uid }),
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ ...formData }),
       });
 
       const result = await res.json();
@@ -164,7 +163,8 @@ const AddPostPage = () => {
         router.push("/auth/signin");
       } else {
         try {
-          const res = await fetch(`/api/posts?categories=true&userId=${user.uid}`);
+          const token = await user.getIdToken();
+          const res = await fetch(`/api/posts?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
           const result = await res.json();
 
           if (res.ok && result.categories) {

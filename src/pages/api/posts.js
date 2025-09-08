@@ -1,3 +1,4 @@
+import { forbid, getAllowedCompanyIds, verifyRequestUser } from "@/lib/serverAuth";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -6,12 +7,28 @@ const supabase = createClient(
 );
 
 export default async function handler(req, res) {
+  // Authenticate request via Firebase ID token
+  let userCtx;
+  try {
+    userCtx = await verifyRequestUser(req);
+  } catch (e) {
+    const status = e.status || 401;
+    return res.status(status).json({ error: e.message || "Unauthorized" });
+  }
+  const allowedCompanyIds = await getAllowedCompanyIds(userCtx);
   if (req.method === "POST") {
     try {
       const body = req.body;
 
-      if (!body.title || !body.category || !body.user_id) {
+      if (!body.title || !body.category) {
         return res.status(400).json({ error: "Missing required fields" });
+      }
+      // Assign company_id based on linkage or explicit provided (validated)
+      let company_id = body.company_id || null;
+      if (!userCtx.isAdmin) {
+        if (!allowedCompanyIds || allowedCompanyIds.length === 0) return forbid(res, 'No company access');
+        if (company_id && !allowedCompanyIds.includes(company_id)) return forbid(res);
+        if (!company_id) company_id = allowedCompanyIds[0];
       }
 
       const { data, error } = await supabase.from("posts").insert([
@@ -26,7 +43,8 @@ export default async function handler(req, res) {
           date_posted: body.datePosted ? new Date(body.datePosted) : null,
           posted_link: body.postedLink || null,
           current_status: body.currentStatus || "pending",
-          user_id: body.user_id,
+          user_id: userCtx.uid,
+          company_id: company_id,
           reddit_username: body.redditUsername || null,
         },
       ]);
@@ -42,7 +60,7 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     try {
-      const { userId, id, categories } = req.query;
+      const { id, categories } = req.query;
 
       // Get single post by ID
       if (id) {
@@ -54,19 +72,21 @@ export default async function handler(req, res) {
 
         if (error) return res.status(500).json({ error: error.message });
 
+        // Enforce access
+        if (!userCtx.isAdmin && data?.company_id && allowedCompanyIds && !allowedCompanyIds.includes(data.company_id)) {
+          return forbid(res);
+        }
         return res.status(200).json({ success: true, data });
       }
 
-      // Otherwise get all posts by userId
-      if (!userId) {
-        return res.status(400).json({ error: "Missing userId" });
-      }
-
       if (categories === "true") {
-        const { data, error } = await supabase
+        let query = supabase
           .from("posts")
-          .select("category")
-          .eq("user_id", userId);
+          .select("category");
+        if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
+          query = query.in('company_id', allowedCompanyIds);
+        }
+        const { data, error } = await query;
 
         if (error) return res.status(500).json({ error: error.message });
 
@@ -76,11 +96,14 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true, categories: uniqueCategories });
       }
 
-      const { data, error } = await supabase
+      let query = supabase
         .from("posts")
         .select("*")
-        // .eq("user_id", userId)
         .order("date_posted", { ascending: false });
+      if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
+        query = query.in('company_id', allowedCompanyIds);
+      }
+      const { data, error } = await query;
 
       if (error) return res.status(500).json({ error: error.message });
 
@@ -98,6 +121,12 @@ export default async function handler(req, res) {
 
       if (!id) {
         return res.status(400).json({ error: "Missing post ID" });
+      }
+      // fetch existing to check access
+      const { data: existing, error: fetchErr } = await supabase.from('posts').select('company_id').eq('id', id).single();
+      if (fetchErr) return res.status(500).json({ error: fetchErr.message });
+      if (!userCtx.isAdmin && existing?.company_id && Array.isArray(allowedCompanyIds) && !allowedCompanyIds.includes(existing.company_id)) {
+        return forbid(res);
       }
 
       const { data, error } = await supabase
@@ -122,6 +151,12 @@ export default async function handler(req, res) {
 
       if (!id) {
         return res.status(400).json({ error: "Missing post ID" });
+      }
+      // Access check
+      const { data: existing, error: fetchErr } = await supabase.from('posts').select('company_id').eq('id', id).single();
+      if (fetchErr) return res.status(500).json({ error: fetchErr.message });
+      if (!userCtx.isAdmin && existing?.company_id && Array.isArray(allowedCompanyIds) && !allowedCompanyIds.includes(existing.company_id)) {
+        return forbid(res);
       }
 
       const { data, error } = await supabase

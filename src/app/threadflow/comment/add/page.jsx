@@ -1,17 +1,17 @@
 'use client';
-import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { ArrowLeft, Plus, Save, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Button } from "../../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../../Components/ui/card";
 import { Input } from "../../../../Components/ui/input";
 import { Label } from "../../../../Components/ui/label";
-import { Textarea } from "../../../../Components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../Components/ui/select";
 import { SidebarTrigger } from "../../../../Components/ui/sidebar";
+import { Textarea } from "../../../../Components/ui/textarea";
 import { UserProfile } from "../../../../Components/UserProfile";
-import { useRouter } from "next/navigation";
-import { Save, ArrowLeft, Plus, X } from "lucide-react";
 import { useToast } from "../../../../hooks/use-toast";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../../lib/firebaseClient";
 
 const AddPostPage = () => {
@@ -25,7 +25,7 @@ const AddPostPage = () => {
   // Predefined categories
   const [categories, setCategories] = useState([
     "Drift Detection",
-    "IaC", 
+    "IaC",
     "DevOps",
     "AWS",
     "Enterprise AI",
@@ -85,7 +85,7 @@ const AddPostPage = () => {
     setFormData(prev => ({ ...prev, category: newCategory.name.trim() }));
     setNewCategory({ name: "", description: "" });
     setShowAddCategory(false);
-    
+
     toast({
       title: "Category added",
       description: `Category "${newCategory.name.trim()}" has been added successfully.`,
@@ -115,10 +115,11 @@ const AddPostPage = () => {
   }
 
   try {
+    const token = await firebaseUser.getIdToken();
     const res = await fetch("/api/comment", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...formData, user_id: firebaseUser.uid }),
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ ...formData }),
     });
 
     const result = await res.json();
@@ -152,13 +153,14 @@ useEffect(() => {
       router.push("/auth/signin");
     } else {
       try {
-        const res = await fetch(`/api/comment?categories=true&userId=${user.uid}`);
+  const token = await user.getIdToken();
+  const res = await fetch(`/api/comment?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (res.ok && result.categories) {
           setCategories((prev) => {
             const merged = [...prev, ...result.categories];
-            return [...new Set(merged.map((c) => c.trim()))]; 
+            return [...new Set(merged.map((c) => c.trim()))];
           });
         }
       } catch (err) {
@@ -181,9 +183,9 @@ useEffect(() => {
           <div className="flex items-center gap-4">
             <SidebarTrigger className="h-8 w-8" />
             <div className="flex items-center gap-3">
-              <Button 
-                variant="ghost" 
-                onClick={() => router.back()}                
+              <Button
+                variant="ghost"
+                onClick={() => router.back()}
                 className="p-2"
               >
                 <ArrowLeft className="h-4 w-4" />
@@ -242,7 +244,7 @@ useEffect(() => {
                           </div>
                         </SelectContent>
                       </Select>
-                      
+
                       {formData.category === "add-new" && (
                         <div className="border border-border/50 rounded-lg p-4 bg-card/50 backdrop-blur-sm shadow-sm">
                           <div className="flex items-center justify-between mb-4">
@@ -460,16 +462,16 @@ useEffect(() => {
 
                 {/* Action Buttons */}
                 <div className="flex items-center justify-end gap-3 pt-8 border-t border-border/50">
-                  <Button 
-                    type="button" 
-                    variant="outline" 
+                  <Button
+                    type="button"
+                    variant="outline"
                     onClick={() => router.back()}
                     className="h-10 px-6"
                   >
                     Cancel
                   </Button>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="bg-primary hover:bg-primary/90 text-primary-foreground h-10 px-6"
                   >
                     <Save className="h-4 w-4 mr-2" />

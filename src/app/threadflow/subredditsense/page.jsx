@@ -23,22 +23,26 @@ const memDashCache = typeof window !== 'undefined'
   : new Map();
 
 async function apiLinkCompany(firebaseUserId, companyName) {
-  const res = await fetch('/api/threadflow/reddit/link-company', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firebaseUserId, companyName }) });
+  const token = await auth.currentUser?.getIdToken?.();
+  const res = await fetch('/api/threadflow/reddit/link-company', { method: 'POST', headers: { 'Content-Type': 'application/json', ...(token? { Authorization: `Bearer ${token}` } : {}) }, body: JSON.stringify({ companyName }) });
   if (!res.ok) throw new Error('Link company failed');
   return res.json();
 }
 async function apiFetchFull(firebaseUserId, companyId, companyName) {
-  const res = await fetch('/api/threadflow/reddit/fetch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firebaseUserId, companyId, companyName, fullRefresh: true, maxBatches: 5 }) });
+  const token = await auth.currentUser?.getIdToken?.();
+  const res = await fetch('/api/threadflow/reddit/fetch', { method: 'POST', headers: { 'Content-Type': 'application/json', ...(token? { Authorization: `Bearer ${token}` } : {}) }, body: JSON.stringify({ companyId, companyName, fullRefresh: true, maxBatches: 5 }) });
   if (!res.ok) throw new Error('Refresh failed');
   return res.json();
 }
 async function apiJob(jobId){
-  const res = await fetch(`/api/threadflow/reddit/job?id=${encodeURIComponent(jobId)}`);
+  const token = await auth.currentUser?.getIdToken?.();
+  const res = await fetch(`/api/threadflow/reddit/job?id=${encodeURIComponent(jobId)}`, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
   if(!res.ok) throw new Error('Job poll failed');
   return res.json();
 }
 async function apiDashboard(companyId) {
-  const res = await fetch(`/api/threadflow/reddit/dashboard?companyId=${encodeURIComponent(companyId)}&legacy=1&range=all`);
+  const token = await auth.currentUser?.getIdToken?.();
+  const res = await fetch(`/api/threadflow/reddit/dashboard?companyId=${encodeURIComponent(companyId)}&legacy=1&range=all`, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
   if (!res.ok) throw new Error('Dashboard fetch failed');
   return res.json();
 }
@@ -137,21 +141,33 @@ export default function ThreadflowSubredditSensePage() {
     const unsub = onAuthStateChanged(auth, (user) => {
       setFirebaseUser(user);
       if (user) {
-        // Only adjust company if we don't already have one
-        if (!companyName) {
+        // Prefer the most recently linked company from server over heuristics
+        (async () => {
           try {
-            const stored = typeof window !== 'undefined' ? localStorage.getItem(`lastSelectedBrand_${user.uid}`) : null;
-            if (stored && stored.trim()) {
-              setCompanyName(stored.trim());
-            } else {
-              const defName = deriveDefaultCompany(user.email || '');
-              setCompanyName(defName);
+            const t = await user.getIdToken();
+            const res = await fetch('/api/threadflow/reddit/my-companies', { headers: { Authorization: `Bearer ${t}` } });
+            if (res.ok) {
+              const j = await res.json();
+              const first = j.companies?.[0];
+              if (first?.name) {
+                setCompanyName(first.name);
+                try { localStorage.setItem(`lastSelectedBrand_${user.uid}`, first.name); } catch {}
+              } else if (!companyName) {
+                // Fallbacks: localStorage, then derived from email
+                const stored = typeof window !== 'undefined' ? localStorage.getItem(`lastSelectedBrand_${user.uid}`) : null;
+                if (stored && stored.trim()) setCompanyName(stored.trim());
+                else setCompanyName(deriveDefaultCompany(user.email || ''));
+              }
+            } else if (!companyName) {
+              const stored = typeof window !== 'undefined' ? localStorage.getItem(`lastSelectedBrand_${user.uid}`) : null;
+              if (stored && stored.trim()) setCompanyName(stored.trim());
+              else setCompanyName(deriveDefaultCompany(user.email || ''));
             }
           } catch {
-            const defName = deriveDefaultCompany(user.email || '');
-            setCompanyName(defName);
+            if (!companyName) setCompanyName(deriveDefaultCompany(user.email || ''));
           }
-        }
+        })();
+        
       }
       setLoading(false);
     });
@@ -411,7 +427,8 @@ async function pollJobUntilDone(jobId, onStatus, timeoutMs=60000, intervalMs=150
   const started = Date.now();
   while (Date.now() - started < timeoutMs){
     try {
-      const res = await fetch(`/api/threadflow/reddit/job?id=${encodeURIComponent(jobId)}`);
+  const token = await auth.currentUser?.getIdToken?.();
+  const res = await fetch(`/api/threadflow/reddit/job?id=${encodeURIComponent(jobId)}`, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
       if(!res.ok) break;
       const json = await res.json();
       const status = json.job?.status;

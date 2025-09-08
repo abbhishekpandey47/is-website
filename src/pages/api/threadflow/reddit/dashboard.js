@@ -1,3 +1,4 @@
+import { forbid, getAllowedCompanyIds, verifyRequestUser } from '@/lib/serverAuth';
 import { createClient } from '@supabase/supabase-js';
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
@@ -5,6 +6,11 @@ export default async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
   const { companyId, range = '30d', legacy } = req.query;
   if (!companyId) return res.status(400).json({ error: 'companyId required' });
+  // AuthZ: ensure caller can access this company
+  let userCtx;
+  try { userCtx = await verifyRequestUser(req); } catch (e) { return res.status(e.status||401).json({ error: e.message }); }
+  const allowed = await getAllowedCompanyIds(userCtx);
+  if (!userCtx.isAdmin && Array.isArray(allowed) && !allowed.includes(companyId)) return forbid(res);
   // range=all returns full history without date filtering
   let since = null;
   let days = null;

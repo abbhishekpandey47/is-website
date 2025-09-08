@@ -1,25 +1,25 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Button } from "../../Components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../../Components/ui/card";
-import { Input } from "../../Components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../Components/ui/select";
-import { Badge } from "../../Components/ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../Components/ui/table";
-import { SidebarTrigger } from "../../Components/ui/sidebar";
-import { UserProfile } from "../../Components/UserProfile";
-import { useRouter } from "next/navigation";
-import { Plus, Search, ExternalLink, BarChart3 } from "lucide-react";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
+import { onAuthStateChanged } from "firebase/auth";
+import { BarChart3, ExternalLink, Plus, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { StatusCard } from "../../Components/StatusCard";
+import { Badge } from "../../Components/ui/badge";
+import { Button } from "../../Components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../../Components/ui/card";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../../Components/ui/dropdown-menu"
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "../../Components/ui/dropdown-menu";
+import { Input } from "../../Components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../Components/ui/select";
+import { SidebarTrigger } from "../../Components/ui/sidebar";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../Components/ui/table";
+import { UserProfile } from "../../Components/UserProfile";
 
 const PostsPage = () => {
   const router = useRouter();
@@ -30,8 +30,8 @@ const PostsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
-  const [selectedType, setSelectedType] = useState("all"); 
-   
+  const [selectedType, setSelectedType] = useState("all");
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setFirebaseUser(user);
@@ -50,9 +50,10 @@ const PostsPage = () => {
 
     console.log("Fetching posts and comments for user:", firebaseUser.uid);
 
-    const fetchPosts = async () => {
+  const fetchPosts = async () => {
       try {
-        const res = await fetch(`/api/posts?userId=${firebaseUser.uid}`);
+    const token = await firebaseUser.getIdToken();
+    const res = await fetch(`/api/posts`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
@@ -66,9 +67,10 @@ const PostsPage = () => {
       }
     };
 
-    const fetchComments = async () => {
+  const fetchComments = async () => {
       try {
-        const res = await fetch(`/api/comment?userId=${firebaseUser.uid}`);
+    const token = await firebaseUser.getIdToken();
+    const res = await fetch(`/api/comment`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
@@ -341,10 +343,10 @@ const PostsPage = () => {
                   <TableRow>
                     {/* Show Type column only when displaying all */}
                     {selectedType === "all" && <TableHead>Type</TableHead>}
-                    
+
                     {/* Common columns */}
                     <TableHead>Category</TableHead>
-                    
+
                     {/* Post-specific columns */}
                     {selectedType === "post" && (
                       <>
@@ -359,7 +361,7 @@ const PostsPage = () => {
                         <TableHead>Reddit Username</TableHead>
                       </>
                     )}
-                    
+
                     {/* Comment-specific columns */}
                     {selectedType === "comment" && (
                       <>
@@ -374,7 +376,7 @@ const PostsPage = () => {
                         <TableHead>Posted Comment Status</TableHead>
                       </>
                     )}
-                    
+
                     {/* All type view - combined columns */}
                     {selectedType === "all" && (
                       <>
@@ -400,7 +402,7 @@ const PostsPage = () => {
                           </Badge>
                         </TableCell>
                       )}
-                      
+
                       {/* Category - always shown */}
                       <TableCell>
                         <Badge variant="outline" className="whitespace-nowrap">
@@ -417,7 +419,7 @@ const PostsPage = () => {
                               {item.title}
                             </div>
                           </TableCell>
-                          
+
                           {/* URL */}
                           <TableCell className="max-w-xs">
                             <a
@@ -430,25 +432,25 @@ const PostsPage = () => {
                               Reddit Link
                             </a>
                           </TableCell>
-                          
+
                           {/* Status */}
                           <TableCell>{getStatusBadge(item.status, item.type)}</TableCell>
-                          
+
                           {/* Text of engagement */}
                           <TableCell className="max-w-sm">
                             <div className="text-sm text-muted-foreground line-clamp-3">
                               {item.engagement_text}
                             </div>
                           </TableCell>
-                          
+
                           {/* Date published */}
                           <TableCell className="text-sm">
                             {item.date_posted ? new Date(item.date_posted).toLocaleDateString() : "-"}
                           </TableCell>
-                          
+
                           {/* Current Status */}
                           <TableCell className="text-sm">{item.current_status || "-"}</TableCell>
-                          
+
                           {/* Published Link */}
                           <TableCell>
                             <a
@@ -460,10 +462,10 @@ const PostsPage = () => {
                               {item.posted_link ? "View Link" : "-"}
                             </a>
                           </TableCell>
-                          
+
                           {/* Number of our engagements */}
                           <TableCell className="text-sm">-</TableCell>
-                          
+
                           {/* Reddit Username */}
                           <TableCell>{item.reddit_username || "-"}</TableCell>
                         </>
@@ -478,37 +480,37 @@ const PostsPage = () => {
                               {item.targeted_subreddit || "-"}
                             </div>
                           </TableCell>
-                          
+
                           {/* Title */}
                           <TableCell className="font-medium max-w-xs">
                             <div className="truncate" title={item.title}>
                               {item.title}
                             </div>
                           </TableCell>
-                          
+
                           {/* Comment Approval Status */}
                           {/* getStatusBadge(item.posted_comment_status, 'comment')} */}
                           <TableCell>{getStatusBadge(item.status, 'comment')}</TableCell>
-                          
+
                           {/* Text of engagement */}
                           <TableCell className="max-w-sm">
                             <div className="text-sm text-muted-foreground line-clamp-3">
                               {item.engagement_text}
                             </div>
                           </TableCell>
-                          
+
                           {/* Date published */}
                           <TableCell className="text-sm">
                             {item.date_posted ? new Date(item.date_posted).toLocaleDateString() : "-"}
                           </TableCell>
-                          
+
                           {/* Customer Comments */}
                           <TableCell className="max-w-sm">
                             <div className="text-sm text-muted-foreground line-clamp-3">
                               {item.client_feedback || "-"}
                             </div>
                           </TableCell>
-                          
+
                           {/* Published Link */}
                           <TableCell>
                             <a
@@ -520,10 +522,10 @@ const PostsPage = () => {
                               {item.posted_link ? "View Link" : "-"}
                             </a>
                           </TableCell>
-                          
+
                           {/* Reddit Username */}
                           <TableCell>{item.reddit_username || "-"}</TableCell>
-                          
+
                           {/* Posted Comment Status */}
                           <TableCell>{getStatusBadge(item.posted_comment_status, 'comment')}</TableCell>
                         </>

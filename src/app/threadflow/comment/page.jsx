@@ -1,20 +1,20 @@
 "use client";
+import { onAuthStateChanged } from "firebase/auth";
+import { Edit, Plus, Save, Search, Trash2, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Badge } from "../../../Components/ui/badge";
 import { Button } from "../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../Components/ui/card";
 import { Input } from "../../../Components/ui/input";
 import { Label } from "../../../Components/ui/label";
-import { Textarea } from "../../../Components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../Components/ui/select";
 import { SidebarTrigger } from "../../../Components/ui/sidebar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../Components/ui/table";
+import { Textarea } from "../../../Components/ui/textarea";
 import { UserProfile } from "../../../Components/UserProfile";
-import { useRouter } from "next/navigation";
-import { Plus, Search, ExternalLink, Edit, Trash2, Save, X } from "lucide-react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../../lib/firebaseClient";
 import { useToast } from "../../../hooks/use-toast";
+import { auth } from "../../../lib/firebaseClient";
 
 
 const PostsPage = () => {
@@ -27,7 +27,7 @@ const PostsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
 
-  // Edit modal 
+  // Edit modal
   const [editingPost, setEditingPost] = useState(null);
   const [editFormData, setEditFormData] = useState({
     category: "",
@@ -72,9 +72,10 @@ const PostsPage = () => {
 
     console.log("Fetching posts for user:", firebaseUser.uid);
 
-    const fetchPosts = async () => {
+  const fetchPosts = async () => {
       try {
-        const res = await fetch(`/api/comment?userId=${firebaseUser.uid}`);
+    const token = await firebaseUser.getIdToken();
+    const res = await fetch(`/api/comment`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
@@ -98,18 +99,19 @@ const PostsPage = () => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setFirebaseUser(user);
       setLoading(false);
-  
+
       if (!user) {
         router.push("/auth/signin");
       } else {
         try {
-          const res = await fetch(`/api/comment?categories=true&userId=${user.uid}`);
+          const token = await user.getIdToken();
+          const res = await fetch(`/api/comment?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
           const result = await res.json();
-  
+
           if (res.ok && result.categories) {
             setEditCategories((prev) => {
               const merged = [...prev, ...result.categories];
-              return [...new Set(merged.map((c) => c.trim()))]; 
+              return [...new Set(merged.map((c) => c.trim()))];
             });
           }
         } catch (err) {
@@ -117,10 +119,10 @@ const PostsPage = () => {
         }
       }
     });
-  
+
     return () => unsubscribe();
   }, [router]);
-  
+
 
 const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
 const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
@@ -227,9 +229,10 @@ const getStatusBadge = (status) => {
     }
 
     try {
+      const token = await firebaseUser.getIdToken();
       const res = await fetch("/api/comment", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
           id: editingPost.id, // required for update
           category: editFormData.category,
@@ -285,8 +288,10 @@ const getStatusBadge = (status) => {
   setIsDeleting(postId);
 
   try {
+    const token = await firebaseUser.getIdToken();
     const res = await fetch(`/api/comment?id=${postId}`, {
       method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     const result = await res.json();

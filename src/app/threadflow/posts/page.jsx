@@ -1,22 +1,21 @@
 "use client";
-import { useEffect, useState } from "react";
+import { auth } from "@/lib/firebaseClient";
+import { cn } from "@/lib/utils";
+import { onAuthStateChanged } from "firebase/auth";
+import { Edit, ExternalLink, Plus, Save, Search, Trash2, X } from "lucide-react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Badge } from "../../../Components/ui/badge";
 import { Button } from "../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../Components/ui/card";
 import { Input } from "../../../Components/ui/input";
 import { Label } from "../../../Components/ui/label";
-import { Textarea } from "../../../Components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../Components/ui/select";
 import { SidebarTrigger } from "../../../Components/ui/sidebar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../Components/ui/table";
 import { UserProfile } from "../../../Components/UserProfile";
-import { useRouter } from "next/navigation";
-import { Plus, Search, ExternalLink, Edit, Trash2, Save, X } from "lucide-react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebaseClient";
 import { useToast } from "../../../hooks/use-toast";
-import { cn } from "@/lib/utils";
 
 const ReactQuill = dynamic(
   async () => {
@@ -40,7 +39,7 @@ const PostsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
 
-  // Edit modal 
+  // Edit modal
   const [editingPost, setEditingPost] = useState(null);
   const [editFormData, setEditFormData] = useState({
     category: "",
@@ -86,9 +85,10 @@ const PostsPage = () => {
 
     console.log("Fetching posts for user:", firebaseUser.uid);
 
-    const fetchPosts = async () => {
+  const fetchPosts = async () => {
       try {
-        const res = await fetch(`/api/posts?userId=${firebaseUser.uid}`);
+    const token = await firebaseUser.getIdToken();
+    const res = await fetch(`/api/posts`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
@@ -114,7 +114,8 @@ const PostsPage = () => {
         router.push("/auth/signin");
       } else {
         try {
-          const res = await fetch(`/api/posts?categories=true&userId=${user.uid}`);
+          const token = await user.getIdToken();
+          const res = await fetch(`/api/posts?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
           const result = await res.json();
 
           if (res.ok && result.categories) {
@@ -167,7 +168,7 @@ const PostsPage = () => {
     );
   };
 
-  // Edit 
+  // Edit
   const openEditModal = (post) => {
     setEditingPost(post);
     setEditFormData({
@@ -221,9 +222,10 @@ const PostsPage = () => {
     }
 
     try {
+      const token = await firebaseUser.getIdToken();
       const res = await fetch("/api/posts", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
           id: editingPost.id,
           category: editFormData.category,
@@ -283,8 +285,10 @@ const PostsPage = () => {
     setIsDeleting(postId);
 
     try {
+      const token = await firebaseUser.getIdToken();
       const res = await fetch(`/api/posts?id=${postId}`, {
         method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       const result = await res.json();
@@ -686,7 +690,7 @@ const PostsPage = () => {
                           <SelectItem value="approved">Approved</SelectItem>
                           <SelectItem value="notApproved">Not Approved</SelectItem>
                           <SelectItem value="pending">Pending</SelectItem>
-                          
+
                         </SelectContent>
                       </Select>
                     </div>

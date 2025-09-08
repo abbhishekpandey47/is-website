@@ -1,4 +1,5 @@
 import { fetchWithRetry } from '@/app/tools/reddit-tools/utils/fetchWithRetry';
+import { forbid, getAllowedCompanyIds, verifyRequestUser } from '@/lib/serverAuth';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
@@ -6,8 +7,11 @@ const API_BASE = 'https://reddit-comment-gen.onrender.com';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-  const { firebaseUserId, companyId, companyName, fullRefresh = false, maxBatches = 3 } = req.body || {};
-  if (!firebaseUserId || !companyId || !companyName) return res.status(400).json({ error: 'Missing fields' });
+  const { companyId, companyName, fullRefresh = false, maxBatches = 3 } = req.body || {};
+  if (!companyId || !companyName) return res.status(400).json({ error: 'Missing fields' });
+  let userCtx; try { userCtx = await verifyRequestUser(req); } catch (e) { return res.status(e.status||401).json({ error: e.message }); }
+  const allowed = await getAllowedCompanyIds(userCtx);
+  if (!userCtx.isAdmin && Array.isArray(allowed) && !allowed.includes(companyId)) return forbid(res);
   try {
     const batchLimit = Math.min(parseInt(maxBatches) || 1, 8); // prevent runaway
   console.log('[reddit_fetch_v2] invocation', { companyId, companyName, fullRefresh, batchLimit });
