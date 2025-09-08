@@ -167,7 +167,7 @@ export default function ThreadflowSubredditSensePage() {
             if (!companyName) setCompanyName(deriveDefaultCompany(user.email || ''));
           }
         })();
-        
+
       }
       setLoading(false);
     });
