@@ -58,13 +58,27 @@ export async function getAllowedCompanyIds({ uid, domain, isAdmin }) {
     return null
   }
   const ids = new Set()
-  // Companies matching email domain
+  // Companies matching email domain; support multiple domains in companies.domain
+  // allowing comma/space separated values like: "respond.io, rocketbots.io"
   if (domain) {
-    const { data: compsByDomain } = await supabase
-      .from('companies')
-      .select('id')
-      .eq('domain', domain)
-    ;(compsByDomain || []).forEach(c => ids.add(c.id))
+    // Use ilike + pattern match to find rows where the domain list contains the domain
+    // Patterns cover start, middle (comma/space separated), or end occurrences.
+    const patterns = [
+      domain,            // exact or single value
+      `${domain},%`,     // at beginning
+      `%, ${domain}`,    // at end with space
+      `%,${domain}`,     // at end without space
+      `%, ${domain},%`,  // in middle with spaces
+      `%,${domain},%`,   // in middle without spaces
+    ]
+    const queries = patterns.map(p =>
+      supabase.from('companies').select('id').ilike('domain', p)
+    )
+    // Execute sequentially to keep it simple; results are small
+    for (const q of queries) {
+      const { data } = await q
+      ;(data || []).forEach(c => ids.add(c.id))
+    }
   }
   // Companies linked in user_companies
   if (uid) {
