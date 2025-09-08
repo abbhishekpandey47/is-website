@@ -1079,7 +1079,7 @@ let postMetaData = [
     metaDescription: "Click the link to unlock growth with an LLM visibility tool. Track brand mentions, rankings & performance in ChatGPT, Gemini, Claude & more."
 },
 {
-    title: "Distribution Channels for B2B Content Marketing",
+    title: "Strategy for Distribution Channels for B2B Content Marketting",
     metatitle: "B2B Content Marketing Distribution Channels | Infrasity",
     slug: "distribution-channels-for-b2b-content-marketing",
     description: "Mastering distribution channels for B2B content marketing is no longer about email blasts or gated PDFs. This blog dives into the owned, earned, and paid content distributors that actually move the needle for B2B SaaS startups. It’ll show you how to build a content distribution strategy that feels less like marketing and more like help. Read on to learn strategies, examples, and metrics to measure success.",
