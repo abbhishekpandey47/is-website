@@ -4,15 +4,15 @@
 
 import * as Sentry from "@sentry/nextjs";
 
+const dsn = process.env.SENTRY_DSN || "";
+const env = process.env.NODE_ENV || "development";
+const telemetry = (process.env.SENTRY_TELEMETRY || "false").toLowerCase() === "true";
+
 Sentry.init({
-  dsn: "https://51fbc61b729d5e67090ec73c6f67b586@o4509925786320896.ingest.de.sentry.io/4509925792088144",
-
-  // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
-  tracesSampleRate: 1,
-
-  // Enable logs to be sent to Sentry
-  enableLogs: true,
-
-  // Setting this option to true will print useful information to the console while you're setting up Sentry.
-  debug: false,
+  dsn: dsn || undefined,
+  enabled: Boolean(dsn),
+  environment: process.env.SENTRY_ENVIRONMENT || env,
+  tracesSampleRate: Number(process.env.SENTRY_TRACES_SAMPLE_RATE ?? 0),
+  enableLogs: telemetry,
+  debug: (process.env.SENTRY_DEBUG || "false").toLowerCase() === "true",
 });
