@@ -22,7 +22,7 @@ module.exports = {
         return [
                 {
                     source: '/blog/10-best-technical-writing-content-service-providers',
-                    destination: 'https://www.infrasity.com/blog/top-10-technical-writing-service-companies',
+                    destination: '/blog/top-10-technical-writing-service-companies',
                     permanent: true,
                     statusCode: 301,
                 },
