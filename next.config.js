@@ -20,6 +20,12 @@ module.exports = {
     // Add redirect configuration
     async redirects() {
         return [
+                {
+                    source: '/blog/10-best-technical-writing-content-service-providers',
+                    destination: 'https://www.infrasity.com/blog/top-10-technical-writing-service-companies',
+                    permanent: true,
+                    statusCode: 301,
+                },
             {
                 source: '/blog/how-to-create-a-powerful-product-document',
                 destination: '/blog/b2b-saas-prd',
