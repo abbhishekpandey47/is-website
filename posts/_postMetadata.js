@@ -1086,7 +1086,7 @@ let postMetaData = [
     ogImage: "/PostImages/distribution-channels-for-b2b-content-marketing/banner.png",
     publishedOn: "2025-09-05",
     authorId: "author0005",
-    category: "Informational",
+    category: "B2B SaaS- Content Marketing",
     metaDescription: "Learn the best content distribution strategy for B2B SaaS. Explore GitHub, Dev.to, Reddit & more digital content distribution channels. Read now."
 },
 
