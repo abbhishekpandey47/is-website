@@ -1079,15 +1079,26 @@ let postMetaData = [
     metaDescription: "Click the link to unlock growth with an LLM visibility tool. Track brand mentions, rankings & performance in ChatGPT, Gemini, Claude & more."
 },
 {
-    title: "Strategy for Distribution Channels for B2B Content Marketting",
+    title: "Strategy for Distribution Channels for B2B Content Marketing",
     metatitle: "B2B Content Marketing Distribution Channels | Infrasity",
     slug: "distribution-channels-for-b2b-content-marketing",
     description: "Mastering distribution channels for B2B content marketing is no longer about email blasts or gated PDFs. This blog dives into the owned, earned, and paid content distributors that actually move the needle for B2B SaaS startups. It’ll show you how to build a content distribution strategy that feels less like marketing and more like help. Read on to learn strategies, examples, and metrics to measure success.",
     ogImage: "/PostImages/distribution-channels-for-b2b-content-marketing/banner.png",
     publishedOn: "2025-09-05",
     authorId: "author0005",
-    category: "Informational",
+    category: "B2B SaaS- Content Marketing",
     metaDescription: "Learn the best content distribution strategy for B2B SaaS. Explore GitHub, Dev.to, Reddit & more digital content distribution channels. Read now."
+},
+{
+  title: "What Is Developer Marketing?",
+  metatitle: "What Is Developer Marketing | Infrasity",
+  slug: "what-is-developer-marketing",
+  description: "Developer marketing is no ordinary B2B marketing, it’s about educating, engaging, and empowering developers with hands-on, technical content that builds trust. In this complete 2025 guide, we break down what developer marketing is, why it’s different from traditional B2B marketing, and how to craft a winning developer marketing strategy. Learn key tactics like docs, community engagement, tutorials, and content distribution.",
+  ogImage: "/PostImages/what-is-developer-marketing/banner.jpg",
+  publishedOn: "2025-09-12",
+  authorId: "author0005",
+  category: "Informational",
+  metaDescription: "Learn what developer marketing is and how to build a winning developer marketing strategy for 2025. Click the link to read now!"
 },
 
 ];

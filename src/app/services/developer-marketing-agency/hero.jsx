@@ -33,7 +33,7 @@ export default function Hero() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="relative mx-auto max-w-3xl text-center">
             <h1 className="font-[quicksand] bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-5xl/[1.07] font-bold tracking-tight text-transparent md:text-5xl/[1.07]">
-              The developer marketing engine behind top SaaS startups
+              The Developer Marketing Agency Behind Top SaaS Startups
             </h1>
             <p className="font-[quicksand]  mt-6 text-lg font-medium text-zinc-400 md:text-xl">
               We work with leading infra and AI companies to transform product features into developer adoption through GitHub repos, community-first content, and technical storytelling.

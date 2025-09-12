@@ -74,6 +74,12 @@ module.exports = {
                 permanent: true,
                 statusCode: 301,
             },
+            {
+                source: '/services/developer-marketting-service',
+                destination: '/services/developer-marketing-agency',
+                permanent: true,
+                statusCode: 301,
+            },
         ];
     },
 };
