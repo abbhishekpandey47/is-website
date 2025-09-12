@@ -6,32 +6,32 @@ const IntegrationsSection = () => {
     {
       name: 'Java',
       image: '/integrations/java-spring.png',
-      href: '/services/developer-marketting-service'
+      href: '/services/developer-marketing-agency'
     },
     {
       name: '.NET',
       image: '/integrations/dotnet.webp',
-      href: '/services/developer-marketting-service'
+      href: '/services/developer-marketing-agency'
     },
     {
       name: 'NodeJS',
       image: '/integrations/node.webp',
-      href: '/services/developer-marketting-service'
+      href: '/services/developer-marketing-agency'
     },
     {
       name: 'Laravel',
       image: '/integrations/laravel.webp',
-      href: '/services/developer-marketting-service'
+      href: '/services/developer-marketing-agency'
     },
     {
       name: 'Ruby on Rails',
       image: '/integrations/ruby-on-rails.png',
-      href: '/services/developer-marketting-service'
+      href: '/services/developer-marketing-agency'
     },
     {
       name: 'Django',
       image: '/integrations/django.webp',
-      href: '/services/developer-marketting-service'
+      href: '/services/developer-marketing-agency'
     }
   ];
 
@@ -39,27 +39,27 @@ const IntegrationsSection = () => {
     {
       name: 'Kong Gateway',
       image: '/integrations/kong.webp',
-      href: '/services/developer-marketting-service'
+      href: '/services/developer-marketing-agency'
     },
     {
       name: 'Traefik API Gateway',
       image: '/integrations/traefik.webp',
-      href: '/services/developer-marketting-service'
+      href: '/services/developer-marketing-agency'
     },
     {
       name: 'WSO2 API Gateway',
       image: '/integrations/traefik.webp',
-      href: '/services/developer-marketting-service'
+      href: '/services/developer-marketing-agency'
     },
     {
       name: 'Cloudflare',
       image: '/integrations/traefik.webp',
-      href: '/services/developer-marketting-service'
+      href: '/services/developer-marketing-agency'
     },
     {
       name: 'Strapi',
       image: '/integrations/traefik.webp',
-      href: '/services/developer-marketting-service'
+      href: '/services/developer-marketing-agency'
     }
   ];
 
