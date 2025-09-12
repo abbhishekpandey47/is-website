@@ -162,7 +162,7 @@ const Footer = () => {
                     href="/services/developer-marketing-agency"
                     className="hover:underline lg:mr-2"
                   >
-                    Developer Marketing Agencys
+                    Developer Marketing Agency
                   </a>
                 </li>
                 <li>

@@ -377,7 +377,7 @@ const Navbar = () => {
                                 : ""
                             }
                           >
-                            <div>Developer Marketing Agencys</div>
+                            <div>Developer Marketing Agency</div>
                           </Link>
                         </MenuItem2>
 
