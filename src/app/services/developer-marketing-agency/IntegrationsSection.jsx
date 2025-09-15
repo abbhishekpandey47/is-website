@@ -4,69 +4,69 @@ import Image from 'next/image';
 const IntegrationsSection = () => {
   const topRowIntegrations = [
     {
-      name: 'Java',
-      image: '/integrations/java-spring.png',
+      name: 'GitHub',
+      image: '/integrations/github.png',
       href: '/services/developer-marketing-agency'
     },
     {
-      name: '.NET',
-      image: '/integrations/dotnet.webp',
+      name: 'GitLab',
+      image: '/integrations/gitlab.png',
       href: '/services/developer-marketing-agency'
     },
     {
-      name: 'NodeJS',
-      image: '/integrations/node.webp',
+      name: 'Slack',
+      image: '/integrations/slack.jpg',
       href: '/services/developer-marketing-agency'
     },
     {
-      name: 'Laravel',
-      image: '/integrations/laravel.webp',
+      name: 'VS Code',
+      image: '/integrations/vscode.png',
       href: '/services/developer-marketing-agency'
     },
     {
-      name: 'Ruby on Rails',
-      image: '/integrations/ruby-on-rails.png',
+      name: 'Infra & Cloud',
+      image: '/integrations/infracloud.png',
       href: '/services/developer-marketing-agency'
     },
     {
-      name: 'Django',
-      image: '/integrations/django.webp',
+      name: 'Kubernetes',
+      image: '/integrations/kubernetes.png',
       href: '/services/developer-marketing-agency'
     }
   ];
 
   const bottomRowIntegrations = [
     {
-      name: 'Kong Gateway',
-      image: '/integrations/kong.webp',
+      name: 'Docker',
+      image: '/integrations/docker.avif',
       href: '/services/developer-marketing-agency'
     },
     {
-      name: 'Traefik API Gateway',
-      image: '/integrations/traefik.webp',
+      name: 'AWS',
+      image: '/integrations/aws.png',
       href: '/services/developer-marketing-agency'
     },
     {
-      name: 'WSO2 API Gateway',
-      image: '/integrations/traefik.webp',
+      name: 'GCP',
+      image: '/integrations/gcp.png',
       href: '/services/developer-marketing-agency'
     },
     {
-      name: 'Cloudflare',
-      image: '/integrations/traefik.webp',
+      name: 'AI & Data',
+      image: '/integrations/aidata.jpeg',
       href: '/services/developer-marketing-agency'
     },
     {
-      name: 'Strapi',
-      image: '/integrations/traefik.webp',
+      name: 'OpenAI',
+      image: '/integrations/openai.png',
       href: '/services/developer-marketing-agency'
     }
   ];
 
   const additionalIntegrations = [
-    { name: 'GraphQL', image: '/integrations/traefik.webp' },
-    { name: 'FastAPI', image: '/integrations/traefik.webp' },
-    { name: 'Symfony', image: '/integrations/traefik.webp' }
+    { name: 'LangChain', image: '/integrations/langchain.png' },
+    { name: 'Hugging Face', image: '/integrations/huggingface.png' },
+    { name: 'Weights & Biases', image: '/integrations/weightsbiases.png' }
   ];
 
   const IntegrationCard = ({ integration, index, isLastColumn = false, isFirstColumn = false, showViewDocs = true, href = null }) => (
@@ -77,7 +77,7 @@ const IntegrationsSection = () => {
       href={href || "/integrations"}
     >
       {integration.images ? (
-        <div className="flex">
+        <div className="flex bg-[#0f172a]">
           {integration.images.map((img, imgIndex) => (
             <Image
               key={imgIndex}
@@ -91,14 +91,17 @@ const IntegrationsSection = () => {
           ))}
         </div>
       ) : (
-        <Image
-          alt={integration.name}
-          loading="lazy"
-          width={32}
-          height={32}
-          className="bg-[#0f172a] rounded-full"
-          src={integration.image}
-        />
+       <Image
+  alt={integration.name}
+  loading="lazy"
+  width={32}
+  height={32}
+  className={`rounded-full ${
+    integration.name === "GitHub" ? "bg-white" : "bg-[#0f172a]"
+  }`}
+  src={integration.image}
+/>
+
       )}
       <p className="font-[quicksand] text-gray-400 transition-colors duration-100 ease-in-out mt-2 mb-4 group-hover:text-white">
         {integration.name}
