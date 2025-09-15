@@ -165,8 +165,19 @@ const CalendarBooking = ({
 
     useEffect(() => {
         const convertedSlots = convertTimeSlots(selectedTimezone);
+        // Remove slots that fall between 2:00 AM and 6:00 AM IST
+        const pdtoffset = getTimezoneOffsetMinutes("UTC-08:00");
+        const istoffset = getTimezoneOffsetMinutes("UTC+05:30");
+        const pdtoISTDiff = istoffset - pdtoffset;
+
+        const withoutIstQuietHours = convertedSlots.filter((slot) => {
+            const istMinutes = (timeToMinutes(slot.originalPDT) + pdtoISTDiff + 1440) % 1440;
+            // Exclude 2:00 AM (120) to 6:00 AM (360) IST
+            return !(istMinutes >= 120 && istMinutes < 360);
+        });
+
         // Filter out past slots if selectedDate is today
-        let filteredSlots = convertedSlots;
+        let filteredSlots = withoutIstQuietHours;
         if (selectedDate) {
             const today = new Date();
             if (
@@ -175,7 +186,7 @@ const CalendarBooking = ({
                 selectedDate.getFullYear() === today.getFullYear()
             ) {
                 const nowMinutes = getCurrentTimeInTimezoneMinutes(selectedTimezone);
-                filteredSlots = convertedSlots.filter(
+                filteredSlots = withoutIstQuietHours.filter(
                     (slot) => timeToMinutes(slot.convertedTime) > nowMinutes
                 );
             }
@@ -467,6 +478,14 @@ const CalendarBooking = ({
         return date < today || isWeekend;
     };
 
+    const isSameDay = (a, b) => {
+        return (
+            a.getDate() === b.getDate() &&
+            a.getMonth() === b.getMonth() &&
+            a.getFullYear() === b.getFullYear()
+        );
+    };
+
 
     const formatDate = (date) => {
         return `${weekdays[date.getDay()]}, ${months[date.getMonth()]
@@ -642,6 +661,13 @@ const CalendarBooking = ({
                                         <p className="text-gray-400 text-sm mb-2">
                                             Select a time slot for your meeting
                                         </p>
+                                        {selectedDate && availableTimeSlots.length === 0 && (
+                                            <div className="mt-2 text-sm text-yellow-300">
+                                                {isSameDay(selectedDate, new Date())
+                                                    ? "No time slots are available today. Please pick another date."
+                                                    : "No time slots are available for this date. Please pick another date."}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="mb-4 bg-[#0e1433] rounded-lg">
                                         <div>
@@ -673,21 +699,27 @@ const CalendarBooking = ({
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto mb-4">
-                                        {availableTimeSlots.map((slot, index) => (
-                                            <div
-                                                key={index}
-                                                onClick={() => handleTimeSelection(slot)}
-                                                className={`p-2 text-center rounded-md cursor-pointer border border-gray-700 
+                                    {availableTimeSlots.length > 0 ? (
+                                        <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto mb-4">
+                                            {availableTimeSlots.map((slot, index) => (
+                                                <div
+                                                    key={index}
+                                                    onClick={() => handleTimeSelection(slot)}
+                                                    className={`p-2 text-center rounded-md cursor-pointer border border-gray-700 
                 ${selectedTime === slot
-                                                        ? "bg-blue-600 text-white"
-                                                        : "hover:bg-gray-700"
-                                                    }`}
-                                            >
-                                                <div className="font-medium">{slot.convertedTime}</div>
-                                            </div>
-                                        ))}
-                                    </div>
+                                                            ? "bg-blue-600 text-white"
+                                                            : "hover:bg-gray-700"
+                                                        }`}
+                                                >
+                                                    <div className="font-medium">{slot.convertedTime}</div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="mb-4 p-4 border border-gray-700 rounded-md bg-[#0e1433] text-gray-300">
+                                            No slots to show.
+                                        </div>
+                                    )}
 
                                     <div className="mt-6 flex justify-between">
                                         <button
