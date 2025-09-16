@@ -51,7 +51,7 @@ export default function VideoTextHero() {
 
       <div className="max-w-5xl">
         <span className="block text-lg font-medium leading-[1.75] -tracking-[0.04em] text-zinc-400 md:text-xl lg:text-xl xl:text-[20px]">
-          It's time to cheat
+          The smarter shortcut to developer marketing
         </span>
         
         <h2 className="relative block font-[quicksand] text-[20px] leading-tight font-semibold md:text-[32px] lg:text-[40px] xl:text-[48px]">

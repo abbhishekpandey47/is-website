@@ -12,7 +12,7 @@ export default function WhyInfrasity() {
       <div className="max-w-xl flex flex-col gap-2">
         <h2 className="text-3xl md:text-4xl font-semibold text-zinc-400">
         Why companies choose{" "}
-          <span className="specialtext">Infrasity for developer marketting</span>
+          <span className="specialtext">Infrasity for developer marketing</span>
         </h2>
         <p className="text-zinc-400">
           Build secure, scalable applications using a developer platform built

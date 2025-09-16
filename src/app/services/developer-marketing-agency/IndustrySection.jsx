@@ -134,7 +134,7 @@ const IndustrySection = () => {
  </svg>}
  title="MLOps Platforms"
  description="Helping you win developer trust in a crowded space with hands-on guides, model ops playbooks, and repo-driven adoption."
- href="/industries/financial-services"
+ href="/services/developer-marketing-agency"
  />
  <IndustryCard 
  icon={<svg width="24" height="25" viewBox="0 0 24 25" xmlns="http://www.w3.org/2000/svg" className="text-gray-400">
@@ -145,7 +145,7 @@ const IndustrySection = () => {
  </svg>}
  title="Infrastructure SaaS"
  description="Positioning infra tools where they belong — inside GitHub, docs, and communities — to build credibility with platform teams."
- href="/industries/insurance"
+ href="/services/developer-marketing-agency"
  />
  <IndustryCard 
  icon={<svg width="22" height="21" viewBox="0 0 22 21" xmlns="http://www.w3.org/2000/svg" className="text-gray-400">
@@ -156,7 +156,7 @@ const IndustrySection = () => {
  </svg>}
  title="Observability & DevOps"
  description="Driving adoption with tutorials, benchmarks, and integrations that prove value in real production setups."
- href="/industries/healthcare"
+ href="/services/developer-marketing-agency"
  />
  <IndustryCard 
  icon={<svg width="24" height="25" viewBox="0 0 24 25" xmlns="http://www.w3.org/2000/svg" className="text-gray-400">
@@ -164,7 +164,7 @@ const IndustrySection = () => {
  </svg>}
  title="AI Infra & Agentic Tools"
  description="Building technical narratives that explain complex agent workflows in a way developers can run and trust."
- href="/industries/travel"
+ href="/services/developer-marketing-agency"
  />
  <div className={`${showAll ? '' : ''}`}>
  <IndustryCard 
@@ -178,7 +178,7 @@ const IndustrySection = () => {
  </svg>}
  title="API-first SaaS"
  description="From SDKs to migration guides, we craft the artifacts that get your API adopted across ecosystems."
- href="/industries/automotive"
+ href="/services/developer-marketing-agency"
  />
  </div>
  <div className={`${showAll ? '' : ''}`}>
@@ -210,7 +210,7 @@ const IndustrySection = () => {
  </svg>}
  title="YC & Early-Stage Startups"
  description="We act as your extended devrel team — shipping community presence, GTM content, and adoption signals from day one."
- href="/industries/iot"
+ href="/services/developer-marketing-agency"
  />
  </div>
  <div className={`${showAll ? '' : 'hidden'}`}>
@@ -226,7 +226,7 @@ const IndustrySection = () => {
  </svg>}
  title="Sports-Tech"
  description="Lead the field with transformative sports-tech solutions that keep users engaged and experiences elevated."
- href="/industries/sports-tech"
+ href="/services/developer-marketing-agency"
  />
  </div>
  <div className={`${showAll ? '' : 'hidden'}`}>
@@ -240,7 +240,7 @@ const IndustrySection = () => {
  </svg>}
  title="Telecommunications"
  description="Elevate global connections with secure, scalable platforms that make staying in touch simpler than ever."
- href="/industries/telecommunications"
+ href="/services/developer-marketing-agency"
  />
  </div>
  </div>

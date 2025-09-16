@@ -165,7 +165,7 @@ const IntegrationsSection = () => {
           className="px-6 py-3 border border-gray-500 text-white rounded-lg hover:bg-gray-800 transition-colors font-[quicksand]"
           href="/contact"
         >
-          Talk to sales
+          Talk to a devrel
         </a>
       </div>
     </div>

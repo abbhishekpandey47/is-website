@@ -80,6 +80,25 @@ module.exports = {
                 permanent: true,
                 statusCode: 301,
             },
+            // Handle common misspellings and variants for developer marketing service
+            {
+                source: '/services/developer-marketing-service',
+                destination: '/services/developer-marketing-agency',
+                permanent: true,
+                statusCode: 301,
+            },
+            {
+                source: '/services/developer-marketting-agency',
+                destination: '/services/developer-marketing-agency',
+                permanent: true,
+                statusCode: 301,
+            },
+            {
+                source: '/services/developer-marketing',
+                destination: '/services/developer-marketing-agency',
+                permanent: true,
+                statusCode: 301,
+            },
         ];
     },
 };
