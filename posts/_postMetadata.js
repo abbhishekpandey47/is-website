@@ -1093,12 +1093,23 @@ let postMetaData = [
   title: "What Is Developer Marketing?",
   metatitle: "What Is Developer Marketing | Infrasity",
   slug: "what-is-developer-marketing",
-  description: "Developer marketing is no ordinary B2B marketing, it’s about educating, engaging, and empowering developers with hands-on, technical content that builds trust. In this complete 2025 guide, we break down what developer marketing is, why it’s different from traditional B2B marketing, and how to craft a winning developer marketing strategy. Learn key tactics like docs, community engagement, tutorials, and content distribution.",
+  description: "Learn what developer marketing is and how to build a winning developer marketing strategy for 2025. Click the link to read now!",
   ogImage: "/PostImages/what-is-developer-marketing/banner.jpg",
   publishedOn: "2025-09-12",
   authorId: "author0005",
   category: "Informational",
   metaDescription: "Learn what developer marketing is and how to build a winning developer marketing strategy for 2025. Click the link to read now!"
+},
+{
+  title: "What Is Developer Marketing?",
+  metatitle: "DevRel Engineer vs GTM Engineer",
+  slug: "devrel-vs-gtm-engineer",
+  description: "Explore DevRel vs GTM engineers, their roles, and impact on B2B SaaS growth and go-to-market strategy. Read now!",
+  ogImage: "/PostImages/devrel-vs-gtm-engineer/0.png",
+  publishedOn: "2025-09-17",
+  authorId: "author0005",
+  category: "Informational",
+  metaDescription: "This blog explores the roles of DevRel engineers and GTM engineers in B2B SaaS growth. DevRel focuses on developer relations, community building, technical storytelling, and adoption metrics, helping developers engage with and advocate for products. GTM engineering drives pipeline acceleration, automation, and data-driven workflows to optimize sales-assisted growth. Learn more now!"
 },
 
 ];

@@ -198,10 +198,9 @@ const PostPage = (props) => {
     if (postContent && typeof postContent === 'string') {
       headingLines = postContent
         .split('\n')
-        .filter((line) => line.startsWith('## '))
-        .map(line => line.trim());
+        .filter((line) => line.startsWith('## ') && line.trim() !== '##')
+        .map(line => line.trim().replace(/\*\*/g, ''));
     }
-
 
     return (
       <>
@@ -236,11 +235,9 @@ const PostPage = (props) => {
                                 typeof children === "string"
                                   ? children
                                   : Array.isArray(children)
-                                    ? children[0]
+                                    ? children[0]?.props?.children[0] || children[0]
                                     : "";
-
                               const normalizedHeading = String(headingText).trim().toLowerCase();
-
                               const headingIndex = headingLines.findIndex(
                                 line => line.replace('## ', '').trim().toLowerCase() === normalizedHeading
                               );
@@ -252,7 +249,7 @@ const PostPage = (props) => {
                               if (headingIndex === 2) {
                                 ctaToShow = "first";
                               }
-                              else if (totalHeadings > 4 && headingIndex === totalHeadings - 3) {
+                              else if (totalHeadings > 4 && headingIndex === totalHeadings - 2) {
                                 ctaToShow = "second";
                               }
 
