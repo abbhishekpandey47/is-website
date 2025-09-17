@@ -40,10 +40,9 @@ Let’s take a look at the roles and responsibilities a DevRel engineer is expec
 1. **Technical Storytelling:**  
    Developers hate marketing fluff. Instead, they want to know *why* a product exists, what problem it solves, and how it fits into their workflow. Technical storytelling turns complex product features into relatable narratives that resonate with real developer problems.  
     
+   **Example:** Infrasity writes engineering content for some of the fast-growing B2B SaaS AI companies like Qodo and Firefly, which frame everyday developer pain points, such as “how to create a devcontainer feature,” and show how our customers solve them. This creates a natural pull for adoption because developers see themselves in the story.
 
-**Example:** Infrasity writes engineering content for some of the fast-growing B2B SaaS AI companies like Qodo and Firefly, which frame everyday developer pain points, such as “how to create a devcontainer feature,” and show how our customers solve them. This creates a natural pull for adoption because developers see themselves in the story.
-
-![Infrasity makes use cases for one of its customers. How to create a devcontainer feature is shown as the pain point.](/PostImages/devrel-vs-gtm-engineer/3.png)
+   ![Infrasity makes use cases for one of its customers. How to create a devcontainer feature is shown as the pain point.](/PostImages/devrel-vs-gtm-engineer/3.png)
 
 2. **Code-First Advocacy:**  
    The fastest way to win developer trust is through code, not pitch decks. DevRel engineers build samples, SDKs, and quickstart guides so developers can immediately test-drive the product  
@@ -63,6 +62,7 @@ Let’s take a look at the roles and responsibilities a DevRel engineer is expec
 5. **Empathy for Developers:**  
    DevRel is about solving real problems, not pushing features. This means listening deeply to feedback, understanding what frustrates developers, and advocating internally to improve product experience.  
    When onboarding a new market, we first talk to local developer communities, map their pain points, and adjust messaging and examples before entering that market.  
+
    **Example**: For one of our customers, [Scalekit](https://www.scalekit.com/), who works around authentication and authorisation. We highlight the developers’ pain points and market trends in their content through a hypothetical scenario or get real pain points mentioned by a developer in any developer community. Once we have discovered the pain points, we showcase how Scalekit solves them or plans to solve them.  
      
 6. **Metrics-Driven Growth:**  
@@ -117,7 +117,7 @@ The image shows Infrasity’s [Reddit Marketing](https://www.infrasity.com/servi
    * Identify new use cases and expansion opportunities within existing customer accounts to drive net revenue retention.   
      **Example:** We predicted the upcoming rapid surge in AI, keeping an eye on recent Product Hunt listings, Dev Hunt listings, and recent YC funding trends way back in the last quarter of 2024 and changed our messaging and positions as the early-stage accelerator for the fastest-growing AI teams like Qodo, Lovable, Vapi, Botgauge AI, etc.  
    * Stay ahead of industry trends, channel requirements, and GTM innovation trends to future-proof the motion.  
-   * Our team keeps a close watch on product capabilities and ensures that content, messaging, and positioning reflect what actually drives value for enterprise buyers.   
+   * Our team keeps a close watch on product capabilities and ensures that content, messaging, and positioning reflect what    actually drives value for enterprise buyers.   
      **Example**: Our team, prior to visiting the Kubecon 2025 at Hyderabad event, analysed the vertical pattern for the exhibitors and observed it to be majorly around observability and monitoring, therefore changed the showcased case studies for the Obsv companies we have worked with, like Middleware, Tracetest.
 
 4. **Growth at Scale**  
@@ -127,7 +127,7 @@ The image shows Infrasity’s [Reddit Marketing](https://www.infrasity.com/servi
 
    **Example**: For each customer, we deliver weekly or monthly reports with detailed performance breakdowns across LinkedIn campaigns, SEO, and content marketing, helping them double down on what’s working.
 
-5.  **Cross-Functional & Strategic Leadership**  
+5. **Cross-Functional & Strategic Leadership**  
    * Lead technical discussions with executives and enterprise stakeholders, translating complex solutions into simple, actionable plans.
 
 **Cost of hiring a GTM Engineer:** $107,100/year, typically 3–5 years of experience.
@@ -171,17 +171,20 @@ Understanding what is a GTM engineer vs what is DevRel isn’t about picking one
 
 ## **Frequently Asked Questions**
 
-1. **Is GTM engineering a good career?**
+1. **How to find a DevRel Engineer?**
 
-Yes, GTM engineering is quickly becoming one of the most in-demand roles in B2B SaaS companies. A GTM engineer uses automation, data pipelines, and workflow design to remove friction in the sales process and accelerate revenue. If you enjoy technical problem-solving but also want direct impact on go-to-market strategy, GTM engineering is a great career path. 
+Finding the right DevRel engineer starts with clarifying your company’s needs. If you’re early-stage, you’ll want someone who can wear multiple hats, building docs, nurturing developer communities, and creating technical content that drives adoption. Mid-to-late-stage startups may need a specialist who can scale developer relations programs, run community events, and measure impact through metrics like GitHub stars, SDK downloads, and developer retention.
+
+You can source DevRel talent through: Developer communities (GitHub, Discord, Reddit, Twitter/X). Specialized hiring platforms for DevRel and go-to-market (GTM) engineering roles and Industry events and conferences (where many DevRel engineers already speak or mentor).
+ 
 
 2. **What’s the future of GTM engineering?**
 
 The future of GTM engineering is **automation-first and AI-driven.** GTM engineers will own the entire GTM tech stack, from CRM workflows to AI-powered lead scoring and personalized outreach. They’ll become a core function alongside RevOps and Growth, making GTM engineering a future-proof career with strong demand across Series A+ SaaS companies.
 
-3. **How much does DevRel pay?**
+3. **How much does a DevRel cost?**
 
-DevRel engineers earn highly competitive salaries, typically ranging from  $185,000/year, depending on experience, seniority, and company stage. Developer relations (DevRel) roles are valued because they drive adoption, retention, and bottom-line impact. Experienced DevRel engineers with a track record of scaling developer communities can expect $180K+ at mid-to-late-stage startups.
+DevRel engineers earn highly competitive salaries, typically starting around $150,000–$185,000/year depending on experience, seniority, and company stage.
 
-**4\. How to become DevRel?**  
-To become a DevRel engineer, focus on a mix of **t**echnical skills and communication skills. Learn to build sample apps, SDKs, and write technical blogs. Practice public speaking, create tutorials, and contribute to open source to build credibility in developer relations. Many DevRel engineers start as software developers, solutions engineers, or developer advocates before transitioning into full-time DevRel roles.
+For early-stage startups, you may find strong DevRel candidates in the $140K–$160K range, while mid-to-late-stage companies often pay $180K+, especially for engineers who can prove measurable impact in scaling developer communities, driving product adoption, and shaping go-to-market engineering efforts.
+
