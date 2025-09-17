@@ -70,6 +70,7 @@ const Featured = () => {
         <div className="space-y-3">
           {latestPosts.map((item, index) => (
             <Link
+              key={index}
               href={`/blog/${item.slug}`}
               className="flex items-center bg-[#2A3A5E] p-2 rounded-md cursor-pointer hover:bg-[#3A4A7E] transition-all duration-300"
             >

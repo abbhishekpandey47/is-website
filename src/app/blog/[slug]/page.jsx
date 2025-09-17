@@ -78,7 +78,8 @@ export const generateStaticParams = async () => {
 // Dynamically generate metadata for each post
 export async function generateMetadata({ params }) {
   try {
-    if (!params || !params.slug) {
+    const {slug} = await params
+    if (!params || !slug) {
       return {
         title: "Post Not Found",
         description: "Invalid post parameters.",
@@ -92,7 +93,7 @@ export async function generateMetadata({ params }) {
       };
     }
 
-    const post = postMetaData.find((element) => element.slug === params.slug);
+    const post = postMetaData.find((element) => element.slug === slug);
 
     if (!post) {
       return {
@@ -111,7 +112,7 @@ export async function generateMetadata({ params }) {
 
     return {
       title: post.metatitle || post.title || "Blog Post",
-      description: post.description || "Blog post description",
+      description: post.metaDescription || "Blog post description",
       openGraph: {
         title: post.title || "Blog Post",
         description: post.metaDescription || post.description || "Blog post description",
@@ -132,9 +133,9 @@ export async function generateMetadata({ params }) {
 }
 
 // Main PostPage component
-const PostPage = (props) => {
+const PostPage = async (props) => {
   try {
-    const slug = props?.params?.slug;
+    const {slug} = await props.params;
 
     if (!slug) {
       console.error("No slug provided in params");
