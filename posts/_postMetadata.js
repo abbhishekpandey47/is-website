@@ -1101,14 +1101,14 @@ let postMetaData = [
   metaDescription: "Learn what developer marketing is and how to build a winning developer marketing strategy for 2025. Click the link to read now!"
 },
 {
-  title: "What Is Developer Marketing?",
+  title: "DevRel Engineer vs. GTM Engineer: The New Faces of Startup Growth",
   metatitle: "DevRel Engineer vs GTM Engineer",
   slug: "devrel-vs-gtm-engineer",
   description: "Explore DevRel vs GTM engineers, their roles, and impact on B2B SaaS growth and go-to-market strategy. Read now!",
-  ogImage: "/PostImages/devrel-vs-gtm-engineer/0.png",
+  ogImage: "/PostImages/devrel-vs-gtm-engineer/0.webp",
   publishedOn: "2025-09-17",
   authorId: "author0005",
-  category: "Informational",
+  category: "B2B SaaS Growth & GTM",
   metaDescription: "This blog explores the roles of DevRel engineers and GTM engineers in B2B SaaS growth. DevRel focuses on developer relations, community building, technical storytelling, and adoption metrics, helping developers engage with and advocate for products. GTM engineering drives pipeline acceleration, automation, and data-driven workflows to optimize sales-assisted growth. Learn more now!"
 },
 
