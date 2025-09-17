@@ -3,7 +3,7 @@
 
 ## **TL;DR**
 
-* **DevRel vs GTM Engineering:** DevRel engineers focus on developer relations (DevRel), community building, and technical enablement, while GTM engineers drive go-to-market (GTM) engineering, pipeline acceleration, and automation.
+* **DevRel vs GTM Engineering:** DevRel engineers focuses on developer relations which is sometimes called as DevRel as well, community building, and technical enablement, while GTM engineers drive go-to-market (GTM) engineering, pipeline acceleration, and automation.
 
 * **The role of DevRel Engineer:** Bridges product teams and developers, creates SDKs, tutorials, and technical content, measures adoption and community growth; avg. Salary $185K/year.
 
