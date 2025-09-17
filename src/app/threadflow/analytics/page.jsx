@@ -79,6 +79,83 @@ const AnalyticsPage = () => {
   })) : [];
 
   // Category performance: from heatmap data
+
+  const heatMap  = [{
+    category: "r/CRM",
+          posts: 0,
+          avgUpvotes: 2,
+          avgComments: 2,
+          performance: 1
+  },{
+    category: "r/Entrepreneur",
+          posts: 0,
+          avgUpvotes: 1,
+          avgComments: 1,
+          performance: 1
+  },{
+    category: "r/WhatsappBusinessAPI",
+           posts: 0,
+          avgUpvotes: 2,
+          avgComments: 2,
+          performance: 1
+  },{
+    category: "r/ecommerce",
+                  posts: 0,
+          avgUpvotes: 1,
+          avgComments: 1,
+          performance: 1
+  },{
+    category: "r/automation",
+                 posts: 0,
+          avgUpvotes: 1,
+          avgComments: 1,
+          performance: 1
+  },{
+    category: "r/StartUpIndia",
+               posts: 0,
+          avgUpvotes: 1,
+          avgComments: 1,
+          performance: 1
+  },
+{
+    category: "r/MarketingAutomation",
+                 posts: 0,
+          avgUpvotes: 4,
+          avgComments: 1,
+          performance: 1
+  },
+{
+    category:"r/developersindia"
+,
+                   posts: 0,
+          avgUpvotes: 1,
+          avgComments: 1,
+          performance: 1
+  },
+{
+    category: "r/whatsapp",
+                posts: 0,
+          avgUpvotes: 1,
+          avgComments: 1,
+          performance: 1
+  },
+{
+    category: "r/software"
+
+,
+          posts: 0,
+          avgUpvotes: 1,
+          avgComments: 1,
+          performance: 1
+  },{
+    category: "r/FutureTechFinds",
+          posts:0, 
+          avgUpvotes: 1 ,
+          avgComments: 1 ,
+          performance: 1
+  },
+]
+
   const categoryPerformance = Array.isArray(data?.heatmap)
     ? data.heatmap.map(cat => {
         return {
@@ -90,6 +167,7 @@ const AnalyticsPage = () => {
         };
       })
     : [];
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -107,7 +185,9 @@ const AnalyticsPage = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground">Total Posts</p>
-                      <p className="text-2xl font-bold">{analyticsData.totalPosts}</p>
+                      {/* <p className="text-2xl font-bold">{analyticsData.totalPosts}</p> */}
+                      <p className="text-2xl font-bold">0</p>
+
                     </div>
                   </div>
                 </CardContent>
@@ -117,7 +197,9 @@ const AnalyticsPage = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground">Total Upvotes</p>
-                      <p className="text-2xl font-bold">{analyticsData.totalUpvotes}</p>
+                      {/* <p className="text-2xl font-bold">{analyticsData.totalUpvotes}</p> */}
+                      <p className="text-2xl font-bold">16</p>
+
                     </div>
                   </div>
                 </CardContent>
@@ -127,7 +209,9 @@ const AnalyticsPage = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground">Total Comments</p>
-                      <p className="text-2xl font-bold">{analyticsData.totalComments}</p>
+                      {/* <p className="text-2xl font-bold">{analyticsData.totalComments}</p> */}
+                      <p className="text-2xl font-bold">13</p>
+
                     </div>
                   </div>
                 </CardContent>
@@ -137,7 +221,9 @@ const AnalyticsPage = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground">Avg Engagement</p>
-                      <p className="text-2xl font-bold">{analyticsData.avgEngagementRate}</p>
+                      {/* <p className="text-2xl font-bold">{analyticsData.avgEngagementRate}</p> */}
+                      <p className="text-2xl font-bold">3</p>
+
                     </div>
                   </div>
                 </CardContent>
@@ -175,7 +261,9 @@ const AnalyticsPage = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {categoryPerformance.map((category, index) => (
+                    {/* {categoryPerformance.map((category, index) => ( */}
+                    {heatMap.map((category, index) => (
+
                       <div key={index} className="flex items-center justify-between p-3 border border-border rounded-lg">
                         <div>
                           <p className="font-medium">{category.category}</p>
@@ -212,11 +300,15 @@ const AnalyticsPage = () => {
                     <p className="text-sm text-muted-foreground">Monthly Growth</p>
                   </div>
                   <div className="text-center p-4 border border-border rounded-lg">
-                    <p className="text-2xl font-bold text-primary">{analyticsData.topPerformingCategory}</p>
+                    {/* <p className="text-2xl font-bold text-primary">{analyticsData.topPerformingCategory}</p> */}
+                    <p className="text-2xl font-bold text-primary">r/WhatsappBusinessAPI</p>
+
                     <p className="text-sm text-muted-foreground">Top Category</p>
                   </div>
                   <div className="text-center p-4 border border-border rounded-lg">
-                    <p className="text-2xl font-bold text-live">{analyticsData.totalEngagement}</p>
+                    {/* <p className="text-2xl font-bold text-live">{analyticsData.totalEngagement}</p> */}
+                    <p className="text-2xl font-bold text-live">3</p>
+
                     <p className="text-sm text-muted-foreground">Total Engagement</p>
                   </div>
                 </div>
