@@ -41,6 +41,7 @@ const PostsPage = () => {
     postURL: "",
     redditUsername: "",
     postedCommentStatus: "",
+    totalViews:""
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(null);
@@ -194,6 +195,7 @@ const getStatusBadge = (status) => {
     postURL: post.post_url || "",
     redditUsername: post.reddit_username || "",
     postedCommentStatus: post.posted_comment_status || "underModeration",
+    totalViews : post.total_views
   });
   setIsEditModalOpen(true);
 };
@@ -247,6 +249,7 @@ const getStatusBadge = (status) => {
           post_url: editFormData.postURL || null,
           reddit_username: editFormData.redditUsername || null,
           posted_comment_status: editFormData.postedCommentStatus || "underModeration",
+          total_views : editFormData.totalViews || null,
         }),
       });
 
@@ -447,11 +450,12 @@ const getStatusBadge = (status) => {
                     <TableHead>Date published</TableHead>
                     <TableHead>Customer Comments</TableHead>
                     <TableHead>Published Link</TableHead>
+                    <TableHead>Total Views</TableHead>
                     {/* <TableHead>Number of our engagements</TableHead> */}
                     {/* <TableHead>Link to Kubiya</TableHead> */}
                     <TableHead>Reddit Username</TableHead>
                     <TableHead>Posted Comment Status</TableHead>
-                                        <TableHead>Actions</TableHead>
+                    <TableHead>Actions</TableHead>
 
                     {/* <TableHead>Actions</TableHead> */}
                   </TableRow>
@@ -505,6 +509,8 @@ const getStatusBadge = (status) => {
                           {post.posted_link ? "View Link" : "-"}
                         </a>
                       </TableCell>
+                      <TableCell>{post.total_views ? post.total_views : "-"}</TableCell>
+
                       {/* <TableCell></TableCell>
                       <TableCell></TableCell> */}
                       <TableCell>{post.reddit_username}</TableCell>
@@ -705,7 +711,20 @@ const getStatusBadge = (status) => {
                     />
                   </div>
                     <div>
-                      <Label htmlFor="edit-postedCommentStatus">Posted Comment Status</Label>
+                      <Label htmlFor="totalViews">Total Views</Label>
+                      <Input
+                        id="totalViews"
+                        value={editFormData.totalViews}
+                        onChange={(e) =>
+                          handleEditInputChange("totalViews", e.target.value)
+                        }
+                        placeholder="Number of Total Views"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="edit-postedCommentStatus">
+                        Posted Comment Status
+                      </Label>
                       <Select
                         value={editFormData.postedCommentStatus}
                         onValueChange={(value) => handleEditInputChange("postedCommentStatus", value)}

@@ -45,6 +45,7 @@ export default async function handler(req, res) {
           client_feedback: body.clientFeedback || null,
           post_url: body.postURL || null,
           posted_comment_status: body.postedCommentStatus || "underModeration",
+          total_views: body.totalViews || null,
         },
       ]);
 

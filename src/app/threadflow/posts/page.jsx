@@ -53,6 +53,7 @@ const PostsPage = () => {
     currentStatus: "pending",
     redditUsername: "",
     targetedSubreddit: "",
+    totalViews:""
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(null);
@@ -162,7 +163,7 @@ const PostsPage = () => {
     };
 
     return (
-      <Badge className={`${statusColors[status?.toLowerCase()] || "bg-gray-200"} capitalize`}>
+      <Badge className={`${statusColors[status?.toLowerCase()] || "bg-gray-500"} capitalize`}>
         {status}
       </Badge>
     );
@@ -183,6 +184,7 @@ const PostsPage = () => {
       currentStatus: post.current_status || "pending",
       redditUsername: post.reddit_username || "",
       targetedSubreddit: post.targeted_subreddit || "",
+      totalViews: post.total_views || ""
     });
     setIsEditModalOpen(true);
   };
@@ -202,6 +204,7 @@ const PostsPage = () => {
       currentStatus: "pending",
       redditUsername: "",
       targetedSubreddit: "",
+      totalViews: ""
     });
   };
 
@@ -239,6 +242,7 @@ const PostsPage = () => {
           current_status: editFormData.currentStatus,
           reddit_username: editFormData.redditUsername,
           targeted_subreddit: editFormData.targetedSubreddit,
+          total_views: editFormData.totalViews
         }),
       });
 
@@ -428,6 +432,7 @@ const PostsPage = () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Category</TableHead>
+                    <TableHead>Targeted Subreddit</TableHead>
                     <TableHead>Title</TableHead>
                     <TableHead>URL</TableHead>
                     <TableHead>Status</TableHead>
@@ -435,6 +440,7 @@ const PostsPage = () => {
                     <TableHead>Date published</TableHead>
                     <TableHead>Current Status</TableHead>
                     <TableHead>Published Link</TableHead>
+                    <TableHead>Total Views</TableHead>
                     <TableHead>Number of our engagements</TableHead>
                     <TableHead>Reddit Username</TableHead>
                     <TableHead>Actions</TableHead>
@@ -448,12 +454,18 @@ const PostsPage = () => {
                           {post.category}
                         </Badge>
                       </TableCell>
+                       <TableCell>
+                        <div className="text-sm text-muted-foreground line-clamp-3">
+                          {post.targeted_subreddit}
+                        </div>
+                      </TableCell>
                       <TableCell className="font-medium max-w-xs">
                         <div className="truncate" title={post.title}>
                           {post.title}
                         </div>
                       </TableCell>
                       <TableCell className="max-w-xs">
+                      {post.url ? 
                         <a
                           href={post.url}
                           target="_blank"
@@ -462,7 +474,7 @@ const PostsPage = () => {
                         >
                           <ExternalLink className="h-3 w-3" />
                           Reddit Link
-                        </a>
+                        </a> : "-"}
                       </TableCell>
                       <TableCell>{getStatusBadge(post.status)}</TableCell>
                       <TableCell className="max-w-sm">
@@ -486,8 +498,10 @@ const PostsPage = () => {
                           {post.posted_link ? "View Link" : "-"}
                         </a>
                       </TableCell>
-                      <TableCell></TableCell>
+                      <TableCell>{post.total_views ? post.total_views : "-"}</TableCell>
                       <TableCell>{post.reddit_username}</TableCell>
+                      <TableCell></TableCell>
+
                       <TableCell>
                         <div className="flex items-center gap-2">
                           <Button
@@ -705,6 +719,15 @@ const PostsPage = () => {
                         value={editFormData.postedLink}
                         onChange={(e) => handleEditInputChange("postedLink", e.target.value)}
                         placeholder="Direct link to the posted content"
+                      />
+                    </div>
+                     <div>
+                      <Label htmlFor="totalViews">Total Views</Label>
+                      <Input
+                        id="totalViews"
+                        value={editFormData.totalViews}
+                        onChange={(e) => handleEditInputChange("totalViews", e.target.value)}
+                        placeholder="Number of Total Views"
                       />
                     </div>
                     <div>
