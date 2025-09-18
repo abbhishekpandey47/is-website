@@ -1,16 +1,17 @@
-// components/Hero.jsx
+// components/Footer.jsx
 "use client";
 
 import Image from "next/image";
 import React from "react";
 
-const Hero = () => {
+const Footer = () => {
   return (
     <section className="bg-[#121826] font-[quicksand] relative overflow-hidden">
+        
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/modern/hero-bg.jpg"      
-          alt="Hero background"
+          src="/modern/Footer-bg.jpg"      
+          alt="Footer background"
           fill                        
           priority                    
           className="object-cover opacity-40"
@@ -22,15 +23,20 @@ const Hero = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 py-28 flex flex-col items-center text-center">
+      <div className="container mx-auto px-4 pt-10 pb-28 flex flex-col items-center text-center">
+        <p className="text-[13px] text-[#939db8] mb-8 max-w-2xl mx-auto uppercase">
+    Sign up for free
+  </p>
         <h1 className="text-4xl sm:text-6xl font-extrabold text-white leading-tight">
-          Modern Pagerduty
+          Get up & running
+
           <br />
-          <span className="block">alternative</span>
+          <span className="block">in 30 seconds</span>
         </h1>
 
         <p className="mt-4 text-lg text-[#939db8] max-w-[500px]">
-          Configure your team's on-call schedule directly in your favorite calendar app.
+          Get notified with a radically better< br />
+infrastructure monitoring platform.
         </p>
 
         <form className="mt-8 flex flex-col sm:flex-row items-center w-full sm:w-auto">
@@ -64,4 +70,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Footer;
