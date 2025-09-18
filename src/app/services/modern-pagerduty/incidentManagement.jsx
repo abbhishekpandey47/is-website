@@ -61,7 +61,7 @@ const IncidentManagement = () => {
             >
               <img src={item.icon} alt={item.title} width={46} height={46} />
               <h3 className="mt-5 text-xl font-bold text-white">{item.title}</h3>
-              <p className="mt-3 text-gray-300">{item.text}</p>
+              <p className="mt-3 text-[#939db8]">{item.text}</p>
             </div>
           ))}
         </div>

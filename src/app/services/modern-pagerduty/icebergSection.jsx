@@ -63,7 +63,7 @@ const IcebergSection = () => {
                                 </div>
                                 <div className="px-8 py-6 flex flex-col flex-grow">
                                     <h4 className="text-xl text-white font-bold">{card.title}</h4>
-                                    <p className="mt-2 text-gray-300">{card.text}</p>
+                                    <p className="mt-2 text-[#939db8]">{card.text}</p>
                                 </div>
                             </div>
                         ))}
