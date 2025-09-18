@@ -1,7 +1,7 @@
 module.exports = {
     reactStrictMode: false,
     images: {
-         domains: ["cdn.prod.website-files.com", "framerusercontent.com", "images.surferseo.art"],
+         domains: ["cdn.prod.website-files.com", "framerusercontent.com", "images.surferseo.art", "betterstackcdn.com"],
         remotePatterns: [
             {
                 protocol: 'https',
