@@ -46,6 +46,7 @@ export default async function handler(req, res) {
           user_id: userCtx.uid,
           company_id: company_id,
           reddit_username: body.redditUsername || null,
+          total_views: body.totalViews || null,
         },
       ]);
 
