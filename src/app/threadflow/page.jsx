@@ -357,6 +357,7 @@ const PostsPage = () => {
                         <TableHead>Date published</TableHead>
                         <TableHead>Current Status</TableHead>
                         <TableHead>Published Link</TableHead>
+                        <TableHead>Total Views</TableHead>
                         <TableHead>Number of our engagements</TableHead>
                         <TableHead>Reddit Username</TableHead>
                       </>
@@ -372,6 +373,7 @@ const PostsPage = () => {
                         <TableHead>Date published</TableHead>
                         <TableHead>Customer Comments</TableHead>
                         <TableHead>Published Link</TableHead>
+                        <TableHead>Total Views</TableHead>
                         <TableHead>Reddit Username</TableHead>
                         <TableHead>Posted Comment Status</TableHead>
                       </>
@@ -385,6 +387,7 @@ const PostsPage = () => {
                         <TableHead>Text of engagement</TableHead>
                         <TableHead>Date published</TableHead>
                         <TableHead>Published Link</TableHead>
+                        <TableHead>Total Views</TableHead>
                         <TableHead>Targeted Subreddit</TableHead>
                         <TableHead>Reddit Username</TableHead>
                       </>
@@ -422,6 +425,7 @@ const PostsPage = () => {
 
                           {/* URL */}
                           <TableCell className="max-w-xs">
+                          {item.url ? 
                             <a
                               href={item.url}
                               target="_blank"
@@ -430,7 +434,7 @@ const PostsPage = () => {
                             >
                               <ExternalLink className="h-3 w-3" />
                               Reddit Link
-                            </a>
+                            </a> : "-"}
                           </TableCell>
 
                           {/* Status */}
@@ -438,9 +442,7 @@ const PostsPage = () => {
 
                           {/* Text of engagement */}
                           <TableCell className="max-w-sm">
-                            <div className="text-sm text-muted-foreground line-clamp-3">
-                              {item.engagement_text}
-                            </div>
+                              <EngagementTextCell text={item.engagement_text}/>
                           </TableCell>
 
                           {/* Date published */}
@@ -462,6 +464,9 @@ const PostsPage = () => {
                               {item.posted_link ? "View Link" : "-"}
                             </a>
                           </TableCell>
+
+                          {/* Total Views */}
+                          <TableCell className="text-sm">{item.total_views ? item.total_views : "-"}</TableCell>
 
                           {/* Number of our engagements */}
                           <TableCell className="text-sm">-</TableCell>
@@ -523,6 +528,9 @@ const PostsPage = () => {
                             </a>
                           </TableCell>
 
+                          {/* Total Views */}
+                          <TableCell className="text-sm">{item.total_views ? item.total_views : "-"}</TableCell>
+
                           {/* Reddit Username */}
                           <TableCell>{item.reddit_username || "-"}</TableCell>
 
@@ -565,6 +573,10 @@ const PostsPage = () => {
                               {item.posted_link ? "View Link" : "-"}
                             </a>
                           </TableCell>
+
+                          {/* Total Views */}
+                          <TableCell className="text-sm">{item.total_views ? item.total_views : "-"}</TableCell>
+
 
                           {/* Targeted Subreddit */}
 <TableCell>
