@@ -33,6 +33,7 @@ const AddPostPage = () => {
   const { toast } = useToast();
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [newCategory, setNewCategory] = useState({ name: "", description: "" });
+  const [companiesList , setCompaniesList] = useState([]);
 
   // Predefined categories
   const [categories, setCategories] = useState([
@@ -54,6 +55,7 @@ const AddPostPage = () => {
     status: "live",
     currentStatus: "approved",
     redditUsername: "",
+    companyId:""
   });
 
   useEffect(() => {
@@ -164,17 +166,31 @@ const AddPostPage = () => {
       } else {
         try {
           const token = await user.getIdToken();
-          const res = await fetch(`/api/posts?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
-          const result = await res.json();
+          const [catRes, companyRes] = await Promise.allSettled([
+            fetch(`/api/posts?categories=true`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            fetch(`/api/companies`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+          ]);
 
-          if (res.ok && result.categories) {
-            setCategories((prev) => {
-              const merged = [...prev, ...result.categories];
-              return [...new Set(merged.map((c) => c.trim()))];
-            });
+          if (catRes.ok) {
+            const result = await catRes.json();
+            if (result.categories) {
+              setCategories((prev) => {
+                const merged = [...prev, ...result.categories];
+                return [...new Set(merged.map((c) => c.trim()))];
+              });
+            }
+          }
+
+          if (companyRes.ok) {
+            const companyResult = await companyRes.json();
+            setCompaniesList(companyResult.data || []);
           }
         } catch (err) {
-          console.error("Failed to fetch categories:", err);
+          console.error("Failed to fetch initial data:", err);
         }
       }
     });
@@ -342,6 +358,26 @@ const AddPostPage = () => {
                       className="h-10"
                     />
                   </div>
+                  {companiesList.length > 0 &&
+                  <div>
+                    <Label htmlFor="companyId">Company Name</Label>
+                    <Select
+                      value={formData.companyId}
+                      onValueChange={(value) =>
+                        handleInputChange("companyId", value)
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {
+                          companiesList.map((company) => (
+                            <SelectItem key={company.id} value={company.id}>{company.name}</SelectItem>
+                          ))}
+                      </SelectContent>
+                    </Select>
+                  </div>}
                 </div>
 
                 <div>

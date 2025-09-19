@@ -24,7 +24,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: "Missing required fields" });
       }
       // Assign company_id based on linkage or explicit provided (validated)
-      let company_id = body.company_id || null;
+      let company_id = body.companyId || null;
       if (!userCtx.isAdmin) {
         if (!allowedCompanyIds || allowedCompanyIds.length === 0) return forbid(res, 'No company access');
         if (company_id && !allowedCompanyIds.includes(company_id)) return forbid(res);
