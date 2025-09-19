@@ -154,7 +154,7 @@ useEffect(() => {
     if (!user) {
       router.push("/auth/signin");
     } else {
-      try {
+       try {
         const token = await user.getIdToken();
         const [catRes, companyRes] = await Promise.allSettled([
           fetch(`/api/comment?categories=true`, {
@@ -165,19 +165,23 @@ useEffect(() => {
           }),
         ]);
 
-        if (catRes.ok) {
-          const result = await catRes.json();
+        if (catRes.status === 'fulfilled' && catRes.value.ok) {
+          const result = await catRes.value.json();
           if (result.categories) {
             setCategories((prev) => {
               const merged = [...prev, ...result.categories];
               return [...new Set(merged.map((c) => c.trim()))];
             });
           }
+        } else if (catRes.status === 'rejected') {
+          console.error("Failed to fetch categories:", catRes.reason);
         }
 
-        if (companyRes.ok) {
-          const companyResult = await companyRes.json();
+        if (companyRes.status === 'fulfilled' && companyRes.value.ok) {
+          const companyResult = await companyRes.value.json();
           setCompaniesList(companyResult.data || []);
+        } else if (companyRes.status === 'rejected') {
+          console.error("Failed to fetch companies:", companyRes.reason);
         }
       } catch (err) {
         console.error("Failed to fetch initial data:", err);
