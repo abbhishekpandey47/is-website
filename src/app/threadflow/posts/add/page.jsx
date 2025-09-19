@@ -166,27 +166,31 @@ const AddPostPage = () => {
       } else {
         try {
           const token = await user.getIdToken();
-          const res = await fetch(`/api/posts?categories=true`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          const result = await res.json();
-          const companyRes = await fetch(`/api/companies`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          const companyResult = await companyRes.json();
+          const [catRes, companyRes] = await Promise.all([
+            fetch(`/api/comment?categories=true`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            fetch(`/api/companies`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+          ]);
 
-          if (res.ok && result.categories) {
-            setCategories((prev) => {
-              const merged = [...prev, ...result.categories];
-              return [...new Set(merged.map((c) => c.trim()))];
-            });
+          if (catRes.ok) {
+            const result = await catRes.json();
+            if (result.categories) {
+              setCategories((prev) => {
+                const merged = [...prev, ...result.categories];
+                return [...new Set(merged.map((c) => c.trim()))];
+              });
+            }
           }
 
           if (companyRes.ok) {
+            const companyResult = await companyRes.json();
             setCompaniesList(companyResult.data || []);
           }
         } catch (err) {
-          console.error("Failed to fetch details:", err);
+          console.error("Failed to fetch initial data:", err);
         }
       }
     });
@@ -356,7 +360,7 @@ const AddPostPage = () => {
                   </div>
                   {companiesList.length > 0 &&
                   <div>
-                    <Label htmlFor="CompanyId">Company name</Label>
+                    <Label htmlFor="companyId">Company Name</Label>
                     <Select
                       value={formData.companyId}
                       onValueChange={(value) =>
