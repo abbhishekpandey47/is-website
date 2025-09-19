@@ -166,8 +166,8 @@ const AddPostPage = () => {
       } else {
         try {
           const token = await user.getIdToken();
-          const [catRes, companyRes] = await Promise.all([
-            fetch(`/api/comment?categories=true`, {
+          const [catRes, companyRes] = await Promise.allSettled([
+            fetch(`/api/posts?categories=true`, {
               headers: { Authorization: `Bearer ${token}` },
             }),
             fetch(`/api/companies`, {

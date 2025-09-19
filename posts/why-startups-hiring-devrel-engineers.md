@@ -69,7 +69,7 @@ This phased approach delivers impact fast without locking you into a costly full
 
 For most early-stage B2B SaaS startups, cost is the first (and often biggest) hurdle when considering a DevRel hire. The salary alone can feel like a major commitment,  however, the real cost of hiring a DevRel engineer goes beyond just what you pay them every month.
 
-In 2025, experienced Developer Relations engineers of 4-8 yeras in the U.S. typically command salaries between $120,000 and $180,000 per year. This can, sometimes, change from company to company and even higher if they have strong personal brands or a track record at well-known developer-first companies. This level of investment can be significant for early-stage founders who are still finding product-market fit and carefully managing burn rates, every single day.
+In 2025, experienced Developer Relations engineers of 4-8 years in the U.S. typically command salaries between $120,000 and $180,000 per year. This can, sometimes, change from company to company and even higher if they have strong personal brands or a track record at well-known developer-first companies. This level of investment can be significant for early-stage founders who are still finding product-market fit and carefully managing burn rates, every single day.
 
 BUT salary is just the starting point. Once you account for benefits, taxes, and equity grants, your total cost of employment can climb 20-30% higher. That means your first DevRel engineer hire could realistically cost your B2B SaaS startup close to $200,000 annually before they’ve even started producing measurable results.
 
@@ -130,7 +130,7 @@ Now that you know about how to start the recruitment process for DevRel, let’s
 
 1. **Long and Costly Hiring Process**
 
-Devrel engineers are expensive as they come with atleast 7-8 yeras of experience. The hiring process of devrel engineers is usually talkies 3–6 months, which is a huge challenge for early-stage B2B SaaS startups that need traction fast as it slowing down developer adoption and product feedback loops. This means:
+Devrel engineers are expensive as they come with atleast 7-8 years of experience. The hiring process of devrel engineers is usually takes 3–6 months, which is a huge challenge for early-stage B2B SaaS startups that need traction fast as it slowing down developer adoption and product feedback loops. This means:
 
 * Long recruiting cycles delay developer onboarding improvements.
 
@@ -156,7 +156,7 @@ A full time Devrels with a decent experience cost around $120K \- $180K+ in the 
 
 4. **Risk of Mis-Hire**
 
-Since the position of DevRel is a relatively new in many b2b SaaS startups, several founders may not have prior experience hiring for it which may lead to bad hires lead to wasted budget and lost momentum. Bad hires will be those candidate who for instance are excellent with tech but aren’t nearly as good in communication or vise versa. This risk of misfit would be one of the reasons why it is a struggle to hire good DevRels in 2025\.
+Since the position of DevRel is a relatively new in many b2b SaaS startups, several founders may not have prior experience hiring for it which may lead to bad hires lead to wasted budget and lost momentum. Bad hires will be those candidate who for instance are excellent with tech but aren’t nearly as good in communication or vice versa. This risk of misfit would be one of the reasons why it is a struggle to hire good DevRels in 2025\.
 
 ## **Final Thought**
 

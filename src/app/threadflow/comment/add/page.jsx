@@ -156,7 +156,7 @@ useEffect(() => {
     } else {
       try {
         const token = await user.getIdToken();
-        const [catRes, companyRes] = await Promise.all([
+        const [catRes, companyRes] = await Promise.allSettled([
           fetch(`/api/comment?categories=true`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
