@@ -499,8 +499,8 @@ const PostsPage = () => {
                         </a>
                       </TableCell>
                       <TableCell>{post.total_views ? post.total_views : "-"}</TableCell>
-                      <TableCell>{post.reddit_username}</TableCell>
                       <TableCell></TableCell>
+                      <TableCell>{post.reddit_username}</TableCell>
 
                       <TableCell>
                         <div className="flex items-center gap-2">
