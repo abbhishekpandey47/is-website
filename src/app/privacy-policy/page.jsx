@@ -42,6 +42,8 @@ const PrivacyPolicy = () => {
       <h2 className="text-xl sm:text-2xl quicksand-semibold mb-3 sm:mb-4">Your Acceptance of These Terms</h2>
       <p className="mb-3 sm:mb-4 quicksand-light">
         By using Infrasity's services, you signify your acceptance of this Privacy Policy. If you do not agree, please refrain from using our platform. Your continued use following policy changes will be considered acceptance of those changes.
+        Since Infrasity does not sell any subscriptions or products, a refund policy is not applicable.
+
       </p>
     </div>
   );
