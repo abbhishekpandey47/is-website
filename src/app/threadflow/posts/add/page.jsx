@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { SidebarTrigger } from "../../../../Components/ui/sidebar";
 import { UserProfile } from "../../../../Components/UserProfile";
 import { useToast } from "../../../../hooks/use-toast";
+import { Textarea } from "../../../../Components/ui/textarea";
 
 
 const ReactQuill = dynamic(
@@ -53,6 +54,7 @@ const AddPostPage = () => {
     datePosted: "",
     postedLink: "",
     status: "live",
+    clientFeedback: "",
     currentStatus: "approved",
     redditUsername: "",
     companyId:""
@@ -457,6 +459,17 @@ const AddPostPage = () => {
                   </p>
                 </div>
 
+                <div>
+                  <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Customer Comments</Label>
+                  <Textarea
+                    id="clientFeedback"
+                    value={formData.clientFeedback}
+                    onChange={(e) => handleInputChange("clientFeedback", e.target.value)}
+                    placeholder="Enter your feedback for this Reddit Comment..."
+                    rows={4}
+                    className="resize-none"
+                  />
+                </div>
 
                 {/* <div>
                   <Label htmlFor="kimsVersion">Kim's Version</Label>
