@@ -15,6 +15,7 @@ import { Textarea } from "../../../Components/ui/textarea";
 import { UserProfile } from "../../../Components/UserProfile";
 import { useToast } from "../../../hooks/use-toast";
 import { auth } from "../../../lib/firebaseClient";
+import { HoverTextCell } from "../components/HoverTextCell";
 
 
 const PostsPage = () => {
@@ -146,15 +147,17 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
 const getStatusBadge = (status) => {
   const statusColors = {
     // Published Post Status
-    commentUnderApproval: "bg-blue-500 text-white",
+    commentunderapproval: "bg-blue-500 text-white",
     live: "bg-green-500 text-white",
     removed: "bg-red-500 text-white",
     undermoderation: "bg-yellow-500 text-black",
+    
 
     // Post Approval Status
-    approved: "bg-emerald-600 text-white",
+    approved: "bg-emerald-700 text-white",
     notapproved: "bg-red-600 text-white",
-    pending: "bg-gray-500 text-white",
+    pending: "bg-yellow-400 text-black",
+
   };
 
   const colorClass = status
@@ -167,7 +170,7 @@ const getStatusBadge = (status) => {
     : "";
 
   return (
-    <Badge className={`${colorClass} capitalize`}>
+    <Badge className={`${colorClass} capitalize text-center min-w-[8rem] justify-center`}>
       {formattedText}
     </Badge>
   );
@@ -474,9 +477,7 @@ const getStatusBadge = (status) => {
                         </div>
                       </TableCell>
                       <TableCell className="font-medium max-w-xs">
-                        <div className="truncate" title={post.title}>
-                          {post.title}
-                        </div>
+                          <HoverTextCell text={post.title} isTitle={true} />
                       </TableCell>
                        <TableCell>
                         <a
@@ -491,14 +492,14 @@ const getStatusBadge = (status) => {
                                 <TableCell>{getStatusBadge(post.status, 'comment')}</TableCell>
 
                       <TableCell className="max-w-sm">
-                        <div className="text-sm text-muted-foreground line-clamp-3">
-                          {post.engagement_text}
-                        </div>
+                        {/* <div className="text-sm text-muted-foreground line-clamp-3"> */}
+                          <HoverTextCell text={post.engagement_text} isTextEngagemen={true} />
+                        {/* </div> */}
                       </TableCell>
                       <TableCell className="text-sm">
                         {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
                       </TableCell>
-                      <TableCell className="text-sm"> <div className="text-sm text-muted-foreground line-clamp-3">{post.client_feedback}</div></TableCell>
+                      <TableCell className="text-sm"> <HoverTextCell text={post.client_feedback}/></TableCell>
                       <TableCell>
                         <a
                           href={post.posted_link}
