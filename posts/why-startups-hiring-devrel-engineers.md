@@ -35,7 +35,6 @@ Yes, the process of recruiting an ideal candidate for your B2B SaaS Startup is g
 
 Infrasity has a seasoned team of DevRels who are extremely customer-facing to showcase your product and fill the gap between your product users and developers. They are fast and, most importantly, cost-effective and result-driven.
 
-	  
 **How Can I Start Hiring a Developer Engineer? The Right Way to Approach** 
 
 Hiring your first developer relations engineer for your early-stage B2B SaaS startup is not just about posting a job description and hoping for the best. You need to do more than that and make a strategic decision that impacts your product adoption, community growth, and developer experience.
