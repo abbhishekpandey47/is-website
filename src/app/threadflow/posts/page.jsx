@@ -164,7 +164,7 @@ const PostsPage = () => {
     postunderapproval: "bg-blue-500 text-white",
     live: "bg-green-500 text-white",
     removed: "bg-red-500 text-white",
-    underModeration: "bg-yellow-500 text-black",
+    undermoderation: "bg-yellow-500 text-black",
 
     // Post Approval Status
       approved: "bg-emerald-700 text-white",
@@ -481,9 +481,7 @@ const PostsPage = () => {
                         </div>
                       </TableCell>
                       <TableCell className="font-medium max-w-xs">
-                        {/* <div className="truncate" title={post.title}> */}
                          <HoverTextCell text={post.title} isTitle={true}/>
-                        {/* </div> */}
                       </TableCell>
                       {/* <TableCell className="max-w-xs">
                       {post.url ? 

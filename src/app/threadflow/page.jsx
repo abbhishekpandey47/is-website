@@ -158,7 +158,7 @@ const statusCnt = getStatusCounts()
     postunderapproval: "bg-blue-500 text-white",
     live: "bg-green-500 text-white",
     removed: "bg-red-500 text-white",
-    underModeration: "bg-yellow-500 text-black",
+    undermoderation: "bg-yellow-500 text-black",
 
     // Post Approval Status
     approved: "bg-emerald-700 text-white",
@@ -408,9 +408,7 @@ const statusCnt = getStatusCounts()
 
                           {/* Customer Comments */}
                           <TableCell className="max-w-sm">
-                            {/* <div className="text-sm text-muted-foreground line-clamp-3"> */}
                               <HoverTextCell text={item.client_feedback || "-"} />
-                            {/* </div> */}
                           </TableCell>
 
                           {/* Current Status */}
@@ -451,9 +449,7 @@ const statusCnt = getStatusCounts()
 
                           {/* Title */}
                           <TableCell className="font-medium max-w-xs">
-                            {/* <div className="truncate" title={item.title}> */}
                              <HoverTextCell text={item.title} isTitle={true}/>
-                            {/* </div> */}
                           </TableCell>
 
                           {/* Comment Approval Status */}
@@ -462,9 +458,7 @@ const statusCnt = getStatusCounts()
 
                           {/* Text of engagement */}
                           <TableCell className="max-w-sm">
-                            {/* <div className="text-sm text-muted-foreground line-clamp-3"> */}
                             <HoverTextCell text ={item.engagement_text} isTextEngagement={true}/>
-                            {/* </div> */}
                           </TableCell>
 
                           {/* Date published */}
@@ -474,9 +468,7 @@ const statusCnt = getStatusCounts()
 
                           {/* Customer Comments */}
                           <TableCell className="max-w-sm">
-                            {/* <div className="text-sm text-muted-foreground line-clamp-3"> */}
                               <HoverTextCell text={item.client_feedback || "-"} />
-                            {/* </div> */}
                           </TableCell>
 
                           {/* Published Link */}
@@ -507,9 +499,7 @@ const statusCnt = getStatusCounts()
                         <>
                           {/* Title */}
                           <TableCell className="font-medium max-w-xs">
-                            {/* <div className="truncate" title={item.title}> */}
                             <HoverTextCell text={item.title} isTitle={true} />
-                            {/* </div> */}
                           </TableCell>
 
                           {/* Status */}
@@ -527,9 +517,7 @@ const statusCnt = getStatusCounts()
 
                           {/* Customer Comments */}
                           <TableCell className="max-w-sm">
-                            {/* <div className="text-sm text-muted-foreground line-clamp-3"> */}
                               <HoverTextCell text={item.client_feedback || "-"} />
-                            {/* </div> */}
                           </TableCell>
 
                           {/* Published Link */}

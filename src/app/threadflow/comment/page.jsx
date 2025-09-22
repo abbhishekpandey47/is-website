@@ -492,9 +492,7 @@ const getStatusBadge = (status) => {
                                 <TableCell>{getStatusBadge(post.status, 'comment')}</TableCell>
 
                       <TableCell className="max-w-sm">
-                        {/* <div className="text-sm text-muted-foreground line-clamp-3"> */}
-                          <HoverTextCell text={post.engagement_text} isTextEngagemen={true} />
-                        {/* </div> */}
+                          <HoverTextCell text={post.engagement_text} isTextEngagement={true} />
                       </TableCell>
                       <TableCell className="text-sm">
                         {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
