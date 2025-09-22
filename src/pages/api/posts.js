@@ -43,6 +43,7 @@ export default async function handler(req, res) {
           date_posted: body.datePosted ? new Date(body.datePosted) : null,
           posted_link: body.postedLink || null,
           current_status: body.currentStatus || "pending",
+          client_feedback: body.clientFeedback || null,
           user_id: userCtx.uid,
           company_id: company_id,
           reddit_username: body.redditUsername || null,

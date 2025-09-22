@@ -20,7 +20,7 @@ export default function CrmLayout({ children }) {
                 <SidebarProvider>
                     <div className="min-h-screen flex w-full">
                         <AppSidebar />
-                        <main className="flex-1">
+                        <main className="flex-1 overflow-hidden">
                             {children}
                         </main>
                     </div>

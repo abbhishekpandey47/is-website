@@ -3,22 +3,22 @@ import { CircleCheckBig, Clock, CircleX, Radio } from "lucide-react";
 
 export function StatusCard({ status, count, label }) {
   const statusConfig = {
-    approved: {
+    live: {
       bgColor: 'bg-success/10 hover:bg-success/15 border-success/20',
       textColor: 'text-success',
       icon: CircleCheckBig
     },
-    pending: {
+    underApproval: {
       bgColor: 'bg-warning/10 hover:bg-warning/15 border-warning/20',
       textColor: 'text-warning',
       icon: Clock
     },
-    rejected: {
+    removed: {
       bgColor: 'bg-destructive/10 hover:bg-destructive/15 border-destructive/20',
       textColor: 'text-destructive',
       icon: CircleX
     },
-    live: {
+    notPosted: {
       bgColor: 'bg-info/10 hover:bg-info/15 border-info/20',
       textColor: 'text-info',
       icon: Radio
