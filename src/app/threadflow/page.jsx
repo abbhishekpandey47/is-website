@@ -133,7 +133,7 @@ const getStatusCounts = () => {
         else if (postStatus === "notposted") statusKey = "notPosted";
       } 
       
-      if (item.type === "comment" || selectedType === "all") {
+      if (item.type === "comment") {
         const commentStatus = item.posted_comment_status?.toLowerCase();
         if (commentStatus === "live") statusKey = "live";
         else if (commentStatus === "removed") statusKey = "removed";
