@@ -298,6 +298,33 @@ const PostPage = async (props) => {
                               };
 
                               if (isBase64 || !isValidUrl(src)) {
+                              
+                                  // Special case: target a single image by its URL
+                                  if (
+                                    src ===
+                                    "/PostImages/why-startups-hiring-devrel-engineers/1.png"
+                                  ) {
+                                    return (
+                                      <span
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "center",
+                                        }}
+                                      >
+                                        <img
+                                          src={src}
+                                          alt={alt || "Image"}
+                                          loading="lazy"
+                                          style={{
+                                            height: "500px",
+                                            width: "350px",
+                                          }}
+                                          {...props}
+                                        />
+                                      </span>
+                                    );
+                                  }
+
                                 return (
                                   <img
                                     src={src}

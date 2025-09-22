@@ -1,4 +1,4 @@
-![Why Are Startups Hiring Their First DevRel Engineers in 2025? Proven Strategy][/PostImages/why-startups-hiring-devrel-engineers/0.webp]
+![Why Are Startups Hiring Their First DevRel Engineers in 2025? Proven Strategy][/PostImages/why-startups-hiring-devrel-engineers/0.png]
 
 
 **TL;DR**
@@ -86,7 +86,7 @@ Yes\! Yes there is. For many early-stage B2B SaaS startups, the alternative to h
 * **Continuous Video Output:** Developer-friendly walkthroughs and demos that make adoption faster and reduce churn.  
 * **Iterative Feedback Loops:** Real developer feedback turned into actionable insights for product teams.
 
-Another way to apprach is hiring freelancer with $20-$80 per hour which will cost you up to $62,000 \- $125,000 per year.
+Another way to approach is hiring a freelancer for $20-$80 per hour, which will cost you up to $62,000 - $125,000 per year.
 
 4.  **Skills to Look for in a Developer Relations**
 
@@ -94,7 +94,7 @@ Hiring for developer relations can feel tricky because a DevRel role is part-eng
 
 Here are the 3 core skills that you must look for when hiring DevRel:
 
-![Infrasity, 3 core skills for a devrel to have](/PostImages/why-startups-hiring-devrel-engineers/1.webp)
+![Infrasity, 3 core skills for a devrel to have](/PostImages/why-startups-hiring-devrel-engineers/1.png)
 
 * **Developer skills:** A DevRel engineer should be able to build small sample apps, write and test integration code, and contribute to docs or SDKs.Without this technical foundation, they’ll struggle to speak credibly to your developer audience and you risk creating content that sounds like marketing fluff rather than actionable guidance.
 
@@ -102,7 +102,7 @@ Here are the 3 core skills that you must look for when hiring DevRel:
 
 * **Technical empathy:** This is the “soft skill” that makes DevRel powerful. A strong DevRel understands how developers think: Where they get stuck, which errors frustrate them most, or what would make onboarding 10× faster. Technical empathy turns documentation and onboarding from a “read-the-manual” experience into a guided, developer-friendly journey.
 
-**Other skills a Devrel should posses are as follows:**
+**Other skills a Devrel should possess are as follows:**
 
 * Content Creation   
 * Curiosity  
@@ -155,7 +155,7 @@ A full time Devrels with a decent experience cost around $120K \- $180K+ in the 
 
 4. **Risk of Mis-Hire**
 
-Since the position of DevRel is a relatively new in many b2b SaaS startups, several founders may not have prior experience hiring for it which may lead to bad hires lead to wasted budget and lost momentum. Bad hires will be those candidate who for instance are excellent with tech but aren’t nearly as good in communication or vice versa. This risk of misfit would be one of the reasons why it is a struggle to hire good DevRels in 2025\.
+Since the position of DevRel is relatively new in many b2b SaaS startups, several founders may not have prior experience hiring for it, which may lead to bad hires, wasted budget, and lost momentum. Bad hires will be those candidates who, for instance, are excellent with tech but aren’t nearly as good in communication or vice versa. This risk of misfit would be one of the reasons why it is a struggle to hire good DevRel in 2025\.
 
 ## **Final Thought**
 

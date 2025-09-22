@@ -1116,7 +1116,7 @@ let postMetaData = [
   metatitle: "Why Startups Hire DevRel in 2025 | Infrasity",
   slug: "why-startups-hiring-devrel-engineers",
   description: "Developer relations (DevRel) has become a game-changer for early-stage B2B SaaS startups. This blog breaks down what DevRel really is, why it’s essential for bridging the gap between developers and your product, and how it drives adoption, retention, and community engagement. You’ll learn proven DevRel strategies, the real cost of hiring your first DevRel engineer, common challenges founders face, and when is the best time to make the hire.",
-  ogImage: "/PostImages/why-startups-hiring-devrel-engineers/0.webp",
+  ogImage: "/PostImages/why-startups-hiring-devrel-engineers/0.png",
   publishedOn: "2025-09-19",
   authorId: "author0005",
   category: "Informational",
