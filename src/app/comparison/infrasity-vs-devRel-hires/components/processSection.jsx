@@ -286,19 +286,7 @@ const ProcessSection = () => {
           </div>
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mx-6 mt-16 md:mx-16 bg-gradient-to-r from-blue-800 to-purple-800 relative flex flex-col items-center rounded-xl py-8 text-center overflow-hidden bg-cover bg-no-repeat">
-          <h3 className="text-2xl md:text-3xl font-bold mb-3">Ready to skip the hiring process?</h3>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">Start getting results in your first week instead of waiting months for a DevRel hire to ramp up.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-ring">
-              Schedule Strategy Call
-            </button>
-            <button className="border border-border bg-background hover:bg-muted px-6 py-3 rounded-lg font-semibold transition-transform hover:scale-105">
-              View Case Studies
-            </button>
-          </div>
-        </div>
+      
       </div>
     </section>
   );

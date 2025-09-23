@@ -92,7 +92,7 @@ const contentExamples = {
   blog: (
     <div className="space-y-6">
       {blogs.map((blog, i) => (
-        <div key={i} className="g-gray-800 rounded-lg border border-gray-700 pb-6 shadow-sm shadow-white/30 transition-shadow duration-200">
+        <div key={i} className="rounded-xl border border-white/20 bg-white/10 backdrop-blur-md shadow-lg p-4 transition-transform hover:scale-[1.02] hover:shadow-2xl">
           {/* Header */}
           <div className="p-6 border-b ">
             <div className="flex items-center gap-3 mb-4">
@@ -103,7 +103,7 @@ const contentExamples = {
               />
               <span className="font-semibold">{blog.platform.label}</span>
               <span className=" flex items-center gap-1 text-sm text-[#4ade80]">
-                <Eye className="w-4 h-4 " color="#4ade80." /> {blog.stats.views}
+                <Eye className="w-4 h-4 " color="#4ade80" /> {blog.stats.views}
               </span>
             </div>
 
@@ -148,78 +148,6 @@ const contentExamples = {
       ))}
     </div>
   ),
-
-  // video: (
-  //   <div className=" rounded-lg border overflow-hidden">
-  //     <div className="aspect-video flex items-center justify-center relative">
-  //       <div className="absolute inset-0 bg-gradient-to-br "></div>
-  //       <div className="relative text-center">
-  //         <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4 mx-auto">
-  //           <Video className="w-8 h-8" />
-  //         </div>
-  //         <h4 className="font-semibold">API Authentication Deep Dive</h4>
-  //         <p className="text-sm text-muted-foreground">12:34 • 8.9k views</p>
-  //       </div>
-  //     </div>
-  //     <div className="p-6">
-  //       <h3 className="text-lg font-semibold mb-3">
-  //         "Zero to JWT: Complete Authentication Tutorial"
-  //       </h3>
-  //       <div className="space-y-3 text-sm">
-  //         <div className="flex justify-between items-center">
-  //           <span>YouTube</span>
-  //           <span className="">8.9k views • 342 likes</span>
-  //         </div>
-  //         <div className="flex justify-between items-center">
-  //           <span>Embedded in docs</span>
-  //           <span className="">2.1k interactions</span>
-  //         </div>
-  //         <div className="flex justify-between items-center">
-  //           <span>Social clips (Twitter/LinkedIn)</span>
-  //           <span className="">45k impressions</span>
-  //         </div>
-  //       </div>
-  //       <div className="mt-4 p-3 rounded text-sm">
-  //         <strong>Chapters:</strong> Setup (0:00) • JWT Basics (2:30) • Security
-  //         Best Practices (8:45) • Production Tips (11:00)
-  //       </div>
-  //     </div>
-  //   </div>
-  // ),
-
-  // community: (
-  //   <div className="space-y-4">
-  //     {community.map((post, i) => (
-  //       <div key={i} className="rounded-lg border  p-4">
-  //         {/* Header */}
-  //         <div className="flex items-center gap-3 mb-3">
-  //           <div
-  //             className={`w-8 h-8 ${post.color} rounded-full flex items-center justify-center text-white text-xs font-bold`}
-  //           >
-  //             {post.short}
-  //           </div>
-  //           <span className="font-semibold">{post.name}</span>
-  //           <span className="text-sm">{post.score}</span>
-  //         </div>
-
-  //         {/* Title */}
-  //         <h4 className="font-semibold mb-2">{post.title}</h4>
-
-  //         {/* Description */}
-  //         <p className="text-sm text-muted-foreground mb-3">
-  //           {post.description}
-  //         </p>
-
-  //         {/* Stats */}
-  //         <div className="flex gap-4 text-xs text-muted-foreground">
-  //           {post.stats.map((stat, idx) => (
-  //             <span key={idx}>{stat}</span>
-  //           ))}
-  //         </div>
-  //       </div>
-  //     ))}
-  //   </div>
-  // ),
  video: (
   <div className="rounded-xl border border-white/20 bg-white/10 backdrop-blur-md shadow-lg overflow-hidden transition-transform hover:scale-[1.02] hover:shadow-2xl">
     <div className="aspect-video flex items-center justify-center relative">
@@ -239,15 +167,15 @@ const contentExamples = {
       <div className="space-y-3 text-sm text-white/80">
         <div className="flex justify-between items-center">
           <span>YouTube</span>
-          <span>8.9k views • 342 likes</span>
+          <span className="text-success">8.9k views • 342 likes</span>
         </div>
         <div className="flex justify-between items-center">
           <span>Embedded in docs</span>
-          <span>2.1k interactions</span>
+          <span className="text-success">2.1k interactions</span>
         </div>
         <div className="flex justify-between items-center">
           <span>Social clips (Twitter/LinkedIn)</span>
-          <span>45k impressions</span>
+          <span className="text-success">45k impressions</span>
         </div>
       </div>
       <div className="mt-4 p-3 rounded-lg bg-white/10 backdrop-blur-sm text-sm text-white/70">
@@ -273,7 +201,7 @@ community: (
             {post.short}
           </div>
           <span className="font-semibold text-white">{post.name}</span>
-          <span className="text-sm text-white/70">{post.score}</span>
+          <span className="text-sm text-success">{post.score}</span>
         </div>
 
         {/* Title */}
@@ -294,7 +222,7 @@ community: (
 ),
  
   analytics: (
-  <div className="g-gray-800 rounded-lg border border-gray-700 p-6 shadow-sm shadow-white/30 transition-shadow duration-200">
+  <div className="rounded-xl border border-white/20 bg-white/10 backdrop-blur-md shadow-lg p-4 transition-transform hover:scale-[1.02] hover:shadow-2xl">
     <h3 className="text-lg font-semibold mb-6 text-white">
       Last 30 Days Performance
     </h3>
@@ -304,7 +232,7 @@ community: (
       {performanceData.totals.map((total, index) => (
         <div
           key={index}
-          className="text-center p-4 rounded-lg bg-gray-800 shadow-sm"
+          className="text-center p-4 rounded-lg bg-white/10 shadow-sm"
         >
           <div className={`text-2xl font-bold text-[#5F64FF] ${total.style}`}>
             {total.value.toLocaleString()}
@@ -404,7 +332,7 @@ const CodeShowcase = () => {
         {/* Content Tabs */}
         <div className="max-w-5xl mx-auto">
           <Tabs defaultValue="blog" className="w-full" onValueChange={handleTabChange}>
-            <TabsList className="grid w-full grid-cols-4 border bg-white/15 rounded-lg">
+            <TabsList className="grid w-full grid-cols-4 border bg-white/10 rounded-lg" style={{height : "2.6rem"}}>
               <TabsTrigger
                 value="blog"
                 className="flex items-center gap-2 transition-transform hover:scale-105 data-[state=active]:bg-[#5F64FF] data-[state=active]:text-white rounded-md"
@@ -448,21 +376,21 @@ const CodeShowcase = () => {
           ref={statsRef}
           className="mt-16 grid md:grid-cols-4 gap-8 text-center"
         >
-          <div className="p-6 rounded-xl border bg-white/5 stat-card">
+          <div className="p-6 rounded-xl  bg-white/5 stat-card">
             <div className="text-3xl font-bold">12+</div>
             <div className="text-muted-foreground">Content pieces/month</div>
           </div>
-          <div className="p-6 rounded-xl border bg-white/5 stat-card">
+          <div className="p-6 rounded-xl  bg-white/5 stat-card">
             <div className="text-3xl font-bold mb-2">50+</div>
             <div className="text-muted-foreground">Distribution channels</div>
           </div>
-          <div className="p-6 rounded-xl border bg-white/5 stat-card">
+          <div className="p-6 rounded-xl  bg-white/5 stat-card">
             <div className="text-3xl font-bold mb-2">3M+</div>
             <div className="text-muted-foreground">
               Monthly developer reach
             </div>
           </div>
-          <div className="p-6 rounded-xl border bg-white/5 stat-card">
+          <div className="p-6 rounded-xl  bg-white/5 stat-card">
             <div className="text-3xl font-bold mb-2">4.2%</div>
             <div className="text-muted-foreground">Avg conversion rate</div>
           </div>

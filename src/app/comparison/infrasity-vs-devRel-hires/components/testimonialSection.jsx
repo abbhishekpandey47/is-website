@@ -1,125 +1,181 @@
 "use client";
-import React, { useMemo } from "react";
-import { Marquee } from "@devnomic/marquee";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { gsap } from "gsap";
 import "@devnomic/marquee/dist/index.css";
 
 const testimonials = [
   {
-    quote: "Infrasity shipped more technical content in their first month than our previous DevRel hire did in six. The quality is exceptional and the distribution reach is incredible.",
+    quote:
+      "Infrasity shipped more technical content in their first month than our previous DevRel hire did in six. The quality is exceptional and the distribution reach is incredible.",
     author: "Sarah Chen",
     role: "CTO",
     company: "DevFlow",
-    avatar: "SC"
+    avatar: "SC",
   },
   {
-    quote: "We were stuck between hiring an expensive DevRel or going without. Infrasity gave us a full GTM team for a fraction of the cost. Our developer engagement is up 300%.",
+    quote:
+      "We were stuck between hiring an expensive DevRel or going without. Infrasity gave us a full GTM team for a fraction of the cost. Our developer engagement is up 300%.",
     author: "Marcus Rodriguez",
     role: "Founder",
     company: "CloudNative Labs",
-    avatar: "MR"
+    avatar: "MR",
   },
   {
-    quote: "The engineering depth they bring to content creation is unmatched. They understand our product better than most of our own team members within weeks.",
+    quote:
+      "The engineering depth they bring to content creation is unmatched. They understand our product better than most of our own team members within weeks.",
     author: "Alex Kim",
     role: "VP Engineering",
     company: "DataStream",
-    avatar: "AK"
-  }
+    avatar: "AK",
+  },
 ];
 
 const companies = [
-  "DevFlow", "CloudNative Labs", "DataStream", "TechVenture", "BuildPlatform", "CodeBase"
+  "DevFlow",
+  "CloudNative Labs",
+  "DataStream",
+  "TechVenture",
+  "BuildPlatform",
+  "CodeBase",
 ];
 
-const NewMarquee = () => {
-  const fileMemo = useMemo(() => companies, []);
-  const duration = "80s"; 
-
-  return (
-    <div className="pb-2">
-      <div className="max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
-        <div
-          className="relative w-full mx-auto max-w-4xl opacity-90 dark:opacity-70 overflow-hidden px-5 lg:px-12"
-          aria-hidden={false}
-        >
-          <Marquee
-            className="custom-marquee-mask"
-            innerClassName="custom-marquee-track"
-            pauseOnHover={true}
-            fade={false}
-            direction="left"
-          >
-            <div className="flex gap-10 items-center mx-4">
-              {companies.map((company, index) => (
-                <div key={index} className={`mix-blend-color-burn`}>
-                 <div key={company} className="text-lg font-semibold text-neutral-foreground">
-                {company}
-              </div>
-                </div>
-              ))}
-            </div>
-          </Marquee>
-        </div>
-      </div>
-
-      <style jsx global>{`
-        /* Smooth fade at left/right edges: mask-image works well (with -webkit prefix fallback) */
-        .custom-marquee-mask {
-          /* adjust percentages to change width of fade */
-          -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);
-          mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);
-          -webkit-mask-size: 100% 100%;
-          mask-size: 100% 100%;
-          /* ensure overlays/gaps are not clipped by mask */
-        }
-
-        /* Force the library's animated track to run slower.
-           innerClassName attaches this class to the moving track, so overriding animation-duration
-           here slows the scroll. */
-        .custom-marquee-track {
-          -webkit-animation-duration: ${duration} !important;
-          animation-duration: ${duration} !important;
-          /* keep linear timing for smooth constant speed */
-          -webkit-animation-timing-function: linear !important;
-          animation-timing-function: linear !important;
-        }
-
-        /* Some environments set animation on a child; add a safer override for any descendant animation */
-        .custom-marquee-track * {
-          -webkit-animation-duration: ${duration} !important;
-          animation-duration: ${duration} !important;
-        }
-
-        /* Optional: nice image smoothing */
-        .custom-marquee-mask img {
-          transition: transform 300ms ease, opacity 300ms ease;
-          will-change: transform, opacity;
-        }
-
-        /* responsive tweak: smaller height on small screens */
-        @media (max-width: 640px) {
-          .custom-marquee-mask img { height: 36px; width: auto; }
-        }
-      `}</style>
-    </div>
-  );
+function useSlidesPerView() {
+  // 1 on small, 2 on md, 3 on lg
+  const [spv, setSpv] = useState(1);
+  useEffect(() => {
+    const mqMd = window.matchMedia("(min-width: 768px)");
+    const mqLg = window.matchMedia("(min-width: 1024px)");
+    const compute = () => setSpv(mqLg.matches ? 3 : mqMd.matches ? 2 : 1);
+    compute();
+    mqMd.addEventListener("change", compute);
+    mqLg.addEventListener("change", compute);
+    return () => {
+      mqMd.removeEventListener("change", compute);
+      mqLg.removeEventListener("change", compute);
+    };
+  }, []);
+  return spv;
 }
 
-
 const TestimonialsSection = () => {
+  const spv = useSlidesPerView();
+  const wrapperRef = useRef(null);
+  const trackRef = useRef(null);
+  const animRef = useRef(null);
+  const pauseIntentRef = useRef(false);
+
+  // Duplicate slides for seamless loop (x3 for smoother cycles)
+  const slides = useMemo(() => [...testimonials, ...testimonials, ...testimonials], []);
+
+  const prefersReduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const getPixelsPerSecond = () => {
+    // Feel free to tweak these speeds
+    const md = window.matchMedia("(min-width: 768px)").matches;
+    const lg = window.matchMedia("(min-width: 1024px)").matches;
+    if (lg) return 110; // faster on large screens
+    if (md) return 90;
+    return 70; // smaller screens a bit slower
+  };
+
+  const buildAnimation = () => {
+    if (!wrapperRef.current || !trackRef.current) return;
+
+    // Kill any existing tween
+    if (animRef.current) animRef.current.kill();
+
+    const wrap = wrapperRef.current;
+    const slideWidth = wrap.clientWidth / spv;
+
+    // We want the loop distance to be exactly one original set (not all duplicates)
+    const loopDistance = slideWidth * testimonials.length;
+
+    // Reset position to the start of a cycle to avoid drift
+    gsap.set(trackRef.current, { x: 0 });
+
+    if (prefersReduced()) {
+      // Respect reduced motion
+      return;
+    }
+
+    // Duration derived from distance / speed (px per second)
+    const pps = getPixelsPerSecond();
+    const duration = loopDistance / pps; // seconds per cycle
+
+    animRef.current = gsap.to(trackRef.current, {
+      x: -loopDistance,
+      duration,
+      ease: "none",
+      repeat: -1,
+      onRepeat: () => gsap.set(trackRef.current, { x: 0 }),
+    });
+  };
+
+  useEffect(() => {
+    buildAnimation();
+
+    const onResize = () => buildAnimation();
+    const onVisibility = () => {
+      // Pause when tab is hidden, resume when visible (unless user is hovering)
+      if (!animRef.current) return;
+      if (document.hidden) animRef.current.pause();
+      else if (!pauseIntentRef.current) animRef.current.resume();
+    };
+
+    const onReducedMotionChange = () => buildAnimation();
+    const mqReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    window.addEventListener("resize", onResize);
+    document.addEventListener("visibilitychange", onVisibility);
+    mqReduced.addEventListener?.("change", onReducedMotionChange);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisibility);
+      mqReduced.removeEventListener?.("change", onReducedMotionChange);
+      if (animRef.current) animRef.current.kill();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [spv]);
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    const pause = () => {
+      pauseIntentRef.current = true;
+      if (animRef.current) animRef.current.pause();
+    };
+    const resume = () => {
+      pauseIntentRef.current = false;
+      if (animRef.current) animRef.current.resume();
+    };
+
+    // Hover to pause (desktop)
+    el.addEventListener("mouseenter", pause);
+    el.addEventListener("mouseleave", resume);
+
+    // Touch to pause while finger is down (mobile)
+    const onTouchStart = () => pause();
+    const onTouchEnd = () => resume();
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchend", onTouchEnd, { passive: true });
+    el.addEventListener("touchcancel", onTouchEnd, { passive: true });
+
+    return () => {
+      el.removeEventListener("mouseenter", pause);
+      el.removeEventListener("mouseleave", resume);
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchend", onTouchEnd);
+      el.removeEventListener("touchcancel", onTouchEnd);
+    };
+  }, []);
+
   return (
     <section id="testimonials" className="py-20 bg-surface">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Social Proof - Company Logos */}
-        <div className="text-center mb-16">
-          <p className="text-sm text-muted-foreground mb-8">
-            Trusted by engineering teams at high-growth startups
-          </p>
-          {NewMarquee()}
-        </div>
-
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-neutral-foreground mb-6">
             What founders are saying
           </h2>
@@ -128,38 +184,56 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div 
-              key={testimonial.author}
-              className="bg-[#2a2d5a]/30 border border-purple-500/30 backdrop-blur-sm rounded-2xl p-6 transition-colors duration-300"
-              style={{ animationDelay: `${index * 150}ms` }}
+        {/* Auto-scrolling Carousel (responsive + hover/touch pause) */}
+        <div
+          className="relative"
+          aria-roledescription="carousel"
+          aria-label="Testimonials auto carousel"
+        >
+          <div
+            ref={wrapperRef}
+            className="overflow-hidden rounded-2xl"
+          >
+            <div
+              ref={trackRef}
+              className="flex touch-none select-none"
+              style={{ willChange: "transform" }}
             >
-              <div className="mb-6">
-                <svg className="w-8 h-8 text-brand/30 mb-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                </svg>
-                <p className="text-neutral-foreground leading-relaxed">
-                  "{testimonial.quote}"
-                </p>
-              </div>
-              
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-brand/10 rounded-full flex items-center justify-center text-brand font-semibold">
-                  {testimonial.avatar}
-                </div>
-                <div>
-                  <div className="font-semibold text-neutral-foreground">
-                    {testimonial.author}
+              {slides.map((t, i) => (
+                <article
+                  key={`${t.author}-${i}`}
+                  className="basis-full md:basis-1/2 lg:basis-1/3 shrink-0 p-3"
+                  aria-roledescription="slide"
+                  aria-label={`${(i % testimonials.length) + 1} of ${testimonials.length}`}
+                >
+                  <div className="h-full bg-[#2a2d5a]/30 border border-purple-500/30 backdrop-blur-sm rounded-2xl p-6">
+                    <div className="mb-6">
+                      <svg
+                        className="w-8 h-8 text-brand/30 mb-4"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden
+                      >
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                      </svg>
+                      <p className="text-neutral-foreground leading-relaxed">“{t.quote}”</p>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-brand/10 rounded-full flex items-center justify-center text-brand font-semibold">
+                        {t.avatar}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-neutral-foreground">{t.author}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {t.role} at {t.company}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    {testimonial.role} at {testimonial.company}
-                  </div>
-                </div>
-              </div>
+                </article>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

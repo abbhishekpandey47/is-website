@@ -10,6 +10,7 @@ import ProcessSection from "./components/processSection";
 import TestimonialsSection from "./components/testimonialSection";
 import InfrasityComparison from "./components/infrasityComparisonSection";
 import PricingSection from "./components/pricingSection";
+import CtaSection from "./components/cta";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
@@ -50,9 +51,10 @@ const Comparison = () => {
       <CodeShowcase/>
       <FeaturesSection />
       <ProcessSection />
-      <TestimonialsSection />
       <InfrasityComparison />
       <PricingSection />
+      <TestimonialsSection />
+      <CtaSection/>
     </div>
   );
 };

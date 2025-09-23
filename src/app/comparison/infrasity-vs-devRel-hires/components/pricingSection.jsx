@@ -272,16 +272,6 @@ const PricingSection = () => {
             </div>
           ))}
         </div>
-
-        {/* Bottom CTA */}
-        <div className="pricing-bottom text-center mt-16">
-          <p className="text-muted-foreground mb-4">
-            Have questions? Want to see how we stack up against DevRel hires?
-          </p>
-          <Button variant="outline" size="lg" className="border-divider">
-            Schedule a Demo
-          </Button>
-        </div>
       </div>
     </section>
   );

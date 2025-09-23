@@ -127,12 +127,12 @@ const InfrasityComparison = () => {
         {/* Comparison Table */}
         <div className="cmp-table bg-card rounded-xl shadow-sm border border-border overflow-hidden mb-12">
           {/* Table Header */}
-          <div className="grid grid-cols-3 bg-card border-b border-border">
+          <div className="grid grid-cols-3 bg-card border-border">
             <div className="p-6" />
             <div className="p-6 text-center border-l border-border">
               <h3 className="text-xl font-semibold text-foreground">DevRel Hire</h3>
             </div>
-            <div className="p-6 text-center border-l border-border bg-primary/5">
+            <div className="p-6 text-center border-t-2 border-l-2  border-r-2 rounded-tl-lg rounded-tr-lg border-[#5F64FF]  bg-white/10">
               <h3 className="text-xl font-semibold text-primary">Infrasity</h3>
             </div>
           </div>
@@ -141,9 +141,7 @@ const InfrasityComparison = () => {
           {comparisonData.map((row, index) => (
             <div
               key={row.category}
-              className={`cmp-row grid grid-cols-3 ${
-                index % 2 === 0 ? "bg-card" : "bg-muted/20"
-              } border-b border-border last:border-b-0`}
+              className={`cmp-row grid grid-cols-3 border-border`}
             >
               {/* Category */}
               <div className="p-6 flex items-center gap-3">
@@ -159,7 +157,9 @@ const InfrasityComparison = () => {
               </div>
 
               {/* Infrasity */}
-              <div className="p-6 border-l border-border bg-primary/5 flex items-center">
+              <div className={`p-6 border-l-2 border-r-2  border-[#5F64FF] bg-white/10 flex items-center ${index === comparisonData.length - 1 ? 
+                'border-[#5F64FF] border-b-2 rounded-bl-lg rounded-br-lg ' : ''
+              }`}>
                 <span className="text-foreground font-medium">{row.infrasity}</span>
               </div>
             </div>
@@ -171,16 +171,6 @@ const InfrasityComparison = () => {
           <blockquote className="text-2xl md:text-3xl font-semibold text-foreground text-center">
             "Why settle for one voice, when you can have an entire GTM team?"
           </blockquote>
-        </div>
-
-        {/* CTA */}
-        <div className="cmp-cta text-center">
-          <Button
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg font-semibold"
-          >
-            See How We Compare
-          </Button>
         </div>
       </div>
     </section>

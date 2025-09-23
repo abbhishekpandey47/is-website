@@ -1,16 +1,12 @@
 "use client";
 import React, { useState, useEffect, useLayoutEffect, useMemo } from "react";
-import { ArrowRight, Play, Terminal, Copy, Check } from "lucide-react";
-// import Particles from "../ui/particles";
-// import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
-import { Typewriter } from "react-simple-typewriter";
-import Link from "next/link";
-// import ClutchBadge from "./clutch";
-// import CalendarBooking from "../../app/calendarButton";
+import CalendarBooking from "../../../calendarButton";
+
+import { Marquee } from "@devnomic/marquee";
 
 const InfrasityVsDevRelHome = () => {
   const headingText = useMemo(() => {
@@ -58,89 +54,190 @@ const InfrasityVsDevRelHome = () => {
     return () => {};
   }, []);
 
+  const companies = [
+    "DevFlow",
+    "CloudNative Labs",
+    "DataStream",
+    "TechVenture",
+    "BuildPlatform",
+    "CodeBase",
+  ];
+
+  const NewMarquee = () => {
+    const fileMemo = useMemo(() => companies, []);
+    const duration = "80s";
+
+    return (
+      <div className="pb-2">
+        <div className="max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
+          <div
+            className="relative w-full mx-auto max-w-4xl opacity-90 dark:opacity-70 overflow-hidden px-5 lg:px-12"
+            aria-hidden={false}
+          >
+            <Marquee
+              className="custom-marquee-mask"
+              innerClassName="custom-marquee-track"
+              pauseOnHover={true}
+              fade={false}
+              direction="left"
+            >
+              <div className="flex gap-10 items-center mx-4">
+                {companies.map((company, index) => (
+                  <div key={index} className={`mix-blend-color-burn`}>
+                    <div
+                      key={company}
+                      className="text-lg font-semibold text-neutral-foreground"
+                    >
+                      {company}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Marquee>
+          </div>
+        </div>
+
+        <style jsx global>{`
+          /* Smooth fade at left/right edges: mask-image works well (with -webkit prefix fallback) */
+          .custom-marquee-mask {
+            /* adjust percentages to change width of fade */
+            -webkit-mask-image: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0) 0%,
+              rgba(0, 0, 0, 1) 10%,
+              rgba(0, 0, 0, 1) 90%,
+              rgba(0, 0, 0, 0) 100%
+            );
+            mask-image: linear-gradient(
+              90deg,
+              rgba(0, 0, 0, 0) 0%,
+              rgba(0, 0, 0, 1) 10%,
+              rgba(0, 0, 0, 1) 90%,
+              rgba(0, 0, 0, 0) 100%
+            );
+            -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+            /* ensure overlays/gaps are not clipped by mask */
+          }
+
+          /* Force the library's animated track to run slower.
+           innerClassName attaches this class to the moving track, so overriding animation-duration
+           here slows the scroll. */
+          .custom-marquee-track {
+            -webkit-animation-duration: ${duration} !important;
+            animation-duration: ${duration} !important;
+            /* keep linear timing for smooth constant speed */
+            -webkit-animation-timing-function: linear !important;
+            animation-timing-function: linear !important;
+          }
+
+          /* Some environments set animation on a child; add a safer override for any descendant animation */
+          .custom-marquee-track * {
+            -webkit-animation-duration: ${duration} !important;
+            animation-duration: ${duration} !important;
+          }
+
+          /* Optional: nice image smoothing */
+          .custom-marquee-mask img {
+            transition: transform 300ms ease, opacity 300ms ease;
+            will-change: transform, opacity;
+          }
+
+          /* responsive tweak: smaller height on small screens */
+          @media (max-width: 640px) {
+            .custom-marquee-mask img {
+              height: 36px;
+              width: auto;
+            }
+          }
+        `}</style>
+      </div>
+    );
+  };
+
   return (
     <section className="relative pt-24 pb-20 overflow-hidden">
-    {/* dotted grid background with directional blur */}
-<div
-  className="absolute"
-  style={{
-    left: "16rem",
-    top: "15rem",
-    width: "58rem",
-    height: "27rem",
-    opacity: 0.4,
-    zIndex: 0,
-  }}
->
-  <svg className="h-full w-full" aria-hidden="true">
-    <defs>
-      {/* dotted grid pattern */}
-      <pattern
-        id="dotted-grid"
-        width="40"
-        height="40"
-        patternUnits="userSpaceOnUse"
+      {/* dotted grid background with directional blur */}
+      <div
+        className="absolute"
+        style={{
+          left: "16rem",
+          top: "15rem",
+          width: "58rem",
+          height: "27rem",
+          opacity: 0.4,
+          zIndex: 0,
+        }}
       >
-        <path
-          d="M0 0 H40"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="0.5"
-          strokeDasharray="2 4"
-        />
-        <path
-          d="M0 0 V40"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="0.5"
-          strokeDasharray="2 4"
-        />
-      </pattern>
+        <svg className="h-full w-full" aria-hidden="true">
+          <defs>
+            {/* dotted grid pattern */}
+            <pattern
+              id="dotted-grid"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M0 0 H40"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                strokeDasharray="2 4"
+              />
+              <path
+                d="M0 0 V40"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                strokeDasharray="2 4"
+              />
+            </pattern>
 
-      {/* custom multi-side fade */}
-      <linearGradient id="fade-horizontal" x1="0" x2="1" y1="0" y2="0">
-        <stop offset="0%" stopColor="white" stopOpacity="0" />   {/* strong blur left */}
-        <stop offset="15%" stopColor="white" stopOpacity="1" />  {/* sharp center starts */}
-        <stop offset="85%" stopColor="white" stopOpacity="1" />  {/* sharp center ends */}
-        <stop offset="100%" stopColor="white" stopOpacity="0" /> {/* strong blur right */}
-      </linearGradient>
+            {/* custom multi-side fade */}
+            <linearGradient id="fade-horizontal" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stopColor="white" stopOpacity="0" />{" "}
+              {/* strong blur left */}
+              <stop offset="15%" stopColor="white" stopOpacity="1" />{" "}
+              {/* sharp center starts */}
+              <stop offset="85%" stopColor="white" stopOpacity="1" />{" "}
+              {/* sharp center ends */}
+              <stop offset="100%" stopColor="white" stopOpacity="0" />{" "}
+              {/* strong blur right */}
+            </linearGradient>
 
-      <linearGradient id="fade-vertical" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="0%" stopColor="white" stopOpacity="0" />   {/* blur top */}
-        <stop offset="15%" stopColor="white" stopOpacity="1" />  {/* sharp area */}
-        <stop offset="85%" stopColor="white" stopOpacity="1" />  {/* sharp area */}
-        <stop offset="100%" stopColor="white" stopOpacity="0" /> {/* blur bottom */}
-      </linearGradient>
+            <linearGradient id="fade-vertical" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stopColor="white" stopOpacity="0" />{" "}
+              {/* blur top */}
+              <stop offset="15%" stopColor="white" stopOpacity="1" />{" "}
+              {/* sharp area */}
+              <stop offset="85%" stopColor="white" stopOpacity="1" />{" "}
+              {/* sharp area */}
+              <stop offset="100%" stopColor="white" stopOpacity="0" />{" "}
+              {/* blur bottom */}
+            </linearGradient>
 
-      {/* combine horizontal + vertical */}
-      <mask id="multi-fade">
-        <rect
-          width="100%"
-          height="100%"
-          fill="url(#fade-horizontal)"
-        />
-        <rect
-          width="100%"
-          height="100%"
-          fill="url(#fade-vertical)"
-        />
-      </mask>
-    </defs>
+            {/* combine horizontal + vertical */}
+            <mask id="multi-fade">
+              <rect width="100%" height="100%" fill="url(#fade-horizontal)" />
+              <rect width="100%" height="100%" fill="url(#fade-vertical)" />
+            </mask>
+          </defs>
 
-    {/* apply dotted grid with fade mask */}
-    <rect
-      width="100%"
-      height="100%"
-      fill="url(#dotted-grid)"
-      mask="url(#multi-fade)"
-    />
-  </svg>
-</div>
-   
+          {/* apply dotted grid with fade mask */}
+          <rect
+            width="100%"
+            height="100%"
+            fill="url(#dotted-grid)"
+            mask="url(#multi-fade)"
+          />
+        </svg>
+      </div>
+
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center flex flex-col justify-center pt-16 max-sm:pt-36  items-center">
+        <div className="text-center flex flex-col justify-center pt-16 max-sm:pt-4  items-center">
           <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-in bg-white/15">
-            🚀 Now shipping: Engineering-led GTM at scale
+            Now shipping: Engineering-led GTM at scale
           </div>
           <div className="flex flex-col gap-[40px] md:gap-[30px] max-w-[70vw] max-sm:max-w-[95vw] z-1">
             <div className="quicksand-bold w-[70vw] max-lg:text-[4em] max-lg:pt-30 max-md:pt-0 text-[5em] text-white tracking-tight leading-[85px] max-md:text-[3.5em] max-md:tracking-tighter max-md:leading-[60px] max-sm:w-[100%] ">
@@ -175,49 +272,37 @@ const InfrasityVsDevRelHome = () => {
 
               {/* CTAs */}
 
-              <div className="flex gap-5 cursor-pointer" style={{zIndex:1}}>
-                <Link
-                  href="/"
-                  className="inline-flex justify-center items-center 
-    text-sm quicksand-semibold 
-    bg-[#5F64FF] 
-    rounded-[5px] relative overflow-hidden 
-    border border-[#3b82f6] 
-    text-white shadow-2xl transition-all 
-    z-10 w-52 h-12
-    
-    before:ease before:absolute before:right-0 before:top-0 
-    before:h-12 before:w-6 before:translate-x-12 
-    before:rotate-6 before:bg-white before:opacity-10 before:duration-700 
-    hover:before:-translate-x-40"
-                >
-                  Start Your GTM Engine
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <button
-                  // onClick={openModal}
-                  className="btn bg-white/15 text-white font-semibold py-2 px-4 rounded shadow hover:bg-gray-900 quicksand-semibold cursor-pointer z-1"
-                >
-                  <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                  Watch Demo
-                </button>
+              <div className="flex gap-5 cursor-pointer" style={{ zIndex: 1 }}>
+                <CalendarBooking
+                  buttonText="Book a Free Consultation"
+                  width="w-52"
+                />
               </div>
-            </div>
-            <div
-              className="grid grid-cols-3 gap-24 max-w-xl mx-auto text-center animate-slide-up pt-5"
-              style={{ animationDelay: "0.4s" }}
-            >
-              <div>
-                <div className="text-3xl font-bold ">10x</div>
-                <div className="text-muted-foreground">Faster output</div>
+
+              {/* Social Proof - Company Logos */}
+              <div className="text-center mt-4">
+                <p className="text-sm text-muted-foreground mb-8">
+                  Trusted by engineering teams at high-growth startups
+                </p>
+                {NewMarquee()}
               </div>
-              <div>
-                <div className="text-3xl font-bold ">50+</div>
-                <div className="text-muted-foreground">Channels</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold ">3M+</div>
-                <div className="text-muted-foreground">Developer reach</div>
+
+              <div
+                className="grid grid-cols-3 max-w-xl mx-auto text-center animate-slide-up pt-5 divide-x divide-border"
+                style={{ animationDelay: "0.4s" }}
+              >
+                <div className="px-6">
+                  <div className="text-3xl font-bold">10x</div>
+                  <div className="text-muted-foreground">Faster output</div>
+                </div>
+                <div className="px-6">
+                  <div className="text-3xl font-bold">50+</div>
+                  <div className="text-muted-foreground">Channels</div>
+                </div>
+                <div className="px-6">
+                  <div className="text-3xl font-bold">3M+</div>
+                  <div className="text-muted-foreground">Developer reach</div>
+                </div>
               </div>
             </div>
           </div>{" "}
