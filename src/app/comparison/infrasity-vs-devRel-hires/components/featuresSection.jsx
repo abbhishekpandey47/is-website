@@ -25,31 +25,31 @@ const features = [
     icon: TrendingUp,
     title: "Scale Beyond One Person",
     description:
-      "Get the output of an entire GTM team, not just a single DevRel hire. Multiple specialists working on your growth simultaneously.",
+      "Why rely on a single DevRel hire? Get the output of an entire GTM team — specialists in content, docs, and distribution working simultaneously.",
   },
   {
     icon: Target,
-    title: "Multi-Channel Distribution",
+    title: "Content That Converts to Adoption",
     description:
-      "We don't just create content—we distribute it across 50+ channels including Reddit, HackerNews, dev communities, and more.",
+      "Each deliverable is created with distribution in mind, so developers discover your product through guides, code, and examples.",
   },
   {
     icon: Code,
     title: "Engineering-First Content",
     description:
-      "Technical deep-dives, SDK documentation, code examples, and architectural guides written by actual engineers.",
+      "Deep dives, SDK docs, code samples, and architecture guides — all written by engineers who’ve shipped real infrastructure.",
   },
   {
     icon: BarChart3,
     title: "Data-Driven Growth",
     description:
-      "Track every metric that matters: developer engagement, sign-up attribution, community growth, and revenue impact.",
+      "Every deliverable tied to outcomes: developer engagement, sign-ups, community traction, and revenue impact.",
   },
   {
     icon: Users,
     title: "Community Building",
     description:
-      "Build and nurture developer communities around your product with authentic engagement and valuable technical contributions.",
+      "Fuel authentic developer communities around your product with content + engagement that feels native, not forced marketing.",
   },
 ];
 

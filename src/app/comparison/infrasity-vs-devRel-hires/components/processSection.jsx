@@ -14,12 +14,12 @@ const processSteps = [
     icon: Target,
     title: "Week 1: Strategy & Setup",
     description:
-      "We analyze your product, identify key technical selling points, and map out your ideal developer persona.",
+      "We dig into your product, extract the technical value props, and map them to developer personas and channels. You’ll walk away with a launch-ready plan.",
     deliverables: [
-      "GTM strategy document",
-      "Content calendar",
-      "Channel selection",
-      "Brand voice guide",
+      "GTM strategy document (framed for developers)",
+      "Content calendar (first 30–60 days)",
+      "Channel selection (where your ICP actually hangs out)",
+      "Brand voice guide (engineering-first tone of voice)",
     ],
     timeline: "5 business days",
 
@@ -36,12 +36,12 @@ const processSteps = [
     icon: Rocket,
     title: "Week 2: Content Production",
     description:
-      "Our engineering team starts creating technical content, documentation, and developer resources.",
+      "We start producing adoption assets the docs, examples, and tutorials that get developers hands-on with your product.",
     deliverables: [
-      "First 3 blog posts",
-      "SDK documentation",
-      "Code examples",
-      "Video tutorials",
+      "First 3 blog posts(technical and developer-focused)",
+      "SDK documentation(clear, adoption-ready)",
+      "Code examples(ready-to-run snippets)",
+      "Video tutorials (hands-on walkthroughs)",
     ],
     timeline: "7 business days",
     theme: {
@@ -56,12 +56,12 @@ const processSteps = [
     icon: Clock,
     title: "Week 3-4: Distribution & Community",
     description:
-      "We launch across all selected channels and begin building your developer community presence.",
+      "We extend your GTM beyond content creation activating developer conversations, communities, and platforms where technical buyers discover and trust new tools.”.",
     deliverables: [
-      "Multi-channel posting",
-      "Community engagement",
-      "Reddit/HN submissions",
-      "Social amplification",
+      "Publish content across developer-relevant platforms (Docs, GitHub, Blogs, Dev.to)",
+      "Seed authentic discussions in niche communities (Reddit, Hacker News, Discord, forums",
+      "Drive early feedback loops from real developers",
+      "Nurture community touchpoints that compound into long-term advocacy",
     ],
     timeline: "Ongoing weekly",
     theme: {
@@ -76,12 +76,12 @@ const processSteps = [
     icon: CheckCircle,
     title: "Ongoing: Scale & Optimize",
     description:
-      "Continuous content creation, performance tracking, and strategy optimization based on data.",
+      "After launch, we shift into scale mode producing advanced technical content, expanding coverage across use cases, and doubling down on what drives product adoption.”.",
     deliverables: [
-      "Weekly reports",
-      "A/B testing",
-      "Channel optimization",
-      "Lead nurturing",
+      "Ongoing content production : blogs, docs, SDKs, tutorials at scale",
+      "Use-case expansion : build libraries and templates that widen adoption paths",
+      "Performance analytics : track what content converts devs into users",
+      "Iterative optimization : refine docs, examples, and guides based on adoption signals",
     ],
     timeline: "Monthly reviews",
     theme: {
@@ -219,7 +219,7 @@ const ProcessSection = () => {
             From onboarding to results in 30 days
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            While traditional DevRel hires spend months learning your product, our engineering team starts delivering from day one.
+          While a DevRel hire ramps for 2–3 months, our engineering-led team starts shipping content in week one.
           </p>
         </div>
 

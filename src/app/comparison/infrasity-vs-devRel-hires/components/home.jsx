@@ -18,7 +18,7 @@ const InfrasityVsDevRelHome = () => {
   }, []);
 
   const description = useMemo(() => {
-    return "Get dedicated technical content, developer advocacy, and multi-channel GTM execution. Built by engineers, scaled for growth, delivered from day one.";
+    return "Go beyond a single developer relations hire, Infrasity delivers technical guides, SDK docs, blogs, and videos at the pace startups need.";
   }, []);
 
   useLayoutEffect(() => {
