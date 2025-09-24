@@ -1,4 +1,4 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../Components/ui/tabs";
 import {
   FileText,
   Video,
@@ -338,28 +338,29 @@ const CodeShowcase = () => {
             <TabsList className="grid w-full grid-cols-4 border bg-white/10 rounded-lg" style={{height : "2.6rem"}}>
               <TabsTrigger
                 value="blog"
-                className="flex items-center gap-2 transition-transform hover:scale-105 data-[state=active]:bg-[#5F64FF] data-[state=active]:text-white rounded-md"
+                className="text-xs md:text-sm flex items-center gap-2 transition-transform hover:scale-105 data-[state=active]:bg-[#5F64FF] data-[state=active]:text-white rounded-md "
+                
               >
                 <FileText className="w-4 h-4" />
                 Blog Posts
               </TabsTrigger>
               <TabsTrigger
                 value="video"
-                className="flex items-center gap-2 transition-transform hover:scale-105 data-[state=active]:bg-[#5F64FF] data-[state=active]:text-white rounded-md"
+                className="text-xs md:text-sm flex items-center gap-2 transition-transform hover:scale-105 data-[state=active]:bg-[#5F64FF] data-[state=active]:text-white rounded-md "
               >
                 <Video className="w-4 h-4" />
                 Video Content
               </TabsTrigger>
               <TabsTrigger
                 value="community"
-                className="flex items-center gap-2 transition-transform hover:scale-105 data-[state=active]:bg-[#5F64FF] data-[state=active]:text-white rounded-md"
+                className="text-xs md:text-sm flex items-center gap-2 transition-transform hover:scale-105 data-[state=active]:bg-[#5F64FF] data-[state=active]:text-white rounded-md"
               >
                 <MessageSquare className="w-4 h-4" />
                 Community
               </TabsTrigger>
               <TabsTrigger
                 value="analytics"
-                className="flex items-center gap-2 transition-transform hover:scale-105 data-[state=active]:bg-[#5F64FF] data-[state=active]:text-white rounded-md"
+                className="text-xs md:text-sm flex items-center gap-2 transition-transform hover:scale-105 data-[state=active]:bg-[#5F64FF] data-[state=active]:text-white rounded-md"
               >
                 <BarChart3 className="w-4 h-4" />
                 Analytics

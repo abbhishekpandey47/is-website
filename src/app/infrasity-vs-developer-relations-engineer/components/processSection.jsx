@@ -240,7 +240,7 @@ const ProcessSection = () => {
 
                 {/* Content Card */}
                 <div className="flex-1 rounded-2xl p-8 shadow-lg ring-1 ring-border bg-card/80 backdrop-blur">
-                  <div className="flex flex-col md:flex-row gap-4 justify-center">
+                  <div className="flex flex-col md:!flex-row gap-4 justify-center">
                     <div className="flex-1">
                       <div className="mb-4">
                         <h3 className="text-2xl font-bold mb-2">{step.title}</h3>
