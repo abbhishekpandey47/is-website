@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
 import { DollarSign, Clock, FileText, TrendingUp, Users } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -144,7 +143,7 @@ const InfrasityComparison = () => {
               className={`cmp-row grid grid-cols-3 border-border`}
             >
               {/* Category */}
-              <div className="p-6 flex items-center gap-3">
+              <div className="p-6 flex flex-col items-center justify-center gap-3 text-center md:!flex-row md:!justify-start md:!text-left ">
                 <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
                   <row.icon className="w-5 h-5 text-primary" />
                 </div>
@@ -153,14 +152,14 @@ const InfrasityComparison = () => {
 
               {/* DevRel */}
               <div className="p-6 border-l border-border flex items-center">
-                <span className="text-muted-foreground">{row.devrel}</span>
+                <span className="text-muted-foreground text-xs md:!text-base">{row.devrel}</span>
               </div>
 
               {/* Infrasity */}
               <div className={`p-6 border-l-2 border-r-2  border-[#5F64FF] bg-white/10 flex items-center ${index === comparisonData.length - 1 ? 
                 'border-[#5F64FF] border-b-2 rounded-bl-lg rounded-br-lg ' : ''
               }`}>
-                <span className="text-foreground font-medium">{row.infrasity}</span>
+                <span className="text-foreground font-medium text-xs md:!text-base">{row.infrasity}</span>
               </div>
             </div>
           ))}

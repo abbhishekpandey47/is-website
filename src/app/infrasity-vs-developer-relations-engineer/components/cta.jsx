@@ -9,7 +9,7 @@ const CtaSection = () => {
         <h3 className="text-2xl md:text-3xl font-bold mb-3">
           Ready to skip the hiring process?
         </h3>
-        <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+        <p className="text-xs md:text-lg text-muted-foreground mb-6 max-w-2xl mx-auto ">
           Start getting results in your first week instead of waiting months for
           a DevRel hire to ramp up.
         </p>
