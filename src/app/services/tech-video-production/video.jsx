@@ -41,10 +41,10 @@ const Video = () => {
   }, [selectedImage]);
 
   const spokespersons = [
-    { id: 4, name: "Casual Male", image: "/video-page/t3.jpg" },
-    { id: 1, name: "Professional Male", image: "/video-page/t1.jpg", },
+    { id: 4, name: "Casual Male", image: "/video-page/t3.jpg", link: "https://www.youtube.com/watch?v=oqe_jFQFHFo" },
+    { id: 1, name: "Professional Male", image: "/video-page/t1.jpg" },
     { id: 3, name: "Corporate Female", image: "/video-page/t4.png" },
-    { id: 2, name: "Friendly Female", image: "/video-page/t2.jpg" }
+    { id: 2, name: "Friendly Female", image: "/video-page/t2.jpg", link: "https://www.youtube.com/watch?v=0AsyeSd1_kQ" }
   ];
 
   return (
@@ -208,15 +208,30 @@ const Video = () => {
                     key={spokesperson.id}
                     className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105`}
                   >
-                    <div className="aspect-video">
-                      <Image
-                        src={spokesperson.image}
-                        alt={spokesperson.name}
-                        className="w-full h-full object-cover"
-                        height={200}
-                        width={200}
-                      />
-                    </div>
+                   <div className="aspect-video">
+  <div className="aspect-video">
+  {spokesperson.link ? (
+    <a href={spokesperson.link} target="_blank" rel="noopener noreferrer">
+      <Image
+        src={spokesperson.image}
+        alt={spokesperson.name}
+        className="w-full h-full object-cover"
+        height={200}
+        width={200}
+      />
+    </a>
+  ) : (
+    <Image
+      src={spokesperson.image}
+      alt={spokesperson.name}
+      className="w-full h-full object-cover"
+      height={200}
+      width={200}
+    />
+  )}
+</div>
+</div>
+
                   </div>
                 ))}
               </div>
