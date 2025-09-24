@@ -15,6 +15,7 @@ import { Textarea } from "../../../Components/ui/textarea";
 import { UserProfile } from "../../../Components/UserProfile";
 import { useToast } from "../../../hooks/use-toast";
 import { auth } from "../../../lib/firebaseClient";
+import { HoverTextCell } from "../components/HoverTextCell";
 
 
 const PostsPage = () => {
@@ -41,6 +42,7 @@ const PostsPage = () => {
     postURL: "",
     redditUsername: "",
     postedCommentStatus: "",
+    totalViews:""
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(null);
@@ -145,15 +147,17 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
 const getStatusBadge = (status) => {
   const statusColors = {
     // Published Post Status
-    commentUnderApproval: "bg-blue-500 text-white",
+    commentunderapproval: "bg-blue-500 text-white",
     live: "bg-green-500 text-white",
     removed: "bg-red-500 text-white",
     undermoderation: "bg-yellow-500 text-black",
+    
 
     // Post Approval Status
-    approved: "bg-emerald-600 text-white",
+    approved: "bg-emerald-700 text-white",
     notapproved: "bg-red-600 text-white",
-    pending: "bg-gray-500 text-white",
+    pending: "bg-yellow-400 text-black",
+
   };
 
   const colorClass = status
@@ -166,7 +170,7 @@ const getStatusBadge = (status) => {
     : "";
 
   return (
-    <Badge className={`${colorClass} capitalize`}>
+    <Badge className={`${colorClass} capitalize text-center min-w-[8rem] justify-center`}>
       {formattedText}
     </Badge>
   );
@@ -194,6 +198,7 @@ const getStatusBadge = (status) => {
     postURL: post.post_url || "",
     redditUsername: post.reddit_username || "",
     postedCommentStatus: post.posted_comment_status || "underModeration",
+    totalViews : post.total_views
   });
   setIsEditModalOpen(true);
 };
@@ -247,6 +252,7 @@ const getStatusBadge = (status) => {
           post_url: editFormData.postURL || null,
           reddit_username: editFormData.redditUsername || null,
           posted_comment_status: editFormData.postedCommentStatus || "underModeration",
+          total_views : editFormData.totalViews || null,
         }),
       });
 
@@ -447,11 +453,12 @@ const getStatusBadge = (status) => {
                     <TableHead>Date published</TableHead>
                     <TableHead>Customer Comments</TableHead>
                     <TableHead>Published Link</TableHead>
+                    <TableHead>Total Views</TableHead>
                     {/* <TableHead>Number of our engagements</TableHead> */}
                     {/* <TableHead>Link to Kubiya</TableHead> */}
                     <TableHead>Reddit Username</TableHead>
                     <TableHead>Posted Comment Status</TableHead>
-                                        <TableHead>Actions</TableHead>
+                    <TableHead>Actions</TableHead>
 
                     {/* <TableHead>Actions</TableHead> */}
                   </TableRow>
@@ -470,9 +477,7 @@ const getStatusBadge = (status) => {
                         </div>
                       </TableCell>
                       <TableCell className="font-medium max-w-xs">
-                        <div className="truncate" title={post.title}>
-                          {post.title}
-                        </div>
+                          <HoverTextCell text={post.title} isTitle={true} />
                       </TableCell>
                        <TableCell>
                         <a
@@ -487,14 +492,12 @@ const getStatusBadge = (status) => {
                                 <TableCell>{getStatusBadge(post.status, 'comment')}</TableCell>
 
                       <TableCell className="max-w-sm">
-                        <div className="text-sm text-muted-foreground line-clamp-3">
-                          {post.engagement_text}
-                        </div>
+                          <HoverTextCell text={post.engagement_text} isTextEngagement={true} />
                       </TableCell>
                       <TableCell className="text-sm">
                         {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
                       </TableCell>
-                      <TableCell className="text-sm"> <div className="text-sm text-muted-foreground line-clamp-3">{post.client_feedback}</div></TableCell>
+                      <TableCell className="text-sm"> <HoverTextCell text={post.client_feedback}/></TableCell>
                       <TableCell>
                         <a
                           href={post.posted_link}
@@ -505,6 +508,8 @@ const getStatusBadge = (status) => {
                           {post.posted_link ? "View Link" : "-"}
                         </a>
                       </TableCell>
+                      <TableCell>{post.total_views ? post.total_views : "-"}</TableCell>
+
                       {/* <TableCell></TableCell>
                       <TableCell></TableCell> */}
                       <TableCell>{post.reddit_username}</TableCell>
@@ -705,7 +710,20 @@ const getStatusBadge = (status) => {
                     />
                   </div>
                     <div>
-                      <Label htmlFor="edit-postedCommentStatus">Posted Comment Status</Label>
+                      <Label htmlFor="totalViews">Total Views</Label>
+                      <Input
+                        id="totalViews"
+                        value={editFormData.totalViews}
+                        onChange={(e) =>
+                          handleEditInputChange("totalViews", e.target.value)
+                        }
+                        placeholder="Number of Total Views"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="edit-postedCommentStatus">
+                        Posted Comment Status
+                      </Label>
                       <Select
                         value={editFormData.postedCommentStatus}
                         onValueChange={(value) => handleEditInputChange("postedCommentStatus", value)}

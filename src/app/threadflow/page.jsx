@@ -20,6 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { SidebarTrigger } from "../../Components/ui/sidebar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../Components/ui/table";
 import { UserProfile } from "../../Components/UserProfile";
+import { HoverTextCell } from "./components/HoverTextCell";
 
 const PostsPage = () => {
   const router = useRouter();
@@ -112,87 +113,57 @@ const PostsPage = () => {
     return matchesSearch && matchesCategory && matchesStatus && matchesType;
   });
 
-  const getStatusCounts = () => {
-    let itemsToCount = allItems;
-    if (selectedType !== "all") {
-      itemsToCount = allItems.filter(item => item.type === selectedType);
-    }
-
-    return itemsToCount.reduce(
-      (acc, item) => {
-        if (item.type === 'post') {
-          acc[item.status] = (acc[item.status] || 0) + 1;
-        } else {
-          const status = item.status?.toLowerCase();
-          if (status === 'live') {
-            acc.live = (acc.live || 0) + 1;
-          } else if (status === 'removed') {
-            acc.rejected = (acc.rejected || 0) + 1;
-          } else if (status === 'undermoderation') {
-            acc.pending = (acc.pending || 0) + 1;
-          } else {
-            acc[item.status] = (acc[item.status] || 0) + 1;
-          }
-        }
-        return acc;
-      },
-      { approved: 0, pending: 0, rejected: 0, live: 0 }
-    );
-  };
-
-  const getStatusCounts2 = () => {
+const getStatusCounts = () => {
   let itemsToCount = allItems;
+
+  // Filter if a specific type is selected
   if (selectedType !== "all") {
-    itemsToCount = allItems.filter(item => item.type === selectedType);
+    itemsToCount = itemsToCount.filter(item => item.type === selectedType);
   }
 
   return itemsToCount.reduce(
     (acc, item) => {
+      let statusKey = null;
+
       if (item.type === "post") {
-        // ✅ posts use post.status
-        if (item.status?.toLowerCase() === "live") {
-          acc.live = (acc.live || 0) + 1;
-        } else if (item.status?.toLowerCase() === "removed") {
-          acc.rejected = (acc.rejected || 0) + 1;
-        } else {
-          acc[item.status] = (acc[item.status] || 0) + 1;
-        }
-      } else if (item.type === "comment") {
-        // ✅ comments use posted_comment_status
+        const postStatus = item.status?.toLowerCase();
+        if (postStatus === "live") statusKey = "live";
+        else if (postStatus === "removed") statusKey = "removed";
+        else if (postStatus === "postunderapproval") statusKey = "underApproval";
+        else if (postStatus === "notposted") statusKey = "notPosted";
+      } 
+      
+      if (item.type === "comment") {
         const commentStatus = item.posted_comment_status?.toLowerCase();
-        if (commentStatus === "live") {
-          acc.live = (acc.live || 0) + 1;
-        } else if (commentStatus === "removed") {
-          acc.rejected = (acc.rejected || 0) + 1;
-        } else if (commentStatus === "undermoderation") {
-          acc.pending = (acc.pending || 0) + 1;
-        } else {
-          acc[item.status] = (acc[item.status] || 0) + 1;
-        }
+        if (commentStatus === "live") statusKey = "live";
+        else if (commentStatus === "removed") statusKey = "removed";
+        else if (commentStatus === "commentunderapproval") statusKey = "underApproval";
+        else if (commentStatus === "notposted") statusKey = "notPosted";
       }
+
+      if (statusKey) {
+        acc[statusKey] = (acc[statusKey] || 0) + 1;
+      }
+
       return acc;
     },
-    { approved: 0, pending: 0, rejected: 0, live: 0 }
+    { removed: 0, underApproval: 0, notPosted: 0, live: 0 }
   );
 };
-
-
-  const statusCounts = getStatusCounts();
-    const statusCounts2 = getStatusCounts2();
-
-
+const statusCnt = getStatusCounts()
   const getStatusBadge = (status) => {
   const statusColors = {
     // Published Post Status
-    commentUnderApproval: "bg-blue-500 text-white",
+    commentunderapproval: "bg-blue-500 text-white",
+    postunderapproval: "bg-blue-500 text-white",
     live: "bg-green-500 text-white",
     removed: "bg-red-500 text-white",
     undermoderation: "bg-yellow-500 text-black",
 
     // Post Approval Status
-    approved: "bg-emerald-600 text-white",
+    approved: "bg-emerald-700 text-white",
     notapproved: "bg-red-600 text-white",
-    pending: "bg-gray-500 text-white",
+    pending: "bg-yellow-400 text-white",
   };
 
   const colorClass = status
@@ -205,7 +176,7 @@ const PostsPage = () => {
     : "";
 
   return (
-    <Badge className={`${colorClass} capitalize`}>
+    <Badge className={`${colorClass} capitalize text-center min-w-[8rem] justify-center`}>
       {formattedText}
     </Badge>
   );
@@ -264,13 +235,13 @@ const PostsPage = () => {
       </header>
 
       <div className="p-6">
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <StatusCard status="approved" count={statusCounts.approved} label="Approved" />
-          <StatusCard status="pending" count={statusCounts.pending} label="Pending" />
-          <StatusCard status="live" count={statusCounts2.live} label="Live" />
-          <StatusCard status="rejected" count={statusCounts2.rejected} label="Removed" />
+          <StatusCard status="live" count={statusCnt.live} label="Live" />
+          <StatusCard status="notPosted" count={statusCnt.notPosted} label="Not Posted" />
+          <StatusCard status="underApproval" count={statusCnt.underApproval} label="Under Approval" />
+          <StatusCard status="removed" count={statusCnt.removed} label="Removed" />
         </div>
-
         {/* Filters */}
         <Card className="mb-6">
           <CardContent className="p-6">
@@ -351,12 +322,13 @@ const PostsPage = () => {
                     {selectedType === "post" && (
                       <>
                         <TableHead>Title</TableHead>
-                        <TableHead>URL</TableHead>
-                        <TableHead>Status</TableHead>
+                        <TableHead>Post Approval Status</TableHead>
                         <TableHead>Text of engagement</TableHead>
                         <TableHead>Date published</TableHead>
-                        <TableHead>Current Status</TableHead>
+                        <TableHead>Customer Comments</TableHead>
+                        <TableHead>Published Status</TableHead>
                         <TableHead>Published Link</TableHead>
+                        <TableHead>Total Views</TableHead>
                         <TableHead>Number of our engagements</TableHead>
                         <TableHead>Reddit Username</TableHead>
                       </>
@@ -372,6 +344,7 @@ const PostsPage = () => {
                         <TableHead>Date published</TableHead>
                         <TableHead>Customer Comments</TableHead>
                         <TableHead>Published Link</TableHead>
+                        <TableHead>Total Views</TableHead>
                         <TableHead>Reddit Username</TableHead>
                         <TableHead>Posted Comment Status</TableHead>
                       </>
@@ -384,7 +357,9 @@ const PostsPage = () => {
                         <TableHead>Status</TableHead>
                         <TableHead>Text of engagement</TableHead>
                         <TableHead>Date published</TableHead>
+                        <TableHead>Customer Comments</TableHead>
                         <TableHead>Published Link</TableHead>
+                        <TableHead>Total Views</TableHead>
                         <TableHead>Targeted Subreddit</TableHead>
                         <TableHead>Reddit Username</TableHead>
                       </>
@@ -415,32 +390,15 @@ const PostsPage = () => {
                         <>
                           {/* Title */}
                           <TableCell className="font-medium max-w-xs">
-                            <div className="truncate" title={item.title}>
-                              {item.title}
-                            </div>
-                          </TableCell>
-
-                          {/* URL */}
-                          <TableCell className="max-w-xs">
-                            <a
-                              href={item.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-primary hover:underline flex items-center gap-1 truncate"
-                            >
-                              <ExternalLink className="h-3 w-3" />
-                              Reddit Link
-                            </a>
+                            <HoverTextCell text = {item.title} isTitle={true}/>
                           </TableCell>
 
                           {/* Status */}
-                          <TableCell>{getStatusBadge(item.status, item.type)}</TableCell>
+                          <TableCell>{getStatusBadge(item.current_status, item.type)}</TableCell>
 
                           {/* Text of engagement */}
                           <TableCell className="max-w-sm">
-                            <div className="text-sm text-muted-foreground line-clamp-3">
-                              {item.engagement_text}
-                            </div>
+                              <HoverTextCell text={item.engagement_text} isTextEngagement={true} />
                           </TableCell>
 
                           {/* Date published */}
@@ -448,8 +406,13 @@ const PostsPage = () => {
                             {item.date_posted ? new Date(item.date_posted).toLocaleDateString() : "-"}
                           </TableCell>
 
+                          {/* Customer Comments */}
+                          <TableCell className="max-w-sm">
+                              <HoverTextCell text={item.client_feedback || "-"} />
+                          </TableCell>
+
                           {/* Current Status */}
-                          <TableCell className="text-sm">{item.current_status || "-"}</TableCell>
+                          <TableCell className="text-sm">{getStatusBadge(item.status) || "-"}</TableCell>
 
                           {/* Published Link */}
                           <TableCell>
@@ -462,6 +425,9 @@ const PostsPage = () => {
                               {item.posted_link ? "View Link" : "-"}
                             </a>
                           </TableCell>
+
+                          {/* Total Views */}
+                          <TableCell className="text-sm">{item.total_views ? item.total_views : "-"}</TableCell>
 
                           {/* Number of our engagements */}
                           <TableCell className="text-sm">-</TableCell>
@@ -483,9 +449,7 @@ const PostsPage = () => {
 
                           {/* Title */}
                           <TableCell className="font-medium max-w-xs">
-                            <div className="truncate" title={item.title}>
-                              {item.title}
-                            </div>
+                             <HoverTextCell text={item.title} isTitle={true}/>
                           </TableCell>
 
                           {/* Comment Approval Status */}
@@ -494,9 +458,7 @@ const PostsPage = () => {
 
                           {/* Text of engagement */}
                           <TableCell className="max-w-sm">
-                            <div className="text-sm text-muted-foreground line-clamp-3">
-                              {item.engagement_text}
-                            </div>
+                            <HoverTextCell text ={item.engagement_text} isTextEngagement={true}/>
                           </TableCell>
 
                           {/* Date published */}
@@ -506,9 +468,7 @@ const PostsPage = () => {
 
                           {/* Customer Comments */}
                           <TableCell className="max-w-sm">
-                            <div className="text-sm text-muted-foreground line-clamp-3">
-                              {item.client_feedback || "-"}
-                            </div>
+                              <HoverTextCell text={item.client_feedback || "-"} />
                           </TableCell>
 
                           {/* Published Link */}
@@ -522,6 +482,9 @@ const PostsPage = () => {
                               {item.posted_link ? "View Link" : "-"}
                             </a>
                           </TableCell>
+
+                          {/* Total Views */}
+                          <TableCell className="text-sm">{item.total_views ? item.total_views : "-"}</TableCell>
 
                           {/* Reddit Username */}
                           <TableCell>{item.reddit_username || "-"}</TableCell>
@@ -536,22 +499,25 @@ const PostsPage = () => {
                         <>
                           {/* Title */}
                           <TableCell className="font-medium max-w-xs">
-                            <div className="truncate" title={item.title}>
-                              {item.title}
-                            </div>
+                            <HoverTextCell text={item.title} isTitle={true} />
                           </TableCell>
 
                           {/* Status */}
-                          <TableCell>{getStatusBadge(item.status, item.type)}</TableCell>
+                          <TableCell>{getStatusBadge(item.type === "post" ? item.status : item.posted_comment_status)}</TableCell>
 
                           {/* Text of Engagement */}
                           <TableCell>
-                            <EngagementTextCell text={item.engagement_text} />
+                            <HoverTextCell text={item.engagement_text} isTextEngagement={true} />
                           </TableCell>
 
                           {/* Date Published */}
                           <TableCell className="text-sm">
                             {item.date_posted ? new Date(item.date_posted).toLocaleDateString() : "-"}
+                          </TableCell>
+
+                          {/* Customer Comments */}
+                          <TableCell className="max-w-sm">
+                              <HoverTextCell text={item.client_feedback || "-"} />
                           </TableCell>
 
                           {/* Published Link */}
@@ -565,6 +531,10 @@ const PostsPage = () => {
                               {item.posted_link ? "View Link" : "-"}
                             </a>
                           </TableCell>
+
+                          {/* Total Views */}
+                          <TableCell className="text-sm">{item.total_views ? item.total_views : "-"}</TableCell>
+
 
                           {/* Targeted Subreddit */}
 <TableCell>
@@ -591,47 +561,3 @@ const PostsPage = () => {
 };
 
 export default PostsPage;
-
-const EngagementTextCell = ({ text }) => {
-  const [showTooltip, setShowTooltip] = useState(false);
-
-  if (!text) {
-    return <span className="text-muted-foreground">-</span>;
-  }
-
-  const handleMouseEnter = () => setShowTooltip(true);
-  const handleMouseLeave = () => setShowTooltip(false);
-
-  return (
-    <div className="relative max-w-sm">
-      {/* Truncated preview */}
-      <div
-        className="text-sm text-muted-foreground line-clamp-3 cursor-help hover:text-foreground transition-colors duration-200
-                   [&_a]:text-blue-500 [&_a:hover]:underline"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        title="Hover to see full text"
-        dangerouslySetInnerHTML={{ __html: text }}
-      />
-
-      {/* Tooltip with full content */}
-      {showTooltip && (
-        <div
-          className="absolute z-50 left-0 top-full -mt-6 w-80 bg-popover border border-border rounded-lg shadow-lg p-3 animate-in fade-in-0 zoom-in-95"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="max-h-60 overflow-y-auto">
-            <div
-              className="text-sm text-popover-foreground whitespace-pre-wrap break-words
-                         [&_a]:text-blue-500 [&_a:hover]:underline"
-              dangerouslySetInnerHTML={{ __html: text }}
-            />
-          </div>
-          {/* Arrow pointer */}
-          <div className="absolute -top-1 left-4 w-2 h-2 bg-popover border-l border-t border-border rotate-45"></div>
-        </div>
-      )}
-    </div>
-  );
-};
