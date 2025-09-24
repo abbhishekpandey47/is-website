@@ -226,11 +226,6 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/faq" className="hover:underline">
-                    FAQ
-                  </a>
-                </li>
-                <li>
                   <a href="/contact" className="hover:underline">
                     Contact Us
                   </a>
@@ -257,19 +252,6 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="https://x.com/InfrasityHub"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="hover:underline flex items-center justify-center sm:justify-start gap-2"
-                  >
-                    <span>
-                      <XOutlined />
-                    </span>
-                    X
-                  </a>
-                </li>
-                <li>
-                  <a
                     href="https://www.linkedin.com/company/infrasity/"
                     rel="noopener noreferrer"
                     target="_blank"
@@ -279,19 +261,6 @@ const Footer = () => {
                       <LinkedinOutlined />
                     </span>
                     LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.instagram.com/infrasity/"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="hover:underline flex items-center justify-center sm:justify-start gap-2"
-                  >
-                    <span>
-                      <InstagramOutlined />
-                    </span>
-                    Instagram
                   </a>
                 </li>
               </ul>
