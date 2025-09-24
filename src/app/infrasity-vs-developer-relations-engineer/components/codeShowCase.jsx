@@ -92,8 +92,9 @@ const performanceData = {
 const contentExamples = {
   blog: (
     <div className="space-y-6">
-      {blogs.map((blog, i) => (
+      {blogs.map((blog,i) => (
         <div key={i} className="rounded-xl border border-white/20 bg-white/10 backdrop-blur-md shadow-lg p-4 transition-transform hover:scale-[1.02] hover:shadow-2xl">
+
           {/* Header */}
           <div className="p-6 border-b ">
             <div className="flex items-center gap-3 mb-4">
@@ -130,8 +131,7 @@ const contentExamples = {
           <div className="p-6">
             <div className="prose ">
               <p className="mb-4">{blog.preview}</p>
-
-              <div className="p-4 border-[#5F64FF] p-4 rounded-lg border-l-4 ">
+              <div className="p-4 border-[#5F64FF] rounded-lg border-l-4 ">
             <h4 className="font-semibold mb-2 ">Key Takeaways:</h4>
             <ul className="text-sm space-y-1 text-muted-foreground">
               <li>• Implemented DataLoader pattern for batching database queries</li>

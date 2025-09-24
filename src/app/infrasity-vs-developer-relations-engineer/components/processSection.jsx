@@ -270,7 +270,7 @@ const ProcessSection = () => {
                         </div>
 
                         <div className="w-full bg-border rounded-full h-3 mb-4 overflow-hidden">
-                          <div className={`progress-bar bg-gradient-to-r ${step.theme.bar} h-3 rounded-full  transition-all duration-500"`} data-width={(index + 1) * 25} />
+                          <div className={`progress-bar bg-gradient-to-r ${step.theme.bar} h-3 rounded-full  transition-all duration-500`} data-width={(index + 1) * 25} />
                         </div>
 
                         <div className="text-sm text-center text-muted-foreground">Week {index + 1} • {step.deliverables.length} items</div>

@@ -38,7 +38,7 @@ const InfrasityVsDevRelHome = () => {
     );
 
     gsap.fromTo(
-      "heroPagePara",
+      ".heroPagePara",
       {
         opacity: 0,
         y: 55,
