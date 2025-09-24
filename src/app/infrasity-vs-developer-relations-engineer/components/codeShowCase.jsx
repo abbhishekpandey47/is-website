@@ -10,12 +10,13 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 const blogs = [
   {
     platform: {
       name: "Dev.to",
-      logo: "https://dev.to/images/devto-logo.png",
+      logo: "/comparison/dev.to.jpg",
       label: "Published on Dev.to",
     },
     stats: {
@@ -96,10 +97,12 @@ const contentExamples = {
           {/* Header */}
           <div className="p-6 border-b ">
             <div className="flex items-center gap-3 mb-4">
-              <img
+              <Image
                 src={blog.platform.logo}
                 alt={blog.platform.name}
                 className="w-8 h-8 rounded"
+                width={100}
+                height={100}
               />
               <span className="font-semibold">{blog.platform.label}</span>
               <span className=" flex items-center gap-1 text-sm text-[#4ade80]">

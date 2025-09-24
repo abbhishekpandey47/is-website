@@ -111,7 +111,7 @@ const InfrasityComparison = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="cmp-chip inline-flex items-center px-4 py-2 bg-[#5F64FF]/10 text-[#5F64FF] rounded-full text-sm font-medium mb-4">
-            ⚡ Side-by-side comparison
+             Side-by-side comparison
           </div>
           <h2 className="cmp-heading text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
             DevRel is authentic but expensive. <br />

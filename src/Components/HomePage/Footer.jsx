@@ -151,6 +151,11 @@ const Footer = () => {
                     Technical Content GTM
                   </a>
                 </li>
+                  <li className="lg:mr-5">
+                  <a href="/infrasity-vs-developer-relations-engineer" className="hover:underline">
+                    Infrasity Vs DevRel
+                  </a>
+                </li>
               </ul>
             </div>
             {/* Services section */}

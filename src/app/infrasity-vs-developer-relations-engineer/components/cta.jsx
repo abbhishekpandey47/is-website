@@ -1,4 +1,4 @@
-import CalendarBooking from "../../../../app/calendarButton";
+import CalendarBooking from "../../calendarButton";
 import Link from "next/link";
 import Image from "next/image"
 
@@ -13,7 +13,7 @@ const CtaSection = () => {
           Start getting results in your first week instead of waiting months for
           a DevRel hire to ramp up.
         </p>
-        <div className="flex flex-row max-sm:flex-col gap-4 justify-center">
+        <div className="flex flex-col lg:flex-row gap-4 justify-center">
           {/* <button className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-ring">
               Schedule Strategy Call
             </button> */}

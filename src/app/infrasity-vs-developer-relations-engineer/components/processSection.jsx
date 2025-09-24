@@ -203,17 +203,14 @@ const ProcessSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 overflow-hidden bg-surface text-foreground"
+      className="relative py-24 overflow-hidden bg-surface text-foreground bg-[radial-gradient(ellipse_at_50%_0%,_#272b40_0%,_transparent_20%)]"
     >
-      {/* Decorative gradient blobs (no Sass, pure Tailwind) */}
-      <div aria-hidden className="bg-blob pointer-events-none absolute -top-32 -left-24 h-72 w-72 rounded-full blur-3xl opacity-40 bg-gradient-to-tr from-primary/30 to-accent/30" />
-      <div aria-hidden className="bg-blob pointer-events-none absolute top-1/3 -right-24 h-80 w-80 rounded-full blur-3xl opacity-30 bg-gradient-to-tr from-approved/30 to-secondary/30" />
 
       <div className="max-w-7xl mx-auto px-6 relative">
         {/* Header */}
         <div className="text-center mb-20">
           <div className="inline-flex items-center px-4 py-2 bg-approved/20 text-approved rounded-full text-sm font-medium mb-5 shadow-sm bg-white/10">
-            ⚡ No 3–6 month ramp‑up time
+             No 3–6 month ramp‑up time
           </div>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 bg-gradient-to-r from-primary via-accent to-approved bg-clip-text text-white">
             From onboarding to results in 30 days
@@ -243,7 +240,7 @@ const ProcessSection = () => {
 
                 {/* Content Card */}
                 <div className="flex-1 rounded-2xl p-8 shadow-lg ring-1 ring-border bg-card/80 backdrop-blur">
-                  <div className="flex flex-col lg:flex-row gap-6">
+                  <div className="flex flex-col md:flex-row gap-4 justify-center">
                     <div className="flex-1">
                       <div className="mb-4">
                         <h3 className="text-2xl font-bold mb-2">{step.title}</h3>

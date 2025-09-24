@@ -113,7 +113,7 @@ const IndustryCard = ({ icon, title, description }) => {
   <div className="relative z-30">
     <Icon className="w-7 h-7 text-primary" />
     <h3 className="text-foreground text-xl font-semibold mt-2">{title}</h3>
-    <p className="text-muted-foreground mt-1">{description}</p>
+    <p className="text-muted-foreground mt-1 quicksand-medium ">{description}</p>
   </div>
 
   {/* spotlight layers */}
@@ -205,7 +205,7 @@ const FeaturesSection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="feat-chip inline-flex items-center px-4 py-2 bg-[#5F64FF]/10 text-[#5F64FF] rounded-full text-sm font-medium mb-4">
-            ✨ Everything you need to scale
+             Everything you need to scale
           </div>
           <h2 className="feat-heading text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
             DevRel + GTM + Engineering

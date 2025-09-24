@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
-import CalendarBooking from "../../../calendarButton";
+import CalendarBooking from "../../calendarButton";
 
 import { Marquee } from "@devnomic/marquee";
 
@@ -234,80 +234,75 @@ const InfrasityVsDevRelHome = () => {
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center flex flex-col justify-center pt-16 max-sm:pt-4  items-center">
-          <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-in bg-white/15">
-            Now shipping: Engineering-led GTM at scale
+      <div className="relative max-w-7xl mx-auto px-6">
+  {/* Spotlight Background */}
+  <div
+    aria-hidden
+    className="absolute inset-0 z-0"
+    style={{
+      background: "radial-gradient(ellipse at 50% 50%, #272b40 0%, transparent 70%)",
+      width: "100%",
+      height: "100%",
+    }}
+  />
+
+  <div className="text-center flex flex-col justify-center pt-16 max-sm:pt-4 items-center">
+    <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-in bg-white/15">
+      Now shipping: Engineering-led GTM at scale
+    </div>
+
+    <div className="flex flex-col gap-[40px] md:gap-[30px] max-w-[70vw] max-sm:max-w-[95vw] z-10">
+      <div className="quicksand-bold w-[70vw] max-lg:text-[4em] max-lg:pt-30 max-md:pt-0 text-[5em] text-white tracking-tight leading-[85px] max-md:text-[3.5em] max-md:tracking-tighter max-md:leading-[60px] max-sm:w-[100%] ">
+        <h1>
+          {headingText.title.map((word, index) => (
+            <span key={index} className="HeroWordSpan">{word} </span>
+          ))}
+          <div>
+            {headingText.subtitle.map((word, index) => (
+              <span key={index} className="HeroWordSpan specialtext md:h-[93px]">{word} </span>
+            ))}
+            {headingText.titles.map((word, index) => (
+              <span key={index} className="HeroWordSpan">{word} </span>
+            ))}
           </div>
-          <div className="flex flex-col gap-[40px] md:gap-[30px] max-w-[70vw] max-sm:max-w-[95vw] z-1">
-            <div className="quicksand-bold w-[70vw] max-lg:text-[4em] max-lg:pt-30 max-md:pt-0 text-[5em] text-white tracking-tight leading-[85px] max-md:text-[3.5em] max-md:tracking-tighter max-md:leading-[60px] max-sm:w-[100%] ">
-              <h1>
-                {headingText.title.map((word, index) => (
-                  <span key={index} className="HeroWordSpan">
-                    {word}{" "}
-                  </span>
-                ))}
-                <div className="">
-                  {headingText.subtitle.map((word, index) => (
-                    <span
-                      key={index}
-                      className="HeroWordSpan specialtext md:h-[93px]"
-                    >
-                      {" "}
-                      {word}{" "}
-                    </span>
-                  ))}
-                  {headingText.titles.map((word, index) => (
-                    <span key={index} className="HeroWordSpan">
-                      {word}{" "}
-                    </span>
-                  ))}
-                </div>
-              </h1>
-            </div>
-            <div className="flex flex-col items-center gap-10">
-              <h2 className="quicksand-mediam text-[1.5em] w-[60vw] max-lg:w-[60vw] max-sm:w-[85vw] max-sm:text-[1.2em] text-center m-auto text-[wheat] heroPagePara">
-                {description}
-              </h2>
+        </h1>
+      </div>
 
-              {/* CTAs */}
+      <div className="flex flex-col items-center gap-10">
+        <h2 className="quicksand-mediam text-[1.5em] w-[60vw] max-lg:w-[60vw] max-sm:w-[85vw] max-sm:text-[1.2em] text-center m-auto text-[wheat] heroPagePara">
+          {description}
+        </h2>
 
-              <div className="flex gap-5 cursor-pointer" style={{ zIndex: 1 }}>
-                <CalendarBooking
-                  buttonText="Book a Free Consultation"
-                  width="w-52"
-                />
-              </div>
+        {/* CTA */}
+        <div className="flex gap-5 cursor-pointer z-10">
+          <CalendarBooking buttonText="Book a Free Consultation" width="w-52" />
+        </div>
 
-              {/* Social Proof - Company Logos */}
-              <div className="text-center mt-4">
-                <p className="text-sm text-muted-foreground mb-8">
-                  Trusted by engineering teams at high-growth startups
-                </p>
-                {NewMarquee()}
-              </div>
+        {/* Social Proof */}
+        <div className="text-center mt-4 z-10">
+          <p className="text-sm text-muted-foreground mb-8">Trusted by engineering teams at high-growth startups</p>
+          {NewMarquee()}
+        </div>
 
-              <div
-                className="grid grid-cols-3 max-w-xl mx-auto text-center animate-slide-up pt-5 divide-x divide-border"
-                style={{ animationDelay: "0.4s" }}
-              >
-                <div className="px-6">
-                  <div className="text-3xl font-bold">10x</div>
-                  <div className="text-muted-foreground">Faster output</div>
-                </div>
-                <div className="px-6">
-                  <div className="text-3xl font-bold">50+</div>
-                  <div className="text-muted-foreground">Channels</div>
-                </div>
-                <div className="px-6">
-                  <div className="text-3xl font-bold">3M+</div>
-                  <div className="text-muted-foreground">Developer reach</div>
-                </div>
-              </div>
-            </div>
-          </div>{" "}
+        {/* Stats */}
+        <div className="grid grid-cols-3 max-w-xl mx-auto text-center animate-slide-up pt-5 divide-x divide-border z-10">
+          <div className="px-6">
+            <div className="text-3xl font-bold">10x</div>
+            <div className="text-muted-foreground">Faster output</div>
+          </div>
+          <div className="px-6">
+            <div className="text-3xl font-bold">50+</div>
+            <div className="text-muted-foreground">Channels</div>
+          </div>
+          <div className="px-6">
+            <div className="text-3xl font-bold">3M+</div>
+            <div className="text-muted-foreground">Developer reach</div>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
     </section>
   );
 };
