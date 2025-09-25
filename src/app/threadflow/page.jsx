@@ -21,7 +21,10 @@ import { SidebarTrigger } from "../../Components/ui/sidebar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../Components/ui/table";
 import { UserProfile } from "../../Components/UserProfile";
 import { HoverTextCell } from "./components/HoverTextCell";
+import Pagination from "./components/pagination";
 
+
+const PAGE_SIZE = 10;
 const PostsPage = () => {
   const router = useRouter();
   const [firebaseUser, setFirebaseUser] = useState(null);
@@ -29,12 +32,15 @@ const PostsPage = () => {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  // const [totalPages, setTotalPages] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth,(user) => {
       setFirebaseUser(user);
       setLoading(false);
 
@@ -48,13 +54,13 @@ const PostsPage = () => {
 
   useEffect(() => {
     if (!firebaseUser) return;
-
+  
     console.log("Fetching posts and comments for user:", firebaseUser.uid);
 
   const fetchPosts = async () => {
       try {
     const token = await firebaseUser.getIdToken();
-    const res = await fetch(`/api/posts`, { headers: { Authorization: `Bearer ${token}` } });
+    const res = await fetch(`/api/posts?page=${currentPage}&limit=${PAGE_SIZE/2}`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
@@ -62,6 +68,7 @@ const PostsPage = () => {
         }
 
         setPosts(result.data || []);
+        setTotalCount(result.totalCount || 0 + totalCount);
       } catch (err) {
         console.error("Error fetching posts:", err);
         toast.error("Failed to load posts");
@@ -71,7 +78,7 @@ const PostsPage = () => {
   const fetchComments = async () => {
       try {
     const token = await firebaseUser.getIdToken();
-    const res = await fetch(`/api/comment`, { headers: { Authorization: `Bearer ${token}` } });
+    const res = await fetch(`/api/comment?page=${currentPage}&limit=${PAGE_SIZE/2}`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
@@ -79,6 +86,7 @@ const PostsPage = () => {
         }
 
         setComments(result.data || []);
+        setTotalCount(result.totalCount || 0 + totalCount);
       } catch (err) {
         console.error("Error fetching comments:", err);
         toast.error("Failed to load comments");
@@ -88,6 +96,70 @@ const PostsPage = () => {
     fetchPosts();
     fetchComments();
   }, [firebaseUser]);
+  // 2️⃣ Verify user and set role
+
+
+  // useEffect(() => {
+  //   if (!firebaseUser) return;
+
+  //   const verifyUserToken = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const token = await firebaseUser.getIdToken();
+  //       const res = await fetch("/api/authVerify", {
+  //         method: "GET",
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+  //       const data = await res.json();
+
+  //       if (!res.ok) {
+  //         router.push("/unauthorized");
+  //         return;
+  //       }
+
+  //       setVerifyUser(data.user);
+
+  //       // Redirect admin immediately if on client page
+  //       if (data.user.isAdmin) {
+  //         router.push("/threadflow");
+  //         return;
+  //       }
+
+  //       // Redirect client immediately 
+  //       if (data.user?.company?.slug) {
+  //         router.push("/threadflow/c/" + data.user.company.slug);
+  //         return;
+  //       }
+
+  //       // Now fetch posts & comments for client
+  //       const [postsRes, commentsRes] = await Promise.all([
+  //         fetch("/api/posts", { headers: { Authorization: `Bearer ${token}` } }),
+  //         fetch("/api/comment", { headers: { Authorization: `Bearer ${token}` } }),
+  //       ]);
+
+  //       const [postsData, commentsData] = await Promise.all([
+  //         postsRes.json(),
+  //         commentsRes.json(),
+  //       ]);
+
+  //       if (!postsRes.ok) throw new Error(postsData.error || "Failed to fetch posts");
+  //       if (!commentsRes.ok) throw new Error(commentsData.error || "Failed to fetch comments");
+
+  //       setPosts(postsData.data || []);
+  //       setComments(commentsData.data || []);
+
+  //     } catch (err) {
+  //       console.error(err);
+  //       toast.error(err.message || "Verification failed");
+  //       router.push("/unauthorized");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   verifyUserToken();
+  // }, [firebaseUser, router]);
+
 
   const allItems = [
     ...posts.map(post => ({ ...post, type: 'post' })),
@@ -112,6 +184,8 @@ const PostsPage = () => {
 
     return matchesSearch && matchesCategory && matchesStatus && matchesType;
   });
+
+const totalPages = Math.ceil(totalCount/ PAGE_SIZE); 
 
 const getStatusCounts = () => {
   let itemsToCount = allItems;
@@ -195,6 +269,10 @@ const statusCnt = getStatusCounts()
   if (!firebaseUser) {
     return <div className="p-6">Please log in to view your posts and comments.</div>;
   }
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -556,6 +634,12 @@ const statusCnt = getStatusCounts()
           </CardContent>
         </Card>
       </div>
+        
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
     </div>
   );
 };
