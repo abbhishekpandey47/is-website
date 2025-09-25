@@ -29,7 +29,6 @@ import {
 export function AppSidebar({ companySlug, isAdmin , companyName }) {
   const { open } = useSidebar()
   const pathname = usePathname()
-  console.log("verifyUser", { companySlug, isAdmin , companyName })
 
   // Define main and management items dynamically based on admin/client
   const mainItems = [
