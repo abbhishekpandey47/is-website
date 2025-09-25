@@ -60,61 +60,131 @@ export default async function handler(req, res) {
     }
   }
 
+  // if (req.method === "GET") {
+  //   try {
+  //     const { id, categories } = req.query;
+
+  //     // Get single post by ID
+  //     if (id) {
+  //       const { data, error } = await supabase
+  //         .from("posts")
+  //         .select("*")
+  //         .eq("id", id)
+  //         .single(); // ensures only one row is returned
+
+  //       if (error) return res.status(500).json({ error: error.message });
+
+  //       // Enforce access
+  //       if (!userCtx.isAdmin && data?.company_id && allowedCompanyIds && !allowedCompanyIds.includes(data.company_id)) {
+  //         return forbid(res);
+  //       }
+  //       return res.status(200).json({ success: true, data });
+  //     }
+
+  //     if (categories === "true") {
+  //       let query = supabase
+  //         .from("posts")
+  //         .select("category");
+  //       if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
+  //         query = query.in('company_id', allowedCompanyIds);
+  //       }
+  //       const { data, error } = await query;
+
+  //       if (error) return res.status(500).json({ error: error.message });
+
+  //       // Extract only unique categories
+  // const uniqueCategories = [...new Set(data.map((item) => item.category).filter(Boolean))];
+
+  //       return res.status(200).json({ success: true, categories: uniqueCategories });
+  //     }
+
+  //     let query = supabase
+  //       .from("posts")
+  //       .select("*")
+  //       .order("date_posted", { ascending: false });
+  //     if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
+  //       query = query.in('company_id', allowedCompanyIds);
+  //     }
+  //     const { data, error } = await query;
+
+  //     if (error) return res.status(500).json({ error: error.message });
+
+  //     return res.status(200).json({ success: true, data });
+  //   } catch (err) {
+  //     console.error(err);
+  //     return res.status(500).json({ error: "Internal Server Error" });
+  //   }
+  // }
   if (req.method === "GET") {
-    try {
-      const { id, categories } = req.query;
+  try {
+    const { id, categories, page, limit } = req.query;
+    const pageNum = parseInt(page) || 1;       // current page, default 1
+    const pageSize = parseInt(limit) || 10;    // items per page, default 10
+    const start = (pageNum - 1) * pageSize;
+    const end = start + pageSize - 1;
 
-      // Get single post by ID
-      if (id) {
-        const { data, error } = await supabase
-          .from("posts")
-          .select("*")
-          .eq("id", id)
-          .single(); // ensures only one row is returned
-
-        if (error) return res.status(500).json({ error: error.message });
-
-        // Enforce access
-        if (!userCtx.isAdmin && data?.company_id && allowedCompanyIds && !allowedCompanyIds.includes(data.company_id)) {
-          return forbid(res);
-        }
-        return res.status(200).json({ success: true, data });
-      }
-
-      if (categories === "true") {
-        let query = supabase
-          .from("posts")
-          .select("category");
-        if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
-          query = query.in('company_id', allowedCompanyIds);
-        }
-        const { data, error } = await query;
-
-        if (error) return res.status(500).json({ error: error.message });
-
-        // Extract only unique categories
-  const uniqueCategories = [...new Set(data.map((item) => item.category).filter(Boolean))];
-
-        return res.status(200).json({ success: true, categories: uniqueCategories });
-      }
-
-      let query = supabase
+    // Get single post by ID
+    if (id) {
+      const { data, error } = await supabase
         .from("posts")
         .select("*")
-        .order("date_posted", { ascending: false });
-      if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
-        query = query.in('company_id', allowedCompanyIds);
-      }
-      const { data, error } = await query;
+        .eq("id", id)
+        .single();
 
       if (error) return res.status(500).json({ error: error.message });
 
+      // Enforce access
+      if (!userCtx.isAdmin && data?.company_id && allowedCompanyIds && !allowedCompanyIds.includes(data.company_id)) {
+        return forbid(res);
+      }
       return res.status(200).json({ success: true, data });
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Internal Server Error" });
     }
+
+    // Get unique categories
+    if (categories === "true") {
+      let query = supabase.from("posts").select("category");
+      if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
+        query = query.in("company_id", allowedCompanyIds);
+      }
+      const { data, error } = await query;
+      if (error) return res.status(500).json({ error: error.message });
+
+      const uniqueCategories = [
+        ...new Set(data.map((item) => item.category).filter(Boolean)),
+      ];
+
+      return res.status(200).json({ success: true, categories: uniqueCategories });
+    }
+
+    // Paginated posts
+    let query = supabase
+      .from("posts")
+      .select("*", { count: "exact" }) // returns total count
+      .order("date_posted", { ascending: false })
+      .range(start, end); // pagination
+
+    if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
+      query = query.in("company_id", allowedCompanyIds);
+    }
+
+    const { data, error, count } = await query;
+
+    if (error) return res.status(500).json({ error: error.message });
+
+    const totalPages = Math.ceil(count / pageSize);
+
+    return res.status(200).json({
+      success: true,
+      data,
+      totalPages,
+      currentPage: pageNum,
+      totalCount: count
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
+}
 
   //  Edit Post (PUT)
   if (req.method === "PUT") {
