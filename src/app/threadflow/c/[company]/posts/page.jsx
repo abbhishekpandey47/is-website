@@ -1,27 +1,41 @@
 "use client";
+import { auth } from "@/lib/firebaseClient";
+import { cn } from "@/lib/utils";
 import { onAuthStateChanged } from "firebase/auth";
-import { Edit, Plus, Save, Search, Trash2, X } from "lucide-react";
+import { Edit, ExternalLink, Plus, Save, Search, Trash2, X } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Badge } from "../../../Components/ui/badge";
-import { Button } from "../../../Components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../../../Components/ui/card";
-import { Input } from "../../../Components/ui/input";
-import { Label } from "../../../Components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../Components/ui/select";
-import { SidebarTrigger } from "../../../Components/ui/sidebar";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../Components/ui/table";
-import { Textarea } from "../../../Components/ui/textarea";
-import { UserProfile } from "../../../Components/UserProfile";
-import { useToast } from "../../../hooks/use-toast";
-import { auth } from "../../../lib/firebaseClient";
+import { Badge } from "@/Components/ui/badge";
+import { Button } from "@/Components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
+import { Input } from "@/Components/ui/input";
+import { Label } from "@/Components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
+import { SidebarTrigger } from "@/Components/ui/sidebar";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/ui/table";
+import { UserProfile } from "@/Components/UserProfile";
+import { useToast } from "@/hooks/use-toast";
+import { Textarea } from "@/Components/ui/textarea";
 import { HoverTextCell } from "../components/HoverTextCell";
 import Pagination from "../components/pagination";
+
+
+const ReactQuill = dynamic(
+  async () => {
+    const { default: RQ } = await import("react-quill-new");
+    await import("react-quill-new/dist/quill.snow.css");
+    return RQ;
+  },
+  { ssr: false }
+);
+
 
 
 const PostsPage = () => {
   const router = useRouter();
   const { toast } = useToast();
+
   const [firebaseUser, setFirebaseUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
@@ -30,28 +44,29 @@ const PostsPage = () => {
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [totalComments , setTotalComments] = useState(0);
-  
+  const [totalPosts , setTotalPosts] = useState(0); 
+
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
   const [editFormData, setEditFormData] = useState({
     category: "",
     title: "",
+    url: "",
+    status: "pending",
     engagementText: "",
+    kimsVersion: "",
     datePosted: "",
     postedLink: "",
-    status: "pending",
     clientFeedback: "",
-    targetedSubreddit: "",
-    postURL: "",
+    currentStatus: "pending",
     redditUsername: "",
-    postedCommentStatus: "",
+    targetedSubreddit: "",
     totalViews:""
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState({ isOpen: false, post: null });
-    const [editCategories, setEditCategories] = useState([
+  const [editCategories, setEditCategories] = useState([
     "Drift Detection",
     "IaC",
     "DevOps",
@@ -59,6 +74,7 @@ const PostsPage = () => {
     "Enterprise AI",
     "AI Workflow"
   ]);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -81,29 +97,26 @@ const PostsPage = () => {
   const fetchPosts = async () => {
       try {
     const token = await firebaseUser.getIdToken();
-    const res = await fetch(`/api/comment?page=${currentPage}&limit=10`, { headers: { Authorization: `Bearer ${token}` } });
+    const res = await fetch(`/api/posts?page=${currentPage}&limit=10`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
           throw new Error(result.error || "Failed to fetch posts");
         }
-        setPosts(result?.data || []);
+
+        setPosts(result.data || []);
         setTotalPages(result?.totalPages || 1);
-        setTotalComments(result?.totalCount || 0);
+        setTotalPosts(result?.totalCount || 0);
       } catch (err) {
         console.error("Error fetching posts:", err);
-         toast({
-        title: "Error",
-        description: "Failed to load posts",
-        variant: "destructive",
-      });
+        toast.error("Failed to load posts");
       }
     };
 
     fetchPosts();
-  }, [currentPage,firebaseUser]);
+  }, [firebaseUser]);
 
-    useEffect(() => {
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setFirebaseUser(user);
       setLoading(false);
@@ -113,7 +126,7 @@ const PostsPage = () => {
       } else {
         try {
           const token = await user.getIdToken();
-          const res = await fetch(`/api/comment?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
+          const res = await fetch(`/api/posts?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
           const result = await res.json();
 
           if (res.ok && result.categories) {
@@ -131,14 +144,16 @@ const PostsPage = () => {
     return () => unsubscribe();
   }, [router]);
 
-// Update current page when pagination changes
+
+  const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
+  const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
+  
+  // Update current page when pagination changes
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
 
-const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
-const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
 
 
   const filteredPosts = posts.filter((post) => {
@@ -155,64 +170,55 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
-const getStatusBadge = (status) => {
-  const statusColors = {
+  const getStatusBadge = (status) => {
+    const statusColors = {
     // Published Post Status
-    commentunderapproval: "bg-blue-500 text-white",
+    postunderapproval: "bg-blue-500 text-white",
     live: "bg-green-500 text-white",
     removed: "bg-red-500 text-white",
     undermoderation: "bg-yellow-500 text-black",
-    
 
     // Post Approval Status
-    approved: "bg-emerald-700 text-white",
-    notapproved: "bg-red-600 text-white",
-    pending: "bg-yellow-400 text-black",
-
-  };
-
-  const colorClass = status
-    ? statusColors[status.toLowerCase()] || "bg-gray-600 text-white"
-    : "bg-gray-600 text-white";
-
-  // Format text → insert spaces before capital letters
-  const formattedText = status
+      approved: "bg-emerald-700 text-white",
+      pending: "bg-yellow-400 text-black",
+      notapproved: "bg-red-500 text-white",
+    };
+    // Format text → insert spaces before capital letters
+     const formattedText = status
     ? status.replace(/([a-z])([A-Z])/g, "$1 $2")
     : "";
 
-  return (
-    <Badge className={`${colorClass} capitalize text-center min-w-[8rem] justify-center`}>
-      {formattedText}
-    </Badge>
-  );
-};
+      const colorClass = status
+    ? statusColors[status.toLowerCase()] || "bg-gray-600 text-white"
+    : "bg-gray-600 text-white";
 
+    return (
+      <Badge className={`${colorClass} capitalize text-center min-w-[6rem] justify-center`}>
+              {formattedText}
+      </Badge>
+    );
+  };
 
+  // Edit
   const openEditModal = (post) => {
-  setEditCategories((prev) => {
-    if (post.category && !prev.includes(post.category)) {
-      return [...prev, post.category];
-    }
-    return prev;
-  });
-
-  setEditingPost(post);
-  setEditFormData({
-    category: post.category || "",
-    title: post.title || "",
-    engagementText: post.engagement_text || "",
-    datePosted: post.date_posted ? new Date(post.date_posted).toISOString().split('T')[0] : "",
-    postedLink: post.posted_link || "",
-    status: post.status || "pending",
-    clientFeedback: post.client_feedback || "",
-    targetedSubreddit: post.targeted_subreddit || "",
-    postURL: post.post_url || "",
-    redditUsername: post.reddit_username || "",
-    postedCommentStatus: post.posted_comment_status || "underModeration",
-    totalViews : post.total_views
-  });
-  setIsEditModalOpen(true);
-};
+    setEditingPost(post);
+    setEditFormData({
+      category: post.category || "",
+      title: post.title || "",
+      url: post.url || "",
+      status: post.status || "pending",
+      engagementText: post.engagement_text || "",
+      kimsVersion: post.kims_version || "",
+      datePosted: post.date_posted ? new Date(post.date_posted).toISOString().split('T')[0] : "",
+      postedLink: post.posted_link || "",
+      currentStatus: post.current_status || "pending",
+      clientFeedback: post.client_feedback || "",
+      redditUsername: post.reddit_username || "",
+      targetedSubreddit: post.targeted_subreddit || "",
+      totalViews: post.total_views || ""
+    });
+    setIsEditModalOpen(true);
+  };
 
   const closeEditModal = () => {
     setIsEditModalOpen(false);
@@ -228,7 +234,8 @@ const getStatusBadge = (status) => {
       postedLink: "",
       currentStatus: "pending",
       redditUsername: "",
-      postedCommentStatus: "underModeration",
+      targetedSubreddit: "",
+      totalViews: ""
     });
   };
 
@@ -240,30 +247,34 @@ const getStatusBadge = (status) => {
     e.preventDefault();
 
     if (!editFormData.category || !editFormData.title) {
-      toast.error("Please fill in category, title, and URL fields.");
+      toast({
+        title: "Error",
+        description: "Please fill in category, title, and URL fields",
+        variant: "destructive",
+      });
       return;
     }
 
     try {
       const token = await firebaseUser.getIdToken();
-      const res = await fetch("/api/comment", {
+      const res = await fetch("/api/posts", {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
-          id: editingPost.id, // required for update
+          id: editingPost.id,
           category: editFormData.category,
           title: editFormData.title,
-          status: editFormData.status || "pending",
-          engagement_text: editFormData.engagementText || null,
+          url: editFormData.url,
+          status: editFormData.status,
+          engagement_text: editFormData.engagementText,
+          kims_version: editFormData.kimsVersion,
           date_posted: editFormData.datePosted ? new Date(editFormData.datePosted) : null,
-          posted_link: editFormData.postedLink || null,
-          user_id: editFormData.user_id,
-          targeted_subreddit: editFormData.targetedSubreddit || null,
           client_feedback: editFormData.clientFeedback || null,
-          post_url: editFormData.postURL || null,
-          reddit_username: editFormData.redditUsername || null,
-          posted_comment_status: editFormData.postedCommentStatus || "underModeration",
-          total_views : editFormData.totalViews || null,
+          posted_link: editFormData.postedLink,
+          current_status: editFormData.currentStatus,
+          reddit_username: editFormData.redditUsername,
+          targeted_subreddit: editFormData.targetedSubreddit,
+          total_views: editFormData.totalViews
         }),
       });
 
@@ -281,13 +292,18 @@ const getStatusBadge = (status) => {
       );
 
       toast({
-        title: "Post updated successfully!",
-        description: "The post was updated successfully.",
+        title: "Success",
+        description: "Post updated successfully",
+        variant: "default",
       });
       closeEditModal();
     } catch (err) {
       console.error("Error updating post:", err);
-      toast.error(err.message);
+      toast({
+        title: "Error",
+        description: err.message,
+        variant: "destructive",
+      });
     }
   };
 
@@ -301,56 +317,56 @@ const getStatusBadge = (status) => {
   };
 
   const handleDelete = async () => {
-  const postId = deleteConfirmation.post.id;
-  setIsDeleting(postId);
+    const postId = deleteConfirmation.post.id;
+    setIsDeleting(postId);
 
-  try {
-    const token = await firebaseUser.getIdToken();
-    const res = await fetch(`/api/comment?id=${postId}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    const result = await res.json();
-
-    if (!res.ok) {
-      // Customize error message for user
-      let message = result.error || "Failed to delete post";
-
-      if (
-        message.toLowerCase().includes("foreign key") ||
-        message.toLowerCase().includes("permission") ||
-        message.toLowerCase().includes("not authorized")
-      ) {
-        message = "You may not be the right person to delete this post.";
-      }
-
-      toast({
-        title: "Error",
-        description: message,
-        variant: "destructive",
+    try {
+      const token = await firebaseUser.getIdToken();
+      const res = await fetch(`/api/posts?id=${postId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
       });
 
-      return;
-    }
+      const result = await res.json();
 
-    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
-    toast({
-      title: "Post deleted successfully!",
-      description: "The post was removed from the tracker.",
-    });
-    closeDeleteConfirmation();
-  } catch (err) {
-    console.error("Error deleting post:", err);
-    toast({
-      title: "Error",
-      description: err.message,
-      variant: "destructive",
-    });
-  } finally {
-    setIsDeleting(null);
-  }
-};
+      if (!res.ok) {
+        // Customize error message for user
+        let message = result.error || "Failed to delete post";
+
+        if (
+          message.toLowerCase().includes("foreign key") ||
+          message.toLowerCase().includes("permission") ||
+          message.toLowerCase().includes("not authorized")
+        ) {
+          message = "You may not be the right person to delete this post.";
+        }
+
+        toast({
+          title: "Error",
+          description: message,
+          variant: "destructive",
+        });
+
+        return;
+      }
+
+      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+      toast({
+        title: "Post deleted successfully!",
+        description: "The post was removed from the tracker.",
+      });
+      closeDeleteConfirmation();
+    } catch (err) {
+      console.error("Error deleting post:", err);
+      toast({
+        title: "Error",
+        description: err.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsDeleting(null);
+    }
+  };
 
 
   if (loading) {
@@ -364,7 +380,7 @@ const getStatusBadge = (status) => {
   }
 
   if (!firebaseUser) {
-    return <div className="p-6">Please log in to view your Comment.</div>;
+    return <div className="p-6">Please log in to view your posts.</div>;
   }
 
   return (
@@ -375,17 +391,17 @@ const getStatusBadge = (status) => {
           <div className="flex items-center gap-4">
             <SidebarTrigger className="h-8 w-8" />
             <div>
-              <h1 className="text-xl font-bold text-foreground">Reddit Comment Management</h1>
+              <h1 className="text-xl font-bold text-foreground">Reddit Posts Management</h1>
               <p className="text-sm text-muted-foreground">Manage all your Reddit content and engagement</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <Button
-              onClick={() => router.push("/threadflow/comment/add")}
+              onClick={() => router.push("/threadflow/posts/add")}
               className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <Plus className="h-4 w-4 mr-2" />
-              Add New Comment
+              Add New Post
             </Button>
             <UserProfile />
           </div>
@@ -399,46 +415,38 @@ const getStatusBadge = (status) => {
               <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
-                  placeholder="Search Comment, categories..."
+                  placeholder="Search posts, categories..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-10"
                 />
               </div>
-
-           <Select
-  value={editFormData.category}
-  onValueChange={(value) => handleEditInputChange("category", value)}
->
-  <SelectTrigger>
-    <SelectValue placeholder="Select category">
-      {editFormData.category || "Select category"}
-    </SelectValue>
-  </SelectTrigger>
-  <SelectContent className="max-h-60">
-    {editCategories.map((category) => (
-      <SelectItem key={category} value={category}>
-        {category}
-      </SelectItem>
-    ))}
-  </SelectContent>
-</Select>
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="w-48">
+                  <SelectValue placeholder="All Categories" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((cat) => (
+                    <SelectItem key={cat} value={cat}>
+                      {cat === "all" ? "All Categories" : cat}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
 
-
-            <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-  <SelectTrigger className="w-32">
-    <SelectValue placeholder="All Status" />
-  </SelectTrigger>
-  <SelectContent>
-    {statuses.map((status) => (
-      <SelectItem key={status} value={status}>
-        {status === "all" ? "All Status" : status.charAt(0).toUpperCase() + status.slice(1)}
-      </SelectItem>
-    ))}
-  </SelectContent>
-</Select>
-
+              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+                <SelectTrigger className="w-32">
+                  <SelectValue placeholder="All Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  {statuses.map((status) => (
+                    <SelectItem key={status} value={status}>
+                      {status === "all" ? "All Status" : status.charAt(0).toUpperCase() + status.slice(1)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </CardContent>
         </Card>
@@ -446,7 +454,7 @@ const getStatusBadge = (status) => {
         <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">
-              My Comment ({totalComments})
+              My Posts ({totalPosts})
             </CardTitle>
           </CardHeader>
           <div className="bg-[#344256] w-full h-[0.5px] mb-1"></div>
@@ -458,20 +466,17 @@ const getStatusBadge = (status) => {
                     <TableHead>Category</TableHead>
                     <TableHead>Targeted Subreddit</TableHead>
                     <TableHead>Title</TableHead>
-                    <TableHead>Reddit Post URL</TableHead>
-                    <TableHead>Comment Approval Status</TableHead>
+                    {/* <TableHead>URL</TableHead> */}
+                    <TableHead>Post Approval Status</TableHead>
                     <TableHead>Text of engagement</TableHead>
                     <TableHead>Date published</TableHead>
                     <TableHead>Customer Comments</TableHead>
+                    <TableHead>Published Status</TableHead>
                     <TableHead>Published Link</TableHead>
                     <TableHead>Total Views</TableHead>
-                    {/* <TableHead>Number of our engagements</TableHead> */}
-                    {/* <TableHead>Link to Kubiya</TableHead> */}
+                    <TableHead>Number of our engagements</TableHead>
                     <TableHead>Reddit Username</TableHead>
-                    <TableHead>Posted Comment Status</TableHead>
                     <TableHead>Actions</TableHead>
-
-                    {/* <TableHead>Actions</TableHead> */}
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -482,33 +487,40 @@ const getStatusBadge = (status) => {
                           {post.category}
                         </Badge>
                       </TableCell>
-                      <TableCell className="max-w-sm">
+                       <TableCell>
                         <div className="text-sm text-muted-foreground line-clamp-3">
                           {post.targeted_subreddit}
                         </div>
                       </TableCell>
                       <TableCell className="font-medium max-w-xs">
-                          <HoverTextCell text={post.title} isTitle={true} />
+                         <HoverTextCell text={post.title} isTitle={true}/>
                       </TableCell>
-                       <TableCell>
+                      {/* <TableCell className="max-w-xs">
+                      {post.url ? 
                         <a
-                          href={post.post_url}
+                          href={post.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-primary hover:underline"
+                          className="text-primary hover:underline flex items-center gap-1 truncate"
                         >
-                          {post.post_url ? "Post Link" : "-"}
-                        </a>
-                      </TableCell>
-                                <TableCell>{getStatusBadge(post.status, 'comment')}</TableCell>
-
+                          <ExternalLink className="h-3 w-3" />
+                          Reddit Link
+                        </a> : "-"}
+                      </TableCell> */}
+                      <TableCell>{getStatusBadge(post.current_status)}</TableCell>
                       <TableCell className="max-w-sm">
-                          <HoverTextCell text={post.engagement_text} isTextEngagement={true} />
+                        {/* <div
+                          className="text-sm text-muted-foreground line-clamp-3"
+                          dangerouslySetInnerHTML={{ __html: post.engagement_text }}
+                        /> */}
+                        <HoverTextCell text={post.engagement_text} isTextEngagement={true} />
                       </TableCell>
+
                       <TableCell className="text-sm">
                         {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
                       </TableCell>
                       <TableCell className="text-sm"> <HoverTextCell text={post.client_feedback}/></TableCell>
+                      <TableCell className="text-sm">{getStatusBadge(post.status)}</TableCell>
                       <TableCell>
                         <a
                           href={post.posted_link}
@@ -520,11 +532,8 @@ const getStatusBadge = (status) => {
                         </a>
                       </TableCell>
                       <TableCell>{post.total_views ? post.total_views : "-"}</TableCell>
-
-                      {/* <TableCell></TableCell>
-                      <TableCell></TableCell> */}
+                      <TableCell></TableCell>
                       <TableCell>{post.reddit_username}</TableCell>
-                                             <TableCell><div className="text-center">{getStatusBadge(post.posted_comment_status)}</div></TableCell>
 
                       <TableCell>
                         <div className="flex items-center gap-2">
@@ -554,12 +563,11 @@ const getStatusBadge = (status) => {
             </div>
           </CardContent>
         </Card>
-       
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+           <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
       </div>
 
       {/* Edit Modal */}
@@ -591,21 +599,21 @@ const getStatusBadge = (status) => {
                         <SelectTrigger>
                           <SelectValue placeholder="Select category" />
                         </SelectTrigger>
-                                    <SelectContent className="max-h-60">
-  {editCategories.length > 0 && (
-    <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground border-b border-border/50 mb-1">
-      Recommended Categories
-    </div>
-  )}
-  {editCategories.map((category) => (
-    <SelectItem key={category} value={category} className="py-2">
-      <div className="flex items-center gap-2">
-        <div className="w-2 h-2 bg-primary/60 rounded-full"></div>
-        {category}
-      </div>
-    </SelectItem>
-  ))}
-  {/* <div className="border-t border-border/50 mt-1 pt-1">
+                        <SelectContent className="max-h-60">
+                          {editCategories.length > 0 && (
+                            <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground border-b border-border/50 mb-1">
+                              Recommended Categories
+                            </div>
+                          )}
+                          {editCategories.map((category) => (
+                            <SelectItem key={category} value={category} className="py-2">
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-primary/60 rounded-full"></div>
+                                {category}
+                              </div>
+                            </SelectItem>
+                          ))}
+                          {/* <div className="border-t border-border/50 mt-1 pt-1">
     <SelectItem value="add-new" className="text-primary font-medium py-2">
       <div className="flex items-center gap-2">
         <Plus className="h-4 w-4" />
@@ -613,12 +621,12 @@ const getStatusBadge = (status) => {
       </div>
     </SelectItem>
   </div> */}
-</SelectContent>
+                        </SelectContent>
                       </Select>
                     </div>
 
                     <div>
-                      <Label htmlFor="targetedSubreddit">Targeted Subreddit</Label>
+                      <Label htmlFor="targetedSubreddit" className="text-sm font-medium mb-2 block">Targeted Subreddit</Label>
                       <Input
                         id="targetedSubreddit"
                         value={editFormData.targetedSubreddit}
@@ -627,17 +635,6 @@ const getStatusBadge = (status) => {
                         className="h-10"
                       />
                     </div>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="postURL" className="text-sm font-medium mb-2 block">Post URL</Label>
-                    <Input
-                      id="postURL"
-                      value={editFormData.postURL}
-                      onChange={(e) => handleEditInputChange("postURL", e.target.value)}
-                      placeholder="Enter the Reddit Post URL"
-                      className="h-10"
-                    />
                   </div>
 
                   <div>
@@ -650,6 +647,7 @@ const getStatusBadge = (status) => {
                       className="h-10"
                     />
                   </div>
+
                   <div>
                     <Label htmlFor="edit-title">Title *</Label>
                     <Input
@@ -660,18 +658,66 @@ const getStatusBadge = (status) => {
                     />
                   </div>
 
-
+                  {/* <div>
+                    <Label htmlFor="edit-url">URL</Label>
+                    <Input
+                      id="edit-url"
+                      type="url"
+                      value={editFormData.url}
+                      onChange={(e) => handleEditInputChange("url", e.target.value)}
+                      placeholder="https://www.reddit.com/r/..."
+                    />
+                  </div> */}
 
                   {/* Content */}
                   <div>
-                    <Label htmlFor="edit-engagementText">Engagement Text</Label>
-                    <Textarea
-                      id="edit-engagementText"
-                      value={editFormData.engagementText}
-                      onChange={(e) => handleEditInputChange("engagementText", e.target.value)}
-                      placeholder="Original engagement text for the post"
-                      rows={4}
-                    />
+                    <Label
+                      htmlFor="engagementText"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      Body Text
+                    </Label>
+                    <div
+                      className={cn(
+                        "flex w-full rounded-md border border-input bg-transparent shadow-sm transition-colors",
+                        "focus-within:outline-none focus-within:ring-1 focus-within:ring-ring"
+                      )}
+                    >
+                      <ReactQuill
+                        id="engagementText"
+                        value={editFormData.engagementText}
+                        onChange={(content) => handleEditInputChange("engagementText", content)}
+                        placeholder="Enter your Body Text or comment for this Reddit post..."
+                        modules={{
+                          toolbar: [
+                            ["bold", "italic", "underline"],
+                            [{ list: "ordered" }, { list: "bullet" }],
+                            ["link"],
+                          ],
+                        }}
+                        className={cn(
+                          "w-full",
+
+                          "[&_.ql-toolbar]:!border-none [&_.ql-container]:!border-none",
+
+                          "[&_.ql-toolbar]:bg-transparent [&_.ql-container]:bg-transparent",
+                          "[&_.ql-editor]:min-h-[120px] [&_.ql-editor]:pt-2 [&_.ql-editor]:px-3",
+                          "[&_.ql-editor]:text-sm [&_.ql-editor]:text-foreground",
+                          "[&_.ql-editor.ql-blank::before]:text-muted-foreground",
+
+                          "[&_.ql-toolbar_button]:text-muted-foreground [&_.ql-toolbar_button:hover]:text-foreground",
+
+                          "[&_.ql-tooltip]:!bg-neutral-900 [&_.ql-tooltip]:!text-white [&_.ql-tooltip]:!border [&_.ql-tooltip]:!border-neutral-700",
+
+                          "[&_.ql-tooltip_input]:!bg-neutral-800 [&_.ql-tooltip_input]:!text-white [&_.ql-tooltip_input]:!placeholder-gray-400 [&_.ql-tooltip_input]:!border [&_.ql-tooltip_input]:!border-neutral-700",
+
+                          "[&_.ql-tooltip] button:!text-white [&_.ql-tooltip] button:hover:!text-blue-400"
+                        )}
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      This will be your response or engagement with the Reddit post
+                    </p>
                   </div>
 
                   <div>
@@ -699,11 +745,8 @@ const getStatusBadge = (status) => {
                     </div>
 
                     <div>
-                      <Label htmlFor="edit-status">Client Approval Status</Label>
-                      <Select
-                        value={editFormData.status}
-                        onValueChange={(value) => handleEditInputChange("status", value)}
-                      >
+                      <Label htmlFor="currentStatus">Post Approval Status</Label>
+                      <Select value={editFormData.currentStatus} onValueChange={(value) => handleEditInputChange("currentStatus", value)}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
@@ -711,51 +754,47 @@ const getStatusBadge = (status) => {
                           <SelectItem value="approved">Approved</SelectItem>
                           <SelectItem value="notApproved">Not Approved</SelectItem>
                           <SelectItem value="pending">Pending</SelectItem>
+
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
                     <div>
-                      <Label htmlFor="edit-postedLink">Comment URL</Label>
+                      <Label htmlFor="edit-postedLink">Posted Link</Label>
                       <Input
                         id="edit-postedLink"
                         type="url"
-                      value={editFormData.postedLink}
-                      onChange={(e) => handleEditInputChange("postedLink", e.target.value)}
-                      placeholder="Direct link to the posted content"
-                    />
-                  </div>
-                    <div>
+                        value={editFormData.postedLink}
+                        onChange={(e) => handleEditInputChange("postedLink", e.target.value)}
+                        placeholder="Direct link to the posted content"
+                      />
+                    </div>
+                     <div>
                       <Label htmlFor="totalViews">Total Views</Label>
                       <Input
                         id="totalViews"
                         value={editFormData.totalViews}
-                        onChange={(e) =>
-                          handleEditInputChange("totalViews", e.target.value)
-                        }
+                        onChange={(e) => handleEditInputChange("totalViews", e.target.value)}
                         placeholder="Number of Total Views"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="edit-postedCommentStatus">
-                        Posted Comment Status
-                      </Label>
-                      <Select
-                        value={editFormData.postedCommentStatus}
-                        onValueChange={(value) => handleEditInputChange("postedCommentStatus", value)}
-                      >
+                      <Label htmlFor="status">Published Post Status</Label>
+                      <Select value={editFormData.status} onValueChange={(value) => handleEditInputChange("status", value)}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="commentUnderApproval">Comment Under Approval</SelectItem>
+                          <SelectItem value="postUnderApproval">Post Under Approval</SelectItem>
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
                           <SelectItem value="underModeration">Under Moderation</SelectItem>
                           <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>
                       </Select>
+
                     </div>
                   </div>
 
@@ -786,7 +825,7 @@ const getStatusBadge = (status) => {
                   <Trash2 className="h-6 w-6 text-destructive" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground">Delete Comment</h3>
+                  <h3 className="text-lg font-semibold text-foreground">Delete Post</h3>
                   <p className="text-sm text-muted-foreground mt-1">
                     This action cannot be undone
                   </p>
@@ -795,7 +834,7 @@ const getStatusBadge = (status) => {
 
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground mb-2">
-                  Are you sure you want to delete this Comment?
+                  Are you sure you want to delete this post?
                 </p>
                 <div className="p-3 bg-muted rounded-md">
                   <p className="text-sm font-medium text-foreground truncate">

@@ -3,18 +3,18 @@ import { onAuthStateChanged } from "firebase/auth";
 import { Edit, Plus, Save, Search, Trash2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Badge } from "../../../Components/ui/badge";
-import { Button } from "../../../Components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../../../Components/ui/card";
-import { Input } from "../../../Components/ui/input";
-import { Label } from "../../../Components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../Components/ui/select";
-import { SidebarTrigger } from "../../../Components/ui/sidebar";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../Components/ui/table";
-import { Textarea } from "../../../Components/ui/textarea";
-import { UserProfile } from "../../../Components/UserProfile";
-import { useToast } from "../../../hooks/use-toast";
-import { auth } from "../../../lib/firebaseClient";
+import { Badge } from "@/Components/ui/badge";
+import { Button } from "@/Components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
+import { Input } from "@/Components/ui/input";
+import { Label } from "@/Components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
+import { SidebarTrigger } from "@/Components/ui/sidebar";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/ui/table";
+import { Textarea } from "@/Components/ui/textarea";
+import { UserProfile } from "@/Components/UserProfile";
+import { useToast } from "@/hooks/use-toast";
+import { auth } from "@/lib/firebaseClient";
 import { HoverTextCell } from "../components/HoverTextCell";
 import Pagination from "../components/pagination";
 
@@ -31,7 +31,7 @@ const PostsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalComments , setTotalComments] = useState(0);
-  
+
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
   const [editFormData, setEditFormData] = useState({
@@ -87,8 +87,9 @@ const PostsPage = () => {
         if (!res.ok) {
           throw new Error(result.error || "Failed to fetch posts");
         }
-        setPosts(result?.data || []);
-        setTotalPages(result?.totalPages || 1);
+
+        setPosts(result.data || []);
+          setTotalPages(result?.totalPages || 1);
         setTotalComments(result?.totalCount || 0);
       } catch (err) {
         console.error("Error fetching posts:", err);
@@ -101,8 +102,7 @@ const PostsPage = () => {
     };
 
     fetchPosts();
-  }, [currentPage,firebaseUser]);
-
+  }, [firebaseUser]);
     useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setFirebaseUser(user);
@@ -131,15 +131,15 @@ const PostsPage = () => {
     return () => unsubscribe();
   }, [router]);
 
-// Update current page when pagination changes
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
 
 const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
 const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
 
+
+// Update current page when pagination changes
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
@@ -554,12 +554,12 @@ const getStatusBadge = (status) => {
             </div>
           </CardContent>
         </Card>
-       
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+           <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+             
       </div>
 
       {/* Edit Modal */}
