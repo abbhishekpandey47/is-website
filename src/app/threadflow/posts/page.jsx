@@ -18,6 +18,7 @@ import { UserProfile } from "../../../Components/UserProfile";
 import { useToast } from "../../../hooks/use-toast";
 import { Textarea } from "../../../Components/ui/textarea";
 import { HoverTextCell } from "../components/HoverTextCell";
+import Pagination from "../components/pagination";
 
 
 const ReactQuill = dynamic(
@@ -41,6 +42,9 @@ const PostsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalPosts , setTotalPosts] = useState(0); 
 
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
@@ -93,7 +97,7 @@ const PostsPage = () => {
   const fetchPosts = async () => {
       try {
     const token = await firebaseUser.getIdToken();
-    const res = await fetch(`/api/posts`, { headers: { Authorization: `Bearer ${token}` } });
+    const res = await fetch(`/api/posts?page=${currentPage}&limit=10`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
@@ -101,6 +105,8 @@ const PostsPage = () => {
         }
 
         setPosts(result.data || []);
+        setTotalPages(result?.totalPages || 1);
+        setTotalPosts(result?.totalCount || 0);
       } catch (err) {
         console.error("Error fetching posts:", err);
         toast.error("Failed to load posts");
@@ -141,7 +147,11 @@ const PostsPage = () => {
 
   const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
   const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
-
+  
+  // Update current page when pagination changes
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
 
   const filteredPosts = posts.filter((post) => {
@@ -442,7 +452,7 @@ const PostsPage = () => {
         <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">
-              My Posts ({filteredPosts.length})
+              My Posts ({totalPosts})
             </CardTitle>
           </CardHeader>
           <div className="bg-[#344256] w-full h-[0.5px] mb-1"></div>
@@ -551,6 +561,11 @@ const PostsPage = () => {
             </div>
           </CardContent>
         </Card>
+          <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
       </div>
 
       {/* Edit Modal */}

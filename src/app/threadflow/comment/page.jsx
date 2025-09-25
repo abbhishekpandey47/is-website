@@ -16,6 +16,7 @@ import { UserProfile } from "../../../Components/UserProfile";
 import { useToast } from "../../../hooks/use-toast";
 import { auth } from "../../../lib/firebaseClient";
 import { HoverTextCell } from "../components/HoverTextCell";
+import Pagination from "../components/pagination";
 
 
 const PostsPage = () => {
@@ -27,7 +28,10 @@ const PostsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalComments , setTotalComments] = useState(0);
+  
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
   const [editFormData, setEditFormData] = useState({
@@ -77,14 +81,15 @@ const PostsPage = () => {
   const fetchPosts = async () => {
       try {
     const token = await firebaseUser.getIdToken();
-    const res = await fetch(`/api/comment`, { headers: { Authorization: `Bearer ${token}` } });
+    const res = await fetch(`/api/comment?page=${currentPage}&limit=10`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
           throw new Error(result.error || "Failed to fetch posts");
         }
-
-        setPosts(result.data || []);
+        setPosts(result?.data || []);
+        setTotalPages(result?.totalPages || 1);
+        setTotalComments(result?.totalCount || 0);
       } catch (err) {
         console.error("Error fetching posts:", err);
          toast({
@@ -96,7 +101,8 @@ const PostsPage = () => {
     };
 
     fetchPosts();
-  }, [firebaseUser]);
+  }, [currentPage,firebaseUser]);
+
     useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setFirebaseUser(user);
@@ -124,6 +130,11 @@ const PostsPage = () => {
 
     return () => unsubscribe();
   }, [router]);
+
+// Update current page when pagination changes
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
 
 const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
@@ -435,7 +446,7 @@ const getStatusBadge = (status) => {
         <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">
-              My Comment ({filteredPosts.length})
+              My Comment ({totalComments})
             </CardTitle>
           </CardHeader>
           <div className="bg-[#344256] w-full h-[0.5px] mb-1"></div>
@@ -543,6 +554,12 @@ const getStatusBadge = (status) => {
             </div>
           </CardContent>
         </Card>
+       
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
       </div>
 
       {/* Edit Modal */}
