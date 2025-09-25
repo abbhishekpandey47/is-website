@@ -26,38 +26,45 @@ import {
     useSidebar,
 } from "./ui/sidebar"
 
-const mainItems = [
-  { title: "Dashboard", url: "/threadflow", icon: BarChart3 },
-  { title: "Reddit Posts", url: "/threadflow/posts", icon: MessageSquare },
-  { title: "Reddit Comments", url: "/threadflow/comment", icon: MessageSquare },
-  { title: "Analytics", url: "/threadflow/analytics", icon: TrendingUp },
-  { title: "Communities", url: "/threadflow/communities", icon: Users },
-  { title: "SubredditSense", url: "/threadflow/subredditsense", icon: TrendingUp },
-]
-
-
-
-const managementItems = [
-  { title: "Categories", url: "/threadflow/management/categories", icon: Tag },
-  { title: "Schedule", url: "/threadflow/management/schedule", icon: Calendar },
-  { title: "Templates", url: "/threadflow/management/templates", icon: FileText },
-  { title: "Settings", url: "/threadflow/management/settings", icon: Settings },
-]
-
-export function AppSidebar() {
+export function AppSidebar({ companySlug, isAdmin , companyName }) {
   const { open } = useSidebar()
   const pathname = usePathname()
+  console.log("verifyUser", { companySlug, isAdmin , companyName })
+
+  // Define main and management items dynamically based on admin/client
+  const mainItems = [
+    { title: "Dashboard", url: isAdmin ? "/threadflow" : `/threadflow/c/${companySlug}`, icon: BarChart3 },
+    { title: "Reddit Posts", url: isAdmin ? "/threadflow/posts" : `/threadflow/c/${companySlug}/posts`, icon: MessageSquare },
+    { title: "Reddit Comments", url: isAdmin ? "/threadflow/comment" : `/threadflow/c/${companySlug}/comment`, icon: MessageSquare },
+    { title: "Analytics", url: isAdmin ? "/threadflow/analytics" : `/threadflow/c/${companySlug}/analytics`, icon: TrendingUp },
+    { title: "Communities", url: isAdmin ? "/threadflow/communities" : `/threadflow/c/${companySlug}/communities`, icon: Users },
+    { title: "SubredditSense", url: isAdmin ? "/threadflow/subredditsense" : `/threadflow/c/${companySlug}/subredditsense`, icon: TrendingUp },
+  ]
+
+  const managementItems = [
+    { title: "Categories", url: isAdmin ? "/threadflow/management/categories" : `/threadflow/c/${companySlug}/management/categories`, icon: Tag },
+    { title: "Schedule", url: isAdmin ? "/threadflow/management/schedule" : `/threadflow/c/${companySlug}/management/schedule`, icon: Calendar },
+    { title: "Templates", url: isAdmin ? "/threadflow/management/templates" : `/threadflow/c/${companySlug}/management/templates`, icon: FileText },
+    { title: "Settings", url: isAdmin ? "/threadflow/management/settings" : `/threadflow/c/${companySlug}/management/settings`, icon: Settings },
+  ]
 
   const isActive = (href) => {
     if (href === "/threadflow") return pathname === "/threadflow"
     return pathname === href || pathname.startsWith(href + "/")
   }
 
+  const camelCaseToName = (str) => {
+  if (!str) return "";
+  return str
+    .replace(/([a-z])([A-Z])/g, "$1 $2") // add space before capital letters
+    .replace(/([A-Z])([A-Z][a-z])/g, "$1 $2") // handle multiple capitals
+    .replace(/^./, (s) => s.toUpperCase()); // capitalize first letter
+}
+
   const renderItem = (item) => {
     const active = isActive(item.url)
     return (
       <SidebarMenuItem key={item.title}>
-        {/* asChild lets SidebarMenuButton pass its styles/props to Link */}
         <SidebarMenuButton asChild>
           <Link
             href={item.url}
@@ -80,27 +87,22 @@ export function AppSidebar() {
   return (
     <Sidebar className="border-sidebar-border">
       <SidebarContent className="bg-sidebar text-sidebar-foreground">
-        {/* Main Navigation */}
+      <div className="text-center mt-5 text-3xl font-extrabold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">{companyName ? camelCaseToName(companyName) : "Infrasity"}</div>
         <SidebarGroup>
           <SidebarGroupLabel className="text-sidebar-foreground/70 text-xs font-medium uppercase tracking-wider mb-2">
             Main
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
-              {mainItems.map(renderItem)}
-            </SidebarMenu>
+            <SidebarMenu>{mainItems.map(renderItem)}</SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Management */}
         <SidebarGroup>
           <SidebarGroupLabel className="text-sidebar-foreground/70 text-xs font-medium uppercase tracking-wider mb-2">
             Management
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
-              {managementItems.map(renderItem)}
-            </SidebarMenu>
+            <SidebarMenu>{managementItems.map(renderItem)}</SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
