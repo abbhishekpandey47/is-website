@@ -31,7 +31,7 @@ const ReactQuill = dynamic(
 );
 
 
-
+const PAGE_SIZE = 10;
 const PostsPage = () => {
   const router = useRouter();
   const { toast } = useToast();
@@ -43,8 +43,7 @@ const PostsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [totalPosts , setTotalPosts] = useState(0); 
+
 
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
@@ -97,7 +96,7 @@ const PostsPage = () => {
   const fetchPosts = async () => {
       try {
     const token = await firebaseUser.getIdToken();
-    const res = await fetch(`/api/posts?page=${currentPage}&limit=10`, { headers: { Authorization: `Bearer ${token}` } });
+    const res = await fetch(`/api/posts`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
@@ -105,8 +104,6 @@ const PostsPage = () => {
         }
 
         setPosts(result.data || []);
-        setTotalPages(result?.totalPages || 1);
-        setTotalPosts(result?.totalCount || 0);
       } catch (err) {
         console.error("Error fetching posts:", err);
         toast.error("Failed to load posts");
@@ -144,18 +141,13 @@ const PostsPage = () => {
     return () => unsubscribe();
   }, [router]);
 
+  useEffect(() => {
+      setCurrentPage(1); // reset to first page whenever filters or search change
+  }, [searchQuery , selectedCategory]);
 
   const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
   const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
   
-  // Update current page when pagination changes
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-
-
-
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
       searchQuery === "" ||
@@ -169,6 +161,15 @@ const PostsPage = () => {
 
     return matchesSearch && matchesCategory && matchesStatus;
   });
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredPosts.length / PAGE_SIZE);
+  const paginatedPosts = filteredPosts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  // Update current page when pagination changes
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
 
   const getStatusBadge = (status) => {
     const statusColors = {
@@ -454,7 +455,7 @@ const PostsPage = () => {
         <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">
-              My Posts ({totalPosts})
+              My Posts ({filteredPosts.length})
             </CardTitle>
           </CardHeader>
           <div className="bg-[#344256] w-full h-[0.5px] mb-1"></div>
@@ -480,7 +481,7 @@ const PostsPage = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredPosts.map((post) => (
+                  {paginatedPosts.map((post) => (
                     <TableRow key={post.id}>
                       <TableCell>
                         <Badge variant="outline" className="whitespace-nowrap">

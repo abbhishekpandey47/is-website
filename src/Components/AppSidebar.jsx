@@ -47,10 +47,25 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
     { title: "Settings", url: isAdmin ? "/threadflow/management/settings" : `/threadflow/c/${companySlug}/management/settings`, icon: Settings },
   ]
 
-  const isActive = (href) => {
-    if (href === "/threadflow") return pathname === "/threadflow"
-    return pathname === href || pathname.startsWith(href + "/")
-  }
+  // const isActive = (href) => {
+  //   if (href === "/threadflow") return pathname === "/threadflow"
+  //   return pathname === href || pathname.startsWith(href + "/")
+  // }
+const isActive = (href) => {
+  const pathParts = pathname.split("/").filter(Boolean);
+  const hrefParts = href.split("/").filter(Boolean);
+
+  // Exact match
+  if (pathname === href) return true;
+
+  // For parent routes, only active if last part of href matches and lengths align
+  return (
+    hrefParts.length === pathParts.length && hrefParts.every((part, index) => part === pathParts[index])
+  );
+};
+
+
+
 
   const camelCaseToName = (str) => {
   if (!str) return "";

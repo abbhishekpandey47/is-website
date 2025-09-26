@@ -115,13 +115,9 @@ export default async function handler(req, res) {
   //     return res.status(500).json({ error: "Internal Server Error" });
   //   }
   // }
-  if (req.method === "GET") {
+if (req.method === "GET") {
   try {
-    const { id, categories, page, limit } = req.query;
-    const pageNum = parseInt(page) || 1;       // current page, default 1
-    const pageSize = parseInt(limit) || 10;    // items per page, default 10
-    const start = (pageNum - 1) * pageSize;
-    const end = start + pageSize - 1;
+    const { id, categories } = req.query;
 
     // Get single post by ID
     if (id) {
@@ -156,35 +152,27 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, categories: uniqueCategories });
     }
 
-    // Paginated posts
-    let query = supabase
-      .from("posts")
-      .select("*", { count: "exact" }) // returns total count
-      .order("date_posted", { ascending: false })
-      .range(start, end); // pagination
+    // Fetch all posts (no pagination)
+    let query = supabase.from("posts").select("*").order("date_posted", { ascending: false });
 
+    // Apply client company filter
     if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
       query = query.in("company_id", allowedCompanyIds);
     }
 
-    const { data, error, count } = await query;
-
+    const { data, error } = await query;
     if (error) return res.status(500).json({ error: error.message });
-
-    const totalPages = Math.ceil(count / pageSize);
 
     return res.status(200).json({
       success: true,
       data,
-      totalPages,
-      currentPage: pageNum,
-      totalCount: count
     });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
 
   //  Edit Post (PUT)
   if (req.method === "PUT") {

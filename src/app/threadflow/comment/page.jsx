@@ -19,6 +19,7 @@ import { HoverTextCell } from "../components/HoverTextCell";
 import Pagination from "../components/pagination";
 
 
+const PAGE_SIZE = 10;
 const PostsPage = () => {
   const router = useRouter();
   const { toast } = useToast();
@@ -29,8 +30,6 @@ const PostsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [totalComments , setTotalComments] = useState(0);
   
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
@@ -51,7 +50,7 @@ const PostsPage = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState({ isOpen: false, post: null });
-    const [editCategories, setEditCategories] = useState([
+  const [editCategories, setEditCategories] = useState([
     "Drift Detection",
     "IaC",
     "DevOps",
@@ -78,18 +77,16 @@ const PostsPage = () => {
 
     console.log("Fetching posts for user:", firebaseUser.uid);
 
-  const fetchPosts = async () => {
+   const fetchPosts = async () => {
       try {
     const token = await firebaseUser.getIdToken();
-    const res = await fetch(`/api/comment?page=${currentPage}&limit=10`, { headers: { Authorization: `Bearer ${token}` } });
+    const res = await fetch(`/api/comment`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
           throw new Error(result.error || "Failed to fetch posts");
         }
         setPosts(result?.data || []);
-        setTotalPages(result?.totalPages || 1);
-        setTotalComments(result?.totalCount || 0);
       } catch (err) {
         console.error("Error fetching posts:", err);
          toast({
@@ -101,7 +98,7 @@ const PostsPage = () => {
     };
 
     fetchPosts();
-  }, [currentPage,firebaseUser]);
+  }, [firebaseUser]);
 
     useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -131,11 +128,7 @@ const PostsPage = () => {
     return () => unsubscribe();
   }, [router]);
 
-// Update current page when pagination changes
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
+  
 
 const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
 const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
@@ -154,6 +147,19 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
 
     return matchesSearch && matchesCategory && matchesStatus;
   });
+
+    const totalPages = Math.ceil(filteredPosts.length / PAGE_SIZE);
+    const paginatedPosts = filteredPosts.slice(
+      (currentPage - 1) * PAGE_SIZE,
+      currentPage * PAGE_SIZE
+    );
+    // Update current page when pagination changes
+    const handlePageChange = (page) => {
+      setCurrentPage(page);
+    };
+    useEffect(() => {
+      setCurrentPage(1); // reset to first page whenever filters or search change
+    }, [searchQuery, selectedCategory]);
 
 const getStatusBadge = (status) => {
   const statusColors = {
@@ -446,7 +452,7 @@ const getStatusBadge = (status) => {
         <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">
-              My Comment ({totalComments})
+              My Comment ({filteredPosts.length})
             </CardTitle>
           </CardHeader>
           <div className="bg-[#344256] w-full h-[0.5px] mb-1"></div>
@@ -475,7 +481,7 @@ const getStatusBadge = (status) => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredPosts.map((post) => (
+                  {paginatedPosts.map((post) => (
                     <TableRow key={post.id}>
                       <TableCell>
                         <Badge variant="outline" className="whitespace-nowrap">
