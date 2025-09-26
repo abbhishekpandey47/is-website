@@ -50,7 +50,7 @@ const projects = [
     title: "AI Marketing Game-Changers",
     subtitle: "Educational Video Series",
     category: "Educational Videos",
-    videoId: "BivxMW5DftE",
+    videoId: "oqe_jFQFHFo",
     image: "/video-page/t3.jpg",
     description: "We produce engaging educational videos that highlight the latest trends in AI and marketing.",
     services: [
