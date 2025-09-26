@@ -29,14 +29,13 @@ const PostsPage = () => {
   const router = useRouter();
   const [firebaseUser, setFirebaseUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalCount, setTotalCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
+  const [allItems, setAllItems] = useState([]);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth,(user) => {
@@ -98,32 +97,61 @@ const PostsPage = () => {
     
     // Fetch posts + comments concurrently
   
-    useEffect(() => {
+  //   useEffect(() => {
+  //   if (!firebaseUser) return;
+
+  //   const fetchData = async () => {
+  //     try {
+  //       const token = await firebaseUser.getIdToken();
+
+  //       const halfPage = Math.floor(PAGE_SIZE / 2);
+
+  //       const [postRes, commentRes] = await Promise.all([
+  //         fetch(`/api/posts?page=${currentPage}&limit=${halfPage}`, {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }),
+  //         fetch(`/api/comment?page=${currentPage}&limit=${halfPage}`, {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }),
+  //       ]);
+
+  //       const [postData, commentData] = await Promise.all([postRes.json(), commentRes.json()]);
+
+  //       if (!postRes.ok) throw new Error(postData.error || "Failed to fetch posts");
+  //       if (!commentRes.ok) throw new Error(commentData.error || "Failed to fetch comments");
+
+  //       setPosts(postData.data || []);
+  //       setComments(commentData.data || []);
+  //       setTotalCount((postData.totalCount || 0) + (commentData.totalCount || 0));
+  //     } catch (err) {
+  //       console.error(err);
+  //       toast.error("Failed to load data");
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [firebaseUser, currentPage]);
+ 
+
+  // Fetch combined posts + comments
+  
+  useEffect(() => {
     if (!firebaseUser) return;
 
     const fetchData = async () => {
       try {
         const token = await firebaseUser.getIdToken();
 
-        const halfPage = Math.floor(PAGE_SIZE / 2);
+        const res = await fetch(`/api/allContent`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-        const [postRes, commentRes] = await Promise.all([
-          fetch(`/api/posts?page=${currentPage}&limit=${halfPage}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          fetch(`/api/comment?page=${currentPage}&limit=${halfPage}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-        ]);
+        const result = await res.json();
 
-        const [postData, commentData] = await Promise.all([postRes.json(), commentRes.json()]);
+        if (!res.ok) throw new Error(result.error || "Failed to fetch content");
 
-        if (!postRes.ok) throw new Error(postData.error || "Failed to fetch posts");
-        if (!commentRes.ok) throw new Error(commentData.error || "Failed to fetch comments");
-
-        setPosts(postData.data || []);
-        setComments(commentData.data || []);
-        setTotalCount((postData.totalCount || 0) + (commentData.totalCount || 0));
+        // Combined data already sorted by date in backend
+        setAllItems(result.data || []);
       } catch (err) {
         console.error(err);
         toast.error("Failed to load data");
@@ -131,16 +159,13 @@ const PostsPage = () => {
     };
 
     fetchData();
-  }, [firebaseUser, currentPage]);
-  
+  }, [firebaseUser]);
 
-  const totalPages = Math.ceil(totalCount / PAGE_SIZE);
-  
+useEffect(() => {
+  setCurrentPage(1); // reset to first page whenever filters or search change
+}, [searchQuery, selectedType, selectedCategory]);
 
-  const allItems = [
-    ...posts.map(post => ({ ...post, type: 'post' })),
-    ...comments.map(comment => ({ ...comment, type: 'comment' }))
-  ];
+
 
   const categories = ["all", ...new Set(allItems.map((item) => item.category).filter(Boolean))];
   const statuses = ["all", ...new Set(allItems.map((item) => item.status).filter(Boolean))];
@@ -161,9 +186,12 @@ const PostsPage = () => {
     return matchesSearch && matchesCategory && matchesStatus && matchesType;
   });
 
+ // Pagination logic
+  const totalPages = Math.ceil(filteredItems.length / PAGE_SIZE);
+  const paginatedItems = filteredItems.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
 const getStatusCounts = () => {
-  let itemsToCount = allItems;
+  let itemsToCount = filteredItems;
 
   // Filter if a specific type is selected
   if (selectedType !== "all") {
@@ -200,6 +228,7 @@ const getStatusCounts = () => {
   );
 };
 const statusCnt = getStatusCounts()
+
   const getStatusBadge = (status) => {
   const statusColors = {
     // Published Post Status
@@ -421,7 +450,7 @@ const statusCnt = getStatusCounts()
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredItems.map((item, index) => (
+                  {paginatedItems.map((item, index) => (
                     <TableRow key={`${item.type}-${item.id}-${index}`}>
                       {/* Type column - only when showing all */}
                       {selectedType === "all" && (
