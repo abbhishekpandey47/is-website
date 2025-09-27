@@ -96,7 +96,7 @@ const JobListings = () => {
           "Hybrid team that blends engineering + growth",
           "Fast-paced, high-impact environment with real ownership"
         ],
-        howToApply: "Send your CV and a short note on a GTM/sales engineering project you've led to careers@infrasity.com"
+        howToApply: "Send your CV and a short note on a GTM/sales engineering project you've led to contact@infrasity.com"
       }
     },
     {
@@ -372,13 +372,16 @@ const JobListings = () => {
                   </p>
 
                   {/* Apply Button */}
-                  <div onClick={(e) => e.stopPropagation()}>
-                    <a
-                      href="mailto:contact@infrasity.com?subject=Job Application - {job.title}&body=Hi, I'm interested in applying for the {job.title} position. Please find my details below:"
+                  <div onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedJob(job);
+                    setIsModalOpen(true);
+                  }}>
+                    <button
                       className="w-full inline-flex items-center justify-center px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors duration-200 text-sm"
                     >
                       Apply Now
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -529,7 +532,14 @@ const JobListings = () => {
                   <div>
                     <h3 className="text-2xl font-bold mb-4 text-foreground">How to Apply</h3>
                     <div className="text-muted-foreground leading-relaxed">
-                      {selectedJob.fullDescription.howToApply}
+                      {selectedJob.fullDescription.howToApply.split('contact@infrasity.com').map((part, index, array) => (
+                        <span key={index}>
+                          {part}
+                          {index < array.length - 1 && (
+                            <span className="text-purple-400 font-semibold text-lg">contact@infrasity.com</span>
+                          )}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 )}
@@ -540,7 +550,7 @@ const JobListings = () => {
                     href={`mailto:contact@infrasity.com?subject=Job Application - ${selectedJob.title}&body=Hi, I'm interested in applying for the ${selectedJob.title} position. Please find my details below:`}
                     className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl transition-colors duration-200 text-center"
                   >
-                    Apply Now
+                    Apply via Email
                   </a>
                   <button
                     onClick={closeModal}
