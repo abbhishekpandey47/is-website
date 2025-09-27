@@ -73,7 +73,7 @@ const CareersHero = () => {
 
 
   return (
-    <section ref={heroRef} className="relative pt-24 pb-20 overflow-hidden">
+    <section ref={heroRef} className="relative pt-48 pb-20 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl floating-icon" />
@@ -83,14 +83,9 @@ const CareersHero = () => {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-8 bg-purple-500/20 text-purple-400 border border-purple-500/30">
-            🚀 We're Hiring - Join Our Mission
-          </div>
-
           {/* Main Title */}
           <h1 className="hero-title text-5xl md:text-7xl font-bold tracking-tight mb-6 text-white">
-            Build the Future of Developer Growth
+            Build the Future of <span className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">Developer Growth</span>
           </h1>
 
           {/* Subtitle */}
