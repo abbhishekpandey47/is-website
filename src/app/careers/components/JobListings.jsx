@@ -13,7 +13,6 @@ import {
   Search,
   ExternalLink
 } from "lucide-react";
-import CalendarBooking from "../../calendarButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -374,12 +373,12 @@ const JobListings = () => {
 
                   {/* Apply Button */}
                   <div onClick={(e) => e.stopPropagation()}>
-                    <CalendarBooking 
-                      buttonText="Apply Now" 
-                      width="w-full" 
-                      textSize="text-sm"
-                      height="h-10"
-                    />
+                    <a
+                      href="mailto:contact@infrasity.com?subject=Job Application - {job.title}&body=Hi, I'm interested in applying for the {job.title} position. Please find my details below:"
+                      className="w-full inline-flex items-center justify-center px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors duration-200 text-sm"
+                    >
+                      Apply Now
+                    </a>
                   </div>
                 </div>
               </div>
@@ -537,10 +536,12 @@ const JobListings = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-border">
-                  <CalendarBooking 
-                    buttonText="Apply Now" 
-                    width="w-52" 
-                  />
+                  <a
+                    href={`mailto:contact@infrasity.com?subject=Job Application - ${selectedJob.title}&body=Hi, I'm interested in applying for the ${selectedJob.title} position. Please find my details below:`}
+                    className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl transition-colors duration-200 text-center"
+                  >
+                    Apply Now
+                  </a>
                   <button
                     onClick={closeModal}
                     className="px-8 py-4 border border-border rounded-xl font-semibold hover:bg-muted/50 transition-all duration-300"

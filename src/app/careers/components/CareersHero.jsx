@@ -2,8 +2,6 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Rocket, Users, Zap, Globe } from "lucide-react";
-import CalendarBooking from "../../calendarButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -73,12 +71,6 @@ const CareersHero = () => {
     return () => ctx.revert();
   }, []);
 
-  const stats = [
-    { icon: Users, value: "15+", label: "Team Members" },
-    { icon: Globe, value: "5+", label: "Countries" },
-    { icon: Zap, value: "100%", label: "Remote First" },
-    { icon: Rocket, value: "3x", label: "Growth Rate" },
-  ];
 
   return (
     <section ref={heroRef} className="relative pt-24 pb-20 overflow-hidden">
@@ -98,39 +90,23 @@ const CareersHero = () => {
 
           {/* Main Title */}
           <h1 className="hero-title text-5xl md:text-7xl font-bold tracking-tight mb-6 text-white">
-            Building the future of B2B support
+            Build the Future of Developer Growth
           </h1>
 
           {/* Subtitle */}
           <p className="hero-subtitle text-xl md:text-2xl text-zinc-400 max-w-4xl mx-auto mb-12 leading-relaxed">
-            Meet the team behind the platform trusted by the next generation
+            Join Infrasity and work at the intersection of engineering, storytelling, and GTM. We partner with YC and VC-backed startups in infra, AI, and DevTools—helping them scale adoption through technical content, DevRel, and product-driven narratives.
           </p>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mb-16">
-            {stats.map((stat, index) => (
-              <div key={index} className="hero-stats text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-purple-500/20 mb-4">
-                  <stat.icon className="w-8 h-8 text-purple-400" />
-                </div>
-                <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
-                <div className="text-sm text-zinc-400">{stat.label}</div>
-              </div>
-            ))}
-          </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {/* CTA Button */}
+          <div className="flex justify-center items-center">
             <a
               href="#open-positions"
               className="inline-flex items-center text-lg rounded-full bg-black px-8 py-4 text-white font-medium hover:bg-gray-900 transition"
             >
               View Open Positions
             </a>
-            <CalendarBooking 
-              buttonText="Book a Free Consultation" 
-              width="w-52" 
-            />
           </div>
         </div>
       </div>

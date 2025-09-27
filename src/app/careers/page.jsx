@@ -1,7 +1,6 @@
 import React from 'react';
 import CareersHero from './components/CareersHero';
 import JobListings from './components/JobListings';
-import CompanyCulture from './components/CompanyCulture';
 import BenefitsSection from './components/BenefitsSection';
 
 export const metadata = {
@@ -26,19 +25,9 @@ export default function CareersPage() {
             "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
         }}
       >
-        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-8 mb-1"></div>
         <JobListings />
       </div>
       
-      <div
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
-        }}
-      >
-        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-0 mb-1"></div>
-        <CompanyCulture />
-      </div>
       
       <div
         style={{
