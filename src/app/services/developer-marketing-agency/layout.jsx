@@ -1,5 +1,5 @@
 export const metadata = {
-    title: " Infrasity: Developer Marketing Agency for SaaS & DevTools",
+    title: "Developer Marketing Agency | Infrasity",
     description: "Infrasity helps SaaS, DevTool, and infra companies grow with developer marketing services, docs, content,  and community engagement.",
 
 };
