@@ -13,6 +13,7 @@ import {
   Search,
   ExternalLink
 } from "lucide-react";
+import CalendarBooking from "../../calendarButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -96,7 +97,7 @@ const JobListings = () => {
           "Hybrid team that blends engineering + growth",
           "Fast-paced, high-impact environment with real ownership"
         ],
-        howToApply: "Send your CV and a short note on a GTM/sales engineering project you've led to contact@infrasity.com"
+        howToApply: "Send your CV and a short note on a GTM/sales engineering project you've led to careers@infrasity.com"
       }
     },
     {
@@ -372,16 +373,13 @@ const JobListings = () => {
                   </p>
 
                   {/* Apply Button */}
-                  <div onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedJob(job);
-                    setIsModalOpen(true);
-                  }}>
-                    <button
-                      className="w-full inline-flex items-center justify-center px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors duration-200 text-sm"
-                    >
-                      Apply Now
-                    </button>
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <CalendarBooking 
+                      buttonText="Apply Now" 
+                      width="w-full" 
+                      textSize="text-sm"
+                      height="h-10"
+                    />
                   </div>
                 </div>
               </div>
@@ -532,26 +530,17 @@ const JobListings = () => {
                   <div>
                     <h3 className="text-2xl font-bold mb-4 text-foreground">How to Apply</h3>
                     <div className="text-muted-foreground leading-relaxed">
-                      {selectedJob.fullDescription.howToApply.split('contact@infrasity.com').map((part, index, array) => (
-                        <span key={index}>
-                          {part}
-                          {index < array.length - 1 && (
-                            <span className="text-purple-400 font-semibold text-lg">contact@infrasity.com</span>
-                          )}
-                        </span>
-                      ))}
+                      {selectedJob.fullDescription.howToApply}
                     </div>
                   </div>
                 )}
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-border">
-                  <a
-                    href={`mailto:contact@infrasity.com?subject=Job Application - ${selectedJob.title}&body=Hi, I'm interested in applying for the ${selectedJob.title} position. Please find my details below:`}
-                    className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl transition-colors duration-200 text-center"
-                  >
-                    Apply via Email
-                  </a>
+                  <CalendarBooking 
+                    buttonText="Apply Now" 
+                    width="w-52" 
+                  />
                   <button
                     onClick={closeModal}
                     className="px-8 py-4 border border-border rounded-xl font-semibold hover:bg-muted/50 transition-all duration-300"
