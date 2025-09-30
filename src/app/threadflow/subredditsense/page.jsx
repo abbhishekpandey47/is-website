@@ -12,6 +12,7 @@ import MentionsChart from '@/app/tools/reddit-tools/components/subredditsense/Me
 import MetricCard from '@/app/tools/reddit-tools/components/subredditsense/MetricCard';
 import SubredditHeatmap from '@/app/tools/reddit-tools/components/subredditsense/SubredditHeatmap';
 import TopThreadsTable from '@/app/tools/reddit-tools/components/subredditsense/TopThreadsTable';
+import AllThreadsTable from '@/app/threadflow/subredditsense/components/AllThreadsTable';
 import { getCache, setCache } from '@/lib/cacheClient';
 import { Eye, MessageSquare, TrendingUp, Users } from 'lucide-react';
 
@@ -277,7 +278,7 @@ export default function ThreadflowSubredditSensePage() {
 
   if (loading && !dashboard) return <div className="p-6">Loading...</div>;
   if (!firebaseUser) return <div className="p-6">Please sign in.</div>;
-
+  console.log("dashbaord is ",dashboard?.allThreads);
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b border-border bg-card">
@@ -414,12 +415,25 @@ export default function ThreadflowSubredditSensePage() {
                 priority: (t.upvotes + t.comments) > 10 ? 'high' : 'medium',
                 post_url: t.url
               }))} />
+               {/* Top Threads Leaderboard (use API-provided ranking) */}
+             <AllThreadsTable threads={(dashboard.allThreads || []).map((t,i)=>(
+              { id: i,
+                title: t.title,
+                type: t.type,  
+                subreddit: t.subreddit,
+                author: t.author || '',
+                upvotes: t.upvotes,
+                comments: t.comments || 0,
+                sentiment: t.upvotes > 0 ? 'positive' : (t.upvotes < 0 ? 'negative' : 'neutral'),
+                post_url: t.url
+              }))} />
           </div>
         )}
       </div>
     </div>
   );
 }
+
 
 // Retained legacy MetricCard styling; inline simple component removed in favor of imported MetricCard.
 

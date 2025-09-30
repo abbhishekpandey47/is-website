@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   try {
     let query = supabase
       .from('reddit_mentions')
-  .select('type, subreddit, upvotes, total_comments, created_utc, fetched_at, engagement_score, title, body, url')
+  .select('type, subreddit, upvotes,author,total_comments, created_utc, fetched_at, engagement_score, title, body, url')
       .eq('company_id', companyId);
     if (range !== 'all') {
       query = query.or(`created_utc.is.null,created_utc.gte.${since}`);
@@ -109,9 +109,11 @@ export default async function handler(req, res) {
       .slice(0,10)
       .map((p,i)=> ({
         id: i,
+        type: p.type,
         subreddit: p.subreddit,
         upvotes: p.upvotes||0,
         comments: p.total_comments||0,
+        author: p.author || '',
         engagement: (p.upvotes||0)+(p.total_comments||0),
         url: p.url,
         title: p.title || '(Untitled)'
@@ -128,6 +130,31 @@ export default async function handler(req, res) {
         phraseCounts[phrase].total_engagement += (m.upvotes||0) + (m.total_comments||0);
       }
     });
+
+    // All threads (posts only), sorted by effective date (created_utc fallback to fetched_at), newest first
+const parseTs = (s) => (s ? new Date(s).getTime() : 0);
+
+const allThreads = mentions
+  .map((p, i) => {
+    const ts = parseTs(p.created_utc) || parseTs(p.fetched_at);
+    return {
+      id: p.id || i,             
+      type: p.type,       // keep a stable id if you store one; fallback to index
+      subreddit: p.subreddit,
+      upvotes: p.upvotes || 0,
+      author: p.author || '',
+      comments: p.total_comments || 0,
+      engagement: (p.upvotes || 0) + (p.total_comments || 0),
+      url: p.url,
+      title: p.title || p.body?.substring(0,100) || '(No Title)',
+      created_utc: p.created_utc || null,
+      fetched_at: p.fetched_at || null,
+      _effective_ts: ts,                // temp for sorting; will be stripped below
+    };
+  })
+  .sort((a, b) => b._effective_ts - a._effective_ts)
+  .map(({ _effective_ts, ...rest }) => rest); // strip temp field
+
     const topicClusters = Object.values(phraseCounts)
       .filter(p=>p.mentions_count>=1) // lowered threshold so clusters appear for smaller datasets
       .sort((a,b)=> b.mentions_count - a.mentions_count)
@@ -170,6 +197,7 @@ export default async function handler(req, res) {
       heatmap,
       funnel,
       topThreads,
+      allThreads,
       topicClusters,
       lastIngestedAt: company?.last_ingested_at || null,
   meta: { firstDate, lastDate, spanDays, distinctDays: timeSeries.length },

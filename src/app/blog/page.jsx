@@ -118,9 +118,9 @@ const CardDiv = React.memo(({ card }) => (
           />
         </figure>
         <div className="py-0 pb-5">
-          <div className="text-[var(--blue)] bg-[#f5f4f7] rounded-full flex justify-center max-w-[100px] h-6 px-3 text-[12px] quicksand-semibold items-center">
-            <p className="text-black max-sm:text-xs">{card.category}</p>
-          </div>
+       <div className="inline-flex items-center justify-center bg-[#f5f4f7] rounded-full px-3 py-1 text-[12px] quicksand-semibold">
+  <p className="text-black max-sm:text-xs">{card.category}</p>
+</div>
         </div>
         <div className="text-white flex flex-col gap-4">
           <h2 className="card-title quicksand-bold">{card.title}</h2>
@@ -229,7 +229,7 @@ const BlogPage = () => {
   useEffect(() => {
     let currTabArr = [];
     if (activeTab === "allCategories") {
-      currTabArr = ["Informational", "Tutorials"];
+      currTabArr = ["Informational", "Tutorials" , "B2B SaaS- Content Marketing", "B2B SaaS Growth & GTM", "Reddit Marketing B2B SaaS", "Tech Video Marketing"];
     } else {
       currTabArr = [activeTab];
     }
