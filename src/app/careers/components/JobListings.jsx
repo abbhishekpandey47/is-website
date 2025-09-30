@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import CalendarBooking from "../../calendarButton";
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 const JobListings = () => {
@@ -98,6 +99,7 @@ const JobListings = () => {
           "Fast-paced, high-impact environment with real ownership"
         ],
         howToApply: "Send your CV and a short note on a GTM/sales engineering project you've led to careers@infrasity.com"
+
       }
     },
     {
@@ -373,6 +375,7 @@ const JobListings = () => {
                   </p>
 
                   {/* Apply Button */}
+
                   <div onClick={(e) => e.stopPropagation()}>
                     <CalendarBooking 
                       buttonText="Apply Now" 
@@ -380,6 +383,7 @@ const JobListings = () => {
                       textSize="text-sm"
                       height="h-10"
                     />
+
                   </div>
                 </div>
               </div>
@@ -530,7 +534,9 @@ const JobListings = () => {
                   <div>
                     <h3 className="text-2xl font-bold mb-4 text-foreground">How to Apply</h3>
                     <div className="text-muted-foreground leading-relaxed">
+
                       {selectedJob.fullDescription.howToApply}
+
                     </div>
                   </div>
                 )}
@@ -541,6 +547,7 @@ const JobListings = () => {
                     buttonText="Apply Now" 
                     width="w-52" 
                   />
+
                   <button
                     onClick={closeModal}
                     className="px-8 py-4 border border-border rounded-xl font-semibold hover:bg-muted/50 transition-all duration-300"

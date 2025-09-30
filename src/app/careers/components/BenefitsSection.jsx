@@ -67,6 +67,7 @@ const BenefitsSection = () => {
     return () => ctx.revert();
   }, []);
 
+
   const benefitCategories = [
     {
       title: "Compensation & Equity",
@@ -175,9 +176,11 @@ const BenefitsSection = () => {
     }
   ];
 
+
   return (
     <section ref={sectionRef} className="py-24">
       <div className="max-w-7xl mx-auto px-6">
+
         {/* Header */}
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-white">
@@ -254,6 +257,9 @@ const BenefitsSection = () => {
               engineering excellence and developer advocacy.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+          
+
               <a
                 href="#open-positions"
                 className="inline-flex items-center text-lg rounded-full bg-black px-8 py-4 text-white font-medium hover:bg-gray-900 transition"
@@ -264,6 +270,7 @@ const BenefitsSection = () => {
                 buttonText="Book a Free Consultation" 
                 width="w-52" 
               />
+
             </div>
           </div>
         </div>

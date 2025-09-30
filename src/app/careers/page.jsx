@@ -39,6 +39,7 @@ export default function CareersPage() {
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-0 mb-1"></div>
         <CompanyCulture />
       </div>
+
       
       <div
         style={{
