@@ -35,8 +35,7 @@ export default function CrmLayout({ children }) {
     if (!firebaseUser) return;
     const verifyUser = async () => {
       try {
-        const token = await firebaseUser.getIdToken();
-
+        const token = await firebaseUser.getIdToken(true);
         const res = await fetch("/api/authVerify", {
           method: "GET",
           headers: {
