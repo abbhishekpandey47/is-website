@@ -23,7 +23,6 @@ import { UserProfile } from "../../Components/UserProfile";
 import { HoverTextCell } from "./components/HoverTextCell";
 import Pagination from "./components/pagination";
 
-
 const PAGE_SIZE = 10;
 const PostsPage = () => {
   const router = useRouter();
