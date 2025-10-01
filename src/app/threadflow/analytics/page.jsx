@@ -261,9 +261,7 @@ const AnalyticsPage = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {/* {categoryPerformance.map((category, index) => ( */}
-                    {heatMap.map((category, index) => (
-
+                    {categoryPerformance.map((category, index) => (
                       <div key={index} className="flex items-center justify-between p-3 border border-border rounded-lg">
                         <div>
                           <p className="font-medium">{category.category}</p>
