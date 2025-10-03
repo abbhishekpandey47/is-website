@@ -70,7 +70,7 @@ export const DownloadPage = () => {
         setIsSubmitted(true);
         setTimeout(() => {
           const link = document.createElement('a');
-          link.href = "https://drive.google.com/uc?export=download&id=1bX9OsrZd2DltBL-p1aLhhUPIqwVW8au7";
+          link.href = "https://drive.google.com/uc?export=download&id=1HBGgOsb7I3zzJ7qanfZxbqsOneh5Zf4f";
           link.download = '';
           document.body.appendChild(link);
           link.click();
