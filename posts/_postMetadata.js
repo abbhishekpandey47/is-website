@@ -368,9 +368,6 @@ let postMetaData = [
       metaDescription: "Discover how we helped a B2B SaaS company achieve 5x growth with developer-focused content. This case study shares their journey and our winning strategies.",
        stats: [
     {
-//         Organic Traffic - 8x Growth (64 to 594 - +828.13%) 
-// Organic Keywords - 7x Growth (106 to 865 - +715.09%)
-// Organic Keywords in Top 10 - 3x Growth (12 to 39 - +290%)
       title: "Organic Traffic",
       value: "+828.13%",
       subtext: "(64 to 594 - 8x Growth)",
@@ -388,12 +385,6 @@ let postMetaData = [
       subtext: "(12 to 39 - 3x Growth)",
       valueClass: "text-xl md:text-4xl font-semibold",
     },
-    // {
-    //   title: "Keywords in Positions 1–10",
-    //   value: "+98%",
-    //   subtext: "in 12 months",
-    //   valueClass: "text-4xl md:text-5xl font-bold",
-    // },
   ],
   },
   {
@@ -1132,6 +1123,51 @@ let postMetaData = [
   authorId: "author0005",
   category: "Informational",
   metaDescription: "Discover the best AI & developer marketing agencies for B2B SaaS. Drive product adoption, community growth, and measurable results. Read now to learn more! "
+},
+   {
+  title: "How Infrasity Boosted Signups for a $23M Series A Cloud Startup Through Developer Marketing",
+  metatitle: "Infrasity Case Study: Boosted Signups for a $23M Cloud Startup",
+  slug: "case-study-series-a-cloud-developer-marketing",
+  description:"This case study explores how Infrasity helped a $23M Series A cloud startup drive user signups through developer marketing strategies. It highlights the importance of community engagement, problem-driven content, and providing actionable insights to technical audiences. Learn how value-first approaches can build trust with developers and effectively support growth without relying on traditional advertising.",
+  ogImage: "/PostImages/case-study-series-a-cloud-developer-marketing/0.webp",
+  publishedOn: "2025-10-03",
+  authorId: "author0005",
+  category: "Case Studies",
+  metaDescription:
+    "Discover how Infrasity drove signups for a $23M Series A cloud startup using developer-focused marketing strategies and community engagement. Read case study now",
+  stats: [
+    {
+      title: "Organic Traffic",
+      value: "+781%",
+      subtext: "(3.7K to 32.6K) ",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Organic Keywords",
+      value: "+182%",
+      subtext: "(446 to 1258)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Organic Keywords in Top 10",
+      value: "+521%",
+      subtext: "(29 to 180)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+      {
+      title: "Signups",
+      value: "+44.19%",
+      subtext: "(Aug to Sept,2025)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "LLM Traffic:",
+      value: "150 Users",
+      subtext: "(191 Sessions │ 508 Views)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+]
+    
 },
 
 ];
