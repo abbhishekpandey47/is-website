@@ -121,6 +121,8 @@ const ContentROICalculator = () => {
     timeSaved: 0,
     projectSavings: 0,
     roleContent: null,
+    shouldShowScalingWarning: false,
+    monthlyBudget: 0,
   });
 
   const handleInputChange = useCallback((field, value) => {
@@ -181,10 +183,11 @@ const ContentROICalculator = () => {
 
 
   const handleCalculate = useCallback(() => {
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
 
-    const { blogPosts, timeline, budget, domainExpertise, trafficGrowth } =
-      formValues;
+      const { blogPosts, timeline, budget, domainExpertise, trafficGrowth, role } =
+        formValues;
 
     const { hasCalculated } = results;
 
@@ -221,7 +224,7 @@ const ContentROICalculator = () => {
       monthsAgency = Math.ceil(targetAssets / 6); // 6 is the max capacity per month
       // Show as error if timeline doesn't comply, info if it does
       if (timeline < monthsAgency) {
-        handleOperation(
+      handleOperation(
           `For ${targetAssets} assets, we recommend a ${monthsAgency}-month timeline (6 assets/month max). This will deliver all ${targetAssets} assets over ${monthsAgency} months.`
         );
       } else {
@@ -312,6 +315,10 @@ const ContentROICalculator = () => {
     // Get role-based content
     const roleContent = getRoleBasedContent(role, annualSavings, paybackMonths, costReduction, outputPerMonth, timeSaved);
 
+    // Check for scaling capacity warning
+    const monthlyBudget = budget || 0;
+    const shouldShowScalingWarning = blogPosts > 20 || monthlyBudget > 10000;
+
     // Clear previous messages at the start
     if (error) {
       setError(null);
@@ -340,24 +347,31 @@ const ContentROICalculator = () => {
       setTrafficGrowthBlogPost(20);
     }
 
-    setTimeout(() => {
-      setResults({
-        inHouseCost: monthlyInHouseCost,
-        outsourcedCost: monthlyAgencyCost,
-        savings: monthlySavings,
-        savingsPercentage: monthlySavingsPercentage,
-        hasCalculated: true,
-        monthsInHouse: monthsInHouse,
-        monthsAgency: monthsAgency,
-        timeSaved: timeSaved,
-        projectSavings: valProjectSavings,
-        roleContent: roleContent,
-      });
-
-      // End loading animation
+        setTimeout(() => {
+          setResults({
+            inHouseCost: monthlyInHouseCost,
+            outsourcedCost: monthlyAgencyCost,
+            savings: monthlySavings,
+            savingsPercentage: monthlySavingsPercentage,
+            hasCalculated: true,
+            monthsInHouse: monthsInHouse,
+            monthsAgency: monthsAgency,
+            timeSaved: timeSaved,
+            projectSavings: valProjectSavings,
+            roleContent: roleContent,
+            shouldShowScalingWarning: shouldShowScalingWarning,
+            monthlyBudget: monthlyBudget,
+          });
+    
+          // End loading animation
+          setIsLoading(false);
+        }, 1000);
+    } catch (error) {
+      console.error("Error in handleCalculate:", error);
       setIsLoading(false);
-    }, 1000);
-  }, [formValues]);
+      handleOperation("An error occurred during calculation. Please try again.");
+    }
+  }, [formValues.budget, formValues.blogPosts, formValues.timeline, formValues.domainExpertise, formValues.trafficGrowth, formValues.role]);
 
   const {
     budget,
@@ -379,6 +393,8 @@ const ContentROICalculator = () => {
     timeSaved,
     projectSavings,
     roleContent,
+    shouldShowScalingWarning,
+    monthlyBudget,
   } = results;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -510,7 +526,7 @@ const ContentROICalculator = () => {
   const showTooltip = isVisible || isHovered;
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-6 font-sans mb-24">
+    <div className="w-full max-w-6xl mx-auto p-6 font-sans mb-24" suppressHydrationWarning>
       <div>
         <div className="w-full rounded-2xl p-6 bg-white/5 border border-white/10 shadow-xl text-white">
           <div className={`flex ${isMobile ? "flex-col" : "flex-row"} gap-8`}>
@@ -632,7 +648,7 @@ const ContentROICalculator = () => {
                   <label className="block text-gray-300 mb-2">
                     Blog posts per month
                     <TooltipIcon
-                      description="Number of blog articles you expect to publish each month."
+                      description="Most high-output teams publish 8–20/mo for steady traffic growth."
                       width="390px"
                     />
                   </label>
@@ -641,7 +657,7 @@ const ContentROICalculator = () => {
                   <input
                     type="range"
                     min="1"
-                    max="50"
+                    max="20"
                     value={blogPosts}
                     onChange={(e) => {
                       handleInputChange("blogPosts", parseInt(e.target.value));
@@ -714,7 +730,7 @@ const ContentROICalculator = () => {
                   >
                     <span className="text-md text-white">
                       {selectedOptionTraffic?.label}
-                    </span>
+                  </span>
                     <div className="flex items-center">
                       <svg
                         className="w-5 h-5 text-gray-400"
@@ -1087,7 +1103,7 @@ const ContentROICalculator = () => {
                       {/* Annual Savings */}
                       <div className="bg-gray-800/60 rounded-2xl p-5 border border-white/10 hover:border-blue-500/30 transition-all duration-300">
                         <div className="text-2xl font-bold text-blue-400 mb-1">
-                          ${(savings * 12).toLocaleString()}
+                          ${(results.savings * 12).toLocaleString()}
                         </div>
                         <div className="text-gray-300 text-md">
                           Annual Savings
@@ -1096,7 +1112,12 @@ const ContentROICalculator = () => {
 
                       <div className="bg-gray-800/60 rounded-2xl p-5 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
                         <div className="text-2xl font-bold text-cyan-400 mb-1">
-                          {Math.round((outsourcedCost / timelineInMonth) / (savings / timelineInMonth) * 10) / 10} {Math.round((outsourcedCost / timelineInMonth) / (savings / timelineInMonth) * 10) / 10 === 1 ? 'month' : 'months'}
+                          {(() => {
+                            const paybackMonths = (outsourcedCost / timelineInMonth) / (savings / timelineInMonth);
+                            const boundedPayback = Math.max(0.5, Math.min(paybackMonths, 24)); // Cap at 24 months max
+                            const roundedPayback = Math.round(boundedPayback * 10) / 10;
+                            return `${roundedPayback} ${roundedPayback === 1 ? 'month' : 'months'}`;
+                          })()}
                         </div>
                         <div className="text-gray-300 text-md" title="Financial break-even (not delivery time)">Payback Period</div>
                       </div>
@@ -1106,15 +1127,31 @@ const ContentROICalculator = () => {
                   {/* Summary Section */}
                   <div className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-xl p-6">
                     <h3 className="text-xl font-bold text-white mb-4 text-center">
-                      Project Summary
+                      ROI Impact
                     </h3>
                     <div className="text-center text-gray-200 text-lg">
                       {roleContent?.projectSummary || `For ${blogPosts} assets: In-house ≈ ${monthsInHouse} ${monthsInHouse === 1 ? 'month' : 'months'} ($${(monthsInHouse * 6500 / 1000).toFixed(1)}k) vs Infrasity ≈ ${monthsAgency} ${monthsAgency === 1 ? 'month' : 'months'} ($${(blogPosts * (domainExpertise ? 540 : 495) / 1000).toFixed(1)}k). Save ≈ $${(projectSavings / 1000).toFixed(0)}k and ~${timeSaved} ${timeSaved === 1 ? 'month' : 'months'}.`}
                     </div>
                   </div>
 
-                  {/* Capacity Guard - Show when posts > 6 */}
-                  {blogPosts > 6 && (
+                  {/* Scaling Capacity Warning - Show when posts > 20 or budget > $10k */}
+                  {shouldShowScalingWarning && (
+                    <div className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border border-orange-500/30 rounded-xl p-4 mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 bg-orange-500/20 rounded-full flex items-center justify-center">
+                          <svg className="w-4 h-4 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div className="text-orange-200 text-sm">
+                          <span className="font-semibold">Scaling Capacity Reached:</span> Your current inputs ({blogPosts} posts/month, ${monthlyBudget.toLocaleString()} budget) exceed what a single pod can sustainably deliver. Most teams produce 6–20 technical blogs/month for consistent growth. To deliver this faster, we can deploy multiple pods — talk to us about scaling options.
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Capacity Guard - Show when posts > 6 but <= 20 */}
+                  {blogPosts > 6 && blogPosts <= 20 && !shouldShowScalingWarning && (
                     <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-xl p-4 mb-4">
                       <div className="flex items-center gap-3">
                         <div className="w-6 h-6 bg-purple-500/20 rounded-full flex items-center justify-center">
@@ -1205,17 +1242,17 @@ const ContentROICalculator = () => {
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <div>
                       <p className="text-[12px] text-gray-300">
-                        Note: To achieve {trafficGrowth.toLowerCase()} traffic growth, aim for{" "}
-                        {trafficGrowthBlogPost} high-quality blog
-                        posts each month.
+                        <strong>Campaign Impact:</strong> With {blogPosts} posts/month, you'll generate{" "}
+                        {Math.round(blogPosts * 12)} high-quality assets annually for your{" "}
+                        {trafficGrowth.toLowerCase()} growth campaigns.
                       </p>
 
                       <p className="text-center">
-                        Start saving{" "}
-                        <span className="font-bold">
+                        <strong>Monthly Impact:</strong> Save{" "}
+                        <span className="font-bold text-green-400">
                           ${(inHouseCost - outsourcedCost).toLocaleString()}
                         </span>{" "}
-                        every month
+                        monthly while scaling content velocity
                       </p>
 
 

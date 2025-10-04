@@ -74,6 +74,7 @@ export function ClientLayoutWrapper({ children }) {
         defaultTheme="dark"
         enableSystem
         disableTransitionOnChange
+        suppressHydrationWarning
       >
         <Appwrap>
           <AntdRegistry>
