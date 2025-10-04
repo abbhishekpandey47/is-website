@@ -940,8 +940,8 @@ const ContentROICalculator = () => {
                     </div>
                   </div>
 
-                  {/* Capacity Warning/Info */}
-                  {blogPosts > 5 && (
+                  {/* Capacity Warning/Info - Only show when there's an actual issue */}
+                  {blogPosts > 5 && timeline !== Math.ceil(blogPosts / 6) && (
                     <div className={`rounded-xl p-4 ${timeline < Math.ceil(blogPosts / 6) ? 'bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-500/30' : 'bg-gradient-to-r from-blue-900/20 to-cyan-900/20 border border-blue-500/30'}`}>
                       <div className="flex items-center gap-3">
                         <div className={`w-6 h-6 rounded-full flex items-center justify-center ${timeline < Math.ceil(blogPosts / 6) ? 'bg-yellow-500/20' : 'bg-blue-500/20'}`}>
