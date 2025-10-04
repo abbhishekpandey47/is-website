@@ -222,16 +222,13 @@ const ContentROICalculator = () => {
     // Calculate recommended timeline if assets exceed monthly capacity
     if (targetAssets > 6) {
       monthsAgency = Math.ceil(targetAssets / 6); // 6 is the max capacity per month
-      // Show as error if timeline doesn't comply, info if it does
-      if (timeline < monthsAgency) {
-      handleOperation(
-          `For ${targetAssets} assets, we recommend a ${monthsAgency}-month timeline (6 assets/month max). This will deliver all ${targetAssets} assets over ${monthsAgency} months.`
-        );
-      } else {
-        handleInfo(
+      // Only show warning if timeline doesn't comply AND it's not a high volume case
+      if (timeline < monthsAgency && targetAssets <= 20) {
+        handleOperation(
           `For ${targetAssets} assets, we recommend a ${monthsAgency}-month timeline (6 assets/month max). This will deliver all ${targetAssets} assets over ${monthsAgency} months.`
         );
       }
+      // For high volume cases (6-20 assets), let the High Volume banner handle the messaging
     }
 
     // Calculate costs for scope mode (for project summary)
@@ -1074,9 +1071,7 @@ const ContentROICalculator = () => {
                         </span>
                         <span className="font-bold text-white text-md">
                           $
-                          {Math.round(
-                            outsourcedCost / timelineInMonth
-                          ).toLocaleString()}
+                          {Math.round(outsourcedCost).toLocaleString()}
                           /mo
                         </span>
                       </div>
@@ -1113,7 +1108,7 @@ const ContentROICalculator = () => {
                       <div className="bg-gray-800/60 rounded-2xl p-5 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
                         <div className="text-2xl font-bold text-cyan-400 mb-1">
                           {(() => {
-                            const paybackMonths = (outsourcedCost / timelineInMonth) / (savings / timelineInMonth);
+                            const paybackMonths = outsourcedCost / savings;
                             const boundedPayback = Math.max(0.5, Math.min(paybackMonths, 24)); // Cap at 24 months max
                             const roundedPayback = Math.round(boundedPayback * 10) / 10;
                             return `${roundedPayback} ${roundedPayback === 1 ? 'month' : 'months'}`;
