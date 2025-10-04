@@ -43,6 +43,7 @@ const ContentROICalculator = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState(null);
+  const [info, setInfo] = useState(null);
   const [blogPerPost, setBlogPerPost] = useState(0);
   const [blogPerPostQunt, setblogPerPostQunt] = useState(0);
   const [timelineInMonth, setTimelineInMonth] = useState(0);
@@ -112,6 +113,10 @@ const ContentROICalculator = () => {
     savings: 0,
     savingsPercentage: 0,
     hasCalculated: false,
+    monthsInHouse: 0,
+    monthsAgency: 0,
+    timeSaved: 0,
+    projectSavings: 0,
   });
 
   const handleInputChange = useCallback((field, value) => {
@@ -130,6 +135,10 @@ const ContentROICalculator = () => {
 
   const handleOperation = (msg) => {
     setError(msg);
+  };
+
+  const handleInfo = (msg) => {
+    setInfo(msg);
   };
 
   const handlePostChange = (domainExpertis, valueOfBlogePost) => {
@@ -192,44 +201,65 @@ const ContentROICalculator = () => {
       return;
     }
 
-    setblogPerPostQunt(blogPosts);
-    const currValueOutSource = domainExpertise ? 540 : 495;
-    setBlogPerPost(currValueOutSource);
-    const valOutsourcedCost = blogPosts * currValueOutSource * timeline;
+    // Scope-based calculation model
+    const targetAssets = blogPosts;
+    const inHouseMonthlyCost = 6500;
+    const inHouseCapacity = 2.5; // midpoint of 2-3 assets/month
+    const agencyPricePerAsset = domainExpertise ? 540 : 495;
+    const agencyCapacity = 6; // max capacity per month
 
-    if (blogPosts * currValueOutSource > budget) {
-      const valYouneed = Math.round(budget / currValueOutSource);
-      handleOperation(
-        `This setup isn't feasible — your budget can't support ${blogPosts} blogs/month. ${valYouneed <= blogPosts
-          ? `Consider reducing output to ${valYouneed} blogs/month, or increase your budget by $${valOutsourcedCost - budget
-          }.`
-          : `Increase your budget by $${valOutsourcedCost - budget}.`
-        }`
-      );
-
-      setIsLoading(false);
-
-      //setRequiredBudget(budget - valOutsourcedCost)
-
-      if (hasCalculated) {
-        handleOutput();
+    // Calculate months needed
+    const monthsInHouse = Math.ceil(targetAssets / inHouseCapacity);
+    let monthsAgency = Math.ceil(targetAssets / agencyCapacity);
+    
+    // Calculate recommended timeline if assets exceed monthly capacity
+    if (targetAssets > 6) {
+      monthsAgency = Math.ceil(targetAssets / 6); // 6 is the max capacity per month
+      // Show as error if timeline doesn't comply, info if it does
+      if (timeline < monthsAgency) {
+        handleOperation(
+          `For ${targetAssets} assets, we recommend a ${monthsAgency}-month timeline (6 assets/month max). This will deliver all ${targetAssets} assets over ${monthsAgency} months.`
+        );
+      } else {
+        handleInfo(
+          `For ${targetAssets} assets, we recommend a ${monthsAgency}-month timeline (6 assets/month max). This will deliver all ${targetAssets} assets over ${monthsAgency} months.`
+        );
       }
-
-      return;
     }
 
+    // Calculate costs for scope mode (for project summary)
+    const valInHouseCost = monthsInHouse * inHouseMonthlyCost;
+    const valOutsourcedCost = targetAssets * agencyPricePerAsset;
+    const valProjectSavings = valInHouseCost - valOutsourcedCost;
+
+    // Calculate monthly mode costs (for main ROI card)
+    const monthlyInHouseCost = inHouseMonthlyCost; // $6,500
+    // Monthly agency cost = min(assets per month, capacity) × price per asset
+    const assetsPerMonth = Math.min(targetAssets / monthsAgency, agencyCapacity);
+    const monthlyAgencyCost = assetsPerMonth * agencyPricePerAsset;
+    const monthlySavings = monthlyInHouseCost - monthlyAgencyCost;
+    const monthlySavingsPercentage = Math.round((monthlySavings / monthlyInHouseCost) * 100);
+
+    // Calculate time saved
+    const timeSaved = monthsInHouse - monthsAgency;
+
+    // Clear previous messages at the start
     if (error) {
       setError(null);
     }
+    if (info) {
+      setInfo(null);
+    }
+
+    setblogPerPostQunt(targetAssets);
+    setBlogPerPost(agencyPricePerAsset);
+    setTimelineInMonth(monthsAgency);
 
     if (domainExpertise) {
       setDomainExpertisResult(true);
     } else {
       setDomainExpertisResult(false);
     }
-
-    let valInHouseCost = timeline * 6500;
-    setTimelineInMonth(timeline);
 
     if (trafficGrowth === "Immediately") {
       setTrafficGrowthBlogPost(10);
@@ -241,18 +271,17 @@ const ContentROICalculator = () => {
       setTrafficGrowthBlogPost(20);
     }
 
-    const valSavings = valInHouseCost - valOutsourcedCost;
-    const valSavingsPercentage = Math.round(
-      (valSavings / valInHouseCost) * 100
-    );
-
     setTimeout(() => {
       setResults({
-        inHouseCost: valInHouseCost,
-        outsourcedCost: valOutsourcedCost,
-        savings: valSavings,
-        savingsPercentage: valSavingsPercentage,
+        inHouseCost: monthlyInHouseCost,
+        outsourcedCost: monthlyAgencyCost,
+        savings: monthlySavings,
+        savingsPercentage: monthlySavingsPercentage,
         hasCalculated: true,
+        monthsInHouse: monthsInHouse,
+        monthsAgency: monthsAgency,
+        timeSaved: timeSaved,
+        projectSavings: valProjectSavings,
       });
 
       // End loading animation
@@ -274,6 +303,10 @@ const ContentROICalculator = () => {
     savings,
     savingsPercentage,
     hasCalculated,
+    monthsInHouse,
+    monthsAgency,
+    timeSaved,
+    projectSavings,
   } = results;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -460,8 +493,8 @@ const ContentROICalculator = () => {
                   <label className="block text-gray-300">
                     Domain expertise required?
                     <TooltipIcon
-                      description="Specify if the content needs specialized industry knowledge or experience."
-                      width="330px"
+                      description="K8s, IAM, SDK docs, etc."
+                      width="200px"
                     />
                   </label>
                   <div className="relative inline-block w-12 h-6">
@@ -784,6 +817,15 @@ const ContentROICalculator = () => {
                   {error}
                 </div>
               )}
+              
+              {info && (
+                <div className="mt-2 text-blue-400 text-sm flex items-center">
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                  {info}
+                </div>
+              )}
             </div>
 
             <div className="w-px min-h-full bg-gray-600"></div>
@@ -881,12 +923,51 @@ const ContentROICalculator = () => {
 
                       <div className="bg-gray-800/60 rounded-2xl p-5 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
                         <div className="text-2xl font-bold text-cyan-400 mb-1">
-                          {Math.round(((savings * 36) / (outsourcedCost / timelineInMonth * 36)) * 100)}%
+                          {Math.round((outsourcedCost / timelineInMonth) / (savings / timelineInMonth) * 10) / 10} {Math.round((outsourcedCost / timelineInMonth) / (savings / timelineInMonth) * 10) / 10 === 1 ? 'month' : 'months'}
                         </div>
-                        <div className="text-gray-300 text-md">3-Year ROI</div>
+                        <div className="text-gray-300 text-md">Payback Period</div>
                       </div>
                     </div>
                   </div>
+
+                  {/* Summary Section */}
+                  <div className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-xl p-6">
+                    <h3 className="text-xl font-bold text-white mb-4 text-center">
+                      Project Summary
+                    </h3>
+                    <div className="text-center text-gray-200 text-lg">
+                      For <span className="font-bold text-blue-400">{blogPosts} assets</span>: In-house ≈ <span className="font-bold text-orange-400">{monthsInHouse} months</span> (<span className="font-bold text-orange-400">${(monthsInHouse * 6500 / 1000).toFixed(1)}k</span>) vs Infrasity ≈ <span className="font-bold text-green-400">{monthsAgency} months</span> (<span className="font-bold text-green-400">${(blogPosts * (domainExpertise ? 540 : 495) / 1000).toFixed(1)}k</span>). Save ≈ <span className="font-bold text-cyan-400">${(projectSavings / 1000).toFixed(0)}k</span> and ~<span className="font-bold text-cyan-400">{timeSaved} months</span>.
+                    </div>
+                  </div>
+
+                  {/* Capacity Warning/Info */}
+                  {blogPosts > 5 && (
+                    <div className={`rounded-xl p-4 ${timeline < Math.ceil(blogPosts / 6) ? 'bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-500/30' : 'bg-gradient-to-r from-blue-900/20 to-cyan-900/20 border border-blue-500/30'}`}>
+                      <div className="flex items-center gap-3">
+                        <div className={`w-6 h-6 rounded-full flex items-center justify-center ${timeline < Math.ceil(blogPosts / 6) ? 'bg-yellow-500/20' : 'bg-blue-500/20'}`}>
+                          <svg className={`w-4 h-4 ${timeline < Math.ceil(blogPosts / 6) ? 'text-yellow-400' : 'text-blue-400'}`} fill="currentColor" viewBox="0 0 20 20">
+                            {timeline < Math.ceil(blogPosts / 6) ? (
+                              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                            ) : (
+                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                            )}
+                          </svg>
+                        </div>
+                        <div className={`text-sm ${timeline < Math.ceil(blogPosts / 6) ? 'text-yellow-200' : 'text-blue-200'}`}>
+                          {timeline < Math.ceil(blogPosts / 6) ? (
+                            <>
+                              <span className="font-semibold">Capacity Warning:</span> For {blogPosts} assets, we recommend a {Math.ceil(blogPosts / 6)}-month timeline (6 assets/month max). This will deliver all {blogPosts} assets over {Math.ceil(blogPosts / 6)} months.
+                            </>
+                          ) : (
+                            <>
+                              <span className="font-semibold">Timeline Info:</span> For {blogPosts} assets, we recommend a {Math.ceil(blogPosts / 6)}-month timeline (6 assets/month max). This will deliver all {blogPosts} assets over {Math.ceil(blogPosts / 6)} months.
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <div className="grid grid-cols-3 pb-3 mb-3">
                       <h3 className="text-xl font-bold">Time to Value</h3>
@@ -899,22 +980,22 @@ const ContentROICalculator = () => {
                     </div>
 
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
-                      <span className="col-span-1">Time to First Output</span>
+                      <span className="col-span-1">Time to Complete</span>
                       <span className="col-span-1 text-center">
-                        4-6 weeks
+                        {monthsInHouse} months
                       </span>
                       <span className="col-span-1 text-center">
-                        1-2 weeks
+                        {monthsAgency} months
                       </span>
                     </div>
 
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Output Per Month</span>
                       <span className="col-span-1 text-center">
-                        {Math.floor(blogPerPostQunt / 2) + 1} assets
+                        {Math.ceil(blogPerPostQunt / monthsInHouse)} assets
                       </span>
                       <span className="col-span-1 text-center">
-                        {blogPerPostQunt} assets
+                        {Math.ceil(blogPerPostQunt / monthsAgency)} assets
                       </span>
                     </div>
 
@@ -930,8 +1011,8 @@ const ContentROICalculator = () => {
 
                     <p className="mt-4 text-blue-400">
                       You get content{" "}
-                      <span className="mt-4 text-blue-400">4 </span>x
-                      faster and save weeks of ramp-up.
+                      <span className="mt-4 text-blue-400">{Math.round(monthsInHouse / monthsAgency * 10) / 10}x </span>
+                      faster and save <span className="font-bold">{timeSaved} months</span> of ramp-up.
                     </p>
                   </div>
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
