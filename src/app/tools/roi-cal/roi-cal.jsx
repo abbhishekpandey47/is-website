@@ -60,6 +60,7 @@ const ContentROICalculator = () => {
       contentTeam,
       domainExpertise,
       timeline,
+      role,
     } = formValues;
 
     if (!email) {
@@ -76,6 +77,7 @@ const ContentROICalculator = () => {
         contentTeam: contentTeam || "No",
         domainExpertise: domainExpertise || "False",
         timeline: timeline || "",
+        role: role || "founder",
         submittedAt: new Date().toISOString(),
       };
 
@@ -105,6 +107,7 @@ const ContentROICalculator = () => {
     contentTeam: "No",
     domainExpertise: false,
     timeline: 1,
+    role: "founder",
   });
 
   const [results, setResults] = useState({
@@ -117,6 +120,7 @@ const ContentROICalculator = () => {
     monthsAgency: 0,
     timeSaved: 0,
     projectSavings: 0,
+    roleContent: null,
   });
 
   const handleInputChange = useCallback((field, value) => {
@@ -243,6 +247,71 @@ const ContentROICalculator = () => {
     // Calculate time saved
     const timeSaved = monthsInHouse - monthsAgency;
 
+    // Calculate values for role-based content
+    const annualSavings = monthlySavings * 12;
+    const paybackMonths = (monthlyAgencyCost / monthlySavings);
+    const costReduction = monthlySavingsPercentage;
+    const outputPerMonth = Math.round(assetsPerMonth);
+
+    // Role-based content customization
+    const getRoleBasedContent = (role, annualSavings, paybackMonths, costReduction, outputPerMonth, timeSaved) => {
+      const pipelineBoost = Math.round(timeSaved * 15); // 15% per month saved
+      
+      switch (role) {
+        case "founder":
+          return {
+            summaryTitle: "Extend your runway, not your headcount.",
+            projectSummary: `By outsourcing technical content to Infrasity, you save $${annualSavings.toLocaleString()} annually and recover your spend in ${paybackMonths.toFixed(1)} months. That's ${timeSaved} extra months of product runway and less operational drag on your engineering team.`,
+            ctaLabel: "Model your team's savings →",
+            ctaTooltip: "See how much runway you recover with Infrasity.",
+            footerLine: "This ROI helps you compound faster — redirect those savings into engineering or GTM acceleration."
+          };
+        case "marketing":
+          return {
+            summaryTitle: "Predictable content velocity without scaling headcount.",
+            projectSummary: `Cut costs by ${costReduction}% and double throughput to ${outputPerMonth} assets/mo — consistent, high-quality content for every campaign. You save ~$${(annualSavings/1000).toFixed(0)}k/year and eliminate hiring overhead.`,
+            ctaLabel: "Export this for your Q4 budget review →",
+            ctaTooltip: "Show this ROI in your next marketing plan.",
+            footerLine: "Predictable throughput, fixed costs, and no hiring lag — perfect for your next quarterly plan."
+          };
+        case "growth":
+          return {
+            summaryTitle: "Turn time saved into growth velocity.",
+            projectSummary: `${timeSaved} months faster output = ${timeSaved} months of compounding SEO and trial growth. Expect ~${pipelineBoost}% higher pipeline velocity with faster publication and higher technical depth.`,
+            ctaLabel: "See impact on growth velocity →",
+            ctaTooltip: "View how faster content cycles accelerate signups.",
+            footerLine: "Each extra month saved compounds — more demos, more traffic, faster iteration."
+          };
+        case "content":
+          return {
+            summaryTitle: "Scale content quality without scaling team complexity.",
+            projectSummary: `Maintain high technical standards while ${costReduction}% cost reduction and ${outputPerMonth} assets/mo output. Focus on strategy while we handle execution.`,
+            ctaLabel: "Plan your content calendar →",
+            ctaTooltip: "See how this fits into your content strategy.",
+            footerLine: "Consistent quality, predictable delivery, more time for content strategy."
+          };
+        case "seo":
+          return {
+            summaryTitle: "Accelerate SEO results with technical depth.",
+            projectSummary: `${timeSaved} months faster publication = ${timeSaved} months of SEO compounding advantage. Higher technical depth improves rankings and organic traffic growth.`,
+            ctaLabel: "Project SEO impact →",
+            ctaTooltip: "See how faster, deeper content affects rankings.",
+            footerLine: "Technical depth + faster publication = stronger SEO foundation."
+          };
+        default:
+          return {
+            summaryTitle: "Optimize your content production.",
+            projectSummary: `Save $${annualSavings.toLocaleString()} annually with ${costReduction}% cost reduction and ${outputPerMonth} assets/mo output.`,
+            ctaLabel: "Get started →",
+            ctaTooltip: "Start optimizing your content production.",
+            footerLine: "Efficient content production with consistent quality."
+          };
+      }
+    };
+
+    // Get role-based content
+    const roleContent = getRoleBasedContent(role, annualSavings, paybackMonths, costReduction, outputPerMonth, timeSaved);
+
     // Clear previous messages at the start
     if (error) {
       setError(null);
@@ -282,6 +351,7 @@ const ContentROICalculator = () => {
         monthsAgency: monthsAgency,
         timeSaved: timeSaved,
         projectSavings: valProjectSavings,
+        roleContent: roleContent,
       });
 
       // End loading animation
@@ -296,6 +366,7 @@ const ContentROICalculator = () => {
     contentTeam,
     domainExpertise,
     timeline,
+    role,
   } = formValues;
   const {
     inHouseCost,
@@ -307,9 +378,19 @@ const ContentROICalculator = () => {
     monthsAgency,
     timeSaved,
     projectSavings,
+    roleContent,
   } = results;
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenRole, setIsOpenRole] = useState(false);
+
+  const roleOptions = [
+    { value: "founder", label: "Founder" },
+    { value: "marketing", label: "Marketing" },
+    { value: "growth", label: "Growth" },
+    { value: "content", label: "Content" },
+    { value: "seo", label: "SEO" },
+  ];
 
   const options = [
     { value: 1, label: "1 month" },
@@ -363,6 +444,13 @@ const ContentROICalculator = () => {
     setIsOpenTraffic(false);
   };
 
+  const toggleDropdownRole = () => setIsOpenRole(!isOpenRole);
+
+  const handleRoleSelect = (option) => {
+    handleInputChange("role", option.value);
+    setIsOpenRole(false);
+  };
+
   const selectedOptionContent = optionsContent.find(
     (option) => option.value === contentTeam
   );
@@ -371,9 +459,14 @@ const ContentROICalculator = () => {
     (option) => option.value === trafficGrowth
   );
 
+  const selectedOptionRole = roleOptions.find(
+    (option) => option.value === role
+  );
+
   const dropdownRef = useRef(null);
   const dropdownRefContent = useRef(null);
   const dropdownRefTraffic = useRef(null);
+  const dropdownRefRole = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -391,6 +484,9 @@ const ContentROICalculator = () => {
         !dropdownRefTraffic.current.contains(event.target)
       ) {
         setIsOpenTraffic(false);
+      }
+      if (dropdownRefRole.current && !dropdownRefRole.current.contains(event.target)) {
+        setIsOpenRole(false);
       }
     }
 
@@ -428,8 +524,9 @@ const ContentROICalculator = () => {
                 <div className="relative inline-block">
                   <label className="block text-gray-300 mb-2">
                     Monthly content budget
+                    <span className="text-gray-500 text-sm ml-1">(reference only, not used in calculations)</span>
                     <TooltipIcon
-                      description="Estimated amount you want to spend on content per month."
+                      description="Estimated amount you want to spend on content per month. This is for reference only - calculations are based on the number of blog posts selected below."
                       width="400px"
                     />
                   </label>
@@ -453,6 +550,81 @@ const ContentROICalculator = () => {
                     Budget must be at least $495.
                   </div>
                 )}
+              </div>
+
+              {/* Role Dropdown */}
+              <div className="mb-5 group">
+                <label className="block text-gray-300 mb-2">
+                  Your Role
+                  <TooltipIcon
+                    description="Select your role to help us understand your perspective and needs."
+                    width="300px"
+                  />
+                </label>
+                <div ref={dropdownRefRole} className="relative">
+                  <button
+                    onClick={toggleDropdownRole}
+                    className="w-full px-4 py-3 bg-gray-800/50 rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
+                  >
+                    <span className="text-md text-white">
+                      {selectedOptionRole?.label}
+                    </span>
+                    <div className="flex items-center">
+                      <svg
+                        className="w-5 h-5 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+                  {isOpenRole && (
+                    <ul className="absolute z-10 w-full mt-1 bg-gray-800 border border-gray-700 rounded-lg shadow-lg max-h-60 overflow-auto">
+                      {roleOptions.map((option) => (
+                        <li key={option.value}>
+                          <div
+                            onClick={() => handleRoleSelect(option)}
+                            className="px-4 py-3 cursor-pointer hover:bg-gray-700 flex justify-between items-center"
+                          >
+                            <span
+                              className={
+                                role === option.value
+                                  ? "text-white font-medium"
+                                  : "text-gray-300"
+                              }
+                            >
+                              {option.label}
+                            </span>
+                            {role === option.value && (
+                              <div className="w-4 h-4 ml-2 rounded-full bg-black flex items-center justify-center">
+                                <svg
+                                  className="w-3 h-3 text-gray-400"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2.5"
+                                    d="M5 12l5 5L20 7"
+                                  />
+                                </svg>
+                              </div>
+                            )}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               </div>
 
               <div className="mb-5 group">
@@ -778,6 +950,7 @@ const ContentROICalculator = () => {
                 </div>
               </div>
 
+
               <button
                 onClick={handleCalculate}
                 disabled={isLoading}
@@ -858,7 +1031,7 @@ const ContentROICalculator = () => {
                         </svg>
                       </div>
                       <h3 className="text-xl font-bold text-white">
-                        ROI Analysis
+                        {roleContent?.summaryTitle || "ROI Analysis"}
                       </h3>
                     </div>
 
@@ -925,7 +1098,7 @@ const ContentROICalculator = () => {
                         <div className="text-2xl font-bold text-cyan-400 mb-1">
                           {Math.round((outsourcedCost / timelineInMonth) / (savings / timelineInMonth) * 10) / 10} {Math.round((outsourcedCost / timelineInMonth) / (savings / timelineInMonth) * 10) / 10 === 1 ? 'month' : 'months'}
                         </div>
-                        <div className="text-gray-300 text-md">Payback Period</div>
+                        <div className="text-gray-300 text-md" title="Financial break-even (not delivery time)">Payback Period</div>
                       </div>
                     </div>
                   </div>
@@ -936,9 +1109,25 @@ const ContentROICalculator = () => {
                       Project Summary
                     </h3>
                     <div className="text-center text-gray-200 text-lg">
-                      For <span className="font-bold text-blue-400">{blogPosts} assets</span>: In-house ≈ <span className="font-bold text-orange-400">{monthsInHouse} months</span> (<span className="font-bold text-orange-400">${(monthsInHouse * 6500 / 1000).toFixed(1)}k</span>) vs Infrasity ≈ <span className="font-bold text-green-400">{monthsAgency} months</span> (<span className="font-bold text-green-400">${(blogPosts * (domainExpertise ? 540 : 495) / 1000).toFixed(1)}k</span>). Save ≈ <span className="font-bold text-cyan-400">${(projectSavings / 1000).toFixed(0)}k</span> and ~<span className="font-bold text-cyan-400">{timeSaved} months</span>.
+                      {roleContent?.projectSummary || `For ${blogPosts} assets: In-house ≈ ${monthsInHouse} ${monthsInHouse === 1 ? 'month' : 'months'} ($${(monthsInHouse * 6500 / 1000).toFixed(1)}k) vs Infrasity ≈ ${monthsAgency} ${monthsAgency === 1 ? 'month' : 'months'} ($${(blogPosts * (domainExpertise ? 540 : 495) / 1000).toFixed(1)}k). Save ≈ $${(projectSavings / 1000).toFixed(0)}k and ~${timeSaved} ${timeSaved === 1 ? 'month' : 'months'}.`}
                     </div>
                   </div>
+
+                  {/* Capacity Guard - Show when posts > 6 */}
+                  {blogPosts > 6 && (
+                    <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-xl p-4 mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 bg-purple-500/20 rounded-full flex items-center justify-center">
+                          <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div className="text-purple-200 text-sm">
+                          <span className="font-semibold">High Volume:</span> For {blogPosts} assets, we can deploy parallel pods to deliver faster. Contact us to discuss scaling options.
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Capacity Warning/Info - Only show when there's an actual issue */}
                   {blogPosts > 5 && timeline !== Math.ceil(blogPosts / 6) && (
@@ -982,10 +1171,10 @@ const ContentROICalculator = () => {
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Time to Complete</span>
                       <span className="col-span-1 text-center">
-                        {monthsInHouse} months
+                        {monthsInHouse} {monthsInHouse === 1 ? 'month' : 'months'}
                       </span>
                       <span className="col-span-1 text-center">
-                        {monthsAgency} months
+                        {monthsAgency} {monthsAgency === 1 ? 'month' : 'months'}
                       </span>
                     </div>
 
@@ -1010,9 +1199,7 @@ const ContentROICalculator = () => {
                     </div>
 
                     <p className="mt-4 text-blue-400">
-                      You get content{" "}
-                      <span className="mt-4 text-blue-400">{Math.round(monthsInHouse / monthsAgency * 10) / 10}x </span>
-                      faster and save <span className="font-bold">{timeSaved} months</span> of ramp-up.
+                      {roleContent?.footerLine || `You get content ${Math.round(monthsInHouse / monthsAgency * 10) / 10}x faster and save ${timeSaved} ${timeSaved === 1 ? 'month' : 'months'} of ramp-up.`}
                     </p>
                   </div>
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
@@ -1035,7 +1222,9 @@ const ContentROICalculator = () => {
                     </div>
                   </div>
                   <div className="mt-3 text-center">
-                    <CalendarBooking buttonText="Get Started Today" />
+                    <CalendarBooking 
+                      buttonText={roleContent?.ctaLabel || "Get Started Today"}
+                    />
                   </div>
                 </div>
 
