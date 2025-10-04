@@ -1,5 +1,5 @@
 import { ArrowUp, Clock, ExternalLink, MessageSquare } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState, useMemo } from "react";
 import session from "@/app/tools/utils/session";
 import { Card, CardHeader, CardTitle, CardContent } from "@/Components/ui/card";
 
@@ -14,11 +14,19 @@ const getSentimentColor = (sentiment) => {
   }
 };
 
-const PostsAnalyticsTable = ({ threads = [] }) => {
+const PostsAnalyticsTable = ({ threads = [], initialCount = 10 }) => {
+  const [showAll, setShowAll] = useState(false);
+
   // Store threads in session when they change
   useEffect(() => {
     session.set("allThreads", threads);
   }, [threads]);
+
+  const visibleThreads = useMemo(() => {
+    return showAll ? threads : threads.slice(0, initialCount);
+  }, [showAll, threads, initialCount]);
+
+  const canExpand = threads.length > initialCount;
 
   return (
     <Card className="animate-slide-up shadow-md">
@@ -27,6 +35,7 @@ const PostsAnalyticsTable = ({ threads = [] }) => {
           Posts Analytics
         </CardTitle>
       </CardHeader>
+
       <CardContent>
         <div className="overflow-x-auto">
           <table className="w-full">
@@ -36,7 +45,7 @@ const PostsAnalyticsTable = ({ threads = [] }) => {
                   Posts
                 </th>
                 <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">
-                  Community
+                  Subreddit
                 </th>
                 <th className="text-left py-3 px-2 text-sm font-medium text-foreground-muted">
                   Engagement
@@ -50,16 +59,16 @@ const PostsAnalyticsTable = ({ threads = [] }) => {
               </tr>
             </thead>
             <tbody>
-              {threads.length === 0 ? (
+              {visibleThreads.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="py-8 text-center text-foreground-muted">
                     No Posts available.
                   </td>
                 </tr>
               ) : (
-                threads.map((thread) => (
+                visibleThreads.map((thread, index) => (
                   <tr
-                    key={thread.id}
+                    key={thread.id || index}
                     className="border-b border-border-muted hover:bg-interactive-hover transition-colors"
                   >
                     <td className="py-4 px-2">
@@ -118,6 +127,21 @@ const PostsAnalyticsTable = ({ threads = [] }) => {
             </tbody>
           </table>
         </div>
+
+        {canExpand && (
+          <div className="mt-4 flex items-center justify-between">
+            <p className="text-sm text-foreground-muted">
+              Showing {visibleThreads.length} of {threads.length}
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowAll(!showAll)}
+              className="px-3 py-1.5 text-sm font-medium rounded border border-border hover:bg-interactive-hover transition-colors"
+            >
+              {showAll ? "Show less" : `Show all (${threads.length})`}
+            </button>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

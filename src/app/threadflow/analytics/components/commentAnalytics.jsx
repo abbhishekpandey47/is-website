@@ -1,5 +1,5 @@
 import { ArrowUp, Clock, ExternalLink, MessageSquare } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import session from "@/app/tools/utils/session";
 import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
 
@@ -14,11 +14,20 @@ const getSentimentColor = (sentiment) => {
   }
 };
 
-const CommentsAnalyticsTable = ({ threads = [] }) => {
+const CommentsAnalyticsTable = ({ threads = [], initialCount = 10 }) => {
+  const [showAll, setShowAll] = useState(false);
+
   // Store threads in session when they change
   useEffect(() => {
     session.set("comments", threads);
   }, [threads]);
+
+  const visibleThreads = useMemo(
+    () => (showAll ? threads : threads.slice(0, initialCount)),
+    [showAll, threads, initialCount]
+  );
+
+  const canExpand = threads.length > initialCount;
 
   return (
     <Card className="animate-slide-up shadow-md">
@@ -50,16 +59,16 @@ const CommentsAnalyticsTable = ({ threads = [] }) => {
               </tr>
             </thead>
             <tbody>
-              {threads.length === 0 ? (
+              {visibleThreads.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="py-8 text-center text-foreground-muted">
                     No Comments available.
                   </td>
                 </tr>
               ) : (
-                threads.map((thread) => (
+                visibleThreads.map((thread, idx) => (
                   <tr
-                    key={thread.id}
+                    key={thread.id ?? idx}
                     className="border-b border-border-muted hover:bg-interactive-hover transition-colors"
                   >
                     <td className="py-4 px-2">
@@ -118,6 +127,23 @@ const CommentsAnalyticsTable = ({ threads = [] }) => {
             </tbody>
           </table>
         </div>
+
+        {canExpand && (
+          <div className="mt-4 flex items-center justify-between">
+            <p className="text-sm text-foreground-muted">
+              Showing {visibleThreads.length} of {threads.length}
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowAll((v) => !v)}
+              className="px-3 py-1.5 text-sm font-medium rounded border border-border hover:bg-interactive-hover transition-colors"
+              aria-expanded={showAll}
+              aria-label={showAll ? "Show less comments" : "Show all comments"}
+            >
+              {showAll ? "Show less" : `Show all (${threads.length})`}
+            </button>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
