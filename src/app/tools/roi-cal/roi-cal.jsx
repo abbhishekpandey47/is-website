@@ -100,7 +100,7 @@ const ContentROICalculator = () => {
   const [formValues, setFormValues] = useState({
     budget: "",
     blogPosts: 3,
-    trafficGrowth: 50,
+    trafficGrowth: "Quarter",
     contentTeam: "No",
     domainExpertise: false,
     timeline: 1,
@@ -166,15 +166,6 @@ const ContentROICalculator = () => {
     [handleInputChange]
   );
 
-  const handleTrafficGrowthChange = useCallback(
-    (e) => {
-      const value = e.target.value.replace(/[^\d]/g, "");
-      let numValue = value === "" ? 0 : parseInt(value, 10);
-      if (numValue > 100) numValue = 100;
-      handleInputChange("trafficGrowth", numValue);
-    },
-    [handleInputChange]
-  );
 
   const handleCalculate = useCallback(() => {
     setIsLoading(true);
@@ -237,19 +228,17 @@ const ContentROICalculator = () => {
       setDomainExpertisResult(false);
     }
 
-    let valInHouseCost = timeline * 1800;
-
-    valInHouseCost = (valInHouseCost + 1800 * 2) * 1.2;
+    let valInHouseCost = timeline * 6500;
     setTimelineInMonth(timeline);
 
-    if (trafficGrowth > 0 && trafficGrowth <= 25) {
+    if (trafficGrowth === "Immediately") {
       setTrafficGrowthBlogPost(10);
-    } else if (trafficGrowth > 25 && trafficGrowth <= 50) {
+    } else if (trafficGrowth === "Quarter") {
       setTrafficGrowthBlogPost(20);
-    } else if (trafficGrowth > 50 && trafficGrowth <= 75) {
-      setTrafficGrowthBlogPost(30);
-    } else {
+    } else if (trafficGrowth === "Year") {
       setTrafficGrowthBlogPost(40);
+    } else {
+      setTrafficGrowthBlogPost(20);
     }
 
     const valSavings = valInHouseCost - valOutsourcedCost;
@@ -314,10 +303,17 @@ const ContentROICalculator = () => {
   const selectedOption = options.find((option) => option.value === timeline);
 
   const [isOpenContent, setIsOpenContent] = useState(false);
+  const [isOpenTraffic, setIsOpenTraffic] = useState(false);
 
   const optionsContent = [
     { value: "Yes", label: "Yes" },
     { value: "No", label: "No" },
+  ];
+
+  const optionsTraffic = [
+    { value: "Immediately", label: "Immediately" },
+    { value: "Quarter", label: "Quarter" },
+    { value: "Year", label: "Year" },
   ];
 
   const toggleDropdownContent = () => setIsOpenContent(!isOpenContent);
@@ -327,12 +323,24 @@ const ContentROICalculator = () => {
     setIsOpenContent(false);
   };
 
+  const toggleDropdownTraffic = () => setIsOpenTraffic(!isOpenTraffic);
+
+  const handleSelectTraffic = (value) => {
+    handleInputChange("trafficGrowth", value);
+    setIsOpenTraffic(false);
+  };
+
   const selectedOptionContent = optionsContent.find(
     (option) => option.value === contentTeam
   );
 
+  const selectedOptionTraffic = optionsTraffic.find(
+    (option) => option.value === trafficGrowth
+  );
+
   const dropdownRef = useRef(null);
   const dropdownRefContent = useRef(null);
+  const dropdownRefTraffic = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -344,6 +352,12 @@ const ContentROICalculator = () => {
         !dropdownRefContent.current.contains(event.target)
       ) {
         setIsOpenContent(false);
+      }
+      if (
+        dropdownRefTraffic.current &&
+        !dropdownRefTraffic.current.contains(event.target)
+      ) {
+        setIsOpenTraffic(false);
       }
     }
 
@@ -369,7 +383,7 @@ const ContentROICalculator = () => {
   return (
     <div className="w-full max-w-6xl mx-auto p-6 font-sans mb-24">
       <div>
-        <div className="w-full rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white">
+        <div className="w-full rounded-2xl p-6 bg-white/5 border border-white/10 shadow-xl text-white">
           <div className={`flex ${isMobile ? "flex-col" : "flex-row"} gap-8`}>
             {/* Left */}
 
@@ -481,24 +495,66 @@ const ContentROICalculator = () => {
               </div>
 
               <div className="mb-5 group">
-                <label className="relative inline-block text-gray-300 mb-2">
+                <label className="block text-gray-300 mb-2">
                   Target traffic growth
                   <TooltipIcon
-                    description="Enter the percentage increase in traffic you aim to achieve."
-                    width="390px"
+                    description="Select when you expect to see traffic growth results."
+                    width="280px"
                   />
                 </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={trafficGrowth}
-                    onChange={(e) => handleTrafficGrowthChange(e)}
-                    className="w-full px-4 py-3 border border-gray-700 rounded-lg bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    placeholder="Enter percentage"
-                  />
-                  <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
-                    %
-                  </span>
+                <div ref={dropdownRefTraffic} className="relative">
+                  <button
+                    onClick={toggleDropdownTraffic}
+                    className="w-full px-4 py-3 bg-gray-800/50 rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
+                  >
+                    <span className="text-md text-white">
+                      {selectedOptionTraffic?.label}
+                    </span>
+                    <div className="flex items-center">
+                      <svg
+                        className="w-5 h-5 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
+                    </div>
+                  </button>
+
+                  {isOpenTraffic && (
+                    <div className="absolute mt-1 w-full bg-black border border-gray-700 rounded-lg shadow-lg z-10 overflow-hidden">
+                      <ul className="py-2 px-4 max-h-60 rounded-lg overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-black">
+                        {optionsTraffic.map((option) => (
+                          <li
+                            key={option.value}
+                            onClick={() => handleSelectTraffic(option.value)}
+                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-md ${trafficGrowth === option.value
+                              ? "bg-gray-800"
+                              : "hover:bg-gray-900"
+                              }`}
+                          >
+                            <div className="flex justify-between items-center">
+                              <span
+                                className={
+                                  trafficGrowth === option.value
+                                    ? "text-white font-medium"
+                                    : "text-gray-300"
+                                }
+                              >
+                                {option.label}
+                              </span>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -741,10 +797,10 @@ const ContentROICalculator = () => {
 
               {hasCalculated ? (
                 <div className="space-y-6">
-                  <div className="bg-gradient-to-br from-gray-900/95 via-gray-800/90 to-gray-700/95 backdrop-blur-sm border border-white/10 shadow-2xl rounded-2xl p-6">
+                  <div className="bg-gradient-to-br from-gray-900/95 via-gray-800/90 to-gray-700/95 border border-white/10 shadow-2xl rounded-2xl p-6">
                     {/* Header */}
                     <div className="flex items-center gap-3 mb-8">
-                      <div className="w-8 h-8 bg-gradient-to-br from-green-500/90 to-green-600/80 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/10">
+                      <div className="w-8 h-8 bg-gradient-to-br from-green-500/90 to-green-600/80 rounded-xl flex items-center justify-center border border-white/10">
                         <svg
                           className="w-6 h-6 text-white"
                           fill="none"
@@ -768,15 +824,15 @@ const ContentROICalculator = () => {
                     <div className="space-y-2 mb-8">
                       <div className="flex justify-between items-center">
                         <span className="text-gray-300 text-md">
-                          Current State
+                          In-house Full Time Cost
                         </span>
                         <span className="font-bold text-white text-md">
-                          ${inHouseCost.toLocaleString()}/mo
+                          $6,500/mo
                         </span>
                       </div>
-                      <div className="w-full bg-gray-700/30 backdrop-blur-sm rounded-full h-3 border border-white/5">
+                      <div className="w-full bg-gray-700/30 rounded-full h-3 border border-white/5">
                         <div
-                          className="bg-gradient-to-r from-orange-500/90 to-red-500/80 h-3 rounded-full backdrop-blur-sm"
+                          className="bg-gradient-to-r from-orange-500/90 to-red-500/80 h-3 rounded-full"
                           style={{ width: "100%" }}
                         ></div>
                       </div>
@@ -793,9 +849,9 @@ const ContentROICalculator = () => {
                           /mo
                         </span>
                       </div>
-                      <div className="w-full bg-gray-700/30 backdrop-blur-sm rounded-full h-3 border border-white/5">
+                      <div className="w-full bg-gray-700/30 rounded-full h-3 border border-white/5">
                         <div
-                          className="bg-gradient-to-r from-green-500/90 to-blue-500/80 h-3 rounded-full backdrop-blur-sm"
+                          className="bg-gradient-to-r from-green-500/90 to-blue-500/80 h-3 rounded-full"
                           style={{ width: `${Math.min(100, Math.max(0, 100 - savingsPercentage))}%` }}
                         ></div>
                       </div>
@@ -804,7 +860,7 @@ const ContentROICalculator = () => {
                     {/* Metrics Grid - Now 3 columns for better balance */}
                     <div className="grid grid-cols-3 gap-4">
                       {/* Cost Reduction */}
-                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-green-500/30 transition-all duration-300">
+                      <div className="bg-gray-800/60 rounded-2xl p-5 border border-white/10 hover:border-green-500/30 transition-all duration-300">
                         <div className="text-2xl font-bold text-green-400 mb-1">
                           {savingsPercentage}%
                         </div>
@@ -814,7 +870,7 @@ const ContentROICalculator = () => {
                       </div>
 
                       {/* Annual Savings */}
-                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-blue-500/30 transition-all duration-300">
+                      <div className="bg-gray-800/60 rounded-2xl p-5 border border-white/10 hover:border-blue-500/30 transition-all duration-300">
                         <div className="text-2xl font-bold text-blue-400 mb-1">
                           ${(savings * 12).toLocaleString()}
                         </div>
@@ -823,9 +879,9 @@ const ContentROICalculator = () => {
                         </div>
                       </div>
 
-                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
+                      <div className="bg-gray-800/60 rounded-2xl p-5 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
                         <div className="text-2xl font-bold text-cyan-400 mb-1">
-                          {Math.round(((savings * 36) / outsourcedCost) * 100)}%
+                          {Math.round(((savings * 36) / (outsourcedCost / timelineInMonth * 36)) * 100)}%
                         </div>
                         <div className="text-gray-300 text-md">3-Year ROI</div>
                       </div>
@@ -844,47 +900,47 @@ const ContentROICalculator = () => {
 
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Time to First Output</span>
-                      <span className="col-span-1 text-center blur-sm">
+                      <span className="col-span-1 text-center">
                         4-6 weeks
                       </span>
-                      <span className="col-span-1 text-center blur-sm">
+                      <span className="col-span-1 text-center">
                         1-2 weeks
                       </span>
                     </div>
 
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Output Per Month</span>
-                      <span className="col-span-1 text-center blur-sm">
+                      <span className="col-span-1 text-center">
                         {Math.floor(blogPerPostQunt / 2) + 1} assets
                       </span>
-                      <span className="col-span-1 text-center blur-sm">
+                      <span className="col-span-1 text-center">
                         {blogPerPostQunt} assets
                       </span>
                     </div>
 
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Ramp-Up Time</span>
-                      <span className="col-span-1 text-center blur-sm">
+                      <span className="col-span-1 text-center">
                         High
                       </span>
-                      <span className="col-span-1 text-center blur-sm">
+                      <span className="col-span-1 text-center">
                         None
                       </span>
                     </div>
 
                     <p className="mt-4 text-blue-400">
                       You get content{" "}
-                      <span className="mt-4 text-blue-400 blur-sm">4 </span>x
+                      <span className="mt-4 text-blue-400">4 </span>x
                       faster and save weeks of ramp-up.
                     </p>
                   </div>
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <div>
-                      {/* <p className="text-[12px] text-gray-300">
-                        Note: To hit {trafficGrowth}% traffic growth, aim for{" "}
+                      <p className="text-[12px] text-gray-300">
+                        Note: To achieve {trafficGrowth.toLowerCase()} traffic growth, aim for{" "}
                         {trafficGrowthBlogPost} high-quality blog
-                        posts each month.
-                      </p> */}
+                        posts each month.
+                      </p>
 
                       <p className="text-center">
                         Start saving{" "}
