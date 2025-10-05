@@ -230,14 +230,14 @@ const ContentROICalculator = () => {
     const valOutsourcedCost = targetAssets * agencyPricePerAsset;
     const valProjectSavings = valInHouseCost - valOutsourcedCost;
 
-    // Calculate time saved
+    // Calculate time saved (for scope mode only - monthly mode doesn't have meaningful time saved)
     const timeSaved = monthsInHouse - monthsAgency;
 
     // Calculate values for role-based content
     const annualSavings = monthlySavings * 12;
     const paybackMonths = (monthlyAgencyCost / monthlySavings);
     const costReduction = monthlySavingsPercentage;
-    const outputPerMonth = Math.round(assetsPerMonth);
+    const outputPerMonth = Math.round(effectiveAssets);
 
     // Role-based content customization
     const getRoleBasedContent = (role, annualSavings, paybackMonths, costReduction, outputPerMonth, timeSaved) => {
