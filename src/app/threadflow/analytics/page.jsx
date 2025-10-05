@@ -1,7 +1,7 @@
 "use client";
 import { auth } from '@/lib/firebaseClient';
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
+import { Card, CardContent } from "@/Components/ui/card";
 import PostAnalyticsTable from './components/postAnalytics';
 import CommentsAnalyticsTable from './components/commentAnalytics';
 import { UserProfile } from '@/Components/UserProfile';
@@ -17,81 +17,74 @@ function getAgeString(hours) {
   return `${Math.round(hours / (24 * 7))}w`;
 }
 
-const AnalyticsPage = () => {
-  const initialCache = session.get("analyticsData") ?? null;
-  const [analyticsData, setAnalyticsData] = useState(initialCache);
-  const [loading, setLoading] = useState(!Boolean(initialCache));
+const PAGE_SIZE = 10;
+
+export default function AnalyticsPage() {
+  const [postsPage, setPostsPage] = useState(1);
+  const [commentsPage, setCommentsPage] = useState(1);
+
+  const cached = session.get("analyticsDataV2");
+  const [analyticsData, setAnalyticsData] = useState(cached ?? null);
+  const [loading, setLoading] = useState(!Boolean(cached));
   const [error, setError] = useState(null);
 
-  // Persist to session whenever analyticsData changes
   useEffect(() => {
-    if (analyticsData) {
-      session.set("analyticsData", analyticsData);
-    }
+    if (analyticsData) session.set("analyticsDataV2", analyticsData);
   }, [analyticsData]);
 
   useEffect(() => {
     let aborted = false;
 
-    const fetchData = async () => {
-      if (analyticsData) {
-        setLoading(false);
-        return;
-      }
-
+    (async () => {
       setLoading(true);
       setError(null);
-
       try {
         let user = auth.currentUser;
         if (!user) {
-          // brief wait for Firebase to hydrate currentUser
-          await new Promise(r => setTimeout(r, 100));
+          await new Promise(r => setTimeout(r, 120));
           user = auth.currentUser;
         }
         if (!user) throw new Error('Not authenticated');
-
         const token = await user.getIdToken();
 
-        const controller = new AbortController();
-        const resp = await fetch('/api/analytics', {
-          headers: { Authorization: `Bearer ${token}` },
-          signal: controller.signal
+        const qs = new URLSearchParams({
+          pagePosts: String(postsPage),
+          pageSizePosts: String(PAGE_SIZE),
+          pageComments: String(commentsPage),
+          pageSizeComments: String(PAGE_SIZE),
         });
 
+        const resp = await fetch(`/api/analytics?${qs.toString()}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         if (!resp.ok) throw new Error('Failed to fetch analytics data');
 
         const json = await resp.json();
-        if (!aborted) {
-          setAnalyticsData(json && json.data ? json.data : null);
-        }
+        if (!aborted) setAnalyticsData(json?.data ?? null);
       } catch (e) {
-        if (!aborted) setError(e && e.message ? e.message : 'Something went wrong');
+        if (!aborted) setError(e?.message ?? 'Something went wrong');
       } finally {
         if (!aborted) setLoading(false);
       }
-    };
+    })();
 
-    fetchData();
-    return () => {
-      aborted = true;
-    };
-  }, []); // run once
+    return () => { aborted = true; };
+  }, [postsPage, commentsPage]);
 
   if (loading) return <div className="text-center py-12">Loading analytics...</div>;
   if (error) return <div className="text-center py-12 text-red-500">Error: {error}</div>;
   if (!analyticsData) return <div className="text-center py-12">No data yet.</div>;
 
-  const posts = analyticsData.posts || [];
-  const comments = analyticsData.comments || [];
+  const postsBlock = analyticsData.posts ?? { items: [], total: 0, page: 1, totalPages: 1 };
+  const commentsBlock = analyticsData.comments ?? { items: [], total: 0, page: 1, totalPages: 1 };
 
-  const totalPosts = posts.length;
-  const totalPostUpvotes = posts.reduce((acc, t) => acc + (t && t.upvotes ? t.upvotes : 0), 0);
-  const totalComments = comments.length;
-  const totalCommentUpvotes = comments.reduce(
-    (acc, c) => acc + (c && c.top_comment && c.top_comment.score ? c.top_comment.score : 0),
-    0
-  );
+  const posts = postsBlock.items || [];
+  const comments = commentsBlock.items || [];
+
+  const totalPostsPage = posts.length;
+  const totalPostUpvotesPage = posts.reduce((acc, t) => acc + (t?.upvotes ?? 0), 0);
+  const totalCommentsPage = comments.length;
+  const totalCommentUpvotesPage = comments.reduce((acc, c) => acc + (c?.top_comment?.score ?? 0), 0);
 
   return (
     <div className="min-h-screen bg-background">
@@ -106,7 +99,7 @@ const AnalyticsPage = () => {
               <div>
                 <h1 className="text-xl font-bold text-foreground">Reddit Analytics</h1>
                 <p className="text-sm text-muted-foreground">
-                  Track how your Reddit posts and comments perform over time
+                  Track how your posts and comments perform (10 per page)
                 </p>
               </div>
             </div>
@@ -118,75 +111,99 @@ const AnalyticsPage = () => {
       </header>
 
       <div className="p-6">
-        {/* Key Metrics */}
+        {/* Page metrics (current page only) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardContent className="p-6">
-              <p className="text-sm text-muted-foreground">Total Posts</p>
-              <p className="text-2xl font-bold">{totalPosts}</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6">
-              <p className="text-sm text-muted-foreground">Post Upvotes</p>
-              <p className="text-2xl font-bold">{totalPostUpvotes}</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6">
-              <p className="text-sm text-muted-foreground">Total Comments</p>
-              <p className="text-2xl font-bold">{totalComments}</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6">
-              <p className="text-sm text-muted-foreground">Comment Upvotes</p>
-              <p className="text-2xl font-bold">{totalCommentUpvotes}</p>
-            </CardContent>
-          </Card>
+          <Card><CardContent className="p-6">
+            <p className="text-sm text-muted-foreground">Posts (this page)</p>
+            <p className="text-2xl font-bold">{totalPostsPage}</p>
+          </CardContent></Card>
+          <Card><CardContent className="p-6">
+            <p className="text-sm text-muted-foreground">Post Upvotes (this page)</p>
+            <p className="text-2xl font-bold">{totalPostUpvotesPage}</p>
+          </CardContent></Card>
+          <Card><CardContent className="p-6">
+            <p className="text-sm text-muted-foreground">Comments (this page)</p>
+            <p className="text-2xl font-bold">{totalCommentsPage}</p>
+          </CardContent></Card>
+          <Card><CardContent className="p-6">
+            <p className="text-sm text-muted-foreground">Comment Upvotes (this page)</p>
+            <p className="text-2xl font-bold">{totalCommentUpvotesPage}</p>
+          </CardContent></Card>
         </div>
 
-        {/* Tables */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        {/* Tables + pagination */}
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-8">
           <PostAnalyticsTable
             threads={posts.map((t, i) => ({
               id: i,
-              title: (t && (t.post_title || t.title)) || "-",
-              subreddit: (t && (t.targeted_subreddit || t.subreddit)) || "-",
-              upvotes: (t && t.upvotes) || 0,
-              comments: (t && t.total_comments) || 0,
-              age: getAgeString(t && t.post_age_hours),
-              sentiment:
-                t && t.upvotes > 0
-                  ? "positive"
-                  : t && t.upvotes < 0
-                  ? "negative"
-                  : "neutral",
-              post_url: (t && t.post_url) || "#"
+              title: t?.post_title || t?.title || "-",
+              subreddit: t?.targeted_subreddit || t?.subreddit || "-",
+              upvotes: t?.upvotes || 0,
+              comments: t?.total_comments || 0,
+              age: getAgeString(t?.post_age_hours),
+              sentiment: (t?.upvotes ?? 0) > 0 ? "positive" : (t?.upvotes ?? 0) < 0 ? "negative" : "neutral",
+              post_url: t?.post_url || "#",
             }))}
           />
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              Page {postsBlock.page} of {postsBlock.totalPages} • {postsBlock.total} total
+            </p>
+            <div className="flex gap-2">
+              <button
+                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                onClick={() => setPostsPage(p => Math.max(1, p - 1))}
+                disabled={postsBlock.page <= 1}
+              >
+                Prev
+              </button>
+              <button
+                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                onClick={() => setPostsPage(p => Math.min(postsBlock.totalPages, p + 1))}
+                disabled={postsBlock.page >= postsBlock.totalPages}
+              >
+                Next
+              </button>
+            </div>
+          </div>
 
           <CommentsAnalyticsTable
             threads={comments.map((c, i) => ({
               id: i,
-              title: (c && c.top_comment && c.top_comment.body) || "-",
-              subreddit: (c && c.subreddit) || "-",
-              upvotes: (c && c.top_comment && c.top_comment.score) || 0,
+              title: c?.top_comment?.body || "-",
+              subreddit: c?.subreddit || "-",
+              upvotes: c?.top_comment?.score || 0,
               comments: 0,
               age: "",
               sentiment:
-                c && c.top_comment && c.top_comment.score > 0
-                  ? "positive"
-                  : c && c.top_comment && c.top_comment.score < 0
-                  ? "negative"
-                  : "neutral",
-              post_url: (c && c.comment_url) || "#"
+                (c?.top_comment?.score ?? 0) > 0 ? "positive" :
+                (c?.top_comment?.score ?? 0) < 0 ? "negative" : "neutral",
+              post_url: c?.comment_url || "#",
             }))}
           />
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              Page {commentsBlock.page} of {commentsBlock.totalPages} • {commentsBlock.total} total
+            </p>
+            <div className="flex gap-2">
+              <button
+                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                onClick={() => setCommentsPage(p => Math.max(1, p - 1))}
+                disabled={commentsBlock.page <= 1}
+              >
+                Prev
+              </button>
+              <button
+                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                onClick={() => setCommentsPage(p => Math.min(commentsBlock.totalPages, p + 1))}
+                disabled={commentsBlock.page >= commentsBlock.totalPages}
+              >
+                Next
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default AnalyticsPage;
+}
