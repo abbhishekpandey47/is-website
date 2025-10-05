@@ -184,10 +184,10 @@ const ContentROICalculator = () => {
 
   const handleCalculate = useCallback(() => {
     try {
-      setIsLoading(true);
+    setIsLoading(true);
 
       const { blogPosts, timeline, budget, domainExpertise, trafficGrowth, role } =
-        formValues;
+      formValues;
 
     const { hasCalculated } = results;
 
@@ -208,41 +208,27 @@ const ContentROICalculator = () => {
       return;
     }
 
-    // Scope-based calculation model
+    // Monthly mode calculation (apples-to-apples monthly compare)
     const targetAssets = blogPosts;
-    const inHouseMonthlyCost = 6500;
-    const inHouseCapacity = 2.5; // midpoint of 2-3 assets/month
+    const inHouseMonthlyCost = 6500; // Fixed at $6,500
+    const inHouseCapacity = 2; // 2 assets/month for in-house
     const agencyPricePerAsset = domainExpertise ? 540 : 495;
-    const agencyCapacity = 6; // max capacity per month
+    const agencyCapacity = 6; // 6 assets/month max for agency
 
-    // Calculate months needed
+    // Apply capacity capping for monthly mode (cap at 20 posts)
+    const effectiveAssets = Math.min(targetAssets, 20);
+    const monthlyAgencyCost = effectiveAssets * agencyPricePerAsset;
+    const monthlySavings = inHouseMonthlyCost - monthlyAgencyCost;
+    const monthlySavingsPercentage = Math.round((monthlySavings / inHouseMonthlyCost) * 100);
+
+    // Calculate months needed for scope mode (for project summary)
     const monthsInHouse = Math.ceil(targetAssets / inHouseCapacity);
-    let monthsAgency = Math.ceil(targetAssets / agencyCapacity);
+    const monthsAgency = Math.ceil(targetAssets / agencyCapacity);
     
-    // Calculate recommended timeline if assets exceed monthly capacity
-    if (targetAssets > 6) {
-      monthsAgency = Math.ceil(targetAssets / 6); // 6 is the max capacity per month
-      // Only show warning if timeline doesn't comply AND it's not a high volume case
-      if (timeline < monthsAgency && targetAssets <= 20) {
-        handleOperation(
-          `For ${targetAssets} assets, we recommend a ${monthsAgency}-month timeline (6 assets/month max). This will deliver all ${targetAssets} assets over ${monthsAgency} months.`
-        );
-      }
-      // For high volume cases (6-20 assets), let the High Volume banner handle the messaging
-    }
-
     // Calculate costs for scope mode (for project summary)
     const valInHouseCost = monthsInHouse * inHouseMonthlyCost;
     const valOutsourcedCost = targetAssets * agencyPricePerAsset;
     const valProjectSavings = valInHouseCost - valOutsourcedCost;
-
-    // Calculate monthly mode costs (for main ROI card)
-    const monthlyInHouseCost = inHouseMonthlyCost; // $6,500
-    // Monthly agency cost = min(assets per month, capacity) × price per asset
-    const assetsPerMonth = Math.min(targetAssets / monthsAgency, agencyCapacity);
-    const monthlyAgencyCost = assetsPerMonth * agencyPricePerAsset;
-    const monthlySavings = monthlyInHouseCost - monthlyAgencyCost;
-    const monthlySavingsPercentage = Math.round((monthlySavings / monthlyInHouseCost) * 100);
 
     // Calculate time saved
     const timeSaved = monthsInHouse - monthsAgency;
@@ -312,9 +298,12 @@ const ContentROICalculator = () => {
     // Get role-based content
     const roleContent = getRoleBasedContent(role, annualSavings, paybackMonths, costReduction, outputPerMonth, timeSaved);
 
-    // Check for scaling capacity warning
+    // Check for scaling capacity warning (updated thresholds)
     const monthlyBudget = budget || 0;
-    const shouldShowScalingWarning = blogPosts > 20 || monthlyBudget > 10000;
+    const shouldShowScalingWarning = blogPosts > 20 || monthlyBudget > 15000;
+    
+    // Check for no-savings scenario
+    const hasNoSavings = monthlySavings <= 0;
 
     // Clear previous messages at the start
     if (error) {
@@ -344,13 +333,13 @@ const ContentROICalculator = () => {
       setTrafficGrowthBlogPost(20);
     }
 
-        setTimeout(() => {
-          setResults({
-            inHouseCost: monthlyInHouseCost,
+    setTimeout(() => {
+      setResults({
+            inHouseCost: inHouseMonthlyCost,
             outsourcedCost: monthlyAgencyCost,
             savings: monthlySavings,
             savingsPercentage: monthlySavingsPercentage,
-            hasCalculated: true,
+        hasCalculated: true,
             monthsInHouse: monthsInHouse,
             monthsAgency: monthsAgency,
             timeSaved: timeSaved,
@@ -358,11 +347,12 @@ const ContentROICalculator = () => {
             roleContent: roleContent,
             shouldShowScalingWarning: shouldShowScalingWarning,
             monthlyBudget: monthlyBudget,
-          });
-    
-          // End loading animation
-          setIsLoading(false);
-        }, 1000);
+            hasNoSavings: hasNoSavings,
+      });
+
+      // End loading animation
+      setIsLoading(false);
+    }, 1000);
     } catch (error) {
       console.error("Error in handleCalculate:", error);
       setIsLoading(false);
@@ -392,6 +382,7 @@ const ContentROICalculator = () => {
     roleContent,
     shouldShowScalingWarning,
     monthlyBudget,
+    hasNoSavings,
   } = results;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -1083,7 +1074,25 @@ const ContentROICalculator = () => {
                       </div>
                     </div>
 
-                    {/* Metrics Grid - Now 3 columns for better balance */}
+                    {/* No Savings Scenario */}
+                    {hasNoSavings && (
+                      <div className="bg-gradient-to-r from-red-900/20 to-orange-900/20 border border-red-500/30 rounded-xl p-6 mb-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center">
+                            <svg className="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <div className="text-red-200">
+                            <div className="font-semibold text-lg mb-2">No savings at this configuration</div>
+                            <div className="text-sm">In-house is cheaper at this volume. Reduce posts or discuss multi-pod options.</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Metrics Grid - Only show if there are savings */}
+                    {!hasNoSavings && (
                     <div className="grid grid-cols-3 gap-4">
                       {/* Cost Reduction */}
                       <div className="bg-gray-800/60 rounded-2xl p-5 border border-white/10 hover:border-green-500/30 transition-all duration-300">
@@ -1110,13 +1119,22 @@ const ContentROICalculator = () => {
                           {(() => {
                             const paybackMonths = outsourcedCost / savings;
                             const boundedPayback = Math.max(0.5, Math.min(paybackMonths, 24)); // Cap at 24 months max
-                            const roundedPayback = Math.round(boundedPayback * 10) / 10;
-                            return `${roundedPayback} ${roundedPayback === 1 ? 'month' : 'months'}`;
+                            
+                            if (boundedPayback < 1.0) {
+                              const days = Math.round(boundedPayback * 30);
+                              return `Under 1 month (~${days} days)`;
+                            } else if (boundedPayback >= 24) {
+                              return `> 24 months`;
+                            } else {
+                              const roundedPayback = Math.round(boundedPayback * 10) / 10;
+                              return `${roundedPayback} ${roundedPayback === 1 ? 'month' : 'months'}`;
+                            }
                           })()}
                         </div>
-                        <div className="text-gray-300 text-md" title="Financial break-even (not delivery time)">Payback Period</div>
+                        <div className="text-gray-300 text-md" title="Financial break-even point — when monthly savings offset your Infrasity spend. Not a delivery timeline.">Payback Period</div>
                       </div>
                     </div>
+                    )}
                   </div>
 
                   {/* Summary Section */}
@@ -1129,7 +1147,7 @@ const ContentROICalculator = () => {
                     </div>
                   </div>
 
-                  {/* Scaling Capacity Warning - Show when posts > 20 or budget > $10k */}
+                  {/* Scaling Capacity Warning - Show when posts > 20 or budget > $15k */}
                   {shouldShowScalingWarning && (
                     <div className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border border-orange-500/30 rounded-xl p-4 mb-4">
                       <div className="flex items-center gap-3">
@@ -1139,7 +1157,7 @@ const ContentROICalculator = () => {
                           </svg>
                         </div>
                         <div className="text-orange-200 text-sm">
-                          <span className="font-semibold">Scaling Capacity Reached:</span> Your current inputs ({blogPosts} posts/month, ${monthlyBudget.toLocaleString()} budget) exceed what a single pod can sustainably deliver. Most teams produce 6–20 technical blogs/month for consistent growth. To deliver this faster, we can deploy multiple pods — talk to us about scaling options.
+                          <span className="font-semibold">Capacity Warning:</span> Most devtool teams operate between 6–20 technical assets/month for sustainable growth. For higher volume, we recommend parallel pods or an extended timeline.
                         </div>
                       </div>
                     </div>
