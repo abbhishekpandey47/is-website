@@ -585,199 +585,314 @@ export default function Page() {
           <div className="text-center mb-12">
             <p className="text-gray-400 mb-8 text-sm font-semibold tracking-wider font-['Inter',sans-serif]">TRUSTED BY LEADING DEVTOOLS</p>
             
-            {/* Moving Customer Logos Carousel - Fixed with proper styling */}
-            <div className="relative overflow-hidden">
-              <div className="flex animate-scroll space-x-8">
-                {/* First set of logos */}
-                <div className="flex space-x-8 items-center">
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Firefly</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Scalekit</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Kubiya</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">DevZero</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">StackGen</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Lovable</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Meteor</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Middleware</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Aviator</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Mocha</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cedana</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">DhiWise</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Amnic</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Oso</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Ox Security</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">MVP Grow</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cerbos</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Qodo</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">CodeGiant</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cycloid</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Scalr</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Daytona</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">StackOne</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">TerraTeam</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Env0</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Tracetest</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">TravisCI</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Firstock</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Vapi</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Kapstan</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">ZenML</span>
-                  </div>
-                </div>
-                {/* Duplicate set for seamless loop */}
-                <div className="flex space-x-8 items-center">
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Firefly</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Scalekit</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Kubiya</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">DevZero</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">StackGen</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Lovable</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Meteor</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Middleware</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Aviator</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Mocha</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cedana</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">DhiWise</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Amnic</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Oso</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Ox Security</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">MVP Grow</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cerbos</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Qodo</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">CodeGiant</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cycloid</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Scalr</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Daytona</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">StackOne</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">TerraTeam</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Env0</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Tracetest</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">TravisCI</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Firstock</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Vapi</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Kapstan</span>
-                  </div>
-                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
-                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">ZenML</span>
+            {/* Customer Logos - Exact copy from developer marketing agency */}
+            <div className="pb-2">
+              <div className="max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
+                <div
+                  className="relative w-full mx-auto max-w-4xl opacity-90 dark:opacity-70 overflow-hidden px-5 lg:px-12"
+                  aria-hidden={false}
+                >
+                  <div className="flex gap-10 items-center mx-4 animate-scroll">
+                    <div className="mix-blend-color-burn p-3">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/aviator.png"
+                        alt="Aviator"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-8">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/mocha.png"
+                        alt="Mocha"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-5">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/cedana.png"
+                        alt="Cedana"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-2">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/dhiwise.png"
+                        alt="DhiWise"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-5 filter brightness-0 invert">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/amnic.png"
+                        alt="Amnic"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-12">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/oso.png"
+                        alt="Oso"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-8">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/ox-sec.svg"
+                        alt="Ox Security"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/mvp-grow.png"
+                        alt="MVP Grow"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/cerbos.png"
+                        alt="Cerbos"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-8">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/qodo-logo.png"
+                        alt="Qodo"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/Codegiant.png"
+                        alt="CodeGiant"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/Scalekit-logo.png"
+                        alt="Scalekit"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-7">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/cycloid.png"
+                        alt="Cycloid"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/scalr.png"
+                        alt="Scalr"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-5">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/daytona.png"
+                        alt="Daytona"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/stackOne.png"
+                        alt="StackOne"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/DevZero.png"
+                        alt="DevZero"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/terrateam.png"
+                        alt="TerraTeam"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-6">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/env0-infra-1.png"
+                        alt="Env0"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/tracetest.png"
+                        alt="Tracetest"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-5">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/firefly.png"
+                        alt="Firefly"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-5">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/TravisCI-Full-Color.png"
+                        alt="TravisCI"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-5">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/firstock-logo.png"
+                        alt="Firstock"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-10">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/vapi-logo.png"
+                        alt="Vapi"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/kapstan.png"
+                        alt="Kapstan"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/Zenml.png"
+                        alt="ZenML"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-5">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/Kubiya.png"
+                        alt="Kubiya"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/lovable-logo.png"
+                        alt="Lovable"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-4">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/Meteor-ops.png"
+                        alt="Meteor"
+                      />
+                    </div>
+                    <div className="mix-blend-color-burn p-3">
+                      <Image
+                        loading="lazy"
+                        width={100}
+                        height={80}
+                        className="object-contain opacity-90"
+                        src="/trustedby-bw/bw/middleware-logo.png"
+                        alt="Middleware"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
