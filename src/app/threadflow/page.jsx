@@ -34,7 +34,8 @@ const PostsPage = () => {
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
   const [allItems, setAllItems] = useState([]);
-
+    const [companiesList , setCompaniesList] = useState([]);
+    const [selectedCompanyId , setSelectedCompanyId] = useState("all");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth,(user) => {
@@ -43,129 +44,58 @@ const PostsPage = () => {
 
       if (!user) {
         router.push("/auth/signin");
+      }else{
+        const fetchData = async () => {
+       try {
+      const token = await user.getIdToken();
+          const [catRes, companyRes] = await Promise.allSettled([
+            fetch(`/api/allContent`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            fetch(`/api/companies`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+          ]);
+          if (catRes.status === 'fulfilled' && catRes.value.ok) {
+            const result = await catRes.value.json();
+            if (result) {
+              setAllItems(result.data || []);
+            }
+          } else if (catRes.status === 'rejected') {
+            console.error("Failed to fetch categories:", catRes.reason);
+          }
+
+          if (companyRes.status === 'fulfilled' && companyRes.value.ok) {
+         const result = await companyRes.value.json();
+         const list = Array.isArray(result.data) ? result.data : [];
+         setCompaniesList(list);
+          } else if (companyRes.status === 'rejected') {
+            console.error("Failed to fetch companies:", companyRes.reason);
+          }
+        } catch (err) {
+          console.error("Failed to fetch:", err);
+        }
+    };
+
+    fetchData();
       }
     });
 
     return () => unsubscribe();
   }, [router]);
 
-  // useEffect(() => {
-  //   if (!firebaseUser) return;
-  
-  //   console.log("Fetching posts and comments for user:", firebaseUser.uid);
-
-  // const fetchPosts = async () => {
-  //     try {
-  //   const token = await firebaseUser.getIdToken();
-  //   const res = await fetch(`/api/posts?page=${currentPage}&limit=${PAGE_SIZE/2}`, { headers: { Authorization: `Bearer ${token}` } });
-  //       const result = await res.json();
-
-  //       if (!res.ok) {
-  //         throw new Error(result.error || "Failed to fetch posts");
-  //       }
-
-  //       setPosts(result.data || []);
-  //       setTotalCount(result.totalCount || 0 + totalCount);
-  //     } catch (err) {
-  //       console.error("Error fetching posts:", err);
-  //       toast.error("Failed to load posts");
-  //     }
-  //   };
-
-  // const fetchComments = async () => {
-  //     try {
-  //   const token = await firebaseUser.getIdToken();
-  //   const res = await fetch(`/api/comment?page=${currentPage}&limit=${PAGE_SIZE/2}`, { headers: { Authorization: `Bearer ${token}` } });
-  //       const result = await res.json();
-
-  //       if (!res.ok) {
-  //         throw new Error(result.error || "Failed to fetch comments");
-  //       }
-
-  //       setComments(result.data || []);
-  //       setTotalCount(result.totalCount || 0 + totalCount);
-  //     } catch (err) {
-  //       console.error("Error fetching comments:", err);
-  //       toast.error("Failed to load comments");
-  //     }
-  //   };
-
-  //   fetchPosts();
-  //   fetchComments();
-  // }, [currentPage , firebaseUser]);
-    
-    // Fetch posts + comments concurrently
-  
-  //   useEffect(() => {
-  //   if (!firebaseUser) return;
-
-  //   const fetchData = async () => {
-  //     try {
-  //       const token = await firebaseUser.getIdToken();
-
-  //       const halfPage = Math.floor(PAGE_SIZE / 2);
-
-  //       const [postRes, commentRes] = await Promise.all([
-  //         fetch(`/api/posts?page=${currentPage}&limit=${halfPage}`, {
-  //           headers: { Authorization: `Bearer ${token}` },
-  //         }),
-  //         fetch(`/api/comment?page=${currentPage}&limit=${halfPage}`, {
-  //           headers: { Authorization: `Bearer ${token}` },
-  //         }),
-  //       ]);
-
-  //       const [postData, commentData] = await Promise.all([postRes.json(), commentRes.json()]);
-
-  //       if (!postRes.ok) throw new Error(postData.error || "Failed to fetch posts");
-  //       if (!commentRes.ok) throw new Error(commentData.error || "Failed to fetch comments");
-
-  //       setPosts(postData.data || []);
-  //       setComments(commentData.data || []);
-  //       setTotalCount((postData.totalCount || 0) + (commentData.totalCount || 0));
-  //     } catch (err) {
-  //       console.error(err);
-  //       toast.error("Failed to load data");
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [firebaseUser, currentPage]);
- 
-
-  // Fetch combined posts + comments
-  
-  useEffect(() => {
-    if (!firebaseUser) return;
-
-    const fetchData = async () => {
-      try {
-        const token = await firebaseUser.getIdToken();
-
-        const res = await fetch(`/api/allContent`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        const result = await res.json();
-
-        if (!res.ok) throw new Error(result.error || "Failed to fetch content");
-
-        // Combined data already sorted by date in backend
-        setAllItems(result.data || []);
-      } catch (err) {
-        console.error(err);
-        toast.error("Failed to load data");
-      }
-    };
-
-    fetchData();
-  }, [firebaseUser]);
-
 useEffect(() => {
   setCurrentPage(1); // reset to first page whenever filters or search change
-}, [searchQuery, selectedType, selectedCategory]);
+}, [searchQuery, selectedType, selectedCategory , selectedCompanyId , selectedStatus]);
 
 
-
+const companies = [
+  { id: "all", name: "All Companies" },
+  ...companiesList.map((company) => ({
+    id: company.id,
+    name: company.name,
+  })),
+];
   const categories = ["all", ...new Set(allItems.map((item) => item.category).filter(Boolean))];
   const statuses = ["all", ...new Set(allItems.map((item) => item.status).filter(Boolean))];
 
@@ -181,8 +111,10 @@ useEffect(() => {
       selectedStatus === "all" || item.status === selectedStatus;
     const matchesType =
       selectedType === "all" || item.type === selectedType;
+    const matchCompanyId =
+      selectedCompanyId === "all" || item.company_id === selectedCompanyId;
 
-    return matchesSearch && matchesCategory && matchesStatus && matchesType;
+    return matchesSearch && matchesCategory && matchesStatus && matchesType && matchCompanyId;
   });
 
  // Pagination logic
@@ -361,6 +293,23 @@ const statusCnt = getStatusCounts()
                   ))}
                 </SelectContent>
               </Select>
+
+                                <Select
+                                  value={selectedCompanyId}
+                                  onValueChange={setSelectedCompanyId}
+                                >
+                                  <SelectTrigger className="w-48">
+                                    <SelectValue placeholder="All Companies" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {companies.map((company) => (
+                                      <SelectItem key={company.id} value={company.id}>
+                                        {company.name === "all" ? "All Comapnies" : company.name}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                          
 
               {/* Status Filter */}
               {/* <Select value={selectedStatus} onValueChange={setSelectedStatus}>
