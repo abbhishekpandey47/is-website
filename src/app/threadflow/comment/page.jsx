@@ -30,6 +30,8 @@ const PostsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
+  const [companiesList , setCompaniesList] = useState([]);
+  const [selectedCompanyId , setSelectedCompanyId] = useState("all");
   
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
@@ -108,20 +110,39 @@ const PostsPage = () => {
       if (!user) {
         router.push("/auth/signin");
       } else {
-        try {
-          const token = await user.getIdToken();
-          const res = await fetch(`/api/comment?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
-          const result = await res.json();
+     try {
+        const token = await user.getIdToken();
+        const [catRes, companyRes] = await Promise.allSettled([
+          fetch(`/api/comment?categories=true`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          fetch(`/api/companies`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+        ]);
 
-          if (res.ok && result.categories) {
+        if (catRes.status === 'fulfilled' && catRes.value.ok) {
+          const result = await catRes.value.json();
+          if (result.categories) {
             setEditCategories((prev) => {
               const merged = [...prev, ...result.categories];
               return [...new Set(merged.map((c) => c.trim()))];
             });
           }
-        } catch (err) {
-          console.error("Failed to fetch categories:", err);
+        } else if (catRes.status === 'rejected') {
+          console.error("Failed to fetch categories:", catRes.reason);
         }
+
+        if (companyRes.status === 'fulfilled' && companyRes.value.ok) {
+          const result = await companyRes.value.json();
+         const list = Array.isArray(result.data) ? result.data : [];
+          setCompaniesList(list);
+        } else if (companyRes.status === 'rejected') {
+          console.error("Failed to fetch companies:", companyRes.reason);
+        }
+      } catch (err) {
+        console.error("Failed to fetch initial data:", err);
+      }
       }
     });
 
@@ -129,7 +150,13 @@ const PostsPage = () => {
   }, [router]);
 
   
-
+const companies = [
+  { id: "all", name: "All Companies" },
+  ...companiesList.map((company) => ({
+    id: company.id,
+    name: company.name,
+  })),
+];
 const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
 const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
 
@@ -144,8 +171,10 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
       selectedCategory === "all" || post.category === selectedCategory;
     const matchesStatus =
       selectedStatus === "all" || post.status === selectedStatus;
+    const matchCompanyId =
+      selectedCompanyId === "all" || post.company_id === selectedCompanyId;
 
-    return matchesSearch && matchesCategory && matchesStatus;
+    return matchesSearch && matchesCategory && matchesStatus && matchCompanyId;
   });
 
     const totalPages = Math.ceil(filteredPosts.length / PAGE_SIZE);
@@ -159,7 +188,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Bool
     };
     useEffect(() => {
       setCurrentPage(1); // reset to first page whenever filters or search change
-    }, [searchQuery, selectedCategory]);
+    }, [searchQuery, selectedCategory , selectedCompanyId , selectedStatus]);
 
 const getStatusBadge = (status) => {
   const statusColors = {
@@ -413,10 +442,10 @@ const getStatusBadge = (status) => {
               </div>
 
            <Select
-  value={editFormData.category}
-  onValueChange={(value) => handleEditInputChange("category", value)}
+  value={selectedCategory}
+  onValueChange={setSelectedCategory}
 >
-  <SelectTrigger>
+  <SelectTrigger className="w-48">
     <SelectValue placeholder="Select category">
       {editFormData.category || "Select category"}
     </SelectValue>
@@ -445,6 +474,21 @@ const getStatusBadge = (status) => {
   </SelectContent>
 </Select>
 
+                  <Select
+                    value={selectedCompanyId}
+                    onValueChange={setSelectedCompanyId}
+                  >
+                    <SelectTrigger className="w-48">
+                      <SelectValue placeholder="All Companies" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {companies.map((company) => (
+                        <SelectItem key={company.id} value={company.id}>
+                          {company.name === "all" ? "All Comapnies" : company.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
             </div>
           </CardContent>
         </Card>

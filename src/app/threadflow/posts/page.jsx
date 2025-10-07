@@ -43,7 +43,8 @@ const PostsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [companiesList , setCompaniesList] = useState([]);
+  const [selectedCompanyId , setSelectedCompanyId] = useState("all");
 
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
@@ -112,6 +113,7 @@ const PostsPage = () => {
     fetchPosts();
   }, [firebaseUser]);
 
+
   useEffect(() => { 
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setFirebaseUser(user);
@@ -121,18 +123,36 @@ const PostsPage = () => {
         router.push("/auth/signin");
       } else {
         try {
-          const token = await user.getIdToken();
-          const res = await fetch(`/api/posts?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
-          const result = await res.json();
+      const token = await user.getIdToken();
+          const [catRes, companyRes] = await Promise.allSettled([
+            fetch(`/api/posts?categories=true`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            fetch(`/api/companies`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+          ]);
+          if (catRes.status === 'fulfilled' && catRes.value.ok) {
+            const result = await catRes.value.json();
+            if (result.categories) {
+              setEditCategories((prev) => {
+                const merged = [...prev, ...result.categories];
+                return [...new Set(merged.map((c) => c.trim()))];
+              });
+            }
+          } else if (catRes.status === 'rejected') {
+            console.error("Failed to fetch categories:", catRes.reason);
+          }
 
-          if (res.ok && result.categories) {
-            setEditCategories((prev) => {
-              const merged = [...prev, ...result.categories];
-              return [...new Set(merged.map((c) => c.trim()))];
-            });
+          if (companyRes.status === 'fulfilled' && companyRes.value.ok) {
+         const result = await companyRes.value.json();
+         const list = Array.isArray(result.data) ? result.data : [];
+         setCompaniesList(list);
+          } else if (companyRes.status === 'rejected') {
+            console.error("Failed to fetch companies:", companyRes.reason);
           }
         } catch (err) {
-          console.error("Failed to fetch categories:", err);
+          console.error("Failed to fetch:", err);
         }
       }
     });
@@ -142,8 +162,15 @@ const PostsPage = () => {
 
   useEffect(() => {
     setCurrentPage(1); // reset to first page whenever filters or search change
-  }, [searchQuery , selectedCategory]);
+  }, [searchQuery , selectedCategory , selectedStatus , selectedCompanyId]);
 
+  const companies = [
+  { id: "all", name: "All Companies" },
+  ...companiesList.map((company) => ({
+    id: company.id,
+    name: company.name,
+  })),
+];
   const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
   const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
   
@@ -153,12 +180,15 @@ const PostsPage = () => {
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.category.toLowerCase().includes(searchQuery.toLowerCase());
 
+
     const matchesCategory =
       selectedCategory === "all" || post.category === selectedCategory;
     const matchesStatus =
       selectedStatus === "all" || post.status === selectedStatus;
+    const matchCompanyId =
+    selectedCompanyId === "all" || post.company_id === selectedCompanyId;
 
-    return matchesSearch && matchesCategory && matchesStatus;
+    return matchesSearch && matchesCategory && matchesStatus && matchCompanyId;
   });
 
      // Pagination logic
@@ -421,7 +451,10 @@ const PostsPage = () => {
                   className="pl-10"
                 />
               </div>
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <Select
+                value={selectedCategory}
+                onValueChange={setSelectedCategory}
+              >
                 <SelectTrigger className="w-48">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
@@ -442,11 +475,32 @@ const PostsPage = () => {
                 <SelectContent>
                   {statuses.map((status) => (
                     <SelectItem key={status} value={status}>
-                      {status === "all" ? "All Status" : status.charAt(0).toUpperCase() + status.slice(1)}
+                      {status === "all"
+                        ? "All Status"
+                        : status.charAt(0).toUpperCase() + status.slice(1)}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
+              
+        
+                  <Select
+                    value={selectedCompanyId}
+                    onValueChange={setSelectedCompanyId}
+                  >
+                    <SelectTrigger className="w-48">
+                      <SelectValue placeholder="All Companies" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {companies.map((company) => (
+                        <SelectItem key={company.id} value={company.id}>
+                          {company.name === "all" ? "All Comapnies" : company.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+            
+
             </div>
           </CardContent>
         </Card>
@@ -721,7 +775,12 @@ const PostsPage = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Customer Comments</Label>
+                    <Label
+                      htmlFor="clientFeedback"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      Customer Comments
+                    </Label>
                     <Textarea
                       id="clientFeedback"
                       value={editFormData.clientFeedback}
