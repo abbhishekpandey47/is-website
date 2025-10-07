@@ -1,7 +1,7 @@
 module.exports = {
     reactStrictMode: false,
     images: {
-         domains: ["cdn.prod.website-files.com", "framerusercontent.com", "images.surferseo.art", "betterstackcdn.com"],
+         domains: ["cdn.prod.website-files.com", "framerusercontent.com", "images.surferseo.art", "betterstackcdn.com", "devplaybook-landing.lovable.app"],
         remotePatterns: [
             {
                 protocol: 'https',
@@ -14,6 +14,10 @@ module.exports = {
             {
                 protocol: 'https',
                 hostname: 'images.surferseo.art',
+            },
+            {
+                protocol: 'https',
+                hostname: 'devplaybook-landing.lovable.app',
             },
         ],
     },
