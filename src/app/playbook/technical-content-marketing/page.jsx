@@ -109,7 +109,7 @@ export default function Page() {
   };
 
   const handleBookDemo = () => {
-    window.open('/book-a-demo', '_blank');
+    window.open('https://www.infrasity.com/contact', '_blank');
   };
 
   return (

@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Developer Marketing Playbook for DevTool and AI Agents Startups in 2025",
-  description: "Master developer marketing with our proven playbook. Drive developer trust, product adoption, and community growth for AI, DevTools, and B2B startups. Real case studies, actionable strategies.",
+  title: "The 2025 Developer Marketing Playbook for DevTool & AI Startups | Infrasity",
+  description: "Master developer marketing with our proven playbook. Drive 781% traffic growth, build developer trust, and turn technical audiences into advocates. Real case studies from Firefly, ScaleKit, and Kubiya included.",
   robots: {
     index: false,
     follow: false,
