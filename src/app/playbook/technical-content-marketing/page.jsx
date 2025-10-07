@@ -1,8 +1,54 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Check, Download, Calendar, Users, TrendingUp, Code, BookOpen, Video, MessageSquare, ArrowRight, Star, Play, Shield, Zap, Target, Award, Globe, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
+import { Marquee } from "@devnomic/marquee";
+import "@devnomic/marquee/dist/index.css";
+
+const fileList = [
+  "aviator.png","mocha.png","cedana.png","dhiwise.png","amnic.png","oso.png","ox-sec.svg",
+  "mvp-grow.png","cerbos.png","qodo-logo.png","Codegiant.png","Scalekit-logo.png","cycloid.png",
+  "scalr.png","daytona.png","stackOne.png","DevZero.png","terrateam.png","env0-infra-1.png",
+  "tracetest.png","firefly.png","TravisCI-Full-Color.png","firstock-logo.png","vapi-logo.png",
+  "kapstan.png","Zenml.png","Kubiya.png","lovable-logo.png","Meteor-ops.png","middleware-logo.png"
+];
+
+const getLogoPadding = (filename) => {
+  const paddingMap = {
+    'aviator.png': 'p-3',
+    'mocha.png': 'p-8',
+    'cedana.png': 'p-5',
+    'dhiwise.png': 'p-2',
+    'amnic.png': 'p-5 filter brightness-0 invert',
+    'mvp-grow.png': 'p-4',
+    'cerbos.png': 'p-4',
+    'qodo-logo.png': 'p-8',
+    'Codegiant.png': 'p-4',
+    'Scalekit-logo.png': 'p-4',
+    'cycloid.png': 'p-7',
+    'scalr.png': 'p-4',
+    'daytona.png': 'p-5',
+    'oso.png': 'p-12 ',
+    'ox-sec.svg': 'p-8',
+    'stackOne.png': 'p-4',
+    'DevZero.png': 'p-4',
+    'terrateam.png': 'p-4',
+    'env0-infra-1.png': 'p-6',
+    'tracetest.png': 'p-4',
+    'firefly.png': 'p-5',
+    'TravisCI-Full-Color.png': 'p-5',
+    'firstock-logo.png': 'p-5',
+    'vapi-logo.png': 'p-10',
+    'kapstan.png': 'p-4',
+    'Zenml.png': 'p-4',
+    'Kubiya.png': 'p-5',
+    'lovable-logo.png': 'p-4',
+    'Meteor-ops.png': 'p-4',
+    'middleware-logo.png': 'p-3',
+  };
+  return paddingMap[filename] || 'p-4';
+};
 
 export default function Page() {
   const [formData, setFormData] = useState({
@@ -16,18 +62,59 @@ export default function Page() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleDownload = (e) => {
+  const handleDownload = async (e) => {
     e.preventDefault();
-    console.log("Download playbook:", formData);
+    
+    // Validate form data
+    if (!formData.fullName || !formData.workEmail || !formData.companyName) {
+      alert("Please fill in all required fields");
+      return;
+    }
+
+    try {
+      const payload = {
+        fields: [
+          { name: "fullname", value: formData.fullName },
+          { name: "companyname", value: formData.companyName },
+          { name: "email", value: formData.workEmail },
+        ],
+        context: {
+          pageUri: window.location.href,
+          pageName: "Developer Marketing Playbook",
+        },
+      };
+
+      const response = await fetch("/api/whitepaper", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        // Download the PDF after successful submission
+        setTimeout(() => {
+          const link = document.createElement('a');
+          link.href = "https://drive.google.com/uc?export=download&id=1HBGgOsb7I3zzJ7qanfZxbqsOneh5Zf4f";
+          link.download = 'Developer-Marketing-Playbook.pdf';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }, 100);
+      } else {
+        alert("Failed to submit form. Please try again.");
+      }
+    } catch (error) {
+      alert("Failed to submit form. Please try again.");
+    }
   };
 
   const handleBookDemo = () => {
-    console.log("Book demo");
+    window.open('https://www.infrasity.com/contact', '_blank');
   };
 
   return (
     <>
-      <style jsx>{`
+      <style jsx global>{`
         @keyframes scroll {
           0% {
             transform: translateX(0);
@@ -38,6 +125,44 @@ export default function Page() {
         }
         .animate-scroll {
           animation: scroll 20s linear infinite;
+        }
+        
+        /* Smooth fade at left/right edges: mask-image works well (with -webkit prefix fallback) */
+        .custom-marquee-mask {
+          /* adjust percentages to change width of fade */
+          -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);
+          mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);
+          -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+          /* ensure overlays/gaps are not clipped by mask */
+        }
+
+        /* Force the library's animated track to run slower.
+           innerClassName attaches this class to the moving track, so overriding animation-duration
+           here slows the scroll. */
+        .custom-marquee-track {
+          -webkit-animation-duration: 80s !important;
+          animation-duration: 80s !important;
+          /* keep linear timing for smooth constant speed */
+          -webkit-animation-timing-function: linear !important;
+          animation-timing-function: linear !important;
+        }
+
+        /* Some environments set animation on a child; add a safer override for any descendant animation */
+        .custom-marquee-track * {
+          -webkit-animation-duration: 80s !important;
+          animation-duration: 80s !important;
+        }
+
+        /* Optional: nice image smoothing */
+        .custom-marquee-mask img {
+          transition: transform 300ms ease, opacity 300ms ease;
+          will-change: transform, opacity;
+        }
+
+        /* responsive tweak: smaller height on small screens */
+        @media (max-width: 640px) {
+          .custom-marquee-mask img { height: 36px; width: auto; }
         }
       `}</style>
       <div className="min-h-screen bg-black">
@@ -207,6 +332,46 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* Trusted By Section - Right after hero */}
+      <div className="py-12 bg-black">
+        <div className="text-center mb-8">
+          <p className="text-gray-400 mb-8 text-sm font-semibold tracking-wider font-['Inter',sans-serif]">TRUSTED BY LEADING DEVTOOLS</p>
+          
+          {/* Customer Logos - Exact copy from developer marketing agency */}
+          <div className="pb-2">
+            <div className="max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
+              <div
+                className="relative w-full mx-auto max-w-4xl opacity-90 dark:opacity-70 overflow-hidden px-5 lg:px-12"
+                aria-hidden={false}
+              >
+                <Marquee
+                  className="custom-marquee-mask"
+                  innerClassName="custom-marquee-track"
+                  pauseOnHover={true}
+                  fade={false}
+                  direction="left"
+                >
+                  <div className="flex gap-10 items-center mx-4">
+                    {fileList.map((file, index) => (
+                      <div key={index} className={`mix-blend-color-burn ${getLogoPadding(file)}`}>
+                        <Image
+                          loading="lazy"
+                          width={100}
+                          height={80}
+                          className="object-contain opacity-90"
+                          src={`/trustedby-bw/bw/${file}`}
+                          alt={file}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </Marquee>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Problem Section - Second Fold */}
       <section className="py-20 bg-black">
@@ -582,207 +747,6 @@ export default function Page() {
             </motion.div>
           </div>
           
-          <div className="text-center mb-12">
-            <p className="text-gray-400 mb-8 text-sm font-semibold tracking-wider font-['Inter',sans-serif]">TRUSTED BY LEADING DEVTOOLS</p>
-            
-            {/* Moving Customer Logos Carousel - Exact copy from Infrasity */}
-            <div className="relative overflow-hidden">
-              <div className="flex animate-scroll space-x-8">
-                {/* First set of logos */}
-                <div className="flex space-x-8 items-center">
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ffirefly.png&w=96&q=75" alt="Firefly" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fscalekit-logo.png&w=96&q=75" alt="Scalekit" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fkubiya.png&w=96&q=75" alt="Kubiya" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdevzero.png&w=96&q=75" alt="DevZero" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fstackgen.png&w=96&q=75" alt="StackGen" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Flovable-logo.png&w=96&q=75" alt="Lovable" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmeteor-ops.png&w=96&q=75" alt="Meteor" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmiddleware-logo.png&w=96&q=75" alt="Middleware" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Faviator.png&w=96&q=75" alt="Aviator" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmocha.png&w=96&q=75" alt="Mocha" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcedana.png&w=96&q=75" alt="Cedana" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdhiwise.png&w=96&q=75" alt="DhiWise" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Famnic.png&w=96&q=75" alt="Amnic" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Foso.png&w=96&q=75" alt="Oso" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fox-sec.svg&w=96&q=75" alt="Ox Security" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmvp-grow.png&w=96&q=75" alt="MVP Grow" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcerbos.png&w=96&q=75" alt="Cerbos" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fqodo-logo.png&w=96&q=75" alt="Qodo" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcodegiant.png&w=96&q=75" alt="CodeGiant" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcycloid.png&w=96&q=75" alt="Cycloid" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fscalr.png&w=96&q=75" alt="Scalr" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdaytona.png&w=96&q=75" alt="Daytona" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fstackone.png&w=96&q=75" alt="StackOne" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fterrateam.png&w=96&q=75" alt="TerraTeam" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fenv0-infra-1.png&w=96&q=75" alt="Env0" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ftracetest.png&w=96&q=75" alt="Tracetest" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ftravisci-full-color.png&w=96&q=75" alt="TravisCI" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ffirstock-logo.png&w=96&q=75" alt="Firstock" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fvapi-logo.png&w=96&q=75" alt="Vapi" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fkapstan.png&w=96&q=75" alt="Kapstan" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fzenml.png&w=96&q=75" alt="ZenML" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-                {/* Duplicate set for seamless loop */}
-                <div className="flex space-x-8 items-center">
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ffirefly.png&w=96&q=75" alt="Firefly" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fscalekit-logo.png&w=96&q=75" alt="Scalekit" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fkubiya.png&w=96&q=75" alt="Kubiya" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdevzero.png&w=96&q=75" alt="DevZero" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fstackgen.png&w=96&q=75" alt="StackGen" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Flovable-logo.png&w=96&q=75" alt="Lovable" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmeteor-ops.png&w=96&q=75" alt="Meteor" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmiddleware-logo.png&w=96&q=75" alt="Middleware" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Faviator.png&w=96&q=75" alt="Aviator" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmocha.png&w=96&q=75" alt="Mocha" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcedana.png&w=96&q=75" alt="Cedana" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdhiwise.png&w=96&q=75" alt="DhiWise" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Famnic.png&w=96&q=75" alt="Amnic" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Foso.png&w=96&q=75" alt="Oso" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fox-sec.svg&w=96&q=75" alt="Ox Security" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmvp-grow.png&w=96&q=75" alt="MVP Grow" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcerbos.png&w=96&q=75" alt="Cerbos" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fqodo-logo.png&w=96&q=75" alt="Qodo" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcodegiant.png&w=96&q=75" alt="CodeGiant" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcycloid.png&w=96&q=75" alt="Cycloid" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fscalr.png&w=96&q=75" alt="Scalr" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdaytona.png&w=96&q=75" alt="Daytona" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fstackone.png&w=96&q=75" alt="StackOne" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fterrateam.png&w=96&q=75" alt="TerraTeam" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fenv0-infra-1.png&w=96&q=75" alt="Env0" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ftracetest.png&w=96&q=75" alt="Tracetest" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ftravisci-full-color.png&w=96&q=75" alt="TravisCI" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ffirstock-logo.png&w=96&q=75" alt="Firstock" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fvapi-logo.png&w=96&q=75" alt="Vapi" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fkapstan.png&w=96&q=75" alt="Kapstan" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fzenml.png&w=96&q=75" alt="ZenML" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
