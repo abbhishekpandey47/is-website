@@ -1,7 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { Check, Download, Calendar, Users, TrendingUp, Code, BookOpen, Video, MessageSquare, ArrowRight, Star, Play, Shield, Zap, Target, Award, Globe, ChevronRight, X } from "lucide-react";
+import { Check, Download, Calendar, Users, TrendingUp, Code, BookOpen, Video, MessageSquare, ArrowRight, Star, Play, Shield, Zap, Target, Award, Globe, ChevronRight, X, Building } from "lucide-react";
 import Image from "next/image";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
@@ -466,77 +466,168 @@ export default function Page() {
             </motion.p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left side - Learning cards */}
+            <div className="space-y-6">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="group bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800 hover:border-[#A259FF]/50 transition-all duration-300"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-[#A259FF] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <Check className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2 font-['Inter',sans-serif]">6 Core Pillars of Developer Marketing</h3>
+                    <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
+                      Master the framework that drives developer adoption
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="group bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800 hover:border-[#A259FF]/50 transition-all duration-300"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-[#A259FF] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2 font-['Inter',sans-serif]">Building Developer Trust</h3>
+                    <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
+                      Learn how to create authentic technical content that resonates
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="group bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800 hover:border-[#A259FF]/50 transition-all duration-300"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-[#A259FF] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <BookOpen className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2 font-['Inter',sans-serif]">Docs & SDKs as Growth Engines</h3>
+                    <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
+                      Transform documentation into your most powerful marketing asset
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="group bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800 hover:border-[#A259FF]/50 transition-all duration-300"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-[#A259FF] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2 font-['Inter',sans-serif]">Measuring Developer Marketing ROI</h3>
+                    <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
+                      Track what matters with real metrics and case studies
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="group bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800 hover:border-[#A259FF]/50 transition-all duration-300"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-[#A259FF] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <Building className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2 font-['Inter',sans-serif]">Case Studies from Firefly & Scalekit</h3>
+                    <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
+                      Real-world examples of 781%+ traffic growth strategies
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right side - 3D Book */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="group bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-[#A259FF]/30 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
-              style={{
-                boxShadow: '0 4px 20px rgba(162,89,255,0.05)'
-              }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative flex justify-center lg:justify-end"
             >
-              <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Check className="w-8 h-8 text-white" />
+              <div className="relative">
+                {/* Book container with 3D effect */}
+                <div className="relative w-[350px] h-[480px] perspective-1000">
+                  {/* Book spine */}
+                  <div className="absolute left-0 top-0 w-6 h-full bg-gray-900 rounded-l-2xl transform rotate-y-12 rotate-x-6 origin-left"></div>
+                  
+                  {/* Book pages (white edges) */}
+                  <div className="absolute top-0 left-0 w-full h-3 bg-white rounded-t-2xl transform rotate-y-12 rotate-x-6"></div>
+                  
+                  {/* Book cover */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl shadow-lg transform rotate-y-12 rotate-x-6">
+                    {/* Book cover content */}
+                    <div className="p-6 h-full flex flex-col justify-start relative overflow-hidden">
+                      {/* Very subtle abstract graphics overlay */}
+                      <div className="absolute inset-0 opacity-5">
+                        {/* Thin horizontal lines */}
+                        <div className="absolute top-32 left-8 w-16 h-0.5 bg-gray-300"></div>
+                        <div className="absolute top-48 right-10 w-12 h-0.5 bg-gray-300"></div>
+                        <div className="absolute top-64 left-10 w-20 h-0.5 bg-gray-300"></div>
+                        <div className="absolute top-80 right-8 w-14 h-0.5 bg-gray-300"></div>
+                        <div className="absolute top-96 left-12 w-18 h-0.5 bg-gray-300"></div>
+                        <div className="absolute top-112 right-12 w-10 h-0.5 bg-gray-300"></div>
+                        
+                        {/* Small dots */}
+                        <div className="absolute top-40 right-20 w-0.5 h-0.5 bg-gray-300 rounded-full"></div>
+                        <div className="absolute top-60 left-24 w-0.5 h-0.5 bg-gray-300 rounded-full"></div>
+                        <div className="absolute top-80 right-24 w-0.5 h-0.5 bg-gray-300 rounded-full"></div>
+                        <div className="absolute top-100 left-20 w-0.5 h-0.5 bg-gray-300 rounded-full"></div>
+                        <div className="absolute top-120 right-28 w-0.5 h-0.5 bg-gray-300 rounded-full"></div>
+                      </div>
+                      
+                      <div className="relative z-10">
+                        {/* Year badge */}
+                        <div className="inline-block bg-gray-400 rounded px-2 py-1 mb-6">
+                          <span className="text-white text-sm font-semibold">2025</span>
+                        </div>
+                        
+                        {/* Main title */}
+                        <div className="text-3xl font-bold text-gray-100 mb-6 leading-tight">
+                          <div>DEVELOPER</div>
+                          <div>MARKETING</div>
+                          <div>PLAYBOOK</div>
+                        </div>
+                        
+                        {/* Subtitle */}
+                        <div className="text-sm text-gray-200 font-medium">
+                          For DevTool and AI Agents Startups
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Subtle shadow effect */}
+                  <div className="absolute -inset-1 bg-gray-900/30 rounded-2xl blur-sm"></div>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-4 text-center font-['Inter',sans-serif]">6 Core Pillars of Developer Marketing</h3>
-              <p className="text-gray-300 text-center leading-relaxed font-['Inter',sans-serif]">
-                Master the framework that drives developer adoption
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="group bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-[#A259FF]/30 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
-              style={{
-                boxShadow: '0 4px 20px rgba(162,89,255,0.05)'
-              }}
-            >
-              <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4 text-center font-['Inter',sans-serif]">Building Developer Trust</h3>
-              <p className="text-gray-300 text-center leading-relaxed font-['Inter',sans-serif]">
-                Learn how to create authentic technical content that resonates
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="group bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-[#A259FF]/30 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
-              style={{
-                boxShadow: '0 4px 20px rgba(162,89,255,0.05)'
-              }}
-            >
-              <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <BookOpen className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4 text-center font-['Inter',sans-serif]">Docs & SDKs as Growth Engines</h3>
-              <p className="text-gray-300 text-center leading-relaxed font-['Inter',sans-serif]">
-                Transform documentation into your most powerful marketing asset
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="group bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-[#A259FF]/30 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
-              style={{
-                boxShadow: '0 4px 20px rgba(162,89,255,0.05)'
-              }}
-            >
-              <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <TrendingUp className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4 text-center font-['Inter',sans-serif]">Measuring Developer Marketing ROI</h3>
-              <p className="text-gray-300 text-center leading-relaxed font-['Inter',sans-serif]">
-                Track what matters with real metrics and case studies
-              </p>
             </motion.div>
           </div>
         </div>
