@@ -585,199 +585,199 @@ export default function Page() {
           <div className="text-center mb-12">
             <p className="text-gray-400 mb-8 text-sm font-semibold tracking-wider font-['Inter',sans-serif]">TRUSTED BY LEADING DEVTOOLS</p>
             
-            {/* Moving Customer Logos Carousel - Exact copy from Infrasity */}
+            {/* Moving Customer Logos Carousel - Fixed with proper styling */}
             <div className="relative overflow-hidden">
               <div className="flex animate-scroll space-x-8">
                 {/* First set of logos */}
                 <div className="flex space-x-8 items-center">
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ffirefly.png&w=96&q=75" alt="Firefly" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Firefly</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fscalekit-logo.png&w=96&q=75" alt="Scalekit" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Scalekit</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fkubiya.png&w=96&q=75" alt="Kubiya" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Kubiya</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdevzero.png&w=96&q=75" alt="DevZero" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">DevZero</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fstackgen.png&w=96&q=75" alt="StackGen" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">StackGen</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Flovable-logo.png&w=96&q=75" alt="Lovable" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Lovable</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmeteor-ops.png&w=96&q=75" alt="Meteor" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Meteor</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmiddleware-logo.png&w=96&q=75" alt="Middleware" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Middleware</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Faviator.png&w=96&q=75" alt="Aviator" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Aviator</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmocha.png&w=96&q=75" alt="Mocha" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Mocha</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcedana.png&w=96&q=75" alt="Cedana" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cedana</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdhiwise.png&w=96&q=75" alt="DhiWise" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">DhiWise</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Famnic.png&w=96&q=75" alt="Amnic" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Amnic</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Foso.png&w=96&q=75" alt="Oso" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Oso</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fox-sec.svg&w=96&q=75" alt="Ox Security" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Ox Security</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmvp-grow.png&w=96&q=75" alt="MVP Grow" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">MVP Grow</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcerbos.png&w=96&q=75" alt="Cerbos" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cerbos</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fqodo-logo.png&w=96&q=75" alt="Qodo" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Qodo</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcodegiant.png&w=96&q=75" alt="CodeGiant" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">CodeGiant</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcycloid.png&w=96&q=75" alt="Cycloid" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cycloid</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fscalr.png&w=96&q=75" alt="Scalr" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Scalr</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdaytona.png&w=96&q=75" alt="Daytona" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Daytona</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fstackone.png&w=96&q=75" alt="StackOne" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">StackOne</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fterrateam.png&w=96&q=75" alt="TerraTeam" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">TerraTeam</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fenv0-infra-1.png&w=96&q=75" alt="Env0" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Env0</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ftracetest.png&w=96&q=75" alt="Tracetest" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Tracetest</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ftravisci-full-color.png&w=96&q=75" alt="TravisCI" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">TravisCI</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ffirstock-logo.png&w=96&q=75" alt="Firstock" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Firstock</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fvapi-logo.png&w=96&q=75" alt="Vapi" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Vapi</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fkapstan.png&w=96&q=75" alt="Kapstan" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Kapstan</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fzenml.png&w=96&q=75" alt="ZenML" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">ZenML</span>
                   </div>
                 </div>
                 {/* Duplicate set for seamless loop */}
                 <div className="flex space-x-8 items-center">
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ffirefly.png&w=96&q=75" alt="Firefly" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Firefly</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fscalekit-logo.png&w=96&q=75" alt="Scalekit" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Scalekit</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fkubiya.png&w=96&q=75" alt="Kubiya" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Kubiya</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdevzero.png&w=96&q=75" alt="DevZero" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">DevZero</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fstackgen.png&w=96&q=75" alt="StackGen" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">StackGen</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Flovable-logo.png&w=96&q=75" alt="Lovable" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Lovable</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmeteor-ops.png&w=96&q=75" alt="Meteor" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Meteor</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmiddleware-logo.png&w=96&q=75" alt="Middleware" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Middleware</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Faviator.png&w=96&q=75" alt="Aviator" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Aviator</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmocha.png&w=96&q=75" alt="Mocha" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Mocha</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcedana.png&w=96&q=75" alt="Cedana" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cedana</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdhiwise.png&w=96&q=75" alt="DhiWise" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">DhiWise</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Famnic.png&w=96&q=75" alt="Amnic" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Amnic</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Foso.png&w=96&q=75" alt="Oso" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Oso</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fox-sec.svg&w=96&q=75" alt="Ox Security" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Ox Security</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fmvp-grow.png&w=96&q=75" alt="MVP Grow" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">MVP Grow</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcerbos.png&w=96&q=75" alt="Cerbos" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cerbos</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fqodo-logo.png&w=96&q=75" alt="Qodo" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Qodo</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcodegiant.png&w=96&q=75" alt="CodeGiant" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">CodeGiant</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fcycloid.png&w=96&q=75" alt="Cycloid" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Cycloid</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fscalr.png&w=96&q=75" alt="Scalr" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Scalr</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fdaytona.png&w=96&q=75" alt="Daytona" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Daytona</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fstackone.png&w=96&q=75" alt="StackOne" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">StackOne</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fterrateam.png&w=96&q=75" alt="TerraTeam" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">TerraTeam</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fenv0-infra-1.png&w=96&q=75" alt="Env0" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Env0</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ftracetest.png&w=96&q=75" alt="Tracetest" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Tracetest</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ftravisci-full-color.png&w=96&q=75" alt="TravisCI" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">TravisCI</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Ffirstock-logo.png&w=96&q=75" alt="Firstock" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Firstock</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fvapi-logo.png&w=96&q=75" alt="Vapi" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Vapi</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fkapstan.png&w=96&q=75" alt="Kapstan" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">Kapstan</span>
                   </div>
-                  <div className="flex items-center justify-center w-24 h-12">
-                    <img src="https://www.infrasity.com/_next/image?url=%2Flogodata%2Fzenml.png&w=96&q=75" alt="ZenML" className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-center px-4 py-2 bg-white/5 rounded-lg border border-white/10 hover:border-[#A259FF]/30 transition-all duration-300">
+                    <span className="text-white font-semibold text-sm opacity-60 hover:opacity-100 transition-opacity">ZenML</span>
                   </div>
                 </div>
               </div>
