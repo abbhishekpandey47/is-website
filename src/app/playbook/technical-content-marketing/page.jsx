@@ -1,8 +1,54 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Check, Download, Calendar, Users, TrendingUp, Code, BookOpen, Video, MessageSquare, ArrowRight, Star, Play, Shield, Zap, Target, Award, Globe, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
+import { Marquee } from "@devnomic/marquee";
+import "@devnomic/marquee/dist/index.css";
+
+const fileList = [
+  "aviator.png","mocha.png","cedana.png","dhiwise.png","amnic.png","oso.png","ox-sec.svg",
+  "mvp-grow.png","cerbos.png","qodo-logo.png","Codegiant.png","Scalekit-logo.png","cycloid.png",
+  "scalr.png","daytona.png","stackOne.png","DevZero.png","terrateam.png","env0-infra-1.png",
+  "tracetest.png","firefly.png","TravisCI-Full-Color.png","firstock-logo.png","vapi-logo.png",
+  "kapstan.png","Zenml.png","Kubiya.png","lovable-logo.png","Meteor-ops.png","middleware-logo.png"
+];
+
+const getLogoPadding = (filename) => {
+  const paddingMap = {
+    'aviator.png': 'p-3',
+    'mocha.png': 'p-8',
+    'cedana.png': 'p-5',
+    'dhiwise.png': 'p-2',
+    'amnic.png': 'p-5 filter brightness-0 invert',
+    'mvp-grow.png': 'p-4',
+    'cerbos.png': 'p-4',
+    'qodo-logo.png': 'p-8',
+    'Codegiant.png': 'p-4',
+    'Scalekit-logo.png': 'p-4',
+    'cycloid.png': 'p-7',
+    'scalr.png': 'p-4',
+    'daytona.png': 'p-5',
+    'oso.png': 'p-12 ',
+    'ox-sec.svg': 'p-8',
+    'stackOne.png': 'p-4',
+    'DevZero.png': 'p-4',
+    'terrateam.png': 'p-4',
+    'env0-infra-1.png': 'p-6',
+    'tracetest.png': 'p-4',
+    'firefly.png': 'p-5',
+    'TravisCI-Full-Color.png': 'p-5',
+    'firstock-logo.png': 'p-5',
+    'vapi-logo.png': 'p-10',
+    'kapstan.png': 'p-4',
+    'Zenml.png': 'p-4',
+    'Kubiya.png': 'p-5',
+    'lovable-logo.png': 'p-4',
+    'Meteor-ops.png': 'p-4',
+    'middleware-logo.png': 'p-3',
+  };
+  return paddingMap[filename] || 'p-4';
+};
 
 export default function Page() {
   const [formData, setFormData] = useState({
@@ -16,18 +62,59 @@ export default function Page() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleDownload = (e) => {
+  const handleDownload = async (e) => {
     e.preventDefault();
-    console.log("Download playbook:", formData);
+    
+    // Validate form data
+    if (!formData.fullName || !formData.workEmail || !formData.companyName) {
+      alert("Please fill in all required fields");
+      return;
+    }
+
+    try {
+      const payload = {
+        fields: [
+          { name: "fullname", value: formData.fullName },
+          { name: "companyname", value: formData.companyName },
+          { name: "email", value: formData.workEmail },
+        ],
+        context: {
+          pageUri: window.location.href,
+          pageName: "Developer Marketing Playbook",
+        },
+      };
+
+      const response = await fetch("/api/whitepaper", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        // Download the PDF after successful submission
+        setTimeout(() => {
+          const link = document.createElement('a');
+          link.href = "https://drive.google.com/uc?export=download&id=1HBGgOsb7I3zzJ7qanfZxbqsOneh5Zf4f";
+          link.download = 'Developer-Marketing-Playbook.pdf';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }, 100);
+      } else {
+        alert("Failed to submit form. Please try again.");
+      }
+    } catch (error) {
+      alert("Failed to submit form. Please try again.");
+    }
   };
 
   const handleBookDemo = () => {
-    console.log("Book demo");
+    window.open('/book-a-demo', '_blank');
   };
 
   return (
     <>
-      <style jsx>{`
+      <style jsx global>{`
         @keyframes scroll {
           0% {
             transform: translateX(0);
@@ -38,6 +125,44 @@ export default function Page() {
         }
         .animate-scroll {
           animation: scroll 20s linear infinite;
+        }
+        
+        /* Smooth fade at left/right edges: mask-image works well (with -webkit prefix fallback) */
+        .custom-marquee-mask {
+          /* adjust percentages to change width of fade */
+          -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);
+          mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0) 100%);
+          -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+          /* ensure overlays/gaps are not clipped by mask */
+        }
+
+        /* Force the library's animated track to run slower.
+           innerClassName attaches this class to the moving track, so overriding animation-duration
+           here slows the scroll. */
+        .custom-marquee-track {
+          -webkit-animation-duration: 80s !important;
+          animation-duration: 80s !important;
+          /* keep linear timing for smooth constant speed */
+          -webkit-animation-timing-function: linear !important;
+          animation-timing-function: linear !important;
+        }
+
+        /* Some environments set animation on a child; add a safer override for any descendant animation */
+        .custom-marquee-track * {
+          -webkit-animation-duration: 80s !important;
+          animation-duration: 80s !important;
+        }
+
+        /* Optional: nice image smoothing */
+        .custom-marquee-mask img {
+          transition: transform 300ms ease, opacity 300ms ease;
+          will-change: transform, opacity;
+        }
+
+        /* responsive tweak: smaller height on small screens */
+        @media (max-width: 640px) {
+          .custom-marquee-mask img { height: 36px; width: auto; }
         }
       `}</style>
       <div className="min-h-screen bg-black">
@@ -207,6 +332,46 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* Trusted By Section - Right after hero */}
+      <div className="py-12 bg-black">
+        <div className="text-center mb-8">
+          <p className="text-gray-400 mb-8 text-sm font-semibold tracking-wider font-['Inter',sans-serif]">TRUSTED BY LEADING DEVTOOLS</p>
+          
+          {/* Customer Logos - Exact copy from developer marketing agency */}
+          <div className="pb-2">
+            <div className="max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
+              <div
+                className="relative w-full mx-auto max-w-4xl opacity-90 dark:opacity-70 overflow-hidden px-5 lg:px-12"
+                aria-hidden={false}
+              >
+                <Marquee
+                  className="custom-marquee-mask"
+                  innerClassName="custom-marquee-track"
+                  pauseOnHover={true}
+                  fade={false}
+                  direction="left"
+                >
+                  <div className="flex gap-10 items-center mx-4">
+                    {fileList.map((file, index) => (
+                      <div key={index} className={`mix-blend-color-burn ${getLogoPadding(file)}`}>
+                        <Image
+                          loading="lazy"
+                          width={100}
+                          height={80}
+                          className="object-contain opacity-90"
+                          src={`/trustedby-bw/bw/${file}`}
+                          alt={file}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </Marquee>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Problem Section - Second Fold */}
       <section className="py-20 bg-black">
@@ -582,322 +747,6 @@ export default function Page() {
             </motion.div>
           </div>
           
-          <div className="text-center mb-12">
-            <p className="text-gray-400 mb-8 text-sm font-semibold tracking-wider font-['Inter',sans-serif]">TRUSTED BY LEADING DEVTOOLS</p>
-            
-            {/* Customer Logos - Exact copy from developer marketing agency */}
-            <div className="pb-2">
-              <div className="max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
-                <div
-                  className="relative w-full mx-auto max-w-4xl opacity-90 dark:opacity-70 overflow-hidden px-5 lg:px-12"
-                  aria-hidden={false}
-                >
-                  <div className="flex gap-10 items-center mx-4 animate-scroll">
-                    <div className="mix-blend-color-burn p-3">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/aviator.png"
-                        alt="Aviator"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-8">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/mocha.png"
-                        alt="Mocha"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-5">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/cedana.png"
-                        alt="Cedana"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-2">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/dhiwise.png"
-                        alt="DhiWise"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-5 filter brightness-0 invert">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/amnic.png"
-                        alt="Amnic"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-12">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/oso.png"
-                        alt="Oso"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-8">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/ox-sec.svg"
-                        alt="Ox Security"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/mvp-grow.png"
-                        alt="MVP Grow"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/cerbos.png"
-                        alt="Cerbos"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-8">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/qodo-logo.png"
-                        alt="Qodo"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/Codegiant.png"
-                        alt="CodeGiant"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/Scalekit-logo.png"
-                        alt="Scalekit"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-7">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/cycloid.png"
-                        alt="Cycloid"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/scalr.png"
-                        alt="Scalr"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-5">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/daytona.png"
-                        alt="Daytona"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/stackOne.png"
-                        alt="StackOne"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/DevZero.png"
-                        alt="DevZero"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/terrateam.png"
-                        alt="TerraTeam"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-6">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/env0-infra-1.png"
-                        alt="Env0"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/tracetest.png"
-                        alt="Tracetest"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-5">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/firefly.png"
-                        alt="Firefly"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-5">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/TravisCI-Full-Color.png"
-                        alt="TravisCI"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-5">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/firstock-logo.png"
-                        alt="Firstock"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-10">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/vapi-logo.png"
-                        alt="Vapi"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/kapstan.png"
-                        alt="Kapstan"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/Zenml.png"
-                        alt="ZenML"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-5">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/Kubiya.png"
-                        alt="Kubiya"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/lovable-logo.png"
-                        alt="Lovable"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-4">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/Meteor-ops.png"
-                        alt="Meteor"
-                      />
-                    </div>
-                    <div className="mix-blend-color-burn p-3">
-                      <Image
-                        loading="lazy"
-                        width={100}
-                        height={80}
-                        className="object-contain opacity-90"
-                        src="/trustedby-bw/bw/middleware-logo.png"
-                        alt="Middleware"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
