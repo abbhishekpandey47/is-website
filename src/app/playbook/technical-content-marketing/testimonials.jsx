@@ -3,35 +3,6 @@
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-/**
- * VideoTestimonials (JS version)
- * -------------------------------------------
- * Dependency‑free, responsive video testimonial carousel for Next.js.
- * Works with your Tailwind config (border/input/card/muted tokens, btnprimary, etc.).
- *
- * Props (plain JS):
- * - heading?: string
- * - eyebrow?: string
- * - blurb?: string
- * - cta?: { label: string, href: string }
- * - items: Array<{
- *     id: string,
- *     eyebrow?: string,
- *     heading?: string,
- *     blurb: string,
- *     ctaHref?: string,
- *     ctaLabel?: string,
- *     headshotSrc: string,
- *     headshotAlt?: string,
- *     companyLogoSrc: string,
- *     companyLogoAlt?: string,
- *     quote: string,
- *     personName: string,
- *     personTitle: string,
- *     videoSrc?: string,
- *   }>
- * - brandColor?: Tailwind bg-* class for Play button (defaults to your theme's btnprimary)
- */
 
 export default function VideoTestimonials({
   heading = "Hear directly from our customers",
@@ -188,20 +159,53 @@ export default function VideoTestimonials({
 function Slide({ item, selected, brandColor, onPlay }) {
   return (
     <div className="w-full shrink-0 basis-full p-0">
-      {/* Compact cover: centered thumbnail with play button */}
-      <div className="flex w-full justify-center">
-        <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-xl border border-border bg-card shadow-navshadow">
+      <div className="relative w-full overflow-hidden rounded-2xl">
+        {/* Image */}
+        <div className="relative aspect-[16/9] w-full">
           <Image
             alt={item.headshotAlt || item.personName || "Testimonial image"}
             src={item.headshotSrc}
             fill
-            sizes="(min-width: 1024px) 32vw, 90vw"
+            sizes="(min-width: 1024px) 48vw, 100vw"
             className="object-cover"
           />
+          {/* Play button centered */}
           {item.videoSrc ? (
             <button
               onClick={onPlay}
-              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full ${brandColor} text-white shadow-lg h-14 w-14 md:h-16 md:w-16 focus:outline-none focus:ring-2 focus:ring-ring`}({ openItem, onClose }) {({ openItem, onClose }) {
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full ${brandColor} text-white shadow-lg h-16 w-16 md:h-20 md:w-20 focus:outline-none focus:ring-2 focus:ring-ring`}
+              aria-label="Play video"
+            >
+              <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
+                <circle cx="12" cy="12" r="12" fill="currentColor" />
+                <path d="M10 15.5v-7L16 12l-6 3.5Z" fill="#fff" fillOpacity="0.9" />
+              </svg>
+            </button>
+          ) : null}
+        </div>
+
+        {/* Quote card overlaid bottom-right (like screenshot) */}
+        <div className="absolute bottom-0 right-0 z-10 m-0 w-[85%] max-w-3xl translate-y-1/4 rounded-md bg-amber-50 p-6 shadow-navshadow border border-border">
+          <div className="flex items-start gap-6">
+            {/* Company logo */}
+            <div className="relative h-8 w-36 shrink-0">
+              <Image alt={item.companyLogoAlt || ""} src={item.companyLogoSrc} fill className="object-contain" />
+            </div>
+            <div className="min-w-0">
+              <blockquote className="italic text-lg leading-relaxed text-foreground/90">“{item.quote}”</blockquote>
+              <div className="mt-4">
+                <div className="font-bold">{item.personName}</div>
+                <div className="text-sm text-muted-foreground">{item.personTitle}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VideoDialog({ openItem, onClose }) {
   const ref = useRef(null);
   useEffect(() => {
     const d = ref.current;
@@ -264,24 +268,9 @@ function XIcon(props) {
 
 /* ---------------- Example data (replace) ---------------- */
 export const DEFAULT_ITEMS = [
+  
   {
-    id: "1",
-    eyebrow: "Case studies",
-    heading: "Hear directly from our customers",
-    blurb: "Learn how HubSpot Academy used Surveys to boost signups by 10%.",
-    ctaHref: "/customers",
-    ctaLabel: "See case studies",
-    headshotSrc: "/images/examples/eric.jpg",
-    headshotAlt: "Eric Peters",
-    companyLogoSrc: "/images/examples/hubspot.svg",
-    companyLogoAlt: "HubSpot",
-    quote: "If you can't figure out why users are bouncing, Surveys is a really direct way to ask them.",
-    personName: "Eric Peters",
-    personTitle: "Growth Marketer, HubSpot",
-    videoSrc: "/videos/examples/hubspot.mp4",
-  },
-  {
-    id: "2",
+    id: "",
     blurb: "Learn how the UK's no.1 job portal optimizes user experience.",
     headshotSrc: "/images/examples/brett.jpg",
     headshotAlt: "Brett Orr",
@@ -293,12 +282,12 @@ export const DEFAULT_ITEMS = [
     videoSrc: "/videos/examples/reed.mp4",
   },
   {
-    id: "3",
+    id: "2",
     blurb: "Learn how landing‑page gurus optimize their pages.",
     headshotSrc: "/images/examples/michael.jpg",
     headshotAlt: "Michael Aagaard",
     companyLogoSrc: "/images/examples/unbounce.svg",
-    companyLogoAlt: "Unbounce",
+    companyLogoAlt: "Unbounce", 
     quote: "I used to have a bunch of different tools I had to pay for, but with this platform you get everything in one bundle.",
     personName: "Michael Aagaard",
     personTitle: "Senior Conversion Optimizer, Unbounce",
