@@ -51,11 +51,28 @@ const getLogoPadding = (filename) => {
   return paddingMap[filename] || 'p-4';
 };
 
-export const Videos =[{
+export const Videos =[
+  {
+  id: "case-2",
+  eyebrow: "CASE STUDIES",
+  heading: "Hear directly from our customers",
+  blurb: "",
+  cta: { label: "See case studies", href: "/case-studies" },
+
+  headshotSrc: "/playbook/firefly.png",
+  headshotAlt: "Eric Peters",
+  companyLogoSrc: "/playbook/firefly-bg.png",
+  companyLogoAlt: "FireFly.ai",
+  quote: "Infrasity was quick to onboard and understand how to best show off the capabilities of Firefly's cloud asset management. Team has been super responsive and collaborative.",
+  personName: "Idoo Neeman",
+  personTitle: "Co-Founder and CEO, FireFly.ai",
+  videoUrl: "https://youtube.com/shorts/xjUnOgEi8DI",
+},
+{
   id: "case-1",
   eyebrow: "CASE STUDIES",
   heading: "Hear directly from our customers",
-  blurb: "Learn how Cycloid used Surveys to boost signups by 10%.",
+  blurb: "",
   cta: { label: "See case studies", href: "/case-studies" },
 
   headshotSrc: "/playbook/cycloid.png",
@@ -63,25 +80,9 @@ export const Videos =[{
   companyLogoSrc: "/playbook/cycloid-bg.png",
   companyLogoAlt: "Cycloid",
   quote: "If you can't figure out why users are bouncing, Surveys is a really direct way to ask them.",
-  personName: "Eric Peters",
-  personTitle: "Growth Marketer, HubSpot",
+  personName: "Ben Hewison",
+  personTitle: "Content Marketing Manager, Cycloid",
   videoUrl: "https://youtu.be/AbqznECrec4",
-},
-{
-  id: "case-2",
-  eyebrow: "CASE STUDIES",
-  heading: "Hear directly from our customers",
-  blurb: "Learn how FireFly used Surveys to boost signups by 10%.",
-  cta: { label: "See case studies", href: "/case-studies" },
-
-  headshotSrc: "/playbook/firefly.png",
-  headshotAlt: "Eric Peters",
-  companyLogoSrc: "/playbook/firefly-bg.png",
-  companyLogoAlt: "FireFly.ai",
-  quote: "If you can't figure out why users are bouncing, Surveys is a really direct way to ask them.",
-  personName: "Eric Peters",
-  personTitle: "Growth Marketer, HubSpot",
-  videoUrl: "https://youtube.com/shorts/xjUnOgEi8DI",
 }
 ]
 
@@ -851,10 +852,10 @@ export default function Page() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative flex justify-center"
+              className="relative flex justify-center lg:w-[45rem] lg:h-[35rem] lg:ml-[-10rem] xl:w-[50rem] xl:h-[40rem] xl:ml-[-8rem]"
             >
               <Image loading="lazy"
-                          width={600}
+                          width={800}
                           height={700}
                           src='/playbook/playbook.png'
                           alt='Developer Marketing Playbook' />

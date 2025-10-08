@@ -123,7 +123,7 @@ export default function VideoTestimonials({
             aria-atomic="true"
           >
             {data.map((item, i) => (
-              <div key={item.id || i} className="w-full shrink-0 basis-full p-0">
+              <div key={item.id || i} className="w-full shrink-0 basis-full p-8 border-[1px] border-[#A259FF] rounded-[15px] ">
                 <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
                   {/* Left: text (per slide) */}
                   <div>
@@ -156,14 +156,14 @@ export default function VideoTestimonials({
                   <div className="relative">
                     {/* Cover */}
                     <div className="flex w-full justify-center">
-                      <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-xl border border-border bg-card shadow-navshadow">
+                      <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-xl border border-border bg-white shadow-navshadow">
                         {item.headshotSrc ? (
                           <Image
                             alt={item.headshotAlt || item.personName || "Testimonial image"}
                             src={item.headshotSrc}
                             fill
                             sizes="(min-width: 1024px) 32vw, 90vw"
-                            className="object-cover"
+                            className="object-contain"
                           />
                         ) : (
                           <div className="absolute inset-0 grid place-items-center text-sm text-muted-foreground">
@@ -178,8 +178,8 @@ export default function VideoTestimonials({
                             aria-label="Play video"
                           >
                             <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor">
-                              <circle cx="12" cy="12" r="12" fill="currentColor" />
-                              <path d="M10 15.5v-7L16 12l-6 3.5Z" fill="#fff" fillOpacity="0.9" />
+                              {/* <circle cx="12" cy="12" r="12" fill="currentColor" /> */}
+                              <path d="M9 6v12l9-6-9-6z" fill="#fff" fillOpacity="0.9" />
                             </svg>
                           </button>
                         ) : null}
@@ -191,12 +191,12 @@ export default function VideoTestimonials({
                       <div className="mx-auto mt-4 w-full max-w-md rounded-md bg-amber-50 p-6 shadow-sm border border-border">
                         <div>
                           {item.companyLogoSrc ? (
-                            <div className="relative h-8 w-32 shrink-0 p-4">
+                            <div className="relative h-8 w-32 shrink-0 p-4 mb-4">
                               <Image
                                 alt={item.companyLogoAlt || ""}
                                 src={item.companyLogoSrc}
                                 fill
-                                className="object-cover"
+                                className={`${item.companyLogoSrc === "/playbook/cycloid-bg.png" && "ml-[-20px]"} object-cover`}
                               />
                             </div>
                           ) : null}
