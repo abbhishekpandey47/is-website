@@ -196,7 +196,7 @@ export default function VideoTestimonials({
                                 alt={item.companyLogoAlt || ""}
                                 src={item.companyLogoSrc}
                                 fill
-                                className={`${item.companyLogoSrc === "/playbook/cycloid-bg.png" && "ml-[-20px]"} object-cover`}
+                                className="object-cover"
                               />
                             </div>
                           ) : null}
