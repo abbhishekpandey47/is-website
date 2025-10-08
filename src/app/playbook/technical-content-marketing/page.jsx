@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, Download, Calendar, Users, TrendingUp, Code, BookOpen, Video, MessageSquare, ArrowRight, Star, Play, Shield, Zap, Target, Award, Globe, ChevronRight, X, Building } from "lucide-react";
 import Image from "next/image";
@@ -56,6 +56,38 @@ export default function Page() {
     workEmail: "",
     companyName: "",
   });
+
+  // Add scroll-based lighting effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Calculate scroll progress (0 to 1)
+      const scrollProgress = scrollY / (documentHeight - windowHeight);
+      
+      // Calculate glow position based on scroll
+      const glowY = 40 + (scrollProgress * 40); // Move from 40% to 80%
+      const glowX = 50 + (Math.sin(scrollProgress * Math.PI) * 10); // Subtle horizontal movement
+      
+      // Update background gradient
+      const container = document.getElementById('main-container');
+      if (container) {
+        container.style.background = `
+          radial-gradient(2000px circle at ${glowX}% ${glowY}%, rgba(162, 89, 255, ${0.15 + scrollProgress * 0.05}), transparent 70%),
+          linear-gradient(180deg, #2B0A4E 0%, #1C062F 50%, #0B0811 100%)
+        `;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial call
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -165,20 +197,30 @@ export default function Page() {
           .custom-marquee-mask img { height: 36px; width: auto; }
         }
       `}</style>
-      <div className="min-h-screen bg-black">
-      {/* Hero Section - First Fold */}
-      <section 
-        className="relative overflow-hidden min-h-screen flex items-center"
-        style={{ 
-          background: 'radial-gradient(1200px 600px at 20% 10%, rgba(162,89,255,.25), transparent 60%), linear-gradient(180deg,#2B0A4E 0%, #1B0630 55%, #0B0811 100%)',
-          maskImage: 'linear-gradient(180deg, rgba(0,0,0,1) 80%, rgba(0,0,0,0))'
+      <div 
+        id="main-container"
+        className="min-h-screen relative"
+        style={{
+          background: `
+            radial-gradient(2000px circle at 50% 60%, rgba(162, 89, 255, 0.15), transparent 70%),
+            linear-gradient(180deg, #2B0A4E 0%, #1C062F 50%, #0B0811 100%)
+          `,
+          backgroundImage: `
+            linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px)
+          `,
+          backgroundSize: '48px 48px',
+          backgroundBlendMode: 'overlay',
+          boxShadow: 'inset 0 0 300px rgba(0, 0, 0, 0.8), inset 0 0 150px rgba(0, 0, 0, 0.4)'
         }}
       >
-        {/* Subtle grid overlay */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.04%22%3E%3Cpath%20d%3D%22M0%200h60v1H0zM0%200v60h1V0z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
+      {/* Hero Section - First Fold */}
+      <section 
+        className="relative overflow-hidden min-h-screen flex flex-col justify-center"
+      >
         
         <div 
-          className="relative max-w-7xl mx-auto px-6 py-20 pt-32 pb-32"
+          className="relative max-w-7xl mx-auto px-6 py-16"
         >
           <div className="grid grid-cols-12 gap-8 items-center">
             {/* Left Content - Cols 1-6 */}
@@ -201,12 +243,15 @@ export default function Page() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-white font-black leading-[1.05]"
                 style={{ 
-                  fontFamily: 'Inter, sans-serif',
+                  fontFamily: 'Geist Sans, Inter, sans-serif',
+                  fontWeight: 800,
                   fontSize: 'clamp(42px, 5.2vw, 64px)',
-                  letterSpacing: '-0.02em'
+                  letterSpacing: '-0.01em',
+                  color: '#EDEAF2',
+                  textShadow: '0 0 12px rgba(162, 89, 255, 0.15)'
                 }}
               >
-                The 2025 Developer Marketing <span className="text-[#A259FF]">Playbook</span> for DevTool & AI Startups
+                The 2025 Developer Marketing <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Playbook</span> for DevTool & AI Startups
               </motion.h1>
               
               {/* Subtitle */}
@@ -214,11 +259,12 @@ export default function Page() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-gray-300 leading-relaxed"
+                className="text-xl leading-relaxed"
                 style={{ 
                   fontFamily: 'Inter, sans-serif',
+                  fontWeight: 400,
                   maxWidth: '42ch',
-                  opacity: 0.85
+                  color: '#C9C4D6'
                 }}
               >
                 Learn how leading DevTool & AI startups like <span className="text-[#A259FF] font-semibold">Firefly</span>, <span className="text-[#A259FF] font-semibold">Scalekit</span>, and <span className="text-[#A259FF] font-semibold">Kubiya</span> built scalable developer growth engines.
@@ -251,26 +297,6 @@ export default function Page() {
                 </button>
               </motion.div>
               
-              {/* Metrics Row */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="flex items-center gap-10 mt-8"
-              >
-                <div className="text-center">
-                  <div className="text-[28px] font-black text-white mb-1">781%</div>
-                  <div className="text-gray-300 text-sm" style={{ opacity: 0.7 }}>Traffic Growth</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-[28px] font-black text-white mb-1">32.6K</div>
-                  <div className="text-gray-300 text-sm" style={{ opacity: 0.7 }}>Monthly Visitors</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-[28px] font-black text-white mb-1">9 Mo</div>
-                  <div className="text-gray-300 text-sm" style={{ opacity: 0.7 }}>To Leadership</div>
-                </div>
-              </motion.div>
             </div>
 
             {/* Right Form - Cols 7-12 */}
@@ -280,12 +306,12 @@ export default function Page() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="col-span-12 lg:col-span-6"
               style={{
-                background: 'rgba(255,255,255,.04)',
-                border: '1px solid rgba(162,89,255,.25)',
-                backdropFilter: 'blur(10px)',
+                background: 'rgba(255,255,255,.02)',
+                border: '1px solid rgba(162,89,255,.15)',
+                backdropFilter: 'blur(8px)',
                 borderRadius: '16px',
                 padding: '20px',
-                boxShadow: '0 8px 28px rgba(0,0,0,.35)'
+                boxShadow: '0 4px 20px rgba(0,0,0,.2), 0 0 20px rgba(162,89,255,.1)'
               }}
             >
               <div className="space-y-6">
@@ -293,7 +319,7 @@ export default function Page() {
                   <label className="block text-sm font-semibold text-white mb-2">Full Name</label>
                   <input 
                     type="text" 
-                    className="w-full px-4 bg-white/5 border border-[#3B3B3B] rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-[#A259FF] focus:border-[#A259FF] focus:shadow-[0_0_10px_rgba(162,89,255,0.3)] transition-all duration-200"
+                    className="w-full px-4 bg-white/3 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-[#A259FF] focus:border-[#A259FF] focus:shadow-[0_0_10px_rgba(162,89,255,0.3)] transition-all duration-200"
                     style={{ height: '48px' }}
                     placeholder="Full Name:"
                   />
@@ -302,7 +328,7 @@ export default function Page() {
                   <label className="block text-sm font-semibold text-white mb-2">Work Email</label>
                   <input 
                     type="email" 
-                    className="w-full px-4 bg-white/5 border border-[#3B3B3B] rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-[#A259FF] focus:border-[#A259FF] focus:shadow-[0_0_10px_rgba(162,89,255,0.3)] transition-all duration-200"
+                    className="w-full px-4 bg-white/3 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-[#A259FF] focus:border-[#A259FF] focus:shadow-[0_0_10px_rgba(162,89,255,0.3)] transition-all duration-200"
                     style={{ height: '48px' }}
                     placeholder="Work Email:"
                   />
@@ -311,7 +337,7 @@ export default function Page() {
                   <label className="block text-sm font-semibold text-white mb-2">Company Name</label>
                   <input 
                     type="text" 
-                    className="w-full px-4 bg-white/5 border border-[#3B3B3B] rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-[#A259FF] focus:border-[#A259FF] focus:shadow-[0_0_10px_rgba(162,89,255,0.3)] transition-all duration-200"
+                    className="w-full px-4 bg-white/3 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-[#A259FF] focus:border-[#A259FF] focus:shadow-[0_0_10px_rgba(162,89,255,0.3)] transition-all duration-200"
                     style={{ height: '48px' }}
                     placeholder="Company Name:"
                   />
@@ -330,19 +356,41 @@ export default function Page() {
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
 
-      {/* Trusted By Section - Right after hero */}
-      <div className="py-12 bg-black">
-        <div className="text-center mb-8">
-          <p className="text-gray-400 mb-8 text-sm font-semibold tracking-wider font-['Inter',sans-serif]">TRUSTED BY LEADING DEVTOOLS</p>
-          
-          {/* Customer Logos - Exact copy from developer marketing agency */}
-          <div className="pb-2">
-            <div className="max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
+          {/* Metrics Row */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="flex items-center justify-center gap-16 mb-8"
+          >
+            <div className="text-center">
+              <div className="text-[32px] font-black mb-1" style={{ color: '#EDEAF2' }}>781%</div>
+              <div className="text-sm" style={{ color: '#C9C4D6', opacity: 0.8 }}>Traffic Growth</div>
+            </div>
+            <div className="text-center">
+              <div className="text-[32px] font-black mb-1" style={{ color: '#EDEAF2' }}>32.6K</div>
+              <div className="text-sm" style={{ color: '#C9C4D6', opacity: 0.8 }}>Monthly Visitors</div>
+            </div>
+            <div className="text-center">
+              <div className="text-[32px] font-black mb-1" style={{ color: '#EDEAF2' }}>9 Mo</div>
+              <div className="text-sm" style={{ color: '#C9C4D6', opacity: 0.8 }}>To Leadership</div>
+            </div>
+          </motion.div>
+
+          {/* Trusted by Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.0 }}
+            className="text-center"
+          >
+            <p className="text-sm mb-6" style={{ color: '#C9C4D6', opacity: 0.8 }}>
+              Trusted by Leading DevTools
+            </p>
+            <div className="max-w-4xl mx-auto">
               <div
-                className="relative w-full mx-auto max-w-4xl opacity-90 dark:opacity-70 overflow-hidden px-5 lg:px-12"
+                className="relative w-full mx-auto overflow-hidden px-5 lg:px-12"
                 aria-hidden={false}
               >
                 <Marquee
@@ -359,7 +407,7 @@ export default function Page() {
                           loading="lazy"
                           width={100}
                           height={80}
-                          className="object-contain opacity-90"
+                          className="object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
                           src={`/trustedby-bw/bw/${file}`}
                           alt={file}
                         />
@@ -369,27 +417,42 @@ export default function Page() {
                 </Marquee>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </section>
+
 
       {/* Problem Section - Second Fold */}
-      <section className="py-20 bg-black">
+      <section 
+        className="py-20 relative"
+      >
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl lg:text-5xl font-extrabold text-white mb-8 font-['Inter',sans-serif]"
+              className="text-4xl lg:text-5xl font-extrabold mb-8"
+              style={{
+                fontFamily: 'Geist Sans, Inter, sans-serif',
+                fontWeight: 800,
+                letterSpacing: '-0.01em',
+                color: '#EDEAF2',
+                textShadow: '0 0 12px rgba(162, 89, 255, 0.15)'
+              }}
             >
-              Why Developer Marketing is the <span className="text-[#A259FF]">Engine</span> Behind Every Successful DevTool
+              Why Developer Marketing is the <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Engine</span> Behind Every Successful DevTool
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-['Inter',sans-serif]"
+              className="text-xl max-w-4xl mx-auto leading-relaxed"
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 400,
+                color: '#C9C4D6'
+              }}
             >
               Developers don't buy hype — they buy <span className="text-[#A259FF] font-semibold">trust</span>. If your content, docs, or community don't speak their language, your adoption curve will flatline.
             </motion.p>
@@ -445,43 +508,96 @@ export default function Page() {
       </section>
 
       {/* What You'll Learn Section - Third Fold */}
-      <section className="py-20 bg-black">
+      <section 
+        className="py-20 relative"
+      >
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl lg:text-5xl font-black text-white mb-8 font-['Inter',sans-serif]"
+              className="text-4xl lg:text-5xl mb-6"
+              style={{
+                fontFamily: 'Geist Sans, Inter, sans-serif',
+                fontWeight: 800,
+                letterSpacing: '-0.01em',
+                color: '#EDEAF2',
+                textShadow: '0 0 12px rgba(162, 89, 255, 0.15)'
+              }}
             >
-              What You'll <span className="text-[#A259FF]">Learn</span>
+              What You'll <span 
+                style={{
+                  color: '#A259FF',
+                  textShadow: '0 0 8px rgba(162, 89, 255, 0.4)'
+                }}
+              >Learn</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-['Inter',sans-serif]"
+              className="text-xl max-w-4xl mx-auto leading-relaxed"
+              style={{ 
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 400,
+                color: '#C9C4D6'
+              }}
             >
               A comprehensive guide to building developer-first marketing strategies that actually work.
             </motion.p>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left side - Learning cards */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="group bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800 hover:border-[#A259FF]/50 transition-all duration-300"
+                className="group p-5 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  border: '1px solid rgba(162, 89, 255, 0.25)',
+                  backdropFilter: 'blur(12px)',
+                  boxShadow: `
+                    0 8px 32px rgba(0, 0, 0, 0.5),
+                    0 0 40px rgba(162, 89, 255, 0.15)
+                  `
+                }}
               >
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-[#A259FF] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                    style={{
+                      background: 'linear-gradient(90deg, #A259FF, #5B36FF)',
+                      boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
+                    }}
+                  >
                     <Check className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-2 font-['Inter',sans-serif]">6 Core Pillars of Developer Marketing</h3>
-                    <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
+                    <h3 
+                      className="text-xl mb-2" 
+                      style={{ 
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 700,
+                        letterSpacing: '-0.01em',
+                        color: '#C9C4D6',
+                        textShadow: '0 0 8px rgba(162, 89, 255, 0.1)'
+                      }}
+                    >
+                      6 Core Pillars of Developer Marketing
+                    </h3>
+                    <p 
+                      className="leading-relaxed" 
+                      style={{ 
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 400,
+                        letterSpacing: '-0.005em',
+                        color: '#C9C4D6'
+                      }}
+                    >
                       Master the framework that drives developer adoption
                     </p>
                   </div>
@@ -492,15 +608,49 @@ export default function Page() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="group bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800 hover:border-[#A259FF]/50 transition-all duration-300"
+                className="group p-5 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  border: '1px solid rgba(162, 89, 255, 0.25)',
+                  backdropFilter: 'blur(12px)',
+                  boxShadow: `
+                    0 8px 32px rgba(0, 0, 0, 0.5),
+                    0 0 40px rgba(162, 89, 255, 0.15)
+                  `
+                }}
               >
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-[#A259FF] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                    style={{
+                      background: 'linear-gradient(90deg, #A259FF, #5B36FF)',
+                      boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
+                    }}
+                  >
                     <Users className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-2 font-['Inter',sans-serif]">Building Developer Trust</h3>
-                    <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
+                    <h3 
+                      className="text-xl mb-2" 
+                      style={{ 
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 700,
+                        letterSpacing: '-0.01em',
+                        color: '#C9C4D6',
+                        textShadow: '0 0 8px rgba(162, 89, 255, 0.1)'
+                      }}
+                    >
+                      Building Developer Trust
+                    </h3>
+                    <p 
+                      className="leading-relaxed" 
+                      style={{ 
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 400,
+                        letterSpacing: '-0.005em',
+                        color: '#C9C4D6'
+                      }}
+                    >
                       Learn how to create authentic technical content that resonates
                     </p>
                   </div>
@@ -511,15 +661,49 @@ export default function Page() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="group bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800 hover:border-[#A259FF]/50 transition-all duration-300"
+                className="group p-5 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  border: '1px solid rgba(162, 89, 255, 0.25)',
+                  backdropFilter: 'blur(12px)',
+                  boxShadow: `
+                    0 8px 32px rgba(0, 0, 0, 0.5),
+                    0 0 40px rgba(162, 89, 255, 0.15)
+                  `
+                }}
               >
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-[#A259FF] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                    style={{
+                      background: 'linear-gradient(90deg, #A259FF, #5B36FF)',
+                      boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
+                    }}
+                  >
                     <BookOpen className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-2 font-['Inter',sans-serif]">Docs & SDKs as Growth Engines</h3>
-                    <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
+                    <h3 
+                      className="text-xl mb-2" 
+                      style={{ 
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 700,
+                        letterSpacing: '-0.01em',
+                        color: '#C9C4D6',
+                        textShadow: '0 0 8px rgba(162, 89, 255, 0.1)'
+                      }}
+                    >
+                      Docs & SDKs as Growth Engines
+                    </h3>
+                    <p 
+                      className="leading-relaxed" 
+                      style={{ 
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 400,
+                        letterSpacing: '-0.005em',
+                        color: '#C9C4D6'
+                      }}
+                    >
                       Transform documentation into your most powerful marketing asset
                     </p>
                   </div>
@@ -530,15 +714,49 @@ export default function Page() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="group bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800 hover:border-[#A259FF]/50 transition-all duration-300"
+                className="group p-5 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  border: '1px solid rgba(162, 89, 255, 0.25)',
+                  backdropFilter: 'blur(12px)',
+                  boxShadow: `
+                    0 8px 32px rgba(0, 0, 0, 0.5),
+                    0 0 40px rgba(162, 89, 255, 0.15)
+                  `
+                }}
               >
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-[#A259FF] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                    style={{
+                      background: 'linear-gradient(90deg, #A259FF, #5B36FF)',
+                      boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
+                    }}
+                  >
                     <TrendingUp className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-2 font-['Inter',sans-serif]">Measuring Developer Marketing ROI</h3>
-                    <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
+                    <h3 
+                      className="text-xl mb-2" 
+                      style={{ 
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 700,
+                        letterSpacing: '-0.01em',
+                        color: '#C9C4D6',
+                        textShadow: '0 0 8px rgba(162, 89, 255, 0.1)'
+                      }}
+                    >
+                      Measuring Developer Marketing ROI
+                    </h3>
+                    <p 
+                      className="leading-relaxed" 
+                      style={{ 
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 400,
+                        letterSpacing: '-0.005em',
+                        color: '#C9C4D6'
+                      }}
+                    >
                       Track what matters with real metrics and case studies
                     </p>
                   </div>
@@ -549,15 +767,49 @@ export default function Page() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="group bg-gray-900/50 backdrop-blur-sm p-6 rounded-2xl border border-gray-800 hover:border-[#A259FF]/50 transition-all duration-300"
+                className="group p-5 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  border: '1px solid rgba(162, 89, 255, 0.25)',
+                  backdropFilter: 'blur(12px)',
+                  boxShadow: `
+                    0 8px 32px rgba(0, 0, 0, 0.5),
+                    0 0 40px rgba(162, 89, 255, 0.15)
+                  `
+                }}
               >
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-[#A259FF] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                    style={{
+                      background: 'linear-gradient(90deg, #A259FF, #5B36FF)',
+                      boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
+                    }}
+                  >
                     <Building className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-2 font-['Inter',sans-serif]">Case Studies from Firefly & Scalekit</h3>
-                    <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
+                    <h3 
+                      className="text-xl mb-2" 
+                      style={{ 
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 700,
+                        letterSpacing: '-0.01em',
+                        color: '#C9C4D6',
+                        textShadow: '0 0 8px rgba(162, 89, 255, 0.1)'
+                      }}
+                    >
+                      Case Studies from Firefly & Scalekit
+                    </h3>
+                    <p 
+                      className="leading-relaxed" 
+                      style={{ 
+                        fontFamily: 'Inter, sans-serif',
+                        fontWeight: 400,
+                        letterSpacing: '-0.005em',
+                        color: '#C9C4D6'
+                      }}
+                    >
                       Real-world examples of 781%+ traffic growth strategies
                     </p>
                   </div>
@@ -576,48 +828,78 @@ export default function Page() {
                 {/* Book container with 3D effect */}
                 <div className="relative w-[350px] h-[480px] perspective-1000">
                   {/* Book spine */}
-                  <div className="absolute left-0 top-0 w-6 h-full bg-gray-900 rounded-l-2xl transform rotate-y-12 rotate-x-6 origin-left"></div>
+                  <div className="absolute left-0 top-0 w-6 h-full rounded-l-2xl transform rotate-y-12 rotate-x-6 origin-left" style={{ backgroundColor: '#0B0811' }}></div>
                   
                   {/* Book pages (white edges) */}
                   <div className="absolute top-0 left-0 w-full h-3 bg-white rounded-t-2xl transform rotate-y-12 rotate-x-6"></div>
                   
                   {/* Book cover */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl shadow-lg transform rotate-y-12 rotate-x-6">
+                  <div className="absolute inset-0 rounded-2xl shadow-lg transform rotate-y-12 rotate-x-6" style={{
+                    background: 'linear-gradient(180deg, #2B0A4E 0%, #1C062F 50%, #0B0811 100%)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(162, 89, 255, 0.15)'
+                  }}>
                     {/* Book cover content */}
                     <div className="p-6 h-full flex flex-col justify-start relative overflow-hidden">
                       {/* Very subtle abstract graphics overlay */}
                       <div className="absolute inset-0 opacity-5">
                         {/* Thin horizontal lines */}
-                        <div className="absolute top-32 left-8 w-16 h-0.5 bg-gray-300"></div>
-                        <div className="absolute top-48 right-10 w-12 h-0.5 bg-gray-300"></div>
-                        <div className="absolute top-64 left-10 w-20 h-0.5 bg-gray-300"></div>
-                        <div className="absolute top-80 right-8 w-14 h-0.5 bg-gray-300"></div>
-                        <div className="absolute top-96 left-12 w-18 h-0.5 bg-gray-300"></div>
-                        <div className="absolute top-112 right-12 w-10 h-0.5 bg-gray-300"></div>
+                        <div className="absolute top-32 left-8 w-16 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
+                        <div className="absolute top-48 right-10 w-12 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
+                        <div className="absolute top-64 left-10 w-20 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
+                        <div className="absolute top-80 right-8 w-14 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
+                        <div className="absolute top-96 left-12 w-18 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
+                        <div className="absolute top-112 right-12 w-10 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
                         
                         {/* Small dots */}
-                        <div className="absolute top-40 right-20 w-0.5 h-0.5 bg-gray-300 rounded-full"></div>
-                        <div className="absolute top-60 left-24 w-0.5 h-0.5 bg-gray-300 rounded-full"></div>
-                        <div className="absolute top-80 right-24 w-0.5 h-0.5 bg-gray-300 rounded-full"></div>
-                        <div className="absolute top-100 left-20 w-0.5 h-0.5 bg-gray-300 rounded-full"></div>
-                        <div className="absolute top-120 right-28 w-0.5 h-0.5 bg-gray-300 rounded-full"></div>
+                        <div className="absolute top-40 right-20 w-0.5 h-0.5 rounded-full" style={{ backgroundColor: '#A259FF' }}></div>
+                        <div className="absolute top-60 left-24 w-0.5 h-0.5 rounded-full" style={{ backgroundColor: '#A259FF' }}></div>
+                        <div className="absolute top-80 right-24 w-0.5 h-0.5 rounded-full" style={{ backgroundColor: '#A259FF' }}></div>
+                        <div className="absolute top-100 left-20 w-0.5 h-0.5 rounded-full" style={{ backgroundColor: '#A259FF' }}></div>
+                        <div className="absolute top-120 right-28 w-0.5 h-0.5 rounded-full" style={{ backgroundColor: '#A259FF' }}></div>
                       </div>
                       
                       <div className="relative z-10">
                         {/* Year badge */}
-                        <div className="inline-block bg-gray-400 rounded px-2 py-1 mb-6">
-                          <span className="text-white text-sm font-semibold">2025</span>
+                        <div className="inline-block rounded px-2 py-1 mb-6" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
+                          <span 
+                            className="text-sm" 
+                            style={{ 
+                              fontFamily: 'Inter, sans-serif',
+                              fontWeight: 600,
+                              letterSpacing: '-0.005em',
+                              color: '#C9C4D6'
+                            }}
+                          >
+                            2025
+                          </span>
                         </div>
                         
                         {/* Main title */}
-                        <div className="text-3xl font-bold text-gray-100 mb-6 leading-tight">
+                        <div 
+                          className="text-3xl mb-6 leading-tight" 
+                          style={{ 
+                            fontFamily: 'Inter, sans-serif',
+                            fontWeight: 800,
+                            letterSpacing: '-0.02em',
+                            color: '#C9C4D6',
+                            textShadow: '0 0 12px rgba(162, 89, 255, 0.15)'
+                          }}
+                        >
                           <div>DEVELOPER</div>
                           <div>MARKETING</div>
                           <div>PLAYBOOK</div>
                         </div>
                         
                         {/* Subtitle */}
-                        <div className="text-sm text-gray-200 font-medium">
+                        <div 
+                          className="text-sm" 
+                          style={{ 
+                            fontFamily: 'Inter, sans-serif',
+                            fontWeight: 400,
+                            letterSpacing: '-0.005em',
+                            color: '#C9C4D6'
+                          }}
+                        >
                           For DevTool and AI Agents Startups
                         </div>
                       </div>
@@ -634,22 +916,36 @@ export default function Page() {
       </section>
 
       {/* Results Section - Fourth Fold */}
-      <section className="py-20 bg-black">
+      <section 
+        className="py-20 relative"
+      >
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl lg:text-5xl font-black text-white mb-8 font-['Inter',sans-serif]"
+              className="text-4xl lg:text-5xl font-black mb-8"
+              style={{
+                fontFamily: 'Geist Sans, Inter, sans-serif',
+                fontWeight: 800,
+                letterSpacing: '-0.01em',
+                color: '#EDEAF2',
+                textShadow: '0 0 12px rgba(162, 89, 255, 0.15)'
+              }}
             >
-              Real Results from <span className="text-[#A259FF]">Real DevTools</span>
+              Real Results from <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Real DevTools</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-['Inter',sans-serif]"
+              className="text-xl max-w-4xl mx-auto leading-relaxed"
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 400,
+                color: '#C9C4D6'
+              }}
             >
               See how leading startups transformed their developer marketing into growth engines.
             </motion.p>
@@ -870,9 +1166,9 @@ export default function Page() {
       </section>
 
       {/* Final CTA Section - Last Fold */}
-      <section className="py-20 bg-black relative overflow-hidden">
-        {/* Subtle grid overlay */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.03%22%3E%3Cpath%20d%3D%22M0%200h60v1H0zM0%200v60h1V0z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
+      <section 
+        className="py-20 relative overflow-hidden"
+      >
         
         <div className="max-w-6xl mx-auto px-6 relative">
           <div className="text-center mb-16">
@@ -880,15 +1176,27 @@ export default function Page() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl lg:text-5xl font-black text-white mb-8 font-['Inter',sans-serif]"
+              className="text-4xl lg:text-5xl font-black mb-8"
+              style={{
+                fontFamily: 'Geist Sans, Inter, sans-serif',
+                fontWeight: 800,
+                letterSpacing: '-0.01em',
+                color: '#EDEAF2',
+                textShadow: '0 0 12px rgba(162, 89, 255, 0.15)'
+              }}
             >
-              Ready to Build Your <span className="text-[#A259FF]">Developer</span> <span className="text-[#A259FF]">Growth Engine?</span>
+              Ready to Build Your <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Developer</span> <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Growth Engine?</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-['Inter',sans-serif]"
+              className="text-xl max-w-4xl mx-auto leading-relaxed"
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 400,
+                color: '#C9C4D6'
+              }}
             >
               Get the complete playbook and discover how to turn developer marketing into your competitive advantage.
             </motion.p>
