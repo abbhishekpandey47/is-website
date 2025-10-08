@@ -3,19 +3,39 @@
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+/* ========= YouTube helpers ========= */
+function isYouTubeUrl(url = "") {
+  return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//i.test(url);
+}
+function getYouTubeId(url = "") {
+  try {
+    const u = new URL(url, typeof window !== "undefined" ? window.location.origin : "http://localhost");
+    if (u.hostname.includes("youtu.be")) return u.pathname.slice(1);
+    if (u.searchParams.get("v")) return u.searchParams.get("v");
+    const parts = u.pathname.split("/").filter(Boolean);
+    const idx = parts.findIndex((p) => p === "embed" || p === "shorts");
+    if (idx !== -1 && parts[idx + 1]) return parts[idx + 1];
+  } catch {}
+  return "";
+}
+function toYouTubeEmbed(url = "") {
+  const id = getYouTubeId(url);
+  return id ? `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&rel=0` : "";
+}
 
+/* ========= Component ========= */
 export default function VideoTestimonials({
-  heading = "Hear directly from our customers",
-  eyebrow = "Case studies",
-  blurb,
-  cta,
   items = [],
   className = "",
   brandColor = "bg-btnprimary",
+  autoplayMs = 0, // set >0 (e.g. 7000) to auto-advance
 }) {
-  const [index, setIndex] = useState(0);
-  const slideCount = items.length || DEFAULT_ITEMS.length;
+  const data = items.length ? items : [DEFAULT_ITEM];
 
+  const [index, setIndex] = useState(0);
+  const [openVideo, setOpenVideo] = useState(null);
+
+  const slideCount = data.length;
   const clamp = useCallback(
     (n) => {
       if (slideCount === 0) return 0;
@@ -25,129 +45,188 @@ export default function VideoTestimonials({
     },
     [slideCount]
   );
-
   const goTo = useCallback((n) => setIndex(clamp(n)), [clamp]);
   const next = useCallback(() => setIndex((i) => clamp(i + 1)), [clamp]);
   const prev = useCallback(() => setIndex((i) => clamp(i - 1)), [clamp]);
 
-  // Touch/drag support
-  const trackRef = useRef(null);
-  const startX = useRef(null);
-  const deltaX = useRef(0);
-
-  const onPointerDown = (e) => {
-    startX.current = e.clientX;
-    deltaX.current = 0;
-    e.currentTarget.setPointerCapture(e.pointerId);
-  };
-  const onPointerMove = (e) => {
-    if (startX.current == null) return;
-    deltaX.current = e.clientX - startX.current;
-    if (trackRef.current) {
-      const pct = -index * 100 + (-deltaX.current / (trackRef.current.clientWidth || 1)) * 100;
-      trackRef.current.style.transform = `translate3d(${pct}%,0,0)`;
-    }
-  };
-  const onPointerUp = () => {
-    if (startX.current == null) return;
-    const threshold = 48; // px
-    if (deltaX.current > threshold) prev();
-    else if (deltaX.current < -threshold) next();
-    // reset transform to the current slide
-    if (trackRef.current) {
-      const pct = -index * 100;
-      trackRef.current.style.transform = `translate3d(${pct}%,0,0)`;
-    }
-    startX.current = null;
-    deltaX.current = 0;
-  };
-
+  // Optional auto-advance (paused while dialog is open)
   useEffect(() => {
-    if (!trackRef.current) return;
-    const pct = -index * 100;
-    trackRef.current.style.transform = `translate3d(${pct}%,0,0)`;
-  }, [index]);
+    if (!autoplayMs || slideCount < 2 || openVideo) return;
+    const t = setInterval(next, autoplayMs);
+    return () => clearInterval(t);
+  }, [autoplayMs, slideCount, next, openVideo]);
 
-  const [openVideo, setOpenVideo] = useState(null);
-  const liveMsg = useMemo(() => `Showing testimonial ${slideCount ? index + 1 : 0} of ${slideCount}`, [index, slideCount]);
+  // Keyboard arrows on the whole section
+  const containerRef = useRef(null);
+  const onKeyDown = (e) => {
+    if (e.key === "ArrowRight") next();
+    if (e.key === "ArrowLeft") prev();
+  };
 
-  const data = items.length ? items : DEFAULT_ITEMS;
+  // Accessibility live region
+  const liveMsg = useMemo(
+    () => `Showing testimonial ${slideCount ? index + 1 : 0} of ${slideCount}`,
+    [index, slideCount]
+  );
 
   return (
-    <section className={`w-full ${className}`} aria-label="Customer video testimonials">
-      <div className="container">
-        {/* Top bar: nav dots + arrows (top-right like the reference) */}
-        <div className="mb-4 flex items-center justify-end gap-4">
-          <div className="flex items-center gap-2" role="tablist" aria-label="Choose testimonial">
-            {data.map((_, i) => (
+    <section className={`${className}`} aria-label="Customer video testimonials">
+      <div
+        className="container outline-none"
+        tabIndex={0}
+        ref={containerRef}
+        onKeyDown={onKeyDown}
+      >
+        {/* Top-right controls (hide when only one slide) */}
+        {slideCount > 1 && (
+          <div className="mb-4 flex items-center justify-end gap-4">
+            <div className="flex items-center gap-2" role="tablist" aria-label="Choose testimonial">
+              {data.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
+                  role="tab"
+                  aria-selected={i === index}
+                  aria-label={`Show testimonial ${i + 1}`}
+                  className={`h-2 w-2 rounded-full transition ${i === index ? "bg-foreground" : "bg-muted"}`}
+                />
+              ))}
+            </div>
+            <div className="flex items-center gap-3">
               <button
-                key={i}
-                onClick={() => goTo(i)}
-                role="tab"
-                aria-selected={i === index}
-                aria-label={`Show testimonial ${i + 1}`}
-                className={`h-2 w-2 rounded-full transition ${i === index ? "bg-foreground" : "bg-muted"}`}
-              />
+                onClick={prev}
+                aria-label="Previous"
+                className="grid h-9 w-9 place-items-center rounded-full bg-muted hover:bg-muted/80"
+              >
+                <ArrowLeftIcon className="h-5 w-5" />
+              </button>
+              <button
+                onClick={next}
+                aria-label="Next"
+                className="grid h-9 w-9 place-items-center rounded-full bg-muted hover:bg-muted/80"
+              >
+                <ArrowRightIcon className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Track: each slide contains BOTH columns */}
+        <div className="relative overflow-hidden rounded-2xl">
+          <div
+            className="flex transition-transform duration-300 ease-out will-change-transform"
+            style={{
+            //   width: `${Math.max(1, data.length) * 100}%`,
+              transform: `translate3d(${-index * 100}%, 0, 0)`,
+            }}
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            {data.map((item, i) => (
+              <div key={item.id || i} className="w-full shrink-0 basis-full p-0">
+                <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+                  {/* Left: text (per slide) */}
+                  <div>
+                    {item.eyebrow ? (
+                      <p className="text-sm font-semibold tracking-widest uppercase text-muted-foreground">
+                        {item.eyebrow}
+                      </p>
+                    ) : null}
+                    {item.heading ? (
+                      <h2 className="mt-2 text-4xl font-bold tracking-tight md:text-5xl leading-tight">
+                        {item.heading}
+                      </h2>
+                    ) : null}
+                    {item.blurb ? (
+                      <p className="mt-4 text-lg text-muted-foreground max-w-xl">{item.blurb}</p>
+                    ) : null}
+                    {item.cta?.href && item.cta?.label ? (
+                      <div className="mt-8">
+                        <a
+                          href={item.cta.href}
+                          className="inline-flex items-center rounded-xl border border-border px-5 py-3 text-sm font-semibold transition hover:bg-accent hover:text-accent-foreground"
+                        >
+                          {item.cta.label}
+                        </a>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  {/* Right: cover + quote card (per slide) */}
+                  <div className="relative">
+                    {/* Cover */}
+                    <div className="flex w-full justify-center">
+                      <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-xl border border-border bg-card shadow-navshadow">
+                        {item.headshotSrc ? (
+                          <Image
+                            alt={item.headshotAlt || item.personName || "Testimonial image"}
+                            src={item.headshotSrc}
+                            fill
+                            sizes="(min-width: 1024px) 32vw, 90vw"
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 grid place-items-center text-sm text-muted-foreground">
+                            No cover image
+                          </div>
+                        )}
+
+                        {(item.videoUrl || item.videoSrc) ? (
+                          <button
+                            onClick={() => setOpenVideo(item)}
+                            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full ${brandColor} text-white shadow-lg h-14 w-14 md:h-16 md:w-16 focus:outline-none focus:ring-2 focus:ring-ring`}
+                            aria-label="Play video"
+                          >
+                            <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor">
+                              <circle cx="12" cy="12" r="12" fill="currentColor" />
+                              <path d="M10 15.5v-7L16 12l-6 3.5Z" fill="#fff" fillOpacity="0.9" />
+                            </svg>
+                          </button>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    {/* Quote (same max-w as cover to avoid overflow) */}
+                    {(item.quote || item.personName || item.companyLogoSrc) && (
+                      <div className="mx-auto mt-4 w-full max-w-md rounded-md bg-amber-50 p-6 shadow-sm border border-border">
+                        <div>
+                          {item.companyLogoSrc ? (
+                            <div className="relative h-8 w-32 shrink-0 p-4">
+                              <Image
+                                alt={item.companyLogoAlt || ""}
+                                src={item.companyLogoSrc}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          ) : null}
+                          <div className="min-w-0">
+                            {item.quote ? (
+                              <blockquote className="italic text-base md:text-lg leading-relaxed text-black">
+                                “{item.quote}”
+                              </blockquote>
+                            ) : null}
+                            {(item.personName || item.personTitle) && (
+                              <div className="mt-3">
+                                {item.personName ? <div className="font-bold text-black">{item.personName}</div> : null}
+                                {item.personTitle ? (
+                                  <div className="text-sm text-black">{item.personTitle}</div>
+                                ) : null}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
-          <div className="flex items-center gap-3">
-            <button onClick={prev} aria-label="Previous" className="grid h-9 w-9 place-items-center rounded-full bg-muted hover:bg-muted/80">
-              <ArrowLeftIcon className="h-5 w-5" />
-            </button>
-            <button onClick={next} aria-label="Next" className="grid h-9 w-9 place-items-center rounded-full bg-muted hover:bg-muted/80">
-              <ArrowRightIcon className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
 
-        {/* Two-column layout to match screenshot */}
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          {/* Left: text block */}
-          <div>
-            {eyebrow ? (
-              <p className="text-sm font-semibold tracking-widest uppercase text-muted-foreground">{eyebrow}</p>
-            ) : null}
-            <h2 className="mt-2 text-4xl font-bold tracking-tight md:text-5xl leading-tight">
-              {heading}
-            </h2>
-            {blurb ? (
-              <p className="mt-4 text-lg text-muted-foreground max-w-xl">{blurb}</p>
-            ) : null}
-            {cta ? (
-              <div className="mt-8">
-                <a
-                  href={cta.href}
-                  className="inline-flex items-center rounded-xl border border-border px-5 py-3 text-sm font-semibold transition hover:bg-accent hover:text-accent-foreground"
-                >
-                  {cta.label}
-                </a>
-              </div>
-            ) : null}
-          </div>
-
-          {/* Right: carousel viewport */}
-          <div className="relative">
-            <div
-              className="overflow-hidden rounded-2xl"
-              onPointerDown={onPointerDown}
-              onPointerMove={onPointerMove}
-              onPointerUp={onPointerUp}
-              onPointerCancel={onPointerUp}
-            >
-              <div
-                ref={trackRef}
-                className="flex transition-transform duration-300 ease-out will-change-transform"
-                style={{ width: `${Math.max(1, data.length) * 100}%`, transform: `translate3d(${-index * 100}%,0,0)` }}
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                {data.map((t, i) => (
-                  <Slide key={t.id || i} item={t} selected={i === index} brandColor={brandColor} onPlay={() => setOpenVideo(t)} />
-                ))}
-              </div>
-            </div>
-            <p className="sr-only" aria-live="polite">{liveMsg}</p>
-          </div>
+          <p className="sr-only" aria-live="polite">
+            {liveMsg}
+          </p>
         </div>
       </div>
 
@@ -156,48 +235,72 @@ export default function VideoTestimonials({
   );
 }
 
-function Slide({ item, selected, brandColor, onPlay }) {
-  return (
-    <div className="w-full shrink-0 basis-full p-0">
-      <div className="relative w-full overflow-hidden rounded-2xl">
-        {/* Image */}
-        <div className="relative aspect-[16/9] w-full">
-          <Image
-            alt={item.headshotAlt || item.personName || "Testimonial image"}
-            src={item.headshotSrc}
-            fill
-            sizes="(min-width: 1024px) 48vw, 100vw"
-            className="object-cover"
-          />
-          {/* Play button centered */}
-          {item.videoSrc ? (
-            <button
-              onClick={onPlay}
-              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full ${brandColor} text-white shadow-lg h-16 w-16 md:h-20 md:w-20 focus:outline-none focus:ring-2 focus:ring-ring`}
-              aria-label="Play video"
-            >
-              <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
-                <circle cx="12" cy="12" r="12" fill="currentColor" />
-                <path d="M10 15.5v-7L16 12l-6 3.5Z" fill="#fff" fillOpacity="0.9" />
-              </svg>
-            </button>
-          ) : null}
-        </div>
+/* ========= Centered modal (NOT full-screen) ========= */
+function VideoDialog({ openItem, onClose }) {
+  const iframeRef = useRef(null);
 
-        {/* Quote card overlaid bottom-right (like screenshot) */}
-        <div className="absolute bottom-0 right-0 z-10 m-0 w-[85%] max-w-3xl translate-y-1/4 rounded-md bg-amber-50 p-6 shadow-navshadow border border-border">
-          <div className="flex items-start gap-6">
-            {/* Company logo */}
-            <div className="relative h-8 w-36 shrink-0">
-              <Image alt={item.companyLogoAlt || ""} src={item.companyLogoSrc} fill className="object-contain" />
-            </div>
-            <div className="min-w-0">
-              <blockquote className="italic text-lg leading-relaxed text-foreground/90">“{item.quote}”</blockquote>
-              <div className="mt-4">
-                <div className="font-bold">{item.personName}</div>
-                <div className="text-sm text-muted-foreground">{item.personTitle}</div>
-              </div>
-            </div>
+  const url = openItem?.videoUrl || openItem?.videoSrc || "";
+  const isYT = isYouTubeUrl(url);
+  const embed = isYT ? toYouTubeEmbed(url) : "";
+
+  // Esc to close + lock scroll while open
+  useEffect(() => {
+    if (!openItem) return;
+    const onKey = (e) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [openItem, onClose]);
+
+  if (!openItem) return null;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 bg-black/70"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30"
+        aria-label="Close video"
+      >
+        <XIcon className="h-5 w-5" />
+      </button>
+
+      {/* Centered modal panel with safe sizing */}
+      <div
+        className="flex h-full w-full items-center justify-center p-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative w-full max-w-[90vw] md:max-w-3xl lg:max-w-4xl">
+          <div
+            className="relative w-full overflow-hidden rounded-lg bg-black shadow-2xl"
+            style={{ paddingTop: "56.25%" }}
+          >
+            {isYT ? (
+              <iframe
+                ref={iframeRef}
+                src={embed}
+                title={openItem.personName || "Testimonial video"}
+                className="absolute left-0 top-0 h-full w-full"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            ) : (
+              <video
+                autoPlay
+                controls
+                playsInline
+                className="absolute left-0 top-0 h-full w-full"
+                src={url}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -205,37 +308,7 @@ function Slide({ item, selected, brandColor, onPlay }) {
   );
 }
 
-function VideoDialog({ openItem, onClose }) {
-  const ref = useRef(null);
-  useEffect(() => {
-    const d = ref.current;
-    if (!d) return;
-    if (openItem) {
-      if (!d.open) d.showModal();
-    } else if (d.open) {
-      d.close();
-    }
-  }, [openItem]);
-
-  return (
-    <dialog ref={ref} onClose={onClose} className="backdrop:bg-black/60 rounded-2xl p-0 border-0 w-[min(90vw,960px)]">
-      {openItem ? (
-        <div className="relative">
-          <video autoPlay controls playsInline className="h-full w-full rounded-2xl" src={openItem.videoSrc} />
-          <button
-            onClick={() => ref.current?.close()}
-            className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white hover:bg-black/90"
-            aria-label="Close video"
-          >
-            <XIcon className="h-5 w-5" />
-          </button>
-        </div>
-      ) : null}
-    </dialog>
-  );
-}
-
-/* ---------------- Icons (inline SVG) ---------------- */
+/* ========= Icons ========= */
 function ArrowLeftIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -250,14 +323,6 @@ function ArrowRightIcon(props) {
     </svg>
   );
 }
-function PlayCircledIcon(props) {
-  return (
-    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <circle cx="32" cy="32" r="32" fill="currentColor" />
-      <path d="M28 40.37V23.63L40.88 32 28 40.37Z" fill="white" fillOpacity="0.89" />
-    </svg>
-  );
-}
 function XIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -265,32 +330,3 @@ function XIcon(props) {
     </svg>
   );
 }
-
-/* ---------------- Example data (replace) ---------------- */
-export const DEFAULT_ITEMS = [
-  
-  {
-    id: "",
-    blurb: "Learn how the UK's no.1 job portal optimizes user experience.",
-    headshotSrc: "/images/examples/brett.jpg",
-    headshotAlt: "Brett Orr",
-    companyLogoSrc: "/images/examples/reed.svg",
-    companyLogoAlt: "Reed.co.uk",
-    quote: "We like to make people happy at Reed.co.uk and Surveys shows us how well we are doing.",
-    personName: "Brett Orr",
-    personTitle: "Lead Product Owner, Reed.co.uk",
-    videoSrc: "/videos/examples/reed.mp4",
-  },
-  {
-    id: "2",
-    blurb: "Learn how landing‑page gurus optimize their pages.",
-    headshotSrc: "/images/examples/michael.jpg",
-    headshotAlt: "Michael Aagaard",
-    companyLogoSrc: "/images/examples/unbounce.svg",
-    companyLogoAlt: "Unbounce", 
-    quote: "I used to have a bunch of different tools I had to pay for, but with this platform you get everything in one bundle.",
-    personName: "Michael Aagaard",
-    personTitle: "Senior Conversion Optimizer, Unbounce",
-    videoSrc: "/videos/examples/unbounce.mp4",
-  },
-];

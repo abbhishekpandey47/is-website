@@ -51,6 +51,41 @@ const getLogoPadding = (filename) => {
   return paddingMap[filename] || 'p-4';
 };
 
+export const Videos =[{
+  id: "case-1",
+  eyebrow: "CASE STUDIES",
+  heading: "Hear directly from our customers",
+  blurb: "Learn how Cycloid used Surveys to boost signups by 10%.",
+  cta: { label: "See case studies", href: "/case-studies" },
+
+  headshotSrc: "/playbook/cycloid.png",
+  headshotAlt: "Eric Peters",
+  companyLogoSrc: "/playbook/cycloid-bg.png",
+  companyLogoAlt: "Cycloid",
+  quote: "If you can't figure out why users are bouncing, Surveys is a really direct way to ask them.",
+  personName: "Eric Peters",
+  personTitle: "Growth Marketer, HubSpot",
+  videoUrl: "https://youtu.be/AbqznECrec4",
+},
+{
+  id: "case-2",
+  eyebrow: "CASE STUDIES",
+  heading: "Hear directly from our customers",
+  blurb: "Learn how FireFly used Surveys to boost signups by 10%.",
+  cta: { label: "See case studies", href: "/case-studies" },
+
+  headshotSrc: "/playbook/firefly.png",
+  headshotAlt: "Eric Peters",
+  companyLogoSrc: "/playbook/firefly-bg.png",
+  companyLogoAlt: "FireFly.ai",
+  quote: "If you can't figure out why users are bouncing, Surveys is a really direct way to ask them.",
+  personName: "Eric Peters",
+  personTitle: "Growth Marketer, HubSpot",
+  videoUrl: "https://youtube.com/shorts/xjUnOgEi8DI",
+}
+]
+
+
 export default function Page() {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -94,7 +129,7 @@ export default function Page() {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  console.log(formData);
+
 
   const handleDownload = async (e) => {
     e.preventDefault();
@@ -266,17 +301,6 @@ export default function Page() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <button 
-                  onClick={handleDownload}
-                  className="text-white py-4 px-8 rounded-lg font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center"
-                  style={{ 
-                    background: 'linear-gradient(90deg,#A259FF,#5B36FF)',
-                    boxShadow: '0 0 20px rgba(162,89,255,0.3)'
-                  }}
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download Playbook
-                </button>
                 <button 
                   onClick={handleBookDemo}
                   className="border-2 border-[#A259FF] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-[#A259FF]/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.3)] flex items-center justify-center"
@@ -504,7 +528,14 @@ export default function Page() {
           </div>
         </div>
       </section>
-
+   <div
+              className="mb-10"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+              }}
+            >
+              <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
       {/* What You'll Learn Section - Third Fold */}
       <section 
         className="py-20 relative"
@@ -820,99 +851,18 @@ export default function Page() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative flex justify-center lg:justify-end"
+              className="relative flex justify-center"
             >
-              <div className="relative">
-                {/* Book container with 3D effect */}
-                <div className="relative w-[350px] h-[480px] perspective-1000">
-                  {/* Book spine */}
-                  <div className="absolute left-0 top-0 w-6 h-full rounded-l-2xl transform rotate-y-12 rotate-x-6 origin-left" style={{ backgroundColor: '#0B0811' }}></div>
-                  
-                  {/* Book pages (white edges) */}
-                  <div className="absolute top-0 left-0 w-full h-3 bg-white rounded-t-2xl transform rotate-y-12 rotate-x-6"></div>
-                  
-                  {/* Book cover */}
-                  <div className="absolute inset-0 rounded-2xl shadow-lg transform rotate-y-12 rotate-x-6" style={{
-                    background: 'linear-gradient(180deg, #2B0A4E 0%, #1C062F 50%, #0B0811 100%)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), 0 0 40px rgba(162, 89, 255, 0.15)'
-                  }}>
-                    {/* Book cover content */}
-                    <div className="p-6 h-full flex flex-col justify-start relative overflow-hidden">
-                      {/* Very subtle abstract graphics overlay */}
-                      <div className="absolute inset-0 opacity-5">
-                        {/* Thin horizontal lines */}
-                        <div className="absolute top-32 left-8 w-16 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
-                        <div className="absolute top-48 right-10 w-12 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
-                        <div className="absolute top-64 left-10 w-20 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
-                        <div className="absolute top-80 right-8 w-14 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
-                        <div className="absolute top-96 left-12 w-18 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
-                        <div className="absolute top-112 right-12 w-10 h-0.5" style={{ backgroundColor: '#A259FF' }}></div>
-                        
-                        {/* Small dots */}
-                        <div className="absolute top-40 right-20 w-0.5 h-0.5 rounded-full" style={{ backgroundColor: '#A259FF' }}></div>
-                        <div className="absolute top-60 left-24 w-0.5 h-0.5 rounded-full" style={{ backgroundColor: '#A259FF' }}></div>
-                        <div className="absolute top-80 right-24 w-0.5 h-0.5 rounded-full" style={{ backgroundColor: '#A259FF' }}></div>
-                        <div className="absolute top-100 left-20 w-0.5 h-0.5 rounded-full" style={{ backgroundColor: '#A259FF' }}></div>
-                        <div className="absolute top-120 right-28 w-0.5 h-0.5 rounded-full" style={{ backgroundColor: '#A259FF' }}></div>
-                      </div>
-                      
-                      <div className="relative z-10">
-                        {/* Year badge */}
-                        <div className="inline-block rounded px-2 py-1 mb-6" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}>
-                          <span 
-                            className="text-sm" 
-                            style={{ 
-                              fontFamily: 'Inter, sans-serif',
-                              fontWeight: 600,
-                              letterSpacing: '-0.005em',
-                              color: '#C9C4D6'
-                            }}
-                          >
-                            2025
-                          </span>
-                        </div>
-                        
-                        {/* Main title */}
-                        <div 
-                          className="text-3xl mb-6 leading-tight" 
-                          style={{ 
-                            fontFamily: 'Inter, sans-serif',
-                            fontWeight: 800,
-                            letterSpacing: '-0.02em',
-                            color: '#C9C4D6',
-                            textShadow: '0 0 12px rgba(162, 89, 255, 0.15)'
-                          }}
-                        >
-                          <div>DEVELOPER</div>
-                          <div>MARKETING</div>
-                          <div>PLAYBOOK</div>
-                        </div>
-                        
-                        {/* Subtitle */}
-                        <div 
-                          className="text-sm" 
-                          style={{ 
-                            fontFamily: 'Inter, sans-serif',
-                            fontWeight: 400,
-                            letterSpacing: '-0.005em',
-                            color: '#C9C4D6'
-                          }}
-                        >
-                          For DevTool and AI Agents Startups
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Subtle shadow effect */}
-                  <div className="absolute -inset-1 bg-gray-900/30 rounded-2xl blur-sm"></div>
-                </div>
-              </div>
+              <Image loading="lazy"
+                          width={600}
+                          height={700}
+                          src='/playbook/playbook.png'
+                          alt='Developer Marketing Playbook' />
             </motion.div>
           </div>
         </div>
       </section>
-
+</div>
       {/* Results Section - Fourth Fold */}
       <section 
         className="py-20 relative"
@@ -1048,7 +998,7 @@ export default function Page() {
       </section>
 
       {/* About Infrasity Section - Fifth Fold */}
-      <section className="py-20 bg-black">
+      <section className="py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <motion.h2 
@@ -1132,13 +1082,23 @@ export default function Page() {
             </motion.div>
           </div>
           
-          
-         <VideoTestimonials/>
+         <div className='mt-28'> 
+         <VideoTestimonials items={Videos}/>
+         </div> 
         </div>
       </section>
 
       {/* Final CTA Section - Last Fold */}
-      <section 
+      <div
+              className="mb-10"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+              }}
+            >
+              <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
+      
+                <section 
         className="py-20 relative overflow-hidden"
       >
         
@@ -1204,6 +1164,8 @@ export default function Page() {
           
         </div>
       </section>
+      </div>
+ 
       </div>
     </>
   );
