@@ -5,6 +5,7 @@ import { Check, Download, Calendar, Users, TrendingUp, Code, BookOpen, Video, Me
 import Image from "next/image";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
+import VideoTestimonials from "./testimonials";
 
 const fileList = [
   "aviator.png","mocha.png","cedana.png","dhiwise.png","amnic.png","oso.png","ox-sec.svg",
@@ -93,6 +94,7 @@ export default function Page() {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
+  console.log(formData);
 
   const handleDownload = async (e) => {
     e.preventDefault();
@@ -102,7 +104,6 @@ export default function Page() {
       alert("Please fill in all required fields");
       return;
     }
-
     try {
       const payload = {
         fields: [
@@ -116,7 +117,7 @@ export default function Page() {
         },
       };
 
-      const response = await fetch("/api/whitepaper", {
+      const response = await fetch("/api/playbook", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -198,21 +199,9 @@ export default function Page() {
         }
       `}</style>
       <div 
-        id="main-container"
+     
         className="min-h-screen relative"
-        style={{
-          background: `
-            radial-gradient(2000px circle at 50% 60%, rgba(162, 89, 255, 0.15), transparent 70%),
-            linear-gradient(180deg, #2B0A4E 0%, #1C062F 50%, #0B0811 100%)
-          `,
-          backgroundImage: `
-            linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px)
-          `,
-          backgroundSize: '48px 48px',
-          backgroundBlendMode: 'overlay',
-          boxShadow: 'inset 0 0 300px rgba(0, 0, 0, 0.8), inset 0 0 150px rgba(0, 0, 0, 0.4)'
-        }}
+
       >
       {/* Hero Section - First Fold */}
       <section 
@@ -220,7 +209,7 @@ export default function Page() {
       >
         
         <div 
-          className="relative max-w-7xl mx-auto px-6 py-16"
+          className="relative max-w-7xl mx-auto px-6 py-16 pt-40"
         >
           <div className="grid grid-cols-12 gap-8 items-center">
             {/* Left Content - Cols 1-6 */}
@@ -319,6 +308,9 @@ export default function Page() {
                   <label className="block text-sm font-semibold text-white mb-2">Full Name</label>
                   <input 
                     type="text" 
+                    onChange={handleInputChange}
+                    name="fullName"
+                    value={formData.fullName}
                     className="w-full px-4 bg-white/3 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-[#A259FF] focus:border-[#A259FF] focus:shadow-[0_0_10px_rgba(162,89,255,0.3)] transition-all duration-200"
                     style={{ height: '48px' }}
                     placeholder="Full Name:"
@@ -328,6 +320,9 @@ export default function Page() {
                   <label className="block text-sm font-semibold text-white mb-2">Work Email</label>
                   <input 
                     type="email" 
+                    name="workEmail"
+                    value={formData.workEmail}
+                    onChange={handleInputChange}
                     className="w-full px-4 bg-white/3 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-[#A259FF] focus:border-[#A259FF] focus:shadow-[0_0_10px_rgba(162,89,255,0.3)] transition-all duration-200"
                     style={{ height: '48px' }}
                     placeholder="Work Email:"
@@ -337,6 +332,9 @@ export default function Page() {
                   <label className="block text-sm font-semibold text-white mb-2">Company Name</label>
                   <input 
                     type="text" 
+                    name="companyName"
+                    value={formData.companyName}
+                    onChange={handleInputChange}
                     className="w-full px-4 bg-white/3 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-[#A259FF] focus:border-[#A259FF] focus:shadow-[0_0_10px_rgba(162,89,255,0.3)] transition-all duration-200"
                     style={{ height: '48px' }}
                     placeholder="Company Name:"
@@ -362,7 +360,7 @@ export default function Page() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex items-center justify-center gap-16 mb-8"
+            className="flex items-center justify-center gap-16 mb-8 mt-20"
           >
             <div className="text-center">
               <div className="text-[32px] font-black mb-1" style={{ color: '#EDEAF2' }}>781%</div>
@@ -1135,33 +1133,7 @@ export default function Page() {
           </div>
           
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-white/10 text-center max-w-4xl mx-auto hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
-          >
-            <div className="flex items-center justify-center mb-4">
-              <div className="flex gap-2 mr-3">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <span className="text-white text-sm font-medium font-['Inter',sans-serif]">testimonial.sh</span>
-            </div>
-            <blockquote className="text-2xl text-white mb-6 leading-relaxed font-['Inter',sans-serif] font-bold">
-              "Infrasity helped us 7x our organic traffic through developer-first storytelling."
-            </blockquote>
-            <div className="flex items-center justify-center gap-4">
-              <div className="w-12 h-12 bg-[#A259FF] rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">F</span>
-              </div>
-              <div className="text-left">
-                <div className="text-white font-bold text-lg font-['Inter',sans-serif]">Firefly.ai Team</div>
-                <div className="text-gray-400 text-sm font-['Inter',sans-serif]">DevTool Startup</div>
-              </div>
-            </div>
-          </motion.div>
+         <VideoTestimonials/>
         </div>
       </section>
 
@@ -1230,55 +1202,6 @@ export default function Page() {
             </motion.div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="bg-white/3 backdrop-blur-sm p-6 rounded-xl border border-[#A259FF]/30 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
-              style={{
-                boxShadow: '0 4px 20px rgba(162,89,255,0.05)'
-              }}
-            >
-              <div className="flex items-center justify-center mb-4">
-                <ArrowRight className="w-6 h-6 text-[#A259FF]" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2 text-center font-['Inter',sans-serif]">Instant Access</h3>
-              <p className="text-gray-300 text-sm text-center font-['Inter',sans-serif]">Download immediately</p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="bg-white/3 backdrop-blur-sm p-6 rounded-xl border border-[#A259FF]/30 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
-              style={{
-                boxShadow: '0 4px 20px rgba(162,89,255,0.05)'
-              }}
-            >
-              <div className="flex items-center justify-center mb-4">
-                <ArrowRight className="w-6 h-6 text-[#A259FF]" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2 text-center font-['Inter',sans-serif]">No Fluff</h3>
-              <p className="text-gray-300 text-sm text-center font-['Inter',sans-serif]">Only actionable strategies</p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="bg-white/3 backdrop-blur-sm p-6 rounded-xl border border-[#A259FF]/30 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
-              style={{
-                boxShadow: '0 4px 20px rgba(162,89,255,0.05)'
-              }}
-            >
-              <div className="flex items-center justify-center mb-4">
-                <ArrowRight className="w-6 h-6 text-[#A259FF]" />
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2 text-center font-['Inter',sans-serif]">Free Forever</h3>
-              <p className="text-gray-300 text-sm text-center font-['Inter',sans-serif]">No credit card required</p>
-            </motion.div>
-          </div>
         </div>
       </section>
       </div>
