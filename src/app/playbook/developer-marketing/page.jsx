@@ -521,7 +521,7 @@ export default function Page() {
               transition={{ duration: 0.6 }}
               className="text-4xl lg:text-5xl font-extrabold mb-8"
               style={{
-                fontFamily: 'Geist Sans, Inter, sans-serif',
+                fontFamily: 'Quicksand',
                 fontWeight: 800,
                 letterSpacing: '-0.01em',
                 color: '#EDEAF2',
@@ -613,7 +613,7 @@ export default function Page() {
               transition={{ duration: 0.6 }}
               className="text-4xl lg:text-5xl mb-6"
               style={{
-                fontFamily: 'Geist Sans, Inter, sans-serif',
+                fontFamily: 'Quicksand',
                 fontWeight: 800,
                 letterSpacing: '-0.01em',
                 color: '#EDEAF2',
@@ -940,7 +940,7 @@ export default function Page() {
               transition={{ duration: 0.6 }}
               className="text-4xl lg:text-5xl font-black mb-8"
               style={{
-                fontFamily: 'Geist Sans, Inter, sans-serif',
+                fontFamily: 'Quicksand',
                 fontWeight: 800,
                 letterSpacing: '-0.01em',
                 color: '#EDEAF2',
@@ -1070,6 +1070,9 @@ export default function Page() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
+              style={{
+                 fontFamily: 'Quicksand'
+              }}
               className="text-4xl lg:text-5xl font-black text-white mb-8 font-['Inter',sans-serif]"
             >
               Built by <span className="text-[#A259FF]">Engineers.</span> Designed for <span className="text-[#A259FF]">Developers.</span>
@@ -1175,7 +1178,7 @@ export default function Page() {
               transition={{ duration: 0.6 }}
               className="text-4xl lg:text-5xl font-black mb-8"
               style={{
-                fontFamily: 'Geist Sans, Inter, sans-serif',
+                fontFamily: 'Quicksand',
                 fontWeight: 800,
                 letterSpacing: '-0.01em',
                 color: '#EDEAF2',
