@@ -28,7 +28,7 @@ export default function VideoTestimonials({
   items = [],
   className = "",
   brandColor = "bg-btnprimary",
-  autoplayMs = 3000, // default 4s
+  autoplayMs = 3000, // default 3s
   pauseOnHover = true,
 }) {
   const data = items;
@@ -207,7 +207,7 @@ export default function VideoTestimonials({
 
                   {/* Quote */}
                   {data[index].quote && (
-                    <div className="relative lg:absolute bottom-0 right-0 lg:m-4 max-w-md rounded-md bg-amber-50 p-6 shadow-sm border border-border lg:col-span-1 z-20">
+                    <div className="relative lg:absolute bottom-0 right-0 lg:m-4 max-w-md rounded-md bg-amber-50 p-6 shadow-sm lg:w-[23rem] lg:col-span-1 z-20">
                       <blockquote className="italic text-base md:text-lg leading-relaxed text-black">“{data[index].quote}”</blockquote>
                       <div className="mt-3">
                         {data[index].personName && <div className="font-bold text-black">{data[index].personName}</div>}
