@@ -280,7 +280,7 @@ export default function Page() {
       >
       {/* Hero Section - First Fold */}
       <section 
-        className="relative overflow-hidden min-h-screen flex flex-col justify-center"
+        className="relative overflow-hidden flex flex-col justify-center"
       >
         
         <div 
@@ -649,7 +649,7 @@ export default function Page() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="group p-5 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
+                className="group p-4 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
                 style={{
                   background: 'rgba(255, 255, 255, 0.04)',
                   border: '1px solid rgba(162, 89, 255, 0.25)',
@@ -702,7 +702,7 @@ export default function Page() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="group p-5 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
+                className="group p-4 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
                 style={{
                   background: 'rgba(255, 255, 255, 0.04)',
                   border: '1px solid rgba(162, 89, 255, 0.25)',
@@ -755,7 +755,7 @@ export default function Page() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="group p-5 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
+                className="group p-4 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
                 style={{
                   background: 'rgba(255, 255, 255, 0.04)',
                   border: '1px solid rgba(162, 89, 255, 0.25)',
@@ -808,7 +808,7 @@ export default function Page() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="group p-5 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
+                className="group p-4 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
                 style={{
                   background: 'rgba(255, 255, 255, 0.04)',
                   border: '1px solid rgba(162, 89, 255, 0.25)',
@@ -861,7 +861,7 @@ export default function Page() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="group p-5 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
+                className="group p-4 rounded-2xl transition-all duration-300 hover:transform hover:-translate-y-1"
                 style={{
                   background: 'rgba(255, 255, 255, 0.04)',
                   border: '1px solid rgba(162, 89, 255, 0.25)',
@@ -916,9 +916,10 @@ export default function Page() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative flex justify-center lg:w-[45rem] lg:h-[35rem] lg:ml-[-10rem] xl:w-[50rem] xl:h-[40rem] xl:ml-[-8rem]"
+              className="relative flex justify-center lg:w-[30rem] lg:h-[32rem] xl:w-[33rem] xl:h-[37rem] rounded-[15px] bg-gradient-to-r from-[#A259FF] to-[#5B36FF] "
             >
               <Image loading="lazy"
+              className="min-w-[140%] -ml-12"
                           width={800}
                           height={700}
                           src='/playbook/playbook.png'
