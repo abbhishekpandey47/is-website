@@ -51,11 +51,28 @@ const getLogoPadding = (filename) => {
   return paddingMap[filename] || 'p-4';
 };
 
-export const Videos =[{
+export const Videos =[
+  {
+  id: "case-2",
+  eyebrow: "CASE STUDIES",
+  heading: "Hear directly from our customers",
+  blurb: "",
+  cta: { label: "See case studies", href: "/case-studies" },
+
+  headshotSrc: "/playbook/firefly.png",
+  headshotAlt: "Eric Peters",
+  companyLogoSrc: "/playbook/firefly-bg.png",
+  companyLogoAlt: "FireFly.ai",
+  quote: "Infrasity was quick to onboard and understand how to best show off the capabilities of Firefly's cloud asset management. Team has been super responsive and collaborative.",
+  personName: "Idoo Neeman",
+  personTitle: "Co-Founder and CEO, FireFly.ai",
+  videoUrl: "https://youtube.com/shorts/xjUnOgEi8DI",
+},
+{
   id: "case-1",
   eyebrow: "CASE STUDIES",
   heading: "Hear directly from our customers",
-  blurb: "Learn how Cycloid used Surveys to boost signups by 10%.",
+  blurb: "",
   cta: { label: "See case studies", href: "/case-studies" },
 
   headshotSrc: "/playbook/cycloid.png",
@@ -63,25 +80,9 @@ export const Videos =[{
   companyLogoSrc: "/playbook/cycloid-bg.png",
   companyLogoAlt: "Cycloid",
   quote: "If you can't figure out why users are bouncing, Surveys is a really direct way to ask them.",
-  personName: "Eric Peters",
-  personTitle: "Growth Marketer, HubSpot",
+  personName: "Ben Hewison",
+  personTitle: "Content Marketing Manager, Cycloid",
   videoUrl: "https://youtu.be/AbqznECrec4",
-},
-{
-  id: "case-2",
-  eyebrow: "CASE STUDIES",
-  heading: "Hear directly from our customers",
-  blurb: "Learn how FireFly used Surveys to boost signups by 10%.",
-  cta: { label: "See case studies", href: "/case-studies" },
-
-  headshotSrc: "/playbook/firefly.png",
-  headshotAlt: "Eric Peters",
-  companyLogoSrc: "/playbook/firefly-bg.png",
-  companyLogoAlt: "FireFly.ai",
-  quote: "If you can't figure out why users are bouncing, Surveys is a really direct way to ask them.",
-  personName: "Eric Peters",
-  personTitle: "Growth Marketer, HubSpot",
-  videoUrl: "https://youtube.com/shorts/xjUnOgEi8DI",
 }
 ]
 
@@ -92,6 +93,8 @@ export default function Page() {
     workEmail: "",
     companyName: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Add scroll-based lighting effect
   useEffect(() => {
@@ -139,6 +142,8 @@ export default function Page() {
       alert("Please fill in all required fields");
       return;
     }
+
+    setIsSubmitting(true);
     try {
       const payload = {
         fields: [
@@ -159,6 +164,7 @@ export default function Page() {
       });
 
       if (response.ok) {
+        setIsSubmitted(true);
         // Download the PDF after successful submission
         setTimeout(() => {
           const link = document.createElement('a');
@@ -173,6 +179,8 @@ export default function Page() {
       }
     } catch (error) {
       alert("Failed to submit form. Please try again.");
+    } finally{
+      setIsSubmitting(false);
     }
   };
 
@@ -244,7 +252,7 @@ export default function Page() {
       >
         
         <div 
-          className="relative max-w-7xl mx-auto px-6 py-16 pt-40"
+          className="relative max-w-7xl mx-auto px-6 py-16 pt-40 w-full"
         >
           <div className="grid grid-cols-12 gap-8 items-center">
             {/* Left Content - Cols 1-6 */}
@@ -313,6 +321,7 @@ export default function Page() {
             </div>
 
             {/* Right Form - Cols 7-12 */}
+             {!isSubmitted ? (
             <motion.div 
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -327,6 +336,7 @@ export default function Page() {
                 boxShadow: '0 4px 20px rgba(0,0,0,.2), 0 0 20px rgba(162,89,255,.1)'
               }}
             >
+
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-semibold text-white mb-2">Full Name</label>
@@ -364,8 +374,11 @@ export default function Page() {
                     placeholder="Company Name:"
                   />
                 </div>
+                <div className="pt-2">
                 <button 
+                  type="button"
                   onClick={handleDownload}
+                  disabled={isSubmitting}
                   className="w-full text-white py-4 rounded-lg font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center"
                   style={{ 
                     background: 'linear-gradient(90deg,#A259FF,#5B36FF)',
@@ -373,10 +386,23 @@ export default function Page() {
                   }}
                 >
                   <Download className="w-5 h-5 mr-2" />
-                  Download Playbook
+                   {isSubmitting ? "Submitting..." : "Download Playbook"}
                 </button>
+                </div>
               </div>
             </motion.div>
+            ): (
+            <div className="col-span-12 lg:col-span-6">
+              <div className="text-center">
+                <div className="text-green-400 text-6xl mb-4">✓</div>
+                <h2 className="text-3xl font-bold text-white mb-4">Success!</h2>
+                <p className="text-gray-300 text-lg mb-6">
+                  Thank you for your submission. Your playbook download will
+                  begin shortly.
+                </p>
+              </div>
+            </div>
+          )}
           </div>
 
           {/* Metrics Row */}
@@ -851,10 +877,10 @@ export default function Page() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative flex justify-center"
+              className="relative flex justify-center lg:w-[45rem] lg:h-[35rem] lg:ml-[-10rem] xl:w-[50rem] xl:h-[40rem] xl:ml-[-8rem]"
             >
               <Image loading="lazy"
-                          width={600}
+                          width={800}
                           height={700}
                           src='/playbook/playbook.png'
                           alt='Developer Marketing Playbook' />
