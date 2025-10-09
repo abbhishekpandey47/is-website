@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "The 2025 Developer Marketing Playbook for DevTool & AI Startups | Infrasity",
-  description: "Master developer marketing with our proven playbook. Drive 781% traffic growth, build developer trust, and turn technical audiences into advocates. Real case studies from Firefly, ScaleKit, and Kubiya included.",
+  title: "Developer Marketing Playbook 2025 | Infrasity",
+  description: "Click the link to see real examples of how Infrasity drove growth for top DevTool and AI startups through content, docs, and community. Download the playbook now!",
   robots: {
     index: false,
     follow: false,
