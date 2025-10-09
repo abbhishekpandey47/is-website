@@ -17,9 +17,9 @@ export default function AwardBanner() {
                 <ArrowRight className="h-4 w-4 text-white" />
               </div>
               <div className="z-20">
-                <Link className="z-10" href="/playbook/reddit-b2b-marketing">
+                <Link className="z-10" href="/playbook/developer-marketing">
                   <p className="text-sm font-medium text-white text-center cursor-pointer">
-                    Download Free Playbook: Reddit B2B Playbook
+                    Download Free Playbook: Developer Marketing Playbook
                   </p>
                 </Link>
               </div>

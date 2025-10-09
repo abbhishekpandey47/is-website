@@ -237,6 +237,10 @@ const resourcesTab = [
         hrefLink: "/playbook/reddit-b2b-marketing",
         menuName: "Reddit B2B Playbook",
       },
+      {
+        hrefLink: "/playbook/developer-marketing",
+        menuName: "Developer Playbook",
+      },
     ],
   },
 ];
@@ -538,6 +542,18 @@ const Navbar = () => {
                                 className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
                               >
                                 Reddit B2B Playbook
+                              </Link>
+                            </MenuItem2>
+                                <MenuItem2>
+                              <Link
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleServiceClick("/playbook/developer-marketing");
+                                }}
+                                href="/playbook/developer-marketing"
+                                className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                              >
+                                Developer Marketing Playbook
                               </Link>
                             </MenuItem2>
                           </div>
