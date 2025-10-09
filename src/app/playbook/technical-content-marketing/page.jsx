@@ -1,11 +1,22 @@
 "use client";
 import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Check, Download, Calendar, Users, TrendingUp, Code, BookOpen, Video, MessageSquare, ArrowRight, Star, Play, Shield, Zap, Target, Award, Globe, ChevronRight, X, Building } from "lucide-react";
+import {  Download, Calendar, TrendingUp, BookOpen, Building} from "lucide-react";
 import Image from "next/image";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
 import VideoTestimonials from "./testimonials";
+
+import { LuSquareCode } from "react-icons/lu";
+import { MdOutlineVideoLibrary } from "react-icons/md";
+import {RiUserCommunityFill} from "react-icons/ri"
+import { IoBookOutline } from "react-icons/io5";
+import { FiUserCheck } from "react-icons/fi";
+import { TiDocumentText } from "react-icons/ti";
+import { SiMarketo } from "react-icons/si";
+
+
+
 
 const fileList = [
   "aviator.png","mocha.png","cedana.png","dhiwise.png","amnic.png","oso.png","ox-sec.svg",
@@ -63,7 +74,7 @@ export const Videos =[
   headshotAlt: "Eric Peters",
   companyLogoSrc: "/playbook/firefly-bg.png",
   companyLogoAlt: "FireFly.ai",
-  quote: "Infrasity was quick to onboard and understand how to best show off the capabilities of Firefly's cloud asset management. Team has been super responsive and collaborative.",
+  quote: "Infrasity streamlined our infrastructure management — what once took days now takes hours. Truly transformative!",
   personName: "Idoo Neeman",
   personTitle: "Co-Founder and CEO, FireFly.ai",
   videoUrl: "https://youtube.com/shorts/xjUnOgEi8DI",
@@ -76,10 +87,10 @@ export const Videos =[
   cta: { label: "See case studies", href: "/case-studies" },
 
   headshotSrc: "/playbook/cycloid.png",
-  headshotAlt: "Eric Peters",
+  headshotAlt: "Ben Hewison",
   companyLogoSrc: "/playbook/cycloid-bg.png",
   companyLogoAlt: "Cycloid",
-  quote: "If you can't figure out why users are bouncing, Surveys is a really direct way to ask them.",
+  quote: "Partnering with Infrasity helped us bring efficiency and clarity to our DevOps pipeline. A reliable partner all the way",
   personName: "Ben Hewison",
   personTitle: "Content Marketing Manager, Cycloid",
   videoUrl: "https://youtu.be/AbqznECrec4",
@@ -95,6 +106,7 @@ export default function Page() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Add scroll-based lighting effect
   useEffect(() => {
@@ -132,16 +144,30 @@ export default function Page() {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
+  
+  const validateForm = () => {
+    const { workEmail, fullName, companyName } = formData;
 
+    if (!workEmail || !fullName || !companyName) {
+      setErrorMessage("All fields are required");
+      return false;
+    }
+
+  const emailRegex = /^(?!.*@(gmail|yahoo|hotmail|outlook|live|aol|icloud|protonmail|pm\.me|yandex|gmx|zoho|mail|rediffmail)\.)[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (!emailRegex.test(workEmail)) {
+      setErrorMessage("Please enter a valid work email address");
+      return false;
+    }
+
+    return true;
+  };
 
   const handleDownload = async (e) => {
     e.preventDefault();
     
-    // Validate form data
-    if (!formData.fullName || !formData.workEmail || !formData.companyName) {
-      alert("Please fill in all required fields");
-      return;
-    }
+    setErrorMessage("");
+
+    if (!validateForm()) return;
 
     setIsSubmitting(true);
     try {
@@ -175,10 +201,10 @@ export default function Page() {
           document.body.removeChild(link);
         }, 100);
       } else {
-        alert("Failed to submit form. Please try again.");
+        setErrorMessage("Failed to submit form. Please try again.");
       }
     } catch (error) {
-      alert("Failed to submit form. Please try again.");
+      setErrorMessage("Failed to submit form. Please try again.");
     } finally{
       setIsSubmitting(false);
     }
@@ -186,6 +212,12 @@ export default function Page() {
 
   const handleBookDemo = () => {
     window.open('https://www.infrasity.com/contact', '_blank');
+  };
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // adds smooth scrolling
+    });
   };
 
   return (
@@ -374,6 +406,13 @@ export default function Page() {
                     placeholder="Company Name:"
                   />
                 </div>
+                {/* <div> */}
+                    {errorMessage && (
+                  <div className="text-red-400 text-sm text-left">
+                    {errorMessage}
+                  </div>
+                )}
+                {/* </div> */}
                 <div className="pt-2">
                 <button 
                   type="button"
@@ -421,7 +460,7 @@ export default function Page() {
               <div className="text-sm" style={{ color: '#C9C4D6', opacity: 0.8 }}>Monthly Visitors</div>
             </div>
             <div className="text-center">
-              <div className="text-[32px] font-black mb-1" style={{ color: '#EDEAF2' }}>9 Mo</div>
+              <div className="text-[32px] font-black mb-1" style={{ color: '#EDEAF2' }}>3 Mo</div>
               <div className="text-sm" style={{ color: '#C9C4D6', opacity: 0.8 }}>To Leadership</div>
             </div>
           </motion.div>
@@ -514,7 +553,7 @@ export default function Page() {
               className="group bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-[#A259FF]/30 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
               <div className="w-16 h-16 bg-gradient-to-r from-[#A259FF] to-[#5B36FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Code className="w-8 h-8 text-white" />
+              <TiDocumentText className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 text-center font-['Inter',sans-serif]">Inconsistent Content</h3>
               <p className="text-gray-300 text-center leading-relaxed font-['Inter',sans-serif]">
@@ -529,7 +568,7 @@ export default function Page() {
               className="group bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
               <div className="w-16 h-16 bg-gradient-to-r from-[#A259FF] to-[#5B36FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Users className="w-8 h-8 text-white" />
+                <LuSquareCode className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 text-center font-['Inter',sans-serif]">Underfunded DevRel</h3>
               <p className="text-gray-300 text-center leading-relaxed font-['Inter',sans-serif]">
@@ -544,7 +583,7 @@ export default function Page() {
               className="group bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
               <div className="w-16 h-16 bg-gradient-to-r from-[#A259FF] to-[#5B36FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <TrendingUp className="w-8 h-8 text-white" />
+                <FiUserCheck className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 text-center font-['Inter',sans-serif]">Lack of Technical Credibility</h3>
               <p className="text-gray-300 text-center leading-relaxed font-['Inter',sans-serif]">
@@ -629,7 +668,7 @@ export default function Page() {
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
                     }}
                   >
-                    <Check className="w-6 h-6 text-white" />
+                    <SiMarketo className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 
@@ -682,7 +721,7 @@ export default function Page() {
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
                     }}
                   >
-                    <Users className="w-6 h-6 text-white" />
+                    <FiUserCheck  className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 
@@ -1016,7 +1055,7 @@ export default function Page() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
             >
-              <div className="text-5xl font-black text-[#A259FF] mb-3">9mo</div>
+              <div className="text-5xl font-black text-[#A259FF] mb-3">3mo</div>
               <div className="text-white font-medium font-['Inter',sans-serif]">Time to Results</div>
             </motion.div>
           </div>
@@ -1054,7 +1093,7 @@ export default function Page() {
               className="group text-center bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
             >
               <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <BookOpen className="w-8 h-8 text-white" />
+                <IoBookOutline className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 font-['Inter',sans-serif]">Content Strategy</h3>
               <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
@@ -1069,7 +1108,7 @@ export default function Page() {
               className="group text-center bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
             >
               <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Code className="w-8 h-8 text-white" />
+                <LuSquareCode className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 font-['Inter',sans-serif]">Documentation</h3>
               <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
@@ -1084,7 +1123,7 @@ export default function Page() {
               className="group text-center bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
             >
               <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Zap className="w-8 h-8 text-white" />
+                <MdOutlineVideoLibrary className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 font-['Inter',sans-serif]">Video Explainers</h3>
               <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
@@ -1099,7 +1138,7 @@ export default function Page() {
               className="group text-center bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
             >
               <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Users className="w-8 h-8 text-white" />
+                <RiUserCommunityFill  className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 font-['Inter',sans-serif]">Community Activation</h3>
               <p className="text-gray-300 leading-relaxed font-['Inter',sans-serif]">
@@ -1168,7 +1207,7 @@ export default function Page() {
               className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             >
               <button
-                onClick={handleDownload}
+                onClick={handleScrollToTop}
                 className="text-white py-4 px-8 rounded-lg font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center"
                 style={{ 
                   background: 'linear-gradient(90deg,#A259FF,#5B36FF)',
