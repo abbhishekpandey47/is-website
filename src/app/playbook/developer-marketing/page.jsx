@@ -74,10 +74,10 @@ export const Videos =[
   headshotAlt: "Eric Peters",
   companyLogoSrc: "/playbook/firefly-bg.png",
   companyLogoAlt: "FireFly.ai",
-  quote: "Infrasity streamlined our infrastructure management — what once took days now takes hours. Truly transformative!",
+  quote:"Infrasity’s unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
   personName: "Idoo Neeman",
   personTitle: "Co-Founder and CEO, FireFly.ai",
-  videoUrl: "https://youtube.com/shorts/xjUnOgEi8DI",
+  videoUrl: "https://youtube.com/shorts/AgCQ176pfRU",
 },
 {
   id: "case-1",
@@ -90,10 +90,10 @@ export const Videos =[
   headshotAlt: "Ben Hewison",
   companyLogoSrc: "/playbook/cycloid-bg.png",
   companyLogoAlt: "Cycloid",
-  quote: "Partnering with Infrasity helped us bring efficiency and clarity to our DevOps pipeline. A reliable partner all the way",
+  quote: "Infrasity’s experience in platform engineering and DevOps gave us confidence that they could translate our technical value into engaging content and videos.",
   personName: "Ben Hewison",
   personTitle: "Content Marketing Manager, Cycloid",
-  videoUrl: "https://youtu.be/AbqznECrec4",
+  videoUrl: "https://youtu.be/19Nz5OxaTtc",
 }
 ]
 
@@ -194,7 +194,7 @@ export default function Page() {
         // Download the PDF after successful submission
         setTimeout(() => {
           const link = document.createElement('a');
-          link.href = "https://drive.google.com/uc?export=download&id=1HBGgOsb7I3zzJ7qanfZxbqsOneh5Zf4f";
+          link.href = "https://drive.google.com/uc?export=download&id=1g7crihLTZ_ikb0y_RVzZb1cLl2L4yNP2";
           link.download = 'Developer-Marketing-Playbook.pdf';
           document.body.appendChild(link);
           link.click();
@@ -919,7 +919,7 @@ export default function Page() {
               className="relative flex justify-center lg:w-[30rem] lg:h-[32rem] xl:w-[33rem] xl:h-[37rem] rounded-[15px] bg-gradient-to-r from-[#A259FF] to-[#5B36FF] "
             >
               <Image loading="lazy"
-              className="min-w-[140%] -ml-12"
+              className="min-w-[130%] -ml-12"
                           width={800}
                           height={700}
                           src='/playbook/playbook.png'
