@@ -151,6 +151,10 @@ const ImageHeight = [
     src: "/PostImages/developer-marketing-strategy/11.png",
     width: 550,
     height: 600,
+  }, {
+    src: "/PostImages/developer-marketing-strategy/7.png",
+    width: 550,
+    height: 600,
   },
 ];
 

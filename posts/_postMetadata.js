@@ -786,7 +786,7 @@ let postMetaData = [
         ogImage: "/PostImages/dev-marketing/dm1.png",
         publishedOn: "2025-05-29",
         authorId: "author0004",
-        category: "Informational",
+        category: "Developer Marketing",
         metaDescription: "Built a SaaS product for developers? Discover how Dev Marketing can help you drive real engagement and growth compared to traditional marketing strategies."
     },
     
@@ -834,7 +834,7 @@ let postMetaData = [
         ogImage: "/PostImages/technical-writer-vs-developer-advocate/td1.webp",
         publishedOn: "2025-06-17",
         authorId: "author0004",
-        category: "Informational",
+        category: "Developer Marketing",
         metaDescription: "Tech writer vs. dev advocate - who gives your B2B SaaS startup the edge? Uncover the impact of each role and make your first hire count. Read the full guide."
     },
     
@@ -846,7 +846,7 @@ let postMetaData = [
         ogImage: "/PostImages/developer-experience-engineer/de1.webp",
         publishedOn: "2025-06-19",
         authorId: "author0004",
-        category: "Informational",
+        category: "Developer Marketing",
         metaDescription: "Master the 5 Whys root cause analysis to solve developer experience challenges and reduce friction in your SaaS onboarding and integration flows."
     },
 
@@ -942,7 +942,7 @@ let postMetaData = [
         ogImage: "/PostImages/developer-marketing-agency/da1.webp",
         publishedOn: "2025-07-16",
         authorId: "author0004",
-        category: "Informational",
+        category: "Developer Marketing",
         metaDescription: "Here are the top 5 dev agencies that specializes in leveraging technical content as marketing collateral. Pick the best one that aligns with your expectations."
     },
 
@@ -1000,7 +1000,7 @@ let postMetaData = [
         ogImage: "/PostImages/developer-advocates-bridge-engineer-product-teams/banner.webp",
         publishedOn: "2025-08-13",
         authorId: "author0005",
-        category: "Informational",
+        category: "Developer Marketing",
         metaDescription: "Learn how developer advocates connect engineers and product teams for better collaboration and product success in the developer community"
     },
     {
@@ -1088,7 +1088,7 @@ let postMetaData = [
   ogImage: "/PostImages/what-is-developer-marketing/banner.jpg",
   publishedOn: "2025-09-12",
   authorId: "author0005",
-  category: "Informational",
+  category: "Developer Marketing",
   metaDescription: "Learn what developer marketing is and how to build a winning developer marketing strategy for 2025. Click the link to read now!"
 },
 {
@@ -1110,7 +1110,7 @@ let postMetaData = [
   ogImage: "/PostImages/why-startups-hiring-devrel-engineers/0.png",
   publishedOn: "2025-09-19",
   authorId: "author0005",
-  category: "Informational",
+  category: "Developer Marketing",
   metaDescription: "Discover what DevRel is, why startups need it in 2025, and proven DevRel strategies to boost adoption. Read now and level up your developer relations!"
 },
 {
@@ -1121,7 +1121,7 @@ let postMetaData = [
   ogImage: "/PostImages/ai-marketing-agency-b2b-saas/0.webp",
   publishedOn: "2025-09-25",
   authorId: "author0005",
-  category: "Informational",
+  category: "Developer Marketing",
   metaDescription: "Discover the best AI & developer marketing agencies for B2B SaaS. Drive product adoption, community growth, and measurable results. Read now to learn more! "
 },
    {
