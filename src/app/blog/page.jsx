@@ -41,7 +41,7 @@ let tabs = [
 ];
 
 const TabDiv = React.memo(({ activeTab, setActiveTab }) => (
-  <div className="flex flex-wrap gap-4 max-w-7xl mx-auto justify-center">
+  <div className="flex flex-wrap gap-[0.60rem] max-w-7xl mx-auto justify-center">
     {tabs.map((tab) => (
       <button
         key={tab.id}

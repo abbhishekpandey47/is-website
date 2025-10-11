@@ -139,18 +139,18 @@ const ImageHeight = [
   },
   {
     src: "/PostImages/developer-marketing-strategy/3.png",
-    width: 500,
-    height: 450,
+    width: 400,
+    height: 500,
   },
   {
     src: "/PostImages/developer-marketing-strategy/10.png",
     width: 550,
-    height: 550,
+    height: 600,
   },
   {
     src: "/PostImages/developer-marketing-strategy/11.png",
     width: 550,
-    height: 550,
+    height: 600,
   },
 ];
 
