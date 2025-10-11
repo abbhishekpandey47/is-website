@@ -913,8 +913,8 @@ export default function Page() {
 
             {/* Right side - 3D Book */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.7 }}
+              whileInView={{ opacity: 1, scale: 0.9 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="relative flex justify-center lg:w-[30rem] lg:h-[32rem] xl:w-[33rem] xl:h-[37rem] rounded-[15px] bg-gradient-to-r from-[#A259FF] to-[#5B36FF] "
             >
@@ -936,9 +936,6 @@ export default function Page() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
               className="text-4xl lg:text-5xl font-black mb-8"
               style={{
                 fontFamily: 'Quicksand',

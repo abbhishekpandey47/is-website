@@ -28,7 +28,7 @@ export default function VideoTestimonials({
   items = [],
   className = "",
   brandColor = "bg-btnprimary",
-  autoplayMs = 3000, // default 3s
+  autoplayMs = 5000, // default 3s
   pauseOnHover = true,
 }) {
   const data = items;
