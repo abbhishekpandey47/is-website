@@ -88,11 +88,11 @@ export default async function handler(req, res) {
       </html>
     `;
 
-    // 📬 Send the email
+    // Send the email
     await transporter.sendMail({
       from: `"Infrasity" <${process.env.GMAIL_USER}>`,
       to: payload.fields[2].value,
-      subject: "🚀 Your Infrasity Developer Marketing Playbook 2025",
+      subject: "Your Infrasity Developer Marketing Playbook 2025",
       html: htmlTemplate,
     });
 
