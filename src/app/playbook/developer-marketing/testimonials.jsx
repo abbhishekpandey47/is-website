@@ -162,7 +162,7 @@ export default function VideoTestimonials({
                       </h2>
                     )}
                     {data[index].blurb && (
-                      <p className="mt-4 text-lg text-muted-foreground max-w-xl">{data[index].blurb}</p>
+                      <p className="mt-4 text-md text-muted-foreground max-w-xl">{data[index].blurb}</p>
                     )}
                     {data[index].cta?.href && data[index].cta?.label ? (
                       <div className="mt-8">
