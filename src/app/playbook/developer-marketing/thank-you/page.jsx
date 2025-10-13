@@ -1,6 +1,6 @@
 'use client'
 
-import { Card } from "@/Components/ui/Card";
+import { Card } from "@/Components/ui/card";
 import { CheckCircle2 } from "lucide-react";
 
 const ThankYou = () => {
