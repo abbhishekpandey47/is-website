@@ -444,26 +444,6 @@ export default function Page() {
           )}
           </div>
 
-          {/* Metrics Row */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex items-center justify-center gap-16 mb-8 mt-20"
-          >
-            <div className="text-center">
-              <div className="text-[32px] font-black mb-1" style={{ color: '#EDEAF2' }}>781%</div>
-              <div className="text-sm" style={{ color: '#C9C4D6', opacity: 0.8 }}>Traffic Growth</div>
-            </div>
-            <div className="text-center">
-              <div className="text-[32px] font-black mb-1" style={{ color: '#EDEAF2' }}>32.6K</div>
-              <div className="text-sm" style={{ color: '#C9C4D6', opacity: 0.8 }}>Monthly Visitors</div>
-            </div>
-            <div className="text-center">
-              <div className="text-[32px] font-black mb-1" style={{ color: '#EDEAF2' }}>3 Mo</div>
-              <div className="text-sm" style={{ color: '#C9C4D6', opacity: 0.8 }}>To Leadership</div>
-            </div>
-          </motion.div>
 
           {/* Trusted by Section */}
           <motion.div 
