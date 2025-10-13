@@ -66,8 +66,8 @@ export default function Hero() {
         </h2>
         
         <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-          Developers don't buy hype — they buy <span className="text-cyan-400 font-semibold">trust</span>. 
-          If your content, docs, or community don't speak their language, your adoption curve will flatline.
+          We've seen it first hand AI and infra teams move fast in product, but their story rarely keeps up.<br />
+          That's why developer marketing can't be an afterthought anymore.
         </p>
       </div>
 
@@ -83,7 +83,7 @@ export default function Hero() {
             </div>
             <h3 className="text-xl font-bold text-white mb-4">Inconsistent Content</h3>
             <p className="text-gray-300 leading-relaxed">
-              Your blog, docs, and social posts don't speak the same technical language developers expect.
+              Your blog, docs, or release notes don't speak the same technical language developers expect.
             </p>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function Hero() {
             </div>
             <h3 className="text-xl font-bold text-white mb-4">Underfunded DevRel</h3>
             <p className="text-gray-300 leading-relaxed">
-              Without dedicated developer advocates, your product stays invisible in the communities that matter.
+              Without dedicated developer advocates, your product stays invisible in the communities where decisions are made.
             </p>
           </div>
         </div>
@@ -113,7 +113,7 @@ export default function Hero() {
             </div>
             <h3 className="text-xl font-bold text-white mb-4">Lack of Technical Credibility</h3>
             <p className="text-gray-300 leading-relaxed">
-              Marketing fluff without code samples, real use cases, and technical depth kills trust instantly.
+              SEO heavy article written without code samples, real use cases, and technical depth kills trust instantly.
             </p>
           </div>
         </div>
@@ -126,7 +126,7 @@ export default function Hero() {
           <span className="bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-500 bg-clip-text text-transparent">Learn</span>
         </h2>
         <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-          A comprehensive guide to building developer-first marketing strategies that actually work.
+          A comprehensive guide to building developer-first marketing strategies that actually worked for AI companies.
         </p>
       </div>
 

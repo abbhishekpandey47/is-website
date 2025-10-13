@@ -521,7 +521,8 @@ export default function Page() {
                 color: '#C9C4D6'
               }}
             >
-              Developers don't buy hype — they buy <span className="text-[#A259FF] font-semibold">trust</span>. If your content, docs, or community don't speak their language, your adoption curve will flatline.
+              We've seen it first hand AI and infra teams move fast in product, but their story rarely keeps up.<br />
+              That's why developer marketing can't be an afterthought anymore.
             </motion.p>
           </div>
           
@@ -618,7 +619,7 @@ export default function Page() {
                 color: '#C9C4D6'
               }}
             >
-              A comprehensive guide to building developer-first marketing strategies that actually work.
+              A comprehensive guide to building developer-first marketing strategies that actually worked for AI companies.
             </motion.p>
           </div>
           
@@ -925,7 +926,7 @@ export default function Page() {
                 textShadow: '0 0 12px rgba(162, 89, 255, 0.15)'
               }}
             >
-              Real Results from <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Real DevTools</span>
+              Success Stories from <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>B2B SAAS Startups</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -949,7 +950,7 @@ export default function Page() {
               transition={{ duration: 0.6 }}
               className="bg-white/3 backdrop-blur-sm p-10 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
-              <h3 className="text-2xl font-bold text-white mb-6 font-['Inter',sans-serif]">Firefly.ai</h3>
+              <h3 className="text-2xl font-bold text-white mb-6 font-['Inter',sans-serif]">Firefly.ai - $23 M Series A Startup</h3>
               <div className="text-6xl font-black text-[#A259FF] mb-3">+781%</div>
               <div className="text-xl text-white mb-4 font-medium">Organic Traffic Growth</div>
               <p className="text-gray-300 mb-6 leading-relaxed font-['Inter',sans-serif]">
@@ -981,7 +982,7 @@ export default function Page() {
               transition={{ duration: 0.6 }}
               className="bg-white/3 backdrop-blur-sm p-10 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
-              <h3 className="text-2xl font-bold text-white mb-6 font-['Inter',sans-serif]">Scalekit.com</h3>
+              <h3 className="text-2xl font-bold text-white mb-6 font-['Inter',sans-serif]">Scalekit.com - $5.5 M Seed Startup</h3>
               <div className="text-6xl font-black text-[#A259FF] mb-3">+828%</div>
               <div className="text-xl text-white mb-4 font-medium">Developer Signups</div>
               <p className="text-gray-300 mb-6 leading-relaxed font-['Inter',sans-serif]">
