@@ -73,7 +73,7 @@ export default async function handler(req, res) {
             <li>Actionable frameworks (Why → Try → Buy → Fly) for driving adoption, advocacy, and long-term trust</li>
             <li>Real-world case studies from startups like Firefly, Scalekit, and Kubiya that turned developer-first marketing into measurable growth</li>
           </ul>
-
+<p>If you’re ready to put these insights into action and want tailored support for your B2B SaaS or DevTool startup, let’s talk.</p>
           <p style="margin-top:20px; text-align:center;">
             <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="margin:auto;">
               <tr>

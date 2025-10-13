@@ -982,7 +982,7 @@ export default function Page() {
 
      <div>
       <h3 className="text-[1.25rem] font-bold text-white font-['Inter',sans-serif]">
-        scalekit — $5.5M Seed Startup
+        scalekit - $5.5M Seed Startup
       </h3>
       <p className="text-gray-400 text-[0.80rem] mb-6 text-sm font-['Inter',sans-serif] italic">
                 Launched from stealth to developer adoption in under 9 months.
