@@ -15,7 +15,7 @@ import { FiUserCheck } from "react-icons/fi";
 import { TiDocumentText } from "react-icons/ti";
 import { SiMarketo } from "react-icons/si";
 import { useRouter } from "next/navigation";
-
+import { GiGrowth } from "react-icons/gi";
 
 
 
@@ -69,7 +69,7 @@ export const Videos =[
   eyebrow: "CASE STUDIES",
   heading: "Hear directly from our customers",
   blurb: "Learn how Infrasity’s deep technical content helped solve engineers’ pain points and attract more prospects.",
-  cta: { label: "See case studies", href: "/case-studies" },
+  cta: { label: "See case studies", href: "/case-studies/case-study-series-a-cloud-developer-marketing" },
 
   headshotSrc: "/playbook/firefly.png",
   headshotAlt: "Eric Peters",
@@ -786,7 +786,7 @@ export default function Page() {
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
                     }}
                   >
-                    <TrendingUp className="w-6 h-6 text-white" />
+                    <GiGrowth className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 
@@ -951,9 +951,9 @@ export default function Page() {
                   <span className="font-['Inter',sans-serif]">SEO-optimized documentation</span>
                 </div>
               </div>
-              <div className="flex items-center gap-2 text-white hover:text-[#A259FF] transition-colors cursor-pointer">
-                <TrendingUp className="w-4 h-4 text-[#A259FF]" />
-                <span className="font-medium font-['Inter',sans-serif]">Case Study</span>
+              <div className="inline-flex items-center rounded-xl border border-border px-5 py-3 text-sm font-semibold transition hover:bg-accent hover:text-accent-foreground ">
+                {/* <TrendingUp className="w-4 h-4 text-[#A259FF]" /> */}
+                <span className="font-medium font-['Inter',sans-serif]" onClick={()=>router.push('/case-studies/case-study-series-a-cloud-developer-marketing')}>Case Study</span>
               </div>
             </motion.div>
             
@@ -972,7 +972,7 @@ export default function Page() {
               <p className="text-gray-300 mb-6 leading-relaxed font-['Inter',sans-serif]">
                 Achieved 44% more developer signups in just 9 months with targeted DevRel.
               </p>
-              <div className="space-y-3 mb-6">
+              <div className="space-y-3 mb-12">
                 <div className="flex items-center gap-3 text-gray-300">
                   <div className="w-2 h-2 bg-[#A259FF] rounded-full"></div>
                   <span className="font-['Inter',sans-serif]">Interactive code samples</span>
@@ -986,9 +986,9 @@ export default function Page() {
                   <span className="font-['Inter',sans-serif]">Community-driven growth</span>
                 </div>
               </div>
-              <div className="flex items-center gap-2 text-white hover:text-[#A259FF] transition-colors cursor-pointer">
-                <TrendingUp className="w-4 h-4 text-[#A259FF]" />
-                <span className="font-medium font-['Inter',sans-serif]">Case Study</span>
+              <div className="inline-flex items-center rounded-xl border border-border px-5 py-3 text-sm font-semibold transition hover:bg-accent hover:text-accent-foreground">
+                {/* <TrendingUp className="w-4 h-4 text-[#A259FF]" /> */}
+                <span className="font-medium font-['Inter',sans-serif]" onClick={()=> router.push('/case-studies/scalekit-case-study')}>Case Study</span>
               </div>
             </motion.div>
           </div>
@@ -1024,7 +1024,14 @@ export default function Page() {
           </div>
         </div>
       </section>
-
+      <div
+              className="mb-10"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+              }}
+            >
+              <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
       {/* About Infrasity Section - Fifth Fold */}
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-6">
@@ -1118,7 +1125,7 @@ export default function Page() {
          </div> 
         </div>
       </section>
-
+      </div>
       {/* Final CTA Section - Last Fold */}
       <div
               className="mb-10"
