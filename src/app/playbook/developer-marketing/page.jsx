@@ -1060,7 +1060,7 @@ export default function Page() {
               }}
               className="text-4xl lg:text-5xl font-black text-white mb-8 font-['Inter',sans-serif]"
             >
-              Built by <span className="text-[#A259FF]">Engineers.</span> Designed for <span className="text-[#A259FF]">Developers.</span>
+              The <span className="text-[#A259FF]">GTM Engine</span> Behind <span className="text-[#A259FF]">Developer-First Companies</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
