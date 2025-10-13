@@ -950,7 +950,10 @@ export default function Page() {
               transition={{ duration: 0.6 }}
               className="bg-white/3 backdrop-blur-sm p-10 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
-              <h3 className="text-2xl font-bold text-white mb-6 font-['Inter',sans-serif]">Firefly.ai - $23 M Series A Startup</h3>
+              <h3 className="text-2xl font-bold text-white mb-2 font-['Inter',sans-serif]">Firefly.ai - $23 M Series A Startup</h3>
+              <p className="text-gray-400 mb-6 text-sm font-['Inter',sans-serif] italic">
+                Shifted from fragmented documentation to a developer-first content engine.
+              </p>
               <div className="text-6xl font-black text-[#A259FF] mb-3">+781%</div>
               <div className="text-xl text-white mb-4 font-medium">Organic Traffic Growth</div>
               <p className="text-gray-300 mb-6 leading-relaxed font-['Inter',sans-serif]">
@@ -982,7 +985,10 @@ export default function Page() {
               transition={{ duration: 0.6 }}
               className="bg-white/3 backdrop-blur-sm p-10 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
-              <h3 className="text-2xl font-bold text-white mb-6 font-['Inter',sans-serif]">Scalekit.com - $5.5 M Seed Startup</h3>
+              <h3 className="text-2xl font-bold text-white mb-2 font-['Inter',sans-serif]">Scalekit.com - $5.5 M Seed Startup</h3>
+              <p className="text-gray-400 mb-6 text-sm font-['Inter',sans-serif] italic">
+                Launched from stealth to developer adoption in under 9 months.
+              </p>
               <div className="text-6xl font-black text-[#A259FF] mb-3">+828%</div>
               <div className="text-xl text-white mb-4 font-medium">Developer Signups</div>
               <p className="text-gray-300 mb-6 leading-relaxed font-['Inter',sans-serif]">
@@ -1034,8 +1040,8 @@ export default function Page() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
             >
-              <div className="text-5xl font-black text-[#A259FF] mb-3">3mo</div>
-              <div className="text-white font-medium font-['Inter',sans-serif]">Time to Results</div>
+              <div className="text-5xl font-black text-[#A259FF] mb-3">30+</div>
+              <div className="text-white font-medium font-['Inter',sans-serif]">DevTool & AI Startups Served</div>
             </motion.div>
           </div>
         </div>
