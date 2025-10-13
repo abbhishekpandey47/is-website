@@ -35,7 +35,7 @@ export default async function handler(req, res) {
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Your Developer Marketing Playbook is Here| Infrasity</title>
+    <title>Infrasity Developer Marketing Playbook 2025 | Infrasity</title>
   </head>
   <body style="font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; padding: 40px;">
     <table align="center" width="600" cellpadding="0" cellspacing="0" style="background: rgba(95,100,255,0.1); border-radius:8px; overflow:hidden;">
@@ -110,7 +110,7 @@ export default async function handler(req, res) {
     await transporter.sendMail({
       from: `"Infrasity" <${process.env.GMAIL_USER}>`,
       to: payload.fields[2].value,
-      subject: "Your Developer Marketing Playbook is Here",
+      subject: "Infrasity Developer Marketing Playbook 2025",
       html: htmlTemplate,
     });
 
