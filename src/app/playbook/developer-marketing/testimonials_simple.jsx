@@ -9,8 +9,8 @@ export default function Testimonials() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="text-white">Real Results from </span>
-            <span className="bg-gradient-to-r from-violet-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent">Real DevTools</span>
+            <span className="text-white">Success Stories from </span>
+            <span className="bg-gradient-to-r from-violet-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent">B2B SAAS Startups</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             See how leading startups transformed their developer marketing into growth engines.
@@ -25,8 +25,7 @@ export default function Testimonials() {
                 <span className="text-white font-bold text-lg">F</span>
               </div>
               <div className="ml-4">
-                <h3 className="text-white font-semibold">Firefly.ai</h3>
-                <p className="text-gray-400 text-sm">AI DevTools</p>
+                <h3 className="text-white font-semibold">Firefly.ai - $23 M Series A Startup</h3>
               </div>
             </div>
             <p className="text-gray-300 leading-relaxed">
@@ -40,8 +39,7 @@ export default function Testimonials() {
                 <span className="text-white font-bold text-lg">S</span>
               </div>
               <div className="ml-4">
-                <h3 className="text-white font-semibold">ScaleKit</h3>
-                <p className="text-gray-400 text-sm">Auth Platform</p>
+                <h3 className="text-white font-semibold">ScaleKit - $5.5 M Seed Startup</h3>
               </div>
             </div>
             <p className="text-gray-300 leading-relaxed">
