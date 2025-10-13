@@ -18,7 +18,7 @@ export default function AwardBanner() {
               </div>
               <div className="z-20">
                 <Link className="z-10" href="/playbook/developer-marketing">
-                  <p className="text-sm font-medium text-white text-center cursor-pointer">
+                  <p className="text-sm font-medium text-white text-center cursor-pointer whitespace-nowrap">
                     Download Free Playbook: [2025]Developer Marketing Playbook for B2B SaaS Startups
                   </p>
                 </Link>
