@@ -174,7 +174,6 @@ const PostPage = (props) => {
             </article>
           </div>{" "}
         </div>
-        <AuthorBanner authorData={authorObj} />
       </div>
     </>
   );
