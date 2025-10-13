@@ -68,7 +68,7 @@ export const Videos =[
   id: "case-2",
   eyebrow: "CASE STUDIES",
   heading: "Hear directly from our customers",
-  blurb: "",
+  blurb: "Learn how Infrasity’s deep technical content helped solve engineers’ pain points and attract more prospects.",
   cta: { label: "See case studies", href: "/case-studies" },
 
   headshotSrc: "/playbook/firefly.png",
@@ -84,7 +84,7 @@ export const Videos =[
   id: "case-1",
   eyebrow: "CASE STUDIES",
   heading: "Hear directly from our customers",
-  blurb: "",
+  blurb: "Learn how Infrasity turned our technical value into engaging content that boosts developer engagement.",
   cta: { label: "See case studies", href: "/case-studies" },
 
   headshotSrc: "/playbook/cycloid.png",
@@ -428,9 +428,9 @@ export default function Page() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.0 }}
-            className="text-center"
+            className="text-center mt-16"
           >
-            <p className="text-sm mb-6" style={{ color: '#C9C4D6', opacity: 0.8 }}>
+            <p className="text-sm" style={{ color: '#C9C4D6', opacity: 0.8 }}>
               Trusted by Leading DevTools
             </p>
             <div className="max-w-4xl mx-auto">
@@ -469,7 +469,7 @@ export default function Page() {
 
       {/* Problem Section - Second Fold */}
       <section 
-        className="py-20 relative"
+        className="pb-20 relative"
       >
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
