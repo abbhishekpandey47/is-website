@@ -511,7 +511,7 @@ export default function Page() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="group bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-[#A259FF]/30 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
-              <div className="w-16 h-16 bg-gradient-to-r from-[#A259FF] to-[#5B36FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-[linear-gradient(120deg,#ff6fd8_0%,#3813c2_100%)] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
               <TiDocumentText className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 text-center font-['Inter',sans-serif]">Inconsistent Content</h3>
@@ -526,7 +526,7 @@ export default function Page() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="group bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
-              <div className="w-16 h-16 bg-gradient-to-r from-[#A259FF] to-[#5B36FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-[linear-gradient(90deg,#FF9A8B_0%,#FF6A88_55%,#A259FF_100%)] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <LuSquareCode className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 text-center font-['Inter',sans-serif]">Underfunded DevRel</h3>
@@ -541,7 +541,7 @@ export default function Page() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="group bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
-              <div className="w-16 h-16 bg-gradient-to-r from-[#A259FF] to-[#5B36FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-[linear-gradient(135deg,#A259FF_0%,#3F87F5_50%,#FF6FD8_100%)] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <FiUserCheck className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 text-center font-['Inter',sans-serif]">Lack of Technical Credibility</h3>
@@ -621,9 +621,8 @@ export default function Page() {
               >
                 <div className="flex items-start space-x-4">
                   <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 bg-[linear-gradient(135deg,#4F46E5_0%,#7C3AED_40%,#EC4899_100%)]"
                     style={{
-                      background: 'linear-gradient(90deg, #A259FF, #5B36FF)',
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
                     }}
                   >
@@ -674,9 +673,8 @@ export default function Page() {
               >
                 <div className="flex items-start space-x-4">
                   <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 bg-[linear-gradient(270deg,#A259FF_0%,#5B36FF_50%,#00C2FF_100%)]"
                     style={{
-                      background: 'linear-gradient(90deg, #A259FF, #5B36FF)',
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
                     }}
                   >
@@ -727,9 +725,8 @@ export default function Page() {
               >
                 <div className="flex items-start space-x-4">
                   <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 bg-[linear-gradient(90deg,#FF9A8B_0%,#FF6A88_55%,#A259FF_100%)]"
                     style={{
-                      background: 'linear-gradient(90deg, #A259FF, #5B36FF)',
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
                     }}
                   >
@@ -780,9 +777,8 @@ export default function Page() {
               >
                 <div className="flex items-start space-x-4">
                   <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 bg-[linear-gradient(120deg,#ff6fd8_0%,#3813c2_100%)]"
                     style={{
-                      background: 'linear-gradient(90deg, #A259FF, #5B36FF)',
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
                     }}
                   >
@@ -833,9 +829,8 @@ export default function Page() {
               >
                 <div className="flex items-start space-x-4">
                   <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 bg-[linear-gradient(135deg,#A259FF_0%,#3F87F5_50%,#FF6FD8_100%)]"
                     style={{
-                      background: 'linear-gradient(90deg, #A259FF, #5B36FF)',
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
                     }}
                   >
@@ -937,7 +932,7 @@ export default function Page() {
         height={60}
         className="rounded-md mt-[-1.25rem]"
       />     <div>
-              <h3 className="text-[1.25rem] font-bold text-white font-['Inter',sans-serif]">Firefly.ai - $23 M Series A Startup</h3>
+              <h3 className="text-[1.25rem] font-bold text-white font-['Inter',sans-serif]">Firefly - $23 M Series A Startup</h3>
                <p className="text-gray-400 mb-6 text-sm font-['Inter',sans-serif] italic text-[0.80rem]">
                 Shifted from fragmented documentation to a developer-first content engine.
               </p>
@@ -987,7 +982,7 @@ export default function Page() {
 
      <div>
       <h3 className="text-[1.25rem] font-bold text-white font-['Inter',sans-serif]">
-        Scalekit.com — $5.5M Seed Startup
+        scalekit - $5.5M Seed Startup
       </h3>
       <p className="text-gray-400 text-[0.80rem] mb-6 text-sm font-['Inter',sans-serif] italic">
                 Launched from stealth to developer adoption in under 9 months.
@@ -1000,7 +995,7 @@ export default function Page() {
               <p className="text-gray-300 mb-6 leading-relaxed font-['Inter',sans-serif]">
                 Achieved 3X more developer signups in just 9 months with targeted DevRel.
               </p>
-              <div className="space-y-3 mb-12">
+              <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-3 text-gray-300">
                   <div className="w-2 h-2 bg-[#A259FF] rounded-full"></div>
                   <span className="font-['Inter',sans-serif]">Interactive code samples</span>
@@ -1093,7 +1088,7 @@ export default function Page() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="group text-center bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
             >
-              <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-[linear-gradient(135deg,#A259FF_0%,#3F87F5_50%,#FF6FD8_100%)] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <IoBookOutline className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 font-['Inter',sans-serif]">Content Strategy</h3>
@@ -1108,7 +1103,7 @@ export default function Page() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="group text-center bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
             >
-              <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-[linear-gradient(120deg,#ff6fd8_0%,#3813c2_100%)] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <LuSquareCode className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 font-['Inter',sans-serif]">Documentation</h3>
@@ -1123,7 +1118,7 @@ export default function Page() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="group text-center bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
             >
-              <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-[linear-gradient(90deg,#FF9A8B_0%,#FF6A88_55%,#A259FF_100%)] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <MdOutlineVideoLibrary className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 font-['Inter',sans-serif]">Video Explainers</h3>
@@ -1138,7 +1133,7 @@ export default function Page() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="group text-center bg-white/3 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.1)] transition-all duration-300"
             >
-              <div className="w-16 h-16 bg-[#A259FF] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-[linear-gradient(270deg,#A259FF_0%,#5B36FF_50%,#00C2FF_100%)] rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                 <RiUserCommunityFill  className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-white mb-4 font-['Inter',sans-serif]">Community Activation</h3>
@@ -1148,9 +1143,25 @@ export default function Page() {
             </motion.div>
           </div>
           
-         <div className='mt-28'> 
+         {/* <div className='mt-28'> 
          <VideoTestimonials items={Videos}/>
-         </div> 
+         </div>  */}
+         <div className="relative mt-28">
+  {/* Background Blob / Gradient */}
+  <div
+    aria-hidden="true"
+    className="absolute inset-0 z-0"
+    style={{
+      background:
+        "radial-gradient(circle at 30% 30%, #ff79c6, #5b36ff 70%)",
+      opacity: 0.3,
+      filter: "blur(120px)",
+    }}
+  ></div>
+
+  <VideoTestimonials items={Videos} />
+</div>
+
         </div>
       </section>
       </div>
