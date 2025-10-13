@@ -1143,9 +1143,25 @@ export default function Page() {
             </motion.div>
           </div>
           
-         <div className='mt-28'> 
+         {/* <div className='mt-28'> 
          <VideoTestimonials items={Videos}/>
-         </div> 
+         </div>  */}
+         <div className="relative mt-28">
+  {/* Background Blob / Gradient */}
+  <div
+    aria-hidden="true"
+    className="absolute inset-0 z-0"
+    style={{
+      background:
+        "radial-gradient(circle at 30% 30%, #ff79c6, #5b36ff 70%)",
+      opacity: 0.3,
+      filter: "blur(120px)",
+    }}
+  ></div>
+
+  <VideoTestimonials items={Videos} />
+</div>
+
         </div>
       </section>
       </div>
