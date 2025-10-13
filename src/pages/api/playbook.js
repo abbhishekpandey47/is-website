@@ -53,7 +53,7 @@ export default async function handler(req, res) {
   <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="margin:auto;">
     <tr>
       <td align="center" bgcolor="#5b36ff" style="border-radius:6px;">
-        <a href="https://drive.google.com/uc?export=download&id=1g7crihLTZ_ikb0y_RVzZb1cLl2L4yNP2"
+        <a href="https://drive.google.com/uc?export=download&id=1aKH0TRg4U9V_tTZ4ibEvGQ1EFDoM19F4"
           style="display:inline-block; font-weight:bold; padding:14px 28px; font-size:16px; color:#ffffff; text-decoration:none; border-radius:6px; background:#5b36ff; font-family:Arial, sans-serif;">
           📘 DOWNLOAD THE PLAYBOOK
         </a>
