@@ -315,7 +315,7 @@ export default function Page() {
                   textShadow: '0 0 12px rgba(162, 89, 255, 0.15)'
                 }}
               >
-                The 2025 Developer Marketing <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Playbook</span> for DevTool & AI Startups
+                The 2025 Developer Marketing <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Playbook</span> for DevTool, B2B SaaS, AI Startups
               </motion.h1>
               
               {/* Subtitle */}
@@ -331,7 +331,7 @@ export default function Page() {
                   color: '#C9C4D6'
                 }}
               >
-                Learn how leading DevTool & AI startups like <span className="text-[#A259FF] font-semibold">Firefly</span>, <span className="text-[#A259FF] font-semibold">Scalekit</span>, and <span className="text-[#A259FF] font-semibold">Kubiya</span> built scalable developer growth engines.
+                Trusted by Series A B2B SaaS startups like <span className="text-[#A259FF] font-semibold">Firefly ($23 M)</span>, <span className="text-[#A259FF] font-semibold">Scalekit ($5.5 M)</span>, <span className="text-[#A259FF] font-semibold">Kubiya</span>, and <span className="text-[#A259FF] font-semibold">Qodo ($40 M)</span> to scale developer marketing and adoption.
               </motion.p>
               
               {/* CTA Buttons */}
