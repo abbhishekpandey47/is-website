@@ -3,7 +3,7 @@
 =======
 ## GettingStarted                       
   
- 
+  
 First run the development server   
                    
 ```bash            
