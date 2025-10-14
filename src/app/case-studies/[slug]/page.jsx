@@ -162,16 +162,41 @@ const PostPage = (props) => {
                           };
 
                           // Use next/image for valid URLs, otherwise use a regular img tag
-                          if (isBase64 || !isValidUrl(src)) {
-                            return (
-                              <img
-                                src={src}
-                                alt={alt}
-                                loading="lazy"
-                                style={{ width: "100%", height: "auto" }}
-                              />
-                            );
-                          }
+                        if (isBase64 || !isValidUrl(src)) {
+  if (src === "/PostImages/case-study-series-a-cloud-developer-marketing/3.png") {
+    return (
+      <span style={{display:"flex",justifyContent:"center"}}>
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        style={{ width: "500px", height: "500px" }}
+      />
+      </span>
+    );
+  } else if (src === "/PostImages/case-study-series-a-cloud-developer-marketing/2.png") {
+    return (
+      <span style={{display:"flex",justifyContent:"center"}}>
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        style={{ width: "650px", height: "450px" }}
+      />
+      </span>
+    );
+  }
+  else {
+    return (
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        style={{ width: "100%", height: "auto" }}
+      />
+    );
+  }
+}
 
                           return (
                             <Image

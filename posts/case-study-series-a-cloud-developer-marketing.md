@@ -38,12 +38,13 @@ The result was a strategy that educated, engaged, and converted meeting develope
 Infrasity developed a strategy to face this challenge and developed content exclusively for developers.
 
 * **Blogs**: Covered well-researched and trendy topics like drift detection, cloud auditing, IaC best practices, and compliance frameworks. These were written to provide value and deep insights, rather than promotional messages.  
+
+![Snapshot of Firefly Academy's content](/PostImages/case-study-series-a-cloud-developer-marketing/2.png)
+
 * **Whitepaper & Updating Content**: Created in-depth whitepapers to guide developers through Firefly’s use cases, and updated outdated content to perform better on SERP.  
 * **Ebook**: Created in-depth ebooks to guide developers through Firefly’s use cases and find solutions to their pain points.   
 * **Problem Solving Storytelling: I**nfrasity incorporated diagrams, screenshots, and code snippets to illustrate concepts and workflows, making complex topics more accessible.
 
-
-![Snapshot of Firefly Academy's content](/PostImages/case-study-series-a-cloud-developer-marketing/2.png)
 
 ![Snapshot of Firefly's code snippet for hybrid integration](/PostImages/case-study-series-a-cloud-developer-marketing/3.png)
 
