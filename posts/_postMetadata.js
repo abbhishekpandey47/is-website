@@ -1188,7 +1188,7 @@ let postMetaData = [
   ogImage: "/PostImages/go-to-market-agency/0.png",
   publishedOn: "2025-10-14",
   authorId: "author0005",
-  category: "Informational",
+  category: "B2B SaaS Growth & GTM",
   metaDescription: "Discover the 9 leading go to market agency to boost your B2B SaaS growth with proven GTM strategies, positioning, and rapid market adoption in 2025. Read now!"
 },
 
