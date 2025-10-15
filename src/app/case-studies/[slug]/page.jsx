@@ -11,6 +11,7 @@ import NotFound from "./NotFound";
 import Outline from "./outline";
 import Analytics from "./analytics";
 import VideoTestimonials from "./testimonials";
+import MoreCaseStudies from "../../../Components/MoreCaseStudies";
 
 
 //firefly Video
@@ -221,6 +222,11 @@ const PostPage = (props) => {
         </div>
         {postData.slug === "case-study-series-a-cloud-developer-marketing" ?
         <div className="flex justify-center items-center w-[80%] mx-auto"><VideoTestimonials items={Videos}/></div> : null}
+        
+        {/* More Case Studies Section */}
+        <div className="w-[80%] mx-auto mt-16">
+          <MoreCaseStudies currentSlug={postData.slug} />
+        </div>
       </div>
     </>
   );
