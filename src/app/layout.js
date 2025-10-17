@@ -148,6 +148,26 @@ export default function RootLayout({ children }) {
           })(window, document, "clarity", "script", "rc3czxet7l");
         });
       `}</Script>
+                {/* Apollo Tracker */}
+        <Script id="apollo-tracker" strategy="afterInteractive">
+          {`
+            (function initApollo() {
+              var n = Math.random().toString(36).substring(7);
+              var o = document.createElement("script");
+              o.src = "https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache=" + n;
+              o.async = true;
+              o.defer = true;
+              o.onload = function () {
+                if (window.trackingFunctions && window.trackingFunctions.onLoad) {
+                  window.trackingFunctions.onLoad({ appId: "663b5ebd5922fc02eac8a429" });
+                } else {
+                  console.error("Apollo trackingFunctions not found.");
+                }
+              };
+              document.head.appendChild(o);
+            })();
+          `}
+        </Script>
 
                 <Script
                     src='https://assets.calendly.com/assets/external/widget.js'
