@@ -181,7 +181,7 @@ const GivenMenuBar = ({
 const menuLinksArrServices = [
   {
     hrefLink: "/services/developer-marketing-agency",
-    menuName: "Developer Marketing Agency",
+    menuName: "Developer Marketing",
   },
   {
     hrefLink: "/services/service-video-production",
@@ -381,7 +381,7 @@ const Navbar = () => {
                                 : ""
                             }
                           >
-                            <div>Developer Marketing Agency</div>
+                            <div>Developer Marketing</div>
                           </Link>
                         </MenuItem2>
 
