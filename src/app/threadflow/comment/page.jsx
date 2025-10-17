@@ -20,6 +20,14 @@ import Pagination from "../components/pagination";
 
 
 const PAGE_SIZE = 10;
+
+function camelCaseToSentence(str){
+  if (!str) return '';
+  return str
+    .replace(/([A-Z])/g, ' $1')   // add space before capital letters
+    .replace(/^./, (char) => char.toUpperCase()); // capitalize first letter
+}
+
 const PostsPage = () => {
   const router = useRouter();
   const { toast } = useToast();
@@ -148,7 +156,7 @@ const PostsPage = () => {
 
     return () => unsubscribe();
   }, [router]);
-
+ 
   
 const companies = [
   { id: "all", name: "All Companies" },
@@ -158,7 +166,7 @@ const companies = [
   })),
 ];
 const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
-const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
+const statuses = ["all", ...new Set(posts.map((post) => post.posted_comment_status).filter(Boolean))];
 
 
   const filteredPosts = posts.filter((post) => {
@@ -197,6 +205,7 @@ const getStatusBadge = (status) => {
     live: "bg-green-500 text-white",
     removed: "bg-red-500 text-white",
     undermoderation: "bg-yellow-500 text-black",
+    reposted : "bg-purple-500 text-white",
     
 
     // Post Approval Status
@@ -468,7 +477,7 @@ const getStatusBadge = (status) => {
   <SelectContent>
     {statuses.map((status) => (
       <SelectItem key={status} value={status}>
-        {status === "all" ? "All Status" : status.charAt(0).toUpperCase() + status.slice(1)}
+        {status === "all" ? "All Status" : camelCaseToSentence(status)}
       </SelectItem>
     ))}
   </SelectContent>
@@ -803,6 +812,7 @@ const getStatusBadge = (status) => {
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
                           <SelectItem value="underModeration">Under Moderation</SelectItem>
+                          <SelectItem value="reposted">Reposted</SelectItem>
                           <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>
                       </Select>

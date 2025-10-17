@@ -30,6 +30,12 @@ const ReactQuill = dynamic(
   { ssr: false }
 );
 
+function camelCaseToSentence(str){
+  if (!str) return '';
+  return str
+    .replace(/([A-Z])/g, ' $1')   // add space before capital letters
+    .replace(/^./, (char) => char.toUpperCase()); // capitalize first letter
+}
 
 const PAGE_SIZE = 10;
 const PostsPage = () => {
@@ -207,6 +213,7 @@ const PostsPage = () => {
     live: "bg-green-500 text-white",
     removed: "bg-red-500 text-white",
     undermoderation: "bg-yellow-500 text-black",
+    reposted : "bg-purple-500 text-white",
 
     // Post Approval Status
       approved: "bg-emerald-700 text-white",
@@ -477,7 +484,7 @@ const PostsPage = () => {
                     <SelectItem key={status} value={status}>
                       {status === "all"
                         ? "All Status"
-                        : status.charAt(0).toUpperCase() + status.slice(1)}
+                        : camelCaseToSentence(status)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -850,6 +857,7 @@ const PostsPage = () => {
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
                           <SelectItem value="underModeration">Under Moderation</SelectItem>
+                           <SelectItem value="reposted">Reposted</SelectItem>
                           <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>
                       </Select>
