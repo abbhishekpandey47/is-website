@@ -1,5 +1,5 @@
 export const videoTypePrompts = {
-"Tool Comparison": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef }) => `
+"Tool Comparison": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef, timecodes, isIDEVsChat }) => `
 Create a professional, time-coded video script comparing ${toolsInvolved.join(", ")} for ${targetAudience.join(", ")}.
 
 **IMPORTANT: Output clean, readable text only. Strictly avoid:**
@@ -18,22 +18,26 @@ Create a professional, time-coded video script comparing ${toolsInvolved.join(",
 - Input: ${videoLength} provided as range (e.g., "5 to 15 Minutes")
 - Parse numeric bounds and calculate midpoint in seconds
 - Example: "5 to 15 Minutes" → 10 minutes = 600 seconds
-- Time allocation:
-  * Introduction: 10% of total runtime
-  * Setup: 10% 
-  * Prompt Explanation: 5%
-  * Tool Breakdown: 60% (divided equally among tools)
-  * Outro: 10%
-  * Call to Action: 5%
+- Time allocation (MANDATORY):
+  * Introduction: 15% of total runtime
+  * Fairness Note: 5% of total runtime (if IDE vs Chat comparison)
+  * Setup: 15% of total runtime
+  * Prompt Explanation: 10% of total runtime
+  * Tool Breakdown: 45% of total runtime (divided equally among tools)
+  * Outro: 10% of total runtime
+  * Call to Action: 5% of total runtime
 - Format timecodes as [mm:ss–mm:ss]
 - Ensure sections are contiguous with no gaps
 
 ### REQUIRED STRUCTURE (All sections mandatory, exact order)
 
-## Introduction [mm:ss–mm:ss]
+## Introduction ${timecodes?.intro || '[mm:ss–mm:ss]'}
 Write 2-3 clear sentences explaining why choosing the right tool matters for ${targetAudience.join(", ")}. Focus on practical impact and productivity. End with one sentence teasing what the comparison will reveal.
 
-## Setup [mm:ss–mm:ss]
+${isIDEVsChat ? `## Fairness Note ${timecodes?.fairness || '[mm:ss–mm:ss]'}
+Explain the fundamental interaction differences: IDE assistants provide inline completions within the editor, while chat models require copy-paste between windows. This affects workflow speed, context awareness, and iteration efficiency.
+
+` : ''}## Setup ${timecodes?.setup || '[mm:ss–mm:ss]'}
 Describe the test environment clearly. Provide setup commands in simple code block:
 
 \`\`\`bash
@@ -42,22 +46,55 @@ cd [project_name]
 npm install
 \`\`\`
 
-## The Prompt (Exact) [mm:ss–mm:ss]
-Prompt:
+## The Prompt (Exact) ${timecodes?.prompt || '[mm:ss–mm:ss]'}
+Prompt: ${prompt || "Create a button that shows 'Hello World!' when clicked"}
 Explain in 1-2 bullets why this tests real-world capabilities.
 
-## Tool-by-Tool Breakdown [mm:ss–mm:ss]
-**Time: 60% divided equally among ${toolsInvolved.length} tools**
+## Tool-by-Tool Breakdown ${timecodes?.breakdown || '[mm:ss–mm:ss]'}
+**Time: 45% divided equally among ${toolsInvolved.length} tools**
 
 For each tool in order: ${toolsInvolved.join(", ")}, use this format:
 
 **[Tool Name] – [mm:ss–mm:ss]**
-* Repo Understanding: Brief assessment of file/structure recognition
-* Implementation Details: 2-4 bullets describing generated code/features  
-* UI & Design Quality: Description of visual output quality
-* Speed: Fast/Medium/Slow
-* Correctness: High/Medium/Low
-* Repo Awareness: Excellent/Needs Guidance/Minimal
+
+**Complete Code Solution:**
+\`\`\`html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World Button</title>
+</head>
+<body>
+    <button id="helloBtn">Click me!</button>
+    <script>
+        document.getElementById('helloBtn').addEventListener('click', function() {
+            alert('Hello World!');
+        });
+    </script>
+</body>
+</html>
+\`\`\`
+
+**Filename:** index.html
+
+**How to run:**
+1. Save as index.html
+2. Open in browser and click the button
+
+**IMPORTANT:** The code block above is a complete, runnable HTML file. Every tool comparison MUST include a similar complete HTML file with proper DOCTYPE, html, head, body, and closing tags. No partial code or fragments are acceptable.
+
+**Evaluation (Rate 1-5 bullets each):**
+
+* Setup Friction: [1-5 bullets] - How easy to get started
+* Integration Flow: [1-5 bullets] - How smoothly it fits into workflow  
+* Iteration Speed: [1-5 bullets] - How fast to refine and improve
+* Code Correctness: [1-5 bullets] - How accurate the generated code
+* Copy-Paste Overhead: [1-5 bullets] - Manual work required (N/A for IDE tools)
+* Learning Help: [1-5 bullets] - Quality of explanations and guidance
+
+**Speed:** Fast/Medium/Slow - [Add practical rationale tied to the prompt, e.g., "Copilot suggested the click handler in <1s inside VS Code; GPT required copy-paste switching between windows."]
+
+**Correctness:** High/Medium/Low - [Add practical rationale tied to the prompt, e.g., "Generated working HTML immediately; required minor syntax fixes."]
 
 **Strengths:**
 ✅ Key strength 1
@@ -68,11 +105,11 @@ For each tool in order: ${toolsInvolved.join(", ")}, use this format:
 ❌ Main limitation 1
 ❌ Main limitation 2
 
-## Outro Script [mm:ss–mm:ss]
+## Outro Script ${timecodes?.outro || '[mm:ss–mm:ss]'}
 **Output as plain text paragraph (no code formatting):**
 Write 2-4 sentences summarizing key findings, highlighting which tools excelled or struggled, and tying back to ${targetAudience.join(", ")} needs.
 
-## Call to Action [mm:ss–mm:ss]
+## Call to Action ${timecodes?.cta || '[mm:ss–mm:ss]'}
 ✅ Drop a like if you found this useful
 💬 Tell us which prompt or tool to test next in the comments  
 ${linkForRef && `📎 For more context or additional information, click here: ${linkForRef}`}
@@ -94,6 +131,17 @@ ${linkForRef && `📎 For more context or additional information, click here: ${
 - Consistent evaluation criteria across tools
 - Accurate timecode calculations
 - Clear, concise explanations
+- Every rating must include practical rationale
+- Complete, runnable code blocks required for each tool
+
+### CODE BLOCK REQUIREMENTS (CRITICAL)
+- EVERY code block MUST be a complete, self-contained HTML file
+- MUST include: <!DOCTYPE html>, <html>, <head>, <body>, and closing tags
+- NO inline text or comments inside fenced code blocks except valid HTML comments
+- NO partial code snippets or fragments
+- NO explanatory text mixed with code
+- Filename MUST be specified outside the code block
+- Code MUST be immediately runnable when saved as an HTML file
 
 ### COPY-FRIENDLY OUTPUT RULES
 **Critical: When users copy sections, ensure clean text output:**
