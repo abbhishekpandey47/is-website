@@ -101,7 +101,7 @@ export default function VideoTestimonials({
   );
 
   return (
-    <section className={`${className}`} aria-label="Customer video testimonials">
+    <section className={`${className} relative z-1`} aria-label="Customer video testimonials">
       <div
         className="container outline-none"
         tabIndex={0}
@@ -118,6 +118,7 @@ export default function VideoTestimonials({
               {data.map((_, i) => (
                 <button
                   key={i}
+                  type="button"
                   onClick={() => goTo(i)}
                   role="tab"
                   aria-selected={i === index}
@@ -127,10 +128,20 @@ export default function VideoTestimonials({
               ))}
             </div>
             <div className="flex items-center gap-3">
-              <button onClick={prev} aria-label="Previous" className="grid h-9 w-9 place-items-center rounded-full bg-muted hover:bg-muted/80">
+              <button
+                type="button"
+                onClick={prev}
+                aria-label="Previous"
+                className="grid h-9 w-9 place-items-center rounded-full bg-muted hover:bg-muted/80"
+              >
                 <ArrowLeftIcon className="h-5 w-5" />
               </button>
-              <button onClick={next} aria-label="Next" className="grid h-9 w-9 place-items-center rounded-full bg-muted hover:bg-muted/80">
+              <button
+                type="button"
+                onClick={next}
+                aria-label="Next"
+                className="grid h-9 w-9 place-items-center rounded-full bg-muted hover:bg-muted/80"
+              >
                 <ArrowRightIcon className="h-5 w-5" />
               </button>
             </div>
@@ -193,6 +204,7 @@ export default function VideoTestimonials({
 
                       {(data[index].videoUrl || data[index].videoSrc) && (
                         <button
+                          type="button"
                           onClick={() => setOpenVideo(data[index])}
                           className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full ${brandColor} text-white shadow-lg h-14 w-14 md:h-16 md:w-16 focus:outline-none focus:ring-2 focus:ring-ring`}
                           aria-label="Play video"
@@ -251,6 +263,7 @@ function VideoDialog({ openItem, onClose }) {
   return (
     <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 bg-black/70" onClick={onClose}>
       <button
+        type="button"
         onClick={onClose}
         className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/30"
         aria-label="Close video"
