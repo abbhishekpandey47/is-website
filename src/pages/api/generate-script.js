@@ -187,7 +187,8 @@ function calculateTimecodes(videoLength, isIDEVsChat = false) {
   const fairnessDuration = isIDEVsChat ? Math.round(totalSeconds * 0.05) : 0;
   const setupDuration = Math.round(totalSeconds * 0.15);
   const promptDuration = Math.round(totalSeconds * 0.10);
-  const breakdownDuration = Math.round(totalSeconds * 0.45);
+  const breakdownDuration = Math.round(totalSeconds * 0.35);
+  const comparisonDuration = Math.round(totalSeconds * 0.10);
   const outroDuration = Math.round(totalSeconds * 0.10);
   const ctaDuration = Math.round(totalSeconds * 0.05);
   
@@ -205,7 +206,8 @@ function calculateTimecodes(videoLength, isIDEVsChat = false) {
     setup: `[${formatTime(currentTime += introDuration)}–${formatTime(currentTime + setupDuration - 1)}]`,
     prompt: `[${formatTime(currentTime += setupDuration)}–${formatTime(currentTime + promptDuration - 1)}]`,
     breakdown: `[${formatTime(currentTime += promptDuration)}–${formatTime(currentTime + breakdownDuration - 1)}]`,
-    outro: `[${formatTime(currentTime += breakdownDuration)}–${formatTime(currentTime + outroDuration - 1)}]`,
+    comparison: `[${formatTime(currentTime += breakdownDuration)}–${formatTime(currentTime + comparisonDuration - 1)}]`,
+    outro: `[${formatTime(currentTime += comparisonDuration)}–${formatTime(currentTime + outroDuration - 1)}]`,
     cta: `[${formatTime(currentTime += outroDuration)}–${formatTime(currentTime + ctaDuration - 1)}]`
   };
   
@@ -216,7 +218,8 @@ function calculateTimecodes(videoLength, isIDEVsChat = false) {
     timecodes.setup = `[${formatTime(currentTime)}–${formatTime(currentTime + setupDuration - 1)}]`;
     timecodes.prompt = `[${formatTime(currentTime += setupDuration)}–${formatTime(currentTime + promptDuration - 1)}]`;
     timecodes.breakdown = `[${formatTime(currentTime += promptDuration)}–${formatTime(currentTime + breakdownDuration - 1)}]`;
-    timecodes.outro = `[${formatTime(currentTime += breakdownDuration)}–${formatTime(currentTime + outroDuration - 1)}]`;
+    timecodes.comparison = `[${formatTime(currentTime += breakdownDuration)}–${formatTime(currentTime + comparisonDuration - 1)}]`;
+    timecodes.outro = `[${formatTime(currentTime += comparisonDuration)}–${formatTime(currentTime + outroDuration - 1)}]`;
     timecodes.cta = `[${formatTime(currentTime += outroDuration)}–${formatTime(currentTime + ctaDuration - 1)}]`;
   }
   

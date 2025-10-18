@@ -2,13 +2,6 @@ export const videoTypePrompts = {
 "Tool Comparison": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef, timecodes, isIDEVsChat }) => `
 Create a professional, time-coded video script comparing ${toolsInvolved.join(", ")} for ${targetAudience.join(", ")}.
 
-**IMPORTANT: Output clean, readable text only. Strictly avoid:**
-- Code block markers (\`\`\`) unless absolutely necessary for actual code
-- Text labels like "text", "bash", "javascript" 
-- Excessive formatting characters (****), decorative elements
-- Icons or emojis in content sections
-- Use simple, clean formatting that renders well when copied**
-
 ### TITLE REQUIREMENT (MANDATORY)
 - Start the script with this exact format: "# Tool Comparison: ${toolsInvolved.join(" vs ")}"
 - Title must be the very first line of the output
@@ -63,6 +56,10 @@ For each tool in order: ${toolsInvolved.join(", ")}, use this format:
 <html>
 <head>
     <title>Hello World Button</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
 </head>
 <body>
     <button id="helloBtn">Click me!</button>
@@ -81,7 +78,11 @@ For each tool in order: ${toolsInvolved.join(", ")}, use this format:
 1. Save as index.html
 2. Open in browser and click the button
 
-**IMPORTANT:** The code block above is a complete, runnable HTML file. Every tool comparison MUST include a similar complete HTML file with proper DOCTYPE, html, head, body, and closing tags. No partial code or fragments are acceptable.
+**Technical Analysis:**
+- **Context Handling:** [Describe how well the tool understood the prompt and provided relevant code]
+- **Syntax Accuracy:** [Note any syntax errors, best practices followed, or code quality issues]
+- **Code Structure:** [Comment on HTML structure, CSS inclusion, JavaScript organization]
+- **Additional Features:** [Mention any extra features like error handling, accessibility, or modern practices]
 
 **Evaluation (Rate 1-5 bullets each):**
 
@@ -97,31 +98,40 @@ For each tool in order: ${toolsInvolved.join(", ")}, use this format:
 **Correctness:** High/Medium/Low - [Add practical rationale tied to the prompt, e.g., "Generated working HTML immediately; required minor syntax fixes."]
 
 **Strengths:**
-✅ Key strength 1
-✅ Key strength 2  
-✅ Key strength 3
+- Key strength 1
+- Key strength 2  
+- Key strength 3
 
 **Limitations:**
-❌ Main limitation 1
-❌ Main limitation 2
+- Main limitation 1
+- Main limitation 2
+
+## Comparison Table ${timecodes?.comparison || '[mm:ss–mm:ss]'}
+Create a comparison table showing all tools side-by-side:
+
+| Tool | Setup Friction | Integration Flow | Iteration Speed | Code Correctness | Copy-Paste Overhead | Learning Help |
+|------|----------------|------------------|-----------------|------------------|-------------------|---------------|
+${toolsInvolved.map(tool => `| ${tool} | [Rating] | [Rating] | [Rating] | [Rating] | [Rating] | [Rating] |`).join('\n')}
 
 ## Outro Script ${timecodes?.outro || '[mm:ss–mm:ss]'}
-**Output as plain text paragraph (no code formatting):**
-Write 2-4 sentences summarizing key findings, highlighting which tools excelled or struggled, and tying back to ${targetAudience.join(", ")} needs.
+Write 2-4 sentences summarizing key findings, highlighting which tools excelled or struggled, and tying back to ${targetAudience.join(", ")} needs. Include specific technical insights about code quality, context handling, and workflow efficiency.
 
 ## Call to Action ${timecodes?.cta || '[mm:ss–mm:ss]'}
-✅ Drop a like if you found this useful
-💬 Tell us which prompt or tool to test next in the comments  
-${linkForRef && `📎 For more context or additional information, click here: ${linkForRef}`}
+**For Developers:**
+- Clone the example repository and run your own comparison
+- Try the tools with your specific use cases and share results
+- Read our detailed benchmark analysis on tool performance
+- Join the discussion about AI coding assistants in our community
+
+${linkForRef && `For more context or additional information, click here: ${linkForRef}`}
 
 ### FORMATTING RULES (STRICT)
 - Clean, readable text - avoid excessive symbols
-- Use single bullets (*) for lists, not multiple asterisks
+- Use single bullets (-) for lists, not multiple asterisks
 - Headers use ## only (double hash)
 - Timecodes in [mm:ss–mm:ss] format
 - Tool names consistent throughout
 - No decorative formatting or extra symbols
-- Keep Outro Script as plain paragraph text
 - Ensure all sections present in exact order
 
 ### CONTENT QUALITY REQUIREMENTS
@@ -133,27 +143,26 @@ ${linkForRef && `📎 For more context or additional information, click here: ${
 - Clear, concise explanations
 - Every rating must include practical rationale
 - Complete, runnable code blocks required for each tool
+- Deep technical analysis beyond superficial descriptions
 
 ### CODE BLOCK REQUIREMENTS (CRITICAL)
 - EVERY code block MUST be a complete, self-contained HTML file
 - MUST include: <!DOCTYPE html>, <html>, <head>, <body>, and closing tags
+- MUST include basic CSS styling for better presentation
 - NO inline text or comments inside fenced code blocks except valid HTML comments
 - NO partial code snippets or fragments
 - NO explanatory text mixed with code
 - Filename MUST be specified outside the code block
 - Code MUST be immediately runnable when saved as an HTML file
+- Code MUST demonstrate best practices (proper structure, styling, event handling)
 
-### COPY-FRIENDLY OUTPUT RULES
-**Critical: When users copy sections, ensure clean text output:**
-- NO code block markers (\`\`\`) in regular content
-- NO language labels (bash, text, javascript) 
-- NO bullet symbols (•, *, -, ✅, ❌) in copied text
-- NO icons or emojis in section content
-- NO time codes in copied content  
-- NO excessive formatting symbols
-- OUTPUT should be plain, readable text that can be directly used
-
-**Only use code blocks for actual code examples, never for regular text content**
+### TECHNICAL ANALYSIS REQUIREMENTS
+- Context Handling: Analyze how well each tool understood the prompt
+- Syntax Accuracy: Note any errors, best practices, or code quality issues
+- Code Structure: Comment on HTML structure, CSS inclusion, JavaScript organization
+- Additional Features: Mention extra features like error handling, accessibility, modern practices
+- Performance: Note any performance considerations or optimizations
+- Maintainability: Assess code readability and maintainability
 `,
 
 "Bug Fixing Session": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef }) => `
