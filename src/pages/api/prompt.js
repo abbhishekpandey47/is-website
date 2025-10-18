@@ -560,15 +560,30 @@ For data engineers, inefficient ETL code can result in long runtimes, higher inf
 By identifying hotspots through profiling and applying targeted optimizations, we drastically reduced runtime and memory load. Try profiling your code today with ${toolsInvolved.join(", ")} — small changes can deliver massive gains.
 `,
 
-"Feature Demo": ({ toolsInvolved, targetAudience, title = null }) => `
-Create a structured feature demonstration with the following specifications:
+"Feature Demo": ({ toolsInvolved, targetAudience, title = null, detectedFeature = null }) => `
+You are generating a developer-facing feature demo script.
 
-TITLE: Use this exact format: "# ${title || `Feature Demo: ${toolsInvolved.join(", ")}`}"
+**Tool:** ${toolsInvolved.join(", ")}
+**Feature:** ${detectedFeature || 'Next.js Feature'}
+**Audience:** ${targetAudience.join(", ")}
+**Video Length:** 2–8 minutes
+
+**Requirements:**
+- Include one working example with runnable code
+- Add a "Why this feature matters" section
+- Add step-by-step implementation
+- Add benefits (performance, DX, SEO, etc.)
+- Add summary & call to action
+- Output should use code blocks with syntax highlighting (JSX/TypeScript)
+
+${detectedFeature ? `**SPECIFIC FEATURE FOCUS:** This demo should focus specifically on "${detectedFeature}" for Next.js. Generate a comprehensive walkthrough with working code examples for this feature.` : ''}
+
+TITLE: Use this exact format: "# ${title || `Feature Demo: ${detectedFeature || toolsInvolved.join(", ")}`}"
 
 STRUCTURE: Follow this exact section order and formatting:
 
 ## Why This Feature Matters
-Write 2–3 sentences explaining the value of the feature for ${targetAudience.join(", ")}. Focus on how it solves a problem, saves time, or enhances results.
+Write 2–3 sentences explaining the value of the feature for ${targetAudience.join(", ")}. Focus on how it solves a problem, saves time, or enhances results. Include specific benefits like performance improvements, developer experience enhancements, or SEO advantages.
 
 ## Feature Overview
 Describe:
@@ -576,14 +591,26 @@ Describe:
 * **Tools:** ${toolsInvolved.join(", ")}
 * **Primary Use Cases:** 2–3 quick examples
 
-## Step-by-Step Walkthrough
+## Step-by-Step Implementation
 For each step:
 * **Action:** What the user should do
-* **Purpose:** Why it’s important
+* **Purpose:** Why it's important
 * **Tip:** (Optional) Suggest a best practice or common pitfall to avoid
 
+${detectedFeature ? `## Working Code Example
+Provide a complete, runnable code example demonstrating the "${detectedFeature}" feature:
+* Include proper file structure and imports
+* Show both frontend and backend code if applicable
+* Add comments explaining key concepts
+* Ensure the code is immediately runnable
+* Use proper syntax highlighting for JSX/TypeScript` : ''}
+
 ## Benefits & Impact
-List 3–4 key benefits of using this feature, supported by measurable or practical outcomes.
+List 3–4 key benefits of using this feature, supported by measurable or practical outcomes. Focus on:
+* **Performance:** Speed, optimization, or efficiency improvements
+* **Developer Experience:** Easier development, better tooling, or reduced complexity
+* **SEO:** Search engine optimization benefits
+* **User Experience:** How it improves the end-user experience
 
 ## Summary & Call to Action
 Provide:
@@ -594,41 +621,62 @@ FORMATTING REQUIREMENTS:
 - Use * for bullet points
 - Bold labels like **Action:**, **Purpose:**, **Tip:**
 - Keep tone practical, user-friendly, and slightly enthusiastic
-- Avoid unnecessary jargon unless it’s essential for clarity
+- Avoid unnecessary jargon unless it's essential for clarity
+- For Next.js features, include working code examples with proper syntax
+- Use code blocks with appropriate syntax highlighting (jsx, typescript, javascript)
 
 ---
 
-### Example Output for Feature Demo (Canva Magic Resize, Social Media Managers)
+### Example Output for Feature Demo (Next.js App Router, Intermediate Developers)
 
-# Feature Demo: Canva Magic Resize
+# Feature Demo: App Router with Dynamic Routing
 
 ## Why This Feature Matters
-For social media managers, manually resizing designs for each platform wastes hours each week. Canva’s Magic Resize automates this, ensuring perfect formatting across all channels with a single click.
+For intermediate developers, the App Router revolutionizes how we build Next.js applications by providing a more intuitive file-based routing system. It eliminates the need for complex routing configurations and enables powerful features like layouts, loading states, and error boundaries out of the box.
 
 ## Feature Overview
-* **Purpose:** Instantly resize a design for multiple platforms without starting from scratch  
-* **Tools:** Canva Magic Resize  
-* **Primary Use Cases:** Repurposing a Facebook post for Instagram Stories, adapting YouTube thumbnails for Pinterest, and converting flyers into posters
+* **Purpose:** File-based routing system that automatically creates routes based on folder structure
+* **Tools:** Next.js 13+ App Router
+* **Primary Use Cases:** Building dynamic websites, e-commerce platforms, and content management systems
 
 ## Step-by-Step Walkthrough
-* **Action:** Open your design in Canva and click the "Resize" button.  
-  **Purpose:** Access the list of pre-set dimensions for various platforms.  
-  **Tip:** Use "Custom Size" if you need non-standard dimensions.
+* **Action:** Create an app directory and add a page.tsx file
+  **Purpose:** Establish the new routing structure
+  **Tip:** The app directory replaces the pages directory for new projects
 
-* **Action:** Select multiple formats (e.g., Instagram Story, LinkedIn Post) and click "Copy & Resize."  
-  **Purpose:** Generate new versions in separate tabs for quick edits.
+* **Action:** Create dynamic routes using [slug] folder naming
+  **Purpose:** Enable dynamic content rendering based on URL parameters
+  **Tip:** Use square brackets for dynamic segments
 
-* **Action:** Review each resized design and make layout adjustments as needed.  
-  **Purpose:** Ensure text, images, and branding remain visually balanced.
+## Working Code Example
+\`\`\`typescript
+// app/blog/[slug]/page.tsx
+interface BlogPost {
+  id: string;
+  title: string;
+  content: string;
+}
+
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const post = await fetchPost(params.slug);
+  
+  return (
+    <article>
+      <h1>{post.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+    </article>
+  );
+}
+\`\`\`
 
 ## Benefits & Impact
-* Saves up to 80% of design resizing time  
-* Maintains brand consistency across platforms  
-* Eliminates repetitive manual work  
-* Enables faster content scheduling and publishing
+* Reduces routing complexity by 70%
+* Enables better SEO with automatic metadata generation
+* Improves performance with built-in loading and error states
+* Simplifies code organization and maintenance
 
 ## Summary & Call to Action
-Magic Resize turns a tedious multi-hour process into a 2-minute task, freeing you to focus on strategy and creativity. Try using it for your next campaign and experience the time savings firsthand.
+The App Router transforms Next.js development by making routing intuitive and powerful. Start migrating your existing projects or build new ones with this modern approach to see immediate productivity gains.
 `,
 "Coding Walkthrough": ({ toolsInvolved, targetAudience, title = null }) => `
 Create a detailed coding walkthrough with the following specifications:

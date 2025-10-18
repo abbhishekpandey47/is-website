@@ -162,6 +162,64 @@ function isIDEVsChatComparison(toolsInvolved) {
   return hasIDETool && hasChatTool;
 }
 
+// Next.js feature mapping for intelligent feature selection
+const nextJsFeatureMap = [
+  "App Router with Dynamic Routing",
+  "Server Actions for Data Fetching", 
+  "Next.js Middleware for Authentication",
+  "NextAuth Integration Example",
+  "Metadata API and SEO Tags",
+  "API Routes for Backend Logic",
+  "Environment Variables and Config",
+  "Image Optimization with next/image",
+  "Static Site Generation (SSG)",
+  "Server-Side Rendering (SSR)",
+  "Incremental Static Regeneration (ISR)",
+  "Next.js Font Optimization",
+  "Edge Runtime and Edge Functions",
+  "Next.js Analytics and Performance Monitoring"
+];
+
+function getRandomNextJsFeature() {
+  const randomIndex = Math.floor(Math.random() * nextJsFeatureMap.length);
+  return nextJsFeatureMap[randomIndex];
+}
+
+function detectNextJsFeatureFromPrompt(prompt, toolsInvolved) {
+  if (!toolsInvolved.includes('Next.js')) {
+    return null;
+  }
+  
+  const promptLower = prompt.toLowerCase();
+  
+  // Check for specific feature mentions
+  const featureKeywords = {
+    'App Router': ['app router', 'app directory', 'app folder', 'routing'],
+    'Server Actions': ['server actions', 'server action', 'form action'],
+    'Middleware': ['middleware', 'auth middleware', 'request middleware'],
+    'NextAuth': ['nextauth', 'next auth', 'authentication', 'auth'],
+    'Metadata API': ['metadata', 'seo', 'meta tags', 'head'],
+    'API Routes': ['api routes', 'api route', 'api endpoint', 'backend'],
+    'Environment Variables': ['env', 'environment', 'config', 'variables'],
+    'Image Optimization': ['image', 'images', 'optimization', 'next/image'],
+    'SSG': ['ssg', 'static', 'static generation', 'build time'],
+    'SSR': ['ssr', 'server side', 'server-side rendering'],
+    'ISR': ['isr', 'incremental', 'regeneration'],
+    'Fonts': ['font', 'fonts', 'typography', 'font optimization'],
+    'Edge': ['edge', 'edge runtime', 'edge functions'],
+    'Analytics': ['analytics', 'performance', 'monitoring', 'metrics']
+  };
+  
+  for (const [feature, keywords] of Object.entries(featureKeywords)) {
+    if (keywords.some(keyword => promptLower.includes(keyword))) {
+      return feature;
+    }
+  }
+  
+  // If no specific feature detected, return null to trigger random selection
+  return null;
+}
+
 // Helper function to calculate timecodes based on video length
 function calculateTimecodes(videoLength, isIDEVsChat = false) {
   // Parse video length (e.g., "5 to 15 Minutes" -> 10 minutes)
@@ -391,6 +449,15 @@ export default async function handler(req, res) {
         timecodes = calculateTimecodes(videoLength, isIDEVsChat);
       }
       
+      // Intelligent Next.js feature detection for Feature Demo
+      let detectedFeature = null;
+      if (videoType === "Feature Demo" && toolsInvolved.includes('Next.js')) {
+        detectedFeature = detectNextJsFeatureFromPrompt(prompt, toolsInvolved);
+        if (!detectedFeature) {
+          detectedFeature = getRandomNextJsFeature();
+        }
+      }
+      
       let systemMessage = systemMessageGenerator
         ? systemMessageGenerator({ 
             toolsInvolved, 
@@ -399,7 +466,8 @@ export default async function handler(req, res) {
             linkForRef, 
             prompt,
             timecodes,
-            isIDEVsChat
+            isIDEVsChat,
+            detectedFeature
           })
         : `You are an expert video scriptwriter for technical and AI content. Audience: ${targetAudience.join(", ")}.`;
 
