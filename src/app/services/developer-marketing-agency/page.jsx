@@ -118,8 +118,9 @@ export default function Page() {
               filter: "blur(120px)",
             }}
           ></div>
-
-          <VideoTestimonials items={Videos} />
+          <div className="flex justify-center">
+          <VideoTestimonials className="max-w-6xl" items={Videos} />
+          </div>
         </div>
       </div>
       <div
