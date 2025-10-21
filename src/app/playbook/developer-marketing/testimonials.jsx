@@ -32,6 +32,13 @@ export default function VideoTestimonials({
   pauseOnHover = true,
 }) {
   const data = items;
+  
+  // Debug logging - only in development
+  if (process.env.NODE_ENV === 'development') {
+    console.log("VideoTestimonials - items:", items);
+    console.log("VideoTestimonials - data:", data);
+    console.log("VideoTestimonials - data length:", data.length);
+  }
 
   const [index, setIndex] = useState(0);
   const [openVideo, setOpenVideo] = useState(null);
@@ -189,7 +196,7 @@ export default function VideoTestimonials({
 
                   {/* Video Section */}
                   <div className="lg:col-span-2 z-0 relative scale-108">
-                    <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-xl border border-border bg-white shadow-navshadow">
+                    <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-xl border border-[#A259FF] rounded-[15px] bg-gradient-to-br from-gray-100 to-gray-200 shadow-md">
                       {data[index].headshotSrc ? (
                         <Image
                           alt={data[index].headshotAlt || data[index].personName || "Testimonial image"}
@@ -197,16 +204,37 @@ export default function VideoTestimonials({
                           fill
                           sizes="(min-width: 1024px) 32vw, 90vw"
                           className="object-contain"
+                          onError={(e) => {
+                            if (process.env.NODE_ENV === 'development') {
+                              console.log("Image failed to load:", data[index].headshotSrc);
+                            }
+                            e.target.style.display = 'none';
+                          }}
                         />
                       ) : (
-                        <div className="absolute inset-0 grid place-items-center text-sm text-muted-foreground">No cover image</div>
+                        <div className="absolute inset-0 grid place-items-center text-sm text-muted-foreground">
+                          <div className="text-center">
+                            <div className="text-4xl mb-2">🎥</div>
+                            <div>Video Testimonial</div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Debug info - only show in development */}
+                      {process.env.NODE_ENV === 'development' && (
+                        <div className="absolute top-2 left-2 bg-black bg-opacity-75 text-white text-xs p-2 rounded">
+                          <div>videoUrl: {data[index].videoUrl || "none"}</div>
+                          <div>videoSrc: {data[index].videoSrc || "none"}</div>
+                          <div>headshotSrc: {data[index].headshotSrc || "none"}</div>
+                          <div>Show play: {!!(data[index].videoUrl || data[index].videoSrc) ? "yes" : "no"}</div>
+                        </div>
                       )}
 
                       {(data[index].videoUrl || data[index].videoSrc) && (
                         <button
                           type="button"
                           onClick={() => setOpenVideo(data[index])}
-                          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full ${brandColor} text-white shadow-lg h-14 w-14 md:h-16 md:w-16 focus:outline-none focus:ring-2 focus:ring-ring`}
+                          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center rounded-full ${brandColor} text-white shadow-lg h-14 w-14 md:h-16 md:w-16 focus:outline-none focus:ring-2 focus:ring-ring z-10`}
                           aria-label="Play video"
                         >
                           <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor">
