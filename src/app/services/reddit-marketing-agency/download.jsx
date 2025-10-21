@@ -58,15 +58,6 @@ export default function DownloadPDF() {
       if (response.ok) {
         setIsSubmitted(true);
         setIsEmailSending(false);
-
-        setTimeout(() => {
-          const link = document.createElement("a");
-          link.href = "https://drive.google.com/uc?export=download&id=1bX9OsrZd2DltBL-p1aLhhUPIqwVW8au7";
-          link.download = "";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }, 100);
       } else {
         setErrorMessage("Failed to submit form. Please try again.");
         setIsEmailSending(false);
@@ -344,7 +335,7 @@ export default function DownloadPDF() {
                                         Thank You!
                                     </h3>
                                     <p className="text-sm sm:text-base text-gray-300">
-                                        Your email has been successfully submitted. Download will start shortly...
+                                        Your email has been received successfully. The download link has been sent to your inbox.
                                     </p>
                                 </div>
                             )}
