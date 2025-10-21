@@ -178,7 +178,7 @@ const statuses = ["all", ...new Set(posts.map((post) => post.posted_comment_stat
     const matchesCategory =
       selectedCategory === "all" || post.category === selectedCategory;
     const matchesStatus =
-      selectedStatus === "all" || post.status === selectedStatus;
+      selectedStatus === "all" || post.posted_comment_status === selectedStatus;
     const matchCompanyId =
       selectedCompanyId === "all" || post.company_id === selectedCompanyId;
 
