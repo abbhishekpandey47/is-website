@@ -33,12 +33,11 @@ export default function VideoTestimonials({
 }) {
   const data = items;
   
-  // Debug logging - only in development
-  if (process.env.NODE_ENV === 'development') {
-    console.log("VideoTestimonials - items:", items);
-    console.log("VideoTestimonials - data:", data);
-    console.log("VideoTestimonials - data length:", data.length);
-  }
+  // Debug logging - always log in production for debugging
+  console.log("VideoTestimonials - items:", items);
+  console.log("VideoTestimonials - data:", data);
+  console.log("VideoTestimonials - data length:", data.length);
+  console.log("VideoTestimonials - NODE_ENV:", process.env.NODE_ENV);
 
   const [index, setIndex] = useState(0);
   const [openVideo, setOpenVideo] = useState(null);
@@ -47,6 +46,13 @@ export default function VideoTestimonials({
   const [pageHidden, setPageHidden] = useState(false);
 
   const slideCount = data.length;
+  
+  // Early return if no data
+  if (!data || data.length === 0) {
+    console.log("VideoTestimonials - No data available, returning null");
+    return null;
+  }
+  
   const clamp = useCallback(
     (n) => {
       if (slideCount === 0) return 0;
