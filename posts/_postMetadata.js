@@ -1191,7 +1191,17 @@ let postMetaData = [
   category: "B2B SaaS Growth & GTM",
   metaDescription: "Discover the 9 leading go to market agency to boost your B2B SaaS growth with proven GTM strategies, positioning, and rapid market adoption in 2025. Read now!"
 },
-
+{
+  title: "GTM Enablement: GTM Strategy & Strategist Roles That Boost Growth",
+  metatitle: "GTM Enablement: Strategy & Roles | Infrasity",
+  slug: "gtm-enablement",
+  description: "GTM enablement is essential for driving predictable, sustainable growth. This framework aligns sales, marketing, product, and customer success teams to improve customer experience, accelerate adoption, and boost revenue. Key GTM strategist roles include defining go-to-market plans, selecting the right channels, and monitoring KPIs. Learn how advanced strategies like ICP & segmentation, value proposition, partnerships, and multi-channel distribution drive enterprise growth.",
+  ogImage: "/PostImages/gtm-enablement/0.webp",
+  publishedOn: "2025-10-21",
+  authorId: "author0005",
+  category: "B2B SaaS Growth & GTM",
+  metaDescription: "Discover how GTM enablement can accelerate growth in B2B SaaS startups. Learn about the roles of GTM strategists, strategies, and KRAs that drive growth. Read now!"
+},
 ];
 
 const sorted = () => {
