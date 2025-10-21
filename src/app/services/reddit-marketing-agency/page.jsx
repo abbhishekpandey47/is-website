@@ -18,6 +18,10 @@ import BlogSection from "./blogSection";
 
 
 export default function Page() {
+    // Debug logging
+    console.log("Reddit Marketing Agency Page - Videos:", Videos);
+    console.log("Reddit Marketing Agency Page - Videos length:", Videos ? Videos.length : 'undefined');
+    
     return (
         <div className="text-white">
             <HeroHome />
@@ -49,7 +53,14 @@ export default function Page() {
                   }}
                 ></div>
                 <div className="flex justify-center">
-                  <VideoTestimonials className="max-w-6xl" items={Videos} />
+                  {Videos && Videos.length > 0 ? (
+                    <VideoTestimonials className="max-w-6xl" items={Videos} />
+                  ) : (
+                    <div className="text-center p-8">
+                      <div className="text-white text-lg">Video testimonials loading...</div>
+                      <div className="text-gray-400 text-sm mt-2">Videos: {Videos ? Videos.length : 'undefined'}</div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
