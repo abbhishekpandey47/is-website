@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState } from "react";
 
 export default function Threadflow() {
@@ -113,10 +114,12 @@ export default function Threadflow() {
         </div>
         {/* Right: Illustration */}
         <div className="flex flex-1 items-center justify-center">
-          <img
-            src="https://assets.stackone.com/illustrations/api-card.png"
-            alt="API Illustration"
-            className="w-[90%] max-w-xs rounded-xl shadow-lg border border-[#e5e7eb]"
+          <Image
+            src="/threadflow.jpg"
+            alt="Threadflow"
+            width={600}
+            height={600}
+            className="rounded-xl shadow-lg border border-[#e5e7eb]"
             style={{ objectFit: "cover" }}
             onError={(e) => {
               e.target.style.display = "none";
