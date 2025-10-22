@@ -1198,7 +1198,7 @@ let postMetaData = [
   description: "GTM enablement is essential for driving predictable, sustainable growth. This framework aligns sales, marketing, product, and customer success teams to improve customer experience, accelerate adoption, and boost revenue. Key GTM strategist roles include defining go-to-market plans, selecting the right channels, and monitoring KPIs. Learn how advanced strategies like ICP & segmentation, value proposition, partnerships, and multi-channel distribution drive enterprise growth.",
   ogImage: "/PostImages/gtm-enablement/0.webp",
   publishedOn: "2025-10-21",
-  authorId: "author0005",
+  authorId: "author0001",
   category: "B2B SaaS Growth & GTM",
   metaDescription: "Discover how GTM enablement can accelerate growth in B2B SaaS startups. Learn about the roles of GTM strategists, strategies, and KRAs that drive growth. Read now!"
 },

@@ -49,7 +49,7 @@ const Featured = () => {
       (a, b) =>
         new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime()
     )
-    .slice(0, 4);
+    .slice(1, 5);
 
   latestPosts.map((item, index) => console.log(item.publishedOn));
 
