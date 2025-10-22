@@ -107,7 +107,7 @@ When integrated correctly, customer feedback becomes the foundation for refining
 
 By combining these core GTM strategies, B2B SaaS startups can build a repeatable, high-performance GTM engine. The next step is understanding the **key result areas (KRAs)** that enable GTM strategists to operationalize these strategies and turn insights into measurable growth.
 
-6. **KRAs Assist GTM Enablement**
+## **KRAs Assist GTM Enablement**
 
 I have listed out the 6 roles of GTM strategists that can boost your B2B SaaS startup’s growth this year. Here’s the list:
 
