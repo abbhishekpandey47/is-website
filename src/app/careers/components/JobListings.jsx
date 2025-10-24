@@ -53,53 +53,35 @@ const JobListings = () => {
       ],
       posted: "2 days ago",
       fullDescription: {
-        aboutUs: "Infrasity is the developer-first growth partner for early-stage SaaS and DevTools startups. We work with YC-backed and VC-funded companies in infra, AI, and DevTools—helping them scale adoption through technical content, demos, and developer relations. Our work spans Series-A+ teams like Firefly, Kubiya, and DevZero, where we've turned complex infrastructure features into adoption levers: quickstarts, use-case libraries, and developer-friendly onboarding.",
-        jobDescription: "As a Sales Engineer at Infrasity, you'll be the technical voice in our growth motion. You'll work directly with founders and product teams to understand their infrastructure challenges and translate Infrasity's GTM services into clear, adoption-driving solutions. This role blends solution engineering, outbound sales, and developer storytelling—perfect for someone who wants to stay technical while owning business impact.",
+        aboutUs: "Infrasity is the developer-first growth partner for early-stage SaaS and DevTools startups. We work with YC-backed and VC-funded companies in infra, AI, and DevTools—helping them scale adoption through technical content, demos, and developer relations.",
+        jobDescription: "As a Sales Engineer at Infrasity, you'll be the technical voice in our growth motion. You'll work directly with founders and product teams to understand their infrastructure challenges and translate Infrasity's GTM services into clear, adoption-driving solutions.",
         keyResponsibilities: {
-          "Client Solutioning & Pre-Sales": [
+          "Client Solutioning": [
             "Partner with founders/CTOs to map adoption blockers into tailored Infrasity solutions",
-            "Run technical discovery calls, connecting customer needs with content, GTM, and DevRel playbooks",
-            "Draft proposals, decks, and adoption roadmaps (from quickstarts to CI/CD wired governance)"
+            "Run technical discovery calls, connecting customer needs with content, GTM, and DevRel playbooks"
           ],
           "Outbound & Partnerships": [
             "Prospect and qualify early-stage infra/AI startups via LinkedIn, VC portfolios, and Reddit",
-            "Own outreach campaigns—email, LinkedIn, event networking—to book conversations",
             "Build and maintain relationships with VCs, accelerators, and ecosystem partners"
-          ],
-          "Sales Engineering Assets": [
-            "Collaborate with content team to create technical decks, demo scripts, and case studies",
-            "Turn technical adoption stories (Terraform drift, CI/CD integrations, SDK onboarding) into repeatable narratives",
-            "Maintain a library of reusable playbooks for sales calls and outbound"
-          ],
-          "Community & Event Engagement": [
-            "Represent Infrasity at KubeCon, DevOpsDays, and startup meetups",
-            "Seed Infrasity's POV in Reddit threads and LinkedIn discussions",
-            "Feed back community insights into outbound and service positioning"
           ]
         },
         qualifications: {
           "Must-Haves": [
             "2–4 years in sales engineering, DevRel, or solutions consulting",
             "Understanding of DevOps/Infra domains (Terraform, K8s, CI/CD, Cloud providers)",
-            "Strong communication and storytelling skills—able to talk to founders and engineers alike",
-            "Comfort with outbound tools (HubSpot, Apollo, YAMM) and LinkedIn outreach"
+            "Strong communication and storytelling skills"
           ],
           "Nice-to-Haves": [
             "Prior experience in SaaS/DevTools GTM",
-            "Hands-on with developer communities (Reddit, GitHub, Discord)",
-            "Exposure to VC/startup ecosystems",
-            "Ability to contribute to content (blogs, demos, technical decks)"
+            "Hands-on with developer communities (Reddit, GitHub, Discord)"
           ]
         },
         whyJoin: [
           "Work directly with founders on GTM strategy",
           "Stay technical while building pipeline and revenue",
-          "Exposure to cutting-edge infra and AI startups",
-          "Hybrid team that blends engineering + growth",
-          "Fast-paced, high-impact environment with real ownership"
+          "Exposure to cutting-edge infra and AI startups"
         ],
         howToApply: "Send your CV and a short note on a GTM/sales engineering project you've led to careers@infrasity.com"
-
       }
     },
     {
@@ -124,46 +106,32 @@ const JobListings = () => {
       ],
       posted: "3 days ago",
       fullDescription: {
-        aboutUs: "Infrasity is the developer-first growth partner for SaaS, AI, and DevTools startups. We create content that engineers actually trust—SDK guides, cloud/infra tutorials, use-case playbooks, and technical comparisons that drive adoption. Our clients include YC and VC-backed startups across infra, AI, and platform engineering, where we've built technical blogs, documentation, and video scripts that reduce onboarding friction and 3x organic visibility.",
-        jobDescription: "As a Technical Writer at Infrasity, you'll create developer-grade content that translates complex infrastructure, AI, and DevTools concepts into engaging, accurate resources. You'll work closely with our engineering and DevRel teams to produce blogs, documentation, and technical assets that showcase product capabilities and help startups win adoption.",
+        aboutUs: "Infrasity is the developer-first growth partner for SaaS, AI, and DevTools startups. We create content that engineers actually trust—SDK guides, cloud/infra tutorials, use-case playbooks, and technical comparisons that drive adoption.",
+        jobDescription: "As a Technical Writer at Infrasity, you'll create developer-grade content that translates complex infrastructure, AI, and DevTools concepts into engaging, accurate resources.",
         keyResponsibilities: {
           "Content Creation": [
             "Research and write long-form technical blogs (cloud infra, Terraform, Kubernetes, SDKs, AI/ML tooling)",
-            "Develop clear, concise developer documentation (API guides, SDK examples, quickstarts)",
-            "Draft use-case guides and comparison pieces that position clients against competitors",
-            "Create scripts for video walkthroughs, demos, and product explainers"
+            "Develop clear, concise developer documentation (API guides, SDK examples, quickstarts)"
           ],
           "Collaboration & Review": [
             "Work with engineers to validate technical accuracy",
-            "Collaborate with SEO/growth teams to align content with keyword strategy",
-            "Review and refine drafts to maintain Infrasity's developer-first tone",
-            "Incorporate client feedback and adapt content to their positioning"
-          ],
-          "Community & Distribution": [
-            "Repurpose content for GitHub READMEs, Reddit posts, and LinkedIn snippets",
-            "Stay up to date with trends in DevOps, AI, cloud, and developer tooling",
-            "Participate in brainstorming sessions for new content ideas"
+            "Collaborate with SEO/growth teams to align content with keyword strategy"
           ]
         },
         qualifications: {
           "Must-Haves": [
             "2+ years of experience writing technical content (blogs, docs, READMEs)",
             "Strong grasp of cloud infrastructure (AWS, GCP, Azure), IaC (Terraform/Pulumi), or Kubernetes",
-            "Ability to explain complex topics to both technical and semi-technical readers",
             "Excellent written English with an engineering-first approach"
           ],
           "Nice-to-Haves": [
             "Prior experience in DevTools/infra startups",
-            "Familiarity with SEO tools (Ahrefs, Semrush, Surfer)",
-            "Experience contributing to GitHub repos (README, docs, examples)",
-            "Exposure to developer marketing or DevRel"
+            "Familiarity with SEO tools (Ahrefs, Semrush, Surfer)"
           ]
         },
         whyJoin: [
           "Write content for cutting-edge startups in infra, AI, and DevTools",
           "Blend engineering knowledge with storytelling and SEO strategy",
-          "Be part of a fast-moving team working with YC and top VC-backed companies",
-          "Opportunity to expand into video scripting, case studies, and technical playbooks",
           "Remote/hybrid flexibility with high ownership"
         ],
         howToApply: "Send your CV and links to recent technical writing samples (blogs, docs, READMEs) to contact@infrasity.com"
@@ -417,29 +385,29 @@ const JobListings = () => {
         {/* Job Detail Modal */}
         {isModalOpen && selectedJob && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={closeModal}>
-            <div className="bg-background border border-border rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
               {/* Modal Header */}
-              <div className="sticky top-0 bg-background border-b border-border p-6 rounded-t-2xl">
+              <div className="sticky top-0 bg-zinc-900 border-b border-zinc-800 p-6 rounded-t-2xl">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-3xl font-bold text-foreground">{selectedJob.title}</h2>
+                    <h2 className="text-3xl font-bold text-white">{selectedJob.title}</h2>
                     <div className="flex items-center gap-4 mt-2">
-                      <div className="flex items-center gap-2 text-muted-foreground">
+                      <div className="flex items-center gap-2 text-zinc-400">
                         <MapPin className="w-4 h-4" />
                         <span>{selectedJob.location}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
+                      <div className="flex items-center gap-2 text-zinc-400">
                         <Clock className="w-4 h-4" />
                         <span>{selectedJob.type}</span>
                       </div>
-                      <div className="px-3 py-1 bg-[#5F64FF]/10 text-[#5F64FF] rounded-full text-sm font-medium">
+                      <div className="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm font-medium">
                         {selectedJob.team}
                       </div>
                     </div>
                   </div>
                   <button
                     onClick={closeModal}
-                    className="w-8 h-8 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted rounded-full transition-colors"
+                    className="w-8 h-8 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-full transition-colors"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -453,8 +421,8 @@ const JobListings = () => {
                 {/* About Us */}
                 {selectedJob.fullDescription?.aboutUs && (
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 text-foreground">About Us</h3>
-                    <div className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                    <h3 className="text-2xl font-bold mb-4 text-white">About Us</h3>
+                    <div className="text-zinc-300 leading-relaxed whitespace-pre-line">
                       {selectedJob.fullDescription.aboutUs}
                     </div>
                   </div>
@@ -463,8 +431,8 @@ const JobListings = () => {
                 {/* Job Description */}
                 {selectedJob.fullDescription?.jobDescription && (
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 text-foreground">Job Description</h3>
-                    <div className="text-muted-foreground leading-relaxed">
+                    <h3 className="text-2xl font-bold mb-4 text-white">Job Description</h3>
+                    <div className="text-zinc-300 leading-relaxed">
                       {selectedJob.fullDescription.jobDescription}
                     </div>
                   </div>
@@ -473,15 +441,15 @@ const JobListings = () => {
                 {/* Key Responsibilities */}
                 {selectedJob.fullDescription?.keyResponsibilities && (
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 text-foreground">Key Responsibilities</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-white">Key Responsibilities</h3>
                     <div className="space-y-6">
                       {Object.entries(selectedJob.fullDescription.keyResponsibilities).map(([category, items]) => (
                         <div key={category}>
-                          <h4 className="text-lg font-semibold mb-3 text-[#5F64FF]">{category}</h4>
+                          <h4 className="text-lg font-semibold mb-3 text-purple-400">{category}</h4>
                           <ul className="space-y-2">
                             {items.map((item, index) => (
-                              <li key={index} className="flex items-start gap-3 text-muted-foreground">
-                                <div className="w-2 h-2 rounded-full bg-[#5F64FF] mt-2 flex-shrink-0" />
+                              <li key={index} className="flex items-start gap-3 text-zinc-300">
+                                <div className="w-2 h-2 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
                                 <span>{item}</span>
                               </li>
                             ))}
@@ -495,15 +463,15 @@ const JobListings = () => {
                 {/* Qualifications */}
                 {selectedJob.fullDescription?.qualifications && (
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 text-foreground">Qualifications</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-white">Qualifications</h3>
                     <div className="space-y-6">
                       {Object.entries(selectedJob.fullDescription.qualifications).map(([category, items]) => (
                         <div key={category}>
-                          <h4 className="text-lg font-semibold mb-3 text-[#5F64FF]">{category}</h4>
+                          <h4 className="text-lg font-semibold mb-3 text-purple-400">{category}</h4>
                           <ul className="space-y-2">
                             {items.map((item, index) => (
-                              <li key={index} className="flex items-start gap-3 text-muted-foreground">
-                                <div className="w-2 h-2 rounded-full bg-[#5F64FF] mt-2 flex-shrink-0" />
+                              <li key={index} className="flex items-start gap-3 text-zinc-300">
+                                <div className="w-2 h-2 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
                                 <span>{item}</span>
                               </li>
                             ))}
@@ -517,11 +485,11 @@ const JobListings = () => {
                 {/* Why Join */}
                 {selectedJob.fullDescription?.whyJoin && (
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 text-foreground">Why Join Infrasity?</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-white">Why Join Infrasity?</h3>
                     <ul className="space-y-2">
                       {selectedJob.fullDescription.whyJoin.map((item, index) => (
-                        <li key={index} className="flex items-start gap-3 text-muted-foreground">
-                          <div className="w-2 h-2 rounded-full bg-[#5F64FF] mt-2 flex-shrink-0" />
+                        <li key={index} className="flex items-start gap-3 text-zinc-300">
+                          <div className="w-2 h-2 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -532,17 +500,15 @@ const JobListings = () => {
                 {/* How to Apply */}
                 {selectedJob.fullDescription?.howToApply && (
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 text-foreground">How to Apply</h3>
-                    <div className="text-muted-foreground leading-relaxed">
-
+                    <h3 className="text-2xl font-bold mb-4 text-white">How to Apply</h3>
+                    <div className="text-zinc-300 leading-relaxed">
                       {selectedJob.fullDescription.howToApply}
-
                     </div>
                   </div>
                 )}
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-border">
+                <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-zinc-800">
                   <CalendarBooking 
                     buttonText="Apply Now" 
                     width="w-52" 
@@ -550,7 +516,7 @@ const JobListings = () => {
 
                   <button
                     onClick={closeModal}
-                    className="px-8 py-4 border border-border rounded-xl font-semibold hover:bg-muted/50 transition-all duration-300"
+                    className="px-8 py-4 border border-zinc-700 rounded-xl font-semibold text-white hover:bg-zinc-800 transition-all duration-300"
                   >
                     Close
                   </button>

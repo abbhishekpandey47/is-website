@@ -68,32 +68,32 @@ const CompanyCulture = () => {
     {
       icon: Code,
       title: "Engineering First",
-      description: "We believe in the power of engineering-led growth and technical excellence in everything we do."
+      description: "We're an engineering-led team. Every piece of content, video, or GTM playbook starts with technical depth and product understanding."
     },
     {
       icon: Lightbulb,
       title: "Innovation",
-      description: "We constantly push boundaries and explore new ways to solve complex developer marketing challenges."
+      description: "We constantly experiment — from new content frameworks to developer-led campaigns — finding creative ways to connect technical ideas with real audiences."
     },
     {
       icon: Users,
       title: "Collaboration",
-      description: "We work together as a team, sharing knowledge and supporting each other's growth and success."
+      description: "We work as one team — writers, engineers, designers, and strategists — learning, iterating, and growing together."
     },
     {
       icon: Target,
       title: "Results Driven",
-      description: "We focus on measurable outcomes and data-driven decisions to deliver exceptional value to our clients."
+      description: "We measure impact, not output. Every deliverable is tied to traffic, engagement, and tangible customer growth."
     },
     {
       icon: Globe,
-      title: "Global Impact",
-      description: "We're building tools and strategies that help developers worldwide build better products and communities."
+      title: "Global Reach",
+      description: "We've partnered with 30+ startups across DevTool, Infra, and AI — helping teams around the world tell better stories and scale faster."
     },
     {
       icon: Heart,
-      title: "Developer Love",
-      description: "We genuinely care about developers and are passionate about making their lives easier and more productive."
+      title: "Developer Empathy",
+      description: "We exist for builders. Everything we do is about making developers' lives easier — by turning their complex work into clarity."
     }
   ];
 
@@ -128,9 +128,14 @@ const CompanyCulture = () => {
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-white">
             Discovery
           </h2>
-          <p className="text-xl text-zinc-400 max-w-3xl mx-auto">
-            The initial insight came after we noticed the emerging trend of chat-based platforms like Slack and Microsoft Teams partially replacing email in B2B comms, and how that broke most existing post-sales workflows.
-          </p>
+          <div className="text-xl text-zinc-400 max-w-4xl mx-auto space-y-4">
+            <p>
+              The idea for Infrasity was simple: most early-stage DevTool startups know how to build great products — but struggle to explain why they matter.
+            </p>
+            <p>
+              We saw that gap while working with engineering teams that shipped brilliant tech yet couldn't communicate its value to users or investors. That's where Infrasity began — to bridge the space between engineering and storytelling.
+            </p>
+          </div>
         </div>
 
         {/* Values Grid */}
@@ -138,12 +143,14 @@ const CompanyCulture = () => {
           {values.map((value, index) => (
             <div key={index} className="culture-value">
               <div className="bg-card border border-border rounded-2xl p-8 h-full hover:shadow-lg transition-all duration-300 hover:border-primary/50 group">
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                  <value.icon className="w-8 h-8 text-primary" />
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <value.icon className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">
+                    {value.title}
+                  </h3>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
-                  {value.title}
-                </h3>
                 <p className="text-muted-foreground leading-relaxed">
                   {value.description}
                 </p>
@@ -152,55 +159,81 @@ const CompanyCulture = () => {
           ))}
         </div>
 
-        {/* Culture Highlights */}
+        {/* How It Started */}
         <div className="culture-card">
           <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-3xl p-12">
             <div className="text-center mb-12">
-              <h3 className="text-3xl md:text-4xl font-bold mb-4">
-                How it started
+              <h3 className="text-3xl md:text-4xl font-bold mb-6">
+                How It Started
               </h3>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Advith and Robert met at Caltech and then later met Marty during the Kleiner Perkins Fellowship.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {cultureHighlights.map((highlight, index) => (
-                <div key={index} className="text-center">
-                  <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                    <highlight.icon className="w-10 h-10 text-primary" />
-                  </div>
-                  <h4 className="text-xl font-bold mb-3">{highlight.title}</h4>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {highlight.description}
-                  </p>
-                </div>
-              ))}
+              <div className="text-xl text-muted-foreground max-w-4xl mx-auto space-y-4">
+                <p>
+                  Infrasity began in early 2024 as a weekend experiment. Back then, it was just Shan, balancing a full-time job and helping one client with developer-focused content.
+                </p>
+                <p>
+                  By September 2024, that side project turned into something real. The 2BHK apartment where it started became our first office — and the foundation of a team that believes in engineering-led growth.
+                </p>
+                <p>
+                  Today, Infrasity works with 15+ DevTool, Infra, and AI startups — helping them scale through content, GTM, and DevRel.
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Team Stats */}
+        {/* What Drives Us */}
         <div className="culture-card mt-20">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="bg-card border border-border rounded-2xl p-8">
-              <div className="text-4xl font-bold text-primary mb-2">15+</div>
-              <div className="text-muted-foreground">Team Members</div>
+          <div className="bg-gradient-to-r from-accent/5 to-primary/5 rounded-3xl p-12">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl md:text-4xl font-bold mb-8">
+                What Drives Us
+              </h3>
             </div>
-            <div className="bg-card border border-border rounded-2xl p-8">
-              <div className="text-4xl font-bold text-primary mb-2">5+</div>
-              <div className="text-muted-foreground">Countries</div>
-            </div>
-            <div className="bg-card border border-border rounded-2xl p-8">
-              <div className="text-4xl font-bold text-primary mb-2">100%</div>
-              <div className="text-muted-foreground">Remote First</div>
-            </div>
-            <div className="bg-card border border-border rounded-2xl p-8">
-              <div className="text-4xl font-bold text-primary mb-2">3x</div>
-              <div className="text-muted-foreground">Growth Rate</div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="text-center">
+                <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                  <div className="text-3xl">🧩</div>
+                </div>
+                <h4 className="text-xl font-bold mb-3">Shared Learning</h4>
+                <p className="text-muted-foreground leading-relaxed">
+                  We're all builders first — learning from every product we write about.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                  <div className="text-3xl">💬</div>
+                </div>
+                <h4 className="text-xl font-bold mb-3">Open Communication</h4>
+                <p className="text-muted-foreground leading-relaxed">
+                  Every voice matters. Transparency drives better work and stronger outcomes.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                  <div className="text-3xl">🚀</div>
+                </div>
+                <h4 className="text-xl font-bold mb-3">Growth Opportunities</h4>
+                <p className="text-muted-foreground leading-relaxed">
+                  We move fast, experiment often, and give everyone ownership of their craft.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                  <div className="text-3xl">🔥</div>
+                </div>
+                <h4 className="text-xl font-bold mb-3">Purpose Over Perfection</h4>
+                <p className="text-muted-foreground leading-relaxed">
+                  We don't chase vanity metrics — we care about building things that last.
+                </p>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );

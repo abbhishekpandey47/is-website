@@ -60,15 +60,6 @@ const CareersHero = () => {
         }
       );
 
-      // Floating elements animation
-      gsap.to(".floating-icon", {
-        y: -20,
-        duration: 3,
-        ease: "power1.inOut",
-        repeat: -1,
-        yoyo: true,
-        stagger: 0.5,
-      });
     }, heroRef);
 
     return () => ctx.revert();
@@ -76,20 +67,14 @@ const CareersHero = () => {
 
   const stats = [
     { icon: Users, value: "15+", label: "Team Members" },
-    { icon: Globe, value: "5+", label: "Countries" },
-    { icon: Zap, value: "100%", label: "Remote First" },
-    { icon: Rocket, value: "3x", label: "Growth Rate" },
+    { icon: Globe, value: "In-Office", label: "New Delhi, India" },
+    { icon: Zap, value: "30+", label: "B2B & AI startups Served" },
+    { icon: Rocket, value: "2.5×", label: "Year-on-Year Growth" },
   ];
 
   return (
     <section ref={heroRef} className="relative pt-24 pb-20 overflow-hidden">
 
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl floating-icon" />
-        <div className="absolute top-40 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl floating-icon" />
-        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-approved/10 rounded-full blur-3xl floating-icon" />
-      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center">
@@ -101,14 +86,12 @@ const CareersHero = () => {
 
           {/* Main Title */}
           <h1 className="hero-title text-5xl md:text-7xl font-bold tracking-tight mb-6 text-white">
-            Building the future of B2B support
-
+            Building the future of developer marketing.
           </h1>
 
           {/* Subtitle */}
           <p className="hero-subtitle text-xl md:text-2xl text-zinc-400 max-w-4xl mx-auto mb-12 leading-relaxed">
-
-            Meet the team behind the platform trusted by the next generation
+            Join the team helping DevTool, Infra, and AI startups scale through content, GTM, and DevRel.
           </p>
 
           {/* Stats Grid */}
