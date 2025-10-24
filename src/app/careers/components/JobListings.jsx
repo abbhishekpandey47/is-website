@@ -263,44 +263,6 @@ const JobListings = () => {
           </div>
         </div>
 
-        {/* Filters */}
-        <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 mb-8">
-          <div className="flex flex-col sm:flex-row gap-4">
-            {/* Search */}
-            <div className="relative flex-1 min-w-0">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-400 w-4 h-4" />
-              <input
-                type="text"
-                placeholder="Search jobs..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-sm text-white placeholder:text-zinc-400"
-              />
-            </div>
-
-            {/* Location Filter */}
-            <select
-              value={selectedLocation}
-              onChange={(e) => setSelectedLocation(e.target.value)}
-              className="px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-sm text-white min-w-[160px]"
-            >
-              {locations.map(location => (
-                <option key={location} value={location} className="bg-zinc-800 text-white">{location}</option>
-              ))}
-            </select>
-
-            {/* Team Filter */}
-            <select
-              value={selectedTeam}
-              onChange={(e) => setSelectedTeam(e.target.value)}
-              className="px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-sm text-white min-w-[140px]"
-            >
-              {teams.map(team => (
-                <option key={team} value={team} className="bg-zinc-800 text-white">{team}</option>
-              ))}
-            </select>
-          </div>
-        </div>
 
         {/* Job Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -8,7 +8,7 @@ export default function AwardBanner() {
   if (!isVisible) return null;
 
   return (
-    <div className="relative bg-gradient-to-r from-purple-900 via-blue-900 to-indigo-900 text-white py-1.5 sm:py-2 px-2 sm:px-4 overflow-hidden z-10">
+    <div className="relative bg-gradient-to-r from-purple-900 via-blue-900 to-indigo-900 text-white py-1.5 sm:py-2 px-2 sm:px-4 overflow-hidden z-50">
       {/* Subtle Background pattern */}
       <div
         aria-hidden="true"
@@ -25,7 +25,7 @@ export default function AwardBanner() {
             {/* Clickable Link */}
             <Link
               href="/playbook/developer-marketing"
-              className="flex items-center gap-2 flex-1 min-w-0 cursor-pointer justify-center"
+              className="flex items-center gap-2 flex-1 min-w-0 cursor-pointer justify-center relative z-10"
             >
               <div className="bg-gradient-to-r from-purple-400 to-blue-400 rounded-full p-[3px] flex-shrink-0">
                 <ArrowRight className="h-3 w-3 text-white" />

@@ -80,7 +80,7 @@ const CareersHero = () => {
         <div className="text-center">
 
           {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-8 bg-purple-500/20 text-purple-400 border border-purple-500/30">
+          <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-8 bg-zinc-800 text-zinc-300 border border-zinc-700">
             🚀 We're Hiring - Join Our Mission
           </div>
 
@@ -98,8 +98,8 @@ const CareersHero = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mb-16">
             {stats.map((stat, index) => (
               <div key={index} className="hero-stats text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-purple-500/20 mb-4">
-                  <stat.icon className="w-8 h-8 text-purple-400" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-zinc-800 mb-4">
+                  <stat.icon className="w-8 h-8 text-zinc-300" />
                 </div>
                 <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
                 <div className="text-sm text-zinc-400">{stat.label}</div>
