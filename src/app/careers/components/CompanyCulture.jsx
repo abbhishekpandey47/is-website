@@ -125,10 +125,10 @@ const CompanyCulture = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-white">
+          <h2 className="text-3xl font-semibold tracking-tight mb-4 text-white">
             Discovery
           </h2>
-          <div className="text-xl text-zinc-400 max-w-4xl mx-auto space-y-4">
+          <div className="text-gray-400 text-[15px] leading-relaxed max-w-4xl mx-auto space-y-4">
             <p>
               The idea for Infrasity was simple: most early-stage DevTool startups know how to build great products — but struggle to explain why they matter.
             </p>
@@ -147,11 +147,11 @@ const CompanyCulture = () => {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                     <value.icon className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">
+                  <h3 className="text-lg font-medium text-white group-hover:text-primary transition-colors">
                     {value.title}
                   </h3>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-gray-400 text-[15px] leading-relaxed">
                   {value.description}
                 </p>
               </div>
@@ -163,10 +163,10 @@ const CompanyCulture = () => {
         <div className="culture-card">
           <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-3xl p-12">
             <div className="text-center mb-12">
-              <h3 className="text-3xl md:text-4xl font-bold mb-6">
+              <h3 className="text-3xl font-semibold tracking-tight mb-4 text-white">
                 How It Started
               </h3>
-              <div className="text-xl text-muted-foreground max-w-4xl mx-auto space-y-4">
+              <div className="text-gray-400 text-[15px] leading-relaxed max-w-4xl mx-auto space-y-4">
                 <p>
                   Infrasity began in early 2024 as a weekend experiment. Back then, it was just Shan, balancing a full-time job and helping one client with developer-focused content.
                 </p>
@@ -181,64 +181,106 @@ const CompanyCulture = () => {
           </div>
         </div>
 
+        {/* Section Divider */}
+        <div className="h-1 bg-gradient-to-r from-purple-600 to-blue-500 my-20 opacity-60" />
+
         {/* What Defines Us */}
-        <div className="culture-card mt-20">
-          <div className="bg-gradient-to-r from-accent/5 to-primary/5 rounded-3xl p-12">
+        <div className="culture-card">
+          <div className="bg-gradient-to-br from-[#0C0C0C] to-[#151515] rounded-3xl p-12 border border-gray-800/30 max-w-6xl mx-auto">
+            {/* Tagline and Title */}
             <div className="text-center mb-12">
-              <h3 className="text-3xl md:text-4xl font-bold mb-8">
+              <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4 font-medium">
+                Our Culture
+              </p>
+              <h3 className="text-3xl font-semibold tracking-tight text-white">
                 What Defines Us
               </h3>
-              <div className="text-xl text-muted-foreground max-w-4xl mx-auto space-y-4 mb-12">
-                <p>
-                  Infrasity is built by engineers who love simplifying complexity — turning technical depth into stories that help products grow.
-                </p>
-                <p>
-                  We work with DevTool, Infra, and AI startups, helping them go from idea to visibility through content, GTM, and developer-focused storytelling.
-                </p>
-                <p>
-                  Every project starts with curiosity, technical precision, and a shared drive to build things that matter.
-                </p>
-              </div>
             </div>
 
-            <div className="text-center mb-12">
-              <h4 className="text-2xl font-bold mb-8">Our Principles</h4>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="text-center">
-                <h4 className="text-xl font-bold mb-3">Learn Relentlessly</h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  Every repo we open or SDK we document teaches us something new. Continuous learning drives everything we build.
+            {/* Tightened two-column layout */}
+            <div className="grid md:grid-cols-5 gap-8 items-center">
+              {/* Left side - Purpose (40% width) */}
+              <div className="md:col-span-2">
+                <p className="text-gray-400 text-[15px] leading-relaxed">
+                  Infrasity helps DevTool, Infra, and AI startups scale through technical content, GTM, and developer storytelling.
                 </p>
               </div>
+              
+              {/* Right side - Principles Cards (2×2 + full-width) */}
+              <div className="md:col-span-3 space-y-4">
+                {/* 2×2 Grid for first 4 cards */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="group relative">
+                    <div className="bg-gray-900/30 rounded-lg p-4 border border-white/10 hover:bg-[#121212] hover:translate-y-[-2px] transition-all duration-300 h-full">
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-gray-600 flex items-center justify-center text-xs font-medium text-white">
+                          1
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-lg font-medium text-white mb-2">Learn Relentlessly</h4>
+                          <p className="text-gray-400 text-[15px] leading-relaxed">Every project teaches us something new about code, systems, or growth.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-              <div className="text-center">
-                <h4 className="text-xl font-bold mb-3">Radical Transparency</h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  We keep context open and decisions clear — so everyone knows how their work impacts the bigger picture.
-                </p>
-              </div>
+                  <div className="group relative">
+                    <div className="bg-gray-900/30 rounded-lg p-4 border border-white/10 hover:bg-[#121212] hover:translate-y-[-2px] transition-all duration-300 h-full">
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-gray-600 flex items-center justify-center text-xs font-medium text-white">
+                          2
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-lg font-medium text-white mb-2">Radical Transparency</h4>
+                          <p className="text-gray-400 text-[15px] leading-relaxed">We keep context open and decisions clear so everyone knows their impact.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-              <div className="text-center">
-                <h4 className="text-xl font-bold mb-3">Ownership & Craft</h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  Each person owns their outcome. You'll see your work directly shaping launches, GTM campaigns, and developer communities.
-                </p>
-              </div>
+                  <div className="group relative">
+                    <div className="bg-gray-900/30 rounded-lg p-4 border border-white/10 hover:bg-[#121212] hover:translate-y-[-2px] transition-all duration-300 h-full">
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-gray-600 flex items-center justify-center text-xs font-medium text-white">
+                          3
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-lg font-medium text-white mb-2">Ownership & Craft</h4>
+                          <p className="text-gray-400 text-[15px] leading-relaxed">You'll see your work live in developer communities and product launches.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-              <div className="text-center">
-                <h4 className="text-xl font-bold mb-3">Progress Over Perfection</h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  We value momentum. Ship, iterate, improve — that's how compounding happens.
-                </p>
-              </div>
+                  <div className="group relative">
+                    <div className="bg-gray-900/30 rounded-lg p-4 border border-white/10 hover:bg-[#121212] hover:translate-y-[-2px] transition-all duration-300 h-full">
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-gray-600 flex items-center justify-center text-xs font-medium text-white">
+                          4
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-lg font-medium text-white mb-2">Progress Over Perfection</h4>
+                          <p className="text-gray-400 text-[15px] leading-relaxed">We value momentum. Ship, iterate, improve — that's how compounding happens.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-              <div className="text-center md:col-span-2">
-                <h4 className="text-xl font-bold mb-3">Builders Helping Builders</h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  Our mission is simple — help other builders grow faster by translating complexity into clarity and adoption.
-                </p>
+                {/* Full-width card for "Builders Helping Builders" */}
+                <div className="group relative">
+                  <div className="bg-gray-900/30 rounded-lg p-4 border border-white/10 hover:bg-[#121212] hover:translate-y-[-2px] transition-all duration-300">
+                    <div className="flex items-start gap-3">
+                      <div className="w-5 h-5 rounded-full bg-gray-600 flex items-center justify-center text-xs font-medium text-white">
+                        5
+                      </div>
+                        <div className="flex-1">
+                          <h4 className="text-lg font-medium text-white mb-2">Builders Helping Builders</h4>
+                          <p className="text-gray-400 text-[15px] leading-relaxed">Our mission is to help other builders grow faster by translating complexity into clarity.</p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
