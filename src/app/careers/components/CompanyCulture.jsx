@@ -181,53 +181,63 @@ const CompanyCulture = () => {
           </div>
         </div>
 
-        {/* What Drives Us */}
+        {/* What Defines Us */}
         <div className="culture-card mt-20">
           <div className="bg-gradient-to-r from-accent/5 to-primary/5 rounded-3xl p-12">
             <div className="text-center mb-12">
               <h3 className="text-3xl md:text-4xl font-bold mb-8">
-                What Drives Us
+                What Defines Us
               </h3>
+              <div className="text-xl text-muted-foreground max-w-4xl mx-auto space-y-4 mb-12">
+                <p>
+                  Infrasity is built by engineers who love simplifying complexity — turning technical depth into stories that help products grow.
+                </p>
+                <p>
+                  We work with DevTool, Infra, and AI startups, helping them go from idea to visibility through content, GTM, and developer-focused storytelling.
+                </p>
+                <p>
+                  Every project starts with curiosity, technical precision, and a shared drive to build things that matter.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center mb-12">
+              <h4 className="text-2xl font-bold mb-8">Our Principles</h4>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="text-center">
-                <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                  <div className="text-3xl">🧩</div>
-                </div>
-                <h4 className="text-xl font-bold mb-3">Shared Learning</h4>
+                <h4 className="text-xl font-bold mb-3">Learn Relentlessly</h4>
                 <p className="text-muted-foreground leading-relaxed">
-                  We're all builders first — learning from every product we write about.
+                  Every repo we open or SDK we document teaches us something new. Continuous learning drives everything we build.
                 </p>
               </div>
 
               <div className="text-center">
-                <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                  <div className="text-3xl">💬</div>
-                </div>
-                <h4 className="text-xl font-bold mb-3">Open Communication</h4>
+                <h4 className="text-xl font-bold mb-3">Radical Transparency</h4>
                 <p className="text-muted-foreground leading-relaxed">
-                  Every voice matters. Transparency drives better work and stronger outcomes.
+                  We keep context open and decisions clear — so everyone knows how their work impacts the bigger picture.
                 </p>
               </div>
 
               <div className="text-center">
-                <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                  <div className="text-3xl">🚀</div>
-                </div>
-                <h4 className="text-xl font-bold mb-3">Growth Opportunities</h4>
+                <h4 className="text-xl font-bold mb-3">Ownership & Craft</h4>
                 <p className="text-muted-foreground leading-relaxed">
-                  We move fast, experiment often, and give everyone ownership of their craft.
+                  Each person owns their outcome. You'll see your work directly shaping launches, GTM campaigns, and developer communities.
                 </p>
               </div>
 
               <div className="text-center">
-                <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                  <div className="text-3xl">🔥</div>
-                </div>
-                <h4 className="text-xl font-bold mb-3">Purpose Over Perfection</h4>
+                <h4 className="text-xl font-bold mb-3">Progress Over Perfection</h4>
                 <p className="text-muted-foreground leading-relaxed">
-                  We don't chase vanity metrics — we care about building things that last.
+                  We value momentum. Ship, iterate, improve — that's how compounding happens.
+                </p>
+              </div>
+
+              <div className="text-center md:col-span-2">
+                <h4 className="text-xl font-bold mb-3">Builders Helping Builders</h4>
+                <p className="text-muted-foreground leading-relaxed">
+                  Our mission is simple — help other builders grow faster by translating complexity into clarity and adoption.
                 </p>
               </div>
             </div>
