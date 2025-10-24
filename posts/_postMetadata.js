@@ -1131,7 +1131,7 @@ let postMetaData = [
   description:"This case study explores how Infrasity helped a $23M Series A cloud startup drive user signups through developer marketing strategies. It highlights the importance of community engagement, problem-driven content, and providing actionable insights to technical audiences. Learn how value-first approaches can build trust with developers and effectively support growth without relying on traditional advertising.",
   ogImage: "/PostImages/case-study-series-a-cloud-developer-marketing/0.webp",
   publishedOn: "2025-10-03",
-  authorId: "author0005",
+  authorId: "author0001",
   category: "Case Studies",
   metaDescription:
     "Discover how Infrasity drove signups for a $23M Series A cloud startup using developer-focused marketing strategies and community engagement. Read case study now",
