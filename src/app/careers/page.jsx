@@ -20,6 +20,10 @@ export default function CareersPage() {
       <CareersHero />
       
       <div>
+        <JobListings />
+      </div>
+      
+      <div>
         <CompanyCulture />
       </div>
 

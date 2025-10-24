@@ -300,7 +300,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute">
-      <div className="navbar bg-slate-900 w-full sm:w-[80vw] md:max-w-6xl p-3 sm:p-5 mx-auto shadow-navshadow rounded-xl lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg:transform lg:-translate-x-1/2">
+      <div className={`navbar ${pathname === '/careers' ? 'bg-transparent' : 'bg-slate-900'} w-full sm:w-[80vw] md:max-w-6xl p-3 sm:p-5 mx-auto shadow-navshadow rounded-xl lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg:transform lg:-translate-x-1/2`}>
         <div className="navbar-start max-lg:visible invisible">
           <Menu as="div" className="absolute inline-block text-left">
             <div>

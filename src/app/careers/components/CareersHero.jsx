@@ -73,15 +73,15 @@ const CareersHero = () => {
   ];
 
   return (
-    <section ref={heroRef} className="relative pt-24 pb-20 overflow-hidden">
+    <section ref={heroRef} className="relative pt-32 pb-20 overflow-hidden">
 
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center">
 
           {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-8 bg-zinc-800 text-zinc-300 border border-zinc-700">
-            🚀 We're Hiring - Join Our Mission
+          <div className="inline-flex items-center px-8 py-4 rounded-full text-sm font-medium mb-16 bg-zinc-800 text-zinc-300 border border-zinc-700">
+            We're Hiring - Join Our Mission
           </div>
 
           {/* Main Title */}
