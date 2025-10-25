@@ -153,13 +153,3 @@ Our goal is to position Terrateam as a leader in the open-source infrastructure 
 📞 **[Book a call with us now](https://calendly.com/meet-shan)** to explore how Infrasity can help you achieve your content and growth goals.
 
 
-## About Infrasity 
-
-Infrasity specializes in helping engineering organizations drive growth
-through organic, technically credible content. Our in-house engineers
-work hands-on with products to create high-impact blogs, whitepapers,
-technical guides, and videos that resonate with developers. We help
-companies cut through the noise, delivering content that fuels growth
-and connects deeply with the target audience.
-
-![terrateam case study](/PostImages/terrateam-case-study/1.png)

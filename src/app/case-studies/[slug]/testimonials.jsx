@@ -177,8 +177,8 @@ export default function VideoTestimonials({
                   </div>
 
                   {/* Video Section */}
-                  <div className="lg:col-span-2 z-0 relative scale-108">
-                    <div className="relative aspect-[4/3] w-full max-w-md overflow-hidden rounded-xl border border-border bg-white shadow-navshadow">
+                  <div className="lg:col-span-2 z-0 relative">
+                    <div className="relative aspect-[4/3] w-full max-w-md mx-auto overflow-hidden rounded-xl border border-border bg-white shadow-navshadow">
                       {data[index].headshotSrc ? (
                         <Image
                           alt={data[index].headshotAlt || data[index].personName || "Testimonial image"}

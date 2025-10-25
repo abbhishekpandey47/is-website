@@ -20,17 +20,36 @@ export const Videos =[
   id: "case-2",
   eyebrow: "CASE STUDIES",
   heading: "Hear directly from our customers",
-  blurb: "Learn how Infrasity’s deep technical content helped solve engineers’ pain points and attract more prospects.",
+  blurb: "Learn how Infrasity's deep technical content helped solve engineers' pain points and attract more prospects.",
   cta: { label: "See case studies", href: "/case-studies/case-study-series-a-cloud-developer-marketing" },
 
   headshotSrc: "/playbook/firefly.png",
   headshotAlt: "Eric Peters",
   companyLogoSrc: "/playbook/firefly-bg.png",
   companyLogoAlt: "Firefly.ai",
-  quote:"Infrasity’s unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
+  quote:"Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
   personName: "Idoo Neeman",
   personTitle: "Co-Founder and CEO, Firefly.ai",
   videoUrl: "https://youtube.com/shorts/AgCQ176pfRU",
+}]
+
+//terrateam Video
+export const TerrateamVideos =[
+  {
+  id: "case-3",
+  eyebrow: "CASE STUDIES",
+  heading: "Hear directly from our customers",
+  blurb: "Learn how Infrasity's technical content strategy drives developer adoption and growth.",
+  cta: { label: "See case studies", href: "/case-studies" },
+
+  headshotSrc: "/Testimon/joshTerraTeam-new.jpg",
+  headshotAlt: "Josh",
+  companyLogoSrc: "/trustedby/terrateam.png",
+  companyLogoAlt: "Terrateam",
+  quote: "Infrasity's dedication to understanding our audience's needs was evident in their research on what Engineers look for in content. By focusing on teachings rather than selling, their content has empowered our users with new skills and solutions. Their work has significantly boosted our web and blog traffic, and we highly recommend their expertise.",
+  personName: "Josh",
+  personTitle: "Co-Founder, Terrateam",
+  videoUrl: "https://youtube.com/shorts/zq4ga3BbbGU?si=1NTay8-ss830v9fb",
 }]
 // Utility function to check if the post file exists
 const isValid = (slug) => {
@@ -221,7 +240,9 @@ const PostPage = (props) => {
           </div>{" "}
         </div>
         {postData.slug === "case-study-series-a-cloud-developer-marketing" ?
-        <div className="flex justify-center items-center w-[80%] mx-auto"><VideoTestimonials items={Videos}/></div> : null}
+        <div className="flex justify-center items-center w-[80%] mx-auto"><VideoTestimonials items={Videos}/></div> : 
+        postData.slug === "terrateam-case-study" ?
+        <div className="flex justify-center items-center w-[80%] mx-auto"><VideoTestimonials items={TerrateamVideos}/></div> : null}
         
         {/* More Case Studies Section */}
         <div className="w-[80%] mx-auto mt-16">
