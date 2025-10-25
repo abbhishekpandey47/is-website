@@ -12,6 +12,7 @@ import Outline from "./outline";
 import Analytics from "./analytics";
 import VideoTestimonials from "./testimonials";
 import MoreCaseStudies from "../../../Components/MoreCaseStudies";
+import CTA from "./cta";
 
 
 //firefly Video
@@ -244,6 +245,11 @@ const PostPage = (props) => {
         postData.slug === "terrateam-case-study" ?
         <div className="flex justify-center items-center w-[80%] mx-auto"><VideoTestimonials items={TerrateamVideos}/></div> : null}
         
+        {/* CTA Section */}
+        <div className="w-[80%] mx-auto">
+          <CTA />
+        </div>
+
         {/* More Case Studies Section */}
         <div className="w-[80%] mx-auto mt-16">
           <MoreCaseStudies currentSlug={postData.slug} />
