@@ -168,13 +168,13 @@ const CompanyCulture = () => {
               </h3>
               <div className="text-gray-400 text-[15px] leading-relaxed max-w-4xl mx-auto space-y-4">
                 <p>
-                  Infrasity began in early 2024 as a weekend experiment. Back then, it was just Shan, balancing a full-time job and helping one client with developer-focused content.
+                  Infrasity began in early 2024 as a weekend experiment. Back then, it was just Shan (founder), balancing a full-time job and helping one client with developer-focused content.
                 </p>
                 <p>
-                  By September 2024, that side project turned into something real. The 2BHK apartment where it started became our first office — and the foundation of a team that believes in engineering-led growth.
+                  By September 2024, that side project turned into something real. The 2BHK apartment where it started became our first office and the foundation of a team that believes in engineering-led growth.
                 </p>
                 <p>
-                  Today, Infrasity works with 15+ DevTool, Infra, and AI startups — helping them scale through content, GTM, and DevRel.
+                  Today, Infrasity works with 15+ DevTool, Infra, and AI startups helping them scale through content, GTM, and DevRel.
                 </p>
               </div>
             </div>

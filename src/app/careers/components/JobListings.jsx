@@ -200,6 +200,69 @@ const JobListings = () => {
         ],
         howToApply: "Send your CV and a link to your design portfolio to contact@infrasity.com"
       }
+    },
+    {
+      id: 4,
+      title: "Search Engine Optimization Specialist",
+      team: "Marketing",
+      location: "New Delhi",
+      type: "Full-time",
+      experience: "1+ years",
+      description: "Drive organic growth through technical SEO, keyword mapping, and backlink strategies for our service pages and technical content.",
+      requirements: [
+        "Minimum 1 year of SEO experience (preferably in SaaS / B2B / tech domains)",
+        "Strong command of Ahrefs, Google Search Console, and Google Analytics 4",
+        "Hands-on experience with keyword mapping, backlink outreach, and on-page optimization",
+        "Understanding of content SEO — able to collaborate with technical writers and growth teams",
+        "Basic familiarity with developer audiences or technical content is a plus"
+      ],
+      benefits: [
+        "Competitive salary and equity",
+        "Flexible work arrangements",
+        "Professional development budget",
+        "Top-tier health insurance"
+      ],
+      posted: "1 day ago",
+      fullDescription: {
+        aboutUs: "At Infrasity, we assist Early and Growth SaaS Startups in achieving their goals through Technical Content Marketing Strategies that boost user growth. Our expertise spans leading tech areas such as AI, MLOps, Observability, Platform Engineering, DevOps, and more. We provide infrastructure and cloud companies with a strong technical documentation base and a dedicated developer technical content team.",
+        jobDescription: "We're looking for an SEO/GEO Specialist who understands both technical SEO and content-driven growth. You'll be responsible for ensuring all of our service pages, blog posts, and target keywords are ranking across Google & LLMs, with a special focus on link-building and keyword mapping for each service area.",
+        keyResponsibilities: {
+          "SEO Strategy & Execution": [
+            "Audit existing service pages (like our Reddit Marketing page) and ensure they rank for high-value keywords",
+            "Create and execute a keyword-to-page strategy ensuring every Infrasity service page ranks on the first page",
+            "Identify and implement backlink opportunities for all service and blog pages through outreach, guest posting, and partnerships"
+          ],
+          "Analytics & Optimization": [
+            "Track and improve keyword performance, CTR, and organic traffic via GA4 and Google Search Console",
+            "Collaborate with the growth and content teams to optimize meta titles, headings, and internal linking structure",
+            "Monitor and report on SEO health (Core Web Vitals, crawlability, indexing)"
+          ]
+        },
+        qualifications: {
+          "Must-Haves": [
+            "Minimum 1 year of SEO experience (preferably in SaaS / B2B / tech domains)",
+            "Strong command of Ahrefs, Google Search Console, and Google Analytics 4",
+            "Hands-on experience with keyword mapping, backlink outreach, and on-page optimization"
+          ],
+          "Nice-to-Haves": [
+            "Understanding of content SEO — able to collaborate with technical writers and growth teams",
+            "Basic familiarity with developer audiences or technical content",
+            "Experience with technical content optimization"
+          ]
+        },
+        successMetrics: [
+          "All service pages (Reddit, Developer Marketing, Documentation, etc.) ranking within top 10 results",
+          "100+ backlinks built to core pages from credible domains within 3 months",
+          "25% improvement in organic traffic MoM",
+          "Each target keyword mapped and tracked to its respective landing page"
+        ],
+        whyJoin: [
+          "You'll work directly with the founder and growth team",
+          "You'll get exposure to DevTools, Infra, and AI startups worldwide",
+          "You'll own SEO end-to-end — from keyword strategy to backlinking and analytics"
+        ],
+        howToApply: "Send your CV and examples of SEO campaigns you've led to careers@infrasity.com"
+      }
     }
   ];
 
@@ -253,16 +316,76 @@ const JobListings = () => {
     <section ref={sectionRef} id="open-positions" className="py-24">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="mb-8">
           <h2 className="text-3xl font-bold text-white">
             Open Positions ({filteredJobs.length})
           </h2>
-          <div className="flex items-center gap-2 text-zinc-400">
-            <Filter className="w-4 h-4" />
-            <span>All Jobs</span>
-          </div>
         </div>
 
+        {/* Filters */}
+        <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 mb-8">
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* Search */}
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400 w-4 h-4" />
+                <input
+                  type="text"
+                  placeholder="Search jobs..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-400 focus:outline-none focus:border-purple-500"
+                />
+              </div>
+            </div>
+
+            {/* Team Filter */}
+            <div className="flex gap-2">
+              {teams.map((team) => (
+                <button
+                  key={team}
+                  onClick={() => setSelectedTeam(team)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    selectedTeam === team
+                      ? 'bg-purple-500 text-white'
+                      : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+                  }`}
+                >
+                  {team}
+                </button>
+              ))}
+            </div>
+
+            {/* Location Filter */}
+            <div className="flex gap-2">
+              {locations.map((location) => (
+                <button
+                  key={location}
+                  onClick={() => setSelectedLocation(location)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    selectedLocation === location
+                      ? 'bg-purple-500 text-white'
+                      : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+                  }`}
+                >
+                  {location}
+                </button>
+              ))}
+            </div>
+
+            {/* Clear Filters */}
+            <button
+              onClick={() => {
+                setSearchTerm("");
+                setSelectedTeam("All Teams");
+                setSelectedLocation("All Locations");
+              }}
+              className="px-4 py-2 border border-zinc-700 rounded-lg text-zinc-300 hover:bg-zinc-800 transition-colors"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
 
         {/* Job Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -304,17 +427,6 @@ const JobListings = () => {
                     {job.description}
                   </p>
 
-                  {/* Apply Button */}
-
-                  <div onClick={(e) => e.stopPropagation()}>
-                    <CalendarBooking 
-                      buttonText="Apply Now" 
-                      width="w-full" 
-                      textSize="text-sm"
-                      height="h-10"
-                    />
-
-                  </div>
                 </div>
               </div>
             </div>
@@ -471,11 +583,6 @@ const JobListings = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-zinc-800">
-                  <CalendarBooking 
-                    buttonText="Apply Now" 
-                    width="w-52" 
-                  />
-
                   <button
                     onClick={closeModal}
                     className="px-8 py-4 border border-zinc-700 rounded-xl font-semibold text-white hover:bg-zinc-800 transition-all duration-300"
