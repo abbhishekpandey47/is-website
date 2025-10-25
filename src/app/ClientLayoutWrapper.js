@@ -17,7 +17,6 @@ import mixpanel from "mixpanel-browser";
 export function ClientLayoutWrapper({ children }) {
 
   useEffect(() => {
-    console.log('intial')
     initMixpanel();
   }, []);
 
@@ -40,20 +39,24 @@ export function ClientLayoutWrapper({ children }) {
   const CrispWithNoSSR = dynamic(() => import("../Components/chatbot"));
 
   const pathname = usePathname();
+  
+  // Add safety check for pathname
+  const safePathname = pathname || '';
+  
   const hideNavbar =
-    pathname === "/technical-writing-services-b2b-saas" ||
-    pathname.startsWith("/threadflow") ||
-    pathname.startsWith("/auth");
+    safePathname === "/technical-writing-services-b2b-saas" ||
+    safePathname.startsWith("/threadflow") ||
+    safePathname.startsWith("/auth");
   const hideNavBar2 =
-    pathname === "/services/webflow-agency" ||
-    pathname.startsWith("/threadflow") ||
-    pathname.startsWith("/auth");
-  const hideNavBar3 = pathname === "/tools/reddit-comment-generator";
+    safePathname === "/services/webflow-agency" ||
+    safePathname.startsWith("/threadflow") ||
+    safePathname.startsWith("/auth");
+  const hideNavBar3 = safePathname === "/tools/reddit-comment-generator";
   const hideNavBarAndFooter =
-    pathname === "/tools/reddit-tools" ||
-    pathname.startsWith("/auth") ||
-    pathname.startsWith("/threadflow");
-  const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2 && pathname !== "/careers";
+    safePathname === "/tools/reddit-tools" ||
+    safePathname.startsWith("/auth") ||
+    safePathname.startsWith("/threadflow");
+  const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2 && safePathname !== "/careers";
   const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar;
 
   return (
