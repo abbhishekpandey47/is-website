@@ -38,7 +38,7 @@ export const Videos = [
     blurb: "Discover how Infrasity's technical content strategy drives developer adoption and growth.",
     cta: { label: "See case studies", href: "/case-studies" },
 
-    headshotSrc: "/Testimon/joshTerraTeam.jpg",
+    headshotSrc: "/Testimon/joshTerraTeam-new.jpg",
     headshotAlt: "Josh",
     companyLogoSrc: "/trustedby/terrateam.png",
     companyLogoAlt: "Terrateam",
