@@ -22,7 +22,6 @@ import {
 } from "../../Components/ui/pagination";
 
 import { useSearchParams } from "next/navigation";
-import NewsletterBlogs from "./NewsletterBlogs";
 
 import Image from "next/image";
 import authorData from "../../../posts/_authorData";
@@ -268,7 +267,6 @@ const CaseStudiesPage = () => {
           </PaginationContent>
         </Pagination>
       </div>
-      <NewsletterBlogs />
     </div>
   );
 };
