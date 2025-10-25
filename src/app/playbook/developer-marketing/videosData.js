@@ -30,5 +30,21 @@ export const Videos = [
     personName: "Ben Hewison",
     personTitle: "Content Marketing Manager, Cycloid",
     videoUrl: "https://youtu.be/19Nz5OxaTtc",
+  },
+  {
+    id: "case-3",
+    eyebrow: "CASE STUDIES",
+    heading: "Hear directly from our customers",
+    blurb: "Discover how Infrasity's technical content strategy drives developer adoption and growth.",
+    cta: { label: "See case studies", href: "/case-studies" },
+
+    headshotSrc: "/Testimon/joshTerraTeam.jpg",
+    headshotAlt: "Josh",
+    companyLogoSrc: "/trustedby/terrateam.png",
+    companyLogoAlt: "Terrateam",
+    quote: "Infrasity's dedication to understanding our audience's needs was evident in their research on what Engineers look for in content. By focusing on teachings rather than selling, their content has empowered our users with new skills and solutions. Their work has significantly boosted our web and blog traffic, and we highly recommend their expertise.",
+    personName: "Josh",
+    personTitle: "Co-Founder, Terrateam",
+    videoUrl: "https://youtube.com/shorts/zq4ga3BbbGU?si=1NTay8-ss830v9fb",
   }
 ];
