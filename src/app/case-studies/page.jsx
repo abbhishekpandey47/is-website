@@ -22,6 +22,7 @@ import {
 } from "../../Components/ui/pagination";
 
 import { useSearchParams } from "next/navigation";
+import CTA from "../../Components/CTA/CTA";
 
 import Image from "next/image";
 import authorData from "../../../posts/_authorData";
@@ -266,6 +267,15 @@ const CaseStudiesPage = () => {
             )}
           </PaginationContent>
         </Pagination>
+      </div>
+
+      {/* CTA Section */}
+      <div className="w-[80%] mx-auto mt-16">
+        <CTA 
+          title="Ready to achieve similar results for your startup?"
+          description="Let's discuss how we can help you scale through technical content and developer marketing."
+          buttonText="Book a Call"
+        />
       </div>
     </div>
   );
