@@ -141,11 +141,11 @@ const PostPage = (props) => {
               />
             </div>
           </div>
-          <div className="w-[70%] min-[1900px]:w-[80%] max-lg:w-[80%] max-md:w-[96%] max-sm:ml-5 pt-2 lg:pt-15 flex justify-center flex-col items-start">
+          <div className="w-[70%] min-[1900px]:w-[80%] max-lg:w-[80%] max-md:w-[96%] max-sm:w-[90%] max-sm:mx-auto pt-2 lg:pt-15 flex justify-center flex-col items-center">
             <Analytics postData={postData} />
 
             <article className="text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto">
-              <div className="max-lg:w-[84vw] min-[1900px]:w-[60vw] max-[1537px]:w-[50vw]">
+              <div className="max-lg:w-[84vw] min-[1900px]:w-[60vw] max-[1537px]:w-[50vw] max-sm:w-[95vw]">
                 <Markdown
                   options={{
                     overrides: {
