@@ -19,7 +19,16 @@ let postMetaData = [
         publishedOn: "2024-11-19",
         authorId: "author0001",
         category: "Case Studies",
-        metaDescription: "Discover how Infrasity partnered with Terrateam to drive a 15% traffic boost in just 14 days through strategic, high-impact content focused on keyword research, SEO, and developer personas."
+        metaDescription: "Discover how Infrasity partnered with Terrateam to drive a 15% traffic boost in just 14 days through strategic, high-impact content focused on keyword research, SEO, and developer personas.",
+        companyHighlights: {
+            company: "Terrateam",
+            headquarters: "Netherlands",
+            funding: "Bootstrapped",
+            industry: "DevTools / Infra (IaC)",
+            employees: "1–10",
+            cloud: "AWS · Terraform · Terragrunt · GitHub",
+            website: "terrateam.io"
+        }
     },
     {
         title: "How to Use React Developer Tools for Debugging and Performance Optimization",
@@ -354,7 +363,15 @@ let postMetaData = [
   category: "Case Studies",
   metaDescription:
     "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions.",
- 
+  companyHighlights: {
+    company: "Middleware",
+    headquarters: "United States",
+    funding: "Not specified",
+    industry: "DevTools / Observability",
+    employees: "Not specified",
+    cloud: "Multi-cloud · LLM Observability",
+    website: "middleware.io"
+  }
 },
   {
       title: "8x Growth Journey: How Developer-Focused Technical Content Scaled a B2B Enterprise SaaS Business",
@@ -366,19 +383,19 @@ let postMetaData = [
       authorId: "author0001",
       category: "Case Studies",
       metaDescription: "Discover how we helped a B2B SaaS company achieve 5x growth with developer-focused content. This case study shares their journey and our winning strategies.",
-       stats: [
-    {
-      title: "Organic Traffic",
-      value: "+828.13%",
-      subtext: "(64 to 594 - 8x Growth)",
-      valueClass: "text-xl md:text-4xl font-semibold",
-    },
-    {
-      title: "Organic Keywords",
-      value: "+715.09%",
-      subtext: "(106 to 865 - 7x Growth)",
-      valueClass: "text-xl md:text-4xl font-semibold",
-    },
+      stats: [
+        {
+          title: "Organic Traffic",
+          value: "+828.13%",
+          subtext: "(64 to 594 - 8x Growth)",
+          valueClass: "text-xl md:text-4xl font-semibold",
+        },
+        {
+          title: "Organic Keywords",
+          value: "+715.09%",
+          subtext: "(106 to 865 - 7x Growth)",
+          valueClass: "text-xl md:text-4xl font-semibold",
+        },
     {
       title: "Organic Keywords in Top 10",
       value: "+290%",
@@ -386,6 +403,15 @@ let postMetaData = [
       valueClass: "text-xl md:text-4xl font-semibold",
     },
   ],
+  companyHighlights: {
+    company: "Scalekit",
+    headquarters: "Not specified",
+    funding: "Not specified",
+    industry: "DevTools / Identity Management",
+    employees: "Not specified",
+    cloud: "SCIM · SAML · SSO · OAuth",
+    website: "scalekit.com"
+  }
   },
   {
     title: "Content Marketing Strategy for SaaS Companies: a Masterclass in SaaS Marketing",
@@ -1166,8 +1192,16 @@ let postMetaData = [
       subtext: "(191 Sessions │ 508 Views)",
       valueClass: "text-xl md:text-4xl font-semibold",
     },
-]
-    
+],
+  companyHighlights: {
+    company: "Firefly.ai",
+    headquarters: "United States",
+    funding: "Series A ($23M)",
+    industry: "DevTools / Cloud Infrastructure",
+    employees: "11–50",
+    cloud: "AWS · Azure · Kubernetes · Terraform · OpenTofu",
+    website: "firefly.ai"
+  }
 },
 {
   title: "Developer Marketing Strategy: A Complete Guide for 2025",

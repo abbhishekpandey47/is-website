@@ -85,10 +85,10 @@ export default React.memo(function HeadBanner({ postData }) {
         <Image
           width={900}
           height={900}
-          loading="lazy" // Lazy loading for performance
+          loading="lazy"
           priority={false}
           src={postData.ogImage || "/blog_home/blog_home.png"}
-          alt={`Illustration for ${postData.title || "the blog"}`} // Improved alt text for accessibility
+          alt={`Illustration for ${postData.title || "the blog"}`}
           className="rounded-lg w-full h-auto max-lg:hidden"
         />
       </div>
