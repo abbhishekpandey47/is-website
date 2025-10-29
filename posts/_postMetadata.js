@@ -368,7 +368,7 @@ let postMetaData = [
     headquarters: "United States",
     funding: "$6.5M",
     industry: "DevTools / Observability",
-    employees: "Not specified",
+    employees: "50-100",
     cloud: "developer use-case blogs + developer relations services",
     website: "middleware.io"
   }
