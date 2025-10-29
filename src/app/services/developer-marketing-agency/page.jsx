@@ -14,6 +14,7 @@ import IntegrationsSection from "./IntegrationsSection";
 import RealResult from "./realresults";
 import VideoTestimonials from "../../playbook/developer-marketing/testimonials";
 import { Videos } from "../../playbook/developer-marketing/videosData";
+import SuccessStories from "../../../Components/SuccessStories";
 
 export default function Page() {
   return (
@@ -96,6 +97,15 @@ export default function Page() {
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10"></div>
 
         <Testimonials />
+      </div>
+      <div
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10 mb-12"></div>
+        <SuccessStories />
       </div>
       <div
         style={{
