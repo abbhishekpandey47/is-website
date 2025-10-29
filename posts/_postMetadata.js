@@ -26,7 +26,7 @@ let postMetaData = [
             funding: "Bootstrapped",
             industry: "DevTools / Infra (IaC)",
             employees: "1–10",
-            cloud: "AWS · Terraform · Terragrunt · GitHub",
+            cloud: "developer use-case blogs + developer relations services",
             website: "terrateam.io"
         }
     },
@@ -366,10 +366,10 @@ let postMetaData = [
   companyHighlights: {
     company: "Middleware",
     headquarters: "United States",
-    funding: "Not specified",
+    funding: "$6.5M",
     industry: "DevTools / Observability",
     employees: "Not specified",
-    cloud: "Multi-cloud · LLM Observability",
+    cloud: "developer use-case blogs + developer relations services",
     website: "middleware.io"
   }
 },
@@ -405,11 +405,11 @@ let postMetaData = [
   ],
   companyHighlights: {
     company: "Scalekit",
-    headquarters: "Not specified",
-    funding: "Not specified",
+    headquarters: "Delaware, United States",
+    funding: "Seed ($5.5M)",
     industry: "DevTools / Identity Management",
     employees: "Not specified",
-    cloud: "SCIM · SAML · SSO · OAuth",
+    cloud: "developer use-case blogs + developer relations services",
     website: "scalekit.com"
   }
   },
@@ -1199,7 +1199,7 @@ let postMetaData = [
     funding: "Series A ($23M)",
     industry: "DevTools / Cloud Infrastructure",
     employees: "11–50",
-    cloud: "AWS · Azure · Kubernetes · Terraform · OpenTofu",
+    cloud: "developer use-case blogs + developer relations services + b2b video production",
     website: "firefly.ai"
   }
 },
