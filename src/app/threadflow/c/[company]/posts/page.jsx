@@ -800,7 +800,6 @@ const PostsPage = () => {
                           <SelectItem value="postUnderApproval">Post Under Approval</SelectItem>
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
-                          <SelectItem value="underModeration">Under Moderation</SelectItem>
                           <SelectItem value="reposted">Reposted</SelectItem>
                           
                           <SelectItem value="notPosted">Not Posted</SelectItem>

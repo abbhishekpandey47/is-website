@@ -44,7 +44,7 @@ const AddPostPage = () => {
     targetedSubreddit: "",
     postURL: "",
     redditUsername: "",
-    postedCommentStatus: "underModeration",
+    postedCommentStatus: "notPosted",
     companyId:""
   });
 
@@ -493,7 +493,6 @@ useEffect(() => {
                           <SelectItem value="commentUnderApproval">Comment Under Approval</SelectItem>
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
-                          <SelectItem value="underModeration">Under Moderation</SelectItem>
                           <SelectItem value="reposted">Reposted</SelectItem>
                           <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>

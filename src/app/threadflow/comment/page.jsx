@@ -39,7 +39,7 @@ const PostsPage = () => {
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [companiesList , setCompaniesList] = useState([]);
-  const [selectedCompanyId , setSelectedCompanyId] = useState("all");
+  const [selectedCompanyId , setSelectedCompanyId] = useState("select");
   
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
@@ -159,6 +159,7 @@ const PostsPage = () => {
  
   
 const companies = [
+   { id: "select", name: "Select Company" },
   { id: "all", name: "All Companies" },
   ...companiesList.map((company) => ({
     id: company.id,
@@ -252,7 +253,7 @@ const getStatusBadge = (status) => {
     targetedSubreddit: post.targeted_subreddit || "",
     postURL: post.post_url || "",
     redditUsername: post.reddit_username || "",
-    postedCommentStatus: post.posted_comment_status || "underModeration",
+    postedCommentStatus: post.posted_comment_status || "notPosted",
     totalViews : post.total_views
   });
   setIsEditModalOpen(true);
@@ -272,7 +273,7 @@ const getStatusBadge = (status) => {
       postedLink: "",
       currentStatus: "pending",
       redditUsername: "",
-      postedCommentStatus: "underModeration",
+      postedCommentStatus: "notPosted",
     });
   };
 
@@ -306,7 +307,7 @@ const getStatusBadge = (status) => {
           client_feedback: editFormData.clientFeedback || null,
           post_url: editFormData.postURL || null,
           reddit_username: editFormData.redditUsername || null,
-          posted_comment_status: editFormData.postedCommentStatus || "underModeration",
+          posted_comment_status: editFormData.postedCommentStatus || "notPosted",
           total_views : editFormData.totalViews || null,
         }),
       });
@@ -488,12 +489,12 @@ const getStatusBadge = (status) => {
                     onValueChange={setSelectedCompanyId}
                   >
                     <SelectTrigger className="w-48">
-                      <SelectValue placeholder="All Companies" />
+                          <SelectValue placeholder="Select Company" />
                     </SelectTrigger>
                     <SelectContent>
                       {companies.map((company) => (
                         <SelectItem key={company.id} value={company.id}>
-                          {company.name === "all" ? "All Comapnies" : company.name}
+                          {company.name === "all" ? "All Companies" : company.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -811,7 +812,6 @@ const getStatusBadge = (status) => {
                           <SelectItem value="commentUnderApproval">Comment Under Approval</SelectItem>
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
-                          <SelectItem value="underModeration">Under Moderation</SelectItem>
                           <SelectItem value="reposted">Reposted</SelectItem>
                           <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>
