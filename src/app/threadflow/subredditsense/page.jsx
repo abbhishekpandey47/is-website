@@ -2,17 +2,18 @@
 import { auth } from '@/lib/firebaseClient';
 import { onAuthStateChanged } from 'firebase/auth';
 import { BarChart3, RefreshCw, Search } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from "../../../Components/ui/button";
 import { SidebarTrigger } from "../../../Components/ui/sidebar";
 import { UserProfile } from "../../../Components/UserProfile";
 // Use original SubredditSense components for consistent UI
+import Pagination from '@/app/threadflow/components/pagination';
+import AllThreadsTable from '@/app/threadflow/subredditsense/components/AllThreadsTable';
 import TopicClusters from '@/app/threadflow/subredditsense/components/TopicClusters';
 import MentionsChart from '@/app/tools/reddit-tools/components/subredditsense/MentionsChart';
 import MetricCard from '@/app/tools/reddit-tools/components/subredditsense/MetricCard';
 import SubredditHeatmap from '@/app/tools/reddit-tools/components/subredditsense/SubredditHeatmap';
 import TopThreadsTable from '@/app/tools/reddit-tools/components/subredditsense/TopThreadsTable';
-import AllThreadsTable from '@/app/threadflow/subredditsense/components/AllThreadsTable';
 import { getCache, setCache } from '@/lib/cacheClient';
 import { Eye, MessageSquare, TrendingUp, Users } from 'lucide-react';
 
@@ -31,8 +32,13 @@ async function apiLinkCompany(firebaseUserId, companyName) {
 }
 async function apiFetchFull(firebaseUserId, companyId, companyName) {
   const token = await auth.currentUser?.getIdToken?.();
-  const res = await fetch('/api/threadflow/reddit/fetch', { method: 'POST', headers: { 'Content-Type': 'application/json', ...(token? { Authorization: `Bearer ${token}` } : {}) }, body: JSON.stringify({ companyId, companyName, fullRefresh: true, maxBatches: 5 }) });
-  if (!res.ok) throw new Error('Refresh failed');
+  // Do incremental ingestion (use stored cursors) and keep each invocation small
+  const res = await fetch('/api/threadflow/reddit/fetch', { method: 'POST', headers: { 'Content-Type': 'application/json', ...(token? { Authorization: `Bearer ${token}` } : {}) }, body: JSON.stringify({ companyId, companyName, fullRefresh: false, maxBatches: 1 }) });
+  if (!res.ok) {
+    let msg = 'Refresh failed';
+    try { msg = (await res.text()) || msg; } catch {}
+    throw new Error(msg);
+  }
   return res.json();
 }
 async function apiJob(jobId){
@@ -41,9 +47,10 @@ async function apiJob(jobId){
   if(!res.ok) throw new Error('Job poll failed');
   return res.json();
 }
-async function apiDashboard(companyId) {
+async function apiDashboard(companyId, page = 1, pageSize = 25) {
   const token = await auth.currentUser?.getIdToken?.();
-  const res = await fetch(`/api/threadflow/reddit/dashboard?companyId=${encodeURIComponent(companyId)}&legacy=1&range=all`, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
+  // Limit to last 365 days by default to keep responses fast and avoid function timeouts on large datasets
+  const res = await fetch(`/api/threadflow/reddit/dashboard?companyId=${encodeURIComponent(companyId)}&legacy=1&range=365&page=${page}&pageSize=${pageSize}`, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
   if (!res.ok) throw new Error('Dashboard fetch failed');
   return res.json();
 }
@@ -103,6 +110,13 @@ export default function ThreadflowSubredditSensePage() {
   const [jobId, setJobId] = useState(null); // reserved if we later display status
   const [updatedFields, setUpdatedFields] = useState(new Set());
   const [hadInitialData, setHadInitialData] = useState(!!dashboard);
+  // Control flags to avoid loops and double ingestion
+  const initResolvedRef = useRef(false);
+  const userOverrideRef = useRef(false);
+  const bgIngestingRef = useRef(false);
+  // Pagination state for allThreads
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(25);
   const friendlyError = error ? (() => {
     // If we already have a zero-mentions dashboard, suppress transient network errors
     if (dashboard && dashboard.metrics && dashboard.metrics.totalMentions === 0) return null;
@@ -124,7 +138,7 @@ export default function ThreadflowSubredditSensePage() {
           if(status==='success') setIngesting(false); else if(status==='running') setIngesting(true);
         });
       }
-      const dash = await apiDashboard(cid);
+  const dash = await apiDashboard(cid, page, pageSize);
   applyDashboardUpdate(dash);
       setLastUpdated(dash.lastIngestedAt || new Date().toISOString());
       if (firebaseUser) {
@@ -141,10 +155,17 @@ export default function ThreadflowSubredditSensePage() {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       setFirebaseUser(user);
-      if (user) {
-        // Prefer the most recently linked company from server over heuristics
+      if (user && !initResolvedRef.current && !userOverrideRef.current) {
         (async () => {
           try {
+            // 1) Local preference wins (fast)
+            const stored = typeof window !== 'undefined' ? localStorage.getItem(`lastSelectedBrand_${user.uid}`) : null;
+            if (stored && stored.trim()) {
+              setCompanyName(stored.trim());
+              initResolvedRef.current = true;
+              return;
+            }
+            // 2) Server most-recent linked
             const t = await user.getIdToken();
             const res = await fetch('/api/threadflow/reddit/my-companies', { headers: { Authorization: `Bearer ${t}` } });
             if (res.ok) {
@@ -153,27 +174,26 @@ export default function ThreadflowSubredditSensePage() {
               if (first?.name) {
                 setCompanyName(first.name);
                 try { localStorage.setItem(`lastSelectedBrand_${user.uid}`, first.name); } catch {}
-              } else if (!companyName) {
-                // Fallbacks: localStorage, then derived from email
-                const stored = typeof window !== 'undefined' ? localStorage.getItem(`lastSelectedBrand_${user.uid}`) : null;
-                if (stored && stored.trim()) setCompanyName(stored.trim());
-                else setCompanyName(deriveDefaultCompany(user.email || ''));
+                initResolvedRef.current = true;
+                return;
               }
-            } else if (!companyName) {
-              const stored = typeof window !== 'undefined' ? localStorage.getItem(`lastSelectedBrand_${user.uid}`) : null;
-              if (stored && stored.trim()) setCompanyName(stored.trim());
-              else setCompanyName(deriveDefaultCompany(user.email || ''));
             }
-          } catch {
-            if (!companyName) setCompanyName(deriveDefaultCompany(user.email || ''));
-          }
+            // 3) Fallback: derive from email domain
+            const derived = deriveDefaultCompany(user.email || '');
+            if (derived) {
+              setCompanyName(derived);
+              initResolvedRef.current = true;
+              return;
+            }
+          } catch {}
+          // If everything fails, leave as-is
+          initResolvedRef.current = true;
         })();
-
       }
       setLoading(false);
     });
     return () => unsub();
-  }, [companyName]);
+  }, []);
 
   useEffect(() => {
     if (!firebaseUser || !companyName) return;
@@ -193,7 +213,7 @@ export default function ThreadflowSubredditSensePage() {
             try {
               const link = await apiLinkCompany(firebaseUser.uid, companyName);
               if (cancelled) return;
-              const dashFresh = await apiDashboard(link.company.id);
+              const dashFresh = await apiDashboard(link.company.id, page, pageSize);
               if (cancelled) return;
               applyDashboardUpdate(dashFresh);
               setLastUpdated(dashFresh.lastIngestedAt || link.company.last_ingested_at || null);
@@ -221,19 +241,62 @@ export default function ThreadflowSubredditSensePage() {
         if (cancelled) return;
         setCompanyId(link.company.id);
         setLastUpdated(link.company.last_ingested_at || null);
-        if (link.stale) await triggerFullRefresh(link.company.id);
-        const dash = await apiDashboard(link.company.id);
+        // Load DB state to show immediately
+  const dash = await apiDashboard(link.company.id, page, pageSize);
         if (!cancelled) {
           applyDashboardUpdate(dash);
           setLastUpdated(dash.lastIngestedAt || link.company.last_ingested_at || null);
           setCache(cacheKey, { data: dash, lastUpdated: dash.lastIngestedAt }, 5*60*1000, 'local');
           memDashCache.set(cacheKey, { data: dash, companyId: link.company.id, lastUpdated: dash.lastIngestedAt, fetchedAt: Date.now(), expires: Date.now() + 5*60*1000 });
         }
+        // Background incremental update logic: if stale OR empty, ingest small batches and progressively refresh UI
+        const isEmpty = !dash?.metrics || (dash.metrics.totalMentions || 0) === 0;
+        if ((link.stale || isEmpty) && !bgIngestingRef.current && !cancelled) {
+          bgIngestingRef.current = true;
+          setIngesting(true);
+          try {
+            // Attempt up to 3 small batches in background
+            for (let i = 0; i < 3; i++) {
+              if (cancelled) break;
+              const resp = await apiFetchFull(firebaseUser.uid, link.company.id, companyName || '');
+              const added = (resp?.added?.posts || 0) + (resp?.added?.comments || 0);
+              // Refresh UI after each batch
+              const dashFresh = await apiDashboard(link.company.id, page, pageSize);
+              if (cancelled) break;
+              applyDashboardUpdate(dashFresh);
+              setLastUpdated(dashFresh.lastIngestedAt || link.company.last_ingested_at || null);
+              setCache(cacheKey, { data: dashFresh, lastUpdated: dashFresh.lastIngestedAt }, 5*60*1000, 'local');
+              memDashCache.set(cacheKey, { data: dashFresh, companyId: link.company.id, lastUpdated: dashFresh.lastIngestedAt, fetchedAt: Date.now(), expires: Date.now() + 5*60*1000 });
+              if (!added) break; // stop if nothing new was added
+              // small pause between batches
+              await new Promise(r => setTimeout(r, 800));
+            }
+          } catch (e) {
+            // Background errors should not surface unless there is no data at all
+            if (!dashboard) setError(e.message || 'Background update failed');
+          } finally {
+            bgIngestingRef.current = false;
+            setIngesting(false);
+          }
+        }
       } catch (e) { if (!cancelled) setError(e.message); }
       finally { if (!cancelled) setFetching(false); }
     })();
     return () => { cancelled = true; };
   }, [firebaseUser, companyName]);
+
+  // Refetch current page when pagination changes
+  useEffect(() => {
+    if (!firebaseUser || !companyId) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const dash = await apiDashboard(companyId, page, pageSize);
+        if (!cancelled) applyDashboardUpdate(dash);
+      } catch (e) { if (!cancelled) setError(e.message); }
+    })();
+    return () => { cancelled = true; };
+  }, [page, pageSize, companyId, firebaseUser]);
 
   function applyDashboardUpdate(nextDash){
     setHadInitialData(true);
@@ -268,6 +331,7 @@ export default function ThreadflowSubredditSensePage() {
     try {
       const newName = customCompany.trim();
       setCompanyName(newName);
+      userOverrideRef.current = true; // lock in user's choice; don't override from server
       // Persist user preference locally (session-level persistence)
       try { if (firebaseUser) localStorage.setItem(`lastSelectedBrand_${firebaseUser.uid}`, newName); } catch {}
     } finally {
@@ -323,7 +387,30 @@ export default function ThreadflowSubredditSensePage() {
             <Button disabled={saving || !customCompany.trim()} onClick={handleRelink}>
               <Search className="w-4 h-4 mr-1" /> {saving ? 'Searching...' : 'Search Mentions'}
             </Button>
-            <Button variant="outline" disabled={fetching || refreshing || ingesting} onClick={() => { if(companyId && firebaseUser) triggerFullRefresh(companyId); }}>
+            <Button variant="outline" disabled={fetching || refreshing || ingesting} onClick={async () => {
+              if (!companyId || !firebaseUser) return;
+              setError(null);
+              setRefreshing(true);
+              try {
+                // Manually run a short background ingestion burst with progressive UI updates
+                for (let i = 0; i < 3; i++) {
+                  const resp = await apiFetchFull(firebaseUser.uid, companyId, companyName || '');
+                  const added = (resp?.added?.posts || 0) + (resp?.added?.comments || 0);
+                  const dashFresh = await apiDashboard(companyId, page, pageSize);
+                  applyDashboardUpdate(dashFresh);
+                  setLastUpdated(dashFresh.lastIngestedAt || null);
+                  const key = `dash_${firebaseUser.uid}_${companyName}`;
+                  setCache(key, { data: dashFresh, lastUpdated: dashFresh.lastIngestedAt }, 5*60*1000, 'local');
+                  memDashCache.set(key, { data: dashFresh, companyId, lastUpdated: dashFresh.lastIngestedAt, fetchedAt: Date.now(), expires: Date.now() + 5*60*1000 });
+                  if (!added) break;
+                  await new Promise(r => setTimeout(r, 800));
+                }
+              } catch (e) {
+                setError(e.message || 'Refresh failed');
+              } finally {
+                setRefreshing(false);
+              }
+            }}>
               <RefreshCw className={`w-4 h-4 mr-1 ${(refreshing||ingesting)?'animate-spin':''}`} /> {refreshing||ingesting? 'Refreshing...' : 'Refresh'}
             </Button>
           </div>
@@ -419,7 +506,7 @@ export default function ThreadflowSubredditSensePage() {
              <AllThreadsTable threads={(dashboard.allThreads || []).map((t,i)=>(
               { id: i,
                 title: t.title,
-                type: t.type,  
+                type: t.type,
                 subreddit: t.subreddit,
                 author: t.author || '',
                 upvotes: t.upvotes,
@@ -427,6 +514,13 @@ export default function ThreadflowSubredditSensePage() {
                 sentiment: t.upvotes > 0 ? 'positive' : (t.upvotes < 0 ? 'negative' : 'neutral'),
                 post_url: t.url
               }))} />
+             {typeof dashboard?.allThreadsTotal === 'number' && dashboard.allThreadsTotal > 0 && (
+               <Pagination
+                 currentPage={dashboard.allThreadsPage || page}
+                 totalPages={Math.max(1, Math.ceil((dashboard.allThreadsTotal || 0) / (dashboard.allThreadsPageSize || pageSize)))}
+                 onPageChange={(p) => setPage(p)}
+               />
+             )}
           </div>
         )}
       </div>
