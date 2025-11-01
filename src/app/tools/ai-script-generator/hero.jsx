@@ -896,25 +896,62 @@ export default function AIVideoScriptGenerator() {
             });
 
             if (res.status === 400) {
-                const errorData = await res.json();
-                setInputIssues({
-                    problems: errorData.problems || [],
-                    suggestedFixes: errorData.suggestedFixes || []
-                });
+                const contentType = res.headers.get("content-type") || "";
+                if (contentType.includes("application/json")) {
+                    try {
+                        const errorData = await res.json();
+                        setInputIssues({
+                            problems: errorData.problems || [],
+                            suggestedFixes: errorData.suggestedFixes || []
+                        });
+                    } catch (parseError) {
+                        setError("Failed to parse validation error response");
+                    }
+                } else {
+                    const text = await res.text();
+                    setError(`Validation error: ${text.substring(0, 100)}`);
+                }
                 return;
             }
 
             if (!res.ok) {
-                const errorData = await res.json();
-                setError(errorData.message || "Failed to generate script");
+                const contentType = res.headers.get("content-type") || "";
+                if (contentType.includes("application/json")) {
+                    try {
+                        const errorData = await res.json();
+                        setError(errorData.message || errorData.error || "Failed to generate script");
+                    } catch (parseError) {
+                        setError(`Failed to parse error response (${res.status})`);
+                    }
+                } else {
+                    // If response is not JSON, try to get text
+                    const text = await res.text();
+                    setError(text ? `Server error: ${text.substring(0, 200)}` : `Failed to generate script (${res.status})`);
+                }
                 return;
             }
 
-            const data = await res.json();
-            setGeneratedComment(data.script);
-            setShowScript(true);
+            const contentType = res.headers.get("content-type") || "";
+            if (!contentType.includes("application/json")) {
+                const text = await res.text();
+                setError(`Unexpected response format: ${text.substring(0, 200)}`);
+                return;
+            }
+
+            try {
+                const data = await res.json();
+                if (!data.script) {
+                    setError("Invalid response format: script not found");
+                    return;
+                }
+                setGeneratedComment(data.script);
+                setShowScript(true);
+            } catch (parseError) {
+                setError(`Failed to parse response: ${parseError.message}`);
+            }
         } catch (err) {
-            setError(err.message || "Something went wrong");
+            console.error("Error in handleSubmit:", err);
+            setError(err.message || "Something went wrong. Please try again.");
         } finally {
             setLoading(false);
         }

@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import OpenAI from "openai";
 import { videoTypePrompts } from "./prompt";
 import { processReferenceLinks } from "../../lib/contentFetcher";
 
@@ -478,11 +479,34 @@ export default async function handler(req, res) {
 
       const fullPrompt = `${systemMessage}\n\nUser Prompt:\n${prompt}`;
 
-      const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      let scriptContent;
+      let usedProvider = "Gemini"; // Default to Gemini
 
-      const result = await model.generateContent(fullPrompt);
-      return result.response.text().trim();
+      // Hardcoded OpenAI API key
+      const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "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";
+
+      if (OPENAI_API_KEY) {
+        console.log("Provider: OpenAI", process.env.OPENAI_MODEL || "gpt-4o-mini");
+        usedProvider = "OpenAI";
+        const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+        const openaiModel = process.env.OPENAI_MODEL || "gpt-4o-mini";
+
+        const completion = await openai.chat.completions.create({
+          messages: [{ role: "user", content: fullPrompt }],
+          model: openaiModel,
+        });
+        scriptContent = completion.choices[0].message.content;
+      } else if (process.env.GEMINI_API_KEY) {
+        console.log("Provider: Gemini", "gemini-2.0-flash");
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+        const result = await model.generateContent(fullPrompt);
+        scriptContent = result.response.text().trim();
+      } else {
+        throw new Error("No AI API key configured");
+      }
+
+      return scriptContent;
     };
 
     let script;
@@ -499,14 +523,34 @@ export default async function handler(req, res) {
       // Use fallback prompt
       const fallbackPrompt = fallbackPrompts[videoType];
       if (fallbackPrompt) {
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-        
-        const fallbackMessage = fallbackPrompt({ toolsInvolved, targetAudience });
-        const result = await model.generateContent(fallbackMessage);
-        script = result.response.text().trim();
+        let fallbackScriptContent;
+        let fallbackProvider = "Gemini"; // Default fallback provider
+
+        // Hardcoded OpenAI API key
+        const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "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";
+
+        if (OPENAI_API_KEY) {
+          console.log("Fallback Provider: OpenAI", process.env.OPENAI_MODEL || "gpt-4o-mini");
+          fallbackProvider = "OpenAI";
+          const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+          const openaiModel = process.env.OPENAI_MODEL || "gpt-4o-mini";
+          const completion = await openai.chat.completions.create({
+            messages: [{ role: "user", content: fallbackPrompt({ toolsInvolved, targetAudience }) }],
+            model: openaiModel,
+          });
+          fallbackScriptContent = completion.choices[0].message.content;
+        } else if (process.env.GEMINI_API_KEY) {
+          console.log("Fallback Provider: Gemini", "gemini-2.0-flash");
+          const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+          const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+          const result = await model.generateContent(fallbackPrompt({ toolsInvolved, targetAudience }));
+          fallbackScriptContent = result.response.text().trim();
+        } else {
+          throw new Error("No AI API key configured for fallback");
+        }
+
+        script = fallbackScriptContent;
         isFallback = true;
-        
         console.log("Fallback script generated");
       } else {
         throw error;
@@ -537,10 +581,13 @@ export default async function handler(req, res) {
     // Log telemetry data
     console.log("Error counters:", errorCounters);
     
-    res.status(503).json({ 
-      error: "Service temporarily unavailable",
-      code: "SERVICE_UNAVAILABLE",
-      message: "Unable to generate script at this time. Please try again later."
-    });
+    // Ensure we always return JSON, even on unexpected errors
+    if (!res.headersSent) {
+      res.status(503).json({ 
+        error: "Service temporarily unavailable",
+        code: "SERVICE_UNAVAILABLE",
+        message: error.message || "Unable to generate script at this time. Please try again later."
+      });
+    }
   }
 }
