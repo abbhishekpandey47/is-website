@@ -1,7 +1,10 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
-import { videoTypePrompts } from "./prompt";
-import { processReferenceLinks } from "../../lib/contentFetcher";
+import { NextResponse } from "next/server";
+import { videoTypePrompts } from "@/pages/api/prompt";
+import { processReferenceLinks } from "@/lib/contentFetcher";
+
+export const dynamic = 'force-dynamic';
 
 // Telemetry counter for error tracking
 const errorCounters = {
@@ -388,21 +391,36 @@ const fallbackPrompts = {
   `
 };
 
-export default async function handler(req, res) {
+// Helper to create CORS headers
+function getCORSHeaders(origin) {
   const allowedOrigins = ["https://infrasity.com", "http://localhost:3000"];
-  const origin = req.headers.origin;
+  const headers = {
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  };
+  
   if (allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
+    headers["Access-Control-Allow-Origin"] = origin;
   }
+  
+  return headers;
+}
 
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+export async function OPTIONS(req) {
+  const origin = req.headers.get("origin");
+  return new NextResponse(null, {
+    status: 200,
+    headers: getCORSHeaders(origin),
+  });
+}
 
-  if (req.method === "OPTIONS") return res.status(200).end();
-  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+export async function POST(req) {
+  const origin = req.headers.get("origin");
+  const headers = getCORSHeaders(origin);
 
   try {
-    const { prompt, toolsInvolved, targetAudience, videoType, videoLength, linkForRef } = req.body;
+    const body = await req.json();
+    const { prompt, toolsInvolved, targetAudience, videoType, videoLength, linkForRef } = body;
 
     console.log("Prompt:", prompt);
     console.log("Tools Involved:", toolsInvolved);
@@ -414,10 +432,13 @@ export default async function handler(req, res) {
     const { problems, suggestedFixes } = validateInputs(prompt, toolsInvolved, targetAudience, videoType);
     
     if (problems.length > 0) {
-      return res.status(400).json({ 
+      return NextResponse.json({ 
         problems,
         suggestedFixes,
         message: "Input validation failed"
+      }, {
+        status: 400,
+        headers
       });
     }
 
@@ -573,7 +594,7 @@ export default async function handler(req, res) {
       response.message = "Generated using simplified format due to API limitations";
     }
 
-    res.status(200).json(response);
+    return NextResponse.json(response, { headers });
   } catch (error) {
     console.error("Error generating script:", error);
     errorCounters.API_ERROR++;
@@ -582,12 +603,14 @@ export default async function handler(req, res) {
     console.log("Error counters:", errorCounters);
     
     // Ensure we always return JSON, even on unexpected errors
-    if (!res.headersSent) {
-      res.status(503).json({ 
-        error: "Service temporarily unavailable",
-        code: "SERVICE_UNAVAILABLE",
-        message: error.message || "Unable to generate script at this time. Please try again later."
-      });
-    }
+    return NextResponse.json({ 
+      error: "Service temporarily unavailable",
+      code: "SERVICE_UNAVAILABLE",
+      message: error.message || "Unable to generate script at this time. Please try again later."
+    }, {
+      status: 503,
+      headers
+    });
   }
 }
+
