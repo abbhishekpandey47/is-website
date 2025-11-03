@@ -7,7 +7,7 @@ import Image from "next/image";
 const fileList = [
   "mocha.png",
   "aviator.png",
-  "firstock-logo.webp",
+  "firstock-logo.webp", 
   "dhiwise.svg",
   "amnic.png",
   "oso.png",
