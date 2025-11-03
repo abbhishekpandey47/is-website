@@ -80,7 +80,7 @@ const Featured = () => {
                   alt={item.title}
                   className="w-10 h-8 rounded-md mr-3 object-cover"
                 />
-                <span className="text-sm line-clamp-2 quicksand-light">
+                <span style={{fontWeight : "400"}} className="text-sm line-clamp-2 quicksand-light">
                   {item.title}
                 </span>
               </div>

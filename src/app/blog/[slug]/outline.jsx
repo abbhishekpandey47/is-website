@@ -213,6 +213,7 @@ const Outline = ({ content }) => {
             onClick={() => handleScrollToElement(element.id)}
           >
             <div
+              style={{fontWeight: "400"}}
               className={`hover:underline hover:cursor-pointer ${activeId === element.id ? "white quicksand-semibold" : "#999"
                 }`}
             >
