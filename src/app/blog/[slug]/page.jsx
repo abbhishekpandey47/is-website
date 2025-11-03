@@ -13,6 +13,7 @@ import NotFound from "./NotFound";
 import Image from "next/image";
 import CTA2 from "./cta2";
 import CTA from "./cta"
+import Head from "next/head";
 
 
 
@@ -78,7 +79,8 @@ export const generateStaticParams = async () => {
 // Dynamically generate metadata for each post
 export async function generateMetadata({ params }) {
   try {
-    if (!params || !params.slug) {
+    const {slug} = await params
+    if (!params || !slug) {
       return {
         title: "Post Not Found",
         description: "Invalid post parameters.",
@@ -92,7 +94,7 @@ export async function generateMetadata({ params }) {
       };
     }
 
-    const post = postMetaData.find((element) => element.slug === params.slug);
+    const post = postMetaData.find((element) => element.slug === slug);
 
     if (!post) {
       return {
@@ -111,7 +113,7 @@ export async function generateMetadata({ params }) {
 
     return {
       title: post.metatitle || post.title || "Blog Post",
-      description: post.description || "Blog post description",
+      description: post.metaDescription || "Blog post description",
       openGraph: {
         title: post.title || "Blog Post",
         description: post.metaDescription || post.description || "Blog post description",
@@ -130,11 +132,37 @@ export async function generateMetadata({ params }) {
     };
   }
 }
+const ImageHeight = [
+  {
+    src: "/PostImages/why-startups-hiring-devrel-engineers/1.png",
+    width: 400,
+    height: 550,
+  },
+  {
+    src: "/PostImages/developer-marketing-strategy/3.png",
+    width: 400,
+    height: 500,
+  },
+  {
+    src: "/PostImages/developer-marketing-strategy/10.png",
+    width: 550,
+    height: 600,
+  },
+  {
+    src: "/PostImages/developer-marketing-strategy/11.png",
+    width: 550,
+    height: 600,
+  }, {
+    src: "/PostImages/developer-marketing-strategy/7.png",
+    width: 550,
+    height: 600,
+  },
+];
 
 // Main PostPage component
-const PostPage = (props) => {
+const PostPage = async (props) => {
   try {
-    const slug = props?.params?.slug;
+    const {slug} = await props.params;
 
     if (!slug) {
       console.error("No slug provided in params");
@@ -201,9 +229,87 @@ const PostPage = (props) => {
         .filter((line) => line.startsWith('## ') && line.trim() !== '##')
         .map(line => line.trim().replace(/\*\*/g, ''));
     }
+let faqSchema = [];
+let inFAQ = false;
+let currentQuestion = "";
+let currentAnswer = "";
+
+const lines = postContent.split('\n');
+
+for (let line of lines) {
+  line = line.trim();
+
+  // Start FAQ section
+  if (!inFAQ && /^##\s*\**(FAQ|FAQs|Frequently Asked Questions)\**/i.test(line)) {
+    inFAQ = true;
+    continue;
+  }
+
+  if (inFAQ) {
+    // Detect numbered question
+    const questionMatch = line.match(/^\d+\.\s*\**(.+?)\**$/);
+    if (questionMatch) {
+      // Push previous Q&A
+      if (currentQuestion && currentAnswer) {
+        faqSchema.push({
+          "@type": "Question",
+          name: currentQuestion,
+          acceptedAnswer: { "@type": "Answer", text: currentAnswer.trim() }
+        });
+      }
+      currentQuestion = questionMatch[1].trim();
+      currentAnswer = "";
+      continue;
+    }
+
+    // If next main heading starts, end FAQ
+    if (/^##\s+/.test(line) && !/^##\s*\**(FAQ|FAQs|Frequently Asked Questions)\**/i.test(line)) {
+      if (currentQuestion && currentAnswer) {
+        faqSchema.push({
+          "@type": "Question",
+          name: currentQuestion,
+          acceptedAnswer: { "@type": "Answer", text: currentAnswer.trim() }
+        });
+      }
+      inFAQ = false;
+      currentQuestion = "";
+      currentAnswer = "";
+      continue;
+    }
+
+    // Line is part of answer
+    if (line.length > 0) {
+      currentAnswer += (currentAnswer ? " " : "") + line;
+    }
+  }
+}
+
+// Push last Q&A
+if (inFAQ && currentQuestion && currentAnswer) {
+  faqSchema.push({
+    "@type": "Question",
+    name: currentQuestion,
+    acceptedAnswer: { "@type": "Answer", text: currentAnswer.trim() }
+  });
+}
 
     return (
       <>
+      <Head>
+  {faqSchema.length > 0 && (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqSchema
+        }),
+      }}
+    />
+  )}
+</Head>
+
         <div className="pt-32 flex flex-col justify-center items-center">
           <HeadBanner postData={postData} />
           <div className="flex justify-around w-full pb-16 px-10 max-lg:flex-col">
@@ -277,7 +383,27 @@ const PostPage = (props) => {
 
                           },
                         },
-
+                        p:{
+                          component: ({ children, ...props }) => (
+                            <p style={{"fontWeight":"400"}}  {...props}>
+                              {children}
+                            </p>
+                          ),
+                        },
+                        li:{
+                          component: ({ children, ...props }) => (
+                            <li style={{"fontWeight":"400"}} {...props}>
+                              {children}
+                            </li>
+                          ),
+                        },
+                        strong:{
+                          component: ({ children, ...props }) => (
+                            <strong style={{"fontWeight":"700"}} {...props}>
+                              {children}
+                            </strong>
+                          ),
+                        },
                         img: {
                           component: ({ src, alt, ...props }) => {
                             try {
@@ -295,8 +421,35 @@ const PostPage = (props) => {
                                   return false;
                                 }
                               };
+                          
 
                               if (isBase64 || !isValidUrl(src)) {
+
+// Special case: target a single image by its URL
+const matchedImage = ImageHeight.find((img) => img.src === src);
+
+if (matchedImage) {
+  return (
+    <span
+      style={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <img
+        src={matchedImage.src}
+        alt={alt || "Image"}
+        loading="lazy"
+        style={{
+          height: `${matchedImage.height}px`,
+          width: `${matchedImage.width}px`,
+        }}
+        {...props}
+      />
+    </span>
+  );
+}
+
                                 return (
                                   <img
                                     src={src}

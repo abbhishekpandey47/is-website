@@ -46,10 +46,32 @@ export async function verifyRequestUser(req) {
   const decoded = await adminAuth.verifyIdToken(token)
   const uid = decoded.uid
   const email = decoded.email || ''
-  const domain = email.includes('@') ? email.split('@')[1].toLowerCase() : ''
+  const userDomain = email.includes('@') ? email.split('@')[1].toLowerCase() : ''
+ const { data: companies, error } = await supabase
+    .from("companies")
+    .select("id, name , name_normalized , domain ");
+
+  if (error) {
+    throw new Error("Failed to fetch companies: " + error.message);
+  }
+  let company = null;
+  let isAdmin = false;
   const adminDomain = (process.env.RBAC_ADMIN_DOMAIN || 'infrasity').toLowerCase()
-  const isAdmin = domain.includes(adminDomain)
-  return { uid, email, domain, isAdmin }
+   if (userDomain.includes(adminDomain)) {
+        isAdmin = true;
+    }
+   else{
+   for (const c of companies) {
+    if (!c.domain) continue;
+    const domains = c.domain.split(",").map((d) => d.trim().toLowerCase());
+    if (domains.includes(userDomain)) {
+      company = { id: c.id, name: c.name, slug: c.name_normalized };
+      // Example: treat "infrasity" as admin
+      break;
+    }
+  }
+  }
+  return { uid, email, domain: userDomain ,company,isAdmin }
 }
 
 export async function getAllowedCompanyIds({ uid, domain, isAdmin }) {

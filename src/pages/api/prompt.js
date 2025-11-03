@@ -1,13 +1,6 @@
 export const videoTypePrompts = {
-"Tool Comparison": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef }) => `
+"Tool Comparison": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef, timecodes, isIDEVsChat }) => `
 Create a professional, time-coded video script comparing ${toolsInvolved.join(", ")} for ${targetAudience.join(", ")}.
-
-**IMPORTANT: Output clean, readable text only. Strictly avoid:**
-- Code block markers (\`\`\`) unless absolutely necessary for actual code
-- Text labels like "text", "bash", "javascript" 
-- Excessive formatting characters (****), decorative elements
-- Icons or emojis in content sections
-- Use simple, clean formatting that renders well when copied**
 
 ### TITLE REQUIREMENT (MANDATORY)
 - Start the script with this exact format: "# Tool Comparison: ${toolsInvolved.join(" vs ")}"
@@ -18,22 +11,26 @@ Create a professional, time-coded video script comparing ${toolsInvolved.join(",
 - Input: ${videoLength} provided as range (e.g., "5 to 15 Minutes")
 - Parse numeric bounds and calculate midpoint in seconds
 - Example: "5 to 15 Minutes" → 10 minutes = 600 seconds
-- Time allocation:
-  * Introduction: 10% of total runtime
-  * Setup: 10% 
-  * Prompt Explanation: 5%
-  * Tool Breakdown: 60% (divided equally among tools)
-  * Outro: 10%
-  * Call to Action: 5%
+- Time allocation (MANDATORY):
+  * Introduction: 15% of total runtime
+  * Fairness Note: 5% of total runtime (if IDE vs Chat comparison)
+  * Setup: 15% of total runtime
+  * Prompt Explanation: 10% of total runtime
+  * Tool Breakdown: 45% of total runtime (divided equally among tools)
+  * Outro: 10% of total runtime
+  * Call to Action: 5% of total runtime
 - Format timecodes as [mm:ss–mm:ss]
 - Ensure sections are contiguous with no gaps
 
 ### REQUIRED STRUCTURE (All sections mandatory, exact order)
 
-## Introduction [mm:ss–mm:ss]
+## Introduction ${timecodes?.intro || '[mm:ss–mm:ss]'}
 Write 2-3 clear sentences explaining why choosing the right tool matters for ${targetAudience.join(", ")}. Focus on practical impact and productivity. End with one sentence teasing what the comparison will reveal.
 
-## Setup [mm:ss–mm:ss]
+${isIDEVsChat ? `## Fairness Note ${timecodes?.fairness || '[mm:ss–mm:ss]'}
+Explain the fundamental interaction differences: IDE assistants provide inline completions within the editor, while chat models require copy-paste between windows. This affects workflow speed, context awareness, and iteration efficiency.
+
+` : ''}## Setup ${timecodes?.setup || '[mm:ss–mm:ss]'}
 Describe the test environment clearly. Provide setup commands in simple code block:
 
 \`\`\`bash
@@ -42,49 +39,99 @@ cd [project_name]
 npm install
 \`\`\`
 
-## The Prompt (Exact) [mm:ss–mm:ss]
-Prompt:
+## The Prompt (Exact) ${timecodes?.prompt || '[mm:ss–mm:ss]'}
+Prompt: ${prompt || "Create a button that shows 'Hello World!' when clicked"}
 Explain in 1-2 bullets why this tests real-world capabilities.
 
-## Tool-by-Tool Breakdown [mm:ss–mm:ss]
-**Time: 60% divided equally among ${toolsInvolved.length} tools**
+## Tool-by-Tool Breakdown ${timecodes?.breakdown || '[mm:ss–mm:ss]'}
+**Time: 45% divided equally among ${toolsInvolved.length} tools**
 
 For each tool in order: ${toolsInvolved.join(", ")}, use this format:
 
 **[Tool Name] – [mm:ss–mm:ss]**
-* Repo Understanding: Brief assessment of file/structure recognition
-* Implementation Details: 2-4 bullets describing generated code/features  
-* UI & Design Quality: Description of visual output quality
-* Speed: Fast/Medium/Slow
-* Correctness: High/Medium/Low
-* Repo Awareness: Excellent/Needs Guidance/Minimal
+
+**Complete Code Solution:**
+\`\`\`html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World Button</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <button id="helloBtn">Click me!</button>
+    <script>
+        document.getElementById('helloBtn').addEventListener('click', function() {
+            alert('Hello World!');
+        });
+    </script>
+</body>
+</html>
+\`\`\`
+
+**Filename:** index.html
+
+**How to run:**
+1. Save as index.html
+2. Open in browser and click the button
+
+**Technical Analysis:**
+- **Context Handling:** [Describe how well the tool understood the prompt and provided relevant code]
+- **Syntax Accuracy:** [Note any syntax errors, best practices followed, or code quality issues]
+- **Code Structure:** [Comment on HTML structure, CSS inclusion, JavaScript organization]
+- **Additional Features:** [Mention any extra features like error handling, accessibility, or modern practices]
+
+**Evaluation (Rate 1-5 bullets each):**
+
+* Setup Friction: [1-5 bullets] - How easy to get started
+* Integration Flow: [1-5 bullets] - How smoothly it fits into workflow  
+* Iteration Speed: [1-5 bullets] - How fast to refine and improve
+* Code Correctness: [1-5 bullets] - How accurate the generated code
+* Copy-Paste Overhead: [1-5 bullets] - Manual work required (N/A for IDE tools)
+* Learning Help: [1-5 bullets] - Quality of explanations and guidance
+
+**Speed:** Fast/Medium/Slow - [Add practical rationale tied to the prompt, e.g., "Copilot suggested the click handler in <1s inside VS Code; GPT required copy-paste switching between windows."]
+
+**Correctness:** High/Medium/Low - [Add practical rationale tied to the prompt, e.g., "Generated working HTML immediately; required minor syntax fixes."]
 
 **Strengths:**
-✅ Key strength 1
-✅ Key strength 2  
-✅ Key strength 3
+- Key strength 1
+- Key strength 2  
+- Key strength 3
 
 **Limitations:**
-❌ Main limitation 1
-❌ Main limitation 2
+- Main limitation 1
+- Main limitation 2
 
-## Outro Script [mm:ss–mm:ss]
-**Output as plain text paragraph (no code formatting):**
-Write 2-4 sentences summarizing key findings, highlighting which tools excelled or struggled, and tying back to ${targetAudience.join(", ")} needs.
+## Comparison Table ${timecodes?.comparison || '[mm:ss–mm:ss]'}
+Create a comparison table showing all tools side-by-side:
 
-## Call to Action [mm:ss–mm:ss]
-✅ Drop a like if you found this useful
-💬 Tell us which prompt or tool to test next in the comments  
-${linkForRef && `📎 For more context or additional information, click here: ${linkForRef}`}
+| Tool | Setup Friction | Integration Flow | Iteration Speed | Code Correctness | Copy-Paste Overhead | Learning Help |
+|------|----------------|------------------|-----------------|------------------|-------------------|---------------|
+${toolsInvolved.map(tool => `| ${tool} | [Rating] | [Rating] | [Rating] | [Rating] | [Rating] | [Rating] |`).join('\n')}
+
+## Outro Script ${timecodes?.outro || '[mm:ss–mm:ss]'}
+Write 2-4 sentences summarizing key findings, highlighting which tools excelled or struggled, and tying back to ${targetAudience.join(", ")} needs. Include specific technical insights about code quality, context handling, and workflow efficiency.
+
+## Call to Action ${timecodes?.cta || '[mm:ss–mm:ss]'}
+**For Developers:**
+- Clone the example repository and run your own comparison
+- Try the tools with your specific use cases and share results
+- Read our detailed benchmark analysis on tool performance
+- Join the discussion about AI coding assistants in our community
+
+${linkForRef && `For more context or additional information, click here: ${linkForRef}`}
 
 ### FORMATTING RULES (STRICT)
 - Clean, readable text - avoid excessive symbols
-- Use single bullets (*) for lists, not multiple asterisks
+- Use single bullets (-) for lists, not multiple asterisks
 - Headers use ## only (double hash)
 - Timecodes in [mm:ss–mm:ss] format
 - Tool names consistent throughout
 - No decorative formatting or extra symbols
-- Keep Outro Script as plain paragraph text
 - Ensure all sections present in exact order
 
 ### CONTENT QUALITY REQUIREMENTS
@@ -94,18 +141,28 @@ ${linkForRef && `📎 For more context or additional information, click here: ${
 - Consistent evaluation criteria across tools
 - Accurate timecode calculations
 - Clear, concise explanations
+- Every rating must include practical rationale
+- Complete, runnable code blocks required for each tool
+- Deep technical analysis beyond superficial descriptions
 
-### COPY-FRIENDLY OUTPUT RULES
-**Critical: When users copy sections, ensure clean text output:**
-- NO code block markers (\`\`\`) in regular content
-- NO language labels (bash, text, javascript) 
-- NO bullet symbols (•, *, -, ✅, ❌) in copied text
-- NO icons or emojis in section content
-- NO time codes in copied content  
-- NO excessive formatting symbols
-- OUTPUT should be plain, readable text that can be directly used
+### CODE BLOCK REQUIREMENTS (CRITICAL)
+- EVERY code block MUST be a complete, self-contained HTML file
+- MUST include: <!DOCTYPE html>, <html>, <head>, <body>, and closing tags
+- MUST include basic CSS styling for better presentation
+- NO inline text or comments inside fenced code blocks except valid HTML comments
+- NO partial code snippets or fragments
+- NO explanatory text mixed with code
+- Filename MUST be specified outside the code block
+- Code MUST be immediately runnable when saved as an HTML file
+- Code MUST demonstrate best practices (proper structure, styling, event handling)
 
-**Only use code blocks for actual code examples, never for regular text content**
+### TECHNICAL ANALYSIS REQUIREMENTS
+- Context Handling: Analyze how well each tool understood the prompt
+- Syntax Accuracy: Note any errors, best practices, or code quality issues
+- Code Structure: Comment on HTML structure, CSS inclusion, JavaScript organization
+- Additional Features: Mention extra features like error handling, accessibility, modern practices
+- Performance: Note any performance considerations or optimizations
+- Maintainability: Assess code readability and maintainability
 `,
 
 "Bug Fixing Session": ({ toolsInvolved, targetAudience, videoLength, prompt, linkForRef }) => `
@@ -503,15 +560,30 @@ For data engineers, inefficient ETL code can result in long runtimes, higher inf
 By identifying hotspots through profiling and applying targeted optimizations, we drastically reduced runtime and memory load. Try profiling your code today with ${toolsInvolved.join(", ")} — small changes can deliver massive gains.
 `,
 
-"Feature Demo": ({ toolsInvolved, targetAudience, title = null }) => `
-Create a structured feature demonstration with the following specifications:
+"Feature Demo": ({ toolsInvolved, targetAudience, title = null, detectedFeature = null }) => `
+You are generating a developer-facing feature demo script.
 
-TITLE: Use this exact format: "# ${title || `Feature Demo: ${toolsInvolved.join(", ")}`}"
+**Tool:** ${toolsInvolved.join(", ")}
+**Feature:** ${detectedFeature || 'Next.js Feature'}
+**Audience:** ${targetAudience.join(", ")}
+**Video Length:** 2–8 minutes
+
+**Requirements:**
+- Include one working example with runnable code
+- Add a "Why this feature matters" section
+- Add step-by-step implementation
+- Add benefits (performance, DX, SEO, etc.)
+- Add summary & call to action
+- Output should use code blocks with syntax highlighting (JSX/TypeScript)
+
+${detectedFeature ? `**SPECIFIC FEATURE FOCUS:** This demo should focus specifically on "${detectedFeature}" for Next.js. Generate a comprehensive walkthrough with working code examples for this feature.` : ''}
+
+TITLE: Use this exact format: "# ${title || `Feature Demo: ${detectedFeature || toolsInvolved.join(", ")}`}"
 
 STRUCTURE: Follow this exact section order and formatting:
 
 ## Why This Feature Matters
-Write 2–3 sentences explaining the value of the feature for ${targetAudience.join(", ")}. Focus on how it solves a problem, saves time, or enhances results.
+Write 2–3 sentences explaining the value of the feature for ${targetAudience.join(", ")}. Focus on how it solves a problem, saves time, or enhances results. Include specific benefits like performance improvements, developer experience enhancements, or SEO advantages.
 
 ## Feature Overview
 Describe:
@@ -519,14 +591,26 @@ Describe:
 * **Tools:** ${toolsInvolved.join(", ")}
 * **Primary Use Cases:** 2–3 quick examples
 
-## Step-by-Step Walkthrough
+## Step-by-Step Implementation
 For each step:
 * **Action:** What the user should do
-* **Purpose:** Why it’s important
+* **Purpose:** Why it's important
 * **Tip:** (Optional) Suggest a best practice or common pitfall to avoid
 
+${detectedFeature ? `## Working Code Example
+Provide a complete, runnable code example demonstrating the "${detectedFeature}" feature:
+* Include proper file structure and imports
+* Show both frontend and backend code if applicable
+* Add comments explaining key concepts
+* Ensure the code is immediately runnable
+* Use proper syntax highlighting for JSX/TypeScript` : ''}
+
 ## Benefits & Impact
-List 3–4 key benefits of using this feature, supported by measurable or practical outcomes.
+List 3–4 key benefits of using this feature, supported by measurable or practical outcomes. Focus on:
+* **Performance:** Speed, optimization, or efficiency improvements
+* **Developer Experience:** Easier development, better tooling, or reduced complexity
+* **SEO:** Search engine optimization benefits
+* **User Experience:** How it improves the end-user experience
 
 ## Summary & Call to Action
 Provide:
@@ -537,41 +621,62 @@ FORMATTING REQUIREMENTS:
 - Use * for bullet points
 - Bold labels like **Action:**, **Purpose:**, **Tip:**
 - Keep tone practical, user-friendly, and slightly enthusiastic
-- Avoid unnecessary jargon unless it’s essential for clarity
+- Avoid unnecessary jargon unless it's essential for clarity
+- For Next.js features, include working code examples with proper syntax
+- Use code blocks with appropriate syntax highlighting (jsx, typescript, javascript)
 
 ---
 
-### Example Output for Feature Demo (Canva Magic Resize, Social Media Managers)
+### Example Output for Feature Demo (Next.js App Router, Intermediate Developers)
 
-# Feature Demo: Canva Magic Resize
+# Feature Demo: App Router with Dynamic Routing
 
 ## Why This Feature Matters
-For social media managers, manually resizing designs for each platform wastes hours each week. Canva’s Magic Resize automates this, ensuring perfect formatting across all channels with a single click.
+For intermediate developers, the App Router revolutionizes how we build Next.js applications by providing a more intuitive file-based routing system. It eliminates the need for complex routing configurations and enables powerful features like layouts, loading states, and error boundaries out of the box.
 
 ## Feature Overview
-* **Purpose:** Instantly resize a design for multiple platforms without starting from scratch  
-* **Tools:** Canva Magic Resize  
-* **Primary Use Cases:** Repurposing a Facebook post for Instagram Stories, adapting YouTube thumbnails for Pinterest, and converting flyers into posters
+* **Purpose:** File-based routing system that automatically creates routes based on folder structure
+* **Tools:** Next.js 13+ App Router
+* **Primary Use Cases:** Building dynamic websites, e-commerce platforms, and content management systems
 
 ## Step-by-Step Walkthrough
-* **Action:** Open your design in Canva and click the "Resize" button.  
-  **Purpose:** Access the list of pre-set dimensions for various platforms.  
-  **Tip:** Use "Custom Size" if you need non-standard dimensions.
+* **Action:** Create an app directory and add a page.tsx file
+  **Purpose:** Establish the new routing structure
+  **Tip:** The app directory replaces the pages directory for new projects
 
-* **Action:** Select multiple formats (e.g., Instagram Story, LinkedIn Post) and click "Copy & Resize."  
-  **Purpose:** Generate new versions in separate tabs for quick edits.
+* **Action:** Create dynamic routes using [slug] folder naming
+  **Purpose:** Enable dynamic content rendering based on URL parameters
+  **Tip:** Use square brackets for dynamic segments
 
-* **Action:** Review each resized design and make layout adjustments as needed.  
-  **Purpose:** Ensure text, images, and branding remain visually balanced.
+## Working Code Example
+\`\`\`typescript
+// app/blog/[slug]/page.tsx
+interface BlogPost {
+  id: string;
+  title: string;
+  content: string;
+}
+
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const post = await fetchPost(params.slug);
+  
+  return (
+    <article>
+      <h1>{post.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+    </article>
+  );
+}
+\`\`\`
 
 ## Benefits & Impact
-* Saves up to 80% of design resizing time  
-* Maintains brand consistency across platforms  
-* Eliminates repetitive manual work  
-* Enables faster content scheduling and publishing
+* Reduces routing complexity by 70%
+* Enables better SEO with automatic metadata generation
+* Improves performance with built-in loading and error states
+* Simplifies code organization and maintenance
 
 ## Summary & Call to Action
-Magic Resize turns a tedious multi-hour process into a 2-minute task, freeing you to focus on strategy and creativity. Try using it for your next campaign and experience the time savings firsthand.
+The App Router transforms Next.js development by making routing intuitive and powerful. Start migrating your existing projects or build new ones with this modern approach to see immediate productivity gains.
 `,
 "Coding Walkthrough": ({ toolsInvolved, targetAudience, title = null }) => `
 Create a detailed coding walkthrough with the following specifications:

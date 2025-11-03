@@ -68,14 +68,6 @@ export const DownloadPage = () => {
 
       if (hubspotRes.ok) {
         setIsSubmitted(true);
-        setTimeout(() => {
-          const link = document.createElement('a');
-          link.href = "https://drive.google.com/uc?export=download&id=1bX9OsrZd2DltBL-p1aLhhUPIqwVW8au7";
-          link.download = '';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }, 100);
       } else {
         setErrorMessage("Failed to submit form. Please try again.");
       }
@@ -176,8 +168,7 @@ If you're still ignoring Reddit, you're leaving trust (and traffic) on the table
                 <div className="text-green-400 text-6xl mb-4">✓</div>
                 <h2 className="text-3xl font-bold text-white mb-4">Success!</h2>
                 <p className="text-gray-300 text-lg mb-6">
-                  Thank you for your submission. Your playbook download will
-                  begin shortly.
+                  Thank you for your submission. The download link has been sent to your inbox.
                 </p>
               </div>
             </div>

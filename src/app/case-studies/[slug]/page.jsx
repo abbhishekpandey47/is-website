@@ -2,15 +2,58 @@ import fs from "fs";
 import matter from "gray-matter";
 import Markdown from "markdown-to-jsx";
 import Image from "next/image";
-import { notFound, redirect } from "next/navigation"; // Add this import
+import Link from "next/link";
+import { notFound, redirect } from "next/navigation";
 import authorMetadata from "../../../../posts/_authorData";
 import postMetaData from "../../../../posts/_postMetadata";
-import AuthorBanner from "./authorBanner";
 import HeadBanner from "./headBanner";
 import NotFound from "./NotFound";
 import Outline from "./outline";
 import Analytics from "./analytics";
+import VideoTestimonials from "./testimonials";
+import MoreCaseStudies from "../../../Components/MoreCaseStudies";
+import CTA from "../../../Components/CTA/CTA";
+import CaseStudyLayout from "./CaseStudyLayout";
+import CaseStudySidebar from "./CaseStudySidebar";
 
+
+//firefly Video
+export const Videos =[
+  {
+  id: "case-2",
+  eyebrow: "CASE STUDIES",
+  heading: "Hear directly from our customers",
+  blurb: "Learn how Infrasity's deep technical content helped solve engineers' pain points and attract more prospects.",
+  cta: { label: "See case studies", href: "/case-studies/case-study-series-a-cloud-developer-marketing" },
+
+  headshotSrc: "/playbook/firefly.png",
+  headshotAlt: "Eric Peters",
+  companyLogoSrc: "/playbook/firefly-bg.png",
+  companyLogoAlt: "Firefly.ai",
+  quote:"Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
+  personName: "Idoo Neeman",
+  personTitle: "Co-Founder and CEO, Firefly.ai",
+  videoUrl: "https://youtube.com/shorts/AgCQ176pfRU",
+}]
+
+//terrateam Video
+export const TerrateamVideos =[
+  {
+  id: "case-3",
+  eyebrow: "CASE STUDIES",
+  heading: "Hear directly from our customers",
+  blurb: "Learn how Infrasity's technical content strategy drives developer adoption and growth.",
+  cta: { label: "See case studies", href: "/case-studies" },
+
+  headshotSrc: "/Testimon/joshTerraTeam-new.jpg",
+  headshotAlt: "Josh",
+  companyLogoSrc: "/trustedby/terrateam.png",
+  companyLogoAlt: "Terrateam",
+  quote: "Infrasity's dedication to understanding our audience's needs was evident in their research on what Engineers look for in content. By focusing on teachings rather than selling, their content has empowered our users with new skills and solutions. Their work has significantly boosted our web and blog traffic, and we highly recommend their expertise.",
+  personName: "Josh",
+  personTitle: "Co-Founder, Terrateam",
+  videoUrl: "https://youtube.com/shorts/zq4ga3BbbGU?si=1NTay8-ss830v9fb",
+}]
 // Utility function to check if the post file exists
 const isValid = (slug) => {
   const folder = "posts/";
@@ -26,6 +69,7 @@ const getPostContent = (slug) => {
   const matterResult = matter(content);
   return matterResult.content;
 };
+
 
 // Generate static paths for dynamic routes - ONLY for case studies
 export const generateStaticParams = async () => {
@@ -98,39 +142,49 @@ const PostPage = (props) => {
   postData.authorName = authorObj.name;
   postData.authorImage = authorObj.profilePic;
   postData.authorLinkedin = authorObj.linkedIn;
-
   return (
     <>
-      <div className="pt-32 pb-12">
+      <style dangerouslySetInnerHTML={{__html: `
+        #headBanner {
+          position: relative;
+          z-index: 30;
+        }
+      `}} />
+      <div className="pt-32 pb-12" style={{ overflow: 'visible', position: 'relative', zIndex: 1 }}>
         <HeadBanner postData={postData} />
 
-        <div className="flex justify-center w-full pb-16 max-lg:flex-col">
-          <div className="w-[17%] min-[1900px]:w-[0] 2xl:w-[13%] max-lg:w-full max-lg:pl-[8%] max-xl:w-[21%]">
-            {<Outline content={postContent} />}
-          </div>
-          <div className="h-auto hidden max-lg:flex max-lg:justify-center">
-            <div className="w-[84vw]">
-              <img
-                src={
-                  postData.ogImage ||
-                  "https://www.infrasity.com/wp-content/uploads/2024/09/Untitled-design-1-1.png"
-                }
-                alt="Content Illustration"
-                className="w-full h-auto text-center"
+        <CaseStudyLayout
+          toc={<Outline content={postContent} />}
+          sidebar={
+            <CaseStudySidebar
+              companyHighlights={postData.companyHighlights}
+              title={postData.title}
+            />
+          }
+        >
+          {/* Mobile & Tablet: TOC and Sidebar stack below intro */}
+          <div className="xl:hidden space-y-6 my-6">
+            <div className="w-full">
+              <Outline content={postContent} />
+            </div>
+            <div className="w-full max-w-2xl space-y-6">
+              <CaseStudySidebar
+                companyHighlights={postData.companyHighlights}
+                title={postData.title}
               />
             </div>
           </div>
-          <div className="w-[70%] min-[1900px]:w-[80%] max-lg:w-[80%] max-md:w-[96%] max-sm:ml-5 pt-2 lg:pt-15 flex justify-center flex-col items-start">
+
+          <div className="pt-2 lg:pt-15 flex flex-col items-start">
             <Analytics postData={postData} />
 
-            <article className="text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto">
-              <div className="max-lg:w-[84vw] min-[1900px]:w-[60vw] max-[1537px]:w-[50vw]">
+            <article className="text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert">
+              <div className="w-full" style={{ maxWidth: '100%' }}>
                 <Markdown
                   options={{
                     overrides: {
                       img: {
                         component: ({ src, alt }) => {
-                          // Check if the src is a base64 string or a valid URL
                           const isBase64 = src.startsWith("data:image/");
                           const isValidUrl = (url) => {
                             try {
@@ -141,27 +195,53 @@ const PostPage = (props) => {
                             }
                           };
 
-                          // Use next/image for valid URLs, otherwise use a regular img tag
                           if (isBase64 || !isValidUrl(src)) {
-                            return (
-                              <img
-                                src={src}
-                                alt={alt}
-                                loading="lazy"
-                                style={{ width: "100%", height: "auto" }}
-                              />
-                            );
+                            if (src === "/PostImages/case-study-series-a-cloud-developer-marketing/3.png") {
+                              return (
+                                <span style={{display:"flex",justifyContent:"center", maxWidth: '100%', overflow: 'hidden'}}>
+                                  <img
+                                    src={src}
+                                    alt={alt}
+                                    loading="lazy"
+                                    style={{ maxWidth: "100%", width: "500px", height: "auto", aspectRatio: "1/1" }}
+                                  />
+                                </span>
+                              );
+                            } else if (src === "/PostImages/case-study-series-a-cloud-developer-marketing/2.png") {
+                              return (
+                                <span style={{display:"flex",justifyContent:"center", maxWidth: '100%', overflow: 'hidden'}}>
+                                  <img
+                                    src={src}
+                                    alt={alt}
+                                    loading="lazy"
+                                    style={{ maxWidth: "100%", width: "650px", height: "auto", aspectRatio: "650/450" }}
+                                  />
+                                </span>
+                              );
+                            } else {
+                              return (
+                                <img
+                                  src={src}
+                                  alt={alt}
+                                  loading="lazy"
+                                  style={{ width: "100%", maxWidth: "100%", height: "auto" }}
+                                />
+                              );
+                            }
                           }
 
                           return (
-                            <Image
-                              loading="lazy"
-                              src={src}
-                              alt={alt}
-                              width={900}
-                              height={900}
-                              unoptimized={true}
-                            />
+                            <div style={{ maxWidth: '100%', overflow: 'hidden' }}>
+                              <Image
+                                loading="lazy"
+                                src={src}
+                                alt={alt}
+                                width={900}
+                                height={900}
+                                unoptimized={true}
+                                style={{ maxWidth: '100%', height: 'auto' }}
+                              />
+                            </div>
                           );
                         },
                       },
@@ -172,9 +252,50 @@ const PostPage = (props) => {
                 </Markdown>
               </div>
             </article>
-          </div>{" "}
+          </div>
+        </CaseStudyLayout>
+        {postData.slug === "case-study-series-a-cloud-developer-marketing" ?
+        <div className="flex justify-center items-center w-[80%] mx-auto"><VideoTestimonials items={Videos}/></div> : 
+        postData.slug === "terrateam-case-study" ?
+        <div className="flex justify-center items-center w-[80%] mx-auto"><VideoTestimonials items={TerrateamVideos}/></div> : null}
+        
+        {/* CTA Section */}
+        <div className="w-[80%] mx-auto">
+          <CTA 
+            title="Ready to achieve similar results for your startup?"
+            description="Let's discuss how we can help you scale through technical content and developer marketing."
+            buttonText="Book a Call"
+          />
         </div>
-        <AuthorBanner authorData={authorObj} />
+
+        {/* More Case Studies Section */}
+        <div className="w-[80%] mx-auto mt-16">
+          <MoreCaseStudies currentSlug={postData.slug} />
+        </div>
+
+        {/* Back to Developer Marketing Services */}
+        <div className="w-[80%] mx-auto mt-12 mb-8 text-center">
+          <Link
+            href="/services/developer-marketing-agency"
+            className="inline-flex items-center text-sm text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-[#0B0B14] rounded-md px-3 py-2"
+          >
+            <svg
+              className="w-4 h-4 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Back to Developer Marketing services
+          </Link>
+        </div>
       </div>
     </>
   );

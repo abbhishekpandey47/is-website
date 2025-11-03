@@ -36,10 +36,12 @@ let tabs = [
   { id: "B2B SaaS Growth & GTM", label: "B2B SaaS Growth & GTM" },
   { id: "Reddit Marketing B2B SaaS", label: "Reddit Marketing B2B SaaS" },
   { id: "Tech Video Marketing", label: "Tech Video Marketing" },
+  { id: "Developer Marketing", label: "Developer Marketing" },
+
 ];
 
 const TabDiv = React.memo(({ activeTab, setActiveTab }) => (
-  <div className="flex flex-wrap gap-4 max-w-7xl mx-auto justify-center">
+  <div className="flex flex-wrap gap-[0.60rem] max-w-7xl mx-auto justify-center">
     {tabs.map((tab) => (
       <button
         key={tab.id}
@@ -118,9 +120,9 @@ const CardDiv = React.memo(({ card }) => (
           />
         </figure>
         <div className="py-0 pb-5">
-          <div className="text-[var(--blue)] bg-[#f5f4f7] rounded-full flex justify-center max-w-[100px] h-6 px-3 text-[12px] quicksand-semibold items-center">
-            <p className="text-black max-sm:text-xs">{card.category}</p>
-          </div>
+       <div className="inline-flex items-center justify-center bg-[#f5f4f7] rounded-full px-3 py-1 text-[12px] quicksand-semibold">
+  <p className="text-black max-sm:text-xs">{card.category}</p>
+</div>
         </div>
         <div className="text-white flex flex-col gap-4">
           <h2 className="card-title quicksand-bold">{card.title}</h2>
@@ -130,8 +132,9 @@ const CardDiv = React.memo(({ card }) => (
               : card.description}
           </p>
           <div className="flex items-center gap-2 absolute bottom-3">
+        
             <Image
-              className="rounded-full"
+              className="rounded-full w-10 h-10"
               src={card.authorImage || "/svgPatterns/profile.svg"}
               alt=""
               width={40}
@@ -229,7 +232,7 @@ const BlogPage = () => {
   useEffect(() => {
     let currTabArr = [];
     if (activeTab === "allCategories") {
-      currTabArr = ["Informational", "Tutorials"];
+      currTabArr = ["Informational", "Tutorials" , "B2B SaaS- Content Marketing", "B2B SaaS Growth & GTM", "Reddit Marketing B2B SaaS", "Tech Video Marketing" , "Developer Marketing"];
     } else {
       currTabArr = [activeTab];
     }

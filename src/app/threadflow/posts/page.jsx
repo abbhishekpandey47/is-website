@@ -16,6 +16,10 @@ import { SidebarTrigger } from "../../../Components/ui/sidebar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../../Components/ui/table";
 import { UserProfile } from "../../../Components/UserProfile";
 import { useToast } from "../../../hooks/use-toast";
+import { Textarea } from "../../../Components/ui/textarea";
+import { HoverTextCell } from "../components/HoverTextCell";
+import Pagination from "../components/pagination";
+
 
 const ReactQuill = dynamic(
   async () => {
@@ -26,8 +30,14 @@ const ReactQuill = dynamic(
   { ssr: false }
 );
 
+function camelCaseToSentence(str){
+  if (!str) return '';
+  return str
+    .replace(/([A-Z])/g, ' $1')   // add space before capital letters
+    .replace(/^./, (char) => char.toUpperCase()); // capitalize first letter
+}
 
-
+const PAGE_SIZE = 10;
 const PostsPage = () => {
   const router = useRouter();
   const { toast } = useToast();
@@ -38,6 +48,9 @@ const PostsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [companiesList , setCompaniesList] = useState([]);
+  const [selectedCompanyId , setSelectedCompanyId] = useState("select");
 
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
@@ -50,9 +63,11 @@ const PostsPage = () => {
     kimsVersion: "",
     datePosted: "",
     postedLink: "",
+    clientFeedback: "",
     currentStatus: "pending",
     redditUsername: "",
     targetedSubreddit: "",
+    totalViews:""
   });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(null);
@@ -87,14 +102,13 @@ const PostsPage = () => {
 
   const fetchPosts = async () => {
       try {
-    const token = await firebaseUser.getIdToken();
-    const res = await fetch(`/api/posts`, { headers: { Authorization: `Bearer ${token}` } });
+        const token = await firebaseUser.getIdToken();
+        const res = await fetch(`/api/posts`, { headers: { Authorization: `Bearer ${token}` } });
         const result = await res.json();
 
         if (!res.ok) {
           throw new Error(result.error || "Failed to fetch posts");
         }
-
         setPosts(result.data || []);
       } catch (err) {
         console.error("Error fetching posts:", err);
@@ -105,7 +119,8 @@ const PostsPage = () => {
     fetchPosts();
   }, [firebaseUser]);
 
-  useEffect(() => {
+
+  useEffect(() => { 
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setFirebaseUser(user);
       setLoading(false);
@@ -114,18 +129,36 @@ const PostsPage = () => {
         router.push("/auth/signin");
       } else {
         try {
-          const token = await user.getIdToken();
-          const res = await fetch(`/api/posts?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
-          const result = await res.json();
+      const token = await user.getIdToken();
+          const [catRes, companyRes] = await Promise.allSettled([
+            fetch(`/api/posts?categories=true`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            fetch(`/api/companies`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+          ]);
+          if (catRes.status === 'fulfilled' && catRes.value.ok) {
+            const result = await catRes.value.json();
+            if (result.categories) {
+              setEditCategories((prev) => {
+                const merged = [...prev, ...result.categories];
+                return [...new Set(merged.map((c) => c.trim()))];
+              });
+            }
+          } else if (catRes.status === 'rejected') {
+            console.error("Failed to fetch categories:", catRes.reason);
+          }
 
-          if (res.ok && result.categories) {
-            setEditCategories((prev) => {
-              const merged = [...prev, ...result.categories];
-              return [...new Set(merged.map((c) => c.trim()))];
-            });
+          if (companyRes.status === 'fulfilled' && companyRes.value.ok) {
+         const result = await companyRes.value.json();
+         const list = Array.isArray(result.data) ? result.data : [];
+         setCompaniesList(list);
+          } else if (companyRes.status === 'rejected') {
+            console.error("Failed to fetch companies:", companyRes.reason);
           }
         } catch (err) {
-          console.error("Failed to fetch categories:", err);
+          console.error("Failed to fetch:", err);
         }
       }
     });
@@ -133,37 +166,73 @@ const PostsPage = () => {
     return () => unsubscribe();
   }, [router]);
 
+  useEffect(() => {
+    setCurrentPage(1); // reset to first page whenever filters or search change
+  }, [searchQuery , selectedCategory , selectedStatus , selectedCompanyId]);
 
+  const companies = [
+  { id: "select", name: "Select Company" },
+  { id: "all", name: "All Companies" },
+  ...companiesList.map((company) => ({
+    id: company.id,
+    name: company.name,
+  })),
+];
   const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
   const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
-
-
-
+  
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
       searchQuery === "" ||
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.category.toLowerCase().includes(searchQuery.toLowerCase());
 
+
     const matchesCategory =
       selectedCategory === "all" || post.category === selectedCategory;
     const matchesStatus =
       selectedStatus === "all" || post.status === selectedStatus;
+    const matchCompanyId =
+    selectedCompanyId === "all" || post.company_id === selectedCompanyId;
 
-    return matchesSearch && matchesCategory && matchesStatus;
+    return matchesSearch && matchesCategory && matchesStatus && matchCompanyId;
   });
+
+     // Pagination logic
+  const totalPages = Math.ceil(filteredPosts.length / PAGE_SIZE);
+  const paginatedPosts = filteredPosts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  // Update current page when pagination changes
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
 
   const getStatusBadge = (status) => {
     const statusColors = {
-      approved: "bg-approved text-approved-foreground",
-      live: "bg-live text-live-foreground",
-      pending: "bg-pending text-pending-foreground",
-      rejected: "bg-rejected text-rejected-foreground",
+    // Published Post Status
+    postunderapproval: "bg-blue-500 text-white",
+    live: "bg-green-500 text-white",
+    removed: "bg-red-500 text-white",
+    undermoderation: "bg-yellow-500 text-black",
+    reposted : "bg-purple-500 text-white",
+
+    // Post Approval Status
+      approved: "bg-emerald-700 text-white",
+      pending: "bg-yellow-400 text-black",
+      notapproved: "bg-red-500 text-white",
     };
+    // Format text → insert spaces before capital letters
+     const formattedText = status
+    ? status.replace(/([a-z])([A-Z])/g, "$1 $2")
+    : "";
+
+      const colorClass = status
+    ? statusColors[status.toLowerCase()] || "bg-gray-600 text-white"
+    : "bg-gray-600 text-white";
 
     return (
-      <Badge className={`${statusColors[status?.toLowerCase()] || "bg-gray-200"} capitalize`}>
-        {status}
+      <Badge className={`${colorClass} capitalize text-center min-w-[6rem] justify-center`}>
+              {formattedText}
       </Badge>
     );
   };
@@ -181,8 +250,10 @@ const PostsPage = () => {
       datePosted: post.date_posted ? new Date(post.date_posted).toISOString().split('T')[0] : "",
       postedLink: post.posted_link || "",
       currentStatus: post.current_status || "pending",
+      clientFeedback: post.client_feedback || "",
       redditUsername: post.reddit_username || "",
       targetedSubreddit: post.targeted_subreddit || "",
+      totalViews: post.total_views || ""
     });
     setIsEditModalOpen(true);
   };
@@ -202,6 +273,7 @@ const PostsPage = () => {
       currentStatus: "pending",
       redditUsername: "",
       targetedSubreddit: "",
+      totalViews: ""
     });
   };
 
@@ -235,10 +307,12 @@ const PostsPage = () => {
           engagement_text: editFormData.engagementText,
           kims_version: editFormData.kimsVersion,
           date_posted: editFormData.datePosted ? new Date(editFormData.datePosted) : null,
+          client_feedback: editFormData.clientFeedback || null,
           posted_link: editFormData.postedLink,
           current_status: editFormData.currentStatus,
           reddit_username: editFormData.redditUsername,
           targeted_subreddit: editFormData.targetedSubreddit,
+          total_views: editFormData.totalViews
         }),
       });
 
@@ -385,7 +459,10 @@ const PostsPage = () => {
                   className="pl-10"
                 />
               </div>
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <Select
+                value={selectedCategory}
+                onValueChange={setSelectedCategory}
+              >
                 <SelectTrigger className="w-48">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
@@ -406,11 +483,32 @@ const PostsPage = () => {
                 <SelectContent>
                   {statuses.map((status) => (
                     <SelectItem key={status} value={status}>
-                      {status === "all" ? "All Status" : status.charAt(0).toUpperCase() + status.slice(1)}
+                      {status === "all"
+                        ? "All Status"
+                        : camelCaseToSentence(status)}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
+              
+        
+                  <Select
+                    value={selectedCompanyId}
+                    onValueChange={setSelectedCompanyId}
+                  >
+                    <SelectTrigger className="w-48"> 
+                        <SelectValue placeholder="Select Company"/>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {companies.map((company) => (
+                        <SelectItem key={company.id} value={company.id}>
+                          {company.name === "all" ? "All Companies" : company.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+            
+
             </div>
           </CardContent>
         </Card>
@@ -428,32 +526,39 @@ const PostsPage = () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Category</TableHead>
+                    <TableHead>Targeted Subreddit</TableHead>
                     <TableHead>Title</TableHead>
-                    <TableHead>URL</TableHead>
-                    <TableHead>Status</TableHead>
+                    {/* <TableHead>URL</TableHead> */}
+                    <TableHead>Post Approval Status</TableHead>
                     <TableHead>Text of engagement</TableHead>
                     <TableHead>Date published</TableHead>
-                    <TableHead>Current Status</TableHead>
+                    <TableHead>Customer Comments</TableHead>
+                    <TableHead>Published Status</TableHead>
                     <TableHead>Published Link</TableHead>
+                    <TableHead>Total Views</TableHead>
                     <TableHead>Number of our engagements</TableHead>
                     <TableHead>Reddit Username</TableHead>
                     <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredPosts.map((post) => (
+                  {paginatedPosts.map((post) => (
                     <TableRow key={post.id}>
                       <TableCell>
                         <Badge variant="outline" className="whitespace-nowrap">
                           {post.category}
                         </Badge>
                       </TableCell>
-                      <TableCell className="font-medium max-w-xs">
-                        <div className="truncate" title={post.title}>
-                          {post.title}
+                       <TableCell>
+                        <div className="text-sm text-muted-foreground line-clamp-3">
+                          {post.targeted_subreddit}
                         </div>
                       </TableCell>
-                      <TableCell className="max-w-xs">
+                      <TableCell className="font-medium max-w-xs">
+                         <HoverTextCell text={post.title} isTitle={true}/>
+                      </TableCell>
+                      {/* <TableCell className="max-w-xs">
+                      {post.url ? 
                         <a
                           href={post.url}
                           target="_blank"
@@ -462,20 +567,22 @@ const PostsPage = () => {
                         >
                           <ExternalLink className="h-3 w-3" />
                           Reddit Link
-                        </a>
-                      </TableCell>
-                      <TableCell>{getStatusBadge(post.status)}</TableCell>
+                        </a> : "-"}
+                      </TableCell> */}
+                      <TableCell>{getStatusBadge(post.current_status)}</TableCell>
                       <TableCell className="max-w-sm">
-                        <div
+                        {/* <div
                           className="text-sm text-muted-foreground line-clamp-3"
                           dangerouslySetInnerHTML={{ __html: post.engagement_text }}
-                        />
+                        /> */}
+                        <HoverTextCell text={post.engagement_text} isTextEngagement={true} />
                       </TableCell>
 
                       <TableCell className="text-sm">
                         {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
                       </TableCell>
-                      <TableCell className="text-sm">{post.current_status}</TableCell>
+                      <TableCell className="text-sm"> <HoverTextCell text={post.client_feedback}/></TableCell>
+                      <TableCell className="text-sm">{getStatusBadge(post.status)}</TableCell>
                       <TableCell>
                         <a
                           href={post.posted_link}
@@ -486,8 +593,10 @@ const PostsPage = () => {
                           {post.posted_link ? "View Link" : "-"}
                         </a>
                       </TableCell>
+                      <TableCell>{post.total_views ? post.total_views : "-"}</TableCell>
                       <TableCell></TableCell>
                       <TableCell>{post.reddit_username}</TableCell>
+
                       <TableCell>
                         <div className="flex items-center gap-2">
                           <Button
@@ -516,6 +625,11 @@ const PostsPage = () => {
             </div>
           </CardContent>
         </Card>
+          <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
       </div>
 
       {/* Edit Modal */}
@@ -668,6 +782,23 @@ const PostsPage = () => {
                     </p>
                   </div>
 
+                  <div>
+                    <Label
+                      htmlFor="clientFeedback"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      Customer Comments
+                    </Label>
+                    <Textarea
+                      id="clientFeedback"
+                      value={editFormData.clientFeedback}
+                      onChange={(e) => handleEditInputChange("clientFeedback", e.target.value)}
+                      placeholder="Enter your feedback for this Reddit Comment..."
+                      rows={4}
+                      className="resize-none"
+                    />
+                  </div>
+
                   {/* Tracking Information */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -707,6 +838,15 @@ const PostsPage = () => {
                         placeholder="Direct link to the posted content"
                       />
                     </div>
+                     <div>
+                      <Label htmlFor="totalViews">Total Views</Label>
+                      <Input
+                        id="totalViews"
+                        value={editFormData.totalViews}
+                        onChange={(e) => handleEditInputChange("totalViews", e.target.value)}
+                        placeholder="Number of Total Views"
+                      />
+                    </div>
                     <div>
                       <Label htmlFor="status">Published Post Status</Label>
                       <Select value={editFormData.status} onValueChange={(value) => handleEditInputChange("status", value)}>
@@ -717,7 +857,7 @@ const PostsPage = () => {
                           <SelectItem value="postUnderApproval">Post Under Approval</SelectItem>
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
-                          <SelectItem value="underModeration">Under Moderation</SelectItem>
+                           <SelectItem value="reposted">Reposted</SelectItem>
                           <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>
                       </Select>

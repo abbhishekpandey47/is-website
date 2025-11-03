@@ -26,7 +26,7 @@ export default React.memo(function HeadBanner({ postData }) {
   return (
     <div
       id="headBanner"
-      className="flex min-[1900px]:mx-52 flex-row items-center justify-between max-sm:mx-8 mx-14 my-4 py-8 px-8 max-sm:px-0 max-sm:py-0 rounded-lg shadow-lg readytostart"
+      className="flex min-[1900px]:mx-52 flex-row items-center justify-between max-sm:mx-4 mx-14 my-4 py-8 px-8 max-sm:px-4 max-sm:py-4 rounded-lg shadow-lg readytostart"
     >
       {/* Left Section (Text Section) */}
       <div className="max-sm:w-[100%] w-[50%] p-7 h-auto flex flex-col justify-center max-lg:w-full">
@@ -34,11 +34,11 @@ export default React.memo(function HeadBanner({ postData }) {
           {postData.category || "Category"}
         </span>
 
-        <h1 className="text-5xl max-xl:text-3xl max-md:text-2xl max-xs:text-xl quicksand-bold mb-6 text-white">
+        <h1 className="text-5xl max-xl:text-3xl max-md:text-2xl max-sm:text-xl quicksand-bold mb-6 text-white">
           {postData.title || "Name of the blog"}
         </h1>
 
-        <p className="text-lg mb-6 text-[wheat] quicksand-light block max-md:hidden">
+        <p className="text-lg mb-6 text-[wheat] quicksand-light block max-sm:hidden">
           {postData.description || "Blog description"}
         </p>
 
@@ -85,10 +85,10 @@ export default React.memo(function HeadBanner({ postData }) {
         <Image
           width={900}
           height={900}
-          loading="lazy" // Lazy loading for performance
+          loading="lazy"
           priority={false}
           src={postData.ogImage || "/blog_home/blog_home.png"}
-          alt={`Illustration for ${postData.title || "the blog"}`} // Improved alt text for accessibility
+          alt={`Illustration for ${postData.title || "the blog"}`}
           className="rounded-lg w-full h-auto max-lg:hidden"
         />
       </div>

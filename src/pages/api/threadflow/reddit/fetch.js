@@ -2,6 +2,9 @@ import { fetchWithRetry } from '@/app/tools/reddit-tools/utils/fetchWithRetry';
 import { forbid, getAllowedCompanyIds, verifyRequestUser } from '@/lib/serverAuth';
 import { createClient } from '@supabase/supabase-js';
 
+// Opt into longer execution for Fluid Compute on Vercel (Hobby: up to 300s)
+export const config = { runtime: 'nodejs', maxDuration: 300 };
+
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 const API_BASE = 'https://reddit-comment-gen.onrender.com';
 
@@ -9,11 +12,15 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   const { companyId, companyName, fullRefresh = false, maxBatches = 3 } = req.body || {};
   if (!companyId || !companyName) return res.status(400).json({ error: 'Missing fields' });
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return res.status(500).json({ error: 'Server not configured' });
+  }
   let userCtx; try { userCtx = await verifyRequestUser(req); } catch (e) { return res.status(e.status||401).json({ error: e.message }); }
   const allowed = await getAllowedCompanyIds(userCtx);
   if (!userCtx.isAdmin && Array.isArray(allowed) && !allowed.includes(companyId)) return forbid(res);
   try {
-    const batchLimit = Math.min(parseInt(maxBatches) || 1, 8); // prevent runaway
+    // Keep ingestion bounded per invocation; Vercel functions have strict time limits.
+    const batchLimit = Math.min(parseInt(maxBatches) || 1, 2); // hard-cap to 2 per call
   console.log('[reddit_fetch_v2] invocation', { companyId, companyName, fullRefresh, batchLimit });
     const { data: job, error: jobErr } = await supabase
       .from('reddit_ingestion_jobs')
@@ -42,7 +49,8 @@ export default async function handler(req, res) {
         nextCommentsAfter = comp.last_comments_after || null;
       }
     }
-    const TIMEOUT_MS = parseInt(process.env.REDDIT_FETCH_TIMEOUT_MS || '120000', 10);
+  // Cap upstream timeout to ensure we finish well within function limit; prefer smaller chunks + multiple invocations
+  const TIMEOUT_MS = parseInt(process.env.REDDIT_FETCH_TIMEOUT_MS || '110000', 10);
     console.log('[reddit_fetch_v2] env', { supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL?.slice(0,30)+'...', serviceKeyPresent: !!process.env.SUPABASE_SERVICE_ROLE_KEY, timeoutMs: TIMEOUT_MS });
     let emptyBatches = 0;
     while (batches < batchLimit) {
@@ -55,7 +63,18 @@ export default async function handler(req, res) {
       };
       const started = Date.now();
       console.log('[reddit_fetch_v2] batch', batches, 'payload', payload);
-      const data = await fetchWithRetry(`${API_BASE}/search_company_mentions`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), retries: 0, timeoutMs: TIMEOUT_MS });
+      let data;
+      try {
+        data = await fetchWithRetry(`${API_BASE}/search_company_mentions`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), retries: 0, timeoutMs: TIMEOUT_MS });
+      } catch (e) {
+        // Handle upstream timeout/abort explicitly to avoid opaque 500s
+        if (e?.name === 'AbortError' || e?.code === 20) {
+          console.warn('[reddit_fetch_v2] upstream timeout/abort');
+          await supabase.from('reddit_ingestion_jobs').update({ status: 'error', finished_at: new Date().toISOString(), error_message: 'upstream-timeout' }).eq('id', job.id);
+          return res.status(504).json({ error: 'Upstream timed out. Please retry shortly.' });
+        }
+        throw e;
+      }
       console.log('[reddit_fetch_v2] upstream duration(ms):', Date.now() - started, 'keys:', Object.keys(data||{}));
       const posts = Array.isArray(data.posts) ? data.posts : [];
       const comments = Array.isArray(data.comments) ? data.comments : [];
@@ -151,6 +170,22 @@ export default async function handler(req, res) {
     return res.status(200).json({ success: true, jobId: job.id, batchesUsed: batches, added: { posts: totalAddedPosts, comments: totalAddedComments }, cursors: { postsAfter, commentsAfter }, totalMentionsEstimate: countRows || null });
   } catch (e) {
     console.error('[reddit_fetch_v2] fetch error', e);
+    try {
+      // Best-effort: mark latest running job for this company as error to avoid dangling state
+      const { data: latestJob } = await supabase
+        .from('reddit_ingestion_jobs')
+        .select('*')
+        .eq('company_id', companyId)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (latestJob && latestJob.status === 'running') {
+        await supabase
+          .from('reddit_ingestion_jobs')
+          .update({ status: 'error', finished_at: new Date().toISOString(), error_message: e.message?.slice(0, 500) || 'error' })
+          .eq('id', latestJob.id);
+      }
+    } catch {}
     return res.status(500).json({ error: e.message });
   }
 }

@@ -26,7 +26,7 @@ export default React.memo(function HeadBanner({ postData }) {
           {postData.title || "Name of the blog"}
         </h1>
 
-        <p className="text-lg mb-6 text-[wheat] quicksand-light block max-md:hidden">
+        <p style={{"fontWeight": "400"}} className="text-lg mb-6 text-[wheat] quicksand-light block max-md:hidden">
           {postData.description || "Blog description"}
         </p>
 

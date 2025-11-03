@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { SidebarTrigger } from "../../../../Components/ui/sidebar";
 import { UserProfile } from "../../../../Components/UserProfile";
 import { useToast } from "../../../../hooks/use-toast";
+import { Textarea } from "../../../../Components/ui/textarea";
 
 
 const ReactQuill = dynamic(
@@ -33,6 +34,7 @@ const AddPostPage = () => {
   const { toast } = useToast();
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [newCategory, setNewCategory] = useState({ name: "", description: "" });
+  const [companiesList , setCompaniesList] = useState([]);
 
   // Predefined categories
   const [categories, setCategories] = useState([
@@ -52,8 +54,10 @@ const AddPostPage = () => {
     datePosted: "",
     postedLink: "",
     status: "live",
+    clientFeedback: "",
     currentStatus: "approved",
     redditUsername: "",
+    companyId:""
   });
 
   useEffect(() => {
@@ -162,19 +166,37 @@ const AddPostPage = () => {
       if (!user) {
         router.push("/auth/signin");
       } else {
-        try {
+       try {
           const token = await user.getIdToken();
-          const res = await fetch(`/api/posts?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
-          const result = await res.json();
+          const [catRes, companyRes] = await Promise.allSettled([
+            fetch(`/api/posts?categories=true`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            fetch(`/api/companies`, {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+          ]);
 
-          if (res.ok && result.categories) {
-            setCategories((prev) => {
-              const merged = [...prev, ...result.categories];
-              return [...new Set(merged.map((c) => c.trim()))];
-            });
+          if (catRes.status === 'fulfilled' && catRes.value.ok) {
+            const result = await catRes.value.json();
+            if (result.categories) {
+              setCategories((prev) => {
+                const merged = [...prev, ...result.categories];
+                return [...new Set(merged.map((c) => c.trim()))];
+              });
+            }
+          } else if (catRes.status === 'rejected') {
+            console.error("Failed to fetch categories:", catRes.reason);
+          }
+
+          if (companyRes.status === 'fulfilled' && companyRes.value.ok) {
+            const companyResult = await companyRes.value.json();
+            setCompaniesList(companyResult.data || []);
+          } else if (companyRes.status === 'rejected') {
+            console.error("Failed to fetch companies:", companyRes.reason);
           }
         } catch (err) {
-          console.error("Failed to fetch categories:", err);
+          console.error("Failed to fetch initial data:", err);
         }
       }
     });
@@ -342,6 +364,26 @@ const AddPostPage = () => {
                       className="h-10"
                     />
                   </div>
+                  {companiesList.length > 0 &&
+                  <div>
+                    <Label htmlFor="companyId">Company Name</Label>
+                    <Select
+                      value={formData.companyId}
+                      onValueChange={(value) =>
+                        handleInputChange("companyId", value)
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {
+                          companiesList.map((company) => (
+                            <SelectItem key={company.id} value={company.id}>{company.name}</SelectItem>
+                          ))}
+                      </SelectContent>
+                    </Select>
+                  </div>}
                 </div>
 
                 <div>
@@ -417,6 +459,17 @@ const AddPostPage = () => {
                   </p>
                 </div>
 
+                <div>
+                  <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Customer Comments</Label>
+                  <Textarea
+                    id="clientFeedback"
+                    value={formData.clientFeedback}
+                    onChange={(e) => handleInputChange("clientFeedback", e.target.value)}
+                    placeholder="Enter your feedback for this Reddit Comment..."
+                    rows={4}
+                    className="resize-none"
+                  />
+                </div>
 
                 {/* <div>
                   <Label htmlFor="kimsVersion">Kim's Version</Label>
@@ -477,7 +530,8 @@ const AddPostPage = () => {
                                               <SelectItem value="postUnderApproval">Post Under Approval</SelectItem>
                                               <SelectItem value="live">Live</SelectItem>
                                               <SelectItem value="removed">Removed </SelectItem>
-                                              <SelectItem value="underModeration">Under Moderation</SelectItem>
+    
+                                              <SelectItem value="reposted">Reposted</SelectItem>
                                               <SelectItem value="notPosted">Not Posted</SelectItem>
 
                                             </SelectContent>

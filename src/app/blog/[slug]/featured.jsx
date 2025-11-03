@@ -49,7 +49,7 @@ const Featured = () => {
       (a, b) =>
         new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime()
     )
-    .slice(0, 4);
+    .slice(1, 5);
 
   latestPosts.map((item, index) => console.log(item.publishedOn));
 
@@ -70,6 +70,7 @@ const Featured = () => {
         <div className="space-y-3">
           {latestPosts.map((item, index) => (
             <Link
+              key={index}
               href={`/blog/${item.slug}`}
               className="flex items-center bg-[#2A3A5E] p-2 rounded-md cursor-pointer hover:bg-[#3A4A7E] transition-all duration-300"
             >
@@ -79,7 +80,7 @@ const Featured = () => {
                   alt={item.title}
                   className="w-10 h-8 rounded-md mr-3 object-cover"
                 />
-                <span className="text-sm line-clamp-2 quicksand-light">
+                <span style={{fontWeight : "400"}} className="text-sm line-clamp-2 quicksand-light">
                   {item.title}
                 </span>
               </div>

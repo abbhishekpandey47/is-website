@@ -181,7 +181,7 @@ const GivenMenuBar = ({
 const menuLinksArrServices = [
   {
     hrefLink: "/services/developer-marketing-agency",
-    menuName: "Developer Marketing Agency",
+    menuName: "Developer Marketing",
   },
   {
     hrefLink: "/services/service-video-production",
@@ -236,6 +236,10 @@ const resourcesTab = [
       {
         hrefLink: "/playbook/reddit-b2b-marketing",
         menuName: "Reddit B2B Playbook",
+      },
+      {
+        hrefLink: "/playbook/developer-marketing",
+        menuName: "Developer Playbook",
       },
     ],
   },
@@ -296,7 +300,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full xs:pt-5 z-20 text-[#CFCAC7] gap-1 absolute">
-      <div className="navbar bg-slate-900 w-full sm:w-[80vw] md:max-w-6xl p-3 sm:p-5 mx-auto shadow-navshadow rounded-xl lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg:transform lg:-translate-x-1/2">
+      <div className={`navbar ${pathname === '/careers' ? 'bg-transparent' : 'bg-slate-900'} w-full sm:w-[80vw] md:max-w-6xl p-3 sm:p-5 mx-auto shadow-navshadow rounded-xl lg:absolute lg:left-[50vw] flex justify-center items-center lg:origin-center lg:transform lg:-translate-x-1/2`}>
         <div className="navbar-start max-lg:visible invisible">
           <Menu as="div" className="absolute inline-block text-left">
             <div>
@@ -377,7 +381,7 @@ const Navbar = () => {
                                 : ""
                             }
                           >
-                            <div>Developer Marketing Agency</div>
+                            <div>Developer Marketing</div>
                           </Link>
                         </MenuItem2>
 
@@ -538,6 +542,18 @@ const Navbar = () => {
                                 className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
                               >
                                 Reddit B2B Playbook
+                              </Link>
+                            </MenuItem2>
+                                <MenuItem2>
+                              <Link
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleServiceClick("/playbook/developer-marketing");
+                                }}
+                                href="/playbook/developer-marketing"
+                                className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                              >
+                                Developer Marketing Playbook
                               </Link>
                             </MenuItem2>
                           </div>

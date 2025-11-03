@@ -48,9 +48,9 @@ import Pagination from "./components/pagination";
 import { StatusCard } from "../../Components/StatusCard";
 import { UserProfile } from "../../Components/UserProfile";
 import { HoverTextCell } from "./components/HoverTextCell";
+import Pagination from "./components/pagination";
 
 const PAGE_SIZE = 10;
-
 const PostsPage = () => {
   const router = useRouter();
   const [firebaseUser, setFirebaseUser] = useState(null);
@@ -71,7 +71,7 @@ const PostsPage = () => {
   const [dateRange, setDateRange] = useState([null, null]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth,(user) => {
       setFirebaseUser(user);
       setLoading(false);
 
@@ -218,6 +218,8 @@ const PostsPage = () => {
 
     const matchesType =
       selectedType === "all" || item.type === selectedType;
+    const matchCompanyId =
+      selectedCompanyId === "all" || item.company_id === selectedCompanyId;
 
     const matchCompanyId =
       selectedCompanyId === "all" ||
@@ -294,6 +296,11 @@ const PostsPage = () => {
   if (!firebaseUser) {
     return <div className="p-6">Please log in to view your posts and comments.</div>;
   }
+  
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -347,7 +354,6 @@ const PostsPage = () => {
           <StatusCard status="underApproval" count={statusCnt.underApproval} label="Under Approval" />
           <StatusCard status="removed" count={statusCnt.removed} label="Removed" />
         </div>
-
         {/* Filters */}
         <Card className="mb-6">
           <CardContent className="p-6">
@@ -374,6 +380,21 @@ const PostsPage = () => {
                   <SelectItem value="comment">Comments</SelectItem>
                 </SelectContent>
               </Select>
+                <Select
+                                  value={selectedCompanyId}
+                                  onValueChange={setSelectedCompanyId}
+                                >
+                                <SelectTrigger className="w-48">
+                                    <SelectValue placeholder="Select Company" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {companies.map((company) => (
+                                      <SelectItem key={company.id} value={company.id}>
+                                        {company.name === "all" ? "All Companies" : company.name}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
 
               {/* Company */}
               <Select value={selectedCompanyId} onValueChange={setSelectedCompanyId}>

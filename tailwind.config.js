@@ -23,6 +23,18 @@ module.exports = {
         xxs: "200px",
         xs: "480px",
       },
+      perspective: {
+        '1000': '1000px',
+      },
+      transformStyle: {
+        'preserve-3d': 'preserve-3d',
+      },
+      rotate: {
+        'y-12': 'rotateY(12deg)',
+        'y-15': 'rotateY(15deg)',
+        'x-5': 'rotateX(5deg)',
+        'x-8': 'rotateX(8deg)',
+      },
       typography: {
         DEFAULT: {
           css: {

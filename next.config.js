@@ -1,7 +1,7 @@
 module.exports = {
     reactStrictMode: false,
     images: {
-         domains: ["cdn.prod.website-files.com", "framerusercontent.com", "images.surferseo.art"],
+         domains: ["cdn.prod.website-files.com", "framerusercontent.com", "images.surferseo.art", "betterstackcdn.com", "devplaybook-landing.lovable.app"],
         remotePatterns: [
             {
                 protocol: 'https',
@@ -14,6 +14,10 @@ module.exports = {
             {
                 protocol: 'https',
                 hostname: 'images.surferseo.art',
+            },
+            {
+                protocol: 'https',
+                hostname: 'devplaybook-landing.lovable.app',
             },
         ],
     },
@@ -101,6 +105,20 @@ module.exports = {
             },
         ];
     },
+    async rewrites() {
+        return [
+            {
+                source: "/ingest/static/:path*",
+                destination: "https://us-assets.i.posthog.com/static/:path*",
+            },
+            {
+                source: "/ingest/:path*",
+                destination: "https://us.i.posthog.com/:path*",
+            },
+        ];
+    },
+    // This is required to support PostHog trailing slash API requests
+    skipTrailingSlashRedirect: true,
 };
 
 

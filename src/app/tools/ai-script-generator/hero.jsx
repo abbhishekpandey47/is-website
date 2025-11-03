@@ -1,6 +1,7 @@
 "use client"
 import { Clock, Copy, Download, FileText, Sparkles, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import InputIssuesCard from './InputIssuesCard';
 
 const ScriptDisplay = ({ generatedScript, onClose, comparisonTitle = null, regenerateText, videoType }) => {
     const [copied, setCopied] = useState(false);
@@ -504,6 +505,7 @@ export default function AIVideoScriptGenerator() {
     const [targetAudience, setTargetAudience] = useState([]);
     const [generatedComment, setGeneratedComment] = useState("");
     const [error, setError] = useState("");
+    const [inputIssues, setInputIssues] = useState(null);
     const [loading, setLoading] = useState(false);
     const [showScript, setShowScript] = useState(false);
     const [regenerate, setRgenerate] = useState(false)
@@ -876,6 +878,7 @@ export default function AIVideoScriptGenerator() {
     const handleSubmit = async () => {
         try {
             setError("");
+            setInputIssues(null);
             setGeneratedComment("");
             setLoading(true);
 
@@ -892,19 +895,102 @@ export default function AIVideoScriptGenerator() {
                 }),
             });
 
-            if (!res.ok) throw new Error("Failed to generate script");
+            if (res.status === 400) {
+                const contentType = res.headers.get("content-type") || "";
+                if (contentType.includes("application/json")) {
+                    try {
+                        const errorData = await res.json();
+                        setInputIssues({
+                            problems: errorData.problems || [],
+                            suggestedFixes: errorData.suggestedFixes || []
+                        });
+                    } catch (parseError) {
+                        setError("Failed to parse validation error response");
+                    }
+                } else {
+                    const text = await res.text();
+                    setError(`Validation error: ${text.substring(0, 100)}`);
+                }
+                return;
+            }
 
-            const data = await res.json();
-            setGeneratedComment(data.script);
-            setShowScript(true);
+            if (!res.ok) {
+                const contentType = res.headers.get("content-type") || "";
+                if (contentType.includes("application/json")) {
+                    try {
+                        const errorData = await res.json();
+                        setError(errorData.message || errorData.error || "Failed to generate script");
+                    } catch (parseError) {
+                        setError(`Failed to parse error response (${res.status})`);
+                    }
+                } else {
+                    // If response is not JSON, try to get text
+                    const text = await res.text();
+                    setError(text ? `Server error: ${text.substring(0, 200)}` : `Failed to generate script (${res.status})`);
+                }
+                return;
+            }
+
+            const contentType = res.headers.get("content-type") || "";
+            if (!contentType.includes("application/json")) {
+                const text = await res.text();
+                setError(`Unexpected response format: ${text.substring(0, 200)}`);
+                return;
+            }
+
+            try {
+                const data = await res.json();
+                if (!data.script) {
+                    setError("Invalid response format: script not found");
+                    return;
+                }
+                setGeneratedComment(data.script);
+                setShowScript(true);
+            } catch (parseError) {
+                setError(`Failed to parse response: ${parseError.message}`);
+            }
         } catch (err) {
-            setError(err.message || "Something went wrong");
+            console.error("Error in handleSubmit:", err);
+            setError(err.message || "Something went wrong. Please try again.");
         } finally {
             setLoading(false);
         }
     };
 
     const [loadingText, setLoadingText] = useState("Generating your script...");
+
+    // Auto-fix functionality
+    const handleAutoFix = (fix) => {
+        switch (fix.action) {
+            case 'add_tool':
+                // Add a suggested tool based on video type
+                const suggestedTools = {
+                    'Coding Walkthrough': ['VS Code', 'GitHub Copilot', 'Codeium'],
+                    'Tool Comparison': ['GitHub Copilot', 'Codeium', 'Tabnine'],
+                    'Bug Fixing Session': ['Chrome DevTools', 'VS Code Debugger', 'Postman'],
+                    'Prompt Testing': ['ChatGPT', 'Claude', 'Gemini']
+                };
+                const tools = suggestedTools[videoType] || ['VS Code', 'GitHub Copilot'];
+                const newTool = tools.find(tool => !toolsInvolved.includes(tool)) || tools[0];
+                if (newTool && !toolsInvolved.includes(newTool)) {
+                    setToolsInvolved([...toolsInvolved, newTool]);
+                }
+                break;
+            case 'change_type':
+                // Change to a single-tool friendly type
+                const singleToolTypes = {
+                    'Coding Walkthrough': 'Feature Demo',
+                    'Tool Comparison': 'Feature Demo',
+                    'Bug Fixing Session': 'Feature Demo',
+                    'Prompt Testing': 'Feature Demo'
+                };
+                const newType = singleToolTypes[videoType] || 'Feature Demo';
+                setVideoType(newType);
+                break;
+        }
+        // Clear the input issues after applying fix
+        setInputIssues(null);
+    };
 
     useEffect(() => {
         if (loading) {
@@ -1079,8 +1165,20 @@ export default function AIVideoScriptGenerator() {
                     />
                 )}
 
-                {/* Show error message if there's an error */}
-                {error && (
+                {/* Show input issues card for validation errors */}
+                {inputIssues && (
+                    <div className="max-w-2xl mx-auto mb-8">
+                        <InputIssuesCard
+                            problems={inputIssues.problems}
+                            suggestedFixes={inputIssues.suggestedFixes}
+                            onFix={handleAutoFix}
+                            onClose={() => setInputIssues(null)}
+                        />
+                    </div>
+                )}
+
+                {/* Show generic error message for other errors */}
+                {error && !inputIssues && (
                     <div className="max-w-2xl mx-auto mb-8">
                         <div className="bg-red-500/20 border border-red-500/30 rounded-xl p-4 text-red-400 text-center">
                             {error}

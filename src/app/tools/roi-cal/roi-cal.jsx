@@ -43,6 +43,7 @@ const ContentROICalculator = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState(null);
+  const [info, setInfo] = useState(null);
   const [blogPerPost, setBlogPerPost] = useState(0);
   const [blogPerPostQunt, setblogPerPostQunt] = useState(0);
   const [timelineInMonth, setTimelineInMonth] = useState(0);
@@ -59,6 +60,7 @@ const ContentROICalculator = () => {
       contentTeam,
       domainExpertise,
       timeline,
+      role,
     } = formValues;
 
     if (!email) {
@@ -75,6 +77,7 @@ const ContentROICalculator = () => {
         contentTeam: contentTeam || "No",
         domainExpertise: domainExpertise || "False",
         timeline: timeline || "",
+        role: role || "founder",
         submittedAt: new Date().toISOString(),
       };
 
@@ -100,10 +103,11 @@ const ContentROICalculator = () => {
   const [formValues, setFormValues] = useState({
     budget: "",
     blogPosts: 3,
-    trafficGrowth: 50,
+    trafficGrowth: "Quarter",
     contentTeam: "No",
     domainExpertise: false,
     timeline: 1,
+    role: "founder",
   });
 
   const [results, setResults] = useState({
@@ -112,6 +116,13 @@ const ContentROICalculator = () => {
     savings: 0,
     savingsPercentage: 0,
     hasCalculated: false,
+    monthsInHouse: 0,
+    monthsAgency: 0,
+    timeSaved: 0,
+    projectSavings: 0,
+    roleContent: null,
+    shouldShowScalingWarning: false,
+    monthlyBudget: 0,
   });
 
   const handleInputChange = useCallback((field, value) => {
@@ -130,6 +141,10 @@ const ContentROICalculator = () => {
 
   const handleOperation = (msg) => {
     setError(msg);
+  };
+
+  const handleInfo = (msg) => {
+    setInfo(msg);
   };
 
   const handlePostChange = (domainExpertis, valueOfBlogePost) => {
@@ -166,20 +181,12 @@ const ContentROICalculator = () => {
     [handleInputChange]
   );
 
-  const handleTrafficGrowthChange = useCallback(
-    (e) => {
-      const value = e.target.value.replace(/[^\d]/g, "");
-      let numValue = value === "" ? 0 : parseInt(value, 10);
-      if (numValue > 100) numValue = 100;
-      handleInputChange("trafficGrowth", numValue);
-    },
-    [handleInputChange]
-  );
 
   const handleCalculate = useCallback(() => {
+    try {
     setIsLoading(true);
 
-    const { blogPosts, timeline, budget, domainExpertise, trafficGrowth } =
+      const { blogPosts, timeline, budget, domainExpertise, trafficGrowth, role } =
       formValues;
 
     const { hasCalculated } = results;
@@ -201,35 +208,117 @@ const ContentROICalculator = () => {
       return;
     }
 
-    setblogPerPostQunt(blogPosts);
-    const currValueOutSource = domainExpertise ? 540 : 495;
-    setBlogPerPost(currValueOutSource);
-    const valOutsourcedCost = blogPosts * currValueOutSource * timeline;
+    // Monthly mode calculation (apples-to-apples monthly compare)
+    const targetAssets = blogPosts;
+    const inHouseMonthlyCost = 6500; // Fixed at $6,500
+    const inHouseCapacity = 2; // 2 assets/month for in-house
+    const agencyPricePerAsset = domainExpertise ? 540 : 495;
+    const agencyCapacity = 6; // 6 assets/month max for agency
 
-    if (blogPosts * currValueOutSource > budget) {
-      const valYouneed = Math.round(budget / currValueOutSource);
-      handleOperation(
-        `This setup isn't feasible — your budget can't support ${blogPosts} blogs/month. ${valYouneed <= blogPosts
-          ? `Consider reducing output to ${valYouneed} blogs/month, or increase your budget by $${valOutsourcedCost - budget
-          }.`
-          : `Increase your budget by $${valOutsourcedCost - budget}.`
-        }`
-      );
+    // Apply capacity capping for monthly mode (cap at 20 posts)
+    const effectiveAssets = Math.min(targetAssets, 20);
+    const monthlyAgencyCost = effectiveAssets * agencyPricePerAsset;
+    const monthlySavings = inHouseMonthlyCost - monthlyAgencyCost;
+    const monthlySavingsPercentage = Math.round((monthlySavings / inHouseMonthlyCost) * 100);
 
-      setIsLoading(false);
+    // Calculate months needed for scope mode (for project summary)
+    const monthsInHouse = Math.ceil(targetAssets / inHouseCapacity);
+    const monthsAgency = Math.ceil(targetAssets / agencyCapacity);
+    
+    // Calculate costs for scope mode (for project summary)
+    const valInHouseCost = monthsInHouse * inHouseMonthlyCost;
+    const valOutsourcedCost = targetAssets * agencyPricePerAsset;
+    const valProjectSavings = valInHouseCost - valOutsourcedCost;
 
-      //setRequiredBudget(budget - valOutsourcedCost)
+    // Calculate time saved (for scope mode only - monthly mode doesn't have meaningful time saved)
+    const timeSaved = monthsInHouse - monthsAgency;
 
-      if (hasCalculated) {
-        handleOutput();
+    // Calculate values for role-based content
+    const annualSavings = monthlySavings * 12;
+    const paybackMonths = (monthlyAgencyCost / monthlySavings);
+    const costReduction = monthlySavingsPercentage;
+    const outputPerMonth = Math.round(effectiveAssets);
+
+    // Role-based content customization
+    const getRoleBasedContent = (role, annualSavings, paybackMonths, costReduction, outputPerMonth, timeSaved) => {
+      const pipelineBoost = Math.round(timeSaved * 15); // 15% per month saved
+      
+      switch (role) {
+        case "founder":
+          return {
+            summaryTitle: "Extend your runway, not your headcount.",
+            projectSummary: `By outsourcing technical content to Infrasity, you save $${annualSavings.toLocaleString()} annually and recover your spend in ${paybackMonths.toFixed(1)} months. That's ${timeSaved} extra months of product runway and less operational drag on your engineering team.`,
+            ctaLabel: "Model your team's savings →",
+            ctaTooltip: "See how much runway you recover with Infrasity.",
+            footerLine: "This ROI helps you compound faster — redirect those savings into engineering or GTM acceleration."
+          };
+        case "marketing":
+          return {
+            summaryTitle: "Predictable content velocity without scaling headcount.",
+            projectSummary: `Cut costs by ${costReduction}% and double throughput to ${outputPerMonth} assets/mo — consistent, high-quality content for every campaign. You save ~$${(annualSavings/1000).toFixed(0)}k/year and eliminate hiring overhead.`,
+            ctaLabel: "Export this for your Q4 budget review →",
+            ctaTooltip: "Show this ROI in your next marketing plan.",
+            footerLine: "Predictable throughput, fixed costs, and no hiring lag — perfect for your next quarterly plan."
+          };
+        case "growth":
+          return {
+            summaryTitle: "Turn time saved into growth velocity.",
+            projectSummary: `${timeSaved} months faster output = ${timeSaved} months of compounding SEO and trial growth. Expect ~${pipelineBoost}% higher pipeline velocity with faster publication and higher technical depth.`,
+            ctaLabel: "See impact on growth velocity →",
+            ctaTooltip: "View how faster content cycles accelerate signups.",
+            footerLine: "Each extra month saved compounds — more demos, more traffic, faster iteration."
+          };
+        case "content":
+          return {
+            summaryTitle: "Scale content quality without scaling team complexity.",
+            projectSummary: `Maintain high technical standards while ${costReduction}% cost reduction and ${outputPerMonth} assets/mo output. Focus on strategy while we handle execution.`,
+            ctaLabel: "Plan your content calendar →",
+            ctaTooltip: "See how this fits into your content strategy.",
+            footerLine: "Consistent quality, predictable delivery, more time for content strategy."
+          };
+        case "seo":
+          return {
+            summaryTitle: "Accelerate SEO results with technical depth.",
+            projectSummary: `${timeSaved} months faster publication = ${timeSaved} months of SEO compounding advantage. Higher technical depth improves rankings and organic traffic growth.`,
+            ctaLabel: "Project SEO impact →",
+            ctaTooltip: "See how faster, deeper content affects rankings.",
+            footerLine: "Technical depth + faster publication = stronger SEO foundation."
+          };
+        default:
+          return {
+            summaryTitle: "Optimize your content production.",
+            projectSummary: `Save $${annualSavings.toLocaleString()} annually with ${costReduction}% cost reduction and ${outputPerMonth} assets/mo output.`,
+            ctaLabel: "Get started →",
+            ctaTooltip: "Start optimizing your content production.",
+            footerLine: "Efficient content production with consistent quality."
+          };
       }
+    };
 
-      return;
-    }
+    // Get role-based content
+    const roleContent = getRoleBasedContent(role, annualSavings, paybackMonths, costReduction, outputPerMonth, timeSaved);
 
+    // Check for scaling capacity warning (updated thresholds)
+    const monthlyBudget = budget || 0;
+    const shouldShowScalingWarning = blogPosts > 20 || monthlyBudget > 15000;
+    
+    // Check for no-savings scenario
+    const hasNoSavings = monthlySavings <= 0;
+    
+    // Check for too few posts (guardrail)
+    const hasTooFewPosts = targetAssets < 3;
+
+    // Clear previous messages at the start
     if (error) {
       setError(null);
     }
+    if (info) {
+      setInfo(null);
+    }
+
+    setblogPerPostQunt(targetAssets);
+    setBlogPerPost(agencyPricePerAsset);
+    setTimelineInMonth(monthsAgency);
 
     if (domainExpertise) {
       setDomainExpertisResult(true);
@@ -237,39 +326,43 @@ const ContentROICalculator = () => {
       setDomainExpertisResult(false);
     }
 
-    let valInHouseCost = timeline * 1800;
-
-    valInHouseCost = (valInHouseCost + 1800 * 2) * 1.2;
-    setTimelineInMonth(timeline);
-
-    if (trafficGrowth > 0 && trafficGrowth <= 25) {
+    if (trafficGrowth === "Immediately") {
       setTrafficGrowthBlogPost(10);
-    } else if (trafficGrowth > 25 && trafficGrowth <= 50) {
+    } else if (trafficGrowth === "Quarter") {
       setTrafficGrowthBlogPost(20);
-    } else if (trafficGrowth > 50 && trafficGrowth <= 75) {
-      setTrafficGrowthBlogPost(30);
-    } else {
+    } else if (trafficGrowth === "Year") {
       setTrafficGrowthBlogPost(40);
+    } else {
+      setTrafficGrowthBlogPost(20);
     }
-
-    const valSavings = valInHouseCost - valOutsourcedCost;
-    const valSavingsPercentage = Math.round(
-      (valSavings / valInHouseCost) * 100
-    );
 
     setTimeout(() => {
       setResults({
-        inHouseCost: valInHouseCost,
-        outsourcedCost: valOutsourcedCost,
-        savings: valSavings,
-        savingsPercentage: valSavingsPercentage,
+            inHouseCost: inHouseMonthlyCost,
+            outsourcedCost: monthlyAgencyCost,
+            savings: monthlySavings,
+            savingsPercentage: monthlySavingsPercentage,
         hasCalculated: true,
+            monthsInHouse: monthsInHouse,
+            monthsAgency: monthsAgency,
+            timeSaved: timeSaved,
+            projectSavings: valProjectSavings,
+            roleContent: roleContent,
+            shouldShowScalingWarning: shouldShowScalingWarning,
+            monthlyBudget: monthlyBudget,
+            hasNoSavings: hasNoSavings,
+            hasTooFewPosts: hasTooFewPosts,
       });
 
       // End loading animation
       setIsLoading(false);
     }, 1000);
-  }, [formValues]);
+    } catch (error) {
+      console.error("Error in handleCalculate:", error);
+      setIsLoading(false);
+      handleOperation("An error occurred during calculation. Please try again.");
+    }
+  }, [formValues.budget, formValues.blogPosts, formValues.timeline, formValues.domainExpertise, formValues.trafficGrowth, formValues.role]);
 
   const {
     budget,
@@ -278,6 +371,7 @@ const ContentROICalculator = () => {
     contentTeam,
     domainExpertise,
     timeline,
+    role,
   } = formValues;
   const {
     inHouseCost,
@@ -285,9 +379,27 @@ const ContentROICalculator = () => {
     savings,
     savingsPercentage,
     hasCalculated,
+    monthsInHouse,
+    monthsAgency,
+    timeSaved,
+    projectSavings,
+    roleContent,
+    shouldShowScalingWarning,
+    monthlyBudget,
+    hasNoSavings,
+    hasTooFewPosts,
   } = results;
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenRole, setIsOpenRole] = useState(false);
+
+  const roleOptions = [
+    { value: "founder", label: "Founder" },
+    { value: "marketing", label: "Marketing" },
+    { value: "growth", label: "Growth" },
+    { value: "content", label: "Content" },
+    { value: "seo", label: "SEO" },
+  ];
 
   const options = [
     { value: 1, label: "1 month" },
@@ -314,10 +426,17 @@ const ContentROICalculator = () => {
   const selectedOption = options.find((option) => option.value === timeline);
 
   const [isOpenContent, setIsOpenContent] = useState(false);
+  const [isOpenTraffic, setIsOpenTraffic] = useState(false);
 
   const optionsContent = [
     { value: "Yes", label: "Yes" },
     { value: "No", label: "No" },
+  ];
+
+  const optionsTraffic = [
+    { value: "Immediately", label: "Immediately" },
+    { value: "Quarter", label: "Quarter" },
+    { value: "Year", label: "Year" },
   ];
 
   const toggleDropdownContent = () => setIsOpenContent(!isOpenContent);
@@ -327,12 +446,36 @@ const ContentROICalculator = () => {
     setIsOpenContent(false);
   };
 
+  const toggleDropdownTraffic = () => setIsOpenTraffic(!isOpenTraffic);
+
+  const handleSelectTraffic = (value) => {
+    handleInputChange("trafficGrowth", value);
+    setIsOpenTraffic(false);
+  };
+
+  const toggleDropdownRole = () => setIsOpenRole(!isOpenRole);
+
+  const handleRoleSelect = (option) => {
+    handleInputChange("role", option.value);
+    setIsOpenRole(false);
+  };
+
   const selectedOptionContent = optionsContent.find(
     (option) => option.value === contentTeam
   );
 
+  const selectedOptionTraffic = optionsTraffic.find(
+    (option) => option.value === trafficGrowth
+  );
+
+  const selectedOptionRole = roleOptions.find(
+    (option) => option.value === role
+  );
+
   const dropdownRef = useRef(null);
   const dropdownRefContent = useRef(null);
+  const dropdownRefTraffic = useRef(null);
+  const dropdownRefRole = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -344,6 +487,15 @@ const ContentROICalculator = () => {
         !dropdownRefContent.current.contains(event.target)
       ) {
         setIsOpenContent(false);
+      }
+      if (
+        dropdownRefTraffic.current &&
+        !dropdownRefTraffic.current.contains(event.target)
+      ) {
+        setIsOpenTraffic(false);
+      }
+      if (dropdownRefRole.current && !dropdownRefRole.current.contains(event.target)) {
+        setIsOpenRole(false);
       }
     }
 
@@ -367,9 +519,9 @@ const ContentROICalculator = () => {
   const showTooltip = isVisible || isHovered;
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-6 font-sans mb-24">
+    <div className="w-full max-w-6xl mx-auto p-6 font-sans mb-24" suppressHydrationWarning>
       <div>
-        <div className="w-full rounded-2xl p-6 bg-white/5 backdrop-blur-md border border-white/10 shadow-xl text-white">
+        <div className="w-full rounded-2xl p-6 bg-white/5 border border-white/10 shadow-xl text-white">
           <div className={`flex ${isMobile ? "flex-col" : "flex-row"} gap-8`}>
             {/* Left */}
 
@@ -381,8 +533,9 @@ const ContentROICalculator = () => {
                 <div className="relative inline-block">
                   <label className="block text-gray-300 mb-2">
                     Monthly content budget
+                    <span className="text-gray-500 text-sm ml-1">(reference only, not used in calculations)</span>
                     <TooltipIcon
-                      description="Estimated amount you want to spend on content per month."
+                      description="Estimated amount you want to spend on content per month. This is for reference only - calculations are based on the number of blog posts selected below."
                       width="400px"
                     />
                   </label>
@@ -408,12 +561,87 @@ const ContentROICalculator = () => {
                 )}
               </div>
 
+              {/* Role Dropdown */}
+              <div className="mb-5 group">
+                <label className="block text-gray-300 mb-2">
+                  Your Role
+                  <TooltipIcon
+                    description="Select your role to help us understand your perspective and needs."
+                    width="300px"
+                  />
+                </label>
+                <div ref={dropdownRefRole} className="relative">
+                  <button
+                    onClick={toggleDropdownRole}
+                    className="w-full px-4 py-3 bg-gray-800/50 rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
+                  >
+                    <span className="text-md text-white">
+                      {selectedOptionRole?.label}
+                    </span>
+                    <div className="flex items-center">
+                      <svg
+                        className="w-5 h-5 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+                  {isOpenRole && (
+                    <ul className="absolute z-10 w-full mt-1 bg-gray-800 border border-gray-700 rounded-lg shadow-lg max-h-60 overflow-auto">
+                      {roleOptions.map((option) => (
+                        <li key={option.value}>
+                          <div
+                            onClick={() => handleRoleSelect(option)}
+                            className="px-4 py-3 cursor-pointer hover:bg-gray-700 flex justify-between items-center"
+                          >
+                            <span
+                              className={
+                                role === option.value
+                                  ? "text-white font-medium"
+                                  : "text-gray-300"
+                              }
+                            >
+                              {option.label}
+                            </span>
+                            {role === option.value && (
+                              <div className="w-4 h-4 ml-2 rounded-full bg-black flex items-center justify-center">
+                                <svg
+                                  className="w-3 h-3 text-gray-400"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2.5"
+                                    d="M5 12l5 5L20 7"
+                                  />
+                                </svg>
+                              </div>
+                            )}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+
               <div className="mb-5 group">
                 <div className="relative inline-block">
                   <label className="block text-gray-300 mb-2">
                     Blog posts per month
                     <TooltipIcon
-                      description="Number of blog articles you expect to publish each month."
+                      description="Most high-output teams publish 8–20/mo for steady traffic growth."
                       width="390px"
                     />
                   </label>
@@ -422,7 +650,7 @@ const ContentROICalculator = () => {
                   <input
                     type="range"
                     min="1"
-                    max="50"
+                    max="20"
                     value={blogPosts}
                     onChange={(e) => {
                       handleInputChange("blogPosts", parseInt(e.target.value));
@@ -446,8 +674,8 @@ const ContentROICalculator = () => {
                   <label className="block text-gray-300">
                     Domain expertise required?
                     <TooltipIcon
-                      description="Specify if the content needs specialized industry knowledge or experience."
-                      width="330px"
+                      description="K8s, IAM, SDK docs, etc."
+                      width="200px"
                     />
                   </label>
                   <div className="relative inline-block w-12 h-6">
@@ -481,24 +709,66 @@ const ContentROICalculator = () => {
               </div>
 
               <div className="mb-5 group">
-                <label className="relative inline-block text-gray-300 mb-2">
+                <label className="block text-gray-300 mb-2">
                   Target traffic growth
                   <TooltipIcon
-                    description="Enter the percentage increase in traffic you aim to achieve."
-                    width="390px"
+                    description="Select when you expect to see traffic growth results."
+                    width="280px"
                   />
                 </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={trafficGrowth}
-                    onChange={(e) => handleTrafficGrowthChange(e)}
-                    className="w-full px-4 py-3 border border-gray-700 rounded-lg bg-gray-800/50 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    placeholder="Enter percentage"
-                  />
-                  <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
-                    %
+                <div ref={dropdownRefTraffic} className="relative">
+                  <button
+                    onClick={toggleDropdownTraffic}
+                    className="w-full px-4 py-3 bg-gray-800/50 rounded-lg text-left appearance-none font-medium focus:outline-none border border-gray-700 flex justify-between items-center"
+                  >
+                    <span className="text-md text-white">
+                      {selectedOptionTraffic?.label}
                   </span>
+                    <div className="flex items-center">
+                      <svg
+                        className="w-5 h-5 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
+                    </div>
+                  </button>
+
+                  {isOpenTraffic && (
+                    <div className="absolute mt-1 w-full bg-black border border-gray-700 rounded-lg shadow-lg z-10 overflow-hidden">
+                      <ul className="py-2 px-4 max-h-60 rounded-lg overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-black">
+                        {optionsTraffic.map((option) => (
+                          <li
+                            key={option.value}
+                            onClick={() => handleSelectTraffic(option.value)}
+                            className={`px-4 py-3 my-2 rounded-xl cursor-pointer text-md ${trafficGrowth === option.value
+                              ? "bg-gray-800"
+                              : "hover:bg-gray-900"
+                              }`}
+                          >
+                            <div className="flex justify-between items-center">
+                              <span
+                                className={
+                                  trafficGrowth === option.value
+                                    ? "text-white font-medium"
+                                    : "text-gray-300"
+                                }
+                              >
+                                {option.label}
+                              </span>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -689,6 +959,7 @@ const ContentROICalculator = () => {
                 </div>
               </div>
 
+
               <button
                 onClick={handleCalculate}
                 disabled={isLoading}
@@ -728,6 +999,15 @@ const ContentROICalculator = () => {
                   {error}
                 </div>
               )}
+              
+              {info && (
+                <div className="mt-2 text-blue-400 text-sm flex items-center">
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                  {info}
+                </div>
+              )}
             </div>
 
             <div className="w-px min-h-full bg-gray-600"></div>
@@ -741,10 +1021,10 @@ const ContentROICalculator = () => {
 
               {hasCalculated ? (
                 <div className="space-y-6">
-                  <div className="bg-gradient-to-br from-gray-900/95 via-gray-800/90 to-gray-700/95 backdrop-blur-sm border border-white/10 shadow-2xl rounded-2xl p-6">
+                  <div className="bg-gradient-to-br from-gray-900/95 via-gray-800/90 to-gray-700/95 border border-white/10 shadow-2xl rounded-2xl p-6">
                     {/* Header */}
                     <div className="flex items-center gap-3 mb-8">
-                      <div className="w-8 h-8 bg-gradient-to-br from-green-500/90 to-green-600/80 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/10">
+                      <div className="w-8 h-8 bg-gradient-to-br from-green-500/90 to-green-600/80 rounded-xl flex items-center justify-center border border-white/10">
                         <svg
                           className="w-6 h-6 text-white"
                           fill="none"
@@ -760,7 +1040,7 @@ const ContentROICalculator = () => {
                         </svg>
                       </div>
                       <h3 className="text-xl font-bold text-white">
-                        ROI Analysis
+                        {roleContent?.summaryTitle || "ROI Analysis"}
                       </h3>
                     </div>
 
@@ -768,15 +1048,15 @@ const ContentROICalculator = () => {
                     <div className="space-y-2 mb-8">
                       <div className="flex justify-between items-center">
                         <span className="text-gray-300 text-md">
-                          Current State
+                          In-house Full Time Cost
                         </span>
                         <span className="font-bold text-white text-md">
-                          ${inHouseCost.toLocaleString()}/mo
+                          $6,500/mo
                         </span>
                       </div>
-                      <div className="w-full bg-gray-700/30 backdrop-blur-sm rounded-full h-3 border border-white/5">
+                      <div className="w-full bg-gray-700/30 rounded-full h-3 border border-white/5">
                         <div
-                          className="bg-gradient-to-r from-orange-500/90 to-red-500/80 h-3 rounded-full backdrop-blur-sm"
+                          className="bg-gradient-to-r from-orange-500/90 to-red-500/80 h-3 rounded-full"
                           style={{ width: "100%" }}
                         ></div>
                       </div>
@@ -787,24 +1067,57 @@ const ContentROICalculator = () => {
                         </span>
                         <span className="font-bold text-white text-md">
                           $
-                          {Math.round(
-                            outsourcedCost / timelineInMonth
-                          ).toLocaleString()}
+                          {Math.round(outsourcedCost).toLocaleString()}
                           /mo
                         </span>
                       </div>
-                      <div className="w-full bg-gray-700/30 backdrop-blur-sm rounded-full h-3 border border-white/5">
+                      <div className="w-full bg-gray-700/30 rounded-full h-3 border border-white/5">
                         <div
-                          className="bg-gradient-to-r from-green-500/90 to-blue-500/80 h-3 rounded-full backdrop-blur-sm"
+                          className="bg-gradient-to-r from-green-500/90 to-blue-500/80 h-3 rounded-full"
                           style={{ width: `${Math.min(100, Math.max(0, 100 - savingsPercentage))}%` }}
                         ></div>
                       </div>
                     </div>
 
-                    {/* Metrics Grid - Now 3 columns for better balance */}
+                    {/* Too Few Posts Guardrail */}
+                    {hasTooFewPosts && (
+                      <div className="bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-500/30 rounded-xl p-6 mb-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-yellow-500/20 rounded-full flex items-center justify-center">
+                            <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <div className="text-yellow-200">
+                            <div className="font-semibold text-lg mb-2">Try 3+ posts for meaningful ROI</div>
+                            <div className="text-sm">For accurate calculations and meaningful insights, we recommend starting with at least 3 posts per month.</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* No Savings Scenario */}
+                    {hasNoSavings && !hasTooFewPosts && (
+                      <div className="bg-gradient-to-r from-red-900/20 to-orange-900/20 border border-red-500/30 rounded-xl p-6 mb-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center">
+                            <svg className="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <div className="text-red-200">
+                            <div className="font-semibold text-lg mb-2">No savings at this configuration</div>
+                            <div className="text-sm">In-house is cheaper at this volume. Reduce posts or discuss multi-pod options.</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Metrics Grid - Only show if there are savings and enough posts */}
+                    {!hasNoSavings && !hasTooFewPosts && (
                     <div className="grid grid-cols-3 gap-4">
                       {/* Cost Reduction */}
-                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-green-500/30 transition-all duration-300">
+                      <div className="bg-gray-800/60 rounded-2xl p-5 border border-white/10 hover:border-green-500/30 transition-all duration-300">
                         <div className="text-2xl font-bold text-green-400 mb-1">
                           {savingsPercentage}%
                         </div>
@@ -814,23 +1127,108 @@ const ContentROICalculator = () => {
                       </div>
 
                       {/* Annual Savings */}
-                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-blue-500/30 transition-all duration-300">
+                      <div className="bg-gray-800/60 rounded-2xl p-5 border border-white/10 hover:border-blue-500/30 transition-all duration-300">
                         <div className="text-2xl font-bold text-blue-400 mb-1">
-                          ${(savings * 12).toLocaleString()}
+                          ${(results.savings * 12).toLocaleString()}
                         </div>
                         <div className="text-gray-300 text-md">
                           Annual Savings
                         </div>
                       </div>
 
-                      <div className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
+                      <div className="bg-gray-800/60 rounded-2xl p-5 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
                         <div className="text-2xl font-bold text-cyan-400 mb-1">
-                          {Math.round(((savings * 36) / outsourcedCost) * 100)}%
+                          {(() => {
+                            const paybackMonths = outsourcedCost / savings;
+                            const boundedPayback = Math.max(0.5, Math.min(paybackMonths, 24)); // Cap at 24 months max
+                            
+                            if (boundedPayback < 1.0) {
+                              const days = Math.round(boundedPayback * 30);
+                              return `Under 1 month (~${days} days)`;
+                            } else if (boundedPayback >= 24) {
+                              return `> 24 months`;
+                            } else {
+                              const roundedPayback = Math.round(boundedPayback * 10) / 10;
+                              return `${roundedPayback} ${roundedPayback === 1 ? 'month' : 'months'}`;
+                            }
+                          })()}
                         </div>
-                        <div className="text-gray-300 text-md">3-Year ROI</div>
+                        <div className="text-gray-300 text-md" title="Financial break-even point — when monthly savings offset your Infrasity spend. Not a delivery timeline.">Payback Period</div>
                       </div>
                     </div>
+                    )}
                   </div>
+
+                  {/* Summary Section */}
+                  <div className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-xl p-6">
+                    <h3 className="text-xl font-bold text-white mb-4 text-center">
+                      ROI Impact
+                    </h3>
+                    <div className="text-center text-gray-200 text-lg">
+                      {roleContent?.projectSummary || `For ${blogPosts} assets: In-house ≈ ${monthsInHouse} ${monthsInHouse === 1 ? 'month' : 'months'} ($${(monthsInHouse * 6500 / 1000).toFixed(1)}k) vs Infrasity ≈ ${monthsAgency} ${monthsAgency === 1 ? 'month' : 'months'} ($${(blogPosts * (domainExpertise ? 540 : 495) / 1000).toFixed(1)}k). Save ≈ $${(projectSavings / 1000).toFixed(0)}k and ~${timeSaved} ${timeSaved === 1 ? 'month' : 'months'}.`}
+                    </div>
+                  </div>
+
+                  {/* Scaling Capacity Warning - Show when posts > 20 or budget > $15k */}
+                  {shouldShowScalingWarning && (
+                    <div className="bg-gradient-to-r from-orange-900/20 to-red-900/20 border border-orange-500/30 rounded-xl p-4 mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 bg-orange-500/20 rounded-full flex items-center justify-center">
+                          <svg className="w-4 h-4 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div className="text-orange-200 text-sm">
+                          <span className="font-semibold">Capacity Warning:</span> Most devtool teams operate between 6–20 technical assets/month for sustainable growth. For higher volume, we recommend parallel pods or an extended timeline.
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Capacity Guard - Show when posts > 6 but <= 20 */}
+                  {blogPosts > 6 && blogPosts <= 20 && !shouldShowScalingWarning && (
+                    <div className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-xl p-4 mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 bg-purple-500/20 rounded-full flex items-center justify-center">
+                          <svg className="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <div className="text-purple-200 text-sm">
+                          <span className="font-semibold">High Volume:</span> For {blogPosts} assets, we can deploy parallel pods to deliver faster. Contact us to discuss scaling options.
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Capacity Warning/Info - Only show when there's an actual issue */}
+                  {blogPosts > 5 && timeline !== Math.ceil(blogPosts / 6) && (
+                    <div className={`rounded-xl p-4 ${timeline < Math.ceil(blogPosts / 6) ? 'bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-500/30' : 'bg-gradient-to-r from-blue-900/20 to-cyan-900/20 border border-blue-500/30'}`}>
+                      <div className="flex items-center gap-3">
+                        <div className={`w-6 h-6 rounded-full flex items-center justify-center ${timeline < Math.ceil(blogPosts / 6) ? 'bg-yellow-500/20' : 'bg-blue-500/20'}`}>
+                          <svg className={`w-4 h-4 ${timeline < Math.ceil(blogPosts / 6) ? 'text-yellow-400' : 'text-blue-400'}`} fill="currentColor" viewBox="0 0 20 20">
+                            {timeline < Math.ceil(blogPosts / 6) ? (
+                              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                            ) : (
+                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                            )}
+                          </svg>
+                        </div>
+                        <div className={`text-sm ${timeline < Math.ceil(blogPosts / 6) ? 'text-yellow-200' : 'text-blue-200'}`}>
+                          {timeline < Math.ceil(blogPosts / 6) ? (
+                            <>
+                              <span className="font-semibold">Capacity Warning:</span> For {blogPosts} assets, we recommend a {Math.ceil(blogPosts / 6)}-month timeline (6 assets/month max). This will deliver all {blogPosts} assets over {Math.ceil(blogPosts / 6)} months.
+                            </>
+                          ) : (
+                            <>
+                              <span className="font-semibold">Timeline Info:</span> For {blogPosts} assets, we recommend a {Math.ceil(blogPosts / 6)}-month timeline (6 assets/month max). This will deliver all {blogPosts} assets over {Math.ceil(blogPosts / 6)} months.
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <div className="grid grid-cols-3 pb-3 mb-3">
                       <h3 className="text-xl font-bold">Time to Value</h3>
@@ -843,62 +1241,62 @@ const ContentROICalculator = () => {
                     </div>
 
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
-                      <span className="col-span-1">Time to First Output</span>
-                      <span className="col-span-1 text-center blur-sm">
-                        4-6 weeks
+                      <span className="col-span-1">Time to Complete</span>
+                      <span className="col-span-1 text-center">
+                        {monthsInHouse} {monthsInHouse === 1 ? 'month' : 'months'}
                       </span>
-                      <span className="col-span-1 text-center blur-sm">
-                        1-2 weeks
+                      <span className="col-span-1 text-center">
+                        {monthsAgency} {monthsAgency === 1 ? 'month' : 'months'}
                       </span>
                     </div>
 
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Output Per Month</span>
-                      <span className="col-span-1 text-center blur-sm">
-                        {Math.floor(blogPerPostQunt / 2) + 1} assets
+                      <span className="col-span-1 text-center">
+                        {Math.ceil(blogPerPostQunt / monthsInHouse)} assets
                       </span>
-                      <span className="col-span-1 text-center blur-sm">
-                        {blogPerPostQunt} assets
+                      <span className="col-span-1 text-center">
+                        {Math.ceil(blogPerPostQunt / monthsAgency)} assets
                       </span>
                     </div>
 
                     <div className="grid grid-cols-3 border-b border-gray-700 pb-3 mb-3">
                       <span className="col-span-1">Ramp-Up Time</span>
-                      <span className="col-span-1 text-center blur-sm">
+                      <span className="col-span-1 text-center">
                         High
                       </span>
-                      <span className="col-span-1 text-center blur-sm">
+                      <span className="col-span-1 text-center">
                         None
                       </span>
                     </div>
 
                     <p className="mt-4 text-blue-400">
-                      You get content{" "}
-                      <span className="mt-4 text-blue-400 blur-sm">4 </span>x
-                      faster and save weeks of ramp-up.
+                      {roleContent?.footerLine || `You get content ${Math.round(monthsInHouse / monthsAgency * 10) / 10}x faster and save ${timeSaved} ${timeSaved === 1 ? 'month' : 'months'} of ramp-up.`}
                     </p>
                   </div>
                   <div className="bg-gray-800 border border-white/10 shadow-xl rounded-lg p-6">
                     <div>
-                      {/* <p className="text-[12px] text-gray-300">
-                        Note: To hit {trafficGrowth}% traffic growth, aim for{" "}
-                        {trafficGrowthBlogPost} high-quality blog
-                        posts each month.
-                      </p> */}
+                      <p className="text-[12px] text-gray-300">
+                        <strong>Campaign Impact:</strong> With {blogPosts} posts/month, you'll generate{" "}
+                        {Math.round(blogPosts * 12)} high-quality assets annually for your{" "}
+                        {trafficGrowth.toLowerCase()} growth campaigns.
+                      </p>
 
                       <p className="text-center">
-                        Start saving{" "}
-                        <span className="font-bold">
+                        <strong>Monthly Impact:</strong> Save{" "}
+                        <span className="font-bold text-green-400">
                           ${(inHouseCost - outsourcedCost).toLocaleString()}
                         </span>{" "}
-                        every month
+                        monthly while scaling content velocity
                       </p>
 
 
                     </div>
                   </div>
                   <div className="mt-3 text-center">
-                    <CalendarBooking buttonText="Get Started Today" />
+                    <CalendarBooking 
+                      buttonText={roleContent?.ctaLabel || "Get Started Today"}
+                    />
                   </div>
                 </div>
 

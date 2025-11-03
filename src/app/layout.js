@@ -17,7 +17,7 @@ export function generateMetadata() {
 
 export default function RootLayout({ children }) {
   return (
-  <html lang='en'>
+  <html lang='en' suppressHydrationWarning>
             <head>
                 <link rel='preconnect' href='https://fonts.googleapis.com' />
                 <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
@@ -60,45 +60,43 @@ export default function RootLayout({ children }) {
                 />
 
                 {/* Factors.ai tracker */}
-                <Script id='factors-ai' strategy='afterInteractive'>
-                    {`
-          window.faitracker = window.faitracker || function () {
-            this.q = [];
-            var t = new CustomEvent("FAITRACKER_QUEUED_EVENT");
-            return this.init = function (t, e, a) {
-              this.TOKEN = t;
-              this.INIT_PARAMS = e;
-              this.INIT_CALLBACK = a;
-              window.dispatchEvent(new CustomEvent("FAITRACKER_INIT_EVENT"));
-            }, this.call = function () {
-              var e = { k: "", a: [] };
-              if (arguments && arguments.length >= 1) {
-                for (var a = 1; a < arguments.length; a++) e.a.push(arguments[a]);
-                e.k = arguments[0];
-              }
-              this.q.push(e), window.dispatchEvent(t);
-            }, this.message = function () {
-              window.addEventListener("message", function (t) {
-                if ("faitracker" === t.data.origin) {
-                  this.call("message", t.data.type, t.data.message);
+                   <Script id="factors-analytics" strategy="afterInteractive">
+          {`
+            window.faitracker = window.faitracker || function(){
+              this.q=[];
+              var t=new CustomEvent("FAITRACKER_QUEUED_EVENT");
+              return this.init=function(t,e,a){
+                this.TOKEN=t,this.INIT_PARAMS=e,this.INIT_CALLBACK=a,
+                window.dispatchEvent(new CustomEvent("FAITRACKER_INIT_EVENT"))
+              },
+              this.call=function(){
+                var e={k:"",a:[]};
+                if(arguments&&arguments.length>=1){
+                  for(var a=1;a<arguments.length;a++)e.a.push(arguments[a]);
+                  e.k=arguments[0]
                 }
-              });
-            }, this.message(), this.init(
-              "3yuwy0lgugm0vsdnuwqtlbh7rrt4ip7k",
-              { host: "https://api.factors.ai" }
-            ), this;
-          }();
-
-          (function () {
-            var t = document.createElement("script");
-            t.type = "text/javascript";
-            t.src = "https://app.factors.ai/assets/factors.js";
-            t.async = true;
-            var d = document.getElementsByTagName("script")[0];
-            d.parentNode.insertBefore(t, d);
-          })();
-        `}
-                </Script>
+                this.q.push(e),window.dispatchEvent(t)
+              },
+              this.message=function(){
+                window.addEventListener("message",function(t){
+                  if("faitracker"===t.data.origin){
+                    this.call("message",t.data.type,t.data.message)
+                  }
+                })
+              },
+              this.message(),
+              this.init("1ykmwtoj7xhjphvpft3b3hfqynnfl1dx",{host:"https://api.factors.ai"}),
+              this
+            }(),
+            function(){
+              var t=document.createElement("script");
+              t.type="text/javascript",
+              t.src="https://app.factors.ai/assets/factors.js",
+              t.async=!0,
+              (d=document.getElementsByTagName("script")[0]).parentNode.insertBefore(t,d)
+            }();
+          `}
+        </Script>
 
                 <Script id='reb2b-snippet' strategy='afterInteractive'>
                     {`
@@ -150,6 +148,26 @@ export default function RootLayout({ children }) {
           })(window, document, "clarity", "script", "rc3czxet7l");
         });
       `}</Script>
+                {/* Apollo Tracker */}
+        <Script id="apollo-tracker" strategy="afterInteractive">
+          {`
+            (function initApollo() {
+              var n = Math.random().toString(36).substring(7);
+              var o = document.createElement("script");
+              o.src = "https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache=" + n;
+              o.async = true;
+              o.defer = true;
+              o.onload = function () {
+                if (window.trackingFunctions && window.trackingFunctions.onLoad) {
+                  window.trackingFunctions.onLoad({ appId: "663b5ebd5922fc02eac8a429" });
+                } else {
+                  console.error("Apollo trackingFunctions not found.");
+                }
+              };
+              document.head.appendChild(o);
+            })();
+          `}
+        </Script>
 
                 <Script
                     src='https://assets.calendly.com/assets/external/widget.js'

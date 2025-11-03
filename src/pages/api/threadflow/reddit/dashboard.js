@@ -5,6 +5,9 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.
 export default async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
   const { companyId, range = '30d', legacy } = req.query;
+  const page = Math.max(1, parseInt(req.query.page || '1', 10));
+  const pageSize = Math.min(100, Math.max(5, parseInt(req.query.pageSize || '25', 10)));
+  const topN = Math.min(50, Math.max(1, parseInt(req.query.topN || '10', 10)));
   if (!companyId) return res.status(400).json({ error: 'companyId required' });
   // AuthZ: ensure caller can access this company
   let userCtx;
@@ -19,14 +22,15 @@ export default async function handler(req, res) {
     since = new Date(Date.now() - days * 24 * 3600 * 1000).toISOString();
   }
   try {
-    let query = supabase
+    // 1) Metrics/time series: fetch scoped set (range-limited) for aggregation
+    let metricsQuery = supabase
       .from('reddit_mentions')
-  .select('type, subreddit, upvotes, total_comments, created_utc, fetched_at, engagement_score, title, body, url')
+      .select('type, subreddit, upvotes,author,total_comments, created_utc, fetched_at, engagement_score, title, body, url')
       .eq('company_id', companyId);
     if (range !== 'all') {
-      query = query.or(`created_utc.is.null,created_utc.gte.${since}`);
+      metricsQuery = metricsQuery.or(`created_utc.is.null,created_utc.gte.${since}`);
     }
-    const { data: mentions, error: mErr } = await query;
+    const { data: mentions, error: mErr } = await metricsQuery;
     if (mErr) throw mErr;
     const totalMentions = mentions.length;
     const subsSet = new Set(mentions.map(m => m.subreddit).filter(Boolean));
@@ -102,20 +106,30 @@ export default async function handler(req, res) {
       { stage: 'Upvotes ≥5', count: upvotes5, percentage: totalMentions? Math.round((upvotes5/totalMentions)*100):0 },
       { stage: 'Comments ≥3', count: comments3, percentage: totalMentions? Math.round((comments3/totalMentions)*100):0 }
     ];
-    // Top threads (posts only, sort by engagement_score)
-    const topThreads = postMentions
-      .slice()
-      .sort((a,b)=> (b.engagement_score||0)-(a.engagement_score||0))
-      .slice(0,10)
-      .map((p,i)=> ({
-        id: i,
-        subreddit: p.subreddit,
-        upvotes: p.upvotes||0,
-        comments: p.total_comments||0,
-        engagement: (p.upvotes||0)+(p.total_comments||0),
-        url: p.url,
-        title: p.title || '(Untitled)'
-      }));
+    // 2) Top threads (DB-side) limited by topN
+    let topQuery = supabase
+      .from('reddit_mentions')
+      .select('type, subreddit, upvotes,total_comments, author, url, title, engagement_score, created_utc, fetched_at')
+      .eq('company_id', companyId)
+      .eq('type', 'post')
+      .order('engagement_score', { ascending: false })
+      .limit(topN);
+    if (range !== 'all') {
+      topQuery = topQuery.or(`created_utc.is.null,created_utc.gte.${since}`);
+    }
+    const { data: topRows, error: topErr } = await topQuery;
+    if (topErr) throw topErr;
+    const topThreads = (topRows || []).map((p,i)=> ({
+      id: i,
+      type: p.type,
+      subreddit: p.subreddit,
+      upvotes: p.upvotes||0,
+      comments: p.total_comments||0,
+      author: p.author || '',
+      engagement: (p.upvotes||0)+(p.total_comments||0),
+      url: p.url,
+      title: p.title || '(Untitled)'
+    }));
     // Simple topic clusters (frequent 2-word phrases in titles)
     const phraseCounts = {};
     const stop = new Set(['this','that','with','from','your','about','have','will','they','their','there','what','when','where','which','them','into','over','under','after','before','still','just','more','some','been','than','then','many','also','such','because','while','could','should','would','until','these','those','using','used','uses','able']);
@@ -128,6 +142,36 @@ export default async function handler(req, res) {
         phraseCounts[phrase].total_engagement += (m.upvotes||0) + (m.total_comments||0);
       }
     });
+
+    // 3) Paged allThreads (DB-side), order by created_utc desc then fetched_at desc
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+    let pageQuery = supabase
+      .from('reddit_mentions')
+      .select('id, type, subreddit, upvotes,total_comments, author, url, title, body, created_utc, fetched_at', { count: 'exact' })
+      .eq('company_id', companyId)
+      .order('created_utc', { ascending: false, nullsFirst: false })
+      .order('fetched_at', { ascending: false, nullsFirst: false })
+      .range(from, to);
+    if (range !== 'all') {
+      pageQuery = pageQuery.or(`created_utc.is.null,created_utc.gte.${since}`);
+    }
+    const { data: pageRows, error: pageErr, count: totalAllThreads } = await pageQuery;
+    if (pageErr) throw pageErr;
+    const allThreads = (pageRows || []).map((p) => ({
+      id: p.id,
+      type: p.type,
+      subreddit: p.subreddit,
+      upvotes: p.upvotes || 0,
+      author: p.author || '',
+      comments: p.total_comments || 0,
+      engagement: (p.upvotes || 0) + (p.total_comments || 0),
+      url: p.url,
+      title: p.title || p.body?.substring(0,100) || '(No Title)',
+      created_utc: p.created_utc || null,
+      fetched_at: p.fetched_at || null,
+    }));
+
     const topicClusters = Object.values(phraseCounts)
       .filter(p=>p.mentions_count>=1) // lowered threshold so clusters appear for smaller datasets
       .sort((a,b)=> b.mentions_count - a.mentions_count)
@@ -170,6 +214,10 @@ export default async function handler(req, res) {
       heatmap,
       funnel,
       topThreads,
+      allThreads,
+      allThreadsPage: page,
+      allThreadsPageSize: pageSize,
+      allThreadsTotal: totalAllThreads || 0,
       topicClusters,
       lastIngestedAt: company?.last_ingested_at || null,
   meta: { firstDate, lastDate, spanDays, distinctDays: timeSeries.length },

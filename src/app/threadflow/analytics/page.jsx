@@ -1,324 +1,209 @@
 "use client";
 import { auth } from '@/lib/firebaseClient';
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../../../Components/ui/card";
+import { Card, CardContent } from "@/Components/ui/card";
+import PostAnalyticsTable from './components/postAnalytics';
+import CommentsAnalyticsTable from './components/commentAnalytics';
+import { UserProfile } from '@/Components/UserProfile';
+import { SidebarTrigger } from '@/Components/ui/sidebar';
+import { BarChart3 } from 'lucide-react';
+import session from "@/app/tools/utils/session";
 
-const getCompanyId = () => {
-  // TODO: Replace with actual logic to get companyId from session/user/context
-  if (typeof window !== "undefined") {
-    return localStorage.getItem("companyId") || "test-company-id";
-  }
-  return "test-company-id";
-};
+function getAgeString(hours) {
+  if (hours == null || Number.isNaN(hours)) return "";
+  if (hours <= 0) return "0h";
+  if (hours < 24) return `${Math.round(hours)}h`;
+  if (hours < 24 * 7) return `${Math.round(hours / 24)}d`;
+  return `${Math.round(hours / (24 * 7))}w`;
+}
 
-const AnalyticsPage = () => {
-  const [loading, setLoading] = useState(true);
+const PAGE_SIZE = 10;
+
+export default function AnalyticsPage() {
+  const [postsPage, setPostsPage] = useState(1);
+  const [commentsPage, setCommentsPage] = useState(1);
+
+  const cached = session.get("analyticsDataV2");
+  const [analyticsData, setAnalyticsData] = useState(cached ?? null);
+  const [loading, setLoading] = useState(!Boolean(cached));
   const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
-  const [companyId, setCompanyId] = useState(null);
 
   useEffect(() => {
-    const fetchCompanyAndDashboard = async () => {
+    if (analyticsData) session.set("analyticsDataV2", analyticsData);
+  }, [analyticsData]);
+
+  useEffect(() => {
+    let aborted = false;
+
+    (async () => {
       setLoading(true);
       setError(null);
       try {
-        // Get current user and token
-        const user = auth.currentUser;
+        let user = auth.currentUser;
+        if (!user) {
+          await new Promise(r => setTimeout(r, 120));
+          user = auth.currentUser;
+        }
         if (!user) throw new Error('Not authenticated');
         const token = await user.getIdToken();
-        // Fetch companies
-        const resCompanies = await fetch('/api/threadflow/reddit/my-companies', { headers: { Authorization: `Bearer ${token}` } });
-        if (!resCompanies.ok) throw new Error('Failed to fetch companies');
-        const companiesJson = await resCompanies.json();
-        const firstCompany = companiesJson.companies?.[0];
-        if (!firstCompany?.id) throw new Error('No companies found');
-        setCompanyId(firstCompany.id);
-        // Fetch dashboard
-        const resDash = await fetch(`/api/threadflow/reddit/dashboard?companyId=${firstCompany.id}`, { headers: { Authorization: `Bearer ${token}` } });
-        if (!resDash.ok) throw new Error('Failed to fetch analytics');
-        const dashJson = await resDash.json();
-        setData(dashJson);
+
+        const qs = new URLSearchParams({
+          pagePosts: String(postsPage),
+          pageSizePosts: String(PAGE_SIZE),
+          pageComments: String(commentsPage),
+          pageSizeComments: String(PAGE_SIZE),
+        });
+
+        const resp = await fetch(`/api/analytics?${qs.toString()}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!resp.ok) throw new Error('Failed to fetch analytics data');
+
+        const json = await resp.json();
+        if (!aborted) setAnalyticsData(json?.data ?? null);
       } catch (e) {
-        setError(e.message);
+        if (!aborted) setError(e?.message ?? 'Something went wrong');
       } finally {
-        setLoading(false);
+        if (!aborted) setLoading(false);
       }
-    };
-    fetchCompanyAndDashboard();
-  }, []);
+    })();
 
-  // Map API data to UI variables with defensive checks
-  // Find top-performing category by highest total mentions in heatmap
-  let topCategory = "-";
-  if (Array.isArray(data?.heatmap) && data.heatmap.length > 0) {
-    const sorted = [...data.heatmap].sort((a, b) => {
-      const aMentions = Array.isArray(a.data) ? a.data.reduce((acc, d) => acc + (d.value || 0), 0) : 0;
-      const bMentions = Array.isArray(b.data) ? b.data.reduce((acc, d) => acc + (d.value || 0), 0) : 0;
-      return bMentions - aMentions;
-    });
-    topCategory = sorted[0]?.subreddit || "-";
-  }
+    return () => { aborted = true; };
+  }, [postsPage, commentsPage]);
 
-  const analyticsData = data?.metrics ? {
-    totalPosts: Array.isArray(data?.timeSeries) ? data.timeSeries.reduce((acc, d) => acc + (d.posts || 0), 0) : 0,
-    totalEngagement: typeof data?.metrics?.estUpVotes === "number" ? data.metrics.estUpVotes : 0,
-    totalUpvotes: typeof data?.metrics?.estUpVotes === "number" ? data.metrics.estUpVotes : 0,
-    totalComments: Array.isArray(data?.timeSeries) ? data.timeSeries.reduce((acc, d) => acc + (d.comments || 0), 0) : 0,
-    avgEngagementRate: typeof data?.metrics?.avgEngagement === "string" || typeof data?.metrics?.avgEngagement === "number" ? `${data.metrics.avgEngagement}%` : "0%",
-    topPerformingCategory: topCategory,
-    monthlyGrowth: "+0%" // Placeholder, can be calculated if needed
-  } : {};
+  if (loading) return <div className="text-center py-12">Loading analytics...</div>;
+  if (error) return <div className="text-center py-12 text-red-500">Error: {error}</div>;
+  if (!analyticsData) return <div className="text-center py-12">No data yet.</div>;
 
-  // Recent metrics: last 4 periods from timeSeries
-  const recentMetrics = Array.isArray(data?.timeSeries) ? data.timeSeries.slice(-4).reverse().map((metric, idx) => ({
-    period: metric.date,
-    posts: metric.posts,
-    upvotes: metric.posts, // Not exact, but can be improved if needed
-    comments: metric.comments,
-    engagement: `${typeof data?.metrics?.avgEngagement === "number" ? data.metrics.avgEngagement : 0}%`
-  })) : [];
+  const postsBlock = analyticsData.posts ?? { items: [], total: 0, page: 1, totalPages: 1 };
+  const commentsBlock = analyticsData.comments ?? { items: [], total: 0, page: 1, totalPages: 1 };
 
-  // Category performance: from heatmap data
+  const posts = postsBlock.items || [];
+  const comments = commentsBlock.items || [];
 
-  const heatMap  = [{
-    category: "r/CRM",
-          posts: 0,
-          avgUpvotes: 2,
-          avgComments: 2,
-          performance: 1
-  },{
-    category: "r/Entrepreneur",
-          posts: 0,
-          avgUpvotes: 1,
-          avgComments: 1,
-          performance: 1
-  },{
-    category: "r/WhatsappBusinessAPI",
-           posts: 0,
-          avgUpvotes: 2,
-          avgComments: 2,
-          performance: 1
-  },{
-    category: "r/ecommerce",
-                  posts: 0,
-          avgUpvotes: 1,
-          avgComments: 1,
-          performance: 1
-  },{
-    category: "r/automation",
-                 posts: 0,
-          avgUpvotes: 1,
-          avgComments: 1,
-          performance: 1
-  },{
-    category: "r/StartUpIndia",
-               posts: 0,
-          avgUpvotes: 1,
-          avgComments: 1,
-          performance: 1
-  },
-{
-    category: "r/MarketingAutomation",
-                 posts: 0,
-          avgUpvotes: 4,
-          avgComments: 1,
-          performance: 1
-  },
-{
-    category:"r/developersindia"
-,
-                   posts: 0,
-          avgUpvotes: 1,
-          avgComments: 1,
-          performance: 1
-  },
-{
-    category: "r/whatsapp",
-                posts: 0,
-          avgUpvotes: 1,
-          avgComments: 1,
-          performance: 1
-  },
-{
-    category: "r/software"
-
-,
-          posts: 0,
-          avgUpvotes: 1,
-          avgComments: 1,
-          performance: 1
-  },{
-    category: "r/FutureTechFinds",
-          posts:0, 
-          avgUpvotes: 1 ,
-          avgComments: 1 ,
-          performance: 1
-  },
-]
-
-  const categoryPerformance = Array.isArray(data?.heatmap)
-    ? data.heatmap.map(cat => {
-        return {
-          category: cat.subreddit,
-          posts: Array.isArray(cat.data) ? cat.data.reduce((acc, d) => acc + d.value, 0) : 0,
-          avgUpvotes: Array.isArray(cat.data) && cat.data.length > 0 ? Math.round(cat.data.reduce((acc, d) => acc + d.engagement, 0) / cat.data.length) : 0,
-          avgComments: 0, // Not available in heatmap, can be improved if needed
-          performance: Array.isArray(cat.data) ? (cat.data.reduce((acc, d) => acc + d.value, 0) > 10 ? "High" : "Medium") : "Medium"
-        };
-      })
-    : [];
+  const totalPostsPage = posts.length;
+  const totalPostUpvotesPage = posts.reduce((acc, t) => acc + (t?.upvotes ?? 0), 0);
+  const totalCommentsPage = comments.length;
+  const totalCommentUpvotesPage = comments.reduce((acc, c) => acc + (c?.top_comment?.score ?? 0), 0);
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
+      <header className="border-b border-border bg-card">
+        <div className="flex items-center justify-between px-6 py-4">
+          <div className="flex items-center gap-4">
+            <SidebarTrigger className="h-8 w-8" />
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary rounded-lg">
+                <BarChart3 className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-foreground">Reddit Analytics</h1>
+                <p className="text-sm text-muted-foreground">
+                  Track how your posts and comments perform (10 per page)
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <UserProfile />
+          </div>
+        </div>
+      </header>
+
       <div className="p-6">
-        {loading ? (
-          <div className="text-center py-12">Loading analytics...</div>
-        ) : error ? (
-          <div className="text-center py-12 text-red-500">Error: {error}</div>
-        ) : (
-          <>
-            {/* Key Metrics */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Total Posts</p>
-                      {/* <p className="text-2xl font-bold">{analyticsData.totalPosts}</p> */}
-                      <p className="text-2xl font-bold">0</p>
+        {/* Page metrics (current page only) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <Card><CardContent className="p-6">
+            <p className="text-sm text-muted-foreground">Posts (this page)</p>
+            <p className="text-2xl font-bold">{totalPostsPage}</p>
+          </CardContent></Card>
+          <Card><CardContent className="p-6">
+            <p className="text-sm text-muted-foreground">Post Upvotes (this page)</p>
+            <p className="text-2xl font-bold">{totalPostUpvotesPage}</p>
+          </CardContent></Card>
+          <Card><CardContent className="p-6">
+            <p className="text-sm text-muted-foreground">Comments (this page)</p>
+            <p className="text-2xl font-bold">{totalCommentsPage}</p>
+          </CardContent></Card>
+          <Card><CardContent className="p-6">
+            <p className="text-sm text-muted-foreground">Comment Upvotes (this page)</p>
+            <p className="text-2xl font-bold">{totalCommentUpvotesPage}</p>
+          </CardContent></Card>
+        </div>
 
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Total Upvotes</p>
-                      {/* <p className="text-2xl font-bold">{analyticsData.totalUpvotes}</p> */}
-                      <p className="text-2xl font-bold">16</p>
-
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Total Comments</p>
-                      {/* <p className="text-2xl font-bold">{analyticsData.totalComments}</p> */}
-                      <p className="text-2xl font-bold">13</p>
-
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Avg Engagement</p>
-                      {/* <p className="text-2xl font-bold">{analyticsData.avgEngagementRate}</p> */}
-                      <p className="text-2xl font-bold">3</p>
-
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+        {/* Tables + pagination */}
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-8">
+          <PostAnalyticsTable
+            threads={posts.map((t, i) => ({
+              id: i,
+              title: t?.post_title || t?.title || "-",
+              subreddit: t?.targeted_subreddit || t?.subreddit || "-",
+              upvotes: t?.upvotes || 0,
+              comments: t?.total_comments || 0,
+              age: getAgeString(t?.post_age_hours),
+              sentiment: (t?.upvotes ?? 0) > 0 ? "positive" : (t?.upvotes ?? 0) < 0 ? "negative" : "neutral",
+              post_url: t?.post_url || "#",
+            }))}
+          />
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              Page {postsBlock.page} of {postsBlock.totalPages} • {postsBlock.total} total
+            </p>
+            <div className="flex gap-2">
+              <button
+                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                onClick={() => setPostsPage(p => Math.max(1, p - 1))}
+                disabled={postsBlock.page <= 1}
+              >
+                Prev
+              </button>
+              <button
+                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                onClick={() => setPostsPage(p => Math.min(postsBlock.totalPages, p + 1))}
+                disabled={postsBlock.page >= postsBlock.totalPages}
+              >
+                Next
+              </button>
             </div>
-            {/* Performance Overview */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Recent Performance</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {recentMetrics.map((metric, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 border border-border rounded-lg">
-                        <div>
-                          <p className="font-medium">{metric.period}</p>
-                          <p className="text-sm text-muted-foreground">{metric.posts} posts</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-sm">
-                            <span className="text-approved">{metric.upvotes} upvotes</span> •
-                            <span className="text-live ml-1">{metric.comments} comments</span>
-                          </p>
-                          <p className="text-sm font-medium">{metric.engagement} engagement</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Category Performance</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {/* {categoryPerformance.map((category, index) => ( */}
-                    {heatMap.map((category, index) => (
+          </div>
 
-                      <div key={index} className="flex items-center justify-between p-3 border border-border rounded-lg">
-                        <div>
-                          <p className="font-medium">{category.category}</p>
-                          <p className="text-sm text-muted-foreground">{category.posts} posts</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-sm">
-                            <span className="text-approved">~{category.avgUpvotes} upvotes</span> •
-                            <span className="text-live ml-1">~{category.avgComments} comments</span>
-                          </p>
-                          <div className={`text-xs px-2 py-1 rounded-full ${
-                            category.performance === 'High' ? 'bg-approved text-approved-foreground' :
-                            category.performance === 'Medium' ? 'bg-pending text-pending-foreground' :
-                            'bg-muted text-muted-foreground'
-                          }`}>
-                            {category.performance}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+          <CommentsAnalyticsTable
+            threads={comments.map((c, i) => ({
+              id: i,
+              title: c?.top_comment?.body || "-",
+              subreddit: c?.subreddit || "-",
+              upvotes: c?.top_comment?.score || 0,
+              comments: 0,
+              age: "",
+              sentiment:
+                (c?.top_comment?.score ?? 0) > 0 ? "positive" :
+                (c?.top_comment?.score ?? 0) < 0 ? "negative" : "neutral",
+              post_url: c?.comment_url || "#",
+            }))}
+          />
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              Page {commentsBlock.page} of {commentsBlock.totalPages} • {commentsBlock.total} total
+            </p>
+            <div className="flex gap-2">
+              <button
+                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                onClick={() => setCommentsPage(p => Math.max(1, p - 1))}
+                disabled={commentsBlock.page <= 1}
+              >
+                Prev
+              </button>
+              <button
+                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                onClick={() => setCommentsPage(p => Math.min(commentsBlock.totalPages, p + 1))}
+                disabled={commentsBlock.page >= commentsBlock.totalPages}
+              >
+                Next
+              </button>
             </div>
-            {/* Summary Stats */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Performance Summary</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="text-center p-4 border border-border rounded-lg">
-                    <p className="text-2xl font-bold text-approved">{analyticsData.monthlyGrowth}</p>
-                    <p className="text-sm text-muted-foreground">Monthly Growth</p>
-                  </div>
-                  <div className="text-center p-4 border border-border rounded-lg">
-                    {/* <p className="text-2xl font-bold text-primary">{analyticsData.topPerformingCategory}</p> */}
-                    <p className="text-2xl font-bold text-primary">r/WhatsappBusinessAPI</p>
-
-                    <p className="text-sm text-muted-foreground">Top Category</p>
-                  </div>
-                  <div className="text-center p-4 border border-border rounded-lg">
-                    {/* <p className="text-2xl font-bold text-live">{analyticsData.totalEngagement}</p> */}
-                    <p className="text-2xl font-bold text-live">3</p>
-
-                    <p className="text-sm text-muted-foreground">Total Engagement</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </>
-        )}
+          </div>
+        </div>
       </div>
     </div>
   );
-};
-
-export default AnalyticsPage;
+}

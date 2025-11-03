@@ -86,46 +86,6 @@ const Footer = () => {
                   </a>
                 </li> */}
               </ul>
-              <h3 className="font-bold mb-2 mt-5">Awards</h3>
-              <ul className="space-y-3">
-                <li>
-                  <div className="flex items-center justify-center flex-grow gap-0 sm:gap-2 text-xs sm:text-sm md:text-base">
-                    <Link
-                      href="https://hackernoon.com/startups/winner-award?type=city&slug=asia-new-delhi-dl-india&rank=1"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline"
-                    >
-                      <span className="z-10">
-                        #1 Startup in New Delhi,India
-                      </span>
-                      <Image
-                        height={640}
-                        width={131}
-                        loading="lazy"
-                        src="/awards/HackerNoon_Logo.png"
-                        alt="Infra Logo"
-                        className="w-[100%] lg:w-[80%] mt-2"
-                      />
-                    </Link>
-                  </div>
-                </li>
-              </ul>
-              <h3 className="font-bold mb-2 mt-5">Mentioned</h3>
-              <ul className="space-y-3">
-                <li>
-                  <div className="items-center justify-center flex-grow ">
-                    <Link
-                      href="https://content.techgig.com/leadership/revolutionizing-engineering-content-infrasitys-approach-to-developer-focused-resources/articleshow/120793276.cms"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline"
-                    >
-                      <span className="z-10 lg:mr-5">Recognized by TechGig</span>
-                    </Link>
-                  </div>
-                </li>
-              </ul>
             </div>
             {/* Use Cases section */}
             <div className="w-full sm:w-1/2 lg:w-1/5 mb-8 lg:mb-0 text-center sm:text-left">
@@ -149,6 +109,14 @@ const Footer = () => {
                 <li className="lg:mr-5">
                   <a href="/services/technical-content-gtm" className="hover:underline">
                     Technical Content GTM
+                  </a>
+                </li>
+              </ul>
+              <h3 className="font-bold mb-2 mt-5">By Role</h3>
+              <ul className="space-y-3">
+                <li>
+                  <a href="/infrasity-vs-developer-relations-engineer" className="hover:underline">
+                    Infrasity Vs DevRel
                   </a>
                 </li>
               </ul>
@@ -221,8 +189,8 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/faq" className="hover:underline">
-                    FAQ
+                  <a href="/careers" className="hover:underline">
+                    Careers
                   </a>
                 </li>
                 <li>
@@ -252,19 +220,6 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="https://x.com/InfrasityHub"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="hover:underline flex items-center justify-center sm:justify-start gap-2"
-                  >
-                    <span>
-                      <XOutlined />
-                    </span>
-                    X
-                  </a>
-                </li>
-                <li>
-                  <a
                     href="https://www.linkedin.com/company/infrasity/"
                     rel="noopener noreferrer"
                     target="_blank"
@@ -276,18 +231,45 @@ const Footer = () => {
                     LinkedIn
                   </a>
                 </li>
+              </ul>
+              <h3 className="font-bold mb-2 mt-5">Awards</h3>
+              <ul className="space-y-3">
                 <li>
-                  <a
-                    href="https://www.instagram.com/infrasity/"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="hover:underline flex items-center justify-center sm:justify-start gap-2"
-                  >
-                    <span>
-                      <InstagramOutlined />
-                    </span>
-                    Instagram
-                  </a>
+                  <div className="flex items-center justify-center flex-grow gap-0 sm:gap-2 text-xs sm:text-sm md:text-base">
+                    <Link
+                      href="https://hackernoon.com/startups/winner-award?type=city&slug=asia-new-delhi-dl-india&rank=1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      <span className="z-10">
+                        #1 Startup in New Delhi,India
+                      </span>
+                      <Image
+                        height={640}
+                        width={131}
+                        loading="lazy"
+                        src="/awards/HackerNoon_Logo.png"
+                        alt="Infra Logo"
+                        className="w-[100%] lg:w-[80%] mt-2"
+                      />
+                    </Link>
+                  </div>
+                </li>
+              </ul>
+              <h3 className="font-bold mb-2 mt-5">Mentioned</h3>
+              <ul className="space-y-3">
+                <li>
+                  <div className="items-center justify-center flex-grow ">
+                    <Link
+                      href="https://content.techgig.com/leadership/revolutionizing-engineering-content-infrasitys-approach-to-developer-focused-resources/articleshow/120793276.cms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      <span className="z-10 lg:mr-5">Recognized by TechGig</span>
+                    </Link>
+                  </div>
                 </li>
               </ul>
             </div>

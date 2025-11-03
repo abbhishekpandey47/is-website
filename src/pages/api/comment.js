@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       if (!body.title || !body.category) {
         return res.status(400).json({ error: "Missing required fields" });
       }
-      let company_id = body.company_id || null;
+      let company_id = body.companyId || null;
       if (!userCtx.isAdmin) {
         if (!allowedCompanyIds || allowedCompanyIds.length === 0) return forbid(res, 'No company access');
         if (company_id && !allowedCompanyIds.includes(company_id)) return forbid(res);
@@ -45,6 +45,7 @@ export default async function handler(req, res) {
           client_feedback: body.clientFeedback || null,
           post_url: body.postURL || null,
           posted_comment_status: body.postedCommentStatus || "underModeration",
+          total_views: body.totalViews || null,
         },
       ]);
 
@@ -57,62 +58,116 @@ export default async function handler(req, res) {
     }
   }
 
-  if (req.method === "GET") {
-    try {
-      const { id, categories } = req.query;
+  // if (req.method === "GET") {
+  //   try {
+  //     const { id, categories } = req.query;
 
-      //  Get single post by ID
-      if (id) {
-        const { data, error } = await supabase
-          .from("comment")
-          .select("*")
-          .eq("id", id)
-          .single();
+  //     //  Get single post by ID
+  //     if (id) {
+  //       const { data, error } = await supabase
+  //         .from("comment")
+  //         .select("*")
+  //         .eq("id", id)
+  //         .single();
 
-        if (error) return res.status(500).json({ error: error.message });
+  //       if (error) return res.status(500).json({ error: error.message });
 
-        if (!userCtx.isAdmin && data?.company_id && Array.isArray(allowedCompanyIds) && !allowedCompanyIds.includes(data.company_id)) {
-          return forbid(res);
-        }
-        return res.status(200).json({ success: true, data });
-      }
+  //       if (!userCtx.isAdmin && data?.company_id && Array.isArray(allowedCompanyIds) && !allowedCompanyIds.includes(data.company_id)) {
+  //         return forbid(res);
+  //       }
+  //       return res.status(200).json({ success: true, data });
+  //     }
 
-      if (categories === "true") {
-        let query = supabase
-          .from("comment")
-          .select("category");
-        if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
-          query = query.in('company_id', allowedCompanyIds);
-        }
-        const { data, error } = await query;
+  //     if (categories === "true") {
+  //       let query = supabase
+  //         .from("comment")
+  //         .select("category");
+  //       if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
+  //         query = query.in('company_id', allowedCompanyIds);
+  //       }
+  //       const { data, error } = await query;
 
-        if (error) return res.status(500).json({ error: error.message });
+  //       if (error) return res.status(500).json({ error: error.message });
 
-        // Extract only unique categories
-        const uniqueCategories = [...new Set(data.map((p) => p.category))];
+  //       // Extract only unique categories
+  //       const uniqueCategories = [...new Set(data.map((p) => p.category))];
+  //       console.log("allowedCompanies",allowedCompanyIds)
+  //       return res.status(200).json({ success: true, categories: uniqueCategories });
+  //     }
 
-        return res.status(200).json({ success: true, categories: uniqueCategories });
-      }
+  //     let query = supabase
+  //       .from("comment")
+  //       .select("*")
+  //       .order("date_posted", { ascending: false });
+  //     if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
+  //       query = query.in('company_id', allowedCompanyIds);
+  //     }
+  //     const { data, error } = await query;
 
+  //     if (error) return res.status(500).json({ error: error.message });
 
+  //     return res.status(200).json({ success: true, data });
+  //   } catch (err) {
+  //     console.error(err);
+  //     return res.status(500).json({ error: "Internal Server Error" });
+  //   }
+  // }
+if (req.method === "GET") {
+  try {
+    const { id, categories } = req.query;
 
-      let query = supabase
+    // Get single comment by ID
+    if (id) {
+      const { data, error } = await supabase
         .from("comment")
         .select("*")
-        .order("date_posted", { ascending: false });
-      if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
-        query = query.in('company_id', allowedCompanyIds);
-      }
-      const { data, error } = await query;
+        .eq("id", id)
+        .single();
 
       if (error) return res.status(500).json({ error: error.message });
 
+      if (!userCtx.isAdmin && data?.company_id && Array.isArray(allowedCompanyIds) && !allowedCompanyIds.includes(data.company_id)) {
+        return forbid(res);
+      }
+
       return res.status(200).json({ success: true, data });
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Internal Server Error" });
     }
+
+    // Get unique categories
+    if (categories === "true") {
+      let query = supabase.from("comment").select("category");
+      if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
+        query = query.in("company_id", allowedCompanyIds);
+      }
+      const { data, error } = await query;
+      if (error) return res.status(500).json({ error: error.message });
+
+      const uniqueCategories = [...new Set(data.map((p) => p.category).filter(Boolean))];
+      return res.status(200).json({ success: true, categories: uniqueCategories });
+    }
+
+    // Fetch all comments (no pagination)
+    let query = supabase.from("comment").select("*").order("date_posted", { ascending: false });
+
+    // Apply client company filter
+    if (!userCtx.isAdmin && Array.isArray(allowedCompanyIds)) {
+      query = query.in("company_id", allowedCompanyIds);
+    }
+
+    const { data, error } = await query;
+    if (error) return res.status(500).json({ error: error.message });
+
+    return res.status(200).json({
+      success: true,
+      data,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
+}
+
+
 
   // Edit Post (PUT)
   if (req.method === "PUT") {

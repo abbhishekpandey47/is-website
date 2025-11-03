@@ -4,6 +4,8 @@ import ReactDOM from "react-dom";
 import ContactPage from "../book-a-demo/page";
 import Image from "next/image";
 import { message } from "antd";
+import { Router } from "next/router";
+import { useRouter } from "next/navigation"; // add this
 
 const CalendarBooking = ({
     buttonText = "Book a Meeting",
@@ -536,6 +538,15 @@ const CalendarBooking = ({
         return days;
     };
 
+    const router = useRouter(); // add this
+
+    useEffect(() => {
+        if (step === 4) {
+            localStorage.setItem("bookingSelected", JSON.stringify({ date: selectedDate, time: selectedTime }));
+            router.push("/contact/thank-you"); // navigate on step 4
+        }
+    }, [step, router]); // add this effect
+
     return (
         <div className="h-full lg:h-[1000px]">
             <div className="w-full mt-36 items-center justify-center">
@@ -579,7 +590,7 @@ const CalendarBooking = ({
                                 )}
                                 {step === 2 && "Book a Time to Connect with Us"}
                                 {/* {step === 3 && "Complete Your Booking"} */}
-                                {step === 4 && "Booking Confirmed"}
+                                {/* {step === 4 && "Booking Confirmed"} */}
                             </div>
 
                             {step === 1 && (
@@ -1011,36 +1022,9 @@ const CalendarBooking = ({
                                 </div>
                             )}
 
-                            {step === 4 && (
-                                <div className="success-message text-center py-8">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-16 w-16 mx-auto mb-4 text-green-500"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M5 13l4 4L19 7"
-                                        />
-                                    </svg>
-                                    <h3 className="text-xl font-bold mb-2 text-green-400">
-                                        Booking Confirmed!
-                                    </h3>
-                                    <p className="text-gray-300">
-                                        Your meeting has been scheduled for:
-                                    </p>
-                                    <p className="font-medium">
-                                        {selectedDate && formatDate(selectedDate)} at {selectedTime}
-                                    </p>
-                                    <p className="mt-2 text-gray-400">
-                                        A confirmation email has been sent to your inbox.
-                                    </p>
-                                </div>
-                            )}
+                            {/* {step === 4 && (
+                               Router.push('/contact/thank-you')
+                            )} */}
                         </div>
                     </div>
                 </div>

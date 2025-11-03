@@ -19,7 +19,16 @@ let postMetaData = [
         publishedOn: "2024-11-19",
         authorId: "author0001",
         category: "Case Studies",
-        metaDescription: "Discover how Infrasity partnered with Terrateam to drive a 15% traffic boost in just 14 days through strategic, high-impact content focused on keyword research, SEO, and developer personas."
+        metaDescription: "Discover how Infrasity partnered with Terrateam to drive a 15% traffic boost in just 14 days through strategic, high-impact content focused on keyword research, SEO, and developer personas.",
+        companyHighlights: {
+            company: "Terrateam",
+            headquarters: "Netherlands",
+            funding: "Bootstrapped",
+            industry: "DevTools / Infra (IaC)",
+            employees: "1–10",
+            cloud: "developer use-case blogs + developer relations services",
+            website: "terrateam.io"
+        }
     },
     {
         title: "How to Use React Developer Tools for Debugging and Performance Optimization",
@@ -354,7 +363,15 @@ let postMetaData = [
   category: "Case Studies",
   metaDescription:
     "Discover how Infrasity helped Middleware refine its content strategy, driving SEO performance, user engagement, and product visibility. Learn the steps that positioned Middleware as a thought leader in observability solutions.",
- 
+  companyHighlights: {
+    company: "Middleware",
+    headquarters: "United States",
+    funding: "$6.5M",
+    industry: "DevTools / Observability",
+    employees: "50-100",
+    cloud: "developer use-case blogs + developer relations services",
+    website: "middleware.io"
+  }
 },
   {
       title: "8x Growth Journey: How Developer-Focused Technical Content Scaled a B2B Enterprise SaaS Business",
@@ -366,35 +383,35 @@ let postMetaData = [
       authorId: "author0001",
       category: "Case Studies",
       metaDescription: "Discover how we helped a B2B SaaS company achieve 5x growth with developer-focused content. This case study shares their journey and our winning strategies.",
-       stats: [
-    {
-//         Organic Traffic - 8x Growth (64 to 594 - +828.13%) 
-// Organic Keywords - 7x Growth (106 to 865 - +715.09%)
-// Organic Keywords in Top 10 - 3x Growth (12 to 39 - +290%)
-      title: "Organic Traffic",
-      value: "+828.13%",
-      subtext: "(64 to 594 - 8x Growth)",
-      valueClass: "text-xl md:text-4xl font-semibold",
-    },
-    {
-      title: "Organic Keywords",
-      value: "+715.09%",
-      subtext: "(106 to 865 - 7x Growth)",
-      valueClass: "text-xl md:text-4xl font-semibold",
-    },
+      stats: [
+        {
+          title: "Organic Traffic",
+          value: "+828.13%",
+          subtext: "(64 to 594 - 8x Growth)",
+          valueClass: "text-xl md:text-4xl font-semibold",
+        },
+        {
+          title: "Organic Keywords",
+          value: "+715.09%",
+          subtext: "(106 to 865 - 7x Growth)",
+          valueClass: "text-xl md:text-4xl font-semibold",
+        },
     {
       title: "Organic Keywords in Top 10",
       value: "+290%",
       subtext: "(12 to 39 - 3x Growth)",
       valueClass: "text-xl md:text-4xl font-semibold",
     },
-    // {
-    //   title: "Keywords in Positions 1–10",
-    //   value: "+98%",
-    //   subtext: "in 12 months",
-    //   valueClass: "text-4xl md:text-5xl font-bold",
-    // },
   ],
+  companyHighlights: {
+    company: "Scalekit",
+    headquarters: "Delaware, United States",
+    funding: "Seed ($5.5M)",
+    industry: "DevTools / Identity Management",
+    employees: "Not specified",
+    cloud: "developer use-case blogs + developer relations services",
+    website: "scalekit.com"
+  }
   },
   {
     title: "Content Marketing Strategy for SaaS Companies: a Masterclass in SaaS Marketing",
@@ -795,7 +812,7 @@ let postMetaData = [
         ogImage: "/PostImages/dev-marketing/dm1.png",
         publishedOn: "2025-05-29",
         authorId: "author0004",
-        category: "Informational",
+        category: "Developer Marketing",
         metaDescription: "Built a SaaS product for developers? Discover how Dev Marketing can help you drive real engagement and growth compared to traditional marketing strategies."
     },
     
@@ -843,7 +860,7 @@ let postMetaData = [
         ogImage: "/PostImages/technical-writer-vs-developer-advocate/td1.webp",
         publishedOn: "2025-06-17",
         authorId: "author0004",
-        category: "Informational",
+        category: "Developer Marketing",
         metaDescription: "Tech writer vs. dev advocate - who gives your B2B SaaS startup the edge? Uncover the impact of each role and make your first hire count. Read the full guide."
     },
     
@@ -855,7 +872,7 @@ let postMetaData = [
         ogImage: "/PostImages/developer-experience-engineer/de1.webp",
         publishedOn: "2025-06-19",
         authorId: "author0004",
-        category: "Informational",
+        category: "Developer Marketing",
         metaDescription: "Master the 5 Whys root cause analysis to solve developer experience challenges and reduce friction in your SaaS onboarding and integration flows."
     },
 
@@ -951,7 +968,7 @@ let postMetaData = [
         ogImage: "/PostImages/developer-marketing-agency/da1.webp",
         publishedOn: "2025-07-16",
         authorId: "author0004",
-        category: "Informational",
+        category: "Developer Marketing",
         metaDescription: "Here are the top 5 dev agencies that specializes in leveraging technical content as marketing collateral. Pick the best one that aligns with your expectations."
     },
 
@@ -1009,7 +1026,7 @@ let postMetaData = [
         ogImage: "/PostImages/developer-advocates-bridge-engineer-product-teams/banner.webp",
         publishedOn: "2025-08-13",
         authorId: "author0005",
-        category: "Informational",
+        category: "Developer Marketing",
         metaDescription: "Learn how developer advocates connect engineers and product teams for better collaboration and product success in the developer community"
     },
     {
@@ -1093,25 +1110,132 @@ let postMetaData = [
   title: "What Is Developer Marketing?",
   metatitle: "What Is Developer Marketing | Infrasity",
   slug: "what-is-developer-marketing",
-  description: "Learn what developer marketing is and how to build a winning developer marketing strategy for 2025. Click the link to read now!",
+  description: "Developer marketing is no ordinary B2B marketing, it’s about educating, engaging, and empowering developers with hands-on, technical content that builds trust. In this complete 2025 guide, we break down what developer marketing is, why it’s different from traditional B2B marketing, and how to craft a winning developer marketing strategy. Learn key tactics like docs, community engagement, tutorials, and content distribution.",
   ogImage: "/PostImages/what-is-developer-marketing/banner.jpg",
   publishedOn: "2025-09-12",
   authorId: "author0005",
-  category: "Informational",
+  category: "Developer Marketing",
   metaDescription: "Learn what developer marketing is and how to build a winning developer marketing strategy for 2025. Click the link to read now!"
 },
 {
   title: "DevRel Engineer vs. GTM Engineer: The New Faces of Startup Growth",
   metatitle: "DevRel Engineer vs GTM Engineer",
   slug: "devrel-vs-gtm-engineer",
-  description: "Explore DevRel vs GTM engineers, their roles, and impact on B2B SaaS growth and go-to-market strategy. Read now!",
+  description: "This blog explores the roles of DevRel engineers and GTM engineers in B2B SaaS growth. DevRel focuses on developer relations, community building, technical storytelling, and adoption metrics, helping developers engage with and advocate for products. GTM engineering drives pipeline acceleration, automation, and data-driven workflows to optimize sales-assisted growth. Learn more now!",
   ogImage: "/PostImages/devrel-vs-gtm-engineer/0.webp",
   publishedOn: "2025-09-17",
   authorId: "author0005",
   category: "B2B SaaS Growth & GTM",
-  metaDescription: "This blog explores the roles of DevRel engineers and GTM engineers in B2B SaaS growth. DevRel focuses on developer relations, community building, technical storytelling, and adoption metrics, helping developers engage with and advocate for products. GTM engineering drives pipeline acceleration, automation, and data-driven workflows to optimize sales-assisted growth. Learn more now!"
+  metaDescription: "Explore DevRel vs GTM engineers, their roles and responsibilities and impact on B2B SaaS growth. Click the link to learn how these two roles are different!"
 },
-
+{
+  title: "Why Are Startups Hiring Their First DevRel Engineers in 2025? Proven Strategy",
+  metatitle: "Why Startups Hire DevRel in 2025 | Infrasity",
+  slug: "why-startups-hiring-devrel-engineers",
+  description: "Developer relations (DevRel) has become a game-changer for early-stage B2B SaaS startups. This blog breaks down what DevRel really is, why it’s essential for bridging the gap between developers and your product, and how it drives adoption, retention, and community engagement. You’ll learn proven DevRel strategies, the real cost of hiring your first DevRel engineer, common challenges founders face, and when is the best time to make the hire.",
+  ogImage: "/PostImages/why-startups-hiring-devrel-engineers/0.png",
+  publishedOn: "2025-09-19",
+  authorId: "author0005",
+  category: "Developer Marketing",
+  metaDescription: "Discover what DevRel is, why startups need it in 2025, and proven DevRel strategies to boost adoption. Read now and level up your developer relations!"
+},
+{
+  title: "6 Best Developer and AI Marketing Agency for B2B SaaS",
+  metatitle: "6 Best Developer & AI Marketing Agencies",
+  slug: "ai-marketing-agency-b2b-saas",
+  description: "Choosing the right developer marketing agency or AI marketing agency can make or break your B2B SaaS growth strategy. Developers are not swayed by traditional ads, they want technical accuracy, hands-on tutorials, and frictionless onboarding. This blog explores six of the best AI marketing agencies and its perfect for founders, CMOs, and CEOs looking to scale developer-facing SaaS products.",
+  ogImage: "/PostImages/ai-marketing-agency-b2b-saas/0.webp",
+  publishedOn: "2025-09-25",
+  authorId: "author0005",
+  category: "Developer Marketing",
+  metaDescription: "Discover the best AI & developer marketing agencies for B2B SaaS. Drive product adoption, community growth, and measurable results. Read now to learn more! "
+},
+   {
+  title: "How Infrasity Boosted Signups for a $23M Series A Cloud Startup Through Developer Marketing",
+  metatitle: "Infrasity Case Study: Boosted Signups for a $23M Cloud Startup",
+  slug: "case-study-series-a-cloud-developer-marketing",
+  description:"This case study explores how Infrasity helped a $23M Series A cloud startup drive user signups through developer marketing strategies. It highlights the importance of community engagement, problem-driven content, and providing actionable insights to technical audiences. Learn how value-first approaches can build trust with developers and effectively support growth without relying on traditional advertising.",
+  ogImage: "/PostImages/case-study-series-a-cloud-developer-marketing/0.webp",
+  publishedOn: "2025-10-03",
+  authorId: "author0001",
+  category: "Case Studies",
+  metaDescription:
+    "Discover how Infrasity drove signups for a $23M Series A cloud startup using developer-focused marketing strategies and community engagement. Read case study now",
+  stats: [
+    {
+      title: "Organic Traffic",
+      value: "+781%",
+      subtext: "(3.7K to 32.6K) ",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Organic Keywords",
+      value: "+182%",
+      subtext: "(446 to 1258)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Organic Keywords in Top 10",
+      value: "+521%",
+      subtext: "(29 to 180)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+      {
+      title: "Signups",
+      value: "+44.19%",
+      subtext: "(Aug to Sept,2025)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "LLM Traffic:",
+      value: "150 Users",
+      subtext: "(191 Sessions │ 508 Views)",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+],
+  companyHighlights: {
+    company: "Firefly.ai",
+    headquarters: "United States",
+    funding: "Series A ($23M)",
+    industry: "DevTools / Cloud Infrastructure",
+    employees: "11–50",
+    cloud: "developer use-case blogs + developer relations services + b2b video production",
+    website: "firefly.ai"
+  }
+},
+{
+  title: "Developer Marketing Strategy: A Complete Guide for 2025",
+  metatitle: "Developer Marketing Strategy 2025 | Infrasity",
+  slug: "developer-marketing-strategy",
+  description: "Developer marketing demands a unique approach where technical blogs, tutorials, explainer videos, starter templates, and community engagement become your competitive edge. From understanding developer personas to creating high-value content, and from data-driven keyword research to low-friction adoption paths, this guide walks you through every pillar of developer marketing strategy. Read this 2025 guide for strategies that drive real adoption.",
+  ogImage: "/PostImages/developer-marketing-strategy/0.webp",
+  publishedOn: "2025-10-11",
+  authorId: "author0005",
+  category: "Developer Marketing",
+  metaDescription: "Developer marketing strategy in 2025 with actionable tips, examples, use cases & community insights. Click the link to read now and boost adoption!"
+},
+{
+  title: "9 Top Go To Market Agency in 2025",
+  metatitle: "Top Go To Market Agency for SaaS | Infrasity",
+  slug: "go-to-market-agency",
+  description: "Launching a SaaS product is only half the battle—reaching the right audience is critical. A go to market agency helps startups accelerate growth with expert positioning, messaging, and execution. From early-stage to scaling companies, GTM agencies provide structured frameworks, market research, and demand generation strategies to ensure measurable adoption and revenue growth. They act as strategic partners, aligning product strengths, marketing, and sales into a cohesive roadmap. Read the blog to learn more.",
+  ogImage: "/PostImages/go-to-market-agency/0.png",
+  publishedOn: "2025-10-14",
+  authorId: "author0005",
+  category: "B2B SaaS Growth & GTM",
+  metaDescription: "Discover the 9 leading go to market agency to boost your B2B SaaS growth with proven GTM strategies, positioning, and rapid market adoption in 2025. Read now!"
+},
+{
+  title: "GTM Enablement: GTM Strategy & Strategist Roles That Boost Growth",
+  metatitle: "GTM Enablement: Strategy & Roles | Infrasity",
+  slug: "gtm-enablement",
+  description: "GTM enablement is essential for driving predictable, sustainable growth. This framework aligns sales, marketing, product, and customer success teams to improve customer experience, accelerate adoption, and boost revenue. Key GTM strategist roles include defining go-to-market plans, selecting the right channels, and monitoring KPIs. Learn how advanced strategies like ICP & segmentation, value proposition, partnerships, and multi-channel distribution drive enterprise growth.",
+  ogImage: "/PostImages/gtm-enablement/0.webp",
+  publishedOn: "2025-10-21",
+  authorId: "author0001",
+  category: "B2B SaaS Growth & GTM",
+  metaDescription: "Discover how GTM enablement can accelerate growth in B2B SaaS startups. Learn about the roles of GTM strategists, strategies, and KRAs that drive growth. Read now!"
+},
 ];
 
 const sorted = () => {

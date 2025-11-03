@@ -21,6 +21,7 @@ const AddPostPage = () => {
   const { toast } = useToast();
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [newCategory, setNewCategory] = useState({ name: "", description: "" });
+  const [companiesList , setCompaniesList] = useState([]);
 
   // Predefined categories
   const [categories, setCategories] = useState([
@@ -43,7 +44,8 @@ const AddPostPage = () => {
     targetedSubreddit: "",
     postURL: "",
     redditUsername: "",
-    postedCommentStatus: "underModeration",
+    postedCommentStatus: "notPosted",
+    companyId:""
   });
 
   useEffect(() => {
@@ -152,19 +154,37 @@ useEffect(() => {
     if (!user) {
       router.push("/auth/signin");
     } else {
-      try {
-  const token = await user.getIdToken();
-  const res = await fetch(`/api/comment?categories=true`, { headers: { Authorization: `Bearer ${token}` } });
-        const result = await res.json();
+       try {
+        const token = await user.getIdToken();
+        const [catRes, companyRes] = await Promise.allSettled([
+          fetch(`/api/comment?categories=true`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          fetch(`/api/companies`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+        ]);
 
-        if (res.ok && result.categories) {
-          setCategories((prev) => {
-            const merged = [...prev, ...result.categories];
-            return [...new Set(merged.map((c) => c.trim()))];
-          });
+        if (catRes.status === 'fulfilled' && catRes.value.ok) {
+          const result = await catRes.value.json();
+          if (result.categories) {
+            setCategories((prev) => {
+              const merged = [...prev, ...result.categories];
+              return [...new Set(merged.map((c) => c.trim()))];
+            });
+          }
+        } else if (catRes.status === 'rejected') {
+          console.error("Failed to fetch categories:", catRes.reason);
+        }
+
+        if (companyRes.status === 'fulfilled' && companyRes.value.ok) {
+          const companyResult = await companyRes.value.json();
+          setCompaniesList(companyResult.data || []);
+        } else if (companyRes.status === 'rejected') {
+          console.error("Failed to fetch companies:", companyRes.reason);
         }
       } catch (err) {
-        console.error("Failed to fetch categories:", err);
+        console.error("Failed to fetch initial data:", err);
       }
     }
   });
@@ -330,6 +350,26 @@ useEffect(() => {
                     className="h-10"
                   />
                   </div>
+                       {companiesList.length > 0 &&
+                  <div>
+                    <Label htmlFor="companyId">Company Name</Label>
+                    <Select
+                      value={formData.companyId}
+                      onValueChange={(value) =>
+                        handleInputChange("companyId", value)
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {
+                          companiesList.map((company) => (
+                            <SelectItem key={company.id} value={company.id}>{company.name}</SelectItem>
+                          ))}
+                      </SelectContent>
+                    </Select>
+                  </div>}
                 </div>
 
                   <div>
@@ -453,7 +493,7 @@ useEffect(() => {
                           <SelectItem value="commentUnderApproval">Comment Under Approval</SelectItem>
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
-                          <SelectItem value="underModeration">Under Moderation</SelectItem>
+                          <SelectItem value="reposted">Reposted</SelectItem>
                           <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>
                       </Select>

@@ -11,7 +11,7 @@ export default function TabbedYouTubeCarousel() {
     allCategories: [
       "0AsyeSd1_kQ",
       "pQoP_Rndpqw",
-      "BivxMW5DftE",
+      "oqe_jFQFHFo",
       "_TrEJAJPp0M",
       "erczPxh8iGc",
       "xPyKqcdt3TY",
