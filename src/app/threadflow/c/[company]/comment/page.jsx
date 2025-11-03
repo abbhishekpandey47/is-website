@@ -223,7 +223,7 @@ const getStatusBadge = (status) => {
     targetedSubreddit: post.targeted_subreddit || "",
     postURL: post.post_url || "",
     redditUsername: post.reddit_username || "",
-    postedCommentStatus: post.posted_comment_status || "underModeration",
+    postedCommentStatus: post.posted_comment_status || "notPosted",
     totalViews : post.total_views
   });
   setIsEditModalOpen(true);
@@ -243,7 +243,7 @@ const getStatusBadge = (status) => {
       postedLink: "",
       currentStatus: "pending",
       redditUsername: "",
-      postedCommentStatus: "underModeration",
+      postedCommentStatus: "notPosted",
     });
   };
 
@@ -277,7 +277,7 @@ const getStatusBadge = (status) => {
           client_feedback: editFormData.clientFeedback || null,
           post_url: editFormData.postURL || null,
           reddit_username: editFormData.redditUsername || null,
-          posted_comment_status: editFormData.postedCommentStatus || "underModeration",
+          posted_comment_status: editFormData.postedCommentStatus || "notPosted",
           total_views : editFormData.totalViews || null,
         }),
       });
@@ -767,7 +767,6 @@ const getStatusBadge = (status) => {
                           <SelectItem value="commentUnderApproval">Comment Under Approval</SelectItem>
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
-                          <SelectItem value="underModeration">Under Moderation</SelectItem>
                           <SelectItem value="reposted">Reposted</SelectItem>
                           <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>

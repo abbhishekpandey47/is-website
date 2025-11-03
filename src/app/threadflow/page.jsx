@@ -30,12 +30,12 @@ const PostsPage = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("select");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
   const [allItems, setAllItems] = useState([]);
     const [companiesList , setCompaniesList] = useState([]);
-    const [selectedCompanyId , setSelectedCompanyId] = useState("all");
+    const [selectedCompanyId , setSelectedCompanyId] = useState("select");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth,(user) => {
@@ -90,13 +90,27 @@ useEffect(() => {
 
 
 const companies = [
+  { id: "select", name: "Select Company" },
   { id: "all", name: "All Companies" },
   ...companiesList.map((company) => ({
     id: company.id,
     name: company.name,
   })),
 ];
-  const categories = ["all", ...new Set(allItems.map((item) => item.category).filter(Boolean))];
+  const categories = [
+  "select",
+  "all",
+  ...new Set(
+     allItems?.filter(
+        post =>
+          selectedCompanyId === "all"
+            ? true
+            : post?.company_id === selectedCompanyId
+      )
+      .map(post => post?.category)
+      .filter(Boolean)
+  ),
+];
   const statuses = ["all", ...new Set(allItems.map((item) => item.status).filter(Boolean))];
 
   const filteredItems = allItems.filter((item) => {
@@ -280,35 +294,36 @@ const statusCnt = getStatusCounts()
                   <SelectItem value="comment">Comments</SelectItem>
                 </SelectContent>
               </Select>
+                <Select
+                                  value={selectedCompanyId}
+                                  onValueChange={setSelectedCompanyId}
+                                >
+                                <SelectTrigger className="w-48">
+                                    <SelectValue placeholder="Select Company" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {companies.map((company) => (
+                                      <SelectItem key={company.id} value={company.id}>
+                                        {company.name === "all" ? "All Companies" : company.name}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
 
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                 <SelectTrigger className="w-48">
-                  <SelectValue placeholder="All Categories" />
+                   <SelectValue placeholder="Select Category" />
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((cat) => (
                     <SelectItem key={cat} value={cat}>
-                      {cat === "all" ? "All Categories" : cat}
+                      {cat === "all" ? "All Categories" : cat === "select" ? "Select Category" : cat}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
 
-                                <Select
-                                  value={selectedCompanyId}
-                                  onValueChange={setSelectedCompanyId}
-                                >
-                                  <SelectTrigger className="w-48">
-                                    <SelectValue placeholder="All Companies" />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    {companies.map((company) => (
-                                      <SelectItem key={company.id} value={company.id}>
-                                        {company.name === "all" ? "All Comapnies" : company.name}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectContent>
-                                </Select>
+                              
                           
 
               {/* Status Filter */}

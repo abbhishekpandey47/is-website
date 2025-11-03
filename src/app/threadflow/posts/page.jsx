@@ -50,7 +50,7 @@ const PostsPage = () => {
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [companiesList , setCompaniesList] = useState([]);
-  const [selectedCompanyId , setSelectedCompanyId] = useState("all");
+  const [selectedCompanyId , setSelectedCompanyId] = useState("select");
 
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
@@ -171,6 +171,7 @@ const PostsPage = () => {
   }, [searchQuery , selectedCategory , selectedStatus , selectedCompanyId]);
 
   const companies = [
+  { id: "select", name: "Select Company" },
   { id: "all", name: "All Companies" },
   ...companiesList.map((company) => ({
     id: company.id,
@@ -495,13 +496,13 @@ const PostsPage = () => {
                     value={selectedCompanyId}
                     onValueChange={setSelectedCompanyId}
                   >
-                    <SelectTrigger className="w-48">
-                      <SelectValue placeholder="All Companies" />
+                    <SelectTrigger className="w-48"> 
+                        <SelectValue placeholder="Select Company"/>
                     </SelectTrigger>
                     <SelectContent>
                       {companies.map((company) => (
                         <SelectItem key={company.id} value={company.id}>
-                          {company.name === "all" ? "All Comapnies" : company.name}
+                          {company.name === "all" ? "All Companies" : company.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -856,7 +857,6 @@ const PostsPage = () => {
                           <SelectItem value="postUnderApproval">Post Under Approval</SelectItem>
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
-                          <SelectItem value="underModeration">Under Moderation</SelectItem>
                            <SelectItem value="reposted">Reposted</SelectItem>
                           <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>

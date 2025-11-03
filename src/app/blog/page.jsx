@@ -132,8 +132,9 @@ const CardDiv = React.memo(({ card }) => (
               : card.description}
           </p>
           <div className="flex items-center gap-2 absolute bottom-3">
+        
             <Image
-              className="rounded-full"
+              className="rounded-full w-10 h-10"
               src={card.authorImage || "/svgPatterns/profile.svg"}
               alt=""
               width={40}

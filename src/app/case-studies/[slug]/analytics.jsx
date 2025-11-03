@@ -6,7 +6,7 @@ export default React.memo(function HeadBanner({ postData }) {
     <>
       {postData.stats && (
         <div className="w-full pt-16 rounded-lg">
-          <div className="flex flex-nowrap justify-center gap-4 overflow-x-auto" style={{ overflowX: 'auto', overflowY: 'visible' }}>
+          <div className="flex flex-wrap justify-center gap-4">
             {postData.stats.map((stat, index) => (
               <div
                 key={index}

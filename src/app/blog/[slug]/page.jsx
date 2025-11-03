@@ -383,7 +383,27 @@ if (inFAQ && currentQuestion && currentAnswer) {
 
                           },
                         },
-
+                        p:{
+                          component: ({ children, ...props }) => (
+                            <p style={{"fontWeight":"400"}}  {...props}>
+                              {children}
+                            </p>
+                          ),
+                        },
+                        li:{
+                          component: ({ children, ...props }) => (
+                            <li style={{"fontWeight":"400"}} {...props}>
+                              {children}
+                            </li>
+                          ),
+                        },
+                        strong:{
+                          component: ({ children, ...props }) => (
+                            <strong style={{"fontWeight":"700"}} {...props}>
+                              {children}
+                            </strong>
+                          ),
+                        },
                         img: {
                           component: ({ src, alt, ...props }) => {
                             try {
@@ -401,6 +421,7 @@ if (inFAQ && currentQuestion && currentAnswer) {
                                   return false;
                                 }
                               };
+                          
 
                               if (isBase64 || !isValidUrl(src)) {
 
