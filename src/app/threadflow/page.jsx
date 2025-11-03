@@ -48,7 +48,6 @@ import Pagination from "./components/pagination";
 import { StatusCard } from "../../Components/StatusCard";
 import { UserProfile } from "../../Components/UserProfile";
 import { HoverTextCell } from "./components/HoverTextCell";
-import Pagination from "./components/pagination";
 
 const PAGE_SIZE = 10;
 const PostsPage = () => {
@@ -71,7 +70,7 @@ const PostsPage = () => {
   const [dateRange, setDateRange] = useState([null, null]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth,(user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       setFirebaseUser(user);
       setLoading(false);
 
@@ -218,8 +217,6 @@ const PostsPage = () => {
 
     const matchesType =
       selectedType === "all" || item.type === selectedType;
-    const matchCompanyId =
-      selectedCompanyId === "all" || item.company_id === selectedCompanyId;
 
     const matchCompanyId =
       selectedCompanyId === "all" ||
@@ -297,9 +294,7 @@ const PostsPage = () => {
     return <div className="p-6">Please log in to view your posts and comments.</div>;
   }
   
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
+
 
 
   return (
@@ -380,21 +375,6 @@ const PostsPage = () => {
                   <SelectItem value="comment">Comments</SelectItem>
                 </SelectContent>
               </Select>
-                <Select
-                                  value={selectedCompanyId}
-                                  onValueChange={setSelectedCompanyId}
-                                >
-                                <SelectTrigger className="w-48">
-                                    <SelectValue placeholder="Select Company" />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    {companies.map((company) => (
-                                      <SelectItem key={company.id} value={company.id}>
-                                        {company.name === "all" ? "All Companies" : company.name}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectContent>
-                                </Select>
 
               {/* Company */}
               <Select value={selectedCompanyId} onValueChange={setSelectedCompanyId}>
@@ -440,7 +420,6 @@ const PostsPage = () => {
                 onChange={(vals) => setDateRange(vals || [null, null])}
                 allowClear
                 format="YYYY-MM-DD"
-                className=""
                 presets={[
                   {
                     label: "Today",
