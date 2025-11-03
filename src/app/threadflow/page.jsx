@@ -1,24 +1,51 @@
 "use client";
-import { auth } from "@/lib/firebaseClient";
-import { onAuthStateChanged } from "firebase/auth";
-import { BarChart3, ExternalLink, Plus, Search } from "lucide-react";
+
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebaseClient";
+import dayjs from "dayjs";
+
+import { DatePicker } from "antd";
+const { RangePicker } = DatePicker;
+
+import { BarChart3, ExternalLink, Plus, Search } from "lucide-react";
 import { toast } from "react-toastify";
-import { StatusCard } from "../../Components/StatusCard";
-import { Badge } from "../../Components/ui/badge";
-import { Button } from "../../Components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../../Components/ui/card";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "../../Components/ui/dropdown-menu";
-import { Input } from "../../Components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../Components/ui/select";
+
 import { SidebarTrigger } from "../../Components/ui/sidebar";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../Components/ui/table";
+import { Button } from "../../Components/ui/button";
+import { Badge } from "../../Components/ui/badge";
+import { Input } from "../../Components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../Components/ui/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../../Components/ui/dropdown-menu";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../Components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../Components/ui/table";
+
+import Pagination from "./components/pagination";
+import { StatusCard } from "../../Components/StatusCard";
 import { UserProfile } from "../../Components/UserProfile";
 import { HoverTextCell } from "./components/HoverTextCell";
 import Pagination from "./components/pagination";
@@ -28,14 +55,20 @@ const PostsPage = () => {
   const router = useRouter();
   const [firebaseUser, setFirebaseUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("select");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
+  const [selectedCompanyId, setSelectedCompanyId] = useState("select");
+
   const [allItems, setAllItems] = useState([]);
-    const [companiesList , setCompaniesList] = useState([]);
-    const [selectedCompanyId , setSelectedCompanyId] = useState("select");
+  const [companiesList, setCompaniesList] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // NEW: date range (dayjs objects or null)
+  const [dateRange, setDateRange] = useState([null, null]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth,(user) => {
@@ -44,75 +77,131 @@ const PostsPage = () => {
 
       if (!user) {
         router.push("/auth/signin");
-      }else{
+      } else {
         const fetchData = async () => {
-       try {
-      const token = await user.getIdToken();
-          const [catRes, companyRes] = await Promise.allSettled([
-            fetch(`/api/allContent`, {
-              headers: { Authorization: `Bearer ${token}` },
-            }),
-            fetch(`/api/companies`, {
-              headers: { Authorization: `Bearer ${token}` },
-            }),
-          ]);
-          if (catRes.status === 'fulfilled' && catRes.value.ok) {
-            const result = await catRes.value.json();
-            if (result) {
-              setAllItems(result.data || []);
+          try {
+            const token = await user.getIdToken();
+
+            const [catRes, companyRes] = await Promise.allSettled([
+              fetch(`/api/allContent`, {
+                headers: { Authorization: `Bearer ${token}` },
+              }),
+              fetch(`/api/companies`, {
+                headers: { Authorization: `Bearer ${token}` },
+              }),
+            ]);
+
+            if (catRes.status === "fulfilled" && catRes.value.ok) {
+              const result = await catRes.value.json();
+              if (result) setAllItems(result.data || []);
+            } else if (catRes.status === "rejected") {
+              console.error("Failed to fetch categories:", catRes.reason);
             }
-          } else if (catRes.status === 'rejected') {
-            console.error("Failed to fetch categories:", catRes.reason);
-          }
 
-          if (companyRes.status === 'fulfilled' && companyRes.value.ok) {
-         const result = await companyRes.value.json();
-         const list = Array.isArray(result.data) ? result.data : [];
-         setCompaniesList(list);
-          } else if (companyRes.status === 'rejected') {
-            console.error("Failed to fetch companies:", companyRes.reason);
+            if (companyRes.status === "fulfilled" && companyRes.value.ok) {
+              const result = await companyRes.value.json();
+              const list = Array.isArray(result.data) ? result.data : [];
+              setCompaniesList(list);
+            } else if (companyRes.status === "rejected") {
+              console.error("Failed to fetch companies:", companyRes.reason);
+            }
+          } catch (err) {
+            console.error("Failed to fetch:", err);
           }
-        } catch (err) {
-          console.error("Failed to fetch:", err);
-        }
-    };
+        };
 
-    fetchData();
+        fetchData();
       }
     });
 
     return () => unsubscribe();
   }, [router]);
 
-useEffect(() => {
-  setCurrentPage(1); // reset to first page whenever filters or search change
-}, [searchQuery, selectedType, selectedCategory , selectedCompanyId , selectedStatus]);
+  // Reset to page 1 whenever filters/search/date change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    searchQuery,
+    selectedType,
+    selectedCategory,
+    selectedCompanyId,
+    selectedStatus,
+    dateRange,
+  ]);
 
+  const companies = [
+    { id: "select", name: "Select Company" },
+    { id: "all", name: "All Companies" },
+    ...companiesList.map((company) => ({
+      id: company.id,
+      name: company.name,
+    })),
+  ];
 
-const companies = [
-  { id: "select", name: "Select Company" },
-  { id: "all", name: "All Companies" },
-  ...companiesList.map((company) => ({
-    id: company.id,
-    name: company.name,
-  })),
-];
   const categories = [
-  "select",
-  "all",
-  ...new Set(
-     allItems?.filter(
-        post =>
-          selectedCompanyId === "all"
-            ? true
-            : post?.company_id === selectedCompanyId
-      )
-      .map(post => post?.category)
-      .filter(Boolean)
-  ),
-];
-  const statuses = ["all", ...new Set(allItems.map((item) => item.status).filter(Boolean))];
+    "select",
+    "all",
+    ...new Set(
+      allItems
+        ?.filter((post) =>
+          selectedCompanyId === "all" ? true : post?.company_id === selectedCompanyId
+        )
+        .map((post) => post?.category)
+        .filter(Boolean)
+    ),
+  ];
 
+  const statuses = [
+    "all",
+    ...new Set(allItems.map((item) => item.status).filter(Boolean)),
+  ];
+
+  // Badge helper (unchanged)
+  const getStatusBadge = (status) => {
+    const statusColors = {
+      commentunderapproval: "bg-blue-500 text-white",
+      postunderapproval: "bg-blue-500 text-white",
+      live: "bg-green-500 text-white",
+      removed: "bg-red-500 text-white",
+      undermoderation: "bg-yellow-500 text-black",
+      approved: "bg-emerald-700 text-white",
+      notapproved: "bg-red-600 text-white",
+      pending: "bg-yellow-400 text-white",
+    };
+
+    const colorClass = status
+      ? statusColors[status.toLowerCase()] || "bg-gray-600 text-white"
+      : "bg-gray-600 text-white";
+
+    const formattedText = status
+      ? status.replace(/([a-z])([A-Z])/g, "$1 $2")
+      : "";
+
+    return (
+      <Badge className={`${colorClass} capitalize text-center min-w-[8rem] justify-center`}>
+        {formattedText}
+      </Badge>
+    );
+  };
+
+  // Date range filter (inclusive)
+  const matchesDateRange = (item, range) => {
+    const [start, end] = range || [];
+    if (!start || !end) return true; // no filter active
+
+    const startMs = start.startOf("day").valueOf();
+    const endMs = end.endOf("day").valueOf();
+
+    // Accept common date formats (ISO string, ms number, Date)
+    const itemMs = item?.date_posted ? dayjs(item.date_posted).valueOf() : NaN;
+
+    // If invalid/missing date and range is set => exclude
+    if (!Number.isFinite(itemMs)) return false;
+
+    return itemMs >= startMs && itemMs <= endMs;
+  };
+
+  // Filtered items
   const filteredItems = allItems.filter((item) => {
     const matchesSearch =
       searchQuery === "" ||
@@ -120,90 +209,79 @@ const companies = [
       item.category?.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesCategory =
-      selectedCategory === "all" || item.category === selectedCategory;
+      selectedCategory === "all" ||
+      selectedCategory === "select" ||
+      item.category === selectedCategory;
+
     const matchesStatus =
       selectedStatus === "all" || item.status === selectedStatus;
+
     const matchesType =
       selectedType === "all" || item.type === selectedType;
     const matchCompanyId =
       selectedCompanyId === "all" || item.company_id === selectedCompanyId;
 
-    return matchesSearch && matchesCategory && matchesStatus && matchesType && matchCompanyId;
+    const matchCompanyId =
+      selectedCompanyId === "all" ||
+      selectedCompanyId === "select" ||
+      item.company_id === selectedCompanyId;
+
+    const matchesDate = matchesDateRange(item, dateRange);
+
+    return (
+      matchesSearch &&
+      matchesCategory &&
+      matchesStatus &&
+      matchesType &&
+      matchCompanyId &&
+      matchesDate
+    );
   });
 
- // Pagination logic
-  const totalPages = Math.ceil(filteredItems.length / PAGE_SIZE);
-  const paginatedItems = filteredItems.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  // Status cards numbers (based on current filter set incl. date range)
+  const getStatusCounts = () => {
+    let itemsToCount = filteredItems;
 
-const getStatusCounts = () => {
-  let itemsToCount = filteredItems;
+    if (selectedType !== "all") {
+      itemsToCount = itemsToCount.filter((item) => item.type === selectedType);
+    }
 
-  // Filter if a specific type is selected
-  if (selectedType !== "all") {
-    itemsToCount = itemsToCount.filter(item => item.type === selectedType);
-  }
+    return itemsToCount.reduce(
+      (acc, item) => {
+        let statusKey = null;
 
-  return itemsToCount.reduce(
-    (acc, item) => {
-      let statusKey = null;
+        if (item.type === "post") {
+          const postStatus = item.status?.toLowerCase();
+          if (postStatus === "live") statusKey = "live";
+          else if (postStatus === "removed") statusKey = "removed";
+          else if (postStatus === "postunderapproval") statusKey = "underApproval";
+          else if (postStatus === "notposted") statusKey = "notPosted";
+        }
 
-      if (item.type === "post") {
-        const postStatus = item.status?.toLowerCase();
-        if (postStatus === "live") statusKey = "live";
-        else if (postStatus === "removed") statusKey = "removed";
-        else if (postStatus === "postunderapproval") statusKey = "underApproval";
-        else if (postStatus === "notposted") statusKey = "notPosted";
-      } 
-      
-      if (item.type === "comment") {
-        const commentStatus = item.posted_comment_status?.toLowerCase();
-        if (commentStatus === "live") statusKey = "live";
-        else if (commentStatus === "removed") statusKey = "removed";
-        else if (commentStatus === "commentunderapproval") statusKey = "underApproval";
-        else if (commentStatus === "notposted") statusKey = "notPosted";
-      }
+        if (item.type === "comment") {
+          const commentStatus = item.posted_comment_status?.toLowerCase();
+          if (commentStatus === "live") statusKey = "live";
+          else if (commentStatus === "removed") statusKey = "removed";
+          else if (commentStatus === "commentunderapproval") statusKey = "underApproval";
+          else if (commentStatus === "notposted") statusKey = "notPosted";
+        }
 
-      if (statusKey) {
-        acc[statusKey] = (acc[statusKey] || 0) + 1;
-      }
-
-      return acc;
-    },
-    { removed: 0, underApproval: 0, notPosted: 0, live: 0 }
-  );
-};
-const statusCnt = getStatusCounts()
-
-  const getStatusBadge = (status) => {
-  const statusColors = {
-    // Published Post Status
-    commentunderapproval: "bg-blue-500 text-white",
-    postunderapproval: "bg-blue-500 text-white",
-    live: "bg-green-500 text-white",
-    removed: "bg-red-500 text-white",
-    undermoderation: "bg-yellow-500 text-black",
-
-    // Post Approval Status
-    approved: "bg-emerald-700 text-white",
-    notapproved: "bg-red-600 text-white",
-    pending: "bg-yellow-400 text-white",
+        if (statusKey) acc[statusKey] = (acc[statusKey] || 0) + 1;
+        return acc;
+      },
+      { removed: 0, underApproval: 0, notPosted: 0, live: 0 }
+    );
   };
+  const statusCnt = getStatusCounts();
 
-  const colorClass = status
-    ? statusColors[status.toLowerCase()] || "bg-gray-600 text-white"
-    : "bg-gray-600 text-white";
-
-  // Format text → insert spaces before capital letters
-  const formattedText = status
-    ? status.replace(/([a-z])([A-Z])/g, "$1 $2")
-    : "";
-
-  return (
-    <Badge className={`${colorClass} capitalize text-center min-w-[8rem] justify-center`}>
-      {formattedText}
-    </Badge>
+  // Pagination
+  const totalPages = Math.ceil(filteredItems.length / PAGE_SIZE);
+  const paginatedItems = filteredItems.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
   );
-};
+
+  const handlePageChange = (page) => setCurrentPage(page);
 
   if (loading) {
     return (
@@ -226,6 +304,7 @@ const statusCnt = getStatusCounts()
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Header */}
       <header className="border-b border-border bg-card">
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">
@@ -235,11 +314,16 @@ const statusCnt = getStatusCounts()
                 <BarChart3 className="h-6 w-6 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-foreground">Reddit Engagement Tracker</h1>
-                <p className="text-sm text-muted-foreground">Manage community discussions and workflows</p>
+                <h1 className="text-xl font-bold text-foreground">
+                  Reddit Engagement Tracker
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                  Manage community discussions and workflows
+                </p>
               </div>
             </div>
           </div>
+
           <div className="flex items-center gap-3">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -263,7 +347,7 @@ const statusCnt = getStatusCounts()
       </header>
 
       <div className="p-6">
-        
+        {/* Status cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <StatusCard status="live" count={statusCnt.live} label="Live" />
           <StatusCard status="notPosted" count={statusCnt.notPosted} label="Not Posted" />
@@ -274,8 +358,9 @@ const statusCnt = getStatusCounts()
         <Card className="mb-6">
           <CardContent className="p-6">
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+              {/* Search */}
               <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
                   placeholder="Search posts, comments, categories..."
                   value={searchQuery}
@@ -284,6 +369,7 @@ const statusCnt = getStatusCounts()
                 />
               </div>
 
+              {/* Type */}
               <Select value={selectedType} onValueChange={setSelectedType}>
                 <SelectTrigger className="w-40">
                   <SelectValue placeholder="All Types" />
@@ -310,24 +396,87 @@ const statusCnt = getStatusCounts()
                                   </SelectContent>
                                 </Select>
 
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              {/* Company */}
+              <Select value={selectedCompanyId} onValueChange={setSelectedCompanyId}>
                 <SelectTrigger className="w-48">
-                   <SelectValue placeholder="Select Category" />
+                  <SelectValue placeholder="Select Company" />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map((cat) => (
-                    <SelectItem key={cat} value={cat}>
-                      {cat === "all" ? "All Categories" : cat === "select" ? "Select Category" : cat}
+                  {[
+                    { id: "select", name: "Select Company" },
+                    { id: "all", name: "All Companies" },
+                    ...companiesList.map((c) => ({ id: c.id, name: c.name })),
+                  ].map((company) => (
+                    <SelectItem key={company.id} value={company.id}>
+                      {company.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
 
-                              
-                          
+              {/* Category */}
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="w-48">
+                  <SelectValue placeholder="Select Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((cat) => (
+                    <SelectItem key={cat} value={cat}>
+                      {cat === "all"
+                        ? "All Categories"
+                        : cat === "select"
+                        ? "Select Category"
+                        : cat}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
-              {/* Status Filter */}
-              {/* <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+              {/* Date Range */}
+              <RangePicker
+                value={dateRange}
+                className="dark-range-picker"
+  popupClassName="dark-range-picker-dropdown"
+                onChange={(vals) => setDateRange(vals || [null, null])}
+                allowClear
+                format="YYYY-MM-DD"
+                className=""
+                presets={[
+                  {
+                    label: "Today",
+                    value: [dayjs().startOf("day"), dayjs().endOf("day")],
+                  },
+                  {
+                    label: "Last 7 Days",
+                    value: [
+                      dayjs().subtract(6, "day").startOf("day"),
+                      dayjs().endOf("day"),
+                    ],
+                  },
+                  {
+                    label: "Last 30 Days",
+                    value: [
+                      dayjs().subtract(29, "day").startOf("day"),
+                      dayjs().endOf("day"),
+                    ],
+                  },
+                  {
+                    label: "This Month",
+                    value: [dayjs().startOf("month"), dayjs().endOf("month")],
+                  },
+                  {
+                    label: "Last Month",
+                    value: [
+                      dayjs().subtract(1, "month").startOf("month"),
+                      dayjs().subtract(1, "month").endOf("month"),
+                    ],
+                  },
+                ]}
+              />
+
+              {/* If you also want a separate 'Status' filter, uncomment below */}
+              {/*
+              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
                 <SelectTrigger className="w-32">
                   <SelectValue placeholder="All Status" />
                 </SelectTrigger>
@@ -338,33 +487,36 @@ const statusCnt = getStatusCounts()
                     </SelectItem>
                   ))}
                 </SelectContent>
-              </Select> */}
+              </Select>
+              */}
             </div>
           </CardContent>
         </Card>
 
-        {/* Content Table */}
+        {/* Table */}
         <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">
-              {selectedType === "post" ? `My Posts (${filteredItems.length})` :
-               selectedType === "comment" ? `My Comments (${filteredItems.length})` :
-               `My Content (${filteredItems.length})`}
+              {selectedType === "post"
+                ? `My Posts (${filteredItems.length})`
+                : selectedType === "comment"
+                ? `My Comments (${filteredItems.length})`
+                : `My Content (${filteredItems.length})`}
+              {dateRange?.[0] && dateRange?.[1] &&
+                ` — ${dateRange[0].format("YYYY-MM-DD")} to ${dateRange[1].format("YYYY-MM-DD")}`}
             </CardTitle>
           </CardHeader>
-          <div className="bg-[#344256] w-full h-[0.5px] mb-1"></div>
+
+          <div className="bg-[#344256] w-full h-[0.5px] mb-1" />
+
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    {/* Show Type column only when displaying all */}
                     {selectedType === "all" && <TableHead>Type</TableHead>}
-
-                    {/* Common columns */}
                     <TableHead>Category</TableHead>
 
-                    {/* Post-specific columns */}
                     {selectedType === "post" && (
                       <>
                         <TableHead>Title</TableHead>
@@ -380,7 +532,6 @@ const statusCnt = getStatusCounts()
                       </>
                     )}
 
-                    {/* Comment-specific columns */}
                     {selectedType === "comment" && (
                       <>
                         <TableHead>Targeted Subreddit</TableHead>
@@ -396,7 +547,6 @@ const statusCnt = getStatusCounts()
                       </>
                     )}
 
-                    {/* All type view - combined columns */}
                     {selectedType === "all" && (
                       <>
                         <TableHead>Title</TableHead>
@@ -412,183 +562,186 @@ const statusCnt = getStatusCounts()
                     )}
                   </TableRow>
                 </TableHeader>
+
                 <TableBody>
                   {paginatedItems.map((item, index) => (
                     <TableRow key={`${item.type}-${item.id}-${index}`}>
-                      {/* Type column - only when showing all */}
                       {selectedType === "all" && (
                         <TableCell>
-                          <Badge variant={item.type === 'post' ? 'default' : 'secondary'} className="capitalize">
+                          <Badge
+                            variant={item.type === "post" ? "default" : "secondary"}
+                            className="capitalize"
+                          >
                             {item.type}
                           </Badge>
                         </TableCell>
                       )}
 
-                      {/* Category - always shown */}
                       <TableCell>
                         <Badge variant="outline" className="whitespace-nowrap">
                           {item.category}
                         </Badge>
                       </TableCell>
 
-                      {/* Post-specific layout */}
                       {selectedType === "post" && (
                         <>
-                          {/* Title */}
                           <TableCell className="font-medium max-w-xs">
-                            <HoverTextCell text = {item.title} isTitle={true}/>
+                            <HoverTextCell text={item.title} isTitle />
                           </TableCell>
 
-                          {/* Status */}
-                          <TableCell>{getStatusBadge(item.current_status, item.type)}</TableCell>
-
-                          {/* Text of engagement */}
-                          <TableCell className="max-w-sm">
-                              <HoverTextCell text={item.engagement_text} isTextEngagement={true} />
-                          </TableCell>
-
-                          {/* Date published */}
-                          <TableCell className="text-sm">
-                            {item.date_posted ? new Date(item.date_posted).toLocaleDateString() : "-"}
-                          </TableCell>
-
-                          {/* Customer Comments */}
-                          <TableCell className="max-w-sm">
-                              <HoverTextCell text={item.client_feedback || "-"} />
-                          </TableCell>
-
-                          {/* Current Status */}
-                          <TableCell className="text-sm">{getStatusBadge(item.status) || "-"}</TableCell>
-
-                          {/* Published Link */}
                           <TableCell>
-                            <a
-                              href={item.posted_link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-primary hover:underline"
-                            >
-                              {item.posted_link ? "View Link" : "-"}
-                            </a>
+                            {getStatusBadge(item.current_status)}
                           </TableCell>
 
-                          {/* Total Views */}
-                          <TableCell className="text-sm">{item.total_views ? item.total_views : "-"}</TableCell>
+                          <TableCell className="max-w-sm">
+                            <HoverTextCell text={item.engagement_text} isTextEngagement />
+                          </TableCell>
 
-                          {/* Number of our engagements */}
+                          <TableCell className="text-sm">
+                            {item.date_posted
+                              ? new Date(item.date_posted).toLocaleDateString()
+                              : "-"}
+                          </TableCell>
+
+                          <TableCell className="max-w-sm">
+                            <HoverTextCell text={item.client_feedback || "-"} />
+                          </TableCell>
+
+                          <TableCell className="text-sm">
+                            {getStatusBadge(item.status) || "-"}
+                          </TableCell>
+
+                          <TableCell>
+                            {item.posted_link ? (
+                              <a
+                                href={item.posted_link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary inline-flex items-center gap-1 hover:underline"
+                              >
+                                View Link <ExternalLink className="h-3.5 w-3.5" />
+                              </a>
+                            ) : (
+                              "-"
+                            )}
+                          </TableCell>
+
+                          <TableCell className="text-sm">
+                            {item.total_views ?? "-"}
+                          </TableCell>
+
                           <TableCell className="text-sm">-</TableCell>
 
-                          {/* Reddit Username */}
                           <TableCell>{item.reddit_username || "-"}</TableCell>
                         </>
                       )}
 
-                      {/* Comment-specific layout */}
                       {selectedType === "comment" && (
                         <>
-                          {/* Targeted Subreddit */}
                           <TableCell className="max-w-sm">
                             <div className="text-sm text-muted-foreground line-clamp-3">
                               {item.targeted_subreddit || "-"}
                             </div>
                           </TableCell>
 
-                          {/* Title */}
                           <TableCell className="font-medium max-w-xs">
-                             <HoverTextCell text={item.title} isTitle={true}/>
+                            <HoverTextCell text={item.title} isTitle />
                           </TableCell>
 
-                          {/* Comment Approval Status */}
-                          {/* getStatusBadge(item.posted_comment_status, 'comment')} */}
-                          <TableCell>{getStatusBadge(item.status, 'comment')}</TableCell>
-
-                          {/* Text of engagement */}
-                          <TableCell className="max-w-sm">
-                            <HoverTextCell text ={item.engagement_text} isTextEngagement={true}/>
-                          </TableCell>
-
-                          {/* Date published */}
-                          <TableCell className="text-sm">
-                            {item.date_posted ? new Date(item.date_posted).toLocaleDateString() : "-"}
-                          </TableCell>
-
-                          {/* Customer Comments */}
-                          <TableCell className="max-w-sm">
-                              <HoverTextCell text={item.client_feedback || "-"} />
-                          </TableCell>
-
-                          {/* Published Link */}
                           <TableCell>
-                            <a
-                              href={item.posted_link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-primary hover:underline"
-                            >
-                              {item.posted_link ? "View Link" : "-"}
-                            </a>
+                            {getStatusBadge(item.status)}
                           </TableCell>
 
-                          {/* Total Views */}
-                          <TableCell className="text-sm">{item.total_views ? item.total_views : "-"}</TableCell>
+                          <TableCell className="max-w-sm">
+                            <HoverTextCell text={item.engagement_text} isTextEngagement />
+                          </TableCell>
 
-                          {/* Reddit Username */}
+                          <TableCell className="text-sm">
+                            {item.date_posted
+                              ? new Date(item.date_posted).toLocaleDateString()
+                              : "-"}
+                          </TableCell>
+
+                          <TableCell className="max-w-sm">
+                            <HoverTextCell text={item.client_feedback || "-"} />
+                          </TableCell>
+
+                          <TableCell>
+                            {item.posted_link ? (
+                              <a
+                                href={item.posted_link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary inline-flex items-center gap-1 hover:underline"
+                              >
+                                View Link <ExternalLink className="h-3.5 w-3.5" />
+                              </a>
+                            ) : (
+                              "-"
+                            )}
+                          </TableCell>
+
+                          <TableCell className="text-sm">
+                            {item.total_views ?? "-"}
+                          </TableCell>
+
                           <TableCell>{item.reddit_username || "-"}</TableCell>
 
-                          {/* Posted Comment Status */}
-                          <TableCell>{getStatusBadge(item.posted_comment_status, 'comment')}</TableCell>
+                          <TableCell>
+                            {getStatusBadge(item.posted_comment_status)}
+                          </TableCell>
                         </>
                       )}
 
-                      {/* All type view - simplified layout */}
                       {selectedType === "all" && (
                         <>
-                          {/* Title */}
                           <TableCell className="font-medium max-w-xs">
-                            <HoverTextCell text={item.title} isTitle={true} />
+                            <HoverTextCell text={item.title} isTitle />
                           </TableCell>
 
-                          {/* Status */}
-                          <TableCell>{getStatusBadge(item.type === "post" ? item.status : item.posted_comment_status)}</TableCell>
-
-                          {/* Text of Engagement */}
                           <TableCell>
-                            <HoverTextCell text={item.engagement_text} isTextEngagement={true} />
+                            {getStatusBadge(
+                              item.type === "post" ? item.status : item.posted_comment_status
+                            )}
                           </TableCell>
 
-                          {/* Date Published */}
+                          <TableCell>
+                            <HoverTextCell text={item.engagement_text} isTextEngagement />
+                          </TableCell>
+
                           <TableCell className="text-sm">
-                            {item.date_posted ? new Date(item.date_posted).toLocaleDateString() : "-"}
+                            {item.date_posted
+                              ? new Date(item.date_posted).toLocaleDateString()
+                              : "-"}
                           </TableCell>
 
-                          {/* Customer Comments */}
                           <TableCell className="max-w-sm">
-                              <HoverTextCell text={item.client_feedback || "-"} />
+                            <HoverTextCell text={item.client_feedback || "-"} />
                           </TableCell>
 
-                          {/* Published Link */}
                           <TableCell>
-                            <a
-                              href={item.posted_link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-primary hover:underline"
-                            >
-                              {item.posted_link ? "View Link" : "-"}
-                            </a>
+                            {item.posted_link ? (
+                              <a
+                                href={item.posted_link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary inline-flex items-center gap-1 hover:underline"
+                              >
+                                View Link <ExternalLink className="h-3.5 w-3.5" />
+                              </a>
+                            ) : (
+                              "-"
+                            )}
                           </TableCell>
 
-                          {/* Total Views */}
-                          <TableCell className="text-sm">{item.total_views ? item.total_views : "-"}</TableCell>
+                          <TableCell className="text-sm">
+                            {item.total_views ?? "-"}
+                          </TableCell>
 
+                          <TableCell>
+                            {item.targeted_subreddit || "-"}
+                          </TableCell>
 
-                          {/* Targeted Subreddit */}
-<TableCell>
-  {item.targeted_subreddit || "-"}
-</TableCell>
-
-
-                          {/* Reddit Username */}
                           <TableCell>
                             {item.reddit_username || "-"}
                           </TableCell>
@@ -602,12 +755,12 @@ const statusCnt = getStatusCounts()
           </CardContent>
         </Card>
       </div>
-        
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };

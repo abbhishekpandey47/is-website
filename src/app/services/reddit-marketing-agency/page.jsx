@@ -15,7 +15,7 @@ import FAQSection from "./FAQ";
 import StatsSection from "./numbers";
 import RedditComment from "./redditComment";
 import BlogSection from "./blogSection";
-// import Threadflow from "./threadflow";
+import Threadflow from "./threadflow";
 
 
 export default function Page() {
@@ -33,7 +33,7 @@ export default function Page() {
             <RedditServiceCards />
             <StatsSection />
             <RedditComment />
-            {/* <Threadflow /> */}
+            <Threadflow />
             <DownloadPDF />
            
             <Testimonials />

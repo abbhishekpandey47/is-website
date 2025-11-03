@@ -618,3 +618,76 @@ body {
 .animate-spin-reverse {
   animation: spin-reverse 50s linear infinite;
 }
+
+/* 🌙 Dark theme for AntD RangePicker (input + popup) */
+.dark-range-picker {
+  background-color: #0f1729 !important;
+  border: 1px solid #334155 !important;
+  color: #ffffff !important;
+  border-radius: 6px;
+  height: 40px;
+}
+
+.dark-range-picker input {
+  background: transparent !important;
+  color: #ffffff !important;
+}
+.dark-range-picker input::placeholder {
+  color: #ffffff !important;
+}
+
+.dark-range-picker .ant-picker-suffix,
+.dark-range-picker .ant-picker-clear {
+  color: #9ca3af !important;
+}
+
+.dark-range-picker:hover,
+.dark-range-picker:focus-within {
+  border-color: #475569 !important; /* subtle gray hover */
+  box-shadow: none !important; /* removes purple glow */
+}
+
+/* 🗓 Popup (calendar dropdown) */
+.dark-range-picker-dropdown {
+  background-color: #0f1729 !important;
+  color: #ffffff !important;
+  border: 1px solid #334155 !important;
+}
+
+.dark-range-picker-dropdown .ant-picker-panel-container {
+  background-color: #0f1729 !important;
+  border: none !important;
+}
+
+.dark-range-picker-dropdown .ant-picker-header,
+.dark-range-picker-dropdown .ant-picker-content th,
+.dark-range-picker-dropdown .ant-picker-cell-inner {
+  color: #e5e7eb !important;
+}
+
+.dark-range-picker-dropdown .ant-picker-cell:hover .ant-picker-cell-inner {
+  background-color: #1e293b !important; /* darker hover */
+  color: #ffffff !important;
+}
+
+.dark-range-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner,
+.dark-range-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-range-start
+  .ant-picker-cell-inner,
+.dark-range-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-range-end
+  .ant-picker-cell-inner {
+  background-color: #2563eb !important; /* blue for selected date */
+  color: #ffffff !important;
+}
+
+.dark-range-picker-dropdown .ant-picker-today-btn {
+  color: #60a5fa !important;
+}
+
+/* optional: hide focus ring */
+.dark-range-picker:focus-visible {
+  box-shadow: none !important;
+}
