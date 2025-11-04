@@ -113,9 +113,11 @@ const applyFilters = (items, filters) => {
       selectedCompanyId === "select" ||
       item.company_id === selectedCompanyId;
 
-    // Date range filter
+    // Date range filter (optional - only apply if dates are provided)
+    // Frontend validation ensures both dates are provided together, but backend handles defensively
     let matchesDate = true;
     if (dateRangeStart && dateRangeEnd) {
+      // Both dates provided - filter items between startDate and endDate (inclusive)
       const itemDate = item.date_posted ? new Date(item.date_posted) : null;
       const startDate = new Date(dateRangeStart);
       const endDate = new Date(dateRangeEnd);
@@ -129,7 +131,32 @@ const applyFilters = (items, filters) => {
       } else {
         matchesDate = false;
       }
+    } else if (dateRangeStart) {
+      // Only startDate provided - filter items >= startDate
+      const itemDate = item.date_posted ? new Date(item.date_posted) : null;
+      const startDate = new Date(dateRangeStart);
+      
+      if (itemDate) {
+        startDate.setHours(0, 0, 0, 0);
+        itemDate.setHours(0, 0, 0, 0);
+        matchesDate = itemDate >= startDate;
+      } else {
+        matchesDate = false;
+      }
+    } else if (dateRangeEnd) {
+      // Only endDate provided - filter items <= endDate
+      const itemDate = item.date_posted ? new Date(item.date_posted) : null;
+      const endDate = new Date(dateRangeEnd);
+      
+      if (itemDate) {
+        endDate.setHours(23, 59, 59, 999);
+        itemDate.setHours(0, 0, 0, 0);
+        matchesDate = itemDate <= endDate;
+      } else {
+        matchesDate = false;
+      }
     }
+    // If neither date is provided, matchesDate remains true (no date filter applied)
 
     return (
       matchesSearch &&
@@ -161,7 +188,7 @@ export default async function handler(req, res) {
   // Parse query parameters (using new API param names)
   const { 
     format = "csv",
-    type = "all",
+    type,
     category = "",
     status = "",
     companyId = "",
@@ -171,11 +198,31 @@ export default async function handler(req, res) {
   } = req.query;
 
   // Normalize filter values
-  const selectedType = type || "all";
+  // If type is "all" or missing, treat as no filter (all types)
+  const selectedType = (type && type !== "all") ? type : "all";
   const selectedCategory = category || "select";
   const selectedStatus = status || "all";
   const selectedCompanyId = companyId || "select";
   const searchQuery = search || "";
+
+  // [QA] Log export query params for validation
+  console.log("[QA] Export query params", {
+    format,
+    type,
+    companyId,
+    category,
+    search,
+    status,
+    startDate,
+    endDate,
+    normalized: {
+      selectedType,
+      selectedCategory,
+      selectedStatus,
+      selectedCompanyId,
+      searchQuery,
+    },
+  });
 
   // Validate format (only CSV and Excel now)
   if (!["csv", "xlsx"].includes(format)) {

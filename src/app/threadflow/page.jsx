@@ -294,6 +294,29 @@ const PostsPage = () => {
       return;
     }
 
+    // Validate date range if partially set
+    const hasStartDate = dateRange?.[0] !== null && dateRange?.[0] !== undefined;
+    const hasEndDate = dateRange?.[1] !== null && dateRange?.[1] !== undefined;
+
+    if (hasStartDate && !hasEndDate) {
+      toast.error("Please select both start and end date, or clear the date range.");
+      return;
+    }
+
+    if (!hasStartDate && hasEndDate) {
+      toast.error("Please select both start and end date, or clear the date range.");
+      return;
+    }
+
+    if (hasStartDate && hasEndDate) {
+      const startDate = dateRange[0];
+      const endDate = dateRange[1];
+      if (startDate.isAfter(endDate)) {
+        toast.error("Start date cannot be after end date.");
+        return;
+      }
+    }
+
     setExporting(true);
     try {
       const token = await firebaseUser.getIdToken();
@@ -301,23 +324,37 @@ const PostsPage = () => {
       // Build query parameters using the new API param names
       const params = new URLSearchParams({
         format,
-        type: selectedType || "all",
+        // Only include type if not "all"
+        ...(selectedType && selectedType !== "all" ? { type: selectedType } : {}),
         category: selectedCategory === "select" ? "" : (selectedCategory || ""),
         status: selectedStatus === "all" ? "" : (selectedStatus || ""),
         companyId: selectedCompanyId === "select" ? "" : (selectedCompanyId === "all" ? "" : (selectedCompanyId || "")),
         search: searchQuery || "",
       });
 
-      // Add date range if present (required for export)
-      if (dateRange?.[0] && dateRange?.[1]) {
+      // Add date range only if both dates are present and valid
+      if (hasStartDate && hasEndDate) {
         params.append("startDate", dateRange[0].format("YYYY-MM-DD"));
         params.append("endDate", dateRange[1].format("YYYY-MM-DD"));
-      } else {
-        // Optional: show warning if no date range selected
-        toast.warning("No date range selected. Export will include all dates.");
       }
 
-      const response = await fetch(`/api/engagement/export?${params.toString()}`, {
+      const finalUrl = `/api/engagement/export?${params.toString()}`;
+      
+      // [QA] Log export parameters for validation
+      console.log("[QA] Export params", {
+        format,
+        type: selectedType,
+        companyId: selectedCompanyId,
+        category: selectedCategory,
+        search: searchQuery,
+        status: selectedStatus,
+        startDate: hasStartDate ? dateRange[0].format("YYYY-MM-DD") : null,
+        endDate: hasEndDate ? dateRange[1].format("YYYY-MM-DD") : null,
+        finalUrl,
+        paramsString: params.toString(),
+      });
+
+      const response = await fetch(finalUrl, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -529,6 +566,28 @@ const PostsPage = () => {
                 ]}
               />
 
+              {/* Export Button */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    disabled={exporting || filteredItems.length === 0}
+                    className="flex items-center gap-2"
+                  >
+                    <Download className="h-4 w-4" />
+                    {exporting ? "Exporting..." : "Export"}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => handleExport("csv")} disabled={exporting}>
+                    Export as CSV
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleExport("xlsx")} disabled={exporting}>
+                    Export as Excel
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
               {/* If you also want a separate 'Status' filter, uncomment below */}
               {/*
               <Select value={selectedStatus} onValueChange={setSelectedStatus}>
@@ -551,37 +610,15 @@ const PostsPage = () => {
         {/* Table */}
         <Card>
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg font-semibold">
-                {selectedType === "post"
-                  ? `My Posts (${filteredItems.length})`
-                  : selectedType === "comment"
-                  ? `My Comments (${filteredItems.length})`
-                  : `My Content (${filteredItems.length})`}
-                {dateRange?.[0] && dateRange?.[1] &&
-                  ` — ${dateRange[0].format("YYYY-MM-DD")} to ${dateRange[1].format("YYYY-MM-DD")}`}
-              </CardTitle>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    disabled={exporting || filteredItems.length === 0}
-                    className="flex items-center gap-2"
-                  >
-                    <Download className="h-4 w-4" />
-                    {exporting ? "Exporting..." : "Export"}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => handleExport("csv")} disabled={exporting}>
-                    Export as CSV
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => handleExport("xlsx")} disabled={exporting}>
-                    Export as Excel
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            <CardTitle className="text-lg font-semibold">
+              {selectedType === "post"
+                ? `My Posts (${filteredItems.length})`
+                : selectedType === "comment"
+                ? `My Comments (${filteredItems.length})`
+                : `My Content (${filteredItems.length})`}
+              {dateRange?.[0] && dateRange?.[1] &&
+                ` — ${dateRange[0].format("YYYY-MM-DD")} to ${dateRange[1].format("YYYY-MM-DD")}`}
+            </CardTitle>
           </CardHeader>
 
           <div className="bg-[#344256] w-full h-[0.5px] mb-1" />
