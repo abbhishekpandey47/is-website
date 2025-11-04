@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 import { DatePicker } from "antd";
 const { RangePicker } = DatePicker;
 
-import { BarChart3, ExternalLink, Plus, Search } from "lucide-react";
+import { BarChart3, ExternalLink, Plus, Search, Download } from "lucide-react";
 import { toast } from "react-toastify";
 
 import { SidebarTrigger } from "../../Components/ui/sidebar";
@@ -280,6 +280,82 @@ const PostsPage = () => {
 
   const handlePageChange = (page) => setCurrentPage(page);
 
+  // Export handler
+  const [exporting, setExporting] = useState(false);
+
+  const handleExport = async (format) => {
+    if (filteredItems.length === 0) {
+      toast.error("No data to export. Please adjust your filters.");
+      return;
+    }
+
+    if (filteredItems.length > 10000) {
+      toast.error(`Export limit exceeded. Maximum 10,000 rows allowed. Please narrow your filters. (Current: ${filteredItems.length} rows)`);
+      return;
+    }
+
+    setExporting(true);
+    try {
+      const token = await firebaseUser.getIdToken();
+      
+      // Build query parameters using the new API param names
+      const params = new URLSearchParams({
+        format,
+        type: selectedType || "all",
+        category: selectedCategory === "select" ? "" : (selectedCategory || ""),
+        status: selectedStatus === "all" ? "" : (selectedStatus || ""),
+        companyId: selectedCompanyId === "select" ? "" : (selectedCompanyId === "all" ? "" : (selectedCompanyId || "")),
+        search: searchQuery || "",
+      });
+
+      // Add date range if present (required for export)
+      if (dateRange?.[0] && dateRange?.[1]) {
+        params.append("startDate", dateRange[0].format("YYYY-MM-DD"));
+        params.append("endDate", dateRange[1].format("YYYY-MM-DD"));
+      } else {
+        // Optional: show warning if no date range selected
+        toast.warning("No date range selected. Export will include all dates.");
+      }
+
+      const response = await fetch(`/api/engagement/export?${params.toString()}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({ error: "Export failed" }));
+        throw new Error(error.error || `Export failed: ${response.statusText}`);
+      }
+
+      // Get filename from Content-Disposition header or use default
+      const contentDisposition = response.headers.get("Content-Disposition");
+      let filename = `engagement-export-${new Date().toISOString().split("T")[0]}.${format}`;
+      if (contentDisposition) {
+        const filenameMatch = contentDisposition.match(/filename="?([^"]+)"?/);
+        if (filenameMatch) {
+          filename = filenameMatch[1];
+        }
+      }
+
+      // Get blob and trigger download
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      toast.success(`Export completed: ${filename}`);
+    } catch (error) {
+      console.error("Export error:", error);
+      toast.error(error.message || "Failed to export data");
+    } finally {
+      setExporting(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="p-6 space-y-4">
@@ -475,15 +551,37 @@ const PostsPage = () => {
         {/* Table */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg font-semibold">
-              {selectedType === "post"
-                ? `My Posts (${filteredItems.length})`
-                : selectedType === "comment"
-                ? `My Comments (${filteredItems.length})`
-                : `My Content (${filteredItems.length})`}
-              {dateRange?.[0] && dateRange?.[1] &&
-                ` — ${dateRange[0].format("YYYY-MM-DD")} to ${dateRange[1].format("YYYY-MM-DD")}`}
-            </CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg font-semibold">
+                {selectedType === "post"
+                  ? `My Posts (${filteredItems.length})`
+                  : selectedType === "comment"
+                  ? `My Comments (${filteredItems.length})`
+                  : `My Content (${filteredItems.length})`}
+                {dateRange?.[0] && dateRange?.[1] &&
+                  ` — ${dateRange[0].format("YYYY-MM-DD")} to ${dateRange[1].format("YYYY-MM-DD")}`}
+              </CardTitle>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    disabled={exporting || filteredItems.length === 0}
+                    className="flex items-center gap-2"
+                  >
+                    <Download className="h-4 w-4" />
+                    {exporting ? "Exporting..." : "Export"}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => handleExport("csv")} disabled={exporting}>
+                    Export as CSV
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleExport("xlsx")} disabled={exporting}>
+                    Export as Excel
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </CardHeader>
 
           <div className="bg-[#344256] w-full h-[0.5px] mb-1" />
