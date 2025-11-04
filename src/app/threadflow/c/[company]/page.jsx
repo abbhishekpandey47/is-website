@@ -1,7 +1,7 @@
 "use client";
 import { auth } from "@/lib/firebaseClient";
 import { onAuthStateChanged } from "firebase/auth";
-import { BarChart3, ExternalLink, Plus, Search } from "lucide-react";
+import { BarChart3, ExternalLink, Plus, Search ,Download } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -22,6 +22,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { UserProfile } from "@/Components/UserProfile";
 import { HoverTextCell } from "../../components/HoverTextCell";
 import Pagination from "./components/pagination";
+import dayjs from "dayjs";
+
+import { DatePicker } from "antd";
+const { RangePicker } = DatePicker;
 
 const PAGE_SIZE = 10;
 const PostsPage = () => {
@@ -34,6 +38,9 @@ const PostsPage = () => {
   const [selectedType, setSelectedType] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [allItems, setAllItems] = useState([]);
+  const [exporting, setExporting] = useState(false);
+  const [dateRange, setDateRange] = useState([null, null]);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth,(user) => {
@@ -153,10 +160,27 @@ const PostsPage = () => {
 
 useEffect(() => {
   setCurrentPage(1); // reset to first page whenever filters or search change
-}, [searchQuery, selectedType, selectedCategory]);
+}, [searchQuery, selectedType, selectedCategory,dateRange]);
     
   const categories = ["all", ...new Set(allItems.map((item) => item.category).filter(Boolean))];
   const statuses = ["all", ...new Set(allItems.map((item) => item.status).filter(Boolean))];
+  
+  // Date range filter (inclusive)
+  const matchesDateRange = (item, range) => {
+    const [start, end] = range || [];
+    if (!start || !end) return true; // no filter active
+
+    const startMs = start.startOf("day").valueOf();
+    const endMs = end.endOf("day").valueOf();
+
+    // Accept common date formats (ISO string, ms number, Date)
+    const itemMs = item?.date_posted ? dayjs(item.date_posted).valueOf() : NaN;
+
+    // If invalid/missing date and range is set => exclude
+    if (!Number.isFinite(itemMs)) return false;
+
+    return itemMs >= startMs && itemMs <= endMs;
+  };
 
   const filteredItems = allItems.filter((item) => {
     const matchesSearch =
@@ -170,8 +194,9 @@ useEffect(() => {
       selectedStatus === "all" || item.status === selectedStatus;
     const matchesType =
       selectedType === "all" || item.type === selectedType;
+    const matchesDate = matchesDateRange(item, dateRange);
 
-    return matchesSearch && matchesCategory && matchesStatus && matchesType;
+    return matchesSearch && matchesCategory && matchesStatus && matchesType && matchesDate;
   });
 
 // Pagination logic
@@ -263,6 +288,81 @@ const statusCnt = getStatusCounts()
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+  };
+
+  // Export handler
+
+  const handleExport = async (format) => {
+    if (filteredItems.length === 0) {
+      toast.error("No data to export. Please adjust your filters.");
+      return;
+    }
+
+    if (filteredItems.length > 10000) {
+      toast.error(`Export limit exceeded. Maximum 10,000 rows allowed. Please narrow your filters. (Current: ${filteredItems.length} rows)`);
+      return;
+    }
+
+    setExporting(true);
+    try {
+      const token = await firebaseUser.getIdToken();
+      
+      // Build query parameters using the new API param names
+      const params = new URLSearchParams({
+        format,
+        type: selectedType || "all",
+        category: selectedCategory === "select" ? "" : (selectedCategory || ""),
+        status: selectedStatus === "all" ? "" : (selectedStatus || ""),
+        // companyId: selectedCompanyId === "select" ? "" : (selectedCompanyId === "all" ? "" : (selectedCompanyId || "")),
+        search: searchQuery || "",
+      });
+
+      // Add date range if present (required for export)
+      if (dateRange?.[0] && dateRange?.[1]) {
+        params.append("startDate", dateRange[0].format("YYYY-MM-DD"));
+        params.append("endDate", dateRange[1].format("YYYY-MM-DD"));
+      } else {
+        // Optional: show warning if no date range selected
+        toast.warning("No date range selected. Export will include all dates.");
+      }
+
+      const response = await fetch(`/api/engagement/export?${params.toString()}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({ error: "Export failed" }));
+        throw new Error(error.error || `Export failed: ${response.statusText}`);
+      }
+
+      // Get filename from Content-Disposition header or use default
+      const contentDisposition = response.headers.get("Content-Disposition");
+      let filename = `engagement-export-${new Date().toISOString().split("T")[0]}.${format}`;
+      if (contentDisposition) {
+        const filenameMatch = contentDisposition.match(/filename="?([^"]+)"?/);
+        if (filenameMatch) {
+          filename = filenameMatch[1];
+        }
+      }
+
+      // Get blob and trigger download
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      toast.success(`Export completed: ${filename}`);
+    } catch (error) {
+      console.error("Export error:", error);
+      toast.error(error.message || "Failed to export data");
+    } finally {
+      setExporting(false);
+    }
   };
 
 
@@ -363,7 +463,68 @@ const statusCnt = getStatusCounts()
                   ))}
                 </SelectContent>
               </Select> */}
+                   <RangePicker
+                            value={dateRange}
+                            className="dark-range-picker"
+              popupClassName="dark-range-picker-dropdown"
+                            onChange={(vals) => setDateRange(vals || [null, null])}
+                            allowClear
+                            format="YYYY-MM-DD"
+                            presets={[
+                              {
+                                label: "Today",
+                                value: [dayjs().startOf("day"), dayjs().endOf("day")],
+                              },
+                              {
+                                label: "Last 7 Days",
+                                value: [
+                                  dayjs().subtract(6, "day").startOf("day"),
+                                  dayjs().endOf("day"),
+                                ],
+                              },
+                              {
+                                label: "Last 30 Days",
+                                value: [
+                                  dayjs().subtract(29, "day").startOf("day"),
+                                  dayjs().endOf("day"),
+                                ],
+                              },
+                              {
+                                label: "This Month",
+                                value: [dayjs().startOf("month"), dayjs().endOf("month")],
+                              },
+                              {
+                                label: "Last Month",
+                                value: [
+                                  dayjs().subtract(1, "month").startOf("month"),
+                                  dayjs().subtract(1, "month").endOf("month"),
+                                ],
+                              },
+                            ]}
+                          />
+             <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    disabled={exporting || filteredItems.length === 0}
+                    className="flex items-center gap-2"
+                  >
+                    <Download className="h-4 w-4" />
+                    {exporting ? "Exporting..." : "Export"}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => handleExport("csv")} disabled={exporting}>
+                    Export as CSV
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleExport("xlsx")} disabled={exporting}>
+                    Export as Excel
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
+
+                     
           </CardContent>
         </Card>
 
@@ -371,10 +532,14 @@ const statusCnt = getStatusCounts()
         <Card>
           <CardHeader>
             <CardTitle className="text-lg font-semibold">
-              {selectedType === "post" ? `My Posts (${filteredItems.length})` :
-               selectedType === "comment" ? `My Comments (${filteredItems.length})` :
-               `My Content (${filteredItems.length})`}
-            </CardTitle>
+              {selectedType === "post"
+                            ? `My Posts (${filteredItems.length})`
+                            : selectedType === "comment"
+                            ? `My Comments (${filteredItems.length})`
+                            : `My Content (${filteredItems.length})`}
+                          {dateRange?.[0] && dateRange?.[1] &&
+                            ` — ${dateRange[0].format("YYYY-MM-DD")} to ${dateRange[1].format("YYYY-MM-DD")}`}
+                        </CardTitle>
           </CardHeader>
           <div className="bg-[#344256] w-full h-[0.5px] mb-1"></div>
           <CardContent className="p-0">
