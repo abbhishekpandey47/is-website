@@ -1247,6 +1247,17 @@ let postMetaData = [
   category: "Informational",
   metaDescription: "Discover the best developer conferences in 2025–2026. Learn, network, and grow your tech skills. Don’t miss out. Click the link and plan your conference calendar today!"
 },
+{
+  title: "How to Optimize Content for AI Search Engines: Strategies for B2B SaaS Startups",
+  metatitle: "How to Optimize Content for AI Search Engines | Infrasity",
+  slug: "ai-search-engines",
+  description: "AI-powered search engines like ChatGPT, Perplexity, and Gemini are transforming how B2B SaaS buyers discover products and content. Traditional SEO tactics no longer guarantee visibility; AI search prioritizes context, authority, and structured data. In this blog, Infrasity breaks down how startups can optimize for AI-driven discovery using AEO principles. You’ll learn how to improve content quality, schema, and internal structure; boost discoverability across trusted sources; and monitor brand visibility in AI-generated results.",
+  ogImage: "/PostImages/ai-search-engines/0.webp",
+  publishedOn: "2025-11-08",
+  authorId: "author0005",
+  category: "Informational",
+  metaDescription: "Learn how to optimize content for AI search engines like ChatGPT & Perplexity using AEO, structured data, and authority signals. Click the link to learn now."
+},
 ];
 
 const sorted = () => {
