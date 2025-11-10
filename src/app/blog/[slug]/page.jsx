@@ -330,7 +330,7 @@ if (inFAQ && currentQuestion && currentAnswer) {
             </div>
             <div className="w-[40%] min-[1900px]:w-[80%] max-lg:w-[60%] max-md:w-[70%] pt-2 lg:pt-15 flex justify-center flex-col items-start lg:ml-10">
               <article className="text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto">
-                <div className="max-lg:w-[84vw] min-[1900px]:w-[45vw] max-[1537px]:w-[50vw]">
+                <div className="max-lg:w-[84vw] min-[1900px]:w-[45vw] max-[1537px]:w-[50vw] overflow-scroll">
                   <Markdown
                     options={{
                       overrides: {
@@ -351,14 +351,26 @@ if (inFAQ && currentQuestion && currentAnswer) {
                               const totalHeadings = headingLines.length;
 
                               let ctaToShow = null;
+                              const newCta = headingLines.find((line) =>
+                                line.toLowerCase().startsWith("## cta")
+                              );
+                              const customCTA =
+                                headingText
+                                  .split(":")[0]
+                                  .trim()
+                                  .toLowerCase() === "cta";
 
-                              if (headingIndex === 2) {
-                                ctaToShow = "first";
+                              if (!newCta) {
+                                if (headingIndex === 2) {
+                                  ctaToShow = "first";
+                                } else if (
+                                  totalHeadings > 4 &&
+                                  headingIndex === totalHeadings - 2
+                                ) {
+                                  ctaToShow = "second";
+                                }
                               }
-                              else if (totalHeadings > 4 && headingIndex === totalHeadings - 2) {
-                                ctaToShow = "second";
-                              }
-
+                          
                               return (
                                 <>
                                   {ctaToShow === "first" && (
@@ -371,9 +383,23 @@ if (inFAQ && currentQuestion && currentAnswer) {
                                       <CTA2 />
                                     </div>
                                   )}
-                                  <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">
-                                    {children}
-                                  </h2>
+                                  {customCTA ? (
+                                    <div className="my-8 mb-10">
+                                      <CTA
+                                        text={
+                                          newCta.split(":")[1]?.trim() ||
+                                          "Tired of wasting engineering time on content?"
+                                        }
+                                      />
+                                    </div>
+                                  ) : (
+                                    <h2
+                                      {...props}
+                                      className="mt-10 mb-4 text-2xl font-bold"
+                                    >
+                                      {children}
+                                    </h2>
+                                  )}
                                 </>
                               );
                             } catch (error) {
