@@ -17,6 +17,9 @@ import { useToast } from "@/hooks/use-toast";
 import { auth } from "@/lib/firebaseClient";
 import { HoverTextCell } from "../components/HoverTextCell";
 import Pagination from "../components/pagination";
+import dayjs from "dayjs";
+import { DatePicker } from "antd";
+const { RangePicker } = DatePicker;
 
 const PAGE_SIZE = 10;
 
@@ -37,6 +40,7 @@ const PostsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
+  const [dateRange, setDateRange] = useState([null, null]);
 
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
@@ -140,6 +144,22 @@ const PostsPage = () => {
 const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
 const statuses = ["all", ...new Set(posts.map((post) => post.posted_comment_status).filter(Boolean))];
 
+  // Date range filter (inclusive)
+  const matchesDateRange = (post, range) => {
+    const [start, end] = range || [];
+    if (!start || !end) return true; // no filter active
+
+    const startMs = start.startOf("day").valueOf();
+    const endMs = end.endOf("day").valueOf();
+
+    // Accept common date formats (ISO string, ms number, Date)
+    const postMs = post?.date_posted ? dayjs(post.date_posted).valueOf() : NaN;
+
+    // If invalid/missing date and range is set => exclude
+    if (!Number.isFinite(postMs)) return false;
+
+    return postMs >= startMs && postMs <= endMs;
+  };
 
 const filteredPosts = posts.filter((post) => {
     const matchesSearch =
@@ -151,8 +171,9 @@ const filteredPosts = posts.filter((post) => {
       selectedCategory === "all" || post.category === selectedCategory;
     const matchesStatus =
       selectedStatus === "all" || post.status === selectedStatus;
+    const matchesDate = matchesDateRange(post, dateRange);
 
-    return matchesSearch && matchesCategory && matchesStatus;
+    return matchesSearch && matchesCategory && matchesStatus && matchesDate;
   });
 
 const totalPages = Math.ceil(filteredPosts.length / PAGE_SIZE);
@@ -453,6 +474,47 @@ const getStatusBadge = (status) => {
     ))}
   </SelectContent>
 </Select>
+
+              {/* Date Range */}
+              <RangePicker
+                value={dateRange}
+                className="dark-range-picker"
+                popupClassName="dark-range-picker-dropdown"
+                onChange={(vals) => setDateRange(vals || [null, null])}
+                allowClear
+                format="YYYY-MM-DD"
+                presets={[
+                  {
+                    label: "Today",
+                    value: [dayjs().startOf("day"), dayjs().endOf("day")],
+                  },
+                  {
+                    label: "Last 7 Days",
+                    value: [
+                      dayjs().subtract(6, "day").startOf("day"),
+                      dayjs().endOf("day"),
+                    ],
+                  },
+                  {
+                    label: "Last 30 Days",
+                    value: [
+                      dayjs().subtract(29, "day").startOf("day"),
+                      dayjs().endOf("day"),
+                    ],
+                  },
+                  {
+                    label: "This Month",
+                    value: [dayjs().startOf("month"), dayjs().endOf("month")],
+                  },
+                  {
+                    label: "Last Month",
+                    value: [
+                      dayjs().subtract(1, "month").startOf("month"),
+                      dayjs().subtract(1, "month").endOf("month"),
+                    ],
+                  },
+                ]}
+              />
 
             </div>
           </CardContent>

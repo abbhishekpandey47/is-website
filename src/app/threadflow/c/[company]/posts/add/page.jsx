@@ -378,9 +378,11 @@ const AddPostPage = () => {
                       </SelectTrigger>
                       <SelectContent>
                         {
-                          companiesList.map((company) => (
-                            <SelectItem key={company.id} value={company.id}>{company.name}</SelectItem>
-                          ))}
+                          companiesList
+                            .filter((company) => !['perplexity', 'spacelift', 'akgec'].includes(company.name.toLowerCase()))
+                            .map((company) => (
+                              <SelectItem key={company.id} value={company.id}>{company.name}</SelectItem>
+                            ))}
                       </SelectContent>
                     </Select>
                   </div>}

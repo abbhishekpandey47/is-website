@@ -132,13 +132,16 @@ const PostsPage = () => {
     dateRange,
   ]);
 
+  const testCompanies = ['perplexity', 'spacelift', 'akgec'];
   const companies = [
     { id: "select", name: "Select Company" },
     { id: "all", name: "All Companies" },
-    ...companiesList.map((company) => ({
-      id: company.id,
-      name: company.name,
-    })),
+    ...companiesList
+      .filter((company) => !testCompanies.includes(company.name.toLowerCase()))
+      .map((company) => ({
+        id: company.id,
+        name: company.name,
+      })),
   ];
 
   const categories = [
@@ -571,7 +574,9 @@ const PostsPage = () => {
                   {[
                     { id: "select", name: "Select Company" },
                     { id: "all", name: "All Companies" },
-                    ...companiesList.map((c) => ({ id: c.id, name: c.name })),
+                    ...companiesList
+                      .filter((c) => !testCompanies.includes(c.name.toLowerCase()))
+                      .map((c) => ({ id: c.id, name: c.name })),
                   ].map((company) => (
                     <SelectItem key={company.id} value={company.id}>
                       {company.name}

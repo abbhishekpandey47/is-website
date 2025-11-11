@@ -19,6 +19,9 @@ import { useToast } from "../../../hooks/use-toast";
 import { Textarea } from "../../../Components/ui/textarea";
 import { HoverTextCell } from "../components/HoverTextCell";
 import Pagination from "../components/pagination";
+import dayjs from "dayjs";
+import { DatePicker } from "antd";
+const { RangePicker } = DatePicker;
 
 
 const ReactQuill = dynamic(
@@ -51,6 +54,9 @@ const PostsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [companiesList , setCompaniesList] = useState([]);
   const [selectedCompanyId , setSelectedCompanyId] = useState("select");
+
+  // Date range state
+  const [dateRange, setDateRange] = useState([null, null]);
 
   // Sorting state
   const [sortField, setSortField] = useState(null);
@@ -172,19 +178,39 @@ const PostsPage = () => {
 
   useEffect(() => {
     setCurrentPage(1); // reset to first page whenever filters or search change
-  }, [searchQuery , selectedCategory , selectedStatus , selectedCompanyId]);
+  }, [searchQuery , selectedCategory , selectedStatus , selectedCompanyId, dateRange]);
 
+  const testCompanies = ['perplexity', 'spacelift', 'akgec'];
   const companies = [
   { id: "select", name: "Select Company" },
   { id: "all", name: "All Companies" },
-  ...companiesList.map((company) => ({
-    id: company.id,
-    name: company.name,
-  })),
+  ...companiesList
+    .filter((company) => !testCompanies.includes(company.name.toLowerCase()))
+    .map((company) => ({
+      id: company.id,
+      name: company.name,
+    })),
 ];
   const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
   const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
   
+  // Date range filter (inclusive)
+  const matchesDateRange = (post, range) => {
+    const [start, end] = range || [];
+    if (!start || !end) return true; // no filter active
+
+    const startMs = start.startOf("day").valueOf();
+    const endMs = end.endOf("day").valueOf();
+
+    // Accept common date formats (ISO string, ms number, Date)
+    const postMs = post?.date_posted ? dayjs(post.date_posted).valueOf() : NaN;
+
+    // If invalid/missing date and range is set => exclude
+    if (!Number.isFinite(postMs)) return false;
+
+    return postMs >= startMs && postMs <= endMs;
+  };
+
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
       searchQuery === "" ||
@@ -198,8 +224,9 @@ const PostsPage = () => {
       selectedStatus === "all" || post.status === selectedStatus;
     const matchCompanyId =
     selectedCompanyId === "all" || post.company_id === selectedCompanyId;
+    const matchesDate = matchesDateRange(post, dateRange);
 
-    return matchesSearch && matchesCategory && matchesStatus && matchCompanyId;
+    return matchesSearch && matchesCategory && matchesStatus && matchCompanyId && matchesDate;
   });
 
   // Handle column header click for sorting
@@ -580,6 +607,47 @@ const PostsPage = () => {
                       ))}
                     </SelectContent>
                   </Select>
+
+                  {/* Date Range */}
+                  <RangePicker
+                    value={dateRange}
+                    className="dark-range-picker"
+                    popupClassName="dark-range-picker-dropdown"
+                    onChange={(vals) => setDateRange(vals || [null, null])}
+                    allowClear
+                    format="YYYY-MM-DD"
+                    presets={[
+                      {
+                        label: "Today",
+                        value: [dayjs().startOf("day"), dayjs().endOf("day")],
+                      },
+                      {
+                        label: "Last 7 Days",
+                        value: [
+                          dayjs().subtract(6, "day").startOf("day"),
+                          dayjs().endOf("day"),
+                        ],
+                      },
+                      {
+                        label: "Last 30 Days",
+                        value: [
+                          dayjs().subtract(29, "day").startOf("day"),
+                          dayjs().endOf("day"),
+                        ],
+                      },
+                      {
+                        label: "This Month",
+                        value: [dayjs().startOf("month"), dayjs().endOf("month")],
+                      },
+                      {
+                        label: "Last Month",
+                        value: [
+                          dayjs().subtract(1, "month").startOf("month"),
+                          dayjs().subtract(1, "month").endOf("month"),
+                        ],
+                      },
+                    ]}
+                  />
             
 
             </div>
