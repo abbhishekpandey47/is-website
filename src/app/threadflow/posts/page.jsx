@@ -2,7 +2,7 @@
 import { auth } from "@/lib/firebaseClient";
 import { cn } from "@/lib/utils";
 import { onAuthStateChanged } from "firebase/auth";
-import { Edit, ExternalLink, Plus, Save, Search, Trash2, X } from "lucide-react";
+import { Edit, ExternalLink, Plus, Save, Search, Trash2, X, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -51,6 +51,10 @@ const PostsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [companiesList , setCompaniesList] = useState([]);
   const [selectedCompanyId , setSelectedCompanyId] = useState("select");
+
+  // Sorting state
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   // Edit modal
   const [editingPost, setEditingPost] = useState(null);
@@ -198,9 +202,78 @@ const PostsPage = () => {
     return matchesSearch && matchesCategory && matchesStatus && matchCompanyId;
   });
 
-     // Pagination logic
-  const totalPages = Math.ceil(filteredPosts.length / PAGE_SIZE);
-  const paginatedPosts = filteredPosts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  // Handle column header click for sorting
+  const handleSort = (field) => {
+    if (sortField === field) {
+      // Toggle direction if clicking same field
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      // Set new field and reset to ascending
+      setSortField(field);
+      setSortDirection("asc");
+    }
+  };
+
+  // Sort filtered items
+  const sortedPosts = [...filteredPosts].sort((a, b) => {
+    if (!sortField) return 0;
+
+    let aValue = a[sortField];
+    let bValue = b[sortField];
+
+    // Special handling for date fields
+    if (sortField === "date_posted" || sortField.includes("date")) {
+      aValue = aValue ? new Date(aValue).getTime() : 0;
+      bValue = bValue ? new Date(bValue).getTime() : 0;
+    }
+    // Special handling for numeric fields
+    else if (sortField === "total_views") {
+      aValue = aValue ?? 0;
+      bValue = bValue ?? 0;
+    }
+    // Handle null/undefined values for strings
+    else {
+      if (aValue == null) aValue = "";
+      if (bValue == null) bValue = "";
+
+      // Convert to lowercase for case-insensitive sorting
+      if (typeof aValue === "string") aValue = aValue.toLowerCase();
+      if (typeof bValue === "string") bValue = bValue.toLowerCase();
+    }
+
+    // Compare values
+    if (aValue < bValue) return sortDirection === "asc" ? -1 : 1;
+    if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
+    return 0;
+  });
+
+  // Helper component for sortable table headers
+  const SortableHeader = ({ field, children }) => {
+    const isActive = sortField === field;
+    return (
+      <TableHead
+        className="cursor-pointer select-none hover:bg-muted/50"
+        onClick={() => handleSort(field)}
+      >
+        <div className="flex items-center gap-1">
+          {children}
+          {isActive ? (
+            sortDirection === "asc" ? (
+              <ArrowUp className="h-4 w-4" />
+            ) : (
+              <ArrowDown className="h-4 w-4" />
+            )
+          ) : (
+            <ArrowUpDown className="h-4 w-4 opacity-50" />
+          )}
+        </div>
+      </TableHead>
+    );
+  };
+
+  // Pagination logic
+  const totalPages = Math.ceil(sortedPosts.length / PAGE_SIZE);
+  const paginatedPosts = sortedPosts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
   // Update current page when pagination changes
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -525,19 +598,19 @@ const PostsPage = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Category</TableHead>
-                    <TableHead>Targeted Subreddit</TableHead>
-                    <TableHead>Title</TableHead>
+                    <SortableHeader field="category">Category</SortableHeader>
+                    <SortableHeader field="targeted_subreddit">Targeted Subreddit</SortableHeader>
+                    <SortableHeader field="title">Title</SortableHeader>
                     {/* <TableHead>URL</TableHead> */}
-                    <TableHead>Post Approval Status</TableHead>
+                    <SortableHeader field="current_status">Post Approval Status</SortableHeader>
                     <TableHead>Text of engagement</TableHead>
-                    <TableHead>Date published</TableHead>
+                    <SortableHeader field="date_posted">Date published</SortableHeader>
                     <TableHead>Customer Comments</TableHead>
-                    <TableHead>Published Status</TableHead>
+                    <SortableHeader field="status">Published Status</SortableHeader>
                     <TableHead>Published Link</TableHead>
-                    <TableHead>Total Views</TableHead>
+                    <SortableHeader field="total_views">Total Views</SortableHeader>
                     <TableHead>Number of our engagements</TableHead>
-                    <TableHead>Reddit Username</TableHead>
+                    <SortableHeader field="reddit_username">Reddit Username</SortableHeader>
                     <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
