@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 import { DatePicker } from "antd";
 const { RangePicker } = DatePicker;
 
-import { BarChart3, ExternalLink, Plus, Search, Download } from "lucide-react";
+import { BarChart3, ExternalLink, Plus, Search, Download, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
 import { toast } from "react-toastify";
 
 import { SidebarTrigger } from "../../Components/ui/sidebar";
@@ -68,6 +68,10 @@ const PostsPage = () => {
 
   // NEW: date range (dayjs objects or null)
   const [dateRange, setDateRange] = useState([null, null]);
+
+  // Sorting state
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -271,14 +275,83 @@ const PostsPage = () => {
   };
   const statusCnt = getStatusCounts();
 
+  // Handle column header click for sorting
+  const handleSort = (field) => {
+    if (sortField === field) {
+      // Toggle direction if clicking same field
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      // Set new field and reset to ascending
+      setSortField(field);
+      setSortDirection("asc");
+    }
+  };
+
+  // Sort filtered items
+  const sortedItems = [...filteredItems].sort((a, b) => {
+    if (!sortField) return 0;
+
+    let aValue = a[sortField];
+    let bValue = b[sortField];
+
+    // Special handling for date fields
+    if (sortField === "date_posted" || sortField.includes("date")) {
+      aValue = aValue ? new Date(aValue).getTime() : 0;
+      bValue = bValue ? new Date(bValue).getTime() : 0;
+    }
+    // Special handling for numeric fields
+    else if (sortField === "total_views") {
+      aValue = aValue ?? 0;
+      bValue = bValue ?? 0;
+    }
+    // Handle null/undefined values for strings
+    else {
+      if (aValue == null) aValue = "";
+      if (bValue == null) bValue = "";
+
+      // Convert to lowercase for case-insensitive sorting
+      if (typeof aValue === "string") aValue = aValue.toLowerCase();
+      if (typeof bValue === "string") bValue = bValue.toLowerCase();
+    }
+
+    // Compare values
+    if (aValue < bValue) return sortDirection === "asc" ? -1 : 1;
+    if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
+    return 0;
+  });
+
   // Pagination
-  const totalPages = Math.ceil(filteredItems.length / PAGE_SIZE);
-  const paginatedItems = filteredItems.slice(
+  const totalPages = Math.ceil(sortedItems.length / PAGE_SIZE);
+  const paginatedItems = sortedItems.slice(
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE
   );
 
   const handlePageChange = (page) => setCurrentPage(page);
+
+  // Helper component for sortable table headers
+  const SortableHeader = ({ field, children }) => {
+    const isActive = sortField === field;
+    return (
+      <TableHead
+        className="cursor-pointer select-none hover:bg-muted/50"
+        onClick={() => handleSort(field)}
+      >
+        <div className="flex items-center gap-1">
+          {children}
+          {isActive ? (
+            sortDirection === "asc" ? (
+              <ArrowUp className="h-4 w-4" />
+            ) : (
+              <ArrowDown className="h-4 w-4" />
+            )
+          ) : (
+            <ArrowUpDown className="h-4 w-4 opacity-50" />
+          )}
+        </div>
+      </TableHead>
+    );
+  };
 
   // Export handler
   const [exporting, setExporting] = useState(false);
@@ -628,50 +701,50 @@ const PostsPage = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    {selectedType === "all" && <TableHead>Type</TableHead>}
-                    <TableHead>Category</TableHead>
+                    {selectedType === "all" && <SortableHeader field="type">Type</SortableHeader>}
+                    <SortableHeader field="category">Category</SortableHeader>
 
                     {selectedType === "post" && (
                       <>
-                        <TableHead>Title</TableHead>
-                        <TableHead>Post Approval Status</TableHead>
+                        <SortableHeader field="title">Title</SortableHeader>
+                        <SortableHeader field="current_status">Post Approval Status</SortableHeader>
                         <TableHead>Text of engagement</TableHead>
-                        <TableHead>Date published</TableHead>
+                        <SortableHeader field="date_posted">Date published</SortableHeader>
                         <TableHead>Customer Comments</TableHead>
-                        <TableHead>Published Status</TableHead>
+                        <SortableHeader field="status">Published Status</SortableHeader>
                         <TableHead>Published Link</TableHead>
-                        <TableHead>Total Views</TableHead>
+                        <SortableHeader field="total_views">Total Views</SortableHeader>
                         <TableHead>Number of our engagements</TableHead>
-                        <TableHead>Reddit Username</TableHead>
+                        <SortableHeader field="reddit_username">Reddit Username</SortableHeader>
                       </>
                     )}
 
                     {selectedType === "comment" && (
                       <>
-                        <TableHead>Targeted Subreddit</TableHead>
-                        <TableHead>Title</TableHead>
-                        <TableHead>Comment Approval Status</TableHead>
+                        <SortableHeader field="targeted_subreddit">Targeted Subreddit</SortableHeader>
+                        <SortableHeader field="title">Title</SortableHeader>
+                        <SortableHeader field="status">Comment Approval Status</SortableHeader>
                         <TableHead>Text of engagement</TableHead>
-                        <TableHead>Date published</TableHead>
+                        <SortableHeader field="date_posted">Date published</SortableHeader>
                         <TableHead>Customer Comments</TableHead>
                         <TableHead>Published Link</TableHead>
-                        <TableHead>Total Views</TableHead>
-                        <TableHead>Reddit Username</TableHead>
-                        <TableHead>Posted Comment Status</TableHead>
+                        <SortableHeader field="total_views">Total Views</SortableHeader>
+                        <SortableHeader field="reddit_username">Reddit Username</SortableHeader>
+                        <SortableHeader field="posted_comment_status">Posted Comment Status</SortableHeader>
                       </>
                     )}
 
                     {selectedType === "all" && (
                       <>
-                        <TableHead>Title</TableHead>
-                        <TableHead>Status</TableHead>
+                        <SortableHeader field="title">Title</SortableHeader>
+                        <SortableHeader field="status">Status</SortableHeader>
                         <TableHead>Text of engagement</TableHead>
-                        <TableHead>Date published</TableHead>
+                        <SortableHeader field="date_posted">Date published</SortableHeader>
                         <TableHead>Customer Comments</TableHead>
                         <TableHead>Published Link</TableHead>
-                        <TableHead>Total Views</TableHead>
-                        <TableHead>Targeted Subreddit</TableHead>
-                        <TableHead>Reddit Username</TableHead>
+                        <SortableHeader field="total_views">Total Views</SortableHeader>
+                        <SortableHeader field="targeted_subreddit">Targeted Subreddit</SortableHeader>
+                        <SortableHeader field="reddit_username">Reddit Username</SortableHeader>
                       </>
                     )}
                   </TableRow>
