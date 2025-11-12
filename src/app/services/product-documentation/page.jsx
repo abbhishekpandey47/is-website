@@ -190,17 +190,17 @@ export default function ProductDocumentationPage() {
                 We build SDK, API, CLI, and integration docs that engineers actually use — written by engineers, optimized for growth.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
                 <Link
                   href="/contact"
-                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#00D4FF] to-[#7B61FF] text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(123,97,255,0.4)]"
+                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#00D4FF] to-[#7B61FF] text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(123,97,255,0.4)] text-center"
                 >
                   See Example Docs
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-[#0E1018]/80 backdrop-blur-md text-white font-semibold rounded-lg border border-[#1E2236] hover:bg-[#0E1018] transition-all duration-300 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-[#0E1018]/80 backdrop-blur-md text-white font-semibold rounded-lg border border-[#1E2236] hover:bg-[#0E1018] transition-all duration-300 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)] text-center"
                 >
                   Book a Docs Audit
                 </Link>

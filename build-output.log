@@ -1,0 +1,854 @@
+
+> infrasity@0.1.0 build
+> NODE_OPTIONS='--max-old-space-size=8192' next build
+
+   ▲ Next.js 15.5.2
+   - Environments: .env
+   - Experiments (use with caution):
+     · clientTraceMetadata
+
+   Creating an optimized production build ...
+
+🌼   daisyUI 4.12.24
+├─ ✔︎ 2 themes added		https://daisyui.com/docs/themes
+╰─ ★ Star daisyUI on GitHub	https://github.com/saadeghi/daisyui
+
+
+🌼   daisyUI 4.12.24
+├─ ✔︎ 2 themes added		https://daisyui.com/docs/themes
+╰─ ★ Star daisyUI on GitHub	https://github.com/saadeghi/daisyui
+
+ ✓ Compiled successfully in 36.4s
+   Linting and checking validity of types ...
+   Collecting page data ...
+Generated 98 static params for blog posts
+   Generating static pages (0/171) ...
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+    at stringify (<anonymous>)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+Memoizing heading text
+Memoizing description text
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+Reddit Marketing Agency Page - Videos: [
+  {
+    id: 'case-2',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: "Learn how Infrasity's deep technical content helped solve engineers' pain points and attract more prospects.",
+    cta: {
+      label: 'See case studies',
+      href: '/case-studies/case-study-series-a-cloud-developer-marketing'
+    },
+    headshotSrc: '/playbook/firefly.png',
+    headshotAlt: 'Eric Peters',
+    companyLogoSrc: '/playbook/firefly-bg.png',
+    companyLogoAlt: 'Firefly.ai',
+    quote: "Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
+    personName: 'Idoo Neeman',
+    personTitle: 'Co-Founder and CEO, Firefly.ai',
+    videoUrl: 'https://youtube.com/shorts/AgCQ176pfRU'
+  },
+  {
+    id: 'case-1',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: 'Learn how Infrasity turned our technical value into engaging content that boosts developer engagement.',
+    cta: { label: 'See case studies', href: '/case-studies' },
+    headshotSrc: '/playbook/cycloid.png',
+    headshotAlt: 'Ben Hewison',
+    companyLogoSrc: '/playbook/cycloid-bg.png',
+    companyLogoAlt: 'Cycloid',
+    quote: "Infrasity's experience in platform engineering and DevOps gave us confidence that they could translate our technical value into engaging content and videos.",
+    personName: 'Ben Hewison',
+    personTitle: 'Content Marketing Manager, Cycloid',
+    videoUrl: 'https://youtu.be/19Nz5OxaTtc'
+  }
+]
+Reddit Marketing Agency Page - Videos length: 2
+VideoTestimonials - items: [
+  {
+    id: 'case-2',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: "Learn how Infrasity's deep technical content helped solve engineers' pain points and attract more prospects.",
+    cta: {
+      label: 'See case studies',
+      href: '/case-studies/case-study-series-a-cloud-developer-marketing'
+    },
+    headshotSrc: '/playbook/firefly.png',
+    headshotAlt: 'Eric Peters',
+    companyLogoSrc: '/playbook/firefly-bg.png',
+    companyLogoAlt: 'Firefly.ai',
+    quote: "Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
+    personName: 'Idoo Neeman',
+    personTitle: 'Co-Founder and CEO, Firefly.ai',
+    videoUrl: 'https://youtube.com/shorts/AgCQ176pfRU'
+  },
+  {
+    id: 'case-1',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: 'Learn how Infrasity turned our technical value into engaging content that boosts developer engagement.',
+    cta: { label: 'See case studies', href: '/case-studies' },
+    headshotSrc: '/playbook/cycloid.png',
+    headshotAlt: 'Ben Hewison',
+    companyLogoSrc: '/playbook/cycloid-bg.png',
+    companyLogoAlt: 'Cycloid',
+    quote: "Infrasity's experience in platform engineering and DevOps gave us confidence that they could translate our technical value into engaging content and videos.",
+    personName: 'Ben Hewison',
+    personTitle: 'Content Marketing Manager, Cycloid',
+    videoUrl: 'https://youtu.be/19Nz5OxaTtc'
+  }
+]
+VideoTestimonials - data: [
+  {
+    id: 'case-2',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: "Learn how Infrasity's deep technical content helped solve engineers' pain points and attract more prospects.",
+    cta: {
+      label: 'See case studies',
+      href: '/case-studies/case-study-series-a-cloud-developer-marketing'
+    },
+    headshotSrc: '/playbook/firefly.png',
+    headshotAlt: 'Eric Peters',
+    companyLogoSrc: '/playbook/firefly-bg.png',
+    companyLogoAlt: 'Firefly.ai',
+    quote: "Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
+    personName: 'Idoo Neeman',
+    personTitle: 'Co-Founder and CEO, Firefly.ai',
+    videoUrl: 'https://youtube.com/shorts/AgCQ176pfRU'
+  },
+  {
+    id: 'case-1',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: 'Learn how Infrasity turned our technical value into engaging content that boosts developer engagement.',
+    cta: { label: 'See case studies', href: '/case-studies' },
+    headshotSrc: '/playbook/cycloid.png',
+    headshotAlt: 'Ben Hewison',
+    companyLogoSrc: '/playbook/cycloid-bg.png',
+    companyLogoAlt: 'Cycloid',
+    quote: "Infrasity's experience in platform engineering and DevOps gave us confidence that they could translate our technical value into engaging content and videos.",
+    personName: 'Ben Hewison',
+    personTitle: 'Content Marketing Manager, Cycloid',
+    videoUrl: 'https://youtu.be/19Nz5OxaTtc'
+  }
+]
+VideoTestimonials - data length: 2
+VideoTestimonials - NODE_ENV: production
+VideoTestimonials - items: [
+  {
+    id: 'case-2',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: "Learn how Infrasity's deep technical content helped solve engineers' pain points and attract more prospects.",
+    cta: {
+      label: 'See case studies',
+      href: '/case-studies/case-study-series-a-cloud-developer-marketing'
+    },
+    headshotSrc: '/playbook/firefly.png',
+    headshotAlt: 'Eric Peters',
+    companyLogoSrc: '/playbook/firefly-bg.png',
+    companyLogoAlt: 'Firefly.ai',
+    quote: "Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
+    personName: 'Idoo Neeman',
+    personTitle: 'Co-Founder and CEO, Firefly.ai',
+    videoUrl: 'https://youtube.com/shorts/AgCQ176pfRU'
+  },
+  {
+    id: 'case-1',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: 'Learn how Infrasity turned our technical value into engaging content that boosts developer engagement.',
+    cta: { label: 'See case studies', href: '/case-studies' },
+    headshotSrc: '/playbook/cycloid.png',
+    headshotAlt: 'Ben Hewison',
+    companyLogoSrc: '/playbook/cycloid-bg.png',
+    companyLogoAlt: 'Cycloid',
+    quote: "Infrasity's experience in platform engineering and DevOps gave us confidence that they could translate our technical value into engaging content and videos.",
+    personName: 'Ben Hewison',
+    personTitle: 'Content Marketing Manager, Cycloid',
+    videoUrl: 'https://youtu.be/19Nz5OxaTtc'
+  }
+]
+VideoTestimonials - data: [
+  {
+    id: 'case-2',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: "Learn how Infrasity's deep technical content helped solve engineers' pain points and attract more prospects.",
+    cta: {
+      label: 'See case studies',
+      href: '/case-studies/case-study-series-a-cloud-developer-marketing'
+    },
+    headshotSrc: '/playbook/firefly.png',
+    headshotAlt: 'Eric Peters',
+    companyLogoSrc: '/playbook/firefly-bg.png',
+    companyLogoAlt: 'Firefly.ai',
+    quote: "Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
+    personName: 'Idoo Neeman',
+    personTitle: 'Co-Founder and CEO, Firefly.ai',
+    videoUrl: 'https://youtube.com/shorts/AgCQ176pfRU'
+  },
+  {
+    id: 'case-1',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: 'Learn how Infrasity turned our technical value into engaging content that boosts developer engagement.',
+    cta: { label: 'See case studies', href: '/case-studies' },
+    headshotSrc: '/playbook/cycloid.png',
+    headshotAlt: 'Ben Hewison',
+    companyLogoSrc: '/playbook/cycloid-bg.png',
+    companyLogoAlt: 'Cycloid',
+    quote: "Infrasity's experience in platform engineering and DevOps gave us confidence that they could translate our technical value into engaging content and videos.",
+    personName: 'Ben Hewison',
+    personTitle: 'Content Marketing Manager, Cycloid',
+    videoUrl: 'https://youtu.be/19Nz5OxaTtc'
+  }
+]
+VideoTestimonials - data length: 2
+VideoTestimonials - NODE_ENV: production
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+    at stringify (<anonymous>)
+   Generating static pages (42/171) 
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+   Generating static pages (85/171) 
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+    at stringify (<anonymous>)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+VideoTestimonials - items: [
+  {
+    id: 'case-2',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: "Learn how Infrasity's deep technical content helped solve engineers' pain points and attract more prospects.",
+    cta: {
+      label: 'See case studies',
+      href: '/case-studies/case-study-series-a-cloud-developer-marketing'
+    },
+    headshotSrc: '/playbook/firefly.png',
+    headshotAlt: 'Eric Peters',
+    companyLogoSrc: '/playbook/firefly-bg.png',
+    companyLogoAlt: 'Firefly.ai',
+    quote: "Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
+    personName: 'Idoo Neeman',
+    personTitle: 'Co-Founder and CEO, Firefly.ai',
+    videoUrl: 'https://youtube.com/shorts/AgCQ176pfRU'
+  },
+  {
+    id: 'case-1',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: 'Learn how Infrasity turned our technical value into engaging content that boosts developer engagement.',
+    cta: { label: 'See case studies', href: '/case-studies' },
+    headshotSrc: '/playbook/cycloid.png',
+    headshotAlt: 'Ben Hewison',
+    companyLogoSrc: '/playbook/cycloid-bg.png',
+    companyLogoAlt: 'Cycloid',
+    quote: "Infrasity's experience in platform engineering and DevOps gave us confidence that they could translate our technical value into engaging content and videos.",
+    personName: 'Ben Hewison',
+    personTitle: 'Content Marketing Manager, Cycloid',
+    videoUrl: 'https://youtu.be/19Nz5OxaTtc'
+  }
+]
+VideoTestimonials - data: [
+  {
+    id: 'case-2',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: "Learn how Infrasity's deep technical content helped solve engineers' pain points and attract more prospects.",
+    cta: {
+      label: 'See case studies',
+      href: '/case-studies/case-study-series-a-cloud-developer-marketing'
+    },
+    headshotSrc: '/playbook/firefly.png',
+    headshotAlt: 'Eric Peters',
+    companyLogoSrc: '/playbook/firefly-bg.png',
+    companyLogoAlt: 'Firefly.ai',
+    quote: "Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
+    personName: 'Idoo Neeman',
+    personTitle: 'Co-Founder and CEO, Firefly.ai',
+    videoUrl: 'https://youtube.com/shorts/AgCQ176pfRU'
+  },
+  {
+    id: 'case-1',
+    eyebrow: 'CASE STUDIES',
+    heading: 'Hear directly from our customers',
+    blurb: 'Learn how Infrasity turned our technical value into engaging content that boosts developer engagement.',
+    cta: { label: 'See case studies', href: '/case-studies' },
+    headshotSrc: '/playbook/cycloid.png',
+    headshotAlt: 'Ben Hewison',
+    companyLogoSrc: '/playbook/cycloid-bg.png',
+    companyLogoAlt: 'Cycloid',
+    quote: "Infrasity's experience in platform engineering and DevOps gave us confidence that they could translate our technical value into engaging content and videos.",
+    personName: 'Ben Hewison',
+    personTitle: 'Content Marketing Manager, Cycloid',
+    videoUrl: 'https://youtu.be/19Nz5OxaTtc'
+  }
+]
+VideoTestimonials - data length: 2
+VideoTestimonials - NODE_ENV: production
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+   Generating static pages (128/171) 
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+Error in h2 component: TypeError: Cannot read properties of undefined (reading 'split')
+    at component (.next/server/app/blog/[slug]/page.js:2:25287)
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+ ✓ Generating static pages (171/171)
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+2025-11-04
+2025-10-21
+2025-10-14
+2025-10-11
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                                                                 Size  First Load JS  Revalidate  Expire
+┌ ○ /                                                                                      470 B         475 kB
+├ ○ /_not-found                                                                            425 B         280 kB
+├ ○ /about                                                                               6.13 kB         291 kB
+├ ƒ /api/generate-script                                                                   424 B         280 kB
+├ ƒ /api/sentry-example-api                                                                426 B         280 kB
+├ ƒ /api/support                                                                           425 B         280 kB
+├ ○ /auth/signin                                                                         15.6 kB         437 kB
+├ ○ /auth/signup                                                                         5.69 kB         427 kB
+├ ○ /blog                                                                                4.45 kB         371 kB
+├ ● /blog/[slug]                                                                         3.91 kB         320 kB
+├   ├ /blog/mastering-advanced-ui-designs
+├   ├ /blog/how-to-use-react-developer-tools-for-debugging-and-performance-optimization
+├   ├ /blog/comprehensive-guide-to-technical-seo-for-improved-website-performance
+├   └ [+95 more paths]
+├ ○ /book-a-demo                                                                           350 B         284 kB
+├ ○ /careers                                                                             10.3 kB         460 kB
+├ ○ /case-studies                                                                        2.92 kB         474 kB
+├ ● /case-studies/[slug]                                                                 9.94 kB         492 kB
+├   ├ /case-studies/terrateam-case-study
+├   ├ /case-studies/middleware-case-study
+├   ├ /case-studies/scalekit-case-study
+├   └ /case-studies/case-study-series-a-cloud-developer-marketing
+├ ○ /contact                                                                             7.61 kB         297 kB
+├ ○ /contact/thank-you                                                                   1.15 kB         281 kB
+├ ○ /docs-landing                                                                        2.21 kB         282 kB
+├ ○ /faq                                                                                 3.54 kB         285 kB
+├ ○ /infrasity-vs-developer-relations-engineer                                             416 B         473 kB
+├ ○ /infrasity-vs-developer-relations-engineer/components                                  417 B         473 kB
+├ ○ /playbook/developer-marketing                                                          17 kB         359 kB
+├ ○ /playbook/developer-marketing/thank-you                                              1.78 kB         289 kB
+├ ○ /playbook/reddit-b2b-marketing                                                       3.35 kB         460 kB
+├ ○ /playbook/technical-content-marketing                                                6.71 kB         334 kB
+├ ○ /pricing                                                                             4.18 kB         454 kB
+├ ○ /privacy-policy                                                                      1.76 kB         282 kB
+├ ○ /sentry-example-page                                                                 2.84 kB         283 kB
+├ ○ /services/ai-agents-gtm-services                                                     13.6 kB         463 kB
+├ ○ /services/byclaude                                                                     423 B         280 kB
+├ ○ /services/created-by-cursor                                                          2.22 kB         282 kB
+├ ○ /services/cursoredit                                                                   425 B         280 kB
+├ ○ /services/developer-marketing-agency                                                  125 kB         484 kB
+├ ○ /services/docs-engine                                                                2.63 kB         284 kB          1h      1y
+├ ○ /services/documentation-services                                                     4.34 kB         284 kB
+├ ○ /services/gtm-content                                                                8.94 kB         459 kB
+├ ○ /services/gtm-content-services-for-yc-startups                                       10.1 kB         462 kB
+├ ○ /services/modern-pagerduty                                                           8.97 kB         296 kB
+├ ○ /services/product-documentation                                                      7.06 kB         320 kB
+├ ○ /services/reddit-marketing-agency                                                    21.1 kB         510 kB
+├ ○ /services/tech-video-production                                                      39.3 kB         521 kB
+├ ○ /services/technical-content-gtm                                                        85 kB         535 kB
+├ ○ /services/technical-writing-services                                                 14.3 kB         482 kB
+├ ○ /services/technical-writing-services/cli-guide                                       1.65 kB         287 kB
+├ ○ /services/technical-writing-services/how-to-guides                                   1.65 kB         287 kB
+├ ○ /services/technical-writing-services/release-notes                                   1.65 kB         287 kB
+├ ○ /services/technical-writing-services/sdk-docs                                        1.65 kB         287 kB
+├ ○ /services/webflow-agency                                                             14.9 kB         497 kB
+├ ○ /technical-writing-services-b2b-saas                                                   14 kB         514 kB
+├ ○ /terms-of-services                                                                   1.91 kB         282 kB
+├ ○ /threadflow                                                                          7.73 kB         584 kB
+├ ○ /threadflow/analytics                                                                5.42 kB         454 kB
+├ ƒ /threadflow/c/[company]                                                              7.14 kB         584 kB
+├ ƒ /threadflow/c/[company]/analytics                                                     5.4 kB         454 kB
+├ ƒ /threadflow/c/[company]/categories                                                   4.04 kB         453 kB
+├ ƒ /threadflow/c/[company]/comment                                                       8.1 kB         585 kB
+├ ƒ /threadflow/c/[company]/comment/add                                                  4.73 kB         463 kB
+├ ƒ /threadflow/c/[company]/communities                                                    604 B         281 kB
+├ ƒ /threadflow/c/[company]/management/categories                                          603 B         281 kB
+├ ƒ /threadflow/c/[company]/management/schedule                                            602 B         281 kB
+├ ƒ /threadflow/c/[company]/management/settings                                            601 B         281 kB
+├ ƒ /threadflow/c/[company]/management/templates                                           604 B         281 kB
+├ ƒ /threadflow/c/[company]/posts                                                        9.33 kB         586 kB
+├ ƒ /threadflow/c/[company]/posts/add                                                    6.02 kB         465 kB
+├ ƒ /threadflow/c/[company]/schedule                                                     1.38 kB         283 kB
+├ ƒ /threadflow/c/[company]/settings                                                     3.69 kB         462 kB
+├ ƒ /threadflow/c/[company]/subredditsense                                               4.63 kB         566 kB
+├ ƒ /threadflow/c/[company]/templates                                                    1.37 kB         283 kB
+├ ○ /threadflow/categories                                                               4.05 kB         453 kB
+├ ○ /threadflow/comment                                                                  8.95 kB         585 kB
+├ ○ /threadflow/comment/add                                                              4.73 kB         463 kB
+├ ○ /threadflow/communities                                                                603 B         281 kB
+├ ○ /threadflow/management/categories                                                      603 B         281 kB
+├ ○ /threadflow/management/schedule                                                        603 B         281 kB
+├ ○ /threadflow/management/settings                                                        602 B         281 kB
+├ ○ /threadflow/management/templates                                                       602 B         281 kB
+├ ○ /threadflow/posts                                                                    10.1 kB         587 kB
+├ ○ /threadflow/posts/add                                                                6.01 kB         465 kB
+├ ○ /threadflow/schedule                                                                 1.38 kB         283 kB
+├ ○ /threadflow/settings                                                                  3.7 kB         462 kB
+├ ○ /threadflow/subredditsense                                                           5.66 kB         567 kB
+├ ○ /threadflow/templates                                                                1.38 kB         283 kB
+├ ○ /tools/ai-script-generator                                                           21.9 kB         317 kB
+├ ○ /tools/ai-script-generator/templates                                                 13.5 kB         294 kB
+├ ○ /tools/reddit-comment-generator                                                      11.4 kB         293 kB
+├ ○ /tools/reddit-tools                                                                  21.8 kB         433 kB
+├ ○ /tools/reddit-tools/reddit-comment-generator                                         2.02 kB         292 kB
+├ ○ /tools/roi-cal                                                                       15.8 kB         466 kB
+└ ○ /tutorials                                                                           3.31 kB         339 kB
++ First Load JS shared by all                                                             280 kB
+  ├ chunks/4bd1b696-f1dfd476d9c7daa7.js                                                  54.4 kB
+  ├ chunks/52774a7f-9d58f088026ac87e.js                                                  36.8 kB
+  ├ chunks/896-805015bd77e2320e.js                                                        125 kB
+  ├ chunks/9da6db1e-ad76253261fda3f7.js                                                  59.1 kB
+  └ other shared chunks (total)                                                          4.35 kB
+
+Route (pages)                                                                               Size  First Load JS
+┌ ƒ /api/allContent                                                                          0 B         233 kB
+├ ƒ /api/analytics                                                                           0 B         233 kB
+├ ƒ /api/authVerify                                                                          0 B         233 kB
+├ ƒ /api/comment                                                                             0 B         233 kB
+├ ƒ /api/companies                                                                           0 B         233 kB
+├ ƒ /api/engagement/export                                                                   0 B         233 kB
+├ ƒ /api/log-bot                                                                             0 B         233 kB
+├ ƒ /api/playbook                                                                            0 B         233 kB
+├ ƒ /api/posts                                                                               0 B         233 kB
+├ ƒ /api/prompt                                                                              0 B         233 kB
+├ ƒ /api/send-email                                                                          0 B         233 kB
+├ ƒ /api/threadflow/reddit/dashboard                                                         0 B         233 kB
+├ ƒ /api/threadflow/reddit/fetch                                                             0 B         233 kB
+├ ƒ /api/threadflow/reddit/job                                                               0 B         233 kB
+├ ƒ /api/threadflow/reddit/link-company                                                      0 B         233 kB
+├ ƒ /api/threadflow/reddit/my-companies                                                      0 B         233 kB
+└ ƒ /api/whitepaper                                                                          0 B         233 kB
++ First Load JS shared by all                                                             233 kB
+  ├ chunks/framework-7541c58df9782b40.js                                                   45 kB
+  ├ chunks/main-7d4b47719e02aca3.js                                                       185 kB
+  └ other shared chunks (total)                                                             3 kB
+
+ƒ Middleware                                                                             88.6 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

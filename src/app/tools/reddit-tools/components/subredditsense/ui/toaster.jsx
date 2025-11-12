@@ -5,7 +5,7 @@ import {
   ToastProvider,
   ToastTitle,
   ToastViewport,
-} from "@/components/ui/toast"
+} from "@/Components/ui/toast"
 import { useToast } from "../../../../../hooks/subredditsense/use-toast"
 
 export function Toaster() {

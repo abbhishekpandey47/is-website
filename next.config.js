@@ -137,6 +137,21 @@ module.exports = withSentryConfig(
 
     // Only print logs for uploading source maps in CI
     silent: !process.env.CI,
+    
+    // Disable source map upload if auth token is missing
+    authToken: process.env.SENTRY_AUTH_TOKEN || undefined,
+    
+    // Don't fail build on missing auth token
+    errorHandler: (err, invokeErr, compilation) => {
+      if (!process.env.SENTRY_AUTH_TOKEN) {
+        // Silently ignore errors when auth token is missing
+        return;
+      }
+      // Otherwise, use default error handling
+      if (invokeErr) {
+        compilation.errors.push(invokeErr);
+      }
+    },
 
     // For all available options, see:
     // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/

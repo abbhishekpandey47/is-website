@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker } from "react-day-picker";
 
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/Components/ui/button";
 import { cn } from "../../../../../lib/subredditsense/utils";
 
 function Calendar({

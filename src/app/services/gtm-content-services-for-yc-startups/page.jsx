@@ -1,4 +1,4 @@
-"use clinet";
+"use client";
 
 import Cta from "./cta";
 import FAQSection from "./FAQ.jsx";

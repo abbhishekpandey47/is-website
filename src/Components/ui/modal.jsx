@@ -2,7 +2,7 @@
 
 import { ErrorBoundary } from "@sentry/react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "./dialog";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 import { useState } from "react";
 
 function ErrorDialog({ error, resetError }) {

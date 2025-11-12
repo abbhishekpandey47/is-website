@@ -5,7 +5,7 @@ import useEmblaCarousel, {
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { cn } from "../../../../../lib/subredditsense/utils"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/Components/ui/button"
 
 // Removed type-only declaration
 // Removed type-only declaration

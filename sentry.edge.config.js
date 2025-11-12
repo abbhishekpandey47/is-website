@@ -16,4 +16,9 @@ Sentry.init({
   tracesSampleRate: Number(process.env.SENTRY_TRACES_SAMPLE_RATE ?? 0),
   enableLogs: telemetry,
   debug: (process.env.SENTRY_DEBUG || "false").toLowerCase() === "true",
+  telemetry: false,
+  // Only create release/upload source maps if auth token is present
+  ...(process.env.SENTRY_AUTH_TOKEN ? {} : {
+    beforeSend: () => null,
+  }),
 });

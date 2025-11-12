@@ -93,11 +93,11 @@ export default function Showcase({ items }) {
 
         <div className="mt-16 text-center space-y-4">
           <p className="text-gray-400">Want your docs to look (and perform) like these?</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="px-8 py-3 bg-gradient-to-r from-[#00D4FF] to-[#7B61FF] text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(123,97,255,0.4)] inline-flex items-center justify-center gap-2">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link href="/contact" className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-[#00D4FF] to-[#7B61FF] text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(123,97,255,0.4)] inline-flex items-center justify-center gap-2">
               Book a Docs Audit <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link href="/contact" className="px-8 py-3 bg-[#0E1018]/80 backdrop-blur-md text-white font-semibold rounded-lg border border-[#1E2236] hover:bg-[#0E1018] transition-all duration-300">
+            <Link href="/contact" className="w-full sm:w-auto px-8 py-3 bg-[#0E1018]/80 backdrop-blur-md text-white font-semibold rounded-lg border border-[#1E2236] hover:bg-[#0E1018] transition-all duration-300 inline-flex items-center justify-center">
               See How We Build Docs
             </Link>
           </div>
