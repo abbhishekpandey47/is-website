@@ -43,7 +43,7 @@ export default function SearchPanel({ onSearch, loading, buttonLabel = "Analyze"
               <select
                 value={timeRange}
                 onChange={e=> setTimeRange(e.target.value)}
-                className="w-full rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white placeholder-grey-100 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-700 appearance-none" style={{color:'white'}}
+                className="w-full rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white placeholder-grey-100 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-700 appearance-none"
                 style={{color:'#ffffff'}}
               >
                 <option value="24h" className="text-white bg-gray-900" style={{color:'#fff',background:'#1a1a1a'}}>Last 24 hours</option>

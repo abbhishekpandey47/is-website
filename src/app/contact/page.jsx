@@ -7,16 +7,15 @@ import { message } from "antd";
 import { Router } from "next/router";
 import { useRouter } from "next/navigation"; // add this
 
-const CalendarBooking = ({
-    buttonText = "Book a Meeting",
-    bgGradient = "", // Default background color if no gradient is passed
-    width = "w-40", // Default width
-    height = "h-12", // Default height
-    textSize = "text-sm", // Text size
-    textWeight = "quicksand-semibold", // Text weight
-    borderColor = "#3b82f6", // Default border color
-    onClick,
-}) => {
+const CalendarBooking = () => {
+    const buttonText = "Book a Meeting";
+    const bgGradient = ""; // Default background color if no gradient is passed
+    const width = "w-40"; // Default width
+    const height = "h-12"; // Default height
+    const textSize = "text-sm"; // Text size
+    const textWeight = "quicksand-semibold"; // Text weight
+    const borderColor = "#3b82f6"; // Default border color
+    const onClick = () => {};
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTime, setSelectedTime] = useState(null);
