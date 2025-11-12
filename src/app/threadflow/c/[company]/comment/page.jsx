@@ -446,7 +446,7 @@ const getStatusBadge = (status) => {
   value={editFormData.category}
   onValueChange={(value) => handleEditInputChange("category", value)}
 >
-  <SelectTrigger>
+  <SelectTrigger className="w-48">
     <SelectValue placeholder="Select category">
       {editFormData.category || "Select category"}
     </SelectValue>
