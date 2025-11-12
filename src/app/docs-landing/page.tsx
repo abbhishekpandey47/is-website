@@ -1,5 +1,5 @@
-import Hero from "@/components/docs-landing/Hero";
-import TrustGrid from "@/components/docs-landing/TrustGrid";
+import Hero from "@/Components/docs-landing/Hero";
+import TrustGrid from "@/Components/docs-landing/TrustGrid";
 
 export const metadata = {
   title: "Infrasity Docs: Documentation That Drives Developer Adoption",
