@@ -2,60 +2,72 @@
 > infrasity@0.1.0 dev
 > next dev
 
-  ▲ Next.js 14.2.32
-  - Local:        http://localhost:3000
-  - Environments: .env
-  - Experiments (use with caution):
-    · instrumentationHook
-    · missingSuspenseWithCSRBailout
+   ▲ Next.js 15.5.2
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.102:3000
+   - Environments: .env
+   - Experiments (use with caution):
+     · clientTraceMetadata
 
  ✓ Starting...
- ⚠ Duplicate page detected. src/app/api/contact/route.js and src/app/api/contact/route.ts resolve to /api/contact
  ○ Compiling /instrumentation ...
- ✓ Compiled /instrumentation in 4.4s (1042 modules)
- ⚠ Duplicate page detected. src/app/api/contact/route.js and src/app/api/contact/route.ts resolve to /api/contact
- ✓ Ready in 9.9s
- ○ Compiling /api/contact ...
- ⨯ ./src/app/api/contact/route.js
-Module not found: Can't resolve '@/lib/validations/contact'
-
-https://nextjs.org/docs/messages/module-not-found
- ⚠ Page config in /Users/shan/infrasity_frontend/src/app/api/contact/route.ts is deprecated. Replace `export const config=…` with the following:
-Visit https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config for more information.
+ ✓ Compiled /instrumentation in 5.1s (1033 modules)
+ ✓ Ready in 8.8s
+ ○ Compiling /services/product-documentation ...
 
 🌼   daisyUI 4.12.24
 ├─ ✔︎ 2 themes added		https://daisyui.com/docs/themes
-╰─ ❤︎ Support daisyUI project:	https://opencollective.com/daisyui
+╰─ ★ Star daisyUI on GitHub	https://github.com/saadeghi/daisyui
 
- ⨯ ./src/app/api/contact/route.js
-Module not found: Can't resolve '@/lib/validations/contact'
-
-https://nextjs.org/docs/messages/module-not-found
- ✓ Compiled /_not-found in 3s (2678 modules)
- ○ Compiling /_error ...
- ⨯ ./src/app/api/contact/route.js
-Module not found: Can't resolve '@/lib/validations/contact'
-
-https://nextjs.org/docs/messages/module-not-found
- POST /api/contact 500 in 41765ms
- POST /api/contact 500 in 102ms
- POST /api/contact 500 in 94ms
- POST /api/contact 500 in 58ms
- POST /api/contact 500 in 52ms
- POST /api/contact 500 in 48ms
- POST /api/contact 500 in 55ms
- POST /api/contact 500 in 54ms
- ⚠ Duplicate page detected. src/app/api/contact/route.js and src/app/api/contact/route.ts resolve to /api/contact
- ✓ Compiled /_error in 8.8s (7762 modules)
- ⚠ Duplicate page detected. src/app/api/contact/route.js and src/app/api/contact/route.ts resolve to /api/contact
- ✓ Compiled in 6.4s (3945 modules)
- ✓ Compiled in 38.3s (3165 modules)
- ✓ Compiled in 36.4s (3165 modules)
- ✓ Compiled in 4s (3165 modules)
- ✓ Compiled in 5.7s (3165 modules)
- ✓ Compiled in 68.3s (4242 modules)
- ✓ Compiled in 5.1s (3165 modules)
- ✓ Compiled in 1741ms (3165 modules)
- ✓ Compiled in 2.4s (3165 modules)
- ✓ Compiled in 3.1s (3165 modules)
- ✓ Compiled in 1711ms (3165 modules)
+ ✓ Compiled /services/product-documentation in 17.1s (8259 modules)
+ ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
+  digest: '3996809970'
+}
+ GET /services/product-documentation 500 in 20117ms
+ ✓ Compiled in 4.3s (3156 modules)
+ ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
+  digest: '3996809970'
+}
+ GET /services/product-documentation 500 in 1901ms
+(node:32621) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 2s (5107 modules)
+ GET /favicon.ico 200 in 2401ms
+ ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
+  digest: '3996809970'
+}
+ GET /services/product-documentation 500 in 2663ms
+ GET /favicon.ico 200 in 67ms
+ ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
+  digest: '3996809970'
+}
+ GET /services/product-documentation 500 in 1305ms
+ GET /favicon.ico 200 in 82ms
+ ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
+  digest: '3996809970'
+}
+ GET /services/product-documentation 500 in 1390ms
+ GET /favicon.ico 200 in 89ms
+ ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
+  digest: '3996809970'
+}
+ GET /services/product-documentation 500 in 1371ms
+ GET /favicon.ico 200 in 339ms
+ ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
+  digest: '3996809970'
+}
+ GET /services/product-documentation 500 in 1750ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 10.1s (8265 modules)
+ GET /favicon.ico 200 in 7613ms
+ GET /services/product-documentation 200 in 3700ms
+ GET /services/product-documentation 200 in 487ms
+ ⚠ The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
+ GET /services/product-documentation 200 in 2184ms
+ GET /favicon.ico 200 in 1468ms
+ ○ Compiling /_not-found ...
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ✓ Compiled /services/product-documentation in 99s (8546 modules)
+ GET /services/product-documentation 404 in 106413ms
+ GET /services/product-documentation 200 in 72993ms
