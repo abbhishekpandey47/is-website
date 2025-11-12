@@ -270,6 +270,13 @@ export default function ProductDocumentationPage() {
         }}
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-8 mb-1"></div>
+        
+        <div className="text-center pt-20 pb-10 px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+            Trusted by <span className="bg-gradient-to-r from-[#00D4FF] via-[#7B61FF] to-[#B14EFF] text-transparent bg-clip-text">Engineering-Led Startups</span>
+          </h2>
+        </div>
+        
         <NewMarquee />
       </div>
 
