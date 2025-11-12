@@ -170,7 +170,7 @@ const filteredPosts = posts.filter((post) => {
     const matchesCategory =
       selectedCategory === "all" || post.category === selectedCategory;
     const matchesStatus =
-      selectedStatus === "all" || post.status === selectedStatus;
+      selectedStatus === "all" || post.posted_comment_status === selectedStatus;
     const matchesDate = matchesDateRange(post, dateRange);
 
     return matchesSearch && matchesCategory && matchesStatus && matchesDate;
