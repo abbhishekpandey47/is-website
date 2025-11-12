@@ -323,6 +323,29 @@ const CalendarBooking = ({
         ? `${selectedDate.getFullYear()}-${pad(selectedDate.getMonth() + 1)}-${pad(selectedDate.getDate())}`
         : null;
 
+    // GTM Services state and handlers
+    const [services, setServices] = useState({
+        technicalContent: false,
+        seoContent: false,
+        productDocs: false,
+        webflow: false,
+        video: false,
+        reddit: false,
+        other: "",
+        otherChecked: false,
+    });
+
+    const handleServiceChange = (e) => {
+        const { name, checked, type, value } = e.target;
+        if (name === "otherChecked") {
+            setServices((prev) => ({ ...prev, otherChecked: checked, other: checked ? prev.other : "" }));
+        } else if (name === "other") {
+            setServices((prev) => ({ ...prev, other: value }));
+        } else {
+            setServices((prev) => ({ ...prev, [name]: checked }));
+        }
+    };
+
     const handleBookingSubmit = async (e) => {
         e.preventDefault();
         if (!validateUserInfo()) return;
@@ -378,6 +401,18 @@ const CalendarBooking = ({
                     name: "domain",
                     value: "https://" + userInfo.companyWebsite,
                 },
+                {
+                    name: "gtm_services",
+                    value: [
+                        services.technicalContent && "Technical Content",
+                        services.seoContent && "SEO/Thought leadership/Marketing Content",
+                        services.productDocs && "Product and Use Case documentation",
+                        services.webflow && "Webflow Services",
+                        services.video && "Video Production and Product Explainers",
+                        services.reddit && "Reddit Engagement for Community Driven Growth",
+                        services.otherChecked && services.other && `Other: ${services.other}`
+                    ].filter(Boolean).join(", ")
+                }
             ],
             context: {
                 pageUri: window.location.href,
@@ -548,7 +583,7 @@ const CalendarBooking = ({
     }, [step, router]); // add this effect
 
     return (
-        <div className="h-full lg:h-[1000px]">
+        <div className="h-full">
             <div className="w-full mt-36 items-center justify-center">
                 <div className="w-full text-white rounded-xl p-8 flex flex-col items-center">
                     <h1 className="text-5xl text-center font-bold mb-4">Schedule a Free Demo</h1>
@@ -948,6 +983,51 @@ const CalendarBooking = ({
                                                     className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
                                                     placeholder="Phone Number"
                                                 />
+                                            </div>
+                                        </div>
+                                         <div className="mb-4">
+                                            <label className="block text-gray-300 mb-2 text-left font-semibold">
+                                                What GTM services are you interested in?
+                                            </label>
+                                            <div className="grid grid-cols-1 gap-2">
+                                                <label className="flex items-center">
+                                                    <input type="checkbox" name="technicalContent" checked={services.technicalContent} onChange={handleServiceChange} className="mr-2" />
+                                                    Technical Content
+                                                </label>
+                                                     <label className="flex items-center">
+                                                    <input type="checkbox" name="reddit" checked={services.reddit} onChange={handleServiceChange} className="mr-2" />
+                                                    Reddit Engagement for Community Driven Growth
+                                                </label>
+                                                <label className="flex items-center">
+                                                    <input type="checkbox" name="seoContent" checked={services.seoContent} onChange={handleServiceChange} className="mr-2" />
+                                                    SEO/Thought leadership/Marketing Content
+                                                </label>
+                                                <label className="flex items-center">
+                                                    <input type="checkbox" name="productDocs" checked={services.productDocs} onChange={handleServiceChange} className="mr-2" />
+                                                    Product and Use Case documentation
+                                                </label>
+                                                <label className="flex items-center">
+                                                    <input type="checkbox" name="webflow" checked={services.webflow} onChange={handleServiceChange} className="mr-2" />
+                                                    Webflow Services
+                                                </label>
+                                                <label className="flex items-center">
+                                                    <input type="checkbox" name="video" checked={services.video} onChange={handleServiceChange} className="mr-2" />
+                                                    Video Production and Product Explainers
+                                                </label>
+                                                <label className="flex items-center">
+                                                    <input type="checkbox" name="otherChecked" checked={services.otherChecked} onChange={handleServiceChange} className="mr-2" />
+                                                    Other
+                                                    {services.otherChecked && (
+                                                        <input
+                                                            type="text"
+                                                            name="other"
+                                                            value={services.other}
+                                                            onChange={handleServiceChange}
+                                                            className="ml-2 px-2 py-1 rounded bg-[#0c102e] border border-gray-700 text-white"
+                                                            placeholder="Please specify"
+                                                        />
+                                                    )}
+                                                </label>
                                             </div>
                                         </div>
                                         <div>
