@@ -1,6 +1,3 @@
-import Navbar from "@/Components/Navbar/Navbar";
-import Footer from "@/Components/HomePage/Footer";
-
 export const metadata = {
   title: "Contact Infrasity | B2B SaaS Marketing Agency",
   description: "Reach out to Infrasity for GTM content, Reddit marketing, and technical writing that drives growth. Click the link below and get in touch with us today!",
