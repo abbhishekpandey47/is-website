@@ -71,3 +71,8 @@
  ✓ Compiled /services/product-documentation in 99s (8546 modules)
  GET /services/product-documentation 404 in 106413ms
  GET /services/product-documentation 200 in 72993ms
+ GET /favicon.ico 200 in 183ms
+ GET /services/product-documentation 200 in 20165ms
+ GET /favicon.ico 200 in 1023ms
+ ✓ Compiled in 33.9s (8265 modules)
+ GET /services/product-documentation 200 in 2350ms

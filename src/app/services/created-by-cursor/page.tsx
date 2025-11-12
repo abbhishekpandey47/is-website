@@ -1,4 +1,4 @@
-import Hero from '@/components/docs-landing/Hero';
+import Hero from '@/Components/docs-landing/Hero';
 
 export const metadata = {
   title: 'Documentation That Drives Developer Adoption | Infrasity',
