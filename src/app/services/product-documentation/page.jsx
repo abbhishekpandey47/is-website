@@ -2,6 +2,8 @@
 
 import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, Settings, ArrowUp, BookOpen, FileText, Layers, Smartphone, Lightbulb, Wrench, TrendingUp, FileStack, Globe } from 'lucide-react';
 import Link from 'next/link';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import NewMarquee from '../developer-marketing-agency/marquee';
 import CTA from '../developer-marketing-agency/cta';
 import Testimonials from '../developer-marketing-agency/Testimonial';
@@ -185,6 +187,116 @@ export default function ProductDocumentationPage() {
       description: 'Ship to any platform your team prefers.',
     },
   ];
+
+  // DocOps Pipeline Component with Animations
+  function DocOpsPipelineFlow({ steps }) {
+    const containerRef = useRef(null);
+    const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+
+    const lineVariants = {
+      hidden: { scaleX: 0, originX: 0 },
+      visible: {
+        scaleX: 1,
+        transition: {
+          duration: 1.5,
+          ease: [0.25, 0.1, 0.25, 1],
+          delay: 0.3,
+        },
+      },
+    };
+
+    const stepVariants = {
+      hidden: { opacity: 0, scale: 0.8, y: 20 },
+      visible: (i) => ({
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: {
+          duration: 0.6,
+          delay: 0.5 + i * 0.15,
+          ease: [0.25, 0.1, 0.25, 1],
+        },
+      }),
+    };
+
+    const circlePulseVariants = {
+      animate: {
+        scale: [1, 1.05, 1],
+        boxShadow: [
+          '0 0 20px rgba(0,212,255,0.4)',
+          '0 0 30px rgba(0,212,255,0.6)',
+          '0 0 20px rgba(0,212,255,0.4)',
+        ],
+        transition: {
+          duration: 2,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          repeatDelay: 1,
+        },
+      },
+    };
+
+    return (
+      <div className="relative" ref={containerRef}>
+        {/* Animated Connecting Line */}
+        <motion.div
+          className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-[#00D4FF]/30 via-[#7B61FF]/30 to-[#00D4FF]/30 transform -translate-y-1/2 z-0 origin-left"
+          style={{ top: '60px' }}
+          variants={lineVariants}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+        />
+
+        {/* Pipeline Steps */}
+        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-6 lg:gap-4">
+          {steps.map((step, i) => (
+            <motion.div
+              key={i}
+              className="relative flex flex-col items-center"
+              variants={stepVariants}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              custom={i}
+            >
+              {/* Step Number Circle with Pulse Animation */}
+              <motion.div
+                className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-[#00D4FF] to-[#7B61FF] flex items-center justify-center mb-4 border-2 border-[#06080D] shadow-[0_0_20px_rgba(0,212,255,0.4)]"
+                variants={circlePulseVariants}
+                animate={isInView ? 'animate' : {}}
+              >
+                <div className="w-14 h-14 rounded-full bg-[#06080D] flex items-center justify-center">
+                  <span className="text-lg font-bold text-white">{step.number}</span>
+                </div>
+              </motion.div>
+
+              {/* Step Content */}
+              <motion.div
+                className="text-center"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ delay: 0.7 + i * 0.15, duration: 0.4 }}
+              >
+                <h3 className="text-base font-bold text-white mb-2">{step.title}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">{step.description}</p>
+              </motion.div>
+
+              {/* Connector Arrow (hidden on mobile, shown between steps on desktop) */}
+              {i < steps.length - 1 && (
+                <motion.div
+                  className="hidden lg:block absolute top-[60px] -right-2 w-4 h-0.5 bg-[#00D4FF]/30 z-0"
+                  initial={{ opacity: 0, scaleX: 0 }}
+                  animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                  transition={{ delay: 0.8 + i * 0.15, duration: 0.4 }}
+                >
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-l-[6px] border-l-[#00D4FF]/30 border-t-[3px] border-t-transparent border-b-[3px] border-b-transparent"></div>
+                </motion.div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#06080D] via-[#0B0E18] to-[#11142B]">
@@ -559,7 +671,13 @@ export default function ProductDocumentationPage() {
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
         <section className="py-20 px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+            >
               <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
                 <span className="bg-gradient-to-r from-[#00D4FF] via-[#7B61FF] to-[#B14EFF] bg-clip-text text-transparent">
                   DocOps
@@ -569,42 +687,12 @@ export default function ProductDocumentationPage() {
               <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                 From discovery to deployment — a proven system for building developer documentation that drives adoption.
               </p>
-            </div>
+            </motion.div>
 
             {/* Horizontal Pipeline Flow */}
-            <div className="relative">
-              {/* Connecting Line */}
-              <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-[#00D4FF]/30 via-[#7B61FF]/30 to-[#00D4FF]/30 transform -translate-y-1/2 z-0" style={{ top: '60px' }}></div>
-
-              {/* Pipeline Steps */}
-              <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-6 lg:gap-4">
-                {docOpsPipeline.map((step, i) => (
-                  <div key={i} className="relative flex flex-col items-center">
-                    {/* Step Number Circle */}
-                    <div className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-[#00D4FF] to-[#7B61FF] flex items-center justify-center mb-4 border-2 border-[#06080D] shadow-[0_0_20px_rgba(0,212,255,0.4)]">
-                      <div className="w-14 h-14 rounded-full bg-[#06080D] flex items-center justify-center">
-                        <span className="text-lg font-bold text-white">{step.number}</span>
-                      </div>
-                    </div>
-
-                    {/* Step Content */}
-                    <div className="text-center">
-                      <h3 className="text-base font-bold text-white mb-2">{step.title}</h3>
-                      <p className="text-sm text-gray-400 leading-relaxed">{step.description}</p>
-                    </div>
-
-                    {/* Connector Arrow (hidden on mobile, shown between steps on desktop) */}
-                    {i < docOpsPipeline.length - 1 && (
-                      <div className="hidden lg:block absolute top-[60px] -right-2 w-4 h-0.5 bg-[#00D4FF]/30 z-0">
-                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-l-[6px] border-l-[#00D4FF]/30 border-t-[3px] border-t-transparent border-b-[3px] border-b-transparent"></div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+            <DocOpsPipelineFlow steps={docOpsPipeline} />
           </div>
-        </div>
-      </section>
+        </section>
       </div>
 
       {/* Metrics */}
