@@ -5,7 +5,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import AwardBanner from '../Components/HomePage/awardwinner';
 import Footer from '../Components/HomePage/Footer';
 import { Loader } from '../Components/Loader';
@@ -15,24 +15,28 @@ import { initMixpanel } from "../lib/mixpanel";
 import mixpanel from "mixpanel-browser";
 
 export function ClientLayoutWrapper({ children }) {
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     initMixpanel();
   }, []);
 
   useEffect(() => {
+    if (mounted) {
       mixpanel.init(process.env.NEXT_PUBLIC_MIXPANEL, {
         autocapture: true, // enable autocapture
         debug: true,
-  });
-    //   mixpanel.identify("USER_ID");
+      });
+      //   mixpanel.identify("USER_ID");
 
-    //   mixpanel.people.set({
-    //     $name: "Jane Doe",
-    //     $email: "jane.doe@example.com",
-    //     plan: "Premium",
-    //   });
-    }, []);
+      //   mixpanel.people.set({
+      //     $name: "Jane Doe",
+      //     $email: "jane.doe@example.com",
+      //     plan: "Premium",
+      //   });
+    }
+  }, [mounted]);
 
 
 
@@ -72,27 +76,36 @@ export function ClientLayoutWrapper({ children }) {
         }}
       />
 
-      <NextThemesProvider
-        attribute="class"
-        defaultTheme="dark"
-        enableSystem
-        disableTransitionOnChange
-        suppressHydrationWarning
-      >
-        <Appwrap>
-          <AntdRegistry>
-            <Loader />
+      {!mounted ? (
+        <div style={{ visibility: 'hidden' }}>
+          <Appwrap>
+            <AntdRegistry>
+              {children}
+            </AntdRegistry>
+          </Appwrap>
+        </div>
+      ) : (
+        <NextThemesProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <Appwrap>
+            <AntdRegistry>
+              <Loader />
 
-            {shouldShowAwardBanner && <AwardBanner />}
+              {shouldShowAwardBanner && <AwardBanner />}
 
-            {shouldShowNavbar && <Navbar />}
+              {shouldShowNavbar && <Navbar />}
 
-            {children}
-            <Analytics />
-            {!hideNavBarAndFooter && <Footer />}
-          </AntdRegistry>
-        </Appwrap>
-      </NextThemesProvider>
+              {children}
+              <Analytics />
+              {!hideNavBarAndFooter && <Footer />}
+            </AntdRegistry>
+          </Appwrap>
+        </NextThemesProvider>
+      )}
     </>
   );
 }
