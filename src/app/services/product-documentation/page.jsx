@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, Settings, ArrowUp, BookOpen, FileText, Layers, Smartphone, Lightbulb, Wrench, TrendingUp, FileStack, Globe } from 'lucide-react';
+import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, Settings, ArrowUp, BookOpen, FileText, Layers, Smartphone, Lightbulb, Wrench, TrendingUp, FileStack, Globe, Rocket, AlertCircle, Map, Heart, MousePointer2 } from 'lucide-react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -188,6 +188,74 @@ export default function ProductDocumentationPage() {
     },
   ];
 
+  const heroFeatures = [
+    {
+      icon: Code,
+      title: 'Engineering-First',
+      description: 'Built by engineers, for engineers.',
+    },
+    {
+      icon: CheckCircle2,
+      title: 'CI-Tested Docs',
+      description: 'Every example validated in CI pipelines.',
+    },
+    {
+      icon: Rocket,
+      title: 'Fast Delivery',
+      description: 'Ship production-ready docs in weeks.',
+    },
+    {
+      icon: Zap,
+      title: 'Growth-Driven',
+      description: 'Docs optimized for SEO and developer adoption.',
+    },
+    {
+      icon: AlertCircle,
+      title: 'Product Deep Dives',
+      description: 'We run your product end-to-end before writing.',
+    },
+    {
+      icon: Layers,
+      title: 'SDK + API Testing',
+      description: 'Every guide validated across interfaces.',
+    },
+    {
+      icon: Map,
+      title: 'Information Architecture',
+      description: 'Map workflows → endpoints → SDKs.',
+    },
+    {
+      icon: Lightbulb,
+      title: 'Developer Experience Design',
+      description: 'Reduce cognitive load with clear flows.',
+    },
+    {
+      icon: Wrench,
+      title: 'CI-Tested Examples',
+      description: 'Never broken; every snippet runs.',
+    },
+    {
+      icon: FileText,
+      title: 'Technical Narratives',
+      description: 'Explain "why," not just "how."',
+    },
+    {
+      icon: FileStack,
+      title: 'Content Systems',
+      description: 'Versioning, release notes, upgrade guides.',
+    },
+    {
+      icon: Heart,
+      title: 'DevRel + GTM Assets',
+      description: 'Tutorials, walkthroughs, launch content.',
+    },
+    {
+      icon: Globe,
+      title: 'Platform-Agnostic Delivery',
+      description: 'Mintlify, GitBook, Docusaurus, custom React/Next.js.',
+    },
+  ];
+
   // DocOps Pipeline Component with Animations
   function DocOpsPipelineFlow({ steps }) {
     const containerRef = useRef(null);
@@ -333,87 +401,52 @@ export default function ProductDocumentationPage() {
           </div>
 
           {/* Hero content */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight tracking-tight text-white">
-                Documentation That Drives{' '}
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left Column: Text Content */}
+            <div className="space-y-6">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
                 <span className="bg-gradient-to-r from-[#00D4FF] via-[#7B61FF] to-[#B14EFF] text-transparent bg-clip-text">
-                  Developer Adoption
-                </span>
+                  Infrasity
+                </span>{' '}
+                <span className="text-white">Studio™</span>
               </h1>
 
-              <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
-                We build SDK, API, CLI, and integration docs that engineers actually use — written by engineers, optimized for growth.
+              <h2 className="text-2xl md:text-3xl font-bold text-white">
+                Where Documentation Meets Engineering
+              </h2>
+
+              <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+                We're not a content agency. We're an engineering studio for documentation systems — combining technical writing, API testing, information architecture, and developer-first GTM. Every deliverable starts with hands-on product testing. We run your APIs, try your CI flows, explore workflows, and validate SDKs before writing a single sentence. Our docs are built to scale: versioned, CI-tested, consistent, and ready for enterprise adoption — whether you're launching your first docs or rebuilding full documentation stacks.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
-                <Link
-                  href="/contact"
-                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#00D4FF] to-[#7B61FF] text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(123,97,255,0.4)] text-center"
-                >
-                  See Example Docs
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-[#0E1018]/80 backdrop-blur-md text-white font-semibold rounded-lg border border-[#1E2236] hover:bg-[#0E1018] transition-all duration-300 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)] text-center"
-                >
-                  Book a Docs Audit
-                </Link>
-              </div>
-
-              {/* Trust line */}
-              <p className="text-sm text-gray-500 font-mono">
-                Built by engineers, not copywriters.
-              </p>
             </div>
 
-            {/* Code preview */}
-            <div className="relative">
-              <div className="bg-[#0E1018]/80 backdrop-blur-md rounded-2xl border border-[#1E2236] overflow-hidden shadow-[0_0_40px_rgba(123,97,255,0.15)]">
-                <div className="flex items-center gap-2 px-4 py-3 bg-[#0A0C14] border-b border-[#1E2236]">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/60" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/60" />
-                  </div>
-                  <span className="ml-2 text-xs text-gray-500 font-mono">quickstart.md</span>
-                  <div className="ml-auto text-xs text-gray-600">→ rendered-docs</div>
-                </div>
-
-                <div className="grid grid-cols-2 divide-x divide-[#1E2236]">
-                  {/* Markdown */}
-                  <div className="p-6 bg-[#0A0C14]">
-                    <div className="space-y-3 font-mono text-sm">
-                      <div className="text-cyan-400">## Quick Start</div>
-                      <div className="text-gray-400">Install the SDK:</div>
-                      <div className="bg-[#06080D] px-3 py-2 rounded border border-[#1E2236]">
-                        <code className="text-emerald-400">npm install @infrasity/sdk</code>
-                      </div>
-                      <div className="text-gray-400">Initialize in your app</div>
-                      <div className="text-gray-600">_</div>
+            {/* Right Column: Feature Cards Grid */}
+            <div className="grid grid-cols-3 gap-4">
+              {heroFeatures.map((feature, i) => {
+                const Icon = feature.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-4 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ delay: i * 0.05, duration: 0.4 }}
+                  >
+                    {/* Icon in square */}
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00D4FF]/20 to-[#7B61FF]/20 border border-[#00D4FF]/30 flex items-center justify-center mb-3 group-hover:border-[#00D4FF]/70 group-hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all duration-300">
+                      <Icon className="w-5 h-5 text-[#00D4FF] group-hover:scale-110 transition-transform duration-300" />
                     </div>
-                  </div>
 
-                  {/* Rendered */}
-                  <div className="p-6 bg-gradient-to-br from-[#0E1018] to-[#0A0C14]">
-                    <div className="space-y-4">
-                      <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                        <CheckCircle2 className="w-5 h-5 text-green-400" />
-                        Quick Start
-                      </h3>
-                      <p className="text-sm text-gray-300">Install the SDK:</p>
-                      <div className="bg-[#06080D] px-3 py-2 rounded font-mono text-sm border border-[#1E2236]">
-                        <code className="text-emerald-400">$ npm install @infrasity/sdk</code>
-                      </div>
-                      <div className="text-xs text-green-400 flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4" />
-                        Ready to use
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    {/* Title */}
+                    <h3 className="text-sm font-bold text-white mb-1.5">{feature.title}</h3>
+
+                    {/* Description */}
+                    <p className="text-xs text-gray-400 leading-relaxed">{feature.description}</p>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>
