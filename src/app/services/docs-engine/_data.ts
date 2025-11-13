@@ -1,4 +1,4 @@
-import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, TrendingUp, Clock, MessageSquare } from 'lucide-react';
+import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, TrendingUp, Clock, MessageSquare, Settings, ArrowUp } from 'lucide-react';
 import type { ComponentType } from 'react';
 
 export interface Company {
@@ -22,6 +22,8 @@ export interface Card {
 
 export interface Deliverable extends Card {
   id: string;
+  metric: string;
+  benefit: string;
 }
 
 export interface ProcessStep extends Card {
@@ -96,26 +98,50 @@ export const deliverables: Deliverable[] = [
   {
     id: 'quickstart',
     icon: Zap,
-    title: 'Quickstart Guides',
-    description: 'Get your users from install to impact fast.',
+    title: 'Developer Quickstarts',
+    metric: 'TTFX ↓ 35-60%',
+    benefit: '• Reduce Time-to-First-Success',
+    description: 'Guides that get users from install → run → output in minutes. Linear, tested, persona-specific flows for SDKs, CLIs, and APIs.',
   },
   {
     id: 'api',
     icon: Code,
-    title: 'API & SDK Docs',
-    description: 'Real examples, versioned endpoints, and clear error references.',
+    title: 'API & SDK Reference Systems',
+    metric: 'Self-serve ↑',
+    benefit: '• Increase self-serve adoption',
+    description: 'Versioned endpoints, runnable examples, and error docs that ship tested in CI — no broken snippets, ever.',
   },
   {
     id: 'cli',
     icon: Terminal,
-    title: 'CLI & Workflow Docs',
-    description: 'Command-line usage with code explanations.',
+    title: 'CLI & Agent Workflow Docs',
+    metric: '0-1 Clarity',
+    benefit: '• Operational clarity',
+    description: 'Command-line and agent prompts mapped to real workflows — provisioning, secret rotation, onboarding. Every flow reproducible.',
   },
   {
     id: 'integration',
     icon: GitBranch,
     title: 'Integration Recipes',
-    description: 'Terraform, React, and Node.js examples tested end-to-end.',
+    metric: 'Integration Time ↓',
+    benefit: '• End-to-end trust',
+    description: 'Examples for Terraform, K8s, GitHub Actions tested live with verification + teardown steps.',
+  },
+  {
+    id: 'troubleshooting',
+    icon: Settings,
+    title: 'Troubleshooting & Runbooks',
+    metric: 'Tickets ↓ 22-40%',
+    benefit: '• Lower support load',
+    description: 'Top 20 error modes with copy-paste fixes, expected logs, and decision trees for instant debugging.',
+  },
+  {
+    id: 'release-notes',
+    icon: ArrowUp,
+    title: 'Release Notes & Upgrade Guides',
+    metric: 'Migration Errors ↓',
+    benefit: '• Predictable versioning',
+    description: 'Semantic changes mapped to SDK/API behavior with migration guides that prevent breaking updates.',
   },
 ];
 

@@ -1,61 +1,61 @@
 'use client';
 
-import { useState } from 'react';
-import { ArrowRight, Zap, Code, Terminal } from 'lucide-react';
 import type { Deliverable } from './_data';
 import { deliverables } from './_data';
 
 export default function ClientInteractive() {
-  const [activeTab, setActiveTab] = useState<string>('quickstart');
-
   return (
     <>
       {/* What We Build */}
       <section id="what-we-build" className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-white text-center mb-16">What We Build</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
+              What We{' '}
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+                Build
+              </span>
+            </h2>
+            <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+              Documentation and GTM systems that shorten activation time, increase self-serve adoption, and reduce support load for engineering-led startups.
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid md:grid-cols-3 gap-6">
             {deliverables.map((item) => {
               const Icon = item.icon;
               return (
-                <button
+                <div
                   key={item.id}
-                  onClick={() => setActiveTab(item.id)}
-                  className={`p-6 rounded-xl border text-left transition-all ${
-                    activeTab === item.id
-                      ? 'bg-gradient-to-br from-cyan-500/10 to-purple-500/10 border-cyan-500/50 shadow-lg shadow-cyan-500/10'
-                      : 'bg-slate-900/30 border-slate-800 hover:border-slate-700'
-                  }`}
+                  className="group relative rounded-2xl bg-slate-900/50 backdrop-blur border border-slate-800 p-6 hover:border-cyan-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(56,189,248,0.15)]"
                 >
-                  <Icon className={`w-8 h-8 mb-4 ${activeTab === item.id ? 'text-cyan-400' : 'text-slate-400'}`} />
-                  <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-slate-400">{item.description}</p>
-                </button>
+                  {/* Icon in square */}
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/30 flex items-center justify-center mb-4 group-hover:border-cyan-500/50 transition-colors">
+                    <Icon className="w-6 h-6 text-cyan-400" />
+                  </div>
+
+                  {/* Metric */}
+                  <div className="text-sm font-semibold text-cyan-400 mb-2">
+                    {item.metric}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {item.title}
+                  </h3>
+
+                  {/* Benefit bullet */}
+                  <div className="text-sm text-slate-300 mb-3">
+                    {item.benefit}
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
               );
             })}
-          </div>
-
-          {/* Code preview for selected tab */}
-          <div className="bg-slate-900/80 backdrop-blur rounded-xl border border-slate-800 p-8">
-            <div className="flex items-center gap-2 mb-6">
-              <Terminal className="w-5 h-5 text-cyan-400" />
-              <span className="font-mono text-sm text-slate-400">quickstart-guides.md</span>
-            </div>
-            <pre className="text-slate-300 font-mono text-sm overflow-x-auto">
-{`# Quick Start
-
-1. Install the package
-   npm install @your-sdk/core
-
-2. Initialize in your app
-   const client = new SDK({
-     apiKey: process.env.API_KEY
-   });
-
-3. Make your first request
-   const result = await client.getData();`}
-            </pre>
           </div>
         </div>
       </section>
