@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, Settings, ArrowUp } from 'lucide-react';
 import Link from 'next/link';
 import NewMarquee from '../developer-marketing-agency/marquee';
 import CTA from '../developer-marketing-agency/cta';
@@ -9,7 +9,6 @@ import Testimonials from '../developer-marketing-agency/Testimonial';
 import Showcase from '../../../Components/docs/Showcase.jsx';
 
 export default function ProductDocumentationPage() {
-  const [activeTab, setActiveTab] = useState('quickstart');
 
   const showcaseItems = [
     {
@@ -64,26 +63,50 @@ export default function ProductDocumentationPage() {
     {
       id: 'quickstart',
       icon: Zap,
-      title: 'Quickstart Guides',
-      description: 'Get your users from install to impact fast.',
+      title: 'Developer Quickstarts',
+      metric: 'TTFX ↓ 35-60%',
+      benefit: '• Reduce Time-to-First-Success',
+      description: 'Guides that get users from install → run → output in minutes. Linear, tested, persona-specific flows for SDKs, CLIs, and APIs.',
     },
     {
       id: 'api',
       icon: Code,
-      title: 'API & SDK Docs',
-      description: 'Real examples, versioned endpoints, and clear error references.',
+      title: 'API & SDK Reference Systems',
+      metric: 'Self-serve ↑',
+      benefit: '• Increase self-serve adoption',
+      description: 'Versioned endpoints, runnable examples, and error docs that ship tested in CI — no broken snippets, ever.',
     },
     {
       id: 'cli',
       icon: Terminal,
-      title: 'CLI & Workflow Docs',
-      description: 'Command-line usage with code explanations.',
+      title: 'CLI & Agent Workflow Docs',
+      metric: '0-1 Clarity',
+      benefit: '• Operational clarity',
+      description: 'Command-line and agent prompts mapped to real workflows — provisioning, secret rotation, onboarding. Every flow reproducible.',
     },
     {
       id: 'integration',
       icon: GitBranch,
       title: 'Integration Recipes',
-      description: 'Framework examples tested end-to-end.',
+      metric: 'Integration Time ↓',
+      benefit: '• End-to-end trust',
+      description: 'Examples for Terraform, K8s, GitHub Actions tested live with verification + teardown steps.',
+    },
+    {
+      id: 'troubleshooting',
+      icon: Settings,
+      title: 'Troubleshooting & Runbooks',
+      metric: 'Tickets ↓ 22-40%',
+      benefit: '• Lower support load',
+      description: 'Top 20 error modes with copy-paste fixes, expected logs, and decision trees for instant debugging.',
+    },
+    {
+      id: 'release-notes',
+      icon: ArrowUp,
+      title: 'Release Notes & Upgrade Guides',
+      metric: 'Migration Errors ↓',
+      benefit: '• Predictable versioning',
+      description: 'Semantic changes mapped to SDK/API behavior with migration guides that prevent breaking updates.',
     },
   ];
 
@@ -278,7 +301,7 @@ export default function ProductDocumentationPage() {
         </div>
         
         <NewMarquee />
-      </div>
+          </div>
 
       {/* Shared: Docs in Action Showcase */}
       <div
@@ -288,7 +311,7 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
         <Showcase items={showcaseItems} />
-      </div>
+          </div>
 
       {/* The Infrasity Difference */}
       <div
@@ -298,26 +321,26 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
         <section className="py-20 px-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">The Infrasity Difference</h2>
               <p className="text-lg md:text-xl text-gray-400">Why founders choose Infrasity for docs</p>
-            </div>
+          </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {differenceCards.map((card, i) => {
-                const Icon = card.icon;
-                return (
+          <div className="grid md:grid-cols-3 gap-8">
+            {differenceCards.map((card, i) => {
+              const Icon = card.icon;
+              return (
                   <div key={i} className="bg-[#0E1018]/80 backdrop-blur-md rounded-2xl border border-[#1E2236] p-8 hover:border-[#7B61FF]/30 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)] transition-all duration-300">
                     <Icon className="w-12 h-12 mb-6" style={{ color: '#00D4FF' }} />
-                    <h3 className="text-xl font-bold text-white mb-3">{card.title}</h3>
+                  <h3 className="text-xl font-bold text-white mb-3">{card.title}</h3>
                     <p className="text-gray-400">{card.description}</p>
-                  </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
-        </section>
+        </div>
+      </section>
       </div>
 
       {/* What We Build */}
@@ -327,37 +350,37 @@ export default function ProductDocumentationPage() {
         }}
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
-        <section className="py-20 px-6">
-          <div className="max-w-7xl mx-auto">
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-16">What We Build</h2>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-12">
-              {deliverables.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => setActiveTab(item.id)}
+          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            {deliverables.map((item) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
                     className={`p-6 rounded-2xl border text-left transition-all duration-300 ${
-                      activeTab === item.id
+                    activeTab === item.id
                         ? 'bg-gradient-to-br from-[#00D4FF]/10 to-[#7B61FF]/10 border-[#00D4FF]/50 shadow-[0_0_40px_rgba(123,97,255,0.2)]'
                         : 'bg-[#0E1018]/80 backdrop-blur-md border-[#1E2236] hover:border-[#1E2236] hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]'
-                    }`}
-                  >
+                  }`}
+                >
                     <Icon className={`w-8 h-8 mb-4 ${activeTab === item.id ? 'text-[#00D4FF]' : 'text-gray-400'}`} />
-                    <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                  <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
                     <p className="text-gray-400">{item.description}</p>
-                  </button>
-                );
-              })}
-            </div>
+                </button>
+              );
+            })}
+          </div>
 
-            {/* Code preview for selected tab */}
+          {/* Code preview for selected tab */}
             <div className="bg-[#0E1018]/80 backdrop-blur-md rounded-2xl border border-[#1E2236] p-8">
-              <div className="flex items-center gap-2 mb-6">
-                <Terminal className="w-5 h-5 text-cyan-400" />
+            <div className="flex items-center gap-2 mb-6">
+              <Terminal className="w-5 h-5 text-cyan-400" />
                 <span className="font-mono text-sm text-gray-400">quickstart-guides.md</span>
-              </div>
+            </div>
               <pre className="text-gray-300 font-mono text-sm overflow-x-auto">
 {`# Quick Start
 
@@ -371,10 +394,10 @@ export default function ProductDocumentationPage() {
 
 3. Make your first request
    const result = await client.getData();`}
-              </pre>
-            </div>
+            </pre>
           </div>
-        </section>
+        </div>
+      </section>
       </div>
 
       {/* Process */}
@@ -385,31 +408,31 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
         <section className="py-20 px-6">
-          <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-16">
-              We Build Docs Like You Build Code
-            </h2>
+            We Build Docs Like You Build Code
+          </h2>
 
-            <div className="grid md:grid-cols-4 gap-8">
-              {process.map((step, i) => {
-                const Icon = step.icon;
-                return (
-                  <div key={i} className="relative">
+          <div className="grid md:grid-cols-4 gap-8">
+            {process.map((step, i) => {
+              const Icon = step.icon;
+              return (
+                <div key={i} className="relative">
                     <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-[#00D4FF] to-[#7B61FF] flex items-center justify-center text-white font-bold text-lg border-4 border-[#06080D] shadow-[0_0_30px_rgba(123,97,255,0.4)]">
-                      {step.number}
-                    </div>
+                    {step.number}
+                  </div>
                     <div className="bg-[#0E1018]/80 backdrop-blur-md rounded-2xl border border-[#1E2236] p-6 pt-12 hover:border-[#7B61FF]/30 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)] transition-all duration-300">
                       <Icon className="w-8 h-8 text-[#00D4FF] mb-4" />
                       <code className="text-sm text-gray-500 font-mono">{step.file}</code>
-                      <h3 className="text-lg font-bold text-white mt-3 mb-2">{step.title}</h3>
+                    <h3 className="text-lg font-bold text-white mt-3 mb-2">{step.title}</h3>
                       <p className="text-sm text-gray-400">{step.description}</p>
-                    </div>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
-        </section>
+        </div>
+      </section>
       </div>
 
       {/* Metrics */}
@@ -419,13 +442,13 @@ export default function ProductDocumentationPage() {
         }}
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
-        <section className="py-20 px-6">
-          <div className="max-w-7xl mx-auto">
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-16">
-              What Happens After Launch
-            </h2>
+            What Happens After Launch
+          </h2>
 
-            <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
               {metrics.map((metric, i) => (
                 <div key={i} className="bg-gradient-to-br from-[#00D4FF]/10 via-[#7B61FF]/5 to-[#B14EFF]/10 backdrop-blur-md rounded-2xl border border-[#00D4FF]/30 p-8 text-center hover:shadow-[0_0_40px_rgba(123,97,255,0.2)] transition-all duration-300">
                   <div className="text-5xl font-bold bg-gradient-to-r from-[#00D4FF] to-[#7B61FF] text-transparent bg-clip-text mb-2">{metric.value}</div>
@@ -436,7 +459,7 @@ export default function ProductDocumentationPage() {
             </div>
           </div>
         </section>
-      </div>
+        </div>
 
       {/* The Infrasity Edge */}
       <div
@@ -446,30 +469,30 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
         <section className="py-20 px-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Docs Aren't Content. They're Product.
-              </h2>
+              Docs Aren't Content. They're Product.
+            </h2>
               <p className="text-lg md:text-xl text-gray-400">
-                That's why AI, Infra, and DevTool startups trust Infrasity with their documentation layer.
-              </p>
-            </div>
+              That's why AI, Infra, and DevTool startups trust Infrasity with their documentation layer.
+            </p>
+          </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {edgeFeatures.map((feature, i) => {
-                const Icon = feature.icon;
-                return (
+          <div className="grid md:grid-cols-3 gap-8">
+            {edgeFeatures.map((feature, i) => {
+              const Icon = feature.icon;
+              return (
                   <div key={i} className="bg-[#0E1018]/80 backdrop-blur-md rounded-2xl border border-[#1E2236] p-8 hover:border-[#7B61FF]/30 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)] transition-all duration-300">
                     <Icon className="w-12 h-12 text-[#00D4FF] mb-6" />
-                    <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                  <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
                     <p className="text-gray-400">{feature.description}</p>
-                  </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
-        </section>
+        </div>
+      </section>
       </div>
 
       {/* Shared: Testimonials */}
@@ -480,7 +503,7 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10"></div>
         <Testimonials />
-      </div>
+          </div>
 
       {/* Shared: CTA Banner */}
       <div
@@ -490,7 +513,7 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10 mb-12"></div>
         <CTA />
-      </div>
+        </div>
     </div>
   );
 }
