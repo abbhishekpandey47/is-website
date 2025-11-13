@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, Settings, ArrowUp } from 'lucide-react';
 import Link from 'next/link';
 import NewMarquee from '../developer-marketing-agency/marquee';
