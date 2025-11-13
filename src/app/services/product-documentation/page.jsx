@@ -401,6 +401,131 @@ export default function ProductDocumentationPage() {
             </div>
           </div>
         </section>
+          </div>
+
+      {/* Where We Publish Documentation */}
+      <div
+        style={{
+          background: "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
+        <section className="py-20 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
+                Where We{' '}
+                <span className="bg-gradient-to-r from-[#00D4FF] via-[#7B61FF] to-[#B14EFF] bg-clip-text text-transparent">
+                  Publish Documentation
+                </span>
+              </h2>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                We work across any documentation platform your team prefers — from modern MDX systems like Mintlify to fully custom React/Next.js-powered docs engines.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Mintlify Docs Systems */}
+              <div className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-6 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20">
+                <div className="w-12 h-12 rounded-lg bg-green-500/20 border border-green-500/30 flex items-center justify-center mb-4 group-hover:border-green-500/70 group-hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] transition-all duration-300">
+                  <span className="text-2xl font-bold text-green-400">M</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Mintlify Docs Systems</h3>
+                <ul className="space-y-1.5 text-sm text-gray-400">
+                  <li>• MDX components</li>
+                  <li>• SDK switchers</li>
+                  <li>• Custom navigation</li>
+                  <li>• OpenAPI → API reference</li>
+                </ul>
+              </div>
+
+              {/* GitBook Enterprise Docs */}
+              <div className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#00D4FF]/50 p-6 hover:border-[#00D4FF]/70 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.4)] hover:shadow-[#00D4FF]/30">
+                <div className="w-12 h-12 rounded-lg bg-orange-500/20 border border-orange-500/30 flex items-center justify-center mb-4 group-hover:border-orange-500/70 group-hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] transition-all duration-300">
+                  <BookOpen className="w-6 h-6 text-orange-400 group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">GitBook Enterprise Docs</h3>
+                <ul className="space-y-1.5 text-sm text-gray-400">
+                  <li>• Versioning</li>
+                  <li>• Integration guides</li>
+                  <li>• Structured categories</li>
+                  <li>• Multi-team workflows</li>
+                </ul>
+              </div>
+
+              {/* ReadMe / Stoplight */}
+              <div className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-6 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-blue-500/20 border border-blue-500/30 flex items-center justify-center group-hover:border-blue-500/70 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all duration-300">
+                    <FileText className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
+                  </div>
+                  <div className="w-12 h-12 rounded-lg bg-white/10 border border-gray-600/30 flex items-center justify-center group-hover:border-yellow-500/70 transition-all duration-300">
+                    <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center">
+                      <span className="text-xs font-bold text-gray-900">S</span>
+                    </div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">ReadMe / Stoplight (API Docs)</h3>
+                <ul className="space-y-1.5 text-sm text-gray-400">
+                  <li>• OpenAPI import</li>
+                  <li>• Try-it playgrounds</li>
+                  <li>• Error code library</li>
+                  <li>• SDK examples</li>
+                </ul>
+              </div>
+
+              {/* Docusaurus / Nextra */}
+              <div className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-6 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-green-500/20 border border-green-500/30 flex items-center justify-center group-hover:border-green-500/70 transition-all duration-300">
+                    <span className="text-2xl">🦖</span>
+                  </div>
+                  <div className="w-12 h-12 rounded-lg bg-white/10 border border-gray-600/30 flex items-center justify-center group-hover:border-gray-400/70 transition-all duration-300">
+                    <span className="text-xs font-semibold text-gray-300">Nextra</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Docusaurus / Nextra</h3>
+                <ul className="space-y-1.5 text-sm text-gray-400">
+                  <li>• Custom React theming</li>
+                  <li>• Multi-versioning</li>
+                  <li>• Live code blocks</li>
+                  <li>• Link-check CI</li>
+                </ul>
+              </div>
+
+              {/* Custom React/Next.js Doc Engine */}
+              <div className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-6 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20">
+                <div className="w-12 h-12 rounded-lg bg-white/10 border border-gray-600/30 flex items-center justify-center mb-4 group-hover:border-gray-400/70 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-300">
+                  <div className="flex items-baseline">
+                    <span className="text-xl font-bold text-white">N</span>
+                    <span className="text-xs text-gray-400 ml-0.5">js</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Custom React/Next.js Doc Engine</h3>
+                <ul className="space-y-1.5 text-sm text-gray-400">
+                  <li>• Fully custom docs routing</li>
+                  <li>• MDX components</li>
+                  <li>• Interactive examples</li>
+                  <li>• Search + tagging system</li>
+                </ul>
+              </div>
+
+              {/* In-App / Embedded Documentation */}
+              <div className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-6 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20">
+                <div className="w-12 h-12 rounded-lg bg-white/10 border border-gray-600/30 flex items-center justify-center mb-4 group-hover:border-gray-400/70 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-300">
+                  <Smartphone className="w-6 h-6 text-gray-300 group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">In-App / Embedded Documentation</h3>
+                <ul className="space-y-1.5 text-sm text-gray-400">
+                  <li>• Embedded Quickstarts</li>
+                  <li>• UI workflow walkthroughs</li>
+                  <li>• Contextual triggers</li>
+                  <li>• Shorter activation time</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
         </div>
 
       {/* Process */}
