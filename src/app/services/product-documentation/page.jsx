@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, Settings, ArrowUp } from 'lucide-react';
+import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, Settings, ArrowUp, BookOpen, FileText, Layers, Smartphone } from 'lucide-react';
 import Link from 'next/link';
 import NewMarquee from '../developer-marketing-agency/marquee';
 import CTA from '../developer-marketing-agency/cta';
