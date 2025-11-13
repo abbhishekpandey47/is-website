@@ -109,34 +109,41 @@ export default function ProductDocumentationPage() {
     },
   ];
 
-  const process = [
+  const docOpsPipeline = [
     {
       number: '01',
-      icon: Search,
-      file: 'discovery.yaml',
-      title: 'Understand your product',
-      description: 'We dive deep into your codebase and test your product hands-on',
+      title: 'Product Discovery',
+      description: 'Test APIs, SDKs, and workflows firsthand.',
     },
     {
       number: '02',
-      icon: GitBranch,
-      file: 'toc.json',
-      title: 'Structure content flow',
-      description: 'Build an information architecture that matches developer intent',
+      title: 'Information Architecture',
+      description: 'Map user journeys to documentation structure.',
     },
     {
       number: '03',
-      icon: Code,
-      file: 'drafts.md',
-      title: 'Write + review',
-      description: 'Create docs with real code examples and your team\'s feedback',
+      title: 'Content Development',
+      description: 'Write developer-focused guides with working code.',
     },
     {
       number: '04',
-      icon: CheckCircle2,
-      file: 'deploy.sh',
-      title: 'Publish + measure',
-      description: 'Launch your docs and track adoption metrics that matter',
+      title: 'Code Validation',
+      description: 'CI-test all examples against live endpoints.',
+    },
+    {
+      number: '05',
+      title: 'Platform Setup',
+      description: 'Configure Mintlify, GitBook, or custom engine.',
+    },
+    {
+      number: '06',
+      title: 'SEO & Metadata',
+      description: 'Optimize for discoverability and search rankings.',
+    },
+    {
+      number: '07',
+      title: 'Deploy & Measure',
+      description: 'Ship docs and track engagement metrics.',
     },
   ];
 
@@ -463,8 +470,8 @@ export default function ProductDocumentationPage() {
                     <div className="w-8 h-8 rounded-full bg-yellow-400 flex items-center justify-center">
                       <span className="text-xs font-bold text-gray-900">S</span>
                     </div>
-                  </div>
-                </div>
+          </div>
+        </div>
                 <h3 className="text-xl font-bold text-white mb-3">ReadMe / Stoplight (API Docs)</h3>
                 <ul className="space-y-1.5 text-sm text-gray-400">
                   <li>• OpenAPI import</li>
@@ -528,7 +535,7 @@ export default function ProductDocumentationPage() {
         </section>
         </div>
 
-      {/* Process */}
+      {/* DocOps Pipeline */}
       <div
         style={{
           background: "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
@@ -536,28 +543,50 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
         <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-16">
-            We Build Docs Like You Build Code
-          </h2>
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
+                <span className="bg-gradient-to-r from-[#00D4FF] via-[#7B61FF] to-[#B14EFF] bg-clip-text text-transparent">
+                  DocOps
+                </span>{' '}
+                Pipeline
+              </h2>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                From discovery to deployment — a proven system for building developer documentation that drives adoption.
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            {process.map((step, i) => {
-              const Icon = step.icon;
-              return (
-                <div key={i} className="relative">
-                    <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-[#00D4FF] to-[#7B61FF] flex items-center justify-center text-white font-bold text-lg border-4 border-[#06080D] shadow-[0_0_30px_rgba(123,97,255,0.4)]">
-                    {step.number}
+            {/* Horizontal Pipeline Flow */}
+            <div className="relative">
+              {/* Connecting Line */}
+              <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-[#00D4FF]/30 via-[#7B61FF]/30 to-[#00D4FF]/30 transform -translate-y-1/2 z-0" style={{ top: '60px' }}></div>
+
+              {/* Pipeline Steps */}
+              <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-6 lg:gap-4">
+                {docOpsPipeline.map((step, i) => (
+                  <div key={i} className="relative flex flex-col items-center">
+                    {/* Step Number Circle */}
+                    <div className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-[#00D4FF] to-[#7B61FF] flex items-center justify-center mb-4 border-2 border-[#06080D] shadow-[0_0_20px_rgba(0,212,255,0.4)]">
+                      <div className="w-14 h-14 rounded-full bg-[#06080D] flex items-center justify-center">
+                        <span className="text-lg font-bold text-white">{step.number}</span>
+                      </div>
+                    </div>
+
+                    {/* Step Content */}
+                    <div className="text-center">
+                      <h3 className="text-base font-bold text-white mb-2">{step.title}</h3>
+                      <p className="text-sm text-gray-400 leading-relaxed">{step.description}</p>
+                    </div>
+
+                    {/* Connector Arrow (hidden on mobile, shown between steps on desktop) */}
+                    {i < docOpsPipeline.length - 1 && (
+                      <div className="hidden lg:block absolute top-[60px] -right-2 w-4 h-0.5 bg-[#00D4FF]/30 z-0">
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-l-[6px] border-l-[#00D4FF]/30 border-t-[3px] border-t-transparent border-b-[3px] border-b-transparent"></div>
+                      </div>
+                    )}
                   </div>
-                    <div className="bg-[#0E1018]/80 backdrop-blur-md rounded-2xl border border-[#1E2236] p-6 pt-12 hover:border-[#7B61FF]/30 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)] transition-all duration-300">
-                      <Icon className="w-8 h-8 text-[#00D4FF] mb-4" />
-                      <code className="text-sm text-gray-500 font-mono">{step.file}</code>
-                    <h3 className="text-lg font-bold text-white mt-3 mb-2">{step.title}</h3>
-                      <p className="text-sm text-gray-400">{step.description}</p>
-                  </div>
-                </div>
-              );
-            })}
+                ))}
+              </div>
           </div>
         </div>
       </section>
