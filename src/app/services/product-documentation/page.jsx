@@ -352,53 +352,57 @@ export default function ProductDocumentationPage() {
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-16">What We Build</h2>
+            <div className="text-center mb-16">
+              <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
+                What We{' '}
+                <span className="bg-gradient-to-r from-[#00D4FF] via-[#7B61FF] to-[#B14EFF] bg-clip-text text-transparent">
+                  Build
+                </span>
+              </h2>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                Documentation and GTM systems that shorten activation time, increase self-serve adoption, and reduce support load for engineering-led startups.
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+            <div className="grid md:grid-cols-3 gap-6">
             {deliverables.map((item) => {
               const Icon = item.icon;
               return (
-                <button
+                  <div
                   key={item.id}
-                  onClick={() => setActiveTab(item.id)}
-                    className={`p-6 rounded-2xl border text-left transition-all duration-300 ${
-                    activeTab === item.id
-                        ? 'bg-gradient-to-br from-[#00D4FF]/10 to-[#7B61FF]/10 border-[#00D4FF]/50 shadow-[0_0_40px_rgba(123,97,255,0.2)]'
-                        : 'bg-[#0E1018]/80 backdrop-blur-md border-[#1E2236] hover:border-[#1E2236] hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]'
-                  }`}
-                >
-                    <Icon className={`w-8 h-8 mb-4 ${activeTab === item.id ? 'text-[#00D4FF]' : 'text-gray-400'}`} />
-                  <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-gray-400">{item.description}</p>
-                </button>
+                    className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-6 hover:border-[#7B61FF]/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]"
+                  >
+                    {/* Icon in square */}
+                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#00D4FF]/20 to-[#7B61FF]/20 border border-[#00D4FF]/30 flex items-center justify-center mb-4 group-hover:border-[#00D4FF]/50 transition-colors">
+                      <Icon className="w-6 h-6 text-[#00D4FF]" />
+                    </div>
+
+                    {/* Metric */}
+                    <div className="text-sm font-semibold text-[#00D4FF] mb-2">
+                      {item.metric}
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-white mb-2">
+                      {item.title}
+                    </h3>
+
+                    {/* Benefit bullet */}
+                    <div className="text-sm text-gray-300 mb-3">
+                      {item.benefit}
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-sm text-gray-400 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
               );
             })}
-          </div>
-
-          {/* Code preview for selected tab */}
-            <div className="bg-[#0E1018]/80 backdrop-blur-md rounded-2xl border border-[#1E2236] p-8">
-            <div className="flex items-center gap-2 mb-6">
-              <Terminal className="w-5 h-5 text-cyan-400" />
-                <span className="font-mono text-sm text-gray-400">quickstart-guides.md</span>
             </div>
-              <pre className="text-gray-300 font-mono text-sm overflow-x-auto">
-{`# Quick Start
-
-1. Install the package
-   npm install @your-sdk/core
-
-2. Initialize in your app
-   const client = new SDK({
-     apiKey: process.env.API_KEY
-   });
-
-3. Make your first request
-   const result = await client.getData();`}
-            </pre>
           </div>
+        </section>
         </div>
-      </section>
-      </div>
 
       {/* Process */}
       <div
