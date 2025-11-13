@@ -259,7 +259,7 @@ export default function ProductDocumentationPage() {
   // DocOps Pipeline Component with Animations
   function DocOpsPipelineFlow({ steps }) {
     const containerRef = useRef(null);
-    const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+    const isInView = useInView(containerRef, { once: true, amount: 0.2, margin: '-100px' });
 
     const lineVariants = {
       hidden: { scaleX: 0, originX: 0 },
@@ -431,7 +431,7 @@ export default function ProductDocumentationPage() {
                     className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-4 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.1, margin: '-50px' }}
                     transition={{ delay: i * 0.05, duration: 0.4 }}
                   >
                     {/* Icon in square */}
@@ -708,7 +708,7 @@ export default function ProductDocumentationPage() {
               className="text-center mb-16"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.1, margin: '-50px' }}
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
@@ -724,8 +724,8 @@ export default function ProductDocumentationPage() {
 
             {/* Horizontal Pipeline Flow */}
             <DocOpsPipelineFlow steps={docOpsPipeline} />
-          </div>
-        </section>
+        </div>
+      </section>
       </div>
 
       {/* Metrics */}
@@ -762,7 +762,7 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
         <section className="py-20 px-6">
-          <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Left Side: Text Content */}
               <div>
@@ -771,18 +771,18 @@ export default function ProductDocumentationPage() {
                   <span className="bg-gradient-to-r from-[#00D4FF] via-[#7B61FF] to-[#B14EFF] bg-clip-text text-transparent">
                     Infrasity?
                   </span>
-                </h2>
+            </h2>
                 <p className="text-sm uppercase tracking-widest text-gray-500 mb-6">The Infrasity Edge</p>
                 <p className="text-lg text-gray-300 leading-relaxed">
                   We're not just writers; we're engineers who build documentation systems. Our team combines deep technical expertise with a product-first approach, ensuring your docs are not only accurate but also drive adoption and growth.
-                </p>
-              </div>
+            </p>
+          </div>
 
               {/* Right Side: Feature Cards Grid */}
               <div className="grid md:grid-cols-2 gap-6">
-                {edgeFeatures.map((feature, i) => {
-                  const Icon = feature.icon;
-                  return (
+            {edgeFeatures.map((feature, i) => {
+              const Icon = feature.icon;
+              return (
                     <div
                       key={i}
                       className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-6 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20"
@@ -792,14 +792,14 @@ export default function ProductDocumentationPage() {
                       </div>
                       <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
                       <p className="text-sm text-gray-400 leading-relaxed">{feature.description}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+                </div>
+              );
+            })}
           </div>
-        </section>
-      </div>
+          </div>
+        </div>
+      </section>
+          </div>
 
       {/* Shared: Testimonials */}
       <div
