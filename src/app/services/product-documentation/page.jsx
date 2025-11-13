@@ -497,7 +497,7 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
         <Showcase items={showcaseItems} />
-          </div>
+      </div>
 
       {/* The Infrasity Difference */}
       <div
