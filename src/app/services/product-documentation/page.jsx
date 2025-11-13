@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, Settings, ArrowUp, BookOpen, FileText, Layers, Smartphone } from 'lucide-react';
+import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, Settings, ArrowUp, BookOpen, FileText, Layers, Smartphone, Lightbulb, Wrench, TrendingUp, FileStack, Globe } from 'lucide-react';
 import Link from 'next/link';
 import NewMarquee from '../developer-marketing-agency/marquee';
 import CTA from '../developer-marketing-agency/cta';
@@ -155,19 +155,34 @@ export default function ProductDocumentationPage() {
 
   const edgeFeatures = [
     {
-      icon: Users,
-      title: 'Engineer-Led Research',
-      description: 'We test your product and understand your codebase before writing a single line',
+      icon: Lightbulb,
+      title: 'Developer Experience Design',
+      description: 'Reduce cognitive load with clear flows.',
     },
     {
-      icon: Search,
-      title: 'SEO + Growth Optimization',
-      description: 'Docs structured for both search engines and developer success',
+      icon: Wrench,
+      title: 'CI-Tested Examples',
+      description: 'All code snippets validated in CI pipelines.',
     },
     {
-      icon: Code,
-      title: 'Code-First Examples',
-      description: 'Every guide includes working code examples, tested end-to-end',
+      icon: TrendingUp,
+      title: 'Technical Narratives',
+      description: 'Stories that connect concepts to real workflows.',
+    },
+    {
+      icon: FileStack,
+      title: 'Content Systems',
+      description: 'Scalable architecture for growing documentation.',
+    },
+    {
+      icon: BookOpen,
+      title: 'DevRel + GTM Assets',
+      description: 'Docs that double as marketing and sales enablement.',
+    },
+    {
+      icon: Globe,
+      title: 'Platform-Agnostic Delivery',
+      description: 'Ship to any platform your team prefers.',
     },
   ];
 
@@ -618,7 +633,7 @@ export default function ProductDocumentationPage() {
         </section>
         </div>
 
-      {/* The Infrasity Edge */}
+      {/* Why Infrasity / The Infrasity Edge */}
       <div
         style={{
           background: "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
@@ -626,30 +641,43 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
         <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Docs Aren't Content. They're Product.
-            </h2>
-              <p className="text-lg md:text-xl text-gray-400">
-              That's why AI, Infra, and DevTool startups trust Infrasity with their documentation layer.
-            </p>
-          </div>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* Left Side: Text Content */}
+              <div>
+                <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
+                  Why{' '}
+                  <span className="bg-gradient-to-r from-[#00D4FF] via-[#7B61FF] to-[#B14EFF] bg-clip-text text-transparent">
+                    Infrasity?
+                  </span>
+                </h2>
+                <p className="text-sm uppercase tracking-widest text-gray-500 mb-6">The Infrasity Edge</p>
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  We're not just writers; we're engineers who build documentation systems. Our team combines deep technical expertise with a product-first approach, ensuring your docs are not only accurate but also drive adoption and growth.
+                </p>
+              </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {edgeFeatures.map((feature, i) => {
-              const Icon = feature.icon;
-              return (
-                  <div key={i} className="bg-[#0E1018]/80 backdrop-blur-md rounded-2xl border border-[#1E2236] p-8 hover:border-[#7B61FF]/30 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)] transition-all duration-300">
-                    <Icon className="w-12 h-12 text-[#00D4FF] mb-6" />
-                  <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                    <p className="text-gray-400">{feature.description}</p>
-                </div>
-              );
-            })}
+              {/* Right Side: Feature Cards Grid */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {edgeFeatures.map((feature, i) => {
+                  const Icon = feature.icon;
+                  return (
+                    <div
+                      key={i}
+                      className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-6 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20"
+                    >
+                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#00D4FF]/20 to-[#7B61FF]/20 border border-[#00D4FF]/30 flex items-center justify-center mb-4 group-hover:border-[#00D4FF]/70 group-hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all duration-300">
+                        <Icon className="w-6 h-6 text-[#00D4FF] group-hover:scale-110 transition-transform duration-300" />
+                      </div>
+                      <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
+                      <p className="text-sm text-gray-400 leading-relaxed">{feature.description}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       </div>
 
       {/* Shared: Testimonials */}
