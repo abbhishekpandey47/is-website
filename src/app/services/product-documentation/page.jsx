@@ -1,13 +1,166 @@
 'use client';
 
-import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, Settings, ArrowUp, BookOpen, FileText, Layers, Smartphone, Lightbulb, Wrench, TrendingUp, FileStack, Globe, Rocket, AlertCircle, Map, Heart, MousePointer2 } from 'lucide-react';
+import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2, Settings, ArrowUp, BookOpen, FileText, Layers, Smartphone, Lightbulb, Wrench, TrendingUp, FileStack, Globe, Rocket, AlertCircle, Map, Heart } from 'lucide-react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import NewMarquee from '../developer-marketing-agency/marquee';
 import CTA from '../developer-marketing-agency/cta';
 import Testimonials from '../developer-marketing-agency/Testimonial';
-import Showcase from '../../../Components/docs/Showcase.jsx';
+import Showcase from '../../../components/docs/Showcase';
+import FeaturedResults from '../developer-marketing-agency/FeaturedResults';
+import VideoTestimonials from '../../playbook/developer-marketing/testimonials';
+import { Videos } from '../../playbook/developer-marketing/videosData';
+
+// Infrasity Studio Component with 3D Tilt Animation
+function InfrasityStudioSection() {
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+
+  // 3D Tilt Card Component
+  const TiltCard = ({ children, delay = 0, className = "" }) => {
+    const cardRef = useRef(null);
+    const [rotateX, setRotateX] = useState(0);
+    const [rotateY, setRotateY] = useState(0);
+
+    const handleMouseMove = (e) => {
+      if (!cardRef.current) return;
+
+      const rect = cardRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const mouseX = e.clientX - centerX;
+      const mouseY = e.clientY - centerY;
+
+      const rotateXValue = (mouseY / (rect.height / 2)) * -10; // Max 10deg rotation
+      const rotateYValue = (mouseX / (rect.width / 2)) * 10;
+
+      setRotateX(rotateXValue);
+      setRotateY(rotateYValue);
+    };
+
+    const handleMouseLeave = () => {
+      setRotateX(0);
+      setRotateY(0);
+    };
+
+    return (
+      <motion.div
+        ref={cardRef}
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.5, delay }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+          transformStyle: "preserve-3d",
+          transition: "transform 0.1s ease-out",
+        }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    );
+  };
+
+  const topBadges = [
+    { icon: Code, label: "Engineering-First" },
+    { icon: CheckCircle2, label: "CI-Tested Docs" },
+    { icon: Rocket, label: "Fast Delivery" },
+    { icon: Zap, label: "Growth-Driven" },
+  ];
+
+  const featureCards = [
+    { icon: AlertCircle, title: "Product Deep Dives", desc: "We run your product end-to-end before writing." },
+    { icon: Users, title: "SDK + API Testing", desc: "Every guide validated across interfaces." },
+    { icon: Map, title: "Information Architecture", desc: "Map workflows → endpoints → SDKs." },
+    { icon: Lightbulb, title: "Developer Experience Design", desc: "Reduce cognitive load with clear flows." },
+    { icon: Wrench, title: "CI-Tested Examples", desc: "Never broken; every snippet runs." },
+    { icon: FileText, title: "Technical Narratives", desc: 'Explain "why," not just "how."' },
+    { icon: Layers, title: "Content Systems", desc: "Versioning, release notes, upgrade guides." },
+    { icon: BookOpen, title: "DevRel + GTM Assets", desc: "Tutorials, walkthroughs, launch content." },
+    { icon: Globe, title: "Platform-Agnostic Delivery", desc: "Mintlify, GitBook, Docusaurus, custom React/Next.js." },
+  ];
+
+  return (
+    <div ref={containerRef} className="grid lg:grid-cols-2 gap-16">
+      {/* Left Side: Main Content */}
+      <motion.div
+        className="space-y-8"
+        initial={{ opacity: 0, x: -20 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div>
+          <h2 className="text-5xl lg:text-6xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-[#00D4FF] via-[#7B61FF] to-[#B14EFF] bg-clip-text text-transparent">
+              Infrasity Studio™
+            </span>
+          </h2>
+          <p className="text-2xl lg:text-3xl font-semibold text-white mb-8">
+            Where Documentation Meets Engineering
+          </p>
+        </div>
+
+        <div className="space-y-6 text-gray-300 text-lg leading-relaxed">
+          <p>
+            We're not a content agency. We're an engineering studio for documentation systems — combining technical writing, API testing, information architecture, and developer-first GTM.
+          </p>
+          <p>
+            Every deliverable starts with hands-on product testing. We run your APIs, try your CI flows, explore workflows, and validate SDKs before writing a single sentence.
+          </p>
+          <p>
+            Our docs are built to scale: versioned, CI-tested, consistent, and ready for enterprise adoption — whether you're launching your first docs or rebuilding full documentation stacks.
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Right Side: Feature Badges with 3D Tilt */}
+      <div className="space-y-6">
+        {/* Top Row Features */}
+        <div className="grid grid-cols-2 gap-4">
+          {topBadges.map((badge, i) => {
+            const Icon = badge.icon;
+            return (
+              <TiltCard key={i} delay={0.1 * i}>
+                <div className="group relative rounded-xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-4 hover:border-[#00D4FF]/50 hover:shadow-[0_0_30px_rgba(0,212,255,0.3)] transition-all duration-300">
+                  <div className="flex items-center gap-3">
+                    <Icon className="w-5 h-5 text-[#00D4FF] group-hover:scale-110 transition-transform" />
+                    <span className="text-white font-medium">{badge.label}</span>
+                  </div>
+                </div>
+              </TiltCard>
+            );
+          })}
+        </div>
+
+        {/* Feature Cards Grid with 3D Tilt */}
+        <div className="grid grid-cols-1 gap-4 mt-8">
+          {/* Render cards in rows of 3 */}
+          {[0, 3, 6].map((startIdx) => (
+            <div key={startIdx} className="grid grid-cols-3 gap-4">
+              {featureCards.slice(startIdx, startIdx + 3).map((card, i) => {
+                const Icon = card.icon;
+                const actualIndex = startIdx + i;
+                return (
+                  <TiltCard key={actualIndex} delay={0.1 * (actualIndex + 4)}>
+                    <div className="group relative rounded-xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-4 hover:border-[#00D4FF]/50 hover:shadow-[0_0_30px_rgba(0,212,255,0.3)] transition-all duration-300 h-full">
+                      <Icon className="w-5 h-5 text-[#00D4FF] mb-3 group-hover:scale-110 transition-transform" />
+                      <h3 className="text-white font-medium mb-2">{card.title}</h3>
+                      <p className="text-sm text-gray-400">{card.desc}</p>
+                    </div>
+                  </TiltCard>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function ProductDocumentationPage() {
 
@@ -259,7 +412,7 @@ export default function ProductDocumentationPage() {
   // DocOps Pipeline Component with Animations
   function DocOpsPipelineFlow({ steps }) {
     const containerRef = useRef(null);
-    const isInView = useInView(containerRef, { once: true, amount: 0.2, margin: '-100px' });
+    const isInView = useInView(containerRef, { once: true, amount: 0.2 });
 
     const lineVariants = {
       hidden: { scaleX: 0, originX: 0 },
@@ -401,35 +554,30 @@ export default function ProductDocumentationPage() {
           </div>
 
           {/* Hero content */}
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left Column: Text Content */}
-            <div className="space-y-6">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <h1 className="text-5xl md:text-6xl font-bold leading-tight tracking-tight text-white">
+                Documentation That Drives{' '}
                 <span className="bg-gradient-to-r from-[#00D4FF] via-[#7B61FF] to-[#B14EFF] text-transparent bg-clip-text">
-                  Infrasity
-                </span>{' '}
-                <span className="text-white">Studio™</span>
+                  Developer Adoption
+                </span>
               </h1>
 
-              <h2 className="text-2xl md:text-3xl font-bold text-white">
-                Where Documentation Meets Engineering
-              </h2>
-
-              <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-                We're not a content agency. We're an engineering studio for documentation systems — combining technical writing, API testing, information architecture, and developer-first GTM. Every deliverable starts with hands-on product testing. We run your APIs, try your CI flows, explore workflows, and validate SDKs before writing a single sentence. Our docs are built to scale: versioned, CI-tested, consistent, and ready for enterprise adoption — whether you're launching your first docs or rebuilding full documentation stacks.
+              <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
+                We build SDK, API, CLI, and integration docs that engineers actually use — written by engineers, optimized for growth.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center pt-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/contact"
-                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#00D4FF] to-[#7B61FF] text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(123,97,255,0.4)] text-center"
+                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#00D4FF] to-[#7B61FF] text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(123,97,255,0.4)]"
                 >
                   See Example Docs
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-[#0E1018]/80 backdrop-blur-md text-white font-semibold rounded-lg border border-[#1E2236] hover:bg-[#0E1018] transition-all duration-300 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)] text-center"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-[#0E1018]/80 backdrop-blur-md text-white font-semibold rounded-lg border border-[#1E2236] hover:bg-[#0E1018] transition-all duration-300 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]"
                 >
                   Book a Docs Audit
                 </Link>
@@ -441,32 +589,52 @@ export default function ProductDocumentationPage() {
               </p>
             </div>
 
-            {/* Right Column: Feature Cards Grid */}
-            <div className="grid grid-cols-3 gap-4">
-              {heroFeatures.map((feature, i) => {
-                const Icon = feature.icon;
-                return (
-                  <motion.div
-                    key={i}
-                    className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-4 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.1, margin: '-50px' }}
-                    transition={{ delay: i * 0.05, duration: 0.4 }}
-                  >
-                    {/* Icon in square */}
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00D4FF]/20 to-[#7B61FF]/20 border border-[#00D4FF]/30 flex items-center justify-center mb-3 group-hover:border-[#00D4FF]/70 group-hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all duration-300">
-                      <Icon className="w-5 h-5 text-[#00D4FF] group-hover:scale-110 transition-transform duration-300" />
+            {/* Code preview */}
+            <div className="relative">
+              <div className="bg-[#0E1018]/80 backdrop-blur-md rounded-2xl border border-[#1E2236] overflow-hidden shadow-[0_0_40px_rgba(123,97,255,0.15)]">
+                <div className="flex items-center gap-2 px-4 py-3 bg-[#0A0C14] border-b border-[#1E2236]">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-red-500/60" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/60" />
+                  </div>
+                  <span className="ml-2 text-xs text-gray-500 font-mono">quickstart.md</span>
+                  <div className="ml-auto text-xs text-gray-600">→ rendered-docs</div>
+                </div>
+
+                <div className="grid grid-cols-2 divide-x divide-[#1E2236]">
+                  {/* Markdown */}
+                  <div className="p-6 bg-[#0A0C14]">
+                    <div className="space-y-3 font-mono text-sm">
+                      <div className="text-cyan-400">## Quick Start</div>
+                      <div className="text-gray-400">Install the SDK:</div>
+                      <div className="bg-[#06080D] px-3 py-2 rounded border border-[#1E2236]">
+                        <code className="text-emerald-400">npm install @infrasity/sdk</code>
+                      </div>
+                      <div className="text-gray-400">Initialize in your app</div>
+                      <div className="text-gray-600">_</div>
                     </div>
+                  </div>
 
-                    {/* Title */}
-                    <h3 className="text-sm font-bold text-white mb-1.5">{feature.title}</h3>
-
-                    {/* Description */}
-                    <p className="text-xs text-gray-400 leading-relaxed">{feature.description}</p>
-                  </motion.div>
-                );
-              })}
+                  {/* Rendered */}
+                  <div className="p-6 bg-gradient-to-br from-[#0E1018] to-[#0A0C14]">
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-green-400" />
+                        Quick Start
+                      </h3>
+                      <p className="text-sm text-gray-300">Install the SDK:</p>
+                      <div className="bg-[#06080D] px-3 py-2 rounded font-mono text-sm border border-[#1E2236]">
+                        <code className="text-emerald-400">$ npm install @infrasity/sdk</code>
+                      </div>
+                      <div className="text-xs text-green-400 flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4" />
+                        Ready to use
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -728,7 +896,7 @@ export default function ProductDocumentationPage() {
               className="text-center mb-16"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1, margin: '-50px' }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
@@ -774,7 +942,7 @@ export default function ProductDocumentationPage() {
         </section>
         </div>
 
-      {/* Why Infrasity / The Infrasity Edge */}
+      {/* Infrasity Studio™ Section */}
       <div
         style={{
           background: "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
@@ -782,44 +950,21 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-16 mb-1"></div>
         <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
-              {/* Left Side: Text Content */}
-              <div>
-                <h2 className="text-5xl lg:text-6xl font-bold text-white mb-4">
-                  Why{' '}
-                  <span className="bg-gradient-to-r from-[#00D4FF] via-[#7B61FF] to-[#B14EFF] bg-clip-text text-transparent">
-                    Infrasity?
-                  </span>
-            </h2>
-                <p className="text-sm uppercase tracking-widest text-gray-500 mb-6">The Infrasity Edge</p>
-                <p className="text-lg text-gray-300 leading-relaxed">
-                  We're not just writers; we're engineers who build documentation systems. Our team combines deep technical expertise with a product-first approach, ensuring your docs are not only accurate but also drive adoption and growth.
-            </p>
+          <div className="max-w-7xl mx-auto">
+            <InfrasityStudioSection />
           </div>
+        </section>
+      </div>
 
-              {/* Right Side: Feature Cards Grid */}
-              <div className="grid md:grid-cols-2 gap-6">
-            {edgeFeatures.map((feature, i) => {
-              const Icon = feature.icon;
-              return (
-                    <div
-                      key={i}
-                      className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-6 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20"
-                    >
-                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#00D4FF]/20 to-[#7B61FF]/20 border border-[#00D4FF]/30 flex items-center justify-center mb-4 group-hover:border-[#00D4FF]/70 group-hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all duration-300">
-                        <Icon className="w-6 h-6 text-[#00D4FF] group-hover:scale-110 transition-transform duration-300" />
-                      </div>
-                      <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
-                      <p className="text-sm text-gray-400 leading-relaxed">{feature.description}</p>
-                </div>
-              );
-            })}
-          </div>
-          </div>
-        </div>
-      </section>
-          </div>
+      {/* Case Study Section - Using FeaturedResults from developer marketing agency */}
+      <div
+        style={{
+          background: "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+        }}
+      >
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10"></div>
+        <FeaturedResults />
+      </div>
 
       {/* Shared: Testimonials */}
       <div
@@ -829,7 +974,30 @@ export default function ProductDocumentationPage() {
       >
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10"></div>
         <Testimonials />
+      </div>
+
+      {/* Video Testimonials Section - Using existing component */}
+      <div className="mt-16">
+        <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-12"></div>
+
+        <div
+          className="relative p-16 md:p-20"
+          style={{
+            background: "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 60%)"
+          }}
+        >
+          <div className="flex justify-center">
+            {Videos && Videos.length > 0 ? (
+              <VideoTestimonials className="max-w-6xl" items={Videos} />
+            ) : (
+              <div className="text-center p-8">
+                <div className="text-white text-lg">Video testimonials loading...</div>
+                <div className="text-gray-400 text-sm mt-2">Videos: {Videos ? Videos.length : 'undefined'}</div>
+              </div>
+            )}
           </div>
+        </div>
+      </div>
 
       {/* Shared: CTA Banner */}
       <div

@@ -137,7 +137,7 @@ module.exports = withSentryConfig(
 
     // Only print logs for uploading source maps in CI
     silent: !process.env.CI,
-    
+
     // Disable source map upload if auth token is missing
     authToken: process.env.SENTRY_AUTH_TOKEN || undefined,
     

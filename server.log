@@ -4,75 +4,25 @@
 
    ▲ Next.js 15.5.2
    - Local:        http://localhost:3000
-   - Network:      http://192.168.1.102:3000
+   - Network:      http://192.168.1.108:3000
    - Environments: .env
    - Experiments (use with caution):
      · clientTraceMetadata
 
  ✓ Starting...
  ○ Compiling /instrumentation ...
- ✓ Compiled /instrumentation in 5.1s (1033 modules)
- ✓ Ready in 8.8s
+ ✓ Compiled /instrumentation in 4.4s (1033 modules)
+ ✓ Ready in 8.1s
  ○ Compiling /services/product-documentation ...
 
 🌼   daisyUI 4.12.24
 ├─ ✔︎ 2 themes added		https://daisyui.com/docs/themes
-╰─ ★ Star daisyUI on GitHub	https://github.com/saadeghi/daisyui
+╰─ ❤︎ Support daisyUI project:	https://opencollective.com/daisyui
 
- ✓ Compiled /services/product-documentation in 17.1s (8259 modules)
- ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
-  digest: '3996809970'
-}
- GET /services/product-documentation 500 in 20117ms
- ✓ Compiled in 4.3s (3156 modules)
- ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
-  digest: '3996809970'
-}
- GET /services/product-documentation 500 in 1901ms
-(node:32621) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
-(Use `node --trace-deprecation ...` to show where the warning was created)
- ○ Compiling /favicon.ico ...
- ✓ Compiled /favicon.ico in 2s (5107 modules)
- GET /favicon.ico 200 in 2401ms
- ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
-  digest: '3996809970'
-}
- GET /services/product-documentation 500 in 2663ms
- GET /favicon.ico 200 in 67ms
- ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
-  digest: '3996809970'
-}
- GET /services/product-documentation 500 in 1305ms
- GET /favicon.ico 200 in 82ms
- ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
-  digest: '3996809970'
-}
- GET /services/product-documentation 500 in 1390ms
- GET /favicon.ico 200 in 89ms
- ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
-  digest: '3996809970'
-}
- GET /services/product-documentation 500 in 1371ms
- GET /favicon.ico 200 in 339ms
- ⨯ [Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.] {
-  digest: '3996809970'
-}
- GET /services/product-documentation 500 in 1750ms
- ⚠ Fast Refresh had to perform a full reload due to a runtime error.
- ✓ Compiled in 10.1s (8265 modules)
- GET /favicon.ico 200 in 7613ms
- GET /services/product-documentation 200 in 3700ms
- GET /services/product-documentation 200 in 487ms
+ ✓ Compiled /services/product-documentation in 26s (8291 modules)
  ⚠ The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
- GET /services/product-documentation 200 in 2184ms
- GET /favicon.ico 200 in 1468ms
- ○ Compiling /_not-found ...
- ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
- ✓ Compiled /services/product-documentation in 99s (8546 modules)
- GET /services/product-documentation 404 in 106413ms
- GET /services/product-documentation 200 in 72993ms
- GET /favicon.ico 200 in 183ms
- GET /services/product-documentation 200 in 20165ms
- GET /favicon.ico 200 in 1023ms
- ✓ Compiled in 33.9s (8265 modules)
- GET /services/product-documentation 200 in 2350ms
+ ✓ Compiled in 6.7s (3172 modules)
+ GET /services/product-documentation 200 in 33138ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 47.7s (5123 modules)
+ GET /favicon.ico 200 in 54229ms

@@ -18,33 +18,33 @@ export default function Hero() {
               <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
                 Developer Adoption
               </span>
-            </h1>
-            
+        </h1>
+
             <p className="text-xl text-slate-300 leading-relaxed max-w-2xl">
-              We build SDK, API, CLI, and integration docs that engineers actually use—written by engineers, optimized for growth.
-            </p>
+          We build SDK, API, CLI, and integration docs that engineers actually use—written by engineers, optimized for growth.
+        </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button 
+          <button
                 className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-200 hover:scale-105"
-              >
-                See Example Docs
+          >
+            See Example Docs
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              
-              <button 
+          </button>
+
+          <button
                 className="inline-flex items-center justify-center px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-lg border border-slate-700 hover:border-slate-600 transition-all duration-200"
-              >
-                Book a Docs Audit
-              </button>
-            </div>
+          >
+            Book a Docs Audit
+          </button>
+        </div>
 
             {/* Trust line */}
             <p className="text-sm text-slate-500 font-mono">
-              Built by engineers, not copywriters.
-            </p>
-          </div>
+          Built by engineers, not copywriters.
+        </p>
+      </div>
 
           {/* Right: Visual placeholder - markdown→render animation */}
           <div className="relative">

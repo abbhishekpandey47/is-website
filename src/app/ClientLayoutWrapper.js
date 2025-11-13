@@ -27,14 +27,14 @@ export function ClientLayoutWrapper({ children }) {
       mixpanel.init(process.env.NEXT_PUBLIC_MIXPANEL, {
         autocapture: true, // enable autocapture
         debug: true,
-      });
-      //   mixpanel.identify("USER_ID");
+  });
+    //   mixpanel.identify("USER_ID");
 
-      //   mixpanel.people.set({
-      //     $name: "Jane Doe",
-      //     $email: "jane.doe@example.com",
-      //     plan: "Premium",
-      //   });
+    //   mixpanel.people.set({
+    //     $name: "Jane Doe",
+    //     $email: "jane.doe@example.com",
+    //     plan: "Premium",
+    //   });
     }
   }, [mounted]);
 
@@ -85,26 +85,26 @@ export function ClientLayoutWrapper({ children }) {
           </Appwrap>
         </div>
       ) : (
-        <NextThemesProvider
-          attribute="class"
-          defaultTheme="dark"
+      <NextThemesProvider
+        attribute="class"
+        defaultTheme="dark"
           enableSystem={false}
-          disableTransitionOnChange
-        >
-          <Appwrap>
-            <AntdRegistry>
-              <Loader />
+        disableTransitionOnChange
+      >
+        <Appwrap>
+          <AntdRegistry>
+            <Loader />
 
-              {shouldShowAwardBanner && <AwardBanner />}
+            {shouldShowAwardBanner && <AwardBanner />}
 
-              {shouldShowNavbar && <Navbar />}
+            {shouldShowNavbar && <Navbar />}
 
-              {children}
-              <Analytics />
-              {!hideNavBarAndFooter && <Footer />}
-            </AntdRegistry>
-          </Appwrap>
-        </NextThemesProvider>
+            {children}
+            <Analytics />
+            {!hideNavBarAndFooter && <Footer />}
+          </AntdRegistry>
+        </Appwrap>
+      </NextThemesProvider>
       )}
     </>
   );
