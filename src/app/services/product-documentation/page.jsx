@@ -419,6 +419,26 @@ export default function ProductDocumentationPage() {
                 We're not a content agency. We're an engineering studio for documentation systems — combining technical writing, API testing, information architecture, and developer-first GTM. Every deliverable starts with hands-on product testing. We run your APIs, try your CI flows, explore workflows, and validate SDKs before writing a single sentence. Our docs are built to scale: versioned, CI-tested, consistent, and ready for enterprise adoption — whether you're launching your first docs or rebuilding full documentation stacks.
               </p>
 
+              <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center pt-4">
+                <Link
+                  href="/contact"
+                  className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#00D4FF] to-[#7B61FF] text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(123,97,255,0.4)] text-center"
+                >
+                  See Example Docs
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-[#0E1018]/80 backdrop-blur-md text-white font-semibold rounded-lg border border-[#1E2236] hover:bg-[#0E1018] transition-all duration-300 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)] text-center"
+                >
+                  Book a Docs Audit
+                </Link>
+              </div>
+
+              {/* Trust line */}
+              <p className="text-sm text-gray-500 font-mono">
+                Built by engineers, not copywriters.
+              </p>
             </div>
 
             {/* Right Column: Feature Cards Grid */}
