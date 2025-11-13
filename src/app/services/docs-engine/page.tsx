@@ -208,12 +208,9 @@ export default function DocsEnginePage() {
 
           <div className="mt-12 text-center space-y-4">
             <p className="text-slate-400">Want your docs to look (and perform) like these?</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center">
+            <div className="flex justify-center">
               <Link href="/contact?topic=docs-audit" className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/25 transition-all inline-flex items-center justify-center gap-2">
                 Book a Docs Audit <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link href="#what-we-build" className="px-8 py-3 bg-slate-800/50 text-white font-semibold rounded-lg border border-slate-700 hover:bg-slate-700/50 transition-all">
-                See How We Build Docs
               </Link>
             </div>
           </div>
