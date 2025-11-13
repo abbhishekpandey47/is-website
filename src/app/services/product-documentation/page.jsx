@@ -369,11 +369,11 @@ export default function ProductDocumentationPage() {
               return (
                   <div
                   key={item.id}
-                    className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-6 hover:border-[#7B61FF]/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]"
+                    className="group relative rounded-2xl bg-[#0E1018]/80 backdrop-blur-md border border-[#1E2236] p-6 hover:border-[#00D4FF]/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(0,212,255,0.3)] hover:shadow-[#00D4FF]/20"
                   >
                     {/* Icon in square */}
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#00D4FF]/20 to-[#7B61FF]/20 border border-[#00D4FF]/30 flex items-center justify-center mb-4 group-hover:border-[#00D4FF]/50 transition-colors">
-                      <Icon className="w-6 h-6 text-[#00D4FF]" />
+                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#00D4FF]/20 to-[#7B61FF]/20 border border-[#00D4FF]/30 flex items-center justify-center mb-4 group-hover:border-[#00D4FF]/70 group-hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all duration-300">
+                      <Icon className="w-6 h-6 text-[#00D4FF] group-hover:scale-110 transition-transform duration-300" />
                     </div>
 
                     {/* Metric */}

@@ -27,11 +27,11 @@ export default function ClientInteractive() {
               return (
                 <div
                   key={item.id}
-                  className="group relative rounded-2xl bg-slate-900/50 backdrop-blur border border-slate-800 p-6 hover:border-cyan-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(56,189,248,0.15)]"
+                  className="group relative rounded-2xl bg-slate-900/50 backdrop-blur border border-slate-800 p-6 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-[0_0_40px_rgba(56,189,248,0.3)] hover:shadow-cyan-500/20"
                 >
                   {/* Icon in square */}
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/30 flex items-center justify-center mb-4 group-hover:border-cyan-500/50 transition-colors">
-                    <Icon className="w-6 h-6 text-cyan-400" />
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/30 flex items-center justify-center mb-4 group-hover:border-cyan-500/70 group-hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all duration-300">
+                    <Icon className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform duration-300" />
                   </div>
 
                   {/* Metric */}
