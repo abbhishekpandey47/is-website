@@ -1,22 +1,13 @@
 export const metadata = {
-  title: "Documentation That Drives Developer Adoption | Infrasity Docs Engine",
+  title: "Product Documentation Services | Infrasity",
   description:
-    "We build SDK, API, CLI, and integration docs that engineers actually use — written by engineers, optimized for growth. Trusted by fast-growing AI and DevTool companies.",
+    "Get expert product documentation services that improve clarity, onboarding, and adoption for APIs, SDKs, and integrations, reducing support and boosting growth.",
   keywords:
     "documentation services, SDK documentation, API documentation, CLI documentation, technical writing, developer documentation, docs as code, documentation agency, developer adoption",
-  robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
-  },
   openGraph: {
-    title: "Documentation That Drives Developer Adoption | Infrasity",
+    title: "Product Documentation Services | Infrasity",
     description:
-      "We build SDK, API, CLI, and integration docs that engineers actually use — written by engineers, optimized for growth.",
+      "Get expert product documentation services that improve clarity, onboarding, and adoption for APIs, SDKs, and integrations, reducing support and boosting growth.",
     url: "https://infrasity.com/services/product-documentation",
     type: "website",
     images: [
