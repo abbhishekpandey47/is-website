@@ -7,7 +7,7 @@ import { useRef, useState } from 'react';
 import NewMarquee from '../developer-marketing-agency/marquee';
 import CTA from '../developer-marketing-agency/cta';
 import Testimonials from '../developer-marketing-agency/Testimonial';
-import Showcase from '../../../components/docs/Showcase';
+import Showcase from '../../../Components/docs/Showcase';
 import FeaturedResults from '../developer-marketing-agency/FeaturedResults';
 import VideoTestimonials from '../../playbook/developer-marketing/testimonials';
 import { Videos } from '../../playbook/developer-marketing/videosData';

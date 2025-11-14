@@ -140,6 +140,9 @@ module.exports = withSentryConfig(
 
     // Disable source map upload if auth token is missing
     authToken: process.env.SENTRY_AUTH_TOKEN || undefined,
+
+    // Skip Sentry webpack plugin entirely if no auth token
+    disabled: !process.env.SENTRY_AUTH_TOKEN,
     
     // Don't fail build on missing auth token
     errorHandler: (err, invokeErr, compilation) => {
