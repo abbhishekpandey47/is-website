@@ -58,6 +58,9 @@ This means that investing in ecosystem scaffolding**,** such as SDKs, templates,
 
 ## **The CORE Model: A Framework for Measuring Developer Community Engagement ROI**
 
+**![CORE model of developer community engagement](/PostImages/developer-community-engagement/3.webp)**
+
+
 To quantify how developer community engagement drives growth, let’s use the CORE model. The CORE model, which stands for Contribution, Organic Pipeline Acceleration, Retention, and Ecosystem Expansion, offers a structured way to align developer community engagement with startup growth metrics. It is a framework for how communities generate compounding business value.
 
 ### 1. **C- Contribution Flywheel**
@@ -83,7 +86,7 @@ Your team can track the Repeat contributor rate and the shift of sentiments over
   **Example**: In Reddit, developers debated the practicality of entering the tech field without a degree. This is an analogy for how credibility and access are shaped by community opinion. Similarly, when they criticize a tool’s performance, documentation, or pricing in Reddit threads, that feedback doesn’t stay confined to the platform; it may be visible on SERP.   
   The image below shows how even negative sentiment can rank on SERP.  
 
-  ![reddit, negative sentiment in serp](/PostImages/developer-community-engagement/1.png)
+  **![reddit, negative sentiment in serp](/PostImages/developer-community-engagement/1.webp)**
 
 ### 4. **E- Ecosystem Expansion**
 
@@ -129,7 +132,7 @@ Community discussions often outperform marketing campaigns in credibility and sp
 
 * **Community to LLM & SERP traffic/ visibility:** Identify and monitor referral traffic from Reddit, GitHub, and Discord using GA4.
 
-**![llm and SERP traffic and visibility in GA4](/PostImages/developer-community-engagement/2.png)**
+**![llm and SERP traffic and visibility in GA4](/PostImages/developer-community-engagement/2.webp)**
 
 * Track sentiment health with tools like Awario or Brand24 to gauge authentic community tone.  
 * Evaluate community-to-trial conversion velocity: how quickly new users move from awareness to active product engagement.
@@ -202,8 +205,7 @@ Reddit has also become Lovable’s public knowledge layer, with threads covering
 * “Tried Lovable.dev to Build an App – Here’s the Good, the Weird…”  
 * “When do you use Lovable vs Cursor?”  
 * “Built a Job Application SaaS in One Day using Lovable.dev”
-
-### “The Problem with Lovable”
+* “The Problem with Lovable”
 
 These threads continue to rank for relevant queries like “*Lovable review*, *Lovable alternatives*, *AI app builder*”, creating long-tail SEO lift that Lovable did not engineer but it emerged through community conversation.
 

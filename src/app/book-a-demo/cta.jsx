@@ -578,9 +578,9 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
 
             {/* Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10">
-              <h1 className="text-3xlc text-white text-purple sm:text-3xl md:text-3xl quicksand-bold text-center mb-4">
+              <h2 className="text-3xlc text-white text-purple sm:text-3xl md:text-3xl quicksand-bold text-center mb-4">
                 Trusted by fastest growing B2B SaaS Startups.
-              </h1>
+              </h2>
               <p className="text-m text-white md:text-lg quicksand-medium text-gray text-center max-w-2xl mb-8">
                 Trusted by YC startups. Built for developer-first companies.
               </p>
