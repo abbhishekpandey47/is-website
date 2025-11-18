@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 import { DatePicker } from "antd";
 const { RangePicker } = DatePicker;
 
-import { BarChart3, ExternalLink, Plus, Search } from "lucide-react";
+import { BarChart3, ExternalLink, Plus, Search, Download, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
 import { toast } from "react-toastify";
 
 import { SidebarTrigger } from "../../Components/ui/sidebar";
@@ -50,7 +50,6 @@ import { UserProfile } from "../../Components/UserProfile";
 import { HoverTextCell } from "./components/HoverTextCell";
 
 const PAGE_SIZE = 10;
-
 const PostsPage = () => {
   const router = useRouter();
   const [firebaseUser, setFirebaseUser] = useState(null);
@@ -69,6 +68,10 @@ const PostsPage = () => {
 
   // NEW: date range (dayjs objects or null)
   const [dateRange, setDateRange] = useState([null, null]);
+
+  // Sorting state
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -129,13 +132,16 @@ const PostsPage = () => {
     dateRange,
   ]);
 
+  const testCompanies = ['perplexity', 'spacelift', 'akgec'];
   const companies = [
     { id: "select", name: "Select Company" },
     { id: "all", name: "All Companies" },
-    ...companiesList.map((company) => ({
-      id: company.id,
-      name: company.name,
-    })),
+    ...companiesList
+      .filter((company) => !testCompanies.includes(company.name.toLowerCase()))
+      .map((company) => ({
+        id: company.id,
+        name: company.name,
+      })),
   ];
 
   const categories = [
@@ -272,14 +278,196 @@ const PostsPage = () => {
   };
   const statusCnt = getStatusCounts();
 
+  // Handle column header click for sorting
+  const handleSort = (field) => {
+    if (sortField === field) {
+      // Toggle direction if clicking same field
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      // Set new field and reset to ascending
+      setSortField(field);
+      setSortDirection("asc");
+    }
+  };
+
+  // Sort filtered items
+  const sortedItems = [...filteredItems].sort((a, b) => {
+    if (!sortField) return 0;
+
+    let aValue = a[sortField];
+    let bValue = b[sortField];
+
+    // Special handling for date fields
+    if (sortField === "date_posted" || sortField.includes("date")) {
+      aValue = aValue ? new Date(aValue).getTime() : 0;
+      bValue = bValue ? new Date(bValue).getTime() : 0;
+    }
+    // Special handling for numeric fields
+    else if (sortField === "total_views") {
+      aValue = aValue ?? 0;
+      bValue = bValue ?? 0;
+    }
+    // Handle null/undefined values for strings
+    else {
+      if (aValue == null) aValue = "";
+      if (bValue == null) bValue = "";
+
+      // Convert to lowercase for case-insensitive sorting
+      if (typeof aValue === "string") aValue = aValue.toLowerCase();
+      if (typeof bValue === "string") bValue = bValue.toLowerCase();
+    }
+
+    // Compare values
+    if (aValue < bValue) return sortDirection === "asc" ? -1 : 1;
+    if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
+    return 0;
+  });
+
   // Pagination
-  const totalPages = Math.ceil(filteredItems.length / PAGE_SIZE);
-  const paginatedItems = filteredItems.slice(
+  const totalPages = Math.ceil(sortedItems.length / PAGE_SIZE);
+  const paginatedItems = sortedItems.slice(
     (currentPage - 1) * PAGE_SIZE,
     currentPage * PAGE_SIZE
   );
 
   const handlePageChange = (page) => setCurrentPage(page);
+
+  // Helper component for sortable table headers
+  const SortableHeader = ({ field, children }) => {
+    const isActive = sortField === field;
+    return (
+      <TableHead
+        className="cursor-pointer select-none hover:bg-muted/50"
+        onClick={() => handleSort(field)}
+      >
+        <div className="flex items-center gap-1">
+          {children}
+          {isActive ? (
+            sortDirection === "asc" ? (
+              <ArrowUp className="h-4 w-4" />
+            ) : (
+              <ArrowDown className="h-4 w-4" />
+            )
+          ) : (
+            <ArrowUpDown className="h-4 w-4 opacity-50" />
+          )}
+        </div>
+      </TableHead>
+    );
+  };
+
+  // Export handler
+  const [exporting, setExporting] = useState(false);
+
+  const handleExport = async (format) => {
+    if (filteredItems.length === 0) {
+      toast.error("No data to export. Please adjust your filters.");
+      return;
+    }
+
+    if (filteredItems.length > 10000) {
+      toast.error(`Export limit exceeded. Maximum 10,000 rows allowed. Please narrow your filters. (Current: ${filteredItems.length} rows)`);
+      return;
+    }
+
+    // Validate date range if partially set
+    const hasStartDate = dateRange?.[0] !== null && dateRange?.[0] !== undefined;
+    const hasEndDate = dateRange?.[1] !== null && dateRange?.[1] !== undefined;
+
+    if (hasStartDate && !hasEndDate) {
+      toast.error("Please select both start and end date, or clear the date range.");
+      return;
+    }
+
+    if (!hasStartDate && hasEndDate) {
+      toast.error("Please select both start and end date, or clear the date range.");
+      return;
+    }
+
+    if (hasStartDate && hasEndDate) {
+      const startDate = dateRange[0];
+      const endDate = dateRange[1];
+      if (startDate.isAfter(endDate)) {
+        toast.error("Start date cannot be after end date.");
+        return;
+      }
+    }
+
+    setExporting(true);
+    try {
+      const token = await firebaseUser.getIdToken();
+      
+      // Build query parameters using the new API param names
+      const params = new URLSearchParams({
+        format,
+        // Only include type if not "all"
+        ...(selectedType && selectedType !== "all" ? { type: selectedType } : {}),
+        category: selectedCategory === "select" ? "" : (selectedCategory || ""),
+        status: selectedStatus === "all" ? "" : (selectedStatus || ""),
+        companyId: selectedCompanyId === "select" ? "" : (selectedCompanyId === "all" ? "" : (selectedCompanyId || "")),
+        search: searchQuery || "",
+      });
+
+      // Add date range only if both dates are present and valid
+      if (hasStartDate && hasEndDate) {
+        params.append("startDate", dateRange[0].format("YYYY-MM-DD"));
+        params.append("endDate", dateRange[1].format("YYYY-MM-DD"));
+      }
+
+      const finalUrl = `/api/engagement/export?${params.toString()}`;
+      
+      // [QA] Log export parameters for validation
+      console.log("[QA] Export params", {
+        format,
+        type: selectedType,
+        companyId: selectedCompanyId,
+        category: selectedCategory,
+        search: searchQuery,
+        status: selectedStatus,
+        startDate: hasStartDate ? dateRange[0].format("YYYY-MM-DD") : null,
+        endDate: hasEndDate ? dateRange[1].format("YYYY-MM-DD") : null,
+        finalUrl,
+        paramsString: params.toString(),
+      });
+
+      const response = await fetch(finalUrl, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({ error: "Export failed" }));
+        throw new Error(error.error || `Export failed: ${response.statusText}`);
+      }
+
+      // Get filename from Content-Disposition header or use default
+      const contentDisposition = response.headers.get("Content-Disposition");
+      let filename = `engagement-export-${new Date().toISOString().split("T")[0]}.${format}`;
+      if (contentDisposition) {
+        const filenameMatch = contentDisposition.match(/filename="?([^"]+)"?/);
+        if (filenameMatch) {
+          filename = filenameMatch[1];
+        }
+      }
+
+      // Get blob and trigger download
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      toast.success(`Export completed: ${filename}`);
+    } catch (error) {
+      console.error("Export error:", error);
+      toast.error(error.message || "Failed to export data");
+    } finally {
+      setExporting(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -350,7 +538,6 @@ const PostsPage = () => {
           <StatusCard status="underApproval" count={statusCnt.underApproval} label="Under Approval" />
           <StatusCard status="removed" count={statusCnt.removed} label="Removed" />
         </div>
-
         {/* Filters */}
         <Card className="mb-6">
           <CardContent className="p-6">
@@ -387,7 +574,9 @@ const PostsPage = () => {
                   {[
                     { id: "select", name: "Select Company" },
                     { id: "all", name: "All Companies" },
-                    ...companiesList.map((c) => ({ id: c.id, name: c.name })),
+                    ...companiesList
+                      .filter((c) => !testCompanies.includes(c.name.toLowerCase()))
+                      .map((c) => ({ id: c.id, name: c.name })),
                   ].map((company) => (
                     <SelectItem key={company.id} value={company.id}>
                       {company.name}
@@ -418,9 +607,8 @@ const PostsPage = () => {
               <RangePicker
                 value={dateRange}
                 className="dark-range-picker"
-                popupClassName="dark-range-picker-dropdown"
+  popupClassName="dark-range-picker-dropdown"
                 onChange={(vals) => setDateRange(vals || [null, null])}
-                placeholder={["Start Date", "End Date"]}
                 allowClear
                 format="YYYY-MM-DD"
                 presets={[
@@ -455,6 +643,28 @@ const PostsPage = () => {
                   },
                 ]}
               />
+
+              {/* Export Button */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    disabled={exporting || filteredItems.length === 0}
+                    className="flex items-center gap-2"
+                  >
+                    <Download className="h-4 w-4" />
+                    {exporting ? "Exporting..." : "Export"}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => handleExport("csv")} disabled={exporting}>
+                    Export as CSV
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleExport("xlsx")} disabled={exporting}>
+                    Export as Excel
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
               {/* If you also want a separate 'Status' filter, uncomment below */}
               {/*
@@ -496,8 +706,8 @@ const PostsPage = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    {selectedType === "all" && <TableHead>Type</TableHead>}
-                    <TableHead>Category</TableHead>
+                    {selectedType === "all" && <SortableHeader field="type">Type</SortableHeader>}
+                    <SortableHeader field="category">Category</SortableHeader>
 
                     {selectedType === "post" && (
                       <>
