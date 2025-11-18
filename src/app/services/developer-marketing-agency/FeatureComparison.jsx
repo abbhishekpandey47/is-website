@@ -87,7 +87,7 @@ const afterItems = [
   strokeLinecap="round"
   strokeLinejoin="round"
   className="w-5 h-5"
-><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Blog and SEO content consistent and compounding" },
+><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" strokeLinecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Blog and SEO content consistent and compounding" },
   { icon: <Sparkles className="w-5 h-5 stroke-green-400" />, text: "Founder narrative translated into developer facing stories" },
   { icon: <svg
   xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,7 @@ const afterItems = [
   strokeLinecap="round"
   strokeLinejoin="round"
   className="w-5 h-5"
-><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Credible presence on Reddit, GitHub, and dev communities" },
+><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" strokeLinecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Credible presence on Reddit, GitHub, and dev communities" },
   { icon: <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 18 18"
@@ -108,7 +108,7 @@ const afterItems = [
   strokeLinecap="round"
   strokeLinejoin="round"
   className="w-5 h-5"
-><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Engineers stay focused on building features" },
+><path d="M 7.5 13.244 L 7.5 15 C 7.5 15.828 8.172 16.5 9 16.5 C 9.828 16.5 10.5 15.828 10.5 15 L 10.5 13.244 M 9 1.5 L 9 2.25 M 2.25 9 L 1.5 9 M 4.125 4.125 L 3.675 3.675 M 13.875 4.125 L 14.325 3.675 M 16.5 9 L 15.75 9 M 13.5 9 C 13.5 11.485 11.485 13.5 9 13.5 C 6.515 13.5 4.5 11.485 4.5 9 C 4.5 6.515 6.515 4.5 9 4.5 C 11.485 4.5 13.5 6.515 13.5 9 Z" fill="transparent" stroke-width="1.5" stroke="var(--token-6da957cc-090e-4d1c-9dc0-fb2970f18968, rgb(40, 184, 84))" strokeLinecap="round" stroke-linejoin="round" stroke-dasharray=""/></svg>, text: "Engineers stay focused on building features" },
 ];
 
 export default function FeatureComparison() {

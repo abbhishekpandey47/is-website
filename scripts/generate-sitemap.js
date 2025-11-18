@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
 const path = require('path');
-const glob = require('glob');
+const fg = require('fast-glob');
 
 // Run next-sitemap to generate the sitemap
 try {
@@ -132,7 +132,7 @@ function collectContent() {
     try {
       if (fs.existsSync(postsDir)) {
         // Check for .md files
-        const mdFiles = glob.sync('**/*.md', { cwd: postsDir });
+        const mdFiles = fg.sync('**/*.md', { cwd: postsDir });
         console.log(`Found ${mdFiles.length} .md files`);
 
         mdFiles.forEach(file => {
@@ -151,7 +151,7 @@ function collectContent() {
         });
 
         // Also check for .mdx files
-        const mdxFiles = glob.sync('**/*.mdx', { cwd: postsDir });
+        const mdxFiles = fg.sync('**/*.mdx', { cwd: postsDir });
         console.log(`Found ${mdxFiles.length} .mdx files`);
 
         mdxFiles.forEach(file => {

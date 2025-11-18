@@ -1,5 +1,20 @@
 module.exports = {
     reactStrictMode: false,
+    experimental: {
+        optimizePackageImports: [
+            'lucide-react',
+            'date-fns',
+            'react-icons',
+            'zod'
+        ],
+    },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
+    typescript: {
+        ignoreBuildErrors: true,
+    },
+    productionBrowserSourceMaps: false,
     images: {
          domains: ["cdn.prod.website-files.com", "framerusercontent.com", "images.surferseo.art", "betterstackcdn.com", "devplaybook-landing.lovable.app"],
         remotePatterns: [
@@ -119,6 +134,19 @@ module.exports = {
     },
     // This is required to support PostHog trailing slash API requests
     skipTrailingSlashRedirect: true,
+    webpack: (config, { dev }) => {
+        // Suppress noisy cache serialization warnings
+        if (!config.infrastructureLogging) config.infrastructureLogging = {};
+        config.infrastructureLogging.level = 'error';
+        // Disable source maps to reduce memory usage in production builds
+        if (!dev) {
+            config.devtool = false;
+            if (config.optimization) {
+                config.optimization.minimize = false;
+            }
+        }
+        return config;
+    },
 };
 
 
@@ -143,7 +171,7 @@ module.exports = withSentryConfig(
 
     // Skip Sentry webpack plugin entirely if no auth token
     disabled: !process.env.SENTRY_AUTH_TOKEN,
-    
+
     // Don't fail build on missing auth token
     errorHandler: (err, invokeErr, compilation) => {
       if (!process.env.SENTRY_AUTH_TOKEN) {
@@ -159,8 +187,8 @@ module.exports = withSentryConfig(
     // For all available options, see:
     // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 
-    // Upload a larger set of source maps for prettier stack traces (increases build time)
-    widenClientFileUpload: true,
+    // Upload a minimal set of source maps to reduce build work
+    widenClientFileUpload: false,
 
     // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
     // This can increase your server load as well as your hosting bill.

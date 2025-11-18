@@ -4,7 +4,7 @@ export default function EditIcon() {
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
       <g
         id="SVGRepo_tracerCarrier"
-        stroke-linecap="round"
+        strokeLinecap="round"
         stroke-linejoin="round"
       ></g>
       <g id="SVGRepo_iconCarrier">
@@ -20,7 +20,7 @@ export default function EditIcon() {
                 d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
                 fill="none"
                 stroke="#5551ff"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               ></path>{" "}
@@ -28,7 +28,7 @@ export default function EditIcon() {
                 fill="none"
                 points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
                 stroke="#5551ff"
-                stroke-linecap="round"
+                strokeLinecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
               ></polygon>{" "}
