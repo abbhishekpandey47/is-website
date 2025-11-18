@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image';
-import React, { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 const FeatureCards = () => {
   const cards = [
@@ -44,7 +44,7 @@ const FeatureCards = () => {
       <Pill label="Explainer" iconUrl="https://framerusercontent.com/images/eFYSSb2rsQ20Xy4Zw3hXmHafiMs.png" />
       <Pill label="Integration Example" iconUrl="https://framerusercontent.com/images/3NHXgLzpd82ROkKyt6peYL6OFhs.svg" />
       <Pill label="SDK Docs" iconUrl="https://framerusercontent.com/images/6hAErI1Rk4yOzvuhtIqtiYkGQ.png" />
-  
+
            </div>
 
       {/* Enhanced Black Fade-out overlay */}
@@ -462,7 +462,7 @@ const DarkPipedreamDiagram = () => {
 
  <svg className="w-32 h-20" viewBox="0 0 115 80" xmlns="http://www.w3.org/2000/svg">
  <g transform="translate(0 39.95)">
- <path class="dashed-line" d="M 0 0 L 115 0" fill="transparent" stroke="rgb(255, 255, 255)" strokeDasharray="9.2 9.2" stroke-linecap="butt" stroke-width="1" />
+ <path className="dashed-line" d="M 0 0 L 115 0" fill="transparent" stroke="rgb(255, 255, 255)" strokeDasharray="9.2 9.2" strokeLinecap="butt" stroke-width="1" />
  </g>
  </svg>
 
@@ -477,18 +477,18 @@ Infrasity
 <svg className="w-[120px] h-32" viewBox="0 0 130 183" xmlns="http://www.w3.org/2000/svg">
   <g>
     <path
-      d="M 0 93.759 L 0.504 93.645 L 39.972 93.712 
-         C 55.146 93.738 67.461 81.444 67.461 66.27 
-         L 67.461 34.302 
+      d="M 0 93.759 L 0.504 93.645 L 39.972 93.712
+         C 55.146 93.738 67.461 81.444 67.461 66.27
+         L 67.461 34.302
          C 67.461 15.358 82.818 0 109.763 0"
       fill="transparent"
       stroke="rgb(198 39 255)"
       strokeWidth="2"
     />
     <path
-      d="M 0 93.759 L 0.504 93.645 L 40.066 93.712 
-         C 55.203 93.738 67.461 106.017 67.461 121.154 
-         L 67.461 144.069 
+      d="M 0 93.759 L 0.504 93.645 L 40.066 93.712
+         C 55.203 93.738 67.461 106.017 67.461 121.154
+         L 67.461 144.069
          C 67.461 163.013 82.818 178.371 109.763 178.371"
       fill="transparent"
       stroke="rgb(198 39 255)"

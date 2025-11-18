@@ -1,19 +1,18 @@
 import fs from "fs";
-import path from "path";
-import Markdown from "markdown-to-jsx";
 import matter from "gray-matter";
-import { notFound, redirect } from "next/navigation";
-import postMetaData from "../../../../posts/_postMetadata";
-import Outline from "./outline";
-import HeadBanner from "./headBanner";
-import BookDemo from "../../book-a-demo/cta";
-import Featured from "./featured";
-import authorMetadata from "../../../../posts/_authorData";
-import NotFound from "./NotFound";
-import Image from "next/image";
-import CTA2 from "./cta2";
-import CTA from "./cta"
+import Markdown from "markdown-to-jsx";
 import Head from "next/head";
+import Image from "next/image";
+import { notFound, redirect } from "next/navigation";
+import path from "path";
+import authorMetadata from "../../../../posts/_authorData";
+import postMetaData from "../../../../posts/_postMetadata";
+import BookDemo from "../../book-a-demo/cta";
+import CTA from "./cta";
+import CTA2 from "./cta2";
+import Featured from "./featured";
+import HeadBanner from "./headBanner";
+import Outline from "./outline";
 
 
 
@@ -351,14 +350,14 @@ if (inFAQ && currentQuestion && currentAnswer) {
                               const totalHeadings = headingLines.length;
 
                               let ctaToShow = null;
-                              const newCta = headingLines.find(line => line.toLowerCase().startsWith("## cta"));
-                              // Fix: Only call split if headingText is a string and defined
-                              let customCTA = false;
-                              if (typeof headingText === "string" && headingText) {
-                                customCTA = headingText.split(':')[0].trim().toLowerCase() === "cta";
-                              }
-                              // console.log("test",headingIndex,headingText, children, headingLines, newCta)
-                              if(!newCta){
+                              const newCta = headingLines.find((line) =>
+                                typeof line === 'string' && line.toLowerCase().startsWith("## cta")
+                              );
+                              const customCTA =
+                                typeof headingText === 'string' &&
+                                headingText.split(":")[0].trim().toLowerCase() === "cta";
+
+                              if (!newCta) {
                                 if (headingIndex === 2) {
                                   ctaToShow = "first";
                                 }
@@ -381,13 +380,17 @@ if (inFAQ && currentQuestion && currentAnswer) {
                                   )}
                                   {customCTA ? (
                                     <div className="my-8 mb-10">
-                                      <CTA
-                                        text={
-                                          typeof headingText === "string" && headingText.includes(":")
-                                            ? headingText.split(":")[1]?.trim() || "Tired of wasting engineering time on content?"
-                                            : "Tired of wasting engineering time on content?"
-                                        }
-                                      />
+                                      {(() => {
+                                        const source = (typeof headingText === 'string' && headingText.includes(':'))
+                                          ? headingText
+                                          : (typeof newCta === 'string' ? newCta : '');
+                                        const textValue = source.split(":")[1]?.trim();
+                                        return (
+                                          <CTA
+                                            text={ textValue || "Tired of wasting engineering time on content?" }
+                                          />
+                                        );
+                                      })()}
                                     </div>
                                   ) : (
                                     <h2
@@ -443,7 +446,7 @@ if (inFAQ && currentQuestion && currentAnswer) {
                                   return false;
                                 }
                               };
-                          
+
 
                               if (isBase64 || !isValidUrl(src)) {
 
