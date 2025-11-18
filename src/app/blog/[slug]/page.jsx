@@ -330,7 +330,7 @@ if (inFAQ && currentQuestion && currentAnswer) {
             </div>
             <div className="w-[40%] min-[1900px]:w-[80%] max-lg:w-[60%] max-md:w-[70%] pt-2 lg:pt-15 flex justify-center flex-col items-start lg:ml-10">
               <article className="text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto">
-                <div className="max-lg:w-[84vw] min-[1900px]:w-[45vw] max-[1537px]:w-[50vw] overflow-scroll">
+                <div className="max-lg:w-[84vw] min-[1900px]:w-[45vw] max-[1537px]:w-[50vw]">
                   <Markdown
                     options={{
                       overrides: {
@@ -351,26 +351,22 @@ if (inFAQ && currentQuestion && currentAnswer) {
                               const totalHeadings = headingLines.length;
 
                               let ctaToShow = null;
-                              const newCta = headingLines.find((line) =>
-                                line.toLowerCase().startsWith("## cta")
-                              );
-                              const customCTA =
-                                headingText
-                                  .split(":")[0]
-                                  .trim()
-                                  .toLowerCase() === "cta";
-
-                              if (!newCta) {
+                              const newCta = headingLines.find(line => line.toLowerCase().startsWith("## cta"));
+                              // Fix: Only call split if headingText is a string and defined
+                              let customCTA = false;
+                              if (typeof headingText === "string" && headingText) {
+                                customCTA = headingText.split(':')[0].trim().toLowerCase() === "cta";
+                              }
+                              // console.log("test",headingIndex,headingText, children, headingLines, newCta)
+                              if(!newCta){
                                 if (headingIndex === 2) {
                                   ctaToShow = "first";
-                                } else if (
-                                  totalHeadings > 4 &&
-                                  headingIndex === totalHeadings - 2
-                                ) {
+                                }
+                                else if (totalHeadings > 4 && headingIndex === totalHeadings - 2) {
                                   ctaToShow = "second";
                                 }
                               }
-                          
+
                               return (
                                 <>
                                   {ctaToShow === "first" && (
@@ -387,8 +383,9 @@ if (inFAQ && currentQuestion && currentAnswer) {
                                     <div className="my-8 mb-10">
                                       <CTA
                                         text={
-                                          newCta.split(":")[1]?.trim() ||
-                                          "Tired of wasting engineering time on content?"
+                                          typeof headingText === "string" && headingText.includes(":")
+                                            ? headingText.split(":")[1]?.trim() || "Tired of wasting engineering time on content?"
+                                            : "Tired of wasting engineering time on content?"
                                         }
                                       />
                                     </div>
@@ -406,7 +403,6 @@ if (inFAQ && currentQuestion && currentAnswer) {
                               console.error("Error in h2 component:", error);
                               return <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">{children}</h2>;
                             }
-
                           },
                         },
                         p:{
