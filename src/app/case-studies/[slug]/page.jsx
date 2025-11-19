@@ -13,6 +13,7 @@ import Analytics from "./analytics";
 import VideoTestimonials from "./testimonials";
 import MoreCaseStudies from "../../../Components/MoreCaseStudies";
 import CTA from "../../../Components/CTA/CTA";
+import CustomCTA from "./cta";
 import CaseStudyLayout from "./CaseStudyLayout";
 import CaseStudySidebar from "./CaseStudySidebar";
 import { Videos, TerrateamVideos } from "./_videoData";
@@ -207,6 +208,58 @@ const PostPage = (props) => {
                           );
                         },
                       },
+                        h2: {
+                                                component: ({ children, ...props }) => {
+                                                  try {
+                                                    const headingText =
+                                                      typeof children === "string"
+                                                        ? children
+                                                        : Array.isArray(children)
+                                                          ? children[0]?.props?.children[0] || children[0]
+                                                          : "";
+                                                   
+                      
+                                                    let ctaToShow = null;
+                                                    const newCta = headingText === 'string' && headingText.toLowerCase().startsWith("## cta")
+                                                    const customCTA =
+                                                      typeof headingText === 'string' &&
+                                                      headingText.split(":")[0].trim().toLowerCase() === "cta";
+                      
+                                                   
+                      
+                                                    return (
+                                                      <>
+                                              
+                                                        {customCTA ? (
+                                                          <div className="my-8 mb-10">
+                                                            {(() => {
+                                                              const source = (typeof headingText === 'string' && headingText.includes(':'))
+                                                                ? headingText
+                                                                : (typeof newCta === 'string' ? newCta : '');
+                                                              const textValue = source.split(":")[1]?.trim();
+                                                              return (
+                                                                <CustomCTA
+                                                                  text={ textValue || "Tired of wasting engineering time on content?" }
+                                                                />
+                                                              );
+                                                            })()}
+                                                          </div>
+                                                        ) : (
+                                                          <h2
+                                                            {...props}
+                                                            className="mt-10 mb-4 text-2xl font-bold"
+                                                          >
+                                                            {children}
+                                                          </h2>
+                                                        )}
+                                                      </>
+                                                    );
+                                                  } catch (error) {
+                                                    console.error("Error in h2 component:", error);
+                                                    return <h2 {...props} className="mt-10 mb-4 text-2xl font-bold">{children}</h2>;
+                                                  }
+                                                },
+                                              },
                     },
                   }}
                 >
