@@ -199,6 +199,10 @@ const menuLinksArrServices = [
     hrefLink: "/services/reddit-marketing-services",
     menuName: "Reddit Marketing Services",
   },
+  {
+    hrefLink: "/services/product-documentation",
+    menuName: "Product Documentation",
+  },
 ];
 
 
@@ -460,6 +464,27 @@ const Navbar = () => {
                             }
                           >
                             <div>Reddit Marketing Services</div>
+                          </Link>
+                        </MenuItem2>
+                          <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick(
+                                "/services/product-documentation"
+                              );
+                            }}
+                            href="/services/product-documentation"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/services/product-documentation".includes(
+                                "http"
+                              )
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>Product Documentation</div>
                           </Link>
                         </MenuItem2>
                       </div>
