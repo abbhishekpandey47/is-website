@@ -1269,6 +1269,18 @@ let postMetaData = [
   category: "Informational",
   metaDescription: "Learn how to optimize content for AI search engines like ChatGPT & Perplexity using AEO, structured data, and authority signals. Click the link to learn now."
 },
+ {
+  title: "How Infrasity Helped the Leading Cost Optimization Platform Boost Customer Retention Through Product Documentation",
+  metatitle: "How Better Product Documentation Improved Retention & Adoption",
+  slug: "case-study-product-documentation",
+  description:"This case study breaks down how Infrasity partnered with DevZero, one of the fastest-growing Kubernetes cost optimization platforms, to rebuild their entire onboarding and documentation experience from the ground up. By creating practical quick-start templates, how to guides, developer-centric video walkthroughs, and a fully restructured documentation system, Infrasity helped DevZero dramatically reduce onboarding friction, and improve customer retention.",
+  ogImage: "/PostImages/case-study-product-documentation/0.webp",
+  publishedOn: "2025-11-19",
+  authorId: "author0005",
+  category: "Case Studies",
+  metaDescription:
+    "Learn how Infraisty helped cost optimization platform improve adoption through better docs, how-to guides & templates. Want to boost your product’s growth? Book a call.",
+},
 ];
 
 const sorted = () => {
