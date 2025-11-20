@@ -45,7 +45,7 @@ const monthArr = [
 
 const CardDiv = React.memo(({ card }) => (
   <Link href={`/case-studies/${card.slug}`} className="">
-    <div className="hover:shadow-2xl hover:scale-105 max-sm:w-72 transition-all duration-200 cursor-pointer card w-96 h-[500px] max-sm:h-[550px] shadow-2xl rounded-md border-[#999] border-2 relative">
+    <div className="hover:shadow-2xl hover:scale-105 max-sm:w-72 transition-all duration-200 cursor-pointer card w-96 h-[540px] max-sm:h-[600px] shadow-2xl rounded-md border-[#999] border-2 relative">
       <div className="p-3">
         <figure className="pb-5">
           <Image
@@ -75,7 +75,7 @@ const CardDiv = React.memo(({ card }) => (
               ? `${card.description.slice(0, 80).trim()} . . .`
               : card.description}
           </p>
-          <div className="flex items-center gap-2 absolute bottom-3">
+          <div className="flex items-center gap-2 absolute bottom-3 my-4">
             <Image
               className="rounded-full"
               src={card.authorImage || "/svgPatterns/profile.svg"}
