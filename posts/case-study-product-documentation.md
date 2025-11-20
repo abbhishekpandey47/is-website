@@ -186,8 +186,7 @@ This session helped position DevZero not just as a product, but as a forward-thi
 Yes, the collaboration between DevZero and Infrasity resulted in a complete transformation of the platform’s developer onboarding experience. Infrasity’s approach to the pain points faced by DevZero resulted in:
 
 * Faster developer onboarding  
-* Increased customer retention  
-* 14.57% increase in active users from  7,367 to 8,440 visitors  
+* Increased developer engagement and increased 14.57% in active users from 7,367 to 8,440 visitors
 * Comparatively fewer onboarding support tickets  
 * Increased engagement with templates in the span of 3 months.
 
