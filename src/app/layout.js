@@ -1,5 +1,6 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
 import * as Sentry from '@sentry/nextjs';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import Script from 'next/script';
 import AlternateLinks from './AlternateLinks';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
@@ -213,20 +214,20 @@ export default function RootLayout({ children }) {
     </Script>
               {/*leadFeeder Tracker*/}
        <Script id="leadfeeder-tracker" strategy="afterInteractive">
-          {`(function(ss,ex){ 
-              window.ldfdr = window.ldfdr || function(){ 
-                  (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments)); 
-              }; 
-              (function(d,s){ 
-                  var fs = d.getElementsByTagName(s)[0]; 
-                  function ce(src){ 
-                      var cs = d.createElement(s); 
-                      cs.src = src; 
-                      cs.async = 1; 
-                      fs.parentNode.insertBefore(cs, fs); 
-                  }; 
-                  ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js'); 
-              })(document,'script'); 
+          {`(function(ss,ex){
+              window.ldfdr = window.ldfdr || function(){
+                  (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments));
+              };
+              (function(d,s){
+                  var fs = d.getElementsByTagName(s)[0];
+                  function ce(src){
+                      var cs = d.createElement(s);
+                      cs.src = src;
+                      cs.async = 1;
+                      fs.parentNode.insertBefore(cs, fs);
+                  };
+                  ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js');
+              })(document,'script');
           })('Xbp1oaElvlk4EdVj');`}
         </Script>
 
@@ -247,6 +248,7 @@ export default function RootLayout({ children }) {
                     ></iframe>
                 </noscript>
                 <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+                <SpeedInsights />
             </body>
         </html>
     );
