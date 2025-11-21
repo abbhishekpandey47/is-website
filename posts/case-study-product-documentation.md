@@ -10,8 +10,6 @@ DevZero has also earned recognition for its technical innovation and developer-f
 
 This case study examines how DevZero, partnered with Infraisty, rebuilt their onboarding journey using starter templates, how to guides, and a complete overhaul of their product documentation that reflects their new positioning, which ultimately increased monthly active visitors and accelerated developer adoption.
 
-## CTA : Turn Your Product Documentation Into a Growth Engine
-
 ## **Initial Challenges DevZero Faced** 
 
 ![Initial Challenges DevZero Faced](/PostImages/case-study-product-documentation/1.webp)
@@ -56,6 +54,8 @@ DevZero did offer core product documentation to its users, but it had some issue
 * No progression path for learning DevZero from zero to expert
 
 Much of the product documentation assumed the user already understood Kubernetes abstractions, microVM isolation, DevZero’s compute model, and environment orchestration. This assumption widened the gap between DevZero’s potential and developers’ actual understanding.
+
+## CTA : Turn Your Product Documentation Into a Growth Engine
 
 ## **Why Did DevZero Collaborate With Infrasity?**
 
@@ -174,6 +174,8 @@ To fix this, Infrasity produced clear, example-driven documentation that showed 
 Debosmit Ray, **Co-Founder of DevZero**
 
 ## **When Founders Talk: Infrasity X DevZero**
+
+[![Watch the video](/PostImages/case-study-product-documentation/video.webp)](https://www.youtube.com/watch?v=GTMEKQIM84I)
 
 In a featured [video conversation,](https://www.youtube.com/watch?v=GTMEKQIM84I) Shantanu, Founder of Infrasity and Debosmit Ray, Co-founder & CEO of DevZero, explored the deeper engineering problems DevZero solves, ranging from the limitations of traditional development environments to the evolving role of platform engineering, SRE, and DevOps.
 

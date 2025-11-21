@@ -776,10 +776,9 @@ let postMetaData = [
         ogImage: "/PostImages/poor-documentation/pd1.jpg",
         publishedOn: "2025-05-21",
         authorId: "author0004",
-        category: "Informational",
+        category: "Product Documentation",
         metaDescription: "No matter how innovative your SaaS product is, poor documentation can impact the sales and revenue. Explore the four red flags of poor documentation here."
     },
-
     {
         title: "Content Marketing ROI: The Growth Lever Most SaaS Teams Undervalue",
         metatitle: "Content Marketing ROI: A Metric Every SaaS CMO Should Track",
@@ -836,7 +835,7 @@ let postMetaData = [
         ogImage: "/PostImages/technical-product-documentation/tp1.png",
         publishedOn: "2025-06-05",
         authorId: "author0004",
-        category: "Informational",
+        category: "Product Documentation",
         metaDescription: "It's time to leverage one of the most versatile assets - technical product documentation, for B2B SaaS startups. Why? Read the article to find out!"
     },
 
@@ -1280,6 +1279,18 @@ let postMetaData = [
   category: "Case Studies",
   metaDescription:
     "Learn how Infraisty helped cost optimization platform improve adoption through better docs, how-to guides & templates. Want to boost your product’s growth? Book a call.",
+},
+ {
+  title: "Product Documentation Best Practices: With Developer-Focused Real World Examples",
+  metatitle: "Product Documentation Best Practices in 2025 | Infrasity ",
+  slug: "product-documentation-best-practices",
+  description:"This blog breaks down the essential product documentation best practices that high-performing DevTools and SaaS teams rely on to accelerate onboarding, increase activation, and reduce support load. Through real-world examples from companies like Vercel, Supabase, Stripe, GitHub, and HashiCorp, you’ll learn how documentation maturity directly drives product adoption and long-term retention. If you want your product documentation to become a competitive advantage rather than a maintenance burden, this guide is your blueprint.",
+  ogImage: "/PostImages/case-study-product-documentation/0.webp",
+  publishedOn: "2025-11-21",
+  authorId: "author0005",
+  category: "Product Documentation",
+  metaDescription:
+    "Learn the best practices for developer focused product documentation with real examples. Improve onboarding, activation, and adoption. Click the link to read the guide now.",
 },
 ];
 
