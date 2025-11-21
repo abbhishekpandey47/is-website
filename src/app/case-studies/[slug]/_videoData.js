@@ -35,4 +35,3 @@ export const TerrateamVideos = [
     videoUrl: "https://youtube.com/shorts/zq4ga3BbbGU?si=1NTay8-ss830v9fb",
   }
 ];
-

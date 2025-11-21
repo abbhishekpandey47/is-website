@@ -17,6 +17,8 @@ import CustomCTA from "./cta";
 import CaseStudyLayout from "./CaseStudyLayout";
 import CaseStudySidebar from "./CaseStudySidebar";
 import { Videos, TerrateamVideos } from "./_videoData";
+import { DevZeroCard } from "./testimonialData";
+import TestimonialCard from "./testimonialCard";
 // Utility function to check if the post file exists
 const isValid = (slug) => {
   const folder = "posts/";
@@ -266,6 +268,10 @@ const PostPage = (props) => {
                   {postContent}
                 </Markdown>
               </div>
+                {postData.slug === "case-study-product-documentation" ?
+        <TestimonialCard data={DevZeroCard} /> : null
+        }
+    
             </article>
           </div>
         </CaseStudyLayout>
@@ -274,15 +280,7 @@ const PostPage = (props) => {
         postData.slug === "terrateam-case-study" ?
         <div className="flex justify-center items-center w-[80%] mx-auto"><VideoTestimonials items={TerrateamVideos}/></div> : null}
         
-        {/* CTA Section */}
-        <div className="w-[80%] mx-auto">
-          <CTA 
-            title="Ready to achieve similar results for your startup?"
-            description="Let's discuss how we can help you scale through technical content and developer marketing."
-            buttonText="Book a Call"
-          />
-        </div>
-
+      
         {/* More Case Studies Section */}
         <div className="w-[80%] mx-auto mt-16">
           <MoreCaseStudies currentSlug={postData.slug} />
