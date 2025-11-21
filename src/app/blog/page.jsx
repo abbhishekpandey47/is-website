@@ -37,6 +37,7 @@ let tabs = [
   { id: "Reddit Marketing B2B SaaS", label: "Reddit Marketing B2B SaaS" },
   { id: "Tech Video Marketing", label: "Tech Video Marketing" },
   { id: "Developer Marketing", label: "Developer Marketing" },
+  {id : "Product Documentation", label : "Product Documentation"},
 
 ];
 
@@ -232,7 +233,7 @@ const BlogPage = () => {
   useEffect(() => {
     let currTabArr = [];
     if (activeTab === "allCategories") {
-      currTabArr = ["Informational", "Tutorials" , "B2B SaaS- Content Marketing", "B2B SaaS Growth & GTM", "Reddit Marketing B2B SaaS", "Tech Video Marketing" , "Developer Marketing"];
+      currTabArr = ["Informational", "Tutorials" , "B2B SaaS- Content Marketing", "B2B SaaS Growth & GTM", "Reddit Marketing B2B SaaS", "Tech Video Marketing" , "Developer Marketing" , "Product Documentation"];
     } else {
       currTabArr = [activeTab];
     }
