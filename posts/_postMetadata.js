@@ -1285,7 +1285,7 @@ let postMetaData = [
   metatitle: "Product Documentation Best Practices in 2025 | Infrasity ",
   slug: "product-documentation-best-practices",
   description:"This blog breaks down the essential product documentation best practices that high-performing DevTools and SaaS teams rely on to accelerate onboarding, increase activation, and reduce support load. Through real-world examples from companies like Vercel, Supabase, Stripe, GitHub, and HashiCorp, you’ll learn how documentation maturity directly drives product adoption and long-term retention. If you want your product documentation to become a competitive advantage rather than a maintenance burden, this guide is your blueprint.",
-  ogImage: "/PostImages/case-study-product-documentation/0.webp",
+  ogImage: "/PostImages/product-documentation-best-practices/0.webp",
   publishedOn: "2025-11-21",
   authorId: "author0005",
   category: "Product Documentation",

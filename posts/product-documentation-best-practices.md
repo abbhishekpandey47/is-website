@@ -87,6 +87,8 @@ Simply revamping the documentation will not shift how documentation contributes 
 
 ## **Common Pain Points Many B2B SaaS Startups Miss**
 
+**![Common Pain Points Many B2B SaaS Startups Miss](/PostImages/product-documentation-best-practices/8.webp)**
+
 Across the B2B SaaS industry, most early-stage teams underestimate how much Product Documentation impacts onboarding, trial conversion, and long-term adoption. Despite having strong engineering and innovative features, the *developer journey* often breaks before a user ever reaches the “aha” moment.
 
 Let’s take a quick look at the most common pain point that several startups face in the industry of B2B SaaS:
