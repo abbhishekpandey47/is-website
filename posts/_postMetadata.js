@@ -1279,6 +1279,15 @@ let postMetaData = [
   category: "Case Studies",
   metaDescription:
     "Learn how Infraisty helped cost optimization platform improve adoption through better docs, how-to guides & templates. Want to boost your product’s growth? Book a call.",
+          companyHighlights: {
+            company: "DevZero",
+            headquarters: "Seattle, Washington, USA",
+            funding: "Series A ($20.9M)",
+            industry: "DevTools / Infra (IaC)",
+            employees: "11–50",
+            // cloud: "developer use-case blogs + developer relations services",
+            website: "devzero.io"
+        }
 },
  {
   title: "Product Documentation Best Practices: With Developer-Focused Real World Examples",
