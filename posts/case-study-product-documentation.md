@@ -167,12 +167,6 @@ To fix this, Infrasity produced clear, example-driven documentation that showed 
 
 ## CTA : Turn Your Product Documentation Into a Growth Engine
 
-## **Hear Directly From Our Customers\!** 
-
-“Infrasity has helped us create technical content, product documentation, and recipe libraries for integrating DevZero with different tech stacks. Their product videos showcase our key features, making it easier to engage users. A great content partner in our journey\!”
-
-Debosmit Ray, **Co-Founder of DevZero**
-
 ## **When Founders Talk: Infrasity X DevZero**
 
 [![Watch the video](/PostImages/case-study-product-documentation/video.webp)](https://www.youtube.com/watch?v=GTMEKQIM84I)
