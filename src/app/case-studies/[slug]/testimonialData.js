@@ -3,5 +3,5 @@ export const DevZeroCard = [{
     imgSrc: "/Testimon/Debosmit-devzero.png",
     personName: "Debosmit Ray",
     personTitle: "Co-Founder, DevZero",
-    quote: "Infrasity's dedication to understanding our audience's needs was evident in their research on what Engineers look for in content. By focusing on teachings rather than selling, their content has empowered our users with new skills and solutions. Their work has significantly boosted our web and blog traffic, and we highly recommend their expertise.",
+    quote: "Infrasity has helped us create technical content, product documentation, and recipe libraries for integrating DevZero with different tech stacks. Their product videos showcase our key features, making it easier to engage users. A great content partner in our journey!",
 }]
