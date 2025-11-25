@@ -995,7 +995,7 @@ let postMetaData = [
         metaDescription: "Learn the key differences between SEO vs AEO, how each impacts your content visibility, and when to use either one or both in your content strategy."
     },
     {
-        title: "Mintlify vs. GitBook: Which Documentation Architecture is Better for Your Engineering Workflow?",
+        title: "Mintlify vs. GitBook: Which Documentation Architecture is Better?",
         metatitle: "Mintlify vs. GitBook: Which Documentation Architecture is Better for Your Engineering Workflow?",
         slug: "Mintlify-vs-Gitbook",
         description: "Learn the key differences between Mintlify vs Gitbook.",
