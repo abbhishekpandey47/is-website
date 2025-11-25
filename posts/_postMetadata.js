@@ -997,7 +997,7 @@ let postMetaData = [
     {
         title: "Mintlify vs. GitBook: Which Documentation Architecture is Better?",
         metatitle: "Mintlify vs. GitBook: Which Documentation Architecture is Better?",
-        slug: "Mintlify-vs-Gitbook",
+        slug: "mintlify-vs-gitbook",
         description: "Learn the key differences between Mintlify vs Gitbook.",
         ogImage: "/PostImages/Mintlify-vs-Gitbook/image7.jpg",
         publishedOn: "2025-11-25",
