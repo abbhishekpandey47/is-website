@@ -997,7 +997,7 @@ let postMetaData = [
     {
         title: "Mintlify vs. GitBook: Which Documentation Architecture is Better?",
         metatitle: "Mintlify vs GitBook Comparison: Best Documentation System for APIs",
-        slug: "Mintlify-vs-Gitbook",
+        slug: "mintlify-vs-gitbook",
         description: "Learn the core differences between Mintlify and GitBook, how each handles API documentation, and when to choose one over the other for scalable, developer-focused content workflows.",
         ogImage: "/PostImages/Mintlify-vs-Gitbook/image7.jpg",
         publishedOn: "2025-11-25",
