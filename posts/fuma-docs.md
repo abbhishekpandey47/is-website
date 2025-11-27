@@ -1,5 +1,3 @@
-# **Why Fumadocs Works for Products with Rapidly Evolving APIs and SDKs**
-![](/PostImages/fuma-docs/banner.jpg)
 
 
 ## **TL;DR**
