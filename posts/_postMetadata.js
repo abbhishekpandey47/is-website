@@ -1312,6 +1312,18 @@ let postMetaData = [
   metaDescription:
     "Learn the best practices for developer focused product documentation with real examples. Improve onboarding, activation, and adoption. Click the link to read the guide now.",
 },
+ {
+  title: "How to Rank on ChatGPT: Practices to Boost LLM Visibility",
+  metatitle: "How to Rank on ChatGPT: LLM Visibility Strategies for B2B SaaS",
+  slug: "how-to-rank-on-chatgpt",
+  description:"AI search engines like ChatGPT are becoming the fastest-growing product discovery channel. This guide explains how B2B SaaS companies can rank as the top AI-generated answer using NLP-aligned content, structured data, trust signals, and optimized page experience. Learn the exact steps to increase LLM visibility — and how Infrasity helps high-growth SaaS brands become the default recommendation in AI results.",
+  ogImage: "/PostImages/how-to-rank-on-chatgpt/0.webp",
+  publishedOn: "2025-11-27",
+  authorId: "author0005",
+  category: "Informational",
+  metaDescription:
+    "Learn how B2B SaaS brands can rank in ChatGPT and AI search. Boost LLM visibility with structured content, NLP optimization, internal linking, and trust signals. Read now",
+},
 ];
 
 const sorted = () => {
