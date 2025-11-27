@@ -189,8 +189,8 @@ Your documentation lives primarily in the `/content/docs` directory. Fumadocs us
 
 The real power for SDKs comes here. To embed your interactive code playgrounds or version switchers, you simply import them into your MDX files.
 
-1. Create Component: Develop your component in the standard `/components` directory (e.g., `components/LiveDemo.jsx`).  
-2. Import in MDX: Use the standard import syntax at the top of your documentation file:  
+* Create Component: Develop your component in the standard `/components` directory (e.g., `components/LiveDemo.jsx`).  
+* Import in MDX: Use the standard import syntax at the top of your documentation file:  
 
 ![](/PostImages/fuma-docs/image4.png)
 
@@ -208,9 +208,9 @@ Because Fumadocs is a standard Next.js application, deployment is straightforwar
 
 This is the fastest path to production for a startup.
 
-1. Connect Git: Push your project to a Git repository (GitHub/GitLab).  
-2. Automated Build: Connect your repository to Vercel or Netlify. They automatically detect the Next.js framework.  
-3. Deployment: On every `git push` to your main branch, the CI/CD pipeline runs `pnpm run build`, generates optimized static assets, and deploys the new documentation. Your docs are updated automatically with every code commit. 
+* Connect Git: Push your project to a Git repository (GitHub/GitLab).  
+* Automated Build: Connect your repository to Vercel or Netlify. They automatically detect the Next.js framework.  
+* Deployment: On every `git push` to your main branch, the CI/CD pipeline runs `pnpm run build`, generates optimized static assets, and deploys the new documentation. Your docs are updated automatically with every code commit. 
 
 ![](/PostImages/fuma-docs/image6.png)
 
