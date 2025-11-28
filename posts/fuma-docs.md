@@ -10,6 +10,8 @@
     
 * Fumadocs Highly composable architecture allows developers to easily embed custom React components for interactive, rapid feature demonstrations.
 
+ **Start Building Auto-Updating Docs Today.**
+> [Book a Call →](https://www.infrasity.com/contact)
 
 ## **What is Fumadocs and how it  Works for Products with Rapidly Evolving APIs and SDKs**
 
@@ -20,7 +22,7 @@ Instead of a locked-in SaaS editor, it gives you a fully code-driven docs site w
 
 APIs that evolve quickly require documentation that can keep up with rapid releases, new endpoints, breaking changes, and frequent SDK updates. Traditional documentation systems like GitBook, Notion, Confluence, and older CMS-based doc sites fall behind because they rely heavily on manual edits, slow publishing cycles, and separate content management layers. Fumadocs solves this entire problem by making documentation a code-driven, automated part of your development workflow.
 
-### **Example: How a Fast-Growing API Product Evolves** 
+ **Example: How a Fast-Growing API Product Evolves** 
 
 Imagine you’re building an early-stage B2B SaaS platform like Unkey, where developers depend on your API to generate and manage authentication keys.  In the first 3-6 months, your product might be shipping updates like:
 
@@ -31,14 +33,7 @@ Imagine you’re building an early-stage B2B SaaS platform like Unkey, where dev
 * Week 7: Change error codes to support new security validations  
 * Week 8: Add rate-limit metadata to all responses
 
-In a rapidly growing SaaS product, these changes happen constantly sometimes multiple times per sprint.
-
-This is exactly where traditional docs break:  
- writers manually update pages, engineers forget to sync changes, and the published docs drift from the actual API behavior.
-
-Fumadocs solves this by making docs code-driven, so every schema change, SDK update, or API version bump can automatically update the documentation.
-
-Fumadocs keeps your docs fresh, accurate, and aligned with your product by combining three core principles:
+In a rapidly growing SaaS product, where API changes occur constantly sometimes multiple times per sprint traditional documentation systems fail because they rely on slow manual page updates, leading to inevitable drift between the published guide and the actual API behavior. Fumadocs solves this critical problem by making documentation code-driven, automatically ensuring every schema change, SDK update, or API version bump syncs directly with the documentation; it keeps your docs fresh, accurate, and aligned with your product by combining three core principles: Live API Metadata, Code-Driven References, and a Composable React architecture.
 
 ###  **Live API Metadata: Docs That Update Themselves**
 
@@ -262,6 +257,9 @@ FumaDocs' credibility is reinforced by its growing adoption. The official site c
 
 Furthermore, FumaDocs is the credited documentation framework behind major open-source projects, including Shadcn UI, Million.js, and Arktype. This widespread community adoption solidifies its reputation as the ideal solution for developers, startups, and companies building products with React and Next.js.
 
+ **Start Building Auto-Updating Docs Today.**
+> [Book a Call →](https://www.infrasity.com/contact)
+
 ## **Conclusion: Documentation as Your Competitive Advantage**
 
 For a developer startup operating at high velocity, documentation cannot be an afterthought; it must be treated as a core feature of your product. If your API evolves weekly, your docs must update instantly or your adoption rates will suffer.
@@ -278,19 +276,19 @@ Shift your documentation from being a costly maintenance burden to a powerful en
 
 ## **Frequently Asked Questions**
 
-**Q: What problem does FumaDocs primarily solve?**
+### **Q: What problem does FumaDocs primarily solve?**
 
 **A:** FumaDocs solves the problem of documentation drift for fast-moving startups. It ensures that technical documentation, especially for APIs and SDKs, remains perfectly in sync with the actual code without requiring manual updates or extra developer bandwidth.
 
-**Q: Is FumaDocs only for Next.js projects?**
+### **Q: Is FumaDocs only for Next.js projects?**
 
 **A:** FumaDocs is heavily optimized for the React and Next.js ecosystem, making it the ideal choice for modern web development companies. Its features and integrations work best within the Next.js framework (particularly the App Router).
 
-**Q: How does FumaDocs handle rapid API changes?**
+### **Q: How does FumaDocs handle rapid API changes?**
 
 **A:** FumaDocs is built to integrate directly into Continuous Integration/Continuous Deployment (CI/CD) workflows. It supports auto-updating documentation based on code changes, meaning every time your code ships, your documentation updates automatically.
 
-**Q: What kind of companies or projects use FumaDocs?**
+### **Q: What kind of companies or projects use FumaDocs?**
 
 **A:** FumaDocs is popular among early-stage and growth-stage startups that ship product changes fast. Notable users include teams from Vercel, Unkey, and major open-source projects like Shadcn UI and Million.js.
 
