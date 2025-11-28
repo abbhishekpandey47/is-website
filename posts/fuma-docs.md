@@ -10,8 +10,7 @@
     
 * Fumadocs Highly composable architecture allows developers to easily embed custom React components for interactive, rapid feature demonstrations.
 
- **Start Building Auto-Updating Docs Today.**
-> [Book a Call →](https://www.infrasity.com/contact)
+## CTA : Start Building Auto-Updating Docs Today.
 
 ## **What is Fumadocs and how it  Works for Products with Rapidly Evolving APIs and SDKs**
 
@@ -257,8 +256,7 @@ FumaDocs' credibility is reinforced by its growing adoption. The official site c
 
 Furthermore, FumaDocs is the credited documentation framework behind major open-source projects, including Shadcn UI, Million.js, and Arktype. This widespread community adoption solidifies its reputation as the ideal solution for developers, startups, and companies building products with React and Next.js.
 
- **Start Building Auto-Updating Docs Today.**
-> [Book a Call →](https://www.infrasity.com/contact)
+## CTA : Start Building Auto-Updating Docs Today.
 
 ## **Conclusion: Documentation as Your Competitive Advantage**
 
