@@ -22,6 +22,7 @@ const ThankYou = () => {
 
     const [dateStr, setDateStr] = useState("");
     const [time, setTime] = useState("");
+    const [timezoneLabel, setTimezoneLabel] = useState("");
 
     useEffect(() => {
         try {
@@ -31,6 +32,7 @@ const ThankYou = () => {
                 // support both {date,time} and {selectedDate,selectedTime}
                 setDateStr(data?.date || data?.selectedDate || "");
                 setTime(data?.time || data?.selectedTime || "");
+                setTimezoneLabel(data?.timezoneLabel || data?.timezone || "");
             }
         } catch {}
     }, []);
@@ -78,6 +80,9 @@ const ThankYou = () => {
                                     </p>
                                     <p className="font-medium">
                                         {displayDate} at {time}
+                                        {timezoneLabel && (
+                                            <> {timezoneLabel}</>
+                                        )}
                                     </p>
                                     <p className="mt-2 text-gray-400">
                                         A confirmation email has been sent to your inbox.
