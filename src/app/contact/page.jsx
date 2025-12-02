@@ -124,6 +124,61 @@ const CalendarBooking = () => {
         return sign * (hours * 60 + minutes);
     };
 
+    // Map a numeric offset in minutes to the closest timezone value string in `timezones`
+    const mapOffsetToTimezoneValue = (offsetMinutes) => {
+        if (!Array.isArray(timezones) || timezones.length === 0) return "UTC+00:00";
+
+        // Precompute offsets for each option
+        let best = timezones[0].value;
+        let bestDiff = Infinity;
+
+        timezones.forEach((tz) => {
+            const tzOffset = getTimezoneOffsetMinutes(tz.value);
+            const diff = Math.abs(tzOffset - offsetMinutes);
+            if (diff < bestDiff) {
+                bestDiff = diff;
+                best = tz.value;
+            }
+        });
+
+        return best;
+    };
+
+    // Auto-detect browser/device timezone once on mount and set the closest option
+    useEffect(() => {
+        try {
+            if (typeof window !== "undefined" && Intl && Intl.DateTimeFormat) {
+                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone; // e.g. "America/Los_Angeles"
+                if (tz && typeof tz === "string") {
+                    const now = new Date();
+                    const formatter = new Intl.DateTimeFormat("en-US", {
+                        timeZone: tz,
+                        hour12: false,
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    });
+                    const parts = formatter.formatToParts(now);
+                    const hour = parseInt(parts.find((p) => p.type === "hour")?.value ?? "0", 10);
+                    const minute = parseInt(parts.find((p) => p.type === "minute")?.value ?? "0", 10);
+
+                    const utcMinutes = now.getUTCHours() * 60 + now.getUTCMinutes();
+                    let localMinutes = hour * 60 + minute;
+
+                    // offset = local - UTC, normalized to [-720, 720)
+                    let offset = localMinutes - utcMinutes;
+                    offset = ((offset + 720) % 1440) - 720;
+
+                    const closestTz = mapOffsetToTimezoneValue(offset);
+                    setSelectedTimezone(closestTz);
+                }
+            }
+        } catch (e) {
+            console.warn("Failed to auto-detect timezone, using default UTC-08:00", e);
+        }
+        // We only want this to run once on mount
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const convertTimeSlots = (targetTimezone) => {
         const pdtOffsetMinutes = getTimezoneOffsetMinutes("UTC-08:00");
         const targetOffsetMinutes = getTimezoneOffsetMinutes(targetTimezone);
@@ -576,10 +631,13 @@ const CalendarBooking = () => {
 
     useEffect(() => {
         if (step === 4) {
-            localStorage.setItem("bookingSelected", JSON.stringify({ date: selectedDate, time: selectedTime }));
+                const selectedTzObj = timezones.find(tz => tz.value === selectedTimezone);
+    const timezoneLabel = selectedTzObj ? selectedTzObj.label : selectedTimezone;
+            localStorage.setItem("bookingSelected", JSON.stringify({ date: selectedDate, time: selectedTime ,         timezone: selectedTimezone,  // e.g. "UTC+05:30"
+        timezoneLabel,           }));
             router.push("/contact/thank-you"); // navigate on step 4
         }
-    }, [step, router]); // add this effect
+    }, [step, router , dateString, selectedTime, selectedTimezone, timezones]); // add this effect
 
     return (
         <div className="h-full">
