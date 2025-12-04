@@ -111,7 +111,7 @@ Because the editor is familiar and easy to use, GitBook is a good choice when yo
 
 []
 
-[ ][ Figure 2 : Sample API response in GitBook.]
+[Figure 2: Sample API response in GitBook.]
 
 [Built Tools & Integrations][GitBook documentation includes several built in tools that make collaboration easy for teams that have product managers, support agents and engineers all contributing to the same documents. The block based editor lets you add text, images, lists, embeds and code blocks without dealing with formatting. This is useful for B2B SaaS startups like Loopin or Spendflo where non technical contributors often write onboarding guides, internal runbooks or customer playbooks.]
 
@@ -150,7 +150,7 @@ GitBook offers free hosting for public documentation which makes it a strong cho
 
 Paid plans unlock private workspaces, collaboration controls, and role based permissions which become important once your team crosses five to ten contributors. These plans also support versioning and advanced access control which help reduce content errors by nearly 30 percent during fast release cycles. Most B2B SaaS teams move to a paid plan once they publish customer facing documentation or maintain multiple product versions.
 
-## Readme
+## ReadMe
 
 ![ReadMe Documentation Platform](/PostImages/best-documentation-tools-for-developers/img13.webp)
 ### Overview
