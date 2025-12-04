@@ -1344,7 +1344,7 @@ let postMetaData = [
   publishedOn: "2025-12-04",
   authorId: "author0001",
   category: "Informational",
-  metaDescription: "Compare the best developer documentation tools for 2025. Discover which platform (Mintlify, GitBook, ReadMe, or Docusaurus) is right for your API, team size, and release cycle."
+  metaDescription: "Compare the best developer documentation tools for 2025. Discover which platform (Mintlify, GitBook, ReadMe, or Docusaurus) is right for your API, team size, and release cycle.",
 },
 
 ];
