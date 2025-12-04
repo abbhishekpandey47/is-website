@@ -113,7 +113,9 @@ Because the editor is familiar and easy to use, GitBook is a good choice when yo
 
 [Figure 2: Sample API response in GitBook.]
 
-[Built Tools & Integrations][GitBook documentation includes several built in tools that make collaboration easy for teams that have product managers, support agents and engineers all contributing to the same documents. The block based editor lets you add text, images, lists, embeds and code blocks without dealing with formatting. This is useful for B2B SaaS startups like Loopin or Spendflo where non technical contributors often write onboarding guides, internal runbooks or customer playbooks.]
+### Built Tools & Integrations
+
+GitBook documentation includes several built in tools that make collaboration easy for teams that have product managers, support agents and engineers all contributing to the same documents. The block based editor lets you add text, images, lists, embeds and code blocks without dealing with formatting. This is useful for B2B SaaS startups like Loopin or Spendflo where non technical contributors often write onboarding guides, internal runbooks or customer playbooks.
 
 GitBook also gives teams a strong review system. You can leave comments inside a page, request changes and run a proper approval workflow before publishing. This helps avoid version drift, especially when your support team updates FAQs while your engineering team adjusts API examples. With role based access, version history and clean content organization, GitBook makes it easy to manage documentation updates even when multiple people work on the same page.
 
