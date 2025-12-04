@@ -38,6 +38,7 @@ let tabs = [
   { id: "Tech Video Marketing", label: "Tech Video Marketing" },
   { id: "Developer Marketing", label: "Developer Marketing" },
   {id : "Product Documentation", label : "Product Documentation"},
+  {id:"Community Engagement", label:"Community Engagement"},
 
 ];
 
@@ -233,7 +234,7 @@ const BlogPage = () => {
   useEffect(() => {
     let currTabArr = [];
     if (activeTab === "allCategories") {
-      currTabArr = ["Informational", "Tutorials" , "B2B SaaS- Content Marketing", "B2B SaaS Growth & GTM", "Reddit Marketing B2B SaaS", "Tech Video Marketing" , "Developer Marketing" , "Product Documentation"];
+      currTabArr = ["Informational", "Tutorials" , "B2B SaaS- Content Marketing", "B2B SaaS Growth & GTM", "Reddit Marketing B2B SaaS", "Tech Video Marketing" , "Developer Marketing" , "Product Documentation" , "Community Engagement"];
     } else {
       currTabArr = [activeTab];
     }
