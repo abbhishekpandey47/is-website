@@ -137,6 +137,7 @@ The platform prioritizes clarity and simplicity, offering a well-structured two-
 This approach ensures that documentation remains visually consistent and readable, making GitBook ideal for teams that value straightforward documentation without the need for complex UI modifications.
 
 ![GitBook Design and Customization](/PostImages/best-documentation-tools-for-developers/img11.webp)
+
 ### Ease of Use & Writer Experience
 
 GitBook offers one of the simplest writing experiences among modern documentation tools. It feels familiar to anyone who has worked in Google Docs or Notion which makes it very comfortable for teams where both technical and non technical contributors write regularly. A contributor can open a page, add text, drop in screenshots, embed videos and structure content without touching Markdown or any code format. This keeps the documentation workflow open to product managers, customer success teams and designers who want to update guides without depending on engineers.
@@ -188,6 +189,8 @@ ReadMe's UX stands out because it blends clarity with interactivity --- making i
 
 ![ReadMe Interactive Documentation Experience](/PostImages/best-documentation-tools-for-developers/img16.webp)
 ### Pricing Overview
+
+## ReadMe
 
 ReadMe operates on a premium and API focused pricing model that targets teams with high API traffic and a need for interactive onboarding. Most early stage teams start with the lower tier plans which are suitable when you serve fewer than one thousand monthly API users. As API traffic scales and customers depend more on interactive consoles, teams usually move to higher plans that support advanced analytics, usage dashboards and embedded API playgrounds. Gartner notes that API first platforms spend almost 25 percent more on developer portals as their customer base grows, which aligns with how ReadMe positions itself among the best documentation tools for developers.
 
