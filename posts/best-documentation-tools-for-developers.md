@@ -139,7 +139,7 @@ GitBook makes sense when you want a simple and collaborative place for documenta
 
 []
 
-[ ][ Figure 2 : Sample API response in GitBook.]
+[Figure 2: Sample API response in GitBook.]
 
 ### Built Tools & Integrations
 
