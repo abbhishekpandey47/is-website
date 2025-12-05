@@ -107,6 +107,8 @@ Because the editor is familiar and easy to use, GitBook is a good choice when yo
 
 [Figure 2: Sample API response in GitBook.]
 
+## CTA: Want faster API onboarding? Let us guide you.
+
 ### Built Tools & Integrations
 
 GitBook documentation includes several built in tools that make collaboration easy for teams that have product managers, support agents and engineers all contributing to the same documents. The block based editor lets you add text, images, lists, embeds and code blocks without dealing with formatting. This is useful for B2B SaaS startups like Loopin or Spendflo where non technical contributors often write onboarding guides, internal runbooks or customer playbooks.
@@ -243,6 +245,8 @@ The platform's UX is ideal for teams comfortable with Git-based workflows and wh
 Docusaurus is open source and self hosted which means it is free by default and often the most cost effective option among the best documentation tools for developers. Engineering teams usually only spend money on hosting. Deploying on platforms like Vercel or Netlify can cost anywhere from ten to fifty dollars per month depending on traffic. This makes it attractive for startups that want full control without committing to paid documentation platforms.
 
 Costs increase only when teams want dedicated infrastructure, private CDNs or custom deployment pipelines. Even then, the total expense is usually lower than hosted documentation tools because the core software is free. Many B2B SaaS teams pick Docusaurus documentation when they expect their docs to scale over time because Gartner notes that open source documentation frameworks can reduce long term operational costs by almost 40 percent when compared to fully hosted alternatives.
+
+## CTA : Not sure which documentation tool fits your team? Let's talk.
 
 ## Conclusion
 
