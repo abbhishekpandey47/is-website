@@ -81,14 +81,16 @@ Focus on:
 URL: ${articleUrl}`;
 
   const handleClick = async (tool: AITool) => {
+    console.log("[SummaryWidget] Copying prompt:", prompt);
     try {
       await navigator.clipboard.writeText(prompt);
+      console.log("[SummaryWidget] Prompt copied successfully");
       setCopiedTool(tool.name);
       
       // Reset copied state after 3 seconds
       setTimeout(() => setCopiedTool(null), 3000);
     } catch (err) {
-      console.error("Failed to copy:", err);
+      console.error("[SummaryWidget] Failed to copy:", err);
     }
     
     // Open the AI tool in a new tab
