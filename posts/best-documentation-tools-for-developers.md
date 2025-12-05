@@ -246,7 +246,7 @@ Docusaurus is open source and self hosted which means it is free by default and 
 
 Costs increase only when teams want dedicated infrastructure, private CDNs or custom deployment pipelines. Even then, the total expense is usually lower than hosted documentation tools because the core software is free. Many B2B SaaS teams pick Docusaurus documentation when they expect their docs to scale over time because Gartner notes that open source documentation frameworks can reduce long term operational costs by almost 40 percent when compared to fully hosted alternatives.
 
-## CTA : Not sure which documentation tool fits your team? Let's talk.
+## CTA: Not sure which documentation tool fits your team? Let's talk.
 
 ## Conclusion
 
