@@ -632,7 +632,7 @@ let postMetaData = [
         ogImage: "/PostImages/kubecon-2025/k3.png",
         publishedOn: "2025-03-26",
         authorId: "author0001",
-        category: "Informational",
+        category: "Community Engagement",
         metaDescription: "KubeCon 2025 is a great conference for the cloud-native community. You must attend it if you belong to this community. Why? Read further to know about it."
     },
 
@@ -1276,7 +1276,7 @@ let postMetaData = [
   ogImage: "/PostImages/developer-community-engagement/0.webp",
   publishedOn: "2025-11-14",
   authorId: "author0005",
-  category: "Informational",
+  category: "Community Engagement",
   metaDescription: "A 2026 guide for B2B SaaS leaders on measuring developer community engagement. Learn KPIs, and real examples to drive acquisition, retention. Read now."
 },
 {
