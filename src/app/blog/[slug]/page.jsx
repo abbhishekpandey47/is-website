@@ -13,6 +13,7 @@ import CTA2 from "./cta2";
 import Featured from "./featured";
 import HeadBanner from "./headBanner";
 import Outline from "./outline";
+import { SummaryWidget } from "@/Components/blog/SummaryWidget";
 
 
 
@@ -311,6 +312,12 @@ if (inFAQ && currentQuestion && currentAnswer) {
 
         <div className="pt-32 flex flex-col justify-center items-center">
           <HeadBanner postData={postData} />
+          {/* AI Summary Widget - Experiment for specific blog only */}
+          {slug === "best-documentation-tools-for-developers" && (
+            <div className="w-full flex justify-center px-10 mt-4">
+              <SummaryWidget slug="best-documentation-tools-for-developers" title={postData.title || "Best Documentation Tools for Developers"} />
+            </div>
+          )}
           <div className="flex justify-around w-full pb-16 px-10 max-lg:flex-col">
             <div className=" max-lg:w-full max-lg:flex justify-center">
               <Outline content={postContent} />
