@@ -179,14 +179,23 @@ const SummarizeBar = ({ blogData }) => {
 
       {/* Message (error or success) */}
       {error && (
-        <div className={`absolute mt-16 px-4 py-2 rounded-lg ${
-          error.includes('copied') 
-            ? 'bg-green-500/10 border border-green-500/20' 
-            : 'bg-red-500/10 border border-red-500/20'
-        }`}>
+        <div
+          className={`absolute mt-16 px-4 py-2 rounded-lg ${
+            error.includes('copied') 
+              ? 'bg-green-500/10 border border-green-500/20' 
+              : 'bg-red-500/10 border border-red-500/20'
+          }`}
+          role="alert"
+          aria-live="assertive"
+        >
           <p className={`text-xs ${
             error.includes('copied') ? 'text-green-400' : 'text-red-400'
-          }`}>{error}</p>
+          }`}>
+            <span className="font-semibold">
+              {error.includes('copied') ? 'Success: ' : 'Error: '}
+            </span>
+            {error}
+          </p>
         </div>
       )}
     </div>
