@@ -13,6 +13,7 @@ import CTA2 from "./cta2";
 import Featured from "./featured";
 import HeadBanner from "./headBanner";
 import Outline from "./outline";
+import SummarizeBar from "./summarizeBar";
 
 
 
@@ -311,6 +312,18 @@ if (inFAQ && currentQuestion && currentAnswer) {
 
         <div className="pt-32 flex flex-col justify-center items-center">
           <HeadBanner postData={postData} />
+          {slug === "best-documentation-tools-for-developers" && (
+            <SummarizeBar 
+              blogData={{
+                title: postData.title,
+                description: postData.description,
+                content: postContent,
+                authorName: postData.authorName,
+                category: postData.category,
+                slug: slug
+              }}
+            />
+          )}
           <div className="flex justify-around w-full pb-16 px-10 max-lg:flex-col">
             <div className=" max-lg:w-full max-lg:flex justify-center">
               <Outline content={postContent} />
