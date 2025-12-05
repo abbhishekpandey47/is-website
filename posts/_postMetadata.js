@@ -1008,7 +1008,7 @@ let postMetaData = [
     {
         title: "Why Fumadocs Works for Products with Rapidly Evolving APIs and SDKs?",
         metatitle: "Fumadocs for Products with Rapidly Evolving SPIs & SDKs",
-        slug: "fuma-docs",
+        slug: "fumadocs-for-apis-and-sdks",
         description: "Fumadocs is engineered for products that ship fast and evolve constantly. With live API metadata, OpenAPI automation, and full React component flexibility, it ensures developer documentation stays accurate, interactive, and scalable, without manual effort. Backed by Next.js performance and used by top teams like Vercel, Unkey, and major open-source projects, Fumadocs transforms documentation into a competitive advantage.",
         ogImage: "/PostImages/fuma-docs/banner.jpg",
         publishedOn: "2025-11-27",
