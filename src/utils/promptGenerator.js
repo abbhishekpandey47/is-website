@@ -52,12 +52,11 @@ Please provide a clear, developer-friendly summary.`;
 
 /**
  * Generates a URL with encoded prompt for specific AI model
- * @param {string} modelId - AI model identifier
  * @param {string} prompt - The prompt text
  * @param {string} baseUrl - Base URL pattern for the model
  * @returns {string} - Complete URL with encoded prompt
  */
-export function generateModelUrl(modelId, prompt, baseUrl) {
+export function generateModelUrl(prompt, baseUrl) {
   const encodedPrompt = encodeURIComponent(prompt);
   return `${baseUrl}${encodedPrompt}`;
 }
