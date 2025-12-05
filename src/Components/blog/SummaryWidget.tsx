@@ -66,8 +66,35 @@ const AI_TOOLS: AITool[] = [
   },
 ];
 
+// Fallback copy function using execCommand for older browsers
+const fallbackCopyToClipboard = (text: string): boolean => {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  
+  // Avoid scrolling to bottom
+  textArea.style.top = "0";
+  textArea.style.left = "0";
+  textArea.style.position = "fixed";
+  textArea.style.opacity = "0";
+  
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  
+  let success = false;
+  try {
+    success = document.execCommand("copy");
+  } catch (err) {
+    console.error("[SummaryWidget] Fallback copy failed:", err);
+  }
+  
+  document.body.removeChild(textArea);
+  return success;
+};
+
 export function SummaryWidget({ slug }: SummaryWidgetProps) {
   const [copiedTool, setCopiedTool] = useState<string | null>(null);
+  const [copyError, setCopyError] = useState<string | null>(null);
   const articleUrl = `https://www.infrasity.com/blog/${slug}`;
   
   const prompt = `Summarize this article in 5–7 bullet points for an engineering leader.
@@ -81,16 +108,36 @@ Focus on:
 URL: ${articleUrl}`;
 
   const handleClick = async (tool: AITool) => {
-    console.log("[SummaryWidget] Copying prompt:", prompt);
-    try {
-      await navigator.clipboard.writeText(prompt);
-      console.log("[SummaryWidget] Prompt copied successfully");
+    console.log("[SummaryWidget] Attempting to copy prompt for:", tool.name);
+    setCopyError(null);
+    
+    let copySuccess = false;
+    
+    // Try modern clipboard API first
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(prompt);
+        copySuccess = true;
+        console.log("[SummaryWidget] Clipboard API succeeded");
+      } catch (err) {
+        console.warn("[SummaryWidget] Clipboard API failed, trying fallback:", err);
+      }
+    }
+    
+    // Fallback to execCommand
+    if (!copySuccess) {
+      copySuccess = fallbackCopyToClipboard(prompt);
+      if (copySuccess) {
+        console.log("[SummaryWidget] Fallback copy succeeded");
+      }
+    }
+    
+    if (copySuccess) {
       setCopiedTool(tool.name);
-      
-      // Reset copied state after 3 seconds
       setTimeout(() => setCopiedTool(null), 3000);
-    } catch (err) {
-      console.error("[SummaryWidget] Failed to copy:", err);
+    } else {
+      setCopyError("Could not copy. Please copy manually.");
+      console.error("[SummaryWidget] All copy methods failed");
     }
     
     // Open the AI tool in a new tab
@@ -121,6 +168,11 @@ URL: ${articleUrl}`;
       {copiedTool && (
         <span className="text-xs text-green-400">
           ✓ Prompt copied! Paste it in {copiedTool}
+        </span>
+      )}
+      {copyError && (
+        <span className="text-xs text-yellow-400">
+          {copyError}
         </span>
       )}
     </div>
