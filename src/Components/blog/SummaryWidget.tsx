@@ -60,7 +60,14 @@ const SparkleIcon = () => (
   </svg>
 );
 
-const AI_TOOLS = [
+interface AITool {
+  name: string;
+  Icon: () => JSX.Element;
+  color: string;
+  url: string;
+}
+
+const AI_TOOLS: AITool[] = [
   {
     name: "ChatGPT",
     Icon: ChatGPTIcon,
@@ -93,27 +100,33 @@ const AI_TOOLS = [
   },
 ];
 
-export function SummaryWidget({ slug, title }: SummaryWidgetProps) {
+export function SummaryWidget({ slug }: SummaryWidgetProps) {
   const [copiedTool, setCopiedTool] = useState<string | null>(null);
-  const articleUrl = `https://infrasity.com/blog/${slug}`;
+  const articleUrl = `https://www.infrasity.com/blog/${slug}`;
+  
+  const prompt = `Summarize this article in 5–7 bullet points for an engineering leader.
 
-  const handleClick = async (tool: typeof AI_TOOLS[0]) => {
-    const prompt = `Summarize this article for me: "${title}" - ${articleUrl}`;
-    
+Focus on:
+- What the article is about
+- Key differences between Mintlify, GitBook, ReadMe, Docusaurus
+- When to use which tool
+- Actionable insights for API-first or devtool startups
+
+URL: ${articleUrl}`;
+
+  const handleClick = async (tool: AITool) => {
     try {
       await navigator.clipboard.writeText(prompt);
       setCopiedTool(tool.name);
-      
-      // Open the AI tool in a new tab
-      window.open(tool.url, "_blank", "noopener,noreferrer");
       
       // Reset copied state after 3 seconds
       setTimeout(() => setCopiedTool(null), 3000);
     } catch (err) {
       console.error("Failed to copy:", err);
-      // Still open the tool even if copy fails
-      window.open(tool.url, "_blank", "noopener,noreferrer");
     }
+    
+    // Open the AI tool in a new tab
+    window.open(tool.url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -128,7 +141,7 @@ export function SummaryWidget({ slug, title }: SummaryWidgetProps) {
             <button
               key={tool.name}
               onClick={() => handleClick(tool)}
-              title={`Summarize with ${tool.name} (copies prompt to clipboard)`}
+              title={`Summarize with ${tool.name}`}
               className="w-10 h-10 rounded-full bg-[#2a2d3e] hover:bg-[#3a3d4e] flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
               style={{ color: tool.color }}
             >
@@ -138,7 +151,7 @@ export function SummaryWidget({ slug, title }: SummaryWidgetProps) {
         </div>
       </div>
       {copiedTool && (
-        <span className="text-xs text-green-400 animate-fade-in">
+        <span className="text-xs text-green-400">
           ✓ Prompt copied! Paste it in {copiedTool}
         </span>
       )}
