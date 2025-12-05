@@ -21,7 +21,7 @@ export function generateSummaryPrompt(blogData) {
         .replace(/!\[.*?\]\(.*?\)/g, '') // Remove images
         .replace(/\[.*?\]\(.*?\)/g, '') // Remove links
         .replace(/```[\s\S]*?```/g, '') // Remove code blocks
-        .replace(/`.*?`/g, '') // Remove inline code
+        .replace(/`(.*?)`/g, '$1') // Remove inline code backticks, preserve code text
         .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold syntax, preserve content
         .replace(/\*.*?\*/g, '') // Remove italic
         .trim()
