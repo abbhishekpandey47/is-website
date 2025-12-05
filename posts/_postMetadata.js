@@ -632,7 +632,7 @@ let postMetaData = [
         ogImage: "/PostImages/kubecon-2025/k3.png",
         publishedOn: "2025-03-26",
         authorId: "author0001",
-        category: "Informational",
+        category: "Community Engagement",
         metaDescription: "KubeCon 2025 is a great conference for the cloud-native community. You must attend it if you belong to this community. Why? Read further to know about it."
     },
 
@@ -1008,7 +1008,7 @@ let postMetaData = [
     {
         title: "Why Fumadocs Works for Products with Rapidly Evolving APIs and SDKs?",
         metatitle: "Fumadocs for Products with Rapidly Evolving SPIs & SDKs",
-        slug: "fuma-docs",
+        slug: "fumadocs-for-apis-and-sdks",
         description: "Fumadocs is engineered for products that ship fast and evolve constantly. With live API metadata, OpenAPI automation, and full React component flexibility, it ensures developer documentation stays accurate, interactive, and scalable, without manual effort. Backed by Next.js performance and used by top teams like Vercel, Unkey, and major open-source projects, Fumadocs transforms documentation into a competitive advantage.",
         ogImage: "/PostImages/fuma-docs/banner.jpg",
         publishedOn: "2025-11-27",
@@ -1276,7 +1276,7 @@ let postMetaData = [
   ogImage: "/PostImages/developer-community-engagement/0.webp",
   publishedOn: "2025-11-14",
   authorId: "author0005",
-  category: "Informational",
+  category: "Community Engagement",
   metaDescription: "A 2026 guide for B2B SaaS leaders on measuring developer community engagement. Learn KPIs, and real examples to drive acquisition, retention. Read now."
 },
 {

@@ -27,6 +27,8 @@ const generateOutlineObj = (content) => {
         const level = headingMatch[1].length;
         const text_ = headingMatch[2].trim();
         const text = text_.replace(/[^a-z0-9A-Z\s!.,:?\-]/gi, "");
+
+        if (text.trim().toUpperCase().startsWith("CTA")) continue;
         
         const item = {
           id: generateId(text),

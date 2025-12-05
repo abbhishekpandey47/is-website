@@ -1,0 +1,180 @@
+"use client";
+
+import { useState } from "react";
+
+interface SummaryWidgetProps {
+  slug: string;
+  title: string;
+}
+
+// ChatGPT/OpenAI icon
+const ChatGPTIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
+    <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z" />
+  </svg>
+);
+
+// Claude/Anthropic icon
+const ClaudeIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
+    <path d="M4.709 15.955l4.72-2.647.08-.08v-.08l-.08-.08-2.086-.318-.398-.08-.239.16-2.724 1.53c-.398.24-.717.558-.717 1.036 0 .399.16.718.479.878.319.16.638.08.965-.319zm8.962-7.38l-.16-.718-.318.558-4.72 8.18c-.24.398-.24.797 0 1.116.239.319.558.478.956.398.16 0 .319-.08.479-.159l7.923-4.481c.08-.08.16-.08.16-.16l.079-.079v-.08c0-.079 0-.079-.08-.159l-4.32-4.401v-.016zm5.65 1.833c.24-.398.24-.797 0-1.116-.239-.319-.558-.478-.956-.398-.16 0-.319.08-.479.159l-2.326 1.315 2.326 2.366 1.116-.638c.16-.08.24-.24.319-.399v-1.289zm-7.126-5.33c-.239-.319-.558-.478-.956-.398-.16 0-.319.08-.479.159L3.753 8.88l2.326 2.366 6.116-3.523v-2.645z" />
+  </svg>
+);
+
+// Perplexity icon
+const PerplexityIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 2v20M2 12h20" strokeLinecap="round" />
+    <path d="M12 7l5 5-5 5-5-5 5-5z" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+// Sparkle icon for "Summarize with" text
+const SparkleIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
+    <path d="M12 0L14.59 8.41L23 11L14.59 13.59L12 22L9.41 13.59L1 11L9.41 8.41L12 0Z" />
+    <path d="M5 2L6.18 5.82L10 7L6.18 8.18L5 12L3.82 8.18L0 7L3.82 5.82L5 2Z" opacity="0.6" />
+  </svg>
+);
+
+interface AITool {
+  name: string;
+  Icon: () => JSX.Element;
+  color: string;
+  url: string;
+}
+
+const AI_TOOLS: AITool[] = [
+  {
+    name: "ChatGPT",
+    Icon: ChatGPTIcon,
+    color: "#10a37f",
+    url: "https://chat.openai.com/",
+  },
+  {
+    name: "Claude",
+    Icon: ClaudeIcon,
+    color: "#cc785c",
+    url: "https://claude.ai/new",
+  },
+  {
+    name: "Perplexity",
+    Icon: PerplexityIcon,
+    color: "#20b8cd",
+    url: "https://www.perplexity.ai/",
+  },
+];
+
+// Fallback copy function using execCommand for older browsers
+const fallbackCopyToClipboard = (text: string): boolean => {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  
+  // Avoid scrolling to bottom
+  textArea.style.top = "0";
+  textArea.style.left = "0";
+  textArea.style.position = "fixed";
+  textArea.style.opacity = "0";
+  
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  
+  let success = false;
+  try {
+    success = document.execCommand("copy");
+  } catch (err) {
+    console.error("[SummaryWidget] Fallback copy failed:", err);
+  }
+  
+  document.body.removeChild(textArea);
+  return success;
+};
+
+export function SummaryWidget({ slug }: SummaryWidgetProps) {
+  const [copiedTool, setCopiedTool] = useState<string | null>(null);
+  const [copyError, setCopyError] = useState<string | null>(null);
+  const articleUrl = `https://www.infrasity.com/blog/${slug}`;
+  
+  const prompt = `Summarize this article in 5–7 bullet points for an engineering leader.
+
+Focus on:
+- What the article is about
+- Key differences between Mintlify, GitBook, ReadMe, Docusaurus
+- When to use which tool
+- Actionable insights for API-first or devtool startups
+
+URL: ${articleUrl}`;
+
+  const handleClick = async (tool: AITool) => {
+    console.log("[SummaryWidget] Attempting to copy prompt for:", tool.name);
+    setCopyError(null);
+    
+    let copySuccess = false;
+    
+    // Try modern clipboard API first
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(prompt);
+        copySuccess = true;
+        console.log("[SummaryWidget] Clipboard API succeeded");
+      } catch (err) {
+        console.warn("[SummaryWidget] Clipboard API failed, trying fallback:", err);
+      }
+    }
+    
+    // Fallback to execCommand
+    if (!copySuccess) {
+      copySuccess = fallbackCopyToClipboard(prompt);
+      if (copySuccess) {
+        console.log("[SummaryWidget] Fallback copy succeeded");
+      }
+    }
+    
+    if (copySuccess) {
+      setCopiedTool(tool.name);
+      setTimeout(() => setCopiedTool(null), 3000);
+    } else {
+      setCopyError("Could not copy. Please copy manually.");
+      console.error("[SummaryWidget] All copy methods failed");
+    }
+    
+    // Open the AI tool in a new tab
+    window.open(tool.url, "_blank", "noopener,noreferrer");
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-[#1a1d2e] border border-[#2a2d3e]">
+        <div className="flex items-center gap-2 text-purple-400">
+          <SparkleIcon />
+          <span className="text-white font-medium text-sm whitespace-nowrap">Summarize with</span>
+        </div>
+        <div className="flex items-center gap-2">
+          {AI_TOOLS.map((tool) => (
+            <button
+              key={tool.name}
+              onClick={() => handleClick(tool)}
+              title={`Summarize with ${tool.name}`}
+              className="w-10 h-10 rounded-full bg-[#2a2d3e] hover:bg-[#3a3d4e] flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
+              style={{ color: tool.color }}
+            >
+              <tool.Icon />
+            </button>
+          ))}
+        </div>
+      </div>
+      {copiedTool && (
+        <span className="text-xs text-green-400">
+          ✓ Prompt copied! Paste it in {copiedTool}
+        </span>
+      )}
+      {copyError && (
+        <span className="text-xs text-yellow-400">
+          {copyError}
+        </span>
+      )}
+    </div>
+  );
+}
