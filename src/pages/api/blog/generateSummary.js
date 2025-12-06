@@ -1,7 +1,7 @@
 // API Endpoint: Generate Summary Prompt
 // Handles blog summarization requests and returns AI model URLs
 
-import { AI_MODELS } from '../../../config/aiModels';
+import { AI_MODELS, RATE_LIMIT } from '../../../config/aiModels';
 import { generateSummaryPrompt, generateModelUrl, validateBlogData } from '../../../utils/promptGenerator';
 
 // Simple in-memory rate limiter (for production, use Redis or similar)

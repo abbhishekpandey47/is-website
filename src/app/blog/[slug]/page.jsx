@@ -13,11 +13,7 @@ import CTA2 from "./cta2";
 import Featured from "./featured";
 import HeadBanner from "./headBanner";
 import Outline from "./outline";
-add-summarize-with-ai
 import SummarizeBar from "./summarizeBar";
-import { SummaryWidget } from "@/Components/blog/SummaryWidget";
-main
-
 
 
 // Utility function to check if the post file exists
@@ -315,25 +311,17 @@ if (inFAQ && currentQuestion && currentAnswer) {
 
         <div className="pt-32 flex flex-col justify-center items-center">
           <HeadBanner postData={postData} />
- add-summarize-with-ai
-          {slug === "best-documentation-tools-for-developers" && (
-            <SummarizeBar 
+          {postData.summarize && (
+            <SummarizeBar
               blogData={{
                 title: postData.title,
                 description: postData.description,
                 content: postContent,
                 authorName: postData.authorName,
                 category: postData.category,
-                slug: slug
+                slug: slug,
               }}
             />
-
-          {/* AI Summary Widget - Experiment for specific blog only */}
-          {slug === "best-documentation-tools-for-developers" && (
-            <div className="w-full flex justify-center px-10 mt-4">
-              <SummaryWidget slug="best-documentation-tools-for-developers" title={postData.title || "Best Documentation Tools for Developers"} />
-            </div>
- main
           )}
           <div className="flex justify-around w-full pb-16 px-10 max-lg:flex-col">
             <div className=" max-lg:w-full max-lg:flex justify-center">

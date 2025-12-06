@@ -48,8 +48,8 @@ Another benefit is that Mintlify documentation is search engine optimized from d
 
 Mintlify also fits smoothly into Git based workflows. Documentation sits inside the same repository as your API code. When you push a commit or merge a pull request, the site rebuilds automatically. This keeps the docs aligned with real code changes and removes the version drift that teams often face when maintaining SDKs in three languages or when customers depend on updated API references.
 
-![Mintlify Built Tools and Essentials](/PostImages/best-documentation-tools-for-developers/img5.webp)
-### Setup, Deployment & Versioning
+<!-- ![Mintlify Built Tools and Essentials](/PostImages/best-documentation-tools-for-developers/img5.webp)
+### Setup, Deployment & Versioning -->
 
 Mintlify is built to fit directly into a modern development workflow, which makes setup and deployment simple for fast moving teams. It connects with GitHub and builds the documentation automatically. When you push a commit or merge a pull request, the site updates itself without any manual deployment steps. This is helpful when you ship new API endpoints every week and want your documentation to stay in sync.
 
@@ -83,7 +83,7 @@ Mintlify offers both free and paid plans. The free plan works well for early sta
 
 ## GitBook
 
-![GitBook Documentation Platform](/PostImages/best-documentation-tools-for-developers/img8.webp)
+<!-- ![GitBook Documentation Platform](/PostImages/best-documentation-tools-for-developers/img8.webp) -->
 
 ### Overview
 
@@ -153,7 +153,7 @@ If you are trying to understand how Mintlify and GitBook differ in real workflow
 
 ## ReadMe
 
-![ReadMe Documentation Platform](/PostImages/best-documentation-tools-for-developers/img13.webp)
+<!-- ![ReadMe Documentation Platform](/PostImages/best-documentation-tools-for-developers/img13.webp) -->
 ### Overview
 
 ReadMe is designed for teams that want interactive and hands on API onboarding and it stands out among the best documentation tools for developers who rely heavily on real time testing. It is used by API heavy startups like Cashfree API, Shyft, and Shiprocket API where customers need to try endpoints before committing to an integration. Many teams pick ReadMe when they compare documentation tools because its interactive console helps developers understand API behavior without switching tabs.
@@ -162,7 +162,7 @@ The platform works best when your product exposes a public API that developers c
 
 ReadMe makes sense when your product behaves like a public developer platform and when you want customers to learn by trying real calls instead of reading long explanations. Many teams evaluating the best documentation tools choose ReadMe when their priority is interactive onboarding rather than static guides.
 
-![ReadMe API Response Sample](/PostImages/best-documentation-tools-for-developers/img14.webp)
+<!-- ![ReadMe API Response Sample](/PostImages/best-documentation-tools-for-developers/img14.webp) -->
 ### Built Tools & Integrations
 
 ReadMe provides a strong set of integrations that improve the developer onboarding experience and support teams that want well structured and data driven API documentation. One of its most useful capabilities is the seamless handling of API keys. Developers can view and use their personal API keys directly inside the interface which removes friction during onboarding. This helps teams where customers need to test endpoints quickly without setting up local environments or configuring credentials manually. Many API first startups compare documentation tools and choose ReadMe because this feature creates a smoother onboarding flow.
@@ -194,7 +194,7 @@ While more expensive than general purpose documentation tools, ReadMe's pricing 
 
 ## Docusaurus
 
-![Docusaurus Documentation Framework](/PostImages/best-documentation-tools-for-developers/img17.webp)
+<!-- ![Docusaurus Documentation Framework](/PostImages/best-documentation-tools-for-developers/img17.webp) -->
 ### Overview
 
 Docusaurus works well for engineering driven teams that want full control over their documentation site. It is open source and built with React which makes it a strong fit for startups like Calcom, N8N, and Refine dev that maintain complex developer platforms rather than a simple REST API. Many teams exploring the best documentation tools for developers choose Docusaurus when they want a system that behaves like part of their own codebase instead of a hosted editor.
@@ -215,7 +215,7 @@ The advantage of this approach is the high level of customizability it offers. E
 
 Below is a simplified example of how an OpenAPI spec might be imported using a Docusaurus plugin:
 
-![Docusaurus OpenAPI Configuration](/PostImages/best-documentation-tools-for-developers/img18.webp)
+<!-- ![Docusaurus OpenAPI Configuration](/PostImages/best-documentation-tools-for-developers/img18.webp) -->
 ### Built Tools & Integrations
 
 Docusaurus works well for teams that want documentation wired into their engineering workflow. Its plugin system supports search, custom themes, and API imports, so you can plug in tools like Algolia style search or OpenAPI rendering without building everything manually. This helps smaller B2B SaaS teams like Calcom or Refine dev keep structure flexible while still using ready plugins.
