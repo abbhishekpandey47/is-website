@@ -92,6 +92,7 @@ export default function SummarizeBar({ blogData }) {
       }
 
     } catch (err) {
+      console.error('Error handling summarization:', err);
       setError(err.message || 'An error occurred');
       setTimeout(() => setError(null), 5000);
     } finally {
