@@ -57,7 +57,7 @@ Please provide a clear, developer-friendly summary.`;
  * @param {string} baseUrl - Base URL pattern for the model
  * @returns {string} - Complete URL with encoded prompt
  */
-export function generateModelUrl(prompt, baseUrl) {
+export function generateModelUrl(modelId, prompt, baseUrl) {
   const encodedPrompt = encodeURIComponent(prompt);
   return `${baseUrl}${encodedPrompt}`;
 }

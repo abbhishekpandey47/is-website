@@ -78,8 +78,11 @@ export default function SummarizeBar({ blogData }) {
           await navigator.clipboard.writeText(data.data.prompt);
           setError(`Prompt copied to clipboard! Paste it in ${modelData.name}.`);
           
-          // Open the model URL
-          window.open(modelData.url, '_blank', 'noopener,noreferrer');
+          // Open the base URL without prompt (they don't support URL params well)
+          const baseUrl = modelId === 'gemini' 
+            ? 'https://gemini.google.com/app' 
+            : 'https://copilot.microsoft.com/';
+          window.open(baseUrl, '_blank', 'noopener,noreferrer');
           
           // Clear success message after 5 seconds
           setTimeout(() => setError(null), 5000);
