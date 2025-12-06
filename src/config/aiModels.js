@@ -8,8 +8,8 @@ export const AI_MODELS = [
     displayName: 'ChatGPT',
     baseUrl: 'https://chatgpt.com/',
     urlPattern: 'https://chatgpt.com/?q=',
-    icon: '🤖', // We'll use emojis for now, can replace with actual icons later
-    color: '#10a37f', // ChatGPT brand color
+    icon: '🤖',
+    color: '#10a37f',
     enabled: true,
   },
   {
@@ -19,7 +19,7 @@ export const AI_MODELS = [
     baseUrl: 'https://claude.ai/',
     urlPattern: 'https://claude.ai/new?q=',
     icon: '🧠',
-    color: '#D97757', // Claude brand color
+    color: '#D97757',
     enabled: true,
   },
   {
@@ -61,8 +61,13 @@ export const RATE_LIMIT = {
 };
 
 // Feature flags
-export const FEATURE_FLAGS = {
-  enableAnalytics: true,
-  enableCaching: true,
-  cacheTTL: 300000, // 5 minutes in milliseconds
+export const FEATURES = {
+  summarization: true,
+  analytics: false, // For future use
+};
+
+// Cache configuration
+export const CACHE_CONFIG = {
+  ttl: 300000, // 5 minutes
+  maxSize: 100,
 };

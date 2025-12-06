@@ -21,8 +21,8 @@ export function generateSummaryPrompt(blogData) {
         .replace(/!\[.*?\]\(.*?\)/g, '') // Remove images
         .replace(/\[.*?\]\(.*?\)/g, '') // Remove links
         .replace(/```[\s\S]*?```/g, '') // Remove code blocks
-        .replace(/`(.*?)`/g, '$1') // Remove inline code backticks, preserve code text
-        .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold syntax, preserve content
+        .replace(/`(.+?)`/g, '$1') // Remove inline code backticks, preserve code text
+        .replace(/\*\*(.+?)\*\*/g, '$1') // Remove bold syntax, preserve content
         .replace(/\*.*?\*/g, '') // Remove italic
         .trim()
         .substring(0, 2000)
@@ -52,6 +52,7 @@ Please provide a clear, developer-friendly summary.`;
 
 /**
  * Generates a URL with encoded prompt for specific AI model
+ * @param {string} modelId - AI model identifier
  * @param {string} prompt - The prompt text
  * @param {string} baseUrl - Base URL pattern for the model
  * @returns {string} - Complete URL with encoded prompt

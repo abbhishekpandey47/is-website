@@ -1322,6 +1322,7 @@ let postMetaData = [
   category: "Product Documentation",
   metaDescription:
     "Learn the best practices for developer focused product documentation with real examples. Improve onboarding, activation, and adoption. Click the link to read the guide now.",
+  summarize: true,
 },
  {
   title: "How to Rank on ChatGPT: Practices to Boost LLM Visibility",
@@ -1346,6 +1347,7 @@ let postMetaData = [
   authorId: "author0001",
   category: "Informational",
   metaDescription: "Compare the top developer documentation tools for 2025. See how Mintlify, GitBook, ReadMe, and Docusaurus differ in API docs, workflows, collaboration and customization. Find the right fit for your SaaS team.",
+  summarize: true,
 },
  {
   title: "Community Led Growth vs Paid Growth: What Works for B2B SaaS Startups?",
