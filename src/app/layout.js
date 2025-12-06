@@ -238,7 +238,7 @@ export default function RootLayout({ children }) {
                 <AlternateLinks />
             </head>
             <GoogleAnalytics gaId='G-G0BTN1FRWY' />
-            <body className='antialiased'>
+            <body className='antialiased' suppressHydrationWarning>
                 <noscript>
                     <iframe
                         src='https://www.googletagmanager.com/ns.html?id=GTM-WGZGHXZS'
