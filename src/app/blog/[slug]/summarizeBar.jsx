@@ -90,7 +90,6 @@ export default function SummarizeBar({ blogData }) {
         // For other models, directly open with URL parameters
         window.open(modelData.url, '_blank', 'noopener,noreferrer');
       }
-
     } catch (err) {
       console.error('Error handling summarization:', err);
       setError(err.message || 'An error occurred');
