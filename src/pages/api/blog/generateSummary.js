@@ -55,7 +55,7 @@ export default async function handler(req, res) {
     const { title, description, content, authorName, category, slug } = req.body;
 
     // Validate blog data
-    const blogData = { title, description, content, authorName, category };
+    const blogData = { title, description, content, authorName, category, slug };
     const validation = validateBlogData(blogData);
 
     if (!validation.valid) {
