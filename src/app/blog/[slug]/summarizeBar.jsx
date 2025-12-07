@@ -58,13 +58,19 @@ const modelLogos = {
 };
 
 export default function SummarizeBar({ blogData }) {
-  const [loading, setLoading] = useState(false);
+  const [loadingModel, setLoadingModel] = useState(null);
   const [error, setError] = useState(null);
 
   const handleSummarize = async (modelId) => {
-    setLoading(true);
+    // Prevent multiple clicks
+    if (loadingModel) return;
+    
+    setLoadingModel(modelId);
     setError(null);
 
+    // Open window immediately to bypass popup blocker
+    const newWindow = window.open('', '_blank');
+    
     try {
       const response = await fetch('/api/blog/generateSummary', {
         method: 'POST',
@@ -77,6 +83,7 @@ export default function SummarizeBar({ blogData }) {
       const data = await response.json();
 
       if (!response.ok) {
+        if (newWindow) newWindow.close();
         throw new Error(data.error || 'Failed to generate summary');
       }
 
@@ -84,17 +91,21 @@ export default function SummarizeBar({ blogData }) {
       const modelData = data.data.models.find(m => m.id === modelId);
 
       if (!modelData) {
+        if (newWindow) newWindow.close();
         throw new Error('Model not found');
       }
 
-      // Open AI model with prompt in URL (works for all models now)
-      window.open(modelData.url, '_blank', 'noopener,noreferrer');
+      // Set the URL and add security attributes
+      if (newWindow) {
+        newWindow.opener = null;
+        newWindow.location.href = modelData.url;
+      }
     } catch (err) {
       console.error('Error handling summarization:', err);
       setError(err.message || 'An error occurred');
       setTimeout(() => setError(null), 5000);
     } finally {
-      setLoading(false);
+      setLoadingModel(null);
     }
   };
 
@@ -119,11 +130,15 @@ export default function SummarizeBar({ blogData }) {
               <button
                 key={model.id}
                 onClick={() => handleSummarize(model.id)}
-                disabled={loading}
+                disabled={loadingModel !== null}
                 className="group relative p-2.5 sm:p-3 rounded-full bg-[#2a2d3e]/80 hover:bg-[#3a3d4e]/90 border border-white/5 hover:border-white/20 transition-all duration-200 active:scale-95 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation shadow-lg hover:shadow-xl"
                 aria-label={model.displayName}
               >
-                {LogoComponent && <LogoComponent />}
+                {loadingModel === model.id ? (
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-purple-500/30 border-t-purple-400 rounded-full animate-spin"></div>
+                ) : (
+                  LogoComponent && <LogoComponent />
+                )}
                 
                 {/* Hover Tooltip */}
                 <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 px-3 py-1.5 text-xs font-medium text-white bg-gray-900/95 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none z-10 border border-white/10">
@@ -133,11 +148,6 @@ export default function SummarizeBar({ blogData }) {
             );
           })}
         </div>
-
-        {/* Loading Spinner */}
-        {loading && (
-          <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-purple-500/30 border-t-purple-400 rounded-full animate-spin"></div>
-        )}
       </div>
 
       {/* Error/Success Message */}
