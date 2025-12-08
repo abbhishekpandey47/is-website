@@ -1,5 +1,21 @@
 // AI Models Configuration
 // This file contains all AI model details for the blog summarization feature
+// 
+// The "Summarize with AI" feature is automatically enabled for:
+// - All blog posts (/blog/[slug])
+// - All case studies (/case-studies/[slug])
+// No additional configuration needed for new content.
+//
+// Features:
+// - Instant loading: URLs generated client-side (no API delay)
+// - Copy prompt button: Users can copy and paste manually
+// - Popup blocker safe: Opens directly with final URL
+// - Mobile optimized: Touch-friendly, responsive design
+//
+// To add a new AI model:
+// 1. Add model config below with id, name, displayName, urlPattern, color, enabled
+// 2. Add corresponding SVG logo to /public/ai-logos/{modelId}.svg
+// 3. Add logo component in summarizeBar.jsx
 
 export const AI_MODELS = [
   {

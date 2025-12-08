@@ -12,12 +12,15 @@
  * @returns {string} - Formatted prompt for AI models
  */
 export function generateSummaryPrompt(blogData) {
-  const { title, description, slug, authorName } = blogData;
+  const { title, description, slug, authorName, category } = blogData;
   
-  // Construct the full blog URL
-  const blogUrl = `https://www.infrasity.com/blog/${slug}`;
+  // Construct the full URL with fallback - handle both blogs and case studies
+  const isCaseStudy = category === "Case Studies";
+  const blogUrl = slug 
+    ? (isCaseStudy ? `https://www.infrasity.com/case-studies/${slug}` : `https://www.infrasity.com/blog/${slug}`)
+    : 'https://www.infrasity.com/blog';
 
-  const prompt = `I'm reading the blog post by Infrasity about "${title}".
+  const prompt = `I'm reading the blog post by Infrasity about "${title || 'technical content'}".
 
 ${blogUrl}
 
@@ -74,6 +77,10 @@ export function validateBlogData(blogData) {
 
   if (!blogData.content || blogData.content.trim() === '') {
     errors.push('Blog content is required');
+  }
+
+  if (!blogData.slug || blogData.slug.trim() === '') {
+    errors.push('Blog slug is required');
   }
 
   return {

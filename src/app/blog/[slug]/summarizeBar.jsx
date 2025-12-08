@@ -61,45 +61,53 @@ export default function SummarizeBar({ blogData }) {
   const [loadingModel, setLoadingModel] = useState(null);
   const [error, setError] = useState(null);
 
-  const handleSummarize = async (modelId) => {
+  // Generate prompt on client side for instant loading
+  const generatePrompt = () => {
+    const { title, slug, category } = blogData;
+    const isCaseStudy = category === "Case Studies";
+    const url = slug 
+      ? (isCaseStudy ? `https://www.infrasity.com/case-studies/${slug}` : `https://www.infrasity.com/blog/${slug}`)
+      : 'https://www.infrasity.com/blog';
+
+    return `I'm reading the blog post by Infrasity about "${title}".
+
+${url}
+
+Summarize the key insights from this blog post. What stands out in their approach or ideas?
+
+Reflect on how Infrasity's perspective adds value for teams working with developer marketing, technical content, and API documentation.`;
+  };
+
+  const handleSummarize = (modelId) => {
     // Prevent multiple clicks
     if (loadingModel) return;
     
     setLoadingModel(modelId);
     setError(null);
 
-    // Open window immediately to bypass popup blocker
-    const newWindow = window.open('', '_blank');
-    
     try {
-      const response = await fetch('/api/blog/generateSummary', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(blogData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        if (newWindow) newWindow.close();
-        throw new Error(data.error || 'Failed to generate summary');
-      }
-
-      // Find the specific model data
-      const modelData = data.data.models.find(m => m.id === modelId);
-
-      if (!modelData) {
-        if (newWindow) newWindow.close();
+      // Find the model
+      const model = AI_MODELS.find(m => m.id === modelId);
+      if (!model) {
         throw new Error('Model not found');
       }
 
-      // Set the URL and add security attributes
-      if (newWindow) {
-        newWindow.opener = null;
-        newWindow.location.href = modelData.url;
+      // Generate prompt instantly
+      const prompt = generatePrompt();
+      const encodedPrompt = encodeURIComponent(prompt);
+      const finalUrl = `${model.urlPattern}${encodedPrompt}`;
+
+      // Open window directly with the URL - FASTEST METHOD
+      const newWindow = window.open(finalUrl, '_blank', 'noopener,noreferrer');
+      
+      // Check if popup was blocked
+      if (!newWindow) {
+        throw new Error('Popup blocked. Please allow popups for this site.');
       }
+
+      // Success feedback
+      setError('Opening AI model...');
+      setTimeout(() => setError(null), 2000);
     } catch (err) {
       console.error('Error handling summarization:', err);
       setError(err.message || 'An error occurred');
@@ -153,7 +161,7 @@ export default function SummarizeBar({ blogData }) {
       {/* Error/Success Message */}
       {error && (
         <div className={`fixed bottom-4 sm:bottom-8 left-4 right-4 sm:left-auto sm:right-8 px-4 py-3 rounded-lg shadow-2xl backdrop-blur-md ${
-          error.includes('copied') 
+          error.includes('Opening')
             ? 'bg-green-500/20 border border-green-500/30 text-green-200' 
             : 'bg-red-500/20 border border-red-500/30 text-red-200'
         } text-sm sm:text-base max-w-md mx-auto sm:mx-0`}>

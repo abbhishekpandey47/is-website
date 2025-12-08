@@ -19,6 +19,8 @@ import CaseStudySidebar from "./CaseStudySidebar";
 import { Videos, TerrateamVideos } from "./_videoData";
 import { DevZeroCard } from "./testimonialData";
 import TestimonialCard from "./testimonialCard";
+import SummarizeBar from "../../blog/[slug]/summarizeBar";
+
 // Utility function to check if the post file exists
 const isValid = (slug) => {
   const folder = "posts/";
@@ -117,6 +119,20 @@ const PostPage = (props) => {
       `}} />
       <div className="pt-32 pb-12" style={{ overflow: 'visible', position: 'relative', zIndex: 1 }}>
         <HeadBanner postData={postData} />
+        
+        {/* Summarize with AI for Case Studies */}
+        <div className="flex justify-center">
+          <SummarizeBar
+            blogData={{
+              title: postData.title,
+              description: postData.description,
+              content: postContent,
+              authorName: postData.authorName,
+              category: postData.category,
+              slug: slug,
+            }}
+          />
+        </div>
 
         <CaseStudyLayout
           toc={<Outline content={postContent} />}
