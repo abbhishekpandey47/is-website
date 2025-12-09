@@ -59,7 +59,8 @@ export function ClientLayoutWrapper({ children }) {
   const hideNavBarAndFooter =
     safePathname === "/tools/reddit-tools" ||
     safePathname.startsWith("/auth") ||
-    safePathname.startsWith("/threadflow");
+    safePathname.startsWith("/threadflow")||
+     safePathname === "/landing"; 
   const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2 && safePathname !== "/careers";
   const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar;
 
