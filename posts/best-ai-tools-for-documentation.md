@@ -2,35 +2,35 @@
 
 Here is the quick summary before we go deeper.
 
-### [Fern](https://buildwithfern.com/) – For API first teams that need SDKs and clean docs
+- **[Fern](https://buildwithfern.com/) – For API first teams that need SDKs and clean docs**
 
-Cohere uses Fern to generate SDKs in multiple languages from a single OpenAPI spec. Nominal uses it to deliver a "stripe quality" onboarding experience without maintaining four different client libraries manually.
+  Cohere uses Fern to generate SDKs in multiple languages from a single OpenAPI spec. Nominal uses it to deliver a "stripe quality" onboarding experience without maintaining four different client libraries manually.
 
-If you expose a public REST API and want Node, Python, Go and Java SDKs generated and kept in sync with your docs, Fern is the tool that removes most of the manual work. Your docs and SDKs come from one API definition and stay aligned during every release cycle.
+  If you expose a public REST API and want Node, Python, Go and Java SDKs generated and kept in sync with your docs, Fern is the tool that removes most of the manual work. Your docs and SDKs come from one API definition and stay aligned during every release cycle.
 
-### [Apidog](https://apidog.com/) – For teams that want one place for design, mocks, tests, and docs
+- **[Apidog](https://apidog.com/) – For teams that want one place for design, mocks, tests, and docs**
 
-Nestlé's innovation team used to juggle Postman, Swagger, mock servers and separate documentation. After moving to Apidog, they design the API once and get mocking, testing and docs in the same workspace.
+  Nestlé's innovation team used to juggle Postman, Swagger, mock servers and separate documentation. After moving to Apidog, they design the API once and get mocking, testing and docs in the same workspace.
 
-If your engineers move fast and you want the frontend to build against realistic mock servers before the backend is ready, Apidog gives you a single synced environment. It replaces the usual stack where you design an API in one tool, test it in another, and document it somewhere else.
+  If your engineers move fast and you want the frontend to build against realistic mock servers before the backend is ready, Apidog gives you a single synced environment. It replaces the usual stack where you design an API in one tool, test it in another, and document it somewhere else.
 
-### [Swimm](https://swimm.io/) – For large or growing codebases where docs keep going out of date
+- **[Swimm](https://swimm.io/) – For large or growing codebases where docs keep going out of date**
 
-Riskfuel cut onboarding time by more than half after coupling documentation directly to the codebase with Swimm. Recursion has over a thousand repositories and uses Swimm to make sure docs are flagged when code changes.
+  Riskfuel cut onboarding time by more than half after coupling documentation directly to the codebase with Swimm. Recursion has over a thousand repositories and uses Swimm to make sure docs are flagged when code changes.
 
-If you maintain a growing repository with hundreds of functions and you want docs to move with the code, Swimm handles that automatically. The editor lives inside the IDE, so developers write and fix docs while they commit code. This reduces version drift across the codebase.
+  If you maintain a growing repository with hundreds of functions and you want docs to move with the code, Swimm handles that automatically. The editor lives inside the IDE, so developers write and fix docs while they commit code. This reduces version drift across the codebase.
 
-### [Guidde](https://www.guidde.com/) – For teams that explain the same process on calls again and again
+- **[Guidde](https://www.guidde.com/) – For teams that explain the same process on calls again and again**
 
-SentinelOne uses Guidde to turn internal workflows into reusable video guides instead of writing long how-to documents. FloQast and Nezasa rely on it to create training and onboarding content without a dedicated video team.
+  SentinelOne uses Guidde to turn internal workflows into reusable video guides instead of writing long how-to documents. FloQast and Nezasa rely on it to create training and onboarding content without a dedicated video team.
 
-If you need clear internal tutorials for tasks like setting up an integration or using an internal dashboard, Guidde records your workflow and turns it into a narrated step-by-step video. It is faster than writing long text guides and it helps support and operations teams move much quicker.
+  If you need clear internal tutorials for tasks like setting up an integration or using an internal dashboard, Guidde records your workflow and turns it into a narrated step-by-step video. It is faster than writing long text guides and it helps support and operations teams move much quicker.
 
-### [Eraser](https://www.eraser.io/) – For teams that need fast architecture diagrams and visual specs
+- **[Eraser](https://www.eraser.io/) – For teams that need fast architecture diagrams and visual specs**
 
-Mathspace uses Eraser to move from concept to complete diagram in minutes. Mission plus and Neon rely on it to keep architecture diagrams close to the code instead of buried in separate design tools.
+  Mathspace uses Eraser to move from concept to complete diagram in minutes. Mission plus and Neon rely on it to keep architecture diagrams close to the code instead of buried in separate design tools.
 
-If you are preparing a system overview for a feature release or you want a clean sequence diagram of your authentication flow, Eraser generates it from a short prompt or from code. You can version these diagrams with your codebase, which keeps technical specs stable during the release cycle.
+  If you are preparing a system overview for a feature release or you want a clean sequence diagram of your authentication flow, Eraser generates it from a short prompt or from code. You can version these diagrams with your codebase, which keeps technical specs stable during the release cycle.
 
 ## How AI Is Changing Documentation in 2025?
 
@@ -152,6 +152,8 @@ When the implementation changes, the diagram updates in the same pull request. N
 
 ![How AI integrates into the modern documentation lifecycle showing continuous integration of code, docs, SDKs, and diagrams](/PostImages/best-ai-tools-for-documentation/img3.webp)
 
+## CTA: Docs lagging behind code? Fix it now.
+
 ## Deep Dive: How API and Documentation Tools Fit Into Engineering Workflows
 
 This deep dive shows how each tool fits into real day-to-day engineering work using practical examples from startup teams that ship features weekly and depend on clean documentation to avoid bottlenecks.
@@ -213,7 +215,7 @@ Fern fits this shift perfectly.
 
 #### How API First SaaS Teams Use Fern in Their Release Workflow
 
-![Step-by-step workflow diagram showing API definition to automatic SDK and documentation generation pipeline with Fern](/PostImages/best-ai-tools-for-documentation/img5.webp)
+<img src="/PostImages/best-ai-tools-for-documentation/img5.webp" alt="Step-by-step workflow diagram showing API definition to automatic SDK and documentation generation pipeline with Fern" style="max-width: 700px; height: auto; display: block; margin: 0 auto;" />
 
 ##### Step-By-Step Breakdown
 
@@ -547,6 +549,8 @@ Architects avoid outdated diagrams during planning.
 **Swimm**: Install IDE plugin, link repository, create first doc  
 **Guidde**: Add browser extension, record workflow, publish guide  
 **Eraser**: Create account, paste prompt or code, export diagram
+
+## CTA: Your API deserves better documentation.
 
 ## Conclusion
 
