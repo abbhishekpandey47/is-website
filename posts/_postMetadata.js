@@ -1345,7 +1345,7 @@ let postMetaData = [
   ogImage: "/PostImages/best-ai-tools-for-documentation/img1.webp",
   publishedOn: "2025-12-10",
   authorId: "author0001",
-  category: "Developer Experience",
+  category: "Informational",
   metaDescription: "Discover the top AI documentation tools used by modern SaaS teams to automate SDKs, prevent documentation drift, create video workflows, and maintain accurate diagrams.",
 },
 {
