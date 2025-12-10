@@ -1372,6 +1372,18 @@ let postMetaData = [
   metaDescription:
     "Compare Community-Led Growth and paid growth. Learn best practices for community-led growth to lower CAC, and gain a competitive advantage in B2B SaaS. Read now",
 },
+ {
+  title: "Bad Documentation Examples and How to Fix Them",
+  metatitle: "Bad Documentation Examples: Why Developers Drop Off | Fixes",
+  slug: "bad-documentation-examples",
+  description:"Bad documentation examples are one of the biggest hidden blockers to developer adoption. When integration guides are missing, CLI references are outdated, or content lacks structure and context, developers lose trust and your onboarding funnel slows down. This blog explains the most common documentation pitfalls seen across B2B SaaS teams, why they happen, and how they directly impact activation, usability, and product credibility.",
+  ogImage: "/PostImages/bad-documentation-examples/0.webp",
+  publishedOn: "2025-12-10",
+  authorId: "author0005",
+  category: "Product Documentation",
+  metaDescription:
+    "Identify and fix bad documentation examples that frustrate developers and kill adoption. Learn how to improve flow, clarity, and trust. Read now to find out",
+},
 ];
 
 const sorted = () => {
