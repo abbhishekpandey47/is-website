@@ -1378,7 +1378,7 @@ const sorted = () => {
     return postMetaData.sort((a, b) => {
         let datea = Math.floor(new Date(a.publishedOn).getTime() / 1000);
         let dateb = Math.floor(new Date(b.publishedOn).getTime() / 1000);
-        return datea - dateb;
+        return dateb - datea;
     });
 };
 
