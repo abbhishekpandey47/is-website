@@ -38,7 +38,16 @@ const authorData = [
     designation: "Content Writer @ Infrasity",
     about: "Content Strategist at Infrasity, leading the content department and overseeing the development of high-quality tech content.",
     linkedIn: "https://www.linkedin.com/in/paramita-kalita/"
-  }
+  },
+  {
+  "authorId": "author0006",
+  "name": "Gaurav Tiwari",
+  "profilePic": "/authorImages/Gaurav.jpeg",
+  "designation": "Web Developer & Technical Content Writer @ Infrasity",
+  "about": "Web developer and technical content writer at Infrasity, creating engineering-focused documentation and writing product-driven content for SaaS teams.",
+  "linkedIn": "https://www.linkedin.com/in/gaurav-tiwari-663215204/"
+}
+
 ];
 
 module.exports = authorData;
