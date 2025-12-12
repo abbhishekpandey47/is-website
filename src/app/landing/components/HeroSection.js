@@ -77,7 +77,7 @@ export default function HeroSection() {
               <div className="flex items-center justify-center space-x-8 md:space-x-16">
                 {/* Stage 1 */}
                 <div className="flex flex-col items-center">
-                  <div className="text-xs text-gray-500 mb-4">Stage 1</div>
+                  <div className="text-xs text-gray-500 mb-4">Product</div>
                   <div className="relative flex items-center">
                     {/* Left circle with 0 */}
                     <div className="w-10 h-10 rounded-full bg-gray-800 border-2 border-gray-700 flex items-center justify-center mr-4">
