@@ -42,14 +42,19 @@ export default function GrowthJourney() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center p-8">
-      <div className="max-w-7xl w-full">
+    <div className="min-h-screen relative text-white flex items-center justify-center p-8">
+      {/* Background with theme */}
+      <div className="absolute inset-0 bg-black">
+        <div className="whyinfra absolute inset-0"></div>
+      </div>
+
+      <div className="max-w-7xl w-full relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            How It All <span className="text-cyan-400">Fits Together</span>
+          <h1 className="text-4xl md:text-5xl quicksand-bold mb-4">
+            How It All <span className="specialtext">Fits Together</span>
           </h1>
-          <p className="text-gray-400 text-lg">
+          <p className="text-[wheat] text-lg quicksand-semibold">
             A systematic journey from product to repeatable growth.
           </p>
         </div>
@@ -64,31 +69,31 @@ export default function GrowthJourney() {
               {/* Connector Line */}
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-12 left-full w-full h-px">
-                  <div className="w-full h-px bg-gradient-to-r from-cyan-500/50 to-transparent"></div>
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-cyan-500 rounded-full"></div>
+                  <div className="w-full h-px bg-gradient-to-r from-white/50 to-transparent"></div>
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full"></div>
                 </div>
               )}
 
               {/* Card */}
-              <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-cyan-500/50 transition-all duration-300 h-full">
+              <div className="bg-[#888]/20 backdrop-blur-sm border border-white/10 ring-1 ring-black/5 rounded-lg p-6 hover:border-white/30 transition-all duration-300 h-full">
                 {/* Number */}
-                <div className="text-cyan-400 text-sm font-mono mb-4">
+                <div className="text-white text-sm font-mono mb-4 quicksand-semibold">
                   {step.number}
                 </div>
 
                 {/* Icon */}
                 <div className="mb-6 relative">
-                  <div className="w-12 h-12 bg-zinc-800 rounded-lg flex items-center justify-center group-hover:bg-cyan-500/10 transition-colors duration-300">
-                    <step.icon className="w-6 h-6 text-cyan-400" />
+                  <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
+                    <step.icon className="w-6 h-6 text-white" />
                   </div>
-                  <div className="absolute top-3 left-3 w-2 h-2 bg-cyan-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute top-3 left-3 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
 
                 {/* Content */}
                 <div>
-                  <h3 className="text-xl font-semibold mb-1">{step.title}</h3>
-                  <p className="text-cyan-400 text-sm mb-3">{step.subtitle}</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
+                  <h3 className="text-xl quicksand-semibold mb-1">{step.title}</h3>
+                  <p className="text-white text-sm mb-3 quicksand-semibold">{step.subtitle}</p>
+                  <p className="text-[wheat] text-sm leading-relaxed quicksand-light">
                     {step.description}
                   </p>
                 </div>

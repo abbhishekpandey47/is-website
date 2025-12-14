@@ -43,14 +43,19 @@ export default function TemplatesToolsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white py-20 px-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen relative text-white py-20 px-8">
+      {/* Background with theme */}
+      <div className="absolute inset-0 bg-black">
+        <div className="whyinfra absolute inset-0"></div>
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            What You Get: <span className="text-cyan-400">Templates, SOPs & Tools</span>
+          <h1 className="text-4xl md:text-5xl quicksand-bold mb-4">
+            What You Get: <span className="specialtext">Templates, SOPs & Tools</span>
           </h1>
-          <p className="text-gray-400 text-lg">
+          <p className="text-[wheat] text-lg quicksand-semibold">
             Practical, ready-to-use frameworks you can implement today.
           </p>
         </div>
@@ -60,22 +65,22 @@ export default function TemplatesToolsPage() {
           {sections.map((section, index) => (
             <div
               key={index}
-              className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-8 hover:border-cyan-500/50 transition-all duration-300 group"
+              className="bg-[#888]/20 backdrop-blur-sm border border-white/10 ring-1 ring-black/5 rounded-xl p-8 hover:border-white/30 transition-all duration-300 group"
             >
               {/* Icon and Title */}
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-cyan-500/20 transition-colors duration-300">
-                  <section.icon className="w-6 h-6 text-cyan-400" />
+                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-colors duration-300">
+                  <section.icon className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-xl font-semibold pt-2">{section.title}</h2>
+                <h2 className="text-xl quicksand-semibold pt-2">{section.title}</h2>
               </div>
 
               {/* List Items */}
               <ul className="space-y-3">
                 {section.items.map((item, itemIndex) => (
-                  <li key={itemIndex} className="flex items-start gap-3 text-gray-400">
-                    <CheckCircle2 className="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm leading-relaxed">{item}</span>
+                  <li key={itemIndex} className="flex items-start gap-3 text-[wheat]">
+                    <CheckCircle2 className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
+                    <span className="text-sm leading-relaxed quicksand-light">{item}</span>
                   </li>
                 ))}
               </ul>
