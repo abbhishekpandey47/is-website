@@ -26,18 +26,14 @@ const PlaybooksCardsSection = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full bg-[#0a0a0a] overflow-hidden">
-      <section className="py-20 px-4 md:px-12 lg:px-16 relative">
-        {/* Background gradient effect */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
-          }}
-        />
+    <div className="min-h-screen w-full relative overflow-hidden">
+      {/* Background with theme */}
+      <div className="absolute inset-0 bg-black">
+        <div className="whyinfra absolute inset-0"></div>
+      </div>
 
-        <div className="max-w-6xl mx-auto relative z-10">
+      <section className="py-20 px-4 md:px-12 lg:px-16 relative z-10">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div
             className={`text-center mb-16 transition-all duration-1000 ${
@@ -45,21 +41,13 @@ const PlaybooksCardsSection = () => {
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl mb-6 tracking-tight">
-              <span className="text-white font-bold">Our Playbooks for </span>
-              <span
-                className="font-bold"
-                style={{
-                  background: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl mb-6 tracking-tight quicksand-bold">
+              <span className="text-white">Our Playbooks for </span>
+              <span className="specialtext">
                 Early-Stage Developer Startups
               </span>
             </h1>
-            <p className="text-gray-400 text-base md:text-lg font-light max-w-3xl mx-auto leading-relaxed">
+            <p className="text-[wheat] text-base md:text-lg quicksand-semibold max-w-3xl mx-auto leading-relaxed">
               These playbooks give early-stage teams a practical, repeatable system for developer-led growth.
             </p>
           </div>
@@ -74,20 +62,21 @@ const PlaybooksCardsSection = () => {
                 }`}
                 style={{
                   backgroundColor: "#000000",
-                  backgroundImage: "radial-gradient(circle at top left, #2c2c36 0%, transparent 70%)",
+                  backgroundImage: "radial-gradient(circle at top left, rgba(136, 136, 136, 0.2) 0%, transparent 70%)",
+                  backdropFilter: "blur(8px)",
                   boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.36)",
-                  border: "2px solid rgba(60, 63, 84, 0.3)",
+                  border: "2px solid rgba(255, 255, 255, 0.1)",
                   transitionDelay: `${400 + index * 150}ms`,
                 }}
               >
                 {/* Badge */}
                 <div className="mb-6">
                   <span
-                    className="inline-block px-3 py-1 rounded-full text-xs font-medium"
+                    className="inline-block px-3 py-1 rounded-full text-xs quicksand-semibold"
                     style={{
-                      backgroundColor: "rgba(168, 85, 247, 0.15)",
-                      color: "#a855f7",
-                      border: "1px solid rgba(168, 85, 247, 0.3)",
+                      backgroundColor: "rgba(255, 255, 255, 0.15)",
+                      color: "#ffffff",
+                      border: "1px solid rgba(255, 255, 255, 0.3)",
                     }}
                   >
                     {playbook.badge}
@@ -95,30 +84,20 @@ const PlaybooksCardsSection = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 tracking-tight leading-snug">
+                <h3 className="text-white text-2xl md:text-3xl quicksand-bold mb-4 tracking-tight leading-snug">
                   {playbook.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-400 text-sm md:text-base font-light mb-6 leading-relaxed">
+                <p className="text-[wheat] text-sm md:text-base quicksand-light mb-6 leading-relaxed">
                   {playbook.description}
                 </p>
 
                 {/* Button */}
                 <button
-                  className="group/btn inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm transition-all duration-300 hover:gap-3"
+                  className="group/btn inline-flex items-center gap-2 px-5 py-2.5 rounded-lg quicksand-semibold text-sm transition-all duration-300 hover:gap-3 bg-btnprimary hover:bg-btnprimaryhov text-white"
                   style={{
-                    backgroundColor: "#a855f7",
-                    color: "#ffffff",
-                    boxShadow: "0 4px 12px 0 rgba(168, 85, 247, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.07)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "#9333ea";
-                    e.currentTarget.style.boxShadow = "0 6px 16px 0 rgba(168, 85, 247, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.07)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "#a855f7";
-                    e.currentTarget.style.boxShadow = "0 4px 12px 0 rgba(168, 85, 247, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.07)";
+                    boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.3)",
                   }}
                 >
                   <span>{playbook.buttonText}</span>
@@ -142,7 +121,7 @@ const PlaybooksCardsSection = () => {
                 <div
                   className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{
-                    background: "radial-gradient(circle at top right, rgba(168, 85, 247, 0.05) 0%, transparent 60%)",
+                    background: "radial-gradient(circle at top right, rgba(255, 255, 255, 0.05) 0%, transparent 60%)",
                   }}
                 />
               </div>
@@ -151,7 +130,7 @@ const PlaybooksCardsSection = () => {
 
           {/* Decorative line */}
           <div
-            className={`w-full h-px mt-20 shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 transition-all duration-1000 ${
+            className={`w-full h-px mt-20 bg-gradient-to-r from-white/5 via-white/50 to-white/5 transition-all duration-1000 ${
               isVisible ? "opacity-100" : "opacity-0"
             }`}
             style={{ transitionDelay: "800ms" }}

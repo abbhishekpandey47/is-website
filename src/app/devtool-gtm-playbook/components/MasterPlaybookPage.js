@@ -7,9 +7,8 @@ export default function MasterPlaybookPage() {
         <svg viewBox="0 0 24 24" className="w-7 h-7 fill-none stroke-2">
           <defs>
             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: '#8b5cf6', stopOpacity: 1 }} />
-              <stop offset="50%" style={{ stopColor: '#a855f7', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: '#ec4899', stopOpacity: 1 }} />
+              <stop offset="0%" style={{ stopColor: '#ffffff', stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: '#f5deb3', stopOpacity: 1 }} />
             </linearGradient>
           </defs>
           <circle cx="12" cy="12" r="10" stroke="url(#grad1)"/>
@@ -24,9 +23,8 @@ export default function MasterPlaybookPage() {
         <svg viewBox="0 0 24 24" className="w-7 h-7 fill-none stroke-2">
           <defs>
             <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: '#8b5cf6', stopOpacity: 1 }} />
-              <stop offset="50%" style={{ stopColor: '#a855f7', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: '#ec4899', stopOpacity: 1 }} />
+              <stop offset="0%" style={{ stopColor: '#ffffff', stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: '#f5deb3', stopOpacity: 1 }} />
             </linearGradient>
           </defs>
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="url(#grad2)"/>
@@ -40,9 +38,8 @@ export default function MasterPlaybookPage() {
         <svg viewBox="0 0 24 24" className="w-7 h-7 fill-none stroke-2">
           <defs>
             <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: '#8b5cf6', stopOpacity: 1 }} />
-              <stop offset="50%" style={{ stopColor: '#a855f7', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: '#ec4899', stopOpacity: 1 }} />
+              <stop offset="0%" style={{ stopColor: '#ffffff', stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: '#f5deb3', stopOpacity: 1 }} />
             </linearGradient>
           </defs>
           <circle cx="12" cy="12" r="3" stroke="url(#grad3)"/>
@@ -57,9 +54,8 @@ export default function MasterPlaybookPage() {
         <svg viewBox="0 0 24 24" className="w-7 h-7 fill-none stroke-2">
           <defs>
             <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: '#8b5cf6', stopOpacity: 1 }} />
-              <stop offset="50%" style={{ stopColor: '#a855f7', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: '#ec4899', stopOpacity: 1 }} />
+              <stop offset="0%" style={{ stopColor: '#ffffff', stopOpacity: 1 }} />
+              <stop offset="100%" style={{ stopColor: '#f5deb3', stopOpacity: 1 }} />
             </linearGradient>
           </defs>
           <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="url(#grad4)"/>
@@ -71,14 +67,19 @@ export default function MasterPlaybookPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
-      <div className="max-w-6xl mx-auto px-6 py-20">
+    <div className="min-h-screen relative text-white">
+      {/* Background with theme */}
+      <div className="absolute inset-0 bg-black">
+        <div className="whyinfra absolute inset-0"></div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 py-20 relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-normal mb-4">
-            Why This <span className="bg-gradient-to-r from-purple-400 via-purple-500 to-pink-500 bg-clip-text text-transparent font-semibold">Master Playbook</span>?
+          <h1 className="text-3xl md:text-4xl quicksand-bold mb-4">
+            Why This <span className="specialtext">Master Playbook</span>?
           </h1>
-          <p className="text-gray-400 text-base">
+          <p className="text-[wheat] text-base quicksand-semibold">
             Sound familiar? These are the problems every early-stage dev/SaaS team faces.
           </p>
         </div>
@@ -88,13 +89,13 @@ export default function MasterPlaybookPage() {
           {problems.map((problem, index) => (
             <div
               key={index}
-              className="relative bg-zinc-900/50 border border-zinc-800/80 rounded-lg p-6 text-center transition-all duration-300 hover:border-purple-400/50 hover:-translate-y-0.5 group"
+              className="relative bg-[#888]/20 backdrop-blur-sm border border-white/10 ring-1 ring-black/5 rounded-lg p-6 text-center transition-all duration-300 hover:border-white/30 hover:-translate-y-0.5 group"
               style={{
                 boxShadow: 'none',
                 transition: 'all 0.3s ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 20px rgba(168, 85, 247, 0.2)';
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.15)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.boxShadow = 'none';
@@ -103,10 +104,10 @@ export default function MasterPlaybookPage() {
               {/* Icon with background circle */}
               <div className="flex justify-center mb-4">
                 <div 
-                  className="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300"
+                  className="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1))',
-                    border: '1px solid rgba(168, 85, 247, 0.2)'
+                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(245, 222, 179, 0.15))',
+                    border: '1px solid rgba(255, 255, 255, 0.2)'
                   }}
                 >
                   {problem.icon}
@@ -114,10 +115,10 @@ export default function MasterPlaybookPage() {
               </div>
               
               {/* Content */}
-              <h3 className="text-sm font-semibold mb-2 text-white">
+              <h3 className="text-sm quicksand-semibold mb-2 text-white">
                 {problem.title}
               </h3>
-              <p className="text-gray-500 text-xs leading-relaxed">
+              <p className="text-[wheat] text-xs leading-relaxed quicksand-light">
                 {problem.description}
               </p>
             </div>
@@ -125,13 +126,13 @@ export default function MasterPlaybookPage() {
         </div>
 
         {/* Bottom Section */}
-        <div className="max-w-3xl mx-auto bg-zinc-900/30 border border-zinc-800/60 rounded-lg p-10 text-center">
-          <p className="text-base leading-relaxed text-gray-300">
+        <div className="max-w-3xl mx-auto bg-[#888]/20 backdrop-blur-sm border border-white/10 ring-1 ring-black/5 rounded-lg p-10 text-center">
+          <p className="text-base leading-relaxed text-[wheat] quicksand-semibold">
             This master playbook is built from{' '}
-            <span className="bg-gradient-to-r from-purple-400 via-purple-500 to-pink-500 bg-clip-text text-transparent font-medium">real-world experience</span> with
+            <span className="text-white quicksand-bold">real-world experience</span> with
             dozens of early-stage DevTools & infrastructure startups — a synthesis of what
             actually works to achieve{' '}
-            <span className="bg-gradient-to-r from-purple-400 via-purple-500 to-pink-500 bg-clip-text text-transparent font-medium">repeatable growth</span>.
+            <span className="text-white quicksand-bold">repeatable growth</span>.
           </p>
         </div>
       </div>

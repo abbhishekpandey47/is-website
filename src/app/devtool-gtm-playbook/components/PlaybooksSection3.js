@@ -58,40 +58,36 @@ const PlaybooksSection = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full bg-[#0a0a0a] overflow-hidden">
-      <section className="py-20 px-4 md:px-12 lg:px-16 relative">
-        {/* Background gradient effect */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
-          }}
-        />
+    <div className="min-h-screen w-full relative overflow-hidden">
+      {/* Background with theme */}
+      <div className="absolute inset-0 bg-black">
+        <div className="whyinfra absolute inset-0"></div>
+      </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
+      <section className="py-20 px-4 md:px-12 lg:px-16 relative z-10">
+        <div className="max-w-7xl mx-auto">
           {/* Three Pillars Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {pillars.map((pillar, index) => (
               <div
                 key={pillar.id}
-                className={`bg-gradient-to-br from-[#1a1a2e]/60 to-[#0f0f1e]/40 border border-purple-900/30 rounded-xl p-6 backdrop-blur-sm transition-all duration-1000 hover:border-purple-600/50 ${
+                className={`bg-[#888]/20 backdrop-blur-sm border border-white/10 ring-1 ring-black/5 rounded-xl p-6 transition-all duration-1000 hover:border-white/30 ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: `${200 + index * 150}ms` }}
               >
                 {/* Icon */}
-                <div className="w-12 h-12 bg-purple-900/30 rounded-lg flex items-center justify-center mb-4 text-2xl">
+                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4 text-2xl">
                   {pillar.icon}
                 </div>
 
                 {/* Title */}
-                <h3 className="text-white text-xl font-bold mb-4 tracking-tight leading-snug">
+                <h3 className="text-white text-xl quicksand-bold mb-4 tracking-tight leading-snug">
                   {pillar.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-400 text-sm font-light mb-4 leading-relaxed">
+                <p className="text-[wheat] text-sm quicksand-light mb-4 leading-relaxed">
                   {pillar.description}
                 </p>
 
@@ -99,7 +95,7 @@ const PlaybooksSection = () => {
                 {pillar.bullets && (
                   <div className="mb-4 space-y-2">
                     {pillar.bullets.map((bullet, idx) => (
-                      <p key={idx} className="text-cyan-400 text-sm font-medium">
+                      <p key={idx} className="text-white text-sm quicksand-semibold">
                         {bullet}
                       </p>
                     ))}
@@ -109,12 +105,12 @@ const PlaybooksSection = () => {
                 {/* Approach */}
                 {pillar.approach && (
                   <div className="mb-3">
-                    <p className="text-white text-sm font-bold mb-2">{pillar.approach}</p>
+                    <p className="text-white text-sm quicksand-bold mb-2">{pillar.approach}</p>
                     <div className="space-y-2">
                       {pillar.approachPoints.map((point, idx) => (
                         <div key={idx} className="flex items-start gap-2">
-                          <span className="text-purple-400 text-xs mt-1">⚙️</span>
-                          <p className="text-gray-300 text-xs font-medium leading-relaxed">
+                          <span className="text-white text-xs mt-1">⚙️</span>
+                          <p className="text-[wheat] text-xs quicksand-semibold leading-relaxed">
                             {point}
                           </p>
                         </div>
@@ -126,12 +122,12 @@ const PlaybooksSection = () => {
                 {/* Framework */}
                 {pillar.framework && (
                   <div className="mb-3">
-                    <p className="text-white text-sm font-bold mb-2">{pillar.framework}</p>
+                    <p className="text-white text-sm quicksand-bold mb-2">{pillar.framework}</p>
                     <div className="space-y-2">
                       {pillar.deliverables.map((item, idx) => (
                         <div key={idx} className="flex items-start gap-2">
-                          <span className="text-cyan-400 text-xs mt-1">↗</span>
-                          <p className="text-gray-300 text-xs font-medium leading-relaxed">
+                          <span className="text-white text-xs mt-1">↗</span>
+                          <p className="text-[wheat] text-xs quicksand-semibold leading-relaxed">
                             {item}
                           </p>
                         </div>
@@ -145,8 +141,8 @@ const PlaybooksSection = () => {
                   <div className="mb-3 space-y-2">
                     {pillar.features.map((feature, idx) => (
                       <div key={idx} className="flex items-start gap-2">
-                        <span className="text-purple-400 text-xs mt-1">☑</span>
-                        <p className="text-gray-300 text-xs font-medium leading-relaxed">
+                        <span className="text-white text-xs mt-1">☑</span>
+                        <p className="text-[wheat] text-xs quicksand-semibold leading-relaxed">
                           {feature}
                         </p>
                       </div>
@@ -156,15 +152,15 @@ const PlaybooksSection = () => {
 
                 {/* Example */}
                 {pillar.example && (
-                  <p className="text-gray-400 text-xs font-light italic mt-3 leading-relaxed">
+                  <p className="text-[wheat] text-xs quicksand-light italic mt-3 leading-relaxed">
                     {pillar.example}
                   </p>
                 )}
 
                 {/* Highlight */}
                 {pillar.highlight && (
-                  <div className="mt-4 pt-4 border-t border-purple-900/30">
-                    <p className="text-cyan-400 text-xs font-medium leading-relaxed">
+                  <div className="mt-4 pt-4 border-t border-white/20">
+                    <p className="text-white text-xs quicksand-semibold leading-relaxed">
                       {pillar.highlight}
                     </p>
                   </div>
@@ -180,19 +176,19 @@ const PlaybooksSection = () => {
             }`}
             style={{ transitionDelay: "650ms" }}
           >
-            <div className="border border-purple-900/50 bg-gradient-to-r from-[#1a1a2e]/60 to-transparent backdrop-blur-sm rounded-lg p-8 text-center">
-              <p className="text-gray-300 text-base md:text-lg font-medium leading-relaxed">
+            <div className="border border-white/10 bg-[#888]/20 backdrop-blur-sm ring-1 ring-black/5 rounded-lg p-8 text-center">
+              <p className="text-[wheat] text-base md:text-lg quicksand-semibold leading-relaxed">
                 These playbooks combine these systems into structured, battle-tested frameworks that early-stage teams can adopt instantly —{" "}
-                <span className="text-cyan-400 font-bold">without guessing</span>,{" "}
-                <span className="text-cyan-400 font-bold">without random posting</span>, and{" "}
-                <span className="text-cyan-400 font-bold">without wasting months</span>.
+                <span className="text-white quicksand-bold">without guessing</span>,{" "}
+                <span className="text-white quicksand-bold">without random posting</span>, and{" "}
+                <span className="text-white quicksand-bold">without wasting months</span>.
               </p>
             </div>
           </div>
 
           {/* Decorative line */}
           <div
-            className={`w-full h-px mt-16 shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 transition-all duration-1000 ${
+            className={`w-full h-px mt-16 bg-gradient-to-r from-white/5 via-white/50 to-white/5 transition-all duration-1000 ${
               isVisible ? "opacity-100" : "opacity-0"
             }`}
             style={{ transitionDelay: "800ms" }}

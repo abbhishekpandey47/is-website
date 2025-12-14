@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState, useEffect } from 'react';
 
@@ -10,40 +9,28 @@ const PlaybooksSection = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-[#0a0a0a] overflow-hidden">
-      <section className="py-20 px-4 md:px-12 lg:px-16 relative">
-        {/* Background gradient effect */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, #272b45 0%, transparent 40%)",
-          }}
-        />
+    <div className="min-h-screen w-full relative overflow-hidden">
+      {/* Background with theme */}
+      <div className="absolute inset-0 bg-black">
+        <div className="whyinfra absolute inset-0"></div>
+      </div>
 
-        <div className="max-w-6xl mx-auto relative z-10">
+      <section className="py-20 px-4 md:px-12 lg:px-16 relative z-10">
+        <div className="max-w-6xl mx-auto">
           {/* Main Heading */}
           <h1
-            className={`text-center text-5xl md:text-6xl lg:text-7xl mb-8 transition-all duration-1000 ${
+            className={`text-center text-5xl md:text-6xl lg:text-7xl mb-8 quicksand-bold transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            <span className="text-white font-bold tracking-tight">
+            <span className="text-white tracking-tight">
               Why These{" "}
             </span>
-            <span
-              className="font-bold tracking-tight"
-              style={{
-                background: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
+            <span className="specialtext tracking-tight">
               Playbooks
             </span>
-            <span className="text-white font-bold tracking-tight"> Exist</span>
+            <span className="text-white tracking-tight"> Exist</span>
           </h1>
 
           {/* Subtitle */}
@@ -53,10 +40,10 @@ const PlaybooksSection = () => {
             }`}
             style={{ transitionDelay: "400ms" }}
           >
-            <p className="text-gray-400 text-lg mb-4 font-light tracking-tight leading-relaxed">
+            <p className="text-[wheat] text-lg mb-4 quicksand-semibold tracking-tight leading-relaxed">
               Early-stage software teams don't fail because of product issues.
             </p>
-            <p className="text-gray-400 text-base font-light tracking-tight leading-relaxed max-w-3xl mx-auto">
+            <p className="text-[wheat] text-base quicksand-light tracking-tight leading-relaxed max-w-3xl mx-auto">
               They fail because they can't communicate value to developers, show up where developers hang out, or build repeatable distribution engines.
             </p>
           </div>
@@ -68,20 +55,20 @@ const PlaybooksSection = () => {
             }`}
             style={{ transitionDelay: "600ms" }}
           >
-            <div className="border-l-4 border-purple-600 bg-gradient-to-r from-[#1a1a2e]/80 to-transparent backdrop-blur-sm rounded-r-lg p-8 md:p-10">
-              <h3 className="text-white text-xl md:text-2xl font-bold mb-6 tracking-tight">
+            <div className="border-l-4 border-white bg-[#888]/20 backdrop-blur-sm rounded-r-lg p-8 md:p-10 ring-1 ring-black/5">
+              <h3 className="text-white text-xl md:text-2xl quicksand-bold mb-6 tracking-tight">
                 Developer marketing today is distribution-first.
               </h3>
               
-              <p className="text-gray-300 text-base md:text-lg font-medium leading-relaxed mb-6">
+              <p className="text-[wheat] text-base md:text-lg quicksand-semibold leading-relaxed mb-6">
                 Reddit, Dev.to, Daily.dev, Hacker News, and LLM-driven search are shaping developer discovery.
               </p>
               
-              <p className="text-gray-300 text-base md:text-lg font-medium leading-relaxed">
+              <p className="text-[wheat] text-base md:text-lg quicksand-semibold leading-relaxed">
                 Infrasity's playbooks exist to give early-stage teams a{" "}
-                <span className="text-purple-400 font-bold">repeatable</span>,{" "}
-                <span className="text-purple-400 font-bold">technical</span>,{" "}
-                <span className="text-purple-400 font-bold">credibility-first system</span>{" "}
+                <span className="text-white quicksand-bold">repeatable</span>,{" "}
+                <span className="text-white quicksand-bold">technical</span>,{" "}
+                <span className="text-white quicksand-bold">credibility-first system</span>{" "}
                 for showing up across these surfaces.
               </p>
             </div>
@@ -89,7 +76,7 @@ const PlaybooksSection = () => {
 
           {/* Decorative line */}
           <div
-            className={`w-full h-px mt-16 shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 transition-all duration-1000 ${
+            className={`w-full h-px mt-16 bg-gradient-to-r from-white/5 via-white/50 to-white/5 transition-all duration-1000 ${
               isVisible ? "opacity-100" : "opacity-0"
             }`}
             style={{ transitionDelay: "800ms" }}
