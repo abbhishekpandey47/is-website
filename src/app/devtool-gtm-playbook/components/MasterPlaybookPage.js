@@ -74,14 +74,27 @@ export default function MasterPlaybookPage() {
       </div>
 
       <div className="max-w-6xl mx-auto px-6 py-20 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl quicksand-bold mb-4">
-            Why This <span className="specialtext">Master Playbook</span>?
-          </h1>
-          <p className="text-[wheat] text-base quicksand-semibold">
-            Sound familiar? These are the problems every early-stage dev/SaaS team faces.
-          </p>
+        {/* Header with Grid Background */}
+        <div className="relative mb-12">
+          {/* Grid Background */}
+          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px',
+            maskImage: 'radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%)'
+          }}></div>
+
+          <div className="text-center relative z-10">
+            <h1 className="text-3xl md:text-4xl quicksand-bold mb-4">
+              Why This <span className="specialtext">Master Playbook</span>?
+            </h1>
+            <p className="text-[wheat] text-base quicksand-semibold">
+              Sound familiar? These are the problems every early-stage dev/SaaS team faces.
+            </p>
+          </div>
         </div>
 
         {/* Cards Grid */}

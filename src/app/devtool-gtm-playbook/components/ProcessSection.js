@@ -75,28 +75,63 @@ export default function GrowthJourney() {
               )}
 
               {/* Card */}
-              <div className="bg-[#888]/20 backdrop-blur-sm border border-white/10 ring-1 ring-black/5 rounded-lg p-6 hover:border-white/30 transition-all duration-300 h-full">
-                {/* Number */}
-                <div className="text-white text-sm font-mono mb-4 quicksand-semibold">
-                  {step.number}
-                </div>
-
-                {/* Icon */}
-                <div className="mb-6 relative">
-                  <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
-                    <step.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="absolute top-3 left-3 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
+              <div 
+                className="relative rounded-lg p-6 hover:border-white/30 transition-all duration-300 h-full overflow-hidden"
+                style={{
+                  background: 'rgba(136, 136, 136, 0.2)',
+                  backdropFilter: 'blur(10px)',
+                  WebkitBackdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+                }}
+              >
+                {/* Subtle gradient overlay */}
+                <div 
+                  className="absolute inset-0 opacity-50 pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle at top left, rgba(255, 255, 255, 0.1) 0%, transparent 70%)'
+                  }}
+                />
 
                 {/* Content */}
-                <div>
-                  <h3 className="text-xl quicksand-semibold mb-1">{step.title}</h3>
-                  <p className="text-white text-sm mb-3 quicksand-semibold">{step.subtitle}</p>
-                  <p className="text-[wheat] text-sm leading-relaxed quicksand-light">
-                    {step.description}
-                  </p>
+                <div className="relative z-10">
+                  {/* Number */}
+                  <div className="text-white text-sm font-mono mb-4 quicksand-semibold">
+                    {step.number}
+                  </div>
+
+                  {/* Icon */}
+                  <div className="mb-6 relative">
+                    <div 
+                      className="w-12 h-12 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        backdropFilter: 'blur(10px)',
+                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                      }}
+                    >
+                      <step.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="absolute top-3 left-3 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+
+                  {/* Text Content */}
+                  <div>
+                    <h3 className="text-xl quicksand-semibold mb-1 text-white">{step.title}</h3>
+                    <p className="text-white text-sm mb-3 quicksand-semibold">{step.subtitle}</p>
+                    <p className="text-[wheat] text-sm leading-relaxed quicksand-light">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
+
+                {/* Bottom highlight line */}
+                <div 
+                  className="absolute bottom-0 left-0 right-0 h-px"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)'
+                  }}
+                />
               </div>
             </div>
           ))}
