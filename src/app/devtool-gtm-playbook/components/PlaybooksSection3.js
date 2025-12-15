@@ -58,7 +58,7 @@ const PlaybooksSection = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden">
+    <div className="w-full w-full relative overflow-hidden">
       {/* Background with theme */}
       <div className="absolute inset-0 bg-black">
         <div className="whyinfra absolute inset-0"></div>
@@ -66,6 +66,22 @@ const PlaybooksSection = () => {
 
       <section className="py-20 px-4 md:px-12 lg:px-16 relative z-10">
         <div className="max-w-7xl mx-auto">
+
+      <div
+  className={`text-center mb-12 transition-all duration-1000 ${
+    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+  }`}
+>
+  <h1 className="text-4xl md:text-5xl lg:text-6xl quicksand-bold mb-6 tracking-tight">
+    <span className="text-white">
+      We focus on{" "}
+    </span>
+    <span className="specialtext">
+      three pillars
+    </span>
+  </h1>
+</div>
+
           {/* Three Pillars Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {pillars.map((pillar, index) => (
