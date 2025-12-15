@@ -4,7 +4,7 @@ import { ArrowRight, MessageCircle } from 'lucide-react';
 
 export default function CTASection() {
   return (
-    <div className="min-h-screen relative flex items-center justify-center px-8">
+    <div className="relative flex items-center justify-center px-8 py-16">
       {/* Background with theme */}
       <div className="absolute inset-0 bg-black">
         <div className="whyinfra absolute inset-0"></div>
