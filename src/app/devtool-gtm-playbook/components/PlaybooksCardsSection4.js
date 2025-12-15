@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 const PlaybooksCardsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -14,14 +15,16 @@ const PlaybooksCardsSection = () => {
       badge: "Playbook",
       title: "Developer Marketing Playbook",
       description: "A complete framework for developer-first GTM — covering developer psychology, technical content, documentation & SDK matness, community engagement, landing pages, and the Why →Try →Buy →Fly adoption model.",
-      buttonText: "Read Playbook"
+      buttonText: "Read Playbook",
+      link: "/services/developer-marketing-agency"
     },
     {
       id: 2,
       badge: "Playbook",
       title: "Reddit B2B Marketing Playbook (2025 Edition)",
       description: "A tactical system for building developer visibility on Reddit — including account warming, karma strategy, thread mapping, safe engagement, comment frameworks, and Infrasity's 3-phase execution process.",
-      buttonText: "Read Playbook"
+      buttonText: "Read Playbook",
+      link: "/services/reddit-marketing-agency"
     }
   ];
 
@@ -94,28 +97,30 @@ const PlaybooksCardsSection = () => {
                 </p>
 
                 {/* Button */}
-                <button
-                  className="group/btn inline-flex items-center gap-2 px-5 py-2.5 rounded-lg quicksand-semibold text-sm transition-all duration-300 hover:gap-3 bg-btnprimary hover:bg-btnprimaryhov text-white"
-                  style={{
-                    boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.3)",
-                  }}
-                >
-                  <span>{playbook.buttonText}</span>
-                  <svg
-                    className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+                <Link href={playbook.link}>
+                  <button
+                    className="group/btn inline-flex items-center gap-2 px-5 py-2.5 rounded-lg quicksand-semibold text-sm transition-all duration-300 hover:gap-3 bg-btnprimary hover:bg-btnprimaryhov text-white"
+                    style={{
+                      boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.3)",
+                    }}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </button>
+                    <span>{playbook.buttonText}</span>
+                    <svg
+                      className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </button>
+                </Link>
 
                 {/* Hover gradient overlay */}
                 <div

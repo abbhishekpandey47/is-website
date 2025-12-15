@@ -10,6 +10,12 @@ import TemplatesToolsPage from "./components/TemplatesToolsPage";
 import WhoThisIsFor from "./components/WhoThisIsFor";
 import CTASection from "./components/CTASection";
 
+export const metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 export default function LandingPage() {
   return (
     <div className="bg-gray-950 min-h-screen">
