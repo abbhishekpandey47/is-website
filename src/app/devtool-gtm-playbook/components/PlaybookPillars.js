@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { MessageSquare, Share2, FileText, Layers } from 'lucide-react';
+import Link from 'next/link';
 
 const PlaybookPillars = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,6 +19,7 @@ const PlaybookPillars = () => {
       description: "Reach and engage developers where they are — authentic, technical, zero fluff.",
       buttonText: "Explore this Playbook",
       available: true,
+      link: "/services/developer-marketing-agency"
     },
     {
       id: 2,
@@ -26,6 +28,7 @@ const PlaybookPillars = () => {
       description: "Master community-driven growth on Reddit without getting banned.",
       buttonText: "Explore this Playbook",
       available: true,
+      link: "/services/reddit-marketing-agency"
     },
     {
       id: 3,
@@ -34,6 +37,7 @@ const PlaybookPillars = () => {
       description: "Docs, APIs, SDKs, and onboarding flows that convert developers.",
       buttonText: "Notify Me",
       available: false,
+      link: null
     },
     {
       id: 4,
@@ -42,6 +46,7 @@ const PlaybookPillars = () => {
       description: "Blog, SEO, forums, newsletters — systematic content distribution.",
       buttonText: "Notify Me",
       available: false,
+      link: null
     }
   ];
 
@@ -182,45 +187,65 @@ const PlaybookPillars = () => {
                     </p>
 
                     {/* Button */}
-                    <button
-                      className="w-full py-3 px-4 rounded-lg quicksand-semibold text-sm flex items-center justify-between transition-all duration-300 disabled:cursor-not-allowed"
-                      style={{
-                        backgroundColor: pillar.available
-                          ? "rgba(136, 136, 136, 0.3)"
-                          : "rgba(136, 136, 136, 0.15)",
-                        color: pillar.available ? "#ffffff" : "#9ca3af",
-                        backdropFilter: "blur(10px)",
-                        boxShadow: pillar.available
-                          ? "0 4px 12px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
-                          : "none",
-                      }}
-                      disabled={!pillar.available}
-                      onMouseEnter={(e) => {
-                        if (pillar.available) {
-                          e.currentTarget.style.backgroundColor = "rgba(136, 136, 136, 0.4)";
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (pillar.available) {
-                          e.currentTarget.style.backgroundColor = "rgba(136, 136, 136, 0.3)";
-                        }
-                      }}
-                    >
-                      <span>{pillar.buttonText}</span>
-                      <svg
-                        className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                    {pillar.link ? (
+                      <Link href={pillar.link} className="block">
+                        <button
+                          className="w-full py-3 px-4 rounded-lg quicksand-semibold text-sm flex items-center justify-between transition-all duration-300"
+                          style={{
+                            backgroundColor: "rgba(136, 136, 136, 0.3)",
+                            color: "#ffffff",
+                            backdropFilter: "blur(10px)",
+                            boxShadow: "0 4px 12px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = "rgba(136, 136, 136, 0.4)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = "rgba(136, 136, 136, 0.3)";
+                          }}
+                        >
+                          <span>{pillar.buttonText}</span>
+                          <svg
+                            className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </button>
+                      </Link>
+                    ) : (
+                      <button
+                        className="w-full py-3 px-4 rounded-lg quicksand-semibold text-sm flex items-center justify-between transition-all duration-300 disabled:cursor-not-allowed"
+                        style={{
+                          backgroundColor: "rgba(136, 136, 136, 0.15)",
+                          color: "#9ca3af",
+                          backdropFilter: "blur(10px)",
+                        }}
+                        disabled={!pillar.available}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </button>
+                        <span>{pillar.buttonText}</span>
+                        <svg
+                          className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </button>
+                    )}
                   </div>
 
                   {/* Hover gradient overlay */}
