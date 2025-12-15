@@ -1,5 +1,6 @@
 module.exports = {
     reactStrictMode: false,
+    
     experimental: {
         optimizePackageImports: [
             'lucide-react',
@@ -140,11 +141,12 @@ module.exports = {
         config.infrastructureLogging.level = 'error';
         // Disable source maps to reduce memory usage in production builds
         if (!dev) {
-            config.devtool = false;
-            if (config.optimization) {
-                config.optimization.minimize = false;
-            }
-        }
+    config.devtool = false;
+    if (config.optimization) {
+        config.optimization.minimize = true; // <-- disables production minification
+    }
+}
+
         return config;
     },
 };
