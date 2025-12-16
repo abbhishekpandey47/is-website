@@ -1360,6 +1360,19 @@ let postMetaData = [
   metaDescription: "Compare the top developer documentation tools for 2025. See how Mintlify, GitBook, ReadMe, and Docusaurus differ in API docs, workflows, collaboration and customization. Find the right fit for your SaaS team.",
   summarize: true,
 },
+{
+  title: "Vector Database Tutorial: Build a Semantic Search Engine",
+  metaTitle: "Vector Database Tutorial: Build a Semantic Search Engine",
+  slug: "vector-database-tutorial",
+  description:
+    "Learn how to use a vector database to build a semantic search engine for API documentation with step-by-step guidance, practical examples, and production best practices.",
+  ogImage: "/PostImages/vector-database-tutorial/img1.webp",
+  publishedOn: "2025-12-16",
+  authorId: "author0001",
+  category: "Informational",
+  metaDescription:
+    "Learn how to use a vector database to build a semantic search engine for API documentation, with step-by-step guidance, real examples, and best practices.",
+},
  {
   title: "Community Led Growth vs Paid Growth: What Works for B2B SaaS Startups?",
   metatitle: "Community Led Growth VS Paid Growth | Best Practices",
