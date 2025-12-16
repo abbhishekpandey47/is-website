@@ -42,7 +42,7 @@ export default function GrowthJourney() {
   ];
 
   return (
-    <div className="min-h-screen relative text-white flex items-center justify-center p-8">
+    <div className="w-full relative text-white flex items-center justify-center p-8">
       {/* Background with theme */}
       <div className="absolute inset-0 bg-black">
         <div className="whyinfra absolute inset-0"></div>

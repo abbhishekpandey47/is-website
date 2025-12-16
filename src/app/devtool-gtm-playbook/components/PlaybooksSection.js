@@ -9,7 +9,7 @@ const PlaybooksSection = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden">
+    <div className="w-full  w-full relative overflow-hidden">
       {/* Background with theme */}
       <div className="absolute inset-0 bg-black">
         <div className="whyinfra absolute inset-0"></div>

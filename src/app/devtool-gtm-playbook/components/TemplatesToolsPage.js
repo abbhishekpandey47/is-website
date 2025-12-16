@@ -43,12 +43,12 @@ export default function TemplatesToolsPage() {
   ];
 
   return (
-    <div className="min-h-screen relative text-white py-20 px-8">
+    <div className="w-full relative text-white py-20 px-8">
       {/* Background with theme */}
       <div className="absolute inset-0 bg-black">
         <div className="whyinfra absolute inset-0"></div>
       </div>
-
+      
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
