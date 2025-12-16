@@ -35,7 +35,7 @@ const PlaybooksCardsSection = () => {
         <div className="whyinfra absolute inset-0"></div>
       </div>
 
-      <section className="py-20 px-4 md:px-12 lg:px-16 relative z-10">
+      <section  id="playbook-pillars"  className="py-20 px-4 md:px-12 lg:px-16 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div
@@ -50,7 +50,7 @@ const PlaybooksCardsSection = () => {
                 Early-Stage Developer Startups
               </span>
             </h1>
-            <p className="text-[wheat] text-base md:text-lg quicksand-semibold max-w-3xl mx-auto leading-relaxed">
+            <p className="text-[white] text-base md:text-lg quicksand-semibold max-w-3xl mx-auto leading-relaxed">
               These playbooks give early-stage teams a practical, repeatable system for developer-led growth.
             </p>
           </div>
@@ -92,7 +92,7 @@ const PlaybooksCardsSection = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-[wheat] text-sm md:text-base quicksand-light mb-6 leading-relaxed">
+                <p className="text-[white] text-sm md:text-base quicksand-light mb-6 leading-relaxed">
                   {playbook.description}
                 </p>
 

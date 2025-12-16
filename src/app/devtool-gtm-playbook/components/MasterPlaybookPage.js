@@ -91,7 +91,7 @@ export default function MasterPlaybookPage() {
             <h1 className="text-3xl md:text-4xl quicksand-bold mb-4">
               Why This <span className="specialtext">Master Playbook</span>?
             </h1>
-            <p className="text-[wheat] text-base quicksand-semibold">
+            <p className="text-[white] text-base quicksand-semibold">
               Sound familiar? These are the problems every early-stage dev/SaaS team faces.
             </p>
           </div>
@@ -131,7 +131,7 @@ export default function MasterPlaybookPage() {
               <h3 className="text-sm quicksand-semibold mb-2 text-white">
                 {problem.title}
               </h3>
-              <p className="text-[wheat] text-xs leading-relaxed quicksand-light">
+              <p className="text-[white] text-xs leading-relaxed quicksand-light">
                 {problem.description}
               </p>
             </div>
@@ -140,7 +140,7 @@ export default function MasterPlaybookPage() {
 
         {/* Bottom Section */}
         <div className="max-w-3xl mx-auto bg-[#888]/20 backdrop-blur-sm border border-white/10 ring-1 ring-black/5 rounded-lg p-10 text-center">
-          <p className="text-base leading-relaxed text-[wheat] quicksand-semibold">
+          <p className="text-base leading-relaxed text-[white] quicksand-semibold">
             This master playbook is built from{' '}
             <span className="text-white quicksand-bold">real-world experience</span> with
             dozens of early-stage DevTools & infrastructure startups — a synthesis of what

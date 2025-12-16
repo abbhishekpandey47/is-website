@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { Users, FileText, Rocket } from 'lucide-react';
 
 const PlaybooksSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,7 +12,7 @@ const PlaybooksSection = () => {
   const pillars = [
     {
       id: 1,
-      icon: "👥",
+      icon: <Users className="w-6 h-6 text-white" />,
       title: "Pillar 1 — Reddit & Community Growth",
       description: "Reddit now dominates developer search queries and LLM-sourcing data. We ensure your product conversations appear in high-ranking discussions like:",
       bullets: [
@@ -30,7 +31,7 @@ const PlaybooksSection = () => {
     },
     {
       id: 2,
-      icon: "📄",
+      icon: <FileText className="w-6 h-6 text-white" />,
       title: "Pillar 2 — Dev.to & Daily.dev Technical Storytelling",
       description: "Great startups aren't SEO-stuffers. It's insight-driven, narrative, and technically grounded.",
       approach: "Our approach:",
@@ -44,7 +45,7 @@ const PlaybooksSection = () => {
     },
     {
       id: 3,
-      icon: "🚀",
+      icon: <Rocket className="w-6 h-6 text-white" />,
       title: "Pillar 3 — Hacker News Launch & Amplification",
       description: "HN remains the highest influential place for founders, senior engineers, and early adopters. Our HN strategy includes:",
       features: [
@@ -58,7 +59,7 @@ const PlaybooksSection = () => {
   ];
 
   return (
-    <div className="w-full w-full relative overflow-hidden">
+    <div className="w-full relative overflow-hidden">
       {/* Background with theme */}
       <div className="absolute inset-0 bg-black">
         <div className="whyinfra absolute inset-0"></div>
@@ -93,7 +94,7 @@ const PlaybooksSection = () => {
                 style={{ transitionDelay: `${200 + index * 150}ms` }}
               >
                 {/* Icon */}
-                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4 text-2xl">
+                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4">
                   {pillar.icon}
                 </div>
 
@@ -103,7 +104,7 @@ const PlaybooksSection = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-[wheat] text-sm quicksand-light mb-4 leading-relaxed">
+                <p className="text-[white] text-sm quicksand-light mb-4 leading-relaxed">
                   {pillar.description}
                 </p>
 
@@ -126,7 +127,7 @@ const PlaybooksSection = () => {
                       {pillar.approachPoints.map((point, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <span className="text-white text-xs mt-1">⚙️</span>
-                          <p className="text-[wheat] text-xs quicksand-semibold leading-relaxed">
+                          <p className="text-[white] text-xs quicksand-semibold leading-relaxed">
                             {point}
                           </p>
                         </div>
@@ -143,7 +144,7 @@ const PlaybooksSection = () => {
                       {pillar.deliverables.map((item, idx) => (
                         <div key={idx} className="flex items-start gap-2">
                           <span className="text-white text-xs mt-1">↗</span>
-                          <p className="text-[wheat] text-xs quicksand-semibold leading-relaxed">
+                          <p className="text-[white] text-xs quicksand-semibold leading-relaxed">
                             {item}
                           </p>
                         </div>
@@ -158,7 +159,7 @@ const PlaybooksSection = () => {
                     {pillar.features.map((feature, idx) => (
                       <div key={idx} className="flex items-start gap-2">
                         <span className="text-white text-xs mt-1">☑</span>
-                        <p className="text-[wheat] text-xs quicksand-semibold leading-relaxed">
+                        <p className="text-[white] text-xs quicksand-semibold leading-relaxed">
                           {feature}
                         </p>
                       </div>
@@ -168,7 +169,7 @@ const PlaybooksSection = () => {
 
                 {/* Example */}
                 {pillar.example && (
-                  <p className="text-[wheat] text-xs quicksand-light italic mt-3 leading-relaxed">
+                  <p className="text-[white] text-xs quicksand-light italic mt-3 leading-relaxed">
                     {pillar.example}
                   </p>
                 )}
@@ -193,7 +194,7 @@ const PlaybooksSection = () => {
             style={{ transitionDelay: "650ms" }}
           >
             <div className="border border-white/10 bg-[#888]/20 backdrop-blur-sm ring-1 ring-black/5 rounded-lg p-8 text-center">
-              <p className="text-[wheat] text-base md:text-lg quicksand-semibold leading-relaxed">
+              <p className="text-[white] text-base md:text-lg quicksand-semibold leading-relaxed">
                 These playbooks combine these systems into structured, battle-tested frameworks that early-stage teams can adopt instantly —{" "}
                 <span className="text-white quicksand-bold">without guessing</span>,{" "}
                 <span className="text-white quicksand-bold">without random posting</span>, and{" "}

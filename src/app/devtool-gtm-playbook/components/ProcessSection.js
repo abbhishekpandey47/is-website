@@ -54,7 +54,7 @@ export default function GrowthJourney() {
           <h1 className="text-4xl md:text-5xl quicksand-bold mb-4">
             How It All <span className="specialtext">Fits Together</span>
           </h1>
-          <p className="text-[wheat] text-lg quicksand-semibold">
+          <p className="text-[white] text-lg quicksand-semibold">
             A systematic journey from product to repeatable growth.
           </p>
         </div>
@@ -119,7 +119,7 @@ export default function GrowthJourney() {
                   <div>
                     <h3 className="text-xl quicksand-semibold mb-1 text-white">{step.title}</h3>
                     <p className="text-white text-sm mb-3 quicksand-semibold">{step.subtitle}</p>
-                    <p className="text-[wheat] text-sm leading-relaxed quicksand-light">
+                    <p className="text-[white] text-sm leading-relaxed quicksand-light">
                       {step.description}
                     </p>
                   </div>

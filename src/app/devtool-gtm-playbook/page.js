@@ -1,5 +1,5 @@
 import HeroSection from "./components/HeroSection";
-import Marquee from "../infrasity-vs-developer-relations-engineer/components/marquee";
+import Marquee from "./components/marqee";
 import MasterPlaybookPage from "./components/MasterPlaybookPage";
 
 import PlaybooksSection from "./components/PlaybooksSection";
@@ -8,7 +8,7 @@ import PlaybookPillars4 from "./components/PlaybooksCardsSection4";
 import ProcessSecion from "./components/ProcessSection";
 import TemplatesToolsPage from "./components/TemplatesToolsPage";
 import WhoThisIsFor from "./components/WhoThisIsFor";
-import CTASection from "./components/CTASection";
+import Cta from "./components/cta";
 
 export const metadata = {
   robots: {
@@ -28,7 +28,7 @@ export default function LandingPage() {
       <ProcessSecion/>
       <TemplatesToolsPage/>
       <WhoThisIsFor/>
-      <CTASection/>
+      <Cta/>
       
     </div>
   );

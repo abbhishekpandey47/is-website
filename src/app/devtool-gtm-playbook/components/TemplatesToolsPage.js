@@ -55,7 +55,7 @@ export default function TemplatesToolsPage() {
           <h1 className="text-4xl md:text-5xl quicksand-bold mb-4">
             What You Get: <span className="specialtext">Templates, SOPs & Tools</span>
           </h1>
-          <p className="text-[wheat] text-lg quicksand-semibold">
+          <p className="text-[white] text-lg quicksand-semibold">
             Practical, ready-to-use frameworks you can implement today.
           </p>
         </div>
@@ -78,7 +78,7 @@ export default function TemplatesToolsPage() {
               {/* List Items */}
               <ul className="space-y-3">
                 {section.items.map((item, itemIndex) => (
-                  <li key={itemIndex} className="flex items-start gap-3 text-[wheat]">
+                  <li key={itemIndex} className="flex items-start gap-3 text-[white]">
                     <CheckCircle2 className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
                     <span className="text-sm leading-relaxed quicksand-light">{item}</span>
                   </li>
