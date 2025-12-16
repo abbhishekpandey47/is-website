@@ -50,7 +50,7 @@ export default function WhoThisIsFor() {
               
               <h3 className="text-xl quicksand-semibold mb-4">{card.title}</h3>
               
-              <p className="text-[wheat] quicksand-light text-sm leading-relaxed">
+              <p className="text-[white] quicksand-light text-sm leading-relaxed">
                 {card.description}
               </p>
             </div>

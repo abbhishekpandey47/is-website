@@ -9,7 +9,7 @@ const PlaybooksSection = () => {
   }, []);
 
   return (
-    <div className="w-full  w-full relative overflow-hidden">
+    <div className="w-full  relative overflow-hidden">
       {/* Background with theme */}
       <div className="absolute inset-0 bg-black">
         <div className="whyinfra absolute inset-0"></div>
@@ -40,10 +40,10 @@ const PlaybooksSection = () => {
             }`}
             style={{ transitionDelay: "400ms" }}
           >
-            <p className="text-[wheat] text-lg mb-4 quicksand-semibold tracking-tight leading-relaxed">
+            <p className="text-[white] text-lg mb-4 quicksand-semibold tracking-tight leading-relaxed">
               Early-stage software teams don't fail because of product issues.
             </p>
-            <p className="text-[wheat] text-base quicksand-light tracking-tight leading-relaxed max-w-3xl mx-auto">
+            <p className="text-[white] text-base quicksand-light tracking-tight leading-relaxed max-w-3xl mx-auto">
               They fail because they can't communicate value to developers, show up where developers hang out, or build repeatable distribution engines.
             </p>
           </div>
@@ -60,11 +60,11 @@ const PlaybooksSection = () => {
                 Developer marketing today is distribution-first.
               </h3>
               
-              <p className="text-[wheat] text-base md:text-lg quicksand-semibold leading-relaxed mb-6">
+              <p className="text-[white] text-base md:text-lg quicksand-semibold leading-relaxed mb-6">
                 Reddit, Dev.to, Daily.dev, Hacker News, and LLM-driven search are shaping developer discovery.
               </p>
               
-              <p className="text-[wheat] text-base md:text-lg quicksand-semibold leading-relaxed">
+              <p className="text-[white] text-base md:text-lg quicksand-semibold leading-relaxed">
                 Infrasity's playbooks exist to give early-stage teams a{" "}
                 <span className="text-white quicksand-bold">repeatable</span>,{" "}
                 <span className="text-white quicksand-bold">technical</span>,{" "}

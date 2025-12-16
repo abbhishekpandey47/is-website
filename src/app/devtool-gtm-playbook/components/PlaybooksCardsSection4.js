@@ -50,7 +50,7 @@ const PlaybooksCardsSection = () => {
                 Early-Stage Developer Startups
               </span>
             </h1>
-            <p className="text-[wheat] text-base md:text-lg quicksand-semibold max-w-3xl mx-auto leading-relaxed">
+            <p className="text-[white] text-base md:text-lg quicksand-semibold max-w-3xl mx-auto leading-relaxed">
               These playbooks give early-stage teams a practical, repeatable system for developer-led growth.
             </p>
           </div>
@@ -92,7 +92,7 @@ const PlaybooksCardsSection = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-[wheat] text-sm md:text-base quicksand-light mb-6 leading-relaxed">
+                <p className="text-[white] text-sm md:text-base quicksand-light mb-6 leading-relaxed">
                   {playbook.description}
                 </p>
 
