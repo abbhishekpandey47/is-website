@@ -35,7 +35,7 @@ const PlaybooksCardsSection = () => {
         <div className="whyinfra absolute inset-0"></div>
       </div>
 
-      <section className="py-20 px-4 md:px-12 lg:px-16 relative z-10">
+      <section  id="playbook-pillars"  className="py-20 px-4 md:px-12 lg:px-16 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div
