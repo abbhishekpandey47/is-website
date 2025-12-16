@@ -65,6 +65,9 @@ const NewMarquee = () => {
           className="relative w-full mx-auto max-w-4xl opacity-90 dark:opacity-70 overflow-hidden px-5 lg:px-12 py-8"
           aria-hidden={false}
         >
+        <p className="w-full text-center text-lg text-white mb-6">
+          We are the growth strategists for some of the fastest-growing B2B SaaS startups
+        </p>
          
           <Marquee
             className="custom-marquee-mask"
@@ -90,9 +93,7 @@ const NewMarquee = () => {
           </Marquee>
         </div>
         
-        <p className="w-full text-center text-sm text-white mb-6">
-          We are the growth strategists for some of the fastest-growing B2B SaaS startups
-        </p>
+     
      
       </div>
 
