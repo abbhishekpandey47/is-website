@@ -16,7 +16,7 @@ const PlaybooksCardsSection = () => {
       title: "Developer Marketing Playbook",
       description: "A complete framework for developer-first GTM — covering developer psychology, technical content, documentation & SDK matness, community engagement, landing pages, and the Why →Try →Buy →Fly adoption model.",
       buttonText: "Read Playbook",
-      link: "/services/developer-marketing-agency"
+      link: "/playbook/playbook/developer-marketing"
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ const PlaybooksCardsSection = () => {
       title: "Reddit B2B Marketing Playbook (2025 Edition)",
       description: "A tactical system for building developer visibility on Reddit — including account warming, karma strategy, thread mapping, safe engagement, comment frameworks, and Infrasity's 3-phase execution process.",
       buttonText: "Read Playbook",
-      link: "/services/reddit-marketing-agency"
+      link: '/playbook/reddit-b2b-marketing'
     }
   ];
 
