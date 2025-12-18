@@ -16,7 +16,7 @@ const PlaybooksCardsSection = () => {
       title: "Developer Marketing Playbook",
       description: "A complete framework for developer-first GTM — covering developer psychology, technical content, documentation & SDK matness, community engagement, landing pages, and the Why →Try →Buy →Fly adoption model.",
       buttonText: "Read Playbook",
-      link: "/playbook/playbook/developer-marketing"
+      link: "/playbook/developer-marketing"
     },
     {
       id: 2,
