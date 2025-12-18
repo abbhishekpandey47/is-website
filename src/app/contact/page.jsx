@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import ContactPage from "../book-a-demo/page";
 import Image from "next/image";
+import { message } from "antd";
 import { Router } from "next/router";
 import { useRouter } from "next/navigation"; // add this
 
@@ -32,9 +33,6 @@ const CalendarBooking = () => {
         countryCode: "+91",
     });
     const [errors, setErrors] = useState({});
-    const [isEmailValidating, setIsEmailValidating] = useState(false);
-    const [emailValidationResult, setEmailValidationResult] = useState(null);
-    const [lastValidatedEmail, setLastValidatedEmail] = useState("");
     const [selectedTimezone, setSelectedTimezone] = useState("UTC-08:00");
     const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
 
@@ -337,21 +335,16 @@ const CalendarBooking = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setUserInfo((prev) => ({
-            ...prev,
+        setUserInfo({
+            ...userInfo,
             [name]: value,
-        }));
-
-        if (name === "email") {
-            setEmailValidationResult(null);
-            setLastValidatedEmail("");
-        }
+        });
 
         if (errors[name]) {
-            setErrors((prev) => ({
-                ...prev,
+            setErrors({
+                ...errors,
                 [name]: "",
-            }));
+            });
         }
     };
 
@@ -377,89 +370,6 @@ const CalendarBooking = () => {
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
-    };
-
-    const buildEmailValidationMessage = (result) => {
-        if (!result) return "";
-
-        if (result.status === "valid") {
-            return "Email verified";
-        }
-
-        if (result.status === "catch-all" || result.status === "unknown") {
-            return "We could not verify this email. Please try another address.";
-        }
-
-        if (result.status === "error") {
-            return "Could not validate this email right now. Please try again.";
-        }
-
-        if (result.didYouMean) {
-            return `Did you mean ${result.didYouMean}?`;
-        }
-
-        const reason = result.subStatus ? ` (${result.subStatus})` : "";
-        return `Email is not valid. Please use a business email.`;
-    };
-
-    const validateEmailWithZeroBounce = async (emailToValidate) => {
-        const email = (emailToValidate || "").trim();
-
-        if (!email || !/\S+@\S+\.\S+/.test(email)) {
-            return null;
-        }
-
-        if (lastValidatedEmail === email && emailValidationResult) {
-            return emailValidationResult;
-        }
-
-        setIsEmailValidating(true);
-
-        try {
-            const response = await fetch("/api/validate-email", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
-                signal: AbortSignal.timeout(30000),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data?.error || "ZeroBounce validation failed");
-            }
-
-            const result = {
-                status: (data.status || "unknown").toLowerCase(),
-                subStatus: (data.subStatus || "").toLowerCase(),
-                didYouMean: data.didYouMean || null,
-            };
-
-            setEmailValidationResult(result);
-            setLastValidatedEmail(email);
-
-            if (result.status !== "valid") {
-                setErrors((prev) => ({
-                    ...prev,
-                    email: buildEmailValidationMessage(result),
-                }));
-            } else {
-                setErrors((prev) => ({ ...prev, email: "" }));
-            }
-
-            return result;
-        } catch (err) {
-            console.error("ZeroBounce validation error:", err);
-            const fallback = { status: "error", subStatus: "", didYouMean: null };
-            setEmailValidationResult(fallback);
-            setErrors((prev) => ({
-                ...prev,
-                email: "Could not validate this email right now. Please try again.",
-            }));
-            return fallback;
-        } finally {
-            setIsEmailValidating(false);
-        }
     };
 
     const pad = (n) => n.toString().padStart(2, '0');
@@ -493,13 +403,6 @@ const CalendarBooking = () => {
     const handleBookingSubmit = async (e) => {
         e.preventDefault();
         if (!validateUserInfo()) return;
-
-        const validationResult = await validateEmailWithZeroBounce(userInfo.email);
-        if (!validationResult || validationResult.status !== "valid") {
-            const msg = buildEmailValidationMessage(validationResult) || "Please use a valid business email.";
-            setErrors((prev) => ({ ...prev, email: msg }));
-            return;
-        }
 
         const bookingData = {
             date: dateString, // Send as YYYY-MM-DD string
@@ -1001,28 +904,14 @@ const CalendarBooking = () => {
                                                     name="email"
                                                     value={userInfo.email}
                                                     onChange={handleInputChange}
-                                                    onBlur={() => validateEmailWithZeroBounce(userInfo.email)}
                                                     className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
                                                     placeholder="Email"
                                                 />
-                                                {isEmailValidating && (
-                                                    <p className="text-yellow-300 text-sm mt-1 text-left">
-                                                        Validating email...
-                                                    </p>
-                                                )}
                                                 {errors.email && (
                                                     <p className="text-red-500 text-sm mt-1 text-left">
                                                         {errors.email}
                                                     </p>
                                                 )}
-                                                {!isEmailValidating &&
-                                                    emailValidationResult &&
-                                                    emailValidationResult.status === "valid" &&
-                                                    !errors.email && (
-                                                        <p className="text-green-400 text-sm mt-1 text-left">
-                                                            Email validated successfully.
-                                                        </p>
-                                                    )}
                                             </div>
 
                                             <div>
