@@ -8,6 +8,7 @@
 .yarn/install-state.gz
 package-lock.json
 
+posts/node_modules/
 # testing
 /coverage
 
