@@ -1373,6 +1373,19 @@ let postMetaData = [
   metaDescription:
     "Learn how to use a vector database to build a semantic search engine for API documentation, with step-by-step guidance, real examples, and best practices.",
 },
+{
+  title: "Top 4 AI Document Generators for Developer Docs in 2026",
+  metatitle: "Top 4 AI Document Generators for Developer Docs (2026)",
+  slug: "top-ai-document-generator",
+  description:
+    "Developer documentation is no longer written manually; its generated from the same artifacts that define the system itself. This guide compares the top AI documentation generators for 2026, including tools built for OpenAPI-driven API docs, code-derived backend documentation, and repository-scale guides. You’ll learn how each approach works, where it fits in real engineering workflows, and the trade-offs teams should consider when choosing an AI doc generator for APIs, SDKs, and onboarding.",
+  ogImage: "/PostImages/top-ai-document-generator/img1.webp",
+  publishedOn: "2025-12-19",
+  authorId: "author0001",
+  category: "Informational",
+  metaDescription:
+    "Compare the leading AI document generators for API and SDK docs. See how spec-driven, code-driven, and repo-scale tools differ for modern SaaS teams. Read now!",
+},
  {
   title: "Community Led Growth vs Paid Growth: What Works for B2B SaaS Startups?",
   metatitle: "Community Led Growth VS Paid Growth | Best Practices",
