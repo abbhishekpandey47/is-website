@@ -1,94 +1,102 @@
-# Infrasity
+# https://www.infrasity.com/ llms.txt
 
-## Navigation/Header section
-- [Home](https://www.infrasity.com/)
-- [Book a Free Demo](https://www.infrasity.com/contact)
-
-## Main content sections
-
-### Technical Writing Services for SaaS Startups
-At Infrasity, we drive growth for DevTools and early-stage SaaS startups with impactful technical content marketing, driving visibility and engagement across key developer platforms.
-
-### How it works
-Your extended Developer Relations Team
-
-#### Developer Led Tech Content
-- Our in-house engineers craft highly technical content, including blogs, how-to guides, and whitepapers, by working hands-on with your product. This ensures "the utmost technological credibility" and delivers deep insights that resonate with engineers and developers.
-
-#### Video Production
-- Our in-house engineers work closely with your product hands-on, to craft videos that showcase its true potential. By understanding the tech through and through, we create videos that engage developers and decision-makers, ensuring "the highest level of credibility and authenticity."
-
-#### Growth Engineering
-- As a part of tech content marketing strategy, we develop ready-to-use recipe libraries for tech stacks like **Node.js**, **Bun.js**, **React**, and **CockroachDB**. These libraries provide end users with ready-made boilerplate code, allowing them to jumpstart their projects without having to write code from scratch.
-
-### How we drive results
-Your Product needs a developer mindset to amplify presence
-
-DevTools and engineering companies often struggle to communicate complex product features to developers. Creating content marketing for tech companies and videos that resonate with technical audiences requires deep expertise, which can drain time and resources from your engineering team.
-
-#### Research
-- We identify the technical challenges and keywords that matter most to your audience, ensuring your content aligns with "real-world engineering problems."
-
-### Why Infrasity is a leading B2B tech content marketing agency?
-- Infrasity delivers the best content marketing for tech businesses, crafted by engineers with real-world experience. We offer end-to-end services, including blogs, videos, and SEO, tailored to your industry. Our content brings depth and credibility, driving growth while freeing up your team.
-
----
-
-## Features and benefits
-- "Best technical content writer trained with hands-on product experience"
-- "Accurate, in-depth tech documentation"
-- "Full service from keyword research to SEO"
-- "Specialized developer-focused content for AI/ML, Kubernetes, Cloud startups"
-- "Explainer videos ensuring technical precision"
-
-### Traditional agencies
-- Limited understanding of development workflows
-- More focus on general marketing and lack of technical resources
-- Tech content writing requires high level of accuracy and detail, which doesn't align with "general writing style"
-- Lack of understanding of latest trends, tools, and technologies in tech development
-
-### On-demand technical videos recorded by engineers
-Get on-demand technical videos and content created by engineers, tailored to showcase your product's key features.
-
-## Customer success
-Combining technical content with SEO to drive real growth for your startup!
-
-- 93% are using content marketing as part of their strategy.
-- 47% of buyers view three to five pieces of content before engaging.
-- “Businesses publishing four blogs per week get 3.5 times more traffic than those publishing less frequently.” – Semrush
-
-### Hear what our customers say about us
-- "We help DevTools and engineering companies drive growth through strategic technical content and developer relations services."
-
-## Join our community
-Engaging discussions, knowledge, and ideas to build your next product.
-
-## Get started with Infrasity
-Infrasity is the only platform that provides you with developer-focused content for your products or services.
-
-## Frequently Asked Questions
-
-### What services does Infrasity offer?
-Infrasity offers a comprehensive range of technical content writing services designed for engineering startups. This includes:
-- Technical articles
-- Case studies
-- Whitepapers
-- SEO-driven blogs
-- Product documentation
-- Video content creation
-
-We specialize in creating high-quality, organic content that resonates with the desired audience, helping startups stand out and drive growth.
-
-### Who creates the content at Infrasity, and how do you ensure its technical accuracy?
-Our content is crafted by in-house engineers who actively work with the technologies they write about. This means the content comes from real-world experience, ensuring that everything we produce is technically sound and up to date. Our team ensures every piece of content is not only accurate but also insightful.
-
-### How does Infrasity help companies grow through content marketing?
-We focus on merging technical depth with strategic SEO, making sure that your content is not just informative but also ranks well and attracts the right audience. Through organic, well-researched content, we help you build authority in your industry, engage your target audience, and ultimately drive leads and conversions.
-
-### How do you ensure SEO optimization in the content?
-We conduct thorough keyword research, optimize meta tags, structure content for readability, and include relevant internal and external links. Our goal is to ensure that the content performs well in search engines while delivering value to your audience.
-
-### Can I see some examples of Infrasity's work?
-Yes! We proudly showcase our work on various platforms. You can find our technical write-ups and articles on the Infrasity website, as well as on popular platforms like [dev.to](https://dev.to) and [Medium](https://medium.com). For video content, visit our [YouTube channel](https://www.youtube.com) to view a range of tutorials and presentations. Additionally, our IAC repositories and product templates are available on our [GitHub page](https://github.com), demonstrating our expertise in practical applications.
-
----
+- [Tech Marketing Services](https://www.infrasity.com/): Infrasity enhances B2B SaaS growth through tech content marketing.
+- [Advanced UI Design Insights](https://www.infrasity.com/blog/mastering-advanced-ui-designs): Explore advanced UI design techniques for user-centered experiences.
+- [Top Video Companies](https://www.infrasity.com/blog/top-explainer-video-companies): Discover top explainer video agencies for B2B SaaS startups.
+- [Infrasity Insights](https://www.infrasity.com/sitemap.xml): Explore Infrasity's technical blogs and case studies for insights.
+- [Developer Content Strategy Success](https://www.infrasity.com/case-studies/middleware-case-study): Infrasity collaborates with Middleware for enhanced developer-focused content strategy.
+- [React Developer Tools Guide](https://www.infrasity.com/blog/how-to-use-react-developer-tools-for-debugging-and-performance-optimization): Learn to debug React apps using Developer Tools effectively.
+- [Terrateam Traffic Growth Case Study](https://www.infrasity.com/case-studies/terrateam-case-study): Infrasity's success in increasing Terrateam's traffic with SEO strategies.
+- [Developer Marketing Success](https://www.infrasity.com/case-studies/case-study-series-a-cloud-developer-marketing): Infrasity's strategies increased signups for a cloud startup.
+- [Reddit Marketing Agencies](https://www.infrasity.com/blog/reddit-marketing-agencies): Explore top Reddit marketing agencies for B2B SaaS growth.
+- [Scalekit's 8x Growth Case Study](https://www.infrasity.com/case-studies/scalekit-case-study): Explore how targeted content achieved 8x growth for Scalekit.
+- [Technical SEO Guide](https://www.infrasity.com/blog/comprehensive-guide-to-technical-seo-for-improved-website-performance): Master technical SEO for optimal website performance and rankings.
+- [Best Blogging Platforms](https://www.infrasity.com/blog/best-platform-for-blogs-how-to-choose-the-right-one): Explore and choose the best blogging platforms for SaaS needs.
+- [Product Marketing Team Overview](https://www.infrasity.com/blog/product-marketing-team-structure): Explore essential roles for effective product marketing strategies.
+- [Organic Content Benefits](https://www.infrasity.com/blog/importance-of-writing-organic-content-benefits-and-best-practices-for-saas-companies): Explore organic content strategies for effective SaaS marketing.
+- [B2B SaaS Marketing Types](https://www.infrasity.com/blog/explore-the-different-fields-of-marketing): Explore crucial marketing types for B2B SaaS growth strategies.
+- [Guide to Technical Writing](https://www.infrasity.com/blog/becoming-a-technical-content-writer-for-the-biggest-tech-companies): Tips for aspiring technical content writers in tech companies.
+- [Top Content Marketing Tools](https://www.infrasity.com/blog/10-best-content-marketing-tools-for-beginners): Explore essential content marketing tools specifically designed for beginners.
+- [Writing Effective Case Studies](https://www.infrasity.com/blog/the-9-steps-to-write-a-case-study-a-complete-guide): Step-by-step guide for writing effective case studies.
+- [Tech Thought Leadership](https://www.infrasity.com/blog/thought-leadership-how-to-shape-the-tech-landscape-and-stand-out): Learn to become a respected tech thought leader efficiently.
+- [Product Marketing Excellence](https://www.infrasity.com/blog/the-importance-of-marketing-a-product-best-strategies-for-product-marketing): Explore essential strategies for effective product marketing success.
+- [Keyword Explorer Benefits](https://www.infrasity.com/blog/benefits-of-using-keyword-explorer): Unlock SaaS success with effective keyword research tools.
+- [Choosing a Video Partner](https://www.infrasity.com/blog/how-to-choose-the-right-production-company): Guidance to choose a video production company effectively.
+- [User Guide and API Documentation](https://www.infrasity.com/blog/user-guide-vs-api-documentation): Explore key differences between user guides and API documentation.
+- [Content Marketing Strategy](https://www.infrasity.com/blog/10-steps-to-build-content-marketing-strategy): Essential steps to develop a successful content marketing strategy.
+- [Brand Assets for SaaS](https://www.infrasity.com/blog/building-brand-assets-for-saas-success): Essential guide for SaaS brands to build strong assets.
+- [Keyword Strategy Insights](https://www.infrasity.com/blog/long-tail-vs-short-tail): Explore long tail and short tail keywords for effective SEO.
+- [Scalable Documentation Frameworks](https://www.infrasity.com/blog/frameworks-for-scalable-documentation-sites): Explore frameworks for scalable, efficient documentation sites.
+- [Identifying AI Content](https://www.infrasity.com/blog/how-to-identify-ai): Guide to identify AI-generated content with practical tips and tools.
+- [LSI Keywords Explained](https://www.infrasity.com/blog/lsi-keywords): Learn about LSI keywords for better SEO strategies.
+- [Robots.txt SEO Guide](https://www.infrasity.com/blog/guide-to-robots-txt): Learn to optimize SEO with Robots.txt for better indexing.
+- [Strategic Marketing for Blogging](https://www.infrasity.com/blog/strategic-marketing-plan): Learn strategies to enhance your blogging business success.
+- [Webflow: Simplifying Web Design](https://www.infrasity.com/blog/what-is-webflow): Discover how Webflow simplifies web design under one platform.
+- [Agencies vs Freelancers](https://www.infrasity.com/blog/content-marketing-agency-vs-freelance-content-writers): Compare content marketing agencies with freelance writers for SaaS.
+- [Terraform Module Overview](https://www.infrasity.com/blog/terraform-module): Explore Terraform modules for efficient infrastructure management.
+- [SEO for Case Studies](https://www.infrasity.com/blog/using-case-studies-and-whitepapers-as-seo-assets-in-technical-content): Learn to optimize case studies and whitepapers for SEO.
+- [SaaS Growth Strategies](https://www.infrasity.com/blog/enhance-saas-business-growth-through-conversion-funnel): Optimize your SaaS business growth through effective conversion funnel strategies.
+- [Boost SEO with Topic Clusters](https://www.infrasity.com/blog/mastering-topic-clusters-boost-your-seo-strategy-in-5-steps): Learn effective strategies to enhance SEO with topic clusters.
+- [Effective Terraform Documentation](https://www.infrasity.com/blog/master-terraform-docs-a-guide-to-effective-documentation): Guide to enhancing Terraform documentation with terraform-docs.
+- [SaaS Content Marketing Strategy](https://www.infrasity.com/blog/content-marketing-strategy): Master content marketing strategies for effective SaaS growth.
+- [B2B Content Syndication](https://www.infrasity.com/blog/b2b-content-syndication): Guide to B2B content syndication for enhanced lead generation.
+- [AI Visual Content Tools](https://www.infrasity.com/blog/top-ai-powered-tools-for-creating-personalized-visual-content): Discover top AI tools to create personalized visual content.
+- [B2B Marketing Funnel Strategies](https://www.infrasity.com/blog/tofu-mofu-bofu-marketing): Comprehensive guide on ToFU, MoFU, BoFU marketing strategies.
+- [Top Technical Writing Services](https://www.infrasity.com/blog/top-10-technical-writing-service-companies): Explore top technical writing companies for effective content creation.
+- [Technical SEO Specialist Overview](https://www.infrasity.com/blog/what-is-a-technical-seo-specialist): Explore the role and tasks of a Technical SEO Specialist.
+- [Understanding Technical Writing](https://www.infrasity.com/blog/what-is-technical-writing): Explore technical writing's impact on B2B SaaS success.
+- [Top AI Outline Generators](https://www.infrasity.com/blog/top-10-free-outline-generators): Discover top free AI tools for efficient outline generation.
+- [SEO Strategies for B2B SaaS](https://www.infrasity.com/blog/why-search-volume-fails-b2b-saas): Explore effective SEO strategies beyond search volume for B2B SaaS.
+- [Y Combinator Content Strategies](https://www.infrasity.com/blog/content-strategy-of-y-combinator-companies): Explore how Y Combinator companies effectively use content strategies.
+- [B2B Content Repurposing Guide](https://www.infrasity.com/blog/b2b-content-repurposing): Learn effective strategies for B2B content repurposing in SaaS.
+- [SaaS Video Production](https://www.infrasity.com/blog/saas-video-production): Streamlined SaaS video production process enhances customer engagement.
+- [B2B SaaS Content Frameworks](https://www.infrasity.com/blog/b2b-saas-content-frameworks): Explore effective content frameworks for B2B SaaS success.
+- [Content Monitoring Guide](https://www.infrasity.com/blog/content-monitoring-for-saas-companies): Explore content monitoring strategies for SaaS growth and relevance.
+- [PRD Writing Guide](https://www.infrasity.com/blog/b2b-saas-prd): Guide to writing effective PRDs for B2B SaaS teams.
+- [Top B2B SaaS Podcasts](https://www.infrasity.com/blog/top-5-b2b-saas-podcasts): Explore the top B2B SaaS podcasts for growth strategies.
+- [DevTools Marketing Strategies](https://www.infrasity.com/blog/devtools-marketing): Effective strategies for engaging developers in DevTools marketing.
+- [KubeCon 2025 Event](https://www.infrasity.com/blog/kubecon-2025): KubeCon 2025 unites cloud-native communities for networking and learning.
+- [LLMs.txt Explained](https://www.infrasity.com/blog/llms.txt): Understand LLMs.txt to enhance your website's AI accessibility.
+- [Understanding Vibe Coding](https://www.infrasity.com/blog/vibe-coding): Explore Vibe Coding: Benefits and challenges for developers.
+- [B2B SaaS Content Playbook](https://www.infrasity.com/blog/content-marketing-playbook): Comprehensive guide for effective B2B SaaS content marketing strategies.
+- [Fractional CMO Benefits](https://www.infrasity.com/blog/fractional-cmo): Effective marketing leadership for budget-conscious B2B SaaS startups.
+- [SaaS Go-To-Market Strategy](https://www.infrasity.com/blog/saas-go-to-market-strategy): Essential guide for launching B2B SaaS products successfully.
+- [Answer Engine Optimization](https://www.infrasity.com/blog/answer-engine-optimization): Learn about answer engine optimization for effective content strategies.
+- [Create Your Ideal Customer Profile](https://www.infrasity.com/blog/ideal-customer-profile): Learn to craft your ideal customer profile effectively.
+- [Creating Product Use Cases](https://www.infrasity.com/blog/product-use-case): Explore effective product use cases to boost B2B SaaS success.
+- [Technical Blog Post Checklist](https://www.infrasity.com/blog/blog-post-checklist): Essential checklist for crafting technical blog posts effectively.
+- [B2B SaaS Metrics Guide](https://www.infrasity.com/blog/content-marketing-metrics): Discover key content marketing metrics for B2B SaaS success.
+- [Product Release Notes Guide](https://www.infrasity.com/blog/product-release-notes): Guide to writing effective product release notes for SaaS.
+- [Red Flags in Documentation](https://www.infrasity.com/blog/poor-documentation): Learn essential red flags of poor SaaS documentation.
+- [Content Marketing ROI Guide](https://www.infrasity.com/blog/content-marketing-roi): Learn how to measure content marketing ROI effectively.
+- [Developer CLI Docs Checklist](https://www.infrasity.com/blog/cli-docs-checklist): Essential checklist for creating effective CLI documentation for developers.
+- [Developer Marketing Insights](https://www.infrasity.com/blog/developer-marketing): Explore effective strategies for engaging developer audiences in marketing.
+- [Changelog vs Release Notes](https://www.infrasity.com/blog/changelog-vs-release-notes): Learn differences between changelogs and release notes for SaaS.
+- [Technical Documentation Insights](https://www.infrasity.com/blog/technical-product-documentation): Explore the importance of technical product documentation for SaaS.
+- [Content Refresh Guide](https://www.infrasity.com/blog/content-refresh): Revitalize outdated content for effective SaaS marketing strategies.
+- [Tech Writer vs Advocate](https://www.infrasity.com/blog/technical-writer-vs-developer-advocate): Compare hiring Technical Writers and Developer Advocates for startups.
+- [5 Whys for Developers](https://www.infrasity.com/blog/developer-experience-engineer): Uncover root causes of developer experience issues effectively.
+- [Top Content Distribution Platforms](https://www.infrasity.com/blog/content-distribution-platforms): Discover top five platforms for distributing SaaS technical content.
+- [Reddit Marketing Strategy](https://www.infrasity.com/blog/reddit-marketing-strategy): Step-by-step Reddit marketing for B2B SaaS growth
+- [Reddit Marketing Tips](https://www.infrasity.com/blog/reddit-marketing): Effective Reddit marketing strategies for B2B SaaS startups.
+- [Reddit Karma Guide](https://www.infrasity.com/blog/how-do-you-get-karma-on-reddit): Learn effective strategies to gain Reddit Karma points easily.
+- [Create Your Own Subreddit](https://www.infrasity.com/blog/how-to-create-a-subreddit): Learn how to create and grow your own subreddit.
+- [Best Subreddits for SaaS](https://www.infrasity.com/blog/best-subreddits): Explore top Reddit communities for B2B SaaS engagement strategies.
+- [Developer Marketing Agencies](https://www.infrasity.com/blog/developer-marketing-agency): Explore top developer marketing agencies to enhance visibility.
+- [Partner with Webflow Agency](https://www.infrasity.com/blog/webflow-agency): Explore benefits of partnering with a Webflow agency for startups.
+- [AEO vs SEO Overview](https://www.infrasity.com/blog/aeo-vs-seo): Explore SEO and AEO differences for B2B SaaS growth.
+- [GitHub SEO Guide](https://www.infrasity.com/blog/github-seo): Optimize your GitHub for better visibility and engagement.
+- [Reddit Marketing Insights](https://www.infrasity.com/blog/reddit-organic-vs-paid-marketing): Explore effective Reddit marketing strategies for B2B SaaS brands.
+- [Bridging Engineer-Product Teams](https://www.infrasity.com/blog/developer-advocates-bridge-engineer-product-teams): Developer advocates enhance collaboration between engineers and product teams.
+- [Generative Engine Optimization Guide](https://www.infrasity.com/blog/generative-engine-optimization-best-practices): Optimize content for AI-driven visibility with best practices.
+- [Key Video Marketing KPIs](https://www.infrasity.com/blog/key-performance-indicators-video-marketing): Essential KPIs for optimizing video marketing in B2B SaaS.
+- [Reddit B2B Marketing Guide](https://www.infrasity.com/blog/reddit-b2b-marketing-strategy): Explore strategies for effective Reddit marketing in B2B SaaS.
+- [Reddit Marketing Strategies](https://www.infrasity.com/blog/reddit-karma-farming-vs-credibility): Explore Reddit's role in B2B SaaS success strategies.
+- [B2B SaaS Growth Strategies](https://www.infrasity.com/blog/b2b-saas-growth-levers): Explore effective growth strategies for early-stage B2B SaaS startups.
+- [LLM Visibility Tool Guide](https://www.infrasity.com/blog/llm-visibility-tool-guide): Learn to track LLM visibility for SaaS success.
+- [B2B Content Channels](https://www.infrasity.com/blog/distribution-channels-for-b2b-content-marketing): Explore effective B2B content marketing distribution strategies for developers.
+- [Developer Marketing Guide](https://www.infrasity.com/blog/what-is-developer-marketing): Explore strategies to effectively engage and empower developers.
+- [DevRel vs GTM Engineers](https://www.infrasity.com/blog/devrel-vs-gtm-engineer): Explore roles of DevRel and GTM engineers in startups.
+- [Startups Hiring DevRel Engineers](https://www.infrasity.com/blog/why-startups-hiring-devrel-engineers): Explore why startups hire DevRel engineers for growth.
+- [AI Marketing Agencies](https://www.infrasity.com/blog/ai-marketing-agency-b2b-saas): Explore top AI marketing agencies for B2B SaaS success.
+- [Developer Marketing Guide](https://www.infrasity.com/blog/developer-marketing-strategy): Comprehensive guide on effective developer marketing strategies.
