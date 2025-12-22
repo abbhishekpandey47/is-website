@@ -2,6 +2,15 @@ export const metadata = {
     title: 'Content Marketing Templates | Infrasity',
     description: 'Access free, ready-to-use content marketing templates for B2B SaaS companies. From content briefs to developer marketing, streamline your workflow with proven templates.',
     keywords: 'Content Marketing Templates, Developer Marketing Templates, Product Documentation Templates, Community Engagement, B2B SaaS Templates, Technical Writing Templates',
+    robots: {
+        index: false,
+        follow: false,
+        nocache: true,
+        googleBot: {
+            index: false,
+            follow: false,
+        },
+    },
     openGraph: {
         title: 'Content Marketing Templates | Infrasity',
         description: 'Access free, ready-to-use content marketing templates for B2B SaaS companies. From content briefs to developer marketing, streamline your workflow with proven templates.',
