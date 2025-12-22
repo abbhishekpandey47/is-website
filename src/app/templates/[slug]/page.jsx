@@ -22,208 +22,227 @@ const TemplateDetailPage = ({ params }) => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Banner Section */}
-      <div className="relative w-full h-[400px] max-sm:h-[300px] overflow-hidden">
-        <Image
-          src={template.bannerImage}
-          alt={template.title}
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 p-8 max-sm:p-4">
-          <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[#0f1419] text-white">
+      {/* Hero Section - Title Left, Video Right */}
+      <div className="bg-gradient-to-b from-[#1a0b2e] via-[#16213e] to-[#0f1419] pt-32 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Title and Info */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center justify-center bg-[#f5f4f7] rounded-full px-4 py-2 text-[14px] quicksand-semibold mb-4"
+              className="space-y-6"
             >
-              <p className="text-black">{template.category}</p>
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl md:text-5xl font-bold quicksand-bold"
-            >
-              {template.title}
-            </motion.h1>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column - Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Description */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <h2 className="text-2xl font-bold mb-4 quicksand-bold">Overview</h2>
-              <p className="text-gray-300 text-lg leading-relaxed quicksand-light">
-                {template.overview}
-              </p>
-            </motion.div>
-
-            {/* Use Case */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 rounded-xl p-6 border border-blue-500/20"
-            >
-              <h3 className="text-xl font-bold mb-2 quicksand-bold">Perfect For</h3>
-              <p className="text-gray-300 quicksand-light">{template.useCase}</p>
-            </motion.div>
-
-            {/* Target Audience */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-xl p-6 border border-purple-500/20"
-            >
-              <h3 className="text-xl font-bold mb-2 quicksand-bold">Who Should Use This</h3>
-              <p className="text-gray-300 quicksand-light">{template.targetAudience}</p>
-            </motion.div>
-
-            {/* Key Features */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <h2 className="text-2xl font-bold mb-4 quicksand-bold">Key Features</h2>
-              <ul className="space-y-3">
-                {template.keyFeatures.map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <svg
-                      className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span className="text-gray-300 quicksand-light">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-
-          {/* Right Column - Video & Info */}
-          <div className="lg:col-span-1 space-y-6">
-            {/* Video Embed */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="sticky top-4"
-            >
-              <div className="bg-slate-900 rounded-xl p-4 border border-slate-700 shadow-2xl">
-                <div className="relative w-full aspect-video mb-4 bg-slate-800 rounded-lg overflow-hidden">
-                  <iframe
-                    src={template.videoEmbedUrl}
-                    className="absolute inset-0 w-full h-full"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                    title={`${template.title} Tutorial`}
-                  ></iframe>
+              <Link 
+                href="/templates" 
+                className="inline-flex items-center text-[#888] hover:text-white transition-colors text-sm quicksand-regular"
+              >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Templates
+              </Link>
+              
+              <div>
+                <div className="inline-flex items-center justify-center bg-blue-600/20 border border-blue-500/30 rounded-full px-4 py-1.5 text-[13px] quicksand-semibold mb-4">
+                  <p className="text-blue-300">{template.category}</p>
                 </div>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold quicksand-bold text-white mb-4 leading-tight">
+                  {template.title}
+                </h1>
+                <p className="text-lg text-[#aaa] quicksand-light leading-relaxed">
+                  {template.description}
+                </p>
+              </div>
 
-                {/* Download Button */}
+              <div className="pt-4">
                 <a
                   href={template.downloadLink}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl quicksand-semibold"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3.5 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl quicksand-semibold"
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                    />
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                   Download Template
                 </a>
+              </div>
+            </motion.div>
 
-                {/* Quick Info */}
-                <div className="mt-6 pt-6 border-t border-slate-700 space-y-3">
+            {/* Right Column - Video */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="relative w-full aspect-video bg-[#1a1f35] border border-[#2a2f45] rounded-xl overflow-hidden shadow-2xl">
+                <iframe
+                  src={template.videoEmbedUrl}
+                  className="absolute inset-0 w-full h-full"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  title={`${template.title} Tutorial`}
+                ></iframe>
+              </div>
+              
+              {/* Video Metadata */}
+              <div className="flex items-center justify-between mt-4 text-sm text-[#666]">
+                <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2">
-                    <svg
-                      className="w-5 h-5 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
-                      />
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span className="text-gray-400 text-sm quicksand-light">
-                      {template.category}
-                    </span>
+                    <span className="quicksand-regular">5 min</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <svg
-                      className="w-5 h-5 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
-                    <span className="text-gray-400 text-sm quicksand-light">
-                      {new Date(template.publishedOn).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Image
-                      src={template.authorImage}
-                      alt={template.author}
-                      width={20}
-                      height={20}
-                      className="rounded-full"
-                    />
-                    <span className="text-gray-400 text-sm quicksand-light">
-                      {template.author}
-                    </span>
+                    <span className="quicksand-regular">21 views</span>
                   </div>
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Content Tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <div className="border-b border-[#1a1f35] mb-12">
+            <div className="flex gap-8">
+              <button className="pb-4 border-b-2 border-white text-white quicksand-semibold text-sm">
+                Content
+              </button>
+            </div>
+          </div>
+
+          {/* Page Content Table */}
+          <div className="mb-16">
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="border-b border-[#1a1f35]">
+                    <th className="text-left py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Page</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q1 Views</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q2 Views</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q3 Views</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q1 Clicks</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q2 Impressions</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q3 Change</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Action Required</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[...Array(5)].map((_, index) => (
+                    <tr key={index} className="border-b border-[#1a1f35] hover:bg-[#1a1f35] transition-colors">
+                      <td className="py-3 px-4">
+                        <Link href="#" className="text-blue-400 hover:underline quicksand-regular text-sm">
+                          sample_page_{index + 1}
+                        </Link>
+                      </td>
+                      <td className="text-right py-3 px-4 text-white quicksand-regular text-sm">
+                        {(Math.random() * 10000).toFixed(0)}
+                      </td>
+                      <td className="text-right py-3 px-4 text-white quicksand-regular text-sm">
+                        {(Math.random() * 10000).toFixed(0)}
+                      </td>
+                      <td className="text-right py-3 px-4 text-white quicksand-regular text-sm">
+                        {Math.floor(Math.random() * 1000)}
+                      </td>
+                      <td className="text-right py-3 px-4 text-white quicksand-regular text-sm">
+                        {(Math.random() * 100).toFixed(2)}%
+                      </td>
+                      <td className="text-right py-3 px-4 text-white quicksand-regular text-sm">
+                        {Math.floor(Math.random() * 100000)}
+                      </td>
+                      <td className="text-right py-3 px-4 quicksand-regular text-sm">
+                        <span className={Math.random() > 0.5 ? 'text-green-400' : 'text-red-400'}>
+                          {Math.random() > 0.5 ? '+' : ''}{(Math.random() * 50 - 25).toFixed(1)}%
+                        </span>
+                      </td>
+                      <td className="text-right py-3 px-4">
+                        <span className={`text-xs px-2 py-1 rounded ${Math.random() > 0.5 ? 'text-green-400 bg-green-400/10' : 'text-orange-400 bg-orange-400/10'}`}>
+                          {Math.random() > 0.5 ? 'Improved Clicks' : 'Lower Clicks'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Template Outline Section - Clean structured design */}
+          <div className="space-y-12">
+            <div>
+              <h2 className="text-3xl font-bold mb-4 quicksand-bold">What is {template.title}?</h2>
+              <p className="text-[#aaa] text-lg quicksand-light leading-relaxed">
+                {template.overview}
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-3xl font-bold mb-6 quicksand-bold">Why Use {template.title}?</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {template.keyFeatures && template.keyFeatures.map((feature, index) => (
+                  <div key={index} className="flex items-start gap-3 bg-[#1a1f35] border border-[#2a2f45] rounded-lg p-5 hover:border-[#4a4f6a] transition-colors">
+                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 mt-2 flex-shrink-0"></div>
+                    <p className="text-[#ccc] quicksand-light leading-relaxed">{feature}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-3xl font-bold mb-6 quicksand-bold">What's Included</h2>
+              <div className="space-y-6">
+                {template.howToUse && template.howToUse.map((step, index) => (
+                  <div key={index} className="bg-[#1a1f35] border border-[#2a2f45] rounded-lg p-6 hover:border-[#4a4f6a] transition-colors">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center font-bold quicksand-bold text-sm">
+                        {index + 1}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-white quicksand-semibold text-lg mb-2">{step.step}</h3>
+                        <p className="text-[#888] text-sm quicksand-light leading-relaxed">{step.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Download CTA */}
+            <div className="pt-8 border-t border-[#1a1f35]">
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-10 text-center">
+                <h3 className="text-2xl font-bold mb-3 quicksand-bold">
+                  Download and start building your marketing strategy
+                </h3>
+                <p className="text-white/80 mb-6 quicksand-light">
+                  Get instant access to this template and streamline your workflow
+                </p>
+                <a
+                  href={template.downloadLink}
+                  className="inline-flex items-center gap-2 bg-white text-black hover:bg-[#e5e5e5] px-8 py-3 rounded-md font-medium transition-colors quicksand-semibold"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Download Template
+                </a>
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Template Outline Section */}
         <motion.div
@@ -254,47 +273,18 @@ const TemplateDetailPage = ({ params }) => {
             ))}
           </div>
         </motion.div>
-
-        {/* How to Use Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-16"
-        >
-          <h2 className="text-3xl font-bold mb-8 quicksand-bold">How to Use This Template</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {template.howToUse.map((step, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-xl p-6 border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center font-bold quicksand-bold">
-                    {index + 1}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold mb-2 quicksand-bold">{step.step}</h3>
-                    <p className="text-gray-300 quicksand-light">{step.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
         {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-16"
         >
-          <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-2xl p-12 border border-blue-500/20 text-center">
+          <div className="bg-[#1a1f35] border border-[#2a2f45] rounded-2xl p-12 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 quicksand-bold">
               Need Help Implementing This Template?
             </h2>
-            <p className="text-lg text-gray-300 mb-8 quicksand-light max-w-2xl mx-auto">
+            <p className="text-lg text-[#888] mb-8 quicksand-light max-w-2xl mx-auto">
               Our content marketing experts can help you customize and implement this template
               for your specific needs.
             </p>
@@ -311,7 +301,7 @@ const TemplateDetailPage = ({ params }) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-16"
         >
           <h2 className="text-3xl font-bold mb-8 quicksand-bold">Explore More Templates</h2>
@@ -323,10 +313,10 @@ const TemplateDetailPage = ({ params }) => {
                 <Link
                   key={relatedTemplate.id}
                   href={`/templates/${relatedTemplate.slug}`}
-                  className="group"
+                  className="group block"
                 >
-                  <div className="bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl">
-                    <div className="relative h-48 overflow-hidden">
+                  <div className="relative bg-[#1a1f35] border border-[#2a2f45] rounded-xl overflow-hidden hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6">
+                    <div className="absolute top-4 right-4 w-24 h-24 overflow-hidden rounded-lg shadow-lg transform transition-transform duration-300 group-hover:rotate-12 origin-top-right">
                       <Image
                         src={relatedTemplate.thumbnailImage}
                         alt={relatedTemplate.title}
@@ -334,11 +324,11 @@ const TemplateDetailPage = ({ params }) => {
                         className="object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     </div>
-                    <div className="p-4">
-                      <div className="inline-flex items-center justify-center bg-[#f5f4f7] rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
-                        <p className="text-black">{relatedTemplate.category}</p>
+                    <div className="pr-24">
+                      <div className="inline-flex items-center justify-center bg-blue-600/10 border border-blue-500/20 rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
+                        <p className="text-blue-400">{relatedTemplate.category}</p>
                       </div>
-                      <h3 className="text-lg font-bold quicksand-bold group-hover:text-blue-400 transition-colors">
+                      <h3 className="text-base font-bold quicksand-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2">
                         {relatedTemplate.title}
                       </h3>
                     </div>
