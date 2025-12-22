@@ -191,14 +191,54 @@ const TemplatesPage = () => {
                       Product Documentation
                     </button>
                     <button
-                      onClick={() => setSelectedUseCase("Community Engagement")}
+                      onClick={() => setSelectedUseCase("Community Engagement (Reddit & GitHub)")}
                       className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
-                        selectedUseCase === "Community Engagement"
+                        selectedUseCase === "Community Engagement (Reddit & GitHub)"
                           ? "bg-[#2a2f45] text-white"
                           : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
                       }`}
                     >
-                      Community Engagement
+                      Community Engagement (Reddit & GitHub)
+                    </button>
+                    <button
+                      onClick={() => setSelectedUseCase("Developer Content & Guides")}
+                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
+                        selectedUseCase === "Developer Content & Guides"
+                          ? "bg-[#2a2f45] text-white"
+                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
+                      }`}
+                    >
+                      Developer Content & Guides
+                    </button>
+                    <button
+                      onClick={() => setSelectedUseCase("DevRel & Content Distribution")}
+                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
+                        selectedUseCase === "DevRel & Content Distribution"
+                          ? "bg-[#2a2f45] text-white"
+                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
+                      }`}
+                    >
+                      DevRel & Content Distribution
+                    </button>
+                    <button
+                      onClick={() => setSelectedUseCase("Content Ops & Performance Reporting")}
+                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
+                        selectedUseCase === "Content Ops & Performance Reporting"
+                          ? "bg-[#2a2f45] text-white"
+                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
+                      }`}
+                    >
+                      Content Ops & Performance Reporting
+                    </button>
+                    <button
+                      onClick={() => setSelectedUseCase("API Docs & SDK Docs")}
+                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
+                        selectedUseCase === "API Docs & SDK Docs"
+                          ? "bg-[#2a2f45] text-white"
+                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
+                      }`}
+                    >
+                      API Docs & SDK Docs
                     </button>
                   </div>
                 </div>
