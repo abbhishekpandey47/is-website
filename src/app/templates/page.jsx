@@ -13,10 +13,10 @@ import Image from "next/image";
 import templateMetadata from "../../../templates-data/_templateMetadata";
 
 const TemplateCard = React.memo(({ template }) => (
-  <Link href={`/templates/${template.slug}`} className="group block">
-    <div className="bg-[#1a1f35] border border-[#2a2f45] rounded-xl overflow-hidden hover:border-[#4a4f6a] hover:shadow-xl transition-all duration-300">
+  <Link href={`/templates/${template.slug}`} className="group block h-full">
+    <div className="bg-[#1e293b] border border-[#334155] rounded-xl overflow-hidden hover:border-[#475569] hover:shadow-xl transition-all duration-300 h-full flex flex-col">
       {/* Image Section */}
-      <div className="relative aspect-video w-full bg-[#0f1419] overflow-hidden">
+      <div className="relative aspect-video w-full bg-[#0f172a] overflow-hidden flex-shrink-0">
         <Image
           loading="lazy"
           width={400}
@@ -28,18 +28,25 @@ const TemplateCard = React.memo(({ template }) => (
       </div>
       
       {/* Content */}
-      <div className="p-5">
+      <div className="p-5 flex flex-col flex-grow">
         <div className="mb-3">
-          <span className="inline-block bg-blue-600/20 text-blue-300 text-xs px-3 py-1 rounded-full quicksand-semibold">
+          <span className="inline-block bg-[#6366f1]/10 text-[#a5b4fc] text-xs px-3 py-1 rounded-full quicksand-semibold">
             {template.category}
           </span>
         </div>
-        <h3 className="text-white quicksand-bold text-lg mb-2 line-clamp-2 group-hover:text-blue-300 transition-colors">
+        <h3 className="text-white quicksand-bold text-lg mb-2 line-clamp-2 group-hover:text-[#a5b4fc] transition-colors min-h-[3.5rem]">
           {template.title}
         </h3>
-        <p className="text-[#a0a5ba] text-sm quicksand-light line-clamp-2 leading-relaxed">
+        <p className="text-[#94a3b8] text-sm quicksand-light line-clamp-2 leading-relaxed mb-4 flex-grow">
           {template.shortDescription}
         </p>
+        {/* Get Template Link */}
+        <span className="text-[#6366f1] hover:text-[#818cf8] font-semibold text-sm quicksand-semibold inline-flex items-center gap-1 transition-colors mt-auto">
+          Get Template
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
       </div>
     </div>
   </Link>
@@ -80,17 +87,17 @@ const TemplatesPage = () => {
   }, [searchQuery, selectedUseCase]);
 
   return (
-    <div className="min-h-screen bg-[#0f1419] text-white">
+    <div className="min-h-screen bg-[#0f172a] text-white">
       {/* Hero Section */}
-      <div className="border-b border-[#1a1f35]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 text-center">
+      <div className="bg-gradient-to-b from-[#1a0b2e] via-[#16213e] to-[#0f172a] border-b border-[#1e293b] pt-32 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 quicksand-bold"
           >
-            Find your Template
+            Templates We Use to Run Developer Content at Scale
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -127,7 +134,7 @@ const TemplatesPage = () => {
                 placeholder="Search templates..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#1a1f35] border border-[#2a2f45] rounded-lg pl-12 pr-4 py-4 text-white placeholder-[#6b7280] focus:outline-none focus:border-[#4a4f6a] transition-colors quicksand-regular"
+                className="w-full bg-[#1e293b] border border-[#334155] rounded-lg pl-12 pr-4 py-4 text-white placeholder-[#64748b] focus:outline-none focus:border-[#6366f1] transition-colors quicksand-regular"
               />
             </div>
           </motion.div>
@@ -148,98 +155,188 @@ const TemplatesPage = () => {
               <h2 className="text-xl font-semibold mb-6 quicksand-semibold text-white">Filter Templates</h2>
               <div className="space-y-3">
                 <div>
-                  <h3 className="text-xs text-[#6b7280] mb-3 quicksand-semibold uppercase tracking-wider">Categories</h3>
-                  <div className="space-y-1">
-                    <button
-                      onClick={() => setSelectedUseCase("all")}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
-                        selectedUseCase === "all"
-                          ? "bg-[#2a2f45] text-white"
-                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
-                      }`}
-                    >
-                      All Templates
-                    </button>
-                    <button
-                      onClick={() => setSelectedUseCase("Informational")}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
-                        selectedUseCase === "Informational"
-                          ? "bg-[#2a2f45] text-white"
-                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
-                      }`}
-                    >
-                      Informational
-                    </button>
-                    <button
-                      onClick={() => setSelectedUseCase("Developer Marketing")}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
-                        selectedUseCase === "Developer Marketing"
-                          ? "bg-[#2a2f45] text-white"
-                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
-                      }`}
-                    >
-                      Developer Marketing
-                    </button>
-                    <button
-                      onClick={() => setSelectedUseCase("Product Documentation")}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
-                        selectedUseCase === "Product Documentation"
-                          ? "bg-[#2a2f45] text-white"
-                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
-                      }`}
-                    >
-                      Product Documentation
-                    </button>
-                    <button
-                      onClick={() => setSelectedUseCase("Community Engagement (Reddit & GitHub)")}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
-                        selectedUseCase === "Community Engagement (Reddit & GitHub)"
-                          ? "bg-[#2a2f45] text-white"
-                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
-                      }`}
-                    >
-                      Community Engagement (Reddit & GitHub)
-                    </button>
-                    <button
-                      onClick={() => setSelectedUseCase("Developer Content & Guides")}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
-                        selectedUseCase === "Developer Content & Guides"
-                          ? "bg-[#2a2f45] text-white"
-                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
-                      }`}
-                    >
-                      Developer Content & Guides
-                    </button>
-                    <button
-                      onClick={() => setSelectedUseCase("DevRel & Content Distribution")}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
-                        selectedUseCase === "DevRel & Content Distribution"
-                          ? "bg-[#2a2f45] text-white"
-                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
-                      }`}
-                    >
-                      DevRel & Content Distribution
-                    </button>
-                    <button
-                      onClick={() => setSelectedUseCase("Content Ops & Performance Reporting")}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
-                        selectedUseCase === "Content Ops & Performance Reporting"
-                          ? "bg-[#2a2f45] text-white"
-                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
-                      }`}
-                    >
-                      Content Ops & Performance Reporting
-                    </button>
-                    <button
-                      onClick={() => setSelectedUseCase("API Docs & SDK Docs")}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors quicksand-regular ${
-                        selectedUseCase === "API Docs & SDK Docs"
-                          ? "bg-[#2a2f45] text-white"
-                          : "text-[#a0a5ba] hover:text-white hover:bg-[#1a1f35]"
-                      }`}
-                    >
-                      API Docs & SDK Docs
-                    </button>
+                  <h3 className="text-xs text-[#64748b] mb-3 quicksand-semibold uppercase tracking-wider">Categories</h3>
+                  <div className="space-y-2">
+                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
+                      selectedUseCase === "all"
+                        ? "bg-[#6366f1]/10 text-[#a5b4fc]"
+                        : "text-[#94a3b8] hover:text-white hover:bg-[#1e293b]"
+                    }`}>
+                      <div className="relative flex items-center mr-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedUseCase === "all"}
+                          onChange={() => setSelectedUseCase("all")}
+                          className="w-5 h-5 appearance-none border-2 border-[#475569] rounded bg-transparent checked:bg-[#6366f1] checked:border-[#6366f1] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-0 transition-all cursor-pointer"
+                        />
+                        {selectedUseCase === "all" && (
+                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <span>All Templates</span>
+                    </label>
+                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
+                      selectedUseCase === "Informational"
+                        ? "bg-[#6366f1]/10 text-[#a5b4fc]"
+                        : "text-[#94a3b8] hover:text-white hover:bg-[#1e293b]"
+                    }`}>
+                      <div className="relative flex items-center mr-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedUseCase === "Informational"}
+                          onChange={() => setSelectedUseCase("Informational")}
+                          className="w-5 h-5 appearance-none border-2 border-[#475569] rounded bg-transparent checked:bg-[#6366f1] checked:border-[#6366f1] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-0 transition-all cursor-pointer"
+                        />
+                        {selectedUseCase === "Informational" && (
+                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <span>Informational</span>
+                    </label>
+                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
+                      selectedUseCase === "Developer Marketing"
+                        ? "bg-[#6366f1]/10 text-[#a5b4fc]"
+                        : "text-[#94a3b8] hover:text-white hover:bg-[#1e293b]"
+                    }`}>
+                      <div className="relative flex items-center mr-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedUseCase === "Developer Marketing"}
+                          onChange={() => setSelectedUseCase("Developer Marketing")}
+                          className="w-5 h-5 appearance-none border-2 border-[#475569] rounded bg-transparent checked:bg-[#6366f1] checked:border-[#6366f1] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-0 transition-all cursor-pointer"
+                        />
+                        {selectedUseCase === "Developer Marketing" && (
+                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <span>Developer Marketing</span>
+                    </label>
+                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
+                      selectedUseCase === "Product Documentation"
+                        ? "bg-[#6366f1]/10 text-[#a5b4fc]"
+                        : "text-[#94a3b8] hover:text-white hover:bg-[#1e293b]"
+                    }`}>
+                      <div className="relative flex items-center mr-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedUseCase === "Product Documentation"}
+                          onChange={() => setSelectedUseCase("Product Documentation")}
+                          className="w-5 h-5 appearance-none border-2 border-[#475569] rounded bg-transparent checked:bg-[#6366f1] checked:border-[#6366f1] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-0 transition-all cursor-pointer"
+                        />
+                        {selectedUseCase === "Product Documentation" && (
+                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <span>Product Documentation</span>
+                    </label>
+                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
+                      selectedUseCase === "Community Engagement (Reddit & GitHub)"
+                        ? "bg-[#6366f1]/10 text-[#a5b4fc]"
+                        : "text-[#94a3b8] hover:text-white hover:bg-[#1e293b]"
+                    }`}>
+                      <div className="relative flex items-center mr-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedUseCase === "Community Engagement (Reddit & GitHub)"}
+                          onChange={() => setSelectedUseCase("Community Engagement (Reddit & GitHub)")}
+                          className="w-5 h-5 appearance-none border-2 border-[#475569] rounded bg-transparent checked:bg-[#6366f1] checked:border-[#6366f1] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-0 transition-all cursor-pointer"
+                        />
+                        {selectedUseCase === "Community Engagement (Reddit & GitHub)" && (
+                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <span>Community Engagement (Reddit & GitHub)</span>
+                    </label>
+                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
+                      selectedUseCase === "Developer Content & Guides"
+                        ? "bg-[#6366f1]/10 text-[#a5b4fc]"
+                        : "text-[#94a3b8] hover:text-white hover:bg-[#1e293b]"
+                    }`}>
+                      <div className="relative flex items-center mr-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedUseCase === "Developer Content & Guides"}
+                          onChange={() => setSelectedUseCase("Developer Content & Guides")}
+                          className="w-5 h-5 appearance-none border-2 border-[#475569] rounded bg-transparent checked:bg-[#6366f1] checked:border-[#6366f1] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-0 transition-all cursor-pointer"
+                        />
+                        {selectedUseCase === "Developer Content & Guides" && (
+                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <span>Developer Content & Guides</span>
+                    </label>
+                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
+                      selectedUseCase === "DevRel & Content Distribution"
+                        ? "bg-[#6366f1]/10 text-[#a5b4fc]"
+                        : "text-[#94a3b8] hover:text-white hover:bg-[#1e293b]"
+                    }`}>
+                      <div className="relative flex items-center mr-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedUseCase === "DevRel & Content Distribution"}
+                          onChange={() => setSelectedUseCase("DevRel & Content Distribution")}
+                          className="w-5 h-5 appearance-none border-2 border-[#475569] rounded bg-transparent checked:bg-[#6366f1] checked:border-[#6366f1] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-0 transition-all cursor-pointer"
+                        />
+                        {selectedUseCase === "DevRel & Content Distribution" && (
+                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <span>DevRel & Content Distribution</span>
+                    </label>
+                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
+                      selectedUseCase === "Content Ops & Performance Reporting"
+                        ? "bg-[#6366f1]/10 text-[#a5b4fc]"
+                        : "text-[#94a3b8] hover:text-white hover:bg-[#1e293b]"
+                    }`}>
+                      <div className="relative flex items-center mr-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedUseCase === "Content Ops & Performance Reporting"}
+                          onChange={() => setSelectedUseCase("Content Ops & Performance Reporting")}
+                          className="w-5 h-5 appearance-none border-2 border-[#475569] rounded bg-transparent checked:bg-[#6366f1] checked:border-[#6366f1] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-0 transition-all cursor-pointer"
+                        />
+                        {selectedUseCase === "Content Ops & Performance Reporting" && (
+                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <span>Content Ops & Performance Reporting</span>
+                    </label>
+                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
+                      selectedUseCase === "API Docs & SDK Docs"
+                        ? "bg-[#6366f1]/10 text-[#a5b4fc]"
+                        : "text-[#94a3b8] hover:text-white hover:bg-[#1e293b]"
+                    }`}>
+                      <div className="relative flex items-center mr-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedUseCase === "API Docs & SDK Docs"}
+                          onChange={() => setSelectedUseCase("API Docs & SDK Docs")}
+                          className="w-5 h-5 appearance-none border-2 border-[#475569] rounded bg-transparent checked:bg-[#6366f1] checked:border-[#6366f1] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-0 transition-all cursor-pointer"
+                        />
+                        {selectedUseCase === "API Docs & SDK Docs" && (
+                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                      <span>API Docs & SDK Docs</span>
+                    </label>
                   </div>
                 </div>
               </div>

@@ -390,8 +390,231 @@ const templateMetadata = [
                 description: "End with gratitude and warmth. Make people feel valued and welcome.",
                 example: "Thank the community, encourage continued engagement, include friendly sign-off."
             }
+        ]    },
+    {
+        id: "template-005",
+        slug: "developer-content-and-guides-outline",
+        title: "Developer Content and Guides (Outline)",
+        category: "Developer Content & Guides",
+        description: "A comprehensive outline for creating content about AI-powered documentation tools. This template guides you through structuring an in-depth comparison of leading documentation solutions for modern development teams.",
+        shortDescription: "Structure your AI documentation tools comparison with this proven outline",
+        thumbnailImage: "/template-thumbnails/developer-outline.png",
+        bannerImage: "/template-banners/developer-outline.png",
+        videoEmbedUrl: "https://www.loom.com/embed/YOUR_LOOM_VIDEO_ID_5",
+        publishedOn: "2024-12-19",
+        author: "Infrasity Team",
+        authorImage: "/svgPatterns/profile.svg",
+        
+        useCase: "Comparison guides, tool evaluation content, developer resource articles, technical buying guides",
+        targetAudience: "Technical Writers, Developer Relations, Engineering Leaders, Documentation Teams",
+        downloadLink: "#",
+        
+        metricsTable: [
+          { label: "Title", value: "Best AI Tools for Documentation (2025): Fern, Apidog, Swimm, Guidde & Eraser.io" },
+          { label: "URL", value: "" },
+          { label: "Word Count", value: "~2200" },
+          { label: "Target Intent", value: "Informational + Technical + Comparison" },
+          { label: "Target Audience", value: "Developers, Technical Writers, SaaS and API Product Teams, Engineering Teams, Operations & Support Teams" },
+          { label: "Page Template", value: "Information and tutorial blog" },
+          { label: "Focus keyword", value: "Best AI tool for documentation | 1600" },
+          { label: "Secondary Keyword", value: "AI documentation tools, Fern Documentation, Apidog API docs, Swimm documentation, Guidde AI, eraser.io Support AI | 900, 800, 700, 600, 500, 450" },
+          { label: "Longtail KWs", value: "best AI documentation tool for developers, Fern vs apidog, Swimm Anti code drift, Best video-first SOP creator | 350, 300, 250, 200" }
+        ],
+        
+        overview: "This outline template helps you structure comprehensive content about AI-powered documentation tools. Perfect for creating comparison guides, evaluation resources, or deep-dive articles that help technical teams make informed decisions about their documentation stack.",
+        
+        keyFeatures: [
+            "Structured comparison framework for multiple tools",
+            "Clear TL;DR section for quick evaluation",
+            "Industry trend analysis structure",
+            "Real-world use case integration",
+            "Actionable decision-making framework"
+        ],
+        
+        howToUse: [
+            {
+                step: "Start with Executive Summary",
+                description: "Create a TL;DR section that highlights each tool's primary value proposition and ideal use case."
+            },
+            {
+                step: "Analyze Industry Trends",
+                description: "Cover current shifts in documentation practices (docs-as-code, AI automation, etc.) to provide context."
+            },
+            {
+                step: "Deep Dive Each Tool",
+                description: "For each solution, cover: what it does, who uses it, key features, and real implementation examples."
+            },
+            {
+                step: "Include Practical Examples",
+                description: "Show actual use cases from real companies to demonstrate value and implementation."
+            },
+            {
+                step: "Add Decision Framework",
+                description: "Help readers choose the right tool based on their team size, tech stack, and documentation needs."
+            }
+        ],
+        
+        templateOutline: [
+            {
+                section: "TL;DR Summary",
+                description: "Quick overview of each tool with one-sentence value proposition and ideal use case",
+                example: "Fern – For API-first teams that need SDKs and clean docs. Used by Cohere for multi-language SDK generation."
+            },
+            {
+                section: "Industry Context",
+                description: "Explain how AI is changing documentation in 2025. Include relevant trends and pain points.",
+                example: "Cover docs-as-code adoption, automated SDK generation, and the shift toward living documentation."
+            },
+            {
+                section: "Tool #1: Fern",
+                description: "Deep dive into Fern - API documentation and SDK generation. Include real customer examples.",
+                example: "Explain how Cohere uses it, key features, integration process, and ideal scenarios."
+            },
+            {
+                section: "Tool #2: Apidog",
+                description: "Cover Apidog's unified approach to API design, testing, and documentation.",
+                example: "Show how Nestlé uses it to eliminate tool fragmentation and streamline workflows."
+            },
+            {
+                section: "Tool #3: Swimm",
+                description: "Explain Swimm's approach to keeping code and docs in sync for large codebases.",
+                example: "Detail how Riskfuel reduced onboarding time using Swimm's continuous documentation."
+            },
+            {
+                section: "Tool #4: Guidde",
+                description: "Cover video-based documentation with Guidde for internal processes and training.",
+                example: "Explain SentinelOne's use case for creating reusable video guides."
+            },
+            {
+                section: "Tool #5: Eraser",
+                description: "Discuss AI-powered diagram generation for architecture and technical specifications.",
+                example: "Show how Mathspace creates diagrams quickly and keeps them version-controlled."
+            },
+            {
+                section: "Comparison Matrix",
+                description: "Create a feature comparison table showing pricing, integrations, and best use cases.",
+                example: "Compare tools side-by-side across key dimensions like team size, API-first needs, etc."
+            },
+            {
+                section: "Decision Framework",
+                description: "Help readers choose based on their specific needs, team structure, and existing stack.",
+                example: "If you're API-first → Fern. If you need unified workspace → Apidog. Large codebase → Swimm."
+            },
+            {
+                section: "Getting Started Guide",
+                description: "Provide next steps for each tool including trial links, setup guides, and key resources.",
+                example: "List pricing tiers, free trial availability, and documentation links for each solution."
+            }
         ]
-    }
+    },
+    {
+        id: "template-006",
+        slug: "developer-content-and-guides-content",
+        title: "Developer Content and Guides (Content)",
+        category: "Developer Content & Guides",
+        description: "Complete, ready-to-use content covering the top 5 AI-powered documentation tools. This comprehensive guide includes real company examples, detailed feature breakdowns, and practical implementation advice for modern development teams.",
+        shortDescription: "Complete guide to AI documentation tools with examples and implementation details",
+        thumbnailImage: "/template-thumbnails/developer-content.png",
+        bannerImage: "/template-banners/developer-content.png",
+        videoEmbedUrl: "https://www.loom.com/embed/YOUR_LOOM_VIDEO_ID_6",
+        publishedOn: "2024-12-19",
+        author: "Infrasity Team",
+        authorImage: "/svgPatterns/profile.svg",
+        
+        useCase: "Complete documentation tool comparison, developer resource library, technical evaluation guides, team onboarding materials",
+        targetAudience: "Engineering Teams, Technical Writers, DevRel Professionals, Engineering Managers, Documentation Specialists",
+        downloadLink: "#",
+        
+        overview: "This full-content template provides a complete, publication-ready guide to the best AI tools for documentation in 2025. It includes in-depth analysis of 5 leading solutions (Fern, Apidog, Swimm, Guidde, Eraser), real customer case studies, implementation examples, and a practical decision framework to help teams choose the right tools.",
+        
+        keyFeatures: [
+            "Complete content covering 5 major AI documentation tools",
+            "Real-world examples from Cohere, Nestlé, Riskfuel, SentinelOne, and more",
+            "Detailed feature analysis and use case breakdowns",
+            "Industry trends and future of documentation analysis",
+            "Practical decision-making framework with comparison matrix",
+            "Ready-to-publish content with proper structure and SEO optimization"
+        ],
+        
+        howToUse: [
+            {
+                step: "Review and Customize Content",
+                description: "Read through the complete content. Adjust examples, add your own insights, or update with latest features."
+            },
+            {
+                step: "Update Company Examples",
+                description: "Verify that all customer examples and case studies are current. Add any recent success stories."
+            },
+            {
+                step: "Customize for Your Audience",
+                description: "Tailor the decision framework and recommendations based on your specific audience's needs and tech stack."
+            },
+            {
+                step: "Add Visual Assets",
+                description: "Include screenshots, architecture diagrams, comparison charts, and product demos where indicated."
+            },
+            {
+                step: "SEO Optimization",
+                description: "Update meta descriptions, add internal links, and ensure keyword placement aligns with your content strategy."
+            },
+            {
+                step: "Publish and Promote",
+                description: "Share on developer communities (dev.to, Hacker News, relevant subreddits) and your distribution channels."
+            }
+        ],
+        
+        templateOutline: [
+            {
+                section: "Complete TL;DR Section",
+                description: "Executive summary covering all 5 tools with key value propositions and customer examples",
+                example: "Full content includes Fern (API-first SDK generation), Apidog (unified workspace), Swimm (living docs), Guidde (video guides), Eraser (AI diagrams) with real company use cases for each."
+            },
+            {
+                section: "How AI Is Changing Documentation",
+                description: "In-depth analysis of 2025 documentation trends including docs-as-code, automated workflows, and AI integration",
+                example: "Complete section with Recursion and Cohere examples, covering the shift from scattered wikis to version-controlled documentation systems."
+            },
+            {
+                section: "Fern: API Documentation & SDK Generation",
+                description: "Comprehensive coverage of Fern's capabilities with Cohere and Nominal case studies",
+                example: "Detailed explanation of how Fern generates multi-language SDKs from OpenAPI specs, keeps docs in sync, and reduces manual maintenance work."
+            },
+            {
+                section: "Apidog: Unified API Workspace",
+                description: "Full section on Apidog's all-in-one approach with Nestlé innovation team example",
+                example: "Complete breakdown of design, mock, test, and documentation workflow consolidation with practical implementation guidance."
+            },
+            {
+                section: "Swimm: Continuous Documentation for Code",
+                description: "Detailed analysis of Swimm's IDE-integrated approach with Riskfuel and Recursion examples",
+                example: "How Swimm reduces onboarding time by 50%+ and keeps docs synced with code changes automatically."
+            },
+            {
+                section: "Guidde: AI-Powered Video Documentation",
+                description: "Complete section on video-first documentation with SentinelOne, FloQast, and Nezasa case studies",
+                example: "Full explanation of how Guidde records workflows and generates narrated video guides for internal processes."
+            },
+            {
+                section: "Eraser: AI Diagram Generation",
+                description: "In-depth coverage of Eraser's diagram-as-code approach with Mathspace, Mission, and Neon examples",
+                example: "Detailed guide on generating architecture diagrams from prompts or code, version controlling visual specs."
+            },
+            {
+                section: "Comparison & Decision Matrix",
+                description: "Complete feature comparison table and decision framework for all 5 tools",
+                example: "Full matrix comparing pricing, integrations, team size suitability, and ideal use cases for each solution."
+            },
+            {
+                section: "Implementation Guidance",
+                description: "Practical advice on evaluation, trial, implementation, and team adoption for each tool",
+                example: "Step-by-step guidance on getting started with each tool including trial setup and integration with existing workflows."
+            },
+            {
+                section: "Future of AI in Documentation",
+                description: "Forward-looking analysis of emerging trends and what's coming next in AI-powered documentation",
+                example: "Analysis of agent-based documentation, real-time sync, and next-generation developer experience improvements."
+            }
+        ]    }
 ];
 
 module.exports = templateMetadata;
