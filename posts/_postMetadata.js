@@ -901,14 +901,14 @@ let postMetaData = [
 
     {
         title: "Dos and Don’ts of Reddit Marketing for B2B SaaS Startups",
-        metatitle: "Dos and Don’ts of Reddit Marketing for B2B SaaS Startups",
+        metatitle: "Dos and Don’ts of Reddit Marketing for B2B SaaS Startups | 2026 Guide",
         slug: "reddit-marketing",
-        description: "Using Reddit for marketing can be a great strategy but it is crucial to understand what to do and what not to do. Therefore, read the article to get insights.",
+        description: "Reddit can be one of the most powerful yet risky channels for B2B SaaS marketing if done incorrectly. This guide breaks down the essential dos and don’ts of Reddit marketing, helping SaaS founders and marketers avoid shadowbans, deleted posts, and negative karma. Learn how to build a credible Reddit profile, follow subreddit rules, earn karma, engage authentically, and mention your product without sounding promotional.",
         ogImage: "/PostImages/reddit-marketing/rm1.webp",
         publishedOn: "2025-07-01",
         authorId: "author0004",
         category: "Reddit Marketing B2B SaaS",
-        metaDescription: "Using Reddit for marketing can be a great strategy but it is crucial to understand what to do and what not to do. Therefore, read the article to get insights."
+        metaDescription: "Learn the essential dos and don’ts of Reddit marketing for B2B SaaS startups. Avoid shadowbans, build karma, follow subreddit rules. Read now"
     },
     
     {
