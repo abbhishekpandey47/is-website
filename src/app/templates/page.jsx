@@ -87,9 +87,9 @@ const TemplatesPage = () => {
   }, [searchQuery, selectedUseCase]);
 
   return (
-    <div className="min-h-screen bg-[#0f172a] text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Hero Section */}
-      <div className="bg-gradient-to-b from-[#1a0b2e] via-[#16213e] to-[#0f172a] border-b border-[#1e293b] pt-32 pb-16">
+      <div className="bg-gradient-to-b from-[#1a0b2e] via-[#16213e] to-[#0a0a0a] border-b border-[#1e293b] pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

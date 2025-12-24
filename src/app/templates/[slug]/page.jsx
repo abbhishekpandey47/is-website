@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useEffect, use } from "react";
+import { useContext, useEffect, use, useState } from "react";
 import AppContext from "../../../context/Infracontext";
 import templateMetadata from "../../../../templates-data/_templateMetadata";
 import { notFound } from "next/navigation";
@@ -10,6 +10,10 @@ import { notFound } from "next/navigation";
 const TemplateDetailPage = ({ params }) => {
   const context = useContext(AppContext);
   const { setProgress } = context;
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailError, setEmailError] = useState("");
   
   // Await params as required by Next.js 15
   const resolvedParams = use(params);
@@ -23,10 +27,55 @@ const TemplateDetailPage = ({ params }) => {
     notFound();
   }
 
+  const handleDownloadClick = (e) => {
+    e.preventDefault();
+    setShowEmailModal(true);
+    setEmail("");
+    setEmailError("");
+  };
+
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault();
+    setEmailError("");
+    
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Here you can add API call to save email
+      // await fetch('/api/save-email', { method: 'POST', body: JSON.stringify({ email }) });
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Trigger download
+      const link = document.createElement('a');
+      link.href = template.downloadLink;
+      link.download = 'best-ai-tools-for-documentation.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Close modal
+      setShowEmailModal(false);
+      setEmail("");
+    } catch (error) {
+      setEmailError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[#0f1419] text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Hero Section - Title Left, Video Right */}
-      <div className="bg-gradient-to-b from-[#1a0b2e] via-[#16213e] to-[#0f1419] pt-32 pb-16">
+      <div className="bg-gradient-to-b from-[#1a0b2e] via-[#16213e] to-[#0a0a0a] pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Title and Info */}
@@ -59,15 +108,15 @@ const TemplateDetailPage = ({ params }) => {
               </div>
 
               <div className="pt-4">
-                <a
-                  href={template.downloadLink}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3.5 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl quicksand-semibold"
+                <button
+                  onClick={handleDownloadClick}
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3.5 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl quicksand-semibold cursor-pointer"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                   Download Template
-                </a>
+                </button>
               </div>
             </motion.div>
 
@@ -126,21 +175,18 @@ const TemplateDetailPage = ({ params }) => {
               <div className="sticky top-24 bg-[#1e293b] border border-[#334155] rounded-xl p-6">
                 <h3 className="text-lg font-bold mb-4 quicksand-bold text-white">Content</h3>
                 <nav className="space-y-2">
-                  {template.slug === "developer-content-and-guides-content" ? (
-                    // Content template TOC
-                    <>
-                      <a href="#section-1" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">1. TL;DR</a>
-                      <a href="#section-2" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">2. How AI Is Changing Documentation</a>
-                      <a href="#section-3" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">3. Fern: API Documentation & SDKs</a>
-                      <a href="#section-4" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">4. Apidog: Unified API Workspace</a>
-                      <a href="#section-5" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">5. Swimm: Code-Coupled Docs</a>
-                      <a href="#section-6" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">6. Guidde: Video Documentation</a>
-                      <a href="#section-7" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">7. Eraser: AI Diagrams</a>
-                      <a href="#section-8" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">8. Setup & Pricing</a>
-                      <a href="#section-9" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">9. Conclusion</a>
-                    </>
-                  ) : (
-                    // Outline template TOC
+                  {/* Common educational sections for both templates */}
+                  <a href="#what-is" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">
+                    {template.slug === "developer-content-and-guides-outline" ? "What is a Developer Content Outline?" : "What is Developer Content Writing?"}
+                  </a>
+                  <a href="#what-is-template" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">
+                    {template.slug === "developer-content-and-guides-outline" ? "What is the Template?" : "What is the Template?"}
+                  </a>
+                  <a href="#why-use" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">Why Use This Template?</a>
+                  <a href="#how-to-use" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">How to Use This Template</a>
+                  
+                  <div className="border-t border-[#334155] my-3 pt-3">
+                  {template.slug === "developer-content-and-guides-outline" && (
                     <>
                       {template.metricsTable && (
                         <a
@@ -161,6 +207,7 @@ const TemplateDetailPage = ({ params }) => {
                       ))}
                     </>
                   )}
+                  </div>
                 </nav>
               </div>
             </motion.aside>
@@ -173,147 +220,143 @@ const TemplateDetailPage = ({ params }) => {
               className="flex-1"
             >
               <div className="max-w-none">
-                {/* Content Template - Full article format */}
-                {template.slug === "developer-content-and-guides-content" ? (
-                  <div className="space-y-8">
-                    {/* TL;DR Section */}
-                    <div id="section-1">
-                      <h2 className="text-3xl font-bold mb-6 text-white quicksand-bold">TL;DR</h2>
-                      <p className="text-[#cbd5e1] quicksand-regular leading-relaxed mb-4">Here is the quick summary before we go deeper.</p>
-                      <div className="space-y-4">
-                        <ul className="space-y-3 text-[#cbd5e1] quicksand-regular">
-                          <li className="mb-3">
-                            <strong className="quicksand-semibold text-white">Fern – For API first teams that need SDKs and clean docs</strong><br/>
-                            <span className="text-sm">Cohere uses Fern to generate SDKs in multiple languages from a single OpenAPI spec. If you expose a public REST API and want Node, Python, Go and Java SDKs generated and kept in sync with your docs, Fern removes most of the manual work.</span>
-                          </li>
-                          <li className="mb-3">
-                            <strong className="quicksand-semibold text-white">Apidog – For teams that want one place for design, mocks, tests, and docs</strong><br/>
-                            <span className="text-sm">Nestlé's innovation team used to juggle Postman, Swagger, mock servers and separate documentation. After moving to Apidog, they design the API once and get mocking, testing and docs in the same workspace.</span>
-                          </li>
-                          <li className="mb-3">
-                            <strong className="quicksand-semibold text-white">Swimm – For large or growing codebases where docs keep going out of date</strong><br/>
-                            <span className="text-sm">Riskfuel cut onboarding time by more than half after coupling documentation directly to the codebase with Swimm. Recursion has over a thousand repositories and uses Swimm to make sure docs are flagged when code changes.</span>
-                          </li>
-                          <li className="mb-3">
-                            <strong className="quicksand-semibold text-white">Guidde – For teams that explain the same process on calls again and again</strong><br/>
-                            <span className="text-sm">SentinelOne uses Guidde to turn internal workflows into reusable video guides instead of writing long how-to documents. It is faster than writing long text guides and helps support teams move much quicker.</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <p className="text-[#cbd5e1] quicksand-regular leading-relaxed mb-6">
-                        Before talking about trends, it helps to look at what is actually happening inside engineering teams. When Recursion's engineering org scaled past 200 developers, their documentation began falling behind the code. New endpoints shipped, internal logic changed, and dozens of microservices evolved independently.
-                      </p>
-                      <div className="space-y-6">
-                        <div>
-                          <h3 className="text-lg font-bold text-white quicksand-bold mb-2">What Is Docs-as-Code and Why Is Everyone Using It Now?</h3>
-                          <p className="text-[#cbd5e1] text-sm quicksand-regular leading-relaxed">Teams no longer keep documentation in scattered wikis. They maintain docs like code: stored in the repository, updated through pull requests, reviewed alongside logic changes, and generated automatically during CI. This prevents documentation drift.</p>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-white quicksand-bold mb-2">Why SaaS Teams Now Auto-Generate SDKs</h3>
-                          <p className="text-[#cbd5e1] text-sm quicksand-regular leading-relaxed">AI systems read the API schema and generate idiomatic SDKs that stay in sync with the documentation. When the schema changes, SDKs update automatically. This improves the developer journey because customers no longer guess request formats — the SDK always matches the API.</p>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-white quicksand-bold mb-2">Why Video SOPs Now Replace Long Text Guides</h3>
-                          <p className="text-[#cbd5e1] text-sm quicksand-regular leading-relaxed">AI tools now record your workflow and convert it into a narrated video, step-by-step instructions, searchable captions, and multilingual variants. Support teams prefer this because it's faster to watch, nothing gets lost in long paragraphs, and repetitive explanations disappear.</p>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-bold text-white quicksand-bold mb-2">Why Engineering Teams Now Prefer Diagrams Over Long Text Blocks</h3>
-                          <p className="text-[#cbd5e1] text-sm quicksand-regular leading-relaxed">Architecture diagrams, sequence flows and dependency maps help engineers understand system behaviour instantly. With AI tools, teams describe the flow in natural language or paste a snippet of code, and the tool generates a clean diagram.</p>
-                        </div>
-                      </div>
-                    </div>
+                {/* Educational Sections - Common for both templates */}
+                <div className="space-y-12 mb-12">
+                  {/* What is Section */}
+                  <div id="what-is" className="mb-10">
+                    <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      {template.slug === "developer-content-and-guides-outline" ? "What is a Developer Content Outline?" : "What is Developer Content Writing?"}
+                    </h2>
+                    <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
+                      {template.slug === "developer-content-and-guides-outline" ? 
+                        "A developer content outline is a strategic framework that helps you plan and structure technical content for developer audiences. It acts as a blueprint for creating comprehensive guides, tool comparisons, and technical tutorials that resonate with engineering teams." :
+                        "Developer content writing is the practice of creating technical content specifically designed for developers, engineers, and technical decision-makers. It combines technical accuracy with clear communication to educate, engage, and help technical audiences solve real problems."
+                      }
+                    </p>
+                    <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-regular">
+                      {template.slug === "developer-content-and-guides-outline" ?
+                        "Unlike traditional content outlines, developer content requires technical depth, real code examples, and practical implementation details. This template helps you structure content that developers actually want to read." :
+                        "This type of content goes beyond surface-level explanations. It includes working code examples, architecture insights, performance considerations, and real-world use cases that help developers make informed technical decisions."
+                      }
+                    </p>
+                  </div>
 
-                    {/* Tool Deep Dives */}
-                    <div id="section-7">
-                      <h2 className="text-3xl font-bold mb-6 text-white quicksand-bold">Tool Deep Dives</h2>
-                      <div className="space-y-6">
-                        <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-lg p-5">
-                          <h3 className="text-lg font-bold text-[#1e3a8a] quicksand-bold mb-2">Fern Analysis</h3>
-                          <p className="text-[#1e3a8a] text-sm quicksand-regular leading-relaxed">When Cohere expanded their LLM API, their team hit a bottleneck. Every new endpoint required fresh docs, updated examples, and SDK changes across Python, Node, Go and Java. This is where teams adopt Fern. It automatically generates SDKs and keeps documentation synced with your API specification.</p>
-                        </div>
-                        <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-lg p-5">
-                          <h3 className="text-lg font-bold text-[#1e3a8a] quicksand-bold mb-2">Apidog Analysis</h3>
-                          <p className="text-[#1e3a8a] text-sm quicksand-regular leading-relaxed">When Nestlé's innovation team built internal AI services, their biggest slowdown came from switching tools. They designed APIs in one app, tested them in Postman, mocked them somewhere else. Apidog solves this by keeping the entire API lifecycle inside one workspace.</p>
-                        </div>
-                        <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-lg p-5">
-                          <h3 className="text-lg font-bold text-[#1e3a8a] quicksand-bold mb-2">Swimm Analysis</h3>
-                          <p className="text-[#1e3a8a] text-sm quicksand-regular leading-relaxed">When Riskfuel scaled their AI models, their biggest issue was not the code but the internal documentation that kept falling behind. That is where teams adopt Swimm. It couples documentation directly to the codebase and flags docs when code changes.</p>
-                        </div>
-                        <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-lg p-5">
-                          <h3 className="text-lg font-bold text-[#1e3a8a] quicksand-bold mb-2">Guidde Analysis</h3>
-                          <p className="text-[#1e3a8a] text-sm quicksand-regular leading-relaxed">When SentinelOne expanded its support operations, it noticed a repeated pattern. New agents kept asking the same questions. Teams adopt Guidde to turn workflows into clean video guides that teams can share instantly.</p>
-                        </div>
-                        <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-lg p-5">
-                          <h3 className="text-lg font-bold text-[#1e3a8a] quicksand-bold mb-2">Eraser Analysis</h3>
-                          <p className="text-[#1e3a8a] text-sm quicksand-regular leading-relaxed">Mathspace ran into a familiar problem when scaling its engineering team. Their system diagrams lived in old slides and outdated design boards. Eraser generates architecture diagrams from text and keeps them versioned with the repository.</p>
-                        </div>
-                      </div>
-                    </div>
+                  {/* What is Template Section */}
+                  <div id="what-is-template" className="mb-10">
+                    <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      {template.slug === "developer-content-and-guides-outline" ? "What is a Developer Content Outline Template?" : "What is a Developer Content Writing Template?"}
+                    </h2>
+                    <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
+                      {template.slug === "developer-content-and-guides-outline" ?
+                        "A developer content outline template is a pre-structured framework that guides you through planning technical content. It includes sections for technical depth, code examples, tool comparisons, and practical implementations—ensuring nothing important gets missed." :
+                        "A developer content writing template provides complete, ready-to-adapt content examples with proper technical depth, structure, and developer-focused messaging. It shows exactly how to explain technical concepts, compare tools, and provide actionable insights."
+                      }
+                    </p>
+                    <ul className="space-y-3 text-[#cbd5e1] quicksand-regular">
+                      <li className="flex items-start gap-3">
+                        <span className="text-[#6366f1] mt-1">•</span>
+                        <span className="text-sm">
+                          {template.slug === "developer-content-and-guides-outline" ?
+                            "Structured sections covering technical concepts, real-world examples, and implementation details" :
+                            "Complete examples showing how to write technical comparisons, tool evaluations, and developer guides"
+                          }
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-[#6366f1] mt-1">•</span>
+                        <span className="text-sm">
+                          {template.slug === "developer-content-and-guides-outline" ?
+                            "SEO-optimized keyword suggestions with search volumes and target intent mapping" :
+                            "Real company examples showing practical implementations and use cases"
+                          }
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-[#6366f1] mt-1">•</span>
+                        <span className="text-sm">
+                          {template.slug === "developer-content-and-guides-outline" ?
+                            "Target audience definition, word count guidance, and content type recommendations" :
+                            "Proper paragraph length, technical tone, and word choice that resonates with developers"
+                          }
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
 
-                    {/* Setup & Pricing */}
-                    <div id="section-8">
-                      <h2 className="text-3xl font-bold mb-6 text-white quicksand-bold">Setup, Pricing & Final Verdict</h2>
-                      <div className="bg-[#1e293b] border border-[#334155] rounded-xl overflow-hidden">
-                        <table className="w-full">
-                          <thead className="bg-[#334155]">
-                            <tr>
-                              <th className="text-left py-3 px-4 text-sm font-bold text-white quicksand-bold">Tool</th>
-                              <th className="text-left py-3 px-4 text-sm font-bold text-white quicksand-bold">Deployment</th>
-                              <th className="text-left py-3 px-4 text-sm font-bold text-white quicksand-bold">Unique Advantage</th>
-                              <th className="text-left py-3 px-4 text-sm font-bold text-white quicksand-bold">Pricing</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {[
-                              { tool: 'Fern', deploy: 'CI/CD Native', advantage: 'Generates SDKs + Docs', price: 'Free Tier / usage-based' },
-                              { tool: 'Apidog', deploy: 'Cloud / Desktop', advantage: 'All-in-One (Design + Test)', price: 'Free Tier / Per Seat' },
-                              { tool: 'Swimm', deploy: 'IDE Plugin / Web', advantage: 'Code-Coupled (Anti-rot)', price: 'Free Tier / Enterprise' },
-                              { tool: 'Guidde', deploy: 'Browser Ext.', advantage: 'Video-First Automation', price: 'Free Tier / $20+ mo' },
-                              { tool: 'Eraser', deploy: 'Web / Canvas', advantage: 'Diagram-as-Code', price: 'Free Tier / Team Plan' }
-                            ].map((row, idx) => (
-                              <tr key={idx} className={idx !== 4 ? "border-b border-[#334155]" : ""}>
-                                <td className="py-3 px-4 text-[#a5b4fc] font-semibold quicksand-semibold text-sm">{row.tool}</td>
-                                <td className="py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">{row.deploy}</td>
-                                <td className="py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">{row.advantage}</td>
-                                <td className="py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">{row.price}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
+                  {/* Why Use Section */}
+                  <div id="why-use" className="mb-10">
+                    <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      {template.slug === "developer-content-and-guides-outline" ? "Why Use a Developer Content Outline Template?" : "Why Use a Developer Content Writing Template?"}
+                    </h2>
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-xl font-bold text-white quicksand-bold mb-2">Saves Time and Ensures Consistency</h3>
+                        <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
+                          {template.slug === "developer-content-and-guides-outline" ?
+                            "Instead of starting from scratch, you get a proven structure that covers all essential sections. This template ensures you don't miss critical technical details or implementation examples." :
+                            "Skip the research phase and start with battle-tested content examples. See exactly how to explain complex technical concepts in ways that developers understand and appreciate."
+                          }
+                        </p>
                       </div>
-                    </div>
-
-                    {/* Final Recommendations */}
-                    <div id="section-9">
-                      <h2 className="text-3xl font-bold mb-6 text-white quicksand-bold">Final Recommendations</h2>
-                      <div className="space-y-4">
-                        {[
-                          { condition: 'If you are API-First', tool: 'Choose Fern', reason: 'The ability to hand customers a pre-built SDK is a massive competitive advantage in 2025.' },
-                          { condition: 'If you want "One Tool to Rule Them All"', tool: 'Choose Apidog', reason: 'It consolidates your entire engineering workflow.' },
-                          { condition: 'If you need to prevent Code Rot', tool: 'Choose Swimm', reason: 'It ensures your docs technically survive a fast-moving codebase.' },
-                          { condition: 'If you need Internal Training', tool: 'Choose Guidde', reason: "It's faster and more engaging than writing long SOPs." },
-                          { condition: 'If you need Architecture Diagrams', tool: 'Choose Eraser', reason: 'It is the fastest way to turn technical concepts into professional visuals.' }
-                        ].map((item, idx) => (
-                          <div key={idx} className="bg-[#1e293b] border border-[#334155] rounded-lg p-5">
-                            <p className="text-[#cbd5e1] quicksand-regular leading-relaxed">
-                              <strong className="quicksand-bold text-white">{item.condition}:</strong> {item.tool}. {item.reason}
-                            </p>
-                          </div>
-                        ))}
+                      <div>
+                        <h3 className="text-xl font-bold text-white quicksand-bold mb-2">SEO-Optimized from the Start</h3>
+                        <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
+                          {template.slug === "developer-content-and-guides-outline" ?
+                            "Get keyword suggestions with search volumes, secondary keywords, and long-tail variations. The template includes target intent mapping so your content ranks for the right searches." :
+                            "Content is structured with proper H2/H3 tags, keyword placement, and meta descriptions that search engines love. Learn from examples that balance technical depth with SEO best practices."
+                          }
+                        </p>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-white quicksand-bold mb-2">Developer-Focused Approach</h3>
+                        <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
+                          {template.slug === "developer-content-and-guides-outline" ?
+                            "Designed specifically for technical audiences who want code examples, architecture details, and practical implementation guidance—not marketing fluff." :
+                            "See how to write with the right technical depth, tone, and examples. Understand what level of detail to provide and how to structure comparisons that help developers make decisions."
+                          }
+                        </p>
                       </div>
                     </div>
                   </div>
-                ) : (
-                  // Outline Template - Show structured sections
+
+                  {/* How to Use Section */}
+                  <div id="how-to-use" className="mb-10">
+                    <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      {template.slug === "developer-content-and-guides-outline" ? "How to Use This Developer Content Outline Template" : "How to Use This Developer Content Writing Template"}
+                    </h2>
+                    <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
+                      {template.slug === "developer-content-and-guides-outline" ?
+                        "Using this outline template is straightforward. Follow these steps to plan your developer content:" :
+                        "This template provides complete content examples you can adapt. Here's how to make the most of it:"
+                      }
+                    </p>
+                    <div className="space-y-5">
+                      {template.howToUse && template.howToUse.map((step, idx) => (
+                        <div key={idx} className="flex gap-4">
+                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#6366f1] flex items-center justify-center">
+                            <span className="text-white font-bold quicksand-bold text-sm">{idx + 1}</span>
+                          </div>
+                          <div>
+                            <h4 className="text-base font-bold text-white quicksand-bold mb-1">{step.step}</h4>
+                            <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">{step.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Template Content - Only for outline template */}
+                {template.slug === "developer-content-and-guides-outline" ? (
                   <>
-                {/* Metrics Table - Only for outline template */}
-                {template.slug === "developer-content-and-guides-outline" && template.metricsTable && (
-                  <div id="metrics-table" className="mb-12">
-                    <h2 className="text-2xl font-bold mb-6 text-[#a5b4fc] quicksand-bold">Suggested Outline</h2>
-                    <div className="overflow-x-auto bg-[#1e293b] border border-[#334155] rounded-xl">
-                      <table className="w-full">
-                        <tbody>
-                          {template.metricsTable.map((row, index) => (
+                    {/* Metrics Table - Only for outline template */}
+                    {template.metricsTable && (
+                      <div id="metrics-table" className="mb-12">
+                        <h2 className="text-2xl font-bold mb-6 text-[#a5b4fc] quicksand-bold">Suggested Outline</h2>
+                        <div className="overflow-x-auto bg-[#1e293b] border border-[#334155] rounded-xl">
+                          <table className="w-full">
+                            <tbody>
+                              {template.metricsTable.map((row, index) => (
                             <tr key={index} className={index !== template.metricsTable.length - 1 ? "border-b border-[#334155]" : ""}>
                               <td className="py-3 px-4 text-[#94a3b8] font-medium quicksand-medium text-sm whitespace-nowrap">
                                 {row.label}
@@ -323,14 +366,14 @@ const TemplateDetailPage = ({ params }) => {
                               </td>
                             </tr>
                           ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                )}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
 
-                {/* Data Table */}
-                <div className="mb-12">
+                    {/* Data Table */}
+                    <div className="mb-12">
                   <div className="overflow-x-auto bg-[#1e293b] border border-[#334155] rounded-xl">
                     <table className="w-full">
                       <thead className="bg-[#334155] border-b border-[#334155]">
@@ -422,9 +465,8 @@ const TemplateDetailPage = ({ params }) => {
                   </div>
                 ))}
                   </>
-                )}
+                ) : null}
               </div>
-
               {/* Download CTA */}
               <div className="mt-12 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] rounded-xl p-8 text-center">
                 <h3 className="text-2xl font-bold mb-3 quicksand-bold text-white">
@@ -565,15 +607,15 @@ const TemplateDetailPage = ({ params }) => {
                 <p className="text-white/80 mb-6 quicksand-light">
                   Get instant access to this template and streamline your workflow
                 </p>
-                <a
-                  href={template.downloadLink}
-                  className="inline-flex items-center gap-2 bg-white text-black hover:bg-[#e5e5e5] px-8 py-3 rounded-md font-medium transition-colors quicksand-semibold"
+                <button
+                  onClick={handleDownloadClick}
+                  className="inline-flex items-center gap-2 bg-white text-black hover:bg-[#e5e5e5] px-8 py-3 rounded-md font-medium transition-colors quicksand-semibold cursor-pointer"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                   Download Template
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -670,6 +712,69 @@ const TemplateDetailPage = ({ params }) => {
           </div>
         </motion.div>
       </div>
+
+      {/* Email Verification Modal */}
+      {showEmailModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="relative w-full max-w-md mx-4 bg-black/20 backdrop-blur-md rounded-xl p-8 lg:p-10 shadow-2xl border border-white/20 hover:border-white/30"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => {
+                setShowEmailModal(false);
+                setEmail("");
+                setEmailError("");
+              }}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+              aria-label="Close modal"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Modal Content */}
+            <div className="space-y-6">
+              <div className="text-center mb-4">
+                <h3 className="text-2xl font-bold text-white mb-2 quicksand-bold">Download Template</h3>
+                <p className="text-gray-300 quicksand-regular">Enter your email to access the template</p>
+              </div>
+
+              <form onSubmit={handleEmailSubmit} className="space-y-6">
+                <div>
+                  <label className="text-white quicksand-medium mb-2 block">Work Email</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setEmailError("");
+                    }}
+                    placeholder="your.email@company.com"
+                    className="w-full px-4 py-3 bg-black backdrop-blur-sm rounded-lg text-white placeholder-gray-400 outline-none focus:ring-1 focus:ring-purple-700 border border-white/20 transition-all quicksand-regular"
+                    disabled={isSubmitting}
+                  />
+                  {emailError && (
+                    <p className="mt-2 text-sm text-red-400 quicksand-light">{emailError}</p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed quicksand-semibold shadow-lg"
+                >
+                  {isSubmitting ? "Downloading..." : "Download Template"}
+                </button>
+              </form>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };
