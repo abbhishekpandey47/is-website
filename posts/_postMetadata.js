@@ -1411,6 +1411,18 @@ let postMetaData = [
     "Identify and fix bad documentation examples that frustrate developers and kill adoption. Learn how to improve flow, clarity, and trust. Read now to find out",
 },
 {
+  title: "How to Build a B2B Content Marketing Strategy for an AI-Driven Startup?",
+  metatitle: "How to Build Tech Content Marketing Strategy for AI-Driven B2B SaaS Startup",
+  slug: "b2b-content-marketing-strategy",
+  description:"Building a high-performing B2B content marketing strategy in 2026 requires more than publishing blogs or scaling content with AI. For AI, DevTools, and infrastructure startups, content must influence the full buyer journey, from discovery and evaluation to adoption and retention, while remaining visible across search engines, LLMs, and developer communities. This blog breaks down what has changed in B2B SaaS content marketing, why technical accuracy and trust now matter more than traffic, and how engineer-led content systems drive measurable growth.",
+  ogImage: "/PostImages/b2b-content-marketing-strategy/0.webp",
+  publishedOn: "2025-12-27",
+  authorId: "author0005",
+  category: "B2B SaaS Growth & GTM",
+  metaDescription:
+    "Learn how to build a B2B SaaS tech content marketing strategy for AI-driven DevTools startups. Discover tech content frameworks and LLM visibility. Read now !",
+},
+{
   title: "Best B2B Marketing Agency in 2026: Tech Content & LLM Visibility",
   metatitle: "Best B2B Marketing Agency in 2026 | Tech Content & LLM Visibility",
   slug: "top-b2b-marketing-agency",
