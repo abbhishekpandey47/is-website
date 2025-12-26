@@ -271,9 +271,9 @@ const TemplateDetailPage = ({ params }) => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="lg:w-56 self-start"
+              className="lg:w-56"
             >
-              <div className="sticky top-24 bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-5 shadow-lg max-h-[calc(100vh-140px)] overflow-y-auto">
+              <div className="bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-5 shadow-lg">
                 <h3 className="text-base font-bold mb-3 quicksand-bold text-white">Template Navigation</h3>
                 <nav className="space-y-1.5">
                   {/* Common educational sections for both templates */}
@@ -289,6 +289,12 @@ const TemplateDetailPage = ({ params }) => {
                   <a href="#how-to-use" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
                     {educationalContent?.howToUse?.title || "How to Use This Template"}
                   </a>
+                  
+                  {template.slug === "developer-content-and-guides-outline" && (
+                    <a href="#next-steps" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                      Next Steps: Writing the Content
+                    </a>
+                  )}
                   
                   <div className="border-t border-purple-500/20 my-3 pt-3 space-y-1.5">
                   {template.slug === "developer-content-and-guides-outline" && (
@@ -583,6 +589,54 @@ const TemplateDetailPage = ({ params }) => {
                 {/* Template Content - Only for outline template */}
                 {template.slug === "developer-content-and-guides-outline" ? (
                   <>
+                    {/* Next Steps Section - Only for outline template */}
+                    <div id="next-steps" className="mb-12 scroll-mt-32">
+                      <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                        Next Steps: Writing the Content
+                      </h2>
+                      <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
+                        Once your outline is ready, it's time to bring it to life with well-crafted content. Use our comprehensive writing template to transform your outline into engaging, technically accurate developer content.
+                      </p>
+                      
+                      {/* Developer Content Writing Template Banner */}
+                      <Link
+                        href="/templates/developer-content-and-guides-content"
+                        className="group block"
+                      >
+                        <div className="relative bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl overflow-hidden hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/30 hover:border-purple-400/60 transition-all duration-300 p-6">
+                          <div className="flex items-center gap-6">
+                            <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-lg shadow-lg border border-purple-500/20">
+                              <Image
+                                src="/template-thumbnails/developer-content.png"
+                                alt="Developer Content Writing Template"
+                                width={96}
+                                height={96}
+                                className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
+                              />
+                            </div>
+                            <div className="flex-1">
+                              <div className="inline-flex items-center justify-center bg-purple-600/20 border border-purple-500/30 rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
+                                <p className="text-purple-300">Developer Content & Guides</p>
+                              </div>
+                              <h3 className="text-xl font-bold quicksand-bold text-white group-hover:text-purple-300 transition-colors mb-2">
+                                Developer Content Writing Template
+                              </h3>
+                              <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
+                                Complete writing guidelines, examples, and best practices for creating developer guides that engage and convert.
+                              </p>
+                            </div>
+                            <div className="flex-shrink-0">
+                              <div className="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center group-hover:bg-purple-600/30 transition-colors">
+                                <svg className="w-5 h-5 text-purple-300 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+
                     {/* Metrics Table - Only for outline template */}
                     {template.metricsTable && (
                       <div id="metrics-table" className="mb-12 scroll-mt-32">

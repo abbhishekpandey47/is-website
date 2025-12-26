@@ -505,7 +505,7 @@ const CalendarBooking = ({
     rounded-[5px] relative overflow-hidden 
     ${borderColor ? `border border-[${borderColor}]` : ""} 
     text-white shadow-2xl transition-all 
-    z-10 ${width} ${height}
+    z-10 ${width} ${height} px-6
     
     before:ease before:absolute before:right-0 before:top-0 
     before:h-12 before:w-6 before:translate-x-12 
@@ -515,7 +515,7 @@ const CalendarBooking = ({
   `}
         href="/contact"
       >
-        {buttonText}
+        <span className="text-center w-full">{buttonText}</span>
       </Link>
 
 
