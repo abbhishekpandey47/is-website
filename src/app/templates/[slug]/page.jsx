@@ -6,6 +6,7 @@ import { useContext, useEffect, use, useState } from "react";
 import AppContext from "../../../context/Infracontext";
 import templateMetadata from "../../../../templates-data/_templateMetadata";
 import { notFound } from "next/navigation";
+import CTA from "../../../Components/CTA/CTA";
 
 // Template Carousel Component
 const TemplateCarousel = () => {
@@ -29,7 +30,7 @@ const TemplateCarousel = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 3500); // Change slide every 3.5 seconds
+    }, 3500);
 
     return () => clearInterval(interval);
   }, [slides.length]);
@@ -38,18 +39,17 @@ const TemplateCarousel = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.5 }}
-      className="mt-16"
+      transition={{ duration: 0.6, delay: 0.3 }}
+      className="mb-12"
     >
-      <h2 className="text-2xl font-bold mb-8 quicksand-bold text-center">Sample Outline</h2>
+      <h2 className="text-2xl font-bold mb-6 quicksand-bold text-center">Sample Outline</h2>
       
-      <div className="relative bg-[#0a0a0a] rounded-xl overflow-hidden max-w-4xl mx-auto">
-        {/* Carousel Images */}
-        <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+      <div className="relative rounded-xl overflow-hidden max-w-2xl mx-auto shadow-2xl">
+        <div className="relative w-full bg-gradient-to-br from-[#1e1b4b]/20 to-[#312e81]/20" style={{ paddingBottom: '45%' }}>
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-500 ${
+              className={`absolute inset-0 transition-opacity duration-500 p-4 ${
                 index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
             >
@@ -57,22 +57,22 @@ const TemplateCarousel = () => {
                 src={slide.image}
                 alt={slide.alt}
                 fill
-                className="object-contain"
+                className="object-contain p-2"
                 priority={index === 0}
+                quality={100}
               />
             </div>
           ))}
         </div>
 
-        {/* Navigation Dots */}
-        <div className="flex justify-center gap-2 py-6">
+        <div className="flex justify-center gap-2 py-4 bg-gradient-to-br from-[#1e1b4b]/60 to-[#312e81]/60">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === currentSlide
-                  ? 'bg-blue-500 w-8'
+                  ? 'bg-purple-500 w-6'
                   : 'bg-gray-600 hover:bg-gray-500'
               }`}
               aria-label={`Go to slide ${index + 1}`}
@@ -103,6 +103,11 @@ const TemplateDetailPage = ({ params }) => {
   if (!template) {
     notFound();
   }
+
+  const layoutType = template.layoutType || "standard";
+  const isDeveloperLayout = layoutType === "developer-outline";
+  const educationalContent = template.educationalContent;
+  const hasCustomEducationalContent = Boolean(educationalContent);
 
   const handleDownloadClick = (e) => {
     e.preventDefault();
@@ -249,40 +254,49 @@ const TemplateDetailPage = ({ params }) => {
         </div>
       </div>
 
+      {/* Template Carousel */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <TemplateCarousel />
+      </div>
+
       {/* Main Content */}
       <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a] to-[#0f0728]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* For Developer Content & Guides templates - Show clean content with sidebar */}
-        {(template.slug === "developer-content-and-guides-outline" || template.slug === "developer-content-and-guides-content") ? (
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Sidebar - Table of Contents */}
+        {isDeveloperLayout ? (
+          <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-6 items-start">
+            {/* Sidebar - Table of Contents (Left Side) */}
             <motion.aside
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="lg:w-64 flex-shrink-0"
+              className="lg:w-56 self-start"
             >
-              <div className="sticky top-24 bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6 shadow-lg">
-                <h3 className="text-lg font-bold mb-4 quicksand-bold text-white">Content</h3>
-                <nav className="space-y-2">
+              <div className="sticky top-24 bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-5 shadow-lg max-h-[calc(100vh-140px)] overflow-y-auto">
+                <h3 className="text-base font-bold mb-3 quicksand-bold text-white">Template Navigation</h3>
+                <nav className="space-y-1.5">
                   {/* Common educational sections for both templates */}
-                  <a href="#what-is" className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
-                    {template.slug === "developer-content-and-guides-outline" ? "What is a Developer Content Outline?" : "What is Developer Content Writing?"}
+                  <a href="#what-is" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                    {educationalContent?.whatIs?.title || "What is Developer Content Writing?"}
                   </a>
-                  <a href="#what-is-template" className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
-                    {template.slug === "developer-content-and-guides-outline" ? "What is the Template?" : "What is the Template?"}
+                  <a href="#why-use" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                    {educationalContent?.whyUse?.title || "Why Use This Template?"}
                   </a>
-                  <a href="#why-use" className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">Why Use This Template?</a>
-                  <a href="#how-to-use" className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">How to Use This Template</a>
+                  <a href="#what-is-template" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                    {educationalContent?.templateOverview?.title || "What is the Template?"}
+                  </a>
+                  <a href="#how-to-use" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                    {educationalContent?.howToUse?.title || "How to Use This Template"}
+                  </a>
                   
-                  <div className="border-t border-purple-500/20 my-3 pt-3">
+                  <div className="border-t border-purple-500/20 my-3 pt-3 space-y-1.5">
                   {template.slug === "developer-content-and-guides-outline" && (
                     <>
                       {template.metricsTable && (
                         <a
                           href="#metrics-table"
-                          className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1"
+                          className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1"
                         >
                           Strategic Overview Table
                         </a>
@@ -291,7 +305,7 @@ const TemplateDetailPage = ({ params }) => {
                         <a
                           key={index}
                           href={`#section-${index + 1}`}
-                          className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1"
+                          className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1"
                         >
                           {typeof item === 'object' ? item.section : item}
                         </a>
@@ -312,94 +326,266 @@ const TemplateDetailPage = ({ params }) => {
             >
               <div className="max-w-none">
                 {/* Educational Sections - Common for both templates */}
-                <div className="space-y-12 mb-12">
-                  {/* What is Section */}
-                  <div id="what-is" className="mb-10">
-                    <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
-                      What is a Developer Guide & Content?
-                    </h2>
-                    <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
-                      {template.whatIsContent || "A developer guide is a technical document that teaches a developer how to do something concrete: integrate a library, design an API, debug a problem, or choose between approaches. Good guides are task-oriented, opinionated when needed, and grounded in working code. They clarify assumptions, show trade-offs, and include copy-paste-ready examples."}
-                    </p>
-                    {template.whatIsContentDetailed && (
-                      <ul className="space-y-2 text-[#94a3b8] text-sm quicksand-regular">
-                        {template.whatIsContentDetailed.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-3">
-                            <span className="text-[#6366f1] mt-1">•</span>
-                            <span>{item}</span>
-                          </li>
+                {hasCustomEducationalContent ? (
+                  <div className="space-y-12 mb-12">
+                    {educationalContent?.whatIs && (
+                      <div id="what-is" className="mb-10 scroll-mt-32">
+                        <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                          {educationalContent.whatIs.title}
+                        </h2>
+                        {educationalContent.whatIs.paragraphs?.map((paragraph, idx) => (
+                          <p key={idx} className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
+                            {paragraph}
+                          </p>
                         ))}
-                      </ul>
+                        {educationalContent.whatIs.highlight && (
+                          <p className="text-[#a5b4fc] text-sm quicksand-semibold mb-3">
+                            {educationalContent.whatIs.highlight}
+                          </p>
+                        )}
+                        {educationalContent.whatIs.subtext && (
+                          <p className="text-[#94a3b8] text-sm quicksand-regular mb-3">
+                            {educationalContent.whatIs.subtext}
+                          </p>
+                        )}
+                        {educationalContent.whatIs.bullets && (
+                          <ul className="space-y-2 text-[#cbd5e1] text-sm quicksand-regular mb-4">
+                            {educationalContent.whatIs.bullets.map((item, idx) => (
+                              <li key={idx} className="flex items-start gap-3">
+                                <span className="text-[#6366f1] mt-1">•</span>
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {educationalContent.whatIs.audience && (
+                          <>
+                            <h3 className="text-white font-semibold quicksand-semibold text-base mb-2">
+                              {educationalContent.whatIs.audienceLabel || "Who this is for"}
+                            </h3>
+                            <ul className="grid md:grid-cols-2 gap-2 text-[#94a3b8] text-sm quicksand-regular">
+                              {educationalContent.whatIs.audience.map((audience, idx) => (
+                                <li key={idx} className="flex items-start gap-2">
+                                  <span className="text-[#6366f1] mt-1">•</span>
+                                  <span>{audience}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </>
+                        )}
+                      </div>
+                    )}
+
+                    {educationalContent?.whyUse && (
+                      <div id="why-use" className="mb-10 scroll-mt-32">
+                        <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                          {educationalContent.whyUse.title}
+                        </h2>
+                        {educationalContent.whyUse.intro && (
+                          <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
+                            {educationalContent.whyUse.intro}
+                          </p>
+                        )}
+                        {educationalContent.whyUse.cards ? (
+                          <div className="grid md:grid-cols-2 gap-6">
+                            {educationalContent.whyUse.cards.map((card, idx) => (
+                              <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur">
+                                <h3 className="text-white text-lg font-semibold quicksand-semibold mb-2">
+                                  {card.title}
+                                </h3>
+                                <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-regular">
+                                  {card.description}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <ul className="space-y-4 text-[#cbd5e1] quicksand-regular">
+                            {educationalContent.whyUse.bullets?.map((reason, idx) => (
+                              <li key={idx} className="flex items-start gap-3">
+                                <span className="text-[#6366f1] mt-1">•</span>
+                                <span className="text-base leading-relaxed">{reason}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {educationalContent.whyUse.audience && (
+                          <div className="mt-6">
+                            <h3 className="text-white font-semibold quicksand-semibold text-base mb-2">
+                              {educationalContent.whyUse.audienceLabel || "Who benefits most"}
+                            </h3>
+                            <ul className="grid md:grid-cols-2 gap-2 text-[#94a3b8] text-sm quicksand-regular">
+                              {educationalContent.whyUse.audience.map((audience, idx) => (
+                                <li key={idx} className="flex items-start gap-2">
+                                  <span className="text-[#6366f1] mt-1">•</span>
+                                  <span>{audience}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {educationalContent?.templateOverview && (
+                      <div id="what-is-template" className="mb-10 scroll-mt-32">
+                        <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                          {educationalContent.templateOverview.title}
+                        </h2>
+                        {educationalContent.templateOverview.description && (
+                          <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
+                            {educationalContent.templateOverview.description}
+                          </p>
+                        )}
+                        {educationalContent.templateOverview.sections && (
+                          <div className="space-y-4 text-[#cbd5e1] text-sm quicksand-regular mb-6">
+                            {educationalContent.templateOverview.sections.map((section, idx) => (
+                              <div key={idx} className="border border-white/10 rounded-lg p-4 bg-white/5">
+                                <h3 className="text-white font-semibold quicksand-semibold text-base mb-1">{section.title}</h3>
+                                <p className="text-[#94a3b8] leading-relaxed">{section.description}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        {educationalContent.templateOverview.audience && (
+                          <>
+                            <h3 className="text-white font-semibold quicksand-semibold text-base mb-2">
+                              {educationalContent.templateOverview.audienceLabel || "Who this is designed for"}
+                            </h3>
+                            <ul className="grid md:grid-cols-2 gap-2 text-[#94a3b8] text-sm quicksand-regular">
+                              {educationalContent.templateOverview.audience.map((audience, idx) => (
+                                <li key={idx} className="flex items-start gap-2">
+                                  <span className="text-[#6366f1] mt-1">•</span>
+                                  <span>{audience}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </>
+                        )}
+                      </div>
+                    )}
+
+                    {educationalContent?.howToUse && (
+                      <div id="how-to-use" className="mb-10 scroll-mt-32">
+                        <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                          {educationalContent.howToUse.title}
+                        </h2>
+                        {educationalContent.howToUse.intro && (
+                          <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
+                            {educationalContent.howToUse.intro}
+                          </p>
+                        )}
+                        <div className="space-y-6">
+                          {educationalContent.howToUse.steps?.map((step, idx) => (
+                            <div key={idx} className="flex gap-4">
+                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#6366f1] flex items-center justify-center">
+                                <span className="text-white font-bold quicksand-bold text-sm">{idx + 1}</span>
+                              </div>
+                              <div>
+                                <h4 className="text-base font-bold text-white quicksand-bold mb-1">{step.title}</h4>
+                                <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
+                                  {step.description}
+                                </p>
+                                {step.extra && (
+                                  <p className="text-[#a5b4fc] text-xs quicksand-medium mt-2">{step.extra}</p>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     )}
                   </div>
-
-                  {/* What is Template Section */}
-                  <div id="what-is-template" className="mb-10">
-                    <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
-                      What is a Developer Guide & Content Template?
-                    </h2>
-                    <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
-                      {template.whatIsTemplate || "It's a structured framework for planning and writing developer guides consistently. It provides section patterns, content prompts, and quality checks so the final output is clear, actionable, and technically sound."}
-                    </p>
-                    {template.whatIsTemplateCovers && (
-                      <>
-                        <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-regular mb-3">What the template standardizes:</p>
-                        <ul className="space-y-2 text-[#cbd5e1] quicksand-regular">
-                          {template.whatIsTemplateCovers.map((item, idx) => (
+                ) : (
+                  <div className="space-y-12 mb-12">
+                    {/* What is Section */}
+                    <div id="what-is" className="mb-10 scroll-mt-32">
+                      <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                        What is a Developer Guide & Content?
+                      </h2>
+                      <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
+                        {template.whatIsContent || "A developer guide is a technical document that teaches a developer how to do something concrete: integrate a library, design an API, debug a problem, or choose between approaches. Good guides are task-oriented, opinionated when needed, and grounded in working code. They clarify assumptions, show trade-offs, and include copy-paste-ready examples."}
+                      </p>
+                      {template.whatIsContentDetailed && (
+                        <ul className="space-y-2 text-[#94a3b8] text-sm quicksand-regular">
+                          {template.whatIsContentDetailed.map((item, idx) => (
                             <li key={idx} className="flex items-start gap-3">
                               <span className="text-[#6366f1] mt-1">•</span>
-                              <span className="text-sm">{item}</span>
+                              <span>{item}</span>
                             </li>
                           ))}
                         </ul>
-                      </>
-                    )}
-                  </div>
+                      )}
+                    </div>
 
-                  {/* Why Use Section */}
-                  <div id="why-use" className="mb-10">
-                    <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
-                      Why Use a Developer Guide & Content Template?
-                    </h2>
-                    {template.whyUseTemplate && (
-                      <ul className="space-y-4 text-[#cbd5e1] quicksand-regular">
-                        {template.whyUseTemplate.map((reason, idx) => (
-                          <li key={idx} className="flex items-start gap-3">
-                            <span className="text-[#6366f1] mt-1">•</span>
-                            <span className="text-base leading-relaxed">{reason}</span>
-                          </li>
+                    {/* What is Template Section */}
+                    <div id="what-is-template" className="mb-10 scroll-mt-32">
+                      <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                        What is a Developer Guide & Content Template?
+                      </h2>
+                      <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
+                        {template.whatIsTemplate || "It's a structured framework for planning and writing developer guides consistently. It provides section patterns, content prompts, and quality checks so the final output is clear, actionable, and technically sound."}
+                      </p>
+                      {template.whatIsTemplateCovers && (
+                        <>
+                          <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-regular mb-3">What the template standardizes:</p>
+                          <ul className="space-y-2 text-[#cbd5e1] quicksand-regular">
+                            {template.whatIsTemplateCovers.map((item, idx) => (
+                              <li key={idx} className="flex items-start gap-3">
+                                <span className="text-[#6366f1] mt-1">•</span>
+                                <span className="text-sm">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Why Use Section */}
+                    <div id="why-use" className="mb-10 scroll-mt-32">
+                      <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                        Why Use a Developer Guide & Content Template?
+                      </h2>
+                      {template.whyUseTemplate && (
+                        <ul className="space-y-4 text-[#cbd5e1] quicksand-regular">
+                          {template.whyUseTemplate.map((reason, idx) => (
+                            <li key={idx} className="flex items-start gap-3">
+                              <span className="text-[#6366f1] mt-1">•</span>
+                              <span className="text-base leading-relaxed">{reason}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+
+                    {/* How to Use Section */}
+                    <div id="how-to-use" className="mb-10 scroll-mt-32">
+                      <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                        How to Use This Developer Guide & Content Template
+                      </h2>
+                      <div className="space-y-5">
+                        {template.howToUse && template.howToUse.map((step, idx) => (
+                          <div key={idx} className="flex gap-4">
+                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#6366f1] flex items-center justify-center">
+                              <span className="text-white font-bold quicksand-bold text-sm">{idx + 1}</span>
+                            </div>
+                            <div>
+                              <h4 className="text-base font-bold text-white quicksand-bold mb-1">{step.step}</h4>
+                              <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">{step.description}</p>
+                            </div>
+                          </div>
                         ))}
-                      </ul>
-                    )}
-                  </div>
-
-                  {/* How to Use Section */}
-                  <div id="how-to-use" className="mb-10">
-                    <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
-                      How to Use This Developer Guide & Content Template
-                    </h2>
-                    <div className="space-y-5">
-                      {template.howToUse && template.howToUse.map((step, idx) => (
-                        <div key={idx} className="flex gap-4">
-                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#6366f1] flex items-center justify-center">
-                            <span className="text-white font-bold quicksand-bold text-sm">{idx + 1}</span>
-                          </div>
-                          <div>
-                            <h4 className="text-base font-bold text-white quicksand-bold mb-1">{step.step}</h4>
-                            <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">{step.description}</p>
-                          </div>
-                        </div>
-                      ))}
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
 
                 {/* Template Content - Only for outline template */}
                 {template.slug === "developer-content-and-guides-outline" ? (
                   <>
                     {/* Metrics Table - Only for outline template */}
                     {template.metricsTable && (
-                      <div id="metrics-table" className="mb-12">
+                      <div id="metrics-table" className="mb-12 scroll-mt-32">
                         <h2 className="text-2xl font-bold mb-6 text-[#a5b4fc] quicksand-bold">Suggested Outline</h2>
                         <div className="overflow-x-auto bg-[#1e293b] border border-[#334155] rounded-xl">
                           <table className="w-full">
@@ -422,7 +608,7 @@ const TemplateDetailPage = ({ params }) => {
 
                 {/* Template Outline - Plain text format */}
                 {template.templateOutline && template.templateOutline.map((item, index) => (
-                  <div key={index} id={`section-${index + 1}`} className="mb-10">
+                  <div key={index} id={`section-${index + 1}`} className="mb-10 scroll-mt-32">
                     <h2 className="text-2xl font-bold mb-3 text-white quicksand-bold">
                       {item.section || item}
                     </h2>
@@ -442,24 +628,6 @@ const TemplateDetailPage = ({ params }) => {
                 ))}
                   </>
                 ) : null}
-              </div>
-              {/* Download CTA */}
-              <div className="mt-12 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] rounded-xl p-8 text-center">
-                <h3 className="text-2xl font-bold mb-3 quicksand-bold text-white">
-                  Ready to Use This Template?
-                </h3>
-                <p className="text-white/90 mb-6 quicksand-light">
-                  Download and start creating exceptional developer content
-                </p>
-                <a
-                  href={template.downloadLink}
-                  className="inline-flex items-center gap-2 bg-white text-[#1e293b] hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors quicksand-semibold"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                  Download Template
-                </a>
               </div>
             </motion.div>
           </div>
@@ -574,25 +742,13 @@ const TemplateDetailPage = ({ params }) => {
               </div>
             </div>
 
-            {/* Download CTA */}
+            {/* CTA Section */}
             <div className="pt-8 border-t border-purple-500/20">
-              <div className="bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-xl p-10 text-center shadow-2xl shadow-purple-500/20">
-                <h3 className="text-2xl font-bold mb-3 quicksand-bold">
-                  Download and start building your marketing strategy
-                </h3>
-                <p className="text-white/80 mb-6 quicksand-light">
-                  Get instant access to this template and streamline your workflow
-                </p>
-                <button
-                  onClick={handleDownloadClick}
-                  className="inline-flex items-center gap-2 bg-white text-black hover:bg-[#e5e5e5] px-8 py-3 rounded-md font-medium transition-colors quicksand-semibold cursor-pointer"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                  Download Template
-                </button>
-              </div>
+              <CTA 
+                title={<>Ready to create {" "}<span className="bg-clip-text text-transparent" style={{backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"}}>exceptional content</span>{" "}with expert guidance?</>}
+                description="Let's discuss how Infrasity can help you implement this template and scale your content strategy."
+                buttonText="Book a Consultation"
+              />
             </div>
           </div>
 
@@ -603,7 +759,7 @@ const TemplateDetailPage = ({ params }) => {
             {template.templateOutline && template.templateOutline.map((item, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-[#1e1b4b]/60 to-[#312e81]/60 backdrop-blur-sm rounded-xl p-6 border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 shadow-lg"
+                className="bg-gradient-to-br from-[#1e1b4b]/60 to-[#312e81]/60 backdrop-blur-sm rounded-xl p-6 border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 shadow-lg scroll-mt-32"
               >
                 <h3 className="text-xl font-bold mb-3 text-blue-400 quicksand-bold">
                   {index + 1}. {item.section}
@@ -623,31 +779,21 @@ const TemplateDetailPage = ({ params }) => {
           </motion.div>
         )}
 
-        {/* Sample Template Preview Carousel */}
-        <TemplateCarousel />
+        {/* Page-to-footer blend */}
+        <div className="mt-16 h-32 -mx-4 sm:-mx-6 lg:-mx-8 bg-gradient-to-b from-transparent via-[#0f0728]/60 to-[#050114] blur-[50px] rounded-t-3xl opacity-80 pointer-events-none" aria-hidden="true" />
 
-        {/* CTA Section - Show for all templates */}
+        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-16"
         >
-          <div className="bg-gradient-to-br from-[#4c1d95] via-[#5b21b6] to-[#6d28d9] border border-purple-500/30 rounded-2xl p-12 text-center shadow-2xl shadow-purple-500/20">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 quicksand-bold text-white">
-              Need Help Implementing This Template?
-            </h2>
-            <p className="text-lg text-white/90 mb-8 quicksand-light max-w-2xl mx-auto">
-              Our content marketing experts can help you customize and implement this template
-              for your specific needs.
-            </p>
-            <Link
-              href="/book-a-demo"
-              className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl quicksand-semibold"
-            >
-              Book a Free Consultation
-            </Link>
-          </div>
+          <CTA 
+            title={<>Need help {" "}<span className="bg-clip-text text-transparent" style={{backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"}}>implementing this template?</span></>}
+            description="Our content marketing experts can help you customize and implement this template for your specific needs."
+            buttonText="Book a Free Consultation"
+          />
         </motion.div>
 
         {/* Related Templates */}

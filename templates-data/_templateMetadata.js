@@ -404,12 +404,147 @@ const templateMetadata = [
         publishedOn: "2024-12-19",
         author: "Infrasity Team",
         authorImage: "/svgPatterns/profile.svg",
+        layoutType: "developer-outline",
         
         useCase: "Developer comparisons, tool evaluation guides, technical resource articles, API documentation planning",
         targetAudience: "Technical Writers, Developer Relations, Content Marketers, Documentation Teams",
         downloadLink: "/templates-pdf/best-ai-tools-for-documentation.pdf",
         
         overview: "This template helps you plan and write developer-facing guides that are technically accurate, easy to follow, and useful in real-world projects. It's built for engineers, devrel, and technical writers who need consistent structure, clear examples, and a workflow that scales across multiple topics.",
+        
+        educationalContent: {
+            whatIs: {
+                title: "What Is an Outline",
+                paragraphs: [
+                    "An outline is the blueprint for a developer-facing article or guide. It defines the goal, target audience, structure (H1/H2/H3), examples, and validation steps before writing begins.",
+                    "Instead of starting with a blank page, an outline breaks a large topic into small, verifiable steps so you always know what comes next."
+                ],
+                highlight: "problem -> approach -> implementation -> validation -> alternatives -> next steps",
+                subtext: "This keeps every guide focused and verifiable:",
+                bullets: [
+                    "Written for the right technical audience",
+                    "Aligned with developer and search intent",
+                    "Practical, testable, and outcome-driven instead of abstract"
+                ],
+                audienceLabel: "Who this is for",
+                audience: [
+                    "Developers",
+                    "Technical Writers",
+                    "DevRel teams",
+                    "API Platform teams",
+                    "Infrastructure Engineers",
+                    "SaaS Product teams",
+                    "Documentation & Onboarding owners"
+                ]
+            },
+            whyUse: {
+                title: "Why Use an Outline Template",
+                intro: "Writing developer content without structure leads to inconsistent depth, missing examples, or unclear outcomes. An outline template fixes that upfront.",
+                cards: [
+                    {
+                        title: "Faster writing",
+                        description: "Removes blank-page friction. Writers start with a proven structure instead of deciding what to cover next."
+                    },
+                    {
+                        title: "Consistent quality",
+                        description: "Keeps tone, depth, and formatting uniform across authors, teams, and topics."
+                    },
+                    {
+                        title: "Higher technical accuracy",
+                        description: "Prompts inclusion of runnable code, CLI commands, expected outputs, and validation steps."
+                    },
+                    {
+                        title: "Better discoverability",
+                        description: "Naturally places primary and secondary keywords in titles, headings, and intros without stuffing."
+                    },
+                    {
+                        title: "Easier collaboration",
+                        description: "Gives editors and engineers clear section prompts and acceptance criteria so reviews move faster."
+                    }
+                ],
+                audienceLabel: "Who benefits most",
+                audience: [
+                    "DevRel leaders",
+                    "Documentation owners",
+                    "Engineering onboarding teams",
+                    "API product teams",
+                    "Developer education leads"
+                ]
+            },
+            templateOverview: {
+                title: "What Is a Developer Content & Guide Outline",
+                description: "A developer content and guide outline is a task-first map for technical documentation. Every section helps the reader achieve a specific, concrete outcome while understanding trade-offs and constraints.",
+                sections: [
+                    {
+                        title: "Problem framing",
+                        description: "Clarify what the developer is trying to do and why it matters to the business or product."
+                    },
+                    {
+                        title: "Prerequisites",
+                        description: "List required tools, versions, accounts, OS notes, environment variables, and sample repositories."
+                    },
+                    {
+                        title: "Section map",
+                        description: "Define the H1 intent, then map H2/H3 sections that spell out what to explain, which code to show, and how the reader validates success."
+                    },
+                    {
+                        title: "Alternatives and troubleshooting",
+                        description: "Capture common errors, root causes, fixes, and trade-offs between approaches."
+                    },
+                    {
+                        title: "Next steps",
+                        description: "Point to production hardening, advanced workflows, and related reference material."
+                    }
+                ],
+                audienceLabel: "Who this is designed for",
+                audience: [
+                    "API teams",
+                    "SDK maintainers",
+                    "Platform engineers",
+                    "Solution architects",
+                    "Developer onboarding leads"
+                ]
+            },
+            howToUse: {
+                title: "How to Use This Outline Template",
+                intro: "Follow these steps to turn the template into a clear, high-quality developer guide.",
+                steps: [
+                    {
+                        title: "Define scope and audience level",
+                        description: "Choose one clear outcome per piece and decide whether you're writing for beginner, intermediate, or advanced readers.",
+                        extra: "Example outcome: Generate SDKs from OpenAPI and publish documentation automatically in CI."
+                    },
+                    {
+                        title: "Choose keywords and search intent",
+                        description: "Select one primary keyword and 3-6 secondary keywords mapped to sections. Review top results to confirm tutorial vs comparison intent and note gaps you can fill."
+                    },
+                    {
+                        title: "Write the TL;DR",
+                        description: "Summarize the guide in 4-6 bullets covering the outcome, key steps, who it's for, and the expected result."
+                    },
+                    {
+                        title: "Lay out the sections",
+                        description: "Use H2s for major steps and H3s for sub-steps, examples, and validation. Include commands, expected output, and gotchas per section."
+                    },
+                    {
+                        title: "Write and verify",
+                        description: "Include only tested code with language tags and version notes. Show before/after states, sample outputs, or screenshots, and call out OS differences."
+                    },
+                    {
+                        title: "Add troubleshooting and alternatives",
+                        description: "Document top issues using Error -> Cause -> Fix and highlight trade-offs for alternate approaches."
+                    },
+                    {
+                        title: "Conclude and extend",
+                        description: "Summarize key takeaways, reinforce the primary topic, and recommend what to do next (deploy, secure, scale, automate)."
+                    },
+                    {
+                        title: "Final checks",
+                        description: "Confirm code runs, links work, headings are scannable, meta description is ~160 characters, alt text is descriptive, and keywords feel natural."
+                    }
+                ]
+            }
+        },
         
         // Custom educational content
         whatIsContent: "A developer guide is a technical document that teaches a developer how to do something concrete: integrate a library, design an API, debug a problem, or choose between approaches. Good guides are task-oriented, opinionated when needed, and grounded in working code. They clarify assumptions, show trade-offs, and include copy-paste-ready examples.",
@@ -500,12 +635,150 @@ const templateMetadata = [
         publishedOn: "2024-12-19",
         author: "Infrasity Team",
         authorImage: "/svgPatterns/profile.svg",
+        layoutType: "developer-outline",
         
         useCase: "Developer guides, tool comparisons, technical tutorials, API documentation, educational blog posts",
         targetAudience: "Engineering Teams, Technical Writers, DevRel Professionals, Engineering Managers, Documentation Specialists",
         downloadLink: "/templates-pdf/best-ai-tools-for-documentation.pdf",
         
         overview: "This template provides a proven framework for writing developer content from outline to publication. It includes keyword strategy, writing best practices, and a step-by-step process to create technically accurate, engaging content that ranks well and resonates with developers.",
+        
+        educationalContent: {
+            whatIs: {
+                title: "What Is Developer Content Writing",
+                paragraphs: [
+                    "Developer content writing translates technical concepts into clear, practical documentation that developers can follow and implement immediately.",
+                    "It blends credible engineering detail with storytelling, so readers understand the 'why', see the 'how', and trust the recommended approach."
+                ],
+                highlight: "principles: clarity -> accuracy -> verification -> next steps",
+                subtext: "High-performing guides share these traits:",
+                bullets: [
+                    "Clear and actionable: readers can repeat the workflow without guessing",
+                    "Technically accurate: code compiles, commands work, examples are tested",
+                    "Contextual: explains decisions, trade-offs, and expected outcomes",
+                    "Optimized: structured for both human readers and search engines"
+                ],
+                audienceLabel: "Who relies on this",
+                audience: [
+                    "Engineering teams",
+                    "Technical writers",
+                    "DevRel practitioners",
+                    "Product marketing engineers",
+                    "Solutions architects",
+                    "Documentation specialists"
+                ]
+            },
+            whyUse: {
+                title: "Why Use a Developer Content Writing Template",
+                intro: "When every piece is unique, structure is the only way to ship on time without sacrificing depth. This template keeps writers, reviewers, and SMEs aligned.",
+                cards: [
+                    {
+                        title: "Faster writing",
+                        description: "Eliminates blank-page syndrome by providing section prompts, keyword placement, and review checklists."
+                    },
+                    {
+                        title: "Quality control",
+                        description: "Ensures every guide includes context, runnable code, expected output, and troubleshooting notes."
+                    },
+                    {
+                        title: "SEO alignment",
+                        description: "Maps primary and secondary keywords to headings and summaries without awkward stuffing."
+                    },
+                    {
+                        title: "Consistency",
+                        description: "Keeps tone, depth, and formatting uniform across multiple authors and publication channels."
+                    },
+                    {
+                        title: "Review speed",
+                        description: "SMEs can focus on accuracy because acceptance criteria are embedded in the outline."
+                    }
+                ],
+                audienceLabel: "Teams that benefit",
+                audience: [
+                    "Dev content teams",
+                    "Developer marketing",
+                    "API product squads",
+                    "Platform enablement",
+                    "Solution consulting groups"
+                ]
+            },
+            templateOverview: {
+                title: "What Is the Developer Content Writing Template",
+                description: "A modular system that takes you from keyword strategy to a publish-ready tutorial, comparison, or integration guide.",
+                sections: [
+                    {
+                        title: "Keyword & intent map",
+                        description: "Choose one primary keyword and supporting questions, confirm SERP intent, and identify gaps to fill."
+                    },
+                    {
+                        title: "Narrative outline",
+                        description: "Translate the outline into H2/H3 prompts with required artifacts: code, commands, screenshots, validation." 
+                    },
+                    {
+                        title: "Code & evidence layer",
+                        description: "Capture runnable snippets, expected output, benchmarks, or comparison tables that prove each claim."
+                    },
+                    {
+                        title: "Optimization checklist",
+                        description: "Meta description, internal links, alt text, scannable paragraphs, and CTA framing."
+                    },
+                    {
+                        title: "Publication workflow",
+                        description: "QA steps, peer review, and go-live checklists so the content lands consistently across docs, blog, and community."
+                    }
+                ],
+                audienceLabel: "Who uses this framework",
+                audience: [
+                    "Editorial leads",
+                    "Developer educators",
+                    "Lifecycle marketing teams",
+                    "Open-source maintainers"
+                ]
+            },
+            howToUse: {
+                title: "How to Use This Writing Template",
+                intro: "Follow these steps end-to-end or plug into your existing editorial workflow.",
+                steps: [
+                    {
+                        title: "Choose your keywords strategically",
+                        description: "Start with the outline topic, find a primary keyword with meaningful volume, and 3-5 secondary keywords developers actually search.",
+                        extra: "Example: Primary = API documentation tools; secondary = automatic API docs, OpenAPI documentation, SDK generation tools."
+                    },
+                    {
+                        title: "Understand search intent",
+                        description: "Review the top results, note format (tutorial, comparison, reference), and document gaps you will fill."
+                    },
+                    {
+                        title: "Write the intro",
+                        description: "Hook readers with the problem, promise an outcome, and state why it matters in 5 sentences or less while using the primary keyword naturally."
+                    },
+                    {
+                        title: "Develop each section with depth",
+                        description: "Expand H2s with context, code, expected output, and transitions every 200-300 words so readers can scan or dive deep."
+                    },
+                    {
+                        title: "Ship tested code",
+                        description: "Only include runnable snippets with language tags, version notes, and comments that explain non-obvious lines."
+                    },
+                    {
+                        title: "Add comparison or decision tables",
+                        description: "When multiple approaches exist, summarize differences using simple matrices with recommendations per scenario."
+                    },
+                    {
+                        title: "Optimize without stuffing",
+                        description: "Map keywords to headings, keep paragraphs short, add alt text, and weave synonyms so the piece reads naturally."
+                    },
+                    {
+                        title: "Write the conclusion and CTA",
+                        description: "Reinforce the main takeaway, suggest next steps, and point readers to related guides or community support."
+                    },
+                    {
+                        title: "Review, test, and refine",
+                        description: "Run everything in a clean environment, validate links, read aloud for flow, and get a peer or SME review before publishing."
+                    }
+                ]
+            }
+        },
         
         // Custom educational content
         whatIsContent: "Developer content writing is the craft of translating technical concepts into clear, practical documentation that developers can follow and apply immediately. It balances technical accuracy with readability, provides working examples, and anticipates common questions and roadblocks.",
