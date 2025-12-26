@@ -152,7 +152,19 @@ const TemplateDetailPage = ({ params }) => {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Hero Section - Title Left, Video Right */}
-      <div className="bg-gradient-to-b from-[#1a0b2e] via-[#16213e] to-[#0a0a0a] pt-32 pb-16">
+      <div className="relative isolate pt-32 pb-16">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(70%_80%_at_50%_-20%,rgba(108,91,233,0.5),rgba(255,255,255,0))]" />
+        <svg
+          className="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(75%_50%_at_top_center,white,transparent)]"
+          aria-hidden="true"
+        >
+          <defs>
+            <pattern id="grid" width="80" height="80" x="50%" y="-1" patternUnits="userSpaceOnUse">
+              <path d="M.5 200V.5H200" fill="none" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" strokeWidth="0" fill="url(#grid)" />
+        </svg>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Title and Info */}
@@ -204,7 +216,7 @@ const TemplateDetailPage = ({ params }) => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative w-full aspect-video bg-[#1a1f35] border border-[#2a2f45] rounded-xl overflow-hidden shadow-2xl">
+              <div className="relative w-full aspect-video bg-gradient-to-br from-[#1e1b4b] to-[#312e81] border border-purple-500/30 rounded-xl overflow-hidden shadow-2xl">
                 <iframe
                   src={template.videoEmbedUrl}
                   className="absolute inset-0 w-full h-full"
@@ -238,7 +250,9 @@ const TemplateDetailPage = ({ params }) => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a] to-[#0f0728]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* For Developer Content & Guides templates - Show clean content with sidebar */}
         {(template.slug === "developer-content-and-guides-outline" || template.slug === "developer-content-and-guides-content") ? (
           <div className="flex flex-col lg:flex-row gap-8">
@@ -249,26 +263,26 @@ const TemplateDetailPage = ({ params }) => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="lg:w-64 flex-shrink-0"
             >
-              <div className="sticky top-24 bg-[#1e293b] border border-[#334155] rounded-xl p-6">
+              <div className="sticky top-24 bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-6 shadow-lg">
                 <h3 className="text-lg font-bold mb-4 quicksand-bold text-white">Content</h3>
                 <nav className="space-y-2">
                   {/* Common educational sections for both templates */}
-                  <a href="#what-is" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">
+                  <a href="#what-is" className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
                     {template.slug === "developer-content-and-guides-outline" ? "What is a Developer Content Outline?" : "What is Developer Content Writing?"}
                   </a>
-                  <a href="#what-is-template" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">
+                  <a href="#what-is-template" className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
                     {template.slug === "developer-content-and-guides-outline" ? "What is the Template?" : "What is the Template?"}
                   </a>
-                  <a href="#why-use" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">Why Use This Template?</a>
-                  <a href="#how-to-use" className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1">How to Use This Template</a>
+                  <a href="#why-use" className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">Why Use This Template?</a>
+                  <a href="#how-to-use" className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">How to Use This Template</a>
                   
-                  <div className="border-t border-[#334155] my-3 pt-3">
+                  <div className="border-t border-purple-500/20 my-3 pt-3">
                   {template.slug === "developer-content-and-guides-outline" && (
                     <>
                       {template.metricsTable && (
                         <a
                           href="#metrics-table"
-                          className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1"
+                          className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1"
                         >
                           Strategic Overview Table
                         </a>
@@ -277,7 +291,7 @@ const TemplateDetailPage = ({ params }) => {
                         <a
                           key={index}
                           href={`#section-${index + 1}`}
-                          className="block text-sm text-[#94a3b8] hover:text-[#a5b4fc] transition-colors quicksand-regular py-1"
+                          className="block text-sm text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1"
                         >
                           {typeof item === 'object' ? item.section : item}
                         </a>
@@ -561,8 +575,8 @@ const TemplateDetailPage = ({ params }) => {
             </div>
 
             {/* Download CTA */}
-            <div className="pt-8 border-t border-[#1a1f35]">
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-10 text-center">
+            <div className="pt-8 border-t border-purple-500/20">
+              <div className="bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-xl p-10 text-center shadow-2xl shadow-purple-500/20">
                 <h3 className="text-2xl font-bold mb-3 quicksand-bold">
                   Download and start building your marketing strategy
                 </h3>
@@ -589,14 +603,14 @@ const TemplateDetailPage = ({ params }) => {
             {template.templateOutline && template.templateOutline.map((item, index) => (
               <div
                 key={index}
-                className="bg-slate-900 rounded-xl p-6 border border-slate-700 hover:border-blue-500/50 transition-all duration-300"
+                className="bg-gradient-to-br from-[#1e1b4b]/60 to-[#312e81]/60 backdrop-blur-sm rounded-xl p-6 border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 shadow-lg"
               >
                 <h3 className="text-xl font-bold mb-3 text-blue-400 quicksand-bold">
                   {index + 1}. {item.section}
                 </h3>
                 <p className="text-gray-300 mb-3 quicksand-light">{item.description}</p>
                 {item.example && (
-                  <div className="bg-slate-800 rounded-lg p-4 border-l-4 border-purple-500">
+                  <div className="bg-gradient-to-r from-[#312e81]/40 to-[#1e1b4b]/40 rounded-lg p-4 border-l-4 border-purple-400">
                     <p className="text-gray-400 text-sm italic quicksand-light">
                       {item.example}
                     </p>
@@ -609,6 +623,9 @@ const TemplateDetailPage = ({ params }) => {
           </motion.div>
         )}
 
+        {/* Sample Template Preview Carousel */}
+        <TemplateCarousel />
+
         {/* CTA Section - Show for all templates */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -616,11 +633,11 @@ const TemplateDetailPage = ({ params }) => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-16"
         >
-          <div className="bg-[#1a1f35] border border-[#2a2f45] rounded-2xl p-12 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 quicksand-bold">
+          <div className="bg-gradient-to-br from-[#4c1d95] via-[#5b21b6] to-[#6d28d9] border border-purple-500/30 rounded-2xl p-12 text-center shadow-2xl shadow-purple-500/20">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 quicksand-bold text-white">
               Need Help Implementing This Template?
             </h2>
-            <p className="text-lg text-[#888] mb-8 quicksand-light max-w-2xl mx-auto">
+            <p className="text-lg text-white/90 mb-8 quicksand-light max-w-2xl mx-auto">
               Our content marketing experts can help you customize and implement this template
               for your specific needs.
             </p>
@@ -632,9 +649,6 @@ const TemplateDetailPage = ({ params }) => {
             </Link>
           </div>
         </motion.div>
-
-        {/* Sample Template Preview Carousel */}
-        <TemplateCarousel />
 
         {/* Related Templates */}
         <motion.div
@@ -654,7 +668,7 @@ const TemplateDetailPage = ({ params }) => {
                   href={`/templates/${relatedTemplate.slug}`}
                   className="group block"
                 >
-                  <div className="relative bg-[#1a1f35] border border-[#2a2f45] rounded-xl overflow-hidden hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6">
+                  <div className="relative bg-gradient-to-br from-[#1e1b4b]/60 to-[#312e81]/60 backdrop-blur-sm border border-purple-500/30 rounded-xl overflow-hidden hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 p-6">
                     <div className="absolute top-4 right-4 w-24 h-24 overflow-hidden rounded-lg shadow-lg transform transition-transform duration-300 group-hover:rotate-12 origin-top-right">
                       <Image
                         src={relatedTemplate.thumbnailImage}
@@ -664,10 +678,10 @@ const TemplateDetailPage = ({ params }) => {
                       />
                     </div>
                     <div className="pr-24">
-                      <div className="inline-flex items-center justify-center bg-blue-600/10 border border-blue-500/20 rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
-                        <p className="text-blue-400">{relatedTemplate.category}</p>
+                      <div className="inline-flex items-center justify-center bg-purple-600/20 border border-purple-500/30 rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
+                        <p className="text-purple-300">{relatedTemplate.category}</p>
                       </div>
-                      <h3 className="text-base font-bold quicksand-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2">
+                      <h3 className="text-base font-bold quicksand-bold text-white group-hover:text-purple-300 transition-colors line-clamp-2">
                         {relatedTemplate.title}
                       </h3>
                     </div>
@@ -677,6 +691,7 @@ const TemplateDetailPage = ({ params }) => {
           </div>
         </motion.div>
       </div>
+      </div>
 
       {/* Email Verification Modal */}
       {showEmailModal && (
@@ -685,7 +700,7 @@ const TemplateDetailPage = ({ params }) => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="relative w-full max-w-md mx-4 bg-black/20 backdrop-blur-md rounded-xl p-8 lg:p-10 shadow-2xl border border-white/20 hover:border-white/30"
+            className="relative w-full max-w-md mx-4 bg-gradient-to-br from-[#1e1b4b]/95 to-[#312e81]/95 backdrop-blur-md rounded-xl p-8 lg:p-10 shadow-2xl border border-purple-500/30 hover:border-purple-400/50"
           >
             {/* Close Button */}
             <button
@@ -720,7 +735,7 @@ const TemplateDetailPage = ({ params }) => {
                       setEmailError("");
                     }}
                     placeholder="your.email@company.com"
-                    className="w-full px-4 py-3 bg-black backdrop-blur-sm rounded-lg text-white placeholder-gray-400 outline-none focus:ring-1 focus:ring-purple-700 border border-white/20 transition-all quicksand-regular"
+                    className="w-full px-4 py-3 bg-[#1e1b4b]/50 backdrop-blur-sm rounded-lg text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-purple-500 border border-purple-500/30 transition-all quicksand-regular"
                     disabled={isSubmitting}
                   />
                   {emailError && (
