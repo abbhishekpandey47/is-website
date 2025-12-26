@@ -409,101 +409,81 @@ const templateMetadata = [
         targetAudience: "Technical Writers, Developer Relations, Content Marketers, Documentation Teams",
         downloadLink: "/templates-pdf/best-ai-tools-for-documentation.pdf",
         
-        metricsTable: [
-          { label: "Title", value: "Best AI Tools for Documentation (2025): Fern, Apidog, Swimm, Guidde & Eraser.io" },
-          { label: "URL", value: "" },
-          { label: "Word Count", value: "~2200" },
-          { label: "Target Intent", value: "Informational + Technical + Comparison" },
-          { label: "Target Audience", value: "Developers, Technical Writers, SaaS and API Product Teams, Engineering Teams, Operations & Support Teams" },
-          { label: "Page Template", value: "Information and tutorial blog" },
-          { label: "Focus keyword", value: "Best AI tool for documentation | 1600" },
-          { label: "Secondary Keyword", value: "AI documentation tools, Fern Documentation, Apidog API docs, Swimm documentation, Guidde AI, eraser.io Support AI | 900, 800, 700, 600, 500, 450" },
-          { label: "Longtail KWs", value: "best AI documentation tool for developers, Fern vs apidog, Swimm Anti code drift, Best video-first SOP creator | 350, 300, 250, 200" }
+        overview: "This template helps you plan and write developer-facing guides that are technically accurate, easy to follow, and useful in real-world projects. It's built for engineers, devrel, and technical writers who need consistent structure, clear examples, and a workflow that scales across multiple topics.",
+        
+        // Custom educational content
+        whatIsContent: "A developer guide is a technical document that teaches a developer how to do something concrete: integrate a library, design an API, debug a problem, or choose between approaches. Good guides are task-oriented, opinionated when needed, and grounded in working code. They clarify assumptions, show trade-offs, and include copy-paste-ready examples.",
+        
+        whatIsContentDetailed: [
+            "Audience-first: tailored to the developer's role and context",
+            "Task-driven: each section helps achieve a specific outcome",
+            "Verifiable: examples run; commands and code compile",
+            "Maintainable: source-linked, versioned, and easy to update"
         ],
         
-        overview: "This outline template helps you structure comprehensive content about AI-powered documentation tools. Perfect for creating comparison guides, evaluation resources, or deep-dive articles that help technical teams make informed decisions about their documentation stack.",
+        whatIsTemplate: "It's a structured framework for planning and writing developer guides consistently. It provides section patterns, content prompts, and quality checks so the final output is clear, actionable, and technically sound.",
+        
+        whatIsTemplateCovers: [
+            "Problem framing and prerequisites",
+            "Step-by-step implementation with code",
+            "Alternatives, trade-offs, and decision points",
+            "Validation (tests, commands, expected output)",
+            "Troubleshooting and common pitfalls",
+            "Next steps and references"
+        ],
+        
+        whyUseTemplate: [
+            "Consistency: keeps guides uniform across authors and teams",
+            "Speed: reduces ramp-up time; you focus on substance, not structure",
+            "Quality: enforces completeness (prereqs, validation, edge cases)",
+            "Discoverability: improves scannability and SEO with predictable headings",
+            "Maintainability: makes updates straightforward when APIs or tooling change"
+        ],
         
         keyFeatures: [
-            "Structured comparison framework for multiple tools",
-            "Clear TL;DR section for quick evaluation",
-            "Industry trend analysis structure",
-            "Real-world use case integration",
-            "Actionable decision-making framework"
+            "Step-by-step workflow from planning to publishing",
+            "Real-world examples and use cases",
+            "Quality checklists for each phase",
+            "Best practices from experienced technical writers",
+            "Troubleshooting guides and common pitfalls"
         ],
         
         howToUse: [
             {
-                step: "Start with Executive Summary",
-                description: "Create a TL;DR section that highlights each tool's primary value proposition and ideal use case."
+                step: "Scope the guide",
+                description: "Define the task: one clear outcome per guide (e.g., 'Add OAuth2 to a Next.js API'). Set the audience level: beginner, intermediate, advanced. Avoid broad topics—focus on specific, achievable tasks. Time estimate: 15-20 minutes."
             },
             {
-                step: "Analyze Industry Trends",
-                description: "Cover current shifts in documentation practices (docs-as-code, AI automation, etc.) to provide context."
+                step: "Capture prerequisites",
+                description: "List everything needed before starting: tools (Node.js 18+, Docker), versions, accounts (GitHub, AWS), environment variables, sample repo links, test data. Include OS-specific notes. Clarify assumptions about prior knowledge. Time estimate: 10 minutes."
             },
             {
-                step: "Deep Dive Each Tool",
-                description: "For each solution, cover: what it does, who uses it, key features, and real implementation examples."
+                step: "Outline the flow",
+                description: "Structure as: Problem → Approach → Implementation → Validation → Alternatives → Troubleshooting → Next Steps. Keep each step small and testable. Each section should produce a verifiable result. Use headings that answer 'how to' questions. Time estimate: 20-30 minutes."
             },
             {
-                step: "Include Practical Examples",
-                description: "Show actual use cases from real companies to demonstrate value and implementation."
+                step: "Write the implementation",
+                description: "Show commands and code with expected results. Use fenced code blocks with language tags. Explain why, not just what. Link to official docs for deep dives. Add guardrails: performance notes ('This approach works for <10k users'), security considerations ('Never commit API keys'), compatibility details ('Requires Python 3.9+'). Time estimate: 1-2 hours."
             },
             {
-                step: "Add Decision Framework",
-                description: "Help readers choose the right tool based on their team size, tech stack, and documentation needs."
-            }
-        ],
-        
-        templateOutline: [
-            {
-                section: "Introduction & Overview",
-                description: "Brief introduction to the topic. Set context and explain what this content will cover.",
-                example: "Example: Opening paragraph that hooks the reader and explains the problem/opportunity."
+                step: "Add validation steps",
+                description: "Provide a quick 'it works' check after each major step: run a script, make a curl request, execute a unit test, show expected console output. Include commands developers can copy/paste. Example: 'Run `npm test` — you should see 5 passing tests.' Time estimate: 20-30 minutes."
             },
             {
-                section: "Background & Context",
-                description: "Provide industry context, current trends, and why this topic matters now.",
-                example: "Cover relevant trends, pain points, and shifts in the developer ecosystem."
+                step: "Document alternatives and trade-offs",
+                description: "When multiple approaches exist, create a comparison table. Explain selection criteria: complexity (beginner-friendly vs. advanced), performance (sync vs. async), portability (cross-platform vs. OS-specific), community support (active maintenance, plugin ecosystem). Example: 'Use REST for simple CRUD, GraphQL for complex data fetching.' Time estimate: 30 minutes."
             },
             {
-                section: "Core Concepts",
-                description: "Explain fundamental concepts and terminology readers need to understand.",
-                example: "Define key terms, explain mental models, and provide conceptual foundations."
+                step: "Add troubleshooting section",
+                description: "List common errors with symptoms, causes, and fixes. Use the format: 'Error: [exact error message]' → 'Cause: [why it happens]' → 'Fix: [steps to resolve]'. Include configuration mistakes, timeout issues, auth failures, version conflicts. Example: 'Error: ECONNREFUSED → Cause: Server not running → Fix: Run `npm start` first.' Time estimate: 20-30 minutes."
             },
             {
-                section: "Deep Dive Analysis",
-                description: "Main content section with detailed analysis, technical explanations, or comparisons.",
-                example: "Detailed technical content, step-by-step explanations, or comparative analysis."
+                step: "Finish with next steps",
+                description: "Point to advanced topics, production hardening guides, related tutorials, API references, community forums. Add 'What's next' suggestions: 'Add authentication', 'Deploy to production', 'Scale with load balancing'. Include external resources with context about what they cover. Time estimate: 10 minutes."
             },
             {
-                section: "Real-World Examples",
-                description: "Include practical examples, use cases, or case studies from actual implementations.",
-                example: "Show how real companies or projects apply these concepts in production."
-            },
-            {
-                section: "Best Practices & Recommendations",
-                description: "Share expert recommendations, common pitfalls to avoid, and optimization tips.",
-                example: "Actionable advice based on experience, with specific do's and don'ts."
-            },
-            {
-                section: "Implementation Guide",
-                description: "Practical steps for readers to implement or apply the concepts discussed.",
-                example: "Step-by-step instructions, code examples, or decision-making frameworks."
-            },
-            {
-                section: "Comparison & Evaluation",
-                description: "If applicable, compare different approaches, tools, or solutions.",
-                example: "Feature comparison table, pros/cons analysis, or decision matrix."
-            },
-            {
-                section: "Getting Started",
-                description: "Provide clear next steps and resources for readers to begin.",
-                example: "Links to documentation, trial signups, tutorials, or community resources."
-            },
-            {
-                section: "Conclusion & Key Takeaways",
-                description: "Summarize main points and reinforce the value proposition.",
-                example: "Recap key insights and provide clear call-to-action for next steps."
+                step: "Review and test",
+                description: "Follow your own guide from scratch in a clean environment. Check that all commands run, all links work, all code compiles. Ask a colleague unfamiliar with the topic to test it. Fix any confusing sections. Verify prerequisites are complete. Estimated time: 30-60 minutes."
             }
         ]
     },
@@ -521,100 +501,89 @@ const templateMetadata = [
         author: "Infrasity Team",
         authorImage: "/svgPatterns/profile.svg",
         
-        useCase: "Complete documentation tool comparison, developer resource library, technical evaluation guides, team onboarding materials",
+        useCase: "Developer guides, tool comparisons, technical tutorials, API documentation, educational blog posts",
         targetAudience: "Engineering Teams, Technical Writers, DevRel Professionals, Engineering Managers, Documentation Specialists",
         downloadLink: "/templates-pdf/best-ai-tools-for-documentation.pdf",
         
-        overview: "This full-content template provides a complete, publication-ready guide to the best AI tools for documentation in 2025. It includes in-depth analysis of 5 leading solutions (Fern, Apidog, Swimm, Guidde, Eraser), real customer case studies, implementation examples, and a practical decision framework to help teams choose the right tools.",
+        overview: "This template provides a proven framework for writing developer content from outline to publication. It includes keyword strategy, writing best practices, and a step-by-step process to create technically accurate, engaging content that ranks well and resonates with developers.",
+        
+        // Custom educational content
+        whatIsContent: "Developer content writing is the craft of translating technical concepts into clear, practical documentation that developers can follow and apply immediately. It balances technical accuracy with readability, provides working examples, and anticipates common questions and roadblocks.",
+        
+        whatIsContentDetailed: [
+            "Clear and actionable: readers can implement what they learn",
+            "Technically accurate: code compiles, commands work, examples are tested",
+            "Contextual: explains the 'why' behind decisions, not just the 'how'",
+            "Optimized: structured for both human readers and search engines"
+        ],
+        
+        whatIsTemplate: "This is a writing framework that takes you from a content outline to a finished, publishable guide. It includes keyword research, section-by-section writing prompts, code example patterns, and quality checks to ensure your content meets developer expectations.",
+        
+        whatIsTemplateCovers: [
+            "Keyword research and search intent analysis",
+            "Writing principles for technical audiences",
+            "Section-by-section content development",
+            "Code example best practices",
+            "SEO optimization without sacrificing quality",
+            "Review checklist and publication guidelines"
+        ],
+        
+        whyUseTemplate: [
+            "Faster writing: clear structure eliminates blank-page syndrome",
+            "Better quality: enforces best practices for technical writing",
+            "SEO benefits: keyword integration happens naturally, not as an afterthought",
+            "Consistency: maintains voice and quality across multiple writers",
+            "Higher engagement: proven patterns that developers prefer"
+        ],
         
         keyFeatures: [
-            "Complete content covering 5 major AI documentation tools",
-            "Real-world examples from Cohere, Nestlé, Riskfuel, SentinelOne, and more",
-            "Detailed feature analysis and use case breakdowns",
-            "Industry trends and future of documentation analysis",
-            "Practical decision-making framework with comparison matrix",
-            "Ready-to-publish content with proper structure and SEO optimization"
+            "Keyword selection framework with search volume analysis",
+            "Section-by-section writing guide with examples",
+            "Code snippet templates and annotation patterns",
+            "Technical accuracy checklist",
+            "SEO optimization without keyword stuffing",
+            "Pre-publication review checklist"
         ],
         
         howToUse: [
             {
-                step: "Review and Customize Content",
-                description: "Read through the complete content. Adjust examples, add your own insights, or update with latest features."
+                step: "Choose your keywords strategically",
+                description: "Start with your outline's main topic. Use tools like Ahrefs, SEMrush, or Google Keyword Planner to find primary keyword (1,000+ monthly searches, medium difficulty) and 3-5 secondary keywords (related terms developers actually search). Prioritize keywords with question-based intent ('how to', 'what is', 'best practices for'). Avoid overly competitive generic terms. Example: Primary = 'API documentation tools', Secondary = 'automatic API docs', 'OpenAPI documentation', 'SDK generation tools'. Time: 20-30 minutes."
             },
             {
-                step: "Update Company Examples",
-                description: "Verify that all customer examples and case studies are current. Add any recent success stories."
+                step: "Understand search intent",
+                description: "Google your primary keyword and analyze the top 5 results. Note what type of content ranks: comparisons, tutorials, reference docs, or opinion pieces. Identify gaps—what questions aren't answered? What examples are missing? Structure your content to match intent while filling those gaps. Example: If 'React state management' shows tutorials, write a tutorial. If it shows comparisons (Redux vs. Context API), write a comparison. Time: 15 minutes."
             },
             {
-                step: "Customize for Your Audience",
-                description: "Tailor the decision framework and recommendations based on your specific audience's needs and tech stack."
+                step: "Write a compelling intro (200-300 words)",
+                description: "Hook readers in the first 2 sentences with a relatable problem or surprising insight. Clearly state what the guide covers and what readers will achieve. Include your primary keyword naturally in the first 100 words. Example structure: 'Problem statement (2-3 sentences) → What you'll learn (1-2 sentences) → Why it matters (1-2 sentences)'. Avoid generic openings like 'In this post, we'll cover…'. Time: 20-30 minutes."
             },
             {
-                step: "Add Visual Assets",
-                description: "Include screenshots, architecture diagrams, comparison charts, and product demos where indicated."
+                step: "Develop each section with depth",
+                description: "Follow your outline but expand each section with: concept explanation, practical example (code or command), expected output, and why it matters. Use subheadings every 200-300 words for scannability. Integrate secondary keywords naturally in subheadings and first sentences. Example pattern: H3 subheading → 2-3 sentences context → code block → 1-2 sentences explanation → transition to next section. Time: 2-3 hours for 1500-2000 words."
             },
             {
-                step: "SEO Optimization",
-                description: "Update meta descriptions, add internal links, and ensure keyword placement aligns with your content strategy."
+                step: "Write code examples that work",
+                description: "Every code block must be: runnable (tested in the target environment), annotated (comments explain non-obvious parts), minimal (only essential code, no distractions), formatted (proper syntax highlighting). Include: language tag, version requirements (// Requires Node.js 18+), and expected output. Show before/after or common variations. Avoid: incomplete snippets, overly complex examples, pseudo-code without explanation. Time: 30-45 minutes per example."
             },
             {
-                step: "Publish and Promote",
-                description: "Share on developer communities (dev.to, Hacker News, relevant subreddits) and your distribution channels."
+                step: "Add comparison or decision tables",
+                description: "When comparing tools, approaches, or options, use tables for clarity. Columns: Feature/Criteria, Option A, Option B, Recommended For. Make it scannable: use checkmarks (✓) for yes, crosses (✗) for no, or ratings (1-5 stars). Add a 'When to choose' row with specific scenarios. Example: 'Choose REST if: simple CRUD, broad compatibility. Choose GraphQL if: complex queries, mobile apps with limited bandwidth.' Time: 20 minutes."
+            },
+            {
+                step: "Optimize without keyword stuffing",
+                description: "Natural integration: use primary keyword in title, first paragraph, one H2, and conclusion. Use secondary keywords in H2/H3 headings and naturally in body text. Add synonyms and related terms (LSI keywords). Structure with: clear heading hierarchy (H1 → H2 → H3), short paragraphs (3-4 lines max), bullet lists for scanability. Include alt text for images with descriptive keywords. Avoid: repeating exact keyword in every paragraph, awkward phrasing just to fit keywords. Time: 15-20 minutes."
+            },
+            {
+                step: "Write a strong conclusion with CTAs",
+                description: "Summarize key points in 2-3 sentences. Suggest next steps: related guides, advanced topics, or community resources. Add a clear call-to-action: 'Try this approach in your next project', 'Join our Discord for help', 'Check out [related guide]'. Reinforce primary keyword one final time naturally. Example: 'You now know how to [primary keyword]. Next, explore [advanced topic] or share your results in [community].' Time: 10-15 minutes."
+            },
+            {
+                step: "Review, test, and refine",
+                description: "Technical review: run all code examples, verify links, check version compatibility. Readability review: read aloud, check for jargon without explanation, ensure logical flow. SEO check: primary keyword in title and intro, H2 headings descriptive, meta description compelling (150-160 chars). Get peer review from a developer unfamiliar with the topic. Use tools like Hemingway Editor for readability, Grammarly for grammar. Time: 45-60 minutes."
             }
-        ],
-        
-        templateOutline: [
-            {
-                section: "Complete TL;DR Section",
-                description: "Executive summary covering all 5 tools with key value propositions and customer examples",
-                example: "Full content includes Fern (API-first SDK generation), Apidog (unified workspace), Swimm (living docs), Guidde (video guides), Eraser (AI diagrams) with real company use cases for each."
-            },
-            {
-                section: "How AI Is Changing Documentation",
-                description: "In-depth analysis of 2025 documentation trends including docs-as-code, automated workflows, and AI integration",
-                example: "Complete section with Recursion and Cohere examples, covering the shift from scattered wikis to version-controlled documentation systems."
-            },
-            {
-                section: "Fern: API Documentation & SDK Generation",
-                description: "Comprehensive coverage of Fern's capabilities with Cohere and Nominal case studies",
-                example: "Detailed explanation of how Fern generates multi-language SDKs from OpenAPI specs, keeps docs in sync, and reduces manual maintenance work."
-            },
-            {
-                section: "Apidog: Unified API Workspace",
-                description: "Full section on Apidog's all-in-one approach with Nestlé innovation team example",
-                example: "Complete breakdown of design, mock, test, and documentation workflow consolidation with practical implementation guidance."
-            },
-            {
-                section: "Swimm: Continuous Documentation for Code",
-                description: "Detailed analysis of Swimm's IDE-integrated approach with Riskfuel and Recursion examples",
-                example: "How Swimm reduces onboarding time by 50%+ and keeps docs synced with code changes automatically."
-            },
-            {
-                section: "Guidde: AI-Powered Video Documentation",
-                description: "Complete section on video-first documentation with SentinelOne, FloQast, and Nezasa case studies",
-                example: "Full explanation of how Guidde records workflows and generates narrated video guides for internal processes."
-            },
-            {
-                section: "Eraser: AI Diagram Generation",
-                description: "In-depth coverage of Eraser's diagram-as-code approach with Mathspace, Mission, and Neon examples",
-                example: "Detailed guide on generating architecture diagrams from prompts or code, version controlling visual specs."
-            },
-            {
-                section: "Comparison & Decision Matrix",
-                description: "Complete feature comparison table and decision framework for all 5 tools",
-                example: "Full matrix comparing pricing, integrations, team size suitability, and ideal use cases for each solution."
-            },
-            {
-                section: "Implementation Guidance",
-                description: "Practical advice on evaluation, trial, implementation, and team adoption for each tool",
-                example: "Step-by-step guidance on getting started with each tool including trial setup and integration with existing workflows."
-            },
-            {
-                section: "Future of AI in Documentation",
-                description: "Forward-looking analysis of emerging trends and what's coming next in AI-powered documentation",
-                example: "Analysis of agent-based documentation, real-time sync, and next-generation developer experience improvements."
-            }
-        ]    }
+        ]
+    }
 ];
 
 module.exports = templateMetadata;

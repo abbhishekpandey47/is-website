@@ -7,6 +7,83 @@ import AppContext from "../../../context/Infracontext";
 import templateMetadata from "../../../../templates-data/_templateMetadata";
 import { notFound } from "next/navigation";
 
+// Template Carousel Component
+const TemplateCarousel = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const slides = [
+    {
+      image: "/template-samples/template-sample-1.png",
+      alt: "Template Example 1"
+    },
+    {
+      image: "/template-samples/template-sample-2.png",
+      alt: "Template Example 2"
+    },
+    {
+      image: "/template-samples/template-sample-3.png",
+      alt: "Template Example 3"
+    }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 3500); // Change slide every 3.5 seconds
+
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.5 }}
+      className="mt-16"
+    >
+      <h2 className="text-2xl font-bold mb-8 quicksand-bold text-center">Sample Outline</h2>
+      
+      <div className="relative bg-[#0a0a0a] rounded-xl overflow-hidden max-w-4xl mx-auto">
+        {/* Carousel Images */}
+        <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+          {slides.map((slide, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-500 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <Image
+                src={slide.image}
+                alt={slide.alt}
+                fill
+                className="object-contain"
+                priority={index === 0}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Navigation Dots */}
+        <div className="flex justify-center gap-2 py-6">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                index === currentSlide
+                  ? 'bg-blue-500 w-8'
+                  : 'bg-gray-600 hover:bg-gray-500'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const TemplateDetailPage = ({ params }) => {
   const context = useContext(AppContext);
   const { setProgress } = context;
@@ -225,111 +302,68 @@ const TemplateDetailPage = ({ params }) => {
                   {/* What is Section */}
                   <div id="what-is" className="mb-10">
                     <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
-                      {template.slug === "developer-content-and-guides-outline" ? "What is a Developer Content Outline?" : "What is Developer Content Writing?"}
+                      What is a Developer Guide & Content?
                     </h2>
                     <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
-                      {template.slug === "developer-content-and-guides-outline" ? 
-                        "A developer content outline is a strategic framework that helps you plan and structure technical content for developer audiences. It acts as a blueprint for creating comprehensive guides, tool comparisons, and technical tutorials that resonate with engineering teams." :
-                        "Developer content writing is the practice of creating technical content specifically designed for developers, engineers, and technical decision-makers. It combines technical accuracy with clear communication to educate, engage, and help technical audiences solve real problems."
-                      }
+                      {template.whatIsContent || "A developer guide is a technical document that teaches a developer how to do something concrete: integrate a library, design an API, debug a problem, or choose between approaches. Good guides are task-oriented, opinionated when needed, and grounded in working code. They clarify assumptions, show trade-offs, and include copy-paste-ready examples."}
                     </p>
-                    <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-regular">
-                      {template.slug === "developer-content-and-guides-outline" ?
-                        "Unlike traditional content outlines, developer content requires technical depth, real code examples, and practical implementation details. This template helps you structure content that developers actually want to read." :
-                        "This type of content goes beyond surface-level explanations. It includes working code examples, architecture insights, performance considerations, and real-world use cases that help developers make informed technical decisions."
-                      }
-                    </p>
+                    {template.whatIsContentDetailed && (
+                      <ul className="space-y-2 text-[#94a3b8] text-sm quicksand-regular">
+                        {template.whatIsContentDetailed.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-3">
+                            <span className="text-[#6366f1] mt-1">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
 
                   {/* What is Template Section */}
                   <div id="what-is-template" className="mb-10">
                     <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
-                      {template.slug === "developer-content-and-guides-outline" ? "What is a Developer Content Outline Template?" : "What is a Developer Content Writing Template?"}
+                      What is a Developer Guide & Content Template?
                     </h2>
-                    <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
-                      {template.slug === "developer-content-and-guides-outline" ?
-                        "A developer content outline template is a pre-structured framework that guides you through planning technical content. It includes sections for technical depth, code examples, tool comparisons, and practical implementations—ensuring nothing important gets missed." :
-                        "A developer content writing template provides complete, ready-to-adapt content examples with proper technical depth, structure, and developer-focused messaging. It shows exactly how to explain technical concepts, compare tools, and provide actionable insights."
-                      }
+                    <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
+                      {template.whatIsTemplate || "It's a structured framework for planning and writing developer guides consistently. It provides section patterns, content prompts, and quality checks so the final output is clear, actionable, and technically sound."}
                     </p>
-                    <ul className="space-y-3 text-[#cbd5e1] quicksand-regular">
-                      <li className="flex items-start gap-3">
-                        <span className="text-[#6366f1] mt-1">•</span>
-                        <span className="text-sm">
-                          {template.slug === "developer-content-and-guides-outline" ?
-                            "Structured sections covering technical concepts, real-world examples, and implementation details" :
-                            "Complete examples showing how to write technical comparisons, tool evaluations, and developer guides"
-                          }
-                        </span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-[#6366f1] mt-1">•</span>
-                        <span className="text-sm">
-                          {template.slug === "developer-content-and-guides-outline" ?
-                            "SEO-optimized keyword suggestions with search volumes and target intent mapping" :
-                            "Real company examples showing practical implementations and use cases"
-                          }
-                        </span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-[#6366f1] mt-1">•</span>
-                        <span className="text-sm">
-                          {template.slug === "developer-content-and-guides-outline" ?
-                            "Target audience definition, word count guidance, and content type recommendations" :
-                            "Proper paragraph length, technical tone, and word choice that resonates with developers"
-                          }
-                        </span>
-                      </li>
-                    </ul>
+                    {template.whatIsTemplateCovers && (
+                      <>
+                        <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-regular mb-3">What the template standardizes:</p>
+                        <ul className="space-y-2 text-[#cbd5e1] quicksand-regular">
+                          {template.whatIsTemplateCovers.map((item, idx) => (
+                            <li key={idx} className="flex items-start gap-3">
+                              <span className="text-[#6366f1] mt-1">•</span>
+                              <span className="text-sm">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
                   </div>
 
                   {/* Why Use Section */}
                   <div id="why-use" className="mb-10">
                     <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
-                      {template.slug === "developer-content-and-guides-outline" ? "Why Use a Developer Content Outline Template?" : "Why Use a Developer Content Writing Template?"}
+                      Why Use a Developer Guide & Content Template?
                     </h2>
-                    <div className="space-y-6">
-                      <div>
-                        <h3 className="text-xl font-bold text-white quicksand-bold mb-2">Saves Time and Ensures Consistency</h3>
-                        <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
-                          {template.slug === "developer-content-and-guides-outline" ?
-                            "Instead of starting from scratch, you get a proven structure that covers all essential sections. This template ensures you don't miss critical technical details or implementation examples." :
-                            "Skip the research phase and start with battle-tested content examples. See exactly how to explain complex technical concepts in ways that developers understand and appreciate."
-                          }
-                        </p>
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white quicksand-bold mb-2">SEO-Optimized from the Start</h3>
-                        <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
-                          {template.slug === "developer-content-and-guides-outline" ?
-                            "Get keyword suggestions with search volumes, secondary keywords, and long-tail variations. The template includes target intent mapping so your content ranks for the right searches." :
-                            "Content is structured with proper H2/H3 tags, keyword placement, and meta descriptions that search engines love. Learn from examples that balance technical depth with SEO best practices."
-                          }
-                        </p>
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white quicksand-bold mb-2">Developer-Focused Approach</h3>
-                        <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
-                          {template.slug === "developer-content-and-guides-outline" ?
-                            "Designed specifically for technical audiences who want code examples, architecture details, and practical implementation guidance—not marketing fluff." :
-                            "See how to write with the right technical depth, tone, and examples. Understand what level of detail to provide and how to structure comparisons that help developers make decisions."
-                          }
-                        </p>
-                      </div>
-                    </div>
+                    {template.whyUseTemplate && (
+                      <ul className="space-y-4 text-[#cbd5e1] quicksand-regular">
+                        {template.whyUseTemplate.map((reason, idx) => (
+                          <li key={idx} className="flex items-start gap-3">
+                            <span className="text-[#6366f1] mt-1">•</span>
+                            <span className="text-base leading-relaxed">{reason}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
 
                   {/* How to Use Section */}
                   <div id="how-to-use" className="mb-10">
                     <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
-                      {template.slug === "developer-content-and-guides-outline" ? "How to Use This Developer Content Outline Template" : "How to Use This Developer Content Writing Template"}
+                      How to Use This Developer Guide & Content Template
                     </h2>
-                    <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
-                      {template.slug === "developer-content-and-guides-outline" ?
-                        "Using this outline template is straightforward. Follow these steps to plan your developer content:" :
-                        "This template provides complete content examples you can adapt. Here's how to make the most of it:"
-                      }
-                    </p>
                     <div className="space-y-5">
                       {template.howToUse && template.howToUse.map((step, idx) => (
                         <div key={idx} className="flex gap-4">
@@ -371,78 +405,6 @@ const TemplateDetailPage = ({ params }) => {
                         </div>
                       </div>
                     )}
-
-                    {/* Data Table */}
-                    <div className="mb-12">
-                  <div className="overflow-x-auto bg-[#1e293b] border border-[#334155] rounded-xl">
-                    <table className="w-full">
-                      <thead className="bg-[#334155] border-b border-[#334155]">
-                        <tr>
-                          <th className="text-left py-3 px-4 text-sm font-medium text-white quicksand-medium">Page</th>
-                          <th className="text-right py-3 px-4 text-sm font-medium text-white quicksand-medium">Q1 Views</th>
-                          <th className="text-right py-3 px-4 text-sm font-medium text-white quicksand-medium">Q2 Views</th>
-                          <th className="text-right py-3 px-4 text-sm font-medium text-white quicksand-medium">Q3 Views</th>
-                          <th className="text-right py-3 px-4 text-sm font-medium text-white quicksand-medium">Q1 Clicks</th>
-                          <th className="text-right py-3 px-4 text-sm font-medium text-white quicksand-medium">Q2 Impressions</th>
-                          <th className="text-right py-3 px-4 text-sm font-medium text-white quicksand-medium">Q3 Change</th>
-                          <th className="text-right py-3 px-4 text-sm font-medium text-white quicksand-medium">Action Required</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="border-b border-[#334155]">
-                          <td className="py-3 px-4 text-[#60a5fa] quicksand-regular text-sm">sample_page_1</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">75,417</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">14,820</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">4,658</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">35.93%</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">102,351</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">13.53%</td>
-                          <td className="text-right py-3 px-4"><span className="text-xs px-2 py-1 rounded text-green-400 bg-green-400/10">Improved Clicks</span></td>
-                        </tr>
-                        <tr className="border-b border-[#334155]">
-                          <td className="py-3 px-4 text-[#60a5fa] quicksand-regular text-sm">sample_page_2</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">8,192</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">3,843</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">5,523</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">-38.25%</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">176,935</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">8.08%</td>
-                          <td className="text-right py-3 px-4"><span className="text-xs px-2 py-1 rounded text-orange-400 bg-orange-400/10">Lower Clicks</span></td>
-                        </tr>
-                        <tr className="border-b border-[#334155]">
-                          <td className="py-3 px-4 text-[#60a5fa] quicksand-regular text-sm">sample_page_3</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">4,340</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">4,135</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">823</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">-25.32%</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">58,148</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">2.77%</td>
-                          <td className="text-right py-3 px-4"><span className="text-xs px-2 py-1 rounded text-orange-400 bg-orange-400/10">Lower Clicks</span></td>
-                        </tr>
-                        <tr className="border-b border-[#334155]">
-                          <td className="py-3 px-4 text-[#60a5fa] quicksand-regular text-sm">sample_page_4</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">1,004</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">937</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">47</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">-75%</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">38,182</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">8.248</td>
-                          <td className="text-right py-3 px-4"><span className="text-xs px-2 py-1 rounded text-red-400 bg-red-400/10">-30.81%</span></td>
-                        </tr>
-                        <tr>
-                          <td className="py-3 px-4 text-[#60a5fa] quicksand-regular text-sm">sample_page_5</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">857</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">838</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">203</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">-28.8%</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">27,098</td>
-                          <td className="text-right py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">10.863</td>
-                          <td className="text-right py-3 px-4"><span className="text-xs px-2 py-1 rounded text-green-400 bg-green-400/10">2.747%</span></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
 
                 {/* Template Outline - Plain text format */}
                 {template.templateOutline && template.templateOutline.map((item, index) => (
@@ -670,6 +632,9 @@ const TemplateDetailPage = ({ params }) => {
             </Link>
           </div>
         </motion.div>
+
+        {/* Sample Template Preview Carousel */}
+        <TemplateCarousel />
 
         {/* Related Templates */}
         <motion.div
