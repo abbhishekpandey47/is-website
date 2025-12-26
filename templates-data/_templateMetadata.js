@@ -8,7 +8,7 @@ const templateMetadata = [
         shortDescription: "Perfect for educational blog posts, tutorials, and technical guides",
         thumbnailImage: "/template-thumbnails/informational.png",
         bannerImage: "/template-banners/informational.png",
-        videoEmbedUrl: "https://www.loom.com/embed/YOUR_LOOM_VIDEO_ID_1", // Replace with actual video
+        videoEmbedUrl: "https://www.youtube.com/embed/ZK-rNEhJIDs",
         publishedOn: "2024-12-19",
         author: "Infrasity Team",
         authorImage: "/svgPatterns/profile.svg",
@@ -99,7 +99,7 @@ const templateMetadata = [
         shortDescription: "Engage developers with authentic, technical content that builds trust",
         thumbnailImage: "/template-thumbnails/developer-marketing.png",
         bannerImage: "/template-banners/developer-marketing.png",
-        videoEmbedUrl: "https://www.loom.com/embed/YOUR_LOOM_VIDEO_ID_2", // Replace with actual video
+        videoEmbedUrl: "https://www.youtube.com/embed/ZK-rNEhJIDs",
         publishedOn: "2024-12-19",
         author: "Infrasity Team",
         authorImage: "/svgPatterns/profile.svg",
@@ -193,7 +193,7 @@ const templateMetadata = [
         shortDescription: "Create user-friendly documentation that drives product adoption",
         thumbnailImage: "/template-thumbnails/product-documentation.png",
         bannerImage: "/template-banners/product-documentation.png",
-        videoEmbedUrl: "https://www.loom.com/embed/YOUR_LOOM_VIDEO_ID_3", // Replace with actual video
+        videoEmbedUrl: "https://www.youtube.com/embed/ZK-rNEhJIDs",
         publishedOn: "2024-12-19",
         author: "Infrasity Team",
         authorImage: "/svgPatterns/profile.svg",
@@ -297,7 +297,7 @@ const templateMetadata = [
         shortDescription: "Build and nurture developer communities through engaging content",
         thumbnailImage: "/template-thumbnails/community-engagement.png",
         bannerImage: "/template-banners/community-engagement.png",
-        videoEmbedUrl: "https://www.loom.com/embed/YOUR_LOOM_VIDEO_ID_4", // Replace with actual video
+        videoEmbedUrl: "https://www.youtube.com/embed/ZK-rNEhJIDs",
         publishedOn: "2024-12-19",
         author: "Infrasity Team",
         authorImage: "/svgPatterns/profile.svg",
@@ -400,7 +400,7 @@ const templateMetadata = [
         shortDescription: "Structure developer content that educates and converts technical audiences",
         thumbnailImage: "/template-thumbnails/developer-outline.png",
         bannerImage: "/template-banners/developer-outline.png",
-        videoEmbedUrl: "https://www.loom.com/embed/YOUR_LOOM_VIDEO_ID_5",
+        videoEmbedUrl: "https://www.youtube.com/embed/ZK-rNEhJIDs",
         publishedOn: "2024-12-19",
         author: "Infrasity Team",
         authorImage: "/svgPatterns/profile.svg",
@@ -496,7 +496,7 @@ const templateMetadata = [
         shortDescription: "Write developer content that engages, educates, and converts",
         thumbnailImage: "/template-thumbnails/developer-content.png",
         bannerImage: "/template-banners/developer-content.png",
-        videoEmbedUrl: "https://www.loom.com/embed/YOUR_LOOM_VIDEO_ID_6",
+        videoEmbedUrl: "https://www.youtube.com/embed/ZK-rNEhJIDs",
         publishedOn: "2024-12-19",
         author: "Infrasity Team",
         authorImage: "/svgPatterns/profile.svg",
