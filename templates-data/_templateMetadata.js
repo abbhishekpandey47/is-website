@@ -636,6 +636,20 @@ const templateMetadata = [
         author: "Infrasity Team",
         authorImage: "/svgPatterns/profile.svg",
         layoutType: "developer-outline",
+        sampleContentImages: [
+            {
+                src: "/template-thumbnails/sample-content-1.png",
+                alt: "Sample content preview hero"
+            },
+            {
+                src: "/template-thumbnails/sample-content-2.png",
+                alt: "Sample content TL;DR section"
+            },
+            {
+                src: "/template-thumbnails/sample-content-3.png",
+                alt: "Sample content conclusion and decision tree"
+            }
+        ],
         
         useCase: "Developer guides, tool comparisons, technical tutorials, API documentation, educational blog posts",
         targetAudience: "Engineering Teams, Technical Writers, DevRel Professionals, Engineering Managers, Documentation Specialists",
@@ -645,177 +659,143 @@ const templateMetadata = [
         
         educationalContent: {
             whatIs: {
-                title: "What Is Developer Content Writing",
+                title: "What Is a Content Writing Template",
                 paragraphs: [
-                    "Developer content writing translates technical concepts into clear, practical documentation that developers can follow and implement immediately.",
-                    "It blends credible engineering detail with storytelling, so readers understand the 'why', see the 'how', and trust the recommended approach."
+                    "A content writing template is a practical framework for writing the actual content of a developer-facing article or guide.",
+                    "Once an outline is approved, the writing template turns that structure into clear explanations, runnable examples, validation steps, and actionable guidance.",
+                    "It removes guesswork about depth and tone so every guide is predictable and easy to ship."
                 ],
-                highlight: "principles: clarity -> accuracy -> verification -> next steps",
-                subtext: "High-performing guides share these traits:",
+                highlight: "Keeps every guide: easy to read → technically accurate → outcome-driven → consistent across teams",
                 bullets: [
-                    "Clear and actionable: readers can repeat the workflow without guessing",
-                    "Technically accurate: code compiles, commands work, examples are tested",
-                    "Contextual: explains decisions, trade-offs, and expected outcomes",
-                    "Optimized: structured for both human readers and search engines"
+                    "Easy to read with scannable structure",
+                    "Technically accurate with tested code",
+                    "Outcome-driven so readers know what they achieve",
+                    "Consistent across teams and authors"
                 ],
-                audienceLabel: "Who relies on this",
+                audienceLabel: "Target ICPs",
                 audience: [
-                    "Engineering teams",
-                    "Technical writers",
-                    "DevRel practitioners",
-                    "Product marketing engineers",
-                    "Solutions architects",
-                    "Documentation specialists"
+                    "Developers",
+                    "Technical Writers",
+                    "DevRel teams",
+                    "API Platform teams",
+                    "Infrastructure Engineers",
+                    "SaaS Product teams",
+                    "Documentation & Onboarding owners"
                 ]
             },
             whyUse: {
-                title: "Why Use a Developer Content Writing Template",
-                intro: "When every piece is unique, structure is the only way to ship on time without sacrificing depth. This template keeps writers, reviewers, and SMEs aligned.",
-                cards: [
-                    {
-                        title: "Faster writing",
-                        description: "Eliminates blank-page syndrome by providing section prompts, keyword placement, and review checklists."
-                    },
-                    {
-                        title: "Quality control",
-                        description: "Ensures every guide includes context, runnable code, expected output, and troubleshooting notes."
-                    },
-                    {
-                        title: "SEO alignment",
-                        description: "Maps primary and secondary keywords to headings and summaries without awkward stuffing."
-                    },
-                    {
-                        title: "Consistency",
-                        description: "Keeps tone, depth, and formatting uniform across multiple authors and publication channels."
-                    },
-                    {
-                        title: "Review speed",
-                        description: "SMEs can focus on accuracy because acceptance criteria are embedded in the outline."
-                    }
+                title: "Why Use a Content Writing Template After the Outline",
+                intro: "An outline defines what to cover. A content writing template defines how to explain it so depth, clarity, and validation stay consistent.",
+                bullets: [
+                    "Prevents inconsistent depth across sections",
+                    "Ensures validation steps and tested examples are present",
+                    "Standardizes tone and level of detail across authors",
+                    "Speeds reviews with clear acceptance criteria",
+                    "Improves onboarding and adoption with clearer guidance"
                 ],
-                audienceLabel: "Teams that benefit",
+                audienceLabel: "Who benefits most",
                 audience: [
-                    "Dev content teams",
-                    "Developer marketing",
-                    "API product squads",
-                    "Platform enablement",
-                    "Solution consulting groups"
+                    "DevRel leaders",
+                    "Documentation owners",
+                    "Engineering onboarding teams",
+                    "API product teams",
+                    "Developer education leads"
                 ]
             },
             templateOverview: {
-                title: "What Is the Developer Content Writing Template",
-                description: "A modular system that takes you from keyword strategy to a publish-ready tutorial, comparison, or integration guide.",
+                title: "What Is a Developer Content & Guide Writing Template",
+                description: "A task-first writing framework that guides how to write each section so developers can follow, validate, recover from errors, and know next steps.",
                 sections: [
-                    {
-                        title: "Keyword & intent map",
-                        description: "Choose one primary keyword and supporting questions, confirm SERP intent, and identify gaps to fill."
-                    },
-                    {
-                        title: "Narrative outline",
-                        description: "Translate the outline into H2/H3 prompts with required artifacts: code, commands, screenshots, validation." 
-                    },
-                    {
-                        title: "Code & evidence layer",
-                        description: "Capture runnable snippets, expected output, benchmarks, or comparison tables that prove each claim."
-                    },
-                    {
-                        title: "Optimization checklist",
-                        description: "Meta description, internal links, alt text, scannable paragraphs, and CTA framing."
-                    },
-                    {
-                        title: "Publication workflow",
-                        description: "QA steps, peer review, and go-live checklists so the content lands consistently across docs, blog, and community."
-                    }
+                    { title: "Context first", description: "Explain what the developer is doing and why it matters." },
+                    { title: "Actionable steps", description: "Show the exact command, API call, or code snippet." },
+                    { title: "Validation", description: "Show expected output so readers know it worked." },
+                    { title: "Error recovery", description: "Call out gotchas and how to fix them." },
+                    { title: "Next steps", description: "Tell readers what to do after completing the guide." }
                 ],
-                audienceLabel: "Who uses this framework",
+                audienceLabel: "Designed for",
                 audience: [
-                    "Editorial leads",
-                    "Developer educators",
-                    "Lifecycle marketing teams",
-                    "Open-source maintainers"
+                    "API teams",
+                    "SDK maintainers",
+                    "Platform engineers",
+                    "Solution architects",
+                    "Developer onboarding leads"
                 ]
             },
             howToUse: {
-                title: "How to Use This Writing Template",
-                intro: "Follow these steps end-to-end or plug into your existing editorial workflow.",
+                title: "How to Use the Developer Content & Guide Writing Template",
+                intro: "Use this template after your outline is finalized to move from structure to publishable content.",
                 steps: [
                     {
-                        title: "Choose your keywords strategically",
-                        description: "Start with the outline topic, find a primary keyword with meaningful volume, and 3-5 secondary keywords developers actually search.",
-                        extra: "Example: Primary = API documentation tools; secondary = automatic API docs, OpenAPI documentation, SDK generation tools."
+                        title: "Write the introduction (context + outcome)",
+                        description: "State the problem, why it matters in real workflows, and what the reader will achieve. Avoid marketing language—write like you are unblocking a peer."
                     },
                     {
-                        title: "Understand search intent",
-                        description: "Review the top results, note format (tutorial, comparison, reference), and document gaps you will fill."
+                        title: "Add a clear TL;DR",
+                        description: "Summarize outcome, key steps, required tools, audience level, and expected result in 4–6 bullets so experienced readers can scan fast."
                     },
                     {
-                        title: "Write the intro",
-                        description: "Hook readers with the problem, promise an outcome, and state why it matters in 5 sentences or less while using the primary keyword naturally."
+                        title: "Explain prerequisites clearly",
+                        description: "List required tools, versions, accounts/permissions, OS assumptions, and any sample repos or configs. Call out optional or environment-specific items explicitly."
                     },
                     {
-                        title: "Develop each section with depth",
-                        description: "Expand H2s with context, code, expected output, and transitions every 200-300 words so readers can scan or dive deep."
+                        title: "Write each section with a consistent pattern",
+                        description: "Goal → Action (command/API/code) → Result (expected output) → Validate success → Gotchas. Repeat per section so depth stays consistent."
                     },
                     {
-                        title: "Ship tested code",
-                        description: "Only include runnable snippets with language tags, version notes, and comments that explain non-obvious lines."
+                        title: "Use code and examples correctly",
+                        description: "Include only tested, runnable code with language tags, version notes, realistic examples, and before/after where helpful. Avoid placeholders."
                     },
                     {
-                        title: "Add comparison or decision tables",
-                        description: "When multiple approaches exist, summarize differences using simple matrices with recommendations per scenario."
+                        title: "Add troubleshooting and alternatives",
+                        description: "Anticipate stuck points. Use Error → Cause → Fix. Include 3–5 common issues and brief trade-offs between approaches."
                     },
                     {
-                        title: "Optimize without stuffing",
-                        description: "Map keywords to headings, keep paragraphs short, add alt text, and weave synonyms so the piece reads naturally."
+                        title: "Conclude with next steps",
+                        description: "Tell readers what to do next, how this fits production, and where to learn more (deploy, secure, scale, automate)."
                     },
                     {
-                        title: "Write the conclusion and CTA",
-                        description: "Reinforce the main takeaway, suggest next steps, and point readers to related guides or community support."
-                    },
-                    {
-                        title: "Review, test, and refine",
-                        description: "Run everything in a clean environment, validate links, read aloud for flow, and get a peer or SME review before publishing."
+                        title: "Final writing checklist",
+                        description: "Code runs; outputs match; headings scan well; concise paragraphs; links work; meta ~160 chars; alt text is descriptive; no keyword stuffing."
                     }
                 ]
             }
         },
         
         // Custom educational content
-        whatIsContent: "Developer content writing is the craft of translating technical concepts into clear, practical documentation that developers can follow and apply immediately. It balances technical accuracy with readability, provides working examples, and anticipates common questions and roadblocks.",
-        
+        whatIsContent: "Developer content writing turns an approved outline into publishable, technically accurate content with runnable examples and clear validation.",
+
         whatIsContentDetailed: [
-            "Clear and actionable: readers can implement what they learn",
-            "Technically accurate: code compiles, commands work, examples are tested",
+            "Clear and actionable: readers can follow and repeat the workflow",
+            "Technically accurate: tested code, real outputs, and environment notes",
             "Contextual: explains the 'why' behind decisions, not just the 'how'",
-            "Optimized: structured for both human readers and search engines"
+            "Optimized: structured for humans, search, and AI-driven discovery"
         ],
-        
-        whatIsTemplate: "This is a writing framework that takes you from a content outline to a finished, publishable guide. It includes keyword research, section-by-section writing prompts, code example patterns, and quality checks to ensure your content meets developer expectations.",
-        
+
+        whatIsTemplate: "A writing framework that moves you from outline to completed guide with consistent depth, validated code, and clear next steps for developers.",
+
         whatIsTemplateCovers: [
-            "Keyword research and search intent analysis",
             "Writing principles for technical audiences",
-            "Section-by-section content development",
-            "Code example best practices",
-            "SEO optimization without sacrificing quality",
-            "Review checklist and publication guidelines"
+            "Section-by-section development with goals, actions, results, validation, and gotchas",
+            "Code example standards and annotation patterns",
+            "Troubleshooting and alternatives",
+            "SEO and accessibility essentials (meta, alt text, scannable headings)",
+            "Final publishing checklist"
         ],
-        
+
         whyUseTemplate: [
-            "Faster writing: clear structure eliminates blank-page syndrome",
-            "Better quality: enforces best practices for technical writing",
-            "SEO benefits: keyword integration happens naturally, not as an afterthought",
-            "Consistency: maintains voice and quality across multiple writers",
-            "Higher engagement: proven patterns that developers prefer"
+            "Prevents uneven depth across sections",
+            "Ensures validation steps and tested examples",
+            "Keeps tone and style consistent across authors",
+            "Speeds technical and editorial review",
+            "Improves onboarding and adoption outcomes"
         ],
-        
+
         keyFeatures: [
-            "Keyword selection framework with search volume analysis",
-            "Section-by-section writing guide with examples",
-            "Code snippet templates and annotation patterns",
-            "Technical accuracy checklist",
-            "SEO optimization without keyword stuffing",
-            "Pre-publication review checklist"
+            "Goal → Action → Result → Validate → Gotchas pattern per section",
+            "Tested, annotated code requirements",
+            "Troubleshooting matrix (Error → Cause → Fix)",
+            "SEO and accessibility guardrails without keyword stuffing",
+            "Concise final checklist before publishing"
         ],
         
         howToUse: [

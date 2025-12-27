@@ -9,31 +9,24 @@ import { notFound } from "next/navigation";
 import CTA from "../../../Components/CTA/CTA";
 
 // Template Carousel Component
-const TemplateCarousel = () => {
+const TemplateCarousel = ({ slides, title = "Sample Outline" }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  
-  const slides = [
-    {
-      image: "/template-samples/template-sample-1.png",
-      alt: "Template Example 1"
-    },
-    {
-      image: "/template-samples/template-sample-2.png",
-      alt: "Template Example 2"
-    },
-    {
-      image: "/template-samples/template-sample-3.png",
-      alt: "Template Example 3"
-    }
+
+  const defaultSlides = [
+    { image: "/template-samples/template-sample-1.png", alt: "Template Example 1" },
+    { image: "/template-samples/template-sample-2.png", alt: "Template Example 2" },
+    { image: "/template-samples/template-sample-3.png", alt: "Template Example 3" }
   ];
+
+  const activeSlides = Array.isArray(slides) && slides.length ? slides : defaultSlides;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      setCurrentSlide((prev) => (prev + 1) % activeSlides.length);
     }, 3500);
 
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [activeSlides.length]);
 
   return (
     <motion.div
@@ -42,11 +35,11 @@ const TemplateCarousel = () => {
       transition={{ duration: 0.6, delay: 0.3 }}
       className="mb-12"
     >
-      <h2 className="text-2xl font-bold mb-6 quicksand-bold text-center">Sample Outline</h2>
+      <h2 className="text-2xl font-bold mb-6 quicksand-bold text-center">{title}</h2>
       
       <div className="relative rounded-xl overflow-hidden max-w-2xl mx-auto shadow-2xl">
         <div className="relative w-full bg-gradient-to-br from-[#1e1b4b]/20 to-[#312e81]/20" style={{ paddingBottom: '45%' }}>
-          {slides.map((slide, index) => (
+          {activeSlides.map((slide, index) => (
             <div
               key={index}
               className={`absolute inset-0 transition-opacity duration-500 p-4 ${
@@ -54,8 +47,8 @@ const TemplateCarousel = () => {
               }`}
             >
               <Image
-                src={slide.image}
-                alt={slide.alt}
+                src={slide.src || slide.image}
+                alt={slide.alt || "Template Example"}
                 fill
                 className="object-contain p-2"
                 priority={index === 0}
@@ -66,7 +59,7 @@ const TemplateCarousel = () => {
         </div>
 
         <div className="flex justify-center gap-2 py-4 bg-gradient-to-br from-[#1e1b4b]/60 to-[#312e81]/60">
-          {slides.map((_, index) => (
+          {activeSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
@@ -256,7 +249,10 @@ const TemplateDetailPage = ({ params }) => {
 
       {/* Template Carousel */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <TemplateCarousel />
+        <TemplateCarousel
+          slides={template.sampleContentImages}
+          title={template.sampleContentImages?.length ? "Sample Content" : "Sample Outline"}
+        />
       </div>
 
       {/* Main Content */}
@@ -271,9 +267,9 @@ const TemplateDetailPage = ({ params }) => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="lg:w-56"
+              className="lg:w-56 sticky top-24 self-start"
             >
-              <div className="bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-5 shadow-lg">
+              <div className="bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-5 shadow-lg max-h-[calc(100vh-140px)] overflow-y-auto">
                 <h3 className="text-base font-bold mb-3 quicksand-bold text-white">Template Navigation</h3>
                 <nav className="space-y-1.5">
                   {/* Common educational sections for both templates */}
@@ -496,6 +492,36 @@ const TemplateDetailPage = ({ params }) => {
                                   <p className="text-[#a5b4fc] text-xs quicksand-medium mt-2">{step.extra}</p>
                                 )}
                               </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {template.sampleContentImages?.length > 0 && (
+                      <div id="sample-content" className="mb-12 scroll-mt-32">
+                        <h2 className="text-3xl font-bold mb-3 text-white quicksand-bold">Sample Content</h2>
+                        <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
+                          See real examples of how this template looks when published. Use these as visual cues for structure, color balance, and scannability.
+                        </p>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {template.sampleContentImages.map((img, idx) => (
+                            <div key={idx} className="group relative bg-gradient-to-br from-[#1e1b4b]/70 to-[#312e81]/70 border border-purple-500/30 rounded-xl overflow-hidden shadow-lg hover:border-purple-400/60 hover:shadow-purple-500/30 transition-all duration-300">
+                              <div className="relative w-full aspect-[4/3]">
+                                <Image
+                                  src={img.src}
+                                  alt={img.alt || "Sample content preview"}
+                                  fill
+                                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                                  priority={idx === 0}
+                                />
+                              </div>
+                              {img.alt && (
+                                <div className="px-4 py-3 bg-black/40 backdrop-blur-sm border-t border-purple-500/20">
+                                  <p className="text-sm text-[#cbd5e1] quicksand-regular line-clamp-2">{img.alt}</p>
+                                </div>
+                              )}
                             </div>
                           ))}
                         </div>
@@ -846,7 +872,7 @@ const TemplateDetailPage = ({ params }) => {
           <CTA 
             title={<>Need help {" "}<span className="bg-clip-text text-transparent" style={{backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"}}>implementing this template?</span></>}
             description="Our content marketing experts can help you customize and implement this template for your specific needs."
-            buttonText="Book a Free Consultation"
+            buttonText="Book a Consultation"
           />
         </motion.div>
 
