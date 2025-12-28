@@ -209,7 +209,7 @@ const TemplatesPage = () => {
                           </svg>
                         )}
                       </div>
-                      <span>Informational</span>
+                      <span>Informational <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
                     </label>
                     <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
                       selectedUseCase === "Developer Marketing"
@@ -229,7 +229,7 @@ const TemplatesPage = () => {
                           </svg>
                         )}
                       </div>
-                      <span>Developer Marketing</span>
+                      <span>Developer Marketing <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
                     </label>
                     <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
                       selectedUseCase === "Product Documentation"
@@ -249,7 +249,7 @@ const TemplatesPage = () => {
                           </svg>
                         )}
                       </div>
-                      <span>Product Documentation</span>
+                      <span>Product Documentation <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
                     </label>
                     <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
                       selectedUseCase === "Community Engagement (Reddit & GitHub)"
@@ -269,7 +269,7 @@ const TemplatesPage = () => {
                           </svg>
                         )}
                       </div>
-                      <span>Community Engagement (Reddit & GitHub)</span>
+                      <span>Community Engagement (Reddit & GitHub) <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
                     </label>
                     <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
                       selectedUseCase === "Developer Content & Guides"
@@ -309,7 +309,7 @@ const TemplatesPage = () => {
                           </svg>
                         )}
                       </div>
-                      <span>DevRel & Content Distribution</span>
+                      <span>DevRel & Content Distribution <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
                     </label>
                     <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
                       selectedUseCase === "Content Ops & Performance Reporting"
@@ -329,7 +329,7 @@ const TemplatesPage = () => {
                           </svg>
                         )}
                       </div>
-                      <span>Content Ops & Performance Reporting</span>
+                      <span>Content Ops & Performance Reporting <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
                     </label>
                     <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
                       selectedUseCase === "API Docs & SDK Docs"
@@ -349,7 +349,7 @@ const TemplatesPage = () => {
                           </svg>
                         )}
                       </div>
-                      <span>API Docs & SDK Docs</span>
+                      <span>API Docs & SDK Docs <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
                     </label>
                   </div>
                 </div>
