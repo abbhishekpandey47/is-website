@@ -191,86 +191,30 @@ const TemplatesPage = () => {
                       </div>
                       <span>All Templates</span>
                     </label>
-                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
-                      selectedUseCase === "Informational"
-                        ? "bg-purple-500/20 text-purple-200"
-                        : "text-gray-300 hover:text-white hover:bg-purple-500/10"
-                    }`}>
+                    <div className="w-full flex items-center px-3 py-2.5 rounded-md text-sm quicksand-regular cursor-not-allowed opacity-50 text-gray-500">
                       <div className="relative flex items-center mr-3">
-                        <input
-                          type="checkbox"
-                          checked={selectedUseCase === "Informational"}
-                          onChange={() => setSelectedUseCase("Informational")}
-                          className="w-5 h-5 appearance-none border-2 border-purple-500/30 rounded bg-transparent checked:bg-purple-500 checked:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 transition-all cursor-pointer"
-                        />
-                        {selectedUseCase === "Informational" && (
-                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
+                        <div className="w-5 h-5 border-2 border-gray-600/30 rounded bg-transparent" />
                       </div>
-                      <span>Informational <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
-                    </label>
-                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
-                      selectedUseCase === "Developer Marketing"
-                        ? "bg-purple-500/20 text-purple-200"
-                        : "text-gray-300 hover:text-white hover:bg-purple-500/10"
-                    }`}>
+                      <span>Informational <span className="text-gray-500 text-xs">(coming soon)</span></span>
+                    </div>
+                    <div className="w-full flex items-center px-3 py-2.5 rounded-md text-sm quicksand-regular cursor-not-allowed opacity-50 text-gray-500">
                       <div className="relative flex items-center mr-3">
-                        <input
-                          type="checkbox"
-                          checked={selectedUseCase === "Developer Marketing"}
-                          onChange={() => setSelectedUseCase("Developer Marketing")}
-                          className="w-5 h-5 appearance-none border-2 border-purple-500/30 rounded bg-transparent checked:bg-purple-500 checked:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 transition-all cursor-pointer"
-                        />
-                        {selectedUseCase === "Developer Marketing" && (
-                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
+                        <div className="w-5 h-5 border-2 border-gray-600/30 rounded bg-transparent" />
                       </div>
-                      <span>Developer Marketing <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
-                    </label>
-                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
-                      selectedUseCase === "Product Documentation"
-                        ? "bg-purple-500/20 text-purple-200"
-                        : "text-gray-300 hover:text-white hover:bg-purple-500/10"
-                    }`}>
+                      <span>Developer Marketing <span className="text-gray-500 text-xs">(coming soon)</span></span>
+                    </div>
+                    <div className="w-full flex items-center px-3 py-2.5 rounded-md text-sm quicksand-regular cursor-not-allowed opacity-50 text-gray-500">
                       <div className="relative flex items-center mr-3">
-                        <input
-                          type="checkbox"
-                          checked={selectedUseCase === "Product Documentation"}
-                          onChange={() => setSelectedUseCase("Product Documentation")}
-                          className="w-5 h-5 appearance-none border-2 border-purple-500/30 rounded bg-transparent checked:bg-purple-500 checked:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 transition-all cursor-pointer"
-                        />
-                        {selectedUseCase === "Product Documentation" && (
-                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
+                        <div className="w-5 h-5 border-2 border-gray-600/30 rounded bg-transparent" />
                       </div>
-                      <span>Product Documentation <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
-                    </label>
-                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
-                      selectedUseCase === "Community Engagement (Reddit & GitHub)"
-                        ? "bg-purple-500/20 text-purple-200"
-                        : "text-gray-300 hover:text-white hover:bg-purple-500/10"
-                    }`}>
+                      <span>Product Documentation <span className="text-gray-500 text-xs">(coming soon)</span></span>
+                    </div>
+                    <div className="w-full flex items-center px-3 py-2.5 rounded-md text-sm quicksand-regular cursor-not-allowed opacity-50 text-gray-500">
                       <div className="relative flex items-center mr-3">
-                        <input
-                          type="checkbox"
-                          checked={selectedUseCase === "Community Engagement (Reddit & GitHub)"}
-                          onChange={() => setSelectedUseCase("Community Engagement (Reddit & GitHub)")}
-                          className="w-5 h-5 appearance-none border-2 border-purple-500/30 rounded bg-transparent checked:bg-purple-500 checked:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 transition-all cursor-pointer"
-                        />
-                        {selectedUseCase === "Community Engagement (Reddit & GitHub)" && (
-                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
+                        <div className="w-5 h-5 border-2 border-gray-600/30 rounded bg-transparent" />
                       </div>
-                      <span>Community Engagement (Reddit & GitHub) <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
-                    </label>
+                      <span>Community Engagement (Reddit & GitHub) <span className="text-gray-500 text-xs">(coming soon)</span></span>
+                    </div>
                     <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
                       selectedUseCase === "Developer Content & Guides"
                         ? "bg-purple-500/20 text-purple-200"
@@ -291,66 +235,24 @@ const TemplatesPage = () => {
                       </div>
                       <span>Developer Content & Guides</span>
                     </label>
-                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
-                      selectedUseCase === "DevRel & Content Distribution"
-                        ? "bg-purple-500/20 text-purple-200"
-                        : "text-gray-300 hover:text-white hover:bg-purple-500/10"
-                    }`}>
+                    <div className="w-full flex items-center px-3 py-2.5 rounded-md text-sm quicksand-regular cursor-not-allowed opacity-50 text-gray-500">
                       <div className="relative flex items-center mr-3">
-                        <input
-                          type="checkbox"
-                          checked={selectedUseCase === "DevRel & Content Distribution"}
-                          onChange={() => setSelectedUseCase("DevRel & Content Distribution")}
-                          className="w-5 h-5 appearance-none border-2 border-purple-500/30 rounded bg-transparent checked:bg-purple-500 checked:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 transition-all cursor-pointer"
-                        />
-                        {selectedUseCase === "DevRel & Content Distribution" && (
-                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
+                        <div className="w-5 h-5 border-2 border-gray-600/30 rounded bg-transparent" />
                       </div>
-                      <span>DevRel & Content Distribution <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
-                    </label>
-                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
-                      selectedUseCase === "Content Ops & Performance Reporting"
-                        ? "bg-purple-500/20 text-purple-200"
-                        : "text-gray-300 hover:text-white hover:bg-purple-500/10"
-                    }`}>
+                      <span>DevRel & Content Distribution <span className="text-gray-500 text-xs">(coming soon)</span></span>
+                    </div>
+                    <div className="w-full flex items-center px-3 py-2.5 rounded-md text-sm quicksand-regular cursor-not-allowed opacity-50 text-gray-500">
                       <div className="relative flex items-center mr-3">
-                        <input
-                          type="checkbox"
-                          checked={selectedUseCase === "Content Ops & Performance Reporting"}
-                          onChange={() => setSelectedUseCase("Content Ops & Performance Reporting")}
-                          className="w-5 h-5 appearance-none border-2 border-purple-500/30 rounded bg-transparent checked:bg-purple-500 checked:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 transition-all cursor-pointer"
-                        />
-                        {selectedUseCase === "Content Ops & Performance Reporting" && (
-                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
+                        <div className="w-5 h-5 border-2 border-gray-600/30 rounded bg-transparent" />
                       </div>
-                      <span>Content Ops & Performance Reporting <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
-                    </label>
-                    <label className={`w-full flex items-center px-3 py-2.5 rounded-md text-sm transition-colors quicksand-regular cursor-pointer ${
-                      selectedUseCase === "API Docs & SDK Docs"
-                        ? "bg-purple-500/20 text-purple-200"
-                        : "text-gray-300 hover:text-white hover:bg-purple-500/10"
-                    }`}>
+                      <span>Content Ops & Performance Reporting <span className="text-gray-500 text-xs">(coming soon)</span></span>
+                    </div>
+                    <div className="w-full flex items-center px-3 py-2.5 rounded-md text-sm quicksand-regular cursor-not-allowed opacity-50 text-gray-500">
                       <div className="relative flex items-center mr-3">
-                        <input
-                          type="checkbox"
-                          checked={selectedUseCase === "API Docs & SDK Docs"}
-                          onChange={() => setSelectedUseCase("API Docs & SDK Docs")}
-                          className="w-5 h-5 appearance-none border-2 border-purple-500/30 rounded bg-transparent checked:bg-purple-500 checked:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0 transition-all cursor-pointer"
-                        />
-                        {selectedUseCase === "API Docs & SDK Docs" && (
-                          <svg className="absolute left-0 w-5 h-5 text-white pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
+                        <div className="w-5 h-5 border-2 border-gray-600/30 rounded bg-transparent" />
                       </div>
-                      <span>API Docs & SDK Docs <span className="text-purple-400/70 text-xs">(coming soon)</span></span>
-                    </label>
+                      <span>API Docs & SDK Docs <span className="text-gray-500 text-xs">(coming soon)</span></span>
+                    </div>
                   </div>
                 </div>
               </div>
