@@ -147,6 +147,59 @@ const TemplateDetailPage = ({ params }) => {
     }
   };
 
+  const renderBulletList = (items) => (
+    <ul className="space-y-2 text-[#cbd5e1] text-sm quicksand-regular mt-4">
+      {items.map((bullet, idx) => (
+        <li key={idx} className="flex items-start gap-3">
+          <span className="text-[#6366f1] mt-1">•</span>
+          <span>{bullet}</span>
+        </li>
+      ))}
+    </ul>
+  );
+
+  const renderDefinitionCards = (items) => (
+    <div className="grid md:grid-cols-2 gap-4 mt-4">
+      {items.map((item, idx) => (
+        <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-4">
+          <p className="text-xs uppercase tracking-wide text-[#a5b4fc] quicksand-semibold">{item.label}</p>
+          {item.description && (
+            <p className="text-[#cbd5e1] text-sm quicksand-regular mt-2">{item.description}</p>
+          )}
+          {item.example && (
+            <p className="text-[#a5b4fc] text-sm quicksand-regular mt-3">
+              <span className="quicksand-semibold">Example:</span> {item.example}
+            </p>
+          )}
+          {item.exampleList && (
+            <ul className="mt-3 space-y-1 text-[#94a3b8] text-sm quicksand-regular">
+              {item.exampleList.map((example, exIdx) => (
+                <li key={exIdx} className="flex items-start gap-2">
+                  <span className="text-[#6366f1] mt-1">•</span>
+                  <span>{example}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+
+  const renderLabeledItems = (items) => (
+    <ul className="space-y-3 text-[#cbd5e1] text-sm quicksand-regular mt-4">
+      {items.map((item, idx) => (
+        <li key={idx} className="flex items-start gap-3">
+          <span className="text-[#6366f1] mt-1">•</span>
+          <span>
+            <span className="font-semibold text-white quicksand-semibold">{item.label}</span>
+            {item.description && <span className="text-[#94a3b8] ml-1">{item.description}</span>}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Hero Section - Title Left, Video Right */}
@@ -273,18 +326,26 @@ const TemplateDetailPage = ({ params }) => {
                 <h3 className="text-base font-bold mb-3 quicksand-bold text-white">Template Navigation</h3>
                 <nav className="space-y-1.5">
                   {/* Common educational sections for both templates */}
-                  <a href="#what-is" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
-                    {educationalContent?.whatIs?.title || "What is Developer Content Writing?"}
-                  </a>
-                  <a href="#why-use" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
-                    {educationalContent?.whyUse?.title || "Why Use This Template?"}
-                  </a>
-                  <a href="#what-is-template" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
-                    {educationalContent?.templateOverview?.title || "What is the Template?"}
-                  </a>
-                  <a href="#how-to-use" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
-                    {educationalContent?.howToUse?.title || "How to Use This Template"}
-                  </a>
+                  {educationalContent?.whatIs && (
+                    <a href="#what-is" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                      {educationalContent.whatIs.title}
+                    </a>
+                  )}
+                  {educationalContent?.whyUse && (
+                    <a href="#why-use" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                      {educationalContent.whyUse.title}
+                    </a>
+                  )}
+                  {educationalContent?.templateOverview && (
+                    <a href="#what-is-template" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                      {educationalContent.templateOverview.title}
+                    </a>
+                  )}
+                  {educationalContent?.howToUse && (
+                    <a href="#how-to-use" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                      {educationalContent.howToUse.title}
+                    </a>
+                  )}
                   
                   {template.slug === "developer-content-and-guides-outline" && (
                     <a href="#next-steps" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
@@ -304,13 +365,15 @@ const TemplateDetailPage = ({ params }) => {
                         </a>
                       )}
                       {template.templateOutline && template.templateOutline.map((item, index) => (
-                        <a
-                          key={index}
-                          href={`#section-${index + 1}`}
-                          className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1"
-                        >
-                          {typeof item === 'object' ? item.section : item}
-                        </a>
+                        item.section && item.showInNav !== false ? (
+                          <a
+                            key={index}
+                            href={`#section-${index + 1}`}
+                            className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1"
+                          >
+                            {item.section}
+                          </a>
+                        ) : null
                       ))}
                     </>
                   )}
@@ -615,54 +678,6 @@ const TemplateDetailPage = ({ params }) => {
                 {/* Template Content - Only for outline template */}
                 {template.slug === "developer-content-and-guides-outline" ? (
                   <>
-                    {/* Next Steps Section - Only for outline template */}
-                    <div id="next-steps" className="mb-12 scroll-mt-32">
-                      <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
-                        Next Steps: Writing the Content
-                      </h2>
-                      <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
-                        Once your outline is ready, it's time to bring it to life with well-crafted content. Use our comprehensive writing template to transform your outline into engaging, technically accurate developer content.
-                      </p>
-                      
-                      {/* Developer Content Writing Template Banner */}
-                      <Link
-                        href="/templates/developer-content-and-guides-content"
-                        className="group block"
-                      >
-                        <div className="relative bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl overflow-hidden hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/30 hover:border-purple-400/60 transition-all duration-300 p-6">
-                          <div className="flex items-center gap-6">
-                            <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-lg shadow-lg border border-purple-500/20">
-                              <Image
-                                src="/template-thumbnails/developer-content.png"
-                                alt="Developer Content Writing Template"
-                                width={96}
-                                height={96}
-                                className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
-                              />
-                            </div>
-                            <div className="flex-1">
-                              <div className="inline-flex items-center justify-center bg-purple-600/20 border border-purple-500/30 rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
-                                <p className="text-purple-300">Developer Content & Guides</p>
-                              </div>
-                              <h3 className="text-xl font-bold quicksand-bold text-white group-hover:text-purple-300 transition-colors mb-2">
-                                Developer Content Writing Template
-                              </h3>
-                              <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
-                                Complete writing guidelines, examples, and best practices for creating developer guides that engage and convert.
-                              </p>
-                            </div>
-                            <div className="flex-shrink-0">
-                              <div className="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center group-hover:bg-purple-600/30 transition-colors">
-                                <svg className="w-5 h-5 text-purple-300 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-
                     {/* Metrics Table - Only for outline template */}
                     {template.metricsTable && (
                       <div id="metrics-table" className="mb-12 scroll-mt-32">
@@ -686,28 +701,123 @@ const TemplateDetailPage = ({ params }) => {
                       </div>
                     )}
 
-                {/* Template Outline - Plain text format */}
-                {template.templateOutline && template.templateOutline.map((item, index) => (
-                  <div key={index} id={`section-${index + 1}`} className="mb-10 scroll-mt-32">
-                    <h2 className="text-2xl font-bold mb-3 text-white quicksand-bold">
-                      {item.section || item}
-                    </h2>
-                    {typeof item === 'object' && (
-                      <>
-                        <p className="text-[#cbd5e1] text-base leading-relaxed mb-3 quicksand-regular">
-                          {item.description}
-                        </p>
-                        {item.example && (
-                          <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-light pl-4 border-l-2 border-[#6366f1]">
-                            <span className="text-[#a5b4fc] quicksand-semibold">Example:</span> {item.example}
+                {/* Template Outline - Structured format */}
+                {template.templateOutline && template.templateOutline.map((item, index) => {
+                  const isObject = typeof item === "object";
+                  return (
+                    <div key={index} id={`section-${index + 1}`} className="mb-10 scroll-mt-32">
+                      <h2 className="text-2xl font-bold mb-4 text-white quicksand-bold">
+                        {item.section || item}
+                      </h2>
+                      {isObject && (
+                        <>
+                          {item.description && (
+                            <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular">
+                              {item.description}
+                            </p>
+                          )}
+                          {item.paragraphs && item.paragraphs.map((paragraph, paraIdx) => (
+                            <p key={paraIdx} className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mt-3">
+                              {paragraph}
+                            </p>
+                          ))}
+                          {item.definitionItems && renderDefinitionCards(item.definitionItems)}
+                          {item.labeledItems && renderLabeledItems(item.labeledItems)}
+                          {item.bulletItems && renderBulletList(item.bulletItems)}
+                          {item.note && (
+                            <p className="text-[#94a3b8] text-sm quicksand-regular mt-4">{item.note}</p>
+                          )}
+                          {item.example && (
+                            <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-light pl-4 border-l-2 border-[#6366f1] mt-4">
+                              <span className="text-[#a5b4fc] quicksand-semibold">Example:</span> {item.example}
+                            </p>
+                          )}
+                          {item.subsections && item.subsections.map((subsection, subIndex) => (
+                            <div key={subIndex} className="mt-6 pl-1">
+                              {subsection.title && (
+                                <h3 className="text-xl font-semibold text-white quicksand-semibold mb-2">
+                                  {subsection.title}
+                                </h3>
+                              )}
+                              {subsection.description && (
+                                <p className="text-[#cbd5e1] text-base quicksand-regular mb-3">
+                                  {subsection.description}
+                                </p>
+                              )}
+                              {subsection.intro && (
+                                <p className="text-[#cbd5e1] text-sm quicksand-regular mb-3">
+                                  {subsection.intro}
+                                </p>
+                              )}
+                              {subsection.paragraphs && subsection.paragraphs.map((paragraph, subParaIdx) => (
+                                <p key={subParaIdx} className="text-[#cbd5e1] text-sm quicksand-regular mb-3">
+                                  {paragraph}
+                                </p>
+                              ))}
+                              {subsection.definitionItems && renderDefinitionCards(subsection.definitionItems)}
+                              {subsection.labeledItems && renderLabeledItems(subsection.labeledItems)}
+                              {subsection.bulletItems && renderBulletList(subsection.bulletItems)}
+                              {subsection.note && (
+                                <p className="text-[#94a3b8] text-sm quicksand-regular mt-4">{subsection.note}</p>
+                              )}
+                              {subsection.closingNote && (
+                                <p className="text-[#a5b4fc] text-sm quicksand-semibold mt-4">{subsection.closingNote}</p>
+                              )}
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
+
+                {/* Next Steps Section - placed after key takeaway */}
+                <div id="next-steps" className="scroll-mt-32">
+                  <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                    Next Steps: Writing the Content
+                  </h2>
+                  <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
+                    Once your outline is ready, it's time to bring it to life with well-crafted content. Use our comprehensive writing template to transform your outline into engaging, technically accurate developer content.
+                  </p>
+                  <Link
+                    href="/templates/developer-content-and-guides-content"
+                    className="group block"
+                  >
+                    <div className="relative bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl overflow-hidden hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/30 hover:border-purple-400/60 transition-all duration-300 p-6">
+                      <div className="flex items-center gap-6">
+                        <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-lg shadow-lg border border-purple-500/20">
+                          <Image
+                            src="/template-thumbnails/developer-content.png"
+                            alt="Developer Content Writing Template"
+                            width={96}
+                            height={96}
+                            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <div className="inline-flex items-center justify-center bg-purple-600/20 border border-purple-500/30 rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
+                            <p className="text-purple-300">Developer Content & Guides</p>
+                          </div>
+                          <h3 className="text-xl font-bold quicksand-bold text-white group-hover:text-purple-300 transition-colors mb-2">
+                            Developer Content Writing Template
+                          </h3>
+                          <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
+                            Complete writing guidelines, examples, and best practices for creating developer guides that engage and convert.
                           </p>
-                        )}
-                      </>
-                    )}
-                  </div>
-                ))}
-                  </>
-                ) : null}
+                        </div>
+                        <div className="flex-shrink-0">
+                          <div className="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center group-hover:bg-purple-600/30 transition-colors">
+                            <svg className="w-5 h-5 text-purple-300 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              </>
+            ) : null}
               </div>
             </motion.div>
           </div>
@@ -859,21 +969,56 @@ const TemplateDetailPage = ({ params }) => {
           </motion.div>
         )}
 
-        {/* Page-to-footer blend */}
-        <div className="mt-16 h-32 -mx-4 sm:-mx-6 lg:-mx-8 bg-gradient-to-b from-transparent via-[#0f0728]/60 to-[#050114] blur-[50px] rounded-t-3xl opacity-80 pointer-events-none" aria-hidden="true" />
-
         {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16"
+          className="mt-12"
         >
-          <CTA 
-            title={<>Need help {" "}<span className="bg-clip-text text-transparent" style={{backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"}}>implementing this template?</span></>}
-            description="Our content marketing experts can help you customize and implement this template for your specific needs."
-            buttonText="Book a Consultation"
-          />
+          <section className="max-w-6xl mx-auto px-4 md:px-0">
+            <div className="mx-0 sm:mx-6 md:mx-16 bg-gradient-to-r from-blue-800 to-purple-800 relative flex flex-col items-center rounded-xl p-8 sm:p-12 md:p-16 text-center overflow-hidden bg-cover bg-no-repeat">
+              {/* Title */}
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white max-w-xl z-10 quicksand-bold">
+                Need help <span className="text-white">implementing this template?</span>
+              </h2>
+              
+              {/* Description */}
+              <p className="text-base text-gray-100 max-w-2xl mt-4 z-10 quicksand-regular">
+                Our content marketing experts can help you customize and implement this template for your specific needs.
+              </p>
+
+              {/* CTA Button */}
+              <Link
+                href="/contact"
+                className="mt-6 md:mt-8 inline-flex items-center text-base md:text-lg rounded-full bg-black px-8 sm:px-10 md:px-14 py-3 sm:py-4 md:py-5 text-white font-medium hover:bg-gray-900 transition z-10 quicksand-semibold"
+              >
+                Book a Consultation
+              </Link>
+
+              {/* Background Decorative Image 1 */}
+              <div className="absolute -bottom-5 sm:-bottom-8 md:-bottom-10 left-0 sm:left-1">
+                <Image
+                  src="https://cdn.prod.website-files.com/65030bfd09557ada51fe30e2/6509ed92ac966ebcf5de4dea_Mask%20group%20(13).webp"
+                  alt="decor"
+                  width={180}
+                  height={180}
+                  className="w-20 sm:w-32 md:w-40 h-auto opacity-50 sm:opacity-75 md:opacity-100"
+                />
+              </div>
+
+              {/* Background Decorative Image 2 */}
+              <div className="absolute -top-5 sm:-top-8 md:-top-10 right-0">
+                <Image
+                  src="https://cdn.prod.website-files.com/65030bfd09557ada51fe30e2/6509ed92c684d5f4210dbe47_Mask%20group%20(14).webp"
+                  alt="decor"
+                  width={180}
+                  height={180}
+                  className="w-20 sm:w-32 md:w-40 h-auto opacity-50 sm:opacity-75 md:opacity-100"
+                />
+              </div>
+            </div>
+          </section>
         </motion.div>
 
         {/* Related Templates */}

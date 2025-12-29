@@ -396,8 +396,8 @@ const templateMetadata = [
         slug: "developer-content-and-guides-outline",
         title: "Developer Content Outline Template",
         category: "Developer Content & Guides",
-        description: "Create comprehensive developer content outlines for technical comparisons, tool reviews, and educational guides. This template helps you structure in-depth content that drives engagement and helps technical audiences make informed decisions.",
-        shortDescription: "Structure developer content that educates and converts technical audiences",
+        description: "Plan developer content and guides with clarity before drafting. This template captures the brief, audience, intent, and structure so technical pieces stay aligned with how developers evaluate tools and how they search.",
+        shortDescription: "Plan developer content and guides before you write",
         thumbnailImage: "/template-thumbnails/developer-outline.png",
         bannerImage: "/template-banners/developer-outline.png",
         videoEmbedUrl: "https://www.youtube.com/embed/ZK-rNEhJIDs",
@@ -406,219 +406,268 @@ const templateMetadata = [
         authorImage: "/svgPatterns/profile.svg",
         layoutType: "developer-outline",
         
-        useCase: "Developer comparisons, tool evaluation guides, technical resource articles, API documentation planning",
-        targetAudience: "Technical Writers, Developer Relations, Content Marketers, Documentation Teams",
+        useCase: "Developer comparisons, platform overviews, setup guides, SDK/API tutorials, infrastructure walkthroughs, and evaluation pieces",
+        targetAudience: "Platform Engineers, DevOps Leaders, Developer Relations, Technical Writers, Documentation Teams",
         downloadLink: "/templates-pdf/best-ai-tools-for-documentation.pdf",
         
-        overview: "This template helps you plan and write developer-facing guides that are technically accurate, easy to follow, and useful in real-world projects. It's built for engineers, devrel, and technical writers who need consistent structure, clear examples, and a workflow that scales across multiple topics.",
+        overview: "A thinking framework used before writing developer-facing content. It defines what is being written, who it is for, why it exists, what it should achieve, and how deep it should go—so drafts ship faster with fewer rewrites and more trust from developer audiences.",
         
         educationalContent: {
             whatIs: {
-                title: "What Is an Outline",
+                title: "What is Developer Content Outline",
                 paragraphs: [
-                    "An outline is the blueprint for a developer-facing article or guide. It defines the goal, target audience, structure (H1/H2/H3), examples, and validation steps before writing begins.",
-                    "Instead of starting with a blank page, an outline breaks a large topic into small, verifiable steps so you always know what comes next."
+                    "A planning framework used before writing developer-facing content. It defines intent, audience, and structure upfront so technical content is intentional, structured, and aligned with how developers evaluate products and how search engines surface technical information.",
+                    "It applies across DevTools, infrastructure platforms, APIs, SDKs, and AI systems. It is not a writing template and not a checklist—it is a thinking framework to plan developer content before drafting begins."
                 ],
-                highlight: "problem -> approach -> implementation -> validation -> alternatives -> next steps",
-                subtext: "This keeps every guide focused and verifiable:",
+                highlight: "Plan first: what is being written, who it is for, why it exists, what it should achieve, and how deep it should go.",
+                subtext: "Where this structure applies",
                 bullets: [
-                    "Written for the right technical audience",
-                    "Aligned with developer and search intent",
-                    "Practical, testable, and outcome-driven instead of abstract"
-                ],
-                audienceLabel: "Who this is for",
-                audience: [
-                    "Developers",
-                    "Technical Writers",
-                    "DevRel teams",
-                    "API Platform teams",
-                    "Infrastructure Engineers",
-                    "SaaS Product teams",
-                    "Documentation & Onboarding owners"
+                    "Tool or platform overviews",
+                    "How-to or setup guides",
+                    "SDK or API tutorials",
+                    "Infrastructure walkthroughs",
+                    "Comparison and evaluation articles"
                 ]
             },
             whyUse: {
-                title: "Why Use an Outline Template",
-                intro: "Writing developer content without structure leads to inconsistent depth, missing examples, or unclear outcomes. An outline template fixes that upfront.",
+                title: "Why developer content needs a brief before writing",
+                intro: "Without a brief, developer content drifts. Writers make assumptions about audience, intent, or depth, and reviewers catch structural issues after drafting has begun. A brief answers what is being written, who it is for, why it exists, what it should achieve, and how deep it should go, preventing vague positioning and unnecessary rewrites.",
                 cards: [
-                    {
-                        title: "Faster writing",
-                        description: "Removes blank-page friction. Writers start with a proven structure instead of deciding what to cover next."
-                    },
-                    {
-                        title: "Consistent quality",
-                        description: "Keeps tone, depth, and formatting uniform across authors, teams, and topics."
-                    },
-                    {
-                        title: "Higher technical accuracy",
-                        description: "Prompts inclusion of runnable code, CLI commands, expected outputs, and validation steps."
-                    },
-                    {
-                        title: "Better discoverability",
-                        description: "Naturally places primary and secondary keywords in titles, headings, and intros without stuffing."
-                    },
-                    {
-                        title: "Easier collaboration",
-                        description: "Gives editors and engineers clear section prompts and acceptance criteria so reviews move faster."
-                    }
-                ],
-                audienceLabel: "Who benefits most",
-                audience: [
-                    "DevRel leaders",
-                    "Documentation owners",
-                    "Engineering onboarding teams",
-                    "API product teams",
-                    "Developer education leads"
+                    { title: "Prevent drift", description: "Lock audience, intent, scope, and depth before drafting so the piece stays on track." },
+                    { title: "Reduce rewrites", description: "Resolve structural questions upfront instead of rewriting after reviews." },
+                    { title: "Clarify purpose", description: "Align on the primary query to rank for and the related questions to answer." },
+                    { title: "Signal quality", description: "For developer audiences, clear intent and structure show up immediately in the perceived quality of the content." }
                 ]
             },
             templateOverview: {
-                title: "What Is a Developer Content & Guide Outline",
-                description: "A developer content and guide outline is a task-first map for technical documentation. Every section helps the reader achieve a specific, concrete outcome while understanding trade-offs and constraints.",
+                title: "What the Developer Content Outline contains",
+                description: "Two components work together to remove ambiguity before writing starts: the brief defines what is being written and why; the suggested outline defines how the content should be structured.",
                 sections: [
                     {
-                        title: "Problem framing",
-                        description: "Clarify what the developer is trying to do and why it matters to the business or product."
+                        title: "The Brief (inputs)",
+                        description: "Capture the title, target audience, target intent, expected depth, focus keyword, and supporting keywords so everyone aligns on the plan."
                     },
                     {
-                        title: "Prerequisites",
-                        description: "List required tools, versions, accounts, OS notes, environment variables, and sample repositories."
-                    },
-                    {
-                        title: "Section map",
-                        description: "Define the H1 intent, then map H2/H3 sections that spell out what to explain, which code to show, and how the reader validates success."
-                    },
-                    {
-                        title: "Alternatives and troubleshooting",
-                        description: "Capture common errors, root causes, fixes, and trade-offs between approaches."
-                    },
-                    {
-                        title: "Next steps",
-                        description: "Point to production hardening, advanced workflows, and related reference material."
-                    }
-                ],
-                audienceLabel: "Who this is designed for",
-                audience: [
-                    "API teams",
-                    "SDK maintainers",
-                    "Platform engineers",
-                    "Solution architects",
-                    "Developer onboarding leads"
-                ]
-            },
-            howToUse: {
-                title: "How to Use This Outline Template",
-                intro: "Follow these steps to turn the template into a clear, high-quality developer guide.",
-                steps: [
-                    {
-                        title: "Define scope and audience level",
-                        description: "Choose one clear outcome per piece and decide whether you're writing for beginner, intermediate, or advanced readers.",
-                        extra: "Example outcome: Generate SDKs from OpenAPI and publish documentation automatically in CI."
-                    },
-                    {
-                        title: "Choose keywords and search intent",
-                        description: "Select one primary keyword and 3-6 secondary keywords mapped to sections. Review top results to confirm tutorial vs comparison intent and note gaps you can fill."
-                    },
-                    {
-                        title: "Write the TL;DR",
-                        description: "Summarize the guide in 4-6 bullets covering the outcome, key steps, who it's for, and the expected result."
-                    },
-                    {
-                        title: "Lay out the sections",
-                        description: "Use H2s for major steps and H3s for sub-steps, examples, and validation. Include commands, expected output, and gotchas per section."
-                    },
-                    {
-                        title: "Write and verify",
-                        description: "Include only tested code with language tags and version notes. Show before/after states, sample outputs, or screenshots, and call out OS differences."
-                    },
-                    {
-                        title: "Add troubleshooting and alternatives",
-                        description: "Document top issues using Error -> Cause -> Fix and highlight trade-offs for alternate approaches."
-                    },
-                    {
-                        title: "Conclude and extend",
-                        description: "Summarize key takeaways, reinforce the primary topic, and recommend what to do next (deploy, secure, scale, automate)."
-                    },
-                    {
-                        title: "Final checks",
-                        description: "Confirm code runs, links work, headings are scannable, meta description is ~160 characters, alt text is descriptive, and keywords feel natural."
+                        title: "The Suggested Outline (execution plan)",
+                        description: "Translate the brief into H1/H2/H3 structure: the primary intent, major sections, and sub-sections with examples and validation points."
                     }
                 ]
             }
         },
         
         // Custom educational content
-        whatIsContent: "A developer guide is a technical document that teaches a developer how to do something concrete: integrate a library, design an API, debug a problem, or choose between approaches. Good guides are task-oriented, opinionated when needed, and grounded in working code. They clarify assumptions, show trade-offs, and include copy-paste-ready examples.",
+        whatIsContent: "A developer content and guide outline is a planning framework—not the draft itself—that defines what will be written, who it is for, why it exists, and how it will flow before any words are drafted.",
         
         whatIsContentDetailed: [
-            "Audience-first: tailored to the developer's role and context",
-            "Task-driven: each section helps achieve a specific outcome",
-            "Verifiable: examples run; commands and code compile",
-            "Maintainable: source-linked, versioned, and easy to update"
+            "Purpose-built for developer audiences and their search behavior",
+            "Applies the same logic to overviews, tutorials, evaluations, and walkthroughs",
+            "Sets scope, intent, audience, and depth so drafts stay aligned",
+            "Turns into an H1/H2/H3 map with examples, validation, and troubleshooting"
         ],
         
-        whatIsTemplate: "It's a structured framework for planning and writing developer guides consistently. It provides section patterns, content prompts, and quality checks so the final output is clear, actionable, and technically sound.",
+        whatIsTemplate: "The outline template standardizes how teams capture the brief and translate it into a suggested structure, so developer content and guides are intentional, sequenced, and trustworthy.",
         
         whatIsTemplateCovers: [
-            "Problem framing and prerequisites",
-            "Step-by-step implementation with code",
-            "Alternatives, trade-offs, and decision points",
-            "Validation (tests, commands, expected output)",
-            "Troubleshooting and common pitfalls",
-            "Next steps and references"
+            "Brief inputs: title, audience, intent, expected depth, focus keyword, supporting keywords",
+            "Suggested outline: H1 intent, H2 sections, H3 sub-sections with examples and validation",
+            "Flow design: context → setup → implementation → validation → alternatives → next steps",
+            "Signals for trust: explicit assumptions, examples, validation steps, and troubleshooting",
+            "Alignment on discovery: mapping keywords to sections without stuffing"
         ],
         
         whyUseTemplate: [
-            "Consistency: keeps guides uniform across authors and teams",
-            "Speed: reduces ramp-up time; you focus on substance, not structure",
-            "Quality: enforces completeness (prereqs, validation, edge cases)",
-            "Discoverability: improves scannability and SEO with predictable headings",
-            "Maintainability: makes updates straightforward when APIs or tooling change"
+            "Stops drift by forcing clarity before drafting",
+            "Avoids late structural rewrites with agreed scope and depth",
+            "Aligns engineers, writers, and reviewers on audience and outcomes",
+            "Keeps sections predictable with built-in examples and validation",
+            "Combines developer needs and SEO signals in one plan"
         ],
         
         keyFeatures: [
-            "Step-by-step workflow from planning to publishing",
-            "Real-world examples and use cases",
-            "Quality checklists for each phase",
-            "Best practices from experienced technical writers",
-            "Troubleshooting guides and common pitfalls"
+            "Brief-first workflow that captures intent, audience, and discovery terms",
+            "Topic-agnostic outline pattern for DevTools, infrastructure, APIs, SDKs, and AI systems",
+            "Section sequencing that ensures flow, coverage, validation, and troubleshooting",
+            "Guidance on where to place keywords without stuffing",
+            "Trust signals: explicit assumptions, examples, expected outputs, and next steps"
         ],
         
         howToUse: [
             {
-                step: "Scope the guide",
-                description: "Define the task: one clear outcome per guide (e.g., 'Add OAuth2 to a Next.js API'). Set the audience level: beginner, intermediate, advanced. Avoid broad topics—focus on specific, achievable tasks. Time estimate: 15-20 minutes."
+                step: "Draft the brief",
+                description: "Fill in title, audience, intent, expected depth, focus keyword, and supporting keywords. Be specific about who the content serves and what it must achieve."
             },
             {
-                step: "Capture prerequisites",
-                description: "List everything needed before starting: tools (Node.js 18+, Docker), versions, accounts (GitHub, AWS), environment variables, sample repo links, test data. Include OS-specific notes. Clarify assumptions about prior knowledge. Time estimate: 10 minutes."
+                step: "Define success and constraints",
+                description: "State the core query to rank for, related questions to cover, and the technical depth required. Decide what is out of scope to prevent drift."
             },
             {
-                step: "Outline the flow",
-                description: "Structure as: Problem → Approach → Implementation → Validation → Alternatives → Troubleshooting → Next Steps. Keep each step small and testable. Each section should produce a verifiable result. Use headings that answer 'how to' questions. Time estimate: 20-30 minutes."
+                step: "Shape the outline",
+                description: "Convert the brief into H1/H2/H3 sections: primary intent, major sections, sub-sections with examples, validation, and troubleshooting."
             },
             {
-                step: "Write the implementation",
-                description: "Show commands and code with expected results. Use fenced code blocks with language tags. Explain why, not just what. Link to official docs for deep dives. Add guardrails: performance notes ('This approach works for <10k users'), security considerations ('Never commit API keys'), compatibility details ('Requires Python 3.9+'). Time estimate: 1-2 hours."
+                step: "Stress-test the flow",
+                description: "Check for missing context, uneven depth, and misplaced examples. Ensure validation steps follow implementation and troubleshooting captures likely failure modes."
             },
             {
-                step: "Add validation steps",
-                description: "Provide a quick 'it works' check after each major step: run a script, make a curl request, execute a unit test, show expected console output. Include commands developers can copy/paste. Example: 'Run `npm test` — you should see 5 passing tests.' Time estimate: 20-30 minutes."
+                step: "Map keywords to sections",
+                description: "Place the focus keyword in the title, intro, and a core H2. Assign supporting keywords to relevant sections to match developer discovery patterns."
             },
             {
-                step: "Document alternatives and trade-offs",
-                description: "When multiple approaches exist, create a comparison table. Explain selection criteria: complexity (beginner-friendly vs. advanced), performance (sync vs. async), portability (cross-platform vs. OS-specific), community support (active maintenance, plugin ecosystem). Example: 'Use REST for simple CRUD, GraphQL for complex data fetching.' Time estimate: 30 minutes."
+                step: "Finalize acceptance criteria",
+                description: "Agree on the audience assumptions, required evidence (screenshots, code, outputs), and what 'done' looks like before drafting begins."
+            }
+        ],
+
+        templateOutline: [
+            {
+                section: "1) The Brief (the inputs)",
+                showInNav: true,
+                description: "The brief defines the constraints and goals of the content. It ensures that everyone involved — founders, engineers, writers — is aligned before execution starts.",
+                subsections: [
+                    {
+                        title: "The brief typically includes",
+                        definitionItems: [
+                            { label: "Title", example: "How Platform Teams Manage Developer Environments Across CI and Production" },
+                            { label: "Target audience", example: "Platform engineers, DevOps engineers, infrastructure leads" },
+                            { label: "Target intent", example: "Informational (help readers understand approaches and trade-offs)" },
+                            { label: "Expected depth (word count)", example: "~1,500–2,000 words (in-depth guide, not a short overview)" },
+                            { label: "Focus keyword", example: "platform engineering tools" },
+                            {
+                                label: "Supporting / long-tail keywords",
+                                exampleList: [
+                                    "internal developer platform examples",
+                                    "platform engineering best practices",
+                                    "developer environment management"
+                                ]
+                            }
+                        ],
+                        note: "These inputs change from topic to topic. The structure does not."
+                    },
+                    {
+                        title: "Why this part exists",
+                        intro: "Without a brief, developer content tends to drift. The brief forces clarity upfront by answering:",
+                        labeledItems: [
+                            { label: "What are we writing?", description: "(topic, scope, and angle)" },
+                            { label: "Who is it for?", description: "(specific engineering personas, not all developers)" },
+                            { label: "Why are we writing it?", description: "(education, evaluation, onboarding, comparison, etc.)" },
+                            { label: "What should it achieve?", description: "(rank for a primary query while covering related questions)" },
+                            { label: "How deep should it go?", description: "(surface-level explanation vs hands-on technical guide)" }
+                        ],
+                        closingNote: "This prevents vague positioning and mismatched expectations."
+                    },
+                    {
+                        title: "What the brief signals to prospects",
+                        bulletItems: [
+                            "Content is planned, not improvised",
+                            "Topics are chosen intentionally, not opportunistically",
+                            "Writing is scoped correctly for the intended audience",
+                            "SEO and developer needs are considered together, not separately"
+                        ]
+                    }
+                ]
             },
             {
-                step: "Add troubleshooting section",
-                description: "List common errors with symptoms, causes, and fixes. Use the format: 'Error: [exact error message]' → 'Cause: [why it happens]' → 'Fix: [steps to resolve]'. Include configuration mistakes, timeout issues, auth failures, version conflicts. Example: 'Error: ECONNREFUSED → Cause: Server not running → Fix: Run `npm start` first.' Time estimate: 20-30 minutes."
+                section: "2) The Suggested Outline (the execution plan)",
+                showInNav: true,
+                description: "The suggested outline defines the section-by-section structure of the content and keeps depth predictable.",
+                subsections: [
+                    {
+                        title: "How the outline works",
+                        paragraphs: [
+                            "It is usually expressed as H1 (the primary intent of the page), H2 (major sections), and H3 (sub-sections, examples, validations).",
+                            "The outline defines what sections will exist, the order in which they appear, and what kind of information belongs in each section. Importantly, the outline is topic-agnostic."
+                        ]
+                    },
+                    {
+                        title: "Where the outline can be used",
+                        bulletItems: [
+                            "A tool or platform overview",
+                            "A how-to or setup guide",
+                            "An SDK or API tutorial",
+                            "An infrastructure walkthrough",
+                            "A comparison or evaluation piece"
+                        ],
+                        note: "Only the content inside the sections changes. The structure remains consistent."
+                    },
+                    {
+                        title: "Why the outline part exists",
+                        intro: "Without an outline:",
+                        bulletItems: [
+                            "Content becomes uneven (some sections too deep, others too shallow)",
+                            "Important developer questions get missed",
+                            "Examples and validation steps are added randomly",
+                            "Articles become hard to scan and harder to trust"
+                        ],
+                        closingNote: "The outline ensures logical flow, complete coverage, predictable depth, and consistency across topics and authors. For developer audiences, consistency is a trust signal."
+                    },
+                    {
+                        title: "What the outline signals to prospects",
+                        bulletItems: [
+                            "Content is structured around how developers consume information",
+                            "Sections exist for a reason, not as filler",
+                            "Complex topics are broken down systematically",
+                            "Writing is engineered for clarity and trust, not just length"
+                        ]
+                    }
+                ]
             },
             {
-                step: "Finish with next steps",
-                description: "Point to advanced topics, production hardening guides, related tutorials, API references, community forums. Add 'What's next' suggestions: 'Add authentication', 'Deploy to production', 'Scale with load balancing'. Include external resources with context about what they cover. Time estimate: 10 minutes."
+                section: "Why each part of the outline matters",
+                showInNav: true,
+                description: "Each component of the outline serves a specific purpose in creating trustworthy, effective developer content.",
+                subsections: [
+                    {
+                        title: "Title + Expected depth",
+                        paragraphs: ["Why it matters: Sets expectations for both the reader and the writer."],
+                        bulletItems: [
+                            "A quick overview",
+                            "A deep technical walkthrough",
+                            "A comprehensive reference"
+                        ],
+                        closingNote: "Signal: A commitment to substance, not thin content."
+                    },
+                    {
+                        title: "Target intent (informational, evaluative, instructional, etc.)",
+                        paragraphs: ["Why it matters: Intent determines tone, structure, level of explanation, and what is included or excluded."],
+                        bulletItems: [
+                            "Informational → explain concepts and context",
+                            "Instructional → show steps, commands, validation",
+                            "Evaluative → discuss trade-offs and positioning"
+                        ],
+                        closingNote: "Signal: Content matches why someone searched, not just what they searched."
+                    },
+                    {
+                        title: "Target audience (explicit personas)",
+                        paragraphs: ["Why it matters: Audience defines acceptable assumptions, depth of technical detail, and the tooling/examples that feel credible."],
+                        bulletItems: [
+                            "Platform engineers evaluate content differently than DevOps leads",
+                            "DevOps leads look for operational depth and real-world validation",
+                            "Junior developers rely on explicit assumptions and step-by-step proof"
+                        ],
+                        closingNote: "Signal: This is not generic developer content — it is written for specific engineering roles."
+                    },
+                    {
+                        title: "Focus keyword + supporting keywords",
+                        paragraphs: ["Why it matters: Keywords anchor the content to a primary discovery query and the related questions developers naturally ask."],
+                        bulletItems: [
+                            "Prevents keyword stuffing",
+                            "Stops off-topic sections from slipping in",
+                            "Keeps the piece from ranking for nothing"
+                        ],
+                        closingNote: "Signal: Outlines are measurable and search-aware, not just editorial ideas."
+                    }
+                ]
             },
             {
-                step: "Review and test",
-                description: "Follow your own guide from scratch in a clean environment. Check that all commands run, all links work, all code compiles. Ask a colleague unfamiliar with the topic to test it. Fix any confusing sections. Verify prerequisites are complete. Estimated time: 30-60 minutes."
+                section: "The key takeaway",
+                showInNav: true,
+                description: "The Developer Content Outline is not a blog template. It is a thinking framework for developer content.",
+                bulletItems: [
+                    "Plan before writing",
+                    "Align structure with intent",
+                    "Ensure technical completeness",
+                    "Create content developers can trust"
+                ]
             }
         ]
     },
