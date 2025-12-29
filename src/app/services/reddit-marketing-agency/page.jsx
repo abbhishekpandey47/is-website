@@ -1,21 +1,22 @@
 "use client";
+import dynamic from "next/dynamic";
 import HeroHome from "./hero";
 import MarqueePage from "./marquee";
 import WhyAI from "./howWeWork";
-import Cta from "./cta";
-import RedditMarketingSlide from "./why";
-import InfraMethodologyTimeline from "./methodology";
-import RedditServiceCards from "./whatYouGet";
-import StartupHeroSection from "./whoThisIsFor";
-import DownloadPDF from "./download";
-import Testimonials from "../gtm-content-services-for-yc-startups/testimonials";
-import VideoTestimonials from "../../playbook/developer-marketing/testimonials";
+const Cta = dynamic(() => import("./cta"), { ssr: false });
+const RedditMarketingSlide = dynamic(() => import("./why"), { ssr: false });
+const InfraMethodologyTimeline = dynamic(() => import("./methodology"), { ssr: false });
+const RedditServiceCards = dynamic(() => import("./whatYouGet"), { ssr: false });
+const StartupHeroSection = dynamic(() => import("./whoThisIsFor"), { ssr: false });
+const DownloadPDF = dynamic(() => import("./download"), { ssr: false });
+const Testimonials = dynamic(() => import("../gtm-content-services-for-yc-startups/testimonials"), { ssr: false });
+const VideoTestimonials = dynamic(() => import("../../playbook/developer-marketing/testimonials"), { ssr: false });
 import { Videos } from "../../playbook/developer-marketing/videosData";
-import FAQSection from "./FAQ";
-import StatsSection from "./numbers";
-import RedditComment from "./redditComment";
-import BlogSection from "./blogSection";
-import Threadflow from "./threadflow";
+const FAQSection = dynamic(() => import("./FAQ"), { ssr: false });
+const StatsSection = dynamic(() => import("./numbers"), { ssr: false });
+const RedditComment = dynamic(() => import("./redditComment"), { ssr: false });
+const BlogSection = dynamic(() => import("./blogSection"), { ssr: false });
+const Threadflow = dynamic(() => import("./threadflow"), { ssr: false });
 
 
 export default function Page() {

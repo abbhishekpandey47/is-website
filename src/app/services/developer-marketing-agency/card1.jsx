@@ -3,11 +3,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const words = [
-  { text: "We take developer.", video: "/landingfolio/Interviews.mp4", poster: "/videos/home/interviews-section/interviews-poster.jpg" },
-  { text: "marketing off your.", video: "/landingfolio/sales.mp4", poster: "/videos/home/interviews-section/sales-calls-poster.jpg" },
-  { text: "plate.", video: "/landingfolio/home.mp4", poster: "/videos/home/interviews-section/homework-poster.jpg" },
-  { text: "so adoption.", video: "/landingfolio/meeting.mp4", poster: "/videos/home/interviews-section/meetings-poster.jpg" },
-  { text: "doesn't slip.", video: "https://cluely.com/videos/home/interviews-section/really-everything.mp4", poster: "/videos/home/interviews-section/really-everything-poster.jpg" },
+  { text: "We take developer" },
+  { text: "marketing off your" },
+  { text: "plate" },
+  { text: "so adoption" },
+  { text: "doesn't slip" },
 ];
 
 export default function VideoTextHero() {
@@ -58,41 +58,15 @@ export default function VideoTextHero() {
           {words.map((word, index) => (
             <span
               key={index}
-              className="relative inline-block pr-3 transition-all duration-700 ease-in-out transform-gpu will-change-transform"
+              className="relative inline-block pr-3 transition-all duration-300 ease-in-out transform-gpu will-change-transform"
             >
               <span 
                 className={`relative z-10 bg-gradient-to-br from-gray-200 to-zinc-400 bg-clip-text text-transparent transition-opacity duration-300 ${
-                  active === index && videoReady[index] ? 'opacity-0' : 'opacity-100'
+                  active === index ? 'opacity-100' : 'opacity-50'
                 }`}
               >
                 {word.text}
               </span>
-              
-              {active === index && (
-                <video
-                  className={`absolute inset-0 w-full h-full object-cover pointer-events-none select-none transition-opacity duration-300 ${
-                    videoReady[index] ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  style={{
-                    mask: `url(#${getMaskId(index)})`,
-                    WebkitMask: `url(#${getMaskId(index)})`,
-                    maskSize: 'contain',
-                    WebkitMaskSize: 'contain',
-                    maskRepeat: 'no-repeat',
-                    WebkitMaskRepeat: 'no-repeat',
-                    maskPosition: 'left center',
-                    WebkitMaskPosition: 'left center'
-                  }}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster={word.poster}
-                  onCanPlayThrough={() => handleVideoReady(index)}
-                >
-                  <source src={word.video} type="video/mp4" />
-                </video>
-              )}
             </span>
           ))}
         </h2>
