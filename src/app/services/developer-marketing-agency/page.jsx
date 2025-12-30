@@ -4,7 +4,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import Hero from "./hero";
 import Card1 from "./card1";
-import NewMarquee from "./marquee";
+import NewMarquee from "@/Components/NewMarquee";
 const Card2 = dynamic(() => import("./card2"), { ssr: false });
 const WhyInfrasity = dynamic(() => import("./WhyInfrasity"), { ssr: false });
 const IndustrySection = dynamic(() => import("./IndustrySection"), { ssr: false });

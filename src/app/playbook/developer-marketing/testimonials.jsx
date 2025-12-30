@@ -32,12 +32,7 @@ export default function VideoTestimonials({
   pauseOnHover = true,
 }) {
   const data = items;
-  
-  // Debug logging - always log in production for debugging
-  console.log("VideoTestimonials - items:", items);
-  console.log("VideoTestimonials - data:", data);
-  console.log("VideoTestimonials - data length:", data.length);
-  console.log("VideoTestimonials - NODE_ENV:", process.env.NODE_ENV);
+
 
   const [index, setIndex] = useState(0);
   const [openVideo, setOpenVideo] = useState(null);
@@ -49,7 +44,6 @@ export default function VideoTestimonials({
   
   // Early return if no data
   if (!data || data.length === 0) {
-    console.log("VideoTestimonials - No data available, returning null");
     return null;
   }
   
