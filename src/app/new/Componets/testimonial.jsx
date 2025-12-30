@@ -65,10 +65,18 @@ function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern 
 		<div className="framer-154pkg relative rounded-2xl border border-[#23232b] bg-[#18181c]/90 shadow-xl flex flex-col overflow-hidden" data-border="true" data-framer-name={name}>
 			{/* Border Top */}
 			<div className="framer-cis7t4 w-full h-[0.1rem] bg-gradient-to-r from-[#8a6fff] via-[#0fc7ff] to-[#8a6fff]" data-framer-name="Border Top"></div>
-			{/* Optional Pattern BG */}
-			{bgPattern && (
-				<div className="framer-1rd8rw0 absolute inset-0 z-0" style={{backgroundImage: `url(${bgPattern})`, backgroundRepeat: 'repeat', backgroundPosition: 'left top', backgroundSize: '160px', opacity: 0.12}}></div>
-			)}
+			{/* Top tiled background (uses bgPattern if provided, otherwise a default tile) */}
+			<div
+				className="framer-1rd8rw0 absolute left-0 right-0 top-0 h-16 md:h-16 z-0 pointer-events-none rounded-t-2xl overflow-hidden"
+				style={{
+					backgroundImage: `url(${bgPattern || 'https://framerusercontent.com/images/NnHLCsLlyjdTyS5xBtx645Fut4U.webp?width=500&height=500'})`,
+					backgroundRepeat: 'repeat',
+					backgroundPosition: 'left top',
+					backgroundSize: '160px',
+					opacity: 0.8,
+					maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+					WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+				}}></div>
 			<div className="framer-nidtgl flex-1 flex flex-col justify-between relative z-10 p-8">
 				<div className="framer-11syty2 mb-6">
 					<div className="framer-1dh0plq">

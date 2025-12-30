@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function SecondSection() {
 	return (
-		<section className="relative w-full bg-[#0e001a] py-24 px-4 overflow-hidden">
+		<section className="relative w-full py-24 px-4 overflow-hidden">
 			{/* Section Heading Framer Style */}
 			<div className="max-w-3xl mx-auto text-center mb-16 relative z-10">
 				<div className="inline-block px-6 py-2 mb-6 rounded-full border border-[#7c3aed] bg-[#1a0033] shadow-[0_0_0_2px_rgba(124,58,237,0.2)]">
@@ -18,8 +18,19 @@ export default function SecondSection() {
 					<div className="relative flex flex-col rounded-[16px] border border-[#23232b] bg-[#18181c]/90 shadow-lg overflow-hidden px-8 pt-0 pb-8 min-h-[520px]" style={{boxShadow: '0 2px 24px 0 rgba(0,0,0,0.18)'}}>
 						{/* Top border accent */}
 						<div className="h-[0.1rem] w-full bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#0ea5e9] opacity-60" />
-						{/* Card background image */}
-						<div className="absolute inset-0 z-0 pointer-events-none" style={{backgroundImage: 'url(https://framerusercontent.com/images/NnHLCsLlyjdTyS5xBtx645Fut4U.webp?width=500&height=500)', backgroundRepeat: 'repeat', backgroundSize: '160px', opacity: 0.13}} />
+						{/* Card background image (top only) */}
+						<div
+							className="absolute left-0 right-0 top-0 h-16 md:h-16 z-0 pointer-events-none rounded-t-[16px] overflow-hidden"
+							style={{
+								backgroundImage: 'url(https://framerusercontent.com/images/NnHLCsLlyjdTyS5xBtx645Fut4U.webp?width=500&height=500)',
+								backgroundRepeat: 'repeat',
+								backgroundSize: '160px',
+								backgroundPosition: 'top center',
+								opacity: 0.8,
+								maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+								WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+							}}
+						/>
 						{/* Dot grid overlay */}
 						<div className="absolute inset-0 z-0 pointer-events-none" style={{backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Ccircle cx=\'2\' cy=\'2\' r=\'1\' fill=\'%2322222b\' fill-opacity=\'0.12\'/%3E%3C/svg%3E")', backgroundRepeat: 'repeat', backgroundSize: '20px 20px', opacity: 0.18}} />
 						{/* Card content */}
@@ -52,8 +63,19 @@ export default function SecondSection() {
 					<div className="relative flex flex-col rounded-[16px] border border-[#23232b] bg-[#18181c]/90 shadow-lg overflow-hidden px-8 pt-0 pb-8 min-h-[520px]" style={{boxShadow: '0 2px 24px 0 rgba(0,0,0,0.18)'}}>
 						{/* Top border accent */}
 						<div className="h-[0.1rem] w-full bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#0ea5e9] opacity-60" />
-						{/* Card background image */}
-						<div className="absolute inset-0 z-0 pointer-events-none" style={{backgroundImage: 'url(https://framerusercontent.com/images/NnHLCsLlyjdTyS5xBtx645Fut4U.webp?width=500&height=500)', backgroundRepeat: 'repeat', backgroundSize: '160px', opacity: 0.13}} />
+						{/* Card background image (top only) */}
+						<div
+							className="absolute left-0 right-0 top-0 h-16 md:h-16 z-0 pointer-events-none rounded-t-[16px] overflow-hidden"
+							style={{
+								backgroundImage: 'url(https://framerusercontent.com/images/NnHLCsLlyjdTyS5xBtx645Fut4U.webp?width=500&height=500)',
+								backgroundRepeat: 'repeat',
+								backgroundSize: '160px',
+								backgroundPosition: 'top center',
+								opacity: 0.8,
+								maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+								WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+							}}
+						/>
 						{/* Dot grid overlay */}
 						<div className="absolute inset-0 z-0 pointer-events-none" style={{backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Ccircle cx=\'2\' cy=\'2\' r=\'1\' fill=\'%2322222b\' fill-opacity=\'0.12\'/%3E%3C/svg%3E")', backgroundRepeat: 'repeat', backgroundSize: '20px 20px', opacity: 0.18}} />
 						{/* Card content */}
