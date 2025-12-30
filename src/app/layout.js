@@ -99,7 +99,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-                <Script id='reb2b-snippet' strategy='afterInteractive'>
+                {/* <Script id='reb2b-snippet' strategy='afterInteractive'>
                     {`
           !function () {
             var reb2b = window.reb2b = window.reb2b || [];
@@ -130,7 +130,7 @@ export default function RootLayout({ children }) {
             reb2b.load("VN080HXMWP6J");
           }();
         `}
-                </Script>
+                </Script> */}
 
                 <Script id='google-tag-manager' strategy='lazyOnload'>{`
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -169,7 +169,7 @@ export default function RootLayout({ children }) {
             })();
           `}
         </Script>
-                {/* Snitcher Tracker */}
+                {/* Snitcher Tracker
             <Script id="snitcher-script" strategy="afterInteractive">
       {`
         !function(e){"use strict";
@@ -211,9 +211,9 @@ export default function RootLayout({ children }) {
           "profileId": "8436381"
         });
       `}
-    </Script>
+    </Script> */}
               {/*leadFeeder Tracker*/}
-       <Script id="leadfeeder-tracker" strategy="afterInteractive">
+       {/* <Script id="leadfeeder-tracker" strategy="afterInteractive">
           {`(function(ss,ex){
               window.ldfdr = window.ldfdr || function(){
                   (ldfdr._q = ldfdr._q || []).push([].slice.call(arguments));
@@ -229,7 +229,7 @@ export default function RootLayout({ children }) {
                   ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js');
               })(document,'script');
           })('Xbp1oaElvlk4EdVj');`}
-        </Script>
+        </Script> */}
 
                 <Script
                     src='https://assets.calendly.com/assets/external/widget.js'
