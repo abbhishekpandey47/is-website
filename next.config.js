@@ -119,6 +119,12 @@ module.exports = {
                 permanent: true,
                 statusCode: 301,
             },
+              {
+                source: '/blog/reddit-b2b-marketing-strategy',
+                destination: '/blog/subreddit-strategy-for-reddit-b2b-marketing',
+                permanent: true,
+                statusCode: 301,
+            },
         ];
     },
     async rewrites() {
