@@ -99,6 +99,8 @@ const TemplateDetailPage = ({ params }) => {
 
   const layoutType = template.layoutType || "standard";
   const isDeveloperLayout = layoutType === "developer-outline";
+  const isOutlineTemplate = template.slug === "developer-content-and-guides-outline";
+  const isWritingTemplate = template.slug === "developer-content-and-guides-content";
   const educationalContent = template.educationalContent;
   const hasCustomEducationalContent = Boolean(educationalContent);
 
@@ -341,20 +343,15 @@ const TemplateDetailPage = ({ params }) => {
                       {educationalContent.templateOverview.title}
                     </a>
                   )}
-                  {educationalContent?.howToUse && (
-                    <a href="#how-to-use" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
-                      {educationalContent.howToUse.title}
-                    </a>
-                  )}
                   
-                  {template.slug === "developer-content-and-guides-outline" && (
+                  {(isOutlineTemplate || isWritingTemplate) && (
                     <a href="#next-steps" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
                       Next Steps: Writing the Content
                     </a>
                   )}
                   
                   <div className="border-t border-purple-500/20 my-3 pt-3 space-y-1.5">
-                  {template.slug === "developer-content-and-guides-outline" && (
+                  {(isOutlineTemplate || isWritingTemplate) && (
                     <>
                       {template.metricsTable && (
                         <a
@@ -530,37 +527,6 @@ const TemplateDetailPage = ({ params }) => {
                       </div>
                     )}
 
-                    {educationalContent?.howToUse && (
-                      <div id="how-to-use" className="mb-10 scroll-mt-32 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-purple-500/10 p-6">
-                        <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
-                          {educationalContent.howToUse.title}
-                        </h2>
-                        {educationalContent.howToUse.intro && (
-                          <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
-                            {educationalContent.howToUse.intro}
-                          </p>
-                        )}
-                        <div className="space-y-6">
-                          {educationalContent.howToUse.steps?.map((step, idx) => (
-                            <div key={idx} className="flex gap-4">
-                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#6366f1] flex items-center justify-center">
-                                <span className="text-white font-bold quicksand-bold text-sm">{idx + 1}</span>
-                              </div>
-                              <div>
-                                <h4 className="text-base font-bold text-white quicksand-bold mb-1">{step.title}</h4>
-                                <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
-                                  {step.description}
-                                </p>
-                                {step.extra && (
-                                  <p className="text-[#a5b4fc] text-xs quicksand-medium mt-2">{step.extra}</p>
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
                     {template.sampleContentImages?.length > 0 && (
                       <div id="sample-content" className="mb-12 scroll-mt-32">
                         <h2 className="text-3xl font-bold mb-3 text-white quicksand-bold">Sample Content</h2>
@@ -675,11 +641,11 @@ const TemplateDetailPage = ({ params }) => {
                   </div>
                 )}
 
-                {/* Template Content - Only for outline template */}
-                {template.slug === "developer-content-and-guides-outline" ? (
+                {/* Template Content - Outline & Writing templates */}
+                {(isOutlineTemplate || isWritingTemplate) ? (
                   <>
                     {/* Metrics Table - Only for outline template */}
-                    {template.metricsTable && (
+                    {isOutlineTemplate && template.metricsTable && (
                       <div id="metrics-table" className="mb-12 scroll-mt-32">
                         <h2 className="text-2xl font-bold mb-6 text-[#a5b4fc] quicksand-bold">Suggested Outline</h2>
                         <div className="overflow-x-auto bg-[#1e293b] border border-[#334155] rounded-xl">
@@ -742,7 +708,7 @@ const TemplateDetailPage = ({ params }) => {
                             </p>
                           )}
                           {item.subsections && item.subsections.map((subsection, subIndex) => (
-                            <div key={subIndex} className="mt-4 pt-4 border-t border-white/10 space-y-3">
+                            <div key={subIndex} className="mt-6 p-5 rounded-lg border border-purple-500/20 bg-[#0f1729]/30 space-y-4">
                               {subsection.title && (
                                 <h3 className="text-xl font-semibold text-white quicksand-semibold mb-1">
                                   {subsection.title}
@@ -772,6 +738,25 @@ const TemplateDetailPage = ({ params }) => {
                               {subsection.closingNote && (
                                 <p className="text-[#a5b4fc] text-sm quicksand-semibold">{subsection.closingNote}</p>
                               )}
+                              {/* Nested subsections */}
+                              {subsection.subsections && subsection.subsections.map((nestedSub, nestedIdx) => (
+                                <div key={nestedIdx} className="mt-5 pl-5 border-l-2 border-purple-500/40 space-y-3">
+                                  {nestedSub.title && (
+                                    <h4 className="text-lg font-semibold text-white quicksand-semibold">
+                                      {nestedSub.title}
+                                    </h4>
+                                  )}
+                                  {nestedSub.paragraphs && nestedSub.paragraphs.map((para, pIdx) => (
+                                    <p key={pIdx} className="text-[#cbd5e1] text-sm quicksand-regular">
+                                      {para}
+                                    </p>
+                                  ))}
+                                  {nestedSub.bulletItems && renderBulletList(nestedSub.bulletItems)}
+                                  {nestedSub.note && (
+                                    <p className="text-[#94a3b8] text-xs quicksand-regular italic">{nestedSub.note}</p>
+                                  )}
+                                </div>
+                              ))}
                             </div>
                           ))}
                         </div>
@@ -780,57 +765,59 @@ const TemplateDetailPage = ({ params }) => {
                   );
                 })}
 
-                {/* Next Steps Section - placed after key takeaway */}
-                <div id="next-steps" className="scroll-mt-32">
-                  <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
-                    Next Steps: Writing the Content
-                  </h2>
-                  <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
-                    Once your outline is ready, it's time to bring it to life with well-crafted content. Use our comprehensive writing template to transform your outline into engaging, technically accurate developer content.
-                  </p>
-                  <Link
-                    href="/templates/developer-content-and-guides-content"
-                    className="group block"
-                  >
-                    <div className="relative bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl overflow-hidden hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/30 hover:border-purple-400/60 transition-all duration-300 p-6">
-                      <div className="flex items-center gap-6">
-                        <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-lg shadow-lg border border-purple-500/20">
-                          <Image
-                            src="/template-thumbnails/developer-content.png"
-                            alt="Developer Content Writing Template"
-                            width={96}
-                            height={96}
-                            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
-                          />
-                        </div>
-                        <div className="flex-1">
-                          <div className="inline-flex items-center justify-center bg-purple-600/20 border border-purple-500/30 rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
-                            <p className="text-purple-300">Developer Content & Guides</p>
+                {/* Next Steps Section - placed after key takeaway (outline only) */}
+                {isOutlineTemplate && (
+                  <div id="next-steps" className="scroll-mt-32">
+                    <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      Next Steps: Writing the Content
+                    </h2>
+                    <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
+                      Once your outline is ready, it's time to bring it to life with well-crafted content. Use our comprehensive writing template to transform your outline into engaging, technically accurate developer content.
+                    </p>
+                    <Link
+                      href="/templates/developer-content-and-guides-content"
+                      className="group block"
+                    >
+                      <div className="relative bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl overflow-hidden hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/30 hover:border-purple-400/60 transition-all duration-300 p-6">
+                        <div className="flex items-center gap-6">
+                          <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-lg shadow-lg border border-purple-500/20">
+                            <Image
+                              src="/template-thumbnails/developer-content.png"
+                              alt="Developer Content Writing Template"
+                              width={96}
+                              height={96}
+                              className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
+                            />
                           </div>
-                          <h3 className="text-xl font-bold quicksand-bold text-white group-hover:text-purple-300 transition-colors mb-2">
-                            Developer Content Writing Template
-                          </h3>
-                          <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
-                            Complete writing guidelines, examples, and best practices for creating developer guides that engage and convert.
-                          </p>
-                        </div>
-                        <div className="flex-shrink-0">
-                          <div className="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center group-hover:bg-purple-600/30 transition-colors">
-                            <svg className="w-5 h-5 text-purple-300 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
+                          <div className="flex-1">
+                            <div className="inline-flex items-center justify-center bg-purple-600/20 border border-purple-500/30 rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
+                              <p className="text-purple-300">Developer Content & Guides</p>
+                            </div>
+                            <h3 className="text-xl font-bold quicksand-bold text-white group-hover:text-purple-300 transition-colors mb-2">
+                              Developer Content Writing Template
+                            </h3>
+                            <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
+                              Complete writing guidelines, examples, and best practices for creating developer guides that engage and convert.
+                            </p>
+                          </div>
+                          <div className="flex-shrink-0">
+                            <div className="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center group-hover:bg-purple-600/30 transition-colors">
+                              <svg className="w-5 h-5 text-purple-300 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
-                </div>
+                    </Link>
+                  </div>
+                )}
               </>
             ) : null}
-              </div>
-            </motion.div>
           </div>
-        ) : (
+        </motion.div>
+      </div>
+    ) : (
           // Original template layout for other templates
           <motion.div
             initial={{ opacity: 0, y: 20 }}

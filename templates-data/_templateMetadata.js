@@ -685,20 +685,6 @@ const templateMetadata = [
         author: "Infrasity Team",
         authorImage: "/svgPatterns/profile.svg",
         layoutType: "developer-outline",
-        sampleContentImages: [
-            {
-                src: "/template-thumbnails/sample-content-1.png",
-                alt: "Sample content preview hero"
-            },
-            {
-                src: "/template-thumbnails/sample-content-2.png",
-                alt: "Sample content TL;DR section"
-            },
-            {
-                src: "/template-thumbnails/sample-content-3.png",
-                alt: "Sample content conclusion and decision tree"
-            }
-        ],
         
         useCase: "Developer guides, tool comparisons, technical tutorials, API documentation, educational blog posts",
         targetAudience: "Engineering Teams, Technical Writers, DevRel Professionals, Engineering Managers, Documentation Specialists",
@@ -743,32 +729,6 @@ const templateMetadata = [
                     { title: "Step execution and validation", description: "Write steps with action, expected output, and a quick validation check so readers can verify progress." },
                     { title: "Examples that match real workflows", description: "Use realistic values, versions, and environments so code and commands can be copied and run as-is." },
                     { title: "Handling errors, alternatives, and next steps", description: "Document specific errors, offer practical alternatives, and close with production-minded next moves." }
-                ]
-            },
-            howToUse: {
-                title: "How to apply the writing template",
-                intro: "Use this framework the moment the outline is frozen. Each section of the outline is drafted with a repeatable execution pattern so nothing is improvised mid-draft.",
-                steps: [
-                    {
-                        title: "Start from the approved brief",
-                        description: "Keep audience, intent, depth, and keyword decisions visible while writing."
-                    },
-                    {
-                        title: "Draft sections using the same flow",
-                        description: "Goal → Action → Result → Validate → Gotchas becomes the default rhythm."
-                    },
-                    {
-                        title: "Annotate every example",
-                        description: "Include language tags, version notes, and realistic values so reviewers can verify with minimal guesswork."
-                    },
-                    {
-                        title: "Document validation and troubleshooting",
-                        description: "Call out expected outputs, metrics to watch, and how to recover when things fail."
-                    },
-                    {
-                        title: "End with actionable next steps",
-                        description: "Tell the reader what to do once the guide is complete—deploy, automate, secure, or iterate."
-                    }
                 ]
             }
         },
@@ -849,205 +809,191 @@ const templateMetadata = [
 
         templateOutline: [
             {
-                section: "What is the Developer Content & Guide Writing Template",
+                section: "What the Developer Content Writing Template contains",
                 showInNav: true,
-                description: "A structured writing framework used after the outline is approved. It dictates how to execute every section so the final piece stays aligned with the intent, audience, and depth captured during planning.",
-                bulletItems: [
-                    "Applies to DevTools, APIs, SDKs, infrastructure, AI systems, and platform content",
-                    "Keeps explanations clear, examples credible, validation explicit, and decisions well-documented",
-                    "Treats writing as engineering work: predictable, reviewable, and testable"
+                description: "A writing framework that defines how to execute each section once the outline is finalized—so context, validation, and reliability show up in the published guide.",
+                subsections: [
+                    { title: "Problem and outcome framing", description: "State the developer problem in practical terms and promise a concrete, observable outcome." },
+                    { title: "Step execution and validation", description: "Write steps with action, expected output, and a quick validation check so readers can verify progress." },
+                    { title: "Examples that match real workflows", description: "Use realistic values, versions, and environments so code and commands can be copied and run as-is." },
+                    { title: "Handling errors, alternatives, and next steps", description: "Document specific errors, offer practical alternatives, and close with production-minded next moves." }
                 ]
             },
             {
-                section: "Why developer content needs a writing framework after the outline",
+                section: "Why these parts matter",
                 showInNav: true,
-                description: "Outlines capture what to cover. Writing determines how those decisions show up in the shipped experience.",
-                bulletItems: [
-                    "Carries planning decisions into execution so nothing drifts",
-                    "Prevents uneven depth and missing validation even when the outline is solid",
-                    "Ensures examples, outputs, and trade-offs reflect real workflows"
-                ],
-                closingNote: "For developer audiences, quality is felt through precision, validation, and honesty. The framework enforces that standard."
-            },
-            {
-                section: "Where this writing framework applies",
-                showInNav: true,
-                description: "Use it across formats so developers experience the same clarity regardless of topic or medium.",
-                bulletItems: [
-                    "API and SDK documentation",
-                    "Setup and onboarding guides",
-                    "Infrastructure and platform walkthroughs",
-                    "CI/CD tutorials and automation runbooks",
-                    "Architectural explanations and reference material",
-                    "Comparisons, evaluations, and decision guides"
-                ]
-            },
-            {
-                section: "How planning decisions shape the writing",
-                showInNav: true,
-                description: "The writing template keeps the outline within reach while drafting.",
-                bulletItems: [
-                    "Audience assumptions control tone, vocabulary, and acceptable shortcuts",
-                    "Intent (instructional, evaluative, reference) dictates section emphasis",
-                    "Depth targets influence how many examples, diagrams, or validation steps each section needs",
-                    "Keyword and discovery decisions inform headings and phrasing without forcing keyword stuffing"
-                ],
-                note: "Keep the outline visible. Mirror its sections and acceptance criteria word-for-word."
-            },
-            {
-                section: "What the writing template contains",
-                showInNav: true,
-                description: "Four execution areas keep the writing phase predictable and reviewer-friendly.",
+                description: "Each writing area exists for a reason. Use these notes to keep depth, clarity, and trust consistent while drafting.",
                 subsections: [
                     {
-                        title: "Problem and outcome framing",
+                        title: "1. Problem and outcome framing",
                         paragraphs: [
-                            "Begin with the situation the developer is in—not the product or feature. Be specific to the task, constraint, and environment assumed in the outline.",
-                            "State one concrete, observable outcome the reader will reach by the end of the guide (what will exist or work). Keep it limited to the defined scope.",
-                            "Avoid marketing language, multiple goals, advanced use cases, or feature comparisons in this section."
+                            "Problem and outcome framing defines how the guide begins. It sets context and scope so the reader understands exactly what the guide will help them accomplish."
                         ],
-                        bulletItems: [
-                            "Include: one clear problem statement, one clear end outcome, and the assumptions from the outline.",
-                            "Example problem: Platform teams need to generate SDKs from OpenAPI specs and keep docs in sync across CI and production.",
-                            "Example outcome: Generate SDKs from an OpenAPI spec and publish versioned docs automatically in CI."
+                        subsections: [
+                            {
+                                title: "How to frame the problem",
+                                paragraphs: [
+                                    "Start by describing the situation the developer is in, not the product or feature.",
+                                    "Focus on: The task the developer is trying to complete; The constraint or difficulty they are facing; The environment or role assumed in the outline.",
+                                    "Avoid general statements. Be specific and grounded in real workflows."
+                                ],
+                                bulletItems: [
+                                    "Instead of “Developers often struggle with API documentation.”",
+                                    "Write “Platform teams often need to generate SDKs from OpenAPI specs and keep documentation in sync across CI and production environments.”"
+                                ]
+                            },
+                            {
+                                title: "How to define the outcome",
+                                paragraphs: [
+                                    "Immediately after stating the problem, describe the outcome the reader will reach by the end of the guide.",
+                                    "The outcome should be: Concrete and observable; Limited to the scope defined in the outline; Described in terms of what will exist or work after completion."
+                                ],
+                                bulletItems: [
+                                    "Example: “By the end of this guide, you will generate SDKs from an OpenAPI spec and publish versioned documentation automatically as part of your CI pipeline.”"
+                                ]
+                            },
+                            {
+                                title: "What to include in this section",
+                                bulletItems: [
+                                    "One clear problem statement",
+                                    "One clear end outcome",
+                                    "Any assumptions already defined in the outline",
+                                    "Clear boundaries on what is covered"
+                                ]
+                            },
+                            {
+                                title: "What to avoid",
+                                bulletItems: [
+                                    "Marketing language",
+                                    "Multiple goals",
+                                    "Advanced or unrelated use cases",
+                                    "Feature comparisons"
+                                ]
+                            }
                         ]
                     },
                     {
-                        title: "Step execution and validation",
+                        title: "2. Step execution and validation",
                         paragraphs: [
-                            "Write each section as a repeatable sequence: describe the step, show the action, show the expected result, then explain how to confirm success.",
-                            "Validation can include CLI output, API responses, log entries, file system changes, or UI state changes—make it explicit every time.",
-                            "Use the same structure for every major step to keep depth predictable."
+                            "Step execution defines how each part of the guide is written so that progress is visible and verifiable."
                         ],
-                        bulletItems: [
-                            "Explain the step: This step generates the SDK from the OpenAPI specification.",
-                            "Show the action: openapi-generator generate -i api.yaml -g typescript-fetch -o ./sdk",
-                            "Show the result: New sdk directory with generated client files under sdk/src.",
-                            "Validate success: npm install && npm run build with no errors."
+                        subsections: [
+                            {
+                                title: "How to structure each step",
+                                paragraphs: [
+                                    "Each step should follow the same internal structure."
+                                ],
+                                bulletItems: [
+                                    "Describe what the step accomplishes",
+                                    "Show the exact action to take",
+                                    "Show the expected result",
+                                    "Explain how to confirm success"
+                                ]
+                            },
+                            {
+                                title: "Example step structure",
+                                bulletItems: [
+                                    "Explain the step: “This step generates the SDK from the OpenAPI specification.”",
+                                    "Show the action: openapi-generator generate \\\n+  -i api.yaml \\\n+  -g typescript-fetch \\\n+  -o ./sdk",
+                                    "Show the expected result: A new sdk directory is created; Generated client files appear under sdk/src",
+                                    "Validate success: Run npm install and npm run build and confirm no errors"
+                                ]
+                            },
+                            {
+                                title: "What validation can include",
+                                bulletItems: [
+                                    "CLI output",
+                                    "API responses",
+                                    "Log entries",
+                                    "File system changes",
+                                    "UI state changes"
+                                ],
+                                paragraphs: [
+                                    "Validation should always be explicit. Do not assume the reader knows how to confirm progress."
+                                ]
+                            }
                         ]
                     },
                     {
-                        title: "Examples that match real workflows",
+                        title: "3. Realistic examples aligned with actual workflows",
                         paragraphs: [
-                            "Use real-looking values, configurations, and names; include tool/library/API versions and call out environment or permission assumptions before the example.",
-                            "Make snippets and commands runnable without modification unless clearly noted; avoid pseudo-code presented as runnable.",
-                            "Keep examples focused on one action and do not skip required setup steps."
+                            "Examples demonstrate how the system behaves in real usage, not simplified demonstrations."
                         ],
-                        bulletItems: [
-                            "Better than placeholders: export INFRASITY_API_KEY=env_live_8f23a9... and explain where it comes from.",
-                            "Add language tags to code blocks and stay aligned to the environment in the outline (e.g., Node.js 18 on a Linux CI runner)."
+                        subsections: [
+                            {
+                                title: "How to write realistic examples",
+                                bulletItems: [
+                                    "Use real looking values and names",
+                                    "Include versions for tools and libraries",
+                                    "Match the environment described in the outline",
+                                    "Be runnable without modification unless stated"
+                                ]
+                            },
+                            {
+                                title: "Example of realistic values",
+                                bulletItems: [
+                                    "Instead of: YOUR_API_KEY_HERE",
+                                    "Use: export INFRASITY_API_KEY=env_live_8f23a9... and explain where the value comes from."
+                                ]
+                            },
+                            {
+                                title: "How to present examples",
+                                bulletItems: [
+                                    "Add language tags to code blocks",
+                                    "Keep examples focused on one action",
+                                    "Avoid skipping required setup steps",
+                                    "Explain assumptions before the example appears",
+                                    "Example: “The following example assumes Node.js 18 and a Linux based CI runner.”"
+                                ]
+                            },
+                            {
+                                title: "What to avoid",
+                                bulletItems: [
+                                    "Abstract placeholders without explanation",
+                                    "Pseudo code presented as runnable",
+                                    "Examples that only work in ideal conditions",
+                                    "Omitting required permissions or configuration"
+                                ]
+                            }
                         ]
                     },
                     {
-                        title: "Handling errors, alternatives, and next steps",
+                        title: "4. Error handling, alternatives, and next steps",
                         paragraphs: [
-                            "Document common errors with what the developer sees, what causes it, and how to resolve it—specific to this guide.",
-                            "Explain alternatives briefly and when to use each, focusing on practical differences like complexity, maintenance, or operational impact.",
-                            "Close with next steps that build naturally on the task: production usage, automation, security, scaling, or related workflows."
+                            "This section prepares the reader for real world usage beyond the happy path."
                         ],
-                        bulletItems: [
-                            "Example error: 401 Unauthorized when publishing docs → Cause: CI lacks the publishing token → Resolution: add the token as a secure CI variable.",
-                            "Next-step examples: add automated versioning for SDK releases, secure credentials with a secrets manager, monitor CI failures and doc drift, extend the setup to more services."
+                        subsections: [
+                            {
+                                title: "How to document errors",
+                                paragraphs: [
+                                    "List common errors that occur when following the guide."
+                                ],
+                                bulletItems: [
+                                    "Error: 401 Unauthorized when publishing documentation",
+                                    "Cause: The CI environment does not have access to the documentation publishing token",
+                                    "Resolution: Add the token as a secure environment variable in the CI configuration"
+                                ]
+                            },
+                            {
+                                title: "How to explain alternatives",
+                                bulletItems: [
+                                    "Describe each approach briefly",
+                                    "Explain when each is appropriate",
+                                    "Highlight practical differences such as complexity or maintenance",
+                                    "Avoid positioning one approach as universally correct"
+                                ]
+                            },
+                            {
+                                title: "How to write next steps",
+                                bulletItems: [
+                                    "Build naturally on the completed task",
+                                    "Reflect real production workflows",
+                                    "Point to related guides where applicable",
+                                    "Examples: Add automated versioning for SDK releases; Secure credentials using a secrets manager; Monitor CI failures and documentation drift; Extend the setup to additional services"
+                                ]
+                            }
                         ]
                     }
-                ]
-            },
-            {
-                section: "How to use the writing template",
-                showInNav: true,
-                description: "Follow the same execution pattern for every section so reviewers know exactly what to expect.",
-                subsections: [
-                    {
-                        title: "Writing the introduction",
-                        bulletItems: [
-                            "Open with the developer problem and the cost of not solving it",
-                            "Explain why the topic is relevant now (new release, scaling challenge, compliance need)",
-                            "Promise the outcome and who benefits"
-                        ]
-                    },
-                    {
-                        title: "Writing the TL;DR",
-                        bulletItems: [
-                            "State the scenario or use case",
-                            "List the primary stack or tools involved",
-                            "Call out 3–4 steps readers will take",
-                            "Mention the expected end state or artifact",
-                            "Include estimated time or difficulty if helpful"
-                        ]
-                    },
-                    {
-                        title: "Writing prerequisites and assumptions",
-                        bulletItems: [
-                            "Tools, versions, accounts, and permissions",
-                            "Sample repos, datasets, or configs",
-                            "Operating system or infrastructure assumptions",
-                            "Optional vs required components clearly labeled",
-                            "Link to setup guides when necessary"
-                        ]
-                    },
-                    {
-                        title: "Writing each section of the outline",
-                        bulletItems: [
-                            "Use the Goal → Action → Result → Validate → Recovery rhythm",
-                            "Pair every command/snippet with why it is needed",
-                            "Show expected output or state change",
-                            "Call out gotchas or edge cases immediately under the step"
-                        ]
-                    },
-                    {
-                        title: "Writing code, API calls, or CLI commands",
-                        bulletItems: [
-                            "Use tested snippets with language tags and version notes",
-                            "Annotate non-obvious lines so readers know what to change",
-                            "Include before/after or alternative implementations when relevant",
-                            "Keep examples realistic—no lorem ipsum payloads"
-                        ]
-                    },
-                    {
-                        title: "Writing troubleshooting",
-                        bulletItems: [
-                            "Structure as Error → Cause → Fix",
-                            "Link to logs, dashboards, or docs that prove the fix",
-                            "Cover 3–5 issues that real users hit, not theoretical edge cases"
-                        ]
-                    },
-                    {
-                        title: "Writing alternatives and trade-offs",
-                        bulletItems: [
-                            "Explain when to choose another approach",
-                            "Call out cost, performance, security, or maintenance differences",
-                            "Help readers make a decision instead of assuming they will figure it out"
-                        ]
-                    },
-                    {
-                        title: "Writing the conclusion",
-                        bulletItems: [
-                            "Summarize what changed or what now works",
-                            "Point to next steps: production hardening, security, automation, monitoring",
-                            "Direct readers to related guides, repos, or community channels"
-                        ]
-                    }
-                ]
-            },
-            {
-                section: "The key takeaway",
-                showInNav: true,
-                description: "Developer content quality is judged by clarity, validation, and honesty. The writing template enforces all three.",
-                bulletItems: [
-                    "Write with intention, not improvisation",
-                    "Keep context, action, validation, and recovery together",
-                    "Show readers what to do next once the primary task is complete"
-                ]
-            },
-            {
-                section: "What to do next",
-                showInNav: true,
-                description: "Once the writing template is in place, expand its influence across your content operations.",
-                bulletItems: [
-                    "Align the outline and writing frameworks so every template speaks the same language",
-                    "Create a writing reference doc that captures examples, accepted phrases, and reviewer expectations",
-                    "Apply the framework to existing content to raise baseline quality",
-                    "Audit published guides for missing validation, troubleshooting, or trade-offs"
                 ]
             }
         ]
