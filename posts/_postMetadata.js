@@ -1075,9 +1075,9 @@ let postMetaData = [
      {
         title: "Subreddit Strategy for Reddit B2B Marketing: How to Pick the Right Communities",
         metatitle: "Reddit B2B Marketing Stategy for SaaS",
-        slug: "reddit-b2b-marketing-strategy",
+        slug: "subreddit-strategy-for-reddit-b2b-marketing",
         description: "Reddit is quickly becoming a goldmine for B2B SaaS marketing, with decision-makers actively validating tools and software inside subreddits. This blog breaks down how to leverage Reddit B2B marketing to build demand, discover the right communities, and avoid common mistakes. You’ll also learn how SaaS companies succeed in niche Reddit spaces and how tools like Infrasity’s Reddit Comment Generator can make your engagement seamless. Perfect for founders and marketers who want to master Reddit SaaS marketing.",
-        ogImage: "/PostImages/reddit-b2b-marketing-strategy/banner.jpg",
+        ogImage: "/PostImages/subreddit-strategy-for-reddit-b2b-marketing/banner.jpg",
         publishedOn: "2025-08-22",
         authorId: "author0005",
         category: "Reddit Marketing B2B SaaS",
