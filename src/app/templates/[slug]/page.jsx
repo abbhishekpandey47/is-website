@@ -394,7 +394,7 @@ const TemplateDetailPage = ({ params }) => {
                 {hasCustomEducationalContent ? (
                   <div className="space-y-12 mb-12">
                     {educationalContent?.whatIs && (
-                      <div id="what-is" className="mb-10 scroll-mt-32">
+                      <div id="what-is" className="mb-10 scroll-mt-32 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-purple-500/10 p-6">
                         <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
                           {educationalContent.whatIs.title}
                         </h2>
@@ -442,7 +442,7 @@ const TemplateDetailPage = ({ params }) => {
                     )}
 
                     {educationalContent?.whyUse && (
-                      <div id="why-use" className="mb-10 scroll-mt-32">
+                      <div id="why-use" className="mb-10 scroll-mt-32 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-purple-500/10 p-6">
                         <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
                           {educationalContent.whyUse.title}
                         </h2>
@@ -493,7 +493,7 @@ const TemplateDetailPage = ({ params }) => {
                     )}
 
                     {educationalContent?.templateOverview && (
-                      <div id="what-is-template" className="mb-10 scroll-mt-32">
+                      <div id="what-is-template" className="mb-10 scroll-mt-32 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-purple-500/10 p-6">
                         <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
                           {educationalContent.templateOverview.title}
                         </h2>
@@ -531,7 +531,7 @@ const TemplateDetailPage = ({ params }) => {
                     )}
 
                     {educationalContent?.howToUse && (
-                      <div id="how-to-use" className="mb-10 scroll-mt-32">
+                      <div id="how-to-use" className="mb-10 scroll-mt-32 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-purple-500/10 p-6">
                         <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
                           {educationalContent.howToUse.title}
                         </h2>
@@ -705,19 +705,28 @@ const TemplateDetailPage = ({ params }) => {
                 {template.templateOutline && template.templateOutline.map((item, index) => {
                   const isObject = typeof item === "object";
                   return (
-                    <div key={index} id={`section-${index + 1}`} className="mb-10 scroll-mt-32">
-                      <h2 className="text-2xl font-bold mb-4 text-white quicksand-bold">
-                        {item.section || item}
-                      </h2>
+                    <div
+                      key={index}
+                      id={`section-${index + 1}`}
+                      className="mb-10 scroll-mt-32 rounded-2xl border border-purple-500/20 bg-white/5 backdrop-blur-sm shadow-xl shadow-purple-500/10 p-6"
+                    >
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] text-white flex items-center justify-center quicksand-bold text-sm border border-white/20">
+                          {index + 1}
+                        </div>
+                        <h2 className="text-2xl font-bold text-white quicksand-bold leading-snug">
+                          {item.section || item}
+                        </h2>
+                      </div>
                       {isObject && (
-                        <>
+                        <div className="space-y-4">
                           {item.description && (
                             <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular">
                               {item.description}
                             </p>
                           )}
                           {item.paragraphs && item.paragraphs.map((paragraph, paraIdx) => (
-                            <p key={paraIdx} className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mt-3">
+                            <p key={paraIdx} className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular">
                               {paragraph}
                             </p>
                           ))}
@@ -725,32 +734,32 @@ const TemplateDetailPage = ({ params }) => {
                           {item.labeledItems && renderLabeledItems(item.labeledItems)}
                           {item.bulletItems && renderBulletList(item.bulletItems)}
                           {item.note && (
-                            <p className="text-[#94a3b8] text-sm quicksand-regular mt-4">{item.note}</p>
+                            <p className="text-[#94a3b8] text-sm quicksand-regular">{item.note}</p>
                           )}
                           {item.example && (
-                            <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-light pl-4 border-l-2 border-[#6366f1] mt-4">
+                            <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-light pl-4 border-l-2 border-[#6366f1]">
                               <span className="text-[#a5b4fc] quicksand-semibold">Example:</span> {item.example}
                             </p>
                           )}
                           {item.subsections && item.subsections.map((subsection, subIndex) => (
-                            <div key={subIndex} className="mt-6 pl-1">
+                            <div key={subIndex} className="mt-4 pt-4 border-t border-white/10 space-y-3">
                               {subsection.title && (
-                                <h3 className="text-xl font-semibold text-white quicksand-semibold mb-2">
+                                <h3 className="text-xl font-semibold text-white quicksand-semibold mb-1">
                                   {subsection.title}
                                 </h3>
                               )}
                               {subsection.description && (
-                                <p className="text-[#cbd5e1] text-base quicksand-regular mb-3">
+                                <p className="text-[#cbd5e1] text-base quicksand-regular">
                                   {subsection.description}
                                 </p>
                               )}
                               {subsection.intro && (
-                                <p className="text-[#cbd5e1] text-sm quicksand-regular mb-3">
+                                <p className="text-[#cbd5e1] text-sm quicksand-regular">
                                   {subsection.intro}
                                 </p>
                               )}
                               {subsection.paragraphs && subsection.paragraphs.map((paragraph, subParaIdx) => (
-                                <p key={subParaIdx} className="text-[#cbd5e1] text-sm quicksand-regular mb-3">
+                                <p key={subParaIdx} className="text-[#cbd5e1] text-sm quicksand-regular">
                                   {paragraph}
                                 </p>
                               ))}
@@ -758,14 +767,14 @@ const TemplateDetailPage = ({ params }) => {
                               {subsection.labeledItems && renderLabeledItems(subsection.labeledItems)}
                               {subsection.bulletItems && renderBulletList(subsection.bulletItems)}
                               {subsection.note && (
-                                <p className="text-[#94a3b8] text-sm quicksand-regular mt-4">{subsection.note}</p>
+                                <p className="text-[#94a3b8] text-sm quicksand-regular">{subsection.note}</p>
                               )}
                               {subsection.closingNote && (
-                                <p className="text-[#a5b4fc] text-sm quicksand-semibold mt-4">{subsection.closingNote}</p>
+                                <p className="text-[#a5b4fc] text-sm quicksand-semibold">{subsection.closingNote}</p>
                               )}
                             </div>
                           ))}
-                        </>
+                        </div>
                       )}
                     </div>
                   );

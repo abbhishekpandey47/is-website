@@ -520,7 +520,7 @@ const templateMetadata = [
 
         templateOutline: [
             {
-                section: "1) The Brief (the inputs)",
+                section: "The Brief (the inputs)",
                 showInNav: true,
                 description: "The brief defines the constraints and goals of the content. It ensures that everyone involved — founders, engineers, writers — is aligned before execution starts.",
                 subsections: [
@@ -567,7 +567,7 @@ const templateMetadata = [
                 ]
             },
             {
-                section: "2) The Suggested Outline (the execution plan)",
+                section: "The Suggested Outline (the execution plan)",
                 showInNav: true,
                 description: "The suggested outline defines the section-by-section structure of the content and keeps depth predictable.",
                 subsections: [
@@ -708,181 +708,347 @@ const templateMetadata = [
         
         educationalContent: {
             whatIs: {
-                title: "What Is a Content Writing Template",
+                title: "What is a Developer Content & Guide Writing Template",
                 paragraphs: [
-                    "A content writing template is a practical framework for writing the actual content of a developer-facing article or guide.",
-                    "Once an outline is approved, the writing template turns that structure into clear explanations, runnable examples, validation steps, and actionable guidance.",
-                    "It removes guesswork about depth and tone so every guide is predictable and easy to ship."
+                    "A developer content and guide writing template is a structured framework used after the outline is approved. It guides how each section should be written so explanations stay clear, examples are credible, validation steps are explicit, and technical decisions are communicated accurately.",
+                    "The framework keeps depth, tone, and execution consistent across authors, topics, and formats. It applies to DevTools, APIs, SDKs, infrastructure platforms, and AI systems where developers expect clarity and correctness."
                 ],
-                highlight: "Keeps every guide: easy to read → technically accurate → outcome-driven → consistent across teams",
+                highlight: "Purpose-built to keep explanations precise, examples trustworthy, validation explicit, and decisions well-documented.",
+                subtext: "Where this writing framework applies",
                 bullets: [
-                    "Easy to read with scannable structure",
-                    "Technically accurate with tested code",
-                    "Outcome-driven so readers know what they achieve",
-                    "Consistent across teams and authors"
-                ],
-                audienceLabel: "Target ICPs",
-                audience: [
-                    "Developers",
-                    "Technical Writers",
-                    "DevRel teams",
-                    "API Platform teams",
-                    "Infrastructure Engineers",
-                    "SaaS Product teams",
-                    "Documentation & Onboarding owners"
+                    "API and SDK documentation",
+                    "Setup and onboarding guides",
+                    "Infrastructure and platform walkthroughs",
+                    "CI/CD tutorials and automation runbooks",
+                    "Architectural or systems explanations",
+                    "Comparison and evaluation content"
                 ]
             },
             whyUse: {
-                title: "Why Use a Content Writing Template After the Outline",
-                intro: "An outline defines what to cover. A content writing template defines how to explain it so depth, clarity, and validation stay consistent.",
+                title: "Why developer content needs a writing framework after the outline",
+                intro: "An outline locks intent, audience, and structure. Writing determines whether those decisions show up in the final experience. Without a writing framework, content quality varies even when the outline is solid—context gets skipped, examples go untested, and validation remains implied.",
                 bullets: [
-                    "Prevents inconsistent depth across sections",
-                    "Ensures validation steps and tested examples are present",
-                    "Standardizes tone and level of detail across authors",
-                    "Speeds reviews with clear acceptance criteria",
-                    "Improves onboarding and adoption with clearer guidance"
-                ],
-                audienceLabel: "Who benefits most",
-                audience: [
-                    "DevRel leaders",
-                    "Documentation owners",
-                    "Engineering onboarding teams",
-                    "API product teams",
-                    "Developer education leads"
+                    "Carries planning decisions through execution",
+                    "Keeps explanations at the right depth for the stated audience",
+                    "Ensures examples and validation mirror real workflows",
+                    "Communicates trade-offs clearly instead of hinting at them",
+                    "Signals reliability that developer audiences immediately notice"
                 ]
             },
             templateOverview: {
-                title: "What Is a Developer Content & Guide Writing Template",
-                description: "A task-first writing framework that guides how to write each section so developers can follow, validate, recover from errors, and know next steps.",
+                title: "What the Developer Content Writing Template contains",
+                description: "A writing framework that defines how to execute each section once the outline is finalized—so context, validation, and reliability show up in the published guide.",
                 sections: [
-                    { title: "Context first", description: "Explain what the developer is doing and why it matters." },
-                    { title: "Actionable steps", description: "Show the exact command, API call, or code snippet." },
-                    { title: "Validation", description: "Show expected output so readers know it worked." },
-                    { title: "Error recovery", description: "Call out gotchas and how to fix them." },
-                    { title: "Next steps", description: "Tell readers what to do after completing the guide." }
-                ],
-                audienceLabel: "Designed for",
-                audience: [
-                    "API teams",
-                    "SDK maintainers",
-                    "Platform engineers",
-                    "Solution architects",
-                    "Developer onboarding leads"
+                    { title: "Problem and outcome framing", description: "State the developer problem in practical terms and promise a concrete, observable outcome." },
+                    { title: "Step execution and validation", description: "Write steps with action, expected output, and a quick validation check so readers can verify progress." },
+                    { title: "Examples that match real workflows", description: "Use realistic values, versions, and environments so code and commands can be copied and run as-is." },
+                    { title: "Handling errors, alternatives, and next steps", description: "Document specific errors, offer practical alternatives, and close with production-minded next moves." }
                 ]
             },
             howToUse: {
-                title: "How to Use the Developer Content & Guide Writing Template",
-                intro: "Use this template after your outline is finalized to move from structure to publishable content.",
+                title: "How to apply the writing template",
+                intro: "Use this framework the moment the outline is frozen. Each section of the outline is drafted with a repeatable execution pattern so nothing is improvised mid-draft.",
                 steps: [
                     {
-                        title: "Write the introduction (context + outcome)",
-                        description: "State the problem, why it matters in real workflows, and what the reader will achieve. Avoid marketing language—write like you are unblocking a peer."
+                        title: "Start from the approved brief",
+                        description: "Keep audience, intent, depth, and keyword decisions visible while writing."
                     },
                     {
-                        title: "Add a clear TL;DR",
-                        description: "Summarize outcome, key steps, required tools, audience level, and expected result in 4–6 bullets so experienced readers can scan fast."
+                        title: "Draft sections using the same flow",
+                        description: "Goal → Action → Result → Validate → Gotchas becomes the default rhythm."
                     },
                     {
-                        title: "Explain prerequisites clearly",
-                        description: "List required tools, versions, accounts/permissions, OS assumptions, and any sample repos or configs. Call out optional or environment-specific items explicitly."
+                        title: "Annotate every example",
+                        description: "Include language tags, version notes, and realistic values so reviewers can verify with minimal guesswork."
                     },
                     {
-                        title: "Write each section with a consistent pattern",
-                        description: "Goal → Action (command/API/code) → Result (expected output) → Validate success → Gotchas. Repeat per section so depth stays consistent."
+                        title: "Document validation and troubleshooting",
+                        description: "Call out expected outputs, metrics to watch, and how to recover when things fail."
                     },
                     {
-                        title: "Use code and examples correctly",
-                        description: "Include only tested, runnable code with language tags, version notes, realistic examples, and before/after where helpful. Avoid placeholders."
-                    },
-                    {
-                        title: "Add troubleshooting and alternatives",
-                        description: "Anticipate stuck points. Use Error → Cause → Fix. Include 3–5 common issues and brief trade-offs between approaches."
-                    },
-                    {
-                        title: "Conclude with next steps",
-                        description: "Tell readers what to do next, how this fits production, and where to learn more (deploy, secure, scale, automate)."
-                    },
-                    {
-                        title: "Final writing checklist",
-                        description: "Code runs; outputs match; headings scan well; concise paragraphs; links work; meta ~160 chars; alt text is descriptive; no keyword stuffing."
+                        title: "End with actionable next steps",
+                        description: "Tell the reader what to do once the guide is complete—deploy, automate, secure, or iterate."
                     }
                 ]
             }
         },
         
         // Custom educational content
-        whatIsContent: "Developer content writing turns an approved outline into publishable, technically accurate content with runnable examples and clear validation.",
+        whatIsContent: "The writing template is the execution layer that turns a signed-off outline into publishable developer content with consistent context, validation, and reliability.",
 
         whatIsContentDetailed: [
-            "Clear and actionable: readers can follow and repeat the workflow",
-            "Technically accurate: tested code, real outputs, and environment notes",
-            "Contextual: explains the 'why' behind decisions, not just the 'how'",
-            "Optimized: structured for humans, search, and AI-driven discovery"
+            "Applied after the outline so every section aligns with the agreed audience, intent, and depth",
+            "Pairs context, action, validation, and recovery so developers can follow without guessing",
+            "Works for DevTools, infrastructure, APIs, SDKs, AI systems, CI/CD, and platform guides",
+            "Prevents improvisation by giving writers a predictable writing rhythm"
         ],
 
-        whatIsTemplate: "A writing framework that moves you from outline to completed guide with consistent depth, validated code, and clear next steps for developers.",
+        whatIsTemplate: "A writing framework that ensures introductions, TL;DRs, prerequisites, walkthroughs, troubleshooting, and conclusions follow the same developer-friendly logic.",
 
         whatIsTemplateCovers: [
-            "Writing principles for technical audiences",
-            "Section-by-section development with goals, actions, results, validation, and gotchas",
-            "Code example standards and annotation patterns",
-            "Troubleshooting and alternatives",
-            "SEO and accessibility essentials (meta, alt text, scannable headings)",
-            "Final publishing checklist"
+            "Introduction formula: problem, why it matters, and the promised outcome",
+            "TL;DR spec: scenario, stack, key steps, and expected result",
+            "Prerequisite checklist with tooling, versions, repos, permissions, and OS assumptions",
+            "Per-section pattern: Goal → Action → Result → Validate → Recovery notes",
+            "Code/API/CLI standards with tested snippets, annotations, and expected outputs",
+            "Error handling, troubleshooting, and alternatives with trade-offs",
+            "Conclusion + next steps that connect the guide to deployment, security, scaling, or automation"
         ],
 
         whyUseTemplate: [
-            "Prevents uneven depth across sections",
-            "Ensures validation steps and tested examples",
-            "Keeps tone and style consistent across authors",
-            "Speeds technical and editorial review",
-            "Improves onboarding and adoption outcomes"
+            "Carries outline decisions straight into the writing stage",
+            "Keeps tone, depth, and structure consistent across authors",
+            "Forces validation, outputs, and recovery steps to be explicit",
+            "Communicates trade-offs instead of leaving them implied",
+            "Gives reviewers clear acceptance criteria so drafts move faster"
         ],
 
         keyFeatures: [
-            "Goal → Action → Result → Validate → Gotchas pattern per section",
-            "Tested, annotated code requirements",
-            "Troubleshooting matrix (Error → Cause → Fix)",
-            "SEO and accessibility guardrails without keyword stuffing",
-            "Concise final checklist before publishing"
+            "Problem-outcome introduction and TL;DR specification",
+            "Goal → Action → Result → Validate → Gotchas writing rhythm",
+            "Tested, annotated code and command requirements",
+            "Troubleshooting matrix built around Error → Cause → Fix",
+            "Comparison and alternative framing guidance",
+            "Conclusion pattern that ties into next steps and ownership"
         ],
         
         howToUse: [
             {
-                step: "Choose your keywords strategically",
-                description: "Start with your outline's main topic. Use tools like Ahrefs, SEMrush, or Google Keyword Planner to find primary keyword (1,000+ monthly searches, medium difficulty) and 3-5 secondary keywords (related terms developers actually search). Prioritize keywords with question-based intent ('how to', 'what is', 'best practices for'). Avoid overly competitive generic terms. Example: Primary = 'API documentation tools', Secondary = 'automatic API docs', 'OpenAPI documentation', 'SDK generation tools'. Time: 20-30 minutes."
+                step: "Confirm the outline and brief are locked",
+                description: "Keep the approved title, audience, intent, depth, and keyword decisions visible while writing so nothing shifts mid-draft."
             },
             {
-                step: "Understand search intent",
-                description: "Google your primary keyword and analyze the top 5 results. Note what type of content ranks: comparisons, tutorials, reference docs, or opinion pieces. Identify gaps—what questions aren't answered? What examples are missing? Structure your content to match intent while filling those gaps. Example: If 'React state management' shows tutorials, write a tutorial. If it shows comparisons (Redux vs. Context API), write a comparison. Time: 15 minutes."
+                step: "Write the introduction using the problem → why → outcome format",
+                description: "Open with the developer pain, explain why it matters right now, and promise the result the reader will achieve once the guide is complete."
             },
             {
-                step: "Write a compelling intro (200-300 words)",
-                description: "Hook readers in the first 2 sentences with a relatable problem or surprising insight. Clearly state what the guide covers and what readers will achieve. Include your primary keyword naturally in the first 100 words. Example structure: 'Problem statement (2-3 sentences) → What you'll learn (1-2 sentences) → Why it matters (1-2 sentences)'. Avoid generic openings like 'In this post, we'll cover…'. Time: 20-30 minutes."
+                step: "Publish the TL;DR immediately",
+                description: "List the scenario, tooling, key steps, estimated time, and expected output so experienced readers can scan and jump straight to execution."
             },
             {
-                step: "Develop each section with depth",
-                description: "Follow your outline but expand each section with: concept explanation, practical example (code or command), expected output, and why it matters. Use subheadings every 200-300 words for scannability. Integrate secondary keywords naturally in subheadings and first sentences. Example pattern: H3 subheading → 2-3 sentences context → code block → 1-2 sentences explanation → transition to next section. Time: 2-3 hours for 1500-2000 words."
+                step: "List prerequisites and assumptions explicitly",
+                description: "Call out tools, versions, accounts, permissions, repos, sample data, OS requirements, and any optional configurations."
             },
             {
-                step: "Write code examples that work",
-                description: "Every code block must be: runnable (tested in the target environment), annotated (comments explain non-obvious parts), minimal (only essential code, no distractions), formatted (proper syntax highlighting). Include: language tag, version requirements (// Requires Node.js 18+), and expected output. Show before/after or common variations. Avoid: incomplete snippets, overly complex examples, pseudo-code without explanation. Time: 30-45 minutes per example."
+                step: "Expand each section with Goal → Action → Result → Validate → Recovery",
+                description: "Stick to the same rhythm so depth stays consistent and reviewers know what to expect in every section."
             },
             {
-                step: "Add comparison or decision tables",
-                description: "When comparing tools, approaches, or options, use tables for clarity. Columns: Feature/Criteria, Option A, Option B, Recommended For. Make it scannable: use checkmarks (✓) for yes, crosses (✗) for no, or ratings (1-5 stars). Add a 'When to choose' row with specific scenarios. Example: 'Choose REST if: simple CRUD, broad compatibility. Choose GraphQL if: complex queries, mobile apps with limited bandwidth.' Time: 20 minutes."
+                step: "Add code, API calls, or CLI commands with annotations",
+                description: "Use tested snippets, include language tags, note version requirements, and show expected output or logs so validation is obvious."
             },
             {
-                step: "Optimize without keyword stuffing",
-                description: "Natural integration: use primary keyword in title, first paragraph, one H2, and conclusion. Use secondary keywords in H2/H3 headings and naturally in body text. Add synonyms and related terms (LSI keywords). Structure with: clear heading hierarchy (H1 → H2 → H3), short paragraphs (3-4 lines max), bullet lists for scanability. Include alt text for images with descriptive keywords. Avoid: repeating exact keyword in every paragraph, awkward phrasing just to fit keywords. Time: 15-20 minutes."
+                step: "Document troubleshooting and alternatives",
+                description: "Include Error → Cause → Fix tables plus when to choose alternative approaches so readers can recover quickly."
             },
             {
-                step: "Write a strong conclusion with CTAs",
-                description: "Summarize key points in 2-3 sentences. Suggest next steps: related guides, advanced topics, or community resources. Add a clear call-to-action: 'Try this approach in your next project', 'Join our Discord for help', 'Check out [related guide]'. Reinforce primary keyword one final time naturally. Example: 'You now know how to [primary keyword]. Next, explore [advanced topic] or share your results in [community].' Time: 10-15 minutes."
+                step: "Close with conclusion, next steps, and validation checklist",
+                description: "Summarize what changed, link to production follow-ups, and confirm code, links, and metadata are tested before handoff."
+            }
+        ],
+
+        templateOutline: [
+            {
+                section: "What is the Developer Content & Guide Writing Template",
+                showInNav: true,
+                description: "A structured writing framework used after the outline is approved. It dictates how to execute every section so the final piece stays aligned with the intent, audience, and depth captured during planning.",
+                bulletItems: [
+                    "Applies to DevTools, APIs, SDKs, infrastructure, AI systems, and platform content",
+                    "Keeps explanations clear, examples credible, validation explicit, and decisions well-documented",
+                    "Treats writing as engineering work: predictable, reviewable, and testable"
+                ]
             },
             {
-                step: "Review, test, and refine",
-                description: "Technical review: run all code examples, verify links, check version compatibility. Readability review: read aloud, check for jargon without explanation, ensure logical flow. SEO check: primary keyword in title and intro, H2 headings descriptive, meta description compelling (150-160 chars). Get peer review from a developer unfamiliar with the topic. Use tools like Hemingway Editor for readability, Grammarly for grammar. Time: 45-60 minutes."
+                section: "Why developer content needs a writing framework after the outline",
+                showInNav: true,
+                description: "Outlines capture what to cover. Writing determines how those decisions show up in the shipped experience.",
+                bulletItems: [
+                    "Carries planning decisions into execution so nothing drifts",
+                    "Prevents uneven depth and missing validation even when the outline is solid",
+                    "Ensures examples, outputs, and trade-offs reflect real workflows"
+                ],
+                closingNote: "For developer audiences, quality is felt through precision, validation, and honesty. The framework enforces that standard."
+            },
+            {
+                section: "Where this writing framework applies",
+                showInNav: true,
+                description: "Use it across formats so developers experience the same clarity regardless of topic or medium.",
+                bulletItems: [
+                    "API and SDK documentation",
+                    "Setup and onboarding guides",
+                    "Infrastructure and platform walkthroughs",
+                    "CI/CD tutorials and automation runbooks",
+                    "Architectural explanations and reference material",
+                    "Comparisons, evaluations, and decision guides"
+                ]
+            },
+            {
+                section: "How planning decisions shape the writing",
+                showInNav: true,
+                description: "The writing template keeps the outline within reach while drafting.",
+                bulletItems: [
+                    "Audience assumptions control tone, vocabulary, and acceptable shortcuts",
+                    "Intent (instructional, evaluative, reference) dictates section emphasis",
+                    "Depth targets influence how many examples, diagrams, or validation steps each section needs",
+                    "Keyword and discovery decisions inform headings and phrasing without forcing keyword stuffing"
+                ],
+                note: "Keep the outline visible. Mirror its sections and acceptance criteria word-for-word."
+            },
+            {
+                section: "What the writing template contains",
+                showInNav: true,
+                description: "Four execution areas keep the writing phase predictable and reviewer-friendly.",
+                subsections: [
+                    {
+                        title: "Problem and outcome framing",
+                        paragraphs: [
+                            "Begin with the situation the developer is in—not the product or feature. Be specific to the task, constraint, and environment assumed in the outline.",
+                            "State one concrete, observable outcome the reader will reach by the end of the guide (what will exist or work). Keep it limited to the defined scope.",
+                            "Avoid marketing language, multiple goals, advanced use cases, or feature comparisons in this section."
+                        ],
+                        bulletItems: [
+                            "Include: one clear problem statement, one clear end outcome, and the assumptions from the outline.",
+                            "Example problem: Platform teams need to generate SDKs from OpenAPI specs and keep docs in sync across CI and production.",
+                            "Example outcome: Generate SDKs from an OpenAPI spec and publish versioned docs automatically in CI."
+                        ]
+                    },
+                    {
+                        title: "Step execution and validation",
+                        paragraphs: [
+                            "Write each section as a repeatable sequence: describe the step, show the action, show the expected result, then explain how to confirm success.",
+                            "Validation can include CLI output, API responses, log entries, file system changes, or UI state changes—make it explicit every time.",
+                            "Use the same structure for every major step to keep depth predictable."
+                        ],
+                        bulletItems: [
+                            "Explain the step: This step generates the SDK from the OpenAPI specification.",
+                            "Show the action: openapi-generator generate -i api.yaml -g typescript-fetch -o ./sdk",
+                            "Show the result: New sdk directory with generated client files under sdk/src.",
+                            "Validate success: npm install && npm run build with no errors."
+                        ]
+                    },
+                    {
+                        title: "Examples that match real workflows",
+                        paragraphs: [
+                            "Use real-looking values, configurations, and names; include tool/library/API versions and call out environment or permission assumptions before the example.",
+                            "Make snippets and commands runnable without modification unless clearly noted; avoid pseudo-code presented as runnable.",
+                            "Keep examples focused on one action and do not skip required setup steps."
+                        ],
+                        bulletItems: [
+                            "Better than placeholders: export INFRASITY_API_KEY=env_live_8f23a9... and explain where it comes from.",
+                            "Add language tags to code blocks and stay aligned to the environment in the outline (e.g., Node.js 18 on a Linux CI runner)."
+                        ]
+                    },
+                    {
+                        title: "Handling errors, alternatives, and next steps",
+                        paragraphs: [
+                            "Document common errors with what the developer sees, what causes it, and how to resolve it—specific to this guide.",
+                            "Explain alternatives briefly and when to use each, focusing on practical differences like complexity, maintenance, or operational impact.",
+                            "Close with next steps that build naturally on the task: production usage, automation, security, scaling, or related workflows."
+                        ],
+                        bulletItems: [
+                            "Example error: 401 Unauthorized when publishing docs → Cause: CI lacks the publishing token → Resolution: add the token as a secure CI variable.",
+                            "Next-step examples: add automated versioning for SDK releases, secure credentials with a secrets manager, monitor CI failures and doc drift, extend the setup to more services."
+                        ]
+                    }
+                ]
+            },
+            {
+                section: "How to use the writing template",
+                showInNav: true,
+                description: "Follow the same execution pattern for every section so reviewers know exactly what to expect.",
+                subsections: [
+                    {
+                        title: "Writing the introduction",
+                        bulletItems: [
+                            "Open with the developer problem and the cost of not solving it",
+                            "Explain why the topic is relevant now (new release, scaling challenge, compliance need)",
+                            "Promise the outcome and who benefits"
+                        ]
+                    },
+                    {
+                        title: "Writing the TL;DR",
+                        bulletItems: [
+                            "State the scenario or use case",
+                            "List the primary stack or tools involved",
+                            "Call out 3–4 steps readers will take",
+                            "Mention the expected end state or artifact",
+                            "Include estimated time or difficulty if helpful"
+                        ]
+                    },
+                    {
+                        title: "Writing prerequisites and assumptions",
+                        bulletItems: [
+                            "Tools, versions, accounts, and permissions",
+                            "Sample repos, datasets, or configs",
+                            "Operating system or infrastructure assumptions",
+                            "Optional vs required components clearly labeled",
+                            "Link to setup guides when necessary"
+                        ]
+                    },
+                    {
+                        title: "Writing each section of the outline",
+                        bulletItems: [
+                            "Use the Goal → Action → Result → Validate → Recovery rhythm",
+                            "Pair every command/snippet with why it is needed",
+                            "Show expected output or state change",
+                            "Call out gotchas or edge cases immediately under the step"
+                        ]
+                    },
+                    {
+                        title: "Writing code, API calls, or CLI commands",
+                        bulletItems: [
+                            "Use tested snippets with language tags and version notes",
+                            "Annotate non-obvious lines so readers know what to change",
+                            "Include before/after or alternative implementations when relevant",
+                            "Keep examples realistic—no lorem ipsum payloads"
+                        ]
+                    },
+                    {
+                        title: "Writing troubleshooting",
+                        bulletItems: [
+                            "Structure as Error → Cause → Fix",
+                            "Link to logs, dashboards, or docs that prove the fix",
+                            "Cover 3–5 issues that real users hit, not theoretical edge cases"
+                        ]
+                    },
+                    {
+                        title: "Writing alternatives and trade-offs",
+                        bulletItems: [
+                            "Explain when to choose another approach",
+                            "Call out cost, performance, security, or maintenance differences",
+                            "Help readers make a decision instead of assuming they will figure it out"
+                        ]
+                    },
+                    {
+                        title: "Writing the conclusion",
+                        bulletItems: [
+                            "Summarize what changed or what now works",
+                            "Point to next steps: production hardening, security, automation, monitoring",
+                            "Direct readers to related guides, repos, or community channels"
+                        ]
+                    }
+                ]
+            },
+            {
+                section: "The key takeaway",
+                showInNav: true,
+                description: "Developer content quality is judged by clarity, validation, and honesty. The writing template enforces all three.",
+                bulletItems: [
+                    "Write with intention, not improvisation",
+                    "Keep context, action, validation, and recovery together",
+                    "Show readers what to do next once the primary task is complete"
+                ]
+            },
+            {
+                section: "What to do next",
+                showInNav: true,
+                description: "Once the writing template is in place, expand its influence across your content operations.",
+                bulletItems: [
+                    "Align the outline and writing frameworks so every template speaks the same language",
+                    "Create a writing reference doc that captures examples, accepted phrases, and reviewer expectations",
+                    "Apply the framework to existing content to raise baseline quality",
+                    "Audit published guides for missing validation, troubleshooting, or trade-offs"
+                ]
             }
         ]
     }
