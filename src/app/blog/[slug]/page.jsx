@@ -214,10 +214,12 @@ const PostPage = async (props) => {
       postData.authorName = authorObj.name || "";
       postData.authorImage = authorObj.profilePic || "";
       postData.authorLinkedin = authorObj.linkedIn || "";
+      postData.designation = authorObj.designation || "";
     } else {
       postData.authorName = "";
       postData.authorImage = "";
       postData.authorLinkedin = "";
+      postData.designation = "";
     }
 
     // Get outline - Extract headings safely
