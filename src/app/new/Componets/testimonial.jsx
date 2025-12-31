@@ -112,44 +112,47 @@ function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern 
 
 export default function Testimonials() {
 	return (
-		<section id="testimonials" className="relative py-20 px-4 bg-transparent">
-			{/* Blurred background */}
-			<div
-				className="absolute inset-0 z-0"
-				style={{
-					backgroundColor: "rgb(15,199,255)",
-					filter: "blur(300px)",
-					opacity: 0.4,
-					width: "60vw",
-					height: "30vh",
-				}}
-				aria-hidden="true"
-			/>
-			<div className="relative z-10 max-w-5xl mx-auto">
-				{/* Section Heading */}
-				<div className="flex flex-col items-center mb-12">
-					<div className="px-4 py-1 mb-3 rounded-full border border-blue-300/40 bg-black/10 shadow-inner shadow-blue-500/20">
-						<p className="text-blue-100 text-base font-medium">Testimonials</p>
-					</div>
-					<h2
-						className="text-4xl md:text-5xl font-bold text-white leading-tight mb-2 text-center"
-						style={{
-							background:
-								"linear-gradient(0deg, rgba(255,255,255,0.8) 0%, #fff 100%)",
-							WebkitBackgroundClip: "text",
-							WebkitTextFillColor: "transparent",
-						}}
-					>
-						Hear From Our Clients
-					</h2>
-				</div>
-				{/* Testimonials Grid */}
-				<div className="grid md:grid-cols-2 gap-10">
-					{testimonialsData.map((testimonial, idx) => (
-						<TestimonialCard key={idx} {...testimonial} />
-					))}
-				</div>
-			</div>
-		</section>
-	);
+    <section id="testimonials" className="relative py-20 px-4 bg-transparent">
+      {/* Blurred background */}
+      <div className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
+        <div
+          className="inset-0 z-0"
+          style={{
+            backgroundColor: "rgb(15,199,255)",
+            filter: "blur(300px)",
+            opacity: 0.4,
+            width: "60vw",
+            height: "30vh",
+          }}
+          aria-hidden="true"
+        />
+      </div>
+
+      <div className="relative z-10 max-w-5xl mx-auto">
+        {/* Section Heading */}
+        <div className="flex flex-col items-center mb-12">
+          <div className="px-4 py-1 mb-3 rounded-full border border-blue-300/40 bg-black/10 shadow-inner shadow-blue-500/20">
+            <p className="text-blue-100 text-base font-medium">Testimonials</p>
+          </div>
+          <h2
+            className="text-4xl md:text-5xl font-bold text-white leading-tight mb-2 text-center"
+            style={{
+              background:
+                "linear-gradient(0deg, rgba(255,255,255,0.8) 0%, #fff 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            Hear From Our Clients
+          </h2>
+        </div>
+        {/* Testimonials Grid */}
+        <div className="grid md:grid-cols-2 gap-10">
+          {testimonialsData.map((testimonial, idx) => (
+            <TestimonialCard key={idx} {...testimonial} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

@@ -138,6 +138,22 @@ const integrationCards = [
 const IntegrationSection = () => {
   return (
     <section className="w-full py-24 px-4 md:px-0 flex flex-col items-center relative overflow-hidden">
+          <div className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
+        <div
+          className="rounded-full blur-3xl"
+          style={{
+            backgroundColor: "#c30fff",
+            filter: "blur(200px)",
+            width: "30vw",
+            height: "20vh",
+            opacity: 0.8,
+            maxWidth: 1200,
+            left: 0,
+            right: 0,
+            margin: "auto",
+          }}
+        />
+      </div>
       <div className="relative z-10 flex flex-col items-center">
         <span className="px-4 py-1 rounded-full border border-[#222] text-xs font-medium text-white/80 mb-6">Integrations</span>
         <h2 className="text-center text-white font-manrope text-[2.5rem] md:text-[3rem] font-medium leading-[1.1] tracking-tight mb-4">Seamless Integration,<br className="hidden md:block" /> Maximum Impact</h2>
