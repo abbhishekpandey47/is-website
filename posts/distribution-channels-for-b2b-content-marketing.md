@@ -10,7 +10,7 @@
 
 When you’re selling to developers, it’s easy to get distribution wrong. Most B2B SaaS marketing leaders understand the concept of distribution channels for B2B content marketing but applying it to developers is a whole different story.
 
-It isn’t unknown that developers don’t buy like traditional B2B SaaS buyers. They are informed buyers and don’t sit through webinars just because the sales team nurtured them. They usually don’t read whitepapers that demand an email gate. 
+It isn’t unknown that developers don’t buy as traditional B2B SaaS buyers do, because they are informed buyers and don’t sit through webinars just because the sales team nurtured them. They usually don’t read whitepapers that demand an email gate. 
 
 Instead, developers discover, evaluate, and adopt software in a hidden journey which are inside your docs, on GitHub, through a tutorial on Dev.to, or in a Discord thread, Reddit ro Slack. That’s why your SaaS B2B content distribution strategy must adapt because the distribution channels in marketing that work for executives don’t necessarily work for developers.
 
