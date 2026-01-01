@@ -43,6 +43,36 @@ export default function ThirdSection() {
         <p className="text-white/80 text-lg max-w-2xl mx-auto mb-2" style={{textAlign: 'center'}}>
           60% of adults are researching products and services on ChatGPT, Google AI Overviews, Perplexity, and Amazon RUFUS, making these key new marketing channels. Monitor how your brand appears, uncover consumer trends, and generate optimized content to lead the AI conversation via our end-to-end workflow
         </p>
+
+        {/* LLM Visibility Audit — three-card layout matching earlier design */}
+        <div className="relative z-10 max-w-4xl mx-auto mt-8 mb-8">
+          <h3 className="text-2xl md:text-3xl font-semibold text-white mb-2">Our proven steps to increase visibility and get business results from AI Search</h3>
+          <p className="text-white/80 mb-4">Our LLM Visibility Audit gives your SaaS company a competitive edge by ensuring you’re optimized for LLMs. Here’s what you get:</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="relative flex flex-col rounded-[16px] border border-[#23232b] bg-[#0f0f12] p-6">
+              <div className="h-[0.1rem] w-full bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#0ea5e9] opacity-60 mb-3" />
+              <h4 className="text-lg font-semibold text-white mb-2">Benchmark of your current site traffic LLMs</h4>
+              <p className="text-white/80 text-sm mb-4">Learn how much traffic your site is currently receiving from LLMs, like ChatGPT, Perplexity, and Claude. Understand how well this traffic is converting and what value you get from LLM referral traffic. Gain insights into which page types perform the best on which platforms.</p>
+
+              <h4 className="text-lg font-semibold text-white mb-2">Close your AI visibility gap</h4>
+              <p className="text-white/80 text-sm">Our audit will make you understand the current performance of your AI visibility for your category and most relevant keywords. We will also provide actionable insights to improve your domain’s visibility.</p>
+            </div>
+
+            <div className="relative flex flex-col rounded-[16px] border border-[#23232b] bg-[#0f0f12] p-6">
+              <div className="h-[0.1rem] w-full bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#0ea5e9] opacity-60 mb-3" />
+              <h4 className="text-lg font-semibold text-white mb-2">Uncover who is talking about your brand and where</h4>
+              <p className="text-white/80 text-sm">Find out which websites are influencing AI Search responses and which citations are mentioning your brand already. And – more importantly – where you are not mentioned yet. This insight will guide your Digital PR strategy.</p>
+            </div>
+
+            <div className="relative flex flex-col rounded-[16px] border border-[#23232b] bg-[#0f0f12] p-6">
+              <div className="h-[0.1rem] w-full bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#0ea5e9] opacity-60 mb-3" />
+              <h4 className="text-lg font-semibold text-white mb-2">An action plan to understand the next steps</h4>
+              <p className="text-white/80 text-sm mb-4">Not only will we go through all our findings with you in a 60-minute call but we will also send you an action plan with your priorities to improve your AI visibility.</p>
+              <a href="/contact" className="inline-block mt-auto px-4 py-2 rounded-md bg-gradient-to-b from-gray-200 via-white to-gray-200 text-black font-semibold border border-white/10">Book the audit</a>
+            </div>
+          </div>
+        </div>
       </div>
 
   
@@ -52,40 +82,11 @@ export default function ThirdSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Card */}
           <div className="bg-[#18181c]/90 border border-[#23232b] rounded-2xl shadow-2xl p-0 flex flex-col min-h-[340px] w-full mx-auto overflow-hidden">
-            <div className="flex">
-              <div className="flex flex-col w-1/3 bg-[#18181c] p-4 gap-2 border-r border-[#23232b]">
-                <span className="text-xs text-white/50">Dashboard</span>
-                <span className="text-xs text-white">Visibility</span>
-                <span className="text-xs text-white/70">Citations</span>
-                <span className="text-xs text-white/70">Competition</span>
-                <span className="text-xs text-white/70">Query Log</span>
-              </div>
-              <div className="flex-1 flex flex-col p-4">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-white text-sm">Visibility</span>
-                  <span className="text-white text-sm">24.7%</span>
-                </div>
-                <div className="w-full h-2 bg-purple-300/30 rounded">
-                  <div className="h-2 bg-[#512febcc] rounded" style={{ width: "24.7%" }}></div>
-                </div>
-                <div className="text-xs text-white/70 mt-2">Your SOV has increased by 17% in the last 3 months</div>
-                <div className="flex-1 flex flex-col justify-end">
-                  <div className="bg-black/10 border border-[#222] rounded-lg p-2 mt-4 w-max">
-                    <span className="text-xs text-white">SOV Tracking</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end p-2">
-              <button className="bg-[#23232b] text-white text-xs rounded px-3 py-1 border border-[#23232b]">Export</button>
-            </div>
+            
           </div>
           {/* Text */}
           <div className="flex flex-col gap-3">
-            <div className="mb-2">
-              <span className="bg-black border border-[#222] rounded-[6px] px-3 py-1 text-xs text-white font-medium">SOV Tracking</span>
-            </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-2">Complete AI Search Visibility</h3>
+            <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-2">Benchmark of your current site traffic LLMs</h3>
             <p className="text-white/80 text-lg max-w-xl">Track your brand's performance across AI platforms like ChatGPT, Perplexity, Gemini, and Rufus. See exactly how your products appear in AI-generated responses and recommendations, with real-time alerts for visibility drops.</p>
           </div>
         </div>
