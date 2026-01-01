@@ -9,33 +9,33 @@ const heroImage = 'https://framerusercontent.com/images/aootIzwv3wiOmpUg9vnbUWVq
 
 const timelineSteps = [
   {
-    title: 'Discovery Audit',
+    title: 'Measure your current LLM traffic',
     description:
-      'We analyze your current LLM visibility landscape, mapping where and how AI systems reference your brand, products, and expertise across the major language models.',
+      'We benchmark how much traffic you currently receive from AI search tools like ChatGPT, Perplexity, and Claude, and how that traffic converts.',
     icon: Search,
   },
   {
-    title: 'Gap Analysis',
+    title: 'Identify your AI visibility gap',
     description:
-      "Identify critical blind spots where AI-generated responses miss your business entirely. Uncover opportunities competitors haven't discovered yet.",
+      'We evaluate your categories and priority keywords to show where you’re visible today and where competitors are winning.',
     icon: BarChart3,
   },
   {
-    title: 'Strategy Blueprint',
+    title: 'Analyze performance by platform & page type',
     description:
-      'Receive a custom roadmap engineered for maximum discoverability. Our data-driven approach ensures your content surfaces in AI conversations that matter.',
+      'We reveal which pages perform best on which LLMs and how optimizing those pages will create the biggest lift.',
     icon: Map,
   },
   {
-    title: 'Implementation',
+    title: 'Map who’s influencing AI answers',
     description:
-      'Execute visibility optimization tactics with precision. From content restructuring to semantic enhancements, we deploy proven techniques at scale.',
+      'We identify the sites, sources, and citations that LLMs rely on, showing where your brand is already mentioned—and where it’s missing.',
     icon: Rocket,
   },
   {
-    title: 'Monitoring & Reporting',
+    title: 'Deliver a prioritized action plan',
     description:
-      'Track performance with real-time dashboards and actionable insights. Watch your LLM visibility metrics climb as AI systems increasingly recognize your authority.',
+      'We walk you through the findings in a strategy call and provide a step-by-step roadmap to improve your AI search visibility.',
     icon: LineChart,
   },
 ];
@@ -178,6 +178,7 @@ export default function ThirdSection() {
             src={heroImage}
             alt="AI Search Growth"
             width={420}
+            height={260}
             className="w-full absolute object-contain rounded-xl"
             priority
           />
@@ -199,23 +200,6 @@ export default function ThirdSection() {
             delay={index * 140}
           />
         ))}
-      </div>
-
-      <div
-        ref={ctaRef}
-        className={cn(
-          'relative z-10 mt-12 text-center',
-          'opacity-0 translate-y-8 transition-all duration-700',
-          ctaVisible && 'opacity-100 translate-y-0'
-        )}
-      >
-        <a
-          href="/contact"
-          className="inline-flex items-center justify-center overflow-hidden rounded-full px-8 py-3 text-black font-semibold bg-gradient-to-r from-[#c30fff] to-[#27f9ff] shadow-[0_10px_40px_rgba(195,15,255,0.7)] group"
-        >
-          <span className="relative z-10">Book the LLM Audit</span>
-        </a>
-        <p className="mt-4 text-sm text-white/70">No commitment required • Results in 48 hours</p>
       </div>
     </section>
   );
