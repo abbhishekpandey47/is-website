@@ -5,40 +5,54 @@ import React, { useState } from "react";
 
 const faqs = [
 	{
-		question: "What Is Generative Engine Optimization?",
+		question: "What does Infrasity’s LLM Visibility Audit include?",
 		answer:
-			"Generative Engine Optimization (GEO) is the process of optimizing content for AI-driven search engines and generative models, which provide more comprehensive and human-like responses to queries than traditional search engines. Unlike conventional SEO that focuses on keyword rankings to drive clicks, GEO centers on creating authoritative, well-structured content that AI systems can easily synthesize and cite within their conversational responses. As users increasingly seek direct answers from AI rather than browsing links, GEO ensures your content becomes an integral part of the AI's knowledge base and gets referenced when users ask relevant questions.",
+			"Our audit analyzes how your brand appears across AI assistants such as ChatGPT, Perplexity, Claude, and Gemini. You receive a visibility benchmark, competitor comparison, citation/source analysis, and a prioritized action roadmap.",
 	},
 	{
-		question: "How can I get my product featured in ChatGPT shopping?",
+		question: "How is this different from a regular SEO audit?",
 		answer:
-			"To get your products featured in ChatGPT Shopping, you need to either be a merchant listed on a platform that ChatGPT integrates with, or wait for OpenAI to open up direct submissions for merchants. Currently, ChatGPT pulls shopping recommendations from integrated platforms like Shopify and Amazon, making these your primary pathways for inclusion. To maximize your visibility, ensure your product listings feature comprehensive descriptions, high-quality images, and proper structured data markup that AI systems can easily parse. While OpenAI continues developing direct merchant submission capabilities, you can monitor their official channels for updates and express interest through their Help Center to stay informed about future opportunities.",
+			"Traditional SEO focuses on ranking in Google search results. Our audit focuses on how AI systems describe, cite, and recommend your brand inside generated answers. We optimize entities, citations, and authority signals rather than just keywords.",
 	},
 	{
-		question:
-			"How is generative engine optimization different from traditional SEO?",
+		question: "Who is this service best suited for?",
 		answer:
-			"Traditional SEO focuses on improving a website's ranking in search engine results pages (SERPs) using keywords and backlinks. GEO, on the other hand, aims to influence the generation of AI-driven answers and search results by optimizing content for AI-powered search engines. While traditional SEO targets click-through rates by positioning web pages higher in link-based results, GEO prioritizes creating content that AI systems can synthesize and cite within their conversational responses. This fundamental shift reflects how users increasingly seek direct answers from AI rather than browsing multiple websites, requiring content creators to optimize for AI comprehension and attribution rather than traditional ranking signals.",
+			"This service is ideal for SaaS companies, developer tools, AI-first products, and B2B brands that rely on organic discovery and want to shape how AI models talk about them.",
 	},
 	{
-		question: "Can my SEO software help me track LLM performance?",
+		question: "How long does the audit take?",
 		answer:
-			"Different software is needed to track LLM performance because these models are inherently complex and their behavior is not always predictable, making traditional monitoring methods inadequate. Traditional SEO software was designed to track keyword rankings and website traffic from search engines, but LLMs operate on entirely different principles—they generate conversational responses, synthesize information from multiple sources, and provide direct answers rather than ranked links. Specialized LLM observability tools like Azoma are built to handle these unique challenges by tracking metrics such as response accuracy, citation frequency, content synthesis patterns, and AI model behavior across different queries. These platforms provide the granular insights needed to understand how your content performs within AI-generated responses, something that conventional SEO analytics simply cannot measure or optimize for effectively.",
+			"Most engagements are completed within 2–4 weeks depending on your content footprint and number of categories analysed.",
 	},
 	{
-		question: 'How is Azoma an "end-to-end" workflow solution?',
+		question: "What outputs will our team receive?",
 		answer:
-			"Azoma not only provides you with Analytics on how you perform in AI Search, but also enables you to generate optimized visual and written content - such as product listings, blogs, recipes etc, at scale. Azoma also integrates with your existing workflows to enable the publishing of this content in one click",
+			"You receive: full visibility audit report, list of influencing sources and citations, gap analysis vs competitors, platform-wise performance insights, and a prioritized implementation roadmap. We also walk you through findings on a strategy call.",
 	},
 	{
-		question: "How Does Azoma Help Me Stay Competitive?",
+		question: "Can Infrasity implement the recommendations as well?",
 		answer:
-			"Azoma gives you real-time visibility into how your topics of interest are being discussed across major AI platforms, surfaces insights into consumer queries, and helps optimize your content strategy to increase presence in AI-powered search. It’s your competitive and end-to-end automation edge in the new AI era.",
+			"Yes. You may execute internally, or Infrasity can handle implementation across content optimization, entity cleanup, structured data, GEO, and digital PR.",
 	},
 	{
-		question: "Who was Azoma built for?",
+		question: "Do you require access to analytics tools?",
 		answer:
-			"Azoma was built for leaders in companies selling 'high consideration' products or services. If your customers are amongst the billion people using ChatGPT each day; or the +14% of Amazon shoppers asking questions to Amazon Rufus; then Azoma is for you.",
+			"Access to GA4 or product analytics helps us tie AI-driven traffic to conversions. If access is limited, we can still conduct a visibility-focused audit.",
+	},
+	{
+		question: "What happens if AI tools currently show wrong or outdated information about us?",
+		answer:
+			"We identify why incorrect responses occur and outline corrective actions such as entity alignment, authority source updates, and content restructuring so AI models present accurate brand information.",
+	},
+	{
+		question: "Will this replace our SEO efforts?",
+		answer:
+			"No. LLM visibility complements SEO. Strong SEO strengthens the signals AI systems rely on, and GEO + SEO together drive better organic discovery.",
+	},
+	{
+		question: "How soon can we expect results after implementation?",
+		answer:
+			"Timelines vary by category and authority level, but most brands begin seeing changes in AI responses and citations within 6–12 weeks as sources refresh and models update.",
 	},
 ];
 
