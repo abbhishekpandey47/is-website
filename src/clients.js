@@ -115,7 +115,7 @@ export const clientPaddingMap = {
 export const clientWhiteLogo = [
   "brevo.png",
   "cycloid.png",
-  "DevZero.png",
+  "devZero.png",
   "dhiwise.png",
   "firefly.png",
   "inframail.png",
@@ -129,3 +129,20 @@ export const clientWhiteLogo = [
   "scalr.png",  
   "teleport.png"
 ];
+export const clientWhiteStyle = {
+  "brevo.png":"object-cover",
+  "cycloid.png":"object-contain",
+  "devZero.png":"object-contain",
+  "dhiwise.png":"object-cover",
+  "firefly.png":"object-contain",
+  "inframail.png":"object-cover",
+  "kubiya.png":"object-contain",
+  "mocha.png":"object-contain",
+  "mvpgrow.png":"object-contain",
+  "ollm.png":"object-cover",
+  "qualifier.png":"object-cover",
+  "respond.png":"object-cover",
+  "scalekit.png":"object-contain",
+  "scalr.png":"object-contain",  
+  "teleport.png":"object-cover"
+};
