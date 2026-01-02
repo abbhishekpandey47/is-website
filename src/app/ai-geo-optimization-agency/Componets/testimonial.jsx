@@ -50,15 +50,6 @@ const testimonialsData = [
 		bgPattern: null
 	},
 	{
-		name: "Sri Krishna",
-		quote: "Infrasity is incredibly responsive and understands client needs exceptionally well, always delivering promptly and as expected. Their attention to detail and outstanding customer support truly set them apart. Communication through email and messaging was seamless, and while the quality of work is top-notch, we look forward to even faster delivery in the future.",
-		title: "Content Head, Middleware",
-		avatar: "/Testimon/sriMiddleware.jpeg",
-		logo: null,
-		logoAlt: "",
-		bgPattern: null
-	},
-	{
 		name: "Debosmit Ray",
 		quote: "Infrasity has helped us create technical content, product documentation, and recipe libraries for integrating DevZero with different tech stacks. Their product videos showcase our key features, making it easier to engage users. A great content partner in our journey!",
 		title: "Founder, DevZero",
