@@ -171,7 +171,7 @@ export default function ThirdSection() {
             heroVisible && 'opacity-100 translate-y-0'
           )}
         >
-          Turn AI Search into Brand Growth
+          Identify where your product is missing or misrepresented
         </h2>
         <div className="relative w-full flex justify-center mb-6">
           <Image
@@ -184,7 +184,7 @@ export default function ThirdSection() {
           />
         </div>
         <p className="text-white/80 text-lg max-w-2xl mx-auto" style={{ textAlign: 'center' }}>
-          60% of adults are researching products and services on ChatGPT, Google AI Overviews, Perplexity, and Amazon RUFUS, making these key new marketing channels. Monitor how your brand appears, uncover consumer trends, and generate optimized content to lead the AI conversation via our end-to-end workflow.
+          We analyze how ChatGPT, Perplexity, Google AI, and Claude currently explain problems in your category and map the docs, GitHub threads, Reddit discussions, and articles they rely on.
         </p>
       </div>
 
