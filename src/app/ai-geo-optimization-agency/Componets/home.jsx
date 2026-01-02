@@ -15,15 +15,9 @@ export default function HeroSection() {
 						{/* blurred magenta background behind heading */}
 						<div className="heading-bg absolute left-1/2 -translate-x-1/2" aria-hidden />
 						<div className="relative z-10">
-							<h1 className="hero-line" style={{fontSize: 'clamp(2rem, 5.5vw, 5.5rem)', lineHeight: 1, margin: 0}}>10X your visibility on AI Search.</h1>
-							<h1 className="hero-line mt-2" style={{fontSize: 'clamp(2rem, 5.5vw, 5.5rem)', lineHeight: 1, margin: 0}}>Be the B2B startup</h1>
-							<div className="hero-line brand-rotator mt-4" style={{position: 'relative', height: '1.1em'}}>
-								<span className="rot-word">ChatGPT</span>
-								<span className="rot-word">Google AI</span>
-								<span className="rot-word">Perplexity</span>
-								<span className="rot-word">ChatGPT</span>
-							</div>
-							<h1 className="hero-line mt-16" style={{fontSize: 'clamp(2rem, 5.5vw, 5.5rem)'}}>recommends first.</h1>
+							<h1 className="hero-line" style={{fontSize: 'clamp(2rem, 5.5vw, 5.5rem)', lineHeight: 1, margin: 0}}>Show up in AI answers</h1>
+							<h1 className="hero-line mt-2" style={{fontSize: 'clamp(2rem, 5.5vw, 5.5rem)', lineHeight: 1, margin: 0}}>where technical buyers</h1>
+							<h1 className="hero-line mt-2" style={{fontSize: 'clamp(2rem, 5.5vw, 5.5rem)', lineHeight: 1, margin: 0}}>actually decide.</h1>
 						</div>
 					</div>
 					<div className="flex justify-center w-full">
