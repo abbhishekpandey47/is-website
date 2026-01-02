@@ -39,12 +39,12 @@ export default function SecondSection() {
 							text: "We help your product appear inside real troubleshooting discussions and technical explanations on Reddit and GitHub — the sources AI systems consistently reference in answers.",
 						},
 						{
-							title: 'Create content that gets picked up',
-							text: "We research the real questions people ask tools like ChatGPT, then help your B2B startup publish content designed to answer them.",
+							title: 'Publish technical content AI can reuse',
+							text: "We create deep technical content and distribute it across Medium, dev.to, and Hacker News — the developer platforms AI systems actively learn from.",
 						},
 						{
-							title: 'Control how your startup is described',
-							text: "We make sure AI tools reflect the right story. From product positioning to company facts, we help shape how your B2B startup is presented.",
+							title: 'Track which content AI actually uses',
+							text: "We show you which pages, docs, and guides are repeatedly referenced inside AI-generated answers — so you know what's influencing decisions and what's being ignored.",
 						},
 					].map((card, i) => (
 						<div key={i} className="relative flex flex-col rounded-[16px] border border-[#23232b] bg-[#18181c]/90 shadow-lg overflow-hidden px-8 pt-0 pb-8 min-h-[320px]" style={{boxShadow: '0 2px 24px 0 rgba(0,0,0,0.18)'}}>
