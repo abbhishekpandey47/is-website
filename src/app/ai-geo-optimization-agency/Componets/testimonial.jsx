@@ -66,16 +66,7 @@ const testimonialsData = [
 		logo: null,
 		logoAlt: "",
 		bgPattern: null
-	},
-	{
-		name: "Saif Ali Shaik",
-		quote: "Infrasity has helped the client achieve increased organic traffic, higher engagement rates on content, and measurable improvements in search rankings. The team's work has contributed to the client's strengthened market position and visibility among key audiences in identification technology.",
-		title: "Developer Advocate, Scalekit",
-		avatar: "/Testimon/SaifScalekit.png",
-		logo: null,
-		logoAlt: "",
-		bgPattern: null
-	},
+	}
 ];
 
 function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern }) {
