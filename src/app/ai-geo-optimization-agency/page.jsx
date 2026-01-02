@@ -1,11 +1,10 @@
 import Home from "./Componets/home";
 import SecondSection from "./Componets/secondSection";
 import ThirdSection from "./Componets/thirdSection";
-import NewMarquee from "@/Components/NewMarquee.jsx";
 import Testimonials from "./Componets/testimonial";
 import FAQ from "./Componets/faq";
 import CTA from "../services/developer-marketing-agency/cta";
-// import ClientSection from "./Componets/clientSection";
+import ClientSection from "./Componets/clientSection";
 // import CaseStudies from "./Componets/caseStudies";
 
 export const metadata = {
@@ -23,8 +22,7 @@ export default function LandingPage() {
   return (
     <main>
       <Home />
-      <NewMarquee />
-      {/* <ClientSection/> */}
+      <ClientSection/>
       <SecondSection />
       <ThirdSection />
       {/* <CaseStudies /> */}

@@ -6,11 +6,14 @@ import { useState, useEffect } from "react";
 // blob GIF removed; using Framer HTML background instead
 
 const rotatingBrands = [
+  { name: "Perplexity", key: "perplexity", logo: "/CommLogo/perplexity.png" },
   { name: "ChatGPT", key: "chatgpt", logo: "/CommLogo/chatgpt.png" },
   { name: "Claude", key: "claude", logo: "/CommLogo/claude.png" },
-  { name: "Perplexity", key: "perplexity", logo: "/CommLogo/perplexity.png" },
-  { name: "Google AI", key: "google", logo: "/CommLogo/gemini.png" },
-  { name: "ChatGPT", key: "chatgpt", logo: "/CommLogo/chatgpt.png" },
+  { name: "Gemini", key: "gemini", logo: "/CommLogo/gemini.png" },
+  { name: "Grok", key: "grok", logo: "/CommLogo/grok.png" },
+  { name: "Copilot", key: "microsoft-copilot", logo: "/CommLogo/copilot.png" },
+  { name: "DeepSeek", key: "deepseek", logo: "/CommLogo/deepseek.png" },
+  { name: "Google AI", key: "google-ai-overviews", logo: "/CommLogo/gemini.png" },
 ];
 
 function BrandBadge({ brand }) {
@@ -18,16 +21,15 @@ function BrandBadge({ brand }) {
     <span className="brand-badge" data-brand={brand.key} aria-hidden>
       <span
         className="brand-badge-inner"
-        style={{ transform: "scale(0.9) rotate(6.5deg)" }}
+        style={{ transform: "scale(0.9)" }}
       >
         <Image
           src={brand.logo}
           alt={brand.name}
-          width={108}
-          height={108}
-          sizes="(min-width: 640px) 54px, 40px"
-          priority={false}
+          width={100}
+          height={100}
           className="brand-logo"
+          unoptimized
         />
       </span>
     </span>
@@ -38,7 +40,7 @@ export default function HeroSection() {
   const [currentIdx, setCurrentIdx] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIdx(idx => (idx + 1) % rotatingBrands.length);
+      setCurrentIdx((idx) => (idx + 1) % rotatingBrands.length);
     }, 1800);
     return () => clearInterval(interval);
   }, []);
@@ -62,12 +64,14 @@ export default function HeroSection() {
                 <span className="hero-prefix">Show up in</span>{" "}
                 <span className="brand-inline">
                   <BrandBadge brand={rotatingBrands[currentIdx]} />
-                  <span className="brand-inline-text rotator-text" key={rotatingBrands[currentIdx].key}>
+                  <span
+                    className="brand-inline-text rotator-text"
+                    key={rotatingBrands[currentIdx].key}
+                  >
                     {rotatingBrands[currentIdx].name}
                   </span>
                 </span>
               </h1>
-
               <h1
                 className="hero-line mt-2"
                 style={{
@@ -129,11 +133,11 @@ export default function HeroSection() {
 						}
 
 						.hero-heading { position: relative; padding-top: 8px; padding-bottom: 8px; }
-						.heading-bg { position: absolute; left: 50%; transform: translateX(-50%); width: 820px; height: 420px; background: radial-gradient(circle at 50% 45%, rgba(59,130,246,0.55) 0%, rgba(79,70,229,0.35) 45%, transparent 70%); filter: blur(88px) saturate(120%); z-index: 0; border-radius: 50%; top: -36px; }
+						.heading-bg { position: absolute; left: 50%; transform: translateX(-50%); width: 820px; height: 420px; background: radial-gradient(circle at 50% 45%, rgba(59,130,246,0.55) 0%, rgba(79,70,229,0.35) 45%, transparent 70%); filter: blur(88px) saturate(120%); z-index: 0; border-radius: 50%; top: -30px ; opacity: 0.5; }
 						.hero-line { font-weight: 700; color: white; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
 						.hero-line-inline { display: inline-flex; align-items: center; gap: 0.75rem; flex-wrap: nowrap; white-space: nowrap; }
 						.hero-prefix { display: inline-block; }
-						.brand-inline { display: inline-flex; align-items: center; gap: 0.5rem;text-align: left; white-space: nowrap; }
+						.brand-inline { display: inline-flex; align-items: center; gap: 0.5rem;text-align: center; white-space: nowrap; }
 						.brand-inline-text { font-size: 1em; letter-spacing: 0.06em; font-family: inherit; }
 						.brand-badge {
 							position: relative;
@@ -143,11 +147,6 @@ export default function HeroSection() {
 							width: 2.25rem;
 							height: 2.25rem;
 							margin: 0 0.25rem 0 0;
-							border-radius: 0.85rem;
-							background: rgba(255, 255, 255, 0.92);
-							box-shadow: 0 18px 48px rgba(15, 23, 42, 0.35);
-							border: 1px solid rgba(0, 0, 0, 0.08);
-							transform: rotate(6.5deg);
 						}
 						@media (min-width: 640px) {
 							.brand-badge {
@@ -165,8 +164,8 @@ export default function HeroSection() {
 							justify-content: center;
 						}
 						.brand-logo {
-							width: 60%;
-							height: 60%;
+							width: 150%;
+							height: 100%;
 							object-fit: contain;
 							filter: drop-shadow(0 6px 6px rgba(15, 23, 42, 0.25));
 						}

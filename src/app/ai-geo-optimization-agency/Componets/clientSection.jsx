@@ -1,11 +1,9 @@
-
 import Image from "next/image";
-import { clientPaddingMap, serviceClientLogo } from "@/clients";
+import {clientWhiteLogo} from "@/clients";
 
-const getLogoPadding = (filename) => clientPaddingMap[filename] || "p-4";
 
 export default function ClientSection() {
-	const logos = serviceClientLogo.slice(0, 15);
+	const logos = clientWhiteLogo.slice(0, 15);
 
 	return (
 		<section className="w-full py-20 px-4 md:px-0 flex flex-col items-center">
@@ -22,20 +20,20 @@ export default function ClientSection() {
 					</p>
 				</div>
 
-				<div className="rounded-2xl border border-[#222] overflow-hidden bg-[#0F0F13]">
+				<div className="overflow-hidden">
 					<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
 						{logos.map((file, idx) => (
 							<div
 								key={`${file}-${idx}`}
 								className="h-24 sm:h-28 lg:h-28 flex items-center justify-center border-b border-r border-[#222] last:border-r-0"
 							>
-								<div className={`mix-blend-color-burn ${getLogoPadding(file)}`}>
+								<div>
 									<Image
 										loading="lazy"
 										width={170}
 										height={80}
 										className="object-contain opacity-90 max-h-12 w-auto"
-										src={`/trustedby-bw/bw/${file}`}
+										src={`/trustedby/white/${file}`}
 										alt="Company logo"
 									/>
 								</div>
