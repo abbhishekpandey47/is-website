@@ -20,27 +20,35 @@ export default function ClientSection() {
 					</p>
 				</div>
 
-				<div className="overflow-hidden">
-					<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-						{logos.map((file, idx) => (
-							<div
-								key={`${file}-${idx}`}
-								className="h-24 sm:h-28 lg:h-28 flex items-center justify-center border-b border-r border-[#222] last:border-r-0"
-							>
-								<div>
-									<Image
-										loading="lazy"
-										width={170}
-										height={80}
-										className="object-contain opacity-90 max-h-12 w-auto"
-										src={`/trustedby/white/${file}`}
-										alt="Company logo"
-									/>
-								</div>
-							</div>
-						))}
-					</div>
-				</div>
+				   <div className="overflow-hidden">
+					   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+						   {logos.map((file, idx) => {
+							   // Calculate if last column or last row for border logic
+							   const isLastCol = (idx + 1) % 5 === 0;
+							   const isLastRow = idx >= 10; // 15 logos, 5 per row, so last row is idx 10-14
+							   let borderClass = "";
+							   if (!isLastCol) borderClass += " border-r-2";
+							   if (!isLastRow) borderClass += " border-b-2";
+							   return (
+								   <div
+									   key={`${file}-${idx}`}
+									   className={`h-28 flex items-center justify-center${borderClass} border-[#fff]/30`}
+								   >
+									   <div className="flex items-center justify-center w-[170px] h-[80px]">
+										   <Image
+											   loading="lazy"
+											   width={150}
+											   height={60}
+											   className="object-contain opacity-90 w-[150px] h-[60px]"
+											   src={`/trustedby/white/${file}`}
+											   alt="Company logo"
+										   />
+									   </div>
+								   </div>
+							   );
+						   })}
+					   </div>
+				   </div>
 			</div>
 		</section>
 	);

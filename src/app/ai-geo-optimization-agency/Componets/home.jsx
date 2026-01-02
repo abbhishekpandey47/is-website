@@ -26,8 +26,8 @@ function BrandBadge({ brand }) {
         <Image
           src={brand.logo}
           alt={brand.name}
-          width={100}
-          height={100}
+          width={300}
+          height={300}
           className="brand-logo"
           unoptimized
         />
@@ -65,7 +65,7 @@ export default function HeroSection() {
                 <span className="brand-inline">
                   <BrandBadge brand={rotatingBrands[currentIdx]} />
                   <span
-                    className="brand-inline-text rotator-text"
+                    className="brand-inline-text rotator-text text-align-left"
                     key={rotatingBrands[currentIdx].key}
                   >
                     {rotatingBrands[currentIdx].name}
@@ -112,7 +112,7 @@ export default function HeroSection() {
       <style>{`
             .rotator-text {
               display: inline-block;
-              min-width: 7.5ch;
+              width: auto;
               transition: opacity 0.5s cubic-bezier(.4,0,.2,1), transform 0.5s cubic-bezier(.4,0,.2,1);
               opacity: 1;
               will-change: opacity, transform;
@@ -139,36 +139,38 @@ export default function HeroSection() {
 						.hero-prefix { display: inline-block; }
 						.brand-inline { display: inline-flex; align-items: center; gap: 0.5rem;text-align: center; white-space: nowrap; }
 						.brand-inline-text { font-size: 1em; letter-spacing: 0.06em; font-family: inherit; }
-						.brand-badge {
-							position: relative;
-							display: inline-flex;
-							align-items: center;
-							justify-content: center;
-							width: 2.25rem;
-							height: 2.25rem;
-							margin: 0 0.25rem 0 0;
-						}
-						@media (min-width: 640px) {
-							.brand-badge {
-								width: 3.25rem;
-								height: 3.25rem;
-								margin: 0 0.65rem 0 0;
-								border-radius: 1.25rem;
-							}
-						}
-						.brand-badge-inner {
-							display: flex;
-							width: 100%;
-							height: 100%;
-							align-items: center;
-							justify-content: center;
-						}
-						.brand-logo {
-							width: 150%;
-							height: 100%;
-							object-fit: contain;
-							filter: drop-shadow(0 6px 6px rgba(15, 23, 42, 0.25));
-						}
+            .brand-badge {
+              position: relative;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              height: 1em;
+              width: 1em;
+              font-size: inherit;
+              vertical-align: middle;
+            }
+            @media (min-width: 640px) {
+              .brand-badge {
+                height: 1.15em;
+                width: 1.15em;
+                border-radius: 0.5em;
+              }
+            }
+            .brand-badge-inner {
+              display: flex;
+              width: 100%;
+              height: 100%;
+              align-items: center;
+              justify-content: center;
+            }
+            .brand-logo {
+              height: 1em;
+              width: auto;
+              max-width: 1.5em;
+              object-fit: contain;
+              filter: drop-shadow(0 6px 6px rgba(15, 23, 42, 0.25));
+              vertical-align: middle;
+            }
 					`}</style>
     </section>
   );
