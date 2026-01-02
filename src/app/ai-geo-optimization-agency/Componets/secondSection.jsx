@@ -6,7 +6,7 @@ export default function SecondSection() {
 			{/* Section Heading Framer Style */}
 			<div className="max-w-3xl mx-auto text-center mb-16 relative z-10">
 				<div className="inline-block px-6 py-2 mb-6 rounded-full border border-[#7c3aed] bg-[#1a0033] shadow-[0_0_0_2px_rgba(124,58,237,0.2)]">
-					<p className="text-sm font-medium text-white">Infrasity helps modern companies win visibility in AI answers</p>
+					<p className="text-sm font-medium text-white">Infrasity helps technical B2B companies win visibility in AI answers</p>
 				</div>
                  <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4" style={{background: 'linear-gradient(0deg, rgba(255,255,255,0.8) 0%, #fff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>
 									Turn AI Search into measurable growth for B2B startups
@@ -22,7 +22,7 @@ export default function SecondSection() {
 						  />
 					</div>
 						<p className="text-white/80 text-lg max-w-2xl mx-auto mb-2" style={{textAlign: 'center'}}>
-						We help you get recommended by ChatGPT, Perplexity, and Google when your target audience is doing research into new products and services. Our innovative AI SEO strategies give your brand a consistent presence in the places that matter.
+						When developers research new tools, they don't scroll ten links. They ask ChatGPT, Perplexity, Claude or Google AI and trust what those systems cite.
 						</p>
 			</div>
 
