@@ -9,31 +9,31 @@ const heroImage = 'https://framerusercontent.com/images/aootIzwv3wiOmpUg9vnbUWVq
 
 const timelineSteps = [
   {
-    title: 'Measure your current LLM traffic',
+    title: 'Baseline how AI systems currently discover your product',
     description:
       'We benchmark how much traffic you currently receive from AI search tools like ChatGPT, Perplexity, and Claude, and how that traffic converts.',
     icon: Search,
   },
   {
-    title: 'Identify your AI visibility gap',
+    title: 'Find where AI answers default to competitors',
     description:
       'We evaluate your categories and priority keywords to show where you’re visible today and where competitors are winning.',
     icon: BarChart3,
   },
   {
-    title: 'Analyze performance by platform & page type',
+    title: 'See which of your technical assets AI actually pulls from',
     description:
       'We reveal which pages perform best on which LLMs and how optimizing those pages will create the biggest lift.',
     icon: Map,
   },
   {
-    title: 'Map who’s influencing AI answers',
+    title: 'Identify the developer surfaces that need intervention',
     description:
       'We identify the sites, sources, and citations that LLMs rely on, showing where your brand is already mentioned—and where it’s missing.',
     icon: Rocket,
   },
   {
-    title: 'Deliver a prioritized action plan',
+    title: 'Execute a source-led technical content and distribution plan',
     description:
       'We walk you through the findings in a strategy call and provide a step-by-step roadmap to improve your AI search visibility.',
     icon: LineChart,
@@ -160,7 +160,7 @@ export default function ThirdSection() {
 
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center mb-20 text-center">
         <div className="inline-flex items-center justify-center px-6 py-2 mb-4 rounded-full border border-violet-400/40 bg-black/10 shadow-inner shadow-violet-500/20">
-          <p className="text-violet-100 text-base font-medium">Activate the fastest growing marketing channel</p>
+          <p className="text-violet-100 text-base font-medium">Activate the fastest growing developer marketing channel</p>
         </div>
         <h2
           ref={heroRef}
@@ -171,7 +171,7 @@ export default function ThirdSection() {
             heroVisible && 'opacity-100 translate-y-0'
           )}
         >
-          Turn AI Search into Brand Growth
+          Identify where your product is missing or misrepresented
         </h2>
         <div className="relative w-full flex justify-center mb-6">
           <Image
@@ -184,7 +184,7 @@ export default function ThirdSection() {
           />
         </div>
         <p className="text-white/80 text-lg max-w-2xl mx-auto" style={{ textAlign: 'center' }}>
-          60% of adults are researching products and services on ChatGPT, Google AI Overviews, Perplexity, and Amazon RUFUS, making these key new marketing channels. Monitor how your brand appears, uncover consumer trends, and generate optimized content to lead the AI conversation via our end-to-end workflow.
+          We analyze how ChatGPT, Perplexity, Google AI, and Claude currently explain problems in your category and map the docs, GitHub threads, Reddit discussions, and articles they rely on.
         </p>
       </div>
 

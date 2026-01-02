@@ -50,15 +50,6 @@ const testimonialsData = [
 		bgPattern: null
 	},
 	{
-		name: "Sri Krishna",
-		quote: "Infrasity is incredibly responsive and understands client needs exceptionally well, always delivering promptly and as expected. Their attention to detail and outstanding customer support truly set them apart. Communication through email and messaging was seamless, and while the quality of work is top-notch, we look forward to even faster delivery in the future.",
-		title: "Content Head, Middleware",
-		avatar: "/Testimon/sriMiddleware.jpeg",
-		logo: null,
-		logoAlt: "",
-		bgPattern: null
-	},
-	{
 		name: "Debosmit Ray",
 		quote: "Infrasity has helped us create technical content, product documentation, and recipe libraries for integrating DevZero with different tech stacks. Their product videos showcase our key features, making it easier to engage users. A great content partner in our journey!",
 		title: "Founder, DevZero",
@@ -66,16 +57,7 @@ const testimonialsData = [
 		logo: null,
 		logoAlt: "",
 		bgPattern: null
-	},
-	{
-		name: "Saif Ali Shaik",
-		quote: "Infrasity has helped the client achieve increased organic traffic, higher engagement rates on content, and measurable improvements in search rankings. The team's work has contributed to the client's strengthened market position and visibility among key audiences in identification technology.",
-		title: "Developer Advocate, Scalekit",
-		avatar: "/Testimon/SaifScalekit.png",
-		logo: null,
-		logoAlt: "",
-		bgPattern: null
-	},
+	}
 ];
 
 function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern }) {

@@ -111,3 +111,21 @@ export const clientPaddingMap = {
   "terrateam.png": "p-4",
   "vapi.png": "p-5",
 };
+
+export const clientWhiteLogo = [
+  "brevo.png",
+  "cycloid.png",
+  "DevZero.png",
+  "dhiwise.png",
+  "firefly.png",
+  "inframail.png",
+  "kubiya.png",
+  "mocha.png",
+  "mvpgrow.png",
+  "ollm.png",
+  "qualifier.png",
+  "respond.png",
+  "scalekit.png",
+  "scalr.png",  
+  "teleport.png"
+];

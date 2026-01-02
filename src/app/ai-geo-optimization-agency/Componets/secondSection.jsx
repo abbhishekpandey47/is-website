@@ -6,7 +6,7 @@ export default function SecondSection() {
 			{/* Section Heading Framer Style */}
 			<div className="max-w-3xl mx-auto text-center mb-16 relative z-10">
 				<div className="inline-block px-6 py-2 mb-6 rounded-full border border-[#7c3aed] bg-[#1a0033] shadow-[0_0_0_2px_rgba(124,58,237,0.2)]">
-					<p className="text-sm font-medium text-white">Infrasity helps modern companies win visibility in AI answers</p>
+					<p className="text-sm font-medium text-white">Infrasity helps technical B2B companies win visibility in AI answers</p>
 				</div>
                  <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4" style={{background: 'linear-gradient(0deg, rgba(255,255,255,0.8) 0%, #fff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>
 									Turn AI Search into measurable growth for B2B startups
@@ -22,7 +22,7 @@ export default function SecondSection() {
 						  />
 					</div>
 						<p className="text-white/80 text-lg max-w-2xl mx-auto mb-2" style={{textAlign: 'center'}}>
-						We help you get recommended by ChatGPT, Perplexity, and Google when your target audience is doing research into new products and services. Our innovative AI SEO strategies give your brand a consistent presence in the places that matter.
+						When developers research new tools, they don't scroll ten links. They ask ChatGPT, Perplexity, Claude or Google AI and trust what those systems cite.
 						</p>
 			</div>
 
@@ -31,20 +31,20 @@ export default function SecondSection() {
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-10 relative">
 					{[
 						{
-							title: 'Establish your B2B startup as an authority',
-							text: "We structure your presence so your B2B startup is included in high-value AI answers, not left out of the conversation.",
+							title: 'Become a source AI actually cites',
+							text: "We help technical products earn mentions in the docs, guides, and developer sources AI systems rely on — so you're referenced, not ignored.",
 						},
 						{
-							title: 'Secure mentions in trusted sources',
-							text: "We put your B2B startup in front of the right people by earning placements in the sources AI systems rely on.",
+							title: 'Become a source AI actually cites',
+							text: "We help your product appear inside real troubleshooting discussions and technical explanations on Reddit and GitHub — the sources AI systems consistently reference in answers.",
 						},
 						{
-							title: 'Create content that gets picked up',
-							text: "We research the real questions people ask tools like ChatGPT, then help your B2B startup publish content designed to answer them.",
+							title: 'Publish technical content AI can reuse',
+							text: "We create deep technical content and distribute it across Medium, dev.to, and Hacker News — the developer platforms AI systems actively learn from.",
 						},
 						{
-							title: 'Control how your startup is described',
-							text: "We make sure AI tools reflect the right story. From product positioning to company facts, we help shape how your B2B startup is presented.",
+							title: 'Track which content AI actually uses',
+							text: "We show you which pages, docs, and guides are repeatedly referenced inside AI-generated answers — so you know what's influencing decisions and what's being ignored.",
 						},
 					].map((card, i) => (
 						<div key={i} className="relative flex flex-col rounded-[16px] border border-[#23232b] bg-[#18181c]/90 shadow-lg overflow-hidden px-8 pt-0 pb-8 min-h-[320px]" style={{boxShadow: '0 2px 24px 0 rgba(0,0,0,0.18)'}}>
