@@ -31,12 +31,12 @@ export default function SecondSection() {
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-10 relative">
 					{[
 						{
-							title: 'Establish your B2B startup as an authority',
-							text: "We structure your presence so your B2B startup is included in high-value AI answers, not left out of the conversation.",
+							title: 'Become a source AI actually cites',
+							text: "We help technical products earn mentions in the docs, guides, and developer sources AI systems rely on — so you're referenced, not ignored.",
 						},
 						{
-							title: 'Secure mentions in trusted sources',
-							text: "We put your B2B startup in front of the right people by earning placements in the sources AI systems rely on.",
+							title: 'Become a source AI actually cites',
+							text: "We help your product appear inside real troubleshooting discussions and technical explanations on Reddit and GitHub — the sources AI systems consistently reference in answers.",
 						},
 						{
 							title: 'Create content that gets picked up',
