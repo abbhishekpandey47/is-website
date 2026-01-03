@@ -1,56 +1,113 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 
 const caseStudies = [
   {
     id: 1,
-    tag: "AI / LLM SaaS",
-    title: "0→2.7M organic visitors in 13 months.",
-    company: "Speedinvest",
-    badge: "Si",
+    tag: "AI Messaging Platform",
+    title: "0→40% of OPs ranking Top 5",
+    company: "Respond.io",
+    badge: "Ri",
     badgeColor: "bg-orange-100 text-orange-700",
-    desc: "Backed startup",
-    link: "#",
-    img: "/case-study-graph-1.svg",
+    desc: "Series A ($7M)",
+    link: "/case-studies/respond-io-community-led-growth-case-study",
+    style:"object-cover",
+    companyImg: "/trustedby/white/respond.png",
+    graphImg: "https://cdn.prod.website-files.com/644e8b4e20ba395ec31a0017/65df7c6d1d6e96eb38db9165_0-27M.svg",
   },
   {
     id: 2,
-    tag: "Fintech / SaaS",
-    title: "$0→1.2M ARR in 9 months.",
-    company: "FintechX",
-    badge: "Fx",
+    tag: "DevTools / Infra (IaC)",
+    title: "0→13.8% Organic traffic in 90 days.",
+    company: "Terrateam",
+    badge: "Tt",
     badgeColor: "bg-green-100 text-green-700",
-    desc: "Series A funded",
-    link: "#",
-    img: "/case-study-graph-2.svg",
+    desc: "Bootstrapped",
+    link: "/case-studies/terrateam-case-study",
+    companyImg: "/trustedby/white/terrateam.png",
+    style: "object-contain",
+    graphImg: "https://cdn.prod.website-files.com/644e8b4e20ba395ec31a0017/65df7c6d2fb5977482cb626f_Group%201000007033.svg",
   },
 ];
 
 export default function CaseStudies() {
+  const [current, setCurrent] = useState(0);
+
+  const handlePrev = () => {
+    setCurrent((prev) => (prev === 0 ? caseStudies.length - 1 : prev - 1));
+  };
+  const handleNext = () => {
+    setCurrent((prev) => (prev === caseStudies.length - 1 ? 0 : prev + 1));
+  };
+
+  const study = caseStudies[current];
+
   return (
-    <div className="w-full min-h-screen bg-white py-12 px-4 flex flex-col gap-10">
-      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 leading-tight text-center">
-        B2B SEO & AI Search marketing agency <span className="inline-block align-middle text-2xl">🌐</span> based in Europe <span className="inline-block align-middle text-2xl">✨</span> Organic growth partners <span className="inline-block align-middle text-2xl">🔗</span> of innovative SaaS & Fintech startups & enterprise companies.
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {caseStudies.map((study) => (
-          <div key={study.id} className="bg-gray-50 rounded-xl shadow p-8 flex flex-col gap-6 hover:shadow-lg transition">
-            <div className="flex flex-col gap-2">
-              <span className="bg-gray-200 text-xs px-2 py-1 rounded w-fit mb-2">{study.tag}</span>
-              <span className="text-xl font-semibold text-gray-900 mb-1">
-                <span className="bg-blue-100 px-1 rounded">{study.title.split(" ")[0]}</span> {study.title.substring(study.title.indexOf(" ")+1)}
-              </span>
-              <div className="flex items-center gap-2 mb-2">
-                <span className={`${study.badgeColor} px-2 py-1 rounded font-bold`}>{study.badge}</span>
-                <span className="text-sm text-gray-700 font-medium">{study.company}</span>
-                <span className="text-xs text-gray-500">{study.desc}</span>
-              </div>
-              <a href={study.link} className="text-blue-600 font-medium hover:underline">Case study <span>→</span></a>
+    <div className="w-full min-h-screen py-20 px-4 flex flex-col gap-14 ">
+    				<div className="flex flex-col items-center text-center mb-10">
+					 <div className="inline-flex items-center justify-center px-6 py-2 mb-4 rounded-full border border-violet-400/40 bg-black/10 shadow-inner shadow-violet-500/20">
+          <p className="text-violet-100 text-base font-medium">Trusted</p>
+        </div>
+					<h2 className="text-white font-manrope text-[2.25rem] md:text-[2.75rem] font-medium leading-[1.1] tracking-tight">
+						SEO & AEO Services for Modern SaaS
+					</h2>
+					<p className="text-white/75 font-manrope text-lg font-medium max-w-2xl mt-4">
+						Grow your technical visibility, win more buyers, and future-proof your brand with Infrasity’s advanced SEO and Answer Engine Optimization solutions.
+					</p>
+				</div>
+      <div className="flex justify-center">
+        <div className="rounded-2xl shadow-lg p-12 flex flex-col md:flex-row gap-10 items-stretch w-full max-w-6xl border border-[#fff]/30 relative transition-all duration-200 min-h-[420px]">
+          {/* Left column: text */}
+          <div className="flex-1 flex flex-col gap-3 min-w-[220px] justify-center">
+            {/* Category Badge */}
+            <div className="mb-2">
+              <span className="text-xs py-1 rounded font-manrope text-white/80 font-medium tracking-wide inline-block">{study.tag}</span>
             </div>
-            <div className="flex items-center justify-center">
-              <img src={study.img} alt="Growth Graph" className="w-full max-w-xs" />
+            {/* Title with blue highlight */}
+            <div className="header-case-study text-2xl font-bold text-white mb-2 font-manrope leading-tight">
+              <span className="blue-highlight bg-[#2e2e38] text-sky-400 px-2 rounded font-bold">{study.title.split(" ")[0]}</span>
+              {" "}{study.title.substring(study.title.indexOf(" ")+1)}
+            </div>
+            {/* Company info and badge */}
+            <div className="case-study-wrapper flex flex-col mb-2">
+              <img src={study.companyImg} alt={study.badge} className={`case-study-image rounded h-[2rem] w-[5rem] ${study.style}`} />
+              <div className="case-study-category text-xs text-white/60">{study.desc}</div>
+            </div>
+            {/* Case study link with arrow */}
+            <a href={study.link} className="blue-link-wrapper flex items-center gap-2 text-sky-400 font-medium hover:underline transition">
+              <span className="blue-link">Case study</span>
+              <span className="arrow-wrapper-new ml-0"> 
+                <span className="w-6 h-[2px] bg-sky-400 inline-block align-middle mr-[-0.5rem]"></span>
+                <span className="arrow-right blue inline-block align-middle -rotate-45 border-sky-400 border-r-2 border-b-2 w-2 h-2"></span>
+              </span>
+            </a>
+          </div>
+          {/* Middle column: graph */}
+          <div className="flex items-center justify-center">
+            <div className="hero-slider-image-wrapper rounded-xl p-6 flex items-center justify-center w-full border border-[#232323] relative bg-[white] min-h-[320px]">
+              <img src={study.graphImg} alt="Graphic representation of growth" className="image-8 graph-line h-[270px] object-contain" />
             </div>
           </div>
-        ))}
+          {/* Right column: arrows at bottom */}
+          <div className="flex flex-col justify-end items-end flex-1 h-full">
+            <div className="flex gap-3 z-20 mb-2">
+              <button
+                aria-label="Previous case study"
+                onClick={handlePrev}
+                className="bg-[#232323] border border-[#333] text-white rounded-lg p-2 hover:bg-[#333] transition shadow h-10 w-10 flex items-center justify-center"
+              >
+                <span className="text-2xl">&#8249;</span>
+              </button>
+              <button
+                aria-label="Next case study"
+                onClick={handleNext}
+                className="bg-[#232323] border border-[#333] text-white rounded-lg p-2 hover:bg-[#333] transition shadow h-10 w-10 flex items-center justify-center"
+              >
+                <span className="text-2xl">&#8250;</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

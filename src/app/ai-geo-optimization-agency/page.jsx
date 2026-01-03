@@ -5,7 +5,8 @@ import Testimonials from "./Componets/testimonial";
 import FAQ from "./Componets/faq";
 import CTA from "../services/developer-marketing-agency/cta";
 import ClientSection from "./Componets/clientSection";
-// import CaseStudies from "./Componets/caseStudies";
+import CaseStudies from "./Componets/caseStudies";
+import AEOReportSection from "./Componets/aeoReportSection";
 
 export const metadata = {
   title: 'AI Generative Engine Optimization Agency | GEO & AI Search Visibility',
@@ -25,7 +26,8 @@ export default function LandingPage() {
       <ClientSection/>
       <SecondSection />
       <ThirdSection />
-      {/* <CaseStudies /> */}
+      <CaseStudies />
+      <AEOReportSection />
       <Testimonials />
       <FAQ />
       <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10 mb-12"></div>
