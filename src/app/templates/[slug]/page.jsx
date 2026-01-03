@@ -19,7 +19,7 @@ const loadTemplateData = async (slug) => {
     const module = await import(`../../../../templates-data/${slug}.js`);
     return module.default;
   } catch (error) {
-    console.error(`Failed to load template: ${slug}`, error);
+    // Template loading failed - return null to show 404
     return null;
   }
 };
@@ -700,70 +700,6 @@ const TemplateDetailPage = ({ params }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-          <div className="border-b border-[#1a1f35] mb-12">
-            <div className="flex gap-8">
-              <button className="pb-4 border-b-2 border-white text-white quicksand-semibold text-sm">
-                Content
-              </button>
-            </div>
-          </div>
-
-          {/* Page Content Table */}
-          <div className="mb-16">
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="border-b border-[#1a1f35]">
-                    <th className="text-left py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Page</th>
-                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q1 Views</th>
-                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q2 Views</th>
-                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q3 Views</th>
-                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q1 Clicks</th>
-                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q2 Impressions</th>
-                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Q3 Change</th>
-                    <th className="text-right py-3 px-4 text-sm font-medium text-[#6b7280] quicksand-medium">Action Required</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[...Array(5)].map((_, index) => (
-                    <tr key={index} className="border-b border-[#1a1f35] hover:bg-[#1a1f35] transition-colors">
-                      <td className="py-3 px-4">
-                        <Link href="#" className="text-blue-400 hover:underline quicksand-regular text-sm">
-                          sample_page_{index + 1}
-                        </Link>
-                      </td>
-                      <td className="text-right py-3 px-4 text-white quicksand-regular text-sm">
-                        {(Math.random() * 10000).toFixed(0)}
-                      </td>
-                      <td className="text-right py-3 px-4 text-white quicksand-regular text-sm">
-                        {(Math.random() * 10000).toFixed(0)}
-                      </td>
-                      <td className="text-right py-3 px-4 text-white quicksand-regular text-sm">
-                        {Math.floor(Math.random() * 1000)}
-                      </td>
-                      <td className="text-right py-3 px-4 text-white quicksand-regular text-sm">
-                        {(Math.random() * 100).toFixed(2)}%
-                      </td>
-                      <td className="text-right py-3 px-4 text-white quicksand-regular text-sm">
-                        {Math.floor(Math.random() * 100000)}
-                      </td>
-                      <td className="text-right py-3 px-4 quicksand-regular text-sm">
-                        <span className={Math.random() > 0.5 ? 'text-green-400' : 'text-red-400'}>
-                          {Math.random() > 0.5 ? '+' : ''}{(Math.random() * 50 - 25).toFixed(1)}%
-                        </span>
-                      </td>
-                      <td className="text-right py-3 px-4">
-                        <span className={`text-xs px-2 py-1 rounded ${Math.random() > 0.5 ? 'text-green-400 bg-green-400/10' : 'text-orange-400 bg-orange-400/10'}`}>
-                          {Math.random() > 0.5 ? 'Improved Clicks' : 'Lower Clicks'}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
           {/* Template Outline Section - Clean structured design */}
           <div className="space-y-12">
             <div>
