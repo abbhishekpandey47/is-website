@@ -1469,9 +1469,8 @@ let postMetaData = [
     company: "Respond.io",
     headquarters: "Kuala Lumpur, Malaysia",
     funding: "Series A ($7M)",
-    industry: "DevTools / Cloud Infrastructure",
+    industry: "Customer Conversation Management / AI Messaging Platform",
     employees: "51-100",
-    cloud: "Customer Conversation Management / AI Messaging Platform",
     website: "respond.io"
   }
 },
