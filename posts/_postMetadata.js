@@ -1434,6 +1434,47 @@ let postMetaData = [
   metaDescription:
     "Discover the top B2B marketing agencies for SaaS in 2026\. Compare tech content, SEO, and LLM visibility leaders. Find the right agency for growth. Read now",
 },
+   {
+  title: "Scaling Community-Led Discovery: How Infrasity Improved Visibility and Sentiment for Respond.io",
+  metatitle: "Respond.io Community Growth Visibility Case Study",
+  slug: "respond-io-community-led-growth-case-study",
+  description:"Discover how Infrasity helped Respond.io strengthen its presence across communities, search engines, and AI platforms, leading to higher visibility, stronger sentiment, and long-term organic growth.",
+  ogImage: "/PostImages/respond-io-community-led-growth-case-study/0.webp",
+  publishedOn: "2026-01-03",
+  authorId: "author0001",
+  category: "Case Studies",
+  metaDescription:
+    "Discover how Respond.io improved organic visibility, rankings, and brand sentiment through community-led growth with Infrasity, strengthening AI and search presence.",
+  stats: [
+    {
+      title: "LLM visibility",
+      value: "4x increase",
+      subtext: "in citable threads",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Ranking adoption",
+      value: "0 → 40%",
+      subtext: "of OPs ranking Top 5",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Sustained positive sentiment growth",
+      value: " ~+24%",
+      subtext: "over 4 months",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    }
+],
+  companyHighlights: {
+    company: "Respond.io",
+    headquarters: "Kuala Lumpur, Malaysia",
+    funding: "Series A ($7M)",
+    industry: "DevTools / Cloud Infrastructure",
+    employees: "51-100",
+    cloud: "Customer Conversation Management / AI Messaging Platform",
+    website: "respond.io"
+  }
+},
 ];
 
 const sorted = () => {
