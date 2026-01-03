@@ -10,7 +10,7 @@ import React, {
 
 import AppContext from "../../context/Infracontext";
 import Image from "next/image";
-import templateMetadata from "../../../templates-data/_templateMetadata";
+import templateIndex from "../../../templates-data/_templateIndex";
 
 const TemplateCard = React.memo(({ template }) => (
   <Link href={`/templates/${template.slug}`} className="group block h-full">
@@ -58,14 +58,14 @@ const TemplatesPage = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedUseCase, setSelectedUseCase] = useState("all");
-  const [filteredTemplates, setFilteredTemplates] = useState(templateMetadata);
+  const [filteredTemplates, setFilteredTemplates] = useState(templateIndex);
 
   useEffect(() => {
     setProgress(100);
   }, [setProgress]);
 
   useEffect(() => {
-    let filtered = templateMetadata;
+    let filtered = templateIndex;
 
     // Filter by search query
     if (searchQuery) {

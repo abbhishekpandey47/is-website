@@ -1,7 +1,16 @@
-import templateMetadata from "../../../../templates-data/_templateMetadata";
+// Helper to load template data dynamically
+async function getTemplateData(slug) {
+  try {
+    const module = await import(`../../../../templates-data/${slug}.js`);
+    return module.default;
+  } catch (error) {
+    console.error(`Failed to load template: ${slug}`, error);
+    return null;
+  }
+}
 
 export async function generateMetadata({ params }) {
-  const template = templateMetadata.find((t) => t.slug === params.slug);
+  const template = await getTemplateData(params.slug);
 
   if (!template) {
     return {

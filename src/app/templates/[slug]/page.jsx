@@ -4,9 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect, use, useState } from "react";
 import AppContext from "../../../context/Infracontext";
-import templateMetadata from "../../../../templates-data/_templateMetadata";
 import { notFound } from "next/navigation";
 import CTA from "../../../Components/CTA/CTA";
+import templateIndex from "../../../../templates-data/_templateIndex";
+
+// Dynamic template loading helper
+const loadTemplateData = async (slug) => {
+  try {
+    const module = await import(`../../../../templates-data/${slug}.js`);
+    return module.default;
+  } catch (error) {
+    console.error(`Failed to load template: ${slug}`, error);
+    return null;
+  }
+};
 
 // Template Carousel Component
 const TemplateCarousel = ({ slides, title = "Sample Outline" }) => {
@@ -52,7 +63,7 @@ const TemplateCarousel = ({ slides, title = "Sample Outline" }) => {
                 fill
                 className="object-contain p-2"
                 priority={index === 0}
-                quality={100}
+                quality={85}
               />
             </div>
           ))}
@@ -84,14 +95,71 @@ const TemplateDetailPage = ({ params }) => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailError, setEmailError] = useState("");
+  const [template, setTemplate] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [activeSection, setActiveSection] = useState("");
   
   // Await params as required by Next.js 15
   const resolvedParams = use(params);
-  const template = templateMetadata.find((t) => t.slug === resolvedParams.slug);
 
   useEffect(() => {
-    setProgress(100);
-  }, [setProgress]);
+    // Load template data dynamically
+    const fetchTemplate = async () => {
+      const data = await loadTemplateData(resolvedParams.slug);
+      if (data) {
+        setTemplate(data);
+      }
+      setLoading(false);
+      setProgress(100);
+    };
+    
+    fetchTemplate();
+  }, [resolvedParams.slug, setProgress]);
+
+  // Scroll tracking for active section highlighting
+  useEffect(() => {
+    if (!template) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-100px 0px -60% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all sections with IDs
+    const sections = document.querySelectorAll('[id]');
+    sections.forEach((section) => {
+      if (section.id) {
+        observer.observe(section);
+      }
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        if (section.id) {
+          observer.unobserve(section);
+        }
+      });
+    };
+  }, [template]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+        <div className="text-white text-xl quicksand-regular">Loading template...</div>
+      </div>
+    );
+  }
 
   if (!template) {
     notFound();
@@ -270,32 +338,26 @@ const TemplateDetailPage = ({ params }) => {
               className="relative"
             >
               <div className="relative w-full aspect-video bg-gradient-to-br from-[#1e1b4b] to-[#312e81] border border-purple-500/30 rounded-xl overflow-hidden shadow-2xl">
-                <iframe
-                  src={template.videoEmbedUrl}
-                  className="absolute inset-0 w-full h-full"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  title={`${template.title} Tutorial`}
-                ></iframe>
-              </div>
-              
-              {/* Video Metadata */}
-              <div className="flex items-center justify-between mt-4 text-sm text-[#666]">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="quicksand-regular">5 min</span>
+                {template.videoEmbedUrl ? (
+                  <iframe
+                    src={template.videoEmbedUrl}
+                    className="absolute inset-0 w-full h-full"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowFullScreen
+                    title={`${template.title} Tutorial`}
+                  ></iframe>
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <svg className="w-16 h-16 mx-auto mb-4 text-purple-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <p className="text-purple-300 text-xl font-semibold quicksand-semibold mb-2">Coming Soon</p>
+                      <p className="text-gray-400 text-sm quicksand-regular">Video tutorial will be available shortly</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                    <span className="quicksand-regular">21 views</span>
-                  </div>
-                </div>
+                )}
               </div>
             </motion.div>
           </div>
@@ -329,23 +391,51 @@ const TemplateDetailPage = ({ params }) => {
                 <nav className="space-y-1.5">
                   {/* Common educational sections for both templates */}
                   {educationalContent?.whatIs && (
-                    <a href="#what-is" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                    <a 
+                      href="#what-is" 
+                      className={`block text-[13px] transition-colors quicksand-regular py-1 ${
+                        activeSection === 'what-is' 
+                          ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
+                          : 'text-gray-300 hover:text-purple-300'
+                      }`}
+                    >
                       {educationalContent.whatIs.title}
                     </a>
                   )}
                   {educationalContent?.whyUse && (
-                    <a href="#why-use" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                    <a 
+                      href="#why-use" 
+                      className={`block text-[13px] transition-colors quicksand-regular py-1 ${
+                        activeSection === 'why-use' 
+                          ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
+                          : 'text-gray-300 hover:text-purple-300'
+                      }`}
+                    >
                       {educationalContent.whyUse.title}
                     </a>
                   )}
                   {educationalContent?.templateOverview && (
-                    <a href="#what-is-template" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                    <a 
+                      href="#what-is-template" 
+                      className={`block text-[13px] transition-colors quicksand-regular py-1 ${
+                        activeSection === 'what-is-template' 
+                          ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
+                          : 'text-gray-300 hover:text-purple-300'
+                      }`}
+                    >
                       {educationalContent.templateOverview.title}
                     </a>
                   )}
                   
                   {(isOutlineTemplate || isWritingTemplate) && (
-                    <a href="#next-steps" className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1">
+                    <a 
+                      href="#next-steps" 
+                      className={`block text-[13px] transition-colors quicksand-regular py-1 ${
+                        activeSection === 'next-steps' 
+                          ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
+                          : 'text-gray-300 hover:text-purple-300'
+                      }`}
+                    >
                       Next Steps: Writing the Content
                     </a>
                   )}
@@ -356,7 +446,11 @@ const TemplateDetailPage = ({ params }) => {
                       {template.metricsTable && (
                         <a
                           href="#metrics-table"
-                          className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1"
+                          className={`block text-[13px] transition-colors quicksand-regular py-1 ${
+                            activeSection === 'metrics-table' 
+                              ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
+                              : 'text-gray-300 hover:text-purple-300'
+                          }`}
                         >
                           Strategic Overview Table
                         </a>
@@ -366,7 +460,11 @@ const TemplateDetailPage = ({ params }) => {
                           <a
                             key={index}
                             href={`#section-${index + 1}`}
-                            className="block text-[13px] text-gray-300 hover:text-purple-300 transition-colors quicksand-regular py-1"
+                            className={`block text-[13px] transition-colors quicksand-regular py-1 ${
+                              activeSection === `section-${index + 1}` 
+                                ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
+                                : 'text-gray-300 hover:text-purple-300'
+                            }`}
                           >
                             {item.section}
                           </a>
@@ -1026,7 +1124,7 @@ const TemplateDetailPage = ({ params }) => {
         >
           <h2 className="text-3xl font-bold mb-8 quicksand-bold">Explore More Templates</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {templateMetadata
+            {templateIndex
               .filter((t) => t.id !== template.id)
               .slice(0, 3)
               .map((relatedTemplate) => (
