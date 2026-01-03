@@ -27,11 +27,9 @@ const TemplateCarousel = ({ slides, title = "Sample Outline" }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.3 }}
+      transition={{ duration: 0.4, delay: 0.2 }}
       className="mb-12"
     >
-      <h2 className="text-2xl font-bold mb-6 quicksand-bold text-center">{title}</h2>
-      
       <div className="relative rounded-xl overflow-hidden max-w-2xl mx-auto shadow-2xl">
         <div className="relative w-full bg-gradient-to-br from-[#1e1b4b]/20 to-[#312e81]/20" style={{ paddingBottom: '45%' }}>
           {activeSlides.map((slide, index) => (

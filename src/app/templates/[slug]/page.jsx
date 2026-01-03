@@ -7,6 +7,11 @@ import AppContext from "../../../context/Infracontext";
 import { notFound } from "next/navigation";
 import CTA from "../../../Components/CTA/CTA";
 import templateIndex from "../../../../templates-data/_templateIndex";
+import TemplateHero from "./TemplateHero";
+import TemplateSidebar from "./TemplateSidebar";
+import RelatedTemplates from "./RelatedTemplates";
+import TemplateCarousel from "./TemplateCarousel";
+import EmailModal from "./EmailModal";
 
 // Dynamic template loading helper
 const loadTemplateData = async (slug) => {
@@ -17,75 +22,6 @@ const loadTemplateData = async (slug) => {
     console.error(`Failed to load template: ${slug}`, error);
     return null;
   }
-};
-
-// Template Carousel Component
-const TemplateCarousel = ({ slides, title = "Sample Outline" }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const defaultSlides = [
-    { image: "/template-samples/template-sample-1.png", alt: "Template Example 1" },
-    { image: "/template-samples/template-sample-2.png", alt: "Template Example 2" },
-    { image: "/template-samples/template-sample-3.png", alt: "Template Example 3" }
-  ];
-
-  const activeSlides = Array.isArray(slides) && slides.length ? slides : defaultSlides;
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % activeSlides.length);
-    }, 3500);
-
-    return () => clearInterval(interval);
-  }, [activeSlides.length]);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.3 }}
-      className="mb-12"
-    >
-      <h2 className="text-2xl font-bold mb-6 quicksand-bold text-center">{title}</h2>
-      
-      <div className="relative rounded-xl overflow-hidden max-w-2xl mx-auto shadow-2xl">
-        <div className="relative w-full bg-gradient-to-br from-[#1e1b4b]/20 to-[#312e81]/20" style={{ paddingBottom: '45%' }}>
-          {activeSlides.map((slide, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-500 p-4 ${
-                index === currentSlide ? 'opacity-100' : 'opacity-0'
-              }`}
-            >
-              <Image
-                src={slide.src || slide.image}
-                alt={slide.alt || "Template Example"}
-                fill
-                className="object-contain p-2"
-                priority={index === 0}
-                quality={85}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="flex justify-center gap-2 py-4 bg-gradient-to-br from-[#1e1b4b]/60 to-[#312e81]/60">
-          {activeSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentSlide
-                  ? 'bg-purple-500 w-6'
-                  : 'bg-gray-600 hover:bg-gray-500'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
 };
 
 const TemplateDetailPage = ({ params }) => {
@@ -136,20 +72,24 @@ const TemplateDetailPage = ({ params }) => {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Observe all sections with IDs
-    const sections = document.querySelectorAll('[id]');
-    sections.forEach((section) => {
-      if (section.id) {
-        observer.observe(section);
-      }
-    });
+    // Only observe specific navigation sections (not all elements with IDs)
+    const sectionIds = [
+      'what-is',
+      'why-use',
+      'what-is-template',
+      'next-steps',
+      'metrics-table',
+      ...Array.from({ length: 20 }, (_, i) => `section-${i + 1}`)
+    ];
+    
+    const sections = sectionIds
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+    
+    sections.forEach((section) => observer.observe(section));
 
     return () => {
-      sections.forEach((section) => {
-        if (section.id) {
-          observer.unobserve(section);
-        }
-      });
+      sections.forEach((section) => observer.unobserve(section));
     };
   }, [template]);
 
@@ -193,16 +133,25 @@ const TemplateDetailPage = ({ params }) => {
     setIsSubmitting(true);
 
     try {
-      // Here you can add API call to save email
-      // await fetch('/api/save-email', { method: 'POST', body: JSON.stringify({ email }) });
+      // Save email via API
+      const response = await fetch('/api/support', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: email.split('@')[0],
+          email: email,
+          message: `Template download request: ${template.title}`
+        })
+      });
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 500));
+      if (!response.ok) {
+        throw new Error('Failed to save email');
+      }
       
       // Trigger download
       const link = document.createElement('a');
       link.href = template.downloadLink;
-      link.download = 'best-ai-tools-for-documentation.pdf';
+      link.download = `${template.slug}.pdf`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -272,104 +221,22 @@ const TemplateDetailPage = ({ params }) => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Hero Section - Title Left, Video Right */}
-      <div className="relative isolate pt-32 pb-16">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(70%_80%_at_50%_-20%,rgba(108,91,233,0.5),rgba(255,255,255,0))]" />
-        <svg
-          className="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(75%_50%_at_top_center,white,transparent)]"
-          aria-hidden="true"
-        >
-          <defs>
-            <pattern id="grid" width="80" height="80" x="50%" y="-1" patternUnits="userSpaceOnUse">
-              <path d="M.5 200V.5H200" fill="none" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" strokeWidth="0" fill="url(#grid)" />
-        </svg>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Title and Info */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6"
-            >
-              <Link 
-                href="/templates" 
-                className="inline-flex items-center text-[#888] hover:text-white transition-colors text-sm quicksand-regular"
-              >
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-                Templates
-              </Link>
-              
-              <div>
-                <div className="inline-flex items-center justify-center bg-blue-600/20 border border-blue-500/30 rounded-full px-4 py-1.5 text-[13px] quicksand-semibold mb-4">
-                  <p className="text-blue-300">{template.category}</p>
-                </div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold quicksand-bold text-white mb-4 leading-tight">
-                  {template.title}
-                </h1>
-                <p className="text-lg text-[#aaa] quicksand-light leading-relaxed">
-                  {template.description}
-                </p>
-              </div>
-
-              <div className="pt-4">
-                <button
-                  onClick={handleDownloadClick}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3.5 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl quicksand-semibold cursor-pointer"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                  Download Template
-                </button>
-              </div>
-            </motion.div>
-
-            {/* Right Column - Video */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative w-full aspect-video bg-gradient-to-br from-[#1e1b4b] to-[#312e81] border border-purple-500/30 rounded-xl overflow-hidden shadow-2xl">
-                {template.videoEmbedUrl ? (
-                  <iframe
-                    src={template.videoEmbedUrl}
-                    className="absolute inset-0 w-full h-full"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                    title={`${template.title} Tutorial`}
-                  ></iframe>
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <svg className="w-16 h-16 mx-auto mb-4 text-purple-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <p className="text-purple-300 text-xl font-semibold quicksand-semibold mb-2">Coming Soon</p>
-                      <p className="text-gray-400 text-sm quicksand-regular">Video tutorial will be available shortly</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
+      {/* Hero Section */}
+      <TemplateHero template={template} onDownloadClick={handleDownloadClick} />
 
       {/* Template Carousel */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 className="text-3xl font-bold mb-8 text-white quicksand-bold text-center">
+          {template.sampleContentImages?.length ? "Take a Look at Sample Content" : "Take a Look at Sample Outline"}
+        </h2>
         <TemplateCarousel
           slides={template.sampleContentImages}
-          title={template.sampleContentImages?.length ? "Sample Content" : "Sample Outline"}
         />
+      </div>
+
+      {/* Section Divider */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent my-12"></div>
       </div>
 
       {/* Main Content */}
@@ -379,103 +246,14 @@ const TemplateDetailPage = ({ params }) => {
         {/* For Developer Content & Guides templates - Show clean content with sidebar */}
         {isDeveloperLayout ? (
           <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-6 items-start">
-            {/* Sidebar - Table of Contents (Left Side) */}
-            <motion.aside
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="lg:w-56 sticky top-24 self-start"
-            >
-              <div className="bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl p-5 shadow-lg max-h-[calc(100vh-140px)] overflow-y-auto">
-                <h3 className="text-base font-bold mb-3 quicksand-bold text-white">Template Navigation</h3>
-                <nav className="space-y-1.5">
-                  {/* Common educational sections for both templates */}
-                  {educationalContent?.whatIs && (
-                    <a 
-                      href="#what-is" 
-                      className={`block text-[13px] transition-colors quicksand-regular py-1 ${
-                        activeSection === 'what-is' 
-                          ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
-                          : 'text-gray-300 hover:text-purple-300'
-                      }`}
-                    >
-                      {educationalContent.whatIs.title}
-                    </a>
-                  )}
-                  {educationalContent?.whyUse && (
-                    <a 
-                      href="#why-use" 
-                      className={`block text-[13px] transition-colors quicksand-regular py-1 ${
-                        activeSection === 'why-use' 
-                          ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
-                          : 'text-gray-300 hover:text-purple-300'
-                      }`}
-                    >
-                      {educationalContent.whyUse.title}
-                    </a>
-                  )}
-                  {educationalContent?.templateOverview && (
-                    <a 
-                      href="#what-is-template" 
-                      className={`block text-[13px] transition-colors quicksand-regular py-1 ${
-                        activeSection === 'what-is-template' 
-                          ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
-                          : 'text-gray-300 hover:text-purple-300'
-                      }`}
-                    >
-                      {educationalContent.templateOverview.title}
-                    </a>
-                  )}
-                  
-                  {(isOutlineTemplate || isWritingTemplate) && (
-                    <a 
-                      href="#next-steps" 
-                      className={`block text-[13px] transition-colors quicksand-regular py-1 ${
-                        activeSection === 'next-steps' 
-                          ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
-                          : 'text-gray-300 hover:text-purple-300'
-                      }`}
-                    >
-                      Next Steps: Writing the Content
-                    </a>
-                  )}
-                  
-                  <div className="border-t border-purple-500/20 my-3 pt-3 space-y-1.5">
-                  {(isOutlineTemplate || isWritingTemplate) && (
-                    <>
-                      {template.metricsTable && (
-                        <a
-                          href="#metrics-table"
-                          className={`block text-[13px] transition-colors quicksand-regular py-1 ${
-                            activeSection === 'metrics-table' 
-                              ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
-                              : 'text-gray-300 hover:text-purple-300'
-                          }`}
-                        >
-                          Strategic Overview Table
-                        </a>
-                      )}
-                      {template.templateOutline && template.templateOutline.map((item, index) => (
-                        item.section && item.showInNav !== false ? (
-                          <a
-                            key={index}
-                            href={`#section-${index + 1}`}
-                            className={`block text-[13px] transition-colors quicksand-regular py-1 ${
-                              activeSection === `section-${index + 1}` 
-                                ? 'text-purple-400 font-semibold quicksand-semibold border-l-2 border-purple-400 pl-2 -ml-2' 
-                                : 'text-gray-300 hover:text-purple-300'
-                            }`}
-                          >
-                            {item.section}
-                          </a>
-                        ) : null
-                      ))}
-                    </>
-                  )}
-                  </div>
-                </nav>
-              </div>
-            </motion.aside>
+            {/* Sidebar */}
+            <TemplateSidebar 
+              educationalContent={educationalContent}
+              template={template}
+              activeSection={activeSection}
+              isOutlineTemplate={isOutlineTemplate}
+              isWritingTemplate={isWritingTemplate}
+            />
 
             {/* Main Content Area */}
             <motion.div
@@ -1116,110 +894,27 @@ const TemplateDetailPage = ({ params }) => {
         </motion.div>
 
         {/* Related Templates */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16"
-        >
-          <h2 className="text-3xl font-bold mb-8 quicksand-bold">Explore More Templates</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {templateIndex
-              .filter((t) => t.id !== template.id)
-              .slice(0, 3)
-              .map((relatedTemplate) => (
-                <Link
-                  key={relatedTemplate.id}
-                  href={`/templates/${relatedTemplate.slug}`}
-                  className="group block"
-                >
-                  <div className="relative bg-gradient-to-br from-[#1e1b4b]/60 to-[#312e81]/60 backdrop-blur-sm border border-purple-500/30 rounded-xl overflow-hidden hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 p-6">
-                    <div className="absolute top-4 right-4 w-24 h-24 overflow-hidden rounded-lg shadow-lg transform transition-transform duration-300 group-hover:rotate-12 origin-top-right">
-                      <Image
-                        src={relatedTemplate.thumbnailImage}
-                        alt={relatedTemplate.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="pr-24">
-                      <div className="inline-flex items-center justify-center bg-purple-600/20 border border-purple-500/30 rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
-                        <p className="text-purple-300">{relatedTemplate.category}</p>
-                      </div>
-                      <h3 className="text-base font-bold quicksand-bold text-white group-hover:text-purple-300 transition-colors line-clamp-2">
-                        {relatedTemplate.title}
-                      </h3>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-          </div>
-        </motion.div>
+        <RelatedTemplates templateIndex={templateIndex} currentTemplateId={template.id} />
       </div>
       </div>
 
       {/* Email Verification Modal */}
-      {showEmailModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="relative w-full max-w-md mx-4 bg-gradient-to-br from-[#1e1b4b]/95 to-[#312e81]/95 backdrop-blur-md rounded-xl p-8 lg:p-10 shadow-2xl border border-purple-500/30 hover:border-purple-400/50"
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => {
-                setShowEmailModal(false);
-                setEmail("");
-                setEmailError("");
-              }}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
-              aria-label="Close modal"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-
-            {/* Modal Content */}
-            <div className="space-y-6">
-              <div className="text-center mb-4">
-                <h3 className="text-2xl font-bold text-white mb-2 quicksand-bold">Download Template</h3>
-                <p className="text-gray-300 quicksand-regular">Enter your email to access the template</p>
-              </div>
-
-              <form onSubmit={handleEmailSubmit} className="space-y-6">
-                <div>
-                  <label className="text-white quicksand-medium mb-2 block">Work Email</label>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      setEmailError("");
-                    }}
-                    placeholder="your.email@company.com"
-                    className="w-full px-4 py-3 bg-[#1e1b4b]/50 backdrop-blur-sm rounded-lg text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-purple-500 border border-purple-500/30 transition-all quicksand-regular"
-                    disabled={isSubmitting}
-                  />
-                  {emailError && (
-                    <p className="mt-2 text-sm text-red-400 quicksand-light">{emailError}</p>
-                  )}
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed quicksand-semibold shadow-lg"
-                >
-                  {isSubmitting ? "Downloading..." : "Download Template"}
-                </button>
-              </form>
-            </div>
-          </motion.div>
-        </div>
-      )}
+      <EmailModal 
+        show={showEmailModal}
+        email={email}
+        emailError={emailError}
+        isSubmitting={isSubmitting}
+        onClose={() => {
+          setShowEmailModal(false);
+          setEmail("");
+          setEmailError("");
+        }}
+        onEmailChange={(e) => {
+          setEmail(e.target.value);
+          setEmailError("");
+        }}
+        onSubmit={handleEmailSubmit}
+      />
     </div>
   );
 };

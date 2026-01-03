@@ -1,3 +1,5 @@
+import templateIndex from "../../../../templates-data/_templateIndex";
+
 // Helper to load template data dynamically
 async function getTemplateData(slug) {
   try {
@@ -7,6 +9,13 @@ async function getTemplateData(slug) {
     console.error(`Failed to load template: ${slug}`, error);
     return null;
   }
+}
+
+// Generate static paths for all templates at build time
+export async function generateStaticParams() {
+  return templateIndex.map((template) => ({
+    slug: template.slug,
+  }));
 }
 
 export async function generateMetadata({ params }) {
