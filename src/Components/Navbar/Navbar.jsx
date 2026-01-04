@@ -235,10 +235,6 @@ const resourcesTab = [
     menuName: "Case Studies",
   },
   {
-    hrefLink: "/templates",
-    menuName: "Templates",
-  },
-  {
     menuName: "Playbook",
     submenu: [
       {

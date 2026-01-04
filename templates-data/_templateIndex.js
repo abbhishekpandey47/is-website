@@ -9,7 +9,8 @@ const templateIndex = [
         category: "Informational",
         shortDescription: "Perfect for educational blog posts, tutorials, and technical guides",
         thumbnailImage: "/template-thumbnails/informational.png",
-        publishedOn: "2024-12-19"
+        publishedOn: "2024-12-19",
+        comingSoon: true
     },
     {
         id: "template-002",
@@ -18,7 +19,8 @@ const templateIndex = [
         category: "Developer Marketing",
         shortDescription: "Engage developers with authentic, technical content that builds trust",
         thumbnailImage: "/template-thumbnails/developer-marketing.png",
-        publishedOn: "2024-12-19"
+        publishedOn: "2024-12-19",
+        comingSoon: true
     },
     {
         id: "template-003",
@@ -27,7 +29,8 @@ const templateIndex = [
         category: "Product Documentation",
         shortDescription: "Create user-friendly documentation that drives product adoption",
         thumbnailImage: "/template-thumbnails/product-documentation.png",
-        publishedOn: "2024-12-19"
+        publishedOn: "2024-12-19",
+        comingSoon: true
     },
     {
         id: "template-004",
@@ -36,7 +39,8 @@ const templateIndex = [
         category: "Community Engagement",
         shortDescription: "Build and nurture developer communities through engaging content",
         thumbnailImage: "/template-thumbnails/community-engagement.png",
-        publishedOn: "2024-12-19"
+        publishedOn: "2024-12-19",
+        comingSoon: true
     },
     {
         id: "template-005",
