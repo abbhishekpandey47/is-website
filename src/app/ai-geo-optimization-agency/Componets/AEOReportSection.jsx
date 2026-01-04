@@ -30,7 +30,15 @@ export default function AEOReportSection() {
   };
 
   return (
-    <div className="w-full flex flex-col md:flex-row rounded-2xl shadow-lg border border-[#fff]/30 p-8 py-20 md:p-12 gap-8 max-w-6xl mx-auto overflow-hidden">
+    <section className="w-full flex flex-col gap-10">
+      <div className="max-w-3xl mx-auto text-center px-4">
+        <div className="inline-flex items-center justify-center px-6 py-2 mb-4 rounded-full border border-violet-400/40 bg-black/10 shadow-inner shadow-violet-500/20">
+          <p className="text-violet-100 text-base font-medium">Customer results</p>
+        </div>
+        <h2 className="text-white text-3xl md:text-4xl font-bold mb-3">How do AI systems talk about your product?</h2>
+        <p className="text-white/80 text-lg">Get a free AEO report showing visibility, citations, and sentiment across leading answer engines.</p>
+      </div>
+      <div className="w-full flex flex-col md:flex-row rounded-2xl shadow-lg border border-[#fff]/30 p-8 py-20 md:p-12 gap-8 max-w-6xl mx-auto overflow-hidden">
       {/* Left: Form */}
       <div className="flex-1 flex flex-col justify-center min-w-[320px]">
         <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Get your free AEO Report today</h2>
@@ -74,6 +82,7 @@ export default function AEOReportSection() {
       <div className="flex-1 flex flex-col justify-center items-center min-w-[320px] ">
         <img src="/CommLogo/aeo.png" alt="AEO Report Mockup" className="max-w-full rounded-lg shadow-lg relative -right-[3.5rem] -bottom-[3.5rem] w-[35rem] h-[32rem]"/>
       </div>
-    </div>
+      </div>
+    </section>
   );
 }

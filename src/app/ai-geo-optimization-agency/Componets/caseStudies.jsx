@@ -52,7 +52,7 @@ export default function CaseStudies() {
 						How B2B teams like yours are winning AI visibility
 					</h2>
 					<p className="text-white/75 font-manrope text-lg font-medium max-w-2xl mt-4">
-						Some of our recent work with some of fastest developer tool and B2B SaaS companies and how they improved visibility, rankings, and adoption by becoming trusted sources inside AI-generated answers.
+						Examples of recent work with fast-growing developer tools and B2B SaaS teams showing how they improved visibility, rankings, and adoption by being consistently cited in tools like ChatGPT, Perplexity, and Google AI.
 					</p>
 				</div>
       <div className="flex justify-center">
