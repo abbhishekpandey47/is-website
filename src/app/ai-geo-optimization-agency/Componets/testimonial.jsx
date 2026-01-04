@@ -1,6 +1,7 @@
 
 "use client";
 import Image from "next/image";
+import TypewriterText from "../../../Components/TypewriterText";
 
 
 const testimonialsData = [
@@ -95,7 +96,7 @@ function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern,
 					<img src={companyLogo} alt="Company Logo" width={60} height={60} className="testimonial-logo object-contain h-10 w-16" />
 				)}
 				{about && (
-					<div className="company-testimonial-about text-xs text-white/70 font-medium">{about}</div>
+					<TypewriterText text={about} className="company-testimonial-about text-xs text-white/70 font-medium" />
 				)}
 			</div>
 			<div className="framer-nidtgl flex-1 flex flex-col justify-between relative z-10 p-8 pt-4">

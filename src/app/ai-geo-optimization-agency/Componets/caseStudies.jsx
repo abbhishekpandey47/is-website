@@ -49,10 +49,10 @@ export default function CaseStudies() {
           <p className="text-violet-100 text-base font-medium">Trusted</p>
         </div>
 					<h2 className="text-white font-manrope text-[2.25rem] md:text-[2.75rem] font-medium leading-[1.1] tracking-tight">
-						SEO & AEO Services for Modern SaaS
+						How B2B teams like yours are winning AI visibility
 					</h2>
 					<p className="text-white/75 font-manrope text-lg font-medium max-w-2xl mt-4">
-						Grow your technical visibility, win more buyers, and future-proof your brand with Infrasity’s advanced SEO and Answer Engine Optimization solutions.
+						Some of our recent work with some of fastest developer tool and B2B SaaS companies and how they improved visibility, rankings, and adoption by becoming trusted sources inside AI-generated answers.
 					</p>
 				</div>
       <div className="flex justify-center">
