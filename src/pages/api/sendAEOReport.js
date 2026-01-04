@@ -1,4 +1,7 @@
+
 import nodemailer from "nodemailer";
+import dns from "dns/promises";
+import { isEmail } from "validator";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -7,6 +10,20 @@ export default async function handler(req, res) {
   const { email } = req.body;
   if (!email) {
     return res.status(400).json({ error: "Email is required" });
+  }
+  // Inline email validation (format and MX lookup)
+  const value = (email || '').trim().toLowerCase();
+  if (!isEmail(value)) {
+    return res.status(400).json({ error: "Invalid email format" });
+  }
+  const domain = value.split('@')[1];
+  try {
+    const mx = await dns.resolveMx(domain);
+    if (!mx || mx.length === 0) {
+      return res.status(400).json({ error: "No mail server found for this domain" });
+    }
+  } catch (e) {
+    return res.status(400).json({ error: "Invalid email domain" });
   }
   try {
     // Configure your SMTP service here
