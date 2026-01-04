@@ -21,16 +21,25 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   className = "",
 }) => {
   const [displayedText, setDisplayedText] = useState("");
-  const [index, setIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
   const [isTyping, setIsTyping] = useState(true);
   const hasRun = useRef(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const startTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const reducedMotion = useRef(
     typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
 
   useEffect(() => {
+    // Cleanup any running timers when text changes/unmounts
+    if (startTimeoutRef.current) {
+      clearTimeout(startTimeoutRef.current);
+    }
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
     if (reducedMotion.current || (runOnce && hasRun.current)) {
       setDisplayedText(text);
       setIsTyping(false);
@@ -39,26 +48,30 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
     }
 
     hasRun.current = true;
+    setDisplayedText("");
+    setIsTyping(true);
+    setShowCursor(cursor);
 
-    const startTimeout = setTimeout(() => {
-      const typingInterval = setInterval(() => {
-        if (index < text.length) {
-          setDisplayedText((prev) => prev + text[index]);
-          setIndex((prev) => prev + 1);
-        } else {
-          clearInterval(typingInterval);
+    startTimeoutRef.current = setTimeout(() => {
+      let i = 0;
+      intervalRef.current = setInterval(() => {
+        i += 1;
+        setDisplayedText(text.slice(0, i));
+        if (i >= text.length) {
+          if (intervalRef.current) clearInterval(intervalRef.current);
           setIsTyping(false);
           if (runOnce && !cursor) {
             setShowCursor(false);
           }
         }
       }, speedMs);
-
-      return () => clearInterval(typingInterval);
     }, startDelayMs);
 
-    return () => clearTimeout(startTimeout);
-  }, [text, speedMs, startDelayMs, index, runOnce, cursor]);
+    return () => {
+      if (startTimeoutRef.current) clearTimeout(startTimeoutRef.current);
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [text, speedMs, startDelayMs, runOnce, cursor]);
 
   useEffect(() => {
     if (!cursor || !isTyping) return;
