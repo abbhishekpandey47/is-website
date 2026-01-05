@@ -43,7 +43,7 @@ export default function CaseStudies() {
   const study = caseStudies[current];
 
   return (
-    <div className="w-full min-h-screen py-16 px-4 flex flex-col gap-14 ">
+    <div className="w-full py-16 px-4 flex flex-col gap-14 ">
     				<div className="flex flex-col items-center text-center mb-10">
 					 <div className="inline-flex items-center justify-center px-6 py-2 mb-4 rounded-full border border-violet-400/40 bg-black/10 shadow-inner shadow-violet-500/20">
           <p className="text-violet-100 text-base font-medium">Trusted</p>

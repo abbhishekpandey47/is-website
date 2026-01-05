@@ -135,6 +135,14 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
+                    href="/services/ai-geo-optimization-agency"
+                    className="hover:underline lg:mr-2"
+                  >
+                    AEO/GEO for Devtools
+                  </a>
+                </li>
+                <li>
+                  <a
                     href="/services/technical-writing-services"
                     className="hover:underline lg:mr-2"
                   >

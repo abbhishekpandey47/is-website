@@ -2,7 +2,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import TypewriterText from "../../../Components/TypewriterText";
+import TypewriterText from "../../../../Components/TypewriterText";
 
 
 const testimonialsData = [
