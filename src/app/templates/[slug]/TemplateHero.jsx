@@ -28,7 +28,7 @@ const TemplateHero = ({ template, onDownloadClick }) => {
           >
             <Link 
               href="/templates" 
-              className="inline-flex items-center text-[#888] hover:text-white transition-colors text-sm quicksand-regular"
+              className="inline-flex items-center text-[#888] hover:text-white transition-colors text-sm font-[quicksand] font-medium"
             >
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -37,13 +37,13 @@ const TemplateHero = ({ template, onDownloadClick }) => {
             </Link>
             
             <div>
-              <div className="inline-flex items-center justify-center bg-blue-600/20 border border-blue-500/30 rounded-full px-4 py-1.5 text-[13px] quicksand-semibold mb-4">
+              <div className="inline-flex items-center justify-center bg-blue-600/20 border border-blue-500/30 rounded-full px-4 py-1.5 text-sm font-[quicksand] font-semibold mb-4">
                 <p className="text-blue-300">{template.category}</p>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold quicksand-bold text-white mb-4 leading-tight">
+              <h1 className="font-[quicksand] bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-5xl/[1.07] font-bold tracking-tight text-transparent md:text-5xl/[1.07]">
                 {template.title}
               </h1>
-              <p className="text-lg text-[#aaa] quicksand-light leading-relaxed">
+              <p className="font-[quicksand] mt-6 text-lg font-medium text-zinc-400 md:text-xl">
                 {template.description}
               </p>
             </div>
@@ -51,7 +51,7 @@ const TemplateHero = ({ template, onDownloadClick }) => {
             <div className="pt-4">
               <button
                 onClick={onDownloadClick}
-                className="inline-flex items-center justify-center gap-2 bg-[#5F64FF] hover:bg-[#4E53E6] rounded-[5px] px-8 py-3.5 text-white font-semibold quicksand-semibold transition-all duration-300 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 bg-[#5F64FF] hover:bg-[#4E53E6] rounded-[5px] px-8 py-3.5 text-white font-[quicksand] font-semibold transition-all duration-300 cursor-pointer"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -68,7 +68,7 @@ const TemplateHero = ({ template, onDownloadClick }) => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="relative"
           >
-            <div className="relative w-full aspect-video bg-gradient-to-br from-[#1e1b4b] to-[#312e81] border border-purple-500/30 rounded-xl overflow-hidden shadow-2xl">
+            <div className="relative w-full aspect-video bg-[#1a1f35] border border-[#2a2f45] rounded-xl overflow-hidden shadow-2xl">
               {template.videoEmbedUrl ? (
                 <iframe
                   src={template.videoEmbedUrl}
@@ -81,12 +81,12 @@ const TemplateHero = ({ template, onDownloadClick }) => {
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <svg className="w-16 h-16 mx-auto mb-4 text-purple-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-16 h-16 mx-auto mb-4 text-blue-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <p className="text-purple-300 text-xl font-semibold quicksand-semibold mb-2">Coming Soon</p>
-                    <p className="text-gray-400 text-sm quicksand-regular">Video tutorial will be available shortly</p>
+                    <p className="text-blue-300 text-xl font-[quicksand] font-semibold mb-2">Coming Soon</p>
+                    <p className="text-gray-400 text-sm font-[quicksand] font-medium">Video tutorial will be available shortly</p>
                   </div>
                 </div>
               )}
@@ -99,3 +99,6 @@ const TemplateHero = ({ template, onDownloadClick }) => {
 };
 
 export default TemplateHero;
+
+
+

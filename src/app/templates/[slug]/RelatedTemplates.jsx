@@ -11,7 +11,7 @@ const RelatedTemplates = ({ templateIndex, currentTemplateId }) => {
       transition={{ duration: 0.4, delay: 0.3 }}
       className="mt-16"
     >
-      <h2 className="text-3xl font-bold mb-8 quicksand-bold">Explore More Templates</h2>
+      <h2 className="text-4xl font-[quicksand] font-bold tracking-tight mb-8">Explore More Templates</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {templateIndex
           .filter((t) => t.id !== currentTemplateId)
@@ -22,7 +22,7 @@ const RelatedTemplates = ({ templateIndex, currentTemplateId }) => {
               href={`/templates/${relatedTemplate.slug}`}
               className="group block"
             >
-              <div className="relative bg-gradient-to-br from-[#1e1b4b]/60 to-[#312e81]/60 backdrop-blur-sm border border-purple-500/30 rounded-xl overflow-hidden hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 p-6">
+              <div className="relative bg-[#1a1f35] border border-[#2a2f45] rounded-xl overflow-hidden hover:scale-105 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300 p-6">
                 <div className="absolute top-4 right-4 w-24 h-24 overflow-hidden rounded-lg shadow-lg transform transition-transform duration-300 group-hover:rotate-12 origin-top-right">
                   <Image
                     src={relatedTemplate.thumbnailImage}
@@ -32,10 +32,10 @@ const RelatedTemplates = ({ templateIndex, currentTemplateId }) => {
                   />
                 </div>
                 <div className="pr-24">
-                  <div className="inline-flex items-center justify-center bg-purple-600/20 border border-purple-500/30 rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
-                    <p className="text-purple-300">{relatedTemplate.category}</p>
+                  <div className="inline-flex items-center justify-center bg-blue-600/20 border border-[#2a2f45] rounded-full px-3 py-1 text-xs font-[quicksand] font-semibold mb-2">
+                    <p className="text-blue-300">{relatedTemplate.category}</p>
                   </div>
-                  <h3 className="text-base font-bold quicksand-bold text-white group-hover:text-purple-300 transition-colors line-clamp-2">
+                  <h3 className="text-lg font-[quicksand] font-bold tracking-tight text-white group-hover:text-blue-300 transition-colors line-clamp-2">
                     {relatedTemplate.title}
                   </h3>
                 </div>
@@ -48,3 +48,8 @@ const RelatedTemplates = ({ templateIndex, currentTemplateId }) => {
 };
 
 export default RelatedTemplates;
+
+
+
+
+
