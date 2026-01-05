@@ -44,7 +44,7 @@ const TemplateCard = React.memo(({ template }) => {
         <h3 className={`text-white font-[quicksand] font-bold tracking-tight text-xl mb-2 line-clamp-2 ${!template.comingSoon ? 'group-hover:text-blue-300' : ''} transition-colors min-h-[3.5rem]`}>
           {template.title}
         </h3>
-        <p className="text-[#94a3b8] text-base font-[quicksand] font-light line-clamp-2 leading-relaxed mb-4 flex-grow">
+        <p className="text-white/90 text-base font-[quicksand] font-light line-clamp-2 leading-relaxed mb-4 flex-grow">
           {template.shortDescription}
         </p>
         {/* Get Template Link */}
@@ -144,7 +144,7 @@ const TemplatesPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-lg text-[#a3a3a3] mb-8 max-w-2xl mx-auto font-[quicksand] font-light"
+            className="text-lg text-white/90 mb-8 max-w-2xl mx-auto font-[quicksand] font-light"
           >
             Jumpstart your app development process with pre-built solutions from Infrasity and our community.
           </motion.p>
