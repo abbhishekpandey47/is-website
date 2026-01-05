@@ -48,3 +48,8 @@ const RelatedTemplates = ({ templateIndex, currentTemplateId }) => {
 };
 
 export default RelatedTemplates;
+
+
+
+
+
