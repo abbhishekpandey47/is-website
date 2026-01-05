@@ -66,7 +66,7 @@ export default function CaseStudies({
           <div className="flex-1 flex flex-col gap-3 min-w-[220px] justify-center">
             {/* Category Badge */}
             <div className="mb-2">
-              <span className="text-xs py-1 rounded font-manrope text-white/80 font-medium tracking-wide inline-block">{study.tag}</span>
+              <span className="text-sm py-1 rounded font-manrope text-white/80 font-medium tracking-wide inline-block">{study.tag}</span>
             </div>
             {/* Title with blue highlight */}
             <div className="header-case-study text-2xl font-bold text-white mb-2 font-manrope leading-tight">
@@ -75,8 +75,8 @@ export default function CaseStudies({
             </div>
             {/* Company info and badge */}
             <div className="case-study-wrapper flex flex-col mb-2">
-              <img src={study.companyImg} alt={study.badge} className={`case-study-image rounded h-[2rem] w-[5rem] ${study.style}`} />
-              <div className="case-study-category text-xs text-white/60">{study.desc}</div>
+              <img src={study.companyImg} alt={study.badge} className={`case-study-image rounded h-[3rem] w-[10rem] ${study.style}`} />
+              <div className="case-study-category text-sm text-white/60">{study.desc}</div>
             </div>
             {/* Case study link with arrow */}
             <a href={study.link} className="blue-link-wrapper flex items-center gap-2 text-[#695AE1] font-medium hover:underline transition">

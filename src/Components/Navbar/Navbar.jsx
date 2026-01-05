@@ -185,7 +185,7 @@ const menuLinksArrServices = [
   },
   {
     hrefLink: "/services/ai-geo-optimization-agency",
-    menuName: "AI Generative Engine Optimization Agency ",
+    menuName: "AEO/GEO Services ",
   },
   {
     hrefLink: "/services/service-video-production",
@@ -197,7 +197,7 @@ const menuLinksArrServices = [
   },
   {
     hrefLink: "/services/webflow-agency",
-    menuName: "Webflow Agency",
+    menuName: "Webflow Design and Development",
   },
   {
     hrefLink: "/services/reddit-marketing-services",
@@ -410,7 +410,7 @@ const Navbar = () => {
                                 : ""
                             }
                           >
-                            <div>AI Generative Engine Optimization Agency </div>
+                            <div>AEO/GEO Services </div>
                           </Link>
                         </MenuItem2>
 
@@ -471,7 +471,7 @@ const Navbar = () => {
                                 : ""
                             }
                           >
-                            <div>Webflow Agency</div>
+                            <div>Webflow Design and Development</div>
                           </Link>
                         </MenuItem2>
                         <MenuItem2>

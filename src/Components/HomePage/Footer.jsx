@@ -138,7 +138,7 @@ const Footer = () => {
                     href="/services/ai-geo-optimization-agency"
                     className="hover:underline lg:mr-2"
                   >
-                    AI Generative Engine Optimization Agency 
+                    AEO/GEO Services 
                   </a>
                 </li>
                 <li>
