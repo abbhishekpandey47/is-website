@@ -331,7 +331,7 @@ const TemplateDetailPage = ({ params }) => {
                                 <h3 className="text-white text-lg font-semibold font-[quicksand] font-semibold mb-2">
                                   {card.title}
                                 </h3>
-                                <p className="text-[#94a3b8] text-sm leading-relaxed font-[quicksand] font-normal">
+                                <p className="text-[#94a3b8] text-base leading-relaxed font-[quicksand] font-normal">
                                   {card.description}
                                 </p>
                               </div>
@@ -759,13 +759,13 @@ const TemplateDetailPage = ({ params }) => {
                 key={index}
                 className="bg-[#1a1f35] backdrop-blur-sm rounded-xl p-6 border border-[#2a2f45] hover:border-blue-500/50 transition-all duration-300 shadow-lg scroll-mt-32"
               >
-                <h3 className="text-xl font-bold mb-3 text-blue-400 font-[quicksand] font-bold tracking-tight">
+                <h3 className="text-2xl font-bold mb-3 text-blue-400 font-[quicksand] font-bold tracking-tight">
                   {index + 1}. {item.section}
                 </h3>
-                <p className="text-gray-300 mb-3 font-[quicksand] font-light">{item.description}</p>
+                <p className="text-gray-300 mb-3 text-lg font-[quicksand] font-light">{item.description}</p>
                 {item.example && (
                   <div className="bg-[#1a1f35]/60 rounded-lg p-4 border-l-4 border-blue-500">
-                    <p className="text-gray-400 text-sm italic font-[quicksand] font-light">
+                    <p className="text-gray-400 text-base italic font-[quicksand] font-light">
                       {item.example}
                     </p>
                   </div>
