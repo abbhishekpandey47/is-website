@@ -3,7 +3,7 @@ import React from 'react';
 
 const StartupHeroSection = () => {
     return (
-        <div className="bg-black text-white p-[2rem] md:px-[5rem] flex flex-col items-center justify-center">
+        <div className=" text-white p-[2rem] md:px-[5rem] flex flex-col items-center justify-center">
             <div className="max-w-6xl w-full">
                 <div className="max-w-7xl grid grid-cols-1 lg:grid-cols-2 md:gap-12 items-center">
                     {/* Left Column - Content */}

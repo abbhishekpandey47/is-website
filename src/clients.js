@@ -58,7 +58,6 @@ export const serviceClientLogo = [
   "qodo-logo.png",
   "Codegiant.png",
   "Scalekit-logo.png",
-  "cycloid.png",
   "scalr.png",
   "daytona.png",
   "stackOne.png",
