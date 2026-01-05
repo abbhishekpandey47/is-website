@@ -60,6 +60,7 @@ export function ClientLayoutWrapper({ children }) {
     safePathname === "/tools/reddit-tools" ||
     safePathname.startsWith("/auth") ||
     safePathname.startsWith("/threadflow");
+  
   const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2 && safePathname !== "/careers";
   const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar;
 

@@ -184,6 +184,10 @@ const menuLinksArrServices = [
     menuName: "Developer Marketing",
   },
   {
+    hrefLink: "/services/ai-geo-optimization-agency",
+    menuName: "AEO/GEO Services ",
+  },
+  {
     hrefLink: "/services/service-video-production",
     menuName: "Video Production",
   },
@@ -193,7 +197,7 @@ const menuLinksArrServices = [
   },
   {
     hrefLink: "/services/webflow-agency",
-    menuName: "Webflow Agency",
+    menuName: "Webflow Design and Development",
   },
   {
     hrefLink: "/services/reddit-marketing-services",
@@ -388,6 +392,27 @@ const Navbar = () => {
                             <div>Developer Marketing</div>
                           </Link>
                         </MenuItem2>
+                         <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick(
+                                "/services/ai-geo-optimization-agency"
+                              );
+                            }}
+                            href="/services/ai-geo-optimization-agency"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/services/ai-geo-optimization-agency".includes(
+                                "http"
+                              )
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>AEO/GEO Services </div>
+                          </Link>
+                        </MenuItem2>
 
                         <MenuItem2>
                           <Link
@@ -446,7 +471,7 @@ const Navbar = () => {
                                 : ""
                             }
                           >
-                            <div>Webflow Agency</div>
+                            <div>Webflow Design and Development</div>
                           </Link>
                         </MenuItem2>
                         <MenuItem2>

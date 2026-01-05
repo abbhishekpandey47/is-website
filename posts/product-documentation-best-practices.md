@@ -152,7 +152,7 @@ The image below shows how Infrasity created a complete library of production-ali
 * **CI/CD Templates:** GitHub Actions, Argo CD, Automatisch, Bazel Buildfarm, and Gitea  
 * **Infrastructure Tool Templates:** Dokku, Helm, Fonoster, Kubectx \+ Kubens, K9S, Langfuse, Terraform CLI, etc.
 
-![DevZero's starter templates by Infrasity](public/PostImages/product-documentation-best-practices/4.webp)
+![DevZero's starter templates by Infrasity](/PostImages/product-documentation-best-practices/4.webp)
 
 ### 4. **Build Structured Core Documentation**
 

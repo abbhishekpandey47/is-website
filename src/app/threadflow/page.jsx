@@ -159,8 +159,34 @@ const PostsPage = () => {
 
   const statuses = [
     "all",
-    ...new Set(allItems.map((item) => item.status).filter(Boolean)),
+    ...new Set(allItems.map((item) => item.type === "post" ? item.status : item.posted_comment_status)),
   ];
+
+  // Helper to format status keys into human-friendly labels
+  const formatStatusLabel = (status) => {
+    if (status === "all") return "All Status";
+    if (status === null || status === undefined) return "";
+    const lookup = {
+      postunderapproval: "Post Under Approval",
+      commentunderapproval: "Comment Under Approval",
+      notposted: "Not Posted",
+      undermoderation: "Under Moderation",
+      notapproved: "Not Approved",
+    };
+    const key = String(status).toLowerCase();
+    if (lookup[key]) return lookup[key];
+
+    // Replace underscores/dashes, insert space before capitals, then title-case words
+    const spaced = String(status)
+      .replace(/[-_]+/g, " ")
+      .replace(/([a-z])([A-Z])/g, "$1 $2");
+
+    return spaced
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+  };
 
   // Badge helper (unchanged)
   const getStatusBadge = (status) => {
@@ -220,7 +246,7 @@ const PostsPage = () => {
       item.category === selectedCategory;
 
     const matchesStatus =
-      selectedStatus === "all" || item.status === selectedStatus;
+      selectedStatus === "all" || item.status === selectedStatus || item.posted_comment_status === selectedStatus;
 
     const matchesType =
       selectedType === "all" || item.type === selectedType;
@@ -541,6 +567,7 @@ const PostsPage = () => {
         {/* Filters */}
         <Card className="mb-6">
           <CardContent className="p-6">
+          <div>
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               {/* Search */}
               <div className="relative flex-1 max-w-md">
@@ -553,17 +580,7 @@ const PostsPage = () => {
                 />
               </div>
 
-              {/* Type */}
-              <Select value={selectedType} onValueChange={setSelectedType}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="All Types" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Types</SelectItem>
-                  <SelectItem value="post">Posts</SelectItem>
-                  <SelectItem value="comment">Comments</SelectItem>
-                </SelectContent>
-              </Select>
+           
 
               {/* Company */}
               <Select value={selectedCompanyId} onValueChange={setSelectedCompanyId}>
@@ -585,25 +602,7 @@ const PostsPage = () => {
                 </SelectContent>
               </Select>
 
-              {/* Category */}
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Select Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((cat) => (
-                    <SelectItem key={cat} value={cat}>
-                      {cat === "all"
-                        ? "All Categories"
-                        : cat === "select"
-                        ? "Select Category"
-                        : cat}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {/* Date Range */}
+                {/* Date Range */}
               <RangePicker
                 value={dateRange}
                 className="dark-range-picker"
@@ -644,7 +643,7 @@ const PostsPage = () => {
                 ]}
               />
 
-              {/* Export Button */}
+                 {/* Export Button */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -665,22 +664,58 @@ const PostsPage = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+              </div>
+              <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-center">
+                 {/* Type */}
+              <Select value={selectedType} onValueChange={setSelectedType}>
+                <SelectTrigger className="w-40">
+                  <SelectValue placeholder="All Types" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Types</SelectItem>
+                  <SelectItem value="post">Posts</SelectItem>
+                  <SelectItem value="comment">Comments</SelectItem>
+                </SelectContent>
+              </Select>
 
-              {/* If you also want a separate 'Status' filter, uncomment below */}
-              {/*
               <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                <SelectTrigger className="w-32">
+                <SelectTrigger className="w-40">
                   <SelectValue placeholder="All Status" />
                 </SelectTrigger>
                 <SelectContent>
                   {statuses.map((status) => (
                     <SelectItem key={status} value={status}>
-                      {status === "all" ? "All Status" : status.charAt(0).toUpperCase() + status.slice(1)}
+                      {formatStatusLabel(status)}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
-              */}
+
+              {/* Category */}
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="w-48">
+                  <SelectValue placeholder="Select Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((cat) => (
+                    <SelectItem key={cat} value={cat}>
+                      {cat === "all"
+                        ? "All Categories"
+                        : cat === "select"
+                        ? "Select Category"
+                        : cat}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              </div>
+
+            
+
+           
+
+              {/* If you also want a separate 'Status' filter, uncomment below */}
+            
             </div>
           </CardContent>
         </Card>

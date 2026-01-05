@@ -4,7 +4,7 @@ import { ArrowRight, Zap, Code, Terminal, GitBranch, Users, Search, CheckCircle2
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import NewMarquee from '../developer-marketing-agency/marquee';
+import NewMarquee from '@/Components/NewMarquee';
 import CTA from '../developer-marketing-agency/cta';
 import Testimonials from '../developer-marketing-agency/Testimonial';
 import Showcase from '../../../Components/docs/Showcase';

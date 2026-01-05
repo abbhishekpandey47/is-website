@@ -1,21 +1,40 @@
 "use client";
+import dynamic from "next/dynamic";
 import HeroHome from "./hero";
 import MarqueePage from "./marquee";
 import WhyAI from "./howWeWork";
-import Cta from "./cta";
-import RedditMarketingSlide from "./why";
-import InfraMethodologyTimeline from "./methodology";
-import RedditServiceCards from "./whatYouGet";
-import StartupHeroSection from "./whoThisIsFor";
-import DownloadPDF from "./download";
-import Testimonials from "../gtm-content-services-for-yc-startups/testimonials";
-import VideoTestimonials from "../../playbook/developer-marketing/testimonials";
+const Cta = dynamic(() => import("./cta"), { ssr: false });
+const RedditMarketingSlide = dynamic(() => import("./why"), { ssr: false });
+const InfraMethodologyTimeline = dynamic(() => import("./methodology"), { ssr: false });
+const RedditServiceCards = dynamic(() => import("./whatYouGet"), { ssr: false });
+const StartupHeroSection = dynamic(() => import("./whoThisIsFor"), { ssr: false });
+const DownloadPDF = dynamic(() => import("./download"), { ssr: false });
+const Testimonials = dynamic(() => import("../gtm-content-services-for-yc-startups/testimonials"), { ssr: false });
+const VideoTestimonials = dynamic(() => import("../../playbook/developer-marketing/testimonials"), { ssr: false });
 import { Videos } from "../../playbook/developer-marketing/videosData";
-import FAQSection from "./FAQ";
-import StatsSection from "./numbers";
-import RedditComment from "./redditComment";
-import BlogSection from "./blogSection";
-import Threadflow from "./threadflow";
+import CaseStudies from "@/Components/caseStudies";
+const FAQSection = dynamic(() => import("./FAQ"), { ssr: false });
+const StatsSection = dynamic(() => import("./numbers"), { ssr: false });
+const RedditComment = dynamic(() => import("./redditComment"), { ssr: false });
+const BlogSection = dynamic(() => import("./blogSection"), { ssr: false });
+const Threadflow = dynamic(() => import("./threadflow"), { ssr: false });
+
+const respondCaseStudy = [
+  {
+    id: 1,
+    tag: "AI Messaging Platform",
+    title: "0→40% of OPs ranking Top 5",
+    company: "Respond.io",
+    badge: "Ri",
+    badgeColor: "bg-orange-100 text-orange-700",
+    desc: "Series A ($7M)",
+    link: "/case-studies/respond-io-community-led-growth-case-study",
+    style: "object-cover",
+    companyImg: "/trustedby/white/respond.png",
+    graphImg:
+      "https://cdn.prod.website-files.com/644e8b4e20ba395ec31a0017/65df7c6d1d6e96eb38db9165_0-27M.svg",
+  },
+];
 
 
 export default function Page() {
@@ -26,6 +45,13 @@ export default function Page() {
     return (
         <div className="text-white">
             <HeroHome />
+              <div className="mt-8">
+              <CaseStudies
+                studies={respondCaseStudy}
+                heading="Community-Led Growth in Action"
+                subheading="Case studies showing how B2B SaaS brands scale visibility and sentiment on Reddit"
+              />
+            </div>
             <StartupHeroSection />
             <RedditMarketingSlide />
             <WhyAI />

@@ -1,10 +1,13 @@
 ## TL;DR
 
--   When doing Reddit marketing, the most crucial thing to keep in mind is to not use a new account to engage on subreddits for promoting your product.
--   It’s essential to first build a personalized profile - with a real username, avatar, and bio - so you don’t appear like a bot or spammer.
--   Focus on sharing insights and adding value before mentioning your product, and always make sure you’re following the specific rules of each subreddit you engage in.
+* When doing [Reddit marketing](https://www.infrasity.com/services/reddit-marketing-agency), the most important thing to keep in mind is not to use a new account to engage on subreddits for promoting your product.  
+* It’s essential to first build a personalized profile, with a real username, avatar, and bio, so you don’t appear like a bot or spammer.  
+* Focus on sharing insights and adding value before mentioning your product, and always make sure you’re following the specific rules of each subreddit you engage in.  
+* Reddit marketing success depends on consistent, non-promotional participation that [builds karma](https://www.infrasity.com/blog/how-do-you-get-karma-on-reddit), credibility, and achievements before any product advocacy.  
+* Accounts that ignore subreddit rules, repeat the same answers, or drop links without context risk shadowbans, content removal, and long-term loss of visibility.  
+* As a B2B SaaS startup, building a presence on Reddit can be one of the smartest moves you make to get visibility, to connect with target users, understand pain points, and gather unfiltered feedback.
 
-As a B2B SaaS startup, building a presence on Reddit can be one of the smartest moves you make, not just to get visibility but to actually connect with your target users, understand their pain points, and gather real, unfiltered feedback from early adopters or current customers.
+As a B2B SaaS startup, building a presence on Reddit can be one of the smartest distribution bets you make when done correctly. [Reddit had **110.4 million daily active users**](https://www.twinstrata.com/reddit-statistics/) in Q2 2025, showing strong engagement and community activity, many of which are tightly focused on SaaS, DevTools, AI, DevOps, analytics, and engineering workflows.
 
 Naturally, at some point in this process, your end goal is to promote your product. However, you must know that Reddit isn't like other social platforms. You can't just drop in, share a few links, and expect traction. Reddit has its own culture, and its moderators are quick to shut down anything that feels even slightly promotional or inauthentic.
 
@@ -35,11 +38,11 @@ Karma is a point-based reputation system that reflects how much the community va
 
 **Every [subreddit](https://www.infrasity.com/blog/how-to-create-a-subreddit) has its own set of rules** (often listed in the sidebar or "About" section), and you must read and respect them before posting. Reddit has two layers of moderation: automated moderation (bots and filters that the platform or subreddit mods set up) and human moderation (the subreddit's volunteer moderators).
 
-![ensure you follow rules of subreddit when doing reddit marketing](/PostImages/reddit-marketing/rm2.webp)
+![r/devops subreddit](/PostImages/reddit-marketing/rm2.webp)
 
-For example, you can see the **r/devops** subreddit's moderators' profiles and rules, such as not sharing personal information and not spamming promotional content, even though they don't mind it, but it shouldn't be the sole purpose to join this subreddit.
+For example, you can see the [r/devops](https://www.reddit.com/r/devops/) subreddit's moderators' profiles and rules, such as not sharing personal information and not spamming promotional content, even though they don't mind it, but it shouldn't be the sole purpose of joining this subreddit.
 
-If you violate the community guidelines, your posts or comments will be removed, even if you have an established account, and you may receive a warning or ban. For example, a user once had their comment removed in the **r/OutOfTheLoop** subreddit simply because it didn't follow that community's specific posting guidelines, starting the comment with "Answer:".
+If you violate the community guidelines, your posts or comments will be removed, even if you have an established account, and you may receive a warning or ban. For example, a user once had their comment removed in the [r/OutOfTheLoop](https://www.reddit.com/r/OutOfTheLoop/) subreddit simply because it didn't follow that community's specific posting guidelines, starting the comment with "Answer:". 
 
 ![automoderator notification of deleting comment when performing reddit marketing](/PostImages/reddit-marketing/rm3.webp)
 
@@ -47,9 +50,11 @@ The AutoModerator deleted it to enforce the rules. This shows how seriously Redd
 
 ### 3. Don't Come Across As Overly Promotional or "Salesy"
 
-Reddit users are quick to spot anything that feels like a sales pitch, and they don't react kindly to it. The community values authenticity and gets easily turned off by posts or comments that seem promotional, leading to receiving downvotes (negative karma), getting comments deleted, or even getting banned. For example, a user promoted Gemini out of nowhere on a comparison post about Claude Code and Cursor.
+Reddit users are quick to spot anything that feels like a sales pitch, and they don't react kindly to it. The community values authenticity and gets easily turned off by posts or comments that seem promotional, leading to receiving downvotes (negative karma), getting comments deleted, or even getting banned. 
 
-![avoid posting promotional comments out of context in reddit marketing](/PostImages/reddit-marketing/rm4.webp)
+**For example**, a user promoted Gemini out of nowhere on a comparison post about Claude Code and Cursor, as shown in the image below.
+
+![Reddit post on “Claude code vs cursor on a budget](/PostImages/reddit-marketing/rm4.webp)
 
 Not only was this comment blatantly promotional, but it also had no structure. To understand how he should have commented with promotional intent, read the 3rd point under Dos of Reddit Marketing.
 
@@ -59,11 +64,11 @@ Additionally, instead of selling, focus on advocating for your product seamlessl
 
 Not all subreddit moderators allow citing links in your comments or posts. Some flag them off, and some approve only if they have context and are not done consecutively. Dropping links to your website or signup page in every post or comment leads to downvotes, getting flagged, or being banned.
 
-Only include a link when it truly adds value or is necessary to support a point, for instance, linking to a relevant resource or a source that was asked about. Even then, it's wise to disclose your affiliation ("Disclosure: I work for the company behind this tool, here's a link if you want to check it out.”) if you're linking to your own product.
+Only include a link when it truly adds value or is necessary to support a point, for instance, linking to a relevant resource or a source that was asked about. Even then, it's wise to disclose your affiliation, such as ("Disclosure: I work for the company behind this tool, here's a link if you want to check it out.”) if you're linking to your own product.
 
-For instance, on a post on r/SaaS, the commenter shares actionable tips while naturally introducing their role as a Growth Marketer at Infrasity, highlighting that they are sharing marketing tips from experience. By offering relevant advice and including a contextual link, they position their company with credibility and authority, without coming off as pushy or salesy.
+For instance, on a post on [r/SaaS,](https://www.reddit.com/r/SaaS/) the commenter shares actionable tips while naturally introducing their role as a Growth Marketer at [Infrasity](http://infrasity.com), highlighting that they are sharing marketing tips from experience. By offering relevant advice and including a contextual link, they position their company with credibility and authority, without coming off as pushy or salesy.
 
-![add links strategically with context in reddit marketing](/PostImages/reddit-marketing/rm5.webp)
+![A Reddit post that adds links with context in Reddit marketing](/PostImages/reddit-marketing/rm5.webp)
 
 By being transparent and sparing with links, you signal that you're there to participate in the community, not just drive traffic to your site. Remember, a conversational mention of your product (without a link) can often be more effective than a promotional link drop. If the subreddit explicitly forbids promotional links, do not include them at all.
 
@@ -75,41 +80,7 @@ Even if your answer is relevant, posting the exact same version everywhere signa
 
 Take the time to read each post carefully and respond in a way that adds unique value to that specific conversation. A thoughtful, tailored comment will always earn more respect (and upvotes) than a recycled one.
 
-## How To Find Out You Are Shadow Banned?
-
-You won't get a notification if you are shadowbanned. However, there are some clues that can help you identify that you have been sent to the deepest trenches of Reddit.
-
-### 1. Your Avatar Disappears
-
-On Reddit's interface (especially on the website), you normally see your avatar at the top right when logged in. If you've been shadowbanned, you may notice that your profile picture or Avatar is no longer visible there. It might or might not appear as a default icon.
-
-### 2. Error Messages When Viewing Your Own Profile
-
-Click on your username or profile. If you get a message saying "We had a server error," it indicates that you have been shadowbanned. For instance, this shadowbanned account has no Avatar, and the error message also pops up.
-
-![in failed reddit marketing, you cannot see your avatar and get error message when you get shadowbanned](/PostImages/reddit-marketing/rm6.webp)
-
-### 3. Your Posts/Comments Are Invisible to Others
-
-An easy test is to log out or use a private/incognito browser window, then try to view a post or comment you made. If you can't find it anywhere, it likely means your comments and posts are invisible to others.
-
-### 4. Suspension Messages Upon Logging Out
-
-Some users report that when they try to log out of a shadowbanned account, they see a notice like "Your account has been suspended," even though they can log back in. This is a pretty strong indicator of a shadow ban.
-
-![suspended account when reddit marketing not done right](/PostImages/reddit-marketing/rm7.webp)
-
-### 5. The Ban Appeal Test
-
-If you are still not sure, do a quick ban appeal test. Reddit has an official ban appeal form that you can find by going to their **[website](https://www.reddit.com/appeal)**. Typically, if your account is actually banned, you'll be able to use the appeal process to ask for a review. For example, here you can see that the user wrote an appeal to Reddit for account suspension.
-
-![apply for band appeal test in reddit marketing](/PostImages/reddit-marketing/rm8.webp)
-
-If your account was not banned, you won't get the option to appeal because there's nothing to appeal; indicating that you are not shadowbanned.
-
-![you are not shadowbanned when you cannot send appeal while doing reddit marketing](/PostImages/reddit-marketing/rm9.webp)
-
-So, you can check if your Reddit account has been shadowbanned in these five ways, including whether your Avatar, posts, and comments are still visible, if an error message appears, or if you can send an appeal.
+## CTA : Tired of getting posts removed or accounts flagged on Reddit?  
 
 ## Dos of Reddit Marketing
 
@@ -197,13 +168,51 @@ Many subreddits offer a user flair, a little tag next to your username, which ca
 
 This kind of flair provides transparency: readers immediately know your affiliation. It can actually help you, because you're being upfront (Redditors appreciate honesty), and it can draw positive attention to your comments (people might notice the flair and see you as an authority, if used appropriately).
 
+## How To Find Out You Are Shadow Banned?
+
+You won't get a notification if you are shadowbanned. However, there are some clues that can help you identify that you have been sent to the deepest trenches of Reddit.
+
+### 1. Your Avatar Disappears
+
+On Reddit's interface (especially on the website), you normally see your avatar at the top right when logged in. If you've been shadowbanned, you may notice that your profile picture or Avatar is no longer visible there. It might or might not appear as a default icon.
+
+### 2. Error Messages When Viewing Your Own Profile
+
+Click on your username or profile. If you get a message saying "We had a server error," it indicates that you have been shadowbanned. For instance, this shadowbanned account has no Avatar, and the error message also pops up.
+
+![in failed reddit marketing, you cannot see your avatar and get error message when you get shadowbanned](/PostImages/reddit-marketing/rm6.webp)
+
+### 3. Your Posts/Comments Are Invisible to Others
+
+An easy test is to log out or use a private/incognito browser window, then try to view a post or comment you made. If you can't find it anywhere, it likely means your comments and posts are invisible to others.
+
+### 4. Suspension Messages Upon Logging Out
+
+Some users report that when they try to log out of a shadowbanned account, they see a notice like "Your account has been suspended," even though they can log back in. This is a pretty strong indicator of a shadow ban.
+
+![suspended account when reddit marketing not done right](/PostImages/reddit-marketing/rm7.webp)
+
+### 5. The Ban Appeal Test
+
+If you are still not sure, do a quick ban appeal test. Reddit has an official ban appeal form that you can find by going to their **[website](https://www.reddit.com/appeal)**. Typically, if your account is actually banned, you'll be able to use the appeal process to ask for a review. For example, here you can see that the user wrote an appeal to Reddit for account suspension.
+
+![apply for band appeal test in reddit marketing](/PostImages/reddit-marketing/rm8.webp)
+
+If your account was not banned, you won't get the option to appeal because there's nothing to appeal; indicating that you are not shadowbanned.
+
+![you are not shadowbanned when you cannot send appeal while doing reddit marketing](/PostImages/reddit-marketing/rm9.webp)
+
+So, you can check if your Reddit account has been shadowbanned in these five ways, including whether your Avatar, posts, and comments are still visible, if an error message appears, or if you can send an appeal.
+
+## CTA : Tired of getting posts removed or accounts flagged on Reddit?  
+
 ## Conclusion
 
 Leveraging Reddit marketing for promoting your product to your target audience is a lucrative practice when done right. In this article, we've covered the most essential Dos and Don'ts of Reddit marketing that every B2B SaaS team should know.
 
 For example, avoid sounding overly promotional, always follow subreddit-specific rules, and be cautious of getting shadowbanned. Make sure your account looks real and personalized (not bot-like), and take the time to build up Karma so your contributions carry weight and credibility. Most importantly, diversify your activity. Don't just show up to pitch - engage in meaningful conversations, share insights, and create a buffer of helpful, non-promotional posts that position you as part of the community rather than a marketer.
 
-These lessons come from real-world experience and if you ever feel stuck or want a strategic partner to help you with [Reddit marketing services](https://www.infrasity.com/services/reddit-marketing-agency)**, **book a Free Demo with [Reddit marketing agencies](https://www.infrasity.com/blog/reddit-marketing-agencies) like Infrasity**. We specialize in helping B2B SaaS companies grow through authentic Reddit engagement.
+These lessons come from real-world experience, and if you ever feel stuck or want a strategic partner to help you with Reddit marketing services, book a [Free Demo](https://www.infrasity.com/contact) with Reddit marketing agencies like Infrasity. We specialize in helping B2B SaaS startups grow through authentic engagement on Reddit.
 
 ## FAQs
 

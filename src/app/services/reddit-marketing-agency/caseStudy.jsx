@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function FireflyClone() {
     return (
-        <div className="min-h-screen bg-black overflow-hidden relative">
+        <div className="min-h-screen  overflow-hidden relative">
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[37px] max-sm:text-[1em] tracking-tighter leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" leading-[80px] max-sm:leading-[69px] text-center max-lg:text-center max-lg:mx-auto">

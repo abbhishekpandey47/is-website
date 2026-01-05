@@ -1,64 +1,66 @@
 import nodemailer from "nodemailer";
 import { google } from "googleapis";
 
-const parseDateTime = (dateStr, timeStr) => {
+// Parse a timezone string like "UTC-04:00" or "+05:30" into minutes offset from UTC
+const parseOffsetMinutes = (timezone) => {
+  const tz = String(timezone || "").trim();
+  const match = tz.match(/^(?:UTC)?([+-])(\d{2}):(\d{2})$/i);
+  if (!match) return null;
+  const sign = match[1] === "+" ? 1 : -1;
+  const hours = parseInt(match[2], 10);
+  const minutes = parseInt(match[3], 10);
+  return sign * (hours * 60 + minutes);
+};
+
+// Build an ISO string that includes the provided offset (e.g., 2025-12-25T23:30:00-04:00)
+const buildIsoWithOffset = (utcDate, offsetMinutes) => {
+  const localMs = utcDate.getTime() + offsetMinutes * 60000;
+  const local = new Date(localMs);
+  const sign = offsetMinutes >= 0 ? "+" : "-";
+  const abs = Math.abs(offsetMinutes);
+  const hh = String(Math.floor(abs / 60)).padStart(2, "0");
+  const mm = String(abs % 60).padStart(2, "0");
+  const year = local.getUTCFullYear();
+  const month = String(local.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(local.getUTCDate()).padStart(2, "0");
+  const hours = String(local.getUTCHours()).padStart(2, "0");
+  const minutes = String(local.getUTCMinutes()).padStart(2, "0");
+  const seconds = String(local.getUTCSeconds()).padStart(2, "0");
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${sign}${hh}:${mm}`;
+};
+
+// Parse date/time in the user's timezone offset into a UTC Date
+const parseDateTimeInTimezone = (dateStr, timeStr, timezone) => {
   try {
-    const [timeOnly, period] = timeStr.split(' ');
-    const [hours, minutes] = timeOnly.split(':');
-    let hour24 = parseInt(hours);
-    
-    if (period === 'PM' && hour24 !== 12) {
-      hour24 += 12;
-    } else if (period === 'AM' && hour24 === 12) {
-      hour24 = 0;
+    const offsetMinutes = parseOffsetMinutes(timezone);
+    if (offsetMinutes === null) {
+      throw new Error("Unsupported timezone format. Expected UTC±HH:MM");
     }
 
-    const dateObj = new Date(dateStr);
-    const year = dateObj.getFullYear();
-    const month = dateObj.getMonth();
-    const day = dateObj.getDate();
-    
-    const meetingDate = new Date(year, month, day, hour24, parseInt(minutes), 0, 0);
-    
-    if (isNaN(meetingDate.getTime())) {
-      throw new Error('Invalid date created');
-    }
+    const [timeOnly, period] = (timeStr || "").trim().split(" ");
+    if (!timeOnly || !period) throw new Error("Time must be in 'HH:MM AM/PM' format");
 
-    return meetingDate;
+    const [hours, minutes] = timeOnly.split(":");
+    let hour24 = parseInt(hours, 10);
+    const minuteVal = parseInt(minutes, 10);
+    if (Number.isNaN(hour24) || Number.isNaN(minuteVal)) throw new Error("Invalid hour/minute");
+
+    if (period.toUpperCase() === "PM" && hour24 !== 12) hour24 += 12;
+    else if (period.toUpperCase() === "AM" && hour24 === 12) hour24 = 0;
+
+    const [y, m, d] = (dateStr || "").split("-").map((v) => parseInt(v, 10));
+    if ([y, m, d].some((n) => Number.isNaN(n))) throw new Error("Invalid date");
+
+    // Create a UTC timestamp from the user's local time by subtracting the offset
+    const utcMs = Date.UTC(y, m - 1, d, hour24, minuteVal) - offsetMinutes * 60000;
+    const utcDate = new Date(utcMs);
+    if (Number.isNaN(utcDate.getTime())) throw new Error("Invalid constructed date");
+
+    return { utcDate, offsetMinutes };
   } catch (error) {
-    console.error('Error parsing time:', error);
-    throw new Error(`Invalid time format: ${error.message}`);
+    console.error("Error parsing date/time with timezone:", error);
+    throw new Error(`Invalid date/time: ${error.message}`);
   }
-};
-
-const formatDateTimeForTimezone = (dateTime, timezone) => {
-
-  const year = dateTime.getFullYear();
-  const month = String(dateTime.getMonth() + 1).padStart(2, '0');
-  const day = String(dateTime.getDate()).padStart(2, '0');
-  const hours = String(dateTime.getHours()).padStart(2, '0');
-  const minutes = String(dateTime.getMinutes()).padStart(2, '0');
-  const seconds = String(dateTime.getSeconds()).padStart(2, '0');
-  
-  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-};
-
-const formatTimezoneForGoogle = (timezone) => {
-
-  
-  if (timezone.includes('/')) {
-    return timezone; 
-  }
-  
-  if (timezone.startsWith('UTC')) {
-    return timezone; // UTC offset format
-  }
-  
-  if (timezone.match(/^[+-]\d{2}:\d{2}$/)) {
-    return `UTC${timezone}`;
-  }
-  
-  return timezone;
 };
 
 export default async function handler(req, res) {
@@ -68,12 +70,6 @@ export default async function handler(req, res) {
 
   const { email, firstName, lastName, date, time, timezone, companyWebsite } = req.body;
 
-  if (!email || !firstName || !lastName || !date || !time || !timezone) {
-    return res.status(400).json({ 
-      message: "Missing required fields",
-      required: ['email', 'firstName', 'lastName', 'date', 'time', 'timezone']
-    });
-  }
 
   try {
     const oauth2Client = new google.auth.OAuth2(
@@ -96,28 +92,31 @@ export default async function handler(req, res) {
 
     const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
 
-    const startDateTime = parseDateTime(date, time);
-    const endDateTime = new Date(startDateTime.getTime() + 30 * 60 * 1000); 
+    const { utcDate: startDateTime, offsetMinutes } = parseDateTimeInTimezone(date, time, timezone);
+    const endDateTime = new Date(startDateTime.getTime() + 30 * 60 * 1000);
 
-    const calendarTimezone = formatTimezoneForGoogle(timezone);
+    const calendarTimezone = timezone; // keep the provided offset/IANA string
+
+    const isoStart = buildIsoWithOffset(startDateTime, offsetMinutes);
+    const isoEnd = buildIsoWithOffset(endDateTime, offsetMinutes);
 
     console.log('Meeting details:', {
       originalDate: date,
       originalTime: time,
       timezone: timezone,
       calendarTimezone: calendarTimezone,
-      localDateTime: startDateTime.toString(),
+      localDateTime: isoStart,
     });
 
     const event = {
       summary: `Infrasity Team Meeting with ${firstName} ${lastName}`,
       description: `Meeting with ${firstName} ${lastName}${companyWebsite ? ` from ${companyWebsite}` : ''}\n\nScheduled for: ${time} ${calendarTimezone}`,
       start: {
-        dateTime: formatDateTimeForTimezone(startDateTime, calendarTimezone),
+        dateTime: isoStart,
         timeZone: calendarTimezone,
       },
       end: {
-        dateTime: formatDateTimeForTimezone(endDateTime, calendarTimezone),
+        dateTime: isoEnd,
         timeZone: calendarTimezone,
       },
       attendees: [
@@ -167,14 +166,17 @@ export default async function handler(req, res) {
     const meetingLink = calendarResponse.data.hangoutLink || calendarResponse.data.htmlLink;
     const eventId = calendarResponse.data.id;
 
-    const formattedDate = startDateTime.toLocaleDateString('en-US', {
+    // Build display time from the offset-aware ISO string to avoid double-applying offsets
+    const userLocalDate = new Date(isoStart);
+
+    const formattedDate = userLocalDate.toLocaleDateString('en-US', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
 
-    const formattedTime = startDateTime.toLocaleTimeString('en-US', {
+    const formattedTime = userLocalDate.toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: '2-digit',
       hour12: true,
@@ -183,8 +185,8 @@ export default async function handler(req, res) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
       },
       pool: true,
       maxConnections: 5,

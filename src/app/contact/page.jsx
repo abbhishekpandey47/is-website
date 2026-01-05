@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import ContactPage from "../book-a-demo/page";
 import Image from "next/image";
-import { message } from "antd";
 import { Router } from "next/router";
 import { useRouter } from "next/navigation"; // add this
 
@@ -33,6 +32,9 @@ const CalendarBooking = () => {
         countryCode: "+91",
     });
     const [errors, setErrors] = useState({});
+    // Email validation state (for UI feedback only)
+    const [isEmailValidating, setIsEmailValidating] = useState(false);
+    const [emailValidationResult, setEmailValidationResult] = useState(null);
     const [selectedTimezone, setSelectedTimezone] = useState("UTC-08:00");
     const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
 
@@ -340,15 +342,50 @@ const CalendarBooking = () => {
             [name]: value,
         });
 
+        if (name === "email") {
+            setEmailValidationResult(null);
+            setErrors((prev) => ({ ...prev, email: undefined }));
+        }
+
         if (errors[name]) {
-            setErrors({
-                ...errors,
-                [name]: "",
-            });
+            setErrors({ ...errors, [name]: undefined });
         }
     };
 
-    const validateUserInfo = () => {
+    // Async MX lookup validation
+    const validateEmailWithApi = async (email) => {
+        setIsEmailValidating(true);
+        setEmailValidationResult(null);
+        if (!email) {
+            setEmailValidationResult({ valid: false, reason: "Email is required" });
+            setIsEmailValidating(false);
+            return { valid: false, reason: "Email is required" };
+        }
+        // Company email check (client-side)
+        if (/@(gmail|yahoo|hotmail|outlook|aol|icloud|protonmail|yandex|live|msn|yo|yoo)\.(com|in|net|org|co\.uk|de|fr)$/i.test(email)) {
+            setEmailValidationResult({ valid: false, reason: "Please enter a valid company email address" });
+            setIsEmailValidating(false);
+            return { valid: false, reason: "Please enter a valid company email address" };
+        }
+        try {
+            const res = await fetch("/api/validate-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+            });
+            const data = await res.json();
+            setEmailValidationResult(data);
+            setIsEmailValidating(false);
+            return data;
+        } catch (err) {
+            setEmailValidationResult({ valid: false, reason: "Could not validate email. Try again." });
+            setIsEmailValidating(false);
+            return { valid: false, reason: "Could not validate email. Try again." };
+        }
+    };
+
+    // Async validation for submit
+    const validateUserInfo = async () => {
         const newErrors = {};
 
         if (!userInfo.firstName.trim()) {
@@ -359,18 +396,20 @@ const CalendarBooking = () => {
             newErrors.lastName = "Last name is required";
         }
 
-        if (!userInfo.email.trim()) {
-            newErrors.email = "Email is required";
-        } else if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
-            newErrors.email = "Email address is invalid";
-        } else if (/@(gmail|yahoo|hotmail|outlook|aol|icloud|protonmail|yandex|live|msn|yo|yoo)\.(com|in|net|org|co\.uk|de|fr)$/i.test(userInfo.email)) {
-            newErrors.email = "Please enter a valid company email address";
+        // Email: use API
+        const emailResult = await validateEmailWithApi(userInfo.email);
+        if (!emailResult.valid) {
+            newErrors.email = emailResult.reason || "Invalid email";
         }
 
-
         setErrors(newErrors);
+        setEmailValidationResult(emailResult);
         return Object.keys(newErrors).length === 0;
     };
+
+    // buildEmailValidationMessage no longer needed
+
+    // validateEmailWithZeroBounce removed
 
     const pad = (n) => n.toString().padStart(2, '0');
     const dateString = selectedDate
@@ -402,17 +441,40 @@ const CalendarBooking = () => {
 
     const handleBookingSubmit = async (e) => {
         e.preventDefault();
-        if (!validateUserInfo()) return;
-
-        const bookingData = {
-            date: dateString, // Send as YYYY-MM-DD string
-            time: selectedTime,
-            ...userInfo,
-        };
-
-        console.log("Booking Data:", userInfo.phoneNumber);
+        const valid = await validateUserInfo();
+        if (!valid) return;
 
         setIsSubmitting(true);
+
+        // Ensure selectedTime is in 'HH:MM AM/PM' format for API
+        function to12HourFormat(time) {
+            if (!time) return "";
+            // If already in correct format, return as is
+            if (/^\d{1,2}:\d{2} (AM|PM)$/i.test(time.trim())) return time.trim();
+            // Try to parse 24h or other formats
+            let [h, m] = (time.split(":")[0] || "").split(":");
+            if (!h || !m) {
+                const parts = time.match(/(\d{1,2}):(\d{2})/);
+                if (parts) {
+                    h = parts[1];
+                    m = parts[2];
+                } else {
+                    return time;
+                }
+            }
+            h = parseInt(h, 10);
+            m = parseInt(m, 10);
+            let period = h >= 12 ? "PM" : "AM";
+            let hour12 = h % 12;
+            if (hour12 === 0) hour12 = 12;
+            return `${hour12}:${m.toString().padStart(2, "0")} ${period}`;
+        }
+
+        const bookingData = {
+            date: dateString,
+            time: to12HourFormat(selectedTime),
+            ...userInfo,
+        };
 
         const hubspotEndpoint =
             "https://api.hsforms.com/submissions/v3/integration/submit/242717777/1bcf066f-9c19-430d-b3b2-a3f05aa671d7";
@@ -421,39 +483,39 @@ const CalendarBooking = () => {
             fields: [
                 {
                     name: "firstname",
-                    value: userInfo.firstName,
+                    value: userInfo.firstName || "",
                 },
                 {
                     name: "lastname",
-                    value: userInfo.lastName,
+                    value: userInfo.lastName || "",
                 },
                 {
                     name: "email",
-                    value: userInfo.email,
+                    value: userInfo.email || "",
                 },
                 {
                     name: "phone_number1",
-                    value: userInfo.countryCode + " " + userInfo.phoneNumber,
+                    value: (userInfo.countryCode || "") + " " + (userInfo.phoneNumber || ""),
                 },
                 {
                     name: "message",
-                    value: userInfo.message,
+                    value: userInfo.message || "",
                 },
                 {
                     name: "start_date",
-                    value: dateString, // Use YYYY-MM-DD string
+                    value: dateString || "",
                 },
                 {
                     name: "meeting_time",
-                    value: selectedTime,
+                    value: selectedTime || "",
                 },
                 {
                     name: "meeting_timezone",
-                    value: selectedTimezone,
+                    value: selectedTimezone || "",
                 },
                 {
                     name: "domain",
-                    value: "https://" + userInfo.companyWebsite,
+                    value: userInfo.companyWebsite ? (userInfo.companyWebsite.startsWith('http') ? userInfo.companyWebsite : 'https://' + userInfo.companyWebsite) : "",
                 },
                 {
                     name: "gtm_services",
@@ -465,7 +527,7 @@ const CalendarBooking = () => {
                         services.video && "Video Production and Product Explainers",
                         services.reddit && "Reddit Engagement for Community Driven Growth",
                         services.otherChecked && services.other && `Other: ${services.other}`
-                    ].filter(Boolean).join(", ")
+                    ].filter(Boolean).join(", ") || ""
                 }
             ],
             context: {
@@ -493,13 +555,12 @@ const CalendarBooking = () => {
                             email: userInfo.email,
                             firstName: userInfo.firstName,
                             lastName: userInfo.lastName,
-                            date: dateString, // Use YYYY-MM-DD string
-                            time: selectedTime,
+                            date: dateString,
+                            time: to12HourFormat(selectedTime),
                             timezone: selectedTimezone,
                             companyWebsite: userInfo.companyWebsite,
                         }),
-                        // Add timeout to prevent hanging requests
-                        signal: AbortSignal.timeout(30000), // 30 second timeout
+                        signal: AbortSignal.timeout(30000),
                     });
 
                     if (!emailResponse.ok) {
@@ -508,12 +569,7 @@ const CalendarBooking = () => {
                     }
                 } catch (emailErr) {
                     console.error("Failed to send confirmation email:", emailErr);
-                    // Don't block the user flow, but maybe show a warning
                 }
-
-                // setTimeout(() => {
-                //   closeModal();
-                // }, 5000);
             } else {
                 const errorData = await response.json();
                 console.error("HubSpot submission failed:", errorData);
@@ -904,14 +960,36 @@ const CalendarBooking = () => {
                                                     name="email"
                                                     value={userInfo.email}
                                                     onChange={handleInputChange}
+                                                    onBlur={async () => { await validateEmailWithApi(userInfo.email); }}
                                                     className={`w-full bg-[#0c102e] rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#3d4058] border border-gray-700`}
                                                     placeholder="Email"
                                                 />
+                                                {isEmailValidating && (
+                                                    <p className="text-yellow-300 text-sm mt-1 text-left">
+                                                        Validating email...
+                                                    </p>
+                                                )}
                                                 {errors.email && (
                                                     <p className="text-red-500 text-sm mt-1 text-left">
                                                         {errors.email}
                                                     </p>
                                                 )}
+                                                {!isEmailValidating &&
+                                                    emailValidationResult &&
+                                                    emailValidationResult.valid === false &&
+                                                    emailValidationResult.reason && (
+                                                        <p className="text-red-500 text-sm mt-1 text-left">
+                                                            {emailValidationResult.reason}
+                                                        </p>
+                                                    )}
+                                                {!isEmailValidating &&
+                                                    emailValidationResult &&
+                                                    emailValidationResult.valid === true &&
+                                                    !errors.email && (
+                                                        <p className="text-green-400 text-sm mt-1 text-left">
+                                                            Email validated successfully.
+                                                        </p>
+                                                    )}
                                             </div>
 
                                             <div>
@@ -1113,7 +1191,8 @@ const CalendarBooking = () => {
                                         {!isSubmitting ? (
                                             <button
                                                 onClick={handleBookingSubmit}
-                                                className="bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md"
+                                                className={`bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md ${isEmailValidating || errors.email || !userInfo.email || (emailValidationResult && emailValidationResult.valid === false) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                                disabled={isEmailValidating || errors.email || !userInfo.email || (emailValidationResult && emailValidationResult.valid === false)}
                                             >
                                                 Confirm Booking
                                             </button>

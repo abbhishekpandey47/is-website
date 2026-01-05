@@ -167,7 +167,36 @@ useEffect(() => {
 }, [searchQuery, selectedType, selectedCategory,dateRange]);
     
   const categories = ["all", ...new Set(allItems.map((item) => item.category).filter(Boolean))];
-  const statuses = ["all", ...new Set(allItems.map((item) => item.status).filter(Boolean))];
+  const statuses = [
+    "all",
+    ...new Set(allItems.map((item) => (item.type === "post" ? item.status : item.posted_comment_status))),
+  ];
+
+  // Helper to format status keys into human-friendly labels
+  const formatStatusLabel = (status) => {
+    if (status === "all") return "All Status";
+    if (status === null || status === undefined) return "";
+    const lookup = {
+      postunderapproval: "Post Under Approval",
+      commentunderapproval: "Comment Under Approval",
+      notposted: "Not Posted",
+      undermoderation: "Under Moderation",
+      notapproved: "Not Approved",
+    };
+    const key = String(status).toLowerCase();
+    if (lookup[key]) return lookup[key];
+
+    // Replace underscores/dashes, insert space before capitals, then title-case words
+    const spaced = String(status)
+      .replace(/[-_]+/g, " ")
+      .replace(/([a-z])([A-Z])/g, "$1 $2");
+
+    return spaced
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+  };
   
   // Date range filter (inclusive)
   const matchesDateRange = (item, range) => {
@@ -195,7 +224,7 @@ useEffect(() => {
     const matchesCategory =
       selectedCategory === "all" || item.category === selectedCategory;
     const matchesStatus =
-      selectedStatus === "all" || item.status === selectedStatus;
+      selectedStatus === "all" || item.status === selectedStatus || item.posted_comment_status === selectedStatus;
     const matchesType =
       selectedType === "all" || item.type === selectedType;
     const matchesDate = matchesDateRange(item, dateRange);
@@ -488,7 +517,7 @@ const statusCnt = getStatusCounts()
         {/* Filters */}
         <Card className="mb-6">
           <CardContent className="p-6">
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+            <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
               <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
@@ -500,7 +529,7 @@ const statusCnt = getStatusCounts()
               </div>
 
               <Select value={selectedType} onValueChange={setSelectedType}>
-                <SelectTrigger className="w-40">
+                <SelectTrigger className="w-36">
                   <SelectValue placeholder="All Types" />
                 </SelectTrigger>
                 <SelectContent>
@@ -511,7 +540,7 @@ const statusCnt = getStatusCounts()
               </Select>
 
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-48">
+                <SelectTrigger className="w-44">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
                 <SelectContent>
@@ -524,18 +553,18 @@ const statusCnt = getStatusCounts()
               </Select>
 
               {/* Status Filter */}
-              {/* <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                <SelectTrigger className="w-32">
+              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+                <SelectTrigger className="w-40">
                   <SelectValue placeholder="All Status" />
                 </SelectTrigger>
                 <SelectContent>
                   {statuses.map((status) => (
                     <SelectItem key={status} value={status}>
-                      {status === "all" ? "All Status" : status.charAt(0).toUpperCase() + status.slice(1)}
+                      {formatStatusLabel(status)}
                     </SelectItem>
                   ))}
                 </SelectContent>
-              </Select> */}
+              </Select>
                    <RangePicker
                             value={dateRange}
                             className="dark-range-picker"

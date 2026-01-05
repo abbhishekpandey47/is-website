@@ -1,20 +1,21 @@
 "use client"
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import Hero from "./hero";
 import Card1 from "./card1";
-import FeatureComparison from "./FeatureComparison";
-import Card2 from "./card2";
-import CTA from "./cta";
-import WhyInfrasity from "./WhyInfrasity";
-import Testimonials from "./Testimonial";
-import NewMarquee from "./marquee";
-import IndustrySection from "./IndustrySection";
-import IntegrationsSection from "./IntegrationsSection";
-import RealResult from "./realresults";
-import VideoTestimonials from "../../playbook/developer-marketing/testimonials";
+import NewMarquee from "@/Components/NewMarquee";
+const Card2 = dynamic(() => import("./card2"), { ssr: false });
+const WhyInfrasity = dynamic(() => import("./WhyInfrasity"), { ssr: false });
+const IndustrySection = dynamic(() => import("./IndustrySection"), { ssr: false });
+const IntegrationsSection = dynamic(() => import("./IntegrationsSection"), { ssr: false });
+const FeatureComparison = dynamic(() => import("./FeatureComparison"), { ssr: false });
+const RealResult = dynamic(() => import("./realresults"), { ssr: false });
+const Testimonials = dynamic(() => import("./Testimonial"), { ssr: false });
+const SuccessStories = dynamic(() => import("../../../Components/SuccessStories"), { ssr: false });
+const VideoTestimonials = dynamic(() => import("../../playbook/developer-marketing/testimonials"), { ssr: false });
 import { Videos } from "../../playbook/developer-marketing/videosData";
-import SuccessStories from "../../../Components/SuccessStories";
+const CTA = dynamic(() => import("./cta"), { ssr: false });
 
 export default function Page() {
   return (

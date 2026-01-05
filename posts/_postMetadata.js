@@ -901,14 +901,14 @@ let postMetaData = [
 
     {
         title: "Dos and Don’ts of Reddit Marketing for B2B SaaS Startups",
-        metatitle: "Dos and Don’ts of Reddit Marketing for B2B SaaS Startups",
+        metatitle: "Dos and Don’ts of Reddit Marketing for B2B SaaS Startups | 2026 Guide",
         slug: "reddit-marketing",
-        description: "Using Reddit for marketing can be a great strategy but it is crucial to understand what to do and what not to do. Therefore, read the article to get insights.",
+        description: "Reddit can be one of the most powerful yet risky channels for B2B SaaS marketing if done incorrectly. This guide breaks down the essential dos and don’ts of Reddit marketing, helping SaaS founders and marketers avoid shadowbans, deleted posts, and negative karma. Learn how to build a credible Reddit profile, follow subreddit rules, earn karma, engage authentically, and mention your product without sounding promotional.",
         ogImage: "/PostImages/reddit-marketing/rm1.webp",
         publishedOn: "2025-07-01",
         authorId: "author0004",
         category: "Reddit Marketing B2B SaaS",
-        metaDescription: "Using Reddit for marketing can be a great strategy but it is crucial to understand what to do and what not to do. Therefore, read the article to get insights."
+        metaDescription: "Learn the essential dos and don’ts of Reddit marketing for B2B SaaS startups. Avoid shadowbans, build karma, follow subreddit rules. Read now"
     },
     
     {
@@ -961,14 +961,14 @@ let postMetaData = [
    
     {
         title: "Top 5 Developer Marketing Agencies For DevTools Startup",
-        metatitle: "Top 5 Developer Marketing Agencies For B2B SaaS Startups",
+        metatitle: "Top 5 Developer Marketing Agencies for DevTools Startup in 2026",
         slug: "developer-marketing-agency",
-        description: "Here are the top 5 dev agencies that specializes in leveraging technical content as marketing collateral. Pick the best one that aligns with your expectations.",
+        description: "Developer marketing has become important for DevTools, and B2B SaaS startups, as traditional marketing continues to fall short with technical audiences. Developers evaluate tools based on hands-on experience, technical credibility, and peer validation. This guide breaks down the top developer marketing agencies, what they specialize in, and how to choose the right partner based on your product stage and technical complexity.",
         ogImage: "/PostImages/developer-marketing-agency/da1.webp",
         publishedOn: "2025-07-16",
         authorId: "author0004",
         category: "Developer Marketing",
-        metaDescription: "Here are the top 5 dev agencies that specializes in leveraging technical content as marketing collateral. Pick the best one that aligns with your expectations."
+        metaDescription: "A 2026 comparison of the top developer marketing agencies for DevTools and B2B SaaS startups. Choose the right dev marketing agency based on technical depth. Read now"
     },
 
     {
@@ -1075,9 +1075,9 @@ let postMetaData = [
      {
         title: "Subreddit Strategy for Reddit B2B Marketing: How to Pick the Right Communities",
         metatitle: "Reddit B2B Marketing Stategy for SaaS",
-        slug: "reddit-b2b-marketing-strategy",
+        slug: "subreddit-strategy-for-reddit-b2b-marketing",
         description: "Reddit is quickly becoming a goldmine for B2B SaaS marketing, with decision-makers actively validating tools and software inside subreddits. This blog breaks down how to leverage Reddit B2B marketing to build demand, discover the right communities, and avoid common mistakes. You’ll also learn how SaaS companies succeed in niche Reddit spaces and how tools like Infrasity’s Reddit Comment Generator can make your engagement seamless. Perfect for founders and marketers who want to master Reddit SaaS marketing.",
-        ogImage: "/PostImages/reddit-b2b-marketing-strategy/banner.jpg",
+        ogImage: "/PostImages/subreddit-strategy-for-reddit-b2b-marketing/banner.jpg",
         publishedOn: "2025-08-22",
         authorId: "author0005",
         category: "Reddit Marketing B2B SaaS",
@@ -1397,6 +1397,82 @@ let postMetaData = [
   category: "Community Engagement",
   metaDescription:
     "Compare Community-Led Growth and paid growth. Learn best practices for community-led growth to lower CAC, and gain a competitive advantage in B2B SaaS. Read now",
+},
+ {
+  title: "Bad Documentation Examples and How to Fix Them",
+  metatitle: "Bad Documentation Examples: Why Developers Drop Off | Fixes",
+  slug: "bad-documentation-examples",
+  description:"Bad documentation examples are one of the biggest hidden blockers to developer adoption. When integration guides are missing, CLI references are outdated, or content lacks structure and context, developers lose trust and your onboarding funnel slows down. This blog explains the most common documentation pitfalls seen across B2B SaaS teams, why they happen, and how they directly impact activation, usability, and product credibility.",
+  ogImage: "/PostImages/bad-documentation-examples/0.webp",
+  publishedOn: "2025-12-10",
+  authorId: "author0005",
+  category: "Product Documentation",
+  metaDescription:
+    "Identify and fix bad documentation examples that frustrate developers and kill adoption. Learn how to improve flow, clarity, and trust. Read now to find out",
+},
+{
+  title: "How to Build a B2B Content Marketing Strategy for an AI-Driven Startup?",
+  metatitle: "How to Build Tech Content Marketing Strategy for AI-Driven B2B SaaS Startup",
+  slug: "b2b-content-marketing-strategy",
+  description:"Building a high-performing B2B content marketing strategy in 2026 requires more than publishing blogs or scaling content with AI. For AI, DevTools, and infrastructure startups, content must influence the full buyer journey, from discovery and evaluation to adoption and retention, while remaining visible across search engines, LLMs, and developer communities. This blog breaks down what has changed in B2B SaaS content marketing, why technical accuracy and trust now matter more than traffic, and how engineer-led content systems drive measurable growth.",
+  ogImage: "/PostImages/b2b-content-marketing-strategy/0.webp",
+  publishedOn: "2025-12-27",
+  authorId: "author0005",
+  category: "B2B SaaS Growth & GTM",
+  metaDescription:
+    "Learn how to build a B2B SaaS tech content marketing strategy for AI-driven DevTools startups. Discover tech content frameworks and LLM visibility. Read now !",
+},
+{
+  title: "Best B2B Marketing Agency in 2026: Tech Content & LLM Visibility",
+  metatitle: "Best B2B Marketing Agency in 2026 | Tech Content & LLM Visibility",
+  slug: "top-b2b-marketing-agency",
+  description:"Choosing the right B2B marketing agency in 2026 requires more than comparing services or pricing. As buyer behavior shifts toward AI-driven discovery and technical audiences demand real expertise, B2B SaaS companies must partner with agencies that build authority, not just traffic.This guide breaks down the top SaaS B2B marketing agencies specializing in tech content, SEO, and LLM visibility, helping Heads of Growth, CMOs, and VPs of Marketing identify the best fit for their growth stage. You’ll learn how modern B2B content marketing agencies align technical accuracy, AI discoverability, and revenue outcomes.",
+  ogImage: "/PostImages/top-b2b-marketing-agency/0.webp",
+  publishedOn: "2025-12-18",
+  authorId: "author0005",
+  category: "B2B SaaS Growth & GTM",
+  metaDescription:
+    "Discover the top B2B marketing agencies for SaaS in 2026\. Compare tech content, SEO, and LLM visibility leaders. Find the right agency for growth. Read now",
+},
+   {
+  title: "Scaling Community-Led Discovery: How Infrasity Improved Visibility and Sentiment for Respond.io",
+  metatitle: "Respond.io Community Growth Visibility Case Study",
+  slug: "respond-io-community-led-growth-case-study",
+  description:"Discover how Infrasity helped Respond.io strengthen its presence across communities, search engines, and AI platforms, leading to higher visibility, stronger sentiment, and long-term organic growth.",
+  ogImage: "/PostImages/respond-io-community-led-growth-case-study/0.webp",
+  publishedOn: "2026-01-03",
+  authorId: "author0001",
+  category: "Case Studies",
+  metaDescription:
+    "Discover how Respond.io improved organic visibility, rankings, and brand sentiment through community-led growth with Infrasity, strengthening AI and search presence.",
+  stats: [
+    {
+      title: "LLM visibility",
+      value: "4x increase",
+      subtext: "in citable threads",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Ranking adoption",
+      value: "0 → 40%",
+      subtext: "of OPs ranking Top 5",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Sustained positive sentiment growth",
+      value: " ~+24%",
+      subtext: "over 4 months",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    }
+],
+  companyHighlights: {
+    company: "Respond.io",
+    headquarters: "Kuala Lumpur, Malaysia",
+    funding: "Series A ($7M)",
+    industry: "Customer Conversation Management / AI Messaging Platform",
+    employees: "51-100",
+    website: "respond.io"
+  }
 },
 ];
 
