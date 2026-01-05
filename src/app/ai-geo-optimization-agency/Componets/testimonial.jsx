@@ -1,5 +1,6 @@
 
 "use client";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import TypewriterText from "../../../Components/TypewriterText";
 
@@ -73,7 +74,7 @@ const testimonialsData = [
 	}
 ];
 
-function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern, companyLogo, about }) {
+function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern, companyLogo, about, startWhenVisible }) {
 	return (
 		<div className="framer-154pkg relative rounded-2xl border border-[#23232b] bg-[#18181c]/90 shadow-xl flex flex-col overflow-hidden" data-border="true" data-framer-name={name}>
 			{/* Border Top */}
@@ -95,9 +96,13 @@ function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern,
 				{companyLogo && (
 					<img src={companyLogo} alt="Company Logo" width={60} height={60} className="testimonial-logo object-contain h-10 w-16" />
 				)}
-				{about && (
-					<TypewriterText text={about} className="company-testimonial-about text-xs text-white/70 font-medium" />
-				)}
+					{about && (
+						<TypewriterText
+							text={about}
+							className="company-testimonial-about text-xs text-white/70 font-medium"
+							startWhenVisible={startWhenVisible}
+						/>
+					)}
 			</div>
 			<div className="framer-nidtgl flex-1 flex flex-col justify-between relative z-10 p-8 pt-4">
 				<div className="framer-11syty2 mb-6">
@@ -128,8 +133,37 @@ function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern,
 }
 
 export default function Testimonials() {
-		return (
-		<section id="testimonials" className="relative py-20 px-4 bg-transparent">
+	const sectionRef = useRef(null);
+	const [typewriterVisible, setTypewriterVisible] = useState(false);
+
+	useEffect(() => {
+		const section = sectionRef.current;
+		if (!section) {
+			return;
+		}
+
+		if (typeof IntersectionObserver === "undefined") {
+			setTypewriterVisible(true);
+			return;
+		}
+
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					setTypewriterVisible(true);
+					observer.disconnect();
+				}
+			},
+			{ threshold: 0.2 }
+		);
+
+		observer.observe(section);
+
+		return () => observer.disconnect();
+	}, []);
+
+	return (
+	<section id="testimonials" ref={sectionRef} className="relative py-20 px-4 bg-transparent">
 			{/* Blurred background */}
 			<div className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
 				<div
@@ -166,7 +200,7 @@ export default function Testimonials() {
 				{/* Testimonials Grid */}
 				<div className="grid md:grid-cols-2 gap-10">
 					{testimonialsData.map((testimonial, idx) => (
-						<TestimonialCard key={idx} {...testimonial} />
+						<TestimonialCard key={idx} {...testimonial} startWhenVisible={typewriterVisible} />
 					))}
 				</div>
 			</div>

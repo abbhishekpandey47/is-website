@@ -43,7 +43,7 @@ export default function CaseStudies() {
   const study = caseStudies[current];
 
   return (
-    <div className="w-full min-h-screen py-20 px-4 flex flex-col gap-14 ">
+    <div className="w-full min-h-screen py-16 px-4 flex flex-col gap-14 ">
     				<div className="flex flex-col items-center text-center mb-10">
 					 <div className="inline-flex items-center justify-center px-6 py-2 mb-4 rounded-full border border-violet-400/40 bg-black/10 shadow-inner shadow-violet-500/20">
           <p className="text-violet-100 text-base font-medium">Trusted</p>
@@ -65,7 +65,7 @@ export default function CaseStudies() {
             </div>
             {/* Title with blue highlight */}
             <div className="header-case-study text-2xl font-bold text-white mb-2 font-manrope leading-tight">
-              <span className="blue-highlight bg-[#2e2e38] text-sky-400 px-2 rounded font-bold">{study.title.split(" ")[0]}</span>
+              <span className="blue-highlight bg-[#2e2e38] text-[#695AE1] px-2 rounded font-bold">{study.title.split(" ")[0]}</span>
               {" "}{study.title.substring(study.title.indexOf(" ")+1)}
             </div>
             {/* Company info and badge */}
@@ -74,11 +74,11 @@ export default function CaseStudies() {
               <div className="case-study-category text-xs text-white/60">{study.desc}</div>
             </div>
             {/* Case study link with arrow */}
-            <a href={study.link} className="blue-link-wrapper flex items-center gap-2 text-sky-400 font-medium hover:underline transition">
+            <a href={study.link} className="blue-link-wrapper flex items-center gap-2 text-[#695AE1] font-medium hover:underline transition">
               <span className="blue-link">Case study</span>
               <span className="arrow-wrapper-new ml-0"> 
-                <span className="w-6 h-[2px] bg-sky-400 inline-block align-middle mr-[-0.5rem]"></span>
-                <span className="arrow-right blue inline-block align-middle -rotate-45 border-sky-400 border-r-2 border-b-2 w-2 h-2"></span>
+                <span className="w-6 h-[2px] bg-[#695AE1] inline-block align-middle mr-[-0.5rem]"></span>
+                <span className="arrow-right  inline-block align-middle -rotate-45 border-[#695AE1] border-r-2 border-b-2 w-2 h-2"></span>
               </span>
             </a>
           </div>
