@@ -167,7 +167,7 @@ const TemplateDetailPage = ({ params }) => {
   };
 
   const renderBulletList = (items) => (
-    <ul className="space-y-2 text-[#cbd5e1] text-base font-[quicksand] font-normal mt-4">
+    <ul className="space-y-2 text-[#cbd5e1] text-lg font-[quicksand] font-normal mt-4">
       {items.map((bullet, idx) => (
         <li key={idx} className="flex items-start gap-3">
           <span className="text-[#6366f1] mt-1">•</span>
@@ -181,17 +181,17 @@ const TemplateDetailPage = ({ params }) => {
     <div className="grid md:grid-cols-2 gap-4 mt-4">
       {items.map((item, idx) => (
         <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-sm uppercase tracking-wide text-[#a5b4fc] font-[quicksand] font-semibold">{item.label}</p>
+          <p className="text-base uppercase tracking-wide text-[#a5b4fc] font-[quicksand] font-bold">{item.label}</p>
           {item.description && (
-            <p className="text-[#cbd5e1] text-base font-[quicksand] font-normal mt-2">{item.description}</p>
+            <p className="text-[#cbd5e1] text-lg font-[quicksand] font-normal mt-2">{item.description}</p>
           )}
           {item.example && (
-            <p className="text-[#a5b4fc] text-base font-[quicksand] font-normal mt-3">
+            <p className="text-[#a5b4fc] text-lg font-[quicksand] font-normal mt-3">
               <span className="font-semibold">Example:</span> {item.example}
             </p>
           )}
           {item.exampleList && (
-            <ul className="mt-3 space-y-1 text-[#94a3b8] text-base font-[quicksand] font-normal">
+            <ul className="mt-3 space-y-1 text-[#94a3b8] text-lg font-[quicksand] font-normal">
               {item.exampleList.map((example, exIdx) => (
                 <li key={exIdx} className="flex items-start gap-2">
                   <span className="text-[#6366f1] mt-1">•</span>
@@ -206,7 +206,7 @@ const TemplateDetailPage = ({ params }) => {
   );
 
   const renderLabeledItems = (items) => (
-    <ul className="space-y-3 text-[#cbd5e1] text-base font-[quicksand] font-normal mt-4">
+    <ul className="space-y-3 text-[#cbd5e1] text-lg font-[quicksand] font-normal mt-4">
       {items.map((item, idx) => (
         <li key={idx} className="flex items-start gap-3">
           <span className="text-[#6366f1] mt-1">•</span>
@@ -563,12 +563,12 @@ const TemplateDetailPage = ({ params }) => {
                       {isObject && (
                         <div className="space-y-4">
                           {item.description && (
-                            <p className="text-[#cbd5e1] text-base leading-relaxed  font-normal">
+                            <p className="text-[#cbd5e1] text-lg leading-relaxed  font-normal">
                               {item.description}
                             </p>
                           )}
                           {item.paragraphs && item.paragraphs.map((paragraph, paraIdx) => (
-                            <p key={paraIdx} className="text-[#cbd5e1] text-base leading-relaxed font-[quicksand] font-normal">
+                            <p key={paraIdx} className="text-[#cbd5e1] text-lg leading-relaxed font-[quicksand] font-normal">
                               {paragraph}
                             </p>
                           ))}
@@ -576,10 +576,10 @@ const TemplateDetailPage = ({ params }) => {
                           {item.labeledItems && renderLabeledItems(item.labeledItems)}
                           {item.bulletItems && renderBulletList(item.bulletItems)}
                           {item.note && (
-                            <p className="text-[#94a3b8] text-base font-[quicksand] font-normal">{item.note}</p>
+                            <p className="text-[#94a3b8] text-lg font-[quicksand] font-normal">{item.note}</p>
                           )}
                           {item.example && (
-                            <p className="text-[#94a3b8] text-sm leading-relaxed font-[quicksand] font-light pl-4 border-l-2 border-[#6366f1]">
+                            <p className="text-[#94a3b8] text-base leading-relaxed font-[quicksand] font-light pl-4 border-l-2 border-[#6366f1]">
                               <span className="text-[#a5b4fc] font-[quicksand] font-semibold">Example:</span> {item.example}
                             </p>
                           )}
@@ -591,17 +591,17 @@ const TemplateDetailPage = ({ params }) => {
                                 </h3>
                               )}
                               {subsection.description && (
-                                <p className="text-[#cbd5e1] text-base font-[quicksand] font-normal">
+                                <p className="text-[#cbd5e1] text-lg font-[quicksand] font-normal">
                                   {subsection.description}
                                 </p>
                               )}
                               {subsection.intro && (
-                                <p className="text-[#cbd5e1] text-base font-[quicksand] font-normal">
+                                <p className="text-[#cbd5e1] text-lg font-[quicksand] font-normal">
                                   {subsection.intro}
                                 </p>
                               )}
                               {subsection.paragraphs && subsection.paragraphs.map((paragraph, subParaIdx) => (
-                                <p key={subParaIdx} className="text-[#cbd5e1] text-base font-[quicksand] font-normal">
+                                <p key={subParaIdx} className="text-[#cbd5e1] text-lg font-[quicksand] font-normal">
                                   {paragraph}
                                 </p>
                               ))}
@@ -609,10 +609,10 @@ const TemplateDetailPage = ({ params }) => {
                               {subsection.labeledItems && renderLabeledItems(subsection.labeledItems)}
                               {subsection.bulletItems && renderBulletList(subsection.bulletItems)}
                               {subsection.note && (
-                                <p className="text-[#94a3b8] text-base font-[quicksand] font-normal">{subsection.note}</p>
+                                <p className="text-[#94a3b8] text-lg font-[quicksand] font-normal">{subsection.note}</p>
                               )}
                               {subsection.closingNote && (
-                                <p className="text-[#a5b4fc] text-base font-[quicksand] font-semibold">{subsection.closingNote}</p>
+                                <p className="text-[#a5b4fc] text-lg font-[quicksand] font-semibold">{subsection.closingNote}</p>
                               )}
                               {/* Nested subsections */}
                               {subsection.subsections && subsection.subsections.map((nestedSub, nestedIdx) => (
@@ -623,13 +623,13 @@ const TemplateDetailPage = ({ params }) => {
                                     </h4>
                                   )}
                                   {nestedSub.paragraphs && nestedSub.paragraphs.map((para, pIdx) => (
-                                    <p key={pIdx} className="text-[#cbd5e1] text-base font-[quicksand] font-normal">
+                                    <p key={pIdx} className="text-[#cbd5e1] text-lg font-[quicksand] font-normal">
                                       {para}
                                     </p>
                                   ))}
                                   {nestedSub.bulletItems && renderBulletList(nestedSub.bulletItems)}
                                   {nestedSub.note && (
-                                    <p className="text-[#94a3b8] text-xs font-[quicksand] font-normal italic">{nestedSub.note}</p>
+                                    <p className="text-[#94a3b8] text-sm font-[quicksand] font-normal italic">{nestedSub.note}</p>
                                   )}
                                 </div>
                               ))}
