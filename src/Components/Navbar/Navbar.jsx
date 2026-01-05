@@ -185,7 +185,7 @@ const menuLinksArrServices = [
   },
   {
     hrefLink: "/services/ai-geo-optimization-agency",
-    menuName: "AEO/GEO for Devtools",
+    menuName: "AI Generative Engine Optimization Agency ",
   },
   {
     hrefLink: "/services/service-video-production",
@@ -410,7 +410,7 @@ const Navbar = () => {
                                 : ""
                             }
                           >
-                            <div>AEO/GEO for Devtools</div>
+                            <div>AI Generative Engine Optimization Agency </div>
                           </Link>
                         </MenuItem2>
 
