@@ -9,6 +9,8 @@ const cards = [
       "We optimize SaaS & Fintech websites for visibility inside AI generated answers and citations from LLM search engines.",
     image:
       "/CommLogo/geo.png",
+    secondaryImage:
+      "/CommLogo/geo-black.png",
     chips: [
       "AI crawler optimization",
       "LLM content scoring & rewriting",
@@ -29,9 +31,9 @@ const cards = [
     description:
       "We optimize B2B websites to rank on traditional search engines, covering the whole process from technical SEO to content-led growth.",
     image:
-      "https://cdn.prod.website-files.com/644e8b4e20ba395ec31a0017/68b834c2431350620e42cc16_Search%20Engine%20Optimization.webp",
+      "/CommLogo/seo-black.png",
     secondaryImage:
-      "https://cdn.prod.website-files.com/644e8b4e20ba395ec31a0017/68703c8b4f0f9c44061fda37_Search%20Engine%20Optimization%20HOVER%20(2)%20(1).png",
+      "/CommLogo/seo.png",
     chips: [
       "SEO Strategy",
       "On & off-page SEO",
@@ -63,7 +65,7 @@ const cardStyles = {
     base: "bg-[#04070f] text-white",
     chip: "bg-white/10 text-white",
     header: "text-white",
-    border: "border border-white/10",
+    border: "border border-[#fff]/30 ",
     text:"text-white",
     chipClass: "rounded-full text-[13px] font-inter font-semibold border border-white/10 border-dashed uppercase tracking-[0.2em] bg-white/10 text-white px-[12px] py-[5px]"
   },
@@ -96,7 +98,7 @@ const statSections = [
 
 const ServiceHighlights = () => {
   return (
-    <section className="section top-border mt-10">
+    <section className="section top-border pb-12">
        <div className="mt-16 relative min-h-[320px]">
           <div className="absolute inset-0 -z-10 flex justify-center items-center opacity-90">
             <div className="w-full max-w-3xl rounded-xl shadow-2xl">
@@ -125,7 +127,7 @@ const ServiceHighlights = () => {
             </p>
           </div>
         </div>
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 max-w-6xl">
         <div className="grid gap-6 lg:grid-cols-2">
           {cards.map((card) => {
             const styles = cardStyles[card.theme];
@@ -177,9 +179,9 @@ const ServiceHighlights = () => {
             );
           })}
         </div>
-        <div className="mt-10 grid gap-8 border border-dashed lg:grid-cols-2">
+        <div className="mt-10 grid gap-8 lg:grid-cols-2">
           {statSections.map((section) => (
-            <div key={section.id} className="space-y-4 border-gray-200 bg-[#04070f] text-white p-6 md:p-8 rounded-2xl">
+            <div key={section.id} className="space-y-4 border border-[#fff]/30  bg-[#04070f] text-white p-6 md:p-8 rounded-2xl">
               <p className="text-5xl font-semibold tracking-tight text-white">{section.value}</p>
               <p className="text-base text-white">{section.body}</p>
               {section.link && (
