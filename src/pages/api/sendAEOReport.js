@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       from:  `"Infrasity" <${process.env.GMAIL_USER}>`,
       to: email,
       subject: "Your AEO Report is on the way!",
-      text: "Thank you for requesting your AEO report. You will receive your detailed report within 7 days.",
+      text: "Thank you for requesting your AEO report. You will receive your detailed report within 1 business day.",
     });
     return res.status(200).json({ success: true });
   } catch (err) {

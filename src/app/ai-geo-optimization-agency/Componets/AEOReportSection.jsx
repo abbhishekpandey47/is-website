@@ -65,7 +65,7 @@ export default function AEOReportSection() {
         ) : (
           <div className="bg-violet-900/80 border border-violet-400/40 rounded-lg p-6 mt-2">
             <h3 className="text-white text-xl font-bold mb-2">Success!</h3>
-            <p className="text-white/80">Thank you! You will receive your AEO report within 7 days over email.</p>
+            <p className="text-white/80">Thank you! You will receive your AEO report within 1 business day over email.</p>
           </div>
         )}
         <div className="mt-8">
