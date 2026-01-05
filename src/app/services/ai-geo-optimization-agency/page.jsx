@@ -7,7 +7,6 @@ import CTA from "../developer-marketing-agency/cta";
 import ClientSection from "./Componets/clientSection";
 import CaseStudies from "./Componets/caseStudies";
 import AEOReportSection from "./Componets/AEOReportSection";
-
 import ServiceHighlights from "./Componets/serviceHighlights";
 
 export const metadata = {
