@@ -45,7 +45,7 @@ const EmailModal = ({ show, onClose, template }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="relative w-full max-w-md bg-[#1e293b] border border-purple-500/30 rounded-2xl shadow-2xl p-8">
+      <div className="relative w-full max-w-md bg-[#1e293b] border border-[#2a2f45] rounded-2xl shadow-2xl p-8">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
@@ -56,8 +56,8 @@ const EmailModal = ({ show, onClose, template }) => {
           </svg>
         </button>
 
-        <h3 className="text-2xl font-bold text-white mb-2 quicksand-bold">Download Template</h3>
-        <p className="text-gray-400 mb-6 quicksand-regular">Enter your email to download the template</p>
+        <h3 className="text-2xl font-bold text-white mb-2 font-[quicksand] font-extrabold tracking-tight">Download Template</h3>
+        <p className="text-gray-400 mb-6 font-[quicksand] font-normal">Enter your email to download the template</p>
 
         <form onSubmit={handleEmailSubmit} className="space-y-4">
           <div>
@@ -66,24 +66,24 @@ const EmailModal = ({ show, onClose, template }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your.email@company.com"
-              className="w-full px-4 py-3 bg-[#0f172a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors quicksand-regular"
+              className="w-full px-4 py-3 bg-[#0f172a] border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors font-[quicksand] font-normal"
               disabled={isSubmitting}
             />
             {emailError && (
-              <p className="mt-2 text-sm text-red-400 quicksand-regular">{emailError}</p>
+              <p className="mt-2 text-sm text-red-400 font-[quicksand] font-normal">{emailError}</p>
             )}
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-indigo-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed quicksand-semibold"
+            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-[quicksand] font-semibold"
           >
             {isSubmitting ? "Processing..." : "Download Template"}
           </button>
         </form>
 
-        <p className="mt-4 text-xs text-gray-500 text-center quicksand-regular">
+        <p className="mt-4 text-xs text-gray-500 text-center font-[quicksand] font-normal">
           We respect your privacy. No spam, unsubscribe anytime.
         </p>
       </div>
@@ -92,3 +92,5 @@ const EmailModal = ({ show, onClose, template }) => {
 };
 
 export default EmailModal;
+
+
