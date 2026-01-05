@@ -1,10 +1,6 @@
-import fs from "fs";
-import matter from "gray-matter";
 import Markdown from "markdown-to-jsx";
-import Head from "next/head";
 import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
-import path from "path";
 import authorMetadata from "../../../../posts/_authorData";
 import postMetaData from "../../../../posts/_postMetadata";
 import BookDemo from "../../book-a-demo/cta";
@@ -14,38 +10,7 @@ import Featured from "./featured";
 import HeadBanner from "./headBanner";
 import Outline from "./outline";
 import SummarizeBar from "./summarizeBar";
-
-
-// Utility function to check if the post file exists
-const isValid = (slug) => {
-  try {
-    const folder = "posts/";
-    const file = path.join(process.cwd(), folder, `${slug}.md`);
-    return fs.existsSync(file);
-  } catch (error) {
-    console.error(`Error checking file existence for slug: ${slug}`, error);
-    return false;
-  }
-};
-
-// Function to retrieve the post content
-const getPostContent = (slug) => {
-  try {
-    const folder = "posts/";
-    const file = path.join(process.cwd(), folder, `${slug}.md`);
-
-    if (!fs.existsSync(file)) {
-      throw new Error(`Post file not found: ${file}`);
-    }
-
-    const content = fs.readFileSync(file, "utf8");
-    const matterResult = matter(content);
-    return matterResult.content;
-  } catch (error) {
-    console.error(`Error reading post content for slug: ${slug}`, error);
-    return "";
-  }
-};
+import { buildFAQSchema, getPostContent, isValidPostSlug } from "@/lib/postUtils";
 
 // Generate static paths for dynamic routes - ONLY for blog posts and tutorials
 export const generateStaticParams = async () => {
@@ -61,7 +26,7 @@ export const generateStaticParams = async () => {
         return post &&
           post.slug &&
           post.category !== "Case Studies" &&
-          isValid(post.slug);
+          isValidPostSlug(post.slug);
       })
       .map((post) => ({
         slug: post.slug,
@@ -169,7 +134,7 @@ const PostPage = async (props) => {
     }
 
     // Check if the post exists
-    if (!isValid(slug)) {
+    if (!isValidPostSlug(slug)) {
       console.error(`Post file not found for slug: ${slug}`);
       return notFound();
     }
@@ -201,6 +166,16 @@ const PostPage = async (props) => {
       return notFound();
     }
 
+    const faqSchema = buildFAQSchema(postContent);
+    const faqJsonLd =
+      faqSchema && faqSchema.length
+        ? {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqSchema,
+          }
+        : null;
+
     // Safely get author data
     let authorObj = null;
     if (authorMetadata && Array.isArray(authorMetadata) && postData.authorId) {
@@ -230,87 +205,8 @@ const PostPage = async (props) => {
         .filter((line) => line.startsWith('## ') && line.trim() !== '##')
         .map(line => line.trim().replace(/\*\*/g, ''));
     }
-let faqSchema = [];
-let inFAQ = false;
-let currentQuestion = "";
-let currentAnswer = "";
-
-const lines = postContent.split('\n');
-
-for (let line of lines) {
-  line = line.trim();
-
-  // Start FAQ section
-  if (!inFAQ && /^##\s*\**(FAQ|FAQs|Frequently Asked Questions)\**/i.test(line)) {
-    inFAQ = true;
-    continue;
-  }
-
-  if (inFAQ) {
-    // Detect numbered question
-    const questionMatch = line.match(/^\d+\.\s*\**(.+?)\**$/);
-    if (questionMatch) {
-      // Push previous Q&A
-      if (currentQuestion && currentAnswer) {
-        faqSchema.push({
-          "@type": "Question",
-          name: currentQuestion,
-          acceptedAnswer: { "@type": "Answer", text: currentAnswer.trim() }
-        });
-      }
-      currentQuestion = questionMatch[1].trim();
-      currentAnswer = "";
-      continue;
-    }
-
-    // If next main heading starts, end FAQ
-    if (/^##\s+/.test(line) && !/^##\s*\**(FAQ|FAQs|Frequently Asked Questions)\**/i.test(line)) {
-      if (currentQuestion && currentAnswer) {
-        faqSchema.push({
-          "@type": "Question",
-          name: currentQuestion,
-          acceptedAnswer: { "@type": "Answer", text: currentAnswer.trim() }
-        });
-      }
-      inFAQ = false;
-      currentQuestion = "";
-      currentAnswer = "";
-      continue;
-    }
-
-    // Line is part of answer
-    if (line.length > 0) {
-      currentAnswer += (currentAnswer ? " " : "") + line;
-    }
-  }
-}
-
-// Push last Q&A
-if (inFAQ && currentQuestion && currentAnswer) {
-  faqSchema.push({
-    "@type": "Question",
-    name: currentQuestion,
-    acceptedAnswer: { "@type": "Answer", text: currentAnswer.trim() }
-  });
-}
-
     return (
       <>
-      <Head>
-  {faqSchema.length > 0 && (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqSchema
-        }),
-      }}
-    />
-  )}
-</Head>
-
         <div className="pt-32 flex flex-col justify-center items-center">
           <HeadBanner postData={postData} />
           {/* Show Summarize with AI for all blog posts */}
@@ -540,6 +436,13 @@ if (matchedImage) {
             <BookDemo />
           </div>
         </div>
+        {faqJsonLd && (
+          <script
+            key="faq-schema"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          />
+        )}
         <div className="mb-20"></div>
       </>
     );
