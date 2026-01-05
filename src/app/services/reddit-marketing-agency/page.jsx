@@ -45,19 +45,19 @@ export default function Page() {
     return (
         <div className="text-white">
             <HeroHome />
+              <div className="mt-8">
+              <CaseStudies
+                studies={respondCaseStudy}
+                heading="Community-Led Growth in Action"
+                subheading="Case studies showing how B2B SaaS brands scale visibility and sentiment on Reddit"
+              />
+            </div>
             <StartupHeroSection />
             <RedditMarketingSlide />
             <WhyAI />
             <InfraMethodologyTimeline />
             <RedditServiceCards />
             <StatsSection />
-            <div className="mt-16">
-              <CaseStudies
-                studies={respondCaseStudy}
-                heading="Respond case study"
-                subheading="A snapshot of how we scaled visibility for Respond.io through developer-first GTM and AI messaging expertise."
-              />
-            </div>
             <RedditComment />
             <Threadflow />
             <DownloadPDF />
