@@ -19,7 +19,7 @@ const posts = [
     title:
       "Subreddit Strategy for Reddit B2B Marketing: How to Pick the Right Communities",
     href: "/blog/reddit-b2b-marketing-strategy",
-    image: "/PostImages/reddit-b2b-marketing-strategy/banner.jpg",
+    image: "/PostImages/subreddit-strategy-for-reddit-b2b-marketing/banner.jpg",
   },
   {
     date: "August 27, 2025",
