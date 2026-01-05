@@ -9,16 +9,18 @@ interface TypewriterTextProps {
   cursorBlinkMs?: number;
   runOnce?: boolean;
   className?: string;
+  startWhenVisible?: boolean;
 }
 
 const TypewriterText: React.FC<TypewriterTextProps> = ({
   text,
-  speedMs = 35,
+  speedMs = 70,
   startDelayMs = 0,
   cursor = true,
   cursorBlinkMs = 500,
   runOnce = true,
   className = "",
+  startWhenVisible = true,
 }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [showCursor, setShowCursor] = useState(true);
@@ -32,19 +34,26 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   );
 
   useEffect(() => {
-    // Cleanup any running timers when text changes/unmounts
-    if (startTimeoutRef.current) {
-      clearTimeout(startTimeoutRef.current);
-    }
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
+    const clearTimers = () => {
+      if (startTimeoutRef.current) {
+        clearTimeout(startTimeoutRef.current);
+      }
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+
+    clearTimers();
+
+    if (!startWhenVisible) {
+      return clearTimers;
     }
 
     if (reducedMotion.current || (runOnce && hasRun.current)) {
       setDisplayedText(text);
       setIsTyping(false);
       setShowCursor(false);
-      return;
+      return clearTimers;
     }
 
     hasRun.current = true;
@@ -67,11 +76,8 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
       }, speedMs);
     }, startDelayMs);
 
-    return () => {
-      if (startTimeoutRef.current) clearTimeout(startTimeoutRef.current);
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [text, speedMs, startDelayMs, runOnce, cursor]);
+    return clearTimers;
+  }, [text, speedMs, startDelayMs, runOnce, cursor, startWhenVisible]);
 
   useEffect(() => {
     if (!cursor || !isTyping) return;

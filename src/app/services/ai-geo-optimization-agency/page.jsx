@@ -3,7 +3,7 @@ import SecondSection from "./Componets/secondSection";
 import ThirdSection from "./Componets/thirdSection";
 import Testimonials from "./Componets/testimonial";
 import FAQ from "./Componets/faq";
-import CTA from "../services/developer-marketing-agency/cta";
+import CTA from "../developer-marketing-agency/cta";
 import ClientSection from "./Componets/clientSection";
 import CaseStudies from "./Componets/caseStudies";
 import AEOReportSection from "./Componets/AEOReportSection";
@@ -12,10 +12,6 @@ export const metadata = {
   title: 'AI Generative Engine Optimization Agency | GEO & AI Search Visibility',
   description:
     'We provide Generative Engine Optimization services that improve discoverability across AI search platforms through entity SEO, structured content and GEO strategy.',
-  robots: {
-    index: false,
-    follow: false,
-  },
 };
 
 

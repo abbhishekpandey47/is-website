@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 export default function SecondSection() {
 	return (
-		<section className="relative w-full py-24 px-4 overflow-hidden">
+		<section className="relative w-full py-16 px-4 overflow-hidden">
 			{/* Section Heading Framer Style */}
 			<div className="max-w-3xl mx-auto text-center mb-16 relative z-10">
 				<div className="inline-block px-6 py-2 mb-6 rounded-full border border-[#7c3aed] bg-[#1a0033] shadow-[0_0_0_2px_rgba(124,58,237,0.2)]">

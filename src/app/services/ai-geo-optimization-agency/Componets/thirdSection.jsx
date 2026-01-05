@@ -144,7 +144,7 @@ export default function ThirdSection() {
   const { ref: heroRef, isIntersecting: heroVisible } = useIntersectionObserver({ threshold: 0.4 });
 
   return (
-    <section className="relative w-full py-24 px-4 overflow-hidden bg-transparent">
+    <section className="relative w-full py-16 px-4 overflow-hidden bg-transparent">
       <div className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
         <div
           className="rounded-full blur-[150px]"

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const caseStudies = [
+const defaultCaseStudies = [
   {
     id: 1,
     tag: "AI Messaging Platform",
@@ -30,30 +30,35 @@ const caseStudies = [
   },
 ];
 
-export default function CaseStudies() {
+export default function CaseStudies({
+  studies = defaultCaseStudies,
+  heading = "How B2B teams like yours are winning AI visibility",
+  subheading = "Examples of recent work with fast-growing developer tools and B2B SaaS teams showing how they improved visibility, rankings, and adoption by being consistently cited in tools like ChatGPT, Perplexity, and Google AI.",
+  className = "",
+}) {
   const [current, setCurrent] = useState(0);
 
   const handlePrev = () => {
-    setCurrent((prev) => (prev === 0 ? caseStudies.length - 1 : prev - 1));
+    setCurrent((prev) => (prev === 0 ? studies.length - 1 : prev - 1));
   };
   const handleNext = () => {
-    setCurrent((prev) => (prev === caseStudies.length - 1 ? 0 : prev + 1));
+    setCurrent((prev) => (prev === studies.length - 1 ? 0 : prev + 1));
   };
 
-  const study = caseStudies[current];
+  const study = studies[current % studies.length];
 
   return (
-    <div className="w-full min-h-screen py-20 px-4 flex flex-col gap-14 ">
-    				<div className="flex flex-col items-center text-center mb-10">
+    <div className={`w-full py-16 px-4 flex flex-col gap-14 ${className}`}>
+            <div className="flex flex-col items-center text-center mb-10">
 					 <div className="inline-flex items-center justify-center px-6 py-2 mb-4 rounded-full border border-violet-400/40 bg-black/10 shadow-inner shadow-violet-500/20">
           <p className="text-violet-100 text-base font-medium">Trusted</p>
         </div>
-					<h2 className="text-white font-manrope text-[2.25rem] md:text-[2.75rem] font-medium leading-[1.1] tracking-tight">
-						How B2B teams like yours are winning AI visibility
-					</h2>
-					<p className="text-white/75 font-manrope text-lg font-medium max-w-2xl mt-4">
-						Examples of recent work with fast-growing developer tools and B2B SaaS teams showing how they improved visibility, rankings, and adoption by being consistently cited in tools like ChatGPT, Perplexity, and Google AI.
-					</p>
+          <h2 className="text-white font-manrope text-[2.25rem] md:text-[2.75rem] font-medium leading-[1.1] tracking-tight">
+            {heading}
+          </h2>
+          <p className="text-white/75 font-manrope text-lg font-medium max-w-2xl mt-4">
+            {subheading}
+          </p>
 				</div>
       <div className="flex justify-center">
         <div className="rounded-2xl shadow-lg p-12 flex flex-col md:flex-row gap-10 items-stretch w-full max-w-6xl border border-[#fff]/30 relative transition-all duration-200 min-h-[420px]">
@@ -65,7 +70,7 @@ export default function CaseStudies() {
             </div>
             {/* Title with blue highlight */}
             <div className="header-case-study text-2xl font-bold text-white mb-2 font-manrope leading-tight">
-              <span className="blue-highlight bg-[#2e2e38] text-sky-400 px-2 rounded font-bold">{study.title.split(" ")[0]}</span>
+              <span className="blue-highlight bg-[#2e2e38] text-[#695AE1] px-2 rounded font-bold">{study.title.split(" ")[0]}</span>
               {" "}{study.title.substring(study.title.indexOf(" ")+1)}
             </div>
             {/* Company info and badge */}
@@ -74,11 +79,11 @@ export default function CaseStudies() {
               <div className="case-study-category text-xs text-white/60">{study.desc}</div>
             </div>
             {/* Case study link with arrow */}
-            <a href={study.link} className="blue-link-wrapper flex items-center gap-2 text-sky-400 font-medium hover:underline transition">
+            <a href={study.link} className="blue-link-wrapper flex items-center gap-2 text-[#695AE1] font-medium hover:underline transition">
               <span className="blue-link">Case study</span>
               <span className="arrow-wrapper-new ml-0"> 
-                <span className="w-6 h-[2px] bg-sky-400 inline-block align-middle mr-[-0.5rem]"></span>
-                <span className="arrow-right blue inline-block align-middle -rotate-45 border-sky-400 border-r-2 border-b-2 w-2 h-2"></span>
+                <span className="w-6 h-[2px] bg-[#695AE1] inline-block align-middle mr-[-0.5rem]"></span>
+                <span className="arrow-right  inline-block align-middle -rotate-45 border-[#695AE1] border-r-2 border-b-2 w-2 h-2"></span>
               </span>
             </a>
           </div>

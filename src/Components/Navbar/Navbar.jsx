@@ -184,6 +184,10 @@ const menuLinksArrServices = [
     menuName: "Developer Marketing",
   },
   {
+    hrefLink: "/services/ai-geo-optimization-agency",
+    menuName: "AI Generative Engine Optimization Agency ",
+  },
+  {
     hrefLink: "/services/service-video-production",
     menuName: "Video Production",
   },
@@ -386,6 +390,27 @@ const Navbar = () => {
                             }
                           >
                             <div>Developer Marketing</div>
+                          </Link>
+                        </MenuItem2>
+                         <MenuItem2>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick(
+                                "/services/ai-geo-optimization-agency"
+                              );
+                            }}
+                            href="/services/ai-geo-optimization-agency"
+                            className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg ml-4"
+                            target={
+                              "/services/ai-geo-optimization-agency".includes(
+                                "http"
+                              )
+                                ? "_blank"
+                                : ""
+                            }
+                          >
+                            <div>AI Generative Engine Optimization Agency </div>
                           </Link>
                         </MenuItem2>
 

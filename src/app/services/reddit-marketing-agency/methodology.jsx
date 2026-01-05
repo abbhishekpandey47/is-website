@@ -1,7 +1,7 @@
 
 const InfraMethodologyTimeline = () => {
     return (
-        <div className="bg-black text-white p-8 md:p-[3rem] md:px-[4rem]">
+        <div className=" text-white p-8 md:p-[3rem] md:px-[4rem]">
             {/* Header */}
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center">

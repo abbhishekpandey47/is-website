@@ -85,7 +85,7 @@ export default function DownloadPDF() {
     };
   }, [isPopup]);
     return (
-    <div className="bg-[#000000] p-8 md:p-[4rem] md:px-[5rem] -mt-8">
+    <div className=" p-8 md:p-[4rem] md:px-[5rem] -mt-8">
             <div className="max-w-6xl mx-auto">
                 {/* Section Heading */}
                 <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
@@ -205,7 +205,7 @@ export default function DownloadPDF() {
             </div>
 
             {isPopup && (
-                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 p-4">
+                <div className="fixed inset-0 flex items-center justify-center z-50  bg-opacity-50 p-4">
                     <div
                         ref={popupRef}
                         className="rounded-xl p-6 sm:p-8 backdrop-blur-md relative overflow-hidden max-w-md w-full"

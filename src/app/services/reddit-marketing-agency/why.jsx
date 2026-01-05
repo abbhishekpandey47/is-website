@@ -18,7 +18,7 @@ export default function RedditMarketingSlide() {
     ];
 
     return (
-        <div className="bg-black text-white p-[2rem] md:p-[6rem] flex flex-col items-center justify-center md:-mt-16">
+        <div className=" text-white p-[2rem] md:p-[6rem] flex flex-col items-center justify-center md:-mt-16">
             <div className="max-w-6xl w-full">
                 <div className="max-w-6xl mx-auto text-center relative z-10">
                     <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] tracking-normal md:leading-[40px] text-white text-center flex justify-center mb-2">
