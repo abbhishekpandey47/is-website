@@ -6,7 +6,7 @@ import FAQ from "./Componets/faq";
 import CTA from "../services/developer-marketing-agency/cta";
 import ClientSection from "./Componets/clientSection";
 import CaseStudies from "./Componets/caseStudies";
-import AEOReportSection from "./Componets/aeoReportSection";
+import AEOReportSection from "./Componets/AEOReportSection";
 
 export const metadata = {
   title: 'AI Generative Engine Optimization Agency | GEO & AI Search Visibility',
