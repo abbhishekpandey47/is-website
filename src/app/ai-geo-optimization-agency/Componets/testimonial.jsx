@@ -1,6 +1,7 @@
 
 "use client";
 import Image from "next/image";
+import TypewriterText from "../../../Components/TypewriterText";
 
 
 const testimonialsData = [
@@ -11,7 +12,9 @@ const testimonialsData = [
 		avatar: "/Testimon/cindyFirefly.jpg",
 		logo: null,
 		logoAlt: "",
-		bgPattern: null
+		bgPattern: null,
+		companyLogo:"/trustedby/white/firefly.png",
+		about:"/ YC-backed cloud governance platform"
 	},
 	{
 		name: "Josh",
@@ -20,7 +23,9 @@ const testimonialsData = [
 		avatar: "/Testimon/joshTerraTeam.jpg",
 		logo: null,
 		logoAlt: "",
-		bgPattern: null
+		bgPattern: null,
+        companyLogo:"/trustedby/white/terrateam.png",
+		about:"/ Open-source Terraform automation platform"
 	},
 	{
 		name: "Shaked Askayo",
@@ -29,16 +34,20 @@ const testimonialsData = [
 		avatar: "/Testimon/Shaked.png",
 		logo: null,
 		logoAlt: "",
-		bgPattern: null
+		bgPattern: null,
+		companyLogo:"/trustedby/white/kubiya.png",
+		about:"/ YC-backed AI DevOps platform"
 	},
 	{
 		name: "Frank Weissmann",
 		quote: "Infrasity's work has improved the client's SEO, earning a score of over 75%. They've also enabled the client to onboard end customers faster. Moreover, the team listens to the client's content needs, produces work that aligns with their conversation and delivers output in a quick turnaround time.",
-		title: "Customer Success Lead, firefly.ai",
+		title: "Customer Success Lead, Firefly.ai",
 		avatar: "/Testimon/Frank.jpg",
 		logo: null,
 		logoAlt: "",
-		bgPattern: null
+		bgPattern: null,
+		companyLogo:"/trustedby/white/firefly.png",
+		about:"/ YC-backed cloud governance platform"
 	},
 	{
 		name: "Igal Zeifman",
@@ -47,7 +56,9 @@ const testimonialsData = [
 		avatar: "/Testimon/igalEnv0.jpg",
 		logo: null,
 		logoAlt: "",
-		bgPattern: null
+		bgPattern: null,
+		companyLogo:"/trustedby-bw/bw/env0-infra-1.png",
+		about:"/ Insight Partners–backed infrastructure automation platform"
 	},
 	{
 		name: "Debosmit Ray",
@@ -56,11 +67,13 @@ const testimonialsData = [
 		avatar: "/Testimon/devzeroDebo1.png",
 		logo: null,
 		logoAlt: "",
-		bgPattern: null
+		bgPattern: null,
+		companyLogo:"/trustedby/white/devzero.png",
+		about:"/ Cloud development platform"
 	}
 ];
 
-function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern }) {
+function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern, companyLogo, about }) {
 	return (
 		<div className="framer-154pkg relative rounded-2xl border border-[#23232b] bg-[#18181c]/90 shadow-xl flex flex-col overflow-hidden" data-border="true" data-framer-name={name}>
 			{/* Border Top */}
@@ -77,7 +90,16 @@ function TestimonialCard({ quote, name, title, avatar, logo, logoAlt, bgPattern 
 					maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
 					WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
 				}}></div>
-			<div className="framer-nidtgl flex-1 flex flex-col justify-between relative z-10 p-8">
+			{/* Company logo and about section at top left */}
+			<div className="grid items-center pt-6 pl-8">
+				{companyLogo && (
+					<img src={companyLogo} alt="Company Logo" width={60} height={60} className="testimonial-logo object-contain h-10 w-16" />
+				)}
+				{about && (
+					<TypewriterText text={about} className="company-testimonial-about text-xs text-white/70 font-medium" />
+				)}
+			</div>
+			<div className="framer-nidtgl flex-1 flex flex-col justify-between relative z-10 p-8 pt-4">
 				<div className="framer-11syty2 mb-6">
 					<div className="framer-1dh0plq">
 						<div className="framer-1k13d4z">
