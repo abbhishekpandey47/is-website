@@ -1486,6 +1486,17 @@ let postMetaData = [
     website: "respond.io"
   }
 },
+{
+  title: "GTM execution without devrel hiring cycle",
+  metaTitle: "Case Study: Execution Without the DevRel Hiring Cycle",
+  slug: "casestudy-execution-without-devrel-hiring",
+  description: "This case study shows how a Series A developer platform replaced DevRel hiring delays with execution-first developer GTM. By outsourcing developer content, documentation, and community execution, the team achieved faster time-to-output, parallel scaling, and measurable growth, without the cost or ramp-up of a full-time DevRel hire. Learn how execution from day one drove 1,000+ organic clicks, 20% month-on-month growth, and new developer traffic channels.",
+  ogImage: "/PostImages/casestudy-execution-without-devrel-hiring/0.webp",
+  publishedOn: "2026-01-06",
+  authorId: "author0001",
+  category: "Informational",
+  metaDescription: "How a Series A developer platform replaced DevRel hiring delays with execution-first developer GTM. Learn how Infrasity drove 20% MoM growth, 1,000+ organic clicks, and parallel content scale. Read now."
+}
 ];
 
 const sorted = () => {
