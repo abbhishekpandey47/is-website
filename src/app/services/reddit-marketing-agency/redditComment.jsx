@@ -7,12 +7,12 @@ export default function RedditComment() {
       <div className="md:flex items-center md:justify-between px-8 pb-10 lg:px-16">
         {/* Left Side Content */}
         <div className="flex-1 max-w-2xl mb-14 md:mb-0 text-center md:text-left">
-          <h1 className="font-[quicksand] text-5xl lg:text-6xl font-bold text-white mb-8 leading-[1]">
+          <h2 className="font-[quicksand] text-5xl lg:text-6xl font-bold text-white mb-8 leading-[1]">
             <div>Try Our New</div>
             <div className="mt-2">
               <span className="text-[#ff4500]">Reddit</span> Comment Generator
             </div>
-          </h1>
+          </h2>
 
 
           <p className="font-[quicksand] text-xl text-gray-300 mb-4 font-medium">

@@ -9,7 +9,7 @@ export default function Showcase({ items }) {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            The fastest-growing AI and DevTool companies trust Infrasity with their documentation.
+            Fastest-growing AI and DevTool Startups Trust Infrasity as Their Product Documentation Agency
           </h2>
           <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
             From SDKs to CLIs — we've helped next-gen infrastructure and agentic platforms turn documentation into their strongest adoption driver.

@@ -11,6 +11,7 @@ import Showcase from '../../../Components/docs/Showcase';
 import FeaturedResults from '../developer-marketing-agency/FeaturedResults';
 import VideoTestimonials from '../../playbook/developer-marketing/testimonials';
 import { Videos } from '../../playbook/developer-marketing/videosData';
+import FAQSection from "./FAQ"
 
 // Infrasity Studio Component with 3D Tilt Animation
 function InfrasityStudioSection() {
@@ -1008,6 +1009,7 @@ export default function ProductDocumentationPage() {
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10 mb-12"></div>
         <CTA />
         </div>
+      <FAQSection />
     </div>
   );
 }
