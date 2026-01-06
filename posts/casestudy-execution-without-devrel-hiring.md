@@ -1,4 +1,4 @@
-## **Problem Statement** 
+## **Problem Statement**
 
 Developer growth depends on consistently shipping content, engaging the community, and educating developers.
 
@@ -12,7 +12,9 @@ Lastly, cost is another constraint; a senior DevRel hire typically costs **$150k
 
 ![](/PostImages/casestudy-execution-without-devrel-hiring/2.webp) 
 
-##  **Infrasity as extended Devrel Arm:** 
+## CTA : See how modern GTM teams execute without friction**
+
+##  **Infrasity as Extended Devrel Arm**
 
 ![](/PostImages/casestudy-execution-without-devrel-hiring/3.webp) 
 
@@ -29,7 +31,7 @@ Rather than committing $180k–$220k annually to a single DevRel, Cycloid access
 
 This shifted developer GTM from a slow, sequential process to a parallel execution model built for speed and scale.
 
-## Key Growth Metrics Driven: 
+## **Key Growth Metrics Driven**
 
 * Monthly organic clicks grew from **50–60 to 1,000+**  
 * Sustained **20% month-on-month growth**
@@ -46,7 +48,9 @@ This shifted developer GTM from a slow, sequential process to a parallel executi
 * **LLM-driven traffic:** grew from **0 to 200+/month**  
 * **Reddit-driven traffic:** **100+ visits/month**
 
-## Hiring v/s Infrasity
+## CTA : See how modern GTM teams execute without friction
+
+## **Hiring v/s Infrasity**
 
 Developer GTM depends on how quickly execution starts and how much can run in parallel. One approach relies on hiring and ramping a single role, the other activates a full execution layer immediately.
 
@@ -61,7 +65,7 @@ Developer GTM depends on how quickly execution starts and how much can run in pa
 | GTM motion | Sequential | Parallel and compounding |
 | Risk | High commitment before results | Low-risk, fast validation |
 
-## FAQs
+## **Frequently Asked Questions** 
 
 ### **1\. What does a DevRel engineer do?**
 
