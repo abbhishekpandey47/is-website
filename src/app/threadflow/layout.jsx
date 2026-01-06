@@ -33,6 +33,7 @@ export default function CrmLayout({ children }) {
 
   useEffect(() => {
     if (!firebaseUser) return;
+    let cancelled = false;
     const verifyUser = async () => {
       try {
         const token = await firebaseUser.getIdToken(true);
@@ -44,26 +45,24 @@ export default function CrmLayout({ children }) {
         });
         console.log ("Response from /api/authVerify:", res);
         const result = await res.json();
-        setVerifyUser(result.user);
+        if (!cancelled) {
+          setVerifyUser(result.user);
+        }
         console.log("Verified User:", result.user);
-        if (res.ok) {
-          // Handle redirection based on the user role
-          if (result.user.isAdmin) {
-            router.push("/threadflow"); // Redirect to admin page
-          } else {
-            router.push(`/threadflow/c/${result.user.company.slug}`); // Redirect to client page
-          }
-        } else {
+        if (!res.ok) {
           router.push("/unauthorized"); // Handle unauthorized access
         }
       } catch (error) {
-        console.error("Error verifying user:", error);
-        router.push("/unauthorized");
+        if (!cancelled) {
+          console.error("Error verifying user:", error);
+          router.push("/unauthorized");
+        }
       }
     };
 
     verifyUser();
-  }, [firebaseUser]);
+    return () => { cancelled = true; };
+  }, [firebaseUser, router]);
 
   return (
     <div className="crm-theme">

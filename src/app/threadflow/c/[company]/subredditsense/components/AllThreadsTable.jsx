@@ -9,6 +9,28 @@ function getAgeString(postAgeHours) {
   return `${Math.round(postAgeHours / (24 * 7))}w`;
 }
 
+function safelyParseDate(value) {
+  if (!value) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function deriveAgeHours(createdAt, fallbackHours) {
+  const parsed = safelyParseDate(createdAt);
+  if (parsed) return (Date.now() - parsed.getTime()) / 3600000;
+  if (typeof fallbackHours === "number") return fallbackHours;
+  if (fallbackHours !== undefined && fallbackHours !== null) {
+    const parsedFallback = Number(fallbackHours);
+    if (!Number.isNaN(parsedFallback)) return parsedFallback;
+  }
+  return null;
+}
+
+function formatCreatedAtLabel(createdAt) {
+  const parsed = safelyParseDate(createdAt);
+  return parsed ? parsed.toLocaleString() : "";
+}
+
 function getSentiment(upvotes) {
   // Approximation: any positive score = positive, zero = neutral, negative (not expected) = negative
   if (typeof upvotes !== "number") return "neutral";
@@ -17,13 +39,21 @@ function getSentiment(upvotes) {
   return "neutral";
 }
 
+function getDateLabel(type) {
+  if (!type) return "Mention Date";
+  const normalized = type.toString().toLowerCase();
+  if (normalized === "comment") return "Comment Date";
+  if (normalized === "post") return "Post Date";
+  return "Mention Date";
+}
+
 const AllThreadsTable = (props) => {
   let threads = [];
   // Prefer props.data, fallback to props.threads if provided
   if (props.data && props.data.posts) {
     threads = props.data.posts.map((p, idx) => ({
       id: idx,
-      type: p.type,
+      type: p.type || "post",
       title: p.post_title,
       subreddit: p.subreddit,
       author: p.author || "",
@@ -39,7 +69,14 @@ const AllThreadsTable = (props) => {
   } else if (props.threads && Array.isArray(props.threads)) {
     threads = props.threads;
   }
-  session.set("allThreads", threads);
+  const normalizedThreads = threads.map((thread) => {
+    const createdAtValue = thread.createdAt || thread.created_utc || thread.created_at || thread.fetched_at || thread.fetchedAt || null;
+    const ageHours = deriveAgeHours(createdAtValue, thread.post_age_hours ?? thread.postAgeHours);
+    const derivedAge = thread.age || (ageHours != null ? getAgeString(ageHours) : "");
+    const createdAtLabel = formatCreatedAtLabel(createdAtValue);
+    return { ...thread, age: derivedAge, createdAtLabel };
+  });
+  session.set("allThreads", normalizedThreads);
 
   const getSentimentColor = (sentiment) => {
     switch (sentiment) {
@@ -61,7 +98,7 @@ const AllThreadsTable = (props) => {
         return "text-foreground-muted";
     }
   };
-  if (!threads.length) {
+  if (!normalizedThreads.length) {
     return (
       <div className="chart-container animate-slide-up">
         <div className="flex items-center justify-between mb-6">
@@ -156,7 +193,7 @@ const AllThreadsTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            {threads.map((thread) => (
+            {normalizedThreads.map((thread) => (
               <tr
                 key={thread.id}
                 className="border-b border-border-muted hover:bg-interactive-hover transition-colors"
@@ -210,7 +247,12 @@ const AllThreadsTable = (props) => {
                     </div>
                     <div className="flex items-center text-foreground-muted">
                       <Clock className="w-3 h-3 mr-1" />
-                      <span>{thread.age}</span>
+                      <div className="flex flex-col text-[11px] leading-tight">
+                        <span className="text-xs text-foreground">{thread.age || '—'}</span>
+                        <span className="text-[11px] text-foreground-muted">
+                          {thread.createdAtLabel ? `${getDateLabel(thread.type)}: ${thread.createdAtLabel}` : `${getDateLabel(thread.type)} unknown`}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </td>

@@ -512,6 +512,7 @@ export default function ThreadflowSubredditSensePage() {
                 upvotes: t.upvotes,
                 comments: t.comments || 0,
                 sentiment: t.upvotes > 0 ? 'positive' : (t.upvotes < 0 ? 'negative' : 'neutral'),
+                createdAt: t.created_utc || t.fetched_at || null,
                 post_url: t.url
               }))} />
              {typeof dashboard?.allThreadsTotal === 'number' && dashboard.allThreadsTotal > 0 && (
