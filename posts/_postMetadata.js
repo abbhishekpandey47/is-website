@@ -1486,6 +1486,28 @@ let postMetaData = [
     website: "respond.io"
   }
 },
+{
+  title: "GTM execution without devrel hiring cycle",
+  metaTitle: "Case Study: Execution Without the DevRel Hiring Cycle",
+  slug: "casestudy-execution-without-devrel-hiring",
+  description: "This case study shows how a Series A developer platform replaced DevRel hiring delays with execution-first developer GTM. By outsourcing developer content, documentation, and community execution, the team achieved faster time-to-output, parallel scaling, and measurable growth, without the cost or ramp-up of a full-time DevRel hire. Learn how execution from day one drove 1,000+ organic clicks, 20% month-on-month growth, and new developer traffic channels.",
+  ogImage: "/PostImages/casestudy-execution-without-devrel-hiring/0.webp",
+  publishedOn: "2026-01-06",
+  authorId: "author0001",
+  category: "Informational",
+  metaDescription: "How a Series A developer platform replaced DevRel hiring delays with execution-first developer GTM. Learn how Infrasity drove 20% MoM growth, 1,000+ organic clicks, and parallel content scale. Read now."
+},
+   {
+    title: "6 Top Content Marketing Agencies for Devtool Startups in 2026",
+    metatitle: "6 Top Content Marketing Agencies for DevTool Startups (2026)",
+    slug: "top-content-marketing-agencies",
+    description: "This guide explores the 6 top content marketing agencies for DevTool and B2B SaaS startups in 2026, with a focus on agencies that understand technical buyers, developer workflows, and long evaluation cycles. As tech companies scale, choosing the right marketing agency for tech becomes critical to reducing acquisition costs and driving adoption. The article explains what SaaS content marketing services are, why DevTool startups need a different approach than traditional SaaS, and how to evaluate a technical content marketing agency based on engineering alignment, intent-driven SEO, and LLM optimization.",
+    ogImage: "/PostImages/top-content-marketing-agencies/0.webp",
+    publishedOn: "2026-01-06",
+    authorId: "author0005",
+    category: "B2B SaaS- Content Marketing",
+    metaDescription: "Discover the top content marketing agencies for DevTool and B2B SaaS startups in 2026 . Compare leading tech content agencies and choose the right fit. Read now"
+},
 ];
 
 const sorted = () => {
