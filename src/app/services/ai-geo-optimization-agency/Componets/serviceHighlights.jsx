@@ -6,7 +6,7 @@ const cards = [
     id: "geo",
     title: "Generative Engine Optimization",
     description:
-      "We optimize SaaS & Fintech websites for visibility inside AI generated answers and citations from LLM search engines.",
+      "We adapt your technical content and documentation so AI systems can reliably discover, interpret, and cite it when answering developer questions.",
     image:
       "/CommLogo/geo.png",
     secondaryImage:
@@ -27,26 +27,23 @@ const cards = [
   {
     
     id: "seo",
-    title: "Search Engine Optimization",
+    title: "Developer Content Discoverability",
     description:
-      "We optimize B2B websites to rank on traditional search engines, covering the whole process from technical SEO to content-led growth.",
+      "Most developer content fails not because it's bad, but because it's invisible. We fix the foundations that determine whether your docs and guides ever get discovered.",
     image:
       "/CommLogo/seo-black.png",
     secondaryImage:
       "/CommLogo/seo.png",
     chips: [
-      "SEO Strategy",
-      "On & off-page SEO",
-      "Technical SEO",
-      "Content production",
-      "Link building",
-      "Site architecture",
-      "Programmatic SEO",
-      "Search intent analysis & mapping",
-      "Market research",
-      "Website development & CRO",
-      "Analytics & reporting",
-      "Management & consulting",
+      "Content crawlability",
+      "Docs & guide structure",
+      "URL architecture",
+      "Internal linking logic",
+      "Developer intent mapping",
+      "Programmatic content",
+      "Structured data & schema",
+      "JS rendering optimization",
+      "Visibility analytics",
     ],
     theme: "dark",
   }
@@ -74,19 +71,21 @@ const cardStyles = {
 const statSections = [
   {
     id: "industries",
-    value: "2",
+    value: "6",
     body: (
       <>
-        Industries we specialize in: <span className="font-semibold text-[#695ae1]">SaaS & Fintech</span>. We believe that narrow focus, wider contextual understanding of the market & deep expertise yield asymmetrical returns.
+        Verticals we work deeply in
+        <br />
+        <span className="font-semibold text-[#695ae1]">DevTools · Infrastructure & Platform Engineering · AI / ML & Agentic Systems · Cloud & DevOps · Cybersecurity · FinTech Infrastructure</span>
       </>
     ),
   },
   {
     id: "registered-users",
-    value: "84M+",
+    value: "67k+",
     body: (
       <>
-        The number of <span className="font-semibold text-[#695ae1]">registered users attributed</span> directly to the work of our team, from our foundation to the end of 2024. We can’t wait to update this number on January 1, 2026.
+        Users exposed to <span className="font-semibold text-[#695ae1]">answers, documentation, and technical guidance</span> sourced from assets we've optimized for AI answer engines and developer search journeys.
       </>
     ),
     link: {
