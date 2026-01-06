@@ -152,7 +152,7 @@ const InfraMethodologyTimeline = () => {
                                 </div>
                             </div>
                             <p className="text-sm text-gray-300 tracking-wider leading-loose font-light mr-4">
-                                We monitor engagement metrics and audience sentiment closely. Based on performance, we refine our Reddit marketing approach and, if suitable, run targeted Reddit ad campaigns to amplify reach all while keeping engagement authentic and compliant.
+                                We monitor engagement metrics and audience sentiment closely. As one of the best Reddit marketing agency for B2B SaaS Reddit marketing agencies, based on performance, we refine our Reddit marketing approach and, if suitable, run targeted Reddit ad campaigns to amplify reach
                             </p>
                         </div>
                     </div>
