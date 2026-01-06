@@ -96,7 +96,7 @@ const TemplateDetailPage = ({ params }) => {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="text-white text-xl quicksand-regular">Loading template...</div>
+        <div className="text-white text-xl font-[quicksand] font-medium">Loading template...</div>
       </div>
     );
   }
@@ -167,7 +167,7 @@ const TemplateDetailPage = ({ params }) => {
   };
 
   const renderBulletList = (items) => (
-    <ul className="space-y-2 text-[#cbd5e1] text-sm quicksand-regular mt-4">
+    <ul className="space-y-2 text-[#cbd5e1] text-lg font-[quicksand] font-normal mt-4">
       {items.map((bullet, idx) => (
         <li key={idx} className="flex items-start gap-3">
           <span className="text-[#6366f1] mt-1">•</span>
@@ -181,17 +181,17 @@ const TemplateDetailPage = ({ params }) => {
     <div className="grid md:grid-cols-2 gap-4 mt-4">
       {items.map((item, idx) => (
         <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-4">
-          <p className="text-xs uppercase tracking-wide text-[#a5b4fc] quicksand-semibold">{item.label}</p>
+          <p className="text-base uppercase tracking-wide text-[#a5b4fc] font-[quicksand] font-bold">{item.label}</p>
           {item.description && (
-            <p className="text-[#cbd5e1] text-sm quicksand-regular mt-2">{item.description}</p>
+            <p className="text-[#cbd5e1] text-lg font-[quicksand] font-normal mt-2">{item.description}</p>
           )}
           {item.example && (
-            <p className="text-[#a5b4fc] text-sm quicksand-regular mt-3">
-              <span className="quicksand-semibold">Example:</span> {item.example}
+            <p className="text-[#a5b4fc] text-lg font-[quicksand] font-normal mt-3">
+              <span className="font-semibold">Example:</span> {item.example}
             </p>
           )}
           {item.exampleList && (
-            <ul className="mt-3 space-y-1 text-[#94a3b8] text-sm quicksand-regular">
+            <ul className="mt-3 space-y-1 text-[#94a3b8] text-lg font-[quicksand] font-normal">
               {item.exampleList.map((example, exIdx) => (
                 <li key={exIdx} className="flex items-start gap-2">
                   <span className="text-[#6366f1] mt-1">•</span>
@@ -206,12 +206,12 @@ const TemplateDetailPage = ({ params }) => {
   );
 
   const renderLabeledItems = (items) => (
-    <ul className="space-y-3 text-[#cbd5e1] text-sm quicksand-regular mt-4">
+    <ul className="space-y-3 text-[#cbd5e1] text-lg font-[quicksand] font-normal mt-4">
       {items.map((item, idx) => (
         <li key={idx} className="flex items-start gap-3">
           <span className="text-[#6366f1] mt-1">•</span>
           <span>
-            <span className="font-semibold text-white quicksand-semibold">{item.label}</span>
+            <span className="font-semibold text-white font-[quicksand]">{item.label}</span>
             {item.description && <span className="text-[#94a3b8] ml-1">{item.description}</span>}
           </span>
         </li>
@@ -226,7 +226,7 @@ const TemplateDetailPage = ({ params }) => {
 
       {/* Template Carousel */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-3xl font-bold mb-8 text-white quicksand-bold text-center">
+        <h2 className="text-4xl font-bold mb-8 text-white font-[quicksand] text-center">
           {template.sampleContentImages?.length ? "Take a Look at Sample Content" : "Take a Look at Sample Outline"}
         </h2>
         <TemplateCarousel
@@ -236,7 +236,7 @@ const TemplateDetailPage = ({ params }) => {
 
       {/* Section Divider */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent my-12"></div>
+        <div className="h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent my-12"></div>
       </div>
 
       {/* Main Content */}
@@ -267,27 +267,27 @@ const TemplateDetailPage = ({ params }) => {
                 {hasCustomEducationalContent ? (
                   <div className="space-y-12 mb-12">
                     {educationalContent?.whatIs && (
-                      <div id="what-is" className="mb-10 scroll-mt-32 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-purple-500/10 p-6">
-                        <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      <div id="what-is" className="mb-10 scroll-mt-32 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-black/10 p-6">
+                        <h2 className="text-4xl font-[quicksand] font-bold tracking-tight mb-4 text-white ">
                           {educationalContent.whatIs.title}
                         </h2>
                         {educationalContent.whatIs.paragraphs?.map((paragraph, idx) => (
-                          <p key={idx} className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
+                          <p key={idx} className="text-[#cbd5e1] text-lg leading-relaxed font-[quicksand] font-normal mb-4">
                             {paragraph}
                           </p>
                         ))}
                         {educationalContent.whatIs.highlight && (
-                          <p className="text-[#a5b4fc] text-sm quicksand-semibold mb-3">
+                          <p className="text-[#a5b4fc] text-base font-[quicksand] font-semibold mb-3">
                             {educationalContent.whatIs.highlight}
                           </p>
                         )}
                         {educationalContent.whatIs.subtext && (
-                          <p className="text-[#94a3b8] text-sm quicksand-regular mb-3">
+                          <p className="text-[#94a3b8] text-base font-[quicksand] font-normal mb-3">
                             {educationalContent.whatIs.subtext}
                           </p>
                         )}
                         {educationalContent.whatIs.bullets && (
-                          <ul className="space-y-2 text-[#cbd5e1] text-sm quicksand-regular mb-4">
+                          <ul className="space-y-2 text-[#cbd5e1] text-base font-[quicksand] font-normal mb-4">
                             {educationalContent.whatIs.bullets.map((item, idx) => (
                               <li key={idx} className="flex items-start gap-3">
                                 <span className="text-[#6366f1] mt-1">•</span>
@@ -298,10 +298,10 @@ const TemplateDetailPage = ({ params }) => {
                         )}
                         {educationalContent.whatIs.audience && (
                           <>
-                            <h3 className="text-white font-semibold quicksand-semibold text-base mb-2">
+                            <h3 className="text-white font-semibold font-[quicksand] font-semibold text-base mb-2">
                               {educationalContent.whatIs.audienceLabel || "Who this is for"}
                             </h3>
-                            <ul className="grid md:grid-cols-2 gap-2 text-[#94a3b8] text-sm quicksand-regular">
+                            <ul className="grid md:grid-cols-2 gap-2 text-[#94a3b8] text-base font-[quicksand] font-normal">
                               {educationalContent.whatIs.audience.map((audience, idx) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="text-[#6366f1] mt-1">•</span>
@@ -315,12 +315,12 @@ const TemplateDetailPage = ({ params }) => {
                     )}
 
                     {educationalContent?.whyUse && (
-                      <div id="why-use" className="mb-10 scroll-mt-32 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-purple-500/10 p-6">
-                        <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      <div id="why-use" className="mb-10 scroll-mt-32 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-black/10 p-6">
+                        <h2 className="text-4xl font-[quicksand] font-bold tracking-tight mb-4 text-white ">
                           {educationalContent.whyUse.title}
                         </h2>
                         {educationalContent.whyUse.intro && (
-                          <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
+                          <p className="text-[#cbd5e1] text-base leading-relaxed font-[quicksand] font-normal mb-6">
                             {educationalContent.whyUse.intro}
                           </p>
                         )}
@@ -328,17 +328,17 @@ const TemplateDetailPage = ({ params }) => {
                           <div className="grid md:grid-cols-2 gap-6">
                             {educationalContent.whyUse.cards.map((card, idx) => (
                               <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-5 backdrop-blur">
-                                <h3 className="text-white text-lg font-semibold quicksand-semibold mb-2">
+                                <h3 className="text-white text-lg font-semibold font-[quicksand] font-semibold mb-2">
                                   {card.title}
                                 </h3>
-                                <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-regular">
+                                <p className="text-[#94a3b8] text-lg leading-relaxed font-[quicksand] font-normal">
                                   {card.description}
                                 </p>
                               </div>
                             ))}
                           </div>
                         ) : (
-                          <ul className="space-y-4 text-[#cbd5e1] quicksand-regular">
+                          <ul className="space-y-4 text-[#cbd5e1] font-[quicksand] font-normal">
                             {educationalContent.whyUse.bullets?.map((reason, idx) => (
                               <li key={idx} className="flex items-start gap-3">
                                 <span className="text-[#6366f1] mt-1">•</span>
@@ -349,10 +349,10 @@ const TemplateDetailPage = ({ params }) => {
                         )}
                         {educationalContent.whyUse.audience && (
                           <div className="mt-6">
-                            <h3 className="text-white font-semibold quicksand-semibold text-base mb-2">
+                            <h3 className="text-white font-semibold font-[quicksand] font-semibold text-base mb-2">
                               {educationalContent.whyUse.audienceLabel || "Who benefits most"}
                             </h3>
-                            <ul className="grid md:grid-cols-2 gap-2 text-[#94a3b8] text-sm quicksand-regular">
+                            <ul className="grid md:grid-cols-2 gap-2 text-[#94a3b8] text-base font-[quicksand] font-normal">
                               {educationalContent.whyUse.audience.map((audience, idx) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="text-[#6366f1] mt-1">•</span>
@@ -366,20 +366,20 @@ const TemplateDetailPage = ({ params }) => {
                     )}
 
                     {educationalContent?.templateOverview && (
-                      <div id="what-is-template" className="mb-10 scroll-mt-32 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-purple-500/10 p-6">
-                        <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      <div id="what-is-template" className="mb-10 scroll-mt-32 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-black/10 p-6">
+                        <h2 className="text-4xl font-[quicksand] font-bold tracking-tight mb-4 text-white ">
                           {educationalContent.templateOverview.title}
                         </h2>
                         {educationalContent.templateOverview.description && (
-                          <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
+                          <p className="text-[#cbd5e1] text-lg leading-relaxed font-[quicksand] font-normal mb-4">
                             {educationalContent.templateOverview.description}
                           </p>
                         )}
                         {educationalContent.templateOverview.sections && (
-                          <div className="space-y-4 text-[#cbd5e1] text-sm quicksand-regular mb-6">
+                          <div className="space-y-4 text-[#cbd5e1] text-base font-[quicksand] font-normal mb-6">
                             {educationalContent.templateOverview.sections.map((section, idx) => (
                               <div key={idx} className="border border-white/10 rounded-lg p-4 bg-white/5">
-                                <h3 className="text-white font-semibold quicksand-semibold text-base mb-1">{section.title}</h3>
+                                <h3 className="text-white font-semibold font-[quicksand] font-semibold text-base mb-1">{section.title}</h3>
                                 <p className="text-[#94a3b8] leading-relaxed">{section.description}</p>
                               </div>
                             ))}
@@ -387,10 +387,10 @@ const TemplateDetailPage = ({ params }) => {
                         )}
                         {educationalContent.templateOverview.audience && (
                           <>
-                            <h3 className="text-white font-semibold quicksand-semibold text-base mb-2">
+                            <h3 className="text-white font-semibold font-[quicksand] font-semibold text-base mb-2">
                               {educationalContent.templateOverview.audienceLabel || "Who this is designed for"}
                             </h3>
-                            <ul className="grid md:grid-cols-2 gap-2 text-[#94a3b8] text-sm quicksand-regular">
+                            <ul className="grid md:grid-cols-2 gap-2 text-[#94a3b8] text-base font-[quicksand] font-normal">
                               {educationalContent.templateOverview.audience.map((audience, idx) => (
                                 <li key={idx} className="flex items-start gap-2">
                                   <span className="text-[#6366f1] mt-1">•</span>
@@ -405,13 +405,13 @@ const TemplateDetailPage = ({ params }) => {
 
                     {template.sampleContentImages?.length > 0 && (
                       <div id="sample-content" className="mb-12 scroll-mt-32">
-                        <h2 className="text-3xl font-bold mb-3 text-white quicksand-bold">Sample Content</h2>
-                        <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
+                        <h2 className="text-3xl font-bold mb-3 text-white font-[quicksand] font-bold tracking-tight">Sample Content</h2>
+                        <p className="text-[#cbd5e1] text-base leading-relaxed font-[quicksand] font-normal mb-6">
                           See real examples of how this template looks when published. Use these as visual cues for structure, color balance, and scannability.
                         </p>
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                           {template.sampleContentImages.map((img, idx) => (
-                            <div key={idx} className="group relative bg-gradient-to-br from-[#1e1b4b]/70 to-[#312e81]/70 border border-purple-500/30 rounded-xl overflow-hidden shadow-lg hover:border-purple-400/60 hover:shadow-purple-500/30 transition-all duration-300">
+                            <div key={idx} className="group relative bg-[#1a1f35] border border-[#2a2f45] rounded-xl overflow-hidden shadow-lg hover:border-blue-500/50 hover:shadow-black/20 transition-all duration-300">
                               <div className="relative w-full aspect-[4/3]">
                                 <Image
                                   src={img.src}
@@ -423,8 +423,8 @@ const TemplateDetailPage = ({ params }) => {
                                 />
                               </div>
                               {img.alt && (
-                                <div className="px-4 py-3 bg-black/40 backdrop-blur-sm border-t border-purple-500/20">
-                                  <p className="text-sm text-[#cbd5e1] quicksand-regular line-clamp-2">{img.alt}</p>
+                                <div className="px-4 py-3 bg-black/40 backdrop-blur-sm border-t border-[#2a2f45]">
+                                  <p className="text-sm text-[#cbd5e1] font-[quicksand] font-normal line-clamp-2">{img.alt}</p>
                                 </div>
                               )}
                             </div>
@@ -437,14 +437,14 @@ const TemplateDetailPage = ({ params }) => {
                   <div className="space-y-12 mb-12">
                     {/* What is Section */}
                     <div id="what-is" className="mb-10 scroll-mt-32">
-                      <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      <h2 className="text-4xl font-[quicksand] font-bold tracking-tight mb-4 text-white ">
                         What is a Developer Guide & Content?
                       </h2>
-                      <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
+                      <p className="text-[#cbd5e1] text-lg leading-relaxed font-[quicksand] font-normal mb-4">
                         {template.whatIsContent || "A developer guide is a technical document that teaches a developer how to do something concrete: integrate a library, design an API, debug a problem, or choose between approaches. Good guides are task-oriented, opinionated when needed, and grounded in working code. They clarify assumptions, show trade-offs, and include copy-paste-ready examples."}
                       </p>
                       {template.whatIsContentDetailed && (
-                        <ul className="space-y-2 text-[#94a3b8] text-sm quicksand-regular">
+                        <ul className="space-y-2 text-[#94a3b8] text-base font-[quicksand] font-normal">
                           {template.whatIsContentDetailed.map((item, idx) => (
                             <li key={idx} className="flex items-start gap-3">
                               <span className="text-[#6366f1] mt-1">•</span>
@@ -457,16 +457,16 @@ const TemplateDetailPage = ({ params }) => {
 
                     {/* What is Template Section */}
                     <div id="what-is-template" className="mb-10 scroll-mt-32">
-                      <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      <h2 className="text-4xl font-[quicksand] font-bold tracking-tight mb-4 text-white ">
                         What is a Developer Guide & Content Template?
                       </h2>
-                      <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-4">
+                      <p className="text-[#cbd5e1] text-lg leading-relaxed font-[quicksand] font-normal mb-4">
                         {template.whatIsTemplate || "It's a structured framework for planning and writing developer guides consistently. It provides section patterns, content prompts, and quality checks so the final output is clear, actionable, and technically sound."}
                       </p>
                       {template.whatIsTemplateCovers && (
                         <>
-                          <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-regular mb-3">What the template standardizes:</p>
-                          <ul className="space-y-2 text-[#cbd5e1] quicksand-regular">
+                          <p className="text-[#94a3b8] text-sm leading-relaxed font-[quicksand] font-normal mb-3">What the template standardizes:</p>
+                          <ul className="space-y-2 text-[#cbd5e1] font-[quicksand] font-normal">
                             {template.whatIsTemplateCovers.map((item, idx) => (
                               <li key={idx} className="flex items-start gap-3">
                                 <span className="text-[#6366f1] mt-1">•</span>
@@ -480,11 +480,11 @@ const TemplateDetailPage = ({ params }) => {
 
                     {/* Why Use Section */}
                     <div id="why-use" className="mb-10 scroll-mt-32">
-                      <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      <h2 className="text-4xl font-[quicksand] font-bold tracking-tight mb-4 text-white ">
                         Why Use a Developer Guide & Content Template?
                       </h2>
                       {template.whyUseTemplate && (
-                        <ul className="space-y-4 text-[#cbd5e1] quicksand-regular">
+                        <ul className="space-y-4 text-[#cbd5e1] font-[quicksand] font-normal">
                           {template.whyUseTemplate.map((reason, idx) => (
                             <li key={idx} className="flex items-start gap-3">
                               <span className="text-[#6366f1] mt-1">•</span>
@@ -497,18 +497,18 @@ const TemplateDetailPage = ({ params }) => {
 
                     {/* How to Use Section */}
                     <div id="how-to-use" className="mb-10 scroll-mt-32">
-                      <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                      <h2 className="text-4xl font-[quicksand] font-bold tracking-tight mb-4 text-white ">
                         How to Use This Developer Guide & Content Template
                       </h2>
                       <div className="space-y-5">
                         {template.howToUse && template.howToUse.map((step, idx) => (
                           <div key={idx} className="flex gap-4">
                             <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#6366f1] flex items-center justify-center">
-                              <span className="text-white font-bold quicksand-bold text-sm">{idx + 1}</span>
+                              <span className="text-white font-[quicksand] font-bold tracking-tight text-sm">{idx + 1}</span>
                             </div>
                             <div>
-                              <h4 className="text-base font-bold text-white quicksand-bold mb-1">{step.step}</h4>
-                              <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">{step.description}</p>
+                              <h4 className="text-base font-bold text-white font-[quicksand] font-[quicksand] font-bold tracking-tight mb-1">{step.step}</h4>
+                              <p className="text-[#94a3b8] text-sm  font-normal leading-relaxed">{step.description}</p>
                             </div>
                           </div>
                         ))}
@@ -523,16 +523,16 @@ const TemplateDetailPage = ({ params }) => {
                     {/* Metrics Table - Only for outline template */}
                     {isOutlineTemplate && template.metricsTable && (
                       <div id="metrics-table" className="mb-12 scroll-mt-32">
-                        <h2 className="text-2xl font-bold mb-6 text-[#a5b4fc] quicksand-bold">Suggested Outline</h2>
+                        <h2 className="text-2xl font-bold mb-6 text-[#a5b4fc] font-[quicksand] font-bold tracking-tight">Suggested Outline</h2>
                         <div className="overflow-x-auto bg-[#1e293b] border border-[#334155] rounded-xl">
                           <table className="w-full">
                             <tbody>
                               {template.metricsTable.map((row, index) => (
                             <tr key={index} className={index !== template.metricsTable.length - 1 ? "border-b border-[#334155]" : ""}>
-                              <td className="py-3 px-4 text-[#94a3b8] font-medium quicksand-medium text-sm whitespace-nowrap">
+                              <td className="py-3 px-4 text-[#94a3b8] font-medium font-[quicksand] font-medium text-sm whitespace-nowrap">
                                 {row.label}
                               </td>
-                              <td className="py-3 px-4 text-[#e2e8f0] quicksand-regular text-sm">
+                              <td className="py-3 px-4 text-[#e2e8f0] font-[quicksand] font-normal text-sm">
                                 {row.value}
                               </td>
                             </tr>
@@ -550,25 +550,25 @@ const TemplateDetailPage = ({ params }) => {
                     <div
                       key={index}
                       id={`section-${index + 1}`}
-                      className="mb-10 scroll-mt-32 rounded-2xl border border-purple-500/20 bg-white/5 backdrop-blur-sm shadow-xl shadow-purple-500/10 p-6"
+                      className="mb-10 scroll-mt-32 rounded-2xl border border-[#2a2f45] bg-white/5 backdrop-blur-sm shadow-xl shadow-black/10 p-6"
                     >
                       <div className="flex items-start gap-3 mb-3">
-                        <div className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] text-white flex items-center justify-center quicksand-bold text-sm border border-white/20">
+                        <div className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] text-white flex items-center justify-center font-[quicksand] font-bold tracking-tight text-sm border border-white/20">
                           {index + 1}
                         </div>
-                        <h2 className="text-2xl font-bold text-white quicksand-bold leading-snug">
+                        <h2 className="text-2xl font-bold text-white font-[quicksand] font-[quicksand] font-bold tracking-tight leading-snug">
                           {item.section || item}
                         </h2>
                       </div>
                       {isObject && (
                         <div className="space-y-4">
                           {item.description && (
-                            <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular">
+                            <p className="text-[#cbd5e1] text-lg leading-relaxed  font-normal">
                               {item.description}
                             </p>
                           )}
                           {item.paragraphs && item.paragraphs.map((paragraph, paraIdx) => (
-                            <p key={paraIdx} className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular">
+                            <p key={paraIdx} className="text-[#cbd5e1] text-lg leading-relaxed font-[quicksand] font-normal">
                               {paragraph}
                             </p>
                           ))}
@@ -576,32 +576,32 @@ const TemplateDetailPage = ({ params }) => {
                           {item.labeledItems && renderLabeledItems(item.labeledItems)}
                           {item.bulletItems && renderBulletList(item.bulletItems)}
                           {item.note && (
-                            <p className="text-[#94a3b8] text-sm quicksand-regular">{item.note}</p>
+                            <p className="text-[#94a3b8] text-lg font-[quicksand] font-normal">{item.note}</p>
                           )}
                           {item.example && (
-                            <p className="text-[#94a3b8] text-sm leading-relaxed quicksand-light pl-4 border-l-2 border-[#6366f1]">
-                              <span className="text-[#a5b4fc] quicksand-semibold">Example:</span> {item.example}
+                            <p className="text-[#94a3b8] text-base leading-relaxed font-[quicksand] font-light pl-4 border-l-2 border-[#6366f1]">
+                              <span className="text-[#a5b4fc] font-[quicksand] font-semibold">Example:</span> {item.example}
                             </p>
                           )}
                           {item.subsections && item.subsections.map((subsection, subIndex) => (
-                            <div key={subIndex} className="mt-6 p-5 rounded-lg border border-purple-500/20 bg-[#0f1729]/30 space-y-4">
+                            <div key={subIndex} className="mt-6 p-5 rounded-lg border border-[#2a2f45] bg-[#0f1729]/30 space-y-4">
                               {subsection.title && (
-                                <h3 className="text-xl font-semibold text-white quicksand-semibold mb-1">
+                                <h3 className="text-xl font-semibold text-white font-[quicksand] font-semibold mb-1">
                                   {subsection.title}
                                 </h3>
                               )}
                               {subsection.description && (
-                                <p className="text-[#cbd5e1] text-base quicksand-regular">
+                                <p className="text-[#cbd5e1] text-lg font-[quicksand] font-normal">
                                   {subsection.description}
                                 </p>
                               )}
                               {subsection.intro && (
-                                <p className="text-[#cbd5e1] text-sm quicksand-regular">
+                                <p className="text-[#cbd5e1] text-lg font-[quicksand] font-normal">
                                   {subsection.intro}
                                 </p>
                               )}
                               {subsection.paragraphs && subsection.paragraphs.map((paragraph, subParaIdx) => (
-                                <p key={subParaIdx} className="text-[#cbd5e1] text-sm quicksand-regular">
+                                <p key={subParaIdx} className="text-[#cbd5e1] text-lg font-[quicksand] font-normal">
                                   {paragraph}
                                 </p>
                               ))}
@@ -609,27 +609,27 @@ const TemplateDetailPage = ({ params }) => {
                               {subsection.labeledItems && renderLabeledItems(subsection.labeledItems)}
                               {subsection.bulletItems && renderBulletList(subsection.bulletItems)}
                               {subsection.note && (
-                                <p className="text-[#94a3b8] text-sm quicksand-regular">{subsection.note}</p>
+                                <p className="text-[#94a3b8] text-lg font-[quicksand] font-normal">{subsection.note}</p>
                               )}
                               {subsection.closingNote && (
-                                <p className="text-[#a5b4fc] text-sm quicksand-semibold">{subsection.closingNote}</p>
+                                <p className="text-[#a5b4fc] text-lg font-[quicksand] font-semibold">{subsection.closingNote}</p>
                               )}
                               {/* Nested subsections */}
                               {subsection.subsections && subsection.subsections.map((nestedSub, nestedIdx) => (
-                                <div key={nestedIdx} className="mt-5 pl-5 border-l-2 border-purple-500/40 space-y-3">
+                                <div key={nestedIdx} className="mt-5 pl-5 border-l-2 border-blue-500/40 space-y-3">
                                   {nestedSub.title && (
-                                    <h4 className="text-lg font-semibold text-white quicksand-semibold">
+                                    <h4 className="text-lg font-semibold text-white font-[quicksand] font-semibold">
                                       {nestedSub.title}
                                     </h4>
                                   )}
                                   {nestedSub.paragraphs && nestedSub.paragraphs.map((para, pIdx) => (
-                                    <p key={pIdx} className="text-[#cbd5e1] text-sm quicksand-regular">
+                                    <p key={pIdx} className="text-[#cbd5e1] text-lg font-[quicksand] font-normal">
                                       {para}
                                     </p>
                                   ))}
                                   {nestedSub.bulletItems && renderBulletList(nestedSub.bulletItems)}
                                   {nestedSub.note && (
-                                    <p className="text-[#94a3b8] text-xs quicksand-regular italic">{nestedSub.note}</p>
+                                    <p className="text-[#94a3b8] text-sm font-[quicksand] font-normal italic">{nestedSub.note}</p>
                                   )}
                                 </div>
                               ))}
@@ -644,19 +644,19 @@ const TemplateDetailPage = ({ params }) => {
                 {/* Next Steps Section - placed after key takeaway (outline only) */}
                 {isOutlineTemplate && (
                   <div id="next-steps" className="scroll-mt-32">
-                    <h2 className="text-3xl font-bold mb-4 text-white quicksand-bold">
+                    <h2 className="text-4xl font-[quicksand] font-bold tracking-tight mb-4 text-white ">
                       Next Steps: Writing the Content
                     </h2>
-                    <p className="text-[#cbd5e1] text-base leading-relaxed quicksand-regular mb-6">
+                    <p className="text-[#cbd5e1] text-base leading-relaxed font-[quicksand] font-normal mb-6">
                       Once your outline is ready, it's time to bring it to life with well-crafted content. Use our comprehensive writing template to transform your outline into engaging, technically accurate developer content.
                     </p>
                     <Link
                       href="/templates/developer-content-and-guides-content"
                       className="group block"
                     >
-                      <div className="relative bg-gradient-to-br from-[#1e1b4b]/80 to-[#312e81]/80 backdrop-blur-sm border border-purple-500/30 rounded-xl overflow-hidden hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/30 hover:border-purple-400/60 transition-all duration-300 p-6">
+                      <div className="relative bg-[#1a1f35] backdrop-blur-sm border border-[#2a2f45] rounded-xl overflow-hidden hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/20 hover:border-blue-500/50 transition-all duration-300 p-6">
                         <div className="flex items-center gap-6">
-                          <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-lg shadow-lg border border-purple-500/20">
+                          <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-lg shadow-lg border border-[#2a2f45]">
                             <Image
                               src="/template-thumbnails/developer-content.png"
                               alt="Developer Content Writing Template"
@@ -666,19 +666,19 @@ const TemplateDetailPage = ({ params }) => {
                             />
                           </div>
                           <div className="flex-1">
-                            <div className="inline-flex items-center justify-center bg-purple-600/20 border border-purple-500/30 rounded-full px-3 py-1 text-[10px] quicksand-semibold mb-2">
-                              <p className="text-purple-300">Developer Content & Guides</p>
+                            <div className="inline-flex items-center justify-center bg-blue-600/20 border border-[#2a2f45] rounded-full px-3 py-1 text-[10px] font-[quicksand] font-semibold mb-2">
+                              <p className="text-blue-300">Developer Content & Guides</p>
                             </div>
-                            <h3 className="text-xl font-bold quicksand-bold text-white group-hover:text-purple-300 transition-colors mb-2">
+                            <h3 className="text-xl font-[quicksand] font-[quicksand] font-bold tracking-tight text-white group-hover:text-blue-300 transition-colors mb-2">
                               Developer Content Writing Template
                             </h3>
-                            <p className="text-[#94a3b8] text-sm quicksand-regular leading-relaxed">
+                            <p className="text-[#94a3b8] text-sm  font-normal leading-relaxed">
                               Complete writing guidelines, examples, and best practices for creating developer guides that engage and convert.
                             </p>
                           </div>
                           <div className="flex-shrink-0">
-                            <div className="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center group-hover:bg-purple-600/30 transition-colors">
-                              <svg className="w-5 h-5 text-purple-300 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div className="w-10 h-10 rounded-full bg-blue-600/20 border border-[#2a2f45] flex items-center justify-center group-hover:bg-blue-600/30 transition-colors">
+                              <svg className="w-5 h-5 text-blue-300 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                               </svg>
                             </div>
@@ -703,36 +703,36 @@ const TemplateDetailPage = ({ params }) => {
           {/* Template Outline Section - Clean structured design */}
           <div className="space-y-12">
             <div>
-              <h2 className="text-3xl font-bold mb-4 quicksand-bold">What is {template.title}?</h2>
-              <p className="text-[#aaa] text-lg quicksand-light leading-relaxed">
+              <h2 className="text-3xl font-bold mb-4 font-[quicksand] font-bold tracking-tight">What is {template.title}?</h2>
+              <p className="text-[#aaa] text-lg font-[quicksand] font-light leading-relaxed">
                 {template.overview}
               </p>
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold mb-6 quicksand-bold">Why Use {template.title}?</h2>
+              <h2 className="text-3xl font-bold mb-6 font-[quicksand] font-bold tracking-tight">Why Use {template.title}?</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {template.keyFeatures && template.keyFeatures.map((feature, index) => (
                   <div key={index} className="flex items-start gap-3 bg-[#1a1f35] border border-[#2a2f45] rounded-lg p-5 hover:border-[#4a4f6a] transition-colors">
                     <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 mt-2 flex-shrink-0"></div>
-                    <p className="text-[#ccc] quicksand-light leading-relaxed">{feature}</p>
+                    <p className="text-[#ccc] font-[quicksand] font-light leading-relaxed">{feature}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold mb-6 quicksand-bold">What's Included</h2>
+              <h2 className="text-3xl font-bold mb-6 font-[quicksand] font-bold tracking-tight">What's Included</h2>
               <div className="space-y-6">
                 {template.howToUse && template.howToUse.map((step, index) => (
                   <div key={index} className="bg-[#1a1f35] border border-[#2a2f45] rounded-lg p-6 hover:border-[#4a4f6a] transition-colors">
                     <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center font-bold quicksand-bold text-sm">
+                      <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center font-[quicksand] font-bold tracking-tight text-sm">
                         {index + 1}
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-white quicksand-semibold text-lg mb-2">{step.step}</h3>
-                        <p className="text-[#888] text-sm quicksand-light leading-relaxed">{step.description}</p>
+                        <h3 className="text-white font-[quicksand] font-semibold text-lg mb-2">{step.step}</h3>
+                        <p className="text-[#888] text-sm font-[quicksand] font-light leading-relaxed">{step.description}</p>
                       </div>
                     </div>
                   </div>
@@ -741,7 +741,7 @@ const TemplateDetailPage = ({ params }) => {
             </div>
 
             {/* CTA Section */}
-            <div className="pt-8 border-t border-purple-500/20">
+            <div className="pt-8 border-t border-[#2a2f45]">
               <CTA 
                 title={<>Ready to create {" "}<span className="bg-clip-text text-transparent" style={{backgroundImage: "linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)"}}>exceptional content</span>{" "}with expert guidance?</>}
                 description="Let's discuss how Infrasity can help you implement this template and scale your content strategy."
@@ -752,20 +752,20 @@ const TemplateDetailPage = ({ params }) => {
 
         {/* Template Outline Section */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold mb-8 quicksand-bold">Template Outline</h2>
+          <h2 className="text-3xl font-[quicksand] font-bold tracking-tight mb-8 ">Template Outline</h2>
           <div className="space-y-6">
             {template.templateOutline && template.templateOutline.map((item, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-[#1e1b4b]/60 to-[#312e81]/60 backdrop-blur-sm rounded-xl p-6 border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 shadow-lg scroll-mt-32"
+                className="bg-[#1a1f35] backdrop-blur-sm rounded-xl p-6 border border-[#2a2f45] hover:border-blue-500/50 transition-all duration-300 shadow-lg scroll-mt-32"
               >
-                <h3 className="text-xl font-bold mb-3 text-blue-400 quicksand-bold">
+                <h3 className="text-2xl font-bold mb-3 text-blue-400 font-[quicksand] font-bold tracking-tight">
                   {index + 1}. {item.section}
                 </h3>
-                <p className="text-gray-300 mb-3 quicksand-light">{item.description}</p>
+                <p className="text-gray-300 mb-3 text-lg font-[quicksand] font-light">{item.description}</p>
                 {item.example && (
-                  <div className="bg-gradient-to-r from-[#312e81]/40 to-[#1e1b4b]/40 rounded-lg p-4 border-l-4 border-purple-400">
-                    <p className="text-gray-400 text-sm italic quicksand-light">
+                  <div className="bg-[#1a1f35]/60 rounded-lg p-4 border-l-4 border-blue-500">
+                    <p className="text-gray-400 text-base italic font-[quicksand] font-light">
                       {item.example}
                     </p>
                   </div>
@@ -787,19 +787,19 @@ const TemplateDetailPage = ({ params }) => {
           <section className="max-w-6xl mx-auto px-4 md:px-0">
             <div className="mx-0 sm:mx-6 md:mx-16 bg-gradient-to-r from-blue-800 to-purple-800 relative flex flex-col items-center rounded-xl p-8 sm:p-12 md:p-16 text-center overflow-hidden bg-cover bg-no-repeat">
               {/* Title */}
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white max-w-xl z-10 quicksand-bold">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white max-w-xl z-10 font-[quicksand] font-bold tracking-tight">
                 Need help <span className="text-white">implementing this template?</span>
               </h2>
               
               {/* Description */}
-              <p className="text-base text-gray-100 max-w-2xl mt-4 z-10 quicksand-regular">
+              <p className="text-base text-gray-100 max-w-2xl mt-4 z-10 font-[quicksand] font-normal">
                 Our content marketing experts can help you customize and implement this template for your specific needs.
               </p>
 
               {/* CTA Button */}
               <Link
                 href="/contact"
-                className="mt-6 md:mt-8 inline-flex items-center text-base md:text-lg rounded-full bg-black px-8 sm:px-10 md:px-14 py-3 sm:py-4 md:py-5 text-white font-medium hover:bg-gray-900 transition z-10 quicksand-semibold"
+                className="mt-6 md:mt-8 inline-flex items-center text-base md:text-lg rounded-full bg-black px-8 sm:px-10 md:px-14 py-3 sm:py-4 md:py-5 text-white font-medium hover:bg-gray-900 transition z-10 font-[quicksand] font-semibold"
               >
                 Book a Consultation
               </Link>
@@ -856,3 +856,10 @@ const TemplateDetailPage = ({ params }) => {
 };
 
 export default TemplateDetailPage;
+
+
+
+
+
+
+

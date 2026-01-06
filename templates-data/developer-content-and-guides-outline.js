@@ -7,7 +7,7 @@ const template = {
     shortDescription: "Plan developer content and guides before you write",
     thumbnailImage: "/template-thumbnails/developer-outline.png",
     bannerImage: "/template-banners/developer-outline.png",
-    videoEmbedUrl: "https://www.loom.com/embed/1ac16a99c5684ffab4973075c375e8e2",
+    videoEmbedUrl: "https://drive.google.com/file/d/1TRwjH3ujOg8s4tVeBvrRgrVeEKBQlUEa/preview",
     publishedOn: "2024-12-19",
     author: "Infrasity Team",
     authorImage: "/svgPatterns/profile.svg",

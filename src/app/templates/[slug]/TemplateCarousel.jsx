@@ -43,7 +43,7 @@ const TemplateCarousel = ({ slides, title = "Sample Outline" }) => {
                 src={slide.src || slide.image}
                 alt={slide.alt || "Template Example"}
                 fill
-                className="object-contain p-2"
+                className="object-contain"
                 priority={index === 0}
                 quality={85}
               />
@@ -58,7 +58,7 @@ const TemplateCarousel = ({ slides, title = "Sample Outline" }) => {
               onClick={() => setCurrentSlide(index)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === currentSlide
-                  ? 'bg-purple-500 w-6'
+                  ? 'bg-blue-500 w-6'
                   : 'bg-gray-600 hover:bg-gray-500'
               }`}
               aria-label={`Go to slide ${index + 1}`}
@@ -71,3 +71,5 @@ const TemplateCarousel = ({ slides, title = "Sample Outline" }) => {
 };
 
 export default TemplateCarousel;
+
+

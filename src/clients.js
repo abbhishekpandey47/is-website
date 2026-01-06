@@ -1,3 +1,4 @@
+
 export const clientLogo = [
   "brevo.png",
   "cardinal.webp",
@@ -145,3 +146,4 @@ export const clientWhiteStyle = {
   "scalr.png":"object-contain",  
   "teleport.png":"object-cover"
 };
+
