@@ -8,7 +8,7 @@ import ClientSection from "./Componets/clientSection";
 import CaseStudies from "./Componets/caseStudies";
 import AEOReportSection from "./Componets/AEOReportSection";
 
-// import ServiceHighlights from "./Componets/serviceHighlights";
+import ServiceHighlights from "./Componets/serviceHighlights";
 
 export const metadata = {
   title: 'AI Generative Engine Optimization Agency | GEO & AI Search Visibility',
@@ -26,7 +26,7 @@ export default function LandingPage() {
       <SecondSection />
       <ThirdSection />
 
-      {/* <ServiceHighlights /> */}
+      <ServiceHighlights />
       <CaseStudies />
       <AEOReportSection />
       <Testimonials />
