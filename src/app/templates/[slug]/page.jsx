@@ -331,7 +331,7 @@ const TemplateDetailPage = ({ params }) => {
                                 <h3 className="text-white text-lg font-semibold font-[quicksand] font-semibold mb-2">
                                   {card.title}
                                 </h3>
-                                <p className="text-[#94a3b8] text-base leading-relaxed font-[quicksand] font-normal">
+                                <p className="text-[#94a3b8] text-lg leading-relaxed font-[quicksand] font-normal">
                                   {card.description}
                                 </p>
                               </div>
