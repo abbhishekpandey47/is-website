@@ -113,16 +113,16 @@ const ServiceHighlights = () => {
           </div>
           <div className="max-w-3xl mx-auto text-center mb-16 relative z-10">
             <div className="inline-block px-6 py-2 mb-6 rounded-full border border-[#7c3aed] bg-[#1a0033] shadow-[0_0_0_2px_rgba(124,58,237,0.2)]">
-              <p className="text-sm font-medium text-white">AI geo optimization + LLM search is the new search frontier for SaaS & fintech</p>
+              <p className="text-sm font-medium text-white">LLM-powered search is reshaping how developers discover products</p>
             </div>
             <h2
               className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4"
               style={{ background: "linear-gradient(0deg, rgba(255,255,255,0.8) 0%, #fff 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
             >
-              Build discoverability where AI search surfaces your product
+              Build discoverability where AI search surfaces products.
             </h2>
             <p className="text-white/80 text-lg max-w-2xl mx-auto mb-2">
-              We combine enterprise SEO rigor with LLM-first schema, intent mapping, and citation hygiene so your platform leads the sources AI answers cite.
+              We align content structure, intent mapping, and machine-readable metadata so AI systems consistently select your sources.
             </p>
           </div>
         </div>
