@@ -146,4 +146,3 @@ export const clientWhiteStyle = {
   "scalr.png":"object-contain",  
   "teleport.png":"object-cover"
 };
-
