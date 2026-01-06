@@ -7,7 +7,7 @@ const template = {
     shortDescription: "Plan developer content and guides before you write",
     thumbnailImage: "/template-thumbnails/developer-outline.png",
     bannerImage: "/template-banners/developer-outline.png",
-    videoEmbedUrl: "https://drive.google.com/file/d/1u6g6UaOhB1IP7UzMp6GNDLxMUJR7W2w6/preview",
+    videoEmbedUrl: "https://drive.google.com/file/d/1TRwjH3ujOg8s4tVeBvrRgrVeEKBQlUEa/preview",
     publishedOn: "2024-12-19",
     author: "Infrasity Team",
     authorImage: "/svgPatterns/profile.svg",
