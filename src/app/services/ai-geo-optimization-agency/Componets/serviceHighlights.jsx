@@ -13,13 +13,13 @@ const cards = [
       "/CommLogo/geo-black.png",
     chips: [
       "AI crawler optimization",
+      "Schema & LLMs.txt",
       "LLM content scoring & rewriting",
+      "Content clustering",
       "Source citation monitoring",
       "Zero-click query targeting",
-      "Schema & LLMs.txt",
       "JavaScript optimization",
       "URL architecture optimization",
-      "Content clustering",
       "AI search data tracking & analysis",
     ],
     theme: "light",
@@ -127,7 +127,7 @@ const ServiceHighlights = () => {
             </p>
           </div>
         </div>
-      <div className="container mx-auto px-6 max-w-6xl">
+      <div className="container mx-auto px-6">
         <div className="grid gap-6 lg:grid-cols-2">
           {cards.map((card) => {
             const styles = cardStyles[card.theme];
