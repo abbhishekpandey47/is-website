@@ -103,11 +103,11 @@ const MenuTrigger = ({ head, isOpen, onMouseEnter, onMouseLeave }) => {
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="inline-flex items-center gap-1 px-3 py-2 rounded-md text-sm font-semibold hover:bg-zinc-800/20 transition-colors duration-150 cursor-pointer text-[#CFCAC7]"
+      className="inline-flex items-center gap-1 rounded-md cursor-pointer"
     >
       {head}
       <svg
-        fill="#CFCAC7"
+        fill="currentColor"
         height="10px"
         width="10px"
         version="1.1"
