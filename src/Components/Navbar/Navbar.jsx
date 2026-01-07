@@ -4,7 +4,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import CalendarBooking from "../../app/calendarButton";
 import AppContext from "../../context/Infracontext";
 
@@ -17,16 +17,41 @@ const GivenMenuBar = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openSubmenus, setOpenSubmenus] = useState({});
+  const [isHovering, setIsHovering] = useState(false);
+  const hoverTimeoutRef = useRef(null);
 
   const checkVisitPage = (el) => {
     el == curPage ? setProgress(0) : setProgress(30);
     setCurPage(el);
   };
 
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleMouseEnter = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    setIsHovering(true);
+    setIsMenuOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    hoverTimeoutRef.current = setTimeout(() => {
+      setIsMenuOpen(false);
+      setOpenSubmenus({});
+    }, 150);
+  };
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     if (!isMenuOpen) {
-      // Reset submenus when opening main menu
       setOpenSubmenus({});
     }
   };
@@ -57,10 +82,12 @@ const GivenMenuBar = ({
 
   return (
     <Menu as="div" className="relative inline-block text-left p-0">
-      <div>
+      <div
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <MenuButton
-          onClick={toggleMenu}
-          className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20"
+          className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20 transition-colors duration-150"
           aria-label="Menu"
         >
           {head}{" "}
@@ -73,6 +100,7 @@ const GivenMenuBar = ({
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 491.996 491.996"
             stroke="#000000"
+            className={`transition-transform duration-200 ${isMenuOpen ? 'rotate-180' : ''}`}
           >
             <g>
               <g>
@@ -91,8 +119,14 @@ const GivenMenuBar = ({
 
       {isMenuOpen && (
         <MenuItems
-          transition
-          className="absolute z-10 mt-6 w-64 origin-top-center rounded-md bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+          static
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={`absolute z-50 mt-2 w-64 origin-top rounded-lg bg-slate-900 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl transition-all duration-200 ease-out ${
+            isMenuOpen
+              ? 'opacity-100 translate-y-0 scale-100'
+              : 'opacity-0 -translate-y-2 scale-95 pointer-events-none'
+          }`}
         >
           <div className="p-2 rounded-lg mx-auto">
             {menuLinks.map((menuLink, index) => {
@@ -109,7 +143,7 @@ const GivenMenuBar = ({
                             handleServiceClick(menuLink.hrefLink);
                           }}
                           href={menuLink.hrefLink}
-                          className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                          className="block px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg transition-all duration-150"
                           target={menuLink.hrefLink.includes("http") ? "_blank" : ""}
                         >
                           {menuLink.menuName}
@@ -118,38 +152,43 @@ const GivenMenuBar = ({
                     ) : (
                       <MenuItem>
                         <div
+                          onMouseEnter={() => setOpenSubmenus(prev => ({ ...prev, [index]: true }))}
                           onClick={(e) => toggleSubmenu(index, e)}
-                          className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-800 rounded-lg cursor-pointer w-full"
+                          className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg cursor-pointer w-full transition-all duration-150"
                         >
                           <span>{menuLink.menuName}</span>
                           {openSubmenus[index] ? (
-                            <ChevronUp size={16} />
+                            <ChevronUp size={16} className="transition-transform duration-200" />
                           ) : (
-                            <ChevronDown size={16} />
+                            <ChevronDown size={16} className="transition-transform duration-200" />
                           )}
                         </div>
                       </MenuItem>
                     )}
 
-                    {openSubmenus[index] && (
-                      <div className="ml-4 bg-slate-900 rounded-lg mt-1 mb-2">
-                        {menuLink.submenu.map((subItem, subIndex) => (
-                          <MenuItem key={subIndex}>
-                            <Link
-                              onClick={(e) => {
-                                e.preventDefault();
-                                handleServiceClick(subItem.hrefLink);
-                              }}
-                              href={subItem.hrefLink}
-                              className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
-                              target={subItem.hrefLink.includes("http") ? "_blank" : ""}
-                            >
-                              {subItem.menuName}
-                            </Link>
-                          </MenuItem>
-                        ))}
-                      </div>
-                    )}
+                    <div 
+                      className={`ml-4 bg-slate-900 rounded-lg overflow-hidden transition-all duration-200 ease-in-out ${
+                        openSubmenus[index] 
+                          ? 'max-h-96 opacity-100 mt-1 mb-2' 
+                          : 'max-h-0 opacity-0'
+                      }`}
+                    >
+                      {menuLink.submenu.map((subItem, subIndex) => (
+                        <MenuItem key={subIndex}>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleServiceClick(subItem.hrefLink);
+                            }}
+                            href={subItem.hrefLink}
+                            className="block px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg transition-all duration-150"
+                            target={subItem.hrefLink.includes("http") ? "_blank" : ""}
+                          >
+                            {subItem.menuName}
+                          </Link>
+                        </MenuItem>
+                      ))}
+                    </div>
                   </div>
                 );
               } else {
@@ -162,7 +201,7 @@ const GivenMenuBar = ({
                         handleServiceClick(menuLink.hrefLink);
                       }}
                       href={menuLink.hrefLink}
-                      className="block px-4 py-2 text-sm hover:bg-slate-800 rounded-lg"
+                      className="block px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg transition-all duration-150"
                       target={menuLink.hrefLink.includes("http") ? "_blank" : ""}
                     >
                       {menuLink.menuName}
