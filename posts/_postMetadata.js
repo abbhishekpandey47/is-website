@@ -1487,7 +1487,7 @@ let postMetaData = [
   }
 },
 {
-  title: "GTM execution without devrel hiring cycle",
+  title: "Can you scale developer GTM without hiring DevRel?",
   metaTitle: "Case Study: Execution Without the DevRel Hiring Cycle",
   slug: "devrel-hiring",
   description: "This case study shows how a Series A developer platform replaced DevRel hiring delays with execution-first developer GTM. By outsourcing developer content, documentation, and community execution, the team achieved faster time-to-output, parallel scaling, and measurable growth, without the cost or ramp-up of a full-time DevRel hire. Learn how execution from day one drove 1,000+ organic clicks, 20% month-on-month growth, and new developer traffic channels.",
