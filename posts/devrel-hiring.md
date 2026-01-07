@@ -38,10 +38,18 @@ Rather than committing $180k–$220k annually to a single DevRel, Cycloid access
 
 This shifted developer GTM from a slow, sequential process to a parallel execution model built for speed and scale.
 
-## **What we executed in week 1 vs what usually wait for onboarding**
+## **How did Cycloid scale developer GTM without hiring DevRel?**
 
-Once execution was decoupled from hiring, Infrasity focused on activating the core developer GTM levers that directly influence discovery and adoption. This included publishing technical, search-driven content, expanding coverage of high-intent keywords, and distributing it across channels where developers actively evaluate tools.
-In parallel, we activated new traffic surfaces by making Cycloid visible in AI-driven discovery flows and relevant community discussions. The metrics below reflect the impact of running these motions consistently and in parallel, without pauses caused by hiring or onboarding.
+Once Cycloid decided not to wait on a DevRel hire, Infrasity stepped in as the execution layer for developer GTM. The focus shifted from role ownership to shipping consistently across the channels that influence discovery, evaluation, and adoption.
+
+###  **Technical Content**
+On the content side, we worked closely with the Cycloid team to produce technical, search-driven content aligned with high-intent developer queries. This included deep-dive blogs, use-case walkthroughs, and platform–engineering–focused pieces designed to rank for competitive keywords and be referenced in comparisons. To avoid content living only on the blog, this work was distributed across multiple platforms such as Medium, Dev.to, and Daily.dev, creating an omnichannel footprint that increased both search visibility and LLM citations.
+
+This distribution strategy ensured Cycloid’s content appeared in more places where AI systems ingest and retrieve information, while also driving referral traffic from developer-heavy platforms. Over time, this led to consistent visibility across search engines and AI answers, rather than relying on a single channel.
+
+### **Organic Reddit Engagements**
+
+In parallel, we activated organic community GTM. Infrasity engaged in relevant developer and platform engineering communities where Cycloid’s ICP already discussed tooling and architecture decisions. This included participating in subreddits such as r/devops, r/platformengineering, r/kubernetes, r/cloudcomputing, and r/sre, contributing context-driven discussions rather than promotional posts. These conversations drove direct referral traffic and reinforced Cycloid’s presence in the community narratives that increasingly surface in AI-generated answers.
 
 **Impact Driven:**
 
@@ -62,7 +70,7 @@ In parallel, we activated new traffic surfaces by making Cycloid visible in AI-d
 
 ## CTA : See how modern GTM teams execute without friction
 
-## **Hiring v/s Infrasity**
+## **DevRel hire vs outsourcing execution: time, cost, and output**
 
 Developer GTM is constrained by time, cost, and execution bandwidth. A hiring-led approach concentrates growth responsibilities in a single DevRel role, introducing delays from hiring and onboarding while limiting output to one person’s capacity. Content, community engagement, and product education tend to move sequentially as the role ramps.
 
@@ -81,24 +89,24 @@ In contrast, Infrasity replaces the hiring dependency with an engineering-led ex
 
 ## **Frequently Asked Questions** 
 
-### **1\. What does a DevRel engineer do?**
+### **1\. What does a DevRel (Developer Relations) engineer typically do in a SaaS company?**
 
-A DevRel (Developer Relations) engineer focuses on developer advocacy, technical content creation, community engagement, product education, and feedback collection. Typical DevRel responsibilities include writing technical blogs, maintaining documentation, creating demos, speaking at events, and engaging with developers in forums and communities.
+A DevRel (Developer Relations) engineer acts as the interface between a product team and its developer audience. The role typically includes creating technical content such as blogs, tutorials, documentation, and demos that help developers understand and adopt the product. DevRel engineers also engage in developer communities, forums, and events to represent the product, answer technical questions, and gather feedback.
 
 ### **2\. How long does it take for a DevRel hire to become productive?**
 
-In most SaaS based startups or scaleups, hiring a DevRel engineer takes approximately 2–3 months. After hiring, onboarding, and ramp-up, typically require an additional 1–1.5 months before consistent output begins across content, documentation, and community engagement.
+In most SaaS startups and scaleups, hiring a DevRel engineer typically takes around 2–3 months, depending on role seniority and market conditions. After the hire is made, onboarding and product ramp-up usually require an additional 4–6 weeks before meaningful output begins. During this period, the DevRel is learning the product, messaging, developer personas, and community context.
 
 ### **3\. How much does it cost to hire a DevRel engineer in the US?**
 
 The average cost of hiring a senior DevRel engineer in the United States ranges from $180,000 to $220,000 per year. This estimate usually excludes equity compensation, benefits, travel expenses, and tooling costs.
 
-### **4\. What is the difference between DevRel hiring and outsourcing developer GTM?**
+### **4\. How does outsourcing developer GTM compare to hiring a DevRel engineer in SaaS teams?**
 
-DevRel hiring centers on a single internal role with long-term ownership but slower ramp-up. Outsourcing developer GTM focuses on faster execution, multi-specialist output, and parallel scaling across content, documentation, community, and distribution channels.
+Outsourcing developer GTM and hiring a DevRel engineer solve similar problems but operate very differently. A DevRel hire places responsibility on a single internal role, which requires time for hiring, onboarding, and product context before consistent execution begins. Output is constrained by individual bandwidth, making it difficult to scale content, documentation, community engagement, and distribution simultaneously. Outsourced developer GTM shifts execution to an external, engineering-led team that can start immediately.
 
 ### **5\. Does outsourcing the developer GTM reduce authenticity with developers?**
 
-Outsourcing developer GTM does not reduce authenticity if the content is technically accurate and written by engineers with real implementation experience. Developers generally value clarity, correctness, and usefulness over the author's identity.
+Outsourcing developer GTM does not reduce authenticity when execution is led by engineers with real implementation experience. Developers primarily evaluate content based on technical accuracy, clarity, and practical usefulness rather than who produced it. Documentation, tutorials, and examples that reflect real-world constraints and trade-offs tend to earn trust
 
 ## CTA : See how modern GTM teams execute without friction
