@@ -1489,13 +1489,41 @@ let postMetaData = [
 {
   title: "GTM execution without devrel hiring cycle",
   metaTitle: "Case Study: Execution Without the DevRel Hiring Cycle",
-  slug: "casestudy-execution-without-devrel-hiring",
+  slug: "devrel-hiring",
   description: "This case study shows how a Series A developer platform replaced DevRel hiring delays with execution-first developer GTM. By outsourcing developer content, documentation, and community execution, the team achieved faster time-to-output, parallel scaling, and measurable growth, without the cost or ramp-up of a full-time DevRel hire. Learn how execution from day one drove 1,000+ organic clicks, 20% month-on-month growth, and new developer traffic channels.",
-  ogImage: "/PostImages/casestudy-execution-without-devrel-hiring/0.webp",
+  ogImage: "/PostImages/devrel-hiring/0.webp",
   publishedOn: "2026-01-06",
-  authorId: "author0001",
-  category: "Informational",
-  metaDescription: "How a Series A developer platform replaced DevRel hiring delays with execution-first developer GTM. Learn how Infrasity drove 20% MoM growth, 1,000+ organic clicks, and parallel content scale. Read now."
+  authorId: "author0007",
+  category: "Case Studies",
+  metaDescription: "How a Series A developer platform replaced DevRel hiring delays with execution-first developer GTM. Learn how Infrasity drove 20% MoM growth, 1,000+ organic clicks, and parallel content scale. Read now.",
+  stats: [
+    {
+      title: "Organic  Clicks",
+      value: "60 to 1000+",
+      subtext: "in 3months",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "MoM Growth",
+      value: "0 → 20%",
+      subtext: "Sustained Month on Month Growth at 20%",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "LLM Traffic",
+      value: " 0 to 200+ visitors",
+      subtext: "over 3 months",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    }
+],
+  companyHighlights: {
+    company: "Cycloid.io",
+    headquarters: "Paris, France",
+    funding: "Series A ($5.2M)",
+    industry: "Unified Internal Developer Platform",
+    employees: "11-50",
+    website: "cycloid.io"
+  }
 },
    {
     title: "6 Top Content Marketing Agencies for Devtool Startups in 2026",
