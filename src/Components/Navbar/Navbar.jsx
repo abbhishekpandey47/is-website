@@ -221,6 +221,7 @@ const Navbar = () => {
   const [dropdownPosition, setDropdownPosition] = useState(0);
   const closeTimeoutRef = useRef(null);
   const menuRefs = useRef({});
+  const dropdownRef = useRef(null);
 
   const context = useContext(AppContext);
   const pathname = usePathname();
@@ -233,6 +234,9 @@ const Navbar = () => {
     tools: { label: "Tools", links: toolsTab },
     resources: { label: "Resources", links: resourcesTab }
   };
+
+  // Dropdown width in pixels (matches w-64 which is 256px)
+  const DROPDOWN_WIDTH = 256;
 
   useEffect(() => {
     return () => {
@@ -260,7 +264,8 @@ const Navbar = () => {
     if (menuElement) {
       const rect = menuElement.getBoundingClientRect();
       const parentRect = menuElement.offsetParent.getBoundingClientRect();
-      setDropdownPosition(rect.left - parentRect.left + rect.width / 2 - 128);
+      // Center dropdown under menu item (DROPDOWN_WIDTH / 2)
+      setDropdownPosition(rect.left - parentRect.left + rect.width / 2 - DROPDOWN_WIDTH / 2);
     }
     
     setOpenMenu(menuId);
@@ -798,6 +803,7 @@ const Navbar = () => {
 
             {openMenu && (
               <div
+                ref={dropdownRef}
                 className="absolute left-0 top-full mt-2 w-64 z-50"
                 style={{ 
                   transform: `translateX(${dropdownPosition}px)`,
@@ -810,11 +816,7 @@ const Navbar = () => {
                 }}
                 onMouseLeave={handleMenuLeave}
               >
-                <div 
-                  className={`bg-slate-900 rounded-lg shadow-2xl ring-1 ring-white/10 backdrop-blur-xl transition-opacity duration-300 ease-out ${
-                    openMenu ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
+                <div className="bg-slate-900 rounded-lg shadow-2xl ring-1 ring-white/10 backdrop-blur-xl opacity-100">
                   <DropdownContent
                     menuLinks={menuConfig[openMenu]?.links || []}
                     onLinkClick={handleLinkClick}
