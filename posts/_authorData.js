@@ -46,8 +46,15 @@ const authorData = [
   "designation": "Web Developer & Technical Content Writer",
   "about": "Web developer and technical content writer at Infrasity, creating engineering-focused documentation and writing product-driven content for SaaS teams.",
   "linkedIn": "https://www.linkedin.com/in/gaurav-tiwari-663215204/"
+},
+  {
+  "authorId": "author0007",
+  "name": "Apoorv Tripathi",
+  "profilePic": "/authorImages/apoorv.webp",
+  "designation": "Growth Engineer",
+  "about": "Growth Engineer at Infrasity, specialises in driving growth for B2B startups",
+  "linkedIn": "www.linkedin.com/in/apoorv-tripathi-0b0b481a5"
 }
-
 ];
 
 module.exports = authorData;
