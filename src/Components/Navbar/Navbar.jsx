@@ -8,59 +8,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import CalendarBooking from "../../app/calendarButton";
 import AppContext from "../../context/Infracontext";
 
-const GivenMenuBar = ({
-  head,
-  menuLinks,
-  setProgress,
-  curPage,
-  setCurPage,
-}) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [openSubmenus, setOpenSubmenus] = useState({});
-  const [isHovering, setIsHovering] = useState(false);
-  const hoverTimeoutRef = useRef(null);
-
-  const checkVisitPage = (el) => {
-    el == curPage ? setProgress(0) : setProgress(30);
-    setCurPage(el);
-  };
-
-  useEffect(() => {
-    return () => {
-      if (hoverTimeoutRef.current) {
-        clearTimeout(hoverTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  const handleMouseEnter = () => {
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current);
-    }
-    setIsHovering(true);
-    setIsMenuOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-    hoverTimeoutRef.current = setTimeout(() => {
-      setIsMenuOpen(false);
-      setOpenSubmenus({});
-    }, 150);
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    if (!isMenuOpen) {
-      setOpenSubmenus({});
-    }
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-    setOpenSubmenus({});
-  };
-
+// Dropdown content component
+const DropdownContent = ({ menuLinks, onLinkClick, openSubmenus, setOpenSubmenus }) => {
   const toggleSubmenu = (index, e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -70,150 +19,113 @@ const GivenMenuBar = ({
     }));
   };
 
-  const handleServiceClick = (path) => {
-    if (path) {
-      checkVisitPage(path);
-      closeMenu();
-      setTimeout(() => {
-        window.location.href = path;
-      }, 10);
-    }
-  };
-
   return (
-    <Menu as="div" className="relative inline-block text-left p-0">
-      <div
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+    <div className="p-3 space-y-1">
+      {menuLinks.map((menuLink, index) => {
+        if (menuLink.submenu && menuLink.submenu.length > 0) {
+          return (
+            <div key={index} className="relative">
+              {menuLink.hrefLink ? (
+                <Link
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onLinkClick(menuLink.hrefLink);
+                  }}
+                  href={menuLink.hrefLink}
+                  className="block px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg transition-colors duration-150 text-[#CFCAC7]"
+                  target={menuLink.hrefLink.includes("http") ? "_blank" : ""}
+                >
+                  {menuLink.menuName}
+                </Link>
+              ) : (
+                <div
+                  onMouseEnter={() => setOpenSubmenus(prev => ({ ...prev, [index]: true }))}
+                  onClick={(e) => toggleSubmenu(index, e)}
+                  className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg cursor-pointer transition-colors duration-150 text-[#CFCAC7]"
+                >
+                  <span>{menuLink.menuName}</span>
+                  {openSubmenus[index] ? (
+                    <ChevronUp size={16} className="transition-transform duration-200" />
+                  ) : (
+                    <ChevronDown size={16} className="transition-transform duration-200" />
+                  )}
+                </div>
+              )}
+
+              <div 
+                className={`ml-4 overflow-hidden transition-all duration-300 ease-in-out ${
+                  openSubmenus[index] 
+                    ? 'max-h-96 opacity-100 mt-1' 
+                    : 'max-h-0 opacity-0'
+                }`}
+              >
+                {menuLink.submenu.map((subItem, subIndex) => (
+                  <Link
+                    key={subIndex}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onLinkClick(subItem.hrefLink);
+                    }}
+                    href={subItem.hrefLink}
+                    className="block px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg transition-colors duration-150 text-[#CFCAC7]"
+                    target={subItem.hrefLink.includes("http") ? "_blank" : ""}
+                  >
+                    {subItem.menuName}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          );
+        } else {
+          return (
+            <Link
+              key={index}
+              onClick={(e) => {
+                e.preventDefault();
+                onLinkClick(menuLink.hrefLink);
+              }}
+              href={menuLink.hrefLink}
+              className="block px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg transition-colors duration-150 text-[#CFCAC7]"
+              target={menuLink.hrefLink.includes("http") ? "_blank" : ""}
+            >
+              {menuLink.menuName}
+            </Link>
+          );
+        }
+      })}
+    </div>
+  );
+};
+
+// Menu trigger button component
+const MenuTrigger = ({ head, isOpen, onMouseEnter, onMouseLeave }) => {
+  return (
+    <div
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className="inline-flex items-center gap-1 px-3 py-2 rounded-md text-sm font-semibold hover:bg-zinc-800/20 transition-colors duration-150 cursor-pointer text-[#CFCAC7]"
+    >
+      {head}
+      <svg
+        fill="#CFCAC7"
+        height="10px"
+        width="10px"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 491.996 491.996"
+        className={`transition-transform duration-300 ease-out ${isOpen ? 'rotate-180' : ''}`}
       >
-        <MenuButton
-          className="inline-flex items-center gap-1 p-2 w-full justify-center rounded-md text-sm font-semibold hover:bg-zinc-800/20 transition-colors duration-150"
-          aria-label="Menu"
-        >
-          {head}{" "}
-          <svg
-            fill="#CFCAC7"
-            height="10px"
-            width="10px"
-            version="1.1"
-            id="Layer_1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 491.996 491.996"
-            stroke="#000000"
-            className={`transition-transform duration-200 ${isMenuOpen ? 'rotate-180' : ''}`}
-          >
-            <g>
-              <g>
-                <path
-                  d="M484.132,124.986l-16.116-16.228c-5.072-5.068-11.82-7.86-19.032-7.86c-7.208,0-13.964,2.792-19.036,7.86l-183.84,183.848
-        L62.056,108.554c-5.064-5.068-11.82-7.856-19.028-7.856s-13.968,2.788-19.036,7.856l-16.12,16.128
-        c-10.496,10.488-10.496,27.572,0,38.06l219.136,219.924c5.064,5.064,11.812,8.632,19.084,8.632h0.084
-        c7.212,0,13.96-3.572,19.024-8.632l218.932-219.328c5.072-5.064,7.856-12.016,7.864-19.224
-        C491.996,136.902,489.204,130.046,484.132,124.986z"
-                />
-              </g>
-            </g>
-          </svg>
-        </MenuButton>
-      </div>
-
-      {isMenuOpen && (
-        <MenuItems
-          static
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          className={`absolute z-50 mt-2 w-64 origin-top rounded-lg bg-slate-900 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl transition-all duration-200 ease-out ${
-            isMenuOpen
-              ? 'opacity-100 translate-y-0 scale-100'
-              : 'opacity-0 -translate-y-2 scale-95 pointer-events-none'
-          }`}
-        >
-          <div className="p-2 rounded-lg mx-auto">
-            {menuLinks.map((menuLink, index) => {
-              // Check if this menu item has a submenu
-              if (menuLink.submenu && menuLink.submenu.length > 0) {
-                return (
-                  <div key={index} className="relative">
-                    {/* Check if the parent item has its own hrefLink */}
-                    {menuLink.hrefLink ? (
-                      <MenuItem>
-                        <Link
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleServiceClick(menuLink.hrefLink);
-                          }}
-                          href={menuLink.hrefLink}
-                          className="block px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg transition-all duration-150"
-                          target={menuLink.hrefLink.includes("http") ? "_blank" : ""}
-                        >
-                          {menuLink.menuName}
-                        </Link>
-                      </MenuItem>
-                    ) : (
-                      <MenuItem>
-                        <div
-                          onMouseEnter={() => setOpenSubmenus(prev => ({ ...prev, [index]: true }))}
-                          onClick={(e) => toggleSubmenu(index, e)}
-                          className="flex items-center justify-between px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg cursor-pointer w-full transition-all duration-150"
-                        >
-                          <span>{menuLink.menuName}</span>
-                          {openSubmenus[index] ? (
-                            <ChevronUp size={16} className="transition-transform duration-200" />
-                          ) : (
-                            <ChevronDown size={16} className="transition-transform duration-200" />
-                          )}
-                        </div>
-                      </MenuItem>
-                    )}
-
-                    <div 
-                      className={`ml-4 bg-slate-900 rounded-lg overflow-hidden transition-all duration-200 ease-in-out ${
-                        openSubmenus[index] 
-                          ? 'max-h-96 opacity-100 mt-1 mb-2' 
-                          : 'max-h-0 opacity-0'
-                      }`}
-                    >
-                      {menuLink.submenu.map((subItem, subIndex) => (
-                        <MenuItem key={subIndex}>
-                          <Link
-                            onClick={(e) => {
-                              e.preventDefault();
-                              handleServiceClick(subItem.hrefLink);
-                            }}
-                            href={subItem.hrefLink}
-                            className="block px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg transition-all duration-150"
-                            target={subItem.hrefLink.includes("http") ? "_blank" : ""}
-                          >
-                            {subItem.menuName}
-                          </Link>
-                        </MenuItem>
-                      ))}
-                    </div>
-                  </div>
-                );
-              } else {
-                // Regular menu item without submenu
-                return (
-                  <MenuItem key={index}>
-                    <Link
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleServiceClick(menuLink.hrefLink);
-                      }}
-                      href={menuLink.hrefLink}
-                      className="block px-4 py-2 text-sm hover:bg-slate-800/80 rounded-lg transition-all duration-150"
-                      target={menuLink.hrefLink.includes("http") ? "_blank" : ""}
-                    >
-                      {menuLink.menuName}
-                    </Link>
-                  </MenuItem>
-                );
-              }
-            })}
-          </div>
-        </MenuItems>
-      )}
-    </Menu>
+        <g>
+          <path
+            d="M484.132,124.986l-16.116-16.228c-5.072-5.068-11.82-7.86-19.032-7.86c-7.208,0-13.964,2.792-19.036,7.86l-183.84,183.848
+  L62.056,108.554c-5.064-5.068-11.82-7.856-19.028-7.856s-13.968,2.788-19.036,7.856l-16.12,16.128
+  c-10.496,10.488-10.496,27.572,0,38.06l219.136,219.924c5.064,5.064,11.812,8.632,19.084,8.632h0.084
+  c7.212,0,13.96-3.572,19.024-8.632l218.932-219.328c5.072-5.064,7.856-12.016,7.864-19.224
+  C491.996,136.902,489.204,130.046,484.132,124.986z"
+          />
+        </g>
+      </svg>
+    </div>
   );
 };
 
@@ -300,46 +212,87 @@ const Navbar = () => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const [playbookOpen, setPlaybookOpen] = useState(false);
-
-  const togglePlaybook = () => setPlaybookOpen(!playbookOpen);
+  
+  // Shared state for desktop dropdowns
+  const [openMenu, setOpenMenu] = useState(null);
+  const [openSubmenus, setOpenSubmenus] = useState({});
+  const [dropdownPosition, setDropdownPosition] = useState(0);
+  const closeTimeoutRef = useRef(null);
+  const menuRefs = useRef({});
 
   const context = useContext(AppContext);
   const pathname = usePathname();
-  const { setProgress, progress } = context;
+  const { setProgress } = context;
   const [curPage, setCurPage] = useState(pathname);
 
-  const toggleServices = () => {
-    setServicesOpen(!servicesOpen);
+  // Menu configurations
+  const menuConfig = {
+    services: { label: "Services", links: menuLinksArrServices },
+    tools: { label: "Tools", links: toolsTab },
+    resources: { label: "Resources", links: resourcesTab }
   };
 
-  const toggleResources = () => {
-    setResourcesOpen(!resourcesOpen);
-  };
-
-  const toggleTools = () => {
-    setToolsOpen(!toolsOpen);
-  };
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const checkVisitPage = (el) => {
-    el == curPage ? setProgress(0) : setProgress(30);
+    el === curPage ? setProgress(0) : setProgress(30);
     setCurPage(el);
   };
 
+  const handleMenuEnter = (menuId) => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    
+    if (openMenu !== menuId) {
+      setOpenSubmenus({});
+    }
+    
+    const menuElement = menuRefs.current[menuId];
+    if (menuElement) {
+      const rect = menuElement.getBoundingClientRect();
+      const parentRect = menuElement.offsetParent.getBoundingClientRect();
+      setDropdownPosition(rect.left - parentRect.left + rect.width / 2 - 128);
+    }
+    
+    setOpenMenu(menuId);
+  };
+
+  const handleMenuLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setOpenMenu(null);
+      setOpenSubmenus({});
+    }, 150);
+  };
+
+  const handleLinkClick = (path) => {
+    if (path) {
+      checkVisitPage(path);
+      setOpenMenu(null);
+      setOpenSubmenus({});
+      setTimeout(() => {
+        window.location.href = path;
+      }, 10);
+    }
+  };
+
+  const togglePlaybook = () => setPlaybookOpen(!playbookOpen);
+  const toggleServices = () => setServicesOpen(!servicesOpen);
+  const toggleResources = () => setResourcesOpen(!resourcesOpen);
+  const toggleTools = () => setToolsOpen(!toolsOpen);
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
   const handleServiceClick = (path) => {
     checkVisitPage(path);
-
     setTimeout(() => {
       window.location.href = path;
     }, 10);
@@ -819,7 +772,7 @@ const Navbar = () => {
             </div>
           </div>
         </Link>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden lg:flex relative">
           <ul className="menu menu-horizontal px-1 quicksand-semibold flex justify-center items-center">
             <li>
               <Link
@@ -832,15 +785,46 @@ const Navbar = () => {
               </Link>
             </li>
 
-            <li className="flex justify-center items-center">
-              <GivenMenuBar
-                head={"Services"}
-                menuLinks={menuLinksArrServices}
-                setProgress={setProgress}
-                curPage={curPage}
-                setCurPage={setCurPage}
-              />
-            </li>
+            {Object.entries(menuConfig).map(([menuId, config]) => (
+              <li key={menuId} ref={el => menuRefs.current[menuId] = el}>
+                <MenuTrigger
+                  head={config.label}
+                  isOpen={openMenu === menuId}
+                  onMouseEnter={() => handleMenuEnter(menuId)}
+                  onMouseLeave={handleMenuLeave}
+                />
+              </li>
+            ))}
+
+            {openMenu && (
+              <div
+                className="absolute left-0 top-full mt-2 w-64 z-50"
+                style={{ 
+                  transform: `translateX(${dropdownPosition}px)`,
+                  transition: 'transform 300ms cubic-bezier(0.4, 0, 0.2, 1)'
+                }}
+                onMouseEnter={() => {
+                  if (closeTimeoutRef.current) {
+                    clearTimeout(closeTimeoutRef.current);
+                  }
+                }}
+                onMouseLeave={handleMenuLeave}
+              >
+                <div 
+                  className={`bg-slate-900 rounded-lg shadow-2xl ring-1 ring-white/10 backdrop-blur-xl transition-opacity duration-300 ease-out ${
+                    openMenu ? 'opacity-100' : 'opacity-0'
+                  }`}
+                >
+                  <DropdownContent
+                    menuLinks={menuConfig[openMenu]?.links || []}
+                    onLinkClick={handleLinkClick}
+                    openSubmenus={openSubmenus}
+                    setOpenSubmenus={setOpenSubmenus}
+                  />
+                </div>
+              </div>
+            )}
+
             <li>
               <Link
                 href="/pricing"
@@ -851,28 +835,6 @@ const Navbar = () => {
                 Pricing
               </Link>
             </li>
-
-
-            <li className="flex justify-center items-center">
-              <GivenMenuBar
-                head={"Tools"}
-                menuLinks={toolsTab}
-                setProgress={setProgress}
-                curPage={curPage}
-                setCurPage={setCurPage}
-              />
-            </li>
-
-            <li className="flex justify-center items-center">
-              <GivenMenuBar
-                head={"Resources"}
-                menuLinks={resourcesTab}
-                setProgress={setProgress}
-                curPage={curPage}
-                setCurPage={setCurPage}
-              />
-            </li>
-
 
             <li>
               <Link
