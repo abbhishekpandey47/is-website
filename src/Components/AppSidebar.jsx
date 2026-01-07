@@ -1,14 +1,15 @@
 'use client'
 
 import {
-    BarChart3,
-    Calendar,
-    FileText,
-    MessageSquare,
-    Settings,
-    Tag,
-    TrendingUp,
-    Users
+  BarChart3,
+  Calendar,
+  FileText,
+  MessageSquare,
+  Search,
+  Settings,
+  Tag,
+  TrendingUp,
+  Users
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -38,6 +39,7 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
     { title: "Analytics", url: isAdmin ? "/threadflow/analytics" : `/threadflow/c/${companySlug}/analytics`, icon: TrendingUp },
     { title: "Communities", url: isAdmin ? "/threadflow/communities" : `/threadflow/c/${companySlug}/communities`, icon: Users },
     { title: "SubredditSense", url: isAdmin ? "/threadflow/subredditsense" : `/threadflow/c/${companySlug}/subredditsense`, icon: TrendingUp },
+    { title: "Serp Scout", url: isAdmin ? "/threadflow/serp-scout" : `/threadflow/c/${companySlug}/serp-scout`, icon: Search },
   ]
 
   const managementItems = [
