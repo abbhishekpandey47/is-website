@@ -1,8 +1,13 @@
-## **Problem Statement**
+## **Overview**
 
+Developer GTM is highly sensitive to execution gaps. When technical content, community engagement, and product education pause, visibility and momentum are lost during critical growth phases. Hiring-driven delays not only slow output; they also directly impact discovery, evaluation, and onboarding.
+
+Cycloid, a €5M Series A Unified Internal Developer Portal, was getting ready to scale its developer GTM. The plan was to hire a DevRel who could own technical content, represent the brand in community discussions, and produce demo and use-case videos. That search ran close to three months. During that time, content slowed, and other GTM efforts stayed on hold. Through ongoing conversations, it became clear that waiting longer for the right hire would only extend the stall. Instead of continuing to wait, Cycloid decided to separate execution from hiring and move forward without a DevRel in place.
+
+## **Why DevRel hiring slows developer GTM**
 Developer growth depends on consistently shipping content, engaging the community, and educating developers.
 
-For a 5M€ Series A Unified Internal Developer Portal, the GTM motion slowed because execution was contingent on a DevRel hire. The search for a DevRel who could own technical content, represent the brand in community threads, and produce demo and use-case videos took around three months. During this period, content velocity stalled.
+For Cycloid, the GTM motion slowed because execution was contingent on a DevRel hire. The search for a DevRel who could own technical content, represent the brand in community threads, and produce demo and use-case videos took around three months. During this period, content velocity stalled.
 
 ![](/PostImages/casestudy-execution-without-devrel-hiring/1.webp) 
 
@@ -14,7 +19,11 @@ Lastly, cost is another constraint; a senior DevRel hire typically costs **$150k
 
 ## CTA : See how modern GTM teams execute without friction**
 
-##  **Infrasity as Extended Devrel Arm**
+##  **The alternative: execution-first developer GTM without a DevRel hire**
+
+Execution-first developer GTM removes dependency on hiring and ramping a DevRel role. Instead, Infrasity operates as an engineering-led execution layer, delivering technical content, documentation, community engagement, and product education immediately.
+For Cycloid, Infrasity acted as an extended DevRel arm, allowing developer GTM to move forward without waiting for hiring cycles or onboarding time. This approach shifts the focus from role ownership to continuous execution, enabling faster output, parallel GTM motion, and scalable developer visibility at a fraction of the cost of a full-time DevRel hire.
+
 
 ![](/PostImages/casestudy-execution-without-devrel-hiring/3.webp) 
 
@@ -31,7 +40,12 @@ Rather than committing $180k–$220k annually to a single DevRel, Cycloid access
 
 This shifted developer GTM from a slow, sequential process to a parallel execution model built for speed and scale.
 
-## **Key Growth Metrics Driven**
+## **What we executed in week 1 vs what usually wait for onboarding**
+
+Once execution was decoupled from hiring, Infrasity focused on activating the core developer GTM levers that directly influence discovery and adoption. This included publishing technical, search-driven content, expanding coverage of high-intent keywords, and distributing it across channels where developers actively evaluate tools.
+In parallel, we activated new traffic surfaces by making Cycloid visible in AI-driven discovery flows and relevant community discussions. The metrics below reflect the impact of running these motions consistently and in parallel, without pauses caused by hiring or onboarding.
+
+**Impact Driven:**
 
 * Monthly organic clicks grew from **50–60 to 1,000+**  
 * Sustained **20% month-on-month growth**
@@ -52,7 +66,9 @@ This shifted developer GTM from a slow, sequential process to a parallel executi
 
 ## **Hiring v/s Infrasity**
 
-Developer GTM depends on how quickly execution starts and how much can run in parallel. One approach relies on hiring and ramping a single role, the other activates a full execution layer immediately.
+Developer GTM is constrained by time, cost, and execution bandwidth. A hiring-led approach concentrates growth responsibilities in a single DevRel role, introducing delays from hiring and onboarding while limiting output to one person’s capacity. Content, community engagement, and product education tend to move sequentially as the role ramps.
+
+In contrast, Infrasity replaces the hiring dependency with an engineering-led execution model. Multiple GTM levers including technical content, documentation, community presence, and distribution are activated immediately and run in parallel, allowing teams to scale developer visibility without waiting for headcount to settle.
 
 | Dimension | DevRel Hire | Infrasity |
 | :---: | :---: | :---: |
