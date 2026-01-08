@@ -109,6 +109,7 @@ const PostPage = (props) => {
   postData.authorName = authorObj.name;
   postData.authorImage = authorObj.profilePic;
   postData.authorLinkedin = authorObj.linkedIn;
+  postData.designation = authorObj.designation;
   return (
     <>
       <style dangerouslySetInnerHTML={{__html: `

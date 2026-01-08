@@ -26,7 +26,7 @@ export function generateMetadata() {
 
 export default function RootLayout({ children }) {
   return (
-  <html lang='en' className={quicksand.className} suppressHydrationWarning>
+  <html lang='en' suppressHydrationWarning>
             <head>
                 <AlternateLinks />
             </head>
