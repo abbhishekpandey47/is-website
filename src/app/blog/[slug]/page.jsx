@@ -1,6 +1,6 @@
 import Markdown from "markdown-to-jsx";
 import Image from "next/image";
-import Head from "next/head";
+import Script from "next/script";
 import { notFound, redirect } from "next/navigation";
 import authorMetadata from "../../../../posts/_authorData";
 import postMetaData from "../../../../posts/_postMetadata";
@@ -437,15 +437,11 @@ if (matchedImage) {
             <BookDemo />
           </div>
         </div>
-        <Head>
-          {faqJsonLd && (
-            <script
-              id="faq-schema"
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-            />
-          )}
-        </Head>
+        {faqJsonLd && (
+          <Script id="faq-schema" type="application/ld+json" strategy="beforeInteractive">
+            {JSON.stringify(faqJsonLd)}
+          </Script>
+        )}
         <div className="mb-20"></div>
       </>
     );
