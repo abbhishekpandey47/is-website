@@ -73,7 +73,7 @@ export default React.memo(function HeadBanner({ postData }) {
               </p>{" "}
               {/* Added transition */}
               <p className="text-sm max-xs:text-xs quicksand-semibold transition duration-300 ease-in-out transform hover:scale-105">
-                {postData.authorName || "Author name"} {/* Added transition */}
+                {postData.authorName || "Author name"} {postData.designation && `| ${postData.designation}`}
               </p>
             </div>
           </a>
