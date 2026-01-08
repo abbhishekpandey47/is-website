@@ -14,7 +14,7 @@ const HeroHome = () => {
   const headingText = useMemo(() => {
     console.log("Memoizing heading text");
     return {
-      title: "Tech Content Marketing Services for B2B SaaS".split(" "),
+      title: "Technical Content Marketing Agency for B2B SaaS".split(" "),
       subtitle: "startups".split(" "),
     };
   }, []);
