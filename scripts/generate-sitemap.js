@@ -14,11 +14,86 @@ try {
 // Get paths and data
 const sitemapPath = path.join(__dirname, '..', 'public', 'sitemap.xml');
 const postsDir = path.join(__dirname, '..', 'posts');
-const today = new Date().toISOString().split('T')[0] + 'T08:02:42+00:00';
+const appDir = path.join(__dirname, '..', 'src', 'app');
+const staticRouteMap = buildStaticRouteMap();
+
+function buildStaticRouteMap() {
+  const map = new Map();
+  const routeFiles = fg.sync('**/page.*', { cwd: appDir, onlyFiles: true });
+
+  for (const routeFile of routeFiles) {
+    if (routeFile.includes('[')) continue; // Skip dynamic routes
+
+    const normalizedRoute = routeFile
+      .replaceAll('\\', '/')
+      .replace(/\/page(?:\.[^/]*)?$/, '')
+      .replace(/\/$/, '');
+
+    const routePath = normalizedRoute === '' ? '/' : `/${normalizedRoute}`;
+    if (!map.has(routePath)) {
+      map.set(routePath, path.join(appDir, routeFile));
+    }
+  }
+
+  return map;
+}
+
+function findPostContentFile(slug) {
+  const extensions = ['md', 'mdx', 'markdown'];
+
+  for (const ext of extensions) {
+    const candidate = path.join(postsDir, `${slug}.${ext}`);
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+
+  const matches = fg.sync(`**/${slug}.@(md|mdx|markdown)`, {
+    cwd: postsDir,
+    absolute: true,
+    onlyFiles: true,
+  });
+
+  return matches[0] || null;
+}
+
+function getLastModifiedDateForUrl(url) {
+  const candidates = [];
+
+  if (staticRouteMap.has(url)) {
+    candidates.push(staticRouteMap.get(url));
+  }
+
+  const postMatch = url.match(/^\/(?:blog|case-studies|tutorials)\/(.+)$/);
+  if (postMatch) {
+    const postFile = findPostContentFile(postMatch[1]);
+    if (postFile) {
+      candidates.push(postFile);
+    }
+  }
+
+  const mtimes = [];
+
+  for (const file of candidates) {
+    if (!fs.existsSync(file)) continue;
+
+    try {
+      mtimes.push(fs.statSync(file).mtime);
+    } catch (error) {
+      console.debug(`Failed to stat ${file}:`, error);
+    }
+  }
+
+  if (mtimes.length === 0) {
+    return null;
+  }
+
+  return new Date(Math.max(...mtimes.map(date => date.getTime())));
+}
 
 // Default URLs (used if sitemap doesn't exist or for validation)
 const defaultUrls = [
-  { url: '/', priority: 1.0, changefreq: 'daily' },
+  { url: '/', priority: 1, changefreq: 'daily' },
   { url: '/blog', priority: 0.9, changefreq: 'daily' },
   { url: '/contact', priority: 0.6, changefreq: 'weekly' },
   { url: '/faq', priority: 0.6, changefreq: 'weekly' },
@@ -38,7 +113,9 @@ function generateSitemapXml(urls) {
 `;
 
   for (const { url, priority, changefreq } of urls) {
-    sitemap += `<url><loc>https://www.infrasity.com${url}</loc><lastmod>${today}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>\n`;
+    const lastmodDate = getLastModifiedDateForUrl(url) ?? new Date();
+    const lastmod = lastmodDate.toISOString();
+    sitemap += `<url><loc>https://www.infrasity.com${url}</loc><lastmod>${lastmod}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>\n`;
   }
 
   sitemap += `</urlset>`;
@@ -55,7 +132,7 @@ function extractUrlsFromSitemap(sitemapContent) {
     urls.push({
       url: match[1],
       changefreq: match[2],
-      priority: parseFloat(match[3])
+      priority: Number.parseFloat(match[3])
     });
   }
 
@@ -185,20 +262,7 @@ function collectContent() {
 }
 
 // Main process
-if (!fs.existsSync(sitemapPath)) {
-  console.log('Sitemap not found, creating a new one...');
-
-  // Start with default URLs
-  const urls = [...defaultUrls];
-
-  // Add content
-  const { blogPosts, caseStudies, tutorials } = collectContent();
-  urls.push(...blogPosts, ...caseStudies, ...tutorials);
-
-  // Write the sitemap
-  fs.writeFileSync(sitemapPath, generateSitemapXml(urls));
-  console.log('New sitemap created successfully!');
-} else {
+if (fs.existsSync(sitemapPath)) {
   console.log('Sitemap exists, updating...');
 
   // Read existing sitemap
@@ -279,6 +343,19 @@ if (!fs.existsSync(sitemapPath)) {
   // Write updated sitemap
   fs.writeFileSync(sitemapPath, generateSitemapXml(updatedUrls));
   console.log('Sitemap updated successfully!');
+} else {
+  console.log('Sitemap not found, creating a new one...');
+
+  // Start with default URLs
+  const urls = [...defaultUrls];
+
+  // Add content
+  const { blogPosts, caseStudies, tutorials } = collectContent();
+  urls.push(...blogPosts, ...caseStudies, ...tutorials);
+
+  // Write the sitemap
+  fs.writeFileSync(sitemapPath, generateSitemapXml(urls));
+  console.log('New sitemap created successfully!');
 }
 
 console.log('Sitemap generation completed.');
