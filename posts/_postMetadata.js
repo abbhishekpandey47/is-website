@@ -1536,6 +1536,17 @@ let postMetaData = [
     category: "B2B SaaS- Content Marketing",
     metaDescription: "Discover the top content marketing agencies for DevTool and B2B SaaS startups in 2026 . Compare leading tech content agencies and choose the right fit. Read now"
 },
+   {
+    title: "7 Best Tech Content Marketing Agency",
+    metatitle: "7 Best B2B SaaS Tech Content Marketing Agency in 2026",
+    slug: "b2b-tech-content-marketing-agency",
+    description: "This guide breaks down the 7 best tech content marketing agency for B2B SaaS startups. It explains what tech content marketing is, why working with a specialized tech content marketing agency matters, and how to evaluate agencies based on strategy, execution, and measurable outcomes. Designed for CMOs, VPs of Marketing, and Growth Leaders, the blog compares leading agencies supporting SaaS, DevTools, AI, and infrastructure products. It highlights where general content agencies fall short and how developer-focused partners like Infrasity help reduce onboarding friction, improve discoverability, and drive product adoption.",
+    ogImage: "/PostImages/b2b-tech-content-marketing-agency/0.webp",
+    publishedOn: "2026-01-09",
+    authorId: "author0005",
+    category: "B2B SaaS- Content Marketing",
+    metaDescription: "Discover the best tech content marketing agency for B2B SaaS. Compare top agencies for SEO, documentation, and adoption. Find the right partner today."
+},
 ];
 
 const sorted = () => {
