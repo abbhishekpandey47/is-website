@@ -455,12 +455,12 @@ let postMetaData = [
      publishedOn: "2025-2-06",
      authorId: "author0003",
      category: "B2B SaaS Growth & GTM",
-     metaDescription: "Discover how a B2B SaaS marketing strategy tailored to fit the buyer's journey through awareness, interest and finally action stage can be harnessed by creating Tofu, Mofu, Bofu content." 
+     metaDescription: "Discover how a B2B SaaS marketing strategy tailored to fit the buyer's journey through awareness, interest and finally action stage can be harnessed by creating Tofu, Mofu, Bofu content."
 },
 
 // /importance-of-writing-organic-content-benefits-and-best-practices-for-saas-companies
 // /importance-of-writing-organic-content-benefits-and-best-practices-for-saas-companies
-    
+
     {
     title: "Top 10 Technical Content Writing Service Companies in 2025",
     metatitle: "Top 10 Technical Content Writing Service Companies to try in 2025",
@@ -495,7 +495,7 @@ let postMetaData = [
         metaDescription: "Technical writing is a crucial aspect for B2B SaaS companies. Learn about the types of technical writing and why they are relevant for your SaaS product."
 },
     {
-    
+
     title: "Top 10 Free AI Outline Generators in 2025",
         metatitle: "Top 10 Free AI Outline Generators of 2025 for Writing",
         slug: "top-10-free-outline-generators",
@@ -505,9 +505,9 @@ let postMetaData = [
         authorId: "author0004",
         category: "Informational",
         metaDescription: "These Top 10 Free AI Outline Generators can save your time and structure the content more efficiently. The best part? They are available for free!"
- },    
+ },
      {
-    
+
      title: "Why Search Volume isn't the best strategy for B2B SaaS Companies?",
         metatitle: "Why Chasing Search Volume Needs Rethinking in 2025",
         slug: "why-search-volume-fails-b2b-saas",
@@ -529,7 +529,7 @@ let postMetaData = [
         category: "B2B SaaS- Content Marketing",
         metaDescription: "Y Combinator companies utilize content marketing to scale their businesses. Read about the content strategies that help them stay ahead of their competitors."
 },
-     
+
     {
         title: "Content Monitoring: A Comprehensive Guide for SaaS Companies",
         metatitle: "How Content Monitoring Can Help SaaS Companies Grow in 2025",
@@ -554,7 +554,7 @@ let postMetaData = [
         metaDescription: "Product docs are a valuable asset for startups but SaaS explainer videos can significantly boost conversion. Here’s what goes into the video production process."
 },
 
-    
+
     {
         title: "Content Strategy Frameworks Adopted By B2B SaaS Companies",
         metatitle: "Content Strategy Frameworks Adopted By B2B SaaS Companies",
@@ -814,7 +814,7 @@ let postMetaData = [
         category: "Developer Marketing",
         metaDescription: "Built a SaaS product for developers? Discover how Dev Marketing can help you drive real engagement and growth compared to traditional marketing strategies."
     },
-    
+
     {
         title: "SaaS Alert: Stop Mixing Up Changelog vs Release Notes",
         metatitle: "SaaS Alert: Avoid Mixing Up Changelog vs Release Notes",
@@ -862,7 +862,7 @@ let postMetaData = [
         category: "Developer Marketing",
         metaDescription: "Tech writer vs. dev advocate - who gives your B2B SaaS startup the edge? Uncover the impact of each role and make your first hire count. Read the full guide."
     },
-    
+
     {
         title: "5 Whys Every Developer Experience Engineer Should Consider",
         metatitle: "5 Whys Every Developer Experience Engineer Should Consider",
@@ -910,7 +910,7 @@ let postMetaData = [
         category: "Reddit Marketing B2B SaaS",
         metaDescription: "Learn the essential dos and don’ts of Reddit marketing for B2B SaaS startups. Avoid shadowbans, build karma, follow subreddit rules. Read now"
     },
-    
+
     {
         title: "How Do You Get Karma on Reddit​: A Comprehensive Guide",
         metatitle: "How Do You Get Karma on Reddit​: A Comprehensive Guide",
@@ -958,7 +958,7 @@ let postMetaData = [
         category: "Reddit Marketing B2B SaaS",
         metaDescription: "Join these top Reddit communities to promote your B2B SaaS product. However, be mindful of some specific thing that have been discussed in the article."
     },
-   
+
     {
         title: "Top 5 Developer Marketing Agencies For DevTools Startup",
         metatitle: "Top 5 Developer Marketing Agencies for DevTools Startup in 2026",
@@ -1034,7 +1034,7 @@ let postMetaData = [
         slug: "reddit-organic-vs-paid-marketing",
         description: "Learn the differences between organic vs paid traffic on Reddit, and what works best for your B2B SaaS brand. Discover the best way to grow on Reddit.",
         ogImage: "/PostImages/organic-vs-paid-marketing-reddit/organic-vs-paid-marketing-reddit.png",
-        publishedOn: "2025-08-08", 
+        publishedOn: "2025-08-08",
         authorId: "author0005",
         category: "Reddit Marketing B2B SaaS",
         metaDescription: "Learn the differences between organic vs paid traffic on Reddit, and what works best for your B2B SaaS brand. Discover the best way to grow on Reddit."
@@ -1336,7 +1336,7 @@ let postMetaData = [
   metaDescription:
     "Learn how B2B SaaS brands can rank in ChatGPT and AI search. Boost LLM visibility with structured content, NLP optimization, internal linking, and trust signals. Read now",
 },
- 
+
 {
   title: "Best AI Tools for Documentation: A Complete Guide for B2B SaaS Teams",
   metatitle: "Top AI Tools for Documentation | Guide for 2026",
@@ -1539,9 +1539,9 @@ let postMetaData = [
    {
     title: "7 Best Tech Content Marketing Agency",
     metatitle: "7 Best B2B SaaS Tech Content Marketing Agency in 2026",
-    slug: "b2b-tech-content-marketing-agency",
+    slug: "tech-content-marketing-agency",
     description: "This guide breaks down the 7 best tech content marketing agency for B2B SaaS startups. It explains what tech content marketing is, why working with a specialized tech content marketing agency matters, and how to evaluate agencies based on strategy, execution, and measurable outcomes. Designed for CMOs, VPs of Marketing, and Growth Leaders, the blog compares leading agencies supporting SaaS, DevTools, AI, and infrastructure products. It highlights where general content agencies fall short and how developer-focused partners like Infrasity help reduce onboarding friction, improve discoverability, and drive product adoption.",
-    ogImage: "/PostImages/b2b-tech-content-marketing-agency/0.webp",
+    ogImage: "/PostImages/tech-content-marketing-agency/0.png",
     publishedOn: "2026-01-09",
     authorId: "author0005",
     category: "B2B SaaS- Content Marketing",
