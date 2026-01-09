@@ -39,14 +39,6 @@ function getSentiment(upvotes) {
   return "neutral";
 }
 
-function getDateLabel(type) {
-  if (!type) return "Mention Date";
-  const normalized = type.toString().toLowerCase();
-  if (normalized === "comment") return "Comment Date";
-  if (normalized === "post") return "Post Date";
-  return "Mention Date";
-}
-
 const AllThreadsTable = (props) => {
   let threads = [];
   // Prefer props.data, fallback to props.threads if provided
@@ -250,7 +242,7 @@ const AllThreadsTable = (props) => {
                       <div className="flex flex-col text-[11px] leading-tight">
                         <span className="text-xs text-foreground">{thread.age || '—'}</span>
                         <span className="text-[11px] text-foreground-muted">
-                          {thread.createdAtLabel ? `${getDateLabel(thread.type)}: ${thread.createdAtLabel}` : `${getDateLabel(thread.type)} unknown`}
+                          {thread.createdAtLabel ? thread.createdAtLabel : '—'}
                         </span>
                       </div>
                     </div>

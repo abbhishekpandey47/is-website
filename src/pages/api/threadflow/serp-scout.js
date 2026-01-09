@@ -20,6 +20,7 @@ const CONTEXT_TEMPERATURE = 0.25
 const CONTEXT_MAX_TOKENS = 1400
 const KEYWORD_TEMPERATURE = 0.65
 const KEYWORD_MAX_TOKENS = 1024
+const LLM_PROMPTS = Number(process.env.SERP_SCOUT_LLM_PROMPTS) || 2
 const SUPERLATIVE_REGEX = /\b(best|leading|top|premier|world[- ]class|industry[- ]leading|cutting[- ]edge|#1)\b/gi
 const CTA_REGEX = /\b(visit|click|learn more|book (now|a demo)?|download|try now|get started|sign up|subscribe|unlock|schedule)\b/gi
 const defaultConstraints = [
@@ -45,6 +46,16 @@ function ensureDomain(input) {
     .replace(/^https?:\/\//i, '')
     .replace(/\/.*$/, '')
     .replace(/\s+/g, '')
+}
+
+function normalizeUrlForMatch(url) {
+  if (!url) return ''
+  return url
+    .toLowerCase()
+    .replace(/^https?:\/\//i, '')
+    .replace(/\/$/, '')
+    .replace(/^www\./i, '')
+    .trim()
 }
 
 function createDataForSeoAuthHeader() {
@@ -79,7 +90,7 @@ async function fetchViaDataForSeo(domain) {
       'Content-Type': 'application/json',
       Authorization: authHeader
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify([payload])
   })
   console.debug('[serp-scout] DataForSEO task_post status', postResp.status)
   if (!postResp.ok) {
@@ -454,13 +465,13 @@ async function callOpenRouter(messages, temperature = 0.65, max_tokens = 1024) {
 
 async function promptKeywords(payload) {
   const companyName = payload.companyName || payload.domain
-  const prompt = `You are an SEO and LLM visibility expert. Analyze the landing page content and generate EXACTLY 5 high-impact keywords.
+  const prompt = `You are an SEO and LLM visibility expert. Analyze the landing page content and generate EXACTLY ${LLM_PROMPTS} high-impact keywords.
 
 For each keyword, provide:
 1. term: the keyword phrase
 2. intent: search intent (informational/commercial/navigational)
 3. why: brief rationale (max 20 words)
-4. prompts: array of EXACTLY 5 general ranking/comparison prompts that would naturally rank ${companyName} in citations
+4. prompts: array of EXACTLY ${LLM_PROMPTS} general ranking/comparison prompts that would naturally rank ${companyName} in citations
 
 CRITICAL: Generate GENERAL ranking prompts, NOT company-specific questions.
 
@@ -496,7 +507,7 @@ Return JSON with this exact structure:
 
 Page content: ${payload.pageContent.slice(0, 4000)}`
   const messages = [
-    { role: 'system', content: 'You are an SEO and LLM visibility strategist. Generate exactly 5 keywords with 5 prompts each.' },
+    { role: 'system', content: `You are an SEO and LLM visibility strategist. Generate exactly 5 keywords with ${LLM_PROMPTS} prompts each.` },
     { role: 'user', content: prompt }
   ]
   const raw = await callOpenRouter(messages, KEYWORD_TEMPERATURE, 2048)
@@ -508,7 +519,7 @@ Page content: ${payload.pageContent.slice(0, 4000)}`
       // Ensure each keyword has exactly 5 prompts
       json.keywords = json.keywords.map(kw => ({
         ...kw,
-        prompts: Array.isArray(kw.prompts) ? kw.prompts.slice(0, 5) : []
+        prompts: Array.isArray(kw.prompts) ? kw.prompts.slice(0, LLM_PROMPTS) : []
       }))
     }
     return json
@@ -517,6 +528,96 @@ Page content: ${payload.pageContent.slice(0, 4000)}`
   }
 }
 
+
+async function fetchKeywordSerpPosition(keyword, targetDomain, depth = 100) {
+  const authHeader = createDataForSeoAuthHeader()
+  if (!authHeader) {
+    throw new Error('DataForSEO credentials are missing')
+  }
+
+  const payload = {
+    keyword,
+    location_code: 2840, // United States
+    language_code: 'en',
+    device: 'desktop',
+    os: 'windows',
+    depth,
+    group_organic_results: true
+  }
+
+  const resp = await fetch('https://api.dataforseo.com/v3/serp/google/organic/live/advanced', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: authHeader
+    },
+    body: JSON.stringify([payload])
+  })
+
+  if (!resp.ok) {
+    const text = await resp.text()
+    console.error('[serp-scout] DataForSEO live/advanced error', { status: resp.status, text })
+    throw new Error(`DataForSEO request failed: ${resp.status} ${text}`)
+  }
+
+  const json = await resp.json()
+  
+  // Gather all organic items from response
+  let allItems = []
+  if (Array.isArray(json.tasks)) {
+    for (const task of json.tasks) {
+      if (Array.isArray(task.result)) {
+        for (const result of task.result) {
+          if (Array.isArray(result.items)) {
+            allItems = allItems.concat(result.items.filter(item => item.type === 'organic'))
+          }
+        }
+      }
+    }
+  }
+
+  if (!allItems.length) {
+    return { position: null, examined: 0, redditThreads: [] }
+  }
+
+  const normalizedTarget = normalizeUrlForMatch(targetDomain)
+  let domainPosition = null
+  let examined = 0
+  const redditThreads = []
+
+  for (const item of allItems) {
+    const url = item.url || item.domain || ''
+    const rank = typeof item.rank_absolute === 'number' ? item.rank_absolute : item.rank_group
+    
+    if (!url || typeof rank !== 'number') continue
+    examined += 1
+
+    // Check if this is a Reddit thread
+    const isReddit = url.toLowerCase().includes('reddit.com')
+    if (isReddit) {
+      redditThreads.push({
+        title: item.title || '',
+        url: url,
+        snippet: item.snippet || '',
+        position: rank,
+        domain: item.domain || ''
+      })
+    }
+
+    // Check if domain matches
+    let normalizedUrl = normalizeUrlForMatch(url)
+    if (normalizedUrl === normalizedTarget && domainPosition === null) {
+      domainPosition = rank
+      console.debug('[serp-scout] domain match found', { keyword, targetDomain, url, rank })
+    }
+  }
+
+  return { 
+    position: domainPosition, 
+    examined, 
+    redditThreads: redditThreads.slice(0, 10) // Return top 10 Reddit threads
+  }
+}
 async function fetchCompanyById(id) {
   if (!id) return null
   const { data, error } = await supabase
@@ -553,10 +654,23 @@ async function findCompanyByDomain(domain) {
   return null
 }
 
+function needsRefresh(timestamp, hoursOld = 24) {
+  if (!timestamp) return true
+  const age = Date.now() - new Date(timestamp).getTime()
+  return age > hoursOld * 60 * 60 * 1000
+}
+
 async function generateCompanyContext(domain, companyId, companyName, forceContext, existingPages = null) {
   const stored = companyId ? await getCompanyContext(companyId) : null
+  
+  // Keywords and overview are permanent - only regenerate if forced or never generated
   if (stored && !forceContext) {
-    return { ...stored, companyName, companyId, domain }
+    console.log('[serp-scout] using existing company context and keywords (permanent)', { 
+      companyId, 
+      domain,
+      hasKeywords: Boolean(stored.approvedContext?.keywords?.length)
+    })
+    return { ...stored, companyName, companyId, domain, fromCache: true }
   }
   // Use existing pages if provided to avoid re-scraping
   const pages = existingPages || await scrapeDomainPages(domain)
@@ -624,7 +738,7 @@ export async function resolveCompanyIdBySlug(slug) {
 }
 
 async function saveKeywords(companyId, domain, keywords, userId, companyName) {
-  console.log('[serp-scout] saveKeywords called', { companyId, domain, keywordCount: keywords?.length, userId, companyName })
+  console.log('[serp-scout] saveKeywords called - PERMANENT save', { companyId, domain, keywordCount: keywords?.length, userId, companyName })
   
   if (!companyId) {
     // Auto-create company if name is provided
@@ -649,12 +763,15 @@ async function saveKeywords(companyId, domain, keywords, userId, companyName) {
     domain: domain || context?.domain,
     metadata: {
       ...(context?.metadata || {}),
-      keywordsUpdatedAt: new Date().toISOString()
+      companyName,
+      keywordsSavedAt: new Date().toISOString(),
+      keywordsGenerated: true
     },
     llmContext: context?.llmContext,
     approvedContext: {
       ...(context?.approvedContext || {}),
-      keywords: keywords
+      keywords: keywords,
+      serpAnalysis: context?.approvedContext?.serpAnalysis || {} // Preserve SERP analysis cache
     }
   }
   const result = await saveCompanyContext(companyId, updatedContext)
@@ -662,11 +779,69 @@ async function saveKeywords(companyId, domain, keywords, userId, companyName) {
     console.warn('[serp-scout] saveCompanyContext returned null; falling back to local save semantics')
     return { saved: true, local: true, companyId, domain, keywords }
   }
-  return { ...result, companyId, saved: true }
+  
+  // Return full saved data from DB
+  const savedContext = await getCompanyContext(companyId)
+  return { 
+    ...result, 
+    companyId, 
+    saved: true,
+    permanent: true,
+    fullContext: savedContext
+  }
+}
+
+async function saveSerpAnalysis(companyId, keyword, serpData) {
+  if (!companyId) return null
+  
+  const context = await getCompanyContext(companyId)
+  if (!context) return null
+  
+  const serpAnalysis = context.approvedContext?.serpAnalysis || {}
+  serpAnalysis[keyword] = {
+    ...serpData,
+    analyzedAt: new Date().toISOString(),
+    expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+  }
+  
+  const updatedContext = {
+    domain: context.domain,
+    metadata: context.metadata,
+    llmContext: context.llmContext,
+    approvedContext: {
+      ...context.approvedContext,
+      serpAnalysis
+    }
+  }
+  
+  const result = await saveCompanyContext(companyId, updatedContext)
+  return result
+}
+
+async function getSerpAnalysis(companyId, keyword) {
+  if (!companyId || !keyword) return null
+  
+  const context = await getCompanyContext(companyId)
+  if (!context?.approvedContext?.serpAnalysis?.[keyword]) return null
+  
+  const analysis = context.approvedContext.serpAnalysis[keyword]
+  
+  // Check if expired (24 hours)
+  if (needsRefresh(analysis.analyzedAt, 24)) {
+    console.log('[serp-scout] SERP analysis expired, needs refresh', { keyword, age: analysis.analyzedAt })
+    return null
+  }
+  
+  console.log('[serp-scout] returning cached SERP analysis', { 
+    keyword, 
+    analyzedAt: analysis.analyzedAt,
+    expiresAt: analysis.expiresAt
+  })
+  return analysis
 }
 
 async function testCitations(prompts, domain) {
-  const citationApiUrl = process.env.CITATION_API_URL || 'http://127.0.0.1:8000/cite'
+  const citationApiUrl = 'https://geo-citations.onrender.com/cite'
   try {
     const resp = await fetch(citationApiUrl, {
       method: 'POST',
@@ -707,7 +882,7 @@ export default async function handler(req, res) {
     companyName: bodyCompanyName
   } = req.body || {}
 
-  // Handle save keywords action
+  // Handle save keywords action (PERMANENT save, not time-limited)
   if (action === 'saveKeywords') {
     if (!bodyKeywords) {
       return res.status(400).json({ error: 'keywords are required' })
@@ -717,9 +892,17 @@ export default async function handler(req, res) {
       const result = await saveKeywords(companyId, rawDomain, bodyKeywords, userCtx.userId, bodyCompanyName)
       return res.status(200).json({ 
         success: true, 
-        message: result.companyId ? 'Keywords saved to database' : (result.local ? 'Keywords processed successfully' : 'Keywords saved to database'),
+        message: result.companyId 
+          ? 'Keywords and overview saved permanently to database' 
+          : (result.local ? 'Keywords processed successfully' : 'Keywords saved permanently'),
         saved: result,
-        companyId: result.companyId
+        companyId: result.companyId,
+        context: result.fullContext,
+        keywords: result.fullContext?.approvedContext?.keywords || bodyKeywords,
+        domain: result.domain || rawDomain,
+        permanent: true,
+        savedAt: new Date().toISOString(),
+        note: 'Keywords are saved permanently and will not be regenerated. Use SERP analysis to check positions (cached 24hrs).'
       })
     } catch (error) {
       return res.status(500).json({ error: error.message })
@@ -746,7 +929,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'keyword, companyName, and domain are required' })
     }
     try {
-      const promptText = `Generate EXACTLY 5 general ranking/comparison prompts for the keyword "${keyword}" (intent: ${intent || 'informational'}).
+      const promptText = `Generate EXACTLY ${LLM_PROMPTS} general ranking/comparison prompts for the keyword "${keyword}" (intent: ${intent || 'informational'}).
 
 CRITICAL: Generate GENERAL ranking prompts, NOT company-specific questions. These should be prompts where LLMs would naturally mention "${companyName}" in their answer/rankings.
 
@@ -764,8 +947,8 @@ Examples of WRONG prompts (do NOT generate - company-specific):
 
 The prompts should be broad enough that when LLMs rank solutions, they naturally include ${companyName}.
 
-Return ONLY a JSON array of 5 general ranking prompts:
-["prompt 1", "prompt 2", "prompt 3", "prompt 4", "prompt 5"]`
+Return ONLY a JSON array of ${LLM_PROMPTS} general ranking prompts:
+${JSON.stringify(Array.from({ length: LLM_PROMPTS }, (_, i) => `prompt ${i + 1}`))}`
 
       const messages = [
         { role: 'system', content: `You are an SEO expert. Generate general ranking/comparison prompts that would naturally surface "${companyName}" in LLM recommendations.` },
@@ -777,17 +960,18 @@ Return ONLY a JSON array of 5 general ranking prompts:
       let prompts = []
       try {
         const json = JSON.parse(extractJsonFromText(raw))
-        prompts = Array.isArray(json) ? json.slice(0, 5) : []
+        prompts = Array.isArray(json) ? json.slice(0, LLM_PROMPTS) : []
       } catch (parseError) {
         console.error('[serp-scout] failed to parse LLM response, using fallback prompts', parseError.message)
         // Fallback: generate ranking prompts
-        prompts = [
+        const base = [
           `Top 5 ${keyword} solutions`,
           `Best platforms for ${keyword}`,
           `Which ${keyword} tools are best for startups?`,
           `Top alternatives in the ${keyword} space`,
           `Best ${keyword} services and platforms 2024`
         ]
+        prompts = base.slice(0, LLM_PROMPTS)
       }
       
       return res.status(200).json({ success: true, prompts })
@@ -803,6 +987,73 @@ Return ONLY a JSON array of 5 general ranking prompts:
     }
   }
 
+  if (action === 'keywordSerp') {
+    const { keyword, domain, companyId: requestCompanyId } = req.body
+    if (!keyword) {
+      return res.status(400).json({ error: 'keyword is required' })
+    }
+    if (!domain) {
+      return res.status(400).json({ error: 'domain is required' })
+    }
+    
+    try {
+      const targetDomain = ensureDomain(domain)
+      
+      // Check if we have cached SERP analysis for this keyword (24hr cache)
+      if (requestCompanyId) {
+        const cachedAnalysis = await getSerpAnalysis(requestCompanyId, keyword)
+        if (cachedAnalysis) {
+          console.log('[serp-scout] returning cached SERP analysis', { keyword, companyId: requestCompanyId })
+          return res.status(200).json({
+            success: true,
+            keyword,
+            domain: targetDomain,
+            position: cachedAnalysis.position,
+            examined: cachedAnalysis.examined,
+            redditThreads: cachedAnalysis.redditThreads,
+            hasRedditMentions: cachedAnalysis.hasRedditMentions,
+            fromCache: true,
+            analyzedAt: cachedAnalysis.analyzedAt,
+            expiresAt: cachedAnalysis.expiresAt
+          })
+        }
+      }
+      
+      // Fetch fresh SERP data
+      console.log('[serp-scout] fetching fresh SERP data', { keyword, domain: targetDomain })
+      const serpData = await fetchKeywordSerpPosition(keyword, targetDomain, 100)
+      
+      // Save SERP analysis for 24hr cache
+      if (requestCompanyId) {
+        await saveSerpAnalysis(requestCompanyId, keyword, {
+          position: serpData.position,
+          examined: serpData.examined,
+          redditThreads: serpData.redditThreads,
+          hasRedditMentions: serpData.redditThreads.length > 0
+        })
+      }
+      
+      return res.status(200).json({ 
+        success: true, 
+        keyword,
+        domain: targetDomain,
+        position: serpData.position,
+        examined: serpData.examined,
+        redditThreads: serpData.redditThreads,
+        hasRedditMentions: serpData.redditThreads.length > 0,
+        fromCache: false,
+        analyzedAt: new Date().toISOString(),
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+      })
+    } catch (error) {
+      console.error('[serp-scout] keyword SERP failed', error.message)
+      if (error.message.includes('429') || error.message.includes('Rate limit')) {
+        return res.status(429).json({ error: 'DataForSEO rate limit exceeded', message: 'Please retry shortly.' })
+      }
+      return res.status(500).json({ error: error.message })
+    }
+  }
+
   const domain = ensureDomain(rawDomain)
   if (!domain) {
     return res.status(400).json({ error: 'domain is required' })
@@ -810,9 +1061,45 @@ Return ONLY a JSON array of 5 general ranking prompts:
 
   // Only use company ID if explicitly provided by user (optional)
   const requestedCompanyId = bodyCompanyId ?? null
-  const resolvedCompanyId = requestedCompanyId
+  let resolvedCompanyId = requestedCompanyId
+
+  // If no company ID provided, try to find by domain
+  if (!resolvedCompanyId && !forceContext) {
+    const foundCompany = await findCompanyByDomain(domain)
+    if (foundCompany) {
+      resolvedCompanyId = foundCompany.id
+      console.log('[serp-scout] found existing company by domain', { domain, companyId: resolvedCompanyId, companyName: foundCompany.name })
+    }
+  }
 
   console.log('[serp-scout] company association', { domain, requestedCompanyId, resolvedCompanyId, isIndependent: !resolvedCompanyId })
+
+  // Check if keywords already exist for this company (permanent data, not time-limited)
+  if (resolvedCompanyId && !forceContext) {
+    const existingContext = await getCompanyContext(resolvedCompanyId)
+    const existingKeywords = existingContext?.approvedContext?.keywords || []
+    
+    if (existingKeywords.length > 0) {
+      console.log('[serp-scout] returning existing keywords and overview (PERMANENT)', {
+        companyId: resolvedCompanyId,
+        domain,
+        keywordCount: existingKeywords.length,
+        savedAt: existingContext.metadata?.keywordsSavedAt || existingContext.generatedAt
+      })
+      return res.status(200).json({
+        success: true,
+        domain: existingContext.domain || domain,
+        companyId: resolvedCompanyId,
+        companyName: existingContext.metadata?.companyName || domain,
+        keywords: existingKeywords,
+        explain: null,
+        companyContext: existingContext,
+        fromExisting: true,
+        savedAt: existingContext.metadata?.keywordsSavedAt || existingContext.generatedAt,
+        message: 'Keywords and overview already exist. Use SERP analysis to check positions.'
+      })
+    }
+  }
 
   // Scrape domain pages to extract content and company name
   let pages
@@ -863,6 +1150,7 @@ Return ONLY a JSON array of 5 general ranking prompts:
     keywordCount: keywords?.keywords?.length
   })
 
+  const responseTimestamp = new Date().toISOString()
   return res.status(200).json({
     success: true,
     domain,
@@ -871,6 +1159,9 @@ Return ONLY a JSON array of 5 general ranking prompts:
     keywords: keywords?.keywords || [],
     explain: keywords?.explain || null,
     companyContext,
-    contextError
+    contextError,
+    firstTimeGeneration: true,
+    generatedAt: responseTimestamp,
+    note: 'Keywords generated for the first time. Save them to avoid regeneration. Use SERP analysis to check positions.'
   })
 }

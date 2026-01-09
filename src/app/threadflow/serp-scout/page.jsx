@@ -18,11 +18,11 @@ import {
   ChevronRight,
   Check,
   Sparkles,
-  Target,
-  Edit2,
-  Save,
   AlertCircle,
   CheckCircle,
+  Search,
+  MessageSquare,
+  Zap,
 } from "lucide-react";
 
 const formatDateTime = (value) => {
@@ -38,8 +38,9 @@ const formatDateTime = (value) => {
 };
 
 export default function SerpScoutPage() {
-  // Step tracking: 1=domain, 2=overview, 3=keywords, 4=save/test
+  // Flow: 1=domain, 2=overview, 3=keywords (locked), 4=save, 5=analysis
   const [currentStep, setCurrentStep] = useState(1);
+  const [analysisTab, setAnalysisTab] = useState(null); // 'citations', 'serp', 'reddit'
 
   // Form data
   const [domain, setDomain] = useState("");
@@ -47,11 +48,18 @@ export default function SerpScoutPage() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState("");
 
-  // Step 1 results
+  // Keywords and context (read-only after generation)
   const [rawResult, setRawResult] = useState(null);
   const [companyContext, setCompanyContext] = useState(null);
+  const [keywords, setKeywords] = useState([]);
+  const [isKeywordsSaved, setIsKeywordsSaved] = useState(false);
+  const [isExistingData, setIsExistingData] = useState(false); // true if loaded from DB
 
-  // Step 2: Company context editing
+  // Keyword editing (before save)
+  const [suggestingPromptsIdx, setSuggestingPromptsIdx] = useState(null);
+  const [suggestingPromptsLoading, setSuggestingPromptsLoading] = useState(false);
+
+  // Company context form
   const [editingContext, setEditingContext] = useState(false);
   const [contextForm, setContextForm] = useState({
     companySummary: "",
@@ -60,19 +68,18 @@ export default function SerpScoutPage() {
     constraints: [],
   });
 
-  // Step 3: Keywords
-  const [keywords, setKeywords] = useState([]);
-  const [editingKeywordIdx, setEditingKeywordIdx] = useState(null);
-  const [suggestingPrompts, setSuggestingPrompts] = useState(false);
-
-  // Step 4: Save/Test
-  const [isSaving, setIsSaving] = useState(false);
-  const [testingCitations, setTestingCitations] = useState(false);
+  // Analysis state
+  const [selectedKeywordIdx, setSelectedKeywordIdx] = useState(null);
+  const [serpResults, setSerpResults] = useState({}); // { [keyword]: { position, redditThreads, ... } }
+  const [serpLoading, setSerpLoading] = useState(false);
   const [citationResults, setCitationResults] = useState(null);
+  const [citationLoading, setCitationLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const trimmedDomain = domain.trim();
+  const selectedKeyword = selectedKeywordIdx !== null ? keywords[selectedKeywordIdx] : null;
 
-  // STEP 1: Fetch domain
+  // STEP 1: Fetch domain and generate keywords
   const handleFetchDomain = async (e) => {
     e.preventDefault();
     if (!trimmedDomain) return;
@@ -94,46 +101,41 @@ export default function SerpScoutPage() {
 
       const data = await res.json();
       if (!res.ok) {
-        // Handle rate limit errors with user-friendly message
         if (res.status === 429) {
-          throw new Error(
-            data.message || "API rate limit exceeded. Please try again later.",
-          );
+          throw new Error(data.message || "API rate limit exceeded. Please try again later.");
         }
         throw new Error(data.error || "Failed to scout domain");
       }
 
       setRawResult(data);
-      console.log("[frontend] After domain fetch, rawResult contains:", {
-        companyName: data.companyName,
-        companyId: data.companyId,
-        domain: data.domain,
-      });
       setCompanyContext(data.companyContext);
-      setKeywords(data.keywords || []);
 
-      // Explicitly ensure companyName is available for later use
-      if (data.companyName) {
-        console.log("[frontend] ✓ Company name captured:", data.companyName);
-      } else {
-        console.warn("[frontend] ⚠️  No company name in response");
-      }
+      const normalizedKeywords = (data.keywords || []).map((keyword) => ({
+        ...keyword,
+        prompts: Array.isArray(keyword.prompts) ? keyword.prompts : [],
+      }));
+      setKeywords(normalizedKeywords);
 
-      // Initialize context form for editing
       if (data.companyContext?.approvedContext) {
         setContextForm({
-          companySummary:
-            data.companyContext.approvedContext.companySummary || "",
-          coreCapabilities:
-            data.companyContext.approvedContext.coreCapabilities || [],
-          problemSpaces:
-            data.companyContext.approvedContext.problemSpaces || [],
+          companySummary: data.companyContext.approvedContext.companySummary || "",
+          coreCapabilities: data.companyContext.approvedContext.coreCapabilities || [],
+          problemSpaces: data.companyContext.approvedContext.problemSpaces || [],
           constraints: data.companyContext.approvedContext.constraints || [],
         });
       }
 
-      setSuccess("✓ Domain fetched successfully");
-      setCurrentStep(2);
+      // Check if this is existing data from DB
+      if (data.fromExisting) {
+        setIsExistingData(true);
+        setIsKeywordsSaved(true);
+        setSuccess("✓ Keywords loaded from database. Ready for analysis.");
+        setCurrentStep(5); // Jump to analysis
+      } else {
+        setIsExistingData(false);
+        setSuccess("✓ Keywords generated! Review and save to continue.");
+        setCurrentStep(2);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -141,20 +143,16 @@ export default function SerpScoutPage() {
     }
   };
 
-  // STEP 2: Approve or edit company context
-  const handleApproveContext = async () => {
-    setSuccess("✓ Company overview approved! Moving to keywords...");
+  // STEP 2: Approve context
+  const handleApproveContext = () => {
+    setSuccess("✓ Overview approved! Reviewing keywords...");
     setTimeout(() => {
       setSuccess("");
       setCurrentStep(3);
     }, 1500);
   };
 
-  const handleEditContextField = (field, value) => {
-    setContextForm((prev) => ({ ...prev, [field]: value }));
-  };
-
-  // STEP 3: Review/edit keywords
+  // STEP 3: Approve keywords (locked, read-only)
   const handleApproveKeywords = () => {
     setSuccess("✓ Keywords approved! Ready to save...");
     setTimeout(() => {
@@ -163,80 +161,8 @@ export default function SerpScoutPage() {
     }, 1500);
   };
 
-  const handleEditKeyword = (idx) => {
-    setEditingKeywordIdx(idx);
-  };
-
-  const handleUpdateKeyword = (idx, field, value) => {
-    const updated = [...keywords];
-    updated[idx] = { ...updated[idx], [field]: value };
-    setKeywords(updated);
-  };
-
-  const handleUpdatePrompt = (keywordIdx, promptIdx, value) => {
-    const updated = [...keywords];
-    updated[keywordIdx].prompts[promptIdx] = value;
-    setKeywords(updated);
-  };
-
-  const handleSuggestNewPrompts = async (keywordIdx) => {
-    const keyword = keywords[keywordIdx];
-    if (!keyword.term) {
-      setError("Please enter a keyword term first");
-      return;
-    }
-
-    setSuggestingPrompts(true);
-    setError("");
-
-    try {
-      const token = await auth.currentUser?.getIdToken?.();
-      const res = await fetch("/api/threadflow/serp-scout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          action: "suggestPrompts",
-          keyword: keyword.term,
-          intent: keyword.intent,
-          companyName: rawResult?.companyName || trimmedDomain,
-          domain: trimmedDomain,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        if (res.status === 429) {
-          throw new Error(
-            data.message || "API rate limit exceeded. Please try again later.",
-          );
-        }
-        throw new Error(data.error || "Failed to suggest prompts");
-      }
-
-      // Update the keyword with new prompts
-      const updated = [...keywords];
-      updated[keywordIdx].prompts = data.prompts || [];
-      setKeywords(updated);
-      setSuccess("✓ New prompts suggested!");
-      setTimeout(() => setSuccess(""), 2000);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setSuggestingPrompts(false);
-    }
-  };
-
-  // STEP 4: Save keywords and test citations
+  // STEP 4: Save keywords permanently
   const handleSaveKeywords = async () => {
-    console.log('[frontend] Saving keywords with:', { 
-      companyId: rawResult?.companyId, 
-      companyName: rawResult?.companyName,
-      domain: trimmedDomain,
-      keywordCount: keywords.length 
-    })
     setIsSaving(true);
     setError("");
     try {
@@ -259,12 +185,16 @@ export default function SerpScoutPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to save");
 
-      // Update rawResult with new companyId if created
       if (data.companyId && !rawResult?.companyId) {
         setRawResult((prev) => ({ ...prev, companyId: data.companyId }));
       }
 
-      setSuccess(data.message || "✓ Keywords saved successfully!");
+      setIsKeywordsSaved(true);
+      setSuccess("✓ Keywords saved permanently! Moving to analysis...");
+      setTimeout(() => {
+        setSuccess("");
+        setCurrentStep(5);
+      }, 1500);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -272,14 +202,55 @@ export default function SerpScoutPage() {
     }
   };
 
+  // STEP 5: Analysis - SERP/Reddit/Citations
+  const handleAnalyzeSerpForKeyword = async () => {
+    if (!selectedKeyword?.term) return;
+
+    setSerpLoading(true);
+    try {
+      const token = await auth.currentUser?.getIdToken?.();
+      const res = await fetch("/api/threadflow/serp-scout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          action: "keywordSerp",
+          keyword: selectedKeyword.term,
+          domain: trimmedDomain,
+          companyId: rawResult?.companyId || null,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to fetch SERP");
+
+      setSerpResults((prev) => ({
+        ...prev,
+        [selectedKeyword.term]: data,
+      }));
+
+      setSuccess(
+        data.fromCache
+          ? "✓ Loaded cached SERP (updates in 24hrs)"
+          : "✓ Fresh SERP analysis complete!"
+      );
+      setTimeout(() => setSuccess(""), 3000);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSerpLoading(false);
+    }
+  };
+
   const handleTestCitations = async () => {
-    const allPrompts = keywords.flatMap((kw) => kw.prompts || []);
-    if (!allPrompts.length) {
-      setError("No prompts to test");
+    if (!selectedKeyword?.prompts?.length) {
+      setError("No prompts available for this keyword");
       return;
     }
 
-    setTestingCitations(true);
+    setCitationLoading(true);
     try {
       const token = await auth.currentUser?.getIdToken?.();
       const res = await fetch("/api/threadflow/serp-scout", {
@@ -290,22 +261,76 @@ export default function SerpScoutPage() {
         },
         body: JSON.stringify({
           action: "testCitations",
-          prompts: allPrompts.slice(0, 10),
+          prompts: selectedKeyword.prompts.slice(0, 10),
           domain: trimmedDomain,
         }),
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to test");
+      if (!res.ok) throw new Error(data.error || "Failed to test citations");
 
       setCitationResults(data.citations);
-      setSuccess("✓ Citation test completed!");
+      setSuccess("✓ Citation analysis complete!");
+      setTimeout(() => setSuccess(""), 3000);
     } catch (err) {
       setError(err.message);
     } finally {
-      setTestingCitations(false);
+      setCitationLoading(false);
     }
   };
+
+  // Keyword editing handlers (before save)
+  const handleUpdateKeyword = (idx, field, value) => {
+    const updated = [...keywords];
+    updated[idx] = { ...updated[idx], [field]: value };
+    setKeywords(updated);
+  };
+
+  const handleSuggestPrompts = async (keywordIdx) => {
+    const keyword = keywords[keywordIdx];
+    if (!keyword.term) {
+      setError("Keyword term is required before suggesting prompts");
+      return;
+    }
+
+    setSuggestingPromptsIdx(keywordIdx);
+    setSuggestingPromptsLoading(true);
+    setError("");
+    try {
+      const token = await auth.currentUser?.getIdToken?.();
+      const res = await fetch("/api/threadflow/serp-scout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          action: "suggestPrompts",
+          keyword: keyword.term,
+          intent: keyword.intent,
+          companyName: rawResult?.companyName || domain,
+          domain: trimmedDomain,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to suggest prompts");
+
+      const updated = [...keywords];
+      updated[keywordIdx].prompts = data.prompts || [];
+      setKeywords(updated);
+
+      setSuccess("✓ New prompts suggested!");
+      setTimeout(() => setSuccess(""), 3000);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSuggestingPromptsLoading(false);
+      setSuggestingPromptsIdx(null);
+    }
+  };
+
+  const keywordSerpData = selectedKeyword ? serpResults[selectedKeyword.term] : null;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -314,14 +339,14 @@ export default function SerpScoutPage() {
           <div className="flex items-center gap-3">
             <SidebarTrigger className="h-8 w-8" />
             <div>
-              <h1 className="text-xl font-semibold">Serp Scout</h1>
+              <h1 className="text-xl font-semibold">SERP Scout</h1>
               <p className="text-sm text-muted-foreground">
-                Sequential domain analysis: fetch → review → approve → save
+                Generate keywords → Save → Analyze SERP, Citations & Reddit
               </p>
             </div>
           </div>
           <Badge variant="outline" className="text-xs">
-            Step {currentStep} of 4
+            {isExistingData ? "🔒 Saved Data - Analysis Only" : `Step ${currentStep} of 5`}
           </Badge>
         </div>
       </header>
@@ -329,14 +354,15 @@ export default function SerpScoutPage() {
       <main className="px-4 py-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl space-y-6">
           {/* STEP INDICATOR */}
-          <div className="flex items-center justify-between rounded-lg border border-border bg-card/50 p-4">
+          <div className="flex items-center gap-2 rounded-lg border border-border bg-card/50 p-4 overflow-x-auto">
             {[
               { step: 1, label: "Domain", icon: "🌐" },
               { step: 2, label: "Overview", icon: "📋" },
               { step: 3, label: "Keywords", icon: "⚡" },
               { step: 4, label: "Save", icon: "💾" },
+              { step: 5, label: "Analyze", icon: "🔍" },
             ].map((item, idx) => (
-              <div key={item.step} className="flex items-center gap-3">
+              <div key={item.step} className="flex items-center gap-2 flex-shrink-0">
                 <div
                   className={`flex items-center justify-center w-10 h-10 rounded-full font-semibold text-sm transition ${
                     currentStep >= item.step
@@ -344,25 +370,23 @@ export default function SerpScoutPage() {
                       : "bg-muted text-muted-foreground border border-border"
                   }`}
                 >
-                  {currentStep > item.step ? (
-                    <Check className="h-5 w-5" />
-                  ) : (
-                    item.step
-                  )}
+                  {currentStep > item.step ? <Check className="h-5 w-5" /> : item.step}
                 </div>
-                <div className="hidden sm:block">
-                  <p className="text-xs font-medium">{item.label}</p>
-                </div>
-                {idx < 3 && (
+                <p className="text-xs font-medium hidden sm:block whitespace-nowrap">
+                  {item.label}
+                </p>
+                {idx < 4 && (
                   <ChevronRight
-                    className={`h-4 w-4 ${currentStep > item.step ? "text-emerald-500" : "text-muted-foreground"}`}
+                    className={`h-4 w-4 flex-shrink-0 ${
+                      currentStep > item.step ? "text-emerald-500" : "text-muted-foreground"
+                    }`}
                   />
                 )}
               </div>
             ))}
           </div>
 
-          {/* ERROR ALERT */}
+          {/* ERROR & SUCCESS */}
           {error && (
             <div className="rounded-lg border border-red-400/50 bg-red-500/10 p-4 flex gap-3 items-start">
               <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
@@ -373,7 +397,6 @@ export default function SerpScoutPage() {
             </div>
           )}
 
-          {/* SUCCESS ALERT */}
           {success && (
             <div className="rounded-lg border border-green-400/50 bg-green-500/10 p-4 flex gap-3 items-start">
               <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -381,395 +404,501 @@ export default function SerpScoutPage() {
             </div>
           )}
 
-          {/* STEP 1: DOMAIN INPUT */}
+          {/* STEP 1: DOMAIN */}
           {currentStep >= 1 && (
-            <Card
-              className={
-                currentStep === 1 ? "border-emerald-500/50 shadow-lg" : ""
-              }
-            >
+            <Card className={currentStep === 1 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <span>🌐</span> Step 1: Enter Domain
                 </CardTitle>
                 <CardDescription>
-                  Paste a landing page URL to analyze company positioning and
-                  generate strategic keywords
+                  Analyze your domain to generate strategic keywords and market positioning
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <form
-                  onSubmit={handleFetchDomain}
-                  className="flex flex-col gap-3"
-                >
+                <form onSubmit={handleFetchDomain} className="flex flex-col gap-3">
                   <Input
                     placeholder="example.com"
                     value={domain}
                     onChange={(e) => setDomain(e.target.value)}
-                    disabled={loading || currentStep > 1}
+                    disabled={loading || currentStep > 1 || isExistingData}
                     className="text-base"
                   />
-                  {currentStep === 1 && (
+                  {currentStep === 1 && !isExistingData && (
                     <Button type="submit" disabled={loading} className="w-full">
-                      {loading ? "Analyzing..." : "Fetch Domain & Analyze"}
+                      {loading ? "Analyzing..." : "Fetch Domain & Generate Keywords"}
                     </Button>
                   )}
                 </form>
                 {currentStep > 1 && (
-                  <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-3 flex items-center gap-2">
-                    <Check className="h-4 w-4 text-emerald-600" />
-                    <p className="text-sm text-emerald-700 font-medium">
-                      Domain analyzed: {trimmedDomain}
-                    </p>
+                  <div className={`rounded-lg border p-3 flex items-center gap-2 ${
+                    isExistingData 
+                      ? "bg-blue-500/10 border-blue-500/30" 
+                      : "bg-emerald-500/10 border-emerald-500/30"
+                  }`}>
+                    {isExistingData ? (
+                      <>
+                        <span className="text-lg">🔒</span>
+                        <p className="text-sm font-medium text-blue-700">
+                          Domain loaded from database: {trimmedDomain}
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <Check className="h-4 w-4 text-emerald-600" />
+                        <p className="text-sm text-emerald-700 font-medium">
+                          Domain analyzed: {trimmedDomain}
+                        </p>
+                      </>
+                    )}
                   </div>
                 )}
               </CardContent>
             </Card>
           )}
 
-          {/* STEP 2: COMPANY CONTEXT REVIEW */}
-          {currentStep >= 2 && companyContext && (
-            <Card
-              className={
-                currentStep === 2 ? "border-emerald-500/50 shadow-lg" : ""
-              }
-            >
+          {/* STEP 2: OVERVIEW */}
+          {!isExistingData && currentStep >= 2 && companyContext && (
+            <Card className={currentStep === 2 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      <span>📋</span> Step 2: Review Company Overview
+                      <span>📋</span> Step 2: Company Overview
                     </CardTitle>
                     <CardDescription>
-                      AI-generated analysis from landing page. Approve or edit
-                      before proceeding.
+                      Review AI-generated company analysis
                     </CardDescription>
                   </div>
-                  {currentStep > 2 && (
-                    <Check className="h-5 w-5 text-emerald-600" />
-                  )}
+                  {currentStep > 2 && <Check className="h-5 w-5 text-emerald-600" />}
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 {!editingContext ? (
-                  <div className="space-y-4">
+                  <>
                     <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
                       <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                        Company Summary
+                        Summary
                       </p>
                       <p className="text-sm leading-relaxed">
-                        {contextForm.companySummary || "No summary available"}
+                        {contextForm.companySummary || "No summary"}
                       </p>
                     </div>
 
                     <div className="grid gap-4 md:grid-cols-2">
                       <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
-                        <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                          Core Capabilities (
-                          {contextForm.coreCapabilities.length})
+                        <p className="text-xs font-semibold text-muted-foreground">
+                          Capabilities ({contextForm.coreCapabilities.length})
                         </p>
                         <ul className="space-y-1">
                           {contextForm.coreCapabilities.map((cap, idx) => (
-                            <li key={idx} className="text-sm text-foreground">
-                              • {cap}
-                            </li>
+                            <li key={idx} className="text-sm">• {cap}</li>
                           ))}
                         </ul>
                       </div>
-
                       <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
-                        <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                          Problem Spaces ({contextForm.problemSpaces.length})
+                        <p className="text-xs font-semibold text-muted-foreground">
+                          Problems ({contextForm.problemSpaces.length})
                         </p>
                         <ul className="space-y-1">
                           {contextForm.problemSpaces.map((prob, idx) => (
-                            <li key={idx} className="text-sm text-foreground">
-                              • {prob}
-                            </li>
+                            <li key={idx} className="text-sm">• {prob}</li>
                           ))}
                         </ul>
                       </div>
                     </div>
 
                     {currentStep === 2 && (
-                      <div className="flex gap-3 pt-4">
-                        <Button
-                          onClick={() => setEditingContext(true)}
-                          variant="outline"
-                          className="flex-1"
-                        >
-                          <Edit2 className="h-4 w-4 mr-2" /> Edit
-                        </Button>
-                        <Button
-                          onClick={handleApproveContext}
-                          className="flex-1"
-                        >
-                          <Check className="h-4 w-4 mr-2" /> Looks Good,
-                          Continue
-                        </Button>
-                      </div>
+                      <Button onClick={handleApproveContext} className="w-full">
+                        <Check className="h-4 w-4 mr-2" /> Approve & Continue
+                      </Button>
                     )}
-                  </div>
+                  </>
                 ) : (
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                        Company Summary
-                      </label>
+                      <label className="text-xs font-semibold">Summary</label>
                       <Textarea
                         value={contextForm.companySummary}
                         onChange={(e) =>
-                          handleEditContextField(
-                            "companySummary",
-                            e.target.value,
-                          )
+                          setContextForm((prev) => ({
+                            ...prev,
+                            companySummary: e.target.value,
+                          }))
                         }
                         className="min-h-[80px]"
                       />
                     </div>
-
-                    <div className="flex gap-3">
-                      <Button
-                        onClick={() => setEditingContext(false)}
-                        variant="outline"
-                        className="flex-1"
-                      >
-                        Done Editing
-                      </Button>
-                      <Button onClick={handleApproveContext} className="flex-1">
-                        <Check className="h-4 w-4 mr-2" /> Save & Continue
-                      </Button>
-                    </div>
+                    <Button onClick={handleApproveContext} className="w-full">
+                      Save & Continue
+                    </Button>
                   </div>
                 )}
               </CardContent>
             </Card>
           )}
 
-          {/* STEP 3: KEYWORDS REVIEW */}
-          {currentStep >= 3 && keywords.length > 0 && (
-            <Card
-              className={
-                currentStep === 3 ? "border-emerald-500/50 shadow-lg" : ""
-              }
-            >
+          {/* STEP 3: KEYWORDS (EDITABLE) */}
+          {!isExistingData && currentStep >= 3 && (
+            <Card className={currentStep === 3 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      <span>⚡</span> Step 3: Review Keywords & Prompts
+                      <span>⚡</span> Step 3: Review Keywords
                     </CardTitle>
                     <CardDescription>
-                      {keywords.length} keywords with 5 prompts each. Edit or
-                      approve to save.
+                      {keywords.length} keywords - edit and suggest new prompts if needed
                     </CardDescription>
                   </div>
-                  {currentStep > 3 && (
-                    <Check className="h-5 w-5 text-emerald-600" />
-                  )}
+                  {currentStep > 3 && <Check className="h-5 w-5 text-emerald-600" />}
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 {keywords.map((keyword, idx) => (
-                  <div
-                    key={idx}
-                    className="rounded-lg border border-border bg-card/50 p-4 space-y-3"
-                  >
-                    {editingKeywordIdx === idx ? (
-                      <div className="space-y-3">
-                        <Input
-                          value={keyword.term}
-                          onChange={(e) =>
-                            handleUpdateKeyword(idx, "term", e.target.value)
-                          }
-                          placeholder="Keyword"
-                          className="font-semibold"
-                        />
-                        <Input
-                          value={keyword.intent}
-                          onChange={(e) =>
-                            handleUpdateKeyword(idx, "intent", e.target.value)
-                          }
-                          placeholder="Intent"
-                        />
-                        <Textarea
-                          value={keyword.why}
-                          onChange={(e) =>
-                            handleUpdateKeyword(idx, "why", e.target.value)
-                          }
-                          placeholder="Why this keyword?"
-                          className="min-h-[60px] text-sm"
-                        />
-                        <div className="space-y-2">
-                          <div className="flex items-center justify-between">
-                            <p className="text-xs font-semibold text-muted-foreground">
-                              Prompts:
-                            </p>
-                            <Button
-                              onClick={() => handleSuggestNewPrompts(idx)}
-                              disabled={suggestingPrompts}
-                              variant="ghost"
-                              size="sm"
-                            >
-                              <Sparkles className="h-3 w-3 mr-1" />
-                              {suggestingPrompts
-                                ? "Suggesting..."
-                                : "Suggest New Prompts"}
-                            </Button>
-                          </div>
-                          {keyword.prompts.map((prompt, pIdx) => (
-                            <Textarea
-                              key={pIdx}
-                              value={prompt}
-                              onChange={(e) =>
-                                handleUpdatePrompt(idx, pIdx, e.target.value)
-                              }
-                              placeholder={`Prompt ${pIdx + 1}`}
-                              className="text-sm min-h-[50px]"
-                            />
-                          ))}
-                        </div>
-                        <Button
-                          onClick={() => setEditingKeywordIdx(null)}
-                          variant="outline"
-                          size="sm"
-                        >
-                          Done Editing
-                        </Button>
-                      </div>
-                    ) : (
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <h3 className="font-semibold text-base">
-                              {keyword.term}
-                            </h3>
-                            <p className="text-xs text-muted-foreground">
-                              {keyword.intent}
-                            </p>
-                            <p className="text-sm text-foreground mt-1">
-                              {keyword.why}
-                            </p>
-                          </div>
-                          {currentStep === 3 && (
-                            <Button
-                              onClick={() => handleEditKeyword(idx)}
-                              size="sm"
-                              variant="outline"
-                            >
-                              <Edit2 className="h-3 w-3" />
-                            </Button>
-                          )}
-                        </div>
+                  <div key={idx} className="rounded-lg border border-border bg-card/50 p-4 space-y-3">
+                    {/* Editable keyword fields */}
+                    <div className="space-y-2">
+                      <input
+                        type="text"
+                        value={keyword.term}
+                        onChange={(e) => handleUpdateKeyword(idx, "term", e.target.value)}
+                        className="w-full bg-background border border-border rounded px-2 py-1 text-sm font-semibold"
+                      />
+                      <select
+                        value={keyword.intent}
+                        onChange={(e) => handleUpdateKeyword(idx, "intent", e.target.value)}
+                        className="w-full bg-background border border-border rounded px-2 py-1 text-xs"
+                      >
+                        <option value="commercial">Commercial</option>
+                        <option value="informational">Informational</option>
+                      </select>
+                      <textarea
+                        value={keyword.why}
+                        onChange={(e) => handleUpdateKeyword(idx, "why", e.target.value)}
+                        placeholder="Why this keyword matters..."
+                        className="w-full bg-background border border-border rounded px-2 py-1 text-xs min-h-[50px]"
+                      />
+                    </div>
 
-                        <div className="pl-4 space-y-2 border-l-2 border-border">
-                          <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                            LLM Prompts (5)
-                          </p>
-                          {keyword.prompts.map((prompt, pIdx) => (
-                            <div key={pIdx} className="text-sm text-foreground">
-                              <Badge
-                                variant="secondary"
-                                className="mr-2 text-xs"
-                              >
-                                {pIdx + 1}
-                              </Badge>
-                              {prompt}
-                            </div>
-                          ))}
-                        </div>
+                    {/* Prompts with suggest button */}
+                    <div className="pt-2 space-y-2 border-t border-border/30">
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs font-semibold text-muted-foreground">
+                          Prompts ({keyword.prompts.length})
+                        </p>
+                        {currentStep === 3 && (
+                          <Button
+                            variant="outline"
+                            size="xs"
+                            onClick={() => handleSuggestPrompts(idx)}
+                            disabled={suggestingPromptsLoading}
+                            className="text-xs h-7"
+                          >
+                            {suggestingPromptsLoading && suggestingPromptsIdx === idx
+                              ? "Suggesting..."
+                              : "✨ Suggest Prompts"}
+                          </Button>
+                        )}
                       </div>
-                    )}
+
+                      <div className="space-y-1">
+                        {keyword.prompts.map((prompt, pIdx) => (
+                          <div key={pIdx} className="text-xs text-foreground/70 pl-2">
+                            {pIdx + 1}. {prompt}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 ))}
 
                 {currentStep === 3 && (
                   <Button onClick={handleApproveKeywords} className="w-full">
-                    <Check className="h-4 w-4 mr-2" /> Keywords Look Good,
-                    Continue
+                    <Check className="h-4 w-4 mr-2" /> Approve Keywords & Continue
                   </Button>
                 )}
               </CardContent>
             </Card>
           )}
 
-          {/* STEP 4: SAVE & TEST */}
-          {currentStep >= 4 && (
-            <Card
-              className={
-                currentStep === 4 ? "border-emerald-500/50 shadow-lg" : ""
-              }
-            >
+          {/* STEP 4: SAVE */}
+          {!isExistingData && currentStep >= 4 && (
+            <Card className={currentStep === 4 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <span>💾</span> Step 4: Save Keywords & Test Citations
-                </CardTitle>
-                <CardDescription>
-                  Save your keywords to the database and test against citation
-                  API
-                </CardDescription>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="flex items-center gap-2">
+                      <span>💾</span> Step 4: Save Keywords
+                    </CardTitle>
+                    <CardDescription>
+                      Save keywords permanently to database
+                    </CardDescription>
+                  </div>
+                  {currentStep > 4 && <Check className="h-5 w-5 text-emerald-600" />}
+                </div>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-3 sm:grid-cols-2">
+              <CardContent>
+                {currentStep === 4 && (
                   <Button
                     onClick={handleSaveKeywords}
                     disabled={isSaving}
-                    className="flex-1"
+                    className="w-full"
                   >
-                    <Save className="h-4 w-4 mr-2" />
-                    {isSaving
-                      ? "Saving..."
-                      : rawResult?.companyId
-                        ? "Save to Database"
-                        : "Export Keywords"}
+                    <Check className="h-4 w-4 mr-2" />
+                    {isSaving ? "Saving..." : "Save Keywords Permanently"}
                   </Button>
-                  <Button
-                    onClick={handleTestCitations}
-                    disabled={testingCitations}
-                    variant="outline"
-                    className="flex-1"
-                  >
-                    <Sparkles className="h-4 w-4 mr-2" />
-                    {testingCitations ? "Testing..." : "Test Citations"}
-                  </Button>
-                </div>
-
-                {citationResults && (
-                  <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-3">
-                    <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                      Citation Test Results
+                )}
+                {isKeywordsSaved && (
+                  <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-4 text-center">
+                    <p className="text-sm font-semibold text-emerald-700">
+                      ✓ Keywords saved! Ready for analysis.
                     </p>
-                    <div className="space-y-2 text-sm">
-                      {citationResults.records?.map((record, idx) => (
-                        <div
-                          key={idx}
-                          className="rounded bg-card/50 p-2 text-xs"
-                        >
-                          <p className="font-medium">{record.model}</p>
-                          {record.results?.map((res, rIdx) => (
-                            <div
-                              key={rIdx}
-                              className="text-muted-foreground mt-1"
-                            >
-                              {res.matches?.length > 0 ? (
-                                <p className="text-green-600">
-                                  ✓ {res.prompt}: Found at rank(s){" "}
-                                  {res.matches[0].ranks.join(",")}
-                                </p>
-                              ) : (
-                                <p className="text-amber-600">
-                                  ✗ {res.prompt}: Not found
-                                </p>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 )}
               </CardContent>
             </Card>
+          )}
+
+          {/* STEP 5: ANALYSIS */}
+          {currentStep >= 5 && (
+            <div className="space-y-6">
+              {/* Keyword Selector */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <span>🔍</span> Step 5: Analyze Keywords
+                  </CardTitle>
+                  <CardDescription>
+                    Select a keyword to search SERP, citations, and Reddit mentions
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+                    {keywords.map((keyword, idx) => (
+                      <Button
+                        key={idx}
+                        variant={selectedKeywordIdx === idx ? "default" : "outline"}
+                        className="text-left justify-start h-auto py-3 px-4"
+                        onClick={() => {
+                          setSelectedKeywordIdx(idx);
+                          setAnalysisTab(null);
+                        }}
+                      >
+                        <div className="flex flex-col gap-1">
+                          <p className="font-semibold text-sm">{keyword.term}</p>
+                          <p className="text-xs text-muted-foreground">{keyword.intent}</p>
+                        </div>
+                      </Button>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Analysis Tabs */}
+              {selectedKeyword && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">
+                      Analysis for: <span className="text-emerald-600">{selectedKeyword.term}</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {/* Tab Buttons */}
+                    <div className="flex gap-2 mb-6 border-b border-border pb-4">
+                      <Button
+                        variant={analysisTab === "serp" ? "default" : "ghost"}
+                        size="sm"
+                        onClick={() => setAnalysisTab("serp")}
+                        className="flex items-center gap-2"
+                      >
+                        <Search className="h-4 w-4" />
+                        SERP Threads
+                      </Button>
+                      <Button
+                        variant={analysisTab === "citations" ? "default" : "ghost"}
+                        size="sm"
+                        onClick={() => setAnalysisTab("citations")}
+                        className="flex items-center gap-2"
+                      >
+                        <Sparkles className="h-4 w-4" />
+                        Citations
+                      </Button>
+                    </div>
+
+                    {/* SERP Tab */}
+                    {analysisTab === "serp" && (
+                      <div className="space-y-4">
+                        <Button
+                          onClick={handleAnalyzeSerpForKeyword}
+                          disabled={serpLoading}
+                          className="w-full"
+                        >
+                          {serpLoading ? "Analyzing..." : "Search SERP & Reddit"}
+                        </Button>
+
+                        {keywordSerpData && (
+                          <div className="space-y-4">
+                            <div className="rounded-lg bg-muted/40 border border-border p-4">
+                              <p className="text-sm font-semibold mb-2">
+                                Position: {keywordSerpData.position || "Not ranked"}
+                              </p>
+                              <p className="text-xs text-muted-foreground">
+                                Examined {keywordSerpData.examined} results
+                                {keywordSerpData.fromCache && " (cached)"}
+                              </p>
+                            </div>
+
+                            {keywordSerpData.redditThreads?.length > 0 && (
+                              <div className="space-y-3">
+                                <p className="text-sm font-semibold flex items-center gap-2">
+                                  <MessageSquare className="h-4 w-4" />
+                                  {keywordSerpData.redditThreads.length} Reddit Threads Found
+                                </p>
+                                {keywordSerpData.redditThreads.slice(0, 5).map((thread, idx) => (
+                                  <div key={idx} className="rounded-lg border border-border/50 bg-card/30 p-3 space-y-2">
+                                    <div className="flex items-start justify-between gap-2">
+                                      <p className="font-semibold text-sm text-foreground">
+                                        #{thread.position} {thread.title}
+                                      </p>
+                                    </div>
+                                    <p className="text-xs text-foreground/70 line-clamp-2">
+                                      {thread.snippet}
+                                    </p>
+                                    <a
+                                      href={thread.url}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      className="text-xs text-emerald-600 hover:underline"
+                                    >
+                                      View thread →
+                                    </a>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
+                            {keywordSerpData.redditThreads?.length === 0 && (
+                              <p className="text-sm text-muted-foreground italic">
+                                No Reddit threads found in top Google results for this keyword
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Citations Tab */}
+                    {analysisTab === "citations" && (
+                      <div className="space-y-4">
+                        <Button
+                          onClick={handleTestCitations}
+                          disabled={citationLoading}
+                          className="w-full"
+                        >
+                          {citationLoading ? "Testing..." : "Test LLM Citations"}
+                        </Button>
+
+                        {citationResults && (
+                          <div className="space-y-6">
+                            {/* Group by prompt */}
+                            {selectedKeyword?.prompts?.map((prompt, pIdx) => {
+                              const promptResults = citationResults.records?.map(record => {
+                                const result = record.results?.find(r => r.prompt === prompt)
+                                return {
+                                  model: record.model,
+                                  timestamp: record.timestamp,
+                                  result
+                                }
+                              }) || []
+
+                              return (
+                                <div key={pIdx} className="space-y-3 border-b border-border pb-4 last:border-b-0">
+                                  <div className="sticky top-0 bg-card/80 backdrop-blur-sm py-2">
+                                    <p className="text-sm font-semibold text-foreground">
+                                      {pIdx + 1}. {prompt}
+                                    </p>
+                                  </div>
+
+                                  <div className="space-y-2">
+                                    {promptResults.map((item, idx) => {
+                                      const match = item.result?.matches?.[0]
+                                      const rank = match?.ranks?.[0]
+                                      const hasMatch = match && rank
+
+                                      return (
+                                        <div
+                                          key={idx}
+                                          className={`rounded-lg border p-3 ${
+                                            hasMatch
+                                              ? "border-green-500/30 bg-green-500/5"
+                                              : "border-amber-500/30 bg-amber-500/5"
+                                          }`}
+                                        >
+                                          <div className="flex items-start justify-between gap-3">
+                                            <div className="flex-1">
+                                              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                                                {item.model}
+                                              </p>
+                                            </div>
+                                            {hasMatch ? (
+                                              <div className="flex items-center gap-2">
+                                                <span className="text-2xl font-bold text-green-600">
+                                                  #{rank}
+                                                </span>
+                                                <span className="text-xs text-green-600 font-medium">
+                                                  ✓ RANKED
+                                                </span>
+                                              </div>
+                                            ) : (
+                                              <div className="flex items-center gap-2">
+                                                <span className="text-xs text-amber-600 font-medium">
+                                                  ✗ NOT FOUND
+                                                </span>
+                                              </div>
+                                            )}
+                                          </div>
+
+                                          {/* Show domain details if matched */}
+                                          {hasMatch && match?.domain && (
+                                            <div className="mt-2 pt-2 border-t border-green-500/20">
+                                              <p className="text-xs text-green-700">
+                                                📍 Domain: <span className="font-mono font-semibold">{match.domain}</span>
+                                              </p>
+                                              {match?.cited_urls?.length > 0 && (
+                                                <p className="text-xs text-green-700 mt-1">
+                                                  🔗 Cited from: {match.cited_urls.join(", ")}
+                                                </p>
+                                              )}
+                                            </div>
+                                          )}
+                                        </div>
+                                      )
+                                    })}
+                                  </div>
+                                </div>
+                              )
+                            })}
+                          </div>
+                        )}
+
+                        {!citationResults && !citationLoading && (
+                          <p className="text-sm text-muted-foreground italic text-center py-6">
+                            Click "Test LLM Citations" to analyze ranking potential
+                          </p>
+                        )}
+                      </div>
+                    )}
+
+                    {!analysisTab && (
+                      <p className="text-sm text-muted-foreground text-center py-6">
+                        Select a tab above to start analysis
+                      </p>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+            </div>
           )}
         </div>
       </main>

@@ -6,7 +6,7 @@ import { createClient } from '@supabase/supabase-js';
 export const config = { runtime: 'nodejs', maxDuration: 300 };
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
-const API_BASE = process.env.THREADFLOW_API_BASE || 'http://localhost:8000';
+const API_BASE = 'https://reddit-comment-gen.onrender.com';
 const toISOStringSafe = (value) => {
   if (value === undefined || value === null) return null;
   const date = new Date(value);
@@ -56,7 +56,7 @@ export default async function handler(req, res) {
       }
     }
   // Cap upstream timeout to ensure we finish well within function limit; prefer smaller chunks + multiple invocations
-  const TIMEOUT_MS = parseInt(process.env.REDDIT_FETCH_TIMEOUT_MS || '110000', 10);
+  const TIMEOUT_MS = parseInt(process.env.REDDIT_FETCH_TIMEOUT_MS || '1100000', 10);
     console.log('[reddit_fetch_v2] env', { supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL?.slice(0,30)+'...', serviceKeyPresent: !!process.env.SUPABASE_SERVICE_ROLE_KEY, timeoutMs: TIMEOUT_MS });
     let emptyBatches = 0;
     while (batches < batchLimit) {
