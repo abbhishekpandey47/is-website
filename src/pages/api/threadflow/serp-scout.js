@@ -471,24 +471,23 @@ For each keyword, provide:
 1. term: the keyword phrase
 2. intent: search intent (informational/commercial/navigational)
 3. why: brief rationale (max 20 words)
-4. prompts: array of EXACTLY ${LLM_PROMPTS} general ranking/comparison prompts that would naturally rank ${companyName} in citations
+4. prompts: array of EXACTLY ${LLM_PROMPTS} ranking/comparison prompts (Top N / Best / Alternatives / Compare / Rank) that would naturally lead LLMs to list multiple solutions and include ${companyName} in citations
 
-CRITICAL: Generate GENERAL ranking prompts, NOT company-specific questions.
+CRITICAL: Prompts MUST be ranking/comparison oriented. DO NOT generate generic Q&A or company-specific questions.
 
-Examples of CORRECT prompts (general "top best" style - would naturally show ${companyName} in rankings/citations):
-- "Top 5 B2B SaaS content marketing agencies"
-- "Best platforms for developer content marketing"
-- "Which technical content writing services are best for startups?"
-- "Top content marketing solutions for DevTools companies"
-- "Best agencies specializing in technical documentation"
-- "What are the top alternatives for [category]?"
-- "Best tools for [specific use case]"
-- "Top [category] platforms 2024"
+GOOD prompt patterns (list-style, ranking/comparison):
+- "Top 10 ${companyName ? '[category]' : ''} platforms for ${payload.companyName ? 'enterprises' : 'professional teams'}"
+- "Best ${companyName ? '[category]' : ''} tools for startups in 2026"
+- "Compare leading ${companyName ? '[category]' : ''} solutions: features and pricing"
+- "Alternatives to leading ${companyName ? '[category]' : ''} platforms"
+- "Rank ${companyName ? '[category]' : ''} providers by integration depth"
 
-Examples of WRONG prompts (do NOT generate these - these are company-specific, not ranking):
-- "What is the ROI of content marketing with ${companyName}?" ❌
-- "How does ${companyName} approach content marketing?" ❌
-- "Can ${companyName} help my startup?" ❌
+BAD prompt patterns (do NOT generate):
+- "What is ${keyword}?" ❌
+- "How to do ${keyword}?" ❌
+- "Guide to ${keyword}" ❌
+- "Is ${companyName} the best ${keyword}?" ❌
+- "Does ${companyName} support ${keyword}?" ❌
 
 The ranking prompts should be broad enough that when LLMs answer them, they naturally include ${companyName} in their rankings and recommendations.
 
@@ -634,23 +633,54 @@ async function fetchCompanyById(id) {
 
 async function findCompanyByDomain(domain) {
   if (!domain) return null
-  const patterns = [
-    domain,
-    `${domain},%`,
-    `%, ${domain}`,
-    `%,${domain}`,
-    `%, ${domain},%`,
-    `%,${domain},%`
-  ]
-  for (const pattern of patterns) {
-    const { data } = await supabase
+  const normalized = normalizeUrlForMatch(domain)
+
+  // 1) Try exact match on normalized domain
+  try {
+    const { data: exact } = await supabase
       .from('companies')
       .select('id, name, name_normalized, domain')
-      .ilike('domain', pattern)
-      .limit(1)
+      .eq('domain', normalized)
       .maybeSingle()
-    if (data) return data
-  }
+    if (exact) {
+      console.log('[serp-scout] exact domain match', { search: normalized, stored: exact.domain, companyId: exact.id })
+      return exact
+    }
+  } catch (_) {}
+
+  // 2) Try common variant with www prefix
+  try {
+    const { data: www } = await supabase
+      .from('companies')
+      .select('id, name, name_normalized, domain')
+      .eq('domain', `www.${normalized}`)
+      .maybeSingle()
+    if (www) {
+      console.log('[serp-scout] www domain match', { search: normalized, stored: www.domain, companyId: www.id })
+      return www
+    }
+  } catch (_) {}
+
+  // 3) Fallback: find candidates containing the normalized domain string,
+  //    then validate by splitting and normalizing each stored domain token.
+  try {
+    const { data: candidates } = await supabase
+      .from('companies')
+      .select('id, name, name_normalized, domain')
+      .ilike('domain', `%${normalized}%`)
+      .limit(5)
+    if (Array.isArray(candidates)) {
+      for (const c of candidates) {
+        const raw = (c.domain || '').split(',')
+        const tokens = raw.map(s => normalizeUrlForMatch(s))
+        if (tokens.includes(normalized) || tokens.includes(`www.${normalized}`)) {
+          console.log('[serp-scout] validated fallback domain match', { search: normalized, stored: c.domain, companyId: c.id })
+          return c
+        }
+      }
+    }
+  } catch (_) {}
+
   return null
 }
 
@@ -929,26 +959,30 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'keyword, companyName, and domain are required' })
     }
     try {
-      const promptText = `Generate EXACTLY ${LLM_PROMPTS} general ranking/comparison prompts for the keyword "${keyword}" (intent: ${intent || 'informational'}).
+      const promptText = `You are generating prompts that force LLMs to produce ranked or comparative lists, not general Q&A.
 
-CRITICAL: Generate GENERAL ranking prompts, NOT company-specific questions. These should be prompts where LLMs would naturally mention "${companyName}" in their answer/rankings.
+    INSTRUCTIONS:
+    - Generate EXACTLY ${LLM_PROMPTS} prompts for the keyword "${keyword}" (intent: ${intent || 'informational'}).
+    - Each prompt MUST be ranking/comparison oriented (e.g., "Top N", "Best", "Alternatives", "Compare", "Rank") and should naturally lead to listing multiple solutions.
+    - Include an explicit number (e.g., Top 5/10) or an explicit ranking/comparison instruction.
+    - DO NOT ask generic informational questions (e.g., "What is...", "How to...", "Guide to...").
+    - DO NOT mention ${companyName} directly or any specific brand; prompts must be neutral and broad.
+    - Prompts should be phrased so that LLM answers can naturally include ${companyName} when ranking.
 
-Examples of CORRECT prompts (general "top best" style):
-- "Top 5 B2B SaaS content marketing agencies"
-- "Best platforms for ${keyword.replace(/[^a-z0-9]/gi, ' ')}"
-- "Which ${keyword} solutions are best for startups?"
-- "Top alternatives for ${keyword}"
-- "Best ${keyword} tools and platforms"
+    GOOD prompt patterns:
+    - "Top 10 ${keyword} platforms for enterprises"
+    - "Best ${keyword} tools for startups in 2026"
+    - "Compare leading ${keyword} solutions: features and pricing"
+    - "Alternatives to leading ${keyword} platforms"
+    - "Rank ${keyword} providers by integration depth"
 
-Examples of WRONG prompts (do NOT generate - company-specific):
-- "Is ${companyName} the best choice?" ❌
-- "How does ${companyName} compare?" ❌
-- "Does ${companyName} support...?" ❌
+    BAD prompt patterns:
+    - "Is ${companyName} the best ${keyword}?" ❌
+    - "Does ${companyName} support ${keyword}?" ❌
+    - "What is ${keyword}?" ❌
 
-The prompts should be broad enough that when LLMs rank solutions, they naturally include ${companyName}.
-
-Return ONLY a JSON array of ${LLM_PROMPTS} general ranking prompts:
-${JSON.stringify(Array.from({ length: LLM_PROMPTS }, (_, i) => `prompt ${i + 1}`))}`
+    Return ONLY a strict JSON array of ${LLM_PROMPTS} strings. No prose, no code fences, no keys. Example:
+    ["Top 10 ${keyword} platforms","Best ${keyword} tools","Compare ${keyword} solutions","Alternatives to ${keyword}","Rank ${keyword} providers"]`
 
       const messages = [
         { role: 'system', content: `You are an SEO expert. Generate general ranking/comparison prompts that would naturally surface "${companyName}" in LLM recommendations.` },
