@@ -7,6 +7,12 @@ export const config = { runtime: 'nodejs', maxDuration: 300 };
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 const API_BASE = 'https://reddit-comment-gen.onrender.com';
+const toISOStringSafe = (value) => {
+  if (value === undefined || value === null) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
+};
+const isoFromAgeHours = (hours) => (typeof hours === 'number' ? new Date(Date.now() - hours * 3600 * 1000).toISOString() : null);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -50,7 +56,7 @@ export default async function handler(req, res) {
       }
     }
   // Cap upstream timeout to ensure we finish well within function limit; prefer smaller chunks + multiple invocations
-  const TIMEOUT_MS = parseInt(process.env.REDDIT_FETCH_TIMEOUT_MS || '110000', 10);
+  const TIMEOUT_MS = parseInt(process.env.REDDIT_FETCH_TIMEOUT_MS || '1100000', 10);
     console.log('[reddit_fetch_v2] env', { supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL?.slice(0,30)+'...', serviceKeyPresent: !!process.env.SUPABASE_SERVICE_ROLE_KEY, timeoutMs: TIMEOUT_MS });
     let emptyBatches = 0;
     while (batches < batchLimit) {
@@ -109,7 +115,10 @@ export default async function handler(req, res) {
           url,
           upvotes: typeof p.upvotes === 'number' ? p.upvotes : 0,
           total_comments: typeof p.total_comments === 'number' ? p.total_comments : 0,
-      created_utc: p.post_age_hours ? new Date(Date.now() - p.post_age_hours * 3600 * 1000).toISOString() : new Date().toISOString(),
+        created_utc:
+          toISOStringSafe(p.post_created_at) ??
+          isoFromAgeHours(p.post_age_hours) ??
+          new Date().toISOString(),
           engagement_score: (p.upvotes || 0) + (p.total_comments || 0)
         });
       });
@@ -127,7 +136,10 @@ export default async function handler(req, res) {
           url,
           upvotes: typeof c.upvotes === 'number' ? c.upvotes : 0,
           total_comments: null,
-          created_utc: c.post_age_hours ? new Date(Date.now() - c.post_age_hours * 3600 * 1000).toISOString() : new Date().toISOString(),
+          created_utc:
+            toISOStringSafe(c.comment_created_at) ??
+            isoFromAgeHours(c.post_age_hours) ??
+            new Date().toISOString(),
           engagement_score: c.upvotes || 0
         });
       });
