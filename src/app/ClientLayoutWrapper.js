@@ -1,6 +1,7 @@
 'use client';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { Analytics } from '@vercel/analytics/react';
+import mixpanel from "mixpanel-browser";
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
@@ -12,7 +13,6 @@ import { Loader } from '../Components/Loader';
 import Navbar from '../Components/Navbar/Navbar';
 import { Appwrap } from '../context';
 import { initMixpanel } from "../lib/mixpanel";
-import mixpanel from "mixpanel-browser";
 
 export function ClientLayoutWrapper({ children }) {
   const [mounted, setMounted] = useState(false);
@@ -43,12 +43,14 @@ export function ClientLayoutWrapper({ children }) {
   const CrispWithNoSSR = dynamic(() => import("../Components/chatbot"));
 
   const pathname = usePathname();
-  
+
   // Add safety check for pathname
   const safePathname = pathname || '';
-  
+
   const hideNavbar =
     safePathname === "/technical-writing-services-b2b-saas" ||
+    safePathname.startsWith("/lp/developer-marketing-agency") ||
+    safePathname.startsWith("/lp/reddit-marketing-agency") ||
     safePathname.startsWith("/threadflow") ||
     safePathname.startsWith("/auth");
   const hideNavBar2 =
@@ -60,7 +62,7 @@ export function ClientLayoutWrapper({ children }) {
     safePathname === "/tools/reddit-tools" ||
     safePathname.startsWith("/auth") ||
     safePathname.startsWith("/threadflow");
-  
+
   const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2 && safePathname !== "/careers";
   const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar;
 
