@@ -63,7 +63,15 @@ export function ClientLayoutWrapper({ children }) {
     safePathname.startsWith("/auth") ||
     safePathname.startsWith("/threadflow");
 
-  const shouldShowAwardBanner = !hideNavBarAndFooter && !hideNavBar2 && safePathname !== "/careers";
+  const hideAwardBanner =
+    safePathname.startsWith("/lp/developer-marketing-agency") ||
+    safePathname.startsWith("/lp/reddit-marketing-agency");
+
+  const shouldShowAwardBanner =
+    !hideAwardBanner &&
+    !hideNavBarAndFooter &&
+    !hideNavBar2 &&
+    safePathname !== "/careers";
   const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar;
 
   return (
