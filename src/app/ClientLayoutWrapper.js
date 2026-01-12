@@ -6,7 +6,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import dynamic from 'next/dynamic';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import AwardBanner from '../Components/HomePage/awardwinner';
 import Footer from '../Components/HomePage/Footer';
 import { Loader } from '../Components/Loader';
@@ -81,48 +81,50 @@ export function ClientLayoutWrapper({ children }) {
   const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar && !isAdsApp;
 
   return (
-    <>
-      {/* <CrispWithNoSSR /> */}
-      <Script
-        id="koala-tracking"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(t){var k="ko",i=(window.globalKoalaKey=window.globalKoalaKey||k);if(window[i])return;var ko=(window[i]=[]);["identify","track","removeListeners","on","off","qualify","ready"].forEach(function(t){ko[t]=function(){var n=[].slice.call(arguments);return n.unshift(t),ko.push(n),ko}});var n=document.createElement("script");n.async=!0,n.setAttribute("src","https://cdn.getkoala.com/v1/pk_ccda6b50f34963a28c2f035673b27491be24/sdk.js"),(document.body || document.head).appendChild(n)}();
-          `,
-        }}
-      />
+    <Suspense fallback={null}>
+      <>
+        {/* <CrispWithNoSSR /> */}
+        <Script
+          id="koala-tracking"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(t){var k="ko",i=(window.globalKoalaKey=window.globalKoalaKey||k);if(window[i])return;var ko=(window[i]=[]);["identify","track","removeListeners","on","off","qualify","ready"].forEach(function(t){ko[t]=function(){var n=[].slice.call(arguments);return n.unshift(t),ko.push(n),ko}});var n=document.createElement("script");n.async=!0,n.setAttribute("src","https://cdn.getkoala.com/v1/pk_ccda6b50f34963a28c2f035673b27491be24/sdk.js"),(document.body || document.head).appendChild(n)}();
+            `,
+          }}
+        />
 
-      {!mounted ? (
-        <div style={{ visibility: 'hidden' }}>
-          <Appwrap>
-            <AntdRegistry>
-              {children}
-            </AntdRegistry>
-          </Appwrap>
-        </div>
-      ) : (
-      <NextThemesProvider
-        attribute="class"
-        defaultTheme="dark"
-          enableSystem={false}
-        disableTransitionOnChange
-      >
-        <Appwrap>
-          <AntdRegistry>
-            <Loader />
+        {!mounted ? (
+          <div style={{ visibility: 'hidden' }}>
+            <Appwrap>
+              <AntdRegistry>
+                {children}
+              </AntdRegistry>
+            </Appwrap>
+          </div>
+        ) : (
+          <NextThemesProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            <Appwrap>
+              <AntdRegistry>
+                <Loader />
 
-            {shouldShowAwardBanner && <AwardBanner />}
+                {shouldShowAwardBanner && <AwardBanner />}
 
-            {shouldShowNavbar && <Navbar />}
+                {shouldShowNavbar && <Navbar />}
 
-            {children}
-            <Analytics />
-            {!hideNavBarAndFooter && <Footer />}
-          </AntdRegistry>
-        </Appwrap>
-      </NextThemesProvider>
-      )}
-    </>
+                {children}
+                <Analytics />
+                {!hideNavBarAndFooter && <Footer />}
+              </AntdRegistry>
+            </Appwrap>
+          </NextThemesProvider>
+        )}
+      </>
+    </Suspense>
   );
 }
