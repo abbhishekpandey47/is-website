@@ -16,6 +16,7 @@ const CalendarBooking = ({
   borderColor = "#3b82f6", // Default border color
   onClick,
   Design,
+  href = "/contact"
 }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
@@ -513,7 +514,7 @@ const CalendarBooking = ({
     hover:before:-translate-x-40
     ${Design === "faq" ? "text-[#5F64FF] text-lg" : ""}
   `}
-        href="/contact"
+        href={href}
       >
         <span className="text-center w-full">{buttonText}</span>
       </Link>

@@ -4,7 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import mixpanel from "mixpanel-browser";
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import dynamic from 'next/dynamic';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import AwardBanner from '../Components/HomePage/awardwinner';
@@ -43,21 +43,25 @@ export function ClientLayoutWrapper({ children }) {
   const CrispWithNoSSR = dynamic(() => import("../Components/chatbot"));
 
   const pathname = usePathname();
-
-  // Add safety check for pathname
+  const searchParams = useSearchParams();
   const safePathname = pathname || '';
+  const appParam = searchParams?.get('app');
+  const isAdsApp = appParam === 'ads';
 
   const hideNavbar =
     safePathname === "/technical-writing-services-b2b-saas" ||
     safePathname.startsWith("/lp/developer-marketing-agency") ||
     safePathname.startsWith("/lp/reddit-marketing-agency") ||
     safePathname.startsWith("/threadflow") ||
-    safePathname.startsWith("/auth");
+    safePathname.startsWith("/auth")
+
   const hideNavBar2 =
     safePathname === "/services/webflow-agency" ||
     safePathname.startsWith("/threadflow") ||
     safePathname.startsWith("/auth");
+
   const hideNavBar3 = safePathname === "/tools/reddit-comment-generator";
+
   const hideNavBarAndFooter =
     safePathname === "/tools/reddit-tools" ||
     safePathname.startsWith("/auth") ||
@@ -71,8 +75,10 @@ export function ClientLayoutWrapper({ children }) {
     !hideAwardBanner &&
     !hideNavBarAndFooter &&
     !hideNavBar2 &&
-    safePathname !== "/careers";
-  const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar;
+    safePathname !== "/careers" &&
+    !(safePathname === "/contact" && isAdsApp);
+
+  const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar && !isAdsApp;
 
   return (
     <>

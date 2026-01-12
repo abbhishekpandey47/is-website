@@ -103,7 +103,7 @@ export default function AIStartupLanding() {
                     <div className="flex flex-col items-center">
                         {/* Center - Book a Demo button */}
                         <div className="flex flex-col items-center">
-                            <CalendarBooking />
+                            <CalendarBooking href={"/contact?app=ads"} />
                         </div>
                     </div>
                 </div>

@@ -43,7 +43,7 @@ export default function Hero() {
                    <div className="mt-6 flex flex-col items-center justify-center gap-y-8">
                <div className="mt-10 gap-4 justify-center items-center">
                  <Link
-                   href="/contact"
+                   href="/contact?app=ads"
                    className="group relative inline-flex rounded-full p-px text-sm/6 text-zinc-400 duration-300 hover:text-zinc-100 hover:shadow-glow"
                  >
                    <span className="absolute inset-0 overflow-hidden rounded-full">

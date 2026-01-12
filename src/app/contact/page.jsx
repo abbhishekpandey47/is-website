@@ -648,7 +648,7 @@ const CalendarBooking = () => {
 
     return (
         <div className="h-full">
-            <div className="w-full mt-36 items-center justify-center">
+            <div className="w-full pt-36 items-center justify-center">
                 <div className="w-full text-white rounded-xl p-8 flex flex-col items-center">
                     <h1 className="text-5xl text-center font-bold mb-4">Schedule a Free Demo</h1>
                     <span className="text-center text-gray-400 mb-8">
