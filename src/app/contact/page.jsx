@@ -331,7 +331,7 @@ const CalendarBooking = () => {
 
     const goToUserInfo = () => {
         if (selectedTime) {
-            setStep(3);
+            setStep(4);
         }
     };
 
@@ -439,19 +439,12 @@ const CalendarBooking = () => {
         }
     };
 
-    const handleBookingSubmit = async (e) => {
-        e.preventDefault();
-        const valid = await validateUserInfo();
-        if (!valid) return;
-
+    // Final submit handler (step 3): submit to HubSpot (with slot info)
+    const handleFinalSubmit = async () => {
         setIsSubmitting(true);
-
-        // Ensure selectedTime is in 'HH:MM AM/PM' format for API
         function to12HourFormat(time) {
             if (!time) return "";
-            // If already in correct format, return as is
             if (/^\d{1,2}:\d{2} (AM|PM)$/i.test(time.trim())) return time.trim();
-            // Try to parse 24h or other formats
             let [h, m] = (time.split(":")[0] || "").split(":");
             if (!h || !m) {
                 const parts = time.match(/(\d{1,2}):(\d{2})/);
@@ -469,82 +462,45 @@ const CalendarBooking = () => {
             if (hour12 === 0) hour12 = 12;
             return `${hour12}:${m.toString().padStart(2, "0")} ${period}`;
         }
-
         const bookingData = {
             date: dateString,
             time: to12HourFormat(selectedTime),
             ...userInfo,
         };
-
         const hubspotEndpoint =
             "https://api.hsforms.com/submissions/v3/integration/submit/242717777/1bcf066f-9c19-430d-b3b2-a3f05aa671d7";
-
         const payload = {
             fields: [
-                {
-                    name: "firstname",
-                    value: userInfo.firstName || "",
-                },
-                {
-                    name: "lastname",
-                    value: userInfo.lastName || "",
-                },
-                {
-                    name: "email",
-                    value: userInfo.email || "",
-                },
-                {
-                    name: "phone_number1",
-                    value: (userInfo.countryCode || "") + " " + (userInfo.phoneNumber || ""),
-                },
-                {
-                    name: "message",
-                    value: userInfo.message || "",
-                },
-                {
-                    name: "start_date",
-                    value: dateString || "",
-                },
-                {
-                    name: "meeting_time",
-                    value: selectedTime || "",
-                },
-                {
-                    name: "meeting_timezone",
-                    value: selectedTimezone || "",
-                },
-                {
-                    name: "domain",
-                    value: userInfo.companyWebsite ? (userInfo.companyWebsite.startsWith('http') ? userInfo.companyWebsite : 'https://' + userInfo.companyWebsite) : "",
-                },
-                {
-                    name: "gtm_services",
-                    value: [
-                        services.technicalContent && "Technical Content",
-                        services.seoContent && "SEO/Thought leadership/Marketing Content",
-                        services.productDocs && "Product and Use Case documentation",
-                        services.webflow && "Webflow Services",
-                        services.video && "Video Production and Product Explainers",
-                        services.reddit && "Reddit Engagement for Community Driven Growth",
-                        services.otherChecked && services.other && `Other: ${services.other}`
-                    ].filter(Boolean).join(", ") || ""
-                }
+                { name: "firstname", value: userInfo.firstName || "" },
+                { name: "lastname", value: userInfo.lastName || "" },
+                { name: "email", value: userInfo.email || "" },
+                { name: "phone_number1", value: (userInfo.countryCode || "") + " " + (userInfo.phoneNumber || "") },
+                { name: "message", value: userInfo.message || "" },
+                { name: "start_date", value: dateString || "" },
+                { name: "meeting_time", value: selectedTime || "" },
+                { name: "meeting_timezone", value: selectedTimezone || "" },
+                { name: "domain", value: userInfo.companyWebsite ? (userInfo.companyWebsite.startsWith('http') ? userInfo.companyWebsite : 'https://' + userInfo.companyWebsite) : "" },
+                { name: "gtm_services", value: [
+                    services.technicalContent && "Technical Content",
+                    services.seoContent && "SEO/Thought leadership/Marketing Content",
+                    services.productDocs && "Product and Use Case documentation",
+                    services.webflow && "Webflow Services",
+                    services.video && "Video Production and Product Explainers",
+                    services.reddit && "Reddit Engagement for Community Driven Growth",
+                    services.otherChecked && services.other && `Other: ${services.other}`
+                ].filter(Boolean).join(", ") || "" }
             ],
             context: {
                 pageUri: window.location.href,
                 pageName: "Contact Form",
             },
         };
-
         try {
             const response = await fetch(hubspotEndpoint, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
             });
-
             if (response.ok) {
                 setStep(4);
                 try {
@@ -562,7 +518,6 @@ const CalendarBooking = () => {
                         }),
                         signal: AbortSignal.timeout(30000),
                     });
-
                     if (!emailResponse.ok) {
                         const errorText = await emailResponse.text();
                         console.error("Email API error:", errorText);
@@ -577,10 +532,7 @@ const CalendarBooking = () => {
             }
         } catch (error) {
             console.error("Error submitting to HubSpot:", error);
-            setErrors({
-                submission:
-                    "Network error. Please check your connection and try again.",
-            });
+            setErrors({ submission: "Network error. Please check your connection and try again." });
         } finally {
             setIsSubmitting(false);
         }
@@ -687,13 +639,12 @@ const CalendarBooking = () => {
 
     useEffect(() => {
         if (step === 4) {
-                const selectedTzObj = timezones.find(tz => tz.value === selectedTimezone);
-    const timezoneLabel = selectedTzObj ? selectedTzObj.label : selectedTimezone;
-            localStorage.setItem("bookingSelected", JSON.stringify({ date: selectedDate, time: selectedTime ,         timezone: selectedTimezone,  // e.g. "UTC+05:30"
-        timezoneLabel,           }));
-            router.push("/contact/thank-you"); // navigate on step 4
+            const selectedTzObj = timezones.find(tz => tz.value === selectedTimezone);
+            const timezoneLabel = selectedTzObj ? selectedTzObj.label : selectedTimezone;
+            localStorage.setItem("bookingSelected", JSON.stringify({ date: selectedDate, time: selectedTime, timezone: selectedTimezone, timezoneLabel }));
+            router.push("/contact/thank-you");
         }
-    }, [step, router , dateString, selectedTime, selectedTimezone, timezones]); // add this effect
+    }, [step, router, dateString, selectedTime, selectedTimezone, timezones]);
 
     return (
         <div className="h-full">
@@ -722,7 +673,7 @@ const CalendarBooking = () => {
                             }}
                         >
                             <div className="text-xl font-bold text-center mb-4 mt-10 ">
-                                {step === 1 && (
+                                {step === 2 && (
                                     <div>
                                         <div className="rounded-full">
                                             <Image
@@ -736,30 +687,20 @@ const CalendarBooking = () => {
                                         Book a Time to Connect with Us
                                     </div>
                                 )}
-                                {step === 2 && "Book a Time to Connect with Us"}
+                                {step === 3 && "Book a Time to Connect with Us"}
                                 {/* {step === 3 && "Complete Your Booking"} */}
                                 {/* {step === 4 && "Booking Confirmed"} */}
                             </div>
 
-                            {step === 1 && (
+                            {step === 2 && (
                                 <div className="calendar-container">
                                     <div className="flex justify-between items-center mb-4">
                                         <button
                                             onClick={prevMonth}
                                             className="p-2 rounded-full hover:bg-gray-700"
                                         >
-                                            <svg
-                                                className="h-5 w-5"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M15 19l-7-7 7-7"
-                                                />
+                                            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                                             </svg>
                                         </button>
                                         <h2 className="text-xl font-medium">
@@ -769,39 +710,27 @@ const CalendarBooking = () => {
                                             onClick={nextMonth}
                                             className="p-2 rounded-full hover:bg-gray-700"
                                         >
-                                            <svg
-                                                className="h-5 w-5"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M9 5l7 7-7 7"
-                                                />
+                                            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                                             </svg>
                                         </button>
                                     </div>
-
                                     <div className="grid grid-cols-7 gap-1 mb-2">
                                         {weekdays.map((day) => (
-                                            <div
-                                                key={day}
-                                                className="text-center text-gray-400 text-sm"
-                                            >
-                                                {day}
-                                            </div>
+                                            <div key={day} className="text-center text-gray-400 text-sm">{day}</div>
                                         ))}
                                     </div>
-
                                     <div className="grid grid-cols-7 gap-1">{renderCalendar()}</div>
-
-                                    <div className="mt-6 flex justify-end">
+                                    <div className="mt-6 flex justify-between">
+                                        <button
+                                            onClick={() => setStep(1)}
+                                            className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md"
+                                        >
+                                            Back
+                                        </button>
                                         {selectedDate && (
                                             <button
-                                                onClick={goToTimeSelection}
+                                                onClick={() => setStep(3)}
                                                 className="bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md"
                                             >
                                                 Next
@@ -810,8 +739,7 @@ const CalendarBooking = () => {
                                     </div>
                                 </div>
                             )}
-
-                            {step === 2 && (
+                            {step === 3 && (
                                 <div className="time-selection">
                                     <div>
                                         <p className="text-lg font-medium mb-1">
@@ -857,59 +785,95 @@ const CalendarBooking = () => {
                                             </select>
                                         </div>
                                     </div>
-
                                     {availableTimeSlots.length > 0 ? (
-                                        <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto mb-4">
-                                            {availableTimeSlots.map((slot, index) => (
-                                                <div
-                                                    key={index}
-                                                    onClick={() => handleTimeSelection(slot)}
-                                                    className={`p-2 text-center rounded-md cursor-pointer border border-gray-700 
-                ${selectedTime === slot
+                                        <>
+                                            <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto mb-4">
+                                                {availableTimeSlots.map((slot, index) => (
+                                                    <div
+                                                        key={index}
+                                                        onClick={() => setSelectedTime(slot.convertedTime)}
+                                                        className={`p-2 text-center rounded-md cursor-pointer border border-gray-700 
+                ${selectedTime === slot.convertedTime
                                                             ? "bg-blue-600 text-white"
                                                             : "hover:bg-gray-700"
                                                         }`}
-                                                >
-                                                    <div className="font-medium">{slot.convertedTime}</div>
-                                                </div>
-                                            ))}
-                                        </div>
+                                                    >
+                                                        <div className="font-medium">{slot.convertedTime}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </>
                                     ) : (
                                         <div className="mb-4 p-4 border border-gray-700 rounded-md bg-[#0e1433] text-gray-300">
                                             No slots to show.
                                         </div>
                                     )}
-
                                     <div className="mt-6 flex justify-between">
                                         <button
-                                            onClick={goToCalendar}
+                                            onClick={() => setStep(2)}
                                             className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md"
                                         >
                                             Back
                                         </button>
-
-                                        {selectedTime && (
-                                            <button
-                                                onClick={goToUserInfo}
-                                                className="bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md"
-                                            >
-                                                Next
-                                            </button>
-                                        )}
+                                                    {selectedTime && (
+                                                        <div className="flex justify-end mt-4">
+                                                            <button
+                                                                className="bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md"
+                                                                disabled={isSubmitting}
+                                                                onClick={handleFinalSubmit}
+                                                            >
+                                                                {isSubmitting ? "Submitting..." : "Confirm Slot"}
+                                                            </button>
+                                                        </div>
+                                                    )}
                                     </div>
                                 </div>
                             )}
 
-                            {step === 3 && (
-                                <div className="user-info">
-                                    <div className="mb-4">
-                                        <p className="text-lg font-medium mb-1">Booking Details</p>
-                                        <p className="text-gray-400 text-sm">
-                                            {selectedDate && formatDate(selectedDate)} at {selectedTime}
-                                        </p>
-                                    </div>
+                            {/* Final confirmation step removed. After slot selection, form is submitted and user is redirected to thank you page. */}
 
-                                    <form className="space-y-4">
+                            {step === 1 && (
+                                <div className="user-info">
+                                    <form className="space-y-4" onSubmit={async (e) => {
+                                        e.preventDefault();
+                                        const valid = await validateUserInfo();
+                                        if (!valid) return;
+                                        if (typeof window !== "undefined") {
+                                            sessionStorage.setItem("contactUserInfo", JSON.stringify(userInfo));
+                                        }
+                                        const endpoint = "https://api.hsforms.com/submissions/v3/integration/submit/242717777/a8f79f68-e81c-41a5-a56c-7a1bc953579e";
+                                        const payload = {
+                                            fields: [
+                                                { name: "firstname", value: userInfo.firstName || "" },
+                                                { name: "lastname", value: userInfo.lastName || "" },
+                                                { name: "email", value: userInfo.email || "" },
+                                                { name: "phone_number1", value: (userInfo.countryCode || "") + " " + (userInfo.phoneNumber || "") },
+                                                { name: "message", value: userInfo.message || "" },
+                                                { name: "domain", value: userInfo.companyWebsite ? (userInfo.companyWebsite.startsWith('http') ? userInfo.companyWebsite : 'https://' + userInfo.companyWebsite) : "" },
+                                                { name: "gtm_services", value: [
+                                                    services.technicalContent && "Technical Content",
+                                                    services.seoContent && "SEO/Thought leadership/Marketing Content",
+                                                    services.productDocs && "Product and Use Case documentation",
+                                                    services.webflow && "Webflow Services",
+                                                    services.video && "Video Production and Product Explainers",
+                                                    services.reddit && "Reddit Engagement for Community Driven Growth",
+                                                    services.otherChecked && services.other && `Other: ${services.other}`
+                                                ].filter(Boolean).join(", ") || "" }
+                                            ],
+                                            context: {
+                                                pageUri: window.location.href,
+                                                pageName: "Contact Form",
+                                            },
+                                        };
+                                        try {
+                                            await fetch(endpoint, {
+                                                method: "POST",
+                                                headers: { "Content-Type": "application/json" },
+                                                body: JSON.stringify(payload),
+                                            });
+                                        } catch (err) {}
+                                        setStep(2);
+                                    }}>
                                         <div className="grid grid-cols-2 gap-4">
                                             <div>
                                                 <label className="block text-gray-300 mb-1 text-left">
@@ -929,7 +893,6 @@ const CalendarBooking = () => {
                                                     </p>
                                                 )}
                                             </div>
-
                                             <div>
                                                 <label className="block text-gray-300 mb-1 text-left">
                                                     Last Name <span className="text-red-500">*</span>
@@ -949,7 +912,6 @@ const CalendarBooking = () => {
                                                 )}
                                             </div>
                                         </div>
-
                                         <div className="grid grid-cols-2 gap-4">
                                             <div>
                                                 <label className="block text-gray-300 mb-1 text-left">
@@ -991,7 +953,6 @@ const CalendarBooking = () => {
                                                         </p>
                                                     )}
                                             </div>
-
                                             <div>
                                                 <label className="block text-gray-300 mb-1 text-left">
                                                     Company Website
@@ -1017,99 +978,98 @@ const CalendarBooking = () => {
                                                     onChange={handleInputChange}
                                                     className="w-[88px] bg-[#0c102e] rounded-l pl-1 py-2 text-white focus:outline-none focus:ring-[0.5px] focus:ring-[#4f4bc6] border border-[#3d4058] border-r-0"
                                                 >
-                                                    <option value="+1">🇺🇸 +1</option>{" "}
-                                                    <option value="+7">🇷🇺 +7</option>{" "}
-                                                    <option value="+20">🇪🇬 +20</option>{" "}
-                                                    <option value="+27">🇿🇦 +27</option>{" "}
-                                                    <option value="+30">🇬🇷 +30</option>{" "}
-                                                    <option value="+31">🇳🇱 +31</option>{" "}
-                                                    <option value="+32">🇧🇪 +32</option>{" "}
-                                                    <option value="+33">🇫🇷 +33</option>{" "}
-                                                    <option value="+34">🇪🇸 +34</option>{" "}
-                                                    <option value="+36">🇭🇺 +36</option>{" "}
-                                                    <option value="+39">🇮🇹 +39</option>{" "}
-                                                    <option value="+40">🇷🇴 +40</option>{" "}
-                                                    <option value="+41">🇨🇭 +41</option>{" "}
-                                                    <option value="+43">🇦🇹 +43</option>{" "}
-                                                    <option value="+44">🇬🇧 +44</option>{" "}
-                                                    <option value="+45">🇩🇰 +45</option>{" "}
-                                                    <option value="+46">🇸🇪 +46</option>{" "}
-                                                    <option value="+47">🇳🇴 +47</option>{" "}
-                                                    <option value="+48">🇵🇱 +48</option>{" "}
-                                                    <option value="+49">🇩🇪 +49</option>{" "}
-                                                    <option value="+51">🇵🇪 +51</option>{" "}
-                                                    <option value="+52">🇲🇽 +52</option>{" "}
-                                                    <option value="+54">🇦🇷 +54</option>{" "}
-                                                    <option value="+55">🇧🇷 +55</option>{" "}
-                                                    <option value="+56">🇨🇱 +56</option>{" "}
-                                                    <option value="+57">🇨🇴 +57</option>{" "}
-                                                    <option value="+58">🇻🇪 +58</option>{" "}
-                                                    <option value="+60">🇲🇾 +60</option>{" "}
-                                                    <option value="+61">🇦🇺 +61</option>{" "}
-                                                    <option value="+62">🇮🇩 +62</option>{" "}
-                                                    <option value="+63">🇵🇭 +63</option>{" "}
-                                                    <option value="+64">🇳🇿 +64</option>{" "}
-                                                    <option value="+65">🇸🇬 +65</option>{" "}
-                                                    <option value="+66">🇹🇭 +66</option>{" "}
-                                                    <option value="+81">JP +81</option>{" "}
-                                                    <option value="+82">🇰🇷 +82</option>{" "}
-                                                    <option value="+84">🇻🇳 +84</option>{" "}
-                                                    <option value="+86">🇨🇳 +86</option>{" "}
-                                                    <option value="+90">🇹🇷 +90</option>{" "}
-                                                    <option value="+91">🇮🇳 +91</option>{" "}
-                                                    <option value="+92">🇵🇰 +92</option>{" "}
-                                                    <option value="+93">🇦🇫 +93</option>{" "}
-                                                    <option value="+94">🇱🇰 +94</option>{" "}
-                                                    <option value="+95">🇲🇲 +95</option>{" "}
-                                                    <option value="+98">🇮🇷 +98</option>{" "}
-                                                    <option value="+212">🇲🇦 +212</option>{" "}
-                                                    <option value="+213">🇩🇿 +213</option>{" "}
-                                                    <option value="+216">🇹🇳 +216</option>{" "}
-                                                    <option value="+218">🇱🇾 +218</option>{" "}
-                                                    <option value="+220">🇬🇲 +220</option>{" "}
-                                                    <option value="+221">🇸🇳 +221</option>{" "}
-                                                    <option value="+234">🇳🇬 +234</option>{" "}
-                                                    <option value="+254">🇰🇪 +254</option>{" "}
-                                                    <option value="+351">🇵🇹 +351</option>{" "}
-                                                    <option value="+352">🇱🇺 +352</option>{" "}
-                                                    <option value="+353">🇮🇪 +353</option>{" "}
-                                                    <option value="+354">🇮🇸 +354</option>{" "}
-                                                    <option value="+355">🇦🇱 +355</option>{" "}
-                                                    <option value="+358">🇫🇮 +358</option>{" "}
-                                                    <option value="+359">🇧🇬 +359</option>{" "}
-                                                    <option value="+370">🇱🇹 +370</option>{" "}
-                                                    <option value="+371">🇱🇻 +371</option>{" "}
-                                                    <option value="+372">🇪🇪 +372</option>{" "}
-                                                    <option value="+380">🇺🇦 +380</option>{" "}
-                                                    <option value="+385">🇭🇷 +385</option>{" "}
-                                                    <option value="+420">🇨🇿 +420</option>{" "}
-                                                    <option value="+421">🇸🇰 +421</option>{" "}
-                                                    <option value="+503">🇸🇻 +503</option>{" "}
-                                                    <option value="+504">🇭🇳 +504</option>{" "}
-                                                    <option value="+505">🇳🇮 +505</option>{" "}
-                                                    <option value="+506">🇨🇷 +506</option>{" "}
-                                                    <option value="+507">🇵🇦 +507</option>{" "}
-                                                    <option value="+591">🇧🇴 +591</option>{" "}
-                                                    <option value="+593">🇪🇨 +593</option>{" "}
-                                                    <option value="+595">🇵🇾 +595</option>{" "}
-                                                    <option value="+598">🇺🇾 +598</option>{" "}
-                                                    <option value="+673">🇧🇳 +673</option>{" "}
-                                                    <option value="+852">🇭🇰 +852</option>{" "}
-                                                    <option value="+855">🇰🇭 +855</option>{" "}
-                                                    <option value="+880">🇧🇩 +880</option>{" "}
-                                                    <option value="+886">🇹🇼 +886</option>{" "}
-                                                    <option value="+960">🇲🇻 +960</option>{" "}
-                                                    <option value="+961">🇱🇧 +961</option>{" "}
-                                                    <option value="+962">🇯🇴 +962</option>{" "}
-                                                    <option value="+963">🇸🇾 +963</option>{" "}
-                                                    <option value="+966">🇸🇦 +966</option>{" "}
-                                                    <option value="+971">🇦🇪 +971</option>{" "}
-                                                    <option value="+972">🇮🇱 +972</option>{" "}
-                                                    <option value="+977">🇳🇵 +977</option>{" "}
-                                                    <option value="+994">🇦🇿 +994</option>{" "}
+                                                    <option value="+1">🇺🇸 +1</option>
+                                                    <option value="+7">🇷🇺 +7</option>
+                                                    <option value="+20">🇪🇬 +20</option>
+                                                    <option value="+27">🇿🇦 +27</option>
+                                                    <option value="+30">🇬🇷 +30</option>
+                                                    <option value="+31">🇳🇱 +31</option>
+                                                    <option value="+32">🇧🇪 +32</option>
+                                                    <option value="+33">🇫🇷 +33</option>
+                                                    <option value="+34">🇪🇸 +34</option>
+                                                    <option value="+36">🇭🇺 +36</option>
+                                                    <option value="+39">🇮🇹 +39</option>
+                                                    <option value="+40">🇷🇴 +40</option>
+                                                    <option value="+41">🇨🇭 +41</option>
+                                                    <option value="+43">🇦🇹 +43</option>
+                                                    <option value="+44">🇬🇧 +44</option>
+                                                    <option value="+45">🇩🇰 +45</option>
+                                                    <option value="+46">🇸🇪 +46</option>
+                                                    <option value="+47">🇳🇴 +47</option>
+                                                    <option value="+48">🇵🇱 +48</option>
+                                                    <option value="+49">🇩🇪 +49</option>
+                                                    <option value="+51">🇵🇪 +51</option>
+                                                    <option value="+52">🇲🇽 +52</option>
+                                                    <option value="+54">🇦🇷 +54</option>
+                                                    <option value="+55">🇧🇷 +55</option>
+                                                    <option value="+56">🇨🇱 +56</option>
+                                                    <option value="+57">🇨🇴 +57</option>
+                                                    <option value="+58">🇻🇪 +58</option>
+                                                    <option value="+60">🇲🇾 +60</option>
+                                                    <option value="+61">🇦🇺 +61</option>
+                                                    <option value="+62">🇮🇩 +62</option>
+                                                    <option value="+63">🇵🇭 +63</option>
+                                                    <option value="+64">🇳🇿 +64</option>
+                                                    <option value="+65">🇸🇬 +65</option>
+                                                    <option value="+66">🇹🇭 +66</option>
+                                                    <option value="+81">JP +81</option>
+                                                    <option value="+82">🇰🇷 +82</option>
+                                                    <option value="+84">🇻🇳 +84</option>
+                                                    <option value="+86">🇨🇳 +86</option>
+                                                    <option value="+90">🇹🇷 +90</option>
+                                                    <option value="+91">🇮🇳 +91</option>
+                                                    <option value="+92">🇵🇰 +92</option>
+                                                    <option value="+93">🇦🇫 +93</option>
+                                                    <option value="+94">🇱🇰 +94</option>
+                                                    <option value="+95">🇲🇲 +95</option>
+                                                    <option value="+98">🇮🇷 +98</option>
+                                                    <option value="+212">🇲🇦 +212</option>
+                                                    <option value="+213">🇩🇿 +213</option>
+                                                    <option value="+216">🇹🇳 +216</option>
+                                                    <option value="+218">🇱🇾 +218</option>
+                                                    <option value="+220">🇬🇲 +220</option>
+                                                    <option value="+221">🇸🇳 +221</option>
+                                                    <option value="+234">🇳🇬 +234</option>
+                                                    <option value="+254">🇰🇪 +254</option>
+                                                    <option value="+351">🇵🇹 +351</option>
+                                                    <option value="+352">🇱🇺 +352</option>
+                                                    <option value="+353">🇮🇪 +353</option>
+                                                    <option value="+354">🇮🇸 +354</option>
+                                                    <option value="+355">🇦🇱 +355</option>
+                                                    <option value="+358">🇫🇮 +358</option>
+                                                    <option value="+359">🇧🇬 +359</option>
+                                                    <option value="+370">🇱🇹 +370</option>
+                                                    <option value="+371">🇱🇻 +371</option>
+                                                    <option value="+372">🇪🇪 +372</option>
+                                                    <option value="+380">🇺🇦 +380</option>
+                                                    <option value="+385">🇭🇷 +385</option>
+                                                    <option value="+420">🇨🇿 +420</option>
+                                                    <option value="+421">🇸🇰 +421</option>
+                                                    <option value="+503">🇸🇻 +503</option>
+                                                    <option value="+504">🇭🇳 +504</option>
+                                                    <option value="+505">🇳🇮 +505</option>
+                                                    <option value="+506">🇨🇷 +506</option>
+                                                    <option value="+507">🇵🇦 +507</option>
+                                                    <option value="+591">🇧🇴 +591</option>
+                                                    <option value="+593">🇪🇨 +593</option>
+                                                    <option value="+595">🇵🇾 +595</option>
+                                                    <option value="+598">🇺🇾 +598</option>
+                                                    <option value="+673">🇧🇳 +673</option>
+                                                    <option value="+852">🇭🇰 +852</option>
+                                                    <option value="+855">🇰🇭 +855</option>
+                                                    <option value="+880">🇧🇩 +880</option>
+                                                    <option value="+886">🇹🇼 +886</option>
+                                                    <option value="+960">🇲🇻 +960</option>
+                                                    <option value="+961">🇱🇧 +961</option>
+                                                    <option value="+962">🇯🇴 +962</option>
+                                                    <option value="+963">🇸🇾 +963</option>
+                                                    <option value="+966">🇸🇦 +966</option>
+                                                    <option value="+971">🇦🇪 +971</option>
+                                                    <option value="+972">🇮🇱 +972</option>
+                                                    <option value="+977">🇳🇵 +977</option>
+                                                    <option value="+994">🇦🇿 +994</option>
                                                     <option value="+995">🇬🇪 +995</option>
                                                 </select>
-
                                                 <input
                                                     type="tel"
                                                     name="phoneNumber"
@@ -1120,7 +1080,7 @@ const CalendarBooking = () => {
                                                 />
                                             </div>
                                         </div>
-                                         <div className="mb-4">
+                                        <div className="mb-4">
                                             <label className="block text-gray-300 mb-2 text-left font-semibold">
                                                 What GTM services are you interested in?
                                             </label>
@@ -1129,7 +1089,7 @@ const CalendarBooking = () => {
                                                     <input type="checkbox" name="technicalContent" checked={services.technicalContent} onChange={handleServiceChange} className="mr-2" />
                                                     Technical Content
                                                 </label>
-                                                     <label className="flex items-center">
+                                                <label className="flex items-center">
                                                     <input type="checkbox" name="reddit" checked={services.reddit} onChange={handleServiceChange} className="mr-2" />
                                                     Reddit Engagement for Community Driven Growth
                                                 </label>
@@ -1178,63 +1138,16 @@ const CalendarBooking = () => {
                                                 placeholder="Write your message here."
                                             />
                                         </div>
-                                    </form>
-
-                                    <div className="mt-6 flex justify-between">
-                                        <button
-                                            onClick={() => setStep(2)}
-                                            className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md"
-                                        >
-                                            Back
-                                        </button>
-
-                                        {!isSubmitting ? (
+                                        <div className="mt-6 flex justify-end">
                                             <button
-                                                onClick={handleBookingSubmit}
+                                                type="submit"
                                                 className={`bg-gradient-to-r from-[#5F64FF] to-[#4d51e0] hover:from-[#4d51e0] hover:to-[#3c40c5] text-white py-2 px-4 rounded-md ${isEmailValidating || errors.email || !userInfo.email || (emailValidationResult && emailValidationResult.valid === false) ? 'opacity-50 cursor-not-allowed' : ''}`}
                                                 disabled={isEmailValidating || errors.email || !userInfo.email || (emailValidationResult && emailValidationResult.valid === false)}
                                             >
-                                                Confirm Booking
+                                                Continue
                                             </button>
-                                        ) : (
-                                            <div
-                                                style={{
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    justifyContent: "center",
-                                                }}
-                                            >
-                                                <svg
-                                                    style={{
-                                                        animation: "spin 1s linear infinite",
-                                                        marginLeft: "-0.25rem",
-                                                        marginRight: "0.75rem",
-                                                        height: "1.25rem",
-                                                        width: "1.25rem",
-                                                        color: "white",
-                                                    }}
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <circle
-                                                        style={{ opacity: 0.25 }}
-                                                        cx="12"
-                                                        cy="12"
-                                                        r="10"
-                                                        stroke="currentColor"
-                                                        strokeWidth="4"
-                                                    ></circle>
-                                                    <path
-                                                        style={{ opacity: 0.75 }}
-                                                        fill="currentColor"
-                                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                                    ></path>
-                                                </svg>
-                                                Submitting...
-                                            </div>
-                                        )}
-                                    </div>
+                                        </div>
+                                    </form>
                                 </div>
                             )}
 
