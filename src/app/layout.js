@@ -2,6 +2,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import * as Sentry from '@sentry/nextjs';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Quicksand } from 'next/font/google';
+import { Suspense } from 'react';
 import AlternateLinks from './AlternateLinks';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
 import DeferredScripts from './components/DeferredScripts';
@@ -40,7 +41,9 @@ export default function RootLayout({ children }) {
                         style={{ display: 'none', visibility: 'hidden' }}
                     ></iframe>
                 </noscript>
-                <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+                <Suspense fallback={null}>
+                  <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+                </Suspense>
                 <SpeedInsights />
                 <DeferredScripts />
             </body>
