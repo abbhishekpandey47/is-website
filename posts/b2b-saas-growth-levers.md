@@ -265,8 +265,6 @@ Publishing your roadmap or sharing product updates publicly does 3 things:
 
 ![Snapshot of a content calendar](/PostImages/b2b-saas-growth-levers/i3.png)
 
-Snapshot of a content calendar
-
 10. **Leverage Offline & Online Events**
 
 Events are a powerful growth lever for B2B SaaS startups, especially when targeting technical buyers. From sponsoring booths to speaking engagements, events like KubeCon, AWS re:Invent, and niche meetups can create direct connections with high-intent prospects.
@@ -297,15 +295,15 @@ Early-stage SaaS and B2B startups operate in a crowded and competitive market wh
 
 ## **FAQ**
 
-1. What are growth levers and how to find them
+### 1. What are growth levers and how to find them
 
    Growth levers are strategies or repeatable activities that drive sustainable growth in SaaS and B2B startups. They can include technical SEO, GitHub marketing, content-driven distribution, pricing experiments, community engagement, and many more, which you can learn from this blog. To find them, analyze customer journeys, track metrics like activation rates and retention, and identify where small improvements can create compounding impact in your B2B SaaS company.
 
-2. How does GTM for startups connect with growth levers?
+### 2. How does GTM for startups connect with growth levers?
 
    A GTM strategy sets the framework for how a SaaS and B2B company reaches its target audience. Growth levers like content distribution, events, and PLG plug into this GTM strategy. This amplifies the reach and adoption, and without deliberate GTM planning, even strong growth levers won’t deliver sustainable results.
 
-3. Why is community important for SaaS and B2B growth?
+### 3. Why is community important for SaaS and B2B growth?
 
    Communities act as distribution multipliers for B2B SaaS startups. Platforms like GitHub, Reddit (e.g., r/devops, r/kubernetes, r/cloudcomputing), and Discord amplify reach by turning early adopters into evangelists. For companies that are B2B, this word-of-mouth and peer validation is more trusted than ads, making the community a critical growth lever. Read this blog to learn more.   
  
