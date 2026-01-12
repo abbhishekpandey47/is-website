@@ -34,6 +34,11 @@ const PrivacyPolicy = () => {
         Our website may contain links to third-party sites. We are not responsible for the content or practices of these sites, which may have their own privacy policies. Browsing and interaction on these sites are subject to the site's terms and policies.
       </p>
 
+      <h2 className="text-xl sm:text-2xl quicksand-semibold mb-3 sm:mb-4">AI Concierge Communications</h2>
+      <p className="mb-3 sm:mb-4 quicksand-light">
+        When you communicate with our AI Concierge, Concierge AI Technologies, Inc. acts as our service provider and receives, stores, and processes those communications on our behalf. These interactions are treated with the same confidentiality as other personal information outlined in this policy, and the data is retained only as long as necessary to provide and improve the Concierge experience.
+      </p>
+
       <h2 className="text-xl sm:text-2xl quicksand-semibold mb-3 sm:mb-4">Changes to This Privacy Policy</h2>
       <p className="mb-3 sm:mb-4 quicksand-light">
         Infrasity reserves the right to update this Privacy Policy at any time. We encourage users to check this page frequently for any updates. By continuing to use our services, you acknowledge and agree to review the policy periodically and become aware of modifications.
