@@ -1386,6 +1386,18 @@ let postMetaData = [
   metaDescription:
     "Compare the leading AI document generators for API and SDK docs. See how spec-driven, code-driven, and repo-scale tools differ for modern SaaS teams. Read now!",
 },
+{
+  title: "How to Build a Local Documentation AI Assistant with RAG",
+  metatitle: "How to Build a Local Documentation AI Assistant with RAG",
+  slug: "local-documentation-ai-assistant-with-rag",
+  description: "This guide walks through building a fully local documentation AI assistant using Retrieval-Augmented Generation (RAG). You’ll learn how to index Markdown docs, run embeddings and inference with Ollama and ChromaDB, and embed an AI search widget directly into your documentation site.",
+  ogImage: "/PostImages/local-documentation-ai-assistant-with-RAG/img1.webp",
+  publishedOn: "2026-01-13",
+  authorId: "author0001",
+  category: "Informational",
+  metaDescription: "Learn how to build a local Retrieval-Augmented Generation (RAG) AI documentation assistant that indexes Markdown docs, prevents hallucinations, and runs with Ollama and ChromaDB.",
+},
+
  {
   title: "Community Led Growth vs Paid Growth: What Works for B2B SaaS Startups?",
   metatitle: "Community Led Growth VS Paid Growth | Best Practices",

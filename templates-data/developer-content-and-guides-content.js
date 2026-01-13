@@ -7,7 +7,7 @@ const template = {
     shortDescription: "Write developer content that engages, educates, and converts",
     thumbnailImage: "/template-thumbnails/developer-content.png",
     bannerImage: "/template-banners/developer-content.png",
-    videoEmbedUrl: "",
+    videoEmbedUrl: "https://drive.google.com/file/d/1sWJPQoyrrPBEttCvXXd0CnDQLC-8Q1F9/preview",
     publishedOn: "2024-12-19",
     author: "Infrasity Team",
     authorImage: "/svgPatterns/profile.svg",
