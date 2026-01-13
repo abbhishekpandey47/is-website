@@ -22,12 +22,12 @@ Search and manual navigation help, but they assume users already know what to se
 This gap is increasingly visible across modern developer platforms. Companies like Docker, Vercel, Stripe, and Supabase have introduced “Ask AI” or assistant-driven search experiences directly inside their documentation portals. Instead of forcing users to navigate menus or guess keywords, these systems allow engineers to ask intent-based questions and receive answers synthesized from official documentation content. The goal is not conversational novelty, but faster problem resolution and lower cognitive load during implementation and debugging.
 
 The screenshot below shows Docker’s documentation portal using an embedded Ask AI experience as a reference for how modern documentation interfaces are evolving.  
-![screenshot](/postImages/local-documentation-ai-assistant-with-RAG/img2.webp)
+![screenshot](/PostImages/local-documentation-ai-assistant-with-RAG/img2.webp)
 
 An AI assistant changes how documentation is accessed. Instead of scanning pages or guessing search terms, users can ask questions directly and receive answers grounded in the existing docs. The assistant retrieves the most relevant sections and synthesizes them into a concise response, reducing time spent navigating and cross-referencing multiple files.
 
 The key requirement is trust. The assistant must stay anchored to the documentation source and avoid introducing behavior that is not documented. This project focuses on building a retrieval-driven assistant that only answers based on indexed Markdown content, making it suitable for engineering workflows rather than generic chat use cases.  
-![RAG](/postImages/local-documentation-ai-assistant-with-RAG/img3.webp)  
+![RAG](/PostImages/local-documentation-ai-assistant-with-RAG/img3.webp)  
 
 ## Making Documentation Queryable with LLMs
 
@@ -48,7 +48,7 @@ A local documentation assistant that lets users ask natural language questions d
 
 We started with a real documentation site and layered a chat assistant directly on top of it instead of building a separate knowledge system. The goal was to keep the documentation as the source of truth while allowing users to query it in natural language through a lightweight chat interface. Let’s walk through the end-to-end user flow and see how a question moves from the browser to retrieval, grounding, and response generation.
 
-![system crchitecture](/postImages/local-documentation-ai-assistant-with-RAG/img4.webp)
+![system crchitecture](/PostImages/local-documentation-ai-assistant-with-RAG/img4.webp)
 
 This architecture follows a simple request–retrieve–generate flow layered on top of an existing documentation site. The user starts inside the documentation UI, opens the chat widget, and submits a question. The widget sends the request to a lightweight backend API that orchestrates retrieval and response generation.
 
@@ -76,7 +76,7 @@ for file in Path("docs").glob("**/*.md"):
 Each file is split into small chunks to improve retrieval accuracy.  
 The chunks are embedded and stored persistently in ChromaDB so ingestion only runs once unless docs change.
 
-![chunks example](/postImages/local-documentation-ai-assistant-with-RAG/img5.webp)  
+<img src="/PostImages/local-documentation-ai-assistant-with-RAG/img5.webp" alt="chunks example" width="500" />
 
 #### 2\. Frontend Chat Widget: Embedding AI Search Inside the Documentation UI
 
@@ -328,7 +328,7 @@ documents = loader.load()
 Documents are split into smaller chunks before embedding to improve retrieval accuracy and reduce context dilution.  
 The image below illustrates how chunk size and overlap affect retrieval behavior, showing the trade-off among precision, contextual coverage, and embedding efficiency when splitting documentation into vectorized segments.
 
-![](/postImages/local-documentation-ai-assistant-with-RAG/img6.webp)  
+![](/PostImages/local-documentation-ai-assistant-with-RAG/img6.webp)  
   
 The following code splits large documentation files into smaller chunks to improve retrieval accuracy and context quality.
 
@@ -456,7 +456,7 @@ When the documentation page loads, a floating Ask AI button is visible. Clickin
 This interaction establishes the entry point into the assistant and keeps the chat experience discoverable without cluttering the documentation layout.
 
 The image below shows how the Ask AI button is embedded inside the documentation UI and how the chat panel opens alongside the documentation content.  
-![chat fronted ui](/postImages/local-documentation-ai-assistant-with-RAG/img7.webp)
+![chat fronted ui](/PostImages/local-documentation-ai-assistant-with-RAG/img7.webp)
 
 The following code shows how the chat panel visibility and input focus are toggled when the user opens or closes the widget.
 
@@ -530,7 +530,7 @@ this.addMessage("assistant", data.answer, data.sources);
 ```
 The image below shows a completed interaction where the assistant returns an answer along with the source files that were used during retrieval.
 
-![chatbot frontend](/postImages/local-documentation-ai-assistant-with-RAG/img8.webp)
+![chatbot frontend](/PostImages/local-documentation-ai-assistant-with-RAG/img8.webp)
 
 This feedback loop makes it clear to users where the answer originated and increases trust in the system.
 
