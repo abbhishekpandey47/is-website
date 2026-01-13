@@ -1389,7 +1389,7 @@ let postMetaData = [
 {
   title: "How to Build a Local Documentation AI Assistant with RAG",
   metatitle: "How to Build a Local Documentation AI Assistant with RAG",
-  slug: "local-documentation-ai-assistant-with-rag",
+  slug: "local-documentation-ai-assistant-with-RAG",
   description: "This guide walks through building a fully local documentation AI assistant using Retrieval-Augmented Generation (RAG). You’ll learn how to index Markdown docs, run embeddings and inference with Ollama and ChromaDB, and embed an AI search widget directly into your documentation site.",
   ogImage: "/PostImages/local-documentation-ai-assistant-with-RAG/img1.webp",
   publishedOn: "2026-01-13",
