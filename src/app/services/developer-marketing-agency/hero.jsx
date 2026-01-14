@@ -1,8 +1,12 @@
-"use client";
-import Particles from "../../../Components/ui/particles";
+import dynamic from "next/dynamic";
 import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
+const Particles = dynamic(
+  () => import("../../../Components/ui/particles"),
+  { ssr: false, loading: () => null }
+);
 
 export default function Hero() {
   return (
