@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import ContactPage from "../book-a-demo/page";
 import Image from "next/image";
@@ -22,6 +22,8 @@ const CalendarBooking = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const formSubmitTrackedRef = useRef(false);
+    const calendarBookedTrackedRef = useRef(false);
     const [userInfo, setUserInfo] = useState({
         firstName: "",
         lastName: "",
@@ -352,6 +354,12 @@ const CalendarBooking = () => {
         }
     };
 
+    const pushDataLayerEvent = (eventName) => {
+        if (typeof window === "undefined") return;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: eventName });
+    };
+
     // Async MX lookup validation
     const validateEmailWithApi = async (email) => {
         setIsEmailValidating(true);
@@ -503,6 +511,10 @@ const CalendarBooking = () => {
             });
             if (response.ok) {
                 setStep(4);
+                if (!calendarBookedTrackedRef.current) {
+                    pushDataLayerEvent("lp_calendar_booked");
+                    calendarBookedTrackedRef.current = true;
+                }
                 try {
                     const emailResponse = await fetch("/api/send-email", {
                         method: "POST",
@@ -871,6 +883,10 @@ const CalendarBooking = () => {
                                                 headers: { "Content-Type": "application/json" },
                                                 body: JSON.stringify(payload),
                                             });
+                                            if (!formSubmitTrackedRef.current) {
+                                                pushDataLayerEvent("lp_form_submit");
+                                                formSubmitTrackedRef.current = true;
+                                            }
                                         } catch (err) {}
                                         setStep(2);
                                     }}>
