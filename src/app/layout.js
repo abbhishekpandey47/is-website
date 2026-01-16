@@ -29,7 +29,8 @@ export default function RootLayout({ children }) {
   return (
   <html lang='en' suppressHydrationWarning>
             <head>
-                <AlternateLinks />
+                  <AlternateLinks />
+                  <link rel="preload" href="/landingfolio/dashboard.webp" as="image" />
             </head>
             <GoogleAnalytics gaId='G-G0BTN1FRWY' />
             <body className='antialiased' suppressHydrationWarning>

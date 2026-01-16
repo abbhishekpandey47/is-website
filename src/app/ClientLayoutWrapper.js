@@ -26,15 +26,8 @@ export function ClientLayoutWrapper({ children }) {
     if (mounted) {
       mixpanel.init(process.env.NEXT_PUBLIC_MIXPANEL, {
         autocapture: true, // enable autocapture
-        debug: true,
+        debug: false,
   });
-    //   mixpanel.identify("USER_ID");
-
-    //   mixpanel.people.set({
-    //     $name: "Jane Doe",
-    //     $email: "jane.doe@example.com",
-    //     plan: "Premium",
-    //   });
     }
   }, [mounted]);
 
@@ -86,7 +79,7 @@ export function ClientLayoutWrapper({ children }) {
         {/* <CrispWithNoSSR /> */}
         <Script
           id="koala-tracking"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               !function(t){var k="ko",i=(window.globalKoalaKey=window.globalKoalaKey||k);if(window[i])return;var ko=(window[i]=[]);["identify","track","removeListeners","on","off","qualify","ready"].forEach(function(t){ko[t]=function(){var n=[].slice.call(arguments);return n.unshift(t),ko.push(n),ko}});var n=document.createElement("script");n.async=!0,n.setAttribute("src","https://cdn.getkoala.com/v1/pk_ccda6b50f34963a28c2f035673b27491be24/sdk.js"),(document.body || document.head).appendChild(n)}();

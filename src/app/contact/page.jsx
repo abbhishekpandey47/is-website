@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import ContactPage from "../book-a-demo/page";
 import Image from "next/image";
 import { Router } from "next/router";
-import { useRouter } from "next/navigation"; // add this
+import { useRouter, useSearchParams } from "next/navigation"; // add this
 
 const CalendarBooking = () => {
     const buttonText = "Book a Meeting";
@@ -648,6 +648,9 @@ const CalendarBooking = () => {
     };
 
     const router = useRouter(); // add this
+    const searchParams = useSearchParams();
+    const appParam = searchParams ? searchParams.get('app') : null;
+    const isAdsApp = appParam === 'ads';
 
     useEffect(() => {
         if (step === 4) {
@@ -660,10 +663,10 @@ const CalendarBooking = () => {
 
     return (
         <div className="h-full">
-            <div className="w-full pt-36 items-center justify-center">
+            <div className={`w-full ${isAdsApp ? '' : 'pt-36'} items-center justify-center`}>
                 <div className="w-full text-white rounded-xl p-8 flex flex-col items-center">
                     <h1 className="text-5xl text-center font-bold mb-4">Schedule a Free Demo</h1>
-                    <span className="text-center text-gray-400 mb-8">
+                    <span className={`text-center text-gray-400 ${isAdsApp ? '' : 'mb-4'}`}>
                         Book a free demo and see how Infrasity helps you move faster, smarter.
                     </span>
                 </div>
@@ -674,7 +677,7 @@ const CalendarBooking = () => {
                             "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
                     }}
                 >
-                    <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-14"></div>
+                    <div className={`w-full ${isAdsApp ? '' : 'mt-6'} h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 ${isAdsApp ? '' : 'mb-8'}`}></div>
 
                     <div className="flex items-center justify-center p-4">
                         <div className="w-full lg:w-[50%] items-center justify-center rounded-3xl border border-gray-400 p-10"
