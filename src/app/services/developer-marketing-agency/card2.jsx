@@ -85,10 +85,13 @@ const FeatureCards = () => {
   {card.design ? (
     <div>{card.design}</div>
   ) : (
-    <img
+    <Image
       src={`/landingfolio/${card.image}`}
       alt={card.imageAlt}
+      width={1200}
+      height={700}
       className="w-full h-full rounded"
+      priority={index === 0}
     />
   )}
 </div>
