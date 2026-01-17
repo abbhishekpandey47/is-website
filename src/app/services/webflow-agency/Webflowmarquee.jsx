@@ -28,7 +28,6 @@ const fileList = [
   "logo-landscape-removebg-preview.png",
   "lovable-logo.png",
   "Mask-group.png",
-  "middleware-logo.svg",
   "scalr.png",
   "stackOne.svg",
   "TravisCI-Full-Color.png",
@@ -41,7 +40,6 @@ const fileList = [
 const getLogoPadding = (filename) => {
   const paddingMap = {
     'dhiwise.svg': 'p-6',
-    'middleware-logo.svg': 'p-3',
     'qodo-logo.svg': 'p-8',
     'stackOne.svg': 'p-4',
     'mocha.png': 'p-8',

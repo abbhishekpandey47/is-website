@@ -9,7 +9,7 @@ const fileList = [
   "mvp-grow.png","cerbos.png","qodo-logo.png","Codegiant.png","Scalekit-logo.png","cycloid.png",
   "scalr.png","daytona.png","stackOne.png","DevZero.png","terrateam.png","env0-infra-1.png",
   "tracetest.png","firefly.png","TravisCI-Full-Color.png","firstock-logo.png","vapi-logo.png",
-  "kapstan.png","Zenml.png","Kubiya.png","lovable-logo.png","Meteor-ops.png","middleware-logo.png"
+  "kapstan.png","Zenml.png","Kubiya.png","lovable-logo.png","Meteor-ops.png"
 ];
 
 const getLogoPadding = (filename) => {
@@ -43,7 +43,6 @@ const getLogoPadding = (filename) => {
     'Kubiya.png': 'p-5',
     'lovable-logo.png': 'p-4',
     'Meteor-ops.png': 'p-4',
-    'middleware-logo.png': 'p-3',
   };
 
   return paddingMap[filename] || 'p-4';

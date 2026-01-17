@@ -36,8 +36,7 @@ const logoFiles = [
     "Zenml.png",
     "Kubiya.png",
     "lovable-logo.png",
-    "Meteor-ops.png",
-    "middleware-logo.png",
+    "Meteor-ops.png"
 ];
 
 
@@ -72,7 +71,6 @@ const getLogoPadding = (filename) => {
         'Kubiya.png': 'p-5',
         'lovable-logo.png': 'p-4',
         'Meteor-ops.png': 'p-4',
-        'middleware-logo.png': 'p-3',
     };
 
     // Return specific padding or default p-4
