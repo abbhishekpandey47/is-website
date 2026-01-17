@@ -9,7 +9,7 @@ const RedditMarketingSlide = dynamic(() => import("./why"), { ssr: false });
 const InfraMethodologyTimeline = dynamic(() => import("./methodology"), { ssr: false });
 const RedditServiceCards = dynamic(() => import("./whatYouGet"), { ssr: false });
 const StartupHeroSection = dynamic(() => import("./whoThisIsFor"), { ssr: false });
-const DownloadPDF = dynamic(() => import("./download"), { ssr: false });
+// const DownloadPDF = dynamic(() => import("./download"), { ssr: false });
 const Testimonials = dynamic(() => import("../../services/gtm-content-services-for-yc-startups/testimonials"), { ssr: false });
 const VideoTestimonials = dynamic(() => import("../../playbook/developer-marketing/testimonials"), { ssr: false });
 const FAQSection = dynamic(() => import("./FAQ"), { ssr: false });
@@ -59,7 +59,7 @@ export default function Page() {
             <StatsSection />
             <RedditComment />
             <Threadflow />
-            <DownloadPDF />
+            {/* <DownloadPDF /> */}
 
             <Testimonials />
 

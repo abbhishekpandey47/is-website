@@ -1,7 +1,6 @@
 'use client';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { Analytics } from '@vercel/analytics/react';
-import mixpanel from "mixpanel-browser";
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import dynamic from 'next/dynamic';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -19,17 +18,20 @@ export function ClientLayoutWrapper({ children }) {
 
   useEffect(() => {
     setMounted(true);
-    initMixpanel();
   }, []);
 
   useEffect(() => {
-    if (mounted) {
-      mixpanel.init(process.env.NEXT_PUBLIC_MIXPANEL, {
-        autocapture: true, // enable autocapture
-        debug: false,
-  });
+    if (typeof window === 'undefined') return;
+
+    const initMixpanelInIdle = () => initMixpanel({ debug: false });
+    if ('requestIdleCallback' in window) {
+      const idleId = window.requestIdleCallback(initMixpanelInIdle);
+      return () => window.cancelIdleCallback(idleId);
     }
-  }, [mounted]);
+
+    const timeoutId = window.setTimeout(initMixpanelInIdle, 0);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
 
 
 

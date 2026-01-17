@@ -30,7 +30,6 @@ export const clientLogo = [
   "logo-landscape-removebg-preview.png",
   "lovable-logo.png",
   "Mask-group.png",
-  "middleware-logo.svg",
   "scalr.png",
   "stackOne.svg",
   "TravisCI-Full-Color.png",
@@ -75,13 +74,11 @@ export const serviceClientLogo = [
   "Kubiya.png",
   "lovable-logo.png",
   "Meteor-ops.png",
-  "middleware-logo.png",
 ];
 
 export const clientPaddingMap = {
   "cardinal.webp": "p-12",
   "dhiwise.svg": "p-6",
-  "middleware-logo.svg": "p-3",
   "qodo-logo.svg": "p-8",
   "stackOne.svg": "p-4",
   "mocha.png": "p-8",

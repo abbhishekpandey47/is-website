@@ -100,7 +100,7 @@ export default function Threadflow() {
             Get Started
           </m.a>
           <m.a
-            href="/contact"
+            href="/contact?app=ads"
             className="inline-flex items-center justify-center rounded-lg border border-white/90 px-5 py-3 font-medium text-white/95 transition hover:bg-white/10"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}

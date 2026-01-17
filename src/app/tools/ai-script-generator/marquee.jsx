@@ -34,13 +34,11 @@ const fileList = [
   "Kubiya.png",
   "lovable-logo.png",
   "Meteor-ops.png",
-  "middleware-logo.png",
 ];
 
 const getLogoPadding = (filename) => {
   const paddingMap = {
     'dhiwise.png': 'p-2',
-    'middleware-logo.svg': 'p-3',
     'oso.png': 'p-12',
     'ox-sec.svg': 'p-8',
     'qodo-logo.svg': 'p-8',
