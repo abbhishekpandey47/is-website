@@ -17,7 +17,8 @@ export default function DeferredScripts() {
       window.addEventListener(event, activate, { once: true, passive: true });
     });
 
-    const timer = window.setTimeout(activate, 1500);
+    // Increase timeout to 2000ms to give page more time to render critical content first
+    const timer = window.setTimeout(activate, 2000);
 
     return () => {
       interactionEvents.forEach((event) => {

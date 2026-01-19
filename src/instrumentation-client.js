@@ -13,18 +13,17 @@ Sentry.init({
     Sentry.replayIntegration(),
   ],
 
-  // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
-  tracesSampleRate: 1,
+  // Reduce trace sample rate to reduce JS execution overhead (20% instead of 100%)
+  tracesSampleRate: 0.2,
   // Enable logs to be sent to Sentry
-  enableLogs: true,
+  enableLogs: false, // Disable to reduce overhead
 
   // Define how likely Replay events are sampled.
-  // This sets the sample rate to be 10%. You may want this to be 100% while
-  // in development and sample at a lower rate in production
-  replaysSessionSampleRate: 0.1,
+  // Reduced from 0.1 to 0.05 (5%) to minimize performance impact
+  replaysSessionSampleRate: 0.05,
 
   // Define how likely Replay events are sampled when an error occurs.
-  replaysOnErrorSampleRate: 1.0,
+  replaysOnErrorSampleRate: 0.5,
 
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,

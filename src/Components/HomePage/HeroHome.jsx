@@ -1,16 +1,17 @@
 "use client";
-import React, { useState, useEffect, useLayoutEffect, useMemo } from "react";
+import React, { useState, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import Particles from "../ui/particles";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger, CustomEase, Power3 } from "gsap/all";
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(CustomEase);
+import dynamic from "next/dynamic";
 import { Typewriter } from "react-simple-typewriter";
 import ClutchBadge from "./clutch";
 import CalendarBooking from "../../app/calendarButton";
 
+// Dynamically import GSAP only when component mounts to reduce initial bundle
+let gsapAnimationReady = false;
+
 const HeroHome = () => {
+  const [animationReady, setAnimationReady] = useState(false);
   const headingText = useMemo(() => {
     console.log("Memoizing heading text");
     return {
@@ -25,36 +26,54 @@ const HeroHome = () => {
   }, []);
 
   useLayoutEffect(() => {
-    gsap.fromTo(
-      ".HeroWordSpan",
-      {
-        opacity: 0,
-        y: 200,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        stagger: 0.1,
-        ease: "power3.out",
-        duration: 1.5,
-      }
-    );
+    // Load GSAP dynamically only on client-side
+    if (typeof window === 'undefined') return;
+    
+    const loadGSAPAnimations = async () => {
+      try {
+        const { default: gsap } = await import("gsap");
+        const { ScrollTrigger, CustomEase, Power3 } = await import("gsap/all");
+        
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(CustomEase);
+        
+        // Run animations after GSAP is loaded
+        gsap.fromTo(
+          ".HeroWordSpan",
+          {
+            opacity: 0,
+            y: 200,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            ease: "power3.out",
+            duration: 1.5,
+          }
+        );
 
-    gsap.fromTo(
-      "heroPagePara",
-      {
-        opacity: 0,
-        y: 55,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        ease: "power3.out",
-        duration: 1.5,
-      }
-    );
+        gsap.fromTo(
+          "heroPagePara",
+          {
+            opacity: 0,
+            y: 55,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            ease: "power3.out",
+            duration: 1.5,
+          }
+        );
 
-    return () => { };
+        gsapAnimationReady = true;
+      } catch (error) {
+        console.error('Failed to load GSAP:', error);
+      }
+    };
+
+    loadGSAPAnimations();
   }, []);
 
   const [color, setColor] = useState("#ffffff");

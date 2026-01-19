@@ -1,7 +1,40 @@
 import { withSentryConfig } from "@sentry/nextjs";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+	// Enable SWC minification (faster than default Terser)
+	swcMinify: true,
+	
+	// Optimize images
+	images: {
+		formats: ['image/avif', 'image/webp'],
+		deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+		imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+	},
+
+	// Enable compression
+	compress: true,
+
+	// Optimize fonts
+	optimizeFonts: true,
+
+	// Reduce initial JS payload
+	productionBrowserSourceMaps: false,
+
+	// Optimize build output
+	experimental: {
+		// Enable next.js optimizations
+		optimizePackageImports: ["@radix-ui/react-*", "@headlessui/react", "lucide-react"],
+	},
+
+	// Webpack optimization
+	webpack: (config, { isServer }) => {
+		// Enable tree-shaking for unused code
+		config.optimization.usedExports = true;
+		
+		return config;
+	},
+};
 
 // Disable Sentry's bundler plugins (which create releases & upload sourcemaps)
 // unless you explicitly enable them via SENTRY_RELEASES_ENABLED=true.

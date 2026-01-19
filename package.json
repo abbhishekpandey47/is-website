@@ -13,6 +13,7 @@
         "sitemap": "node scripts/generate-sitemap.js",
         "start": "next start",
         "lint": "next lint",
+        "analyze": "node scripts/analyze-bundle.js",
         "postinstall": "next --version"
     },
     "dependencies": {
