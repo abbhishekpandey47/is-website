@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { auth } from "@/lib/firebaseClient";
 import { Badge } from "@/Components/ui/badge";
 import { Button } from "@/Components/ui/button";
@@ -75,9 +75,41 @@ export default function SerpScoutPage() {
   const [citationResults, setCitationResults] = useState(null);
   const [citationLoading, setCitationLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [selectedKeywordIds, setSelectedKeywordIds] = useState([]);
 
   const trimmedDomain = domain.trim();
+  const maxSelectable = 20;
+  const minSelectable = 1;
   const selectedKeyword = selectedKeywordIdx !== null ? keywords[selectedKeywordIdx] : null;
+
+  const selectedKeywordEntries = useMemo(
+    () =>
+      selectedKeywordIds
+        .map((id) => (keywords[id] ? { ...keywords[id], _originalIndex: id } : null))
+        .filter(Boolean),
+    [keywords, selectedKeywordIds]
+  );
+
+  const analysisKeywordEntries = useMemo(() => {
+    const sourceIds = selectedKeywordIds.length ? selectedKeywordIds : keywords.map((_, idx) => idx);
+    return sourceIds
+      .map((id) => (keywords[id] ? { ...keywords[id], _originalIndex: id } : null))
+      .filter(Boolean);
+  }, [keywords, selectedKeywordIds]);
+
+  const toggleKeywordSelection = (idx) => {
+    setError("");
+    setSelectedKeywordIds((prev) => {
+      if (prev.includes(idx)) {
+        return prev.filter((id) => id !== idx);
+      }
+      if (prev.length >= maxSelectable) {
+        setError(`You can select up to ${maxSelectable} keywords.`);
+        return prev;
+      }
+      return [...prev, idx];
+    });
+  };
 
   // STEP 1: Fetch domain and generate keywords
   const handleFetchDomain = async (e) => {
@@ -110,11 +142,16 @@ export default function SerpScoutPage() {
       setRawResult(data);
       setCompanyContext(data.companyContext);
 
-      const normalizedKeywords = (data.keywords || []).map((keyword) => ({
-        ...keyword,
-        prompts: Array.isArray(keyword.prompts) ? keyword.prompts : [],
-      }));
+      const normalizedKeywords = (data.keywords || [])
+        .slice(0, 20)
+        .map((keyword) => ({
+          ...keyword,
+          prompts: Array.isArray(keyword.prompts) ? keyword.prompts : [],
+        }));
       setKeywords(normalizedKeywords);
+      setSelectedKeywordIds(
+        normalizedKeywords.slice(0, Math.min(3, normalizedKeywords.length)).map((_, idx) => idx)
+      );
 
       if (data.companyContext?.approvedContext) {
         setContextForm({
@@ -145,7 +182,7 @@ export default function SerpScoutPage() {
 
   // STEP 2: Approve context
   const handleApproveContext = () => {
-    setSuccess("✓ Overview approved! Reviewing keywords...");
+    setSuccess("✓ Overview approved! Select 1-5 keywords to keep...");
     setTimeout(() => {
       setSuccess("");
       setCurrentStep(3);
@@ -154,6 +191,11 @@ export default function SerpScoutPage() {
 
   // STEP 3: Approve keywords (locked, read-only)
   const handleApproveKeywords = () => {
+    if (selectedKeywordIds.length < 1 || selectedKeywordIds.length > 20) {
+      setError("Select at least 1 and up to 20 keywords to continue.");
+      return;
+    }
+    setError("");
     setSuccess("✓ Keywords approved! Ready to save...");
     setTimeout(() => {
       setSuccess("");
@@ -177,7 +219,7 @@ export default function SerpScoutPage() {
           action: "saveKeywords",
           companyId: rawResult?.companyId || null,
           domain: trimmedDomain,
-          keywords,
+          keywords: selectedKeywordIds.map((id) => keywords[id]).filter(Boolean),
           companyName: rawResult?.companyName || null,
         }),
       });
@@ -241,6 +283,48 @@ export default function SerpScoutPage() {
       setError(err.message);
     } finally {
       setSerpLoading(false);
+    }
+  };
+
+  const handleGeneratePostContent = async () => {
+    if (!selectedKeyword?.term) return;
+
+    setGeneratingPosts(true);
+    setError("");
+    try {
+      const token = await auth.currentUser?.getIdToken?.();
+      
+      // Gather Reddit context from current SERP data
+      const redditContext = {
+        topPosts: topRedditPosts.slice(0, 5),
+        newPosts: newRedditPosts.slice(0, 5)
+      };
+
+      const res = await fetch("/api/threadflow/serp-scout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          action: "generatePostContent",
+          keyword: selectedKeyword.term,
+          domain: trimmedDomain,
+          companyId: rawResult?.companyId || null,
+          redditContext,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to generate posts");
+
+      setGeneratedPosts(data.posts || []);
+      setSuccess("✓ Post content generated with Reddit context!");
+      setTimeout(() => setSuccess(""), 3000);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setGeneratingPosts(false);
     }
   };
 
@@ -331,6 +415,22 @@ export default function SerpScoutPage() {
   };
 
   const keywordSerpData = selectedKeyword ? serpResults[selectedKeyword.term] : null;
+  const topRedditPosts = useMemo(
+    () => keywordSerpData?.topRedditPosts || [],
+    [keywordSerpData]
+  );
+  const newRedditPosts = useMemo(
+    () => keywordSerpData?.newRedditPosts || [],
+    [keywordSerpData]
+  );
+  const suggestedPosts = useMemo(
+    () => keywordSerpData?.suggestedPosts || [],
+    [keywordSerpData]
+  );
+  
+  // Post content generation state
+  const [generatedPosts, setGeneratedPosts] = useState([]);
+  const [generatingPosts, setGeneratingPosts] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -358,8 +458,8 @@ export default function SerpScoutPage() {
             {[
               { step: 1, label: "Domain", icon: "🌐" },
               { step: 2, label: "Overview", icon: "📋" },
-              { step: 3, label: "Keywords", icon: "⚡" },
-              { step: 4, label: "Save", icon: "💾" },
+              { step: 3, label: "Select Keywords", icon: "⚡" },
+              { step: 4, label: "Prompts & Save", icon: "💾" },
               { step: 5, label: "Analyze", icon: "🔍" },
             ].map((item, idx) => (
               <div key={item.step} className="flex items-center gap-2 flex-shrink-0">
@@ -538,115 +638,135 @@ export default function SerpScoutPage() {
             </Card>
           )}
 
-          {/* STEP 3: KEYWORDS (EDITABLE) */}
+          {/* STEP 3: KEYWORDS (SELECT 1-5) */}
           {!isExistingData && currentStep >= 3 && (
             <Card className={currentStep === 3 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      <span>⚡</span> Step 3: Review Keywords
+                      <span>⚡</span> Step 3: Select Keywords
                     </CardTitle>
                     <CardDescription>
-                      {keywords.length} keywords - edit and suggest new prompts if needed
+                      Choose at least 1 and up to 20 keywords from the list below.
                     </CardDescription>
                   </div>
-                  {currentStep > 3 && <Check className="h-5 w-5 text-emerald-600" />}
+                  <div className="text-xs text-muted-foreground">
+                    Selected {selectedKeywordIds.length}/{maxSelectable}
+                  </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                {keywords.map((keyword, idx) => (
-                  <div key={idx} className="rounded-lg border border-border bg-card/50 p-4 space-y-3">
-                    {/* Editable keyword fields */}
-                    <div className="space-y-2">
-                      <input
-                        type="text"
-                        value={keyword.term}
-                        onChange={(e) => handleUpdateKeyword(idx, "term", e.target.value)}
-                        className="w-full bg-background border border-border rounded px-2 py-1 text-sm font-semibold"
-                      />
-                      <select
-                        value={keyword.intent}
-                        onChange={(e) => handleUpdateKeyword(idx, "intent", e.target.value)}
-                        className="w-full bg-background border border-border rounded px-2 py-1 text-xs"
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {keywords.map((keyword, idx) => {
+                    const isChecked = selectedKeywordIds.includes(idx);
+                    return (
+                      <div
+                        key={idx}
+                        onClick={() => toggleKeywordSelection(idx)}
+                        className={`cursor-pointer rounded-lg border transition-all ${
+                          isChecked
+                            ? "border-emerald-500 bg-emerald-500/10 shadow-md"
+                            : "border-border bg-card/50 hover:border-emerald-400/50 hover:bg-card"
+                        } p-3 space-y-2`}
                       >
-                        <option value="commercial">Commercial</option>
-                        <option value="informational">Informational</option>
-                      </select>
-                      <textarea
-                        value={keyword.why}
-                        onChange={(e) => handleUpdateKeyword(idx, "why", e.target.value)}
-                        placeholder="Why this keyword matters..."
-                        className="w-full bg-background border border-border rounded px-2 py-1 text-xs min-h-[50px]"
-                      />
-                    </div>
-
-                    {/* Prompts with suggest button */}
-                    <div className="pt-2 space-y-2 border-t border-border/30">
-                      <div className="flex items-center justify-between">
-                        <p className="text-xs font-semibold text-muted-foreground">
-                          Prompts ({keyword.prompts.length})
-                        </p>
-                        {currentStep === 3 && (
-                          <Button
-                            variant="outline"
-                            size="xs"
-                            onClick={() => handleSuggestPrompts(idx)}
-                            disabled={suggestingPromptsLoading}
-                            className="text-xs h-7"
-                          >
-                            {suggestingPromptsLoading && suggestingPromptsIdx === idx
-                              ? "Suggesting..."
-                              : "✨ Suggest Prompts"}
-                          </Button>
-                        )}
-                      </div>
-
-                      <div className="space-y-1">
-                        {keyword.prompts.map((prompt, pIdx) => (
-                          <div key={pIdx} className="text-xs text-foreground/70 pl-2">
-                            {pIdx + 1}. {prompt}
+                        <div className="flex items-start gap-2">
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => toggleKeywordSelection(idx)}
+                            onClick={(e) => e.stopPropagation()}
+                            className="mt-0.5 h-4 w-4 accent-emerald-600 cursor-pointer flex-shrink-0"
+                            aria-label={`Select ${keyword.term}`}
+                          />
+                          <div className="flex-1 min-w-0 space-y-1">
+                            <p className="text-sm font-semibold text-foreground" title={keyword.term}>
+                              {keyword.term}
+                            </p>
+                            <p className="text-[10px] text-muted-foreground line-clamp-2" title={keyword.why}>
+                              {keyword.why}
+                            </p>
                           </div>
-                        ))}
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
+                    );
+                  })}
+                </div>
 
                 {currentStep === 3 && (
                   <Button onClick={handleApproveKeywords} className="w-full">
-                    <Check className="h-4 w-4 mr-2" /> Approve Keywords & Continue
+                    <Check className="h-4 w-4 mr-2" /> Continue to Prompts
                   </Button>
                 )}
               </CardContent>
             </Card>
           )}
 
-          {/* STEP 4: SAVE */}
+          {/* STEP 4: PROMPTS & SAVE */}
           {!isExistingData && currentStep >= 4 && (
             <Card className={currentStep === 4 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      <span>💾</span> Step 4: Save Keywords
+                      <span>💾</span> Step 4: Prompts & Save
                     </CardTitle>
                     <CardDescription>
-                      Save keywords permanently to database
+                      Suggest prompts for your selected keywords, then save.
                     </CardDescription>
                   </div>
                   {currentStep > 4 && <Check className="h-5 w-5 text-emerald-600" />}
                 </div>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
+                {selectedKeywordEntries.length === 0 && (
+                  <div className="text-sm text-amber-600 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+                    Select 1-20 keywords first to request prompts.
+                  </div>
+                )}
+
+                {selectedKeywordEntries.map((keyword) => (
+                  <div key={keyword._originalIndex} className="rounded-lg border border-border bg-card/40 p-4 space-y-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">{keyword.term}</p>
+                        <p className="text-[11px] text-muted-foreground">{keyword.intent}</p>
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="xs"
+                        onClick={() => handleSuggestPrompts(keyword._originalIndex)}
+                        disabled={suggestingPromptsLoading}
+                        className="text-xs h-7"
+                      >
+                        {suggestingPromptsLoading && suggestingPromptsIdx === keyword._originalIndex
+                          ? "Suggesting..."
+                          : "✨ Suggest Prompts"}
+                      </Button>
+                    </div>
+
+                    <div className="space-y-1">
+                      {keyword.prompts?.length ? (
+                        keyword.prompts.map((prompt, pIdx) => (
+                          <div key={pIdx} className="text-xs text-foreground/80 pl-2">
+                            {pIdx + 1}. {prompt}
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-xs text-muted-foreground">No prompts yet. Click suggest.</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
                 {currentStep === 4 && (
                   <Button
                     onClick={handleSaveKeywords}
-                    disabled={isSaving}
+                    disabled={isSaving || selectedKeywordEntries.length === 0}
                     className="w-full"
                   >
                     <Check className="h-4 w-4 mr-2" />
-                    {isSaving ? "Saving..." : "Save Keywords Permanently"}
+                    {isSaving ? "Saving..." : "Save Selected Keywords"}
                   </Button>
                 )}
                 {isKeywordsSaved && (
@@ -675,13 +795,13 @@ export default function SerpScoutPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
-                    {keywords.map((keyword, idx) => (
+                    {analysisKeywordEntries.map((keyword) => (
                       <Button
-                        key={idx}
-                        variant={selectedKeywordIdx === idx ? "default" : "outline"}
+                        key={keyword._originalIndex}
+                        variant={selectedKeywordIdx === keyword._originalIndex ? "default" : "outline"}
                         className="text-left justify-start h-auto py-3 px-4"
                         onClick={() => {
-                          setSelectedKeywordIdx(idx);
+                          setSelectedKeywordIdx(keyword._originalIndex);
                           setAnalysisTab(null);
                         }}
                       >
@@ -705,7 +825,7 @@ export default function SerpScoutPage() {
                   </CardHeader>
                   <CardContent>
                     {/* Tab Buttons */}
-                    <div className="flex gap-2 mb-6 border-b border-border pb-4">
+                    <div className="flex gap-2 mb-6 border-b border-border pb-4 overflow-x-auto">
                       <Button
                         variant={analysisTab === "serp" ? "default" : "ghost"}
                         size="sm"
@@ -713,7 +833,16 @@ export default function SerpScoutPage() {
                         className="flex items-center gap-2"
                       >
                         <Search className="h-4 w-4" />
-                        SERP Threads
+                        SERP & Reddit
+                      </Button>
+                      <Button
+                        variant={analysisTab === "postContent" ? "default" : "ghost"}
+                        size="sm"
+                        onClick={() => setAnalysisTab("postContent")}
+                        className="flex items-center gap-2"
+                      >
+                        <MessageSquare className="h-4 w-4" />
+                        Post Content
                       </Button>
                       <Button
                         variant={analysisTab === "citations" ? "default" : "ghost"}
@@ -738,7 +867,7 @@ export default function SerpScoutPage() {
                         </Button>
 
                         {keywordSerpData && (
-                          <div className="space-y-4">
+                          <div className="space-y-6">
                             <div className="rounded-lg bg-muted/40 border border-border p-4">
                               <p className="text-sm font-semibold mb-2">
                                 Position: {keywordSerpData.position || "Not ranked"}
@@ -749,6 +878,7 @@ export default function SerpScoutPage() {
                               </p>
                             </div>
 
+                            {/* SERP Reddit Threads */}
                             {keywordSerpData.redditThreads?.length > 0 && (
                               <div className="space-y-3">
                                 <p className="text-sm font-semibold flex items-center gap-2">
@@ -783,6 +913,199 @@ export default function SerpScoutPage() {
                                 No Reddit threads found in top Google results for this keyword
                               </p>
                             )}
+
+                            {/* Top Reddit Posts */}
+                            {topRedditPosts.length > 0 && (
+                              <div className="space-y-3">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-lg">🔥</span>
+                                  <p className="text-sm font-semibold">Top Reddit Posts ({topRedditPosts.length})</p>
+                                </div>
+                                {topRedditPosts.map((post, idx) => (
+                                  <div key={idx} className="rounded-lg border border-orange-500/20 bg-orange-500/5 p-4 space-y-2">
+                                    <p className="text-sm font-semibold text-foreground">
+                                      {post.post_title || `Post #${idx + 1}`}
+                                    </p>
+                                    <p className="text-xs text-muted-foreground line-clamp-2">
+                                      {(post.post_content || '').slice(0, 150)}...
+                                    </p>
+                                    <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
+                                      <span>r/{post.subreddit}</span>
+                                      <span>•</span>
+                                      <span>↑ {post.upvotes || 0}</span>
+                                      <span>•</span>
+                                      <span>💬 {post.total_comments || 0}</span>
+                                    </div>
+                                    <a
+                                      href={post.post_url}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      className="text-xs text-orange-600 hover:underline inline-flex items-center gap-1"
+                                    >
+                                      View on Reddit →
+                                    </a>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* New Reddit Posts */}
+                            {newRedditPosts.length > 0 && (
+                              <div className="space-y-3">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-lg">🆕</span>
+                                  <p className="text-sm font-semibold">New Reddit Posts ({newRedditPosts.length})</p>
+                                </div>
+                                {newRedditPosts.map((post, idx) => (
+                                  <div key={idx} className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4 space-y-2">
+                                    <p className="text-sm font-semibold text-foreground">
+                                      {post.post_title || `Post #${idx + 1}`}
+                                    </p>
+                                    <p className="text-xs text-muted-foreground line-clamp-2">
+                                      {(post.post_content || '').slice(0, 150)}...
+                                    </p>
+                                    <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
+                                      <span>r/{post.subreddit}</span>
+                                      <span>•</span>
+                                      <span>↑ {post.upvotes || 0}</span>
+                                      <span>•</span>
+                                      <span>💬 {post.total_comments || 0}</span>
+                                      <span>•</span>
+                                      <span>{post.post_age_hours}h ago</span>
+                                    </div>
+                                    <a
+                                      href={post.post_url}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      className="text-xs text-blue-600 hover:underline inline-flex items-center gap-1"
+                                    >
+                                      View on Reddit →
+                                    </a>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* AI-Suggested Posts */}
+                            {suggestedPosts.length > 0 && (
+                              <div className="space-y-3">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-lg">✨</span>
+                                  <p className="text-sm font-semibold">AI-Suggested Posts to Engage ({suggestedPosts.length})</p>
+                                </div>
+                                <p className="text-xs text-muted-foreground italic">
+                                  These posts were selected by AI based on your company context and engagement potential
+                                </p>
+                                {suggestedPosts.map((post, idx) => (
+                                  <div key={idx} className="rounded-lg border-2 border-emerald-500/40 bg-emerald-500/10 p-4 space-y-3">
+                                    <div className="flex items-start justify-between gap-2">
+                                      <p className="text-sm font-semibold text-foreground flex-1">
+                                        {post.post_title || `Post #${idx + 1}`}
+                                      </p>
+                                      {post.engagementScore && (
+                                        <span className="px-2 py-1 rounded-full bg-emerald-600 text-white text-[10px] font-bold">
+                                          {post.engagementScore}/10
+                                        </span>
+                                      )}
+                                    </div>
+                                    <p className="text-xs text-foreground/80 line-clamp-2">
+                                      {(post.post_content || '').slice(0, 150)}...
+                                    </p>
+                                    {post.engagementReason && (
+                                      <div className="rounded bg-emerald-950/20 p-2 space-y-1">
+                                        <p className="text-[10px] font-semibold text-emerald-700 uppercase tracking-wider">Why Engage</p>
+                                        <p className="text-xs text-emerald-900">{post.engagementReason}</p>
+                                      </div>
+                                    )}
+                                    {post.engagementStrategy && (
+                                      <div className="rounded bg-amber-950/20 p-2 space-y-1">
+                                        <p className="text-[10px] font-semibold text-amber-700 uppercase tracking-wider">Strategy</p>
+                                        <p className="text-xs text-amber-900">{post.engagementStrategy}</p>
+                                      </div>
+                                    )}
+                                    <div className="flex items-center gap-3 text-[11px] text-muted-foreground pt-2 border-t border-emerald-500/20">
+                                      <span>r/{post.subreddit}</span>
+                                      <span>•</span>
+                                      <span>↑ {post.upvotes || 0}</span>
+                                      <span>•</span>
+                                      <span>💬 {post.total_comments || 0}</span>
+                                    </div>
+                                    <a
+                                      href={post.post_url}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      className="text-xs font-semibold text-emerald-700 hover:text-emerald-600 inline-flex items-center gap-1"
+                                    >
+                                      Engage on Reddit →
+                                    </a>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Post Content Tab */}
+                    {analysisTab === "postContent" && (
+                      <div className="space-y-4">
+                        <Button
+                          onClick={handleGeneratePostContent}
+                          disabled={generatingPosts}
+                          className="w-full"
+                        >
+                          {generatingPosts ? "Generating..." : "Generate Post Ideas"}
+                        </Button>
+
+                        {generatedPosts.length > 0 && (
+                          <div className="space-y-4">
+                            <div className="flex items-center gap-2 mb-4">
+                              <span className="text-lg">📝</span>
+                              <p className="text-sm font-semibold">AI-Generated Post Content ({generatedPosts.length})</p>
+                            </div>
+                            <p className="text-xs text-muted-foreground italic mb-4">
+                              Ready-to-post content ideas tailored to your keyword and company context
+                            </p>
+                            {generatedPosts.map((post, idx) => (
+                              <div key={idx} className="rounded-lg border-2 border-blue-500/40 bg-blue-500/5 p-4 space-y-3">
+                                <div className="flex items-start justify-between gap-2">
+                                  <p className="text-sm font-semibold text-foreground flex-1">
+                                    {post.title}
+                                  </p>
+                                  {post.subreddit && (
+                                    <span className="px-2 py-1 rounded-full bg-blue-600 text-white text-[10px] font-bold">
+                                      r/{post.subreddit}
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="bg-background rounded p-3 space-y-2">
+                                  <p className="text-xs text-foreground/90 whitespace-pre-wrap">
+                                    {post.content}
+                                  </p>
+                                </div>
+                                {post.rationale && (
+                                  <div className="rounded bg-blue-950/20 p-2 space-y-1">
+                                    <p className="text-[10px] font-semibold text-blue-700 uppercase tracking-wider">Why This Works</p>
+                                    <p className="text-xs text-blue-900">{post.rationale}</p>
+                                  </div>
+                                )}
+                                <div className="flex items-center gap-2 pt-2 border-t border-blue-500/20">
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={() => {
+                                      navigator.clipboard.writeText(post.content);
+                                      setSuccess("✓ Copied to clipboard!");
+                                      setTimeout(() => setSuccess(""), 2000);
+                                    }}
+                                    className="text-xs"
+                                  >
+                                    Copy Post
+                                  </Button>
+                                </div>
+                              </div>
+                            ))}
                           </div>
                         )}
                       </div>
@@ -796,21 +1119,28 @@ export default function SerpScoutPage() {
                           disabled={citationLoading}
                           className="w-full"
                         >
-                          {citationLoading ? "Testing..." : "Test LLM Citations"}
+                          {citationLoading ? "Testing..." : "Test Reddit Citations"}
                         </Button>
 
                         {citationResults && (
                           <div className="space-y-6">
                             {/* Group by prompt */}
                             {selectedKeyword?.prompts?.map((prompt, pIdx) => {
-                              const promptResults = citationResults.records?.map(record => {
-                                const result = record.results?.find(r => r.prompt === prompt)
-                                return {
-                                  model: record.model,
-                                  timestamp: record.timestamp,
-                                  result
-                                }
-                              }) || []
+                              const promptResults =
+                                citationResults.records
+                                  ?.map((record) => {
+                                    const result = record.results?.find((r) => r.prompt === prompt);
+                                    const redditMatch = result?.matches?.find((m) =>
+                                      m.domain?.toLowerCase().includes("reddit.com")
+                                    );
+                                    if (!redditMatch) return null;
+                                    return {
+                                      model: record.model,
+                                      timestamp: record.timestamp,
+                                      result: { ...result, matches: [redditMatch] },
+                                    };
+                                  })
+                                  .filter(Boolean) || [];
 
                               return (
                                 <div key={pIdx} className="space-y-3 border-b border-border pb-4 last:border-b-0">
@@ -822,9 +1152,9 @@ export default function SerpScoutPage() {
 
                                   <div className="space-y-2">
                                     {promptResults.map((item, idx) => {
-                                      const match = item.result?.matches?.[0]
-                                      const rank = match?.ranks?.[0]
-                                      const hasMatch = match && rank
+                                      const match = item.result?.matches?.[0];
+                                      const rank = match?.ranks?.[0];
+                                      const hasMatch = match && rank;
 
                                       return (
                                         <div
@@ -875,6 +1205,12 @@ export default function SerpScoutPage() {
                                         </div>
                                       )
                                     })}
+
+                                    {!promptResults.length && (
+                                      <p className="text-xs text-muted-foreground italic">
+                                        No Reddit citations found for this prompt.
+                                      </p>
+                                    )}
                                   </div>
                                 </div>
                               )
