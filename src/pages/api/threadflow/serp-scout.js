@@ -37,6 +37,150 @@ const DATAFORSEO_LANGUAGE = process.env.DATAFORSEO_LANGUAGE || 'English'
 const DATAFORSEO_LOCATION = process.env.DATAFORSEO_LOCATION || 'United States'
 const DATAFORSEO_POLL_INTERVAL = 3000
 const DATAFORSEO_POLL_TIMEOUT = 30_000
+const REDDIT_API_BASE = 'https://reddit-comment-gen.onrender.com'
+
+/**
+ * Fetch top and new Reddit posts/comments for a keyword
+ * @param {string} keyword - The search keyword
+ * @returns {Promise<{top_posts: Array, new_posts: Array, top_comments: Array, new_comments: Array}>}
+ */
+async function fetchRedditTopNewPosts(keyword) {
+  try {
+    const response = await fetch(`${REDDIT_API_BASE}/find_top_posts_comments`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ keyword }),
+      timeout: 30000
+    })
+    
+    if (!response.ok) {
+      console.error('[serp-scout] Reddit API error', { status: response.status, keyword })
+      return { top_posts: [], new_posts: [], top_comments: [], new_comments: [] }
+    }
+    
+    const data = await response.json()
+    return {
+      top_posts: Array.isArray(data.top_posts) ? data.top_posts : [],
+      new_posts: Array.isArray(data.new_posts) ? data.new_posts : [],
+      top_comments: Array.isArray(data.top_comments) ? data.top_comments : [],
+      new_comments: Array.isArray(data.new_comments) ? data.new_comments : []
+    }
+  } catch (error) {
+    console.error('[serp-scout] Failed to fetch Reddit posts', { keyword, error: error.message })
+    return { top_posts: [], new_posts: [], top_comments: [], new_comments: [] }
+  }
+}
+
+/**
+ * Use LLM to analyze and suggest the best Reddit posts for engagement
+ * @param {Array} topPosts - Top Reddit posts
+ * @param {Array} newPosts - New Reddit posts
+ * @param {string} keyword - The search keyword
+ * @param {string} companyContext - Company context/description
+ * @returns {Promise<Array>} - Array of 5 suggested posts with engagement strategies
+ */
+async function suggestBestPostsWithLLM(topPosts, newPosts, keyword, companyContext = '') {
+  try {
+    const allPosts = [...topPosts, ...newPosts]
+    if (allPosts.length === 0) {
+      return []
+    }
+    
+    // Prepare posts summary for LLM
+    const postsSummary = allPosts.slice(0, 20).map((post, idx) => ({
+      index: idx,
+      title: post.post_title || '',
+      content: (post.post_content || '').slice(0, 300),
+      url: post.post_url || '',
+      subreddit: post.subreddit || '',
+      upvotes: post.upvotes || 0,
+      total_comments: post.total_comments || 0,
+      post_age_hours: post.post_age_hours || 0
+    }))
+    
+    const prompt = `You are an expert Reddit engagement strategist. Analyze these Reddit posts about "${keyword}" and suggest the TOP 5 posts that would be most valuable for engagement.
+
+Company Context:
+${companyContext || 'Not provided'}
+
+Reddit Posts:
+${JSON.stringify(postsSummary, null, 2)}
+
+For each of the 5 recommended posts, provide:
+1. Post index (from the list above)
+2. Why this post is valuable for engagement
+3. A brief engagement strategy (what to say, how to add value)
+4. Engagement score (1-10)
+
+Return ONLY a valid JSON array with this structure:
+[
+  {
+    "index": 0,
+    "reason": "High engagement post with specific pain point mentioned",
+    "strategy": "Share relevant case study or insight that addresses the pain point naturally",
+    "engagementScore": 9
+  }
+]
+
+Be strategic - prioritize posts where:
+- The company can add genuine value without being salesy
+- Discussion is active and recent
+- The tone is receptive to expert input
+- There's a clear pain point or question the company can address
+
+Return ONLY the JSON array, no other text.`
+
+    const response = await fetch(OPENROUTER_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+        'HTTP-Referer': 'https://infrasity.com',
+        'X-Title': 'Infrasity SERP Scout'
+      },
+      body: JSON.stringify({
+        model: OPENROUTER_MODEL,
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.7,
+        max_tokens: 2000
+      })
+    })
+    
+    if (!response.ok) {
+      console.error('[serp-scout] LLM suggestion failed', { status: response.status })
+      return allPosts.slice(0, 5)
+    }
+    
+    const data = await response.json()
+    const llmText = data.choices?.[0]?.message?.content || '[]'
+    
+    // Extract JSON from response (handle code blocks)
+    let jsonText = llmText.trim()
+    if (jsonText.includes('```')) {
+      const match = jsonText.match(/```(?:json)?\s*([\s\S]*?)```/)
+      if (match) jsonText = match[1].trim()
+    }
+    
+    const suggestions = JSON.parse(jsonText)
+    
+    // Map suggestions back to original posts with engagement metadata
+    return suggestions.slice(0, 5).map(suggestion => {
+      const originalPost = allPosts[suggestion.index] || allPosts[0]
+      return {
+        ...originalPost,
+        engagementReason: suggestion.reason || '',
+        engagementStrategy: suggestion.strategy || '',
+        engagementScore: suggestion.engagementScore || 0
+      }
+    })
+  } catch (error) {
+    console.error('[serp-scout] LLM post suggestion failed', { error: error.message })
+    // Fallback: return top 5 by upvotes + comments
+    return [...topPosts, ...newPosts]
+      .sort((a, b) => ((b.upvotes || 0) + (b.total_comments || 0)) - ((a.upvotes || 0) + (a.total_comments || 0)))
+      .slice(0, 5)
+  }
+}
 
 function ensureDomain(input) {
   if (!input) return null
@@ -249,6 +393,19 @@ async function scrapeDomainPages(domain) {
     if (page?.text) {
       console.log('[serp-scout] scraped page', { url, charCount: page.text.length, preview: page.text.slice(0, 200) })
       pages.push(page)
+    }
+  }
+  if (!pages.length) {
+    console.warn('[serp-scout] no readable pages after direct fetch, attempting DataForSEO fallback', { domain })
+    try {
+      const fallbackText = await fetchViaDataForSeo(domain)
+      const normalized = fallbackText.replace(/\s+/g, ' ').trim()
+      if (normalized) {
+        pages.push({ url: `https://${domain}`, text: normalized.slice(0, MAX_PAGE_CHARS) })
+        console.log('[serp-scout] DataForSEO fallback succeeded', { domain, charCount: normalized.length })
+      }
+    } catch (error) {
+      console.error('[serp-scout] DataForSEO fallback failed', { domain, error: error.message })
     }
   }
   console.log('[serp-scout] total pages scraped', { domain, count: pages.length })
@@ -465,7 +622,7 @@ async function callOpenRouter(messages, temperature = 0.65, max_tokens = 1024) {
 
 async function promptKeywords(payload) {
   const companyName = payload.companyName || payload.domain
-  const prompt = `You are an SEO and LLM visibility expert. Analyze the landing page content and generate EXACTLY ${LLM_PROMPTS} high-impact keywords.
+  const prompt = `You are an SEO and LLM visibility expert. Analyze the landing page content and generate EXACTLY 20 high-impact keywords.
 
 For each keyword, provide:
 1. term: the keyword phrase
@@ -483,11 +640,11 @@ GOOD prompt patterns (list-style, ranking/comparison):
 - "Rank ${companyName ? '[category]' : ''} providers by integration depth"
 
 BAD prompt patterns (do NOT generate):
-- "What is ${keyword}?" ❌
-- "How to do ${keyword}?" ❌
-- "Guide to ${keyword}" ❌
-- "Is ${companyName} the best ${keyword}?" ❌
-- "Does ${companyName} support ${keyword}?" ❌
+- "What is [keyword]?" ❌
+- "How to do [keyword]?" ❌
+- "Guide to [keyword]" ❌
+- "Is ${companyName} the best [keyword]?" ❌
+- "Does ${companyName} support [keyword]?" ❌
 
 The ranking prompts should be broad enough that when LLMs answer them, they naturally include ${companyName} in their rankings and recommendations.
 
@@ -506,16 +663,16 @@ Return JSON with this exact structure:
 
 Page content: ${payload.pageContent.slice(0, 4000)}`
   const messages = [
-    { role: 'system', content: `You are an SEO and LLM visibility strategist. Generate exactly 5 keywords with ${LLM_PROMPTS} prompts each.` },
+    { role: 'system', content: `You are an SEO and LLM visibility strategist. Generate exactly 20 keywords with ${LLM_PROMPTS} prompts each.` },
     { role: 'user', content: prompt }
   ]
   const raw = await callOpenRouter(messages, KEYWORD_TEMPERATURE, 2048)
   try {
     const json = JSON.parse(extractJsonFromText(raw))
-    // Ensure exactly 5 keywords
+    // Ensure exactly 20 keywords
     if (json.keywords && Array.isArray(json.keywords)) {
-      json.keywords = json.keywords.slice(0, 5)
-      // Ensure each keyword has exactly 5 prompts
+      json.keywords = json.keywords.slice(0, 20)
+      // Ensure each keyword has exactly LLM_PROMPTS prompts
       json.keywords = json.keywords.map(kw => ({
         ...kw,
         prompts: Array.isArray(kw.prompts) ? kw.prompts.slice(0, LLM_PROMPTS) : []
@@ -830,6 +987,9 @@ async function saveSerpAnalysis(companyId, keyword, serpData) {
   const serpAnalysis = context.approvedContext?.serpAnalysis || {}
   serpAnalysis[keyword] = {
     ...serpData,
+    suggestedPosts: serpData.suggestedPosts || [],
+    topRedditPosts: serpData.topRedditPosts || [],
+    newRedditPosts: serpData.newRedditPosts || [],
     analyzedAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
   }
@@ -952,6 +1112,116 @@ export default async function handler(req, res) {
     }
   }
 
+  // Handle generate post content action
+  if (action === 'generatePostContent') {
+    const { keyword, domain, companyId: requestCompanyId, redditContext } = req.body
+    if (!keyword || !domain) {
+      return res.status(400).json({ error: 'keyword and domain are required' })
+    }
+
+    try {
+      // Get company context
+      let companyContext = ''
+      let companyName = domain
+      if (requestCompanyId) {
+        try {
+          const context = await getCompanyContext(requestCompanyId)
+          const summary = context?.approvedContext?.companySummary || context?.llmContext?.companySummary || ''
+          const capabilities = context?.approvedContext?.coreCapabilities || context?.llmContext?.coreCapabilities || []
+          const problems = context?.approvedContext?.problemSpaces || context?.llmContext?.problemSpaces || []
+          companyName = context?.metadata?.companyName || domain
+          companyContext = `${summary}\n\nCapabilities: ${capabilities.join(', ')}\n\nProblems: ${problems.join(', ')}`
+        } catch (err) {
+          console.warn('[serp-scout] context fetch failed', err.message)
+        }
+      }
+
+      // Build Reddit discussion context
+      let redditDiscussionContext = ''
+      if (redditContext && (redditContext.topPosts?.length || redditContext.newPosts?.length)) {
+        const topDiscussions = redditContext.topPosts?.slice(0, 3).map(p => ({
+          title: p.post_title || '',
+          subreddit: p.subreddit || '',
+          upvotes: p.upvotes || 0,
+          comments: p.total_comments || 0
+        })) || []
+        
+        const newDiscussions = redditContext.newPosts?.slice(0, 3).map(p => ({
+          title: p.post_title || '',
+          subreddit: p.subreddit || '',
+          comments: p.total_comments || 0
+        })) || []
+
+        redditDiscussionContext = `\n\nTop discussions on Reddit about "${keyword}":\n`
+        topDiscussions.forEach((post, i) => {
+          redditDiscussionContext += `${i + 1}. "${post.title}" in r/${post.subreddit} (${post.upvotes} upvotes, ${post.comments} comments)\n`
+        })
+        
+        if (newDiscussions.length) {
+          redditDiscussionContext += `\nRecent posts:\n`
+          newDiscussions.forEach((post, i) => {
+            redditDiscussionContext += `${i + 1}. "${post.title}" in r/${post.subreddit} (${post.comments} comments)\n`
+          })
+        }
+      }
+
+      const prompt = `You are creating authentic Reddit posts for "${companyName}" about "${keyword}".
+
+Company Context:
+${companyContext || 'Not provided'}
+${redditDiscussionContext}
+
+Generate 3 Reddit posts that:
+1. Add genuine value by sharing real insights, experiences, or case studies
+2. Relate directly to the discussions above
+3. NATURALLY mention "${companyName}" when it's relevant to the context (e.g., sharing how the company solved the problem, features that help, etc.)
+4. Feel like authentic posts from someone knowledgeable about the company and "${keyword}"
+5. Address pain points that "${companyName}" actually helps solve
+6. Are written in conversational Reddit tone, not corporate speak
+
+Important: It's totally fine to mention "${companyName}" openly - these are authentic posts. Mention it when:
+- Sharing a case study or real example
+- Discussing a feature or capability that's relevant
+- Answering someone's question with the company's solution
+- Explaining how a specific problem was solved
+
+Just make sure the mention feels natural, not forced. For example:
+- GOOD: "We used ${companyName} to solve this and here's what happened..."
+- GOOD: "${companyName} handles this really well because..."
+- AVOID: "You should definitely try ${companyName}" (too salesy)
+
+Return ONLY valid JSON:
+[
+  {
+    "title": "Post title that matches Reddit discussion style",
+    "content": "Full post body (300-500 words, include company name naturally where relevant)",
+    "subreddit": "most_relevant_subreddit",
+    "rationale": "How this post adds value and naturally showcases the company"
+  }
+]`
+
+      const messages = [
+        { role: 'system', content: `You are an expert Reddit contributor writing authentic posts for ${companyName}. Include the company name naturally when it fits the context and adds value.` },
+        { role: 'user', content: prompt }
+      ]
+
+      const raw = await callOpenRouter(messages, 0.7, 3000)
+      let posts = []
+      try {
+        const json = JSON.parse(extractJsonFromText(raw))
+        posts = Array.isArray(json) ? json.slice(0, 3) : []
+      } catch (parseError) {
+        console.error('[serp-scout] failed to parse post content', parseError.message)
+        return res.status(500).json({ error: 'Failed to generate post content' })
+      }
+
+      return res.status(200).json({ success: true, posts })
+    } catch (error) {
+      console.error('[serp-scout] generate post content failed', error.message)
+      return res.status(500).json({ error: error.message })
+    }
+  }
+
   // Handle suggest prompts action
   if (action === 'suggestPrompts') {
     const { keyword, intent, companyName, domain } = req.body
@@ -1046,6 +1316,9 @@ export default async function handler(req, res) {
             examined: cachedAnalysis.examined,
             redditThreads: cachedAnalysis.redditThreads,
             hasRedditMentions: cachedAnalysis.hasRedditMentions,
+            topRedditPosts: cachedAnalysis.topRedditPosts || cachedAnalysis.redditThreads || [],
+            newRedditPosts: cachedAnalysis.newRedditPosts || [],
+            suggestedPosts: cachedAnalysis.suggestedPosts || (cachedAnalysis.redditThreads || []).slice(0, 5),
             fromCache: true,
             analyzedAt: cachedAnalysis.analyzedAt,
             expiresAt: cachedAnalysis.expiresAt
@@ -1056,14 +1329,44 @@ export default async function handler(req, res) {
       // Fetch fresh SERP data
       console.log('[serp-scout] fetching fresh SERP data', { keyword, domain: targetDomain })
       const serpData = await fetchKeywordSerpPosition(keyword, targetDomain, 100)
+      const redditThreads = Array.isArray(serpData.redditThreads) ? serpData.redditThreads : []
+      
+      // Fetch top/new posts from Reddit API
+      console.log('[serp-scout] fetching Reddit top/new posts', { keyword })
+      const redditData = await fetchRedditTopNewPosts(keyword)
+      
+      const topRedditPosts = redditData.top_posts.slice(0, 10)
+      const newRedditPosts = redditData.new_posts.slice(0, 10)
+      
+      // Get company context for LLM suggestions
+      let companyContext = ''
+      if (requestCompanyId) {
+        try {
+          const context = await getCompanyContext(requestCompanyId)
+          const summary = context?.approvedContext?.companySummary || context?.llmContext?.companySummary || ''
+          const capabilities = context?.approvedContext?.coreCapabilities || context?.llmContext?.coreCapabilities || []
+          const problems = context?.approvedContext?.problemSpaces || context?.llmContext?.problemSpaces || []
+          companyContext = `${summary}\n\nCapabilities: ${capabilities.join(', ')}\n\nProblems: ${problems.join(', ')}`
+          console.log('[serp-scout] using company context', { companyId: requestCompanyId, length: companyContext.length })
+        } catch (err) {
+          console.warn('[serp-scout] context fetch failed', err.message)
+        }
+      }
+      
+      // LLM-powered post suggestions based on company context
+      console.log('[serp-scout] generating LLM suggestions', { keyword, posts: topRedditPosts.length + newRedditPosts.length })
+      const suggestedPosts = await suggestBestPostsWithLLM(topRedditPosts, newRedditPosts, keyword, companyContext)
       
       // Save SERP analysis for 24hr cache
       if (requestCompanyId) {
         await saveSerpAnalysis(requestCompanyId, keyword, {
           position: serpData.position,
           examined: serpData.examined,
-          redditThreads: serpData.redditThreads,
-          hasRedditMentions: serpData.redditThreads.length > 0
+          redditThreads,
+          hasRedditMentions: redditThreads.length > 0,
+          topRedditPosts,
+          newRedditPosts,
+          suggestedPosts
         })
       }
       
@@ -1073,8 +1376,11 @@ export default async function handler(req, res) {
         domain: targetDomain,
         position: serpData.position,
         examined: serpData.examined,
-        redditThreads: serpData.redditThreads,
-        hasRedditMentions: serpData.redditThreads.length > 0,
+        redditThreads,
+        hasRedditMentions: redditThreads.length > 0,
+        topRedditPosts,
+        newRedditPosts,
+        suggestedPosts,
         fromCache: false,
         analyzedAt: new Date().toISOString(),
         expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()

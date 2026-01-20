@@ -1561,14 +1561,14 @@ let postMetaData = [
 },
  {
     title: "Is Your Developer Content AI-Discoverable? Insights From an AI Visibility Audit",
-    metatitle: "Is Your Developer Content AI-Discoverable? | AI Visibility Audit Insights",
+    metatitle: "Is Your Developer Content AI-Discoverable? | AI Visibility Audit ",
     slug: "ai-visibility-audit",
     description: "Developer discovery is no longer driven by search results alone. AI assistants now decide which content gets surfaced, cited, or ignored. This blog breaks down what it really means for developer content to be AI-discoverable and why traditional SEO signals aren’t enough anymore. Based on real AI visibility audits, it explains how AI systems evaluate clarity, structure, freshness, documentation depth, and E-E-A-T before trusting content. You’ll learn where most B2B SaaS and AI startups lose AI confidence despite ranking well, and how issues like weak canonicals, missing structured data, vague explanations, and inconsistent terminology quietly block visibility.",
     ogImage: "/PostImages/ai-visibility-audit/0.webp",
     publishedOn: "2026-01-17",
     authorId: "author0005",
     category: "B2B SaaS- Content Marketing",
-    metaDescription: "Developer content can rank and still be invisible to AI. Learn how AI visibility audits uncover gaps in E-E-A-T, structure, documentation, and crawlability that stop AI systems from citing your content."
+    metaDescription: "Developer content can rank and still be invisible to AI. This AI visibility audit uncovers gaps in E-E-A-T, and crawlability that prevent LLMs from citing your content."
 },
 ];
 

@@ -17,8 +17,7 @@ This blog shows how an AI visibility audit reveals *exactly where* developer con
 
 ## **What Does “AI-Discoverable” Content Mean?**
 
-When I say *AI-discoverable*, I’m not talking about whether content exists online.  
-I’m talking about whether AI systems can understand, trust, and reuse it.
+When I say *AI-discoverable*, I’m not talking about whether content exists online. I’m talking about whether AI systems can understand, trust, and reuse it.
 
 There are many developer content visible today, but not usable. AI-discoverable content has three properties:
 
