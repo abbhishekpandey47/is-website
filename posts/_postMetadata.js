@@ -1570,6 +1570,46 @@ let postMetaData = [
     category: "B2B SaaS- Content Marketing",
     metaDescription: "Developer content can rank and still be invisible to AI. This AI visibility audit uncovers gaps in E-E-A-T, and crawlability that prevent LLMs from citing your content."
 },
+{
+  title: "How Lovable Reached $10M ARR in 2 Months",
+  metaTitle: "Lovable Case Study: $10M ARR in 60 Days | Infrasity",
+  slug: "lovable-growth-case-study",
+  description: "This case study breaks down how Lovable scaled to $10M ARR in just two months by embedding growth directly into its product and distribution model. Instead of relying on paid acquisition or a sales-led motion, Lovable used open source, founder-led storytelling, community, and 12+ reinforcing growth channels to drive trust, adoption, and revenue at unprecedented speed.",
+  ogImage: "/PostImages/lovable-growth-case-study/0.webp",
+  publishedOn: "2026-01-22",
+  authorId: "author0001",
+  category: "Case Studies",
+  metaDescription: "A detailed case study on how Lovable used open source and founder-led distribution to become Europe’s fastest-growing startup. Read now",
+  stats: [
+    {
+      title: "Valuation",
+      value: "$6.6B",
+      subtext: "",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "ARR",
+      value: "$10M",
+      subtext: "in 60 days",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Organic Website Traffic",
+      value: "1.1M",
+      subtext: "",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    }
+],
+  companyHighlights: {
+    company: "Lovable",
+    headquarters: "Stockholm, Sweden",
+    funding: "$330M Series B ($6.6B)",
+    industry: "AI-powered software development / AI “vibe coding”   ",
+    employees: "51-200",
+    website: "Lovable.dev",
+    cloud:"Lovable provides an AI platform that enables users to build websites and full applications from natural-language prompts."
+  }
+},
 ];
 
 const sorted = () => {
