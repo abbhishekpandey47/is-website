@@ -170,7 +170,7 @@ const Outline = ({ content }) => {
       <hr className="border-white mb-3" />
       <div
         ref={outlineRef}
-        className="flex flex-col max-h-[480px] overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-full"
+        className="flex flex-col overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-full"
       >
         {outline.map((element, elementIdx) => (
           <div

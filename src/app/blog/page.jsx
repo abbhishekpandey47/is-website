@@ -118,7 +118,7 @@ const CardDiv = React.memo(({ card }) => (
               borderRadius: "7px",
               width: "600px",
               height: "200px",
-              objectFit: "cover",
+              objectFit: "contain",
             }}
           />
         </figure>

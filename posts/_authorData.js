@@ -41,7 +41,7 @@ const authorData = [
   },
   {
   "authorId": "author0006",
-  "name": "Gaurav Tiwari",
+  "name": "Gaurav",
   "profilePic": "/authorImages/Gaurav.jpeg",
   "designation": "Web Developer & Technical Content Writer",
   "about": "Web developer and technical content writer at Infrasity, creating engineering-focused documentation and writing product-driven content for SaaS teams.",
@@ -49,7 +49,7 @@ const authorData = [
 },
   {
   "authorId": "author0007",
-  "name": "Apoorv Tripathi",
+  "name": "Apoorv",
   "profilePic": "/authorImages/apoorv.webp",
   "designation": "Growth Engineer",
   "about": "Growth Engineer at Infrasity, specialises in driving growth for B2B startups",

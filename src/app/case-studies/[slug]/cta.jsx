@@ -17,7 +17,7 @@ export default function CTA2({ text }) {
         {/* Content */}
         <div className="relative md:gap-4 px-6 md:px-12 flex flex-col md:flex-row items-center md:justify-between -mt-6">
           <div className="text-center md:text-left mb-4 md:mb-0">
-            <h2 className="font-[quicksand] text-3xl md:text-4xl font-bold text-white leading-tight mt-0">
+            <h2 className="font-[quicksand] text-3xl md:text-4xl font-bold text-white leading-tight mt-6 mb-0">
               {text ||
                 "Every devtool startup needs content. Most do it wrong."}
             </h2>
