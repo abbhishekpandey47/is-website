@@ -54,6 +54,14 @@ const authorData = [
   "designation": "Growth Engineer",
   "about": "Growth Engineer at Infrasity, specialises in driving growth for B2B startups",
   "linkedIn": "www.linkedin.com/in/apoorv-tripathi-0b0b481a5"
+},
+ {
+  "authorId": "author0008",
+  "name": "Arvish",
+  "profilePic": "/authorImages/arvish.webp",
+  "designation": "Growth Lead",
+  "about": "Growth Lead at Infrasity, specialises in driving growth for B2B startups",
+  "linkedIn": "https://www.linkedin.com/in/arvish-suresh-3b55031b7"
 }
 ];
 

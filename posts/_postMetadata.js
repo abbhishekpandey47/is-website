@@ -1161,7 +1161,7 @@ let postMetaData = [
   metaDescription: "Discover what DevRel is, why startups need it in 2025, and proven DevRel strategies to boost adoption. Read now and level up your developer relations!"
 },
 {
-  title: "6 Best Developer and AI Marketing Agency for B2B SaaS",
+  title: "6 Best AI Marketing Agency for B2B SaaS",
   metatitle: "6 Best Developer & AI Marketing Agencies",
   slug: "ai-marketing-agency-b2b-saas",
   description: "Choosing the right developer marketing agency or AI marketing agency can make or break your B2B SaaS growth strategy. Developers are not swayed by traditional ads, they want technical accuracy, hands-on tutorials, and frictionless onboarding. This blog explores six of the best AI marketing agencies and its perfect for founders, CMOs, and CEOs looking to scale developer-facing SaaS products.",
@@ -1577,7 +1577,7 @@ let postMetaData = [
   description: "This case study breaks down how Lovable scaled to $10M ARR in just two months by embedding growth directly into its product and distribution model. Instead of relying on paid acquisition or a sales-led motion, Lovable used open source, founder-led storytelling, community, and 12+ reinforcing growth channels to drive trust, adoption, and revenue at unprecedented speed.",
   ogImage: "/PostImages/lovable-growth-case-study/0.webp",
   publishedOn: "2026-01-22",
-  authorId: "author0001",
+  authorId: "author0008",
   category: "Case Studies",
   metaDescription: "A detailed case study on how Lovable used open source and founder-led distribution to become Europe’s fastest-growing startup. Read now",
   stats: [
