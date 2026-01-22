@@ -1588,9 +1588,9 @@ let postMetaData = [
       valueClass: "text-xl md:text-4xl font-semibold",
     },
     {
-      title: "ARR",
+      title: "ARR in 60 days",
       value: "$10M",
-      subtext: "in 60 days",
+      subtext: "",
       valueClass: "text-xl md:text-4xl font-semibold",
     },
     {

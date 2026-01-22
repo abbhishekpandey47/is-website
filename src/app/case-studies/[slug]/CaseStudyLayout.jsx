@@ -93,9 +93,7 @@ export default function CaseStudyLayout({
             position: sticky;
             top: 96px;
             pointer-events: auto;
-            max-height: calc(100vh - 112px);
-            overflow-y: auto;
-            overflow-x: visible !important;
+
             width: 100%;
           }
         }
