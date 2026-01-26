@@ -1610,6 +1610,17 @@ let postMetaData = [
     cloud:"Lovable provides an AI platform that enables users to build websites and full applications from natural-language prompts."
   }
 },
+{
+    title: "How Startup in Stealth-Mode Earn Developer Trust Before Launch?",
+    metatitle: "How Startup in Stealth-Mode Earn Developer Trust Before Launch",
+    slug: "startup-in-stealth-mode",
+    description: "This blog explains how a stealth mode startup should approach go-to-market without public marketing or brand visibility. It breaks down why GTM doesn’t pause in stealth and how search engines, AI systems, and developers still form opinions long before launch. Using examples from AI and B2B SaaS, the post outlines four growth levers that work in stealth: blog-first SEO, high-signal Reddit engagement, early product documentation, and continuous website SEO hygiene.",
+    ogImage: "/PostImages/startup-in-stealth-mode/0.webp",
+    publishedOn: "2026-01-26",
+    authorId: "author0005",
+    category: "Informational",
+    metaDescription: "A guide on how stealth-mode startups earn developer trust before launch through technical content, documentation, community signals, and early search visibility. Read now"
+},
 ];
 
 const sorted = () => {

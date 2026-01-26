@@ -38,6 +38,7 @@ export default function AwardBanner() {
             <button
               onClick={() => setIsVisible(false)}
               className="text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 rounded-full p-1 cursor-pointer flex-shrink-0"
+              aria-label="Close banner"
             >
               <X size={12} />
             </button>

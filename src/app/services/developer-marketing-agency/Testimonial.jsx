@@ -251,6 +251,7 @@ const Testimonials = () => {
           <button
             onClick={handleOnIndIncr}
             className="transition scale-125 btn hover:bg-transparent rounded-[100%] bg-transparent text-white border-[#999] hover:border-[white]"
+            aria-label="Previous testimonial"
           >
             <ArrowLeftOutlined className="text-white" />
           </button>
@@ -273,6 +274,7 @@ const Testimonials = () => {
           <button
             onClick={handleOnIndDecr}
             className="transition scale-125 btn hover:bg-transparent rounded-[100%] bg-transparent text-white border-[#999] hover:border-[white]"
+            aria-label="Next testimonial"
           >
             <ArrowRightOutlined className="text-white" />
           </button>
