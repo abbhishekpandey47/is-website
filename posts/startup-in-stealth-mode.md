@@ -362,7 +362,7 @@ Framing content around these developer- and AI-focused queries ensures your expe
 
 A startup in stealth mode intentionally limits public visibility while building its product, validating demand, or securing competitive advantages. A stealth mode startup avoids traditional marketing, press, and branding to protect intellectual property, control market timing, and reduce competitive risk, especially in fast-moving markets like AI and B2B SaaS.
 
-### 2. ### **What are the pros & cons of stealth mode?**
+### 2. **What are the pros & cons of stealth mode?**
 
 The primary benefits of a stealth mode startup include protecting product strategy, avoiding premature competition, and iterating without external pressure. However, the downside is reduced discoverability, limited brand authority, and slower trust-building if go-to-market groundwork is ignored. Successful stealth startups offset this by investing early in SEO, developer content, and quiet GTM signals.
 
