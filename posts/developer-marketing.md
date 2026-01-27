@@ -81,3 +81,8 @@ The common challenges include understanding developer personas, creating authent
 
 ### 5. **How Long Does It Typically Take To See Results From a Developer Marketing Strategy?**  
 It usually takes several months of consistent effort to build trust and engagement with developers before seeing meaningful results.
+
+### 6. **How to ensure alignment between sales and developer marketing?**
+Alignment between sales and developer marketing starts with a shared understanding of the target developer persona and the role developers play in the buying journey. Developer marketing should focus on education, self-serve evaluation, and adoption signals, while sales teams use those signals to engage at the right time with context-aware conversations. 
+
+Clear handoffs are important and sales teams should have visibility into which documentation, tutorials, or demos developers have interacted with, so outreach feels informed rather than generic. Regular feedback loops between sales, marketing, and product teams help ensure messaging stays technically accurate, objection handling reflects real developer concerns, and both teams work toward the same adoption-driven outcomes rather than disconnected KPIs.
