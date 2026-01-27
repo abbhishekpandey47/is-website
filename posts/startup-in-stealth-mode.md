@@ -2,7 +2,7 @@
 
 * A B2B SaaS startup in stealth mode operates with minimal public visibility to protect its product, timing, and competitive advantage, especially in markets like AI and developer tools, while still validating demand and preparing for launch.  
     
-* High-performing stealth mode startups rely on **4 ways for growth**: blog-first SEO to own problem-driven searches, high-signal [Reddit engagement](https://www.infrasity.com/services/reddit-marketing-services) to earn developer trust, early product docs to establish technical credibility, and continuous SEO hygiene to ensure discoverability compounds.  
+* High-performing stealth mode startups rely on **4 ways for growth**: blog-first SEO to own problem-driven searches, high-signal [Reddit engagement](https://www.infrasity.com/services/reddit-marketing-services), or GitHub engagement  to earn developer trust, early product docs to establish technical credibility, and ensure discoverability compounds.
     
 * Founders and CTOs in AI and B2B SaaS win in stealth by owning high-intent keyword clusters (AI software engineering, AI IDEs, cloud development environments, and confidential AI), so the market understands what they stand for before they go public.
 
@@ -358,22 +358,23 @@ Framing content around these developer- and AI-focused queries ensures your expe
 
 ## **Frequently Asked Questions**
 
-### 1. **What is a startup in stealth mode?**
+### 1. **What is a B2B SaaS startup in stealth mode?**
 
 A startup in stealth mode intentionally limits public visibility while building its product, validating demand, or securing competitive advantages. A stealth mode startup avoids traditional marketing, press, and branding to protect intellectual property, control market timing, and reduce competitive risk, especially in fast-moving markets like AI and B2B SaaS.
 
-### 2. **What are the pros & cons of stealth mode?**
+### 2. **What are the pros & cons of B2B SaaS startup in stealth mode?**
 
-The primary benefits of a stealth mode startup include protecting product strategy, avoiding premature competition, and iterating without external pressure. However, the downside is reduced discoverability, limited brand authority, and slower trust-building if go-to-market groundwork is ignored. Successful stealth startups offset this by investing early in SEO, developer content, and quiet GTM signals.
+The primary benefits of a B2B SaaS startup in stealth mode include protecting product strategy, avoiding premature competition, and iterating without external pressure. However, the downside is reduced discoverability, limited brand authority, and slower trust-building if go-to-market groundwork is ignored. Successful stealth startups offset this by investing early in SEO, developer content, and quiet GTM signals.
 
-### 3. **Should a stealth mode startup invest in go-to-market before launch?**
+### 3. **Should a B2B stealth mode startup invest in go-to-market before launch?**
 
-**Yes**, Go-to-market should begin long before launch, even for a startup in stealth mode. Search engines, AI systems, and technical buyers start forming opinions based on content, discussions, and documentation early. Founders who delay GTM often face slower traction post-launch, while those who build authority in stealth see faster adoption.
+**Yes**, Go-to-market should begin long before launch, even for a B2B SaaS startup in stealth mode. Search engines, AI systems, and technical buyers start forming opinions based on content, discussions, and documentation early. Founders who delay GTM often face slower traction post-launch, while those who build authority in stealth see faster adoption.
 
-### 4. **How do stealth mode startups attract users without marketing?**
+### 4. **How do B2B SaaS stealth mode startups attract users without marketing?**
 
-A stealth mode startup attracts early users by focusing on problem-led content, high-intent SEO, developer communities like Reddit, and well-structured product documentation. Instead of promoting the product directly, teams educate the market, define categories, and establish technical credibility, creating demand without explicit marketing.
+A B2B SaaS stealth mode startup attracts early users by focusing on problem-led content, high-intent SEO, developer communities like Reddit, GitHub, and well-structured product documentation. Instead of promoting the product directly, teams educate the market, define categories, and establish technical credibility, creating demand without explicit marketing.
 
 ### 5. **Does publishing content in stealth expose the product or roadmap?**
 
-**No.** Not if done correctly. Stealth-mode content should focus on workflows, constraints, trade-offs, and system design rather than implementation details or proprietary logic. Explaining *problems well* builds credibility without revealing how the product works internally.
+**No.** Not if done correctly. Stealth-mode content should focus on workflows, constraints, trade-offs, and system design rather than implementation details or proprietary logic. Explaining problems well builds credibility without revealing how the product works internally.
+

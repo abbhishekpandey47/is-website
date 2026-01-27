@@ -1621,6 +1621,17 @@ let postMetaData = [
     category: "Informational",
     metaDescription: "A guide on how stealth-mode startups earn developer trust before launch through technical content, documentation, community signals, and early search visibility. Read now"
 },
+{
+    title: "Web Summit Qatar 2026",
+    metatitle: "Web Summit Qatar (Doha) 2026: Checklist Before Attending",
+    slug: "web-summit-qatar",
+    description: " Web Summit Qatar 2026 brings one of the world’s largest startup and tech conferences to Doha, attracting founders, investors, operators, and early-stage teams from across the globe. This blog breaks down what Web Summit Qatar is actually like, who attends, and where real value comes from for startups beyond booths and talks. This blog covers what teams should prepare before attending, how post-session events drive networking, and why visibility in developer communities matters after the summit ends.  From feedback on product positioning to understanding your competitive landscape and building relationships that compound after the event.",
+    ogImage: "/PostImages/web-summit-qatar/0.webp",
+    publishedOn: "2026-01-27",
+    authorId: "author0007",
+    category: "Informational",
+    metaDescription: "Web Summit Qatar 2026 brings founders, startups, and investors to Doha. Learn who attends. Learn how B2B early-stage teams can prepare before attending the summit."
+},
 ];
 
 const sorted = () => {
