@@ -30,63 +30,63 @@ const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
 const faqData = [
     {
         id: "1",
-        question: "What does a Reddit marketing agency do?",
+        question: "What does your Reddit marketing service include?",
         answer:
-            "A Reddit marketing agency like Infrasity helps B2B startups engage with developer communities through authentic, non-promotional content. At Infrasity, we ghostwrite Reddit comments, seed technical threads, and manage warmed accounts to drive traffic, visibility, and trust, all while staying subreddit-compliant.",
+            "Infrasity's Reddit marketing service includes subreddit research, narrative design, comment and thread seeding, and live Reddit engagement using karma-rich accounts. Everything is customised to your ICP and optimized for credibility, upvotes, and long-term discoverability.",
     },
     {
         id: "2",
-        question: "Is Reddit a good place for marketing?",
+        question: "How long does it take to see results?",
         answer:
-            "Yes, Reddit is one of the best channels for B2B startups in DevTools, AI infrastructure, and platform engineering, for marketing. Technical buyers often search for tools by asking real users in subreddits like r/devops, r/kubernetes, and r/mlops. These threads often rank on Google. With the right comment strategy and warmed accounts, Reddit can drive qualified traffic, influence decision-making, and build early-stage trust, without relying on ads or outbound.",
+            "Typically, results can be seen in 2-3 weeks. You’ll see early signals like upvotes, replies, and sentiment lift. Organic traffic, product mentions, and lead quality usually compound over 30–60 days.",
     },
     {
         id: "3",
-        question: "How much does Reddit marketing cost?",
+        question: "Do you manage both organic Reddit and Reddit Ads?",
         answer:
-            "Reddit marketing costs depend on engagement volume, targeted subreddits, and whether account warming or competitor analysis is included. At Infrasity, we offer flexible, usage-based plans tailored for early-stage B2B startups. 📩 Reach out to us or visit our contact page to get a custom quote.",
+            "Yes, Infrasity's focus is organic first, but we selectively use Reddit Ads to amplify threads that are already performing well organically.",
     },
     {
         id: "4",
-        question: "Best Reddit marketing agency?",
+        question: "Will you post from our brand account or your accounts?",
         answer:
-            "Infrasity is one of the best Reddit marketing agency and the one that understands Reddit as a community-first platform. For B2B SaaS startups selling to technical buyers, success comes from credibility, timing, and cultural fluency. Infrasity is trusted by AI and dev-tool startups because we specialize in value-first, organic Reddit participation backed by aged, karma-rich accounts, technical accuracy, and deep subreddit knowledge. Instead of pushing links, we earn visibility through high-quality contributions that get upvoted, indexed by LLMs, and discovered long after they’re posted.",
+            "We primarily engage through aged, karma-rich accounts that fit naturally into each subreddit. Brand accounts can be used later once trust and visibility are established.",
     },
     {
         id: "5",
-        question: "Top Reddit advertising agencies services Reddit marketing agencies?",
+        question: "Is Reddit marketing safe? Can accounts get banned?",
         answer:
-            "Top Reddit marketing agencies combine organic engagement with selective Reddit ads, rather than relying on paid campaigns alone. Many agencies focus heavily on Reddit ads, but without organic credibility, ads often underperform or trigger skepticism, especially in developer-heavy subreddits. Infrasity’s approach prioritizes organic traction first: we validate narratives in real conversations, then selectively use Reddit ads to amplify what’s already resonating. This hybrid model delivers stronger engagement, lower friction, and better long-term results than ad-only strategies.",
+            "When done correctly, yes. We follow subreddit-specific rules, avoid promotional footprints, and prioritize value-first participation, hence minimizing the risk and avoiding the patterns that trigger bans.",
     },
     {
         id: "6",
-        question: "Reddit marketing agency for dev tool startup what to look for and examples",
+        question: "What do you need from us to get started?",
         answer:
-            "For a dev tool startup, the most important thing to look for in a Reddit marketing agency is technical depth. Normally, agencies struggle on Reddit because developers instantly detect shallow or promotional content. Infrasity works specifically with dev tools, infrastructure, and platform engineering teams. We participate in real conversations around IaC drift, CI/CD workflows, internal dev platforms, observability, and AI agents, using examples, trade-offs, and lived experience instead of marketing language. This is what allows our content to survive community review and earn genuine engagement.",
+            "A clear understanding of your product, ICP, competitors, and success goals. We’ll also align on positioning guardrails, use cases, and what not to say.",
     },
     {
         id: "7",
-        question: "Best agencies experienced in Reddit marketing for startups including for dev tools marketing",
+        question: "What results do you track weekly?",
         answer:
-            "The best agencies experienced in Reddit marketing for startups are those that have operated inside early and growth-stage teams and understand how credibility translates into pipeline. Infrasity has run Reddit programs across 30+ developer-first startups, including AI, DevOps, security, and infra tooling companies. That experience shows up in how we seed threads, handle competitor mentions, and guide conversations without ever triggering spam signals or bans.",
+            "At Infraisty, we track upvotes, comment rankings, thread visibility, referral traffic, product mentions, sentiment, and downstream conversions, mapped back to specific subreddits and discussions.",
     },
     {
         id: "8",
-        question: "Reddit marketing agency for AI startups marketing on Reddit UK US agencies Reddit marketing specialised",
+        question: "How much revenue can Reddit generate?",
         answer:
-            "A Reddit marketing agency in the US like Infrasity for AI startups must understand LLMs, agents, infra trade-offs, and real-world limitations. Infrasity supports AI startups marketing on Reddit across the US, UK, and Europe, with region-aware subreddit targeting and tone adaptation. We show up in communities like r/devops, r/LLMops, and r/platform_engineering with technically grounded responses that build trust rather than overpromising.",
+            "Reddit works best as a credibility and demand-shaping channel that influences conversions across your funnel. For B2B devtool startups, it often becomes a top source of high-intent, highly qualified leads over time.",
     },
     {
         id: "9",
-        question: "Agencies that do Reddit marketing for startups or technology companies, Reddit ads management",
+        question: "What is the minimum result we can expect?",
         answer:
-            "Agencies that work well for startups and technology companies on Reddit offer more than ad management. They understand when not to advertise and when organic momentum should lead. Infrasity manages both organic Reddit marketing and Reddit ads, but ads are used selectively, typically after organic posts demonstrate traction. This ensures paid spend amplifies credibility instead of trying to manufacture it.",
+            "Within the first month, most of our customers see consistent upvoted mentions, increased subreddit visibility, and early referral traffic. Results compound as threads begin ranking and resurfacing in LLM searches.",
     },
     {
         id: "10",
-        question: "Top agencies specialising in Reddit ads and marketing for B2B SaaS companies",
+        question: "How much does Reddit marketing cost?",
         answer:
-            "For B2B SaaS companies, especially those selling to engineers or technical leaders, Reddit requires a fundamentally different playbook than LinkedIn or Google. Infrasity specializes in Reddit marketing for B2B SaaS companies by focusing on how buying decisions are influenced: peer discussions, tool comparisons, implementation pain points, and honest trade-offs. While many agencies focus only on Reddit ads, we pair ads with high-signal organic presence so brands earn trust before asking for attention.",
+            "Pricing depends on scope, number of subreddits, and engagement intensity. Most B2B SaaS and devtool startups invest at a level comparable to that of a senior content hire or a fractional DevRel. Check out the pricing for result-driven reddit marketing services - https://www.infrasity.com/contact",
     },
 ];
 

@@ -8,6 +8,7 @@ import Script from 'next/script';
 import { Suspense, useEffect, useState } from 'react';
 import AwardBanner from '../Components/HomePage/awardwinner';
 import Footer from '../Components/HomePage/Footer';
+import AdsFooter from '../Components/adsFooter';
 import { Loader } from '../Components/Loader';
 import Navbar from '../Components/Navbar/Navbar';
 import { Appwrap } from '../context';
@@ -75,6 +76,8 @@ export function ClientLayoutWrapper({ children }) {
 
   const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar && !isAdsApp;
 
+  const isRedditMarketingAgencyLp = safePathname.startsWith("/lp/reddit-marketing-agency");
+
   return (
     <Suspense fallback={null}>
       <>
@@ -114,7 +117,7 @@ export function ClientLayoutWrapper({ children }) {
 
                 {children}
                 <Analytics />
-                {!hideNavBarAndFooter && <Footer />}
+                {isRedditMarketingAgencyLp ? <AdsFooter /> : !hideNavBarAndFooter && <Footer />}
               </AntdRegistry>
             </Appwrap>
           </NextThemesProvider>

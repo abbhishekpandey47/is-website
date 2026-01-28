@@ -2,6 +2,7 @@
 import CaseStudies from "@/Components/caseStudies";
 import dynamic from "next/dynamic";
 import { Videos } from "../../playbook/developer-marketing/videosData";
+import AuditWhatYouGet from "./auditWhatYouGet";
 import HeroHome from "./hero";
 import WhyAI from "./howWeWork";
 const Cta = dynamic(() => import("./cta"), { ssr: false });
@@ -37,13 +38,10 @@ const respondCaseStudy = [
 
 
 export default function Page() {
-    // Debug logging
-    console.log("Reddit Marketing Agency Page - Videos:", Videos);
-    console.log("Reddit Marketing Agency Page - Videos length:", Videos ? Videos.length : 'undefined');
-
     return (
         <div className="text-white">
             <HeroHome />
+            <AuditWhatYouGet />
               <div className="mt-8">
               <CaseStudies
                 studies={respondCaseStudy}
@@ -57,8 +55,8 @@ export default function Page() {
             <InfraMethodologyTimeline />
             <RedditServiceCards />
             <StatsSection />
-            <RedditComment />
-            <Threadflow />
+            {/* <RedditComment /> */}
+            {/* <Threadflow /> */}
             {/* <DownloadPDF /> */}
 
             <Testimonials />
