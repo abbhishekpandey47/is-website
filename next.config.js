@@ -1,13 +1,18 @@
 module.exports = {
     reactStrictMode: false,
     
+    swcMinify: true,
+    compress: true,
+    optimizeFonts: true,
+    
     experimental: {
         optimizeCss: true,
         optimizePackageImports: [
             'lucide-react',
             'date-fns',
             'react-icons',
-            'zod'
+            'zod',
+            'antd'
         ],
     },
     eslint: {
@@ -139,6 +144,40 @@ module.exports = {
                     }
                 ],
             },
+            // Cache CSS files with long expiration
+            {
+                source: '/_next/static/css/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    },
+                    {
+                        key: 'X-Content-Type-Options',
+                        value: 'nosniff',
+                    }
+                ],
+            },
+            // Cache third-party analytics and tracking scripts longer
+            {
+                source: '/ingest/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=86400',
+                    }
+                ],
+            },
+            // Cache main content and API responses appropriately
+            {
+                source: '/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=3600, stale-while-revalidate=86400',
+                    }
+                ],
+            },
         ];
     },
 
@@ -160,13 +199,21 @@ module.exports = {
         // Suppress noisy cache serialization warnings
         if (!config.infrastructureLogging) config.infrastructureLogging = {};
         config.infrastructureLogging.level = 'error';
+        
+        // Optimize CSS loading
+        if (!dev) {
+            config.optimization = {
+                ...config.optimization,
+                minimize: true,
+                usedExports: true,
+                sideEffects: true,
+            };
+        }
+        
         // Disable source maps to reduce memory usage in production builds
         if (!dev) {
-    config.devtool = false;
-    if (config.optimization) {
-        config.optimization.minimize = true; // <-- disables production minification
-    }
-}
+            config.devtool = false;
+        }
 
         return config;
     },
