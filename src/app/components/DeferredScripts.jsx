@@ -34,7 +34,7 @@ export default function DeferredScripts() {
 
   return (
     <>
-      <Script id="factors-analytics" strategy="lazyOnload">
+      <Script id="factors-analytics" strategy="afterInteractive">
         {`
             window.faitracker = window.faitracker || function(){
               this.q=[];
@@ -72,7 +72,7 @@ export default function DeferredScripts() {
           `}
       </Script>
 
-      <Script id="google-tag-manager" strategy="lazyOnload">
+      <Script id="google-tag-manager" strategy="afterInteractive">
         {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -82,7 +82,7 @@ export default function DeferredScripts() {
           `}
       </Script>
 
-      <Script id="clarity-script" strategy="lazyOnload">
+      <Script id="clarity-script" strategy="afterInteractive">
         {`
             (function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -92,7 +92,7 @@ export default function DeferredScripts() {
           `}
       </Script>
 
-      <Script id="apollo-tracker" strategy="lazyOnload">
+      <Script id="apollo-tracker" strategy="afterInteractive">
         {`
             (function initApollo() {
               var n = Math.random().toString(36).substring(7);
@@ -114,7 +114,7 @@ export default function DeferredScripts() {
 
       <Script
         src="https://assets.calendly.com/assets/external/widget.js"
-        strategy="lazyOnload"
+        strategy="afterInteractive"
       />
     </>
   );

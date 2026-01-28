@@ -14,6 +14,8 @@ const quicksand = Quicksand({
   weight: ['400', '500', '600', '700'],
   display: 'swap',
   preload: true,
+  fallback: ['system-ui', 'arial'],
+  adjustFontFallback: true,
 });
 
 export function generateMetadata() {
@@ -29,6 +31,30 @@ export default function RootLayout({ children }) {
   return (
   <html lang='en' suppressHydrationWarning>
             <head>
+                  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+                  {/* Preload critical fonts */}
+                  <link 
+                    rel="preload" 
+                    href="/fonts/Quicksand-Bold.woff" 
+                    as="font" 
+                    type="font/woff" 
+                    crossOrigin="anonymous"
+                  />
+                  <link 
+                    rel="preload" 
+                    href="/fonts/Quicksand-SemiBold.woff2" 
+                    as="font" 
+                    type="font/woff2" 
+                    crossOrigin="anonymous"
+                  />
+                  <link 
+                    rel="preload" 
+                    href="/fonts/Quicksand-Medium.woff2" 
+                    as="font" 
+                    type="font/woff2" 
+                    crossOrigin="anonymous"
+                  />
                   <AlternateLinks />
                   <link rel="preload" href="/landingfolio/dashboard.webp" as="image" />
             </head>
