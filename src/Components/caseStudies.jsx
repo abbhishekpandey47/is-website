@@ -35,6 +35,7 @@ export default function CaseStudies({
   heading = "How B2B teams like yours are winning AI visibility",
   subheading = "Examples of recent work with fast-growing developer tools and B2B SaaS teams showing how they improved visibility, rankings, and adoption by being consistently cited in tools like ChatGPT, Perplexity, and Google AI.",
   className = "",
+  hideLink = false,
 }) {
   const [current, setCurrent] = useState(0);
 
@@ -79,13 +80,15 @@ export default function CaseStudies({
               <div className="case-study-category text-sm text-white/60">{study.desc}</div>
             </div>
             {/* Case study link with arrow */}
-            <a href={study.link} className="blue-link-wrapper flex items-center gap-2 text-[#695AE1] font-medium hover:underline transition">
-              <span className="blue-link">Case study</span>
-              <span className="arrow-wrapper-new ml-0"> 
-                <span className="w-6 h-[2px] bg-[#695AE1] inline-block align-middle mr-[-0.5rem]"></span>
-                <span className="arrow-right  inline-block align-middle -rotate-45 border-[#695AE1] border-r-2 border-b-2 w-2 h-2"></span>
-              </span>
-            </a>
+            {!hideLink && (
+              <a href={study.link} className="blue-link-wrapper flex items-center gap-2 text-[#695AE1] font-medium hover:underline transition">
+                <span className="blue-link">Case study</span>
+                <span className="arrow-wrapper-new ml-0"> 
+                  <span className="w-6 h-[2px] bg-[#695AE1] inline-block align-middle mr-[-0.5rem]"></span>
+                  <span className="arrow-right  inline-block align-middle -rotate-45 border-[#695AE1] border-r-2 border-b-2 w-2 h-2"></span>
+                </span>
+              </a>
+            )}
           </div>
           {/* Middle column: graph */}
           <div className="flex items-center justify-center">

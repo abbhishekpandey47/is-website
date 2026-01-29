@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import CalendarBooking from "../../calendarButton";
+import ContactPopupButton from "./ContactPopupButton";
 
 const items = [
   "Subreddit + keyword list for your product",
@@ -11,12 +11,12 @@ const items = [
   "30-day execution roadmap",
 ];
 
-const CheckIcon = () => (
+const CheckIcon = ({ className = "" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"
     fill="currentColor"
-    className="h-5 w-5 text-[#7ef29d]"
+    className={`h-5 w-5 ${className}`}
     aria-hidden="true"
   >
     <path
@@ -47,23 +47,26 @@ export default function AuditWhatYouGet() {
                     </p>
                 </div>
             </div>
-      <div className="relative max-w-6xl mx-auto overflow-hidden rounded-3xl border border-[#2d3355] bg-[#0c1025]/90 backdrop-blur">
+      <div className="relative max-w-6xl mx-auto overflow-hidden rounded-3xl border border-[#2d3355] bg-[#0c1025]/90 backdrop-blur p-8">
 
-        <div className="flex justify-around ">
+        <div className="flex flex-wrap-reverse md:flex-nowrap justify-around">
           
           <div className="mt-6 flex flex-col justify-center gap-4 mb-8 w-full max-w-lg px-6">
               {items.map((item) => (
                 <div
                   key={item}
-                  className="flex align-center items-start gap-3 rounded-xl border border-white/5 bg-white/5 px-3 py-3 text-left h-12"
+                  className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-left shadow-[inset_0_0_50px_rgba(146,164,255,0.05)] "
                 >
-                  <CheckIcon />
-                  <span className="text-sm text-gray-100 md:text-base">{item}</span>
+                  <span className="flex h-6 w-6= items-center justify-center rounded-md border border-emerald-500 bg-emerald-500 text-white shadow-[0_0_12px_rgba(16,185,129,0.4)]">
+                    <CheckIcon className="h-4 w-4" />
+                  </span>
+                  <span className="text-sm text-gray-100 md:text-base leading-relaxed">
+                    {item}
+                  </span>
                 </div>
               ))}
     <div className="flex justify-center mt-4">
-    <CalendarBooking
-                href={"/contact?app=ads"} 
+    <ContactPopupButton
                 buttonText="Get Free Reddit Audit"
                 width="w-1/2"
                 height="h-11"
@@ -74,10 +77,10 @@ export default function AuditWhatYouGet() {
           </div>
             
               <Image
-                src="/reddit/freeAudit.png"
+                src="/reddit/freeAudit.svg"
                 alt="Free Reddit audit badge"
                 width={480}
-                height={400}
+                height={420}
                 className="object-contain mix-blend-exclusion"
               />
         </div>

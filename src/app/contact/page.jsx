@@ -1,12 +1,9 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
-import ContactPage from "../book-a-demo/page";
 import Image from "next/image";
-import { Router } from "next/router";
 import { useRouter, useSearchParams } from "next/navigation"; // add this
 
-const CalendarBooking = () => {
+const CalendarBooking = ({ onSuccess, forceAdsApp = false }) => {
     const buttonText = "Book a Meeting";
     const bgGradient = ""; // Default background color if no gradient is passed
     const width = "w-40"; // Default width
@@ -510,10 +507,27 @@ const CalendarBooking = () => {
                 body: JSON.stringify(payload),
             });
             if (response.ok) {
-                setStep(4);
                 if (!calendarBookedTrackedRef.current) {
                     pushDataLayerEvent("lp_calendar_booked");
                     calendarBookedTrackedRef.current = true;
+                }
+                // If onSuccess callback is provided (for popup), call it with booking details
+                if (onSuccess) {
+                    const bookingData = {
+                        date: dateString,
+                        time: to12HourFormat(selectedTime),
+                        timezone: selectedTimezone
+                    };
+                    onSuccess(bookingData);
+                } else {
+                    // For standalone contact page, save to localStorage and set step to 4 (which will trigger redirect)
+                    const bookingData = {
+                        date: dateString,
+                        time: to12HourFormat(selectedTime),
+                        timezone: selectedTimezone
+                    };
+                    localStorage.setItem("bookingSelected", JSON.stringify(bookingData));
+                    setStep(4);
                 }
                 try {
                     const emailResponse = await fetch("/api/send-email", {
@@ -650,43 +664,54 @@ const CalendarBooking = () => {
     const router = useRouter(); // add this
     const searchParams = useSearchParams();
     const appParam = searchParams ? searchParams.get('app') : null;
-    const isAdsApp = appParam === 'ads';
+    const isAdsApp = forceAdsApp || appParam === 'ads';
+    const heroTitleSize = isAdsApp ? "text-3xl" : "text-5xl";
+    const heroSubtitleClass = isAdsApp ? "text-base text-gray-300" : "text-gray-400";
+    const heroTitleMargin = isAdsApp ? "mb-2" : "mb-4";
+    const cardWidthClass = isAdsApp ? "w-full max-w-4xl" : "w-full lg:w-[50%]";
+    const outerLayoutClass = isAdsApp ? "flex flex-col items-center gap-8" : "items-center justify-center";
+    const cardOuterClass = isAdsApp ? "flex justify-center" : "flex items-center justify-center p-4";
 
+    // Redirect to thank you page when step 4 is reached and no onSuccess callback
     useEffect(() => {
-        if (step === 4) {
-            const selectedTzObj = timezones.find(tz => tz.value === selectedTimezone);
-            const timezoneLabel = selectedTzObj ? selectedTzObj.label : selectedTimezone;
-            localStorage.setItem("bookingSelected", JSON.stringify({ date: selectedDate, time: selectedTime, timezone: selectedTimezone, timezoneLabel }));
-            router.push("/contact/thank-you");
+        if (step === 4 && !onSuccess) {
+            const timer = setTimeout(() => {
+                router.push('/contact/thank-you');
+            }, 500);
+            return () => clearTimeout(timer);
         }
-    }, [step, router, dateString, selectedTime, selectedTimezone, timezones]);
+    }, [step, onSuccess, router]);
 
     return (
         <div className="h-full">
-            <div className={`w-full ${isAdsApp ? '' : 'pt-36'} items-center justify-center`}>
+            <div className={`w-full ${isAdsApp ? '' : 'pt-36'} ${outerLayoutClass}`}>
+                {!isAdsApp && (
                 <div className="w-full text-white rounded-xl p-8 flex flex-col items-center">
-                    <h1 className="text-5xl text-center font-bold mb-4">Schedule a Free Demo</h1>
-                    <span className={`text-center text-gray-400 ${isAdsApp ? '' : 'mb-4'}`}>
+                    <h1 className={`${heroTitleSize} text-center font-bold ${heroTitleMargin}`}>Schedule a Free Demo</h1>
+                    <span className={`text-center ${heroSubtitleClass} ${isAdsApp ? '' : 'mb-4'}`}>
                         Book a free demo and see how Infrasity helps you move faster, smarter.
                     </span>
                 </div>
+                )}
                 <div
-                    className="mb-24"
-                    style={{
+                    className={isAdsApp ? '' : 'mb-24'}
+                    style={isAdsApp ? {} : {
                         background:
                             "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
                     }}
                 >
+                    {!isAdsApp && (
                     <div className={`w-full ${isAdsApp ? '' : 'mt-6'} h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 ${isAdsApp ? '' : 'mb-8'}`}></div>
-
-                    <div className="flex items-center justify-center p-4">
-                        <div className="w-full lg:w-[50%] items-center justify-center rounded-3xl border border-gray-400 p-10"
-                            style={{
+                    )}
+                    <div className={cardOuterClass}>
+                        <div className={`${cardWidthClass} items-center justify-center ${isAdsApp ? '' : 'rounded-3xl border border-gray-400 p-10'}`}
+                            style={isAdsApp ? {} : {
                                 background: "linear-gradient(to right, #0e1329 0%, #0e1329 10%, #353586 100%)",
                                 border: "2px solid #393a52",
                                 transition: "all 0.3s ease",
                             }}
                         >
+                            {!isAdsApp && (
                             <div className="text-xl font-bold text-center mb-4 mt-10 ">
                                 {step === 2 && (
                                     <div>
@@ -706,6 +731,7 @@ const CalendarBooking = () => {
                                 {/* {step === 3 && "Complete Your Booking"} */}
                                 {/* {step === 4 && "Booking Confirmed"} */}
                             </div>
+                            )}
 
                             {step === 2 && (
                                 <div className="calendar-container">
