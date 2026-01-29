@@ -37,6 +37,35 @@ const getPostContent = (slug) => {
   return matterResult.content;
 };
 
+// Image height configurations for specific images
+const ImageHeight = [
+  {
+    src: "/PostImages/case-study-series-a-cloud-developer-marketing/3.png",
+    width: 500,
+    height: 500,
+  },
+  {
+    src: "/PostImages/case-study-series-a-cloud-developer-marketing/2.png",
+    width: 650,
+    height: 450,
+  },
+  { 
+    src: "/PostImages/how-notion-grows-strategies/7.webp",
+    width: 650,
+    height: 650,
+  },
+  {
+    src: "/PostImages/how-notion-grows-strategies/8.webp",
+    width: 650,
+    height: 650,
+  },
+  {
+    src: "/PostImages/how-notion-grows-strategies/9.webp",
+    width: 650,
+    height: 650,
+  }
+];
+
 
 // Generate static paths for dynamic routes - ONLY for case studies
 export const generateStaticParams = async () => {
@@ -165,66 +194,97 @@ const PostPage = (props) => {
                 <Markdown
                   options={{
                     overrides: {
+                      p: {
+                        component: ({ children, ...props }) => (
+                          <p style={{ "fontWeight": "400" }} {...props}>
+                            {children}
+                          </p>
+                        ),
+                      },
+                      li: {
+                        component: ({ children, ...props }) => (
+                          <li style={{ "fontWeight": "400" }} {...props}>
+                            {children}
+                          </li>
+                        ),
+                      },
+                      strong: {
+                        component: ({ children, ...props }) => (
+                          <strong style={{ "fontWeight": "700" }} {...props}>
+                            {children}
+                          </strong>
+                        ),
+                      },
                       img: {
-                        component: ({ src, alt }) => {
-                          const isBase64 = src.startsWith("data:image/");
-                          const isValidUrl = (url) => {
-                            try {
-                              new URL(url);
-                              return true;
-                            } catch {
-                              return false;
+                        component: ({ src, alt, ...props }) => {
+                          try {
+                            // Safety checks
+                            if (!src || typeof src !== 'string') {
+                              return <div className="text-gray-500">Image not available</div>;
                             }
-                          };
 
-                          if (isBase64 || !isValidUrl(src)) {
-                            if (src === "/PostImages/case-study-series-a-cloud-developer-marketing/3.png") {
-                              return (
-                                <span style={{display:"flex",justifyContent:"center", maxWidth: '100%', overflow: 'hidden'}}>
-                                  <img
-                                    src={src}
-                                    alt={alt}
-                                    loading="lazy"
-                                    style={{ maxWidth: "100%", width: "500px", height: "auto", aspectRatio: "1/1" }}
-                                  />
-                                </span>
-                              );
-                            } else if (src === "/PostImages/case-study-series-a-cloud-developer-marketing/2.png") {
-                              return (
-                                <span style={{display:"flex",justifyContent:"center", maxWidth: '100%', overflow: 'hidden'}}>
-                                  <img
-                                    src={src}
-                                    alt={alt}
-                                    loading="lazy"
-                                    style={{ maxWidth: "100%", width: "650px", height: "auto", aspectRatio: "650/450" }}
-                                  />
-                                </span>
-                              );
-                            } else {
+                            const isBase64 = src.startsWith("data:image/");
+                            const isValidUrl = (url) => {
+                              try {
+                                new URL(url);
+                                return true;
+                              } catch {
+                                return false;
+                              }
+                            };
+
+                            if (isBase64 || !isValidUrl(src)) {
+                              // Special case: target a single image by its URL
+                              const matchedImage = ImageHeight.find((img) => img.src === src);
+
+                              if (matchedImage) {
+                                return (
+                                  <span
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "center",
+                                    }}
+                                  >
+                                    <img
+                                      src={matchedImage.src}
+                                      alt={alt || "Image"}
+                                      loading="lazy"
+                                      style={{
+                                        height: `${matchedImage.height}px`,
+                                        width: `${matchedImage.width}px`,
+                                      }}
+                                      {...props}
+                                    />
+                                  </span>
+                                );
+                              }
+
                               return (
                                 <img
                                   src={src}
-                                  alt={alt}
+                                  alt={alt || "Image"}
                                   loading="lazy"
-                                  style={{ width: "100%", maxWidth: "100%", height: "auto" }}
+                                  style={{ width: "100%", height: "auto" }}
+                                  {...props}
                                 />
                               );
                             }
-                          }
 
-                          return (
-                            <div style={{ maxWidth: '100%', overflow: 'hidden' }}>
+                            return (
                               <Image
                                 loading="lazy"
                                 src={src}
-                                alt={alt}
+                                alt={alt || "Image"}
                                 width={900}
                                 height={900}
                                 unoptimized={true}
-                                style={{ maxWidth: '100%', height: 'auto' }}
+                                {...props}
                               />
-                            </div>
-                          );
+                            );
+                          } catch (error) {
+                            console.error("Error in img component:", error);
+                            return <div className="text-gray-500">Failed to load image</div>;
+                          }
                         },
                       },
                         h2: {
