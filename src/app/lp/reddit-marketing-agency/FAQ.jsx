@@ -1,6 +1,7 @@
 "use client";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import ContactPopupButton from "./ContactPopupButton";
 
 // Custom Accordion component
 const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
@@ -115,16 +116,19 @@ const FAQSection = () => {
                             Have a question that needs a human to answer? No problem.
                         </p>
 
-                        <div
-                            className="inline-flex i"
-                        >
-                            <a
-                                href="/contact"
-                                className="inline-flex items-center text-[#5F64FF] text-lg  transition-colors"
-                            >
-                                Speak to Us
-                                <ArrowRight className="ml-2 h-4 w-4" />
-                            </a>
+                        <div className="flex flex-col items-start mt-4">
+                            <div className="inline-flex items-center gap-2">
+                                <ContactPopupButton
+                                    buttonText="Speak to Us"
+                                    width="w-52"
+                                    height="h-11"
+                                    textSize="text-sm"
+                                    textWeight="quicksand-semibold"
+                                    bgGradient="bg-[#5F64FF]"
+                                />
+                                
+                            </div>
+                            
                         </div>
                     </div>
 

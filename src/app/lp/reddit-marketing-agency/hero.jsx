@@ -4,7 +4,7 @@ import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
 import Image from "next/image";
 import { useMemo } from "react";
-import CalendarBooking from "../../calendarButton";
+import ContactPopupButton from "./ContactPopupButton";
 import TrustedBySection from "./marquee";
 
 
@@ -103,7 +103,7 @@ export default function AIStartupLanding() {
                     <div className="flex flex-col items-center">
                         {/* Center - Book a Demo button */}
                         <div className="flex flex-col items-center">
-                            <CalendarBooking href={"/contact?app=ads"} buttonText="Book a Strategy Call" width="w-52" height="h-11" textSize="text-sm" textWeight="quicksand-semibold" />
+                            <ContactPopupButton buttonText="Book a Strategy Call" width="w-52" height="h-11" textSize="text-sm" textWeight="quicksand-semibold" />
                             <p className="text-[0.75rem] px-[1rem] py-[0.75rem]">Free Reddit audit included</p>
                         </div>
                     </div>

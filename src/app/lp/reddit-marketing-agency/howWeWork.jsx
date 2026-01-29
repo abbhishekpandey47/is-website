@@ -1,4 +1,5 @@
 import { MessageCircle, Monitor, Shield, Users } from "lucide-react";
+import ContactPopupButton from "./ContactPopupButton";
 
 export default function AIChallengesSection() {
     const challenges = [
@@ -81,8 +82,16 @@ export default function AIChallengesSection() {
                             <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                         </div>
                     ))}
+                    
                 </div>
-
+                   <div className="flex flex-col items-center mt-4">
+                        {/* Center - Book a Demo button */}
+                        <div className="flex flex-col items-center mt-4">
+                            <ContactPopupButton buttonText="Book a Strategy Call" width="w-52" height="h-11" textSize="text-sm" textWeight="quicksand-semibold" />
+                            <p className="text-[0.75rem] px-[1rem] py-[0.75rem]">Free Reddit audit included</p>
+                        </div>
+                    </div>
+  
                 {/* Background decorative elements */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                     <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>

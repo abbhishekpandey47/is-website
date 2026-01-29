@@ -8,7 +8,6 @@ import Script from 'next/script';
 import { Suspense, useEffect, useState } from 'react';
 import AwardBanner from '../Components/HomePage/awardwinner';
 import Footer from '../Components/HomePage/Footer';
-import AdsFooter from '../Components/adsFooter';
 import { Loader } from '../Components/Loader';
 import Navbar from '../Components/Navbar/Navbar';
 import { Appwrap } from '../context';
@@ -37,6 +36,8 @@ export function ClientLayoutWrapper({ children }) {
 
 
   const CrispWithNoSSR = dynamic(() => import("../Components/chatbot"));
+  const AdsFooter = dynamic(() => import("../Components/adsFooter"), { ssr: true });
+  const AdsHeader = dynamic(() => import("../Components/adsHeader"), { ssr: true });
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -113,7 +114,7 @@ export function ClientLayoutWrapper({ children }) {
 
                 {shouldShowAwardBanner && <AwardBanner />}
 
-                {shouldShowNavbar && <Navbar />}
+                {isRedditMarketingAgencyLp ? <AdsHeader /> : shouldShowNavbar && <Navbar />}
 
                 {children}
                 <Analytics />
