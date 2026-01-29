@@ -1632,6 +1632,52 @@ let postMetaData = [
     category: "Informational",
     metaDescription: "Web Summit Qatar 2026 brings founders, startups, and investors to Doha. Learn who attends. Learn how B2B early-stage teams can prepare before attending the summit."
 },
+{
+  title: "How Did Notion Grow From an Early-Stage Startup to an $11B B2B SaaS?",
+  metaTitle: "How Notion Grew to a $11B SaaS Using Developer-Led Growth",
+  slug: "how-notion-grows-strategies",
+  description: "This case study examines how Notion grew from an early-stage startup on the brink of shutdown into a $11B B2B SaaS with over 100 million users, without relying on traditional marketing. Instead, Notion applied developer-style go-to-market principles: product-led growth, workflow-driven templates, exhaustive documentation, API extensibility, and community-led distribution. By designing the product to be composable, self-serve, and extensible, Notion turned internal artifacts into scalable growth infrastructure. The result was compounding adoption across search, social platforms, communities, and LLM discovery, proving that developer marketing works best when it is treated as product infrastructure, not promotion.",
+  ogImage: "/PostImages/how-notion-grows-strategies/0.webp",
+  publishedOn: "2026-01-29",
+  authorId: "author0005",
+  category: "Case Studies",
+  metaDescription: "Discover how Notion scaled from near shutdown to a $11B B2B SaaS using developer-style GTM: templates, documentation, APIs, and community-led growth.",
+  stats: [
+    {
+      title: "Global users",
+      value: "100M+",
+      subtext: "",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Valuation",
+      value: "$11B ",
+      subtext: "",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+    {
+      title: "Funding Raised",
+      value: "$418M",
+      subtext: "",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    },
+     {
+      title: "Funding Raised",
+      value: "100M",
+      subtext: "",
+      valueClass: "text-xl md:text-4xl font-semibold",
+    }
+],
+  companyHighlights: {
+    company: "Notion",
+    headquarters: "San Francisco, California, United States",
+    funding: "$418M total funding & $10-11B valuation ",
+    industry: "Software Development",
+    employees: "501-1,000",
+    website: "notion.com",
+    cloud:"Notion provides a flexible, AI-enhanced workspace platform that combines notes, documents, tasks, databases, and automation capabilities into one customizable system. Widely adopted by individuals, startups, and enterprises for internal knowledge management, workflow automation, and cross-team collaboration, Notion’s composable architecture lets users build their own workflows without code. "
+  }
+},
 ];
 
 const sorted = () => {
