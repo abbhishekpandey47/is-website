@@ -1,14 +1,8 @@
-import * as Sentry from '@sentry/nextjs';
+// Sentry instrumentation - completely disabled for performance
+// Removes surveys.js (31 KiB) and other Sentry overhead from bundle
 
 export async function register() {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    await import('../sentry.server.config');
-  }
-
-  if (process.env.NEXT_RUNTIME === 'edge') {
-    await import('../sentry.edge.config');
-    
-  }
+  // Sentry disabled to prevent surveys.js from loading
 }
 
-export const onRequestError = Sentry.captureRequestError;
+export const onRequestError = () => {};

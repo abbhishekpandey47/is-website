@@ -1,16 +1,15 @@
 "use client";
 
-import { ErrorBoundary } from "@sentry/react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "./dialog";
 import { Button } from "@/Components/ui/button";
 import { useState } from "react";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "./dialog";
 
 function ErrorDialog({ error, resetError }) {
   const [open, setOpen] = useState(true);
 
   const handleClose = () => {
     setOpen(false);
-    resetError(); // Optional: Reset error boundary after closing
+    resetError();
   };
 
   return (
@@ -29,13 +28,10 @@ function ErrorDialog({ error, resetError }) {
 }
 
 export default function PlatformLayout({ children }) {
+  // Sentry ErrorBoundary disabled for performance optimization
   return (
-    <ErrorBoundary
-      fallback={({ error, resetError }) => (
-        <ErrorDialog error={error} resetError={resetError} />
-      )}
-    >
+    <>
       {children}
-    </ErrorBoundary>
+    </>
   );
 }
