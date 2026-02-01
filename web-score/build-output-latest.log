@@ -1,0 +1,196 @@
+
+> infrasity@0.1.0 build
+> node --max-old-space-size=3072 ./node_modules/next/dist/bin/next build && npm run sitemap
+
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local, .env
+- Experiments (use with caution):
+  · clientTraceMetadata
+  ✓ optimizeCss
+  · optimizePackageImports
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 13.1s
+  Running next.config.js provided runAfterProductionCompile ...
+✓ Completed runAfterProductionCompile in 573ms
+  Skipping validation of types
+  Collecting page data using 15 workers ...
+Generated 118 static params for blog posts
+  Generating static pages using 15 workers (0/210) ...
+  Generating static pages using 15 workers (52/210)
+  Generating static pages using 15 workers (104/210)
+  Generating static pages using 15 workers (157/210)
+✓ Generating static pages using 15 workers (210/210) in 1347.4ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /about
+├ ƒ /api/generate-script
+├ ƒ /api/sentry-example-api
+├ ƒ /api/support
+├ ƒ /api/validate-email
+├ ○ /auth/signin
+├ ○ /auth/signup
+├ ○ /blog
+├ ● /blog/[slug]
+│ ├ /blog/web-summit-qatar
+│ ├ /blog/startup-in-stealth-mode
+│ ├ /blog/ai-visibility-audit
+│ └ [+115 more paths]
+├ ○ /book-a-demo
+├ ○ /careers
+├ ○ /case-studies
+├ ● /case-studies/[slug]
+│ ├ /case-studies/how-notion-grows-strategies
+│ ├ /case-studies/lovable-growth-case-study
+│ ├ /case-studies/devrel-hiring
+│ └ [+6 more paths]
+├ ○ /contact
+├ ○ /contact/thank-you
+├ ○ /devtool-gtm-playbook
+├ ○ /docs-landing
+├ ○ /faq
+├ ○ /infrasity-vs-developer-relations-engineer
+├ ○ /infrasity-vs-developer-relations-engineer/components
+├ ○ /lp/developer-marketing-agency
+├ ○ /lp/reddit-marketing-agency
+├ ○ /playbook/developer-marketing
+├ ○ /playbook/developer-marketing/thank-you
+├ ○ /playbook/reddit-b2b-marketing
+├ ○ /playbook/technical-content-marketing
+├ ○ /pricing
+├ ○ /privacy-policy
+├ ○ /sentry-example-page
+├ ○ /services/ai-agents-gtm-services
+├ ○ /services/ai-geo-optimization-agency
+├ ○ /services/byclaude
+├ ○ /services/created-by-cursor
+├ ○ /services/cursoredit
+├ ○ /services/developer-marketing-agency
+├ ○ /services/documentation-services
+├ ○ /services/gtm-content
+├ ○ /services/gtm-content-services-for-yc-startups
+├ ○ /services/modern-pagerduty
+├ ○ /services/product-documentation
+├ ○ /services/reddit-marketing-agency
+├ ○ /services/tech-video-production
+├ ○ /services/technical-content-gtm
+├ ○ /services/technical-writing-services
+├ ○ /services/technical-writing-services/cli-guide
+├ ○ /services/technical-writing-services/how-to-guides
+├ ○ /services/technical-writing-services/release-notes
+├ ○ /services/technical-writing-services/sdk-docs
+├ ○ /services/webflow-agency
+├ ○ /signal-check
+├ ○ /technical-writing-services-b2b-saas
+├ ○ /templates
+├ ● /templates/[slug]
+│ ├ /templates/informational-content-template
+│ ├ /templates/developer-marketing-content-template
+│ ├ /templates/product-documentation-template
+│ └ [+3 more paths]
+├ ○ /terms-of-services
+├ ○ /threadflow
+├ ○ /threadflow/analytics
+├ ƒ /threadflow/c/[company]
+├ ƒ /threadflow/c/[company]/analytics
+├ ƒ /threadflow/c/[company]/categories
+├ ƒ /threadflow/c/[company]/comment
+├ ƒ /threadflow/c/[company]/comment/add
+├ ƒ /threadflow/c/[company]/communities
+├ ƒ /threadflow/c/[company]/management/categories
+├ ƒ /threadflow/c/[company]/management/schedule
+├ ƒ /threadflow/c/[company]/management/settings
+├ ƒ /threadflow/c/[company]/management/templates
+├ ƒ /threadflow/c/[company]/posts
+├ ƒ /threadflow/c/[company]/posts/add
+├ ƒ /threadflow/c/[company]/schedule
+├ ƒ /threadflow/c/[company]/settings
+├ ƒ /threadflow/c/[company]/subredditsense
+├ ƒ /threadflow/c/[company]/templates
+├ ○ /threadflow/categories
+├ ○ /threadflow/comment
+├ ○ /threadflow/comment/add
+├ ○ /threadflow/communities
+├ ○ /threadflow/management/categories
+├ ○ /threadflow/management/schedule
+├ ○ /threadflow/management/settings
+├ ○ /threadflow/management/templates
+├ ○ /threadflow/posts
+├ ○ /threadflow/posts/add
+├ ○ /threadflow/schedule
+├ ○ /threadflow/serp-scout
+├ ○ /threadflow/settings
+├ ○ /threadflow/subredditsense
+├ ○ /threadflow/templates
+├ ○ /tools/ai-script-generator
+├ ○ /tools/ai-script-generator/templates
+├ ○ /tools/reddit-comment-generator
+├ ○ /tools/reddit-tools
+├ ○ /tools/reddit-tools/reddit-comment-generator
+├ ○ /tools/roi-cal
+├ ○ /tutorials
+└ ○ /web-summit-doha-2026
+
+Route (pages)
+┌ ƒ /api/allContent
+├ ƒ /api/analytics
+├ ƒ /api/authVerify
+├ ƒ /api/blog/generateSummary
+├ ƒ /api/comment
+├ ƒ /api/companies
+├ ƒ /api/engagement/export
+├ ƒ /api/log-bot
+├ ƒ /api/playbook
+├ ƒ /api/posts
+├ ƒ /api/prompt
+├ ƒ /api/send-email
+├ ƒ /api/sendAEOReport
+├ ƒ /api/threadflow/company-context
+├ ƒ /api/threadflow/insights
+├ ƒ /api/threadflow/reddit/dashboard
+├ ƒ /api/threadflow/reddit/fetch
+├ ƒ /api/threadflow/reddit/job
+├ ƒ /api/threadflow/reddit/link-company
+├ ƒ /api/threadflow/reddit/my-companies
+├ ƒ /api/threadflow/serp-scout
+└ ƒ /api/whitepaper
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+
+> infrasity@0.1.0 sitemap
+> node scripts/generate-sitemap.js
+
+Running next-sitemap...
+✨ [next-sitemap] Loading next-sitemap config: file:///C:/Users/sidla/Downloads/git/infrasity_frontend/next-sitemap.config.js
+✅ [next-sitemap] Generation completed
+┌───────────────┬────────┐
+│ (index)       │ Values │
+├───────────────┼────────┤
+│ indexSitemaps │ 0      │
+│ sitemaps      │ 1      │
+└───────────────┴────────┘
+-----------------------------------------------------
+ SITEMAPS
+-----------------------------------------------------
+
+   ○ https://www.infrasity.com/sitemap.xml
+
+
+Sitemap exists, updating...
+Found 206 URLs in existing sitemap
+Looking for content...
+Found 127 posts in metadata
+Removed 0 deleted content items from sitemap
+Added 0 new blog posts to sitemap
+Added 0 new case studies to sitemap
+Added 0 new tutorials to sitemap
+Sitemap updated successfully!
+Sitemap generation completed.
