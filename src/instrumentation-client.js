@@ -27,6 +27,9 @@ Sentry.init({
 
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
+
+  // Disable auto session tracking to reduce overhead and prevent surveys.js loading (31.3 KiB)
+  autoSessionTracking: false,
 });
 
 
