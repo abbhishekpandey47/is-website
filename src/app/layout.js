@@ -33,6 +33,10 @@ export default function RootLayout({ children }) {
             <head>
                   <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+                  {/* Preconnect to critical third-party origins */}
+                  <link rel="preconnect" href="https://cdn.getkoala.com" crossOrigin="anonymous" />
+                  <link rel="preconnect" href="https://scripts.clarity.ms" crossOrigin="anonymous" />
+                  <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />
                   {/* Preload critical fonts */}
                   <link 
                     rel="preload" 
