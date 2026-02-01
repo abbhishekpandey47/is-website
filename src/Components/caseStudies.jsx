@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { useState } from "react";
 
 const defaultCaseStudies = [
   {
@@ -76,14 +77,22 @@ export default function CaseStudies({
             </div>
             {/* Company info and badge */}
             <div className="case-study-wrapper flex flex-col mb-2">
-              <img src={study.companyImg} alt={study.badge} className={`case-study-image rounded h-[3rem] w-[10rem] ${study.style}`} />
+              <img
+                src={study.companyImg}
+                alt={study.badge}
+                width="160"
+                height="48"
+                loading="lazy"
+                decoding="async"
+                className={`case-study-image rounded h-[3rem] w-[10rem] ${study.style}`}
+              />
               <div className="case-study-category text-sm text-white/60">{study.desc}</div>
             </div>
             {/* Case study link with arrow */}
             {!hideLink && (
               <a href={study.link} className="blue-link-wrapper flex items-center gap-2 text-[#695AE1] font-medium hover:underline transition">
                 <span className="blue-link">Case study</span>
-                <span className="arrow-wrapper-new ml-0"> 
+                <span className="arrow-wrapper-new ml-0">
                   <span className="w-6 h-[2px] bg-[#695AE1] inline-block align-middle mr-[-0.5rem]"></span>
                   <span className="arrow-right  inline-block align-middle -rotate-45 border-[#695AE1] border-r-2 border-b-2 w-2 h-2"></span>
                 </span>
@@ -93,7 +102,15 @@ export default function CaseStudies({
           {/* Middle column: graph */}
           <div className="flex items-center justify-center">
             <div className="hero-slider-image-wrapper rounded-xl p-6 flex items-center justify-center w-full border border-[#232323] relative bg-[white] min-h-[320px]">
-              <img src={study.graphImg} alt="Graphic representation of growth" className="image-8 graph-line h-[270px] object-contain" />
+              <img
+                src={study.graphImg}
+                alt="Graphic representation of growth"
+                width="540"
+                height="270"
+                loading="lazy"
+                decoding="async"
+                className="image-8 graph-line h-[270px] object-contain"
+              />
             </div>
           </div>
           {/* Right column: arrows at bottom */}
@@ -120,3 +137,25 @@ export default function CaseStudies({
     </div>
   );
 }
+
+CaseStudies.propTypes = {
+  studies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      tag: PropTypes.string,
+      title: PropTypes.string,
+      company: PropTypes.string,
+      badge: PropTypes.string,
+      badgeColor: PropTypes.string,
+      desc: PropTypes.string,
+      link: PropTypes.string,
+      style: PropTypes.string,
+      companyImg: PropTypes.string,
+      graphImg: PropTypes.string,
+    })
+  ),
+  heading: PropTypes.string,
+  subheading: PropTypes.string,
+  className: PropTypes.string,
+  hideLink: PropTypes.bool,
+};
