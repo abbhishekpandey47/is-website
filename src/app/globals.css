@@ -11,21 +11,21 @@
   font-family: "Quicksand";
   src: url('/fonts/Quicksand-Bold.woff');
   font-weight: bold;
-  font-display: swap;
+  font-display: optional;
 }
 
 @font-face {
   font-family: "Quicksand";
   src: url('/fonts/Quicksand-SemiBold.woff2');
   font-weight: 600;
-  font-display: swap;
+  font-display: optional;
 }
 
 @font-face {
   font-family: "Quicksand";
   src: url('/fonts/Quicksand-Light.woff2') format("woff2");
   font-weight: 100;
-  font-display: swap;
+  font-display: optional;
 
 }
 
@@ -33,7 +33,7 @@
   font-family: "Quicksand";
   src: url('/fonts/Quicksand-Medium.woff2') format("woff2");
   font-weight: medium;
-  font-display: swap;
+  font-display: optional;
 }
 
 

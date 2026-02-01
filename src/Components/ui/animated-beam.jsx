@@ -70,42 +70,22 @@ export const AnimatedBeam = ({
       }
     };
 
-    // Defer layout measurements to idle time to prevent forced reflows during initial paint
-    let updatePathId;
-    let resizeObserver;
-
-    if (typeof requestIdleCallback !== 'undefined') {
-      updatePathId = requestIdleCallback(() => {
-        // Initialize ResizeObserver
-        resizeObserver = new ResizeObserver(() => {
-          updatePath();
-        });
-
-        if (containerRef.current) {
-          resizeObserver.observe(containerRef.current);
-        }
-        updatePath();
-      }, { timeout: 2000 });
-    } else {
-      // Fallback for browsers without requestIdleCallback
-      resizeObserver = new ResizeObserver(() => {
-        updatePath();
-      });
-
-      if (containerRef.current) {
-        resizeObserver.observe(containerRef.current);
-      }
+    // Initialize ResizeObserver
+    const resizeObserver = new ResizeObserver(() => {
       updatePath();
+    });
+
+    // Observe the container element
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
     }
+
+    // Call the updatePath initially to set the initial path
+    updatePath();
 
     // Clean up the observer on component unmount
     return () => {
-      if (updatePathId) {
-        cancelIdleCallback(updatePathId);
-      }
-      if (resizeObserver) {
-        resizeObserver.disconnect();
-      }
+      resizeObserver.disconnect();
     };
   }, [
     containerRef,
