@@ -14,7 +14,7 @@ const quicksand = Quicksand({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
-  preload: true,
+  preload: false,
   fallback: ['system-ui', 'arial'],
   adjustFontFallback: true,
 });
