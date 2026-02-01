@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import AlternateLinks from './AlternateLinks';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
 import DeferredScripts from './components/DeferredScripts';
+import { CSSLoader } from './CSSLoader';
 import { FontLoader } from './FontLoader';
 import './globals.css';
 import { metadata } from './metadata';
@@ -41,6 +42,7 @@ export default function RootLayout({ children }) {
             </head>
             <GoogleAnalytics gaId='G-G0BTN1FRWY' />
             <body className='antialiased' suppressHydrationWarning>
+                <CSSLoader />
                 <FontLoader />
                 <noscript>
                     <iframe
