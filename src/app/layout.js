@@ -1,11 +1,11 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
-import * as Sentry from '@sentry/nextjs';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 import AlternateLinks from './AlternateLinks';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
 import DeferredScripts from './components/DeferredScripts';
+import { FontLoader } from './FontLoader';
 import './globals.css';
 import { metadata } from './metadata';
 
@@ -13,12 +13,7 @@ import { metadata } from './metadata';
 // This prevents fonts from blocking render (1340ms saved)
 
 export function generateMetadata() {
-  return {
-    ...metadata,
-    other: {
-      ...Sentry.getTraceData()
-    }
-  };
+  return metadata;
 }
 
 export default function RootLayout({ children }) {
@@ -40,21 +35,13 @@ export default function RootLayout({ children }) {
                     .quicksand-semibold { font-family: Quicksand, system-ui, sans-serif; font-weight: 600; }
                     .quicksand-bold { font-family: Quicksand, system-ui, sans-serif; font-weight: 700; }
                   `}} />
-                  {/* Load fonts asynchronously using script injection */}
-                  <script dangerouslySetInnerHTML={{__html: `
-                    (function(){
-                      var link = document.createElement('link');
-                      link.rel = 'stylesheet';
-                      link.href = '/fonts.css';
-                      document.head.appendChild(link);
-                    })();
-                  `}} />
                   <noscript><link rel="stylesheet" href="/fonts.css" /></noscript>
                   <AlternateLinks />
                   <link rel="preload" href="/landingfolio/dashboard.webp" as="image" />
             </head>
             <GoogleAnalytics gaId='G-G0BTN1FRWY' />
             <body className='antialiased' suppressHydrationWarning>
+                <FontLoader />
                 <noscript>
                     <iframe
                         src='https://www.googletagmanager.com/ns.html?id=GTM-WGZGHXZS'
