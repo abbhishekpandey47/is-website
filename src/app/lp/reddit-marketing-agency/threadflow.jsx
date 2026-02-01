@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useRef } from "react";
-import Image from "next/image";
 import {
-  LazyMotion,
-  domAnimation,
-  m,
-  useScroll,
-  useTransform,
-  useSpring,
+    LazyMotion,
+    domAnimation,
+    m,
+    useScroll,
+    useSpring,
+    useTransform,
 } from "framer-motion";
+import Image from "next/image";
+import { useRef } from "react";
 
 export default function Threadflow() {
   const sectionRef = useRef(null);
@@ -17,6 +17,8 @@ export default function Threadflow() {
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start 100%", "end 95%"],
+    // Optimize scroll tracking to reduce layout recalculations
+    layoutEffect: false,
   });
 
   const rotateXRaw = useTransform(scrollYProgress, [0, 1], [30, 0]);
