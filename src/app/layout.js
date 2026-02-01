@@ -2,6 +2,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import * as Sentry from '@sentry/nextjs';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Quicksand } from 'next/font/google';
+import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 import AlternateLinks from './AlternateLinks';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
                   <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
                   {/* Preconnect to critical third-party origins */}
+                  <link rel="preconnect" href="https://cdn.prod.website-files.com" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://cdn.getkoala.com" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://scripts.clarity.ms" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />
@@ -59,6 +61,13 @@ export default function RootLayout({ children }) {
                     type="font/woff2"
                     crossOrigin="anonymous"
                   />
+                  <link
+                    rel="preload"
+                    href="/fonts/Quicksand-Light.woff2"
+                    as="font"
+                    type="font/woff2"
+                    crossOrigin="anonymous"
+                  />
                   <AlternateLinks />
                   <link rel="preload" href="/landingfolio/dashboard.webp" as="image" />
             </head>
@@ -67,6 +76,7 @@ export default function RootLayout({ children }) {
                 <noscript>
                     <iframe
                         src='https://www.googletagmanager.com/ns.html?id=GTM-WGZGHXZS'
+                    title='Google Tag Manager'
                         height='0'
                         width='0'
                         style={{ display: 'none', visibility: 'hidden' }}
@@ -81,3 +91,7 @@ export default function RootLayout({ children }) {
         </html>
     );
 }
+
+RootLayout.propTypes = {
+  children: PropTypes.node,
+};

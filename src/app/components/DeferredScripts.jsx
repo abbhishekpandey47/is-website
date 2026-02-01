@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Script from "next/script";
+import { useEffect, useState } from "react";
 
 const interactionEvents = ["scroll", "click", "keydown", "pointerdown", "touchstart"];
 
@@ -14,17 +14,17 @@ export default function DeferredScripts() {
     const activate = () => setReady(true);
 
     interactionEvents.forEach((event) => {
-      window.addEventListener(event, activate, { once: true, passive: true });
+      globalThis.addEventListener(event, activate, { once: true, passive: true });
     });
 
-    // Increase timeout to 2000ms to give page more time to render critical content first
-    const timer = window.setTimeout(activate, 2000);
+    // Increase timeout to 4500ms to give page more time to render critical content first
+    const timer = globalThis.setTimeout(activate, 4500);
 
     return () => {
       interactionEvents.forEach((event) => {
-        window.removeEventListener(event, activate);
+        globalThis.removeEventListener(event, activate);
       });
-      window.clearTimeout(timer);
+      globalThis.clearTimeout(timer);
     };
   }, [ready]);
 

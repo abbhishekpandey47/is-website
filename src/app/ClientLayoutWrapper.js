@@ -5,7 +5,8 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import dynamic from 'next/dynamic';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
-import { Suspense, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { Suspense, useEffect } from 'react';
 import AwardBanner from '../Components/HomePage/awardwinner';
 import Footer from '../Components/HomePage/Footer';
 import { Loader } from '../Components/Loader';
@@ -14,34 +15,28 @@ import { Appwrap } from '../context';
 import { initMixpanel } from "../lib/mixpanel";
 
 export function ClientLayoutWrapper({ children }) {
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (globalThis.window === undefined) return;
 
     const initMixpanelInIdle = () => initMixpanel({ debug: false });
-    if ('requestIdleCallback' in window) {
-      const idleId = window.requestIdleCallback(initMixpanelInIdle);
-      return () => window.cancelIdleCallback(idleId);
+    if ('requestIdleCallback' in globalThis) {
+      const idleId = globalThis.requestIdleCallback(initMixpanelInIdle);
+      return () => globalThis.cancelIdleCallback(idleId);
     }
 
-    const timeoutId = window.setTimeout(initMixpanelInIdle, 0);
-    return () => window.clearTimeout(timeoutId);
+    const timeoutId = globalThis.setTimeout(initMixpanelInIdle, 0);
+    return () => globalThis.clearTimeout(timeoutId);
   }, []);
 
 
 
-  const CrispWithNoSSR = dynamic(() => import("../Components/chatbot"));
   const AdsFooter = dynamic(() => import("../Components/adsFooter"), { ssr: true });
   const AdsHeader = dynamic(() => import("../Components/adsHeader"), { ssr: true });
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const safePathname = pathname || '';
+  const routeReady = Boolean(pathname);
   const appParam = searchParams?.get('app');
   const isAdsApp = appParam === 'ads';
 
@@ -57,8 +52,6 @@ export function ClientLayoutWrapper({ children }) {
     safePathname.startsWith("/threadflow") ||
     safePathname.startsWith("/auth");
 
-  const hideNavBar3 = safePathname === "/tools/reddit-comment-generator";
-
   const hideNavBarAndFooter =
     safePathname === "/tools/reddit-tools" ||
     safePathname.startsWith("/auth") ||
@@ -69,15 +62,18 @@ export function ClientLayoutWrapper({ children }) {
     safePathname.startsWith("/lp/reddit-marketing-agency");
 
   const shouldShowAwardBanner =
+    routeReady &&
     !hideAwardBanner &&
     !hideNavBarAndFooter &&
     !hideNavBar2 &&
     safePathname !== "/careers" &&
     !(safePathname === "/contact" && isAdsApp);
 
-  const shouldShowNavbar = !hideNavBarAndFooter && !hideNavbar && !isAdsApp;
+  const shouldShowNavbar =
+    routeReady && !hideNavBarAndFooter && !hideNavbar && !isAdsApp;
 
-  const isRedditMarketingAgencyLp = safePathname.startsWith("/lp/reddit-marketing-agency");
+  const isRedditMarketingAgencyLp =
+    routeReady && safePathname.startsWith("/lp/reddit-marketing-agency");
 
   return (
     <Suspense fallback={null}>
@@ -93,37 +89,31 @@ export function ClientLayoutWrapper({ children }) {
           }}
         />
 
-        {!mounted ? (
-          <div style={{ visibility: 'hidden' }}>
-            <Appwrap>
-              <AntdRegistry>
-                {children}
-              </AntdRegistry>
-            </Appwrap>
-          </div>
-        ) : (
-          <NextThemesProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem={false}
-            disableTransitionOnChange
-          >
-            <Appwrap>
-              <AntdRegistry>
-                <Loader />
+        <NextThemesProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <Appwrap>
+            <AntdRegistry>
+              <Loader />
 
-                {shouldShowAwardBanner && <AwardBanner />}
+              {shouldShowAwardBanner && <AwardBanner />}
 
-                {isRedditMarketingAgencyLp ? <AdsHeader /> : shouldShowNavbar && <Navbar />}
+              {isRedditMarketingAgencyLp ? <AdsHeader /> : shouldShowNavbar && <Navbar />}
 
-                {children}
-                <Analytics />
-                {isRedditMarketingAgencyLp ? <AdsFooter /> : !hideNavBarAndFooter && <Footer />}
-              </AntdRegistry>
-            </Appwrap>
-          </NextThemesProvider>
-        )}
+              {children}
+              <Analytics />
+              {isRedditMarketingAgencyLp ? <AdsFooter /> : !hideNavBarAndFooter && <Footer />}
+            </AntdRegistry>
+          </Appwrap>
+        </NextThemesProvider>
       </>
     </Suspense>
   );
 }
+
+ClientLayoutWrapper.propTypes = {
+  children: PropTypes.node,
+};
