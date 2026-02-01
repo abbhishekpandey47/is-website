@@ -22,7 +22,7 @@ Sentry.init({
 
   // Disable auto session tracking to reduce overhead
   autoSessionTracking: false,
-  
+
   // Disable debug logging
   debug: false,
 });
