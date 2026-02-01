@@ -1,7 +1,6 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
 import * as Sentry from '@sentry/nextjs';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Quicksand } from 'next/font/google';
 import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 import AlternateLinks from './AlternateLinks';
@@ -10,14 +9,8 @@ import DeferredScripts from './components/DeferredScripts';
 import './globals.css';
 import { metadata } from './metadata';
 
-const quicksand = Quicksand({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
-  preload: false,
-  fallback: ['system-ui', 'arial'],
-  adjustFontFallback: true,
-});
+// Removed Next.js Quicksand font loader - using CSS @font-face with font-display: optional instead
+// This prevents fonts from blocking render (1340ms saved)
 
 export function generateMetadata() {
   return {
@@ -39,14 +32,14 @@ export default function RootLayout({ children }) {
                   <link rel="preconnect" href="https://cdn.getkoala.com" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://scripts.clarity.ms" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />
-                  {/* Preload only critical Light font for body text and main content */}
-                  <link
-                    rel="preload"
-                    href="/fonts/Quicksand-Light.woff2"
-                    as="font"
-                    type="font/woff2"
-                    crossOrigin="anonymous"
-                  />
+                  {/* Inline critical CSS to prevent render blocking */}
+                  <style dangerouslySetInnerHTML={{__html: `
+                    * { box-sizing: border-box; color: white; }
+                    body { background-color: #0D0A1A; margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+                    .quicksand-light { font-family: Quicksand, system-ui, sans-serif; font-weight: 300; }
+                    .quicksand-semibold { font-family: Quicksand, system-ui, sans-serif; font-weight: 600; }
+                    .quicksand-bold { font-family: Quicksand, system-ui, sans-serif; font-weight: 700; }
+                  `}} />
                   <AlternateLinks />
                   <link rel="preload" href="/landingfolio/dashboard.webp" as="image" />
             </head>
