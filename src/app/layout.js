@@ -5,8 +5,6 @@ import { Suspense } from 'react';
 import AlternateLinks from './AlternateLinks';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
 import DeferredScripts from './components/DeferredScripts';
-import { CSSLoader } from './CSSLoader';
-import { FontLoader } from './FontLoader';
 import './globals.css';
 import { metadata } from './metadata';
 
@@ -28,22 +26,11 @@ export default function RootLayout({ children }) {
                   <link rel="preconnect" href="https://cdn.getkoala.com" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://scripts.clarity.ms" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />
-                  {/* Inline critical CSS to prevent render blocking */}
-                  <style dangerouslySetInnerHTML={{__html: `
-                    * { box-sizing: border-box; color: white; }
-                    body { background-color: #0D0A1A; margin: 0; font-family: system-ui, -apple-system, sans-serif; }
-                    .quicksand-light { font-family: Quicksand, system-ui, sans-serif; font-weight: 300; }
-                    .quicksand-semibold { font-family: Quicksand, system-ui, sans-serif; font-weight: 600; }
-                    .quicksand-bold { font-family: Quicksand, system-ui, sans-serif; font-weight: 700; }
-                  `}} />
-                  <noscript><link rel="stylesheet" href="/fonts.css" /></noscript>
                   <AlternateLinks />
                   <link rel="preload" href="/landingfolio/dashboard.webp" as="image" />
             </head>
             <GoogleAnalytics gaId='G-G0BTN1FRWY' />
             <body className='antialiased' suppressHydrationWarning>
-                <CSSLoader />
-                <FontLoader />
                 <noscript>
                     <iframe
                         src='https://www.googletagmanager.com/ns.html?id=GTM-WGZGHXZS'
