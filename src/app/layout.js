@@ -26,6 +26,7 @@ export default function RootLayout({ children }) {
                   <link rel="preconnect" href="https://cdn.getkoala.com" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://scripts.clarity.ms" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />
+                  <link rel="stylesheet" href="/fonts.css" />
                   <AlternateLinks />
                   <link rel="preload" href="/landingfolio/dashboard.webp" as="image" />
             </head>
