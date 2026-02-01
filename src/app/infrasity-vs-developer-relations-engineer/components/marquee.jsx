@@ -1,12 +1,12 @@
 "use client";
-import React, { useMemo } from "react";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
 import Image from "next/image";
+import { useMemo } from "react";
 
 const fileList = [
   "aviator.png","mocha.png","cedana.png","dhiwise.png","amnic.png","oso.png","ox-sec.svg",
-  "mvp-grow.png","cerbos.png","qodo-logo.png","Codegiant.png","Scalekit-logo.png","cycloid.png",
+  "mvp-grow.png","cerbos.png","qodo-logo.png","Codegiant.png","Scalekit-logo.png","cycloid.webp",
   "scalr.png","daytona.png","stackOne.png","DevZero.png","terrateam.png","env0-infra-1.png",
   "tracetest.png","firefly.png","TravisCI-Full-Color.png","firstock-logo.png","vapi-logo.png",
   "kapstan.png","Zenml.png","Kubiya.png","lovable-logo.png","Meteor-ops.png"
@@ -50,7 +50,7 @@ const getLogoPadding = (filename) => {
 
 const NewMarquee = () => {
   const fileMemo = useMemo(() => fileList, []);
-  const duration = "80s"; 
+  const duration = "80s";
 
   return (
     <div className="pb-2">

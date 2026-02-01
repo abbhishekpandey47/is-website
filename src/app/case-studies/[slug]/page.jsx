@@ -48,7 +48,9 @@ export const generateStaticParams = async () => {
 
 // Dynamically generate metadata for each post
 export async function generateMetadata({ params }) {
-  const post = postMetaData.find((element) => element.slug === params.slug);
+  // Await params as required by Next.js 15+
+  const resolvedParams = await params;
+  const post = postMetaData.find((element) => element.slug === resolvedParams.slug);
 
   if (!post) {
     return {
@@ -80,8 +82,10 @@ export async function generateMetadata({ params }) {
 }
 
 // Main PostPage component
-const PostPage = (props) => {
-  const slug = props.params.slug;
+const PostPage = async (props) => {
+  // Await params as required by Next.js 15+
+  const resolvedParams = await props.params;
+  const slug = resolvedParams.slug;
 
   // Check if the post exists
   if (!isValid(slug)) {

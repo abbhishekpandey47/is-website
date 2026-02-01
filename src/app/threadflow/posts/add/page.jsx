@@ -6,21 +6,21 @@ import { ArrowLeft, Plus, Save, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import "react-quill-new/dist/quill.snow.css";
 import { Button } from "../../../../Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../../Components/ui/card";
 import { Input } from "../../../../Components/ui/input";
 import { Label } from "../../../../Components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../Components/ui/select";
 import { SidebarTrigger } from "../../../../Components/ui/sidebar";
+import { Textarea } from "../../../../Components/ui/textarea";
 import { UserProfile } from "../../../../Components/UserProfile";
 import { useToast } from "../../../../hooks/use-toast";
-import { Textarea } from "../../../../Components/ui/textarea";
 
 
 const ReactQuill = dynamic(
   async () => {
     const { default: RQ } = await import("react-quill-new");
-    await import("react-quill-new/dist/quill.snow.css");
     return RQ;
   },
   { ssr: false }
@@ -532,7 +532,7 @@ const AddPostPage = () => {
                                               <SelectItem value="postUnderApproval">Post Under Approval</SelectItem>
                                               <SelectItem value="live">Live</SelectItem>
                                               <SelectItem value="removed">Removed </SelectItem>
-    
+
                                               <SelectItem value="reposted">Reposted</SelectItem>
                                               <SelectItem value="notPosted">Not Posted</SelectItem>
 

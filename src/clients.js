@@ -17,7 +17,7 @@ export const clientLogo = [
   "cedana.png",
   "cerbos.png",
   "codegiant-infra-1.png",
-  "cycloid.png",
+  "cycloid.webp",
   "daytona-removebg-preview-e1721477918328.png",
   "DevZero.png",
   "env0-infra-1.png",
@@ -90,7 +90,7 @@ export const clientPaddingMap = {
   "cedana.png": "p-5",
   "cerbos.png": "p-4",
   "codegiant-infra-1.png": "p-3",
-  "cycloid.png": "p-7",
+  "cycloid.webp": "p-7",
   "daytona-removebg-preview-e1721477918328.png": "p-5",
   "DevZero.png": "p-4",
   "env0-infra-1.png": "p-6",
@@ -111,7 +111,7 @@ export const clientPaddingMap = {
 
 export const clientWhiteLogo = [
   "brevo.png",
-  "cycloid.png",
+  "cycloid.webp",
   "devzero.png",
   "dhiwise.png",
   "firefly.png",
@@ -123,12 +123,12 @@ export const clientWhiteLogo = [
   "qualifier.png",
   "respond.png",
   "scalekit.png",
-  "scalr.png",  
+  "scalr.png",
   "teleport.png"
 ];
 export const clientWhiteStyle = {
   "brevo.png":"object-cover",
-  "cycloid.png":"object-contain",
+  "cycloid.webp":"object-contain",
   "devzero.png":"object-contain",
   "dhiwise.png":"object-cover",
   "firefly.png":"object-contain",
@@ -140,6 +140,6 @@ export const clientWhiteStyle = {
   "qualifier.png":"object-cover",
   "respond.png":"object-cover",
   "scalekit.png":"object-contain",
-  "scalr.png":"object-contain",  
+  "scalr.png":"object-contain",
   "teleport.png":"object-cover"
 };

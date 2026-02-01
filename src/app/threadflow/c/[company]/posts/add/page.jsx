@@ -1,4 +1,13 @@
 'use client';
+import { Button } from "@/Components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
+import { Input } from "@/Components/ui/input";
+import { Label } from "@/Components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
+import { SidebarTrigger } from "@/Components/ui/sidebar";
+import { Textarea } from "@/Components/ui/textarea";
+import { UserProfile } from "@/Components/UserProfile";
+import { useToast } from "@/hooks/use-toast";
 import { auth } from "@/lib/firebaseClient";
 import { cn } from "@/lib/utils";
 import { onAuthStateChanged } from "firebase/auth";
@@ -6,21 +15,12 @@ import { ArrowLeft, Plus, Save, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Button } from "@/Components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
-import { Input } from "@/Components/ui/input";
-import { Label } from "@/Components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
-import { SidebarTrigger } from "@/Components/ui/sidebar";
-import { UserProfile } from "@/Components/UserProfile";
-import { useToast } from "@/hooks/use-toast";
-import { Textarea } from "@/Components/ui/textarea";
+import "react-quill-new/dist/quill.snow.css";
 
 
 const ReactQuill = dynamic(
   async () => {
     const { default: RQ } = await import("react-quill-new");
-    await import("react-quill-new/dist/quill.snow.css");
     return RQ;
   },
   { ssr: false }
