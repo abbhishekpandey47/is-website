@@ -1,8 +1,8 @@
 "use client";
-import React, { useMemo } from "react";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
 import Image from "next/image";
+import { useMemo } from "react";
 
 const fileList = [
   "mocha.png",
@@ -51,7 +51,7 @@ const getLogoPadding = (filename) => {
     'cedana.png': 'p-5',
     'cerbos.png': 'p-4',
     'codegiant-infra-1.png': 'p-3',
-    'cycloid.png': 'p-7',
+    'cycloid.webp': 'p-7',
     'daytona-removebg-preview-e1721477918328.png': 'p-5',
     'DevZero.png': 'p-4',
     'env0-infra-1.png': 'p-6',
@@ -117,12 +117,12 @@ const MarqueeDef = ({ text }) => {
         .marquee-container {
           overflow: hidden;
         }
-        
+
         .marquee-content {
           display: flex;
           animation: scroll-left 30s linear infinite;
         }
-        
+
         @keyframes scroll-left {
           0% {
             transform: translateX(0);

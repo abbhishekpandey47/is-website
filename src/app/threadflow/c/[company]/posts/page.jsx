@@ -1,11 +1,4 @@
 "use client";
-import { auth } from "@/lib/firebaseClient";
-import { cn } from "@/lib/utils";
-import { onAuthStateChanged } from "firebase/auth";
-import { Edit, ExternalLink, Plus, Save, Search, Trash2, X, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { Badge } from "@/Components/ui/badge";
 import { Button } from "@/Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
@@ -14,20 +7,27 @@ import { Label } from "@/Components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
 import { SidebarTrigger } from "@/Components/ui/sidebar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/ui/table";
+import { Textarea } from "@/Components/ui/textarea";
 import { UserProfile } from "@/Components/UserProfile";
 import { useToast } from "@/hooks/use-toast";
-import { Textarea } from "@/Components/ui/textarea";
+import { auth } from "@/lib/firebaseClient";
+import { cn } from "@/lib/utils";
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
+import { onAuthStateChanged } from "firebase/auth";
+import { Edit, Plus, Save, Search, Trash2, X } from "lucide-react";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import "react-quill-new/dist/quill.snow.css";
 import { HoverTextCell } from "../components/HoverTextCell";
 import Pagination from "../components/pagination";
-import dayjs from "dayjs";
-import { DatePicker } from "antd";
 const { RangePicker } = DatePicker;
 
 
 const ReactQuill = dynamic(
   async () => {
     const { default: RQ } = await import("react-quill-new");
-    await import("react-quill-new/dist/quill.snow.css");
     return RQ;
   },
   { ssr: false }
@@ -158,7 +158,7 @@ const PostsPage = () => {
 
   const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
   const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
-  
+
   // Date range filter (inclusive)
   const matchesDateRange = (post, range) => {
     const [start, end] = range || [];
@@ -569,7 +569,7 @@ const PostsPage = () => {
                          <HoverTextCell text={post.title} isTitle={true}/>
                       </TableCell>
                       {/* <TableCell className="max-w-xs">
-                      {post.url ? 
+                      {post.url ?
                         <a
                           href={post.url}
                           target="_blank"
@@ -864,7 +864,7 @@ const PostsPage = () => {
                           <SelectItem value="live">Live</SelectItem>
                           <SelectItem value="removed">Removed </SelectItem>
                           <SelectItem value="reposted">Reposted</SelectItem>
-                          
+
                           <SelectItem value="notPosted">Not Posted</SelectItem>
                         </SelectContent>
                       </Select>

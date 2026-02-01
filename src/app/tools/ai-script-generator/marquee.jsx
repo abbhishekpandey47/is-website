@@ -1,8 +1,8 @@
 "use client";
-import React, { useMemo } from "react";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
 import Image from "next/image";
+import { useMemo } from "react";
 
 const fileList = [
   "aviator.png",
@@ -50,7 +50,7 @@ const getLogoPadding = (filename) => {
     'cedana.png': 'p-5',
     'cerbos.png': 'p-4',
     'codegiant-infra-1.png': 'p-3',
-    'cycloid.png': 'p-7',
+    'cycloid.webp': 'p-7',
     'daytona-removebg-preview-e1721477918328.png': 'p-5',
     'DevZero.png': 'p-4',
     'env0-infra-1.png': 'p-6',

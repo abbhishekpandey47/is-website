@@ -1,29 +1,28 @@
 "use client";
-import { useState, useMemo, useEffect } from "react";
-import { motion } from "framer-motion";
-import {  Download, Calendar, TrendingUp, BookOpen, Building} from "lucide-react";
-import Image from "next/image";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
+import { motion } from "framer-motion";
+import { BookOpen, Building, Calendar, Download } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import VideoTestimonials from "./testimonials";
 import { Videos } from "./videosData";
 
+import { useRouter } from "next/navigation";
+import { FiUserCheck } from "react-icons/fi";
+import { GiGrowth } from "react-icons/gi";
+import { IoBookOutline } from "react-icons/io5";
 import { LuSquareCode } from "react-icons/lu";
 import { MdOutlineVideoLibrary } from "react-icons/md";
-import {RiUserCommunityFill} from "react-icons/ri"
-import { IoBookOutline } from "react-icons/io5";
-import { FiUserCheck } from "react-icons/fi";
-import { TiDocumentText } from "react-icons/ti";
+import { RiUserCommunityFill } from "react-icons/ri";
 import { SiMarketo } from "react-icons/si";
-import { useRouter } from "next/navigation";
-import { GiGrowth } from "react-icons/gi";
-import CTA from './CTA';
+import { TiDocumentText } from "react-icons/ti";
 
 
 
 const fileList = [
   "aviator.png","mocha.png","cedana.png","dhiwise.png","amnic.png","oso.png","ox-sec.svg",
-  "mvp-grow.png","cerbos.png","qodo-logo.png","Codegiant.png","Scalekit-logo.png","cycloid.png",
+  "mvp-grow.png","cerbos.png","qodo-logo.png","Codegiant.png","Scalekit-logo.png","cycloid.webp",
   "scalr.png","daytona.png","stackOne.png","DevZero.png","terrateam.png","env0-infra-1.png",
   "tracetest.png","firefly.png","TravisCI-Full-Color.png","firstock-logo.png","vapi-logo.png",
   "kapstan.png","Zenml.png","Kubiya.png","lovable-logo.png","Meteor-ops.png","middleware-logo.png"
@@ -82,14 +81,14 @@ export default function Page() {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
-      
+
       // Calculate scroll progress (0 to 1)
       const scrollProgress = scrollY / (documentHeight - windowHeight);
-      
+
       // Calculate glow position based on scroll
       const glowY = 40 + (scrollProgress * 40); // Move from 40% to 80%
       const glowX = 50 + (Math.sin(scrollProgress * Math.PI) * 10); // Subtle horizontal movement
-      
+
       // Update background gradient
       const container = document.getElementById('main-container');
       if (container) {
@@ -112,7 +111,7 @@ export default function Page() {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
+
   const validateForm = () => {
     const { workEmail, fullName, companyName } = formData;
 
@@ -132,7 +131,7 @@ export default function Page() {
 
   const handleDownload = async (e) => {
     e.preventDefault();
-    
+
     setErrorMessage("");
 
     if (!validateForm()) return;
@@ -193,7 +192,7 @@ export default function Page() {
         .animate-scroll {
           animation: scroll 20s linear infinite;
         }
-        
+
         /* Smooth fade at left/right edges: mask-image works well (with -webkit prefix fallback) */
         .custom-marquee-mask {
           /* adjust percentages to change width of fade */
@@ -232,24 +231,24 @@ export default function Page() {
           .custom-marquee-mask img { height: 36px; width: auto; }
         }
       `}</style>
-      <div 
-     
+      <div
+
         className="min-h-screen relative"
 
       >
       {/* Hero Section - First Fold */}
-      <section 
+      <section
         className="relative overflow-hidden flex flex-col justify-center"
       >
-        
-        <div 
+
+        <div
           className="relative max-w-7xl mx-auto px-6 py-16 pt-40 w-full"
         >
           <div className="grid grid-cols-12 gap-8 items-center">
             {/* Left Content - Cols 1-6 */}
             <div className="col-span-12 lg:col-span-6 space-y-6">
               {/* Badge */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -258,14 +257,14 @@ export default function Page() {
                 <span className="w-2 h-2 bg-[#A259FF] rounded-full mr-2 animate-pulse"></span>
                 2025 Edition
               </motion.div>
-              
+
               {/* Main Heading */}
-              <motion.h1 
+              <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-white font-black leading-[1.05]"
-                style={{ 
+                style={{
                   fontFamily: 'Geist Sans, Inter, sans-serif',
                   fontWeight: 800,
                   fontSize: 'clamp(42px, 5.2vw, 64px)',
@@ -276,14 +275,14 @@ export default function Page() {
               >
                 The 2025 Developer Marketing <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Playbook</span> for DevTool, B2B SaaS, AI Startups
               </motion.h1>
-              
+
               {/* Subtitle */}
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-xl leading-relaxed"
-                style={{ 
+                style={{
                   fontFamily: 'Inter, sans-serif',
                   fontWeight: 400,
                   maxWidth: '42ch',
@@ -292,15 +291,15 @@ export default function Page() {
               >
                 Trusted by Series A B2B SaaS startups like <span className="text-[#A259FF] font-semibold">Firefly ($23 M)</span>, <span className="text-[#A259FF] font-semibold">Scalekit ($5.5 M)</span>, <span className="text-[#A259FF] font-semibold">Kubiya</span>, and <span className="text-[#A259FF] font-semibold">Qodo ($40 M)</span> to scale developer marketing and adoption.
               </motion.p>
-              
+
               {/* CTA Buttons */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <button 
+                <button
                   onClick={handleBookDemo}
                   className="border-2 border-[#A259FF] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-[#A259FF]/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.3)] flex items-center justify-center"
                 >
@@ -308,11 +307,11 @@ export default function Page() {
                   Book a Free Demo
                 </button>
               </motion.div>
-              
+
             </div>
 
             {/* Right Form - Cols 7-12 */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -330,8 +329,8 @@ export default function Page() {
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-semibold text-white mb-2">Full Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     onChange={handleInputChange}
                     name="fullName"
                     value={formData.fullName}
@@ -342,8 +341,8 @@ export default function Page() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-white mb-2">Work Email</label>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     name="workEmail"
                     value={formData.workEmail}
                     onChange={handleInputChange}
@@ -354,8 +353,8 @@ export default function Page() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-white mb-2">Company Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     name="companyName"
                     value={formData.companyName}
                     onChange={handleInputChange}
@@ -372,12 +371,12 @@ export default function Page() {
                 )}
                 {/* </div> */}
                 <div className="pt-2">
-                <button 
+                <button
                   type="button"
                   onClick={handleDownload}
                   disabled={isSubmitting}
                   className="w-full text-white py-4 rounded-lg font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center"
-                  style={{ 
+                  style={{
                     background: 'linear-gradient(90deg,#A259FF,#5B36FF)',
                     boxShadow: '0 0 20px rgba(162,89,255,0.3)'
                   }}
@@ -392,7 +391,7 @@ export default function Page() {
 
 
           {/* Trusted by Section */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.0 }}
@@ -436,12 +435,12 @@ export default function Page() {
 
 
       {/* Problem Section - Second Fold */}
-      <section 
+      <section
         className="pb-20 relative"
       >
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -456,7 +455,7 @@ export default function Page() {
             >
               Why Developer Marketing is the <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Engine</span> Behind Every Successful DevTool
             </motion.h2>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -471,9 +470,9 @@ export default function Page() {
               That's why developer marketing can't be an afterthought anymore.
             </motion.p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -487,8 +486,8 @@ export default function Page() {
                 Your blog, docs, and social posts don't speak the same technical language developers expect.
               </p>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -502,8 +501,8 @@ export default function Page() {
                 Without dedicated developer advocates, your product stays invisible in the communities that matter.
               </p>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -529,12 +528,12 @@ export default function Page() {
             >
               <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
       {/* What You'll Learn Section - Third Fold */}
-      <section 
+      <section
         className="py-20 relative"
       >
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -547,19 +546,19 @@ export default function Page() {
                 textShadow: '0 0 12px rgba(162, 89, 255, 0.15)'
               }}
             >
-              What You'll <span 
+              What You'll <span
                 style={{
                   color: '#A259FF',
                   textShadow: '0 0 8px rgba(162, 89, 255, 0.4)'
                 }}
               >Learn</span>
             </motion.h2>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl max-w-4xl mx-auto leading-relaxed"
-              style={{ 
+              style={{
                 fontFamily: 'Inter, sans-serif',
                 fontWeight: 400,
                 color: '#C9C4D6'
@@ -568,11 +567,11 @@ export default function Page() {
               A comprehensive guide to building developer-first marketing strategies that actually worked for AI companies.
             </motion.p>
           </div>
-          
+
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left side - Learning cards */}
             <div className="space-y-4">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -588,7 +587,7 @@ export default function Page() {
                 }}
               >
                 <div className="flex items-start space-x-4">
-                  <div 
+                  <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 bg-[linear-gradient(135deg,#4F46E5_0%,#7C3AED_40%,#EC4899_100%)]"
                     style={{
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
@@ -597,9 +596,9 @@ export default function Page() {
                     <SiMarketo className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 
-                      className="text-xl mb-2" 
-                      style={{ 
+                    <h3
+                      className="text-xl mb-2"
+                      style={{
                         fontFamily: 'Inter, sans-serif',
                         fontWeight: 700,
                         letterSpacing: '-0.01em',
@@ -609,9 +608,9 @@ export default function Page() {
                     >
                       6 Core Pillars of Developer Marketing
                     </h3>
-                    <p 
-                      className="leading-relaxed" 
-                      style={{ 
+                    <p
+                      className="leading-relaxed"
+                      style={{
                         fontFamily: 'Inter, sans-serif',
                         fontWeight: 400,
                         letterSpacing: '-0.005em',
@@ -623,8 +622,8 @@ export default function Page() {
                   </div>
                 </div>
               </motion.div>
-              
-              <motion.div 
+
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -640,7 +639,7 @@ export default function Page() {
                 }}
               >
                 <div className="flex items-start space-x-4">
-                  <div 
+                  <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 bg-[linear-gradient(270deg,#A259FF_0%,#5B36FF_50%,#00C2FF_100%)]"
                     style={{
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
@@ -649,9 +648,9 @@ export default function Page() {
                     <FiUserCheck  className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 
-                      className="text-xl mb-2" 
-                      style={{ 
+                    <h3
+                      className="text-xl mb-2"
+                      style={{
                         fontFamily: 'Inter, sans-serif',
                         fontWeight: 700,
                         letterSpacing: '-0.01em',
@@ -661,9 +660,9 @@ export default function Page() {
                     >
                       Building Developer Trust
                     </h3>
-                    <p 
-                      className="leading-relaxed" 
-                      style={{ 
+                    <p
+                      className="leading-relaxed"
+                      style={{
                         fontFamily: 'Inter, sans-serif',
                         fontWeight: 400,
                         letterSpacing: '-0.005em',
@@ -675,8 +674,8 @@ export default function Page() {
                   </div>
                 </div>
               </motion.div>
-              
-              <motion.div 
+
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -692,7 +691,7 @@ export default function Page() {
                 }}
               >
                 <div className="flex items-start space-x-4">
-                  <div 
+                  <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 bg-[linear-gradient(90deg,#FF9A8B_0%,#FF6A88_55%,#A259FF_100%)]"
                     style={{
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
@@ -701,9 +700,9 @@ export default function Page() {
                     <BookOpen className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 
-                      className="text-xl mb-2" 
-                      style={{ 
+                    <h3
+                      className="text-xl mb-2"
+                      style={{
                         fontFamily: 'Inter, sans-serif',
                         fontWeight: 700,
                         letterSpacing: '-0.01em',
@@ -713,9 +712,9 @@ export default function Page() {
                     >
                       Docs & SDKs as Growth Engines
                     </h3>
-                    <p 
-                      className="leading-relaxed" 
-                      style={{ 
+                    <p
+                      className="leading-relaxed"
+                      style={{
                         fontFamily: 'Inter, sans-serif',
                         fontWeight: 400,
                         letterSpacing: '-0.005em',
@@ -727,8 +726,8 @@ export default function Page() {
                   </div>
                 </div>
               </motion.div>
-              
-              <motion.div 
+
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -744,7 +743,7 @@ export default function Page() {
                 }}
               >
                 <div className="flex items-start space-x-4">
-                  <div 
+                  <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 bg-[linear-gradient(120deg,#ff6fd8_0%,#3813c2_100%)]"
                     style={{
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
@@ -753,9 +752,9 @@ export default function Page() {
                     <GiGrowth className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 
-                      className="text-xl mb-2" 
-                      style={{ 
+                    <h3
+                      className="text-xl mb-2"
+                      style={{
                         fontFamily: 'Inter, sans-serif',
                         fontWeight: 700,
                         letterSpacing: '-0.01em',
@@ -765,9 +764,9 @@ export default function Page() {
                     >
                       Measuring Developer Marketing ROI
                     </h3>
-                    <p 
-                      className="leading-relaxed" 
-                      style={{ 
+                    <p
+                      className="leading-relaxed"
+                      style={{
                         fontFamily: 'Inter, sans-serif',
                         fontWeight: 400,
                         letterSpacing: '-0.005em',
@@ -779,8 +778,8 @@ export default function Page() {
                   </div>
                 </div>
               </motion.div>
-              
-              <motion.div 
+
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
@@ -796,7 +795,7 @@ export default function Page() {
                 }}
               >
                 <div className="flex items-start space-x-4">
-                  <div 
+                  <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 bg-[linear-gradient(135deg,#A259FF_0%,#3F87F5_50%,#FF6FD8_100%)]"
                     style={{
                       boxShadow: '0 0 20px rgba(162, 89, 255, 0.3)'
@@ -805,9 +804,9 @@ export default function Page() {
                     <Building className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 
-                      className="text-xl mb-2" 
-                      style={{ 
+                    <h3
+                      className="text-xl mb-2"
+                      style={{
                         fontFamily: 'Inter, sans-serif',
                         fontWeight: 700,
                         letterSpacing: '-0.01em',
@@ -817,9 +816,9 @@ export default function Page() {
                     >
                       Case Studies from Firefly & Scalekit
                     </h3>
-                    <p 
-                      className="leading-relaxed" 
-                      style={{ 
+                    <p
+                      className="leading-relaxed"
+                      style={{
                         fontFamily: 'Inter, sans-serif',
                         fontWeight: 400,
                         letterSpacing: '-0.005em',
@@ -834,7 +833,7 @@ export default function Page() {
             </div>
 
             {/* Right side - 3D Book */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.7 }}
               whileInView={{ opacity: 1, scale: 0.9 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -852,12 +851,12 @@ export default function Page() {
       </section>
 </div>
       {/* Results Section - Fourth Fold */}
-      <section 
+      <section
         className="py-20 relative"
       >
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <motion.h2 
+            <motion.h2
               className="text-4xl lg:text-5xl font-black mb-8"
               style={{
                 fontFamily: 'Quicksand',
@@ -869,7 +868,7 @@ export default function Page() {
             >
               Success Stories from <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>B2B SAAS Startups</span>
             </motion.h2>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -883,18 +882,18 @@ export default function Page() {
               See how leading startups transformed their developer marketing into growth engines.
             </motion.p>
           </div>
-          
+
           <div className="grid lg:grid-cols-2 gap-12 mb-16">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               className="bg-white/3 backdrop-blur-sm p-10 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
             <div className="flex items-center space-x-4">
-     
+
       <Image
-        src="/playbook/fireflylogo.png" 
+        src="/playbook/fireflylogo.png"
         alt="Scalekit Logo"
         width={60}
         height={60}
@@ -906,7 +905,7 @@ export default function Page() {
               </p>
               </div>
               </div>
-             
+
               <div className="text-6xl font-black text-[#A259FF] mb-3">+110%</div>
               <div className="text-xl text-white mb-4 font-medium">Organic Traffic Growth</div>
               <p className="text-gray-300 mb-6 leading-relaxed font-['Inter',sans-serif]">
@@ -931,17 +930,17 @@ export default function Page() {
                 <span className="font-medium font-['Inter',sans-serif]" onClick={()=>router.push('/case-studies/case-study-series-a-cloud-developer-marketing')}>Case Study</span>
               </div>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               className="bg-white/3 backdrop-blur-sm p-10 rounded-2xl border border-white/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.2)] transition-all duration-300"
             >
                 <div className="flex items-center space-x-4">
-     
+
       <Image
-        src="/playbook/scalekit.svg" 
+        src="/playbook/scalekit.svg"
         alt="Scalekit Logo"
         width={60}
         height={60}
@@ -957,7 +956,7 @@ export default function Page() {
               </p>
               </div>
     </div>
-              
+
               <div className="text-6xl font-black text-[#A259FF] mb-3">3X</div>
               <div className="text-xl text-white mb-4 font-medium">Developer Signups</div>
               <p className="text-gray-300 mb-6 leading-relaxed font-['Inter',sans-serif]">
@@ -983,9 +982,9 @@ export default function Page() {
               </div>
             </motion.div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -994,7 +993,7 @@ export default function Page() {
               <div className="text-5xl font-black text-[#A259FF] mb-3">110%</div>
               <div className="text-white font-medium font-['Inter',sans-serif]">Average Traffic Growth</div>
             </motion.div>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -1003,7 +1002,7 @@ export default function Page() {
               <div className="text-5xl font-black text-[#A259FF] mb-3">3X</div>
               <div className="text-white font-medium font-['Inter',sans-serif]">More Developer Signups</div>
             </motion.div>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -1027,7 +1026,7 @@ export default function Page() {
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -1038,19 +1037,19 @@ export default function Page() {
             >
               The <span className="text-[#A259FF]">GTM Engine</span> Behind <span className="text-[#A259FF]">Developer-First Companies</span>
             </motion.h2>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl text-white max-w-4xl mx-auto leading-relaxed font-['Inter',sans-serif]"
             >
-              Infrasity specializes in developer-centric GTM — from content strategy and video explainers 
+              Infrasity specializes in developer-centric GTM — from content strategy and video explainers
               to documentation and community activation.
             </motion.p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -1064,8 +1063,8 @@ export default function Page() {
                 Technical content that developers actually want to read.
               </p>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -1079,8 +1078,8 @@ export default function Page() {
                 Transform docs into your most powerful growth asset.
               </p>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -1094,8 +1093,8 @@ export default function Page() {
                 Visual storytelling for complex technical concepts.
               </p>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -1110,8 +1109,8 @@ export default function Page() {
               </p>
             </motion.div>
           </div>
-          
-         {/* <div className='mt-28'> 
+
+         {/* <div className='mt-28'>
          <VideoTestimonials items={Videos}/>
          </div>  */}
          <div className="relative mt-28">
@@ -1142,14 +1141,14 @@ export default function Page() {
               }}
             >
               <div className="w-full mt-10 h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5"></div>
-      
-                <section 
+
+                <section
         className="pt-20 relative overflow-hidden"
       >
-        
+
         <div className="max-w-6xl mx-auto px-6 relative">
           <div className="text-center mb-16">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -1164,7 +1163,7 @@ export default function Page() {
             >
               Ready to Build Your <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Developer</span> <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Growth Engine?</span>
             </motion.h2>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -1178,9 +1177,9 @@ export default function Page() {
               Get the complete playbook and discover how to turn developer marketing into your competitive advantage.
             </motion.p>
           </div>
-          
+
           <div className="text-center mb-12">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -1189,7 +1188,7 @@ export default function Page() {
               <button
                 onClick={handleScrollToTop}
                 className="text-white py-4 px-8 rounded-lg font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center"
-                style={{ 
+                style={{
                   background: 'linear-gradient(90deg,#A259FF,#5B36FF)',
                   boxShadow: '0 0 20px rgba(162,89,255,0.3)'
                 }}
@@ -1197,7 +1196,7 @@ export default function Page() {
                 <BookOpen className="w-5 h-5 mr-2" />
                 Download Free Playbook
               </button>
-              <button 
+              <button
                 onClick={handleBookDemo}
                 className="border-2 border-[#A259FF] text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:bg-[#A259FF]/10 hover:shadow-[0_0_20px_rgba(162,89,255,0.3)] flex items-center justify-center"
               >
@@ -1207,11 +1206,11 @@ export default function Page() {
             </motion.div>
           </div>
 
-          
+
         </div>
       </section>
       </div>
- 
+
       </div>
     </>
   );

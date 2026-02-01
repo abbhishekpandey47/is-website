@@ -1,10 +1,8 @@
 module.exports = {
     reactStrictMode: false,
-    
-    swcMinify: true,
+
     compress: true,
-    optimizeFonts: true,
-    
+
     experimental: {
         optimizeCss: true,
         optimizePackageImports: [
@@ -15,15 +13,11 @@ module.exports = {
             'antd'
         ],
     },
-    eslint: {
-        ignoreDuringBuilds: true,
-    },
     typescript: {
         ignoreBuildErrors: true,
     },
     productionBrowserSourceMaps: false,
     images: {
-         domains: ["cdn.prod.website-files.com", "framerusercontent.com", "images.surferseo.art", "betterstackcdn.com", "devplaybook-landing.lovable.app"],
         remotePatterns: [
             {
                 protocol: 'https',
@@ -199,7 +193,7 @@ module.exports = {
         // Suppress noisy cache serialization warnings
         if (!config.infrastructureLogging) config.infrastructureLogging = {};
         config.infrastructureLogging.level = 'error';
-        
+
         // Optimize CSS loading
         if (!dev) {
             config.optimization = {
@@ -209,7 +203,7 @@ module.exports = {
                 sideEffects: true,
             };
         }
-        
+
         // Disable source maps to reduce memory usage in production builds
         if (!dev) {
             config.devtool = false;
@@ -267,12 +261,15 @@ module.exports = withSentryConfig(
     tunnelRoute: "/monitoring",
 
     // Automatically tree-shake Sentry logger statements to reduce bundle size
-    disableLogger: true,
-
-    // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
-    // See the following for more information:
-    // https://docs.sentry.io/product/crons/
-    // https://vercel.com/docs/cron-jobs
-    automaticVercelMonitors: true,
+    webpack: {
+      treeshake: {
+        removeDebugLogging: true,
+      },
+      // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
+      // See the following for more information:
+      // https://docs.sentry.io/product/crons/
+      // https://vercel.com/docs/cron-jobs
+      automaticVercelMonitors: true,
+    },
   }
 );

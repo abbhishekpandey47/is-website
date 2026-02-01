@@ -19,7 +19,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const template = await getTemplateData(params.slug);
+  // Await params as required by Next.js 15+
+  const resolvedParams = await params;
+  const template = await getTemplateData(resolvedParams.slug);
 
   if (!template) {
     return {

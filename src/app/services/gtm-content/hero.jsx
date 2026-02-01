@@ -1,11 +1,9 @@
 "use client";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
-import CalendarBooking from "../../calendarButton";
-import Image from "next/image";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
-import TrustedBySection from "./marquee";
+import Image from "next/image";
+import { useMemo } from "react";
+import CalendarBooking from "../../calendarButton";
 
 const logoFiles = [
     "aviator.png",
@@ -20,7 +18,7 @@ const logoFiles = [
     "qodo-logo.png",
     "Codegiant.png",
     "Scalekit-logo.png",
-    "cycloid.png",
+    "cycloid.webp",
     "scalr.png",
     "daytona.png",
     "stackOne.png",
@@ -54,7 +52,7 @@ const getLogoPadding = (filename) => {
         'qodo-logo.png': 'p-8',
         'Codegiant.png': 'p-4',
         'Scalekit-logo.png': 'p-4',
-        'cycloid.png': 'p-7',
+        'cycloid.webp': 'p-7',
         'scalr.png': 'p-4',
         'daytona.png': 'p-5',
         'stackOne.png': 'p-4',

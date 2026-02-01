@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
 import { Redis } from '@upstash/redis';
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 // Initialize Redis client
 const redis = new Redis({
@@ -12,7 +12,7 @@ const redis = new Redis({
 const RATE_LIMIT = 5; // 5 requests
 const WINDOW_SIZE = 60; // 60 seconds (1 minute)
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   // Only apply rate limiting to /api/support POST requests
   if (request.nextUrl.pathname === '/api/support' && request.method === 'POST') {
     try {
@@ -21,18 +21,18 @@ export async function middleware(request: NextRequest) {
 
       // Get current request count
       const current = await redis.get<number>(key);
-      
+
       if (current !== null && current >= RATE_LIMIT) {
         // Calculate retry after time
         const ttl = await redis.ttl(key);
         const retryAfter = ttl > 0 ? ttl : WINDOW_SIZE;
-        
+
         return new NextResponse(
-          JSON.stringify({ 
-            error: 'Too many requests', 
-            message: 'Rate limit exceeded. Please try again later.' 
-          }), 
-          { 
+          JSON.stringify({
+            error: 'Too many requests',
+            message: 'Rate limit exceeded. Please try again later.'
+          }),
+          {
             status: 429,
             headers: {
               'Content-Type': 'application/json',
@@ -56,11 +56,11 @@ export async function middleware(request: NextRequest) {
       // Add rate limit headers to the response
       const response = NextResponse.next();
       const remaining = RATE_LIMIT - (current || 0) - 1;
-      
+
       response.headers.set('X-RateLimit-Limit', RATE_LIMIT.toString());
       response.headers.set('X-RateLimit-Remaining', Math.max(0, remaining).toString());
       response.headers.set('X-RateLimit-Reset', (Math.floor(Date.now() / 1000) + WINDOW_SIZE).toString());
-      
+
       return response;
     } catch (error) {
       console.error('Rate limiter error:', error);
@@ -73,7 +73,7 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// Configure which paths the middleware will run on
+// Configure which paths the proxy will run on
 export const config = {
   matcher: '/api/support',
 };
