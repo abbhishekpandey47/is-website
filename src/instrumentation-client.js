@@ -10,7 +10,8 @@ Sentry.init({
 
   // Add optional integrations for additional features
   integrations: [
-    Sentry.replayIntegration(),
+    // Disable replay integration to prevent surveys.js loading (31.3 KiB overhead)
+    // Sentry.replayIntegration(),
   ],
 
   // Reduce trace sample rate to reduce JS execution overhead (20% instead of 100%)
@@ -20,10 +21,10 @@ Sentry.init({
 
   // Define how likely Replay events are sampled.
   // Reduced from 0.1 to 0.05 (5%) to minimize performance impact
-  replaysSessionSampleRate: 0.05,
+  replaysSessionSampleRate: false, // Disabled to prevent surveys.js
 
   // Define how likely Replay events are sampled when an error occurs.
-  replaysOnErrorSampleRate: 0.5,
+  replaysOnErrorSampleRate: false, // Disabled to prevent surveys.js
 
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,

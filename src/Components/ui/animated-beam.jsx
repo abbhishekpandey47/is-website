@@ -1,6 +1,6 @@
 "use client";;
-import { useEffect, useId, useState } from "react";
 import { motion } from "framer-motion";
+import { useEffect, useId, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -70,25 +70,42 @@ export const AnimatedBeam = ({
       }
     };
 
-    // Initialize ResizeObserver
-    const resizeObserver = new ResizeObserver((entries) => {
-      // For all entries, recalculate the path
-      for (let entry of entries) {
+    // Defer layout measurements to idle time to prevent forced reflows during initial paint
+    let updatePathId;
+    let resizeObserver;
+
+    if (typeof requestIdleCallback !== 'undefined') {
+      updatePathId = requestIdleCallback(() => {
+        // Initialize ResizeObserver
+        resizeObserver = new ResizeObserver(() => {
+          updatePath();
+        });
+
+        if (containerRef.current) {
+          resizeObserver.observe(containerRef.current);
+        }
         updatePath();
+      }, { timeout: 2000 });
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      resizeObserver = new ResizeObserver(() => {
+        updatePath();
+      });
+
+      if (containerRef.current) {
+        resizeObserver.observe(containerRef.current);
       }
-    });
-
-    // Observe the container element
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
+      updatePath();
     }
-
-    // Call the updatePath initially to set the initial path
-    updatePath();
 
     // Clean up the observer on component unmount
     return () => {
-      resizeObserver.disconnect();
+      if (updatePathId) {
+        cancelIdleCallback(updatePathId);
+      }
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
     };
   }, [
     containerRef,

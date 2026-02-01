@@ -228,6 +228,33 @@ module.exports = {
                 optionalChaining: true,
                 optionalCatchBinding: true,
             };
+
+            // Disable polyfills for modern JavaScript features
+            config.resolve.fallback = {
+                ...config.resolve.fallback,
+                'core-js': false,
+                'regenerator-runtime': false,
+            };
+
+            // Force terser to remove polyfills
+            if (config.optimization && config.optimization.minimizer) {
+                config.optimization.minimizer.forEach(minimizer => {
+                    if (minimizer.constructor.name === 'TerserPlugin') {
+                        minimizer.options = minimizer.options || {};
+                        minimizer.options.terserOptions = {
+                            ...minimizer.options.terserOptions,
+                            compress: {
+                                ...minimizer.options.terserOptions?.compress,
+                                pure_funcs: [
+                                    'Array.from',
+                                    'Object.fromEntries',
+                                    'Object.hasOwn',
+                                ],
+                            },
+                        };
+                    }
+                });
+            }
         }
 
         return config;
