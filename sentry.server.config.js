@@ -1,23 +1,17 @@
 // This file configures the initialization of Sentry on the server.
-// The config you add here will be used whenever the server handles a request.
+// Sentry has been completely disabled to improve performance and remove surveys.js overhead
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from "@sentry/nextjs";
 
 const dsn = process.env.SENTRY_DSN || "";
 const env = process.env.NODE_ENV || "development";
-const telemetry = (process.env.SENTRY_TELEMETRY || "false").toLowerCase() === "true";
 
+// Completely disable Sentry on server
 Sentry.init({
-  dsn: dsn || undefined,
-  enabled: Boolean(dsn),
-  environment: process.env.SENTRY_ENVIRONMENT || env,
-  tracesSampleRate: Number(process.env.SENTRY_TRACES_SAMPLE_RATE ?? 0),
-  enableLogs: telemetry,
-  debug: (process.env.SENTRY_DEBUG || "false").toLowerCase() === "true",
-  telemetry: false,
-  // Only create release/upload source maps if auth token is present
-  ...(process.env.SENTRY_AUTH_TOKEN ? {} : {
-    beforeSend: () => null,
-  }),
+  dsn: undefined,
+  enabled: false,
+  environment: env,
+  tracesSampleRate: 0,
+  beforeSend: () => null,
 });
