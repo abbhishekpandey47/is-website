@@ -80,7 +80,7 @@
         "gsap": "^3.12.5",
         "input-otp": "^1.4.2",
         "jsdom": "^20.0.3",
-        "jspdf": "4.0.0",
+        "jspdf": "^4.0.0",
         "jspdf-autotable": "^5.0.2",
         "lucide-react": "^0.483.0",
         "markdown-to-jsx": "^7.5.0",
@@ -123,6 +123,7 @@
     "devDependencies": {
         "@types/node": "24.3.0",
         "autoprefixer": "^10.4.20",
+        "baseline-browser-mapping": "^1.0.0",
         "eslint": "9.39.1",
         "eslint-config-next": "16.0.7",
         "fast-glob": "^3.3.2",
@@ -143,6 +144,9 @@
         "sucrase": {
             "glob": "10.5.0"
         },
-        "fast-xml-parser": "5.3.4"
+        "fast-xml-parser": "5.3.4",
+        "jspdf-autotable": {
+            "jspdf": "^4.0.0"
+        }
     }
 }

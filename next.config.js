@@ -201,12 +201,19 @@ module.exports = {
                 minimize: true,
                 usedExports: true,
                 sideEffects: true,
+                // Reduce polyfill overhead by targeting modern browsers
+                nodeEnv: 'production',
             };
         }
 
         // Disable source maps to reduce memory usage in production builds
         if (!dev) {
             config.devtool = false;
+        }
+
+        // Target modern browsers to reduce polyfills
+        if (!dev) {
+            config.target = ['web', 'es2020'];
         }
 
         return config;

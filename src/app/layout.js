@@ -33,26 +33,30 @@ export default function RootLayout({ children }) {
             <head>
                   <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+                  {/* Preconnect to critical third-party origins */}
+                  <link rel="preconnect" href="https://cdn.getkoala.com" crossOrigin="anonymous" />
+                  <link rel="preconnect" href="https://scripts.clarity.ms" crossOrigin="anonymous" />
+                  <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />
                   {/* Preload critical fonts */}
-                  <link 
-                    rel="preload" 
-                    href="/fonts/Quicksand-Bold.woff" 
-                    as="font" 
-                    type="font/woff" 
+                  <link
+                    rel="preload"
+                    href="/fonts/Quicksand-Bold.woff"
+                    as="font"
+                    type="font/woff"
                     crossOrigin="anonymous"
                   />
-                  <link 
-                    rel="preload" 
-                    href="/fonts/Quicksand-SemiBold.woff2" 
-                    as="font" 
-                    type="font/woff2" 
+                  <link
+                    rel="preload"
+                    href="/fonts/Quicksand-SemiBold.woff2"
+                    as="font"
+                    type="font/woff2"
                     crossOrigin="anonymous"
                   />
-                  <link 
-                    rel="preload" 
-                    href="/fonts/Quicksand-Medium.woff2" 
-                    as="font" 
-                    type="font/woff2" 
+                  <link
+                    rel="preload"
+                    href="/fonts/Quicksand-Medium.woff2"
+                    as="font"
+                    type="font/woff2"
                     crossOrigin="anonymous"
                   />
                   <AlternateLinks />
