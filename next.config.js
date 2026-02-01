@@ -214,6 +214,20 @@ module.exports = {
         // Target modern browsers to reduce polyfills
         if (!dev) {
             config.target = ['web', 'es2020'];
+
+            // Explicitly set output environment to prevent polyfills
+            config.output.environment = {
+                arrowFunction: true,
+                bigIntLiteral: true,
+                const: true,
+                destructuring: true,
+                dynamicImport: true,
+                forOf: true,
+                logicalAssignment: true,
+                module: true,
+                optionalChaining: true,
+                optionalCatchBinding: true,
+            };
         }
 
         return config;

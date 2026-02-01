@@ -6,8 +6,14 @@ module.exports = {
   ],
   daisyui: {
     logs: false,
+    // Only include themes in use to reduce CSS bundle
+    themes: ["light", "dark"],
+    // Disable unused components to save CSS bundle size
+    styled: true,
+    base: true,
+    utils: true,
+    prefix: "",
   },
-  prefix: "",
   theme: {
     container: {
       center: true,
