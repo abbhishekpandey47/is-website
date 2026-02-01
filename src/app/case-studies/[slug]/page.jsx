@@ -1,22 +1,19 @@
 import fs from "fs";
 import matter from "gray-matter";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import authorMetadata from "../../../../posts/_authorData";
 import postMetaData from "../../../../posts/_postMetadata";
-import HeadBanner from "./headBanner";
-import NotFound from "./NotFound";
-import Outline from "./outline";
-import Analytics from "./analytics";
-import VideoTestimonials from "./testimonials";
 import MoreCaseStudies from "../../../Components/MoreCaseStudies";
-import CTA from "../../../Components/CTA/CTA";
+import SummarizeBar from "../../blog/[slug]/summarizeBar";
+import { TerrateamVideos, Videos } from "./_videoData";
+import Analytics from "./analytics";
 import CaseStudyLayout from "./CaseStudyLayout";
 import CaseStudySidebar from "./CaseStudySidebar";
-import { Videos, TerrateamVideos } from "./_videoData";
-import SummarizeBar from "../../blog/[slug]/summarizeBar";
+import HeadBanner from "./headBanner";
+import Outline from "./outline";
 import PostContent from "./PostContent";
+import VideoTestimonials from "./testimonials";
 
 // Utility function to check if the post file exists
 const isValid = (slug) => {
@@ -123,7 +120,7 @@ const PostPage = async (props) => {
       `}} />
       <div className="pt-32 pb-12" style={{ overflow: 'visible', position: 'relative', zIndex: 1 }}>
         <HeadBanner postData={postData} />
-        
+
         {/* Summarize with AI for Case Studies */}
         <div className="flex justify-center">
           <SummarizeBar
@@ -163,18 +160,18 @@ const PostPage = async (props) => {
           <div className="pt-2 lg:pt-15 flex flex-col items-start">
             <Analytics postData={postData} />
 
-            <PostContent 
-              postContent={postContent} 
+            <PostContent
+              postContent={postContent}
               postData={postData}
             />
           </div>
         </CaseStudyLayout>
         {postData.slug === "case-study-series-a-cloud-developer-marketing" ?
-        <div className="flex justify-center items-center w-[80%] mx-auto"><VideoTestimonials items={Videos}/></div> : 
+        <div className="flex justify-center items-center w-[80%] mx-auto"><VideoTestimonials items={Videos}/></div> :
         postData.slug === "terrateam-case-study" ?
         <div className="flex justify-center items-center w-[80%] mx-auto"><VideoTestimonials items={TerrateamVideos}/></div> : null}
-        
-      
+
+
         {/* More Case Studies Section */}
         <div className="w-[80%] mx-auto mt-16">
           <MoreCaseStudies currentSlug={postData.slug} />
