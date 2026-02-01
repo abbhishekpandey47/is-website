@@ -60,9 +60,14 @@ const StartupHeroSection = () => {
                     {/* Right Column - Image */}
                     <div className="flex justify-center lg:justify-end">
                         <div className="rounded-lg flex items-center justify-center">
-                            <img
-                                src="/reddit/whothisisfor.png"
+                            <Image
+                                src="/reddit/whothisisfor.webp"
                                 alt="Who this is for Image"
+                                width={487}
+                                height={622}
+                                quality={85}
+                                priority={false}
+                                sizes="(max-width: 768px) 287px, (max-width: 1024px) 387px, 487px"
                                 className="w-[287px] h-[422px] lg:w-[487px] lg:h-[622px] object-cover"
                             />
                         </div>
