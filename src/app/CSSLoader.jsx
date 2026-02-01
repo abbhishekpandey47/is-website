@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 
 export function CSSLoader() {
   useEffect(() => {
-    // Defer main CSS chunks that aren't critical
-    // Load them with low priority after page interactive
+    // Defer main CSS chunks using media query trick
+    // media='print' makes the link non-critical, then switch to 'all' on load
     const links = [
       '/_next/static/css/chunks/19d7b415bdc069ad.css',
       '/_next/static/css/chunks/1a01acfb1b6bc028.css'
@@ -21,12 +21,8 @@ export function CSSLoader() {
         link.onload = function() {
           link.media = 'all';
         };
-        // Use requestIdleCallback for truly non-blocking load
-        if ('requestIdleCallback' in globalThis) {
-          globalThis.requestIdleCallback(() => document.head.appendChild(link));
-        } else {
-          setTimeout(() => document.head.appendChild(link), 1000);
-        }
+        // Add immediately but marked as print (non-critical)
+        document.head.appendChild(link);
       }
     });
   }, []);
