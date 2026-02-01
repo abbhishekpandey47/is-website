@@ -1,13 +1,6 @@
+import { FileText, Layout, Video } from 'lucide-react/dist/cjs/lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Inter } from 'next/font/google';
-import { FileText, Layout, Video } from 'lucide-react/dist/cjs/lucide-react';
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['500'],
-  display: 'swap',
-});
 
 // Case study data
 const caseStudies = [
@@ -88,7 +81,7 @@ function CaseStudyCard({ study }) {
         <h3 className="text-xl font-medium text-white mb-2 group-hover:text-purple-800 transition-colors duration-300">
           {study.title}
         </h3>
-        
+
         {/* Description */}
         <p className="text-gray-400 text-sm mb-4 h-20">
           {study.description}
@@ -97,13 +90,13 @@ function CaseStudyCard({ study }) {
 
         <span className="opacity-0 group-hover:opacity-100 mb-6 text-gray-400 text-sm font-medium flex items-center">
           {study.ctaText}
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
             strokeLinejoin="round"
             className="w-4 h-4 ml-2"
           >
@@ -118,11 +111,11 @@ function CaseStudyCard({ study }) {
               </div>
 
       {/* Read Story Text and Arrow - Shows on Hover */}
-      <div className="absolute top-4 right-6 flex items-center justify-between opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out">        
+      <div className="absolute top-4 right-6 flex items-center justify-between opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out">
         <div className="bg-gray-700 rounded-full p-2">
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 256 256" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 256 256"
             className="w-4 h-4 fill-white"
           >
             <path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z" />
@@ -141,7 +134,7 @@ function CaseStudyCard({ study }) {
 export default function RealResult() {
   return (
     <section
-      className={`${inter.className} border border-gray-700/30 py-16 px-4 md:px-8 lg:px-16`}
+      className="border border-gray-700/30 py-16 px-4 md:px-8 lg:px-16 font-medium"
       id="case-study-section"
     >
       <div className="max-w-7xl mx-auto">

@@ -5,25 +5,16 @@
 import * as Sentry from "@sentry/nextjs";
 import posthog from "posthog-js";
 
+// Disable Sentry completely to prevent surveys.js loading (31.2 KiB overhead)
 Sentry.init({
-  dsn: "https://51fbc61b729d5e67090ec73c6f67b586@o4509925786320896.ingest.de.sentry.io/4509925792088144",
-
-  // Disable all integrations to prevent surveys.js loading (31.3 KiB overhead)
+  enabled: false,
+  dsn: undefined,
   integrations: [],
-
-  // Reduce trace sample rate to reduce JS execution overhead (10% instead of 20%)
-  tracesSampleRate: 0.1,
-  // Disable logs to reduce overhead
+  tracesSampleRate: 0,
   enableLogs: false,
-
-  // Disable all replay features to prevent surveys.js
   replaysSessionSampleRate: 0,
   replaysOnErrorSampleRate: 0,
-
-  // Disable auto session tracking to reduce overhead
   autoSessionTracking: false,
-
-  // Disable debug logging
   debug: false,
 });
 

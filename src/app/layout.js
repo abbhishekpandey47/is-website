@@ -40,6 +40,16 @@ export default function RootLayout({ children }) {
                     .quicksand-semibold { font-family: Quicksand, system-ui, sans-serif; font-weight: 600; }
                     .quicksand-bold { font-family: Quicksand, system-ui, sans-serif; font-weight: 700; }
                   `}} />
+                  {/* Load fonts asynchronously using script injection */}
+                  <script dangerouslySetInnerHTML={{__html: `
+                    (function(){
+                      var link = document.createElement('link');
+                      link.rel = 'stylesheet';
+                      link.href = '/fonts.css';
+                      document.head.appendChild(link);
+                    })();
+                  `}} />
+                  <noscript><link rel="stylesheet" href="/fonts.css" /></noscript>
                   <AlternateLinks />
                   <link rel="preload" href="/landingfolio/dashboard.webp" as="image" />
             </head>
