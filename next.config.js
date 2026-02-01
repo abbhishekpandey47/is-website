@@ -152,6 +152,39 @@ module.exports = {
                     }
                 ],
             },
+            // Cache fonts with long expiration
+            {
+                source: '/fonts/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    },
+                    {
+                        key: 'Access-Control-Allow-Origin',
+                        value: '*',
+                    }
+                ],
+            },
+            // Cache images with long expiration
+            {
+                source: '/images/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    }
+                ],
+            },
+            {
+                source: '/:path*.{jpg,jpeg,png,gif,webp,svg,ico}',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    }
+                ],
+            },
             // Cache third-party analytics and tracking scripts longer
             {
                 source: '/ingest/:path*',
