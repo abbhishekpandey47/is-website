@@ -85,7 +85,7 @@ Notion’s [template](https://www.notion.com/templates) served as a plug-and-pla
 
 Notion grew through self- reinforcing growth loops like:
 
-Templates – Sharing – Discovery – Reuse – New Creation – More Templates
+![](/PostImages/how-notion-grows-strategies/15.webp)
 
 Every new template became:
 
