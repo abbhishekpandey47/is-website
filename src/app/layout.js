@@ -20,7 +20,6 @@ export default function RootLayout({ children }) {
                   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
                   {/* Preconnect to critical third-party origins */}
                   <link rel="preconnect" href="https://cdn.prod.website-files.com" crossOrigin="anonymous" />
-                  <link rel="preconnect" href="https://cdn.getkoala.com" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://scripts.clarity.ms" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://snap.licdn.com" crossOrigin="anonymous" />
                   <link rel="preconnect" href="https://www.googletagmanager.com" />

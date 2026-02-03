@@ -79,16 +79,6 @@ export function ClientLayoutWrapper({ children }) {
     <Suspense fallback={null}>
       <>
         {/* <CrispWithNoSSR /> */}
-        <Script
-          id="koala-tracking"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(t){var k="ko",i=(window.globalKoalaKey=window.globalKoalaKey||k);if(window[i])return;var ko=(window[i]=[]);["identify","track","removeListeners","on","off","qualify","ready"].forEach(function(t){ko[t]=function(){var n=[].slice.call(arguments);return n.unshift(t),ko.push(n),ko}});var n=document.createElement("script");n.async=!0,n.setAttribute("src","https://cdn.getkoala.com/v1/pk_ccda6b50f34963a28c2f035673b27491be24/sdk.js"),(document.body || document.head).appendChild(n)}();
-            `,
-          }}
-        />
-
         <NextThemesProvider
           attribute="class"
           defaultTheme="dark"
