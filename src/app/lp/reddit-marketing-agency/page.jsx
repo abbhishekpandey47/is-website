@@ -1,4 +1,3 @@
-import Head from "next/head";
 import RedditMarketingAgencyClient from "./RedditMarketingAgencyClient";
 
 const respondCaseStudy = [
@@ -31,22 +30,6 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <>
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Critical fonts and hero assets */}
-        <link rel="preload" href="/fonts/quicksand-variable.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        {/* TrustedSection logos - critical for mobile LCP */}
-        <link rel="preload" href="/reddit/hyperwise.svg" as="image" importance="high" />
-        <link rel="preload" href="/reddit/together.svg" as="image" importance="high" />
-        <link rel="preload" href="/reddit/eclipse.svg" as="image" importance="high" />
-        <link rel="preload" href="/reddit/freeAudit.svg" as="image" />
-        {/* Testimonial images */}
-        <link rel="preload" href="/Testimon/Frank.jpg" as="image" />
-        <link rel="preload" href="/Testimon/cindyFirefly.jpg" as="image" />
-      </Head>
-      <RedditMarketingAgencyClient respondCaseStudy={respondCaseStudy} />
-    </>
+    <RedditMarketingAgencyClient respondCaseStudy={respondCaseStudy} />
   );
 }
