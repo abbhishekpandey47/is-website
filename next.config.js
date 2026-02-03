@@ -138,6 +138,15 @@ module.exports = {
                     }
                 ],
             },
+            {
+                source: '/_next/image',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, s-maxage=31536000, stale-while-revalidate=86400',
+                    }
+                ],
+            },
             // Cache CSS files with long expiration
             {
                 source: '/_next/static/css/:path*',
@@ -178,6 +187,25 @@ module.exports = {
             },
             {
                 source: '/:path*.{jpg,jpeg,png,gif,webp,svg,ico}',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    }
+                ],
+            },
+            // Cache common public asset folders
+            {
+                source: '/reddit/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    }
+                ],
+            },
+            {
+                source: '/PostImages/:path*',
                 headers: [
                     {
                         key: 'Cache-Control',
@@ -256,10 +284,8 @@ module.exports = {
                 destructuring: true,
                 dynamicImport: true,
                 forOf: true,
-                logicalAssignment: true,
                 module: true,
                 optionalChaining: true,
-                optionalCatchBinding: true,
             };
 
             // Disable polyfills for modern JavaScript features

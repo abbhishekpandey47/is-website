@@ -1,4 +1,3 @@
-"use client";
 import dynamic from "next/dynamic";
 import PropTypes from "prop-types";
 import { Videos } from "../../playbook/developer-marketing/videosData";
@@ -7,16 +6,16 @@ import ContactPopupButton from "./ContactPopupButton";
 import HeroHome from "./hero";
 import WhyAI from "./howWeWork";
 
-const Cta = dynamic(() => import("./cta"), { ssr: false });
-const CaseStudies = dynamic(() => import("@/Components/caseStudies"), { ssr: false });
-const RedditMarketingSlide = dynamic(() => import("./why"), { ssr: false });
-const InfraMethodologyTimeline = dynamic(() => import("./methodology"), { ssr: false });
-const RedditServiceCards = dynamic(() => import("./whatYouGet"), { ssr: false });
-const StartupHeroSection = dynamic(() => import("./whoThisIsFor"), { ssr: false });
-const Testimonials = dynamic(() => import("../../services/gtm-content-services-for-yc-startups/testimonials"), { ssr: false });
-const VideoTestimonials = dynamic(() => import("../../playbook/developer-marketing/testimonials"), { ssr: false });
-const FAQSection = dynamic(() => import("./FAQ"), { ssr: false });
-const StatsSection = dynamic(() => import("./numbers"), { ssr: false });
+const Cta = dynamic(() => import("./cta"));
+const CaseStudies = dynamic(() => import("@/Components/caseStudies"));
+const RedditMarketingSlide = dynamic(() => import("./why"));
+const InfraMethodologyTimeline = dynamic(() => import("./methodology"));
+const RedditServiceCards = dynamic(() => import("./whatYouGet"));
+const StartupHeroSection = dynamic(() => import("./whoThisIsFor"));
+const Testimonials = dynamic(() => import("../../services/gtm-content-services-for-yc-startups/testimonials"));
+const VideoTestimonials = dynamic(() => import("../../playbook/developer-marketing/testimonials"));
+const FAQSection = dynamic(() => import("./FAQ"));
+const StatsSection = dynamic(() => import("./numbers"));
 
 export default function RedditMarketingAgencyClient({ respondCaseStudy }) {
   return (

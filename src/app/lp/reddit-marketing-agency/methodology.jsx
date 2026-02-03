@@ -17,43 +17,89 @@ const InfraMethodologyTimeline = () => {
 
             {/* Desktop Version */}
             <div className="max-w-7xl mx-auto relative hidden md:block">
-                <style jsx>{`
-  .horizontal-dashed {
-    height: 1px;
-    background-image: repeating-linear-gradient(
-      to right,
-      #818285 0 6px,
-      transparent 6px 12px
-    );
-    background-size: 12px 1px;
-    background-repeat: repeat-x;
-    background-position: center;
-    display: block;
-  }
-
-  .vertical-dashed {
-    width: 1px;
-    background-image: repeating-linear-gradient(
-      to bottom,
-      #818285 0 6px,
-      transparent 6px 12px
-    );
-    background-size: 1px 12px;
-    background-repeat: repeat-y;
-    background-position: center;
-    display: block;
-  }
-`}</style>
-
                 {/* Horizontal dashed lines */}
-                <div className="absolute left-0 right-0 horizontal-dashed" style={{ top: '50px' }}></div>
-                <div className="absolute left-0 right-0 horizontal-dashed" style={{ bottom: '50px' }}></div>
+                <div
+                    className="absolute left-0 right-0"
+                    style={{
+                        top: "50px",
+                        height: "1px",
+                        backgroundImage: "repeating-linear-gradient(to right, #818285 0 6px, transparent 6px 12px)",
+                        backgroundSize: "12px 1px",
+                        backgroundRepeat: "repeat-x",
+                        backgroundPosition: "center",
+                        display: "block",
+                    }}
+                ></div>
+                <div
+                    className="absolute left-0 right-0"
+                    style={{
+                        bottom: "50px",
+                        height: "1px",
+                        backgroundImage: "repeating-linear-gradient(to right, #818285 0 6px, transparent 6px 12px)",
+                        backgroundSize: "12px 1px",
+                        backgroundRepeat: "repeat-x",
+                        backgroundPosition: "center",
+                        display: "block",
+                    }}
+                ></div>
 
                 {/* Vertical dashed lines */}
-                <div className="absolute vertical-dashed" style={{ left: '12.5%', top: '50px', bottom: '50px' }}></div>
-                <div className="absolute vertical-dashed" style={{ left: '37.5%', top: '50px', bottom: '50px' }}></div>
-                <div className="absolute vertical-dashed" style={{ left: '62.5%', top: '50px', bottom: '50px' }}></div>
-                <div className="absolute vertical-dashed" style={{ left: '87.5%', top: '50px', bottom: '50px' }}></div>
+                <div
+                    className="absolute"
+                    style={{
+                        left: "12.5%",
+                        top: "50px",
+                        bottom: "50px",
+                        width: "1px",
+                        backgroundImage: "repeating-linear-gradient(to bottom, #818285 0 6px, transparent 6px 12px)",
+                        backgroundSize: "1px 12px",
+                        backgroundRepeat: "repeat-y",
+                        backgroundPosition: "center",
+                        display: "block",
+                    }}
+                ></div>
+                <div
+                    className="absolute"
+                    style={{
+                        left: "37.5%",
+                        top: "50px",
+                        bottom: "50px",
+                        width: "1px",
+                        backgroundImage: "repeating-linear-gradient(to bottom, #818285 0 6px, transparent 6px 12px)",
+                        backgroundSize: "1px 12px",
+                        backgroundRepeat: "repeat-y",
+                        backgroundPosition: "center",
+                        display: "block",
+                    }}
+                ></div>
+                <div
+                    className="absolute"
+                    style={{
+                        left: "62.5%",
+                        top: "50px",
+                        bottom: "50px",
+                        width: "1px",
+                        backgroundImage: "repeating-linear-gradient(to bottom, #818285 0 6px, transparent 6px 12px)",
+                        backgroundSize: "1px 12px",
+                        backgroundRepeat: "repeat-y",
+                        backgroundPosition: "center",
+                        display: "block",
+                    }}
+                ></div>
+                <div
+                    className="absolute"
+                    style={{
+                        left: "87.5%",
+                        top: "50px",
+                        bottom: "50px",
+                        width: "1px",
+                        backgroundImage: "repeating-linear-gradient(to bottom, #818285 0 6px, transparent 6px 12px)",
+                        backgroundSize: "1px 12px",
+                        backgroundRepeat: "repeat-y",
+                        backgroundPosition: "center",
+                        display: "block",
+                    }}
+                ></div>
 
                 <div className="relative" style={{ height: '1050px', paddingTop: '70px', paddingBottom: '70px' }}>
 

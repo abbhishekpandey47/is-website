@@ -82,7 +82,7 @@ export default function Threadflow() {
                 fill
                 style={{ objectFit: "contain", backgroundColor: "transparent" }}
                 sizes="(max-width: 640px) 100vw, (max-width: 1280px) 90vw, 1100px"
-                priority
+                loading="lazy"
                 quality={90}
               />
             </div>
