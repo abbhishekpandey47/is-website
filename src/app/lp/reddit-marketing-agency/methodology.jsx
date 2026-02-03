@@ -115,7 +115,7 @@ const InfraMethodologyTimeline = () => {
                             <div className="flex items-start mb-4">
                                 <div className="w-10 h-10 bg-[#232a5f] rounded-lg flex items-center justify-center mr-4 mt-1 flex-shrink-0">
                                     <svg className="w-6 h-6 text-[#6b5be7]" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 0 00-2-2H4zm0 2h12v8H4V6z" />
+                                        <path d="M4 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4zm0 2h12v8H4V6z" />
                                         <path d="M6 8h8v2H6V8zm0 4h5v2H6v-2z" />
                                     </svg>
                                 </div>
