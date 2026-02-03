@@ -213,6 +213,45 @@ module.exports = {
                     }
                 ],
             },
+            // Cache testimonial images with long expiration
+            {
+                source: '/Testimon/:path*',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    }
+                ],
+            },
+            // Cache public folder images and SVGs
+            {
+                source: '/:path*.svg',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    }
+                ],
+            },
+            {
+                source: '/:path*.webp',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    }
+                ],
+            },
+            // Cache fonts.css with longer expiration
+            {
+                source: '/fonts.css',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
+                    }
+                ],
+            },
             // Cache third-party analytics and tracking scripts longer
             {
                 source: '/ingest/:path*',

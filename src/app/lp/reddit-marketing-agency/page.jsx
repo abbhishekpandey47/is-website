@@ -1,5 +1,5 @@
+import Head from "next/head";
 import RedditMarketingAgencyClient from "./RedditMarketingAgencyClient";
-
 
 const respondCaseStudy = [
   {
@@ -18,7 +18,28 @@ const respondCaseStudy = [
   },
 ];
 
+export const metadata = {
+  title: "Reddit Marketing Agency for AI Agents & SaaS Startups | Infrasity",
+  description: "Get LLM-friendly Reddit growth with karma-rich accounts, stealth strategies, and thread seeding. Free audit.",
+  openGraph: {
+    title: "Reddit Marketing Agency for AI Agents & SaaS Startups",
+    description: "LLM-optimized Reddit marketing for B2B SaaS startups",
+    url: "https://www.infrasity.com/lp/reddit-marketing-agency",
+    type: "website",
+  },
+};
 
 export default function Page() {
-  return <RedditMarketingAgencyClient respondCaseStudy={respondCaseStudy} />;
+  return (
+    <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/quicksand-variable.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/reddit/freeAudit.svg" as="image" />
+        <link rel="preload" href="/reddit/hero.png" as="image" />
+      </Head>
+      <RedditMarketingAgencyClient respondCaseStudy={respondCaseStudy} />
+    </>
+  );
 }
