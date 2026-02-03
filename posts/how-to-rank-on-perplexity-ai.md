@@ -43,7 +43,7 @@ To scale this impact, your teams must also track AI rankings on Perplexity using
 
 Traditional search tools show a list of pages ranked by signals like keywords, links, and performance. Answer engines work differently. They give one clear answer and show the sources behind it. The goal is not to send users browsing but it is to help them decide. Let’s see what has changed:
 
-1. ### **Clarity and Structure**
+### 1. **Clarity and Structure**
 
 Perplexity favors content that can be understood in seconds. If the answer is buried or poorly structured, it won’t be cited. Clear hierarchy, short sections, and direct answers make content reusable inside AI responses. What works:
 
