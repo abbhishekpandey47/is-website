@@ -7,13 +7,13 @@ const ContactPopupButton = dynamic(() => import("./ContactPopupButton"), {
   loading: () => <div className="h-11 w-52 bg-gray-700 rounded animate-pulse" />,
 });
 
-const TrustedSection = dynamic(() => import("./TrustedSection"), {
-  loading: () => <div className="h-8 w-80 bg-gray-700 rounded animate-pulse" />,
-});
+// const TrustedSection = dynamic(() => import("./TrustedSection"), {
+//   loading: () => <div className="h-8 w-80 bg-gray-700 rounded animate-pulse" />,
+// });
 
-const TrustedMarquee = dynamic(() => import("./TrustedMarquee"), {
-  loading: () => <div className="h-32 w-full bg-gray-700/30 rounded animate-pulse" />,
-});
+// const TrustedMarquee = dynamic(() => import("./TrustedMarquee"), {
+//   loading: () => <div className="h-32 w-full bg-gray-700/30 rounded animate-pulse" />,
+// });
 
 export default function AIStartupLanding() {
     const BackgroundSVG = () => (
@@ -85,10 +85,9 @@ export default function AIStartupLanding() {
                 </div>
 
                 <div className="justify-center items-center">
-
-<div className="flex flex-row gap-4 justify-center items-center mb-6">
+                    {/* <div className="flex flex-row gap-4 justify-center items-center mb-6">
                         <TrustedSection />
-                    </div>
+                    </div> */}
                     <div className="flex flex-col items-center">
                         {/* Center - Book a Demo button */}
                         <div className="flex flex-col items-center">
@@ -112,9 +111,9 @@ export default function AIStartupLanding() {
                 />
             </div> */}
 
-            <div className="w-full justify-center items-center flex flex-col pt-16 max-sm:pt-12">
+            {/* <div className="w-full justify-center items-center flex flex-col pt-16 max-sm:pt-12">
                 <TrustedMarquee />
-            </div>
+            </div> */}
 
         </div>
     );
