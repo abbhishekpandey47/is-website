@@ -46,9 +46,8 @@ export default function AuditWhatYouGet() {
                     </p>
                 </div>
             </div>
-      <div className="relative max-w-6xl mx-auto overflow-hidden rounded-3xl border border-[#2d3355] bg-[#0c1025]/90 backdrop-blur p-8">
 
-        <div className="flex flex-wrap-reverse md:flex-nowrap justify-around">
+        <div className="flex flex-wrap-reverse md:flex-nowrap justify-center gap-20">
           
           <div className="mt-6 flex flex-col justify-center gap-4 mb-8 w-full max-w-lg px-6">
               {items.map((item) => (
@@ -78,12 +77,11 @@ export default function AuditWhatYouGet() {
               <Image
                 src="/reddit/freeAudit.svg"
                 alt="Free Reddit audit badge"
-                width={480}
+                width={560}
                 height={420}
-                className="object-contain mix-blend-exclusion"
+                className="object-contain mix-blend-exclusion h-120 w-140"
               />
         </div>
-      </div>
     </section>
   );
 }
