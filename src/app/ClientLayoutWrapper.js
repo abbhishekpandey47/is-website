@@ -86,17 +86,28 @@ export function ClientLayoutWrapper({ children }) {
           disableTransitionOnChange
         >
           <Appwrap>
-            <AntdRegistry>
-              <Loader />
+            {/* Conditionally apply AntdRegistry - Reddit LP handles it in its own layout to save 150K */}
+            {isRedditMarketingAgencyLp ? (
+              <>
+                <Loader />
+                <AdsHeader />
+                {children}
+                <Analytics />
+                <AdsFooter />
+              </>
+            ) : (
+              <AntdRegistry>
+                <Loader />
 
-              {shouldShowAwardBanner && <AwardBanner />}
+                {shouldShowAwardBanner && <AwardBanner />}
 
-              {isRedditMarketingAgencyLp ? <AdsHeader /> : shouldShowNavbar && <Navbar />}
+                {shouldShowNavbar && <Navbar />}
 
-              {children}
-              <Analytics />
-              {isRedditMarketingAgencyLp ? <AdsFooter /> : !hideNavBarAndFooter && <Footer />}
-            </AntdRegistry>
+                {children}
+                <Analytics />
+                {!hideNavBarAndFooter && <Footer />}
+              </AntdRegistry>
+            )}
           </Appwrap>
         </NextThemesProvider>
       </>

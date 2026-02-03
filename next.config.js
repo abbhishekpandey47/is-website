@@ -10,7 +10,10 @@ module.exports = {
             'date-fns',
             'react-icons',
             'zod',
-            'antd'
+            'antd',
+            'framer-motion',
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu'
         ],
     },
     typescript: {
