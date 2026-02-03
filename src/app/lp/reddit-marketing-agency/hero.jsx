@@ -1,3 +1,4 @@
+"use client";
 import { clientPaddingMap, serviceClientLogo } from "@/clients";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";

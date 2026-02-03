@@ -5,6 +5,7 @@ import AuditWhatYouGet from "./auditWhatYouGet";
 import ContactPopupButton from "./ContactPopupButton";
 import HeroHome from "./hero";
 import WhyAI from "./howWeWork";
+import DeferredSection from "@/Components/DeferredSection";
 
 const Cta = dynamic(() => import("./cta"));
 const CaseStudies = dynamic(() => import("@/Components/caseStudies"));
@@ -28,14 +29,16 @@ export default function RedditMarketingAgencyClient({ respondCaseStudy }) {
       <InfraMethodologyTimeline />
       <RedditServiceCards />
       <StatsSection />
-      <div className="mt-8">
-        <CaseStudies
-          studies={respondCaseStudy}
-          heading="Community-Led Growth in Action"
-          subheading="Case studies showing how B2B SaaS brands scale visibility and sentiment on Reddit"
-          hideLink
-        />
-      </div>
+      <DeferredSection>
+        <div className="mt-8">
+          <CaseStudies
+            studies={respondCaseStudy}
+            heading="Community-Led Growth in Action"
+            subheading="Case studies showing how B2B SaaS brands scale visibility and sentiment on Reddit"
+            hideLink
+          />
+        </div>
+      </DeferredSection>
       <div className="flex flex-col items-center mb-12">
         <ContactPopupButton
           buttonText="Get Free Reddit Audit"
@@ -45,9 +48,12 @@ export default function RedditMarketingAgencyClient({ respondCaseStudy }) {
           textWeight="quicksand-semibold"
         />
       </div>
-      <Testimonials />
+      <DeferredSection>
+        <Testimonials />
+      </DeferredSection>
 
       {/* Video Testimonials Section - Right after written testimonials */}
+      <DeferredSection>
       <div className="mt-16">
         <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mb-12"></div>
 
@@ -91,11 +97,16 @@ export default function RedditMarketingAgencyClient({ respondCaseStudy }) {
           </div>
         </div>
       </div>
+      </DeferredSection>
       <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] mb-10 mt-6"></div>
-      <FAQSection />
+      <DeferredSection>
+        <FAQSection />
+      </DeferredSection>
       <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] my-10"></div>
 
-      <Cta />
+      <DeferredSection>
+        <Cta />
+      </DeferredSection>
     </div>
   );
 }
