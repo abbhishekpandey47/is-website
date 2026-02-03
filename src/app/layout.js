@@ -27,10 +27,6 @@ export default function RootLayout({ children }) {
                   <link rel="preconnect" href="https://www.google-analytics.com" />
                   <link rel="stylesheet" href="/fonts.css" />
                   <AlternateLinks />
-                  {/* Preload critical images */}
-                  <link rel="preload" href="/landingfolio/dashboard.webp" as="image" />
-                  <link rel="preload" href="/Testimon/Frank.jpg" as="image" />
-                  <link rel="preload" href="/Testimon/cindyFirefly.jpg" as="image" />
             </head>
             <GoogleAnalytics gaId='G-G0BTN1FRWY' />
             <body className='antialiased' suppressHydrationWarning>
