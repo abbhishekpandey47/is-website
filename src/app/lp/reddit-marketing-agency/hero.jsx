@@ -1,29 +1,19 @@
 "use client";
-import { clientPaddingMap, serviceClientLogo } from "@/clients";
-import { Marquee } from "@devnomic/marquee";
-import "@devnomic/marquee/dist/index.css";
+
 import Image from "next/image";
-import ContactPopupButton from "./ContactPopupButton";
-import TrustedBySection from "./marquee";
+import dynamic from "next/dynamic";
 
+const ContactPopupButton = dynamic(() => import("./ContactPopupButton"), {
+  loading: () => <div className="h-11 w-52 bg-gray-700 rounded animate-pulse" />,
+});
 
-const fileList = [
-    { name: "hyperwise.svg", hasBackground: false },
-    { name: "eclipse.svg", hasBackground: true },
-    { name: "together.svg", hasBackground: false },
-    { name: "susaventures.png", hasBackground: true },
-    { name: "firestreak.png", hasBackground: true },
-    { name: "yc.avif", hasBackground: false },
-    { name: "khosala.avif", hasBackground: false }
-];
+const TrustedSection = dynamic(() => import("./TrustedSection"), {
+  loading: () => <div className="h-8 w-80 bg-gray-700 rounded animate-pulse" />,
+});
 
-const logoFiles = serviceClientLogo;
-
-const getLogoPadding = (filename) => {
-    const paddingMap = clientPaddingMap
-    // Return specific padding or default p-4
-    return paddingMap[filename] || 'p-4';
-};
+const TrustedMarquee = dynamic(() => import("./TrustedMarquee"), {
+  loading: () => <div className="h-32 w-full bg-gray-700/30 rounded animate-pulse" />,
+});
 
 export default function AIStartupLanding() {
     const BackgroundSVG = () => (
@@ -95,8 +85,9 @@ export default function AIStartupLanding() {
                 </div>
 
                 <div className="justify-center items-center">
-                    <div className="flex flex-row gap-4 justify-center items-center mb-6">
-                        <TrustedBySection />
+
+<div className="flex flex-row gap-4 justify-center items-center mb-6">
+                        <TrustedSection />
                     </div>
                     <div className="flex flex-col items-center">
                         {/* Center - Book a Demo button */}
@@ -122,41 +113,7 @@ export default function AIStartupLanding() {
             </div> */}
 
             <div className="w-full justify-center items-center flex flex-col pt-16 max-sm:pt-12">
-                <div
-                    className="w-[100%] pt-8 pb-1 max-sm:pt-4"
-                    style={{
-                        backgroundColor: "#171a3d",
-                        backgroundImage: `radial-gradient(circle at top right, #090d1a 0%, transparent 30%)`,
-                        border: "1.5px solid rgba(45, 51, 71, 1)",
-                        borderRadius: "16px",
-                        zIndex: 0,
-                    }}
-                >
-                    <h2 className="text-center pb-1 text-white quicksand-bold text-2xl max-sm:text-xl max-sm:px-4">
-                        Trusted by Builders at Innovative AI Startups
-                    </h2>
-                    <Marquee
-                        className="motion-reduce:overflow-auto"
-                        innerClassName="motion-reduce:animate-none"
-                    >
-                        <div className="flex gap-20 max-sm:gap-10 items-center mx-4">
-                            {logoFiles.map((logoFile, idx) => {
-                                return (
-                                    <div key={idx} className="mix-blend-color-burn">
-                                        <Image
-                                            loading="lazy"
-                                            width={160}
-                                            height={80}
-                                            className={`${getLogoPadding(logoFile)} object-contain opacity-90`}
-                                            src={`/trustedby-bw/bw/${logoFile}`}
-                                            alt="Company Logo"
-                                        />
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </Marquee>
-                </div>
+                <TrustedMarquee />
             </div>
 
         </div>
