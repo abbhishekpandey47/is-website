@@ -1,10 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import ContactPage from "./page";
-import Image from "next/image";
 import { Zap } from "lucide-react";
-import { message } from "antd";
+import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const CalendarBooking = ({ onBookingComplete, check }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -469,7 +467,7 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
         <div
           key={`day-${day}`}
           className={`h-10 w-10 flex items-center justify-center rounded-full cursor-pointer mx-1
-            ${isSelected ? "bg-blue-600 text-white" : ""} 
+            ${isSelected ? "bg-blue-600 text-white" : ""}
             ${isTodayDate && !isSelected
               ? "border border-blue-600 text-white"
               : ""
@@ -489,49 +487,55 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
   };
 
   const Stars = () => {
-    // Generate random positions for the stars
-    const smallStars = Array.from({ length: 100 }).map((_, i) => ({
-      id: `small-${i}`,
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 5}s`,
-      animation:
-        i % 3 === 0
-          ? "animate-float"
-          : i % 3 === 1
-            ? "animate-float-delay-1"
-            : "animate-float-delay-2",
-    }));
+    const [stars, setStars] = useState({ small: [], medium: [], large: [] });
 
-    const mediumStars = Array.from({ length: 30 }).map((_, i) => ({
-      id: `medium-${i}`,
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 5}s`,
-      animation:
-        i % 3 === 0
-          ? "animate-float"
-          : i % 3 === 1
-            ? "animate-float-delay-1"
-            : "animate-float-delay-2",
-    }));
+    useEffect(() => {
+      // Generate random positions for the stars only on client
+      const smallStars = Array.from({ length: 100 }).map((_, i) => ({
+        id: `small-${i}`,
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 5}s`,
+        animation:
+          i % 3 === 0
+            ? "animate-float"
+            : i % 3 === 1
+              ? "animate-float-delay-1"
+              : "animate-float-delay-2",
+      }));
 
-    const largeStars = Array.from({ length: 15 }).map((_, i) => ({
-      id: `large-${i}`,
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 5}s`,
-      animation:
-        i % 3 === 0
-          ? "animate-pulse-slow"
-          : i % 3 === 1
-            ? "animate-float-delay-1"
-            : "animate-scale-slow",
-    }));
+      const mediumStars = Array.from({ length: 30 }).map((_, i) => ({
+        id: `medium-${i}`,
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 5}s`,
+        animation:
+          i % 3 === 0
+            ? "animate-float"
+            : i % 3 === 1
+              ? "animate-float-delay-1"
+              : "animate-float-delay-2",
+      }));
+
+      const largeStars = Array.from({ length: 15 }).map((_, i) => ({
+        id: `large-${i}`,
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 5}s`,
+        animation:
+          i % 3 === 0
+            ? "animate-pulse-slow"
+            : i % 3 === 1
+              ? "animate-float-delay-1"
+              : "animate-scale-slow",
+      }));
+
+      setStars({ small: smallStars, medium: mediumStars, large: largeStars });
+    }, []);
 
     return (
       <div className="absolute inset-0 z-0">
-        {smallStars.map((star) => (
+        {stars.small.map((star) => (
           <div
             key={star.id}
             className={`absolute star-small ${star.animation}`}
@@ -542,7 +546,7 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
             }}
           ></div>
         ))}
-        {mediumStars.map((star) => (
+        {stars.medium.map((star) => (
           <div
             key={star.id}
             className={`absolute star-medium ${star.animation}`}
@@ -553,7 +557,7 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
             }}
           ></div>
         ))}
-        {largeStars.map((star) => (
+        {stars.large.map((star) => (
           <div
             key={star.id}
             className={`absolute star-large ${star.animation}`}
@@ -814,7 +818,7 @@ const CalendarBooking = ({ onBookingComplete, check }) => {
                     <div
                       key={index}
                       onClick={() => handleTimeSelection(slot)}
-                      className={`p-2 text-center rounded-md cursor-pointer border border-gray-700 
+                      className={`p-2 text-center rounded-md cursor-pointer border border-gray-700
                 ${selectedTime === slot
                           ? "bg-blue-600 text-white"
                           : "hover:bg-gray-700"

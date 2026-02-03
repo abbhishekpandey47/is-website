@@ -1688,6 +1688,17 @@ let postMetaData = [
     authorId: "author0005",
     category: "Informational",
     metaDescription: "Learn how LLM visibility analysis tools work, which metrics matter, and how B2B SaaS teams improve AI search visibility beyond dashboards. Read now"
+  },
+{
+    title: "How to Rank on Perplexity AI: Tips & Strategies",
+    metatitle: "How to Rank on Perplexity AI: Tips & Strategies",
+    slug: "how-to-rank-on-perplexity-ai",
+    description: "B2B SaaS teams are rethinking search as buyers move from Google to AI tools like Perplexity. Ranking well on search is no longer enough if your content doesn’t appear in AI-generated answers. This guide explains how to rank on Perplexity AI, how ranking in Perplexity differs from traditional SEO, and what kind of content gets cited. You’ll also learn how to track AI rankings on Perplexity using a structured visibility framework built for technical SaaS teams. If your goal is to influence buyers earlier and stay visible in AI search, this blog shows exactly how.",
+    ogImage: "/PostImages/how-to-rank-on-perplexity-ai/0.webp",
+    publishedOn: "2026-02-02",
+    authorId: "author0005",
+    category: "Informational",
+    metaDescription: "Learn how to rank on Perplexity AI, how ranking works, and how to track AI rankings on Perplexity using proven content and visibility strategies. Read now"
 },
 ];
 
