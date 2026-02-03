@@ -2,13 +2,10 @@
 
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import TrustedSection from "./TrustedSection";
 
 const ContactPopupButton = dynamic(() => import("./ContactPopupButton"), {
   loading: () => <div className="h-11 w-52 bg-gray-700 rounded animate-pulse" />,
-});
-
-const TrustedSection = dynamic(() => import("./TrustedSection"), {
-  loading: () => <div className="h-8 w-80 bg-gray-700 rounded animate-pulse" />,
 });
 
 const TrustedMarquee = dynamic(() => import("./TrustedMarquee"), {
