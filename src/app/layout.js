@@ -5,7 +5,6 @@ import { Suspense } from 'react';
 import AlternateLinks from './AlternateLinks';
 import { ClientLayoutWrapper } from './ClientLayoutWrapper';
 import DeferredScripts from './components/DeferredScripts';
-import { DeferredThirdPartyScripts } from './DeferredThirdPartyScripts';
 import './globals.css';
 import { metadata } from './metadata';
 
@@ -46,7 +45,6 @@ export default function RootLayout({ children }) {
                 </noscript>
                 <Suspense fallback={null}>
                   <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
-                  <DeferredThirdPartyScripts />
                 </Suspense>
                 <SpeedInsights />
                 <DeferredScripts />
