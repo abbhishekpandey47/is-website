@@ -694,7 +694,7 @@ const CalendarBooking = ({ onSuccess, forceAdsApp = false }) => {
                 </div>
                 )}
                 <div
-                    className={isAdsApp ? '' : 'mb-24'}
+                    className={isAdsApp ? 'w-[80%]' : 'mb-24'}
                     style={isAdsApp ? {} : {
                         background:
                             "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
@@ -711,7 +711,7 @@ const CalendarBooking = ({ onSuccess, forceAdsApp = false }) => {
                                 transition: "all 0.3s ease",
                             }}
                         >
-                            {!isAdsApp && (
+                            
                             <div className="text-xl font-bold text-center mb-4 mt-10 ">
                                 {step === 2 && (
                                     <div>
@@ -731,7 +731,7 @@ const CalendarBooking = ({ onSuccess, forceAdsApp = false }) => {
                                 {/* {step === 3 && "Complete Your Booking"} */}
                                 {/* {step === 4 && "Booking Confirmed"} */}
                             </div>
-                            )}
+                        
 
                             {step === 2 && (
                                 <div className="calendar-container">
@@ -1016,12 +1016,12 @@ const CalendarBooking = ({ onSuccess, forceAdsApp = false }) => {
                                             <label className="block text-gray-300 mb-1 text-left">
                                                 Phone Number
                                             </label>
-                                            <div className="flex w-full">
+                                            <div className="flex w-full gap-4">
                                                 <select
                                                     name="countryCode"
                                                     value={userInfo.countryCode}
                                                     onChange={handleInputChange}
-                                                    className="w-[88px] bg-[#0c102e] rounded-l pl-1 py-2 text-white focus:outline-none focus:ring-[0.5px] focus:ring-[#4f4bc6] border border-[#3d4058] border-r-0"
+                                                    className="w-[88px] bg-[#0c102e] rounded-l pl-1 py-2 text-white focus:outline-none focus:ring-[0.5px] focus:ring-[#4f4bc6] border border-[#3d4058]"
                                                 >
                                                     <option value="+1">🇺🇸 +1</option>
                                                     <option value="+7">🇷🇺 +7</option>
