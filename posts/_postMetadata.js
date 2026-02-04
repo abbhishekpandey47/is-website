@@ -1678,6 +1678,28 @@ let postMetaData = [
     cloud:"Notion provides a flexible, AI-enhanced workspace platform that combines notes, documents, tasks, databases, and automation capabilities into one customizable system. Widely adopted by individuals, startups, and enterprises for internal knowledge management, workflow automation, and cross-team collaboration, Notion’s composable architecture lets users build their own workflows without code. "
   }
 },
+{
+    title: "5 Best LLM Visibility Analysis Tools (2026)",
+    metatitle: "5 Best LLM Visibility Analysis Tools for B2B SaaS (2026 Guide)",
+    slug: "llm-visibility-analysis-tools",
+    description: "AI search is changing how buyers discover B2B SaaS tools. This guide breaks down the best LLM visibility analysis tools, the metrics that actually matter, and how growth teams turn visibility insights into prompt-aligned technical content that AI systems surface and cite.",
+    ogImage: "/PostImages/llm-visibility-analysis-tools/0.webp",
+    publishedOn: "2026-02-01",
+    authorId: "author0005",
+    category: "Informational",
+    metaDescription: "Learn how LLM visibility analysis tools work, which metrics matter, and how B2B SaaS teams improve AI search visibility beyond dashboards. Read now"
+  },
+{
+    title: "How to Rank on Perplexity AI: Tips & Strategies",
+    metatitle: "How to Rank on Perplexity AI: Tips & Strategies",
+    slug: "how-to-rank-on-perplexity-ai",
+    description: "B2B SaaS teams are rethinking search as buyers move from Google to AI tools like Perplexity. Ranking well on search is no longer enough if your content doesn’t appear in AI-generated answers. This guide explains how to rank on Perplexity AI, how ranking in Perplexity differs from traditional SEO, and what kind of content gets cited. You’ll also learn how to track AI rankings on Perplexity using a structured visibility framework built for technical SaaS teams. If your goal is to influence buyers earlier and stay visible in AI search, this blog shows exactly how.",
+    ogImage: "/PostImages/how-to-rank-on-perplexity-ai/0.webp",
+    publishedOn: "2026-02-02",
+    authorId: "author0005",
+    category: "Informational",
+    metaDescription: "Learn how to rank on Perplexity AI, how ranking works, and how to track AI rankings on Perplexity using proven content and visibility strategies. Read now"
+},
 ];
 
 const sorted = () => {
