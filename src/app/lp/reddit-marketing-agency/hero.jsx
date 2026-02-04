@@ -16,48 +16,6 @@ const ContactPopupButton = dynamic(() => import("./ContactPopupButton"), {
 // });
 
 export default function AIStartupLanding() {
-    const BackgroundSVG = () => (
-        <svg
-            width="140"
-            height="10"
-            viewBox="0 0 1440 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="absolute inset-0 w-full h-full object-cover"
-        >
-            <g clipPath="url(#clip0_647_203)">
-                <g filter="url(#filter0_f_647_203)">
-                    <circle cx="1436" cy="31" r="402" fill="#5F64FF" fillOpacity="0.6" />
-                </g>
-                <g filter="url(#filter1_f_647_203)">
-                    <circle cx="-162" cy="449" r="402" fill="#5F64FF" fillOpacity="0.6" />
-                </g>
-                <g filter="url(#filter2_f_647_203)">
-                    <circle cx="842" cy="885" r="328" fill="#5F64FF" fillOpacity="0.5" />
-                </g>
-            </g>
-            <defs>
-                <filter id="filter0_f_647_203" x="660" y="-745" width="1552" height="1552" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                    <feGaussianBlur stdDeviation="187" result="effect1_foregroundBlur_647_203" />
-                </filter>
-                <filter id="filter1_f_647_203" x="-938" y="-327" width="1552" height="1552" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                    <feGaussianBlur stdDeviation="187" result="effect1_foregroundBlur_647_203" />
-                </filter>
-                <filter id="filter2_f_647_203" x="140" y="183" width="1404" height="1404" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                    <feGaussianBlur stdDeviation="187" result="effect1_foregroundBlur_647_203" />
-                </filter>
-                <clipPath id="clip0_647_203">
-                    <rect width="1455" height="1507" fill="white" transform="translate(-15 -449)" />
-                </clipPath>
-            </defs>
-        </svg>
-    );
 
     return (
         <div
@@ -65,8 +23,15 @@ export default function AIStartupLanding() {
         //   style={{ background: "#171a3d" }}
 
         >
-            <div className="inset-0 z-0">
-                <BackgroundSVG />
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0 w-full h-full">
+                <Image
+                    src="/reddit/redditbg.svg"
+                    alt="Reddit Background"
+                    fill
+                    priority
+                    className="object-cover object-center"
+                />
             </div>
 
             {/* Content */}
@@ -98,22 +63,18 @@ export default function AIStartupLanding() {
                 </div>
             </div>
 
-            {/* Desktop: Image positioned on the right */}
-            {/* <div className=" absolute right-0 bottom-0 mb-[270px] max-sm:hidden">
-                <Image
-                    width={600}
-                    height={200}
-                    className="w-[28rem] h-auto border-l-[1.5px] border-t-[1.5px] border-b-[1.5px] border-[#373737] rounded-l-2xl"
-                    loading="lazy"
-                    priority={false}
-                    src="/reddit/hero.png"
-                    alt="Hero Image"
-                />
-            </div> */}
-
-            {/* <div className="w-full justify-center items-center flex flex-col pt-16 max-sm:pt-12">
-                <TrustedMarquee />
-            </div> */}
+            {/* Trusted by Builders Section */}
+            <div className="w-full justify-center items-center flex flex-col pt-16 max-sm:pt-12 relative z-10">
+                
+                    <Image
+                        src="/reddit/client.svg"
+                        alt="Trusted by Builders at Innovative AI Startups"
+                        width={1200}
+                        height={350}
+                        priority={false}
+                        className="w-[75%] h-auto"
+                    />
+                </div>
 
         </div>
     );

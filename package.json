@@ -6,10 +6,10 @@
         "node": ">=20"
     },
     "browserslist": [
-        "last 2 Chrome versions",
-        "last 2 Firefox versions",
-        "last 2 Safari versions",
-        "last 2 Edge versions"
+        "chrome >= 90",
+        "firefox >= 88",
+        "safari >= 14",
+        "edge >= 90"
     ],
     "scripts": {
         "dev": "next dev",
