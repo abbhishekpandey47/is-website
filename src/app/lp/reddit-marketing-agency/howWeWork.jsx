@@ -1,32 +1,27 @@
-import { MessageCircle, Monitor, Shield, Users } from "lucide-react";
 import ContactPopupButton from "./ContactPopupButton";
 
 export default function AIChallengesSection() {
-    const challenges = [
-        {
-            icon: Monitor,
-            title: "Narrative Tracking & Competitor Listening",
-            description:
-                "We monitor how specific SDKs, LLM agents, platform engineering or AI Agents are being discussed — what’s earning love, what’s getting dragged — and use those signals to craft Reddit-native narratives around your product.",
-        },
-        {
-            icon: Users,
-            title: "Karma-Rich Handle Rotation & Comment Seeding",
-            description:
-                "We drop LLM-friendly, value-first comments using aged, trusted Reddit accounts — showing up in threads around IaC drift, tool comparisons, or “Which stack should I use for policy?” conversations with zero promotional footprint.",
-        },
-        {
-            icon: MessageCircle,
-            title: "Thread Seeding for Use Case Discovery",
-            description:
-                "We launch and sustain conversations around real-world use cases — like automating CI/CD with Terraform, handling multi-cloud AI workloads, or shipping faster with internal dev platforms — and naturally introduce your tool as the solution.",
-        },
-        {
-            icon: Shield,
-            title: "Subreddit Mapping & ICP-First Targeting",
-            description: "We show up where your ICP is already active — from r/devops to r/LLMops — and seed original threads designed to prompt discussion, not raise flags. Every post is shaped to match each subreddit’s culture, tone, and rhythm — so you earn attention, not suspicion.",
-        },
-    ];
+        const challenges = [
+            {
+                title: "Narrative Tracking & Competitor Listening",
+                description:
+                    "We monitor how specific SDKs, LLM agents, platform engineering or AI Agents are being discussed — what’s earning love, what’s getting dragged — and use those signals to craft Reddit-native narratives around your product.",
+            },
+            {
+                title: "Karma-Rich Handle Rotation & Comment Seeding",
+                description:
+                    "We drop LLM-friendly, value-first comments using aged, trusted Reddit accounts — showing up in threads around IaC drift, tool comparisons, or “Which stack should I use for policy?” conversations with zero promotional footprint.",
+            },
+            {
+                title: "Thread Seeding for Use Case Discovery",
+                description:
+                    "We launch and sustain conversations around real-world use cases — like automating CI/CD with Terraform, handling multi-cloud AI workloads, or shipping faster with internal dev platforms — and naturally introduce your tool as the solution.",
+            },
+            {
+                title: "Subreddit Mapping & ICP-First Targeting",
+                description: "We show up where your ICP is already active — from r/devops to r/LLMops — and seed original threads designed to prompt discussion, not raise flags. Every post is shaped to match each subreddit’s culture, tone, and rhythm — so you earn attention, not suspicion.",
+            },
+        ];
     return (
         <div className="pb-10 p-8 md:p-[2rem]" >
             <div className="max-w-7xl mx-auto text-center relative z-10">
@@ -47,42 +42,40 @@ export default function AIChallengesSection() {
                     </p>
                 </div>
             </div>
-            <div className="max-w-[90%] mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {challenges.map((challenge, index) => (
-                        <div key={index} className="group relative ">
-                            {/* Icon */}
-                            <div className="mb-6">
-                                <div className="w-16 h-16 bg-[#1b1a3f] rounded-xl flex items-center justify-center transition-colors duration-300">
-                                    <challenge.icon className="w-8 h-8 text-[#6b5be7] group-hover:text-purple-300 transition-colors duration-300" />
+            <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+                        {challenges.map((challenge, index) => (
+                            <div
+                                key={index}
+                                className="relative min-h-[340px] overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-[#0d0a1a]/90 via-[#110828]/90 to-[#0b0d1f]/90 p-8 text-white shadow-[0_25px_60px_rgba(0,0,0,0.45)] transition duration-300 hover:border-[#8b7ef9]/60"
+                            >
+                                <div className="absolute inset-0" aria-hidden>
+                                    <div className="absolute inset-0 bg-gradient-to-br from-[#0d0a1a]/80 via-[#1e0f36]/70 to-[#0a0b1f]/80" />
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent" />
+                                    <div
+                                        className="absolute"
+                                        style={{
+                                            width: "459.82px",
+                                            height: "384.71px",
+                                            left: "-188.17px",
+                                            top: "-156.96px",
+                                            transform: "rotate(-37deg)",
+                                            background:
+                                                "linear-gradient(252.77deg, #0D0A1A 0%, rgba(71, 59, 121, 0.8) 71.76%, rgba(155, 145, 198, 0.8) 100.21%)",
+                                            filter: "blur(46.5243px)",
+                                        }}
+                                    />
+                                </div>
+                                <div className="relative z-10 flex flex-col h-full justify-between">
+                                    <h3 className="text-xl font-semibold leading-tight tracking-normal text-white md:text-[22px]">
+                                        {challenge.title}
+                                    </h3>
+                                    <p className="text-base leading-relaxed text-neutral-300">
+                                        {challenge.description}
+                                    </p>
                                 </div>
                             </div>
-
-                            {/* Title */}
-                            {/* <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-purple-200 transition-colors duration-300">
-                {challenge.title}
-              </h3> */}
-
-                            {/* Description */}
-                            {/* <p className="text-slate-300 leading-relaxed text-sm group-hover:text-slate-200 transition-colors duration-300">
-                {challenge.description}
-              </p> */}
-                            <div className="quicksand-bold text-xl max-sm:text-[1em] tracking-wide leading-[30px] text-white text-left flex justify-start mb-2">
-                                <h2>{challenge.title}</h2>
-                            </div>
-
-                            {/* Description */}
-                            <div className="mx-auto max-w-prose">
-                                <p className="text-sm text-gray-300 tracking-wider leading-loose font-light mr-4">
-                                    {challenge.description}
-                                </p>
-                            </div>
-
-                            {/* Hover glow effect */}
-                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                        </div>
-                    ))}
-                    
+                        ))}
                 </div>
                    <div className="flex flex-col items-center mt-4">
                         {/* Center - Book a Demo button */}
