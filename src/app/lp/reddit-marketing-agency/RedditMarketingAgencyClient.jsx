@@ -20,7 +20,13 @@ const StatsSection = dynamic(() => import("./numbers"));
 
 export default function RedditMarketingAgencyClient({ respondCaseStudy }) {
   return (
-    <div className="text-white">
+    <div
+      className="text-white relative overflow-hidden"
+      style={{
+        backgroundImage: "url('/reddit/bgstar.svg')",
+        backgroundPosition: 'center',
+      }}
+    >
       <HeroHome />
       <AuditWhatYouGet />
       <StartupHeroSection />

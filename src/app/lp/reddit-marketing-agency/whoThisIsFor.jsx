@@ -1,81 +1,60 @@
 import Image from 'next/image';
 
+const badges = [
+    { text: 'AI/LLM agentic platforms.', top: 'top-[273px]', left: 'left-[335px]' },
+    { text: 'Internal developer platforms (IDPs).', top: 'top-[438px]', left: 'left-[111px]' },
+    { text: 'Observability / APM / Testing tools.', top: 'top-[626px]', left: 'left-[220px]' },
+    { text: 'Auth, CI/CD, and DevX tooling.', top: 'top-[762px]', left: 'left-[492px]' },
+    { text: 'Backend infra, feature flags, config tools.', top: 'top-[556px]', left: 'left-[1396px]' },
+    { text: 'Deployment & workflow automation.', top: 'top-[347px]', left: 'left-[1274px]' },
+    { text: 'Experimental tools solving new-edge problems (think: Codium, DevZero, Kubiya, Tracetest).', top: 'top-[821px]', left: 'left-[1274px]' },
+];
+
 const StartupHeroSection = () => {
     return (
-        <div className=" text-white p-[2rem] md:px-[5rem] flex flex-col items-center justify-center">
-            <div className="max-w-6xl w-full">
-                <div className="max-w-7xl grid grid-cols-1 lg:grid-cols-2 md:gap-12 items-center">
-                    {/* Left Column - Content */}
-                    <div className="space-y-8">
-                        <div className="max-w-6xl text-left relative z-10">
-                            <div className="quicksand-bold text-[30px] tracking-tighter md:leading-[80px] text-white text-left flex justify-left mb-2">
-                                <h2 className="leading-[80px] max-sm:leading-[69px] text-left max-lg:mx-auto">
-                                    Who this is for :
-                                </h2>
-                            </div>
+        <section className="relative overflow-hidden pb-24">
+            <div className="absolute inset-0" />
+            <div className="relative mx-auto flex w-full max-w-[1920px] flex-col items-center px-6 pt-16 md:pt-24">
 
-                            {/* Description */}
-                            <div className="mx-auto mb-8">
-                                <p className="font-[quicksand] text-[18px] md:text-[18px] text-white tracking-wide leading-relaxed font-[320]">
-                                    We work with early and growth-stage startups building tools for technical users.
-                                    If you're building for developers and want to win credibility on Reddit — we're
-                                    your team.
-                                </p>
-                            </div>
-                        </div>
+            <div className="max-w-6xl mx-auto text-center relative z-10">
+                <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
+                    <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
+                        Who this is for :
+                    </h2>
+                </div>
+                <div className="flex justify-center my-6 mb-8">
+                    <div className="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
+                </div>
 
-                        <div className="space-y-2">
-                            {[
-                                "AI/LLM agentic platforms.",
-                                "Internal developer platforms (IDPs).",
-                                "Observability / APM / Testing tools.",
-                                "Deployment & workflow automation.",
-                                "Auth, CI/CD, and DevX tooling.",
-                                "Backend infra, feature flags, config tools.",
-                                "Experimental tools solving new-edge problems (think: Codium, DevZero, Kubiya, Tracetest)."
-                            ].map((item, index) => (
-                                <div key={index} className="flex items-center space-x-3">
-                                    <div className="flex-shrink-0 mt-1">
-                                        <svg
-                                            className="w-9 h-9"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                d="M11.5 13.8H10.1299C8.72143 13.8 8.01721 13.8 7.72228 13.3385C7.42735 12.8769 7.72321 12.2379 8.31493 10.9597L11.0463 5.06006C11.4205 4.25182 11.6075 3.8477 11.8038 3.89091C12 3.93413 12 4.37946 12 5.27013V9.7C12 9.9357 12 10.0536 12.0732 10.1268C12.1464 10.2 12.2643 10.2 12.5 10.2H13.8701C15.2786 10.2 15.9828 10.2 16.2777 10.6615C16.5726 11.1231 16.2768 11.7621 15.6851 13.0402L12.9537 18.9399C12.5795 19.7482 12.3925 20.1523 12.1962 20.1091C12 20.0659 12 19.6205 12 18.7299V14.3C12 14.0643 12 13.9464 11.9268 13.8732C11.8536 13.8 11.7357 13.8 11.5 13.8Z"
-                                                fill="#6b5be7"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <p className="font-[quicksand] font-bold text-[18px] md:text-[18px] text-white tracking-wide leading-relaxed">
-                                        {item}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                {/* Description */}
+                <div className="max-w-[70%] mx-auto mb-8">
+                    <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
+                        We work with early and growth-stage startups building tools for technical users. If you&apos;re building for developers and want to win credibility on Reddit — we&apos;re your team.
 
-                    {/* Right Column - Image */}
-                    <div className="flex justify-center lg:justify-end">
-                        <div className="rounded-lg flex items-center justify-center">
-                            <Image
-                                src="/reddit/whothisisfor.webp"
-                                alt="Who this is for Image"
-                                width={487}
-                                height={622}
-                                quality={85}
-                                priority={false}
-                                sizes="(max-width: 768px) 287px, (max-width: 1024px) 387px, 487px"
-                                className="w-[287px] h-[422px] lg:w-[487px] lg:h-[622px] object-cover"
-                            />
-                        </div>
 
-                    </div>
-
+                    </p>
                 </div>
             </div>
-        </div>
+
+            <div className="flex justify-center mx-auto mt-10 w-full max-w-[1440px]">
+                <div className="w-full max-w-[1080px]">
+                    <div className="relative aspect-[1080/720] w-full">
+                        <Image
+                            src="/reddit/whoisthisfor.svg"
+                            alt="Who this is for"
+                            width={1080}
+                            height={720}
+                            priority
+                            fetchPriority="high"
+                            className="h-full w-full object-contain"
+                        />
+                    </div>
+                </div>
+            </div>
+              
+            </div>
+
+        </section>
     );
 };
 
