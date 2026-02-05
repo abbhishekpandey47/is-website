@@ -39,7 +39,7 @@ Reddit Metrics That Move the Needle — Traffic, Upvotes, Trials
             </div>
             <div className='flex justify-center items-center'>
       <div className="max-w-7xl justify-center items-center mt-12">
-        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-6 bg-[#0D0A1A]/50 rounded-3xl p-6 md:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.45)] border border-[#F2F2F2] ">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-6 bg-[#0D0A1A]/50 rounded-3xl p-6 md:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.45)] border border-gray-700/50">
           {stats.map((stat, index) => (
             <div
               key={index}

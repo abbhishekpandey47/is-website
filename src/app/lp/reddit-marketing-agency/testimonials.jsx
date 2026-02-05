@@ -77,11 +77,11 @@ const highlightedQuote = (quote, highlights) => {
 };
 
 const TestimonialCard = ({ testimonial, variant = 'front', ctaClassName = '' }) => {
-    const variantStyles = variant === 'back' ? 'opacity-80 border-[#777777]' : 'opacity-100 border-white/70 border-[#777777]';
+    const variantStyles = variant === 'back' ? 'opacity-80 border-gray-700/50' : 'opacity-100 border-gray-700/50';
 
     return (
         <div
-            className={`w-full h-full relative ${variantStyles} rounded-[32px] overflow-hidden border border-white/10 ring-1 ring-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.25)]`}
+            className={`w-full h-full relative ${variantStyles} rounded-[32px] overflow-hidden border border-gray-700/50 ring-1 ring-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.25)]`}
         >
             <svg
                 className="absolute inset-0 w-full h-full pointer-events-none"
