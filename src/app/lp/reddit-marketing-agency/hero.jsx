@@ -11,15 +11,15 @@ const ContactPopupButton = dynamic(() => import("./ContactPopupButton"), {
 //   loading: () => <div className="h-8 w-80 bg-gray-700 rounded animate-pulse" />,
 // });
 
-// const TrustedMarquee = dynamic(() => import("./TrustedMarquee"), {
-//   loading: () => <div className="h-32 w-full bg-gray-700/30 rounded animate-pulse" />,
-// });
+const TrustedMarquee = dynamic(() => import("./TrustedMarquee"), {
+  loading: () => <div className="h-32 w-full bg-gray-700/30 rounded animate-pulse" />,
+});
 
 export default function AIStartupLanding() {
 
     return (
         <div
-            className="relative flex flex-col items-left justify-left px-6 pt-20 max-sm:pb-0"
+            className="relative flex flex-col items-left justify-left pt-20 max-sm:pb-0"
         //   style={{ background: "#171a3d" }}
 
         >
@@ -63,18 +63,9 @@ export default function AIStartupLanding() {
                 </div>
             </div>
 
-            {/* Trusted by Builders Section */}
-            <div className="w-full justify-center items-center flex flex-col pt-16 max-sm:pt-12 relative z-10">
-                
-                    <Image
-                        src="/reddit/client.svg"
-                        alt="Trusted by Builders at Innovative AI Startups"
-                        width={1200}
-                        height={350}
-                        priority={false}
-                        className="w-[75%] h-auto"
-                    />
-                </div>
+            <div className="w-full justify-center items-center flex flex-col pt-12 max-sm:pt-12 relative z-10">
+                    <TrustedMarquee />
+            </div>
 
         </div>
     );
