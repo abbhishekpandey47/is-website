@@ -23,7 +23,9 @@ When a user asks a research-driven question, Perplexity retrieves content from a
 * Technically accurate
 * Citation-worthy
 
-are far more likely to be referenced. So unlike SERP search results, keyword density plays a minimal role compared to structure, clarity, and credibility.
+are far more likely to be referenced. So unlike SERP search results, keyword density plays a minimal role compared to structure, clarity, and credibility.As shown in the image below, for example, we added the prompt “best shoe brands,” and Perplexity listed websites that are clear, technically accurate, and basically check in everything that makes them rank on LLM platforms like Perplexity. We will discuss all the strategies and tips in the sections below.
+
+![](/PostImages/how-to-rank-on-perplexity-ai/9.webp)
 
 For B2B SaaS early-stage startups, this means visibility depends on whether your developer content can be used as a source. To improve performance and track AI rankings on Perplexity, teams need to focus on how often and where their content is cited.
 
