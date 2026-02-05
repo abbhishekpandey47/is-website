@@ -37,13 +37,13 @@ const StartupHeroSection = () => {
             </div>
 
             <div className="flex justify-center mx-auto mt-10 w-full max-w-[1440px]">
-                <div className="w-full max-w-[1080px]">
-                    <div className="relative aspect-[1080/720] w-full">
+                <div className="w-full max-w-[1240px]">
+                    <div className="relative aspect-[1140/480] w-full">
                         <Image
                             src="/reddit/whoisthisfor.svg"
                             alt="Who this is for"
-                            width={1080}
-                            height={720}
+                            width={1140}
+                            height={540}
                             priority
                             fetchPriority="high"
                             className="h-full w-full object-contain"
