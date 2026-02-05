@@ -1,64 +1,55 @@
 import { Check, X } from 'lucide-react';
+import Image from 'next/image';
 
 export default function RedditMarketingSlide() {
-    const failurePoints = [
-        "Fresh accounts → instantly flagged",
-        "Posting links too early → removed by mods",
-        "Generic replies → ignored or downvoted",
-        "Crossposting → banned for spam",
-        "No upvotes → zero visibility"
-    ];
+  return (
+    <section className="relative overflow-hidden px-6 py-16 text-white md:px-12 lg:py-20">
+      <div className="absolute inset-0 opacity-50" aria-hidden>
+        <div className="absolute inset-0" />
+        <div className="absolute -left-24 top-20 h-[320px] w-[320px] rounded-full bg-gradient-to-br from-[#7629ff]/30 via-transparent to-transparent blur-[60px]" />
+        <div className="absolute right-16 top-16 h-[260px] w-[260px] rounded-full bg-gradient-to-br from-[#f97316]/30 via-transparent to-transparent blur-[80px]" />
+      </div>
 
-    const solutions = [
-        "Use aged, karma-rich accounts with history",
-        "Earn trust before mentioning your product",
-        "Write LLM-optimized, value-driven responses",
-        "Adapt tone to each subreddit’s culture",
-        "Focus on helpful content that gets upvoted naturally"
-    ];
-
-    return (
-        <div className=" text-white p-[2rem] md:p-[6rem] flex flex-col items-center justify-center md:-mt-16">
-            <div className="max-w-6xl w-full">
-                <div className="max-w-6xl mx-auto text-center relative z-10">
-                    <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] tracking-normal md:leading-[40px] text-white text-center flex justify-center mb-2">
-                        <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
-                            What We Learned Running Reddit for the Fastest-Growing
-                            {' '}
-                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">B2B Startups</span>
-                        </h2>
-                    </div>
-                    <div className="flex justify-center my-6 mb-10">
-                        <div className="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
-                    </div>
+      <div className="relative mx-auto flex w-full max-w-[1400px] flex-col gap-12 text-center">
+            <div className="max-w-6xl mx-auto text-center relative z-10">
+                <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
+                    <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
+                      What We Learned Running Reddit for the Fastest-Growing{' '}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>B2B Startups</span>
+                    </h2>
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-                    <div className="bg-[#270102] border-[1px] border-[#F87171] rounded-lg p-6">
-                        <h2 className="quicksand-semibold text-3xl font-semibold text-[#F87171] mb-6">What Fails</h2>
-                        <div className="space-y-6">
-                            {failurePoints.map((point, index) => (
-                                <div key={index} className="flex items-center gap-3">
-                                    <X style={{ stroke: '#F87171' }} size={20} />
-                                    <p className="text-[17px] md:text-[17px] text-[#ffffff] leading-none tracking-wide font-light">{point}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* How We Fix It Column */}
-                    <div className="bg-[#071e0b] border-[1px] border-[#28b837] rounded-lg p-6">
-                        <h2 className="quicksand-semibold text-3xl font-semibold text-[#28b837] mb-6">How we fix it</h2>
-                        <div className="space-y-6">
-                            {solutions.map((solution, index) => (
-                                <div key={index} className="flex items-center gap-3">
-                                    <Check style={{ stroke: '#28b837' }} size={20} />
-                                    <p className="text-[17px] md:text-[17px] text-[#ffffff] leading-none tracking-wide font-light">{solution}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                <div className="flex justify-center my-6 mb-8">
+                    <div className="w-[148px] h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600 rounded-full"></div>
                 </div>
             </div>
+
+        <div className="flex justify-center gap-8 md:gap-12 lg:gap-16">
+          <div className="">
+            <Image
+              src="/reddit/fails.svg"
+              alt="What fails: common Reddit marketing pitfalls"
+              width={550}
+              height={320}
+            //   fill
+              priority
+            //   sizes="(max-width: 1024px) 100vw, 540px"
+            //   className="object-cover"
+            />
+          </div>
+
+          <div className="">
+            <Image
+              src="/reddit/howwefix.svg"
+              alt="How we fix Reddit marketing"
+              width={550}
+              height={320}
+            //   fill
+              priority
+            //   sizes="(max-width: 1024px) 100vw, 540px"
+            //   className="object-cover"
+            />
+          </div>
         </div>
-    );
+      </div>
+    </section>
+  );
 }
