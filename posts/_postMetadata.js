@@ -1332,7 +1332,7 @@ let postMetaData = [
   ogImage: "/PostImages/how-to-rank-on-chatgpt/0.webp",
   publishedOn: "2025-11-27",
   authorId: "author0005",
-  category: "Informational",
+  category: "LLM Visiblity",
   metaDescription:
     "Learn how B2B SaaS brands can rank in ChatGPT and AI search. Boost LLM visibility with structured content, NLP optimization, internal linking, and trust signals. Read now",
 },
@@ -1567,7 +1567,7 @@ let postMetaData = [
     ogImage: "/PostImages/ai-visibility-audit/0.webp",
     publishedOn: "2026-01-17",
     authorId: "author0005",
-    category: "B2B SaaS- Content Marketing",
+    category: "LLM Visiblity",
     metaDescription: "Developer content can rank and still be invisible to AI. This AI visibility audit uncovers gaps in E-E-A-T, and crawlability that prevent LLMs from citing your content."
 },
 {
@@ -1686,7 +1686,7 @@ let postMetaData = [
     ogImage: "/PostImages/llm-visibility-analysis-tools/0.webp",
     publishedOn: "2026-02-01",
     authorId: "author0005",
-    category: "Informational",
+    category: "LLM Visiblity",
     metaDescription: "Learn how LLM visibility analysis tools work, which metrics matter, and how B2B SaaS teams improve AI search visibility beyond dashboards. Read now"
   },
 {
@@ -1697,8 +1697,19 @@ let postMetaData = [
     ogImage: "/PostImages/how-to-rank-on-perplexity-ai/0.webp",
     publishedOn: "2026-02-02",
     authorId: "author0005",
-    category: "Informational",
+    category: "LLM Visiblity",
     metaDescription: "Learn how to rank on Perplexity AI, how ranking works, and how to track AI rankings on Perplexity using proven content and visibility strategies. Read now"
+},
+{
+    title: "How to Rank in Gemini in 2026? (Best Strategies)",
+    metatitle: "How to Rank in Gemini Explained: Best Strategies",
+    slug: "rank-in-gemini-strategies",
+    description: "Google Gemini is changing how visibility works in search. Ranking \#1 on SERP is not enough when nearly 60% of searches end without a click and answers are delivered directly inside AI Overviews. For B2B SaaS startups, ranking in Gemini now means being cited, trusted, and reused by AI systems.",
+    ogImage: "/PostImages/rank-in-gemini-strategies/1.webp",
+    publishedOn: "2026-02-05",
+    authorId: "author0005",
+    category: "LLM Visiblity",
+    metaDescription: "Learn how to rank in Gemini in 2026\. A practical guide to SEO for Gemini, citations, E-E-A-T, schema, and visibility in AI Overviews. Click the link to read now\!"
 },
 ];
 
