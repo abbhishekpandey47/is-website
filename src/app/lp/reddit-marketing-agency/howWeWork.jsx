@@ -47,7 +47,7 @@ export default function AIChallengesSection() {
                         {challenges.map((challenge, index) => (
                             <div
                                 key={index}
-                                className="relative min-h-[340px] overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-[#0d0a1a]/90 via-[#110828]/90 to-[#0b0d1f]/90 p-8 text-white shadow-[0_25px_60px_rgba(0,0,0,0.45)] transition duration-300 hover:border-[#8b7ef9]/60"
+                                className="relative h-[15rem] w-[20rem] overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-b from-[#0d0a1a]/90 via-[#110828]/90 to-[#0b0d1f]/90 p-8 text-white shadow-[0_25px_60px_rgba(0,0,0,0.45)] transition duration-300 hover:border-[#8b7ef9]/60"
                             >
                                 <div className="absolute inset-0" aria-hidden>
                                     <div className="absolute inset-0 bg-gradient-to-br from-[#0d0a1a]/80 via-[#1e0f36]/70 to-[#0a0b1f]/80" />
@@ -67,10 +67,10 @@ export default function AIChallengesSection() {
                                     />
                                 </div>
                                 <div className="relative z-10 flex flex-col h-full justify-between">
-                                    <h3 className="text-xl font-semibold leading-tight tracking-normal text-white md:text-[22px]">
+                                    <h3 className="text-xl font-semibold leading-tight tracking-normal text-white md:text-[18px]">
                                         {challenge.title}
                                     </h3>
-                                    <p className="text-base leading-relaxed text-neutral-300">
+                                    <p className="text-xs leading-relaxed text-neutral-300">
                                         {challenge.description}
                                     </p>
                                 </div>

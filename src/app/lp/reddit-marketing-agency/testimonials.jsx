@@ -7,7 +7,7 @@ const testimonials = [
         quote:
             "Infrasity was quick to onboard and understand how to best show off the capabilities of Firefly's cloud asset management. Team has been super responsive and collaborative.",
         highlight: ['quick to onboard', 'responsive', 'collaborative'],
-        animate: true,
+        animate: false,
         caseStudyUrl: '/case-studies',
     },
     {
@@ -18,7 +18,7 @@ const testimonials = [
         quote:
             "Infrasity's creative content has significantly enhanced the visibility and appeal of our product in a competitive market. Crafting content that engages our audience and eloquently highlights the advanced capabilities of Kubiya.ai.",
         highlight: ['significantly enhanced the visibility and appeal of our product'],
-        animate: true,
+        animate: false,
         caseStudyUrl: '/case-studies/terrateam-case-study',
     },
     {
@@ -29,7 +29,7 @@ const testimonials = [
         quote:
             "Infrasity's experience in platform engineering and DevOps gave us confidence that they could translate our technical value into engaging content and videos.",
         highlight: ['platform engineering', 'engaging content'],
-        animate: true,
+        animate: false,
         caseStudyUrl: '/case-studies',
     },
     {
@@ -40,7 +40,7 @@ const testimonials = [
         quote:
             "Infrasity's work has improved the client's SEO, earning a score of over 75%. They've also enabled the client to onboard end customers faster. Moreover, the team listens to the client's content needs, produces work that aligns with their conversation and delivers output in a quick turnaround time.",
         highlight: ['over 75%', 'quick turnaround time'],
-        animate: true,
+        animate: false,
         caseStudyUrl: '/case-studies',
     },
     {
@@ -51,7 +51,7 @@ const testimonials = [
         quote:
             "Infrasity's ability to translate Cycloid's technical messaging into stories that sales and engineering teams could rally around was game changing.",
         highlight: ['technical messaging', 'game changing'],
-        animate: true,
+        animate: false,
         caseStudyUrl: '/case-studies',
     },
     {
@@ -62,7 +62,7 @@ const testimonials = [
         quote:
             "Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
         highlight: ['create deep', 'customers pain points'],
-        animate: true,
+        animate: false,
         caseStudyUrl: '/case-studies/case-study-series-a-cloud-developer-marketing',
     },
 ];
