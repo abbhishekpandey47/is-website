@@ -15,6 +15,17 @@ At the same time, being cited in an AI answer, especially in Google Gemini’s A
 
 In this blog, we’ll break down how ranking in Gemini works and why clicks are disappearing, some proven strategies that will help your B2B SaaS startup to rank in Gemini, including ongoing SEO, content structure, trust signals, and schema. Let’s begin.
 
+## **What is AI Citation?**
+
+AI citations are linked references to specific webpages or sources that AI systems like Google Gemini use to help generate or support a response.  These citations, as shown in the image below, directly influence how your B2B SaaS startup is represented, discovered, and trusted. 
+
+![](/PostImages/rank-in-gemini-strategies/6.webp)
+
+AI citations are important as they determine which sources models rely on when answering relevant prompts, and whose perspective gets amplified. These AI citations can impact your startup in 2 key ways:
+
+* **First-party citations** (citations that reference your own website or content) increase brand visibility, reinforce authority, and can direct qualified traffic back to your site. When Gemini pulls from your developer content, your startup becomes the default source of truth in that category.  
+* **Third-party citations** (citations that reference external websites) also affect your business, especially when those sources mention your product, competitors, or market positioning. Favorable third-party coverage can strengthen credibility, while competitor-dominated citations can dilute visibility.
+
 ## **How Does Ranking On Gemini Work?**
 
 Google Gemini is shifting search from a list of links to an answer-first experience. Instead of ranking pages alone, Google now uses Gemini to generate AI Overviews, synthesized answers built from multiple trusted sources and shown directly in search results.
@@ -25,17 +36,17 @@ When you rank in Gemini, your content isn’t just listed,  it’s used. Gemini 
 * Structuring content for extraction and reuse  
 * Showing up in AI-generated answers, not just blue links
 
-Take a look at the image below, an example of how if you add a prompt on Gemini, it will show you the content that is easier for it to crawl and come back to. We have added the prompt “top clothing brands” as a test and it gave us a list of content results that maintains the content structure, well-defined entities, and scannable formatting, making it easier for the model to understand, rank, and reference the information accurately.
+Take a look at the image below, an example of how if you add a prompt on Gemini, it will show you the content that is easier for it to crawl and come back to. We have added the prompt “best b2b saas agencies" as a test, and it gave us a list of content results that maintains the content structure, well-defined entities, and scannable formatting, making it easier for the model to understand, rank, and reference the information accurately.
 
 ![](/PostImages/rank-in-gemini-strategies/5.webp)
 
-For B2B SaaS teams, this means visibility at the moment buyers are researching and comparing tools,  often before they click any results.
+For B2B SaaS teams, this means visibility at the moment buyers are researching and comparing tools, often before they click any results.
 
 As AI Overviews expand, just the traffic alone is not enough. Startups that adapt early gain authority, influence, and consistent presence inside Gemini answers.
 
 ## CTA : Find Out How Gemini Sees Your Content
 
-## **Strategies to Rank in Gemini** 
+## **8 Strategies to Rank in Gemini**
 
 Gemini selects sources it can trust, extract, and confidently cite when answering real buyer and developer questions. The strategies below reflect how Gemini evaluates content across websites, documentation, and developer ecosystems.
 
@@ -92,6 +103,8 @@ Some of the best practices for content that ranks in Gemini:
 
 If Gemini can reuse your content with confidence, it’s far more likely to cite it. 
 
+![](/PostImages/rank-in-gemini-strategies/9.webp)
+
 ### **4\. Create Readable Tech Content**
 
 Content structure plays a major role in SEO for Gemini. Gemini processes pages in chunks, not as a continuous article, so structure determines extractability. To improve your startup’s Gemini rankings:
@@ -103,7 +116,7 @@ Content structure plays a major role in SEO for Gemini. Gemini processes pages i
 
 Well-structured content makes it easier for Gemini to parse, verify, and reuse your explanations. If not sure about how to create a readable structure of your developer content, your team can also [use free templates for the outlines](https://www.infrasity.com/templates/developer-content-and-guides-outline), as shown in the image below.
 
-![](/PostImages/rank-in-gemini-strategies/3.webp)
+![](/PostImages/how-to-rank-on-perplexity-ai/15.webp)
 
 ### **5\. Demonstrate E-E-A-T to Build Gemini Trust**
 
@@ -151,7 +164,28 @@ Content freshness and its maintenance are really important because Gemini aims t
 * Refresh examples, configurations, and tooling references  
 * Add new insights as products, standards, or workflows evolve
 
-Maintained content signals reliability and long-term trustworthiness.
+Content freshness and ongoing maintenance are critical because Gemini prioritizes current, low-risk, and reliable sources when generating responses. Outdated documentation, examples, or tooling references introduce uncertainty, something Gemini is explicitly designed to avoid when selecting content to surface or cite.
+
+One practical way to validate whether refreshed content is being picked up by Gemini is by monitoring Gemini referral traffic in your analytics. While this is a lagging indicator, it’s often the first measurable signal that your content is visible to Gemini-powered answers.
+
+The standard version of GA4 is free and can reveal referral traffic from Gemini answers, alongside other LLMs. Follow these simple steps to know how to:
+
+**Step 1**: Open up [**Google Analytics 4**](https://developers.google.com/analytics), navigate to your **Traffic Acquisition report**, and add “**Session source**” as a filter.
+
+![](/PostImages/rank-in-gemini-strategies/7.webp)
+
+**Step 2**: Select the “Matches regex” filter option and copy-paste something like the following (note: Update your inputs based on the sources you want to track):
+
+(?i)(.\*gemini.\* | .\*chatgpt.\* | .\*openai.\* | .\*claude.\* | .\*gpt.\* | .\*google.\* | .\*perplexity.\*)
+
+![](/PostImages/rank-in-gemini-strategies/8.webp)
+
+**Some best practices are:**
+
+* Review and update key content every 3-6 months  
+* Refresh examples, configurations, and tooling references  
+* Add new insights as products, standards, or workflows evolve  
+* Monitor LLM referral traffic after updates to understand how refreshed content performs in AI search surfaces
 
 ### **7\. Use Schema Markup to Remove Ambiguity**
 
@@ -235,7 +269,7 @@ Gemini favors content that directly answers a specific question, shows real-worl
 
 ### 4. **How do I know which pages Gemini trusts most from my site?**
 
-You can test queries manually, but this doesn’t scale. An LLM visibility audit helps identify which pages Gemini pulls from, which ones are ignored, and where content needs restructuring to improve citation likelihood.
+You can test queries manually, but this doesn’t scale. An [LLM visibility audit](https://www.infrasity.com/blog/ai-visibility-audit) helps identify which pages Gemini pulls from, which ones are ignored, and where content needs restructuring to improve citation likelihood.
 
 ### 5. **How often should I refresh content to rank in Gemini?**
 
