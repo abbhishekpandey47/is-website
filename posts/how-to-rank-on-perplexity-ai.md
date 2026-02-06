@@ -1,14 +1,14 @@
 ## **TL;DR**
 
-* Growth and marketing leaders struggle with a new visibility gapw which is that a product may rank on Google but remains invisible in AI systems like Perplexity AI, [ChatGPT](https://www.infrasity.com/blog/how-to-rank-on-chatgpt), Gemini answers, where modern buyers research and validate solutions.
-* Perplexity AI prioritizes clarity, technical depth, and credible sources over keywords, requiring content structured to be **citation-worthy** rather than just readable.
-* Best practices include competitor citation analysis, source-worthy technical content, structured formatting, natural language queries, semantic URLs, and publishing on developer-first platforms like GitHub and Medium.
-* Common mistakes that stop B2B SaaS startup to rank on Perplexity are optimizing for prompt phrasing, long, vague content, blocked crawlers, or relying solely on backlinks, which can prevent Perplexity visibility.
+* Growth and marketing leaders struggle with a new visibility gap: a product may rank on Google but remains invisible in AI systems like Perplexity AI, ChatGPT, and Gemini Answers, where modern buyers research and validate solutions.  
+* Perplexity AI prioritizes clarity, technical depth, and credible sources over keywords, requiring content structured to be **citation-worthy** rather than just readable.  
+* Best practices include competitor citation analysis, source-worthy technical content, structured formatting, natural language queries, semantic URLs, and publishing on developer-first platforms like GitHub and Medium.  
+* Common mistakes that stop B2B SaaS startup to rank on Perplexity are optimizing for prompt phrasing, long, vague content, blocked crawlers, or relying solely on backlinks, which can prevent Perplexity visibility.  
 * This blog explains how to rank on Perplexity AI, how visibility differs from traditional SEO, tips to optimize content, and how to track Perplexity AI rankings to turn citations into measurable growth.
 
 Growth and marketing leaders are facing a new visibility gap. Prospects no longer scroll search results because they ask Perplexity AI direct questions, trust the cited answers, and shortlist tools without ever visiting a SERP. If your content isn’t being cited, you’re invisible at the exact moment buying decisions are formed.
 
-This shift is happening fast. According to a recent study, Perplexity AI crossed [10 million monthly active users](%20https://www.similarweb.com/blog/insights/ai-news/perplexity-growth/) in 2024, driven largely by research-heavy users and decision-makers
+This shift is happening fast. According to a recent study, Perplexity AI crossed [10 million monthly active users](%20https://www.similarweb.com/blog/insights/ai-news/perplexity-growth/) in 2024, driven largely by research-heavy users and decision-makers  
 At the same time, [73% of B2B buyers now rely on self-serve research](https://www.gartner.com/en/marketing/insights/articles/b2b-buying-journey) before talking to sales, increasingly using AI tools to validate options. This is why growth teams are urgently trying to understand how to rank on Perplexity AI, how to rank in Perplexity, and how to track AI rankings on Perplexity using the right platform. Traditional SEO alone no longer guarantees visibility.
 
 In this blog, we break down how Perplexity AI generates and ranks answers, why Perplexity visibility has become so important for B2B SaaS startups, what content actually gets cited, common mistakes to avoid, and how to use a track Perplexity AI rankings platform to turn AI visibility into a repeatable growth channel. Read along to find out.
@@ -17,15 +17,21 @@ In this blog, we break down how Perplexity AI generates and ranks answers, why P
 
 Perplexity AI generates answers using a retrieval-augmented generation (RAG) system that pulls information from trusted sources and cites them directly. Understanding this is key if you want to learn how to rank on Perplexity or how to rank in Perplexity AI results.
 
-When a user asks a research-driven question, Perplexity retrieves content from across the web, including technical blogs, documentation, research articles, and authoritative publications, and then synthesizes an answer. Sources that are:
+**Example**: A code review platform was not visible in AI systems, let alone in Perplexity. Although the startup was ranking in SERP in “best AI code review tools”, it started to position itself in Reddit threads, which helped Perplexity to retrieve the code review platforms’ content.  Reddit served as a high-signal validation layer, helping Perplexity confirm that the platform was actively discussed and trusted by practitioners.
 
-* Clear
-* Technically accurate
-* Citation-worthy
-
-are far more likely to be referenced. So unlike SERP search results, keyword density plays a minimal role compared to structure, clarity, and credibility.As shown in the image below, for example, we added the prompt “best shoe brands,” and Perplexity listed websites that are clear, technically accurate, and basically check in everything that makes them rank on LLM platforms like Perplexity. We will discuss all the strategies and tips in the sections below.
+They also positioned their homepage around a code review platform from Quality-first AI code generation.  Reddit served as a high-signal validation layer, helping Perplexity confirm that the platform was actively discussed and trusted by practitioners. Take a look at the image below. When the prompt “top code review companies” was searched, this particular code review platform ranked on Perplexity’s list.
 
 ![](/PostImages/how-to-rank-on-perplexity-ai/9.webp)
+
+When a user asks a research-driven question, Perplexity retrieves content from across the web, including technical blogs, documentation, research articles, and authoritative publications, and then synthesizes an answer. It then selects sources that meet 3 criteria:
+
+* **Clear**: The content presents direct answers using simple language, strong structure, and scannable sections.  
+* **Technically accurate**: Explanations are factually correct, aligned with real-world workflows, and free of exaggerated claims.  
+* **Citation-worthy**: The page can stand alone as a reliable reference and often includes data, examples, or external sources.
+
+So unlike SERP search results, keyword density plays a minimal role compared to structure, clarity, and credibility. As shown in the image below, for example, we added the prompt “best AI visibility tracking tools,” and Perplexity listed websites that are clear, technically accurate, and basically check in everything that makes them rank on LLM platforms like Perplexity. We will discuss all the strategies and tips in the sections below.
+
+![](/PostImages/how-to-rank-on-perplexity-ai/10.webp)
 
 For B2B SaaS early-stage startups, this means visibility depends on whether your developer content can be used as a source. To improve performance and track AI rankings on Perplexity, teams need to focus on how often and where their content is cited.
 
@@ -33,122 +39,21 @@ For B2B SaaS early-stage startups, this means visibility depends on whether your
 
 For B2B SaaS startups, buying journeys increasingly start with research-heavy questions. Decision-makers use tools like Perplexity AI to compare platforms, understand technical trade-offs, and validate solutions. If your product isn’t cited in these answers, you’re invisible at the exact moment buyers are forming opinions. This is why understanding how to rank on Perplexity AI is becoming a growth priority.
 
-Take B2B SaaS startups like Stripe or Datadog. They consistently appear in AI-generated research answers because their content goes beyond marketing pages. Their blogs, documentation, and engineering explainers are detailed, structured, and written to educate, making them ideal sources for Perplexity to cite. Similarly, developer-first tools like Vercel and HashiCorp earn visibility because their technical docs clearly explain concepts, not just features.
+Take B2B SaaS startups like Stripe, Datadog, etc. They consistently appear in AI-generated research answers because their content goes beyond marketing pages. Their blogs, documentation, and engineering explainers are detailed, structured, and written to educate, making them ideal sources for Perplexity to cite. Similarly, developer-first tools like Vercel and HashiCorp earn visibility because their technical docs clearly explain concepts, not just features.
 
-For early-stage B2B SaaS startups, Perplexity visibility levels the playing field. You don’t need massive brand awareness; you only need source-worthy content. When your blog or docs are cited, your startup will gain instant credibility.
+For early-stage B2B SaaS startups, Perplexity visibility levels the playing field. You don’t need massive brand awareness; you only need source-worthy content. When your blog or docs are cited, your startup will gain instant credibility. 
 
 To scale this impact, your teams must also track AI rankings on Perplexity using a reliable platform, ensuring their content consistently appears where modern buyers are researching.
 
-## CTA : See how your content ranks in Perplexity
+**CTA- See how your content ranks in Perplexity** 
 
-## **How is Ranking on Perplexity Different from Search?**
+## **6 Tips to Help Rank on Perplexity AI**
 
-Traditional search tools show a list of pages ranked by signals like keywords, links, and performance. Answer engines work differently. They give one clear answer and show the sources behind it. The goal is not to send users browsing but it is to help them decide. Let’s see what has changed:
-
-### 1. **Clarity and Structure**
-
-Perplexity favors content that can be understood in seconds. If the answer is buried or poorly structured, it won’t be cited. Clear hierarchy, short sections, and direct answers make content reusable inside AI responses. What works:
-
-* Clear headings
-* Short paragraphs
-* Bullet points
-* Direct answers at the top of sections
-
-If Perplexity can’t quickly extract a clear answer, it won’t use the page. If you are not sure on the structure of the content, feel free to use Infrasity’s [outline template.](https://www.infrasity.com/templates/developer-content-and-guides-outline)
-
-![Sample Outline](/PostImages/how-to-rank-on-perplexity-ai/1.webp)
-
-### **2\. Authority and Accuracy**
-
-Perplexity evaluates whether the content demonstrates real subject mastery. Explanations must be accurate, consistent, and written to inform. Content designed to educate reliably outperforms content written to promote. This means:
-
-* Clear explanations
-* Evidence-backed claims
-* Consistent publishing on the same topic
-
-Content written to educate performs better than content written to promote.
-
-### **3\. Content Freshness**
-
-When multiple sources exist, Perplexity often chooses the most current one. Updated examples, tooling references, and workflows signal relevance and reliability, especially for technical and SaaS topics. To improve Perplexity visibility:
-
-* Refresh existing pages
-* Update data, examples, and tooling references
-* Keep explanations aligned with current workflows
-
-Freshness often decides which source Perplexity chooses when multiple options exist.
-
-### **4\. Semantic Relevance**
-
-Keywords alone are not enough. Perplexity AI looks for content that answers the **full intent** behind a question. Using natural language, related concepts, and clear question-answer formats helps the model understand relevance.
-
-For growth and marketing teams, this means visibility no longer depends on ranking a page. It depends on whether your content is clear, accurate, and useful enough to be cited as a source.
-
-### **5\. Use Structured Formatting**
-
-Perplexity extracts answers in chunks. Well-structured content with clear headings, lists, and tables makes it easier for the model to lift accurate sections without losing context. Best practices:
-
-* Clear H2 and H3 headings
-* Bullet points for explanations
-* Numbered lists for steps
-* Tables for comparisons
-
-Well-structured content increases the chance of being cited.
-
-### **6\. Link to Credible Sources**
-
-Pages that reference other reliable material are easier to trust. Linking to technical documentation, research, and industry reports strengthens verifiability and improves citation potential. Hyperlink to:
-
-* Technical documentation
-* Industry reports
-* Research studies
-
-![Credible Source Link](/PostImages/how-to-rank-on-perplexity-ai/2.webp)
-
-Add brief explanations around each link so the context is clear.
-
-### **7\. Add FAQs and Related Questions**
-
-Perplexity often builds answers step-by-step. FAQs help your content match follow-up questions, expand citation coverage, and appear across multiple prompts in a single topic area. Including FAQs improves your ability to:
-
-* Match conversational queries
-* Appear in multi-step answers
-* Increase citation coverage
-
-![FAQs](/PostImages/how-to-rank-on-perplexity-ai/3.webp)
-
-**Pro tip:** Add prompts from Profound AI or Peec AI and incorporate them in the FAQs of your developer content for more AI visibility. Keep answers short and written in natural language.
-
-### **8\. Refresh Content Regularly**
-
-AI visibility is not permanent. Regular reviews ensure explanations stay accurate and aligned with current tools and workflows, preventing silent drops in citation coverage. To maintain Perplexity AI visibility:
-
-* Review key pages quarterly
-* Update stats, examples, and tools
-* Adjust content to reflect current trends
-
-Updated content is more likely to be selected as a cited source.
-
-### **9\. Content Types That Perform Well on Perplexity AI**
-
-Formats that reduce decision friction outperform others. Step-by-step guides, clear comparisons, and expert breakdowns are consistently reused because they help users understand and decide faster.
-
-Some formats consistently perform better when trying to rank on Perplexity:
-
-* **How-to guides** with clear steps
-* **FAQ pages** that answer direct questions
-* **Comparisons** that explain trade-offs
-* **Expert explanations** that break down complex topics
-
-If your content helps users make a decision faster, Perplexity AI is more likely to surface it.
-
-## **7 Tips to Help Rank on Perplexity AI**
-
-![7 Tips to Help Rank in Perplexity AI](/PostImages/how-to-rank-on-perplexity-ai/4.webp)
+![6 Tips to Help Rank on Perplexity AI](/PostImages/how-to-rank-on-perplexity-ai/11.webp)
 
 Perplexity AI selects answers based on how easily it can extract, verify, and cite information. If your content cannot be reused confidently, it won’t be surfaced, no matter how good it looks on traditional search.
 
-### **1\. Do Competitor Citation Analysis**
+### **1\. Do Competitor Citation Analysis** 
 
 Before creating new content, you need to understand what Perplexity already considers reliable. This tells you which sources are winning visibility today and sets the baseline you need to beat.
 
@@ -156,75 +61,139 @@ Search your priority queries directly in Perplexity and study the cited sources.
 
 **How to approach it:**
 
-* Identify competitors repeatedly cited for your core queries
-* Analyze content depth, structure, and format
+* Identify competitors repeatedly cited for your core queries  
+* Analyze content depth, structure, and format  
 * Create content that fills gaps, adds technical clarity, or answers missed questions
 
 Perplexity favors content that solves the full problem in one place.
 
-### **2\. Create Source-Worthy Technical Content**
+### **2\. How to Write Content that Ranks on Perplexity**
 
 Perplexity does not reward long-form content unless it clearly explains outcomes. Content must explain what changes for the reader and do so in a format that can be easily reused in an AI-generated answer. If the benefit is not obvious within seconds, Perplexity will move on.
 
 **What works best:**
 
-* Clear explanations tied to outcomes
-* Short paragraphs and focused sections
+* Clear explanations tied to outcomes  
+* Short paragraphs and focused sections  
 * Direct answers early in each section
 
-### **3\. Structure Content for Research Queries**
+### **3\. Write in Natural, Question-Based Language**
 
-Structure determines whether your content can be extracted at all. Perplexity scans content in chunks, not as a full article. Use formatting that helps it lift clean excerpts without losing meaning. Some of the best practices to developer a structured piece of content are**:**
+Perplexity is built around how people naturally ask questions. Content written in promotional language is harder for the model to match with real queries. Your goal should be to mirror how users phrase problems during research. What you need to do:
 
-* 3-4 line paragraphs
-* Clear H2 and H3 hierarchy
-* Bullet points and numbered steps
-* Tables for comparisons and specifications
-
-### **4\. Write in Natural, Question-Based Language**
-
-Perplexity is built around how people naturally ask questions. Content written in rigid or promotional language is harder for the model to match with real queries.
-
-Your goal is to mirror how users phrase problems during research. What to do:
-
-* Use question-style headings
-* Include multiple phrasings of the same concept
+* Use question-style headings  
+* Include multiple phrasings of the same concept  
 * Answer directly, without filler or positioning language
 
-### **5\. Use Semantic, Clean URL Structures**
+Take a look at the image below. The queries use natural language and are question-based.   
+![](/PostImages/how-to-rank-on-perplexity-ai/13.webp)
 
-URLs help Perplexity understand context. Follow these rules:
+### **4\. Use Semantic & Clean URL Structures**
 
-* Use human-readable URLs
-   (e.g. `/ai-search/perplexity-ranking-factors`)
-* Include the primary keyword
+URLs help Perplexity understand context, and if you want your content to be used by Perplexity, follow these simple rules:
+
+* Use human-readable URLs  
+   (e.g. `/ai-search/perplexity-ranking-factors`)  
+* Include the primary/focus keyword  
 * Match URL hierarchy to content structure
 
 Clear URLs reinforce topical relevance and improve discoverability.
 
-### **6\. Publish Where Perplexity Actually Pulls From**
+### **5\. Publish Where Perplexity Pulls From**
 
-Perplexity does not rely only on websites. It consistently pulls from developer-first platforms and high-signal technical surfaces where real problem-solving happens. If your content only lives on your site, you’re limiting where Perplexity can discover and validate it.
+Perplexity does not rely only on websites, and it consistently pulls content from developer-first platforms and high-signal technical surfaces where real problem-solving happens. If your content only lives on your site, you’re limiting where Perplexity can discover and validate it.
 
-**High-impact surfaces include:**
+**These high-impact surfaces include:**
 
-* Technical blogs and documentation
-* Medium and dev-focused publishing platforms
-* GitHub discussions and READMEs
+* Technical blogs and documentation  
+* Medium and dev-focused publishing platforms  
+* GitHub discussions and READMEs  
 * Reddit threads that explain real-world use cases
 
 Publishing and syndicating technical content across these channels increases the chance that Perplexity encounters, evaluates, and cites it.
 
-### **7\. Author Identity & Technical Credibility**
+### **6\. Authority & Technical Credibility**
 
 Perplexity favors content that is clearly written by someone who understands the topic deeply. Anonymous or generic author pages reduce trust signals. Strong author identity helps Perplexity assess whether the content is reliable enough to cite. What improves credibility:
 
-* Clear author attribution
-* Technical background or role listed
-* Links to previous writing or profiles
+* Clear author bio 
+
+![](/PostImages/how-to-rank-on-perplexity-ai/14.webp)
+
+* Links to previous writing or profiles  
 * Consistent publishing on related topics
 
 Content written by people with hands-on experience is more likely to be referenced in Perplexity answers.
+
+## **How is Ranking on Perplexity Different from Search?**
+
+Traditional search tools show a list of pages ranked by signals like keywords, links, and performance. Answer engines work differently. They give one clear answer and show the sources behind it. The goal is not to send users browsing but it is to help them decide. Let’s see what has changed:
+
+### **1\. Clarity and Structure**
+
+Perplexity favors content that can be understood in seconds. If the answer is buried or poorly structured, it won’t be cited. Clear hierarchy, short sections, and direct answers make content reusable inside AI responses. Well-structured content with clear headings, lists, and tables makes it easier for the model to lift accurate sections without losing context. Best practices:
+
+What works:
+
+* Clear headings like H1, H2, H2, H4, etc  
+* Short paragraphs  
+* Bullet points for explanations  
+* Direct answers at the top of sections  
+* Numbered lists for steps  
+* Tables for comparisons
+
+Perplexity AI looks for content that answers the full intent behind a question. Using natural language, related concepts, and clear question-answer formats helps the model understand relevance. For growth and marketing teams, this means that visibility no longer depends on ranking a page but on whether your content is clear, accurate, and useful enough to be cited as a source. 
+
+If Perplexity can’t quickly extract a clear answer, it won’t use the page. If you are not sure of the structure of the content, feel free to use Infrasity’s [outline template.](https://www.infrasity.com/templates/developer-content-and-guides-outline)
+
+![](/PostImages/how-to-rank-on-perplexity-ai/15.webp)
+
+### **2\. Content Freshness**
+
+When multiple sources exist, Perplexity often chooses the most current one. Updated examples, tooling references, and workflows signal relevance and reliability, especially for technical and SaaS topics. To improve Perplexity visibility:
+
+* Refresh existing pages  
+* Update data, examples, and tooling references  
+* Keep explanations aligned with current workflows
+
+Freshness often decides which source Perplexity chooses when multiple options exist. Updated content is more likely to be selected as a cited source. For example, regularly updating content will help your startup appear on lists like Perplexity.
+
+### **4\. Link to Credible Sources**
+
+Pages that reference other reliable material are easier to trust. Linking to technical documentation, research, and industry reports strengthens verifiability and improves citation potential. Hyperlink your content to:
+
+* Technical documentation  
+* Industry reports  
+* Research studies
+
+![](/PostImages/how-to-rank-on-perplexity-ai/16.webp)
+
+Add brief explanations around each link so the context is clear.
+
+### **6\. Add Query-Based and Related Questions**
+
+Perplexity often builds answers step-by-step. FAQs help your content match follow-up questions, expand citation coverage, and appear across multiple prompts in a single topic area. Including FAQs improves your ability to:
+
+* Match conversational queries  
+* Appear in multi-step answers  
+* Increase citation coverage
+
+![](/PostImages/how-to-rank-on-perplexity-ai/17.webp)
+
+**Pro tip:** Add prompts from Profound AI or Peec AI and incorporate them in the FAQs of your developer content for more AI visibility. Keep answers short and written in natural language.
+
+### **7. Content Types That Perform Well on Perplexity AI**
+
+Formats that reduce decision friction outperform others. Step-by-step guides, clear comparisons, and expert breakdowns are consistently reused because they help users understand and decide faster.
+
+Some formats consistently perform better when trying to rank on Perplexity:
+
+* **How-to guides** with clear steps  
+* **FAQ pages** that answer direct questions  
+* **Comparisons** that explain trade-offs  
+* **Expert explanations** that break down complex topics
+
+If your content helps users make a decision faster, Perplexity AI is more likely to surface it.
 
 ## **Common Mistakes That Prevent Your B2B SaaS Startups from Ranking on Perplexity**
 
@@ -291,7 +260,7 @@ This closes the loop between analysis, content, and measurable AI visibility gai
 
 B2B SaaS growth and marketing leaders face a new challenge: being visible where buyers actually research, AI answer engines like Perplexity AI. Unlike traditional search engines, Perplexity provides direct answers and cites sources it trusts, meaning content must be clear, accurate, structured, and technically credible to be referenced. Simply optimizing for keywords no longer guarantees visibility.
 
-To know how to rank on Perplexity AI, teams should start with competitor citation analysis, produce source-worthy technical content, format for research queries, write in natural question-based language, and ensure semantic URLs.
+To know how to rank on Perplexity AI, teams should start with competitor citation analysis, produce source-worthy technical content, format for research queries, write in natural question-based language, and ensure semantic URLs. 
 
 Publishing on developer-focused platforms and building author credibility further increases citation chances. Avoid common mistakes such as chasing prompt phrasing, publishing vague, uncited content, blocking crawlers, or relying solely on backlinks.
 
