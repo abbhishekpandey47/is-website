@@ -38,24 +38,19 @@ Reddit Metrics That Move the Needle — Traffic, Upvotes, Trials
                 </div>
             </div>
             <div className='flex justify-center items-center'>
-      <div className="max-w-7xl justify-center items-center">
-        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-6">
+      <div className="max-w-7xl justify-center items-center mt-12">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-6 bg-[#0D0A1A]/50 rounded-3xl p-6 md:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.45)] border border-gray-700/50">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="text-center bg-[#2b2a2aa8] py-6 rounded-2xl group hover:scale-105 transition-transform duration-300"
-              style={{
-background: "radial-gradient(ellipse at bottom center, rgba(255, 255, 255, 0.2) 5%, rgba(17, 17, 17, 0.4) 60%, rgba(17, 17, 17, 0.6) 100%)",
-                                border: "1.5px solid #2b2a2aa8",
-                                transition: "all 0.3s ease",
-                            }}
+              className="text-center py-6"
             >
               <div className="mb-3">
-                <span className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl quicksand-bold text-white tracking-tight">
+                <span className="text-4xl sm:text-5xl lg:text-7xl xl:text-7xl font-weight-[400] text-white tracking-tight">
                   {stat.number}
                 </span>
               </div>
-              <p className="font-[quicksand] text-sm sm:text-base lg:text-lg text-gray-400 font-medium leading-tight">
+              <p className="text-[16px] text-[#F2F2F2] leading-tight">
                 {stat.label}
               </p>
             </div>

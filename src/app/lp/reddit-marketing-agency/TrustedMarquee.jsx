@@ -15,42 +15,56 @@ export default function TrustedMarquee() {
     }, []);
 
     const memoizedLogos = useMemo(() => logoFiles, []);
+    const logoRows = useMemo(() => {
+        const firstRow = [];
+        const secondRow = [];
+        memoizedLogos.forEach((logo, index) => {
+            if (index % 2 === 0) {
+                firstRow.push(logo);
+            } else {
+                secondRow.push(logo);
+            }
+        });
+        return [firstRow, secondRow];
+    }, [memoizedLogos]);
 
     return (
         <div
-            className="w-[100%] pt-8 pb-1 max-sm:pt-4"
-            style={{
-                backgroundColor: "#171a3d",
-                backgroundImage: `radial-gradient(circle at top right, #090d1a 0%, transparent 30%)`,
-                border: "1.5px solid rgba(45, 51, 71, 1)",
-                borderRadius: "16px",
-                zIndex: 0,
-            }}
+            className="relative w-full pt-10 pb-8 max-sm:pt-6"
         >
-            <h2 className="text-center pb-1 text-white quicksand-bold text-2xl max-sm:text-xl max-sm:px-4">
-                Trusted by Builders at Innovative AI Startups
-            </h2>
-            <Marquee
-                className="motion-reduce:overflow-auto"
-                innerClassName="motion-reduce:animate-none"
-            >
-                <div className="flex gap-20 max-sm:gap-10 items-center mx-4">
-                    {memoizedLogos.map((logoFile, idx) => {
-                        return (
-                            <div key={idx} className="mix-blend-color-burn">
-                                <Image
-                                    loading="lazy"
-                                    width={160}
-                                    height={80}
-                                    className={`${getLogoPadding(logoFile)} object-contain opacity-90`}
-                                    src={`/trustedby-bw/bw/${logoFile}`}
-                                    alt="Company Logo"
-                                />
-                            </div>
-                        );
-                    })}
+             <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
+                    <h3 className=" md:leading-[40px] text-center max-lg:text-center max-lg:mx-auto">
+                        Trusted by Builders at {" "}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>Innovative AI Startups</span>
+                    </h3>
                 </div>
-            </Marquee>
+            <div className="space-y-6 mt-6">
+                {logoRows.map((row, rowIndex) => (
+                    <Marquee
+                        key={rowIndex}
+                        className="motion-reduce:overflow-auto"
+                        innerClassName="motion-reduce:animate-none"
+                        reverse={rowIndex % 2 === 1}
+                    >
+                        <div className="flex gap-6 items-center mx-4">
+                            {row.map((logoFile, idx) => (
+                                <div
+                                    key={`${logoFile}-${idx}`}
+                                    className="flex items-center justify-center rounded-full border border-white/10 bg-[linear-gradient(135deg,_#1b1530,_#2a1b47)] h-[56px] px-6"
+                                >
+                                    <Image
+                                        loading="lazy"
+                                        width={140}
+                                        height={40}
+                                        className={`${getLogoPadding(logoFile)} object-contain opacity-100`}
+                                        src={`/trustedby-bw/bw/${logoFile}`}
+                                        alt="Company Logo"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </Marquee>
+                ))}
+            </div>
         </div>
     );
 }
