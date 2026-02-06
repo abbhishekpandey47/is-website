@@ -30,6 +30,7 @@ export default function AIStartupLanding() {
                     alt="Reddit Background"
                     fill
                     priority
+                    fetchPriority="high"
                     className="object-cover object-center"
                 />
             </div>

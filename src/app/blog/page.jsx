@@ -33,6 +33,7 @@ import postMetaData from "../../../posts/_postMetadata";
 let tabs = [
   { id: "allCategories", label: "All Categories" },
   { id: "Informational", label: "Informational" },
+  {id:"LLM Visiblity" , label:"LLM Visiblity"},
   { id: "B2B SaaS- Content Marketing", label: "B2B SaaS- Content Marketing" },
   { id: "B2B SaaS Growth & GTM", label: "B2B SaaS Growth & GTM" },
   { id: "Reddit Marketing B2B SaaS", label: "Reddit Marketing B2B SaaS" },
@@ -40,7 +41,6 @@ let tabs = [
   { id: "Developer Marketing", label: "Developer Marketing" },
   {id : "Product Documentation", label : "Product Documentation"},
   {id:"Community Engagement", label:"Community Engagement"},
-  {id:"LLM Visiblity" , label:"LLM Visiblity"}
 
 ];
 
