@@ -3,7 +3,8 @@ const testimonials = [
         id: 1,
         name: 'Cindy Blake',
         imageUrl: '/Testimon/cindyFirefly.jpg',
-        title: 'VP Marketing, Firefly.ai',
+        title: 'VP Marketing',
+        company: 'Firefly.ai',
         quote:
             "Infrasity was quick to onboard and understand how to best show off the capabilities of Firefly's cloud asset management. Team has been super responsive and collaborative.",
         highlight: ['quick to onboard', 'responsive', 'collaborative'],
@@ -14,7 +15,8 @@ const testimonials = [
         id: 2,
         name: 'Josh',
         imageUrl: '/Testimon/joshTerraTeam.jpg',
-        title: 'Co-Founder, Terrateam',
+        title: 'Co-Founder',
+        company: 'Terrateam',
         quote:
             "Infrasity's creative content has significantly enhanced the visibility and appeal of our product in a competitive market. Crafting content that engages our audience and eloquently highlights the advanced capabilities of Kubiya.ai.",
         highlight: ['significantly enhanced the visibility and appeal of our product'],
@@ -25,7 +27,8 @@ const testimonials = [
         id: 3,
         name: 'Shaked Askayo',
         imageUrl: '/Testimon/Shaked.png',
-        title: 'CTO, Kubiya.ai',
+        title: 'CTO',
+        company: 'Kubiya.ai',
         quote:
             "Infrasity's experience in platform engineering and DevOps gave us confidence that they could translate our technical value into engaging content and videos.",
         highlight: ['platform engineering', 'engaging content'],
@@ -36,7 +39,8 @@ const testimonials = [
         id: 4,
         name: 'Frank Weissmann',
         imageUrl: '/Testimon/Frank.jpg',
-        title: 'Customer Success Lead, Firefly.ai',
+        title: 'Customer Success Lead',
+        company:'Firefly.ai',
         quote:
             "Infrasity's work has improved the client's SEO, earning a score of over 75%. They've also enabled the client to onboard end customers faster. Moreover, the team listens to the client's content needs, produces work that aligns with their conversation and delivers output in a quick turnaround time.",
         highlight: ['over 75%', 'quick turnaround time'],
@@ -47,7 +51,8 @@ const testimonials = [
         id: 5,
         name: 'Ben Hewison',
         imageUrl: '/playbook/cycloid.png',
-        title: 'Content Marketing Manager, Cycloid',
+        title: 'Content Marketing Manager',
+        company: 'Cycloid',
         quote:
             "Infrasity's ability to translate Cycloid's technical messaging into stories that sales and engineering teams could rally around was game changing.",
         highlight: ['technical messaging', 'game changing'],
@@ -58,7 +63,8 @@ const testimonials = [
         id: 6,
         name: 'Idoo Neeman',
         imageUrl: '/playbook/firefly.png',
-        title: 'Co-Founder and CEO, Firefly.ai',
+        title: 'Co-Founder and CEO',
+        company: 'Firefly.ai',
         quote:
             "Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
         highlight: ['create deep', 'customers pain points'],
@@ -147,7 +153,7 @@ const TestimonialCard = ({ testimonial, variant = 'front', ctaClassName = '' }) 
             {variant === 'front' ? (
                 <div className="relative z-10 w-full h-full px-8 py-10 flex flex-col justify-between">
                     <p
-                        className="text-sm leading-relaxed text-[#DAD1F1]"
+                        className="text-sm leading-relaxed text-[#DAD1F1] text-left"
                         dangerouslySetInnerHTML={{ __html: highlightedQuote(testimonial.quote, testimonial.highlight) }}
                     />
                     <div className="flex items-center gap-4">
@@ -159,6 +165,7 @@ const TestimonialCard = ({ testimonial, variant = 'front', ctaClassName = '' }) 
                         <div className="flex flex-col items-start">
                             <p className="text-white font-bold text-sm leading-tight">{testimonial.name}</p>
                             <p className="text-xs text-gray-400 leading-snug">{testimonial.title}</p>
+                            <p className="text-xs text-gray-400 leading-snug">{testimonial.company}</p>
                         </div>
                     </div>
                 </div>
