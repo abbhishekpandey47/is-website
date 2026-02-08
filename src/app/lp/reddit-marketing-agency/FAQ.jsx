@@ -91,9 +91,8 @@ const faqData = [
     },
 ];
 
-const FAQSection = () => {
+const FAQSection = ({faqsData=faqData}) => {
     const [openItem, setOpenItem] = useState(null);
-
     const toggleAccordion = (id) => {
         setOpenItem(openItem === id ? null : id);
     };
@@ -136,7 +135,7 @@ const FAQSection = () => {
                     {/* Right column with accordion FAQs */}
                     <div className="flex justify-center">
                         <div className="w-[80%] flex flex-col gap-4">
-                            {faqData.map((faq) => (
+                            {faqsData.map((faq) => (
                                 <AccordionItem
                                     key={faq.id}
                                     id={faq.id}

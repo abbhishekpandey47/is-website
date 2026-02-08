@@ -1,205 +1,140 @@
 "use client";
 
-import Image from 'next/image';
-import { Search, BarChart3, Map, Rocket, LineChart } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+const backgroundPatterns = {
+  card: "url(\"data:image/svg+xml,%3Csvg%20width%3D%27410%27%20height%3D%27449%27%20viewBox%3D%270%200%20410%20449%27%20fill%3D%27none%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cg%20clip-path%3D%27url(%23clip0_195_6855)%27%3E%3Crect%20width%3D%27410%27%20height%3D%27449%27%20rx%3D%2722.948%27%20fill%3D%27%230E0B1B%27%2F%3E%3Cg%20opacity%3D%270.5%27%20filter%3D%27url(%23filter0_f_195_6855)%27%3E%3Crect%20width%3D%27459.819%27%20height%3D%27384.712%27%20transform%3D%27matrix(-0.79866%20-0.601782%20-0.601782%200.79866%20634.551%20289.562)%27%20fill%3D%27url(%23paint0_linear_195_6855)%27%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter%20id%3D%27filter0_f_195_6855%27%20x%3D%27-57.2498%27%20y%3D%27-80.1976%27%20width%3D%27784.849%27%20height%3D%27770.063%27%20filterUnits%3D%27userSpaceOnUse%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeFlood%20flood-opacity%3D%270%27%20result%3D%27BackgroundImageFix%27%2F%3E%3CfeBlend%20mode%3D%27normal%27%20in%3D%27SourceGraphic%27%20in2%3D%27BackgroundImageFix%27%20result%3D%27shape%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%2746.5243%27%20result%3D%27effect1_foregroundBlur_195_6855%27%2F%3E%3C%2Ffilter%3E%3ClinearGradient%20id%3D%27paint0_linear_195_6855%27%20x1%3D%27459.819%27%20y1%3D%271.69576e-05%27%20x2%3D%27-70.9646%27%20y2%3D%27196.769%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20stop-color%3D%27%230D0A1A%27%2F%3E%3Cstop%20offset%3D%270.716097%27%20stop-color%3D%27%23473B79%27%20stop-opacity%3D%270.8%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%239B91C6%27%20stop-opacity%3D%270.8%27%2F%3E%3C%2FlinearGradient%3E%3CclipPath%20id%3D%27clip0_195_6855%27%3E%3Crect%20width%3D%27410%27%20height%3D%27449%27%20rx%3D%2722.948%27%20fill%3D%27white%27%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3C%2Fsvg%3E\")",
+  cardWide: "url(\"data:image/svg+xml,%3Csvg%20width%3D%27729%27%20height%3D%27450%27%20viewBox%3D%270%200%20729%20450%27%20fill%3D%27none%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cg%20clip-path%3D%27url(%23clip0_195_6843)%27%3E%3Crect%20width%3D%27729%27%20height%3D%27450%27%20rx%3D%2722.948%27%20fill%3D%27%230E0B1B%27%2F%3E%3Cg%20opacity%3D%270.5%27%20filter%3D%27url(%23filter0_f_195_6843)%27%3E%3Crect%20x%3D%27573.052%27%20y%3D%27230.149%27%20width%3D%27459.819%27%20height%3D%27384.712%27%20transform%3D%27rotate(143.002%20573.052%20230.149)%27%20fill%3D%27url(%23paint0_linear_195_6843)%27%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter%20id%3D%27filter0_f_195_6843%27%20x%3D%27-118.749%27%20y%3D%27-170.154%27%20width%3D%27784.849%27%20height%3D%27770.063%27%20filterUnits%3D%27userSpaceOnUse%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeFlood%20flood-opacity%3D%270%27%20result%3D%27BackgroundImageFix%27%2F%3E%3CfeBlend%20mode%3D%27normal%27%20in%3D%27SourceGraphic%27%20in2%3D%27BackgroundImageFix%27%20result%3D%27shape%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%2746.5243%27%20result%3D%27effect1_foregroundBlur_195_6843%27%2F%3E%3C%2Ffilter%3E%3ClinearGradient%20id%3D%27paint0_linear_195_6843%27%20x1%3D%271032.87%27%20y1%3D%27230.149%27%20x2%3D%27502.087%27%20y2%3D%27426.918%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20stop-color%3D%27%230D0A1A%27%2F%3E%3Cstop%20offset%3D%270.716097%27%20stop-color%3D%27%23473B79%27%20stop-opacity%3D%270.8%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%239B91C6%27%20stop-opacity%3D%270.8%27%2F%3E%3C%2FlinearGradient%3E%3CclipPath%20id%3D%27clip0_195_6843%27%3E%3Crect%20width%3D%27729%27%20height%3D%27450%27%20rx%3D%2722.948%27%20fill%3D%27white%27%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3C%2Fsvg%3E\")",
+};
 
-const heroImage = 'https://framerusercontent.com/images/aootIzwv3wiOmpUg9vnbUWVqA1U.png';
-
-const timelineSteps = [
+const defaultCards = [
   {
-    title: 'Baseline how AI systems currently discover your product',
+    title: 'LLM Search Engine Optimization',
     description:
-      'We benchmark how much traffic you currently receive from AI search tools like ChatGPT, Perplexity, and Claude, and how that traffic converts.',
-    icon: Search,
+      'We built a proprietary LLM-Readiness Checklist that audits every page for clarity, structure, and factual accuracy—so AI engines understand, trust, and recommend your content.',
+    img: '/aeo/1.svg',
+    gridSpan: 'md:col-span-5',
+    background: 'card',
+    backgroundPosition: 'center',
+    imageClassName: 'object-top',
+    overlayImage: '/aeo/3.1.svg',
   },
   {
-    title: 'Find where AI answers default to competitors',
-    description:
-      'We evaluate your categories and priority keywords to show where you’re visible today and where competitors are winning.',
-    icon: BarChart3,
+    title: 'AI Overview Visibility',
+    description: 'We optimize your content for Google AI Overviews, expanding visibility across search and AI.',
+    img: '/aeo/2.svg',
+    gridSpan: 'md:col-span-3',
+    background: 'card',
+    backgroundPosition: 'center',
+    imageClassName: 'object-bottom',
+    overlayImage: '/aeo/3.2.svg',
   },
   {
-    title: 'See which of your technical assets AI actually pulls from',
+    title: 'High Intent Content Creation',
     description:
-      'We reveal which pages perform best on which LLMs and how optimizing those pages will create the biggest lift.',
-    icon: Map,
+      'We answer real buying questions so AI recommends your brand when customers are ready to decide.',
+    img: '/aeo/3.svg',
+    gridSpan: 'md:col-span-4',
+    background: 'cardWide',
+    backgroundPosition: 'top',
+    imageClassName: 'object-center',
+    overlayImage: '/aeo/3.3.svg',
   },
   {
-    title: 'Identify the developer surfaces that need intervention',
-    description:
-      'We identify the sites, sources, and citations that LLMs rely on, showing where your brand is already mentioned—and where it’s missing.',
-    icon: Rocket,
+    title: 'Backlink Building',
+    description: 'Trusted backlinks that make Google and LLMs recognize and cite your brand.',
+    img: '/aeo/4.svg',
+    gridSpan: 'md:col-span-3',
+    background: 'cardWide',
+    backgroundPosition: 'top',
+    imageClassName: 'object-top',
+    overlayImage: '/aeo/3.4.svg',
   },
   {
-    title: 'Execute a source-led technical content and distribution plan',
+    title: 'SEO Reporting & Analytics',
     description:
-      'We walk you through the findings in a strategy call and provide a step-by-step roadmap to improve your AI search visibility.',
-    icon: LineChart,
+      'Transparent reporting across rankings, AI Overviews, and LLM visibility—showing exactly what’s working and what’s next.',
+    img: '/aeo/5.svg',
+    gridSpan: 'md:col-span-4',
+    background: 'card',
+    backgroundPosition: 'center',
+    imageClassName: 'object-top',
+    overlayImage: '/aeo/3.5.svg',
+  },
+  {
+    title: 'Conversion Rate Optimization',
+    description:
+      'We design buyer journeys that turn clicks and AI mentions into conversions—handling UX, technical audits, and landing pages so traffic becomes revenue.',
+    img: '/aeo/6.svg',
+    gridSpan: 'md:col-span-5',
+    background: 'card',
+    backgroundPosition: 'center',
+    imageClassName: 'object-bottom',
+    overlayImage: '/aeo/3.6.svg',
   },
 ];
 
-const TimelineStep = ({
-  stepNumber,
-  title,
-  description,
-  icon: Icon,
-  isLast = false,
-  delay = 0,
-}) => {
-  const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.25 });
-
+export default function ThirdSection({ cards = defaultCards }) {
   return (
-    <div ref={ref} className="relative flex gap-6 md:gap-10">
-      <div className="flex flex-col items-center">
-        <div
-          className={cn(
-            'relative z-10 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center',
-            'border border-primary/30 bg-gradient-to-br from-primary/20 to-secondary/20',
-            'opacity-0 scale-75 transition-all duration-700',
-            isIntersecting && 'opacity-100 scale-100'
-          )}
-          style={{ transitionDelay: `${delay}ms` }}
-        >
-          <div
-            className={cn(
-              'absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-1000',
-              isIntersecting && 'opacity-100 animate-glow-pulse'
-            )}
-            style={{ transitionDelay: `${delay + 200}ms` }}
-          />
-          <Icon
-            className={cn(
-              'w-6 h-6 md:w-7 md:h-7 text-primary transition-all duration-500',
-              isIntersecting && 'text-secondary'
-            )}
-            style={{ transitionDelay: `${delay + 300}ms` }}
-          />
-          <div
-            className={cn(
-              'absolute -top-2 -right-2 w-6 h-6 rounded-full',
-              'from-primary to-secondary bg-gradient-to-r text-primary-foreground font-bold',
-              'flex items-center justify-center text-xs opacity-0 scale-0 transition-all duration-500',
-              isIntersecting && 'opacity-100 scale-100'
-            )}
-            style={{ transitionDelay: `${delay + 400}ms` }}
-          >
-            {stepNumber}
-          </div>
-        </div>
-
-        {!isLast && (
-          <div className="relative w-px flex-1 min-h-[80px]">
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-secondary/20 to-transparent" />
-            <div
-              className={cn(
-                'absolute top-0 left-0 w-full bg-gradient-to-b from-primary to-secondary',
-                'origin-top scale-y-0 transition-transform duration-1000 ease-out',
-                isIntersecting && 'scale-y-100'
-              )}
-              style={{ height: '100%', transitionDelay: `${delay + 500}ms` }}
-            />
-            <div
-              className={cn(
-                'absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full',
-                'bg-secondary shadow-[0_0_10px_hsl(var(--secondary))]',
-                'opacity-0 transition-opacity duration-300',
-                isIntersecting && 'opacity-100 animate-flow-down'
-              )}
-              style={{ transitionDelay: `${delay + 800}ms` }}
-            />
-          </div>
-        )}
+    <section className="relative w-full py-20 px-4 overflow-hidden text-white">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(79,70,229,0.35),_rgba(2,6,23,0)_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,_rgba(14,165,233,0.2),_rgba(2,6,23,0)_50%)]" />
       </div>
 
-      <div
-        className={cn(
-          'flex-1 pb-12 opacity-0 translate-x-8 transition-all duration-700',
-          isIntersecting && 'opacity-100 translate-x-0'
-        )}
-        style={{ transitionDelay: `${delay + 200}ms` }}
-      >
-        <div className="group relative p-6 md:p-8 rounded-2xl bg-card/50 backdrop-blur-xl border border-card-border/50 hover:border-primary/30 transition-all duration-500 hover:bg-card/70">
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="relative z-10">
-            <h3 className="font-heading text-xl md:text-2xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
-              {title}
-            </h3>
-            <p className="font-body text-muted-foreground leading-relaxed text-sm md:text-base">
-              {description}
-            </p>
-          </div>
-          <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden rounded-tr-2xl">
-            <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-primary/10 to-transparent rotate-45" />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default function ThirdSection() {
-  const { ref: ctaRef, isIntersecting: ctaVisible } = useIntersectionObserver({ threshold: 0.5 });
-  const { ref: heroRef, isIntersecting: heroVisible } = useIntersectionObserver({ threshold: 0.4 });
-
-  return (
-    <section className="relative w-full py-16 px-4 overflow-hidden bg-transparent">
-      <div className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
-        <div
-          className="rounded-full blur-[150px]"
-          style={{
-            background: 'linear-gradient(135deg, rgba(195,15,255,0.45), rgba(39,249,255,0.4))',
-            width: '60vw',
-            height: '45vh',
-            opacity: 0.6,
-            maxWidth: 1200,
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center mb-20 text-center">
-        <div className="inline-flex items-center justify-center px-6 py-2 mb-4 rounded-full border border-violet-400/40 bg-black/10 shadow-inner shadow-violet-500/20">
-          <p className="text-violet-100 text-base font-medium">Activate the fastest growing developer marketing channel</p>
-        </div>
-        <h2
-          ref={heroRef}
-          className={cn(
-            'text-4xl md:text-5xl font-bold leading-tight mb-6',
-            'bg-gradient-to-r from-white/90 to-white/60 bg-clip-text text-transparent',
-            'opacity-0 translate-y-6 transition-all duration-700',
-            heroVisible && 'opacity-100 translate-y-0'
-          )}
-        >
-          Identify where your product is missing or misrepresented
+      <div className="max-w-5xl mx-auto text-center mb-14">
+        <h2 className="text-4xl md:text-6xl font-semibold text-white mb-4" style={{ fontFamily: 'Manrope, sans-serif' }}>
+          Win visibility everywhere with GEO
         </h2>
-        <div className="relative w-full flex justify-center mb-6">
-          <Image
-            src={heroImage}
-            alt="AI Search Growth"
-            width={420}
-            height={260}
-            className="w-full absolute object-contain rounded-xl"
-            priority
-          />
-        </div>
-        <p className="text-white/80 text-lg max-w-2xl mx-auto" style={{ textAlign: 'center' }}>
-          We analyze how ChatGPT, Perplexity, Google AI, and Claude currently explain problems in your category and map the docs, GitHub threads, Reddit discussions, and articles they rely on.
+        <p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto" style={{ fontFamily: 'Inter, sans-serif' }}>
+          We help you rank on Google, appear in AI Overviews, and get recommended by LLMs—so your brand stays visible wherever answers are generated.
         </p>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto grid gap-16">
-        {timelineSteps.map((step, index) => (
-          <TimelineStep
-            key={step.title}
-            stepNumber={index + 1}
-            title={step.title}
-            description={step.description}
-            icon={step.icon}
-            isLast={index === timelineSteps.length - 1}
-            delay={index * 140}
-          />
-        ))}
+      <div className="relative max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {cards.map((card, index) => {
+            const cardStyle = {
+              backgroundColor: 'rgba(8, 6, 18, 0.95)',
+              backgroundBlendMode: 'screen',
+            };
+
+            const backgroundImages = [];
+            if (card.overlayImage) {
+              backgroundImages.push(`url(${card.overlayImage})`);
+            }
+            if (card.background) {
+              backgroundImages.push(backgroundPatterns[card.background]);
+            }
+
+            if (backgroundImages.length) {
+              cardStyle.backgroundImage = backgroundImages.join(', ');
+            }
+
+            const baseBackgroundSize = 'cover';
+
+            if (card.overlayImage) {
+              cardStyle.backgroundSize = `${baseBackgroundSize}`;
+            } else {
+              cardStyle.backgroundSize = baseBackgroundSize;
+            }
+
+            return (
+              <div
+                key={`${card.title}-${index}`}
+                className={`relative rounded-3xl bg-slate-950/95 border border-white/15 overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.45)] ${card.gridSpan ?? ''} ${card.className ?? ''}`}
+                style={cardStyle}
+              >
+                <div className="relative z-10 p-6 md:p-7">
+                  <h3 className="text-white text-xl md:text-2xl font-semibold" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                    {card.title}
+                  </h3>
+                  <p className="text-neutral-400 text-base mt-3" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    {card.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
