@@ -61,7 +61,7 @@ const testimonials = [
     },
     {
         id: 6,
-        name: 'Idoo Neeman',
+        name: 'Ido Neeman',
         imageUrl: '/playbook/firefly.png',
         title: 'Co-Founder and CEO',
         company: 'Firefly.ai',
