@@ -1,6 +1,6 @@
 import Home from "./Componets/home";
 import SecondSection from "./Componets/secondSection";
-import ThirdSection from "./Componets/thirdSection";
+// import ThirdSection from "./Componets/thirdSection";
 import Testimonials from "../../lp/reddit-marketing-agency/testimonials";
 import FAQ from "./Componets/faq";
 import CTA from "../developer-marketing-agency/cta";
@@ -33,7 +33,7 @@ export default function LandingPage() {
         headingStyle={{ fontFamily: 'Manrope, sans-serif' }}
       />
       <SecondSection />
-      <ThirdSection />
+      {/* <ThirdSection /> */}
       <FourthSection />
       <FifthSection />
       {/* <ServiceHighlights /> */}

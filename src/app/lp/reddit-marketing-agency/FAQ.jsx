@@ -107,7 +107,7 @@ const FAQSection = ({faqsData=faqData}) => {
                             <span className="text-purple-800 text-center">FAQ</span>
                         </div>
 
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-400 text-[#5F64FF] mb-6 leading-tight">
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-400 text-[#5F64FF] mb-6 leading-tight">
                             Frequently Asked Questions
                         </h2>
 

@@ -65,7 +65,7 @@ export default function FifthSection() {
     <section className="relative overflow-hidden px-4 text-white">
       <div className="relative mx-auto w-full max-w-6xl">
         <div className="text-center">
-          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-white">GEO Metrics We Track</h2>
+          <h2 className="mt-3 text-2xl md:text-4xl font-semibold text-white">GEO Metrics We Track</h2>
           <p className="mt-3 max-w-3xl mx-auto text-base text-white/70 md:text-lg">
             From AI visibility to revenue impact, this dashboard keeps every metric we monitor so you know where the brand is seen, cited, and recommended.
           </p>
@@ -86,7 +86,7 @@ export default function FifthSection() {
                 <div className="rounded-2xl border border-zinc-700/80 overflow-hidden mb-5">
                   <img src={metric.visual} alt={metric.title} className="w-full h-[190px] object-cover" />
                 </div>
-                <h3 className="mt-3 text-2xl font-semibold text-white" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <h3 className="mt-3 text-lg font-semibold text-white" style={{ fontFamily: 'Manrope, sans-serif' }}>
                   {metric.title}
                 </h3>
                 <p className="mt-3 text-sm text-white/70" style={{ fontFamily: 'Inter, sans-serif' }}>

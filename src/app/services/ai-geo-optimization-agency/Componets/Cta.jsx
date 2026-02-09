@@ -14,7 +14,7 @@ export default function Cta() {
 
 			<div className="relative mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-20 lg:flex-row lg:items-center lg:justify-between">
 				<div className="flex-1 space-y-6">
-					<h2 className="text-3xl font-semibold leading-tight tracking-tight text-white md:text-[3.75rem]">
+					<h2 className="text-2xl font-semibold leading-tight tracking-tight text-white md:text-4xl">
 						Want to Own AI Search Visibility
 					</h2>
 					<p className="text-lg text-white/70 md:text-xl" style={{ lineHeight: '1.6' }}>

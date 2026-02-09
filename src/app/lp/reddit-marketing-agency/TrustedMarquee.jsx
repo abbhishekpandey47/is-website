@@ -83,7 +83,7 @@ export default function TrustedMarquee({
                     align-items: center;
                     gap: 24px;
                     width: max-content;
-                    animation: marquee 28s linear infinite;
+                    animation: marquee 42s linear infinite;
                 }
                 .marquee__track--reverse {
                     animation-direction: reverse;
