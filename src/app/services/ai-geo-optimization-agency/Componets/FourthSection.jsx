@@ -41,7 +41,7 @@ const geoSteps = [
 
 export default function FourthSection() {
   return (
-    <section className="relative overflow-hidden w-full text-white">
+    <section className="relative overflow-hidden py-10 w-full text-white">
       <div className="pointer-events-none absolute -right-24 top-0 h-[460px] w-[460px] rounded-full blur-[220px]" />
       <div className="pointer-events-none absolute -left-20 top-[-60px] h-[360px] w-[360px] rounded-full blur-[200px]" />
       <div className="relative mx-auto max-w-7xl px-4 py-16">

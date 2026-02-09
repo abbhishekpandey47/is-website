@@ -111,7 +111,7 @@ const TestimonialCard = ({ testimonial, variant = 'front', ctaClassName = '', on
 
     return (
         <div
-            className={`w-full h-full relative ${variantStyles} rounded-[32px] overflow-hidden border border-gray-700/50 ring-1 ring-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.25)]`}
+            className={`w-full h-full py-10 relative ${variantStyles} rounded-[32px] overflow-hidden border border-gray-700/50 ring-1 ring-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.25)]`}
         >
             <svg
                 className="absolute inset-0 w-full h-full pointer-events-none"

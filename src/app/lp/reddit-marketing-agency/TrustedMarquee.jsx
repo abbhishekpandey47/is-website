@@ -12,7 +12,8 @@ export default function TrustedMarquee({
     wrapperClassName,
     headingClassName,
     highlightClassName,
-    headingStyle
+    headingStyle,
+    spacingClassName="pt-24"
 }) {
     const getLogoPadding = useCallback((filename) => {
         const paddingMap = clientPaddingMap;
@@ -43,7 +44,7 @@ export default function TrustedMarquee({
         "bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600";
 
     return (
-        <div className="relative w-full pt-24 pb-8 max-sm:pt-6">
+        <div className={`relative w-full ${spacingClassName} pb-8 max-sm:pt-6`}>
             <div className={resolvedWrapperClassName}>
                 <h3 className={resolvedHeadingClassName} style={headingStyle}>
                     {heading}{" "}
@@ -52,7 +53,7 @@ export default function TrustedMarquee({
             </div>
             <div className="space-y-6 mt-12">
                 {logoRows.map((row, rowIndex) => (
-                    <div key={rowIndex} className="marquee">
+                    <div key={rowIndex} className="marquee marquee--blur">
                         <div className={`marquee__track${rowIndex % 2 === 1 ? " marquee__track--reverse" : ""}`}>
                             {[...row, ...row].map((logoFile, idx) => (
                                 <div
@@ -78,15 +79,60 @@ export default function TrustedMarquee({
                 .marquee {
                     overflow: hidden;
                 }
+                .marquee--blur {
+                    position: relative;
+                }
                 .marquee__track {
                     display: flex;
                     align-items: center;
                     gap: 24px;
                     width: max-content;
                     animation: marquee 42s linear infinite;
+                    mask-image: linear-gradient(
+                        to right,
+                        transparent 0%,
+                        black 14%,
+                        black 86%,
+                        transparent 100%
+                    );
+                    -webkit-mask-image: linear-gradient(
+                        to right,
+                        transparent 0%,
+                        black 14%,
+                        black 86%,
+                        transparent 100%
+                    );
                 }
                 .marquee__track--reverse {
                     animation-direction: reverse;
+                }
+                .marquee--blur::before,
+                .marquee--blur::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    width: 72px;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 10;
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                }
+                .marquee--blur::before {
+                    left: 0;
+                    background: linear-gradient(
+                        to right,
+                        rgba(12, 8, 24, 0.95),
+                        rgba(12, 8, 24, 0)
+                    );
+                }
+                .marquee--blur::after {
+                    right: 0;
+                    background: linear-gradient(
+                        to left,
+                        rgba(12, 8, 24, 0.95),
+                        rgba(12, 8, 24, 0)
+                    );
                 }
                 @keyframes marquee {
                     from {

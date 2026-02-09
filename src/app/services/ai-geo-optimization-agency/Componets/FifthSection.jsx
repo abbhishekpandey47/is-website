@@ -62,7 +62,7 @@ const metrics = [
 
 export default function FifthSection() {
   return (
-    <section className="relative overflow-hidden px-4 text-white">
+    <section className="relative overflow-hidden py-10 px-4 text-white">
       <div className="relative mx-auto w-full max-w-6xl">
         <div className="text-center">
           <h2 className="mt-3 text-2xl md:text-4xl font-semibold text-white">GEO Metrics We Track</h2>
