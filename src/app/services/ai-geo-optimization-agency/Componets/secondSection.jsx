@@ -51,7 +51,7 @@ export default function SecondSection() {
 					Why Generative AI Search Is the Future
 				</h2>
 				<p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto" style={{ fontFamily: "Inter, sans-serif" }}>
-					Generative AI has reshaped how users discover and evaluate products—visibility now depends on whether AI understands, trusts, and recommends your brand.
+					Generative AI has reshaped how users discover and evaluate products visibility now depends on whether AI understands, trusts, and recommends your brand.
 				</p>
 			</div>
 

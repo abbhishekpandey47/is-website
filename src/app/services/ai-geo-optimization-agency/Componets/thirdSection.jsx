@@ -9,7 +9,7 @@ const defaultCards = [
   {
     title: 'LLM Search Engine Optimization',
     description:
-      'We built a proprietary LLM-Readiness Checklist that audits every page for clarity, structure, and factual accuracy—so AI engines understand, trust, and recommend your content.',
+      'We built a proprietary LLM-Readiness Checklist that audits every page for clarity, structure, and factual accuracy so AI engines understand, trust, and recommend your content.',
     img: '/aeo/1.svg',
     gridSpan: 'md:col-span-5',
     background: 'card',
@@ -51,7 +51,7 @@ const defaultCards = [
   {
     title: 'SEO Reporting & Analytics',
     description:
-      'Transparent reporting across rankings, AI Overviews, and LLM visibility—showing exactly what’s working and what’s next.',
+      'Transparent reporting across rankings, AI Overviews, and LLM visibility showing exactly what’s working and what’s next.',
     img: '/aeo/5.svg',
     gridSpan: 'md:col-span-4',
     background: 'card',
@@ -62,7 +62,7 @@ const defaultCards = [
   {
     title: 'Conversion Rate Optimization',
     description:
-      'We design buyer journeys that turn clicks and AI mentions into conversions—handling UX, technical audits, and landing pages so traffic becomes revenue.',
+      'We design buyer journeys that turn clicks and AI mentions into conversions handling UX, technical audits, and landing pages so traffic becomes revenue.',
     img: '/aeo/6.svg',
     gridSpan: 'md:col-span-5',
     background: 'card',
@@ -85,7 +85,7 @@ export default function ThirdSection({ cards = defaultCards }) {
           Win visibility everywhere with GEO
         </h2>
         <p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto" style={{ fontFamily: 'Inter, sans-serif' }}>
-          We help you rank on Google, appear in AI Overviews, and get recommended by LLMs—so your brand stays visible wherever answers are generated.
+          We help you rank on Google, appear in AI Overviews, and get recommended by LLMs so your brand stays visible wherever answers are generated.
         </p>
       </div>
 
@@ -93,8 +93,7 @@ export default function ThirdSection({ cards = defaultCards }) {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {cards.map((card, index) => {
             const cardStyle = {
-              backgroundColor: 'rgba(8, 6, 18, 0.95)',
-              backgroundBlendMode: 'screen',
+              
             };
 
             const backgroundImages = [];
@@ -120,7 +119,7 @@ export default function ThirdSection({ cards = defaultCards }) {
             return (
               <div
                 key={`${card.title}-${index}`}
-                className={`relative rounded-3xl bg-slate-950/95 border border-white/15 overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.45)] ${card.gridSpan ?? ''} ${card.className ?? ''}`}
+                className={`relative h-[18rem] rounded-3xl bg-slate-950/95 border border-white/15 overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.45)] ${card.gridSpan ?? ''} ${card.className ?? ''}`}
                 style={cardStyle}
               >
                 <div className="relative z-10 p-6 md:p-7">
