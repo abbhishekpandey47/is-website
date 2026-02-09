@@ -80,10 +80,6 @@ export default function FourthSection() {
                       <h3 className="text-4xl font-semibold uppercase text-white">
                         {step.title}
                       </h3>
-                      <div className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-lg text-white/50 transition duration-500 group-hover:border-white/60 group-hover:text-white">
-                        <span className="transition-opacity duration-500 group-hover:opacity-0">+</span>
-                        <span className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">-</span>
-                      </div>
                     </div>
                     <p className="mt-4 max-h-0 overflow-hidden text-lg md:text-xl leading-relaxed text-white transition-[max-height,margin,opacity] duration-500 group-hover:max-h-[260px] group-hover:opacity-100 group-hover:mt-6">
                       {step.description}
