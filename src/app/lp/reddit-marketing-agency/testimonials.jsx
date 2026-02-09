@@ -202,31 +202,48 @@ const TestimonialTile = ({ testimonial }) => {
     );
 };
 
-export default function Testimonials({ heading, subHeading }) {
+export default function Testimonials({
+    heading = 'Why',
+    highlight = 'Y Combinator Companies - Boldstart, and Eclipse',
+    trailing = 'trust Infrasity',
+    subHeading = 'Here’s how we help them ship content fast — and with depth.',
+    showDivider = true,
+    wrapperClassName,
+    headingClassName,
+    highlightClassName,
+    subHeadingClassName,
+    headingStyle
+}) {
+    const resolvedWrapperClassName =
+        wrapperClassName ||
+        'quicksand-bold text-[32px] max-sm:text-[20px] tracking-tight leading-[1.1] text-white flex justify-center mb-2';
+    const resolvedHeadingClassName = headingClassName || 'text-center max-lg:mx-auto tracking-wide';
+    const resolvedHighlightClassName =
+        highlightClassName || 'bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600';
+    const resolvedSubHeadingClassName =
+        subHeadingClassName || 'text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light tracking-wide';
     return (
         <section className="mx-auto px-6 py-12">
             <div className="max-w-6xl mx-auto text-center relative z-10 mb-8">
-                <div className="quicksand-bold text-[32px] max-sm:text-[20px] tracking-tight leading-[1.1] text-white flex justify-center mb-2">
-                    <h2 className="text-center max-lg:mx-auto tracking-wide">
-                        Why{' '}
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">
-                            Y Combinator Companies - Boldstart, and Eclipse
-                        </span>{' '}
-                        trust Infrasity
+                <div className={resolvedWrapperClassName}>
+                    <h2 className={resolvedHeadingClassName} style={headingStyle}>
+                        {heading}{' '}
+                        <span className={resolvedHighlightClassName}>{highlight}</span>{' '}
+                        {trailing}
                     </h2>
                 </div>
-                <div className="flex justify-center my-6 mb-8">
-                    <div
-                        className="w-[148px] h-1 rounded-full"
-                        style={{
-                            backgroundImage: 'linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)',
-                        }}
-                    />
-                </div>
+                {showDivider ? (
+                    <div className="flex justify-center my-6 mb-8">
+                        <div
+                            className="w-[148px] h-1 rounded-full"
+                            style={{
+                                backgroundImage: 'linear-gradient(90.63deg, #6B5BE7 14.54%, #A64AE7 42.42%, #C62FE7 86.96%)',
+                            }}
+                        />
+                    </div>
+                ) : null}
                 <div className="max-w-[70%] mx-auto">
-                    <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light tracking-wide">
-                        Here’s how we help them ship content fast — and with depth.
-                    </p>
+                    <p className={resolvedSubHeadingClassName}>{subHeading}</p>
                 </div>
             </div>
 

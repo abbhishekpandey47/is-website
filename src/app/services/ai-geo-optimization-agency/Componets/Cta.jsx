@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Cta() {
 	return (
 		<section className="relative overflow-hidden text-white h-[30rem] py-12 my-12">
@@ -19,9 +21,12 @@ export default function Cta() {
 						Stop watching competitors rank. Let's build your strategy to own the space.
 					</p>
 					<div className="flex flex-wrap gap-4">
-						<button className="rounded-lg bg-[#5F64FF] px-8 py-3 text-lg font-semibold text-white shadow-[0_10px_35px_rgba(95,100,255,0.35)] transition hover:bg-[#3e43ff]">
+						<Link
+							href="/contact"
+							className="rounded-lg bg-[#5F64FF] px-8 py-3 text-lg font-semibold text-white shadow-[0_10px_35px_rgba(95,100,255,0.35)] transition hover:bg-[#3e43ff]"
+						>
 							Book a Demo
-						</button>
+						</Link>
 					</div>
 				</div>
 			</div>

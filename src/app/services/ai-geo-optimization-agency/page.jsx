@@ -24,17 +24,34 @@ export default function LandingPage() {
   return (
     <main>
       <Home />
-      <TrustedMarquee />
+      <TrustedMarquee
+        heading="Trusted by Builders at Innovative AI Startups"
+        highlight=""
+        wrapperClassName="text-center max-w-5xl mx-auto"
+        headingClassName="text-2xl md:text-4xl font-semibold text-white"
+        highlightClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#6366f1]"
+        headingStyle={{ fontFamily: 'Manrope, sans-serif' }}
+      />
       <SecondSection />
       <ThirdSection />
       <FourthSection />
       <FifthSection />
       {/* <ServiceHighlights /> */}
       {/* <CaseStudies /> */}
-      <Cta />
       <AEOReportSection />
-      <Testimonials />
-      <div className="w-full h-px shadow-pink-400/50 bg-gradient-to-r from-pink-500/5 via-pink-300 to-pink-500/5 mt-10 mb-12"></div>
+      <Testimonials
+        heading="Why Leading VCs Choose Infrasity"
+        highlight=""
+        trailing=""
+        subHeading="Here’s how we help them ship content fast and with depth."
+        wrapperClassName="text-center max-w-5xl mx-auto"
+        headingClassName="text-2xl md:text-4xl font-semibold text-white"
+        highlightClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#6366f1]"
+        subHeadingClassName="text-white/70 text-base md:text-lg"
+        headingStyle={{ fontFamily: 'Manrope, sans-serif' }}
+          showDivider={false}
+      />
+      <Cta />
       <FAQ />
     </main>
   );
