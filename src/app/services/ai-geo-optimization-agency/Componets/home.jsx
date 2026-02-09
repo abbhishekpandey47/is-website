@@ -17,8 +17,8 @@ export default function HeroSection() {
         />
         {/* Content above image */}
         <div className="relative z-10 max-w-4xl mx-auto text-center py-8 px-4 mt-6">
-          <h1 className="text-5xl md:text-5xl font-bold text-white mb-4 leading-tight">Increase AI Visibility</h1>
-          <p className="text-lg md:text-xl text-white/80 mb-6">Get cited in ChatGPT, Claude, Perplexity. GEO services to increase AI visibility for SaaS.<br />7x growth in AI search sessions. Get your free visibility report.</p>
+          <h1 className="text-5xl md:text-5xl font-bold text-white mb-4 leading-tight">When Buyers Ask AI About Your Category, Be the Answer</h1>
+          <p className="text-lg md:text-xl text-white/80 mb-6">AEO/GEO services for B2B SaaS and AI companies to increase visibility, citations, and share of voice across leading AI engines.</p>
           <Link href="/contact">
             <button className="mt-4 mb-4 px-4 py-2 rounded-xl bg-[#6F74FF] text-white font-semibold text-base shadow-lg hover:bg-[#473b79] transition">Book a Call</button>
           </Link>

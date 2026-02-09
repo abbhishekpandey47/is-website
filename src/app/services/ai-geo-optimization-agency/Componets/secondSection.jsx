@@ -3,14 +3,14 @@ export default function SecondSection() {
 	const cardBgSvgWide = "url(\"data:image/svg+xml,%3Csvg%20width%3D%27729%27%20height%3D%27450%27%20viewBox%3D%270%200%20729%20450%27%20fill%3D%27none%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cg%20clip-path%3D%27url(%23clip0_195_6843)%27%3E%3Crect%20width%3D%27729%27%20height%3D%27450%27%20rx%3D%2722.948%27%20fill%3D%27%230E0B1B%27%2F%3E%3Cg%20opacity%3D%270.5%27%20filter%3D%27url(%23filter0_f_195_6843)%27%3E%3Crect%20x%3D%27573.052%27%20y%3D%27230.149%27%20width%3D%27459.819%27%20height%3D%27384.712%27%20transform%3D%27rotate(143.002%20573.052%20230.149)%27%20fill%3D%27url(%23paint0_linear_195_6843)%27%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter%20id%3D%27filter0_f_195_6843%27%20x%3D%27-118.749%27%20y%3D%27-170.154%27%20width%3D%27784.849%27%20height%3D%27770.063%27%20filterUnits%3D%27userSpaceOnUse%27%20color-interpolation-filters%3D%27sRGB%27%3E%3CfeFlood%20flood-opacity%3D%270%27%20result%3D%27BackgroundImageFix%27%2F%3E%3CfeBlend%20mode%3D%27normal%27%20in%3D%27SourceGraphic%27%20in2%3D%27BackgroundImageFix%27%20result%3D%27shape%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%2746.5243%27%20result%3D%27effect1_foregroundBlur_195_6843%27%2F%3E%3C%2Ffilter%3E%3ClinearGradient%20id%3D%27paint0_linear_195_6843%27%20x1%3D%271032.87%27%20y1%3D%27230.149%27%20x2%3D%27502.087%27%20y2%3D%27426.918%27%20gradientUnits%3D%27userSpaceOnUse%27%3E%3Cstop%20stop-color%3D%27%230D0A1A%27%2F%3E%3Cstop%20offset%3D%270.716097%27%20stop-color%3D%27%23473B79%27%20stop-opacity%3D%270.8%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%239B91C6%27%20stop-opacity%3D%270.8%27%2F%3E%3C%2FlinearGradient%3E%3CclipPath%20id%3D%27clip0_195_6843)%27%3E%3Crect%20width%3D%27729%27%20height%3D%27450%27%20rx%3D%2722.948%27%20fill%3D%27white%27%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3C%2Fsvg%3E\")";
 	const cards = [
 		{
-			title: "It's everywhere",
-			text: "ChatGPT, Perplexity, Claude, and Copilot aren't novelties anymore; they're daily utilities. Users now ask questions, get direct answers, and skip the 10-blue-links journey altogether.",
+			title: "AI usage is massive",
+			text: "ChatGPT: 100M+ weekly users. Buyers ask for tools, comparisons, and alternatives.",
 			img: "/aeo/1.svg",
 			className: "md:col-span-3",
 		},
 		{
-			title: "People prefer chatting over scrolling",
-			text: "Search behavior is shifting from scroll-and-skim to ask-and-understand. Users want natural, conversational answers, not long blog posts or keyword-stuffed pages.",
+			title: "Search behavior has changed",
+			text: "Users prefer asking questions over scanning results. The 10-blue-links journey is disappearing.",
 			img: "/aeo/2.svg",
 			className: "md:col-span-3",
 		},
@@ -48,10 +48,10 @@ export default function SecondSection() {
 			</div>
 			<div className="max-w-5xl mx-auto text-center mb-14">
 				<h2 className="text-4xl md:text-6xl font-semibold text-white mb-4" style={{ fontFamily: "Manrope, sans-serif" }}>
-					Why Generative AI Search Is the Future
+					AI Is Becoming the New Discovery Layer for B2B
 				</h2>
 				<p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto" style={{ fontFamily: "Inter, sans-serif" }}>
-					Generative AI has reshaped how users discover and evaluate products visibility now depends on whether AI understands, trusts, and recommends your brand.
+					Generative AI has reshaped how users discover and evaluate products visibility now depends on whether AI understands, trusts, and recommends your product.
 				</p>
 			</div>
 
@@ -84,9 +84,17 @@ export default function SecondSection() {
 								<h3 className="text-white text-lg font-semibold" style={{ fontFamily: "Manrope, sans-serif" }}>
 									{card.title}
 								</h3>
-								<p className="text-neutral-400 text-sm mt-3" style={{ fontFamily: "Inter, sans-serif" }}>
-									{card.text}
-								</p>
+								{card.bullets ? (
+									<ul className="text-neutral-400 text-sm mt-3 list-disc list-inside space-y-1" style={{ fontFamily: "Inter, sans-serif" }}>
+										{card.bullets.map((bullet, i) => (
+											<li key={i}>{bullet}</li>
+										))}
+									</ul>
+								) : (
+									<p className="text-neutral-400 text-sm mt-3" style={{ fontFamily: "Inter, sans-serif" }}>
+										{card.text}
+									</p>
+								)}
 							</div>
 						</div>
 					))}
