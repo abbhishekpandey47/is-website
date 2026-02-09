@@ -25,16 +25,17 @@ export default function LandingPage() {
     <main>
       <Home />
       <TrustedMarquee
-        heading="Trusted by high growth B2B SaaS, DevTools, and AI Teams worldwide"
+        heading=""
         highlight=""
         wrapperClassName="text-center max-w-5xl mx-auto"
         headingClassName="text-2xl md:text-4xl font-semibold text-white"
         highlightClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#6366f1]"
         headingStyle={{ fontFamily: 'Manrope, sans-serif' }}
       />
+      <FourthSection />
+
       <SecondSection />
       {/* <ThirdSection /> */}
-      <FourthSection />
       <FifthSection />
       {/* <ServiceHighlights /> */}
       {/* <CaseStudies /> */}
