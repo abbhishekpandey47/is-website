@@ -32,9 +32,6 @@ export default function AEOReportSection() {
   return (
     <section className="w-full flex flex-col gap-10 py-12">
       <div className="max-w-3xl mx-auto text-center px-4">
-        <div className="inline-flex items-center justify-center px-6 py-2 mb-4 rounded-full border border-violet-400/40 bg-black/10 shadow-inner shadow-violet-500/20">
-          <p className="text-violet-100 text-base font-medium">Get free AEO report</p>
-        </div>
         <h2 className="text-white text-3xl md:text-4xl font-bold mb-3">How do AI systems talk about your product?</h2>
         <p className="text-white/80 text-lg">Get a free AEO report showing visibility, citations, and sentiment across leading answer engines.</p>
       </div>
