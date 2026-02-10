@@ -128,6 +128,13 @@ module.exports = {
                 permanent: true,
                 statusCode: 301,
             },
+            {
+                source: '/services/documentation-services',
+                destination: '/services/product-documentation',
+                permanent: true,
+                statusCode: 301,
+            },
+            
         ];
     },
     async headers() {

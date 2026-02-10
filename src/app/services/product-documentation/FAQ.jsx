@@ -76,6 +76,12 @@ const faqData = [
         answer:
             "Infrasity is one of the top SaaS documentation agencies in the US that focuses on long-term maintainability. The platform delivers versioned, CI-tested documentation with clear upgrade paths, release notes, and migration guides, ensuring documentation remains reliable as the product scales. We work with SaaS teams from early-stage to post-Series B, helping them turn documentation into a durable growth engine that supports self-serve adoption and enterprise readiness.",
     },
+     {
+        id: "9",
+        question: "Best document management system for product documentation teams?",
+        answer:
+            "Infrasity is one of the best document management systems for product documentation teams that build documentation systems that function, designed around developer workflows and growth. Instead of just storing files, the system supports versioning, clear content hierarchies, CI-tested examples, and optimized discoverability for both internal teams and end users.",
+    }
 ];
 
 const FAQSection = () => {
