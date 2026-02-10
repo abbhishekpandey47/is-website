@@ -16,6 +16,7 @@ const supabase = createClient(
 const CONTEXT_PAGE_PATHS = ['', '/product', '/features', '/pricing', '/about']
 const MAX_PAGE_CHARS = 3000
 const MAX_PAGES = 4
+const MIN_READABILITY_CHARS = 400
 const CONTEXT_TEMPERATURE = 0.25
 const CONTEXT_MAX_TOKENS = 1400
 const KEYWORD_TEMPERATURE = 0.65
@@ -336,7 +337,9 @@ async function fetchPageText(url) {
   try {
     const resp = await fetch(url, {
       headers: {
-        'User-Agent': 'Threadflow-Context-Scanner/1.0'
+        'User-Agent': 'Threadflow-Context-Scanner/1.0',
+        Accept: 'text/html,application/xhtml+xml',
+        'Accept-Language': 'en-US,en;q=0.9'
       }
     })
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
@@ -344,8 +347,33 @@ async function fetchPageText(url) {
     const dom = new JSDOM(html, { url })
     const reader = new Readability(dom.window.document)
     const article = reader.parse()
-    const rawText = (article?.textContent ?? dom.window.document.body?.textContent ?? '').replace(/\s+/g, ' ')
-    const cleaned = rawText.replace(/https?:\/\/\S+/g, '').trim()
+    const doc = dom.window.document
+    const readabilityText = (article?.textContent ?? '').replace(/\s+/g, ' ').trim()
+
+    const metaDescription = doc.querySelector('meta[name="description"]')?.getAttribute('content') || ''
+    const title = doc.querySelector('title')?.textContent || ''
+    const headings = Array.from(doc.querySelectorAll('h1, h2'))
+      .map((node) => node.textContent || '')
+      .map((text) => text.replace(/\s+/g, ' ').trim())
+      .filter(Boolean)
+      .slice(0, 6)
+    const bodyText = (doc.body?.textContent ?? '').replace(/\s+/g, ' ').trim()
+
+    const fallbackText = [title, metaDescription, ...headings, bodyText]
+      .filter(Boolean)
+      .join('\n')
+
+    const preferredText = readabilityText.length >= MIN_READABILITY_CHARS ? readabilityText : fallbackText
+    const cleaned = preferredText.replace(/https?:\/\/\S+/g, '').trim()
+
+    if (readabilityText.length < MIN_READABILITY_CHARS) {
+      console.warn('[serp-scout] readability short, using fallback extraction', {
+        url,
+        readabilityChars: readabilityText.length,
+        fallbackChars: fallbackText.length
+      })
+    }
+
     return { url, text: cleaned.slice(0, MAX_PAGE_CHARS) }
   } catch (error) {
     console.warn('[serp-scout] skip page', url, error.message)
@@ -871,7 +899,7 @@ async function generateCompanyContext(domain, companyId, companyName, forceConte
     companyName: companyName || null,
     domain
   }
-  const systemMessage = 'You are generating internal context for Reddit engagement. Describe the company neutrally, without marketing language, links, or calls to action.'
+  const systemMessage = 'You are generating internal context for Reddit engagement. Describe the company neutrally, without marketing language, links, or calls to action but bit professionally'
   const userPrompt = `Normalized content:\n${normalized}\n\nReturn valid JSON only with the following schema: {"companySummary": "2-3 sentence neutral summary", "coreCapabilities": ["..."] , "problemSpaces": ["..."], "constraints": ["..."]}. Constraints should mention tone rules or usage guardrails.`
   const messages = [
     { role: 'system', content: systemMessage },
