@@ -1287,12 +1287,11 @@ export default function SerpScoutPage() {
                               Prompts from Step 4 are listed here automatically; add one above only if you need a custom test.
                             </p>
                           )}
-                        </div>
-                        <Button
-                          onClick={handleTestCitations}
-                          disabled={citationLoading}
-                          className="w-full"
-                        >
+                          <Button
+                            onClick={handleTestCitations}
+                            disabled={citationLoading}
+                            className="w-full"
+                          >
                           {citationLoading ? "Testing..." : "Test Reddit Citations"}
                         </Button>
 
