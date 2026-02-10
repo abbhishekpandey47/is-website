@@ -28,8 +28,8 @@ export default function LandingPage() {
       <FourthSection />
       <SecondSection />
       {/* <ThirdSection /> */}
-      <FifthSection />
       <AEOReportSection />
+      <FifthSection />
       <Testimonials
         heading="Why Leading VCs Choose Infrasity"
         highlight=""
