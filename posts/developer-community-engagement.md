@@ -24,17 +24,17 @@ Developers co-create, extend, and fine-tune them and with open-source projects a
 
 Today, traditional marketing funnels are losing relevance for developer-led adoption. Developers discover, validate, and adopt tools through peer-driven platforms such as GitHub, Discord, [Reddit](https://www.infrasity.com/services/reddit-marketing-agency), Quora, or Stack Overflow. In this environment, authentic engagement matters more than what you spend. Yes, attention does give you data, but engagement gives you insight, which is what developers *REALLY* want.
 
-Unfortunately, for years, startups have viewed communities as a soft asset, something that’s only good for brand perception but not quantifiable in ROI. But that myth is fading now, swiftly that too because now community engagement directly influences **adoption velocity**, **support cost reduction**, and **feature validation**.
+Unfortunately, for years, startups have viewed communities as a soft asset, something that’s only good for brand perception but not quantifiable in ROI. But that myth is fading now, swiftly, because now community engagement directly influences **adoption velocity**, **support cost reduction**, and **feature validation**.
 
 ## **Things B2B SaaS Startups Get Wrong About Developer Communities**
 
 First, let’s take a look at the things B2B SaaS startups still get wrong about developer communities in 2025\.
 
-### 1. **Treating the developer community as support overhead**
+### 1. **Treating the Developer Community as Support Overhead**
 
 Many startups mistakenly view their community as an externalized support desk. But it’s not. In reality, an engaged developer community is a great feedback amplifier because it surfaces insights faster than any surveys and creates reusable content that scales onboarding. Viewing it as a cost center rather than a growth lever limits its potential.
 
-### 2. **Focusing on vanity metrics**
+### 2. **Focusing on Vanity Metrics**
 
 Tracking Reddit, Discord, or Slack members without measuring active contributors, PRs, or discussions is misleading because the number of members in a community doesn’t mean adoption. The real developer community engagement metrics you need to focus on are:
 
@@ -42,7 +42,7 @@ Tracking Reddit, Discord, or Slack members without measuring active contributors
 * Knowledge reuse  
 * Peer-to-peer contribution
 
-### 3. **Overlooking the compounding nature of developers**
+### 3. **Overlooking the Compounding Nature of Developers**
 
 Developer trust compounds over time, and every tutorial, repository, and forum discussion adds to a startup’s long-term equity. While the ROI may not appear instantly, it creates a durable moat that paid marketing cannot replicate. 
 
