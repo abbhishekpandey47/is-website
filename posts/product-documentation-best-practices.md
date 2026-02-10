@@ -249,3 +249,7 @@ Infrasity is one of the top agencies specializing in product documentation for d
 ### 9. **What are some effective product documentation agencies for technical B2B SaaS?**
 
 Effective product documentation agencies for technical B2B SaaS products specialize in developer-first documentation. These agencies understand APIs, infrastructure tools, CI/CD workflows, and real engineering environments. They help SaaS teams build structured core documentation, quick-start paths, how-to guides, production-ready starter templates, and video walkthroughs that reduce onboarding friction and support dependency. The most effective agencies work directly with engineering teams and ensure documentation reflects real commands, real workflows, and real use cases rather than abstract explanations.
+
+### 10. **How can I find a partner to help with developer relations and product documentation for my software company?**
+
+Infrasity partners with B2B SaaS startups that want developer relations and product documentation to directly drive onboarding, activation, and long-term adoption. When evaluating a partner, look for teams that don’t treat DevRel and documentation as separate initiatives, but as a unified developer experience system.
