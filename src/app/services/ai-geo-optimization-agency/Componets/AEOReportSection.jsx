@@ -36,11 +36,11 @@ export default function AEOReportSection() {
         <p className="text-white/80 text-lg">Get a free AEO report showing visibility, citations, and sentiment across leading answer engines.</p>
       </div>
       <div
-        className="relative w-full flex flex-col md:flex-row rounded-2xl shadow-lg border border-[#777777] md:p-12 gap-8 max-w-6xl mx-auto overflow-hidden bg-center bg-no-repeat bg-auto"
+        className="relative w-full grid grid-cols-3 md:flex-row rounded-2xl shadow-lg border border-[#777777] md:p-12 gap-8 max-w-6xl mx-auto overflow-hidden bg-center bg-no-repeat bg-auto"
         style={{ backgroundImage: "url('/aeo/aeoreportbg.svg')" }}
       >
       {/* Left: Form */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center min-w-[320px]">
+      <div className="relative z-10 flex-0 flex flex-col justify-center min-w-[320px]">
         <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Get your free AEO Report today</h2>
         <p className="text-white/80 text-lg mb-6">Discover how your brand performs on answer engines and uncover the opportunities to outpace the competition</p>
         {!submitted ? (
@@ -79,8 +79,8 @@ export default function AEOReportSection() {
         </div>
       </div>
       {/* Right: Mockup/Preview */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center items-center min-w-[320px] ">
-        <img src="/aeo/aeoReport.svg" alt="AEO Report Mockup" className="max-w-full rounded-lg shadow-lg relative -right-[3.5rem] -bottom-[3.5rem] w-[35rem] h-[32rem]"/>
+      <div className="col-span-2 relative z-10 flex-1 flex flex-col justify-center items-center min-w-[320px] ">
+        <img src="/aeo/aeoReport.svg" style={{bottom:"-6.5rem"}} alt="AEO Report Mockup" className="max-w-full rounded-lg shadow-lg relative -right-[4.5rem] -bottom-[6.5rem] w-[50rem] h-[28rem]"/>
       </div>
       </div>
     </section>

@@ -10,6 +10,7 @@ import ServiceHighlights from "./Componets/serviceHighlights";
 import FourthSection from "./Componets/FourthSection";
 import FifthSection from "./Componets/FifthSection";
 import Cta from "./Componets/Cta";
+import TrustedMarquee from "@/app/lp/reddit-marketing-agency/TrustedMarquee";
 // import ClientSection from "./Componets/clientSection";
 
 export const metadata = {
@@ -24,6 +25,19 @@ export default function LandingPage() {
   return (
     <main>
       <Home />
+      <section className="flex justify-center mt-36">
+        <div className="w-[80%] overflow-hidden">
+          <TrustedMarquee
+            heading=""
+            highlight=""
+            wrapperClassName="text-center max-w-5xl mx-auto"
+            headingClassName="text-2xl md:text-4xl font-semibold text-white"
+            highlightClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#6366f1]"
+            headingStyle={{ fontFamily: 'Manrope, sans-serif' }}
+            spacingClassName="pt-0"
+          />
+        </div>
+      </section>
       {/* <ClientSection/> */}
       <FourthSection />
       <SecondSection />
