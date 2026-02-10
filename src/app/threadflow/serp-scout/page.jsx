@@ -168,9 +168,10 @@ export default function SerpScoutPage() {
           prompts: Array.isArray(keyword.prompts) ? keyword.prompts : [],
         }));
       setKeywords(normalizedKeywords);
-      setSelectedKeywordIds(
-        normalizedKeywords.slice(0, Math.min(3, normalizedKeywords.length)).map((_, idx) => idx)
-      );
+      const initialSelectedIds = data.fromExisting
+        ? normalizedKeywords.map((_, idx) => idx)
+        : normalizedKeywords.slice(0, Math.max(3, normalizedKeywords.length)).map((_, idx) => idx);
+      setSelectedKeywordIds(initialSelectedIds);
 
       if (data.companyContext?.approvedContext) {
         setContextForm({
@@ -525,6 +526,12 @@ export default function SerpScoutPage() {
   // Post content generation state
   const [generatedPosts, setGeneratedPosts] = useState([]);
   const [generatingPosts, setGeneratingPosts] = useState(false);
+  const savedKeywordTimestamp =
+    rawResult?.savedAt ||
+    rawResult?.companyContext?.metadata?.keywordsSavedAt ||
+    rawResult?.companyContext?.metadata?.generatedAt ||
+    null;
+  const savedAtDisplay = formatDateTime(savedKeywordTimestamp);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -652,7 +659,7 @@ export default function SerpScoutPage() {
           )}
 
           {/* STEP 2: OVERVIEW */}
-          {!isExistingData && currentStep >= 2 && companyContext && (
+          {currentStep >= 2 && companyContext && (
             <Card className={currentStep === 2 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -661,13 +668,20 @@ export default function SerpScoutPage() {
                       <span>📋</span> Step 2: Company Overview
                     </CardTitle>
                     <CardDescription>
-                      Review AI-generated company analysis
+                      {isExistingData
+                        ? "Review the saved overview from the last analysis."
+                        : "Review AI-generated company analysis"}
                     </CardDescription>
                   </div>
                   {currentStep > 2 && <Check className="h-5 w-5 text-emerald-600" />}
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
+                {isExistingData && rawResult?.savedAt && (
+                  <p className="text-[11px] text-muted-foreground">
+                    Saved on {formatDateTime(rawResult.savedAt)}
+                  </p>
+                )}
                 {!editingContext ? (
                   <>
                     <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
@@ -733,7 +747,7 @@ export default function SerpScoutPage() {
           )}
 
           {/* STEP 3: KEYWORDS (SELECT 1-5) */}
-          {!isExistingData && currentStep >= 3 && (
+          {currentStep >= 3 && (
             <Card className={currentStep === 3 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -742,7 +756,9 @@ export default function SerpScoutPage() {
                       <span>⚡</span> Step 3: Select Keywords
                     </CardTitle>
                     <CardDescription>
-                      Choose at least 1 and up to 20 keywords from the list below.
+                      {isExistingData
+                        ? "Keywords were loaded from the saved set. You can review them or adjust the selection for analysis."
+                        : "Choose at least 1 and up to 20 keywords from the list below."}
                     </CardDescription>
                   </div>
                   <div className="text-xs text-muted-foreground">
@@ -787,7 +803,7 @@ export default function SerpScoutPage() {
                   })}
                 </div>
 
-                {currentStep === 3 && (
+                {currentStep === 3 && !isExistingData && (
                   <Button onClick={handleApproveKeywords} className="w-full">
                     <Check className="h-4 w-4 mr-2" /> Continue to Prompts
                   </Button>
@@ -838,18 +854,20 @@ export default function SerpScoutPage() {
           )}
 
           {/* STEP 4: PROMPTS & SAVE */}
-          {!isExistingData && currentStep >= 4 && (
+          {currentStep >= 4 && (
             <Card className={currentStep === 4 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="flex items-center gap-2">
-                      <span>💾</span> Step 4: Prompts & Save
-                    </CardTitle>
-                    <CardDescription>
-                      Suggest prompts for your selected keywords, then save.
-                    </CardDescription>
-                  </div>
+                    <div>
+                      <CardTitle className="flex items-center gap-2">
+                        <span>💾</span> Step 4: Prompts & Save
+                      </CardTitle>
+                      <CardDescription>
+                        {isExistingData
+                          ? "Review the prompts that were saved with the keywords."
+                          : "Suggest prompts for your selected keywords, then save."}
+                      </CardDescription>
+                    </div>
                   {currentStep > 4 && <Check className="h-5 w-5 text-emerald-600" />}
                 </div>
               </CardHeader>
@@ -867,17 +885,23 @@ export default function SerpScoutPage() {
                         <p className="text-sm font-semibold text-foreground">{keyword.term}</p>
                         <p className="text-[11px] text-muted-foreground">{keyword.intent}</p>
                       </div>
-                      <Button
-                        variant="outline"
-                        size="xs"
-                        onClick={() => handleSuggestPrompts(keyword._originalIndex)}
-                        disabled={suggestingPromptsLoading}
-                        className="text-xs h-7"
-                      >
-                        {suggestingPromptsLoading && suggestingPromptsIdx === keyword._originalIndex
-                          ? "Suggesting..."
-                          : "✨ Suggest Prompts"}
-                      </Button>
+                      {!isExistingData ? (
+                        <Button
+                          variant="outline"
+                          size="xs"
+                          onClick={() => handleSuggestPrompts(keyword._originalIndex)}
+                          disabled={suggestingPromptsLoading}
+                          className="text-xs h-7"
+                        >
+                          {suggestingPromptsLoading && suggestingPromptsIdx === keyword._originalIndex
+                            ? "Suggesting..."
+                            : "✨ Suggest Prompts"}
+                        </Button>
+                      ) : (
+                        <span className="text-[11px] text-muted-foreground">
+                          Prompts loaded {savedAtDisplay ? `on ${savedAtDisplay}` : "previously"}
+                        </span>
+                      )}
                     </div>
 
                     <div className="space-y-1">
@@ -891,29 +915,31 @@ export default function SerpScoutPage() {
                         <p className="text-xs text-muted-foreground">No prompts yet. Click suggest.</p>
                       )}
                     </div>
-                    <div className="flex flex-col gap-2 md:flex-row md:items-center">
-                      <Input
-                        placeholder="Add a custom prompt"
-                        value={manualPromptInput[keyword._originalIndex] || ""}
-                        onChange={(e) =>
-                          setManualPromptInput((prev) => ({
-                            ...prev,
-                            [keyword._originalIndex]: e.target.value,
-                          }))
-                        }
-                      />
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleAddManualPrompt(keyword._originalIndex)}
-                      >
-                        Add Prompt
-                      </Button>
-                    </div>
+                    {!isExistingData && (
+                      <div className="flex flex-col gap-2 md:flex-row md:items-center">
+                        <Input
+                          placeholder="Add a custom prompt"
+                          value={manualPromptInput[keyword._originalIndex] || ""}
+                          onChange={(e) =>
+                            setManualPromptInput((prev) => ({
+                              ...prev,
+                              [keyword._originalIndex]: e.target.value,
+                            }))
+                          }
+                        />
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleAddManualPrompt(keyword._originalIndex)}
+                        >
+                          Add Prompt
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 ))}
 
-                {currentStep === 4 && (
+                {!isExistingData && currentStep === 4 && (
                   <Button
                     onClick={handleSaveKeywords}
                     disabled={isSaving || selectedKeywordEntries.length === 0}
@@ -923,7 +949,17 @@ export default function SerpScoutPage() {
                     {isSaving ? "Saving..." : "Save Selected Keywords"}
                   </Button>
                 )}
-                {isKeywordsSaved && (
+                {isExistingData && (
+                  <div className="rounded-lg bg-blue-500/10 border border-blue-500/30 p-4 text-center">
+                    <p className="text-sm font-semibold text-blue-800">
+                      ✓ Keywords and prompts saved earlier {savedAtDisplay ? `on ${savedAtDisplay}` : "previously"}.
+                    </p>
+                    <p className="text-xs text-blue-700/80">
+                      Use Step 5 to analyze, or rerun the domain fetch to regenerate everything.
+                    </p>
+                  </div>
+                )}
+                {!isExistingData && isKeywordsSaved && (
                   <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-4 text-center">
                     <p className="text-sm font-semibold text-emerald-700">
                       ✓ Keywords saved! Ready for analysis.
