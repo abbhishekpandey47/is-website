@@ -46,7 +46,7 @@ export default function AIStartupLanding() {
             <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600">
               {" "}
-              AI Agents <span className="text-white">&</span> SaaS Startups{" "}
+              B2B SaaS Startups{" "}
             </span>
           </h1>
         </div>

@@ -2,40 +2,40 @@
   font-family: "Quicksand";
   src: url('/fonts/Quicksand-Bold.woff');
   font-weight: bold;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Quicksand";
   src: url('/fonts/Quicksand-SemiBold.woff2');
   font-weight: 600;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Quicksand";
   src: url('/fonts/Quicksand-Light.woff2') format("woff2");
   font-weight: 100;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Quicksand";
   src: url('/fonts/Quicksand-Medium.woff2') format("woff2");
   font-weight: medium;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Termina Demi';
   src: url('/fonts/TerminaTest-Demi.otf') format('opentype');
   font-weight: semibold;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Termina Demi';
   src: url('/fonts/TerminaTest-Thin.otf') format('opentype');
   font-weight: 100;
-  font-display: optional;
+  font-display: swap;
 }
