@@ -7,13 +7,16 @@ import { clientPaddingMap, serviceClientLogo } from "@/clients";
 const logoFiles = serviceClientLogo;
 
 export default function TrustedMarquee({
-    heading = "Trusted by Builders at",
-    highlight = "Innovative AI Startups",
+    heading = "",
+    highlight = "",
     wrapperClassName,
     headingClassName,
     highlightClassName,
     headingStyle,
-    spacingClassName="pt-24"
+    spacingClassName = "pt-28",
+    maskColor = "rgba(12, 8, 24, 0.95)",
+    maskFadeColor = "rgba(12, 8, 24, 0)",
+    maskWidth = 72
 }) {
     const getLogoPadding = useCallback((filename) => {
         const paddingMap = clientPaddingMap;
@@ -51,9 +54,17 @@ export default function TrustedMarquee({
                     <span className={resolvedHighlightClassName}>{highlight}</span>
                 </h3>
             </div>
-            <div className="space-y-6 mt-12">
+            <div
+                className="space-y-6 mt-12 relative z-0 marquee__rows"
+                style={{
+                    "--marquee-mask-color": maskColor,
+                    "--marquee-mask-fade": maskFadeColor,
+                    "--marquee-mask-width": `${maskWidth}px`,
+                    "--marquee-border-radius": "24px"
+                }}
+            >
                 {logoRows.map((row, rowIndex) => (
-                    <div key={rowIndex} className="marquee marquee--blur">
+                    <div key={rowIndex} className="marquee">
                         <div className={`marquee__track${rowIndex % 2 === 1 ? " marquee__track--reverse" : ""}`}>
                             {[...row, ...row].map((logoFile, idx) => (
                                 <div
@@ -79,8 +90,28 @@ export default function TrustedMarquee({
                 .marquee {
                     overflow: hidden;
                 }
-                .marquee--blur {
+                .marquee__rows {
                     position: relative;
+                }
+                .marquee__rows::before,
+                .marquee__rows::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    width: var(--marquee-mask-width, 72px);
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 10;
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                }
+                .marquee__rows::before {
+                    left: 0;
+                    background: linear-gradient(to right, var(--marquee-mask-color), var(--marquee-mask-fade));
+                }
+                .marquee__rows::after {
+                    right: 0;
+                    background: linear-gradient(to left, var(--marquee-mask-color), var(--marquee-mask-fade));
                 }
                 .marquee__track {
                     display: flex;
@@ -105,34 +136,6 @@ export default function TrustedMarquee({
                 }
                 .marquee__track--reverse {
                     animation-direction: reverse;
-                }
-                .marquee--blur::before,
-                .marquee--blur::after {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    width: 72px;
-                    height: 100%;
-                    pointer-events: none;
-                    z-index: 10;
-                    backdrop-filter: blur(12px);
-                    -webkit-backdrop-filter: blur(12px);
-                }
-                .marquee--blur::before {
-                    left: 0;
-                    background: linear-gradient(
-                        to right,
-                        rgba(12, 8, 24, 0.95),
-                        rgba(12, 8, 24, 0)
-                    );
-                }
-                .marquee--blur::after {
-                    right: 0;
-                    background: linear-gradient(
-                        to left,
-                        rgba(12, 8, 24, 0.95),
-                        rgba(12, 8, 24, 0)
-                    );
                 }
                 @keyframes marquee {
                     from {

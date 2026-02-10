@@ -41,15 +41,15 @@ const testimonials = [
     },
     {
         id: 4,
-        name: 'Frank Weissmann',
-        imageUrl: '/Testimon/Frank.jpg',
-        title: 'Customer Success Lead',
-        company:'Firefly.ai',
+        name: 'Debosmit Ray',
+        imageUrl: '/Testimon/Debosmit-devzero.png',
+        title: 'Founder',
+        company:'Devzero',
         quote:
-            "Infrasity's work has improved the client's SEO, earning a score of over 75%. They've also enabled the client to onboard end customers faster. Moreover, the team listens to the client's content needs, produces work that aligns with their conversation and delivers output in a quick turnaround time.",
-        highlight: ['over 75%', 'quick turnaround time'],
+            "Infrasity has helped us create technical content, product documentation, and recipe libraries for integrating DevZero with different tech stacks. Their product videos showcase our key features, making it easier to engage users. A great content partner in our journey!",
+        highlight: ['technical content', 'tech stacks' , 'easier to engage users','great content partner'],
         animate: true,
-        caseStudyUrl: '/case-studies/case-study-series-a-cloud-developer-marketing',
+        caseStudyUrl: '/case-studies/case-study-product-documentation',
     },
     {
         id: 5,
