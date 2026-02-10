@@ -105,13 +105,42 @@ const highlightedQuote = (quote, highlights) => {
     }, quote);
 };
 
+const CaseStudyCta = ({ testimonial, ctaClassName = '', onOpenVideo, variant }) => {
+    const hasVideo = Boolean(testimonial.videoUrl);
+    if (hasVideo) {
+        return (
+            <button
+                type="button"
+                onClick={() => onOpenVideo?.(testimonial)}
+                className={`inline-flex items-center gap-2 text-sm uppercase tracking-[0.4em] text-white/80 hover:text-white transition ${ctaClassName}`}
+                aria-label={`Play ${testimonial.name} video testimonial`}
+            >
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20">
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                        <path d="M9 6v12l9-6-9-6z" />
+                    </svg>
+                </span>
+                View Full Case Study
+            </button>
+        );
+    }
+    return (
+        <a
+            href={testimonial.caseStudyUrl}
+            className={`text-sm uppercase tracking-[0.4em] text-white/70 hover:text-white transition ${ctaClassName}`}
+            aria-label={`View full case study`}
+        >
+            View Full Case Study
+        </a>
+    );
+};
+
 const TestimonialCard = ({ testimonial, variant = 'front', ctaClassName = '', onOpenVideo }) => {
     const variantStyles = variant === 'back' ? 'opacity-80 border-gray-700/50' : 'opacity-100 border-gray-700/50';
-    const hasVideo = Boolean(testimonial.videoUrl);
 
     return (
         <div
-            className={`w-full h-full py-10 relative ${variantStyles} rounded-[32px] overflow-hidden border border-gray-700/50 ring-1 ring-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.25)]`}
+            className={`w-full h-full relative ${variantStyles} rounded-[32px] overflow-hidden border border-gray-700/50 ring-1 ring-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.25)]`}
         >
             <svg
                 className="absolute inset-0 w-full h-full pointer-events-none"
@@ -195,29 +224,7 @@ const TestimonialCard = ({ testimonial, variant = 'front', ctaClassName = '', on
                 </div>
             ) : (
                 <div className="relative z-10 w-full h-full flex items-end justify-center pb-2">
-                    {hasVideo ? (
-                        <button
-                            type="button"
-                            onClick={() => onOpenVideo?.(testimonial)}
-                            className={`inline-flex items-center gap-2 text-sm uppercase tracking-[0.4em] text-white/80 hover:text-white transition ${ctaClassName}`}
-                            aria-label={`Play ${testimonial.name} video testimonial`}
-                        >
-                            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20">
-                                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
-                                    <path d="M9 6v12l9-6-9-6z" />
-                                </svg>
-                            </span>
-                            View Full Case Study
-                        </button>
-                    ) : (
-                        <a
-                            href={testimonial.caseStudyUrl}
-                            className={`text-sm uppercase tracking-[0.4em] text-white/60 hover:text-white transition ${ctaClassName}`}
-                            aria-label={`View full case study`}
-                        >
-                            View Full Case Study
-                        </a>
-                    )}
+                    <CaseStudyCta testimonial={testimonial} onOpenVideo={onOpenVideo} ctaClassName={ctaClassName} />
                 </div>
             )}
         </div>

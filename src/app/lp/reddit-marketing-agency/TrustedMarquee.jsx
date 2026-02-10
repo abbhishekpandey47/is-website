@@ -58,8 +58,8 @@ export default function TrustedMarquee({
                             {[...row, ...row].map((logoFile, idx) => (
                                 <div
                                     key={`${logoFile}-${idx}`}
-                                    style={{"background": "linear-gradient(225deg, #24126A 0%, rgba(70.64, 35.32, 208, 0) 100%)"}}
-                                    className="flex items-center justify-center rounded-lg border border-white/10 h-[56px] px-6"
+                                    // style={{"background": "linear-gradient(225deg, #24126A 0%, rgba(70.64, 35.32, 208, 0) 100%)"}}
+                                    className="flex items-center justify-center h-[56px] px-6"
                                 >
                                     <Image
                                         loading="lazy"

@@ -14,7 +14,7 @@ const faqs = [
         id: "2",
         question: "How is Infrasity different from other GEO or AI SEO agencies?",
         answer:
-            "Unlike generic SEO agencies, Infrasity is built for developer-first and SaaS-led products.\nWe understand how AI systems interpret:\nTechnical blogs and product documentation\nAPIs, SDKs, and developer workflows\nB2B SaaS positioning and comparisons\n\nOur GEO strategies are designed by practitioners who actively work with dev tools, AI platforms, and technical startups, so your content is optimized to be trusted and cited by AI engines.",
+            "Unlike generic SEO agencies, Infrasity is built for developer-first and SaaS-led products.\n We understand how AI systems interpret:\n\n • Technical blogs and product documentation\n • APIs, SDKs, and developer workflows\n • B2B SaaS positioning and comparisons\n\nOur GEO strategies are designed by practitioners who actively work with dev tools, AI platforms, and technical startups, so your content is optimized to be trusted and cited by AI engines.",
     },
     {
         id: "3",
@@ -26,7 +26,7 @@ const faqs = [
         id: "4",
         question: "What types of companies benefit most from Infrasity’s AI GEO Optimization?",
         answer:
-            "Our service is best suited for:\nB2B SaaS companies\nDeveloper tools and platforms\nAI agents and AI-first products\nDevOps, cloud, infra, and security startups\n\nIf your buyers ask questions like “best tool for”, “how to solve”, or “which platform should I use”, GEO ensures your product is part of those AI-driven answers.",
+            "Our service is best suited for:\n\n• B2B SaaS companies\n• Developer tools and platforms\n• AI agents and AI-first products\n• DevOps, cloud, infra, and security startups\n\nIf your buyers ask questions like “best tool for”, “how to solve”, or “which platform should I use”, GEO ensures your product is part of those AI-driven answers.",
     },
     {
         id: "5",
@@ -44,7 +44,7 @@ const faqs = [
         id: "7",
         question: "How does Infrasity measure success for AI GEO Optimization?",
         answer:
-            "We measure success using AI-native metrics such as:\nProduct mentions and citations in AI tools\nVisibility across AI platforms and prompts\nAI referral signals and assisted discovery\nCoverage for high-intent AI queries\n\nThis provides a clearer picture of how your startup performs across the AI-driven buyer journey, not just traditional rankings.",
+            "We measure success using AI-native metrics such as:\n\n• Product mentions and citations in AI tools\n• Visibility across AI platforms and prompts\n• AI referral signals and assisted discovery\n• Coverage for high-intent AI queries\n\nThis provides a clearer picture of how your startup performs across the AI-driven buyer journey, not just traditional rankings.",
     },
 ];
 
