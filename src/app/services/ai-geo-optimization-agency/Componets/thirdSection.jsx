@@ -81,7 +81,7 @@ export default function ThirdSection({ cards = defaultCards }) {
       </div>
 
       <div className="max-w-5xl mx-auto text-center mb-14">
-        <h2 className="text-4xl md:text-6xl font-semibold text-white mb-4" style={{ fontFamily: 'Manrope, sans-serif' }}>
+        <h2 className="text-2xl md:text-4xl font-semibold text-white mb-4" style={{ fontFamily: 'Manrope, sans-serif' }}>
           Win visibility everywhere with GEO
         </h2>
         <p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto" style={{ fontFamily: 'Inter, sans-serif' }}>

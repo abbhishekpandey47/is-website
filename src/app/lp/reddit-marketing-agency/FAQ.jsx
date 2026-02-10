@@ -21,7 +21,7 @@ const AccordionItem = ({ id, question, answer, isOpen, toggleAccordion }) => {
                 className={`overflow-hidden bg-gray-100 rounded-[10px] transition-all duration-300 ${isOpen ? "max-h-96 opacity-100 p-6" : "max-h-0 opacity-0"
                     }`}
             >
-                <div className="text-black">{answer}</div>
+                <div className="text-black whitespace-pre-line">{answer}</div>
             </div>
         </div>
     );
@@ -103,11 +103,7 @@ const FAQSection = ({faqsData=faqData}) => {
                 <div className="flex max-md:flex-col sm:flex-col lg:flex-row justify-center gap-10 lg:gap-40">
                     {/* Left column with heading and text */}
                     <div className="lg:w-5/12 mb-10 lg:mb-0">
-                        <div className="inline-flex items-center bg-purple-100 rounded-full px-4 py-1.5 mb-6">
-                            <span className="text-purple-800 text-center">FAQ</span>
-                        </div>
-
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-400 text-[#5F64FF] mb-6 leading-tight">
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl mb-6 font-semibold">
                             Frequently Asked Questions
                         </h2>
 

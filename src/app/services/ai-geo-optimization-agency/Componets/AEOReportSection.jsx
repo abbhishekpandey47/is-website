@@ -30,14 +30,17 @@ export default function AEOReportSection() {
   };
 
   return (
-    <section className="w-full flex flex-col gap-10 py-12">
+    <section className="w-full flex flex-col gap-10 py-10">
       <div className="max-w-3xl mx-auto text-center px-4">
         <h2 className="text-white text-3xl md:text-4xl font-bold mb-3">How do AI systems talk about your product?</h2>
         <p className="text-white/80 text-lg">Get a free AEO report showing visibility, citations, and sentiment across leading answer engines.</p>
       </div>
-      <div className="w-full flex flex-col md:flex-row rounded-2xl shadow-lg border border-[#fff]/30 p-8 py-20 md:p-12 gap-8 max-w-6xl mx-auto overflow-hidden">
+      <div
+        className="relative w-full flex flex-col md:flex-row rounded-2xl shadow-lg border border-[#777777] md:p-12 gap-8 max-w-6xl mx-auto overflow-hidden bg-center bg-no-repeat bg-auto"
+        style={{ backgroundImage: "url('/aeo/aeoreportbg.svg')" }}
+      >
       {/* Left: Form */}
-      <div className="flex-1 flex flex-col justify-center min-w-[320px]">
+      <div className="relative z-10 flex-1 flex flex-col justify-center min-w-[320px]">
         <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Get your free AEO Report today</h2>
         <p className="text-white/80 text-lg mb-6">Discover how your brand performs on answer engines and uncover the opportunities to outpace the competition</p>
         {!submitted ? (
@@ -76,8 +79,8 @@ export default function AEOReportSection() {
         </div>
       </div>
       {/* Right: Mockup/Preview */}
-      <div className="flex-1 flex flex-col justify-center items-center min-w-[320px] ">
-        <img src="/CommLogo/aeo.png" alt="AEO Report Mockup" className="max-w-full rounded-lg shadow-lg relative -right-[3.5rem] -bottom-[3.5rem] w-[35rem] h-[32rem]"/>
+      <div className="relative z-10 flex-1 flex flex-col justify-center items-center min-w-[320px] ">
+        <img src="/aeo/aeoReport.svg" alt="AEO Report Mockup" className="max-w-full rounded-lg shadow-lg relative -right-[3.5rem] -bottom-[3.5rem] w-[35rem] h-[32rem]"/>
       </div>
       </div>
     </section>

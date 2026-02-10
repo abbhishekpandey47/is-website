@@ -1,16 +1,16 @@
 import Home from "./Componets/home";
 import SecondSection from "./Componets/secondSection";
-import ThirdSection from "./Componets/thirdSection";
+// import ThirdSection from "./Componets/thirdSection";
 import Testimonials from "../../lp/reddit-marketing-agency/testimonials";
 import FAQ from "./Componets/faq";
 import CTA from "../developer-marketing-agency/cta";
-import TrustedMarquee from "@/app/lp/reddit-marketing-agency/TrustedMarquee";
 import CaseStudies from "./Componets/caseStudies";
 import AEOReportSection from "./Componets/AEOReportSection";
 import ServiceHighlights from "./Componets/serviceHighlights";
 import FourthSection from "./Componets/FourthSection";
 import FifthSection from "./Componets/FifthSection";
 import Cta from "./Componets/Cta";
+// import ClientSection from "./Componets/clientSection";
 
 export const metadata = {
   title: 'AI Generative Engine Optimization Agency | GEO & AI Search Visibility',
@@ -24,20 +24,11 @@ export default function LandingPage() {
   return (
     <main>
       <Home />
-      <TrustedMarquee
-        heading="Trusted by high growth B2B SaaS, DevTools, and AI Teams worldwide"
-        highlight=""
-        wrapperClassName="text-center max-w-5xl mx-auto"
-        headingClassName="text-2xl md:text-4xl font-semibold text-white"
-        highlightClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#6366f1]"
-        headingStyle={{ fontFamily: 'Manrope, sans-serif' }}
-      />
-      <SecondSection />
-      <ThirdSection />
+      {/* <ClientSection/> */}
       <FourthSection />
+      <SecondSection />
+      {/* <ThirdSection /> */}
       <FifthSection />
-      {/* <ServiceHighlights /> */}
-      {/* <CaseStudies /> */}
       <AEOReportSection />
       <Testimonials
         heading="Why Leading VCs Choose Infrasity"
@@ -49,7 +40,7 @@ export default function LandingPage() {
         highlightClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#6366f1]"
         subHeadingClassName="text-white/70 text-base md:text-lg"
         headingStyle={{ fontFamily: 'Manrope, sans-serif' }}
-          showDivider={false}
+        showDivider={false}
       />
       <Cta />
       <FAQ />

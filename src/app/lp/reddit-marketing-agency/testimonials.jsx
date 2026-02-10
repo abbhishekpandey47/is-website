@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 const testimonials = [
     {
         id: 1,
@@ -8,8 +12,8 @@ const testimonials = [
         quote:
             "Infrasity was quick to onboard and understand how to best show off the capabilities of Firefly's cloud asset management. Team has been super responsive and collaborative.",
         highlight: ['quick to onboard', 'responsive', 'collaborative'],
-        animate: false,
-        caseStudyUrl: '/case-studies',
+        animate: true,
+        caseStudyUrl: '/case-studies/case-study-series-a-cloud-developer-marketing',
     },
     {
         id: 2,
@@ -20,20 +24,20 @@ const testimonials = [
         quote:
             "Infrasity's creative content has significantly enhanced the visibility and appeal of our product in a competitive market. Crafting content that engages our audience and eloquently highlights the advanced capabilities of Kubiya.ai.",
         highlight: ['significantly enhanced the visibility and appeal of our product'],
-        animate: false,
+        animate: true,
         caseStudyUrl: '/case-studies/terrateam-case-study',
     },
     {
         id: 3,
-        name: 'Shaked Askayo',
-        imageUrl: '/Testimon/Shaked.png',
-        title: 'CTO',
-        company: 'Kubiya.ai',
+        name: 'Melanie Lim Laju Kitingon',
+        imageUrl: '/Testimon/Melanie.png',
+        title: 'Project Manager',
+        company: 'Respond.io',
         quote:
-            "Infrasity's experience in platform engineering and DevOps gave us confidence that they could translate our technical value into engaging content and videos.",
-        highlight: ['platform engineering', 'engaging content'],
-        animate: false,
-        caseStudyUrl: '/case-studies',
+            "Infrasity is constantly looking for ways to work more productively and be more optimized. Infrasity has created original posts and content that have ranked in the top 10 search results for priority keywords.They strive to be more productive and optimized.",
+        highlight: ['top 10 search results', 'responds fast', 'adapts quickly', 'more productive and optimized'],
+        animate: true,
+        caseStudyUrl: '/case-studies/respond-io-community-led-growth-case-study',
     },
     {
         id: 4,
@@ -44,8 +48,8 @@ const testimonials = [
         quote:
             "Infrasity's work has improved the client's SEO, earning a score of over 75%. They've also enabled the client to onboard end customers faster. Moreover, the team listens to the client's content needs, produces work that aligns with their conversation and delivers output in a quick turnaround time.",
         highlight: ['over 75%', 'quick turnaround time'],
-        animate: false,
-        caseStudyUrl: '/case-studies',
+        animate: true,
+        caseStudyUrl: '/case-studies/case-study-series-a-cloud-developer-marketing',
     },
     {
         id: 5,
@@ -56,8 +60,9 @@ const testimonials = [
         quote:
             "Infrasity's ability to translate Cycloid's technical messaging into stories that sales and engineering teams could rally around was game changing.",
         highlight: ['technical messaging', 'game changing'],
-        animate: false,
+        animate: true,
         caseStudyUrl: '/case-studies',
+        videoUrl: 'https://youtu.be/19Nz5OxaTtc',
     },
     {
         id: 6,
@@ -68,10 +73,28 @@ const testimonials = [
         quote:
             "Infrasity's unique ability to create deep, technical content that resonates with engineers has been valuable in helping us identify and address our customers pain points.",
         highlight: ['create deep', 'customers pain points'],
-        animate: false,
+        animate: true,
         caseStudyUrl: '/case-studies/case-study-series-a-cloud-developer-marketing',
+        videoUrl: 'https://youtube.com/shorts/AgCQ176pfRU',
     },
 ];
+
+const isYouTubeUrl = (url = "") => /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//i.test(url);
+const getYouTubeId = (url = "") => {
+    try {
+        const parsed = new URL(url, typeof window !== "undefined" ? window.location.origin : "http://localhost");
+        if (parsed.hostname.includes("youtu.be")) return parsed.pathname.slice(1);
+        if (parsed.searchParams.get("v")) return parsed.searchParams.get("v");
+        const parts = parsed.pathname.split("/").filter(Boolean);
+        const idx = parts.findIndex((part) => part === "embed" || part === "shorts");
+        if (idx !== -1 && parts[idx + 1]) return parts[idx + 1];
+    } catch {}
+    return "";
+};
+const toYouTubeEmbed = (url = "") => {
+    const id = getYouTubeId(url);
+    return id ? `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&rel=0` : "";
+};
 
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -82,7 +105,37 @@ const highlightedQuote = (quote, highlights) => {
     }, quote);
 };
 
-const TestimonialCard = ({ testimonial, variant = 'front', ctaClassName = '' }) => {
+const CaseStudyCta = ({ testimonial, ctaClassName = '', onOpenVideo, variant }) => {
+    const hasVideo = Boolean(testimonial.videoUrl);
+    if (hasVideo) {
+        return (
+            <button
+                type="button"
+                onClick={() => onOpenVideo?.(testimonial)}
+                className={`inline-flex items-center gap-2 text-sm uppercase tracking-[0.4em] text-white/80 hover:text-white transition ${ctaClassName}`}
+                aria-label={`Play ${testimonial.name} video testimonial`}
+            >
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20">
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                        <path d="M9 6v12l9-6-9-6z" />
+                    </svg>
+                </span>
+                View Full Case Study
+            </button>
+        );
+    }
+    return (
+        <a
+            href={testimonial.caseStudyUrl}
+            className={`text-sm uppercase tracking-[0.4em] text-white/70 hover:text-white transition ${ctaClassName}`}
+            aria-label={`View full case study`}
+        >
+            View Full Case Study
+        </a>
+    );
+};
+
+const TestimonialCard = ({ testimonial, variant = 'front', ctaClassName = '', onOpenVideo }) => {
     const variantStyles = variant === 'back' ? 'opacity-80 border-gray-700/50' : 'opacity-100 border-gray-700/50';
 
     return (
@@ -171,19 +224,13 @@ const TestimonialCard = ({ testimonial, variant = 'front', ctaClassName = '' }) 
                 </div>
             ) : (
                 <div className="relative z-10 w-full h-full flex items-end justify-center pb-2">
-                    <a
-                        href={testimonial.caseStudyUrl}
-                        className={`text-sm uppercase tracking-[0.4em] text-white/60 ${ctaClassName}`}
-                        aria-label={`View full case study`}
-                    >
-                        View Full Case Study
-                    </a>
+                    <CaseStudyCta testimonial={testimonial} onOpenVideo={onOpenVideo} ctaClassName={ctaClassName} />
                 </div>
             )}
         </div>
     );
 };
-const TestimonialTile = ({ testimonial }) => {
+const TestimonialTile = ({ testimonial, onOpenVideo }) => {
     const frontTransform = testimonial.animate
         ? 'origin-left group-hover:-translate-y-6 group-hover:rotate-[-2deg]'
         : 'origin-left';
@@ -192,10 +239,85 @@ const TestimonialTile = ({ testimonial }) => {
         <div className="group flex flex-col items-center text-center">
             <div className="relative w-[350px] h-[350px]">
                 <div className="absolute inset-0">
-                    <TestimonialCard testimonial={testimonial} variant="back" ctaClassName="group-hover:text-white" />
+                    <TestimonialCard
+                        testimonial={testimonial}
+                        variant="back"
+                        ctaClassName="group-hover:text-white"
+                        onOpenVideo={onOpenVideo}
+                    />
                 </div>
                 <div className={`absolute inset-0 transition duration-700 transform-gpu ${frontTransform}`}>
                     <TestimonialCard testimonial={testimonial} variant="front" />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const VideoModal = ({ openItem, onClose }) => {
+    const url = openItem?.videoUrl || "";
+    const isYouTube = isYouTubeUrl(url);
+    const embedUrl = isYouTube ? toYouTubeEmbed(url) : "";
+
+    useEffect(() => {
+        if (!openItem) return;
+        const onKey = (event) => event.key === "Escape" && onClose();
+        window.addEventListener("keydown", onKey);
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        return () => {
+            window.removeEventListener("keydown", onKey);
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [openItem, onClose]);
+
+    if (!openItem) return null;
+
+    return (
+        <div
+            role="dialog"
+            aria-modal="true"
+            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
+            onClick={onClose}
+        >
+            <button
+                type="button"
+                onClick={onClose}
+                className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20"
+                aria-label="Close video"
+            >
+                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 6L6 18" />
+                    <path d="M6 6l12 12" />
+                </svg>
+            </button>
+            <div className="flex h-full w-full items-center justify-center p-4" onClick={(event) => event.stopPropagation()}>
+                <div className="relative w-full max-w-[90vw] md:max-w-3xl lg:max-w-4xl">
+                    <div
+                        className="relative w-full overflow-hidden rounded-2xl bg-black shadow-2xl ring-1 ring-white/10"
+                        style={{ paddingTop: "56.25%" }}
+                    >
+                        {isYouTube ? (
+                            <iframe
+                                src={embedUrl}
+                                title={openItem.name || "Testimonial video"}
+                                className="absolute left-0 top-0 h-full w-full"
+                                allow="autoplay; encrypted-media; picture-in-picture"
+                                allowFullScreen
+                            />
+                        ) : (
+                            <video
+                                autoPlay
+                                controls
+                                playsInline
+                                className="absolute left-0 top-0 h-full w-full"
+                                src={url}
+                            />
+                        )}
+                    </div>
+                    <div className="mt-4 text-center text-sm text-white/70">
+                        {openItem.name} - {openItem.company}
+                    </div>
                 </div>
             </div>
         </div>
@@ -214,6 +336,7 @@ export default function Testimonials({
     subHeadingClassName,
     headingStyle
 }) {
+    const [openVideo, setOpenVideo] = useState(null);
     const resolvedWrapperClassName =
         wrapperClassName ||
         'quicksand-bold text-[32px] max-sm:text-[20px] tracking-tight leading-[1.1] text-white flex justify-center mb-2';
@@ -249,9 +372,14 @@ export default function Testimonials({
 
             <div className="grid gap-8 max-w-6xl mx-auto place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {testimonials.map((testimonial) => (
-                    <TestimonialTile key={testimonial.id} testimonial={testimonial} />
+                    <TestimonialTile
+                        key={testimonial.id}
+                        testimonial={testimonial}
+                        onOpenVideo={setOpenVideo}
+                    />
                 ))}
             </div>
+            <VideoModal openItem={openVideo} onClose={() => setOpenVideo(null)} />
         </section>
     );
 }

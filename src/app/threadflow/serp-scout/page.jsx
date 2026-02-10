@@ -25,6 +25,14 @@ import {
   Zap,
 } from "lucide-react";
 
+const buildCitationPrompts = (keywordPrompts = [], manualPrompts = []) => {
+  const basePrompts = Array.isArray(keywordPrompts) ? keywordPrompts.filter(Boolean) : [];
+  const extraPrompts = (Array.isArray(manualPrompts) ? manualPrompts : [])
+    .filter(Boolean)
+    .filter((prompt) => !basePrompts.includes(prompt));
+  return [...basePrompts, ...extraPrompts];
+};
+
 const formatDateTime = (value) => {
   if (!value) return "";
   try {
@@ -58,6 +66,13 @@ export default function SerpScoutPage() {
   // Keyword editing (before save)
   const [suggestingPromptsIdx, setSuggestingPromptsIdx] = useState(null);
   const [suggestingPromptsLoading, setSuggestingPromptsLoading] = useState(false);
+  const [manualKeywordForm, setManualKeywordForm] = useState({
+    term: "",
+    intent: "informational",
+    why: "",
+    prompts: "",
+  });
+  const [manualPromptInput, setManualPromptInput] = useState({});
 
   // Company context form
   const [editingContext, setEditingContext] = useState(false);
@@ -74,6 +89,8 @@ export default function SerpScoutPage() {
   const [serpLoading, setSerpLoading] = useState(false);
   const [citationResults, setCitationResults] = useState(null);
   const [citationLoading, setCitationLoading] = useState(false);
+  const [manualCitationPrompts, setManualCitationPrompts] = useState([]);
+  const [manualCitationInput, setManualCitationInput] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [selectedKeywordIds, setSelectedKeywordIds] = useState([]);
 
@@ -81,6 +98,8 @@ export default function SerpScoutPage() {
   const maxSelectable = 20;
   const minSelectable = 1;
   const selectedKeyword = selectedKeywordIdx !== null ? keywords[selectedKeywordIdx] : null;
+  const getCitationPrompts = () =>
+    buildCitationPrompts(selectedKeyword?.prompts, manualCitationPrompts);
 
   const selectedKeywordEntries = useMemo(
     () =>
@@ -329,8 +348,15 @@ export default function SerpScoutPage() {
   };
 
   const handleTestCitations = async () => {
-    if (!selectedKeyword?.prompts?.length) {
-      setError("No prompts available for this keyword");
+    const effectiveDomain =
+      trimmedDomain || rawResult?.domain || companyContext?.domain || rawResult?.companyContext?.domain || "";
+    const promptsToTest = getCitationPrompts();
+    if (!promptsToTest.length) {
+      setError("Add at least one prompt before running citation tests.");
+      return;
+    }
+    if (!effectiveDomain) {
+      setError("Domain is required to test citations.");
       return;
     }
 
@@ -345,8 +371,8 @@ export default function SerpScoutPage() {
         },
         body: JSON.stringify({
           action: "testCitations",
-          prompts: selectedKeyword.prompts.slice(0, 10),
-          domain: trimmedDomain,
+          prompts: promptsToTest.slice(0, 10),
+          domain: effectiveDomain,
         }),
       });
 
@@ -368,6 +394,41 @@ export default function SerpScoutPage() {
     const updated = [...keywords];
     updated[idx] = { ...updated[idx], [field]: value };
     setKeywords(updated);
+  };
+
+  const handleAddManualKeyword = () => {
+    setError("");
+    if (!manualKeywordForm.term.trim()) {
+      setError("Keyword term is required.");
+      return;
+    }
+    const prompts = manualKeywordForm.prompts
+      .split(/\n|,/)
+      .map((entry) => entry.trim())
+      .filter(Boolean)
+      .slice(0, 10);
+    const newKeyword = {
+      term: manualKeywordForm.term.trim(),
+      intent: manualKeywordForm.intent.trim() || "informational",
+      why: manualKeywordForm.why.trim() || "",
+      prompts,
+    };
+    setKeywords((prev) => [...prev, newKeyword]);
+    setManualKeywordForm({ term: "", intent: "informational", why: "", prompts: "" });
+    setSuccess("✓ Custom keyword added.");
+    setTimeout(() => setSuccess(""), 2000);
+  };
+
+  const handleAddManualPrompt = (keywordIdx) => {
+    const value = manualPromptInput[keywordIdx]?.trim();
+    if (!value) return;
+    const updated = [...keywords];
+    const existing = Array.isArray(updated[keywordIdx].prompts)
+      ? updated[keywordIdx].prompts
+      : [];
+    updated[keywordIdx].prompts = [...existing, value].slice(0, 10);
+    setKeywords(updated);
+    setManualPromptInput((prev) => ({ ...prev, [keywordIdx]: "" }));
   };
 
   const handleSuggestPrompts = async (keywordIdx) => {
@@ -427,6 +488,39 @@ export default function SerpScoutPage() {
     () => keywordSerpData?.suggestedPosts || [],
     [keywordSerpData]
   );
+  const citationPrompts = getCitationPrompts();
+  const citationDomain = useMemo(() => {
+    if (citationResults?.domain) return citationResults.domain;
+    if (trimmedDomain) return trimmedDomain.replace(/^https?:\/\//i, '').replace(/\/$/, '');
+    return '';
+  }, [citationResults, trimmedDomain]);
+
+  const citationSummary = useMemo(() => {
+    if (!citationResults?.records?.length) return null;
+    const records = citationResults.records;
+    const summary = {
+      total: records.length,
+      citedByTarget: 0,
+      citedByReddit: 0,
+      providers: []
+    };
+    records.forEach((record) => {
+      const targetCited = record.results?.some((result) =>
+        result.matches?.some((match) => match.domain === citationDomain)
+      );
+      const redditCited = record.results?.some((result) =>
+        result.matches?.some((match) => match.domain?.includes('reddit.com'))
+      );
+      summary.providers.push({
+        model: record.model,
+        targetCited: Boolean(targetCited),
+        redditCited: Boolean(redditCited)
+      });
+      if (targetCited) summary.citedByTarget += 1;
+      if (redditCited) summary.citedByReddit += 1;
+    });
+    return summary;
+  }, [citationResults, citationDomain]);
   
   // Post content generation state
   const [generatedPosts, setGeneratedPosts] = useState([]);
@@ -698,6 +792,47 @@ export default function SerpScoutPage() {
                     <Check className="h-4 w-4 mr-2" /> Continue to Prompts
                   </Button>
                 )}
+
+                <div className="rounded-lg border border-border bg-card/40 p-4 space-y-4">
+                  <div className="flex items-center gap-2 text-sm font-semibold">
+                    <Zap className="h-4 w-4 text-emerald-500" /> Add a custom keyword
+                  </div>
+                  <div className="grid gap-3 md:grid-cols-2">
+                    <Input
+                      placeholder="Keyword term"
+                      value={manualKeywordForm.term}
+                      onChange={(e) =>
+                        setManualKeywordForm((prev) => ({ ...prev, term: e.target.value }))
+                      }
+                    />
+                    <Input
+                      placeholder="Intent (informational/commercial/navigational)"
+                      value={manualKeywordForm.intent}
+                      onChange={(e) =>
+                        setManualKeywordForm((prev) => ({ ...prev, intent: e.target.value }))
+                      }
+                    />
+                  </div>
+                  <Textarea
+                    placeholder="Why this keyword matters (optional)"
+                    value={manualKeywordForm.why}
+                    onChange={(e) =>
+                      setManualKeywordForm((prev) => ({ ...prev, why: e.target.value }))
+                    }
+                    className="min-h-[70px]"
+                  />
+                  <Textarea
+                    placeholder="Add prompts (one per line or comma-separated)"
+                    value={manualKeywordForm.prompts}
+                    onChange={(e) =>
+                      setManualKeywordForm((prev) => ({ ...prev, prompts: e.target.value }))
+                    }
+                    className="min-h-[90px]"
+                  />
+                  <Button variant="outline" onClick={handleAddManualKeyword}>
+                    Add Keyword
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           )}
@@ -755,6 +890,25 @@ export default function SerpScoutPage() {
                       ) : (
                         <p className="text-xs text-muted-foreground">No prompts yet. Click suggest.</p>
                       )}
+                    </div>
+                    <div className="flex flex-col gap-2 md:flex-row md:items-center">
+                      <Input
+                        placeholder="Add a custom prompt"
+                        value={manualPromptInput[keyword._originalIndex] || ""}
+                        onChange={(e) =>
+                          setManualPromptInput((prev) => ({
+                            ...prev,
+                            [keyword._originalIndex]: e.target.value,
+                          }))
+                        }
+                      />
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleAddManualPrompt(keyword._originalIndex)}
+                      >
+                        Add Prompt
+                      </Button>
                     </div>
                   </div>
                 ))}
@@ -1114,6 +1268,49 @@ export default function SerpScoutPage() {
                     {/* Citations Tab */}
                     {analysisTab === "citations" && (
                       <div className="space-y-4">
+                        <div className="rounded-lg border border-border bg-card/40 p-4 space-y-3">
+                          <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                            Citation prompts
+                          </p>
+                          <div className="flex flex-col gap-2 md:flex-row md:items-center">
+                            <Input
+                              placeholder="Add an optional prompt to compare"
+                              value={manualCitationInput}
+                              onChange={(e) => setManualCitationInput(e.target.value)}
+                            />
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                const value = manualCitationInput.trim();
+                                if (!value) return;
+                                setManualCitationPrompts((prev) => [...prev, value].slice(0, 10));
+                                setManualCitationInput("");
+                              }}
+                            >
+                              Add prompt
+                            </Button>
+                          </div>
+                          <p className="text-[11px] text-muted-foreground">
+                            Step 4 prompts are used by default. Add extras only if you want to test variations.
+                          </p>
+                          {citationPrompts.length ? (
+                            <div className="flex flex-wrap gap-2">
+                              {citationPrompts.map((prompt, idx) => (
+                                <span
+                                  key={`${prompt}-${idx}`}
+                                  className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700"
+                                >
+                                  {prompt}
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-xs text-muted-foreground">
+                              Prompts from Step 4 are listed here automatically; add one above only if you need a custom test.
+                            </p>
+                          )}
+                        </div>
                         <Button
                           onClick={handleTestCitations}
                           disabled={citationLoading}
@@ -1124,20 +1321,44 @@ export default function SerpScoutPage() {
 
                         {citationResults && (
                           <div className="space-y-6">
+                            {citationSummary && (
+                              <div className="rounded-lg border border-border bg-card/40 p-4 space-y-3">
+                                <div className="flex flex-wrap items-center gap-3">
+                                  <span className="text-xs uppercase tracking-widest text-muted-foreground">
+                                    Citation Summary
+                                  </span>
+                                  <span className="text-xs text-muted-foreground">
+                                    {citationSummary.total} model runs
+                                  </span>
+                                </div>
+                                <div className="flex flex-wrap gap-3">
+                                  <div className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700">
+                                    {citationDomain || 'Target domain'} cited in {citationSummary.citedByTarget}/{citationSummary.total}
+                                  </div>
+                                  <div className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs text-amber-700">
+                                    Reddit cited in {citationSummary.citedByReddit}/{citationSummary.total}
+                                  </div>
+                                </div>
+                              </div>
+                            )}
                             {/* Group by prompt */}
-                            {selectedKeyword?.prompts?.map((prompt, pIdx) => {
+                            {citationPrompts.map((prompt, pIdx) => {
                               const promptResults =
                                 citationResults.records
                                   ?.map((record) => {
                                     const result = record.results?.find((r) => r.prompt === prompt);
-                                    const redditMatch = result?.matches?.find((m) =>
+                                    if (!result) return null;
+                                    const targetMatch = result.matches?.find((m) => m.domain === citationDomain);
+                                    const redditMatch = result.matches?.find((m) =>
                                       m.domain?.toLowerCase().includes("reddit.com")
                                     );
-                                    if (!redditMatch) return null;
+                                    if (!targetMatch && !redditMatch) return null;
                                     return {
                                       model: record.model,
                                       timestamp: record.timestamp,
-                                      result: { ...result, matches: [redditMatch] },
+                                      result,
+                                      targetMatch,
+                                      redditMatch
                                     };
                                   })
                                   .filter(Boolean) || [];
@@ -1152,15 +1373,16 @@ export default function SerpScoutPage() {
 
                                   <div className="space-y-2">
                                     {promptResults.map((item, idx) => {
-                                      const match = item.result?.matches?.[0];
-                                      const rank = match?.ranks?.[0];
-                                      const hasMatch = match && rank;
+                                      const targetRank = item.targetMatch?.ranks?.[0];
+                                      const redditRank = item.redditMatch?.ranks?.[0];
+                                      const hasTarget = Boolean(item.targetMatch);
+                                      const hasReddit = Boolean(item.redditMatch);
 
                                       return (
                                         <div
                                           key={idx}
                                           className={`rounded-lg border p-3 ${
-                                            hasMatch
+                                            hasTarget || hasReddit
                                               ? "border-green-500/30 bg-green-500/5"
                                               : "border-amber-500/30 bg-amber-500/5"
                                           }`}
@@ -1171,34 +1393,51 @@ export default function SerpScoutPage() {
                                                 {item.model}
                                               </p>
                                             </div>
-                                            {hasMatch ? (
-                                              <div className="flex items-center gap-2">
-                                                <span className="text-2xl font-bold text-green-600">
-                                                  #{rank}
+                                            <div className="flex flex-wrap items-center gap-2">
+                                              {hasTarget ? (
+                                                <span className="rounded-full bg-emerald-600/10 px-2 py-1 text-[10px] font-semibold text-emerald-700">
+                                                  {citationDomain || 'Target'} #{targetRank || '—'}
                                                 </span>
-                                                <span className="text-xs text-green-600 font-medium">
-                                                  ✓ RANKED
+                                              ) : (
+                                                <span className="rounded-full bg-amber-500/10 px-2 py-1 text-[10px] font-semibold text-amber-700">
+                                                  Target not cited
                                                 </span>
-                                              </div>
-                                            ) : (
-                                              <div className="flex items-center gap-2">
-                                                <span className="text-xs text-amber-600 font-medium">
-                                                  ✗ NOT FOUND
+                                              )}
+                                              {hasReddit ? (
+                                                <span className="rounded-full bg-orange-500/10 px-2 py-1 text-[10px] font-semibold text-orange-700">
+                                                  Reddit #{redditRank || '—'}
                                                 </span>
-                                              </div>
-                                            )}
+                                              ) : (
+                                                <span className="rounded-full bg-muted px-2 py-1 text-[10px] font-semibold text-muted-foreground">
+                                                  Reddit not cited
+                                                </span>
+                                              )}
+                                            </div>
                                           </div>
 
-                                          {/* Show domain details if matched */}
-                                          {hasMatch && match?.domain && (
-                                            <div className="mt-2 pt-2 border-t border-green-500/20">
-                                              <p className="text-xs text-green-700">
-                                                📍 Domain: <span className="font-mono font-semibold">{match.domain}</span>
-                                              </p>
-                                              {match?.cited_urls?.length > 0 && (
-                                                <p className="text-xs text-green-700 mt-1">
-                                                  🔗 Cited from: {match.cited_urls.join(", ")}
-                                                </p>
+                                          {(hasTarget || hasReddit) && (
+                                            <div className="mt-3 grid gap-2 md:grid-cols-2">
+                                              {hasTarget && (
+                                                <div className="rounded-md border border-emerald-500/30 bg-emerald-500/10 p-2 text-xs text-emerald-800">
+                                                  <p className="font-semibold">Target cited</p>
+                                                  <p className="font-mono text-[11px]">{item.targetMatch.domain}</p>
+                                                  {item.targetMatch.cited_urls?.length > 0 && (
+                                                    <p className="mt-1 break-words">
+                                                      {item.targetMatch.cited_urls.join(", ")}
+                                                    </p>
+                                                  )}
+                                                </div>
+                                              )}
+                                              {hasReddit && (
+                                                <div className="rounded-md border border-orange-500/30 bg-orange-500/10 p-2 text-xs text-orange-800">
+                                                  <p className="font-semibold">Reddit cited</p>
+                                                  <p className="font-mono text-[11px]">{item.redditMatch.domain}</p>
+                                                  {item.redditMatch.cited_urls?.length > 0 && (
+                                                    <p className="mt-1 break-words">
+                                                      {item.redditMatch.cited_urls.join(", ")}
+                                                    </p>
+                                                  )}
+                                                </div>
                                               )}
                                             </div>
                                           )}
