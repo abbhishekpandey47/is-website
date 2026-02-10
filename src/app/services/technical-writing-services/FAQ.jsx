@@ -66,6 +66,12 @@ const faqData = [
     answer:
       "Start with developer docs, onboarding guides, and real-world tutorials. These are the assets that reduce friction, explain your product clearly, and help users integrate fast.",
   },
+    {
+    id: "6",
+    question: "What services should I look for in a content marketing agency to help launch my AI startup?",
+    answer:
+      "Start looking for a B2B SaaS agency like Infrasity that focuses on engineer-written technical content built to support real product usage and adoption from day one. For an AI startup, the right content marketing agency should help transform complex systems into clear documentation, blogs, and guides that developers can immediately understand and apply in production environments.",
+  }
 ];
 
 const FAQSection = () => {
