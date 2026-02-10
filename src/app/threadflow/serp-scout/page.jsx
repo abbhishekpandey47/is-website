@@ -1268,31 +1268,8 @@ export default function SerpScoutPage() {
                     {/* Citations Tab */}
                     {analysisTab === "citations" && (
                       <div className="space-y-4">
-                        <div className="rounded-lg border border-border bg-card/40 p-4 space-y-3">
-                          <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                            Citation prompts
-                          </p>
-                          <div className="flex flex-col gap-2 md:flex-row md:items-center">
-                            <Input
-                              placeholder="Add an optional prompt to compare"
-                              value={manualCitationInput}
-                              onChange={(e) => setManualCitationInput(e.target.value)}
-                            />
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => {
-                                const value = manualCitationInput.trim();
-                                if (!value) return;
-                                setManualCitationPrompts((prev) => [...prev, value].slice(0, 10));
-                                setManualCitationInput("");
-                              }}
-                            >
-                              Add prompt
-                            </Button>
-                          </div>
                           <p className="text-[11px] text-muted-foreground">
-                            Step 4 prompts are used by default. Add extras only if you want to test variations.
+                            Step 4 prompts are used by default.
                           </p>
                           {citationPrompts.length ? (
                             <div className="flex flex-wrap gap-2">
