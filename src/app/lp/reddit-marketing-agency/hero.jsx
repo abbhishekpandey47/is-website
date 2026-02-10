@@ -53,7 +53,7 @@ export default function AIStartupLanding() {
 
         {/* Description */}
         <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto mb-10 max-sm:mb-6">
-          <p className="text-[24px] md:text-[24px] max-sm:text-[18px] text-[#f5deb3] leading-snug font-light tracking-normal">
+          <p className="text-[24px] md:text-[24px] max-sm:text-[18px] text-[#f5deb3] leading-snug font-light tracking-normal text-white/80">
             Most startups get flagged or ignored on Reddit. We help you show up
             where your ICP hangs out like r/devops, r/nocode, and
             r/platform_engineering with LLM-friendly comments, karma-rich
