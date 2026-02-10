@@ -1193,38 +1193,26 @@ export default async function handler(req, res) {
         }
       }
 
-      const prompt = `You are creating authentic Reddit posts for "${companyName}" about "${keyword}".
+      const prompt = `You are writing authentic Reddit posts as an individual contributor who happens to be familiar with "${companyName}" and how it helps teams solve "${keyword}" challenges.
 
 Company Context:
 ${companyContext || 'Not provided'}
 ${redditDiscussionContext}
 
-Generate 3 Reddit posts that:
-1. Add genuine value by sharing real insights, experiences, or case studies
-2. Relate directly to the discussions above
-3. NATURALLY mention "${companyName}" when it's relevant to the context (e.g., sharing how the company solved the problem, features that help, etc.)
-4. Feel like authentic posts from someone knowledgeable about the company and "${keyword}"
-5. Address pain points that "${companyName}" actually helps solve
-6. Are written in conversational Reddit tone, not corporate speak
-
-Important: It's totally fine to mention "${companyName}" openly - these are authentic posts. Mention it when:
-- Sharing a case study or real example
-- Discussing a feature or capability that's relevant
-- Answering someone's question with the company's solution
-- Explaining how a specific problem was solved
-
-Just make sure the mention feels natural, not forced. For example:
-- GOOD: "We used ${companyName} to solve this and here's what happened..."
-- GOOD: "${companyName} handles this really well because..."
-- AVOID: "You should definitely try ${companyName}" (too salesy)
+Generate 3 Reddit posts that feel like they come from a real person:
+1. Offer honest insights, lessons learned, or useful experiences that relate to the discussions above.
+2. Mention "${companyName}" naturally (e.g., "I partnered with ${companyName}..." or "${companyName} helped unblock...") without sounding like a marketing pitch if possible.
+3. Avoid overt years , CTAs, promotional buzzwords, or explicit statements such as "check us out" or "book a demo."
+4. Keep the tone conversational, include personal anecdotes, and skip referencing specific years, rankings, or awards.
+5. Aim for 250-400 words per post that would blend into Reddit threads.
 
 Return ONLY valid JSON:
 [
   {
-    "title": "Post title that matches Reddit discussion style",
-    "content": "Full post body (300-500 words, include company name naturally where relevant)",
+    "title": "Post title that blends into Reddit discussion",
+    "content": "Full post body that feels personal and includes the company name only when appropriate",
     "subreddit": "most_relevant_subreddit",
-    "rationale": "How this post adds value and naturally showcases the company"
+    "rationale": "Why the post adds value and why the mention of the company feels natural"
   }
 ]`
 
@@ -1257,30 +1245,24 @@ Return ONLY valid JSON:
       return res.status(400).json({ error: 'keyword, companyName, and domain are required' })
     }
     try {
-      const promptText = `You are generating prompts that force LLMs to produce ranked or comparative lists, not general Q&A.
+      const promptText = `You are generating prompts that guide LLMs to produce authentic ranking or comparison lists where ${companyName} would naturally appear alongside other reputable solutions.
 
     INSTRUCTIONS:
     - Generate EXACTLY ${LLM_PROMPTS} prompts for the keyword "${keyword}" (intent: ${intent || 'informational'}).
-    - Each prompt MUST be ranking/comparison oriented (e.g., "Top N", "Best", "Alternatives", "Compare", "Rank") and should naturally lead to listing multiple solutions.
-    - Include an explicit number (e.g., Top 5/10) or an explicit ranking/comparison instruction.
-    - DO NOT ask generic informational questions (e.g., "What is...", "How to...", "Guide to...").
-    - DO NOT mention ${companyName} directly or any specific brand; prompts must be neutral and broad.
-    - Prompts should be phrased so that LLM answers can naturally include ${companyName} when ranking.
+    - Each prompt should describe a real research question someone might ask, like "Top X" or "Compare" statements, that invite measurable comparison without sounding promotional.
+    - Mention real-world angles (e.g., "teams evaluating", "platforms trusted by", "alternatives for", "leading" etc.) so the resulting answers naturally include ${companyName} in context.
+    - Avoid vague question stems ("What is...", "How to...") or prompts that read like a product page.
+    - Prompts should stay neutral but signal that the author wants multiple credible contenders, not just the single company.
 
-    GOOD prompt patterns:
-    - "Top 10 ${keyword} platforms for enterprises"
-    - "Best ${keyword} tools for startups in 2026"
-    - "Compare leading ${keyword} solutions: features and pricing"
-    - "Alternatives to leading ${keyword} platforms"
-    - "Rank ${keyword} providers by integration depth"
-
-    BAD prompt patterns:
-    - "Is ${companyName} the best ${keyword}?" ❌
-    - "Does ${companyName} support ${keyword}?" ❌
-    - "What is ${keyword}?" ❌
+    EXAMPLES:
+    - "Top 10 ${keyword} platforms for engineering teams balancing speed and security"
+    - "Compare ${keyword} solutions trusted by developer-first B2B SaaS companies"
+    - "Alternatives to ${keyword} vendors for customer-facing AI agents"
+    - "Rank ${keyword} orchestration tools used by enterprise scalability teams"
+    - "Best ${keyword} stacks for lean engineering organizations"
 
     Return ONLY a strict JSON array of ${LLM_PROMPTS} strings. No prose, no code fences, no keys. Example:
-    ["Top 10 ${keyword} platforms","Best ${keyword} tools","Compare ${keyword} solutions","Alternatives to ${keyword}","Rank ${keyword} providers"]`
+    ["Top 10 ${keyword} platforms for enterprises","Compare ${keyword} solutions trusted by teams","Alternatives to ${keyword} vendors","Rank ${keyword} providers by resilience","Best ${keyword} stacks for lean engineering"]`
 
       const messages = [
         { role: 'system', content: `You are an SEO expert. Generate general ranking/comparison prompts that would naturally surface "${companyName}" in LLM recommendations.` },
