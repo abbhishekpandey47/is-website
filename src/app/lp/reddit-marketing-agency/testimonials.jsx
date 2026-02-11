@@ -120,7 +120,7 @@ const CaseStudyCta = ({ testimonial, ctaClassName = '', onOpenVideo, variant }) 
                         <path d="M9 6v12l9-6-9-6z" />
                     </svg>
                 </span>
-                View Full Case Study
+                View Testimonial
             </button>
         );
     }

@@ -27,7 +27,7 @@ export default function Cta({ isAdsVariant = false }) {
 			<div className="relative mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-20 lg:flex-row lg:items-center lg:justify-between">
 				<div className="flex-1 space-y-6">
 					<h2 className="text-2xl font-semibold leading-tight tracking-tight text-white md:text-4xl">
-						Ready to Get Your Product Recommended by AI?
+						Ready to Get Your Product <span className="bg-[#5F64FF] p-1">Recommended</span> by AI?
 					</h2>
 					<p className="text-lg text-white/70 md:text-xl" style={{ lineHeight: '1.6' }}>
 						We&apos;ll show you where your product stands today and what it takes to get cited across ChatGPT, Claude, and Perplexity.

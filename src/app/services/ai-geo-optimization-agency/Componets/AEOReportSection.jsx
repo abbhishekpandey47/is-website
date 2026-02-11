@@ -32,8 +32,8 @@ export default function AEOReportSection() {
 
   return (
     <section className="w-full flex flex-col gap-10 py-10">
-      <div className="max-w-3xl mx-auto text-center px-4">
-        <h2 className="text-white text-3xl md:text-4xl font-bold mb-3">If Buyers Ask AI About Your Category Do You Show Up?</h2>
+      <div className="max-w-5xl mx-auto text-center px-4">
+        <h2 className="text-white text-3xl md:text-4xl font-bold mb-3">If Buyers Ask AI About Your Category <span className="bg-[#5F64FF] p-1">Do You Show Up?</span></h2>
         <p className="text-white/80 text-lg">Get a free AEO report showing your visibility, citations, and positioning across ChatGPT, Claude, and Perplexity.</p>
       </div>
       <div
