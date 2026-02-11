@@ -53,7 +53,7 @@ export default async function LandingPage({ searchParams }) {
         subHeading="Hear from the teams behind fast-growing SaaS and AI companies"
         wrapperClassName="text-center max-w-5xl mx-auto"
         headingClassName="text-2xl md:text-4xl font-semibold text-white"
-        highlightClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#6366f1]"
+        highlightClassName="text-2xl md:text-4xl font-semibold text-white"
         subHeadingClassName="text-white/70 text-base md:text-lg"
         headingStyle={{ fontFamily: 'Manrope, sans-serif' }}
         showDivider={false}

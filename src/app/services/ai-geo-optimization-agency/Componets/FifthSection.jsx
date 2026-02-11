@@ -65,7 +65,7 @@ export default function FifthSection() {
     <section className="relative overflow-hidden py-10 px-4 text-white">
       <div className="relative mx-auto w-full max-w-6xl">
         <div className="text-center">
-          <h2 className="mt-3 text-2xl md:text-4xl font-semibold text-white">GEO Metrics We Track</h2>
+          <h2 className="mt-3 text-2xl md:text-4xl font-semibold text-white"><span className="bg-[#5F64FF] p-1">GEO Metrics</span> We Track</h2>
           <p className="mt-3 max-w-3xl mx-auto text-base text-white/70 md:text-lg">
             From AI visibility to revenue impact, this dashboard keeps every metric we monitor so you know where the brand is seen, cited, and recommended.
           </p>
