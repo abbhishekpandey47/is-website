@@ -27,8 +27,8 @@ export default async function LandingPage({ searchParams }) {
   return (
     <main>
       <Home isAdsVariant={isAdsVariant} />
-      <section className="flex justify-center">
-        <div className="w-[80%] overflow-hidden">
+      <section className="flex justify-center -mt-0 md:-mt-40 lg:-mt-48 relative z-10">
+        <div className="w-[90%] md:w-[85%] overflow-visible">
           <TrustedMarquee
             heading=""
             highlight=""
