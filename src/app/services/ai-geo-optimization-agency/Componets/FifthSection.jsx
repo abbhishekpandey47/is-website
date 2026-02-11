@@ -11,7 +11,7 @@ const metrics = [
     colSpan: 'md:col-span-6',
   },
   {
-    title: 'Brand Mention Frequency',
+    title: 'AI Citations & Source Coverage',
     description:
       'Track how frequently large language models (like ChatGPT or Claude) mention your brand in their responses',
     visual: '/aeo/5.2.svg',
@@ -35,7 +35,7 @@ const metrics = [
     colSpan: 'md:col-span-4',
   },
   {
-    title: 'Visibility on UGC Platforms',
+    title: 'Developer Community Visibility',
     description:
       'Track how often your brand appears on Reddit, Quora, and other community forums that are prioritized by LLMs',
     visual: '/aeo/5.5.svg',
