@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 
 export default function AEOReportSection() {
   const [email, setEmail] = useState("");
@@ -32,12 +33,12 @@ export default function AEOReportSection() {
   return (
     <section className="w-full flex flex-col gap-10 py-10">
       <div className="max-w-3xl mx-auto text-center px-4">
-        <h2 className="text-white text-3xl md:text-4xl font-bold mb-3 whitespace-nowrap">If Buyers Ask AI About Your Category Do You Show Up?</h2>
+        <h2 className="text-white text-3xl md:text-4xl font-bold mb-3">If Buyers Ask AI About Your Category Do You Show Up?</h2>
         <p className="text-white/80 text-lg">Get a free AEO report showing your visibility, citations, and positioning across ChatGPT, Claude, and Perplexity.</p>
       </div>
       <div
-        className="relative w-full grid grid-cols-3 md:flex-row rounded-2xl shadow-lg border border-[#777777] md:p-12 gap-8 max-w-6xl mx-auto overflow-hidden bg-center bg-no-repeat bg-auto"
-        style={{ backgroundImage: "url('/aeo/aeoreportbg.svg')" }}
+        className="relative w-full flex flex-col md:grid md:grid-cols-3 rounded-2xl shadow-lg border border-[#777777] p-6 md:p-12 px-4 gap-8 max-w-6xl mx-auto overflow-hidden bg-center bg-no-repeat bg-auto m-8"
+        style={{ backgroundImage: "linear-gradient(180deg, rgba(14, 14, 23, 0.85), rgba(14, 14, 23, 0.95)), url('/aeo/aeoreportbg.svg')" }}
       >
       {/* Left: Form */}
       <div className="relative z-10 flex-0 flex flex-col justify-center min-w-[320px]">
@@ -79,8 +80,15 @@ export default function AEOReportSection() {
         </div>
       </div>
       {/* Right: Mockup/Preview */}
-      <div className="col-span-2 relative z-10 flex-1 flex flex-col justify-center items-center min-w-[320px] ">
-        <img src="/aeo/aeoReport.svg" style={{bottom:"-6.5rem"}} alt="AEO Report Mockup" className="max-w-full rounded-lg shadow-lg relative -right-[4.5rem] -bottom-[6.5rem] w-[50rem] h-[28rem]"/>
+      <div className="col-span-2 relative z-10 flex flex-1 flex-col justify-center items-center min-w-[320px] md:items-end">
+        <Image
+          src="/aeo/aeoReport.svg"
+          alt="AEO Report Mockup"
+          width={800}
+          height={480}
+          priority
+          className="max-w-full rounded-xl shadow-2xl w-full md:w-[50rem] md:h-[28rem] md:relative md:-right-[4.5rem] md:-bottom-[6.5rem]"
+        />
       </div>
       </div>
     </section>

@@ -145,30 +145,34 @@ Limitations:
 * Strategic \+ executional capability
 * Demonstrated results in organic traffic and brand authority
 
-### **3\. 310 Creative**
+### **3\. Perceptric**
 
-![310 creative homepage](/PostImages/tech-content-marketing-agency/3.webp)
+![Perceptric homepage](/PostImages/tech-content-marketing-agency/3.webp)
 
-310 Creative, a B2B content marketing agency that offers inbound marketing and content services for SaaS, technology, and professional services platforms. Their work is commonly aligned with demand generation and lead-focused content initiatives.
+[Perceptric](http://perceptric.com/) is a B2B tech marketing agency with strong expertise in both traditional SEO and AI SEO. They have driven $200M+ for clients across a rich variety of B2B industries like B2B SaaS, professional services, martech, salestech, fintech, health tech, cybersecurity, transportation and logistics.
 
 **Strengths:**
 
-* Experience delivering inbound-focused B2B SaaS content programs
-* Integration with HubSpot and CRM-driven marketing workflows
-* Covers full-funnel content from awareness to conversion
+* Bottom-of-funnel-first strategy focused on high-intent, decision-stage keywords  
+* Strong expertise in both traditional SEO and AI SEO  
+* Expert-led content created by writers with real technical backgrounds  
+* Revenue-driven measurement framework (pipeline, conversions, ROI) rather than just traffic  
+* Proven track record across diverse B2B verticals  
+* Structured approach to comparison pages, alternatives content, and commercial intent clusters
 
 **Limitations:**
 
-* Less emphasis on deeply technical or developer-first content
-* Complex technical products may require additional internal subject-matter input
+* Solely focus on B2B rather than B2C  
+* May require your team to collaborate closely
 
-**Best fit for:** Small to mid-market B2B SaaS startups
+**Best fit for:** Growth-stage B2B companies that want SEO tied directly to revenue impact rather than traffic growth alone.
 
-**Eligibility Checklist:**
+**Eligibility checklist:**
 
-* Expertise in B2B technology marketing
-* Executional capability
-* Demonstrated results
+* Operates in a B2B industry  
+* Has a defined ICP and bottom-of-funnel search demand  
+* Values revenue attribution over vanity metrics  
+* Ready to invest in structured, intent-driven SEO strategy
 
 ### **4\. Kalungi**
 

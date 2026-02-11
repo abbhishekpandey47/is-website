@@ -1,6 +1,18 @@
+"use client";
+import dynamic from "next/dynamic";
 import CalendarBooking from "../../../calendarButton";
 
-export default function Cta() {
+const ContactPopupButton = dynamic(
+	() => import("../../../lp/reddit-marketing-agency/ContactPopupButton"),
+	{
+		ssr: false,
+		loading: () => (
+			<div className="h-11 w-52 rounded-[5px] bg-white/10 animate-pulse" />
+		),
+	}
+);
+
+export default function Cta({ isAdsVariant = false }) {
 	return (
 		<section className="relative overflow-hidden text-white h-[30rem] my-10">
 			<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(79,70,229,0.35),_transparent_50%)]" />
@@ -21,9 +33,17 @@ export default function Cta() {
 						We&apos;ll show you where your product stands today and what it takes to get cited across ChatGPT, Claude, and Perplexity.
 					</p>
 					<div className="flex flex-wrap gap-4">
-						   <div className="flex flex-col items-center">
-                            <CalendarBooking text="Book a Demo" />
-                        </div>
+					   <div className="flex flex-col items-center">
+					      {isAdsVariant ? (
+					        <ContactPopupButton
+					          buttonText="Book a Strategy Call"
+					          width="w-52"
+					          height="h-11"
+					        />
+					      ) : (
+					        <CalendarBooking text="Book a Demo" />
+					      )}
+					    </div>
 					</div>
 				</div>
 			</div>

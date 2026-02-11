@@ -66,12 +66,18 @@ export function ClientLayoutWrapper({ children }) {
     safePathname.startsWith("/lp/developer-marketing-agency") ||
     safePathname.startsWith("/lp/reddit-marketing-agency");
 
+  const isGeoAdsService =
+    routeReady &&
+    isAdsApp &&
+    safePathname.startsWith("/services/ai-geo-optimization-agency");
+
   const shouldShowAwardBanner =
     routeReady &&
     !hideAwardBanner &&
     !hideNavBarAndFooter &&
     !hideNavBar2 &&
     safePathname !== "/careers" &&
+    !isAdsApp &&
     !(safePathname === "/contact" && isAdsApp);
 
   const shouldShowNavbar =
@@ -79,6 +85,8 @@ export function ClientLayoutWrapper({ children }) {
 
   const isRedditMarketingAgencyLp =
     routeReady && safePathname.startsWith("/lp/reddit-marketing-agency");
+
+  const shouldShowAdsLayout = isRedditMarketingAgencyLp || isGeoAdsService;
 
   return (
     <Suspense fallback={null}>
@@ -92,7 +100,7 @@ export function ClientLayoutWrapper({ children }) {
         >
           <Appwrap>
             {/* Conditionally apply AntdRegistry - Reddit LP handles it in its own layout to save 150K */}
-            {isRedditMarketingAgencyLp ? (
+            {shouldShowAdsLayout ? (
               <>
                 <Loader />
                 <AdsHeader />

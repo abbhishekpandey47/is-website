@@ -77,7 +77,7 @@ export default function ContactPopupButton({
         {isOpen && isMounted && portalRef.current &&
           ReactDOM.createPortal(
             <div
-              className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/70 p-4"
+              className="fixed inset-0 z-[100000] flex items-center justify-center bg-black/70 p-4"
               onClick={(e) => {
                 if (e.target === e.currentTarget) closeModal();
               }}
