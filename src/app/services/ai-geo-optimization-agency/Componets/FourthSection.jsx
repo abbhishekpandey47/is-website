@@ -59,7 +59,7 @@ export default function FourthSection() {
           <h2 className="text-2xl md:text-4xl font-semibold text-white mb-4">
             Infrasity End-to-End GEO Framework
           </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-lg md:text-xl text-white/60 whitespace-nowrap">
+          <p className="mx-auto mt-4 max-w-3xl text-lg md:text-xl text-white/60">
             We identify what AI sees today and build what&apos;s needed to get you cited and recommended.
           </p>
         </div>

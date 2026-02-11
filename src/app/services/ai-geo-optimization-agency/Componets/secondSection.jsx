@@ -47,7 +47,7 @@ export default function SecondSection() {
 				<div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,_rgba(14,165,233,0.2),_rgba(2,6,23,0)_50%)]" />
 			</div>
 			<div className="max-w-5xl mx-auto text-center mb-14">
-				<h2 className="text-2xl md:text-4xl font-semibold text-white mb-4 whitespace-nowrap" style={{ fontFamily: "Manrope, sans-serif" }}>
+				<h2 className="text-2xl md:text-4xl font-semibold text-white mb-4" style={{ fontFamily: "Manrope, sans-serif" }}>
 					B2B SaaS and DevTools Buyers Are Discovering Tools Through AI
 				</h2>
 				<p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto" style={{ fontFamily: "Inter, sans-serif" }}>
