@@ -3,39 +3,39 @@
 const geoSteps = [
   {
     number: '01',
-    title: 'Website Audit',
+    title: 'See What AI Says About You',
     description:
-      'We evaluate your website’s content for AI compatibility, check technical SEO elements like speed and indexing, and audit schema markup to meet AI search standards',
+      'We analyze how ChatGPT, Perplexity, Gemini, and Copilot talk about your product - where you appear, where competitors dominate, and what signals AI is using to decide.',
   },
   {
     number: '02',
-    title: 'Conversational Query Research',
+    title: 'Map the Questions That Drive Shortlists',
     description:
-      "We figure out how users ask questions in AI tools. Think trending prompts, natural language queries, and intent-rich phrasing your audience actually uses",
+      'We identify the real buyer prompts - comparisons, alternatives, and "best tool" queries - and map where your product must show up to influence decisions.',
   },
   {
     number: '03',
-    title: 'Optimize Content & Website Revamp',
+    title: 'Make Your Product an AI-Recognized Entity',
     description:
-      'Outdated content is updated to match conversational queries, while new, concise, AI-friendly content is created with structures optimized for AI crawlers',
+      'We structure your website, docs, and content so AI clearly understands your product, category, use cases, and when to recommend you.',
   },
   {
     number: '04',
-    title: 'Implement Structured Data',
+    title: 'Turn Your Content Into AI-Citable Answers',
     description:
-      'Schema markup is added to highlight services and improve visibility. Metadata is optimized, and actionable schema elements are used to signal relevance',
+      'We rebuild key pages into answer-first formats - comparisons, FAQs, use cases, and technical explainers - designed for AI extraction and citation.',
   },
   {
     number: '05',
-    title: 'Technical SEO Updates',
+    title: 'Test Visibility Across AI Platforms',
     description:
-      'We enhance site speed, mobile responsiveness, and server health while fixing crawl errors and ensuring your site meets AI indexing standards',
+      "We run real buyer prompts across major AI tools to see if you appear, how you're positioned, and what's blocking inclusion.",
   },
   {
     number: '06',
-    title: 'Monitor and Adapt',
+    title: 'Stay Recommended as AI Changes',
     description:
-      'Once you’re live, we track performance across GenAI tools and adjust strategy based on algorithm shifts, SERP behavior, and emerging AI search optimization trends',
+      'AI answers evolve constantly. We monitor visibility shifts, refine signals, and update content so your product keeps showing up — and stays recommended.',
   },
 ];
 
@@ -49,8 +49,8 @@ export default function FourthSection() {
           <h2 className="text-2xl md:text-4xl font-semibold text-white mb-4">
             Infrasity End-to-End GEO Framework
           </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-lg md:text-xl  text-white/60">
-            From audit to adaptation, here is how we keep your brand AI-visible, trusted, and recommended.
+          <p className="mx-auto mt-4 max-w-3xl text-lg md:text-xl text-white/60 whitespace-nowrap">
+            We identify what AI sees today and build what&apos;s needed to get you cited and recommended.
           </p>
         </div>
 

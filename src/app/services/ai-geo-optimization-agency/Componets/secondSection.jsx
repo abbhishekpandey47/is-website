@@ -51,7 +51,7 @@ export default function SecondSection() {
 					B2B SaaS and DevTools Buyers Are Discovering Tools Through AI
 				</h2>
 				<p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto" style={{ fontFamily: "Inter, sans-serif" }}>
-					Product research is moving from Google to AI answers. If your product isn't cited, it's excluded from early evaluation.
+					Product research is moving from Google to AI answers. If your product isn&apos;t cited, it&apos;s excluded from early evaluation.
 				</p>
 			</div>
 
