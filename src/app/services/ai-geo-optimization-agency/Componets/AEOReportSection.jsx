@@ -32,8 +32,8 @@ export default function AEOReportSection() {
   return (
     <section className="w-full flex flex-col gap-10 py-10">
       <div className="max-w-3xl mx-auto text-center px-4">
-        <h2 className="text-white text-3xl md:text-4xl font-bold mb-3">How do AI systems talk about your product?</h2>
-        <p className="text-white/80 text-lg">Get a free AEO report showing visibility, citations, and sentiment across leading answer engines.</p>
+        <h2 className="text-white text-3xl md:text-4xl font-bold mb-3 whitespace-nowrap">If Buyers Ask AI About Your Category Do You Show Up?</h2>
+        <p className="text-white/80 text-lg">Get a free AEO report showing your visibility, citations, and positioning across ChatGPT, Claude, and Perplexity.</p>
       </div>
       <div
         className="relative w-full grid grid-cols-3 md:flex-row rounded-2xl shadow-lg border border-[#777777] md:p-12 gap-8 max-w-6xl mx-auto overflow-hidden bg-center bg-no-repeat bg-auto"
@@ -42,7 +42,7 @@ export default function AEOReportSection() {
       {/* Left: Form */}
       <div className="relative z-10 flex-0 flex flex-col justify-center min-w-[320px]">
         <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Get your free AEO Report today</h2>
-        <p className="text-white/80 text-lg mb-6">Discover how your brand performs on answer engines and uncover the opportunities to outpace the competition</p>
+        <p className="text-white/80 text-lg mb-6">See where your product appears, how often it's cited, and how AI positions you across ChatGPT, Claude, and Perplexity.</p>
         {!submitted ? (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input

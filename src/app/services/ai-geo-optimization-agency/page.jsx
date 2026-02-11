@@ -45,10 +45,10 @@ export default function LandingPage() {
       <AEOReportSection />
       <FifthSection />
       <Testimonials
-        heading="Why Leading VCs Choose Infrasity"
+        heading="Trusted by Leading B2B SaaS, DevTools, and AI Startups"
         highlight=""
         trailing=""
-        subHeading="Here’s how we help them ship content fast and with depth."
+        subHeading="Hear from the teams behind fast-growing SaaS and AI companies"
         wrapperClassName="text-center max-w-5xl mx-auto"
         headingClassName="text-2xl md:text-4xl font-semibold text-white"
         highlightClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#6366f1]"
