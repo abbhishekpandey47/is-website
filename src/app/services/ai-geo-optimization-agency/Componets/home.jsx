@@ -1,8 +1,8 @@
 "use client";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import CalendarBooking from "../../../calendarButton";
 
 
 const rotatingBrands = [
@@ -12,6 +12,28 @@ const rotatingBrands = [
   { name: "Grok", key: "grok", logo: "/CommLogo/grok.svg" },
   { name: "Google AI", key: "google-ai-overviews", logo: "/CommLogo/googleai.svg" },
 ];
+
+const HeroCTAPlaceholder = () => (
+  <Link
+    href="/contact"
+    className="inline-flex items-center justify-center rounded-[5px] border border-white/40 bg-white/90 px-8 py-3 text-center text-base font-semibold text-black shadow-2xl transition hover:border-transparent hover:bg-white"
+  >
+    Book a Call
+  </Link>
+);
+
+const CalendarBooking = dynamic(() => import("../../../calendarButton"), {
+  ssr: false,
+  loading: () => <HeroCTAPlaceholder />,
+});
+
+const ContactPopupButton = dynamic(
+  () => import("../../../lp/reddit-marketing-agency/ContactPopupButton"),
+  {
+    ssr: false,
+    loading: () => <HeroCTAPlaceholder />,
+  }
+);
 
 function BrandBadge({ brand }) {
   return (
@@ -32,7 +54,7 @@ function BrandBadge({ brand }) {
 
 
 
-export default function HeroSection() {
+export default function HeroSection({ isAdsVariant = false }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -46,14 +68,16 @@ export default function HeroSection() {
   return (
     <section className="w-full flex flex-col pb-10 items-center justify-end bg-transparent">
       {/* Card background image */}
-      <div className="relative w-full shadow-2xl -mt-18">
+      <div className="relative w-full shadow-2xl -mt-18 min-h-[70vh] md:min-h-[85vh] xl:min-h-[95vh]">
         <Image
           src="/aeo/aeoHome.svg"
           alt="Home Background"
           fill
           priority
-          className="absolute inset-0 object-cover !h-[175%]"
+          sizes="(max-width: 768px) 100vw, 1200px"
+          className="absolute inset-0 h-full w-full object-cover"
         />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(2,6,23,1),_rgba(2,6,23,0)_50%)]" />
         {/* Content above image */}
         <div className="relative z-10 max-w-4xl mx-auto text-center px-4 mt-[15rem]">
           <h1 className="text-5xl md:text-5xl font-bold text-white mb-4 leading-tight">
@@ -68,7 +92,17 @@ export default function HeroSection() {
           </h1>
           <p className="text-lg md:text-xl text-white/80 mb-6">AEO/GEO services for B2B SaaS and AI companies to increase visibility, citations, and share of voice across leading AI engines.</p>
             <div className="flex flex-col items-center">
-                                     <CalendarBooking text="Book a Call" />
+              {isAdsVariant ? (
+                <ContactPopupButton
+                  buttonText="Book a Strategy Call"
+                  width="w-52"
+                  height="h-11"
+                  textSize="text-base"
+                  textWeight="quicksand-semibold"
+                />
+              ) : (
+                <CalendarBooking buttonText="Book a Call" />
+              )}
             </div>
         </div>
       

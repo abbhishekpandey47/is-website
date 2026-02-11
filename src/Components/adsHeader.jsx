@@ -1,9 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import ContactPopupButton from "../app/lp/reddit-marketing-agency/ContactPopupButton";
 
 const AdsHeader = () => {
+  const pathname = usePathname() ?? "";
+  const isGeoPage = pathname.startsWith("/services/ai-geo-optimization-agency");
+  const auditText = isGeoPage ? "Free AEO audit included" : "Free Reddit audit included";
   return (
     <div className="sticky top-0 z-[99999] w-full bg-slate-900 shadow-navshadow p-4 sm:p-0 md:p-0">
       <div className="w-full sm:w-[90vw] md:max-w-6xl p-2 sm:p-3 md:p-4 mx-auto rounded-lg flex justify-between items-center gap-2 sm:gap-4">
@@ -27,7 +31,7 @@ const AdsHeader = () => {
             textSize="text-xs sm:text-sm"
             textWeight="quicksand-semibold"
           />
-          <p className="text-[0.65rem] sm:text-[0.75rem] text-gray-400">Free Reddit audit included</p>
+          <p className="text-[0.65rem] sm:text-[0.75rem] text-gray-400">{auditText}</p>
         </div>
 
       </div>

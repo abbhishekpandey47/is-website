@@ -21,11 +21,13 @@ export const metadata = {
 
 
 
-export default function LandingPage() {
+export default async function LandingPage({ searchParams }) {
+  const resolvedSearchParams = await searchParams;
+  const isAdsVariant = resolvedSearchParams?.app === "ads";
   return (
     <main>
-      <Home />
-      <section className="flex justify-center mt-36">
+      <Home isAdsVariant={isAdsVariant} />
+      <section className="flex justify-center">
         <div className="w-[80%] overflow-hidden">
           <TrustedMarquee
             heading=""
@@ -56,7 +58,7 @@ export default function LandingPage() {
         headingStyle={{ fontFamily: 'Manrope, sans-serif' }}
         showDivider={false}
       />
-      <Cta />
+      <Cta isAdsVariant={isAdsVariant} />
       <FAQ />
     </main>
   );

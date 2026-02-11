@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 
 const geoSteps = [
   {
@@ -40,6 +41,15 @@ const geoSteps = [
 ];
 
 export default function FourthSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <section className="relative overflow-hidden py-10 w-full text-white">
       <div className="pointer-events-none absolute -right-24 top-0 h-[460px] w-[460px] rounded-full blur-[220px]" />
@@ -57,21 +67,26 @@ export default function FourthSection() {
         <div className="mt-12 relative">
           {geoSteps.map((step, index) => {
             const overlapStyle = {
-              marginTop: index === 0 ? 0 : -190,
+              marginTop: index === 0 ? 0 : isMobile ? 24 : -190,
             };
-            const zIndexClass = `z-[${20 + index}]`;
-            
-
+            const zIndexClass = isMobile ? "" : `z-[${20 + index}]`;
+            const articleBase = "group bg-[#0D0A1A] border border-l-0 border-r-0 relative overflow-hidden p-6 transition duration-500 min-h-[260px] md:min-h-[320px] md:py-8";
+            const desktopExtras = "hover:border-b-[#777777] hover:bg-gradient-to-r hover:from-[#090617]/80 hover:via-[#111028] hover:to-black/80";
+            const mobileExtras = "border-b border-white/10 rounded-3xl shadow-lg mobile-card";
+            const mergedStyle = {
+              ...overlapStyle,
+              ...(isMobile ? { animationDelay: `${index * 0.08}s` } : {}),
+            };
             return (
               <article
                 key={step.number}
-                className={`group bg-[#0D0A1A] border border-l-0 border-r-0 ${index === 0 ? 'border-t-0' : 'border-t-[#777777]'} hover:border-b-[#777777] relative overflow-hidden p-6 transition duration-500 hover:bg-gradient-to-r hover:from-[#090617]/80 hover:via-[#111028] hover:to-black/80 min-h-[260px] md:min-h-[320px] md:py-8 hover:z-50 ${zIndexClass}`}
-                style={overlapStyle}
+                className={`${articleBase} ${isMobile ? mobileExtras : desktopExtras} ${index === 0 ? "border-t-0" : "border-t-[#777777]"} ${isMobile ? "" : "hover:z-50"} ${zIndexClass}`}
+                style={mergedStyle}
               >
-                <div className="relative flex items-center gap-8">
+                <div className={`relative flex ${isMobile ? "flex-col gap-4" : "items-center gap-8"}`}>
                   <div
-                    style={{ fontSize: '25rem' }}
-                    className="text-[clamp(3rem,8vw,8rem)] font-light leading-none text-white/20 transition duration-500 group-hover:text-white"
+                    style={{ fontSize: isMobile ? '15rem' : '25rem' }}
+                    className="text-[clamp(2.5rem,6vw,4.5rem)] md:text-[clamp(3rem,8vw,8rem)] font-light leading-none text-white/20 transition duration-500 group-hover:text-white"
                   >
                     {step.number}
                   </div>
@@ -81,7 +96,7 @@ export default function FourthSection() {
                         {step.title}
                       </h3>
                     </div>
-                    <p className="mt-4 max-h-0 overflow-hidden text-lg md:text-xl leading-relaxed text-white transition-[max-height,margin,opacity] duration-500 group-hover:max-h-[260px] group-hover:opacity-100 group-hover:mt-6">
+                    <p className={`mt-4 text-lg md:text-xl leading-relaxed text-white transition duration-500 ${isMobile ? "max-h-full opacity-100" : "max-h-0 overflow-hidden group-hover:max-h-[260px] group-hover:opacity-100 group-hover:mt-6"}`}>
                       {step.description}
                     </p>
                   </div>
@@ -91,6 +106,19 @@ export default function FourthSection() {
           })}
         </div>
       </div>
+      <style jsx>{`
+        .mobile-card {
+          opacity: 0;
+          transform: translateY(30px);
+          animation: mobileStack 0.7s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        @keyframes mobileStack {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </section>
   );
 }

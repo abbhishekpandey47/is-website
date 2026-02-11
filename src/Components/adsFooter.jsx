@@ -1,3 +1,5 @@
+"use client";
+
 import {
   GithubOutlined,
   InstagramOutlined,
@@ -7,10 +9,15 @@ import {
   YoutubeFilled,
 } from "@ant-design/icons";
 import Image from "next/image";
-import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const AdsFooter = () => {
+  const pathname = usePathname() ?? "";
+  const isGeoPage = pathname.startsWith("/services/ai-geo-optimization-agency");
+  const heroDescription = isGeoPage
+    ? "AI visibility & GEO optimization services for B2B SaaS and devtool startups. Strategic, data-backed and execution-focused. Infrasity tracks your brand’s presence across ChatGPT, Gemini, Perplexity and AI Overviews measuring prompt rankings, citation share, sentiment and competitive positioning and aligns your narrative to win inside answer engines."
+    : "Reddit marketing services for B2B SaaS startups. Fast, result-driven and execution ready. Infrasity tracks your upvotes, thread visibility, comment rankings, sentiment, etc and align on your startup's positioning.";
   return (
     <footer className="bg-zing-800 backdrop-blur-lg py-4 px-14 mt-8 text-white flex justify-center flex-col w-full opacity-1 footerClassHome">
       <div className="flex flex-col gap-6">
@@ -25,9 +32,7 @@ const AdsFooter = () => {
               className="w-[50%]"
             />
             <p className="w-full lg:w-4/5">
-             Reddit marketing services for B2B SaaS startups. Fast, result-driven and execution ready.
-Infrasity tracks your upvotes, thread visibility, comment rankings, sentiment, etc and align on your startup's positioning.
-
+             {heroDescription}
             </p>
           </div>
 
