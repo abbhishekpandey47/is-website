@@ -15,10 +15,10 @@ export default function Cta() {
 			<div className="relative mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-20 lg:flex-row lg:items-center lg:justify-between">
 				<div className="flex-1 space-y-6">
 					<h2 className="text-2xl font-semibold leading-tight tracking-tight text-white md:text-4xl">
-						Want to Own AI Search Visibility
+						Ready to Get Your Product Recommended by AI?
 					</h2>
 					<p className="text-lg text-white/70 md:text-xl" style={{ lineHeight: '1.6' }}>
-						Stop watching competitors rank. Let's build your strategy to own the space.
+						We&apos;ll show you where your product stands today and what it takes to get cited across ChatGPT, Claude, and Perplexity.
 					</p>
 					<div className="flex flex-wrap gap-4">
 						   <div className="flex flex-col items-center">

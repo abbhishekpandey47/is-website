@@ -42,7 +42,7 @@ export default function AEOReportSection() {
       {/* Left: Form */}
       <div className="relative z-10 flex-0 flex flex-col justify-center min-w-[320px]">
         <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">Get your free AEO Report today</h2>
-        <p className="text-white/80 text-lg mb-6">See where your product appears, how often it's cited, and how AI positions you across ChatGPT, Claude, and Perplexity.</p>
+        <p className="text-white/80 text-lg mb-6">See where your product appears, how often it&apos;s cited, and how AI positions you across ChatGPT, Claude, and Perplexity.</p>
         {!submitted ? (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
