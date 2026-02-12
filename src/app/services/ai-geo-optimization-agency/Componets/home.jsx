@@ -81,7 +81,7 @@ export default function HeroSection({ isAdsVariant = false }) {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(2,6,23,1),_rgba(2,6,23,0)_50%)]" />
         {/* Content above image */}
         <div className="relative z-10 max-w-4xl 2xl:max-w-6xl  mx-auto text-center px-4 mt-[15rem]">
-          <h1 className="text-3xl md:text-5xl 2xl:text-7xl font-bold text-white mb-4 leading-tight">
+          <h1 className="text-5xl md:text-5xl  font-bold text-white mb-4 leading-tight">
             When Buyers Ask{' '}
             <span className="brand-inline">
               <BrandBadge brand={currentBrand} />
@@ -106,7 +106,7 @@ export default function HeroSection({ isAdsVariant = false }) {
               )}
             </div>
         </div>
-         <section className="absolute bottom-0 right-0 left-0 flex justify-center -mt-0 md:-mt-40 lg:-mt-100 z-10">
+         <section className="relative md:absolute bottom-0 right-0 left-0 flex justify-center -mt-0 md:-mt-40 lg:-mt-100 z-10">
               <div className="w-[70%] overflow-visible">
                 <TrustedMarquee
                   heading=""
