@@ -255,7 +255,7 @@ export default function Page() {
                 className="inline-flex items-center bg-white/5 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium border border-[#A259FF]/30"
               >
                 <span className="w-2 h-2 bg-[#A259FF] rounded-full mr-2 animate-pulse"></span>
-                2025 Edition
+                2026 Edition
               </motion.div>
 
               {/* Main Heading */}
@@ -273,7 +273,7 @@ export default function Page() {
                   textShadow: '0 0 12px rgba(162, 89, 255, 0.15)'
                 }}
               >
-                The 2025 Developer Marketing <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Playbook</span> for DevTool, B2B SaaS, AI Startups
+                The 2026 Developer Marketing <span className="text-[#A259FF]" style={{ textShadow: '0 0 8px rgba(162, 89, 255, 0.4)' }}>Playbook</span> for DevTool, B2B SaaS, AI Startups
               </motion.h1>
 
               {/* Subtitle */}
