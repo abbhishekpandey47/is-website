@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import TrustedMarquee from "@/app/lp/reddit-marketing-agency/TrustedMarquee";
 
 
 const rotatingBrands = [
@@ -68,19 +69,19 @@ export default function HeroSection({ isAdsVariant = false }) {
   return (
     <section className="w-full flex flex-col pb-10 items-center justify-end bg-transparent">
       {/* Card background image */}
-      <div className="relative w-full shadow-2xl -mt-18 min-h-[70vh] md:min-h-[85vh] xl:min-h-[95vh]">
+      <div className="relative w-full shadow-2xl -mt-18 2xl:-mt-30 min-h-[100vh] md:min-h-[95vh] xl:min-h-[95vh] 2xl:min-h-[90vh]">
         <Image
           src="/aeo/aeoHome.svg"
           alt="Home Background"
           fill
           priority
           sizes="(max-width: 768px) 100vw, 1200px"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-bottom"
         />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(2,6,23,1),_rgba(2,6,23,0)_50%)]" />
         {/* Content above image */}
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-4 mt-[15rem]">
-          <h1 className="text-5xl md:text-5xl font-bold text-white mb-4 leading-tight">
+        <div className="relative z-10 max-w-4xl 2xl:max-w-6xl  mx-auto text-center px-4 mt-[15rem]">
+          <h1 className="text-3xl md:text-5xl 2xl:text-7xl font-bold text-white mb-4 leading-tight">
             When Buyers Ask{' '}
             <span className="brand-inline">
               <BrandBadge brand={currentBrand} />
@@ -105,7 +106,19 @@ export default function HeroSection({ isAdsVariant = false }) {
               )}
             </div>
         </div>
-      
+         <section className="absolute bottom-0 right-0 left-0 flex justify-center -mt-0 md:-mt-40 lg:-mt-100 z-10">
+              <div className="w-[70%] overflow-visible">
+                <TrustedMarquee
+                  heading=""
+                  highlight=""
+                  wrapperClassName="text-center max-w-5xl mx-auto"
+                  headingClassName="text-2xl md:text-4xl font-semibold text-white"
+                  highlightClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#6366f1]"
+                  headingStyle={{ fontFamily: 'Manrope, sans-serif' }}
+                  spacingClassName="pt-0"
+                />
+              </div>
+            </section>
         <style jsx>{`
           .brand-inline {
             margin: 0 0.4rem;
@@ -125,8 +138,8 @@ export default function HeroSection({ isAdsVariant = false }) {
             display: inline-flex;
             align-items: baseline;
             justify-content: center;
-            width: 1.25em;
-            height: 1.25em;
+            width: clamp(1.2em, 1.4vw, 1.8em);
+            height: clamp(1.2em, 1.4vw, 1.8em);
           }
           .brand-badge-inner {
             width: 100%;

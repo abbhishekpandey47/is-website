@@ -10,7 +10,6 @@ import ServiceHighlights from "./Componets/serviceHighlights";
 import FourthSection from "./Componets/FourthSection";
 import FifthSection from "./Componets/FifthSection";
 import Cta from "./Componets/Cta";
-import TrustedMarquee from "@/app/lp/reddit-marketing-agency/TrustedMarquee";
 import { createMetadata } from "@/utils/metadata";
 // import ClientSection from "./Componets/clientSection";
 
@@ -28,19 +27,6 @@ export default async function LandingPage({ searchParams }) {
   return (
     <main>
       <Home isAdsVariant={isAdsVariant} />
-      <section className="flex justify-center -mt-0 md:-mt-40 lg:-mt-48 relative z-10">
-        <div className="w-[90%] md:w-[85%] overflow-visible">
-          <TrustedMarquee
-            heading=""
-            highlight=""
-            wrapperClassName="text-center max-w-5xl mx-auto"
-            headingClassName="text-2xl md:text-4xl font-semibold text-white"
-            highlightClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#7c3aed] via-[#a855f7] to-[#6366f1]"
-            headingStyle={{ fontFamily: 'Manrope, sans-serif' }}
-            spacingClassName="pt-0"
-          />
-        </div>
-      </section>
       {/* <ClientSection/> */}
       <FourthSection />
       <SecondSection />
