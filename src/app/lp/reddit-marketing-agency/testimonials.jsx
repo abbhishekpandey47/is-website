@@ -277,7 +277,7 @@ const VideoModal = ({ openItem, onClose }) => {
         <div
             role="dialog"
             aria-modal="true"
-            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 z-[99999] bg-black/70 backdrop-blur-sm"
             onClick={onClose}
         >
             <button

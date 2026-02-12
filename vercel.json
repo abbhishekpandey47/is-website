@@ -5,21 +5,12 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "value": "public, max-age=3600, must-revalidate"
         }
       ]
     },
     {
-      "source": "/fonts/:path*",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/images/:path*",
+      "source": "/_next/static/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -32,12 +23,12 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "value": "public, max-age=604800, immutable"
         }
       ]
     },
     {
-      "source": "/_next/static/:path*",
+      "source": "/fonts/:path*",
       "headers": [
         {
           "key": "Cache-Control",

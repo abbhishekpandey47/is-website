@@ -11,13 +11,14 @@ import FourthSection from "./Componets/FourthSection";
 import FifthSection from "./Componets/FifthSection";
 import Cta from "./Componets/Cta";
 import TrustedMarquee from "@/app/lp/reddit-marketing-agency/TrustedMarquee";
+import { createMetadata } from "@/utils/metadata";
 // import ClientSection from "./Componets/clientSection";
 
-export const metadata = {
-  title: 'AI Generative Engine Optimization Agency | GEO & AI Search Visibility',
-  description:
-    'We provide Generative Engine Optimization services that improve discoverability across AI search platforms through entity SEO, structured content and GEO strategy.',
-};
+export const metadata = createMetadata(
+  'AI Generative Engine Optimization Agency | GEO & AI Search Visibility',
+  'We provide Generative Engine Optimization services that improve discoverability across AI search platforms through entity SEO, structured content and GEO strategy.',
+  'https://www.infrasity.com/services/ai-geo-optimization-agency'
+);
 
 
 

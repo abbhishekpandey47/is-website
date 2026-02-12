@@ -227,7 +227,9 @@ It’s 2026, and Claude has become a discovery layer where real buying decisions
 
 So, the next step after understanding how to rank in Claude is doing an AI visibility audit. InfraSity helps teams baseline their Claude visibility, fix where content is missing or misrepresented, and continuously monitor which assets AI systems actually cite, so AI search becomes a measurable, repeatable growth channel rather than a black box.
 
-![](/PostImages/how-to-rank-in-claude-practices-tips/8.webp)		
+<a href="https://www.infrasity.com/services/ai-geo-optimization-agency#:~:text=Get%20your%20free%20AEO%20Report%20today" target="_blank" rel="noreferrer noopener">
+![](/PostImages/how-to-rank-in-claude-practices-tips/8.webp)
+</a>
 
 ## **Frequently Asked Questions**
 

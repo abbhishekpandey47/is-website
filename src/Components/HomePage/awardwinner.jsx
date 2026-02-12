@@ -31,7 +31,7 @@ export default function AwardBanner() {
                 <ArrowRight className="h-3 w-3 text-white" />
               </div>
               <p className="text-[0.78rem] sm:text-[0.82rem] font-medium text-white hover:text-purple-200 transition-colors duration-200 leading-tight text-center truncate">
-                Download Free Developer Marketing Playbook [2025]
+                Download Free Developer Marketing Playbook [2026]
               </p>
             </Link>
 

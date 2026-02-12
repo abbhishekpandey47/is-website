@@ -289,7 +289,7 @@ const Footer = () => {
           {" "}
           <div className="flex max-xs:text-xs max-xs:flex-col gap-1 w-1/2">
             {" "}
-            <div>© 2025 Infrasity. All rights reserved.</div>{" "}
+            <div>© 2026 Infrasity. All rights reserved.</div>{" "}
           </div>{" "}
           <div className="flex max-xs:text-xs max-sm:flex-col w-1/2 justify-end items-end max-sm:gap-1 gap-3">
             {" "}

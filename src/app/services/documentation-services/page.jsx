@@ -322,7 +322,7 @@ const documentation = {
       {/* Footer */}
       <footer className="border-t border-slate-700/50 py-12 px-6">
         <div className="max-w-6xl mx-auto text-center text-slate-400">
-          <p>&copy; 2025 Infrasity. Documentation that drives developer adoption.</p>
+          <p>&copy; 2026 Infrasity. Documentation that drives developer adoption.</p>
         </div>
       </footer>
     </div>
