@@ -14,7 +14,7 @@ If there's one company often held up as a gold standard in developer marketing, 
 
 At its core, developer marketing is about communicating a product’s value directly to engineers, showing how it solves real-world problems, and enabling them to explore it on their own terms.
 
-For teams looking to operationalize these ideas at scale, setting up a developer marketing plan with Infrasity focuses on building repeatable systems for documentation, technical content, community distribution, and low-friction onboarding that align directly with real developer workflows rather than one-off campaigns. By engaging them with deep technical content, resources, and community interactions, B2B SaaS companies can turn developers into trusted advocates who drive organic growth and long-term credibility.
+For teams looking to operationalize these ideas at scale, setting up a developer marketing plan with Infrasity, a leading [developer marketing agency](https://www.infrasity.com/blog/what-is-developer-marketing), focuses on building repeatable systems for documentation, technical content, community distribution, and low-friction onboarding that align directly with real developer workflows rather than one-off campaigns. By engaging them with deep technical content, resources, and community interactions, B2B SaaS companies can turn developers into trusted advocates who drive organic growth and long-term credibility.
 
 ## **Why Developer Marketing is Not Traditional Marketing?**
 
