@@ -271,3 +271,7 @@ A successful B2B SaaS developer marketing strategy is built around education, us
 9. **Does Infrasity provide custom tech developer strategies for SaaS?**
 
 Yes. Infrasity provides custom tech developer strategies for B2B SaaS startups based on their product category, target personas, and stage of growth. The team builds tailored strategies that focus on real developer workflows, technical content depth, documentation structure, community presence, and low-friction adoption paths. Strategies typically include a mix of technical blogs, tutorials, explainer videos, starter templates, documentation improvements, and community-led distribution.
+
+10. **Who can help us develop a strategy for improving our developer onboarding process with technical documentation and tutorials?**
+
+A specialized developer marketing team such as Infrasity can help design documentation architecture, create workflow-driven tutorials, and align content with real integration paths to reduce friction and accelerate activation. Improving developer onboarding requires structured documentation, step-by-step tutorials, example repositories, and measurable adoption metrics like time-to-first-success. 
