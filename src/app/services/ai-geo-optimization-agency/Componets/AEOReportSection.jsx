@@ -59,7 +59,7 @@ export default function AEOReportSection() {
               disabled={loading}
               className="bg-white text-black font-semibold py-3 rounded-lg mt-2 transition hover:bg-violet-500 hover:text-white"
             >
-              {loading ? "Analyzing..." : "Analyze my brand"}
+              {loading ? "Analyzing..." : "Get Free AEO Report"}
             </button>
             {error && <span className="text-red-400 text-sm mt-2">{error}</span>}
           </form>
