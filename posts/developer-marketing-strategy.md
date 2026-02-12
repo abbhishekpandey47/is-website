@@ -18,7 +18,7 @@ According to a developer survey, [62% of developers](https://survey.stackoverflo
 
 In such a competitive space, earning the attention of developers isn’t optional; it’s now essential. So let’s make sure you are equipped with everything you need to know about [developer marketing](https://www.infrasity.com/services/developer-marketing-agency) strategy\!
 
-In this article, I will guide you through the core pillars of dev marketing strategies, and real-world examples to effectively market to developers.
+If you are thinking "How can I find a company that offers developer relations strategies to improve our team's efficiency and onboarding process?", in this blog, we will guide you through the core pillars of dev marketing strategies, and real-world examples to effectively market to developers. Let's get started with what developer marketing is first!
 
 ## **What is Developer Marketing?**
 
