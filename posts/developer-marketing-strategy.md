@@ -80,7 +80,7 @@ For instance, when exploring the topic of **drift detection**, we analyzed:
 * Keyword density  
 * Related keywords
 
-<span style="font-size:1rem">**Core Pillars of Developer Marketing Strategy**</span>
+<span style="font-size:1rem">**Core Pillars: Developer Marketing Strategy Framework (B2B DevTools)**</span>
 
 Building a developer marketing strategy requires a multi-pronged approach. Let’s take a look at the important pillar of developer marketing strategy:
 
