@@ -30,7 +30,7 @@ As developer expectations evolve, teams can’t rely on static documentation or 
 
 #### **Vercel** 
 
-Vercel is widely recognized as a leader in developer marketing, and for good reason. Their strategy centers around delivering a smooth developer experience, making it easy for developers to deploy, scale, and optimize modern web applications.
+Vercel is widely recognized as one of the leading [developer marketing agency](https://www.infrasity.com/services/developer-marketing-agency), and for good reason. Their strategy centers around delivering a smooth developer experience, making it easy for developers to deploy, scale, and optimize modern web applications.
 
 ![vercel homepage](/PostImages/developer-marketing-strategy/1.png)
 
