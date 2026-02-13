@@ -69,7 +69,7 @@ export default function HeroSection({ isAdsVariant = false }) {
   return (
     <section className="w-full flex flex-col pb-10 items-center justify-end bg-transparent">
       {/* Card background image */}
-      <div className="relative w-full shadow-2xl -mt-18 2xl:-mt-30 min-h-[100vh] md:min-h-[95vh] xl:min-h-[95vh] 2xl:min-h-[90vh]">
+      <div className="relative w-full shadow-2xl -mt-18 2xl:-mt-30 min-h-[100vh] md:min-h-[95vh] xl:min-h-[85vh] 2xl:min-h-[70vh]">
         <Image
           src="/aeo/aeoHome.svg"
           alt="Home Background"
