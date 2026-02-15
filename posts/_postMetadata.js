@@ -1738,7 +1738,7 @@ let postMetaData = [
     metatitle: "5 Best Generative Engine Optimization Tools for B2B SaaS",
     slug: "generative-engine-optimization-tools",
     description: "AI search is reshaping how B2B SaaS startups get discovered. As buyers increasingly rely on ChatGPT and other AI engines for product research, traditional SEO alone is no longer enough. This blog explores the best generative engine optimization tools available in 2026, comparing their features, pricing, and use cases for growth-driven teams. You’ll learn how GEO differs from traditional SEO, how to track AI visibility, and what steps to take to improve LLM citations and share of voice. If you're a Growth Head or VP of Marketing, this guide will help you operationalize AI search visibility strategically and measurably.",
-    ogImage: "/PostImages/generative-engine-optimization-tools/1.jpeg",
+    ogImage: "/PostImages/generative-engine-optimization-tools/1.webp",
     publishedOn: "2026-02-15",
     authorId: "author0005",
     category: "LLM Visiblity",
