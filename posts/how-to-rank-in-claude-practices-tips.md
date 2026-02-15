@@ -20,6 +20,8 @@ This blog breaks down why ranking in Claude is important, what Claude prioritize
 
 ## **Why Rank Developer Content on Claude?**
 
+![](/PostImages/how-to-rank-in-claude-practices-tips/9.webp)
+
 Claude AI is increasingly used by developers to solve real problems like debugging code, analyzing datasets, or generating implementation-ready artifacts. Ranking in Claude places your content directly inside these workflows. Developer content performs especially well because it aligns with how Claude retrieves sources:
 
 * It is task-oriented and problem-driven  
@@ -131,6 +133,8 @@ Claude does not provide rankings in the traditional sense, which is why visibili
 * AI agent traffic (retrieval and indexing)
 
 ## **Claude AI Search Monitoring Tips**
+
+![](/PostImages/how-to-rank-in-claude-practices-tips/10.webp)
 
 ### 1. **Pick the Primary Goal** 
 
