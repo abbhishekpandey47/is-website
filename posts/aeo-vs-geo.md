@@ -81,6 +81,20 @@ Unlike AEO, which focuses on direct answers in search results, GEO addresses a b
 * **LLM-Friendly Structure:** Logical flow, clear headings, and well-separated topic blocks (100–300 tokens per idea) improve machine comprehension.  
 * **AI Interface Awareness:** Content is optimized for how it appears in AI summaries, comparison prompts, and recommendation prompts or queries.
 
+To operationalize this, we follow these small but very important steps:
+
+* We pull high-intent prompts from Scrunch aligned with our core clusters   
+* Next, we maintain a centralized tracking sheet to evaluate performance across LLM platforms like ChatGPT, Claude, Perplexity, and Gemini. 
+
+![](/PostImages/aeo-vs-geo/9.webp)
+
+* As you can see in the image above, each prompt is mapped against ranking status, citation presence, cited page, and required next steps.  
+* If a prompt isn’t performing or generating citations, we plan the “Next Steps” for it. We decide whether to integrate it into existing headings like H2s, H3s, or FAQs, expand the section with deeper context, or build a dedicated page around it. 
+
+This structured prompt mapping has helped improve LLM visibility across clusters such as developer marketing, technical content, and product documentation by turning conversational queries into content architecture decisions.
+
+The tracking sheet serves as a strategic control panel actively guiding content prioritization for GEO impact and most B2B SaaS startups are doing this to gain LLM visibility.
+
 **Example:** A code review platform incorporated the prompts taken from platforms like Profound or Peec in its content. They replaced their H2s, H3s and FAQs with the prompts and soon saw a boost in their citations and overall AI visibility. Below is a snapshot of their organically boosted citations on the platform. 
 
 #### **The GEO Funnel: Synthesis-Led Visibility**
@@ -123,7 +137,7 @@ AEO is more effective than GEO for B2B SaaS startups when your primary growth le
 
 But how can AEO be more effective than GEO for B2B SaaS startups? It’s simple, if you’re:
 
-* #### **Targeting question-driven, snippet-friendly keywords and prompts:** AEO performs best when your core queries start with what, how, why, which, or best and trigger featured snippets or People Also Ask results. Structured answers, concise definitions, and FAQ blocks help you capture these high-visibility SERP placements quickly.
+* **Targeting question-driven, snippet-friendly keywords and prompts:** AEO performs best when your core queries start with what, how, why, which, or best and trigger featured snippets or People Also Ask results. Structured answers, concise definitions, and FAQ blocks help you capture these high-visibility SERP placements quickly.
 
 **Example**: An omnichannel inbox CRM for lead management platform incorporated prompts infused with high-intent keywords from [Profound.ai](http://Profound.ai) into their threads. Next, they engaged with the cited threads on the prompts and created new engagement posts around the same prompts. This resulted in a spike from 4th to 1st within 1-2 months.  
    
