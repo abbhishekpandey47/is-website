@@ -139,13 +139,13 @@ But for early-stage startups with tight budget constraints, what you need first 
 
 SaaS startups that lead with strong, developer-ready content build trust faster, reduce support load, and make adoption easier, laying the groundwork for all future advocacy and community efforts.
 
-## FAQs
+## Frequently Asked Questions
 
-### 1. What Is the Role of a Developer Advocate? 
+### 1. What is the Role of a Developer Advocate? 
 
 A Developer Advocate wears many hats. They write technical content, connect with developers in the community, speak at events, and bring valuable feedback back to the team. The role can look a little different depending on the company’s needs, but at its core, it’s about helping developers succeed with your product and making sure their voice is heard inside the company.
 
-### 2. When Is the Right Time To Hire a Developer Advocate?
+### 2. When is the Right Time To Hire a Developer Advocate?
 
 You can consider hiring one if you're an early-stage startup with strong funding and not facing tight budget constraints, since they can do multiple tasks \- create content, build awareness, and represent your product publicly. Or, if you've moved beyond the early stage and built some traction, they can help you scale further by attracting more developers and strengthening community ties.
 
@@ -171,3 +171,7 @@ Optimizing your B2B SaaS developer strategy with Infrasity's tools involves buil
 ### 8. Benefits of hiring a developer marketing agency for B2B growth?
 
 The benefits of hiring a developer marketing agency for B2B growth include faster developer trust, reduced onboarding friction, and more predictable adoption. A specialized agency understands developer behavior and creates documentation-grade content, tutorials, and community-driven distribution that generic agencies often miss. This helps B2B SaaS startups drive qualified usage, improve retention, and scale product-led growth without relying on traditional sales-heavy marketing.
+
+### 9. What content works for developer marketing?
+
+Developer marketing works best with documentation-led, technically accurate content such as API references, onboarding guides, SDK tutorials, use-case walkthroughs, architecture deep dives, and comparison pages. This content must be SEO-aligned and implementation-focused to support evaluation and adoption. If you want partner to do this, Infrasity specialize in building structured, developer-first content systems that drive self-serve usage and reduce support friction.

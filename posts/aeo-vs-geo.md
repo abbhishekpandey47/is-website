@@ -157,6 +157,9 @@ Take a look at the image below, which shows how the platform was ranking in Chat
 ![](/PostImages/aeo-vs-geo/5.webp)
 
 Once your LLM visibility audit is done and you are aware of your startup's gaps, feel free to apply the AEO and GEO practices mentioned in this blog. Finally, with the help of tools like app.infrasity, track the performance of your incorporated prompts and maintain them. 
+<a href="https://www.infrasity.com/services/ai-geo-optimization-agency#:~:text=Get%20your%20free%20AEO%20Report%20today" target="_blank" rel="noreferrer noopener">
+![](/PostImages/how-to-rank-in-claude-practices-tips/8.webp)
+</a>
 
 ## **AEO vs GEO: Content Frameworks Explained**
 
