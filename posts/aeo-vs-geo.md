@@ -140,7 +140,7 @@ Take a look at the image below, which shows how the platform was ranking in Chat
 
 **Example**: If you use [AI visibility audit tools](https://www.infrasity.com/blog/llm-visibility-analysis-tools) like [Infrasity](https://app.infrasity.com/), you can do an audit of your website. Your LLM visibility audit will look like this: 
 
-![](/PostImages/aeo-vs-geo/4.webp)
+![](/PostImages/aeo-vs-geo/5.webp)
 
 Once your LLM visibility audit is done and you are aware of your startup's gaps, feel free to apply the AEO and GEO practices mentioned in this blog. Finally, with the help of tools like app.infrasity, track the performance of your incorporated prompts and maintain them. 
 
