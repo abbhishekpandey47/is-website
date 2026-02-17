@@ -1,6 +1,6 @@
 ## **TLDR**
 
-* Most LLM visibility analysis tools are good at showing *what’s working* in AI search: prompt coverage, rankings, citations, and competitors. The real challenge starts **after the analysis**, when teams need to turn insights into content that LLMs actually surface.  
+* Most [LLM visibility analysis](https://www.infrasity.com/services/ai-geo-optimization-agency) tools are good at showing *what’s working* in AI search: prompt coverage, rankings, citations, and competitors. The real challenge starts **after the analysis**, when teams need to turn insights into content that LLMs actually surface.  
 * LLM visibility analysis tools measure how often and in what context your B2B SaaS product is cited, recommended, or referenced in AI-generated answers instead of traditional search rankings.  
 * These tools track prompts across multiple AI models (ChatGPT, Perplexity, Gemini), recording brand mentions, citations, sentiment, and per-prompt ranking shifts.  
 * Key metrics include visibility score trends, relative share of voice, sentiment distribution, and prompt‐level rank movement, which reveal both strengths and gaps in AI search presence.  
