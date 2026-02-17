@@ -42,11 +42,9 @@ Paid traffic, unlike organic traffic, is traffic that you get through sponsored 
 
 According to Reddit Advertising, **90% of users** trust Reddit to learn about products and brands, **79%** would be interested in seeing brands share information about their products, and **27%** are more likely to buy the products or services they see on Reddit
 
-You can either set up and manage your own paid traffic campaigns, or you can opt for experts who can do the same, but with experience and insights. This will decrease the risk of failure when managing the campaigns.
+You can either set up and manage your own paid traffic campaigns or opt for experts who can do the same, but with experience and insights. This will decrease the risk of failure when managing the campaigns.
 
 For example, if you're launching a new DevOps SaaS tool, you can promote it directly in subreddits like r/devops or r/sysadmin. This will reach engineers who are actively looking for solutions. 
-
-## 
 
 ## **What is Organic Traffic vs Paid Traffic on Reddit?**
 
@@ -79,7 +77,7 @@ I have mentioned all possible metrics you would want to know before setting up a
 
 ## **Why Reddit Works Best For B2B SaaS Marketing?**
 
-Reddit already has millions of users every day and is still growing, which is why considering Reddit as a platform for marketing your B2B SaaS brand is a great choice. If you are not considering using Reddit as your marketing platform, then you will be losing a big chance. There are a few [great Reddit marketing agencies](https://www.infrasity.com/blog/reddit-marketing-agencies) if you want to check them out.
+Reddit already has millions of users every day and is still growing, which is why considering Reddit as a platform for marketing your B2B SaaS brand is a great choice. If you are not considering using Reddit as your marketing platform, then you will be losing a big chance. There are a few [great Reddit marketing agencies](https://www.infrasity.com/services/reddit-marketing-agency) if you want to check them out.
 
 Reddit isn't just a niche platform anymore; it's a powerhouse of subcultures, consumer insights, and purchasing influence. It gives you direct access to audiences that are informed, opinionated, and passionate. Several B2B SaaS have already realised this and started marketing with organic vs paid search on Reddit.
 
@@ -107,32 +105,21 @@ Promoted ads appear in users’ feeds and look very similar to organic posts. Th
 “This picture displayed the various types of Promoted Ads”
 
 * **Text Ads**: Mimic organic Reddit posts, perfect for storytelling and receiving comments.
-
 * **Link Ads**: Drive traffic directly to your website, product page, or landing page.
-
 * **Video Ads**: Great for grabbing attention quickly in a scroll-heavy environment.
-
 * **Carousel Ads**: Feature multiple images or products in a single ad unit.
-
 * **Image ads**: Text and images.
-
 * **Conversation ads**: Unique Reddit ad type that shows up under a post before the first comments.
-
 * **Product ads**: Shopping ads delivered in context. E.g., camping products showing up in a Reddit thread asking for camping advice.
-
 * **AMA**: Ask Me Anything campaigns are a great way to drive engagement and introduce users to your SaaS brand.
-
 
 ### **Takeover Ads**
 
 Reddit offers several takeover ad packages that allow you to take over specific subreddits, the entire site, categories, etc. These are the premium ad formats that will dominate Reddit’s front page or your targeted subreddits. Most of the packages include:
 
 * **Front Page Takeover**: Full homepage ad placement for maximum exposure.
-
 * **Subreddit Takeover**: Places your brand prominently within a specific subreddit, perfect for niche targeting.
-
 * **Trending Takeover**: It highlights your campaign in Reddit’s "Trending Today" section, boosting visibility.
-
    
 ![A Reddit interface showing the "TRENDING TODAY" section](/PostImages/organic-vs-paid-marketing-reddit/i3.png)  
 
@@ -171,7 +158,6 @@ To be fluent in Reddit’s tone, I’d suggest you learn a few acronyms.
  
 “A snapshot of a Reddit user using a popular acronym ‘TL;DR’.”
 
-### 
 
 ### **Listen to Feedback**
 
@@ -190,7 +176,7 @@ Creativity thrives on Reddit. This isn’t your average social media app. The us
 
 ## **Conclusion**
 
-offers a powerful mix of organic and paid marketing opportunities that can put your brand in front of highly engaged audiences. Unlike traditional platforms, Reddit thrives on authenticity. When done right, marketing here isn’t just about impressions, it’s about building an influence. I hope that the concept of organic vs paid search on Reddit is a little clearer to you.
+offers a powerful mix of organic and paid marketing opportunities that can put your brand in front of highly engaged audiences. Unlike traditional platforms, Reddit thrives on authenticity. When done right, marketing here isn’t just about impressions; it’s about building an influence. I hope that the concept of organic vs paid search on Reddit is a little clearer to you.
 
 Whether you're starting small with subreddit engagement or investing in a full-blown ad campaign, Reddit has the potential to amplify your brand in ways most platforms can’t.
 
