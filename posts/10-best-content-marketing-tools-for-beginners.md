@@ -14,7 +14,7 @@ Here's a list of tools designed to support your content marketing journey.
 
 ## Content Research Tools
 
-In content marketing, having a powerful tool to drive your research and spark fresh ideas can be transformative. Let’s have a look at the best tools that can assist you with the right research and brainstorming out-of-the-box ideas:
+In [technical content marketing](https://www.infrasity.com/services/technical-writing-services), having a powerful tool to drive your research and spark fresh ideas can be transformative. Let’s have a look at the best tools that can assist you with the right research and brainstorming out-of-the-box ideas:
 
 ### 1. Outline Generator (by Infrasity)
 
