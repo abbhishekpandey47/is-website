@@ -5,7 +5,7 @@ import Testimonials from "../../lp/reddit-marketing-agency/testimonials";
 import FAQ from "./Componets/faq";
 import CTA from "../developer-marketing-agency/cta";
 import CaseStudies from "./Componets/caseStudies";
-import AEOReportSection from "./Componets/AEOReportSection";
+// import AEOReportSection from "./Componets/AEOReportSection";
 import ServiceHighlights from "./Componets/serviceHighlights";
 import FourthSection from "./Componets/FourthSection";
 import FifthSection from "./Componets/FifthSection";
@@ -31,7 +31,7 @@ export default async function LandingPage({ searchParams }) {
       <FourthSection />
       <SecondSection />
       {/* <ThirdSection /> */}
-      <AEOReportSection />
+      {/* <AEOReportSection /> */}
       <FifthSection />
       <Testimonials
         heading="Trusted by Leading B2B SaaS, DevTools, and AI Startups"
