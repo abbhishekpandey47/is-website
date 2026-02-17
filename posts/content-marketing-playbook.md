@@ -6,7 +6,7 @@ Let's say you have created a solid strategy in mind - you know what kind of cont
 
 The reality is that **[33% of B2B marketers](https://contentmarketinginstitute.com/b2b-research/7-things-b2b-content-marketers-need-in-2023-new-research)** plan their content strategy but never document it, and that's where things fall apart. People go off-script, new team members struggle to catch up, and freelancers are left guessing.
 
-So what's the fix? A **content marketing playbook**. One file that serves as a source of truth for your content marketing efforts.
+So what's the fix? A **[content marketing](https://www.infrasity.com/services/technical-writing-services) playbook**. One file that serves as a source of truth for your content marketing efforts.
 
 In this article, you will learn about a content playbook, its major components, and how you can create one for your B2B SaaS company.
 
