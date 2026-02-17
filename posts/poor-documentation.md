@@ -12,7 +12,7 @@ Now that you have a clear picture of how poor documentation can impact your sale
 
 ## Red Flags: What Poor Documentation Looks Like
 
-Even the best SaaS products can lose their target customers if their documentation creates friction instead of confidence. If your documentation shows any of the following signs, it may be affecting product adoption, increasing churn, or overwhelming your support team.
+Even the best SaaS products can lose their target customers if their [product documentation](https://www.infrasity.com/services/product-documentation) creates friction instead of confidence. If your documentation shows any of the following signs, it may be affecting product adoption, increasing churn, or overwhelming your support team.
 
 ![poor documentation](/PostImages/poor-documentation/pd2.jpg) 
 
