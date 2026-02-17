@@ -1,6 +1,6 @@
 ## TL;DR
 
-- The top 5 Reddit marketing agencies are Infrasity, Foundation Marketing, Taktical Digital, Soar, and Inflow.
+- The top 5 [Reddit marketing agencies](https://www.infrasity.com/services/reddit-marketing-agency) are Infrasity, Foundation Marketing, Taktical Digital, Soar, and Inflow.
 - They understand how to leverage Reddit for marketing B2B SaaS products, be it through organic community engagement or paid ads.
 - Infrasity stands out by focusing on value-first conversations and only pitching your product when it truly fits - more advocacy, less promotion.
 
