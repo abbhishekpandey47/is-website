@@ -60,7 +60,7 @@ While the subreddit is strictly moderated, it welcomes thoughtful conversations,
 
 ![r/aiagents is one of the best subreddits for b2b saas startups](/PostImages/best-subreddits/ts5.webp) 
 
-**[r/AI_Agents](https://www.reddit.com/r/AI_Agents/)** is a niche but one of the best Reddit communities for **[Reddit marketing](https://www.infrasity.com/blog/reddit-marketing)**, focused on the development and application of autonomous AI agents. Builders, researchers, and early adopters use this space to share frameworks, tools, demos, and breakthroughs - from Auto-GPT setups to custom orchestration stacks.
+**[r/AI_Agents](https://www.reddit.com/r/AI_Agents/)** is a niche but one of the best Reddit communities for **[Reddit marketing](https://www.infrasity.com/services/reddit-marketing-agency)**, focused on the development and application of autonomous AI agents. Builders, researchers, and early adopters use this space to share frameworks, tools, demos, and breakthroughs - from Auto-GPT setups to custom orchestration stacks.
 
 It’s a great place for startups working on agent infrastructure, AI copilots, or complex task automation to engage, especially if you're sharing technical insights, GitHub repos, or real-world use cases.
 
