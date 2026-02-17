@@ -1,11 +1,11 @@
 ## TL;DR
 
 - Karma is the reputation score on Reddit that indicates how much the community members appreciate your presence and contribution.
-- There are two types of Karma - Comment Karma and Post Karma.
+- There are two types of Karma: Comment Karma and Post Karma.
 - In order to get Comment Karma, engage in active conversations quickly and especially in rising posts, provide them with helpful insights, and maintain a polite tone. 
 - To increase your Post Karma, pick the relevant subreddits, post engaging content that sparks conversation, but at the right time. Also, ensure that they are LLM and SEO-friendly for better visibility.
 
-Reddit marketing is a fantastic way to engage with your target users, but only if you've built up some solid Reddit Karma. Without it, you don't have much credibility on the platform, and jumping straight into promoting your product can backfire. In fact, pushing content too soon can get you shadowbanned, meaning your posts and profile become invisible to everyone but you. Not exactly ideal for marketing, right? That's why it's essential to focus on earning Reddit Karma first. In this article, you will learn everything you need to know about Reddit Karma and how you can increase them.
+[Reddit marketing](https://www.infrasity.com/services/reddit-marketing-agency) is a fantastic way to engage with your target users, but only if you've built up some solid Reddit Karma. Without it, you don't have much credibility on the platform, and jumping straight into promoting your product can backfire. In fact, pushing content too soon can get you shadowbanned, meaning your posts and profile become invisible to everyone but you. Not exactly ideal for marketing, right? That's why it's essential to focus on earning Reddit Karma first. In this article, you will learn everything you need to know about Reddit Karma and how you can increase them.
 
 ## What is Karma on Reddit?
 
@@ -123,7 +123,7 @@ For post karma, choose subreddits where your audience is active and post during 
 
 These tactics and specific insights to increase Karma points on Reddit are experience-based, and if you are seeking a Reddit marketing partner, book a Free Demo with Infrasity. We specialize in Reddit marketing, wherein we don't promote your B2B SaaS company but advocate for it, which goes with the Reddit community's vibe.
 
-## FAQs
+## Frequently Asked Questions
 
 ### 1. Is 1 Upvote 1 Karma?  
 Not exactly. Reddit uses a scoring algorithm, so 1 upvote doesn't always equal 1 karma - some votes may count more or less depending on timing and community activity.
