@@ -1,6 +1,6 @@
 ## TL;DR
 
-- Reddit marketing strategy includes assessing your competitors' presence on the platform, gathering insights about your target audiences, and identifying whether they are discussing your product.
+- [Reddit marketing strategy](https://www.infrasity.com/services/reddit-marketing-agency) includes assessing your competitors' presence on the platform, gathering insights about your target audiences, and identifying whether they are discussing your product.
 - Based on these data, develop a content strategy wherein you engage in user-generated questions and create strategic threads to organically promote your product.
 - Gauge your Reddit marketing efforts using metrics, such as traffic from Reddit, tool mentions, upvotes, product trials, and search visibility.
 
