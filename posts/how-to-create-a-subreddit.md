@@ -77,7 +77,7 @@ Consider sticking this welcome thread to the top of your subreddit so every newc
 
 ### 2. Seed Your Subreddit With Content
 
-Before you invite others in or promote your subreddit, publish some quality posts in it. In fact, Reddit recommends at least 3 posts so that visitors find something interesting when they visit your subreddit. As the moderator or founder, start posting content that will spark discussions and share resources related to your product. Here are a couple of content ideas to get started:
+Before you invite others in or promote your subreddit, publish some quality posts in it. In fact, some of the best [Reddit marketing agencies](https://www.infrasity.com/services/reddit-marketing-agency) recommend at least 3 posts so that visitors find something interesting when they visit your subreddit. As the moderator or founder, start posting content that will spark discussions and share resources related to your product. Here are a couple of content ideas to get started:
 
 **Ask Me Anything (AMA) Posts**
 
