@@ -1,6 +1,6 @@
 ## Introduction
 
-Content marketing takes _time, creativity, and effort_ - but without tracking the right metrics, it's like driving without a dashboard. With multiple sales and marketing campaigns running in parallel, it's hard to tell where a lead came from or which piece of content actually pushed them toward conversion.
+[Content marketing](https://www.infrasity.com/services/technical-writing-services) takes _time, creativity, and effort_ - but without tracking the right metrics, it's like driving without a dashboard. With multiple sales and marketing campaigns running in parallel, it's hard to tell where a lead came from or which piece of content actually pushed them toward conversion.
 
 That's why tracking your content marketing metrics is necessary. These metrics help you find out what's really working and where you're falling short. Nevertheless, only **[35% of marketers](https://www.hubspot.com/marketing-statistics)** use data to gauge and enhance their marketing efforts and comprehend which content metrics are good and which need attention.
 
@@ -105,7 +105,7 @@ Measuring the content performance KPIs is important, especially for B2B SaaS sta
 
 Not sure how to measure these content metrics? We'll analyze your content, identify what's working, and pinpoint exactly where to optimize for better results. Contact us for a **[Free Audit](https://www.infrasity.com/contact)**!
 
-## FAQs
+## Frequently Asked Questions
 
 ### 1. What’s the Difference Between Average Position and Keyword Ranking?
 
