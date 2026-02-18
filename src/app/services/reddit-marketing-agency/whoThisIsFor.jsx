@@ -11,29 +11,27 @@ const StartupHeroSection = () => {
                         <div className="max-w-6xl text-left relative z-10">
                             <div className="quicksand-bold text-[30px] tracking-tighter md:leading-[80px] text-white text-left flex justify-left mb-2">
                                 <h2 className="leading-[80px] max-sm:leading-[69px] text-left max-lg:mx-auto">
-                                    Who this is for :
+                                    Who This Is For
                                 </h2>
                             </div>
 
                             {/* Description */}
                             <div className="mx-auto mb-8">
                                 <p className="font-[quicksand] text-[18px] md:text-[18px] text-white tracking-wide leading-relaxed font-[320]">
-                                    We work with early and growth-stage startups building tools for technical users.
-                                    If you're building for developers and want to win credibility on Reddit — we're
-                                    your team.
+                                    We work with early to growth-stage B2B companies whose buyers research before they buy.
+                                    If your product is discovered through community discussions, comparisons, and peer recommendations, this is built for you.
                                 </p>
                             </div>
                         </div>
 
                         <div className="space-y-2">
                             {[
-                                "AI/LLM agentic platforms.",
-                                "Internal developer platforms (IDPs).",
-                                "Observability / APM / Testing tools.",
-                                "Deployment & workflow automation.",
-                                "Auth, CI/CD, and DevX tooling.",
-                                "Backend infra, feature flags, config tools.",
-                                "Experimental tools solving new-edge problems (think: Codium, DevZero, Kubiya, Tracetest)."
+                                "AI and LLM platforms",
+                                "DevTools and infrastructure products",
+                                "Technical B2B SaaS (developer, engineering, or ops-focused)",
+                                "Workflow, automation, and productivity platforms",
+                                "Customer support, messaging, and operational tools",
+                                "Seed to Series B+ teams building awareness or strengthening category credibility",
                             ].map((item, index) => (
                                 <div key={index} className="flex items-center space-x-3">
                                     <div className="flex-shrink-0 mt-1">

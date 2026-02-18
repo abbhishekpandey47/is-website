@@ -84,16 +84,16 @@ export default function AIStartupLanding() {
 
             {/* Content */}
             <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto text-center relative z-10">
-                <div className="quicksand-bold text-[4.5em] max-md:text-[3.2em] max-sm:text-[2.4em] leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-white text-center mb-12 max-sm:mb-6">                    <h1 className="leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-center max-lg:text-center max-lg:mx-auto tracking-normal">
-                    <span className="text-[#ff4500]">Reddit </span>Marketing Agency for<br />
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600"> AI Agents <span className="text-white">&</span> SaaS Startups </span>
-                </h1>
+                <div className="quicksand-bold text-[4.5em] max-md:text-[3.2em] max-sm:text-[2.4em] leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-white text-center mb-12 max-sm:mb-6">
+                    <h1 className="leading-[80px] max-md:leading-[60px] max-sm:leading-[45px] text-center max-lg:text-center max-lg:mx-auto tracking-normal">
+                        <span className="text-[#ff4500]">Reddit </span>Marketing Agency that Actually Gets You Sign Ups
+                    </h1>
                 </div>
 
                 {/* Description */}
                 <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto mb-10 max-sm:mb-6">
                     <p className="text-[24px] md:text-[24px] max-sm:text-[18px] text-[#f5deb3] leading-snug font-light tracking-normal">
-                        Most startups get flagged or ignored on Reddit. We help you show up where your ICP hangs out like r/devops, r/nocode, and r/platform_engineering  with LLM-friendly comments, karma-rich accounts, and stealth thread strategies.
+                        Most B2B SaaS products get ignored, flagged, or banned on Reddit. We help you show up in the right subreddits, earn real trust, and turn Reddit conversations into customers.
                     </p>
                 </div>
 

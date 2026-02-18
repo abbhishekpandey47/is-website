@@ -25,32 +25,32 @@ const RedditServiceCards = () => {
     const services = [
         {
             title: "Subreddit & Keyword Mapping",
-            description: "We surface high-signal topics that invite your ICP to engage — blending into existing conversation patterns while steering the narrative toward your strengths.",
+            description: "We research relevant subreddits, Reddit keywords, and active discussions to identify where your buyers already spend time. This helps us build a Reddit marketing strategy that fits naturally into existing conversations.",
             icon: <DocumentIcon />
         },
         {
-            title: "Organic Engagement",
-            description: "We use karma-rich Reddit accounts to participate in live discussions with technical clarity and cultural fluency, showing up where it counts, and never triggering flags.",
+            title: "Trusted Account Management",
+            description: "We use established Reddit profiles with strong history and credibility to participate in discussions with real insights ensuring natural engagement without spam, flags, or account risk.",
             icon: <DocumentIcon />
         },
         {
-            title: "Strategic Thread Creation",
-            description: "Ask once-per-week hard questions like \"How do you handle drift at scale?\" to spark convo.",
+            title: "Strategic Thread Creation & Engagement",
+            description: "We create and support high-signal threads around the real problems your buyers are discussing, positioning your product as a credible solution through context & not promotion.",
             icon: <DocumentIcon />
         },
         {
-            title: "Competitor & Sentiment Monitoring",
-            description: "We monitor how Reddit talks about tools in categories like infrastructure automation, data observability, and AI agent platforms — identifying sentiment shifts and conversation gaps where your product can enter naturally and earn attention.",
+            title: "Competitor & Category Monitoring",
+            description: "We monitor Reddit conversations around your category, competitors, and product to identify sentiment trends, discussion gaps, and opportunities to enter conversations at the right time.",
             icon: <DocumentIcon />
         },
         {
             title: "Selective Paid Amplification",
-            description: "If something works organically, we’ll selectively amplify it using Reddit’s native ad format. Less than 10% of our impact, used for signal, not reach.",
+            description: "When organic posts perform well, we amplify them using Reddit Ads to increase visibility among high-intent audiences focusing on precision, not broad reach.",
             icon: <DocumentIcon />
         },
         {
-            title: "KPI Dashboard",
-            description: "You get weekly visibility into what’s working — upvotes, traffic, clicks, conversions — and how each Reddit thread contributes to the bigger picture.",
+            title: "Reddit Analytics & KPI Tracking",
+            description: "You get weekly visibility into performance including upvotes, traffic, thread visibility, and conversions so you can clearly see how Reddit contributes to pipeline.",
             icon: <DocumentIcon />
         }
     ];
@@ -60,7 +60,7 @@ const RedditServiceCards = () => {
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
-                        The Quiet Reddit System Refined Across 30+ {" "}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>Breakout Startups</span>
+                        How We Run Reddit Marketing Campaigns
                     </h2>
                 </div>
                 <div className="flex justify-center my-6 mb-8">
