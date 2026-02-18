@@ -19,10 +19,10 @@ const TrustedMarquee = dynamic(() => import("./TrustedMarquee"), {
   ),
 });
 
-export default function AIStartupLanding() {
+export default function AIStartupLanding({customPadding="pt-20"}) {
   return (
     <div
-      className="relative flex flex-col items-left justify-left pt-20 max-sm:pb-0"
+      className={`relative flex flex-col items-left justify-left ${customPadding} max-sm:pb-0`}
       //   style={{ background: "#171a3d" }}
     >
       {/* Background Image */}
