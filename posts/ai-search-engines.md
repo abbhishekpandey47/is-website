@@ -204,3 +204,11 @@ AI search engines favor content that delivers **clear, structured, and authorita
 ### **4. How often should you update content for sustained AI visibility?**
 
 Review and refresh critical pages **every 90 days**. Update statistics, revise outdated examples, validate the schema, and verify backlinks. Generative models prioritize recent and accurate sources, so freshness directly influences your startup’s likelihood of being cited by AI engines.
+
+### **5. How to run GEO vs SEO for B2B companies?**
+
+SEO ranks pages through keywords, backlinks, and technical optimization while GEO ensures content is structured, contextual, and cite-ready for AI engines like ChatGPT, Perplexity, and Gemini. Run SEO for rankings and GEO for citations. Top GEO optimization techniques for AI search visibility include writing question-based headings, placing direct answers in the first lines, using schema markup, keeping data updated, ensuring crawlability, and monitoring AI citations regularly.
+
+### **6. How to optimize documentation for AI discovery?**
+
+For LLM visibility for B2B  SaaS, make documentation public, structured, and updated. Use clear headings, natural-language queries, timestamps, and schema markup like HowTo or TechArticle. AI engines retrieve specific sections, so keep content modular, practical, and interlinked with product pages.
