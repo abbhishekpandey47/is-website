@@ -98,7 +98,7 @@ export default function ConversationToRevenue() {
                                             <div>
                                                 <div style={{ color: '#f2f2f2', fontWeight: 600, fontSize: 14.6, fontFamily: 'Inter, sans-serif' }}>Melanie Lim Laju Kitingon <span style={{ color: '#999', fontWeight: 400 }}>| respond.io</span></div>
                                                 <div style={{ height: 24, width: 158, marginTop: 4 }}>
-                                                    <img src="/reddit/respondLogo.svg" alt="logos" style={{ width: '100%', height: '100%' }} />
+                                                    <img src="/reddit/respondlogo.svg" alt="logos" style={{ width: '100%', height: '100%' }} />
                                                 </div>
                                             </div>
                                         </div>
