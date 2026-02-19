@@ -326,8 +326,8 @@ const VideoModal = ({ openItem, onClose }) => {
 
 export default function Testimonials({
     heading = 'Why',
-    highlight = 'Y Combinator Companies - Boldstart, and Eclipse',
-    trailing = 'trust Infrasity',
+    highlight = 'Trusted by Leading DevTools and B2B SaaS Teams',
+    trailing = '',
     subHeading = 'Here’s how we help them ship content fast — and with depth.',
     showDivider = true,
     wrapperClassName,

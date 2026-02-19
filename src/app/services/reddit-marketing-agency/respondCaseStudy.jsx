@@ -5,7 +5,7 @@ export default function ConversationToRevenue() {
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
-                        Community-Led {" "}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>Growth in Action</span>
+                        B2B SaaS Teams Are Winning on Reddit. Here’s What That Looks Like.
                     </h2>
                 </div>
                 <div className="flex justify-center my-6 mb-8">
@@ -15,7 +15,7 @@ export default function ConversationToRevenue() {
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto mb-8">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-                      Case studies showing how B2B SaaS brands scale visibility and sentiment on Reddit
+                      Case studies showing how early-stage and growth-stage B2B SaaS companies scale visibility and sentiment through community-led engagement on Reddit
                     </p>
                 </div>
             </div>
