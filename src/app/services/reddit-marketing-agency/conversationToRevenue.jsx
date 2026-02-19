@@ -15,7 +15,7 @@ const conversationCards = [
     },
     {
         key: 3,
-        title: '3.Execute Targeted Engagement Across Buying Threads',
+        title: '3. Execute Targeted Engagement Across Buying Threads',
         description: 'Participation begins across comparison posts, recommendation discussions, and ICP-relevant subreddits to increase organic brand mentions and presence within decision-stage conversations.',
         image: '/reddit/revenue3.svg',
     },
@@ -73,7 +73,7 @@ export default function ConversationToRevenue() {
                             </div>
                             <div style={{ padding: 24, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
                                 <div style={{ color: '#fff', fontWeight: 600, fontSize: 18, marginBottom: 12 }}>{card.title}</div>
-                                <div style={{ color: 'rgba(255,255,255,0.75)', fontSize: 12, lineHeight: '1.6' }}>{card.description}</div>
+                                <div style={{ color: 'rgba(255,255,255,0.75)', fontSize: 14, lineHeight: '1.6' }}>{card.description}</div>
                             </div>
                         </div>
                     ))}

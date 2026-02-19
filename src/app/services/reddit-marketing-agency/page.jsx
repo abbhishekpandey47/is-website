@@ -11,7 +11,7 @@ const Cta = dynamic(() => import("../../lp/reddit-marketing-agency/cta"));
 const RedditMarketingSlide = dynamic(() => import("../../lp/reddit-marketing-agency/why"));
 const InfraMethodologyTimeline = dynamic(() => import("../../lp/reddit-marketing-agency/methodology"));
 const RedditServiceCards = dynamic(() => import("../../lp/reddit-marketing-agency/whatYouGet"));
-const StartupHeroSection = dynamic(() => import("../../lp/reddit-marketing-agency/whoThisIsFor"));
+// const StartupHeroSection = dynamic(() => import("../../lp/reddit-marketing-agency/whoThisIsFor"));
 const Testimonials = dynamic(() => import("../../lp/reddit-marketing-agency/testimonials"));
 const FAQSection = dynamic(() => import("../../lp/reddit-marketing-agency/FAQ"));
 const StatsSection = dynamic(() => import("../../lp/reddit-marketing-agency/numbers"));
@@ -30,7 +30,7 @@ export default function RedditMarketingAgencyClient() {
     >
       <HeroHome customPadding={"pt-44"}/>
       <AuditWhatYouGet />
-      <StartupHeroSection />
+      {/* <StartupHeroSection /> */}
       <RedditMarketingSlide />
       <ConversationToRevenue/>
       <Threadflow />

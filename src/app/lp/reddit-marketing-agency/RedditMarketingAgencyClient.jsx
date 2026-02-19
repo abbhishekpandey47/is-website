@@ -9,12 +9,14 @@ const Cta = dynamic(() => import("./cta"));
 const RedditMarketingSlide = dynamic(() => import("./why"));
 const InfraMethodologyTimeline = dynamic(() => import("./methodology"));
 const RedditServiceCards = dynamic(() => import("./whatYouGet"));
-const StartupHeroSection = dynamic(() => import("./whoThisIsFor"));
+// const StartupHeroSection = dynamic(() => import("./whoThisIsFor"));
 const Testimonials = dynamic(() => import("./testimonials"));
 const FAQSection = dynamic(() => import("./FAQ"));
 const StatsSection = dynamic(() => import("./numbers"));
 const Threadflow = dynamic(() => import("./threadflow"));
 const TrustedMarquee = dynamic(() => import("./TrustedMarquee"));
+const RespondCaseStudy = dynamic(() => import("../../services/reddit-marketing-agency/respondCaseStudy"));
+const ConversationToRevenue = dynamic(() => import("../../services/reddit-marketing-agency/conversationToRevenue"));
 
 export default function RedditMarketingAgencyClient() {
   return (
@@ -28,12 +30,14 @@ export default function RedditMarketingAgencyClient() {
     >
       <HeroHome />
       <AuditWhatYouGet />
-      <StartupHeroSection />
+      {/* <StartupHeroSection /> */}
       <RedditMarketingSlide />
+      <ConversationToRevenue/>
       <Threadflow />
       <WhyAI />
       <InfraMethodologyTimeline />
       <RedditServiceCards />
+      <RespondCaseStudy />
       <StatsSection />
 
       <DeferredSection rootMargin="500px 0px">
