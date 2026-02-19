@@ -326,9 +326,9 @@ const VideoModal = ({ openItem, onClose }) => {
 
 export default function Testimonials({
     heading = 'Why',
-    highlight = 'Trusted by Leading DevTools and B2B SaaS Teams',
+    highlight = 'Trusted by VC-Backed B2B SaaS and Infrastructure Startups',
     trailing = '',
-    subHeading = 'Here’s how we help them ship content fast — and with depth.',
+    subHeading = 'What founders and marketing teams say after scaling Reddit visibility with Infrasity.',
     showDivider = true,
     wrapperClassName,
     headingClassName,
