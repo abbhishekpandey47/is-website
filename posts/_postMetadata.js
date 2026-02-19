@@ -924,8 +924,8 @@ let postMetaData = [
     },
 
     {
-        title: "Top 5 Reddit Marketing Agencies for B2B SaaS Companies",
-        metatitle: "Top 5 Reddit Marketing Agencies for B2B SaaS Companies",
+        title: "Top 5 Reddit Marketing Agencies for B2B SaaS and Tech",
+        metatitle: "Top 5 Reddit Marketing Agencies for B2B SaaS and Tech",
         slug: "reddit-marketing-agencies",
         description: "If you are confused about finding the right Reddit marketing agency to partner with, you can pick any of these best marketing agencies for SaaS companies.",
         ogImage: "/PostImages/reddit-marketing-agencies/ag1.webp",
