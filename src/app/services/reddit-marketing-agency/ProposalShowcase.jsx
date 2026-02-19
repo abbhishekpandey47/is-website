@@ -25,10 +25,10 @@ const subreddits = [
 ];
 
 const kpiRows = [
-  { metric: 'Threads engaged',       m1: '35',       m2: '40–60',      m3: '45–50'  },
-  { metric: 'Google ranking threads', m1: 'Baseline', m2: '2–3 threads', m3: '5+ threads' },
-  { metric: 'LLM prompt mentions',   m1: 'Minimal',  m2: '2 of 5',     m3: 'All 5'  },
-  { metric: 'Sentiment (positive)',  m1: '40%',      m2: '~50%',       m3: '55%+'   },
+  { metric: 'Threads engaged',       m1: '35',       m2: '40–60',      m3: '45–50', highlight: 'green' },
+  { metric: 'Google ranking threads', m1: 'Baseline', m2: '2–3 threads', m3: '5+ threads', highlight: 'green' },
+  { metric: 'LLM prompt mentions',   m1: 'Minimal',  m2: '2 of 5',     m3: 'All 5', highlight: 'green' },
+  { metric: 'Sentiment (positive)',  m1: '40%',      m2: '~50%',       m3: '55%+', highlight: 'green' },
 ];
 
 const detailItems = [
@@ -39,15 +39,15 @@ const detailItems = [
 ];
 
 /* ─── shared token shortcuts ─────────────────────────────────────── */
-const P = '#877aeb';          // primary purple accent
-const P_DIM = 'rgba(135,122,235,0.45)';
-const P_BG  = 'rgba(135,122,235,0.07)';
-const P_BDR = 'rgba(135,122,235,0.22)';
-const MUTED  = 'rgba(255,255,255,0.45)';
-const MUTED2 = 'rgba(255,255,255,0.22)';
-const TEXT   = '#e8e9ed';
+const P = '#8B7CE8';          // primary purple accent (lighter for better visibility)
+const P_DIM = 'rgba(139,124,232,0.45)';
+const P_BG  = 'rgba(139,124,232,0.08)';
+const P_BDR = 'rgba(139,124,232,0.25)';
+const MUTED  = 'rgba(255,255,255,0.55)';
+const MUTED2 = 'rgba(255,255,255,0.35)';
+const TEXT   = '#f0f1f5';
 const GREEN  = '#22c55e';
-const BORDER = 'rgba(255,255,255,0.07)';
+const BORDER = 'rgba(255,255,255,0.08)';
 
 /* ─── sub-components ─────────────────────────────────────────────── */
 function SecTitle({ children }) {
@@ -73,23 +73,39 @@ function ProposalDoc() {
   return (
     <div
       style={{
-        background: '#09080f',
+        background: 'linear-gradient(180deg, #0a0914 0%, #0f0d1c 100%)',
         border: `1px solid ${P_BDR}`,
-        borderRadius: 10,
+        borderRadius: 12,
         overflow: 'hidden',
-        boxShadow: `0 8px 64px rgba(129,89,220,0.12), 0 0 0 1px rgba(135,122,235,0.08)`,
+        boxShadow: `0 20px 80px rgba(139,124,232,0.15), 0 0 0 1px rgba(139,124,232,0.1)`,
+        position: 'relative',
       }}
     >
+      {/* Gradient overlay */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '200px',
+          background: `radial-gradient(ellipse at top center, ${P_BG} 0%, transparent 70%)`,
+          pointerEvents: 'none',
+        }}
+      />
+
       {/* Header */}
       <div
         style={{
-          background: '#0f0d1c',
+          background: 'rgba(15,13,28,0.6)',
+          backdropFilter: 'blur(10px)',
           borderBottom: `1px solid ${BORDER}`,
-          padding: '16px 22px',
+          padding: '18px 24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: 12,
+          position: 'relative',
         }}
       >
         <span
@@ -106,14 +122,15 @@ function ProposalDoc() {
           style={{
             fontFamily: 'DM Mono, monospace',
             fontSize: 9,
-            padding: '3px 10px',
-            background: P_BG,
+            padding: '4px 12px',
+            background: `linear-gradient(135deg, ${P_BG}, rgba(139,124,232,0.12))`,
             color: P,
-            letterSpacing: '.1em',
+            letterSpacing: '.12em',
             textTransform: 'uppercase',
-            borderRadius: 3,
+            borderRadius: 4,
             border: `1px solid ${P_BDR}`,
             whiteSpace: 'nowrap',
+            boxShadow: `0 2px 8px rgba(139,124,232,0.2)`,
           }}
         >
           Confidential
@@ -121,23 +138,24 @@ function ProposalDoc() {
       </div>
 
       {/* Body */}
-      <div style={{ padding: '22px 22px 18px' }}>
+      <div style={{ padding: '26px 26px 22px', position: 'relative' }}>
 
         {/* ICP Targeting */}
-        <div style={{ marginBottom: 20 }}>
+        <div style={{ marginBottom: 24 }}>
           <SecTitle>ICP Targeting</SecTitle>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {icpTags.map(({ label, primary }) => (
               <span
                 key={label}
                 style={{
                   fontFamily: 'DM Mono, monospace',
                   fontSize: 10,
-                  padding: '4px 10px',
+                  padding: '5px 12px',
                   border: primary ? `1px solid ${P_BDR}` : `1px solid ${MUTED2}`,
-                  background: primary ? P_BG : 'rgba(255,255,255,0.04)',
-                  color: primary ? 'rgba(135,122,235,0.85)' : MUTED,
-                  borderRadius: 3,
+                  background: primary ? `linear-gradient(135deg, ${P_BG}, rgba(139,124,232,0.05))` : 'rgba(255,255,255,0.03)',
+                  color: primary ? P : MUTED,
+                  borderRadius: 4,
+                  transition: 'all 0.2s ease',
                 }}
               >
                 {label}
@@ -147,27 +165,28 @@ function ProposalDoc() {
         </div>
 
         {/* Prompts */}
-        <div style={{ marginBottom: 20 }}>
+        <div style={{ marginBottom: 24 }}>
           <SecTitle>Prompts to Target</SecTitle>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {prompts.map((p) => (
               <div
                 key={p}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 9,
-                  padding: '7px 10px',
-                  background: 'rgba(255,255,255,0.025)',
+                  gap: 10,
+                  padding: '9px 12px',
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.025), rgba(255,255,255,0.015))',
                   border: `1px solid ${BORDER}`,
-                  borderRadius: 4,
+                  borderRadius: 6,
+                  transition: 'all 0.2s ease',
                 }}
               >
-                <span style={{ color: P, fontSize: 10, flexShrink: 0 }}>▸</span>
+                <span style={{ color: P, fontSize: 11, flexShrink: 0 }}>▸</span>
                 <span
                   style={{
                     fontFamily: 'DM Mono, monospace',
-                    fontSize: 10.5,
+                    fontSize: 11,
                     color: MUTED,
                   }}
                 >
@@ -179,20 +198,21 @@ function ProposalDoc() {
         </div>
 
         {/* Subreddits */}
-        <div style={{ marginBottom: 20 }}>
+        <div style={{ marginBottom: 24 }}>
           <SecTitle>Primary Subreddits</SecTitle>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {subreddits.map(({ label, primary }) => (
               <span
                 key={label}
                 style={{
                   fontFamily: 'DM Mono, monospace',
                   fontSize: 10,
-                  padding: '4px 10px',
-                  background: primary ? P_BG : 'rgba(255,255,255,0.04)',
+                  padding: '5px 12px',
+                  background: primary ? `linear-gradient(135deg, ${P_BG}, rgba(139,124,232,0.05))` : 'rgba(255,255,255,0.03)',
                   border: primary ? `1px solid ${P_BDR}` : `1px solid ${MUTED2}`,
-                  color: primary ? 'rgba(135,122,235,0.8)' : MUTED2,
-                  borderRadius: 3,
+                  color: primary ? P : MUTED2,
+                  borderRadius: 4,
+                  transition: 'all 0.2s ease',
                 }}
               >
                 {label}
@@ -204,40 +224,74 @@ function ProposalDoc() {
         {/* KPI Table */}
         <div>
           <SecTitle>KPI Forecast</SecTitle>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
-              <tr>
-                {['Metric', 'M1', 'M2', 'M3'].map((h) => (
-                  <th
-                    key={h}
-                    style={{
-                      fontFamily: 'DM Mono, monospace',
-                      fontSize: 9,
-                      letterSpacing: '.12em',
-                      textTransform: 'uppercase',
-                      color: MUTED2,
-                      textAlign: 'left',
-                      padding: '5px 8px',
-                      borderBottom: `1px solid ${BORDER}`,
-                      fontWeight: 400,
-                    }}
-                  >
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {kpiRows.map(({ metric, m1, m2, m3 }) => (
-                <tr key={metric}>
-                  <td style={{ fontFamily: 'DM Mono, monospace', fontSize: 10.5, color: MUTED,  padding: '7px 8px', borderBottom: `1px solid rgba(255,255,255,0.035)` }}>{metric}</td>
-                  <td style={{ fontFamily: 'DM Mono, monospace', fontSize: 10.5, color: MUTED2, padding: '7px 8px', borderBottom: `1px solid rgba(255,255,255,0.035)` }}>{m1}</td>
-                  <td style={{ fontFamily: 'DM Mono, monospace', fontSize: 10.5, color: P_DIM,  padding: '7px 8px', borderBottom: `1px solid rgba(255,255,255,0.035)` }}>{m2}</td>
-                  <td style={{ fontFamily: 'DM Mono, monospace', fontSize: 10.5, color: GREEN,  padding: '7px 8px', borderBottom: `1px solid rgba(255,255,255,0.035)` }}>{m3}</td>
+          <div style={{
+            background: 'rgba(255,255,255,0.015)',
+            borderRadius: 6,
+            overflow: 'hidden',
+            border: `1px solid ${BORDER}`
+          }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr style={{ background: 'rgba(139,124,232,0.05)' }}>
+                  {['Metric', 'M1', 'M2', 'M3'].map((h) => (
+                    <th
+                      key={h}
+                      style={{
+                        fontFamily: 'DM Mono, monospace',
+                        fontSize: 9,
+                        letterSpacing: '.12em',
+                        textTransform: 'uppercase',
+                        color: h === 'Metric' ? P : MUTED2,
+                        textAlign: 'left',
+                        padding: '8px 12px',
+                        borderBottom: `1px solid ${BORDER}`,
+                        fontWeight: 500,
+                      }}
+                    >
+                      {h}
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {kpiRows.map(({ metric, m1, m2, m3, highlight }, idx) => (
+                  <tr key={metric} style={{
+                    background: idx % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.01)'
+                  }}>
+                    <td style={{
+                      fontFamily: 'DM Mono, monospace',
+                      fontSize: 11,
+                      color: TEXT,
+                      padding: '10px 12px',
+                      borderBottom: idx < kpiRows.length - 1 ? `1px solid rgba(255,255,255,0.04)` : 'none'
+                    }}>{metric}</td>
+                    <td style={{
+                      fontFamily: 'DM Mono, monospace',
+                      fontSize: 11,
+                      color: MUTED2,
+                      padding: '10px 12px',
+                      borderBottom: idx < kpiRows.length - 1 ? `1px solid rgba(255,255,255,0.04)` : 'none'
+                    }}>{m1}</td>
+                    <td style={{
+                      fontFamily: 'DM Mono, monospace',
+                      fontSize: 11,
+                      color: P_DIM,
+                      padding: '10px 12px',
+                      borderBottom: idx < kpiRows.length - 1 ? `1px solid rgba(255,255,255,0.04)` : 'none'
+                    }}>{m2}</td>
+                    <td style={{
+                      fontFamily: 'DM Mono, monospace',
+                      fontSize: 11,
+                      color: highlight === 'green' ? GREEN : P,
+                      padding: '10px 12px',
+                      borderBottom: idx < kpiRows.length - 1 ? `1px solid rgba(255,255,255,0.04)` : 'none',
+                      fontWeight: 500,
+                    }}>{m3}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -248,12 +302,36 @@ function ProposalDoc() {
 export default function ProposalShowcase() {
   return (
     <section
-      className="py-20 md:py-28"
+      className="py-24 md:py-32 relative"
+      style={{
+        background: 'linear-gradient(180deg, transparent 0%, rgba(139,124,232,0.03) 50%, transparent 100%)',
+      }}
     >
-      <div className="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-[52px]">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-16 items-start">
+      {/* Background decoration */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '10%',
+          left: '5%',
+          width: '300px',
+          height: '300px',
+          background: `radial-gradient(circle, ${P_BG} 0%, transparent 70%)`,
+          filter: 'blur(100px)',
+          opacity: 0.5,
+          pointerEvents: 'none',
+        }}
+      />
 
-          {/* LEFT — copy */}
+      <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-[52px]">
+        <div
+          style={{
+            display: 'grid',
+            alignItems: 'start',
+          }}
+          className="grid-cols-1 gap-10 md:grid-cols-[1fr_1.2fr] md:gap-16 lg:gap-[64px]"
+        >
+
+          {/* LEFT COLUMN — copy */}
           <div>
             {/* Eyebrow */}
             <div
@@ -277,50 +355,79 @@ export default function ProposalShowcase() {
             <h2
               className="quicksand-bold"
               style={{
-                fontSize: 'clamp(30px, 3.5vw, 54px)',
-                lineHeight: 1.1,
+                fontSize: 'clamp(32px, 3.8vw, 56px)',
+                lineHeight: 1.15,
                 color: '#fff',
                 margin: 0,
+                fontWeight: 700,
               }}
             >
               Proposals That Read Like{' '}
-              <em style={{ fontStyle: 'italic', color: P }}>Research Reports.</em>
+              <span style={{
+                background: `linear-gradient(135deg, ${P}, #a591ff)`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                fontStyle: 'italic',
+              }}>
+                Research Reports
+              </span>
             </h2>
 
             {/* Body copy */}
-            <p style={{ fontSize: 15, color: MUTED, lineHeight: 1.85, marginTop: 22, marginBottom: 0 }}>
+            <p style={{
+              fontSize: 16,
+              color: MUTED,
+              lineHeight: 1.8,
+              marginTop: 24,
+              marginBottom: 0
+            }}>
               Every client engagement starts with a deep Reddit audit — competitor share of voice,
               sentiment distribution, thread analysis, and a month-by-month KPI forecast.{' '}
-              <span style={{ color: 'rgba(232,233,237,0.62)' }}>
+              <span style={{ color: TEXT, fontWeight: 500 }}>
                 This isn&apos;t a pitch deck. It&apos;s an intelligence report.
               </span>
             </p>
 
-            <p style={{ fontSize: 15, color: MUTED, lineHeight: 1.85, marginTop: 16, marginBottom: 0 }}>
+            <p style={{
+              fontSize: 16,
+              color: MUTED,
+              lineHeight: 1.8,
+              marginTop: 18,
+              marginBottom: 0
+            }}>
               We studied Reddit&apos;s entire payment gateway conversation before a single comment
               was written for Razorpay. We know Cashfree has 30% share of voice. We know PayU skews
               enterprise. We know exactly which threads are making decisions.
             </p>
 
             {/* Detail list */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginTop: 24 }}>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 10,
+              marginTop: 28,
+              padding: '20px',
+              background: 'linear-gradient(135deg, rgba(139,124,232,0.05), rgba(139,124,232,0.02))',
+              border: `1px solid ${P_BDR}`,
+              borderRadius: 8,
+            }}>
               {detailItems.map((item, i) => (
                 <div
                   key={i}
                   style={{
                     display: 'flex',
                     alignItems: 'flex-start',
-                    gap: 10,
-                    fontSize: 13,
+                    gap: 12,
+                    fontSize: 14,
                     color: MUTED,
-                    lineHeight: 1.65,
+                    lineHeight: 1.7,
                   }}
                 >
                   <span
                     style={{
                       color: P,
                       fontFamily: 'DM Mono, monospace',
-                      fontSize: 11,
+                      fontSize: 12,
                       flexShrink: 0,
                       marginTop: 2,
                     }}
@@ -333,7 +440,7 @@ export default function ProposalShowcase() {
             </div>
           </div>
 
-          {/* RIGHT — document mockup */}
+          {/* RIGHT COLUMN — document mockup */}
           <ProposalDoc />
         </div>
       </div>

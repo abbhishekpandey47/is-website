@@ -14,33 +14,16 @@ const SubredditSense = () => (
   <section
     className="py-20 md:py-28"
   >
-    <div className="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-[52px]">
-      <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-10 lg:gap-16 items-center">
+    <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-[52px]">
+      <div
+        style={{
+          display: 'grid',
+          alignItems: 'start',
+        }}
+        className="grid-cols-1 gap-10 md:grid-cols-[1fr_1.2fr] md:gap-16 lg:gap-[64px]"
+      >
 
-        {/* LEFT — dashboard mock */}
-        <div>
-          <div
-            className="rounded-xl overflow-hidden"
-            style={{
-              background: '#090c14',
-              border: '1px solid rgba(135,122,235,0.22)',
-              boxShadow:
-                '0 8px 64px rgba(129,89,220,0.12), 0 0 0 1px rgba(135,122,235,0.08), 0 2px 24px rgba(0,0,0,0.45)',
-            }}
-          >
-            {/* Screenshot */}
-            <Image
-              src="/reddit/subredditSense.webp"
-              alt="SubredditSense dashboard mockup"
-              width={640}
-              height={580}
-              style={{ display: 'block', width: '100%', height: 'auto', background: '#090c14' }}
-              priority
-            />
-          </div>
-        </div>
-
-        {/* RIGHT — copy */}
+        {/* LEFT COLUMN — copy */}
         <div>
           {/* Eyebrow */}
           <div
@@ -145,6 +128,29 @@ const SubredditSense = () => (
               Every client gets access to their own SubredditSense dashboard. You see every mention,
               every heatmap, every topic cluster — not a monthly PDF summary, but live data.
             </div>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN — dashboard mock */}
+        <div>
+          <div
+            className="rounded-xl overflow-hidden"
+            style={{
+              background: '#090c14',
+              border: '1px solid rgba(135,122,235,0.22)',
+              boxShadow:
+                '0 8px 64px rgba(129,89,220,0.12), 0 0 0 1px rgba(135,122,235,0.08), 0 2px 24px rgba(0,0,0,0.45)',
+            }}
+          >
+            {/* Screenshot */}
+            <Image
+              src="/reddit/subredditSense.webp"
+              alt="SubredditSense dashboard mockup"
+              width={640}
+              height={580}
+              style={{ display: 'block', width: '100%', height: 'auto', background: '#090c14' }}
+              priority
+            />
           </div>
         </div>
       </div>
