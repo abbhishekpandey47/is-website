@@ -19,7 +19,7 @@ const StartupHeroSection = () => {
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
-                        Who this is for :
+                        Designed for Technical B2B Products That Win Through Credibility
                     </h2>
                 </div>
                 <div className="flex justify-center my-6 mb-8">
@@ -29,7 +29,7 @@ const StartupHeroSection = () => {
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto mb-8">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-                        We work with early and growth-stage startups building tools for technical users. If you&apos;re building for developers and want to win credibility on Reddit — we&apos;re your team.
+                        We work with early and growth-stage startups building tools for technical users. If you&apos;re building for developers and want to win credibility on Reddit we&apos;re your team.
 
 
                     </p>
