@@ -32,7 +32,7 @@ export default function AuditWhatYouGet() {
          <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
-                      What you’ll get in the{" "}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>free Reddit audit</span>
+                      Your Reddit Opportunity Mapped in One Audit
                     </h2>
                 </div>
                 <div className="flex justify-center my-6 mb-8">
@@ -42,7 +42,7 @@ export default function AuditWhatYouGet() {
                 {/* Description */}
                 <div className="max-w-[70%] mx-auto mb-8">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
-                         A focused, non-generic teardown of your category on Reddit so you know exactly where to engage, what to say, and how to stay unflagged while earning trust fast.
+                      We analyze and indicate the exact category, competitors, and buyer conversations to show where your product should appear, what to engage with, and how to build visibility without getting banned or flagged.
                     </p>
                 </div>
             </div>
