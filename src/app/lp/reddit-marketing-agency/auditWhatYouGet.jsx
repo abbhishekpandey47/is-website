@@ -65,7 +65,7 @@ export default function AuditWhatYouGet() {
               ))}
     <div className="flex justify-center mt-4">
     <ContactPopupButton
-                buttonText="Get Free Reddit Audit"
+                buttonText="Claim your free Reddit Audit"
                 width="w-1/2"
                 height="h-11"
                 textSize="text-sm"
