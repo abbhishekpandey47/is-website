@@ -16,6 +16,8 @@ const Testimonials = dynamic(() => import("../../lp/reddit-marketing-agency/test
 const FAQSection = dynamic(() => import("../../lp/reddit-marketing-agency/FAQ"));
 const StatsSection = dynamic(() => import("../../lp/reddit-marketing-agency/numbers"));
 const Threadflow = dynamic(() => import("../../lp/reddit-marketing-agency/threadflow"));
+const SubredditSense = dynamic(() => import("./SubredditSense"));
+const ProposalShowcase = dynamic(() => import("./ProposalShowcase"));
 const TrustedMarquee = dynamic(() => import("../../lp/reddit-marketing-agency/TrustedMarquee"));
 
 export default function RedditMarketingAgencyClient() {
@@ -34,6 +36,8 @@ export default function RedditMarketingAgencyClient() {
       <RedditMarketingSlide />
       <ConversationToRevenue/>
       <Threadflow />
+      <ProposalShowcase />
+      <SubredditSense />
       <WhyAI />
       <InfraMethodologyTimeline />
       <RedditServiceCards />
