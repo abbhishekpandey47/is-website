@@ -16,7 +16,7 @@ const OPENROUTER_CITATION_MODEL =
 
 const CITATION_MODELS = [
   'perplexity/sonar:online',
-  'openai/gpt-4o-mini:online',
+  'openai/gpt-4o-mini',
   'anthropic/claude-3.5-haiku:online',
 ]
 
@@ -62,30 +62,24 @@ Return 3–8 Reddit posts in this exact JSON format:
 Output ONLY the JSON array. No explanation, no markdown, no extra text.
 `.trim()
 
-// For OpenAI search-preview models (Bing-backed), site: dorks are unreliable.
-// Use natural-language search so the model actually finds results.
+// For plugin-based models (openai/gpt-4o-mini + plugins:[{id:'web'}]):
+// Keep the prompt simple — the plugin already injects search results as context.
+// Complex restriction rules cause the model to over-cautiously return [].
 const buildCitationSearchSystemMessageForSearchModel = (prompt) => `
-You are a Reddit research assistant. Use your web search capability to find real Reddit posts.
+Find Reddit discussions about: "${prompt}"
 
-Search for Reddit discussions about: "${prompt}"
+From your search results, extract Reddit post URLs and return them as a JSON array.
 
-Use a search query like: "${prompt} reddit" or "${prompt} site:reddit.com"
-
-Return 3–8 Reddit posts you actually found in this exact JSON format:
 [
   {
-    "url": "https://www.reddit.com/r/SUBREDDIT/comments/POST_ID/post_title/",
+    "url": "https://www.reddit.com/r/SUBREDDIT/comments/POST_ID/slug/",
     "subreddit": "subreddit_name",
-    "title": "Exact post title from Reddit",
-    "reason": "One sentence: why this post relates to the prompt"
+    "title": "Post title from search results",
+    "reason": "One sentence: why this post relates to the topic"
   }
 ]
 
-RULES:
-- Only include reddit.com URLs from real posts you found via search.
-- Do NOT invent or guess URLs.
-- If you truly find no Reddit posts, return an empty JSON array [].
-- Output ONLY the JSON array. No explanation, no markdown, no extra text.
+Include every Reddit post you found (aim for 3–8). Output ONLY the JSON array.
 `.trim()
 
 // For Claude :online — Claude will hallucinate plausible-looking URLs if not strictly constrained.
@@ -1463,7 +1457,8 @@ async function testCitations(prompts, domain, competitors = []) {
             ],
             temperature: CITATION_SEARCH_TEMPERATURE,
             max_tokens: CITATION_SEARCH_MAX_TOKENS,
-            stream: false
+            stream: false,
+            plugins: [{ id: 'web' }]
           })
         })
 
@@ -1499,15 +1494,28 @@ async function testCitations(prompts, domain, competitors = []) {
           : [];
         console.log(`[testCitations] ${model} validated ${validated.length} posts after URL filter`)
 
-        // Add self/competitor mention detection to each citation post
-        record.models[model] = validated.map((entry) => {
+        // Fetch actual post content for each citation (same as SERP thread enrichment)
+        // so competitor/brand mention detection runs on real content, not just the AI-generated reason
+        const enrichedCitations = await Promise.all(
+          validated.slice(0, 8).map(async (entry) => {
+            const details = await fetchRedditPostDetails(entry.url).catch(() => null)
+            return {
+              ...entry,
+              fullContent: details?.post_content || ''
+            }
+          })
+        )
+
+        // Run full competitor/brand mention detection on actual post content
+        record.models[model] = enrichedCitations.map((entry) => {
           const mentionData = (brandTargets.length || competitorTargets.length)
             ? buildThreadMentionData(
-                { fullContent: entry.reason || '', title: entry.title || '', snippet: entry.url || '' },
+                { fullContent: entry.fullContent || '', title: entry.title || '', snippet: entry.reason || '' },
                 competitorTargets, brandTargets
               )
-            : { mentionsYou: false, mentionedCompetitors: [], mentionHighlights: [] }
-          return { ...entry, url: entry.url, ...mentionData }
+            : { mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] }
+          const { fullContent, ...entryClean } = entry
+          return { ...entryClean, ...mentionData, mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3) }
         })
       } catch (err) {
         record.models[model] = {

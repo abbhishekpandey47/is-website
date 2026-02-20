@@ -183,6 +183,8 @@ PLG accelerates when your community becomes an extension of the product itself. 
 
 ## **The B2D Marketing Funnel: Discovery to Expansion**
 
+![](/PostImages/business-to-developer-marketing/8.webp)
+
 B2D funnel is driven by **self-education, peer validation, and product experience**. Developers move forward only when technical confidence increases. Here’s how that journey typically unfolds.
 
 ### **Stage 1: Discovery: “I have a problem. What’s out there?”**
