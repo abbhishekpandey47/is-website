@@ -27,6 +27,8 @@ module.exports = {
       screens: {
         xxs: "200px",
         xs: "480px",
+        '3xl':"1920px",
+        '4xl':"2560px"
       },
       perspective: {
         '1000': '1000px',

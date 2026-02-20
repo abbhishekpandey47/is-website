@@ -1755,6 +1755,28 @@ let postMetaData = [
     category: "LLM Visiblity",
     metaDescription: "Learn 5 AI search engine optimization best practices to improve B2B SaaS visibility in LLM-powered search, AI overviews, and generative AI answers. Read now !"
 },
+{
+    title: "Business to Developer Marketing Guide for B2B SaaS Startups",
+    metatitle: "Business to Developer Marketing Guide for B2B SaaS Startups",
+    slug: "business-to-developer-marketing",
+    description: "Most B2B SaaS startups struggle to convert developers because they apply traditional marketing playbooks to technical audiences. This guide breaks down Business to Developer (B2D) marketing and how it differs from conventional demand generation. You’ll learn who your real developer ICPs are, where they research tools, and how to build trust through developer marketing, DevRel, and product-led growth.",
+    ogImage: "/PostImages/business-to-developer-marketing/1.webp",
+    publishedOn: "2026-02-20",
+    authorId: "author0005",
+    category: "Developer Marketing",
+    metaDescription: "Learn how to build a B2D marketing strategy for B2B SaaS. Discover developer marketing, DevRel, PLG, and the funnel from discovery to expansion."
+},
+{
+    title: "Developer Growth Strategy: A Practical Blueprint for B2B SaaS Startups",
+    metatitle: "5 Pillars of Developer Growth Strategy for B2B SaaS Startups ",
+    slug: "developer-growth-strategy",
+    description: "Most B2B SaaS startups struggle to convert developer interest into real adoption. Developers evaluate tools through code, community insights, and AI search. This blog breaks down a practical developer growth strategy built on five pillars: high-intent SEO content, Reddit authority, GitHub trust layers, conversion-optimized documentation, and AI visibility. ",
+    ogImage: "/PostImages/developer-growth-strategy/1.webp",
+    publishedOn: "2026-02-19",
+    authorId: "author0005",
+    category: "Developer Marketing",
+    metaDescription: "Build a winning developer growth strategy for your B2B SaaS startup. Learn how to drive adoption through SEO content, GitHub trust layers, community engagement, and AI visibility optimization. "
+},
 ];
 
 const sorted = () => {
