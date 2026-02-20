@@ -3,10 +3,22 @@ import { Readability } from '@mozilla/readability'
 import { JSDOM } from 'jsdom'
 import { verifyRequestUser } from '@/lib/serverAuth'
 import { getCompanyContext, saveCompanyContext } from '@/lib/companyContext'
+import pLimit from 'p-limit'
 
 const OPENROUTER_ENDPOINT = process.env.OPENROUTER_API_URL || 'https://openrouter.ai/api/v1/chat/completions'
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
-const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || 'google/gemma-3-27b-it:free'
+const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || 'openai/gpt-oss-20b'
+const OPENROUTER_FALLBACK_MODELS = [
+  'openai/gpt-oss-20b',
+]
+const OPENROUTER_CITATION_MODEL =
+  process.env.OPENROUTER_CITATION_MODEL || 'perplexity/sonar:online'
+
+const CITATION_MODELS = [
+  'perplexity/sonar:online',
+  'openai/gpt-4o-mini:online',
+  'anthropic/claude-3.5-haiku:online',
+]
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -21,6 +33,95 @@ const CONTEXT_TEMPERATURE = 0.25
 const CONTEXT_MAX_TOKENS = 1400
 const KEYWORD_TEMPERATURE = 0.65
 const KEYWORD_MAX_TOKENS = 1024
+const CITATION_SEARCH_TEMPERATURE = 0.35
+const CITATION_SEARCH_MAX_TOKENS = 2000
+const buildCitationSearchSystemMessage = (prompt) => `
+You are a Reddit research assistant with live web search access.
+
+Your ONLY job: Search reddit.com for real posts related to the topic below.
+
+Search query to use: site:reddit.com ${prompt}
+
+STRICT RULES:
+- You MUST perform a web search scoped to reddit.com only.
+- Every URL you return MUST start with https://www.reddit.com/r/ and contain /comments/
+- Do NOT return links from any other website (no dev.to, Medium, YouTube, blogs, etc).
+- Do NOT make up or guess URLs. Only return posts you actually found via search.
+- If your search returned zero reddit.com results, return an empty JSON array [].
+
+Return 3–8 Reddit posts in this exact JSON format:
+[
+  {
+    "url": "https://www.reddit.com/r/SUBREDDIT/comments/POST_ID/post_title/",
+    "subreddit": "subreddit_name",
+    "title": "Exact post title from Reddit",
+    "reason": "One sentence: why this post relates to the prompt"
+  }
+]
+
+Output ONLY the JSON array. No explanation, no markdown, no extra text.
+`.trim()
+
+// For OpenAI search-preview models (Bing-backed), site: dorks are unreliable.
+// Use natural-language search so the model actually finds results.
+const buildCitationSearchSystemMessageForSearchModel = (prompt) => `
+You are a Reddit research assistant. Use your web search capability to find real Reddit posts.
+
+Search for Reddit discussions about: "${prompt}"
+
+Use a search query like: "${prompt} reddit" or "${prompt} site:reddit.com"
+
+Return 3–8 Reddit posts you actually found in this exact JSON format:
+[
+  {
+    "url": "https://www.reddit.com/r/SUBREDDIT/comments/POST_ID/post_title/",
+    "subreddit": "subreddit_name",
+    "title": "Exact post title from Reddit",
+    "reason": "One sentence: why this post relates to the prompt"
+  }
+]
+
+RULES:
+- Only include reddit.com URLs from real posts you found via search.
+- Do NOT invent or guess URLs.
+- If you truly find no Reddit posts, return an empty JSON array [].
+- Output ONLY the JSON array. No explanation, no markdown, no extra text.
+`.trim()
+
+// For Claude :online — Claude will hallucinate plausible-looking URLs if not strictly constrained.
+// Force it to treat this as a tool-use search task, not a generation task.
+const buildCitationSearchSystemMessageForClaude = (prompt) => `
+You have web search access. You MUST search before responding.
+
+Execute this search right now: "${prompt} reddit"
+
+Then execute a second search: "${prompt} discussion reddit.com"
+
+From your actual search results, extract Reddit post URLs only.
+
+CRITICAL RULES — violations will make the response useless:
+- Every URL MUST come directly from your search results. Do NOT construct or guess any URL.
+- URLs MUST follow this pattern: https://www.reddit.com/r/{subreddit}/comments/{id}/
+- The post title MUST match what appeared in your search results for that URL.
+- If your search returned fewer than 3 Reddit posts, return only what you found.
+- If your search returned zero Reddit posts, return exactly: []
+
+Return ONLY this JSON array, nothing else:
+[
+  {
+    "url": "https://www.reddit.com/r/SUBREDDIT/comments/POST_ID/slug/",
+    "subreddit": "subreddit_name",
+    "title": "Exact title from search results",
+    "reason": "One sentence: how this post relates to the search topic"
+  }
+]
+`.trim()
+
+const buildCitationSearchUserMessage = (prompt, domain) => `Search reddit.com for posts about: "${prompt}". Use the search query: site:reddit.com ${prompt}. Domain for context: ${domain && domain.length ? domain : 'N/A'}. Return only the JSON array of real Reddit post URLs found.`
+
+const buildCitationSearchUserMessageForSearchModel = (prompt, domain) => `Find Reddit posts about: "${prompt}". Search for "${prompt} reddit" to locate real discussions. Domain for context: ${domain && domain.length ? domain : 'N/A'}. Return only the JSON array of real Reddit post URLs found.`
+
+const buildCitationSearchUserMessageForClaude = (prompt, domain) => `Search for: "${prompt} reddit". Return only the Reddit post URLs you found in search results as a JSON array. Do not construct any URLs. Domain context: ${domain && domain.length ? domain : 'N/A'}.`
 const LLM_PROMPTS = Number(process.env.SERP_SCOUT_LLM_PROMPTS) || 2
 const SUPERLATIVE_REGEX = /\b(best|leading|top|premier|world[- ]class|industry[- ]leading|cutting[- ]edge|#1)\b/gi
 const CTA_REGEX = /\b(visit|click|learn more|book (now|a demo)?|download|try now|get started|sign up|subscribe|unlock|schedule)\b/gi
@@ -39,6 +140,12 @@ const DATAFORSEO_LOCATION = process.env.DATAFORSEO_LOCATION || 'United States'
 const DATAFORSEO_POLL_INTERVAL = 3000
 const DATAFORSEO_POLL_TIMEOUT = 30_000
 const REDDIT_API_BASE = 'https://reddit-comment-gen.onrender.com'
+const POST_DETAILS_ENDPOINT = `${REDDIT_API_BASE}/fetch_post_details`
+const POST_DETAILS_TIMEOUT_MS = Number(process.env.SERP_SCOUT_POST_DETAILS_TIMEOUT_MS) || 12000
+const POST_DETAILS_CONCURRENCY = Number(process.env.SERP_SCOUT_POST_DETAILS_CONCURRENCY) || 4
+const MENTION_SNIPPET_RADIUS = 120
+const MENTION_SNIPPET_MAX_LENGTH = 200
+const postDetailsLimiter = pLimit(POST_DETAILS_CONCURRENCY)
 
 /**
  * Fetch top and new Reddit posts/comments for a keyword
@@ -53,12 +160,12 @@ async function fetchRedditTopNewPosts(keyword) {
       body: JSON.stringify({ keyword }),
       timeout: 30000
     })
-    
+
     if (!response.ok) {
       console.error('[serp-scout] Reddit API error', { status: response.status, keyword })
       return { top_posts: [], new_posts: [], top_comments: [], new_comments: [] }
     }
-    
+
     const data = await response.json()
     return {
       top_posts: Array.isArray(data.top_posts) ? data.top_posts : [],
@@ -69,6 +176,100 @@ async function fetchRedditTopNewPosts(keyword) {
   } catch (error) {
     console.error('[serp-scout] Failed to fetch Reddit posts', { keyword, error: error.message })
     return { top_posts: [], new_posts: [], top_comments: [], new_comments: [] }
+  }
+}
+
+/**
+ * Fetch Reddit posts via DataForSEO "site:reddit.com" search
+ * @param {string} keyword - The search keyword
+ * @returns {Promise<{top_posts: Array, new_posts: Array}>}
+ */
+async function fetchRedditViaDataForSeo(keyword) {
+  try {
+    const authHeader = createDataForSeoAuthHeader()
+    if (!authHeader) {
+      throw new Error('DataForSEO credentials are missing')
+    }
+
+    // Dork query for Reddit
+    const query = `site:reddit.com ${keyword}`
+
+    const payload = {
+      keyword: query,
+      location_code: 2840, // US
+      language_code: 'en',
+      device: 'desktop',
+      os: 'windows',
+      depth: 50 // scan top 50 Google results for better coverage
+    }
+
+    const resp = await fetch('https://api.dataforseo.com/v3/serp/google/organic/live/advanced', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: authHeader
+      },
+      body: JSON.stringify([payload])
+    })
+
+    if (!resp.ok) {
+      console.error('[serp-scout] DataForSEO Reddit search failed', resp.status)
+      return { top_posts: [], new_posts: [] }
+    }
+
+    const json = await resp.json()
+    let items = []
+
+    if (json.tasks?.[0]?.result?.[0]?.items) {
+      items = json.tasks[0].result[0].items.filter(item => item.type === 'organic')
+    }
+
+    console.log(`[serp-scout] DataForSEO dork search returned ${items.length} organic items for "${query}"`)
+
+    // Map to "post" structure, preserving Google's SERP rank
+    const posts = items.map(item => {
+      const snippet = item.snippet || ''
+      const title = item.title || ''
+
+      // Heuristic extraction of engagement from snippet
+      // Google snippets often show: "123 votes, 45 comments" or "45 comments" or "Posted by ... 123 upvotes"
+      const commentsMatch = snippet.match(/(\d[\d,]*)\s+comments?/i) || snippet.match(/(\d[\d,]*)\s+replies/i)
+      const comments = commentsMatch ? parseInt(commentsMatch[1].replace(/,/g, ''), 10) : 0
+
+      const votesMatch = snippet.match(/(\d[\d,]*)\s+(?:votes?|upvotes?|points?)/i)
+      const upvotes = votesMatch ? parseInt(votesMatch[1].replace(/,/g, ''), 10) : 0
+
+      // Extract subreddit from URL
+      const subMatch = item.url?.match(/reddit\.com\/r\/([^/]+)/i)
+      const subreddit = subMatch ? subMatch[1] : 'reddit'
+
+      return {
+        post_title: title,
+        post_url: item.url,
+        post_content: snippet,
+        subreddit,
+        upvotes,
+        total_comments: comments,
+        serp_rank: item.rank_group || item.rank_absolute || 999, // Preserve Google's ranking
+        source: 'dataforseo'
+      }
+    })
+
+    // "Top" = sorted by Google SERP rank (this IS what Google thinks is most relevant)
+    // We keep them in SERP order — that's the whole point of a dork search
+    const topPosts = [...posts].sort((a, b) => a.serp_rank - b.serp_rank)
+
+    // "New" = same list, there's no reliable date extraction from SERP
+    const newPosts = posts.slice(0, 10)
+
+    return {
+      top_posts: topPosts.slice(0, 15),
+      new_posts: newPosts
+    }
+
+  } catch (error) {
+    console.error('[serp-scout] fetchRedditViaDataForSeo failed', error.message)
+    return { top_posts: [], new_posts: [] }
   }
 }
 
@@ -86,7 +287,7 @@ async function suggestBestPostsWithLLM(topPosts, newPosts, keyword, companyConte
     if (allPosts.length === 0) {
       return []
     }
-    
+
     // Prepare posts summary for LLM
     const postsSummary = allPosts.slice(0, 20).map((post, idx) => ({
       index: idx,
@@ -98,7 +299,7 @@ async function suggestBestPostsWithLLM(topPosts, newPosts, keyword, companyConte
       total_comments: post.total_comments || 0,
       post_age_hours: post.post_age_hours || 0
     }))
-    
+
     const prompt = `You are an expert Reddit engagement strategist. Analyze these Reddit posts about "${keyword}" and suggest the TOP 5 posts that would be most valuable for engagement.
 
 Company Context:
@@ -146,24 +347,24 @@ Return ONLY the JSON array, no other text.`
         max_tokens: 2000
       })
     })
-    
+
     if (!response.ok) {
       console.error('[serp-scout] LLM suggestion failed', { status: response.status })
       return allPosts.slice(0, 5)
     }
-    
+
     const data = await response.json()
     const llmText = data.choices?.[0]?.message?.content || '[]'
-    
+
     // Extract JSON from response (handle code blocks)
     let jsonText = llmText.trim()
     if (jsonText.includes('```')) {
       const match = jsonText.match(/```(?:json)?\s*([\s\S]*?)```/)
       if (match) jsonText = match[1].trim()
     }
-    
+
     const suggestions = JSON.parse(jsonText)
-    
+
     // Map suggestions back to original posts with engagement metadata
     return suggestions.slice(0, 5).map(suggestion => {
       const originalPost = allPosts[suggestion.index] || allPosts[0]
@@ -183,24 +384,144 @@ Return ONLY the JSON array, no other text.`
   }
 }
 
+async function fetchWithTimeout(url, options = {}, timeoutMs = 10000) {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), timeoutMs)
+  try {
+    return await fetch(url, { ...options, signal: controller.signal })
+  } finally {
+    clearTimeout(timeout)
+  }
+}
+
+async function fetchRedditPostDetails(url) {
+  if (!url) return null
+  try {
+    const response = await fetchWithTimeout(
+      POST_DETAILS_ENDPOINT,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reddit_url: url })
+      },
+      POST_DETAILS_TIMEOUT_MS
+    )
+
+    if (!response.ok) {
+      console.warn('[serp-scout] fetchRedditPostDetails failed', { url, status: response.status })
+      return null
+    }
+
+    return await response.json()
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      console.warn('[serp-scout] fetchRedditPostDetails timed out', { url })
+    } else {
+      console.warn('[serp-scout] fetchRedditPostDetails error', { url, error: error.message })
+    }
+    return null
+  }
+}
+
+async function enrichRedditThread(thread) {
+  if (!thread || !thread.url) {
+    return { ...thread, fullContent: thread?.snippet || thread?.title || '' }
+  }
+
+  const details = await fetchRedditPostDetails(thread.url)
+  const fallback = thread?.snippet || thread?.title || ''
+  return {
+    ...thread,
+    fullContent: details?.post_content || fallback
+  }
+}
+
+function findMentionSnippet(source, normalizedTerm, radius = MENTION_SNIPPET_RADIUS) {
+  if (!source || !normalizedTerm) return null
+  const lowerSource = source.toLowerCase()
+  const idx = lowerSource.indexOf(normalizedTerm)
+  if (idx === -1) return null
+
+  const start = Math.max(0, idx - radius)
+  const end = Math.min(source.length, idx + normalizedTerm.length + radius)
+  let snippet = source.slice(start, end).replace(/\s+/g, ' ').trim()
+  if (!snippet) return null
+  if (snippet.length > MENTION_SNIPPET_MAX_LENGTH) {
+    snippet = snippet.slice(0, MENTION_SNIPPET_MAX_LENGTH).trim()
+  }
+  const prefix = start > 0 ? '...' : ''
+  const suffix = end < source.length ? '...' : ''
+  return `${prefix}${snippet}${suffix}`.replace(/\s+/g, ' ')
+}
+
+function findMentionSnippetInSources(normalizedTerm, sources = [], radius = MENTION_SNIPPET_RADIUS) {
+  for (const source of sources) {
+    const snippet = findMentionSnippet(source, normalizedTerm, radius)
+    if (snippet) return snippet
+  }
+  return null
+}
+
+function buildThreadMentionData(thread, competitorTargets, brandTargets) {
+  const sources = [thread.fullContent, thread.snippet, thread.title].filter(Boolean)
+  const mentionHighlights = []
+  const matchedCompetitors = new Set()
+
+  competitorTargets.forEach(target => {
+    const snippet = findMentionSnippetInSources(target.normalized, sources)
+    if (snippet) {
+      matchedCompetitors.add(target.raw)
+      mentionHighlights.push({ type: 'competitor', term: target.raw, snippet })
+    }
+  })
+
+  let brandMentionSnippet = null
+  let brandMentionLabel = null
+  for (const target of brandTargets) {
+    const snippet = findMentionSnippetInSources(target.normalized, sources)
+    if (snippet) {
+      brandMentionSnippet = snippet
+      brandMentionLabel = target.label
+      break
+    }
+  }
+
+  if (brandMentionSnippet) {
+    mentionHighlights.unshift({ type: 'brand', term: brandMentionLabel, snippet: brandMentionSnippet })
+  }
+
+  return {
+    mentionsCompetitors: Array.from(matchedCompetitors),
+    mentionsBrand: Boolean(brandMentionSnippet),
+    brandMentionSnippet,
+    mentionHighlights
+  }
+}
+
+function normalizeMentionValue(value) {
+  if (!value) return ''
+  return value
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/^(https?:\/\/)?(www\.)?/, '')
+    .replace(/\/$/, '')
+}
+
 function ensureDomain(input) {
   if (!input) return null
   return input
     .toString()
     .trim()
+    .toLowerCase()
     .replace(/^https?:\/\//i, '')
+    .replace(/^www\./i, '')
     .replace(/\/.*$/, '')
     .replace(/\s+/g, '')
 }
 
 function normalizeUrlForMatch(url) {
-  if (!url) return ''
-  return url
-    .toLowerCase()
-    .replace(/^https?:\/\//i, '')
-    .replace(/\/$/, '')
-    .replace(/^www\./i, '')
-    .trim()
+  return ensureDomain(url) || ''
 }
 
 function createDataForSeoAuthHeader() {
@@ -383,16 +704,16 @@ async function fetchPageText(url) {
 
 async function createCompanyIfNeeded(companyName, domain, userId) {
   const norm = companyName.trim().toLowerCase()
-  
+
   // 1. Try to find existing company
   let { data: company, error: fetchErr } = await supabase
     .from('companies')
     .select('*')
     .eq('name_normalized', norm)
     .maybeSingle()
-  
+
   if (fetchErr) throw fetchErr
-  
+
   // 2. Create if doesn't exist
   if (!company) {
     const { data: inserted, error: insErr } = await supabase
@@ -400,14 +721,14 @@ async function createCompanyIfNeeded(companyName, domain, userId) {
       .upsert({ name: companyName, domain }, { onConflict: 'name_normalized' })
       .select('*')
       .single()
-    
+
     if (insErr) throw insErr
     company = inserted
     console.log('[serp-scout] Created new company', { id: company.id, name: companyName, domain })
   } else {
     console.log('[serp-scout] Using existing company', { id: company.id, name: company.name })
   }
-  
+
   return company
 }
 
@@ -445,16 +766,16 @@ function extractCompanyNameFromContent(pages, domain) {
     console.log('[extractCompanyNameFromContent] No pages provided, using domain', { domain })
     return domain
   }
-  
+
   // Try to find company name from page title or first paragraph
   const firstPage = pages[0].text
   if (!firstPage) {
     console.log('[extractCompanyNameFromContent] First page has no text, using fallback', { domain })
     return domain
   }
-  
+
   const sentences = firstPage.split(/[.!?]\s+/)
-  
+
   // Look for patterns like "CompanyName is...", "Welcome to CompanyName", etc.
   for (const sentence of sentences.slice(0, 3)) {
     const match = sentence.match(/^([A-Z][a-zA-Z0-9\s]{2,30})(?:\s+is|\s+-|\s+provides|\s+offers|:|,)/)
@@ -464,14 +785,14 @@ function extractCompanyNameFromContent(pages, domain) {
       return name
     }
   }
-  
+
   // Fallback: capitalize domain name
   const fallbackName = domain
     .replace(/\.(com|io|net|org|co|ai|dev)$/i, '')
     .split(/[.-]/)
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
-  
+
   console.log('[extractCompanyNameFromContent] Using fallback', { fallbackName, domain })
   return fallbackName
 }
@@ -623,29 +944,41 @@ async function callOpenRouter(messages, temperature = 0.65, max_tokens = 1024) {
   if (!OPENROUTER_API_KEY) {
     throw new Error('OPENROUTER_API_KEY is not configured')
   }
-  const payload = {
-    model: OPENROUTER_MODEL,
-    messages,
-    temperature,
-    max_tokens,
-    stream: false
+  // Build candidate list: env-specified model first, then fallbacks (deduped)
+  const primaryModel = OPENROUTER_MODEL
+  const candidates = [primaryModel, ...OPENROUTER_FALLBACK_MODELS.filter(m => m !== primaryModel)]
+  let lastError = null
+  for (const model of candidates) {
+    const payload = {
+      model,
+      messages,
+      temperature,
+      max_tokens,
+      stream: false,
+      transforms: ['middle-out']
+    }
+    const resp = await fetch(OPENROUTER_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`
+      },
+      body: JSON.stringify(payload)
+    })
+    if (!resp.ok) {
+      const body = await resp.text()
+      lastError = new Error(`LLM ${resp.status} ${body}`)
+      console.warn(`[serp-scout] model ${model} failed (${resp.status}), trying next fallback`)
+      continue
+    }
+    const json = await resp.json()
+    const result = json?.choices?.[0]?.message?.content || json?.choices?.[0]?.text || ''
+    if (model !== primaryModel) {
+      console.log(`[serp-scout] used fallback model: ${model}`)
+    }
+    return result
   }
-  const resp = await fetch(OPENROUTER_ENDPOINT, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${OPENROUTER_API_KEY}`
-    },
-    body: JSON.stringify(payload)
-  })
-  if (!resp.ok) {
-    const body = await resp.text()
-    throw new Error(`LLM ${resp.status} ${body}`)
-  }
-  const json = await resp.json()
-  const result = json?.choices?.[0]?.message?.content || json?.choices?.[0]?.text || ''
-  console.debug('[serp-scout] openrouter response', result)
-  return result
+  throw lastError
 }
 
 async function promptKeywords(payload) {
@@ -745,7 +1078,7 @@ async function fetchKeywordSerpPosition(keyword, targetDomain, depth = 100) {
   }
 
   const json = await resp.json()
-  
+
   // Gather all organic items from response
   let allItems = []
   if (Array.isArray(json.tasks)) {
@@ -772,7 +1105,7 @@ async function fetchKeywordSerpPosition(keyword, targetDomain, depth = 100) {
   for (const item of allItems) {
     const url = item.url || item.domain || ''
     const rank = typeof item.rank_absolute === 'number' ? item.rank_absolute : item.rank_group
-    
+
     if (!url || typeof rank !== 'number') continue
     examined += 1
 
@@ -796,10 +1129,11 @@ async function fetchKeywordSerpPosition(keyword, targetDomain, depth = 100) {
     }
   }
 
-  return { 
-    position: domainPosition, 
-    examined, 
-    redditThreads: redditThreads.slice(0, 10) // Return top 10 Reddit threads
+  return {
+    position: domainPosition,
+    examined,
+    redditThreads: redditThreads.slice(0, 10), // Return top 10 Reddit threads
+    organicResults: allItems // Return all organic items for competitor analysis
   }
 }
 async function fetchCompanyById(id) {
@@ -831,7 +1165,7 @@ async function findCompanyByDomain(domain) {
       console.log('[serp-scout] exact domain match', { search: normalized, stored: exact.domain, companyId: exact.id })
       return exact
     }
-  } catch (_) {}
+  } catch (_) { }
 
   // 2) Try common variant with www prefix
   try {
@@ -844,7 +1178,7 @@ async function findCompanyByDomain(domain) {
       console.log('[serp-scout] www domain match', { search: normalized, stored: www.domain, companyId: www.id })
       return www
     }
-  } catch (_) {}
+  } catch (_) { }
 
   // 3) Fallback: find candidates containing the normalized domain string,
   //    then validate by splitting and normalizing each stored domain token.
@@ -864,7 +1198,7 @@ async function findCompanyByDomain(domain) {
         }
       }
     }
-  } catch (_) {}
+  } catch (_) { }
 
   return null
 }
@@ -877,11 +1211,11 @@ function needsRefresh(timestamp, hoursOld = 24) {
 
 async function generateCompanyContext(domain, companyId, companyName, forceContext, existingPages = null) {
   const stored = companyId ? await getCompanyContext(companyId) : null
-  
+
   // Keywords and overview are permanent - only regenerate if forced or never generated
   if (stored && !forceContext) {
-    console.log('[serp-scout] using existing company context and keywords (permanent)', { 
-      companyId, 
+    console.log('[serp-scout] using existing company context and keywords (permanent)', {
+      companyId,
       domain,
       hasKeywords: Boolean(stored.approvedContext?.keywords?.length)
     })
@@ -923,12 +1257,12 @@ async function generateCompanyContext(domain, companyId, companyName, forceConte
   const approvedContext = forceContext ? sanitized : stored?.approvedContext ?? sanitized
   const persisted = companyId
     ? await saveCompanyContext(companyId, {
-        domain,
-        metadata,
-        llmContext: sanitized,
-        approvedContext,
-        generatedAt: metadata.generatedAt
-      })
+      domain,
+      metadata,
+      llmContext: sanitized,
+      approvedContext,
+      generatedAt: metadata.generatedAt
+    })
     : null
   return {
     companyId,
@@ -952,9 +1286,9 @@ export async function resolveCompanyIdBySlug(slug) {
   return data?.id ?? null
 }
 
-async function saveKeywords(companyId, domain, keywords, userId, companyName) {
+async function saveKeywords(companyId, domain, keywords, userId, companyName, competitors) {
   console.log('[serp-scout] saveKeywords called - PERMANENT save', { companyId, domain, keywordCount: keywords?.length, userId, companyName })
-  
+
   if (!companyId) {
     // Auto-create company if name is provided
     if (companyName && domain) {
@@ -986,6 +1320,7 @@ async function saveKeywords(companyId, domain, keywords, userId, companyName) {
     approvedContext: {
       ...(context?.approvedContext || {}),
       keywords: keywords,
+      competitors: competitors || context?.approvedContext?.competitors || [],
       serpAnalysis: context?.approvedContext?.serpAnalysis || {} // Preserve SERP analysis cache
     }
   }
@@ -994,12 +1329,12 @@ async function saveKeywords(companyId, domain, keywords, userId, companyName) {
     console.warn('[serp-scout] saveCompanyContext returned null; falling back to local save semantics')
     return { saved: true, local: true, companyId, domain, keywords }
   }
-  
+
   // Return full saved data from DB
   const savedContext = await getCompanyContext(companyId)
-  return { 
-    ...result, 
-    companyId, 
+  return {
+    ...result,
+    companyId,
     saved: true,
     permanent: true,
     fullContext: savedContext
@@ -1008,10 +1343,10 @@ async function saveKeywords(companyId, domain, keywords, userId, companyName) {
 
 async function saveSerpAnalysis(companyId, keyword, serpData) {
   if (!companyId) return null
-  
+
   const context = await getCompanyContext(companyId)
   if (!context) return null
-  
+
   const serpAnalysis = context.approvedContext?.serpAnalysis || {}
   serpAnalysis[keyword] = {
     ...serpData,
@@ -1021,7 +1356,7 @@ async function saveSerpAnalysis(companyId, keyword, serpData) {
     analyzedAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
   }
-  
+
   const updatedContext = {
     domain: context.domain,
     metadata: context.metadata,
@@ -1031,48 +1366,162 @@ async function saveSerpAnalysis(companyId, keyword, serpData) {
       serpAnalysis
     }
   }
-  
+
   const result = await saveCompanyContext(companyId, updatedContext)
   return result
 }
 
 async function getSerpAnalysis(companyId, keyword) {
   if (!companyId || !keyword) return null
-  
+
   const context = await getCompanyContext(companyId)
   if (!context?.approvedContext?.serpAnalysis?.[keyword]) return null
-  
+
   const analysis = context.approvedContext.serpAnalysis[keyword]
-  
+
   // Check if expired (24 hours)
   if (needsRefresh(analysis.analyzedAt, 24)) {
     console.log('[serp-scout] SERP analysis expired, needs refresh', { keyword, age: analysis.analyzedAt })
     return null
   }
-  
-  console.log('[serp-scout] returning cached SERP analysis', { 
-    keyword, 
+
+  console.log('[serp-scout] returning cached SERP analysis', {
+    keyword,
     analyzedAt: analysis.analyzedAt,
     expiresAt: analysis.expiresAt
   })
   return analysis
 }
 
-async function testCitations(prompts, domain) {
-  const citationApiUrl = 'https://geo-citations.onrender.com/cite'
-  try {
-    const resp = await fetch(citationApiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompts, domain })
-    })
-    if (!resp.ok) {
-      throw new Error(`Citation API returned ${resp.status}`)
+async function testCitations(prompts, domain, competitors = []) {
+  const sanitizedPrompts = Array.isArray(prompts)
+    ? prompts.map((prompt) => (prompt || '').trim()).filter(Boolean)
+    : []
+
+  if (!sanitizedPrompts.length) {
+    throw new Error('At least one prompt is required for citation testing')
+  }
+
+  const normalizedDomain = ensureDomain(domain)
+  const records = []
+
+  // Build mention targets for self/competitor detection in citation posts
+  const brandDomain = normalizedDomain.toLowerCase().replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '')
+  const brandTargets = []
+  const brandDomainNormalized = normalizeMentionValue(brandDomain)
+  if (brandDomainNormalized) {
+    brandTargets.push({ normalized: brandDomainNormalized, label: brandDomain })
+  }
+  const competitorTargets = []
+  const seenCompetitors = new Set()
+  const competitorList = Array.isArray(competitors) ? competitors : (competitors ? [competitors] : [])
+  competitorList.forEach(entry => {
+    const display = entry != null ? String(entry).trim() : ''
+    if (!display) return
+    const normalized = normalizeMentionValue(display)
+    if (!normalized || seenCompetitors.has(normalized)) return
+    seenCompetitors.add(normalized)
+    competitorTargets.push({ raw: display, normalized })
+  })
+
+  for (const prompt of sanitizedPrompts) {
+    const record = {
+      prompt,
+      timestamp: new Date().toISOString(),
+      models: {}
     }
-    return await resp.json()
-  } catch (error) {
-    console.error('[serp-scout] citation test failed', error.message)
-    throw new Error(`Citation API error: ${error.message}`)
+
+    for (const model of CITATION_MODELS) {
+      const isPerplexityModel = model.startsWith('perplexity/')
+      const isClaudeModel = model.startsWith('anthropic/')
+      // Perplexity handles site: dorks natively; Claude needs anti-hallucination prompt;
+      // everything else (openai/:online, etc.) gets the natural-language search prompt.
+      const systemMessage = isClaudeModel
+        ? buildCitationSearchSystemMessageForClaude(prompt)
+        : isPerplexityModel
+          ? buildCitationSearchSystemMessage(prompt)
+          : buildCitationSearchSystemMessageForSearchModel(prompt)
+      const userMessage = isClaudeModel
+        ? buildCitationSearchUserMessageForClaude(prompt, normalizedDomain)
+        : isPerplexityModel
+          ? buildCitationSearchUserMessage(prompt, normalizedDomain)
+          : buildCitationSearchUserMessageForSearchModel(prompt, normalizedDomain)
+      try {
+        const resp = await fetch(OPENROUTER_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+            'HTTP-Referer': 'https://infrasity.com',
+            'X-Title': 'Infrasity SERP Scout - Reddit Citation Search'
+          },
+          body: JSON.stringify({
+            model,
+            messages: [
+              { role: 'system', content: systemMessage },
+              { role: 'user', content: userMessage }
+            ],
+            temperature: CITATION_SEARCH_TEMPERATURE,
+            max_tokens: CITATION_SEARCH_MAX_TOKENS,
+            stream: false
+          })
+        })
+
+        if (!resp.ok) {
+          const body = await resp.text()
+          throw new Error(`OpenRouter ${resp.status} ${body}`)
+        }
+
+        const json = await resp.json()
+        const raw = json?.choices?.[0]?.message?.content || ''
+        console.log(`[testCitations] ${model} RAW RESPONSE (${raw.length} chars):`, raw.slice(0, 800))
+        const parsed = JSON.parse(extractJsonFromText(raw))
+        // Only keep Reddit posts whose URLs match a real post pattern:
+        // reddit.com/r/{subreddit}/comments/{post_id}/...
+        // This rejects AI-hallucinated slugs like "comments/search-results-not-found"
+        // Real Reddit post IDs are base36, 5–7 chars (e.g. "1bcd23").
+        // IDs longer than 8 chars or with only repeated letters are hallucinations.
+        const REAL_REDDIT_POST_RE = /reddit\.com\/r\/\w+\/comments\/[a-z0-9]{5,8}(?:\/|$|\?)/i
+        console.log(`[testCitations] ${model} raw entries (${Array.isArray(parsed) ? parsed.length : typeof parsed}):`,
+          Array.isArray(parsed) ? parsed.map(e => e?.url).slice(0, 5) : String(parsed).slice(0, 200))
+        const validated = Array.isArray(parsed)
+          ? parsed
+              .filter((entry) => {
+                if (!entry || typeof entry.url !== 'string') return false;
+                const url = entry.url.trim()
+                if (!REAL_REDDIT_POST_RE.test(url)) {
+                  console.log(`[testCitations] ${model} rejected URL: ${url}`)
+                  return false;
+                }
+                return typeof entry.subreddit === 'string' && typeof entry.title === 'string';
+              })
+              .slice(0, 10)
+          : [];
+        console.log(`[testCitations] ${model} validated ${validated.length} posts after URL filter`)
+
+        // Add self/competitor mention detection to each citation post
+        record.models[model] = validated.map((entry) => {
+          const mentionData = (brandTargets.length || competitorTargets.length)
+            ? buildThreadMentionData(
+                { fullContent: entry.reason || '', title: entry.title || '', snippet: entry.url || '' },
+                competitorTargets, brandTargets
+              )
+            : { mentionsYou: false, mentionedCompetitors: [], mentionHighlights: [] }
+          return { ...entry, url: entry.url, ...mentionData }
+        })
+      } catch (err) {
+        record.models[model] = {
+          error: err.message
+        }
+      }
+    }
+
+    records.push(record)
+  }
+
+  return {
+    domain: normalizedDomain,
+    records
   }
 }
 
@@ -1089,15 +1538,16 @@ export default async function handler(req, res) {
     return res.status(err?.status || 401).json({ error: err?.message || 'Unauthorized' })
   }
 
-  const { 
-    domain: rawDomain, 
-    companyId: bodyCompanyId, 
-    companySlug, 
+  const {
+    domain: rawDomain,
+    companyId: bodyCompanyId,
+    companySlug,
     forceContext,
     action,
     keywords: bodyKeywords,
     prompts: bodyPrompts,
-    companyName: bodyCompanyName
+    companyName: bodyCompanyName,
+    competitors: bodyCompetitors
   } = req.body || {}
 
   // Handle save keywords action (PERMANENT save, not time-limited)
@@ -1107,11 +1557,11 @@ export default async function handler(req, res) {
     }
     const companyId = bodyCompanyId ?? null
     try {
-      const result = await saveKeywords(companyId, rawDomain, bodyKeywords, userCtx.userId, bodyCompanyName)
-      return res.status(200).json({ 
-        success: true, 
-        message: result.companyId 
-          ? 'Keywords and overview saved permanently to database' 
+      const result = await saveKeywords(companyId, rawDomain, bodyKeywords, userCtx.userId, bodyCompanyName, bodyCompetitors)
+      return res.status(200).json({
+        success: true,
+        message: result.companyId
+          ? 'Keywords and overview saved permanently to database'
           : (result.local ? 'Keywords processed successfully' : 'Keywords saved permanently'),
         saved: result,
         companyId: result.companyId,
@@ -1133,7 +1583,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'prompts array and domain are required' })
     }
     try {
-      const citations = await testCitations(bodyPrompts, rawDomain)
+      const citations = await testCitations(bodyPrompts, rawDomain, req.body.competitors)
       return res.status(200).json({ success: true, citations })
     } catch (error) {
       return res.status(500).json({ error: error.message })
@@ -1173,7 +1623,7 @@ export default async function handler(req, res) {
           upvotes: p.upvotes || 0,
           comments: p.total_comments || 0
         })) || []
-        
+
         const newDiscussions = redditContext.newPosts?.slice(0, 3).map(p => ({
           title: p.post_title || '',
           subreddit: p.subreddit || '',
@@ -1184,7 +1634,7 @@ export default async function handler(req, res) {
         topDiscussions.forEach((post, i) => {
           redditDiscussionContext += `${i + 1}. "${post.title}" in r/${post.subreddit} (${post.upvotes} upvotes, ${post.comments} comments)\n`
         })
-        
+
         if (newDiscussions.length) {
           redditDiscussionContext += `\nRecent posts:\n`
           newDiscussions.forEach((post, i) => {
@@ -1270,7 +1720,7 @@ Return ONLY valid JSON:
       ]
       const raw = await callOpenRouter(messages, 0.7, 512)
       console.log('[serp-scout] openrouter response for suggestPrompts', raw.slice(0, 500))
-      
+
       let prompts = []
       try {
         const json = JSON.parse(extractJsonFromText(raw))
@@ -1287,7 +1737,7 @@ Return ONLY valid JSON:
         ]
         prompts = base.slice(0, LLM_PROMPTS)
       }
-      
+
       return res.status(200).json({ success: true, prompts })
     } catch (error) {
       if (error.message.includes('429') || error.message.includes('Rate limit')) {
@@ -1301,6 +1751,40 @@ Return ONLY valid JSON:
     }
   }
 
+  // Handle update company context action
+  if (action === 'updateCompanyContext') {
+    if (!bodyCompanyId) return res.status(400).json({ error: 'companyId is required' })
+    const { companySummary, coreCapabilities, problemSpaces, constraints } = req.body
+
+    try {
+      const context = await getCompanyContext(bodyCompanyId)
+      if (!context) return res.status(404).json({ error: 'Company not found' })
+
+      const updatedContext = {
+        ...context,
+        approvedContext: {
+          ...(context.approvedContext || {}),
+          companySummary: companySummary !== undefined ? companySummary : context.approvedContext?.companySummary,
+          coreCapabilities: coreCapabilities !== undefined ? coreCapabilities : context.approvedContext?.coreCapabilities,
+          problemSpaces: problemSpaces !== undefined ? problemSpaces : context.approvedContext?.problemSpaces,
+          constraints: constraints !== undefined ? constraints : context.approvedContext?.constraints,
+          competitors: req.body.competitors !== undefined ? req.body.competitors : context.approvedContext?.competitors
+        },
+        metadata: {
+          ...(context.metadata || {}),
+          updatedAt: new Date().toISOString()
+        }
+      }
+
+      const saved = await saveCompanyContext(bodyCompanyId, updatedContext)
+      if (!saved) return res.status(500).json({ error: 'Failed to update context' })
+
+      return res.status(200).json({ success: true, companyContext: saved })
+    } catch (error) {
+      return res.status(500).json({ error: error.message })
+    }
+  }
+
   if (action === 'keywordSerp') {
     const { keyword, domain, companyId: requestCompanyId } = req.body
     if (!keyword) {
@@ -1309,10 +1793,10 @@ Return ONLY valid JSON:
     if (!domain) {
       return res.status(400).json({ error: 'domain is required' })
     }
-    
+
     try {
       const targetDomain = ensureDomain(domain)
-      
+
       // Check if we have cached SERP analysis for this keyword (24hr cache)
       if (requestCompanyId) {
         const cachedAnalysis = await getSerpAnalysis(requestCompanyId, keyword)
@@ -1329,68 +1813,197 @@ Return ONLY valid JSON:
             topRedditPosts: cachedAnalysis.topRedditPosts || cachedAnalysis.redditThreads || [],
             newRedditPosts: cachedAnalysis.newRedditPosts || [],
             suggestedPosts: cachedAnalysis.suggestedPosts || (cachedAnalysis.redditThreads || []).slice(0, 5),
+            organicResults: cachedAnalysis.organicResults || [],
             fromCache: true,
             analyzedAt: cachedAnalysis.analyzedAt,
             expiresAt: cachedAnalysis.expiresAt
           })
         }
       }
-      
-      // Fetch fresh SERP data
+
+      // --- 1. KEYWORD SERP ANALYSIS (Step 5) ---
       console.log('[serp-scout] fetching fresh SERP data', { keyword, domain: targetDomain })
       const serpData = await fetchKeywordSerpPosition(keyword, targetDomain, 100)
       const redditThreads = Array.isArray(serpData.redditThreads) ? serpData.redditThreads : []
-      
-      // Fetch top/new posts from Reddit API
-      console.log('[serp-scout] fetching Reddit top/new posts', { keyword })
-      const redditData = await fetchRedditTopNewPosts(keyword)
-      
-      const topRedditPosts = redditData.top_posts.slice(0, 10)
-      const newRedditPosts = redditData.new_posts.slice(0, 10)
-      
+
+      // Fetch top/new posts using BOTH DataForSEO and Reddit API
+      console.log('[serp-scout] fetching Reddit posts via DataForSEO & Reddit API', { keyword })
+
+      const [redditApiData, dataForSeoData] = await Promise.all([
+        fetchRedditTopNewPosts(keyword),
+        fetchRedditViaDataForSeo(keyword)
+      ])
+
+      // MERGE STRATEGY:
+      // 1. Combine both lists, dedup by URL
+      // 2. When a post exists in BOTH sources — enrich Reddit API data with DataForSEO's serp_rank
+      // 3. Sort by composite score: engagement (from Reddit API) + SERP relevance (from DataForSEO)
+
+      const mergePosts = (redditList, seoList) => {
+        const map = new Map()
+
+        // Helper to normalize URL for dedup key
+        const getKey = (url) => url ? url.toLowerCase().replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '').replace(/\/+$/, '') : ''
+
+        // Build a lookup from DataForSEO results (keyed by URL)
+        const seoLookup = new Map()
+        seoList.forEach(post => {
+          const key = getKey(post.post_url)
+          if (key) seoLookup.set(key, post)
+        })
+
+        // Add Reddit API posts first (better metadata: real upvotes/comments)
+        redditList.forEach(post => {
+          const key = getKey(post.post_url)
+          if (!key) return
+          const seoMatch = seoLookup.get(key)
+          map.set(key, {
+            ...post,
+            source: seoMatch ? 'both' : 'reddit_api',
+            serp_rank: seoMatch?.serp_rank || 999 // Enrich with SERP rank if available
+          })
+        })
+
+        // Add DataForSEO-only posts (ones NOT found in Reddit API)
+        seoList.forEach(post => {
+          const key = getKey(post.post_url)
+          if (key && !map.has(key)) {
+            map.set(key, { ...post, source: 'dataforseo' })
+          }
+        })
+
+        return Array.from(map.values())
+      }
+
+      // Merge "Top" candidates
+      const allTopCandidates = mergePosts(redditApiData.top_posts || [], dataForSeoData.top_posts || [])
+
+      // Sort by COMPOSITE SCORE:
+      // - Posts found in both sources get a bonus (they're validated by Google AND Reddit)
+      // - Then sort by engagement (upvotes + comments) as primary
+      // - Use SERP rank as tiebreaker (lower rank = higher in Google = better)
+      const topRedditPosts = allTopCandidates
+        .sort((a, b) => {
+          const bothBonus = (src) => src === 'both' ? 1000 : 0
+          const engagementA = (a.upvotes || 0) + (a.total_comments || 0) + bothBonus(a.source)
+          const engagementB = (b.upvotes || 0) + (b.total_comments || 0) + bothBonus(b.source)
+          if (engagementB !== engagementA) return engagementB - engagementA
+          return (a.serp_rank || 999) - (b.serp_rank || 999) // tiebreaker: Google rank
+        })
+        .slice(0, 10)
+
+      // Merge "New" candidates — prioritize Reddit API's new posts, backfill with DataForSEO
+      const allNewCandidates = mergePosts(redditApiData.new_posts || [], dataForSeoData.new_posts || [])
+      const newRedditPosts = allNewCandidates.slice(0, 10)
+
+
       // Get company context for LLM suggestions
       let companyContext = ''
+      let storedCompanyContext = null
       if (requestCompanyId) {
         try {
-          const context = await getCompanyContext(requestCompanyId)
-          const summary = context?.approvedContext?.companySummary || context?.llmContext?.companySummary || ''
-          const capabilities = context?.approvedContext?.coreCapabilities || context?.llmContext?.coreCapabilities || []
-          const problems = context?.approvedContext?.problemSpaces || context?.llmContext?.problemSpaces || []
+          storedCompanyContext = await getCompanyContext(requestCompanyId)
+          const summary = storedCompanyContext?.approvedContext?.companySummary || storedCompanyContext?.llmContext?.companySummary || ''
+          const capabilities = storedCompanyContext?.approvedContext?.coreCapabilities || storedCompanyContext?.llmContext?.coreCapabilities || []
+          const problems = storedCompanyContext?.approvedContext?.problemSpaces || storedCompanyContext?.llmContext?.problemSpaces || []
           companyContext = `${summary}\n\nCapabilities: ${capabilities.join(', ')}\n\nProblems: ${problems.join(', ')}`
           console.log('[serp-scout] using company context', { companyId: requestCompanyId, length: companyContext.length })
         } catch (err) {
           console.warn('[serp-scout] context fetch failed', err.message)
         }
       }
-      
+
       // LLM-powered post suggestions based on company context
       console.log('[serp-scout] generating LLM suggestions', { keyword, posts: topRedditPosts.length + newRedditPosts.length })
       const suggestedPosts = await suggestBestPostsWithLLM(topRedditPosts, newRedditPosts, keyword, companyContext)
-      
+
+      const threadsWithContent = redditThreads.length
+        ? await Promise.all(
+            redditThreads.map(thread => postDetailsLimiter(() => enrichRedditThread(thread)))
+          )
+        : [];
+
+      const competitorCandidates = Array.isArray(req.body.competitors)
+        ? req.body.competitors
+        : req.body.competitors
+          ? [req.body.competitors]
+          : [];
+
+      const competitorTargets = []
+      const seenCompetitors = new Set()
+      competitorCandidates.forEach(entry => {
+        const display = entry != null ? String(entry).trim() : ''
+        if (!display) return
+        const normalized = normalizeMentionValue(display)
+        if (!normalized || seenCompetitors.has(normalized)) return
+        seenCompetitors.add(normalized)
+        competitorTargets.push({ raw: display, normalized })
+      })
+
+      const brandDomain = targetDomain.toLowerCase().replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '')
+      const brandDisplayName = (storedCompanyContext?.metadata?.companyName || brandDomain).trim()
+      const brandTargets = []
+      const brandNameNormalized = normalizeMentionValue(brandDisplayName)
+      if (brandNameNormalized) {
+        brandTargets.push({ normalized: brandNameNormalized, label: brandDisplayName })
+      }
+      const brandDomainNormalized = normalizeMentionValue(brandDomain)
+      if (brandDomainNormalized && brandDomainNormalized !== brandNameNormalized) {
+        brandTargets.push({ normalized: brandDomainNormalized, label: brandDomain })
+      }
+
+      const enrichedRedditThreads = threadsWithContent.map(thread => {
+        const { fullContent, ...threadCore } = thread
+        const mentionData = buildThreadMentionData(thread, competitorTargets, brandTargets)
+        return {
+          ...threadCore,
+          ...mentionData,
+          mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3)
+        }
+      })
+
+      // Enrich top/new posts with competitor/brand mention detection
+      const enrichedTopPosts = topRedditPosts.map(post => {
+        const mentionData = buildThreadMentionData(
+          { fullContent: post.post_content, title: post.post_title },
+          competitorTargets, brandTargets
+        )
+        return { ...post, ...mentionData, mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3) }
+      })
+      const enrichedNewPosts = newRedditPosts.map(post => {
+        const mentionData = buildThreadMentionData(
+          { fullContent: post.post_content, title: post.post_title },
+          competitorTargets, brandTargets
+        )
+        return { ...post, ...mentionData, mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3) }
+      })
+
       // Save SERP analysis for 24hr cache
       if (requestCompanyId) {
         await saveSerpAnalysis(requestCompanyId, keyword, {
           position: serpData.position,
           examined: serpData.examined,
-          redditThreads,
-          hasRedditMentions: redditThreads.length > 0,
-          topRedditPosts,
-          newRedditPosts,
-          suggestedPosts
+          redditThreads: enrichedRedditThreads,
+          hasRedditMentions: enrichedRedditThreads.length > 0,
+          topRedditPosts: enrichedTopPosts,
+          newRedditPosts: enrichedNewPosts,
+          suggestedPosts,
+          organicResults: [] // Don't cache organic results to save space/privacy as requested
         })
       }
-      
-      return res.status(200).json({ 
-        success: true, 
+
+      return res.status(200).json({
+        success: true,
         keyword,
         domain: targetDomain,
         position: serpData.position,
         examined: serpData.examined,
-        redditThreads,
-        hasRedditMentions: redditThreads.length > 0,
-        topRedditPosts,
-        newRedditPosts,
+        redditThreads: enrichedRedditThreads,
+        hasRedditMentions: enrichedRedditThreads.length > 0,
+        topRedditPosts: enrichedTopPosts,
+        newRedditPosts: enrichedNewPosts,
         suggestedPosts,
+        organicResults: [], // Removed as user requested focus on Reddit only
         fromCache: false,
         analyzedAt: new Date().toISOString(),
         expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
@@ -1428,7 +2041,7 @@ Return ONLY valid JSON:
   if (resolvedCompanyId && !forceContext) {
     const existingContext = await getCompanyContext(resolvedCompanyId)
     const existingKeywords = existingContext?.approvedContext?.keywords || []
-    
+
     if (existingKeywords.length > 0) {
       console.log('[serp-scout] returning existing keywords and overview (PERMANENT)', {
         companyId: resolvedCompanyId,
@@ -1493,9 +2106,9 @@ Return ONLY valid JSON:
     contextError = error.message
   }
 
-  console.log('[serp-scout] RETURNING DOMAIN FETCH RESPONSE', { 
-    domain, 
-    companyName: extractedCompanyName, 
+  console.log('[serp-scout] RETURNING DOMAIN FETCH RESPONSE', {
+    domain,
+    companyName: extractedCompanyName,
     companyId: resolvedCompanyId,
     keywordCount: keywords?.keywords?.length
   })

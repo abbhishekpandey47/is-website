@@ -46,24 +46,21 @@ const formatDateTime = (value) => {
 };
 
 export default function SerpScoutPage() {
-  // Flow: 1=domain, 2=overview, 3=keywords (locked), 4=save, 5=analysis
+  // ── STATE DECLARATIONS (hooks must be at the top) ──────────────────────────
   const [currentStep, setCurrentStep] = useState(1);
-  const [analysisTab, setAnalysisTab] = useState(null); // 'citations', 'serp', 'reddit'
+  const [analysisTab, setAnalysisTab] = useState(null);
 
-  // Form data
   const [domain, setDomain] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState("");
 
-  // Keywords and context (read-only after generation)
   const [rawResult, setRawResult] = useState(null);
   const [companyContext, setCompanyContext] = useState(null);
   const [keywords, setKeywords] = useState([]);
   const [isKeywordsSaved, setIsKeywordsSaved] = useState(false);
-  const [isExistingData, setIsExistingData] = useState(false); // true if loaded from DB
+  const [isExistingData, setIsExistingData] = useState(false);
 
-  // Keyword editing (before save)
   const [suggestingPromptsIdx, setSuggestingPromptsIdx] = useState(null);
   const [suggestingPromptsLoading, setSuggestingPromptsLoading] = useState(false);
   const [manualKeywordForm, setManualKeywordForm] = useState({
@@ -74,7 +71,6 @@ export default function SerpScoutPage() {
   });
   const [manualPromptInput, setManualPromptInput] = useState({});
 
-  // Company context form
   const [editingContext, setEditingContext] = useState(false);
   const [contextForm, setContextForm] = useState({
     companySummary: "",
@@ -83,9 +79,8 @@ export default function SerpScoutPage() {
     constraints: [],
   });
 
-  // Analysis state
   const [selectedKeywordIdx, setSelectedKeywordIdx] = useState(null);
-  const [serpResults, setSerpResults] = useState({}); // { [keyword]: { position, redditThreads, ... } }
+  const [serpResults, setSerpResults] = useState({});
   const [serpLoading, setSerpLoading] = useState(false);
   const [citationResults, setCitationResults] = useState(null);
   const [citationLoading, setCitationLoading] = useState(false);
@@ -93,10 +88,15 @@ export default function SerpScoutPage() {
   const [manualCitationInput, setManualCitationInput] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [selectedKeywordIds, setSelectedKeywordIds] = useState([]);
+  const [generatedPosts, setGeneratedPosts] = useState([]);
+  const [generatingPosts, setGeneratingPosts] = useState(false);
 
+  const [competitors, setCompetitors] = useState([]);
+  const [competitorInput, setCompetitorInput] = useState("");
+
+  // ── COMPUTED VALUES ────────────────────────────────────────────────────────
   const trimmedDomain = domain.trim();
   const maxSelectable = 20;
-  const minSelectable = 1;
   const selectedKeyword = selectedKeywordIdx !== null ? keywords[selectedKeywordIdx] : null;
   const getCitationPrompts = () =>
     buildCitationPrompts(selectedKeyword?.prompts, manualCitationPrompts);
@@ -116,31 +116,102 @@ export default function SerpScoutPage() {
       .filter(Boolean);
   }, [keywords, selectedKeywordIds]);
 
-  const toggleKeywordSelection = (idx) => {
-    setError("");
-    setSelectedKeywordIds((prev) => {
-      if (prev.includes(idx)) {
-        return prev.filter((id) => id !== idx);
-      }
-      if (prev.length >= maxSelectable) {
-        setError(`You can select up to ${maxSelectable} keywords.`);
-        return prev;
-      }
-      return [...prev, idx];
+  const keywordSerpData = selectedKeyword ? serpResults[selectedKeyword.term] : null;
+
+  const topRedditPosts = useMemo(
+    () => keywordSerpData?.topRedditPosts || [],
+    [keywordSerpData]
+  );
+  const newRedditPosts = useMemo(
+    () => keywordSerpData?.newRedditPosts || [],
+    [keywordSerpData]
+  );
+  const suggestedPosts = useMemo(
+    () => keywordSerpData?.suggestedPosts || [],
+    [keywordSerpData]
+  );
+
+  const citationPrompts = getCitationPrompts();
+
+  const citationSummary = useMemo(() => {
+    const records = citationResults?.records || [];
+    if (!records.length) return null;
+    let totalPosts = 0;
+    let totalModels = 0;
+    let totalErrors = 0;
+    let selfMentions = 0;
+    const competitorMentionCounts = {};
+
+    records.forEach((record) => {
+      const models = record?.models || {};
+      Object.values(models).forEach((value) => {
+        totalModels += 1;
+        if (Array.isArray(value)) {
+          totalPosts += value.length;
+          value.forEach((post) => {
+            if (post.mentionsYou) selfMentions += 1;
+            (post.mentionedCompetitors || []).forEach((comp) => {
+              competitorMentionCounts[comp] = (competitorMentionCounts[comp] || 0) + 1;
+            });
+          });
+        } else if (value && value.error) {
+          totalErrors += 1;
+        }
+      });
     });
+
+    const latestTimestamp = records.reduce((latest, record) => {
+      if (!record?.timestamp) return latest;
+      const parsed = Date.parse(record.timestamp);
+      return Number.isNaN(parsed) ? latest : Math.max(latest, parsed);
+    }, 0);
+
+    return {
+      totalPrompts: records.length,
+      totalModels,
+      totalPosts,
+      totalErrors,
+      selfMentions,
+      competitorMentionCounts,
+      latestRun: latestTimestamp || null,
+    };
+  }, [citationResults]);
+
+  const savedKeywordTimestamp =
+    rawResult?.savedAt ||
+    rawResult?.companyContext?.metadata?.keywordsSavedAt ||
+    rawResult?.companyContext?.metadata?.generatedAt ||
+    null;
+  const savedAtDisplay = formatDateTime(savedKeywordTimestamp);
+
+  // ── HANDLERS ──────────────────────────────────────────────────────────────
+
+  // Competitor management
+  const handleAddCompetitor = () => {
+    const val = competitorInput.trim();
+    if (!val) return;
+    if (!competitors.includes(val)) {
+      setCompetitors((prev) => [...prev, val]);
+    }
+    setCompetitorInput("");
+  };
+
+  const handleRemoveCompetitor = (idx) => {
+    setCompetitors((prev) => prev.filter((_, i) => i !== idx));
   };
 
   // STEP 1: Fetch domain and generate keywords
   const handleFetchDomain = async (e) => {
     e.preventDefault();
-    if (!trimmedDomain) return;
-
+    if (!trimmedDomain) {
+      setError("Please enter a domain.");
+      return;
+    }
     setError("");
     setSuccess("");
     setLoading(true);
-
     try {
-      const token = await auth.currentUser?.getIdToken?.();
+      const token = await auth?.currentUser?.getIdToken?.();
       const res = await fetch("/api/threadflow/serp-scout", {
         method: "POST",
         headers: {
@@ -149,52 +220,44 @@ export default function SerpScoutPage() {
         },
         body: JSON.stringify({ domain: trimmedDomain }),
       });
-
       const data = await res.json();
-      if (!res.ok) {
-        if (res.status === 429) {
-          throw new Error(data.message || "API rate limit exceeded. Please try again later.");
-        }
-        throw new Error(data.error || "Failed to scout domain");
-      }
+      if (!res.ok) throw new Error(data.error || "Failed to analyze domain");
 
       setRawResult(data);
-      setCompanyContext(data.companyContext);
+      setKeywords(data.keywords || []);
 
-      const normalizedKeywords = (data.keywords || [])
-        .slice(0, 20)
-        .map((keyword) => ({
-          ...keyword,
-          prompts: Array.isArray(keyword.prompts) ? keyword.prompts : [],
-        }));
-      setKeywords(normalizedKeywords);
-      const initialSelectedIds = data.fromExisting
-        ? normalizedKeywords.map((_, idx) => idx)
-        : normalizedKeywords.slice(0, Math.max(3, normalizedKeywords.length)).map((_, idx) => idx);
-      setSelectedKeywordIds(initialSelectedIds);
-
-      if (data.companyContext?.approvedContext) {
+      // Always set companyContext (even null/empty) so step 2 renders
+      const ctx =
+        data.companyContext?.approvedContext ||
+        data.companyContext?.llmContext ||
+        null;
+      setCompanyContext(data.companyContext || null);
+      if (ctx) {
         setContextForm({
-          companySummary: data.companyContext.approvedContext.companySummary || "",
-          coreCapabilities: data.companyContext.approvedContext.coreCapabilities || [],
-          problemSpaces: data.companyContext.approvedContext.problemSpaces || [],
-          constraints: data.companyContext.approvedContext.constraints || [],
+          companySummary: ctx.companySummary || "",
+          coreCapabilities: Array.isArray(ctx.coreCapabilities) ? ctx.coreCapabilities : [],
+          problemSpaces: Array.isArray(ctx.problemSpaces) ? ctx.problemSpaces : [],
+          constraints: Array.isArray(ctx.constraints) ? ctx.constraints : [],
         });
       }
 
-      // Check if this is existing data from DB
       if (data.fromExisting) {
         setIsExistingData(true);
         setIsKeywordsSaved(true);
-        setSuccess("✓ Keywords loaded from database. Ready for analysis.");
-        setCurrentStep(5); // Jump to analysis
+        setSelectedKeywordIds((data.keywords || []).map((_, idx) => idx));
+        const savedCompetitors = data.companyContext?.approvedContext?.competitors;
+        if (Array.isArray(savedCompetitors) && savedCompetitors.length > 0) {
+          setCompetitors(savedCompetitors);
+        }
+        setCurrentStep(5);
+        setSuccess("✓ Loaded existing data! Ready for analysis.");
       } else {
-        setIsExistingData(false);
-        setSuccess("✓ Keywords generated! Review and save to continue.");
         setCurrentStep(2);
+        setSuccess("✓ Domain analyzed successfully!");
       }
+      setTimeout(() => setSuccess(""), 3000);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Failed to analyze domain");
     } finally {
       setLoading(false);
     }
@@ -202,14 +265,14 @@ export default function SerpScoutPage() {
 
   // STEP 2: Approve context
   const handleApproveContext = () => {
-    setSuccess("✓ Overview approved! Select 1-5 keywords to keep...");
+    setSuccess("✓ Overview approved! Select keywords to keep...");
     setTimeout(() => {
       setSuccess("");
       setCurrentStep(3);
     }, 1500);
   };
 
-  // STEP 3: Approve keywords (locked, read-only)
+  // STEP 3: Approve keywords
   const handleApproveKeywords = () => {
     if (selectedKeywordIds.length < 1 || selectedKeywordIds.length > 20) {
       setError("Select at least 1 and up to 20 keywords to continue.");
@@ -223,174 +286,18 @@ export default function SerpScoutPage() {
     }, 1500);
   };
 
-  // STEP 4: Save keywords permanently
-  const handleSaveKeywords = async () => {
-    setIsSaving(true);
+  const toggleKeywordSelection = (idx) => {
     setError("");
-    try {
-      const token = await auth.currentUser?.getIdToken?.();
-      const res = await fetch("/api/threadflow/serp-scout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          action: "saveKeywords",
-          companyId: rawResult?.companyId || null,
-          domain: trimmedDomain,
-          keywords: selectedKeywordIds.map((id) => keywords[id]).filter(Boolean),
-          companyName: rawResult?.companyName || null,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to save");
-
-      if (data.companyId && !rawResult?.companyId) {
-        setRawResult((prev) => ({ ...prev, companyId: data.companyId }));
+    setSelectedKeywordIds((prev) => {
+      if (prev.includes(idx)) return prev.filter((id) => id !== idx);
+      if (prev.length >= maxSelectable) {
+        setError(`You can select up to ${maxSelectable} keywords.`);
+        return prev;
       }
-
-      setIsKeywordsSaved(true);
-      setSuccess("✓ Keywords saved permanently! Moving to analysis...");
-      setTimeout(() => {
-        setSuccess("");
-        setCurrentStep(5);
-      }, 1500);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsSaving(false);
-    }
+      return [...prev, idx];
+    });
   };
 
-  // STEP 5: Analysis - SERP/Reddit/Citations
-  const handleAnalyzeSerpForKeyword = async () => {
-    if (!selectedKeyword?.term) return;
-
-    setSerpLoading(true);
-    try {
-      const token = await auth.currentUser?.getIdToken?.();
-      const res = await fetch("/api/threadflow/serp-scout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          action: "keywordSerp",
-          keyword: selectedKeyword.term,
-          domain: trimmedDomain,
-          companyId: rawResult?.companyId || null,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to fetch SERP");
-
-      setSerpResults((prev) => ({
-        ...prev,
-        [selectedKeyword.term]: data,
-      }));
-
-      setSuccess(
-        data.fromCache
-          ? "✓ Loaded cached SERP (updates in 24hrs)"
-          : "✓ Fresh SERP analysis complete!"
-      );
-      setTimeout(() => setSuccess(""), 3000);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setSerpLoading(false);
-    }
-  };
-
-  const handleGeneratePostContent = async () => {
-    if (!selectedKeyword?.term) return;
-
-    setGeneratingPosts(true);
-    setError("");
-    try {
-      const token = await auth.currentUser?.getIdToken?.();
-      
-      // Gather Reddit context from current SERP data
-      const redditContext = {
-        topPosts: topRedditPosts.slice(0, 5),
-        newPosts: newRedditPosts.slice(0, 5)
-      };
-
-      const res = await fetch("/api/threadflow/serp-scout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          action: "generatePostContent",
-          keyword: selectedKeyword.term,
-          domain: trimmedDomain,
-          companyId: rawResult?.companyId || null,
-          redditContext,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to generate posts");
-
-      setGeneratedPosts(data.posts || []);
-      setSuccess("✓ Post content generated with Reddit context!");
-      setTimeout(() => setSuccess(""), 3000);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setGeneratingPosts(false);
-    }
-  };
-
-  const handleTestCitations = async () => {
-    const effectiveDomain =
-      trimmedDomain || rawResult?.domain || companyContext?.domain || rawResult?.companyContext?.domain || "";
-    const promptsToTest = getCitationPrompts();
-    if (!promptsToTest.length) {
-      setError("Add at least one prompt before running citation tests.");
-      return;
-    }
-    if (!effectiveDomain) {
-      setError("Domain is required to test citations.");
-      return;
-    }
-
-    setCitationLoading(true);
-    try {
-      const token = await auth.currentUser?.getIdToken?.();
-      const res = await fetch("/api/threadflow/serp-scout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          action: "testCitations",
-          prompts: promptsToTest.slice(0, 10),
-          domain: effectiveDomain,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to test citations");
-
-      setCitationResults(data.citations);
-      setSuccess("✓ Citation analysis complete!");
-      setTimeout(() => setSuccess(""), 3000);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setCitationLoading(false);
-    }
-  };
-
-  // Keyword editing handlers (before save)
   const handleUpdateKeyword = (idx, field, value) => {
     const updated = [...keywords];
     updated[idx] = { ...updated[idx], [field]: value };
@@ -424,9 +331,7 @@ export default function SerpScoutPage() {
     const value = manualPromptInput[keywordIdx]?.trim();
     if (!value) return;
     const updated = [...keywords];
-    const existing = Array.isArray(updated[keywordIdx].prompts)
-      ? updated[keywordIdx].prompts
-      : [];
+    const existing = Array.isArray(updated[keywordIdx].prompts) ? updated[keywordIdx].prompts : [];
     updated[keywordIdx].prompts = [...existing, value].slice(0, 10);
     setKeywords(updated);
     setManualPromptInput((prev) => ({ ...prev, [keywordIdx]: "" }));
@@ -438,7 +343,6 @@ export default function SerpScoutPage() {
       setError("Keyword term is required before suggesting prompts");
       return;
     }
-
     setSuggestingPromptsIdx(keywordIdx);
     setSuggestingPromptsLoading(true);
     setError("");
@@ -458,14 +362,11 @@ export default function SerpScoutPage() {
           domain: trimmedDomain,
         }),
       });
-
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to suggest prompts");
-
       const updated = [...keywords];
       updated[keywordIdx].prompts = data.prompts || [];
       setKeywords(updated);
-
       setSuccess("✓ New prompts suggested!");
       setTimeout(() => setSuccess(""), 3000);
     } catch (err) {
@@ -476,63 +377,179 @@ export default function SerpScoutPage() {
     }
   };
 
-  const keywordSerpData = selectedKeyword ? serpResults[selectedKeyword.term] : null;
-  const topRedditPosts = useMemo(
-    () => keywordSerpData?.topRedditPosts || [],
-    [keywordSerpData]
-  );
-  const newRedditPosts = useMemo(
-    () => keywordSerpData?.newRedditPosts || [],
-    [keywordSerpData]
-  );
-  const suggestedPosts = useMemo(
-    () => keywordSerpData?.suggestedPosts || [],
-    [keywordSerpData]
-  );
-  const citationPrompts = getCitationPrompts();
-  const citationDomain = useMemo(() => {
-    if (citationResults?.domain) return citationResults.domain;
-    if (trimmedDomain) return trimmedDomain.replace(/^https?:\/\//i, '').replace(/\/$/, '');
-    return '';
-  }, [citationResults, trimmedDomain]);
-
-  const citationSummary = useMemo(() => {
-    if (!citationResults?.records?.length) return null;
-    const records = citationResults.records;
-    const summary = {
-      total: records.length,
-      citedByTarget: 0,
-      citedByReddit: 0,
-      providers: []
-    };
-    records.forEach((record) => {
-      const targetCited = record.results?.some((result) =>
-        result.matches?.some((match) => match.domain === citationDomain)
-      );
-      const redditCited = record.results?.some((result) =>
-        result.matches?.some((match) => match.domain?.includes('reddit.com'))
-      );
-      summary.providers.push({
-        model: record.model,
-        targetCited: Boolean(targetCited),
-        redditCited: Boolean(redditCited)
+  // STEP 4: Save keywords permanently
+  const handleSaveKeywords = async () => {
+    setIsSaving(true);
+    setError("");
+    try {
+      const token = await auth.currentUser?.getIdToken?.();
+      const res = await fetch("/api/threadflow/serp-scout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          action: "saveKeywords",
+          companyId: rawResult?.companyId || null,
+          domain: trimmedDomain,
+          keywords: selectedKeywordIds.map((id) => keywords[id]).filter(Boolean),
+          companyName: rawResult?.companyName || null,
+          competitors,
+        }),
       });
-      if (targetCited) summary.citedByTarget += 1;
-      if (redditCited) summary.citedByReddit += 1;
-    });
-    return summary;
-  }, [citationResults, citationDomain]);
-  
-  // Post content generation state
-  const [generatedPosts, setGeneratedPosts] = useState([]);
-  const [generatingPosts, setGeneratingPosts] = useState(false);
-  const savedKeywordTimestamp =
-    rawResult?.savedAt ||
-    rawResult?.companyContext?.metadata?.keywordsSavedAt ||
-    rawResult?.companyContext?.metadata?.generatedAt ||
-    null;
-  const savedAtDisplay = formatDateTime(savedKeywordTimestamp);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to save");
 
+      if (data.companyId && !rawResult?.companyId) {
+        setRawResult((prev) => ({ ...prev, companyId: data.companyId }));
+      }
+      setIsKeywordsSaved(true);
+      setSuccess("✓ Keywords saved permanently! Moving to analysis...");
+      setTimeout(() => {
+        setSuccess("");
+        setCurrentStep(5);
+      }, 1500);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  // STEP 5: SERP Analysis
+  const handleAnalyzeSerpForKeyword = async () => {
+    if (!selectedKeyword?.term) return;
+    setSerpLoading(true);
+    try {
+      const token = await auth.currentUser?.getIdToken?.();
+      const res = await fetch("/api/threadflow/serp-scout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          action: "keywordSerp",
+          keyword: selectedKeyword.term,
+          domain: trimmedDomain,
+          companyId: rawResult?.companyId || null,
+          competitors,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to fetch SERP");
+
+      setSerpResults((prev) => ({ ...prev, [selectedKeyword.term]: data }));
+      setSuccess(
+        data.fromCache
+          ? "✓ Loaded cached SERP (updates in 24hrs)"
+          : "✓ Fresh SERP analysis complete!"
+      );
+      setTimeout(() => setSuccess(""), 3000);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSerpLoading(false);
+    }
+  };
+
+  const handleGeneratePostContent = async () => {
+    if (!selectedKeyword?.term) return;
+    setGeneratingPosts(true);
+    setError("");
+    try {
+      const token = await auth.currentUser?.getIdToken?.();
+      const redditContext = {
+        topPosts: topRedditPosts.slice(0, 5),
+        newPosts: newRedditPosts.slice(0, 5),
+      };
+      const res = await fetch("/api/threadflow/serp-scout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          action: "generatePostContent",
+          keyword: selectedKeyword.term,
+          domain: trimmedDomain,
+          companyId: rawResult?.companyId || null,
+          redditContext,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to generate posts");
+      setGeneratedPosts(data.posts || []);
+      setSuccess("✓ Post content generated!");
+      setTimeout(() => setSuccess(""), 3000);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setGeneratingPosts(false);
+    }
+  };
+
+  // Citation testing
+  const handleTestCitations = async () => {
+    setError("");
+    setCitationResults(null);
+    setSuccess("");
+    const effectiveDomain =
+      trimmedDomain ||
+      rawResult?.domain ||
+      companyContext?.domain ||
+      rawResult?.companyContext?.domain ||
+      "";
+
+    // Use prompts from the currently selected keyword + any manual additions
+    // (citationPrompts is already computed as buildCitationPrompts(selectedKeyword?.prompts, manualCitationPrompts))
+    const promptsToTest = citationPrompts.slice(0, 10);
+
+    if (!promptsToTest.length) {
+      setError("Add at least one prompt before running citation tests.");
+      return;
+    }
+    if (!effectiveDomain) {
+      setError("Domain is required to test citations.");
+      return;
+    }
+
+    setCitationLoading(true);
+    try {
+      const token = await auth?.currentUser?.getIdToken?.();
+      const res = await fetch("/api/threadflow/serp-scout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          action: "testCitations",
+          prompts: promptsToTest,
+          domain: effectiveDomain,
+          competitors,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to test citations");
+
+      if (!data.citations?.records?.length) {
+        setCitationResults(null);
+        setError("No citations found for the provided prompts.");
+      } else {
+        setCitationResults(data.citations);
+        setSuccess("✓ Citation analysis complete!");
+        setTimeout(() => setSuccess(""), 3000);
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setCitationLoading(false);
+    }
+  };
+
+  // ── RENDER ─────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border bg-card">
@@ -597,7 +614,6 @@ export default function SerpScoutPage() {
               </div>
             </div>
           )}
-
           {success && (
             <div className="rounded-lg border border-green-400/50 bg-green-500/10 p-4 flex gap-3 items-start">
               <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -626,17 +642,85 @@ export default function SerpScoutPage() {
                     className="text-base"
                   />
                   {currentStep === 1 && !isExistingData && (
-                    <Button type="submit" disabled={loading} className="w-full">
-                      {loading ? "Analyzing..." : "Fetch Domain & Generate Keywords"}
+                    <Button type="submit" disabled={loading || !domain.trim()} className="w-full">
+                      {loading ? "Analyzing domain…" : "Fetch Domain & Generate Keywords"}
                     </Button>
                   )}
                 </form>
+
+                {/* Competitors */}
+                {currentStep === 1 && !isExistingData && (
+                  <div className="space-y-2 pt-2">
+                    <p className="text-sm font-medium text-foreground">
+                      Competitors{" "}
+                      <span className="text-xs font-normal text-muted-foreground">(optional — for mention tracking)</span>
+                    </p>
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="competitor.com or Company Name"
+                        value={competitorInput}
+                        onChange={(e) => setCompetitorInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            handleAddCompetitor();
+                          }
+                        }}
+                        className="text-sm"
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={handleAddCompetitor}
+                        className="flex-shrink-0"
+                      >
+                        Add
+                      </Button>
+                    </div>
+                    {competitors.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {competitors.map((c, i) => (
+                          <span
+                            key={i}
+                            className="flex items-center gap-1 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-xs text-orange-700"
+                          >
+                            {c}
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveCompetitor(i)}
+                              className="ml-0.5 text-orange-400 hover:text-orange-600 font-semibold leading-none"
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+                {currentStep > 1 && competitors.length > 0 && (
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    <span className="text-xs text-muted-foreground self-center">Tracking competitors:</span>
+                    {competitors.map((c, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-xs text-orange-700"
+                      >
+                        {c}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
                 {currentStep > 1 && (
-                  <div className={`rounded-lg border p-3 flex items-center gap-2 ${
-                    isExistingData 
-                      ? "bg-blue-500/10 border-blue-500/30" 
-                      : "bg-emerald-500/10 border-emerald-500/30"
-                  }`}>
+                  <div
+                    className={`rounded-lg border p-3 flex items-center gap-2 ${
+                      isExistingData
+                        ? "bg-blue-500/10 border-blue-500/30"
+                        : "bg-emerald-500/10 border-emerald-500/30"
+                    }`}
+                  >
                     {isExistingData ? (
                       <>
                         <span className="text-lg">🔒</span>
@@ -658,8 +742,8 @@ export default function SerpScoutPage() {
             </Card>
           )}
 
-          {/* STEP 2: OVERVIEW */}
-          {currentStep >= 2 && companyContext && (
+          {/* STEP 2: OVERVIEW — shows whenever step >= 2, regardless of context */}
+          {currentStep >= 2 && (
             <Card className={currentStep === 2 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -682,43 +766,53 @@ export default function SerpScoutPage() {
                     Saved on {formatDateTime(rawResult.savedAt)}
                   </p>
                 )}
+
                 {!editingContext ? (
                   <>
-                    <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
-                      <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                        Summary
-                      </p>
-                      <p className="text-sm leading-relaxed">
-                        {contextForm.companySummary || "No summary"}
-                      </p>
-                    </div>
+                    {contextForm.companySummary ? (
+                      <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
+                        <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
+                          Summary
+                        </p>
+                        <p className="text-sm leading-relaxed">{contextForm.companySummary}</p>
+                      </div>
+                    ) : (
+                      <div className="rounded-lg border border-amber-400/40 bg-amber-500/10 p-4">
+                        <p className="text-sm text-amber-700">
+                          No company overview was generated (context generation may have failed or is pending).
+                          You can still continue to keywords.
+                        </p>
+                      </div>
+                    )}
 
-                    <div className="grid gap-4 md:grid-cols-2">
-                      <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
-                        <p className="text-xs font-semibold text-muted-foreground">
-                          Capabilities ({contextForm.coreCapabilities.length})
-                        </p>
-                        <ul className="space-y-1">
-                          {contextForm.coreCapabilities.map((cap, idx) => (
-                            <li key={idx} className="text-sm">• {cap}</li>
-                          ))}
-                        </ul>
+                    {(contextForm.coreCapabilities.length > 0 || contextForm.problemSpaces.length > 0) && (
+                      <div className="grid gap-4 md:grid-cols-2">
+                        <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
+                          <p className="text-xs font-semibold text-muted-foreground">
+                            Capabilities ({contextForm.coreCapabilities.length})
+                          </p>
+                          <ul className="space-y-1">
+                            {contextForm.coreCapabilities.map((cap, idx) => (
+                              <li key={idx} className="text-sm">• {cap}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
+                          <p className="text-xs font-semibold text-muted-foreground">
+                            Problems ({contextForm.problemSpaces.length})
+                          </p>
+                          <ul className="space-y-1">
+                            {contextForm.problemSpaces.map((prob, idx) => (
+                              <li key={idx} className="text-sm">• {prob}</li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
-                      <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
-                        <p className="text-xs font-semibold text-muted-foreground">
-                          Problems ({contextForm.problemSpaces.length})
-                        </p>
-                        <ul className="space-y-1">
-                          {contextForm.problemSpaces.map((prob, idx) => (
-                            <li key={idx} className="text-sm">• {prob}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
+                    )}
 
                     {currentStep === 2 && (
                       <Button onClick={handleApproveContext} className="w-full">
-                        <Check className="h-4 w-4 mr-2" /> Approve & Continue
+                        <Check className="h-4 w-4 mr-2" /> Approve & Continue to Keywords
                       </Button>
                     )}
                   </>
@@ -729,10 +823,7 @@ export default function SerpScoutPage() {
                       <Textarea
                         value={contextForm.companySummary}
                         onChange={(e) =>
-                          setContextForm((prev) => ({
-                            ...prev,
-                            companySummary: e.target.value,
-                          }))
+                          setContextForm((prev) => ({ ...prev, companySummary: e.target.value }))
                         }
                         className="min-h-[80px]"
                       />
@@ -746,7 +837,7 @@ export default function SerpScoutPage() {
             </Card>
           )}
 
-          {/* STEP 3: KEYWORDS (SELECT 1-5) */}
+          {/* STEP 3: KEYWORDS */}
           {currentStep >= 3 && (
             <Card className={currentStep === 3 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
@@ -757,7 +848,7 @@ export default function SerpScoutPage() {
                     </CardTitle>
                     <CardDescription>
                       {isExistingData
-                        ? "Keywords were loaded from the saved set. You can review them or adjust the selection for analysis."
+                        ? "Keywords loaded from saved set. Adjust selection for analysis."
                         : "Choose at least 1 and up to 20 keywords from the list below."}
                     </CardDescription>
                   </div>
@@ -767,48 +858,57 @@ export default function SerpScoutPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {keywords.map((keyword, idx) => {
-                    const isChecked = selectedKeywordIds.includes(idx);
-                    return (
-                      <div
-                        key={idx}
-                        onClick={() => toggleKeywordSelection(idx)}
-                        className={`cursor-pointer rounded-lg border transition-all ${
-                          isChecked
-                            ? "border-emerald-500 bg-emerald-500/10 shadow-md"
-                            : "border-border bg-card/50 hover:border-emerald-400/50 hover:bg-card"
-                        } p-3 space-y-2`}
-                      >
-                        <div className="flex items-start gap-2">
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={() => toggleKeywordSelection(idx)}
-                            onClick={(e) => e.stopPropagation()}
-                            className="mt-0.5 h-4 w-4 accent-emerald-600 cursor-pointer flex-shrink-0"
-                            aria-label={`Select ${keyword.term}`}
-                          />
-                          <div className="flex-1 min-w-0 space-y-1">
-                            <p className="text-sm font-semibold text-foreground" title={keyword.term}>
-                              {keyword.term}
-                            </p>
-                            <p className="text-[10px] text-muted-foreground line-clamp-2" title={keyword.why}>
-                              {keyword.why}
-                            </p>
+                {keywords.length === 0 ? (
+                  <p className="text-sm text-muted-foreground italic">No keywords generated yet.</p>
+                ) : (
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {keywords.map((keyword, idx) => {
+                      const isChecked = selectedKeywordIds.includes(idx);
+                      return (
+                        <div
+                          key={idx}
+                          onClick={() => toggleKeywordSelection(idx)}
+                          className={`cursor-pointer rounded-lg border transition-all ${
+                            isChecked
+                              ? "border-emerald-500 bg-emerald-500/10 shadow-md"
+                              : "border-border bg-card/50 hover:border-emerald-400/50 hover:bg-card"
+                          } p-3 space-y-2`}
+                        >
+                          <div className="flex items-start gap-2">
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={() => toggleKeywordSelection(idx)}
+                              onClick={(e) => e.stopPropagation()}
+                              className="mt-0.5 h-4 w-4 accent-emerald-600 cursor-pointer flex-shrink-0"
+                              aria-label={`Select ${keyword.term}`}
+                            />
+                            <div className="flex-1 min-w-0 space-y-1">
+                              <p className="text-sm font-semibold text-foreground" title={keyword.term}>
+                                {keyword.term}
+                              </p>
+                              <p className="text-[10px] text-muted-foreground line-clamp-2" title={keyword.why}>
+                                {keyword.why}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                      );
+                    })}
+                  </div>
+                )}
 
                 {currentStep === 3 && !isExistingData && (
-                  <Button onClick={handleApproveKeywords} className="w-full">
+                  <Button
+                    onClick={handleApproveKeywords}
+                    disabled={selectedKeywordIds.length === 0}
+                    className="w-full"
+                  >
                     <Check className="h-4 w-4 mr-2" /> Continue to Prompts
                   </Button>
                 )}
 
+                {/* Add custom keyword */}
                 <div className="rounded-lg border border-border bg-card/40 p-4 space-y-4">
                   <div className="flex items-center gap-2 text-sm font-semibold">
                     <Zap className="h-4 w-4 text-emerald-500" /> Add a custom keyword
@@ -858,23 +958,23 @@ export default function SerpScoutPage() {
             <Card className={currentStep === 4 ? "border-emerald-500/50 shadow-lg" : ""}>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle className="flex items-center gap-2">
-                        <span>💾</span> Step 4: Prompts & Save
-                      </CardTitle>
-                      <CardDescription>
-                        {isExistingData
-                          ? "Review the prompts that were saved with the keywords."
-                          : "Suggest prompts for your selected keywords, then save."}
-                      </CardDescription>
-                    </div>
+                  <div>
+                    <CardTitle className="flex items-center gap-2">
+                      <span>💾</span> Step 4: Prompts & Save
+                    </CardTitle>
+                    <CardDescription>
+                      {isExistingData
+                        ? "Review the prompts saved with the keywords."
+                        : "Suggest prompts for selected keywords, then save."}
+                    </CardDescription>
+                  </div>
                   {currentStep > 4 && <Check className="h-5 w-5 text-emerald-600" />}
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 {selectedKeywordEntries.length === 0 && (
                   <div className="text-sm text-amber-600 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
-                    Select 1-20 keywords first to request prompts.
+                    Select 1–20 keywords in Step 3 first.
                   </div>
                 )}
 
@@ -915,6 +1015,7 @@ export default function SerpScoutPage() {
                         <p className="text-xs text-muted-foreground">No prompts yet. Click suggest.</p>
                       )}
                     </div>
+
                     {!isExistingData && (
                       <div className="flex flex-col gap-2 md:flex-row md:items-center">
                         <Input
@@ -952,10 +1053,10 @@ export default function SerpScoutPage() {
                 {isExistingData && (
                   <div className="rounded-lg bg-blue-500/10 border border-blue-500/30 p-4 text-center">
                     <p className="text-sm font-semibold text-blue-800">
-                      ✓ Keywords and prompts saved earlier {savedAtDisplay ? `on ${savedAtDisplay}` : "previously"}.
+                      ✓ Keywords and prompts saved {savedAtDisplay ? `on ${savedAtDisplay}` : "previously"}.
                     </p>
                     <p className="text-xs text-blue-700/80">
-                      Use Step 5 to analyze, or rerun the domain fetch to regenerate everything.
+                      Use Step 5 to analyze, or re-enter the domain to regenerate everything.
                     </p>
                   </div>
                 )}
@@ -980,28 +1081,34 @@ export default function SerpScoutPage() {
                     <span>🔍</span> Step 5: Analyze Keywords
                   </CardTitle>
                   <CardDescription>
-                    Select a keyword to search SERP, citations, and Reddit mentions
+                    Select a keyword to search SERP, Reddit posts, and LLM citations
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
-                    {analysisKeywordEntries.map((keyword) => (
-                      <Button
-                        key={keyword._originalIndex}
-                        variant={selectedKeywordIdx === keyword._originalIndex ? "default" : "outline"}
-                        className="text-left justify-start h-auto py-3 px-4"
-                        onClick={() => {
-                          setSelectedKeywordIdx(keyword._originalIndex);
-                          setAnalysisTab(null);
-                        }}
-                      >
-                        <div className="flex flex-col gap-1">
-                          <p className="font-semibold text-sm">{keyword.term}</p>
-                          <p className="text-xs text-muted-foreground">{keyword.intent}</p>
-                        </div>
-                      </Button>
-                    ))}
-                  </div>
+                  {analysisKeywordEntries.length === 0 ? (
+                    <p className="text-sm text-muted-foreground italic">
+                      No keywords available. Go back to Step 3 to select keywords.
+                    </p>
+                  ) : (
+                    <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+                      {analysisKeywordEntries.map((keyword) => (
+                        <Button
+                          key={keyword._originalIndex}
+                          variant={selectedKeywordIdx === keyword._originalIndex ? "default" : "outline"}
+                          className="text-left justify-start h-auto py-3 px-4"
+                          onClick={() => {
+                            setSelectedKeywordIdx(keyword._originalIndex);
+                            setAnalysisTab(null);
+                          }}
+                        >
+                          <div className="flex flex-col gap-1">
+                            <p className="font-semibold text-sm">{keyword.term}</p>
+                            <p className="text-xs text-muted-foreground">{keyword.intent}</p>
+                          </div>
+                        </Button>
+                      ))}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
 
@@ -1045,6 +1152,12 @@ export default function SerpScoutPage() {
                       </Button>
                     </div>
 
+                    {!analysisTab && (
+                      <p className="text-sm text-muted-foreground text-center py-6">
+                        Select a tab above to start analysis
+                      </p>
+                    )}
+
                     {/* SERP Tab */}
                     {analysisTab === "serp" && (
                       <div className="space-y-4">
@@ -1053,18 +1166,21 @@ export default function SerpScoutPage() {
                           disabled={serpLoading}
                           className="w-full"
                         >
-                          {serpLoading ? "Analyzing..." : "Search SERP & Reddit"}
+                          {serpLoading ? "Analyzing…" : "Search SERP & Reddit"}
                         </Button>
 
                         {keywordSerpData && (
                           <div className="space-y-6">
                             <div className="rounded-lg bg-muted/40 border border-border p-4">
-                              <p className="text-sm font-semibold mb-2">
-                                Position: {keywordSerpData.position || "Not ranked"}
+                              <p className="text-sm font-semibold mb-1">
+                                Position:{" "}
+                                {keywordSerpData.position
+                                  ? `#${keywordSerpData.position}`
+                                  : "Not ranked in top 100"}
                               </p>
                               <p className="text-xs text-muted-foreground">
                                 Examined {keywordSerpData.examined} results
-                                {keywordSerpData.fromCache && " (cached)"}
+                                {keywordSerpData.fromCache && " · cached"}
                               </p>
                             </div>
 
@@ -1073,18 +1189,30 @@ export default function SerpScoutPage() {
                               <div className="space-y-3">
                                 <p className="text-sm font-semibold flex items-center gap-2">
                                   <MessageSquare className="h-4 w-4" />
-                                  {keywordSerpData.redditThreads.length} Reddit Threads Found
+                                  {keywordSerpData.redditThreads.length} Reddit Threads in Google SERP
                                 </p>
                                 {keywordSerpData.redditThreads.slice(0, 5).map((thread, idx) => (
                                   <div key={idx} className="rounded-lg border border-border/50 bg-card/30 p-3 space-y-2">
-                                    <div className="flex items-start justify-between gap-2">
-                                      <p className="font-semibold text-sm text-foreground">
-                                        #{thread.position} {thread.title}
-                                      </p>
-                                    </div>
-                                    <p className="text-xs text-foreground/70 line-clamp-2">
-                                      {thread.snippet}
+                                    <p className="font-semibold text-sm text-foreground">
+                                      #{thread.position} {thread.title}
                                     </p>
+                                    <p className="text-xs text-foreground/70 line-clamp-2">{thread.snippet}</p>
+                                    {thread.mentionHighlights?.length > 0 && (
+                                      <div className="flex flex-wrap gap-1 mt-1">
+                                        {thread.mentionHighlights.map((h, i) => (
+                                          <span
+                                            key={i}
+                                            className={`text-[10px] px-2 py-0.5 rounded-full ${
+                                              h.type === "brand"
+                                                ? "bg-emerald-500/15 text-emerald-700 border border-emerald-500/30"
+                                                : "bg-orange-500/15 text-orange-700 border border-orange-500/30"
+                                            }`}
+                                          >
+                                            {h.type === "brand" ? "✓ " : "⚠ "}{h.term}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    )}
                                     <a
                                       href={thread.url}
                                       target="_blank"
@@ -1098,33 +1226,54 @@ export default function SerpScoutPage() {
                               </div>
                             )}
 
-                            {keywordSerpData.redditThreads?.length === 0 && (
-                              <p className="text-sm text-muted-foreground italic">
-                                No Reddit threads found in top Google results for this keyword
-                              </p>
-                            )}
-
                             {/* Top Reddit Posts */}
                             {topRedditPosts.length > 0 && (
                               <div className="space-y-3">
                                 <div className="flex items-center gap-2">
                                   <span className="text-lg">🔥</span>
-                                  <p className="text-sm font-semibold">Top Reddit Posts ({topRedditPosts.length})</p>
+                                  <p className="text-sm font-semibold">
+                                    Top Reddit Posts ({topRedditPosts.length})
+                                  </p>
                                 </div>
                                 {topRedditPosts.map((post, idx) => (
-                                  <div key={idx} className="rounded-lg border border-orange-500/20 bg-orange-500/5 p-4 space-y-2">
+                                  <div
+                                    key={idx}
+                                    className="rounded-lg border border-orange-500/20 bg-orange-500/5 p-4 space-y-2"
+                                  >
                                     <p className="text-sm font-semibold text-foreground">
                                       {post.post_title || `Post #${idx + 1}`}
                                     </p>
                                     <p className="text-xs text-muted-foreground line-clamp-2">
-                                      {(post.post_content || '').slice(0, 150)}...
+                                      {(post.post_content || "").slice(0, 150)}
                                     </p>
+                                    {post.mentionHighlights?.length > 0 && (
+                                      <div className="flex flex-wrap gap-1">
+                                        {post.mentionHighlights.map((h, i) => (
+                                          <span
+                                            key={i}
+                                            className={`text-[10px] px-2 py-0.5 rounded-full ${
+                                              h.type === "brand"
+                                                ? "bg-emerald-500/15 text-emerald-700 border border-emerald-500/30"
+                                                : "bg-orange-500/15 text-orange-700 border border-orange-500/30"
+                                            }`}
+                                          >
+                                            {h.type === "brand" ? "✓ Self" : `⚠ ${h.term}`}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    )}
                                     <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
                                       <span>r/{post.subreddit}</span>
                                       <span>•</span>
                                       <span>↑ {post.upvotes || 0}</span>
                                       <span>•</span>
                                       <span>💬 {post.total_comments || 0}</span>
+                                      {post.source && (
+                                        <>
+                                          <span>•</span>
+                                          <span className="capitalize">{post.source.replace("_", " ")}</span>
+                                        </>
+                                      )}
                                     </div>
                                     <a
                                       href={post.post_url}
@@ -1144,24 +1293,43 @@ export default function SerpScoutPage() {
                               <div className="space-y-3">
                                 <div className="flex items-center gap-2">
                                   <span className="text-lg">🆕</span>
-                                  <p className="text-sm font-semibold">New Reddit Posts ({newRedditPosts.length})</p>
+                                  <p className="text-sm font-semibold">
+                                    New Reddit Posts ({newRedditPosts.length})
+                                  </p>
                                 </div>
                                 {newRedditPosts.map((post, idx) => (
-                                  <div key={idx} className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4 space-y-2">
+                                  <div
+                                    key={idx}
+                                    className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4 space-y-2"
+                                  >
                                     <p className="text-sm font-semibold text-foreground">
                                       {post.post_title || `Post #${idx + 1}`}
                                     </p>
                                     <p className="text-xs text-muted-foreground line-clamp-2">
-                                      {(post.post_content || '').slice(0, 150)}...
+                                      {(post.post_content || "").slice(0, 150)}
                                     </p>
+                                    {post.mentionHighlights?.length > 0 && (
+                                      <div className="flex flex-wrap gap-1">
+                                        {post.mentionHighlights.map((h, i) => (
+                                          <span
+                                            key={i}
+                                            className={`text-[10px] px-2 py-0.5 rounded-full ${
+                                              h.type === "brand"
+                                                ? "bg-emerald-500/15 text-emerald-700 border border-emerald-500/30"
+                                                : "bg-orange-500/15 text-orange-700 border border-orange-500/30"
+                                            }`}
+                                          >
+                                            {h.type === "brand" ? "✓ Self" : `⚠ ${h.term}`}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    )}
                                     <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
                                       <span>r/{post.subreddit}</span>
                                       <span>•</span>
                                       <span>↑ {post.upvotes || 0}</span>
                                       <span>•</span>
                                       <span>💬 {post.total_comments || 0}</span>
-                                      <span>•</span>
-                                      <span>{post.post_age_hours}h ago</span>
                                     </div>
                                     <a
                                       href={post.post_url}
@@ -1181,35 +1349,44 @@ export default function SerpScoutPage() {
                               <div className="space-y-3">
                                 <div className="flex items-center gap-2">
                                   <span className="text-lg">✨</span>
-                                  <p className="text-sm font-semibold">AI-Suggested Posts to Engage ({suggestedPosts.length})</p>
+                                  <p className="text-sm font-semibold">
+                                    AI-Suggested Posts to Engage ({suggestedPosts.length})
+                                  </p>
                                 </div>
                                 <p className="text-xs text-muted-foreground italic">
-                                  These posts were selected by AI based on your company context and engagement potential
+                                  Selected by AI based on your company context and engagement potential
                                 </p>
                                 {suggestedPosts.map((post, idx) => (
-                                  <div key={idx} className="rounded-lg border-2 border-emerald-500/40 bg-emerald-500/10 p-4 space-y-3">
+                                  <div
+                                    key={idx}
+                                    className="rounded-lg border-2 border-emerald-500/40 bg-emerald-500/10 p-4 space-y-3"
+                                  >
                                     <div className="flex items-start justify-between gap-2">
                                       <p className="text-sm font-semibold text-foreground flex-1">
                                         {post.post_title || `Post #${idx + 1}`}
                                       </p>
                                       {post.engagementScore && (
-                                        <span className="px-2 py-1 rounded-full bg-emerald-600 text-white text-[10px] font-bold">
+                                        <span className="px-2 py-1 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex-shrink-0">
                                           {post.engagementScore}/10
                                         </span>
                                       )}
                                     </div>
                                     <p className="text-xs text-foreground/80 line-clamp-2">
-                                      {(post.post_content || '').slice(0, 150)}...
+                                      {(post.post_content || "").slice(0, 150)}
                                     </p>
                                     {post.engagementReason && (
                                       <div className="rounded bg-emerald-950/20 p-2 space-y-1">
-                                        <p className="text-[10px] font-semibold text-emerald-700 uppercase tracking-wider">Why Engage</p>
+                                        <p className="text-[10px] font-semibold text-emerald-700 uppercase tracking-wider">
+                                          Why Engage
+                                        </p>
                                         <p className="text-xs text-emerald-900">{post.engagementReason}</p>
                                       </div>
                                     )}
                                     {post.engagementStrategy && (
                                       <div className="rounded bg-amber-950/20 p-2 space-y-1">
-                                        <p className="text-[10px] font-semibold text-amber-700 uppercase tracking-wider">Strategy</p>
+                                        <p className="text-[10px] font-semibold text-amber-700 uppercase tracking-wider">
+                                          Strategy
+                                        </p>
                                         <p className="text-xs text-amber-900">{post.engagementStrategy}</p>
                                       </div>
                                     )}
@@ -1232,6 +1409,14 @@ export default function SerpScoutPage() {
                                 ))}
                               </div>
                             )}
+
+                            {topRedditPosts.length === 0 &&
+                              newRedditPosts.length === 0 &&
+                              suggestedPosts.length === 0 && (
+                                <p className="text-sm text-muted-foreground italic">
+                                  No Reddit posts found for this keyword.
+                                </p>
+                              )}
                           </div>
                         )}
                       </div>
@@ -1245,38 +1430,42 @@ export default function SerpScoutPage() {
                           disabled={generatingPosts}
                           className="w-full"
                         >
-                          {generatingPosts ? "Generating..." : "Generate Post Ideas"}
+                          {generatingPosts ? "Generating…" : "Generate Post Ideas"}
                         </Button>
 
                         {generatedPosts.length > 0 && (
                           <div className="space-y-4">
                             <div className="flex items-center gap-2 mb-4">
                               <span className="text-lg">📝</span>
-                              <p className="text-sm font-semibold">AI-Generated Post Content ({generatedPosts.length})</p>
+                              <p className="text-sm font-semibold">
+                                AI-Generated Post Content ({generatedPosts.length})
+                              </p>
                             </div>
-                            <p className="text-xs text-muted-foreground italic mb-4">
-                              Ready-to-post content ideas tailored to your keyword and company context
-                            </p>
                             {generatedPosts.map((post, idx) => (
-                              <div key={idx} className="rounded-lg border-2 border-blue-500/40 bg-blue-500/5 p-4 space-y-3">
+                              <div
+                                key={idx}
+                                className="rounded-lg border-2 border-blue-500/40 bg-blue-500/5 p-4 space-y-3"
+                              >
                                 <div className="flex items-start justify-between gap-2">
                                   <p className="text-sm font-semibold text-foreground flex-1">
                                     {post.title}
                                   </p>
                                   {post.subreddit && (
-                                    <span className="px-2 py-1 rounded-full bg-blue-600 text-white text-[10px] font-bold">
+                                    <span className="px-2 py-1 rounded-full bg-blue-600 text-white text-[10px] font-bold flex-shrink-0">
                                       r/{post.subreddit}
                                     </span>
                                   )}
                                 </div>
-                                <div className="bg-background rounded p-3 space-y-2">
+                                <div className="bg-background rounded p-3">
                                   <p className="text-xs text-foreground/90 whitespace-pre-wrap">
                                     {post.content}
                                   </p>
                                 </div>
                                 {post.rationale && (
                                   <div className="rounded bg-blue-950/20 p-2 space-y-1">
-                                    <p className="text-[10px] font-semibold text-blue-700 uppercase tracking-wider">Why This Works</p>
+                                    <p className="text-[10px] font-semibold text-blue-700 uppercase tracking-wider">
+                                      Why This Works
+                                    </p>
                                     <p className="text-xs text-blue-900">{post.rationale}</p>
                                   </div>
                                 )}
@@ -1304,183 +1493,186 @@ export default function SerpScoutPage() {
                     {/* Citations Tab */}
                     {analysisTab === "citations" && (
                       <div className="space-y-4">
-                          <p className="text-[11px] text-muted-foreground">
-                            Step 4 prompts are used by default.
+                        <p className="text-[11px] text-muted-foreground">
+                          Prompts from Step 4 are used by default.
+                        </p>
+                        {citationPrompts.length > 0 ? (
+                          <div className="flex flex-wrap gap-2">
+                            {citationPrompts.map((prompt, idx) => (
+                              <span
+                                key={`${prompt}-${idx}`}
+                                className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700"
+                              >
+                                {prompt}
+                              </span>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-xs text-muted-foreground">
+                            No prompts found. Add prompts in Step 4 or add a custom one below.
                           </p>
-                          {citationPrompts.length ? (
-                            <div className="flex flex-wrap gap-2">
-                              {citationPrompts.map((prompt, idx) => (
-                                <span
-                                  key={`${prompt}-${idx}`}
-                                  className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700"
-                                >
-                                  {prompt}
-                                </span>
-                              ))}
-                            </div>
-                          ) : (
-                            <p className="text-xs text-muted-foreground">
-                              Prompts from Step 4 are listed here automatically; add one above only if you need a custom test.
-                            </p>
-                          )}
-                          <Button
-                            onClick={handleTestCitations}
-                            disabled={citationLoading}
-                            className="w-full"
-                          >
-                          {citationLoading ? "Testing..." : "Test Reddit Citations"}
+                        )}
+
+                        <Button
+                          onClick={handleTestCitations}
+                          disabled={citationLoading}
+                          className="w-full"
+                        >
+                          {citationLoading ? "Testing…" : "Test Reddit Citations"}
                         </Button>
 
                         {citationResults && (
                           <div className="space-y-6">
                             {citationSummary && (
                               <div className="rounded-lg border border-border bg-card/40 p-4 space-y-3">
-                                <div className="flex flex-wrap items-center gap-3">
-                                  <span className="text-xs uppercase tracking-widest text-muted-foreground">
-                                    Citation Summary
-                                  </span>
-                                  <span className="text-xs text-muted-foreground">
-                                    {citationSummary.total} model runs
-                                  </span>
-                                </div>
+                                <span className="text-xs uppercase tracking-widest text-muted-foreground">
+                                  Citation Summary
+                                </span>
                                 <div className="flex flex-wrap gap-3">
                                   <div className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700">
-                                    {citationDomain || 'Target domain'} cited in {citationSummary.citedByTarget}/{citationSummary.total}
+                                    {citationSummary.totalPrompts} prompt{citationSummary.totalPrompts !== 1 ? "s" : ""} tested
                                   </div>
-                                  <div className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs text-amber-700">
-                                    Reddit cited in {citationSummary.citedByReddit}/{citationSummary.total}
+                                  <div className="rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-xs text-orange-700">
+                                    {citationSummary.totalPosts} Reddit post{citationSummary.totalPosts !== 1 ? "s" : ""} found
                                   </div>
+                                  {citationSummary.selfMentions > 0 && (
+                                    <div className="rounded-full border border-emerald-500/50 bg-emerald-500/20 px-3 py-1 text-xs text-emerald-800 font-medium">
+                                      ✓ {citationSummary.selfMentions} self mention{citationSummary.selfMentions !== 1 ? "s" : ""}
+                                    </div>
+                                  )}
+                                  {Object.entries(citationSummary.competitorMentionCounts || {}).map(([comp, count]) => (
+                                    <div key={comp} className="rounded-full border border-orange-500/50 bg-orange-500/15 px-3 py-1 text-xs text-orange-800">
+                                      ⚠ {comp}: {count} mention{count !== 1 ? "s" : ""}
+                                    </div>
+                                  ))}
+                                  {citationSummary.totalErrors > 0 && (
+                                    <div className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs text-red-700">
+                                      {citationSummary.totalErrors} error{citationSummary.totalErrors !== 1 ? "s" : ""}
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                             )}
-                            {/* Group by prompt */}
-                            {citationPrompts.map((prompt, pIdx) => {
-                              const promptResults =
-                                citationResults.records
-                                  ?.map((record) => {
-                                    const result = record.results?.find((r) => r.prompt === prompt);
-                                    if (!result) return null;
-                                    const targetMatch = result.matches?.find((m) => m.domain === citationDomain);
-                                    const redditMatch = result.matches?.find((m) =>
-                                      m.domain?.toLowerCase().includes("reddit.com")
-                                    );
-                                    if (!targetMatch && !redditMatch) return null;
-                                    return {
-                                      model: record.model,
-                                      timestamp: record.timestamp,
-                                      result,
-                                      targetMatch,
-                                      redditMatch
-                                    };
-                                  })
-                                  .filter(Boolean) || [];
 
+                            {/* One section per tested prompt */}
+                            {citationResults.records?.map((record, pIdx) => {
+                              const modelEntries = Object.entries(record.models || {});
+                              const hasAnyPosts = modelEntries.some(
+                                ([, v]) => Array.isArray(v) && v.length > 0
+                              );
                               return (
-                                <div key={pIdx} className="space-y-3 border-b border-border pb-4 last:border-b-0">
+                                <div
+                                  key={pIdx}
+                                  className="space-y-3 border-b border-border pb-4 last:border-b-0"
+                                >
                                   <div className="sticky top-0 bg-card/80 backdrop-blur-sm py-2">
                                     <p className="text-sm font-semibold text-foreground">
-                                      {pIdx + 1}. {prompt}
+                                      {pIdx + 1}. {record.prompt}
                                     </p>
                                   </div>
-
                                   <div className="space-y-2">
-                                    {promptResults.map((item, idx) => {
-                                      const targetRank = item.targetMatch?.ranks?.[0];
-                                      const redditRank = item.redditMatch?.ranks?.[0];
-                                      const hasTarget = Boolean(item.targetMatch);
-                                      const hasReddit = Boolean(item.redditMatch);
-
-                                      return (
-                                        <div
-                                          key={idx}
-                                          className={`rounded-lg border p-3 ${
-                                            hasTarget || hasReddit
-                                              ? "border-green-500/30 bg-green-500/5"
-                                              : "border-amber-500/30 bg-amber-500/5"
-                                          }`}
-                                        >
-                                          <div className="flex items-start justify-between gap-3">
-                                            <div className="flex-1">
-                                              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                                                {item.model}
-                                              </p>
-                                            </div>
-                                            <div className="flex flex-wrap items-center gap-2">
-                                              {hasTarget ? (
-                                                <span className="rounded-full bg-emerald-600/10 px-2 py-1 text-[10px] font-semibold text-emerald-700">
-                                                  {citationDomain || 'Target'} #{targetRank || '—'}
-                                                </span>
-                                              ) : (
-                                                <span className="rounded-full bg-amber-500/10 px-2 py-1 text-[10px] font-semibold text-amber-700">
-                                                  Target not cited
-                                                </span>
-                                              )}
-                                              {hasReddit ? (
-                                                <span className="rounded-full bg-orange-500/10 px-2 py-1 text-[10px] font-semibold text-orange-700">
-                                                  Reddit #{redditRank || '—'}
-                                                </span>
-                                              ) : (
-                                                <span className="rounded-full bg-muted px-2 py-1 text-[10px] font-semibold text-muted-foreground">
-                                                  Reddit not cited
-                                                </span>
-                                              )}
-                                            </div>
-                                          </div>
-
-                                          {(hasTarget || hasReddit) && (
-                                            <div className="mt-3 grid gap-2 md:grid-cols-2">
-                                              {hasTarget && (
-                                                <div className="rounded-md border border-emerald-500/30 bg-emerald-500/10 p-2 text-xs text-emerald-800">
-                                                  <p className="font-semibold">Target cited</p>
-                                                  <p className="font-mono text-[11px]">{item.targetMatch.domain}</p>
-                                                  {item.targetMatch.cited_urls?.length > 0 && (
-                                                    <p className="mt-1 break-words">
-                                                      {item.targetMatch.cited_urls.join(", ")}
-                                                    </p>
-                                                  )}
-                                                </div>
-                                              )}
-                                              {hasReddit && (
-                                                <div className="rounded-md border border-orange-500/30 bg-orange-500/10 p-2 text-xs text-orange-800">
-                                                  <p className="font-semibold">Reddit cited</p>
-                                                  <p className="font-mono text-[11px]">{item.redditMatch.domain}</p>
-                                                  {item.redditMatch.cited_urls?.length > 0 && (
-                                                    <p className="mt-1 break-words">
-                                                      {item.redditMatch.cited_urls.join(", ")}
-                                                    </p>
-                                                  )}
-                                                </div>
-                                              )}
-                                            </div>
-                                          )}
-                                        </div>
-                                      )
-                                    })}
-
-                                    {!promptResults.length && (
+                                    {!hasAnyPosts && (
                                       <p className="text-xs text-muted-foreground italic">
-                                        No Reddit citations found for this prompt.
+                                        No Reddit posts found for this prompt.
                                       </p>
                                     )}
+                                    {modelEntries.map(([model, value]) => {
+                                      if (value?.error) {
+                                        return (
+                                          <div
+                                            key={model}
+                                            className="rounded-lg border p-3 border-red-500/30 bg-red-500/5"
+                                          >
+                                            <span className="text-xs font-semibold text-red-600">
+                                              {model}: {value.error}
+                                            </span>
+                                          </div>
+                                        );
+                                      }
+                                      const posts = Array.isArray(value) ? value : [];
+                                      if (!posts.length) {
+                                        return (
+                                          <div
+                                            key={model}
+                                            className="rounded-lg border p-3 border-border/40 bg-muted/30"
+                                          >
+                                            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                                              {model}
+                                            </span>
+                                            <span className="text-xs text-muted-foreground ml-2 italic">
+                                              — No valid Reddit post URLs returned
+                                            </span>
+                                          </div>
+                                        );
+                                      }
+                                      return (
+                                        <div
+                                          key={model}
+                                          className="rounded-lg border p-3 border-orange-500/30 bg-orange-500/5"
+                                        >
+                                          <div className="flex items-center gap-2 mb-2">
+                                            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                                              {model}
+                                            </span>
+                                            <span className="text-xs text-muted-foreground">
+                                              ({posts.length} Reddit links)
+                                            </span>
+                                          </div>
+                                          <ol className="list-decimal pl-5 space-y-2">
+                                            {posts.map((post, pidx) => (
+                                              <li key={post.url + "-" + pidx} className="text-xs space-y-1">
+                                                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                                                  <a
+                                                    href={post.url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-emerald-700 hover:underline font-semibold"
+                                                  >
+                                                    {post.title || post.url}
+                                                  </a>
+                                                  {post.subreddit && (
+                                                    <span className="text-muted-foreground">
+                                                      r/{post.subreddit}
+                                                    </span>
+                                                  )}
+                                                  {post.mentionHighlights?.length > 0 &&
+                                                    post.mentionHighlights.map((h, hi) => (
+                                                      <span
+                                                        key={hi}
+                                                        className={`text-[10px] px-2 py-0.5 rounded-full ${
+                                                          h.type === "brand"
+                                                            ? "bg-emerald-500/15 text-emerald-700 border border-emerald-500/30"
+                                                            : "bg-orange-500/15 text-orange-700 border border-orange-500/30"
+                                                        }`}
+                                                      >
+                                                        {h.type === "brand" ? "✓ Self" : `⚠ ${h.term}`}
+                                                      </span>
+                                                    ))}
+                                                </div>
+                                                {post.reason && (
+                                                  <p className="text-muted-foreground italic">
+                                                    {post.reason}
+                                                  </p>
+                                                )}
+                                              </li>
+                                            ))}
+                                          </ol>
+                                        </div>
+                                      );
+                                    })}
                                   </div>
                                 </div>
-                              )
+                              );
                             })}
                           </div>
                         )}
 
                         {!citationResults && !citationLoading && (
                           <p className="text-sm text-muted-foreground italic text-center py-6">
-                            Click "Test LLM Citations" to analyze ranking potential
+                            Click "Test Reddit Citations" to analyze LLM ranking potential
                           </p>
                         )}
                       </div>
-                    )}
-
-                    {!analysisTab && (
-                      <p className="text-sm text-muted-foreground text-center py-6">
-                        Select a tab above to start analysis
-                      </p>
                     )}
                   </CardContent>
                 </Card>
