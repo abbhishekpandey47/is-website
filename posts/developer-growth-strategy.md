@@ -124,7 +124,7 @@ Distributing in subreddits works because:
 
 Traffic without conversion is wasted engineering investment. Developers who land on your website should reach activation in just minutes\!
 
-1. #### **Improve Product Documentation Structure**
+#### 1. **Improve Product Documentation Structure**
 
 High-performing developer-first startups like Stripe built growth on product documentation. Your product docs must include:
 
@@ -137,7 +137,7 @@ High-performing developer-first startups like Stripe built growth on product doc
 
 ![](/PostImages/developer-growth-strategy/6.webp)
 
-2. #### **Structured Release Notes**
+#### 2. **Structured Release Notes**
 
 When structuring release notes, make sure they are:
 
@@ -146,9 +146,7 @@ When structuring release notes, make sure they are:
 * Infrastructure improvements are explained  
 * Performance benchmarks are shown
 
-#### 
-
-3. #### **Dedicated Comparison Landing Pages**
+#### 3. **Dedicated Comparison Landing Pages**
 
 Comparison pages convert evaluation traffic at 3-8% in many developer categories. Structure:
 
