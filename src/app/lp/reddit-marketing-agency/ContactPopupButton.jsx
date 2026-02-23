@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
+import { useRouter } from "next/navigation";
 import CalendarBooking from "../../contact/page";
 
 export default function ContactPopupButton({
@@ -12,12 +13,14 @@ export default function ContactPopupButton({
   textSize = "text-sm",
   textWeight = "quicksand-semibold",
   borderColor = "#3b82f6",
+  thankYouPath = null,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [bookingDetails, setBookingDetails] = useState(null);
   const portalRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -48,6 +51,27 @@ export default function ContactPopupButton({
     setIsOpen(false);
     setShowThankYou(false);
     setBookingDetails(null);
+  };
+
+  const storeBookingData = (details) => {
+    if (!thankYouPath) return;
+    if (typeof window === "undefined") return;
+    try {
+      window.localStorage.setItem("bookingSelected", JSON.stringify(details));
+    } catch (error) {
+      console.error("Unable to persist booking details", error);
+    }
+  };
+
+  const handleBookingSuccess = (details) => {
+    setBookingDetails(details);
+    if (thankYouPath) {
+      storeBookingData(details);
+      closeModal();
+      router.push(thankYouPath);
+      return;
+    }
+    setShowThankYou(true);
   };
 
   const openModal = () => setIsOpen(true);
@@ -136,10 +160,7 @@ export default function ContactPopupButton({
                     </div>
                   ) : (
                     <CalendarBooking 
-                      onSuccess={(details) => {
-                        setBookingDetails(details);
-                        setShowThankYou(true);
-                      }} 
+                      onSuccess={handleBookingSuccess} 
                       forceAdsApp={true} 
                     />
                   )}
