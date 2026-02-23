@@ -64,13 +64,28 @@ export default function ContactPopupButton({
   };
 
   const handleBookingSuccess = (details) => {
+    console.log("✅ Booking success called with:", details);
     setBookingDetails(details);
     if (thankYouPath) {
+      console.log("📍 Redirecting to:", thankYouPath);
       storeBookingData(details);
-      closeModal();
+      
+      // Explicitly remove the portal DOM element
+      if (portalRef.current && portalRef.current.parentNode) {
+        console.log("🗑️ Removing portal DOM element");
+        portalRef.current.parentNode.removeChild(portalRef.current);
+      }
+      
+      // Close modal state
+      setIsOpen(false);
+      setShowThankYou(false);
+      
+      // Navigate immediately after cleanup
+      console.log("🚀 Calling router.push");
       router.push(thankYouPath);
       return;
     }
+    console.log("💬 Showing inline thank you");
     setShowThankYou(true);
   };
 
