@@ -46,17 +46,17 @@ export default function RedditMarketingAgencyClient() {
 
     </div>
     <div>
+          <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] my-10"></div>
+
+      <DeferredSection rootMargin="500px 0px">
+        <Cta />
+      </DeferredSection>
       <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] mb-10 mt-6"></div>
 
       <DeferredSection rootMargin="500px 0px">
         <FAQSection />
       </DeferredSection>
 
-      <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] my-10"></div>
-
-      <DeferredSection rootMargin="500px 0px">
-        <Cta />
-      </DeferredSection>
     </div>
     </>
   );

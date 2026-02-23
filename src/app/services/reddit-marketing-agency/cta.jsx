@@ -3,7 +3,7 @@ import CalendarBooking from "../../calendarButton";
 
 export default function Cta() {
     return (
-        <div className="px-8 md:px-[52px] pb-16 md:pb-[80px]">
+        <div className="px-8 py-16">
             <div
                 className="max-w-[1240px] mx-auto text-center relative overflow-hidden rounded-2xl"
                 style={{
