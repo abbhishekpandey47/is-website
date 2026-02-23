@@ -80,7 +80,7 @@ export default function AIChallengesSection() {
                    <div className="flex flex-col items-center mt-4">
                         {/* Center - Book a Demo button */}
                         <div className="flex flex-col items-center mt-4">
-                            <ContactPopupButton buttonText="Book a Strategy Call" width="w-52" height="h-11" textSize="text-sm" textWeight="quicksand-semibold" />
+                            <ContactPopupButton buttonText="Book a Strategy Call" width="w-52" height="h-11" textSize="text-sm" textWeight="quicksand-semibold" thankYouPath="/lp/reddit-marketing-agency/thankyou" />
                             <p className="text-[0.75rem] px-[1rem] py-[0.75rem]">Free Reddit audit included</p>
                         </div>
                     </div>

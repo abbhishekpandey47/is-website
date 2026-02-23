@@ -120,6 +120,7 @@ const FAQSection = ({faqsData=faqData}) => {
                                     textSize="text-sm"
                                     textWeight="quicksand-semibold"
                                     bgGradient="bg-[#5F64FF]"
+                                    thankYouPath="/lp/reddit-marketing-agency/thankyou"
                                 />
                                 
                             </div>

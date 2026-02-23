@@ -71,6 +71,7 @@ export default function AIStartupLanding({customPadding="pt-20"}) {
                 height="h-11"
                 textSize="text-sm"
                 textWeight="quicksand-semibold"
+                thankYouPath="/lp/reddit-marketing-agency/thankyou"
               />
               <p className="text-[0.75rem] px-[1rem] py-[0.75rem]">
                 Free Reddit audit included

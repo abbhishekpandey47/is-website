@@ -30,6 +30,7 @@ const AdsHeader = () => {
             height="h-9 sm:h-10 md:h-11"
             textSize="text-xs sm:text-sm"
             textWeight="quicksand-semibold"
+            thankYouPath="/lp/reddit-marketing-agency/thankyou" 
           />
           <p className="text-[0.65rem] sm:text-[0.75rem] text-gray-400">{auditText}</p>
         </div>

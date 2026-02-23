@@ -70,6 +70,7 @@ export default function AuditWhatYouGet() {
                 height="h-11"
                 textSize="text-sm"
                 textWeight="quicksand-semibold"
+                thankYouPath="/lp/reddit-marketing-agency/thankyou"
               />
     </div>
           </div>
