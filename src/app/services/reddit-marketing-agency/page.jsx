@@ -7,7 +7,7 @@ import DeferredSection from "@/Components/DeferredSection";
 import ConversationToRevenue from "./conversationToRevenue";
 import RespondCaseStudy from "./respondCaseStudy";
 
-const Cta = dynamic(() => import("../../lp/reddit-marketing-agency/cta"));
+const Cta = dynamic(() => import("./cta"));
 const RedditMarketingSlide = dynamic(() => import("../../lp/reddit-marketing-agency/why"));
 const InfraMethodologyTimeline = dynamic(() => import("../../lp/reddit-marketing-agency/methodology"));
 const RedditServiceCards = dynamic(() => import("../../lp/reddit-marketing-agency/whatYouGet"));
