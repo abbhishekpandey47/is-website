@@ -80,9 +80,12 @@ export default function ContactPopupButton({
       setIsOpen(false);
       setShowThankYou(false);
       
-      // Navigate immediately after cleanup
-      console.log("🚀 Calling router.push");
-      router.push(thankYouPath);
+      // Use window.location.href instead of router.push (more reliable from portal)
+      console.log("🚀 Calling window.location.href");
+      // Add small delay to ensure state updates
+      setTimeout(() => {
+        window.location.href = thankYouPath;
+      }, 50);
       return;
     }
     console.log("💬 Showing inline thank you");
