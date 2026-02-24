@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
@@ -157,10 +157,17 @@ const PostsPage = () => {
     ),
   ];
 
-  const statuses = [
-    "all",
-    ...new Set(allItems.map((item) => item.type === "post" ? item.status : item.posted_comment_status)),
-  ];
+  const statuses = useMemo(() => {
+    const statusSet = new Set();
+    allItems.forEach((item) => {
+      [item.status, item.posted_comment_status].forEach((statusValue) => {
+        if (statusValue) {
+          statusSet.add(String(statusValue).toLowerCase());
+        }
+      });
+    });
+    return ["all", ...statusSet];
+  }, [allItems]);
 
   // Helper to format status keys into human-friendly labels
   const formatStatusLabel = (status) => {
@@ -245,8 +252,14 @@ const PostsPage = () => {
       selectedCategory === "select" ||
       item.category === selectedCategory;
 
-    const matchesStatus =
-      selectedStatus === "all" || item.status === selectedStatus || item.posted_comment_status === selectedStatus;
+    const matchesStatus = (() => {
+      if (selectedStatus === "all") return true;
+      const normalizedSelectedStatus = selectedStatus?.toLowerCase();
+      return (
+        item.status?.toLowerCase() === normalizedSelectedStatus ||
+        item.posted_comment_status?.toLowerCase() === normalizedSelectedStatus
+      );
+    })();
 
     const matchesType =
       selectedType === "all" || item.type === selectedType;

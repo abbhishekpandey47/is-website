@@ -3,7 +3,7 @@ import { auth } from "@/lib/firebaseClient";
 import { onAuthStateChanged } from "firebase/auth";
 import { BarChart3, ExternalLink, Plus, Search ,Download, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { StatusCard } from "@/Components/StatusCard";
 import { Badge } from "@/Components/ui/badge";
@@ -167,10 +167,23 @@ useEffect(() => {
 }, [searchQuery, selectedType, selectedCategory,dateRange]);
     
   const categories = ["all", ...new Set(allItems.map((item) => item.category).filter(Boolean))];
-  const statuses = [
-    "all",
-    ...new Set(allItems.map((item) => (item.type === "post" ? item.status : item.posted_comment_status))),
-  ];
+  const statuses = useMemo(() => {
+    const normalizedMap = new Map();
+    const addStatus = (statusValue) => {
+      if (!statusValue) return;
+      const normalized = String(statusValue).toLowerCase();
+      if (!normalizedMap.has(normalized)) {
+        normalizedMap.set(normalized, statusValue);
+      }
+    };
+
+    allItems.forEach((item) => {
+      addStatus(item.status);
+      addStatus(item.posted_comment_status);
+    });
+
+    return ["all", ...normalizedMap.values()];
+  }, [allItems]);
 
   // Helper to format status keys into human-friendly labels
   const formatStatusLabel = (status) => {
@@ -223,8 +236,14 @@ useEffect(() => {
 
     const matchesCategory =
       selectedCategory === "all" || item.category === selectedCategory;
-    const matchesStatus =
-      selectedStatus === "all" || item.status === selectedStatus || item.posted_comment_status === selectedStatus;
+    const matchesStatus = (() => {
+      if (selectedStatus === "all") return true;
+      const normalizedSelected = selectedStatus?.toLowerCase();
+      return (
+        item.status?.toLowerCase() === normalizedSelected ||
+        item.posted_comment_status?.toLowerCase() === normalizedSelected
+      );
+    })();
     const matchesType =
       selectedType === "all" || item.type === selectedType;
     const matchesDate = matchesDateRange(item, dateRange);

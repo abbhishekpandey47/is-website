@@ -7,7 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { ArrowDown, ArrowUp, ArrowUpDown, Edit, Plus, Save, Search, Trash2, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "react-quill-new/dist/quill.snow.css";
 import { Badge } from "../../../Components/ui/badge";
 import { Button } from "../../../Components/ui/button";
@@ -192,7 +192,22 @@ const PostsPage = () => {
     })),
 ];
   const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
-  const statuses = ["all", ...new Set(posts.map((post) => post.status).filter(Boolean))];
+  const statuses = useMemo(() => {
+    const normalized = new Map();
+    const addStatus = (value) => {
+      if (!value) return;
+      const key = String(value).toLowerCase();
+      if (!normalized.has(key)) {
+        normalized.set(key, value);
+      }
+    };
+
+    posts.forEach((post) => {
+      addStatus(post.status);
+    });
+
+    return ["all", ...normalized.values()];
+  }, [posts]);
 
   // Date range filter (inclusive)
   const matchesDateRange = (post, range) => {
@@ -220,8 +235,10 @@ const PostsPage = () => {
 
     const matchesCategory =
       selectedCategory === "all" || post.category === selectedCategory;
-    const matchesStatus =
-      selectedStatus === "all" || post.status === selectedStatus;
+    const matchesStatus = (() => {
+      if (selectedStatus === "all") return true;
+      return post.status?.toLowerCase() === selectedStatus?.toLowerCase();
+    })();
     const matchCompanyId =
     selectedCompanyId === "all" || post.company_id === selectedCompanyId;
     const matchesDate = matchesDateRange(post, dateRange);
