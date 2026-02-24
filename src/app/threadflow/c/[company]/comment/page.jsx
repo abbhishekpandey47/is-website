@@ -2,7 +2,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { Edit, Plus, Save, Search, Trash2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/Components/ui/badge";
 import { Button } from "@/Components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
@@ -142,7 +142,22 @@ const PostsPage = () => {
 
 
 const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
-const statuses = ["all", ...new Set(posts.map((post) => post.posted_comment_status).filter(Boolean))];
+const statuses = useMemo(() => {
+  const normalized = new Map();
+  const addStatus = (value) => {
+    if (!value) return;
+    const key = String(value).toLowerCase();
+    if (!normalized.has(key)) {
+      normalized.set(key, value);
+    }
+  };
+
+  posts.forEach((post) => {
+    addStatus(post.posted_comment_status);
+  });
+
+  return ["all", ...normalized.values()];
+}, [posts]);
 
   // Date range filter (inclusive)
   const matchesDateRange = (post, range) => {
@@ -169,8 +184,10 @@ const filteredPosts = posts.filter((post) => {
 
     const matchesCategory =
       selectedCategory === "all" || post.category === selectedCategory;
-    const matchesStatus =
-      selectedStatus === "all" || post.posted_comment_status === selectedStatus;
+    const matchesStatus = (() => {
+      if (selectedStatus === "all") return true;
+      return post.posted_comment_status?.toLowerCase() === selectedStatus?.toLowerCase();
+    })();
     const matchesDate = matchesDateRange(post, dateRange);
 
     return matchesSearch && matchesCategory && matchesStatus && matchesDate;
