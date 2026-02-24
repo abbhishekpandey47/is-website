@@ -137,11 +137,11 @@ export default function ConversationToRevenue() {
                                         <div style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden', width: '100%', minHeight: 200, maxHeight: 340, background: '#222' }}>
                                             <img src="/reddit/caseStudy.svg" alt="Case study visual" style={{ width: '100%', height: '100%', objectFit: 'cover', borderTopLeftRadius: 16, borderTopRightRadius: 16 }} />
                                         </div>
-                                                                                <div style={{ background: '#0e0b1b', border: '1px solid rgba(119,119,119,0.5)', borderRadius: 22.95, padding: 24, marginTop: -24, minHeight: 150, boxSizing: 'border-box' }}>
+                                                                                <div style={{ background: '#0e0b1b', border: '1px solid rgba(119,119,119,0.5)', borderRadius: 22.95, padding: 24, marginTop: -50, minHeight: 150, boxSizing: 'border-box' }}>
                                                                                         <div style={{ color: '#f2f2f2', fontWeight: 600, fontSize: 19.5, fontFamily: 'Inter, sans-serif', marginBottom: 8 }}>
                                                                                                 Scaling Community-Led Discovery: How Infrasity Improved Visibility and Sentiment for Respond.io
                                                                                         </div>
-                                                                                        <div style={{ color: '#ebebeb', fontWeight: 500, fontSize: 14.6, fontFamily: 'Inter, sans-serif', marginBottom: 16 }}>
+                                                                                        <div style={{ color: '#ebebeb', fontWeight: 500, fontSize: 14.6, fontFamily: 'Inter, sans-serif'}}>
                                                                                                 Read the full case study to see how we helped Respond.io identify high-impact communities, optimize engagement strategies, and build a sustainable presence on Reddit that drives growth.
                                                                                         </div>
                                                                                 </div>
