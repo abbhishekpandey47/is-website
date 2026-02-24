@@ -5,7 +5,7 @@ export default function ConversationToRevenue() {
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
-                        B2B SaaS Teams Are Winning on Reddit. Here’s What That Looks Like.
+                        <span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>B2B SaaS Teams{" "}</span>Are Winning on Reddit. Here’s What That Looks Like.
                     </h2>
                 </div>
                 <div className="flex justify-center my-6 mb-8">
@@ -142,7 +142,7 @@ export default function ConversationToRevenue() {
                                                                                                 Scaling Community-Led Discovery: How Infrasity Improved Visibility and Sentiment for Respond.io
                                                                                         </div>
                                                                                         <div style={{ color: '#ebebeb', fontWeight: 500, fontSize: 14.6, fontFamily: 'Inter, sans-serif', marginBottom: 16 }}>
-                                                                                                Scaling Community-Led Discovery: How Infrasity Improved Visibility and Sentiment for Respond.io
+                                                                                                Read the full case study to see how we helped Respond.io identify high-impact communities, optimize engagement strategies, and build a sustainable presence on Reddit that drives growth.
                                                                                         </div>
                                                                                 </div>
                                       </a>

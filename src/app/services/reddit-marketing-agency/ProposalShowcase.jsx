@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import ContactPopupButton from '@/app/lp/reddit-marketing-agency/ContactPopupButton';
 
 const detailItems = [
   'Competitor visibility ratio analysis (Razorpay 55% / Cashfree 30% / PayU 15%)',
@@ -25,7 +26,7 @@ export default function ProposalShowcase() {
         background: 'linear-gradient(180deg, transparent 0%, rgba(139,124,232,0.03) 50%, transparent 100%)',
       }}
     >
-      <div className="max-w-6xl mx-auto text-center relative z-10">
+      <div className="max-w-6xl mx-auto text-center relative z-10 mb-4">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
                        Proposals That Read Like{' '}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>Research Reports</span>
@@ -36,11 +37,9 @@ export default function ProposalShowcase() {
                 </div>
 
                 {/* Description */}
-                <div className="max-w-[70%] mx-auto mb-8">
+                <div className="max-w-[80%] mx-auto mb-8">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
                         From competitor share of voice to KPI forecasts, every proposal is built like an intelligence brief, not a marketing pitch.
-
-
                     </p>
                 </div>
             </div>
@@ -59,13 +58,13 @@ export default function ProposalShowcase() {
         }}
       />
 
-      <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-[52px]">
+      <div className="max-w-[1480px] mx-auto px-5 sm:px-8 lg:px-[52px]">
         <div
           style={{
             display: 'grid',
             alignItems: 'center',
           }}
-          className="grid-cols-1 gap-10 md:grid-cols-[1fr_1.2fr] md:gap-16 lg:gap-[64px]"
+          className="grid-cols-1 gap-5 md:grid-cols-[1fr_1.2fr] md:gap-8 lg:gap-[32px]"
         >
 
           {/* LEFT COLUMN — copy */}
@@ -135,6 +134,16 @@ export default function ProposalShowcase() {
                 </div>
               ))}
             </div>
+            <div className="mt-8">
+               <ContactPopupButton
+                buttonText="Get your free Proposal"
+                width="w-52"
+                height="h-11"
+                textSize="text-sm"
+                textWeight="quicksand-semibold"
+                thankYouPath="/lp/reddit-marketing-agency/thankyou"
+              />
+              </div>
           </div>
 
             {/* RIGHT COLUMN — dashboard mock */}

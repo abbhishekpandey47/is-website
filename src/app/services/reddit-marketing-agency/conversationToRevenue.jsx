@@ -30,11 +30,11 @@ const conversationCards = [
 export default function ConversationToRevenue() {
     // For brevity, only the main container and a sample step are shown. Expand as needed for full fidelity.
     return (
-        <div className=" p-8 md:p-[4rem] md:px-[5rem] -mt-8">
+        <div className="p-8 md:p-[4rem] md:px-[5rem]">
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
-                        The Reddit Growth System Built for High-Growth B2B Startups
+                        The Reddit Growth System Built for High-Growth{' '}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>B2B Startups</span>
                     </h2>
                 </div>
                 <div className="flex justify-center my-6 mb-8">

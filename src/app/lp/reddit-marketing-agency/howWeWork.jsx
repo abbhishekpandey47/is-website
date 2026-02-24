@@ -23,7 +23,7 @@ export default function AIChallengesSection() {
             },
         ];
     return (
-        <div className="pb-10 p-8 md:p-[2rem]" >
+        <div className="pb-10 p-8 pt-[2rem] md:p-[4rem]" >
             <div className="max-w-7xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
@@ -77,7 +77,7 @@ export default function AIChallengesSection() {
                             </div>
                         ))}
                 </div>
-                   <div className="flex flex-col items-center mt-4">
+                   <div className="flex flex-col items-center mt-8">
                         {/* Center - Book a Demo button */}
                         <div className="flex flex-col items-center mt-4">
                             <ContactPopupButton buttonText="Book a Strategy Call" width="w-52" height="h-11" textSize="text-sm" textWeight="quicksand-semibold" thankYouPath="/lp/reddit-marketing-agency/thankyou" />

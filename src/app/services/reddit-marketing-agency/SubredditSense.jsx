@@ -12,9 +12,9 @@ const detailItems = [
 
 const SubredditSense = () => (
   <section
-    className="py-2 pb-24 md:py-4 md:pb-32"
+    className="py-2 pb-20 md:py-4 md:pb-24"
   >
-     <div className="max-w-6xl mx-auto text-center relative z-10">
+     <div className="max-w-6xl mx-auto text-center relative z-10 mb-4">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
                         See Exactly Where Your Brand{' '}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>Lives</span> on Reddit
@@ -26,13 +26,13 @@ const SubredditSense = () => (
                 </div>
 
                 {/* Description */}
-                <div className="max-w-[70%] mx-auto mb-8">
+                <div className="max-w-[70%] mx-auto mb-16">
                     <p className="text-[17px] md:text-[17px] text-gray-300 leading-relaxed font-light">
 Every mention, every thread, and every competitor continuously tracked, measured, and turned into actionable Reddit intelligence.
                     </p>
                 </div>
             </div>
-    <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-[52px]">
+    <div className="max-w-[1480px] mx-auto px-5 sm:px-8 lg:px-[52px]">
       <div
         style={{
           display: 'grid',
@@ -43,7 +43,7 @@ Every mention, every thread, and every competitor continuously tracked, measured
      
 
         {/* LEFT COLUMN — copy */}
-        <div>
+        <div style={{height: '100%'}}>
 
           {/* Body */}
           <p
@@ -51,7 +51,6 @@ Every mention, every thread, and every competitor continuously tracked, measured
               fontSize: 15,
               color: 'white',
               lineHeight: 1.85,
-              marginTop: 24,
               marginBottom: 24,
             }}
           >

@@ -28,11 +28,11 @@ const CheckIcon = ({ className = "" }) => (
 
 export default function AuditWhatYouGet() {
   return (
-    <section className="relative px-6 md:px-10 pt-12 pb-8">
+    <section className="relative px-6 md:px-10 pt-24 pb-8">
          <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
-                      Your Reddit Opportunity Mapped in One Audit
+                      Your Reddit Opportunity Mapped in{' '}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>One Audit</span>
                     </h2>
                 </div>
                 <div className="flex justify-center my-6 mb-8">
