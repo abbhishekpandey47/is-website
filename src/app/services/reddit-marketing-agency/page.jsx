@@ -33,8 +33,8 @@ export default function RedditMarketingAgencyClient() {
       <ConversationToRevenue/>
       <ProposalShowcase />
       <SubredditSense />
-      <RedditMarketingSlide />
       <InfraMethodologyTimeline />
+      <RedditMarketingSlide />
       {/* <WhyAI /> */}
 
       <RedditServiceCards />
