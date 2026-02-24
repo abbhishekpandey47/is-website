@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const detailItems = [
   'Total mention count with historical trend (7-day moving average)',
-  'Subreddit activity heatmap — see where volume is concentrated by time period',
+  'Subreddit activity heatmap see where volume is concentrated by time period',
   'Topic cluster detection: what conversations are driving your mentions',
   'Positive sentiment tracking with estimated reach',
   'Competitor brand tracking in the same interface',
@@ -40,20 +40,7 @@ Every mention, every thread, and every competitor continuously tracked, measured
         }}
         className="grid-cols-1 gap-10 md:grid-cols-[1fr_1.2fr] md:gap-16 lg:gap-[64px]"
       >
-             {/* RIGHT COLUMN — dashboard mock */}
-        <div>
-          <div className="rounded-xl overflow-hidden">
-            {/* Screenshot — negative marginBottom clips the ~96px of empty filter space at the bottom of the SVG */}
-            <Image
-              src="/reddit/subredditSense.svg"
-              alt="SubredditSense dashboard mockup"
-              width={640}
-              height={580}
-              style={{ display: 'block', width: '100%', height: 'auto' }}
-              priority
-            />
-          </div>
-        </div>
+       
 
         {/* LEFT COLUMN — copy */}
         <div>
@@ -106,7 +93,20 @@ Every mention, every thread, and every competitor continuously tracked, measured
           </div>
        
         </div>
-
+      {/* RIGHT COLUMN — dashboard mock */}
+        <div>
+          <div className="rounded-xl overflow-hidden">
+            {/* Screenshot — negative marginBottom clips the ~96px of empty filter space at the bottom of the SVG */}
+            <Image
+              src="/reddit/subredditSense.svg"
+              alt="SubredditSense dashboard mockup"
+              width={640}
+              height={580}
+              style={{ display: 'block', width: '100%', height: 'auto' }}
+              priority
+            />
+          </div>
+        </div>
 
       </div>
     </div>
