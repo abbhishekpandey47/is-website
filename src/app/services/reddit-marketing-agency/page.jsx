@@ -33,13 +33,13 @@ export default function RedditMarketingAgencyClient() {
       <HeroHome customPadding={"pt-44"}/>
       <AuditWhatYouGet />
       {/* <StartupHeroSection /> */}
-      <RedditMarketingSlide />
       <ConversationToRevenue/>
-      <Threadflow />
+      <RedditMarketingSlide />
+      <InfraMethodologyTimeline />
+
       <ProposalShowcase />
       <SubredditSense />
       <WhyAI />
-      <InfraMethodologyTimeline />
       <RedditServiceCards />
       <RespondCaseStudy />
       <StatsSection />
