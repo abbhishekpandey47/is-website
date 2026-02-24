@@ -68,7 +68,7 @@ export default function ProposalShowcase() {
         >
 
           {/* LEFT COLUMN — copy */}
-          <div style={{height: '100%'}}>
+          <div>
           
             {/* Body copy */}
             <p style={{
@@ -147,17 +147,15 @@ export default function ProposalShowcase() {
           </div>
 
             {/* RIGHT COLUMN — dashboard mock */}
-                  <div>
-                    <div
-                      className="rounded-xl overflow-hidden"
-                    >
-                      {/* Screenshot */}
+                  <div style={{ overflow: 'hidden' }}>
+                    <div className="rounded-xl overflow-hidden">
+                      {/* Screenshot — negative marginBottom clips the ~110px of empty filter space at the bottom of the SVG */}
                       <Image
                         src="/reddit/report.svg"
                         alt="SubredditSense dashboard mockup"
                         width={640}
                         height={580}
-                        style={{ display: 'block', width: '100%', height: 'auto' }}
+                        style={{ display: 'block', width: '100%', height: 'auto', marginBottom: '-13%' }}
                         priority
                       />
                     </div>

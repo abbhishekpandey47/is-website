@@ -1,8 +1,6 @@
 import dynamic from "next/dynamic";
-import PropTypes from "prop-types";
 import AuditWhatYouGet from "../../lp/reddit-marketing-agency/auditWhatYouGet";
 import HeroHome from "../../lp/reddit-marketing-agency/hero";
-import WhyAI from "../../lp/reddit-marketing-agency/howWeWork";
 import DeferredSection from "@/Components/DeferredSection";
 import ConversationToRevenue from "./conversationToRevenue";
 import RespondCaseStudy from "./respondCaseStudy";
@@ -15,10 +13,9 @@ const RedditServiceCards = dynamic(() => import("../../lp/reddit-marketing-agenc
 const Testimonials = dynamic(() => import("../../lp/reddit-marketing-agency/testimonials"));
 const FAQSection = dynamic(() => import("../../lp/reddit-marketing-agency/FAQ"));
 const StatsSection = dynamic(() => import("../../lp/reddit-marketing-agency/numbers"));
-const Threadflow = dynamic(() => import("../../lp/reddit-marketing-agency/threadflow"));
 const SubredditSense = dynamic(() => import("./SubredditSense"));
 const ProposalShowcase = dynamic(() => import("./ProposalShowcase"));
-const TrustedMarquee = dynamic(() => import("../../lp/reddit-marketing-agency/TrustedMarquee"));
+
 
 export default function RedditMarketingAgencyClient() {
   return (
@@ -34,35 +31,26 @@ export default function RedditMarketingAgencyClient() {
       <AuditWhatYouGet />
       {/* <StartupHeroSection /> */}
       <ConversationToRevenue/>
-      <RedditMarketingSlide />
-      <InfraMethodologyTimeline />
-
       <ProposalShowcase />
       <SubredditSense />
-      <WhyAI />
+      <RedditMarketingSlide />
+      <InfraMethodologyTimeline />
+      {/* <WhyAI /> */}
+
       <RedditServiceCards />
       <RespondCaseStudy />
-      <StatsSection />
-   
+      {/* <StatsSection /> */}
       <DeferredSection rootMargin="500px 0px">
         <Testimonials />
       </DeferredSection>
-
-    </div>
-    <div>
-          <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] my-10"></div>
-
       <DeferredSection rootMargin="500px 0px">
         <Cta />
       </DeferredSection>
-      <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] mb-10 mt-6"></div>
-
+    </div>
+    <div>
       <DeferredSection rootMargin="500px 0px">
         <FAQSection />
       </DeferredSection>
-
-
-
     </div>
     </>
   );
