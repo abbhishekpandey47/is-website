@@ -32,7 +32,7 @@ const InfraMethodologyTimeline = () => {
             <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center">
                     <h2 className="md:leading-[80px] text-center max-lg:text-center max-lg:mx-auto">
-                        Our Proven Reddit Marketing Process for Authentic Brand Growth
+                        Our Proven Reddit Marketing Process for{' '}<span className='bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-600'>Authentic Brand Growth</span>
                     </h2>
                 </div>
             </div>

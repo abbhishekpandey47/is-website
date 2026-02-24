@@ -53,8 +53,8 @@ export default function AIStartupLanding({customPadding="pt-20"}) {
 
         {/* Description */}
         <div className="max-w-[85%] max-sm:max-w-[95%] mx-auto mb-10 max-sm:mb-6">
-          <p className="text-[24px] md:text-[24px] max-sm:text-[18px] text-[#f5deb3] leading-snug font-light tracking-normal text-white/80">
-            In 2026 AI models prioritize brands that are consistently referenced in trusted discussions. We help you build that presence on Reddit with structured, sustained participation.
+          <p className="text-[17px] md:text-[17px] max-sm:text-[17px] text-[#f5deb3] leading-snug font-light tracking-normal text-white/80">
+            In 2026 AI models prioritize brands that are consistently referenced in trusted discussions.<br/>We help you build that presence on Reddit with structured, sustained participation.
           </p>
         </div>
 
