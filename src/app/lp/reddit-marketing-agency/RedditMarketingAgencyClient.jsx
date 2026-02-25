@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import PropTypes from "prop-types";
 import AuditWhatYouGet from "./auditWhatYouGet";
 import HeroHome from "./hero";
-import WhyAI from "./howWeWork";
 import DeferredSection from "@/Components/DeferredSection";
 
 const Cta = dynamic(() => import("./cta"));
@@ -12,11 +11,10 @@ const RedditServiceCards = dynamic(() => import("./whatYouGet"));
 // const StartupHeroSection = dynamic(() => import("./whoThisIsFor"));
 const Testimonials = dynamic(() => import("./testimonials"));
 const FAQSection = dynamic(() => import("./FAQ"));
-const StatsSection = dynamic(() => import("./numbers"));
-const Threadflow = dynamic(() => import("./threadflow"));
-const TrustedMarquee = dynamic(() => import("./TrustedMarquee"));
 const RespondCaseStudy = dynamic(() => import("../../services/reddit-marketing-agency/respondCaseStudy"));
 const ConversationToRevenue = dynamic(() => import("../../services/reddit-marketing-agency/conversationToRevenue"));
+const SubredditSense = dynamic(() => import("../../services/reddit-marketing-agency/SubredditSense"));
+const ProposalShowcase = dynamic(() => import("../../services/reddit-marketing-agency/ProposalShowcase"));
 
 export default function RedditMarketingAgencyClient() {
   return (
@@ -28,35 +26,42 @@ export default function RedditMarketingAgencyClient() {
         backgroundPosition: 'center',
       }}
     >
-      <HeroHome />
+      <HeroHome customPadding={"pt-44"}/>
+
       <AuditWhatYouGet />
+                {/* Background SVG */}
+      <div className="w-full pointer-events-none" aria-hidden="true">
+        <img src="/reddit/betweenBg.svg" alt="" className="absolute w-full z-0" />
+      </div>
       {/* <StartupHeroSection /> */}
-      <RedditMarketingSlide />
       <ConversationToRevenue/>
-      <Threadflow />
-      <WhyAI />
+            <div className="w-full pointer-events-none" aria-hidden="true">
+        <img src="/reddit/auditBg.svg" alt="" className="absolute w-full z-0" />
+      </div>
+   
+      <ProposalShowcase />
+      <SubredditSense />
       <InfraMethodologyTimeline />
+   <div className="w-full pointer-events-none" aria-hidden="true">
+        <img src="/reddit/betweenBg.svg" alt="" className="absolute w-full z-0" />
+      </div>
+      <RedditMarketingSlide />
+      {/* <WhyAI /> */}
+
       <RedditServiceCards />
       <RespondCaseStudy />
-      <StatsSection />
-
+      {/* <StatsSection /> */}
       <DeferredSection rootMargin="500px 0px">
         <Testimonials />
       </DeferredSection>
-
-    </div>
-    <div>
-          <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] my-10"></div>
-
       <DeferredSection rootMargin="500px 0px">
         <Cta />
       </DeferredSection>
-      <div className="w-full h-px shadow-[#877aeb] bg-gradient-to-r from-pink-500/5 via-[#877aeb] to-pink-[#877aeb] pb-[2px] mb-10 mt-6"></div>
-
+    </div>
+    <div>
       <DeferredSection rootMargin="500px 0px">
         <FAQSection />
       </DeferredSection>
-
     </div>
     </>
   );

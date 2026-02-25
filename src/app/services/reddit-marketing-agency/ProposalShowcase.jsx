@@ -134,7 +134,7 @@ export default function ProposalShowcase() {
                 </div>
               ))}
             </div>
-            <div className="mt-8">
+            <div className="mt-8 flex justify-center">
                <ContactPopupButton
                 buttonText="Get your free Proposal"
                 width="w-52"

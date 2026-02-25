@@ -28,12 +28,24 @@ export default function RedditMarketingAgencyClient() {
       }}
     >
       <HeroHome customPadding={"pt-44"}/>
+
       <AuditWhatYouGet />
+                {/* Background SVG */}
+      <div className="w-full pointer-events-none" aria-hidden="true">
+        <img src="/reddit/betweenBg.svg" alt="" className="absolute w-full z-0" />
+      </div>
       {/* <StartupHeroSection /> */}
       <ConversationToRevenue/>
+            <div className="w-full pointer-events-none" aria-hidden="true">
+        <img src="/reddit/auditBg.svg" alt="" className="absolute w-full z-0" />
+      </div>
+   
       <ProposalShowcase />
       <SubredditSense />
       <InfraMethodologyTimeline />
+   <div className="w-full pointer-events-none" aria-hidden="true">
+        <img src="/reddit/betweenBg.svg" alt="" className="absolute w-full z-0" />
+      </div>
       <RedditMarketingSlide />
       {/* <WhyAI /> */}
 
