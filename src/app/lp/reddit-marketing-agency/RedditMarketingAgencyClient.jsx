@@ -20,7 +20,7 @@ export default function RedditMarketingAgencyClient() {
   return (
     <>
     <div
-      className="text-white relative overflow-hidden"
+      className="text-white relative z-0 overflow-hidden"
       style={{
         backgroundImage: "url('/reddit/bgstar.svg')",
         backgroundPosition: 'center',
@@ -28,24 +28,32 @@ export default function RedditMarketingAgencyClient() {
     >
       <HeroHome customPadding={"pt-44"}/>
 
-      <AuditWhatYouGet />
-                {/* Background SVG */}
-      <div className="w-full pointer-events-none" aria-hidden="true">
-        <img src="/reddit/betweenBg.svg" alt="" className="absolute w-full z-0" />
+      {/* Section pair: AuditWhatYouGet + ConversationToRevenue */}
+      <div className="relative z-0">
+        <div className="absolute inset-0 pointer-events-none -z-10 flex items-center justify-center" aria-hidden="true">
+          <img src="/reddit/betweenBg.svg" alt="" className="w-full mix-blend-screen opacity-80" />
+        </div>
+        <AuditWhatYouGet />
+        <ConversationToRevenue />
       </div>
-      {/* <StartupHeroSection /> */}
-      <ConversationToRevenue/>
-            <div className="w-full pointer-events-none" aria-hidden="true">
-        <img src="/reddit/auditBg.svg" alt="" className="absolute w-full z-0" />
+
+      {/* Section pair: ProposalShowcase + SubredditSense */}
+      <div className="relative z-0">
+        <div className="absolute inset-0 pointer-events-none -z-10 flex items-center justify-center" aria-hidden="true">
+          <img src="/reddit/auditBg.svg" alt="" className="w-full mix-blend-screen opacity-80" />
+        </div>
+        <ProposalShowcase />
+        <SubredditSense />
       </div>
-   
-      <ProposalShowcase />
-      <SubredditSense />
-      <InfraMethodologyTimeline />
-   <div className="w-full pointer-events-none" aria-hidden="true">
-        <img src="/reddit/betweenBg.svg" alt="" className="absolute w-full z-0" />
+
+      {/* Section pair: InfraMethodologyTimeline + RedditMarketingSlide */}
+      <div className="relative z-0">
+        <div className="absolute inset-0 pointer-events-none -z-10 flex items-center justify-center" aria-hidden="true">
+          <img src="/reddit/betweenBg.svg" alt="" className="w-full mix-blend-screen opacity-80" />
+        </div>
+        <InfraMethodologyTimeline />
+        <RedditMarketingSlide />
       </div>
-      <RedditMarketingSlide />
       {/* <WhyAI /> */}
 
       <RedditServiceCards />
