@@ -28,7 +28,7 @@ const CheckIcon = ({ className = "" }) => (
 
 export default function AuditWhatYouGet() {
   return (
-    <section className="relative px-6 md:px-10 pt-24 pb-8">
+    <section className="relative px-6 md:px-10 pt-24 pb-8 overflow-hidden">
          <div className="max-w-6xl mx-auto text-center relative z-10">
                 <div className="quicksand-bold text-[30px] max-sm:text-[1.5em] md:leading-[80px] text-white text-center flex justify-center mb-2">
                     <h2 className=" md:leading-[50px] text-center max-lg:text-center max-lg:mx-auto">
