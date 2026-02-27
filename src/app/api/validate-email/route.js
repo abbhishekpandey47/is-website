@@ -18,7 +18,20 @@ export async function validateEmail(email) {
       return { valid: false, reason: 'No mail server found', suggestion: null };
     }
   } catch (e) {
-    return { valid: false, reason: 'Invalid email domain', suggestion: null };
+    const domainResolves = await domainHasAddress(domain);
+    if (domainResolves) {
+      return {
+        valid: true,
+        reason: 'Domain resolves but has no MX records',
+        suggestion: 'Mail delivery may still fail until MX records are added',
+      };
+    }
+
+    return {
+      valid: false,
+      reason: 'Invalid email domain',
+      suggestion: null,
+    };
   }
 
   return { valid: true, reason: null, suggestion: null };
@@ -43,6 +56,20 @@ export async function POST(req) {
   } catch (err) {
     console.error('Email validation failed:', err);
     return NextResponse.json({ error: 'Email validation failed' }, { status: 500 });
+  }
+}
+
+async function domainHasAddress(domain) {
+  try {
+    const records = await dns.resolve(domain);
+    return Boolean(records && records.length > 0);
+  } catch (err) {
+    try {
+      const ipv6 = await dns.resolve6(domain);
+      return Boolean(ipv6 && ipv6.length > 0);
+    } catch (innerErr) {
+      return false;
+    }
   }
 }
 
