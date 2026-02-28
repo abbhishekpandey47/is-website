@@ -1,0 +1,356 @@
+/**
+ * Shared ThreadFlow Data Layer
+ *
+ * Single source of truth for ALL ThreadFlow pages.
+ * Every page MUST import status mapping and data processing from here
+ * instead of defining its own version.
+ *
+ * API: All data comes from two endpoints:
+ *   GET /api/allContent  → { data: [...posts, ...comments] }
+ *   GET /api/companies   → { data: [{ id, name }] }
+ */
+
+// ─── Status Colors ──────────────────────────────────────────────────────────
+
+export const STATUS_COLORS = {
+  Live: "#34d399",
+  Pending: "#fbbf24",
+  "Under Approval": "#60a5fa",
+  Removed: "#f87171",
+  Archived: "#71717a",
+};
+
+// ─── Core Status Normalization ──────────────────────────────────────────────
+
+/**
+ * Returns the raw status string from an item based on its type.
+ * Posts use `status`, comments use `posted_comment_status`.
+ */
+export function getRawStatus(item) {
+  return item.type === "comment"
+    ? item.posted_comment_status
+    : item.status;
+}
+
+/**
+ * Normalize a raw item into a unified display status.
+ *
+ * This is the SINGLE source of truth for status mapping.
+ * Every page must use this function — do NOT create local alternatives.
+ *
+ * Returns: "Live" | "Under Approval" | "Pending" | "Removed" | "Archived"
+ */
+export function normalizeStatus(item) {
+  const s = (getRawStatus(item) || "").toLowerCase();
+
+  if (s === "live" || s === "approved") return "Live";
+  if (s === "postunderapproval" || s === "commentunderapproval")
+    return "Under Approval";
+  if (
+    s === "pending" ||
+    s === "undermoderation" ||
+    s === "under_moderation" ||
+    s === "notposted" ||
+    s === "reposted"
+  )
+    return "Pending";
+  if (s === "removed" || s === "deleted" || s === "notapproved")
+    return "Removed";
+  if (s === "archived") return "Archived";
+
+  return "Pending"; // fallback for unknown statuses
+}
+
+// ─── Data Fetching ──────────────────────────────────────────────────────────
+
+/**
+ * Fetch allContent + companies in parallel with a Firebase auth token.
+ * Returns { items: [...], companies: [{ id, name }] }
+ */
+export async function fetchThreadflowData(token) {
+  const [contentRes, companyRes] = await Promise.allSettled([
+    fetch("/api/allContent", {
+      headers: { Authorization: `Bearer ${token}` },
+    }),
+    fetch("/api/companies", {
+      headers: { Authorization: `Bearer ${token}` },
+    }),
+  ]);
+
+  let items = [];
+  let companies = [];
+
+  if (contentRes.status === "fulfilled" && contentRes.value.ok) {
+    const result = await contentRes.value.json();
+    items = result.data || [];
+  }
+  if (companyRes.status === "fulfilled" && companyRes.value.ok) {
+    const result = await companyRes.value.json();
+    companies = result.data || [];
+  }
+
+  return { items, companies };
+}
+
+// ─── Filtering Helpers ──────────────────────────────────────────────────────
+
+/**
+ * Filter items by company ID.
+ */
+export function getItemsByCompany(items, companyId) {
+  if (!companyId) return items;
+  return items.filter((item) => item.company_id === companyId);
+}
+
+/**
+ * Filter items for the current calendar month.
+ */
+export function getCurrentMonthItems(items) {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  return items.filter((item) => {
+    if (!item.date_posted) return false;
+    const d = new Date(item.date_posted);
+    return d.getFullYear() === year && d.getMonth() === month;
+  });
+}
+
+/**
+ * Filter items for a specific year/month (0-indexed month).
+ */
+export function getItemsByMonth(items, year, month) {
+  return items.filter((item) => {
+    if (!item.date_posted) return false;
+    const d = new Date(item.date_posted);
+    return d.getFullYear() === year && d.getMonth() === month;
+  });
+}
+
+// ─── Status Counting ────────────────────────────────────────────────────────
+
+/**
+ * Count items by normalized status.
+ * Returns { Live, "Under Approval", Pending, Removed, Archived }
+ */
+export function getStatusCounts(items) {
+  const counts = {
+    Live: 0,
+    "Under Approval": 0,
+    Pending: 0,
+    Removed: 0,
+    Archived: 0,
+  };
+  items.forEach((item) => {
+    const status = normalizeStatus(item);
+    if (counts[status] !== undefined) counts[status]++;
+  });
+  return counts;
+}
+
+/**
+ * Get comprehensive stats for a set of items.
+ */
+export function getClientStats(items) {
+  const counts = getStatusCounts(items);
+  const total = items.length;
+  const live = counts.Live;
+  const completion = total > 0 ? Math.round((live / total) * 100) : 0;
+  const remaining = Math.max(0, total - live);
+
+  return {
+    ...counts,
+    total,
+    live,
+    completion,
+    remaining,
+  };
+}
+
+// ─── Cadence Helpers ────────────────────────────────────────────────────────
+
+/**
+ * Build weekly breakdown for the current month.
+ * Returns [{ week: "Wk 1", count }, ...]
+ */
+export function buildWeeklyData(items) {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+
+  const weeks = [
+    { week: "Wk 1", count: 0 },
+    { week: "Wk 2", count: 0 },
+    { week: "Wk 3", count: 0 },
+    { week: "Wk 4", count: 0 },
+  ];
+
+  items.forEach((item) => {
+    if (!item.date_posted) return;
+    const d = new Date(item.date_posted);
+    if (d.getFullYear() !== year || d.getMonth() !== month) return;
+    const day = d.getDate();
+    if (day <= 7) weeks[0].count++;
+    else if (day <= 14) weeks[1].count++;
+    else if (day <= 21) weeks[2].count++;
+    else weeks[3].count++;
+  });
+
+  return weeks;
+}
+
+/**
+ * Determine pace label from live count and total.
+ */
+export function getPace(liveCount, total) {
+  if (total === 0) return "No Data";
+  const pct = Math.round((liveCount / total) * 100);
+  if (pct >= 75) return "On Track";
+  if (pct >= 50) return "Behind";
+  return "At Risk";
+}
+
+/**
+ * Get overview data for ALL clients — used by Cadence Planner.
+ * Filters to current month only.
+ */
+export function getAllClientsOverview(allItems, companies) {
+  const monthItems = getCurrentMonthItems(allItems);
+
+  return companies.map((company) => {
+    const companyItems = monthItems.filter(
+      (item) => item.company_id === company.id
+    );
+    const stats = getClientStats(companyItems);
+    const weeklyData = buildWeeklyData(companyItems);
+    const pace = getPace(stats.live, stats.total);
+
+    return {
+      id: company.id,
+      name: company.name,
+      ...stats,
+      pace,
+      weeklyData,
+    };
+  });
+}
+
+// ─── Engagement Row Builder ─────────────────────────────────────────────────
+
+/**
+ * Map a raw item into an engagement row with normalized fields.
+ * Used by Client Dashboard, Reports, etc.
+ */
+export function buildEngagementRow(item, idx, companyMap) {
+  return {
+    id: item.id || `item-${idx}`,
+    type: item.type || "post",
+    topic: item.category || item.targeted_subreddit || "--",
+    title: item.title || "(untitled)",
+    displayTitle: item.title || (item.type === "comment" ? "Comment" : "Untitled"),
+    displayType: item.type === "comment" ? "Comment" : "Post",
+    threadUrl: item.posted_link || "",
+    engagementText: item.engagement_text || "",
+    status: normalizeStatus(item),
+    rawStatus: getRawStatus(item),
+    publishedUrl: item.posted_link || "",
+    date: item.date_posted ? item.date_posted.split("T")[0] : "--",
+    datePosted: item.date_posted || null,
+    redditUsername: item.reddit_username || "",
+    subreddit: item.targeted_subreddit || "",
+    totalViews: item.total_views || 0,
+    companyId: item.company_id,
+    companyName: companyMap ? companyMap[item.company_id] || "" : "",
+  };
+}
+
+/**
+ * Build a companyId → companyName lookup map.
+ */
+export function buildCompanyMap(companies) {
+  const map = {};
+  companies.forEach((c) => {
+    map[c.id] = c.name;
+  });
+  return map;
+}
+
+// ─── Cadence Config (Supabase-backed) ───────────────────────────────────────
+
+/**
+ * Fetch all cadence configs from the API.
+ * Returns array of { company_name, monthly_limit, alert_threshold, ... }
+ */
+export async function fetchCadenceConfig(token) {
+  try {
+    const res = await fetch("/api/cadence-config", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) return [];
+    const result = await res.json();
+    return result.data || [];
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Upsert a single company's cadence config via the API.
+ * Returns the updated row or null on failure.
+ */
+export async function updateCadenceConfig(token, companyName, monthlyLimit) {
+  try {
+    const res = await fetch("/api/cadence-config", {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        company_name: companyName,
+        monthly_limit: monthlyLimit,
+      }),
+    });
+    if (!res.ok) return null;
+    const result = await res.json();
+    return result.data || null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Build a companyName → monthly_limit lookup map from cadence config array.
+ */
+export function buildCadenceMap(configs) {
+  const map = {};
+  (configs || []).forEach((c) => {
+    map[c.company_name] = c.monthly_limit;
+  });
+  return map;
+}
+
+// ─── Month-Scoping Helpers (for engagement rows) ─────────────────────────
+
+/**
+ * Filter engagement rows by a specific year/month (1-indexed month).
+ * Works with both raw items (date_posted) and engagement rows (date/datePosted).
+ * Items with no date are included (they represent pending/approved content).
+ */
+export function filterByMonth(engagements, year, month) {
+  return engagements.filter((e) => {
+    const dateStr = e.date_posted || e.datePosted || e.date;
+    if (!dateStr || dateStr === "--") return true;
+    const d = new Date(dateStr);
+    return d.getFullYear() === year && d.getMonth() === month - 1;
+  });
+}
+
+/**
+ * Filter engagement rows to the current calendar month.
+ * Items with no date are included (pending/approved).
+ */
+export function getCurrentMonthEngagements(engagements) {
+  const now = new Date();
+  return filterByMonth(engagements, now.getFullYear(), now.getMonth() + 1);
+}
