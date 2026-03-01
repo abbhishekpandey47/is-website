@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
 import { useRouter } from "next/navigation";
@@ -46,6 +46,12 @@ const COLORS = {
 };
 
 const DATE_RANGES = ["7d", "30d", "90d"];
+
+const CLIENT_COLORS = [
+  "#60a5fa", "#34d399", "#8b5cf6", "#fbbf24", "#f87171",
+  "#38bdf8", "#a78bfa", "#fb923c", "#4ade80", "#e879f9",
+  "#f472b6", "#22d3ee", "#a3e635", "#facc15", "#c084fc",
+];
 
 const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -393,6 +399,27 @@ export default function AnalyticsOverviewPage() {
     return companiesList.filter((c) => c.name.toLowerCase().includes(q));
   }, [companiesList, clientSearch]);
 
+  const clientColorMap = useMemo(() => {
+    const map = {};
+    companiesList.forEach((c, i) => {
+      map[c.name] = CLIENT_COLORS[i % CLIENT_COLORS.length];
+    });
+    return map;
+  }, [companiesList]);
+
+  const pickerRef = useRef(null);
+
+  useEffect(() => {
+    if (!showClientPicker) return;
+    const handleClick = (e) => {
+      if (pickerRef.current && !pickerRef.current.contains(e.target)) {
+        setShowClientPicker(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [showClientPicker]);
+
   /* ──── styles ──── */
 
   const pageStyle = {
@@ -455,6 +482,7 @@ export default function AnalyticsOverviewPage() {
 
   const dropdownWrapperStyle = {
     position: "relative",
+    display: "inline-block",
     marginLeft: 4,
   };
 
@@ -477,30 +505,18 @@ export default function AnalyticsOverviewPage() {
 
   const dropdownMenuStyle = {
     position: "absolute",
-    top: "calc(100% + 4px)",
+    top: "100%",
     left: 0,
-    minWidth: 240,
-    background: COLORS.tooltipBg,
-    border: `1px solid ${COLORS.tooltipBorder}`,
+    width: 300,
+    maxHeight: 400,
+    overflow: "hidden",
+    background: "#161616",
+    border: "1px solid rgba(255,255,255,0.1)",
     borderRadius: 10,
     padding: "4px 0",
     boxShadow: "0 12px 40px rgba(0,0,0,0.5)",
     zIndex: 50,
   };
-
-  const dropdownItemStyle = (active) => ({
-    fontSize: 12,
-    fontFamily: FONT,
-    padding: "7px 14px",
-    cursor: "pointer",
-    background: active ? "rgba(255,255,255,0.06)" : "transparent",
-    color: active ? COLORS.textPrimary : COLORS.textSecondary,
-    border: "none",
-    width: "100%",
-    textAlign: "left",
-    display: "block",
-    transition: "background 0.1s ease",
-  });
 
   const gridStyle = {
     display: "grid",
@@ -571,14 +587,14 @@ export default function AnalyticsOverviewPage() {
             ))}
           </div>
 
-          <div style={dropdownWrapperStyle}>
+          <div style={dropdownWrapperStyle} ref={pickerRef}>
             <button
               style={dropdownButtonStyle}
               onClick={() => { setShowClientPicker((o) => !o); setClientSearch(""); }}
             >
               {selectedClients.length === 0
                 ? "All Clients"
-                : `${selectedClients.length} client${selectedClients.length > 1 ? "s" : ""} selected`}
+                : `${selectedClients.length} Clients`}
               <svg
                 width="12"
                 height="12"
@@ -600,102 +616,102 @@ export default function AnalyticsOverviewPage() {
             </button>
 
             {showClientPicker && (
-              <>
+              <div style={dropdownMenuStyle}>
+                <div style={{ padding: "8px 10px 4px" }}>
+                  <input
+                    type="text"
+                    placeholder="Search clients..."
+                    value={clientSearch}
+                    onChange={(e) => setClientSearch(e.target.value)}
+                    style={{
+                      width: "100%",
+                      fontSize: 12,
+                      fontFamily: FONT,
+                      padding: "6px 10px",
+                      borderRadius: 6,
+                      border: `1px solid ${COLORS.border}`,
+                      background: "rgba(255,255,255,0.04)",
+                      color: COLORS.textPrimary,
+                      outline: "none",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </div>
                 <div
-                  style={{ position: "fixed", inset: 0, zIndex: 40 }}
-                  onClick={() => setShowClientPicker(false)}
-                />
-                <div style={dropdownMenuStyle}>
-                  <div style={{ padding: "8px 10px 4px" }}>
-                    <input
-                      type="text"
-                      placeholder="Search clients..."
-                      value={clientSearch}
-                      onChange={(e) => setClientSearch(e.target.value)}
+                  style={{
+                    display: "flex",
+                    gap: 8,
+                    padding: "6px 12px",
+                    borderBottom: `1px solid ${COLORS.border}`,
+                  }}
+                >
+                  <button
+                    style={{
+                      fontSize: 11,
+                      fontFamily: FONT,
+                      color: COLORS.blue,
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                    }}
+                    onClick={() => setSelectedClients(companiesList.map((c) => c.name))}
+                  >
+                    Select All
+                  </button>
+                  <button
+                    style={{
+                      fontSize: 11,
+                      fontFamily: FONT,
+                      color: COLORS.textSecondary,
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                    }}
+                    onClick={() => setSelectedClients([])}
+                  >
+                    Deselect All
+                  </button>
+                </div>
+                <div
+                  className="analytics-scrollbar"
+                  style={{ maxHeight: 280, overflowY: "auto" }}
+                >
+                  {filteredCompanies.map((c) => (
+                    <label
+                      key={c.id}
+                      className="analytics-dropdown-item"
                       style={{
-                        width: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        padding: "8px 12px",
+                        cursor: "pointer",
+                        background: selectedClients.includes(c.name) ? "rgba(255,255,255,0.06)" : "transparent",
+                        color: selectedClients.includes(c.name) ? COLORS.textPrimary : COLORS.textSecondary,
                         fontSize: 12,
                         fontFamily: FONT,
-                        padding: "6px 10px",
-                        borderRadius: 6,
-                        border: `1px solid ${COLORS.border}`,
-                        background: "rgba(255,255,255,0.04)",
-                        color: COLORS.textPrimary,
-                        outline: "none",
-                        boxSizing: "border-box",
+                        transition: "background 0.1s ease",
                       }}
-                    />
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: 8,
-                      padding: "6px 12px",
-                      borderBottom: `1px solid ${COLORS.border}`,
-                    }}
-                  >
-                    <button
-                      style={{
-                        fontSize: 11,
-                        fontFamily: FONT,
-                        color: COLORS.blue,
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                        padding: 0,
-                      }}
-                      onClick={() => setSelectedClients(companiesList.map((c) => c.name))}
                     >
-                      Select All
-                    </button>
-                    <button
-                      style={{
-                        fontSize: 11,
-                        fontFamily: FONT,
-                        color: COLORS.textSecondary,
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                        padding: 0,
-                      }}
-                      onClick={() => setSelectedClients([])}
-                    >
-                      Deselect All
-                    </button>
-                  </div>
-                  <div
-                    className="analytics-scrollbar"
-                    style={{ maxHeight: 220, overflowY: "auto" }}
-                  >
-                    {filteredCompanies.map((c) => (
-                      <label
-                        key={c.id}
-                        className="analytics-dropdown-item"
-                        style={{
-                          ...dropdownItemStyle(selectedClients.includes(c.name)),
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 8,
-                          cursor: "pointer",
-                        }}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={selectedClients.includes(c.name)}
-                          onChange={() => toggleClient(c.name)}
-                          style={{ accentColor: COLORS.blue, margin: 0, cursor: "pointer" }}
-                        />
-                        {c.name}
-                      </label>
-                    ))}
-                    {filteredCompanies.length === 0 && (
-                      <div style={{ padding: "10px 14px", fontSize: 12, color: COLORS.textMuted }}>
-                        No clients found
-                      </div>
-                    )}
-                  </div>
+                      <input
+                        type="checkbox"
+                        checked={selectedClients.includes(c.name)}
+                        onChange={() => toggleClient(c.name)}
+                        style={{ accentColor: COLORS.blue, margin: 0, cursor: "pointer" }}
+                      />
+                      <span style={{ width: 8, height: 8, borderRadius: "50%", background: clientColorMap[c.name] || COLORS.gray, flexShrink: 0 }} />
+                      <span>{c.name}</span>
+                    </label>
+                  ))}
+                  {filteredCompanies.length === 0 && (
+                    <div style={{ padding: "10px 14px", fontSize: 12, color: COLORS.textMuted }}>
+                      No clients found
+                    </div>
+                  )}
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
