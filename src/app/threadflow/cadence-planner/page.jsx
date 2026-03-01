@@ -546,6 +546,8 @@ export default function CadencePlannerPage() {
 
   const [search, setSearch] = useState("");
   const [paceFilter, setPaceFilter] = useState(null);
+  const [progressFilter, setProgressFilter] = useState(null);
+  const [hideEmpty, setHideEmpty] = useState(false);
   const [sortBy, setSortBy] = useState("risk");
   const [mounted, setMounted] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
@@ -689,6 +691,22 @@ export default function CadencePlannerPage() {
       data = data.filter((c) => c.pace === paceFilter);
     }
 
+    if (progressFilter) {
+      data = data.filter((c) => {
+        if (progressFilter === "0") return c.pct === 0;
+        if (progressFilter === "1-25") return c.pct >= 1 && c.pct <= 25;
+        if (progressFilter === "26-50") return c.pct >= 26 && c.pct <= 50;
+        if (progressFilter === "51-75") return c.pct >= 51 && c.pct <= 75;
+        if (progressFilter === "76-100") return c.pct >= 76 && c.pct <= 100;
+        if (progressFilter === "100+") return c.pct > 100;
+        return true;
+      });
+    }
+
+    if (hideEmpty) {
+      data = data.filter((c) => c.live > 0);
+    }
+
     // No Data sorts to bottom in Risk First mode
     const paceOrder = { "At Risk": 0, Behind: 1, "On Track": 2, "No Data": 3 };
 
@@ -700,10 +718,34 @@ export default function CadencePlannerPage() {
       data.sort((a, b) => a.pct - b.pct);
     } else if (sortBy === "total") {
       data.sort((a, b) => b.target - a.target);
+    } else if (sortBy === "live") {
+      data.sort((a, b) => b.live - a.live || a.name.localeCompare(b.name));
+    } else if (sortBy === "remaining") {
+      data.sort((a, b) => b.remaining - a.remaining || a.name.localeCompare(b.name));
+    } else if (sortBy === "progress") {
+      data.sort((a, b) => a.pct - b.pct || a.name.localeCompare(b.name));
     }
 
     return data;
-  }, [clients, search, paceFilter, sortBy]);
+  }, [clients, search, paceFilter, progressFilter, hideEmpty, sortBy]);
+
+  // ── Active Filter Count ───────────────────────────────────────────────────
+
+  const activeFilterCount = useMemo(() => {
+    let count = 0;
+    if (search.trim()) count++;
+    if (paceFilter) count++;
+    if (progressFilter) count++;
+    if (hideEmpty) count++;
+    return count;
+  }, [search, paceFilter, progressFilter, hideEmpty]);
+
+  const clearAllFilters = () => {
+    setSearch("");
+    setPaceFilter(null);
+    setProgressFilter(null);
+    setHideEmpty(false);
+  };
 
   // ── Summary Stats ────────────────────────────────────────────────────────
 
@@ -1042,7 +1084,7 @@ export default function CadencePlannerPage() {
       <div
         style={{
           display: "flex",
-          alignItems: "center",
+          flexDirection: "column",
           gap: 10,
           marginBottom: 20,
           opacity: mounted ? 1 : 0,
@@ -1050,143 +1092,273 @@ export default function CadencePlannerPage() {
           transition: "opacity 0.3s ease 0.28s, transform 0.3s ease 0.28s",
         }}
       >
-        {/* Search */}
-        <div style={{ position: "relative", flex: "0 0 260px" }}>
-          <Search
-            size={14}
+        {/* Row 1: Search, Pace Pills, Progress Dropdown, Hide Empty */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {/* Search */}
+          <div style={{ position: "relative", flex: "0 0 220px" }}>
+            <Search
+              size={14}
+              style={{
+                position: "absolute",
+                left: 10,
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "rgba(255,255,255,0.25)",
+                pointerEvents: "none",
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Search clients..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "8px 12px 8px 32px",
+                fontSize: 13,
+                fontFamily: font,
+                color: "#ededed",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: 8,
+                outline: "none",
+                transition: "border-color 0.15s ease",
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.16)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+              }}
+            />
+          </div>
+
+          {/* Pace Filter Pills */}
+          {[
+            { label: "On Track", color: "#34d399" },
+            { label: "Behind", color: "#fbbf24" },
+            { label: "At Risk", color: "#f87171" },
+            { label: "No Data", color: "rgba(255,255,255,0.35)" },
+          ].map((p) => {
+            const active = paceFilter === p.label;
+            return (
+              <button
+                key={p.label}
+                onClick={() => setPaceFilter(active ? null : p.label)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  padding: "6px 12px",
+                  fontSize: 12,
+                  fontWeight: 500,
+                  fontFamily: font,
+                  color: active ? p.color : "rgba(255,255,255,0.4)",
+                  background: active ? `${p.color}10` : "transparent",
+                  border: `1px solid ${active ? `${p.color}30` : "rgba(255,255,255,0.06)"}`,
+                  borderRadius: 20,
+                  cursor: "pointer",
+                  transition: "all 0.15s ease",
+                }}
+                onMouseEnter={(e) => {
+                  if (!active) {
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+                    e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!active) {
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                    e.currentTarget.style.color = "rgba(255,255,255,0.4)";
+                  }
+                }}
+              >
+                <span
+                  style={{
+                    width: 6,
+                    height: 6,
+                    borderRadius: "50%",
+                    background: p.color,
+                    opacity: active ? 1 : 0.4,
+                  }}
+                />
+                {p.label}
+              </button>
+            );
+          })}
+
+          {/* Progress Filter Dropdown */}
+          <select
+            value={progressFilter || ""}
+            onChange={(e) => setProgressFilter(e.target.value || null)}
             style={{
-              position: "absolute",
-              left: 10,
-              top: "50%",
-              transform: "translateY(-50%)",
-              color: "rgba(255,255,255,0.25)",
-              pointerEvents: "none",
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Search clients..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "8px 12px 8px 32px",
-              fontSize: 13,
+              background: progressFilter ? "rgba(96,165,250,0.10)" : "rgba(255,255,255,0.06)",
+              border: `1px solid ${progressFilter ? "rgba(96,165,250,0.3)" : "rgba(255,255,255,0.1)"}`,
+              borderRadius: 20,
+              color: progressFilter ? "#60a5fa" : "rgba(255,255,255,0.4)",
+              padding: "6px 28px 6px 12px",
+              fontSize: 12,
+              fontWeight: 500,
               fontFamily: font,
-              color: "#ededed",
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: 8,
+              cursor: "pointer",
               outline: "none",
-              transition: "border-color 0.15s ease",
+              appearance: "none",
+              WebkitAppearance: "none",
+              backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E\")",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "right 10px center",
+              transition: "all 0.15s ease",
             }}
-            onFocus={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.16)";
+          >
+            <option value="" style={{ background: "#161616", color: "#ededed" }}>All Progress</option>
+            <option value="0" style={{ background: "#161616", color: "#ededed" }}>0%</option>
+            <option value="1-25" style={{ background: "#161616", color: "#ededed" }}>1–25%</option>
+            <option value="26-50" style={{ background: "#161616", color: "#ededed" }}>26–50%</option>
+            <option value="51-75" style={{ background: "#161616", color: "#ededed" }}>51–75%</option>
+            <option value="76-100" style={{ background: "#161616", color: "#ededed" }}>76–100%</option>
+            <option value="100+" style={{ background: "#161616", color: "#ededed" }}>100%+</option>
+          </select>
+
+          {/* Hide Empty Toggle */}
+          <button
+            onClick={() => setHideEmpty((v) => !v)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              padding: "6px 12px",
+              fontSize: 12,
+              fontWeight: 500,
+              fontFamily: font,
+              color: hideEmpty ? "#a78bfa" : "rgba(255,255,255,0.4)",
+              background: hideEmpty ? "rgba(167,139,250,0.10)" : "transparent",
+              border: `1px solid ${hideEmpty ? "rgba(167,139,250,0.3)" : "rgba(255,255,255,0.06)"}`,
+              borderRadius: 20,
+              cursor: "pointer",
+              transition: "all 0.15s ease",
+              whiteSpace: "nowrap",
             }}
-            onBlur={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+            onMouseEnter={(e) => {
+              if (!hideEmpty) {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+                e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+              }
             }}
-          />
+            onMouseLeave={(e) => {
+              if (!hideEmpty) {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                e.currentTarget.style.color = "rgba(255,255,255,0.4)";
+              }
+            }}
+          >
+            <span style={{
+              width: 14,
+              height: 14,
+              borderRadius: 3,
+              border: `1.5px solid ${hideEmpty ? "#a78bfa" : "rgba(255,255,255,0.25)"}`,
+              background: hideEmpty ? "#a78bfa" : "transparent",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 9,
+              color: "#0a0a0a",
+              fontWeight: 700,
+              flexShrink: 0,
+              transition: "all 0.15s ease",
+            }}>
+              {hideEmpty ? "\u2713" : ""}
+            </span>
+            Hide empty
+          </button>
+
+          {/* Spacer */}
+          <div style={{ flex: 1 }} />
+
+          {/* Filter status + Clear all */}
+          <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+            <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", whiteSpace: "nowrap", fontVariantNumeric: "tabular-nums" }}>
+              {filteredClients.length === clients.length
+                ? `${clients.length} clients`
+                : `${filteredClients.length} of ${clients.length}`}
+            </span>
+            {activeFilterCount > 0 && (
+              <button
+                onClick={clearAllFilters}
+                style={{
+                  padding: "3px 8px",
+                  fontSize: 11,
+                  fontWeight: 500,
+                  fontFamily: font,
+                  color: "rgba(255,255,255,0.45)",
+                  background: "transparent",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: 4,
+                  cursor: "pointer",
+                  transition: "all 0.15s ease",
+                  whiteSpace: "nowrap",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#ededed";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.16)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "rgba(255,255,255,0.45)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                }}
+              >
+                Clear all
+              </button>
+            )}
+          </div>
         </div>
 
-        {/* Pace Filter Pills */}
-        {[
-          { label: "On Track", color: "#34d399" },
-          { label: "Behind", color: "#fbbf24" },
-          { label: "At Risk", color: "#f87171" },
-          { label: "No Data", color: "rgba(255,255,255,0.35)" },
-        ].map((p) => {
-          const active = paceFilter === p.label;
-          return (
-            <button
-              key={p.label}
-              onClick={() => setPaceFilter(active ? null : p.label)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                padding: "6px 12px",
-                fontSize: 12,
-                fontWeight: 500,
-                fontFamily: font,
-                color: active ? p.color : "rgba(255,255,255,0.4)",
-                background: active ? `${p.color}10` : "transparent",
-                border: `1px solid ${active ? `${p.color}30` : "rgba(255,255,255,0.06)"}`,
-                borderRadius: 20,
-                cursor: "pointer",
-                transition: "all 0.15s ease",
-              }}
-              onMouseEnter={(e) => {
-                if (!active) {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
-                  e.currentTarget.style.color = "rgba(255,255,255,0.6)";
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!active) {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
-                  e.currentTarget.style.color = "rgba(255,255,255,0.4)";
-                }
-              }}
-            >
-              <span
+        {/* Row 2: Sort Buttons */}
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <span style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", color: "rgba(255,255,255,0.2)", marginRight: 4 }}>Sort</span>
+          {[
+            { key: "risk", label: "Risk First" },
+            { key: "name", label: "Name" },
+            { key: "cadence", label: "Live %" },
+            { key: "total", label: "Target" },
+            { key: "live", label: "Live" },
+            { key: "remaining", label: "Remaining" },
+            { key: "progress", label: "Progress" },
+          ].map((s) => {
+            const active = sortBy === s.key;
+            return (
+              <button
+                key={s.key}
+                onClick={() => setSortBy(s.key)}
                 style={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: "50%",
-                  background: p.color,
-                  opacity: active ? 1 : 0.4,
+                  padding: "5px 10px",
+                  fontSize: 11,
+                  fontWeight: 500,
+                  fontFamily: font,
+                  color: active ? "#ededed" : "rgba(255,255,255,0.35)",
+                  background: active ? "rgba(255,255,255,0.06)" : "transparent",
+                  border: `1px solid ${active ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0.04)"}`,
+                  borderRadius: 6,
+                  cursor: "pointer",
+                  transition: "all 0.15s ease",
                 }}
-              />
-              {p.label}
-            </button>
-          );
-        })}
-
-        {/* Spacer */}
-        <div style={{ flex: 1 }} />
-
-        {/* Sort Buttons */}
-        {[
-          { key: "risk", label: "Risk First" },
-          { key: "name", label: "Name" },
-          { key: "cadence", label: "Live %" },
-          { key: "total", label: "Target" },
-        ].map((s) => {
-          const active = sortBy === s.key;
-          return (
-            <button
-              key={s.key}
-              onClick={() => setSortBy(s.key)}
-              style={{
-                padding: "6px 12px",
-                fontSize: 12,
-                fontWeight: 500,
-                fontFamily: font,
-                color: active ? "#ededed" : "rgba(255,255,255,0.35)",
-                background: active ? "rgba(255,255,255,0.06)" : "transparent",
-                border: `1px solid ${active ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0.04)"}`,
-                borderRadius: 6,
-                cursor: "pointer",
-                transition: "all 0.15s ease",
-              }}
-              onMouseEnter={(e) => {
-                if (!active) {
-                  e.currentTarget.style.color = "rgba(255,255,255,0.6)";
-                  e.currentTarget.style.background = "rgba(255,255,255,0.03)";
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!active) {
-                  e.currentTarget.style.color = "rgba(255,255,255,0.35)";
-                  e.currentTarget.style.background = "transparent";
-                }
-              }}
-            >
-              {s.label}
-            </button>
-          );
-        })}
+                onMouseEnter={(e) => {
+                  if (!active) {
+                    e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!active) {
+                    e.currentTarget.style.color = "rgba(255,255,255,0.35)";
+                    e.currentTarget.style.background = "transparent";
+                  }
+                }}
+              >
+                {s.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* ── Cadence Table ────────────────────────────────────────────────── */}
