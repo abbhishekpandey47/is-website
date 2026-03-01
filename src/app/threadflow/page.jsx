@@ -466,7 +466,7 @@ const PostsPage = () => {
             <RangePicker
               value={dateRange}
               className="dark-range-picker"
-              popupClassName="dark-range-picker-dropdown"
+              classNames={{ popup: { root: "dark-range-picker-dropdown" } }}
               onChange={(vals) => setDateRange(vals || [null, null])}
               allowClear
               format="YYYY-MM-DD"

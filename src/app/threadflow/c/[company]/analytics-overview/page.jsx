@@ -169,8 +169,9 @@ function SkeletonCard({ height = 220, delay = 0 }) {
 export default function AnalyticsOverviewPage() {
   const router = useRouter();
   const [dateRange, setDateRange] = useState("30d");
-  const [selectedClient, setSelectedClient] = useState("All Clients");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedClients, setSelectedClients] = useState([]);
+  const [showClientPicker, setShowClientPicker] = useState(false);
+  const [clientSearch, setClientSearch] = useState("");
   const [mounted, setMounted] = useState(false);
 
   const [firebaseUser, setFirebaseUser] = useState(null);
@@ -230,10 +231,12 @@ export default function AnalyticsOverviewPage() {
   /* ──── Filtered items (by client + date range) ──── */
   const filteredItems = useMemo(() => {
     return allItems.filter((item) => {
-      // Client filter
-      if (selectedClient !== "All Clients") {
-        const company = companiesList.find((c) => c.name === selectedClient);
-        if (!company || item.company_id !== company.id) return false;
+      // Skip items without a valid company mapping
+      if (!companyMap[item.company_id]) return false;
+      // Client filter (multi-select)
+      if (selectedClients.length > 0) {
+        const companyName = companyMap[item.company_id];
+        if (!selectedClients.includes(companyName)) return false;
       }
       // Date range filter
       if (item.date_posted) {
@@ -242,7 +245,7 @@ export default function AnalyticsOverviewPage() {
       }
       return true;
     });
-  }, [allItems, selectedClient, companiesList, dateRangeCutoff]);
+  }, [allItems, selectedClients, companyMap, dateRangeCutoff]);
 
   /* ──── Chart 1: Engagement Over Time ──── */
   const engagementData = useMemo(() => {
@@ -285,7 +288,8 @@ export default function AnalyticsOverviewPage() {
 
     const counts = {};
     itemsInRange.forEach((item) => {
-      const name = companyMap[item.company_id] || "Unknown";
+      const name = companyMap[item.company_id];
+      if (!name) return;
       counts[name] = (counts[name] || 0) + 1;
     });
 
@@ -359,7 +363,8 @@ export default function AnalyticsOverviewPage() {
     const totals = {};
     const liveCounts = {};
     itemsInRange.forEach((item) => {
-      const name = companyMap[item.company_id] || "Unknown";
+      const name = companyMap[item.company_id];
+      if (!name) return;
       totals[name] = (totals[name] || 0) + 1;
       if (sharedNormalizeStatus(item) === "Live") {
         liveCounts[name] = (liveCounts[name] || 0) + 1;
@@ -376,10 +381,17 @@ export default function AnalyticsOverviewPage() {
       .sort((a, b) => b.pct - a.pct);
   }, [allItems, companyMap, dateRangeCutoff]);
 
-  const handleClientSelect = useCallback((client) => {
-    setSelectedClient(client);
-    setDropdownOpen(false);
+  const toggleClient = useCallback((name) => {
+    setSelectedClients((prev) =>
+      prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]
+    );
   }, []);
+
+  const filteredCompanies = useMemo(() => {
+    if (!clientSearch.trim()) return companiesList;
+    const q = clientSearch.toLowerCase();
+    return companiesList.filter((c) => c.name.toLowerCase().includes(q));
+  }, [companiesList, clientSearch]);
 
   /* ──── styles ──── */
 
@@ -467,15 +479,13 @@ export default function AnalyticsOverviewPage() {
     position: "absolute",
     top: "calc(100% + 4px)",
     left: 0,
-    minWidth: 180,
+    minWidth: 240,
     background: COLORS.tooltipBg,
     border: `1px solid ${COLORS.tooltipBorder}`,
     borderRadius: 10,
     padding: "4px 0",
     boxShadow: "0 12px 40px rgba(0,0,0,0.5)",
     zIndex: 50,
-    maxHeight: 280,
-    overflowY: "auto",
   };
 
   const dropdownItemStyle = (active) => ({
@@ -564,16 +574,18 @@ export default function AnalyticsOverviewPage() {
           <div style={dropdownWrapperStyle}>
             <button
               style={dropdownButtonStyle}
-              onClick={() => setDropdownOpen((o) => !o)}
+              onClick={() => { setShowClientPicker((o) => !o); setClientSearch(""); }}
             >
-              {selectedClient}
+              {selectedClients.length === 0
+                ? "All Clients"
+                : `${selectedClients.length} client${selectedClients.length > 1 ? "s" : ""} selected`}
               <svg
                 width="12"
                 height="12"
                 viewBox="0 0 12 12"
                 fill="none"
                 style={{
-                  transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)",
+                  transform: showClientPicker ? "rotate(180deg)" : "rotate(0deg)",
                   transition: "transform 0.15s ease",
                 }}
               >
@@ -587,42 +599,156 @@ export default function AnalyticsOverviewPage() {
               </svg>
             </button>
 
-            {dropdownOpen && (
+            {showClientPicker && (
               <>
                 <div
-                  style={{
-                    position: "fixed",
-                    inset: 0,
-                    zIndex: 40,
-                  }}
-                  onClick={() => setDropdownOpen(false)}
+                  style={{ position: "fixed", inset: 0, zIndex: 40 }}
+                  onClick={() => setShowClientPicker(false)}
                 />
-                <div
-                  style={dropdownMenuStyle}
-                  className="analytics-scrollbar"
-                >
-                  <button
-                    className="analytics-dropdown-item"
-                    style={dropdownItemStyle(selectedClient === "All Clients")}
-                    onClick={() => handleClientSelect("All Clients")}
+                <div style={dropdownMenuStyle}>
+                  <div style={{ padding: "8px 10px 4px" }}>
+                    <input
+                      type="text"
+                      placeholder="Search clients..."
+                      value={clientSearch}
+                      onChange={(e) => setClientSearch(e.target.value)}
+                      style={{
+                        width: "100%",
+                        fontSize: 12,
+                        fontFamily: FONT,
+                        padding: "6px 10px",
+                        borderRadius: 6,
+                        border: `1px solid ${COLORS.border}`,
+                        background: "rgba(255,255,255,0.04)",
+                        color: COLORS.textPrimary,
+                        outline: "none",
+                        boxSizing: "border-box",
+                      }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: 8,
+                      padding: "6px 12px",
+                      borderBottom: `1px solid ${COLORS.border}`,
+                    }}
                   >
-                    All Clients
-                  </button>
-                  {companiesList.map((c) => (
                     <button
-                      key={c.id}
-                      className="analytics-dropdown-item"
-                      style={dropdownItemStyle(selectedClient === c.name)}
-                      onClick={() => handleClientSelect(c.name)}
+                      style={{
+                        fontSize: 11,
+                        fontFamily: FONT,
+                        color: COLORS.blue,
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        padding: 0,
+                      }}
+                      onClick={() => setSelectedClients(companiesList.map((c) => c.name))}
                     >
-                      {c.name}
+                      Select All
                     </button>
-                  ))}
+                    <button
+                      style={{
+                        fontSize: 11,
+                        fontFamily: FONT,
+                        color: COLORS.textSecondary,
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        padding: 0,
+                      }}
+                      onClick={() => setSelectedClients([])}
+                    >
+                      Deselect All
+                    </button>
+                  </div>
+                  <div
+                    className="analytics-scrollbar"
+                    style={{ maxHeight: 220, overflowY: "auto" }}
+                  >
+                    {filteredCompanies.map((c) => (
+                      <label
+                        key={c.id}
+                        className="analytics-dropdown-item"
+                        style={{
+                          ...dropdownItemStyle(selectedClients.includes(c.name)),
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                          cursor: "pointer",
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={selectedClients.includes(c.name)}
+                          onChange={() => toggleClient(c.name)}
+                          style={{ accentColor: COLORS.blue, margin: 0, cursor: "pointer" }}
+                        />
+                        {c.name}
+                      </label>
+                    ))}
+                    {filteredCompanies.length === 0 && (
+                      <div style={{ padding: "10px 14px", fontSize: 12, color: COLORS.textMuted }}>
+                        No clients found
+                      </div>
+                    )}
+                  </div>
                 </div>
               </>
             )}
           </div>
         </div>
+
+        {/* ──── Selected Client Pills ──── */}
+        {selectedClients.length > 0 && (
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
+            {selectedClients.slice(0, 5).map((name) => (
+              <span
+                key={name}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 4,
+                  fontSize: 11,
+                  fontFamily: FONT,
+                  padding: "3px 10px",
+                  borderRadius: 12,
+                  background: "rgba(255,255,255,0.08)",
+                  color: COLORS.textPrimary,
+                }}
+              >
+                {name}
+                <span
+                  style={{ cursor: "pointer", marginLeft: 2, color: COLORS.textSecondary, lineHeight: 1 }}
+                  onClick={() => toggleClient(name)}
+                >
+                  &times;
+                </span>
+              </span>
+            ))}
+            {selectedClients.length > 5 && (
+              <span style={{ fontSize: 11, color: COLORS.textSecondary }}>
+                +{selectedClients.length - 5} more
+              </span>
+            )}
+            <button
+              style={{
+                fontSize: 11,
+                fontFamily: FONT,
+                color: COLORS.blue,
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+                marginLeft: 4,
+              }}
+              onClick={() => setSelectedClients([])}
+            >
+              Reset
+            </button>
+          </div>
+        )}
 
         {/* ──── Loading State ──── */}
         {loading && (

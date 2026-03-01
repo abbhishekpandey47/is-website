@@ -19,7 +19,6 @@ import {
   X,
   FileText,
   MessageSquare,
-  Mail,
   Share2,
   Check,
 } from "lucide-react";
@@ -463,6 +462,58 @@ export default function ClientDashboardPage() {
     }
   }, [cadenceTargets, selectedClientName]);
 
+  // ── Generate Report (CSV download) ────────────────────────────────────────
+  const generateReport = useCallback(() => {
+    if (!client) return;
+    const clientName = client.name;
+    const now = new Date();
+    const monthName = now.toLocaleString("default", { month: "long", year: "numeric" });
+
+    const escapeCSV = (v) => {
+      const s = String(v ?? "").replace(/\r/g, "");
+      if (s.includes(",") || s.includes('"') || s.includes("\n")) {
+        return `"${s.replace(/"/g, '""')}"`;
+      }
+      return s;
+    };
+
+    let csv = "";
+    csv += `ThreadFlow Report: ${escapeCSV(clientName)}\n`;
+    csv += `Generated: ${now.toISOString().split("T")[0]}\n`;
+    csv += `Month: ${monthName}\n`;
+    csv += `\n`;
+    csv += `CADENCE SUMMARY\n`;
+    csv += `Target,${cadenceTarget}\n`;
+    csv += `Live (this month),${liveCount}\n`;
+    csv += `Completion,${cadenceTarget > 0 ? Math.round((liveCount / cadenceTarget) * 100) : 0}%\n`;
+    csv += `Remaining,${Math.max(0, cadenceTarget - liveCount)}\n`;
+    csv += `\n`;
+    csv += `ALL ENGAGEMENTS\n`;
+    csv += `#,Type,Title,Subreddit,Status,Date,Link\n`;
+
+    clientEngagements.forEach((e, i) => {
+      csv += [
+        i + 1,
+        capitalize(e.type),
+        escapeCSV(e.title),
+        escapeCSV(e.subreddit || "\u2014"),
+        e.status,
+        e.date,
+        e.publishedUrl || "\u2014",
+      ].join(",") + "\n";
+    });
+
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${slugify(clientName)}-report-${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, [client, cadenceTarget, liveCount, clientEngagements]);
+
   // Status breakdown data
   const statusBreakdown = [
     { status: "Live", count: liveCount, color: STATUS_COLORS.Live },
@@ -542,8 +593,10 @@ export default function ClientDashboardPage() {
               alignItems: "center",
               gap: 10,
               padding: "10px 16px",
-              backgroundColor: "rgba(255,255,255,0.02)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              backgroundColor: dropdownOpen ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.02)",
+              borderWidth: 1,
+              borderStyle: "solid",
+              borderColor: dropdownOpen ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.06)",
               borderRadius: 8,
               color: "#ededed",
               fontFamily: FONT_FAMILY,
@@ -551,7 +604,6 @@ export default function ClientDashboardPage() {
               cursor: "pointer",
               transition: "all 0.15s ease",
               minWidth: 260,
-              ...(dropdownOpen ? { borderColor: "rgba(255,255,255,0.12)", backgroundColor: "rgba(255,255,255,0.03)" } : {}),
             }}
             onMouseEnter={(e) => {
               if (!dropdownOpen) {
@@ -1741,6 +1793,7 @@ export default function ClientDashboardPage() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           {/* Generate Report */}
           <button
+            onClick={generateReport}
             onMouseEnter={() => setHoveredAction("report")}
             onMouseLeave={() => setHoveredAction(null)}
             style={{
@@ -1784,29 +1837,6 @@ export default function ClientDashboardPage() {
           >
             <MessageSquare size={13} />
             Send Slack Alert
-          </button>
-          {/* Email Reminder */}
-          <button
-            onMouseEnter={() => setHoveredAction("email")}
-            onMouseLeave={() => setHoveredAction(null)}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 7,
-              padding: "8px 16px",
-              backgroundColor: hoveredAction === "email" ? "rgba(251,191,36,0.18)" : "rgba(251,191,36,0.10)",
-              border: "1px solid rgba(251,191,36,0.2)",
-              borderRadius: 7,
-              color: "#fbbf24",
-              fontSize: 12,
-              fontWeight: 500,
-              fontFamily: FONT_FAMILY,
-              cursor: "pointer",
-              transition: "all 0.15s ease",
-            }}
-          >
-            <Mail size={13} />
-            Email Reminder
           </button>
         </div>
       </div>

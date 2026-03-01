@@ -71,7 +71,7 @@ export default function CrmLayout({ children }) {
           <Toaster />
           <Sonner />
           <SidebarProvider>
-            <div className="min-h-screen flex w-full">
+            <div className="min-h-screen flex w-full" suppressHydrationWarning>
               <AppSidebar companySlug={verifyUser?.company?.slug} isAdmin={verifyUser?.isAdmin} companyName = {verifyUser?.company?.name} />
               <main className="flex-1 overflow-hidden">{children}</main>
             </div>

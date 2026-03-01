@@ -2,6 +2,8 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebaseClient";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 
@@ -526,7 +528,7 @@ useEffect(() => {
             <RangePicker
               value={dateRange}
               className="dark-range-picker"
-              popupClassName="dark-range-picker-dropdown"
+              classNames={{ popup: { root: "dark-range-picker-dropdown" } }}
               onChange={(vals) => setDateRange(vals || [null, null])}
               allowClear
               format="YYYY-MM-DD"
