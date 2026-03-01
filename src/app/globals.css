@@ -3,7 +3,14 @@
 @tailwind utilities;
 
 * {
-  color: white;
+  color: #ededed;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url('/fonts/GeistVF.woff2') format('woff2'), url('/fonts/GeistVF.woff') format('woff');
+  font-weight: 100 900;
+  font-display: swap;
 }
 
 @font-face {
@@ -41,7 +48,8 @@
 }
 
 body {
-  background-color: #0D0A1A;
+  background-color: #0a0a0a;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* Flash highlight for updated metrics */
@@ -50,10 +58,10 @@ body {
   animation: flashPulse 0.9s ease-in-out 0s 1;
 }
 @keyframes flashPulse {
-  0% { box-shadow: 0 0 0 0 rgba(99,102,241,0.0); background-color: rgba(99,102,241,0.10); }
-  40% { box-shadow: 0 0 0 2px rgba(99,102,241,0.35); background-color: rgba(99,102,241,0.18); }
-  80% { box-shadow: 0 0 0 1px rgba(99,102,241,0.15); background-color: rgba(99,102,241,0.08); }
-  100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); background-color: transparent; }
+  0% { box-shadow: 0 0 0 0 rgba(255,255,255,0); background-color: rgba(255,255,255,0.03); }
+  40% { box-shadow: 0 0 0 2px rgba(255,255,255,0.08); background-color: rgba(255,255,255,0.05); }
+  80% { box-shadow: 0 0 0 1px rgba(255,255,255,0.04); background-color: rgba(255,255,255,0.02); }
+  100% { box-shadow: 0 0 0 0 transparent; background-color: transparent; }
 }
 
 .scrollertesti {
@@ -574,55 +582,60 @@ body {
   animation: spin-reverse 50s linear infinite;
 }
 
-/* 🌙 Dark theme for AntD RangePicker (input + popup) */
+/* Dark theme for AntD RangePicker */
 .dark-range-picker {
-  background-color: #0f1729 !important;
-  border: 1px solid #334155 !important;
-  color: #ffffff !important;
-  border-radius: 6px;
-  height: 40px;
+  background-color: rgba(255,255,255,0.02) !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  color: #ededed !important;
+  border-radius: 7px;
+  height: 36px;
+  font-family: "Geist", -apple-system, sans-serif;
+  font-size: 13px;
 }
 
 .dark-range-picker input {
   background: transparent !important;
-  color: #ffffff !important;
+  color: #ededed !important;
+  font-size: 13px;
 }
 .dark-range-picker input::placeholder {
-  color: #ffffff !important;
+  color: rgba(255,255,255,0.4) !important;
 }
 
 .dark-range-picker .ant-picker-suffix,
 .dark-range-picker .ant-picker-clear {
-  color: #9ca3af !important;
+  color: rgba(255,255,255,0.4) !important;
 }
 
 .dark-range-picker:hover,
 .dark-range-picker:focus-within {
-  border-color: #475569 !important; /* subtle gray hover */
-  box-shadow: none !important; /* removes purple glow */
+  border-color: rgba(255,255,255,0.12) !important;
+  box-shadow: none !important;
 }
 
-/* 🗓 Popup (calendar dropdown) */
+/* Calendar dropdown */
 .dark-range-picker-dropdown {
-  background-color: #0f1729 !important;
-  color: #ffffff !important;
-  border: 1px solid #334155 !important;
+  background-color: #111111 !important;
+  color: #ededed !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
 }
 
 .dark-range-picker-dropdown .ant-picker-panel-container {
-  background-color: #0f1729 !important;
+  background-color: #111111 !important;
   border: none !important;
 }
 
 .dark-range-picker-dropdown .ant-picker-header,
 .dark-range-picker-dropdown .ant-picker-content th,
 .dark-range-picker-dropdown .ant-picker-cell-inner {
-  color: #e5e7eb !important;
+  color: rgba(255,255,255,0.6) !important;
 }
 
 .dark-range-picker-dropdown .ant-picker-cell:hover .ant-picker-cell-inner {
-  background-color: #1e293b !important; /* darker hover */
-  color: #ffffff !important;
+  background-color: rgba(255,255,255,0.04) !important;
+  color: #ededed !important;
 }
 
 .dark-range-picker-dropdown
@@ -634,15 +647,14 @@ body {
 .dark-range-picker-dropdown
   .ant-picker-cell-in-view.ant-picker-cell-range-end
   .ant-picker-cell-inner {
-  background-color: #2563eb !important; /* blue for selected date */
-  color: #ffffff !important;
+  background-color: rgba(255,255,255,0.1) !important;
+  color: #ededed !important;
 }
 
 .dark-range-picker-dropdown .ant-picker-today-btn {
   color: #60a5fa !important;
 }
 
-/* optional: hide focus ring */
 .dark-range-picker:focus-visible {
   box-shadow: none !important;
 }

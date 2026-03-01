@@ -1,16 +1,14 @@
 "use client";
+import ComingSoon from '@/Components/ComingSoon';
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
-      <div className="text-center space-y-4">
-        <h1 className="text-3xl font-bold text-foreground">
-          Templates Page Coming Soon
-        </h1>
-        <p className="text-muted-foreground">
-          We’re working hard to bring this feature to you. Stay tuned!
-        </p>
-      </div>
+    <div className="min-h-screen bg-[#0a0a0a]">
+      <ComingSoon
+        title="Template Management"
+        description="Reusable, high-performing Reddit content templates with AI-assisted customization are being built."
+        backHref="/threadflow"
+      />
     </div>
   );
 }

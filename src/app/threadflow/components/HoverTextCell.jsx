@@ -4,13 +4,12 @@ export const HoverTextCell = ({ text, isTitle = false, isTextEngagement = false 
   const [showTooltip, setShowTooltip] = useState(false);
 
   if (!text) {
-    return <span className="text-muted-foreground">-</span>;
+    return <span className="text-[rgba(255,255,255,0.25)]">-</span>;
   }
 
   const handleMouseEnter = () => setShowTooltip(true);
   const handleMouseLeave = () => setShowTooltip(false);
 
-  // helper to render content safely
   const renderContent = (className) =>
     isTextEngagement ? (
       <div
@@ -23,32 +22,29 @@ export const HoverTextCell = ({ text, isTitle = false, isTextEngagement = false 
 
   return (
     <div className="relative max-w-sm">
-      {/* Truncated preview */}
       <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         title="Hover to see full text"
       >
         {renderContent(
-          `text-sm ${isTitle ? "text-white" : "text-muted-foreground"} line-clamp-3 cursor-help hover:text-foreground transition-colors duration-200
-           [&_a]:text-blue-500 [&_a:hover]:underline`
+          `text-[13px] ${isTitle ? "text-[#ededed]" : "text-[rgba(255,255,255,0.6)]"} line-clamp-3 cursor-help hover:text-[#ededed] transition-colors duration-150
+           [&_a]:text-[#60a5fa] [&_a:hover]:underline`
         )}
       </div>
 
-      {/* Tooltip with full content */}
       {showTooltip && (
         <div
-          className="absolute z-50 left-0 top-full -mt-6 w-80 bg-popover border border-border rounded-lg shadow-lg p-3 animate-in fade-in-0 zoom-in-95"
+          className="absolute z-50 left-0 top-full -mt-4 w-80 bg-[#141414] border border-[rgba(255,255,255,0.08)] rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-3 animate-drop-in"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
           <div className="max-h-60 overflow-y-auto">
             {renderContent(
-              "text-sm text-popover-foreground whitespace-pre-wrap break-words [&_a]:text-blue-500 [&_a:hover]:underline"
+              "text-[13px] text-[#ededed] whitespace-pre-wrap break-words [&_a]:text-[#60a5fa] [&_a:hover]:underline"
             )}
           </div>
-          {/* Arrow pointer */}
-          <div className="absolute -top-1 left-4 w-2 h-2 bg-popover border-l border-t border-border rotate-45"></div>
+          <div className="absolute -top-1 left-4 w-2 h-2 bg-[#141414] border-l border-t border-[rgba(255,255,255,0.08)] rotate-45" />
         </div>
       )}
     </div>

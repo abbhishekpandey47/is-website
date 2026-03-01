@@ -1,7 +1,6 @@
 "use client";
 import { auth } from '@/lib/firebaseClient';
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/Components/ui/card";
 import PostAnalyticsTable from './components/postAnalytics';
 import CommentsAnalyticsTable from './components/commentAnalytics';
 import { UserProfile } from '@/Components/UserProfile';
@@ -23,10 +22,18 @@ export default function AnalyticsPage() {
   const [postsPage, setPostsPage] = useState(1);
   const [commentsPage, setCommentsPage] = useState(1);
 
-  const cached = session.get("analyticsDataV2");
-  const [analyticsData, setAnalyticsData] = useState(cached ?? null);
-  const [loading, setLoading] = useState(!Boolean(cached));
+  const [analyticsData, setAnalyticsData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Hydrate from session cache on client only (avoids SSR mismatch)
+  useEffect(() => {
+    const cached = session.get("analyticsDataV2");
+    if (cached) {
+      setAnalyticsData(cached);
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (analyticsData) session.set("analyticsDataV2", analyticsData);
@@ -71,9 +78,32 @@ export default function AnalyticsPage() {
     return () => { aborted = true; };
   }, [postsPage, commentsPage]);
 
-  if (loading) return <div className="text-center py-12">Loading analytics...</div>;
-  if (error) return <div className="text-center py-12 text-red-500">Error: {error}</div>;
-  if (!analyticsData) return <div className="text-center py-12">No data yet.</div>;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] font-geist flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-8 w-8 rounded-full border-2 border-[rgba(255,255,255,0.06)] border-t-[#ededed] animate-spin" />
+          <p className="text-[13px] text-[rgba(255,255,255,0.4)]">Loading analytics...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] font-geist flex items-center justify-center">
+        <p className="text-[13px] text-[#f87171]">Error: {error}</p>
+      </div>
+    );
+  }
+
+  if (!analyticsData) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] font-geist flex items-center justify-center">
+        <p className="text-[13px] text-[rgba(255,255,255,0.4)]">No data yet.</p>
+      </div>
+    );
+  }
 
   const postsBlock = analyticsData.posts ?? { items: [], total: 0, page: 1, totalPages: 1 };
   const commentsBlock = analyticsData.comments ?? { items: [], total: 0, page: 1, totalPages: 1 };
@@ -87,18 +117,19 @@ export default function AnalyticsPage() {
   const totalCommentUpvotesPage = comments.reduce((acc, c) => acc + (c?.top_comment?.score ?? 0), 0);
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-card">
+    <div className="min-h-screen bg-[#0a0a0a] font-geist">
+      {/* Header */}
+      <header className="border-b border-[rgba(255,255,255,0.06)]">
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">
-            <SidebarTrigger className="h-8 w-8" />
+            <SidebarTrigger className="h-7 w-7 text-[rgba(255,255,255,0.4)] hover:text-[#ededed]" />
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary rounded-lg">
-                <BarChart3 className="h-6 w-6 text-primary-foreground" />
+              <div className="p-2 rounded-[7px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)]">
+                <BarChart3 className="h-5 w-5 text-[#ededed]" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-foreground">Reddit Analytics</h1>
-                <p className="text-sm text-muted-foreground">
+                <h1 className="text-[16px] font-semibold text-[#ededed]">Reddit Analytics</h1>
+                <p className="text-[13px] text-[rgba(255,255,255,0.4)]">
                   Track how your posts and comments perform (10 per page)
                 </p>
               </div>
@@ -110,29 +141,29 @@ export default function AnalyticsPage() {
         </div>
       </header>
 
-      <div className="p-6">
-        {/* Page metrics (current page only) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card><CardContent className="p-6">
-            <p className="text-sm text-muted-foreground">Posts (this page)</p>
-            <p className="text-2xl font-bold">{totalPostsPage}</p>
-          </CardContent></Card>
-          <Card><CardContent className="p-6">
-            <p className="text-sm text-muted-foreground">Post Upvotes (this page)</p>
-            <p className="text-2xl font-bold">{totalPostUpvotesPage}</p>
-          </CardContent></Card>
-          <Card><CardContent className="p-6">
-            <p className="text-sm text-muted-foreground">Comments (this page)</p>
-            <p className="text-2xl font-bold">{totalCommentsPage}</p>
-          </CardContent></Card>
-          <Card><CardContent className="p-6">
-            <p className="text-sm text-muted-foreground">Comment Upvotes (this page)</p>
-            <p className="text-2xl font-bold">{totalCommentUpvotesPage}</p>
-          </CardContent></Card>
+      <div className="p-6 animate-fade-up">
+        {/* Metric cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="p-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)]">
+            <p className="text-[13px] text-[rgba(255,255,255,0.4)] mb-1">Posts (this page)</p>
+            <p className="text-[28px] font-semibold tracking-[-0.02em] tabular-nums text-[#ededed]">{totalPostsPage}</p>
+          </div>
+          <div className="p-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)]">
+            <p className="text-[13px] text-[rgba(255,255,255,0.4)] mb-1">Post Upvotes (this page)</p>
+            <p className="text-[28px] font-semibold tracking-[-0.02em] tabular-nums text-[#ededed]">{totalPostUpvotesPage}</p>
+          </div>
+          <div className="p-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)]">
+            <p className="text-[13px] text-[rgba(255,255,255,0.4)] mb-1">Comments (this page)</p>
+            <p className="text-[28px] font-semibold tracking-[-0.02em] tabular-nums text-[#ededed]">{totalCommentsPage}</p>
+          </div>
+          <div className="p-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)]">
+            <p className="text-[13px] text-[rgba(255,255,255,0.4)] mb-1">Comment Upvotes (this page)</p>
+            <p className="text-[28px] font-semibold tracking-[-0.02em] tabular-nums text-[#ededed]">{totalCommentUpvotesPage}</p>
+          </div>
         </div>
 
         {/* Tables + pagination */}
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-8">
+        <div className="grid grid-cols-1 gap-6 mb-8">
           <PostAnalyticsTable
             threads={posts.map((t, i) => ({
               id: i,
@@ -146,19 +177,19 @@ export default function AnalyticsPage() {
             }))}
           />
           <div className="flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">
-              Page {postsBlock.page} of {postsBlock.totalPages} • {postsBlock.total} total
+            <p className="text-[13px] text-[rgba(255,255,255,0.4)]">
+              Page {postsBlock.page} of {postsBlock.totalPages} &bull; {postsBlock.total} total
             </p>
             <div className="flex gap-2">
               <button
-                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                className="px-3 py-1.5 rounded-md text-[13px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] text-[rgba(255,255,255,0.6)] hover:bg-[rgba(255,255,255,0.04)] disabled:opacity-30 transition-colors"
                 onClick={() => setPostsPage(p => Math.max(1, p - 1))}
                 disabled={postsBlock.page <= 1}
               >
                 Prev
               </button>
               <button
-                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                className="px-3 py-1.5 rounded-md text-[13px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] text-[rgba(255,255,255,0.6)] hover:bg-[rgba(255,255,255,0.04)] disabled:opacity-30 transition-colors"
                 onClick={() => setPostsPage(p => Math.min(postsBlock.totalPages, p + 1))}
                 disabled={postsBlock.page >= postsBlock.totalPages}
               >
@@ -182,19 +213,19 @@ export default function AnalyticsPage() {
             }))}
           />
           <div className="flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">
-              Page {commentsBlock.page} of {commentsBlock.totalPages} • {commentsBlock.total} total
+            <p className="text-[13px] text-[rgba(255,255,255,0.4)]">
+              Page {commentsBlock.page} of {commentsBlock.totalPages} &bull; {commentsBlock.total} total
             </p>
             <div className="flex gap-2">
               <button
-                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                className="px-3 py-1.5 rounded-md text-[13px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] text-[rgba(255,255,255,0.6)] hover:bg-[rgba(255,255,255,0.04)] disabled:opacity-30 transition-colors"
                 onClick={() => setCommentsPage(p => Math.max(1, p - 1))}
                 disabled={commentsBlock.page <= 1}
               >
                 Prev
               </button>
               <button
-                className="px-3 py-1.5 border rounded disabled:opacity-50"
+                className="px-3 py-1.5 rounded-md text-[13px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] text-[rgba(255,255,255,0.6)] hover:bg-[rgba(255,255,255,0.04)] disabled:opacity-30 transition-colors"
                 onClick={() => setCommentsPage(p => Math.min(commentsBlock.totalPages, p + 1))}
                 disabled={commentsBlock.page >= commentsBlock.totalPages}
               >

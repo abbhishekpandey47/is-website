@@ -239,7 +239,7 @@ export function getAllClientsOverview(allItems, companies) {
 
 /**
  * Map a raw item into an engagement row with normalized fields.
- * Used by Client Dashboard, Reports, etc.
+ * Used by Client Dashboard, etc.
  */
 export function buildEngagementRow(item, idx, companyMap) {
   return {

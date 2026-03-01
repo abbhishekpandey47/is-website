@@ -1,42 +1,45 @@
-import { Card, CardContent } from "./ui/card";
 import { CircleCheckBig, Clock, CircleX, Radio } from "lucide-react";
 
-export function StatusCard({ status, count, label }) {
-  const statusConfig = {
-    live: {
-      bgColor: 'bg-success/10 hover:bg-success/15 border-success/20',
-      textColor: 'text-success',
-      icon: CircleCheckBig
-    },
-    underApproval: {
-      bgColor: 'bg-warning/10 hover:bg-warning/15 border-warning/20',
-      textColor: 'text-warning',
-      icon: Clock
-    },
-    removed: {
-      bgColor: 'bg-destructive/10 hover:bg-destructive/15 border-destructive/20',
-      textColor: 'text-destructive',
-      icon: CircleX
-    },
-    notPosted: {
-      bgColor: 'bg-info/10 hover:bg-info/15 border-info/20',
-      textColor: 'text-info',
-      icon: Radio
-    }
-  };
+const statusConfig = {
+  live: {
+    iconColor: "text-[#34d399]",
+    iconBg: "bg-[rgba(52,211,153,0.1)]",
+    icon: CircleCheckBig,
+  },
+  underApproval: {
+    iconColor: "text-[#fbbf24]",
+    iconBg: "bg-[rgba(251,191,36,0.1)]",
+    icon: Clock,
+  },
+  removed: {
+    iconColor: "text-[#f87171]",
+    iconBg: "bg-[rgba(248,113,113,0.1)]",
+    icon: CircleX,
+  },
+  notPosted: {
+    iconColor: "text-[#60a5fa]",
+    iconBg: "bg-[rgba(96,165,250,0.1)]",
+    icon: Radio,
+  },
+};
 
-  const config = statusConfig[status] || statusConfig.approved;
+export function StatusCard({ status, count, label }) {
+  const config = statusConfig[status] || statusConfig.live;
   const IconComponent = config.icon;
 
   return (
-    <div className={`relative p-6 rounded-xl border backdrop-blur-sm transition-all duration-200 hover:shadow-lg hover:scale-[1.02] cursor-pointer ${config.bgColor}`}>
+    <div className="group relative p-5 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] transition-all duration-200 hover:border-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.03)]">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-muted-foreground capitalize">{label}</p>
-          <p className="text-3xl font-bold mt-2">{count}</p>
+          <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-[rgba(255,255,255,0.25)]">
+            {label}
+          </p>
+          <p className="text-[28px] font-semibold text-[#ededed] mt-1.5 tracking-[-0.02em]" style={{ fontVariantNumeric: "tabular-nums" }}>
+            {count}
+          </p>
         </div>
-        <div className="p-3 rounded-lg bg-background/50">
-          <IconComponent className={`w-6 h-6 ${config.iconColor}`} />
+        <div className={`flex items-center justify-center w-9 h-9 rounded-lg ${config.iconBg}`}>
+          <IconComponent className={`w-[18px] h-[18px] ${config.iconColor}`} />
         </div>
       </div>
     </div>

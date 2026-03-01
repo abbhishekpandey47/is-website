@@ -23,6 +23,7 @@ module.exports = {
     extend: {
       fontFamily: {
         termina: ['"Termina Demi"', "sans-serif"],
+        geist: ['"Geist"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
       },
       screens: {
         xxs: "200px",
@@ -88,6 +89,12 @@ module.exports = {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
+        // Semantic accent tokens
+        "accent-green": "#34d399",
+        "accent-yellow": "#fbbf24",
+        "accent-purple": "#9382ff",
+        "accent-red": "#f87171",
+        "accent-blue": "#60a5fa",
       },
       boxShadow: {
         navshadow: "0 15px 20px #0000004d",
@@ -150,6 +157,18 @@ module.exports = {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.05)" },
         },
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "slide-in": {
+          "0%": { opacity: "0", transform: "translateX(-8px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        "drop-in": {
+          "0%": { opacity: "0", transform: "translateY(-4px) scale(0.98)" },
+          "100%": { opacity: "1", transform: "translateY(0) scale(1)" },
+        },
       },
       animation: {
         orbit: "orbit calc(var(--duration)*1s) linear infinite",
@@ -165,6 +184,13 @@ module.exports = {
         "float-delay-2": "float 1s ease-in-out infinite 2s",
         "pulse-slow": "pulse-slow 1s ease-in-out infinite",
         "scale-slow": "scale-slow 1s ease-in-out infinite",
+        "fade-up": "fade-up 0.4s ease-out both",
+        "fade-up-delay-1": "fade-up 0.4s ease-out 0.05s both",
+        "fade-up-delay-2": "fade-up 0.4s ease-out 0.1s both",
+        "fade-up-delay-3": "fade-up 0.4s ease-out 0.15s both",
+        "fade-up-delay-4": "fade-up 0.4s ease-out 0.2s both",
+        "slide-in": "slide-in 0.3s ease-out both",
+        "drop-in": "drop-in 0.2s ease-out both",
       },
     },
   },

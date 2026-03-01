@@ -1,16 +1,14 @@
 "use client";
+import ComingSoon from '@/Components/ComingSoon';
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
-      <div className="text-center space-y-4">
-        <h1 className="text-3xl font-bold text-foreground">
-          Category Page Coming Soon
-        </h1>
-        <p className="text-muted-foreground">
-          We’re working hard to bring this feature to you. Stay tuned!
-        </p>
-      </div>
+    <div className="min-h-screen bg-[#0a0a0a]">
+      <ComingSoon
+        title="Category Management"
+        description="Organize and manage your Reddit content categories. Advanced category management is coming soon."
+        backHref="/threadflow"
+      />
     </div>
   );
 }

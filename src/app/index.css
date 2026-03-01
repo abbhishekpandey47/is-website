@@ -1,65 +1,65 @@
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* ThreadFlow Design System — Vercel/Linear inspired dark theme.
+   All colors are HSL (for shadcn/ui compatibility).
 */
 
 .crm-theme {
-    /* Dark theme inspired by the reference */
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+  /* Core backgrounds */
+  --background: 0 0% 4%;          /* #0a0a0a */
+  --foreground: 0 0% 93%;         /* #ededed */
 
-    --card: 224 47% 15%;
-    --card-foreground: 210 40% 98%;
+  --card: 0 0% 5%;                /* rgba(255,255,255,0.02) approx */
+  --card-foreground: 0 0% 93%;
 
-    --popover: 224 47% 15%;
-    --popover-foreground: 210 40% 98%;
+  --popover: 0 0% 6%;
+  --popover-foreground: 0 0% 93%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+  /* Primary action: white-on-black */
+  --primary: 0 0% 93%;
+  --primary-foreground: 0 0% 4%;
 
-    --secondary: 215 25% 27%;
-    --secondary-foreground: 210 40% 98%;
+  --secondary: 0 0% 8%;
+  --secondary-foreground: 0 0% 93%;
 
-    --muted: 215 25% 27%;
-    --muted-foreground: 217 10% 65%;
+  --muted: 0 0% 8%;
+  --muted-foreground: 0 0% 60%;   /* rgba(255,255,255,0.6) */
 
-    --accent: 215 25% 27%;
-    --accent-foreground: 210 40% 98%;
+  --accent: 0 0% 8%;
+  --accent-foreground: 0 0% 93%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+  --destructive: 0 91% 71%;       /* #f87171 */
+  --destructive-foreground: 0 0% 100%;
 
-    --border: 215 25% 27%;
-    --input: 215 25% 27%;
-    --ring: 217 91% 60%;
+  /* Borders & inputs */
+  --border: 0 0% 10%;             /* rgba(255,255,255,0.06) approx */
+  --input: 0 0% 10%;
+  --ring: 0 0% 60%;
 
-    /* Status colors */
-    --approved: 142 76% 36%;
-    --approved-foreground: 0 0% 100%;
-    --pending: 43 96% 56%;
-    --pending-foreground: 222 47% 11%;
-    --rejected: 0 84% 60%;
-    --rejected-foreground: 0 0% 100%;
-    --live: 217 91% 60%;
-    --live-foreground: 0 0% 100%;
+  /* Status colors */
+  --approved: 160 59% 52%;        /* #34d399 emerald */
+  --approved-foreground: 0 0% 4%;
+  --pending: 45 93% 56%;          /* #fbbf24 amber */
+  --pending-foreground: 0 0% 4%;
+  --rejected: 0 91% 71%;          /* #f87171 red */
+  --rejected-foreground: 0 0% 100%;
+  --live: 160 59% 52%;            /* #34d399 green */
+  --live-foreground: 0 0% 4%;
 
-    --radius: 0.75rem;
+  --radius: 0.5rem;
 
-    --sidebar-background: 222 47% 11%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 25% 27%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 215 25% 27%;
-    --sidebar-ring: 217 91% 60%;
-  }
+  /* Sidebar */
+  --sidebar-background: 0 0% 4%;
+  --sidebar-foreground: 0 0% 93%;
+  --sidebar-primary: 0 0% 93%;
+  --sidebar-primary-foreground: 0 0% 4%;
+  --sidebar-accent: 0 0% 8%;
+  --sidebar-accent-foreground: 0 0% 93%;
+  --sidebar-border: 0 0% 10%;
+  --sidebar-ring: 0 0% 60%;
 
-/* @layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-} */
+  /* Charts */
+  --chart-1: 160 59% 52%;         /* green */
+  --chart-2: 45 93% 56%;          /* yellow */
+  --chart-3: 251 100% 75%;        /* purple #9382ff */
+  --chart-4: 0 91% 71%;           /* red */
+  --chart-5: 217 92% 76%;         /* blue #60a5fa */
+}

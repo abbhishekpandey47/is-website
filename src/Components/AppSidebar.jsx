@@ -4,7 +4,11 @@ import {
   BarChart3,
   Calendar,
   FileText,
+  Gauge,
+  LayoutGrid,
   MessageSquare,
+  PieChart,
+  Plug,
   Search,
   Settings,
   Tag,
@@ -31,15 +35,21 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
   const { open } = useSidebar()
   const pathname = usePathname()
 
-  // Define main and management items dynamically based on admin/client
   const mainItems = [
     { title: "Dashboard", url: isAdmin ? "/threadflow" : `/threadflow/c/${companySlug}`, icon: BarChart3 },
+    { title: "Clients", url: isAdmin ? "/threadflow/clients" : `/threadflow/c/${companySlug}/clients`, icon: LayoutGrid },
+    { title: "Client Dashboard", url: isAdmin ? "/threadflow/client-dashboard" : `/threadflow/c/${companySlug}/client-dashboard`, icon: Gauge },
     { title: "Reddit Posts", url: isAdmin ? "/threadflow/posts" : `/threadflow/c/${companySlug}/posts`, icon: MessageSquare },
     { title: "Reddit Comments", url: isAdmin ? "/threadflow/comment" : `/threadflow/c/${companySlug}/comment`, icon: MessageSquare },
     { title: "Analytics", url: isAdmin ? "/threadflow/analytics" : `/threadflow/c/${companySlug}/analytics`, icon: TrendingUp },
+    { title: "Analytics Overview", url: isAdmin ? "/threadflow/analytics-overview" : `/threadflow/c/${companySlug}/analytics-overview`, icon: PieChart },
     { title: "Communities", url: isAdmin ? "/threadflow/communities" : `/threadflow/c/${companySlug}/communities`, icon: Users },
     { title: "SubredditSense", url: isAdmin ? "/threadflow/subredditsense" : `/threadflow/c/${companySlug}/subredditsense`, icon: TrendingUp },
     { title: "Serp Scout", url: isAdmin ? "/threadflow/serp-scout" : `/threadflow/c/${companySlug}/serp-scout`, icon: Search },
+  ]
+
+  const planningItems = [
+    { title: "Cadence Planner", url: isAdmin ? "/threadflow/cadence-planner" : `/threadflow/c/${companySlug}/cadence-planner`, icon: Gauge },
   ]
 
   const managementItems = [
@@ -47,35 +57,25 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
     { title: "Schedule", url: isAdmin ? "/threadflow/management/schedule" : `/threadflow/c/${companySlug}/management/schedule`, icon: Calendar },
     { title: "Templates", url: isAdmin ? "/threadflow/management/templates" : `/threadflow/c/${companySlug}/management/templates`, icon: FileText },
     { title: "Settings", url: isAdmin ? "/threadflow/management/settings" : `/threadflow/c/${companySlug}/management/settings`, icon: Settings },
+    { title: "Integrations", url: isAdmin ? "/threadflow/integrations" : `/threadflow/c/${companySlug}/integrations`, icon: Plug },
   ]
 
-  // const isActive = (href) => {
-  //   if (href === "/threadflow") return pathname === "/threadflow"
-  //   return pathname === href || pathname.startsWith(href + "/")
-  // }
-const isActive = (href) => {
-  const pathParts = pathname.split("/").filter(Boolean);
-  const hrefParts = href.split("/").filter(Boolean);
-
-  // Exact match
-  if (pathname === href) return true;
-
-  // For parent routes, only active if last part of href matches and lengths align
-  return (
-    hrefParts.length === pathParts.length && hrefParts.every((part, index) => part === pathParts[index])
-  );
-};
-
-
-
+  const isActive = (href) => {
+    const pathParts = pathname.split("/").filter(Boolean);
+    const hrefParts = href.split("/").filter(Boolean);
+    if (pathname === href) return true;
+    return (
+      hrefParts.length === pathParts.length && hrefParts.every((part, index) => part === pathParts[index])
+    );
+  };
 
   const camelCaseToName = (str) => {
-  if (!str) return "";
-  return str
-    .replace(/([a-z])([A-Z])/g, "$1 $2") // add space before capital letters
-    .replace(/([A-Z])([A-Z][a-z])/g, "$1 $2") // handle multiple capitals
-    .replace(/^./, (s) => s.toUpperCase()); // capitalize first letter
-}
+    if (!str) return "";
+    return str
+      .replace(/([a-z])([A-Z])/g, "$1 $2")
+      .replace(/([A-Z])([A-Z][a-z])/g, "$1 $2")
+      .replace(/^./, (s) => s.toUpperCase());
+  }
 
   const renderItem = (item) => {
     const active = isActive(item.url)
@@ -86,13 +86,13 @@ const isActive = (href) => {
             href={item.url}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "flex items-center w-full px-3 py-2 rounded-md transition-colors",
+              "flex items-center w-full px-2.5 py-2 rounded-[7px] transition-all duration-150 text-[13px]",
               active
-                ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
-                : "hover:bg-sidebar-accent/50 text-sidebar-foreground"
+                ? "bg-[rgba(255,255,255,0.06)] text-[#ededed] font-medium"
+                : "text-[rgba(255,255,255,0.4)] hover:bg-[rgba(255,255,255,0.03)] hover:text-[rgba(255,255,255,0.7)]"
             )}
           >
-            <item.icon className="mr-3 h-4 w-4" />
+            <item.icon className={cn("mr-2.5 h-4 w-4 shrink-0", active ? "opacity-100" : "opacity-50")} />
             {open && <span>{item.title}</span>}
           </Link>
         </SidebarMenuButton>
@@ -101,11 +101,22 @@ const isActive = (href) => {
   }
 
   return (
-    <Sidebar className="border-sidebar-border">
-      <SidebarContent className="bg-sidebar text-sidebar-foreground">
-      <div className="text-center mt-5 text-3xl font-extrabold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">{companyName ? camelCaseToName(companyName) : "Infrasity"}</div>
+    <Sidebar className="border-r border-[rgba(255,255,255,0.06)]">
+      <SidebarContent className="bg-[rgba(255,255,255,0.01)] font-geist">
+        {/* Logo + brand */}
+        <div className="flex items-center gap-2.5 px-4 pt-5 pb-4">
+          <div className="flex items-center justify-center w-7 h-7 rounded-[7px] bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] shrink-0">
+            <BarChart3 className="w-3.5 h-3.5 text-white" />
+          </div>
+          {open && (
+            <span className="text-[15px] font-semibold text-[#ededed] tracking-[-0.01em]">
+              {companyName ? camelCaseToName(companyName) : "Infrasity"}
+            </span>
+          )}
+        </div>
+
         <SidebarGroup>
-          <SidebarGroupLabel className="text-sidebar-foreground/70 text-xs font-medium uppercase tracking-wider mb-2">
+          <SidebarGroupLabel className="text-[10px] font-medium uppercase tracking-[0.08em] text-[rgba(255,255,255,0.25)] px-3 mb-1">
             Main
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -114,7 +125,16 @@ const isActive = (href) => {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className="text-sidebar-foreground/70 text-xs font-medium uppercase tracking-wider mb-2">
+          <SidebarGroupLabel className="text-[10px] font-medium uppercase tracking-[0.08em] text-[rgba(255,255,255,0.25)] px-3 mb-1">
+            Planning
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>{planningItems.map(renderItem)}</SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-[10px] font-medium uppercase tracking-[0.08em] text-[rgba(255,255,255,0.25)] px-3 mb-1">
             Management
           </SidebarGroupLabel>
           <SidebarGroupContent>

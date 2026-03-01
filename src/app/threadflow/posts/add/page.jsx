@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import "react-quill-new/dist/quill.snow.css";
 import { Button } from "../../../../Components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../../../../Components/ui/card";
 import { Input } from "../../../../Components/ui/input";
 import { Label } from "../../../../Components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../Components/ui/select";
@@ -205,26 +204,31 @@ const AddPostPage = () => {
   }, [router]);
 
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return (
+    <div className="min-h-screen bg-[#0a0a0a] p-6 space-y-4 font-geist">
+      <div className="animate-pulse h-6 w-48 bg-[rgba(255,255,255,0.04)] rounded-[7px]" />
+      <div className="animate-pulse h-10 w-full bg-[rgba(255,255,255,0.04)] rounded-[7px]" />
+      <div className="animate-pulse h-10 w-full bg-[rgba(255,255,255,0.04)] rounded-[7px]" />
+    </div>
+  );
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0a0a0a] font-geist">
       {/* Header */}
-      <header className="border-b border-border bg-card">
+      <header className="border-b border-[rgba(255,255,255,0.06)]">
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">
-            <SidebarTrigger className="h-8 w-8" />
+            <SidebarTrigger className="h-7 w-7 text-[rgba(255,255,255,0.4)] hover:text-[#ededed]" />
             <div className="flex items-center gap-3">
-              <Button
-                variant="ghost"
+              <button
                 onClick={() => router.back()}
-                className="p-2"
+                className="h-8 w-8 inline-flex items-center justify-center rounded-[7px] text-[rgba(255,255,255,0.4)] hover:text-[#ededed] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
               >
                 <ArrowLeft className="h-4 w-4" />
-              </Button>
+              </button>
               <div>
-                <h1 className="text-xl font-bold text-foreground">Add New Reddit Post</h1>
-                <p className="text-sm text-muted-foreground">Create a new entry for tracking</p>
+                <h1 className="text-[16px] font-semibold text-[#ededed]">Add New Reddit Post</h1>
+                <p className="text-[13px] text-[rgba(255,255,255,0.4)]">Create a new entry for tracking</p>
               </div>
             </div>
           </div>
@@ -233,43 +237,44 @@ const AddPostPage = () => {
       </header>
 
       {/* Main Content */}
-      <div className="p-6">
+      <div className="p-6 animate-fade-up">
         <div className="max-w-4xl mx-auto">
           <form onSubmit={handleSubmit}>
-            <Card className="border-border/50 shadow-sm">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                  <div className="w-1 h-6 bg-primary rounded-full"></div>
+            <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] p-6">
+              <div className="mb-6 pb-4 border-b border-[rgba(255,255,255,0.06)]">
+                <h2 className="text-[16px] font-semibold text-[#ededed] flex items-center gap-2">
+                  <div className="w-1 h-5 bg-[#34d399] rounded-full"></div>
                   Post Details
-                </CardTitle>
-                <p className="text-sm text-muted-foreground">Fill in the information below to create a new Reddit post entry</p>
-              </CardHeader>
-              <CardContent className="space-y-6">
+                </h2>
+                <p className="text-[13px] text-[rgba(255,255,255,0.4)] mt-1">Fill in the information below to create a new Reddit post entry</p>
+              </div>
+
+              <div className="space-y-6">
                 {/* Basic Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="category">Category *</Label>
+                    <Label htmlFor="category" className="text-[13px] font-medium text-[rgba(255,255,255,0.6)] mb-2 block">Category *</Label>
                     <div className="space-y-2">
                       <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
-                        <SelectTrigger className="h-10">
+                        <SelectTrigger className="h-9 text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px]">
                           <SelectValue placeholder="Choose a category" />
                         </SelectTrigger>
-                        <SelectContent className="max-h-60">
+                        <SelectContent className="max-h-60 bg-[#141414] border-[rgba(255,255,255,0.08)] shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
                           {categories.length > 0 && (
-                            <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground border-b border-border/50 mb-1">
+                            <div className="px-2 py-1.5 text-[11px] font-medium text-[rgba(255,255,255,0.25)] border-b border-[rgba(255,255,255,0.06)] mb-1 uppercase tracking-[0.06em]">
                               Recommended Categories
                             </div>
                           )}
                           {categories.map((category) => (
-                            <SelectItem key={category} value={category} className="py-2">
+                            <SelectItem key={category} value={category} className="py-2 text-[13px] text-[rgba(255,255,255,0.6)] focus:bg-[rgba(255,255,255,0.04)] focus:text-[#ededed]">
                               <div className="flex items-center gap-2">
-                                <div className="w-2 h-2 bg-primary/60 rounded-full"></div>
+                                <div className="w-1.5 h-1.5 bg-[#34d399]/60 rounded-full"></div>
                                 {category}
                               </div>
                             </SelectItem>
                           ))}
-                          <div className="border-t border-border/50 mt-1 pt-1">
-                            <SelectItem value="add-new" className="text-primary font-medium py-2">
+                          <div className="border-t border-[rgba(255,255,255,0.06)] mt-1 pt-1">
+                            <SelectItem value="add-new" className="text-[#34d399] font-medium py-2 text-[13px] focus:bg-[rgba(255,255,255,0.04)] focus:text-[#34d399]">
                               <div className="flex items-center gap-2">
                                 <Plus className="h-4 w-4" />
                                 Create New Category
@@ -281,28 +286,26 @@ const AddPostPage = () => {
                       </Select>
 
                       {formData.category === "add-new" && (
-                        <div className="border border-border/50 rounded-lg p-4 bg-card/50 backdrop-blur-sm shadow-sm">
+                        <div className="border border-[rgba(255,255,255,0.06)] rounded-xl p-4 bg-[rgba(255,255,255,0.02)]">
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-2">
-                              <div className="w-2 h-2 bg-primary rounded-full"></div>
-                              <Label className="text-sm font-semibold text-foreground">Create New Category</Label>
+                              <div className="w-1.5 h-1.5 bg-[#34d399] rounded-full"></div>
+                              <Label className="text-[13px] font-semibold text-[#ededed]">Create New Category</Label>
                             </div>
-                            <Button
+                            <button
                               type="button"
-                              variant="ghost"
-                              size="sm"
-                              className="h-6 w-6 p-0 hover:bg-muted"
+                              className="h-6 w-6 inline-flex items-center justify-center rounded-[7px] text-[rgba(255,255,255,0.4)] hover:text-[#ededed] hover:bg-[rgba(255,255,255,0.04)] transition-colors"
                               onClick={() => {
                                 setShowAddCategory(false);
                                 setFormData(prev => ({ ...prev, category: "" }));
                               }}
                             >
                               <X className="h-3 w-3" />
-                            </Button>
+                            </button>
                           </div>
                           <div className="space-y-4">
                             <div>
-                              <Label htmlFor="newCategoryName" className="text-xs font-medium text-muted-foreground mb-2 block">
+                              <Label htmlFor="newCategoryName" className="text-[11px] font-medium text-[rgba(255,255,255,0.4)] mb-2 block uppercase tracking-[0.06em]">
                                 Category Name *
                               </Label>
                               <Input
@@ -310,12 +313,12 @@ const AddPostPage = () => {
                                 value={newCategory.name}
                                 onChange={(e) => setNewCategory(prev => ({ ...prev, name: e.target.value }))}
                                 placeholder="e.g., Cloud Security, Monitoring, etc."
-                                className="h-9 text-sm"
+                                className="h-9 text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px] placeholder:text-[rgba(255,255,255,0.25)]"
                                 autoFocus
                               />
                             </div>
                             <div>
-                              <Label htmlFor="newCategoryDescription" className="text-xs font-medium text-muted-foreground mb-2 block">
+                              <Label htmlFor="newCategoryDescription" className="text-[11px] font-medium text-[rgba(255,255,255,0.4)] mb-2 block uppercase tracking-[0.06em]">
                                 Description (Optional)
                               </Label>
                               <Input
@@ -323,31 +326,28 @@ const AddPostPage = () => {
                                 value={newCategory.description}
                                 onChange={(e) => setNewCategory(prev => ({ ...prev, description: e.target.value }))}
                                 placeholder="Brief description of this category"
-                                className="h-9 text-sm"
+                                className="h-9 text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px] placeholder:text-[rgba(255,255,255,0.25)]"
                               />
                             </div>
                             <div className="flex gap-2 pt-2">
-                              <Button
+                              <button
                                 type="button"
-                                variant="outline"
-                                size="sm"
                                 onClick={() => {
                                   setShowAddCategory(false);
                                   setFormData(prev => ({ ...prev, category: "" }));
                                 }}
-                                className="flex-1 h-8 text-xs"
+                                className="flex-1 h-8 text-[12px] font-medium rounded-[7px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] text-[rgba(255,255,255,0.6)] hover:text-[#ededed] hover:bg-[rgba(255,255,255,0.06)] transition-colors"
                               >
                                 Cancel
-                              </Button>
-                              <Button
+                              </button>
+                              <button
                                 type="button"
                                 onClick={handleAddCategory}
-                                size="sm"
-                                className="flex-1 h-8 text-xs bg-primary hover:bg-primary/90"
+                                className="flex-1 h-8 text-[12px] font-medium rounded-[7px] bg-[#ededed] text-[#0a0a0a] hover:bg-[#d4d4d4] transition-colors inline-flex items-center justify-center gap-1"
                               >
-                                <Plus className="h-3 w-3 mr-1" />
+                                <Plus className="h-3 w-3" />
                                 Create Category
-                              </Button>
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -355,33 +355,33 @@ const AddPostPage = () => {
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="targetedSubreddit" className="text-sm font-medium mb-2 block">Targeted Subreddit</Label>
+                    <Label htmlFor="targetedSubreddit" className="text-[13px] font-medium text-[rgba(255,255,255,0.6)] mb-2 block">Targeted Subreddit</Label>
                     <Input
                       id="targetedSubreddit"
                       value={formData.targetedSubreddit}
                       onChange={(e) => handleInputChange("targetedSubreddit", e.target.value)}
                       placeholder="Enter the Targeted Subreddit"
-                      className="h-10"
+                      className="h-9 text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px] placeholder:text-[rgba(255,255,255,0.25)]"
                     />
                   </div>
                   {companiesList.length > 0 &&
                   <div>
-                    <Label htmlFor="companyId">Company Name</Label>
+                    <Label htmlFor="companyId" className="text-[13px] font-medium text-[rgba(255,255,255,0.6)] mb-2 block">Company Name</Label>
                     <Select
                       value={formData.companyId}
                       onValueChange={(value) =>
                         handleInputChange("companyId", value)
                       }
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="h-9 text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px]">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-[#141414] border-[rgba(255,255,255,0.08)] shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
                         {
                           companiesList
                             .filter((company) => !['perplexity', 'spacelift', 'akgec'].includes(company.name.toLowerCase()))
                             .map((company) => (
-                              <SelectItem key={company.id} value={company.id}>{company.name}</SelectItem>
+                              <SelectItem key={company.id} value={company.id} className="text-[13px] text-[rgba(255,255,255,0.6)] focus:bg-[rgba(255,255,255,0.04)] focus:text-[#ededed]">{company.name}</SelectItem>
                             ))}
                       </SelectContent>
                     </Select>
@@ -389,24 +389,24 @@ const AddPostPage = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="redditUsername" className="text-sm font-medium mb-2 block">Reddit Username</Label>
+                  <Label htmlFor="redditUsername" className="text-[13px] font-medium text-[rgba(255,255,255,0.6)] mb-2 block">Reddit Username</Label>
                   <Input
                     id="redditUsername"
                     value={formData.redditUsername}
                     onChange={(e) => handleInputChange("redditUsername", e.target.value)}
                     placeholder="Enter the Reddit Username"
-                    className="h-10"
+                    className="h-9 text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px] placeholder:text-[rgba(255,255,255,0.25)]"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="title" className="text-sm font-medium mb-2 block">Title *</Label>
+                  <Label htmlFor="title" className="text-[13px] font-medium text-[rgba(255,255,255,0.6)] mb-2 block">Title *</Label>
                   <Input
                     id="title"
                     value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
                     placeholder="Enter the Reddit post title"
-                    className="h-10"
+                    className="h-9 text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px] placeholder:text-[rgba(255,255,255,0.25)]"
                   />
                 </div>
 
@@ -414,14 +414,14 @@ const AddPostPage = () => {
                 <div>
                   <Label
                     htmlFor="engagementText"
-                    className="text-sm font-medium mb-2 block"
+                    className="text-[13px] font-medium text-[rgba(255,255,255,0.6)] mb-2 block"
                   >
                     Body Text
                   </Label>
                   <div
                     className={cn(
-                      "flex w-full rounded-md border border-input bg-transparent shadow-sm transition-colors",
-                      "focus-within:outline-none focus-within:ring-1 focus-within:ring-ring"
+                      "flex w-full rounded-[7px] border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] shadow-sm transition-colors",
+                      "focus-within:outline-none focus-within:border-[rgba(255,255,255,0.12)]"
                     )}
                   >
                     <ReactQuill
@@ -438,74 +438,58 @@ const AddPostPage = () => {
                       }}
                       className={cn(
                         "w-full",
-
                         "[&_.ql-toolbar]:!border-none [&_.ql-container]:!border-none",
-
                         "[&_.ql-toolbar]:bg-transparent [&_.ql-container]:bg-transparent",
                         "[&_.ql-editor]:min-h-[120px] [&_.ql-editor]:pt-2 [&_.ql-editor]:px-3",
-                        "[&_.ql-editor]:text-sm [&_.ql-editor]:text-foreground",
-                        "[&_.ql-editor.ql-blank::before]:text-muted-foreground",
-
-                        "[&_.ql-toolbar_button]:text-muted-foreground [&_.ql-toolbar_button:hover]:text-foreground",
-
-                        "[&_.ql-tooltip]:!bg-neutral-900 [&_.ql-tooltip]:!text-white [&_.ql-tooltip]:!border [&_.ql-tooltip]:!border-neutral-700",
-
-                        "[&_.ql-tooltip_input]:!bg-neutral-800 [&_.ql-tooltip_input]:!text-white [&_.ql-tooltip_input]:!placeholder-gray-400 [&_.ql-tooltip_input]:!border [&_.ql-tooltip_input]:!border-neutral-700",
-
-                        "[&_.ql-tooltip] button:!text-white [&_.ql-tooltip] button:hover:!text-blue-400"
+                        "[&_.ql-editor]:text-[13px] [&_.ql-editor]:text-[#ededed]",
+                        "[&_.ql-editor.ql-blank::before]:text-[rgba(255,255,255,0.25)]",
+                        "[&_.ql-toolbar_button]:text-[rgba(255,255,255,0.4)] [&_.ql-toolbar_button:hover]:text-[#ededed]",
+                        "[&_.ql-tooltip]:!bg-[#141414] [&_.ql-tooltip]:!text-[#ededed] [&_.ql-tooltip]:!border [&_.ql-tooltip]:!border-[rgba(255,255,255,0.08)]",
+                        "[&_.ql-tooltip_input]:!bg-[rgba(255,255,255,0.02)] [&_.ql-tooltip_input]:!text-[#ededed] [&_.ql-tooltip_input]:!placeholder-[rgba(255,255,255,0.25)] [&_.ql-tooltip_input]:!border [&_.ql-tooltip_input]:!border-[rgba(255,255,255,0.06)]",
+                        "[&_.ql-tooltip] button:!text-[#ededed] [&_.ql-tooltip] button:hover:!text-[#60a5fa]"
                       )}
                     />
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="text-[11px] text-[rgba(255,255,255,0.25)] mt-1.5">
                     This will be your response or engagement with the Reddit post
                   </p>
                 </div>
 
                 <div>
-                  <Label htmlFor="clientFeedback" className="text-sm font-medium mb-2 block">Customer Comments</Label>
+                  <Label htmlFor="clientFeedback" className="text-[13px] font-medium text-[rgba(255,255,255,0.6)] mb-2 block">Customer Comments</Label>
                   <Textarea
                     id="clientFeedback"
                     value={formData.clientFeedback}
                     onChange={(e) => handleInputChange("clientFeedback", e.target.value)}
                     placeholder="Enter your feedback for this Reddit Comment..."
                     rows={4}
-                    className="resize-none"
+                    className="resize-none text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px] placeholder:text-[rgba(255,255,255,0.25)]"
                   />
                 </div>
-
-                {/* <div>
-                  <Label htmlFor="kimsVersion">Kim's Version</Label>
-                  <Textarea
-                    id="kimsVersion"
-                    value={formData.kimsVersion}
-                    onChange={(e) => handleInputChange("kimsVersion", e.target.value)}
-                    placeholder="Revised version of the engagement text"
-                    rows={4}
-                  />
-                </div> */}
 
                 {/* Tracking Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="datePosted">Date Posted</Label>
+                    <Label htmlFor="datePosted" className="text-[13px] font-medium text-[rgba(255,255,255,0.6)] mb-2 block">Date Posted</Label>
                     <Input
                       id="datePosted"
                       type="date"
                       value={formData.datePosted}
                       onChange={(e) => handleInputChange("datePosted", e.target.value)}
+                      className="h-9 text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px]"
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="currentStatus">Post Approval Status</Label>
+                    <Label htmlFor="currentStatus" className="text-[13px] font-medium text-[rgba(255,255,255,0.6)] mb-2 block">Post Approval Status</Label>
                     <Select value={formData.currentStatus} onValueChange={(value) => handleInputChange("currentStatus", value)}>
-                      <SelectTrigger>
+                      <SelectTrigger className="h-9 text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px]">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="approved">Approved</SelectItem>
-                        <SelectItem value="notApproved">Not Approved</SelectItem>
-                        <SelectItem value="pending">Pending</SelectItem>
+                      <SelectContent className="bg-[#141414] border-[rgba(255,255,255,0.08)] shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+                        <SelectItem value="approved" className="text-[13px] text-[rgba(255,255,255,0.6)] focus:bg-[rgba(255,255,255,0.04)] focus:text-[#ededed]">Approved</SelectItem>
+                        <SelectItem value="notApproved" className="text-[13px] text-[rgba(255,255,255,0.6)] focus:bg-[rgba(255,255,255,0.04)] focus:text-[#ededed]">Not Approved</SelectItem>
+                        <SelectItem value="pending" className="text-[13px] text-[rgba(255,255,255,0.6)] focus:bg-[rgba(255,255,255,0.04)] focus:text-[#ededed]">Pending</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -513,30 +497,29 @@ const AddPostPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="postedLink">Posted Link</Label>
+                    <Label htmlFor="postedLink" className="text-[13px] font-medium text-[rgba(255,255,255,0.6)] mb-2 block">Posted Link</Label>
                     <Input
                       id="postedLink"
                       type="url"
                       value={formData.postedLink}
                       onChange={(e) => handleInputChange("postedLink", e.target.value)}
                       placeholder="Direct link to the posted content"
+                      className="h-9 text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px] placeholder:text-[rgba(255,255,255,0.25)]"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="status">Published Post Status</Label>
+                    <Label htmlFor="status" className="text-[13px] font-medium text-[rgba(255,255,255,0.6)] mb-2 block">Published Post Status</Label>
                     <Select value={formData.status} onValueChange={(value) => handleInputChange("status", value)}>
-                      <SelectTrigger>
+                      <SelectTrigger className="h-9 text-[13px] bg-[rgba(255,255,255,0.02)] border-[rgba(255,255,255,0.06)] text-[#ededed] rounded-[7px]">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
-                                              <SelectItem value="postUnderApproval">Post Under Approval</SelectItem>
-                                              <SelectItem value="live">Live</SelectItem>
-                                              <SelectItem value="removed">Removed </SelectItem>
-
-                                              <SelectItem value="reposted">Reposted</SelectItem>
-                                              <SelectItem value="notPosted">Not Posted</SelectItem>
-
-                                            </SelectContent>
+                      <SelectContent className="bg-[#141414] border-[rgba(255,255,255,0.08)] shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+                        <SelectItem value="postUnderApproval" className="text-[13px] text-[rgba(255,255,255,0.6)] focus:bg-[rgba(255,255,255,0.04)] focus:text-[#ededed]">Post Under Approval</SelectItem>
+                        <SelectItem value="live" className="text-[13px] text-[rgba(255,255,255,0.6)] focus:bg-[rgba(255,255,255,0.04)] focus:text-[#ededed]">Live</SelectItem>
+                        <SelectItem value="removed" className="text-[13px] text-[rgba(255,255,255,0.6)] focus:bg-[rgba(255,255,255,0.04)] focus:text-[#ededed]">Removed</SelectItem>
+                        <SelectItem value="reposted" className="text-[13px] text-[rgba(255,255,255,0.6)] focus:bg-[rgba(255,255,255,0.04)] focus:text-[#ededed]">Reposted</SelectItem>
+                        <SelectItem value="notPosted" className="text-[13px] text-[rgba(255,255,255,0.6)] focus:bg-[rgba(255,255,255,0.04)] focus:text-[#ededed]">Not Posted</SelectItem>
+                      </SelectContent>
                     </Select>
 
                   </div>
@@ -544,25 +527,24 @@ const AddPostPage = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex items-center justify-end gap-3 pt-8 border-t border-border/50">
-                  <Button
+                <div className="flex items-center justify-end gap-3 pt-6 border-t border-[rgba(255,255,255,0.06)]">
+                  <button
                     type="button"
-                    variant="outline"
                     onClick={() => router.back()}
-                    className="h-10 px-6"
+                    className="h-9 px-6 text-[13px] font-medium rounded-[7px] bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.06)] text-[rgba(255,255,255,0.6)] hover:text-[#ededed] hover:bg-[rgba(255,255,255,0.06)] transition-colors"
                   >
                     Cancel
-                  </Button>
-                  <Button
+                  </button>
+                  <button
                     type="submit"
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground h-10 px-6"
+                    className="h-9 px-6 text-[13px] font-medium rounded-[7px] bg-[#ededed] text-[#0a0a0a] hover:bg-[#d4d4d4] transition-colors inline-flex items-center gap-2"
                   >
-                    <Save className="h-4 w-4 mr-2" />
+                    <Save className="h-4 w-4" />
                     Save
-                  </Button>
+                  </button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </form>
         </div>
       </div>

@@ -1,16 +1,14 @@
 "use client";
+import ComingSoon from '@/Components/ComingSoon';
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
-      <div className="text-center space-y-4">
-        <h1 className="text-3xl font-bold text-foreground">
-          Schedule Page Coming Soon
-        </h1>
-        <p className="text-muted-foreground">
-          We’re working hard to bring this feature to you. Stay tuned!
-        </p>
-      </div>
+    <div className="min-h-screen bg-[#0a0a0a]">
+      <ComingSoon
+        title="Schedule Management"
+        description="Plan, queue, and optimize Reddit post timing. Intelligent scheduling engine coming soon."
+        backHref="/threadflow"
+      />
     </div>
   );
 }

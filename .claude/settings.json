@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "/Users/shan/infrasity_frontend/src/app/threadflow/c/[company]",
+      "/Users/shan/infrasity_frontend/src/app/threadflow/c/[company]/integrations"
+    ],
+    "allow": [
+      "Bash(grep -r \"useParams\\\\|useRouter\" /Users/shan/infrasity_frontend/src/app/threadflow/c/[company] --include=\"*.jsx\" -A 3)"
+    ]
+  }
+}
