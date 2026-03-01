@@ -36,9 +36,8 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
   const pathname = usePathname()
 
   const mainItems = [
-    { title: "Dashboard", url: isAdmin ? "/threadflow" : `/threadflow/c/${companySlug}`, icon: BarChart3 },
+    { title: "Dashboard", url: isAdmin ? "/threadflow/client-dashboard" : `/threadflow/c/${companySlug}/client-dashboard`, icon: Gauge },
     { title: "Clients", url: isAdmin ? "/threadflow/clients" : `/threadflow/c/${companySlug}/clients`, icon: LayoutGrid },
-    { title: "Client Dashboard", url: isAdmin ? "/threadflow/client-dashboard" : `/threadflow/c/${companySlug}/client-dashboard`, icon: Gauge },
     { title: "Reddit Posts", url: isAdmin ? "/threadflow/posts" : `/threadflow/c/${companySlug}/posts`, icon: MessageSquare },
     { title: "Reddit Comments", url: isAdmin ? "/threadflow/comment" : `/threadflow/c/${companySlug}/comment`, icon: MessageSquare },
     { title: "Analytics", url: isAdmin ? "/threadflow/analytics" : `/threadflow/c/${companySlug}/analytics`, icon: TrendingUp },

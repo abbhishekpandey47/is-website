@@ -559,6 +559,7 @@ export default function CadencePlannerPage() {
   const [flashCell, setFlashCell] = useState(null);
   const [showLimitsModal, setShowLimitsModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [selectedMonth, setSelectedMonth] = useState(() => {
     const now = new Date();
     return { year: now.getFullYear(), month: now.getMonth() + 1 };
@@ -633,9 +634,18 @@ export default function CadencePlannerPage() {
       setTimeout(() => setFlashCell(null), 600);
       // Persist to localStorage immediately
       try { localStorage.setItem("cadence_targets", JSON.stringify(updated)); } catch (e) { /* noop */ }
-      // Also attempt API persist (will silently fail if table doesn't exist)
-      if (tokenRef.current) {
-        await updateCadenceConfig(tokenRef.current, companyName, numLimit);
+      // Refresh token before API call
+      try {
+        if (firebaseUser) {
+          tokenRef.current = await firebaseUser.getIdToken(true);
+        }
+        if (tokenRef.current) {
+          await updateCadenceConfig(tokenRef.current, companyName, numLimit);
+        }
+      } catch (err) {
+        console.error("handleSaveLimit API error:", err);
+        setErrorMessage("Saved locally but failed to sync to server");
+        setTimeout(() => setErrorMessage(""), 3000);
       }
     }
     setEditingCell(null);
@@ -656,17 +666,26 @@ export default function CadencePlannerPage() {
     });
     setCadenceLimitsState(newLimits);
     setShowLimitsModal(false);
-    setSuccessMessage(`Updated ${changes.length} client${changes.length > 1 ? "s" : ""}`);
-    setTimeout(() => setSuccessMessage(""), 2500);
     // Persist to localStorage immediately
     try { localStorage.setItem("cadence_targets", JSON.stringify(newLimits)); } catch (e) { /* noop */ }
-    // Also attempt API persist
-    if (tokenRef.current) {
-      await Promise.all(
-        changes.map(({ name, limit }) =>
-          updateCadenceConfig(tokenRef.current, name, limit)
-        )
-      );
+    // Refresh token before API calls
+    try {
+      if (firebaseUser) {
+        tokenRef.current = await firebaseUser.getIdToken(true);
+      }
+      if (tokenRef.current) {
+        await Promise.all(
+          changes.map(({ name, limit }) =>
+            updateCadenceConfig(tokenRef.current, name, limit)
+          )
+        );
+      }
+      setSuccessMessage(`Updated ${changes.length} client${changes.length > 1 ? "s" : ""}`);
+      setTimeout(() => setSuccessMessage(""), 2500);
+    } catch (err) {
+      console.error("handleBulkSave API error:", err);
+      setErrorMessage("Saved locally but failed to sync to server");
+      setTimeout(() => setErrorMessage(""), 3000);
     }
   };
 
@@ -1773,6 +1792,27 @@ export default function CadencePlannerPage() {
           }}
         >
           {successMessage}
+        </div>
+      )}
+      {errorMessage && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 24,
+            left: "50%",
+            transform: "translateX(-50%)",
+            padding: "10px 20px",
+            background: "rgba(248,113,113,0.15)",
+            border: "1px solid rgba(248,113,113,0.3)",
+            borderRadius: 8,
+            color: "#f87171",
+            fontSize: 13,
+            fontWeight: 500,
+            zIndex: 1001,
+            fontFamily: font,
+          }}
+        >
+          {errorMessage}
         </div>
       )}
     </div>

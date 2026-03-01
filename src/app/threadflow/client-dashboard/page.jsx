@@ -244,6 +244,7 @@ export default function ClientDashboardPage() {
   const [cadenceTargets, setCadenceTargets] = useState({});
   const [editingCadence, setEditingCadence] = useState(false);
   const [cadenceInput, setCadenceInput] = useState("");
+  const [cadenceSaveError, setCadenceSaveError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const ROWS_PER_PAGE = 15;
   const dropdownRef = useRef(null);
@@ -460,11 +461,20 @@ export default function ClientDashboardPage() {
     setEditingCadence(false);
     // Persist to localStorage immediately
     try { localStorage.setItem("cadence_targets", JSON.stringify(updated)); } catch (e) { /* noop */ }
-    // Also attempt API persist
-    if (tokenRef.current) {
-      await updateCadenceConfig(tokenRef.current, selectedClientName, num);
+    // Refresh token before API call
+    try {
+      if (firebaseUser) {
+        tokenRef.current = await firebaseUser.getIdToken(true);
+      }
+      if (tokenRef.current) {
+        await updateCadenceConfig(tokenRef.current, selectedClientName, num);
+      }
+    } catch (err) {
+      console.error("saveCadenceTarget API error:", err);
+      setCadenceSaveError("Saved locally but failed to sync to server");
+      setTimeout(() => setCadenceSaveError(""), 3000);
     }
-  }, [cadenceTargets, selectedClientName]);
+  }, [cadenceTargets, selectedClientName, firebaseUser]);
 
   // ── Generate Report (CSV download) ────────────────────────────────────────
   const generateReport = useCallback(() => {
@@ -1872,6 +1882,29 @@ export default function ClientDashboardPage() {
           </button>
         </div>
       </div>
+
+      {/* ─── Cadence Save Error Toast ─── */}
+      {cadenceSaveError && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 28,
+            left: "50%",
+            transform: "translateX(-50%)",
+            padding: "10px 20px",
+            background: "rgba(248,113,113,0.15)",
+            border: "1px solid rgba(248,113,113,0.3)",
+            borderRadius: 8,
+            color: "#f87171",
+            fontSize: 13,
+            fontWeight: 500,
+            zIndex: 9999,
+            fontFamily: FONT_FAMILY,
+          }}
+        >
+          {cadenceSaveError}
+        </div>
+      )}
 
       {/* ─── Share Toast ─── */}
       {showShareToast && (

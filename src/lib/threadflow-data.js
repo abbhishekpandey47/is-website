@@ -286,37 +286,42 @@ export async function fetchCadenceConfig(token) {
     const res = await fetch("/api/cadence-config", {
       headers: { Authorization: `Bearer ${token}` },
     });
-    if (!res.ok) return [];
+    if (!res.ok) {
+      console.error("fetchCadenceConfig: HTTP", res.status);
+      return [];
+    }
     const result = await res.json();
     return result.data || [];
-  } catch {
+  } catch (err) {
+    console.error("fetchCadenceConfig error:", err);
     return [];
   }
 }
 
 /**
  * Upsert a single company's cadence config via the API.
- * Returns the updated row or null on failure.
+ * Returns the updated row, or throws on failure so callers can show feedback.
  */
 export async function updateCadenceConfig(token, companyName, monthlyLimit) {
-  try {
-    const res = await fetch("/api/cadence-config", {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        company_name: companyName,
-        monthly_limit: monthlyLimit,
-      }),
-    });
-    if (!res.ok) return null;
-    const result = await res.json();
-    return result.data || null;
-  } catch {
-    return null;
+  const res = await fetch("/api/cadence-config", {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      company_name: companyName,
+      monthly_limit: monthlyLimit,
+    }),
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    const msg = body.error || `Failed to save cadence (${res.status})`;
+    console.error("updateCadenceConfig error:", msg);
+    throw new Error(msg);
   }
+  const result = await res.json();
+  return result.data || null;
 }
 
 /**
