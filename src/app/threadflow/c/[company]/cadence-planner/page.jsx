@@ -62,6 +62,12 @@ function isCurrentMonth(dateStr) {
   return d.getUTCFullYear() === now.getFullYear() && d.getUTCMonth() === now.getMonth();
 }
 
+function isSelectedMonthMatch(dateStr, year, month) {
+  if (!dateStr) return false;
+  const d = new Date(dateStr);
+  return d.getUTCFullYear() === year && d.getUTCMonth() === month - 1;
+}
+
 function isItemLive(item) {
   return sharedNormalizeStatus(item) === "Live";
 }
@@ -74,9 +80,12 @@ function isItemApproved(item) {
   return sharedNormalizeStatus(item) === "Under Approval";
 }
 
-function buildClientsFromData(allItems, companiesList, cadenceLimits = {}) {
-  const currentMonthItems = allItems.filter((item) => isCurrentMonth(item.date_posted));
-  const currentWeek = getCurrentWeekOfMonth();
+function buildClientsFromData(allItems, companiesList, cadenceLimits = {}, selectedYear = null, selectedMonthNum = null) {
+  const isCurrentMonthSelected = selectedYear === null || (selectedYear === new Date().getFullYear() && selectedMonthNum === new Date().getMonth() + 1);
+  const currentMonthItems = selectedYear
+    ? allItems.filter((item) => isSelectedMonthMatch(item.date_posted, selectedYear, selectedMonthNum))
+    : allItems.filter((item) => isCurrentMonth(item.date_posted));
+  const currentWeek = isCurrentMonthSelected ? getCurrentWeekOfMonth() : 4;
 
   const companyMap = {};
   companiesList.forEach((company) => {
@@ -342,6 +351,10 @@ export default function CadencePlannerPage() {
   const [flashCell, setFlashCell] = useState(null);
   const [showLimitsModal, setShowLimitsModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState(() => {
+    const now = new Date();
+    return { year: now.getFullYear(), month: now.getMonth() + 1 };
+  });
 
 
   // Token ref for API calls
@@ -443,8 +456,8 @@ export default function CadencePlannerPage() {
 
   const clients = useMemo(() => {
     if (companiesList.length === 0) return [];
-    return buildClientsFromData(allItems, companiesList, cadenceLimits);
-  }, [allItems, companiesList, cadenceLimits]);
+    return buildClientsFromData(allItems, companiesList, cadenceLimits, selectedMonth.year, selectedMonth.month);
+  }, [allItems, companiesList, cadenceLimits, selectedMonth]);
 
   // ── Filtering & Sorting ──────────────────────────────────────────────────
 
@@ -485,9 +498,8 @@ export default function CadencePlannerPage() {
   // ── Export CSV ───────────────────────────────────────────────────────────
 
   const handleExport = () => {
-    const now = new Date();
-    const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-    const monthLabel = `${monthNames[now.getMonth()]}-${now.getFullYear()}`;
+    const shortMonthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const monthLabel = `${shortMonthNames[selectedMonth.month - 1]}-${selectedMonth.year}`;
     const headers = ["Client", "Target", "Live", "Approved", "Pending", "Live %", "Wk1", "Wk2", "Wk3", "Wk4", "Pace"];
     const rows = filteredClients.map((c) => [
       c.name, c.target || "", c.live, c.approved, c.pending,
@@ -536,7 +548,12 @@ export default function CadencePlannerPage() {
 
   const now = new Date();
   const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const currentMonthLabel = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+  const monthOptions = Array.from({ length: 6 }, (_, i) => {
+    const d = new Date();
+    d.setMonth(d.getMonth() - i);
+    return { year: d.getFullYear(), month: d.getMonth() + 1, label: d.toLocaleString("default", { month: "long", year: "numeric" }) };
+  });
+  const isCurrentMonthSelected = selectedMonth.year === now.getFullYear() && selectedMonth.month === now.getMonth() + 1;
 
   // ── Render ───────────────────────────────────────────────────────────────
 
@@ -547,7 +564,40 @@ export default function CadencePlannerPage() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 28, opacity: mounted ? 1 : 0, transform: mounted ? "translateY(0)" : "translateY(6px)", transition: "opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s" }}>
         <div>
           <h1 style={{ fontSize: 16, fontWeight: 600, color: "#ededed", margin: 0, lineHeight: 1.4 }}>Cadence Planner</h1>
-          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", margin: "4px 0 0" }}>{currentMonthLabel}</p>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 4 }}>
+            <select
+              value={`${selectedMonth.year}-${selectedMonth.month}`}
+              onChange={(e) => {
+                const [y, m] = e.target.value.split("-").map(Number);
+                setSelectedMonth({ year: y, month: m });
+              }}
+              style={{
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: 8,
+                color: "#ededed",
+                padding: "6px 30px 6px 12px",
+                fontSize: 13,
+                fontFamily: "inherit",
+                cursor: "pointer",
+                outline: "none",
+                appearance: "none",
+                WebkitAppearance: "none",
+                backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E\")",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "right 10px center",
+              }}
+            >
+              {monthOptions.map((opt) => (
+                <option key={`${opt.year}-${opt.month}`} value={`${opt.year}-${opt.month}`} style={{ background: "#161616", color: "#ededed" }}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            {isCurrentMonthSelected && (
+              <span style={{ fontSize: 11, color: "#34d399", fontWeight: 500, padding: "2px 8px", background: "rgba(52,211,153,0.1)", borderRadius: 4 }}>CURRENT</span>
+            )}
+          </div>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
           <button
