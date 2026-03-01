@@ -245,6 +245,8 @@ export default function ClientDashboardPage() {
   const [cadenceTargets, setCadenceTargets] = useState({});
   const [editingCadence, setEditingCadence] = useState(false);
   const [cadenceInput, setCadenceInput] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const ROWS_PER_PAGE = 15;
   const dropdownRef = useRef(null);
   const tokenRef = useRef(null);
 
@@ -414,6 +416,7 @@ export default function ClientDashboardPage() {
     (id) => {
       setSelectedClientId(id);
       setStatusFilter(null);
+      setCurrentPage(1);
       setDropdownOpen(false);
       setSearchQuery("");
       setRecentClients((prev) => {
@@ -443,9 +446,9 @@ export default function ClientDashboardPage() {
     { label: "ARCHIVED", count: archivedCount, status: "Archived", color: STATUS_COLORS.Archived },
   ];
 
-  // Cadence target (from Supabase via company name, falls back to totalEngagements)
+  // Cadence target (from Supabase via company name)
   const selectedClientName = client ? client.name : null;
-  const cadenceTarget = selectedClientName && cadenceTargets[selectedClientName] ? cadenceTargets[selectedClientName] : totalEngagements;
+  const cadenceTarget = selectedClientName && cadenceTargets[selectedClientName] ? cadenceTargets[selectedClientName] : 0;
   const weeklyTarget = Math.ceil(cadenceTarget / 4);
   const progressPct = cadenceTarget > 0 ? (liveCount / cadenceTarget) * 100 : 0;
   const progressColor = progressPct > 60 ? "#34d399" : progressPct >= 30 ? "#fbbf24" : "#f87171";
@@ -751,7 +754,7 @@ export default function ClientDashboardPage() {
           return (
             <button
               key={card.status}
-              onClick={() => setStatusFilter(isActive ? null : card.status)}
+              onClick={() => { setStatusFilter(isActive ? null : card.status); setCurrentPage(1); }}
               onMouseEnter={() => setHoveredCard(card.status)}
               onMouseLeave={() => setHoveredCard(null)}
               style={{
@@ -806,7 +809,7 @@ export default function ClientDashboardPage() {
         })}
       </div>
 
-      {/* ─── Section 3: Monthly Cadence History (6-month table) ─── */}
+      {/* ─── Section 3: Monthly Cadence History (chart + table) ─── */}
       <div
         style={{
           ...fadeUp(2),
@@ -839,11 +842,137 @@ export default function ClientDashboardPage() {
               Last 6 months
             </span>
           </div>
-          <span style={{ fontSize: 12, color: "rgba(255,255,255,0.3)" }}>
-            Target: {cadenceTarget}/mo
-          </span>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: 2, backgroundColor: "#34d399" }} />
+              <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>Live</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: 2, backgroundColor: "rgba(255,255,255,0.12)" }} />
+              <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>Target ({cadenceTarget})</span>
+            </div>
+          </div>
         </div>
 
+        {/* ── Bar Chart ── */}
+        {(() => {
+          const target = cadenceTarget || 0;
+          const chartMax = Math.max(target, ...monthlyData.map((m) => m.live), ...monthlyData.map((m) => m.total), 1);
+          return (
+            <div style={{ padding: "20px 20px 8px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              {/* Y-axis gridlines */}
+              <div style={{ position: "relative", height: 160 }}>
+                {/* Target line */}
+                {target > 0 && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: `${(target / chartMax) * 100}%`,
+                      left: 0,
+                      right: 0,
+                      borderTop: "1px dashed rgba(255,255,255,0.15)",
+                      zIndex: 1,
+                    }}
+                  >
+                    <span
+                      style={{
+                        position: "absolute",
+                        right: 0,
+                        top: -16,
+                        fontSize: 10,
+                        color: "rgba(255,255,255,0.3)",
+                        ...TABULAR,
+                      }}
+                    >
+                      {target}
+                    </span>
+                  </div>
+                )}
+
+                {/* Bars */}
+                <div style={{ display: "flex", alignItems: "flex-end", gap: 8, height: "100%", paddingBottom: 4 }}>
+                  {monthlyData.map((m, idx) => {
+                    const isCurrentMo = m.month === new Date().getMonth() && m.year === new Date().getFullYear();
+                    const liveH = chartMax > 0 ? (m.live / chartMax) * 100 : 0;
+                    const totalH = chartMax > 0 ? (m.total / chartMax) * 100 : 0;
+                    const livePct = target > 0 ? Math.round((m.live / target) * 100) : 0;
+                    const liveColor = livePct >= 80 ? "#34d399" : livePct >= 40 ? "#fbbf24" : "#f87171";
+
+                    return (
+                      <div key={idx} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+                        <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height: 130, width: "100%" }}>
+                          {/* Total bar (background) */}
+                          <div
+                            style={{
+                              flex: 1,
+                              height: `${totalH}%`,
+                              backgroundColor: "rgba(255,255,255,0.04)",
+                              borderRadius: "3px 3px 0 0",
+                              minHeight: m.total > 0 ? 4 : 0,
+                              position: "relative",
+                            }}
+                          >
+                            {m.total > 0 && (
+                              <span
+                                style={{
+                                  position: "absolute",
+                                  top: -16,
+                                  left: "50%",
+                                  transform: "translateX(-50%)",
+                                  fontSize: 9,
+                                  color: "rgba(255,255,255,0.25)",
+                                  ...TABULAR,
+                                }}
+                              >
+                                {m.total}
+                              </span>
+                            )}
+                          </div>
+                          {/* Live bar */}
+                          <div
+                            style={{
+                              flex: 1,
+                              height: `${liveH}%`,
+                              backgroundColor: liveColor,
+                              borderRadius: "3px 3px 0 0",
+                              minHeight: m.live > 0 ? 4 : 0,
+                              opacity: isCurrentMo ? 1 : 0.7,
+                              transition: "height 0.4s ease",
+                              position: "relative",
+                            }}
+                          >
+                            {m.live > 0 && (
+                              <span
+                                style={{
+                                  position: "absolute",
+                                  top: -16,
+                                  left: "50%",
+                                  transform: "translateX(-50%)",
+                                  fontSize: 10,
+                                  color: liveColor,
+                                  fontWeight: 600,
+                                  ...TABULAR,
+                                }}
+                              >
+                                {m.live}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                        {/* Month label */}
+                        <span style={{ fontSize: 10, color: isCurrentMo ? "#ededed" : "rgba(255,255,255,0.35)", fontWeight: isCurrentMo ? 500 : 400, ...TABULAR }}>
+                          {m.label.split(" ")[0]}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
+
+        {/* ── Data Table ── */}
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
           <thead>
             <tr>
@@ -1053,11 +1182,16 @@ export default function ClientDashboardPage() {
                     ...TABULAR,
                   }}
                 >
-                  {cadenceTarget}
+                  {cadenceTarget > 0 ? cadenceTarget : "Set"}
                 </span>
               )}
             </div>
           </div>
+          {cadenceTarget > 0 && (
+            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", margin: "-12px 0 16px" }}>
+              {liveCount} live of {cadenceTarget} target engagements
+            </p>
+          )}
 
           {/* Quick-set pills */}
           <div style={{ display: "flex", gap: 6, marginBottom: 16 }}>
@@ -1280,7 +1414,7 @@ export default function ClientDashboardPage() {
             </span>
             {statusFilter && (
               <button
-                onClick={() => setStatusFilter(null)}
+                onClick={() => { setStatusFilter(null); setCurrentPage(1); }}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -1373,7 +1507,10 @@ export default function ClientDashboardPage() {
               </tr>
             </thead>
             <tbody>
-              {filteredEngagements.map((eng, idx) => {
+              {(() => {
+                const startIndex = (currentPage - 1) * ROWS_PER_PAGE;
+                const paginatedEngagements = filteredEngagements.slice(startIndex, startIndex + ROWS_PER_PAGE);
+                return paginatedEngagements.map((eng, idx) => {
                 const isRowHovered = hoveredRow === eng.id;
                 return (
                   <tr
@@ -1395,7 +1532,7 @@ export default function ClientDashboardPage() {
                         ...TABULAR,
                       }}
                     >
-                      {idx + 1}
+                      {startIndex + idx + 1}
                     </td>
                     <td
                       style={{
@@ -1542,7 +1679,8 @@ export default function ClientDashboardPage() {
                     </td>
                   </tr>
                 );
-              })}
+              });
+              })()}
               {filteredEngagements.length === 0 && (
                 <tr>
                   <td
@@ -1561,6 +1699,56 @@ export default function ClientDashboardPage() {
             </tbody>
           </table>
         </div>
+        {/* Pagination */}
+        {(() => {
+          const totalPages = Math.ceil(filteredEngagements.length / ROWS_PER_PAGE);
+          const startIndex = (currentPage - 1) * ROWS_PER_PAGE;
+          if (totalPages <= 1) return null;
+          return (
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"12px 16px",borderTop:"1px solid rgba(255,255,255,0.06)"}}>
+              <span style={{fontSize:13,color:"rgba(255,255,255,0.4)"}}>
+                Showing {startIndex + 1}&ndash;{Math.min(startIndex + ROWS_PER_PAGE, filteredEngagements.length)} of {filteredEngagements.length}
+              </span>
+              <div style={{display:"flex",gap:4,alignItems:"center"}}>
+                <button
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  style={{padding:"6px 12px",background: currentPage === 1 ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:6,color: currentPage === 1 ? "rgba(255,255,255,0.2)" : "#ededed",fontSize:13,cursor: currentPage === 1 ? "not-allowed" : "pointer",fontFamily:"inherit"}}
+                >
+                  &larr; Prev
+                </button>
+                {Array.from({length: Math.min(totalPages, 7)}, (_, i) => {
+                  let pageNum;
+                  if (totalPages <= 7) {
+                    pageNum = i + 1;
+                  } else if (currentPage <= 4) {
+                    pageNum = i + 1;
+                  } else if (currentPage >= totalPages - 3) {
+                    pageNum = totalPages - 6 + i;
+                  } else {
+                    pageNum = currentPage - 3 + i;
+                  }
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => setCurrentPage(pageNum)}
+                      style={{padding:"6px 10px",background: currentPage === pageNum ? "rgba(255,255,255,0.12)" : "transparent",border: currentPage === pageNum ? "1px solid rgba(255,255,255,0.15)" : "1px solid transparent",borderRadius:6,color: currentPage === pageNum ? "#fff" : "rgba(255,255,255,0.4)",fontSize:13,cursor:"pointer",fontFamily:"inherit",fontVariantNumeric:"tabular-nums",minWidth:32,textAlign:"center"}}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+                <button
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  style={{padding:"6px 12px",background: currentPage === totalPages ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:6,color: currentPage === totalPages ? "rgba(255,255,255,0.2)" : "#ededed",fontSize:13,cursor: currentPage === totalPages ? "not-allowed" : "pointer",fontFamily:"inherit"}}
+                >
+                  Next &rarr;
+                </button>
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       {/* ─── Section 6: Month-End Actions Bar ─── */}
