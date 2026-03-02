@@ -5,7 +5,7 @@ import { Search, Plus, X, ArrowUpDown } from "lucide-react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
 import { useRouter } from "next/navigation";
-import { normalizeStatus, fetchThreadflowData, getCurrentMonthItems, STATUS_COLORS as SHARED_STATUS_COLORS } from "@/lib/threadflow-data";
+import { normalizeStatus, fetchThreadflowData } from "@/lib/threadflow-data";
 
 // ── Color Palette for deterministic company colors ──────────────────────────
 const COLOR_PALETTE = [
@@ -149,12 +149,10 @@ export default function ClientsOverviewPage() {
     return () => unsubscribe();
   }, [router]);
 
-  // ── Build client objects from real data (current month only) ─────────────
-  const currentMonthItems = useMemo(() => getCurrentMonthItems(allItems), [allItems]);
-
+  // ── Build client objects from real data (all-time) ───────────────────────
   const clients = useMemo(() => {
     return companiesList.map((company) => {
-      const companyItems = currentMonthItems.filter((item) => item.company_id === company.id);
+      const companyItems = allItems.filter((item) => item.company_id === company.id);
       const total = companyItems.length;
 
       const live = companyItems.filter((item) => normalizeStatus(item) === "Live").length;
@@ -173,7 +171,7 @@ export default function ClientsOverviewPage() {
         approved,
       };
     });
-  }, [companiesList, currentMonthItems]);
+  }, [companiesList, allItems]);
 
   // Derived data
   const enrichedClients = useMemo(() => {
