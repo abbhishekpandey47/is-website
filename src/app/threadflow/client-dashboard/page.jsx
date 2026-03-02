@@ -419,6 +419,13 @@ export default function ClientDashboardPage() {
     return counts;
   }, [allItems]);
 
+  // Cadence target (from Supabase via company name)
+  const selectedClientName = client ? client.name : null;
+  const cadenceTarget = selectedClientName && cadenceTargets[selectedClientName] ? cadenceTargets[selectedClientName] : 0;
+  const weeklyTarget = Math.ceil(cadenceTarget / 4);
+  const progressPct = cadenceTarget > 0 ? (liveCount / cadenceTarget) * 100 : 0;
+  const progressColor = progressPct > 60 ? "#34d399" : progressPct >= 30 ? "#fbbf24" : "#f87171";
+
   // Weekly cadence data
   const weeklyData = useMemo(() => buildWeeklyData(clientItems), [clientItems]);
   const chartMax = Math.max(...weeklyData.map((w) => w.count), 1);
@@ -462,13 +469,6 @@ export default function ClientDashboardPage() {
     { label: "REMOVED", count: removedCount, status: "Removed", color: STATUS_COLORS.Removed },
     { label: "ARCHIVED", count: archivedCount, status: "Archived", color: STATUS_COLORS.Archived },
   ];
-
-  // Cadence target (from Supabase via company name)
-  const selectedClientName = client ? client.name : null;
-  const cadenceTarget = selectedClientName && cadenceTargets[selectedClientName] ? cadenceTargets[selectedClientName] : 0;
-  const weeklyTarget = Math.ceil(cadenceTarget / 4);
-  const progressPct = cadenceTarget > 0 ? (liveCount / cadenceTarget) * 100 : 0;
-  const progressColor = progressPct > 60 ? "#34d399" : progressPct >= 30 ? "#fbbf24" : "#f87171";
 
   const saveCadenceTarget = useCallback(async (value) => {
     const num = parseInt(value, 10);
