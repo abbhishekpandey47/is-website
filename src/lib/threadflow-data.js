@@ -299,13 +299,13 @@ export function buildCompanyMap(companies) {
 
 /**
  * Fetch all cadence configs from the API.
+ * GET is public (no auth required) so targets always load even if
+ * the Firebase token is missing or expired.
  * Returns array of { company_name, monthly_limit, alert_threshold, ... }
  */
-export async function fetchCadenceConfig(token) {
+export async function fetchCadenceConfig() {
   try {
-    const res = await fetch("/api/cadence-config", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const res = await fetch("/api/cadence-config");
     if (!res.ok) {
       const body = await res.json().catch(() => ({}));
       console.error("fetchCadenceConfig: HTTP", res.status, body.error || "");

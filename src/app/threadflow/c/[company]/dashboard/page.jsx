@@ -295,7 +295,7 @@ export default function ClientShareableDashboard() {
           const token = await user.getIdToken();
           const [{ items, companies }, configs] = await Promise.all([
             fetchThreadflowData(token),
-            fetchCadenceConfig(token),
+            fetchCadenceConfig(),
           ]);
           setAllItems(items);
           setCompaniesList(companies);

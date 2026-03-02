@@ -381,7 +381,7 @@ export default function CadencePlannerPage() {
             tokenRef.current = token;
             const [{ items, companies }, configs] = await Promise.all([
               fetchThreadflowData(token),
-              fetchCadenceConfig(token),
+              fetchCadenceConfig(),
             ]);
             setAllItems(items);
             setCompaniesList(companies);

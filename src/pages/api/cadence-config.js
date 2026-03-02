@@ -39,17 +39,13 @@ async function ensureTable() {
 }
 
 export default async function handler(req, res) {
-  let userCtx;
-  try {
-    userCtx = await verifyRequestUser(req);
-  } catch (e) {
-    return res.status(e.status || 401).json({ error: e.message });
-  }
-
   try {
     await ensureTable();
 
-    // GET — return all cadence configs (auto-seeds missing companies)
+    // ── GET — public, no auth required ──────────────────────────────────
+    // Cadence targets are not sensitive. Making this public prevents the
+    // "silent fallback to stale localStorage" bug when Firebase tokens
+    // are missing or expired.
     if (req.method === "GET") {
       // Fetch companies + existing configs in parallel
       const [companiesRes, configsRes] = await Promise.all([
@@ -91,6 +87,14 @@ export default async function handler(req, res) {
       }
 
       return res.status(200).json({ success: true, data: configsRes.data });
+    }
+
+    // ── PUT / DELETE — auth required ────────────────────────────────────
+    let userCtx;
+    try {
+      userCtx = await verifyRequestUser(req);
+    } catch (e) {
+      return res.status(e.status || 401).json({ error: e.message });
     }
 
     // PUT — upsert one company's cadence config
