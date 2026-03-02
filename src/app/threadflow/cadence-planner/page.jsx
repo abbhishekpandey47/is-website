@@ -1469,12 +1469,17 @@ export default function CadencePlannerPage() {
                           }}
                         />
                         <span
+                          onClick={() => router.push(`/threadflow/client-dashboard?client=${encodeURIComponent(client.name)}`)}
                           style={{
                             fontSize: 13,
                             fontWeight: 500,
                             color: "#ededed",
                             whiteSpace: "nowrap",
+                            cursor: "pointer",
+                            textDecoration: "none",
                           }}
+                          onMouseEnter={(e) => { e.currentTarget.style.textDecoration = "underline"; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.textDecoration = "none"; }}
                         >
                           {client.name}
                         </span>

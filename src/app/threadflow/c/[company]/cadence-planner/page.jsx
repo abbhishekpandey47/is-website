@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import {
   normalizeStatus as sharedNormalizeStatus,
   fetchThreadflowData,
@@ -333,6 +333,8 @@ function SetLimitsModal({ clients, cadenceLimits, onSave, onClose, font }) {
 
 export default function CadencePlannerPage() {
   const router = useRouter();
+  const params = useParams();
+  const companySlug = params?.company;
   const [firebaseUser, setFirebaseUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [allItems, setAllItems] = useState([]);
@@ -846,7 +848,12 @@ export default function CadencePlannerPage() {
                     <td style={{ padding: "11px 14px" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                         <span style={{ width: 8, height: 8, borderRadius: "50%", background: client.color, flexShrink: 0 }} />
-                        <span style={{ fontSize: 13, fontWeight: 500, color: "#ededed", whiteSpace: "nowrap" }}>{client.name}</span>
+                        <span
+                          onClick={() => router.push(`/threadflow/c/${companySlug}/client-dashboard?client=${encodeURIComponent(client.name)}`)}
+                          style={{ fontSize: 13, fontWeight: 500, color: "#ededed", whiteSpace: "nowrap", cursor: "pointer" }}
+                          onMouseEnter={(e) => { e.currentTarget.style.textDecoration = "underline"; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.textDecoration = "none"; }}
+                        >{client.name}</span>
                       </div>
                     </td>
 

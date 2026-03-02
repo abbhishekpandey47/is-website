@@ -42,7 +42,7 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
     { title: "Reddit Comments", url: isAdmin ? "/threadflow/comment" : `/threadflow/c/${companySlug}/comment`, icon: MessageSquare },
     { title: "Analytics", url: isAdmin ? "/threadflow/analytics" : `/threadflow/c/${companySlug}/analytics`, icon: TrendingUp },
     { title: "Analytics Overview", url: isAdmin ? "/threadflow/analytics-overview" : `/threadflow/c/${companySlug}/analytics-overview`, icon: PieChart },
-    { title: "Communities", url: isAdmin ? "/threadflow/communities" : `/threadflow/c/${companySlug}/communities`, icon: Users },
+    { title: "Communities", url: isAdmin ? "/threadflow/communities" : `/threadflow/c/${companySlug}/communities`, icon: Users, soon: true },
     { title: "SubredditSense", url: isAdmin ? "/threadflow/subredditsense" : `/threadflow/c/${companySlug}/subredditsense`, icon: TrendingUp },
     { title: "Serp Scout", url: isAdmin ? "/threadflow/serp-scout" : `/threadflow/c/${companySlug}/serp-scout`, icon: Search },
   ]
@@ -52,9 +52,9 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
   ]
 
   const managementItems = [
-    { title: "Categories", url: isAdmin ? "/threadflow/management/categories" : `/threadflow/c/${companySlug}/management/categories`, icon: Tag },
-    { title: "Schedule", url: isAdmin ? "/threadflow/management/schedule" : `/threadflow/c/${companySlug}/management/schedule`, icon: Calendar },
-    { title: "Templates", url: isAdmin ? "/threadflow/management/templates" : `/threadflow/c/${companySlug}/management/templates`, icon: FileText },
+    { title: "Categories", url: isAdmin ? "/threadflow/management/categories" : `/threadflow/c/${companySlug}/management/categories`, icon: Tag, soon: true },
+    { title: "Schedule", url: isAdmin ? "/threadflow/management/schedule" : `/threadflow/c/${companySlug}/management/schedule`, icon: Calendar, soon: true },
+    { title: "Templates", url: isAdmin ? "/threadflow/management/templates" : `/threadflow/c/${companySlug}/management/templates`, icon: FileText, soon: true },
     { title: "Settings", url: isAdmin ? "/threadflow/management/settings" : `/threadflow/c/${companySlug}/management/settings`, icon: Settings },
     { title: "Integrations", url: isAdmin ? "/threadflow/integrations" : `/threadflow/c/${companySlug}/integrations`, icon: Plug },
   ]
@@ -93,6 +93,9 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
           >
             <item.icon className={cn("mr-2.5 h-4 w-4 shrink-0", active ? "opacity-100" : "opacity-50")} />
             {open && <span>{item.title}</span>}
+            {open && item.soon && (
+              <span style={{fontSize:10, padding:"2px 6px", background:"rgba(255,255,255,0.06)", borderRadius:4, color:"rgba(255,255,255,0.3)", marginLeft:"auto"}}>Soon</span>
+            )}
           </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>

@@ -10,6 +10,7 @@ import {
   fetchCadenceConfig,
   updateCadenceConfig,
   buildCadenceMap,
+  stripHtml,
   STATUS_COLORS as SHARED_STATUS_COLORS,
 } from "@/lib/threadflow-data";
 import {
@@ -340,9 +341,9 @@ export default function ClientDashboardPage() {
       id: item.id || `item-${idx}`,
       type: item.type || "post",
       topic: item.category || item.targeted_subreddit || "--",
-      title: item.title || "(untitled)",
+      title: stripHtml(item.title) || "(untitled)",
       threadUrl: item.posted_link || "",
-      engagementText: item.engagement_text || "",
+      engagementText: stripHtml(item.engagement_text) || "",
       status: normalizeStatus(item),
       publishedUrl: item.posted_link || "",
       date: item.date_posted ? item.date_posted.split("T")[0] : "--",
@@ -1474,6 +1475,7 @@ export default function ClientDashboardPage() {
             >
               {filteredEngagements.length}
             </span>
+            <span style={{ fontSize: 12, color: "rgba(255,255,255,0.3)" }}>All months</span>
             {statusFilter && (
               <button
                 onClick={() => { setStatusFilter(null); setCurrentPage(1); }}
@@ -1859,22 +1861,21 @@ export default function ClientDashboardPage() {
           </button>
           {/* Send Slack Alert */}
           <button
-            onMouseEnter={() => setHoveredAction("slack")}
-            onMouseLeave={() => setHoveredAction(null)}
+            title="Coming soon"
             style={{
               display: "flex",
               alignItems: "center",
               gap: 7,
               padding: "8px 16px",
-              backgroundColor: hoveredAction === "slack" ? "rgba(52,211,153,0.18)" : "rgba(52,211,153,0.10)",
-              border: "1px solid rgba(52,211,153,0.2)",
+              backgroundColor: "rgba(52,211,153,0.06)",
+              border: "1px solid rgba(52,211,153,0.12)",
               borderRadius: 7,
-              color: "#34d399",
+              color: "rgba(52,211,153,0.4)",
               fontSize: 12,
               fontWeight: 500,
               fontFamily: FONT_FAMILY,
-              cursor: "pointer",
-              transition: "all 0.15s ease",
+              cursor: "not-allowed",
+              opacity: 0.5,
             }}
           >
             <MessageSquare size={13} />

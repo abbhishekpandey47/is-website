@@ -10,6 +10,26 @@
  *   GET /api/companies   → { data: [{ id, name }] }
  */
 
+// ─── HTML Stripping ─────────────────────────────────────────────────────────
+
+/**
+ * Strip HTML tags and decode common HTML entities from a string.
+ * Used to clean engagement text and titles that may contain raw HTML.
+ */
+export function stripHtml(str) {
+  if (!str) return "";
+  return str
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 // ─── Status Colors ──────────────────────────────────────────────────────────
 
 export const STATUS_COLORS = {
@@ -246,11 +266,11 @@ export function buildEngagementRow(item, idx, companyMap) {
     id: item.id || `item-${idx}`,
     type: item.type || "post",
     topic: item.category || item.targeted_subreddit || "--",
-    title: item.title || "(untitled)",
-    displayTitle: item.title || (item.type === "comment" ? "Comment" : "Untitled"),
+    title: stripHtml(item.title) || "(untitled)",
+    displayTitle: stripHtml(item.title) || (item.type === "comment" ? "Comment" : "Untitled"),
     displayType: item.type === "comment" ? "Comment" : "Post",
     threadUrl: item.posted_link || "",
-    engagementText: item.engagement_text || "",
+    engagementText: stripHtml(item.engagement_text) || "",
     status: normalizeStatus(item),
     rawStatus: getRawStatus(item),
     publishedUrl: item.posted_link || "",

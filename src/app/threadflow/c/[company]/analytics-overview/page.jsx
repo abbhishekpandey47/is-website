@@ -904,7 +904,7 @@ export default function AnalyticsOverviewPage() {
                       }}
                       axisLine={false}
                       tickLine={false}
-                      width={85}
+                      width={160}
                     />
                     <Tooltip content={<CustomTooltip />} cursor={false} />
                     <Bar
@@ -993,7 +993,7 @@ export default function AnalyticsOverviewPage() {
                             marginTop: 2,
                           }}
                         >
-                          Total
+                          {dateRange === "7d" ? "7 Days" : dateRange === "30d" ? "30 Days" : "90 Days"}
                         </div>
                       </div>
                     </>
@@ -1098,7 +1098,7 @@ export default function AnalyticsOverviewPage() {
                       }}
                       axisLine={false}
                       tickLine={false}
-                      width={95}
+                      width={160}
                     />
                     <Tooltip content={<CustomTooltip />} cursor={false} />
                     <Bar
@@ -1211,7 +1211,7 @@ export default function AnalyticsOverviewPage() {
                       }}
                       axisLine={false}
                       tickLine={false}
-                      width={85}
+                      width={160}
                     />
                     <Tooltip content={<CustomTooltipPct />} cursor={false} />
                     <Bar
