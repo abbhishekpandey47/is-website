@@ -136,6 +136,7 @@ const DATAFORSEO_POLL_TIMEOUT = 30_000
 const REDDIT_API_BASE = 'https://reddit-comment-gen.onrender.com'
 const POST_DETAILS_ENDPOINT = `${REDDIT_API_BASE}/fetch_post_details`
 const POST_DETAILS_TIMEOUT_MS = Number(process.env.SERP_SCOUT_POST_DETAILS_TIMEOUT_MS) || 12000
+const CITATION_SEARCH_TIMEOUT_MS = 120_000 // 120 seconds for citation searches (web search can be slow)
 const POST_DETAILS_CONCURRENCY = Number(process.env.SERP_SCOUT_POST_DETAILS_CONCURRENCY) || 4
 const MENTION_SNIPPET_RADIUS = 120
 const MENTION_SNIPPET_MAX_LENGTH = 200
@@ -499,7 +500,54 @@ function normalizeMentionValue(value) {
     .trim()
     .toLowerCase()
     .replace(/^(https?:\/\/)?(www\.)?/, '')
-    .replace(/\/$/, '')
+    .replace(/\/.*$/, '')  // strip path, query, and fragment — not just trailing slash
+    .trim()
+}
+
+/**
+ * Build a deduplicated list of mention targets from a competitor list.
+ * For each entry we add:
+ *   1. The normalized value itself (e.g. "hubspot.com")
+ *   2. If it looks like a domain, also the bare company name without TLD
+ *      (e.g. "hubspot") so Reddit mentions of just the brand name are caught.
+ */
+function buildCompetitorTargets(competitorList) {
+  const targets = []
+  const seenNormalized = new Set()
+
+  const addTarget = (raw, normalized) => {
+    if (!normalized || seenNormalized.has(normalized)) return
+    seenNormalized.add(normalized)
+    targets.push({ raw, normalized })
+  }
+
+  const list = Array.isArray(competitorList)
+    ? competitorList
+    : competitorList ? [competitorList] : []
+
+  list.forEach(entry => {
+    const display = entry != null ? String(entry).trim() : ''
+    if (!display) return
+    const normalized = normalizeMentionValue(display)
+    if (!normalized) return
+
+    // Add the full normalized value (domain or company name as entered)
+    addTarget(display, normalized)
+
+    // If it looks like a domain (has a dot, e.g. "hubspot.com", "monday.io")
+    // also add a bare short name so Reddit threads that just say "HubSpot" are matched.
+    if (/^[a-z0-9][a-z0-9-]*\.[a-z]{2,}$/.test(normalized)) {
+      const shortName = normalized
+        .replace(/\.[a-z]{2,6}$/, '')  // strip TLD
+        .replace(/-/g, ' ')            // hyphens → spaces ("some-company" → "some company")
+        .trim()
+      if (shortName && shortName.length > 2) {
+        addTarget(display, shortName)
+      }
+    }
+  })
+
+  return targets
 }
 
 function ensureDomain(input) {
@@ -1021,7 +1069,7 @@ Page content: ${payload.pageContent.slice(0, 4000)}`
     { role: 'system', content: `You are an SEO and LLM visibility strategist. Generate exactly 20 keywords with ${LLM_PROMPTS} prompts each.` },
     { role: 'user', content: prompt }
   ]
-  const raw = await callOpenRouter(messages, KEYWORD_TEMPERATURE, 2048)
+  const raw = await callOpenRouter(messages, KEYWORD_TEMPERATURE, 6000)
   try {
     const json = JSON.parse(extractJsonFromText(raw))
     // Ensure exactly 20 keywords
@@ -1035,6 +1083,7 @@ Page content: ${payload.pageContent.slice(0, 4000)}`
     }
     return json
   } catch (error) {
+    console.error('[promptKeywords] raw response (first 500 chars):', (raw || '').slice(0, 500))
     throw new Error('Unable to parse JSON from OpenRouter keyword response')
   }
 }
@@ -1400,23 +1449,22 @@ async function testCitations(prompts, domain, competitors = []) {
   const records = []
 
   // Build mention targets for self/competitor detection in citation posts
-  const brandDomain = normalizedDomain.toLowerCase().replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '')
+  const brandDomain = normalizedDomain  // ensureDomain already stripped path/www
   const brandTargets = []
   const brandDomainNormalized = normalizeMentionValue(brandDomain)
   if (brandDomainNormalized) {
     brandTargets.push({ normalized: brandDomainNormalized, label: brandDomain })
+    // Also add short company name (strip TLD) so "infrasity" matches as well as "infrasity.com"
+    if (/^[a-z0-9][a-z0-9-]*\.[a-z]{2,}$/.test(brandDomainNormalized)) {
+      const shortBrand = brandDomainNormalized.replace(/\.[a-z]{2,6}$/, '').replace(/-/g, ' ').trim()
+      if (shortBrand && shortBrand.length > 2) {
+        brandTargets.push({ normalized: shortBrand, label: shortBrand })
+      }
+    }
   }
-  const competitorTargets = []
-  const seenCompetitors = new Set()
-  const competitorList = Array.isArray(competitors) ? competitors : (competitors ? [competitors] : [])
-  competitorList.forEach(entry => {
-    const display = entry != null ? String(entry).trim() : ''
-    if (!display) return
-    const normalized = normalizeMentionValue(display)
-    if (!normalized || seenCompetitors.has(normalized)) return
-    seenCompetitors.add(normalized)
-    competitorTargets.push({ raw: display, normalized })
-  })
+  const competitorTargets = buildCompetitorTargets(
+    Array.isArray(competitors) ? competitors : (competitors ? [competitors] : [])
+  )
 
   for (const prompt of sanitizedPrompts) {
     const record = {
@@ -1441,8 +1489,12 @@ async function testCitations(prompts, domain, competitors = []) {
           ? buildCitationSearchUserMessage(prompt, normalizedDomain)
           : buildCitationSearchUserMessageForSearchModel(prompt, normalizedDomain)
       try {
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), CITATION_SEARCH_TIMEOUT_MS)
+        
         const resp = await fetch(OPENROUTER_ENDPOINT, {
           method: 'POST',
+          signal: controller.signal,
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${OPENROUTER_API_KEY}`,
@@ -1461,6 +1513,8 @@ async function testCitations(prompts, domain, competitors = []) {
             plugins: [{ id: 'web' }]
           })
         })
+        
+        clearTimeout(timeoutId)
 
         if (!resp.ok) {
           const body = await resp.text()
@@ -1518,8 +1572,12 @@ async function testCitations(prompts, domain, competitors = []) {
           return { ...entryClean, ...mentionData, mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3) }
         })
       } catch (err) {
+        let errorMsg = err.message || 'Citation search failed'
+        if (err.name === 'AbortError') {
+          errorMsg = `${model} request timed out after ${CITATION_SEARCH_TIMEOUT_MS / 1000}s`
+        }
         record.models[model] = {
-          error: err.message
+          error: errorMsg
         }
       }
     }
@@ -1592,7 +1650,21 @@ export default async function handler(req, res) {
     }
     try {
       const citations = await testCitations(bodyPrompts, rawDomain, req.body.competitors)
-      return res.status(200).json({ success: true, citations })
+      return res.status(200).json({ success: true, ...citations })
+    } catch (error) {
+      return res.status(500).json({ error: error.message })
+    }
+  }
+
+  // Handle fetch post details action (for full content scanning)
+  if (action === 'fetchPostDetails') {
+    const { url } = req.body
+    if (!url) {
+      return res.status(400).json({ error: 'url is required' })
+    }
+    try {
+      const postContent = await fetchRedditPostDetails(url)
+      return res.status(200).json({ success: true, ...postContent })
     } catch (error) {
       return res.status(500).json({ error: error.message })
     }
@@ -1841,6 +1913,8 @@ Return ONLY valid JSON:
         fetchRedditTopNewPosts(keyword),
         fetchRedditViaDataForSeo(keyword)
       ])
+      // Keep raw dork results before merging — these are the pure `site:reddit.com keyword` hits
+      const rawDorkResults = (dataForSeoData.top_posts || []).slice(0, 15)
 
       // MERGE STRATEGY:
       // 1. Combine both lists, dedup by URL
@@ -1931,22 +2005,18 @@ Return ONLY valid JSON:
           )
         : [];
 
-      const competitorCandidates = Array.isArray(req.body.competitors)
+      const reqCompetitors = Array.isArray(req.body.competitors)
         ? req.body.competitors
         : req.body.competitors
           ? [req.body.competitors]
           : [];
-
-      const competitorTargets = []
-      const seenCompetitors = new Set()
-      competitorCandidates.forEach(entry => {
-        const display = entry != null ? String(entry).trim() : ''
-        if (!display) return
-        const normalized = normalizeMentionValue(display)
-        if (!normalized || seenCompetitors.has(normalized)) return
-        seenCompetitors.add(normalized)
-        competitorTargets.push({ raw: display, normalized })
-      })
+      // Also pull in any competitors saved in the company context (stored previously)
+      const storedCompetitors = storedCompanyContext?.approvedContext?.competitors || []
+      const allCompetitorEntries = [
+        ...reqCompetitors,
+        ...storedCompetitors.filter(c => c != null).map(c => String(c))
+      ]
+      const competitorTargets = buildCompetitorTargets(allCompetitorEntries)
 
       const brandDomain = targetDomain.toLowerCase().replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '')
       const brandDisplayName = (storedCompanyContext?.metadata?.companyName || brandDomain).trim()
@@ -1986,6 +2056,21 @@ Return ONLY valid JSON:
         return { ...post, ...mentionData, mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3) }
       })
 
+      // Enrich dork results and remove URLs already shown in organic redditThreads
+      const organicThreadUrls = new Set(enrichedRedditThreads.map(t => (t.url || '').toLowerCase()))
+      const enrichedDorkLinks = rawDorkResults
+        .filter(post => {
+          const url = (post.post_url || '').toLowerCase()
+          return url && !organicThreadUrls.has(url)
+        })
+        .map(post => {
+          const mentionData = buildThreadMentionData(
+            { fullContent: post.post_content, title: post.post_title },
+            competitorTargets, brandTargets
+          )
+          return { ...post, ...mentionData, mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3) }
+        })
+
       // Save SERP analysis for 24hr cache
       if (requestCompanyId) {
         await saveSerpAnalysis(requestCompanyId, keyword, {
@@ -1995,8 +2080,9 @@ Return ONLY valid JSON:
           hasRedditMentions: enrichedRedditThreads.length > 0,
           topRedditPosts: enrichedTopPosts,
           newRedditPosts: enrichedNewPosts,
+          dorkRedditLinks: enrichedDorkLinks,
           suggestedPosts,
-          organicResults: [] // Don't cache organic results to save space/privacy as requested
+          organicResults: []
         })
       }
 
@@ -2010,8 +2096,9 @@ Return ONLY valid JSON:
         hasRedditMentions: enrichedRedditThreads.length > 0,
         topRedditPosts: enrichedTopPosts,
         newRedditPosts: enrichedNewPosts,
+        dorkRedditLinks: enrichedDorkLinks,
         suggestedPosts,
-        organicResults: [], // Removed as user requested focus on Reddit only
+        organicResults: [],
         fromCache: false,
         analyzedAt: new Date().toISOString(),
         expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()

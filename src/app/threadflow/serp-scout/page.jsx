@@ -1,1686 +1,1469 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { auth } from "@/lib/firebaseClient";
-import { Badge } from "@/Components/ui/badge";
+import {
+  Tabs, TabsContent, TabsList, TabsTrigger,
+} from "@/Components/ui/tabs";
+import {
+  Card, CardContent, CardDescription, CardHeader, CardTitle,
+} from "@/Components/ui/card";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
+import { Badge } from "@/Components/ui/badge";
 import { Textarea } from "@/Components/ui/textarea";
+import { Skeleton } from "@/Components/ui/skeleton";
+import { useToast } from "@/hooks/use-toast";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/Components/ui/card";
-import { SidebarTrigger } from "@/Components/ui/sidebar";
-import {
-  ChevronRight,
-  Check,
-  Sparkles,
-  AlertCircle,
-  CheckCircle,
-  Search,
-  MessageSquare,
-  Zap,
+  Sparkles, AlertCircle, CheckCircle, Search, MessageSquare, Zap,
+  ExternalLink, Globe, FileText, Tag, Bookmark, BarChart2, Plus, X,
+  ChevronRight, Edit2, Save, Loader2,
 } from "lucide-react";
 
-const buildCitationPrompts = (keywordPrompts = [], manualPrompts = []) => {
-  const basePrompts = Array.isArray(keywordPrompts) ? keywordPrompts.filter(Boolean) : [];
-  const extraPrompts = (Array.isArray(manualPrompts) ? manualPrompts : [])
-    .filter(Boolean)
-    .filter((prompt) => !basePrompts.includes(prompt));
-  return [...basePrompts, ...extraPrompts];
+// ── Model badge styles ────────────────────────────────────────────────────────
+
+const MODEL_STYLES = {
+  perplexity: { label: "Perplexity", bg: "bg-purple-500/15", text: "text-purple-700", border: "border-purple-500/30" },
+  openai:     { label: "GPT",        bg: "bg-green-500/15",  text: "text-green-700",  border: "border-green-500/30" },
+  anthropic:  { label: "Claude",     bg: "bg-orange-500/15", text: "text-orange-700", border: "border-orange-500/30" },
 };
 
-const formatDateTime = (value) => {
-  if (!value) return "";
-  try {
-    return new Intl.DateTimeFormat("en-US", {
-      dateStyle: "medium",
-      timeStyle: "short",
-    }).format(value);
-  } catch (error) {
-    return value.toString();
+function getModelStyle(modelId = "") {
+  const id = modelId.toLowerCase();
+  if (id.includes("perplexity")) return MODEL_STYLES.perplexity;
+  if (id.includes("openai") || id.includes("gpt")) return MODEL_STYLES.openai;
+  if (id.includes("anthropic") || id.includes("claude")) return MODEL_STYLES.anthropic;
+  const label = modelId.split("/").pop()?.split(":")[0] ?? modelId;
+  return { label, bg: "bg-gray-500/15", text: "text-gray-700", border: "border-gray-500/30" };
+}
+
+// ── Shared sub-components ─────────────────────────────────────────────────────
+
+function Spinner({ className = "h-4 w-4" }) {
+  return <Loader2 className={`${className} animate-spin`} />;
+}
+
+function PostCard({ post, brandLabel, allCompetitors = [], rank = null, scannedData = null }) {
+  // Handle both camelCase (from HTTP results) and snake_case (from API) property names
+  const url = post.url || post.post_url || '';
+  const title = post.title || post.post_title || '';
+  const subreddit = post.subreddit || '';
+  const reason = post.reason || '';
+  const upvotes = post.upvotes || post.score || 0;
+  const downvotes = post.downvotes || 0;
+  const postAge = post.post_age_hours || post.age_hours || 0;
+
+  // Use scanned data if available, otherwise use API mention data
+  const mentionedCompetitors = scannedData?.mentionsCompetitors || post.mentionsCompetitors || [];
+  const mentionsBrand = scannedData?.mentionsBrand !== undefined ? scannedData.mentionsBrand : post.mentionsBrand || false;
+
+  // Format upvotes and downvotes with K/M suffix
+  const formatNumber = (num) => {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    return num.toString();
+  };
+
+  // Format age
+  const formatAge = (hours) => {
+    if (hours < 1) return 'now';
+    if (hours < 24) return `${Math.floor(hours)}h`;
+    const days = Math.floor(hours / 24);
+    if (days < 7) return `${days}d`;
+    const weeks = Math.floor(days / 7);
+    if (weeks < 4) return `${weeks}w`;
+    const months = Math.floor(days / 30);
+    return `${months}mo`;
+  };
+
+  return (
+    <div className="rounded-lg border border-border bg-card p-3 space-y-2 hover:border-primary/30 transition-colors">
+      <div className="space-y-1.5">
+        <div className="flex items-start gap-2">
+          {rank && (
+            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center">
+              <span className="text-xs font-bold text-primary">#{rank}</span>
+            </div>
+          )}
+          <a
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-sm text-primary hover:underline line-clamp-2 flex items-start gap-1.5 flex-1"
+          >
+            <ExternalLink className="h-3.5 w-3.5 mt-0.5 shrink-0" />
+            {title}
+          </a>
+        </div>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground flex-wrap">
+          <Badge variant="outline" className="text-[10px]">{subreddit}</Badge>
+          {reason && <span className="truncate max-w-xs">{reason}</span>}
+        </div>
+      </div>
+
+      {/* Post stats row */}
+      <div className="flex items-center gap-3 text-xs text-muted-foreground pt-1 border-t border-border/50">
+        <div className="flex items-center gap-1">
+          <span className="text-emerald-600 dark:text-emerald-400 font-semibold">↑ {formatNumber(upvotes)}</span>
+        </div>
+        {downvotes > 0 && (
+          <div className="flex items-center gap-1">
+            <span className="text-red-600 dark:text-red-400 font-semibold">↓ {formatNumber(downvotes)}</span>
+          </div>
+        )}
+        {postAge > 0 && (
+          <div className="flex items-center gap-1 ml-auto">
+            <span>{formatAge(postAge)}</span>
+          </div>
+        )}
+      </div>
+
+      {/* Mentions badges and scan button */}
+      {(brandLabel || allCompetitors.length > 0) && (
+        <>
+          <div className="flex flex-wrap gap-1 pt-1">
+            {brandLabel && (
+              mentionsBrand ? (
+                <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-semibold border bg-emerald-500/15 text-emerald-700 border-emerald-500/30">
+                  ✓ {brandLabel}
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] border bg-muted/40 text-muted-foreground/60 border-border/40">
+                  ✗ {brandLabel}
+                </span>
+              )
+            )}
+            {allCompetitors.map(comp =>
+              mentionedCompetitors.includes(comp) ? (
+                <span key={`${url}-${comp}`} className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-semibold border bg-orange-500/15 text-orange-700 border-orange-500/30">
+                  ⚠ {comp}
+                </span>
+              ) : (
+                <span key={`${url}-${comp}`} className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] border bg-muted/30 text-muted-foreground/40 border-border/30">
+                  ○ {comp}
+                </span>
+              )
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ── Auth-aware fetch helper ───────────────────────────────────────────────────
+
+async function apiPost(path, body) {
+  const token = await auth.currentUser?.getIdToken?.();
+  const res = await fetch(path, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => res.statusText);
+    throw new Error(text || `Request failed: ${res.status}`);
   }
-};
+  return res.json();
+}
 
-export default function SerpScoutPage() {
-  // ── STATE DECLARATIONS (hooks must be at the top) ──────────────────────────
-  const [currentStep, setCurrentStep] = useState(1);
-  const [analysisTab, setAnalysisTab] = useState(null);
+// ── Main Page ─────────────────────────────────────────────────────────────────
 
+export default function SerpScout() {
+  const { toast } = useToast();
+  const [activeTab, setActiveTab] = useState("domain");
+
+  // Domain
   const [domain, setDomain] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState("");
 
+  // Raw result from domain POST
   const [rawResult, setRawResult] = useState(null);
-  const [companyContext, setCompanyContext] = useState(null);
   const [keywords, setKeywords] = useState([]);
-  const [isKeywordsSaved, setIsKeywordsSaved] = useState(false);
-  const [isExistingData, setIsExistingData] = useState(false);
+  const [selectedKwIds, setSelectedKwIds] = useState(new Set());
 
-  const [suggestingPromptsIdx, setSuggestingPromptsIdx] = useState(null);
-  const [suggestingPromptsLoading, setSuggestingPromptsLoading] = useState(false);
-  const [manualKeywordForm, setManualKeywordForm] = useState({
-    term: "",
-    intent: "informational",
-    why: "",
-    prompts: "",
-  });
-  const [manualPromptInput, setManualPromptInput] = useState({});
-
-  const [editingContext, setEditingContext] = useState(false);
-  const [contextForm, setContextForm] = useState({
-    companySummary: "",
-    coreCapabilities: [],
-    problemSpaces: [],
-    constraints: [],
+  // Company context editing
+  const [editingCtx, setEditingCtx] = useState(false);
+  const [ctxForm, setCtxForm] = useState({
+    companySummary: "", coreCapabilities: [], problemSpaces: [], constraints: [],
   });
 
-  const [selectedKeywordIdx, setSelectedKeywordIdx] = useState(null);
-  const [serpResults, setSerpResults] = useState({});
-  const [serpLoading, setSerpLoading] = useState(false);
-  const [citationResults, setCitationResults] = useState(null);
-  const [citationLoading, setCitationLoading] = useState(false);
-  const [manualCitationPrompts, setManualCitationPrompts] = useState([]);
-  const [manualCitationInput, setManualCitationInput] = useState("");
-  const [isSaving, setIsSaving] = useState(false);
-  const [selectedKeywordIds, setSelectedKeywordIds] = useState([]);
-  const [generatedPosts, setGeneratedPosts] = useState([]);
-  const [generatingPosts, setGeneratingPosts] = useState(false);
+  // Per-keyword prompts UX
+  const [suggestingIdx, setSuggestingIdx] = useState(null);
+  const [manualPromptInputs, setManualPromptInputs] = useState({});
+  const [expandedKw, setExpandedKw] = useState(null);
 
+  // Add custom keyword form
+  const [newKwForm, setNewKwForm] = useState({ term: "", intent: "informational", why: "", prompts: "" });
+
+  // Save tab
   const [competitors, setCompetitors] = useState([]);
   const [competitorInput, setCompetitorInput] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
 
-  // ── COMPUTED VALUES ────────────────────────────────────────────────────────
-  const trimmedDomain = domain.trim();
-  const maxSelectable = 20;
-  const selectedKeyword = selectedKeywordIdx !== null ? keywords[selectedKeywordIdx] : null;
-  const getCitationPrompts = () =>
-    buildCitationPrompts(selectedKeyword?.prompts, manualCitationPrompts);
+  // Analyze — SERP
+  const [serpResults, setSerpResults] = useState({});
+  const [serpLoading, setSerpLoading] = useState(false);
+  const [selectedKwIdx, setSelectedKwIdx] = useState(null);
+  const [serpAccordionOpen, setSerpAccordionOpen] = useState(true);
 
-  const selectedKeywordEntries = useMemo(
-    () =>
-      selectedKeywordIds
-        .map((id) => (keywords[id] ? { ...keywords[id], _originalIndex: id } : null))
-        .filter(Boolean),
-    [keywords, selectedKeywordIds]
-  );
+  // Analyze — Citations
+  const [citationResults, setCitationResults] = useState(null);
+  const [citationLoading, setCitationLoading] = useState(false);
+  const [manualCitationInput, setManualCitationInput] = useState("");
+  const [manualCitationPrompts, setManualCitationPrompts] = useState([]);
 
-  const analysisKeywordEntries = useMemo(() => {
-    const sourceIds = selectedKeywordIds.length ? selectedKeywordIds : keywords.map((_, idx) => idx);
-    return sourceIds
-      .map((id) => (keywords[id] ? { ...keywords[id], _originalIndex: id } : null))
-      .filter(Boolean);
-  }, [keywords, selectedKeywordIds]);
+  // Post details scanning for competitors
+  const [scannedPostDetails, setScannedPostDetails] = useState({});
 
-  const keywordSerpData = selectedKeyword ? serpResults[selectedKeyword.term] : null;
+  // Auto-load from localStorage
+  const [hasAutoLoadedOnMount, setHasAutoLoadedOnMount] = useState(false);
 
-  const topRedditPosts = useMemo(
-    () => keywordSerpData?.topRedditPosts || [],
-    [keywordSerpData]
-  );
-  const newRedditPosts = useMemo(
-    () => keywordSerpData?.newRedditPosts || [],
-    [keywordSerpData]
-  );
-  const suggestedPosts = useMemo(
-    () => keywordSerpData?.suggestedPosts || [],
-    [keywordSerpData]
-  );
+  // ── Derived ──────────────────────────────────────────────────────────────
 
-  const citationPrompts = getCitationPrompts();
+  const hasResult = !!rawResult;
+  const activeCtx = rawResult?.companyContext?.approvedContext ?? rawResult?.companyContext?.llmContext ?? null;
+  const companyName = rawResult?.companyName ?? domain.trim();
+  const companyId = rawResult?.companyId ?? null;
+
+  const selectedKw = selectedKwIdx !== null ? keywords[selectedKwIdx] : null;
+  const kwSerpData = selectedKw ? serpResults[selectedKw.term] : null;
+
+  const citationPrompts = useMemo(() => {
+    const base = selectedKw?.prompts ?? [];
+    const extras = manualCitationPrompts.filter(p => !base.includes(p));
+    return [...base, ...extras];
+  }, [selectedKw, manualCitationPrompts]);
 
   const citationSummary = useMemo(() => {
-    const records = citationResults?.records || [];
+    const records = citationResults?.records ?? [];
     if (!records.length) return null;
-    let totalPosts = 0;
-    let totalModels = 0;
-    let totalErrors = 0;
-    let selfMentions = 0;
-    const competitorMentionCounts = {};
-
-    records.forEach((record) => {
-      const models = record?.models || {};
-      Object.values(models).forEach((value) => {
-        totalModels += 1;
-        if (Array.isArray(value)) {
-          totalPosts += value.length;
-          value.forEach((post) => {
-            if (post.mentionsYou) selfMentions += 1;
-            (post.mentionedCompetitors || []).forEach((comp) => {
-              competitorMentionCounts[comp] = (competitorMentionCounts[comp] || 0) + 1;
-            });
-          });
-        } else if (value && value.error) {
-          totalErrors += 1;
+    let totalPosts = 0, totalModels = 0, selfMentions = 0;
+    records.forEach(rec => {
+      Object.values(rec.models).forEach(val => {
+        totalModels++;
+        if (Array.isArray(val)) {
+          totalPosts += val.length;
+          val.forEach(p => { if (p.mentionsBrand) selfMentions++; });
         }
       });
     });
-
-    const latestTimestamp = records.reduce((latest, record) => {
-      if (!record?.timestamp) return latest;
-      const parsed = Date.parse(record.timestamp);
-      return Number.isNaN(parsed) ? latest : Math.max(latest, parsed);
-    }, 0);
-
-    return {
-      totalPrompts: records.length,
-      totalModels,
-      totalPosts,
-      totalErrors,
-      selfMentions,
-      competitorMentionCounts,
-      latestRun: latestTimestamp || null,
-    };
+    return { totalPrompts: records.length, totalModels, totalPosts, selfMentions };
   }, [citationResults]);
 
-  const savedKeywordTimestamp =
-    rawResult?.savedAt ||
-    rawResult?.companyContext?.metadata?.keywordsSavedAt ||
-    rawResult?.companyContext?.metadata?.generatedAt ||
-    null;
-  const savedAtDisplay = formatDateTime(savedKeywordTimestamp);
+  // ── Effects ──────────────────────────────────────────────────────────────
 
-  // ── HANDLERS ──────────────────────────────────────────────────────────────
+  // Auto-load domain from localStorage on mount
+  useEffect(() => {
+    if (hasAutoLoadedOnMount) return; // Prevent re-running
+    setHasAutoLoadedOnMount(true);
 
-  // Competitor management
-  const handleAddCompetitor = () => {
-    const val = competitorInput.trim();
-    if (!val) return;
-    if (!competitors.includes(val)) {
-      setCompetitors((prev) => [...prev, val]);
-    }
-    setCompetitorInput("");
-  };
+    if (typeof window === "undefined") return; // SSR safety
 
-  const handleRemoveCompetitor = (idx) => {
-    setCompetitors((prev) => prev.filter((_, i) => i !== idx));
-  };
-
-  // STEP 1: Fetch domain and generate keywords
-  const handleFetchDomain = async (e) => {
-    e.preventDefault();
-    if (!trimmedDomain) {
-      setError("Please enter a domain.");
-      return;
-    }
-    setError("");
-    setSuccess("");
-    setLoading(true);
     try {
-      const token = await auth?.currentUser?.getIdToken?.();
-      const res = await fetch("/api/threadflow/serp-scout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({ domain: trimmedDomain }),
+      const savedDomain = localStorage.getItem("serp-scout-domain");
+      if (savedDomain && !domain) {
+        setDomain(savedDomain);
+      }
+    } catch (e) {
+      console.warn("[SERP Scout] Failed to read localStorage:", e.message);
+    }
+  }, []);
+
+  // Auto-trigger analysis when domain is loaded from localStorage
+  useEffect(() => {
+    if (!domain || rawResult || !hasAutoLoadedOnMount || loading) return;
+    
+    const savedDomain = localStorage.getItem("serp-scout-domain");
+    if (savedDomain === domain.trim()) {
+      // Domain was loaded from localStorage, trigger analysis
+      handleAnalyzeDomain();
+    }
+  }, [domain, hasAutoLoadedOnMount]);
+
+  // Auto-scan all posts for full content mentions when results load
+  useEffect(() => {
+    if (!serpResults || Object.keys(serpResults).length === 0) return;
+    if (!companyName || competitors.length === 0) return;
+
+    const autoScanPosts = async () => {
+      const postsToScan = [];
+      
+      // Collect all unique post URLs from all result categories
+      Object.values(serpResults).forEach(kwData => {
+        if (kwData?.topRedditPosts?.length > 0) {
+          kwData.topRedditPosts.forEach(post => {
+            const url = post.url || post.post_url;
+            if (url && !scannedPostDetails[url]) {
+              postsToScan.push(url);
+            }
+          });
+        }
+        if (kwData?.newRedditPosts?.length > 0) {
+          kwData.newRedditPosts.forEach(post => {
+            const url = post.url || post.post_url;
+            if (url && !scannedPostDetails[url]) {
+              postsToScan.push(url);
+            }
+          });
+        }
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to analyze domain");
 
-      setRawResult(data);
-      setKeywords(data.keywords || []);
-
-      // Always set companyContext (even null/empty) so step 2 renders
-      const ctx =
-        data.companyContext?.approvedContext ||
-        data.companyContext?.llmContext ||
-        null;
-      setCompanyContext(data.companyContext || null);
-      if (ctx) {
-        setContextForm({
-          companySummary: ctx.companySummary || "",
-          coreCapabilities: Array.isArray(ctx.coreCapabilities) ? ctx.coreCapabilities : [],
-          problemSpaces: Array.isArray(ctx.problemSpaces) ? ctx.problemSpaces : [],
-          constraints: Array.isArray(ctx.constraints) ? ctx.constraints : [],
+      // Also collect from citation results
+      if (citationResults?.records?.length > 0) {
+        citationResults.records.forEach(rec => {
+          Object.values(rec.models || {}).forEach(posts => {
+            if (Array.isArray(posts)) {
+              posts.forEach(post => {
+                const url = post.url || post.post_url;
+                if (url && !scannedPostDetails[url]) {
+                  postsToScan.push(url);
+                }
+              });
+            }
+          });
         });
       }
 
-      if (data.fromExisting) {
-        setIsExistingData(true);
-        setIsKeywordsSaved(true);
-        setSelectedKeywordIds((data.keywords || []).map((_, idx) => idx));
-        const savedCompetitors = data.companyContext?.approvedContext?.competitors;
-        if (Array.isArray(savedCompetitors) && savedCompetitors.length > 0) {
-          setCompetitors(savedCompetitors);
-        }
-        setCurrentStep(5);
-        setSuccess("✓ Loaded existing data! Ready for analysis.");
-      } else {
-        setCurrentStep(2);
-        setSuccess("✓ Domain analyzed successfully!");
+      // Scan in parallel with concurrency limit (3 at a time)
+      if (postsToScan.length === 0) return;
+      
+      const uniqueUrls = [...new Set(postsToScan)];
+      const concurrency = 3;
+      for (let i = 0; i < uniqueUrls.length; i += concurrency) {
+        const batch = uniqueUrls.slice(i, i + concurrency);
+        await Promise.all(batch.map(performPostScan));
       }
-      setTimeout(() => setSuccess(""), 3000);
-    } catch (err) {
-      setError(err.message || "Failed to analyze domain");
+    };
+
+    autoScanPosts();
+  }, [serpResults, citationResults]);
+
+  // Perform a single post scan
+  async function performPostScan(postUrl) {
+    if (!postUrl || scannedPostDetails[postUrl]) return;
+
+    try {
+      const details = await apiPost("/api/threadflow/serp-scout", {
+        action: "fetchPostDetails",
+        url: postUrl,
+      });
+
+      const postContent = details?.post_content || details?.content || '';
+      const postTitle = details?.post_title || details?.title || '';
+      
+      if (postContent || postTitle) {
+        const fullContent = postContent + ' ' + postTitle;
+        const contentLower = fullContent.toLowerCase();
+        
+        const brandMentioned = companyName && contentLower.includes(companyName.toLowerCase());
+        const foundCompetitors = competitors.filter(comp =>
+          contentLower.includes(comp.toLowerCase())
+        );
+
+        setScannedPostDetails(prev => ({
+          ...prev,
+          [postUrl]: {
+            mentionsCompetitors: foundCompetitors,
+            mentionsBrand: brandMentioned,
+            content: postContent,
+            title: postTitle,
+            scannedAt: new Date().toISOString(),
+          }
+        }));
+      }
+    } catch (e) {
+      console.warn("[SERP Scout] Failed to auto-scan post:", postUrl, e.message);
+    }
+  }
+
+  // ── Handlers ─────────────────────────────────────────────────────────────
+
+  async function handleAnalyzeDomain() {
+    const trimmed = domain.trim();
+    if (!trimmed) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await apiPost("/api/threadflow/serp-scout", { domain: trimmed });
+      setRawResult(res);
+      const kws = res.keywords ?? [];
+      setKeywords(kws);
+      setSelectedKwIds(new Set(kws.map((_, i) => i)));
+      const ctx = res.companyContext?.approvedContext ?? res.companyContext?.llmContext;
+      if (ctx) setCtxForm(ctx);
+      const savedCompetitors = ctx?.competitors;
+      if (Array.isArray(savedCompetitors) && savedCompetitors.length > 0) setCompetitors(savedCompetitors);
+
+      // Save domain to localStorage for future auto-load
+      try {
+        localStorage.setItem("serp-scout-domain", trimmed);
+      } catch (e) {
+        console.warn("[SERP Scout] Failed to save domain to localStorage:", e.message);
+      }
+
+      if (res.fromExisting) {
+        setSaved(true);
+        toast({ title: "Loaded!", description: "Existing data loaded — jumping to Analyze." });
+        
+        // Auto-load SERP cache for all keywords when returning to existing setup
+        if (res.companyId && kws.length > 0) {
+          loadSerpCacheForKeywords(kws, trimmed, res.companyId);
+        }
+
+        setActiveTab("analyze");
+      } else {
+        setActiveTab("overview");
+        toast({ title: "Domain analyzed", description: `${kws.length} keywords generated.` });
+      }
+    } catch (e) {
+      setError(e.message ?? "Failed to analyze domain");
     } finally {
       setLoading(false);
     }
-  };
+  }
 
-  // STEP 2: Approve context
-  const handleApproveContext = () => {
-    setSuccess("✓ Overview approved! Select keywords to keep...");
-    setTimeout(() => {
-      setSuccess("");
-      setCurrentStep(3);
-    }, 1500);
-  };
-
-  // STEP 3: Approve keywords
-  const handleApproveKeywords = () => {
-    if (selectedKeywordIds.length < 1 || selectedKeywordIds.length > 20) {
-      setError("Select at least 1 and up to 20 keywords to continue.");
-      return;
-    }
-    setError("");
-    setSuccess("✓ Keywords approved! Ready to save...");
-    setTimeout(() => {
-      setSuccess("");
-      setCurrentStep(4);
-    }, 1500);
-  };
-
-  const toggleKeywordSelection = (idx) => {
-    setError("");
-    setSelectedKeywordIds((prev) => {
-      if (prev.includes(idx)) return prev.filter((id) => id !== idx);
-      if (prev.length >= maxSelectable) {
-        setError(`You can select up to ${maxSelectable} keywords.`);
-        return prev;
-      }
-      return [...prev, idx];
-    });
-  };
-
-  const handleUpdateKeyword = (idx, field, value) => {
-    const updated = [...keywords];
-    updated[idx] = { ...updated[idx], [field]: value };
-    setKeywords(updated);
-  };
-
-  const handleAddManualKeyword = () => {
-    setError("");
-    if (!manualKeywordForm.term.trim()) {
-      setError("Keyword term is required.");
-      return;
-    }
-    const prompts = manualKeywordForm.prompts
-      .split(/\n|,/)
-      .map((entry) => entry.trim())
-      .filter(Boolean)
-      .slice(0, 10);
-    const newKeyword = {
-      term: manualKeywordForm.term.trim(),
-      intent: manualKeywordForm.intent.trim() || "informational",
-      why: manualKeywordForm.why.trim() || "",
-      prompts,
-    };
-    setKeywords((prev) => [...prev, newKeyword]);
-    setManualKeywordForm({ term: "", intent: "informational", why: "", prompts: "" });
-    setSuccess("✓ Custom keyword added.");
-    setTimeout(() => setSuccess(""), 2000);
-  };
-
-  const handleAddManualPrompt = (keywordIdx) => {
-    const value = manualPromptInput[keywordIdx]?.trim();
-    if (!value) return;
-    const updated = [...keywords];
-    const existing = Array.isArray(updated[keywordIdx].prompts) ? updated[keywordIdx].prompts : [];
-    updated[keywordIdx].prompts = [...existing, value].slice(0, 10);
-    setKeywords(updated);
-    setManualPromptInput((prev) => ({ ...prev, [keywordIdx]: "" }));
-  };
-
-  const handleSuggestPrompts = async (keywordIdx) => {
-    const keyword = keywords[keywordIdx];
-    if (!keyword.term) {
-      setError("Keyword term is required before suggesting prompts");
-      return;
-    }
-    setSuggestingPromptsIdx(keywordIdx);
-    setSuggestingPromptsLoading(true);
-    setError("");
+  // Load SERP cache for all keywords from existing company setup
+  async function loadSerpCacheForKeywords(kws, domain, companyId) {
+    if (!kws.length || !companyId) return;
+    
     try {
-      const token = await auth.currentUser?.getIdToken?.();
-      const res = await fetch("/api/threadflow/serp-scout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          action: "suggestPrompts",
-          keyword: keyword.term,
-          intent: keyword.intent,
-          companyName: rawResult?.companyName || domain,
-          domain: trimmedDomain,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to suggest prompts");
-      const updated = [...keywords];
-      updated[keywordIdx].prompts = data.prompts || [];
-      setKeywords(updated);
-      setSuccess("✓ New prompts suggested!");
-      setTimeout(() => setSuccess(""), 3000);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setSuggestingPromptsLoading(false);
-      setSuggestingPromptsIdx(null);
-    }
-  };
-
-  // STEP 4: Save keywords permanently
-  const handleSaveKeywords = async () => {
-    setIsSaving(true);
-    setError("");
-    try {
-      const token = await auth.currentUser?.getIdToken?.();
-      const res = await fetch("/api/threadflow/serp-scout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          action: "saveKeywords",
-          companyId: rawResult?.companyId || null,
-          domain: trimmedDomain,
-          keywords: selectedKeywordIds.map((id) => keywords[id]).filter(Boolean),
-          companyName: rawResult?.companyName || null,
-          competitors,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to save");
-
-      if (data.companyId && !rawResult?.companyId) {
-        setRawResult((prev) => ({ ...prev, companyId: data.companyId }));
-      }
-      setIsKeywordsSaved(true);
-      setSuccess("✓ Keywords saved permanently! Moving to analysis...");
-      setTimeout(() => {
-        setSuccess("");
-        setCurrentStep(5);
-      }, 1500);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
-  // STEP 5: SERP Analysis
-  const handleAnalyzeSerpForKeyword = async () => {
-    if (!selectedKeyword?.term) return;
-    setSerpLoading(true);
-    try {
-      const token = await auth.currentUser?.getIdToken?.();
-      const res = await fetch("/api/threadflow/serp-scout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
+      // Fetch SERP cache for each keyword in parallel
+      const serpDataPromises = kws.map(kw =>
+        apiPost("/api/threadflow/serp-scout", {
           action: "keywordSerp",
-          keyword: selectedKeyword.term,
-          domain: trimmedDomain,
-          companyId: rawResult?.companyId || null,
-          competitors,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to fetch SERP");
-
-      setSerpResults((prev) => ({ ...prev, [selectedKeyword.term]: data }));
-      setSuccess(
-        data.fromCache
-          ? "✓ Loaded cached SERP (updates in 24hrs)"
-          : "✓ Fresh SERP analysis complete!"
+          keyword: kw.term,
+          domain,
+          companyId,
+        }).catch(e => {
+          console.warn(`[SERP Scout] Failed to load SERP cache for "${kw.term}":`, e.message);
+          return null; // Don't throw, continue with other keywords
+        })
       );
-      setTimeout(() => setSuccess(""), 3000);
-    } catch (err) {
-      setError(err.message);
+
+      const serpDataResults = await Promise.all(serpDataPromises);
+      
+      // Populate serpResults with cached data
+      const newSerpResults = {};
+      serpDataResults.forEach((data, idx) => {
+        if (data && data.success !== false) {
+          const kwTerm = kws[idx].term;
+          newSerpResults[kwTerm] = data;
+        }
+      });
+
+      if (Object.keys(newSerpResults).length > 0) {
+        setSerpResults(newSerpResults);
+        console.log("[SERP Scout] Loaded SERP cache for", Object.keys(newSerpResults).length, "keywords");
+      }
+    } catch (e) {
+      console.warn("[SERP Scout] Error loading SERP cache:", e.message);
+    }
+  }
+
+  async function handleSuggestPrompts(idx) {
+    const kw = keywords[idx];
+    if (!kw?.term) return;
+    setSuggestingIdx(idx);
+    try {
+      const res = await apiPost("/api/threadflow/serp-scout", {
+        action: "suggestPrompts",
+        keyword: kw.term,
+        intent: kw.intent,
+        companyName,
+        domain: domain.trim(),
+      });
+      const updated = [...keywords];
+      updated[idx] = { ...updated[idx], prompts: res.prompts ?? [] };
+      setKeywords(updated);
+      toast({ title: "Prompts generated", description: `${res.prompts?.length ?? 0} prompts for "${kw.term}"` });
+    } catch (e) {
+      toast({ variant: "destructive", title: "Failed", description: e.message });
+    } finally {
+      setSuggestingIdx(null);
+    }
+  }
+
+  async function handleSaveKeywords() {
+    setSaving(true);
+    try {
+      const selectedKws = Array.from(selectedKwIds).map(i => keywords[i]).filter(Boolean);
+      const res = await apiPost("/api/threadflow/serp-scout", {
+        action: "saveKeywords",
+        companyId,
+        domain: domain.trim(),
+        keywords: selectedKws,
+        companyName,
+        competitors,
+      });
+      if (res.companyId) setRawResult(prev => ({ ...prev, companyId: res.companyId }));
+      setSaved(true);
+      toast({ title: "Saved!", description: "Keywords saved. Ready to analyze." });
+      setActiveTab("analyze");
+    } catch (e) {
+      toast({ variant: "destructive", title: "Save failed", description: e.message });
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function handleSerpAnalysis() {
+    if (!selectedKw) return;
+    setSerpLoading(true);
+    setError(null);
+    try {
+      const res = await apiPost("/api/threadflow/serp-scout", {
+        action: "keywordSerp",
+        keyword: selectedKw.term,
+        domain: domain.trim(),
+        companyId,
+        competitors,
+      });
+      setSerpResults(prev => ({ ...prev, [selectedKw.term]: res }));
+    } catch (e) {
+      setError(e.message ?? "SERP analysis failed");
     } finally {
       setSerpLoading(false);
     }
-  };
+  }
 
-  const handleGeneratePostContent = async () => {
-    if (!selectedKeyword?.term) return;
-    setGeneratingPosts(true);
-    setError("");
-    try {
-      const token = await auth.currentUser?.getIdToken?.();
-      const redditContext = {
-        topPosts: topRedditPosts.slice(0, 5),
-        newPosts: newRedditPosts.slice(0, 5),
-      };
-      const res = await fetch("/api/threadflow/serp-scout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          action: "generatePostContent",
-          keyword: selectedKeyword.term,
-          domain: trimmedDomain,
-          companyId: rawResult?.companyId || null,
-          redditContext,
-        }),
+  async function handleCitationSearch() {
+    if (!domain.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Missing domain",
+        description: "Please enter a domain first."
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to generate posts");
-      setGeneratedPosts(data.posts || []);
-      setSuccess("✓ Post content generated!");
-      setTimeout(() => setSuccess(""), 3000);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setGeneratingPosts(false);
-    }
-  };
-
-  // Citation testing
-  const handleTestCitations = async () => {
-    setError("");
-    setCitationResults(null);
-    setSuccess("");
-    const effectiveDomain =
-      trimmedDomain ||
-      rawResult?.domain ||
-      companyContext?.domain ||
-      rawResult?.companyContext?.domain ||
-      "";
-
-    // Use prompts from the currently selected keyword + any manual additions
-    // (citationPrompts is already computed as buildCitationPrompts(selectedKeyword?.prompts, manualCitationPrompts))
-    const promptsToTest = citationPrompts.slice(0, 10);
-
-    if (!promptsToTest.length) {
-      setError("Add at least one prompt before running citation tests.");
       return;
     }
-    if (!effectiveDomain) {
-      setError("Domain is required to test citations.");
+    
+    if (!citationPrompts.length) {
+      toast({
+        variant: "destructive",
+        title: "No prompts",
+        description: "Add at least one prompt to run citation search."
+      });
       return;
     }
-
+    
     setCitationLoading(true);
+    setError(null);
+    
     try {
-      const token = await auth?.currentUser?.getIdToken?.();
-      const res = await fetch("/api/threadflow/serp-scout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          action: "testCitations",
-          prompts: promptsToTest,
-          domain: effectiveDomain,
-          competitors,
-        }),
+      const res = await apiPost("/api/threadflow/serp-scout", {
+        action: "testCitations",
+        prompts: citationPrompts,
+        domain: domain.trim(),
+        competitors,
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to test citations");
-
-      if (!data.citations?.records?.length) {
-        setCitationResults(null);
-        setError("No citations found for the provided prompts.");
+      
+      setCitationResults(res);
+      
+      // Show summary of results
+      if (res?.records?.length > 0) {
+        let totalPosts = 0;
+        res.records.forEach(rec => {
+          Object.values(rec.models).forEach(val => {
+            if (Array.isArray(val)) totalPosts += val.length;
+          });
+        });
+        toast({
+          title: "Citation search complete",
+          description: `Found ${totalPosts} posts across ${res.records.length} prompt${res.records.length !== 1 ? 's' : ''}`
+        });
       } else {
-        setCitationResults(data.citations);
-        setSuccess("✓ Citation analysis complete!");
-        setTimeout(() => setSuccess(""), 3000);
+        toast({
+          title: "No results found",
+          description: "Try different prompts or keywords."
+        });
       }
-    } catch (err) {
-      setError(err.message);
+    } catch (e) {
+      const errorMsg = e.message ?? "Citation search failed";
+      setError(errorMsg);
+      
+      // Provide specific error guidance
+      let description = errorMsg;
+      if (errorMsg.includes("timeout")) {
+        description = "The search took too long. Try with fewer prompts or simpler keywords.";
+      } else if (errorMsg.includes("401") || errorMsg.includes("unauthorized")) {
+        description = "Your session expired. Please sign in again.";
+      } else if (errorMsg.includes("429")) {
+        description = "Rate limited. Please wait a moment and try again.";
+      }
+      
+      toast({
+        variant: "destructive",
+        title: "Citation search failed",
+        description
+      });
     } finally {
       setCitationLoading(false);
     }
-  };
+  }
 
-  // ── RENDER ─────────────────────────────────────────────────────────────────
+  function toggleKw(idx) {
+    setSelectedKwIds(prev => {
+      const next = new Set(prev);
+      if (next.has(idx)) next.delete(idx); else next.add(idx);
+      return next;
+    });
+  }
+
+  function addManualPromptToKeyword(idx) {
+    const val = (manualPromptInputs[idx] ?? "").trim();
+    if (!val) return;
+    const updated = [...keywords];
+    updated[idx] = { ...updated[idx], prompts: [...(updated[idx].prompts ?? []), val].slice(0, 10) };
+    setKeywords(updated);
+    setManualPromptInputs(prev => ({ ...prev, [idx]: "" }));
+  }
+
+  function addCustomKeyword() {
+    if (!newKwForm.term.trim()) return;
+    const kw = {
+      term: newKwForm.term.trim(),
+      intent: newKwForm.intent,
+      why: newKwForm.why,
+      prompts: newKwForm.prompts.split(/\n|,/).map(p => p.trim()).filter(Boolean),
+    };
+    setKeywords(prev => {
+      const next = [...prev, kw];
+      setSelectedKwIds(ids => new Set([...ids, next.length - 1]));
+      return next;
+    });
+    setNewKwForm({ term: "", intent: "informational", why: "", prompts: "" });
+    toast({ title: "Keyword added" });
+  }
+
+  // ── Render ────────────────────────────────────────────────────────────────
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-border bg-card">
-        <div className="flex items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
-            <SidebarTrigger className="h-8 w-8" />
-            <div>
-              <h1 className="text-xl font-semibold">SERP Scout</h1>
-              <p className="text-sm text-muted-foreground">
-                Generate keywords → Save → Analyze SERP, Citations & Reddit
-              </p>
-            </div>
-          </div>
-          <Badge variant="outline" className="text-xs">
-            {isExistingData ? "🔒 Saved Data - Analysis Only" : `Step ${currentStep} of 5`}
-          </Badge>
+    <div className="space-y-6 max-w-6xl m-4">
+      {/* Page header */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+        <div className="flex-1">
+          <h1 className="text-2xl font-bold tracking-tight">SERP Scout</h1>
+          <p className="text-muted-foreground text-sm mt-0.5">
+            Discover Reddit threads ranking on Google and find LLM citation opportunities for your brand.
+          </p>
         </div>
-      </header>
-
-      <main className="px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl space-y-6">
-          {/* STEP INDICATOR */}
-          <div className="flex items-center gap-2 rounded-lg border border-border bg-card/50 p-4 overflow-x-auto">
-            {[
-              { step: 1, label: "Domain", icon: "🌐" },
-              { step: 2, label: "Overview", icon: "📋" },
-              { step: 3, label: "Select Keywords", icon: "⚡" },
-              { step: 4, label: "Prompts & Save", icon: "💾" },
-              { step: 5, label: "Analyze", icon: "🔍" },
-            ].map((item, idx) => (
-              <div key={item.step} className="flex items-center gap-2 flex-shrink-0">
-                <div
-                  className={`flex items-center justify-center w-10 h-10 rounded-full font-semibold text-sm transition ${
-                    currentStep >= item.step
-                      ? "bg-emerald-500/20 text-emerald-600 border border-emerald-500/50"
-                      : "bg-muted text-muted-foreground border border-border"
-                  }`}
-                >
-                  {currentStep > item.step ? <Check className="h-5 w-5" /> : item.step}
-                </div>
-                <p className="text-xs font-medium hidden sm:block whitespace-nowrap">
-                  {item.label}
-                </p>
-                {idx < 4 && (
-                  <ChevronRight
-                    className={`h-4 w-4 flex-shrink-0 ${
-                      currentStep > item.step ? "text-emerald-500" : "text-muted-foreground"
-                    }`}
-                  />
-                )}
-              </div>
-            ))}
+        {hasResult && (
+          <div className="flex items-center gap-2 text-sm bg-muted/60 px-3 py-1.5 rounded-lg border border-border">
+            <Globe className="h-3.5 w-3.5 text-primary shrink-0" />
+            <span className="font-medium truncate max-w-48">{companyName}</span>
+            {saved && <CheckCircle className="h-3.5 w-3.5 text-emerald-500 shrink-0" />}
           </div>
+        )}
+      </div>
 
-          {/* ERROR & SUCCESS */}
-          {error && (
-            <div className="rounded-lg border border-red-400/50 bg-red-500/10 p-4 flex gap-3 items-start">
-              <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="font-medium text-red-700">Error</p>
-                <p className="text-sm text-red-600">{error}</p>
+      {/* Error banner */}
+      {error && (
+        <div className="flex items-center gap-2 text-sm text-destructive bg-destructive/10 px-4 py-3 rounded-lg border border-destructive/20">
+          <AlertCircle className="h-4 w-4 shrink-0" />
+          <span className="flex-1">{error}</span>
+          <button className="text-xs underline opacity-70 hover:opacity-100" onClick={() => setError(null)}>
+            dismiss
+          </button>
+        </div>
+      )}
+
+      {/* Tab navigation */}
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="grid grid-cols-5 w-full sm:w-auto sm:flex">
+          <TabsTrigger value="domain" className="gap-1.5">
+            <Globe className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline text-xs">Domain</span>
+          </TabsTrigger>
+          <TabsTrigger value="overview" disabled={!hasResult} className="gap-1.5">
+            <FileText className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline text-xs">Overview</span>
+          </TabsTrigger>
+          <TabsTrigger value="keywords" disabled={!hasResult} className="gap-1.5">
+            <Tag className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline text-xs">Keywords</span>
+            {hasResult && keywords.length > 0 && (
+              <span className="hidden sm:inline text-[10px] bg-primary/15 text-primary px-1.5 py-0.5 rounded-full font-medium leading-none">
+                {keywords.length}
+              </span>
+            )}
+          </TabsTrigger>
+          <TabsTrigger value="save" disabled={!hasResult} className="gap-1.5">
+            <Bookmark className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline text-xs">Save</span>
+            {saved && <CheckCircle className="h-3 w-3 text-emerald-500" />}
+          </TabsTrigger>
+          <TabsTrigger value="analyze" disabled={!saved} className="gap-1.5">
+            <BarChart2 className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline text-xs">Analyze</span>
+          </TabsTrigger>
+        </TabsList>
+
+        {/* ── Tab 1: Domain ─────────────────────────────────────────────────── */}
+        <TabsContent value="domain" className="mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Globe className="h-5 w-5 text-primary" /> Enter Your Website
+              </CardTitle>
+              <CardDescription>
+                Paste your domain and we&apos;ll scrape your site to understand your company, then generate targeted keywords and prompts automatically.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex gap-2 max-w-lg">
+                <Input
+                  value={domain}
+                  onChange={e => setDomain(e.target.value)}
+                  placeholder="https://yourwebsite.com"
+                  onKeyDown={e => e.key === "Enter" && handleAnalyzeDomain()}
+                  disabled={loading}
+                />
+                <Button onClick={handleAnalyzeDomain} disabled={loading || !domain.trim()}>
+                  {loading
+                    ? <><Spinner className="h-4 w-4 mr-2" />Analyzing…</>
+                    : <><Sparkles className="h-4 w-4 mr-2" />Analyze</>
+                  }
+                </Button>
               </div>
-            </div>
-          )}
-          {success && (
-            <div className="rounded-lg border border-green-400/50 bg-green-500/10 p-4 flex gap-3 items-start">
-              <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-green-700">{success}</p>
-            </div>
-          )}
 
-          {/* STEP 1: DOMAIN */}
-          {currentStep >= 1 && (
-            <Card className={currentStep === 1 ? "border-emerald-500/50 shadow-lg" : ""}>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <span>🌐</span> Step 1: Enter Domain
-                </CardTitle>
-                <CardDescription>
-                  Analyze your domain to generate strategic keywords and market positioning
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <form onSubmit={handleFetchDomain} className="flex flex-col gap-3">
-                  <Input
-                    placeholder="example.com"
-                    value={domain}
-                    onChange={(e) => setDomain(e.target.value)}
-                    disabled={loading || currentStep > 1 || isExistingData}
-                    className="text-base"
-                  />
-                  {currentStep === 1 && !isExistingData && (
-                    <Button type="submit" disabled={loading || !domain.trim()} className="w-full">
-                      {loading ? "Analyzing domain…" : "Fetch Domain & Generate Keywords"}
-                    </Button>
-                  )}
-                </form>
+              {loading && (
+                <div className="space-y-2 max-w-lg pt-1">
+                  <Skeleton className="h-3 w-3/4" />
+                  <Skeleton className="h-3 w-1/2" />
+                  <Skeleton className="h-3 w-2/3" />
+                </div>
+              )}
 
-                {/* Competitors */}
-                {currentStep === 1 && !isExistingData && (
-                  <div className="space-y-2 pt-2">
-                    <p className="text-sm font-medium text-foreground">
-                      Competitors{" "}
-                      <span className="text-xs font-normal text-muted-foreground">(optional — for mention tracking)</span>
-                    </p>
-                    <div className="flex gap-2">
-                      <Input
-                        placeholder="competitor.com or Company Name"
-                        value={competitorInput}
-                        onChange={(e) => setCompetitorInput(e.target.value)}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter") {
-                            e.preventDefault();
-                            handleAddCompetitor();
-                          }
-                        }}
-                        className="text-sm"
-                      />
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        onClick={handleAddCompetitor}
-                        className="flex-shrink-0"
-                      >
-                        Add
-                      </Button>
-                    </div>
-                    {competitors.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {competitors.map((c, i) => (
-                          <span
-                            key={i}
-                            className="flex items-center gap-1 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-xs text-orange-700"
-                          >
-                            {c}
-                            <button
-                              type="button"
-                              onClick={() => handleRemoveCompetitor(i)}
-                              className="ml-0.5 text-orange-400 hover:text-orange-600 font-semibold leading-none"
-                            >
-                              ×
-                            </button>
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-                {currentStep > 1 && competitors.length > 0 && (
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    <span className="text-xs text-muted-foreground self-center">Tracking competitors:</span>
-                    {competitors.map((c, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-xs text-orange-700"
-                      >
-                        {c}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                {currentStep > 1 && (
-                  <div
-                    className={`rounded-lg border p-3 flex items-center gap-2 ${
-                      isExistingData
-                        ? "bg-blue-500/10 border-blue-500/30"
-                        : "bg-emerald-500/10 border-emerald-500/30"
-                    }`}
+              {hasResult && !loading && (
+                <div className="flex items-center gap-2 text-sm text-emerald-700 bg-emerald-50 dark:bg-emerald-950/20 px-4 py-2.5 rounded-lg border border-emerald-200 dark:border-emerald-900">
+                  <CheckCircle className="h-4 w-4 shrink-0" />
+                  <span className="flex-1">
+                    {rawResult?.fromExisting
+                      ? "Existing setup loaded — jump straight to Analyze."
+                      : `${keywords.length} keywords generated. Review your company overview next.`}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-7 text-xs shrink-0"
+                    onClick={() => setActiveTab(rawResult?.fromExisting ? "analyze" : "overview")}
                   >
-                    {isExistingData ? (
-                      <>
-                        <span className="text-lg">🔒</span>
-                        <p className="text-sm font-medium text-blue-700">
-                          Domain loaded from database: {trimmedDomain}
-                        </p>
-                      </>
-                    ) : (
-                      <>
-                        <Check className="h-4 w-4 text-emerald-600" />
-                        <p className="text-sm text-emerald-700 font-medium">
-                          Domain analyzed: {trimmedDomain}
-                        </p>
-                      </>
-                    )}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          )}
+                    Continue <ChevronRight className="h-3 w-3 ml-0.5" />
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-          {/* STEP 2: OVERVIEW — shows whenever step >= 2, regardless of context */}
-          {currentStep >= 2 && (
-            <Card className={currentStep === 2 ? "border-emerald-500/50 shadow-lg" : ""}>
-              <CardHeader>
-                <div className="flex items-center justify-between">
+        {/* ── Tab 2: Overview ───────────────────────────────────────────────── */}
+        <TabsContent value="overview" className="mt-6">
+          {activeCtx ? (
+            <div className="space-y-4">
+              <Card>
+                <CardHeader className="flex flex-row items-start justify-between gap-4">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      <span>📋</span> Step 2: Company Overview
+                      <FileText className="h-5 w-5 text-primary" /> Company Overview
                     </CardTitle>
                     <CardDescription>
-                      {isExistingData
-                        ? "Review the saved overview from the last analysis."
-                        : "Review AI-generated company analysis"}
+                      AI-generated from your website. Edit if anything looks off, then continue to Keywords.
                     </CardDescription>
                   </div>
-                  {currentStep > 2 && <Check className="h-5 w-5 text-emerald-600" />}
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {isExistingData && rawResult?.savedAt && (
-                  <p className="text-[11px] text-muted-foreground">
-                    Saved on {formatDateTime(rawResult.savedAt)}
-                  </p>
-                )}
-
-                {!editingContext ? (
-                  <>
-                    {contextForm.companySummary ? (
-                      <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
-                        <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
-                          Summary
-                        </p>
-                        <p className="text-sm leading-relaxed">{contextForm.companySummary}</p>
+                  <Button variant="outline" size="sm" onClick={() => {
+                    if (!editingCtx) {
+                      setCtxForm({
+                        companySummary: activeCtx?.companySummary ?? "",
+                        coreCapabilities: Array.isArray(activeCtx?.coreCapabilities) ? activeCtx.coreCapabilities : [],
+                        problemSpaces: Array.isArray(activeCtx?.problemSpaces) ? activeCtx.problemSpaces : [],
+                        constraints: Array.isArray(activeCtx?.constraints) ? activeCtx.constraints : [],
+                      });
+                    }
+                    setEditingCtx(e => !e);
+                  }} className="shrink-0">
+                    {editingCtx
+                      ? <><X className="h-3.5 w-3.5 mr-1" />Cancel</>
+                      : <><Edit2 className="h-3.5 w-3.5 mr-1" />Edit</>
+                    }
+                  </Button>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {editingCtx ? (
+                    <>
+                      <div>
+                        <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Company Summary</label>
+                        <Textarea
+                          value={ctxForm.companySummary}
+                          onChange={e => setCtxForm(f => ({ ...f, companySummary: e.target.value }))}
+                          rows={4}
+                        />
                       </div>
-                    ) : (
-                      <div className="rounded-lg border border-amber-400/40 bg-amber-500/10 p-4">
-                        <p className="text-sm text-amber-700">
-                          No company overview was generated (context generation may have failed or is pending).
-                          You can still continue to keywords.
-                        </p>
-                      </div>
-                    )}
-
-                    {(contextForm.coreCapabilities.length > 0 || contextForm.problemSpaces.length > 0) && (
-                      <div className="grid gap-4 md:grid-cols-2">
-                        <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
-                          <p className="text-xs font-semibold text-muted-foreground">
-                            Capabilities ({contextForm.coreCapabilities.length})
-                          </p>
-                          <ul className="space-y-1">
-                            {contextForm.coreCapabilities.map((cap, idx) => (
-                              <li key={idx} className="text-sm">• {cap}</li>
-                            ))}
-                          </ul>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
+                            Core Capabilities (one per line)
+                          </label>
+                          <Textarea
+                            value={ctxForm.coreCapabilities.join("\n")}
+                            onChange={e => setCtxForm(f => ({ ...f, coreCapabilities: e.target.value.split("\n").filter(Boolean) }))}
+                            rows={4}
+                          />
                         </div>
-                        <div className="rounded-lg border border-border bg-muted/40 p-4 space-y-2">
-                          <p className="text-xs font-semibold text-muted-foreground">
-                            Problems ({contextForm.problemSpaces.length})
-                          </p>
-                          <ul className="space-y-1">
-                            {contextForm.problemSpaces.map((prob, idx) => (
-                              <li key={idx} className="text-sm">• {prob}</li>
-                            ))}
-                          </ul>
+                        <div>
+                          <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
+                            Problem Spaces (one per line)
+                          </label>
+                          <Textarea
+                            value={ctxForm.problemSpaces.join("\n")}
+                            onChange={e => setCtxForm(f => ({ ...f, problemSpaces: e.target.value.split("\n").filter(Boolean) }))}
+                            rows={4}
+                          />
                         </div>
                       </div>
-                    )}
-
-                    {currentStep === 2 && (
-                      <Button onClick={handleApproveContext} className="w-full">
-                        <Check className="h-4 w-4 mr-2" /> Approve & Continue to Keywords
+                      <Button
+                        size="sm"
+                        onClick={() => {
+                          setEditingCtx(false);
+                          setRawResult(prev => ({
+                            ...prev,
+                            companyContext: {
+                              ...prev?.companyContext,
+                              approvedContext: {
+                                ...prev?.companyContext?.approvedContext,
+                                ...ctxForm,
+                              },
+                            },
+                          }));
+                          toast({ title: "Overview updated" });
+                        }}
+                      >
+                        <Save className="h-3.5 w-3.5 mr-1.5" />Save Changes
                       </Button>
-                    )}
-                  </>
-                ) : (
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <label className="text-xs font-semibold">Summary</label>
-                      <Textarea
-                        value={contextForm.companySummary}
-                        onChange={(e) =>
-                          setContextForm((prev) => ({ ...prev, companySummary: e.target.value }))
-                        }
-                        className="min-h-[80px]"
-                      />
-                    </div>
-                    <Button onClick={handleApproveContext} className="w-full">
-                      Save & Continue
-                    </Button>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          )}
-
-          {/* STEP 3: KEYWORDS */}
-          {currentStep >= 3 && (
-            <Card className={currentStep === 3 ? "border-emerald-500/50 shadow-lg" : ""}>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="flex items-center gap-2">
-                      <span>⚡</span> Step 3: Select Keywords
-                    </CardTitle>
-                    <CardDescription>
-                      {isExistingData
-                        ? "Keywords loaded from saved set. Adjust selection for analysis."
-                        : "Choose at least 1 and up to 20 keywords from the list below."}
-                    </CardDescription>
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Selected {selectedKeywordIds.length}/{maxSelectable}
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {keywords.length === 0 ? (
-                  <p className="text-sm text-muted-foreground italic">No keywords generated yet.</p>
-                ) : (
-                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    {keywords.map((keyword, idx) => {
-                      const isChecked = selectedKeywordIds.includes(idx);
-                      return (
-                        <div
-                          key={idx}
-                          onClick={() => toggleKeywordSelection(idx)}
-                          className={`cursor-pointer rounded-lg border transition-all ${
-                            isChecked
-                              ? "border-emerald-500 bg-emerald-500/10 shadow-md"
-                              : "border-border bg-card/50 hover:border-emerald-400/50 hover:bg-card"
-                          } p-3 space-y-2`}
-                        >
-                          <div className="flex items-start gap-2">
-                            <input
-                              type="checkbox"
-                              checked={isChecked}
-                              onChange={() => toggleKeywordSelection(idx)}
-                              onClick={(e) => e.stopPropagation()}
-                              className="mt-0.5 h-4 w-4 accent-emerald-600 cursor-pointer flex-shrink-0"
-                              aria-label={`Select ${keyword.term}`}
-                            />
-                            <div className="flex-1 min-w-0 space-y-1">
-                              <p className="text-sm font-semibold text-foreground" title={keyword.term}>
-                                {keyword.term}
-                              </p>
-                              <p className="text-[10px] text-muted-foreground line-clamp-2" title={keyword.why}>
-                                {keyword.why}
-                              </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-sm leading-relaxed text-foreground/90">{activeCtx.companySummary}</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {activeCtx.coreCapabilities?.length > 0 && (
+                          <div>
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Core Capabilities</p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {activeCtx.coreCapabilities.map((c, i) => (
+                                <Badge key={i} variant="secondary" className="text-xs">{c}</Badge>
+                              ))}
                             </div>
                           </div>
+                        )}
+                        {activeCtx.problemSpaces?.length > 0 && (
+                          <div>
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Problem Spaces</p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {activeCtx.problemSpaces.map((p, i) => (
+                                <Badge key={i} variant="outline" className="text-xs">{p}</Badge>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </CardContent>
+              </Card>
+              <div className="flex justify-end">
+                <Button onClick={() => setActiveTab("keywords")}>
+                  Review Keywords <ChevronRight className="h-4 w-4 ml-1" />
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center h-48 border border-dashed rounded-lg text-muted-foreground text-sm">
+              Analyze a domain first to see your company overview.
+            </div>
+          )}
+        </TabsContent>
+
+        {/* ── Tab 3: Keywords ───────────────────────────────────────────────── */}
+        <TabsContent value="keywords" className="mt-6">
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 text-sm">
+              <Tag className="h-4 w-4 text-primary" />
+              <span className="font-medium">{selectedKwIds.size} of {keywords.length} selected</span>
+              <button
+                className="text-xs text-muted-foreground underline"
+                onClick={() => setSelectedKwIds(new Set(keywords.map((_, i) => i)))}
+              >
+                Select all
+              </button>
+              <button
+                className="text-xs text-muted-foreground underline"
+                onClick={() => setSelectedKwIds(new Set())}
+              >
+                Clear
+              </button>
+            </div>
+
+            <div className="space-y-2">
+              {keywords.map((kw, idx) => (
+                <Card
+                  key={idx}
+                  className={`transition-all ${selectedKwIds.has(idx) ? "border-primary/40 bg-primary/5" : "border-border hover:border-primary/20"}`}
+                >
+                  <CardContent className="p-3">
+                    <div className="flex items-start gap-3">
+                      <button
+                        onClick={() => toggleKw(idx)}
+                        className={`mt-0.5 h-4 w-4 rounded border-2 shrink-0 flex items-center justify-center transition-colors ${
+                          selectedKwIds.has(idx) ? "bg-primary border-primary" : "border-muted-foreground/40"
+                        }`}
+                      >
+                        {selectedKwIds.has(idx) && (
+                          <span className="text-primary-foreground text-[10px] font-bold leading-none">✓</span>
+                        )}
+                      </button>
+
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="font-medium text-sm">{kw.term}</span>
+                          <Badge variant="outline" className="text-[10px] capitalize">{kw.intent}</Badge>
+                          <button
+                            className="text-xs text-primary underline"
+                            onClick={() => setExpandedKw(expandedKw === idx ? null : idx)}
+                          >
+                            {expandedKw === idx ? "collapse" : `${kw.prompts.length} prompt${kw.prompts.length !== 1 ? "s" : ""}`}
+                          </button>
                         </div>
-                      );
-                    })}
-                  </div>
-                )}
 
-                {currentStep === 3 && !isExistingData && (
-                  <Button
-                    onClick={handleApproveKeywords}
-                    disabled={selectedKeywordIds.length === 0}
-                    className="w-full"
-                  >
-                    <Check className="h-4 w-4 mr-2" /> Continue to Prompts
-                  </Button>
-                )}
+                        {kw.why && (
+                          <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">{kw.why}</p>
+                        )}
 
-                {/* Add custom keyword */}
-                <div className="rounded-lg border border-border bg-card/40 p-4 space-y-4">
-                  <div className="flex items-center gap-2 text-sm font-semibold">
-                    <Zap className="h-4 w-4 text-emerald-500" /> Add a custom keyword
-                  </div>
-                  <div className="grid gap-3 md:grid-cols-2">
-                    <Input
-                      placeholder="Keyword term"
-                      value={manualKeywordForm.term}
-                      onChange={(e) =>
-                        setManualKeywordForm((prev) => ({ ...prev, term: e.target.value }))
-                      }
-                    />
-                    <Input
-                      placeholder="Intent (informational/commercial/navigational)"
-                      value={manualKeywordForm.intent}
-                      onChange={(e) =>
-                        setManualKeywordForm((prev) => ({ ...prev, intent: e.target.value }))
-                      }
-                    />
-                  </div>
-                  <Textarea
-                    placeholder="Why this keyword matters (optional)"
-                    value={manualKeywordForm.why}
-                    onChange={(e) =>
-                      setManualKeywordForm((prev) => ({ ...prev, why: e.target.value }))
-                    }
-                    className="min-h-[70px]"
-                  />
-                  <Textarea
-                    placeholder="Add prompts (one per line or comma-separated)"
-                    value={manualKeywordForm.prompts}
-                    onChange={(e) =>
-                      setManualKeywordForm((prev) => ({ ...prev, prompts: e.target.value }))
-                    }
-                    className="min-h-[90px]"
-                  />
-                  <Button variant="outline" onClick={handleAddManualKeyword}>
-                    Add Keyword
-                  </Button>
+                        {expandedKw === idx && (
+                          <div className="mt-3 space-y-2 border-t border-border/50 pt-3">
+                            {kw.prompts.length > 0 ? (
+                              kw.prompts.map((p, pi) => (
+                                <div key={pi} className="flex items-start gap-1.5 text-xs text-foreground/80">
+                                  <MessageSquare className="h-3 w-3 mt-0.5 shrink-0 text-primary" />
+                                  <span>{p}</span>
+                                </div>
+                              ))
+                            ) : (
+                              <p className="text-xs text-muted-foreground italic">No prompts yet — click AI to generate.</p>
+                            )}
+
+                            <div className="flex gap-1.5 pt-1">
+                              <Input
+                                value={manualPromptInputs[idx] ?? ""}
+                                onChange={e => setManualPromptInputs(prev => ({ ...prev, [idx]: e.target.value }))}
+                                placeholder="Add a prompt…"
+                                className="h-7 text-xs"
+                                onKeyDown={e => {
+                                  if (e.key === "Enter") addManualPromptToKeyword(idx);
+                                }}
+                              />
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                className="h-7 px-2 shrink-0"
+                                onClick={() => addManualPromptToKeyword(idx)}
+                                title="Add prompt"
+                              >
+                                <Plus className="h-3 w-3" />
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                className="h-7 px-2 shrink-0"
+                                onClick={() => handleSuggestPrompts(idx)}
+                                disabled={suggestingIdx === idx}
+                                title="AI suggest prompts"
+                              >
+                                {suggestingIdx === idx ? <Spinner className="h-3 w-3" /> : <Sparkles className="h-3 w-3" />}
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+
+              {keywords.length === 0 && (
+                <div className="flex items-center justify-center h-32 border border-dashed rounded-lg text-muted-foreground text-sm">
+                  No keywords — analyze a domain first.
                 </div>
+              )}
+            </div>
+
+            {/* Add custom keyword */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-sm flex items-center gap-1.5">
+                  <Plus className="h-4 w-4" />Add Custom Keyword
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="sm:col-span-2">
+                    <Input
+                      value={newKwForm.term}
+                      onChange={e => setNewKwForm(f => ({ ...f, term: e.target.value }))}
+                      placeholder="Keyword term"
+                      onKeyDown={e => e.key === "Enter" && addCustomKeyword()}
+                    />
+                  </div>
+                  <select
+                    value={newKwForm.intent}
+                    onChange={e => setNewKwForm(f => ({ ...f, intent: e.target.value }))}
+                    className="h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
+                  >
+                    {["informational", "commercial", "transactional", "navigational"].map(v => (
+                      <option key={v} value={v}>{v}</option>
+                    ))}
+                  </select>
+                </div>
+                <Textarea
+                  value={newKwForm.prompts}
+                  onChange={e => setNewKwForm(f => ({ ...f, prompts: e.target.value }))}
+                  placeholder="Search prompts (one per line or comma-separated, optional)"
+                  rows={2}
+                  className="text-sm"
+                />
+                <Button size="sm" variant="outline" onClick={addCustomKeyword} disabled={!newKwForm.term.trim()}>
+                  <Plus className="h-3.5 w-3.5 mr-1.5" />Add Keyword
+                </Button>
               </CardContent>
             </Card>
-          )}
 
-          {/* STEP 4: PROMPTS & SAVE */}
-          {currentStep >= 4 && (
-            <Card className={currentStep === 4 ? "border-emerald-500/50 shadow-lg" : ""}>
+            <div className="flex justify-end">
+              <Button onClick={() => setActiveTab("save")} disabled={selectedKwIds.size === 0}>
+                Add Competitors & Save <ChevronRight className="h-4 w-4 ml-1" />
+              </Button>
+            </div>
+          </div>
+        </TabsContent>
+
+        {/* ── Tab 4: Save ───────────────────────────────────────────────────── */}
+        <TabsContent value="save" className="mt-6">
+          <div className="space-y-4">
+            <Card>
               <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="flex items-center gap-2">
-                      <span>💾</span> Step 4: Prompts & Save
-                    </CardTitle>
-                    <CardDescription>
-                      {isExistingData
-                        ? "Review the prompts saved with the keywords."
-                        : "Suggest prompts for selected keywords, then save."}
-                    </CardDescription>
-                  </div>
-                  {currentStep > 4 && <Check className="h-5 w-5 text-emerald-600" />}
-                </div>
+                <CardTitle className="flex items-center gap-2">
+                  <Bookmark className="h-5 w-5 text-primary" /> Save & Configure
+                </CardTitle>
+                <CardDescription>
+                  Optionally add competitors to track brand vs. competitor mentions, then save your {selectedKwIds.size} selected keyword{selectedKwIds.size !== 1 ? "s" : ""}.
+                </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {selectedKeywordEntries.length === 0 && (
-                  <div className="text-sm text-amber-600 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
-                    Select 1–20 keywords in Step 3 first.
-                  </div>
-                )}
-
-                {selectedKeywordEntries.map((keyword) => (
-                  <div key={keyword._originalIndex} className="rounded-lg border border-border bg-card/40 p-4 space-y-3">
-                    <div className="flex items-center justify-between gap-3">
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">{keyword.term}</p>
-                        <p className="text-[11px] text-muted-foreground">{keyword.intent}</p>
-                      </div>
-                      {!isExistingData ? (
-                        <Button
-                          variant="outline"
-                          size="xs"
-                          onClick={() => handleSuggestPrompts(keyword._originalIndex)}
-                          disabled={suggestingPromptsLoading}
-                          className="text-xs h-7"
-                        >
-                          {suggestingPromptsLoading && suggestingPromptsIdx === keyword._originalIndex
-                            ? "Suggesting..."
-                            : "✨ Suggest Prompts"}
-                        </Button>
-                      ) : (
-                        <span className="text-[11px] text-muted-foreground">
-                          Prompts loaded {savedAtDisplay ? `on ${savedAtDisplay}` : "previously"}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="space-y-1">
-                      {keyword.prompts?.length ? (
-                        keyword.prompts.map((prompt, pIdx) => (
-                          <div key={pIdx} className="text-xs text-foreground/80 pl-2">
-                            {pIdx + 1}. {prompt}
-                          </div>
-                        ))
-                      ) : (
-                        <p className="text-xs text-muted-foreground">No prompts yet. Click suggest.</p>
-                      )}
-                    </div>
-
-                    {!isExistingData && (
-                      <div className="flex flex-col gap-2 md:flex-row md:items-center">
-                        <Input
-                          placeholder="Add a custom prompt"
-                          value={manualPromptInput[keyword._originalIndex] || ""}
-                          onChange={(e) =>
-                            setManualPromptInput((prev) => ({
-                              ...prev,
-                              [keyword._originalIndex]: e.target.value,
-                            }))
-                          }
-                        />
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleAddManualPrompt(keyword._originalIndex)}
-                        >
-                          Add Prompt
-                        </Button>
-                      </div>
+              <CardContent className="space-y-5">
+                <div>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Selected Keywords</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {Array.from(selectedKwIds).map(i => keywords[i]).filter(Boolean).map((kw, j) => (
+                      <Badge key={j} variant="secondary" className="text-xs">{kw.term}</Badge>
+                    ))}
+                    {selectedKwIds.size === 0 && (
+                      <span className="text-xs text-muted-foreground italic">No keywords selected — go back to Keywords tab.</span>
                     )}
                   </div>
-                ))}
+                </div>
 
-                {!isExistingData && currentStep === 4 && (
-                  <Button
-                    onClick={handleSaveKeywords}
-                    disabled={isSaving || selectedKeywordEntries.length === 0}
-                    className="w-full"
-                  >
-                    <Check className="h-4 w-4 mr-2" />
-                    {isSaving ? "Saving..." : "Save Selected Keywords"}
-                  </Button>
-                )}
-                {isExistingData && (
-                  <div className="rounded-lg bg-blue-500/10 border border-blue-500/30 p-4 text-center">
-                    <p className="text-sm font-semibold text-blue-800">
-                      ✓ Keywords and prompts saved {savedAtDisplay ? `on ${savedAtDisplay}` : "previously"}.
-                    </p>
-                    <p className="text-xs text-blue-700/80">
-                      Use Step 5 to analyze, or re-enter the domain to regenerate everything.
-                    </p>
+                <div>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Competitors to Track</p>
+                  <div className="flex flex-wrap gap-2 mb-2 min-h-7">
+                    {competitors.map((c, i) => (
+                      <Badge key={i} variant="secondary" className="gap-1 pr-1.5 text-xs">
+                        {c}
+                        <button onClick={() => setCompetitors(cs => cs.filter((_, j) => j !== i))}>
+                          <X className="h-3 w-3 hover:text-destructive" />
+                        </button>
+                      </Badge>
+                    ))}
+                    {competitors.length === 0 && (
+                      <span className="text-xs text-muted-foreground italic">No competitors added (optional)</span>
+                    )}
                   </div>
-                )}
-                {!isExistingData && isKeywordsSaved && (
-                  <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-4 text-center">
-                    <p className="text-sm font-semibold text-emerald-700">
-                      ✓ Keywords saved! Ready for analysis.
-                    </p>
+                  <div className="flex gap-2 max-w-sm">
+                    <Input
+                      value={competitorInput}
+                      onChange={e => setCompetitorInput(e.target.value)}
+                      placeholder="e.g. CompetitorName"
+                      className="h-8 text-sm"
+                      onKeyDown={e => {
+                        if (e.key === "Enter" && competitorInput.trim()) {
+                          setCompetitors(cs => [...cs, competitorInput.trim()]);
+                          setCompetitorInput("");
+                        }
+                      }}
+                    />
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="h-8 px-2"
+                      onClick={() => {
+                        if (competitorInput.trim()) {
+                          setCompetitors(cs => [...cs, competitorInput.trim()]);
+                          setCompetitorInput("");
+                        }
+                      }}
+                    >
+                      <Plus className="h-3.5 w-3.5" />
+                    </Button>
+                  </div>
+                </div>
+
+                {saved && (
+                  <div className="flex items-center gap-2 text-sm text-emerald-700 bg-emerald-50 dark:bg-emerald-950/20 px-4 py-2.5 rounded-lg border border-emerald-200 dark:border-emerald-900">
+                    <CheckCircle className="h-4 w-4 shrink-0" />
+                    Keywords saved! Head to the Analyze tab to run SERP and Citation searches.
                   </div>
                 )}
               </CardContent>
             </Card>
+
+            <div className="flex gap-2 justify-end">
+              <Button variant="outline" onClick={() => setActiveTab("keywords")}>
+                Back to Keywords
+              </Button>
+              <Button onClick={handleSaveKeywords} disabled={saving || selectedKwIds.size === 0}>
+                {saving
+                  ? <><Spinner className="h-4 w-4 mr-2" />Saving…</>
+                  : <><Bookmark className="h-4 w-4 mr-2" />Save & Go to Analyze</>
+                }
+              </Button>
+            </div>
+          </div>
+        </TabsContent>
+
+        {/* ── Tab 5: Analyze ────────────────────────────────────────────────── */}
+        <TabsContent value="analyze" className="mt-6">
+          {citationSummary && (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+              {[
+                { label: "Prompts Searched", value: citationSummary.totalPrompts },
+                { label: "Models Used", value: citationSummary.totalModels },
+                { label: "Reddit Posts Found", value: citationSummary.totalPosts },
+                { label: "Brand Mentions", value: citationSummary.selfMentions },
+              ].map(({ label, value }) => (
+                <Card key={label}>
+                  <CardContent className="pt-4 pb-3">
+                    <p className="text-2xl font-bold">{value}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{label}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           )}
 
-          {/* STEP 5: ANALYSIS */}
-          {currentStep >= 5 && (
-            <div className="space-y-6">
-              {/* Keyword Selector */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Left controls */}
+            <div className="space-y-4">
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <span>🔍</span> Step 5: Analyze Keywords
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    <Search className="h-4 w-4 text-primary" />SERP Analysis
                   </CardTitle>
-                  <CardDescription>
-                    Select a keyword to search SERP, Reddit posts, and LLM citations
+                  <CardDescription className="text-xs">
+                    Find Reddit posts currently ranking on Google for your keyword.
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  {analysisKeywordEntries.length === 0 ? (
-                    <p className="text-sm text-muted-foreground italic">
-                      No keywords available. Go back to Step 3 to select keywords.
-                    </p>
-                  ) : (
-                    <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
-                      {analysisKeywordEntries.map((keyword) => (
-                        <Button
-                          key={keyword._originalIndex}
-                          variant={selectedKeywordIdx === keyword._originalIndex ? "default" : "outline"}
-                          className="text-left justify-start h-auto py-3 px-4"
-                          onClick={() => {
-                            setSelectedKeywordIdx(keyword._originalIndex);
-                            setAnalysisTab(null);
-                          }}
-                        >
-                          <div className="flex flex-col gap-1">
-                            <p className="font-semibold text-sm">{keyword.term}</p>
-                            <p className="text-xs text-muted-foreground">{keyword.intent}</p>
-                          </div>
-                        </Button>
-                      ))}
-                    </div>
+                <CardContent className="space-y-2">
+                  {Array.from(selectedKwIds).map(globalIdx => {
+                    const kw = keywords[globalIdx];
+                    if (!kw) return null;
+                    const isSelected = selectedKwIdx === globalIdx;
+                    const serpData = serpResults[kw.term];
+                    return (
+                      <button
+                        key={globalIdx}
+                        onClick={() => setSelectedKwIdx(globalIdx)}
+                        className={`w-full text-left px-3 py-2 rounded-md text-sm border transition-colors ${
+                          isSelected
+                            ? "bg-primary text-primary-foreground border-primary"
+                            : "bg-muted/30 border-border hover:bg-muted text-black"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-1">
+                          <span className="truncate">{kw.term}</span>
+                          {serpData && (
+                            <span className="text-[10px] shrink-0 opacity-70">
+                              {serpData.topRedditPosts.length + serpData.newRedditPosts.length} posts
+                            </span>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+
+                  {selectedKwIds.size === 0 && (
+                    <p className="text-xs text-muted-foreground italic">No keywords saved. Go back to Save tab.</p>
+                  )}
+
+                  {selectedKwIdx !== null && (
+                    <Button onClick={handleSerpAnalysis} disabled={serpLoading} className="w-full" size="sm">
+                      {serpLoading
+                        ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Searching…</>
+                        : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run SERP Search</>
+                      }
+                    </Button>
                   )}
                 </CardContent>
               </Card>
 
-              {/* Analysis Tabs */}
-              {selectedKeyword && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">
-                      Analysis for: <span className="text-emerald-600">{selectedKeyword.term}</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    {/* Tab Buttons */}
-                    <div className="flex gap-2 mb-6 border-b border-border pb-4 overflow-x-auto">
-                      <Button
-                        variant={analysisTab === "serp" ? "default" : "ghost"}
-                        size="sm"
-                        onClick={() => setAnalysisTab("serp")}
-                        className="flex items-center gap-2"
-                      >
-                        <Search className="h-4 w-4" />
-                        SERP & Reddit
-                      </Button>
-                      <Button
-                        variant={analysisTab === "postContent" ? "default" : "ghost"}
-                        size="sm"
-                        onClick={() => setAnalysisTab("postContent")}
-                        className="flex items-center gap-2"
-                      >
-                        <MessageSquare className="h-4 w-4" />
-                        Post Content
-                      </Button>
-                      <Button
-                        variant={analysisTab === "citations" ? "default" : "ghost"}
-                        size="sm"
-                        onClick={() => setAnalysisTab("citations")}
-                        className="flex items-center gap-2"
-                      >
-                        <Sparkles className="h-4 w-4" />
-                        Citations
-                      </Button>
-                    </div>
-
-                    {!analysisTab && (
-                      <p className="text-sm text-muted-foreground text-center py-6">
-                        Select a tab above to start analysis
-                      </p>
-                    )}
-
-                    {/* SERP Tab */}
-                    {analysisTab === "serp" && (
-                      <div className="space-y-4">
-                        <Button
-                          onClick={handleAnalyzeSerpForKeyword}
-                          disabled={serpLoading}
-                          className="w-full"
-                        >
-                          {serpLoading ? "Analyzing…" : "Search SERP & Reddit"}
-                        </Button>
-
-                        {keywordSerpData && (
-                          <div className="space-y-6">
-                            <div className="rounded-lg bg-muted/40 border border-border p-4">
-                              <p className="text-sm font-semibold mb-1">
-                                Position:{" "}
-                                {keywordSerpData.position
-                                  ? `#${keywordSerpData.position}`
-                                  : "Not ranked in top 100"}
-                              </p>
-                              <p className="text-xs text-muted-foreground">
-                                Examined {keywordSerpData.examined} results
-                                {keywordSerpData.fromCache && " · cached"}
-                              </p>
-                            </div>
-
-                            {/* SERP Reddit Threads */}
-                            {keywordSerpData.redditThreads?.length > 0 && (
-                              <div className="space-y-3">
-                                <p className="text-sm font-semibold flex items-center gap-2">
-                                  <MessageSquare className="h-4 w-4" />
-                                  {keywordSerpData.redditThreads.length} Reddit Threads in Google SERP
-                                </p>
-                                {keywordSerpData.redditThreads.slice(0, 5).map((thread, idx) => (
-                                  <div key={idx} className="rounded-lg border border-border/50 bg-card/30 p-3 space-y-2">
-                                    <p className="font-semibold text-sm text-foreground">
-                                      #{thread.position} {thread.title}
-                                    </p>
-                                    <p className="text-xs text-foreground/70 line-clamp-2">{thread.snippet}</p>
-                                    {thread.mentionHighlights?.length > 0 && (
-                                      <div className="flex flex-wrap gap-1 mt-1">
-                                        {thread.mentionHighlights.map((h, i) => (
-                                          <span
-                                            key={i}
-                                            className={`text-[10px] px-2 py-0.5 rounded-full ${
-                                              h.type === "brand"
-                                                ? "bg-emerald-500/15 text-emerald-700 border border-emerald-500/30"
-                                                : "bg-orange-500/15 text-orange-700 border border-orange-500/30"
-                                            }`}
-                                          >
-                                            {h.type === "brand" ? "✓ " : "⚠ "}{h.term}
-                                          </span>
-                                        ))}
-                                      </div>
-                                    )}
-                                    <a
-                                      href={thread.url}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      className="text-xs text-emerald-600 hover:underline"
-                                    >
-                                      View thread →
-                                    </a>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-
-                            {/* Top Reddit Posts */}
-                            {topRedditPosts.length > 0 && (
-                              <div className="space-y-3">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-lg">🔥</span>
-                                  <p className="text-sm font-semibold">
-                                    Top Reddit Posts ({topRedditPosts.length})
-                                  </p>
-                                </div>
-                                {topRedditPosts.map((post, idx) => (
-                                  <div
-                                    key={idx}
-                                    className="rounded-lg border border-orange-500/20 bg-orange-500/5 p-4 space-y-2"
-                                  >
-                                    <p className="text-sm font-semibold text-foreground">
-                                      {post.post_title || `Post #${idx + 1}`}
-                                    </p>
-                                    <p className="text-xs text-muted-foreground line-clamp-2">
-                                      {(post.post_content || "").slice(0, 150)}
-                                    </p>
-                                    {post.mentionHighlights?.length > 0 && (
-                                      <div className="flex flex-wrap gap-1">
-                                        {post.mentionHighlights.map((h, i) => (
-                                          <span
-                                            key={i}
-                                            className={`text-[10px] px-2 py-0.5 rounded-full ${
-                                              h.type === "brand"
-                                                ? "bg-emerald-500/15 text-emerald-700 border border-emerald-500/30"
-                                                : "bg-orange-500/15 text-orange-700 border border-orange-500/30"
-                                            }`}
-                                          >
-                                            {h.type === "brand" ? "✓ Self" : `⚠ ${h.term}`}
-                                          </span>
-                                        ))}
-                                      </div>
-                                    )}
-                                    <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
-                                      <span>r/{post.subreddit}</span>
-                                      <span>•</span>
-                                      <span>↑ {post.upvotes || 0}</span>
-                                      <span>•</span>
-                                      <span>💬 {post.total_comments || 0}</span>
-                                      {post.source && (
-                                        <>
-                                          <span>•</span>
-                                          <span className="capitalize">{post.source.replace("_", " ")}</span>
-                                        </>
-                                      )}
-                                    </div>
-                                    <a
-                                      href={post.post_url}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      className="text-xs text-orange-600 hover:underline inline-flex items-center gap-1"
-                                    >
-                                      View on Reddit →
-                                    </a>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-
-                            {/* New Reddit Posts */}
-                            {newRedditPosts.length > 0 && (
-                              <div className="space-y-3">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-lg">🆕</span>
-                                  <p className="text-sm font-semibold">
-                                    New Reddit Posts ({newRedditPosts.length})
-                                  </p>
-                                </div>
-                                {newRedditPosts.map((post, idx) => (
-                                  <div
-                                    key={idx}
-                                    className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4 space-y-2"
-                                  >
-                                    <p className="text-sm font-semibold text-foreground">
-                                      {post.post_title || `Post #${idx + 1}`}
-                                    </p>
-                                    <p className="text-xs text-muted-foreground line-clamp-2">
-                                      {(post.post_content || "").slice(0, 150)}
-                                    </p>
-                                    {post.mentionHighlights?.length > 0 && (
-                                      <div className="flex flex-wrap gap-1">
-                                        {post.mentionHighlights.map((h, i) => (
-                                          <span
-                                            key={i}
-                                            className={`text-[10px] px-2 py-0.5 rounded-full ${
-                                              h.type === "brand"
-                                                ? "bg-emerald-500/15 text-emerald-700 border border-emerald-500/30"
-                                                : "bg-orange-500/15 text-orange-700 border border-orange-500/30"
-                                            }`}
-                                          >
-                                            {h.type === "brand" ? "✓ Self" : `⚠ ${h.term}`}
-                                          </span>
-                                        ))}
-                                      </div>
-                                    )}
-                                    <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
-                                      <span>r/{post.subreddit}</span>
-                                      <span>•</span>
-                                      <span>↑ {post.upvotes || 0}</span>
-                                      <span>•</span>
-                                      <span>💬 {post.total_comments || 0}</span>
-                                    </div>
-                                    <a
-                                      href={post.post_url}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      className="text-xs text-blue-600 hover:underline inline-flex items-center gap-1"
-                                    >
-                                      View on Reddit →
-                                    </a>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-
-                            {/* AI-Suggested Posts */}
-                            {suggestedPosts.length > 0 && (
-                              <div className="space-y-3">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-lg">✨</span>
-                                  <p className="text-sm font-semibold">
-                                    AI-Suggested Posts to Engage ({suggestedPosts.length})
-                                  </p>
-                                </div>
-                                <p className="text-xs text-muted-foreground italic">
-                                  Selected by AI based on your company context and engagement potential
-                                </p>
-                                {suggestedPosts.map((post, idx) => (
-                                  <div
-                                    key={idx}
-                                    className="rounded-lg border-2 border-emerald-500/40 bg-emerald-500/10 p-4 space-y-3"
-                                  >
-                                    <div className="flex items-start justify-between gap-2">
-                                      <p className="text-sm font-semibold text-foreground flex-1">
-                                        {post.post_title || `Post #${idx + 1}`}
-                                      </p>
-                                      {post.engagementScore && (
-                                        <span className="px-2 py-1 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex-shrink-0">
-                                          {post.engagementScore}/10
-                                        </span>
-                                      )}
-                                    </div>
-                                    <p className="text-xs text-foreground/80 line-clamp-2">
-                                      {(post.post_content || "").slice(0, 150)}
-                                    </p>
-                                    {post.engagementReason && (
-                                      <div className="rounded bg-emerald-950/20 p-2 space-y-1">
-                                        <p className="text-[10px] font-semibold text-emerald-700 uppercase tracking-wider">
-                                          Why Engage
-                                        </p>
-                                        <p className="text-xs text-emerald-900">{post.engagementReason}</p>
-                                      </div>
-                                    )}
-                                    {post.engagementStrategy && (
-                                      <div className="rounded bg-amber-950/20 p-2 space-y-1">
-                                        <p className="text-[10px] font-semibold text-amber-700 uppercase tracking-wider">
-                                          Strategy
-                                        </p>
-                                        <p className="text-xs text-amber-900">{post.engagementStrategy}</p>
-                                      </div>
-                                    )}
-                                    <div className="flex items-center gap-3 text-[11px] text-muted-foreground pt-2 border-t border-emerald-500/20">
-                                      <span>r/{post.subreddit}</span>
-                                      <span>•</span>
-                                      <span>↑ {post.upvotes || 0}</span>
-                                      <span>•</span>
-                                      <span>💬 {post.total_comments || 0}</span>
-                                    </div>
-                                    <a
-                                      href={post.post_url}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                      className="text-xs font-semibold text-emerald-700 hover:text-emerald-600 inline-flex items-center gap-1"
-                                    >
-                                      Engage on Reddit →
-                                    </a>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-
-                            {topRedditPosts.length === 0 &&
-                              newRedditPosts.length === 0 &&
-                              suggestedPosts.length === 0 && (
-                                <p className="text-sm text-muted-foreground italic">
-                                  No Reddit posts found for this keyword.
-                                </p>
-                              )}
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Post Content Tab */}
-                    {analysisTab === "postContent" && (
-                      <div className="space-y-4">
-                        <Button
-                          onClick={handleGeneratePostContent}
-                          disabled={generatingPosts}
-                          className="w-full"
-                        >
-                          {generatingPosts ? "Generating…" : "Generate Post Ideas"}
-                        </Button>
-
-                        {generatedPosts.length > 0 && (
-                          <div className="space-y-4">
-                            <div className="flex items-center gap-2 mb-4">
-                              <span className="text-lg">📝</span>
-                              <p className="text-sm font-semibold">
-                                AI-Generated Post Content ({generatedPosts.length})
-                              </p>
-                            </div>
-                            {generatedPosts.map((post, idx) => (
-                              <div
-                                key={idx}
-                                className="rounded-lg border-2 border-blue-500/40 bg-blue-500/5 p-4 space-y-3"
-                              >
-                                <div className="flex items-start justify-between gap-2">
-                                  <p className="text-sm font-semibold text-foreground flex-1">
-                                    {post.title}
-                                  </p>
-                                  {post.subreddit && (
-                                    <span className="px-2 py-1 rounded-full bg-blue-600 text-white text-[10px] font-bold flex-shrink-0">
-                                      r/{post.subreddit}
-                                    </span>
-                                  )}
-                                </div>
-                                <div className="bg-background rounded p-3">
-                                  <p className="text-xs text-foreground/90 whitespace-pre-wrap">
-                                    {post.content}
-                                  </p>
-                                </div>
-                                {post.rationale && (
-                                  <div className="rounded bg-blue-950/20 p-2 space-y-1">
-                                    <p className="text-[10px] font-semibold text-blue-700 uppercase tracking-wider">
-                                      Why This Works
-                                    </p>
-                                    <p className="text-xs text-blue-900">{post.rationale}</p>
-                                  </div>
-                                )}
-                                <div className="flex items-center gap-2 pt-2 border-t border-blue-500/20">
-                                  <Button
-                                    size="sm"
-                                    variant="outline"
-                                    onClick={() => {
-                                      navigator.clipboard.writeText(post.content);
-                                      setSuccess("✓ Copied to clipboard!");
-                                      setTimeout(() => setSuccess(""), 2000);
-                                    }}
-                                    className="text-xs"
-                                  >
-                                    Copy Post
-                                  </Button>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Citations Tab */}
-                    {analysisTab === "citations" && (
-                      <div className="space-y-4">
-                        <p className="text-[11px] text-muted-foreground">
-                          Prompts from Step 4 are used by default.
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    <MessageSquare className="h-4 w-4 text-primary" />Citation Search
+                  </CardTitle>
+                  <CardDescription className="text-xs">
+                    Ask AI models to find Reddit posts matching your prompts. (Takes 30-60s)
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {citationPrompts.length === 0 ? (
+                    <p className="text-xs text-muted-foreground italic">
+                      Select a keyword to use its prompts, or add custom ones below.
+                    </p>
+                  ) : (
+                    <div className="space-y-1 max-h-36 overflow-y-auto pr-1">
+                      {citationPrompts.map((p, i) => (
+                        <p key={i} className="text-xs text-muted-foreground flex items-start gap-1">
+                          <span className="shrink-0 text-primary">•</span>{p}
                         </p>
-                        {citationPrompts.length > 0 ? (
-                          <div className="flex flex-wrap gap-2">
-                            {citationPrompts.map((prompt, idx) => (
-                              <span
-                                key={`${prompt}-${idx}`}
-                                className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700"
-                              >
-                                {prompt}
-                              </span>
-                            ))}
-                          </div>
-                        ) : (
-                          <p className="text-xs text-muted-foreground">
-                            No prompts found. Add prompts in Step 4 or add a custom one below.
-                          </p>
-                        )}
+                      ))}
+                    </div>
+                  )}
 
-                        <Button
-                          onClick={handleTestCitations}
-                          disabled={citationLoading}
-                          className="w-full"
-                        >
-                          {citationLoading ? "Testing…" : "Test Reddit Citations"}
-                        </Button>
+                  <div className="flex gap-1.5 pt-1">
+                    <Input
+                      value={manualCitationInput}
+                      onChange={e => setManualCitationInput(e.target.value)}
+                      placeholder="Add custom prompt"
+                      className="h-7 text-xs"
+                      onKeyDown={e => {
+                        if (e.key === "Enter" && manualCitationInput.trim()) {
+                          setManualCitationPrompts(ps => [...ps, manualCitationInput.trim()]);
+                          setManualCitationInput("");
+                        }
+                      }}
+                    />
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="h-7 px-2 shrink-0"
+                      onClick={() => {
+                        if (manualCitationInput.trim()) {
+                          setManualCitationPrompts(ps => [...ps, manualCitationInput.trim()]);
+                          setManualCitationInput("");
+                        }
+                      }}
+                    >
+                      <Plus className="h-3 w-3" />
+                    </Button>
+                  </div>
 
-                        {citationResults && (
-                          <div className="space-y-6">
-                            {citationSummary && (
-                              <div className="rounded-lg border border-border bg-card/40 p-4 space-y-3">
-                                <span className="text-xs uppercase tracking-widest text-muted-foreground">
-                                  Citation Summary
-                                </span>
-                                <div className="flex flex-wrap gap-3">
-                                  <div className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-700">
-                                    {citationSummary.totalPrompts} prompt{citationSummary.totalPrompts !== 1 ? "s" : ""} tested
-                                  </div>
-                                  <div className="rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-xs text-orange-700">
-                                    {citationSummary.totalPosts} Reddit post{citationSummary.totalPosts !== 1 ? "s" : ""} found
-                                  </div>
-                                  {citationSummary.selfMentions > 0 && (
-                                    <div className="rounded-full border border-emerald-500/50 bg-emerald-500/20 px-3 py-1 text-xs text-emerald-800 font-medium">
-                                      ✓ {citationSummary.selfMentions} self mention{citationSummary.selfMentions !== 1 ? "s" : ""}
-                                    </div>
-                                  )}
-                                  {Object.entries(citationSummary.competitorMentionCounts || {}).map(([comp, count]) => (
-                                    <div key={comp} className="rounded-full border border-orange-500/50 bg-orange-500/15 px-3 py-1 text-xs text-orange-800">
-                                      ⚠ {comp}: {count} mention{count !== 1 ? "s" : ""}
-                                    </div>
-                                  ))}
-                                  {citationSummary.totalErrors > 0 && (
-                                    <div className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs text-red-700">
-                                      {citationSummary.totalErrors} error{citationSummary.totalErrors !== 1 ? "s" : ""}
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-                            )}
+                  <Button
+                    onClick={handleCitationSearch}
+                    disabled={citationLoading || citationPrompts.length === 0}
+                    className="w-full"
+                    size="sm"
+                  >
+                    {citationLoading
+                      ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Searching…</>
+                      : <><Sparkles className="h-3.5 w-3.5 mr-1.5" />Run Citation Search</>
+                    }
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
 
-                            {/* One section per tested prompt */}
-                            {citationResults.records?.map((record, pIdx) => {
-                              const modelEntries = Object.entries(record.models || {});
-                              const hasAnyPosts = modelEntries.some(
-                                ([, v]) => Array.isArray(v) && v.length > 0
-                              );
-                              return (
-                                <div
-                                  key={pIdx}
-                                  className="space-y-3 border-b border-border pb-4 last:border-b-0"
-                                >
-                                  <div className="sticky top-0 bg-card/80 backdrop-blur-sm py-2">
-                                    <p className="text-sm font-semibold text-foreground">
-                                      {pIdx + 1}. {record.prompt}
-                                    </p>
-                                  </div>
-                                  <div className="space-y-2">
-                                    {!hasAnyPosts && (
-                                      <p className="text-xs text-muted-foreground italic">
-                                        No Reddit posts found for this prompt.
-                                      </p>
-                                    )}
-                                    {modelEntries.map(([model, value]) => {
-                                      if (value?.error) {
-                                        return (
-                                          <div
-                                            key={model}
-                                            className="rounded-lg border p-3 border-red-500/30 bg-red-500/5"
-                                          >
-                                            <span className="text-xs font-semibold text-red-600">
-                                              {model}: {value.error}
-                                            </span>
-                                          </div>
-                                        );
-                                      }
-                                      const posts = Array.isArray(value) ? value : [];
-                                      if (!posts.length) {
-                                        return (
-                                          <div
-                                            key={model}
-                                            className="rounded-lg border p-3 border-border/40 bg-muted/30"
-                                          >
-                                            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                                              {model}
-                                            </span>
-                                            <span className="text-xs text-muted-foreground ml-2 italic">
-                                              — No valid Reddit post URLs returned
-                                            </span>
-                                          </div>
-                                        );
-                                      }
-                                      return (
-                                        <div
-                                          key={model}
-                                          className="rounded-lg border p-3 border-orange-500/30 bg-orange-500/5"
-                                        >
-                                          <div className="flex items-center gap-2 mb-2">
-                                            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                                              {model}
-                                            </span>
-                                            <span className="text-xs text-muted-foreground">
-                                              ({posts.length} Reddit links)
-                                            </span>
-                                          </div>
-                                          <ol className="list-decimal pl-5 space-y-2">
-                                            {posts.map((post, pidx) => (
-                                              <li key={post.url + "-" + pidx} className="text-xs space-y-1">
-                                                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                                                  <a
-                                                    href={post.url}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-emerald-700 hover:underline font-semibold"
-                                                  >
-                                                    {post.title || post.url}
-                                                  </a>
-                                                  {post.subreddit && (
-                                                    <span className="text-muted-foreground">
-                                                      r/{post.subreddit}
-                                                    </span>
-                                                  )}
-                                                  {post.mentionHighlights?.length > 0 &&
-                                                    post.mentionHighlights.map((h, hi) => (
-                                                      <span
-                                                        key={hi}
-                                                        className={`text-[10px] px-2 py-0.5 rounded-full ${
-                                                          h.type === "brand"
-                                                            ? "bg-emerald-500/15 text-emerald-700 border border-emerald-500/30"
-                                                            : "bg-orange-500/15 text-orange-700 border border-orange-500/30"
-                                                        }`}
-                                                      >
-                                                        {h.type === "brand" ? "✓ Self" : `⚠ ${h.term}`}
-                                                      </span>
-                                                    ))}
-                                                </div>
-                                                {post.reason && (
-                                                  <p className="text-muted-foreground italic">
-                                                    {post.reason}
-                                                  </p>
-                                                )}
-                                              </li>
-                                            ))}
-                                          </ol>
-                                        </div>
-                                      );
-                                    })}
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-
-                        {!citationResults && !citationLoading && (
-                          <p className="text-sm text-muted-foreground italic text-center py-6">
-                            Click "Test Reddit Citations" to analyze LLM ranking potential
-                          </p>
-                        )}
-                      </div>
-                    )}
+            {/* Right results panel */}
+            <div className="lg:col-span-2 space-y-4">
+              {serpLoading && (
+                <Card>
+                  <CardContent className="pt-6 space-y-3">
+                    <Skeleton className="h-4 w-1/2" />
+                    <Skeleton className="h-16 w-full rounded-lg" />
+                    <Skeleton className="h-16 w-full rounded-lg" />
+                    <Skeleton className="h-16 w-full rounded-lg" />
                   </CardContent>
                 </Card>
               )}
+
+              {kwSerpData && !serpLoading && (
+                <Card>
+                  <CardHeader>
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-1.5 flex-1">
+                        <Zap className="h-4 w-4 text-primary" />
+                        <CardTitle className="text-sm">SERP — {selectedKw?.term}</CardTitle>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-6 w-6 p-0 shrink-0"
+                        onClick={() => setSerpAccordionOpen(!serpAccordionOpen)}
+                      >
+                        <ChevronRight className={`h-4 w-4 transition-transform ${serpAccordionOpen ? 'rotate-90' : ''}`} />
+                      </Button>
+                    </div>
+                  </CardHeader>
+                  {serpAccordionOpen && (
+                    <CardContent className="space-y-5">
+                    {kwSerpData.topRedditPosts?.length > 0 && (
+                      <div>
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Top Ranking Posts</p>
+                        <div className="space-y-2">
+                          {kwSerpData.topRedditPosts.map((post, i) => (
+                            <PostCard
+                              key={i}
+                              post={post}
+                              brandLabel={companyName}
+                              allCompetitors={competitors}
+                              rank={(post.serp_rank || 999) <= 50 ? post.serp_rank : null}
+                              scannedData={scannedPostDetails[post.url || post.post_url]}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {kwSerpData.newRedditPosts?.length > 0 && (
+                      <div>
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">New / Rising Posts</p>
+                        <div className="space-y-2">
+                          {kwSerpData.newRedditPosts.map((post, i) => (
+                            <PostCard
+                              key={i}
+                              post={post}
+                              brandLabel={companyName}
+                              allCompetitors={competitors}
+                              rank={(post.serp_rank || 999) <= 50 ? post.serp_rank : null}
+                              scannedData={scannedPostDetails[post.url || post.post_url]}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {kwSerpData.suggestedPosts?.length > 0 && (
+                      <div>
+                        {/* LLM Suggested Engagement Posts - commented out for now
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">🎯 LLM Suggested Engagement Posts</p>
+                        <div className="space-y-2">
+                          {kwSerpData.suggestedPosts.map((post, i) => (
+                            <div key={i} className="rounded-lg border border-amber-500/20 bg-amber-50/30 dark:bg-amber-950/20 p-3 space-y-2">
+                              <PostCard
+                                post={post}
+                                brandLabel={companyName}
+                                allCompetitors={competitors}
+                                scannedData={scannedPostDetails[post.url || post.post_url]}
+                              />
+                              {post.engagementScore && (
+                                <div className="pt-2 border-t border-amber-500/20">
+                                  <p className="text-xs text-amber-700 dark:text-amber-400 font-semibold mb-1">Engagement Strategy:</p>
+                                  <p className="text-xs text-muted-foreground">{post.engagementStrategy}</p>
+                                  {post.engagementScore && (
+                                    <p className="text-[10px] text-amber-600 dark:text-amber-500 mt-1.5 font-semibold">Score: {post.engagementScore}/10</p>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                        */}
+                      </div>
+                    )}
+                    {!kwSerpData.topRedditPosts?.length && !kwSerpData.newRedditPosts?.length && (
+                      <p className="text-sm text-muted-foreground text-center py-4">No Reddit posts found for this keyword.</p>
+                    )}
+                    </CardContent>
+                  )}
+                </Card>
+              )}
+
+              {citationLoading && (
+                <Card>
+                  <CardContent className="pt-6 space-y-3">
+                    <Skeleton className="h-4 w-2/3" />
+                    <Skeleton className="h-20 w-full rounded-lg" />
+                    <Skeleton className="h-20 w-full rounded-lg" />
+                  </CardContent>
+                </Card>
+              )}
+
+              {!citationLoading && citationResults?.records?.length > 0 && citationResults.records.map((rec, i) => (
+                <Card key={i}>
+                  <CardHeader>
+                    <CardTitle className="text-sm leading-snug line-clamp-2">{rec.prompt}</CardTitle>
+                    <CardDescription className="text-xs">{new Date(rec.timestamp).toLocaleString()}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {Object.entries(rec.models).map(([modelId, value]) => {
+                      const style = getModelStyle(modelId);
+                      const posts = Array.isArray(value) ? value : [];
+                      const isError = !Array.isArray(value) && value && "error" in value;
+                      return (
+                        <div key={modelId}>
+                          <div className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border mb-2 ${style.bg} ${style.text} ${style.border}`}>
+                            {style.label}
+                          </div>
+                          {isError ? (
+                            <p className="text-xs text-destructive">{value.error}</p>
+                          ) : posts.length === 0 ? (
+                            <p className="text-xs text-muted-foreground italic">No results found for this model.</p>
+                          ) : (
+                            <div className="space-y-2">
+                              {posts.map((post, j) => (
+                                <PostCard
+                                  key={j}
+                                  post={post}
+                                  brandLabel={companyName}
+                                  allCompetitors={competitors}
+                                  scannedData={scannedPostDetails[post.url || post.post_url]}
+                                />
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </CardContent>
+                </Card>
+              ))}
+
+              {!citationLoading && citationResults && citationResults.records?.length === 0 && (
+                <Card>
+                  <CardContent className="pt-6 flex flex-col items-center text-center gap-3 h-48">
+                    <div className="opacity-50">
+                      <AlertCircle className="h-10 w-10 mx-auto" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">No posts found</p>
+                      <p className="text-xs text-muted-foreground mt-1">Try different prompts or keywords to find more results.</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {!kwSerpData && !citationResults && !serpLoading && !citationLoading && (
+                <div className="flex flex-col items-center justify-center h-64 border border-dashed border-border rounded-lg text-muted-foreground gap-3">
+                  <BarChart2 className="h-10 w-10 opacity-20" />
+                  <div className="text-center text-sm">
+                    <p className="font-medium">No results yet</p>
+                    <p className="text-xs mt-1 opacity-70">
+                      Select a keyword and run SERP, or add prompts and run Citation Search.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </main>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
