@@ -10,6 +10,8 @@ import {
   fetchCadenceConfig,
   updateCadenceConfig,
   buildCadenceMap,
+  saveTargetSnapshot,
+  seedCurrentMonthTargets,
 } from "@/lib/threadflow-data";
 import {
   Search,
@@ -387,17 +389,26 @@ export default function CadencePlannerPage() {
             if (Object.keys(apiMap).length > 0) {
               setCadenceLimitsState(apiMap);
               try { localStorage.setItem("cadence_targets", JSON.stringify(apiMap)); } catch (e) { /* noop */ }
+              seedCurrentMonthTargets(apiMap);
             } else {
               try {
                 const saved = localStorage.getItem("cadence_targets");
-                if (saved) setCadenceLimitsState(JSON.parse(saved));
+                if (saved) {
+                  const parsed = JSON.parse(saved);
+                  setCadenceLimitsState(parsed);
+                  seedCurrentMonthTargets(parsed);
+                }
               } catch (e) { /* noop */ }
             }
           } catch (err) {
             console.error("Error fetching cadence data:", err);
             try {
               const saved = localStorage.getItem("cadence_targets");
-              if (saved) setCadenceLimitsState(JSON.parse(saved));
+              if (saved) {
+                const parsed = JSON.parse(saved);
+                setCadenceLimitsState(parsed);
+                seedCurrentMonthTargets(parsed);
+              }
             } catch (e) { /* noop */ }
           } finally {
             setLoading(false);
@@ -423,6 +434,7 @@ export default function CadencePlannerPage() {
       setFlashCell(companyName);
       setTimeout(() => setFlashCell(null), 600);
       try { localStorage.setItem("cadence_targets", JSON.stringify(updated)); } catch (e) { /* noop */ }
+      saveTargetSnapshot(companyName, numLimit);
       if (tokenRef.current) {
         await updateCadenceConfig(tokenRef.current, companyName, numLimit);
       }
@@ -447,6 +459,7 @@ export default function CadencePlannerPage() {
     setSuccessMessage(`Updated ${changes.length} client${changes.length > 1 ? "s" : ""}`);
     setTimeout(() => setSuccessMessage(""), 2500);
     try { localStorage.setItem("cadence_targets", JSON.stringify(newLimits)); } catch (e) { /* noop */ }
+    changes.forEach(({ name, limit }) => saveTargetSnapshot(name, limit));
     if (tokenRef.current) {
       await Promise.all(
         changes.map(({ name, limit }) =>
@@ -805,6 +818,38 @@ export default function CadencePlannerPage() {
           })}
         </div>
       </div>
+
+      {/* ── No data yet hint ───────────────────────────────────────────── */}
+      {isCurrentMonthSelected && stats.totalLive === 0 && clients.length > 0 && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            padding: "10px 16px",
+            marginBottom: 12,
+            background: "rgba(251,191,36,0.06)",
+            border: "1px solid rgba(251,191,36,0.15)",
+            borderRadius: 8,
+            fontSize: 13,
+            color: "rgba(255,255,255,0.6)",
+          }}
+        >
+          <AlertTriangle size={14} style={{ color: "#fbbf24", flexShrink: 0 }} />
+          <span>
+            No data yet this month.{" "}
+            <span
+              style={{ color: "#60a5fa", cursor: "pointer", textDecoration: "underline" }}
+              onClick={() => {
+                const prev = monthOptions[1];
+                if (prev) setSelectedMonth({ year: prev.year, month: prev.month });
+              }}
+            >
+              View {monthOptions[1]?.label || "previous month"}
+            </span>
+          </span>
+        </div>
+      )}
 
       {/* ── Cadence Table ────────────────────────────────────────────────── */}
       <div style={{ border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, overflow: "hidden", opacity: mounted ? 1 : 0, transform: mounted ? "translateY(0)" : "translateY(6px)", transition: "opacity 0.3s ease 0.34s, transform 0.3s ease 0.34s" }}>

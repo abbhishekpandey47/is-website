@@ -12,6 +12,9 @@ import {
   buildCadenceMap,
   stripHtml,
   STATUS_COLORS as SHARED_STATUS_COLORS,
+  saveTargetSnapshot,
+  seedCurrentMonthTargets,
+  buildCadenceHistory,
 } from "@/lib/threadflow-data";
 import {
   ChevronDown,
@@ -274,10 +277,16 @@ export default function ClientDashboardPage() {
             if (Object.keys(apiMap).length > 0) {
               setCadenceTargets(apiMap);
               try { localStorage.setItem("cadence_targets", JSON.stringify(apiMap)); } catch (e) { /* noop */ }
+              // Snapshot current targets for history tracking
+              seedCurrentMonthTargets(apiMap);
             } else {
               try {
                 const saved = localStorage.getItem("cadence_targets");
-                if (saved) setCadenceTargets(JSON.parse(saved));
+                if (saved) {
+                  const parsed = JSON.parse(saved);
+                  setCadenceTargets(parsed);
+                  seedCurrentMonthTargets(parsed);
+                }
               } catch (e) { /* noop */ }
             }
             // Auto-select first company
@@ -289,7 +298,11 @@ export default function ClientDashboardPage() {
             console.error("Error fetching dashboard data:", err);
             try {
               const saved = localStorage.getItem("cadence_targets");
-              if (saved) setCadenceTargets(JSON.parse(saved));
+              if (saved) {
+                const parsed = JSON.parse(saved);
+                setCadenceTargets(parsed);
+                seedCurrentMonthTargets(parsed);
+              }
             } catch (e) { /* noop */ }
           } finally {
             setLoading(false);
@@ -411,7 +424,10 @@ export default function ClientDashboardPage() {
   const chartMax = Math.max(...weeklyData.map((w) => w.count), 1);
 
   // Monthly cadence data (last 6 months)
-  const monthlyData = useMemo(() => buildMonthlyData(clientItems), [clientItems]);
+  const monthlyData = useMemo(
+    () => buildCadenceHistory(clientItems, selectedClientName, cadenceTarget),
+    [clientItems, selectedClientName, cadenceTarget]
+  );
 
   const switchClient = useCallback(
     (id) => {
@@ -462,6 +478,8 @@ export default function ClientDashboardPage() {
     setEditingCadence(false);
     // Persist to localStorage immediately
     try { localStorage.setItem("cadence_targets", JSON.stringify(updated)); } catch (e) { /* noop */ }
+    // Snapshot this target for the current month's history
+    saveTargetSnapshot(selectedClientName, num);
     // Refresh token before API call
     try {
       if (firebaseUser) {
@@ -912,70 +930,42 @@ export default function ClientDashboardPage() {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
               <span style={{ width: 8, height: 8, borderRadius: 2, backgroundColor: "rgba(255,255,255,0.12)" }} />
-              <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>Target ({cadenceTarget})</span>
+              <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>Target</span>
             </div>
           </div>
         </div>
 
         {/* ── Bar Chart ── */}
         {(() => {
-          const target = cadenceTarget || 0;
-          const chartMax = Math.max(target, ...monthlyData.map((m) => m.live), ...monthlyData.map((m) => m.total), 1);
+          const chartMax = Math.max(...monthlyData.map((m) => m.target || 0), ...monthlyData.map((m) => m.live), ...monthlyData.map((m) => m.total), 1);
           return (
             <div style={{ padding: "20px 20px 8px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-              {/* Y-axis gridlines */}
               <div style={{ position: "relative", height: 160 }}>
-                {/* Target line */}
-                {target > 0 && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: `${(target / chartMax) * 100}%`,
-                      left: 0,
-                      right: 0,
-                      borderTop: "1px dashed rgba(255,255,255,0.15)",
-                      zIndex: 1,
-                    }}
-                  >
-                    <span
-                      style={{
-                        position: "absolute",
-                        right: 0,
-                        top: -16,
-                        fontSize: 10,
-                        color: "rgba(255,255,255,0.3)",
-                        ...TABULAR,
-                      }}
-                    >
-                      {target}
-                    </span>
-                  </div>
-                )}
-
                 {/* Bars */}
                 <div style={{ display: "flex", alignItems: "flex-end", gap: 8, height: "100%", paddingBottom: 4 }}>
                   {monthlyData.map((m, idx) => {
                     const isCurrentMo = m.month === new Date().getMonth() && m.year === new Date().getFullYear();
+                    const mTarget = m.target || 0;
                     const liveH = chartMax > 0 ? (m.live / chartMax) * 100 : 0;
-                    const targetH = chartMax > 0 ? (target / chartMax) * 100 : 0;
-                    const livePct = target > 0 ? Math.round((m.live / target) * 100) : 0;
+                    const targetH = chartMax > 0 ? (mTarget / chartMax) * 100 : 0;
+                    const livePct = mTarget > 0 ? Math.round((m.live / mTarget) * 100) : 0;
                     const liveColor = livePct >= 80 ? "#34d399" : livePct >= 40 ? "#fbbf24" : "#f87171";
 
                     return (
                       <div key={idx} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
                         <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height: 130, width: "100%" }}>
-                          {/* Target bar */}
+                          {/* Target bar (per-month) */}
                           <div
                             style={{
                               flex: 1,
                               height: `${targetH}%`,
                               backgroundColor: "rgba(255,255,255,0.04)",
                               borderRadius: "3px 3px 0 0",
-                              minHeight: target > 0 ? 4 : 0,
+                              minHeight: mTarget > 0 ? 4 : 0,
                               position: "relative",
                             }}
                           >
-                            {target > 0 && (
+                            {mTarget > 0 && (
                               <span
                                 style={{
                                   position: "absolute",
@@ -987,7 +977,7 @@ export default function ClientDashboardPage() {
                                   ...TABULAR,
                                 }}
                               >
-                                {target}
+                                {mTarget}
                               </span>
                             )}
                           </div>
@@ -1062,7 +1052,7 @@ export default function ClientDashboardPage() {
           </thead>
           <tbody>
             {monthlyData.map((m, idx) => {
-              const target = cadenceTarget || 0;
+              const target = m.target || 0;
               const pct = target > 0 ? Math.round((m.live / target) * 100) : 0;
               const isCurrentMonth =
                 m.month === new Date().getMonth() && m.year === new Date().getFullYear();

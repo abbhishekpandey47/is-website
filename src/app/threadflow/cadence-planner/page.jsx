@@ -10,6 +10,8 @@ import {
   fetchCadenceConfig,
   updateCadenceConfig,
   buildCadenceMap,
+  saveTargetSnapshot,
+  seedCurrentMonthTargets,
 } from "@/lib/threadflow-data";
 import {
   Search,
@@ -594,11 +596,16 @@ export default function CadencePlannerPage() {
               setCadenceLimitsState(apiMap);
               // Sync API data to localStorage as backup
               try { localStorage.setItem("cadence_targets", JSON.stringify(apiMap)); } catch (e) { /* noop */ }
+              seedCurrentMonthTargets(apiMap);
             } else {
               // API returned empty — try localStorage
               try {
                 const saved = localStorage.getItem("cadence_targets");
-                if (saved) setCadenceLimitsState(JSON.parse(saved));
+                if (saved) {
+                  const parsed = JSON.parse(saved);
+                  setCadenceLimitsState(parsed);
+                  seedCurrentMonthTargets(parsed);
+                }
               } catch (e) { /* noop */ }
             }
           } catch (err) {
@@ -606,7 +613,11 @@ export default function CadencePlannerPage() {
             // On full fetch error, try localStorage
             try {
               const saved = localStorage.getItem("cadence_targets");
-              if (saved) setCadenceLimitsState(JSON.parse(saved));
+              if (saved) {
+                const parsed = JSON.parse(saved);
+                setCadenceLimitsState(parsed);
+                seedCurrentMonthTargets(parsed);
+              }
             } catch (e) { /* noop */ }
           } finally {
             setLoading(false);
@@ -634,6 +645,8 @@ export default function CadencePlannerPage() {
       setTimeout(() => setFlashCell(null), 600);
       // Persist to localStorage immediately
       try { localStorage.setItem("cadence_targets", JSON.stringify(updated)); } catch (e) { /* noop */ }
+      // Snapshot this target for the current month's history
+      saveTargetSnapshot(companyName, numLimit);
       // Refresh token before API call
       try {
         if (firebaseUser) {
@@ -668,6 +681,8 @@ export default function CadencePlannerPage() {
     setShowLimitsModal(false);
     // Persist to localStorage immediately
     try { localStorage.setItem("cadence_targets", JSON.stringify(newLimits)); } catch (e) { /* noop */ }
+    // Snapshot targets for the current month's history
+    changes.forEach(({ name, limit }) => saveTargetSnapshot(name, limit));
     // Refresh token before API calls
     try {
       if (firebaseUser) {
@@ -1379,6 +1394,38 @@ export default function CadencePlannerPage() {
           })}
         </div>
       </div>
+
+      {/* ── No data yet hint ───────────────────────────────────────────── */}
+      {isCurrentMonthSelected && stats.totalLive === 0 && clients.length > 0 && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            padding: "10px 16px",
+            marginBottom: 12,
+            background: "rgba(251,191,36,0.06)",
+            border: "1px solid rgba(251,191,36,0.15)",
+            borderRadius: 8,
+            fontSize: 13,
+            color: "rgba(255,255,255,0.6)",
+          }}
+        >
+          <AlertTriangle size={14} style={{ color: "#fbbf24", flexShrink: 0 }} />
+          <span>
+            No data yet this month.{" "}
+            <span
+              style={{ color: "#60a5fa", cursor: "pointer", textDecoration: "underline" }}
+              onClick={() => {
+                const prev = monthOptions[1];
+                if (prev) setSelectedMonth({ year: prev.year, month: prev.month });
+              }}
+            >
+              View {monthOptions[1]?.label || "previous month"}
+            </span>
+          </span>
+        </div>
+      )}
 
       {/* ── Cadence Table ────────────────────────────────────────────────── */}
       <div

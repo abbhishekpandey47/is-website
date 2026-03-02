@@ -355,6 +355,116 @@ export function buildCadenceMap(configs) {
   return map;
 }
 
+// ─── Cadence Target History (localStorage per-month snapshots) ───────────
+
+const TARGET_HISTORY_KEY = "cadence_target_history";
+
+/**
+ * Get the full target history map from localStorage.
+ * Shape: { "ClientName": { "2026-01": 30, "2026-02": 45, ... }, ... }
+ */
+export function getTargetHistory() {
+  try {
+    const raw = localStorage.getItem(TARGET_HISTORY_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * Save a target snapshot for a specific client and month.
+ * monthKey format: "YYYY-MM" (e.g. "2026-03")
+ */
+export function saveTargetSnapshot(clientName, target, monthKey) {
+  if (!clientName || !target || target <= 0) return;
+  const key = monthKey || (() => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+  })();
+  const history = getTargetHistory();
+  if (!history[clientName]) history[clientName] = {};
+  history[clientName][key] = target;
+  try {
+    localStorage.setItem(TARGET_HISTORY_KEY, JSON.stringify(history));
+  } catch { /* noop */ }
+}
+
+/**
+ * Snapshot all current targets for the current month (used on page load).
+ * Only writes if the current month doesn't already have a value for that client.
+ */
+export function seedCurrentMonthTargets(cadenceTargets) {
+  if (!cadenceTargets || typeof cadenceTargets !== "object") return;
+  const d = new Date();
+  const monthKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+  const history = getTargetHistory();
+  let changed = false;
+  Object.entries(cadenceTargets).forEach(([name, target]) => {
+    if (!target || target <= 0) return;
+    if (!history[name]) history[name] = {};
+    if (!history[name][monthKey]) {
+      history[name][monthKey] = target;
+      changed = true;
+    }
+  });
+  if (changed) {
+    try {
+      localStorage.setItem(TARGET_HISTORY_KEY, JSON.stringify(history));
+    } catch { /* noop */ }
+  }
+}
+
+/**
+ * Get the target for a specific client and month.
+ * Falls back to the current cadenceTarget if no historical value exists.
+ */
+export function getTargetForMonth(clientName, year, month, fallbackTarget) {
+  const monthKey = `${year}-${String(month + 1).padStart(2, "0")}`;
+  const history = getTargetHistory();
+  if (history[clientName] && history[clientName][monthKey] != null) {
+    return history[clientName][monthKey];
+  }
+  return fallbackTarget || 0;
+}
+
+/**
+ * Build monthly cadence history data with per-month targets.
+ * Returns last 6 months with { label, month, year, total, live, target }.
+ */
+export function buildCadenceHistory(items, clientName, currentTarget) {
+  const now = new Date();
+  const months = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const m = d.getMonth();
+    const y = d.getFullYear();
+    const target = getTargetForMonth(clientName, y, m, currentTarget);
+    months.push({
+      label: d.toLocaleString("en-US", { month: "short", year: "numeric" }),
+      month: m,
+      year: y,
+      total: 0,
+      live: 0,
+      target,
+    });
+  }
+
+  items.forEach((item) => {
+    if (!item.date_posted) return;
+    const d = new Date(item.date_posted);
+    const m = d.getMonth();
+    const y = d.getFullYear();
+    const entry = months.find((e) => e.month === m && e.year === y);
+    if (entry) {
+      entry.total++;
+      if (normalizeStatus(item) === "Live") entry.live++;
+    }
+  });
+
+  return months;
+}
+
 // ─── Month-Scoping Helpers (for engagement rows) ─────────────────────────
 
 /**
