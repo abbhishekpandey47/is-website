@@ -176,6 +176,7 @@ export default function SerpScout() {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("domain");
 
+  // Authentication
   // Domain
   const [domain, setDomain] = useState("");
   const [loading, setLoading] = useState(false);
@@ -220,6 +221,12 @@ export default function SerpScout() {
 
   // Post details scanning for competitors
   const [scannedPostDetails, setScannedPostDetails] = useState({});
+
+  // Generate posts
+  const [postStyle, setPostStyle] = useState("with-company"); // 'with-company' or 'without-company'
+  const [generatedPosts, setGeneratedPosts] = useState([]);
+  const [generateLoading, setGenerateLoading] = useState(false);
+  const [generateError, setGenerateError] = useState(null);
 
   // Auto-load from localStorage
   const [hasAutoLoadedOnMount, setHasAutoLoadedOnMount] = useState(false);
@@ -286,7 +293,7 @@ export default function SerpScout() {
     }
   }, [domain, hasAutoLoadedOnMount]);
 
-  // Auto-scan all posts for full content mentions when results load
+  // Auto-scan all posts for full content mentions when SERP results load (manual citation search)
   useEffect(() => {
     if (!serpResults || Object.keys(serpResults).length === 0) return;
     if (!companyName || competitors.length === 0) return;
@@ -294,7 +301,7 @@ export default function SerpScout() {
     const autoScanPosts = async () => {
       const postsToScan = [];
       
-      // Collect all unique post URLs from all result categories
+      // Collect all unique post URLs from SERP results only
       Object.values(serpResults).forEach(kwData => {
         if (kwData?.topRedditPosts?.length > 0) {
           kwData.topRedditPosts.forEach(post => {
@@ -314,22 +321,6 @@ export default function SerpScout() {
         }
       });
 
-      // Also collect from citation results
-      if (citationResults?.records?.length > 0) {
-        citationResults.records.forEach(rec => {
-          Object.values(rec.models || {}).forEach(posts => {
-            if (Array.isArray(posts)) {
-              posts.forEach(post => {
-                const url = post.url || post.post_url;
-                if (url && !scannedPostDetails[url]) {
-                  postsToScan.push(url);
-                }
-              });
-            }
-          });
-        });
-      }
-
       // Scan in parallel with concurrency limit (3 at a time)
       if (postsToScan.length === 0) return;
       
@@ -342,7 +333,7 @@ export default function SerpScout() {
     };
 
     autoScanPosts();
-  }, [serpResults, citationResults]);
+  }, [serpResults]); // Only triggers on SERP results, not citations
 
   // Perform a single post scan
   async function performPostScan(postUrl) {
@@ -411,11 +402,9 @@ export default function SerpScout() {
         setSaved(true);
         toast({ title: "Loaded!", description: "Existing data loaded — jumping to Analyze." });
         
-        // Auto-load SERP cache for all keywords when returning to existing setup
-        if (res.companyId && kws.length > 0) {
-          loadSerpCacheForKeywords(kws, trimmed, res.companyId);
-        }
-
+        // Manual SERP search only - removed auto-load
+        // SERP analysis will only run when user clicks on keyword and clicks search button
+        
         setActiveTab("analyze");
       } else {
         setActiveTab("overview");
@@ -529,6 +518,62 @@ export default function SerpScout() {
       setError(e.message ?? "SERP analysis failed");
     } finally {
       setSerpLoading(false);
+    }
+  }
+
+  async function handleGeneratePostContent() {
+    if (!selectedKw) {
+      toast({
+        variant: "destructive",
+        title: "No keyword selected",
+        description: "Please select a keyword first."
+      });
+      return;
+    }
+
+    setGenerateLoading(true);
+    setGenerateError(null);
+    setGeneratedPosts([]);
+
+    try {
+      // Build reddit context from current SERP results
+      const currSerpData = serpResults[selectedKw.term];
+      const redditContext = {
+        topPosts: currSerpData?.topRedditPosts || [],
+        newPosts: currSerpData?.newRedditPosts || []
+      };
+
+      const res = await apiPost("/api/threadflow/serp-scout", {
+        action: "generatePostContent",
+        keyword: selectedKw.term,
+        domain: domain.trim(),
+        companyId,
+        redditContext,
+        postStyle // Pass the style so backend can adjust prompt
+      });
+
+      if (res.posts && res.posts.length > 0) {
+        setGeneratedPosts(res.posts);
+        toast({
+          title: "Posts generated!",
+          description: `Created ${res.posts.length} sample Reddit posts for "${selectedKw.term}"`
+        });
+      } else {
+        console.error("Generate posts response:", res);
+        const errorMsg = res.error || "No posts generated. Try again.";
+        setGenerateError(errorMsg);
+      }
+    } catch (e) {
+      console.error("Generate posts error:", e);
+      const errorMsg = e.message ?? "Failed to generate posts";
+      setGenerateError(errorMsg);
+      toast({
+        variant: "destructive",
+        title: "Generation failed",
+        description: errorMsg
+      });
+    } finally {
+      setGenerateLoading(false);
     }
   }
 
@@ -701,6 +746,10 @@ export default function SerpScout() {
             <BarChart2 className="h-3.5 w-3.5" />
             <span className="hidden sm:inline text-xs">Analyze</span>
           </TabsTrigger>
+          <TabsTrigger value="generate" disabled={!saved} className="gap-1.5">
+            <Sparkles className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline text-xs">Generate</span>
+          </TabsTrigger>
         </TabsList>
 
         {/* ── Tab 1: Domain ─────────────────────────────────────────────────── */}
@@ -744,14 +793,14 @@ export default function SerpScout() {
                   <CheckCircle className="h-4 w-4 shrink-0" />
                   <span className="flex-1">
                     {rawResult?.fromExisting
-                      ? "Existing setup loaded — jump straight to Analyze."
+                      ? "Welcome back! Your company overview and keywords are ready."
                       : `${keywords.length} keywords generated. Review your company overview next.`}
                   </span>
                   <Button
                     variant="ghost"
                     size="sm"
                     className="h-7 text-xs shrink-0"
-                    onClick={() => setActiveTab(rawResult?.fromExisting ? "analyze" : "overview")}
+                    onClick={() => setActiveTab("overview")}
                   >
                     Continue <ChevronRight className="h-3 w-3 ml-0.5" />
                   </Button>
@@ -809,7 +858,7 @@ export default function SerpScout() {
                             Core Capabilities (one per line)
                           </label>
                           <Textarea
-                            value={ctxForm.coreCapabilities.join("\n")}
+                            value={(Array.isArray(ctxForm.coreCapabilities) ? ctxForm.coreCapabilities : []).join("\n")}
                             onChange={e => setCtxForm(f => ({ ...f, coreCapabilities: e.target.value.split("\n").filter(Boolean) }))}
                             rows={4}
                           />
@@ -819,7 +868,7 @@ export default function SerpScout() {
                             Problem Spaces (one per line)
                           </label>
                           <Textarea
-                            value={ctxForm.problemSpaces.join("\n")}
+                            value={(Array.isArray(ctxForm.problemSpaces) ? ctxForm.problemSpaces : []).join("\n")}
                             onChange={e => setCtxForm(f => ({ ...f, problemSpaces: e.target.value.split("\n").filter(Boolean) }))}
                             rows={4}
                           />
@@ -1184,8 +1233,8 @@ export default function SerpScout() {
                         onClick={() => setSelectedKwIdx(globalIdx)}
                         className={`w-full text-left px-3 py-2 rounded-md text-sm border transition-colors ${
                           isSelected
-                            ? "bg-primary text-primary-foreground border-primary"
-                            : "bg-muted/30 border-border hover:bg-muted text-black"
+                            ? "bg-primary text-black border-primary"
+                            : "bg-muted/30 border-border hover:bg-muted"
                         }`}
                       >
                         <div className="flex items-center justify-between gap-1">
@@ -1461,6 +1510,185 @@ export default function SerpScout() {
                 </div>
               )}
             </div>
+          </div>
+        </TabsContent>
+
+        {/* ── Tab 6: Generate Posts ─────────────────────────────────────────────*/}
+        <TabsContent value="generate" className="mt-6">
+          <div className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-primary" /> Generate Sample Reddit Posts
+                </CardTitle>
+                <CardDescription>
+                  Create authentic sample Reddit posts that mention your product naturally. Choose your post style to control how prominently your company name appears.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                {/* Keyword selection */}
+                <div>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Select Keyword</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {Array.from(selectedKwIds).map(globalIdx => {
+                      const kw = keywords[globalIdx];
+                      if (!kw) return null;
+                      const isSelected = selectedKwIdx === globalIdx;
+                      return (
+                        <button
+                          key={globalIdx}
+                          onClick={() => setSelectedKwIdx(globalIdx)}
+                          className={`px-3 py-2 rounded-md text-sm border transition-colors text-left ${
+                            isSelected
+                              ? "bg-primary text-black border-primary font-medium"
+                              : "bg-muted/30 border-border hover:bg-muted"
+                          }`}
+                        >
+                          <span className="truncate">{kw.term}</span>
+                        </button>
+                      );
+                    })}
+                    {selectedKwIds.size === 0 && (
+                      <p className="text-xs text-muted-foreground italic col-span-2">No keywords saved. Go to Save tab first.</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Post style selection */}
+                <div>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Post Style</p>
+                  <div className="space-y-2">
+                    {[
+                      {
+                        id: "with-company",
+                        label: "With Company Name (Marketing-Oriented)",
+                        description: "Posts naturally mention your company name in the solution/context. Good for brand awareness.",
+                        icon: "🎯"
+                      },
+                      {
+                        id: "without-company",
+                        label: "Without Company Name (Community-Oriented)",
+                        description: "Posts focus on the industry/problem without mentioning your company directly. Better for engagement.",
+                        icon: "👥"
+                      }
+                    ].map(style => (
+                      <button
+                        key={style.id}
+                        onClick={() => setPostStyle(style.id)}
+                        className={`w-full p-3 text-left rounded-lg border-2 transition-all ${
+                          postStyle === style.id
+                            ? "border-primary bg-primary/5"
+                            : "border-border hover:border-primary/30 bg-muted/30"
+                        }`}
+                      >
+                        <div className="flex items-start gap-2">
+                          <input
+                            type="radio"
+                            checked={postStyle === style.id}
+                            onChange={() => setPostStyle(style.id)}
+                            className="mt-1 shrink-0"
+                          />
+                          <div>
+                            <p className="font-medium text-sm">{style.label}</p>
+                            <p className="text-xs text-muted-foreground mt-0.5">{style.description}</p>
+                          </div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {generateError && (
+                  <div className="flex items-center gap-2 text-sm text-destructive bg-destructive/10 px-3 py-2 rounded-lg border border-destructive/20">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>{generateError}</span>
+                  </div>
+                )}
+
+                {selectedKw && !kwSerpData && (
+                  <div className="flex items-center gap-2 text-sm text-amber-700 bg-amber-50 dark:bg-amber-950/20 px-3 py-2 rounded-lg border border-amber-200 dark:border-amber-900">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>Run SERP analysis first for better context on Reddit discussions</span>
+                  </div>
+                )}
+
+                <Button
+                  onClick={handleGeneratePostContent}
+                  disabled={generateLoading || selectedKwIdx === null}
+                  className="w-full"
+                  size="lg"
+                >
+                  {generateLoading
+                    ? <><Spinner className="h-4 w-4 mr-2" />Generating posts…</>
+                    : <><Sparkles className="h-4 w-4 mr-2" />Generate 3 Sample Posts</>
+                  }
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Generated posts display */}
+            {generatedPosts.length > 0 && (
+              <div className="space-y-3">
+                <h3 className="font-semibold text-sm flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-emerald-500" />
+                  Generated Posts for "{selectedKw?.term}"
+                </h3>
+                {generatedPosts.map((post, idx) => (
+                  <Card key={idx}>
+                    <CardContent className="pt-4 pb-3 space-y-3">
+                      <div>
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">Title</p>
+                        <p className="text-sm font-medium line-clamp-2">{post.title}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">Subreddit</p>
+                        <Badge variant="outline" className="text-xs">r/{post.subreddit}</Badge>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">Post Content</p>
+                        <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap">{post.content}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">Rationale</p>
+                        <p className="text-xs text-muted-foreground italic">{post.rationale}</p>
+                      </div>
+                      <div className="flex gap-2 pt-2 border-t border-border/50">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="text-xs"
+                          onClick={() => {
+                            navigator.clipboard.writeText(post.content);
+                            toast({ title: "Copied!", description: "Post content copied to clipboard." });
+                          }}
+                        >
+                          Copy Content
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="text-xs"
+                          onClick={() => {
+                            window.open(`https://reddit.com/r/${post.subreddit}`, "_blank");
+                          }}
+                        >
+                          Visit r/{post.subreddit} <ExternalLink className="h-3 w-3 ml-1" />
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+
+            {!generateLoading && generatedPosts.length === 0 && selectedKwIdx !== null && (
+              <Card className="border-dashed">
+                <CardContent className="pt-6 pb-6 flex flex-col items-center justify-center text-center text-muted-foreground gap-2">
+                  <Sparkles className="h-8 w-8 opacity-20" />
+                  <p className="text-sm">Click "Generate Posts" above to create sample Reddit posts.</p>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </TabsContent>
       </Tabs>

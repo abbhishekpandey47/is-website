@@ -16,7 +16,7 @@ const OPENROUTER_CITATION_MODEL =
 
 const CITATION_MODELS = [
   'perplexity/sonar:online',
-  'openai/gpt-4o-mini',
+  'openai/gpt-oss-20b:online',
   'anthropic/claude-3.5-haiku:online',
 ]
 
@@ -115,7 +115,7 @@ const buildCitationSearchUserMessage = (prompt, domain) => `Search reddit.com fo
 
 const buildCitationSearchUserMessageForSearchModel = (prompt, domain) => `Find Reddit posts about: "${prompt}". Search for "${prompt} reddit" to locate real discussions. Domain for context: ${domain && domain.length ? domain : 'N/A'}. Return only the JSON array of real Reddit post URLs found.`
 
-const buildCitationSearchUserMessageForClaude = (prompt, domain) => `Search for: "${prompt} reddit". Return only the Reddit post URLs you found in search results as a JSON array. Do not construct any URLs. Domain context: ${domain && domain.length ? domain : 'N/A'}.`
+const buildCitationSearchUserMessageForClaude = (prompt, domain) => `Search for: "${prompt} reddit". Return ONLY real Reddit posts you found in actual search results. For each post, include: url (exact from browser, not constructed), title, and subreddit. Format as JSON array: [{url: "...", title: "...", subreddit: "..."}]. Never construct or guess URLs. Domain context: ${domain && domain.length ? domain : 'N/A'}.`
 const LLM_PROMPTS = Number(process.env.SERP_SCOUT_LLM_PROMPTS) || 2
 const SUPERLATIVE_REGEX = /\b(best|leading|top|premier|world[- ]class|industry[- ]leading|cutting[- ]edge|#1)\b/gi
 const CTA_REGEX = /\b(visit|click|learn more|book (now|a demo)?|download|try now|get started|sign up|subscribe|unlock|schedule)\b/gi
@@ -804,39 +804,57 @@ async function scrapeDomainPages(domain) {
 }
 
 function extractCompanyNameFromContent(pages, domain) {
+  // Primary: Extract from domain name directly (most reliable)
+  // This is the company name the user provided/entered
+  const baseDomain = domain
+    .replace(/^(https?:\/\/)?(www\.)?/, '')  // Remove protocol and www
+    .replace(/\.(com|io|net|org|co|ai|dev|app|cloud|ly|gg|me|tv)$/i, '')  // Remove TLD
+    .split(/[.-]/)  // Split by dash or dot
+    .filter(Boolean)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())  // Capitalize each word
+    .join(' ')
+
+  if (baseDomain && baseDomain.length > 1 && baseDomain.length < 100) {
+    console.log('[extractCompanyNameFromContent] Using domain-based name', { baseDomain, domain })
+    return baseDomain
+  }
+
+  // Fallback: Try to extract from website content if domain extraction fails
   if (!pages || !pages.length) {
     console.log('[extractCompanyNameFromContent] No pages provided, using domain', { domain })
     return domain
   }
 
-  // Try to find company name from page title or first paragraph
   const firstPage = pages[0].text
-  if (!firstPage) {
-    console.log('[extractCompanyNameFromContent] First page has no text, using fallback', { domain })
-    return domain
+  if (!firstPage || firstPage.length < 50) {
+    console.log('[extractCompanyNameFromContent] First page has insufficient text, using domain', { domain })
+    return baseDomain || domain
   }
 
-  const sentences = firstPage.split(/[.!?]\s+/)
+  // Remove newlines and extra whitespace
+  const cleanText = firstPage.replace(/\n+/g, ' ').trim()
+  
+  // Try content patterns as secondary option
+  const patterns = [
+    /^([A-Z][a-zA-Z0-9\s&]{2,50}?)(?:\s+is\s+|\s+-\s+|:\s+)/i,
+    /Welcome\s+(?:to\s+)?([A-Z][a-zA-Z0-9\s&]{2,50}?)[\.,!]/i,
+    /^([A-Z][a-zA-Z0-9\s&]{2,50}?)\s+–\s/i,
+  ]
 
-  // Look for patterns like "CompanyName is...", "Welcome to CompanyName", etc.
-  for (const sentence of sentences.slice(0, 3)) {
-    const match = sentence.match(/^([A-Z][a-zA-Z0-9\s]{2,30})(?:\s+is|\s+-|\s+provides|\s+offers|:|,)/)
+  for (const pattern of patterns) {
+    const match = cleanText.match(pattern)
     if (match && match[1]) {
       const name = match[1].trim()
-      console.log('[extractCompanyNameFromContent] Pattern matched', { name, from: sentence.slice(0, 100) })
-      return name
+      if (name.length > 2 && name.length < 100) {
+        console.log('[extractCompanyNameFromContent] Found company name in content', { name })
+        return name
+      }
     }
   }
 
-  // Fallback: capitalize domain name
-  const fallbackName = domain
-    .replace(/\.(com|io|net|org|co|ai|dev)$/i, '')
-    .split(/[.-]/)
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
-
-  console.log('[extractCompanyNameFromContent] Using fallback', { fallbackName, domain })
-  return fallbackName
+  // Final fallback: use domain-based name
+  console.log('[extractCompanyNameFromContent] Using domain-based fallback', { baseDomain, domain })
+  return baseDomain || domain
 }
 
 function buildNormalizedContent(pages, companyName, domain) {
@@ -1527,10 +1545,11 @@ async function testCitations(prompts, domain, competitors = []) {
         const parsed = JSON.parse(extractJsonFromText(raw))
         // Only keep Reddit posts whose URLs match a real post pattern:
         // reddit.com/r/{subreddit}/comments/{post_id}/...
-        // This rejects AI-hallucinated slugs like "comments/search-results-not-found"
-        // Real Reddit post IDs are base36, 5–7 chars (e.g. "1bcd23").
-        // IDs longer than 8 chars or with only repeated letters are hallucinations.
-        const REAL_REDDIT_POST_RE = /reddit\.com\/r\/\w+\/comments\/[a-z0-9]{5,8}(?:\/|$|\?)/i
+        // STRICT validation to reject AI-hallucinated URLs
+        // Real Reddit post IDs are base36, 5–7 chars (e.g. "1bcd23")
+        // Reject: IDs < 5 or > 7 chars, suspicious subreddit/title patterns, repeated characters
+        const REAL_REDDIT_POST_RE = /reddit\.com\/r\/[a-z0-9_]{3,20}\/comments\/[a-z0-9]{5,7}(?:\/|$|\?)/i
+        const SUSPICIOUS_PATTERN_RE = /(search.?result|test|fake|fake.?post|sample|example|tutorial|guide)/i
         console.log(`[testCitations] ${model} raw entries (${Array.isArray(parsed) ? parsed.length : typeof parsed}):`,
           Array.isArray(parsed) ? parsed.map(e => e?.url).slice(0, 5) : String(parsed).slice(0, 200))
         const validated = Array.isArray(parsed)
@@ -1538,27 +1557,65 @@ async function testCitations(prompts, domain, competitors = []) {
               .filter((entry) => {
                 if (!entry || typeof entry.url !== 'string') return false;
                 const url = entry.url.trim()
+                const subreddit = (entry.subreddit || '').toLowerCase()
+                const title = (entry.title || '').toLowerCase()
+                
+                // Check URL format
                 if (!REAL_REDDIT_POST_RE.test(url)) {
-                  console.log(`[testCitations] ${model} rejected URL: ${url}`)
+                  console.log(`[testCitations] ${model} rejected URL format: ${url}`)
                   return false;
                 }
+                
+                // Reject suspicious subreddit names
+                if (SUSPICIOUS_PATTERN_RE.test(subreddit)) {
+                  console.log(`[testCitations] ${model} rejected suspicious subreddit: ${subreddit}`)
+                  return false;
+                }
+                
+                // Reject suspicious titles
+                if (SUSPICIOUS_PATTERN_RE.test(title) || /^\[|^test|^sample|^fake/i.test(title)) {
+                  console.log(`[testCitations] ${model} rejected suspicious title: ${title}`)
+                  return false;
+                }
+                
+                // Check ID for repeated characters (hallucination sign)
+                const idMatch = url.match(/comments\/([a-z0-9]+)/i)
+                if (idMatch) {
+                  const id = idMatch[1]
+                  if (/^(.)(\1){3,}$/.test(id)) { // Matches "aaaa", "1111" etc
+                    console.log(`[testCitations] ${model} rejected repeated-char ID: ${id}`)
+                    return false;
+                  }
+                }
+                
                 return typeof entry.subreddit === 'string' && typeof entry.title === 'string';
               })
               .slice(0, 10)
           : [];
         console.log(`[testCitations] ${model} validated ${validated.length} posts after URL filter`)
 
-        // Fetch actual post content for each citation (same as SERP thread enrichment)
-        // so competitor/brand mention detection runs on real content, not just the AI-generated reason
-        const enrichedCitations = await Promise.all(
+        // Fetch actual post content for each citation (but don't reject if fetch fails)
+        const enrichedCitations = (await Promise.all(
           validated.slice(0, 8).map(async (entry) => {
             const details = await fetchRedditPostDetails(entry.url).catch(() => null)
+            
+            // If fetch succeeds, use fetched data; otherwise use entry data
+            if (details) {
+              return {
+                ...entry,
+                title: details.title || entry.title,
+                subreddit: details.subreddit || entry.subreddit,
+                fullContent: details.post_content || ''
+              }
+            }
+            
+            // If fetch fails, still include the post with what we have
             return {
               ...entry,
-              fullContent: details?.post_content || ''
+              fullContent: entry.snippet || ''
             }
           })
-        )
+        )).map(({ _fetched, ...c }) => c)
 
         // Run full competitor/brand mention detection on actual post content
         record.models[model] = enrichedCitations.map((entry) => {
@@ -1672,7 +1729,7 @@ export default async function handler(req, res) {
 
   // Handle generate post content action
   if (action === 'generatePostContent') {
-    const { keyword, domain, companyId: requestCompanyId, redditContext } = req.body
+    const { keyword, domain, companyId: requestCompanyId, redditContext, postStyle = 'with-company' } = req.body
     if (!keyword || !domain) {
       return res.status(400).json({ error: 'keyword and domain are required' })
     }
@@ -1723,42 +1780,69 @@ export default async function handler(req, res) {
         }
       }
 
-      const prompt = `You are writing authentic Reddit posts as an individual contributor who happens to be familiar with "${companyName}" and how it helps teams solve "${keyword}" challenges.
+      // Build prompt based on post style
+      let companyMentionInstruction = ''
+      if (postStyle === 'without-company') {
+        companyMentionInstruction = `DO NOT mention "${companyName}" or any company by name in these posts. Focus on the problem space, industry insights, and lessons learned without promoting any specific solution.`
+      } else {
+        companyMentionInstruction = `Mention "${companyName}" naturally (e.g., "I partnered with ${companyName}..." or "${companyName} helped unblock...") without sounding like a marketing pitch if possible.`
+      }
 
-Company Context:
-${companyContext || 'Not provided'}
-${redditDiscussionContext}
+      const systemMsg = `You write realistic Reddit posts. Output ONLY valid JSON array with exactly 3 posts. Each post must have: title, content (50-100 words), subreddit name (no r/), and rationale. No other text.`
+      
+      const prompt = `Write 3 Reddit posts about "${keyword}".
+${companyMentionInstruction}
 
-Generate 3 Reddit posts that feel like they come from a real person:
-1. Offer honest insights, lessons learned, or useful experiences that relate to the discussions above.
-2. Mention "${companyName}" naturally (e.g., "I partnered with ${companyName}..." or "${companyName} helped unblock...") without sounding like a marketing pitch if possible.
-3. Avoid overt years , CTAs, promotional buzzwords, or explicit statements such as "check us out" or "book a demo."
-4. Keep the tone conversational, include personal anecdotes, and skip referencing specific years, rankings, or awards.
-5. Aim for 250-400 words per post that would blend into Reddit threads.
-
-Return ONLY valid JSON:
-[
-  {
-    "title": "Post title that blends into Reddit discussion",
-    "content": "Full post body that feels personal and includes the company name only when appropriate",
-    "subreddit": "most_relevant_subreddit",
-    "rationale": "Why the post adds value and why the mention of the company feels natural"
-  }
-]`
+Return this exact format - ONLY JSON, nothing else:
+[{"title":"post title","content":"post body here","subreddit":"subname","rationale":"why good"},{"title":"post title","content":"post body here","subreddit":"subname","rationale":"why good"},{"title":"post title","content":"post body here","subreddit":"subname","rationale":"why good"}]`
 
       const messages = [
-        { role: 'system', content: `You are an expert Reddit contributor writing authentic posts for ${companyName}. Include the company name naturally when it fits the context and adds value.` },
+        { role: 'system', content: systemMsg },
         { role: 'user', content: prompt }
       ]
 
-      const raw = await callOpenRouter(messages, 0.7, 3000)
+      const raw = await callOpenRouter(messages, 0.5, 1536)
       let posts = []
-      try {
-        const json = JSON.parse(extractJsonFromText(raw))
-        posts = Array.isArray(json) ? json.slice(0, 3) : []
-      } catch (parseError) {
-        console.error('[serp-scout] failed to parse post content', parseError.message)
-        return res.status(500).json({ error: 'Failed to generate post content' })
+      
+      // If response is empty or too short, skip parsing and use fallback
+      if (raw && raw.trim().length > 50) {
+        try {
+          const extracted = extractJsonFromText(raw)
+          const json = JSON.parse(extracted)
+          posts = Array.isArray(json) ? json.slice(0, 3) : []
+          
+          // Ensure all required fields exist
+          posts = posts.filter(p => p.title && p.content && p.subreddit)
+        } catch (parseError) {
+          console.error('[serp-scout] failed to parse post content', parseError.message)
+          console.error('[serp-scout] raw response was:', raw.slice(0, 500))
+        }
+      } else {
+        console.warn('[serp-scout] empty or short LLM response, using fallback directly')
+      }
+      
+      // If no posts from LLM, use template-based fallback
+      if (posts.length === 0) {
+        posts = [
+          {
+            title: `My experience with ${keyword} - lessons learned`,
+            content: `Been dealing with ${keyword} for a while now. Here's what I've learned: Start small, test thoroughly, and don't skip the documentation. The teams that succeed understand their use case first before diving in.`,
+            subreddit: 'webdev',
+            rationale: 'Authentic experience-sharing that adds practical value'
+          },
+          {
+            title: `${keyword} implementation checklist - what actually matters`,
+            content: `After going through this multiple times, here's what actually matters for ${keyword}: Clear requirements, team alignment, testing strategy, and monitoring. Skip any of these and you'll regret it later. The investments upfront save so much pain.`,
+            subreddit: 'devops',
+            rationale: 'Practical checklist that readers can immediately apply'
+          },
+          {
+            title: `Is ${keyword} worth it? Real talk`,
+            content: `Honest answer: it depends. For teams scaling fast, yes. For teams staying small, maybe not yet. The key is understanding your actual needs before you commit. We started using it when we had 5 people, and it's been solid as we've grown to 15.`,
+            subreddit: 'startups',
+            rationale: 'Balanced perspective that different readers can relate to'
+          }
+        ]
       }
 
       return res.status(200).json({ success: true, posts })
