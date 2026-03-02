@@ -35,28 +35,32 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
   const { open } = useSidebar()
   const pathname = usePathname()
 
+  // Use admin paths when companySlug isn't available yet (prevents /c/undefined hydration mismatch)
+  const useCompanyPath = !isAdmin && companySlug;
+  const prefix = useCompanyPath ? `/threadflow/c/${companySlug}` : "/threadflow";
+
   const mainItems = [
-    { title: "Dashboard", url: isAdmin ? "/threadflow/client-dashboard" : `/threadflow/c/${companySlug}/client-dashboard`, icon: Gauge },
-    { title: "Clients", url: isAdmin ? "/threadflow/clients" : `/threadflow/c/${companySlug}/clients`, icon: LayoutGrid },
-    { title: "Reddit Posts", url: isAdmin ? "/threadflow/posts" : `/threadflow/c/${companySlug}/posts`, icon: MessageSquare },
-    { title: "Reddit Comments", url: isAdmin ? "/threadflow/comment" : `/threadflow/c/${companySlug}/comment`, icon: MessageSquare },
-    { title: "Analytics", url: isAdmin ? "/threadflow/analytics" : `/threadflow/c/${companySlug}/analytics`, icon: TrendingUp },
-    { title: "Analytics Overview", url: isAdmin ? "/threadflow/analytics-overview" : `/threadflow/c/${companySlug}/analytics-overview`, icon: PieChart },
-    { title: "Communities", url: isAdmin ? "/threadflow/communities" : `/threadflow/c/${companySlug}/communities`, icon: Users, soon: true },
-    { title: "SubredditSense", url: isAdmin ? "/threadflow/subredditsense" : `/threadflow/c/${companySlug}/subredditsense`, icon: TrendingUp },
-    { title: "Serp Scout", url: isAdmin ? "/threadflow/serp-scout" : `/threadflow/c/${companySlug}/serp-scout`, icon: Search },
+    { title: "Dashboard", url: `${prefix}/client-dashboard`, icon: Gauge },
+    { title: "Clients", url: `${prefix}/clients`, icon: LayoutGrid },
+    { title: "Reddit Posts", url: `${prefix}/posts`, icon: MessageSquare },
+    { title: "Reddit Comments", url: `${prefix}/comment`, icon: MessageSquare },
+    { title: "Analytics", url: `${prefix}/analytics`, icon: TrendingUp },
+    { title: "Analytics Overview", url: `${prefix}/analytics-overview`, icon: PieChart },
+    { title: "Communities", url: `${prefix}/communities`, icon: Users, soon: true },
+    { title: "SubredditSense", url: `${prefix}/subredditsense`, icon: TrendingUp },
+    { title: "Serp Scout", url: `${prefix}/serp-scout`, icon: Search },
   ]
 
   const planningItems = [
-    { title: "Cadence Planner", url: isAdmin ? "/threadflow/cadence-planner" : `/threadflow/c/${companySlug}/cadence-planner`, icon: Gauge },
+    { title: "Cadence Planner", url: `${prefix}/cadence-planner`, icon: Gauge },
   ]
 
   const managementItems = [
-    { title: "Categories", url: isAdmin ? "/threadflow/management/categories" : `/threadflow/c/${companySlug}/management/categories`, icon: Tag, soon: true },
-    { title: "Schedule", url: isAdmin ? "/threadflow/management/schedule" : `/threadflow/c/${companySlug}/management/schedule`, icon: Calendar, soon: true },
-    { title: "Templates", url: isAdmin ? "/threadflow/management/templates" : `/threadflow/c/${companySlug}/management/templates`, icon: FileText, soon: true },
-    { title: "Settings", url: isAdmin ? "/threadflow/management/settings" : `/threadflow/c/${companySlug}/management/settings`, icon: Settings },
-    { title: "Integrations", url: isAdmin ? "/threadflow/integrations" : `/threadflow/c/${companySlug}/integrations`, icon: Plug },
+    { title: "Categories", url: `${prefix}/management/categories`, icon: Tag, soon: true },
+    { title: "Schedule", url: `${prefix}/management/schedule`, icon: Calendar, soon: true },
+    { title: "Templates", url: `${prefix}/management/templates`, icon: FileText, soon: true },
+    { title: "Settings", url: `${prefix}/management/settings`, icon: Settings },
+    { title: "Integrations", url: `${prefix}/integrations`, icon: Plug },
   ]
 
   const isActive = (href) => {
