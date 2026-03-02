@@ -657,8 +657,11 @@ export default function CadencePlannerPage() {
         }
       } catch (err) {
         console.error("handleSaveLimit API error:", err);
-        setErrorMessage("Saved locally but failed to sync to server");
-        setTimeout(() => setErrorMessage(""), 3000);
+        const msg = err.message?.includes("not exist")
+          ? "DB table missing — run supabase/migrations/cadence_config.sql"
+          : "Saved locally, will sync when server is available";
+        setErrorMessage(msg);
+        setTimeout(() => setErrorMessage(""), 4000);
       }
     }
     setEditingCell(null);
@@ -699,8 +702,11 @@ export default function CadencePlannerPage() {
       setTimeout(() => setSuccessMessage(""), 2500);
     } catch (err) {
       console.error("handleBulkSave API error:", err);
-      setErrorMessage("Saved locally but failed to sync to server");
-      setTimeout(() => setErrorMessage(""), 3000);
+      const msg = err.message?.includes("not exist")
+        ? "DB table missing — run supabase/migrations/cadence_config.sql"
+        : "Saved locally, will sync when server is available";
+      setErrorMessage(msg);
+      setTimeout(() => setErrorMessage(""), 4000);
     }
   };
 

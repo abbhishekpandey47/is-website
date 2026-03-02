@@ -490,8 +490,11 @@ export default function ClientDashboardPage() {
       }
     } catch (err) {
       console.error("saveCadenceTarget API error:", err);
-      setCadenceSaveError("Saved locally but failed to sync to server");
-      setTimeout(() => setCadenceSaveError(""), 3000);
+      const msg = err.message?.includes("not exist")
+        ? "DB table missing — run supabase/migrations/cadence_config.sql"
+        : "Saved locally, will sync when server is available";
+      setCadenceSaveError(msg);
+      setTimeout(() => setCadenceSaveError(""), 4000);
     }
   }, [cadenceTargets, selectedClientName, firebaseUser]);
 
