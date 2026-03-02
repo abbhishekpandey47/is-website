@@ -175,7 +175,7 @@ function SkeletonCard({ height = 220, delay = 0 }) {
 export default function AnalyticsOverviewPage() {
   const router = useRouter();
   const [dateRange, setDateRange] = useState("30d");
-  const [selectedClients, setSelectedClients] = useState([]);
+  const [excludedClients, setExcludedClients] = useState([]);
   const [showClientPicker, setShowClientPicker] = useState(false);
   const [clientSearch, setClientSearch] = useState("");
   const [mounted, setMounted] = useState(false);
@@ -188,6 +188,20 @@ export default function AnalyticsOverviewPage() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  /* ──── Excluded clients localStorage persistence ──── */
+  const excludedInitRef = useRef(false);
+  useEffect(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem("threadflow_excluded_clients") || "[]");
+      if (stored.length > 0) setExcludedClients(stored);
+    } catch {}
+    excludedInitRef.current = true;
+  }, []);
+  useEffect(() => {
+    if (!excludedInitRef.current) return;
+    try { localStorage.setItem("threadflow_excluded_clients", JSON.stringify(excludedClients)); } catch {}
+  }, [excludedClients]);
 
   /* ──── Firebase auth + data fetching ──── */
   useEffect(() => {
@@ -234,24 +248,19 @@ export default function AnalyticsOverviewPage() {
     return cutoff;
   }, [dateRange]);
 
-  /* ──── Filtered items (by client + date range) ──── */
+  /* ──── Filtered items (by excluded clients + date range) ──── */
   const filteredItems = useMemo(() => {
     return allItems.filter((item) => {
-      // Skip items without a valid company mapping
       if (!companyMap[item.company_id]) return false;
-      // Client filter (multi-select)
-      if (selectedClients.length > 0) {
-        const companyName = companyMap[item.company_id];
-        if (!selectedClients.includes(companyName)) return false;
-      }
-      // Date range filter
+      const companyName = companyMap[item.company_id];
+      if (excludedClients.includes(companyName)) return false;
       if (item.date_posted) {
         const itemDate = new Date(item.date_posted);
         if (itemDate < dateRangeCutoff) return false;
       }
       return true;
     });
-  }, [allItems, selectedClients, companyMap, dateRangeCutoff]);
+  }, [allItems, excludedClients, companyMap, dateRangeCutoff]);
 
   /* ──── Chart 1: Engagement Over Time ──── */
   const engagementData = useMemo(() => {
@@ -281,9 +290,8 @@ export default function AnalyticsOverviewPage() {
     return result;
   }, [filteredItems, dateRange]);
 
-  /* ──── Chart 2: Top Clients by Item Count ──── */
+  /* ──── Chart 2: Top Clients by Item Count (shows ALL clients, marks excluded) ──── */
   const topClientsData = useMemo(() => {
-    // Count all items per company (respect date range but NOT client filter)
     const itemsInRange = allItems.filter((item) => {
       if (item.date_posted) {
         const itemDate = new Date(item.date_posted);
@@ -300,10 +308,10 @@ export default function AnalyticsOverviewPage() {
     });
 
     return Object.entries(counts)
-      .map(([name, count]) => ({ name, count }))
+      .map(([name, count]) => ({ name, count, excluded: excludedClients.includes(name) }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 10);
-  }, [allItems, companyMap, dateRangeCutoff]);
+  }, [allItems, companyMap, dateRangeCutoff, excludedClients]);
 
   /* ──── Chart 3: Status Distribution ──── */
   const statusData = useMemo(() => {
@@ -355,9 +363,8 @@ export default function AnalyticsOverviewPage() {
     return DAY_NAMES.map((name, i) => ({ name, count: counts[i] }));
   }, [filteredItems]);
 
-  /* ──── Chart 6: Cadence Completion by Client ──── */
+  /* ──── Chart 6: Cadence Completion by Client (excludes hidden) ──── */
   const cadenceData = useMemo(() => {
-    // For each company, compute % of items that are "live"
     const itemsInRange = allItems.filter((item) => {
       if (item.date_posted) {
         const itemDate = new Date(item.date_posted);
@@ -378,6 +385,7 @@ export default function AnalyticsOverviewPage() {
     });
 
     return Object.keys(totals)
+      .filter((name) => !excludedClients.includes(name))
       .map((name) => ({
         name,
         pct: totals[name] > 0
@@ -385,10 +393,10 @@ export default function AnalyticsOverviewPage() {
           : 0,
       }))
       .sort((a, b) => b.pct - a.pct);
-  }, [allItems, companyMap, dateRangeCutoff]);
+  }, [allItems, companyMap, dateRangeCutoff, excludedClients]);
 
   const toggleClient = useCallback((name) => {
-    setSelectedClients((prev) =>
+    setExcludedClients((prev) =>
       prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]
     );
   }, []);
@@ -592,9 +600,9 @@ export default function AnalyticsOverviewPage() {
               style={dropdownButtonStyle}
               onClick={() => { setShowClientPicker((o) => !o); setClientSearch(""); }}
             >
-              {selectedClients.length === 0
+              {excludedClients.length === 0
                 ? "All Clients"
-                : `${selectedClients.length} Clients`}
+                : `${companiesList.length - excludedClients.length} of ${companiesList.length} Clients`}
               <svg
                 width="12"
                 height="12"
@@ -655,9 +663,9 @@ export default function AnalyticsOverviewPage() {
                       cursor: "pointer",
                       padding: 0,
                     }}
-                    onClick={() => setSelectedClients(companiesList.map((c) => c.name))}
+                    onClick={() => setExcludedClients([])}
                   >
-                    Select All
+                    Show All
                   </button>
                   <button
                     style={{
@@ -669,42 +677,45 @@ export default function AnalyticsOverviewPage() {
                       cursor: "pointer",
                       padding: 0,
                     }}
-                    onClick={() => setSelectedClients([])}
+                    onClick={() => setExcludedClients(companiesList.map((c) => c.name))}
                   >
-                    Deselect All
+                    Hide All
                   </button>
                 </div>
                 <div
                   className="analytics-scrollbar"
                   style={{ maxHeight: 280, overflowY: "auto" }}
                 >
-                  {filteredCompanies.map((c) => (
-                    <label
-                      key={c.id}
-                      className="analytics-dropdown-item"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 8,
-                        padding: "8px 12px",
-                        cursor: "pointer",
-                        background: selectedClients.includes(c.name) ? "rgba(255,255,255,0.06)" : "transparent",
-                        color: selectedClients.includes(c.name) ? COLORS.textPrimary : COLORS.textSecondary,
-                        fontSize: 12,
-                        fontFamily: FONT,
-                        transition: "background 0.1s ease",
-                      }}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedClients.includes(c.name)}
-                        onChange={() => toggleClient(c.name)}
-                        style={{ accentColor: COLORS.blue, margin: 0, cursor: "pointer" }}
-                      />
-                      <span style={{ width: 8, height: 8, borderRadius: "50%", background: clientColorMap[c.name] || COLORS.gray, flexShrink: 0 }} />
-                      <span>{c.name}</span>
-                    </label>
-                  ))}
+                  {filteredCompanies.map((c) => {
+                    const isVisible = !excludedClients.includes(c.name);
+                    return (
+                      <label
+                        key={c.id}
+                        className="analytics-dropdown-item"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                          padding: "8px 12px",
+                          cursor: "pointer",
+                          background: isVisible ? "rgba(255,255,255,0.06)" : "transparent",
+                          color: isVisible ? COLORS.textPrimary : COLORS.textSecondary,
+                          fontSize: 12,
+                          fontFamily: FONT,
+                          transition: "background 0.1s ease",
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={isVisible}
+                          onChange={() => toggleClient(c.name)}
+                          style={{ accentColor: COLORS.blue, margin: 0, cursor: "pointer" }}
+                        />
+                        <span style={{ width: 8, height: 8, borderRadius: "50%", background: clientColorMap[c.name] || COLORS.gray, flexShrink: 0 }} />
+                        <span>{c.name}</span>
+                      </label>
+                    );
+                  })}
                   {filteredCompanies.length === 0 && (
                     <div style={{ padding: "10px 14px", fontSize: 12, color: COLORS.textMuted }}>
                       No clients found
@@ -716,10 +727,11 @@ export default function AnalyticsOverviewPage() {
           </div>
         </div>
 
-        {/* ──── Selected Client Pills ──── */}
-        {selectedClients.length > 0 && (
+        {/* ──── Excluded Client Pills ──── */}
+        {excludedClients.length > 0 && (
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
-            {selectedClients.slice(0, 5).map((name) => (
+            <span style={{ fontSize: 11, color: COLORS.textMuted }}>Hidden:</span>
+            {excludedClients.slice(0, 5).map((name) => (
               <span
                 key={name}
                 style={{
@@ -730,22 +742,23 @@ export default function AnalyticsOverviewPage() {
                   fontFamily: FONT,
                   padding: "3px 10px",
                   borderRadius: 12,
-                  background: "rgba(255,255,255,0.08)",
-                  color: COLORS.textPrimary,
+                  background: "rgba(255,255,255,0.06)",
+                  color: COLORS.textSecondary,
+                  textDecoration: "line-through",
                 }}
               >
                 {name}
                 <span
-                  style={{ cursor: "pointer", marginLeft: 2, color: COLORS.textSecondary, lineHeight: 1 }}
+                  style={{ cursor: "pointer", marginLeft: 2, color: COLORS.textSecondary, lineHeight: 1, textDecoration: "none" }}
                   onClick={() => toggleClient(name)}
                 >
                   &times;
                 </span>
               </span>
             ))}
-            {selectedClients.length > 5 && (
+            {excludedClients.length > 5 && (
               <span style={{ fontSize: 11, color: COLORS.textSecondary }}>
-                +{selectedClients.length - 5} more
+                +{excludedClients.length - 5} more
               </span>
             )}
             <button
@@ -759,7 +772,7 @@ export default function AnalyticsOverviewPage() {
                 padding: 0,
                 marginLeft: 4,
               }}
-              onClick={() => setSelectedClients([])}
+              onClick={() => setExcludedClients([])}
             >
               Reset
             </button>
@@ -775,6 +788,41 @@ export default function AnalyticsOverviewPage() {
             <SkeletonCard delay={180} />
             <SkeletonCard delay={240} />
             <SkeletonCard delay={300} height={320} />
+          </div>
+        )}
+
+        {/* ──── Filter Indicator Banner ──── */}
+        {!loading && excludedClients.length > 0 && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "8px 16px",
+              marginBottom: 16,
+              background: "rgba(251,191,36,0.06)",
+              border: "1px solid rgba(251,191,36,0.15)",
+              borderRadius: 8,
+              fontSize: 12,
+              fontFamily: FONT,
+            }}
+          >
+            <span style={{ color: "rgba(251,191,36,0.8)" }}>
+              Showing data for {companiesList.length - excludedClients.length} of{" "}
+              {companiesList.length} clients
+              {" \u00b7 "}
+              {excludedClients.join(", ")} hidden
+            </span>
+            <span
+              onClick={() => setExcludedClients([])}
+              style={{
+                color: "rgba(251,191,36,0.6)",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+            >
+              Reset
+            </span>
           </div>
         )}
 
@@ -854,7 +902,7 @@ export default function AnalyticsOverviewPage() {
               </ResponsiveContainer>
             </div>
 
-            {/* ── Chart 2: Top Clients by Item Count ── */}
+            {/* ── Chart 2: Top Clients by Live Count (interactive) ── */}
             <div style={cardStyle(60)}>
               <h3 style={cardTitleStyle}>Top Clients by Live Count</h3>
               {topClientsData.length === 0 ? (
@@ -871,51 +919,100 @@ export default function AnalyticsOverviewPage() {
                   No data available
                 </div>
               ) : (
-                <ResponsiveContainer width="100%" height={220}>
-                  <BarChart
-                    data={topClientsData}
-                    layout="vertical"
-                    margin={{ left: 10, right: 20, top: 0, bottom: 0 }}
-                  >
-                    <CartesianGrid
-                      strokeDasharray="none"
-                      stroke={COLORS.gridLine}
-                      horizontal={false}
-                    />
-                    <XAxis
-                      type="number"
-                      tick={{
-                        fill: COLORS.axisText,
-                        fontSize: 11,
-                        fontFamily: FONT,
-                        fontVariantNumeric: TABULAR,
-                      }}
-                      axisLine={{ stroke: COLORS.gridLine }}
-                      tickLine={false}
-                      allowDecimals={false}
-                    />
-                    <YAxis
-                      type="category"
-                      dataKey="name"
-                      tick={{
-                        fill: COLORS.axisText,
-                        fontSize: 11,
-                        fontFamily: FONT,
-                      }}
-                      axisLine={false}
-                      tickLine={false}
-                      width={160}
-                    />
-                    <Tooltip content={<CustomTooltip />} cursor={false} />
-                    <Bar
-                      dataKey="count"
-                      fill={COLORS.green}
-                      radius={[0, 4, 4, 0]}
-                      barSize={14}
-                      name="Live Count"
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
+                <div>
+                  {(() => {
+                    const maxCount = Math.max(...topClientsData.map((d) => d.count), 1);
+                    return topClientsData.map((client) => (
+                      <div
+                        key={client.name}
+                        onClick={() => toggleClient(client.name)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                          padding: "5px 0",
+                          cursor: "pointer",
+                          opacity: client.excluded ? 0.3 : 1,
+                          transition: "opacity 0.2s",
+                        }}
+                      >
+                        <span
+                          style={{
+                            width: 100,
+                            textAlign: "right",
+                            fontSize: 12,
+                            fontFamily: FONT,
+                            color: client.excluded ? "rgba(255,255,255,0.2)" : COLORS.axisText,
+                            textDecoration: client.excluded ? "line-through" : "none",
+                            flexShrink: 0,
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {client.name}
+                        </span>
+                        <div
+                          style={{
+                            flex: 1,
+                            height: 16,
+                            background: "rgba(255,255,255,0.04)",
+                            borderRadius: 4,
+                            overflow: "hidden",
+                          }}
+                        >
+                          <div
+                            style={{
+                              height: "100%",
+                              borderRadius: 4,
+                              width: `${(client.count / maxCount) * 100}%`,
+                              minWidth: client.count > 0 ? 4 : 0,
+                              background: client.excluded ? "rgba(52,211,153,0.15)" : COLORS.green,
+                              transition: "all 0.3s",
+                            }}
+                          />
+                        </div>
+                        <span
+                          style={{
+                            fontSize: 11,
+                            color: COLORS.axisText,
+                            minWidth: 24,
+                            textAlign: "right",
+                            fontVariantNumeric: TABULAR,
+                            fontFamily: FONT,
+                          }}
+                        >
+                          {client.count}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: 10,
+                            color: client.excluded ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.25)",
+                            width: 12,
+                            textAlign: "center",
+                          }}
+                        >
+                          {client.excluded ? "+" : "\u00d7"}
+                        </span>
+                      </div>
+                    ));
+                  })()}
+                  {excludedClients.length > 0 && (
+                    <div style={{ textAlign: "right", marginTop: 6 }}>
+                      <span
+                        onClick={() => setExcludedClients([])}
+                        style={{
+                          fontSize: 11,
+                          color: "rgba(255,255,255,0.3)",
+                          cursor: "pointer",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        Show all ({excludedClients.length} hidden)
+                      </span>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
 
@@ -1160,7 +1257,7 @@ export default function AnalyticsOverviewPage() {
               </ResponsiveContainer>
             </div>
 
-            {/* ── Chart 6: Cadence Completion by Client ── */}
+            {/* ── Chart 6: Cadence Completion by Client (interactive) ── */}
             <div style={cardStyle(300)}>
               <h3 style={cardTitleStyle}>Cadence Completion by Client</h3>
               {cadenceData.length === 0 ? (
@@ -1177,55 +1274,80 @@ export default function AnalyticsOverviewPage() {
                   No data available
                 </div>
               ) : (
-                <ResponsiveContainer width="100%" height={320}>
-                  <BarChart
-                    data={cadenceData}
-                    layout="vertical"
-                    margin={{ left: 10, right: 20, top: 0, bottom: 0 }}
-                  >
-                    <CartesianGrid
-                      strokeDasharray="none"
-                      stroke={COLORS.gridLine}
-                      horizontal={false}
-                    />
-                    <XAxis
-                      type="number"
-                      domain={[0, 100]}
-                      tick={{
-                        fill: COLORS.axisText,
-                        fontSize: 11,
-                        fontFamily: FONT,
-                        fontVariantNumeric: TABULAR,
+                <div>
+                  {cadenceData.map((client) => (
+                    <div
+                      key={client.name}
+                      onClick={() => toggleClient(client.name)}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        padding: "5px 0",
+                        cursor: "pointer",
+                        transition: "opacity 0.2s",
                       }}
-                      axisLine={{ stroke: COLORS.gridLine }}
-                      tickLine={false}
-                      tickFormatter={(v) => `${v}%`}
-                    />
-                    <YAxis
-                      type="category"
-                      dataKey="name"
-                      tick={{
-                        fill: COLORS.axisText,
-                        fontSize: 11,
-                        fontFamily: FONT,
-                      }}
-                      axisLine={false}
-                      tickLine={false}
-                      width={160}
-                    />
-                    <Tooltip content={<CustomTooltipPct />} cursor={false} />
-                    <Bar
-                      dataKey="pct"
-                      radius={[0, 4, 4, 0]}
-                      barSize={14}
-                      name="Completion"
                     >
-                      {cadenceData.map((entry, i) => (
-                        <Cell key={i} fill={getCadenceColor(entry.pct)} />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
+                      <span
+                        style={{
+                          width: 100,
+                          textAlign: "right",
+                          fontSize: 12,
+                          fontFamily: FONT,
+                          color: COLORS.axisText,
+                          flexShrink: 0,
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {client.name}
+                      </span>
+                      <div
+                        style={{
+                          flex: 1,
+                          height: 16,
+                          background: "rgba(255,255,255,0.04)",
+                          borderRadius: 4,
+                          overflow: "hidden",
+                        }}
+                      >
+                        <div
+                          style={{
+                            height: "100%",
+                            borderRadius: 4,
+                            width: `${client.pct}%`,
+                            minWidth: client.pct > 0 ? 4 : 0,
+                            background: getCadenceColor(client.pct),
+                            transition: "all 0.3s",
+                          }}
+                        />
+                      </div>
+                      <span
+                        style={{
+                          fontSize: 11,
+                          color: COLORS.axisText,
+                          minWidth: 30,
+                          textAlign: "right",
+                          fontVariantNumeric: TABULAR,
+                          fontFamily: FONT,
+                        }}
+                      >
+                        {client.pct}%
+                      </span>
+                      <span
+                        style={{
+                          fontSize: 10,
+                          color: "rgba(255,255,255,0.25)",
+                          width: 12,
+                          textAlign: "center",
+                        }}
+                      >
+                        {"\u00d7"}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
           </div>
