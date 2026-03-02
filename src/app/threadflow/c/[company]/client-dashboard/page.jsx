@@ -939,7 +939,7 @@ export default function ClientDashboardPage() {
                   {monthlyData.map((m, idx) => {
                     const isCurrentMo = m.month === new Date().getMonth() && m.year === new Date().getFullYear();
                     const liveH = chartMax > 0 ? (m.live / chartMax) * 100 : 0;
-                    const totalH = chartMax > 0 ? (m.total / chartMax) * 100 : 0;
+                    const targetH = chartMax > 0 ? (target / chartMax) * 100 : 0;
                     const livePct = target > 0 ? Math.round((m.live / target) * 100) : 0;
                     const liveColor = livePct >= 80 ? "#34d399" : livePct >= 40 ? "#fbbf24" : "#f87171";
 
@@ -949,16 +949,16 @@ export default function ClientDashboardPage() {
                           <div
                             style={{
                               flex: 1,
-                              height: `${totalH}%`,
+                              height: `${targetH}%`,
                               backgroundColor: "rgba(255,255,255,0.04)",
                               borderRadius: "3px 3px 0 0",
-                              minHeight: m.total > 0 ? 4 : 0,
+                              minHeight: target > 0 ? 4 : 0,
                               position: "relative",
                             }}
                           >
-                            {m.total > 0 && (
+                            {target > 0 && (
                               <span style={{ position: "absolute", top: -16, left: "50%", transform: "translateX(-50%)", fontSize: 9, color: "rgba(255,255,255,0.25)", ...TABULAR }}>
-                                {m.total}
+                                {target}
                               </span>
                             )}
                           </div>

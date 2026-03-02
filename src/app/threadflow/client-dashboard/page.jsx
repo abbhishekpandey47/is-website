@@ -957,25 +957,25 @@ export default function ClientDashboardPage() {
                   {monthlyData.map((m, idx) => {
                     const isCurrentMo = m.month === new Date().getMonth() && m.year === new Date().getFullYear();
                     const liveH = chartMax > 0 ? (m.live / chartMax) * 100 : 0;
-                    const totalH = chartMax > 0 ? (m.total / chartMax) * 100 : 0;
+                    const targetH = chartMax > 0 ? (target / chartMax) * 100 : 0;
                     const livePct = target > 0 ? Math.round((m.live / target) * 100) : 0;
                     const liveColor = livePct >= 80 ? "#34d399" : livePct >= 40 ? "#fbbf24" : "#f87171";
 
                     return (
                       <div key={idx} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
                         <div style={{ display: "flex", alignItems: "flex-end", gap: 3, height: 130, width: "100%" }}>
-                          {/* Total bar (background) */}
+                          {/* Target bar */}
                           <div
                             style={{
                               flex: 1,
-                              height: `${totalH}%`,
+                              height: `${targetH}%`,
                               backgroundColor: "rgba(255,255,255,0.04)",
                               borderRadius: "3px 3px 0 0",
-                              minHeight: m.total > 0 ? 4 : 0,
+                              minHeight: target > 0 ? 4 : 0,
                               position: "relative",
                             }}
                           >
-                            {m.total > 0 && (
+                            {target > 0 && (
                               <span
                                 style={{
                                   position: "absolute",
@@ -987,7 +987,7 @@ export default function ClientDashboardPage() {
                                   ...TABULAR,
                                 }}
                               >
-                                {m.total}
+                                {target}
                               </span>
                             )}
                           </div>

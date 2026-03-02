@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useMemo, useCallback, useEffect } from "react";
-import { Search, Plus, X, ArrowUpDown } from "lucide-react";
+import { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { Search, Plus, X, ArrowUpDown, MoreVertical, Pencil, EyeOff, Trash2, RotateCcw, ChevronDown, Check } from "lucide-react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
 import { useRouter } from "next/navigation";
-import { normalizeStatus, fetchThreadflowData } from "@/lib/threadflow-data";
+import { normalizeStatus, fetchThreadflowData, updateCadenceConfig, fetchCadenceConfig, buildCadenceMap } from "@/lib/threadflow-data";
 
 // ── Color Palette for deterministic company colors ──────────────────────────
 const COLOR_PALETTE = [
@@ -112,6 +112,7 @@ export default function ClientsOverviewPage() {
   const [loading, setLoading] = useState(true);
   const [companiesList, setCompaniesList] = useState([]);
   const [allItems, setAllItems] = useState([]);
+  const [cadenceLimits, setCadenceLimits] = useState({});
 
   const [search, setSearch] = useState("");
   const [paceFilters, setPaceFilters] = useState(new Set());
@@ -122,6 +123,19 @@ export default function ClientsOverviewPage() {
   const [hoveredSort, setHoveredSort] = useState(null);
   const [hoveredPill, setHoveredPill] = useState(null);
   const [animateIn, setAnimateIn] = useState(true);
+
+  // Add/Edit/Delete client state
+  const [newClientName, setNewClientName] = useState("");
+  const [newClientTarget, setNewClientTarget] = useState("35");
+  const [saving, setSaving] = useState(false);
+  const [toast, setToast] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(null);
+  const [editTargetId, setEditTargetId] = useState(null);
+  const [editTargetValue, setEditTargetValue] = useState("");
+  const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [hiddenClients, setHiddenClients] = useState([]);
+  const [showHidden, setShowHidden] = useState(false);
+  const tokenRef = useRef(null);
 
   // ── Firebase auth + data fetching ────────────────────────────────────────
   useEffect(() => {
@@ -134,9 +148,14 @@ export default function ClientsOverviewPage() {
         const fetchData = async () => {
           try {
             const token = await user.getIdToken();
-            const { items, companies } = await fetchThreadflowData(token);
+            tokenRef.current = token;
+            const [{ items, companies }, configs] = await Promise.all([
+              fetchThreadflowData(token),
+              fetchCadenceConfig(token),
+            ]);
             setAllItems(items);
             setCompaniesList(companies);
+            setCadenceLimits(buildCadenceMap(configs));
           } catch (err) {
             console.error("Failed to fetch client data:", err);
           } finally {
@@ -260,6 +279,129 @@ export default function ClientsOverviewPage() {
     router.push(`/threadflow/c/${formatted}`);
   }, [router]);
 
+  // ── Toast helper ──────────────────────────────────────────────────────────
+  const showToast = (msg, type = "success") => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  // ── Hidden clients persistence ────────────────────────────────────────────
+  const hiddenInitRef = useRef(false);
+  useEffect(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem("threadflow_hidden_clients") || "[]");
+      if (stored.length > 0) setHiddenClients(stored);
+    } catch {}
+    hiddenInitRef.current = true;
+  }, []);
+  useEffect(() => {
+    if (!hiddenInitRef.current) return;
+    try { localStorage.setItem("threadflow_hidden_clients", JSON.stringify(hiddenClients)); } catch {}
+  }, [hiddenClients]);
+
+  const visibleFiltered = useMemo(
+    () => filtered.filter((c) => !hiddenClients.includes(c.id)),
+    [filtered, hiddenClients]
+  );
+  const hiddenClientsList = useMemo(
+    () => enrichedClients.filter((c) => hiddenClients.includes(c.id)),
+    [enrichedClients, hiddenClients]
+  );
+
+  // ── Add Client handler ────────────────────────────────────────────────────
+  const handleAddClient = async () => {
+    if (!newClientName.trim()) return;
+    setSaving(true);
+    try {
+      const token = tokenRef.current || (firebaseUser ? await firebaseUser.getIdToken(true) : null);
+      if (!token) throw new Error("Not authenticated");
+
+      const res = await fetch("/api/companies", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newClientName.trim() }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || "Failed to add client");
+      }
+      const { data: newCompany } = await res.json();
+
+      const targetVal = parseInt(newClientTarget, 10) || 35;
+      await updateCadenceConfig(token, newClientName.trim(), targetVal);
+
+      setCompaniesList((prev) => [...prev, newCompany]);
+      setCadenceLimits((prev) => ({ ...prev, [newClientName.trim()]: targetVal }));
+      setNewClientName("");
+      setNewClientTarget("35");
+      setShowModal(false);
+      showToast("Client added to tracking");
+    } catch (err) {
+      showToast(err.message, "error");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  // ── Edit cadence target ───────────────────────────────────────────────────
+  const handleSaveTarget = async (clientName) => {
+    const val = parseInt(editTargetValue, 10);
+    if (isNaN(val) || val < 0) return;
+    try {
+      const token = tokenRef.current || (firebaseUser ? await firebaseUser.getIdToken(true) : null);
+      await updateCadenceConfig(token, clientName, val);
+      setCadenceLimits((prev) => ({ ...prev, [clientName]: val }));
+      setEditTargetId(null);
+      showToast(`Target set to ${val} for ${clientName}`);
+    } catch (err) {
+      showToast(err.message, "error");
+    }
+  };
+
+  // ── Hide client ───────────────────────────────────────────────────────────
+  const handleHide = (clientId) => {
+    setHiddenClients((prev) => [...prev, clientId]);
+    setMenuOpen(null);
+    showToast("Client hidden from dashboard");
+  };
+  const handleRestore = (clientId) => {
+    setHiddenClients((prev) => prev.filter((id) => id !== clientId));
+  };
+
+  // ── Delete client ─────────────────────────────────────────────────────────
+  const handleDelete = async (client) => {
+    try {
+      const token = tokenRef.current || (firebaseUser ? await firebaseUser.getIdToken(true) : null);
+      if (!token) throw new Error("Not authenticated");
+
+      await fetch("/api/companies", {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ id: client.id }),
+      });
+
+      await fetch("/api/cadence-config", {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ company_name: client.name }),
+      });
+
+      setCompaniesList((prev) => prev.filter((c) => c.id !== client.id));
+      setDeleteConfirm(null);
+      showToast(`${client.name} removed`);
+    } catch (err) {
+      showToast(err.message, "error");
+    }
+  };
+
+  // ── Close menu on outside click ────────────────────────────────────────
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleClickOutside = () => setMenuOpen(null);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [menuOpen]);
+
   // ── Keyframes style (injected once) ──────────────────────────────────────
   const keyframesStyle = `
     @keyframes fadeUp {
@@ -333,7 +475,7 @@ export default function ClientsOverviewPage() {
           onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
           <Plus size={14} strokeWidth={2} />
-          Add Client
+          Add Client to Tracking
         </button>
       </div>
 
@@ -559,7 +701,7 @@ export default function ClientsOverviewPage() {
             ))}
           </>
         ) : (
-          filtered.map((client, i) => {
+          visibleFiltered.map((client, i) => {
             const pace = PACE_CONFIG[client.pace];
             const isHovered = hoveredCard === client.id;
             return (
@@ -609,32 +751,74 @@ export default function ClientsOverviewPage() {
                       {client.name}
                     </span>
                   </div>
-                  {/* Pace Badge */}
-                  <span
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 5,
-                      padding: "3px 9px",
-                      background: pace.bg,
-                      borderRadius: 12,
-                      fontSize: 11,
-                      fontWeight: 500,
-                      color: pace.color,
-                      fontFamily: FONT,
-                      lineHeight: 1.4,
-                    }}
-                  >
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    {/* Pace Badge */}
                     <span
                       style={{
-                        width: 5,
-                        height: 5,
-                        borderRadius: "50%",
-                        background: pace.color,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 5,
+                        padding: "3px 9px",
+                        background: pace.bg,
+                        borderRadius: 12,
+                        fontSize: 11,
+                        fontWeight: 500,
+                        color: pace.color,
+                        fontFamily: FONT,
+                        lineHeight: 1.4,
                       }}
-                    />
-                    {pace.label}
-                  </span>
+                    >
+                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: pace.color }} />
+                      {pace.label}
+                    </span>
+                    {/* Three-dot menu */}
+                    <div style={{ position: "relative" }}>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); setMenuOpen(menuOpen === client.id ? null : client.id); }}
+                        style={{ background: "none", border: "none", color: "rgba(255,255,255,0.3)", cursor: "pointer", padding: 2, display: "flex", borderRadius: 4 }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.7)")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.3)")}
+                      >
+                        <MoreVertical size={14} />
+                      </button>
+                      {menuOpen === client.id && (
+                        <div
+                          onClick={(e) => e.stopPropagation()}
+                          style={{
+                            position: "absolute", top: "100%", right: 0, marginTop: 4, zIndex: 50,
+                            background: "#161616", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8,
+                            minWidth: 180, padding: 4, boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
+                          }}
+                        >
+                          <button
+                            onClick={() => { setEditTargetId(client.id); setEditTargetValue(cadenceLimits[client.name]?.toString() || "35"); setMenuOpen(null); }}
+                            style={{ display: "flex", alignItems: "center", gap: 8, width: "100%", padding: "8px 10px", background: "none", border: "none", color: "rgba(255,255,255,0.7)", fontSize: 12, fontFamily: FONT, cursor: "pointer", borderRadius: 4, textAlign: "left" }}
+                            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.04)")}
+                            onMouseLeave={(e) => (e.currentTarget.style.background = "none")}
+                          >
+                            <Pencil size={13} /> Edit Target
+                          </button>
+                          <button
+                            onClick={() => handleHide(client.id)}
+                            style={{ display: "flex", alignItems: "center", gap: 8, width: "100%", padding: "8px 10px", background: "none", border: "none", color: "rgba(255,255,255,0.7)", fontSize: 12, fontFamily: FONT, cursor: "pointer", borderRadius: 4, textAlign: "left" }}
+                            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.04)")}
+                            onMouseLeave={(e) => (e.currentTarget.style.background = "none")}
+                          >
+                            <EyeOff size={13} /> Hide from Dashboard
+                          </button>
+                          <div style={{ height: 1, background: "rgba(255,255,255,0.06)", margin: "4px 0" }} />
+                          <button
+                            onClick={() => { setDeleteConfirm(client); setMenuOpen(null); }}
+                            style={{ display: "flex", alignItems: "center", gap: 8, width: "100%", padding: "8px 10px", background: "none", border: "none", color: "#f87171", fontSize: 12, fontFamily: FONT, cursor: "pointer", borderRadius: 4, textAlign: "left" }}
+                            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(248,113,113,0.06)")}
+                            onMouseLeave={(e) => (e.currentTarget.style.background = "none")}
+                          >
+                            <Trash2 size={13} /> Delete Client
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 {/* Middle: Three Columns */}
@@ -767,14 +951,110 @@ export default function ClientsOverviewPage() {
                     {client.pct}%
                   </span>
                 </div>
+
+                {/* Cadence target display */}
+                {cadenceLimits[client.name] > 0 && (
+                  <div style={{ marginTop: 8, fontSize: 11, color: "rgba(255,255,255,0.3)" }}>
+                    Target: {cadenceLimits[client.name]}/mo
+                  </div>
+                )}
+
+                {/* Inline edit target overlay */}
+                {editTargetId === client.id && (
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      marginTop: 10, padding: "10px 12px", background: "rgba(255,255,255,0.03)",
+                      border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8,
+                    }}
+                  >
+                    <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 6 }}>Monthly Cadence Target</div>
+                    <div style={{ display: "flex", gap: 6 }}>
+                      <input
+                        type="number" min="0" value={editTargetValue}
+                        onChange={(e) => setEditTargetValue(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === "Enter") handleSaveTarget(client.name); if (e.key === "Escape") setEditTargetId(null); }}
+                        autoFocus
+                        style={{
+                          flex: 1, padding: "6px 10px", fontSize: 13, fontFamily: FONT, color: "#ededed",
+                          background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)",
+                          borderRadius: 6, outline: "none",
+                        }}
+                      />
+                      <button
+                        onClick={() => handleSaveTarget(client.name)}
+                        style={{
+                          padding: "6px 12px", fontSize: 12, fontWeight: 500, fontFamily: FONT,
+                          color: "#0a0a0a", background: "#ededed", border: "none", borderRadius: 6, cursor: "pointer",
+                        }}
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => setEditTargetId(null)}
+                        style={{
+                          padding: "6px 8px", fontSize: 12, fontFamily: FONT,
+                          color: "rgba(255,255,255,0.5)", background: "none",
+                          border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, cursor: "pointer",
+                        }}
+                      >
+                        <X size={12} />
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })
         )}
       </div>
 
+      {/* Hidden clients section */}
+      {hiddenClientsList.length > 0 && (
+        <div style={{ marginTop: 20 }}>
+          <button
+            onClick={() => setShowHidden((v) => !v)}
+            style={{
+              display: "flex", alignItems: "center", gap: 6, padding: "8px 0",
+              background: "none", border: "none", color: "rgba(255,255,255,0.35)",
+              fontSize: 12, fontFamily: FONT, cursor: "pointer",
+            }}
+          >
+            <ChevronDown size={14} style={{ transform: showHidden ? "rotate(180deg)" : "none", transition: "transform 0.15s" }} />
+            {hiddenClientsList.length} hidden client{hiddenClientsList.length > 1 ? "s" : ""}
+          </button>
+          {showHidden && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
+              {hiddenClientsList.map((c) => (
+                <div
+                  key={c.id}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 8, padding: "6px 12px",
+                    background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)",
+                    borderRadius: 8, fontSize: 12, color: "rgba(255,255,255,0.5)", fontFamily: FONT,
+                  }}
+                >
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: c.color }} />
+                  {c.name}
+                  <button
+                    onClick={() => handleRestore(c.id)}
+                    style={{
+                      display: "flex", alignItems: "center", gap: 4, padding: "2px 8px",
+                      background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
+                      borderRadius: 4, color: "rgba(255,255,255,0.6)", fontSize: 11, fontFamily: FONT, cursor: "pointer",
+                    }}
+                  >
+                    <RotateCcw size={10} /> Restore
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Empty state */}
-      {!loading && filtered.length === 0 && (
+      {!loading && visibleFiltered.length === 0 && hiddenClientsList.length === 0 && (
         <div
           style={{
             textAlign: "center",
@@ -836,7 +1116,7 @@ export default function ClientsOverviewPage() {
                   fontFamily: FONT,
                 }}
               >
-                Add Client
+                Add Client to Tracking
               </h2>
               <button
                 onClick={() => setShowModal(false)}
@@ -858,56 +1138,162 @@ export default function ClientsOverviewPage() {
             </div>
 
             {/* Modal Body */}
-            <div style={{ padding: "20px 24px" }}>
-              <div
-                style={{
-                  fontSize: 13,
-                  color: "rgba(255,255,255,0.5)",
-                  fontFamily: FONT,
-                  lineHeight: 1.6,
-                }}
-              >
-                Clients are managed through the system administration panel. New companies added via the admin panel will automatically appear here with their engagement data.
+            <div style={{ padding: "20px 24px", display: "flex", flexDirection: "column", gap: 16 }}>
+              <div>
+                <label style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", fontFamily: FONT, display: "block", marginBottom: 6 }}>Company Name *</label>
+                <input
+                  type="text" value={newClientName} onChange={(e) => setNewClientName(e.target.value)}
+                  placeholder="e.g. Acme Corp"
+                  onKeyDown={(e) => { if (e.key === "Enter") handleAddClient(); }}
+                  autoFocus
+                  style={{
+                    width: "100%", padding: "9px 12px", fontSize: 13, fontFamily: FONT, color: "#ededed",
+                    background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
+                    borderRadius: 7, outline: "none", transition: "border-color 0.15s",
+                  }}
+                  onFocus={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.16)")}
+                  onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
+                />
+              </div>
+              <div>
+                <label style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", fontFamily: FONT, display: "block", marginBottom: 6 }}>Monthly Cadence Target</label>
+                <input
+                  type="number" min="0" value={newClientTarget} onChange={(e) => setNewClientTarget(e.target.value)}
+                  style={{
+                    width: 120, padding: "9px 12px", fontSize: 13, fontFamily: FONT, color: "#ededed",
+                    background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
+                    borderRadius: 7, outline: "none",
+                  }}
+                />
               </div>
             </div>
 
             {/* Modal Footer */}
             <div
               style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                gap: 10,
-                padding: "16px 24px 20px",
-                borderTop: "1px solid rgba(255,255,255,0.06)",
+                display: "flex", justifyContent: "flex-end", gap: 10,
+                padding: "16px 24px 20px", borderTop: "1px solid rgba(255,255,255,0.06)",
               }}
             >
               <button
-                onClick={() => setShowModal(false)}
+                onClick={() => { setShowModal(false); setNewClientName(""); setNewClientTarget("35"); }}
                 style={{
-                  padding: "8px 16px",
-                  background: "transparent",
-                  border: "1px solid rgba(255,255,255,0.06)",
-                  borderRadius: 7,
-                  color: "rgba(255,255,255,0.6)",
-                  fontSize: 13,
-                  fontWeight: 500,
-                  fontFamily: FONT,
-                  cursor: "pointer",
-                  transition: "all 0.15s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
-                  e.currentTarget.style.color = "#ededed";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
-                  e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                  padding: "8px 16px", background: "transparent", border: "1px solid rgba(255,255,255,0.06)",
+                  borderRadius: 7, color: "rgba(255,255,255,0.6)", fontSize: 13, fontWeight: 500, fontFamily: FONT, cursor: "pointer",
                 }}
               >
-                Close
+                Cancel
+              </button>
+              <button
+                onClick={handleAddClient}
+                disabled={saving || !newClientName.trim()}
+                style={{
+                  padding: "8px 16px", background: saving || !newClientName.trim() ? "rgba(255,255,255,0.08)" : "#ededed",
+                  border: "none", borderRadius: 7,
+                  color: saving || !newClientName.trim() ? "rgba(255,255,255,0.3)" : "#0a0a0a",
+                  fontSize: 13, fontWeight: 500, fontFamily: FONT, cursor: saving ? "wait" : "pointer",
+                }}
+              >
+                {saving ? "Adding..." : "Add Client"}
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* ── Delete Confirmation Modal ───────────────────────────────────── */}
+      {deleteConfirm && (
+        <div
+          onClick={() => setDeleteConfirm(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.60)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1001,
+            animation: "overlayFadeIn 0.2s ease",
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: "100%",
+              maxWidth: 400,
+              background: "#0f0f0f",
+              border: "1px solid rgba(255,255,255,0.06)",
+              borderRadius: 12,
+              padding: "24px",
+              animation: "modalFadeIn 0.25s ease",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+              <div style={{
+                width: 36, height: 36, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
+                background: "rgba(248,113,113,0.1)",
+              }}>
+                <Trash2 size={18} color="#f87171" />
+              </div>
+              <h3 style={{ fontSize: 15, fontWeight: 600, margin: 0, color: "#ededed", fontFamily: FONT }}>
+                Delete Client
+              </h3>
+            </div>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", fontFamily: FONT, lineHeight: 1.5, margin: "0 0 20px" }}>
+              Are you sure you want to remove <strong style={{ color: "#ededed" }}>{deleteConfirm.name}</strong> from tracking?
+              This will delete the company and its cadence configuration. Engagement data in Supabase will remain intact.
+            </p>
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>
+              <button
+                onClick={() => setDeleteConfirm(null)}
+                style={{
+                  padding: "8px 16px", background: "transparent", border: "1px solid rgba(255,255,255,0.06)",
+                  borderRadius: 7, color: "rgba(255,255,255,0.6)", fontSize: 13, fontWeight: 500, fontFamily: FONT, cursor: "pointer",
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleDelete(deleteConfirm)}
+                style={{
+                  padding: "8px 16px", background: "#f87171", border: "none",
+                  borderRadius: 7, color: "#fff", fontSize: 13, fontWeight: 500, fontFamily: FONT, cursor: "pointer",
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Toast Notification ───────────────────────────────────────────── */}
+      {toast && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 24,
+            right: 24,
+            zIndex: 1100,
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "10px 16px",
+            background: toast.type === "error" ? "rgba(248,113,113,0.15)" : "rgba(52,211,153,0.15)",
+            border: `1px solid ${toast.type === "error" ? "rgba(248,113,113,0.3)" : "rgba(52,211,153,0.3)"}`,
+            borderRadius: 8,
+            color: toast.type === "error" ? "#f87171" : "#34d399",
+            fontSize: 13,
+            fontWeight: 500,
+            fontFamily: FONT,
+            animation: "fadeUp 0.3s ease",
+            boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
+          }}
+        >
+          {toast.type === "error" ? <X size={14} /> : <Check size={14} />}
+          {toast.msg}
         </div>
       )}
     </div>

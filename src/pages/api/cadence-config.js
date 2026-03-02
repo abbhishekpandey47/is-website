@@ -55,6 +55,22 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, data });
     }
 
+    // DELETE — remove a company's cadence config
+    if (req.method === "DELETE") {
+      const { company_name } = req.body || {};
+      if (!company_name) {
+        return res.status(400).json({ error: "company_name is required" });
+      }
+
+      const { error } = await supabase
+        .from("cadence_config")
+        .delete()
+        .eq("company_name", company_name);
+
+      if (error) throw error;
+      return res.status(200).json({ success: true, deleted: true });
+    }
+
     return res.status(405).json({ error: "Method not allowed" });
   } catch (e) {
     console.error("cadence-config error", e);
