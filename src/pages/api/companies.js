@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
     // POST — add a new company
     if (req.method === 'POST') {
-      const { name } = req.body || {};
+      const { name, monthly_limit } = req.body || {};
       if (!name || !name.trim()) {
         return res.status(400).json({ error: 'Company name is required' });
       }
@@ -36,6 +36,15 @@ export default async function handler(req, res) {
         .single();
 
       if (error) throw error;
+
+      // Also create cadence config for the new company
+      await supabase
+        .from('cadence_config')
+        .upsert(
+          { company_name: name.trim(), monthly_limit: monthly_limit || 8 },
+          { onConflict: 'company_name' }
+        );
+
       return res.status(201).json({ success: true, data });
     }
 

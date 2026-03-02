@@ -179,6 +179,8 @@ export default function AnalyticsOverviewPage() {
   const [showClientPicker, setShowClientPicker] = useState(false);
   const [clientSearch, setClientSearch] = useState("");
   const [mounted, setMounted] = useState(false);
+  const [newClientName, setNewClientName] = useState("");
+  const [addToast, setAddToast] = useState(null);
 
   const [firebaseUser, setFirebaseUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -414,6 +416,42 @@ export default function AnalyticsOverviewPage() {
     });
     return map;
   }, [companiesList]);
+
+  const addNewClient = useCallback(async () => {
+    const name = newClientName.trim();
+    if (!name) return;
+    const allNames = companiesList.map((c) => (c.name || "").toLowerCase());
+    if (allNames.includes(name.toLowerCase())) {
+      setAddToast({ type: "error", text: `"${name}" already exists` });
+      setTimeout(() => setAddToast(null), 3000);
+      return;
+    }
+    try {
+      const token = await firebaseUser?.getIdToken();
+      const res = await fetch("/api/companies", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({ name }),
+      });
+      if (res.ok) {
+        const result = await res.json();
+        setCompaniesList((prev) => [...prev, result.data || { name }]);
+        setNewClientName("");
+        setAddToast({ type: "success", text: `"${name}" added to tracking` });
+        setTimeout(() => setAddToast(null), 3000);
+      } else {
+        const err = await res.json().catch(() => ({}));
+        setAddToast({ type: "error", text: err.error || "Failed to add" });
+        setTimeout(() => setAddToast(null), 3000);
+      }
+    } catch (e) {
+      setAddToast({ type: "error", text: e.message });
+      setTimeout(() => setAddToast(null), 3000);
+    }
+  }, [newClientName, companiesList, firebaseUser]);
 
   const pickerRef = useRef(null);
 
@@ -721,6 +759,51 @@ export default function AnalyticsOverviewPage() {
                       No clients found
                     </div>
                   )}
+                </div>
+                {/* ── Add New Client ── */}
+                <div style={{
+                  padding: "10px 16px",
+                  borderTop: "1px solid rgba(255,255,255,0.06)",
+                  display: "flex",
+                  gap: 8,
+                  alignItems: "center",
+                }}>
+                  <input
+                    placeholder="New client name..."
+                    value={newClientName}
+                    onChange={(e) => setNewClientName(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && newClientName.trim()) addNewClient();
+                    }}
+                    style={{
+                      flex: 1,
+                      padding: "8px 12px",
+                      fontSize: 12,
+                      fontFamily: FONT,
+                      background: "rgba(255,255,255,0.04)",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      borderRadius: 8,
+                      color: "#ededed",
+                      outline: "none",
+                    }}
+                  />
+                  <button
+                    onClick={addNewClient}
+                    disabled={!newClientName.trim()}
+                    style={{
+                      padding: "8px 14px",
+                      fontSize: 12,
+                      fontWeight: 600,
+                      fontFamily: FONT,
+                      background: newClientName.trim() ? "#34d399" : "rgba(255,255,255,0.06)",
+                      color: newClientName.trim() ? "#000" : "rgba(255,255,255,0.2)",
+                      border: "none",
+                      borderRadius: 8,
+                      cursor: newClientName.trim() ? "pointer" : "default",
+                    }}
+                  >
+                    + Add
+                  </button>
                 </div>
               </div>
             )}
@@ -1353,6 +1436,18 @@ export default function AnalyticsOverviewPage() {
           </div>
         )}
       </div>
+      {addToast && (
+        <div style={{
+          position: "fixed", bottom: 24, right: 24, zIndex: 999,
+          padding: "10px 18px", borderRadius: 10, fontFamily: FONT, fontSize: 13,
+          background: addToast.type === "success" ? "rgba(52,211,153,0.15)" : "rgba(248,113,113,0.15)",
+          border: `1px solid ${addToast.type === "success" ? "rgba(52,211,153,0.3)" : "rgba(248,113,113,0.3)"}`,
+          color: addToast.type === "success" ? "#34d399" : "#f87171",
+          backdropFilter: "blur(8px)",
+        }}>
+          {addToast.type === "success" ? "\u2713" : "\u2715"} {addToast.text}
+        </div>
+      )}
     </>
   );
 }
