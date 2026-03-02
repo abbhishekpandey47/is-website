@@ -25,7 +25,7 @@ async function ensureTable() {
         "CREATE TABLE IF NOT EXISTS cadence_config (\n" +
         "  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,\n" +
         "  company_name text UNIQUE NOT NULL,\n" +
-        "  monthly_limit integer NOT NULL DEFAULT 8,\n" +
+        "  monthly_limit integer NOT NULL DEFAULT 35,\n" +
         "  alert_threshold integer NOT NULL DEFAULT 75,\n" +
         "  created_at timestamptz DEFAULT now(),\n" +
         "  updated_at timestamptz DEFAULT now()\n" +
@@ -49,15 +49,48 @@ export default async function handler(req, res) {
   try {
     await ensureTable();
 
-    // GET — return all cadence configs
+    // GET — return all cadence configs (auto-seeds missing companies)
     if (req.method === "GET") {
-      const { data, error } = await supabase
-        .from("cadence_config")
-        .select("id, company_name, monthly_limit, alert_threshold, updated_at")
-        .order("company_name");
+      // Fetch companies + existing configs in parallel
+      const [companiesRes, configsRes] = await Promise.all([
+        supabase.from("companies").select("name"),
+        supabase
+          .from("cadence_config")
+          .select("id, company_name, monthly_limit, alert_threshold, updated_at")
+          .order("company_name"),
+      ]);
 
-      if (error) throw error;
-      return res.status(200).json({ success: true, data });
+      if (configsRes.error) throw configsRes.error;
+
+      // Auto-seed any company that has no cadence_config row
+      const existingNames = new Set(
+        (configsRes.data || []).map((c) => c.company_name)
+      );
+      const companyNames = (companiesRes.data || []).map((c) => c.name);
+      const missing = companyNames.filter((n) => n && !existingNames.has(n));
+
+      if (missing.length > 0) {
+        const rows = missing.map((name) => ({
+          company_name: name,
+          monthly_limit: 35,
+        }));
+        const { error: seedErr } = await supabase
+          .from("cadence_config")
+          .upsert(rows, { onConflict: "company_name" });
+        if (seedErr) console.error("Auto-seed cadence_config error:", seedErr);
+
+        // Re-fetch after seeding
+        const { data: refreshed, error: refErr } = await supabase
+          .from("cadence_config")
+          .select(
+            "id, company_name, monthly_limit, alert_threshold, updated_at"
+          )
+          .order("company_name");
+        if (refErr) throw refErr;
+        return res.status(200).json({ success: true, data: refreshed });
+      }
+
+      return res.status(200).json({ success: true, data: configsRes.data });
     }
 
     // PUT — upsert one company's cadence config

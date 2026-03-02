@@ -307,11 +307,16 @@ export async function fetchCadenceConfig(token) {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (!res.ok) {
-      console.error("fetchCadenceConfig: HTTP", res.status);
+      const body = await res.json().catch(() => ({}));
+      console.error("fetchCadenceConfig: HTTP", res.status, body.error || "");
       return [];
     }
     const result = await res.json();
-    return result.data || [];
+    const data = result.data || [];
+    if (data.length === 0) {
+      console.warn("fetchCadenceConfig: API returned 0 configs");
+    }
+    return data;
   } catch (err) {
     console.error("fetchCadenceConfig error:", err);
     return [];

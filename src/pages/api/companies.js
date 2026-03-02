@@ -41,7 +41,7 @@ export default async function handler(req, res) {
       await supabase
         .from('cadence_config')
         .upsert(
-          { company_name: name.trim(), monthly_limit: monthly_limit || 8 },
+          { company_name: name.trim(), monthly_limit: monthly_limit || 35 },
           { onConflict: 'company_name' }
         );
 

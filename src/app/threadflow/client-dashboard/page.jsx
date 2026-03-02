@@ -272,22 +272,12 @@ export default function ClientDashboardPage() {
             ]);
             setAllItems(items);
             setCompaniesList(companies);
-            // Use API data if available, otherwise fall back to localStorage
+            // API is the SINGLE source of truth for cadence targets.
             const apiMap = buildCadenceMap(configs);
+            setCadenceTargets(apiMap);
+            try { localStorage.setItem("cadence_targets", JSON.stringify(apiMap)); } catch (e) { /* noop */ }
             if (Object.keys(apiMap).length > 0) {
-              setCadenceTargets(apiMap);
-              try { localStorage.setItem("cadence_targets", JSON.stringify(apiMap)); } catch (e) { /* noop */ }
-              // Snapshot current targets for history tracking
               seedCurrentMonthTargets(apiMap);
-            } else {
-              try {
-                const saved = localStorage.getItem("cadence_targets");
-                if (saved) {
-                  const parsed = JSON.parse(saved);
-                  setCadenceTargets(parsed);
-                  seedCurrentMonthTargets(parsed);
-                }
-              } catch (e) { /* noop */ }
             }
             // Auto-select first company
             if (companies.length > 0) {

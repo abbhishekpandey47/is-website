@@ -590,23 +590,15 @@ export default function CadencePlannerPage() {
             ]);
             setAllItems(items);
             setCompaniesList(companies);
-            // Use API data if available, otherwise fall back to localStorage
+            // API is the SINGLE source of truth for cadence targets.
+            // The GET endpoint auto-seeds missing companies, so this
+            // should always return a complete map.
             const apiMap = buildCadenceMap(configs);
+            setCadenceLimitsState(apiMap);
+            // Sync to localStorage as offline backup
+            try { localStorage.setItem("cadence_targets", JSON.stringify(apiMap)); } catch (e) { /* noop */ }
             if (Object.keys(apiMap).length > 0) {
-              setCadenceLimitsState(apiMap);
-              // Sync API data to localStorage as backup
-              try { localStorage.setItem("cadence_targets", JSON.stringify(apiMap)); } catch (e) { /* noop */ }
               seedCurrentMonthTargets(apiMap);
-            } else {
-              // API returned empty — try localStorage
-              try {
-                const saved = localStorage.getItem("cadence_targets");
-                if (saved) {
-                  const parsed = JSON.parse(saved);
-                  setCadenceLimitsState(parsed);
-                  seedCurrentMonthTargets(parsed);
-                }
-              } catch (e) { /* noop */ }
             }
           } catch (err) {
             console.error("Error fetching cadence data:", err);
@@ -655,13 +647,12 @@ export default function CadencePlannerPage() {
         if (tokenRef.current) {
           await updateCadenceConfig(tokenRef.current, companyName, numLimit);
         }
+        setSuccessMessage(`Target for ${companyName} updated`);
+        setTimeout(() => setSuccessMessage(""), 2500);
       } catch (err) {
         console.error("handleSaveLimit API error:", err);
-        const msg = err.message?.includes("not exist")
-          ? "DB table missing — run supabase/migrations/cadence_config.sql"
-          : "Saved locally, will sync when server is available";
-        setErrorMessage(msg);
-        setTimeout(() => setErrorMessage(""), 4000);
+        setErrorMessage(`Failed to save to database: ${err.message}`);
+        setTimeout(() => setErrorMessage(""), 5000);
       }
     }
     setEditingCell(null);
@@ -702,11 +693,8 @@ export default function CadencePlannerPage() {
       setTimeout(() => setSuccessMessage(""), 2500);
     } catch (err) {
       console.error("handleBulkSave API error:", err);
-      const msg = err.message?.includes("not exist")
-        ? "DB table missing — run supabase/migrations/cadence_config.sql"
-        : "Saved locally, will sync when server is available";
-      setErrorMessage(msg);
-      setTimeout(() => setErrorMessage(""), 4000);
+      setErrorMessage(`Failed to save to database: ${err.message}`);
+      setTimeout(() => setErrorMessage(""), 5000);
     }
   };
 
