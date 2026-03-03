@@ -85,9 +85,14 @@ function parseCSVText(text) {
   const rows = [];
   for (let i = 1; i < lines.length; i++) {
     const cols = parseLine(lines[i]);
-    // Skip separator rows (e.g. "JAN 2026 SPRINT ───────")
+    // Skip separator rows (e.g. "JAN 2026 SPRINT ───────", "JAN 2026", "─────")
     const first = (cols[0] || "").trim();
-    if (!first || /^[-─=]+$/.test(first) || /sprint/i.test(first)) continue;
+    const isSep =
+      !first ||
+      /^[-─=]+$/.test(first) ||
+      /sprint/i.test(first) ||
+      /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\b/i.test(first);
+    if (isSep) continue;
     if (cols.some((c) => c)) rows.push(cols);
   }
   return { headers, rows };
@@ -258,9 +263,10 @@ export default function BulkUploadModal({ isOpen, onClose, type, firebaseUser, o
       if (!res.ok) throw new Error(result.error || `Import failed (${res.status})`);
 
       const companyName = companies.find((c) => c.id === companyId)?.name || "";
-      setSuccess(`Successfully imported ${result.imported} ${typeLabel} for ${companyName}`);
+      const skippedMsg = result.skipped > 0 ? ` (${result.skipped} duplicates skipped)` : "";
+      setSuccess(`Successfully imported ${result.imported} ${typeLabel} for ${companyName}${skippedMsg}`);
 
-      setTimeout(() => { onSuccess?.({ imported: result.imported, type }); }, 1800);
+      setTimeout(() => { onSuccess?.({ imported: result.imported, skipped: result.skipped ?? 0, type }); }, 1800);
     } catch (err) {
       console.error("Import error:", err);
       setError(err.message);

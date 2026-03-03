@@ -61,10 +61,40 @@ export default async function handler(req, res) {
   try {
     const table = type === "post" ? "posts" : "comment";
 
-    const dbRows = rows.map((row) => {
+    // --- Duplicate detection ---
+    // Build a set of existing (title, url) pairs for this company so we can skip dupes.
+    const urlField = type === "post" ? "url" : "post_url";
+    const { data: existing, error: existErr } = await supabase
+      .from(table)
+      .select(`title,${urlField}`)
+      .eq("company_id", companyId);
+
+    if (existErr) {
+      console.error("Duplicate-check query error:", existErr);
+      return res.status(500).json({ error: existErr.message });
+    }
+
+    const existingKeys = new Set(
+      (existing || []).map((r) => `${(r.title || "").trim()}||${(r[urlField] || "").trim()}`)
+    );
+
+    const dbRows = [];
+    let skipped = 0;
+
+    for (const row of rows) {
+      const title = (row.title || "(untitled)").trim();
+      const url = (row.url || "").trim();
+      const key = `${title}||${url}`;
+
+      if (existingKeys.has(key)) {
+        skipped++;
+        continue;
+      }
+      existingKeys.add(key); // prevent in-batch dupes too
+
       const base = {
         category: row.category || "Imported",
-        title: row.title || "(untitled)",
+        title: title || "(untitled)",
         engagement_text: row.engagementText || null,
         date_posted: row.datePosted ? new Date(row.datePosted) : null,
         posted_link: row.postedLink || row.url || null,
@@ -77,22 +107,32 @@ export default async function handler(req, res) {
       };
 
       if (type === "post") {
-        return {
+        dbRows.push({
           ...base,
           url: row.url || "",
           status: mapToDbStatus(row.status, "post"),
           current_status: mapToApprovalStatus(row.currentStatus),
           kims_version: null,
-        };
+        });
       } else {
-        return {
+        dbRows.push({
           ...base,
           post_url: row.url || null,
           status: mapToApprovalStatus(row.currentStatus),
           posted_comment_status: mapToDbStatus(row.status, "comment"),
-        };
+        });
       }
-    });
+    }
+
+    if (dbRows.length === 0) {
+      return res.status(200).json({
+        success: true,
+        imported: 0,
+        skipped,
+        type,
+        message: `All ${skipped} rows already exist — nothing imported.`,
+      });
+    }
 
     const { data, error } = await supabase
       .from(table)
@@ -107,6 +147,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       success: true,
       imported: (data || []).length,
+      skipped,
       type,
     });
   } catch (err) {
