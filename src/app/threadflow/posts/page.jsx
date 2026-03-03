@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import { onAuthStateChanged } from "firebase/auth";
-import { ArrowDown, ArrowUp, ArrowUpDown, Edit, Plus, Save, Search, Trash2, X } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, Edit, Plus, Save, Search, Trash2, Upload, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -19,6 +19,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from ".
 import { Textarea } from "../../../Components/ui/textarea";
 import { UserProfile } from "../../../Components/UserProfile";
 import { useToast } from "../../../hooks/use-toast";
+import BulkUploadModal from "../components/BulkUploadModal";
 import { HoverTextCell } from "../components/HoverTextCell";
 import Pagination from "../components/pagination";
 import { getStatusBadge } from "../utils/statusBadge";
@@ -54,6 +55,10 @@ const PostsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [companiesList , setCompaniesList] = useState([]);
   const [selectedCompanyId , setSelectedCompanyId] = useState("select");
+
+  // Bulk upload
+  const [bulkUploadOpen, setBulkUploadOpen] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   // Date range state
   const [dateRange, setDateRange] = useState([null, null]);
@@ -127,7 +132,8 @@ const PostsPage = () => {
     };
 
     fetchPosts();
-  }, [firebaseUser]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [firebaseUser, refreshKey]);
 
 
   useEffect(() => {
@@ -520,6 +526,13 @@ const PostsPage = () => {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => setBulkUploadOpen(true)}
+              style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", fontSize: 12, fontWeight: 500, backgroundColor: "rgba(251,191,36,0.1)", border: "1px solid rgba(251,191,36,0.25)", borderRadius: 7, color: "#fbbf24", cursor: "pointer", fontFamily: "inherit" }}
+            >
+              <Upload size={13} />
+              Bulk Upload
+            </button>
             <Button
               onClick={() => router.push("/threadflow/posts/add")}
               className="bg-[#ededed] text-[#0a0a0a] font-medium rounded-[7px] hover:bg-[#d4d4d4] text-[13px] h-9 px-4"
@@ -1040,6 +1053,18 @@ const PostsPage = () => {
           </div>
         </div>
       )}
+
+      <BulkUploadModal
+        isOpen={bulkUploadOpen}
+        onClose={() => setBulkUploadOpen(false)}
+        type="post"
+        firebaseUser={firebaseUser}
+        onSuccess={(result) => {
+          setBulkUploadOpen(false);
+          setRefreshKey((k) => k + 1);
+          toast({ title: `✅ ${result.imported} post${result.imported === 1 ? "" : "s"} imported` });
+        }}
+      />
     </div>
   );
 };
