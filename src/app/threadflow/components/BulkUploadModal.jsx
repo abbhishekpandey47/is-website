@@ -56,35 +56,56 @@ const TARGET_FIELDS = [
   { key: "clientFeedback", label: "Customer Comments" },
 ];
 
-// ── CSV parser (handles quoted fields) ───────────────────────────────────────
+// ── CSV parser — properly handles multi-line quoted fields ───────────────────
+// The old approach (split on \n first, then parse each line) broke whenever a
+// quoted cell contained an embedded newline (common in Google Sheet exports for
+// long engagement-text cells). The new parser walks the raw text character-by-
+// character so embedded newlines inside quotes are treated as field content.
 function parseCSVText(text) {
-  const lines = text.split(/\r?\n/).filter((l) => l.trim());
-  if (lines.length < 2) return null;
+  const allRows = [];
+  let currentRow = [];
+  let field = "";
+  let inQuotes = false;
 
-  const parseLine = (line) => {
-    const result = [];
-    let current = "";
-    let inQuotes = false;
-    for (let i = 0; i < line.length; i++) {
-      const ch = line[i];
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (inQuotes) {
       if (ch === '"') {
-        if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
-        else inQuotes = !inQuotes;
-      } else if (ch === "," && !inQuotes) {
-        result.push(current.trim());
-        current = "";
+        // Escaped double-quote ("") inside a quoted field
+        if (text[i + 1] === '"') { field += '"'; i++; }
+        else inQuotes = false;
       } else {
-        current += ch;
+        field += ch; // newlines inside quotes become part of the field value
+      }
+    } else {
+      if (ch === '"') {
+        inQuotes = true;
+      } else if (ch === ",") {
+        currentRow.push(field.trim());
+        field = "";
+      } else if (ch === "\n" || (ch === "\r" && text[i + 1] === "\n")) {
+        if (ch === "\r") i++; // consume the \n in \r\n
+        currentRow.push(field.trim());
+        field = "";
+        if (currentRow.some((c) => c)) allRows.push(currentRow);
+        currentRow = [];
+      } else {
+        field += ch;
       }
     }
-    result.push(current.trim());
-    return result;
-  };
+  }
+  // Flush last field / row
+  if (field.trim() || currentRow.length > 0) {
+    currentRow.push(field.trim());
+    if (currentRow.some((c) => c)) allRows.push(currentRow);
+  }
 
-  const headers = parseLine(lines[0]);
+  if (allRows.length < 2) return null;
+
+  const headers = allRows[0];
   const rows = [];
-  for (let i = 1; i < lines.length; i++) {
-    const cols = parseLine(lines[i]);
+  for (let i = 1; i < allRows.length; i++) {
+    const cols = allRows[i];
     // Skip separator rows (e.g. "JAN 2026 SPRINT ───────", "JAN 2026", "─────")
     const first = (cols[0] || "").trim();
     const isSep =
