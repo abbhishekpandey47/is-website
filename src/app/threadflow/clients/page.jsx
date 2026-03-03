@@ -119,7 +119,6 @@ export default function ClientsOverviewPage() {
   const [sortKey, setSortKey] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
   const [showModal, setShowModal] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState(null);
   const [hoveredSort, setHoveredSort] = useState(null);
   const [hoveredPill, setHoveredPill] = useState(null);
   const [animateIn, setAnimateIn] = useState(true);
@@ -274,10 +273,6 @@ export default function ClientsOverviewPage() {
     [sortKey]
   );
 
-  const handleCardClick = useCallback((clientName) => {
-    const formatted = clientName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-    router.push(`/threadflow/c/${formatted}`);
-  }, [router]);
 
   // ── Toast helper ──────────────────────────────────────────────────────────
   const showToast = (msg, type = "success") => {
@@ -703,19 +698,14 @@ export default function ClientsOverviewPage() {
         ) : (
           visibleFiltered.map((client, i) => {
             const pace = PACE_CONFIG[client.pace];
-            const isHovered = hoveredCard === client.id;
             return (
               <div
                 key={client.id}
-                onClick={() => handleCardClick(client.name)}
-                onMouseEnter={() => setHoveredCard(client.id)}
-                onMouseLeave={() => setHoveredCard(null)}
                 style={{
-                  background: isHovered ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.02)",
-                  border: `1px solid ${isHovered ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.06)"}`,
+                  background: "rgba(255,255,255,0.02)",
+                  border: "1px solid rgba(255,255,255,0.06)",
                   borderRadius: 10,
                   padding: 20,
-                  cursor: "pointer",
                   transition: "all 0.15s ease",
                   animation: animateIn ? `fadeUp 0.3s ease both` : "none",
                   animationDelay: `${i * 0.03}s`,

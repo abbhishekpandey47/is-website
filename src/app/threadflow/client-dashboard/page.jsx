@@ -25,6 +25,9 @@ import {
   MessageSquare,
   Share2,
   Check,
+  Upload,
+  AlertCircle,
+  Loader2,
 } from "lucide-react";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -253,6 +256,16 @@ export default function ClientDashboardPage() {
   const ROWS_PER_PAGE = 15;
   const dropdownRef = useRef(null);
   const tokenRef = useRef(null);
+
+  // Upload modal state
+  const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const [uploadData, setUploadData] = useState(null); // { headers: [], rows: [] }
+  const [uploadColumnMap, setUploadColumnMap] = useState({});
+  const [uploadType, setUploadType] = useState(null); // null = not yet chosen
+  const [uploadImporting, setUploadImporting] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+  const [uploadSuccess, setUploadSuccess] = useState("");
+  const fileInputRef = useRef(null);
 
   // ─── Firebase auth + data fetching ───
   useEffect(() => {
@@ -539,6 +552,254 @@ export default function ClientDashboardPage() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }, [client, cadenceTarget, liveCount, clientEngagements]);
+
+  // ── CSV/XLSX Upload Handlers ──────────────────────────────────────────────
+
+  // Known spreadsheet column names → our field keys
+  const COLUMN_ALIASES = {
+    category: "category",
+    title: "title",
+    url: "url",
+    "text of engagement": "engagementText",
+    "engagement text": "engagementText",
+    engagement_text: "engagementText",
+    engagementtext: "engagementText",
+    approval: "currentStatus",
+    "post approval status": "currentStatus",
+    "comment approval status": "currentStatus",
+    status: "status",
+    "published status": "status",
+    "date published": "datePosted",
+    date_posted: "datePosted",
+    dateposted: "datePosted",
+    date: "datePosted",
+    "posted link": "postedLink",
+    posted_link: "postedLink",
+    "published link": "postedLink",
+    link: "postedLink",
+    "reddit username": "redditUsername",
+    reddit_username: "redditUsername",
+    username: "redditUsername",
+    subreddit: "targetedSubreddit",
+    "targeted subreddit": "targetedSubreddit",
+    targeted_subreddit: "targetedSubreddit",
+    "total views": "totalViews",
+    total_views: "totalViews",
+    views: "totalViews",
+    "customer comments": "clientFeedback",
+    client_feedback: "clientFeedback",
+    feedback: "clientFeedback",
+  };
+
+  const TARGET_FIELDS = [
+    { key: "category", label: "Category" },
+    { key: "title", label: "Title" },
+    { key: "url", label: "URL (Post/Thread URL)" },
+    { key: "engagementText", label: "Text of Engagement" },
+    { key: "currentStatus", label: "Approval (Client Approval Status)" },
+    { key: "status", label: "Status (Published/Posted Status)" },
+    { key: "datePosted", label: "Date Published" },
+    { key: "postedLink", label: "Published Link (Comment URL)" },
+    { key: "redditUsername", label: "Reddit Username" },
+    { key: "targetedSubreddit", label: "Subreddit" },
+    { key: "totalViews", label: "Total Views" },
+    { key: "clientFeedback", label: "Customer Comments" },
+  ];
+
+  const parseCSV = useCallback((text) => {
+    const lines = text.split(/\r?\n/).filter((l) => l.trim());
+    if (lines.length < 2) return null;
+
+    // Parse a CSV line handling quoted fields
+    const parseLine = (line) => {
+      const result = [];
+      let current = "";
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') {
+          if (inQuotes && line[i + 1] === '"') {
+            current += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (ch === "," && !inQuotes) {
+          result.push(current.trim());
+          current = "";
+        } else {
+          current += ch;
+        }
+      }
+      result.push(current.trim());
+      return result;
+    };
+
+    const headers = parseLine(lines[0]);
+    const rows = [];
+    for (let i = 1; i < lines.length; i++) {
+      const cols = parseLine(lines[i]);
+      if (cols.length > 0 && cols.some((c) => c)) {
+        rows.push(cols);
+      }
+    }
+
+    return { headers, rows };
+  }, []);
+
+  const autoMapColumns = useCallback((headers) => {
+    const map = {};
+    headers.forEach((h, idx) => {
+      const normalized = h.toLowerCase().trim();
+      if (COLUMN_ALIASES[normalized]) {
+        map[idx] = COLUMN_ALIASES[normalized];
+      }
+    });
+    return map;
+  }, []);
+
+  const handleFileSelect = useCallback((e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadError("");
+    setUploadSuccess("");
+    setUploadType(null); // reset type so user must choose each time
+
+    if (file.name.endsWith(".csv") || file.name.endsWith(".tsv") || file.type === "text/csv") {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        const parsed = parseCSV(evt.target.result);
+        if (!parsed || parsed.rows.length === 0) {
+          setUploadError("Could not parse file or file is empty");
+          return;
+        }
+        setUploadData(parsed);
+        setUploadColumnMap(autoMapColumns(parsed.headers));
+        setUploadModalOpen(true);
+      };
+      reader.readAsText(file);
+    } else if (file.name.endsWith(".xlsx") || file.name.endsWith(".xls")) {
+      // Use ExcelJS for xlsx files
+      const reader = new FileReader();
+      reader.onload = async (evt) => {
+        try {
+          const ExcelJS = (await import("exceljs")).default;
+          const wb = new ExcelJS.Workbook();
+          await wb.xlsx.load(evt.target.result);
+          const ws = wb.worksheets[0];
+          if (!ws || ws.rowCount < 2) {
+            setUploadError("Spreadsheet is empty or has no data rows");
+            return;
+          }
+          const headers = [];
+          const rows = [];
+          ws.eachRow((row, rowNum) => {
+            const vals = [];
+            row.eachCell({ includeEmpty: true }, (cell) => {
+              vals.push(cell.text || "");
+            });
+            if (rowNum === 1) {
+              headers.push(...vals);
+            } else {
+              if (vals.some((v) => v)) rows.push(vals);
+            }
+          });
+          if (rows.length === 0) {
+            setUploadError("No data rows found in spreadsheet");
+            return;
+          }
+          setUploadData({ headers, rows });
+          setUploadColumnMap(autoMapColumns(headers));
+          setUploadModalOpen(true);
+        } catch (err) {
+          console.error("Excel parse error:", err);
+          setUploadError("Failed to parse Excel file");
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    } else {
+      setUploadError("Unsupported file format. Use .csv or .xlsx");
+    }
+
+    // Reset input so same file can be re-selected
+    e.target.value = "";
+  }, [parseCSV, autoMapColumns]);
+
+  const handleImport = useCallback(async () => {
+    if (!uploadData || !client) return;
+    setUploadImporting(true);
+    setUploadError("");
+
+    try {
+      // Build mapped rows
+      const mappedRows = uploadData.rows.map((row) => {
+        const obj = {};
+        Object.entries(uploadColumnMap).forEach(([colIdx, fieldKey]) => {
+          if (fieldKey && fieldKey !== "_skip") {
+            obj[fieldKey] = row[Number(colIdx)] || "";
+          }
+        });
+        return obj;
+      });
+
+      // Filter out rows that have no title and no engagement text
+      const validRows = mappedRows.filter(
+        (r) => (r.title && r.title.trim()) || (r.engagementText && r.engagementText.trim())
+      );
+
+      if (validRows.length === 0) {
+        setUploadError("No valid rows to import (need at least a Title or Engagement Text)");
+        setUploadImporting(false);
+        return;
+      }
+
+      // Refresh token
+      if (firebaseUser) {
+        tokenRef.current = await firebaseUser.getIdToken(true);
+      }
+
+      const res = await fetch("/api/engagement/import", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${tokenRef.current}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          companyId: client.id,
+          type: uploadType,
+          rows: validRows,
+        }),
+      });
+
+      const result = await res.json();
+      if (!res.ok) {
+        throw new Error(result.error || `Import failed (${res.status})`);
+      }
+
+      setUploadSuccess(`Successfully imported ${result.imported} ${uploadType === "post" ? "original posts (OP)" : "comments"} for ${client.name}`);
+
+      // Refresh data
+      if (tokenRef.current) {
+        const { items, companies } = await fetchThreadflowData(tokenRef.current);
+        setAllItems(items);
+        setCompaniesList(companies);
+      }
+
+      // Close modal after brief delay
+      setTimeout(() => {
+        setUploadModalOpen(false);
+        setUploadData(null);
+        setUploadColumnMap({});
+        setUploadSuccess("");
+      }, 2000);
+    } catch (err) {
+      console.error("Import error:", err);
+      setUploadError(err.message);
+    } finally {
+      setUploadImporting(false);
+    }
+  }, [uploadData, uploadColumnMap, uploadType, client, firebaseUser]);
 
   // Status breakdown data
   const statusBreakdown = [
@@ -1481,37 +1742,68 @@ export default function ClientDashboardPage() {
               </button>
             )}
           </div>
-          <button
-            onClick={handleShare}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "6px 14px",
-              backgroundColor: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              borderRadius: 7,
-              color: "rgba(255,255,255,0.6)",
-              fontFamily: FONT_FAMILY,
-              fontSize: 12,
-              fontWeight: 500,
-              cursor: "pointer",
-              transition: "all 0.15s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
-              e.currentTarget.style.color = "#ededed";
-              e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.06)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-              e.currentTarget.style.color = "rgba(255,255,255,0.6)";
-              e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.04)";
-            }}
-          >
-            <Share2 size={12} />
-            Share
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "6px 14px",
+                backgroundColor: "rgba(251,191,36,0.08)",
+                border: "1px solid rgba(251,191,36,0.2)",
+                borderRadius: 7,
+                color: "#fbbf24",
+                fontFamily: FONT_FAMILY,
+                fontSize: 12,
+                fontWeight: 500,
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(251,191,36,0.35)";
+                e.currentTarget.style.backgroundColor = "rgba(251,191,36,0.15)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(251,191,36,0.2)";
+                e.currentTarget.style.backgroundColor = "rgba(251,191,36,0.08)";
+              }}
+            >
+              <Upload size={12} />
+              Import Spreadsheet
+            </button>
+            <button
+              onClick={handleShare}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "6px 14px",
+                backgroundColor: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: 7,
+                color: "rgba(255,255,255,0.6)",
+                fontFamily: FONT_FAMILY,
+                fontSize: 12,
+                fontWeight: 500,
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
+                e.currentTarget.style.color = "#ededed";
+                e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.06)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                e.currentTarget.style.color = "rgba(255,255,255,0.6)";
+                e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.04)";
+              }}
+            >
+              <Share2 size={12} />
+              Share
+            </button>
+          </div>
         </div>
 
         {/* Table */}
@@ -1842,6 +2134,37 @@ export default function ClientDashboardPage() {
             <FileText size={13} />
             Generate Report
           </button>
+          {/* Import Spreadsheet */}
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            onMouseEnter={() => setHoveredAction("upload")}
+            onMouseLeave={() => setHoveredAction(null)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 7,
+              padding: "8px 16px",
+              backgroundColor: hoveredAction === "upload" ? "rgba(251,191,36,0.18)" : "rgba(251,191,36,0.10)",
+              border: "1px solid rgba(251,191,36,0.2)",
+              borderRadius: 7,
+              color: "#fbbf24",
+              fontSize: 12,
+              fontWeight: 500,
+              fontFamily: FONT_FAMILY,
+              cursor: "pointer",
+              transition: "all 0.15s ease",
+            }}
+          >
+            <Upload size={13} />
+            Import Spreadsheet
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".csv,.xlsx,.xls"
+            onChange={handleFileSelect}
+            style={{ display: "none" }}
+          />
           {/* Send Slack Alert */}
           <button
             title="Coming soon"
@@ -1928,6 +2251,355 @@ export default function ClientDashboardPage() {
           </span>
         </div>
       )}
+
+      {/* ─── Upload Modal ─── */}
+      {uploadModalOpen && uploadData && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundColor: "rgba(0,0,0,0.7)",
+            backdropFilter: "blur(4px)",
+            zIndex: 10000,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 24,
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget && !uploadImporting) {
+              setUploadModalOpen(false);
+              setUploadData(null);
+              setUploadError("");
+              setUploadSuccess("");
+            }
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              maxWidth: 840,
+              maxHeight: "90vh",
+              backgroundColor: "#141414",
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: 12,
+              display: "flex",
+              flexDirection: "column",
+              overflow: "hidden",
+              boxShadow: "0 24px 64px rgba(0,0,0,0.6)",
+            }}
+          >
+            {/* Modal Header */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "18px 24px",
+                borderBottom: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <Upload size={16} style={{ color: "#fbbf24" }} />
+                <span style={{ fontSize: 15, fontWeight: 600 }}>
+                  Import Engagements
+                </span>
+                <span style={{ fontSize: 12, color: "rgba(255,255,255,0.4)" }}>
+                  {client.name} &middot; {uploadData.rows.length} rows
+                </span>
+              </div>
+              <button
+                onClick={() => {
+                  if (!uploadImporting) {
+                    setUploadModalOpen(false);
+                    setUploadData(null);
+                    setUploadError("");
+                    setUploadSuccess("");
+                  }
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "rgba(255,255,255,0.4)",
+                  cursor: uploadImporting ? "not-allowed" : "pointer",
+                  padding: 4,
+                }}
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div style={{ padding: "20px 24px", overflow: "auto", flex: 1 }}>
+              {/* ── Step 1: Type selector (required) ── */}
+              <div
+                style={{
+                  marginBottom: 20,
+                  padding: "16px 18px",
+                  borderRadius: 10,
+                  border: uploadType
+                    ? "1px solid rgba(52,211,153,0.2)"
+                    : "1px solid rgba(251,191,36,0.35)",
+                  backgroundColor: uploadType
+                    ? "rgba(52,211,153,0.04)"
+                    : "rgba(251,191,36,0.06)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+                  <span
+                    style={{
+                      width: 20, height: 20, borderRadius: "50%",
+                      backgroundColor: uploadType ? "rgba(52,211,153,0.15)" : "rgba(251,191,36,0.15)",
+                      border: `1px solid ${uploadType ? "#34d399" : "#fbbf24"}`,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: 11, fontWeight: 700,
+                      color: uploadType ? "#34d399" : "#fbbf24",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {uploadType ? "✓" : "1"}
+                  </span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: uploadType ? "#34d399" : "#fbbf24" }}>
+                    What type of content are you importing?
+                  </span>
+                  {!uploadType && (
+                    <span style={{ fontSize: 11, color: "rgba(251,191,36,0.7)", marginLeft: 4 }}>
+                      — required before you can import
+                    </span>
+                  )}
+                </div>
+                <div style={{ display: "flex", gap: 10 }}>
+                  {[
+                    { value: "comment", label: "Comments", desc: "Replies posted on Reddit threads" },
+                    { value: "post", label: "Original Posts (OP)", desc: "Threads created by your accounts" },
+                  ].map(({ value, label, desc }) => (
+                    <button
+                      key={value}
+                      onClick={() => setUploadType(value)}
+                      style={{
+                        flex: 1,
+                        padding: "12px 16px",
+                        fontSize: 13,
+                        fontWeight: uploadType === value ? 600 : 400,
+                        fontFamily: FONT_FAMILY,
+                        borderRadius: 8,
+                        border: `1.5px solid ${uploadType === value ? "#34d399" : "rgba(255,255,255,0.1)"}`,
+                        backgroundColor: uploadType === value ? "rgba(52,211,153,0.1)" : "rgba(255,255,255,0.03)",
+                        color: uploadType === value ? "#34d399" : "rgba(255,255,255,0.55)",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        transition: "all 0.15s ease",
+                      }}
+                    >
+                      <div>{label}</div>
+                      <div style={{ fontSize: 11, opacity: 0.6, marginTop: 3, fontWeight: 400 }}>{desc}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── Step 2: Column Mapping (only shown once type is chosen) ── */}
+              <div style={{ marginBottom: 20, opacity: uploadType ? 1 : 0.35, pointerEvents: uploadType ? "auto" : "none" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                  <span
+                    style={{
+                      width: 20, height: 20, borderRadius: "50%",
+                      backgroundColor: "rgba(255,255,255,0.06)",
+                      border: "1px solid rgba(255,255,255,0.15)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.4)",
+                      flexShrink: 0,
+                    }}
+                  >2</span>
+                  <span style={{ fontSize: 13, fontWeight: 500 }}>Column Mapping</span>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 20px 1fr", gap: "8px 0", alignItems: "center" }}>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                    Spreadsheet Column
+                  </span>
+                  <span />
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                    Maps To
+                  </span>
+                  {uploadData.headers.map((header, idx) => (
+                    <div key={idx} style={{ display: "contents" }}>
+                      <div style={{ fontSize: 13, color: "#ededed", padding: "6px 10px", backgroundColor: "rgba(255,255,255,0.03)", borderRadius: 5, border: "1px solid rgba(255,255,255,0.06)" }}>
+                        {header || `(Column ${idx + 1})`}
+                      </div>
+                      <span style={{ textAlign: "center", color: "rgba(255,255,255,0.2)", fontSize: 12 }}>&rarr;</span>
+                      <select
+                        value={uploadColumnMap[idx] || "_skip"}
+                        onChange={(e) => setUploadColumnMap((prev) => ({ ...prev, [idx]: e.target.value }))}
+                        style={{
+                          fontSize: 12,
+                          padding: "6px 10px",
+                          backgroundColor: "#1a1a1a",
+                          border: `1px solid ${uploadColumnMap[idx] && uploadColumnMap[idx] !== "_skip" ? "rgba(251,191,36,0.25)" : "rgba(255,255,255,0.08)"}`,
+                          borderRadius: 5,
+                          color: uploadColumnMap[idx] && uploadColumnMap[idx] !== "_skip" ? "#fbbf24" : "rgba(255,255,255,0.4)",
+                          fontFamily: FONT_FAMILY,
+                          cursor: "pointer",
+                          outline: "none",
+                        }}
+                      >
+                        <option value="_skip">-- Skip --</option>
+                        {TARGET_FIELDS.map((f) => (
+                          <option key={f.key} value={f.key}>{f.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Data Preview */}
+              <div style={{ marginBottom: 16 }}>
+                <span style={{ fontSize: 13, fontWeight: 500, display: "block", marginBottom: 10 }}>
+                  Preview (first 5 rows)
+                </span>
+                <div style={{ overflow: "auto", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 8 }}>
+                  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 11 }}>
+                    <thead>
+                      <tr>
+                        {uploadData.headers.map((h, i) => (
+                          <th
+                            key={i}
+                            style={{
+                              padding: "8px 10px",
+                              textAlign: "left",
+                              borderBottom: "1px solid rgba(255,255,255,0.08)",
+                              color: uploadColumnMap[i] && uploadColumnMap[i] !== "_skip" ? "#fbbf24" : "rgba(255,255,255,0.35)",
+                              fontWeight: 600,
+                              whiteSpace: "nowrap",
+                              backgroundColor: "rgba(255,255,255,0.02)",
+                            }}
+                          >
+                            {h || `Col ${i + 1}`}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {uploadData.rows.slice(0, 5).map((row, ri) => (
+                        <tr key={ri}>
+                          {uploadData.headers.map((_, ci) => (
+                            <td
+                              key={ci}
+                              style={{
+                                padding: "6px 10px",
+                                borderBottom: "1px solid rgba(255,255,255,0.04)",
+                                color: "rgba(255,255,255,0.6)",
+                                maxWidth: 200,
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                whiteSpace: "nowrap",
+                              }}
+                            >
+                              {row[ci] || ""}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                {uploadData.rows.length > 5 && (
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginTop: 6, display: "block" }}>
+                    ... and {uploadData.rows.length - 5} more rows
+                  </span>
+                )}
+              </div>
+
+              {/* Error / Success */}
+              {uploadError && (
+                <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 14px", backgroundColor: "rgba(248,113,113,0.1)", border: "1px solid rgba(248,113,113,0.2)", borderRadius: 7, marginBottom: 12 }}>
+                  <AlertCircle size={14} style={{ color: "#f87171", flexShrink: 0 }} />
+                  <span style={{ fontSize: 12, color: "#f87171" }}>{uploadError}</span>
+                </div>
+              )}
+              {uploadSuccess && (
+                <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 14px", backgroundColor: "rgba(52,211,153,0.1)", border: "1px solid rgba(52,211,153,0.2)", borderRadius: 7, marginBottom: 12 }}>
+                  <Check size={14} style={{ color: "#34d399", flexShrink: 0 }} />
+                  <span style={{ fontSize: 12, color: "#34d399" }}>{uploadSuccess}</span>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "16px 24px",
+                borderTop: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <span style={{ fontSize: 12, color: "rgba(255,255,255,0.3)" }}>
+                {Object.values(uploadColumnMap).filter((v) => v && v !== "_skip").length} of {uploadData.headers.length} columns mapped
+              </span>
+              <div style={{ display: "flex", gap: 10 }}>
+                <button
+                  onClick={() => {
+                    setUploadModalOpen(false);
+                    setUploadData(null);
+                    setUploadError("");
+                    setUploadSuccess("");
+                  }}
+                  disabled={uploadImporting}
+                  style={{
+                    padding: "8px 18px",
+                    fontSize: 12,
+                    fontWeight: 500,
+                    fontFamily: FONT_FAMILY,
+                    backgroundColor: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: 7,
+                    color: "rgba(255,255,255,0.6)",
+                    cursor: uploadImporting ? "not-allowed" : "pointer",
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleImport}
+                  disabled={uploadImporting || !uploadType || Object.values(uploadColumnMap).filter((v) => v && v !== "_skip").length === 0}
+                  style={{
+                    padding: "8px 22px",
+                    fontSize: 12,
+                    fontWeight: 600,
+                    fontFamily: FONT_FAMILY,
+                    backgroundColor: uploadImporting ? "rgba(251,191,36,0.08)" : "rgba(251,191,36,0.15)",
+                    border: "1px solid rgba(251,191,36,0.3)",
+                    borderRadius: 7,
+                    color: "#fbbf24",
+                    cursor: uploadImporting ? "not-allowed" : "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 7,
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  {uploadImporting ? (
+                    <>
+                      <Loader2 size={13} style={{ animation: "spin 1s linear infinite" }} />
+                      Importing...
+                    </>
+                  ) : (
+                    <>
+                      <Upload size={13} />
+                      Import {uploadData.rows.length} {uploadType === "post" ? "Original Posts (OP)" : uploadType === "comment" ? "Comments" : "..."}
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Spinner keyframe for loader */}
+      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 }
