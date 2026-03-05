@@ -16,7 +16,7 @@ const OPENROUTER_CITATION_MODEL =
 
 const CITATION_MODELS = [
   'perplexity/sonar:online',
-  'openai/gpt-oss-20b:online',
+  'openai/gpt-oss-120b:online',
   'anthropic/claude-3.5-haiku:online',
 ]
 
@@ -33,82 +33,43 @@ const CONTEXT_TEMPERATURE = 0.25
 const CONTEXT_MAX_TOKENS = 1400
 const KEYWORD_TEMPERATURE = 0.65
 const KEYWORD_MAX_TOKENS = 1024
-const CITATION_SEARCH_TEMPERATURE = 0.35
+const CITATION_SEARCH_TEMPERATURE = 0
 const CITATION_SEARCH_MAX_TOKENS = 2000
-const buildCitationSearchSystemMessage = (prompt) => `
-You are a Reddit research assistant with live web search access.
+const buildCitationSearchSystemMessage = (prompt) => `CRITICAL: Return ONLY JSON. No explanations, no text before or after.
 
-Your ONLY job: Search reddit.com for real posts related to the topic below.
+Web search for Reddit posts about: "${prompt}"
 
-Search query to use: site:reddit.com ${prompt}
+Return ONLY:
+[{"url":"https://www.reddit.com/r/subreddit/comments/id/slug/","subreddit":"name","title":"title","reason":"why"}]
 
-STRICT RULES:
-- You MUST perform a web search scoped to reddit.com only.
-- Every URL you return MUST start with https://www.reddit.com/r/ and contain /comments/
-- Do NOT return links from any other website (no dev.to, Medium, YouTube, blogs, etc).
-- Do NOT make up or guess URLs. Only return posts you actually found via search.
-- If your search returned zero reddit.com results, return an empty JSON array [].
-
-Return 3–8 Reddit posts in this exact JSON format:
-[
-  {
-    "url": "https://www.reddit.com/r/SUBREDDIT/comments/POST_ID/post_title/",
-    "subreddit": "subreddit_name",
-    "title": "Exact post title from Reddit",
-    "reason": "One sentence: why this post relates to the prompt"
-  }
-]
-
-Output ONLY the JSON array. No explanation, no markdown, no extra text.
+Empty: []
 `.trim()
 
 // For plugin-based models (openai/gpt-4o-mini + plugins:[{id:'web'}]):
 // Keep the prompt simple — the plugin already injects search results as context.
 // Complex restriction rules cause the model to over-cautiously return [].
-const buildCitationSearchSystemMessageForSearchModel = (prompt) => `
-Find Reddit discussions about: "${prompt}"
+const buildCitationSearchSystemMessageForSearchModel = (prompt) => `CRITICAL: You MUST return ONLY valid JSON. NO explanations. NO descriptions. NO search process. ONLY JSON.
 
-From your search results, extract Reddit post URLs and return them as a JSON array.
+Using web search, find Reddit posts about: "${prompt}"
 
-[
-  {
-    "url": "https://www.reddit.com/r/SUBREDDIT/comments/POST_ID/slug/",
-    "subreddit": "subreddit_name",
-    "title": "Post title from search results",
-    "reason": "One sentence: why this post relates to the topic"
-  }
-]
+RETURN ONLY THIS JSON ARRAY FORMAT:
+[{"url":"https://www.reddit.com/r/subreddit/comments/postid/slug/","subreddit":"name","title":"title","reason":"why"}]
 
-Include every Reddit post you found (aim for 3–8). Output ONLY the JSON array.
+ZERO OTHER TEXT. If no posts: []
 `.trim()
 
-// For Claude :online — Claude will hallucinate plausible-looking URLs if not strictly constrained.
-// Force it to treat this as a tool-use search task, not a generation task.
-const buildCitationSearchSystemMessageForClaude = (prompt) => `
-You have web search access. You MUST search before responding.
+// For Claude - use web search but return ONLY JSON, zero other text
+const buildCitationSearchSystemMessageForClaude = (prompt) => `CRITICAL: Return ONLY valid JSON. NO text before or after. NO explanations.
 
-Execute this search right now: "${prompt} reddit"
+Using web search, find Reddit posts about: "${prompt}"
 
-Then execute a second search: "${prompt} discussion reddit.com"
+Return this format exactly:
+[{"url":"...","subreddit":"...","title":"..."}]
 
-From your actual search results, extract Reddit post URLs only.
+If no posts found: []
+If error: []
 
-CRITICAL RULES — violations will make the response useless:
-- Every URL MUST come directly from your search results. Do NOT construct or guess any URL.
-- URLs MUST follow this pattern: https://www.reddit.com/r/{subreddit}/comments/{id}/
-- The post title MUST match what appeared in your search results for that URL.
-- If your search returned fewer than 3 Reddit posts, return only what you found.
-- If your search returned zero Reddit posts, return exactly: []
-
-Return ONLY this JSON array, nothing else:
-[
-  {
-    "url": "https://www.reddit.com/r/SUBREDDIT/comments/POST_ID/slug/",
-    "subreddit": "subreddit_name",
-    "title": "Exact title from search results",
-    "reason": "One sentence: how this post relates to the search topic"
-  }
-]
+NO other text. Only JSON.
 `.trim()
 
 const buildCitationSearchUserMessage = (prompt, domain) => `Search reddit.com for posts about: "${prompt}". Use the search query: site:reddit.com ${prompt}. Domain for context: ${domain && domain.length ? domain : 'N/A'}. Return only the JSON array of real Reddit post URLs found.`
@@ -1510,6 +1471,21 @@ async function testCitations(prompts, domain, competitors = []) {
         const controller = new AbortController()
         const timeoutId = setTimeout(() => controller.abort(), CITATION_SEARCH_TIMEOUT_MS)
         
+        // Web plugin enabled for fresh, current Reddit data
+        // Temperature set to 0 for deterministic output (prevents model from explaining search)
+        const requestBody = {
+          model,
+          messages: [
+            { role: 'system', content: systemMessage },
+            { role: 'user', content: userMessage }
+          ],
+          temperature: 0,  // Deterministic - prevents explanations/rambling
+          top_p: 0.1,  // Reduce randomness
+          max_tokens: CITATION_SEARCH_MAX_TOKENS,
+          stream: false,
+          plugins: [{ id: 'web' }]  // Web search for current Reddit discussions
+        }
+        
         const resp = await fetch(OPENROUTER_ENDPOINT, {
           method: 'POST',
           signal: controller.signal,
@@ -1519,17 +1495,7 @@ async function testCitations(prompts, domain, competitors = []) {
             'HTTP-Referer': 'https://infrasity.com',
             'X-Title': 'Infrasity SERP Scout - Reddit Citation Search'
           },
-          body: JSON.stringify({
-            model,
-            messages: [
-              { role: 'system', content: systemMessage },
-              { role: 'user', content: userMessage }
-            ],
-            temperature: CITATION_SEARCH_TEMPERATURE,
-            max_tokens: CITATION_SEARCH_MAX_TOKENS,
-            stream: false,
-            plugins: [{ id: 'web' }]
-          })
+          body: JSON.stringify(requestBody)
         })
         
         clearTimeout(timeoutId)
@@ -1542,7 +1508,30 @@ async function testCitations(prompts, domain, competitors = []) {
         const json = await resp.json()
         const raw = json?.choices?.[0]?.message?.content || ''
         console.log(`[testCitations] ${model} RAW RESPONSE (${raw.length} chars):`, raw.slice(0, 800))
-        const parsed = JSON.parse(extractJsonFromText(raw))
+        
+        // Handle empty responses - sometimes models return nothing
+        if (!raw || raw.trim().length === 0) {
+          console.warn(`[testCitations] ${model} returned empty response (0 chars), skipping`)
+          record.models[model] = { error: 'Model returned empty response' }
+          continue  // Skip to next model
+        }
+        
+        let parsed = null
+        try {
+          parsed = JSON.parse(extractJsonFromText(raw))
+        } catch (parseError) {
+          console.warn(`[testCitations] ${model} JSON parsing failed, skipping this model`, parseError.message)
+          record.models[model] = { error: `Failed to parse response: ${parseError.message}` }
+          continue  // Skip to next model
+        }
+        
+        // Verify parsed is actually an array (not an object or other type)
+        if (!Array.isArray(parsed)) {
+          console.warn(`[testCitations] ${model} returned non-array JSON (${typeof parsed}), skipping this model`)
+          record.models[model] = { error: `Expected array, got ${typeof parsed}` }
+          continue  // Skip to next model
+        }
+        
         // Only keep Reddit posts whose URLs match a real post pattern:
         // reddit.com/r/{subreddit}/comments/{post_id}/...
         // STRICT validation to reject AI-hallucinated URLs
