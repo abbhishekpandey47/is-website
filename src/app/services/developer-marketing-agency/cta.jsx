@@ -2,8 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
-export default function CTA() {
+const ContactPopupButton = dynamic(
+  () => import("../../lp/reddit-marketing-agency/ContactPopupButton"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="mt-6 md:mt-8 h-12 w-40 rounded-full bg-white/10 animate-pulse" />
+    ),
+  }
+);
+
+export default function CTA({ isAdsVariant = false }) {
   return (
     <section className="max-w-6xl mx-auto my-10 md:my-20 px-4 md:px-0">
     <div className="mx-0 sm:mx-6 md:mx-16 bg-gradient-to-r from-blue-800 to-purple-800 relative flex flex-col items-center rounded-xl p-8 sm:p-12 md:p-16 text-center overflow-hidden bg-cover bg-no-repeat"
@@ -14,12 +25,22 @@ export default function CTA() {
       </h2>
 
       {/* CTA Button */}
-      <Link
-        href="/contact"
-        className="mt-6 md:mt-8 inline-flex items-center text-base md:text-lg rounded-full bg-black px-8 sm:px-10 md:px-14 py-3 sm:py-4 md:py-5 text-white font-medium hover:bg-gray-900 transition z-10"
-      >
-        Book a Demo
-      </Link>
+      {isAdsVariant ? (
+        <div className="mt-6 md:mt-8 z-10">
+          <ContactPopupButton
+            buttonText="Book a Strategy Call"
+            width="w-52"
+            height="h-12"
+          />
+        </div>
+      ) : (
+        <Link
+          href="/contact"
+          className="mt-6 md:mt-8 inline-flex items-center text-base md:text-lg rounded-full bg-black px-8 sm:px-10 md:px-14 py-3 sm:py-4 md:py-5 text-white font-medium hover:bg-gray-900 transition z-10"
+        >
+          Book a Demo
+        </Link>
+      )}
 
       {/* Background Decorative Image 1 */}
       <div className="absolute -bottom-5 sm:-bottom-8 md:-bottom-10 left-0 sm:left-1">

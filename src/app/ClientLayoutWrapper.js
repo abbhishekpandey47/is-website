@@ -71,6 +71,11 @@ export function ClientLayoutWrapper({ children }) {
     isAdsApp &&
     safePathname.startsWith("/services/ai-geo-optimization-agency");
 
+  const isDeveloperMarketingAdsService =
+    routeReady &&
+    isAdsApp &&
+    safePathname.startsWith("/services/developer-marketing-agency");
+
   const shouldShowAwardBanner =
     routeReady &&
     !hideAwardBanner &&
@@ -86,7 +91,7 @@ export function ClientLayoutWrapper({ children }) {
   const isRedditMarketingAgencyLp =
     routeReady && safePathname.startsWith("/lp/reddit-marketing-agency");
 
-  const shouldShowAdsLayout = isRedditMarketingAgencyLp || isGeoAdsService;
+  const shouldShowAdsLayout = isRedditMarketingAgencyLp || isGeoAdsService || isDeveloperMarketingAdsService;
 
   return (
     <Suspense fallback={null}>

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { useSearchParams } from "next/navigation";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import Hero from "./hero";
 import Card1 from "./card1";
@@ -86,15 +87,17 @@ const LazySection = ({ Component, dividerClass = "mt-16 mb-1", showDivider = tru
 };
 
 export default function Page() {
+  const searchParams = useSearchParams();
+  const isAdsVariant = searchParams.get('app') === 'ads';
   return (
     <div className="">
-      <Hero />
+      <Hero isAdsVariant={isAdsVariant} />
       <NewMarquee />
       
       {/* Card1 - Above fold, no lazy loading */}
       <SectionWrapper>
         <GradientDivider className="mt-8 mb-1" />
-        <Card1 />
+        <Card1 isAdsVariant={isAdsVariant} />
       </SectionWrapper>
       
       {/* Card2 - Lazy load */}
@@ -112,7 +115,7 @@ export default function Page() {
       {/* IntegrationsSection - Lazy load */}
       <SectionWrapper>
         <GradientDivider className="mt-16 mb-16" />
-        <LazySection Component={IntegrationsSection} showDivider={false} gradient={false} />
+        <LazySection Component={() => <IntegrationsSection isAdsVariant={isAdsVariant} />} showDivider={false} gradient={false} />
       </SectionWrapper>
       
       {/* FeatureComparison - Lazy load */}
@@ -158,7 +161,7 @@ export default function Page() {
       {/* CTA - Lazy load */}
       <SectionWrapper>
         <GradientDivider className="mt-10 mb-12" />
-        <LazySection Component={CTA} showDivider={false} gradient={false} />
+        <LazySection Component={() => <CTA isAdsVariant={isAdsVariant} />} showDivider={false} gradient={false} />
       </SectionWrapper>
     </div>
   )

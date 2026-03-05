@@ -1,7 +1,18 @@
 import React from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 
-const IntegrationsSection = () => {
+const ContactPopupButton = dynamic(
+  () => import('../../lp/reddit-marketing-agency/ContactPopupButton'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-11 w-40 rounded-lg bg-gray-700 animate-pulse" />
+    ),
+  }
+);
+
+const IntegrationsSection = ({ isAdsVariant = false }) => {
   const topRowIntegrations = [
     {
       name: 'GitHub',
@@ -161,12 +172,22 @@ const IntegrationsSection = () => {
         <p className="font-[quicksand] text-gray-400">
           Drowning in product and GTM tasks? Let's take developer marketing off your plate
         </p>
-        <a 
-          className="px-6 py-3 border border-gray-500 text-white rounded-lg hover:bg-gray-800 transition-colors font-[quicksand]"
-          href="/contact"
-        >
-          Talk to a devrel
-        </a>
+        {isAdsVariant ? (
+          <ContactPopupButton
+            buttonText="Talk to a devrel"
+            width="w-44"
+            height="h-11"
+            textSize="text-base"
+            textWeight="quicksand-semibold"
+          />
+        ) : (
+          <a
+            className="px-6 py-3 border border-gray-500 text-white rounded-lg hover:bg-gray-800 transition-colors font-[quicksand]"
+            href="/contact"
+          >
+            Talk to a devrel
+          </a>
+        )}
       </div>
     </div>
   );
