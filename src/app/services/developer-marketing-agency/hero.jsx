@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CalendarBooking from "../../calendarButton";
@@ -52,10 +51,10 @@ export default function Hero({ isAdsVariant = false }) {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="relative mx-auto max-w-3xl text-center">
             <h1 className="font-[quicksand] bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-5xl/[1.07] font-bold tracking-tight text-transparent md:text-5xl/[1.07]">
-              The Developer Marketing Agency Behind Top SaaS Startups
+              The Developer Marketing Agency That Ships as Fast as You Do
             </h1>
             <p className="font-[quicksand]  mt-6 text-lg font-medium text-zinc-400 md:text-xl">
-              We work with leading infra and AI companies to transform product features into developer adoption through GitHub repos, community-first content, and technical storytelling.
+              We&apos;re the top rated developer marketing agency for dev-first SaaS companies. From technical content to community presence to AI search visibility we build the full growth engine so developers discover, evaluate, and adopt your product.
             </p>
 
             {/* Buttons */}
@@ -74,19 +73,7 @@ export default function Hero({ isAdsVariant = false }) {
                    <CalendarBooking buttonText="Book a Demo" />
                  )}
                </div>
-             </div>             {/* Learn More */}
-              <div className="">
-                <a href="/#intro" className="flex flex-col items-center gap-1">
-                  <p className="text-sm/6 text-zinc-400 duration-300 group-hover:text-white">
-                    Learn more
-                  </p>
-                  <ArrowDown
-                    className="w-4 h-4 text-zinc-400 duration-300 
-                               group-hover:translate-y-1.5 group-hover:text-white"
-                  />
-                </a>
-              </div>
-            </div>
+             </div>            </div>
           </div>
 
 

@@ -2,29 +2,30 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import CalendarBooking from "../../calendarButton";
 
 const FeatureCards = () => {
   const cards = [
     {
       id: 1,
-      title: "Ship product knowledge, not just features",
-      description: "Developer adoption depends on crisp docs, release notes, and GitHub examples. We build these so your product is discoverable and usable from day one.",
+      title: "Docs That Convert, Not Just Inform",
+      description: "API references, SDK guides, integration walkthroughs, and architecture explainers — structured code-first so developers go from discovery to first API call in minutes. Built for humans and LLM crawlers alike.",
       imageAlt: "MCP servers illustration",
       image: "c1.png",
       design: < MCPToolsInterface />
     },
     {
       id: 2,
-      title: "Show up where developers are",
-      description: "From Reddit to GitHub Discussions, we seed conversations that spark trust. No spam, just consistent engagement where your users already live.",
+      title: "Show Up Where Developers Evaluate",
+      description: "We seed 40+ genuine technical contributions monthly across Reddit, GitHub Discussions, and Dev.to. No spam — just consistent developer marketing in the communities where your buyers already compare tools.",
       imageAlt: "Auth management illustration",
       image: "c2.png",
       design: <OrbitLogos />
     },
     {
       id: 3,
-      title: "Content Developers Actually Read",
-      description: "From hands-on tutorials to comparison blogs and SDK examples, Infrasity creates the content that answers developer questions and builds long-term trust.",
+      title: "Content That Ranks and Gets Cited",
+      description: "From hands-on tutorials to comparison pages and SDK examples, our developer marketing services create the technical content that ranks on Google, gets cited by ChatGPT, and answers the questions developers actually search for.",
       imageAlt: "Tools illustration",
       image: "c3.png",
       design: <div className="relative w-full flex flex-wrap justify-center bg-black overflow-hidden min-h-[200px] -mb-5 mt-5">
@@ -62,8 +63,8 @@ const FeatureCards = () => {
     },
     {
       id: 4,
-      title: "From One Video to Many Surfaces",
-      description: "We turn a single demo into YouTube explainers, doc embeds, shorts, and landing page assets — giving your product visibility everywhere developers learn.",
+      title: "From One Demo to Every Surface",
+      description: "We turn a single product walkthrough into YouTube explainers, doc embeds, shorts, and landing page assets — giving your developer marketing reach across every channel where engineers learn and evaluate.",
       imageAlt: "Custom requests illustration",
       image: "c4.png",
       design: <DarkPipedreamDiagram />
@@ -107,12 +108,13 @@ const FeatureCards = () => {
               {card.description}
             </p>
 
-            <button className="px-5 py-2 text-sm font-medium text-gray-200 bg-gray-700/20 border border-gray-600 rounded-md hover:bg-gray-600/30 hover:border-gray-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-800">
-              Learn more
-            </button>
           </div>
         </div>
       ))}
+    </div>
+
+    <div className="mt-12 flex justify-center">
+      <CalendarBooking buttonText="Book a Demo" />
     </div>
   </div>
 </div>
