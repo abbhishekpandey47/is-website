@@ -277,8 +277,8 @@ const IndustrySection = memo(() => {
  </div>
  <div className="z-[1] relative">
  <div className="mx-[12px] md:mx-auto text-center relative z-[1] max-w-[692px] pt-[110px]">
- <h2 className="font-poppins text-[32px] lg:text-[38px] text-white font-medium mb-[16px]">The SaaS categories we help win</h2>
- <p className="font-inter text-[18px] text-gray-400">See how Infrasity accelerates adoption across different types of developer-first companies.</p>
+ <h2 className="font-poppins text-[32px] lg:text-[38px] text-white font-medium mb-[16px]">The Developer Marketing Categories We Help Win</h2>
+ <p className="font-inter text-[18px] text-gray-400">See how our developer marketing agency accelerates adoption across different types of developer-first companies.</p>
  </div>
  </div>
  <svg

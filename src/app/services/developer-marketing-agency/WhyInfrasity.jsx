@@ -9,12 +9,11 @@ export default function WhyInfrasity() {
       {/* Header */}
       <div className="max-w-xl flex flex-col gap-2">
         <h2 className="text-3xl md:text-4xl font-semibold text-zinc-400">
-        Why companies choose{" "}
-          <span className="specialtext">Infrasity for developer marketing</span>
+        Why Startups Choose{" "}
+          <span className="specialtext">Infrasity as Their Developer Marketing Agency</span>
         </h2>
         <p className="text-zinc-400">
-          Build secure, scalable applications using a developer platform built
-          for dependability.
+          Technical content. Community presence. Developer docs. GitHub repos. AI visibility. We build the whole engine, custom-fit to your product and your competitors.
         </p>
       </div>
 
