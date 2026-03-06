@@ -98,14 +98,14 @@ const IndustryCard = memo(({ icon, title, description, href }) => {
     <Link href={href} className="flex">
       <div
         ref={cardRef}
-        className="group flex relative w-full rounded-[20px] md:w-[338px] h-[243px] px-[32px] py-[10px] flex-col justify-center cursor-pointer border border-gray-800"
+        className="group flex relative w-full rounded-[20px] md:w-[338px] min-h-[243px] px-[32px] py-[24px] flex-col justify-center cursor-pointer border border-gray-800"
       >
         <div className="absolute inset-[1px] z-10 rounded-[19px] bg-[#01041A]"></div>
 
         <div className="relative z-30">
           {icon}
           <h3 className="font-poppins text-white text-[22px] mt-[8px]">{title}</h3>
-          <p className="font-inter text-gray-400 mb-[16px]">{description}</p>
+          <p className="font-inter text-gray-400 text-sm mb-[16px]">{description}</p>
         </div>
 
         <div
@@ -177,8 +177,8 @@ const IndustrySection = memo(() => {
          <path d="M2.22 10.773H8.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"></path>
        </g>
      </svg>,
-     title: "Observability & DevOps",
-     description: "Driving adoption with tutorials, benchmarks, and integrations that prove value in real production setups.",
+     title: "DevTools, Observability & DevOps",
+     description: "Developers don't evaluate DevTools in a boardroom. They benchmark them in production, compare them on Reddit, and trust what their peers already shipped. We make sure your tool shows up and wins in all three.",
      href: "/services/developer-marketing-agency",
      alwaysShow: true
    },
@@ -186,8 +186,8 @@ const IndustrySection = memo(() => {
      icon: <svg width="24" height="25" viewBox="0 0 24 25" xmlns="http://www.w3.org/2000/svg" className="text-gray-400">
        <path d="M12 2.29a10.485 10.485 0 0 1 9.635 6.344c.546 1.27.848 2.669.848 4.139 0 5.79-4.693 10.483-10.483 10.483-5.79 0-10.483-4.693-10.483-10.483C1.517 6.983 6.21 2.29 12 2.29zM6.311 6.212l-.008.007a8.678 8.678 0 0 0-2.787 4.695h1.776a2.817 2.817 0 0 1 2.816 2.817v.958c0 .562.456 1.017 1.017 1.017a2.817 2.817 0 0 1 2.817 2.817l-.001 2.933H12c.68 0 1.34-.078 1.975-.226v-3.666a2.817 2.817 0 0 1 2.817-2.816h3.666a8.71 8.71 0 0 0 .225-1.975c0-1.03-.179-2.017-.508-2.934H17.75c-.557 0-1.017.46-1.017 1.017a2.817 2.817 0 0 1-5.633 0c0-.561-.455-1.016-1.017-1.016a3.775 3.775 0 0 1-3.772-3.628zm-2.994 6.56a8.686 8.686 0 0 0 6.824 8.485v-2.734c0-.562-.454-1.017-1.016-1.017a2.817 2.817 0 0 1-2.817-2.817v-.958c0-.561-.455-1.017-1.016-1.017H3.317v.059zm13.475 3.776c-.562 0-1.017.455-1.017 1.016v3.03a8.719 8.719 0 0 0 4.046-4.045l-3.03-.001zM12 4.09c-1.4 0-2.72.33-3.891.918v1.057c0 1.09.884 1.975 1.974 1.975a2.817 2.817 0 0 1 2.817 2.816 1.017 1.017 0 1 0 2.033 0A2.822 2.822 0 0 1 17.75 8.04l1.53-.001A8.676 8.676 0 0 0 12 4.089z" fill="currentColor" fillRule="nonzero"></path>
      </svg>,
-     title: "AI Infra & Agentic Tools",
-     description: "Building technical narratives that explain complex agent workflows in a way developers can run and trust.",
+     title: "AI Infra, Agents & LLM Apps",
+     description: "The agentic layer has no playbook yet — we help you write it. From framework comparisons to multi-agent workflow narratives, we build the technical authority that makes your product the default choice when developers are still figuring out the stack.",
      href: "/services/developer-marketing-agency",
      alwaysShow: true
    },
