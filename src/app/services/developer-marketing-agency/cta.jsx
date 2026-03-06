@@ -21,7 +21,7 @@ export default function CTA({ isAdsVariant = false }) {
     >
       {/* Title */}
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white max-w-xl z-10">
-        YC-backed SaaS companies trust Infrasity to drive adoption.<br className="hidden sm:block" />Ready to join them?
+        70+ dev-first startups trust Infrasity for their developer marketing.<br className="hidden sm:block" />Ready to be next?
       </h2>
 
       {/* CTA Button */}

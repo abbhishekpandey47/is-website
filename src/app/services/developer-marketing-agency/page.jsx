@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import Hero from "./hero";
 import Card1 from "./card1";
+import RealResult from "./realresults";
 import NewMarquee from "@/Components/NewMarquee";
 
 // Lazy load with dynamic imports for better performance
@@ -27,10 +28,6 @@ const IntegrationsSection = dynamic(() => import("./IntegrationsSection"), {
   loading: () => <div className="h-96 w-full" />
 });
 const FeatureComparison = dynamic(() => import("./FeatureComparison"), { 
-  ssr: false,
-  loading: () => <div className="h-96 w-full" />
-});
-const RealResult = dynamic(() => import("./realresults"), { 
   ssr: false,
   loading: () => <div className="h-96 w-full" />
 });
@@ -93,8 +90,14 @@ export default function Page() {
     <div className="">
       <Hero isAdsVariant={isAdsVariant} />
       <NewMarquee />
-      
-      {/* Card1 - Above fold, no lazy loading */}
+
+      {/* RealResult - Second fold, no lazy load */}
+      <SectionWrapper>
+        <GradientDivider className="mt-8 mb-1" />
+        <RealResult />
+      </SectionWrapper>
+
+      {/* Card1 */}
       <SectionWrapper>
         <GradientDivider className="mt-8 mb-1" />
         <Card1 isAdsVariant={isAdsVariant} />
@@ -120,9 +123,6 @@ export default function Page() {
       
       {/* FeatureComparison - Lazy load */}
       <LazySection Component={FeatureComparison} />
-      
-      {/* RealResult - Lazy load */}
-      <LazySection Component={RealResult} dividerClass="mt-10 mb-12" />
       
       {/* Testimonials - Lazy load */}
       <LazySection Component={Testimonials} dividerClass="mt-10" />

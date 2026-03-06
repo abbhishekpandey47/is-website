@@ -231,7 +231,7 @@ const Testimonials = () => {
         <div className="whyinfra"></div>
         <div className="flex justify-center text-white pt-20 testiMonialsHead overflow-y-hidden">
           <h2 className="text-center max-sm:text-[1.6em] text-[2em] w-[80%] max-sm:w-[95%] quicksand-semibold text-[wheat]">
-            Hear what our customers say about us
+            Trusted by founders, CTOs, and developer marketing leads
           </h2>
         </div>
         <div className="flex justify-center text-white testiMonialsHead">
