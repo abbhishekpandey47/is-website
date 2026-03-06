@@ -126,7 +126,7 @@ const IntegrationsSection = ({ isAdsVariant = false }) => {
       Trusted by SaaS teams across DevTools, Infra, and AI
       </h2>
       <p className="font-['Inter'] text-[18px] text-gray-400 max-w-[928px] mx-auto text-center mb-10">
-      From MLOps to Cloud Infra, from YC-backed startups to growth-stage SaaS — we’ve built adoption engines that scale.
+      From Kubernetes to headless browsers to AI agent platforms we&apos;ve shipped content, docs, community presence, and GitHub repos across all of it. We&apos;re not learning your stack on your dime.
       </p>
 
       <div className="relative max-w-[1200px] mx-auto">

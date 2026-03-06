@@ -118,9 +118,12 @@ export default function FeatureComparison() {
         {/* Title */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl">
-            <span className="text-white">Before</span> vs{" "}
-            <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">After Infrasity</span>
+            <span className="text-white">What your developer marketing looks like</span>{" "}
+            <span className="bg-gradient-to-r from-[#1966ff] via-[#d129ff] to-[#8c1eff] bg-clip-text animate-gradient text-transparent">before and after Infrasity</span>
           </h2>
+          <p className="mt-4 text-lg text-zinc-400 max-w-2xl mx-auto">
+            Most startups come to us with outdated docs, zero Reddit presence, and no LLM visibility. Here&apos;s what the first 90 days look like.
+          </p>
         </div>
 
         {/* Columns */}
