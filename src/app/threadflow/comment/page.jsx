@@ -252,7 +252,7 @@ const statuses = useMemo(() => {
       return post.posted_comment_status?.toLowerCase() === selectedStatus?.toLowerCase();
     })();
     const matchCompanyId =
-      selectedCompanyId === "all" || post.company_id === selectedCompanyId;
+      selectedCompanyId === "all" || selectedCompanyId === "select" || post.company_id === selectedCompanyId;
     const matchesDate = matchesDateRange(post, dateRange);
 
     return matchesSearch && matchesCategory && matchesStatus && matchCompanyId && matchesDate;
