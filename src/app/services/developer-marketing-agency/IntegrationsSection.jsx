@@ -182,10 +182,10 @@ const IntegrationsSection = ({ isAdsVariant = false }) => {
           />
         ) : (
           <a
-            className="px-6 py-3 border border-gray-500 text-white rounded-lg hover:bg-gray-800 transition-colors font-[quicksand]"
+            className="inline-flex items-center text-base rounded-full bg-black px-10 py-4 text-white font-medium hover:bg-gray-900 transition ring-1 ring-white/10 font-[quicksand]"
             href="/contact"
           >
-            Talk to a devrel
+            Talk to a Devrel
           </a>
         )}
       </div>

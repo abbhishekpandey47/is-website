@@ -1,4 +1,5 @@
 import { FileText, Layout, Video, Search, BookOpen, MessageCircle } from 'lucide-react/dist/cjs/lucide-react';
+import CalendarBooking from "../../calendarButton";
 
 // Case study data
 const caseStudies = [
@@ -98,6 +99,10 @@ export default function RealResult() {
         {caseStudies.map((study) => (
           <CaseStudyCard key={study.id} study={study} />
         ))}
+      </div>
+
+      <div className="mt-10 flex justify-center">
+        <CalendarBooking buttonText="Book a Demo" />
       </div>
     </section>
   );
