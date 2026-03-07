@@ -31,11 +31,11 @@ const FeatureComparison = dynamic(() => import("./FeatureComparison"), {
   ssr: false,
   loading: () => <div className="h-96 w-full" />
 });
-const Testimonials = dynamic(() => import("./Testimonial"), { 
+const Testimonials = dynamic(() => import("../../lp/reddit-marketing-agency/testimonials"), { 
   ssr: false,
   loading: () => <div className="h-96 w-full" />
 });
-const SuccessStories = dynamic(() => import("../../../Components/SuccessStories"), { 
+const SuccessStories = dynamic(() => import("../../lp/reddit-marketing-agency/testimonials"), { 
   ssr: false,
   loading: () => <div className="h-96 w-full" />
 });
@@ -94,7 +94,7 @@ export default function Page() {
       {/* RealResult - Second fold, no lazy load */}
       <SectionWrapper>
         <GradientDivider className="mt-8 mb-1" />
-        <RealResult />
+        <RealResult isAdsVariant={isAdsVariant} />
       </SectionWrapper>
 
       {/* Card1 */}
@@ -125,39 +125,8 @@ export default function Page() {
       <LazySection Component={FeatureComparison} />
       
       {/* Testimonials - Lazy load */}
-      <LazySection Component={Testimonials} dividerClass="mt-10" />
-      
-      {/* SuccessStories - Lazy load */}
-      <SectionWrapper>
-        <GradientDivider className="mt-10 mb-12" />
-        <LazySection Component={SuccessStories} showDivider={false} gradient={false} />
-      </SectionWrapper>
-      
-      {/* Video Testimonials - Lazy load */}
-      <SectionWrapper>
-        <GradientDivider className="mt-10 mb-1" />
-        <div className="relative mt-28">
-          {/* Background Blob / Gradient */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 z-0"
-            style={{
-              background:
-                "radial-gradient(circle at 30% 30%, #ff79c6, #5b36ff 70%)",
-              opacity: 0.3,
-              filter: "blur(120px)",
-            }}
-          ></div>
-          <div className="flex justify-center">
-            <LazySection 
-              Component={() => <VideoTestimonials className="max-w-6xl" items={Videos} />}
-              showDivider={false}
-              gradient={false}
-            />
-          </div>
-        </div>
-      </SectionWrapper>
-      
+      <LazySection Component={() => <Testimonials subHeading="What founders and marketing teams say after growing their developer community with Infrasity." />} dividerClass="mt-10" />
+            
       {/* CTA - Lazy load */}
       <SectionWrapper>
         <GradientDivider className="mt-10 mb-12" />

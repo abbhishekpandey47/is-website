@@ -17,8 +17,10 @@ import { useToast } from "@/hooks/use-toast";
 import {
   Sparkles, AlertCircle, CheckCircle, Search, MessageSquare, Zap,
   ExternalLink, Globe, FileText, Tag, Bookmark, BarChart2, Plus, X,
-  ChevronRight, Edit2, Save, Loader2,
+  ChevronRight, Edit2, Save, Loader2, Users,
 } from "lucide-react";
+import CompetitiveSenseTab from "./components/CompetitiveSenseTab";
+import AnalysisPanel from "./components/AnalysisPanel";
 
 // ── Model badge styles ────────────────────────────────────────────────────────
 
@@ -400,12 +402,8 @@ export default function SerpScout() {
 
       if (res.fromExisting) {
         setSaved(true);
-        toast({ title: "Loaded!", description: "Existing data loaded — jumping to Analyze." });
-        
-        // Manual SERP search only - removed auto-load
-        // SERP analysis will only run when user clicks on keyword and clicks search button
-        
-        setActiveTab("analyze");
+        toast({ title: "Welcome back!", description: `${kws.length} saved keywords loaded. Review or edit, then head to Analyze.` });
+        setActiveTab("keywords");
       } else {
         setActiveTab("overview");
         toast({ title: "Domain analyzed", description: `${kws.length} keywords generated.` });
@@ -719,7 +717,7 @@ export default function SerpScout() {
 
       {/* Tab navigation */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-5 w-full sm:w-auto sm:flex">
+        <TabsList className="grid grid-cols-7 w-full sm:w-auto sm:flex overflow-x-auto">
           <TabsTrigger value="domain" className="gap-1.5">
             <Globe className="h-3.5 w-3.5" />
             <span className="hidden sm:inline text-xs">Domain</span>
@@ -749,6 +747,10 @@ export default function SerpScout() {
           <TabsTrigger value="generate" disabled={!saved} className="gap-1.5">
             <Sparkles className="h-3.5 w-3.5" />
             <span className="hidden sm:inline text-xs">Generate</span>
+          </TabsTrigger>
+          <TabsTrigger value="compete" disabled={!saved} className="gap-1.5">
+            <Users className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline text-xs">Compete</span>
           </TabsTrigger>
         </TabsList>
 
@@ -793,16 +795,16 @@ export default function SerpScout() {
                   <CheckCircle className="h-4 w-4 shrink-0" />
                   <span className="flex-1">
                     {rawResult?.fromExisting
-                      ? "Welcome back! Your company overview and keywords are ready."
+                      ? `Welcome back! ${keywords.length} keywords loaded — review and edit below, then run your analysis.`
                       : `${keywords.length} keywords generated. Review your company overview next.`}
                   </span>
                   <Button
                     variant="ghost"
                     size="sm"
                     className="h-7 text-xs shrink-0"
-                    onClick={() => setActiveTab("overview")}
+                    onClick={() => setActiveTab(rawResult?.fromExisting ? "keywords" : "overview")}
                   >
-                    Continue <ChevronRight className="h-3 w-3 ml-0.5" />
+                    {rawResult?.fromExisting ? "Review Keywords" : "Continue"} <ChevronRight className="h-3 w-3 ml-0.5" />
                   </Button>
                 </div>
               )}
@@ -939,6 +941,18 @@ export default function SerpScout() {
         {/* ── Tab 3: Keywords ───────────────────────────────────────────────── */}
         <TabsContent value="keywords" className="mt-6">
           <div className="space-y-4">
+            {rawResult?.fromExisting && (
+              <div className="flex items-start gap-3 bg-primary/5 border border-primary/20 rounded-lg px-4 py-3 text-sm">
+                <CheckCircle className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-foreground">Your saved keywords are ready</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Review, add, or remove keywords below — then head to Analyze when you&apos;re good to go.</p>
+                </div>
+                <Button size="sm" className="h-7 text-xs shrink-0" onClick={() => setActiveTab("analyze")}>
+                  Go to Analyze <ChevronRight className="h-3 w-3 ml-0.5" />
+                </Button>
+              </div>
+            )}
             <div className="flex items-center gap-3 text-sm">
               <Tag className="h-4 w-4 text-primary" />
               <span className="font-medium">{selectedKwIds.size} of {keywords.length} selected</span>
@@ -1191,326 +1205,28 @@ export default function SerpScout() {
 
         {/* ── Tab 5: Analyze ────────────────────────────────────────────────── */}
         <TabsContent value="analyze" className="mt-6">
-          {citationSummary && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-              {[
-                { label: "Prompts Searched", value: citationSummary.totalPrompts },
-                { label: "Models Used", value: citationSummary.totalModels },
-                { label: "Reddit Posts Found", value: citationSummary.totalPosts },
-                { label: "Brand Mentions", value: citationSummary.selfMentions },
-              ].map(({ label, value }) => (
-                <Card key={label}>
-                  <CardContent className="pt-4 pb-3">
-                    <p className="text-2xl font-bold">{value}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">{label}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Left controls */}
-            <div className="space-y-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-sm flex items-center gap-2">
-                    <Search className="h-4 w-4 text-primary" />SERP Analysis
-                  </CardTitle>
-                  <CardDescription className="text-xs">
-                    Find Reddit posts currently ranking on Google for your keyword.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {Array.from(selectedKwIds).map(globalIdx => {
-                    const kw = keywords[globalIdx];
-                    if (!kw) return null;
-                    const isSelected = selectedKwIdx === globalIdx;
-                    const serpData = serpResults[kw.term];
-                    return (
-                      <button
-                        key={globalIdx}
-                        onClick={() => setSelectedKwIdx(globalIdx)}
-                        className={`w-full text-left px-3 py-2 rounded-md text-sm border transition-colors ${
-                          isSelected
-                            ? "bg-primary text-black border-primary"
-                            : "bg-muted/30 border-border hover:bg-muted"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between gap-1">
-                          <span className="truncate">{kw.term}</span>
-                          {serpData && (
-                            <span className="text-[10px] shrink-0 opacity-70">
-                              {serpData.topRedditPosts.length + serpData.newRedditPosts.length} posts
-                            </span>
-                          )}
-                        </div>
-                      </button>
-                    );
-                  })}
-
-                  {selectedKwIds.size === 0 && (
-                    <p className="text-xs text-muted-foreground italic">No keywords saved. Go back to Save tab.</p>
-                  )}
-
-                  {selectedKwIdx !== null && (
-                    <Button onClick={handleSerpAnalysis} disabled={serpLoading} className="w-full" size="sm">
-                      {serpLoading
-                        ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Searching…</>
-                        : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run SERP Search</>
-                      }
-                    </Button>
-                  )}
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-sm flex items-center gap-2">
-                    <MessageSquare className="h-4 w-4 text-primary" />Citation Search
-                  </CardTitle>
-                  <CardDescription className="text-xs">
-                    Ask AI models to find Reddit posts matching your prompts. (Takes 30-60s)
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {citationPrompts.length === 0 ? (
-                    <p className="text-xs text-muted-foreground italic">
-                      Select a keyword to use its prompts, or add custom ones below.
-                    </p>
-                  ) : (
-                    <div className="space-y-1 max-h-36 overflow-y-auto pr-1">
-                      {citationPrompts.map((p, i) => (
-                        <p key={i} className="text-xs text-muted-foreground flex items-start gap-1">
-                          <span className="shrink-0 text-primary">•</span>{p}
-                        </p>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="flex gap-1.5 pt-1">
-                    <Input
-                      value={manualCitationInput}
-                      onChange={e => setManualCitationInput(e.target.value)}
-                      placeholder="Add custom prompt"
-                      className="h-7 text-xs"
-                      onKeyDown={e => {
-                        if (e.key === "Enter" && manualCitationInput.trim()) {
-                          setManualCitationPrompts(ps => [...ps, manualCitationInput.trim()]);
-                          setManualCitationInput("");
-                        }
-                      }}
-                    />
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="h-7 px-2 shrink-0"
-                      onClick={() => {
-                        if (manualCitationInput.trim()) {
-                          setManualCitationPrompts(ps => [...ps, manualCitationInput.trim()]);
-                          setManualCitationInput("");
-                        }
-                      }}
-                    >
-                      <Plus className="h-3 w-3" />
-                    </Button>
-                  </div>
-
-                  <Button
-                    onClick={handleCitationSearch}
-                    disabled={citationLoading || citationPrompts.length === 0}
-                    className="w-full"
-                    size="sm"
-                  >
-                    {citationLoading
-                      ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Searching…</>
-                      : <><Sparkles className="h-3.5 w-3.5 mr-1.5" />Run Citation Search</>
-                    }
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Right results panel */}
-            <div className="lg:col-span-2 space-y-4">
-              {serpLoading && (
-                <Card>
-                  <CardContent className="pt-6 space-y-3">
-                    <Skeleton className="h-4 w-1/2" />
-                    <Skeleton className="h-16 w-full rounded-lg" />
-                    <Skeleton className="h-16 w-full rounded-lg" />
-                    <Skeleton className="h-16 w-full rounded-lg" />
-                  </CardContent>
-                </Card>
-              )}
-
-              {kwSerpData && !serpLoading && (
-                <Card>
-                  <CardHeader>
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-1.5 flex-1">
-                        <Zap className="h-4 w-4 text-primary" />
-                        <CardTitle className="text-sm">SERP — {selectedKw?.term}</CardTitle>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 w-6 p-0 shrink-0"
-                        onClick={() => setSerpAccordionOpen(!serpAccordionOpen)}
-                      >
-                        <ChevronRight className={`h-4 w-4 transition-transform ${serpAccordionOpen ? 'rotate-90' : ''}`} />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  {serpAccordionOpen && (
-                    <CardContent className="space-y-5">
-                    {kwSerpData.topRedditPosts?.length > 0 && (
-                      <div>
-                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Top Ranking Posts</p>
-                        <div className="space-y-2">
-                          {kwSerpData.topRedditPosts.map((post, i) => (
-                            <PostCard
-                              key={i}
-                              post={post}
-                              brandLabel={companyName}
-                              allCompetitors={competitors}
-                              rank={(post.serp_rank || 999) <= 50 ? post.serp_rank : null}
-                              scannedData={scannedPostDetails[post.url || post.post_url]}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    {kwSerpData.newRedditPosts?.length > 0 && (
-                      <div>
-                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">New / Rising Posts</p>
-                        <div className="space-y-2">
-                          {kwSerpData.newRedditPosts.map((post, i) => (
-                            <PostCard
-                              key={i}
-                              post={post}
-                              brandLabel={companyName}
-                              allCompetitors={competitors}
-                              rank={(post.serp_rank || 999) <= 50 ? post.serp_rank : null}
-                              scannedData={scannedPostDetails[post.url || post.post_url]}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    {kwSerpData.suggestedPosts?.length > 0 && (
-                      <div>
-                        {/* LLM Suggested Engagement Posts - commented out for now
-                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">🎯 LLM Suggested Engagement Posts</p>
-                        <div className="space-y-2">
-                          {kwSerpData.suggestedPosts.map((post, i) => (
-                            <div key={i} className="rounded-lg border border-amber-500/20 bg-amber-50/30 dark:bg-amber-950/20 p-3 space-y-2">
-                              <PostCard
-                                post={post}
-                                brandLabel={companyName}
-                                allCompetitors={competitors}
-                                scannedData={scannedPostDetails[post.url || post.post_url]}
-                              />
-                              {post.engagementScore && (
-                                <div className="pt-2 border-t border-amber-500/20">
-                                  <p className="text-xs text-amber-700 dark:text-amber-400 font-semibold mb-1">Engagement Strategy:</p>
-                                  <p className="text-xs text-muted-foreground">{post.engagementStrategy}</p>
-                                  {post.engagementScore && (
-                                    <p className="text-[10px] text-amber-600 dark:text-amber-500 mt-1.5 font-semibold">Score: {post.engagementScore}/10</p>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                        */}
-                      </div>
-                    )}
-                    {!kwSerpData.topRedditPosts?.length && !kwSerpData.newRedditPosts?.length && (
-                      <p className="text-sm text-muted-foreground text-center py-4">No Reddit posts found for this keyword.</p>
-                    )}
-                    </CardContent>
-                  )}
-                </Card>
-              )}
-
-              {citationLoading && (
-                <Card>
-                  <CardContent className="pt-6 space-y-3">
-                    <Skeleton className="h-4 w-2/3" />
-                    <Skeleton className="h-20 w-full rounded-lg" />
-                    <Skeleton className="h-20 w-full rounded-lg" />
-                  </CardContent>
-                </Card>
-              )}
-
-              {!citationLoading && citationResults?.records?.length > 0 && citationResults.records.map((rec, i) => (
-                <Card key={i}>
-                  <CardHeader>
-                    <CardTitle className="text-sm leading-snug line-clamp-2">{rec.prompt}</CardTitle>
-                    <CardDescription className="text-xs">{new Date(rec.timestamp).toLocaleString()}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {Object.entries(rec.models).map(([modelId, value]) => {
-                      const style = getModelStyle(modelId);
-                      const posts = Array.isArray(value) ? value : [];
-                      const isError = !Array.isArray(value) && value && "error" in value;
-                      return (
-                        <div key={modelId}>
-                          <div className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border mb-2 ${style.bg} ${style.text} ${style.border}`}>
-                            {style.label}
-                          </div>
-                          {isError ? (
-                            <p className="text-xs text-destructive">{value.error}</p>
-                          ) : posts.length === 0 ? (
-                            <p className="text-xs text-muted-foreground italic">No results found for this model.</p>
-                          ) : (
-                            <div className="space-y-2">
-                              {posts.map((post, j) => (
-                                <PostCard
-                                  key={j}
-                                  post={post}
-                                  brandLabel={companyName}
-                                  allCompetitors={competitors}
-                                  scannedData={scannedPostDetails[post.url || post.post_url]}
-                                />
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </CardContent>
-                </Card>
-              ))}
-
-              {!citationLoading && citationResults && citationResults.records?.length === 0 && (
-                <Card>
-                  <CardContent className="pt-6 flex flex-col items-center text-center gap-3 h-48">
-                    <div className="opacity-50">
-                      <AlertCircle className="h-10 w-10 mx-auto" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium">No posts found</p>
-                      <p className="text-xs text-muted-foreground mt-1">Try different prompts or keywords to find more results.</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-
-              {!kwSerpData && !citationResults && !serpLoading && !citationLoading && (
-                <div className="flex flex-col items-center justify-center h-64 border border-dashed border-border rounded-lg text-muted-foreground gap-3">
-                  <BarChart2 className="h-10 w-10 opacity-20" />
-                  <div className="text-center text-sm">
-                    <p className="font-medium">No results yet</p>
-                    <p className="text-xs mt-1 opacity-70">
-                      Select a keyword and run SERP, or add prompts and run Citation Search.
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+          <AnalysisPanel
+            companyName={companyName}
+            competitors={competitors}
+            citationSummary={citationSummary}
+            keywords={keywords}
+            selectedKwIds={selectedKwIds}
+            selectedKwIdx={selectedKwIdx}
+            setSelectedKwIdx={setSelectedKwIdx}
+            serpResults={serpResults}
+            kwSerpData={kwSerpData}
+            serpLoading={serpLoading}
+            citationLoading={citationLoading}
+            citationResults={citationResults}
+            citationPrompts={citationPrompts}
+            manualCitationInput={manualCitationInput}
+            setManualCitationInput={setManualCitationInput}
+            manualCitationPrompts={manualCitationPrompts}
+            setManualCitationPrompts={setManualCitationPrompts}
+            handleSerpAnalysis={handleSerpAnalysis}
+            handleCitationSearch={handleCitationSearch}
+            scannedPostDetails={scannedPostDetails}
+          />
         </TabsContent>
 
         {/* ── Tab 6: Generate Posts ─────────────────────────────────────────────*/}
@@ -1690,6 +1406,24 @@ export default function SerpScout() {
               </Card>
             )}
           </div>
+        </TabsContent>
+
+        {/* ── Tab 7: Competitive Sense ─────────────────────────────────────────────────── */}
+        <TabsContent value="compete" className="mt-6">
+          <CompetitiveSenseTab
+            companyContext={rawResult}
+            companyId={companyId}
+            userId={auth.currentUser?.uid}
+            serpResults={serpResults}
+            scannedPostDetails={scannedPostDetails}
+            companyName={companyName}
+            competitors={competitors}
+            keywords={keywords}
+            selectedKwIds={selectedKwIds}
+            onDataLoaded={(data) => {
+              console.log('[SERP Scout] Competitive Sense data loaded:', data)
+            }}
+          />
         </TabsContent>
       </Tabs>
     </div>

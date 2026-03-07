@@ -1,5 +1,7 @@
-import { FileText, Layout, Video, Search, BookOpen, MessageCircle } from 'lucide-react/dist/cjs/lucide-react';
+import Link from 'next/link';
+import { FileText, Layout, Video, Search, BookOpen, MessageCircle, ArrowRight } from 'lucide-react/dist/cjs/lucide-react';
 import CalendarBooking from "../../calendarButton";
+import { useState } from 'react';
 
 // Case study data
 const caseStudies = [
@@ -54,17 +56,30 @@ const caseStudies = [
 ];
 
 
-function CaseStudyCard({ study }) {
-  return (
+function CaseStudyCard({ study, usesExplore, isAdsVariant }) {
+  const [showLink, setShowLink] = useState(false);
+  const isDisabled = isAdsVariant;
+
+  const cardContent = (
     <div
-      className="block border border-gray-700/50 rounded-xl shadow-lg overflow-hidden bg-gradient-to-br from-gray-900 to-black relative"
+      className={`block border border-gray-700/50 rounded-xl shadow-lg overflow-hidden bg-gradient-to-br from-gray-900 to-black relative group transition-all duration-500 ${
+        !isDisabled
+          ? 'cursor-pointer hover:border-[#5F64FF]/50 hover:shadow-2xl hover:shadow-[#5F64FF]/20 hover:scale-105 hover:-translate-y-1'
+          : 'hover:border-gray-600/80'
+      }`}
+      onMouseEnter={() => !isDisabled && setShowLink(true)}
+      onMouseLeave={() => setShowLink(false)}
     >
       <div className="p-6 flex flex-col">
         <div className="h-4 mb-4 flex items-center">
-          <div className="w-6 h-6 text-white">{study.icon}</div>
+          <div className={`w-6 h-6 transition-transform duration-300 ${
+            showLink && !isDisabled ? 'scale-110' : ''
+          }`}>{study.icon}</div>
         </div>
 
-        <h3 className="text-xl font-medium text-white mb-2">
+        <h3 className={`text-xl font-medium text-white mb-2 transition-colors duration-300 ${
+          showLink && !isDisabled ? 'text-[#5F64FF]' : ''
+        }`}>
           {study.title}
         </h3>
 
@@ -72,38 +87,60 @@ function CaseStudyCard({ study }) {
           {study.description}
         </p>
       </div>
+
+      {/* Hover Link - Only shows on hover and not for ads variant */}
+      {showLink && !isDisabled && (
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 flex items-center justify-between animate-in fade-in duration-200">
+          <button className="text-[#5F64FF] text-sm font-medium flex items-center gap-2 transition-all duration-200 hover:text-[#4d51e0]">
+            Explore
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      )}
     </div>
+  );
+
+  if (isDisabled) {
+    return cardContent;
+  }
+
+  return (
+    <Link href={study.href}>
+      {cardContent}
+    </Link>
   );
 }
 
 // Main Component
-export default function RealResult() {
+export default function RealResult({ isAdsVariant = false }) {
   return (
-    <section
-      className="border border-gray-700/30 py-16 px-4 md:px-8 lg:px-16 font-medium"
-      id="case-study-section"
-    >
-      <div className="max-w-7xl mx-auto">
-        {/* Title */}
-        <h2 className="text-4xl md:text-6xl font-medium leading-tight tracking-tight text-left bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-          The developer marketing services behind 30+ SaaS startups
-        </h2>
+    <>
+      <section
+        className="border border-gray-700/30 py-16 px-4 md:px-8 lg:px-16 font-medium"
+        id="case-study-section"
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Title */}
+          <h2 className="text-4xl md:text-6xl font-medium leading-tight tracking-tight text-left bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+            The developer marketing services behind 30+ SaaS startups
+          </h2>
 
-        {/* Subtitle */}
-        <p className="mt-4 text-lg md:text-xl font-medium leading-relaxed tracking-tight text-gray-400 text-left">
-          How top infra, AI, and SaaS startups scaled credibility without hiring full DevRel teams.
-        </p>
-      </div>
+          {/* Subtitle */}
+          <p className="mt-4 text-lg md:text-xl font-medium leading-relaxed tracking-tight text-gray-400 text-left">
+            How top infra, AI, and SaaS startups scaled credibility without hiring full DevRel teams.
+          </p>
+        </div>
 
-      <div className="mt-8 max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {caseStudies.map((study) => (
-          <CaseStudyCard key={study.id} study={study} />
-        ))}
-      </div>
+        <div className="mt-8 max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {caseStudies.map((study) => (
+            <CaseStudyCard key={study.id} study={study} isAdsVariant={isAdsVariant} />
+          ))}
+        </div>
 
-      <div className="mt-10 flex justify-center">
-        <CalendarBooking buttonText="Book a Demo" />
-      </div>
-    </section>
+        <div className="mt-10 flex justify-center">
+          <CalendarBooking buttonText="Book a Demo" />
+        </div>
+      </section>
+    </>
   );
 }
