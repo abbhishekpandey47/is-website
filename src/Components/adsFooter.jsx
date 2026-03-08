@@ -15,9 +15,15 @@ import { usePathname } from "next/navigation";
 const AdsFooter = () => {
   const pathname = usePathname() ?? "";
   const isGeoPage = pathname.startsWith("/services/ai-geo-optimization-agency");
-  const heroDescription = isGeoPage
-    ? "AI visibility & GEO optimization services for B2B SaaS and devtool startups. Strategic, data-backed and execution-focused. Infrasity tracks your brand’s presence across ChatGPT, Gemini, Perplexity and AI Overviews measuring prompt rankings, citation share, sentiment and competitive positioning and aligns your narrative to win inside answer engines."
-    : "Reddit marketing services for B2B SaaS startups. Fast, result-driven and execution ready. Infrasity tracks your upvotes, thread visibility, comment rankings, sentiment, etc and align on your startup's positioning.";
+  const isDeveloperMarketingPage = pathname.startsWith("/services/developer-marketing-agency");
+  
+  let heroDescription = "Reddit marketing services for B2B SaaS startups. Fast, result-driven and execution ready. Infrasity tracks your upvotes, thread visibility, comment rankings, sentiment, etc and align on your startup's positioning.";
+  
+  if (isGeoPage) {
+    heroDescription = "AI visibility & GEO optimization services for B2B SaaS and devtool startups. Strategic, data-backed and execution-focused. Infrasity tracks your brand's presence across ChatGPT, Gemini, Perplexity and AI Overviews measuring prompt rankings, citation share, sentiment and competitive positioning and aligns your narrative to win inside answer engines.";
+  } else if (isDeveloperMarketingPage) {
+    heroDescription = "Developer marketing services for dev tool, AI agent, and B2B SaaS startups. We help you reach developers through technical content, community engagement, and authentic conversations.";
+  }
   return (
     <footer className="bg-zing-800 backdrop-blur-lg py-4 px-14 mt-8 text-white flex justify-center flex-col w-full opacity-1 footerClassHome">
       <div className="flex flex-col gap-6">

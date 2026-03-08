@@ -116,7 +116,7 @@ export default function RealResult({ isAdsVariant = false }) {
   return (
     <>
       <section
-        className="border border-gray-700/30 py-16 px-4 md:px-8 lg:px-16 font-medium"
+        className="py-16 px-4 md:px-8 lg:px-16 font-medium"
         id="case-study-section"
       >
         <div className="max-w-7xl mx-auto">
