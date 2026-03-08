@@ -48,6 +48,10 @@ const CTA = dynamic(() => import("./cta"), {
   ssr: false,
   loading: () => <div className="h-96 w-full" />
 });
+const FAQSection = dynamic(() => import("./FAQ"), { 
+  ssr: false,
+  loading: () => <div className="h-96 w-full" />
+});
 
 // Memoized gradient divider component
 const GradientDivider = ({ className = "" }) => (
@@ -126,6 +130,9 @@ export default function Page() {
       
       {/* Testimonials - Lazy load */}
       <LazySection Component={() => <Testimonials subHeading="What founders and marketing teams say after growing their developer community with Infrasity." />} dividerClass="mt-10" />
+      
+      {/* FAQ - Lazy load */}
+      <LazySection Component={FAQSection} dividerClass="mt-10" />
             
       {/* CTA - Lazy load */}
       <SectionWrapper>

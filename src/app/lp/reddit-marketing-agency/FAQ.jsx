@@ -91,7 +91,9 @@ const faqData = [
     },
 ];
 
-const FAQSection = ({faqsData=faqData}) => {
+const FAQSection = ({faqData: customFaqData, faqsData, heading = "Frequently Asked Questions", description = "Have a question that needs a human to answer? No problem."}) => {
+    // Support both faqData and faqsData prop names for backwards compatibility
+    const faqDataToUse = customFaqData || faqsData || faqData;
     const [openItem, setOpenItem] = useState(null);
     const toggleAccordion = (id) => {
         setOpenItem(openItem === id ? null : id);
@@ -104,11 +106,11 @@ const FAQSection = ({faqsData=faqData}) => {
                     {/* Left column with heading and text */}
                     <div className="lg:w-5/12 mb-10 lg:mb-0">
                         <h2 className="text-2xl md:text-4xl lg:text-5xl mb-6 font-semibold">
-                            Frequently Asked Questions
+                            {heading}
                         </h2>
 
                         <p className="text-lg text-white mb-8">
-                            Have a question that needs a human to answer? No problem.
+                            {description}
                         </p>
 
                         <div className="flex flex-col items-start mt-4">
@@ -132,7 +134,7 @@ const FAQSection = ({faqsData=faqData}) => {
                     {/* Right column with accordion FAQs */}
                     <div className="flex justify-center">
                         <div className="w-[80%] flex flex-col gap-4">
-                            {faqsData.map((faq) => (
+                            {faqDataToUse.map((faq) => (
                                 <AccordionItem
                                     key={faq.id}
                                     id={faq.id}
