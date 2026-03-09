@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FileText, Layout, Video, Search, BookOpen, MessageCircle, ArrowRight } from 'lucide-react/dist/cjs/lucide-react';
 import CalendarBooking from "../../calendarButton";
+import ContactPopupButton from "../../lp/reddit-marketing-agency/ContactPopupButton";
 import { useState } from 'react';
 
 // Case study data
@@ -17,7 +18,7 @@ const caseStudies = [
     id: 'video-production',
     href: '/services/tech-video-production',
     title: 'Video Production',
-    description: 'We turn a single product walkthrough into YouTube explainers, doc embeds, shorts, and landing page assets — giving your product visibility across every channel where engineers learn and evaluate.',
+    description: 'We turn a single product walkthrough into YouTube explainers, doc embeds, shorts, and landing page assets giving your product visibility across every channel where engineers learn and evaluate.',
     icon: <Video className="w-6 h-6 text-blue-400" />,
     ctaText: "View our work",
   },
@@ -25,7 +26,7 @@ const caseStudies = [
     id: 'technical-writing',
     href: '/services/technical-writing-services',
     title: 'Technical Writing Services',
-    description: 'From hands-on tutorials to comparison pages and SDK examples — we create the technical content that ranks on Google, gets cited by AI models, and answers the questions developers actually search for. Each piece ships with code snippets, diagrams, and FAQ blocks.',
+    description: 'From hands-on tutorials to comparison pages and SDK examples we create the technical content that ranks on Google, gets cited by AI models, and answers the questions developers actually search for. Each piece ships with code snippets, diagrams, and FAQ blocks.',
     icon: <FileText className="w-6 h-6 text-emerald-400" />,
     ctaText: "See our writing",
   },
@@ -41,7 +42,7 @@ const caseStudies = [
     id: 'reddit-marketing',
     href: '/services/reddit-marketing-agency',
     title: 'Reddit Marketing Services',
-    description: 'We seed 40+ genuine technical contributions monthly across the subreddits where your buyers evaluate tools. Thread research, context-matched responses, aged accounts, and monthly visibility tracking — no spam, just credibility that compounds.',
+    description: 'We seed 40+ genuine technical contributions monthly across the subreddits where your buyers evaluate tools. Thread research, context-matched responses, aged accounts, and monthly visibility tracking no spam, just credibility that compounds.',
     icon: <MessageCircle className="w-6 h-6 text-orange-400" />,
     ctaText: "See our strategy",
   },
@@ -49,7 +50,7 @@ const caseStudies = [
     id: 'product-docs',
     href: '/services/technical-writing-services',
     title: 'Product Documentation',
-    description: 'API references, SDK guides, integration walkthroughs, quickstart tutorials, and architecture explainers — structured code-first so developers go from discovery to first API call in minutes. Built for humans and LLM crawlers alike.',
+    description: 'API references, SDK guides, integration walkthroughs, quickstart tutorials, and architecture explainers structured code-first so developers go from discovery to first API call in minutes. Built for humans and LLM crawlers alike.',
     icon: <BookOpen className="w-6 h-6 text-yellow-400" />,
     ctaText: "See our docs",
   },
@@ -138,7 +139,18 @@ export default function RealResult({ isAdsVariant = false }) {
         </div>
 
         <div className="mt-10 flex justify-center">
-          <CalendarBooking buttonText="Book a Demo" />
+          {isAdsVariant ? (
+            <ContactPopupButton 
+              buttonText="Book a Strategy Call" 
+              width="w-52" 
+              height="h-11" 
+              textSize="text-sm" 
+              textWeight="quicksand-semibold" 
+              thankYouPath="/services/developer-marketing-agency/thankyou" 
+            />
+          ) : (
+            <CalendarBooking buttonText="Book a Demo" />
+          )}
         </div>
       </section>
     </>

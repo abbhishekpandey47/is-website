@@ -31,6 +31,10 @@ const FeatureComparison = dynamic(() => import("./FeatureComparison"), {
   ssr: false,
   loading: () => <div className="h-96 w-full" />
 });
+const FeaturedResults = dynamic(() => import("./FeaturedResults"), { 
+  ssr: false,
+  loading: () => <div className="h-96 w-full" />
+});
 const Testimonials = dynamic(() => import("../../lp/reddit-marketing-agency/testimonials"), { 
   ssr: false,
   loading: () => <div className="h-96 w-full" />
@@ -110,7 +114,7 @@ export default function Page() {
       {/* Card2 - Lazy load */}
       <SectionWrapper>
         <GradientDivider className="mt-0 mb-1" />
-        <LazySection Component={Card2} showDivider={false} gradient={false} />
+        <LazySection Component={() => <Card2 isAdsVariant={isAdsVariant} />} showDivider={false} gradient={false} />
       </SectionWrapper>
       
       {/* WhyInfrasity - Lazy load */}
@@ -127,6 +131,9 @@ export default function Page() {
       
       {/* FeatureComparison - Lazy load */}
       <LazySection Component={FeatureComparison} />
+      
+      {/* FeaturedResults - Lazy load - Before Testimonials */}
+      <LazySection Component={() => <FeaturedResults isAdsVariant={isAdsVariant} />} dividerClass="mt-10" />
       
       {/* Testimonials - Lazy load */}
       <LazySection Component={() => <Testimonials subHeading="What founders and marketing teams say after growing their developer community with Infrasity." />} dividerClass="mt-10" />
