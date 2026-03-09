@@ -264,7 +264,7 @@ export default function FeaturedResults({ isAdsVariant = false }) {
                             }}
                           >
                             <img
-                              src={`/postimages/${study.slug}/0.${study.imageExt}`}
+                              src={`/PostImages/${study.slug}/0.${study.imageExt}`}
                               alt={`${study.company} case study`}
                               style={{ width: "100%", height: "100%", objectFit: "cover", borderTopLeftRadius: 16, borderTopRightRadius: 16 }}
                             />
