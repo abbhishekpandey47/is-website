@@ -1,6 +1,42 @@
+"use client";
+
 import { Input } from "../../Components/ui/input"
+import { useState } from "react";
 
 export default function NewsletterBlogs() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+    setError("");
+
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage("✅ Successfully subscribed to our newsletter!");
+        setEmail("");
+      } else {
+        setError(data.error || "Failed to subscribe");
+      }
+    } catch (err) {
+      setError("Error subscribing. Please try again.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="max-w-6xl max-sm:flex-col max-sm:p-8 max-sm:text-center max-md:max-w-xl justify-between mt-6 py-12 mx-auto p-4 flex rounded-lg shadow-sm readytostart">
       <div className="flex items-center  space-x-4">
@@ -28,15 +64,40 @@ export default function NewsletterBlogs() {
           </p>
         </div>
       </div>
-      <form className="mt-4 sm:flex sm:items-center">
-        <Input
-          className="w-full sm:max-w-xs text-white text-md quicksand-medium border-[#999]"
-          placeholder="Enter your email"
-          type="email"
-        />
-        <button className="bg-[#0A66C2] btn mx-2 text-white quicksand-light text-sm h-[30px] leading-5 max-w-[480px] min-h-[40px] px-3 py-0 rounded-full inline-flex items-center justify-center transition duration-150 ease-in-out hover:bg-[#16437E] focus:bg-[#16437E] active:bg-[#09223b] active:text-white/70 disabled:bg-black/20 disabled:text-black/50 disabled:cursor-not-allowed max-sm:mt-5">
-          Subscribe
-        </button>
+      <form className="mt-4 sm:mt-0 w-full sm:w-auto" onSubmit={handleSubmit}>
+        <div className="flex flex-col sm:items-end gap-3">
+          {/* Input and Button */}
+          <div className="flex flex-col sm:flex-row gap-2 items-center">
+            <Input
+              className="w-full sm:max-w-xs text-white text-md quicksand-medium border-[#999]"
+              placeholder="Enter your email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={loading}
+            />
+            <button 
+              type="submit"
+              disabled={loading}
+              className="bg-[#0A66C2] btn text-white quicksand-light text-sm h-[40px] px-6 rounded-full inline-flex items-center justify-center transition duration-150 ease-in-out hover:bg-[#16437E] focus:bg-[#16437E] active:bg-[#09223b] active:text-white/70 disabled:bg-black/20 disabled:text-black/50 disabled:cursor-not-allowed whitespace-nowrap"
+            >
+              {loading ? "Subscribing..." : "Subscribe"}
+            </button>
+          </div>
+
+          {/* Message below input */}
+          {message && (
+            <p className="text-green-400 text-sm quicksand-medium">
+              Successfully subscribed to our newsletter!
+            </p>
+          )}
+          {error && (
+            <p className="text-red-400 text-sm quicksand-medium">
+              {error}
+            </p>
+          )}
+        </div>
       </form>
     </div>
   )
