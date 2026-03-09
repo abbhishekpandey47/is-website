@@ -110,7 +110,7 @@ export default function Page() {
       {/* Card2 - Lazy load */}
       <SectionWrapper>
         <GradientDivider className="mt-0 mb-1" />
-        <LazySection Component={Card2} showDivider={false} gradient={false} />
+        <LazySection Component={() => <Card2 isAdsVariant={isAdsVariant} />} showDivider={false} gradient={false} />
       </SectionWrapper>
       
       {/* WhyInfrasity - Lazy load */}

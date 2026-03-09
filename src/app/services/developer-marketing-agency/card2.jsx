@@ -3,13 +3,14 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import CalendarBooking from "../../calendarButton";
+import ContactPopupButton from "../../lp/reddit-marketing-agency/ContactPopupButton";
 
-const FeatureCards = () => {
+const FeatureCards = ({ isAdsVariant = false }) => {
   const cards = [
     {
       id: 1,
       title: "Docs That Convert, Not Just Inform",
-      description: "API references, SDK guides, integration walkthroughs, and architecture explainers — structured code-first so developers go from discovery to first API call in minutes. Built for humans and LLM crawlers alike.",
+      description: "API references, SDK guides, integration walkthroughs, and architecture explainers structured code-first so developers go from discovery to first API call in minutes. Built for humans and LLM crawlers alike.",
       imageAlt: "MCP servers illustration",
       image: "c1.png",
       design: < MCPToolsInterface />
@@ -17,7 +18,7 @@ const FeatureCards = () => {
     {
       id: 2,
       title: "Show Up Where Developers Evaluate",
-      description: "We seed 40+ genuine technical contributions monthly across Reddit, GitHub Discussions, and Dev.to. No spam — just consistent developer marketing in the communities where your buyers already compare tools.",
+      description: "We seed 40+ genuine technical contributions monthly across Reddit, GitHub Discussions, and Dev.to. No spam just consistent developer marketing in the communities where your buyers already compare tools.",
       imageAlt: "Auth management illustration",
       image: "c2.png",
       design: <OrbitLogos />
@@ -64,7 +65,7 @@ const FeatureCards = () => {
     {
       id: 4,
       title: "From One Demo to Every Surface",
-      description: "We turn a single product walkthrough into YouTube explainers, doc embeds, shorts, and landing page assets — giving your developer marketing reach across every channel where engineers learn and evaluate.",
+      description: "We turn a single product walkthrough into YouTube explainers, doc embeds, shorts, and landing page assets giving your developer marketing reach across every channel where engineers learn and evaluate.",
       imageAlt: "Custom requests illustration",
       image: "c4.png",
       design: <DarkPipedreamDiagram />
@@ -114,7 +115,18 @@ const FeatureCards = () => {
     </div>
 
     <div className="mt-12 flex justify-center">
-      <CalendarBooking buttonText="Book a Demo" />
+      {isAdsVariant ? (
+        <ContactPopupButton 
+          buttonText="Book a Strategy Call" 
+          width="w-52" 
+          height="h-11" 
+          textSize="text-sm" 
+          textWeight="quicksand-semibold" 
+          thankYouPath="/services/developer-marketing-agency/thankyou" 
+        />
+      ) : (
+        <CalendarBooking buttonText="Book a Demo" />
+      )}
     </div>
   </div>
 </div>
