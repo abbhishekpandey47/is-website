@@ -638,7 +638,7 @@ const PostsPage = () => {
                     </TableCell>
 
                     <TableCell className="text-[13px] text-[rgba(255,255,255,0.6)]">
-                      {post.date_posted ? new Date(post.date_posted).toLocaleDateString() : "-"}
+                      {post.date_posted ? (() => { const d = new Date(post.date_posted); return `${String(d.getUTCDate()).padStart(2,"0")}/${String(d.getUTCMonth()+1).padStart(2,"0")}/${d.getUTCFullYear()}`; })() : "-"}
                     </TableCell>
                     <TableCell className="text-[13px] text-[rgba(255,255,255,0.6)]"> <HoverTextCell text={post.client_feedback}/></TableCell>
                     <TableCell>{getStatusBadge(post.status)}</TableCell>

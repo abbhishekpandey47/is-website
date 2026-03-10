@@ -19,7 +19,12 @@ const formatStatus = (status) => {
 const formatDate = (date) => {
   if (!date) return "-";
   try {
-    return new Date(date).toLocaleDateString();
+    const d = new Date(date);
+    if (isNaN(d.getTime())) return "-";
+    const dd = String(d.getUTCDate()).padStart(2, "0");
+    const mm = String(d.getUTCMonth() + 1).padStart(2, "0");
+    const yyyy = d.getUTCFullYear();
+    return `${dd}/${mm}/${yyyy}`;
   } catch {
     return "-";
   }

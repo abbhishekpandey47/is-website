@@ -10,6 +10,42 @@ const supabase = createClient(
 const MAX_IMPORT_ROWS = 500;
 
 /**
+ * Parse a date string into ISO YYYY-MM-DD.
+ * Supports DD/MM/YYYY, DD-MM-YYYY (primary — sheet format) and YYYY-MM-DD (ISO).
+ * Falls back to JS Date constructor for other formats.
+ */
+function parseDate(str) {
+  if (!str || !str.trim()) return null;
+  const s = str.trim();
+
+  // Skip non-date values
+  if (/repost|sprint/i.test(s)) return null;
+
+  // DD/MM/YYYY or DD-MM-YYYY
+  const ddmm = s.match(/^(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{4})$/);
+  if (ddmm) {
+    const [, day, month, year] = ddmm;
+    if (+month >= 1 && +month <= 12 && +day >= 1 && +day <= 31) {
+      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    }
+  }
+
+  // YYYY-MM-DD (ISO)
+  const iso = s.match(/^(\d{4})[/\-.](\d{1,2})[/\-.](\d{1,2})$/);
+  if (iso) {
+    return `${iso[1]}-${iso[2].padStart(2, "0")}-${iso[3].padStart(2, "0")}`;
+  }
+
+  // Fallback: let JS parse it (handles "March 8, 2026" etc.)
+  const d = new Date(s);
+  if (!isNaN(d.getTime())) {
+    return d.toISOString().split("T")[0];
+  }
+
+  return null;
+}
+
+/**
  * POST /api/engagement/import
  *
  * Bulk-import engagement rows into the posts or comment table.
@@ -96,7 +132,7 @@ export default async function handler(req, res) {
         category: row.category || "Imported",
         title: title || "(untitled)",
         engagement_text: row.engagementText || null,
-        date_posted: row.datePosted ? new Date(row.datePosted) : null,
+        date_posted: parseDate(row.datePosted),
         posted_link: row.postedLink || row.url || null,
         user_id: userCtx.uid,
         company_id: companyId,
