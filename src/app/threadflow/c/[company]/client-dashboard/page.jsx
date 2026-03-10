@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebaseClient";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import {
   normalizeStatus as sharedNormalizeStatus,
   fetchThreadflowData,
@@ -226,6 +226,7 @@ function SkeletonDashboard() {
 
 export default function ClientDashboardPage() {
   const router = useRouter();
+  const { company: companySlug } = useParams();
 
   // Auth & data loading state
   const [firebaseUser, setFirebaseUser] = useState(null);
@@ -264,11 +265,15 @@ export default function ClientDashboardPage() {
           try {
             const token = await user.getIdToken();
             tokenRef.current = token;
-            const [{ items, companies }, configs] = await Promise.all([
+            const [{ items }, configs, myCompaniesRes] = await Promise.all([
               fetchThreadflowData(token),
               fetchCadenceConfig(),
+              fetch("/api/threadflow/reddit/my-companies", {
+                headers: { Authorization: `Bearer ${token}` },
+              }).then((r) => r.json()).catch(() => ({ companies: [] })),
             ]);
             setAllItems(items);
+            const companies = myCompaniesRes.companies || [];
             setCompaniesList(companies);
             const apiMap = buildCadenceMap(configs);
             if (Object.keys(apiMap).length > 0) {
@@ -285,9 +290,12 @@ export default function ClientDashboardPage() {
                 }
               } catch (e) { /* noop */ }
             }
-            // Auto-select first company
+            // Select company matching URL slug, fallback to first
             if (companies.length > 0) {
-              setSelectedClientId(companies[0].id);
+              const match = companySlug
+                ? companies.find((c) => c.name_normalized === companySlug)
+                : null;
+              setSelectedClientId(match ? match.id : companies[0].id);
               setRecentClients(companies.slice(0, 3).map((c) => c.id));
             }
           } catch (err) {
