@@ -36,90 +36,133 @@ function getModelStyle(modelId = '') {
   return { label, bg: 'bg-gray-500/15', text: 'text-gray-700', border: 'border-gray-500/30' };
 }
 
-function CitationCard({ post, scannedPostDetails }) {
-  const url = post.url || post.post_url || '';
-  const title = post.title || post.post_title || '';
-  const subreddit = post.subreddit || '';
-  const scanned = scannedPostDetails?.[url];
-  const mentionsBrand = scanned?.mentionsBrand !== undefined ? scanned.mentionsBrand : post.mentionsBrand || false;
-  const competitorsMentioned = scanned?.mentionsCompetitors || post.mentionsCompetitors || [];
-  const upvotes = post.upvotes || post.score || 0;
-  const comments = post.comments || 0;
-  const models = post.citedByModels || [];
-
-  return (
-    <div className="rounded-lg border border-border bg-card p-3 hover:bg-muted/30 transition-colors">
-      <div className="flex items-start justify-between gap-2">
-        <div className="min-w-0 flex-1 space-y-1.5">
-          <p className="text-sm font-medium line-clamp-2 leading-snug">{title || url}</p>
-          <div className="flex flex-wrap items-center gap-1.5">
-            {/* Subreddit */}
-            {subreddit && (
-              <Badge variant="outline" className="text-[10px] px-1.5 py-0 text-muted-foreground">
-                r/{subreddit}
-              </Badge>
-            )}
-            {/* Brand mention */}
-            {mentionsBrand && (
-              <Badge variant="outline" className="text-[10px] px-1.5 py-0 text-emerald-600 border-emerald-200 bg-emerald-50">
-                your brand
-              </Badge>
-            )}
-            {/* Competitor badges */}
-            {competitorsMentioned.slice(0, 3).map(c => (
-              <Badge key={c} variant="outline" className="text-[10px] px-1.5 py-0 text-rose-600 border-rose-200 bg-rose-50">
-                {c}
-              </Badge>
-            ))}
-            {competitorsMentioned.length > 3 && (
-              <Badge variant="outline" className="text-[10px] px-1.5 py-0">+{competitorsMentioned.length - 3}</Badge>
-            )}
-            {/* Engagement */}
-            <span className="text-[10px] text-muted-foreground ml-auto">
-              👍 {upvotes >= 1000 ? (upvotes / 1000).toFixed(1) + 'K' : upvotes}{' '}
-              · 💬 {comments >= 1000 ? (comments / 1000).toFixed(1) + 'K' : comments}
-            </span>
-          </div>
-          {/* LLM model badges */}
-          {models.length > 0 && (
-            <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-              <span className="text-[10px] text-muted-foreground">cited by</span>
-              {models.map(modelId => {
-                const s = getModelStyle(modelId);
-                return (
-                  <span
-                    key={modelId}
-                    className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium ${s.bg} ${s.text} ${s.border}`}
-                  >
-                    {s.label}
-                  </span>
-                );
-              })}
-            </div>
-          )}
-        </div>
-        {url && (
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0 p-1.5 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-        )}
-      </div>
-    </div>
-  );
-}
-
 function CitationTable({ records, scannedPostDetails }) {
   if (!records.length) return null;
+
+  const thCls = 'py-2.5 px-3 text-left text-[11px] font-medium text-muted-foreground uppercase tracking-wide whitespace-nowrap';
+  const tdCls = 'py-2.5 px-3 align-top';
+
+  function fmt(n) {
+    if (!n) return '0';
+    return n >= 1000 ? (n / 1000).toFixed(1) + 'K' : String(n);
+  }
+
   return (
-    <div className="space-y-2">
-      {records.map((post, i) => (
-        <CitationCard key={`${post.url || post.post_url || i}`} post={post} scannedPostDetails={scannedPostDetails} />
-      ))}
+    <div className="overflow-x-auto rounded-lg border border-border">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="border-b border-border bg-muted/40">
+            <th className={thCls + ' w-8'}>#</th>
+            <th className={thCls}>Thread</th>
+            <th className={thCls + ' w-32'}>Community</th>
+            <th className={thCls + ' w-44'}>Cited By</th>
+            <th className={thCls + ' w-48'}>Mentions</th>
+            <th className={thCls + ' w-28 text-right'}>Engagement</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-border">
+          {records.map((post, i) => {
+            const url = post.url || post.post_url || '';
+            const title = post.title || post.post_title || '';
+            const subreddit = post.subreddit || '';
+            const scanned = scannedPostDetails?.[url];
+            const mentionsBrand = scanned?.mentionsBrand !== undefined
+              ? scanned.mentionsBrand
+              : post.mentionsBrand || false;
+            const competitorsMentioned = scanned?.mentionsCompetitors || post.mentionsCompetitors || [];
+            const upvotes = post.upvotes || post.score || 0;
+            const comments = post.comments || 0;
+            const models = post.citedByModels || [];
+
+            return (
+              <tr key={`${url || i}`} className="hover:bg-muted/20 transition-colors">
+                {/* # */}
+                <td className={tdCls + ' text-muted-foreground text-xs pt-3'}>{i + 1}</td>
+
+                {/* Thread title + link */}
+                <td className={tdCls}>
+                  <div className="flex items-start gap-2 min-w-0">
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium text-sm line-clamp-2 leading-snug">{title || url || '—'}</p>
+                    </div>
+                    {url && (
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="shrink-0 mt-0.5 p-1 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                        title="Open on Reddit"
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    )}
+                  </div>
+                </td>
+
+                {/* Community */}
+                <td className={tdCls}>
+                  {subreddit
+                    ? <span className="text-xs font-medium text-blue-600">r/{subreddit}</span>
+                    : <span className="text-xs text-muted-foreground">—</span>}
+                </td>
+
+                {/* Cited by models */}
+                <td className={tdCls}>
+                  {models.length > 0 ? (
+                    <div className="flex flex-wrap gap-1">
+                      {models.map(modelId => {
+                        const s = getModelStyle(modelId);
+                        return (
+                          <span
+                            key={modelId}
+                            className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium ${s.bg} ${s.text} ${s.border}`}
+                          >
+                            {s.label}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <span className="text-xs text-muted-foreground">—</span>
+                  )}
+                </td>
+
+                {/* Brand / competitor mentions */}
+                <td className={tdCls}>
+                  <div className="flex flex-wrap gap-1">
+                    {mentionsBrand && (
+                      <Badge variant="outline" className="text-[10px] px-1.5 py-0 text-emerald-600 border-emerald-200 bg-emerald-50">
+                        your brand
+                      </Badge>
+                    )}
+                    {competitorsMentioned.slice(0, 3).map(c => (
+                      <Badge key={c} variant="outline" className="text-[10px] px-1.5 py-0 text-rose-600 border-rose-200 bg-rose-50">
+                        {c}
+                      </Badge>
+                    ))}
+                    {competitorsMentioned.length > 3 && (
+                      <Badge variant="outline" className="text-[10px] px-1.5 py-0">
+                        +{competitorsMentioned.length - 3}
+                      </Badge>
+                    )}
+                    {!mentionsBrand && competitorsMentioned.length === 0 && (
+                      <span className="text-xs text-muted-foreground">none</span>
+                    )}
+                  </div>
+                </td>
+
+                {/* Engagement */}
+                <td className={tdCls + ' text-right'}>
+                  <div className="flex items-center justify-end gap-2 text-xs text-muted-foreground whitespace-nowrap">
+                    <span>👍 {fmt(upvotes)}</span>
+                    <span>💬 {fmt(comments)}</span>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -182,14 +225,13 @@ export default function AnalysisPanel({
     <div className="space-y-6">
       {/* Metrics */}
       {citationSummary && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 justify-items-center">
           {[
             { label: 'Prompts Searched', value: citationSummary.totalPrompts, icon: MessageSquare },
             { label: 'Models Used', value: citationSummary.totalModels, icon: Sparkles },
             { label: 'Reddit Posts Found', value: citationSummary.totalPosts, icon: BarChart2 },
-            { label: 'Brand Mentions', value: citationSummary.selfMentions, icon: TrendingUp },
           ].map(({ label, value, icon: Icon }) => (
-            <Card key={label}>
+            <Card key={label} className="w-full max-w-xs">
               <CardContent className="pt-4 pb-3">
                 <div className="flex items-start justify-between gap-2">
                   <div>
@@ -206,12 +248,11 @@ export default function AnalysisPanel({
 
       {/* Analysis Sub-tabs */}
       <Tabs defaultValue="serp" className="w-full">
-        <TabsList className="grid grid-cols-5 w-full">
+        <TabsList className="grid grid-cols-4 w-full">
           <TabsTrigger value="serp" className="text-xs">Search Results</TabsTrigger>
-          <TabsTrigger value="threads" className="text-xs">Threads</TabsTrigger>
           <TabsTrigger value="top" className="text-xs">Top Posts</TabsTrigger>
           <TabsTrigger value="new" className="text-xs">New Posts</TabsTrigger>
-          <TabsTrigger value="citations" className="text-xs">Citations</TabsTrigger>
+          <TabsTrigger value="citations" className="text-xs">Cited URLs</TabsTrigger>
         </TabsList>
 
         {/* Search Results / SERP */}
@@ -237,14 +278,14 @@ export default function AnalysisPanel({
                         onClick={() => setSelectedKwIdx(globalIdx)}
                         className={`w-full text-left px-3 py-2 rounded-md text-sm border transition-colors ${
                           isSelected
-                            ? 'bg-primary text-black border-primary'
+                            ? 'bg-primary border-primary font-medium'
                             : 'bg-muted/30 border-border hover:bg-muted'
                         }`}
                       >
                         <div className="flex items-center justify-between gap-1">
-                          <span className="truncate">{kw.term}</span>
+                          <span className={`truncate font-medium ${isSelected ? 'text-black' : 'text-white'}`}>{kw.term}</span>
                           {serpData && (
-                            <span className="text-[10px] shrink-0 opacity-70">
+                            <span className={`text-[10px] shrink-0 ${isSelected ? 'opacity-100' : 'opacity-70'}`}>
                               {serpData.topRedditPosts.length + serpData.newRedditPosts.length} posts
                             </span>
                           )}
@@ -316,60 +357,7 @@ export default function AnalysisPanel({
         </TabsContent>
 
         {/* Threads - Site locator */}
-        <TabsContent value="threads" className="mt-6 space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-sm flex items-center gap-2">
-                <MessageSquare className="h-4 w-4 text-primary" />Thread Search
-              </CardTitle>
-              <CardDescription className="text-xs">Find specific Reddit threads by keyword</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {selectedKwIds.size === 0 ? (
-                <p className="text-sm text-muted-foreground py-8 text-center">No keywords saved</p>
-              ) : (
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                  <div className="lg:col-span-1">
-                    <Card className="border-dashed">
-                      <CardContent className="pt-4 space-y-2">
-                        {Array.from(selectedKwIds).map(globalIdx => {
-                          const kw = keywords[globalIdx];
-                          if (!kw) return null;
-                          const isSelected = selectedKwIdx === globalIdx;
-                          return (
-                            <button
-                              key={globalIdx}
-                              onClick={() => setSelectedKwIdx(globalIdx)}
-                              className={`w-full text-left px-3 py-2 rounded-md text-sm border transition-colors ${
-                                isSelected
-                                  ? 'bg-primary text-black border-primary'
-                                  : 'bg-muted/30 border-border hover:bg-muted'
-                              }`}
-                            >
-                              {kw.term}
-                            </button>
-                          );
-                        })}
-                      </CardContent>
-                    </Card>
-                  </div>
-                  <div className="lg:col-span-3">
-                    {selectedKw && (
-                      <Card>
-                        <CardHeader>
-                          <CardTitle className="text-sm">Threads matching "{selectedKw.term}"</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-sm text-muted-foreground text-center py-8">Thread search coming soon</p>
-                        </CardContent>
-                      </Card>
-                    )}
-                  </div>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </TabsContent>
+
 
         {/* Top Posts */}
         <TabsContent value="top" className="mt-6">
