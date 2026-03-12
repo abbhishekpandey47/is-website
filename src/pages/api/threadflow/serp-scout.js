@@ -1583,28 +1583,23 @@ async function testCitations(prompts, domain, competitors = []) {
           : [];
         console.log(`[testCitations] ${model} validated ${validated.length} posts after URL filter`)
 
-        // Fetch actual post content for each citation (but don't reject if fetch fails)
+        // Fetch actual post content for each citation — drop any posts where fetch fails
+        // (avoids showing AI-hallucinated titles paired with wrong URLs)
         const enrichedCitations = (await Promise.all(
-          validated.slice(0, 8).map(async (entry) => {
+          validated.map(async (entry) => {
             const details = await fetchRedditPostDetails(entry.url).catch(() => null)
-            
-            // If fetch succeeds, use fetched data; otherwise use entry data
-            if (details) {
-              return {
-                ...entry,
-                title: details.title || entry.title,
-                subreddit: details.subreddit || entry.subreddit,
-                fullContent: details.post_content || ''
-              }
+            if (!details) {
+              console.log(`[testCitations] ${model} dropping unverified post (fetch failed): ${entry.url}`)
+              return null
             }
-            
-            // If fetch fails, still include the post with what we have
             return {
               ...entry,
-              fullContent: entry.snippet || ''
+              title: details.title || entry.title,
+              subreddit: details.subreddit || entry.subreddit,
+              fullContent: details.post_content || ''
             }
           })
-        )).map(({ _fetched, ...c }) => c)
+        )).filter(Boolean).map(({ _fetched, ...c }) => c)
 
         // Run full competitor/brand mention detection on actual post content
         record.models[model] = enrichedCitations.map((entry) => {
@@ -1986,6 +1981,27 @@ Return this exact format - ONLY JSON, nothing else:
         fetchRedditTopNewPosts(keyword),
         fetchRedditViaDataForSeo(keyword)
       ])
+
+      // Debug: log raw API data
+      if (redditApiData.top_posts && redditApiData.top_posts.length > 0) {
+        console.log('[serp-scout] Reddit API top_posts[0]:', JSON.stringify({
+          keys: Object.keys(redditApiData.top_posts[0]),
+          sample: {
+            title: redditApiData.top_posts[0].post_title || redditApiData.top_posts[0].title,
+            url: redditApiData.top_posts[0].post_url || redditApiData.top_posts[0].url,
+            upvotes: redditApiData.top_posts[0].upvotes || redditApiData.top_posts[0].score,
+            score: redditApiData.top_posts[0].score,
+            comments: redditApiData.top_posts[0].total_comments || redditApiData.top_posts[0].comments
+          }
+        }, null, 2))
+      }
+      if (dataForSeoData.top_posts && dataForSeoData.top_posts.length > 0) {
+        console.log('[serp-scout] DataForSEO top_posts[0]:', JSON.stringify({
+          keys: Object.keys(dataForSeoData.top_posts[0]),
+          upvotes: dataForSeoData.top_posts[0].upvotes,
+          total_comments: dataForSeoData.top_posts[0].total_comments
+        }, null, 2))
+      }
       // Keep raw dork results before merging — these are the pure `site:reddit.com keyword` hits
       const rawDorkResults = (dataForSeoData.top_posts || []).slice(0, 15)
 
@@ -2033,6 +2049,23 @@ Return this exact format - ONLY JSON, nothing else:
       // Merge "Top" candidates
       const allTopCandidates = mergePosts(redditApiData.top_posts || [], dataForSeoData.top_posts || [])
 
+      // Debug: log what we got from merge
+      if (allTopCandidates.length > 0) {
+        const post = allTopCandidates[0]
+        console.log('[serp-scout] 📦 MERGED POST SAMPLE:', JSON.stringify({
+          title: post.post_title?.substring(0, 40),
+          upvotes: post.upvotes,
+          score: post.score,
+          upvotesType: typeof post.upvotes,
+          hasUpvoteField: 'upvotes' in post,
+          source: post.source,
+          sourceCheck: {
+            isRedditApi: post.source === 'reddit_api',
+            isBoth: post.source === 'both'
+          }
+        }, null, 2))
+      }
+
       // Sort by COMPOSITE SCORE:
       // - Posts found in both sources get a bonus (they're validated by Google AND Reddit)
       // - Then sort by engagement (upvotes + comments) as primary
@@ -2078,6 +2111,36 @@ Return this exact format - ONLY JSON, nothing else:
           )
         : [];
 
+      // Also fetch full content for top/new posts to get complete mention context
+      console.log('[serp-scout] enriching top/new posts with full content for mention detection', { topCount: topRedditPosts.length, newCount: newRedditPosts.length })
+      const topPostsWithContent = topRedditPosts.length > 0
+        ? await Promise.all(
+            topRedditPosts.map(post =>
+              postDetailsLimiter(async () => {
+                const details = await fetchRedditPostDetails(post.post_url || post.url)
+                return {
+                  ...post,
+                  fullContent: details?.post_content || post.post_content || post.snippet || ''
+                }
+              })
+            )
+          )
+        : topRedditPosts;
+
+      const newPostsWithContent = newRedditPosts.length > 0
+        ? await Promise.all(
+            newRedditPosts.map(post =>
+              postDetailsLimiter(async () => {
+                const details = await fetchRedditPostDetails(post.post_url || post.url)
+                return {
+                  ...post,
+                  fullContent: details?.post_content || post.post_content || post.snippet || ''
+                }
+              })
+            )
+          )
+        : newRedditPosts;
+
       const reqCompetitors = Array.isArray(req.body.competitors)
         ? req.body.competitors
         : req.body.competitors
@@ -2103,6 +2166,13 @@ Return this exact format - ONLY JSON, nothing else:
         brandTargets.push({ normalized: brandDomainNormalized, label: brandDomain })
       }
 
+      // Debug mention targets
+      console.log('[serp-scout] 🎯 MENTION SEARCH TARGETS:', JSON.stringify({
+        brandTargets: brandTargets.map(t => t.normalized),
+        competitorCount: competitorTargets.length,
+        sampleCompetitors: competitorTargets.slice(0, 3).map(t => t.normalized)
+      }, null, 2))
+
       const enrichedRedditThreads = threadsWithContent.map(thread => {
         const { fullContent, ...threadCore } = thread
         const mentionData = buildThreadMentionData(thread, competitorTargets, brandTargets)
@@ -2114,35 +2184,116 @@ Return this exact format - ONLY JSON, nothing else:
       })
 
       // Enrich top/new posts with competitor/brand mention detection
-      const enrichedTopPosts = topRedditPosts.map(post => {
+      const enrichedTopPosts = topPostsWithContent.map(post => {
         const mentionData = buildThreadMentionData(
-          { fullContent: post.post_content, title: post.post_title },
+          {
+            fullContent: post.fullContent || post.post_content || '',
+            snippet: post.post_snippet || post.snippet || '',
+            title: post.post_title || post.title || ''
+          },
           competitorTargets, brandTargets
         )
-        return { ...post, ...mentionData, mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3) }
+        return {
+          ...post,
+          upvotes: post.upvotes || post.score || post.points || 0,
+          total_comments: post.total_comments || post.comments || post.num_comments || 0,
+          ...mentionData,
+          mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3)
+        }
       })
-      const enrichedNewPosts = newRedditPosts.map(post => {
+      const enrichedNewPosts = newPostsWithContent.map(post => {
         const mentionData = buildThreadMentionData(
-          { fullContent: post.post_content, title: post.post_title },
+          {
+            fullContent: post.fullContent || post.post_content || '',
+            snippet: post.post_snippet || post.snippet || '',
+            title: post.post_title || post.title || ''
+          },
           competitorTargets, brandTargets
         )
-        return { ...post, ...mentionData, mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3) }
+        return {
+          ...post,
+          upvotes: post.upvotes || post.score || post.points || 0,
+          total_comments: post.total_comments || post.comments || post.num_comments || 0,
+          ...mentionData,
+          mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3)
+        }
       })
+
+      // Debug logging: check post structure and mention detection
+      if (enrichedTopPosts.length > 0) {
+        const sample = enrichedTopPosts[0]
+        console.log('[serp-scout] ✓ ENRICHED TOP POST #1:', JSON.stringify({
+          title: sample.post_title?.substring(0, 40),
+          url: sample.post_url?.substring(0, 40),
+          upvotes: sample.upvotes,
+          score: sample.score,
+          comments: sample.total_comments,
+          mentionsBrand: sample.mentionsBrand,
+          competitorsFound: sample.mentionsCompetitors?.length || 0,
+          source: sample.source,
+          fullContentLength: sample.fullContent?.length || 0,
+          mentionHighlights: sample.mentionHighlights?.length || 0
+        }, null, 2))
+      }
+      if (enrichedNewPosts.length > 0) {
+        const sample = enrichedNewPosts[0]
+        console.log('[serp-scout] ✓ ENRICHED NEW POST #1:', JSON.stringify({
+          title: sample.post_title?.substring(0, 40),
+          upvotes: sample.upvotes,
+          mentionsBrand: sample.mentionsBrand,
+          competitorsFound: sample.mentionsCompetitors?.length || 0,
+          fullContentLength: sample.fullContent?.length || 0
+        }, null, 2))
+      }
+      if (enrichedDorkLinks.length > 0) {
+        const sample = enrichedDorkLinks[0]
+        console.log('[serp-scout] ✓ ENRICHED DORK LINK #1:', JSON.stringify({
+          title: sample.post_title?.substring(0, 40),
+          mentionsBrand: sample.mentionsBrand,
+          fullContentLength: sample.fullContent?.length || 0
+        }, null, 2))
+      }
 
       // Enrich dork results and remove URLs already shown in organic redditThreads
       const organicThreadUrls = new Set(enrichedRedditThreads.map(t => (t.url || '').toLowerCase()))
-      const enrichedDorkLinks = rawDorkResults
+      const dorkResultsFiltered = rawDorkResults
         .filter(post => {
           const url = (post.post_url || '').toLowerCase()
           return url && !organicThreadUrls.has(url)
         })
-        .map(post => {
-          const mentionData = buildThreadMentionData(
-            { fullContent: post.post_content, title: post.post_title },
-            competitorTargets, brandTargets
+
+      // Fetch full content for dork links too
+      const dorkResultsWithContent = dorkResultsFiltered.length > 0
+        ? await Promise.all(
+            dorkResultsFiltered.map(post =>
+              postDetailsLimiter(async () => {
+                const details = await fetchRedditPostDetails(post.post_url || post.url)
+                return {
+                  ...post,
+                  fullContent: details?.post_content || post.post_content || post.snippet || ''
+                }
+              })
+            )
           )
-          return { ...post, ...mentionData, mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3) }
-        })
+        : dorkResultsFiltered;
+
+      const enrichedDorkLinks = dorkResultsWithContent.map(post => {
+        const mentionData = buildThreadMentionData(
+          {
+            fullContent: post.fullContent || post.post_content || '',
+            snippet: post.post_snippet || post.snippet || '',
+            title: post.post_title || post.title || ''
+          },
+          competitorTargets, brandTargets
+        )
+        return {
+          ...post,
+          upvotes: post.upvotes || post.score || post.points || 0,
+          total_comments: post.total_comments || post.comments || post.num_comments || 0,
+          ...mentionData,
+          mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3)
+        }
+      })
 
       // Save SERP analysis for 24hr cache
       if (requestCompanyId) {

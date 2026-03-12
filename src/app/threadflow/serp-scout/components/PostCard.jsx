@@ -7,11 +7,14 @@ export default function PostCard({ post, brandLabel, allCompetitors = [], rank =
   // Handle both camelCase (from HTTP results) and snake_case (from API) property names
   const url = post.url || post.post_url || '';
   const title = post.title || post.post_title || '';
-  const subreddit = post.subreddit || '';
+  const subreddit = post.subreddit || post.community || '';
   const reason = post.reason || '';
-  const upvotes = post.upvotes || post.score || 0;
-  const downvotes = post.downvotes || 0;
-  const postAge = post.post_age_hours || post.age_hours || 0;
+  
+  // Extract upvotes - try all possible field names
+  const upvotes = post.upvotes || post.score || post.points || post.ups || 0;
+  const downvotes = post.downvotes || post.downs || 0;
+  const comments = post.total_comments || post.num_comments || post.comments || 0;
+  const postAge = post.post_age_hours || post.age_hours || post.created_utc || 0;
 
   // Use scanned data if available, otherwise use API mention data
   const mentionedCompetitors = scannedData?.mentionsCompetitors || post.mentionsCompetitors || [];
@@ -19,6 +22,7 @@ export default function PostCard({ post, brandLabel, allCompetitors = [], rank =
 
   // Format upvotes and downvotes with K/M suffix
   const formatNumber = (num) => {
+    if (!num || num === 0) return '0';
     if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
     if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
     return num.toString();
@@ -26,7 +30,7 @@ export default function PostCard({ post, brandLabel, allCompetitors = [], rank =
 
   // Format age
   const formatAge = (hours) => {
-    if (hours < 1) return 'now';
+    if (!hours || hours < 1) return 'now';
     if (hours < 24) return `${Math.floor(hours)}h`;
     const days = Math.floor(hours / 24);
     if (days < 7) return `${days}d`;
@@ -56,24 +60,29 @@ export default function PostCard({ post, brandLabel, allCompetitors = [], rank =
           </a>
         </div>
         <div className="flex items-center gap-2 text-xs text-muted-foreground flex-wrap">
-          <Badge variant="outline" className="text-[10px]">{subreddit}</Badge>
+          {subreddit && <Badge variant="outline" className="text-[10px]">r/{subreddit}</Badge>}
           {reason && <span className="truncate max-w-xs">{reason}</span>}
         </div>
       </div>
 
       {/* Post stats row */}
-      <div className="flex items-center gap-3 text-xs text-muted-foreground pt-1 border-t border-border/50">
-        <div className="flex items-center gap-1">
+      <div className="flex items-center gap-4 text-xs text-muted-foreground pt-2 border-t border-border/50 flex-wrap">
+        <div className="flex items-center gap-2">
           <span className="text-emerald-600 dark:text-emerald-400 font-semibold">↑ {formatNumber(upvotes)}</span>
         </div>
         {downvotes > 0 && (
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <span className="text-red-600 dark:text-red-400 font-semibold">↓ {formatNumber(downvotes)}</span>
           </div>
         )}
+        {comments > 0 && (
+          <div className="flex items-center gap-2">
+            <span className="text-blue-600 dark:text-blue-400 font-semibold">💬 {formatNumber(comments)}</span>
+          </div>
+        )}
         {postAge > 0 && (
-          <div className="flex items-center gap-1 ml-auto">
-            <span>{formatAge(postAge)}</span>
+          <div className="flex items-center gap-2 ml-auto">
+            <span className="text-muted-foreground">{formatAge(postAge)}</span>
           </div>
         )}
       </div>

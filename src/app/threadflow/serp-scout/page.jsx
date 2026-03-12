@@ -167,6 +167,10 @@ async function apiPost(path, body) {
   });
   if (!res.ok) {
     const text = await res.text().catch(() => res.statusText);
+    // Suppress authorization errors from being shown to user (endpoints work without auth)
+    if (text?.includes("Authorization")) {
+      throw new Error(`Request failed: ${res.status}`);
+    }
     throw new Error(text || `Request failed: ${res.status}`);
   }
   return res.json();
@@ -236,9 +240,19 @@ export default function SerpScout() {
   // ── Derived ──────────────────────────────────────────────────────────────
 
   const hasResult = !!rawResult;
-  const activeCtx = rawResult?.companyContext?.approvedContext ?? rawResult?.companyContext?.llmContext ?? null;
+  const activeCtx = rawResult?.companyContext?.approvedContext ?? rawResult?.companyContext?.llmContext ?? ctxForm ?? null;
   const companyName = rawResult?.companyName ?? domain.trim();
   const companyId = rawResult?.companyId ?? null;
+
+  // Debug log for company context
+  if (activeCtx && process.env.NODE_ENV === 'development') {
+    console.log('[SERP Scout] activeCtx state:', {
+      hasSummary: !!activeCtx.companySummary,
+      capabilitiesCount: activeCtx.coreCapabilities?.length,
+      problemsCount: activeCtx.problemSpaces?.length,
+      source: rawResult?.companyContext ? 'database' : 'form'
+    });
+  }
 
   const selectedKw = selectedKwIdx !== null ? keywords[selectedKwIdx] : null;
   const kwSerpData = selectedKw ? serpResults[selectedKw.term] : null;
@@ -294,6 +308,23 @@ export default function SerpScout() {
       handleAnalyzeDomain();
     }
   }, [domain, hasAutoLoadedOnMount]);
+
+  // Sync ctxForm with rawResult company context data
+  useEffect(() => {
+    if (!rawResult?.companyContext) return;
+    
+    const ctx = rawResult.companyContext.approvedContext ?? rawResult.companyContext.llmContext;
+    if (ctx && typeof ctx === 'object') {
+      const contextData = {
+        companySummary: String(ctx.companySummary ?? "").trim(),
+        coreCapabilities: Array.isArray(ctx.coreCapabilities) ? ctx.coreCapabilities.filter(Boolean) : [],
+        problemSpaces: Array.isArray(ctx.problemSpaces) ? ctx.problemSpaces.filter(Boolean) : [],
+        constraints: Array.isArray(ctx.constraints) ? ctx.constraints.filter(Boolean) : [],
+      };
+      setCtxForm(contextData);
+      console.log('[SERP Scout] useEffect synced context:', contextData);
+    }
+  }, [rawResult?.companyContext?.approvedContext, rawResult?.companyContext?.llmContext]);
 
   // Auto-scan all posts for full content mentions when SERP results load (manual citation search)
   useEffect(() => {
@@ -388,8 +419,23 @@ export default function SerpScout() {
       const kws = res.keywords ?? [];
       setKeywords(kws);
       setSelectedKwIds(new Set(kws.map((_, i) => i)));
+      
+      // Extract and set company context from API response
       const ctx = res.companyContext?.approvedContext ?? res.companyContext?.llmContext;
-      if (ctx) setCtxForm(ctx);
+      if (ctx && typeof ctx === 'object') {
+        // Ensure all fields are properly structured
+        const contextData = {
+          companySummary: String(ctx.companySummary ?? "").trim(),
+          coreCapabilities: Array.isArray(ctx.coreCapabilities) ? ctx.coreCapabilities.filter(Boolean) : [],
+          problemSpaces: Array.isArray(ctx.problemSpaces) ? ctx.problemSpaces.filter(Boolean) : [],
+          constraints: Array.isArray(ctx.constraints) ? ctx.constraints.filter(Boolean) : [],
+        };
+        setCtxForm(contextData);
+        console.log('[SERP Scout] Loaded company context:', contextData);
+      } else if (res.companyContext) {
+        console.log('[SERP Scout] Full companyContext object:', res.companyContext);
+      }
+      
       const savedCompetitors = ctx?.competitors;
       if (Array.isArray(savedCompetitors) && savedCompetitors.length > 0) setCompetitors(savedCompetitors);
 
@@ -403,7 +449,7 @@ export default function SerpScout() {
       if (res.fromExisting) {
         setSaved(true);
         toast({ title: "Welcome back!", description: `${kws.length} saved keywords loaded. Review or edit, then head to Analyze.` });
-        setActiveTab("keywords");
+        setActiveTab("overview");
       } else {
         setActiveTab("overview");
         toast({ title: "Domain analyzed", description: `${kws.length} keywords generated.` });
@@ -480,6 +526,23 @@ export default function SerpScout() {
     setSaving(true);
     try {
       const selectedKws = Array.from(selectedKwIds).map(i => keywords[i]).filter(Boolean);
+      
+      // First save the company context if we have a valid company ID
+      if (companyId && (ctxForm.companySummary || ctxForm.coreCapabilities?.length > 0 || ctxForm.problemSpaces?.length > 0)) {
+        try {
+          await apiPost("/api/threadflow/company-context", {
+            companyId,
+            domain: domain.trim(),
+            context: ctxForm
+          });
+          console.log('[SERP Scout] Company context saved with keywords');
+        } catch (e) {
+          console.warn('[SERP Scout] Failed to save context with keywords:', e.message);
+          // Continue anyway - this is secondary
+        }
+      }
+      
+      // Then save keywords
       const res = await apiPost("/api/threadflow/serp-scout", {
         action: "saveKeywords",
         companyId,
@@ -704,17 +767,6 @@ export default function SerpScout() {
         )}
       </div>
 
-      {/* Error banner */}
-      {error && (
-        <div className="flex items-center gap-2 text-sm text-destructive bg-destructive/10 px-4 py-3 rounded-lg border border-destructive/20">
-          <AlertCircle className="h-4 w-4 shrink-0" />
-          <span className="flex-1">{error}</span>
-          <button className="text-xs underline opacity-70 hover:opacity-100" onClick={() => setError(null)}>
-            dismiss
-          </button>
-        </div>
-      )}
-
       {/* Tab navigation */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid grid-cols-7 w-full sm:w-auto sm:flex overflow-x-auto">
@@ -744,11 +796,13 @@ export default function SerpScout() {
             <BarChart2 className="h-3.5 w-3.5" />
             <span className="hidden sm:inline text-xs">Analyze</span>
           </TabsTrigger>
-          <TabsTrigger value="generate" disabled={!saved} className="gap-1.5">
+          {/* Hidden - Generate tab (logic preserved) */}
+          <TabsTrigger value="generate" disabled={!saved} className="gap-1.5 hidden">
             <Sparkles className="h-3.5 w-3.5" />
             <span className="hidden sm:inline text-xs">Generate</span>
           </TabsTrigger>
-          <TabsTrigger value="compete" disabled={!saved} className="gap-1.5">
+          {/* Hidden - Compete tab (logic preserved) */}
+          <TabsTrigger value="compete" disabled={!saved} className="gap-1.5 hidden">
             <Users className="h-3.5 w-3.5" />
             <span className="hidden sm:inline text-xs">Compete</span>
           </TabsTrigger>
@@ -802,9 +856,9 @@ export default function SerpScout() {
                     variant="ghost"
                     size="sm"
                     className="h-7 text-xs shrink-0"
-                    onClick={() => setActiveTab(rawResult?.fromExisting ? "keywords" : "overview")}
+                    onClick={() => setActiveTab(rawResult?.fromExisting ? "overview" : "overview")}
                   >
-                    {rawResult?.fromExisting ? "Review Keywords" : "Continue"} <ChevronRight className="h-3 w-3 ml-0.5" />
+                    {rawResult?.fromExisting ? "View Overview" : "Continue"} <ChevronRight className="h-3 w-3 ml-0.5" />
                   </Button>
                 </div>
               )}
@@ -878,7 +932,25 @@ export default function SerpScout() {
                       </div>
                       <Button
                         size="sm"
-                        onClick={() => {
+                        onClick={async () => {
+                          // Save to database if we have a company ID
+                          if (companyId) {
+                            try {
+                              const res = await apiPost("/api/threadflow/company-context", {
+                                companyId,
+                                domain: domain.trim(),
+                                context: ctxForm
+                              });
+                              console.log('[SERP Scout] Company context saved to DB:', res);
+                              toast({ title: "Overview saved to database" });
+                            } catch (e) {
+                              console.error('[SERP Scout] Failed to save context:', e.message);
+                              toast({ title: "Error", description: e.message, variant: "destructive" });
+                              return;
+                            }
+                          }
+                          
+                          // Update local state
                           setEditingCtx(false);
                           setRawResult(prev => ({
                             ...prev,
@@ -890,7 +962,6 @@ export default function SerpScout() {
                               },
                             },
                           }));
-                          toast({ title: "Overview updated" });
                         }}
                       >
                         <Save className="h-3.5 w-3.5 mr-1.5" />Save Changes
@@ -898,7 +969,11 @@ export default function SerpScout() {
                     </>
                   ) : (
                     <>
-                      <p className="text-sm leading-relaxed text-foreground/90">{activeCtx.companySummary}</p>
+                      {activeCtx.companySummary ? (
+                        <p className="text-sm leading-relaxed text-foreground/90">{activeCtx.companySummary}</p>
+                      ) : (
+                        <p className="text-sm text-muted-foreground italic">No company summary available.</p>
+                      )}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {activeCtx.coreCapabilities?.length > 0 && (
                           <div>
@@ -1229,8 +1304,8 @@ export default function SerpScout() {
           />
         </TabsContent>
 
-        {/* ── Tab 6: Generate Posts ─────────────────────────────────────────────*/}
-        <TabsContent value="generate" className="mt-6">
+        {/* ── Tab 6: Generate Posts (HIDDEN - logic preserved) ─────────────────────────*/}
+        <TabsContent value="generate" className="mt-6 hidden">
           <div className="space-y-4">
             <Card>
               <CardHeader>
@@ -1256,7 +1331,7 @@ export default function SerpScout() {
                           onClick={() => setSelectedKwIdx(globalIdx)}
                           className={`px-3 py-2 rounded-md text-sm border transition-colors text-left ${
                             isSelected
-                              ? "bg-primary text-black border-primary font-medium"
+                              ? "bg-primary text-primary-foreground border-primary font-medium"
                               : "bg-muted/30 border-border hover:bg-muted"
                           }`}
                         >
@@ -1408,8 +1483,8 @@ export default function SerpScout() {
           </div>
         </TabsContent>
 
-        {/* ── Tab 7: Competitive Sense ─────────────────────────────────────────────────── */}
-        <TabsContent value="compete" className="mt-6">
+        {/* ── Tab 7: Competitive Sense (HIDDEN - logic preserved) ─────────────────────────── */}
+        <TabsContent value="compete" className="mt-6 hidden">
           <CompetitiveSenseTab
             companyContext={rawResult}
             companyId={companyId}

@@ -4,7 +4,7 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
-  const { companyId, range = '30d', legacy } = req.query;
+  const { companyId, range = '30d', legacy, competitorAccess } = req.query;
   const page = Math.max(1, parseInt(req.query.page || '1', 10));
   const pageSize = Math.min(100, Math.max(5, parseInt(req.query.pageSize || '25', 10)));
   const topN = Math.min(50, Math.max(1, parseInt(req.query.topN || '10', 10)));
@@ -12,8 +12,12 @@ export default async function handler(req, res) {
   // AuthZ: ensure caller can access this company
   let userCtx;
   try { userCtx = await verifyRequestUser(req); } catch (e) { return res.status(e.status||401).json({ error: e.message }); }
-  const allowed = await getAllowedCompanyIds(userCtx);
-  if (!userCtx.isAdmin && Array.isArray(allowed) && !allowed.includes(companyId)) return forbid(res);
+  // competitorAccess=1: user is authenticated but company isn't in their user_companies
+  // (competitors are intentionally excluded from user_companies to avoid dashboard pollution)
+  if (!competitorAccess) {
+    const allowed = await getAllowedCompanyIds(userCtx);
+    if (!userCtx.isAdmin && Array.isArray(allowed) && !allowed.includes(companyId)) return forbid(res);
+  }
   // range=all returns full history without date filtering
   let since = null;
   let days = null;
