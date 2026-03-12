@@ -1807,7 +1807,7 @@ let postMetaData = [
     ogImage: "/PostImages/ai-agent-content-strategy/0.webp",
     publishedOn: "2026-03-12",
     authorId: "author0005",
-    category: "LLM Visibility",
+    category: "LLM Visiblity",
     metaDescription: "Learn how B2B SaaS startups use AI agent content strategy to get cited in ChatGPT, Perplexity, Gemini, etc. 5 frameworks to turn tech content into pipeline. Read now"
 },
 ];
