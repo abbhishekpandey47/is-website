@@ -1799,6 +1799,17 @@ let postMetaData = [
     category: "Developer Marketing",
     metaDescription: "Discover the top developer marketing channels like Dev.to, GitHub, Reddit, and Stack Overflow. Learn how B2B SaaS teams distribute developer content effectively. Read now"
 },
+{
+    title: "AI Agent Content Strategy for B2B SaaS: 5 Frameworks That Drive Pipeline in 2026",
+    metatitle: "AI Agent Content Strategy for B2B SaaS: 5 Frameworks for 2026",
+    slug: "ai-agent-content-strategy",
+    description: "AI agents are changing how B2B SaaS buyers discover and evaluate products. Instead of traditional search alone, developers and decision-makers now ask tools like ChatGPT, Perplexity, and Gemini for recommendations. This blog breaks down five AI agent content strategies that help startups get cited in AI answers, build developer trust, and turn technical content into a predictable pipeline.",
+    ogImage: "/PostImages/ai-agent-content-strategy/0.webp",
+    publishedOn: "2026-03-12",
+    authorId: "author0005",
+    category: "LLM Visibility",
+    metaDescription: "Learn how B2B SaaS startups use AI agent content strategy to get cited in ChatGPT, Perplexity, Gemini, etc. 5 frameworks to turn tech content into pipeline. Read now"
+},
 ];
 
 const sorted = () => {
