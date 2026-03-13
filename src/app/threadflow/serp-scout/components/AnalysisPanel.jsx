@@ -257,103 +257,101 @@ export default function AnalysisPanel({
 
         {/* Search Results / SERP */}
         <TabsContent value="serp" className="mt-6 space-y-4">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <div className="lg:col-span-1 space-y-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-sm flex items-center gap-2">
-                    <Search className="h-4 w-4 text-primary" />Keywords
-                  </CardTitle>
-                  <CardDescription className="text-xs">Select a keyword to search</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {Array.from(selectedKwIds).map(globalIdx => {
-                    const kw = keywords[globalIdx];
-                    if (!kw) return null;
-                    const isSelected = selectedKwIdx === globalIdx;
-                    const serpData = serpResults[kw.term];
-                    return (
-                      <button
-                        key={globalIdx}
-                        onClick={() => setSelectedKwIdx(globalIdx)}
-                        className={`w-full text-left px-3 py-2 rounded-md text-sm border transition-colors ${
-                          isSelected
-                            ? 'bg-primary border-primary font-medium'
-                            : 'bg-muted/30 border-border hover:bg-muted'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between gap-1">
-                          <span className={`truncate font-medium ${isSelected ? 'text-black' : 'text-white'}`}>{kw.term}</span>
-                          {serpData && (
-                            <span className={`text-[10px] shrink-0 ${isSelected ? 'opacity-100' : 'opacity-70'}`}>
-                              {serpData.topRedditPosts.length + serpData.newRedditPosts.length} posts
-                            </span>
-                          )}
-                        </div>
-                      </button>
-                    );
-                  })}
-                  {selectedKwIds.size === 0 && (
-                    <p className="text-xs text-muted-foreground italic">No keywords. Go to Save tab.</p>
-                  )}
-                  {selectedKwIdx !== null && (
-                    <Button onClick={handleSerpAnalysis} disabled={serpLoading} className="w-full" size="sm">
-                      {serpLoading
-                        ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Searching…</>
-                        : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run SERP</>
-                      }
-                    </Button>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
+          {/* Keywords + Run SERP — top row */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm flex items-center gap-2">
+                <Search className="h-4 w-4 text-primary" />Keywords
+              </CardTitle>
+              <CardDescription className="text-xs">Select a keyword, then run SERP search</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex flex-wrap gap-2">
+                {Array.from(selectedKwIds).map(globalIdx => {
+                  const kw = keywords[globalIdx];
+                  if (!kw) return null;
+                  const isSelected = selectedKwIdx === globalIdx;
+                  const serpData = serpResults[kw.term];
+                  return (
+                    <button
+                      key={globalIdx}
+                      onClick={() => setSelectedKwIdx(globalIdx)}
+                      className={`px-3 py-1.5 rounded-md text-sm border transition-colors ${
+                        isSelected
+                          ? 'bg-primary border-primary font-medium'
+                          : 'bg-muted/30 border-border hover:bg-muted'
+                      }`}
+                    >
+                      <span className={`font-medium ${isSelected ? 'text-primary-foreground' : 'text-foreground'}`}>
+                        {kw.term}
+                      </span>
+                      {serpData && (
+                        <span className={`ml-1.5 text-[10px] ${isSelected ? 'opacity-90' : 'opacity-60'}`}>
+                          {serpData.topRedditPosts.length + serpData.newRedditPosts.length} posts
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+                {selectedKwIds.size === 0 && (
+                  <p className="text-xs text-muted-foreground italic">No keywords selected. Go to the Save tab first.</p>
+                )}
+              </div>
+              {selectedKwIdx !== null && (
+                <Button onClick={handleSerpAnalysis} disabled={serpLoading} size="sm">
+                  {serpLoading
+                    ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Searching…</>
+                    : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run SERP Search</>
+                  }
+                </Button>
+              )}
+            </CardContent>
+          </Card>
 
-            <div className="lg:col-span-3 space-y-4">
-              {serpLoading && (
-                <Card>
-                  <CardContent className="pt-6 space-y-3">
-                    <Skeleton className="h-4 w-1/2" />
-                    <Skeleton className="h-16 w-full rounded-lg" />
-                    <Skeleton className="h-16 w-full rounded-lg" />
-                  </CardContent>
-                </Card>
-              )}
-              {kwSerpData && !serpLoading && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-sm">SERP Results — {selectedKw?.term}</CardTitle>
-                    <CardDescription className="text-xs">Google SERP Reddit posts</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {!allSerpPosts.length ? (
-                      <p className="text-sm text-muted-foreground py-8 text-center">No posts found</p>
-                    ) : (
-                      <div className="space-y-2">
-                        {allSerpPosts.map((post, i) => (
-                          <PostCard
-                            key={i}
-                            post={post}
-                            brandLabel={companyName}
-                            allCompetitors={competitors}
-                            scannedData={scannedPostDetails[post.url || post.post_url]}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              )}
-              {!kwSerpData && !serpLoading && (
-                <div className="flex flex-col items-center justify-center h-48 border border-dashed border-border rounded-lg text-muted-foreground gap-3">
-                  <Zap className="h-10 w-10 opacity-20" />
-                  <div className="text-center text-sm">
-                    <p className="font-medium">Run SERP search</p>
-                    <p className="text-xs mt-1 opacity-70">Select keyword and click Run SERP</p>
+          {/* Results — below */}
+          {serpLoading && (
+            <Card>
+              <CardContent className="pt-6 space-y-3">
+                <Skeleton className="h-4 w-1/2" />
+                <Skeleton className="h-16 w-full rounded-lg" />
+                <Skeleton className="h-16 w-full rounded-lg" />
+              </CardContent>
+            </Card>
+          )}
+          {kwSerpData && !serpLoading && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-sm">SERP Results — {selectedKw?.term}</CardTitle>
+                <CardDescription className="text-xs">Google SERP Reddit posts</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {!allSerpPosts.length ? (
+                  <p className="text-sm text-muted-foreground py-8 text-center">No posts found</p>
+                ) : (
+                  <div className="space-y-2">
+                    {allSerpPosts.map((post, i) => (
+                      <PostCard
+                        key={i}
+                        post={post}
+                        brandLabel={companyName}
+                        allCompetitors={competitors}
+                        scannedData={scannedPostDetails[post.url || post.post_url]}
+                      />
+                    ))}
                   </div>
-                </div>
-              )}
+                )}
+              </CardContent>
+            </Card>
+          )}
+          {!kwSerpData && !serpLoading && (
+            <div className="flex flex-col items-center justify-center h-48 border border-dashed border-border rounded-lg text-muted-foreground gap-3">
+              <Zap className="h-10 w-10 opacity-20" />
+              <div className="text-center text-sm">
+                <p className="font-medium">Run SERP search</p>
+                <p className="text-xs mt-1 opacity-70">Select a keyword above and click Run SERP Search</p>
+              </div>
             </div>
-          </div>
+          )}
         </TabsContent>
 
         {/* Threads - Site locator */}

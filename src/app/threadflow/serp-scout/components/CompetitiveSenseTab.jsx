@@ -757,6 +757,71 @@ function ThreadCardList({ threads, compact = false, relevanceFilter = 'all' }) {
     </div>
   )
 }
+// Build { [subredditLower]: { subreddit, totalMentions } } from SS heatmap
+function buildSubMap(heatmap = []) {
+  const map = {}
+  heatmap.forEach(entry => {
+    const sub = (entry.subreddit || '').toLowerCase()
+    if (!sub) return
+    const total = (entry.data || []).reduce((s, d) => s + (d.value || 0), 0)
+    map[sub] = { subreddit: entry.subreddit, totalMentions: total }
+  })
+  return map
+}
+
+// Merge all competitor SS heatmaps into one subreddit map
+function buildMergedCompetitorSubMap(competitorData = {}) {
+  const map = {}
+  Object.entries(competitorData).forEach(([compName, { dashboard }]) => {
+    if (!dashboard?.heatmap) return
+    dashboard.heatmap.forEach(entry => {
+      const sub = (entry.subreddit || '').toLowerCase()
+      if (!sub) return
+      const total = (entry.data || []).reduce((s, d) => s + (d.value || 0), 0)
+      if (!map[sub]) map[sub] = { subreddit: entry.subreddit, totalMentions: 0, byCompetitor: {} }
+      map[sub].totalMentions += total
+      map[sub].byCompetitor[compName] = (map[sub].byCompetitor[compName] || 0) + total
+    })
+  })
+  return map
+}
+
+// Produce rows: gap (comp only) | battleground (both) | stronghold (brand only)
+function buildComparisonRows(brandSubMap = {}, compSubMap = {}) {
+  const allSubs = new Set([...Object.keys(brandSubMap), ...Object.keys(compSubMap)])
+  return Array.from(allSubs).map(sub => {
+    const brand = brandSubMap[sub]
+    const comp  = compSubMap[sub]
+    const brandMentions      = brand?.totalMentions || 0
+    const competitorMentions = comp?.totalMentions  || 0
+    const byCompetitor       = comp?.byCompetitor   || {}
+    const category = brandMentions === 0 && competitorMentions > 0
+      ? 'gap'
+      : brandMentions > 0 && competitorMentions > 0
+        ? 'battleground'
+        : 'stronghold'
+    return { subreddit: brand?.subreddit || comp?.subreddit || sub, category, brandMentions, competitorMentions, byCompetitor }
+  })
+}
+
+// Extract bi-gram topic phrases from thread titles
+function extractTopics(threads = []) {
+  const stop = new Set(['this','that','with','from','your','about','have','will','they','their','there','what','when','where','which','them','into','over','under','after','before','still','just','more','some','been','than','then','many','also','such','because','while','could','should','would','until','these','those','using','used','uses','able'])
+  const counts = {}
+  threads.forEach(t => {
+    const words = (t.title || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(w => w.length > 3 && !stop.has(w))
+    for (let i = 0; i < words.length - 1; i++) {
+      const phrase = `${words[i]} ${words[i+1]}`
+      counts[phrase] = (counts[phrase] || 0) + 1
+    }
+  })
+  return Object.entries(counts)
+    .filter(([, c]) => c >= 2)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 20)
+    .map(([phrase, count]) => ({ phrase, count }))
+}
+
 function GapAnalysis({ scanData, ssStatus, ssData, ssLastIngestedAt, competitorData, competitorStatus, competitors, expandedKeys, toggle, companyName }) {
   const { brandMentions=0, competitorMentions=0 } = scanData.metrics ?? {}
 
