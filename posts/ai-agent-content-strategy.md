@@ -26,7 +26,7 @@ This blog covers some of the best AI agent content strategy framework, built spe
 
 An AI agent is software that can **perceive inputs, make decisions, use tools like APIs, databases, code,** and take multi-step actions toward a goal with minimal human intervention. Unlike a chatbot that responds to one prompt, an agent plans, acts, observes the result, and adjusts.  
 
-![](/PostImages/ai-agent-content-strategy/4.webp)
+![](/PostImages/ai-agent-content-strategy/1.webp)
 
 Most content out there, written about AI agents, assumes the reader already knows what an agent is. Even if some do, there’s still a group who don't, or they have an unclear definition. The fastest way to lose a developer or a VP Marketing is to start with a strategy before they understand the subject.
 
