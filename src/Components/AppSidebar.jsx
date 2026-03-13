@@ -3,6 +3,7 @@
 import {
   BarChart3,
   Calendar,
+  Crosshair,
   FileText,
   Gauge,
   LayoutGrid,
@@ -49,6 +50,7 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
     { title: "Communities", url: `${prefix}/communities`, icon: Users, soon: true },
     { title: "SubredditSense", url: `${prefix}/subredditsense`, icon: TrendingUp },
     { title: "Serp Scout", url: `${prefix}/serp-scout`, icon: Search },
+    { title: "Competitive Sense", url: `${prefix}/competitive-sense`, icon: Crosshair },
   ]
 
   const planningItems = [

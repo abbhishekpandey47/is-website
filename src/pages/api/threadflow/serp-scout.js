@@ -2245,15 +2245,6 @@ Return this exact format - ONLY JSON, nothing else:
           fullContentLength: sample.fullContent?.length || 0
         }, null, 2))
       }
-      if (enrichedDorkLinks.length > 0) {
-        const sample = enrichedDorkLinks[0]
-        console.log('[serp-scout] ✓ ENRICHED DORK LINK #1:', JSON.stringify({
-          title: sample.post_title?.substring(0, 40),
-          mentionsBrand: sample.mentionsBrand,
-          fullContentLength: sample.fullContent?.length || 0
-        }, null, 2))
-      }
-
       // Enrich dork results and remove URLs already shown in organic redditThreads
       const organicThreadUrls = new Set(enrichedRedditThreads.map(t => (t.url || '').toLowerCase()))
       const dorkResultsFiltered = rawDorkResults
@@ -2294,6 +2285,14 @@ Return this exact format - ONLY JSON, nothing else:
           mentionHighlights: (mentionData.mentionHighlights || []).slice(0, 3)
         }
       })
+      if (enrichedDorkLinks.length > 0) {
+        const sample = enrichedDorkLinks[0]
+        console.log('[serp-scout] ✓ ENRICHED DORK LINK #1:', JSON.stringify({
+          title: sample.post_title?.substring(0, 40),
+          mentionsBrand: sample.mentionsBrand,
+          fullContentLength: sample.fullContent?.length || 0
+        }, null, 2))
+      }
 
       // Save SERP analysis for 24hr cache
       if (requestCompanyId) {
