@@ -1682,6 +1682,43 @@ export default function SerpScout() {
           />
         </TabsContent>
       </Tabs>
+
+      {/* ── CTA Banner ──────────────────────────────────────────────────────── */}
+      <div className="mt-16 mb-8">
+        <div className="rounded-2xl border border-border bg-muted/30 px-6 py-12 text-center space-y-5">
+          <h3 className="text-xl sm:text-2xl font-bold tracking-tight">
+            Want Infrasity to run this for you?
+          </h3>
+          <p className="text-muted-foreground text-sm max-w-md mx-auto">
+            Our team manages Reddit visibility, SERP monitoring, and AI citation strategy end-to-end so you can focus on building.
+          </p>
+          <div className="flex flex-col items-center gap-3 pt-2">
+            <a
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 text-sm transition-colors"
+            >
+              Book a free consultation
+              <ChevronRight className="h-4 w-4" />
+            </a>
+            <p className="text-xs text-muted-foreground">Free strategy call. No commitment required.</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+          <a href="/services/reddit-marketing-agency" className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3.5 text-sm hover:border-primary/30 transition-colors group">
+            <span>See our Reddit marketing services</span>
+            <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+          </a>
+          <a href="/case-studies" className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3.5 text-sm hover:border-primary/30 transition-colors group">
+            <span>Read client case studies</span>
+            <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+          </a>
+          <a href="/pricing" className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3.5 text-sm hover:border-primary/30 transition-colors group">
+            <span>View pricing plans</span>
+            <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
