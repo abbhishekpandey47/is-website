@@ -236,6 +236,9 @@ export default function SerpScout() {
   const [generateLoading, setGenerateLoading] = useState(false);
   const [generateError, setGenerateError] = useState(null);
 
+  // Recent domains (UI only — read from localStorage)
+  const [recentDomains, setRecentDomains] = useState([]);
+
   // Auto-load from localStorage
   const [hasAutoLoadedOnMount, setHasAutoLoadedOnMount] = useState(false);
 
@@ -302,10 +305,27 @@ export default function SerpScout() {
       if (savedDomain && !domain) {
         setDomain(savedDomain);
       }
+      // Load recent domains list
+      const saved = localStorage.getItem("serp-scout-recent-domains");
+      if (saved) {
+        try { setRecentDomains(JSON.parse(saved).slice(0, 3)); } catch {}
+      }
     } catch (e) {
       console.warn("[SERP Scout] Failed to read localStorage:", e.message);
     }
   }, []);
+
+  // Update recent domains list when a new domain is analyzed
+  useEffect(() => {
+    if (!rawResult || !domain.trim()) return;
+    try {
+      const trimmed = domain.trim();
+      const prev = JSON.parse(localStorage.getItem("serp-scout-recent-domains") || "[]");
+      const updated = [trimmed, ...prev.filter(d => d !== trimmed)].slice(0, 3);
+      localStorage.setItem("serp-scout-recent-domains", JSON.stringify(updated));
+      setRecentDomains(updated);
+    } catch {}
+  }, [rawResult]);
 
   // Auto-trigger analysis when domain is loaded from localStorage
   useEffect(() => {
@@ -916,10 +936,27 @@ export default function SerpScout() {
             <p className="text-sm text-muted-foreground">
               Discover Reddit threads ranking on Google and find LLM citation opportunities for your brand.
             </p>
-            <div className="flex items-center gap-2 text-sm bg-muted/60 px-3 py-1.5 rounded-lg border border-border shrink-0">
-              <Globe className="h-3.5 w-3.5 text-primary shrink-0" />
-              <span className="font-medium truncate max-w-48">{companyName}</span>
-              {saved && <CheckCircle className="h-3.5 w-3.5 text-emerald-500 shrink-0" />}
+            <div className="flex items-center gap-2 shrink-0">
+              <div
+                className="flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg"
+                style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.2)' }}
+              >
+                <Globe className="h-3.5 w-3.5 shrink-0" style={{ color: '#5f64ff' }} />
+                <span className="font-medium truncate max-w-48">{companyName}</span>
+                {saved && (
+                  <span
+                    className="inline-block h-2 w-2 rounded-full shrink-0"
+                    style={{ background: '#5f64ff', boxShadow: '0 0 6px rgba(95,100,255,0.3)' }}
+                  />
+                )}
+              </div>
+              <button
+                onClick={() => setActiveTab("save")}
+                className="flex items-center justify-center h-8 w-8 rounded-lg border border-border hover:border-[#5f64ff]/40 bg-muted/60 hover:bg-[rgba(95,100,255,0.1)] transition-colors"
+                title="Save keywords & competitors"
+              >
+                <Bookmark className="h-3.5 w-3.5 text-muted-foreground" />
+              </button>
             </div>
           </div>
         )}
@@ -928,30 +965,30 @@ export default function SerpScout() {
       {/* Tab navigation */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <div className="border-b border-border">
-          <TabsList className="h-auto p-0 bg-transparent gap-0">
-            <TabsTrigger value="domain" className="gap-2 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 py-3">
+          <TabsList className="h-auto min-h-[48px] p-0 bg-transparent rounded-none gap-0">
+            <TabsTrigger value="domain" className="gap-2 rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-transparent px-4 py-3">
               <Globe className="h-4 w-4" />
               <span className="text-sm">Domain</span>
             </TabsTrigger>
-            <TabsTrigger value="overview" disabled={!hasResult} className="gap-2 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 py-3">
+            <TabsTrigger value="overview" disabled={!hasResult} className="gap-2 rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-transparent px-4 py-3">
               <FileText className="h-4 w-4" />
               <span className="text-sm">Overview</span>
             </TabsTrigger>
-            <TabsTrigger value="keywords" disabled={!hasResult} className="gap-2 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 py-3">
+            <TabsTrigger value="keywords" disabled={!hasResult} className="gap-2 rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-transparent px-4 py-3">
               <Tag className="h-4 w-4" />
               <span className="text-sm">Keywords</span>
               {hasResult && keywords.length > 0 && (
-                <span className="text-[10px] bg-primary/15 text-primary px-1.5 py-0.5 rounded-full font-medium leading-none">
+                <span className="text-[10px] bg-[rgba(95,100,255,0.15)] text-[#5f64ff] px-1.5 py-0.5 rounded-full font-medium leading-none">
                   {keywords.length}
                 </span>
               )}
             </TabsTrigger>
-            <TabsTrigger value="save" disabled={!hasResult} className="gap-2 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 py-3">
+            <TabsTrigger value="save" disabled={!hasResult} className="hidden">
               <Bookmark className="h-4 w-4" />
               <span className="text-sm">Save</span>
               {saved && <CheckCircle className="h-3 w-3 text-emerald-500" />}
             </TabsTrigger>
-            <TabsTrigger value="analyze" disabled={!saved} className="gap-2 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 py-3">
+            <TabsTrigger value="analyze" disabled={!saved} className="gap-2 rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-transparent px-4 py-3">
               <BarChart2 className="h-4 w-4" />
               <span className="text-sm">Analyze</span>
             </TabsTrigger>
@@ -971,8 +1008,11 @@ export default function SerpScout() {
         <TabsContent value="domain" className="mt-8">
           <div className="flex flex-col items-center text-center max-w-2xl mx-auto space-y-8">
             <div className="space-y-3">
-              <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-primary/10 mb-2">
-                <Search className="h-7 w-7 text-primary" />
+              <div
+                className="inline-flex items-center justify-center h-14 w-14 rounded-2xl mb-2"
+                style={{ background: 'rgba(95,100,255,0.1)', border: '0.5px solid rgba(95,100,255,0.3)' }}
+              >
+                <Search className="h-7 w-7" style={{ color: '#5f64ff' }} />
               </div>
               <h2 className="text-3xl font-bold tracking-tight">Analyze your domain</h2>
               <p className="text-muted-foreground text-base max-w-md mx-auto">
@@ -989,13 +1029,41 @@ export default function SerpScout() {
                 disabled={loading}
                 className="h-12 text-base px-4"
               />
-              <Button onClick={handleAnalyzeDomain} disabled={loading || !domain.trim()} className="h-12 px-6">
+              <Button
+                onClick={handleAnalyzeDomain}
+                disabled={loading || !domain.trim()}
+                className="h-12 px-6 text-white border-none"
+                style={{ background: '#5f64ff', boxShadow: '0 0 14px rgba(95,100,255,0.3)' }}
+              >
                 {loading
                   ? <><Spinner className="h-4 w-4 mr-2" />Analyzing…</>
                   : <><Sparkles className="h-4 w-4 mr-2" />Analyze</>
                 }
               </Button>
             </div>
+
+            {/* Recent domains */}
+            {recentDomains.length > 0 && !loading && !hasResult && (
+              <div className="flex items-center gap-2 w-full max-w-xl flex-wrap">
+                <span className="text-[11px]" style={{ color: '#666' }}>Recent:</span>
+                {recentDomains.map((d) => (
+                  <button
+                    key={d}
+                    onClick={() => setDomain(d)}
+                    className="text-[11px] transition-colors hover:border-[#444]"
+                    style={{
+                      background: '#161616',
+                      border: '0.5px solid #222',
+                      borderRadius: '100px',
+                      padding: '3px 10px',
+                      color: '#666',
+                    }}
+                  >
+                    {d}
+                  </button>
+                ))}
+              </div>
+            )}
 
             {loading && (
               <div className="space-y-2 w-full max-w-xl pt-1">
@@ -1025,18 +1093,38 @@ export default function SerpScout() {
             )}
 
             {!hasResult && !loading && (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-xl pt-4">
-                <div className="flex flex-col items-center gap-2 p-4 rounded-lg border border-border bg-muted/30">
-                  <Globe className="h-5 w-5 text-muted-foreground" />
-                  <p className="text-xs text-muted-foreground text-center">Scrapes &amp; understands your company</p>
-                </div>
-                <div className="flex flex-col items-center gap-2 p-4 rounded-lg border border-border bg-muted/30">
-                  <Tag className="h-5 w-5 text-muted-foreground" />
-                  <p className="text-xs text-muted-foreground text-center">Generates targeted keywords &amp; prompts</p>
-                </div>
-                <div className="flex flex-col items-center gap-2 p-4 rounded-lg border border-border bg-muted/30">
-                  <BarChart2 className="h-5 w-5 text-muted-foreground" />
-                  <p className="text-xs text-muted-foreground text-center">Finds Reddit threads &amp; AI citations</p>
+              <div className="relative w-full max-w-xl pt-4">
+                {/* Gradient connecting line */}
+                <div
+                  className="hidden sm:block absolute top-[calc(1rem+28px)] left-[calc(16.67%+20px)] right-[calc(16.67%+20px)] h-[0.5px]"
+                  style={{ background: 'linear-gradient(90deg, #c084fc, #a78bfa, #60a5fa)' }}
+                />
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {[
+                    { num: '01', icon: <Globe className="h-5 w-5" style={{ color: '#c084fc' }} />, label: 'Scrapes & understands your company' },
+                    { num: '02', icon: <Tag className="h-5 w-5" style={{ color: '#a78bfa' }} />, label: 'Generates targeted keywords & prompts' },
+                    { num: '03', icon: <BarChart2 className="h-5 w-5" style={{ color: '#60a5fa' }} />, label: 'Finds Reddit threads & AI citations' },
+                  ].map((step) => (
+                    <div key={step.num} className="flex flex-col items-center gap-2 p-4 rounded-lg border border-border" style={{ background: '#141414' }}>
+                      <span
+                        className="text-lg font-bold"
+                        style={{
+                          background: 'linear-gradient(135deg, #c084fc, #60a5fa)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                        }}
+                      >
+                        {step.num}
+                      </span>
+                      <div
+                        className="flex items-center justify-center h-10 w-10 rounded-lg"
+                        style={{ background: '#141414', border: '0.5px solid rgba(95,100,255,0.3)' }}
+                      >
+                        {step.icon}
+                      </div>
+                      <p className="text-xs text-muted-foreground text-center">{step.label}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
@@ -1047,11 +1135,11 @@ export default function SerpScout() {
         <TabsContent value="overview" className="mt-8">
           {activeCtx ? (
             <div className="space-y-4">
-              <Card>
+              <Card style={{ border: '0.5px solid rgba(95,100,255,0.2)' }}>
                 <CardHeader className="flex flex-row items-start justify-between gap-4">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      <FileText className="h-5 w-5 text-primary" /> Company Overview
+                      <FileText className="h-5 w-5" style={{ color: '#5f64ff' }} /> Company Overview
                     </CardTitle>
                     <CardDescription>
                       AI-generated from your website. Edit if anything looks off, then continue to Keywords.
@@ -1067,10 +1155,13 @@ export default function SerpScout() {
                       });
                     }
                     setEditingCtx(e => !e);
-                  }} className="shrink-0">
+                  }}
+                    className="shrink-0 border-none"
+                    style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.2)', color: '#5f64ff' }}
+                  >
                     {editingCtx
-                      ? <><X className="h-3.5 w-3.5 mr-1" />Cancel</>
-                      : <><Edit2 className="h-3.5 w-3.5 mr-1" />Edit</>
+                      ? <><X className="h-3.5 w-3.5 mr-1" style={{ color: '#5f64ff' }} />Cancel</>
+                      : <><Edit2 className="h-3.5 w-3.5 mr-1" style={{ color: '#5f64ff' }} />Edit</>
                     }
                   </Button>
                 </CardHeader>
@@ -1154,20 +1245,44 @@ export default function SerpScout() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {activeCtx.coreCapabilities?.length > 0 && (
                           <div>
-                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Core Capabilities</p>
+                            <p
+                              className="text-xs font-semibold uppercase tracking-wide mb-2"
+                              style={{
+                                background: 'linear-gradient(90deg, #c084fc, #60a5fa)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                              }}
+                            >Core Capabilities</p>
                             <div className="flex flex-wrap gap-1.5">
                               {activeCtx.coreCapabilities.map((c, i) => (
-                                <Badge key={i} variant="secondary" className="text-xs">{c}</Badge>
+                                <Badge
+                                  key={i}
+                                  variant="secondary"
+                                  className="text-xs border-none"
+                                  style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.2)' }}
+                                >{c}</Badge>
                               ))}
                             </div>
                           </div>
                         )}
                         {activeCtx.problemSpaces?.length > 0 && (
                           <div>
-                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Problem Spaces</p>
+                            <p
+                              className="text-xs font-semibold uppercase tracking-wide mb-2"
+                              style={{
+                                background: 'linear-gradient(90deg, #c084fc, #60a5fa)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                              }}
+                            >Problem Spaces</p>
                             <div className="flex flex-wrap gap-1.5">
                               {activeCtx.problemSpaces.map((p, i) => (
-                                <Badge key={i} variant="outline" className="text-xs">{p}</Badge>
+                                <Badge
+                                  key={i}
+                                  variant="outline"
+                                  className="text-xs border-none"
+                                  style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.2)' }}
+                                >{p}</Badge>
                               ))}
                             </div>
                           </div>
@@ -1178,7 +1293,11 @@ export default function SerpScout() {
                 </CardContent>
               </Card>
               <div className="flex justify-end">
-                <Button onClick={() => setActiveTab("keywords")}>
+                <Button
+                  onClick={() => setActiveTab("keywords")}
+                  className="text-white border-none"
+                  style={{ background: '#5f64ff', boxShadow: '0 0 14px rgba(95,100,255,0.3)' }}
+                >
                   Review Keywords <ChevronRight className="h-4 w-4 ml-1" />
                 </Button>
               </div>
@@ -1194,28 +1313,38 @@ export default function SerpScout() {
         <TabsContent value="keywords" className="mt-8">
           <div className="space-y-4">
             {rawResult?.fromExisting && (
-              <div className="flex items-start gap-3 bg-primary/5 border border-primary/20 rounded-lg px-4 py-3 text-sm">
-                <CheckCircle className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+              <div
+                className="flex items-start gap-3 rounded-lg px-4 py-3 text-sm"
+                style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.2)' }}
+              >
+                <CheckCircle className="h-4 w-4 shrink-0 mt-0.5" style={{ color: '#5f64ff' }} />
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-foreground">Your saved keywords are ready</p>
                   <p className="text-xs text-muted-foreground mt-0.5">Review, add, or remove keywords below — then head to Analyze when you&apos;re good to go.</p>
                 </div>
-                <Button size="sm" className="h-7 text-xs shrink-0" onClick={() => setActiveTab("analyze")}>
+                <Button
+                  size="sm"
+                  className="h-7 text-xs shrink-0 text-white border-none"
+                  style={{ background: '#5f64ff' }}
+                  onClick={() => setActiveTab("analyze")}
+                >
                   Go to Analyze <ChevronRight className="h-3 w-3 ml-0.5" />
                 </Button>
               </div>
             )}
             <div className="flex items-center gap-3 text-sm">
-              <Tag className="h-4 w-4 text-primary" />
+              <Tag className="h-4 w-4" style={{ color: '#5f64ff' }} />
               <span className="font-medium">{selectedKwIds.size} of {keywords.length} selected</span>
               <button
-                className="text-xs text-muted-foreground underline"
+                className="text-xs underline"
+                style={{ color: '#5f64ff' }}
                 onClick={() => setSelectedKwIds(new Set(keywords.map((_, i) => i)))}
               >
                 Select all
               </button>
               <button
-                className="text-xs text-muted-foreground underline"
+                className="text-xs underline"
+                style={{ color: '#5f64ff' }}
                 onClick={() => setSelectedKwIds(new Set())}
               >
                 Clear
@@ -1226,27 +1355,41 @@ export default function SerpScout() {
               {keywords.map((kw, idx) => (
                 <Card
                   key={idx}
-                  className={`transition-all ${selectedKwIds.has(idx) ? "border-primary/40 bg-primary/5" : "border-border hover:border-primary/20"}`}
+                  className="transition-all"
+                  style={selectedKwIds.has(idx)
+                    ? { border: '0.5px solid rgba(95,100,255,0.4)', background: 'rgba(95,100,255,0.05)' }
+                    : { border: '0.5px solid rgba(95,100,255,0.1)' }
+                  }
                 >
                   <CardContent className="p-3">
                     <div className="flex items-start gap-3">
                       <button
                         onClick={() => toggleKw(idx)}
-                        className={`mt-0.5 h-4 w-4 rounded border-2 shrink-0 flex items-center justify-center transition-colors ${
-                          selectedKwIds.has(idx) ? "bg-primary border-primary" : "border-muted-foreground/40"
-                        }`}
+                        className="mt-0.5 h-4 w-4 rounded border-2 shrink-0 flex items-center justify-center transition-colors"
+                        style={selectedKwIds.has(idx)
+                          ? { background: '#5f64ff', borderColor: '#5f64ff' }
+                          : { borderColor: 'rgba(255,255,255,0.25)' }
+                        }
                       >
                         {selectedKwIds.has(idx) && (
-                          <span className="text-primary-foreground text-[10px] font-bold leading-none">✓</span>
+                          <span className="text-white text-[10px] font-bold leading-none">✓</span>
                         )}
                       </button>
 
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="font-medium text-sm">{kw.term}</span>
-                          <Badge variant="outline" className="text-[10px] capitalize">{kw.intent}</Badge>
+                          <Badge
+                            variant="outline"
+                            className="text-[10px] capitalize border-none"
+                            style={kw.intent === 'informational'
+                              ? { background: 'rgba(96,165,250,0.1)', border: '0.5px solid rgba(96,165,250,0.3)', color: '#93c5fd' }
+                              : { background: 'rgba(95,100,255,0.12)', border: '0.5px solid rgba(95,100,255,0.3)', color: '#a5b4fc' }
+                            }
+                          >{kw.intent}</Badge>
                           <button
-                            className="text-xs text-primary underline"
+                            className="text-xs underline"
+                            style={{ color: '#5f64ff' }}
                             onClick={() => setExpandedKw(expandedKw === idx ? null : idx)}
                           >
                             {expandedKw === idx ? "collapse" : `${kw.prompts.length} prompt${kw.prompts.length !== 1 ? "s" : ""}`}
@@ -1262,7 +1405,7 @@ export default function SerpScout() {
                             {kw.prompts.length > 0 ? (
                               kw.prompts.map((p, pi) => (
                                 <div key={pi} className="flex items-start gap-1.5 text-xs text-foreground/80">
-                                  <MessageSquare className="h-3 w-3 mt-0.5 shrink-0 text-primary" />
+                                  <MessageSquare className="h-3 w-3 mt-0.5 shrink-0" style={{ color: '#5f64ff' }} />
                                   <span>{p}</span>
                                 </div>
                               ))
@@ -1283,21 +1426,23 @@ export default function SerpScout() {
                               <Button
                                 size="sm"
                                 variant="outline"
-                                className="h-7 px-2 shrink-0"
+                                className="h-7 px-2 shrink-0 border-none"
+                                style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.2)' }}
                                 onClick={() => addManualPromptToKeyword(idx)}
                                 title="Add prompt"
                               >
-                                <Plus className="h-3 w-3" />
+                                <Plus className="h-3 w-3" style={{ color: '#5f64ff' }} />
                               </Button>
                               <Button
                                 size="sm"
                                 variant="outline"
-                                className="h-7 px-2 shrink-0"
+                                className="h-7 px-2 shrink-0 border-none"
+                                style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.2)' }}
                                 onClick={() => handleSuggestPrompts(idx)}
                                 disabled={suggestingIdx === idx}
                                 title="AI suggest prompts"
                               >
-                                {suggestingIdx === idx ? <Spinner className="h-3 w-3" /> : <Sparkles className="h-3 w-3" />}
+                                {suggestingIdx === idx ? <Spinner className="h-3 w-3" /> : <Sparkles className="h-3 w-3" style={{ color: '#5f64ff' }} />}
                               </Button>
                             </div>
                           </div>
@@ -1316,10 +1461,10 @@ export default function SerpScout() {
             </div>
 
             {/* Add custom keyword */}
-            <Card>
+            <Card style={{ border: '0.5px solid rgba(95,100,255,0.2)' }}>
               <CardHeader>
                 <CardTitle className="text-sm flex items-center gap-1.5">
-                  <Plus className="h-4 w-4" />Add Custom Keyword
+                  <Plus className="h-4 w-4" style={{ color: '#5f64ff' }} />Add Custom Keyword
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -1349,14 +1494,26 @@ export default function SerpScout() {
                   rows={2}
                   className="text-sm"
                 />
-                <Button size="sm" variant="outline" onClick={addCustomKeyword} disabled={!newKwForm.term.trim()}>
-                  <Plus className="h-3.5 w-3.5 mr-1.5" />Add Keyword
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="border-none"
+                  style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.2)', color: '#5f64ff' }}
+                  onClick={addCustomKeyword}
+                  disabled={!newKwForm.term.trim()}
+                >
+                  <Plus className="h-3.5 w-3.5 mr-1.5" style={{ color: '#5f64ff' }} />Add Keyword
                 </Button>
               </CardContent>
             </Card>
 
             <div className="flex justify-end">
-              <Button onClick={() => setActiveTab("save")} disabled={selectedKwIds.size === 0}>
+              <Button
+                onClick={() => setActiveTab("save")}
+                disabled={selectedKwIds.size === 0}
+                className="text-white border-none"
+                style={{ background: '#5f64ff', boxShadow: '0 0 16px rgba(95,100,255,0.3)' }}
+              >
                 Add Competitors & Save <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
             </div>
@@ -1695,7 +1852,8 @@ export default function SerpScout() {
           <div className="flex flex-col items-center gap-3 pt-2">
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 text-sm transition-colors"
+              className="inline-flex items-center gap-2 rounded-full text-white font-semibold px-8 py-3 text-sm transition-colors"
+              style={{ background: '#5f64ff', borderRadius: '100px', boxShadow: '0 0 20px rgba(95,100,255,0.3)' }}
             >
               Book a free consultation
               <ChevronRight className="h-4 w-4" />
@@ -1704,20 +1862,6 @@ export default function SerpScout() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-          <a href="/services/reddit-marketing-agency" className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3.5 text-sm hover:border-primary/30 transition-colors group">
-            <span>See our Reddit marketing services</span>
-            <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-          </a>
-          <a href="/case-studies" className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3.5 text-sm hover:border-primary/30 transition-colors group">
-            <span>Read client case studies</span>
-            <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-          </a>
-          <a href="/pricing" className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3.5 text-sm hover:border-primary/30 transition-colors group">
-            <span>View pricing plans</span>
-            <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-          </a>
-        </div>
       </div>
     </div>
   );

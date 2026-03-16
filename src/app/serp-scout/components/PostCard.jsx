@@ -41,7 +41,7 @@ export default function PostCard({ post, brandLabel, allCompetitors = [], rank =
   };
 
   return (
-    <div className="rounded-lg border border-border bg-card p-3 space-y-2 hover:border-primary/30 transition-colors">
+    <div className="rounded-lg bg-card p-3 space-y-2 transition-colors" style={{ border: '0.5px solid rgba(95,100,255,0.15)' }}>
       <div className="space-y-1.5">
         <div className="flex items-start gap-2">
           {rank && (
@@ -53,9 +53,10 @@ export default function PostCard({ post, brandLabel, allCompetitors = [], rank =
             href={url}
             target="_blank"
             rel="noreferrer"
-            className="font-medium text-sm text-primary hover:underline line-clamp-2 flex items-start gap-1.5 flex-1"
+            className="font-medium text-sm hover:underline line-clamp-2 flex items-start gap-1.5 flex-1"
+            style={{ color: '#5f64ff' }}
           >
-            <ExternalLink className="h-3.5 w-3.5 mt-0.5 shrink-0" />
+            <ExternalLink className="h-3.5 w-3.5 mt-0.5 shrink-0" style={{ color: '#5f64ff' }} />
             {title}
           </a>
         </div>

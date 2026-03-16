@@ -308,10 +308,16 @@ export default function AnalysisPanel({
         </div>
       )}
       {/* ── Keyword selector + single Run Analysis button ── */}
-      <Card>
+      <Card style={{ border: '0.5px solid rgba(95,100,255,0.22)' }}>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm flex items-center gap-2">
-            <Search className="h-4 w-4 text-primary" />Analysis
+            <span
+              className="inline-flex items-center justify-center h-6 w-6 rounded-md"
+              style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)' }}
+            >
+              <Search className="h-3.5 w-3.5" style={{ color: '#5f64ff' }} />
+            </span>
+            Analysis
           </CardTitle>
           <CardDescription className="text-xs">
             Select a keyword and run analysis — fetches SERP threads, dork links, Reddit posts &amp; AI citations in one go
@@ -328,11 +334,13 @@ export default function AnalysisPanel({
                 <button
                   key={globalIdx}
                   onClick={() => setSelectedKwIdx(globalIdx)}
-                  className={`px-3 py-1.5 rounded-md text-sm border transition-colors ${
-                    isSelected ? 'bg-primary border-primary font-medium' : 'bg-muted/30 border-border hover:bg-muted'
-                  }`}
+                  className="px-3 py-1.5 rounded-md text-sm transition-colors"
+                  style={isSelected
+                    ? { background: 'rgba(95,100,255,0.08)', border: '0.5px solid #5f64ff', color: '#f0f0f0', boxShadow: '0 0 0 1px rgba(95,100,255,0.15)' }
+                    : { background: '#1a1a1a', border: '0.5px solid #2a2a2a', color: '#bbb' }
+                  }
                 >
-                  <span className={`font-medium ${isSelected ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  <span className="font-medium">
                     {kw.term}
                   </span>
                   {hasData && (
@@ -347,7 +355,13 @@ export default function AnalysisPanel({
           </div>
           {selectedKwIdx !== null && (
             <div className="flex items-center gap-3 flex-wrap">
-              <Button onClick={handleRunAnalysis} disabled={isLoading} size="sm">
+              <Button
+                onClick={handleRunAnalysis}
+                disabled={isLoading}
+                size="sm"
+                className="text-white border-none"
+                style={{ background: '#5f64ff', boxShadow: '0 0 14px rgba(95,100,255,0.3)' }}
+              >
                 {isLoading
                   ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Running…</>
                   : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run Analysis</>
@@ -378,40 +392,43 @@ export default function AnalysisPanel({
       {/* ── Result tabs ── */}
       {(hasAnyData || isLoading || serpThreadsLoading || redditPostsLoading) && (
         <Tabs defaultValue="serp" className="w-full">
-          <TabsList className="grid grid-cols-4 w-full">
-            <TabsTrigger value="serp" className="text-xs">
+          <TabsList className="grid grid-cols-4 w-full bg-transparent p-0 h-auto rounded-none border-b border-border">
+            <TabsTrigger value="serp" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
               SERP Threads
               {serpThreadsLoading
                 ? <Spinner className="ml-1 h-3 w-3 opacity-60" />
-                : (serpThreads.length + dorkThreads.length) > 0 && <span className="ml-1 opacity-60 text-[10px]">{serpThreads.length + dorkThreads.length}</span>
+                : (serpThreads.length + dorkThreads.length) > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{serpThreads.length + dorkThreads.length}</span>
               }
             </TabsTrigger>
-            <TabsTrigger value="top" className="text-xs">
+            <TabsTrigger value="top" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
               Top
               {redditPostsLoading
                 ? <Spinner className="ml-1 h-3 w-3 opacity-60" />
-                : topThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{topThreads.length}</span>
+                : topThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{topThreads.length}</span>
               }
             </TabsTrigger>
-            <TabsTrigger value="new" className="text-xs">
+            <TabsTrigger value="new" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
               New
               {redditPostsLoading
                 ? <Spinner className="ml-1 h-3 w-3 opacity-60" />
-                : newThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{newThreads.length}</span>
+                : newThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{newThreads.length}</span>
               }
             </TabsTrigger>
-            <TabsTrigger value="cited" className="text-xs">
+            <TabsTrigger value="cited" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
               Cited
-              {citedThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{citedThreads.length} links</span>}
+              {citedThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{citedThreads.length} links</span>}
             </TabsTrigger>
           </TabsList>
 
           {/* SERP Threads — SERP first, dork appended seamlessly */}
           <TabsContent value="serp" className="mt-4">
-            <Card>
+            <Card style={{ border: '0.5px solid rgba(95,100,255,0.22)' }}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
-                  <Search className="h-4 w-4 text-primary" />SERP Threads
+                  <span className="inline-flex items-center justify-center h-6 w-6 rounded-md" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)' }}>
+                    <Search className="h-3.5 w-3.5" style={{ color: '#5f64ff' }} />
+                  </span>
+                  SERP Threads
                   {serpThreadsLoading
                     ? <span className="ml-auto flex items-center gap-1 text-[11px] font-normal text-muted-foreground"><Spinner className="h-3 w-3" />Loading…</span>
                     : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{serpThreads.length + dorkThreads.length} results</span>
@@ -427,10 +444,13 @@ export default function AnalysisPanel({
 
           {/* Top Threads */}
           <TabsContent value="top" className="mt-4 space-y-3">
-            <Card>
+            <Card style={{ border: '0.5px solid rgba(95,100,255,0.22)' }}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
-                  <TrendingUp className="h-4 w-4 text-primary" />Top Threads
+                  <span className="inline-flex items-center justify-center h-6 w-6 rounded-md" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)' }}>
+                    <TrendingUp className="h-3.5 w-3.5" style={{ color: '#5f64ff' }} />
+                  </span>
+                  Top Threads
                   {redditPostsLoading
                     ? <span className="ml-auto flex items-center gap-1 text-[11px] font-normal text-muted-foreground"><Spinner className="h-3 w-3" />Loading Reddit…</span>
                     : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{topThreads.length} results</span>
@@ -462,10 +482,13 @@ export default function AnalysisPanel({
 
           {/* New Threads */}
           <TabsContent value="new" className="mt-4 space-y-3">
-            <Card>
+            <Card style={{ border: '0.5px solid rgba(95,100,255,0.22)' }}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-primary" />New Threads
+                  <span className="inline-flex items-center justify-center h-6 w-6 rounded-md" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)' }}>
+                    <Clock className="h-3.5 w-3.5" style={{ color: '#5f64ff' }} />
+                  </span>
+                  New Threads
                   {redditPostsLoading
                     ? <span className="ml-auto flex items-center gap-1 text-[11px] font-normal text-muted-foreground"><Spinner className="h-3 w-3" />Loading Reddit…</span>
                     : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{newThreads.length} results</span>
@@ -497,10 +520,13 @@ export default function AnalysisPanel({
 
           {/* Cited Threads — grouped by prompt, per AI platform */}
           <TabsContent value="cited" className="mt-4">
-            <Card>
+            <Card style={{ border: '0.5px solid rgba(95,100,255,0.22)' }}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-primary" />AI Citations by Prompt
+                  <span className="inline-flex items-center justify-center h-6 w-6 rounded-md" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)' }}>
+                    <Sparkles className="h-3.5 w-3.5" style={{ color: '#5f64ff' }} />
+                  </span>
+                  AI Citations by Prompt
                   <span className="ml-auto text-[11px] font-normal text-muted-foreground">
                     {(citationResults?.records || []).length} prompt{(citationResults?.records || []).length !== 1 ? 's' : ''}
                   </span>
