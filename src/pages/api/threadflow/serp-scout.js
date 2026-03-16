@@ -96,9 +96,9 @@ const DATAFORSEO_POLL_INTERVAL = 3000
 const DATAFORSEO_POLL_TIMEOUT = 30_000
 const REDDIT_API_BASE = 'https://reddit-comment-gen.onrender.com'
 const POST_DETAILS_ENDPOINT = `${REDDIT_API_BASE}/fetch_post_details`
-const POST_DETAILS_TIMEOUT_MS = Number(process.env.SERP_SCOUT_POST_DETAILS_TIMEOUT_MS) || 12000
+const POST_DETAILS_TIMEOUT_MS = Number(process.env.SERP_SCOUT_POST_DETAILS_TIMEOUT_MS) || 5000
 const CITATION_SEARCH_TIMEOUT_MS = 120_000 // 120 seconds for citation searches (web search can be slow)
-const POST_DETAILS_CONCURRENCY = Number(process.env.SERP_SCOUT_POST_DETAILS_CONCURRENCY) || 4
+const POST_DETAILS_CONCURRENCY = Number(process.env.SERP_SCOUT_POST_DETAILS_CONCURRENCY) || 8
 const MENTION_SNIPPET_RADIUS = 120
 const MENTION_SNIPPET_MAX_LENGTH = 200
 const postDetailsLimiter = pLimit(POST_DETAILS_CONCURRENCY)
@@ -1980,17 +1980,20 @@ Return this exact format - ONLY JSON, nothing else:
       }
 
       // --- 1. KEYWORD SERP ANALYSIS (Step 5) ---
-      console.log('[serp-scout] fetching fresh SERP data', { keyword, domain: targetDomain })
-      const serpData = await fetchKeywordSerpPosition(keyword, targetDomain, 100)
-      const redditThreads = Array.isArray(serpData.redditThreads) ? serpData.redditThreads : []
+      // Run SERP fetch, Reddit API, DataForSEO, and company context fetch all in parallel
+      console.log('[serp-scout] fetching fresh SERP data + Reddit posts in parallel', { keyword, domain: targetDomain })
 
-      // Fetch top/new posts using BOTH DataForSEO and Reddit API
-      console.log('[serp-scout] fetching Reddit posts via DataForSEO & Reddit API', { keyword })
-
-      const [redditApiData, dataForSeoData] = await Promise.all([
+      const [serpData, redditApiData, dataForSeoData, storedCompanyContext] = await Promise.all([
+        fetchKeywordSerpPosition(keyword, targetDomain, 100),
         fetchRedditTopNewPosts(keyword),
-        fetchRedditViaDataForSeo(keyword)
+        fetchRedditViaDataForSeo(keyword),
+        requestCompanyId ? getCompanyContext(requestCompanyId).catch(err => {
+          console.warn('[serp-scout] context fetch failed', err.message)
+          return null
+        }) : Promise.resolve(null)
       ])
+
+      const redditThreads = Array.isArray(serpData.redditThreads) ? serpData.redditThreads : []
 
       // Debug: log raw API data
       if (redditApiData.top_posts && redditApiData.top_posts.length > 0) {
@@ -2103,61 +2106,47 @@ Return this exact format - ONLY JSON, nothing else:
       const newRedditPosts = allNewCandidates.slice(0, 10)
 
 
-      // Get company context for LLM suggestions
-      let companyContext = ''
-      let storedCompanyContext = null
-      if (requestCompanyId) {
-        try {
-          storedCompanyContext = await getCompanyContext(requestCompanyId)
-          const summary = storedCompanyContext?.approvedContext?.companySummary || storedCompanyContext?.llmContext?.companySummary || ''
-          const capabilities = storedCompanyContext?.approvedContext?.coreCapabilities || storedCompanyContext?.llmContext?.coreCapabilities || []
-          const problems = storedCompanyContext?.approvedContext?.problemSpaces || storedCompanyContext?.llmContext?.problemSpaces || []
-          companyContext = `${summary}\n\nCapabilities: ${capabilities.join(', ')}\n\nProblems: ${problems.join(', ')}`
-          console.log('[serp-scout] using company context', { companyId: requestCompanyId, length: companyContext.length })
-        } catch (err) {
-          console.warn('[serp-scout] context fetch failed', err.message)
-        }
-      }
+      // Build mention targets from already-fetched company context
+      const companyContext = (() => {
+        if (!storedCompanyContext) return ''
+        const summary = storedCompanyContext?.approvedContext?.companySummary || storedCompanyContext?.llmContext?.companySummary || ''
+        const capabilities = storedCompanyContext?.approvedContext?.coreCapabilities || storedCompanyContext?.llmContext?.coreCapabilities || []
+        const problems = storedCompanyContext?.approvedContext?.problemSpaces || storedCompanyContext?.llmContext?.problemSpaces || []
+        return `${summary}\n\nCapabilities: ${capabilities.join(', ')}\n\nProblems: ${problems.join(', ')}`
+      })()
 
-      // LLM-powered post suggestions based on company context
-      console.log('[serp-scout] generating LLM suggestions', { keyword, posts: topRedditPosts.length + newRedditPosts.length })
-      const suggestedPosts = await suggestBestPostsWithLLM(topRedditPosts, newRedditPosts, keyword, companyContext)
+      // Pre-compute dork filter from raw redditThreads URLs (before enrichment)
+      // so all 4 enrichment batches can run in parallel
+      const organicThreadUrls = new Set(redditThreads.map(t => (t.url || '').toLowerCase()))
+      const dorkResultsFiltered = rawDorkResults.filter(post => {
+        const url = (post.post_url || '').toLowerCase()
+        return url && !organicThreadUrls.has(url)
+      })
 
-      const threadsWithContent = redditThreads.length
-        ? await Promise.all(
-            redditThreads.map(thread => postDetailsLimiter(() => enrichRedditThread(thread)))
-          )
-        : [];
+      // Run all 4 enrichment batches in parallel — all tasks queue into the shared limiter together
+      console.log('[serp-scout] enriching all posts in parallel', {
+        threads: redditThreads.length, top: topRedditPosts.length,
+        new: newRedditPosts.length, dork: dorkResultsFiltered.length
+      })
+      const fetchContent = (post) => postDetailsLimiter(async () => {
+        const details = await fetchRedditPostDetails(post.post_url || post.url)
+        return { ...post, fullContent: details?.post_content || post.post_content || post.snippet || '' }
+      })
 
-      // Also fetch full content for top/new posts to get complete mention context
-      console.log('[serp-scout] enriching top/new posts with full content for mention detection', { topCount: topRedditPosts.length, newCount: newRedditPosts.length })
-      const topPostsWithContent = topRedditPosts.length > 0
-        ? await Promise.all(
-            topRedditPosts.map(post =>
-              postDetailsLimiter(async () => {
-                const details = await fetchRedditPostDetails(post.post_url || post.url)
-                return {
-                  ...post,
-                  fullContent: details?.post_content || post.post_content || post.snippet || ''
-                }
-              })
-            )
-          )
-        : topRedditPosts;
-
-      const newPostsWithContent = newRedditPosts.length > 0
-        ? await Promise.all(
-            newRedditPosts.map(post =>
-              postDetailsLimiter(async () => {
-                const details = await fetchRedditPostDetails(post.post_url || post.url)
-                return {
-                  ...post,
-                  fullContent: details?.post_content || post.post_content || post.snippet || ''
-                }
-              })
-            )
-          )
-        : newRedditPosts;
+      const [threadsWithContent, topPostsWithContent, newPostsWithContent, dorkResultsWithContent] = await Promise.all([
+        redditThreads.length
+          ? Promise.all(redditThreads.map(thread => postDetailsLimiter(() => enrichRedditThread(thread))))
+          : Promise.resolve([]),
+        topRedditPosts.length > 0
+          ? Promise.all(topRedditPosts.map(fetchContent))
+          : Promise.resolve(topRedditPosts),
+        newRedditPosts.length > 0
+          ? Promise.all(newRedditPosts.map(fetchContent))
+          : Promise.resolve(newRedditPosts),
+        dorkResultsFiltered.length > 0
+          ? Promise.all(dorkResultsFiltered.map(fetchContent))
+          : Promise.resolve(dorkResultsFiltered),
+      ])
 
       const reqCompetitors = Array.isArray(req.body.competitors)
         ? req.body.competitors
@@ -2271,29 +2260,6 @@ Return this exact format - ONLY JSON, nothing else:
           fullContentLength: sample.fullContent?.length || 0
         }, null, 2))
       }
-      // Enrich dork results and remove URLs already shown in organic redditThreads
-      const organicThreadUrls = new Set(enrichedRedditThreads.map(t => (t.url || '').toLowerCase()))
-      const dorkResultsFiltered = rawDorkResults
-        .filter(post => {
-          const url = (post.post_url || '').toLowerCase()
-          return url && !organicThreadUrls.has(url)
-        })
-
-      // Fetch full content for dork links too
-      const dorkResultsWithContent = dorkResultsFiltered.length > 0
-        ? await Promise.all(
-            dorkResultsFiltered.map(post =>
-              postDetailsLimiter(async () => {
-                const details = await fetchRedditPostDetails(post.post_url || post.url)
-                return {
-                  ...post,
-                  fullContent: details?.post_content || post.post_content || post.snippet || ''
-                }
-              })
-            )
-          )
-        : dorkResultsFiltered;
-
       const enrichedDorkLinks = dorkResultsWithContent.map(post => {
         const mentionData = buildThreadMentionData(
           {
@@ -2330,7 +2296,7 @@ Return this exact format - ONLY JSON, nothing else:
           topRedditPosts: enrichedTopPosts,
           newRedditPosts: enrichedNewPosts,
           dorkRedditLinks: enrichedDorkLinks,
-          suggestedPosts,
+          suggestedPosts: [],
           organicResults: []
         })
       }
@@ -2346,7 +2312,7 @@ Return this exact format - ONLY JSON, nothing else:
         topRedditPosts: enrichedTopPosts,
         newRedditPosts: enrichedNewPosts,
         dorkRedditLinks: enrichedDorkLinks,
-        suggestedPosts,
+        suggestedPosts: [],
         organicResults: [],
         fromCache: false,
         analyzedAt: new Date().toISOString(),
