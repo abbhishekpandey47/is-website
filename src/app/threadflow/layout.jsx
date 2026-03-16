@@ -24,7 +24,7 @@ export default function CrmLayout({ children }) {
       setFirebaseUser(user);
 
       if (!user) {
-        router.push("/auth/signin");
+        window.location.href = "/auth/signin?redirect=/threadflow";
       }
     });
 

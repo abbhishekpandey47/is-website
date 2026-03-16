@@ -1,7 +1,7 @@
 import { Check, Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from 'react';
 import { toast } from "react-toastify";
 import { signinWithGoogle, signUpWithEmail } from "../service/firebase-auth-service";
@@ -16,20 +16,32 @@ const SignupForm = () => {
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  function getRedirect() {
+    const fromHook = searchParams?.get("redirect");
+    if (fromHook) return fromHook;
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("redirect") || "/threadflow";
+    }
+    return "/threadflow";
+  }
 
   const handleGoogleSignin = async () => {
     try {
       setLoading(true);
+      const redirectTo = getRedirect();
       const res = await signinWithGoogle();
       if (res === true) {
         setShowSuccess(true);
         setTimeout(() => {
-          router.push("/threadflow");
-        }, 2000); // Adjust the delay as needed
+          window.location.href = redirectTo;
+        }, 2000);
       } else {
         setShowSuccess(true);
         setTimeout(() => {
-          router.push("/threadflow");
+          window.location.href = redirectTo;
         }, 2000);
       }
     } catch (error) {
@@ -72,16 +84,17 @@ const SignupForm = () => {
     try {
       setLoading(true);
       e.preventDefault();
+      const redirectTo = getRedirect();
       const res = await signUpWithEmail(email, password, firstName, lastName);
       if (res === true) {
         setShowSuccess(true);
         setTimeout(() => {
-          router.push("/threadflow");
-        }, 2000); // Adjust the delay as needed
+          window.location.href = redirectTo;
+        }, 2000);
       } else {
         setShowSuccess(true);
         setTimeout(() => {
-          router.push("/threadflow");
+          window.location.href = redirectTo;
         }, 2000);
       }
     } catch (error) {
@@ -249,7 +262,7 @@ const SignupForm = () => {
           <p className="text-center text-gray-500 text-xs mt-4 mb-6">
             Already have an account?{" "}
             <Link
-            href="/auth/signin"
+            href={`/auth/signin${getRedirect() !== "/threadflow" ? `?redirect=${encodeURIComponent(getRedirect())}` : ""}`}
             className="text-blue-400 hover:text-blue-300 font-medium">
               Log In
             </Link>

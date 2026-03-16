@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Oval } from "react-loader-spinner";
 import { toast } from "react-toastify";
@@ -26,14 +26,27 @@ const SigninForm = () => {
   const [showSuccess, setShowSuccess] = useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  function getRedirect() {
+    // Try React hook first, then fallback to window.location
+    const fromHook = searchParams?.get("redirect");
+    if (fromHook) return fromHook;
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("redirect") || "/threadflow";
+    }
+    return "/threadflow";
+  }
 
   const handleGoogleSignin = async () => {
     try {
       setLoading(true);
+      const redirectTo = getRedirect();
       const res = await signinWithGoogle();
       setShowSuccess(true);
       setTimeout(() => {
-        router.push(res === true ? "/threadflow" : "/threadflow");
+        window.location.href = redirectTo;
       }, 2000);
     } catch (error) {
       if (error instanceof FireBaseErrors.INVALID_PASSWORD) {
@@ -51,10 +64,11 @@ const SigninForm = () => {
     e.preventDefault();
     try {
       setLoading(true);
+      const redirectTo = getRedirect();
       const res = await signinWithEmail(email, password);
       setShowSuccess(true);
       setTimeout(() => {
-        router.push(res === true ? "/threadflow" : "/threadflow");
+        window.location.href = redirectTo;
       }, 2000);
     } catch (error) {
       if (error instanceof FireBaseErrors.INVALID_PASSWORD) {
@@ -147,7 +161,7 @@ const SigninForm = () => {
           {/* Footer links */}
           <div className="text-gray-400 text-sm">
             New to Infrasity?{" "}
-            <Link href="/auth/signup" className="text-indigo-400 hover:underline">
+            <Link href={`/auth/signup${getRedirect() !== "/threadflow" ? `?redirect=${encodeURIComponent(getRedirect())}` : ""}`} className="text-indigo-400 hover:underline">
               Create account
             </Link>
           </div>

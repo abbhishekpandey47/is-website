@@ -1,7 +1,7 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { firestore } from "../lib/firebaseClient";
 
-const saveUser = async (userr) => {
+const saveUser = async (user) => {
   try {
     const userRef = doc(firestore, "users", user.uid);
     const docSnap = await getDoc(userRef);
