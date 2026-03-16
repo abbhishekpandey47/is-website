@@ -101,11 +101,6 @@ export default function Page() {
   return (
     <div className="">
       <Hero isAdsVariant={isAdsVariant} />
-      <NewMarquee />
-
-      {/* ServicesFold - New services bento grid */}
-      <LazySection Component={ServicesFold} showDivider={false} />
-
       {/* RealResult - Second fold, no lazy load */}
       <SectionWrapper>
         <GradientDivider className="mt-8 mb-1" />
