@@ -183,6 +183,8 @@ export default function AnalysisPanel({
   serpResults,
   kwSerpData,
   serpLoading,
+  serpThreadsLoading,
+  redditPostsLoading,
   citationLoading,
   citationResults,
   handleRunAnalysis,
@@ -265,8 +267,9 @@ export default function AnalysisPanel({
   })();
 
   // ── Helpers ───────────────────────────────────────────────────────────────
-  function PostList({ posts, emptyMsg }) {
-    if (isLoading) return (
+  // loading prop controls the skeleton — each section passes its own flag
+  function PostList({ posts, emptyMsg, loading = false }) {
+    if (loading && !posts.length) return (
       <div className="space-y-3 pt-2">
         {[1,2,3].map(i => <Skeleton key={i} className="h-16 w-full rounded-lg" />)}
       </div>
@@ -293,9 +296,17 @@ export default function AnalysisPanel({
   }
 
   const hasAnyData = kwSerpData || citedThreads.length > 0;
+  const isEnriching = kwSerpData && kwSerpData.enriched === false;
 
   return (
     <div className="space-y-4">
+      {/* ── Enriching banner ── */}
+      {isEnriching && (
+        <div className="flex items-center gap-2 text-xs text-blue-700 bg-blue-50 dark:bg-blue-950/20 px-3 py-2 rounded-lg border border-blue-200 dark:border-blue-900">
+          <Loader2 className="h-3.5 w-3.5 animate-spin shrink-0" />
+          <span>Scanning post content for brand &amp; competitor mentions in the background…</span>
+        </div>
+      )}
       {/* ── Keyword selector + single Run Analysis button ── */}
       <Card>
         <CardHeader className="pb-2">
@@ -335,18 +346,26 @@ export default function AnalysisPanel({
             )}
           </div>
           {selectedKwIdx !== null && (
-            <Button onClick={handleRunAnalysis} disabled={isLoading} size="sm">
-              {isLoading
-                ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Running Analysis…</>
-                : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run Analysis</>
-              }
-            </Button>
+            <div className="flex items-center gap-3 flex-wrap">
+              <Button onClick={handleRunAnalysis} disabled={isLoading} size="sm">
+                {isLoading
+                  ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Running…</>
+                  : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run Analysis</>
+                }
+              </Button>
+              {(serpThreadsLoading || redditPostsLoading) && (
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  {serpThreadsLoading && <span className="flex items-center gap-1"><Spinner className="h-3 w-3" />SERP</span>}
+                  {redditPostsLoading && <span className="flex items-center gap-1"><Spinner className="h-3 w-3" />Reddit</span>}
+                </div>
+              )}
+            </div>
           )}
         </CardContent>
       </Card>
 
       {/* ── Empty state ── */}
-      {!hasAnyData && !isLoading && (
+      {!hasAnyData && !isLoading && !serpThreadsLoading && !redditPostsLoading && (
         <div className="flex flex-col items-center justify-center h-48 border border-dashed border-border rounded-lg text-muted-foreground gap-3">
           <Zap className="h-10 w-10 opacity-20" />
           <div className="text-center text-sm">
@@ -357,20 +376,29 @@ export default function AnalysisPanel({
       )}
 
       {/* ── Result tabs ── */}
-      {(hasAnyData || isLoading) && (
+      {(hasAnyData || isLoading || serpThreadsLoading || redditPostsLoading) && (
         <Tabs defaultValue="serp" className="w-full">
           <TabsList className="grid grid-cols-4 w-full">
             <TabsTrigger value="serp" className="text-xs">
               SERP Threads
-              {(serpThreads.length + dorkThreads.length) > 0 && <span className="ml-1 opacity-60 text-[10px]">{Math.min(serpThreads.length + dorkThreads.length, 10)}</span>}
+              {serpThreadsLoading
+                ? <Spinner className="ml-1 h-3 w-3 opacity-60" />
+                : (serpThreads.length + dorkThreads.length) > 0 && <span className="ml-1 opacity-60 text-[10px]">{serpThreads.length + dorkThreads.length}</span>
+              }
             </TabsTrigger>
             <TabsTrigger value="top" className="text-xs">
               Top
-              {topThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{topThreads.length}</span>}
+              {redditPostsLoading
+                ? <Spinner className="ml-1 h-3 w-3 opacity-60" />
+                : topThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{topThreads.length}</span>
+              }
             </TabsTrigger>
             <TabsTrigger value="new" className="text-xs">
               New
-              {newThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{newThreads.length}</span>}
+              {redditPostsLoading
+                ? <Spinner className="ml-1 h-3 w-3 opacity-60" />
+                : newThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{newThreads.length}</span>
+              }
             </TabsTrigger>
             <TabsTrigger value="cited" className="text-xs">
               Cited
@@ -378,63 +406,93 @@ export default function AnalysisPanel({
             </TabsTrigger>
           </TabsList>
 
-          {/* SERP Threads — Google ranked + dork combined, deduplicated top 10 */}
+          {/* SERP Threads — SERP first, dork appended seamlessly */}
           <TabsContent value="serp" className="mt-4">
-            {(() => {
-              const seen = new Set();
-              const combined = [...serpThreads, ...dorkThreads].filter(p => {
-                const url = p.url || p.post_url || '';
-                if (!url || seen.has(url)) return false;
-                seen.add(url);
-                return true;
-              }).slice(0, 10);
-              return (
-                <Card>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-sm flex items-center gap-2">
-                      <Search className="h-4 w-4 text-primary" />SERP Threads
-                      <span className="ml-auto text-[11px] font-normal text-muted-foreground">{combined.length} results</span>
-                    </CardTitle>
-                    <CardDescription className="text-xs">Google SERP ranked + site:reddit.com dork — top 10 combined</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <PostList posts={combined} emptyMsg="No SERP threads found — run Analysis" />
-                  </CardContent>
-                </Card>
-              );
-            })()}
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <Search className="h-4 w-4 text-primary" />SERP Threads
+                  {serpThreadsLoading
+                    ? <span className="ml-auto flex items-center gap-1 text-[11px] font-normal text-muted-foreground"><Spinner className="h-3 w-3" />Loading…</span>
+                    : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{serpThreads.length + dorkThreads.length} results</span>
+                  }
+                </CardTitle>
+                <CardDescription className="text-xs">Google SERP threads · site:reddit.com dork</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <PostList posts={[...serpThreads, ...dorkThreads]} emptyMsg="No SERP threads found — run Analysis" loading={serpThreadsLoading} />
+              </CardContent>
+            </Card>
           </TabsContent>
 
           {/* Top Threads */}
-          <TabsContent value="top" className="mt-4">
+          <TabsContent value="top" className="mt-4 space-y-3">
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <TrendingUp className="h-4 w-4 text-primary" />Top Threads
-                  <span className="ml-auto text-[11px] font-normal text-muted-foreground">{topThreads.length} results</span>
+                  {redditPostsLoading
+                    ? <span className="ml-auto flex items-center gap-1 text-[11px] font-normal text-muted-foreground"><Spinner className="h-3 w-3" />Loading Reddit…</span>
+                    : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{topThreads.length} results</span>
+                  }
                 </CardTitle>
                 <CardDescription className="text-xs">Highest engagement posts from Reddit API</CardDescription>
               </CardHeader>
               <CardContent>
-                <PostList posts={topThreads} emptyMsg="No top posts found" />
+                <PostList posts={topThreads} emptyMsg="No top posts found" loading={redditPostsLoading} />
               </CardContent>
             </Card>
+
+            {/* While Reddit is loading, show SERP threads as preview */}
+            {redditPostsLoading && serpThreads.length > 0 && (
+              <Card className="border-dashed opacity-80">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm flex items-center gap-2 text-muted-foreground">
+                    <Search className="h-3.5 w-3.5" />SERP Preview
+                    <span className="ml-auto text-[11px] font-normal">{serpThreads.length} threads</span>
+                  </CardTitle>
+                  <CardDescription className="text-xs">Reddit posts loading — showing SERP threads in the meantime</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <PostList posts={serpThreads} emptyMsg="" />
+                </CardContent>
+              </Card>
+            )}
           </TabsContent>
 
           {/* New Threads */}
-          <TabsContent value="new" className="mt-4">
+          <TabsContent value="new" className="mt-4 space-y-3">
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <Clock className="h-4 w-4 text-primary" />New Threads
-                  <span className="ml-auto text-[11px] font-normal text-muted-foreground">{newThreads.length} results</span>
+                  {redditPostsLoading
+                    ? <span className="ml-auto flex items-center gap-1 text-[11px] font-normal text-muted-foreground"><Spinner className="h-3 w-3" />Loading Reddit…</span>
+                    : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{newThreads.length} results</span>
+                  }
                 </CardTitle>
                 <CardDescription className="text-xs">Recently posted threads from Reddit API</CardDescription>
               </CardHeader>
               <CardContent>
-                <PostList posts={newThreads} emptyMsg="No new posts found" />
+                <PostList posts={newThreads} emptyMsg="No new posts found" loading={redditPostsLoading} />
               </CardContent>
             </Card>
+
+            {/* While Reddit is loading, show dork threads as preview */}
+            {redditPostsLoading && dorkThreads.length > 0 && (
+              <Card className="border-dashed opacity-80">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm flex items-center gap-2 text-muted-foreground">
+                    <Search className="h-3.5 w-3.5" />Dork Preview
+                    <span className="ml-auto text-[11px] font-normal">{dorkThreads.length} threads</span>
+                  </CardTitle>
+                  <CardDescription className="text-xs">Reddit posts loading — showing dork results in the meantime</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <PostList posts={dorkThreads} emptyMsg="" />
+                </CardContent>
+              </Card>
+            )}
           </TabsContent>
 
           {/* Cited Threads — grouped by prompt, per AI platform */}
