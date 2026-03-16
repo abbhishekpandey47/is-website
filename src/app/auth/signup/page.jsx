@@ -1,15 +1,16 @@
-"use client"
+import { Suspense } from "react"
 import SignupForm from "../../../Components/SignupForm";
 
-const Singup = () => {
+const Signup = () => {
   return (
     <div className="flex w-full">
-      {/* <StaticContent /> */}
       <div className="flex flex-1 items-center justify-center">
-        <SignupForm />
+        <Suspense fallback={null}>
+          <SignupForm />
+        </Suspense>
       </div>
     </div>
   )
 }
 
-export default Singup
+export default Signup

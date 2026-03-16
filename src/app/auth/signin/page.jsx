@@ -1,11 +1,14 @@
+import { Suspense } from "react"
 import SigninForm from "../../../Components/SigninForm"
 
-const Singup = () => {
+const Signin = () => {
   return (
     <div className="bg-background-gradient w-full h-screen flex items-center justify-center">
-      <SigninForm />
+      <Suspense fallback={null}>
+        <SigninForm />
+      </Suspense>
     </div>
   )
 }
 
-export default Singup
+export default Signin
