@@ -555,7 +555,8 @@ export default function SerpScout() {
         }
       }
       
-      // Then save keywords
+      // Then save keywords — also pass context so backend can persist it for first-time
+      // users whose companyId was null during analysis (generateCompanyContext never saved to DB)
       const res = await apiPost("/api/threadflow/serp-scout", {
         action: "saveKeywords",
         companyId,
@@ -563,6 +564,8 @@ export default function SerpScout() {
         keywords: selectedKws,
         companyName,
         competitors,
+        llmContext: rawResult?.companyContext?.llmContext ?? null,
+        approvedContext: ctxForm?.companySummary ? { ...ctxForm, competitors } : null,
       });
       if (res.companyId) setRawResult(prev => ({ ...prev, companyId: res.companyId }));
       setSaved(true);
