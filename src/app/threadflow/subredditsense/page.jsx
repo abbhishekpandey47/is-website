@@ -24,7 +24,7 @@ const memDashCache = typeof window !== 'undefined'
 
 async function apiLinkCompany(firebaseUserId, companyName) {
   const token = await auth.currentUser?.getIdToken?.();
-  const res = await fetch('/api/threadflow/reddit/link-company', { method: 'POST', headers: { 'Content-Type': 'application/json', ...(token? { Authorization: `Bearer ${token}` } : {}) }, body: JSON.stringify({ companyName }) });
+  const res = await fetch('/api/threadflow/reddit/link-company', { method: 'POST', headers: { 'Content-Type': 'application/json', ...(token? { Authorization: `Bearer ${token}` } : {}) }, body: JSON.stringify({ companyName, source: 'research' }) });
   if (!res.ok) throw new Error('Link company failed');
   return res.json();
 }

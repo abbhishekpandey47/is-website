@@ -226,7 +226,7 @@ export default function CompetitiveSenseTab({
         const res = await fetch('/api/threadflow/subreddit-sense-competitive', {
           method: 'POST',
           headers: authHeaders(token),
-          body: JSON.stringify({ topic: topic.trim() || null, companyId: resolvedCompanyId }),
+          body: JSON.stringify({ topic: topic.trim() || null, companyId: resolvedCompanyId, companyName, competitors }),
         })
         if (!res.ok) { const p = await res.json().catch(() => ({})); throw new Error(p?.error || `scan error ${res.status}`) }
         const result = await res.json()

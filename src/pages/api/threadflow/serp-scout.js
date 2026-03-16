@@ -1276,7 +1276,11 @@ async function generateCompanyContext(domain, companyId, companyName, forceConte
   if (!sanitized) {
     throw new Error('Unable to generate a neutral company context. Try again with a reachable domain.')
   }
-  const approvedContext = forceContext ? sanitized : stored?.approvedContext ?? sanitized
+  // When forcing regeneration, merge new summary fields over existing approvedContext so
+  // saved keywords/competitors/serpAnalysis are preserved alongside the fresh overview
+  const approvedContext = forceContext
+    ? { ...(stored?.approvedContext || {}), ...sanitized }
+    : stored?.approvedContext ?? sanitized
   const persisted = companyId
     ? await saveCompanyContext(companyId, {
       domain,
@@ -1308,7 +1312,7 @@ export async function resolveCompanyIdBySlug(slug) {
   return data?.id ?? null
 }
 
-async function saveKeywords(companyId, domain, keywords, userId, companyName, competitors) {
+async function saveKeywords(companyId, domain, keywords, userId, companyName, competitors, llmContext, approvedContext) {
   console.log('[serp-scout] saveKeywords called - PERMANENT save', { companyId, domain, keywordCount: keywords?.length, userId, companyName })
 
   if (!companyId) {
@@ -1338,12 +1342,16 @@ async function saveKeywords(companyId, domain, keywords, userId, companyName, co
       keywordsSavedAt: new Date().toISOString(),
       keywordsGenerated: true
     },
-    llmContext: context?.llmContext,
+    // Prefer DB-stored llmContext; fall back to what frontend passed (first-time users whose
+    // companyId was null during analysis so generateCompanyContext never saved to DB)
+    llmContext: context?.llmContext ?? llmContext ?? null,
     approvedContext: {
+      // Merge: DB base → passed approvedContext (user edits) → always set keywords/competitors/serp
       ...(context?.approvedContext || {}),
+      ...(approvedContext || {}),
       keywords: keywords,
       competitors: competitors || context?.approvedContext?.competitors || [],
-      serpAnalysis: context?.approvedContext?.serpAnalysis || {} // Preserve SERP analysis cache
+      serpAnalysis: context?.approvedContext?.serpAnalysis || {}
     }
   }
   const result = await saveCompanyContext(companyId, updatedContext)
@@ -1654,7 +1662,9 @@ export default async function handler(req, res) {
     keywords: bodyKeywords,
     prompts: bodyPrompts,
     companyName: bodyCompanyName,
-    competitors: bodyCompetitors
+    competitors: bodyCompetitors,
+    llmContext: bodyLlmContext,
+    approvedContext: bodyApprovedContext
   } = req.body || {}
 
   // Handle save keywords action (PERMANENT save, not time-limited)
@@ -1664,7 +1674,7 @@ export default async function handler(req, res) {
     }
     const companyId = bodyCompanyId ?? null
     try {
-      const result = await saveKeywords(companyId, rawDomain, bodyKeywords, userCtx.userId, bodyCompanyName, bodyCompetitors)
+      const result = await saveKeywords(companyId, rawDomain, bodyKeywords, userCtx.userId, bodyCompanyName, bodyCompetitors, bodyLlmContext, bodyApprovedContext)
       return res.status(200).json({
         success: true,
         message: result.companyId
@@ -2025,11 +2035,19 @@ Return this exact format - ONLY JSON, nothing else:
 
         // Add Reddit API posts first (better metadata: real upvotes/comments)
         redditList.forEach(post => {
-          const key = getKey(post.post_url)
+          const rawUrl = post.post_url || post.url || ''
+          const key = getKey(rawUrl)
           if (!key) return
           const seoMatch = seoLookup.get(key)
           map.set(key, {
             ...post,
+            // Normalize URL field so downstream code can always use post_url
+            post_url: post.post_url || post.url || '',
+            // Normalize title field
+            post_title: post.post_title || post.title || '',
+            // Normalize upvote/comment fields from Reddit API (may use score/ups/num_comments)
+            upvotes: post.upvotes || post.score || post.ups || post.points || 0,
+            total_comments: post.total_comments || post.num_comments || post.comments || 0,
             source: seoMatch ? 'both' : 'reddit_api',
             serp_rank: seoMatch?.serp_rank || 999 // Enrich with SERP rank if available
           })
@@ -2164,6 +2182,14 @@ Return this exact format - ONLY JSON, nothing else:
       const brandDomainNormalized = normalizeMentionValue(brandDomain)
       if (brandDomainNormalized && brandDomainNormalized !== brandNameNormalized) {
         brandTargets.push({ normalized: brandDomainNormalized, label: brandDomain })
+      }
+      // Also add short brand name without TLD (e.g. "infrasity" from "infrasity.com")
+      // so posts that mention the name without .com are still detected
+      if (/^[a-z0-9][a-z0-9-]*\.[a-z]{2,}$/.test(brandDomainNormalized)) {
+        const shortBrand = brandDomainNormalized.replace(/\.[a-z]{2,6}$/, '').replace(/-/g, ' ').trim()
+        if (shortBrand && shortBrand.length > 2 && shortBrand !== brandNameNormalized && shortBrand !== brandDomainNormalized) {
+          brandTargets.push({ normalized: shortBrand, label: shortBrand })
+        }
       }
 
       // Debug mention targets
@@ -2361,6 +2387,24 @@ Return this exact format - ONLY JSON, nothing else:
     const existingKeywords = existingContext?.approvedContext?.keywords || []
 
     if (existingKeywords.length > 0) {
+      // Check if company overview (summary) is present — older users may have keywords but no context
+      const hasSummary = existingContext?.approvedContext?.companySummary || existingContext?.llmContext?.companySummary
+      let returnContext = existingContext
+
+      if (!hasSummary) {
+        // Regenerate and save context so returning users get their overview
+        console.log('[serp-scout] keywords exist but no company summary — regenerating context', { companyId: resolvedCompanyId })
+        try {
+          const pages = await scrapeDomainPages(domain)
+          if (pages?.length) {
+            const extractedName = extractCompanyNameFromContent(pages, domain)
+            returnContext = await generateCompanyContext(domain, resolvedCompanyId, extractedName, true, pages)
+          }
+        } catch (e) {
+          console.warn('[serp-scout] context regeneration failed (non-fatal):', e.message)
+        }
+      }
+
       console.log('[serp-scout] returning existing keywords and overview (PERMANENT)', {
         companyId: resolvedCompanyId,
         domain,
@@ -2369,12 +2413,12 @@ Return this exact format - ONLY JSON, nothing else:
       })
       return res.status(200).json({
         success: true,
-        domain: existingContext.domain || domain,
+        domain: returnContext?.domain || existingContext.domain || domain,
         companyId: resolvedCompanyId,
-        companyName: existingContext.metadata?.companyName || domain,
+        companyName: returnContext?.metadata?.companyName || existingContext.metadata?.companyName || domain,
         keywords: existingKeywords,
         explain: null,
-        companyContext: existingContext,
+        companyContext: returnContext,
         fromExisting: true,
         savedAt: existingContext.metadata?.keywordsSavedAt || existingContext.generatedAt,
         message: 'Keywords and overview already exist. Use SERP analysis to check positions.'

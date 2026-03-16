@@ -16,14 +16,17 @@ const isoFromAgeHours = (hours) => (typeof hours === 'number' ? new Date(Date.no
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-  const { companyId, companyName, fullRefresh = false, maxBatches = 3 } = req.body || {};
+  const { companyId, companyName, fullRefresh = false, maxBatches = 3, isCompetitor = false } = req.body || {};
   if (!companyId || !companyName) return res.status(400).json({ error: 'Missing fields' });
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
     return res.status(500).json({ error: 'Server not configured' });
   }
   let userCtx; try { userCtx = await verifyRequestUser(req); } catch (e) { return res.status(e.status||401).json({ error: e.message }); }
-  const allowed = await getAllowedCompanyIds(userCtx);
-  if (!userCtx.isAdmin && Array.isArray(allowed) && !allowed.includes(companyId)) return forbid(res);
+  // Competitors are not linked to user_companies — skip ownership check (user is already authenticated)
+  if (!isCompetitor) {
+    const allowed = await getAllowedCompanyIds(userCtx);
+    if (!userCtx.isAdmin && Array.isArray(allowed) && !allowed.includes(companyId)) return forbid(res);
+  }
   try {
     // Keep ingestion bounded per invocation; Vercel functions have strict time limits.
     const batchLimit = Math.min(parseInt(maxBatches) || 1, 2); // hard-cap to 2 per call
