@@ -60,7 +60,7 @@ export default function Hero({ isAdsVariant = false }) {
             <div className="mt-12 flex justify-center">
               {isAdsVariant ? (
                 <ContactPopupButton
-                  buttonText="Book a Call"
+                  buttonText="Book a Strategy Call"
                   width="w-48"
                   height="h-12"
                   textSize="text-base"
