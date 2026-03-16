@@ -77,7 +77,7 @@ const buildCitationSearchUserMessage = (prompt, domain) => `Search reddit.com fo
 const buildCitationSearchUserMessageForSearchModel = (prompt, domain) => `Find Reddit posts about: "${prompt}". Search for "${prompt} reddit" to locate real discussions. Domain for context: ${domain && domain.length ? domain : 'N/A'}. Return only the JSON array of real Reddit post URLs found.`
 
 const buildCitationSearchUserMessageForClaude = (prompt, domain) => `Search for: "${prompt} reddit". Return ONLY real Reddit posts you found in actual search results. For each post, include: url (exact from browser, not constructed), title, and subreddit. Format as JSON array: [{url: "...", title: "...", subreddit: "..."}]. Never construct or guess URLs. Domain context: ${domain && domain.length ? domain : 'N/A'}.`
-const LLM_PROMPTS = Number(process.env.SERP_SCOUT_LLM_PROMPTS) || 2
+const LLM_PROMPTS = Number(process.env.SERP_SCOUT_LLM_PROMPTS) || 5
 const SUPERLATIVE_REGEX = /\b(best|leading|top|premier|world[- ]class|industry[- ]leading|cutting[- ]edge|#1)\b/gi
 const CTA_REGEX = /\b(visit|click|learn more|book (now|a demo)?|download|try now|get started|sign up|subscribe|unlock|schedule)\b/gi
 const defaultConstraints = [
