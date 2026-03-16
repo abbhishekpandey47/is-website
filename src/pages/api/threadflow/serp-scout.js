@@ -1943,8 +1943,72 @@ Return this exact format - ONLY JSON, nothing else:
     }
   }
 
+  // Fast path: DataForSEO SERP position + dork only (no Reddit API, no enrichment)
+  // Returns SERP Threads + dork links in ~3s so the UI can show that tab immediately.
+  if (action === 'serpAndDork') {
+    const { keyword, domain } = req.body
+    if (!keyword || !domain) return res.status(400).json({ error: 'keyword and domain are required' })
+    try {
+      const targetDomain = ensureDomain(domain)
+      const [serpData, dataForSeoData] = await Promise.all([
+        fetchKeywordSerpPosition(keyword, targetDomain, 100),
+        fetchRedditViaDataForSeo(keyword),
+      ])
+      const redditThreads = Array.isArray(serpData.redditThreads) ? serpData.redditThreads : []
+      const organicUrls = new Set(redditThreads.map(t => (t.url || '').toLowerCase()))
+      const dorkFiltered = (dataForSeoData.top_posts || []).slice(0, 15).filter(p => {
+        const u = (p.post_url || '').toLowerCase()
+        return u && !organicUrls.has(u)
+      })
+      return res.status(200).json({
+        success: true,
+        keyword,
+        domain: targetDomain,
+        position: serpData.position,
+        examined: serpData.examined,
+        redditThreads: redditThreads.map(t => ({ ...t, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
+        dorkRedditLinks: dorkFiltered.map(p => ({ ...p, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
+        enriched: false,
+      })
+    } catch (error) {
+      console.error('[serp-scout] serpAndDork failed', error.message)
+      return res.status(500).json({ error: error.message })
+    }
+  }
+
+  // Fast path: Reddit API top/new posts only (independent of DataForSEO)
+  if (action === 'redditTopNew') {
+    const { keyword } = req.body
+    if (!keyword) return res.status(400).json({ error: 'keyword is required' })
+    try {
+      const redditData = await fetchRedditTopNewPosts(keyword)
+      const normalize = (post) => ({
+        post_url: post.post_url || post.url || '',
+        post_title: post.post_title || post.title || '',
+        subreddit: post.subreddit || '',
+        upvotes: post.upvotes || post.score || post.ups || 0,
+        total_comments: post.total_comments || post.num_comments || post.comments || 0,
+        post_content: post.post_content || '',
+        source: 'reddit_api',
+        mentionsBrand: false,
+        mentionsCompetitors: [],
+        mentionHighlights: [],
+      })
+      return res.status(200).json({
+        success: true,
+        keyword,
+        topRedditPosts: (redditData.top_posts || []).slice(0, 10).map(normalize),
+        newRedditPosts: (redditData.new_posts || []).slice(0, 10).map(normalize),
+        enriched: false,
+      })
+    } catch (error) {
+      console.error('[serp-scout] redditTopNew failed', error.message)
+      return res.status(500).json({ error: error.message })
+    }
+  }
+
   if (action === 'keywordSerp') {
-    const { keyword, domain, companyId: requestCompanyId } = req.body
+    const { keyword, domain, companyId: requestCompanyId, quickMode } = req.body
     if (!keyword) {
       return res.status(400).json({ error: 'keyword is required' })
     }
@@ -1956,7 +2020,8 @@ Return this exact format - ONLY JSON, nothing else:
       const targetDomain = ensureDomain(domain)
 
       // Check if we have cached SERP analysis for this keyword (24hr cache)
-      if (requestCompanyId) {
+      // Skip cache for quickMode so phase 2 can still run full enrichment
+      if (requestCompanyId && !quickMode) {
         const cachedAnalysis = await getSerpAnalysis(requestCompanyId, keyword)
         if (cachedAnalysis) {
           console.log('[serp-scout] returning cached SERP analysis', { keyword, companyId: requestCompanyId })
@@ -2122,6 +2187,28 @@ Return this exact format - ONLY JSON, nothing else:
         const url = (post.post_url || '').toLowerCase()
         return url && !organicThreadUrls.has(url)
       })
+
+      // quickMode: skip fetching full post content (fast path — caller will enrich in a second request)
+      if (quickMode) {
+        console.log('[serp-scout] quickMode — skipping post enrichment, returning raw data immediately')
+        return res.status(200).json({
+          success: true,
+          keyword,
+          domain: targetDomain,
+          position: serpData.position,
+          examined: serpData.examined,
+          redditThreads: redditThreads.map(t => ({ ...t, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
+          hasRedditMentions: redditThreads.length > 0,
+          topRedditPosts: topRedditPosts.map(p => ({ ...p, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
+          newRedditPosts: newRedditPosts.map(p => ({ ...p, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
+          dorkRedditLinks: dorkResultsFiltered.map(p => ({ ...p, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
+          suggestedPosts: [],
+          organicResults: [],
+          fromCache: false,
+          enriched: false,
+          analyzedAt: new Date().toISOString(),
+        })
+      }
 
       // Run all 4 enrichment batches in parallel — all tasks queue into the shared limiter together
       console.log('[serp-scout] enriching all posts in parallel', {

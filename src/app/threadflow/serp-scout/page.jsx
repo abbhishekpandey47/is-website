@@ -216,6 +216,8 @@ export default function SerpScout() {
   // Analyze — SERP
   const [serpResults, setSerpResults] = useState({});
   const [serpLoading, setSerpLoading] = useState(false);
+  const [serpThreadsLoading, setSerpThreadsLoading] = useState(false);
+  const [redditPostsLoading, setRedditPostsLoading] = useState(false);
   const [selectedKwIdx, setSelectedKwIdx] = useState(null);
   const [serpAccordionOpen, setSerpAccordionOpen] = useState(true);
 
@@ -582,18 +584,37 @@ export default function SerpScout() {
     if (!selectedKw) return;
     setSerpLoading(true);
     setError(null);
+    const kwTerm = selectedKw.term;
     try {
-      const res = await apiPost("/api/threadflow/serp-scout", {
+      // Phase 1: fast — get SERP position + post list without full content enrichment
+      const fastRes = await apiPost("/api/threadflow/serp-scout", {
         action: "keywordSerp",
-        keyword: selectedKw.term,
+        keyword: kwTerm,
         domain: domain.trim(),
         companyId,
         competitors,
+        quickMode: true,
       });
-      setSerpResults(prev => ({ ...prev, [selectedKw.term]: res }));
+      setSerpResults(prev => ({ ...prev, [kwTerm]: fastRes }));
+      setSerpLoading(false);
+
+      // Phase 2: background — full enrichment (brand/competitor mention detection)
+      // Skip if results came from cache (already fully enriched)
+      if (!fastRes.fromCache) {
+        apiPost("/api/threadflow/serp-scout", {
+          action: "keywordSerp",
+          keyword: kwTerm,
+          domain: domain.trim(),
+          companyId,
+          competitors,
+        }).then(fullRes => {
+          setSerpResults(prev => ({ ...prev, [kwTerm]: fullRes }));
+        }).catch(e => {
+          console.warn("[SERP Scout] background enrichment failed:", e.message);
+        });
+      }
     } catch (e) {
       setError(e.message ?? "SERP analysis failed");
-    } finally {
       setSerpLoading(false);
     }
   }
@@ -794,10 +815,60 @@ export default function SerpScout() {
     return Object.values(byPrompt);
   }
 
-  // Single "Run Analysis" — fires SERP + citations in parallel
+  // Run Analysis — fires 3 sources simultaneously so each tab fills in as it arrives
+  // serpAndDork (~3s) → SERP Threads tab
+  // redditTopNew (~5-15s) → Top + New tabs
+  // citations (independent) → Cited tab
+  // After both data calls finish → background enrichment for mention detection
   async function handleRunAnalysis() {
     if (!selectedKw) return;
-    await Promise.allSettled([handleSerpAnalysis(), handleCitationSearch()]);
+    const kwTerm = selectedKw.term;
+    const kwDomain = domain.trim();
+
+    setSerpThreadsLoading(true);
+    setRedditPostsLoading(true);
+    setError(null);
+    // Clear stale results so tabs show loading skeletons
+    setSerpResults(prev => ({ ...prev, [kwTerm]: undefined }));
+
+    const merge = (newData) =>
+      setSerpResults(prev => ({
+        ...prev,
+        [kwTerm]: { ...(prev[kwTerm] || {}), ...newData, success: true },
+      }));
+
+    const serpDorkPromise = apiPost("/api/threadflow/serp-scout", {
+      action: "serpAndDork",
+      keyword: kwTerm,
+      domain: kwDomain,
+      companyId,
+    }).then(merge)
+      .catch(e => console.error("[SERP Scout] serpAndDork failed:", e.message))
+      .finally(() => setSerpThreadsLoading(false));
+
+    const redditPromise = apiPost("/api/threadflow/serp-scout", {
+      action: "redditTopNew",
+      keyword: kwTerm,
+      domain: kwDomain,
+    }).then(merge)
+      .catch(e => console.error("[SERP Scout] redditTopNew failed:", e.message))
+      .finally(() => setRedditPostsLoading(false));
+
+    // Citations run independently
+    handleCitationSearch();
+
+    // Background enrichment (brand/competitor mention detection) — fires after both data calls finish
+    Promise.allSettled([serpDorkPromise, redditPromise]).then(() => {
+      apiPost("/api/threadflow/serp-scout", {
+        action: "keywordSerp",
+        keyword: kwTerm,
+        domain: kwDomain,
+        companyId,
+        competitors,
+      }).then(fullRes => {
+        setSerpResults(prev => ({ ...prev, [kwTerm]: fullRes }));
+      }).catch(e => console.warn("[SERP Scout] background enrichment failed:", e.message));
+    });
   }
 
   function toggleKw(idx) {
@@ -1379,6 +1450,8 @@ export default function SerpScout() {
             serpResults={serpResults}
             kwSerpData={kwSerpData}
             serpLoading={serpLoading}
+            serpThreadsLoading={serpThreadsLoading}
+            redditPostsLoading={redditPostsLoading}
             citationLoading={citationLoading}
             citationResults={citationResults}
             citationPrompts={citationPrompts}
@@ -1389,7 +1462,7 @@ export default function SerpScout() {
             handleSerpAnalysis={handleSerpAnalysis}
             handleCitationSearch={handleCitationSearch}
             handleRunAnalysis={handleRunAnalysis}
-            analysisLoading={serpLoading || citationLoading}
+            analysisLoading={serpThreadsLoading || redditPostsLoading || citationLoading}
             scannedPostDetails={scannedPostDetails}
           />
         </TabsContent>
