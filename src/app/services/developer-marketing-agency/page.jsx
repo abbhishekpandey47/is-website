@@ -8,6 +8,10 @@ import Hero from "./hero";
 import Card1 from "./card1";
 import RealResult from "./realresults";
 import NewMarquee from "@/Components/NewMarquee";
+const ServicesFold = dynamic(() => import("./ServicesFold"), {
+  ssr: false,
+  loading: () => <div className="h-96 w-full" />
+});
 
 // Lazy load with dynamic imports for better performance
 // Only loads when scrolled into view or immediately if above fold
@@ -98,6 +102,9 @@ export default function Page() {
     <div className="">
       <Hero isAdsVariant={isAdsVariant} />
       <NewMarquee />
+
+      {/* ServicesFold - New services bento grid */}
+      <LazySection Component={ServicesFold} showDivider={false} />
 
       {/* RealResult - Second fold, no lazy load */}
       <SectionWrapper>
