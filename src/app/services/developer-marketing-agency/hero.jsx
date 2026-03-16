@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import CalendarBooking from "../../calendarButton";
+import TrustedMarquee from "@/app/lp/reddit-marketing-agency/TrustedMarquee";
 
 const HeroCTAPlaceholder = () => (
   <Link
@@ -24,94 +25,68 @@ const Particles = dynamic(
 
 export default function Hero({ isAdsVariant = false }) {
   return (
-    <section className="relative isolate transform-gpu pt-28">
-      <div className="absolute inset-0 -z-10 top-0 bg-[radial-gradient(70%_80%_at_50%_-20%,rgba(108,91,233,0.5),rgba(255,255,255,0))]" />
-
-      <svg
-        className="absolute inset-0 -z-10 h-full w-full stroke-white/10 
-                   [mask-image:radial-gradient(75%_50%_at_top_center,white,transparent)]"
-        aria-hidden="true"
-      >
-        <defs>
-          <pattern
-            id="hero"
-            width="80"
-            height="80"
-            x="50%"
-            y="-1"
-            patternUnits="userSpaceOnUse"
-          >
-            <path d="M.5 200V.5H200" fill="none" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" strokeWidth="0" fill="url(#hero)" />
-      </svg>
-
-      <div className="pt-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="relative mx-auto max-w-3xl text-center">
-            <h1 className="font-[quicksand] bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-5xl/[1.07] font-bold tracking-tight text-transparent md:text-5xl/[1.07]">
-              The Developer Marketing Agency That Ships as Fast as You Do
-            </h1>
-            <p className="font-[quicksand]  mt-6 text-lg font-medium text-zinc-400 md:text-xl">
-              We&apos;re the top rated developer marketing agency for dev-first SaaS companies. From technical content to community presence to AI search visibility we build the full growth engine so developers discover, evaluate, and adopt your product.
-            </p>
-
-            {/* Buttons */}
-            <div className="mt-10 flex flex-col items-center justify-center gap-y-8">
-                   <div className="mt-6 flex flex-col items-center justify-center gap-y-8">
-               <div className="mt-10 gap-4 justify-center items-center">
-                 {isAdsVariant ? (
-                   <ContactPopupButton
-                     buttonText="Book a Strategy Call"
-                     width="w-52"
-                     height="h-11"
-                     textSize="text-base"
-                     textWeight="quicksand-semibold"
-                   />
-                 ) : (
-                   <CalendarBooking buttonText="Book a Demo" />
-                 )}
-               </div>
-             </div>            </div>
-          </div>
-
-
-              {/* Top Glow Line */}
-              {/* <div className="absolute -top-px right-20 h-2 w-20 
-                              [mask-image:linear-gradient(to_right,rgba(217,217,217,0)_0%,#d9d9d9_25%,#d9d9d9_75%,rgba(217,217,217,0)_100%)] 
-                              md:w-32 lg:w-64">
-                <div className="h-px w-full animate-starlight-right bg-gradient-to-r from-purple-500/0 via-[rgba(108,91,233,1)] to-purple-500/0"></div>
-              </div> */}
-{/* 
-              <div className="rounded-md bg-zinc-950 ring-1 ring-white/10 lg:rounded-2xl">
-                <Image
-                  src="/landingfolio/dashboard.webp"
-                  alt="App screenshot"
-                  width={4200}
-                  height={2490}
-                  priority
-                  className="rounded-md lg:rounded-2xl"
-                />
-              </div> */}
-
-              {/* Bottom Glow Line */}
-              {/* <div className="absolute -bottom-2 left-20 h-2 w-20 
-                              [mask-image:linear-gradient(to_right,rgba(217,217,217,0)_0%,#d9d9d9_25%,#d9d9d9_75%,rgba(217,217,217,0)_100%)] 
-                              md:w-32 lg:w-64">
-                <div className="h-px w-full animate-starlight-left bg-gradient-to-r from-purple-500/0 via-[rgba(108,91,233,1)] to-purple-500/0"></div>
-              </div> */}
-            </div>
+    <section className="relative isolate w-full overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/developerMarketing/Hero.svg"
+          alt="Hero background"
+          fill
+          className="object-cover w-full h-full"
+          priority
+        />
       </div>
 
-    
-        <Particles
-              className="absolute inset-0"
-              quantity={100}
-              ease={80}
-              color={"#ffffff"}
-              refresh
-            />
+      {/* Gradient overlay effects */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#581c87]/30 via-transparent to-[#0d0a1a]" />
+
+      <div className="relative pt-44 pb-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          {/* Main Content */}
+          <div className="relative mx-auto max-w-4xl text-center">
+            {/* Headline */}
+            <div className="space-y-6">
+              <h1 className="font-[quicksand] bg-gradient-to-br from-white via-purple-200 to-purple-100 bg-clip-text text-5xl md:text-6xl font-bold tracking-tight text-transparent leading-tight">
+                              The Developer Marketing Agency That Ships as Fast as You Do
+              </h1>
+
+              {/* Description */}
+              <p className="font-[quicksand] text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              We&apos;re the top rated developer marketing agency for dev-first SaaS companies. From technical content to community presence to AI search visibility we build the full growth engine so developers discover, evaluate, and adopt your product.
+              </p>
+            </div>
+
+            {/* CTA Button */}
+            <div className="mt-12 flex justify-center">
+              {isAdsVariant ? (
+                <ContactPopupButton
+                  buttonText="Book a Call"
+                  width="w-48"
+                  height="h-12"
+                  textSize="text-base"
+                  textWeight="quicksand-semibold"
+                />
+              ) : (
+                <CalendarBooking buttonText="Book a Call" />
+              )}
+            </div>
+          </div>
+                <div className="w-full flex flex-col items-center justify-center">
+        <div className="w-[90%] justify-center items-center flex flex-col relative z-10">
+          <TrustedMarquee />
+        </div>
+      </div>
+        </div>
+      </div>
+
+      {/* Particles effect */}
+      <Particles
+        className="absolute inset-0 pointer-events-none"
+        quantity={60}
+        ease={80}
+        color={"#ffffff"}
+        refresh
+      />
     </section>
   );
 }
