@@ -359,7 +359,7 @@ export default function AnalysisPanel({
       {/* ── Result tabs ── */}
       {(hasAnyData || isLoading) && (
         <Tabs defaultValue="serp" className="w-full">
-          <TabsList className="grid grid-cols-5 w-full">
+          <TabsList className="grid grid-cols-4 w-full">
             <TabsTrigger value="serp" className="text-xs">
               SERP Threads
               {(serpThreads.length + dorkThreads.length) > 0 && <span className="ml-1 opacity-60 text-[10px]">{Math.min(serpThreads.length + dorkThreads.length, 10)}</span>}
@@ -375,10 +375,6 @@ export default function AnalysisPanel({
             <TabsTrigger value="cited" className="text-xs">
               Cited
               {citedThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{citedThreads.length} links</span>}
-            </TabsTrigger>
-            <TabsTrigger value="best" className="text-xs">
-              Best ✦
-              {bestThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{bestThreads.length}</span>}
             </TabsTrigger>
           </TabsList>
 
@@ -475,8 +471,8 @@ export default function AnalysisPanel({
             </Card>
           </TabsContent>
 
-          {/* Best — ranked by AI citation count then upvotes */}
-          <TabsContent value="best" className="mt-4">
+          {/* Best — hidden for now */}
+          <TabsContent value="best" className="mt-4 hidden">
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
