@@ -53,8 +53,12 @@ export default function ServiceHighlights({ isAdsVariant = false }) {
 			</div>
 			
 			<div className="max-w-8xl mx-auto text-center mb-14">
-				<h2 className="text-2xl md:text-4xl font-semibold text-white mb-4">
-					The developer marketing services behind <span className="bg-[#5F64FF] p-1">30+ SaaS startups</span>
+				<h2      style={{
+                fontFamily: 'Quicksand',
+                fontWeight: 800,
+                letterSpacing: '-0.01em',
+              }} className="text-2xl md:text-4xl font-[quicksand] text-white mb-4">
+					The Developer Marketing Services Behind <span className="bg-[#5F64FF] p-1">30+ SaaS startups</span>
 				</h2>
 				<p className="text-white/80 text-lg md:text-xl max-w-3xl mx-auto">
 					How top infra, AI, and SaaS startups scaled credibility without hiring full DevRel teams.
