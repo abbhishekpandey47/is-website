@@ -92,7 +92,7 @@ export default function ServiceHighlights({ isAdsVariant = false }) {
 									<img 
 										src={card.img} 
 										alt={card.title} 
-										className="w-full h-[190px] object-contain" 
+										className="w-full h-[190px] object-fill" 
 										onError={(e) => {
 											e.target.style.display = "none";
 										}}
