@@ -113,7 +113,7 @@ export default function ServiceHighlights({ isAdsVariant = false }) {
 						<div className="mt-12 flex justify-center">
 						  {isAdsVariant ? (
 							<ContactPopupButton
-							  buttonText="Book a Demo"
+							  buttonText="Book a Strategy Call"
 							  width="w-48"
 							  height="h-12"
 							  textSize="text-base"
