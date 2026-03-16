@@ -2025,11 +2025,19 @@ Return this exact format - ONLY JSON, nothing else:
 
         // Add Reddit API posts first (better metadata: real upvotes/comments)
         redditList.forEach(post => {
-          const key = getKey(post.post_url)
+          const rawUrl = post.post_url || post.url || ''
+          const key = getKey(rawUrl)
           if (!key) return
           const seoMatch = seoLookup.get(key)
           map.set(key, {
             ...post,
+            // Normalize URL field so downstream code can always use post_url
+            post_url: post.post_url || post.url || '',
+            // Normalize title field
+            post_title: post.post_title || post.title || '',
+            // Normalize upvote/comment fields from Reddit API (may use score/ups/num_comments)
+            upvotes: post.upvotes || post.score || post.ups || post.points || 0,
+            total_comments: post.total_comments || post.num_comments || post.comments || 0,
             source: seoMatch ? 'both' : 'reddit_api',
             serp_rank: seoMatch?.serp_rank || 999 // Enrich with SERP rank if available
           })
@@ -2164,6 +2172,14 @@ Return this exact format - ONLY JSON, nothing else:
       const brandDomainNormalized = normalizeMentionValue(brandDomain)
       if (brandDomainNormalized && brandDomainNormalized !== brandNameNormalized) {
         brandTargets.push({ normalized: brandDomainNormalized, label: brandDomain })
+      }
+      // Also add short brand name without TLD (e.g. "infrasity" from "infrasity.com")
+      // so posts that mention the name without .com are still detected
+      if (/^[a-z0-9][a-z0-9-]*\.[a-z]{2,}$/.test(brandDomainNormalized)) {
+        const shortBrand = brandDomainNormalized.replace(/\.[a-z]{2,6}$/, '').replace(/-/g, ' ').trim()
+        if (shortBrand && shortBrand.length > 2 && shortBrand !== brandNameNormalized && shortBrand !== brandDomainNormalized) {
+          brandTargets.push({ normalized: shortBrand, label: shortBrand })
+        }
       }
 
       // Debug mention targets

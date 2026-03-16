@@ -240,7 +240,13 @@ export default function SerpScout() {
   // ── Derived ──────────────────────────────────────────────────────────────
 
   const hasResult = !!rawResult;
-  const activeCtx = rawResult?.companyContext?.approvedContext ?? rawResult?.companyContext?.llmContext ?? ctxForm ?? null;
+  // Merge llmContext (base) with approvedContext (override) so overview fields from llmContext
+  // fill in when approvedContext only has keywords/competitors/serpAnalysis (returning user case)
+  const _approved = rawResult?.companyContext?.approvedContext;
+  const _llm = rawResult?.companyContext?.llmContext;
+  const activeCtx = (_approved || _llm)
+    ? { ...(_llm || {}), ...(_approved || {}) }
+    : (ctxForm?.companySummary ? ctxForm : null);
   const companyName = rawResult?.companyName ?? domain.trim();
   const companyId = rawResult?.companyId ?? null;
 
@@ -258,6 +264,7 @@ export default function SerpScout() {
   const kwSerpData = selectedKw ? serpResults[selectedKw.term] : null;
 
   const citationPrompts = useMemo(() => {
+    // Use the selected keyword's saved prompts only — citations run per-keyword
     const base = selectedKw?.prompts ?? [];
     const extras = manualCitationPrompts.filter(p => !base.includes(p));
     return [...base, ...extras];
@@ -313,7 +320,9 @@ export default function SerpScout() {
   useEffect(() => {
     if (!rawResult?.companyContext) return;
     
-    const ctx = rawResult.companyContext.approvedContext ?? rawResult.companyContext.llmContext;
+    const _a = rawResult.companyContext.approvedContext;
+    const _l = rawResult.companyContext.llmContext;
+    const ctx = (_a || _l) ? { ...(_l || {}), ...(_a || {}) } : null;
     if (ctx && typeof ctx === 'object') {
       const contextData = {
         companySummary: String(ctx.companySummary ?? "").trim(),
@@ -420,8 +429,11 @@ export default function SerpScout() {
       setKeywords(kws);
       setSelectedKwIds(new Set(kws.map((_, i) => i)));
       
-      // Extract and set company context from API response
-      const ctx = res.companyContext?.approvedContext ?? res.companyContext?.llmContext;
+      // Extract and set company context from API response — merge llm+approved so overview
+      // fields from llmContext fill in when approvedContext only has keywords (returning user)
+      const _a = res.companyContext?.approvedContext;
+      const _l = res.companyContext?.llmContext;
+      const ctx = (_a || _l) ? { ...(_l || {}), ...(_a || {}) } : null;
       if (ctx && typeof ctx === 'object') {
         // Ensure all fields are properly structured
         const contextData = {
@@ -436,8 +448,9 @@ export default function SerpScout() {
         console.log('[SERP Scout] Full companyContext object:', res.companyContext);
       }
       
+      // Always reset competitors for the new domain — prevents bleed from a previous company
       const savedCompetitors = ctx?.competitors;
-      if (Array.isArray(savedCompetitors) && savedCompetitors.length > 0) setCompetitors(savedCompetitors);
+      setCompetitors(Array.isArray(savedCompetitors) ? savedCompetitors : []);
 
       // Save domain to localStorage for future auto-load
       try {
@@ -533,7 +546,7 @@ export default function SerpScout() {
           await apiPost("/api/threadflow/company-context", {
             companyId,
             domain: domain.trim(),
-            context: ctxForm
+            context: { ...ctxForm, competitors }
           });
           console.log('[SERP Scout] Company context saved with keywords');
         } catch (e) {
@@ -648,68 +661,140 @@ export default function SerpScout() {
       return;
     }
     
-    if (!citationPrompts.length) {
+    // Fall back to all selected keyword terms if no LLM-generated prompts saved yet
+    const effectivePrompts = citationPrompts.length > 0
+      ? citationPrompts
+      : Array.from(selectedKwIds).map(idx => keywords[idx]?.term).filter(Boolean);
+
+    if (!effectivePrompts.length) {
       toast({
         variant: "destructive",
         title: "No prompts",
-        description: "Add at least one prompt to run citation search."
+        description: "Select a keyword first to run citation search."
       });
       return;
     }
-    
+
     setCitationLoading(true);
     setError(null);
-    
+
     try {
-      const res = await apiPost("/api/threadflow/serp-scout", {
-        action: "testCitations",
-        prompts: citationPrompts,
-        domain: domain.trim(),
-        competitors,
+      // Step 1: Trigger all platforms in parallel — each gets its own snapshot_id
+      const triggerRes = await apiPost("/api/threadflow/brightdata-citations", {
+        action: "trigger",
+        prompts: effectivePrompts,
+        companyName: companyName || domain.trim(),
+        maxPromptsPerPlatform: effectivePrompts.length,
       });
-      
-      setCitationResults(res);
-      
-      // Show summary of results
-      if (res?.records?.length > 0) {
-        let totalPosts = 0;
-        res.records.forEach(rec => {
-          Object.values(rec.models).forEach(val => {
-            if (Array.isArray(val)) totalPosts += val.length;
-          });
+
+      if (!triggerRes?.snapshots?.length) {
+        throw new Error(triggerRes?.error || "No platform snapshots were triggered");
+      }
+
+      const { snapshots, prompts: triggeredPrompts, wrappedToOriginal } = triggerRes;
+      toast({
+        title: "Citation search started",
+        description: `Querying ${snapshots.length} AI platforms in parallel. Results appear as each completes…`,
+      });
+
+      // Step 2: Poll all snapshots — show partial results as platforms complete
+      const POLL_INTERVAL = 15_000;
+      const POLL_MAX_ATTEMPTS = 20;
+      let finalRes = null;
+
+      for (let attempt = 0; attempt < POLL_MAX_ATTEMPTS; attempt++) {
+        await new Promise(r => setTimeout(r, POLL_INTERVAL));
+
+        const pollRes = await apiPost("/api/threadflow/brightdata-citations", {
+          action: "poll",
+          snapshots,
+          prompts: triggeredPrompts,
+          companyName: companyName || domain.trim(),
+          wrappedToOriginal,
         });
+
+        if (!pollRes) continue;
+
+        // Show partial results immediately — build records from whatever platforms are ready
+        if (pollRes.platforms) {
+          const partialRecords = buildCitationRecords(pollRes.platforms, triggeredPrompts);
+          if (partialRecords.length > 0) {
+            setCitationResults({ records: partialRecords, summary: pollRes.summary, partial: pollRes.partial });
+          }
+        }
+
+        if (pollRes.overallStatus === "ready") {
+          finalRes = pollRes;
+          break;
+        }
+      }
+
+      // Final update (ensure latest full data is set)
+      if (finalRes?.platforms) {
+        const records = buildCitationRecords(finalRes.platforms, triggeredPrompts);
+        setCitationResults({ records, summary: finalRes.summary, partial: false });
+      }
+
+      const totalPosts = finalRes?.summary?.totalRedditUrlsFound || 0;
+      const completedPlatforms = finalRes?.summary?.platformsComplete || snapshots.length;
+      if (totalPosts > 0) {
         toast({
           title: "Citation search complete",
-          description: `Found ${totalPosts} posts across ${res.records.length} prompt${res.records.length !== 1 ? 's' : ''}`
+          description: `Found ${totalPosts} Reddit links across ${completedPlatforms} AI platforms`,
+        });
+      } else if (finalRes) {
+        toast({
+          title: "Citation search complete",
+          description: "AI platforms did not surface Reddit threads for these prompts.",
         });
       } else {
         toast({
-          title: "No results found",
-          description: "Try different prompts or keywords."
+          variant: "destructive",
+          title: "Citation search timed out",
+          description: "Partial results shown. Try again or use fewer prompts.",
         });
       }
     } catch (e) {
       const errorMsg = e.message ?? "Citation search failed";
       setError(errorMsg);
-      
-      // Provide specific error guidance
-      let description = errorMsg;
-      if (errorMsg.includes("timeout")) {
-        description = "The search took too long. Try with fewer prompts or simpler keywords.";
-      } else if (errorMsg.includes("401") || errorMsg.includes("unauthorized")) {
-        description = "Your session expired. Please sign in again.";
-      } else if (errorMsg.includes("429")) {
-        description = "Rate limited. Please wait a moment and try again.";
-      }
-      
-      toast({
-        variant: "destructive",
-        title: "Citation search failed",
-        description
-      });
+      toast({ variant: "destructive", title: "Citation search failed", description: errorMsg });
     } finally {
       setCitationLoading(false);
     }
+  }
+
+  /** Convert per-platform poll response into CitationTable records format */
+  function buildCitationRecords(platformsData, triggeredPrompts) {
+    // Group by prompt across all ready platforms
+    const byPrompt = {};
+    Object.entries(platformsData).forEach(([platformName, data]) => {
+      if (data.status !== 'ready' || !Array.isArray(data.results)) return;
+      data.results.forEach(result => {
+        const p = result.prompt;
+        if (!p) return;
+        if (!byPrompt[p]) byPrompt[p] = { prompt: p, models: {} };
+        if (result.redditUrls?.length > 0) {
+          byPrompt[p].models[platformName] = result.redditUrls.map(url => ({
+            url,
+            title: url.split('/').filter(Boolean).pop()?.replace(/-/g, ' ') || url,
+            subreddit: url.match(/\/r\/([^/]+)/)?.[1] || '',
+            upvotes: 0,
+            comments: 0,
+          }));
+        }
+      });
+    });
+    // Ensure all triggered prompts appear even if no results yet
+    (triggeredPrompts || []).forEach(p => {
+      if (!byPrompt[p]) byPrompt[p] = { prompt: p, models: {} };
+    });
+    return Object.values(byPrompt);
+  }
+
+  // Single "Run Analysis" — fires SERP + citations in parallel
+  async function handleRunAnalysis() {
+    if (!selectedKw) return;
+    await Promise.allSettled([handleSerpAnalysis(), handleCitationSearch()]);
   }
 
   function toggleKw(idx) {
@@ -939,7 +1024,7 @@ export default function SerpScout() {
                               const res = await apiPost("/api/threadflow/company-context", {
                                 companyId,
                                 domain: domain.trim(),
-                                context: ctxForm
+                                context: { ...ctxForm, competitors }
                               });
                               console.log('[SERP Scout] Company context saved to DB:', res);
                               toast({ title: "Overview saved to database" });
@@ -1300,6 +1385,8 @@ export default function SerpScout() {
             setManualCitationPrompts={setManualCitationPrompts}
             handleSerpAnalysis={handleSerpAnalysis}
             handleCitationSearch={handleCitationSearch}
+            handleRunAnalysis={handleRunAnalysis}
+            analysisLoading={serpLoading || citationLoading}
             scannedPostDetails={scannedPostDetails}
           />
         </TabsContent>

@@ -268,7 +268,7 @@ export default function ClientDashboardPage() {
             const [{ items }, configs, myCompaniesRes] = await Promise.all([
               fetchThreadflowData(token),
               fetchCadenceConfig(),
-              fetch("/api/threadflow/reddit/my-companies", {
+              fetch("/api/threadflow/reddit/my-companies?clientOnly=true", {
                 headers: { Authorization: `Bearer ${token}` },
               }).then((r) => r.json()).catch(() => ({ companies: [] })),
             ]);

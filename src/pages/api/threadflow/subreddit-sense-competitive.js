@@ -1,7 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
 import { verifyRequestUser } from '@/lib/serverAuth'
-import { getCompanyContext } from '@/lib/companyContext'
+import { getCompanyContext, saveCompanyContext } from '@/lib/companyContext'
 import pLimit from 'p-limit'
+
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000 // 24 hours
 
 const REDDIT_API_BASE = 'https://reddit-comment-gen.onrender.com'
 const POST_DETAILS_ENDPOINT = `${REDDIT_API_BASE}/fetch_post_details`
@@ -16,6 +18,8 @@ const supabase = createClient(
 )
 
 const postDetailsLimiter = pLimit(POST_DETAILS_CONCURRENCY)
+// Render.com free-tier server queues concurrent requests → serialize mention fetches
+const mentionFetchLimiter = pLimit(1)
 
 /**
  * Extract mention snippet from text with context
@@ -81,33 +85,39 @@ function buildMentionData(thread, brandTargets, competitorTargets) {
   }
 }
 
+const MENTION_FETCH_TIMEOUT_MS = 120_000
+
 /**
- * Fetch Reddit posts via the external API
+ * Fetch Reddit posts that mention a company — same endpoint as SubredditSense.
+ * Returns { posts, comments } where every item already mentions the company name.
  */
-async function fetchRedditPostsForKeyword(keyword) {
+async function fetchMentionsByCompanyName(companyName) {
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), MENTION_FETCH_TIMEOUT_MS)
   try {
-    const response = await fetch(`${REDDIT_API_BASE}/find_top_posts_comments`, {
+    const response = await fetch(`${REDDIT_API_BASE}/search_company_mentions`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ keyword }),
-      timeout: 30000
+      body: JSON.stringify({ company_name: companyName }),
+      signal: controller.signal
     })
+    clearTimeout(timeoutId)
 
     if (!response.ok) {
-      console.error('[competitive-sense] Reddit API error', { status: response.status, keyword })
-      return { top_posts: [], new_posts: [], top_comments: [], new_comments: [] }
+      console.error('[competitive-sense] Reddit API error', { status: response.status, companyName })
+      return { posts: [], comments: [] }
     }
 
     const data = await response.json()
     return {
-      top_posts: Array.isArray(data.top_posts) ? data.top_posts : [],
-      new_posts: Array.isArray(data.new_posts) ? data.new_posts : [],
-      top_comments: Array.isArray(data.top_comments) ? data.top_comments : [],
-      new_comments: Array.isArray(data.new_comments) ? data.new_comments : []
+      posts: Array.isArray(data.posts) ? data.posts : [],
+      comments: Array.isArray(data.comments) ? data.comments : []
     }
   } catch (error) {
-    console.error('[competitive-sense] Failed to fetch Reddit posts', { keyword, error: error.message })
-    return { top_posts: [], new_posts: [], top_comments: [], new_comments: [] }
+    clearTimeout(timeoutId)
+    const reason = error.name === 'AbortError' ? `timed out after ${MENTION_FETCH_TIMEOUT_MS}ms` : error.message
+    console.error('[competitive-sense] Failed to fetch mentions', { companyName, error: reason })
+    return { posts: [], comments: [] }
   }
 }
 
@@ -115,13 +125,16 @@ async function fetchRedditPostsForKeyword(keyword) {
  * Fetch full post details to get content for mention extraction
  */
 async function fetchRedditPostDetails(postUrl) {
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), POST_DETAILS_TIMEOUT_MS)
   try {
     const response = await fetch(POST_DETAILS_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url: postUrl }),
-      timeout: POST_DETAILS_TIMEOUT_MS
+      signal: controller.signal
     })
+    clearTimeout(timeoutId)
 
     if (!response.ok) {
       return null
@@ -129,6 +142,7 @@ async function fetchRedditPostDetails(postUrl) {
 
     return await response.json()
   } catch (err) {
+    clearTimeout(timeoutId)
     return null
   }
 }
@@ -295,7 +309,7 @@ export default async function handler(req, res) {
       console.warn('[competitive-sense] Proceeding without authenticated user')
     }
 
-    const { topic, companyId } = req.body || {}
+    const { topic, companyId, companyName: bodyCompanyName, competitors: bodyCompetitors } = req.body || {}
 
     if (!companyId) {
       return res.status(400).json({ error: 'companyId required' })
@@ -307,116 +321,200 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'Company context not found' })
     }
 
-    const companyName = String(context.approvedContext?.companyName || '').trim()
-    const competitors = normalizeStringList(context.approvedContext?.competitors)
-    const capabilities = normalizeStringList(context.approvedContext?.coreCapabilities)
+    // companyName priority: request body > metadata (set by analyze_domain) > approvedContext
+    const companyName = String(
+      bodyCompanyName ||
+      context.metadata?.companyName ||
+      context.approvedContext?.companyName ||
+      ''
+    ).trim()
+    // Dedupe competitors — skip any entry that matches the brand name (case-insensitive)
+    // Prefer DB-saved competitors; fall back to request body (for fresh sessions without saved keywords)
+    const brandLower = companyName.toLowerCase()
+    const dbCompetitors = normalizeStringList(context.approvedContext?.competitors)
+    const fallbackCompetitors = normalizeStringList(bodyCompetitors)
+    const competitors = (dbCompetitors.length > 0 ? dbCompetitors : fallbackCompetitors)
+      .filter(c => c.toLowerCase() !== brandLower)
 
-    // Build brand and competitor targets
-    const brandTargets = companyName
-      ? [companyName, ...capabilities.slice(0, 3)]
-      : capabilities.slice(0, 3)
-    const competitorTargets = competitors
-
-    const explicitTopic = typeof topic === 'string' ? topic.trim() : ''
-    const queryPlan = explicitTopic
-      ? [explicitTopic]
-      : [
-          companyName,
-          ...competitorTargets.slice(0, 4),
-          ...capabilities.slice(0, 2).map((cap) => companyName ? `${companyName} ${cap}` : cap)
-        ].filter(Boolean)
-
-    const uniqueQueries = Array.from(new Set(queryPlan)).slice(0, 6)
-
-    if (!uniqueQueries.length) {
-      return res.status(400).json({
-        error: 'No analysis queries could be derived. Add company name/capabilities/competitors in Overview or provide a topic.'
-      })
+    if (!companyName) {
+      return res.status(400).json({ error: 'Company name not found. Please run domain analysis first.' })
     }
 
-    console.log('[competitive-sense] Analyzing:', {
-      mode: explicitTopic ? 'topic' : 'general',
-      topic: explicitTopic || null,
-      queries: uniqueQueries,
-      brandTargets,
-      competitorTargets
+    // ── 24-hour cache ──────────────────────────────────────────────────────────
+    const cached = context.approvedContext?.competitiveSenseCache
+    const cacheKey = competitors.sort().join(',')
+    if (
+      cached &&
+      cached.cacheKey === cacheKey &&
+      cached.cachedAt &&
+      Date.now() - new Date(cached.cachedAt).getTime() < CACHE_TTL_MS
+    ) {
+      console.log('[competitive-sense] Returning cached result (< 24h old)')
+      return res.status(200).json({ ...cached.data, fromCache: true, cachedAt: cached.cachedAt })
+    }
+
+    console.log('[competitive-sense] Fetching mentions via search_company_mentions (same as SubredditSense):', {
+      companyName,
+      competitors
     })
 
-    // Fetch Reddit posts/comments for all planned queries, then merge + dedupe
-    const allQueryResults = await Promise.all(uniqueQueries.map((q) => fetchRedditPostsForKeyword(q)))
-    const allPosts = dedupeBy(
-      allQueryResults.flatMap((data) => [...(data.top_posts || []), ...(data.new_posts || [])]),
-      (post) => String(post?.url || post?.post_url || '')
+    // ── Fetch brand + competitor mentions using the same endpoint as SubredditSense ──
+    // Serialized via mentionFetchLimiter (concurrency=1) — Render.com free tier queues
+    // parallel requests which causes all of them to time out simultaneously.
+    const allNames = [companyName, ...competitors.slice(0, 4)]
+    const allResults = await Promise.all(
+      allNames.map(name => mentionFetchLimiter(() => fetchMentionsByCompanyName(name)))
     )
-    const allComments = dedupeBy(
-      allQueryResults.flatMap((data) => [...(data.top_comments || []), ...(data.new_comments || [])]),
-      (comment) => String(comment?.comment_url || `${comment?.subreddit || ''}:${comment?.comment_id || comment?.id || ''}:${comment?.author || ''}`)
-    )
+    const [brandData, ...competitorResults] = allResults
 
-    console.log('[competitive-sense] Fetched:', { postCount: allPosts.length, commentCount: allComments.length })
+    // Brand targets: company name + any short alias (first word if multi-word)
+    const brandTargets = [companyName]
+    const firstWord = companyName.split(/\s+/)[0]
+    if (firstWord && firstWord.length > 3 && firstWord.toLowerCase() !== companyName.toLowerCase()) {
+      brandTargets.push(firstWord)
+    }
 
-    // Enrich posts with full content
-    const enrichedPosts = await Promise.all(
-      allPosts.slice(0, 20).filter(Boolean).map((post) =>
-        postDetailsLimiter(async () => {
-          const url = post.url || post.post_url
-          if (!url) return post
-          const details = await fetchRedditPostDetails(url).catch(() => null)
-          return details ? { ...post, ...details } : post
-        })
-      )
-    )
+    // Normalize brand posts — guaranteed to mention brand (fetched by brand name search)
+    // Also scan title for any competitor mentions present in the same thread
+    const brandPosts = dedupeBy(
+      [...(brandData.posts || [])],
+      p => String(p.post_url || p.url || '')
+    ).map(p => {
+      const title = p.post_title || p.title || ''
+      const body = p.selftext || p.post_content || ''
+      const fullText = `${title} ${body}`
+      // Scan for which competitors are also mentioned in this brand post
+      const mentionedCompetitors = competitors.filter(comp => mentionsTarget(fullText, comp))
+      return {
+        url: p.post_url || p.url || '',
+        title,
+        subreddit: p.subreddit || 'unknown',
+        upvotes: typeof p.upvotes === 'number' ? p.upvotes : (p.score || 0),
+        comments: typeof p.total_comments === 'number' ? p.total_comments : (p.num_comments || 0),
+        mentionsBrand: true,
+        competitors: mentionedCompetitors,
+        mentionHighlights: []
+      }
+    })
 
-    // Extract mentions
-    const postMentionAnalysis = enrichedPosts.map(post =>
-      buildMentionData(post, brandTargets, competitorTargets)
-    )
-    const commentMentionAnalysis = allComments.slice(0, 50).map(comment =>
-      buildMentionData(comment, brandTargets, competitorTargets)
-    )
+    const brandComments = (brandData.comments || []).map(c => ({
+      url: c.comment_url || c.url || '',
+      subreddit: c.subreddit || 'unknown',
+      upvotes: typeof c.upvotes === 'number' ? c.upvotes : 0,
+      mentionsBrand: true,
+      competitors: []
+    }))
+
+    // Normalize competitor posts — guaranteed to mention that competitor
+    // Also scan title for brand mentions present in the same thread
+    const competitorPostsByName = {}
+    competitors.slice(0, 5).forEach((comp, idx) => {
+      const data = competitorResults[idx] || { posts: [], comments: [] }
+      competitorPostsByName[comp] = dedupeBy(
+        data.posts || [],
+        p => String(p.post_url || p.url || '')
+      ).map(p => {
+        const title = p.post_title || p.title || ''
+        const body = p.selftext || p.post_content || ''
+        const fullText = `${title} ${body}`
+        const mentionsBrand = brandTargets.some(t => mentionsTarget(fullText, t))
+        return {
+          url: p.post_url || p.url || '',
+          title,
+          subreddit: p.subreddit || 'unknown',
+          upvotes: typeof p.upvotes === 'number' ? p.upvotes : (p.score || 0),
+          comments: typeof p.total_comments === 'number' ? p.total_comments : (p.num_comments || 0),
+          mentionsBrand,
+          competitors: [comp],
+          mentionHighlights: []
+        }
+      })
+    })
+
+    // Merge all posts into a single map, combining brand + competitor flags per URL
+    const mergedMap = new Map()
+    brandPosts.forEach(p => mergedMap.set(p.url, { ...p }))
+    Object.entries(competitorPostsByName).forEach(([comp, posts]) => {
+      posts.forEach(p => {
+        if (mergedMap.has(p.url)) {
+          const existing = mergedMap.get(p.url)
+          existing.competitors = [...new Set([...existing.competitors, comp])]
+          if (p.mentionsBrand) existing.mentionsBrand = true
+        } else {
+          mergedMap.set(p.url, { ...p })
+        }
+      })
+    })
+
+    const allMergedPosts = Array.from(mergedMap.values()).filter(p => p.url)
+    const allCompetitorPosts = allMergedPosts.filter(p => p.competitors.length > 0)
 
     // Aggregate by subreddit
-    const subredditData = aggregateBySubreddit(
-      enrichedPosts,
-      allComments.slice(0, 50),
-      { posts: postMentionAnalysis, comments: commentMentionAnalysis }
-    )
+    const subredditData = {}
+    allMergedPosts.forEach(post => {
+      const sub = post.subreddit || 'unknown'
+      if (!subredditData[sub]) {
+        subredditData[sub] = {
+          subreddit: sub,
+          totalPosts: 0,
+          brandMentions: 0,
+          competitorMentions: 0,
+          avgEngagement: 0,
+          topPosts: [],
+          postWithBrand: [],
+          postWithCompetitors: []
+        }
+      }
+      subredditData[sub].totalPosts++
+      const eng = (post.upvotes || 0) + (post.comments || 0)
+      subredditData[sub].avgEngagement += eng
+      subredditData[sub].topPosts.push({ title: post.title, url: post.url, upvotes: post.upvotes || 0 })
+      if (post.mentionsBrand) {
+        subredditData[sub].brandMentions++
+        subredditData[sub].postWithBrand.push({ title: post.title, url: post.url, upvotes: post.upvotes || 0 })
+      }
+      if (post.competitors.length > 0) {
+        subredditData[sub].competitorMentions++
+        subredditData[sub].postWithCompetitors.push({ title: post.title, url: post.url, upvotes: post.upvotes || 0, competitors: post.competitors })
+      }
+    })
+    Object.keys(subredditData).forEach(sub => {
+      const total = subredditData[sub].totalPosts
+      if (total > 0) {
+        subredditData[sub].avgEngagement = Math.round(subredditData[sub].avgEngagement / total)
+        subredditData[sub].topPosts = subredditData[sub].topPosts.slice(0, 3)
+      }
+    })
 
-    // Build full thread-level lists (with direct Reddit links)
-    const allMatchedThreads = enrichedPosts
-      .map((post, idx) => buildThreadRecord(post, postMentionAnalysis[idx]))
-      .filter((thread) => thread.mentionsBrand || thread.competitors.length > 0)
+    // Thread lists
+    const allMatchedThreads = allMergedPosts
+      .filter(p => p.mentionsBrand || p.competitors.length > 0)
       .sort((a, b) => ((b.upvotes + b.comments) - (a.upvotes + a.comments)))
-
-    const brandMentionThreads = allMatchedThreads.filter((thread) => thread.mentionsBrand)
-    const competitorMentionThreads = allMatchedThreads.filter((thread) => thread.competitors.length > 0)
-
-    const competitorThreadsByName = competitorTargets.reduce((acc, competitor) => {
-      acc[competitor] = allMatchedThreads.filter((thread) => thread.competitors.includes(competitor))
+    const brandMentionThreads = allMatchedThreads.filter(t => t.mentionsBrand)
+    const competitorMentionThreads = allMatchedThreads.filter(t => t.competitors.length > 0)
+    const competitorThreadsByName = competitors.reduce((acc, comp) => {
+      acc[comp] = allMatchedThreads.filter(t => t.competitors.includes(comp))
       return acc
     }, {})
 
-    // Calculate metrics
-    const totalMentions = postMentionAnalysis.filter(m => m.mentionsBrand || m.mentionsCompetitors.length > 0).length
-    const brandMentions = postMentionAnalysis.filter(m => m.mentionsBrand).length
-    const competitorMentionsData = postMentionAnalysis.map(m => m.mentionsCompetitors).flat()
-    const positivePosts = enrichedPosts.filter(p => (p.upvotes || 0) > 100).length
+    // Metrics
+    const brandMentions = brandPosts.length + brandComments.length
+    const competitorMentionCount = allCompetitorPosts.length
+    const positivePosts = allMergedPosts.filter(p => (p.upvotes || 0) > 100).length
 
-    res.status(200).json({
+    const responseData = {
       success: true,
-      topic: explicitTopic || null,
-      mode: explicitTopic ? 'topic' : 'general',
-      queryPlan: uniqueQueries,
+      mode: 'company-mention',
       metrics: {
-        totalMentions,
+        totalMentions: brandMentions + competitorMentionCount,
         brandMentions,
-        competitorMentions: competitorMentionsData.length,
+        competitorMentions: competitorMentionCount,
         positivePosts,
         activeSubreddits: Object.keys(subredditData).length
       },
       subreddits: subredditData,
-      posts: enrichedPosts.slice(0, 10),
-      comments: allComments.slice(0, 20),
+      posts: brandPosts.slice(0, 10),
+      comments: brandComments.slice(0, 20),
       threads: {
         all: allMatchedThreads,
         brand: brandMentionThreads,
@@ -424,15 +522,27 @@ export default async function handler(req, res) {
         competitorByName: competitorThreadsByName
       },
       competitorBreakdown: competitors.reduce((acc, comp) => {
-        acc[comp] = competitorMentionsData.filter(m => m === comp).length
+        acc[comp] = (competitorPostsByName[comp] || []).length
         return acc
       }, {}),
       coverage: {
-        analyzedPosts: enrichedPosts.length,
+        analyzedPosts: allMergedPosts.length,
         matchedPosts: allMatchedThreads.length,
-        note: 'Thread-level lists are built from analyzed posts with Reddit links.'
+        note: 'Posts fetched via direct company mention search — same method as SubredditSense.'
       }
-    })
+    }
+
+    // Persist result to 24-hour cache (fire-and-forget)
+    const cachedAt = new Date().toISOString()
+    saveCompanyContext(companyId, {
+      ...context,
+      approvedContext: {
+        ...(context.approvedContext || {}),
+        competitiveSenseCache: { cacheKey, cachedAt, data: responseData }
+      }
+    }).catch(e => console.warn('[competitive-sense] Cache save failed:', e.message))
+
+    res.status(200).json(responseData)
   } catch (error) {
     console.error('[competitive-sense] Error:', error)
     res.status(500).json({ error: error.message })

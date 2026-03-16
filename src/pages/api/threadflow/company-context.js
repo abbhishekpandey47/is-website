@@ -41,7 +41,8 @@ export default async function handler(req, res) {
     companySummary: String(context.companySummary || '').trim(),
     coreCapabilities: cleanList(context.coreCapabilities),
     problemSpaces: cleanList(context.problemSpaces),
-    constraints: cleanList(context.constraints)
+    constraints: cleanList(context.constraints),
+    competitors: cleanList(context.competitors),
   }
 
   if (!sanitizedContext.companySummary) {

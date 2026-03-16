@@ -12,14 +12,21 @@ export default async function handler(req, res) {
   if(!userCtx.isAdmin) return res.status(403).json({error : "Access Denied"});
 
   try {
-    // GET — list all companies
+    // GET — list client companies (those with cadence_config = proper clients, not SS/CS research companies)
     if (req.method === 'GET') {
+      const { data: cadenceRows, error: cadenceErr } = await supabase
+        .from('cadence_config')
+        .select('company_name')
+      if (cadenceErr) throw cadenceErr;
+      const clientNames = new Set((cadenceRows || []).map(r => r.company_name).filter(Boolean))
+
       const { data, error } = await supabase
         .from('companies')
-        .select('id , name')
-
+        .select('id, name')
       if (error) throw error;
-      return res.status(200).json({ success: true, data });
+
+      const filtered = (data || []).filter(c => clientNames.has(c.name))
+      return res.status(200).json({ success: true, data: filtered });
     }
 
     // POST — add a new company
