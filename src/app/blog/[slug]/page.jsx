@@ -177,25 +177,40 @@ const PostPage = async (props) => {
           }
         : null;
 
-    // Safely get author data
+    // Safely get author and optional co-author data
     let authorObj = null;
+    let coAuthorObj = null;
     if (authorMetadata && Array.isArray(authorMetadata) && postData.authorId) {
       authorObj = authorMetadata.find(
         (element) => element.authorId === postData.authorId
       );
+
+      if (postData.coAuthorId) {
+        coAuthorObj = authorMetadata.find(
+          (element) => element.authorId === postData.coAuthorId
+        );
+      }
     }
 
-    // Safely assign author properties
+    // Safely assign author properties (with optional co-author separate)
     if (authorObj) {
       postData.authorName = authorObj.name || "";
       postData.authorImage = authorObj.profilePic || "";
       postData.authorLinkedin = authorObj.linkedIn || "";
       postData.designation = authorObj.designation || "";
+      postData.coAuthorName = coAuthorObj?.name || "";
+      postData.coAuthorImage = coAuthorObj?.profilePic || "";
+      postData.coAuthorLinkedin = coAuthorObj?.linkedIn || "";
+      postData.coAuthorDesignation = coAuthorObj?.designation || "";
     } else {
       postData.authorName = "";
       postData.authorImage = "";
       postData.authorLinkedin = "";
       postData.designation = "";
+      postData.coAuthorName = "";
+      postData.coAuthorImage = "";
+      postData.coAuthorLinkedin = "";
+      postData.coAuthorDesignation = "";
     }
 
     // Get outline - Extract headings safely
