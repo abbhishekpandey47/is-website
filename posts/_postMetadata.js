@@ -1806,7 +1806,8 @@ let postMetaData = [
     description: "The developer marketing plan has fundamentally changed in 2026\. Today, developers discover and evaluate products across AI assistants, Reddit discussions, GitHub repositories, and technical documentation. This shift has made authority, structured content, and community presence the primary drivers of growth. In this blog, we break down the five structural layers that define the new developer marketing plan, including AI visibility, documentation strategy, and GitHub distribution. Learn what most B2B SaaS startups are still getting wrong and how to build a discoverability system that drives pipeline.",
     ogImage: "/PostImages/developer-marketing-plan/1.webp",
     publishedOn: "2026-03-17",
-    authorId: "author0005",
+    authorId: "author0008",
+    coAuthorId: "author0009",
     category: "Developer Marketing",
     metaDescription: "Your new developer marketing plan for 2026\. Discover what changed and how AI, GitHub, and community signals now drive real adoption. Click the link to learn now"
 },

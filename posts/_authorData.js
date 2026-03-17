@@ -62,6 +62,14 @@ const authorData = [
   "designation": "Growth Lead",
   "about": "Growth Lead at Infrasity, specialises in driving growth for B2B startups",
   "linkedIn": "https://www.linkedin.com/in/arvish-suresh-3b55031b7"
+},
+ {
+  "authorId": "author0009",
+  "name": "Isha srivastava",
+  "profilePic": "/authorImages/isha-srivastava.webp",
+  "designation": "Head of Partnerships @Reo.Dev ",
+  "about": "",
+  "linkedIn": "https://www.linkedin.com/in/isha-srivastava-685a1228b/"
 }
 ];
 

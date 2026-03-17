@@ -36,7 +36,7 @@ export default React.memo(function HeadBanner({ postData }) {
         </p>
 
         <div className="flex items-center space-x-6 text-white">
-          {/* Author Info */}
+          {/* Primary Author Info */}
           <a
             href={postData.authorLinkedin || "#"} 
             target="_blank" // Open the link in a new tab
@@ -63,6 +63,34 @@ export default React.memo(function HeadBanner({ postData }) {
               </p>
             </div>
           </a>
+
+          {/* Co-Author Info (if exists) */}
+          {postData.coAuthorName && (
+            <a
+              href={postData.coAuthorLinkedin || "#"} 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 border-l border-white/30 pl-6"
+            >
+              <Image
+                width={50}
+                height={50}
+                loading="lazy"
+                priority={false}
+                src={postData.coAuthorImage || "https://via.placeholder.com/40"}
+                alt={`Co-author picture of ${postData.coAuthorName}`}
+                className="rounded-full w-10 h-10 transition duration-300 ease-in-out transform hover:scale-105"
+              />
+              <div>
+                <p className="text-sm max-xs:text-xs quicksand-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                  Co-author
+                </p>
+                <p className="text-sm max-xs:text-xs quicksand-semibold transition duration-300 ease-in-out transform hover:scale-105">
+                  {postData.coAuthorName || " "} | {postData.coAuthorDesignation || " "}
+                </p>
+              </div>
+            </a>
+          )}
         </div>
 
       </div>
