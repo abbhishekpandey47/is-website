@@ -929,35 +929,38 @@ export default function SerpScout() {
 
   return (
     <div className="space-y-6 w-full">
-      {/* Stepper nav + company badge */}
-      <div className="flex flex-col gap-4">
+      {/* Subheader bar — always visible */}
+      <div
+        className="flex items-center justify-between"
+        style={{ minHeight: 44, borderBottom: '0.5px solid #2a2a2a', paddingBottom: 12 }}
+      >
+        <p style={{ fontSize: 12, color: '#777', margin: 0 }}>
+          Discover Reddit threads ranking on Google and find LLM citation opportunities for your brand.
+        </p>
         {hasResult && (
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">
-              Discover Reddit threads ranking on Google and find LLM citation opportunities for your brand.
-            </p>
-            <div className="flex items-center gap-2 shrink-0">
-              <div
-                className="flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg"
-                style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.2)' }}
-              >
-                <Globe className="h-3.5 w-3.5 shrink-0" style={{ color: '#5f64ff' }} />
-                <span className="font-medium truncate max-w-48">{companyName}</span>
-                {saved && (
-                  <span
-                    className="inline-block h-2 w-2 rounded-full shrink-0"
-                    style={{ background: '#5f64ff', boxShadow: '0 0 6px rgba(95,100,255,0.3)' }}
-                  />
-                )}
-              </div>
-              <button
-                onClick={() => setActiveTab("save")}
-                className="flex items-center justify-center h-8 w-8 rounded-lg border border-border hover:border-[#5f64ff]/40 bg-muted/60 hover:bg-[rgba(95,100,255,0.1)] transition-colors"
-                title="Save keywords & competitors"
-              >
-                <Bookmark className="h-3.5 w-3.5 text-muted-foreground" />
-              </button>
+          <div className="flex items-center gap-2 shrink-0">
+            <div
+              className="flex items-center gap-2"
+              style={{
+                background: 'rgba(95,100,255,0.08)',
+                border: '0.5px solid rgba(95,100,255,0.22)',
+                borderRadius: 8,
+                padding: '5px 12px',
+                fontSize: 12,
+                color: '#f0f0f0',
+              }}
+            >
+              <Globe className="h-3.5 w-3.5 shrink-0" style={{ color: '#5f64ff' }} />
+              <span className="font-medium truncate max-w-48">{companyName}</span>
+              <CheckCircle className="h-3.5 w-3.5 shrink-0" style={{ color: '#5f64ff' }} />
             </div>
+            <button
+              onClick={() => setActiveTab("save")}
+              className="flex items-center justify-center h-8 w-8 rounded-lg border border-border hover:border-[#5f64ff]/40 bg-muted/60 hover:bg-[rgba(95,100,255,0.1)] transition-colors"
+              title="Save keywords & competitors"
+            >
+              <Bookmark className="h-3.5 w-3.5 text-muted-foreground" />
+            </button>
           </div>
         )}
       </div>
