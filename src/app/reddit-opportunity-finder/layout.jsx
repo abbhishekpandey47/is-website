@@ -23,7 +23,7 @@ export default function SerpScoutLayout({ children }) {
       setFirebaseUser(user);
 
       if (!user) {
-        window.location.href = "/auth/signin?redirect=/serp-scout";
+        window.location.href = "/auth/signin?redirect=/reddit-opportunity-finder";
       }
     });
 
@@ -87,7 +87,7 @@ export default function SerpScoutLayout({ children }) {
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
                       <Search className="h-4 w-4 text-primary" />
                     </div>
-                    <span className="text-lg font-semibold tracking-tight">SERP Scout</span>
+                    <span className="text-lg font-semibold tracking-tight">Reddit Opportunity Finder</span>
                   </div>
                   {verifyUser?.company?.name && (
                     <span className="hidden sm:inline-flex text-xs text-muted-foreground bg-muted px-2.5 py-1 rounded-full border border-border">

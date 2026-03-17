@@ -301,12 +301,12 @@ export default function SerpScout() {
     if (typeof window === "undefined") return; // SSR safety
 
     try {
-      const savedDomain = localStorage.getItem("serp-scout-domain");
+      const savedDomain = localStorage.getItem("reddit-opportunity-finder-domain");
       if (savedDomain && !domain) {
         setDomain(savedDomain);
       }
       // Load recent domains list
-      const saved = localStorage.getItem("serp-scout-recent-domains");
+      const saved = localStorage.getItem("reddit-opportunity-finder-recent-domains");
       if (saved) {
         try { setRecentDomains(JSON.parse(saved).slice(0, 3)); } catch {}
       }
@@ -320,9 +320,9 @@ export default function SerpScout() {
     if (!rawResult || !domain.trim()) return;
     try {
       const trimmed = domain.trim();
-      const prev = JSON.parse(localStorage.getItem("serp-scout-recent-domains") || "[]");
+      const prev = JSON.parse(localStorage.getItem("reddit-opportunity-finder-recent-domains") || "[]");
       const updated = [trimmed, ...prev.filter(d => d !== trimmed)].slice(0, 3);
-      localStorage.setItem("serp-scout-recent-domains", JSON.stringify(updated));
+      localStorage.setItem("reddit-opportunity-finder-recent-domains", JSON.stringify(updated));
       setRecentDomains(updated);
     } catch {}
   }, [rawResult]);
@@ -331,7 +331,7 @@ export default function SerpScout() {
   useEffect(() => {
     if (!domain || rawResult || !hasAutoLoadedOnMount || loading) return;
     
-    const savedDomain = localStorage.getItem("serp-scout-domain");
+    const savedDomain = localStorage.getItem("reddit-opportunity-finder-domain");
     if (savedDomain === domain.trim()) {
       // Domain was loaded from localStorage, trigger analysis
       handleAnalyzeDomain();
@@ -404,7 +404,7 @@ export default function SerpScout() {
     if (!postUrl || scannedPostDetails[postUrl]) return;
 
     try {
-      const details = await apiPost("/api/threadflow/serp-scout", {
+      const details = await apiPost("/api/threadflow/reddit-opportunity-finder", {
         action: "fetchPostDetails",
         url: postUrl,
       });
@@ -445,7 +445,7 @@ export default function SerpScout() {
     setLoading(true);
     setError(null);
     try {
-      const res = await apiPost("/api/threadflow/serp-scout", { domain: trimmed });
+      const res = await apiPost("/api/threadflow/reddit-opportunity-finder", { domain: trimmed });
       setRawResult(res);
       const kws = res.keywords ?? [];
       setKeywords(kws);
@@ -476,7 +476,7 @@ export default function SerpScout() {
 
       // Save domain to localStorage for future auto-load
       try {
-        localStorage.setItem("serp-scout-domain", trimmed);
+        localStorage.setItem("reddit-opportunity-finder-domain", trimmed);
       } catch (e) {
         console.warn("[SERP Scout] Failed to save domain to localStorage:", e.message);
       }
@@ -503,7 +503,7 @@ export default function SerpScout() {
     try {
       // Fetch SERP cache for each keyword in parallel
       const serpDataPromises = kws.map(kw =>
-        apiPost("/api/threadflow/serp-scout", {
+        apiPost("/api/threadflow/reddit-opportunity-finder", {
           action: "keywordSerp",
           keyword: kw.term,
           domain,
@@ -539,7 +539,7 @@ export default function SerpScout() {
     if (!kw?.term) return;
     setSuggestingIdx(idx);
     try {
-      const res = await apiPost("/api/threadflow/serp-scout", {
+      const res = await apiPost("/api/threadflow/reddit-opportunity-finder", {
         action: "suggestPrompts",
         keyword: kw.term,
         intent: kw.intent,
@@ -579,7 +579,7 @@ export default function SerpScout() {
       
       // Then save keywords — also pass context so backend can persist it for first-time
       // users whose companyId was null during analysis (generateCompanyContext never saved to DB)
-      const res = await apiPost("/api/threadflow/serp-scout", {
+      const res = await apiPost("/api/threadflow/reddit-opportunity-finder", {
         action: "saveKeywords",
         companyId,
         domain: domain.trim(),
@@ -607,7 +607,7 @@ export default function SerpScout() {
     const kwTerm = selectedKw.term;
     try {
       // Phase 1: fast — get SERP position + post list without full content enrichment
-      const fastRes = await apiPost("/api/threadflow/serp-scout", {
+      const fastRes = await apiPost("/api/threadflow/reddit-opportunity-finder", {
         action: "keywordSerp",
         keyword: kwTerm,
         domain: domain.trim(),
@@ -621,7 +621,7 @@ export default function SerpScout() {
       // Phase 2: background — full enrichment (brand/competitor mention detection)
       // Skip if results came from cache (already fully enriched)
       if (!fastRes.fromCache) {
-        apiPost("/api/threadflow/serp-scout", {
+        apiPost("/api/threadflow/reddit-opportunity-finder", {
           action: "keywordSerp",
           keyword: kwTerm,
           domain: domain.trim(),
@@ -661,7 +661,7 @@ export default function SerpScout() {
         newPosts: currSerpData?.newRedditPosts || []
       };
 
-      const res = await apiPost("/api/threadflow/serp-scout", {
+      const res = await apiPost("/api/threadflow/reddit-opportunity-finder", {
         action: "generatePostContent",
         keyword: selectedKw.term,
         domain: domain.trim(),
@@ -857,7 +857,7 @@ export default function SerpScout() {
         [kwTerm]: { ...(prev[kwTerm] || {}), ...newData, success: true },
       }));
 
-    const serpDorkPromise = apiPost("/api/threadflow/serp-scout", {
+    const serpDorkPromise = apiPost("/api/threadflow/reddit-opportunity-finder", {
       action: "serpAndDork",
       keyword: kwTerm,
       domain: kwDomain,
@@ -866,7 +866,7 @@ export default function SerpScout() {
       .catch(e => console.error("[SERP Scout] serpAndDork failed:", e.message))
       .finally(() => setSerpThreadsLoading(false));
 
-    const redditPromise = apiPost("/api/threadflow/serp-scout", {
+    const redditPromise = apiPost("/api/threadflow/reddit-opportunity-finder", {
       action: "redditTopNew",
       keyword: kwTerm,
       domain: kwDomain,
@@ -879,7 +879,7 @@ export default function SerpScout() {
 
     // Background enrichment (brand/competitor mention detection) — fires after both data calls finish
     Promise.allSettled([serpDorkPromise, redditPromise]).then(() => {
-      apiPost("/api/threadflow/serp-scout", {
+      apiPost("/api/threadflow/reddit-opportunity-finder", {
         action: "keywordSerp",
         keyword: kwTerm,
         domain: kwDomain,
