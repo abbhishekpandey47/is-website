@@ -65,7 +65,7 @@ const authorData = [
 },
  {
   "authorId": "author0009",
-  "name": "Isha srivastava",
+  "name": "Isha Srivastava",
   "profilePic": "/authorImages/isha-srivastava.webp",
   "designation": "Head of Partnerships @Reo.Dev ",
   "about": "",
