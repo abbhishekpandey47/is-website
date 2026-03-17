@@ -70,7 +70,7 @@ const GradientDivider = ({ className = "" }) => (
 const SectionWrapper = ({ children, gradient = true }) => (
   <div
     style={gradient ? {
-      background: "radial-gradient(ellipse at 50% 0%, #272b40 0%, transparent 40%)",
+      background: "transparent",
     } : {}}
   >
     {children}
@@ -99,11 +99,11 @@ export default function Page() {
   const searchParams = useSearchParams();
   const isAdsVariant = searchParams.get('app') === 'ads';
   return (
-    <div className="">
+    <div className="bg-[#0d0a1a]">
       <Hero isAdsVariant={isAdsVariant} />
       {/* RealResult - Second fold, no lazy load */}
       <SectionWrapper>
-        <GradientDivider className="mt-8 mb-1" />
+        <GradientDivider className="-mt-px mb-1" />
         <RealResult isAdsVariant={isAdsVariant} />
       </SectionWrapper>
 
