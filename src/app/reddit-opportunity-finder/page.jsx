@@ -301,12 +301,12 @@ export default function SerpScout() {
     if (typeof window === "undefined") return; // SSR safety
 
     try {
-      const savedDomain = localStorage.getItem("serp-scout-domain");
+      const savedDomain = localStorage.getItem("reddit-opportunity-finder-domain");
       if (savedDomain && !domain) {
         setDomain(savedDomain);
       }
       // Load recent domains list
-      const saved = localStorage.getItem("serp-scout-recent-domains");
+      const saved = localStorage.getItem("reddit-opportunity-finder-recent-domains");
       if (saved) {
         try { setRecentDomains(JSON.parse(saved).slice(0, 3)); } catch {}
       }
@@ -320,9 +320,9 @@ export default function SerpScout() {
     if (!rawResult || !domain.trim()) return;
     try {
       const trimmed = domain.trim();
-      const prev = JSON.parse(localStorage.getItem("serp-scout-recent-domains") || "[]");
+      const prev = JSON.parse(localStorage.getItem("reddit-opportunity-finder-recent-domains") || "[]");
       const updated = [trimmed, ...prev.filter(d => d !== trimmed)].slice(0, 3);
-      localStorage.setItem("serp-scout-recent-domains", JSON.stringify(updated));
+      localStorage.setItem("reddit-opportunity-finder-recent-domains", JSON.stringify(updated));
       setRecentDomains(updated);
     } catch {}
   }, [rawResult]);
@@ -330,8 +330,8 @@ export default function SerpScout() {
   // Auto-trigger analysis when domain is loaded from localStorage
   useEffect(() => {
     if (!domain || rawResult || !hasAutoLoadedOnMount || loading) return;
-    
-    const savedDomain = localStorage.getItem("serp-scout-domain");
+
+    const savedDomain = localStorage.getItem("reddit-opportunity-finder-domain");
     if (savedDomain === domain.trim()) {
       // Domain was loaded from localStorage, trigger analysis
       handleAnalyzeDomain();
@@ -341,7 +341,7 @@ export default function SerpScout() {
   // Sync ctxForm with rawResult company context data
   useEffect(() => {
     if (!rawResult?.companyContext) return;
-    
+
     const _a = rawResult.companyContext.approvedContext;
     const _l = rawResult.companyContext.llmContext;
     const ctx = (_a || _l) ? { ...(_l || {}), ...(_a || {}) } : null;
@@ -364,7 +364,7 @@ export default function SerpScout() {
 
     const autoScanPosts = async () => {
       const postsToScan = [];
-      
+
       // Collect all unique post URLs from SERP results only
       Object.values(serpResults).forEach(kwData => {
         if (kwData?.topRedditPosts?.length > 0) {
@@ -387,7 +387,7 @@ export default function SerpScout() {
 
       // Scan in parallel with concurrency limit (3 at a time)
       if (postsToScan.length === 0) return;
-      
+
       const uniqueUrls = [...new Set(postsToScan)];
       const concurrency = 3;
       for (let i = 0; i < uniqueUrls.length; i += concurrency) {
@@ -411,11 +411,11 @@ export default function SerpScout() {
 
       const postContent = details?.post_content || details?.content || '';
       const postTitle = details?.post_title || details?.title || '';
-      
+
       if (postContent || postTitle) {
         const fullContent = postContent + ' ' + postTitle;
         const contentLower = fullContent.toLowerCase();
-        
+
         const brandMentioned = companyName && contentLower.includes(companyName.toLowerCase());
         const foundCompetitors = competitors.filter(comp =>
           contentLower.includes(comp.toLowerCase())
@@ -450,7 +450,7 @@ export default function SerpScout() {
       const kws = res.keywords ?? [];
       setKeywords(kws);
       setSelectedKwIds(new Set(kws.map((_, i) => i)));
-      
+
       // Extract and set company context from API response — merge llm+approved so overview
       // fields from llmContext fill in when approvedContext only has keywords (returning user)
       const _a = res.companyContext?.approvedContext;
@@ -469,14 +469,14 @@ export default function SerpScout() {
       } else if (res.companyContext) {
         console.log('[SERP Scout] Full companyContext object:', res.companyContext);
       }
-      
+
       // Always reset competitors for the new domain — prevents bleed from a previous company
       const savedCompetitors = ctx?.competitors;
       setCompetitors(Array.isArray(savedCompetitors) ? savedCompetitors : []);
 
       // Save domain to localStorage for future auto-load
       try {
-        localStorage.setItem("serp-scout-domain", trimmed);
+        localStorage.setItem("reddit-opportunity-finder-domain", trimmed);
       } catch (e) {
         console.warn("[SERP Scout] Failed to save domain to localStorage:", e.message);
       }
@@ -499,7 +499,7 @@ export default function SerpScout() {
   // Load SERP cache for all keywords from existing company setup
   async function loadSerpCacheForKeywords(kws, domain, companyId) {
     if (!kws.length || !companyId) return;
-    
+
     try {
       // Fetch SERP cache for each keyword in parallel
       const serpDataPromises = kws.map(kw =>
@@ -515,7 +515,7 @@ export default function SerpScout() {
       );
 
       const serpDataResults = await Promise.all(serpDataPromises);
-      
+
       // Populate serpResults with cached data
       const newSerpResults = {};
       serpDataResults.forEach((data, idx) => {
@@ -561,7 +561,7 @@ export default function SerpScout() {
     setSaving(true);
     try {
       const selectedKws = Array.from(selectedKwIds).map(i => keywords[i]).filter(Boolean);
-      
+
       // First save the company context if we have a valid company ID
       if (companyId && (ctxForm.companySummary || ctxForm.coreCapabilities?.length > 0 || ctxForm.problemSpaces?.length > 0)) {
         try {
@@ -576,7 +576,7 @@ export default function SerpScout() {
           // Continue anyway - this is secondary
         }
       }
-      
+
       // Then save keywords — also pass context so backend can persist it for first-time
       // users whose companyId was null during analysis (generateCompanyContext never saved to DB)
       const res = await apiPost("/api/threadflow/serp-scout", {
@@ -704,7 +704,7 @@ export default function SerpScout() {
       });
       return;
     }
-    
+
     // Fall back to all selected keyword terms if no LLM-generated prompts saved yet
     const effectivePrompts = citationPrompts.length > 0
       ? citationPrompts
@@ -1220,7 +1220,7 @@ export default function SerpScout() {
                               return;
                             }
                           }
-                          
+
                           // Update local state
                           setEditingCtx(false);
                           setRawResult(prev => ({

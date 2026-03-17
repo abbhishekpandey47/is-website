@@ -50,20 +50,20 @@ export function ClientLayoutWrapper({ children }) {
     safePathname.startsWith("/lp/developer-marketing-agency") ||
     safePathname.startsWith("/lp/reddit-marketing-agency") ||
     safePathname.startsWith("/threadflow") ||
-    safePathname.startsWith("/serp-scout") ||
+    safePathname.startsWith("/reddit-opportunity-finder") ||
     safePathname.startsWith("/auth")
 
   const hideNavBar2 =
     safePathname === "/services/webflow-agency" ||
     safePathname.startsWith("/threadflow") ||
-    safePathname.startsWith("/serp-scout") ||
+    safePathname.startsWith("/reddit-opportunity-finder") ||
     safePathname.startsWith("/auth");
 
   const hideNavBarAndFooter =
     safePathname === "/tools/reddit-tools" ||
     safePathname.startsWith("/auth") ||
     safePathname.startsWith("/threadflow") ||
-    safePathname.startsWith("/serp-scout");
+    safePathname.startsWith("/reddit-opportunity-finder");
 
   const hideAwardBanner =
     safePathname.startsWith("/lp/developer-marketing-agency") ||
