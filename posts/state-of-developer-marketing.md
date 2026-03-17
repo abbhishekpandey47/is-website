@@ -28,17 +28,17 @@ But the problem is that this approach is optimised for a single discovery channe
 
 ## **What Changed in 2026: The 5 Structural Shifts A Developer Marketing Plan Must Address**
 
-![](/PostImages/developer-marketing-plan/2.webp)
+![](/PostImages/state-of-developer-marketing/2.webp)
 
 ### **Shift 1: Discovery Has Changed**
 
 In 2025, developers still started with a Google query, but in 2026, that isn’t the default first step. Search quickly changed **from SERP to LLMs.** 
 
-![](/PostImages/developer-marketing-plan/3.webp)
+![](/PostImages/state-of-developer-marketing/3.webp)
 
 Developers now discover tools across AI search tools like ChatGPT, Claude, Gemini, etc., AI-native answer engines like Perplexity, Reddit threads ranking on page one, GitHub repositories and documentation, and technical comparison content. 
 
-![](/PostImages/developer-marketing-plan/4.webp)
+![](/PostImages/state-of-developer-marketing/4.webp)
 
 A developer evaluating a Kubernetes automation tool in 2026 might ask Perplexity for a comparison, check a Reddit thread for community validation, read your docs to assess technical depth, and look at your GitHub stars to verify traction, all before they ever visit your homepage.
 
@@ -46,20 +46,20 @@ We soon realised how discovery is now fragmented across:
 
 * AI search tools like Claude, ChatGPT, etc. As shown in the image below, when the query is searched for the top developer marketing agencies for tech and software startups, [Infrasity](http://infrasity.com) takes the first position in LLM visibility.
 
-![](/PostImages/developer-marketing-plan/5.webp)
+![](/PostImages/state-of-developer-marketing/5.webp)
 
 * **AI assistants and answer engines** such as ChatGPT, Claude, and Perplexity that generate direct recommendations instead of traditional lists of links on SERP.  
 * **Reddit threads increasingly rank on the first page** of search results for developer queries such as tool comparisons, debugging questions, and infrastructure recommendations. These discussions often surface real user experiences, benchmarks, and trade-offs, which makes them a trusted source during tool evaluation.  
 
-![](/PostImages/developer-marketing-plan/6.webp) 
+![](/PostImages/state-of-developer-marketing/6.webp) 
 
 * **GitHub repositories** and open-source projects, where developers evaluate real usage, community activity, and integration examples. Popular infrastructure projects like [Kubernetes](https://github.com/kubernetes/kubernetes) demonstrate how repositories function not only as codebases but also as living documentation and credibility signals for the tools built around them.
 
-![](/PostImages/developer-marketing-plan/7.webp)
+![](/PostImages/state-of-developer-marketing/7.webp)
 
 * Comparison blog posts like “[AEO vs GEO](https://www.infrasity.com/blog/aeo-vs-geo)”, “ Deterministic AI vs Non-Deterministic AI: Understanding the Core Difference”, etc  
 * Technical documentation, like API references, integration guides, and deployment walkthroughs, that developers review to evaluate how easily a tool fits into their existing stack.  
-![](/PostImages/developer-marketing-plan/8.webp)
+![](/PostImages/state-of-developer-marketing/8.webp)
 
 Did you know that [ChatGPT processes 2 billion queries daily](https://exposureninja.com/blog/ai-search-statistics/) and is the 4th most visited website globally as of September 2025? More importantly, AI Search traffic converts at 14.2% compared to Google's 2.8%; the visitors arriving via AI citations are high-intent. Missing this channel is not just a visibility problem, but a pipeline problem.
 
@@ -87,7 +87,7 @@ In 2025, documentation was a support infrastructure, a cost center written react
 
 AI crawlers retrieve documentation pages as source material when developers ask buying questions. If your docs are structured as JavaScript-rendered single-page applications, AI bots cannot read them. If they bury key integration information in nested menus or lack FAQ sections, AI systems skip them. 
 
-![](/PostImages/developer-marketing-plan/9.webp)
+![](/PostImages/state-of-developer-marketing/9.webp)
 
 If they are not written to answer the specific questions a developer has at each stage of the buying journey, like "how does this integrate with my stack," "how long does onboarding take," "what does it cost at scale", they generate no pipeline.
 
@@ -119,7 +119,7 @@ Some typical gaps you will notice are:
 
 * Publishing blog content without a structured AI visibility layer, for example, no schema, no FAQ sections, and no answer-first formatting.
 
-![](/PostImages/developer-marketing-plan/10.webp)
+![](/PostImages/state-of-developer-marketing/10.webp)
 
 * No Reddit participation strategy and treating the community as a megaphone rather than a trust-building channel.  
 * GitHub repos with poor READMEs and no example code, documentation as an afterthought  
@@ -154,7 +154,7 @@ Platforms like Reddit, Hacker News, and GitHub Discussions frequently appear on 
 * “Alternatives to Datadog”  
 * “How to manage secrets in production.”
 
-![](/PostImages/developer-marketing-plan/11.webp)
+![](/PostImages/state-of-developer-marketing/11.webp)
 
 These discussions matter because developers trust peer validation far more than any type of promotional messaging. Reddit threads, especially, now rank aggressively for developer queries. When someone searches for tools, comparisons, or technical problems, Reddit frequently appears on the first page.
 
@@ -180,7 +180,7 @@ What well-structured documentation actually does:
 * **Ranks for technical queries** that marketing pages never will. "How to implement webhook verification in Node.js" lands on the docs.  
 * **Gets cited by LLM platforms.** When a developer asks Perplexity or ChatGPT how to integrate your tool, the answer is pulled from structured content on the web. Thin or poorly organized docs \= invisible in AI answers.
 
-![](/PostImages/developer-marketing-plan/12.webp)
+![](/PostImages/state-of-developer-marketing/12.webp)
 
 * **Converts inside the product.** Developers decide to adopt tools in the docs, and not on landing pages. The moment they map a working example to their own stack, intent converts to trial.  
 * **Signals engineering quality.** Sparse, outdated docs suggest a rough product. Well-maintained docs suggest a team that ships thoughtfully.
@@ -214,7 +214,7 @@ When a developer asks Perplexity which rate-limiting library to use, or asks Cla
 
 * **Citation tracking.** Run prompt tests across ChatGPT, Perplexity, and Claude. Track where you appear vs. where competitors appear in [app.infrasity](https://app.infrasity.com/). Gaps in citation coverage are gaps in discoverability.
 
-![](/PostImages/developer-marketing-plan/13.webp)
+![](/PostImages/state-of-developer-marketing/13.webp)
 
 * **FAQ sections that mirror real queries.** "Does X support multi-region?" "How does X handle token refresh?" Explicit questions in your content get extracted directly into AI answers.  
 * **Comparison content.** "X vs Y" and "alternatives to Z" are high-intent research queries. If you don't have content addressing them, you're absent from that part of the funnel, in both search and AI answers.  

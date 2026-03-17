@@ -1802,9 +1802,9 @@ let postMetaData = [
 {
     title: "The State of Developer Marketing: Why Every DevTools Startup Needs a Developer Marketing Plan in 2026",
     metatitle: "Developer Marketing Plan: What Works for B2B SaaS in 2026?",
-    slug: "developer-marketing-plan",
+    slug: "state-of-developer-marketing",
     description: "The developer marketing plan has fundamentally changed in 2026\. Today, developers discover and evaluate products across AI assistants, Reddit discussions, GitHub repositories, and technical documentation. This shift has made authority, structured content, and community presence the primary drivers of growth. In this blog, we break down the five structural layers that define the new developer marketing plan, including AI visibility, documentation strategy, and GitHub distribution. Learn what most B2B SaaS startups are still getting wrong and how to build a discoverability system that drives pipeline.",
-    ogImage: "/PostImages/developer-marketing-plan/1.webp",
+    ogImage: "/PostImages/state-of-developer-marketing/1.webp",
     publishedOn: "2026-03-17",
     authorId: "author0008",
     coAuthorId: "author0009",
