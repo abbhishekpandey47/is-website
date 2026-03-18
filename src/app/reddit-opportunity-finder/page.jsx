@@ -107,6 +107,7 @@ export default function SerpScout() {
   // Analyze — Citations
   const [citationResults, setCitationResults] = useState(null);
   const [citationLoading, setCitationLoading] = useState(false);
+  const [citationPlatformStatus, setCitationPlatformStatus] = useState(null);
   const [manualCitationPrompts, setManualCitationPrompts] = useState([]);
 
   // Post details scanning for competitors
@@ -511,11 +512,14 @@ export default function SerpScout() {
         description: `Querying ${snapshots.length} AI platforms. Results appear as each completes…`,
       });
 
+      // Initialize all platforms as pending so the UI shows status immediately
+      setCitationPlatformStatus(Object.fromEntries(snapshots.map(s => [s.platform, 'pending'])));
+
       // Step 2: Poll with smart schedule — faster intervals, skip completed platforms
-      // BrightData typically needs 25-45s for first results; poll at 20s then every 10s
-      const INITIAL_DELAY  = 20_000;
+      // First results typically arrive in 20-35s
+      const INITIAL_DELAY  = 10_000;
       const POLL_INTERVAL  = 10_000;
-      const POLL_MAX_ATTEMPTS = 12;  // 20s + 12×10s = max ~2 min
+      const POLL_MAX_ATTEMPTS = 14;  // 10s + 14×10s = max ~2.5 min
       const completedPlatforms = new Set();
       let pendingSnapshots = [...snapshots];
       const mergedPlatforms = {};
@@ -540,10 +544,17 @@ export default function SerpScout() {
         Object.entries(pollRes.platforms).forEach(([platform, data]) => {
           if (data.status === 'ready' || data.status === 'error') {
             completedPlatforms.add(platform);
-            mergedPlatforms[platform] = data;
-          } else {
-            mergedPlatforms[platform] = data;
           }
+          mergedPlatforms[platform] = data;
+        });
+
+        // Update platform status UI
+        setCitationPlatformStatus(prev => {
+          const next = { ...(prev || {}) };
+          Object.entries(mergedPlatforms).forEach(([p, d]) => {
+            next[p] = d.status === 'ready' ? 'ready' : d.status === 'error' ? 'error' : 'pending';
+          });
+          return next;
         });
 
         // Remove completed from pending list for next poll
@@ -1508,6 +1519,7 @@ export default function SerpScout() {
             redditPostsError={redditPostsError}
             citationLoading={citationLoading}
             citationResults={citationResults}
+            citationPlatformStatus={citationPlatformStatus}
             handleRunAnalysis={handleRunAnalysis}
             analysisLoading={serpThreadsLoading || redditPostsLoading || citationLoading}
             scannedPostDetails={scannedPostDetails}

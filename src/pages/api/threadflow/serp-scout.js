@@ -111,12 +111,11 @@ const postDetailsLimiter = pLimit(POST_DETAILS_CONCURRENCY)
  */
 async function fetchRedditTopNewPosts(keyword) {
   try {
-    const response = await fetch(`${REDDIT_API_BASE}/find_top_posts_comments`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ keyword }),
-      signal: AbortSignal.timeout(30000)
-    })
+    const response = await fetchWithTimeout(
+      `${REDDIT_API_BASE}/find_top_posts_comments`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ keyword }) },
+      30000
+    )
 
     if (!response.ok) {
       console.error('[serp-scout] Reddit API error', { status: response.status, keyword })
