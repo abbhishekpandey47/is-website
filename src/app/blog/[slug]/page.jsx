@@ -236,8 +236,9 @@ const PostPage = async (props) => {
               slug: slug,
             }}
           />
-          <div className="flex justify-around w-full pb-16 px-10 max-lg:flex-col">
-            <div className=" max-lg:w-full max-lg:flex justify-center">
+          <div className="flex w-full pb-16 px-6 lg:px-10 gap-6 max-lg:flex-col">
+            {/* Left sidebar — fixed width */}
+            <div className="shrink-0 w-[220px] max-xl:w-[200px] max-lg:w-full max-lg:flex max-lg:justify-center">
               <Outline content={postContent} />
             </div>
             <div className="h-auto hidden max-lg:flex max-lg:justify-center">
@@ -252,9 +253,10 @@ const PostPage = async (props) => {
                 />
               </div>
             </div>
-            <div className="w-[40%] min-[1900px]:w-[80%] max-lg:w-[60%] max-md:w-[70%] pt-2 lg:pt-15 flex justify-center flex-col items-start lg:ml-10">
-              <article className="text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto prose-pre:max-w-full prose-pre:overflow-x-auto prose-code:break-words prose-p:break-words prose-li:break-words">
-                <div className="max-lg:w-[84vw] min-[1900px]:w-[45vw] max-[1537px]:w-[50vw] max-w-full overflow-x-hidden">
+            {/* Center article — fills remaining space */}
+            <div className="flex-1 min-w-0 pt-2 lg:pt-15">
+              <article className="relative z-10 text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto prose-pre:max-w-full prose-pre:overflow-x-auto prose-code:break-words prose-p:break-words prose-li:break-words">
+                <div className="max-lg:w-[84vw] w-full max-w-full overflow-x-hidden">
                   <Markdown
                     options={{
                       overrides: {
@@ -436,7 +438,8 @@ if (matchedImage) {
                 </div>
               </article>
             </div>
-            <div className=" max-lg:w-full max-lg:flex justify-center">
+            {/* Right sidebar — fixed width, matches left */}
+            <div className="shrink-0 w-[220px] max-xl:w-[200px] max-lg:w-full max-lg:flex max-lg:justify-center">
               <Featured />
             </div>
           </div>
