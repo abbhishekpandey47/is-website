@@ -236,9 +236,9 @@ const PostPage = async (props) => {
               slug: slug,
             }}
           />
-          <div className="flex w-full pb-16 px-6 lg:px-10 gap-6 max-lg:flex-col">
-            {/* Left sidebar — fixed width */}
-            <div className="shrink-0 w-[220px] max-xl:w-[200px] max-lg:w-full max-lg:flex max-lg:justify-center">
+          <div className="flex items-start w-full pb-16 px-4 lg:px-8 gap-8 xl:gap-12 max-lg:flex-col">
+            {/* Left sidebar — sticky, fixed width */}
+            <div className="shrink-0 w-[18rem] max-xl:w-[13rem] max-lg:w-full max-lg:flex max-lg:justify-center overflow-hidden sticky top-[82px] self-start">
               <Outline content={postContent} />
             </div>
             <div className="h-auto hidden max-lg:flex max-lg:justify-center">
@@ -253,9 +253,9 @@ const PostPage = async (props) => {
                 />
               </div>
             </div>
-            {/* Center article — fills remaining space */}
-            <div className="flex-1 min-w-0 pt-2 lg:pt-15">
-              <article className="relative z-10 text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert mx-auto prose-pre:max-w-full prose-pre:overflow-x-auto prose-code:break-words prose-p:break-words prose-li:break-words">
+            {/* Center article — capped width, centered in remaining space */}
+            <div className="flex-1 min-w-0 max-w-[680px] mx-auto pt-2 lg:pt-15">
+              <article className="relative z-10 text-white prose-p:quicksand-medium prose-p:lg:text-justify prose-p:text-lg prose-ul:text-lg prose-img:w-full prose-img:h-full prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl 2xl:prose-2xl dark:prose-invert prose-pre:max-w-full prose-pre:overflow-x-auto prose-code:break-words prose-p:break-words prose-li:break-words">
                 <div className="max-lg:w-[84vw] w-full max-w-full overflow-x-hidden">
                   <Markdown
                     options={{
@@ -438,8 +438,8 @@ if (matchedImage) {
                 </div>
               </article>
             </div>
-            {/* Right sidebar — fixed width, matches left */}
-            <div className="shrink-0 w-[220px] max-xl:w-[200px] max-lg:w-full max-lg:flex max-lg:justify-center">
+            {/* Right sidebar — sticky, fixed width */}
+            <div className="shrink-0 w-[15rem] max-xl:w-[13rem] max-lg:w-full max-lg:flex max-lg:justify-center overflow-hidden sticky top-[82px] self-start">
               <Featured />
             </div>
           </div>
