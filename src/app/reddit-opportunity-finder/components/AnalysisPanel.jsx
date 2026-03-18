@@ -182,9 +182,9 @@ export default function AnalysisPanel({
   setSelectedKwIdx,
   serpResults,
   kwSerpData,
-  serpLoading,
   serpThreadsLoading,
   redditPostsLoading,
+  redditPostsError,
   citationLoading,
   citationResults,
   handleRunAnalysis,
@@ -192,7 +192,7 @@ export default function AnalysisPanel({
   scannedPostDetails,
 }) {
   const selectedKw = selectedKwIdx !== null ? keywords[selectedKwIdx] : null;
-  const isLoading = analysisLoading || serpLoading || citationLoading;
+  const isLoading = analysisLoading || citationLoading;
 
   // ── Data sources ──────────────────────────────────────────────────────────
   const serpThreads  = kwSerpData?.redditThreads   || [];
@@ -200,7 +200,32 @@ export default function AnalysisPanel({
   const topThreads   = kwSerpData?.topRedditPosts   || [];
   const newThreads   = kwSerpData?.newRedditPosts   || [];
 
-  // Cited threads: flatten all BrightData platform results, dedupe by URL
+  // ── Cross-source metrics map ───────────────────────────────────────────────
+  // Top/New posts from Reddit API carry real upvotes — share them with all other tabs
+  // by URL match so SERP threads and Cited threads also show engagement numbers.
+  const metricsMap = (() => {
+    const map = new Map();
+    const norm = u => (u || '').toLowerCase().replace(/\/$/, '');
+    // Top/New have the most reliable upvote data — add them first
+    [...topThreads, ...newThreads, ...serpThreads, ...dorkThreads].forEach(p => {
+      const key = norm(p.post_url || p.url);
+      if (!key) return;
+      const votes = p.upvotes || 0;
+      const comms = p.total_comments || p.comments || 0;
+      const cur = map.get(key);
+      // Keep whichever entry has the highest upvotes
+      if (!cur || votes > (cur.upvotes || 0)) map.set(key, { upvotes: votes, total_comments: comms });
+    });
+    return map;
+  })();
+
+  const enrichPost = post => {
+    const key = (post.url || post.post_url || '').toLowerCase().replace(/\/$/, '');
+    const m = metricsMap.get(key);
+    return (m && (m.upvotes || m.total_comments)) ? { ...post, upvotes: m.upvotes, total_comments: m.total_comments } : post;
+  };
+
+  // Cited threads: flatten all BrightData platform results, dedupe by URL, enrich metrics
   const citedThreads = (() => {
     const byUrl = new Map();
     (citationResults?.records || []).forEach(rec => {
@@ -217,52 +242,56 @@ export default function AnalysisPanel({
         });
       });
     });
-    return Array.from(byUrl.values());
+    return Array.from(byUrl.values()).map(enrichPost);
   })();
 
-  // ── Best: ranked by AI platform citation count, then upvotes ─────────────
+  // ── Best: ranked by total weighted score across all sources ───────────────
+  // Priority: Cited (AI platforms) > SERP/Top > New/Dork
+  // Score weights: each AI platform = 4pts, SERP = 3pts, Top = 3pts, Dork = 1pt, New = 1pt
+  const SOURCE_WEIGHTS = { SERP: 3, Top: 3, Dork: 1, New: 1 };
   const bestThreads = (() => {
-    // Step 1: build url → { post, aiPlatforms: Set, otherSources: Set }
     const urlMap = new Map();
+    const normalizeUrl = u => (u || '').toLowerCase().replace(/\/$/, '');
 
-    const addOther = (posts, sourceName) => {
+    const addSource = (posts, sourceName) => {
       posts.forEach(post => {
-        const url = post.url || post.post_url || '';
+        const url = normalizeUrl(post.url || post.post_url);
         if (!url) return;
         if (!urlMap.has(url)) urlMap.set(url, { post, aiPlatforms: new Set(), otherSources: new Set() });
         urlMap.get(url).otherSources.add(sourceName);
       });
     };
-    addOther(serpThreads, 'SERP');
-    addOther(dorkThreads, 'Dork');
-    addOther(topThreads,  'Top');
-    addOther(newThreads,  'New');
+    addSource(citedThreads.map(p => ({ ...p, url: p.url || p.post_url })), 'Cited');
+    addSource(serpThreads, 'SERP');
+    addSource(topThreads,  'Top');
+    addSource(dorkThreads, 'Dork');
+    addSource(newThreads,  'New');
 
-    // citedThreads already has citedByModels — use that for AI platform count
     citedThreads.forEach(post => {
-      const url = post.url || post.post_url || '';
+      const url = normalizeUrl(post.url || post.post_url);
       if (!url) return;
       if (!urlMap.has(url)) urlMap.set(url, { post, aiPlatforms: new Set(), otherSources: new Set() });
-      const entry = urlMap.get(url);
-      (post.citedByModels || []).forEach(p => entry.aiPlatforms.add(p));
+      (post.citedByModels || []).forEach(p => urlMap.get(url).aiPlatforms.add(p));
     });
+
+    const score = e =>
+      e.aiPlatforms.size * 4 +
+      Array.from(e.otherSources).reduce((s, src) => s + (SOURCE_WEIGHTS[src] || 1), 0);
 
     return Array.from(urlMap.values())
       .filter(e => e.aiPlatforms.size >= 1 || e.otherSources.size >= 2)
       .sort((a, b) => {
-        // Primary: AI platforms citing count (4 > 3 > 2 > 1 > 0)
-        const aiDiff = b.aiPlatforms.size - a.aiPlatforms.size;
-        if (aiDiff !== 0) return aiDiff;
-        // Secondary: other source overlap count
-        const srcDiff = b.otherSources.size - a.otherSources.size;
-        if (srcDiff !== 0) return srcDiff;
-        // Tiebreaker: upvotes
-        return (b.post.upvotes || 0) - (a.post.upvotes || 0);
+        const sDiff = score(b) - score(a);
+        if (sDiff !== 0) return sDiff;
+        const aUp = enrichPost(a.post).upvotes || 0;
+        const bUp = enrichPost(b.post).upvotes || 0;
+        return bUp - aUp;
       })
       .map(e => ({
-        ...e.post,
-        _sources: [...Array.from(e.aiPlatforms), ...Array.from(e.otherSources)],
+        ...enrichPost(e.post),
+        _sources: [...Array.from(e.aiPlatforms), ...Array.from(e.otherSources).filter(s => s !== 'Cited')],
         _aiPlatformCount: e.aiPlatforms.size,
+        _score: score(e),
       }));
   })();
 
@@ -354,26 +383,18 @@ export default function AnalysisPanel({
             )}
           </div>
           {selectedKwIdx !== null && (
-            <div className="flex items-center gap-3 flex-wrap">
-              <Button
-                onClick={handleRunAnalysis}
-                disabled={isLoading}
-                size="sm"
-                className="text-white border-none"
-                style={{ background: '#5f64ff', boxShadow: '0 0 14px rgba(95,100,255,0.3)' }}
-              >
-                {isLoading
-                  ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Running…</>
-                  : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run Analysis</>
-                }
-              </Button>
-              {(serpThreadsLoading || redditPostsLoading) && (
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  {serpThreadsLoading && <span className="flex items-center gap-1"><Spinner className="h-3 w-3" />SERP</span>}
-                  {redditPostsLoading && <span className="flex items-center gap-1"><Spinner className="h-3 w-3" />Reddit</span>}
-                </div>
-              )}
-            </div>
+            <Button
+              onClick={handleRunAnalysis}
+              disabled={isLoading}
+              size="sm"
+              className="text-white border-none"
+              style={{ background: '#5f64ff', boxShadow: '0 0 14px rgba(95,100,255,0.3)' }}
+            >
+              {isLoading
+                ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Running…</>
+                : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run Analysis</>
+              }
+            </Button>
           )}
         </CardContent>
       </Card>
@@ -391,8 +412,16 @@ export default function AnalysisPanel({
 
       {/* ── Result tabs ── */}
       {(hasAnyData || isLoading || serpThreadsLoading || redditPostsLoading) && (
-        <Tabs defaultValue="serp" className="w-full">
-          <TabsList className="grid grid-cols-4 w-full bg-transparent p-0 h-auto rounded-none border-b border-border">
+        <Tabs defaultValue="best" className="w-full">
+          <TabsList className="grid grid-cols-5 w-full bg-transparent p-0 h-auto rounded-none border-b border-border">
+            <TabsTrigger value="best" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
+              <Sparkles className="h-3 w-3 mr-1" style={{ color: '#5f64ff' }} />Best
+              {bestThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{bestThreads.length}</span>}
+            </TabsTrigger>
+            <TabsTrigger value="cited" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
+              Cited
+              {citedThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{citedThreads.length} links</span>}
+            </TabsTrigger>
             <TabsTrigger value="serp" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
               SERP Threads
               {serpThreadsLoading
@@ -414,10 +443,6 @@ export default function AnalysisPanel({
                 : newThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{newThreads.length}</span>
               }
             </TabsTrigger>
-            <TabsTrigger value="cited" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
-              Cited
-              {citedThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{citedThreads.length} links</span>}
-            </TabsTrigger>
           </TabsList>
 
           {/* SERP Threads — SERP first, dork appended seamlessly */}
@@ -431,19 +456,31 @@ export default function AnalysisPanel({
                   SERP Threads
                   {serpThreadsLoading
                     ? <span className="ml-auto flex items-center gap-1 text-[11px] font-normal text-muted-foreground"><Spinner className="h-3 w-3" />Loading…</span>
-                    : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{serpThreads.length + dorkThreads.length} results</span>
+                    : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{Math.min(serpThreads.length + dorkThreads.length, 10)} results</span>
                   }
                 </CardTitle>
                 <CardDescription className="text-xs">Google SERP threads · site:reddit.com dork</CardDescription>
               </CardHeader>
               <CardContent>
-                <PostList posts={[...serpThreads, ...dorkThreads]} emptyMsg="No SERP threads found — run Analysis" loading={serpThreadsLoading} />
+                <PostList posts={[...serpThreads, ...dorkThreads].slice(0, 10).map(enrichPost)} emptyMsg="No SERP threads found — run Analysis" loading={serpThreadsLoading} />
               </CardContent>
             </Card>
           </TabsContent>
 
           {/* Top Threads */}
           <TabsContent value="top" className="mt-4 space-y-3">
+            {redditPostsLoading && (
+              <div className="flex items-center gap-2.5 text-xs px-3 py-2.5 rounded-lg border" style={{ background: 'rgba(95,100,255,0.05)', borderColor: 'rgba(95,100,255,0.2)', color: '#8b8fff' }}>
+                <Spinner className="h-3.5 w-3.5 shrink-0" />
+                <span>Fetching top Reddit posts for this keyword…</span>
+              </div>
+            )}
+            {redditPostsError && !redditPostsLoading && (
+              <div className="flex items-center gap-2 text-xs px-3 py-2.5 rounded-lg border border-red-500/20 bg-red-500/5 text-red-600">
+                <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+                <span>Reddit API error — {redditPostsError}</span>
+              </div>
+            )}
             <Card style={{ border: '0.5px solid rgba(95,100,255,0.22)' }}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
@@ -451,19 +488,17 @@ export default function AnalysisPanel({
                     <TrendingUp className="h-3.5 w-3.5" style={{ color: '#5f64ff' }} />
                   </span>
                   Top Threads
-                  {redditPostsLoading
-                    ? <span className="ml-auto flex items-center gap-1 text-[11px] font-normal text-muted-foreground"><Spinner className="h-3 w-3" />Loading Reddit…</span>
-                    : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{topThreads.length} results</span>
-                  }
+                  <span className="ml-auto text-[11px] font-normal text-muted-foreground">
+                    {redditPostsLoading && !topThreads.length ? 'loading…' : `${topThreads.length} results`}
+                  </span>
                 </CardTitle>
                 <CardDescription className="text-xs">Highest engagement posts from Reddit API</CardDescription>
               </CardHeader>
               <CardContent>
-                <PostList posts={topThreads} emptyMsg="No top posts found" loading={redditPostsLoading} />
+                <PostList posts={topThreads.map(enrichPost)} emptyMsg={redditPostsError ? "Failed to load — see error above" : "No top posts found"} loading={redditPostsLoading} />
               </CardContent>
             </Card>
 
-            {/* While Reddit is loading, show SERP threads as preview */}
             {redditPostsLoading && serpThreads.length > 0 && (
               <Card className="border-dashed opacity-80">
                 <CardHeader className="pb-2">
@@ -471,10 +506,10 @@ export default function AnalysisPanel({
                     <Search className="h-3.5 w-3.5" />SERP Preview
                     <span className="ml-auto text-[11px] font-normal">{serpThreads.length} threads</span>
                   </CardTitle>
-                  <CardDescription className="text-xs">Reddit posts loading — showing SERP threads in the meantime</CardDescription>
+                  <CardDescription className="text-xs">Showing SERP threads while Reddit loads</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <PostList posts={serpThreads} emptyMsg="" />
+                  <PostList posts={serpThreads.map(enrichPost)} emptyMsg="" />
                 </CardContent>
               </Card>
             )}
@@ -482,6 +517,18 @@ export default function AnalysisPanel({
 
           {/* New Threads */}
           <TabsContent value="new" className="mt-4 space-y-3">
+            {redditPostsLoading && (
+              <div className="flex items-center gap-2.5 text-xs px-3 py-2.5 rounded-lg border" style={{ background: 'rgba(95,100,255,0.05)', borderColor: 'rgba(95,100,255,0.2)', color: '#8b8fff' }}>
+                <Spinner className="h-3.5 w-3.5 shrink-0" />
+                <span>Fetching newest Reddit posts for this keyword…</span>
+              </div>
+            )}
+            {redditPostsError && !redditPostsLoading && (
+              <div className="flex items-center gap-2 text-xs px-3 py-2.5 rounded-lg border border-red-500/20 bg-red-500/5 text-red-600">
+                <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+                <span>Reddit API error — {redditPostsError}</span>
+              </div>
+            )}
             <Card style={{ border: '0.5px solid rgba(95,100,255,0.22)' }}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
@@ -489,19 +536,17 @@ export default function AnalysisPanel({
                     <Clock className="h-3.5 w-3.5" style={{ color: '#5f64ff' }} />
                   </span>
                   New Threads
-                  {redditPostsLoading
-                    ? <span className="ml-auto flex items-center gap-1 text-[11px] font-normal text-muted-foreground"><Spinner className="h-3 w-3" />Loading Reddit…</span>
-                    : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{newThreads.length} results</span>
-                  }
+                  <span className="ml-auto text-[11px] font-normal text-muted-foreground">
+                    {redditPostsLoading && !newThreads.length ? 'loading…' : `${newThreads.length} results`}
+                  </span>
                 </CardTitle>
                 <CardDescription className="text-xs">Recently posted threads from Reddit API</CardDescription>
               </CardHeader>
               <CardContent>
-                <PostList posts={newThreads} emptyMsg="No new posts found" loading={redditPostsLoading} />
+                <PostList posts={newThreads.map(enrichPost)} emptyMsg={redditPostsError ? "Failed to load — see error above" : "No new posts found"} loading={redditPostsLoading} />
               </CardContent>
             </Card>
 
-            {/* While Reddit is loading, show dork threads as preview */}
             {redditPostsLoading && dorkThreads.length > 0 && (
               <Card className="border-dashed opacity-80">
                 <CardHeader className="pb-2">
@@ -509,10 +554,10 @@ export default function AnalysisPanel({
                     <Search className="h-3.5 w-3.5" />Dork Preview
                     <span className="ml-auto text-[11px] font-normal">{dorkThreads.length} threads</span>
                   </CardTitle>
-                  <CardDescription className="text-xs">Reddit posts loading — showing dork results in the meantime</CardDescription>
+                  <CardDescription className="text-xs">Showing dork results while Reddit loads</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <PostList posts={dorkThreads} emptyMsg="" />
+                  <PostList posts={dorkThreads.map(enrichPost)} emptyMsg="" />
                 </CardContent>
               </Card>
             )}
@@ -555,8 +600,8 @@ export default function AnalysisPanel({
             </Card>
           </TabsContent>
 
-          {/* Best — hidden for now */}
-          <TabsContent value="best" className="mt-4 hidden">
+          {/* Best — threads appearing across the most sources */}
+          <TabsContent value="best" className="mt-4">
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">

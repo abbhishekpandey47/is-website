@@ -2,8 +2,9 @@ import { createClient } from '@supabase/supabase-js'
 import { Readability } from '@mozilla/readability'
 import { JSDOM } from 'jsdom'
 import { verifyRequestUser } from '@/lib/serverAuth'
-import { getCompanyContext, saveCompanyContext } from '@/lib/companyContext'
+import { getCompanyContext, saveCompanyContext, getContextByDomainAndUser } from '@/lib/companyContext'
 import pLimit from 'p-limit'
+import { withSlackLog, logSerpAction } from '@/lib/slackLogger'
 
 const OPENROUTER_ENDPOINT = process.env.OPENROUTER_API_URL || 'https://openrouter.ai/api/v1/chat/completions'
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
@@ -96,9 +97,9 @@ const DATAFORSEO_POLL_INTERVAL = 3000
 const DATAFORSEO_POLL_TIMEOUT = 30_000
 const REDDIT_API_BASE = 'https://reddit-comment-gen.onrender.com'
 const POST_DETAILS_ENDPOINT = `${REDDIT_API_BASE}/fetch_post_details`
-const POST_DETAILS_TIMEOUT_MS = Number(process.env.SERP_SCOUT_POST_DETAILS_TIMEOUT_MS) || 5000
+const POST_DETAILS_TIMEOUT_MS = Number(process.env.SERP_SCOUT_POST_DETAILS_TIMEOUT_MS) || 25000
 const CITATION_SEARCH_TIMEOUT_MS = 120_000 // 120 seconds for citation searches (web search can be slow)
-const POST_DETAILS_CONCURRENCY = Number(process.env.SERP_SCOUT_POST_DETAILS_CONCURRENCY) || 8
+const POST_DETAILS_CONCURRENCY = Number(process.env.SERP_SCOUT_POST_DETAILS_CONCURRENCY) || 4
 const MENTION_SNIPPET_RADIUS = 120
 const MENTION_SNIPPET_MAX_LENGTH = 200
 const postDetailsLimiter = pLimit(POST_DETAILS_CONCURRENCY)
@@ -114,7 +115,7 @@ async function fetchRedditTopNewPosts(keyword) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ keyword }),
-      timeout: 30000
+      signal: AbortSignal.timeout(30000)
     })
 
     if (!response.ok) {
@@ -658,8 +659,11 @@ function buildPageUrls(domain) {
 }
 
 async function fetchPageText(url) {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 5000)
   try {
     const resp = await fetch(url, {
+      signal: controller.signal,
       headers: {
         'User-Agent': 'Threadflow-Context-Scanner/1.0',
         Accept: 'text/html,application/xhtml+xml',
@@ -702,51 +706,25 @@ async function fetchPageText(url) {
   } catch (error) {
     console.warn('[serp-scout] skip page', url, error.message)
     return null
+  } finally {
+    clearTimeout(timeout)
   }
 }
 
-async function createCompanyIfNeeded(companyName, domain, userId) {
-  const norm = companyName.trim().toLowerCase()
-
-  // 1. Try to find existing company
-  let { data: company, error: fetchErr } = await supabase
-    .from('companies')
-    .select('*')
-    .eq('name_normalized', norm)
-    .maybeSingle()
-
-  if (fetchErr) throw fetchErr
-
-  // 2. Create if doesn't exist
-  if (!company) {
-    const { data: inserted, error: insErr } = await supabase
-      .from('companies')
-      .upsert({ name: companyName, domain }, { onConflict: 'name_normalized' })
-      .select('*')
-      .single()
-
-    if (insErr) throw insErr
-    company = inserted
-    console.log('[serp-scout] Created new company', { id: company.id, name: companyName, domain })
-  } else {
-    console.log('[serp-scout] Using existing company', { id: company.id, name: company.name })
-  }
-
-  return company
+function createCompanyIfNeeded(companyName, domain) {
+  // Generate a UUID-based company ID — no companies table insert needed.
+  // User scoping and all data is stored in threadflow_company_contexts via firebase_user_id in metadata.
+  const id = crypto.randomUUID()
+  console.log('[serp-scout] Generated new company id', { id, name: companyName, domain })
+  return { id, name: companyName, domain }
 }
 
 async function scrapeDomainPages(domain) {
   const urls = buildPageUrls(domain)
-  const pages = []
-  console.log('[serp-scout] scraping domain', { domain, urls: urls.slice(0, MAX_PAGES) })
-  for (const url of urls) {
-    if (pages.length >= MAX_PAGES) break
-    const page = await fetchPageText(url)
-    if (page?.text) {
-      console.log('[serp-scout] scraped page', { url, charCount: page.text.length, preview: page.text.slice(0, 200) })
-      pages.push(page)
-    }
-  }
+  console.log('[serp-scout] scraping domain in parallel', { domain, urlCount: urls.length })
+  const results = await Promise.all(urls.map(url => fetchPageText(url)))
+  const pages = results.filter(p => p?.text)
+  pages.forEach(p => console.log('[serp-scout] scraped page', { url: p.url, charCount: p.text.length }))
   if (!pages.length) {
     console.warn('[serp-scout] no readable pages after direct fetch, attempting DataForSEO fallback', { domain })
     try {
@@ -1043,7 +1021,7 @@ Return JSON with this exact structure:
   ]
 }
 
-Page content: ${payload.pageContent.slice(0, 4000)}`
+Page content: ${payload.pageContent.slice(0, 10000)}`
   const messages = [
     { role: 'system', content: `You are an SEO and LLM visibility strategist. Generate exactly 20 keywords with ${LLM_PROMPTS} prompts each.` },
     { role: 'user', content: prompt }
@@ -1158,72 +1136,6 @@ async function fetchKeywordSerpPosition(keyword, targetDomain, depth = 100) {
     organicResults: allItems // Return all organic items for competitor analysis
   }
 }
-async function fetchCompanyById(id) {
-  if (!id) return null
-  const { data, error } = await supabase
-    .from('companies')
-    .select('id, name, name_normalized, domain')
-    .eq('id', id)
-    .maybeSingle()
-  if (error) {
-    console.error('[serp-scout] fetchCompanyById error', error.message)
-    return null
-  }
-  return data
-}
-
-async function findCompanyByDomain(domain) {
-  if (!domain) return null
-  const normalized = normalizeUrlForMatch(domain)
-
-  // 1) Try exact match on normalized domain
-  try {
-    const { data: exact } = await supabase
-      .from('companies')
-      .select('id, name, name_normalized, domain')
-      .eq('domain', normalized)
-      .maybeSingle()
-    if (exact) {
-      console.log('[serp-scout] exact domain match', { search: normalized, stored: exact.domain, companyId: exact.id })
-      return exact
-    }
-  } catch (_) { }
-
-  // 2) Try common variant with www prefix
-  try {
-    const { data: www } = await supabase
-      .from('companies')
-      .select('id, name, name_normalized, domain')
-      .eq('domain', `www.${normalized}`)
-      .maybeSingle()
-    if (www) {
-      console.log('[serp-scout] www domain match', { search: normalized, stored: www.domain, companyId: www.id })
-      return www
-    }
-  } catch (_) { }
-
-  // 3) Fallback: find candidates containing the normalized domain string,
-  //    then validate by splitting and normalizing each stored domain token.
-  try {
-    const { data: candidates } = await supabase
-      .from('companies')
-      .select('id, name, name_normalized, domain')
-      .ilike('domain', `%${normalized}%`)
-      .limit(5)
-    if (Array.isArray(candidates)) {
-      for (const c of candidates) {
-        const raw = (c.domain || '').split(',')
-        const tokens = raw.map(s => normalizeUrlForMatch(s))
-        if (tokens.includes(normalized) || tokens.includes(`www.${normalized}`)) {
-          console.log('[serp-scout] validated fallback domain match', { search: normalized, stored: c.domain, companyId: c.id })
-          return c
-        }
-      }
-    }
-  } catch (_) { }
-
-  return null
-}
 
 function needsRefresh(timestamp, hoursOld = 24) {
   if (!timestamp) return true
@@ -1231,7 +1143,7 @@ function needsRefresh(timestamp, hoursOld = 24) {
   return age > hoursOld * 60 * 60 * 1000
 }
 
-async function generateCompanyContext(domain, companyId, companyName, forceContext, existingPages = null) {
+async function generateCompanyContext(domain, companyId, companyName, forceContext, existingPages = null, userId = null) {
   const stored = companyId ? await getCompanyContext(companyId) : null
 
   // Keywords and overview are permanent - only regenerate if forced or never generated
@@ -1253,7 +1165,8 @@ async function generateCompanyContext(domain, companyId, companyName, forceConte
     pagesUsed: pages.map((p) => p.url),
     generatedAt: new Date().toISOString(),
     companyName: companyName || null,
-    domain
+    domain,
+    ...(userId ? { firebase_user_id: userId } : {})
   }
   const systemMessage = 'You are generating internal context for Reddit engagement. Describe the company neutrally, without marketing language, links, or calls to action but bit professionally'
   const userPrompt = `Normalized content:\n${normalized}\n\nReturn valid JSON only with the following schema: {"companySummary": "2-3 sentence neutral summary", "coreCapabilities": ["..."] , "problemSpaces": ["..."], "constraints": ["..."]}. Constraints should mention tone rules or usage guardrails.`
@@ -1320,7 +1233,7 @@ async function saveKeywords(companyId, domain, keywords, userId, companyName, co
     if (companyName && domain) {
       console.log('[serp-scout] Auto-creating company', { companyName, domain, userId })
       try {
-        const newCompany = await createCompanyIfNeeded(companyName, domain, userId)
+        const newCompany = createCompanyIfNeeded(companyName, domain)
         companyId = newCompany.id
         console.log('[serp-scout] Created new company', { companyId, companyName })
       } catch (error) {
@@ -1340,7 +1253,8 @@ async function saveKeywords(companyId, domain, keywords, userId, companyName, co
       ...(context?.metadata || {}),
       companyName,
       keywordsSavedAt: new Date().toISOString(),
-      keywordsGenerated: true
+      keywordsGenerated: true,
+      ...(userId ? { firebase_user_id: userId } : {})
     },
     // Prefer DB-stored llmContext; fall back to what frontend passed (first-time users whose
     // companyId was null during analysis so generateCompanyContext never saved to DB)
@@ -1378,13 +1292,12 @@ async function saveSerpAnalysis(companyId, keyword, serpData) {
   if (!context) return null
 
   const serpAnalysis = context.approvedContext?.serpAnalysis || {}
+  // Merge into existing record so serpAndDork and redditTopNew can each save their portion
   serpAnalysis[keyword] = {
+    ...(serpAnalysis[keyword] || {}),
     ...serpData,
-    suggestedPosts: serpData.suggestedPosts || [],
-    topRedditPosts: serpData.topRedditPosts || [],
-    newRedditPosts: serpData.newRedditPosts || [],
     analyzedAt: new Date().toISOString(),
-    expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+    expiresAt: new Date(Date.now() + 12 * 60 * 60 * 1000).toISOString()
   }
 
   const updatedContext = {
@@ -1397,8 +1310,7 @@ async function saveSerpAnalysis(companyId, keyword, serpData) {
     }
   }
 
-  const result = await saveCompanyContext(companyId, updatedContext)
-  return result
+  return saveCompanyContext(companyId, updatedContext)
 }
 
 async function getSerpAnalysis(companyId, keyword) {
@@ -1408,19 +1320,11 @@ async function getSerpAnalysis(companyId, keyword) {
   if (!context?.approvedContext?.serpAnalysis?.[keyword]) return null
 
   const analysis = context.approvedContext.serpAnalysis[keyword]
+  const stale = needsRefresh(analysis.analyzedAt, 12)
 
-  // Check if expired (24 hours)
-  if (needsRefresh(analysis.analyzedAt, 24)) {
-    console.log('[serp-scout] SERP analysis expired, needs refresh', { keyword, age: analysis.analyzedAt })
-    return null
-  }
-
-  console.log('[serp-scout] returning cached SERP analysis', {
-    keyword,
-    analyzedAt: analysis.analyzedAt,
-    expiresAt: analysis.expiresAt
-  })
-  return analysis
+  console.log('[serp-scout] getSerpAnalysis', { keyword, stale, analyzedAt: analysis.analyzedAt })
+  // Always return cached data — let the caller decide what to do with stale data
+  return { ...analysis, stale }
 }
 
 async function testCitations(prompts, domain, competitors = []) {
@@ -1674,7 +1578,7 @@ export default async function handler(req, res) {
     }
     const companyId = bodyCompanyId ?? null
     try {
-      const result = await saveKeywords(companyId, rawDomain, bodyKeywords, userCtx.userId, bodyCompanyName, bodyCompetitors, bodyLlmContext, bodyApprovedContext)
+      const result = await saveKeywords(companyId, rawDomain, bodyKeywords, userCtx.uid, bodyCompanyName, bodyCompetitors, bodyLlmContext, bodyApprovedContext)
       return res.status(200).json({
         success: true,
         message: result.companyId
@@ -1943,13 +1847,72 @@ Return this exact format - ONLY JSON, nothing else:
     }
   }
 
+  // ── Citation cache ────────────────────────────────────────────────────────
+  if (action === 'getCitationCache') {
+    const { companyId: reqCompanyId, keyword } = req.body
+    if (!reqCompanyId || !keyword) return res.status(400).json({ error: 'companyId and keyword required' })
+    try {
+      const context = await getCompanyContext(reqCompanyId)
+      const cached = context?.approvedContext?.citationCache?.[keyword]
+      if (!cached?.records?.length) return res.status(200).json({ found: false })
+      const stale = needsRefresh(cached.cachedAt, 24)
+      return res.status(200).json({ found: true, stale, records: cached.records, summary: cached.summary, cachedAt: cached.cachedAt })
+    } catch (e) {
+      return res.status(200).json({ found: false })
+    }
+  }
+
+  if (action === 'saveCitationCache') {
+    const { companyId: reqCompanyId, keyword, records, summary } = req.body
+    if (!reqCompanyId || !keyword || !records?.length) return res.status(400).json({ error: 'missing params' })
+    try {
+      const context = await getCompanyContext(reqCompanyId)
+      if (!context) return res.status(404).json({ error: 'company not found' })
+      const citationCache = context.approvedContext?.citationCache || {}
+      citationCache[keyword] = { records, summary, cachedAt: new Date().toISOString() }
+      await saveCompanyContext(reqCompanyId, {
+        domain: context.domain,
+        metadata: context.metadata,
+        llmContext: context.llmContext,
+        approvedContext: { ...context.approvedContext, citationCache },
+      })
+      return res.status(200).json({ success: true })
+    } catch (e) {
+      return res.status(500).json({ error: e.message })
+    }
+  }
+
   // Fast path: DataForSEO SERP position + dork only (no Reddit API, no enrichment)
   // Returns SERP Threads + dork links in ~3s so the UI can show that tab immediately.
   if (action === 'serpAndDork') {
-    const { keyword, domain } = req.body
+    const { keyword, domain, companyId: reqCompanyId, force } = req.body
     if (!keyword || !domain) return res.status(400).json({ error: 'keyword and domain are required' })
+    const _t0 = Date.now()
     try {
       const targetDomain = ensureDomain(domain)
+
+      // Serve from cache unless force refresh requested
+      if (reqCompanyId && !force) {
+        const cached = await getSerpAnalysis(reqCompanyId, keyword)
+        if (cached && (cached.redditThreads?.length || cached.position != null)) {
+          console.log('[serp-scout] serpAndDork cache hit', { keyword, stale: cached.stale })
+          logSerpAction({ user: userCtx, action: 'serpAndDork', domain: targetDomain, keyword, durationMs: Date.now() - _t0, fromCache: true, audit: true }).catch(() => {})
+          return res.status(200).json({
+            success: true,
+            keyword,
+            domain: targetDomain,
+            position: cached.position,
+            examined: cached.examined,
+            redditThreads: cached.redditThreads || [],
+            dorkRedditLinks: cached.dorkRedditLinks || [],
+            enriched: false,
+            fromCache: true,
+            stale: cached.stale || false,
+            analyzedAt: cached.analyzedAt,
+          })
+        }
+      }
+
       const [serpData, dataForSeoData] = await Promise.all([
         fetchKeywordSerpPosition(keyword, targetDomain, 100),
         fetchRedditViaDataForSeo(keyword),
@@ -1960,49 +1923,135 @@ Return this exact format - ONLY JSON, nothing else:
         const u = (p.post_url || '').toLowerCase()
         return u && !organicUrls.has(u)
       })
+      const mappedThreads = redditThreads.map(t => {
+        const snip = t.snippet || ''
+        const votesMatch = snip.match(/(\d[\d,]*)\s+(?:votes?|upvotes?|points?)/i)
+        const commentsMatch = snip.match(/(\d[\d,]*)\s+(?:comments?|replies)/i)
+        const upvotes = votesMatch ? parseInt(votesMatch[1].replace(/,/g, ''), 10) : 0
+        const total_comments = commentsMatch ? parseInt(commentsMatch[1].replace(/,/g, ''), 10) : 0
+        return { ...t, upvotes, total_comments, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] }
+      })
+      const mappedDork = dorkFiltered.map(p => ({ ...p, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] }))
+
+      // Save in background — don't block response
+      if (reqCompanyId) {
+        saveSerpAnalysis(reqCompanyId, keyword, {
+          position: serpData.position,
+          examined: serpData.examined,
+          redditThreads: mappedThreads,
+          dorkRedditLinks: mappedDork,
+        }).catch(e => console.warn('[serp-scout] serpAndDork save failed', e.message))
+      }
+
+      logSerpAction({ user: userCtx, action: 'serpAndDork', domain: targetDomain, keyword, durationMs: Date.now() - _t0, fromCache: false, audit: true }).catch(() => {})
       return res.status(200).json({
         success: true,
         keyword,
         domain: targetDomain,
         position: serpData.position,
         examined: serpData.examined,
-        redditThreads: redditThreads.map(t => ({ ...t, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
-        dorkRedditLinks: dorkFiltered.map(p => ({ ...p, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
+        redditThreads: mappedThreads,
+        dorkRedditLinks: mappedDork,
         enriched: false,
+        fromCache: false,
       })
     } catch (error) {
       console.error('[serp-scout] serpAndDork failed', error.message)
+      logSerpAction({ user: userCtx, action: 'serpAndDork', domain, keyword: req.body.keyword, durationMs: Date.now() - _t0, error: error.message }).catch(() => {})
       return res.status(500).json({ error: error.message })
     }
   }
 
   // Fast path: Reddit API top/new posts only (independent of DataForSEO)
   if (action === 'redditTopNew') {
-    const { keyword } = req.body
+    const { keyword, companyId: reqCompanyId, force } = req.body
     if (!keyword) return res.status(400).json({ error: 'keyword is required' })
+    const _t0 = Date.now()
     try {
+      // Serve from cache unless force refresh requested.
+      // Skip cache if ALL posts have 0 upvotes — means old bad data was saved.
+      if (reqCompanyId && !force) {
+        const cached = await getSerpAnalysis(reqCompanyId, keyword)
+        const cachedTop = cached?.topRedditPosts || []
+        const hasRealUpvotes = cachedTop.some(p => (p.upvotes || p.score || 0) > 0)
+        if (cached && cachedTop.length > 0 && hasRealUpvotes) {
+          console.log('[serp-scout] redditTopNew cache hit', { keyword, stale: cached.stale, sampleUpvotes: cachedTop[0]?.upvotes })
+          logSerpAction({ user: userCtx, action: 'redditTopNew', domain: req.body.domain, keyword, durationMs: Date.now() - _t0, fromCache: true }).catch(() => {})
+          return res.status(200).json({
+            success: true,
+            keyword,
+            topRedditPosts: cached.topRedditPosts || [],
+            newRedditPosts: cached.newRedditPosts || [],
+            enriched: false,
+            fromCache: true,
+            stale: cached.stale || false,
+            analyzedAt: cached.analyzedAt,
+          })
+        }
+        if (cached && cachedTop.length > 0 && !hasRealUpvotes) {
+          console.log('[serp-scout] redditTopNew cache has 0 upvotes — skipping cache, fetching fresh')
+        }
+      }
+
+      const normalize = (post) => {
+        // Parse as number — API may return string like "1.2k" or numeric
+        const toNum = v => { const n = parseInt(v, 10); return isNaN(n) ? 0 : n }
+        const upvotes = toNum(post.upvotes ?? post.score ?? post.ups ?? post.vote_count ?? post.likes ?? post.points ?? 0)
+        const total_comments = toNum(post.total_comments ?? post.num_comments ?? post.comment_count ?? post.comments ?? 0)
+        return {
+          ...post, // pass all raw fields through so PostCard can find any field name
+          post_url: post.post_url || post.url || '',
+          post_title: post.post_title || post.title || post.name || '',
+          subreddit: post.subreddit || post.community || post.subreddit_name_prefixed?.replace('r/', '') || '',
+          upvotes,
+          total_comments,
+          post_content: post.post_content || post.selftext || post.body || '',
+          source: 'reddit_api',
+          mentionsBrand: false,
+          mentionsCompetitors: [],
+          mentionHighlights: [],
+        }
+      }
+
       const redditData = await fetchRedditTopNewPosts(keyword)
-      const normalize = (post) => ({
-        post_url: post.post_url || post.url || '',
-        post_title: post.post_title || post.title || '',
-        subreddit: post.subreddit || '',
-        upvotes: post.upvotes || post.score || post.ups || 0,
-        total_comments: post.total_comments || post.num_comments || post.comments || 0,
-        post_content: post.post_content || '',
-        source: 'reddit_api',
-        mentionsBrand: false,
-        mentionsCompetitors: [],
-        mentionHighlights: [],
-      })
+      // Debug: log raw field names from the API so we can verify normalization
+      if (redditData.top_posts?.length > 0) {
+        const sample = redditData.top_posts[0]
+        console.log('[redditTopNew] raw post fields:', Object.keys(sample).join(', '))
+        console.log('[redditTopNew] raw post sample:', JSON.stringify({
+          upvotes: sample.upvotes, score: sample.score, ups: sample.ups,
+          vote_count: sample.vote_count, likes: sample.likes,
+          num_comments: sample.num_comments, total_comments: sample.total_comments,
+          comment_count: sample.comment_count,
+        }))
+      }
+      const topRedditPosts = (redditData.top_posts || []).slice(0, 10).map(normalize)
+      const newRedditPosts = (redditData.new_posts || []).slice(0, 10).map(normalize)
+
+      console.log('[redditTopNew] normalized top[0]:', topRedditPosts[0] ? {
+        title: topRedditPosts[0].post_title?.substring(0, 40),
+        upvotes: topRedditPosts[0].upvotes,
+        total_comments: topRedditPosts[0].total_comments,
+      } : 'no posts')
+
+      // Only save to cache if we got real upvote data — avoids poisoning cache with 0s
+      if (reqCompanyId && topRedditPosts.some(p => p.upvotes > 0)) {
+        saveSerpAnalysis(reqCompanyId, keyword, { topRedditPosts, newRedditPosts })
+          .catch(e => console.warn('[serp-scout] redditTopNew save failed', e.message))
+      }
+
+      logSerpAction({ user: userCtx, action: 'redditTopNew', domain: req.body.domain, keyword, durationMs: Date.now() - _t0, fromCache: false }).catch(() => {})
       return res.status(200).json({
         success: true,
         keyword,
-        topRedditPosts: (redditData.top_posts || []).slice(0, 10).map(normalize),
-        newRedditPosts: (redditData.new_posts || []).slice(0, 10).map(normalize),
+        topRedditPosts,
+        newRedditPosts,
         enriched: false,
+        fromCache: false,
       })
     } catch (error) {
       console.error('[serp-scout] redditTopNew failed', error.message)
+      logSerpAction({ user: userCtx, action: 'redditTopNew', domain: req.body.domain, keyword: req.body.keyword, durationMs: Date.now() - _t0, error: error.message }).catch(() => {})
       return res.status(500).json({ error: error.message })
     }
   }
@@ -2015,7 +2064,7 @@ Return this exact format - ONLY JSON, nothing else:
     if (!domain) {
       return res.status(400).json({ error: 'domain is required' })
     }
-
+    const _t0 = Date.now()
     try {
       const targetDomain = ensureDomain(domain)
 
@@ -2388,6 +2437,7 @@ Return this exact format - ONLY JSON, nothing else:
         })
       }
 
+      logSerpAction({ user: userCtx, action: 'keywordSerp', domain: targetDomain, keyword, durationMs: Date.now() - _t0, fromCache: false }).catch(() => {})
       return res.status(200).json({
         success: true,
         keyword,
@@ -2407,6 +2457,7 @@ Return this exact format - ONLY JSON, nothing else:
       })
     } catch (error) {
       console.error('[serp-scout] keyword SERP failed', error.message)
+      logSerpAction({ user: userCtx, action: 'keywordSerp', domain: req.body.domain, keyword: req.body.keyword, durationMs: Date.now() - _t0, error: error.message }).catch(() => {})
       if (error.message.includes('429') || error.message.includes('Rate limit')) {
         return res.status(429).json({ error: 'DataForSEO rate limit exceeded', message: 'Please retry shortly.' })
       }
@@ -2418,17 +2469,18 @@ Return this exact format - ONLY JSON, nothing else:
   if (!domain) {
     return res.status(400).json({ error: 'domain is required' })
   }
+  const _domainStart = Date.now()
 
   // Only use company ID if explicitly provided by user (optional)
   const requestedCompanyId = bodyCompanyId ?? null
   let resolvedCompanyId = requestedCompanyId
 
-  // If no company ID provided, try to find by domain
+  // If no company ID provided, look up this user's existing context by domain first
   if (!resolvedCompanyId && !forceContext) {
-    const foundCompany = await findCompanyByDomain(domain)
-    if (foundCompany) {
-      resolvedCompanyId = foundCompany.id
-      console.log('[serp-scout] found existing company by domain', { domain, companyId: resolvedCompanyId, companyName: foundCompany.name })
+    const existingCtx = await getContextByDomainAndUser(domain, userCtx.uid)
+    if (existingCtx?.companyId) {
+      resolvedCompanyId = existingCtx.companyId
+      console.log('[serp-scout] found user-scoped context by domain', { domain, companyId: resolvedCompanyId, userId: userCtx.uid })
     }
   }
 
@@ -2451,7 +2503,7 @@ Return this exact format - ONLY JSON, nothing else:
           const pages = await scrapeDomainPages(domain)
           if (pages?.length) {
             const extractedName = extractCompanyNameFromContent(pages, domain)
-            returnContext = await generateCompanyContext(domain, resolvedCompanyId, extractedName, true, pages)
+            returnContext = await generateCompanyContext(domain, resolvedCompanyId, extractedName, true, pages, userCtx.uid)
           }
         } catch (e) {
           console.warn('[serp-scout] context regeneration failed (non-fatal):', e.message)
@@ -2464,6 +2516,7 @@ Return this exact format - ONLY JSON, nothing else:
         keywordCount: existingKeywords.length,
         savedAt: existingContext.metadata?.keywordsSavedAt || existingContext.generatedAt
       })
+      logSerpAction({ user: userCtx, action: 'analyzeDomain', domain, durationMs: Date.now() - _domainStart, fromCache: true, audit: true }).catch(() => {})
       return res.status(200).json({
         success: true,
         domain: returnContext?.domain || existingContext.domain || domain,
@@ -2487,6 +2540,7 @@ Return this exact format - ONLY JSON, nothing else:
       throw new Error('Unable to scrape any pages from the domain')
     }
   } catch (error) {
+    logSerpAction({ user: userCtx, action: 'analyzeDomain', domain, durationMs: Date.now() - _domainStart, error: `scrape failed: ${error.message}` }).catch(() => {})
     return res.status(502).json({ error: error.message })
   }
 
@@ -2494,32 +2548,32 @@ Return this exact format - ONLY JSON, nothing else:
   const extractedCompanyName = extractCompanyNameFromContent(pages, domain)
   console.log('[serp-scout] DOMAIN FETCH - extracted company name', { domain, extractedCompanyName, pagesCount: pages.length })
 
-  // Use first page for keyword generation
+  // Run keyword generation and company context generation in parallel — both use the same pages
   const landingText = pages.map(p => p.text).join('\n\n')
-  let keywords
-  try {
-    keywords = await promptKeywords({ domain, pageContent: landingText, companyName: extractedCompanyName })
-  } catch (error) {
-    if (error.message.includes('429') || error.message.includes('Rate limit')) {
+  const [keywordsResult, companyContextResult] = await Promise.allSettled([
+    promptKeywords({ domain, pageContent: landingText, companyName: extractedCompanyName }),
+    generateCompanyContext(domain, resolvedCompanyId, extractedCompanyName, Boolean(forceContext), pages, userCtx.uid)
+  ])
+
+  if (keywordsResult.status === 'rejected') {
+    const err = keywordsResult.reason
+    if (err.message.includes('429') || err.message.includes('Rate limit')) {
+      logSerpAction({ user: userCtx, action: 'analyzeDomain', domain, durationMs: Date.now() - _domainStart, error: 'API rate limit exceeded' }).catch(() => {})
       return res.status(429).json({
         error: 'API rate limit exceeded',
         message: 'The AI service has reached its daily request limit. Please try again later or upgrade your API plan.',
         retryAfter: new Date(1767830400000).toISOString()
       })
     }
-    console.error('[serp-scout] keyword generation failed', error.message)
-    return res.status(500).json({ error: 'Failed to generate keywords', details: error.message })
+    console.error('[serp-scout] keyword generation failed', err.message)
+    logSerpAction({ user: userCtx, action: 'analyzeDomain', domain, durationMs: Date.now() - _domainStart, error: `keyword generation failed: ${err.message}` }).catch(() => {})
+    return res.status(500).json({ error: 'Failed to generate keywords', details: err.message })
   }
 
-  // Generate company context (will use extracted name, pass existing pages to avoid re-scraping)
-  let companyContext = null
-  let contextError = null
-  try {
-    companyContext = await generateCompanyContext(domain, resolvedCompanyId, extractedCompanyName, Boolean(forceContext), pages)
-  } catch (error) {
-    console.error('[serp-scout] context generation failed', error.message)
-    contextError = error.message
-  }
+  const keywords = keywordsResult.value
+  const companyContext = companyContextResult.status === 'fulfilled' ? companyContextResult.value : null
+  const contextError = companyContextResult.status === 'rejected' ? companyContextResult.reason?.message : null
+  if (contextError) console.error('[serp-scout] context generation failed', contextError)
 
   console.log('[serp-scout] RETURNING DOMAIN FETCH RESPONSE', {
     domain,
@@ -2529,6 +2583,7 @@ Return this exact format - ONLY JSON, nothing else:
   })
 
   const responseTimestamp = new Date().toISOString()
+  logSerpAction({ user: userCtx, action: 'analyzeDomain', domain, durationMs: Date.now() - _domainStart, fromCache: false, audit: true }).catch(() => {})
   return res.status(200).json({
     success: true,
     domain,

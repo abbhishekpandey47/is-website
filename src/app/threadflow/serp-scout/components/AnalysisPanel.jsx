@@ -220,49 +220,51 @@ export default function AnalysisPanel({
     return Array.from(byUrl.values());
   })();
 
-  // ── Best: ranked by AI platform citation count, then upvotes ─────────────
+  // ── Best: ranked by total weighted score across all sources ───────────────
+  // Priority: Cited (AI platforms) > SERP/Top > New/Dork
+  // Score weights: each AI platform = 4pts, SERP = 3pts, Top = 3pts, Dork = 1pt, New = 1pt
+  const SOURCE_WEIGHTS = { SERP: 3, Top: 3, Dork: 1, New: 1 };
   const bestThreads = (() => {
-    // Step 1: build url → { post, aiPlatforms: Set, otherSources: Set }
     const urlMap = new Map();
+    const normalizeUrl = u => (u || '').toLowerCase().replace(/\/$/, '');
 
-    const addOther = (posts, sourceName) => {
+    const addSource = (posts, sourceName) => {
       posts.forEach(post => {
-        const url = post.url || post.post_url || '';
+        const url = normalizeUrl(post.url || post.post_url);
         if (!url) return;
         if (!urlMap.has(url)) urlMap.set(url, { post, aiPlatforms: new Set(), otherSources: new Set() });
         urlMap.get(url).otherSources.add(sourceName);
       });
     };
-    addOther(serpThreads, 'SERP');
-    addOther(dorkThreads, 'Dork');
-    addOther(topThreads,  'Top');
-    addOther(newThreads,  'New');
+    addSource(citedThreads.map(p => ({ ...p, url: p.url || p.post_url })), 'Cited');
+    addSource(serpThreads, 'SERP');
+    addSource(topThreads,  'Top');
+    addSource(dorkThreads, 'Dork');
+    addSource(newThreads,  'New');
 
-    // citedThreads already has citedByModels — use that for AI platform count
     citedThreads.forEach(post => {
-      const url = post.url || post.post_url || '';
+      const url = normalizeUrl(post.url || post.post_url);
       if (!url) return;
       if (!urlMap.has(url)) urlMap.set(url, { post, aiPlatforms: new Set(), otherSources: new Set() });
-      const entry = urlMap.get(url);
-      (post.citedByModels || []).forEach(p => entry.aiPlatforms.add(p));
+      (post.citedByModels || []).forEach(p => urlMap.get(url).aiPlatforms.add(p));
     });
+
+    const score = e =>
+      e.aiPlatforms.size * 4 +
+      Array.from(e.otherSources).reduce((s, src) => s + (SOURCE_WEIGHTS[src] || 1), 0);
 
     return Array.from(urlMap.values())
       .filter(e => e.aiPlatforms.size >= 1 || e.otherSources.size >= 2)
       .sort((a, b) => {
-        // Primary: AI platforms citing count (4 > 3 > 2 > 1 > 0)
-        const aiDiff = b.aiPlatforms.size - a.aiPlatforms.size;
-        if (aiDiff !== 0) return aiDiff;
-        // Secondary: other source overlap count
-        const srcDiff = b.otherSources.size - a.otherSources.size;
-        if (srcDiff !== 0) return srcDiff;
-        // Tiebreaker: upvotes
+        const sDiff = score(b) - score(a);
+        if (sDiff !== 0) return sDiff;
         return (b.post.upvotes || 0) - (a.post.upvotes || 0);
       })
       .map(e => ({
         ...e.post,
-        _sources: [...Array.from(e.aiPlatforms), ...Array.from(e.otherSources)],
+        _sources: [...Array.from(e.aiPlatforms), ...Array.from(e.otherSources).filter(s => s !== 'Cited')],
         _aiPlatformCount: e.aiPlatforms.size,
+        _score: score(e),
       }));
   })();
 
@@ -353,10 +355,11 @@ export default function AnalysisPanel({
                   : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run Analysis</>
                 }
               </Button>
-              {(serpThreadsLoading || redditPostsLoading) && (
+              {(serpThreadsLoading || redditPostsLoading || citationLoading) && (
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   {serpThreadsLoading && <span className="flex items-center gap-1"><Spinner className="h-3 w-3" />SERP</span>}
                   {redditPostsLoading && <span className="flex items-center gap-1"><Spinner className="h-3 w-3" />Reddit</span>}
+                  {citationLoading && <span className="flex items-center gap-1"><Spinner className="h-3 w-3" />Citations</span>}
                 </div>
               )}
             </div>
@@ -377,10 +380,18 @@ export default function AnalysisPanel({
 
       {/* ── Result tabs ── */}
       {(hasAnyData || isLoading || serpThreadsLoading || redditPostsLoading) && (
-        <Tabs defaultValue="serp" className="w-full">
-          <TabsList className="grid grid-cols-4 w-full">
+        <Tabs defaultValue="best" className="w-full">
+          <TabsList className="grid grid-cols-5 w-full">
+            <TabsTrigger value="best" className="text-xs">
+              <Sparkles className="h-3 w-3 mr-1 text-primary" />Best
+              {bestThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{bestThreads.length}</span>}
+            </TabsTrigger>
+            <TabsTrigger value="cited" className="text-xs">
+              Cited
+              {citedThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{citedThreads.length}</span>}
+            </TabsTrigger>
             <TabsTrigger value="serp" className="text-xs">
-              SERP Threads
+              SERP
               {serpThreadsLoading
                 ? <Spinner className="ml-1 h-3 w-3 opacity-60" />
                 : (serpThreads.length + dorkThreads.length) > 0 && <span className="ml-1 opacity-60 text-[10px]">{serpThreads.length + dorkThreads.length}</span>
@@ -400,10 +411,6 @@ export default function AnalysisPanel({
                 : newThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{newThreads.length}</span>
               }
             </TabsTrigger>
-            <TabsTrigger value="cited" className="text-xs">
-              Cited
-              {citedThreads.length > 0 && <span className="ml-1 opacity-60 text-[10px]">{citedThreads.length} links</span>}
-            </TabsTrigger>
           </TabsList>
 
           {/* SERP Threads — SERP first, dork appended seamlessly */}
@@ -414,13 +421,13 @@ export default function AnalysisPanel({
                   <Search className="h-4 w-4 text-primary" />SERP Threads
                   {serpThreadsLoading
                     ? <span className="ml-auto flex items-center gap-1 text-[11px] font-normal text-muted-foreground"><Spinner className="h-3 w-3" />Loading…</span>
-                    : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{serpThreads.length + dorkThreads.length} results</span>
+                    : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{Math.min(serpThreads.length + dorkThreads.length, 10)} results</span>
                   }
                 </CardTitle>
                 <CardDescription className="text-xs">Google SERP threads · site:reddit.com dork</CardDescription>
               </CardHeader>
               <CardContent>
-                <PostList posts={[...serpThreads, ...dorkThreads]} emptyMsg="No SERP threads found — run Analysis" loading={serpThreadsLoading} />
+                <PostList posts={[...serpThreads, ...dorkThreads].slice(0, 10)} emptyMsg="No SERP threads found — run Analysis" loading={serpThreadsLoading} />
               </CardContent>
             </Card>
           </TabsContent>
@@ -529,15 +536,15 @@ export default function AnalysisPanel({
             </Card>
           </TabsContent>
 
-          {/* Best — hidden for now */}
-          <TabsContent value="best" className="mt-4 hidden">
+          {/* Best — threads appearing across the most sources */}
+          <TabsContent value="best" className="mt-4">
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-primary" />Best Threads
                   <span className="ml-auto text-[11px] font-normal text-muted-foreground">{bestThreads.length} results</span>
                 </CardTitle>
-                <CardDescription className="text-xs">Ranked by AI citation count (4 platforms → 3 → 2 → 1), then upvotes</CardDescription>
+                <CardDescription className="text-xs">Threads appearing in the most places — Cited &gt; SERP/Top &gt; New, then by upvotes</CardDescription>
               </CardHeader>
               <CardContent>
                 {bestThreads.length === 0 ? (

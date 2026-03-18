@@ -15,7 +15,7 @@ import { Textarea } from "@/Components/ui/textarea";
 import { Skeleton } from "@/Components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
 import {
-  Sparkles, AlertCircle, CheckCircle, Search, MessageSquare, Zap,
+  Sparkles, AlertCircle, CheckCircle, Search, MessageSquare,
   ExternalLink, Globe, FileText, Tag, Bookmark, BarChart2, Plus, X,
   ChevronRight, Edit2, Save, Loader2, Users,
 } from "lucide-react";
@@ -30,127 +30,10 @@ const MODEL_STYLES = {
   anthropic:  { label: "Claude",     bg: "bg-orange-500/15", text: "text-orange-700", border: "border-orange-500/30" },
 };
 
-function getModelStyle(modelId = "") {
-  const id = modelId.toLowerCase();
-  if (id.includes("perplexity")) return MODEL_STYLES.perplexity;
-  if (id.includes("openai") || id.includes("gpt")) return MODEL_STYLES.openai;
-  if (id.includes("anthropic") || id.includes("claude")) return MODEL_STYLES.anthropic;
-  const label = modelId.split("/").pop()?.split(":")[0] ?? modelId;
-  return { label, bg: "bg-gray-500/15", text: "text-gray-700", border: "border-gray-500/30" };
-}
-
 // ── Shared sub-components ─────────────────────────────────────────────────────
 
 function Spinner({ className = "h-4 w-4" }) {
   return <Loader2 className={`${className} animate-spin`} />;
-}
-
-function PostCard({ post, brandLabel, allCompetitors = [], rank = null, scannedData = null }) {
-  // Handle both camelCase (from HTTP results) and snake_case (from API) property names
-  const url = post.url || post.post_url || '';
-  const title = post.title || post.post_title || '';
-  const subreddit = post.subreddit || '';
-  const reason = post.reason || '';
-  const upvotes = post.upvotes || post.score || 0;
-  const downvotes = post.downvotes || 0;
-  const postAge = post.post_age_hours || post.age_hours || 0;
-
-  // Use scanned data if available, otherwise use API mention data
-  const mentionedCompetitors = scannedData?.mentionsCompetitors || post.mentionsCompetitors || [];
-  const mentionsBrand = scannedData?.mentionsBrand !== undefined ? scannedData.mentionsBrand : post.mentionsBrand || false;
-
-  // Format upvotes and downvotes with K/M suffix
-  const formatNumber = (num) => {
-    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-    return num.toString();
-  };
-
-  // Format age
-  const formatAge = (hours) => {
-    if (hours < 1) return 'now';
-    if (hours < 24) return `${Math.floor(hours)}h`;
-    const days = Math.floor(hours / 24);
-    if (days < 7) return `${days}d`;
-    const weeks = Math.floor(days / 7);
-    if (weeks < 4) return `${weeks}w`;
-    const months = Math.floor(days / 30);
-    return `${months}mo`;
-  };
-
-  return (
-    <div className="rounded-lg border border-border bg-card p-3 space-y-2 hover:border-primary/30 transition-colors">
-      <div className="space-y-1.5">
-        <div className="flex items-start gap-2">
-          {rank && (
-            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center">
-              <span className="text-xs font-bold text-primary">#{rank}</span>
-            </div>
-          )}
-          <a
-            href={url}
-            target="_blank"
-            rel="noreferrer"
-            className="font-medium text-sm text-primary hover:underline line-clamp-2 flex items-start gap-1.5 flex-1"
-          >
-            <ExternalLink className="h-3.5 w-3.5 mt-0.5 shrink-0" />
-            {title}
-          </a>
-        </div>
-        <div className="flex items-center gap-2 text-xs text-muted-foreground flex-wrap">
-          <Badge variant="outline" className="text-[10px]">{subreddit}</Badge>
-          {reason && <span className="truncate max-w-xs">{reason}</span>}
-        </div>
-      </div>
-
-      {/* Post stats row */}
-      <div className="flex items-center gap-3 text-xs text-muted-foreground pt-1 border-t border-border/50">
-        <div className="flex items-center gap-1">
-          <span className="text-emerald-600 dark:text-emerald-400 font-semibold">↑ {formatNumber(upvotes)}</span>
-        </div>
-        {downvotes > 0 && (
-          <div className="flex items-center gap-1">
-            <span className="text-red-600 dark:text-red-400 font-semibold">↓ {formatNumber(downvotes)}</span>
-          </div>
-        )}
-        {postAge > 0 && (
-          <div className="flex items-center gap-1 ml-auto">
-            <span>{formatAge(postAge)}</span>
-          </div>
-        )}
-      </div>
-
-      {/* Mentions badges and scan button */}
-      {(brandLabel || allCompetitors.length > 0) && (
-        <>
-          <div className="flex flex-wrap gap-1 pt-1">
-            {brandLabel && (
-              mentionsBrand ? (
-                <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-semibold border bg-emerald-500/15 text-emerald-700 border-emerald-500/30">
-                  ✓ {brandLabel}
-                </span>
-              ) : (
-                <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] border bg-muted/40 text-muted-foreground/60 border-border/40">
-                  ✗ {brandLabel}
-                </span>
-              )
-            )}
-            {allCompetitors.map(comp =>
-              mentionedCompetitors.includes(comp) ? (
-                <span key={`${url}-${comp}`} className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-semibold border bg-orange-500/15 text-orange-700 border-orange-500/30">
-                  ⚠ {comp}
-                </span>
-              ) : (
-                <span key={`${url}-${comp}`} className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] border bg-muted/30 text-muted-foreground/40 border-border/30">
-                  ○ {comp}
-                </span>
-              )
-            )}
-          </div>
-        </>
-      )}
-    </div>
-  );
 }
 
 // ── Auth-aware fetch helper ───────────────────────────────────────────────────
@@ -218,13 +101,12 @@ export default function SerpScout() {
   const [serpLoading, setSerpLoading] = useState(false);
   const [serpThreadsLoading, setSerpThreadsLoading] = useState(false);
   const [redditPostsLoading, setRedditPostsLoading] = useState(false);
+  const [redditPostsError, setRedditPostsError] = useState(null);
   const [selectedKwIdx, setSelectedKwIdx] = useState(null);
-  const [serpAccordionOpen, setSerpAccordionOpen] = useState(true);
 
   // Analyze — Citations
   const [citationResults, setCitationResults] = useState(null);
   const [citationLoading, setCitationLoading] = useState(false);
-  const [manualCitationInput, setManualCitationInput] = useState("");
   const [manualCitationPrompts, setManualCitationPrompts] = useState([]);
 
   // Post details scanning for competitors
@@ -236,11 +118,8 @@ export default function SerpScout() {
   const [generateLoading, setGenerateLoading] = useState(false);
   const [generateError, setGenerateError] = useState(null);
 
-  // Recent domains (UI only — read from localStorage)
+  // Recent domains (UI only)
   const [recentDomains, setRecentDomains] = useState([]);
-
-  // Auto-load from localStorage
-  const [hasAutoLoadedOnMount, setHasAutoLoadedOnMount] = useState(false);
 
   // ── Derived ──────────────────────────────────────────────────────────────
 
@@ -275,44 +154,11 @@ export default function SerpScout() {
     return [...base, ...extras];
   }, [selectedKw, manualCitationPrompts]);
 
-  const citationSummary = useMemo(() => {
-    const records = citationResults?.records ?? [];
-    if (!records.length) return null;
-    let totalPosts = 0, totalModels = 0, selfMentions = 0;
-    records.forEach(rec => {
-      Object.values(rec.models).forEach(val => {
-        totalModels++;
-        if (Array.isArray(val)) {
-          totalPosts += val.length;
-          val.forEach(p => { if (p.mentionsBrand) selfMentions++; });
-        }
-      });
-    });
-    return { totalPrompts: records.length, totalModels, totalPosts, selfMentions };
-  }, [citationResults]);
-
   // ── Effects ──────────────────────────────────────────────────────────────
 
-  // Auto-load domain from localStorage on mount
+  // Warmup the Render Reddit API on mount so it's ready by the time the user runs analysis
   useEffect(() => {
-    if (hasAutoLoadedOnMount) return; // Prevent re-running
-    setHasAutoLoadedOnMount(true);
-
-    if (typeof window === "undefined") return; // SSR safety
-
-    try {
-      const savedDomain = localStorage.getItem("reddit-opportunity-finder-domain");
-      if (savedDomain && !domain) {
-        setDomain(savedDomain);
-      }
-      // Load recent domains list
-      const saved = localStorage.getItem("reddit-opportunity-finder-recent-domains");
-      if (saved) {
-        try { setRecentDomains(JSON.parse(saved).slice(0, 3)); } catch {}
-      }
-    } catch (e) {
-      console.warn("[SERP Scout] Failed to read localStorage:", e.message);
-    }
+    fetch("/api/threadflow/warmup").catch(() => {});
   }, []);
 
   // Update recent domains list when a new domain is analyzed
@@ -327,16 +173,6 @@ export default function SerpScout() {
     } catch {}
   }, [rawResult]);
 
-  // Auto-trigger analysis when domain is loaded from localStorage
-  useEffect(() => {
-    if (!domain || rawResult || !hasAutoLoadedOnMount || loading) return;
-
-    const savedDomain = localStorage.getItem("reddit-opportunity-finder-domain");
-    if (savedDomain === domain.trim()) {
-      // Domain was loaded from localStorage, trigger analysis
-      handleAnalyzeDomain();
-    }
-  }, [domain, hasAutoLoadedOnMount]);
 
   // Sync ctxForm with rawResult company context data
   useEffect(() => {
@@ -474,12 +310,6 @@ export default function SerpScout() {
       const savedCompetitors = ctx?.competitors;
       setCompetitors(Array.isArray(savedCompetitors) ? savedCompetitors : []);
 
-      // Save domain to localStorage for future auto-load
-      try {
-        localStorage.setItem("reddit-opportunity-finder-domain", trimmed);
-      } catch (e) {
-        console.warn("[SERP Scout] Failed to save domain to localStorage:", e.message);
-      }
 
       if (res.fromExisting) {
         setSaved(true);
@@ -493,44 +323,6 @@ export default function SerpScout() {
       setError(e.message ?? "Failed to analyze domain");
     } finally {
       setLoading(false);
-    }
-  }
-
-  // Load SERP cache for all keywords from existing company setup
-  async function loadSerpCacheForKeywords(kws, domain, companyId) {
-    if (!kws.length || !companyId) return;
-
-    try {
-      // Fetch SERP cache for each keyword in parallel
-      const serpDataPromises = kws.map(kw =>
-        apiPost("/api/threadflow/serp-scout", {
-          action: "keywordSerp",
-          keyword: kw.term,
-          domain,
-          companyId,
-        }).catch(e => {
-          console.warn(`[SERP Scout] Failed to load SERP cache for "${kw.term}":`, e.message);
-          return null; // Don't throw, continue with other keywords
-        })
-      );
-
-      const serpDataResults = await Promise.all(serpDataPromises);
-
-      // Populate serpResults with cached data
-      const newSerpResults = {};
-      serpDataResults.forEach((data, idx) => {
-        if (data && data.success !== false) {
-          const kwTerm = kws[idx].term;
-          newSerpResults[kwTerm] = data;
-        }
-      });
-
-      if (Object.keys(newSerpResults).length > 0) {
-        setSerpResults(newSerpResults);
-        console.log("[SERP Scout] Loaded SERP cache for", Object.keys(newSerpResults).length, "keywords");
-      }
-    } catch (e) {
-      console.warn("[SERP Scout] Error loading SERP cache:", e.message);
     }
   }
 
@@ -597,45 +389,6 @@ export default function SerpScout() {
       toast({ variant: "destructive", title: "Save failed", description: e.message });
     } finally {
       setSaving(false);
-    }
-  }
-
-  async function handleSerpAnalysis() {
-    if (!selectedKw) return;
-    setSerpLoading(true);
-    setError(null);
-    const kwTerm = selectedKw.term;
-    try {
-      // Phase 1: fast — get SERP position + post list without full content enrichment
-      const fastRes = await apiPost("/api/threadflow/serp-scout", {
-        action: "keywordSerp",
-        keyword: kwTerm,
-        domain: domain.trim(),
-        companyId,
-        competitors,
-        quickMode: true,
-      });
-      setSerpResults(prev => ({ ...prev, [kwTerm]: fastRes }));
-      setSerpLoading(false);
-
-      // Phase 2: background — full enrichment (brand/competitor mention detection)
-      // Skip if results came from cache (already fully enriched)
-      if (!fastRes.fromCache) {
-        apiPost("/api/threadflow/serp-scout", {
-          action: "keywordSerp",
-          keyword: kwTerm,
-          domain: domain.trim(),
-          companyId,
-          competitors,
-        }).then(fullRes => {
-          setSerpResults(prev => ({ ...prev, [kwTerm]: fullRes }));
-        }).catch(e => {
-          console.warn("[SERP Scout] background enrichment failed:", e.message);
-        });
-      }
-    } catch (e) {
-      setError(e.message ?? "SERP analysis failed");
-      setSerpLoading(false);
     }
   }
 
@@ -723,7 +476,24 @@ export default function SerpScout() {
     setError(null);
 
     try {
-      // Step 1: Trigger all platforms in parallel — each gets its own snapshot_id
+      // Step 0: Check citation cache — skip BrightData entirely if we have fresh results
+      if (companyId && selectedKw?.term) {
+        try {
+          const cached = await apiPost("/api/threadflow/serp-scout", {
+            action: "getCitationCache",
+            companyId,
+            keyword: selectedKw.term,
+          });
+          if (cached?.found && !cached?.stale && cached?.records?.length) {
+            setCitationResults({ records: cached.records, summary: cached.summary, partial: false, fromCache: true });
+            toast({ title: "Citations loaded", description: "Showing cached results from a recent scan." });
+            setCitationLoading(false);
+            return;
+          }
+        } catch (_) { /* cache miss — proceed to BrightData */ }
+      }
+
+      // Step 1: Trigger all platforms in parallel — cap at 2 prompts per platform for speed
       const triggerRes = await apiPost("/api/threadflow/brightdata-citations", {
         action: "trigger",
         prompts: effectivePrompts,
@@ -738,65 +508,95 @@ export default function SerpScout() {
       const { snapshots, prompts: triggeredPrompts, wrappedToOriginal } = triggerRes;
       toast({
         title: "Citation search started",
-        description: `Querying ${snapshots.length} AI platforms in parallel. Results appear as each completes…`,
+        description: `Querying ${snapshots.length} AI platforms. Results appear as each completes…`,
       });
 
-      // Step 2: Poll all snapshots — show partial results as platforms complete
-      const POLL_INTERVAL = 15_000;
-      const POLL_MAX_ATTEMPTS = 20;
-      let finalRes = null;
+      // Step 2: Poll with smart schedule — faster intervals, skip completed platforms
+      // BrightData typically needs 25-45s for first results; poll at 20s then every 10s
+      const INITIAL_DELAY  = 20_000;
+      const POLL_INTERVAL  = 10_000;
+      const POLL_MAX_ATTEMPTS = 12;  // 20s + 12×10s = max ~2 min
+      const completedPlatforms = new Set();
+      let pendingSnapshots = [...snapshots];
+      const mergedPlatforms = {};
+
+      await new Promise(r => setTimeout(r, INITIAL_DELAY));
 
       for (let attempt = 0; attempt < POLL_MAX_ATTEMPTS; attempt++) {
-        await new Promise(r => setTimeout(r, POLL_INTERVAL));
+        if (attempt > 0) await new Promise(r => setTimeout(r, POLL_INTERVAL));
 
+        // Only poll snapshots that haven't completed yet
         const pollRes = await apiPost("/api/threadflow/brightdata-citations", {
           action: "poll",
-          snapshots,
+          snapshots: pendingSnapshots,
           prompts: triggeredPrompts,
           companyName: companyName || domain.trim(),
           wrappedToOriginal,
         });
 
-        if (!pollRes) continue;
+        if (!pollRes?.platforms) continue;
 
-        // Show partial results immediately — build records from whatever platforms are ready
-        if (pollRes.platforms) {
-          const partialRecords = buildCitationRecords(pollRes.platforms, triggeredPrompts);
-          if (partialRecords.length > 0) {
-            setCitationResults({ records: partialRecords, summary: pollRes.summary, partial: pollRes.partial });
+        // Merge newly completed platforms into our running result
+        Object.entries(pollRes.platforms).forEach(([platform, data]) => {
+          if (data.status === 'ready' || data.status === 'error') {
+            completedPlatforms.add(platform);
+            mergedPlatforms[platform] = data;
+          } else {
+            mergedPlatforms[platform] = data;
           }
+        });
+
+        // Remove completed from pending list for next poll
+        pendingSnapshots = snapshots.filter(s => !completedPlatforms.has(s.platform));
+
+        // Show partial results — only once at least one platform is actually ready
+        const hasReadyPlatform = Object.values(mergedPlatforms).some(p => p.status === 'ready');
+        if (hasReadyPlatform) {
+          const partialRecords = buildCitationRecords(mergedPlatforms, triggeredPrompts);
+          const allRedditUrls = [...new Set(Object.values(mergedPlatforms)
+            .filter(p => p.status === 'ready')
+            .flatMap(p => p.redditUrls || []))];
+          setCitationResults({
+            records: partialRecords,
+            summary: { ...pollRes.summary, totalRedditUrlsFound: allRedditUrls.length },
+            partial: pendingSnapshots.length > 0,
+          });
         }
 
-        if (pollRes.overallStatus === "ready") {
-          finalRes = pollRes;
+        // All done if no pending snapshots remain
+        if (pendingSnapshots.length === 0) {
           break;
         }
       }
 
-      // Final update (ensure latest full data is set)
-      if (finalRes?.platforms) {
-        const records = buildCitationRecords(finalRes.platforms, triggeredPrompts);
-        setCitationResults({ records, summary: finalRes.summary, partial: false });
-      }
+      // Final update — ensure UI shows complete data
+      if (Object.keys(mergedPlatforms).length > 0) {
+        const records = buildCitationRecords(mergedPlatforms, triggeredPrompts);
+        const allRedditUrls = [...new Set(Object.values(mergedPlatforms)
+          .filter(p => p.status === 'ready')
+          .flatMap(p => p.redditUrls || []))];
+        const summary = { totalRedditUrlsFound: allRedditUrls.length, uniqueRedditUrls: allRedditUrls, platformsComplete: completedPlatforms.size, platformsTotal: snapshots.length };
+        setCitationResults({ records, summary, partial: false });
 
-      const totalPosts = finalRes?.summary?.totalRedditUrlsFound || 0;
-      const completedPlatforms = finalRes?.summary?.platformsComplete || snapshots.length;
-      if (totalPosts > 0) {
-        toast({
-          title: "Citation search complete",
-          description: `Found ${totalPosts} Reddit links across ${completedPlatforms} AI platforms`,
-        });
-      } else if (finalRes) {
-        toast({
-          title: "Citation search complete",
-          description: "AI platforms did not surface Reddit threads for these prompts.",
-        });
+        // Save to cache so next run is instant
+        if (companyId && selectedKw?.term && records.length > 0) {
+          apiPost("/api/threadflow/serp-scout", {
+            action: "saveCitationCache",
+            companyId,
+            keyword: selectedKw.term,
+            records,
+            summary,
+          }).catch(() => {});
+        }
+
+        const totalPosts = allRedditUrls.length;
+        if (totalPosts > 0) {
+          toast({ title: "Citations complete", description: `Found ${totalPosts} Reddit links across ${completedPlatforms.size} AI platforms` });
+        } else {
+          toast({ title: "Citations complete", description: "AI platforms did not surface Reddit threads for these prompts." });
+        }
       } else {
-        toast({
-          variant: "destructive",
-          title: "Citation search timed out",
-          description: "Partial results shown. Try again or use fewer prompts.",
-        });
+        toast({ variant: "destructive", title: "Citation search timed out", description: "Try again or use fewer prompts." });
       }
     } catch (e) {
       const errorMsg = e.message ?? "Citation search failed";
@@ -847,9 +647,9 @@ export default function SerpScout() {
 
     setSerpThreadsLoading(true);
     setRedditPostsLoading(true);
+    setRedditPostsError(null);
     setError(null);
-    // Clear stale results so tabs show loading skeletons
-    setSerpResults(prev => ({ ...prev, [kwTerm]: undefined }));
+    // Keep stale results visible while loading — user sees old data instead of blank skeletons
 
     const merge = (newData) =>
       setSerpResults(prev => ({
@@ -857,37 +657,113 @@ export default function SerpScout() {
         [kwTerm]: { ...(prev[kwTerm] || {}), ...newData, success: true },
       }));
 
+    // Background: silently refresh a stale cached call without blocking UI
+    const backgroundRefresh = (action) => {
+      apiPost("/api/threadflow/serp-scout", { action, keyword: kwTerm, domain: kwDomain, companyId, force: true })
+        .then(data => { if (!data.fromCache) merge(data); })
+        .catch(() => {});
+    };
+
+    // Background: fetch post details for posts with 0 upvotes and update metrics in-place
+    const enrichMetrics = (posts, listKey) => {
+      posts
+        .filter(p => !(p.upvotes || p.score) && (p.post_url || p.url))
+        .slice(0, 4) // cap at 4 concurrent requests to avoid overwhelming Render
+        .forEach(post => {
+          const url = post.post_url || post.url;
+          apiPost("/api/threadflow/serp-scout", { action: "fetchPostDetails", url })
+            .then(details => {
+              if (!details) return;
+              const toInt = v => { const n = parseInt(v, 10); return isNaN(n) ? 0 : n; };
+              const upvotes = toInt(details.score ?? details.upvotes ?? details.ups ?? 0);
+              const total_comments = toInt(details.num_comments ?? details.total_comments ?? details.comments ?? 0);
+              if (!upvotes && !total_comments) return;
+              setSerpResults(prev => {
+                const cur = prev[kwTerm];
+                if (!cur?.[listKey]) return prev;
+                return {
+                  ...prev,
+                  [kwTerm]: {
+                    ...cur,
+                    [listKey]: cur[listKey].map(p =>
+                      (p.post_url || p.url) === url ? { ...p, upvotes, total_comments } : p
+                    ),
+                  },
+                };
+              });
+            })
+            .catch(() => {});
+        });
+    };
+
+    // 1. SERP + dork — populates SERP tab immediately (~3s)
     const serpDorkPromise = apiPost("/api/threadflow/serp-scout", {
       action: "serpAndDork",
       keyword: kwTerm,
       domain: kwDomain,
       companyId,
-    }).then(merge)
-      .catch(e => console.error("[SERP Scout] serpAndDork failed:", e.message))
+    }).then(data => {
+      merge(data);
+      if (data.stale) {
+        backgroundRefresh("serpAndDork");
+      } else if (!data.fromCache) {
+        enrichMetrics(data.redditThreads || [], "redditThreads");
+        enrichMetrics(data.dorkRedditLinks || [], "dorkRedditLinks");
+      }
+    })
+      .catch(e => console.error("[Reddit Finder] serpAndDork failed:", e.message))
       .finally(() => setSerpThreadsLoading(false));
 
+    // 2. Reddit top/new — populates Top + New tabs (~5-15s)
     const redditPromise = apiPost("/api/threadflow/serp-scout", {
       action: "redditTopNew",
       keyword: kwTerm,
       domain: kwDomain,
-    }).then(merge)
-      .catch(e => console.error("[SERP Scout] redditTopNew failed:", e.message))
+      companyId,
+    }).then(data => {
+      merge(data);
+      if (data.stale) {
+        backgroundRefresh("redditTopNew");
+      } else if (!data.fromCache) {
+        enrichMetrics(data.topRedditPosts || [], "topRedditPosts");
+        enrichMetrics(data.newRedditPosts || [], "newRedditPosts");
+      }
+    })
+      .catch(e => {
+        console.error("[Reddit Finder] redditTopNew failed:", e.message);
+        setRedditPostsError(e.message || "Failed to load Reddit posts");
+      })
       .finally(() => setRedditPostsLoading(false));
 
-    // Citations run independently
+    // 3. Citations run independently
     handleCitationSearch();
 
-    // Background enrichment (brand/competitor mention detection) — fires after both data calls finish
+    // 4. After both finish: client-side merge Reddit API upvotes into SERP thread posts
+    // SERP threads come from Google search (no engagement data) — enrich from Reddit API results
     Promise.allSettled([serpDorkPromise, redditPromise]).then(() => {
-      apiPost("/api/threadflow/serp-scout", {
-        action: "keywordSerp",
-        keyword: kwTerm,
-        domain: kwDomain,
-        companyId,
-        competitors,
-      }).then(fullRes => {
-        setSerpResults(prev => ({ ...prev, [kwTerm]: fullRes }));
-      }).catch(e => console.warn("[SERP Scout] background enrichment failed:", e.message));
+      setSerpResults(prev => {
+        const cur = prev[kwTerm];
+        if (!cur) return prev;
+        const metricsMap = new Map();
+        [...(cur.topRedditPosts || []), ...(cur.newRedditPosts || [])].forEach(p => {
+          const key = (p.post_url || p.url || "").toLowerCase().replace(/\/$/, "");
+          if (key && (p.upvotes || p.total_comments))
+            metricsMap.set(key, { upvotes: p.upvotes || 0, total_comments: p.total_comments || 0 });
+        });
+        const enrich = posts => posts.map(p => {
+          const key = (p.post_url || p.url || "").toLowerCase().replace(/\/$/, "");
+          const m = metricsMap.get(key);
+          return m ? { ...p, ...m } : p;
+        });
+        return {
+          ...prev,
+          [kwTerm]: {
+            ...cur,
+            redditThreads: enrich(cur.redditThreads || []),
+            dorkRedditLinks: enrich(cur.dorkRedditLinks || []),
+          },
+        };
+      });
     });
   }
 
@@ -1620,7 +1496,6 @@ export default function SerpScout() {
           <AnalysisPanel
             companyName={companyName}
             competitors={competitors}
-            citationSummary={citationSummary}
             keywords={keywords}
             selectedKwIds={selectedKwIds}
             selectedKwIdx={selectedKwIdx}
@@ -1630,15 +1505,9 @@ export default function SerpScout() {
             serpLoading={serpLoading}
             serpThreadsLoading={serpThreadsLoading}
             redditPostsLoading={redditPostsLoading}
+            redditPostsError={redditPostsError}
             citationLoading={citationLoading}
             citationResults={citationResults}
-            citationPrompts={citationPrompts}
-            manualCitationInput={manualCitationInput}
-            setManualCitationInput={setManualCitationInput}
-            manualCitationPrompts={manualCitationPrompts}
-            setManualCitationPrompts={setManualCitationPrompts}
-            handleSerpAnalysis={handleSerpAnalysis}
-            handleCitationSearch={handleCitationSearch}
             handleRunAnalysis={handleRunAnalysis}
             analysisLoading={serpThreadsLoading || redditPostsLoading || citationLoading}
             scannedPostDetails={scannedPostDetails}
