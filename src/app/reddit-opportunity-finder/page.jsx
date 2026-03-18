@@ -71,6 +71,24 @@ export default function SerpScout() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // ── Domain analysis rotating messages ────────────────────────────────────
+  const DOMAIN_MESSAGES = [
+    'Analyzing domain…',
+    'Fetching company context…',
+    'Generating keywords…',
+    'Building citation prompts…',
+    'Mapping keyword intent…',
+    'Scoring opportunity gaps…',
+    'Ranking search terms…',
+    'Finalizing results…',
+  ];
+  const [domainMsgIdx, setDomainMsgIdx] = useState(0);
+  useEffect(() => {
+    if (!loading) { setDomainMsgIdx(0); return; }
+    const tid = setInterval(() => setDomainMsgIdx(i => Math.min(i + 1, DOMAIN_MESSAGES.length - 1)), 1800);
+    return () => clearInterval(tid);
+  }, [loading]);
+
   // Raw result from domain POST
   const [rawResult, setRawResult] = useState(null);
   const [keywords, setKeywords] = useState([]);
@@ -157,9 +175,13 @@ export default function SerpScout() {
 
   // ── Effects ──────────────────────────────────────────────────────────────
 
-  // Warmup the Render Reddit API on mount so it's ready by the time the user runs analysis
+  // Warmup the Render Reddit API on mount — awaited silently so the backend is
+  // genuinely warm before analysis starts (the /warmup route waits up to 45s).
+  const [redditWarm, setRedditWarm] = useState(false);
   useEffect(() => {
-    fetch("/api/threadflow/warmup").catch(() => {});
+    fetch("/api/threadflow/warmup")
+      .then(() => setRedditWarm(true))
+      .catch(() => setRedditWarm(true)); // even on error, allow analysis to proceed
   }, []);
 
   // Update recent domains list when a new domain is analyzed
@@ -193,6 +215,36 @@ export default function SerpScout() {
       console.log('[SERP Scout] useEffect synced context:', contextData);
     }
   }, [rawResult?.companyContext?.approvedContext, rawResult?.companyContext?.llmContext]);
+
+  // Auto-expand prompts: after keywords load with only 3 initial prompts, silently generate
+  // the remaining prompts per keyword in the background so citation search has more to work with.
+  useEffect(() => {
+    if (!keywords.length) return;
+    const needsPrompts = keywords
+      .map((kw, i) => ({ kw, i }))
+      .filter(({ kw }) => (kw.prompts?.length ?? 0) < 5);
+    if (!needsPrompts.length) return;
+
+    needsPrompts.forEach(({ kw, i }) => {
+      apiPost("/api/threadflow/serp-scout", {
+        action: "suggestPrompts",
+        keyword: kw.term,
+        intent: kw.intent,
+        companyName,
+        domain: domain.trim(),
+      }).then(res => {
+        const newPrompts = res.prompts ?? [];
+        if (!newPrompts.length) return;
+        setKeywords(prev => {
+          const updated = [...prev];
+          const existing = updated[i]?.prompts ?? [];
+          const merged = [...new Set([...existing, ...newPrompts])].slice(0, 5);
+          updated[i] = { ...updated[i], prompts: merged };
+          return updated;
+        });
+      }).catch(() => {});
+    });
+  }, [keywords.length > 0 ? keywords[0]?.term : null]); // only re-run when keyword set changes
 
   // Auto-scan all posts for full content mentions when SERP results load (manual citation search)
   useEffect(() => {
@@ -926,7 +978,7 @@ export default function SerpScout() {
                 style={{ background: '#5f64ff', boxShadow: '0 0 14px rgba(95,100,255,0.3)' }}
               >
                 {loading
-                  ? <><Spinner className="h-4 w-4 mr-2" />Analyzing…</>
+                  ? <><Spinner className="h-4 w-4 mr-2" /><span className="transition-all duration-300">{DOMAIN_MESSAGES[domainMsgIdx]}</span></>
                   : <><Sparkles className="h-4 w-4 mr-2" />Analyze</>
                 }
               </Button>
@@ -1513,7 +1565,6 @@ export default function SerpScout() {
             setSelectedKwIdx={setSelectedKwIdx}
             serpResults={serpResults}
             kwSerpData={kwSerpData}
-            serpLoading={serpLoading}
             serpThreadsLoading={serpThreadsLoading}
             redditPostsLoading={redditPostsLoading}
             redditPostsError={redditPostsError}
@@ -1523,6 +1574,7 @@ export default function SerpScout() {
             handleRunAnalysis={handleRunAnalysis}
             analysisLoading={serpThreadsLoading || redditPostsLoading || citationLoading}
             scannedPostDetails={scannedPostDetails}
+            redditWarm={redditWarm}
           />
         </TabsContent>
 

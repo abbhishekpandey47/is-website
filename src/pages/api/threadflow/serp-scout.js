@@ -26,7 +26,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 )
 
-const CONTEXT_PAGE_PATHS = ['', '/product', '/features', '/pricing', '/about']
+const CONTEXT_PAGE_PATHS = ['']
 const MAX_PAGE_CHARS = 3000
 const MAX_PAGES = 4
 const MIN_READABILITY_CHARS = 400
@@ -97,6 +97,8 @@ const DATAFORSEO_POLL_INTERVAL = 3000
 const DATAFORSEO_POLL_TIMEOUT = 30_000
 const REDDIT_API_BASE = 'https://reddit-comment-gen.onrender.com'
 const POST_DETAILS_ENDPOINT = `${REDDIT_API_BASE}/fetch_post_details`
+const REDDIT_PUBLIC_BASE = 'https://www.reddit.com'
+const REDDIT_USER_AGENT = 'infrasity-rof/1.0'
 const POST_DETAILS_TIMEOUT_MS = Number(process.env.SERP_SCOUT_POST_DETAILS_TIMEOUT_MS) || 25000
 const CITATION_SEARCH_TIMEOUT_MS = 120_000 // 120 seconds for citation searches (web search can be slow)
 const POST_DETAILS_CONCURRENCY = Number(process.env.SERP_SCOUT_POST_DETAILS_CONCURRENCY) || 4
@@ -113,8 +115,8 @@ async function fetchRedditTopNewPosts(keyword) {
   try {
     const response = await fetchWithTimeout(
       `${REDDIT_API_BASE}/find_top_posts_comments`,
-      { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ keyword }) },
-      30000
+      { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ keyword, num_posts: 10 }) },
+      50000
     )
 
     if (!response.ok) {
@@ -133,6 +135,47 @@ async function fetchRedditTopNewPosts(keyword) {
     console.error('[serp-scout] Failed to fetch Reddit posts', { keyword, error: error.message })
     return { top_posts: [], new_posts: [], top_comments: [], new_comments: [] }
   }
+}
+
+/**
+ * Fetch Reddit posts directly from Reddit's public JSON API.
+ * No auth required, no cold start — returns in <2s.
+ * Returns same shape as fetchRedditTopNewPosts for drop-in use.
+ */
+async function fetchRedditPublicAPI(keyword) {
+  const q = encodeURIComponent(keyword)
+  const headers = { 'User-Agent': REDDIT_USER_AGENT }
+
+  const [topRes, newRes] = await Promise.allSettled([
+    fetchWithTimeout(`${REDDIT_PUBLIC_BASE}/search.json?q=${q}&sort=top&type=link&t=year&limit=25`, { headers }, 10000),
+    fetchWithTimeout(`${REDDIT_PUBLIC_BASE}/search.json?q=${q}&sort=new&type=link&limit=25`, { headers }, 10000),
+  ])
+
+  const parseChildren = (res) => {
+    if (res.status !== 'fulfilled' || !res.value.ok) return []
+    return res.value.json().then(body =>
+      (body?.data?.children || []).map(c => {
+        const d = c.data || {}
+        return {
+          post_url:      `${REDDIT_PUBLIC_BASE}${d.permalink}`,
+          url:           `${REDDIT_PUBLIC_BASE}${d.permalink}`,
+          post_title:    d.title || '',
+          title:         d.title || '',
+          subreddit:     d.subreddit || '',
+          upvotes:       d.score || 0,
+          score:         d.score || 0,
+          total_comments: d.num_comments || 0,
+          num_comments:   d.num_comments || 0,
+          post_content:  d.selftext || '',
+          created_utc:   d.created_utc || 0,
+          post_age_hours: d.created_utc ? Math.round((Date.now() / 1000 - d.created_utc) / 3600) : 0,
+        }
+      })
+    ).catch(() => [])
+  }
+
+  const [top_posts, new_posts] = await Promise.all([parseChildren(topRes), parseChildren(newRes)])
+  return { top_posts, new_posts, top_comments: [], new_comments: [] }
 }
 
 /**
@@ -979,63 +1022,91 @@ async function callOpenRouter(messages, temperature = 0.65, max_tokens = 1024) {
   throw lastError
 }
 
-async function promptKeywords(payload) {
-  const companyName = payload.companyName || payload.domain
-  const prompt = `You are an SEO and LLM visibility expert. Analyze the landing page content and generate EXACTLY 20 high-impact keywords.
+/**
+ * Attempt to close off a truncated JSON string so it can be parsed.
+ * Works by counting unmatched brackets/braces and appending the closers.
+ */
+function repairTruncatedJson(raw) {
+  if (!raw) return null
+  // Trim to last complete object/array item boundary
+  let s = raw.trim()
+  // Remove trailing commas before we try to close (common truncation artifact)
+  s = s.replace(/,\s*$/, '')
 
-For each keyword, provide:
-1. term: the keyword phrase
-2. intent: search intent (informational/commercial/navigational)
-3. why: brief rationale (max 20 words)
-4. prompts: array of EXACTLY ${LLM_PROMPTS} ranking/comparison prompts (Top N / Best / Alternatives / Compare / Rank) that would naturally lead LLMs to list multiple solutions and include ${companyName} in citations
-
-CRITICAL: Prompts MUST be ranking/comparison oriented. DO NOT generate generic Q&A or company-specific questions.
-
-GOOD prompt patterns (list-style, ranking/comparison):
-- "Top 10 ${companyName ? '[category]' : ''} platforms for ${payload.companyName ? 'enterprises' : 'professional teams'}"
-- "Best ${companyName ? '[category]' : ''} tools for startups in 2026"
-- "Compare leading ${companyName ? '[category]' : ''} solutions: features and pricing"
-- "Alternatives to leading ${companyName ? '[category]' : ''} platforms"
-- "Rank ${companyName ? '[category]' : ''} providers by integration depth"
-
-BAD prompt patterns (do NOT generate):
-- "What is [keyword]?" ❌
-- "How to do [keyword]?" ❌
-- "Guide to [keyword]" ❌
-- "Is ${companyName} the best [keyword]?" ❌
-- "Does ${companyName} support [keyword]?" ❌
-
-The ranking prompts should be broad enough that when LLMs answer them, they naturally include ${companyName} in their rankings and recommendations.
-
-Return JSON with this exact structure:
-{
-  "explain": "summary of the company's primary market position",
-  "keywords": [
-    {
-      "term": "keyword phrase",
-      "intent": "informational",
-      "why": "rationale",
-      "prompts": ["general ranking prompt 1", "general ranking prompt 2", "general ranking prompt 3", "general ranking prompt 4", "general ranking prompt 5"]
+  const opens = []
+  let inStr = false
+  let esc = false
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i]
+    if (esc) { esc = false; continue }
+    if (inStr) {
+      if (c === '\\') esc = true
+      else if (c === '"') inStr = false
+      continue
     }
-  ]
+    if (c === '"') { inStr = true; continue }
+    if (c === '{' || c === '[') opens.push(c === '{' ? '}' : ']')
+    else if ((c === '}' || c === ']') && opens.length) opens.pop()
+  }
+
+  // Append missing closers in reverse
+  const repaired = s + opens.reverse().join('')
+  try { JSON.parse(repaired); return repaired } catch { return null }
 }
 
-Page content: ${payload.pageContent.slice(0, 10000)}`
+// Initial prompts per keyword — kept small so the LLM call is fast (<10s).
+// Background auto-expansion (page.jsx useEffect) silently fills up to 5 prompts per keyword.
+const INITIAL_PROMPTS_PER_KW = 2
+const INITIAL_KW_COUNT = 10
+
+async function promptKeywords(payload) {
+  const companyName = payload.companyName || payload.domain
+  // Tight, minimal prompt — fewer input tokens → faster response
+  const prompt = `You are an SEO and LLM visibility expert. Generate exactly ${INITIAL_KW_COUNT} high-impact keywords for the company below.
+
+For each keyword return:
+- term: keyword phrase
+- intent: informational | commercial | navigational
+- why: rationale in max 15 words
+- prompts: exactly ${INITIAL_PROMPTS_PER_KW} broad ranking/comparison prompts (e.g. "Top 10 [category] platforms for enterprises", "Best [category] tools for startups 2026") that would lead LLMs to list multiple solutions and naturally include ${companyName}.
+
+Return ONLY this JSON (no prose):
+{"explain":"one-sentence market position","keywords":[{"term":"...","intent":"...","why":"...","prompts":["...","..."]}]}
+
+Page content: ${payload.pageContent.slice(0, 5000)}`
+
   const messages = [
-    { role: 'system', content: `You are an SEO and LLM visibility strategist. Generate exactly 20 keywords with ${LLM_PROMPTS} prompts each.` },
+    { role: 'system', content: `SEO strategist. Return only JSON. Generate exactly ${INITIAL_KW_COUNT} keywords with ${INITIAL_PROMPTS_PER_KW} ranking prompts each.` },
     { role: 'user', content: prompt }
   ]
-  const raw = await callOpenRouter(messages, KEYWORD_TEMPERATURE, 6000)
+  const raw = await callOpenRouter(messages, KEYWORD_TEMPERATURE, 3500)
+
+  function parseKeywords(text) {
+    // Try normal extraction first
+    try { return JSON.parse(extractJsonFromText(text)) } catch (_) {}
+    // Try repairing truncated JSON
+    try {
+      const extracted = extractJsonFromText(text)
+      const repaired = repairTruncatedJson(extracted)
+      if (repaired) return JSON.parse(repaired)
+    } catch (_) {}
+    // Last resort: repair the raw text itself
+    const repaired = repairTruncatedJson(text)
+    if (repaired) return JSON.parse(repaired)
+    throw new Error('Unable to parse JSON from OpenRouter keyword response')
+  }
+
   try {
-    const json = JSON.parse(extractJsonFromText(raw))
-    // Ensure exactly 20 keywords
+    const json = parseKeywords(raw)
+    // Normalise: keep up to 20 complete keywords (truncation may give us fewer — that's fine)
     if (json.keywords && Array.isArray(json.keywords)) {
-      json.keywords = json.keywords.slice(0, 20)
-      // Ensure each keyword has exactly LLM_PROMPTS prompts
-      json.keywords = json.keywords.map(kw => ({
-        ...kw,
-        prompts: Array.isArray(kw.prompts) ? kw.prompts.slice(0, LLM_PROMPTS) : []
-      }))
+      json.keywords = json.keywords
+        .filter(kw => kw && kw.term)  // drop any half-written last entry
+        .slice(0, INITIAL_KW_COUNT)
+        .map(kw => ({
+          ...kw,
+          prompts: Array.isArray(kw.prompts) ? kw.prompts.filter(Boolean).slice(0, INITIAL_PROMPTS_PER_KW) : []
+        }))
     }
     return json
   } catch (error) {
@@ -1173,20 +1244,27 @@ async function generateCompanyContext(domain, companyId, companyName, forceConte
     { role: 'system', content: systemMessage },
     { role: 'user', content: userPrompt }
   ]
+  // Single attempt — if parse fails, use a minimal fallback so we never block the response
   let sanitized = null
-  let attempts = 0
-  while (attempts < 3 && !sanitized) {
-    attempts += 1
+  try {
     const raw = await callOpenRouter(messages, CONTEXT_TEMPERATURE, CONTEXT_MAX_TOKENS)
     try {
       const parsed = JSON.parse(extractJsonFromText(raw))
       sanitized = sanitizeContextPayload(parsed)
-    } catch (error) {
-      console.warn('[serp-scout] context parse failed', error.message)
+    } catch (parseError) {
+      console.warn('[serp-scout] context parse failed, using fallback', parseError.message)
     }
+  } catch (llmError) {
+    console.warn('[serp-scout] context LLM call failed, using fallback', llmError.message)
   }
+  // Fallback: minimal context derived from domain name so we don't hard-fail
   if (!sanitized) {
-    throw new Error('Unable to generate a neutral company context. Try again with a reachable domain.')
+    sanitized = {
+      companySummary: `${companyName || domain} is a technology company.`,
+      coreCapabilities: [],
+      problemSpaces: [],
+      constraints: defaultConstraints,
+    }
   }
   // When forcing regeneration, merge new summary fields over existing approvedContext so
   // saved keywords/competitors/serpAnalysis are preserved alongside the fresh overview
@@ -1542,6 +1620,9 @@ async function testCitations(prompts, domain, competitors = []) {
     records
   }
 }
+
+// Allow up to 60s on Vercel Pro — prevents function kill before Reddit/LLM calls complete
+export const config = { maxDuration: 60 }
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -2012,18 +2093,10 @@ Return this exact format - ONLY JSON, nothing else:
         }
       }
 
+      // Use custom Render Reddit API — filtered, accurate results
       const redditData = await fetchRedditTopNewPosts(keyword)
-      // Debug: log raw field names from the API so we can verify normalization
-      if (redditData.top_posts?.length > 0) {
-        const sample = redditData.top_posts[0]
-        console.log('[redditTopNew] raw post fields:', Object.keys(sample).join(', '))
-        console.log('[redditTopNew] raw post sample:', JSON.stringify({
-          upvotes: sample.upvotes, score: sample.score, ups: sample.ups,
-          vote_count: sample.vote_count, likes: sample.likes,
-          num_comments: sample.num_comments, total_comments: sample.total_comments,
-          comment_count: sample.comment_count,
-        }))
-      }
+      console.log('[redditTopNew] fetched', { top: redditData.top_posts.length, new: redditData.new_posts.length, keyword })
+
       const topRedditPosts = (redditData.top_posts || []).slice(0, 10).map(normalize)
       const newRedditPosts = (redditData.new_posts || []).slice(0, 10).map(normalize)
 

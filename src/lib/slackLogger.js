@@ -77,6 +77,40 @@ export async function logSerpAction({ user, action, domain, keyword, durationMs,
 }
 
 /**
+ * Log a user signup or login event to Slack.
+ *
+ * @param {{ type: 'signup'|'login', email: string, uid: string, method: string }} opts
+ */
+export async function logAuthEvent({ type, email, uid, method = 'unknown' }) {
+  const emoji = type === 'signup' ? '🎉' : '👋'
+  const label = type === 'signup' ? 'NEW SIGNUP' : 'LOGIN'
+  const lines = [
+    `${emoji} *Reddit Opportunity Finder · ${label}*`,
+    `• *Email:* ${email || 'unknown'}`,
+    `• *UID:* \`${uid || '?'}\``,
+    `• *Method:* ${method}`,
+    `• *Time:* ${utcNow()}`,
+  ].join('\n')
+  await sendSlack({ text: lines })
+}
+
+/**
+ * Log an API error (4xx/5xx) to Slack.
+ */
+export async function logApiError({ action, domain, keyword, status, error, user }) {
+  const lines = [
+    `🔴 *Reddit Opportunity Finder · API ERROR ${status || ''}*`,
+    `• *User:* ${user?.email || 'unknown'} \`${user?.uid || '?'}\``,
+    `• *Action:* \`${action || '—'}\``,
+    domain ? `• *Domain:* ${domain}` : null,
+    keyword ? `• *Keyword:* ${keyword}` : null,
+    `• *Error:* \`${String(error).slice(0, 300)}\``,
+    `• *Time:* ${utcNow()}`,
+  ].filter(Boolean).join('\n')
+  await sendSlack({ text: lines })
+}
+
+/**
  * Convenience: wrap an async action handler with automatic timing + Slack logging.
  *
  * Usage:
