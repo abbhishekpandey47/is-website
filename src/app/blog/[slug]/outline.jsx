@@ -193,8 +193,7 @@ const Outline = ({ content }) => {
     <nav
       id="outlineComponent"
       aria-label="Outline Navigation"
-      className={`w-[18rem] max-xl:w-[13rem] min-[2173px]:w-[22rem] min-[2173px]:text-lg min-[2500px]:w-[30rem] min-[2500px]:text-xl max-lg:w-[20rem] flex flex-col quicksand-light text-sm my-8 ${sticky && "sticky"
-        } left-0 top-[82px]`}
+      className="w-full flex flex-col quicksand-light text-sm my-8"
     >
       <div className="flex justify-start text-lg py-4 pb-2 mb-0 quicksand-semibold">
         <p className="text-left text-[#3c61e2]"># Overview</p>

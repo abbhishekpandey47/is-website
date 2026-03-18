@@ -58,9 +58,7 @@ const Featured = () => {
       id="outlineComponent"
       ref={featuredRef}
       aria-label="Outline Navigation"
-      className={`w-[15rem] max-xl:w-[13rem] min-[2173px]:w-[22rem] min-[2173px]:text-lg min-[2500px]:w-[22rem] min-[2500px]:text-xl max-lg:w-[20rem] flex flex-col quicksand-light text-sm lg:mt-44 ${
-        isSticky && "sticky"
-      } left-0 top-[200px] backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)] rounded-xl`}
+      className="w-full flex flex-col quicksand-light text-sm lg:mt-44 backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)] rounded-xl"
     >
       {/* Featured Section */}
       <div className="flex flex-col max-h-[380px] p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-full">
