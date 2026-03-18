@@ -177,6 +177,10 @@ const toolsTab = [
   {
     hrefLink: "/tools/ai-script-generator",
     menuName: "Script Generator",
+  },
+  {
+    hrefLink: "/tools/geo-audit",
+    menuName: "GEO Audit",
   }
 ];
 
