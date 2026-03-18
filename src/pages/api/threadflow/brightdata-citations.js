@@ -14,18 +14,19 @@
 const BRIGHTDATA_API_KEY = process.env.BRIGHTDATA_API_KEY || ''
 const BRIGHTDATA_BASE    = 'https://api.brightdata.com/datasets/v3'
 
-// Each AI platform uses its own BrightData dataset with its own input schema.
-// extraFields are merged into each input object — only include fields the dataset accepts.
+// Each AI platform uses its own BrightData dataset with different allowed input fields.
+// ChatGPT accepts: web_search, country, additional_prompt
+// Perplexity/Gemini/Google AI reject web_search and additional_prompt — only prompt + url allowed
 const AI_PLATFORMS = [
-  { name: 'ChatGPT',    url: 'https://chatgpt.com/',       datasetId: 'gd_m7aof0k82r803d5bjm', extraFields: { web_search: true, country: '' } },
+  { name: 'ChatGPT',    url: 'https://chatgpt.com/',       datasetId: 'gd_m7aof0k82r803d5bjm', extraFields: { additional_prompt: '', web_search: true, country: 'US' } },
   { name: 'Perplexity', url: 'https://www.perplexity.ai/', datasetId: 'gd_m7dhdot1vw9a7gc1n', extraFields: { country: 'US' } },
-  { name: 'Gemini',     url: 'https://gemini.google.com/', datasetId: 'gd_mbz66arm2mf9cu856y', extraFields: {} },
-  { name: 'Google AI',  url: 'https://google.com/aimode',  datasetId: 'gd_mcswdt6z2elth3zqr2', extraFields: { country: '' } },
+  { name: 'Gemini',     url: 'https://gemini.google.com/', datasetId: 'gd_mbz66arm2mf9cu856y', extraFields: { country: 'US' } },
+  { name: 'Google AI',  url: 'https://google.com/aimode',  datasetId: 'gd_mcswdt6z2elth3zqr2', extraFields: { country: 'US' } },
 ]
 
 const SNAPSHOT_URL = (id) => `${BRIGHTDATA_BASE}/snapshot/${id}?format=json`
-const TRIGGER_URL  = (datasetId) =>
-  `${BRIGHTDATA_BASE}/trigger?dataset_id=${datasetId}&include_errors=true`
+const SCRAPE_URL   = (datasetId) =>
+  `${BRIGHTDATA_BASE}/scrape?dataset_id=${datasetId}&notify=false&include_errors=true`
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -66,6 +67,8 @@ function getResponseText(result) {
     result?.response             ||
     result?.output               ||
     result?.content              ||
+    result?.text                 ||
+    result?.result               ||
     (typeof result?.data === 'string' ? result.data : '') ||
     ''
   )
@@ -75,39 +78,66 @@ function getResponseText(result) {
  * Parse raw BrightData result items for a single platform into per-prompt results.
  */
 function parsePlatformResults(resultItems, selectedPrompts, companyName, wrappedToOriginal) {
+  // Pre-populate all expected prompts
   const byPrompt = {}
+  selectedPrompts.forEach(p => {
+    byPrompt[p] = { prompt: p, mentionsCompany: false, redditUrls: [], responsePreview: '', error: null }
+  })
 
-  resultItems.forEach(result => {
+  resultItems.forEach((result, idx) => {
     if (!result || typeof result !== 'object') return
-    const rawPrompt = result?.prompt || result?.input?.prompt || ''
+
+    // Log first item's schema so we know what BrightData actually returns
+    if (idx === 0) {
+      const keys = Object.keys(result)
+      console.log('[brightdata-citations] item keys:', keys)
+      console.log('[brightdata-citations] item sample:', JSON.stringify(result).slice(0, 800))
+    }
+
+    // Try multiple fields where BrightData might echo back the prompt
+    const rawPrompt = result?.prompt || result?.input?.prompt || result?.query || result?.search_query || ''
     const prompt = wrappedToOriginal[rawPrompt] || rawPrompt
 
     const responseText = getResponseText(result)
-    const urlsFromText = extractRedditUrls(responseText)
+    const urlsFromText      = extractRedditUrls(responseText)
     const urlsFromCitations = extractCitationRedditUrls(result?.citations)
-    const urlsFromRefs = extractCitationRedditUrls(result?.references)
-    const urlsFromSources = extractCitationRedditUrls(result?.sources)   // Perplexity
-    const redditUrls = [...new Set([...urlsFromText, ...urlsFromCitations, ...urlsFromRefs, ...urlsFromSources])]
+    const urlsFromRefs      = extractCitationRedditUrls(result?.references)
+    const urlsFromSources   = extractCitationRedditUrls(result?.sources)         // Perplexity
+    const urlsFromWebRes    = extractCitationRedditUrls(result?.web_results)     // some platforms
+    const urlsFromLinks     = extractCitationRedditUrls(result?.links)
+    const redditUrls = [...new Set([
+      ...urlsFromText, ...urlsFromCitations, ...urlsFromRefs,
+      ...urlsFromSources, ...urlsFromWebRes, ...urlsFromLinks,
+    ])]
+
+    if (redditUrls.length) {
+      console.log(`[brightdata-citations] item[${idx}] prompt="${prompt}" reddit urls:`, redditUrls)
+    }
 
     const mentionsCompany = companyName
       ? responseText.toLowerCase().includes(companyName.toLowerCase())
       : false
 
-    if (prompt) {
-      if (!byPrompt[prompt]) {
-        byPrompt[prompt] = { prompt, mentionsCompany, redditUrls, responsePreview: responseText.slice(0, 400), error: result?.error || null }
-      } else {
-        // Merge duplicate prompt entries (shouldn't happen but guard it)
-        byPrompt[prompt].redditUrls = [...new Set([...byPrompt[prompt].redditUrls, ...redditUrls])]
-        if (mentionsCompany) byPrompt[prompt].mentionsCompany = true
-      }
-    }
-  })
+    // Match to an expected prompt; if not found and only one prompt, attribute to it;
+    // otherwise distribute to all prompts so we never silently discard results.
+    const targetPrompt = byPrompt[prompt]
+      ? prompt
+      : selectedPrompts.length === 1
+        ? selectedPrompts[0]
+        : null
 
-  // Ensure every expected prompt has an entry
-  selectedPrompts.forEach(p => {
-    if (!byPrompt[p]) {
-      byPrompt[p] = { prompt: p, mentionsCompany: false, redditUrls: [], responsePreview: '', error: null }
+    if (targetPrompt) {
+      byPrompt[targetPrompt].redditUrls = [...new Set([...byPrompt[targetPrompt].redditUrls, ...redditUrls])]
+      if (mentionsCompany) byPrompt[targetPrompt].mentionsCompany = true
+      if (!byPrompt[targetPrompt].responsePreview && responseText) {
+        byPrompt[targetPrompt].responsePreview = responseText.slice(0, 400)
+      }
+      if (result?.error) byPrompt[targetPrompt].error = result.error
+    } else if (redditUrls.length > 0) {
+      // Can't identify prompt — distribute URLs across all expected prompts
+      selectedPrompts.forEach(p => {
+        byPrompt[p].redditUrls = [...new Set([...byPrompt[p].redditUrls, ...redditUrls])]
+      })
     }
   })
 
@@ -120,9 +150,6 @@ function parsePlatformResults(resultItems, selectedPrompts, companyName, wrapped
  */
 async function triggerPlatform(platform, selectedPrompts, wrappedToOriginal) {
   const inputs = selectedPrompts.map(prompt => {
-    // Send the prompt naturally — no dork, no forced Reddit phrasing.
-    // web_search: true lets the AI find the best real sources including Reddit.
-    // We then extract whatever Reddit URLs the AI organically cites.
     wrappedToOriginal[prompt] = prompt
     return {
       url: platform.url,
@@ -131,22 +158,25 @@ async function triggerPlatform(platform, selectedPrompts, wrappedToOriginal) {
     }
   })
 
-  const resp = await fetch(TRIGGER_URL(platform.datasetId), {
+  // /scrape endpoint expects a raw array body (unlike /trigger which wraps in {input:[...]})
+  const resp = await fetch(SCRAPE_URL(platform.datasetId), {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${BRIGHTDATA_API_KEY}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ input: inputs }),
+    body: JSON.stringify(inputs),
   })
 
   if (!resp.ok) {
     const text = await resp.text()
-    throw new Error(`BrightData trigger error for ${platform.name} (${resp.status}): ${text}`)
+    throw new Error(`BrightData scrape error for ${platform.name} (${resp.status}): ${text}`)
   }
 
-  const { snapshot_id } = await resp.json()
-  if (!snapshot_id) throw new Error(`No snapshot_id returned for ${platform.name}`)
+  const triggerBody = await resp.json()
+  console.log(`[brightdata-citations] ${platform.name} trigger response:`, JSON.stringify(triggerBody).slice(0, 300))
+  const snapshot_id = triggerBody?.snapshot_id
+  if (!snapshot_id) throw new Error(`No snapshot_id returned for ${platform.name} — got: ${JSON.stringify(triggerBody).slice(0, 200)}`)
   return snapshot_id
 }
 
@@ -168,6 +198,8 @@ async function pollSnapshot(snapshot_id) {
     if (resp.status === 200) {
       const rawData = await resp.json()
       const items = Array.isArray(rawData) ? rawData : []
+      console.log(`[brightdata-citations] snapshot ${snapshot_id} ready — ${items.length} items`)
+      if (items.length) console.log('[brightdata-citations] first item keys:', Object.keys(items[0]))
       return { status: 'ready', items }
     }
 

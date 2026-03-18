@@ -10,12 +10,21 @@ import { FireBaseErrors } from "../errors/firebase-errors";
 import { auth } from "../lib/firebaseClient";
 import { saveUser, saveUser2 } from "./firebase-db-service";
 
+function notifyAuth(type, user, method) {
+  fetch('/api/auth-notify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type, email: user.email, uid: user.uid, method }),
+  }).catch(() => {})
+}
+
 const signinWithGoogle = async () => {
   try {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider, browserPopupRedirectResolver);
     const user = result.user;
     const res = await saveUser(user);
+    notifyAuth('login', user, 'google');
     const token = await user.getIdToken();
     const refreshToken = await user.refreshToken;
     localStorage.setItem('token', token);
@@ -60,6 +69,7 @@ const signinWithEmail = async (email, password) => {
     const result = await signInWithEmailAndPassword(auth, email, password);
     const user = result.user;
     const res = await saveUser2(user);
+    notifyAuth('login', user, 'email');
     const token = await user.getIdToken();
     const refreshToken = await user.refreshToken;
     localStorage.setItem('token', token);
@@ -104,6 +114,7 @@ const signUpWithEmail = async (email, password, firstName, lastName) => {
     const result = await createUserWithEmailAndPassword(auth, email, password);
     const user = result.user;
     const res = await saveUser2(user, firstName, lastName);
+    notifyAuth('signup', user, 'email');
     const token = await user.getIdToken();
     const refreshToken = await user.refreshToken;
     localStorage.setItem('token', token);
