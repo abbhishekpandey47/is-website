@@ -81,6 +81,30 @@ export async function getCompanyContext(companyId) {
   return mapRow(row)
 }
 
+/**
+ * Find a company context by domain + firebase user ID stored in metadata.
+ * Returns null if not found or Supabase not configured.
+ */
+export async function getContextByDomainAndUser(domain, userId) {
+  if (!domain || !userId || !supabase) return null
+  try {
+    const { data, error } = await supabase
+      .from(TABLE_NAME)
+      .select('*')
+      .eq('domain', domain)
+      .eq('metadata->>firebase_user_id', userId)
+      .maybeSingle()
+    if (error) {
+      if (isMissingTableError(error)) return null
+      throw error
+    }
+    return mapRow(data)
+  } catch (err) {
+    console.error('[companyContext] getContextByDomainAndUser error:', err.message)
+    return null
+  }
+}
+
 export async function saveCompanyContext(companyId, fields = {}) {
   if (!companyId) return null
   if (!supabase) {
