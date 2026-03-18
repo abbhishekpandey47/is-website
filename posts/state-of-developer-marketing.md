@@ -93,7 +93,7 @@ If they are not written to answer the specific questions a developer has at each
 
 Documentation now needs to be written for two audiences simultaneously: the developer reading it, and the AI system that will surface it in an answer.
 
-**Example**: One DevTool startup using [Reo.Dev](https://www.reo.dev/) reported: "We now know who's looking at our documentation or who's reviewing our GitHub. That's a much easier and frictionless path to building a pipeline versus your traditional approach on outbound.",  [achieving a 30% month-over-month increase in signups](https://www.reo.dev/solutions/marketing) by combining documentation quality with intent signal tracking
+**Example**: One DevTool startup using Reo.Dev reported: "We now know who's looking at our documentation or who's reviewing our GitHub. That's a much easier and frictionless path to building a pipeline versus your traditional approach on outbound.",  [achieving a 30% month-over-month increase in signups](https://www.reo.dev/solutions/marketing) by combining documentation quality with intent signal tracking
 
 **What this means for your team:** Audit every doc page for AI crawlability (no JS-gating, clear H2 structure, FAQ blocks, timestamped data). Treat documentation updates as content marketing sprints, not maintenance tasks. Every new integration guide is a new AI citation candidate.
 
@@ -244,7 +244,7 @@ Most teams are optimizing for Google traffic while the actual discovery conversa
 
 As discovery fragments across AI search, communities, documentation, and GitHub, the signals that matter for your DevTool are changing too. You can no longer rely on traffic alone. What matters more is how developers are actually finding you in open-source ecosystems, what technologies your users already run, and how engineers engage with your docs and product pages. These signals give you a clearer view of how your tool is being discovered, trusted, and shortlisted in practice.
 
-Layer on top of that, which startups are showing early signs of evaluation, how their engineering teams are structured, and where hiring is trending, and you start to see real buying motion. This is the kind of developer intent platforms like Reo.Dev is built to observe and aggregate, helping you understand what’s really driving adoption beyond surface-level metrics.
+Layer on top of that, which startups are showing early signs of evaluation, how their engineering teams are structured, and where hiring is trending, and you start to see real buying motion. This is the kind of [developer intent platforms](https://www.reo.dev/) like Reo.Dev is built to observe and aggregate, helping you understand what’s really driving adoption beyond surface-level metrics.
 
 The structural shift is already underway. Here's where it goes next:
 
