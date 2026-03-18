@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+
 // Image assets from Figma
 const imgBackground = "https://www.figma.com/api/mcp/asset/461a7d0e-4bc9-4163-93d7-33ada83da67b";
 const imgGrid       = "https://www.figma.com/api/mcp/asset/af990093-bd75-4801-8967-6048ef181a5f";
@@ -14,88 +16,74 @@ const imgWebConv    = "https://www.figma.com/api/mcp/asset/2b48f7a8-eab8-4c64-8e
 const imgGithub     = "https://www.figma.com/api/mcp/asset/4d28f54a-673b-4aab-a2b8-029c6c3f04e5";
 const imgAiSearch   = "https://www.figma.com/api/mcp/asset/da89f272-1b72-4264-b580-476b74400f61";
 
-// ─── Positioning math ─────────────────────────────────────────────────────────
-//
-// Figma: section is 1920px wide × 1095px tall.
-// Hex grid content starts at y=228px (below title area).
-// Canvas height = 820px maps to Figma y range 228–1048.
-//
-// horizontal %  = figmaX / 1920
-// vertical   %  = (figmaY - 228) / 820
-//
-// Main hexes (figma y):  top row ≈ 397px  → (397-228)/820 = 20.6%
-//                        bottom row ≈ 568px → (568-228)/820 = 41.5%
-//
-// Labels (figma y): top-row labels ≈ 656px → (656-228)/820 = 52.2%
-//                   bot-row labels ≈ 842px → (842-228)/820 = 74.9%
-//
-// Tags start ~54px below label top:
-//   top-row  710px → (710-228)/820 = 58.8%
-//   bot-row  911px → (911-228)/820 = 83.3%
+// ─── Canvas dimensions ──────────────────────────────────────────────────────
+// Coordinate system is 1400×600 (scaled from the original 1920×820 Figma canvas
+// by a ratio of 1400/1920 ≈ 0.729). This means scale = containerWidth/1400,
+// which gives ~0.82 at a 1200px screen instead of ~0.6, appearing larger.
+const CANVAS_W = 1400;
+const CANVAS_H = 600;
+
+// Hex tile dimensions in canvas-space (172×198 × 0.729)
+const HEX_W = 125;
+const HEX_H = 144;
 
 const STAGES = [
   {
     title: "Developer Content",
     tags: ["Technical Blogs", "Use cases guides", "Multi-platform distribution (Dev.to, Medium)"],
     image: imgDevContent,
-    hexLeft: "14.1%", hexTop: "20.6%",           // figma x=271, y=399
-    labelLeft: "13.2%", labelTop: "52.2%",        // figma x=254, y=656
-    tagsLeft: "13.2%",  tagsTop: "58.8%",         // figma x=254, y=710
-    tagsWidth: "220px",
+    hex:      { x: 198, y: 125 },
+    label:    { x: 185, y: 312 },
+    tags_pos: { x: 185, y: 352, w: 185 },
   },
   {
     title: "Developer Community Presence",
     tags: ["Reddit", "Slack/Discord"],
     image: imgCommunity,
-    hexLeft: "29.5%", hexTop: "41.5%",            // figma x=566, y=568
-    labelLeft: "28.5%", labelTop: "74.9%",        // figma x=547, y=842
-    tagsLeft: "28.5%",  tagsTop: "83.3%",         // figma x=547, y=911
-    tagsWidth: "145px",
+    hex:      { x: 413, y: 248 },
+    label:    { x: 399, y: 448 },
+    tags_pos: { x: 399, y: 498, w: 140 },
   },
   {
     title: "Web Conversion Layer",
     tags: ["Product docs", "Release notes"],
     image: imgWebConv,
-    hexLeft: "44.9%", hexTop: "20.6%",            // figma x=862, y=397
-    labelLeft: "45.3%", labelTop: "52.2%",        // figma x=870, y=656
-    tagsLeft: "45.3%",  tagsTop: "62.4%",         // figma x=870, y=740
-    tagsWidth: "145px",
+    hex:      { x: 629, y: 123 },
+    label:    { x: 635, y: 312 },
+    tags_pos: { x: 635, y: 373, w: 140 },
   },
   {
     title: "Github Presence",
     tags: ["Example repos", "Templates", "Starter kits"],
     image: imgGithub,
-    hexLeft: "60.3%", hexTop: "41.5%",            // figma x=1158, y=568
-    labelLeft: "60.9%", labelTop: "74.9%",        // figma x=1171, y=842
-    tagsLeft: "60.9%",  tagsTop: "81.5%",         // figma x=1171, y=896
-    tagsWidth: "150px",
+    hex:      { x: 845, y: 248 },
+    label:    { x: 854, y: 448 },
+    tags_pos: { x: 854, y: 487, w: 140 },
   },
   {
     title: "AI and Search-Visibility",
     tags: ["LLM visibility", "FAQ & structured answers", "Citation tracking & gap analysis"],
     image: imgAiSearch,
-    hexLeft: "75.6%", hexTop: "20.6%",            // figma x=1451, y=397
-    labelLeft: "74.6%", labelTop: "52.2%",        // figma x=1434, y=656
-    tagsLeft: "74.6%",  tagsTop: "60.6%",         // figma x=1434, y=725
-    tagsWidth: "245px",
+    hex:      { x: 1058, y: 123 },
+    label:    { x: 1046, y: 312 },
+    tags_pos: { x: 1046, y: 362, w: 200 },
   },
 ];
 
-// Decorative empty hexes — same positioning math
 const DIM_HEXES = [
-  { frame: imgHexTopLeft, left: "9%",    top: "0%"    }, // figma x=172, y=228
-  { frame: imgHexDim,     left: "24.4%", top: "20.6%" }, // figma x=469, y=397
-  { frame: imgHexDim,     left: "34.6%", top: "20.6%" }, // figma x=665, y=397
-  { frame: imgHexDim,     left: "65.4%", top: "20.6%" }, // figma x=1255, y=397
+  { frame: imgHexTopLeft, x: 125, y: 0   },
+  { frame: imgHexDim,     x: 342, y: 123 },
+  { frame: imgHexDim,     x: 485, y: 123 },
+  { frame: imgHexDim,     x: 915, y: 123 },
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function HexTile({ frame, image, left, top, imageClass = "object-cover", dimmed }) {
+function HexTile({ frame, image, x, y, dimmed }) {
   return (
     <div
-      className="absolute w-[172px] h-[198px]"
-      style={{ left, top, opacity: dimmed ? 0.7 : 1 }}
+      className="absolute"
+      style={{ left: x, top: y, width: HEX_W, height: HEX_H, opacity: dimmed ? 0.7 : 1 }}
       aria-hidden="true"
     >
       <img alt="" src={frame} className="absolute inset-0 w-full h-full" loading="lazy" />
@@ -104,7 +92,8 @@ function HexTile({ frame, image, left, top, imageClass = "object-cover", dimmed 
           alt=""
           src={image}
           loading="lazy"
-          className={`absolute left-[8%] top-[10%] w-[84%] h-[80%] [clip-path:polygon(25%_6.5%,75%_6.5%,100%_50%,75%_93.5%,25%_93.5%,0_50%)] ${imageClass}`}
+          className="absolute object-cover [clip-path:polygon(25%_6.5%,75%_6.5%,100%_50%,75%_93.5%,25%_93.5%,0_50%)]"
+          style={{ left: '5%', top: '6%', width: '90%', height: '88%' }}
         />
       )}
     </div>
@@ -123,9 +112,25 @@ function Tag({ text }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function DeveloperMarketingPlan() {
+  const containerRef = useRef(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const update = () => {
+      // Account for section horizontal padding (px-10 = 80px at xl, px-6 = 48px below)
+      const padding = window.innerWidth >= 1280 ? 80 : 48;
+      const w = window.innerWidth - padding;
+      // Scale canvas to exactly fill container width — no overflow possible
+      setScale(w / CANVAS_W);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
   return (
     <section className="relative w-full overflow-hidden bg-[#0d0a1a]">
-      {/* Background image */}
+      {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <img alt="" src={imgBackground} className="w-full h-full object-cover" loading="lazy" />
       </div>
@@ -137,31 +142,25 @@ export default function DeveloperMarketingPlan() {
           alt=""
           src={imgGrid}
           className="absolute top-0 opacity-55"
-          style={{ width: "1920px", left: "50%", transform: "translateX(-50%)" }}
+          style={{ width: '1920px', left: '50%', transform: 'translateX(-50%)' }}
           loading="lazy"
         />
       </div>
 
       {/* Left purple glow */}
-      <div
-        className="absolute pointer-events-none overflow-hidden"
-        style={{ top: 0, left: "-88px", width: "600px", height: "70%" }}
-      >
+      <div className="absolute pointer-events-none overflow-hidden"
+           style={{ top: 0, left: '-88px', width: '600px', height: '70%' }}>
         <img alt="" src={imgGlow} className="w-full h-full object-cover" loading="lazy" />
       </div>
 
-      <div className="relative z-10 max-w-[1720px] mx-auto px-6 xl:px-10 pt-10 pb-12 lg:pt-12 lg:pb-16">
+      <div className="relative z-10 max-w-[1920px] mx-auto px-6 xl:px-10 pt-10 pb-12 lg:pt-12 lg:pb-16">
 
         {/* ── Header ────────────────────────────────────────────────────────── */}
         <div className="text-center mb-6 lg:mb-8">
           <h2 className="inline-flex items-baseline flex-wrap justify-center gap-x-3 text-white quicksand-bold text-3xl md:text-4xl lg:text-[48px] lg:leading-[60px] tracking-[-0.02em]">
             <span>Developer Marketing</span>
             <span className="relative inline-block px-1">
-              <span
-                className="absolute inset-0 rounded-sm"
-                style={{ backgroundColor: "#5f64ff" }}
-                aria-hidden="true"
-              />
+              <span className="absolute inset-0 rounded-sm" style={{ backgroundColor: '#5f64ff' }} aria-hidden="true" />
               <span className="relative">Plan</span>
             </span>
           </h2>
@@ -171,48 +170,62 @@ export default function DeveloperMarketingPlan() {
           </p>
         </div>
 
-        {/* ── Desktop hex canvas ─────────────────────────────────────────────── */}
-        <div className="hidden xl:block relative h-[820px]">
+        {/* ── Scaled hex canvas — shown at lg (1024px+) ─────────────────────── */}
+        <div
+          ref={containerRef}
+          className="hidden lg:block relative overflow-hidden"
+          style={{ height: CANVAS_H * scale }}
+        >
+          {/* Inner canvas: 1400×600, scaled to fill container exactly */}
+          <div
+            className="absolute top-0 left-0"
+            style={{
+              width: CANVAS_W,
+              height: CANVAS_H,
+              transformOrigin: 'top left',
+              transform: `scale(${scale})`,
+            }}
+          >
+            {/* Decorative dim hexes */}
+            {DIM_HEXES.map((h, i) => (
+              <HexTile key={`dim-${i}`} frame={h.frame} x={h.x} y={h.y} dimmed />
+            ))}
 
-          {/* Decorative dim hexes */}
-          {DIM_HEXES.map((h, i) => (
-            <HexTile key={`dim-${i}`} frame={h.frame} left={h.left} top={h.top} dimmed />
-          ))}
+            {/* Main hexes with icons */}
+            {STAGES.map((stage) => (
+              <HexTile
+                key={`hex-${stage.title}`}
+                frame={imgHexFilled}
+                image={stage.image}
+                x={stage.hex.x}
+                y={stage.hex.y}
+              />
+            ))}
 
-          {/* Main hexes with icons */}
-          {STAGES.map((stage) => (
-            <HexTile
-              key={`hex-${stage.title}`}
-              frame={imgHexFilled}
-              image={stage.image}
-              left={stage.hexLeft}
-              top={stage.hexTop}
-            />
-          ))}
-
-          {/* Labels + tags — absolutely positioned below each hex */}
-          {STAGES.map((stage) => (
-            <div key={`label-${stage.title}`}>
-              <h3
-                className="absolute text-[#f2f2f2] text-[20px] leading-snug quicksand-semibold max-w-[240px]"
-                style={{ left: stage.labelLeft, top: stage.labelTop }}
-              >
-                {stage.title}
-              </h3>
-              <div
-                className="absolute flex flex-col gap-[6px]"
-                style={{ left: stage.tagsLeft, top: stage.tagsTop, width: stage.tagsWidth }}
-              >
-                {stage.tags.map((tag) => (
-                  <Tag key={tag} text={tag} />
-                ))}
+            {/* Labels + tags */}
+            {STAGES.map((stage) => (
+              <div key={`label-${stage.title}`}>
+                <h3
+                  className="absolute text-[#f2f2f2] text-[15px] leading-snug quicksand-semibold"
+                  style={{ left: stage.label.x, top: stage.label.y, maxWidth: 190 }}
+                >
+                  {stage.title}
+                </h3>
+                <div
+                  className="absolute flex flex-col gap-[8px]"
+                  style={{ left: stage.tags_pos.x, top: stage.tags_pos.y, width: stage.tags_pos.w }}
+                >
+                  {stage.tags.map((tag) => (
+                    <Tag key={tag} text={tag} />
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* ── Mobile / tablet card grid ──────────────────────────────────────── */}
-        <div className="xl:hidden grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* ── Card grid — mobile / tablet (below lg / 1024px) ────────────────────────── */}
+        <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-5">
           {STAGES.map((stage, idx) => (
             <article
               key={stage.title}
@@ -225,7 +238,8 @@ export default function DeveloperMarketingPlan() {
                     alt=""
                     src={stage.image}
                     loading="lazy"
-                    className="absolute left-[8%] top-[10%] w-[84%] h-[80%] object-cover [clip-path:polygon(25%_6.5%,75%_6.5%,100%_50%,75%_93.5%,25%_93.5%,0_50%)]"
+                    className="absolute object-cover [clip-path:polygon(25%_6.5%,75%_6.5%,100%_50%,75%_93.5%,25%_93.5%,0_50%)]"
+                    style={{ left: '5%', top: '6%', width: '90%', height: '88%' }}
                   />
                 </div>
                 <div>
