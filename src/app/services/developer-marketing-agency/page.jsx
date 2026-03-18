@@ -7,6 +7,7 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import Hero from "./hero";
 import Card1 from "./card1";
 import RealResult from "./realresults";
+import DeveloperMarketingPlan from "./DeveloperMarketingPlan";
 import NewMarquee from "@/Components/NewMarquee";
 const ServicesFold = dynamic(() => import("./ServicesFold"), {
   ssr: false,
@@ -105,6 +106,11 @@ export default function Page() {
       <SectionWrapper>
         <GradientDivider className="-mt-px mb-1" />
         <RealResult isAdsVariant={isAdsVariant} />
+      </SectionWrapper>
+
+      {/* DeveloperMarketingPlan - After second component */}
+      <SectionWrapper>
+        <DeveloperMarketingPlan />
       </SectionWrapper>
 
       {/* Card1 */}
