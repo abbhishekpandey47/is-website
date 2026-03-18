@@ -235,7 +235,7 @@ export default function GeoAuditPage() {
         >
           → {loading ? "Running audit..." : "Run GEO Audit"}
         </button>
-        <span style={{ fontSize: 11, color: "#bbb" }}>Powered by Claude · ~20 sec</span>
+        <span style={{ fontSize: 11, color: "#bbb" }}>Powered by Open API · ~20 sec</span>
       </div>
 
       {error && (
@@ -252,7 +252,7 @@ export default function GeoAuditPage() {
           </p>
           <div>
             {STEPS.map((step, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "6px 0", fontSize: 13, color: i < stepIndex ? "#bbb" : i === stepIndex ? "#111" : "#ddd", fontWeight: i === stepIndex ? 600 : 400 }}>
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "6px 0", fontSize: 13, color: i < stepIndex ? "#666" : i === stepIndex ? "#d97706" : "#444", fontWeight: i === stepIndex ? 600 : 400 }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: i < stepIndex ? "#bbb" : i === stepIndex ? "#d97706" : "#e5e7eb", display: "inline-block", flexShrink: 0 }} />
                 {step}
               </div>
