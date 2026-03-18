@@ -187,6 +187,7 @@ export default function AnalysisPanel({
   redditPostsError,
   citationLoading,
   citationResults,
+  citationPlatformStatus,
   handleRunAnalysis,
   analysisLoading,
   scannedPostDetails,
@@ -584,9 +585,29 @@ export default function AnalysisPanel({
                 <CardDescription className="text-xs">Reddit links each AI platform cited when answering your prompts</CardDescription>
               </CardHeader>
               <CardContent>
+                {/* Platform status row — shown while loading */}
+                {citationLoading && citationPlatformStatus && (
+                  <div className="flex flex-wrap gap-1.5 pb-3">
+                    {Object.entries(citationPlatformStatus).map(([platform, status]) => {
+                      const s = PLATFORM_STYLES[platform] || { bg: 'bg-gray-500/10', text: 'text-gray-700', border: 'border-gray-400/30' };
+                      const isReady = status === 'ready';
+                      const isError = status === 'error';
+                      return (
+                        <span key={platform} className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] border font-medium ${
+                          isReady ? 'bg-emerald-500/10 text-emerald-700 border-emerald-400/30' :
+                          isError ? 'bg-red-500/10 text-red-600 border-red-400/30' :
+                          `${s.bg} ${s.text} ${s.border} opacity-60`
+                        }`}>
+                          {isReady ? <span className="text-[9px] font-bold">done</span> : isError ? <span className="text-[9px] font-bold">err</span> : <Loader2 className="h-2.5 w-2.5 animate-spin" />}
+                          {platform}
+                        </span>
+                      );
+                    })}
+                  </div>
+                )}
                 {citationLoading && !(citationResults?.records?.length) ? (
-                  <div className="space-y-3 pt-2">
-                    {[1,2,3].map(i => <Skeleton key={i} className="h-16 w-full rounded-lg" />)}
+                  <div className="space-y-3 pt-1">
+                    {[1,2,3].map(i => <Skeleton key={i} className="h-12 w-full rounded-lg" />)}
                   </div>
                 ) : !(citationResults?.records?.length) ? (
                   <div className="flex flex-col items-center justify-center h-32 text-muted-foreground gap-2">

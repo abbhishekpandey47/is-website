@@ -21,12 +21,18 @@ function utcNow() {
 async function sendSlack(payload) {
   if (!WEBHOOK) return
   try {
-    await fetch(WEBHOOK, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      signal: AbortSignal.timeout(4000),
-    })
+    const ctrl = new AbortController()
+    const tid = setTimeout(() => ctrl.abort(), 4000)
+    try {
+      await fetch(WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: ctrl.signal,
+      })
+    } finally {
+      clearTimeout(tid)
+    }
   } catch (_) {
     // intentionally silent — Slack logging must never break the API
   }

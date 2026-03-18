@@ -116,6 +116,7 @@ export default function SerpScout() {
   // Analyze — Citations
   const [citationResults, setCitationResults] = useState(null);
   const [citationLoading, setCitationLoading] = useState(false);
+  const [citationPlatformStatus, setCitationPlatformStatus] = useState(null);
   const [manualCitationInput, setManualCitationInput] = useState("");
   const [manualCitationPrompts, setManualCitationPrompts] = useState([]);
 
@@ -572,62 +573,97 @@ export default function SerpScout() {
       const { snapshots, prompts: triggeredPrompts, wrappedToOriginal } = triggerRes;
       if (!silent) toast({
         title: "Citation search started",
-        description: `Querying ${snapshots.length} AI platforms in parallel. Results appear as each completes…`,
+        description: `Querying ${snapshots.length} AI platforms. Results appear as each completes…`,
       });
 
-      const POLL_INTERVAL = 15_000;
-      const POLL_MAX_ATTEMPTS = 20;
-      let finalRes = null;
+      // Initialize all platforms as pending so UI shows status immediately
+      if (!silent) setCitationPlatformStatus(Object.fromEntries(snapshots.map(s => [s.platform, 'pending'])));
+
+      // Smart poll schedule: 10s initial wait, 10s intervals, skip completed platforms
+      const INITIAL_DELAY     = 10_000;
+      const POLL_INTERVAL     = 10_000;
+      const POLL_MAX_ATTEMPTS = 14;  // 10s + 14×10s = max ~2.5 min
+      const completedPlatforms = new Set();
+      let pendingSnapshots = [...snapshots];
+      const mergedPlatforms = {};
+
+      await new Promise(r => setTimeout(r, INITIAL_DELAY));
 
       for (let attempt = 0; attempt < POLL_MAX_ATTEMPTS; attempt++) {
-        await new Promise(r => setTimeout(r, POLL_INTERVAL));
+        if (attempt > 0) await new Promise(r => setTimeout(r, POLL_INTERVAL));
 
         const pollRes = await apiPost("/api/threadflow/brightdata-citations", {
           action: "poll",
-          snapshots,
+          snapshots: pendingSnapshots,
           prompts: triggeredPrompts,
           companyName: companyName || domain.trim(),
           wrappedToOriginal,
         });
 
-        if (!pollRes) continue;
+        if (!pollRes?.platforms) continue;
 
-        if (pollRes.platforms) {
-          const partialRecords = buildCitationRecords(pollRes.platforms, triggeredPrompts);
-          if (partialRecords.length > 0) {
-            setCitationResults({ records: partialRecords, summary: pollRes.summary, partial: pollRes.partial });
-          }
+        Object.entries(pollRes.platforms).forEach(([platform, data]) => {
+          if (data.status === 'ready' || data.status === 'error') completedPlatforms.add(platform);
+          mergedPlatforms[platform] = data;
+        });
+
+        // Update platform status for live UI
+        if (!silent) setCitationPlatformStatus(prev => {
+          const next = { ...(prev || {}) };
+          Object.entries(mergedPlatforms).forEach(([p, d]) => {
+            next[p] = d.status === 'ready' ? 'ready' : d.status === 'error' ? 'error' : 'pending';
+          });
+          return next;
+        });
+
+        pendingSnapshots = snapshots.filter(s => !completedPlatforms.has(s.platform));
+
+        const hasReadyPlatform = Object.values(mergedPlatforms).some(p => p.status === 'ready');
+        if (hasReadyPlatform) {
+          const partialRecords = buildCitationRecords(mergedPlatforms, triggeredPrompts);
+          const allRedditUrls = [...new Set(Object.values(mergedPlatforms)
+            .filter(p => p.status === 'ready')
+            .flatMap(p => p.redditUrls || []))];
+          setCitationResults({
+            records: partialRecords,
+            summary: { ...pollRes.summary, totalRedditUrlsFound: allRedditUrls.length },
+            partial: pendingSnapshots.length > 0,
+          });
         }
 
-        if (pollRes.overallStatus === "ready") { finalRes = pollRes; break; }
+        if (pendingSnapshots.length === 0) break;
       }
 
-      if (finalRes?.platforms) {
-        const records = buildCitationRecords(finalRes.platforms, triggeredPrompts);
-        setCitationResults({ records, summary: finalRes.summary, partial: false });
+      // Final update
+      if (Object.keys(mergedPlatforms).length > 0) {
+        const records = buildCitationRecords(mergedPlatforms, triggeredPrompts);
+        const allRedditUrls = [...new Set(Object.values(mergedPlatforms)
+          .filter(p => p.status === 'ready')
+          .flatMap(p => p.redditUrls || []))];
+        const summary = { totalRedditUrlsFound: allRedditUrls.length, uniqueRedditUrls: allRedditUrls, platformsComplete: completedPlatforms.size, platformsTotal: snapshots.length };
+        setCitationResults({ records, summary, partial: false });
 
-        // Save to 12hr cache
+        // Save to 24hr cache
         if (companyId && selectedKw?.term && records.length > 0) {
           apiPost("/api/threadflow/serp-scout", {
             action: "saveCitationCache",
             companyId,
             keyword: selectedKw.term,
             records,
-            summary: finalRes.summary,
+            summary,
           }).catch(() => {});
         }
-      }
 
-      if (!silent) {
-        const totalPosts = finalRes?.summary?.totalRedditUrlsFound || 0;
-        const completedPlatforms = finalRes?.summary?.platformsComplete || snapshots.length;
-        if (totalPosts > 0) {
-          toast({ title: "Citation search complete", description: `Found ${totalPosts} Reddit links across ${completedPlatforms} AI platforms` });
-        } else if (finalRes) {
-          toast({ title: "Citation search complete", description: "AI platforms did not surface Reddit threads for these prompts." });
-        } else {
-          toast({ variant: "destructive", title: "Citation search timed out", description: "Partial results shown. Try again or use fewer prompts." });
+        if (!silent) {
+          const totalPosts = allRedditUrls.length;
+          if (totalPosts > 0) {
+            toast({ title: "Citation search complete", description: `Found ${totalPosts} Reddit links across ${completedPlatforms.size} AI platforms` });
+          } else {
+            toast({ title: "Citation search complete", description: "AI platforms did not surface Reddit threads for these prompts." });
+          }
         }
+      } else if (!silent) {
+        toast({ variant: "destructive", title: "Citation search timed out", description: "Partial results shown. Try again or use fewer prompts." });
       }
     } catch (e) {
       if (!silent) {
@@ -1390,6 +1426,7 @@ export default function SerpScout() {
             redditPostsLoading={redditPostsLoading}
             citationLoading={citationLoading}
             citationResults={citationResults}
+            citationPlatformStatus={citationPlatformStatus}
             handleRunAnalysis={handleRunAnalysis}
             analysisLoading={serpThreadsLoading || redditPostsLoading || citationLoading}
             scannedPostDetails={scannedPostDetails}
