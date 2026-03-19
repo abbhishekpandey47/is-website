@@ -204,14 +204,14 @@ function FeaturesSection() {
         {/* Row 1 — 2 equal columns (Domain → Overview) */}
         <div className="grid gap-4 md:grid-cols-2 mb-4">
           <FeatureCard
-            screenshot="/reddit-scout/domain.png"
+            screenshot="/reddit-opportunity-finder/Domain Section.png"
             num="01"
             heading={<>Paste your domain.<br />That&apos;s it.</>}
             subtitle="One URL triggers the entire analysis — no forms, no setup."
             previewHeight={280}
           />
           <FeatureCard
-            screenshot="/reddit-scout/overview.png"
+            screenshot="/reddit-opportunity-finder/Overview.png"
             num="02"
             heading={<>Your company profile,<br />auto-generated.</>}
             subtitle="Capabilities, ICP, and problem spaces — extracted in seconds."
@@ -219,27 +219,27 @@ function FeaturesSection() {
           />
         </div>
 
-        {/* Row 2 — 3 equal columns (Keywords → Analyze → Citations) */}
+        {/* Row 2 — 3 equal columns (Keywords → Analyze → Configure) */}
         <div className="grid gap-4 md:grid-cols-3">
           <FeatureCard
-            screenshot="/reddit-scout/keywords.png"
+            screenshot="/reddit-opportunity-finder/keyword section image.png"
             num="03"
             heading={<>20 keywords.<br />Zero research.</>}
             subtitle="AI-generated with prompt clusters, labeled by intent, ready to run."
             previewHeight={240}
           />
           <FeatureCard
-            screenshot="/reddit-scout/analyze.png"
+            screenshot="/reddit-opportunity-finder/Save and configure.png"
             num="04"
-            heading={<>One click.<br />Full analysis.</>}
-            subtitle="SERP dork, Reddit threads, and AI citations — in a single pass."
+            heading={<>Save & configure<br />your strategy.</>}
+            subtitle="Track saved keywords, manage competitors, and monitor results over time."
             previewHeight={240}
           />
           <FeatureCard
-            screenshot="/reddit-scout/citations.png"
+            screenshot="/reddit-opportunity-finder/Anaylysis.png"
             num="05"
-            heading={<>Your citation gaps,<br />exposed.</>}
-            subtitle="See where competitors are cited and you're absent. Close the gap."
+            heading={<>One click.<br />Full analysis.</>}
+            subtitle="SERP dork, Reddit threads, and AI citations — in a single pass."
             previewHeight={240}
           />
         </div>
@@ -358,10 +358,10 @@ function HowItWorks() {
 
           {/* Right — sticky browser screenshot */}
           <div className="sticky top-32">
-            <BrowserChrome url="reddit-scout.infrasity.com">
+            <BrowserChrome url="reddit-opportunity-finder.infrasity.com">
               <img
-                src="/reddit-scout/domain.png"
-                alt="Reddit Radar — Domain Input"
+                src="/reddit-opportunity-finder/Domain Section.png"
+                alt="Reddit Opportunity Finder — Domain Input"
                 className="w-full block"
               />
             </BrowserChrome>
