@@ -45,6 +45,16 @@ function Spinner({ className = "h-4 w-4" }) {
   return <Loader2 className={`${className} animate-spin`} />;
 }
 
+function countCitationUrls(records = []) {
+  return (Array.isArray(records) ? records : []).reduce((total, rec) => {
+    const models = rec?.models || {};
+    const modelCount = Object.values(models).reduce((acc, posts) => {
+      return acc + (Array.isArray(posts) ? posts.length : 0);
+    }, 0);
+    return total + modelCount;
+  }, 0);
+}
+
 // ── Auth-aware fetch helper ───────────────────────────────────────────────────
 
 async function apiPost(path, body) {
@@ -114,7 +124,7 @@ export default function SerpScout() {
   const [serpAccordionOpen, setSerpAccordionOpen] = useState(true);
 
   // Analyze — Citations
-  const [citationResults, setCitationResults] = useState(null);
+  const [citationResultsByKeyword, setCitationResultsByKeyword] = useState({});
   const [citationLoading, setCitationLoading] = useState(false);
   const [citationPlatformStatus, setCitationPlatformStatus] = useState(null);
   const [manualCitationInput, setManualCitationInput] = useState("");
@@ -154,6 +164,7 @@ export default function SerpScout() {
 
   const selectedKw = selectedKwIdx !== null ? keywords[selectedKwIdx] : null;
   const kwSerpData = selectedKw ? serpResults[selectedKw.term] : null;
+  const citationResults = selectedKw ? (citationResultsByKeyword[selectedKw.term] || null) : null;
 
   const citationPrompts = useMemo(() => {
     // Use the selected keyword's saved prompts only — citations run per-keyword
@@ -541,9 +552,15 @@ export default function SerpScout() {
   }
 
   // silent=true: background refresh — suppress toasts and loading state, just update results + re-save cache
-  async function handleCitationSearch({ silent = false } = {}) {
+  async function handleCitationSearch({ silent = false, keywordOverride = null } = {}) {
+    const kwTerm = keywordOverride || selectedKw?.term || "";
     if (!domain.trim()) {
       if (!silent) toast({ variant: "destructive", title: "Missing domain", description: "Please enter a domain first." });
+      return;
+    }
+
+    if (!kwTerm) {
+      if (!silent) toast({ variant: "destructive", title: "No keyword selected", description: "Select a keyword first to run citation search." });
       return;
     }
 
@@ -624,10 +641,21 @@ export default function SerpScout() {
           const allRedditUrls = [...new Set(Object.values(mergedPlatforms)
             .filter(p => p.status === 'ready')
             .flatMap(p => p.redditUrls || []))];
-          setCitationResults({
-            records: partialRecords,
-            summary: { ...pollRes.summary, totalRedditUrlsFound: allRedditUrls.length },
-            partial: pendingSnapshots.length > 0,
+          setCitationResultsByKeyword(prev => {
+            const existing = prev[kwTerm] || null;
+            const hasExistingUrls = countCitationUrls(existing?.records || []) > 0;
+            const incomingHasUrls = allRedditUrls.length > 0;
+            if (!incomingHasUrls && hasExistingUrls) {
+              return prev;
+            }
+            return {
+              ...prev,
+              [kwTerm]: {
+                records: partialRecords,
+                summary: { ...pollRes.summary, totalRedditUrlsFound: allRedditUrls.length },
+                partial: pendingSnapshots.length > 0,
+              },
+            };
           });
         }
 
@@ -641,14 +669,25 @@ export default function SerpScout() {
           .filter(p => p.status === 'ready')
           .flatMap(p => p.redditUrls || []))];
         const summary = { totalRedditUrlsFound: allRedditUrls.length, uniqueRedditUrls: allRedditUrls, platformsComplete: completedPlatforms.size, platformsTotal: snapshots.length };
-        setCitationResults({ records, summary, partial: false });
+        setCitationResultsByKeyword(prev => {
+          const existing = prev[kwTerm] || null;
+          const hasExistingUrls = countCitationUrls(existing?.records || []) > 0;
+          const incomingHasUrls = allRedditUrls.length > 0;
+          if (!incomingHasUrls && hasExistingUrls) {
+            return prev;
+          }
+          return {
+            ...prev,
+            [kwTerm]: { records, summary, partial: false },
+          };
+        });
 
         // Save to 24hr cache
-        if (companyId && selectedKw?.term && records.length > 0) {
+        if (companyId && kwTerm && records.length > 0) {
           apiPost("/api/threadflow/serp-scout", {
             action: "saveCitationCache",
             companyId,
-            keyword: selectedKw.term,
+            keyword: kwTerm,
             records,
             summary,
           }).catch(() => {});
@@ -718,13 +757,33 @@ export default function SerpScout() {
     setSerpThreadsLoading(true);
     setRedditPostsLoading(true);
     setError(null);
-    setSerpResults(prev => ({ ...prev, [kwTerm]: undefined }));
 
     const merge = (newData) =>
-      setSerpResults(prev => ({
-        ...prev,
-        [kwTerm]: { ...(prev[kwTerm] || {}), ...newData, success: true },
-      }));
+      setSerpResults(prev => {
+        const existing = prev[kwTerm] || {};
+        const merged = { ...existing, ...newData, success: true };
+
+        // Keep already-visible data if a transient refresh returns empty arrays.
+        const preserveIfIncomingEmpty = [
+          'redditThreads',
+          'dorkRedditLinks',
+          'topRedditPosts',
+          'newRedditPosts',
+        ];
+
+        preserveIfIncomingEmpty.forEach((key) => {
+          const existingVal = existing[key];
+          const incomingVal = newData?.[key];
+          if (Array.isArray(existingVal) && existingVal.length > 0 && Array.isArray(incomingVal) && incomingVal.length === 0) {
+            merged[key] = existingVal;
+          }
+        });
+
+        return {
+          ...prev,
+          [kwTerm]: merged,
+        };
+      });
 
     // Background: fetch post details for posts with 0 upvotes/comments and update metrics
     const enrichMetrics = (posts, listKey) => {
@@ -804,15 +863,18 @@ export default function SerpScout() {
       apiPost("/api/threadflow/serp-scout", { action: "getCitationCache", companyId, keyword: kwTerm })
         .then(cached => {
           if (cached?.found) {
-            setCitationResults({ records: cached.records, summary: cached.summary, partial: false });
-            if (cached.stale) handleCitationSearch({ silent: true }); // refresh quietly
+            setCitationResultsByKeyword(prev => ({
+              ...prev,
+              [kwTerm]: { records: cached.records, summary: cached.summary, partial: false },
+            }));
+            if (cached.stale) handleCitationSearch({ silent: true, keywordOverride: kwTerm }); // refresh quietly
           } else {
-            handleCitationSearch();
+            handleCitationSearch({ keywordOverride: kwTerm });
           }
         })
-        .catch(() => handleCitationSearch());
+        .catch(() => handleCitationSearch({ keywordOverride: kwTerm }));
     } else {
-      handleCitationSearch();
+      handleCitationSearch({ keywordOverride: kwTerm });
     }
 
     // 4. After both finish: client-side merge Reddit API upvotes into SERP thread posts
