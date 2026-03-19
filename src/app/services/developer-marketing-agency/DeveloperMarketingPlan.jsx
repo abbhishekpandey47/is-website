@@ -1,6 +1,6 @@
 export default function DeveloperMarketingPlan() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#0d0a1a] mb-20">
+    <section className="relative w-full overflow-hidden bg-[#0d0a1a] pb-20">
       <div className="absolute inset-0 pointer-events-none">
         <img
           src="/developerMarketing/Hero.svg"
