@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reddit Scout — rotating conic border glow on hover */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes borderRotate {
+  to { --border-angle: 360deg; }
+}
+.border-glow-active {
+  background: conic-gradient(from var(--border-angle), #5f64ff, #8b5cf6, #3b82f6, #5f64ff);
+  animation: borderRotate 3s linear infinite;
+}
+
 @font-face {
   font-family: "Geist";
   src: url('/fonts/GeistVF.woff2') format('woff2'), url('/fonts/GeistVF.woff') format('woff');
