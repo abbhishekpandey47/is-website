@@ -158,7 +158,7 @@ module.exports = {
           "50%": { transform: "scale(1.05)" },
         },
         "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "slide-in": {
@@ -184,7 +184,7 @@ module.exports = {
         "float-delay-2": "float 1s ease-in-out infinite 2s",
         "pulse-slow": "pulse-slow 1s ease-in-out infinite",
         "scale-slow": "scale-slow 1s ease-in-out infinite",
-        "fade-up": "fade-up 0.4s ease-out both",
+        "fade-up": "fade-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both",
         "fade-up-delay-1": "fade-up 0.4s ease-out 0.05s both",
         "fade-up-delay-2": "fade-up 0.4s ease-out 0.1s both",
         "fade-up-delay-3": "fade-up 0.4s ease-out 0.15s both",
