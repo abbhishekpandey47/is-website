@@ -1,11 +1,62 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(grep -r \"useParams\\\\|useRouter\" /Users/shan/infrasity_frontend/src/app/threadflow/c/[company] --include=\"*.jsx\" -A 3)",
+      "Bash(grep -E \"\\\\.\\(jsx|js\\)$\")",
+      "Bash(grep -n \"useParams\\\\|params.*company\" /Users/shan/infrasity_frontend/src/app/threadflow/c/[company]/client-dashboard/page.jsx)",
+      "Bash(grep -n \"selectedClientId\\\\|company.*slug\" /Users/shan/infrasity_frontend/src/app/threadflow/c/[company]/client-dashboard/page.jsx)",
+      "Bash(grep -n \"useParams\" /Users/shan/infrasity_frontend/src/app/threadflow/c/[company]/client-dashboard/page.jsx)",
+      "Bash(kill 30745)",
+      "Bash(git diff src/app/threadflow/c/[company]/client-dashboard/page.jsx)",
+      "Bash(echo \"=== All comments with future dates \\(month > March 2026\\) ===\")",
+      "Bash(python3 -c \":*)",
+      "Bash(echo \"The issue was the swapped dates. Before the fix::*)",
+      "Bash(find /Users/shan/infrasity_frontend/public -type d -name *white* -o -name *logo* -o -name *client*)",
+      "Bash(node -e \":*)",
+      "Bash(npx next:*)",
+      "Bash(git checkout:*)",
+      "Bash(find /Users/shan/infrasity_frontend/app -type f -path *services*)",
+      "Bash(find /Users/shan/infrasity_frontend -path */playbook/developer-marketing/* -type f ! -path */.next/*)",
+      "mcp__claude_ai_Figma__get_metadata",
+      "mcp__claude_ai_Figma__get_screenshot",
+      "mcp__claude_ai_Figma__get_design_context",
+      "Bash(kill -9 94627)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(node tests/serp-scout-brand.spec.mjs)",
+      "Bash(pkill -f 'next build')",
+      "Bash(kill 95956)",
+      "Bash(wc -l /Users/shan/infrasity_frontend/src/app/reddit-opportunity-finder/components/*.jsx)",
+      "WebFetch(domain:resend.com)",
+      "Bash(node -e \"require\\(''fs''\\).readFileSync\\(''src/app/products/reddit-opportunity-finder/page.jsx'', ''utf8''\\); console.log\\(''File reads OK''\\)\")",
+      "WebFetch(domain:www.infrasity.com)",
+      "Bash(kill 53577)",
+      "Bash(find /Users/shan/infrasity_frontend -name 177389* -o -name *screenshot* -o -name *serp*scout*)",
+      "Bash(find /Users/shan -maxdepth 3 -name 177389*)",
+      "Bash(ls -lt /Users/shan/Desktop/*.png)",
+      "Bash(ls -lt /Users/shan/Downloads/*.png)",
+      "Bash(find /private/tmp -name *.png -newer /Users/shan/infrasity_frontend/src/app/tools/reddit-opportunity-finder/page.jsx)",
+      "Bash(find /Users/shan -maxdepth 2 -name *.png -newer /Users/shan/infrasity_frontend/src/app/tools/reddit-opportunity-finder/page.jsx)",
+      "Bash(node -e \"const fs=require\\(''fs''\\); const c=fs.readFileSync\\(''src/app/tools/reddit-opportunity-finder/page.jsx'',''utf8''\\); let b=0,p=0,k=0; let s=false,sc='''',t=false; for\\(let i=0;i<c.length;i++\\){const ch=c[i]; if\\(s\\){if\\(ch===sc&&c[i-1]!==''\\\\\\\\''\\)s=false;continue;} if\\(ch===''\"\"''||ch===\"\"''\"\"\\){s=true;sc=ch;continue;} if\\(ch===''\\\\`''\\){t=!t;continue;} if\\(!t\\){if\\(ch===''{''\\)b++;if\\(ch===''}''\\)b--;if\\(ch===''\\(''\\)p++;if\\(ch===''\\)''\\)p--;if\\(ch===''[''\\)k++;if\\(ch==='']''\\)k--;}} const issues=[]; if\\(b\\)issues.push\\(''braces:''+b\\); if\\(p\\)issues.push\\(''parens:''+p\\); if\\(k\\)issues.push\\(''brackets:''+k\\); console.log\\(issues.length?issues.join\\('', ''\\):''OK — no syntax issues''\\);\")",
+      "Bash(find /private/tmp -name *.png -newer /Users/shan/infrasity_frontend/public/reddit-scout/analyze.png)",
+      "Bash(find /Users/shan -maxdepth 2 -name *.png -newer /Users/shan/infrasity_frontend/public/reddit-scout/analyze.png)",
+      "Bash(find /private/tmp -name *.png -size +500k -newer /Users/shan/infrasity_frontend/public/reddit-scout/analyze.png)",
+      "Bash(find /var/folders -name *.png -size +500k -newer /Users/shan/infrasity_frontend/public/reddit-scout/analyze.png)",
+      "Bash(find /Users/shan -maxdepth 4 -name *.png -newer /Users/shan/Downloads/ph3.png -not -path */node_modules/* -not -path */.next/* -not -path */Library/*)",
+      "Bash(find /Users/shan/Pictures -name *.png -o -name *.jpg -o -name *.jpeg -o -name *.heic)",
+      "Bash(find '/Users/shan/Pictures/Photos Library.photoslibrary' -name *.png -maxdepth 5)",
+      "Bash(mdfind -onlyin /Users/shan \"kMDItemContentType == ''''public.png'''' && kMDItemFSCreationDate > $time.today\\(-1\\)\")",
+      "Bash(xargs ls:*)",
+      "Bash(mdfind hero_image)",
+      "Bash(mdfind InfrasityApp)",
+      "Bash(find /Users/shan -name InfrasityApp* -maxdepth 5)",
+      "Bash(find /Users/shan -name hero_image* -maxdepth 5)",
+      "Bash(find /Users/shan -name *.png -not -path */node_modules/* -not -path */.next/* -not -path */Library/*)"
+    ],
     "additionalDirectories": [
       "/Users/shan/infrasity_frontend/src/app/threadflow/c/[company]",
-      "/Users/shan/infrasity_frontend/src/app/threadflow/c/[company]/integrations"
-    ],
-    "allow": [
-      "Bash(grep -r \"useParams\\\\|useRouter\" /Users/shan/infrasity_frontend/src/app/threadflow/c/[company] --include=\"*.jsx\" -A 3)"
+      "/Users/shan/infrasity_frontend/src/app/threadflow/c/[company]/integrations",
+      "/Users/shan/infrasity_frontend/public/PostImages/developer-marketing-agency",
+      "/Users/shan/infrasity_frontend/src/app/products"
     ]
   }
 }
