@@ -8,8 +8,9 @@ import { withSlackLog, logSerpAction } from '@/lib/slackLogger'
 
 const OPENROUTER_ENDPOINT = process.env.OPENROUTER_API_URL || 'https://openrouter.ai/api/v1/chat/completions'
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || ''
-const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || 'openai/gpt-oss-20b'
+const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || 'openai/gpt-4o-mini'
 const OPENROUTER_FALLBACK_MODELS = [
+  'openai/gpt-4o-mini',
   'openai/gpt-oss-20b',
 ]
 const OPENROUTER_CITATION_MODEL =
@@ -27,7 +28,7 @@ const supabase = createClient(
 )
 
 const CONTEXT_PAGE_PATHS = ['']
-const MAX_PAGE_CHARS = 3000
+const MAX_PAGE_CHARS = 2500  // was 3000 — less JSDOM work, less LLM input
 const MAX_PAGES = 4
 const MIN_READABILITY_CHARS = 400
 const CONTEXT_TEMPERATURE = 0.25
@@ -99,9 +100,10 @@ const REDDIT_API_BASE = 'https://reddit-comment-gen.onrender.com'
 const POST_DETAILS_ENDPOINT = `${REDDIT_API_BASE}/fetch_post_details`
 const REDDIT_PUBLIC_BASE = 'https://www.reddit.com'
 const REDDIT_USER_AGENT = 'infrasity-rof/1.0'
-const POST_DETAILS_TIMEOUT_MS = Number(process.env.SERP_SCOUT_POST_DETAILS_TIMEOUT_MS) || 25000
+const POST_DETAILS_TIMEOUT_MS = Number(process.env.SERP_SCOUT_POST_DETAILS_TIMEOUT_MS) || 10000
 const CITATION_SEARCH_TIMEOUT_MS = 120_000 // 120 seconds for citation searches (web search can be slow)
 const POST_DETAILS_CONCURRENCY = Number(process.env.SERP_SCOUT_POST_DETAILS_CONCURRENCY) || 4
+const REDDIT_MIN_RESULTS_PER_BUCKET = Number(process.env.SERP_SCOUT_REDDIT_MIN_RESULTS_PER_BUCKET) || 10
 const MENTION_SNIPPET_RADIUS = 120
 const MENTION_SNIPPET_MAX_LENGTH = 200
 const postDetailsLimiter = pLimit(POST_DETAILS_CONCURRENCY)
@@ -116,7 +118,7 @@ async function fetchRedditTopNewPosts(keyword) {
     const response = await fetchWithTimeout(
       `${REDDIT_API_BASE}/find_top_posts_comments`,
       { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ keyword, num_posts: 10 }) },
-      50000
+      15000 // 15s — warm Render takes ~8-14s; cold (>15s) times out, user gets empty Top/New
     )
 
     if (!response.ok) {
@@ -147,8 +149,8 @@ async function fetchRedditPublicAPI(keyword) {
   const headers = { 'User-Agent': REDDIT_USER_AGENT }
 
   const [topRes, newRes] = await Promise.allSettled([
-    fetchWithTimeout(`${REDDIT_PUBLIC_BASE}/search.json?q=${q}&sort=top&type=link&t=year&limit=25`, { headers }, 10000),
-    fetchWithTimeout(`${REDDIT_PUBLIC_BASE}/search.json?q=${q}&sort=new&type=link&limit=25`, { headers }, 10000),
+    fetchWithTimeout(`${REDDIT_PUBLIC_BASE}/search.json?q=${q}&sort=top&t=year&limit=25`, { headers }, 10000),
+    fetchWithTimeout(`${REDDIT_PUBLIC_BASE}/search.json?q=${q}&sort=new&limit=25`, { headers }, 10000),
   ])
 
   const parseChildren = (res) => {
@@ -199,7 +201,7 @@ async function fetchRedditViaDataForSeo(keyword) {
       language_code: 'en',
       device: 'desktop',
       os: 'windows',
-      depth: 50 // scan top 50 Google results for better coverage
+      depth: 20 // 20 results is enough for Reddit dork — reduces latency from ~8s to ~3s
     }
 
     const resp = await fetch('https://api.dataforseo.com/v3/serp/google/organic/live/advanced', {
@@ -270,6 +272,110 @@ async function fetchRedditViaDataForSeo(keyword) {
     console.error('[serp-scout] fetchRedditViaDataForSeo failed', error.message)
     return { top_posts: [], new_posts: [] }
   }
+}
+
+function parseMetricCount(value) {
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    return Math.max(0, Math.round(value))
+  }
+  if (typeof value !== 'string') return 0
+
+  const normalized = value.trim().toLowerCase().replace(/,/g, '')
+  if (!normalized) return 0
+
+  const shortMatch = normalized.match(/^(\d+(?:\.\d+)?)\s*([km])$/i)
+  if (shortMatch) {
+    const base = Number(shortMatch[1])
+    const multiplier = shortMatch[2].toLowerCase() === 'm' ? 1_000_000 : 1_000
+    return Number.isFinite(base) ? Math.max(0, Math.round(base * multiplier)) : 0
+  }
+
+  const numeric = Number(normalized.replace(/[^\d.]/g, ''))
+  return Number.isFinite(numeric) ? Math.max(0, Math.round(numeric)) : 0
+}
+
+function canonicalRedditUrl(url) {
+  if (!url) return ''
+  return url
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/^https?:\/\/(www\.)?/, '')
+    .replace(/\?.*$/, '')
+    .replace(/#.*$/, '')
+    .replace(/\/+$/, '')
+}
+
+function normalizeRedditPost(post, source = 'reddit_api') {
+  const postUrl = post?.post_url || post?.url || ''
+  const title = post?.post_title || post?.title || post?.name || ''
+  const subreddit = post?.subreddit || post?.community || post?.subreddit_name_prefixed?.replace('r/', '') || ''
+  const upvotes = parseMetricCount(
+    post?.upvotes ?? post?.score ?? post?.ups ?? post?.vote_count ?? post?.likes ?? post?.points ?? 0
+  )
+  const total_comments = parseMetricCount(
+    post?.total_comments ?? post?.num_comments ?? post?.comment_count ?? post?.comments ?? 0
+  )
+  const postAgeHours = Number.isFinite(Number(post?.post_age_hours)) ? Number(post.post_age_hours) : null
+
+  return {
+    ...post,
+    post_url: postUrl,
+    post_title: title,
+    subreddit,
+    upvotes,
+    total_comments,
+    post_content: post?.post_content || post?.selftext || post?.body || post?.snippet || '',
+    post_age_hours: postAgeHours,
+    source,
+    mentionsBrand: false,
+    mentionsCompetitors: [],
+    mentionHighlights: [],
+  }
+}
+
+function pickTopPosts(posts = [], minCount = REDDIT_MIN_RESULTS_PER_BUCKET) {
+  return [...posts]
+    .sort((a, b) => {
+      if ((b.keyword_relevance_score || 0) !== (a.keyword_relevance_score || 0)) {
+        return (b.keyword_relevance_score || 0) - (a.keyword_relevance_score || 0)
+      }
+      return ((b.upvotes || 0) + (b.total_comments || 0)) - ((a.upvotes || 0) + (a.total_comments || 0))
+    })
+    .slice(0, minCount)
+}
+
+function pickNewPosts(posts = [], minCount = REDDIT_MIN_RESULTS_PER_BUCKET) {
+  return [...posts]
+    .sort((a, b) => {
+      const aAge = Number.isFinite(a.post_age_hours) ? a.post_age_hours : 999999
+      const bAge = Number.isFinite(b.post_age_hours) ? b.post_age_hours : 999999
+      return aAge - bAge
+    })
+    .slice(0, minCount)
+}
+
+function backfillBucket(bucket, candidates, minCount = REDDIT_MIN_RESULTS_PER_BUCKET) {
+  if (bucket.length >= minCount) return bucket.slice(0, minCount)
+  const existing = new Set(bucket.map(p => canonicalRedditUrl(p.post_url || p.url)).filter(Boolean))
+  const filled = [...bucket]
+  for (const candidate of candidates) {
+    const key = canonicalRedditUrl(candidate.post_url || candidate.url)
+    if (!key || existing.has(key)) continue
+    existing.add(key)
+    filled.push(candidate)
+    if (filled.length >= minCount) break
+  }
+  return filled.slice(0, minCount)
+}
+
+function extractDorkLeftovers(allDorkPosts, usedTopPosts, usedNewPosts, limit = 15) {
+  const used = new Set([
+    ...usedTopPosts.map(p => canonicalRedditUrl(p.post_url || p.url)),
+    ...usedNewPosts.map(p => canonicalRedditUrl(p.post_url || p.url)),
+  ].filter(Boolean))
+
+  return allDorkPosts.filter(post => !used.has(canonicalRedditUrl(post.post_url || post.url))).slice(0, limit)
 }
 
 /**
@@ -564,6 +670,14 @@ function ensureDomain(input) {
     .replace(/^www\./i, '')
     .replace(/\/.*$/, '')
     .replace(/\s+/g, '')
+}
+
+function normalizeKeywordKey(keyword) {
+  return (keyword || '')
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
 }
 
 function normalizeUrlForMatch(url) {
@@ -1056,63 +1170,64 @@ function repairTruncatedJson(raw) {
 
 // Initial prompts per keyword — kept small so the LLM call is fast (<10s).
 // Background auto-expansion (page.jsx useEffect) silently fills up to 5 prompts per keyword.
-const INITIAL_PROMPTS_PER_KW = 2
+const INITIAL_PROMPTS_PER_KW = 3
 const INITIAL_KW_COUNT = 10
 
 async function promptKeywords(payload) {
   const companyName = payload.companyName || payload.domain
-  // Tight, minimal prompt — fewer input tokens → faster response
-  const prompt = `You are an SEO and LLM visibility expert. Generate exactly ${INITIAL_KW_COUNT} high-impact keywords for the company below.
+  const pageSnippet = payload.pageContent.slice(0, 2000)
+  const sysMsg = `Return only valid JSON. Exactly 5 keywords, exactly ${INITIAL_PROMPTS_PER_KW} prompts each. No extra fields.`
 
-For each keyword return:
+  function makeMessages(intentHint) {
+    const prompt = `SEO expert. Generate exactly 5 ${intentHint} keywords for this company.
+
+Each keyword:
 - term: keyword phrase
 - intent: informational | commercial | navigational
-- why: rationale in max 15 words
-- prompts: exactly ${INITIAL_PROMPTS_PER_KW} broad ranking/comparison prompts (e.g. "Top 10 [category] platforms for enterprises", "Best [category] tools for startups 2026") that would lead LLMs to list multiple solutions and naturally include ${companyName}.
+- prompts: exactly ${INITIAL_PROMPTS_PER_KW} short ranking/comparison prompts (e.g. "Best [category] tools for startups 2026") that would lead LLMs to list ${companyName} among competitors.
 
-Return ONLY this JSON (no prose):
-{"explain":"one-sentence market position","keywords":[{"term":"...","intent":"...","why":"...","prompts":["...","..."]}]}
+Return ONLY JSON, no prose:
+{"keywords":[{"term":"...","intent":"...","prompts":["...","..."]}]}
 
-Page content: ${payload.pageContent.slice(0, 5000)}`
+Page content: ${pageSnippet}`
+    return [
+      { role: 'system', content: sysMsg },
+      { role: 'user', content: prompt }
+    ]
+  }
 
-  const messages = [
-    { role: 'system', content: `SEO strategist. Return only JSON. Generate exactly ${INITIAL_KW_COUNT} keywords with ${INITIAL_PROMPTS_PER_KW} ranking prompts each.` },
-    { role: 'user', content: prompt }
-  ]
-  const raw = await callOpenRouter(messages, KEYWORD_TEMPERATURE, 3500)
-
-  function parseKeywords(text) {
-    // Try normal extraction first
+  function parseKeywords(text, label) {
     try { return JSON.parse(extractJsonFromText(text)) } catch (_) {}
-    // Try repairing truncated JSON
     try {
-      const extracted = extractJsonFromText(text)
-      const repaired = repairTruncatedJson(extracted)
+      const repaired = repairTruncatedJson(extractJsonFromText(text))
       if (repaired) return JSON.parse(repaired)
     } catch (_) {}
-    // Last resort: repair the raw text itself
     const repaired = repairTruncatedJson(text)
     if (repaired) return JSON.parse(repaired)
-    throw new Error('Unable to parse JSON from OpenRouter keyword response')
+    throw new Error(`Unable to parse JSON from OpenRouter keyword response (${label})`)
   }
 
-  try {
-    const json = parseKeywords(raw)
-    // Normalise: keep up to 20 complete keywords (truncation may give us fewer — that's fine)
-    if (json.keywords && Array.isArray(json.keywords)) {
-      json.keywords = json.keywords
-        .filter(kw => kw && kw.term)  // drop any half-written last entry
-        .slice(0, INITIAL_KW_COUNT)
-        .map(kw => ({
-          ...kw,
-          prompts: Array.isArray(kw.prompts) ? kw.prompts.filter(Boolean).slice(0, INITIAL_PROMPTS_PER_KW) : []
-        }))
-    }
-    return json
-  } catch (error) {
-    console.error('[promptKeywords] raw response (first 500 chars):', (raw || '').slice(0, 500))
-    throw new Error('Unable to parse JSON from OpenRouter keyword response')
-  }
+  // Run two 5-keyword calls in parallel — each ~600 tokens output vs 1200 for one big call
+  const [rawA, rawB] = await Promise.all([
+    callOpenRouter(makeMessages('informational/awareness'), KEYWORD_TEMPERATURE, 800),
+    callOpenRouter(makeMessages('commercial/navigational'), KEYWORD_TEMPERATURE, 800),
+  ])
+
+  const jsonA = parseKeywords(rawA, 'batch-A')
+  const jsonB = parseKeywords(rawB, 'batch-B')
+
+  const merged = [
+    ...(Array.isArray(jsonA?.keywords) ? jsonA.keywords : []),
+    ...(Array.isArray(jsonB?.keywords) ? jsonB.keywords : []),
+  ]
+    .filter(kw => kw && kw.term)
+    .slice(0, INITIAL_KW_COUNT)
+    .map(kw => ({
+      ...kw,
+      prompts: Array.isArray(kw.prompts) ? kw.prompts.filter(Boolean).slice(0, INITIAL_PROMPTS_PER_KW) : []
+    }))
+
+  return { keywords: merged }
 }
 
 
@@ -1128,7 +1243,7 @@ async function fetchKeywordSerpPosition(keyword, targetDomain, depth = 100) {
     language_code: 'en',
     device: 'desktop',
     os: 'windows',
-    depth,
+    depth: Math.min(depth, 30), // Cap at 30 — if domain doesn't rank in top 30 it's not ranking; reduces latency from ~10s to ~3s
     group_organic_results: true
   }
 
@@ -1369,10 +1484,14 @@ async function saveSerpAnalysis(companyId, keyword, serpData) {
   if (!context) return null
 
   const serpAnalysis = context.approvedContext?.serpAnalysis || {}
+  const keywordKey = normalizeKeywordKey(keyword)
+  if (!keywordKey) return null
   // Merge into existing record so serpAndDork and redditTopNew can each save their portion
-  serpAnalysis[keyword] = {
-    ...(serpAnalysis[keyword] || {}),
+  serpAnalysis[keywordKey] = {
+    ...(serpAnalysis[keywordKey] || {}),
     ...serpData,
+    keyword,
+    keywordKey,
     analyzedAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + 12 * 60 * 60 * 1000).toISOString()
   }
@@ -1394,12 +1513,26 @@ async function getSerpAnalysis(companyId, keyword) {
   if (!companyId || !keyword) return null
 
   const context = await getCompanyContext(companyId)
-  if (!context?.approvedContext?.serpAnalysis?.[keyword]) return null
+  const keywordKey = normalizeKeywordKey(keyword)
+  const exactKey = keyword.toString()
+  const analysis = context?.approvedContext?.serpAnalysis?.[keywordKey]
+    || context?.approvedContext?.serpAnalysis?.[exactKey]
+  if (!analysis) return null
 
-  const analysis = context.approvedContext.serpAnalysis[keyword]
+   // Guard against legacy/misaligned cached payloads bleeding across keywords.
+   const analysisKey = normalizeKeywordKey(analysis.keywordKey || analysis.keyword || '')
+   if (analysisKey && analysisKey !== keywordKey) {
+    console.log('[serp-scout] getSerpAnalysis keyword mismatch, ignoring cache', {
+      requestedKeyword: keyword,
+      requestedKey: keywordKey,
+      analysisKey,
+    })
+    return null
+  }
+
   const stale = needsRefresh(analysis.analyzedAt, 12)
 
-  console.log('[serp-scout] getSerpAnalysis', { keyword, stale, analyzedAt: analysis.analyzedAt })
+  console.log('[serp-scout] getSerpAnalysis', { keyword, keywordKey, stale, analyzedAt: analysis.analyzedAt })
   // Always return cached data — let the caller decide what to do with stale data
   return { ...analysis, stale }
 }
@@ -1933,12 +2066,66 @@ Return this exact format - ONLY JSON, nothing else:
     if (!reqCompanyId || !keyword) return res.status(400).json({ error: 'companyId and keyword required' })
     try {
       const context = await getCompanyContext(reqCompanyId)
-      const cached = context?.approvedContext?.citationCache?.[keyword]
-      if (!cached?.records?.length) return res.status(200).json({ found: false })
-      const stale = needsRefresh(cached.cachedAt, 24)
-      return res.status(200).json({ found: true, stale, records: cached.records, summary: cached.summary, cachedAt: cached.cachedAt })
+      const keywordKey = normalizeKeywordKey(keyword)
+      const cached = context?.approvedContext?.citationCache?.[keywordKey]
+        || context?.approvedContext?.citationCache?.[keyword]
+      if (!cached?.records?.length && !cached?.inProgress) return res.status(200).json({ found: false })
+
+      const cachedKey = normalizeKeywordKey(cached?.keywordKey || cached?.keyword || '')
+      if (cachedKey && cachedKey !== keywordKey) {
+        return res.status(200).json({ found: false })
+      }
+
+      const stale = cached.records?.length ? needsRefresh(cached.cachedAt, 24) : false
+      // In-progress is stale after 2 hours — discard so user can re-trigger
+      const inProgressStale = cached.inProgress?.startedAt ? needsRefresh(cached.inProgress.startedAt, 2) : true
+      return res.status(200).json({
+        found: true,
+        stale,
+        records: cached.records || null,
+        summary: cached.summary || null,
+        cachedAt: cached.cachedAt || null,
+        inProgress: (!inProgressStale && cached.inProgress?.snapshots?.length > 0) ? cached.inProgress : null,
+      })
     } catch (e) {
       return res.status(200).json({ found: false })
+    }
+  }
+
+  // Save in-progress state (sync results + ChatGPT snapshot_ids) so the client can resume
+  // polling after navigating away and returning without re-triggering BrightData.
+  if (action === 'saveCitationInProgress') {
+    const { companyId: reqCompanyId, keyword, immediateResults, snapshots, allTriggeredPrompts, wrappedToOriginal, companyLabel } = req.body
+    if (!reqCompanyId || !keyword) return res.status(400).json({ error: 'missing params' })
+    try {
+      const context = await getCompanyContext(reqCompanyId)
+      if (!context) return res.status(404).json({ error: 'company not found' })
+      const citationCache = context.approvedContext?.citationCache || {}
+      const keywordKey = normalizeKeywordKey(keyword)
+      const existing = citationCache[keywordKey] || citationCache[keyword] || {}
+      // Preserve any existing final records — only update inProgress tracking
+      citationCache[keywordKey] = {
+        ...existing,
+        keyword,
+        keywordKey,
+        inProgress: {
+          immediateResults: immediateResults || {},
+          snapshots: snapshots || [],
+          allTriggeredPrompts: allTriggeredPrompts || [],
+          wrappedToOriginal: wrappedToOriginal || {},
+          companyLabel: companyLabel || '',
+          startedAt: new Date().toISOString(),
+        },
+      }
+      await saveCompanyContext(reqCompanyId, {
+        domain: context.domain,
+        metadata: context.metadata,
+        llmContext: context.llmContext,
+        approvedContext: { ...context.approvedContext, citationCache },
+      })
+      return res.status(200).json({ success: true })
+    } catch (e) {
+      return res.status(500).json({ error: e.message })
     }
   }
 
@@ -1949,7 +2136,16 @@ Return this exact format - ONLY JSON, nothing else:
       const context = await getCompanyContext(reqCompanyId)
       if (!context) return res.status(404).json({ error: 'company not found' })
       const citationCache = context.approvedContext?.citationCache || {}
-      citationCache[keyword] = { records, summary, cachedAt: new Date().toISOString() }
+      const keywordKey = normalizeKeywordKey(keyword)
+      // Clear inProgress when final results are saved
+      citationCache[keywordKey] = {
+        keyword,
+        keywordKey,
+        records,
+        summary,
+        cachedAt: new Date().toISOString(),
+        inProgress: null,
+      }
       await saveCompanyContext(reqCompanyId, {
         domain: context.domain,
         metadata: context.metadata,
@@ -1994,7 +2190,7 @@ Return this exact format - ONLY JSON, nothing else:
       }
 
       const [serpData, dataForSeoData] = await Promise.all([
-        fetchKeywordSerpPosition(keyword, targetDomain, 100),
+        fetchKeywordSerpPosition(keyword, targetDomain, 30),
         fetchRedditViaDataForSeo(keyword),
       ])
       const redditThreads = Array.isArray(serpData.redditThreads) ? serpData.redditThreads : []
@@ -2053,8 +2249,11 @@ Return this exact format - ONLY JSON, nothing else:
       if (reqCompanyId && !force) {
         const cached = await getSerpAnalysis(reqCompanyId, keyword)
         const cachedTop = cached?.topRedditPosts || []
-        const hasRealUpvotes = cachedTop.some(p => (p.upvotes || p.score || 0) > 0)
-        if (cached && cachedTop.length > 0 && hasRealUpvotes) {
+        const cachedNew = cached?.newRedditPosts || []
+        const hasRealUpvotes = cachedTop.some(p => parseMetricCount(p.upvotes ?? p.score ?? 0) > 0)
+        const hasEnoughTop = cachedTop.length >= REDDIT_MIN_RESULTS_PER_BUCKET
+        const hasEnoughNew = cachedNew.length >= REDDIT_MIN_RESULTS_PER_BUCKET
+        if (cached && cachedTop.length > 0 && hasRealUpvotes && hasEnoughTop && hasEnoughNew) {
           console.log('[serp-scout] redditTopNew cache hit', { keyword, stale: cached.stale, sampleUpvotes: cachedTop[0]?.upvotes })
           logSerpAction({ user: userCtx, action: 'redditTopNew', domain: req.body.domain, keyword, durationMs: Date.now() - _t0, fromCache: true }).catch(() => {})
           return res.status(200).json({
@@ -2062,43 +2261,61 @@ Return this exact format - ONLY JSON, nothing else:
             keyword,
             topRedditPosts: cached.topRedditPosts || [],
             newRedditPosts: cached.newRedditPosts || [],
+            dorkRedditLinks: cached.dorkRedditLinks || [],
             enriched: false,
             fromCache: true,
             stale: cached.stale || false,
             analyzedAt: cached.analyzedAt,
           })
         }
-        if (cached && cachedTop.length > 0 && !hasRealUpvotes) {
-          console.log('[serp-scout] redditTopNew cache has 0 upvotes — skipping cache, fetching fresh')
+        if (cached && cachedTop.length > 0 && (!hasRealUpvotes || !hasEnoughTop || !hasEnoughNew)) {
+          console.log('[serp-scout] redditTopNew cache incomplete — skipping cache, fetching fresh', {
+            hasRealUpvotes,
+            hasEnoughTop,
+            hasEnoughNew,
+            topCount: cachedTop.length,
+            newCount: cachedNew.length,
+          })
         }
       }
 
-      const normalize = (post) => {
-        // Parse as number — API may return string like "1.2k" or numeric
-        const toNum = v => { const n = parseInt(v, 10); return isNaN(n) ? 0 : n }
-        const upvotes = toNum(post.upvotes ?? post.score ?? post.ups ?? post.vote_count ?? post.likes ?? post.points ?? 0)
-        const total_comments = toNum(post.total_comments ?? post.num_comments ?? post.comment_count ?? post.comments ?? 0)
-        return {
-          ...post, // pass all raw fields through so PostCard can find any field name
-          post_url: post.post_url || post.url || '',
-          post_title: post.post_title || post.title || post.name || '',
-          subreddit: post.subreddit || post.community || post.subreddit_name_prefixed?.replace('r/', '') || '',
-          upvotes,
-          total_comments,
-          post_content: post.post_content || post.selftext || post.body || '',
-          source: 'reddit_api',
-          mentionsBrand: false,
-          mentionsCompetitors: [],
-          mentionHighlights: [],
-        }
-      }
-
-      // Use custom Render Reddit API — filtered, accurate results
+      const _t1 = Date.now()
       const redditData = await fetchRedditTopNewPosts(keyword)
-      console.log('[redditTopNew] fetched', { top: redditData.top_posts.length, new: redditData.new_posts.length, keyword })
+      console.log('[redditTopNew] source fetch complete', {
+        renderTop: redditData.top_posts.length,
+        renderNew: redditData.new_posts.length,
+        ms: Date.now() - _t1,
+        keyword,
+      })
 
-      const topRedditPosts = (redditData.top_posts || []).slice(0, 10).map(normalize)
-      const newRedditPosts = (redditData.new_posts || []).slice(0, 10).map(normalize)
+      const topPrimaryPool = [
+        ...(redditData.top_posts || []).map(p => normalizeRedditPost(p, 'reddit_api')),
+      ]
+
+      const newPrimaryPool = [
+        ...(redditData.new_posts || []).map(p => normalizeRedditPost(p, 'reddit_api')),
+      ]
+
+      const dynamicBestPool = [...topPrimaryPool, ...newPrimaryPool]
+      let topRedditPosts = pickTopPosts(dynamicBestPool, REDDIT_MIN_RESULTS_PER_BUCKET)
+
+      const freshNewCandidates = pickNewPosts(newPrimaryPool, REDDIT_MIN_RESULTS_PER_BUCKET * 2)
+      let newRedditPosts = freshNewCandidates.slice(0, REDDIT_MIN_RESULTS_PER_BUCKET)
+      const topUrls = new Set(topRedditPosts.map(p => canonicalRedditUrl(p.post_url || p.url)).filter(Boolean))
+      const distinctNewPosts = freshNewCandidates.filter(
+        p => !topUrls.has(canonicalRedditUrl(p.post_url || p.url))
+      )
+      // Prefer distinct new posts, but do not underfill the bucket if top/new overlap is high.
+      newRedditPosts = distinctNewPosts.length >= REDDIT_MIN_RESULTS_PER_BUCKET
+        ? distinctNewPosts.slice(0, REDDIT_MIN_RESULTS_PER_BUCKET)
+        : freshNewCandidates.slice(0, REDDIT_MIN_RESULTS_PER_BUCKET)
+      const dorkRedditLinks = []
+
+      console.log('[redditTopNew] source stats', {
+        keyword,
+        topPrimaryBefore: topPrimaryPool.length,
+        newPrimaryBefore: newPrimaryPool.length,
+      })
 
       console.log('[redditTopNew] normalized top[0]:', topRedditPosts[0] ? {
         title: topRedditPosts[0].post_title?.substring(0, 40),
@@ -2108,7 +2325,7 @@ Return this exact format - ONLY JSON, nothing else:
 
       // Only save to cache if we got real upvote data — avoids poisoning cache with 0s
       if (reqCompanyId && topRedditPosts.some(p => p.upvotes > 0)) {
-        saveSerpAnalysis(reqCompanyId, keyword, { topRedditPosts, newRedditPosts })
+        saveSerpAnalysis(reqCompanyId, keyword, { topRedditPosts, newRedditPosts, dorkRedditLinks })
           .catch(e => console.warn('[serp-scout] redditTopNew save failed', e.message))
       }
 
@@ -2118,6 +2335,7 @@ Return this exact format - ONLY JSON, nothing else:
         keyword,
         topRedditPosts,
         newRedditPosts,
+        dorkRedditLinks,
         enriched: false,
         fromCache: false,
       })
@@ -2144,7 +2362,9 @@ Return this exact format - ONLY JSON, nothing else:
       // Skip cache for quickMode so phase 2 can still run full enrichment
       if (requestCompanyId && !quickMode) {
         const cachedAnalysis = await getSerpAnalysis(requestCompanyId, keyword)
-        if (cachedAnalysis) {
+        const hasSerpThreadPayload = Array.isArray(cachedAnalysis?.redditThreads)
+        const hasSerpSignals = cachedAnalysis?.position != null || (cachedAnalysis?.examined || 0) > 0
+        if (cachedAnalysis && hasSerpThreadPayload && hasSerpSignals) {
           console.log('[serp-scout] returning cached SERP analysis', { keyword, companyId: requestCompanyId })
           return res.status(200).json({
             success: true,
@@ -2163,6 +2383,13 @@ Return this exact format - ONLY JSON, nothing else:
             expiresAt: cachedAnalysis.expiresAt
           })
         }
+        if (cachedAnalysis && (!hasSerpThreadPayload || !hasSerpSignals)) {
+          console.log('[serp-scout] keywordSerp cache incomplete — fetching fresh SERP data', {
+            keyword,
+            hasSerpThreadPayload,
+            hasSerpSignals,
+          })
+        }
       }
 
       // --- 1. KEYWORD SERP ANALYSIS (Step 5) ---
@@ -2170,7 +2397,7 @@ Return this exact format - ONLY JSON, nothing else:
       console.log('[serp-scout] fetching fresh SERP data + Reddit posts in parallel', { keyword, domain: targetDomain })
 
       const [serpData, redditApiData, dataForSeoData, storedCompanyContext] = await Promise.all([
-        fetchKeywordSerpPosition(keyword, targetDomain, 100),
+        fetchKeywordSerpPosition(keyword, targetDomain, 30),
         fetchRedditTopNewPosts(keyword),
         fetchRedditViaDataForSeo(keyword),
         requestCompanyId ? getCompanyContext(requestCompanyId).catch(err => {
@@ -2204,57 +2431,14 @@ Return this exact format - ONLY JSON, nothing else:
       // Keep raw dork results before merging — these are the pure `site:reddit.com keyword` hits
       const rawDorkResults = (dataForSeoData.top_posts || []).slice(0, 15)
 
-      // MERGE STRATEGY:
-      // 1. Combine both lists, dedup by URL
-      // 2. When a post exists in BOTH sources — enrich Reddit API data with DataForSEO's serp_rank
-      // 3. Sort by composite score: engagement (from Reddit API) + SERP relevance (from DataForSEO)
+      const allTopCandidates = [
+        ...(redditApiData.top_posts || []).map(p => normalizeRedditPost(p, 'reddit_api')),
+      ]
 
-      const mergePosts = (redditList, seoList) => {
-        const map = new Map()
-
-        // Helper to normalize URL for dedup key
-        const getKey = (url) => url ? url.toLowerCase().replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '').replace(/\/+$/, '') : ''
-
-        // Build a lookup from DataForSEO results (keyed by URL)
-        const seoLookup = new Map()
-        seoList.forEach(post => {
-          const key = getKey(post.post_url)
-          if (key) seoLookup.set(key, post)
-        })
-
-        // Add Reddit API posts first (better metadata: real upvotes/comments)
-        redditList.forEach(post => {
-          const rawUrl = post.post_url || post.url || ''
-          const key = getKey(rawUrl)
-          if (!key) return
-          const seoMatch = seoLookup.get(key)
-          map.set(key, {
-            ...post,
-            // Normalize URL field so downstream code can always use post_url
-            post_url: post.post_url || post.url || '',
-            // Normalize title field
-            post_title: post.post_title || post.title || '',
-            // Normalize upvote/comment fields from Reddit API (may use score/ups/num_comments)
-            upvotes: post.upvotes || post.score || post.ups || post.points || 0,
-            total_comments: post.total_comments || post.num_comments || post.comments || 0,
-            source: seoMatch ? 'both' : 'reddit_api',
-            serp_rank: seoMatch?.serp_rank || 999 // Enrich with SERP rank if available
-          })
-        })
-
-        // Add DataForSEO-only posts (ones NOT found in Reddit API)
-        seoList.forEach(post => {
-          const key = getKey(post.post_url)
-          if (key && !map.has(key)) {
-            map.set(key, { ...post, source: 'dataforseo' })
-          }
-        })
-
-        return Array.from(map.values())
-      }
-
-      // Merge "Top" candidates
-      const allTopCandidates = mergePosts(redditApiData.top_posts || [], dataForSeoData.top_posts || [])
+      const allNewCandidates = [
+        ...(redditApiData.new_posts || []).map(p => normalizeRedditPost(p, 'reddit_api')),
+      ]
+      const dynamicBestCandidates = [...allTopCandidates, ...allNewCandidates]
 
       // Debug: log what we got from merge
       if (allTopCandidates.length > 0) {
@@ -2273,23 +2457,19 @@ Return this exact format - ONLY JSON, nothing else:
         }, null, 2))
       }
 
-      // Sort by COMPOSITE SCORE:
-      // - Posts found in both sources get a bonus (they're validated by Google AND Reddit)
-      // - Then sort by engagement (upvotes + comments) as primary
-      // - Use SERP rank as tiebreaker (lower rank = higher in Google = better)
-      const topRedditPosts = allTopCandidates
+      const filteredTopRedditPosts = dynamicBestCandidates
+        .slice()
         .sort((a, b) => {
-          const bothBonus = (src) => src === 'both' ? 1000 : 0
-          const engagementA = (a.upvotes || 0) + (a.total_comments || 0) + bothBonus(a.source)
-          const engagementB = (b.upvotes || 0) + (b.total_comments || 0) + bothBonus(b.source)
-          if (engagementB !== engagementA) return engagementB - engagementA
-          return (a.serp_rank || 999) - (b.serp_rank || 999) // tiebreaker: Google rank
+          return ((b.upvotes || 0) + (b.total_comments || 0)) - ((a.upvotes || 0) + (a.total_comments || 0))
         })
         .slice(0, 10)
+      const newRedditPosts = pickNewPosts(allNewCandidates, 10)
 
-      // Merge "New" candidates — prioritize Reddit API's new posts, backfill with DataForSEO
-      const allNewCandidates = mergePosts(redditApiData.new_posts || [], dataForSeoData.new_posts || [])
-      const newRedditPosts = allNewCandidates.slice(0, 10)
+      console.log('[serp-scout] keywordSerp source stats', {
+        keyword,
+        topBefore: allTopCandidates.length,
+        newBefore: allNewCandidates.length,
+      })
 
 
       // Build mention targets from already-fetched company context
@@ -2320,7 +2500,7 @@ Return this exact format - ONLY JSON, nothing else:
           examined: serpData.examined,
           redditThreads: redditThreads.map(t => ({ ...t, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
           hasRedditMentions: redditThreads.length > 0,
-          topRedditPosts: topRedditPosts.map(p => ({ ...p, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
+          topRedditPosts: filteredTopRedditPosts.map(p => ({ ...p, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
           newRedditPosts: newRedditPosts.map(p => ({ ...p, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
           dorkRedditLinks: dorkResultsFiltered.map(p => ({ ...p, mentionsBrand: false, mentionsCompetitors: [], mentionHighlights: [] })),
           suggestedPosts: [],
@@ -2333,7 +2513,7 @@ Return this exact format - ONLY JSON, nothing else:
 
       // Run all 4 enrichment batches in parallel — all tasks queue into the shared limiter together
       console.log('[serp-scout] enriching all posts in parallel', {
-        threads: redditThreads.length, top: topRedditPosts.length,
+        threads: redditThreads.length, top: filteredTopRedditPosts.length,
         new: newRedditPosts.length, dork: dorkResultsFiltered.length
       })
       const fetchContent = (post) => postDetailsLimiter(async () => {
@@ -2345,9 +2525,9 @@ Return this exact format - ONLY JSON, nothing else:
         redditThreads.length
           ? Promise.all(redditThreads.map(thread => postDetailsLimiter(() => enrichRedditThread(thread))))
           : Promise.resolve([]),
-        topRedditPosts.length > 0
-          ? Promise.all(topRedditPosts.map(fetchContent))
-          : Promise.resolve(topRedditPosts),
+        filteredTopRedditPosts.length > 0
+          ? Promise.all(filteredTopRedditPosts.map(fetchContent))
+          : Promise.resolve(filteredTopRedditPosts),
         newRedditPosts.length > 0
           ? Promise.all(newRedditPosts.map(fetchContent))
           : Promise.resolve(newRedditPosts),
@@ -2608,12 +2788,15 @@ Return this exact format - ONLY JSON, nothing else:
   let pages
   try {
     pages = await scrapeDomainPages(domain)
-    if (!pages || !pages.length) {
-      throw new Error('Unable to scrape any pages from the domain')
-    }
   } catch (error) {
-    logSerpAction({ user: userCtx, action: 'analyzeDomain', domain, durationMs: Date.now() - _domainStart, error: `scrape failed: ${error.message}` }).catch(() => {})
-    return res.status(502).json({ error: error.message })
+    console.warn('[serp-scout] scrapeDomainPages threw unexpectedly', { domain, error: error.message })
+    pages = []
+  }
+  if (!pages || !pages.length) {
+    // Scraping blocked (bot protection, unusual TLD, etc.) — fall back to domain-only context.
+    // The LLM can still infer company type and generate useful keywords from the domain name alone.
+    console.warn('[serp-scout] scraping failed — proceeding with domain-name-only context', { domain })
+    pages = [{ url: `https://${domain}`, text: `Company domain: ${domain}` }]
   }
 
   // Extract company name from scraped content (independent of database)

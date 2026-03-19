@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { auth } from "@/lib/firebaseClient";
 import {
   Tabs, TabsContent, TabsList, TabsTrigger,
@@ -175,13 +175,15 @@ export default function SerpScout() {
 
   // ── Effects ──────────────────────────────────────────────────────────────
 
-  // Warmup the Render Reddit API on mount — awaited silently so the backend is
-  // genuinely warm before analysis starts (the /warmup route waits up to 45s).
+  // Warmup the Render Reddit API on mount — the warmup route waits up to 45s for cold start.
+  // We store the promise in a ref so redditTopNew can await it without blocking the button.
   const [redditWarm, setRedditWarm] = useState(false);
+  const warmupPromiseRef = useRef(null);
   useEffect(() => {
-    fetch("/api/threadflow/warmup")
+    const p = fetch("/api/threadflow/warmup")
       .then(() => setRedditWarm(true))
-      .catch(() => setRedditWarm(true)); // even on error, allow analysis to proceed
+      .catch(() => setRedditWarm(true)); // unblock even on error so UI never hangs
+    warmupPromiseRef.current = p;
   }, []);
 
   // Update recent domains list when a new domain is analyzed
@@ -249,7 +251,7 @@ export default function SerpScout() {
   // Auto-scan all posts for full content mentions when SERP results load (manual citation search)
   useEffect(() => {
     if (!serpResults || Object.keys(serpResults).length === 0) return;
-    if (!companyName || competitors.length === 0) return;
+    if (!companyName) return; // scan brand even when no competitors are configured
 
     const autoScanPosts = async () => {
       const postsToScan = [];
@@ -546,61 +548,155 @@ export default function SerpScout() {
         } catch (_) { /* cache miss — proceed to BrightData */ }
       }
 
-      // Step 1: Trigger all platforms in parallel — cap at 2 prompts per platform for speed
-      const triggerRes = await apiPost("/api/threadflow/brightdata-citations", {
-        action: "trigger",
-        prompts: effectivePrompts,
-        companyName: companyName || domain.trim(),
-        maxPromptsPerPlatform: effectivePrompts.length,
-      });
+      const companyLabel = companyName || domain.trim();
 
-      if (!triggerRes?.snapshots?.length) {
-        throw new Error(triggerRes?.error || "No platform snapshots were triggered");
-      }
+      // ── PARALLEL PER-PROMPT TRIGGERS ──────────────────────────────────────
+      // Fire one BrightData request per prompt (max 4) simultaneously.
+      // Each request sends 1 prompt to all 4 AI platforms — BrightData processes 1 prompt
+      // faster than batching N prompts together. UI updates as each prompt's results arrive.
+      const promptsToUse = effectivePrompts.slice(0, 4);
 
-      const { snapshots, prompts: triggeredPrompts, wrappedToOriginal } = triggerRes;
+      // Shared accumulation across all per-prompt triggers
+      const mergedPlatforms = {};
+      const allTriggeredPrompts = [];
+      const allSnapshots = [];       // ChatGPT snapshot_ids across all triggers
+      const completedPlatforms = new Set();
+      const completedSnapshotIds = new Set();
+      const wrappedToOriginal = {};
+      let firstResultShown = false;
+      let anyTriggerSucceeded = false;
+
+      // Initialize all 4 platform statuses as pending
+      setCitationPlatformStatus({ ChatGPT: 'pending', Perplexity: 'pending', Gemini: 'pending', 'Google AI': 'pending' });
+
       toast({
         title: "Citation search started",
-        description: `Querying ${snapshots.length} AI platforms. Results appear as each completes…`,
+        description: `Querying 4 AI platforms across ${promptsToUse.length} prompt${promptsToUse.length > 1 ? 's' : ''}…`,
       });
 
-      // Initialize all platforms as pending so the UI shows status immediately
-      setCitationPlatformStatus(Object.fromEntries(snapshots.map(s => [s.platform, 'pending'])));
+      // Merge one platform's new data into mergedPlatforms, accumulating results
+      const mergePlatformData = (platform, data) => {
+        const existing = mergedPlatforms[platform];
+        if (existing?.status === 'ready' && data?.status === 'ready') {
+          mergedPlatforms[platform] = {
+            ...data,
+            results: [...(existing.results || []), ...(data.results || [])],
+            redditUrls: [...new Set([...(existing.redditUrls || []), ...(data.redditUrls || [])])],
+            mentionCount: (existing.mentionCount || 0) + (data.mentionCount || 0),
+          };
+        } else {
+          mergedPlatforms[platform] = data;
+        }
+      };
 
-      // Step 2: Poll with smart schedule — faster intervals, skip completed platforms
-      // First results typically arrive in 20-35s
-      const INITIAL_DELAY  = 10_000;
-      const POLL_INTERVAL  = 10_000;
-      const POLL_MAX_ATTEMPTS = 14;  // 10s + 14×10s = max ~2.5 min
-      const completedPlatforms = new Set();
-      let pendingSnapshots = [...snapshots];
-      const mergedPlatforms = {};
+      const refreshCitationUI = (isPartial) => {
+        const urls = [...new Set(Object.values(mergedPlatforms).filter(p => p.status === 'ready').flatMap(p => p.redditUrls || []))];
+        setCitationResults(prev => ({
+          ...prev,
+          records: buildCitationRecords(mergedPlatforms, allTriggeredPrompts),
+          summary: { totalRedditUrlsFound: urls.length },
+          partial: isPartial,
+        }));
+        setCitationPlatformStatus(prev => {
+          const next = { ...(prev || {}) };
+          Object.entries(mergedPlatforms).forEach(([p, d]) => {
+            next[p] = d.status === 'ready' ? 'ready' : d.status === 'error' ? 'error' : 'pending';
+          });
+          return next;
+        });
+      };
 
-      await new Promise(r => setTimeout(r, INITIAL_DELAY));
+      // Fire all per-prompt triggers simultaneously — each resolves independently
+      await Promise.all(promptsToUse.map(prompt =>
+        apiPost("/api/threadflow/brightdata-citations", {
+          action: "trigger",
+          prompts: [prompt],
+          companyName: companyLabel,
+          maxPromptsPerPlatform: 1,
+        }).then(res => {
+          if (!res) return;
+          anyTriggerSucceeded = true;
 
-      for (let attempt = 0; attempt < POLL_MAX_ATTEMPTS; attempt++) {
+          // Accumulate metadata
+          (res.prompts || []).forEach(p => { if (!allTriggeredPrompts.includes(p)) allTriggeredPrompts.push(p); });
+          Object.assign(wrappedToOriginal, res.wrappedToOriginal || {});
+          // Collect ChatGPT snapshots (deduped)
+          (res.snapshots || []).forEach(s => {
+            if (!allSnapshots.some(x => x.snapshot_id === s.snapshot_id)) allSnapshots.push(s);
+          });
+
+          // Merge sync (immediate) platform results and update UI
+          Object.entries(res.immediateResults || {}).forEach(([platform, data]) => {
+            mergePlatformData(platform, data);
+            completedPlatforms.add(platform);
+          });
+
+          refreshCitationUI(true);
+
+          // Release loading state on the first sync result that arrives
+          if (!firstResultShown && Object.keys(res.immediateResults || {}).length > 0) {
+            firstResultShown = true;
+            setCitationLoading(false);
+          }
+        }).catch(e => {
+          console.error('[citations] trigger failed for prompt:', prompt, e.message);
+        })
+      ));
+
+      if (!anyTriggerSucceeded) throw new Error("All platform triggers failed");
+
+      // If no sync results arrived at all, release loading now
+      if (!firstResultShown) setCitationLoading(false);
+
+      // ── Poll ChatGPT snapshots ─────────────────────────────────────────────
+      // All ChatGPT snapshot_ids (one per prompt) are polled together.
+      // Backend merges multiple snapshots for the same platform automatically.
+      const INITIAL_DELAY     = 5_000;
+      const POLL_INTERVAL     = 5_000;
+      const POLL_MAX_ATTEMPTS = 20;
+      let pendingSnapshots = [...allSnapshots];
+
+      if (pendingSnapshots.length > 0) {
+        await new Promise(r => setTimeout(r, INITIAL_DELAY));
+      }
+
+      for (let attempt = 0; attempt < POLL_MAX_ATTEMPTS && pendingSnapshots.length > 0; attempt++) {
         if (attempt > 0) await new Promise(r => setTimeout(r, POLL_INTERVAL));
 
-        // Only poll snapshots that haven't completed yet
         const pollRes = await apiPost("/api/threadflow/brightdata-citations", {
           action: "poll",
           snapshots: pendingSnapshots,
-          prompts: triggeredPrompts,
-          companyName: companyName || domain.trim(),
+          prompts: allTriggeredPrompts,
+          companyName: companyLabel,
           wrappedToOriginal,
         });
 
         if (!pollRes?.platforms) continue;
 
-        // Merge newly completed platforms into our running result
+        // Merge completed platform data; skip 'running' so existing data isn't overwritten
         Object.entries(pollRes.platforms).forEach(([platform, data]) => {
-          if (data.status === 'ready' || data.status === 'error') {
+          if (data.status === 'ready') {
+            mergePlatformData(platform, data);
+            completedPlatforms.add(platform);
+          } else if (data.status === 'error') {
+            mergedPlatforms[platform] = data;
             completedPlatforms.add(platform);
           }
-          mergedPlatforms[platform] = data;
         });
 
-        // Update platform status UI
+        // Track per-snapshot_id completion (backend returns snapshotStatuses map)
+        const snapshotStatuses = pollRes.snapshotStatuses || {};
+        Object.entries(snapshotStatuses).forEach(([sid, status]) => {
+          if (status === 'ready' || status === 'error') completedSnapshotIds.add(sid);
+        });
+        pendingSnapshots = allSnapshots.filter(s => !completedSnapshotIds.has(s.snapshot_id));
+
+        const allRedditUrls = [...new Set(Object.values(mergedPlatforms).filter(p => p.status === 'ready').flatMap(p => p.redditUrls || []))];
+        setCitationResults({
+          records: buildCitationRecords(mergedPlatforms, allTriggeredPrompts),
+          summary: { ...pollRes.summary, totalRedditUrlsFound: allRedditUrls.length },
+          partial: pendingSnapshots.length > 0,
+        });
         setCitationPlatformStatus(prev => {
           const next = { ...(prev || {}) };
           Object.entries(mergedPlatforms).forEach(([p, d]) => {
@@ -609,39 +705,17 @@ export default function SerpScout() {
           return next;
         });
 
-        // Remove completed from pending list for next poll
-        pendingSnapshots = snapshots.filter(s => !completedPlatforms.has(s.platform));
-
-        // Show partial results — only once at least one platform is actually ready
-        const hasReadyPlatform = Object.values(mergedPlatforms).some(p => p.status === 'ready');
-        if (hasReadyPlatform) {
-          const partialRecords = buildCitationRecords(mergedPlatforms, triggeredPrompts);
-          const allRedditUrls = [...new Set(Object.values(mergedPlatforms)
-            .filter(p => p.status === 'ready')
-            .flatMap(p => p.redditUrls || []))];
-          setCitationResults({
-            records: partialRecords,
-            summary: { ...pollRes.summary, totalRedditUrlsFound: allRedditUrls.length },
-            partial: pendingSnapshots.length > 0,
-          });
-        }
-
-        // All done if no pending snapshots remain
-        if (pendingSnapshots.length === 0) {
-          break;
-        }
+        if (pendingSnapshots.length === 0) break;
       }
 
-      // Final update — ensure UI shows complete data
+      // Final save + toast
       if (Object.keys(mergedPlatforms).length > 0) {
-        const records = buildCitationRecords(mergedPlatforms, triggeredPrompts);
+        const records = buildCitationRecords(mergedPlatforms, allTriggeredPrompts);
         const allRedditUrls = [...new Set(Object.values(mergedPlatforms)
-          .filter(p => p.status === 'ready')
-          .flatMap(p => p.redditUrls || []))];
-        const summary = { totalRedditUrlsFound: allRedditUrls.length, uniqueRedditUrls: allRedditUrls, platformsComplete: completedPlatforms.size, platformsTotal: snapshots.length };
+          .filter(p => p.status === 'ready').flatMap(p => p.redditUrls || []))];
+        const summary = { totalRedditUrlsFound: allRedditUrls.length, uniqueRedditUrls: allRedditUrls, platformsComplete: completedPlatforms.size, platformsTotal: 4 };
         setCitationResults({ records, summary, partial: false });
 
-        // Save to cache so next run is instant
         if (companyId && selectedKw?.term && records.length > 0) {
           apiPost("/api/threadflow/serp-scout", {
             action: "saveCitationCache",
@@ -653,11 +727,10 @@ export default function SerpScout() {
         }
 
         const totalPosts = allRedditUrls.length;
-        if (totalPosts > 0) {
-          toast({ title: "Citations complete", description: `Found ${totalPosts} Reddit links across ${completedPlatforms.size} AI platforms` });
-        } else {
-          toast({ title: "Citations complete", description: "AI platforms did not surface Reddit threads for these prompts." });
-        }
+        toast({ title: "Citations complete", description: totalPosts > 0
+          ? `Found ${totalPosts} Reddit links across ${completedPlatforms.size} AI platforms`
+          : "AI platforms did not surface Reddit threads for these prompts."
+        });
       } else {
         toast({ variant: "destructive", title: "Citation search timed out", description: "Try again or use fewer prompts." });
       }
@@ -777,13 +850,17 @@ export default function SerpScout() {
       .catch(e => console.error("[Reddit Finder] serpAndDork failed:", e.message))
       .finally(() => setSerpThreadsLoading(false));
 
-    // 2. Reddit top/new — populates Top + New tabs (~5-15s)
-    const redditPromise = apiPost("/api/threadflow/serp-scout", {
-      action: "redditTopNew",
-      keyword: kwTerm,
-      domain: kwDomain,
-      companyId,
-    }).then(data => {
+    // 2. Reddit top/new — Render API only (curated results). Await warmup so Render is ready.
+    //    serpAndDork + citations already fired above and don't wait for this.
+    const redditPromise = (async () => {
+      if (warmupPromiseRef.current) await warmupPromiseRef.current;
+      return apiPost("/api/threadflow/serp-scout", {
+        action: "redditTopNew",
+        keyword: kwTerm,
+        domain: kwDomain,
+        companyId,
+      });
+    })().then(data => {
       merge(data);
       if (data.stale) {
         backgroundRefresh("redditTopNew");
