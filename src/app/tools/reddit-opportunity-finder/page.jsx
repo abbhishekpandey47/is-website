@@ -1,11 +1,33 @@
 "use client";
 
 import Link from "next/link";
-// ArrowRight no longer needed — removed "Learn more" links from cards
-import CalendarBooking from "../../calendarButton";
 import TrustedMarquee from "@/app/lp/reddit-marketing-agency/TrustedMarquee";
 
 const CTA_URL = "/reddit-opportunity-finder";
+
+/* ── Shared button styles ─────────────────────────────────────────────── */
+
+function PrimaryCTA({ className = "" }) {
+  return (
+    <Link
+      href={CTA_URL}
+      className={`inline-flex items-center rounded-[5px] bg-[#5f64ff] px-6 py-2.5 text-[14px] font-medium text-white transition-colors hover:bg-[#4e53e6] ${className}`}
+    >
+      Try Reddit Radar Free →
+    </Link>
+  );
+}
+
+function GhostCTA({ href, children }) {
+  return (
+    <Link
+      href={href}
+      className="inline-flex items-center rounded-[5px] border border-white/15 px-6 py-2.5 text-[14px] font-medium text-gray-300 transition-colors hover:border-white/30 hover:text-white"
+    >
+      {children}
+    </Link>
+  );
+}
 
 /* ── Feature card (Resend two-zone layout, Infrasity styling) ──────────── */
 
@@ -24,6 +46,13 @@ function FeatureCard({ screenshot, num, heading, subtitle, previewHeight = 280 }
           src={screenshot}
           alt={heading}
           className="w-full h-full object-cover object-top"
+        />
+        {/* Vignette — all edges fade to card bg */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            boxShadow: "inset 0 0 40px 20px #0e0b1b",
+          }}
         />
         <div
           className="absolute bottom-0 left-0 right-0 pointer-events-none"
@@ -60,7 +89,7 @@ function FeatureCard({ screenshot, num, heading, subtitle, previewHeight = 280 }
 
 /* ── Browser chrome wrapper ────────────────────────────────────────────── */
 
-function BrowserChrome({ children, url = "reddit-scout.infrasity.com" }) {
+function BrowserChrome({ children, url = "infrasity.com/tools/reddit-radar" }) {
   return (
     <div
       className="overflow-hidden rounded-[20px] bg-[#0e0b1b] border-[0.918px] border-solid border-[rgba(119,119,119,0.5)]"
@@ -98,9 +127,9 @@ function Hero() {
           </span>
         </div>
 
-        {/* h1 — LEFT aligned, 72-80px, plain white, NO gradient */}
+        {/* h1 */}
         <h1
-          className="font-[quicksand] text-white mb-6 max-w-[750px] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:80ms]"
+          className="font-[quicksand] text-white mb-4 max-w-[750px] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:80ms]"
           style={{
             fontSize: "clamp(60px, 7vw, 80px)",
             fontWeight: 700,
@@ -117,8 +146,8 @@ function Hero() {
 
         {/* Description */}
         <p
-          className="text-gray-300 mb-8 max-w-[500px] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:160ms]"
-          style={{ fontSize: 17, fontWeight: 300, lineHeight: 1.7 }}
+          className="mb-8 max-w-[500px] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:160ms]"
+          style={{ fontSize: 17, fontWeight: 300, lineHeight: 1.7, color: "rgba(255,255,255,0.55)" }}
         >
           Reddit Radar analyzes your domain, generates targeted keywords, and
           surfaces every Reddit thread ranking on Google — plus every AI
@@ -128,32 +157,24 @@ function Hero() {
 
         {/* Two CTA buttons side by side */}
         <div className="flex items-center gap-4 mb-4 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:240ms]">
-          <CalendarBooking
-            buttonText="Get Started →"
-            href={CTA_URL}
-            width="w-auto"
-            height="h-12"
-            textSize="text-sm"
-          />
-          <Link
-            href="#features"
-            className="inline-flex h-12 items-center rounded-[5px] border border-white/15 px-6 text-sm text-gray-300 transition-colors hover:border-white/30 hover:text-white"
-          >
-            See how it works
-          </Link>
+          <PrimaryCTA />
+          <GhostCTA href="#features">See how it works</GhostCTA>
         </div>
 
         {/* Footnote */}
-        <p className="text-[13px] text-gray-600 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:280ms]">
+        <p
+          className="text-[13px] animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:280ms]"
+          style={{ color: "rgba(255,255,255,0.3)" }}
+        >
           Free to start · No credit card required
         </p>
       </div>
 
-      {/* Hero product card — analyze screenshot in browser chrome */}
+      {/* Hero product card */}
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8 pb-20 animate-fade-up opacity-0 [animation-fill-mode:forwards] [animation-delay:360ms]">
         <BrowserChrome>
           <img
-            src="/reddit-scout/analyze.png"
+            src="/aeo/hero_image_reddit_finder.png"
             alt="Reddit Radar — Analysis Dashboard"
             className="w-full block"
           />
@@ -164,7 +185,7 @@ function Hero() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   LOGOS BAR — reuse the global TrustedMarquee component
+   LOGOS BAR
    ══════════════════════════════════════════════════════════════════════════ */
 
 function LogoCloud() {
@@ -178,30 +199,30 @@ function LogoCloud() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   FEATURES — section header + 2-col / 3-col card grid
+   FEATURES
    ══════════════════════════════════════════════════════════════════════════ */
 
 function FeaturesSection() {
   return (
-    <section id="features" className="py-24 md:py-28">
+    <section id="features" className="py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Section intro — LEFT aligned */}
-        <div className="mb-14 max-w-xl">
-          <p className="mb-3 text-[13px] text-[#5f64ff] tracking-[0.01em]">
+        {/* Section intro */}
+        <div className="mb-10 max-w-xl">
+          <p className="mb-2 text-[13px] text-[#5f64ff] tracking-[0.01em]">
             Everything in one pass
           </p>
-          <h2 className="font-[quicksand] text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+          <h2 className="font-[quicksand] text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight mb-4">
             First-class
             <br />
             <span className="text-gray-400 italic">Reddit intelligence</span>
           </h2>
-          <p className="mt-5 max-w-[480px] text-[16px] font-light text-gray-400 leading-relaxed">
+          <p className="max-w-[480px] text-[16px] font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
             Stop manually searching subreddits. Reddit Radar does the research,
             finds the signal, and shows you exactly where to show up.
           </p>
         </div>
 
-        {/* Row 1 — 2 equal columns (Domain → Overview) */}
+        {/* Row 1 — 2 equal columns */}
         <div className="grid gap-4 md:grid-cols-2 mb-4">
           <FeatureCard
             screenshot="/reddit-opportunity-finder/Domain Section.png"
@@ -219,7 +240,7 @@ function FeaturesSection() {
           />
         </div>
 
-        {/* Row 2 — 3 equal columns (Keywords → Analyze → Configure) */}
+        {/* Row 2 — 3 equal columns */}
         <div className="grid gap-4 md:grid-cols-3">
           <FeatureCard
             screenshot="/reddit-opportunity-finder/keyword section image.png"
@@ -231,7 +252,7 @@ function FeaturesSection() {
           <FeatureCard
             screenshot="/reddit-opportunity-finder/Save and configure.png"
             num="04"
-            heading={<>Save & configure<br />your strategy.</>}
+            heading={<>Save &amp; configure<br />your strategy.</>}
             subtitle="Track saved keywords, manage competitors, and monitor results over time."
             previewHeight={240}
           />
@@ -248,35 +269,13 @@ function FeaturesSection() {
   );
 }
 
-/* ── FOLD 2 — Mid-page CTA after feature cards ────────────────────────── */
+/* ── Mid-page CTA ─────────────────────────────────────────────────────── */
 
 function MidCTA() {
   return (
-    <div className="py-14 text-center">
-      <Link
-        href={CTA_URL}
-        className="inline-flex h-11 items-center gap-2 rounded-[5px] border border-white/15 bg-white/[0.04] px-6 text-sm text-gray-300 transition-colors hover:bg-white/[0.08] hover:text-white"
-      >
-        Try it free — no signup needed
-        <span className="text-[#5f64ff]">→</span>
-      </Link>
-    </div>
-  );
-}
-
-/* ── FOLD 3 — Strong CTA after how-it-works ────────────────────────────── */
-
-function PostStepsCTA() {
-  return (
-    <div className="py-20 text-center">
-      <CalendarBooking
-        buttonText="Get Started →"
-        href={CTA_URL}
-        width="w-auto"
-        height="h-12"
-        textSize="text-sm"
-      />
-      <p className="mt-4 text-[13px] text-gray-600">
+    <div className="py-12 text-center">
+      <PrimaryCTA />
+      <p className="mt-4 text-[13px]" style={{ color: "rgba(255,255,255,0.3)" }}>
         Free to start · No credit card required
       </p>
     </div>
@@ -284,7 +283,7 @@ function PostStepsCTA() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   HOW IT WORKS — steps left, browser screenshot right
+   HOW IT WORKS
    ══════════════════════════════════════════════════════════════════════════ */
 
 const STEPS = [
@@ -312,20 +311,30 @@ const STEPS = [
 
 function HowItWorks() {
   return (
-    <section className="py-24 md:py-28 border-y border-white/[0.06]">
+    <section className="py-20 border-y border-white/[0.06]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-16 md:grid-cols-2 items-start">
           {/* Left — steps */}
           <div>
-            <p className="mb-3 text-[13px] text-[#5f64ff] tracking-[0.01em]">
+            <p className="mb-2 text-[13px] text-[#5f64ff] tracking-[0.01em]">
               How it works
             </p>
-            <h2 className="font-[quicksand] text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight mb-4">
+            <h2
+              className="font-[quicksand] font-bold text-white mb-4"
+              style={{
+                fontSize: "clamp(36px, 5vw, 56px)",
+                letterSpacing: "-0.04em",
+                lineHeight: 1.05,
+              }}
+            >
               URL in.
               <br />
               <span className="text-gray-400 italic">Reddit map out.</span>
             </h2>
-            <p className="max-w-[440px] text-[16px] font-light text-gray-400 leading-relaxed mb-10">
+            <p
+              className="max-w-[400px] text-[15px] font-light leading-relaxed mb-10"
+              style={{ color: "rgba(255,255,255,0.45)" }}
+            >
               30 seconds from domain to full Reddit intelligence. No manual
               research. No guesswork. No agency needed.
             </p>
@@ -333,7 +342,7 @@ function HowItWorks() {
             {STEPS.map((s, i) => (
               <div
                 key={s.num}
-                className="flex gap-5 py-6"
+                className="flex gap-5 py-4"
                 style={{
                   borderBottom:
                     i < STEPS.length - 1
@@ -354,14 +363,18 @@ function HowItWorks() {
                 </div>
               </div>
             ))}
+
+            <div className="mt-8">
+              <PrimaryCTA />
+            </div>
           </div>
 
           {/* Right — sticky browser screenshot */}
           <div className="sticky top-32">
-            <BrowserChrome url="reddit-opportunity-finder.infrasity.com">
+            <BrowserChrome>
               <img
                 src="/reddit-opportunity-finder/Domain Section.png"
-                alt="Reddit Opportunity Finder — Domain Input"
+                alt="Reddit Radar — Domain Input"
                 className="w-full block"
               />
             </BrowserChrome>
@@ -373,20 +386,26 @@ function HowItWorks() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   CTA
+   FINAL CTA
    ══════════════════════════════════════════════════════════════════════════ */
 
 function CTA() {
   return (
-    <section className="py-32 md:py-40">
+    <section className="py-20 border-t border-white/[0.06]">
       <div className="mx-auto max-w-3xl px-6 text-center">
+        <p
+          className="mb-4 text-[12px] tracking-[0.1em] uppercase"
+          style={{ color: "rgba(255,255,255,0.3)" }}
+        >
+          Get started free
+        </p>
         <h2
-          className="text-white mb-6"
+          className="text-white mb-4"
           style={{
-            fontSize: "clamp(40px, 6vw, 72px)",
+            fontSize: "clamp(36px, 5vw, 64px)",
             fontWeight: 700,
             letterSpacing: "-0.04em",
-            lineHeight: 1.05,
+            lineHeight: 1.0,
           }}
         >
           Stop guessing.
@@ -395,28 +414,19 @@ function CTA() {
           <br />
           the conversation.
         </h2>
-        <p className="mx-auto max-w-lg text-[16px] font-light text-gray-400 leading-relaxed mb-10">
-          Your competitors are already cited in Reddit threads ranking on
-          Page 1 for your keywords. Reddit Radar shows you exactly which
-          ones — and how to take them back.
+        <p
+          className="mx-auto max-w-lg text-[16px] font-light leading-relaxed mb-8"
+          style={{ color: "rgba(255,255,255,0.45)" }}
+        >
+          Your competitors are already winning Reddit threads ranking on
+          Page 1 for your keywords.
         </p>
         <div className="flex items-center justify-center gap-3 mb-4">
-          <CalendarBooking
-            buttonText="Get Started →"
-            href={CTA_URL}
-            width="w-auto"
-            height="h-12"
-            textSize="text-sm"
-          />
-          <Link
-            href="/contact"
-            className="inline-flex h-12 items-center rounded-[5px] border border-white/15 bg-white/[0.04] px-6 text-sm text-gray-300 transition-colors hover:bg-white/[0.08] hover:text-white"
-          >
-            Talk to the team
-          </Link>
+          <PrimaryCTA />
+          <GhostCTA href="/contact">Talk to the team</GhostCTA>
         </div>
-        <p className="text-[12px] text-gray-600">
-          Free to start · No credit card required · Built by Infrasity
+        <p className="mt-4 text-[12px]" style={{ color: "rgba(255,255,255,0.25)" }}>
+          Free to try · B2B SaaS &amp; DevTools · Built by Infrasity
         </p>
       </div>
     </section>
@@ -424,10 +434,10 @@ function CTA() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   PAGE — inherits site body bg, font, nav, footer
+   PAGE
    ══════════════════════════════════════════════════════════════════════════ */
 
-export default function SerpScoutLanding() {
+export default function RedditRadarLanding() {
   return (
     <div className="relative">
       <Hero />
@@ -435,7 +445,6 @@ export default function SerpScoutLanding() {
       <FeaturesSection />
       <MidCTA />
       <HowItWorks />
-      <PostStepsCTA />
       <CTA />
     </div>
   );
