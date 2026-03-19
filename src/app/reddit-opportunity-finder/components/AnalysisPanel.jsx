@@ -283,8 +283,26 @@ export default function AnalysisPanel({
   // ── Data sources ──────────────────────────────────────────────────────────
   const serpThreads  = kwSerpData?.redditThreads   || [];
   const dorkThreads  = kwSerpData?.dorkRedditLinks  || [];
-  const topThreads   = kwSerpData?.topRedditPosts   || [];
-  const newThreads   = kwSerpData?.newRedditPosts   || [];
+  const rawTopThreads = kwSerpData?.topRedditPosts  || [];
+  const rawNewThreads = kwSerpData?.newRedditPosts  || [];
+
+  // Augment Top/New with dork posts when Render returns few results.
+  // Dork posts are Google-indexed Reddit threads for the keyword — highly relevant.
+  // Dedup by URL so no post appears twice across Top, New, or Dork.
+  const MIN_TOP_POSTS = 5;
+  const allTopNewUrls = new Set([
+    ...rawTopThreads.map(p => (p.post_url || p.url || '').toLowerCase().replace(/\/$/, '')),
+    ...rawNewThreads.map(p => (p.post_url || p.url || '').toLowerCase().replace(/\/$/, '')),
+  ]);
+  const dorkFill = dorkThreads.filter(p => {
+    const u = (p.post_url || p.url || '').toLowerCase().replace(/\/$/, '');
+    return u && !allTopNewUrls.has(u);
+  });
+  // Fill Top first, then New — split dork fill evenly between the two tabs
+  const topNeed = Math.max(0, MIN_TOP_POSTS - rawTopThreads.length);
+  const newNeed = Math.max(0, MIN_TOP_POSTS - rawNewThreads.length);
+  const topThreads = [...rawTopThreads, ...dorkFill.slice(0, topNeed).map(p => ({ ...p, _fromDork: true }))];
+  const newThreads = [...rawNewThreads, ...dorkFill.slice(topNeed, topNeed + newNeed).map(p => ({ ...p, _fromDork: true }))];
 
   // ── Cross-source metrics map ───────────────────────────────────────────────
   // Top/New posts from Reddit API carry real upvotes — share them with all other tabs
@@ -535,7 +553,7 @@ export default function AnalysisPanel({
                 style={{ background: '#5f64ff', boxShadow: '0 0 14px rgba(95,100,255,0.3)' }}
               >
                 {isLoading
-                  ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />{analysisLoading ? 'Analysing…' : 'Scanning citations…'}</>
+                  ? <><Spinner className="h-3.5 w-3.5 mr-1.5" /><span className="transition-all duration-300">{analysisLoading ? ANALYSIS_MESSAGES[analysisMsgIdx] : CITATION_MESSAGES[citationMsgIdx]}</span></>
                   : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run Analysis</>
                 }
               </Button>
