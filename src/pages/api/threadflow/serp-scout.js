@@ -118,7 +118,7 @@ async function fetchRedditTopNewPosts(keyword) {
     const response = await fetchWithTimeout(
       `${REDDIT_API_BASE}/find_top_posts_comments`,
       { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ keyword, num_posts: 10 }) },
-      15000 // 15s — warm Render takes ~8-14s; cold (>15s) times out, user gets empty Top/New
+      25000 // 25s — warm Render takes ~8-14s; cold starts can take up to 20s+
     )
 
     if (!response.ok) {

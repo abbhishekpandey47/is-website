@@ -797,9 +797,28 @@ export default function SerpScout() {
       // THEN update state with accumulated + existing data to prevent races
       setSerpResults(prev => {
         const existing = prev[kwTerm] || {};
+        const merged = { ...existing, ...accumulatedResults, success: true };
+        
+        // Keep already-visible data if incoming response returns empty arrays for certain fields.
+        // This prevents redditTopNew (which doesn't include redditThreads) from clearing SERP results.
+        const preserveIfIncomingEmpty = [
+          'redditThreads',
+          'dorkRedditLinks',
+          'topRedditPosts',
+          'newRedditPosts',
+        ];
+        
+        preserveIfIncomingEmpty.forEach((key) => {
+          const existingVal = existing[key];
+          const incomingVal = merged[key];
+          if (Array.isArray(existingVal) && existingVal.length > 0 && Array.isArray(incomingVal) && incomingVal.length === 0) {
+            merged[key] = existingVal;
+          }
+        });
+        
         return {
           ...prev,
-          [kwTerm]: { ...existing, ...accumulatedResults, success: true },
+          [kwTerm]: merged,
         };
       });
     };
