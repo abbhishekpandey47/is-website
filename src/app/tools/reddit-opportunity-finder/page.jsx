@@ -497,7 +497,7 @@ const STEPS = [
 function StepItem({ step, index, isActive }) {
   const motionSafe = useMotionSafe();
   return (
-    <div className="flex gap-5 py-4 relative">
+    <div className="flex gap-5 py-5 relative">
       <motion.span
         className="shrink-0 text-[13px] font-semibold pt-0.5"
         animate={{
@@ -509,7 +509,7 @@ function StepItem({ step, index, isActive }) {
       </motion.span>
       <div className="flex-1">
         <motion.h3
-          className="mb-1.5 text-[17px] font-semibold tracking-[-0.01em]"
+          className="mb-1.5 text-[16px] font-semibold tracking-[-0.01em]"
           animate={{
             color: isActive ? "rgba(255,255,255,1)" : "rgba(255,255,255,0.75)",
           }}
@@ -518,9 +518,10 @@ function StepItem({ step, index, isActive }) {
           {step.title}
         </motion.h3>
         <motion.p
-          className="text-[14px] font-light leading-relaxed"
+          className="text-[14px] font-light"
+          style={{ lineHeight: 1.6 }}
           animate={{
-            color: isActive ? "rgba(156,163,175,1)" : "rgba(156,163,175,0.75)",
+            color: isActive ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.35)",
           }}
           transition={{ duration: 0.3 }}
         >
@@ -566,7 +567,7 @@ function HowItWorks() {
   return (
     <section className="py-20 border-y border-white/[0.06]" ref={sectionRef}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid gap-16 md:grid-cols-2 items-start">
+        <div className="grid gap-12 md:grid-cols-2 items-start">
           {/* Left — steps */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -586,7 +587,7 @@ function HowItWorks() {
             >
               URL in.
               <br />
-              <span className="text-white/60">Reddit map out.</span>
+              <span className="text-white">Reddit map out.</span>
             </h2>
             <p
               className="max-w-[400px] text-[15px] font-light leading-relaxed mb-6"
