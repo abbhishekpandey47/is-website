@@ -1822,6 +1822,17 @@ let postMetaData = [
     category: "LLM Visiblity",
     metaDescription: "Learn how B2B SaaS startups use AI agent content strategy to get cited in ChatGPT, Perplexity, Gemini, etc. 5 frameworks to turn tech content into pipeline. Read now"
 },
+{
+    title: "How to Structure Content for LLMs? Step-by-Step Guide for B2B SaaS Teams",
+    metatitle: "How to Structure Content for LLMs (2026 Step by Step Guide)",
+    slug: "how-to-structure-content-for-LLMs",
+    description: "This guide explains how to structure content for LLMs using a practical 3-layer framework: answer-first writing, structured content for AI, and authority signals. It covers key factors for AI-friendly content, platform-specific differences across ChatGPT, Perplexity, Claude, and Gemini, and the best on-page content formats for AI citations.",
+    ogImage: "/PostImages/how-to-structure-content-for-LLMs/1.webp",
+    publishedOn: "2026-03-18",
+    authorId: "author0005",
+    category: "LLM Visiblity",
+    metaDescription: "Learn how to structure content for LLMs with a 3-layer framework. Discover key factors for LLM content, structured formats, and platform-specific tactics to improve visibility"
+}
 ];
 
 const sorted = () => {
