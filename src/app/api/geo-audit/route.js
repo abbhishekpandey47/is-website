@@ -34,50 +34,64 @@ export async function POST(req) {
 
   const stream = new ReadableStream({
     async start(controller) {
+      let closed = false;
+
       const send = (event, data) => {
-        const line = `data: ${JSON.stringify({ event, ...data })}\n\n`;
-        controller.enqueue(new TextEncoder().encode(line));
+        if (closed) return;
+        try {
+          const line = `data: ${JSON.stringify({ event, ...data })}\n\n`;
+          controller.enqueue(new TextEncoder().encode(line));
+        } catch {
+          // controller already closed
+        }
+      };
+
+      const close = () => {
+        if (!closed) {
+          closed = true;
+          try { controller.close(); } catch {}
+        }
       };
 
       try {
-        // ── Step 1: Crawl ─────────────────────────────────────────────────────
+        // ── Step 1: Crawl ───────────────────────────────────────────────────
         send("progress", { step: 1, total: 5, message: "Crawling sitemap and pages…" });
         const crawledPages = await crawlSite(normDomain, Math.min(maxPages, 150), 400);
 
         if (crawledPages.length === 0) {
           send("error", { message: "No pages found. Check that the domain is publicly accessible." });
-          controller.close();
+          close();
           return;
         }
 
         send("progress", { step: 1, total: 5, message: `Found ${crawledPages.length} pages` });
 
-        // ── Step 2: Fetch + Parse ─────────────────────────────────────────────
+        // ── Step 2: Fetch + Parse ───────────────────────────────────────────
         send("progress", { step: 2, total: 5, message: `Fetching and parsing ${crawledPages.length} pages…` });
         const parsedPages = await fetchPages(crawledPages, 8, 250);
         send("progress", { step: 2, total: 5, message: `Parsed ${parsedPages.length} pages successfully` });
 
-        // ── Step 3: Score ─────────────────────────────────────────────────────
+        // ── Step 3: Score ───────────────────────────────────────────────────
         send("progress", { step: 3, total: 5, message: "Scoring pages across 6 GEO signals…" });
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise(r => setTimeout(r, 600));
         const scoredPages = scorePages(parsedPages);
 
-        // ── Step 4: Rank ──────────────────────────────────────────────────────
+        // ── Step 4: Rank ────────────────────────────────────────────────────
         send("progress", { step: 4, total: 5, message: `Ranking by opportunity score, selecting top ${topN}…` });
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise(r => setTimeout(r, 600));
         const rankedResults = rankPages(scoredPages, topN);
         const topPages = rankedResults.topPages;
         const allSorted = rankedResults.allSorted;
         const summary = buildInventorySummary(allSorted);
 
-        // ── Step 5: Rewrite ───────────────────────────────────────────────────
+        // ── Step 5: Rewrite ─────────────────────────────────────────────────
         send("progress", { step: 5, total: 5, message: `Generating rewrite suggestions for ${topPages.length} pages…` });
         const rewrites = await generateRewrites(topPages);
 
-        // ── Step 6: Report ────────────────────────────────────────────────────
+        // ── Step 6: Report ──────────────────────────────────────────────────
         const markdown = buildReport(normDomain, allSorted, topPages, rewrites, summary);
 
-        // ── Done ──────────────────────────────────────────────────────────────
+        // ── Done ────────────────────────────────────────────────────────────
         send("complete", {
           domain: normDomain,
           summary,
@@ -91,7 +105,7 @@ export async function POST(req) {
         console.error("[geo-audit] Agent error:", err);
         send("error", { message: err.message || "Audit failed. Please try again." });
       } finally {
-        controller.close();
+        close();
       }
     },
   });
