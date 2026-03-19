@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { auth } from "@/lib/firebaseClient";
 import {
   Tabs, TabsContent, TabsList, TabsTrigger,
 } from "@/Components/ui/tabs";
@@ -36,24 +35,18 @@ function Spinner({ className = "h-4 w-4" }) {
   return <Loader2 className={`${className} animate-spin`} />;
 }
 
-// ── Auth-aware fetch helper ───────────────────────────────────────────────────
+// ── API fetch helper ─────────────────────────────────────────────────────
 
 async function apiPost(path, body) {
-  const token = await auth.currentUser?.getIdToken?.();
   const res = await fetch(path, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
     body: JSON.stringify(body),
   });
   if (!res.ok) {
     const text = await res.text().catch(() => res.statusText);
-    // Suppress authorization errors from being shown to user (endpoints work without auth)
-    if (text?.includes("Authorization")) {
-      throw new Error(`Request failed: ${res.status}`);
-    }
     throw new Error(text || `Request failed: ${res.status}`);
   }
   return res.json();
@@ -65,7 +58,6 @@ export default function SerpScout() {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("domain");
 
-  // Authentication
   // Domain
   const [domain, setDomain] = useState("");
   const [loading, setLoading] = useState(false);
@@ -1885,7 +1877,6 @@ export default function SerpScout() {
           <CompetitiveSenseTab
             companyContext={rawResult}
             companyId={companyId}
-            userId={auth.currentUser?.uid}
             serpResults={serpResults}
             scannedPostDetails={scannedPostDetails}
             companyName={companyName}
