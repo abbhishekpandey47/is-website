@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Tabs, TabsContent, TabsList, TabsTrigger,
 } from '@/Components/ui/tabs';
@@ -191,9 +191,94 @@ export default function AnalysisPanel({
   handleRunAnalysis,
   analysisLoading,
   scannedPostDetails,
+  redditWarm = true,
 }) {
   const selectedKw = selectedKwIdx !== null ? keywords[selectedKwIdx] : null;
   const isLoading = analysisLoading || citationLoading;
+
+  // ── Citation elapsed timer ─────────────────────────────────────────────────
+  const [citationElapsed, setCitationElapsed] = useState(0);
+  useEffect(() => {
+    if (!citationLoading) { setCitationElapsed(0); return; }
+    const start = Date.now();
+    const tid = setInterval(() => setCitationElapsed(Math.round((Date.now() - start) / 1000)), 1000);
+    return () => clearInterval(tid);
+  }, [citationLoading]);
+
+  // ── Rotating dynamic loading messages ─────────────────────────────────────
+  const SERP_MESSAGES = [
+    'Scanning Google for Reddit threads…',
+    'Running site:reddit.com dork queries…',
+    'Extracting SERP thread positions…',
+    'Matching threads to your keyword…',
+    'Identifying high-ranking discussions…',
+    'Pulling Reddit URLs from Google index…',
+    'Checking search result page one…',
+    'Looking for threads with SEO traction…',
+  ];
+  const REDDIT_MESSAGES = [
+    'Fetching top Reddit posts…',
+    'Sorting by highest engagement…',
+    'Pulling newest community threads…',
+    'Checking upvote counts…',
+    'Finding active discussions…',
+    'Scanning subreddit activity…',
+    'Ranking posts by comment velocity…',
+    'Grabbing fresh Reddit content…',
+  ];
+  const CITATION_MESSAGES = [
+    'Asking ChatGPT which Reddit threads it cites…',
+    'Querying Perplexity for Reddit recommendations…',
+    "Checking Gemini's Reddit citations…",
+    'Scanning Google AI for referenced threads…',
+    'Collecting AI platform responses…',
+    'Parsing Reddit URLs from AI answers…',
+    'Matching citations back to your prompts…',
+    'Aggregating results across platforms…',
+    'Filtering Reddit-specific references…',
+    'Building citation map by prompt…',
+    'Cross-checking sources across models…',
+    'Almost there — finalising citations…',
+  ];
+  const ANALYSIS_MESSAGES = [
+    'Generating keywords for your domain…',
+    'Analysing company context…',
+    'Building LLM citation prompts…',
+    'Mapping keyword intent…',
+    'Identifying high-value search terms…',
+    'Scoring keyword opportunity gaps…',
+    'Crafting ranking prompts…',
+    'Packaging results for analysis…',
+  ];
+
+  const [serpMsgIdx, setSerpMsgIdx] = useState(0);
+  const [redditMsgIdx, setRedditMsgIdx] = useState(0);
+  const [citationMsgIdx, setCitationMsgIdx] = useState(0);
+  const [analysisMsgIdx, setAnalysisMsgIdx] = useState(0);
+
+  useEffect(() => {
+    if (!serpThreadsLoading) { setSerpMsgIdx(0); return; }
+    const tid = setInterval(() => setSerpMsgIdx(i => Math.min(i + 1, SERP_MESSAGES.length - 1)), 2200);
+    return () => clearInterval(tid);
+  }, [serpThreadsLoading]);
+
+  useEffect(() => {
+    if (!redditPostsLoading) { setRedditMsgIdx(0); return; }
+    const tid = setInterval(() => setRedditMsgIdx(i => Math.min(i + 1, REDDIT_MESSAGES.length - 1)), 2200);
+    return () => clearInterval(tid);
+  }, [redditPostsLoading]);
+
+  useEffect(() => {
+    if (!citationLoading) { setCitationMsgIdx(0); return; }
+    const tid = setInterval(() => setCitationMsgIdx(i => Math.min(i + 1, CITATION_MESSAGES.length - 1)), 2000);
+    return () => clearInterval(tid);
+  }, [citationLoading]);
+
+  useEffect(() => {
+    if (!analysisLoading) { setAnalysisMsgIdx(0); return; }
+    const tid = setInterval(() => setAnalysisMsgIdx(i => Math.min(i + 1, ANALYSIS_MESSAGES.length - 1)), 1800);
+    return () => clearInterval(tid);
+  }, [analysisLoading]);
 
   // ── Data sources ──────────────────────────────────────────────────────────
   const serpThreads  = kwSerpData?.redditThreads   || [];
@@ -300,16 +385,34 @@ export default function AnalysisPanel({
   // loading prop controls the skeleton — each section passes its own flag
   function PostList({ posts, emptyMsg, loading = false }) {
     if (loading && !posts.length) return (
-      <div className="space-y-3 pt-2">
-        {[1,2,3].map(i => <Skeleton key={i} className="h-16 w-full rounded-lg" />)}
+      <div className="space-y-2 pt-2">
+        {[1,2,3].map(i => (
+          <div key={i} className="rounded-lg p-3 space-y-2 animate-pulse" style={{ border: '0.5px solid rgba(95,100,255,0.10)', background: 'rgba(95,100,255,0.02)' }}>
+            <div className="flex items-start gap-2">
+              <Skeleton className="h-3.5 w-3.5 rounded mt-0.5 shrink-0" />
+              <div className="flex-1 space-y-1.5">
+                <Skeleton className="h-3.5 w-full rounded" />
+                <Skeleton className="h-3 w-2/3 rounded" />
+              </div>
+            </div>
+            <div className="flex gap-3 pt-1">
+              <Skeleton className="h-3 w-10 rounded" />
+              <Skeleton className="h-3 w-14 rounded" />
+              <Skeleton className="h-3 w-8 rounded ml-auto" />
+            </div>
+          </div>
+        ))}
       </div>
     );
-    if (!posts.length) return (
-      <div className="flex flex-col items-center justify-center h-32 text-muted-foreground gap-2">
-        <AlertCircle className="h-8 w-8 opacity-20" />
-        <p className="text-xs text-center">{emptyMsg}</p>
-      </div>
-    );
+    if (!posts.length) {
+      if (!emptyMsg) return null;
+      return (
+        <div className="flex flex-col items-center justify-center h-32 text-muted-foreground gap-2">
+          <AlertCircle className="h-8 w-8 opacity-20" />
+          <p className="text-xs text-center">{emptyMsg}</p>
+        </div>
+      );
+    }
     return (
       <div className="space-y-2">
         {posts.map((post, i) => (
@@ -326,15 +429,54 @@ export default function AnalysisPanel({
   }
 
   const hasAnyData = kwSerpData || citedThreads.length > 0;
-  const isEnriching = kwSerpData && kwSerpData.enriched === false;
 
   return (
     <div className="space-y-4">
-      {/* ── Enriching banner ── */}
-      {isEnriching && (
-        <div className="flex items-center gap-2 text-xs text-blue-700 bg-blue-50 dark:bg-blue-950/20 px-3 py-2 rounded-lg border border-blue-200 dark:border-blue-900">
-          <Loader2 className="h-3.5 w-3.5 animate-spin shrink-0" />
-          <span>Scanning post content for brand &amp; competitor mentions in the background…</span>
+      {/* ── Analysis progress banner — shown while any source is loading ── */}
+      {(serpThreadsLoading || redditPostsLoading || citationLoading) && (
+        <div className="rounded-xl border px-4 py-3 space-y-2.5" style={{ background: 'rgba(95,100,255,0.04)', borderColor: 'rgba(95,100,255,0.18)' }}>
+          <p className="text-xs font-medium" style={{ color: '#8b8fff' }}>
+            Finding opportunities — results appear in each tab as they arrive
+          </p>
+          <div className="flex flex-col gap-1.5">
+            {/* SERP row */}
+            <div className="flex items-center gap-2 text-[11px]">
+              {serpThreadsLoading
+                ? <Loader2 className="h-3 w-3 animate-spin shrink-0" style={{ color: '#5f64ff' }} />
+                : <span className="h-3 w-3 shrink-0 flex items-center justify-center rounded-full bg-emerald-500/20 text-emerald-500 text-[8px] font-bold">✓</span>
+              }
+              <span className={serpThreadsLoading ? 'text-muted-foreground transition-all duration-500' : 'text-emerald-600 dark:text-emerald-400'}>
+                {serpThreadsLoading ? SERP_MESSAGES[serpMsgIdx] : `SERP threads ready (${(serpThreads.length + dorkThreads.length)} found)`}
+              </span>
+              {serpThreadsLoading && <span className="ml-auto text-muted-foreground opacity-50 shrink-0">~5s</span>}
+            </div>
+            {/* Reddit row */}
+            <div className="flex items-center gap-2 text-[11px]">
+              {redditPostsLoading
+                ? <Loader2 className="h-3 w-3 animate-spin shrink-0" style={{ color: '#5f64ff' }} />
+                : <span className="h-3 w-3 shrink-0 flex items-center justify-center rounded-full bg-emerald-500/20 text-emerald-500 text-[8px] font-bold">✓</span>
+              }
+              <span className={redditPostsLoading ? 'text-muted-foreground transition-all duration-500' : 'text-emerald-600 dark:text-emerald-400'}>
+                {redditPostsLoading ? REDDIT_MESSAGES[redditMsgIdx] : `Reddit posts ready (${topThreads.length + newThreads.length} found)`}
+              </span>
+              {redditPostsLoading && <span className="ml-auto text-muted-foreground opacity-50 shrink-0">~15s</span>}
+            </div>
+            {/* Citations row */}
+            <div className="flex items-center gap-2 text-[11px]">
+              {citationLoading
+                ? <Loader2 className="h-3 w-3 animate-spin shrink-0" style={{ color: '#5f64ff' }} />
+                : <span className="h-3 w-3 shrink-0 flex items-center justify-center rounded-full bg-emerald-500/20 text-emerald-500 text-[8px] font-bold">✓</span>
+              }
+              <span className={citationLoading ? 'text-muted-foreground transition-all duration-500' : 'text-emerald-600 dark:text-emerald-400'}>
+                {citationLoading ? CITATION_MESSAGES[citationMsgIdx] : `AI citations ready (${citedThreads.length} links found)`}
+              </span>
+              {citationLoading && (
+                <span className="ml-auto text-muted-foreground opacity-50 shrink-0 tabular-nums">
+                  {citationElapsed > 0 ? `${citationElapsed}s` : '~1–2 min'}
+                </span>
+              )}
+            </div>
+          </div>
         </div>
       )}
       {/* ── Keyword selector + single Run Analysis button ── */}
@@ -384,18 +526,26 @@ export default function AnalysisPanel({
             )}
           </div>
           {selectedKwIdx !== null && (
-            <Button
-              onClick={handleRunAnalysis}
-              disabled={isLoading}
-              size="sm"
-              className="text-white border-none"
-              style={{ background: '#5f64ff', boxShadow: '0 0 14px rgba(95,100,255,0.3)' }}
-            >
-              {isLoading
-                ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />Running…</>
-                : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run Analysis</>
-              }
-            </Button>
+            <div className="flex items-center gap-3">
+              <Button
+                onClick={handleRunAnalysis}
+                disabled={isLoading || !redditWarm}
+                size="sm"
+                className="text-white border-none"
+                style={{ background: '#5f64ff', boxShadow: '0 0 14px rgba(95,100,255,0.3)' }}
+              >
+                {isLoading
+                  ? <><Spinner className="h-3.5 w-3.5 mr-1.5" />{analysisLoading ? 'Analysing…' : 'Scanning citations…'}</>
+                  : <><Zap className="h-3.5 w-3.5 mr-1.5" />Run Analysis</>
+                }
+              </Button>
+              {!redditWarm && !isLoading && (
+                <span className="flex items-center gap-1 text-[11px] text-amber-600">
+                  <Loader2 className="h-3 w-3 animate-spin" />
+                  Warming up Reddit backend…
+                </span>
+              )}
+            </div>
           )}
         </CardContent>
       </Card>
@@ -413,18 +563,10 @@ export default function AnalysisPanel({
 
       {/* ── Result tabs ── */}
       {(hasAnyData || isLoading || serpThreadsLoading || redditPostsLoading) && (
-        <Tabs defaultValue="best" className="w-full">
+        <Tabs defaultValue="serp" className="w-full">
           <TabsList className="grid grid-cols-5 w-full bg-transparent p-0 h-auto rounded-none border-b border-border">
-            <TabsTrigger value="best" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
-              <Sparkles className="h-3 w-3 mr-1" style={{ color: '#5f64ff' }} />Best
-              {bestThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{bestThreads.length}</span>}
-            </TabsTrigger>
-            <TabsTrigger value="cited" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
-              Cited
-              {citedThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{citedThreads.length} links</span>}
-            </TabsTrigger>
             <TabsTrigger value="serp" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
-              SERP Threads
+              SERP
               {serpThreadsLoading
                 ? <Spinner className="ml-1 h-3 w-3 opacity-60" />
                 : (serpThreads.length + dorkThreads.length) > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{serpThreads.length + dorkThreads.length}</span>
@@ -444,9 +586,20 @@ export default function AnalysisPanel({
                 : newThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{newThreads.length}</span>
               }
             </TabsTrigger>
+            <TabsTrigger value="cited" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
+              Cited
+              {citationLoading
+                ? <Spinner className="ml-1 h-3 w-3 opacity-60" />
+                : citedThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{citedThreads.length} links</span>
+              }
+            </TabsTrigger>
+            <TabsTrigger value="best" className="text-xs rounded-none border-b-2 border-transparent data-[state=active]:border-[#5f64ff] data-[state=active]:bg-[#161616] data-[state=active]:shadow-none py-2.5">
+              <Sparkles className="h-3 w-3 mr-1" style={{ color: '#5f64ff' }} />Best
+              {bestThreads.length > 0 && <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: 'rgba(95,100,255,0.08)', border: '0.5px solid rgba(95,100,255,0.22)', color: '#5f64ff' }}>{bestThreads.length}</span>}
+            </TabsTrigger>
           </TabsList>
 
-          {/* SERP Threads — SERP first, dork appended seamlessly */}
+          {/* SERP Threads */}
           <TabsContent value="serp" className="mt-4">
             <Card style={{ border: '0.5px solid rgba(95,100,255,0.22)' }}>
               <CardHeader className="pb-2">
@@ -457,13 +610,13 @@ export default function AnalysisPanel({
                   SERP Threads
                   {serpThreadsLoading
                     ? <span className="ml-auto flex items-center gap-1 text-[11px] font-normal text-muted-foreground"><Spinner className="h-3 w-3" />Loading…</span>
-                    : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{Math.min(serpThreads.length + dorkThreads.length, 10)} results</span>
+                    : <span className="ml-auto text-[11px] font-normal text-muted-foreground">{serpThreads.length + dorkThreads.length} results</span>
                   }
                 </CardTitle>
                 <CardDescription className="text-xs">Google SERP threads · site:reddit.com dork</CardDescription>
               </CardHeader>
               <CardContent>
-                <PostList posts={[...serpThreads, ...dorkThreads].slice(0, 10).map(enrichPost)} emptyMsg="No SERP threads found — run Analysis" loading={serpThreadsLoading} />
+                <PostList posts={[...serpThreads, ...dorkThreads].map(enrichPost)} emptyMsg="No SERP threads found — run Analysis" loading={serpThreadsLoading} />
               </CardContent>
             </Card>
           </TabsContent>
@@ -473,7 +626,7 @@ export default function AnalysisPanel({
             {redditPostsLoading && (
               <div className="flex items-center gap-2.5 text-xs px-3 py-2.5 rounded-lg border" style={{ background: 'rgba(95,100,255,0.05)', borderColor: 'rgba(95,100,255,0.2)', color: '#8b8fff' }}>
                 <Spinner className="h-3.5 w-3.5 shrink-0" />
-                <span>Fetching top Reddit posts for this keyword…</span>
+                <span className="transition-all duration-500">{REDDIT_MESSAGES[redditMsgIdx]}</span>
               </div>
             )}
             {redditPostsError && !redditPostsLoading && (
@@ -496,7 +649,11 @@ export default function AnalysisPanel({
                 <CardDescription className="text-xs">Highest engagement posts from Reddit API</CardDescription>
               </CardHeader>
               <CardContent>
-                <PostList posts={topThreads.map(enrichPost)} emptyMsg={redditPostsError ? "Failed to load — see error above" : "No top posts found"} loading={redditPostsLoading} />
+                <PostList
+                  posts={topThreads.map(enrichPost)}
+                  emptyMsg={redditPostsError ? "Failed to load — see error above" : "No top posts found — the Reddit backend may have been cold. Try clicking Run Analysis again."}
+                  loading={redditPostsLoading}
+                />
               </CardContent>
             </Card>
 
@@ -521,7 +678,7 @@ export default function AnalysisPanel({
             {redditPostsLoading && (
               <div className="flex items-center gap-2.5 text-xs px-3 py-2.5 rounded-lg border" style={{ background: 'rgba(95,100,255,0.05)', borderColor: 'rgba(95,100,255,0.2)', color: '#8b8fff' }}>
                 <Spinner className="h-3.5 w-3.5 shrink-0" />
-                <span>Fetching newest Reddit posts for this keyword…</span>
+                <span className="transition-all duration-500">{REDDIT_MESSAGES[redditMsgIdx]}</span>
               </div>
             )}
             {redditPostsError && !redditPostsLoading && (
@@ -544,7 +701,11 @@ export default function AnalysisPanel({
                 <CardDescription className="text-xs">Recently posted threads from Reddit API</CardDescription>
               </CardHeader>
               <CardContent>
-                <PostList posts={newThreads.map(enrichPost)} emptyMsg={redditPostsError ? "Failed to load — see error above" : "No new posts found"} loading={redditPostsLoading} />
+                <PostList
+                  posts={newThreads.map(enrichPost)}
+                  emptyMsg={redditPostsError ? "Failed to load — see error above" : "No new posts found — the Reddit backend may have been cold. Try clicking Run Analysis again."}
+                  loading={redditPostsLoading}
+                />
               </CardContent>
             </Card>
 
@@ -585,7 +746,7 @@ export default function AnalysisPanel({
                 <CardDescription className="text-xs">Reddit links each AI platform cited when answering your prompts</CardDescription>
               </CardHeader>
               <CardContent>
-                {/* Platform status row — shown while loading */}
+                {/* Platform status pills — shown while loading (summary bar replaces after done) */}
                 {citationLoading && citationPlatformStatus && (
                   <div className="flex flex-wrap gap-1.5 pb-3">
                     {Object.entries(citationPlatformStatus).map(([platform, status]) => {
@@ -606,8 +767,48 @@ export default function AnalysisPanel({
                   </div>
                 )}
                 {citationLoading && !(citationResults?.records?.length) ? (
-                  <div className="space-y-3 pt-1">
-                    {[1,2,3].map(i => <Skeleton key={i} className="h-12 w-full rounded-lg" />)}
+                  <div className="py-6 flex flex-col items-center gap-5 text-center">
+                    {/* Spinner + heading + elapsed */}
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="relative h-10 w-10">
+                        <Loader2 className="h-10 w-10 animate-spin opacity-10 absolute inset-0" style={{ color: '#5f64ff' }} />
+                        <Loader2 className="h-6 w-6 animate-spin absolute inset-0 m-auto" style={{ color: '#5f64ff' }} />
+                      </div>
+                      <p className="text-sm font-medium transition-all duration-500">{CITATION_MESSAGES[citationMsgIdx]}</p>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <span>First results in ~20–40s · full scan up to 2 min</span>
+                        {citationElapsed > 0 && (
+                          <span className="px-1.5 py-0.5 rounded bg-muted/60 font-mono text-[11px] tabular-nums" style={{ color: '#8b8fff' }}>
+                            {citationElapsed}s
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Per-platform status list */}
+                    <div className="w-full max-w-xs rounded-lg border border-border/50 divide-y divide-border/50 overflow-hidden text-xs">
+                      {['ChatGPT', 'Perplexity', 'Gemini', 'Google AI'].map(p => {
+                        const status = citationPlatformStatus?.[p];
+                        const s = PLATFORM_STYLES[p] || {};
+                        return (
+                          <div key={p} className={`flex items-center gap-2.5 px-3 py-2 transition-colors ${status === 'ready' ? 'bg-emerald-500/5' : status === 'error' ? 'bg-red-500/5' : 'bg-muted/20'}`}>
+                            {status === 'ready'
+                              ? <span className="h-4 w-4 rounded-full bg-emerald-500/20 text-emerald-500 text-[9px] font-bold flex items-center justify-center shrink-0">✓</span>
+                              : status === 'error'
+                              ? <span className="h-4 w-4 rounded-full bg-red-500/20 text-red-500 text-[9px] font-bold flex items-center justify-center shrink-0">✗</span>
+                              : <Loader2 className="h-4 w-4 animate-spin shrink-0 opacity-50" style={{ color: '#5f64ff' }} />
+                            }
+                            <span className={`font-medium ${status === 'ready' ? 'text-emerald-600 dark:text-emerald-400' : status === 'error' ? 'text-red-500' : 'text-muted-foreground'}`}>{p}</span>
+                            <span className="ml-auto text-[11px] opacity-60">
+                              {!status && 'queued'}
+                              {status === 'pending' && 'scanning…'}
+                              {status === 'ready' && 'complete'}
+                              {status === 'error' && 'failed'}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 ) : !(citationResults?.records?.length) ? (
                   <div className="flex flex-col items-center justify-center h-32 text-muted-foreground gap-2">
@@ -615,7 +816,51 @@ export default function AnalysisPanel({
                     <p className="text-xs text-center">No AI citations found — run Analysis to fetch</p>
                   </div>
                 ) : (
-                  <CitationByPrompt records={citationResults.records} />
+                  <>
+                    {/* Platform result summary — always visible once results are in */}
+                    {(() => {
+                      const platformCounts = {};
+                      (citationResults?.records || []).forEach(rec => {
+                        Object.entries(rec.models || {}).forEach(([platform, posts]) => {
+                          platformCounts[platform] = (platformCounts[platform] || 0) + (posts?.length || 0);
+                        });
+                      });
+                      const allPlatforms = ['ChatGPT', 'Perplexity', 'Gemini', 'Google AI'];
+                      return (
+                        <div className="flex flex-wrap gap-1.5 pb-3 border-b border-border/50 mb-3">
+                          {allPlatforms.map(p => {
+                            const count = platformCounts[p] || 0;
+                            const status = citationPlatformStatus?.[p];
+                            const s = PLATFORM_STYLES[p] || { bg: 'bg-gray-500/10', text: 'text-gray-700', border: 'border-gray-400/30' };
+                            const isError = status === 'error';
+                            return (
+                              <span key={p} className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] border font-medium ${isError ? 'bg-red-500/10 text-red-600 border-red-400/30 opacity-60' : count > 0 ? `${s.bg} ${s.text} ${s.border}` : 'bg-muted/30 text-muted-foreground border-border/40 opacity-50'}`}>
+                                {isError
+                                  ? <span className="text-[9px] font-bold">✗</span>
+                                  : count > 0
+                                  ? <span className="text-[9px] font-bold">✓</span>
+                                  : <span className="text-[9px]">–</span>
+                                }
+                                {p}
+                                {!isError && (
+                                  <span className={`text-[10px] font-semibold ${count > 0 ? '' : 'opacity-50'}`}>
+                                    {count} link{count !== 1 ? 's' : ''}
+                                  </span>
+                                )}
+                              </span>
+                            );
+                          })}
+                          {citationLoading && (
+                            <span className="inline-flex items-center gap-1 text-[10px] text-muted-foreground ml-auto">
+                              <Loader2 className="h-3 w-3 animate-spin" />
+                              {citationElapsed > 0 ? `${citationElapsed}s` : 'loading more…'}
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })()}
+                    <CitationByPrompt records={citationResults.records} />
+                  </>
                 )}
               </CardContent>
             </Card>
@@ -632,7 +877,12 @@ export default function AnalysisPanel({
                 <CardDescription className="text-xs">Ranked by AI citation count (4 platforms → 3 → 2 → 1), then upvotes</CardDescription>
               </CardHeader>
               <CardContent>
-                {bestThreads.length === 0 ? (
+                {bestThreads.length === 0 && isLoading ? (
+                  <div className="space-y-3 pt-1">
+                    <p className="text-[11px] text-muted-foreground">Best threads are ranked once all sources finish loading…</p>
+                    {[1,2,3].map(i => <Skeleton key={i} className="h-16 w-full rounded-lg" />)}
+                  </div>
+                ) : bestThreads.length === 0 ? (
                   <div className="flex flex-col items-center justify-center h-32 text-muted-foreground gap-2">
                     <Sparkles className="h-8 w-8 opacity-20" />
                     <p className="text-xs text-center">Run Analysis to find best threads across all sources</p>
