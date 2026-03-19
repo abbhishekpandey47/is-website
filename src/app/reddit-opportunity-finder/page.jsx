@@ -787,11 +787,22 @@ export default function SerpScout() {
     setError(null);
     // Keep stale results visible while loading — user sees old data instead of blank skeletons
 
-    const merge = (newData) =>
-      setSerpResults(prev => ({
-        ...prev,
-        [kwTerm]: { ...(prev[kwTerm] || {}), ...newData, success: true },
-      }));
+    // Accumulator for results from both sources to prevent React batching from losing data
+    let accumulatedResults = {};
+
+    const merge = (newData) => {
+      if (!newData) return;
+      // Accumulate into memory FIRST
+      accumulatedResults = { ...accumulatedResults, ...newData };
+      // THEN update state with accumulated + existing data to prevent races
+      setSerpResults(prev => {
+        const existing = prev[kwTerm] || {};
+        return {
+          ...prev,
+          [kwTerm]: { ...existing, ...accumulatedResults, success: true },
+        };
+      });
+    };
 
     // Background: silently refresh a stale cached call without blocking UI
     const backgroundRefresh = (action) => {
@@ -833,12 +844,14 @@ export default function SerpScout() {
     };
 
     // 1. SERP + dork — populates SERP tab immediately (~3s)
+    let serpDorkData = null;
     const serpDorkPromise = apiPost("/api/threadflow/serp-scout", {
       action: "serpAndDork",
       keyword: kwTerm,
       domain: kwDomain,
       companyId,
     }).then(data => {
+      serpDorkData = data;
       merge(data);
       if (data.stale) {
         backgroundRefresh("serpAndDork");
@@ -852,6 +865,7 @@ export default function SerpScout() {
 
     // 2. Reddit top/new — Render API only (curated results). Await warmup so Render is ready.
     //    serpAndDork + citations already fired above and don't wait for this.
+    let redditData = null;
     const redditPromise = (async () => {
       if (warmupPromiseRef.current) await warmupPromiseRef.current;
       return apiPost("/api/threadflow/serp-scout", {
@@ -861,6 +875,7 @@ export default function SerpScout() {
         companyId,
       });
     })().then(data => {
+      redditData = data;
       merge(data);
       if (data.stale) {
         backgroundRefresh("redditTopNew");
@@ -884,8 +899,20 @@ export default function SerpScout() {
       setSerpResults(prev => {
         const cur = prev[kwTerm];
         if (!cur) return prev;
+        
+        // Final consolidation: ensure both sources' data is present in state
+        // This guards against React batching causing one promise's data to overwrite the other
+        const finalMerged = {
+          ...cur,
+          // Ensure all fields from both sources are present
+          redditThreads: cur.redditThreads || (serpDorkData?.redditThreads || []),
+          dorkRedditLinks: cur.dorkRedditLinks || (serpDorkData?.dorkRedditLinks || []),
+          topRedditPosts: cur.topRedditPosts || (redditData?.topRedditPosts || []),
+          newRedditPosts: cur.newRedditPosts || (redditData?.newRedditPosts || []),
+        };
+        
         const metricsMap = new Map();
-        [...(cur.topRedditPosts || []), ...(cur.newRedditPosts || [])].forEach(p => {
+        [...(finalMerged.topRedditPosts || []), ...(finalMerged.newRedditPosts || [])].forEach(p => {
           const key = (p.post_url || p.url || "").toLowerCase().replace(/\/$/, "");
           if (key && (p.upvotes || p.total_comments))
             metricsMap.set(key, { upvotes: p.upvotes || 0, total_comments: p.total_comments || 0 });
@@ -898,9 +925,9 @@ export default function SerpScout() {
         return {
           ...prev,
           [kwTerm]: {
-            ...cur,
-            redditThreads: enrich(cur.redditThreads || []),
-            dorkRedditLinks: enrich(cur.dorkRedditLinks || []),
+            ...finalMerged,
+            redditThreads: enrich(finalMerged.redditThreads || []),
+            dorkRedditLinks: enrich(finalMerged.dorkRedditLinks || []),
           },
         };
       });

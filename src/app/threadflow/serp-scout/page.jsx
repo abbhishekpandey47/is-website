@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { auth } from "@/lib/firebaseClient";
 import {
   Tabs, TabsContent, TabsList, TabsTrigger,
@@ -122,6 +122,7 @@ export default function SerpScout() {
   const [redditPostsLoading, setRedditPostsLoading] = useState(false);
   const [selectedKwIdx, setSelectedKwIdx] = useState(null);
   const [serpAccordionOpen, setSerpAccordionOpen] = useState(true);
+  const analysisRunIdsRef = useRef({});
 
   // Analyze — Citations
   const [citationResultsByKeyword, setCitationResultsByKeyword] = useState({});
@@ -753,15 +754,26 @@ export default function SerpScout() {
     if (!selectedKw) return;
     const kwTerm = selectedKw.term;
     const kwDomain = domain.trim();
+    const runId = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    analysisRunIdsRef.current[kwTerm] = runId;
+    const isRunActive = () => analysisRunIdsRef.current[kwTerm] === runId;
 
     setSerpThreadsLoading(true);
     setRedditPostsLoading(true);
     setError(null);
 
-    const merge = (newData) =>
+    // Accumulator for results from both sources to prevent React batching from losing data
+    let accumulatedResults = {};
+
+    const merge = (newData) => {
+      if (!isRunActive()) return;
+      // Accumulate into memory FIRST
+      accumulatedResults = { ...accumulatedResults, ...newData };
+      // THEN update state with accumulated + existing data to prevent races
       setSerpResults(prev => {
+        if (!isRunActive()) return prev;
         const existing = prev[kwTerm] || {};
-        const merged = { ...existing, ...newData, success: true };
+        const merged = { ...existing, ...accumulatedResults, success: true };
 
         // Keep already-visible data if a transient refresh returns empty arrays.
         const preserveIfIncomingEmpty = [
@@ -773,7 +785,7 @@ export default function SerpScout() {
 
         preserveIfIncomingEmpty.forEach((key) => {
           const existingVal = existing[key];
-          const incomingVal = newData?.[key];
+          const incomingVal = merged[key];
           if (Array.isArray(existingVal) && existingVal.length > 0 && Array.isArray(incomingVal) && incomingVal.length === 0) {
             merged[key] = existingVal;
           }
@@ -784,6 +796,7 @@ export default function SerpScout() {
           [kwTerm]: merged,
         };
       });
+    };
 
     // Background: fetch post details for posts with 0 upvotes/comments and update metrics
     const enrichMetrics = (posts, listKey) => {
@@ -793,11 +806,13 @@ export default function SerpScout() {
           const url = post.post_url || post.url;
           apiPost("/api/threadflow/serp-scout", { action: "fetchPostDetails", url })
             .then(details => {
+              if (!isRunActive()) return;
               if (!details) return;
               const upvotes = details.score || details.upvotes || details.ups || 0;
               const total_comments = details.num_comments || details.total_comments || details.comments || 0;
               if (!upvotes && !total_comments) return;
               setSerpResults(prev => {
+                if (!isRunActive()) return prev;
                 const cur = prev[kwTerm];
                 if (!cur?.[listKey]) return prev;
                 return {
@@ -818,17 +833,23 @@ export default function SerpScout() {
     // Helper: silently refresh a stale cached call in the background
     const backgroundRefresh = (action) => {
       apiPost("/api/threadflow/serp-scout", { action, keyword: kwTerm, domain: kwDomain, companyId, force: true })
-        .then(data => { if (!data.fromCache) merge(data); })
+        .then(data => {
+          if (!isRunActive()) return;
+          if (!data.fromCache) merge(data);
+        })
         .catch(() => {});
     };
 
     // 1. SERP + dork
+    let serpDorkData = null;
     const serpDorkPromise = apiPost("/api/threadflow/serp-scout", {
       action: "serpAndDork",
       keyword: kwTerm,
       domain: kwDomain,
       companyId,
     }).then(data => {
+      if (!isRunActive()) return;
+      serpDorkData = data;
       merge(data);
       if (data.stale) {
         backgroundRefresh("serpAndDork");
@@ -838,15 +859,18 @@ export default function SerpScout() {
       }
     })
       .catch(e => console.error("[SERP Scout] serpAndDork failed:", e.message))
-      .finally(() => setSerpThreadsLoading(false));
+      .finally(() => { if (isRunActive()) setSerpThreadsLoading(false); });
 
     // 2. Reddit top/new
+    let redditData = null;
     const redditPromise = apiPost("/api/threadflow/serp-scout", {
       action: "redditTopNew",
       keyword: kwTerm,
       domain: kwDomain,
       companyId,
     }).then(data => {
+      if (!isRunActive()) return;
+      redditData = data;
       merge(data);
       if (data.stale) {
         backgroundRefresh("redditTopNew");
@@ -856,7 +880,7 @@ export default function SerpScout() {
       }
     })
       .catch(e => console.error("[SERP Scout] redditTopNew failed:", e.message))
-      .finally(() => setRedditPostsLoading(false));
+      .finally(() => { if (isRunActive()) setRedditPostsLoading(false); });
 
     // 3. Citations — check 12hr cache first, serve instantly, refresh in background if stale
     if (companyId) {
@@ -880,11 +904,27 @@ export default function SerpScout() {
     // 4. After both finish: client-side merge Reddit API upvotes into SERP thread posts
     // (SERP threads come from DataForSEO and have no engagement data — enrich from Reddit API)
     Promise.allSettled([serpDorkPromise, redditPromise]).then(() => {
+      if (!isRunActive()) return;
+      // Final consolidation: ensure both sources' data is present in state
+      // This guards against React batching causing one promise's data to overwrite the other
       setSerpResults(prev => {
+        if (!isRunActive()) return prev;
         const cur = prev[kwTerm];
         if (!cur) return prev;
+        
+        // Build merged result including data from BOTH promises
+        const finalMerged = {
+          ...cur,
+          // Ensure all fields from both sources are present
+          redditThreads: cur.redditThreads || (serpDorkData?.redditThreads || []),
+          dorkRedditLinks: cur.dorkRedditLinks || (serpDorkData?.dorkRedditLinks || []),
+          topRedditPosts: cur.topRedditPosts || (redditData?.topRedditPosts || []),
+          newRedditPosts: cur.newRedditPosts || (redditData?.newRedditPosts || []),
+        };
+
+        // Enrich SERP threads with Reddit metrics from top/new
         const metricsMap = new Map();
-        [...(cur.topRedditPosts || []), ...(cur.newRedditPosts || [])].forEach(p => {
+        [...(finalMerged.topRedditPosts || []), ...(finalMerged.newRedditPosts || [])].forEach(p => {
           const key = (p.post_url || p.url || "").toLowerCase().replace(/\/$/, "");
           if (key && (p.upvotes || p.total_comments))
             metricsMap.set(key, { upvotes: p.upvotes || 0, total_comments: p.total_comments || 0 });
@@ -897,9 +937,9 @@ export default function SerpScout() {
         return {
           ...prev,
           [kwTerm]: {
-            ...cur,
-            redditThreads: enrich(cur.redditThreads || []),
-            dorkRedditLinks: enrich(cur.dorkRedditLinks || []),
+            ...finalMerged,
+            redditThreads: enrich(finalMerged.redditThreads || []),
+            dorkRedditLinks: enrich(finalMerged.dorkRedditLinks || []),
           },
         };
       });
