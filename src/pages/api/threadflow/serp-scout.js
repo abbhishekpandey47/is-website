@@ -1762,12 +1762,13 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  // Verify user is authenticated
-  let userCtx
+  // Auth is optional — attempt to verify but don't require it
+  let userCtx = null
   try {
     userCtx = await verifyRequestUser(req)
   } catch (err) {
-    return res.status(err?.status || 401).json({ error: err?.message || 'Unauthorized' })
+    // Auth failed or missing, but continue anyway (allow unauthenticated requests)
+    userCtx = null
   }
 
   const {
@@ -1791,7 +1792,7 @@ export default async function handler(req, res) {
     }
     const companyId = bodyCompanyId ?? null
     try {
-      const result = await saveKeywords(companyId, rawDomain, bodyKeywords, userCtx.uid, bodyCompanyName, bodyCompetitors, bodyLlmContext, bodyApprovedContext)
+      const result = await saveKeywords(companyId, rawDomain, bodyKeywords, userCtx?.uid || null, bodyCompanyName, bodyCompetitors, bodyLlmContext, bodyApprovedContext)
       return res.status(200).json({
         success: true,
         message: result.companyId
@@ -2729,10 +2730,10 @@ Return this exact format - ONLY JSON, nothing else:
 
   // If no company ID provided, look up this user's existing context by domain first
   if (!resolvedCompanyId && !forceContext) {
-    const existingCtx = await getContextByDomainAndUser(domain, userCtx.uid)
+    const existingCtx = userCtx?.uid ? await getContextByDomainAndUser(domain, userCtx.uid) : null
     if (existingCtx?.companyId) {
       resolvedCompanyId = existingCtx.companyId
-      console.log('[serp-scout] found user-scoped context by domain', { domain, companyId: resolvedCompanyId, userId: userCtx.uid })
+      console.log('[serp-scout] found user-scoped context by domain', { domain, companyId: resolvedCompanyId, userId: userCtx?.uid || null })
     }
   }
 
@@ -2755,7 +2756,7 @@ Return this exact format - ONLY JSON, nothing else:
           const pages = await scrapeDomainPages(domain)
           if (pages?.length) {
             const extractedName = extractCompanyNameFromContent(pages, domain)
-            returnContext = await generateCompanyContext(domain, resolvedCompanyId, extractedName, true, pages, userCtx.uid)
+            returnContext = await generateCompanyContext(domain, resolvedCompanyId, extractedName, true, pages, userCtx?.uid || null)
           }
         } catch (e) {
           console.warn('[serp-scout] context regeneration failed (non-fatal):', e.message)
@@ -2807,7 +2808,7 @@ Return this exact format - ONLY JSON, nothing else:
   const landingText = pages.map(p => p.text).join('\n\n')
   const [keywordsResult, companyContextResult] = await Promise.allSettled([
     promptKeywords({ domain, pageContent: landingText, companyName: extractedCompanyName }),
-    generateCompanyContext(domain, resolvedCompanyId, extractedCompanyName, Boolean(forceContext), pages, userCtx.uid)
+    generateCompanyContext(domain, resolvedCompanyId, extractedCompanyName, Boolean(forceContext), pages, userCtx?.uid || null)
   ])
 
   if (keywordsResult.status === 'rejected') {
