@@ -257,7 +257,7 @@ function FeaturesSection() {
             previewHeight={240}
           />
           <FeatureCard
-            screenshot="/reddit-opportunity-finder/Anaylysis.png"
+            screenshot="/aeo/Result Image 6.png"
             num="05"
             heading={<>One click.<br />Full analysis.</>}
             subtitle="SERP dork, Reddit threads, and AI citations — in a single pass."
