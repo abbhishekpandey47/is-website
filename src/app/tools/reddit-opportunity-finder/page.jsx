@@ -105,14 +105,15 @@ function FeatureCard({ screenshot, num, heading, subtitle, previewHeight = 280, 
       className="relative group rounded-[24px] p-[1px]"
       style={{ cursor: "default" }}
     >
-      {/* Animated gradient border — visible on hover */}
+      {/* Light beam tracing border edge */}
       <div
-        className={`absolute inset-0 rounded-[24px] transition-opacity duration-300 ${hovered ? "border-glow-active" : ""}`}
-        style={{ opacity: hovered ? 0.6 : 0 }}
+        className="absolute inset-0 rounded-[24px] border-trace transition-opacity duration-300"
+        style={{ opacity: hovered ? 1 : 0.3 }}
       />
+      {/* Soft glow following the beam */}
       <div
-        className={`absolute inset-[-4px] rounded-[28px] blur-[12px] transition-opacity duration-300 ${hovered ? "border-glow-active" : ""}`}
-        style={{ opacity: hovered ? 0.25 : 0 }}
+        className="absolute inset-[-3px] rounded-[27px] blur-[10px] border-trace-glow transition-opacity duration-300"
+        style={{ opacity: hovered ? 0.6 : 0.15 }}
       />
 
       {/* Card inner */}
@@ -266,62 +267,80 @@ function Hero() {
         />
       )}
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-32 pb-10 md:pt-44 md:pb-14">
-        {/* Badge */}
-        <FadeSlide y={16} delay={0}>
-          <div className="mb-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-[13px] text-gray-400">
-              AI-powered Reddit &amp; SERP analysis
-            </span>
-          </div>
-        </FadeSlide>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-32 pb-10 md:pt-44 md:pb-14 grid grid-cols-1 md:grid-cols-[1fr_280px] items-center gap-12">
+        {/* Left — hero text */}
+        <div>
+          <FadeSlide y={16} delay={0}>
+            <div className="mb-6">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-[13px] text-gray-400">
+                AI-powered Reddit &amp; SERP analysis
+              </span>
+            </div>
+          </FadeSlide>
 
-        {/* h1 — each line staggered */}
-        <FadeSlide y={24} delay={0.1}>
-          <h1
-            className="font-[quicksand] text-white mb-4 max-w-[750px]"
-            style={{
-              fontSize: "clamp(60px, 7vw, 80px)",
-              fontWeight: 700,
-              letterSpacing: "-0.04em",
-              lineHeight: 0.95,
-            }}
+          <FadeSlide y={24} delay={0.1}>
+            <h1
+              className="font-[quicksand] text-white mb-4 max-w-[750px]"
+              style={{
+                fontSize: "clamp(60px, 7vw, 80px)",
+                fontWeight: 700,
+                letterSpacing: "-0.04em",
+                lineHeight: 0.95,
+              }}
+            >
+              Reddit threads your
+              <br />
+              competitors are winning.
+              <br />
+              Now you can too.
+            </h1>
+          </FadeSlide>
+
+          <FadeSlide y={16} delay={0.26}>
+            <p
+              className="mb-8 max-w-[500px]"
+              style={{ fontSize: 17, fontWeight: 300, lineHeight: 1.7, color: "rgba(255,255,255,0.55)" }}
+            >
+              Paste your domain. Get every Reddit thread ranking on Google for your keywords — plus where your competitors are cited and you aren&apos;t.
+            </p>
+          </FadeSlide>
+
+          <FadeSlide y={12} delay={0.34}>
+            <div className="flex items-center gap-4 mb-4">
+              <PrimaryCTA />
+              <GhostCTA href="#features">See how it works</GhostCTA>
+            </div>
+          </FadeSlide>
+
+          <FadeSlide y={0} delay={0.42}>
+            <p className="text-[13px]" style={{ color: "rgba(255,255,255,0.3)" }}>
+              Free to start · No credit card required
+            </p>
+          </FadeSlide>
+        </div>
+
+        {/* Right — Product Hunt badge */}
+        <FadeSlide y={16} delay={0.5} className="hidden md:flex items-center justify-center self-center">
+          <a
+            href="https://www.producthunt.com/products/reddit-opportunity-finder-by-infrasity?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-reddit-opportunity-finder-by-infrasity"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
           >
-            Reddit threads your
-            <br />
-            competitors are winning.
-            <br />
-            Now you can too.
-          </h1>
-        </FadeSlide>
-
-        {/* Description */}
-        <FadeSlide y={16} delay={0.26}>
-          <p
-            className="mb-8 max-w-[500px]"
-            style={{ fontSize: 17, fontWeight: 300, lineHeight: 1.7, color: "rgba(255,255,255,0.55)" }}
-          >
-            Paste your domain. Get every Reddit thread ranking on Google for your keywords — plus where your competitors are cited and you aren&apos;t.
-          </p>
-        </FadeSlide>
-
-        {/* Buttons */}
-        <FadeSlide y={12} delay={0.34}>
-          <div className="flex items-center gap-4 mb-4">
-            <PrimaryCTA />
-            <GhostCTA href="#features">See how it works</GhostCTA>
-          </div>
-        </FadeSlide>
-
-        {/* Footnote */}
-        <FadeSlide y={0} delay={0.42}>
-          <p className="text-[13px]" style={{ color: "rgba(255,255,255,0.3)" }}>
-            Free to start · No credit card required
-          </p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1100763&theme=light&t=1773946604966"
+              alt="Reddit Opportunity Finder by Infrasity on Product Hunt"
+              width="250"
+              height="54"
+              style={{ width: 250, height: 54 }}
+              loading="eager"
+            />
+          </a>
         </FadeSlide>
       </div>
 
-      {/* Hero product card — float effect */}
+      {/* Hero product card — full width, float effect */}
       <motion.div
         className="relative mx-auto max-w-7xl px-6 lg:px-8 pb-20"
         initial={motionSafe ? { opacity: 0, y: 40 } : { opacity: 1, y: 0 }}
@@ -388,7 +407,7 @@ function FeaturesSection() {
           <h2 className="font-[quicksand] text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight mb-4">
             One URL.
             <br />
-            <span className="text-gray-400 italic">Full picture.</span>
+            <span className="text-white/60">Full picture.</span>
           </h2>
           <p className="max-w-[480px] text-[16px] font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
             One click fetches Google-ranked Reddit threads, keyword clusters, and AI citation gaps — all from a single domain input.
@@ -482,7 +501,7 @@ function StepItem({ step, index, isActive }) {
       <motion.span
         className="shrink-0 text-[13px] font-semibold pt-0.5"
         animate={{
-          color: isActive ? "rgba(95,100,255,1)" : "rgba(95,100,255,0.4)",
+          color: isActive ? "rgba(95,100,255,1)" : "rgba(95,100,255,0.6)",
         }}
         transition={{ duration: 0.3 }}
       >
@@ -492,7 +511,7 @@ function StepItem({ step, index, isActive }) {
         <motion.h3
           className="mb-1.5 text-[17px] font-semibold tracking-[-0.01em]"
           animate={{
-            color: isActive ? "rgba(255,255,255,1)" : "rgba(255,255,255,0.5)",
+            color: isActive ? "rgba(255,255,255,1)" : "rgba(255,255,255,0.75)",
           }}
           transition={{ duration: 0.3 }}
         >
@@ -501,7 +520,7 @@ function StepItem({ step, index, isActive }) {
         <motion.p
           className="text-[14px] font-light leading-relaxed"
           animate={{
-            color: isActive ? "rgba(156,163,175,1)" : "rgba(156,163,175,0.5)",
+            color: isActive ? "rgba(156,163,175,1)" : "rgba(156,163,175,0.75)",
           }}
           transition={{ duration: 0.3 }}
         >
@@ -567,10 +586,10 @@ function HowItWorks() {
             >
               URL in.
               <br />
-              <span className="text-gray-400 italic">Reddit map out.</span>
+              <span className="text-white/60">Reddit map out.</span>
             </h2>
             <p
-              className="max-w-[400px] text-[15px] font-light leading-relaxed mb-10"
+              className="max-w-[400px] text-[15px] font-light leading-relaxed mb-6"
               style={{ color: "rgba(255,255,255,0.45)" }}
             >
               30 seconds from domain to full Reddit coverage. No manual
