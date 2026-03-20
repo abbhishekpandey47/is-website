@@ -319,8 +319,15 @@ function Hero() {
           </FadeSlide>
         </div>
 
-        {/* Right — Product Hunt badge */}
-        <FadeSlide y={16} delay={0.5} className="hidden md:flex items-center justify-center self-center">
+        {/* Right — Mascot + Product Hunt badge */}
+        <FadeSlide y={16} delay={0.5} className="hidden md:flex flex-col items-center justify-center self-center gap-6">
+          <img
+            src="/aeo/Avatar img.png"
+            alt="Reddit Scout mascot"
+            width="280"
+            height="280"
+            style={{ width: 280, height: "auto" }}
+          />
           <a
             href="https://www.producthunt.com/products/reddit-opportunity-finder-by-infrasity?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-reddit-opportunity-finder-by-infrasity"
             target="_blank"
