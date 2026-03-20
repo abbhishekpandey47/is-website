@@ -224,8 +224,8 @@ function Hero() {
   const motionSafe = useMotionSafe();
 
   return (
-    <section className="relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#581c87]/20 via-transparent to-transparent" />
+    <section className="relative overflow-hidden isolate">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#581c87]/30 via-transparent to-transparent" />
 
       {/* Orb 1 — indigo, top-left */}
       {motionSafe && (
@@ -904,7 +904,16 @@ const REDDIT_SCOUT_FAQS = [
 
 export default function RedditScoutLanding() {
   return (
-    <div className="relative">
+    <div className="relative bg-[#0d0a1a]">
+      {/* Full-page background gradient — matches developer marketing */}
+      <div className="absolute inset-0 pointer-events-none -z-0">
+        <img
+          src="/developerMarketing/Hero.svg"
+          alt=""
+          className="w-full h-full object-cover opacity-60"
+          style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%" }}
+        />
+      </div>
       <Hero />
       <LogoCloud />
       <StatsSection />
