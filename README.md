@@ -3,7 +3,7 @@
 =======
 ## Getting Started  
    
-First run the development server
+First run the developmentserver
                    
 ```bash             
 npm run dev       

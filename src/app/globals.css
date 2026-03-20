@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reddit Scout — light beam tracing card border */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes borderTrace {
+  0% { --border-angle: 0deg; }
+  100% { --border-angle: 360deg; }
+}
+.border-trace {
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 0%,
+    transparent 85%,
+    #5f64ff 92%,
+    #8b5cf6 96%,
+    #5f64ff 100%
+  );
+  animation: borderTrace 4s linear infinite;
+}
+.border-trace-glow {
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 0%,
+    transparent 82%,
+    rgba(95,100,255,0.5) 90%,
+    rgba(139,92,246,0.6) 96%,
+    rgba(95,100,255,0.5) 100%
+  );
+  animation: borderTrace 4s linear infinite;
+}
+
 @font-face {
   font-family: "Geist";
   src: url('/fonts/GeistVF.woff2') format('woff2'), url('/fonts/GeistVF.woff') format('woff');

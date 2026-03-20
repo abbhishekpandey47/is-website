@@ -1,11 +1,11 @@
 export const metadata = {
   title: "Reddit Scout | Infrasity",
   description:
-    "Discover high-intent Reddit threads where your audience is already talking. Analyze domains, generate keywords, and find untapped marketing opportunities on Reddit — powered by AI.",
+    "Paste your domain. Get every Reddit thread ranking on Google for your keywords — plus where your competitors are cited and you aren't. Powered by AI.",
   openGraph: {
     title: "Reddit Scout | Infrasity",
     description:
-      "Discover high-intent Reddit threads where your audience is already talking.",
+      "Paste your domain. Get every Reddit thread ranking on Google for your keywords.",
     url: "https://www.infrasity.com/tools/reddit-opportunity-finder",
   },
 };
