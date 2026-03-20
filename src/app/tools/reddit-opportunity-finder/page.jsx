@@ -384,6 +384,123 @@ function LogoCloud() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   STATS
+   ══════════════════════════════════════════════════════════════════════════ */
+
+const METRICS = [
+  { label: "Reddit threads missed", number: "73%", desc: "of Reddit threads ranking on Google for B2B keywords go completely unengaged." },
+  { label: "Keywords generated", number: "20", desc: "targeted keywords auto-generated from a single domain input. Zero research." },
+  { label: "Citation gaps found", number: "8x", desc: "more competitor citations discovered vs manual Reddit monitoring." },
+  { label: "Time saved", number: "4hrs", desc: "per week previously spent manually searching subreddits for relevant threads." },
+  { label: "Analysis time", number: "30s", desc: "from domain input to full Reddit thread map. No forms, no setup required." },
+];
+
+function StatsSection() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+
+  return (
+    <section style={{ padding: "80px 0" }} ref={ref}>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Header row */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-8 md:gap-16 mb-12"
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+        >
+          <h2
+            className="font-[quicksand] text-white"
+            style={{
+              fontSize: "clamp(28px, 4vw, 48px)",
+              fontWeight: 700,
+              letterSpacing: "-0.03em",
+              lineHeight: 1.1,
+            }}
+          >
+            Reddit threads your competitors
+            <br />
+            find. That you don&apos;t.
+          </h2>
+          <p
+            style={{
+              fontSize: 15,
+              color: "rgba(255,255,255,0.5)",
+              fontWeight: 300,
+              lineHeight: 1.6,
+              maxWidth: 320,
+            }}
+            className="md:ml-auto"
+          >
+            Data from B2B teams using Reddit Scout reveals what&apos;s working on Reddit — and how much pipeline most teams are leaving on the table.
+          </p>
+        </motion.div>
+
+        {/* Metric cards */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          {METRICS.map((m, i) => (
+            <motion.div
+              key={m.label}
+              className="flex flex-col"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: 16,
+                padding: "24px 20px",
+              }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ ...SPRING, delay: 0.1 + i * 0.08 }}
+            >
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 8 }}>
+                {m.label}
+              </p>
+              <p
+                className="font-[quicksand]"
+                style={{
+                  fontSize: 52,
+                  fontWeight: 700,
+                  letterSpacing: "-0.04em",
+                  color: "#ffffff",
+                  lineHeight: 1,
+                }}
+              >
+                {m.number}
+              </p>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.6, marginTop: 8 }}>
+                {m.desc}
+              </p>
+              <Link
+                href="#features"
+                style={{
+                  fontSize: 13,
+                  color: "rgba(255,255,255,0.3)",
+                  textDecoration: "underline",
+                  marginTop: "auto",
+                  paddingTop: 16,
+                }}
+              >
+                See how it works →
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA below cards */}
+        <motion.div
+          className="mt-10 text-center"
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: EASE_OUT_EXPO, delay: 0.6 }}
+        >
+          <PrimaryCTA />
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    FEATURES
    ══════════════════════════════════════════════════════════════════════════ */
 
@@ -417,7 +534,7 @@ function FeaturesSection() {
         {/* Row 1 */}
         <div className="grid gap-4 md:grid-cols-2 mb-4">
           <FeatureCard
-            screenshot="/reddit-opportunity-finder/Domain Section.png"
+            screenshot="/aeo/Domain Section (3).png"
             num="01"
             heading={<>Paste your domain.<br />That&apos;s it.</>}
             subtitle="One URL triggers the entire analysis — no forms, no setup."
@@ -443,16 +560,16 @@ function FeaturesSection() {
             num="03"
             heading={<>20 keywords.<br />Zero research.</>}
             subtitle="Generated from your actual positioning. Labeled by intent. Ready to run."
-            previewHeight={360}
+            previewHeight={280}
             index={2}
             inView={inView}
           />
           <FeatureCard
-            screenshot="/aeo/Result Image 6.png"
+            screenshot="/aeo/Best Thread Section.png"
             num="04"
             heading={<>One click.<br />Full analysis.</>}
             subtitle="SERP dork links, Reddit threads, and AI citations — pulled and structured in one pass."
-            previewHeight={360}
+            previewHeight={280}
             index={3}
             inView={inView}
           />
@@ -494,31 +611,38 @@ const STEPS = [
   { num: "04", title: "Act on the signal", desc: "Engage high-ranking threads, close citation gaps, and make Reddit a repeatable pipeline source." },
 ];
 
-function StepItem({ step, index, isActive }) {
-  const motionSafe = useMotionSafe();
+function StepItem({ step, index, isActive, isLast }) {
   return (
-    <div className="flex gap-5 py-5 relative">
+    <div
+      className="grid gap-3 py-4"
+      style={{
+        gridTemplateColumns: "32px 1fr",
+        borderBottom: isLast ? "none" : "1px solid rgba(255,255,255,0.07)",
+      }}
+    >
       <motion.span
-        className="shrink-0 text-[13px] font-semibold pt-0.5"
+        className="font-mono text-[12px] font-semibold"
+        style={{ marginTop: 3 }}
         animate={{
-          color: isActive ? "rgba(95,100,255,1)" : "rgba(95,100,255,0.6)",
+          color: isActive ? "#6366f1" : "rgba(99,102,241,0.6)",
         }}
         transition={{ duration: 0.3 }}
       >
         {step.num}
       </motion.span>
-      <div className="flex-1">
+      <div>
         <motion.h3
-          className="mb-1.5 text-[16px] font-semibold tracking-[-0.01em]"
+          className="text-[15px] font-semibold"
+          style={{ letterSpacing: "-0.01em", marginBottom: 4 }}
           animate={{
-            color: isActive ? "rgba(255,255,255,1)" : "rgba(255,255,255,0.75)",
+            color: isActive ? "#ffffff" : "rgba(255,255,255,0.75)",
           }}
           transition={{ duration: 0.3 }}
         >
           {step.title}
         </motion.h3>
         <motion.p
-          className="text-[14px] font-light"
+          className="text-[13px] m-0"
           style={{ lineHeight: 1.6 }}
           animate={{
             color: isActive ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.35)",
@@ -528,19 +652,6 @@ function StepItem({ step, index, isActive }) {
           {step.desc}
         </motion.p>
       </div>
-      {/* Accent line draws on active */}
-      {index < STEPS.length - 1 && (
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-[1px]"
-          style={{ background: isActive ? "#5f64ff" : "rgba(255,255,255,0.06)" }}
-          initial={{ scaleX: 0, transformOrigin: "left" }}
-          animate={{ scaleX: isActive ? 1 : 0 }}
-          transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
-        />
-      )}
-      {index < STEPS.length - 1 && !isActive && (
-        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/[0.06]" />
-      )}
     </div>
   );
 }
@@ -565,63 +676,89 @@ function HowItWorks() {
   }, []);
 
   return (
-    <section className="py-20 border-y border-white/[0.06]" ref={sectionRef}>
+    <section className="border-y border-white/[0.06]" style={{ padding: "80px 0" }} ref={sectionRef}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 items-start">
+        {/* Section header — full width */}
+        <motion.div
+          className="mb-10"
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+        >
+          <p className="text-[13px] font-medium" style={{ color: "#6366f1", marginBottom: 8 }}>
+            How it works
+          </p>
+          <h2
+            className="font-[quicksand] text-white"
+            style={{
+              fontSize: "clamp(32px, 4vw, 48px)",
+              fontWeight: 700,
+              letterSpacing: "-0.03em",
+              lineHeight: 1.1,
+              marginBottom: 14,
+            }}
+          >
+            URL in. Reddit map out.
+          </h2>
+          <p
+            style={{
+              fontSize: 15,
+              color: "rgba(255,255,255,0.45)",
+              lineHeight: 1.6,
+              maxWidth: 500,
+            }}
+          >
+            30 seconds from domain to full Reddit coverage. No manual
+            research. No guesswork. No agency needed.
+          </p>
+        </motion.div>
+
+        {/* Two column: steps + screenshot */}
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] items-start gap-10 lg:gap-16">
           {/* Left — steps */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+            transition={{ duration: 0.5, ease: EASE_OUT_EXPO, delay: 0.1 }}
           >
-            <p className="mb-2 text-[13px] text-[#5f64ff] tracking-[0.01em]">
-              How it works
-            </p>
-            <h2
-              className="font-[quicksand] font-bold text-white mb-4"
-              style={{
-                fontSize: "clamp(36px, 5vw, 56px)",
-                letterSpacing: "-0.04em",
-                lineHeight: 1.05,
-              }}
-            >
-              URL in.
-              <br />
-              <span className="text-white">Reddit map out.</span>
-            </h2>
-            <p
-              className="max-w-[400px] text-[15px] font-light leading-relaxed mb-6"
-              style={{ color: "rgba(255,255,255,0.45)" }}
-            >
-              30 seconds from domain to full Reddit coverage. No manual
-              research. No guesswork. No agency needed.
-            </p>
-
-            <div ref={stepsRef}>
+            <div ref={stepsRef} className="flex flex-col" style={{ gap: 0 }}>
               {STEPS.map((s, i) => (
-                <StepItem key={s.num} step={s} index={i} isActive={i === activeStep} />
+                <StepItem key={s.num} step={s} index={i} isActive={i === activeStep} isLast={i === STEPS.length - 1} />
               ))}
             </div>
 
-            <div className="mt-8">
+            <div style={{ marginTop: 28, width: "fit-content" }}>
               <PrimaryCTA />
             </div>
           </motion.div>
 
-          {/* Right — sticky browser screenshot */}
+          {/* Right — screenshot card */}
           <motion.div
-            className="sticky top-32"
+            className="sticky top-20"
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease: EASE_OUT_EXPO, delay: 0.2 }}
           >
-            <BrowserChrome>
-              <img
-                src="/reddit-opportunity-finder/Domain Section.png"
-                alt="Reddit Scout — Domain Input"
-                className="w-full block"
+            <div
+              className="overflow-hidden"
+              style={{
+                background: "#111",
+                borderRadius: 14,
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07), 0 24px 60px rgba(0,0,0,0.5)",
+                aspectRatio: "16/9",
+              }}
+            >
+              <iframe
+                src="https://www.youtube.com/embed/_WbM4LIjUBQ?rel=0&modestbranding=1&start=3"
+                title="Reddit Scout — Product Demo"
+                className="w-full h-full block"
+                style={{ border: "none" }}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
               />
-            </BrowserChrome>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -744,6 +881,7 @@ export default function RedditScoutLanding() {
     <div className="relative">
       <Hero />
       <LogoCloud />
+      <StatsSection />
       <FeaturesSection />
       <MidCTA />
       <HowItWorks />

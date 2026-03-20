@@ -19,7 +19,7 @@ const TrustedMarquee = dynamic(() => import("./TrustedMarquee"), {
   ),
 });
 
-export default function AIStartupLanding({customPadding="pt-20"}) {
+export default function AIStartupLanding({customPadding="pt-20", extraCTA = null}) {
   return (
     <div
       className={`relative flex flex-col items-left justify-left ${customPadding} max-sm:pb-0`}
@@ -63,8 +63,7 @@ export default function AIStartupLanding({customPadding="pt-20"}) {
                         <TrustedSection />
                     </div> */}
           <div className="flex flex-col items-center">
-            {/* Center - Book a Demo button */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-row items-center gap-5 flex-wrap justify-center">
               <ContactPopupButton
                 buttonText="Book a Strategy Call"
                 width="w-52"
@@ -73,6 +72,7 @@ export default function AIStartupLanding({customPadding="pt-20"}) {
                 textWeight="quicksand-semibold"
                 thankYouPath="/lp/reddit-marketing-agency/thankyou"
               />
+              {extraCTA}
             </div>
           </div>
         </div>

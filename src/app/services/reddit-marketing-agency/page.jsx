@@ -27,7 +27,25 @@ export default function RedditMarketingAgencyClient() {
         backgroundPosition: 'center',
       }}
     >
-      <HeroHome customPadding={"pt-44"}/>
+      <HeroHome
+        customPadding={"pt-44"}
+        extraCTA={
+          <a
+            href="https://www.producthunt.com/products/reddit-opportunity-finder-by-infrasity?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-reddit-opportunity-finder-by-infrasity"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1100763&theme=light&t=1773946604966"
+              alt="Reddit Opportunity Finder by Infrasity on Product Hunt"
+              width="250"
+              height="54"
+              style={{ width: 250, height: 54 }}
+              loading="eager"
+            />
+          </a>
+        }
+      />
 
       {/* Section pair: AuditWhatYouGet + ConversationToRevenue */}
       <div className="relative z-0">
