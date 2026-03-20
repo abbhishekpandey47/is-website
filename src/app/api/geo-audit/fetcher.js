@@ -30,7 +30,6 @@ export async function fetchPages(pages, concurrency = 8, delay = 300) {
 
   for (let i = 0; i < batches.length; i++) {
     const batch = batches[i];
-    console.log(`  [fetcher] Batch ${i + 1}/${batches.length} — fetching ${batch.length} pages`);
 
     const settled = await Promise.allSettled(
       batch.map(({ url, type }) => fetchPlain(url, type))
@@ -56,12 +55,10 @@ export async function fetchPages(pages, concurrency = 8, delay = 300) {
 
   // Second pass — Playwright for JS-rendered pages
   if (needsPlaywright.length > 0) {
-    console.log(`  [fetcher] ${needsPlaywright.length} pages need Playwright (JS-rendered)`);
     const playwrightResults = await fetchWithPlaywright(needsPlaywright);
     results.push(...playwrightResults);
   }
 
-  console.log(`  [fetcher] Successfully parsed ${results.length}/${pages.length} pages`);
   return results;
 }
 
@@ -144,7 +141,6 @@ async function fetchWithPlaywright(pages) {
     if (browser) await browser.close();
   }
 
-  console.log(`  [fetcher] Playwright fetched ${results.length}/${pages.length} pages`);
   return results;
 }
 

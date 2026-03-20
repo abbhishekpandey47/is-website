@@ -46,14 +46,12 @@ Schema:
  * @returns {Promise<Array<RewriteResult>>}
  */
 export async function generateRewrites(topPages) {
-  console.log(`  [rewriter] Generating rewrites for ${topPages.length} pages (3 concurrent)`);
 
   const results = [];
   const batches = chunk(topPages, 3);
 
   for (let i = 0; i < batches.length; i++) {
     const batch = batches[i];
-    console.log(`  [rewriter] Rewrite batch ${i + 1}/${batches.length}`);
 
     const settled = await Promise.allSettled(
       batch.map((page) => rewritePage(page))
@@ -71,7 +69,6 @@ export async function generateRewrites(topPages) {
     if (i < batches.length - 1) await sleep(1000);
   }
 
-  console.log(`  [rewriter] Got rewrites for ${results.length}/${topPages.length} pages`);
   return results;
 }
 

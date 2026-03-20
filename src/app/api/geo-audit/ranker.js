@@ -36,11 +36,6 @@ export function rankPages(scoredPages, topN = 10) {
 
   const topPages = sortedHighValue.slice(0, topN);
 
-  console.log(`  [ranker] Top ${topPages.length} pages selected for rewrites`);
-  topPages.forEach((p, i) => {
-    console.log(`    ${i + 1}. ${p.url} — score ${p.rawScore}/100 — opp ${p.opportunityScore}`);
-  });
-
   return { topPages, allSorted };
 }
 

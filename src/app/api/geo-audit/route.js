@@ -21,7 +21,7 @@ export async function POST(req) {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
 
-  const { domain, maxPages = 50, topN = 10 } = body;
+  const { domain, pages: formPages = [], maxPages = 50, topN = 10 } = body;
 
   if (!domain || typeof domain !== "string") {
     return NextResponse.json({ error: "domain is required." }, { status: 400 });
@@ -41,9 +41,7 @@ export async function POST(req) {
         try {
           const line = `data: ${JSON.stringify({ event, ...data })}\n\n`;
           controller.enqueue(new TextEncoder().encode(line));
-        } catch {
-          // controller already closed
-        }
+        } catch {}
       };
 
       const close = () => {
@@ -55,7 +53,7 @@ export async function POST(req) {
 
       try {
         // ── Step 1: Crawl ───────────────────────────────────────────────────
-        send("progress", { step: 1, total: 5, message: "Crawling sitemap and pages…" });
+        send("progress", { step: 1, total: 5, message: "Crawling sitemap and pages…", urls: [] });
         const crawledPages = await crawlSite(normDomain, Math.min(maxPages, 150), 400);
 
         if (crawledPages.length === 0) {
@@ -64,34 +62,83 @@ export async function POST(req) {
           return;
         }
 
-        send("progress", { step: 1, total: 5, message: `Found ${crawledPages.length} pages` });
+        // Send discovered URLs to frontend
+        send("progress", {
+          step: 1, total: 5,
+          message: `Found ${crawledPages.length} pages`,
+          urls: crawledPages.slice(0, 20).map(p => p.url),
+        });
 
         // ── Step 2: Fetch + Parse ───────────────────────────────────────────
-        send("progress", { step: 2, total: 5, message: `Fetching and parsing ${crawledPages.length} pages…` });
-        const parsedPages = await fetchPages(crawledPages, 8, 250);
-        send("progress", { step: 2, total: 5, message: `Parsed ${parsedPages.length} pages successfully` });
+        send("progress", {
+          step: 2, total: 5,
+          message: `Fetching and parsing ${crawledPages.length} pages…`,
+          urls: crawledPages.slice(0, 20).map(p => p.url),
+        });
+
+        // Stream batches of URLs as they get fetched
+        const batchSize = 8;
+        const allParsed = [];
+        const batches = chunkArray(crawledPages, batchSize);
+
+        for (let i = 0; i < batches.length; i++) {
+          const batch = batches[i];
+          const batchParsed = await fetchPagesBatch(batch);
+          allParsed.push(...batchParsed);
+
+          // Send live URL updates showing what's being processed
+          const processedUrls = crawledPages
+            .slice(0, (i + 1) * batchSize)
+            .map(p => p.url);
+
+          send("progress", {
+            step: 2, total: 5,
+            message: `Fetching and parsing ${Math.min((i + 1) * batchSize, crawledPages.length)} of ${crawledPages.length} pages…`,
+            urls: processedUrls.slice(-10), // show last 10
+          });
+        }
+
+        const parsedPages = allParsed.filter(Boolean);
+
+        // ── Analyze form-pasted pages first if provided ─────────────────────
+        if (formPages && formPages.length > 0) {
+          send("progress", {
+            step: 2, total: 5,
+            message: `Analyzing ${formPages.length} provided page${formPages.length > 1 ? "s" : ""}…`,
+            urls: formPages.map(p => p.url).filter(Boolean),
+          });
+        }
 
         // ── Step 3: Score ───────────────────────────────────────────────────
-        send("progress", { step: 3, total: 5, message: "Scoring pages across 6 GEO signals…" });
+        send("progress", { step: 3, total: 5, message: "Scoring pages across 6 GEO signals…", urls: [] });
         await new Promise(r => setTimeout(r, 600));
         const scoredPages = scorePages(parsedPages);
 
         // ── Step 4: Rank ────────────────────────────────────────────────────
-        send("progress", { step: 4, total: 5, message: `Ranking by opportunity score, selecting top ${topN}…` });
+        send("progress", { step: 4, total: 5, message: `Ranking by opportunity score, selecting top ${topN}…`, urls: [] });
         await new Promise(r => setTimeout(r, 600));
         const rankedResults = rankPages(scoredPages, topN);
         const topPages = rankedResults.topPages;
         const allSorted = rankedResults.allSorted;
         const summary = buildInventorySummary(allSorted);
 
+        send("progress", {
+          step: 4, total: 5,
+          message: `Top ${topPages.length} pages identified`,
+          urls: topPages.map(p => p.url),
+        });
+
         // ── Step 5: Rewrite ─────────────────────────────────────────────────
-        send("progress", { step: 5, total: 5, message: `Generating rewrite suggestions for ${topPages.length} pages…` });
+        send("progress", {
+          step: 5, total: 5,
+          message: `Generating rewrite suggestions for ${topPages.length} pages…`,
+          urls: topPages.map(p => p.url),
+        });
         const rewrites = await generateRewrites(topPages);
 
-        // ── Step 6: Report ──────────────────────────────────────────────────
+        // ── Report ──────────────────────────────────────────────────────────
         const markdown = buildReport(normDomain, allSorted, topPages, rewrites, summary);
 
-        // ── Done ────────────────────────────────────────────────────────────
         send("complete", {
           domain: normDomain,
           summary,
@@ -122,25 +169,32 @@ export async function POST(req) {
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const domain = searchParams.get("domain");
-  if (!domain) {
-    return NextResponse.json({ error: "?domain= required" }, { status: 400 });
-  }
+  if (!domain) return NextResponse.json({ error: "?domain= required" }, { status: 400 });
   return NextResponse.json({ message: "Use POST /api/geo-audit with { domain, maxPages, topN }" });
 }
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
 
 function normaliseDomain(domain) {
   let d = domain.trim();
   if (!d.startsWith("http")) d = "https://" + d;
   d = d.replace(/\/$/, "");
-  try {
-    const u = new URL(d);
-    return u.origin;
-  } catch {
-    return null;
-  }
+  try { const u = new URL(d); return u.origin; } catch { return null; }
 }
 
 function sanitisePage(page) {
   const { _parsed, ...clean } = page;
   return clean;
+}
+
+function chunkArray(arr, size) {
+  const chunks = [];
+  for (let i = 0; i < arr.length; i += size) chunks.push(arr.slice(i, i + size));
+  return chunks;
+}
+
+// Fetch a batch of pages (reuses fetcher logic but per-batch for streaming)
+async function fetchPagesBatch(batch) {
+  const { fetchPages } = await import("./fetcher.js");
+  return fetchPages(batch, batch.length, 0);
 }

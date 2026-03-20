@@ -23,14 +23,11 @@ const SKIP_PATHS = /\/(wp-admin|admin|login|logout|cart|checkout|feed|rss|sitema
  */
 export async function crawlSite(domain, maxPages = 50, crawlDelay = 500) {
   const base = normaliseBase(domain);
-  console.log(`  [crawler] Starting crawl for ${base}`);
-
   let urls = [];
 
   // 1 — Try sitemap
   try {
     urls = await fetchSitemap(base);
-    console.log(`  [crawler] Sitemap found — ${urls.length} URLs`);
   } catch {
     console.log(`  [crawler] No sitemap — falling back to BFS crawl`);
   }
@@ -38,7 +35,6 @@ export async function crawlSite(domain, maxPages = 50, crawlDelay = 500) {
   // 2 — BFS fallback if sitemap empty or failed
   if (urls.length === 0) {
     urls = await bfsCrawl(base, maxPages, crawlDelay);
-    console.log(`  [crawler] BFS found ${urls.length} URLs`);
   }
 
   // 3 — Deduplicate, filter, cap, classify
@@ -55,8 +51,6 @@ export async function crawlSite(domain, maxPages = 50, crawlDelay = 500) {
     result.push({ url: clean, type: classifyUrl(clean) });
     if (result.length >= maxPages) break;
   }
-
-  console.log(`  [crawler] Final URL list: ${result.length} pages`);
   return result;
 }
 
