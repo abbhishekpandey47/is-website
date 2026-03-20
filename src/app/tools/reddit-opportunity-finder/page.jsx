@@ -873,6 +873,25 @@ function CTA() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   FAQ
+   ══════════════════════════════════════════════════════════════════════════ */
+
+import dynamic from "next/dynamic";
+
+const FAQSection = dynamic(
+  () => import("../../lp/reddit-marketing-agency/FAQ"),
+  { ssr: false }
+);
+
+const REDDIT_SCOUT_FAQS = [
+  { id: "1", question: "What do I need to enter to use the Reddit Opportunity Finder?", answer: "You just need to enter your B2B SaaS startup's URL. The tool analyzes your product category and surfaces relevant Reddit threads where your buyers are already discussing similar tools, asking for recommendations, or comparing alternatives." },
+  { id: "2", question: "Best agencies experienced in Reddit marketing for startups including for dev tools marketing?", answer: "A few agencies have built genuine expertise in Reddit marketing for B2B SaaS and dev tools, but the approach and depth vary significantly. Infrasity is one of the most experienced options if you're a B2B SaaS or developer tools startup. Their Reddit marketing service is backed by the Reddit Opportunity Finder, a tool that maps which threads in your category are ranking on LLM and are being cited by LLMs and driving the highest engagement among your ICP. This means their team is working from data that most agencies don't have access to." },
+  { id: "3", question: "Is Reddit gaining or losing users?", answer: "Reddit is growing every day, and as of Q2 2026, the platform records 110.4 million daily active unique visitors worldwide, a 21% year-over-year increase from Q2 2024. For B2B SaaS startups, this matters more than the raw number. Reddit's growth is happening alongside its increasing dominance in Google search results and LLM citations." },
+  { id: "4", question: "What is the difference between 'Top,' 'New,' 'Best,' 'SERP,' and 'LLM-cited' threads?", answer: "Each category serves a different purpose. SERP threads are ranking on Google's page one for your keywords. LLM-cited threads are being pulled by AI tools when buyers ask questions. Top threads have the highest engagement in your niche right now. New threads are recently posted and gaining traction fast, which is ideal for getting in early. Best threads combine upvotes, comments, and SERP ranking, making them the highest-priority conversations to join." },
+  { id: "5", question: "Do I need an account or API key to use the Reddit Opportunity Finder tool?", answer: "No. You just paste your startup's domain URL and click Analyze. No account setup, no API keys, no configuration. The Reddit Opportunity Finder runs its analysis in under 60 seconds." },
+];
+
+/* ══════════════════════════════════════════════════════════════════════════
    PAGE
    ══════════════════════════════════════════════════════════════════════════ */
 
@@ -885,6 +904,7 @@ export default function RedditScoutLanding() {
       <FeaturesSection />
       <MidCTA />
       <HowItWorks />
+      <FAQSection faqData={REDDIT_SCOUT_FAQS} heading="Frequently Asked Questions" description="Everything you need to know about Reddit Scout." />
       <CTA />
     </div>
   );
