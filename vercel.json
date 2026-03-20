@@ -37,11 +37,9 @@
       ]
     }
   ],
-  {
-    "functions": {
-      "src/app/api/geo-audit/route.js": {
-        "maxDuration": 300
-      }
+  "functions": {
+    "src/app/api/geo-audit/route.js": {
+      "maxDuration": 300
     }
   }
 }
