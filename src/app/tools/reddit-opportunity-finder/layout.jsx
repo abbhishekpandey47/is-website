@@ -1,11 +1,11 @@
 export const metadata = {
-  title: "Reddit Scout | Infrasity",
+  title: "Reddit Opportunity Finder: Find the Right Threads Under 60 Secs",
   description:
-    "Paste your domain. Get every Reddit thread ranking on Google for your keywords — plus where your competitors are cited and you aren't. Powered by AI.",
+    "Find high-intent and relevant Reddit threads for your B2B SaaS startup. Engage in the top threads to rank in SERP and get discovered in LLM by your ideal buyers.",
   openGraph: {
-    title: "Reddit Scout | Infrasity",
+    title: "Reddit Opportunity Finder: Find the Right Threads Under 60 Secs",
     description:
-      "Paste your domain. Get every Reddit thread ranking on Google for your keywords.",
+      "Find high-intent and relevant Reddit threads for your B2B SaaS startup. Engage in the top threads to rank in SERP and get discovered in LLM by your ideal buyers.",
     url: "https://www.infrasity.com/tools/reddit-opportunity-finder",
   },
 };
