@@ -56,10 +56,10 @@ function ScoreHeroCard({summary}){
     <div className="rounded-2xl p-6 mb-6 bg-gray-800/60 border border-gray-700">
       <div className="flex items-start gap-7 flex-wrap">
         <div className="flex-shrink-0">
-          <div className="font-mono text-sm font-medium mb-1" style={{color}}>{grade(score)}</div>
+          <div className="font-[quicksand] text-sm font-medium mb-1" style={{color}}>{grade(score)}</div>
           <div className="flex items-baseline gap-1">
             <span style={{fontFamily:"'DM Serif Display',serif",fontSize:72,lineHeight:1,color,letterSpacing:"-0.02em"}}>{score}</span>
-            <span className="text-gray-400 text-lg font-mono">/100</span>
+            <span className="text-gray-400 text-lg font-[quicksand]">/100</span>
           </div>
         </div>
         <div className="flex-1 min-w-44 pt-2">
@@ -68,7 +68,7 @@ function ScoreHeroCard({summary}){
           </p>
           <div className="flex gap-2 flex-wrap">
             {[{n:passing,c:"#16a34a",l:"passing"},{n:warning,c:"#d4980a",l:"warning"},{n:failing,c:"#dc2626",l:"failing"}].map(p=>(
-              <span key={p.l} className="font-mono text-xs px-3 py-1 rounded-full" style={{background:`${p.c}22`,border:`1px solid ${p.c}66`,color:p.c}}>{p.n} {p.l}</span>
+              <span key={p.l} className="font-[quicksand] text-xs px-3 py-1 rounded-full" style={{background:`${p.c}22`,border:`1px solid ${p.c}66`,color:p.c}}>{p.n} {p.l}</span>
             ))}
           </div>
         </div>
@@ -85,11 +85,11 @@ function SignalBars({signals}){
         const disp=toDisp(sig,signals[sig]??0);const color=barColor(disp);
         return(
           <div key={sig} className="flex items-center gap-3 mb-2">
-            <span className="font-mono text-xs flex-shrink-0 w-28 text-gray-400">{SIGNAL_DISPLAY[sig]||sig}</span>
+            <span className="font-[quicksand] text-xs flex-shrink-0 w-28 text-gray-400">{SIGNAL_DISPLAY[sig]||sig}</span>
             <div className="flex-1 h-1 rounded-full overflow-hidden bg-gray-700">
               <div style={{width:`${disp}%`,height:"100%",background:color,borderRadius:2}}/>
             </div>
-            <span className="font-mono text-xs font-medium w-7 text-right flex-shrink-0" style={{color}}>{disp}</span>
+            <span className="font-[quicksand] text-xs font-medium w-7 text-right flex-shrink-0" style={{color}}>{disp}</span>
           </div>
         );
       })}
@@ -106,12 +106,12 @@ function PriorityFixes({rewrites=[]}){
         const isHigh=rw.priority==="high";
         return(
           <div key={i} className="flex gap-2 mb-2 items-start rounded-xl p-3 bg-gray-900/60 border border-gray-700">
-            <span className="font-mono text-xs px-2 py-0.5 rounded flex-shrink-0 mt-0.5" style={{background:isHigh?"rgba(220,38,38,0.2)":"rgba(100,80,40,0.3)",border:isHigh?"1px solid rgba(220,38,38,0.5)":"1px solid rgba(180,140,60,0.4)",color:isHigh?"#fca5a5":"#d4980a"}}>{rw.priority}</span>
+            <span className="font-[quicksand] text-xs px-2 py-0.5 rounded flex-shrink-0 mt-0.5" style={{background:isHigh?"rgba(220,38,38,0.2)":"rgba(100,80,40,0.3)",border:isHigh?"1px solid rgba(220,38,38,0.5)":"1px solid rgba(180,140,60,0.4)",color:isHigh?"#fca5a5":"#d4980a"}}>{rw.priority}</span>
             <div>
               <div className="text-sm font-medium mb-1 text-white font-[quicksand]">
                 {rw.signal?`${rw.signal.charAt(0).toUpperCase()}${rw.signal.slice(1)}`:"Fix"}{rw.original&&rw.original!=="Not present"?` — ${rw.original.slice(0,55)}${rw.original.length>55?"...":""}` :""}
               </div>
-              {rw.rationale&&<div className="font-mono text-xs leading-relaxed text-gray-400">{rw.rationale.slice(0,95)}{rw.rationale.length>95?"...":""}</div>}
+              {rw.rationale&&<div className="font-[quicksand] text-xs leading-relaxed text-gray-400">{rw.rationale.slice(0,95)}{rw.rationale.length>95?"...":""}</div>}
             </div>
           </div>
         );
@@ -133,7 +133,7 @@ function ActionPlan({topGaps=[],rewrites=[]}){
       <div style={labelStyle}>Action plan</div>
       {actions.map((a,i)=>(
         <div key={i} className="flex gap-3 mb-2 items-start">
-          <span className="font-mono text-xs flex-shrink-0 w-5 pt-0.5 text-gray-500">{String(i+1).padStart(2,"0")}</span>
+          <span className="font-[quicksand] text-xs flex-shrink-0 w-5 pt-0.5 text-gray-500">{String(i+1).padStart(2,"0")}</span>
           <span className="text-sm leading-relaxed text-gray-200">{a}</span>
         </div>
       ))}
@@ -146,7 +146,7 @@ function CTAStrip(){
     <div className="flex items-center justify-between flex-wrap gap-3 pt-4 mt-1 border-t border-gray-700">
       <div>
         <div className="font-[quicksand] text-base font-bold mb-1 text-white">Want us to fix this?</div>
-        <div className="font-mono text-xs text-gray-400">Infrasity implements GEO for B2B SaaS and drives traffic or conversion by AI source</div>
+        <div className="font-[quicksand] text-xs text-gray-400">Infrasity implements GEO for B2B SaaS and drives traffic or conversion by AI source</div>
       </div>
       <a href="/contact" className="inline-flex items-center gap-2 font-[quicksand] text-sm font-bold px-5 py-2.5 rounded-xl no-underline whitespace-nowrap"
         style={{background:"linear-gradient(135deg,#5F64FF,#8B5CF6)",color:"#fff"}}>
@@ -165,15 +165,15 @@ function PageCard({page,rewriteResult,rank}){
     <div className="rounded-2xl mb-3 overflow-hidden border border-gray-700" style={{background:open?"#0d0f1a":"rgba(31,32,51,0.6)"}}>
       <div onClick={()=>setOpen(!open)} className="p-4 cursor-pointer" style={{borderBottom:open?"1px solid rgba(255,255,255,0.08)":"none"}}>
         <div className="inline-flex items-center bg-[#1e2252] rounded-full px-2 py-0.5 mb-2">
-          <span className="font-mono text-xs text-indigo-300">{category}</span>
+          <span className="font-[quicksand] text-xs text-indigo-300">{category}</span>
         </div>
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
             <div className="font-[quicksand] text-sm font-semibold mb-0.5 truncate text-white">{page.title||shortUrl(page.url)}</div>
-            <div className="font-mono text-xs truncate text-gray-500">{page.url}</div>
+            <div className="font-[quicksand] text-xs truncate text-gray-500">{page.url}</div>
           </div>
           <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{border:`1.5px solid ${color}`,background:`${color}18`}}>
-            <span className="font-mono text-xs font-bold" style={{color}}>{score}</span>
+            <span className="font-[quicksand] text-xs font-bold" style={{color}}>{score}</span>
           </div>
         </div>
       </div>
@@ -266,30 +266,30 @@ export default function GeoAuditToolPage(){
 </div>
     <div>
       <div className="text-sm font-semibold text-white" style={{letterSpacing:"-0.01em"}}>Infrasity</div>
-      <div className="font-mono text-xs" style={{color:"#a8a29e"}}>GEO Audit Report</div>
+      <div className="font-[quicksand]   text-xs" style={{color:"#a8a29e"}}>GEO Audit Report</div>
     </div>
   </div>
   <div className="flex items-center gap-2 rounded-full px-3 py-1.5" style={{border:"1px solid #333"}}>
-    <span className="font-mono text-xs" style={{color:"#a8a29e"}}>Beta</span>
-    <span className="font-mono text-xs" style={{color:"#555"}}>·</span>
-    <span className="font-mono text-xs" style={{color:"#a8a29e"}}>v1.0</span>
+    <span className="font-[quicksand]  text-xs" style={{color:"#a8a29e"}}>Beta</span>
+    <span className="font-[quicksand]  text-xs" style={{color:"#555"}}>·</span>
+    <span className="font-[quicksand]  text-xs" style={{color:"#a8a29e"}}>v1.0</span>
   </div>
 </div>
 
 {/* ── GEO label ── */}
 <div className="flex items-center gap-3 mb-5">
-  <div style={{width:28,height:1,background:"#d4980a"}}/>
-  <span className="font-mono text-xs tracking-[0.12em]" style={{color:"#d4980a"}}>GENERATIVE ENGINE OPTIMIZATION</span>
+  <div style={{width:28,height:1,background:"#ffffff"}}/>
+  <span className="font-[quicksand] text-sm text-gray-300 font-bold">GENERATIVE ENGINE OPTIMIZATION</span>
 </div>
 
 {/* ── Hero heading card ── */}
 <div style={{border:"1px solid #2a2a3a",borderRadius:12,padding:"24px",background:"#111118",marginBottom:20}}>
-  <h1 className="mb-4" style={{fontFamily:"'DM Serif Display',serif",fontSize:"clamp(28px,5vw,44px)",fontWeight:400,lineHeight:1.1,letterSpacing:"-0.01em",color:"#ede9e1"}}>
+  <h1 className="mb-4" style={{fontFamily:"font-[quicksand]",fontSize:"clamp(28px,5vw,44px)",fontWeight:400,lineHeight:1.1,letterSpacing:"-0.01em",color:"#ede9e1"}}>
     Is your content{" "}
-    <em style={{color:"#d4980a",fontStyle:"italic"}}>visible</em>
+    <em style={{color:"#5F64FF",fontStyle:"italic"}}>visible</em>
     <br/>to AI engines?
   </h1>
-  <p className="font-mono text-sm mb-0" style={{color:"#c8c4bc",maxWidth:520,lineHeight:1.65}}>
+  <p className="font-[quicksand]  text-sm mb-0" style={{color:"#c8c4bc",maxWidth:520,lineHeight:1.65}}>
     Paste your page content below. We score each page across 6 GEO signals, identify exactly what&apos;s missing, and give you a prioritized fix list.
   </p>
 </div>
@@ -297,7 +297,7 @@ export default function GeoAuditToolPage(){
 {/* ── Signal pills 2-col grid ── */}
 {/* ── Signal pills card — Image 2 style ── */}
 <div style={{border:"1px solid #2a2a3a",borderRadius:12,padding:"20px",background:"#111118",marginBottom:36}}>
-  <div className="font-mono text-xs tracking-widest mb-4" style={{color:"#a8a29e"}}>6 GEO SIGNALS SCORED</div>
+  <div className="font-[quicksand] text-xs tracking-widest mb-4" style={{color:"#a8a29e"}}>6 GEO SIGNALS SCORED</div>
   <div style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:8}}>
   {[
       {label:"AI-quotable definitions", dot:"#7F77DD",border:"#534AB7",bg:"rgba(83,74,183,0.15)"},
@@ -309,7 +309,7 @@ export default function GeoAuditToolPage(){
     ].map(s=>(
       <div key={s.label} style={{border:`1px solid ${s.border}`,borderRadius:6,padding:"10px 14px",display:"flex",alignItems:"center",gap:10,background:s.bg}}>
         <span style={{color:s.dot,fontSize:14,flexShrink:0}}>•</span>
-        <span className="font-mono text-xs" style={{color:"#ede9e1"}}>{s.label}</span>
+        <span className="font-[quicksand] text-xs" style={{color:"#ede9e1"}}>{s.label}</span>
       </div>
     ))}
   </div>
@@ -351,7 +351,7 @@ export default function GeoAuditToolPage(){
             {pages.map((page,i)=>(
               <div key={i} className="rounded-xl p-3 mb-2 border border-gray-700 bg-gray-900/60">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-mono text-xs text-gray-500">Page {i+1}</span>
+                  <span className="font-[quicksand] text-xs text-gray-500">Page {i+1}</span>
                   {pages.length>1&&<button onClick={()=>removePage(i)} style={{background:"none",border:"none",cursor:"pointer",color:"#9ca3af",fontSize:18,lineHeight:1}}>×</button>}
                 </div>
                 <input type="text" placeholder="Page URL or path (optional)"
@@ -391,7 +391,7 @@ export default function GeoAuditToolPage(){
             Preview demo
           </button> */}
         </div>
-        <p className="text-center font-mono text-xs text-gray-500 mb-8">Powered by OpenAI GPT-4o · ~20 sec · Up to 50 pages</p>
+        <p className="text-center font-[quicksand] text-xs text-gray-500 mb-8">Powered by OpenAI GPT-4o · ~20 sec · Up to 50 pages</p>
 
         {/* Loading */}
         {loading&&(
@@ -404,7 +404,7 @@ export default function GeoAuditToolPage(){
                   return(
                     <li key={i} className="flex items-center gap-2.5">
                       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{background:st==="done"?"#6c5ce8":st==="active"?"#8B5CF6":"#374151"}}/>
-                      <span className="font-mono text-xs" style={{fontWeight:st==="active"?600:400,color:st==="done"?"#6b7280":st==="active"?"#fff":"#4b5563"}}>{step}</span>
+                      <span className="font-[quicksand] text-xs" style={{fontWeight:st==="active"?600:400,color:st==="done"?"#6b7280":st==="active"?"#fff":"#4b5563"}}>{step}</span>
                     </li>
                   );
                 })}
@@ -428,27 +428,27 @@ export default function GeoAuditToolPage(){
             <div className="h-px mt-5 mb-4 bg-gray-700"/>
             {stepIndex>=0&&(
               <>
-                <div className="font-mono text-xs text-gray-400">{stepMsg||STEP_DETAILS[stepIndex]?.sub}</div>
+                <div className="font-[quicksand] text-xs text-gray-400">{stepMsg||STEP_DETAILS[stepIndex]?.sub}</div>
                 {stepUrls.length>0&&(stepIndex===0||stepIndex===1||stepIndex===4)&&(
-                  <div className="mt-3 font-mono text-xs truncate" style={{color:"#6c5ce8"}}>→ {shortUrl(stepUrls[stepUrls.length-1])}</div>
+                  <div className="mt-3 font-[quicksand] text-xs truncate" style={{color:"#6c5ce8"}}>→ {shortUrl(stepUrls[stepUrls.length-1])}</div>
                 )}
               </>
             )}
           </div>
         )}
 
-        {error&&<div className="mb-8 bg-red-500/20 border border-red-500/30 rounded-xl p-4 text-red-400 text-center font-mono text-xs">{error}</div>}
+        {error&&<div className="mb-8 bg-red-500/20 border border-red-500/30 rounded-xl p-4 text-red-400 text-center font-[quicksand] text-xs">{error}</div>}
 
         {/* Results */}
         {results&&!loading&&(
           <div ref={resultsRef}>
             <div className="h-px my-8 bg-gray-700"/>
             <div className="mb-5">
-              <div className="font-mono text-xs tracking-widest mb-2 text-gray-400 uppercase">GEO Audit Report</div>
+              <div className="font-[quicksand] text-xs tracking-widest mb-2 text-gray-400 uppercase">GEO Audit Report</div>
               <div className="flex items-start justify-between gap-3 flex-wrap">
                 <div>
                   <h2 className="font-[quicksand] text-3xl font-bold mb-1 text-white">{(domain||"infrasity.com").replace(/https?:\/\//,"")}</h2>
-                  <p className="font-mono text-xs text-gray-400">
+                  <p className="font-[quicksand] text-xs text-gray-400">
                     {new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})} · {results.summary?.totalPages??1} page{results.summary?.totalPages!==1?"s":""} audited
                   </p>
                 </div>
@@ -465,7 +465,7 @@ export default function GeoAuditToolPage(){
             <ScoreHeroCard summary={results.summary}/>
             {results.topPages?.length>0&&(
               <>
-                <div className="font-mono text-xs uppercase tracking-widest mb-3 text-gray-400">Page breakdown</div>
+                <div className="font-[quicksand] text-xs uppercase tracking-widest mb-3 text-gray-400">Page breakdown</div>
                 {(()=>{const rmap=new Map((results.rewrites||[]).map(r=>[r.url,r]));return results.topPages.map((page,i)=><PageCard key={i} page={page} rewriteResult={rmap.get(page.url)} rank={i+1}/>);})()}
               </>
             )}
