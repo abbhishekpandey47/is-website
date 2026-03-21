@@ -1832,7 +1832,18 @@ let postMetaData = [
     authorId: "author0005",
     category: "LLM Visiblity",
     metaDescription: "Learn how to structure content for LLMs with a 3-layer framework. Discover key factors for LLM content, structured formats, and platform-specific tactics to improve visibility"
-}
+},
+{
+    title: "How to Find & Use the Right Reddit Threads for B2B SaaS Growth?",
+    metatitle: "Introducing Reddit Opportunity Finder: Find the Right Reddit Threads",
+    slug: "reddit-opportunity-finder-find-reddit-threads",
+    description: "We’re excited to introduce the Reddit Opportunity Finder by Infrasity. A new way for B2B SaaS teams to discover Reddit threads driving visibility across Google and AI search.  Analyze your domain in under 60 seconds to uncover SERP-ranking and LLM-cited discussions where your buyers are already active. Stop guessing where to engage and start showing up in the conversations that matter.",
+    ogImage: "/PostImages/reddit-opportunity-finder-find-reddit-threads/1.webp",
+    publishedOn: "2026-03-19",
+    authorId: "author0008",
+    category: "Announcements",
+    metaDescription: "Infrasity’s Reddit Opportunity Finder identifies high-impact Reddit threads across Google rankings and AI citations, helping SaaS teams close visibility gaps. Try now\!"
+},
 ];
 
 const sorted = () => {
