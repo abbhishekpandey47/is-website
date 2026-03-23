@@ -462,8 +462,8 @@ let postMetaData = [
 // /importance-of-writing-organic-content-benefits-and-best-practices-for-saas-companies
 
     {
-    title: "Top 10 Technical Content Writing Service Companies in 2025",
-    metatitle: "Top 10 Technical Content Writing Service Companies to try in 2025",
+    title: "Top 10 Technical Content Writing Service Companies in 2026",
+    metatitle: "Top 10 Technical Content Writing Service Companies to try in 2026",
     slug: "top-10-technical-writing-service-companies",
     description: "In this blog we have curated a list of top 10 technical writing service companies that provide comprehensive and simplified technical content.",
     ogImage: "/PostImages/top-10-technical-writing-service/banner.png",
@@ -496,8 +496,8 @@ let postMetaData = [
 },
     {
 
-    title: "Top 10 Free AI Outline Generators in 2025",
-        metatitle: "Top 10 Free AI Outline Generators of 2025 for Writing",
+    title: "Top 10 Free AI Outline Generators in 2026",
+        metatitle: "Top 10 Free AI Outline Generators of 2026 for Writing",
         slug: "top-10-free-outline-generators",
         description: "Here are the top 10 Free AI Outline Generators that you should utilize while preparing the structure of your write-up. The best part? They are free!",
         ogImage: "/PostImages/top-10-free-outline-generators/A.png",
@@ -509,7 +509,7 @@ let postMetaData = [
      {
 
      title: "Why Search Volume isn't the best strategy for B2B SaaS Companies?",
-        metatitle: "Why Chasing Search Volume Needs Rethinking in 2025",
+        metatitle: "Why Chasing Search Volume Needs Rethinking in 2026",
         slug: "why-search-volume-fails-b2b-saas",
         description: "In this blog, discover how you can rank well on the SERP by targeting low or zero search volume keywords and leverage the first movers advantage.",
         ogImage: "/PostImages/why-search-volume-not-best/0.png",
@@ -532,7 +532,7 @@ let postMetaData = [
 
     {
         title: "Content Monitoring: A Comprehensive Guide for SaaS Companies",
-        metatitle: "How Content Monitoring Can Help SaaS Companies Grow in 2025",
+        metatitle: "How Content Monitoring Can Help SaaS Companies Grow in 2026",
         slug: "content-monitoring-for-saas-companies",
         description: "In this blog we explore the role of content monitoring  in maintaining the content's competitiveness in the search results, ultimately aiding your SaaS growth.",
         ogImage: "/PostImages/content-monitoring-for-saas-companies/0.png",
@@ -579,8 +579,8 @@ let postMetaData = [
 },
 
 {
-        title: "The Ultimate PRD Guide For Your B2B SaaS Success in 2025",
-        metatitle: "The Ultimate PRD Guide For Your B2B SaaS Success in 2025",
+        title: "The Ultimate PRD Guide For Your B2B SaaS Success in 2026",
+        metatitle: "The Ultimate PRD Guide For Your B2B SaaS Success in 2026",
         slug: "b2b-saas-prd",
         description: "Learn how to write a product requirements document for your B2B SaaS product and improve the team collaboration with an efficient development process.",
         ogImage: "/PostImages/b2b-saas-prd/p1.png",
@@ -590,7 +590,7 @@ let postMetaData = [
         metaDescription: "Learn how to write a product requirements document for your B2B SaaS product and improve the team collaboration with an efficient development process."
     },
     {
-        title: "Top B2B SaaS Podcasts to Listen in 2025",
+        title: "Top B2B SaaS Podcasts to Listen in 2026",
         metatitle: "The Expert-curated List for Best B2b Saas Podcasts",
         slug: "top-5-b2b-saas-podcasts",
         description: "This blog curates a list of top B2B SaaS podcasts and contains a guide to launching your own B2B SaaS podcast to scale and grow your enterprise and product.",
@@ -602,7 +602,7 @@ let postMetaData = [
     },
     {
         title: "Top Explainer Video Companies For B2B SaaS Startups",
-        metatitle: "Top Explainer Video Companies For B2B SaaS Startups in 2025",
+        metatitle: "Top Explainer Video Companies For B2B SaaS Startups in 2026",
         slug: "top-explainer-video-companies",
         description: "If you're planning to partner with an explainer video production company, don't forget to go through this list before you make a decision for your SaaS Startup.",
         ogImage: "/PostImages/best-b2b-saas-video-agencies/0.png",
@@ -937,7 +937,7 @@ let postMetaData = [
 
     {
         title: "How To Create a Subreddit And Grow Your Community?",
-        metatitle: "How To Create a Subreddit And Grow Your Community in 2025?",
+        metatitle: "How To Create a Subreddit And Grow Your Community in 2026?",
         slug: "how-to-create-a-subreddit",
         description: "If you are building your presence on Reddit, learn how to create a subreddit easily, connect with target users and grow your community with effective tips.",
         ogImage: "/PostImages/how-to-create-a-subreddit/sub1.webp",
@@ -949,7 +949,7 @@ let postMetaData = [
 
     {
         title: "Best Subreddits to Join for B2B SaaS Startups",
-        metatitle: "Best Subreddits to Join for B2B SaaS Startups in 2025",
+        metatitle: "Best Subreddits to Join for B2B SaaS Startups in 2026",
         slug: "best-subreddits",
         description: "Join these top Reddit communities to promote your B2B SaaS product. However, be mindful of some specific thing that have been discussed in the article.",
         ogImage: "/PostImages/best-subreddits/ts1.webp",
@@ -1018,8 +1018,8 @@ let postMetaData = [
     },
 
     {
-        title: "The Ultimate Guide to GitHub SEO for 2025",
-        metatitle: "The Ultimate Guide to GitHub SEO for 2025",
+        title: "The Ultimate Guide to GitHub SEO for 2026",
+        metatitle: "The Ultimate Guide to GitHub SEO for 2026",
         slug: "github-seo",
         description: "Explore how you can do GitHub SEO in several ways and get your product documentation visible to your target audience - developers.",
         ogImage: "/PostImages/github-seo/gh1.webp",
@@ -1029,7 +1029,7 @@ let postMetaData = [
         metaDescription: "Explore how you can do GitHub SEO in several ways and get your product documentation visible to your target audience - developers."
     },
          {
-        title: "Organic Vs Paid Marketing on Reddit: What Works Best in 2025?",
+        title: "Organic Vs Paid Marketing on Reddit: What Works Best in 2026?",
         metatitle: "Organic Vs Paid Search on Reddit | Are Reddit Ads Worth it?",
         slug: "reddit-organic-vs-paid-marketing",
         description: "Learn the differences between organic vs paid traffic on Reddit, and what works best for your B2B SaaS brand. Discover the best way to grow on Reddit.",
@@ -1051,7 +1051,7 @@ let postMetaData = [
         metaDescription: "Learn how developer advocates connect engineers and product teams for better collaboration and product success in the developer community"
     },
     {
-        title: "Checklist for Generative Engine Optimization 2025",
+        title: "Checklist for Generative Engine Optimization 2026",
         metatitle: "Checklist of Generative Engine Optimization Best Practices ",
         slug: "generative-engine-optimization-best-practices",
         description: "Discover the latest generative engine optimization best practices and compare top GEO platforms to stay ahead in AI-driven search. Learn how to structure content, optimize entities, and leverage AI-friendly strategies for maximum visibility in 2025’s evolving discovery landscape.",
@@ -1150,7 +1150,7 @@ let postMetaData = [
   metaDescription: "Explore DevRel vs GTM engineers, their roles and responsibilities and impact on B2B SaaS growth. Click the link to learn how these two roles are different!"
 },
 {
-  title: "Why Are Startups Hiring Their First DevRel Engineers in 2025? Proven Strategy",
+  title: "Why Are Startups Hiring Their First DevRel Engineers in 2026? Proven Strategy",
   metatitle: "Why Startups Hire DevRel in 2025 | Infrasity",
   slug: "why-startups-hiring-devrel-engineers",
   description: "Developer relations (DevRel) has become a game-changer for early-stage B2B SaaS startups. This blog breaks down what DevRel really is, why it’s essential for bridging the gap between developers and your product, and how it drives adoption, retention, and community engagement. You’ll learn proven DevRel strategies, the real cost of hiring your first DevRel engineer, common challenges founders face, and when is the best time to make the hire.",
@@ -1158,7 +1158,7 @@ let postMetaData = [
   publishedOn: "2025-09-19",
   authorId: "author0005",
   category: "Developer Marketing",
-  metaDescription: "Discover what DevRel is, why startups need it in 2025, and proven DevRel strategies to boost adoption. Read now and level up your developer relations!"
+  metaDescription: "Discover what DevRel is, why startups need it in 2026, and proven DevRel strategies to boost adoption. Read now and level up your developer relations!"
 },
 {
   title: "6 Best AI Marketing Agency for B2B SaaS",
@@ -1236,7 +1236,7 @@ let postMetaData = [
   metaDescription: "Developer marketing strategy in 2025 with actionable tips, examples, use cases & community insights. Click the link to read now and boost adoption!"
 },
 {
-  title: "9 Top Go To Market Agency in 2025",
+  title: "9 Top Go To Market Agency in 2026",
   metatitle: "Top Go To Market Agency for SaaS | Infrasity",
   slug: "go-to-market-agency",
   description: "Launching a SaaS product is only half the battle—reaching the right audience is critical. A go to market agency helps startups accelerate growth with expert positioning, messaging, and execution. From early-stage to scaling companies, GTM agencies provide structured frameworks, market research, and demand generation strategies to ensure measurable adoption and revenue growth. They act as strategic partners, aligning product strengths, marketing, and sales into a cohesive roadmap. Read the blog to learn more.",
@@ -1349,7 +1349,7 @@ let postMetaData = [
   metaDescription: "Discover the top AI documentation tools used by modern SaaS teams to automate SDKs, prevent documentation drift, create video workflows, and maintain accurate diagrams.",
 },
 {
-  title: "Best Developer Documentation Tools: Which Platform Should Your Team Choose in 2025?",
+  title: "Best Developer Documentation Tools: Which Platform Should Your Team Choose?",
   metatitle: "Best Developer Documentation Tools in 2025: Mintlify, GitBook, ReadMe, Docusaurus",
   slug: "best-documentation-tools-for-developers",
   description: "Compare the best developer documentation tools for 2025: Mintlify, GitBook, ReadMe, and Docusaurus. Learn which platform fits your team's workflow, API complexity, and customization needs.",
