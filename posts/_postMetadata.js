@@ -1843,6 +1843,17 @@ let postMetaData = [
     authorId: "author0008",
     category: "Announcements",
     metaDescription: "Infrasity’s Reddit Opportunity Finder identifies high-impact Reddit threads across Google rankings and AI citations, helping SaaS teams close visibility gaps. Try now\!"
+  },
+{
+    title: "KubeCon Day 0: KubeAuto Day Europe 2026",
+    metatitle: "KubeAuto Day 2026 Recap: KubeCon Insights",
+    slug: "kubeauto-day-europe-2026-kubecon",
+    description: "KubeAuto Day Europe 2026 sets the tone for KubeCon with focused, practitioner-led discussions on AI and Kubernetes automation. From GPU cost optimization to agentic AI and multi-cloud challenges, the event highlights how teams are actually running AI workloads in production. With 450+ attendees surpassing expectations, it’s clear that AI infrastructure is no longer experimental.",
+    ogImage: "/PostImages/kubeauto-day-europe-2026-kubecon/1.webp",
+    publishedOn: "2026-03-23",
+    authorId: "author0001",
+    category: "Announcements",
+    metaDescription: "KubeAuto Day Europe 2026 kicks off KubeCon with deep dives into AI + Kubernetes automation, GPU optimization, and real-world use cases. Read now to learn more."
 },
 ];
 
