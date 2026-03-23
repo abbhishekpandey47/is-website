@@ -52,62 +52,43 @@ export async function POST(req) {
       };
 
       try {
-        // ── Step 1: Crawl ───────────────────────────────────────────────────
-        send("progress", { step: 1, total: 5, message: "Crawling sitemap and pages…", urls: [] });
-        const crawledPages = await crawlSite(normDomain, Math.min(maxPages, 150), 400);
+        // ── Step 1 & 2: Crawl OR use provided pages ──
+const providedPages = (body.pages || []).filter(p => p.url || p.content);
+let parsedPages;
 
-        if (crawledPages.length === 0) {
-          send("error", { message: "No pages found. Check that the domain is publicly accessible." });
-          close();
-          return;
-        }
+if (providedPages.length > 0) {
+  // User provided specific pages — skip crawl, use directly
+  send("progress", { step: 1, total: 5, message: `Using ${providedPages.length} provided page${providedPages.length > 1 ? "s" : ""}…` });
+  send("progress", { step: 2, total: 5, message: "Parsing provided page content…" });
 
-        // Send discovered URLs to frontend
-        send("progress", {
-          step: 1, total: 5,
-          message: `Found ${crawledPages.length} pages`,
-          urls: crawledPages.slice(0, 20).map(p => p.url),
-        });
+  parsedPages = providedPages.map((p, i) => ({
+    url: p.url || `${normDomain}/page-${i + 1}`,
+    domain: normDomain,
+    bodyText: p.content || "",
+    headings: extractHeadings(p.content || ""),
+    links: extractLinks(p.content || "", normDomain),
+    rawHtml: p.content || "",
+    title: extractTitle(p.content || "") || p.url || normDomain,
+    type: detectPageType(p.url || ""),
+  }));
 
-        // ── Step 2: Fetch + Parse ───────────────────────────────────────────
-        send("progress", {
-          step: 2, total: 5,
-          message: `Fetching and parsing ${crawledPages.length} pages…`,
-          urls: crawledPages.slice(0, 20).map(p => p.url),
-        });
+  send("progress", { step: 2, total: 5, message: `Parsed ${parsedPages.length} pages successfully` });
+} else {
+  // No pages provided — crawl the domain
+  send("progress", { step: 1, total: 5, message: "Crawling sitemap and pages…" });
+  const crawledPages = await crawlSite(normDomain, Math.min(maxPages, 150), 400);
 
-        // Stream batches of URLs as they get fetched
-        const batchSize = 8;
-        const allParsed = [];
-        const batches = chunkArray(crawledPages, batchSize);
+  if (crawledPages.length === 0) {
+    send("error", { message: "No pages found. Check that the domain is publicly accessible." });
+    close();
+    return;
+  }
 
-        for (let i = 0; i < batches.length; i++) {
-          const batch = batches[i];
-          const batchParsed = await fetchPagesBatch(batch);
-          allParsed.push(...batchParsed);
-
-          // Send live URL updates showing what's being processed
-          const processedUrls = crawledPages
-            .slice(0, (i + 1) * batchSize)
-            .map(p => p.url);
-
-          send("progress", {
-            step: 2, total: 5,
-            message: `Fetching and parsing ${Math.min((i + 1) * batchSize, crawledPages.length)} of ${crawledPages.length} pages…`,
-            urls: processedUrls.slice(-10), // show last 10
-          });
-        }
-
-        const parsedPages = allParsed.filter(Boolean);
-
-        // ── Analyze form-pasted pages first if provided ─────────────────────
-        if (formPages && formPages.length > 0) {
-          send("progress", {
-            step: 2, total: 5,
-            message: `Analyzing ${formPages.length} provided page${formPages.length > 1 ? "s" : ""}…`,
-            urls: formPages.map(p => p.url).filter(Boolean),
-          });
-        }
+  send("progress", { step: 1, total: 5, message: `Found ${crawledPages.length} pages` });
+  send("progress", { step: 2, total: 5, message: `Fetching and parsing ${crawledPages.length} pages…` });
+  parsedPages = await fetchPages(crawledPages, 8, 250);
+  send("progress", { step: 2, total: 5, message: `Parsed ${parsedPages.length} pages successfully` });
+}
 
         // ── Step 3: Score ───────────────────────────────────────────────────
         send("progress", { step: 3, total: 5, message: "Scoring pages across 6 GEO signals…", urls: [] });
@@ -174,6 +155,41 @@ export async function GET(req) {
 }
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
+
+function extractHeadings(text) {
+  const headings = [];
+  const mdH = text.matchAll(/^(#{1,4})\s+(.+)$/gm);
+  for (const m of mdH) headings.push({ level: m[1].length, text: m[2].trim() });
+  const htmlH = text.matchAll(/<h([1-4])[^>]*>(.*?)<\/h\1>/gi);
+  for (const m of htmlH) headings.push({ level: parseInt(m[1]), text: m[2].replace(/<[^>]+>/g,"").trim() });
+  return headings;
+}
+
+function extractLinks(text, domain) {
+  const links = [];
+  const mdLinks = text.matchAll(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g);
+  for (const m of mdLinks) links.push(m[2]);
+  const htmlLinks = text.matchAll(/href=["'](https?:\/\/[^"']+)["']/gi);
+  for (const m of htmlLinks) links.push(m[1]);
+  return links;
+}
+
+function extractTitle(text) {
+  const md = text.match(/^#\s+(.+)$/m);
+  if (md) return md[1].trim();
+  const html = text.match(/<h1[^>]*>(.*?)<\/h1>/i);
+  if (html) return html[1].replace(/<[^>]+>/g,"").trim();
+  return "";
+}
+
+function detectPageType(url) {
+  if (/\/blog\/|\/post\/|\/article\//i.test(url)) return "blog";
+  if (/\/guide\/|\/tutorial\/|\/how-to\//i.test(url)) return "guide";
+  if (/\/product\/|\/service\/|\/pricing\//i.test(url)) return "product";
+  if (/\/$|\/home\/?$/i.test(url)) return "home";
+  if (/\/about\//i.test(url)) return "about";
+  return "page";
+}
 
 function normaliseDomain(domain) {
   let d = domain.trim();
