@@ -238,7 +238,7 @@ const PostPage = async (props) => {
           />
           <div className="flex items-start w-full pb-16 px-4 lg:px-8 gap-8 xl:gap-12 max-lg:flex-col">
             {/* Left sidebar — sticky, fixed width */}
-            <div className="shrink-0 w-[18rem] max-xl:w-[13rem] max-lg:w-full max-lg:flex max-lg:justify-center overflow-hidden sticky top-[82px] self-start">
+            <div className="shrink-0 w-[18rem] max-xl:w-[13rem] max-lg:w-full max-lg:flex max-lg:justify-center overflow-hidden md:sticky top-[82px] self-start">
               <Outline content={postContent} />
             </div>
             <div className="h-auto hidden max-lg:flex max-lg:justify-center">
