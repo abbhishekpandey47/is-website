@@ -14,7 +14,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Badge } from "./ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { ScrollArea } from "./ui/scroll-area";
 
 const STATUS_COLORS = {
   removed: { dot: "bg-[#f87171]", text: "text-[#f87171]", label: "Removed" },
@@ -253,7 +252,7 @@ export function RedditStatusBell({ companyId }) {
             <p className="text-[11px] text-[rgba(255,255,255,0.2)] mt-1">Click "Check now" to scan all posted content</p>
           </div>
         ) : (
-          <ScrollArea className="max-h-[360px]">
+          <div className="overflow-y-auto max-h-[360px]">
             <div className="p-3 space-y-1.5">
               {changes.map((change) => (
                 <div
@@ -295,7 +294,7 @@ export function RedditStatusBell({ companyId }) {
                 </div>
               ))}
             </div>
-          </ScrollArea>
+          </div>
         )}
 
         {/* Footer */}
