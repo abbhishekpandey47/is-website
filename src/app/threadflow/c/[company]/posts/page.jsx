@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import { onAuthStateChanged } from "firebase/auth";
-import { ArrowDown, ArrowUp, ArrowUpDown, Edit, Plus, Save, Search, Trash2, X } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, Edit, Loader2, Plus, Save, Search, ShieldCheck, Trash2, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import "react-quill-new/dist/quill.snow.css";
 import { Badge } from "@/Components/ui/badge";
 import { Button } from "@/Components/ui/button";
@@ -53,6 +53,9 @@ const PostsPage = () => {
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Live status check
+  const [checkingStatus, setCheckingStatus] = useState(false);
+  const [checkStatusResult, setCheckStatusResult] = useState(null);
   // Date range state
   const [dateRange, setDateRange] = useState([null, null]);
 
@@ -159,6 +162,33 @@ const PostsPage = () => {
   useEffect(() => {
     setCurrentPage(1); // reset to first page whenever filters or search change
   }, [searchQuery , selectedCategory , selectedStatus, dateRange]);
+
+  const checkLiveStatus = useCallback(async () => {
+    if (!firebaseUser || checkingStatus) return;
+    setCheckingStatus(true);
+    setCheckStatusResult(null);
+    try {
+      const token = await firebaseUser.getIdToken();
+      const res = await fetch('/api/reddit/check-live-status', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      });
+      const data = await res.json();
+      setCheckStatusResult({ checked: data.checked || 0, changesCount: (data.changes || []).length });
+      // Locally update statuses for changed posts so the table reflects changes immediately
+      if ((data.changes || []).length > 0) {
+        setPosts(prev => prev.map(p => {
+          const changed = data.changes.find(c => c.id === p.id && c.type === 'post');
+          return changed ? { ...p, status: 'removed' } : p;
+        }));
+      }
+    } catch (e) {
+      console.error('[checkLiveStatus]', e);
+    } finally {
+      setCheckingStatus(false);
+    }
+  }, [firebaseUser, checkingStatus]);
 
   const categories = ["all", ...new Set(posts.map((post) => post.category).filter(Boolean))];
   const statuses = useMemo(() => {
@@ -487,6 +517,19 @@ const PostsPage = () => {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <button
+              onClick={checkLiveStatus}
+              disabled={checkingStatus}
+              style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", fontSize: 12, fontWeight: 500, backgroundColor: checkingStatus ? "rgba(99,102,241,0.06)" : "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)", borderRadius: 7, color: checkingStatus ? "rgba(129,140,248,0.5)" : "#818cf8", cursor: checkingStatus ? "not-allowed" : "pointer", fontFamily: "inherit", opacity: checkingStatus ? 0.7 : 1 }}
+            >
+              {checkingStatus ? <Loader2 size={13} className="animate-spin" /> : <ShieldCheck size={13} />}
+              {checkingStatus ? "Checking…" : "Check Status"}
+            </button>
+            {checkStatusResult && (
+              <span style={{ fontSize: 11, color: checkStatusResult.changesCount > 0 ? "#f87171" : "#34d399", whiteSpace: "nowrap" }}>
+                {checkStatusResult.changesCount > 0 ? `${checkStatusResult.changesCount} changed` : `All ${checkStatusResult.checked} live`}
+              </span>
+            )}
             <Button
               onClick={() => router.push("/threadflow/posts/add")}
               className="bg-[#ededed] text-[#0a0a0a] font-medium rounded-[7px] hover:bg-[#d4d4d4] text-[13px] h-9 px-4"
