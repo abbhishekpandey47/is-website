@@ -55,6 +55,11 @@ DevZero did offer core product documentation to its users, but it had some issue
 
 Much of the product documentation assumed the user already understood Kubernetes abstractions, microVM isolation, DevZero’s compute model, and environment orchestration. This assumption widened the gap between DevZero’s potential and developers’ actual understanding.
 
+### 6. **Near-Zero Visibility in AI Search and LLM Responses**
+
+None of DevZero’s developer content was visible on LLMs and Infrasity benchmarked their content across LLM platforms like ChatGPT, Claude, and Perplexity using new prompts. The prompts were taken from their keywords, and these are very crucial queries that their customers ask on LLMs, but they don't show up.
+
+
 ## CTA : Turn Your Product Documentation Into a Growth Engine
 
 ## **Why Did DevZero Collaborate With Infrasity?**
@@ -165,6 +170,48 @@ To fix this, Infrasity produced clear, example-driven documentation that showed 
 
 ![DevZero's updated recipes by Infrasity](/PostImages/case-study-product-documentation/8.webp)
 
+#### 7. **Building AI Search Visibility from Zero**
+
+After addressing the documentation foundation, Infrasity executed a full AEO strategy for DevZero. The goal was to be the answer that AI models surface when a buyer asks, for example, "What's the best Kubernetes cost optimization platform?" 
+
+Here is how Infrasity executed each part of the plan, but before starting, we made an AEO checklist for content to make sure the developer content ends up being cited and visible on LLMs. Once we had the checklist, we:
+
+##### 7.1 **Restructure Existing Blogs for LLM Extraction:**
+
+DevZero’s existing blogs had the same problems across three areas:
+
+* Data & structure: No FAQ sections or QAPage schema markup, no structured spec tables or product attribute markup, titles too long and not front-loaded with primary keywords, or no internal links to product pages
+
+* Content quality gaps: Features listed without user benefits or differentiating attributes, no first-hand usage or low E-E-A-T signals, images missing descriptive file names and keyword-relevant ALT text, and factual claims made without credible sources cited
+
+* SEO & technical gaps: No single primary keyword is aligned across the title tag, H1, and body; URL structures are sub-optimal, and no competitor content gap analysis has been done.
+
+Changes made across every blog were:
+
+* One primary keyword assigned per post, integrated into the title tag, H1, and the body
+* URLs cleaned up to be semantic and keyword-inclusive
+* Headings rewritten around search intent
+* TL;DR summaries added to every post
+* Comparison tables inserted
+* FAQ sections added with QAPage schema markup
+* Product spec table(s) added with structured data markup
+* Internal links added to relevant product and feature pages
+* Feature-focused sections rewritten to lead with user benefits and differentiating attributes
+* Generic sections replaced with first-hand product usage, benchmarks, and real screenshots, hence addressing E-E-A-T
+* All factual claims sourced and cited from credible external references
+* Image ALT text rewritten with descriptive, keyword-relevant attributes
+* Competitor content gap analysis run for each post to ensure full topical coverage
+
+##### 7.2 **Adding New Prompts to Existing Content**
+
+New prompts were incorporated into the existing content’s FAQ section as new FAQ, as H2s, or in the content for LLM visibility. The performance of the incorporated prompts can be seen on [app.infrasity](https://app.infrasity.com/), which allows you to understand which prompt is driving results and which is not.
+
+#### 8. **Created New SEO Optimized Landing Pages**
+
+DevZero's website had outdated messaging that no longer reflected the product, which is why Infrasity rewrote the messaging, redesigned the UI/UX, and built five SEO-optimized landing pages, which are the homepage, Kubernetes cost optimization, cost monitoring, GPU optimization, and blog, as shown in the image below. 
+
+Each page was built around a dedicated target keyword, with keyword-aligned H1s, meta titles, meta descriptions, internal linking, FAQ schema markup, embedded case studies, and a clear how-it-works flow.
+
 ## CTA : Turn Your Product Documentation Into a Growth Engine
 
 ## **When Founders Talk: Infrasity X DevZero**
@@ -175,7 +222,7 @@ In a featured [video conversation,](https://www.youtube.com/watch?v=GTMEKQIM84I)
 
 The discussion also highlighted how DevZero integrates with major cloud providers like AWS, Azure, and DigitalOcean, and the value it delivers to both developers and engineering leaders. 
 
-This session helped position DevZero not just as a product, but as a forward-thinking voice in the cloud-native and developer infrastructure space, strengthening brand credibility and increasing awareness among engineering teams evaluating modern development platforms.
+This session helped position DevZero not just as a product but as a forward-thinking voice in the cloud-native and developer infrastructure space, strengthening brand credibility and increasing awareness among engineering teams evaluating modern development platforms.
 
 ## **Did Anything Change?**
 
