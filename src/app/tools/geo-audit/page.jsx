@@ -143,11 +143,11 @@ function Hero(){
         </div>
         <FadeSlide y={16} delay={0.5} className="hidden md:flex items-center justify-center self-center">
           <div className="w-full rounded-[20px] overflow-hidden border border-white/10 bg-[#0e0b1b] p-6" style={{boxShadow:"0 20px 60px rgba(0,0,0,0.4)"}}>
-            <div className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-4">6 GEO signals scored</div>
+            <div className="font-[quicksand] text-xs text-gray-500 uppercase tracking-widest mb-4">6 GEO signals scored</div>
             {SIGNAL_PILLS.map(s=>(
               <div key={s.label} className="flex items-center gap-3 mb-2 rounded-lg px-3 py-2" style={{border:`1px solid ${s.border}`,background:s.bg}}>
                 <span style={{color:s.dot}} className="text-sm flex-shrink-0">•</span>
-                <span className="font-mono text-xs text-stone-100">{s.label}</span>
+                <span className="font-[quicksand] text-xs text-stone-100">{s.label}</span>
               </div>
             ))}
           </div>
@@ -171,28 +171,28 @@ function Hero(){
             </div>
             <div className="p-8 grid grid-cols-2 gap-6">
               <div>
-                <div className="font-mono text-xs text-[#6c5ce8] uppercase tracking-widest mb-3">GEO Audit Report</div>
+                <div className="font-[quicksand] text-xs text-[#6c5ce8] uppercase tracking-widest mb-3">GEO Audit Report</div>
                 <div className="font-[quicksand] text-2xl font-bold text-white mb-1">infrasity.com</div>
-                <div className="font-mono text-xs text-gray-500 mb-6">20 March 2026 · 50 pages audited</div>
+                <div className="font-[quicksand] text-xs text-gray-500 mb-6">20 March 2026 · 50 pages audited</div>
                 <div className="flex items-baseline gap-2 mb-4">
                   <span className="font-serif text-6xl font-bold" style={{color:"#16a34a"}}>76</span>
-                  <span className="font-mono text-lg text-gray-500">/100</span>
-                  <span className="font-mono text-sm ml-2" style={{color:"#16a34a"}}>Strong</span>
+                  <span className="font-[quicksand] text-lg text-gray-500">/100</span>
+                  <span className="font-[quicksand] text-sm ml-2" style={{color:"#16a34a"}}>Strong</span>
                 </div>
                 <div className="flex gap-2">
-                  <span className="font-mono text-xs px-3 py-1 rounded-full" style={{background:"#16a34a22",border:"1px solid #16a34a66",color:"#16a34a"}}>48 passing</span>
-                  <span className="font-mono text-xs px-3 py-1 rounded-full" style={{background:"#d4980a22",border:"1px solid #d4980a66",color:"#d4980a"}}>2 warning</span>
+                  <span className="font-[quicksand] text-xs px-3 py-1 rounded-full" style={{background:"#16a34a22",border:"1px solid #16a34a66",color:"#16a34a"}}>48 passing</span>
+                  <span className="font-[quicksand] text-xs px-3 py-1 rounded-full" style={{background:"#d4980a22",border:"1px solid #d4980a66",color:"#d4980a"}}>2 warning</span>
                 </div>
               </div>
               <div>
-                <div className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-3">Signal breakdown</div>
+                <div className="font-[quicksand] text-xs text-gray-500 uppercase tracking-widest mb-3">Signal breakdown</div>
                 {[{l:"Citation auth",v:72,c:"#16a34a"},{l:"FAQ block",v:85,c:"#16a34a"},{l:"Headings",v:93,c:"#16a34a"},{l:"Schema signals",v:68,c:"#16a34a"},{l:"Answer-first",v:76,c:"#16a34a"},{l:"AI-quotable defs",v:61,c:"#d4980a"}].map(s=>(
                   <div key={s.l} className="flex items-center gap-2 mb-2">
-                    <span className="font-mono text-xs text-gray-500 w-24 flex-shrink-0">{s.l}</span>
+                    <span className="font-[quicksand] text-xs text-gray-500 w-24 flex-shrink-0">{s.l}</span>
                     <div className="flex-1 h-1 rounded-full bg-gray-700 overflow-hidden">
                       <div style={{width:`${s.v}%`,height:"100%",background:s.c,borderRadius:2}}/>
                     </div>
-                    <span className="font-mono text-xs w-7 text-right flex-shrink-0" style={{color:s.c}}>{s.v}</span>
+                    <span className="font-[quicksand] text-xs w-7 text-right flex-shrink-0" style={{color:s.c}}>{s.v}</span>
                   </div>
                 ))}
               </div>
@@ -236,7 +236,7 @@ function FeaturesSection(){
               className="relative rounded-[24px] overflow-hidden bg-[#0e0b1b] border border-white/[0.06] p-8"
               style={{boxShadow:"0 20px 60px rgba(0,0,0,0.4)"}}>
               <div className="absolute top-0 right-0 w-48 h-48 rounded-full pointer-events-none" style={{background:`radial-gradient(circle, ${f.color}20 0%, transparent 70%)`,filter:"blur(40px)"}}/>
-              <span className="block mb-4 font-mono text-[11px] text-white/30">{f.num}</span>
+              <span className="block mb-4 font-[quicksand] text-[11px] text-white/30">{f.num}</span>
               <h3 className="font-[quicksand] text-white mb-3" style={{fontSize:"clamp(22px,2.5vw,28px)",fontWeight:700,letterSpacing:"-0.03em",lineHeight:1.1}}>{f.title}</h3>
               <p className="text-[14px] font-light leading-snug" style={{color:"rgba(255,255,255,0.45)"}}>{f.sub}</p>
             </motion.div>
@@ -313,17 +313,17 @@ function HowItWorks(){
             initial={{opacity:0,y:30}} animate={inView?{opacity:1,y:0}:{}}
             transition={{duration:0.6,ease:EASE_OUT_EXPO,delay:0.2}}>
             <div className="overflow-hidden rounded-[20px] bg-[#0e0b1b] border border-white/10 p-6" style={{boxShadow:"0 20px 60px rgba(0,0,0,0.4)"}}>
-              <div className="font-mono text-xs text-[#6c5ce8] uppercase tracking-widest mb-4">Live audit in progress</div>
+              <div className="font-[quicksand] text-xs text-[#6c5ce8] uppercase tracking-widest mb-4">Live audit in progress</div>
               <div className="space-y-2 mb-6">
                 {AUDIT_STEPS.map((step,i)=>(
                   <div key={i} className="flex items-center gap-2.5">
                     <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{background:i<activeStep?"#6c5ce8":i===activeStep?"#8B5CF6":"#374151"}}/>
-                    <span className="font-mono text-xs" style={{color:i<activeStep?"#6b7280":i===activeStep?"#fff":"#4b5563",fontWeight:i===activeStep?600:400}}>{step}</span>
+                    <span className="font-[quicksand] text-xs" style={{color:i<activeStep?"#6b7280":i===activeStep?"#fff":"#4b5563",fontWeight:i===activeStep?600:400}}>{step}</span>
                   </div>
                 ))}
               </div>
               <div className="h-px bg-gray-700 mb-4"/>
-              <div className="font-mono text-xs" style={{color:"#6c5ce8"}}>→ infrasity.com/blog/geo-vs-seo</div>
+              <div className="font-[quicksand] text-xs" style={{color:"#6c5ce8"}}>→ infrasity.com/blog/geo-vs-seo</div>
             </div>
           </motion.div>
         </div>

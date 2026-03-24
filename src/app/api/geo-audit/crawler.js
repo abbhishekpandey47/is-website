@@ -21,7 +21,7 @@ const SKIP_PATHS = /\/(wp-admin|admin|login|logout|cart|checkout|feed|rss|sitema
  * @param {number} crawlDelay — ms between requests
  * @returns {Promise<Array<{url: string, type: string}>>}
  */
-export async function crawlSite(domain, maxPages = 50, crawlDelay = 500) {
+export async function crawlSite(domain, maxPages, timeout, onUrl = ()=>{}) {  
   const base = normaliseBase(domain);
   let urls = [];
 
