@@ -122,6 +122,12 @@ const ImageHeight = [
     width: 550,
     height: 600,
   },
+  // KubeAuto Day Europe 2026
+  { src: "/PostImages/kubeauto-day-europe-2026-kubecon/2.webp", width: 400, height: 500 },
+  { src: "/PostImages/kubeauto-day-europe-2026-kubecon/3.webp", width: 400, height: 500 },
+  { src: "/PostImages/kubeauto-day-europe-2026-kubecon/4.webp", width: 400, height: 500 },
+  { src: "/PostImages/kubeauto-day-europe-2026-kubecon/5.webp", width: 400, height: 500 },
+  { src: "/PostImages/kubeauto-day-europe-2026-kubecon/6.webp", width: 400, height: 500 },
 ];
 
 // Main PostPage component
