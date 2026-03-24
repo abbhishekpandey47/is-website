@@ -83,12 +83,12 @@ function buildSignalOverview(summary) {
   const { signalAverages } = summary;
 
   const rows = Object.entries(signalAverages)
-    .map(([signal, avg]) => {
-      const max = SIGNAL_MAX[signal];
-      const pct = Math.round((avg / max) * 100);
-      const bar = "█".repeat(Math.round(pct / 10)) + "░".repeat(10 - Math.round(pct / 10));
+  .map(([signal, avg]) => {
+    const pct = Math.min(100, Math.max(0, Math.round(avg)));
+    const barFill = Math.min(10, Math.round(pct / 10));
+    const bar = "█".repeat(barFill) + "░".repeat(10 - barFill);
       const status = pct >= 70 ? "✓ Good" : pct >= 40 ? "~ Fair" : "✗ Weak";
-      return `| ${capitalise(signal)} | ${avg}/${max} | ${bar} | ${pct}% | ${status} |`;
+      return `| ${capitalise(signal)} | ${avg}/100 | ${bar} | ${pct}% | ${status} |`;
     })
     .join("\n");
 
@@ -134,7 +134,7 @@ These pages have the highest GEO improvement potential. Each section includes sp
 
 function buildPageSection(page, rewriteResult, rank) {
   const signalBreakdown = Object.entries(page.signals)
-    .map(([s, pts]) => `${capitalise(s)}: ${pts}/${SIGNAL_MAX[s]}`)
+    .map(([s, pts]) => `${capitalise(s)}: ${pts}/${pts[s]}`)
     .join(" · ");
 
   let body = `### ${rank}. ${page.title || page.url}

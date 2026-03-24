@@ -21,11 +21,10 @@ const MIN_WORDS = 50;
  * @param {number} delay — ms between batches
  * @returns {Promise<Array<PageData>>}
  */
-export async function fetchPages(pages, concurrency = 8, delay = 300) {
+export async function fetchPages(pages, concurrency = 8, delay = 300, onUrl = ()=>{}) {
   const results = [];
   const batches = chunk(pages, concurrency);
 
-  // First pass — plain HTTP fetch (fast)
   const needsPlaywright = [];
 
   for (let i = 0; i < batches.length; i++) {
@@ -40,12 +39,11 @@ export async function fetchPages(pages, concurrency = 8, delay = 300) {
       if (result.status === "fulfilled" && result.value) {
         if (result.value.wordCount >= MIN_WORDS) {
           results.push(result.value);
+          onUrl(result.value.url);
         } else {
-          // Page loaded but empty — needs Playwright
           needsPlaywright.push(batch[j]);
         }
       } else {
-        // Fetch failed entirely — try Playwright
         needsPlaywright.push(batch[j]);
       }
     }
@@ -53,7 +51,6 @@ export async function fetchPages(pages, concurrency = 8, delay = 300) {
     if (delay > 0 && i < batches.length - 1) await sleep(delay);
   }
 
-  // Second pass — Playwright for JS-rendered pages
   if (needsPlaywright.length > 0) {
     const playwrightResults = await fetchWithPlaywright(needsPlaywright);
     results.push(...playwrightResults);

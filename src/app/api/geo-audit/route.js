@@ -52,42 +52,55 @@ export async function POST(req) {
       };
 
       try {
-        // ── Step 1 & 2: Crawl OR use provided pages ──
+// ── Step 1 & 2: Crawl OR use provided pages ──
 const providedPages = (body.pages || []).filter(p => p.url || p.content);
 let parsedPages;
 
 if (providedPages.length > 0) {
-  // User provided specific pages — skip crawl, use directly
-  send("progress", { step: 1, total: 5, message: `Using ${providedPages.length} provided page${providedPages.length > 1 ? "s" : ""}…` });
-  send("progress", { step: 2, total: 5, message: "Parsing provided page content…" });
+  // User provided specific pages — skip crawl, show each URL
+  send("progress", { step:1, total:5, message:`Using ${providedPages.length} provided page${providedPages.length>1?"s":""}…`, urls:[] });
 
-  parsedPages = providedPages.map((p, i) => ({
-    url: p.url || `${normDomain}/page-${i + 1}`,
-    domain: normDomain,
-    bodyText: p.content || "",
-    headings: extractHeadings(p.content || ""),
-    links: extractLinks(p.content || "", normDomain),
-    rawHtml: p.content || "",
-    title: extractTitle(p.content || "") || p.url || normDomain,
-    type: detectPageType(p.url || ""),
-  }));
-
-  send("progress", { step: 2, total: 5, message: `Parsed ${parsedPages.length} pages successfully` });
-} else {
-  // No pages provided — crawl the domain
-  send("progress", { step: 1, total: 5, message: "Crawling sitemap and pages…" });
-  const crawledPages = await crawlSite(normDomain, Math.min(maxPages, 150), 400);
-
-  if (crawledPages.length === 0) {
-    send("error", { message: "No pages found. Check that the domain is publicly accessible." });
-    close();
-    return;
+  parsedPages = [];
+  for (const [i, p] of providedPages.entries()) {
+    const url = p.url || `${normDomain}/page-${i+1}`;
+    send("progress", { step:2, total:5, message:`Parsing page ${i+1} of ${providedPages.length}…`, urls:[url] });
+    parsedPages.push({
+      url,
+      domain: normDomain,
+      bodyText: p.content || "",
+      headings: extractHeadings(p.content || ""),
+      links: extractLinks(p.content || "", normDomain),
+      rawHtml: p.content || "",
+      title: extractTitle(p.content || "") || p.url || normDomain,
+      type: detectPageType(p.url || ""),
+    });
   }
 
-  send("progress", { step: 1, total: 5, message: `Found ${crawledPages.length} pages` });
-  send("progress", { step: 2, total: 5, message: `Fetching and parsing ${crawledPages.length} pages…` });
-  parsedPages = await fetchPages(crawledPages, 8, 250);
-  send("progress", { step: 2, total: 5, message: `Parsed ${parsedPages.length} pages successfully` });
+  send("progress", { step:2, total:5, message:`Parsed ${parsedPages.length} page${parsedPages.length>1?"s":""} successfully`, urls:[] });
+
+} else {
+  // No pages provided — crawl the domain
+  send("progress", { step:1, total:5, message:"Crawling sitemap and pages…", urls:[] });
+
+  const crawledPages = await crawlSite(normDomain, Math.min(maxPages,150), 400);
+
+// Stream each discovered URL to frontend
+for (const page of crawledPages) {
+  send("progress", { step:1, total:5, message:`Crawling sitemap and pages…`, urls:[page.url] });
+}
+
+  if (crawledPages.length === 0) {
+    send("error", { message:"No pages found. Check that the domain is publicly accessible." });
+    close(); return;
+  }
+
+  send("progress", { step:1, total:5, message:`Found ${crawledPages.length} pages`, urls:[] });
+  send("progress", { step:2, total:5, message:`Fetching and parsing ${crawledPages.length} pages…`, urls:[] });
+
+  parsedPages = await fetchPages(crawledPages, 8, 250, (url) => {
+    send("progress", { step:2, total:5, message:`Fetching and parsing ${crawledPages.length} pages…`, urls:[url] });
+  });
+  send("progress", { step:2, total:5, message:`Parsed ${parsedPages.length} pages successfully`, urls:[] });
 }
 
         // ── Step 3: Score ───────────────────────────────────────────────────

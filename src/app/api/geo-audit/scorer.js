@@ -45,6 +45,23 @@ const WEIGHTS = {
 
 const TOTAL_WEIGHT = Object.values(WEIGHTS).reduce((a,b)=>a+b,0); // should be 100
 
+export const SIGNAL_MAX = {
+  entities:      10,
+  directness:    10,
+  structure:     10,
+  authority:     10,
+  freshness:      5,
+  citations:     10,
+  freshDate:      7,
+  authorCred:     8,
+  promptMatch:    7,
+  topicalDepth:   8,
+  entityMention:  5,
+  comparison:     4,
+  codeExamples:   2,
+  uniqueness:     2,
+  internalLinks:  2,
+};
 /* ── Calibration bands (enforce variance) ────────────────────── */
 // Generic marketing page with no data → below 30 overall
 // Page with nothing: returns 0 for that signal
