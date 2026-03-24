@@ -1,5 +1,8 @@
 'use client'
 
+import { auth } from "@/lib/firebaseClient"
+import { cn } from "@/lib/utils"
+import { onAuthStateChanged } from "firebase/auth"
 import {
   BarChart3,
   Calendar,
@@ -12,17 +15,18 @@ import {
   Plug,
   Search,
   Settings,
+  ShieldAlert,
   Tag,
   TrendingUp,
   Users
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-
-import { cn } from "@/lib/utils"
+import { useEffect, useRef, useState } from "react"
 import {
     Sidebar,
     SidebarContent,
+    SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel,
@@ -31,10 +35,43 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from "./ui/sidebar"
+import { RedditStatusBell } from "./RedditStatusBell"
 
 export function AppSidebar({ companySlug, isAdmin , companyName }) {
   const { open } = useSidebar()
   const pathname = usePathname()
+  const [unreadStatusCount, setUnreadStatusCount] = useState(0)
+  const firebaseUserRef = useRef(null)
+  const mountedRef = useRef(true)
+
+  useEffect(() => {
+    mountedRef.current = true
+    return () => { mountedRef.current = false }
+  }, [])
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      firebaseUserRef.current = user
+    })
+    return () => unsub()
+  }, [])
+
+  useEffect(() => {
+    const fetchUnread = async () => {
+      const user = firebaseUserRef.current
+      if (!user || !mountedRef.current) return
+      try {
+        const token = await user.getIdToken()
+        const res = await fetch('/api/reddit/status-changes?limit=1', { headers: { Authorization: `Bearer ${token}` } })
+        if (!res.ok || !mountedRef.current) return
+        const { unreadCount } = await res.json()
+        if (mountedRef.current) setUnreadStatusCount(unreadCount || 0)
+      } catch { /* silent */ }
+    }
+    fetchUnread()
+    const interval = setInterval(fetchUnread, 5 * 60 * 1000)
+    return () => clearInterval(interval)
+  }, [])
 
   // Use admin paths when companySlug isn't available yet (prevents /c/undefined hydration mismatch)
   const useCompanyPath = !isAdmin && companySlug;
@@ -45,6 +82,7 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
     { title: "Clients", url: `${prefix}/clients`, icon: LayoutGrid },
     { title: "Reddit Posts", url: `${prefix}/posts`, icon: MessageSquare },
     { title: "Reddit Comments", url: `${prefix}/comment`, icon: MessageSquare },
+    { title: "Status Changes", url: `/threadflow/status-changes`, icon: ShieldAlert },
     { title: "Analytics", url: `${prefix}/analytics`, icon: TrendingUp },
     { title: "Analytics Overview", url: `${prefix}/analytics-overview`, icon: PieChart },
     { title: "Communities", url: `${prefix}/communities`, icon: Users, soon: true },
@@ -84,6 +122,8 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
 
   const renderItem = (item) => {
     const active = isActive(item.url)
+    const isStatusChanges = item.url === '/threadflow/status-changes'
+    const showBadge = isStatusChanges && unreadStatusCount > 0
     return (
       <SidebarMenuItem key={item.title}>
         <SidebarMenuButton asChild>
@@ -101,6 +141,14 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
             {open && <span>{item.title}</span>}
             {open && item.soon && (
               <span style={{fontSize:10, padding:"2px 6px", background:"rgba(255,255,255,0.06)", borderRadius:4, color:"rgba(255,255,255,0.3)", marginLeft:"auto"}}>Soon</span>
+            )}
+            {open && showBadge && (
+              <span className="ml-auto min-w-[18px] h-[18px] rounded-full bg-[#f87171] text-[#0a0a0a] text-[10px] font-bold flex items-center justify-center px-1 leading-none">
+                {unreadStatusCount > 99 ? "99+" : unreadStatusCount}
+              </span>
+            )}
+            {!open && showBadge && (
+              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#f87171]" />
             )}
           </Link>
         </SidebarMenuButton>
@@ -150,6 +198,22 @@ export function AppSidebar({ companySlug, isAdmin , companyName }) {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
+      <SidebarFooter className="border-t border-[rgba(255,255,255,0.06)] px-3 py-2">
+        <div className={cn("flex items-center gap-2", open ? "justify-between" : "justify-center")}>
+          {open && (
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="text-[12px] text-[rgba(255,255,255,0.35)] font-medium truncate">Reddit Alerts</span>
+              {unreadStatusCount > 0 && (
+                <span className="shrink-0 min-w-[18px] h-[18px] rounded-full bg-[rgba(248,113,113,0.15)] text-[#f87171] text-[10px] font-semibold flex items-center justify-center px-1 leading-none border border-[rgba(248,113,113,0.25)]">
+                  {unreadStatusCount > 99 ? "99+" : unreadStatusCount}
+                </span>
+              )}
+            </div>
+          )}
+          <RedditStatusBell />
+        </div>
+      </SidebarFooter>
     </Sidebar>
   )
 }
