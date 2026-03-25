@@ -1,8 +1,8 @@
 "use client";
 import { onAuthStateChanged } from "firebase/auth";
-import { Edit, Plus, Save, Search, Trash2, Upload, X, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
+import { Edit, Loader2, Plus, Save, Search, ShieldCheck, Trash2, Upload, X, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Badge } from "../../../Components/ui/badge";
 import { Button } from "../../../Components/ui/button";
 import { Input } from "../../../Components/ui/input";
@@ -47,7 +47,9 @@ const PostsPage = () => {
 
   // Bulk upload
   const [bulkUploadOpen, setBulkUploadOpen] = useState(false);
-  const [refreshKey, setRefreshKey] = useState(0);
+  // Live status check
+  const [checkingStatus, setCheckingStatus] = useState(false);
+  const [checkStatusResult, setCheckStatusResult] = useState(null);
 
   // Date range state
   const [dateRange, setDateRange] = useState([null, null]);
@@ -97,34 +99,23 @@ const PostsPage = () => {
     return () => unsubscribe();
   }, [router]);
 
-  useEffect(() => {
+  const fetchPosts = useCallback(async () => {
     if (!firebaseUser) return;
+    try {
+      const token = await firebaseUser.getIdToken();
+      const res = await fetch(`/api/comment`, { headers: { Authorization: `Bearer ${token}` } });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || "Failed to fetch posts");
+      setPosts(result?.data || []);
+    } catch (err) {
+      console.error("Error fetching posts:", err);
+    }
+  }, [firebaseUser]);
 
-    console.log("Fetching posts for user:", firebaseUser.uid);
-
-   const fetchPosts = async () => {
-      try {
-    const token = await firebaseUser.getIdToken();
-    const res = await fetch(`/api/comment`, { headers: { Authorization: `Bearer ${token}` } });
-        const result = await res.json();
-
-        if (!res.ok) {
-          throw new Error(result.error || "Failed to fetch posts");
-        }
-        setPosts(result?.data || []);
-      } catch (err) {
-        console.error("Error fetching posts:", err);
-         toast({
-        title: "Error",
-        description: "Failed to load posts",
-        variant: "destructive",
-      });
-      }
-    };
-
+  useEffect(() => {
     fetchPosts();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [firebaseUser, refreshKey]);
+  }, [firebaseUser]);
 
     useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -340,6 +331,32 @@ const statuses = useMemo(() => {
       setCurrentPage(1); // reset to first page whenever filters or search change
     }, [searchQuery, selectedCategory , selectedCompanyId , selectedStatus, dateRange]);
 
+  const checkLiveStatus = useCallback(async () => {
+    if (!firebaseUser || checkingStatus) return;
+    setCheckingStatus(true);
+    setCheckStatusResult(null);
+    try {
+      const token = await firebaseUser.getIdToken();
+      const body = selectedCompanyId && selectedCompanyId !== 'all' && selectedCompanyId !== 'select'
+        ? { companyId: selectedCompanyId }
+        : {};
+      const res = await fetch('/api/reddit/check-live-status', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      const changesCount = (data.changes || []).length;
+      setCheckStatusResult({ checked: data.checked || 0, changesCount });
+      if (changesCount > 0) {
+        toast({ title: `⚠️ ${changesCount} status change${changesCount !== 1 ? "s" : ""} detected`, description: "Check the Reddit Status Changes page for details." });
+      }
+    } catch (e) {
+      console.error('[checkLiveStatus]', e);
+    } finally {
+      setCheckingStatus(false);
+    }
+  }, [firebaseUser, checkingStatus, selectedCompanyId]);
 
   const openEditModal = (post) => {
   setEditCategories((prev) => {
@@ -540,6 +557,19 @@ const statuses = useMemo(() => {
               <Upload size={13} />
               Bulk Upload
             </button>
+            <button
+              onClick={checkLiveStatus}
+              disabled={checkingStatus}
+              style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", fontSize: 12, fontWeight: 500, backgroundColor: checkingStatus ? "rgba(99,102,241,0.06)" : "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.25)", borderRadius: 7, color: checkingStatus ? "rgba(129,140,248,0.5)" : "#818cf8", cursor: checkingStatus ? "not-allowed" : "pointer", fontFamily: "inherit", opacity: checkingStatus ? 0.7 : 1 }}
+            >
+              {checkingStatus ? <Loader2 size={13} className="animate-spin" /> : <ShieldCheck size={13} />}
+              {checkingStatus ? "Checking…" : "Check Status"}
+            </button>
+            {checkStatusResult && (
+              <span style={{ fontSize: 11, color: checkStatusResult.changesCount > 0 ? "#f87171" : "#34d399", whiteSpace: "nowrap" }}>
+                {checkStatusResult.changesCount > 0 ? `${checkStatusResult.changesCount} changed` : `All ${checkStatusResult.checked} live`}
+              </span>
+            )}
             <Button
               onClick={() => router.push("/threadflow/comment/add")}
               className="bg-[#ededed] text-[#0a0a0a] font-medium rounded-[7px] hover:bg-[#d4d4d4] text-[13px] h-9 px-4"
@@ -1054,7 +1084,7 @@ const statuses = useMemo(() => {
         firebaseUser={firebaseUser}
         onSuccess={(result) => {
           setBulkUploadOpen(false);
-          setRefreshKey((k) => k + 1);
+          fetchPosts();
           toast({ title: `✅ ${result.imported} comment${result.imported === 1 ? "" : "s"} imported` });
         }}
       />

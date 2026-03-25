@@ -40,6 +40,15 @@
   "functions": {
     "src/app/api/geo-audit/route.js": {
       "maxDuration": 300
+    },
+    "src/pages/api/reddit/cron-check-status.js": {
+      "maxDuration": 120
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/reddit/cron-check-status",
+      "schedule": "0 12 * * *"
+    }
+  ]
 }
